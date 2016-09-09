@@ -1,0 +1,54 @@
+.brodsmuler {
+	margin-bottom: 2rem; 
+	line-height: 1.8; 
+
+	@media print {
+		display: none; 
+	}
+}
+
+.brodsmule {
+	white-space: nowrap;
+}
+
+.brodsmuler-ikon, .brodsmuler-ikon-hoykontrast {
+	display: none; 
+}
+
+.brodsmule-skille {
+	padding-left: .5rem; 
+	padding-right: .5rem; 
+}
+
+@media(min-width: @screen-medium) {
+
+	.brodsmuler {
+		padding-left: 3rem;
+		position: relative;
+	}
+
+	.brodsmuler-ikon {
+		position: absolute;
+		width: 2rem; 
+		height: 2rem; 
+		display: inline-block; 
+		top: 0;
+		left: 0;
+	}
+	
+	.brodsmuler-ikon-hoykontrast {
+		display: none; 
+	}
+
+	.contrast {
+
+		.brodsmuler-ikon {
+			display: none;
+		}
+
+		.brodsmuler-ikon-hoykontrast {
+			display: inline-block; 
+		}
+
+	}
+}
