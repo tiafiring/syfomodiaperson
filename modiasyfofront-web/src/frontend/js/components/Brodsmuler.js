@@ -61,7 +61,7 @@ class Brodsmuler extends Component {
         return (<nav role="navigation" className="brodsmuler blokk side-innhold" aria-label="Du er her: ">
             <img src="/sykefravaer/img/svg/person.svg" alt="Du" className="brodsmuler-ikon" />
             <img src="/sykefravaer/img/svg/person-highcontrast.svg" alt="Du" className="brodsmuler-ikon brodsmuler-ikon-hoykontrast" />
-            <a href="/dittnav" className="js-smule brodsmule">Sykefravaer</a>
+            <a href="/modiabrukerdialog" className="js-smule brodsmule">Modia brukerdialog</a>
             {brodsmuler.length ? <span className="brodsmule-skille"> / </span> : ''}
             {this.visCollapsed() ? <ToggleLink onClick={(e) => {
                 e.preventDefault();

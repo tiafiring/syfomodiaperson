@@ -9,7 +9,7 @@ var timestamp = Date.now().toString();
 var dev = {
     'timestamp': `${timestamp}`,
     "buildRoot": "http://localhost:8080/assets",
-    "restRoot": "http://localhost:8182/syforest",
+    "restRoot": "http://localhost:8084/modiasyforest",
     "bundleFileName": `bundle.js`,
 };
 
