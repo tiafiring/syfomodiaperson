@@ -6,18 +6,13 @@
   "test": "npm run test",
   "scripts": {
     "prebuild": "node createProdFolders.js",
-    "dev": "parallelshell \"npm run prebuild\" \"npm run images\" \"npm run static:build:local\" \"npm run scripts:watch\" \"npm run styles:watch\"",
+    "dev": "parallelshell \"npm run prebuild\" \"npm run images\" \"npm run static:build:local\" \"npm run scripts:watch\"",
     "build": "parallelshell \"npm run prebuild\" \"npm run static:build\" \"npm run scripts:build\" \"npm run images\" \"npm run styles:build\"",
     "test": "mocha --compilers js:babel-core/register --require ./tests/test_helper.js \"tests/**/*.@(js|jsx)\"",
     "test:watch": "npm run test -- --watch",
     "coverage": "babel-node node_modules/isparta/lib/cli cover node_modules/mocha/bin/_mocha -- --require tests/test_helper.js tests/**/*.js",
-    "styles:watch": "nodemon -q -w styles --ext \"less\" --exec \"npm run styles:build\"",
-    "styles:build": "lessc styles/styles.less > ../main/webapp/styles/styles.css --autoprefix=\"last 3 versions\"",
     "static:build:local": "node build-html.js html/modiasyfofront.mustache local",
     "static:build": "node build-html.js html/modiasyfofront.mustache prod",
-    "images": "parallelshell \"npm run images:copy\" \"npm run images:install\"",
-    "images:copy": "cp -R node_modules/modig-frontend/modig-frontend-ressurser/src/main/resources/META-INF/resources/img img/modig-frontend",
-    "images:install": "cp -R img ../main/webapp",
     "scripts:build": "set NODE_ENV=production&&node deploy.js",
     "scripts:watch": "webpack-dev-server --inline",
     "lint": "eslint js/. --ext .js"
@@ -28,7 +23,7 @@
       "react"
     ]
   },
-  "author": "***REMOVED*** <***REMOVED***>",
+  "author": "Team DigiSyfo <digisyfo@nav.no>",
   "license": "ISC",
   "dependencies": {
     "babel": "6.3.26",
