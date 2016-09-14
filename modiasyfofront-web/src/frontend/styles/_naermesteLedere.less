@@ -1,0 +1,72 @@
+.NaermesteLedere {
+
+    padding-right: 3em;
+    position: relative;
+    cursor: pointer;
+
+    h3 {
+        .typo-etikett();
+    }
+
+}
+
+.NaermesteLedere .IkonKollaps {
+    top: 1.5em;
+}
+
+.NaermesteLedere:hover .IkonKollaps {
+    &:after, &:before {
+        background-color: @FargeLenke;
+    }
+}
+
+.IkonKollaps {
+    position: absolute;
+    right: 1em;
+    width: 2em;
+    height: 2em;
+    display: inline-block; 
+    border: 0;
+    background-color: transparent;
+    text-indent: -9999px;
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px @FargeFokus;
+    }
+
+    &:after, &:before {
+        content: "";
+        display: block;
+        width: 1.2em;
+        height: 2px;
+        background: @FargeBorder;
+        position: absolute;
+        top: 50%        ;
+    }
+
+    &:before {
+        transform: rotate(-45deg);
+        left: 0;
+    }
+
+    &:after {
+        transform: rotate(45deg);
+        right: 0;
+    }
+
+}
+
+.IkonKollaps--erKollapsert {
+    &:before {
+        transform: rotate(45deg);
+    }
+
+    &:after {
+        transform: rotate(-45deg);
+    }
+}
+
+.IkonKollaps--erHover:after, *:hover .IkonKollaps--erHover:before,  {
+    background-color: @FargeLenke;
+}

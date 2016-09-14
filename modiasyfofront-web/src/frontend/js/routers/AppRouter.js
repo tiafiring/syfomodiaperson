@@ -1,14 +1,11 @@
 import React, { PropTypes } from 'react';
 import { Router, Route } from 'react-router';
-
-const MinSide = () => {
-    return <div>Dette er min side</div>
-}
+import LandingssideContainer from '../containers/LandingssideContainer';
 
 const AppRouter = ({ history }) => {
     return (<Router history={history}>
-        <Route path="/sykefravaer" component={MinSide} />
-        <Route path="/" component={MinSide} />
+        <Route path="/sykefravaer" component={LandingssideContainer} />
+        <Route path="/" component={LandingssideContainer} />
     </Router>);
 };
 

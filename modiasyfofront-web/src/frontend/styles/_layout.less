@@ -1,0 +1,32 @@
+.Container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 50em;
+}
+
+.Panel {
+    padding: 1em 1em 1.5em;
+    background-color: #fff;
+    margin-bottom: 1.25em;
+}
+
+@media (min-width: 30em) {
+
+    .Cols {
+        display: flex;
+    }
+
+    .Col {
+        flex: 1;
+    }
+}
+
+.Rows--adskilt {
+    border-bottom: 1px solid @FargeBorder;
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
+
+.Rows--adskilt:first-of-type {
+    border-top: 1px solid @FargeBorder;
+}
