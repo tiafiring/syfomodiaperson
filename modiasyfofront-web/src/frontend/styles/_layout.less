@@ -1,32 +1,43 @@
-.Container {
+.container {
     margin-left: auto;
     margin-right: auto;
     max-width: 50em;
 }
 
-.Panel {
+.panel {
     padding: 1em 1em 1.5em;
     background-color: #fff;
     margin-bottom: 1.25em;
 }
 
+.kolonne {
+    margin-bottom: 1em;
+}
+
 @media (min-width: 30em) {
 
-    .Cols {
+    .rad {
         display: flex;
     }
 
-    .Col {
+    .kolonne {
         flex: 1;
+        margin: 0;
     }
+
+    .kolonne--auto {
+        flex: 0;
+        margin-right: 4em;
+    }
+
 }
 
-.Rows--adskilt {
+.rad--adskilt {
     border-bottom: 1px solid @FargeBorder;
     padding-bottom: 1em;
     padding-top: 1em;
 }
 
-.Rows--adskilt:first-of-type {
+.rad--adskilt:first-of-type {
     border-top: 1px solid @FargeBorder;
 }

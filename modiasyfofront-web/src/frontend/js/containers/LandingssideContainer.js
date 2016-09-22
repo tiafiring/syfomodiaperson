@@ -17,7 +17,7 @@ export const LandingssideSide = ({ ledere, navBruker, toggleApenLeder }) => {
 LandingssideSide.propTypes = {
     ledere: PropTypes.array,
     navBruker: PropTypes.object,
-    toggleApenLeder: PropTypes.object,
+    toggleApenLeder: PropTypes.func,
 };
 
 export function mapStateToProps(state) {
