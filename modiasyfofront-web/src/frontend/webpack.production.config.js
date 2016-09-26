@@ -21,10 +21,27 @@ var config = {
       loader: 'babel',
       query: {
         presets: ["react", "es2015"]
-      },      
+      },
       exclude: [nodeModulesPath]
-    }]
+    },
+        {
+            test: /\.less$/,
+            loader: "style!css!autoprefixer!less"
+        },
+        {
+            test: /\.json$/,
+            loader: 'json'
+        },
+        {
+            test: /\.((woff2?|svg)(\?v=[0-9]\.[0-9]\.[0-9]))|(woff2?|svg|jpe?g|png|gif|ico)$/,
+            loader: 'url?limit=10000'
+        },
+        {
+            test: /\.((ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9]))|(ttf|eot)$/,
+            loader: 'file'
+        }]
   },
+
   plugins: [
     new Webpack.DefinePlugin({
       "process.env.NODE_ENV": "'production'"
