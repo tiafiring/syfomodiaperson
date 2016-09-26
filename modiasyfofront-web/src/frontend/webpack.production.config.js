@@ -3,14 +3,13 @@ var path = require('path');
 var nodeModulesPath = path.resolve(__dirname, 'node_modules');
 var buildPath = '../main/webapp/js';
 var mainPath = path.resolve(__dirname, 'js', 'index.js');
+var stylesPath = path.resolve(__dirname, 'styles', 'styles.less');
 
 var config = {
 
   // We change to normal source mapping
   devtool: 'source-map',
-  entry: {
-    app: "./js/index.js"
-  },
+  entry: [mainPath, stylesPath],
   output: {
     path: buildPath,
     filename: 'bundle-prod.js'
