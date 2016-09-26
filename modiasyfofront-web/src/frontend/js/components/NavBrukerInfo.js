@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react';
 
-const NavBrukerinfo = ({ navn, fnr }) => {
+const NavBrukerinfo = ({ navBruker }) => {
     return (<div className="brukerInfo">
-        <h2 className="typo-undertittel">{navn}</h2>
+        <h2 className="typo-undertittel">{navBruker.navn}</h2>
 
         <div className="rad">
-            <div className="kolonne kolonne--auto">
+            <div className="kolonne kolonne--auto nokkelopplysning">
                 <h3>Fødselsnr:</h3>
-                <p>{fnr}</p>
+                <p>{navBruker.fnr}</p>
             </div>
-            <div className="kolonne">
+            <div className="kolonne nokkelopplysning">
                 <h3>Arbeidssituasjon:</h3>
                 <ul className="brukerinfo_arbeidssituasjoner">
                     <li>Arbeidstaker</li>

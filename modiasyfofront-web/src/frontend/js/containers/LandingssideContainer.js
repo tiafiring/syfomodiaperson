@@ -3,12 +3,12 @@ import NaermesteLedere from '../components/NaermesteLedere';
 import { connect } from 'react-redux';
 import Side from '../sider/Side';
 import NavBrukerinfo from '../components/NavBrukerinfo';
+import Navigasjon from '../components/Navigasjon';
 import * as ledereActions from '../actions/ledere_actions';
 
 export const LandingssideSide = ({ ledere, navBruker, toggleApenLeder }) => {
     return (
         <Side tittel="Sykefravær">
-            <NavBrukerinfo {...navBruker} />
             <NaermesteLedere ledere={ledere} navBruker={navBruker} toggleApenLeder={toggleApenLeder} />
         </Side>
     );
@@ -22,8 +22,7 @@ LandingssideSide.propTypes = {
 
 export function mapStateToProps(state) {
     return {
-        ledere: state.ledere.data,
-        navBruker: state.navBruker.data,
+        ledere: state.ledere.data,    
     };
 }
 

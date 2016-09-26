@@ -1,0 +1,56 @@
+.inngangspanel {
+    display: block;
+    border: 0;
+    background-color: #fff;
+    padding: 1em 2em;
+    margin-bottom: 2px;
+    color: @FargeTekst;
+    border-left: 0;
+}
+
+.inngangspanel__meta {
+    font-size: .85em;
+    margin: 0;
+}
+
+.inngangspanel__tittel {
+    font-size: 1em;
+    margin: .2em 0;
+}
+
+.inngangspanel--aktiv,
+.inngangspanel.inngangspanel--aktiv:hover,
+.inngangspanel:hover {
+    padding-left: 1.5em;
+    border-left: .5em solid @FargeNavigasjonAktiv;
+}
+
+.inngangspanel:hover {
+    border-color: @FargeBorder;   
+}
+
+.inngangspaneler {
+    margin-bottom: 3em;
+}
+
+.inngangspaneler__header {
+    padding: 1em 2em;
+    font-size: 1em;
+    background-color: #fff;
+    margin-bottom: 2px;
+}
+
+.inngangspaneler__flere {
+    padding: 1em 2em;
+    background-color: #fff;
+    color: @FargeLenke;
+    margin: 0;
+    border: 0;
+    width: 100%;
+    text-align: left;
+
+    &:focus {
+        box-shadow: 0 0 0 3px @FargeFokus;
+        outline: none;              
+    }
+}
