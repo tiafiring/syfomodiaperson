@@ -32,7 +32,7 @@
                         <webModule>
                             <groupId>${project.groupId}</groupId>
                             <artifactId>modiasyfofront-web</artifactId>
-                            <contextRoot>/modiasyfofront</contextRoot>
+                            <contextRoot>/sykefravaer</contextRoot>
                             <bundleFileName>modiasyfofront-web.war</bundleFileName>
                         </webModule>
                     </modules>

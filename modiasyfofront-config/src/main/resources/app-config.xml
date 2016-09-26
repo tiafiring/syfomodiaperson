@@ -12,7 +12,7 @@
     <loadBalancer />
 
     <resources>
-
+        <baseUrl alias="modapp" mapToProperty="modapp"/>
     </resources>
 
 </application>
