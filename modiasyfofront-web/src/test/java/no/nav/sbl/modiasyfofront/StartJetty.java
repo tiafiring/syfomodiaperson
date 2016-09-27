@@ -9,7 +9,7 @@ import static no.nav.modig.lang.collections.RunnableUtils.waitFor;
 import static no.nav.sbl.dialogarena.common.jetty.Jetty.usingWar;
 
 public class StartJetty {
-    private static final int PORT = 8181;
+    private static final int PORT = 8190;
 
     public static void main(String[] args) throws Exception {
         System.setProperty("no.nav.modig.core.context.subjectHandlerImplementationClass", ThreadLocalSubjectHandler.class.getName());
@@ -19,6 +19,7 @@ public class StartJetty {
         Jetty jetty = usingWar()
                 .at("/sykefravaer")
                 .overrideWebXml()
+                .loadProperties("/test.properties")
                 .port(PORT)
                 .buildJetty();
         jetty.startAnd(first(waitFor(gotKeypress())).then(jetty.stop));
