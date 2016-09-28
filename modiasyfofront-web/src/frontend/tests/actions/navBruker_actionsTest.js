@@ -1,15 +1,15 @@
 import { expect } from 'chai';
 import deepFreeze from 'deep-freeze';
 
-import * as actions from '../../js/actions/navBruker_actions.js';
+import * as actions from '../../js/actions/navbruker_actions.js';
 
-describe('navBruker_actions', () => {
+describe('navbruker_actions', () => {
 
-    it("Har en setNavBruker()-funksjon", () => {
+    it("Har en setNavbruker()-funksjon", () => {
         const navBruker = {
             navn: "***REMOVED***"
         }
-        const res = actions.setNavBruker(navBruker);
+        const res = actions.setNavbruker(navBruker);
         expect(res).to.deep.equal({
             type: "SET_NAVBRUKER",
             data: {

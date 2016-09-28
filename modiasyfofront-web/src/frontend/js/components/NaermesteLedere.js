@@ -28,7 +28,7 @@ EnLeder.propTypes = {
     leder: PropTypes.object,
 };
 
-const FlereLedere = ({ arbeidsgiver, leder, erApen, clickHandler }) => {
+const FlereLedere = ({ arbeidsgiver, epost, navn, tlf, fodselsdato, erApen, clickHandler }) => {
     return (<div className={`rad rad--adskilt naermesteLeder ${erApen ? 'naermesteLeder--aktiv' : ''}`} onClick={clickHandler}>
         <div className="kolonne">
             <h3>Arbeidsgiver</h3>
@@ -38,15 +38,15 @@ const FlereLedere = ({ arbeidsgiver, leder, erApen, clickHandler }) => {
         </div>
         <div className="kolonne">
             <h3>Navn</h3>
-            <p>{leder.navn}</p>
+            <p>{navn}</p>
             { erApen && <h3>Fødselsdato</h3> }
-            { erApen && <p>{leder.fodselsdato}</p> }
+            { erApen && <p>{fodselsdato}</p> }
         </div>
         <div className="kolonne">
             <h3>Telefon</h3>
-            <p>{leder.telefon}</p>
+            <p>{tlf}</p>
             { erApen && <h3>E-post</h3> }
-            { erApen && <p><a href={`mailto:${leder.epost}`}>{leder.epost}</a></p> }
+            { erApen && <p><a href={`mailto:${epost}`}>{epost}</a></p> }
         </div>
         <button aria-pressed={erApen} className={`ikonKollaps ${!erApen ? 'ikonKollaps--erKollapsert' : ''}`} onClick={(event) => {
             event.stopPropagation();

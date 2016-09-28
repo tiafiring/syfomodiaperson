@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import Navigasjon from '../components/Navigasjon';
 import NavBrukerinfoContainer from '../containers/NavBrukerinfoContainer';
 
 const Side = ({ children, fnr }) => {

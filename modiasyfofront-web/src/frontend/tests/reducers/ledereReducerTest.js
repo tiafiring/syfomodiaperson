@@ -39,6 +39,34 @@ describe('ledere', () => {
 
     });
 
+    it("håndterer HENTER_LEDERE", () => {
+        const initialState = deepFreeze({
+            henter: false,
+        });
+        const action = {
+            type: 'HENTER_LEDERE'
+        }
+        const nextState = ledere(initialState, action);
+        expect(nextState).to.deep.equal({
+            henter: true,
+            hentingFeilet: false,
+        })
+    });
+
+    it("håndterer HENT_LEDERE_FEILET", () => {
+        const initialState = deepFreeze({
+            henter: false,
+        });
+        const action = {
+            type: 'HENT_LEDERE_FEILET'
+        }
+        const nextState = ledere(initialState, action);
+        expect(nextState).to.deep.equal({
+            henter: false,
+            hentingFeilet: true,
+        })
+    });
+
     it("håndterer TOGGLE_APEN_LEDER når lederen er lukket", () => {
         const initialState = deepFreeze({
             henter: false,

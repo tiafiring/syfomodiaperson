@@ -1,4 +1,8 @@
-const navBruker = (state = {}, action = {}) => {
+const defualtState = {
+    data: {},
+};
+
+const navBruker = (state = defualtState, action = {}) => {
     switch (action.type) {
         case 'SET_NAVBRUKER': {
             return {

@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Side from '../sider/Side';
+import Feilmelding from '../components/Feilmelding';
 
 export const Feilside = () => {
     return (
         <Side tittel="Sykefravær">
-            <p>Beklager, det oppstod en feil</p>
+            <Feilmelding />
         </Side>
     );
 };

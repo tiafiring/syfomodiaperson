@@ -7,37 +7,17 @@ import thunkMiddleware from 'redux-thunk';
 import history from './history.js';
 import ledere from './reducers/ledere';
 import navBruker from './reducers/navBruker';
-import { setLedere } from './actions/ledere_actions';
-import { setNavBruker } from './actions/navBruker_actions';
-import { setBrukersSykmeldinger } from './actions/brukersSykmeldinger_actions';
-import { setArbeidsgiversSykmeldinger } from './actions/arbeidsgiversSykmeldinger_actions';
-import { setNavsSykmeldinger } from './actions/navsSykmeldinger_actions';
-import arbeidsgiversSykmeldinger from './reducers/arbeidsgiversSykmeldinger';
-import brukersSykmeldinger from './reducers/brukersSykmeldinger';
-import navsSykmeldinger from './reducers/navsSykmeldinger';
-
-const ledereJson = require('./mockData/ledere.json');
-const navBrukerJson = require('./mockData/navBruker.json');
-const sykmeldingerJson = require('./mockData/sykmeldinger.json');
+import { hentLedere } from './actions/ledere_actions';
 
 const rootReducer = combineReducers({
     history,
     ledere,
     navBruker,
-    arbeidsgiversSykmeldinger,
-    brukersSykmeldinger,
-    navsSykmeldinger,
 });
 
 const store = createStore(rootReducer,
     applyMiddleware(thunkMiddleware)
 );
-
-store.dispatch(setLedere(ledereJson));
-store.dispatch(setNavBruker(navBrukerJson));
-store.dispatch(setBrukersSykmeldinger(sykmeldingerJson));
-store.dispatch(setArbeidsgiversSykmeldinger(sykmeldingerJson));
-store.dispatch(setNavsSykmeldinger(sykmeldingerJson));
 
 // <POC for contextholder>
 
@@ -73,7 +53,11 @@ function contextholderOnMessage() {
 
 openWebSocketConnection();
 
-// </POC for contextholder>
+// </POC for contextholder> 
+
+setTimeout(() => {
+    history.replace(`/sykefravaer/887766`);
+}, 3000);
 
 render(<Provider store={store}>
         <AppRouter history={history} /></Provider>,

@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Router, Route } from 'react-router';
 import NaermesteLedereContainer from '../containers/NaermesteLedereContainer';
-import SykmeldingerContainer from '../containers/SykmeldingerContainer';
-import SykmeldingContainer from '../containers/SykmeldingContainer';
 import FeilsideContainer from '../containers/FeilsideContainer';
 
 const AppRouter = ({ history }) => {

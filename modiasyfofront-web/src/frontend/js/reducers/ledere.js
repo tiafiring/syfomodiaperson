@@ -1,10 +1,29 @@
-const ledere = (state = {}, action = {}) => {
+const defaultState = {
+    data: [],
+    default: true,
+};
+
+const ledere = (state = defaultState, action = {}) => {
     switch (action.type) {
         case 'SET_LEDERE': {
             return {
                 data: action.data,
                 henter: false,
                 hentingFeilet: false,
+            };
+        }
+        case 'HENTER_LEDERE': {
+            return {
+                henter: true,
+                hentingFeilet: false,
+                data: [],
+            };
+        }
+        case 'HENT_LEDERE_FEILET': {
+            return {
+                henter: false,
+                hentingFeilet: true,
+                data: [],
             };
         }
         case 'TOGGLE_APEN_LEDER': {

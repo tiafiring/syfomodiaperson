@@ -5,7 +5,7 @@ const Brukerinfo = ({ navBruker, fnr }) => {
         <h2 className="typo-undertittel">{navBruker.navn}</h2>
 
         <div className="rad nokkelopplysninger">
-            <div className="kolonne kolonne--auto nokkelopplysning">
+            <div className="kolonne nokkelopplysning">
                 <h3>Fødselsnr:</h3>
                 <p>{fnr}</p>
             </div>
