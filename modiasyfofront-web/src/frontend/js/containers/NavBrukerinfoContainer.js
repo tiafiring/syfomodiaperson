@@ -1,10 +1,11 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import NavBrukerinfo from '../components/NavBrukerinfo';
 
-export function mapStateToProps(state) {
+export function mapStateToProps(state, ownProps) {
     return {
         navBruker: state.navBruker.data,
+        fnr: ownProps.fnr,
     };
 }
 

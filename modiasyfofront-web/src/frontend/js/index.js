@@ -39,6 +39,42 @@ store.dispatch(setBrukersSykmeldinger(sykmeldingerJson));
 store.dispatch(setArbeidsgiversSykmeldinger(sykmeldingerJson));
 store.dispatch(setNavsSykmeldinger(sykmeldingerJson));
 
+// <POC for contextholder>
+
+var contextholder;
+function getUserId() {
+    return httpGet(window.location.origin + "/contextholder/userid");
+}
+
+function openWebSocketConnection() {
+    contextholder = new WebSocket('wss://' + window.location.host + '/contextholder/websocket/' + getUserId());
+    contextholderOnMessage();
+}
+
+function httpGet(url) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", url, false);
+    xmlHttp.send(null);
+    return xmlHttp.responseText;
+}
+
+function contextholderOnMessage() {
+    contextholder.onmessage = function(e) {
+        if (e.data === 'OK') {
+            return;
+        }
+        history.replace(`/sykefravaer/${e.data}`);
+    }
+}
+
+function pushNewFnr(fnr) {
+    contextholder.send(fnr);
+}
+
+openWebSocketConnection();
+
+// </POC for contextholder>
+
 render(<Provider store={store}>
         <AppRouter history={history} /></Provider>,
     document.getElementById('maincontent'));

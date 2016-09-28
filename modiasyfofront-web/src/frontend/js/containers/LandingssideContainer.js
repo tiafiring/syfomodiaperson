@@ -6,10 +6,10 @@ import NavBrukerinfo from '../components/NavBrukerinfo';
 import Navigasjon from '../components/Navigasjon';
 import * as ledereActions from '../actions/ledere_actions';
 
-export const LandingssideSide = ({ ledere, navBruker, toggleApenLeder }) => {
+export const LandingssideSide = ({ ledere, fnr, toggleApenLeder }) => {
     return (
-        <Side tittel="Sykefravær">
-            <NaermesteLedere ledere={ledere} navBruker={navBruker} toggleApenLeder={toggleApenLeder} />
+        <Side tittel="Sykefravær" fnr={fnr}>
+            <NaermesteLedere ledere={ledere} toggleApenLeder={toggleApenLeder} />
         </Side>
     );
 };
@@ -20,9 +20,11 @@ LandingssideSide.propTypes = {
     toggleApenLeder: PropTypes.func,
 };
 
-export function mapStateToProps(state) {
+export function mapStateToProps(state, ownProps) {
+    const fnr = ownProps.params.fnr;
     return {
-        ledere: state.ledere.data,    
+        ledere: state.ledere.data,
+        fnr,
     };
 }
 

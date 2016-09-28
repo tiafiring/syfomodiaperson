@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Side from '../sider/Side';
 import SykmeldingerNavigasjonContainer from '../containers/SykmeldingerNavigasjonContainer';
+import { DineSykmeldingOpplysninger } from 'digisyfo-npm';
 
 export const SykmeldingSide = ({ sykmelding }) => {
     return (
@@ -10,7 +11,9 @@ export const SykmeldingSide = ({ sykmelding }) => {
                 <nav className="kolonne">
                     <SykmeldingerNavigasjonContainer />
                 </nav>
-                <div className="kolonne kolonne--3">Her kommer en sykmelding {sykmelding.id}</div>
+                <div className="kolonne kolonne--3">
+                    <DineSykmeldingOpplysninger sykmelding={sykmelding} />
+                </div>
             </div>
         </Side>
     );
