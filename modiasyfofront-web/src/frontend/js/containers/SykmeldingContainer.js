@@ -23,13 +23,14 @@ SykmeldingSide.propTypes = {
     ledere: PropTypes.array,
     navBruker: PropTypes.object,
     toggleApenLeder: PropTypes.func,
+    sykmelding: PropTypes.object,
 };
 
 export function mapStateToProps(state, ownProps) {
     return {
         sykmelding: state.arbeidsgiversSykmeldinger.data.filter((sykmelding) => {
             return sykmelding.id === ownProps.params.sykmeldingId;
-        })[0]
+        })[0],
     };
 }
 

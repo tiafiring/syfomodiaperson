@@ -26,7 +26,7 @@ export function mapStateToProps(state, ownProps) {
     return {
         aktivSykmelding: state.arbeidsgiversSykmeldinger.data.filter((sykmelding) => {
             return sykmelding.id === ownProps.params.sykmeldingId;
-        })[0]
+        })[0],
     };
 }
 

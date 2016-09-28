@@ -21,7 +21,7 @@ const NavBrukerinfo = ({ navBruker, fnr }) => {
 };
 
 NavBrukerinfo.propTypes = {
-    navn: PropTypes.string,
+    navBruker: PropTypes.object,
     fnr: PropTypes.string,
 };
 

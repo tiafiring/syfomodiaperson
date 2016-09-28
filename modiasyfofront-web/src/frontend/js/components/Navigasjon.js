@@ -18,10 +18,10 @@ const Navigasjon = () => {
         links.map((link, index) => {
             return (<li key={index}>
                 <Link className="navigasjon__link" activeClassName="navigasjon__link--aktiv" to={`/sykefravaer${link.sti}`}>{link.tittel}</Link>
-            </li>)
+            </li>);
         })
     }
     </ul>);
-}
+};
 
 export default Navigasjon;

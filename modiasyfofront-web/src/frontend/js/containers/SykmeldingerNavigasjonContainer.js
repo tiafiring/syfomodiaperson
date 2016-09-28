@@ -16,7 +16,11 @@ const Navigasjon = ({ sykmeldinger }) => {
     </div>);
 };
 
-export function mapStateToProps(state, ownProps) {
+Navigasjon.propTypes = {
+    sykmeldinger: PropTypes.array,
+};
+
+export function mapStateToProps(state) {
     return {
         sykmeldinger: state.navsSykmeldinger.data,
     };

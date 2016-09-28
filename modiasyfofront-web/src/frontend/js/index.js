@@ -41,7 +41,14 @@ store.dispatch(setNavsSykmeldinger(sykmeldingerJson));
 
 // <POC for contextholder>
 
-var contextholder;
+let contextholder;
+function httpGet(url) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", url, false);
+    xmlHttp.send(null);
+    return xmlHttp.responseText;
+}
+
 function getUserId() {
     return httpGet(window.location.origin + "/contextholder/userid");
 }
@@ -49,13 +56,6 @@ function getUserId() {
 function openWebSocketConnection() {
     contextholder = new WebSocket('wss://' + window.location.host + '/contextholder/websocket/' + getUserId());
     contextholderOnMessage();
-}
-
-function httpGet(url) {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", url, false);
-    xmlHttp.send(null);
-    return xmlHttp.responseText;
 }
 
 function contextholderOnMessage() {

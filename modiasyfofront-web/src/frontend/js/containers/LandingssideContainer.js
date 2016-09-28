@@ -2,8 +2,6 @@ import React, { PropTypes } from 'react';
 import NaermesteLedere from '../components/NaermesteLedere';
 import { connect } from 'react-redux';
 import Side from '../sider/Side';
-import NavBrukerinfo from '../components/NavBrukerinfo';
-import Navigasjon from '../components/Navigasjon';
 import * as ledereActions from '../actions/ledere_actions';
 
 export const LandingssideSide = ({ ledere, fnr, toggleApenLeder }) => {
@@ -18,6 +16,7 @@ LandingssideSide.propTypes = {
     ledere: PropTypes.array,
     navBruker: PropTypes.object,
     toggleApenLeder: PropTypes.func,
+    fnr: PropTypes.string,
 };
 
 export function mapStateToProps(state, ownProps) {
