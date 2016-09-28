@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const NavBrukerinfo = ({ navBruker, fnr }) => {
+const Brukerinfo = ({ navBruker, fnr }) => {
     return (<div className="brukerInfo">
         <h2 className="typo-undertittel">{navBruker.navn}</h2>
 
@@ -20,9 +20,9 @@ const NavBrukerinfo = ({ navBruker, fnr }) => {
     </div>);
 };
 
-NavBrukerinfo.propTypes = {
+Brukerinfo.propTypes = {
     navBruker: PropTypes.object,
     fnr: PropTypes.string,
 };
 
-export default NavBrukerinfo;
+export default Brukerinfo;

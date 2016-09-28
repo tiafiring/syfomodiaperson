@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import NavBrukerinfo from '../components/NavBrukerinfo';
+import Brukerinfo from '../components/Brukerinfo';
 
 export function mapStateToProps(state, ownProps) {
     return {
@@ -8,6 +8,6 @@ export function mapStateToProps(state, ownProps) {
     };
 }
 
-const NavBrukerinfoContainer = connect(mapStateToProps)(NavBrukerinfo);
+const NavBrukerinfoContainer = connect(mapStateToProps)(Brukerinfo);
 
 export default NavBrukerinfoContainer;
