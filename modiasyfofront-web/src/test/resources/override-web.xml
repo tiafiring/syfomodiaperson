@@ -23,17 +23,4 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <filter>
-        <filter-name>HttpSessionSecurityIntegrationFilter</filter-name>
-        <filter-class>no.nav.sbl.modiasyfofront.FakeLoginFilter</filter-class>
-        <init-param>
-            <param-name>defaultFnr</param-name>
-            <param-value>01017021008</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>HttpSessionSecurityIntegrationFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
 </web-app>
