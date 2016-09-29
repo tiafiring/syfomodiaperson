@@ -49,12 +49,16 @@ function httpGet(url) {
     return xmlHttp.responseText;
 }
 
+function getNode() {
+    return httpGet(window.location.origin + "/contextholder/finnnode");
+}
+
 function getUserId() {
     return httpGet(window.location.origin + "/contextholder/userid");
 }
 
 function openWebSocketConnection() {
-    contextholder = new WebSocket('wss://' + window.location.host + '/contextholder/websocket/' + getUserId());
+    contextholder = new WebSocket('wss://' + getNode() + ':8443/contextholder/websocket/' + getUserId());
     contextholderOnMessage();
 }
 
@@ -65,10 +69,6 @@ function contextholderOnMessage() {
         }
         history.replace(`/sykefravaer/${e.data}`);
     }
-}
-
-function pushNewFnr(fnr) {
-    contextholder.send(fnr);
 }
 
 openWebSocketConnection();
