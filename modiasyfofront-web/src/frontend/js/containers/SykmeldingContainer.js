@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Side from '../sider/Side';
 import SykmeldingerNavigasjonContainer from '../containers/SykmeldingerNavigasjonContainer';
 
-export const SykmeldingSide = ({ sykmelding }) => {
+export const SykmeldingSide = () => {
     return (
         <Side tittel="Sykefravær">
             <div className="rad">

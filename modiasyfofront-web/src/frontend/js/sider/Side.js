@@ -5,13 +5,12 @@ import NavBrukerinfoContainer from '../containers/NavBrukerinfoContainer';
 const Side = ({ children, fnr }) => {
     return (<div className="container">
         <NavBrukerinfoContainer fnr={fnr} />
-        <Navigasjon />
-        <div>{children}</div>
+        {children}
     </div>);
 };
 
 Side.propTypes = {
-    children: PropTypes.array,
+    children: PropTypes.object,
     fnr: PropTypes.string,
 };
 
