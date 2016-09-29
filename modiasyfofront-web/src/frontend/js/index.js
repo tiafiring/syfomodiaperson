@@ -3,11 +3,11 @@ import React from 'react';
 import AppRouter from './routers/AppRouter.js';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import thunkMiddleware from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import history from './history.js';
 import ledere from './reducers/ledere';
 import navBruker from './reducers/navBruker';
-import { hentLedere } from './actions/ledere_actions';
+import rootSaga from './sagas';
 
 const rootReducer = combineReducers({
     history,
@@ -15,9 +15,13 @@ const rootReducer = combineReducers({
     navBruker,
 });
 
+const sagaMiddleware = createSagaMiddleware();
+
 const store = createStore(rootReducer,
-    applyMiddleware(thunkMiddleware)
+    applyMiddleware(sagaMiddleware)
 );
+
+sagaMiddleware.run(rootSaga);
 
 // <POC for contextholder>
 

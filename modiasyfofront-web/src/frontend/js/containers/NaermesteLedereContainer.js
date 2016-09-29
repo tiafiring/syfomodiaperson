@@ -9,7 +9,7 @@ import * as ledereActions from '../actions/ledere_actions';
 class NaermesteLedereSide extends Component {
     constructor(props) {
         super(props);
-        this.props.actions.hentLedere(this.props.fnr)
+        this.props.actions.hentLedere(this.props.fnr);
     }
 
     componentWillUpdate(nextProps) {
@@ -19,17 +19,16 @@ class NaermesteLedereSide extends Component {
     }
 
     render() {
-        const {  fnr, henter, ledere, hentingFeilet, actions, navBruker } = this.props;
+        const { fnr, henter, ledere, hentingFeilet, actions, navBruker } = this.props;
         return (<Side tittel="Sykefravær" fnr={fnr}>
         {
             (() => {
                 if (henter) {
                     return <p>Henter</p>;
                 } else if (hentingFeilet) {
-                    return <Feilmelding />
-                } else {
-                    return <NaermesteLedere ledere={ledere} toggleApenLeder={actions.toggleApenLeder} navBruker={navBruker} />;
+                    return <Feilmelding />;
                 }
+                return <NaermesteLedere ledere={ledere} toggleApenLeder={actions.toggleApenLeder} navBruker={navBruker} />;
             })()
         }
         </Side>);
@@ -40,6 +39,10 @@ NaermesteLedereSide.propTypes = {
     ledere: PropTypes.array,
     toggleApenLeder: PropTypes.func,
     fnr: PropTypes.string,
+    actions: PropTypes.object,
+    henter: PropTypes.bool,
+    hentingFeilet: PropTypes.bool,
+    navBruker: PropTypes.object,
 };
 
 export function mapDispatchToProps(dispatch) {

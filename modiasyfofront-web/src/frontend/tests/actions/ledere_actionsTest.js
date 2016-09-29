@@ -5,16 +5,11 @@ import * as actions from '../../js/actions/ledere_actions.js';
 
 describe('ledere_actions', () => {
 
-    it("Har en setLedere()-funksjon", () => {
-        const ledere = [{
-            navn: "***REMOVED***"
-        }]
-        const res = actions.setLedere(ledere);
+    it("Har en hentLedere()-funksjon", () => {
+        const res = actions.hentLedere("44");
         expect(res).to.deep.equal({
-            type: "SET_LEDERE",
-            data: [{
-                navn: "***REMOVED***"
-            }]
+            type: "HENT_LEDERE_FORESPURT",
+            fnr: "44"
         })
     });
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Brukerinfo from '../components/Brukerinfo';
 import { bindActionCreators } from 'redux';
@@ -17,9 +17,14 @@ class BrukerinfoContainer extends Component {
     }
 
     render() {
-        return <Brukerinfo {...this.props} />
+        return <Brukerinfo {...this.props} />;
     }
 }
+
+BrukerinfoContainer.propTypes = {
+    actions: PropTypes.object,
+    fnr: PropTypes.string,
+};
 
 export function mapStateToProps(state, ownProps) {
     return {

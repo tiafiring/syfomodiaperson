@@ -57,12 +57,15 @@ const FlereLedere = ({ arbeidsgiver, epost, navn, tlf, fodselsdato, erApen, clic
 
 FlereLedere.propTypes = {
     arbeidsgiver: PropTypes.object,
-    leder: PropTypes.object,
+    epost: PropTypes.string,
+    navn: PropTypes.string,
     erApen: PropTypes.bool,
     clickHandler: PropTypes.func,
+    tlf: PropTypes.string,
+    fodselsdato: PropTypes.string,
 };
 
-const naermesteLedere = ({ ledere, navBruker, toggleApenLeder }) => {
+const NaermesteLedere = ({ ledere, navBruker, toggleApenLeder }) => {
     const tittel = ledere.length > 1 ? 'Nærmeste ledere med personalansvar' : 'Nærmeste ledere med personalansvar';
     return (<div className="panel">
         <h2 className="typo-undertittel">{tittel}</h2>
@@ -85,10 +88,10 @@ const naermesteLedere = ({ ledere, navBruker, toggleApenLeder }) => {
     </div>);
 };
 
-naermesteLedere.propTypes = {
+NaermesteLedere.propTypes = {
     ledere: PropTypes.array,
     navBruker: PropTypes.object,
     toggleApenLeder: PropTypes.func,
 };
 
-export default naermesteLedere;
+export default NaermesteLedere;

@@ -1,20 +1,21 @@
-import {List, Map, fromJS} from 'immutable';
-import {expect} from 'chai';
+import { expect } from 'chai';
 import deepFreeze from 'deep-freeze';
 
 import navBruker from '../../js/reducers/navBruker.js';
 
 describe('navBruker', () => {
 
-    it("Returnerer {} ved initializering", () => {
+    it("Returnerer { data: {} } ved initializering", () => {
         const nextState = navBruker();
-        expect(nextState).to.deep.equal({});
+        expect(nextState).to.deep.equal({
+            data: {}
+        });
     });
 
-    it("håndterer SET_NAVBRUKER", () => {
+    it("håndterer NAVBRUKER_HENTET", () => {
         const initialState = deepFreeze({});
         const action = {
-            type: 'SET_NAVBRUKER',
+            type: 'NAVBRUKER_HENTET',
             data: {
                 navn: "Kurt Nilsen"
             },

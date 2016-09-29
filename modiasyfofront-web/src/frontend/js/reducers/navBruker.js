@@ -4,7 +4,7 @@ const defualtState = {
 
 const navBruker = (state = defualtState, action = {}) => {
     switch (action.type) {
-        case 'SET_NAVBRUKER': {
+        case 'NAVBRUKER_HENTET': {
             return {
                 henter: false,
                 hentingFeilet: false,

@@ -1,11 +1,10 @@
 const defaultState = {
     data: [],
-    default: true,
 };
 
 const ledere = (state = defaultState, action = {}) => {
     switch (action.type) {
-        case 'SET_LEDERE': {
+        case 'LEDERE_HENTET': {
             return {
                 data: action.data,
                 henter: false,
