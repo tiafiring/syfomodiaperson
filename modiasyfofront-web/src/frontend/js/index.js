@@ -6,13 +6,13 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import history from './history.js';
 import ledere from './reducers/ledere';
-import navBruker from './reducers/navBruker';
+import navbruker from './reducers/navbruker';
 import rootSaga from './sagas';
 
 const rootReducer = combineReducers({
     history,
     ledere,
-    navBruker,
+    navbruker,
 });
 
 const sagaMiddleware = createSagaMiddleware();
