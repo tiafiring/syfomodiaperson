@@ -7,19 +7,19 @@ env = process.argv[3];
 var timestamp = Date.now().toString();
 
 var dev = {
-    'timestamp': `${timestamp}`,
-    "buildRoot": "http://localhost:8080/assets",
-    "restRoot": "http://localhost:8084/modiasyforest",
-    "bundleFileName": `bundle.js`,
-    "decoratorRoot": "https://modapp-t1.adeo.no",
+    timestamp: timestamp,
+    buildRoot: 'http://localhost:8080/assets',
+    restRoot: 'http://localhost:8084/modiasyforest',
+    bundleFileName: 'bundle.js',
+    decoratorRoot: 'https://modapp-t1.adeo.no',
 };
 
 var prod = {
-    'timestamp': `${timestamp}`,
-    "buildRoot": "/sykefravaer/js",
-    "restRoot": "/syforest",
-    "bundleFileName": "bundle-prod.js",
-    "decoratorRoot": ""
+    timestamp: timestamp,
+    buildRoot: '/sykefravaer/js',
+    restRoot: '/modiasyforest',
+    bundleFileName: 'bundle-prod.js',
+    decoratorRoot: ''
 };
 
 fs.readFile(front, function (err, data) {
