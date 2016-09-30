@@ -19,7 +19,7 @@ class NaermesteLedereSide extends Component {
     }
 
     render() {
-        const { fnr, henter, ledere, hentingFeilet, actions, navBruker } = this.props;
+        const { fnr, henter, ledere, hentingFeilet, actions, navbruker } = this.props;
         return (<Side tittel="Sykefravær" fnr={fnr}>
         {
             (() => {
@@ -28,7 +28,7 @@ class NaermesteLedereSide extends Component {
                 } else if (hentingFeilet) {
                     return <Feilmelding />;
                 }
-                return <NaermesteLedere ledere={ledere} toggleApenLeder={actions.toggleApenLeder} navBruker={navBruker} />;
+                return <NaermesteLedere ledere={ledere} toggleApenLeder={actions.toggleApenLeder} navbruker={navbruker} />;
             })()
         }
         </Side>);
@@ -42,7 +42,7 @@ NaermesteLedereSide.propTypes = {
     actions: PropTypes.object,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
-    navBruker: PropTypes.object,
+    navbruker: PropTypes.object,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -57,7 +57,7 @@ export function mapStateToProps(state, ownProps) {
         ledere: state.ledere.data,
         henter: state.ledere.henter,
         hentingFeilet: state.ledere.hentingFeilet,
-        navBruker: state.navBruker.data,
+        navbruker: state.navbruker.data,
         fnr,
     };
 }

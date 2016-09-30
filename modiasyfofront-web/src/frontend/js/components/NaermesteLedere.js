@@ -65,7 +65,7 @@ FlereLedere.propTypes = {
     fodselsdato: PropTypes.string,
 };
 
-const NaermesteLedere = ({ ledere, navBruker, toggleApenLeder }) => {
+const NaermesteLedere = ({ ledere, navbruker, toggleApenLeder }) => {
     const tittel = ledere.length > 1 ? 'Nærmeste ledere med personalansvar' : 'Nærmeste ledere med personalansvar';
     return (<div className="panel">
         <h2 className="typo-undertittel">{tittel}</h2>
@@ -74,7 +74,7 @@ const NaermesteLedere = ({ ledere, navBruker, toggleApenLeder }) => {
                 ledere.length === 1 && <EnLeder {...ledere[0]} />
             }
             {
-                ledere.length === 0 && <p>Nærmeste leder med personalansvar for {navBruker.navn} er ikke oppgitt.</p>
+                ledere.length === 0 && <p>Nærmeste leder med personalansvar for {navbruker.navn} er ikke oppgitt.</p>
             }
             {
                 ledere.length > 1 && ledere.map((leder, index) => {
@@ -90,7 +90,7 @@ const NaermesteLedere = ({ ledere, navBruker, toggleApenLeder }) => {
 
 NaermesteLedere.propTypes = {
     ledere: PropTypes.array,
-    navBruker: PropTypes.object,
+    navbruker: PropTypes.object,
     toggleApenLeder: PropTypes.func,
 };
 

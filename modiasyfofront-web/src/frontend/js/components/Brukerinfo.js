@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 
-const Brukerinfo = ({ navBruker, fnr }) => {
+const Brukerinfo = ({ navbruker, fnr }) => {
     return (<div className="brukerInfo">
-        <h2 className="typo-undertittel">{navBruker.navn}</h2>
+        <h2 className="typo-undertittel">{navbruker.navn}</h2>
 
         <div className="rad nokkelopplysninger">
             <div className="kolonne nokkelopplysning">
@@ -14,7 +14,7 @@ const Brukerinfo = ({ navBruker, fnr }) => {
 };
 
 Brukerinfo.propTypes = {
-    navBruker: PropTypes.object,
+    navbruker: PropTypes.object,
     fnr: PropTypes.string,
 };
 

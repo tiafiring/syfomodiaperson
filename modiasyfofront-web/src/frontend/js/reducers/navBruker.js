@@ -2,7 +2,7 @@ const defualtState = {
     data: {},
 };
 
-const navBruker = (state = defualtState, action = {}) => {
+const navbruker = (state = defualtState, action = {}) => {
     switch (action.type) {
         case 'NAVBRUKER_HENTET': {
             return {
@@ -17,4 +17,4 @@ const navBruker = (state = defualtState, action = {}) => {
     }
 };
 
-export default navBruker;
+export default navbruker;

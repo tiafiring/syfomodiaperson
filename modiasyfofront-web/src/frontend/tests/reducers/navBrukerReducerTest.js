@@ -1,12 +1,12 @@
 import { expect } from 'chai';
 import deepFreeze from 'deep-freeze';
 
-import navBruker from '../../js/reducers/navBruker.js';
+import navbruker from '../../js/reducers/navbruker.js';
 
-describe('navBruker', () => {
+describe('navbruker', () => {
 
     it("Returnerer { data: {} } ved initializering", () => {
-        const nextState = navBruker();
+        const nextState = navbruker();
         expect(nextState).to.deep.equal({
             data: {}
         });
@@ -20,7 +20,7 @@ describe('navBruker', () => {
                 navn: "Kurt Nilsen"
             },
         };
-        const nextState = navBruker(initialState, action);
+        const nextState = navbruker(initialState, action);
 
         expect(nextState).to.deep.equal({
             henter: false,

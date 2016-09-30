@@ -28,7 +28,7 @@ BrukerinfoContainer.propTypes = {
 
 export function mapStateToProps(state, ownProps) {
     return {
-        navBruker: state.navBruker.data,
+        navbruker: state.navbruker.data,
         fnr: ownProps.fnr,
     };
 }
