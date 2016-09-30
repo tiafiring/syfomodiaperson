@@ -39,6 +39,6 @@ export function mapDispatchToProps(dispatch) {
     };
 }
 
-const NavBrukerinfoContainer = connect(mapStateToProps, mapDispatchToProps)(BrukerinfoContainer);
+const NavbrukerinfoContainer = connect(mapStateToProps, mapDispatchToProps)(BrukerinfoContainer);
 
-export default NavBrukerinfoContainer;
+export default NavbrukerinfoContainer;

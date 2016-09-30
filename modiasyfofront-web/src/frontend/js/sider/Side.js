@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
-import NavBrukerinfoContainer from '../containers/NavBrukerinfoContainer';
+import NavbrukerinfoContainer from '../containers/NavbrukerinfoContainer';
 
 const Side = ({ children, fnr }) => {
     return (<div className="container">
-        <NavBrukerinfoContainer fnr={fnr} />
+        <NavbrukerinfoContainer fnr={fnr} />
         {children}
     </div>);
 };
