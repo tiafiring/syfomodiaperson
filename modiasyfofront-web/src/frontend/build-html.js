@@ -12,6 +12,8 @@ var dev = {
     restRoot: 'http://localhost:8084/modiasyforest',
     bundleFileName: 'bundle.js',
     decoratorRoot: 'https://modapp-t1.adeo.no',
+    websocketProtocol: 'ws',
+    contextholderRoot: 'http://localhost:8090/contextholder'
 };
 
 var prod = {
@@ -19,7 +21,9 @@ var prod = {
     buildRoot: '/sykefravaer/js',
     restRoot: '/modiasyforest',
     bundleFileName: 'bundle-prod.js',
-    decoratorRoot: ''
+    decoratorRoot: '',
+    websocketProtocol: 'wss',
+    contextholderRoot: '/contextholder'
 };
 
 fs.readFile(front, function (err, data) {
