@@ -27,7 +27,17 @@ const opprettWebsocketConnection = (callback) => {
                 return;
             }
             callback(e);
+        };
+        connection.onerror = (e) => {
+            callback("onerror");
+        };
+
+        connection.onclose = () => {
+            callback("onerror");
         }
+    })
+    .catch(function(){
+        callback("onerror");
     });
 };
 

@@ -26,7 +26,13 @@ const store = createStore(rootReducer,
 sagaMiddleware.run(rootSaga);
 
 opprettWebsocketConnection((event) => {
-    history.replace(`/sykefravaer/${event.data}`);
+
+    if (event === "onerror") {
+        document.getElementById('contextholderfeil').style.display = "block";
+    } else {
+        document.getElementById('contextholderoppdatering').style.display = "block";
+        history.replace(`/sykefravaer/${event.data}`);
+    }
 });
 
 render(<Provider store={store}>
