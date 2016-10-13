@@ -10,4 +10,4 @@ export const hentLedere = (fnr) => {
         type: 'HENT_LEDERE_FORESPURT',
         fnr,
     };
-}
+};
