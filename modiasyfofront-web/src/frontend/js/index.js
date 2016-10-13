@@ -30,13 +30,8 @@ const fnr = window.location.pathname.split('/')[2];
 store.dispatch(hentNavbruker(fnr));
 
 opprettWebsocketConnection((event) => {
-    if (event === "onerror") {
-        document.getElementById('contextholderfeil').style.display = "block";
-    } else {
-        document.getElementById('contextholderoppdatering').style.display = "block";
-        store.dispatch(hentNavbruker(event.data));
-        history.replace(`/sykefravaer/${event.data}`);
-    }
+    store.dispatch(hentNavbruker(event.data));
+    history.replace(`/sykefravaer/${event.data}`);
 });
 
 render(<Provider store={store}>

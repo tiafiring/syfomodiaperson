@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Brukerinfo from '../components/Brukerinfo';
-import ContextOppdatering from '../components/ContextOppdatering';
 import { bindActionCreators } from 'redux';
 import * as navbrukerActions from '../actions/navbruker_actions';
 
@@ -19,7 +18,6 @@ class BrukerinfoContainer extends Component {
 
     render() {
         return <div>
-                <ContextOppdatering/>
                 <Brukerinfo {...this.props} />
             </div>
         ;

@@ -27,15 +27,8 @@ const opprettWebsocketConnection = (callback) => {
             }
             callback(e);
         };
-        connection.onerror = (e) => {
-            callback("onerror");
-        };
-        connection.onclose = () => {
-            callback("onerror");
-        }
-    })
-    .catch(function(){
-        callback("onerror");
+    }).catch((e) => {
+        throw new Error("Det oppstod en feil med contextholder", e);
     });
 };
 
