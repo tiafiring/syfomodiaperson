@@ -4,35 +4,9 @@ import Brukerinfo from '../components/Brukerinfo';
 import { bindActionCreators } from 'redux';
 import * as navbrukerActions from '../actions/navbruker_actions';
 
-class BrukerinfoContainer extends Component {
-    constructor(props) {
-        super(props);
-        this.props.actions.hentNavbruker(this.props.fnr);
-    }
-
-    componentWillUpdate(nextProps) {
-        if (nextProps.fnr !== this.props.fnr) {
-            this.props.actions.hentNavbruker(nextProps.fnr);
-        }
-    }
-
-    render() {
-        return <div>
-                <Brukerinfo {...this.props} />
-            </div>
-        ;
-    }
-}
-
-BrukerinfoContainer.propTypes = {
-    actions: PropTypes.object,
-    fnr: PropTypes.string,
-};
-
 export function mapStateToProps(state, ownProps) {
     return {
         navbruker: state.navbruker.data,
-        fnr: ownProps.fnr,
     };
 }
 
@@ -42,6 +16,6 @@ export function mapDispatchToProps(dispatch) {
     };
 }
 
-const NavbrukerinfoContainer = connect(mapStateToProps, mapDispatchToProps)(BrukerinfoContainer);
+const NavbrukerinfoContainer = connect(mapStateToProps, mapDispatchToProps)(Brukerinfo);
 
 export default NavbrukerinfoContainer;

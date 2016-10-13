@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Side from '../sider/Side';
 import * as ledereActions from '../actions/ledere_actions';
+import AppSpinner from '../components/AppSpinner';
 
 class NaermesteLedereSide extends Component {
     constructor(props) {
@@ -24,7 +25,7 @@ class NaermesteLedereSide extends Component {
         {
             (() => {
                 if (henter) {
-                    return <p>Henter</p>;
+                    return <AppSpinner />;
                 } else if (hentingFeilet) {
                     return <Feilmelding />;
                 }
