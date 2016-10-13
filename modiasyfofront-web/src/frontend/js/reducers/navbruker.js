@@ -8,8 +8,17 @@ const navbruker = (state = defualtState, action = {}) => {
             return {
                 henter: false,
                 hentingFeilet: false,
-                data: action.data,
+                data: Object.assign({}, state.data, action.data),
             };
+        }
+        case 'HENT_NAVBRUKER_FORESPURT': {
+            return Object.assign({
+                henter: true,
+                hentingFeilet: false,
+                data: Object.assign({}, state.data, {
+                    fnr: action.fnr,
+                }),
+            });
         }
         default: {
             return state;

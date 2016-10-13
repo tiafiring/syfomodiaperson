@@ -10,6 +10,7 @@ import ledere from './reducers/ledere';
 import navbruker from './reducers/navbruker';
 import rootSaga from './sagas';
 import opprettWebsocketConnection from './contextHolder';
+import { hentNavbruker } from './actions/navbruker_actions';
 
 const rootReducer = combineReducers({
     history,
@@ -25,12 +26,15 @@ const store = createStore(rootReducer,
 
 sagaMiddleware.run(rootSaga);
 
-opprettWebsocketConnection((event) => {
+const fnr = window.location.pathname.split('/')[2];
+store.dispatch(hentNavbruker(fnr));
 
+opprettWebsocketConnection((event) => {
     if (event === "onerror") {
         document.getElementById('contextholderfeil').style.display = "block";
     } else {
         document.getElementById('contextholderoppdatering').style.display = "block";
+        store.dispatch(hentNavbruker(event.data));
         history.replace(`/sykefravaer/${event.data}`);
     }
 });
