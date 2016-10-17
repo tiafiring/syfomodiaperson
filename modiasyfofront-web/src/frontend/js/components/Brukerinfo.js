@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 const Brukerinfo = ({ navbruker }) => {
     return (<div className="brukerInfo">
-        <h2 className="typo-undertittel">{navbruker.navn}</h2>
+        <h2 className="typo-innholdstittel">{navbruker.navn}</h2>
 
         <div className="rad nokkelopplysninger">
             <div className="kolonne nokkelopplysning">

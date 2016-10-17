@@ -1,0 +1,116 @@
+fieldset {
+    border: 0;
+    padding: 0;
+}
+
+legend {
+    font-size: 1.2em;
+    margin-bottom: 1em;
+    float: left; 
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: .2em;
+}
+
+input {
+    font-size: 1em;
+    padding: .45em;
+    line-height: 1.2;
+    box-sizing: border-box;
+    border: 1px solid @FargeBorder;
+    font-family: @Standardfont;
+    border-radius: 1px;
+
+    &:hover {
+        border-color: @FargeLenke;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 3px @FargeFokus;
+        border-color: @FargeTekst;
+        outline: none;
+        transition: .1s border-color ease-in-out;
+    }
+}
+
+.input--xxs {
+    max-width: 2em; 
+}
+
+.input--xs {
+    max-width: 4em;
+}
+
+.input--s {
+    max-width: 6em;
+}
+
+.input--m {
+    width: 100%;
+    max-width: 12em;
+}
+
+.input--l {
+    width: 100%;
+    max-width: 18em;
+}
+
+
+.nav-input {
+    margin-bottom: 1em;
+}
+
+.skjema__feilmelding {
+    color: @FargeFeil;
+    font-style: italic;
+}
+
+.knapp {
+    border: 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #fff;
+    background-color: #0067c5;
+    padding: .5em 2.5em .75em 2.5em;
+    font-family: @Profilfont; 
+    font-size: 1em;
+    letter-spacing: .0625em;
+    border-radius: .125em;
+    cursor: pointer;
+    line-height: 1;
+    box-shadow: 0 -.125em 0 @FargeTekst inset;
+
+    &:active, &:active:hover, &:active:focus {
+        transform: translateY(.125em);
+        box-shadow: none;
+        background-color: #005b82;
+    }
+
+    &:hover, &:focus                 {
+        transform: translateY(-1px);
+        box-shadow: 0 -.125em 0 @FargeTekst inset, 0 1px 0 @FargeTekst;
+        background-color: lighten(#0067c5, 5%);
+    }
+
+    &:focus {
+        box-shadow: 0 -.1875em 0 @FargeTekst inset, 0 0 0 .1875em @FargeFokus;
+    }
+
+    &:active:focus {
+        box-shadow: 0 0 0 .1875em @FargeFokus;
+    }
+
+    &:focus {
+        box-shadow: 0 -.1875em 0 @FargeTekst inset, 0 0 0 .1875em @FargeFokus;
+    }
+
+}
+
+.knapp--liten {
+    font-size: .875em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+}

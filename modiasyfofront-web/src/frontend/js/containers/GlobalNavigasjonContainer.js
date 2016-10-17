@@ -15,7 +15,7 @@ const GlobalNavigasjon = ({ fnr }) => {
     {
         menypunkter.map(({ navn, sti }, key) => {
             return (<li key={key} className="navigasjon__element">
-                <Link className="inngangspanel" activeClassName="inngangspanel" to={`/sykefravaer/${fnr}/${sti}`}>{navn}</Link>
+                <Link className="inngangspanel" activeClassName="inngangspanel--aktiv" to={`/sykefravaer/${fnr}/${sti}`}>{navn}</Link>
             </li>);
         })
     }

@@ -8,6 +8,8 @@ import createSagaMiddleware from 'redux-saga';
 import history from './history.js';
 import ledere from './reducers/ledere';
 import navbruker from './reducers/navbruker';
+import { reducer as formReducer } from 'redux-form';
+import moter from './mote/reducers/moter';
 import rootSaga from './sagas';
 import opprettWebsocketConnection from './contextHolder';
 import { hentNavbruker } from './actions/navbruker_actions';
@@ -16,6 +18,8 @@ const rootReducer = combineReducers({
     history,
     ledere,
     navbruker,
+    moter,
+    form: formReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();

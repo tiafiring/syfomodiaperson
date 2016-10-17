@@ -1,23 +1,40 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Side from '../sider/Side';
+import MotebookingSkjema from '../mote/skjema/MotebookingSkjema';
+import MotebookingStatus from '../mote/skjema/MotebookingStatus';
+import * as actionCreators from '../mote/actions/moter_actions';
 
-const Motebooking = ({ fnr }) => {
+let MotebookingSide = (props) => {
     return (<Side tittel="Møtebooking">
-        <p>Her er litt møtebooking for {fnr}</p>
+    {
+        (() => {
+            if (props.mote) {
+                return <MotebookingStatus mote={props.mote} />
+            } else {
+                return <MotebookingSkjema {...props} />
+            }
+        })()
+    }
     </Side>);
 };
 
-Motebooking.propTypes = {
+MotebookingSide.propTypes = {
     fnr: PropTypes.string,
 };
 
 const mapStateToProps = (state) => {
+    const fnr = state.navbruker.data.fnr;
+    const skjemaData = state.form.opprettMote;
     return {
-        fnr: state.navbruker.data.fnr,
+        skjemaData,
+        fnr,
+        mote: state.moter.data.filter((m) => {
+            return m.fnr === fnr
+        })[0]
     };
 };
 
-const MotebookingContainer = connect(mapStateToProps)(Motebooking);
+const MotebookingContainer = connect(mapStateToProps, actionCreators)(MotebookingSide);
 
 export default MotebookingContainer;
