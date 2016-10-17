@@ -21,7 +21,6 @@ function fetchBruker() {
 const opprettWebsocketConnection = (callback) => {
     return fetchBruker().then((json) => {
         const connection = new ContextholderConnection(json.userid);
-        console.log(connection);
         connection.onmessage = (e) => {
             if (e.data === 'OK') {
                 return;

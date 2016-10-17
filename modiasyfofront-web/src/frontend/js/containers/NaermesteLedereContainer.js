@@ -55,7 +55,7 @@ export function mapStateToProps(state, ownProps) {
     const fnr = ownProps.params.fnr;
     return {
         ledere: state.ledere.data,
-        henter: state.ledere.henter,
+        henter: state.ledere.henter || state.navbruker.henter,
         hentingFeilet: state.ledere.hentingFeilet,
         navbruker: state.navbruker.data,
         fnr,

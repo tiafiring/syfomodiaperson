@@ -3,7 +3,11 @@ export function get(url) {
         credentials: 'include',
     })
     .then((res) => {
-        return res.json();
+        if (res.status > 400) {
+            throw new Error('Det oppstod en feil');
+        } else {
+            return res.json();
+        }
     })
     .catch((err) => {
         throw err;

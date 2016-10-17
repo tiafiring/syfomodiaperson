@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 
-const EnLeder = ({ arbeidsgiver, leder }) => {
+const EnLeder = ({ leder }) => {
     return (<div className="rad naermesteLeder">
         <div className="kolonne">
             <h3>Arbeidsgiver</h3>
-            <p>{arbeidsgiver.navn}</p>
+            <p>{leder.arbeidsgiver.navn}</p>
             <h3>Org. nummer</h3>
-            <p>{arbeidsgiver.orgnummer}</p>
+            <p>{leder.arbeidsgiver.orgnummer}</p>
         </div>
         <div className="kolonne">
             <h3>Navn</h3>
@@ -16,7 +16,7 @@ const EnLeder = ({ arbeidsgiver, leder }) => {
         </div>
         <div className="kolonne">
             <h3>Telefon</h3>
-            <p>{leder.telefon}</p>
+            <p>{leder.tlf}</p>
             <h3>E-post</h3>
             <p><a href={`mailto:${leder.epost}`}>{leder.epost}</a></p>
         </div>
@@ -66,12 +66,13 @@ FlereLedere.propTypes = {
 };
 
 const NaermesteLedere = ({ ledere, navbruker, toggleApenLeder }) => {
-    const tittel = ledere.length > 1 ? 'Nærmeste ledere med personalansvar' : 'Nærmeste ledere med personalansvar';
+    const tittel = ledere.length > 1 ? 'Nærmeste ledere med personalansvar' : 'Nærmeste leder med personalansvar';
+    console.log("første leder", ledere[0])
     return (<div className="panel">
         <h2 className="typo-undertittel">{tittel}</h2>
         <div className="naermesteLedere">
             {
-                ledere.length === 1 && <EnLeder {...ledere[0]} />
+                ledere.length === 1 && <EnLeder leder={ledere[0]} />
             }
             {
                 ledere.length === 0 && <p>Nærmeste leder med personalansvar for {navbruker.navn} er ikke oppgitt.</p>
