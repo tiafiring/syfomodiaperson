@@ -6,7 +6,7 @@ const getPort = () => {
 };
 
 const ContextholderConnection = (brukerId) => {
-    const webSocketUrl = window.SYFO_SETTINGS.WEBSOCKET_PROTOCOL + '://' + window.location.hostname + getPort('DEV') + '/contextholder/websocket/' + brukerId;
+    const webSocketUrl = window.SYFO_SETTINGS.WEBSOCKET_PROTOCOL + '://' + window.location.hostname + getPort('DEV') + '/eventdistributer/websocket/' + brukerId;
     return new WebSocket(webSocketUrl);
 };
 
