@@ -2,28 +2,35 @@ import React, { Component } from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import DatePicker from 'nav-datepicker';
 
-class DatepickerField extends Component {
-    render () {
-        return <input ref="jsDatePicker" type="text" className="input--s" {...this.props.input} />
-    }
+const TextField = (props) => {    
+    const { meta } = props;
+
+    return (<div>
+        <input type={props.type || 'text'} id={props.id} className={`${props.className} ${(meta.touched && meta.error && 'input--feil')}`} {...props.input} />
+        <p className="skjema__feilmelding" aria-live="polite">{meta.touched && meta.error}</p>
+    </div>)
 }
 
-const Tidspunker = ({ fields }) => {
+const Tidspunker = ({ fields, skjemaData }) => {
     const tidspunkter = [{}, {}];
+    
     return (<div>
         {
             tidspunkter.map((tidspunkt, index) => {
+                const datofelt = `tidspunkter[${index}].dato`;
+                const klokkeslettfelt = `tidspunkter[${index}].klokkeslett`;
+
                 return (<div key={index}>
                     <h4>Alternativ {index + 1}</h4>
                     <div className="blokk">
                         <div className="rad">
                             <div className="kolonne kolonne--auto">    
                                 <label htmlFor={`dato-${index}`}>Dato</label>
-                                <Field id={`dato-${index}`} component={DatepickerField} type="date" name={`tidspunkter[${index}].dato`} className="datovelger input--s" />
+                                <Field id={`dato-${index}`} component={TextField} name={datofelt} className="input--s" />
                             </div>
                             <div className="kolonne">
                                 <label htmlFor={`klokkeslett-${index}`}>Klokkeslett</label>
-                                <Field id={`klokkeslett-${index}`} component="input" type="text" name={`tidspunkter[${index}].klokkeslett`} className="input--xs" />
+                                <Field id={`klokkeslett-${index}`} component={TextField} name={klokkeslettfelt} className="input--xs" />
                             </div>
                         </div>
                     </div>
@@ -41,8 +48,8 @@ class MotebookingSkjema extends Component {
     }
 
     render () {
-        const { handleSubmit } = this.props;
-        console.log(this.props)
+        const { handleSubmit, skjemaData } = this.props;
+
         return (<form className="panel" onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
             <h3 className="typo-innholdstittel">Book møte</h3>
 
@@ -50,19 +57,19 @@ class MotebookingSkjema extends Component {
                 <legend>Arbeidsgiveren</legend>
                 <div className="nav-input">
                     <label htmlFor="navn">Navn</label>
-                    <Field id="navn" component="input" type="text" name="naermesteLeder.navn" className="input--l" />
+                    <Field id="navn" component={TextField} name="naermesteLederNavn" className="input--l" />
                 </div>
                 <div className="nav-input">
                     <label htmlFor="navn">E-post</label>
-                    <Field id="navn" component="input" type="email" name="naermesteLeder.epost" className="input--l" />
+                    <Field id="navn" component={TextField} type="email" name="naermesteLederEpost" className="input--l" />
                 </div>
             </fieldset>
 
             <fieldset className="blokk-xl">
                 <legend>Møte</legend>
-                <Tidspunker />
+                <Tidspunker skjemaData={this.props.skjemaData} />
                 <label htmlFor="sted">Sted</label>
-                <Field id="sted" component="input" type="text" name="sted" className="input--l" />
+                <Field id="sted" component={TextField} name="moetested" className="input--l" />
             </fieldset>
 
             <input type="submit" className="knapp" value="Send møteforespørsel" />
@@ -82,18 +89,14 @@ export function validate(values) {
     let lederFeilmeldinger = {};
     let tidspunkterFeilmeldinger = [{}, {}]
 
-    if (!values.naermesteLeder || !values.naermesteLeder.navn) {
-        lederFeilmeldinger.navn = "Vennligst fyll ut nærmeste leders navn";
+    if (!values.naermesteLederNavn) {
+        feilmeldinger.naermesteLederNavn = "Vennligst fyll ut nærmeste leders navn";
     }
 
-    if (!values.naermesteLeder || !values.naermesteLeder.epost) {
-        lederFeilmeldinger.epost = "Vennligst fyll ut nærmeste leders e-post-adresse";
-    } else if (!validateEmail(values.naermesteLeder.epost)) {
-        lederFeilmeldinger.epost = "Vennligst fyll ut en gyldig e-post-adresse";
-    }
-
-    if (lederFeilmeldinger !== {}) {
-        feilmeldinger.naermesteLeder = lederFeilmeldinger;
+    if (!values.naermesteLederEpost) {
+        feilmeldinger.naermesteLederEpost = "Vennligst fyll ut nærmeste leders e-post-adresse";
+    } else if (!validateEmail(values.naermesteLederEpost)) {
+        feilmeldinger.naermesteLederEpost = "Vennligst fyll ut en gyldig e-post-adresse";
     }
 
     if(!values.tidspunkter || !values.tidspunkter.length) {

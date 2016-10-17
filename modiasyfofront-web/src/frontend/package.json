@@ -1,5 +1,5 @@
 {
-  "name": "digisyfo",
+  "name": "modiasyfofront",
   "version": "0.0.1",
   "description": "Digitalisering av sykefraværsoppfølging",
   "main": "index.js",
@@ -42,6 +42,7 @@
     "cheerio": "0.20.0",
     "chokidar": "git+https://github.com/paulmillr/chokidar.git#1.4.2",
     "deep-freeze": "0.0.1",
+    "digisyfo-npm": "1.0.10",
     "enzyme": "2.2.0",
     "express": "4.13.4",
     "fetch": "1.0.1",

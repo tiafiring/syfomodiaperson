@@ -12,31 +12,19 @@ describe("MotebookingSkjema", () => {
         })
 
         it("Skal validere nærmeste leders e-post dersom e-post ikke er fylt ut", () => {
-            values.naermesteLeder = undefined;
             const res = validate(values);
-            expect(res.naermesteLeder.epost).to.equal("Vennligst fyll ut nærmeste leders e-post-adresse");
+            expect(res.naermesteLederEpost).to.equal("Vennligst fyll ut nærmeste leders e-post-adresse");
         }); 
-
-        it("Skal validere nærmeste leders e-post dersom e-post ikke er fylt ut", () => {
-            values.naermesteLeder = {};
-            const res = validate(values);
-            expect(res.naermesteLeder.epost).to.equal("Vennligst fyll ut nærmeste leders e-post-adresse");
-        });
 
         it("Skal validere nærmeste leders e-post dersom e-post er ugyldig", () => {
-            values.naermesteLeder = {
-                epost: "min epost"
-            };
+            values.naermesteLederEpost = "min epost";
             const res = validate(values);
-            expect(res.naermesteLeder.epost).to.equal("Vennligst fyll ut en gyldig e-post-adresse");
+            expect(res.naermesteLederEpost).to.equal("Vennligst fyll ut en gyldig e-post-adresse");
         }); 
 
-        it("Skal validere nærmeste leders navn dersom det ikke er fylt ut ", () => {
-            values.naermesteLeder = {
-                navn: undefined
-            }
+        it("Skal validere nærmeste leders navn dersom det ikke er fylt ut", () => {
             const res = validate(values);
-            expect(res.naermesteLeder.navn).to.equal("Vennligst fyll ut nærmeste leders navn");
+            expect(res.naermesteLederNavn).to.equal("Vennligst fyll ut nærmeste leders navn");
         });
 
         it("Skal validere tidspunkter dersom ingen felt er angitt (1)", () => {
