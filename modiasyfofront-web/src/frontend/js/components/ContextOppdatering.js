@@ -4,8 +4,8 @@ const ContextOppdatering = () => {
 
     return <div>
 
-        <div id="contextholderoppdatering" style={{display: 'none' }}>
-            <p>Hei! Nå oppdaterte vi brukeren her automatisk fordi du søkte på en ny bruker i Modia. Hva synes du om denne funksjonaliteten? Gi gjerne utviklerene tilbakemelding om hvordan dette fungerer her:</p>
+        <div className="panel" id="contextholderoppdatering" style={{display: 'none' }}>
+            <p>Hei! Nå oppdaterte vi brukeren her automatisk fordi du søkte på en ny bruker i Modia. Hva synes du om denne funksjonaliteten? Gi oss gjerne tilbakemelding om hvordan dette fungerer her: digisyfo@nav.no</p>
         </div>
 
 
