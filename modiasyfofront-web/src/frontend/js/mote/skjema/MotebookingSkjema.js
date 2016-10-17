@@ -60,7 +60,7 @@ class MotebookingSkjema extends Component {
             <h3 className="typo-innholdstittel">Book møte</h3>
 
             <fieldset className="blokk-xl">
-                <legend>Arbeidsgiveren</legend>
+                <legend>1. Fyll inn arbeidsgivers opplysninger</legend>
                 <div className="nav-input">
                     <label htmlFor="navn">Navn</label>
                     <Field id="navn" component={TextField} name="naermesteLederNavn" className="input--l" />
@@ -72,7 +72,7 @@ class MotebookingSkjema extends Component {
             </fieldset>
 
             <fieldset className="blokk-xl">
-                <legend>Møte</legend>
+                <legend>2. Velg dato, tid og sted</legend>
                 <Tidspunkter />
                 <label htmlFor="sted">Sted</label>
                 <Field id="sted" component={TextField} name="moetested" className="input--l" />
