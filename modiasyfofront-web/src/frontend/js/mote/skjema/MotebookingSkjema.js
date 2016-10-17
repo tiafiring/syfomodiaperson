@@ -1,19 +1,26 @@
-import React, { Component } from 'react';
-import { Field, FieldArray, reduxForm } from 'redux-form';
-import DatePicker from 'nav-datepicker';
+import React, { Component, PropTypes } from 'react';
+import { Field, reduxForm } from 'redux-form';
 
-const TextField = (props) => {    
+const TextField = (props) => {
     const { meta } = props;
 
     return (<div>
         <input type={props.type || 'text'} id={props.id} className={`${props.className} ${(meta.touched && meta.error && 'input--feil')}`} {...props.input} />
         <p className="skjema__feilmelding" aria-live="polite">{meta.touched && meta.error}</p>
-    </div>)
-}
+    </div>);
+};
 
-const Tidspunker = ({ fields, skjemaData }) => {
+TextField.propTypes = {
+    meta: PropTypes.object,
+    id: PropTypes.string,
+    input: PropTypes.object,
+    type: PropTypes.string,
+    className: PropTypes.string,
+};
+
+const Tidspunkter = () => {
     const tidspunkter = [{}, {}];
-    
+
     return (<div>
         {
             tidspunkter.map((tidspunkt, index) => {
@@ -24,7 +31,7 @@ const Tidspunker = ({ fields, skjemaData }) => {
                     <h4>Alternativ {index + 1}</h4>
                     <div className="blokk">
                         <div className="rad">
-                            <div className="kolonne kolonne--auto">    
+                            <div className="kolonne kolonne--auto">
                                 <label htmlFor={`dato-${index}`}>Dato</label>
                                 <Field id={`dato-${index}`} component={TextField} name={datofelt} className="input--s" />
                             </div>
@@ -34,21 +41,20 @@ const Tidspunker = ({ fields, skjemaData }) => {
                             </div>
                         </div>
                     </div>
-                </div>)
+                </div>);
             })
         }
     </div>);
-}
+};
 
 class MotebookingSkjema extends Component {
-
-    handleSubmit (data) {
+    handleSubmit(data) {
         const { fnr } = this.props;
         this.props.opprettMote(fnr, data);
     }
 
-    render () {
-        const { handleSubmit, skjemaData } = this.props;
+    render() {
+        const { handleSubmit } = this.props;
 
         return (<form className="panel" onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
             <h3 className="typo-innholdstittel">Book møte</h3>
@@ -67,55 +73,60 @@ class MotebookingSkjema extends Component {
 
             <fieldset className="blokk-xl">
                 <legend>Møte</legend>
-                <Tidspunker skjemaData={this.props.skjemaData} />
+                <Tidspunkter />
                 <label htmlFor="sted">Sted</label>
                 <Field id="sted" component={TextField} name="moetested" className="input--l" />
             </fieldset>
 
             <input type="submit" className="knapp" value="Send møteforespørsel" />
 
-        </form>)
+        </form>);
     }
-
 }
 
+MotebookingSkjema.propTypes = {
+    fnr: PropTypes.string,
+    skjemaData: PropTypes.object,
+    handleSubmit: PropTypes.func,
+    opprettMote: PropTypes.func,
+};
+
 function validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
 
 export function validate(values) {
-    let feilmeldinger = {};
-    let lederFeilmeldinger = {};
-    let tidspunkterFeilmeldinger = [{}, {}]
+    const feilmeldinger = {};
+    let tidspunkterFeilmeldinger = [{}, {}];
 
     if (!values.naermesteLederNavn) {
-        feilmeldinger.naermesteLederNavn = "Vennligst fyll ut nærmeste leders navn";
+        feilmeldinger.naermesteLederNavn = 'Vennligst fyll ut nærmeste leders navn';
     }
 
     if (!values.naermesteLederEpost) {
-        feilmeldinger.naermesteLederEpost = "Vennligst fyll ut nærmeste leders e-post-adresse";
+        feilmeldinger.naermesteLederEpost = 'Vennligst fyll ut nærmeste leders e-post-adresse';
     } else if (!validateEmail(values.naermesteLederEpost)) {
-        feilmeldinger.naermesteLederEpost = "Vennligst fyll ut en gyldig e-post-adresse";
+        feilmeldinger.naermesteLederEpost = 'Vennligst fyll ut en gyldig e-post-adresse';
     }
 
-    if(!values.tidspunkter || !values.tidspunkter.length) {
+    if (!values.tidspunkter || !values.tidspunkter.length) {
         tidspunkterFeilmeldinger = [{
-            dato: "Vennligst angi dato",
-            klokkeslett: "Vennligst angi klokkeslett"
+            dato: 'Vennligst angi dato',
+            klokkeslett: 'Vennligst angi klokkeslett',
         }, {
-            dato: "Vennligst angi dato",
-            klokkeslett: "Vennligst angi klokkeslett"
+            dato: 'Vennligst angi dato',
+            klokkeslett: 'Vennligst angi klokkeslett',
         }];
     } else {
         tidspunkterFeilmeldinger = tidspunkterFeilmeldinger.map((tidspunkt, index) => {
             const tidspunktValue = values.tidspunkter[index];
             const feil = {};
             if (!tidspunktValue || !tidspunktValue.klokkeslett) {
-                feil.klokkeslett = "Vennligst angi klokkeslett";
+                feil.klokkeslett = 'Vennligst angi klokkeslett';
             }
             if (!tidspunktValue || !tidspunktValue.dato) {
-                feil.dato = "Vennligst angi dato";
+                feil.dato = 'Vennligst angi dato';
             }
             return feil;
         });
@@ -126,7 +137,7 @@ export function validate(values) {
     }
 
     if (!values.moetested) {
-        feilmeldinger.moetested = "Vennligst angi møtested";
+        feilmeldinger.moetested = 'Vennligst angi møtested';
     }
 
     return feilmeldinger;

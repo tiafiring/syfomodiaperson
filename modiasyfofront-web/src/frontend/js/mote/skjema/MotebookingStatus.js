@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 const MotebookingStatus = ({ mote }) => {
-    const { tidspunkter, sted, naermesteLederNavn, naermesteLederEpost } = mote;
+    const { tidspunkter, naermesteLederNavn } = mote;
     return (<div>
         <div className="panel">
             <div className="varselstripe varselstripe--suksess">
@@ -30,14 +30,18 @@ const MotebookingStatus = ({ mote }) => {
                         <td>{naermesteLederNavn}</td>
                         {
                             tidspunkter.map((tidspunkt, index) => {
-                                return (<td key={index}>?</td>)
+                                return (<td key={index}>?</td>);
                             })
                         }
                     </tr>
                 </tbody>
             </table>
         </div>
-    </div>)
+    </div>);
+};
+
+MotebookingStatus.propTypes = {
+    mote: PropTypes.object,
 };
 
 export default MotebookingStatus;

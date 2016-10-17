@@ -16,7 +16,7 @@ function fetchBruker() {
     }).then((respons) => {
         return respons.json();
     });
-};
+}
 
 const opprettWebsocketConnection = (callback) => {
     return fetchBruker().then((json) => {
@@ -28,7 +28,7 @@ const opprettWebsocketConnection = (callback) => {
             callback(e);
         };
     }).catch((e) => {
-        throw new Error("Det oppstod en feil med contextholder", e);
+        throw new Error('Det oppstod en feil med contextholder', e);
     });
 };
 

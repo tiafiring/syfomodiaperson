@@ -5,15 +5,14 @@ import MotebookingSkjema from '../mote/skjema/MotebookingSkjema';
 import MotebookingStatus from '../mote/skjema/MotebookingStatus';
 import * as actionCreators from '../mote/actions/moter_actions';
 
-let MotebookingSide = (props) => {
+const MotebookingSide = (props) => {
     return (<Side tittel="Møtebooking">
     {
         (() => {
             if (props.mote) {
-                return <MotebookingStatus mote={props.mote} />
-            } else {
-                return <MotebookingSkjema {...props} />
+                return <MotebookingStatus mote={props.mote} />;
             }
+            return <MotebookingSkjema {...props} />;
         })()
     }
     </Side>);
@@ -21,6 +20,7 @@ let MotebookingSide = (props) => {
 
 MotebookingSide.propTypes = {
     fnr: PropTypes.string,
+    mote: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {
@@ -30,8 +30,8 @@ const mapStateToProps = (state) => {
         skjemaData,
         fnr,
         mote: state.moter.data.filter((m) => {
-            return m.fnr === fnr
-        })[0]
+            return m.fnr === fnr;
+        })[0],
     };
 };
 

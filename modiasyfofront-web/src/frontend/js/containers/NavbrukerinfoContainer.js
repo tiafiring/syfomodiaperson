@@ -1,10 +1,9 @@
-import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Brukerinfo from '../components/Brukerinfo';
 import { bindActionCreators } from 'redux';
 import * as navbrukerActions from '../actions/navbruker_actions';
 
-export function mapStateToProps(state, ownProps) {
+export function mapStateToProps(state) {
     return {
         navbruker: state.navbruker.data,
     };
