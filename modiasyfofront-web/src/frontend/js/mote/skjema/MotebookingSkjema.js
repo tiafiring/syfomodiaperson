@@ -66,8 +66,8 @@ class MotebookingSkjema extends Component {
                     <Field id="navn" component={TextField} name="naermesteLederNavn" className="input--l" />
                 </div>
                 <div className="nav-input">
-                    <label htmlFor="navn">E-post</label>
-                    <Field id="navn" component={TextField} type="email" name="naermesteLederEpost" className="input--l" />
+                    <label htmlFor="epost">E-post</label>
+                    <Field id="epost" component={TextField} type="email" name="naermesteLederEpost" className="input--l" />
                 </div>
             </fieldset>
 
