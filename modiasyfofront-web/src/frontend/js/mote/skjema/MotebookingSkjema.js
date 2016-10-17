@@ -57,7 +57,7 @@ class MotebookingSkjema extends Component {
         const { handleSubmit } = this.props;
 
         return (<form className="panel" onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
-            <h3 className="typo-innholdstittel">Book møte</h3>
+            <h3 className="typo-innholdstittel">Møteforespørsel</h3>
 
             <fieldset className="blokk-xl">
                 <legend>1. Fyll inn arbeidsgivers opplysninger</legend>
