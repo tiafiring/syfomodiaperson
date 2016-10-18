@@ -2,10 +2,21 @@
     display: block;
     border: 0;
     background-color: #fff;
-    padding: 1em 2em;
-    margin-bottom: 2px;
+    padding: 1em 3em 1em 2em;
+    margin-bottom: .5em             ;
     color: @FargeTekst;
     border-left: 0;
+    padding-right: 3rem; 
+    background-image: data-uri("../img/svg/pilVidere--graa.svg");
+    background-repeat: no-repeat;
+    background-position: 97% center; 
+    background-size: 1rem 1rem; 
+    transition: background-position ease-in-out .1s;
+    transform: translate3d(0, 0, 0);
+
+    &:hover {
+        background-image: data-uri("../img/svg/pilVidere--blaa.svg");
+    }
 }
 
 .inngangspanel__meta {
@@ -32,26 +43,4 @@
 .inngangspaneler {
     margin: 0;
     padding: 0;
-}
-
-.inngangspaneler__header {
-    padding: 1em 2em;
-    font-size: 1em;
-    background-color: #fff;
-    margin-bottom: 2px;
-}
-
-.inngangspaneler__flere {
-    padding: 1em 2em;
-    background-color: #fff;
-    color: @FargeLenke;
-    margin: 0;
-    border: 0;
-    width: 100%;
-    text-align: left;
-
-    &:focus {
-        box-shadow: 0 0 0 3px @FargeFokus;
-        outline: none;              
-    }
 }
