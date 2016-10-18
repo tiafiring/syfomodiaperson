@@ -21,14 +21,14 @@ TextField.propTypes = {
 const Tidspunkter = () => {
     const tidspunkter = [{}, {}];
 
-    return (<div>
+    return (<div className="motetidspunkter">
         {
             tidspunkter.map((tidspunkt, index) => {
                 const datofelt = `tidspunkter[${index}].dato`;
                 const klokkeslettfelt = `tidspunkter[${index}].klokkeslett`;
 
-                return (<div key={index}>
-                    <h4>Alternativ {index + 1}</h4>
+                return (<div key={index} className="motetidspunkter__tidspunkt blokk-xl">
+                    <h4 className="typo-element blokk-l">Alternativ {index + 1}</h4>
                     <div className="blokk">
                         <div className="rad">
                             <div className="kolonne kolonne--auto">
@@ -61,11 +61,11 @@ class MotebookingSkjema extends Component {
 
             <fieldset className="blokk-xl">
                 <legend>1. Fyll inn arbeidsgivers opplysninger</legend>
-                <div className="nav-input">
-                    <label htmlFor="navn">Navn</label>
+                <div className="navInput">
+                    <label htmlFor="navn">Nærmeste leders navn</label>
                     <Field id="navn" component={TextField} name="naermesteLederNavn" className="input--l" />
                 </div>
-                <div className="nav-input">
+                <div className="navInput">
                     <label htmlFor="epost">E-post</label>
                     <Field id="epost" component={TextField} type="email" name="naermesteLederEpost" className="input--l" />
                 </div>
@@ -75,10 +75,12 @@ class MotebookingSkjema extends Component {
                 <legend>2. Velg dato, tid og sted</legend>
                 <Tidspunkter />
                 <label htmlFor="sted">Sted</label>
-                <Field id="sted" component={TextField} name="moetested" className="input--l" />
+                <Field id="sted" component={TextField} name="moetested" className="input--xxl" />
             </fieldset>
 
-            <input type="submit" className="knapp" value="Send møteforespørsel" />
+            <div className="knapperad">
+                <input type="submit" className="knapp" value="Send" />
+            </div>
 
         </form>);
     }
