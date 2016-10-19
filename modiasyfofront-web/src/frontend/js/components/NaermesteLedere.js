@@ -85,7 +85,7 @@ const NaermesteLedere = ({ ledere, navbruker, toggleApenLeder }) => {
                 })
             }
         </div>
-        <p><strong>NB:</strong> Nærmeste leder er kun gyldig for sykefraværsoppfølging. Skal ikke brukes til...</p>
+        <p>Navn og kontaktinformasjon til den som har personalansvaret for den ansatte, og som NAV kan kontakte i forbindelse med oppfølging.</p>
     </div>);
 };
 
