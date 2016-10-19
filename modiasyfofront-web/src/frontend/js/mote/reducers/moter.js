@@ -17,8 +17,11 @@ export default function moter(state = defaultState, action) {
             });
         }
         case 'MOTE_OPPRETTET': {
+            const mote = Object.assign({}, action.data, {
+                fnr: action.fnr,
+            });
             return Object.assign({}, state, {
-                data: [...state.data, action.data],
+                data: [...state.data, mote],
             }, {
                 henter: false,
                 hentingFeilet: false,

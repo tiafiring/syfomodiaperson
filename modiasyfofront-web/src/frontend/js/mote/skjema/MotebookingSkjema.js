@@ -77,6 +77,7 @@ export function getData(values) {
 }
 
 const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeilet }) => {
+
     const submit = (values) => {
         const data = getData(values);
         opprettMote(fnr, data);

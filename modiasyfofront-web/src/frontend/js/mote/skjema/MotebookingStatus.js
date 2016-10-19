@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 
 const MotebookingStatus = ({ mote }) => {
-    const { tidspunkter, naermesteLederNavn } = mote;
+    const { tidspunkter, deltakere } = mote;
     return (<div>
         <div className="panel">
             <div className="varselstripe varselstripe--suksess">
                 <div className="varselstripe__ikon">
                     <img src="/sykefravaer/img/svg/suksess.svg" />
                 </div>
-                <p className="sist">Møteforespørselen er sendt til {naermesteLederNavn}!</p>
+                <p className="sist">Møteforespørselen er sendt til {deltakere[0].navn}!</p>
             </div>
         </div>
         <div className="panel">
@@ -20,20 +20,24 @@ const MotebookingStatus = ({ mote }) => {
                         <th>Møtetider</th>
                         {
                             tidspunkter.map((tidspunkt, index) => {
-                                return (<th key={index}>{tidspunkt.dato} kl {tidspunkt.klokkeslett}</th>);
+                                return (<th key={index}>(dato) kl. (klokkeslett</th>);
                             })
                         }
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>{naermesteLederNavn}</td>
-                        {
-                            tidspunkter.map((tidspunkt, index) => {
-                                return (<td key={index}>?</td>);
-                            })
-                        }
-                    </tr>
+                    {
+                        deltakere.map((deltaker, index) => {
+                           return (<tr key={index}>
+                            <td>{deltaker.navn}</td>
+                                {
+                                    tidspunkter.map((tidspunkt, index2) => {
+                                        return (<td key={index2}>?</td>);
+                                    })
+                                }
+                            </tr>);
+                        })
+                    }
                 </tbody>
             </table>
         </div>

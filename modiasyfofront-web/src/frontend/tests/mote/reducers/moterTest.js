@@ -29,12 +29,14 @@ describe("moter", () => {
             type: 'MOTE_OPPRETTET',
             data: {
                 "test": "OK"
-            }
+            },
+            fnr: "hei"
         }
         const nextState = moter(initialState, action);
         expect(nextState).to.deep.equal({
             data: [{
-                "test": "OK"
+                "test": "OK",
+                "fnr": "hei"
             }],
             sender: false,
             sendingFeilet: false,

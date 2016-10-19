@@ -25,12 +25,10 @@ MotebookingSide.propTypes = {
 
 const mapStateToProps = (state) => {
     const fnr = state.navbruker.data.fnr;
-    const skjemaData = state.form.opprettMote;
     const mote = state.moter.data.filter((m) => {
         return m.fnr === fnr;
     })[0];
     return {
-        skjemaData,
         fnr,
         mote,
         sender: state.moter.sender,

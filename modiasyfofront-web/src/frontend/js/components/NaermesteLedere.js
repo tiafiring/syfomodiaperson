@@ -67,7 +67,6 @@ FlereLedere.propTypes = {
 
 const NaermesteLedere = ({ ledere, navbruker, toggleApenLeder }) => {
     const tittel = ledere.length > 1 ? 'Nærmeste ledere med personalansvar' : 'Nærmeste leder med personalansvar';
-    console.log("første leder", ledere[0])
     return (<div className="panel">
         <h2 className="typo-innholdstittel">{tittel}</h2>
         <div className="naermesteLedere">

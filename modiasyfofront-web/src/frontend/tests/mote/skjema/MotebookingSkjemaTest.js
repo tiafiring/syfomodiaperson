@@ -70,7 +70,7 @@ describe("MotebookingSkjema", () => {
                 dato: "A1.12.2016",
             }, {}]
             const res = validate(values);
-            expect(res.tidspunkter[0].dato).to.equal("Vennligst angi dato på formatet dd.mm.yyyy");
+            expect(res.tidspunkter[0].dato).to.equal("Vennligst angi riktig datoformat; dd.mm.åååå");
         }); 
 
         it("Skal validere tidspunkter dersom klokkeslett er på feil format", () => {
@@ -79,7 +79,7 @@ describe("MotebookingSkjema", () => {
                 klokkeslett: "A1.11"
             }, {}]
             const res = validate(values);
-            expect(res.tidspunkter[0].klokkeslett).to.equal("Vennligst angi klokkeslett på formatet 13.00");
+            expect(res.tidspunkter[0].klokkeslett).to.equal("Vennligst angi riktig format; f.eks. 13.00");
         }); 
 
         it("Skal validere tidspunkter dersom andre felt mangler dato", () => {
@@ -112,7 +112,6 @@ describe("MotebookingSkjema", () => {
             const res = validate(values)
             expect(res.sted).to.equal("Vennligst angi møtested")
         });
-
 
         it("Skal validere sted dersom sted finnes", () => {
             values.sted = "Økernveien 94"

@@ -3,13 +3,14 @@ import { takeEvery } from 'redux-saga';
 import { post } from '../../api';
 
 export function* opprettMote(action) {
-    yield put({ type: 'OPPRETTER_MOTE' });
-    try {
-        const data = yield call(post, `${window.SYFO_SETTINGS.REST_ROOT}/rest/mote?fnr=${action.fnr}`, action.data);
-        yield put({ type: 'MOTE_OPPRETTET', data });
-    } catch (e) {
-        yield put({ type: 'OPPRETT_MOTE_FEILET' });
-    }
+    yield put({ type: 'MOTE_OPPRETTET', fnr: action.fnr, data: action.data });
+    // yield put({ type: 'OPPRETTER_MOTE' });
+    // try {
+    //     const data = yield call(post, `${window.SYFO_SETTINGS.REST_ROOT}/rest/mote?fnr=${action.fnr}`, action.data);
+    //     yield put({ type: 'MOTE_OPPRETTET', data: action.data });
+    // } catch (e) {
+    //     yield put({ type: 'OPPRETT_MOTE_FEILET' });
+    // }
 }
 
 function* watchOpprettMote() {
