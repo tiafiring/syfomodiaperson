@@ -13,7 +13,7 @@ var dev = {
     bundleFileName: 'bundle.js',
     decoratorRoot: 'https://modapp-t1.adeo.no',
     websocketProtocol: 'ws',
-    contextholderRoot: 'http://localhost:8090/contextholder'
+    contextholderRoot: 'http://localhost:8090/eventdistributer'
 };
 
 var prod = {
@@ -23,7 +23,7 @@ var prod = {
     bundleFileName: 'bundle-prod.js',
     decoratorRoot: '',
     websocketProtocol: 'wss',
-    contextholderRoot: '/contextholder'
+    contextholderRoot: '/eventdistributer'
 };
 
 fs.readFile(front, function (err, data) {
