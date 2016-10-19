@@ -33,10 +33,10 @@ sagaMiddleware.run(rootSaga);
 const fnr = window.location.pathname.split('/')[2];
 store.dispatch(hentNavbruker(fnr));
 
-opprettWebsocketConnection((event) => {
-    store.dispatch(hentNavbruker(event.data));
-    history.replace(`/sykefravaer/${event.data}`);
-});
+// opprettWebsocketConnection((event) => {
+//     store.dispatch(hentNavbruker(event.data));
+//     history.replace(`/sykefravaer/${event.data}`);
+// });
 
 render(<Provider store={store}>
         <AppRouter history={history} /></Provider>,

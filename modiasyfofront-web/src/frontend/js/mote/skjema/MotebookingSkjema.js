@@ -5,7 +5,7 @@ const TextField = (props) => {
     const { meta } = props;
 
     return (<div>
-        <input type={props.type || 'text'} id={props.id} className={`${props.className} ${(meta.touched && meta.error && 'input--feil')}`} {...props.input} />
+        <input autoComplete="off" placeholder={props.placeholder} type={props.type || 'text'} id={props.id} className={`${props.className} ${(meta.touched && meta.error && 'input--feil')}`} {...props.input} />
         <p className="skjema__feilmelding" aria-live="polite">{meta.touched && meta.error}</p>
     </div>);
 };
@@ -33,11 +33,11 @@ const Tidspunkter = () => {
                         <div className="rad">
                             <div className="kolonne kolonne--auto">
                                 <label htmlFor={`dato-${index}`}>Dato</label>
-                                <Field id={`dato-${index}`} component={TextField} name={datofelt} className="input--s" />
+                                <Field id={`dato-${index}`} component={TextField} name={datofelt} className="input--m" placeholder="dd.mm.åååå" />
                             </div>
                             <div className="kolonne">
                                 <label htmlFor={`klokkeslett-${index}`}>Klokkeslett</label>
-                                <Field id={`klokkeslett-${index}`} component={TextField} name={klokkeslettfelt} className="input--xs" />
+                                <Field id={`klokkeslett-${index}`} component={TextField} name={klokkeslettfelt} className="input--m" placeholder="F.eks: 09.30" />
                             </div>
                         </div>
                     </div>
@@ -89,11 +89,11 @@ const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeil
             <legend>1. Fyll inn arbeidsgivers opplysninger</legend>
             <div className="navInput">
                 <label htmlFor="navn">Nærmeste leders navn</label>
-                <Field id="navn" component={TextField} name="deltakere[0].navn" className="input--l" />
+                <Field id="navn" component={TextField} name="deltakere[0].navn" className="input--xxl" />
             </div>
             <div className="navInput">
                 <label htmlFor="epost">E-post</label>
-                <Field id="epost" component={TextField} type="email" name="deltakere[0].epost" className="input--l" />
+                <Field id="epost" component={TextField} type="email" name="deltakere[0].epost" className="input--xxl" />
             </div>
         </fieldset>
 
@@ -101,7 +101,7 @@ const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeil
             <legend>2. Velg dato, tid og sted</legend>
             <Tidspunkter />
             <label htmlFor="sted">Sted</label>
-            <Field id="sted" component={TextField} name="sted" className="input--xxl" />
+            <Field id="sted" component={TextField} name="sted" className="input--xxl" placeholder="Skriv møtested eller om det er et videomøte" />
         </fieldset>
 
         <div aria-live="polite" role="alert">
@@ -180,12 +180,12 @@ export function validate(values) {
             if (!tidspunktValue || !tidspunktValue.klokkeslett) {
                 feil.klokkeslett = 'Vennligst angi klokkeslett';
             } else if (!erGyldigKlokkeslett(tidspunktValue.klokkeslett)) {
-                feil.klokkeslett = 'Vennligst angi klokkeslett på formatet 13.00';
+                feil.klokkeslett = 'Vennligst angi riktig format; f.eks. 13.00';
             }
             if (!tidspunktValue || !tidspunktValue.dato) {
                 feil.dato = 'Vennligst angi dato';
             } else if (!erGyldigDato(tidspunktValue.dato)) {
-                feil.dato = 'Vennligst angi dato på formatet dd.mm.yyyy';
+                feil.dato = 'Vennligst angi riktig datoformat; dd.mm.åååå';
             }
             return feil;
         });
