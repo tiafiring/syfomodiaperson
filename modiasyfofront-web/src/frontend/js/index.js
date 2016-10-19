@@ -11,7 +11,6 @@ import navbruker from './reducers/navbruker';
 import { reducer as formReducer } from 'redux-form';
 import moter from './mote/reducers/moter';
 import rootSaga from './sagas';
-import opprettWebsocketConnection from './contextHolder';
 import { hentNavbruker } from './actions/navbruker_actions';
 
 const rootReducer = combineReducers({
@@ -32,11 +31,6 @@ sagaMiddleware.run(rootSaga);
 
 const fnr = window.location.pathname.split('/')[2];
 store.dispatch(hentNavbruker(fnr));
-
-// opprettWebsocketConnection((event) => {
-//     store.dispatch(hentNavbruker(event.data));
-//     history.replace(`/sykefravaer/${event.data}`);
-// });
 
 render(<Provider store={store}>
         <AppRouter history={history} /></Provider>,
