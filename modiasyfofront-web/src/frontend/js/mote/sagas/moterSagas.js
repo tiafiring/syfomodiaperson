@@ -1,6 +1,7 @@
-import { call, put, fork } from 'redux-saga/effects';
+// import { call, put, fork } from 'redux-saga/effects';
+import { fork, put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-import { post } from '../../api';
+// import { post } from '../../api';
 
 export function* opprettMote(action) {
     yield put({ type: 'MOTE_OPPRETTET', fnr: action.fnr, data: action.data });

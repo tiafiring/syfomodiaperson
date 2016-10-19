@@ -28,7 +28,7 @@ const MotebookingStatus = ({ mote }) => {
                 <tbody>
                     {
                         deltakere.map((deltaker, index) => {
-                           return (<tr key={index}>
+                            return (<tr key={index}>
                             <td>{deltaker.navn}</td>
                                 {
                                     tidspunkter.map((tidspunkt, index2) => {
