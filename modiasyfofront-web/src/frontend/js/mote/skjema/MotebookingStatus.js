@@ -6,14 +6,14 @@ const MotebookingStatus = ({ mote }) => {
         <div className="panel">
             <div className="varselstripe varselstripe--suksess">
                 <div className="varselstripe__ikon">
-                    <img />
+                    <img src="/sykefravaer/img/svg/suksess.svg" />
                 </div>
                 <p className="sist">Møteforespørselen er sendt til {naermesteLederNavn}!</p>
             </div>
         </div>
         <div className="panel">
-            <h2 className="typo-undertittel">Oversikt over møtetider</h2>
-            <p>Her ser du en oversikt over alle deltakere som har svart på møteforespørselen din. </p>
+            <h2 className="typo-innholdstittel">Oversikt over møtetider</h2>
+            <p className="redaksjonelt">Her ser du en oversikt over alle deltakere som har svart på møteforespørselen din. </p>
             <table className="motestatus">
                 <thead>
                     <tr>

@@ -4,7 +4,7 @@ import { get } from '../../js/api';
 import { put, call } from 'redux-saga/effects';
 
 window.SYFO_SETTINGS = {
-    REST_ROOT: "http://tjenester.nav.no/rest"
+    REST_ROOT: "http://tjenester.nav.no/sykefravaer"
 }
 
 describe("ledereSagas", () => {
@@ -19,7 +19,7 @@ describe("ledereSagas", () => {
     });
 
     it("Skal dernest hente ledere", () => {
-        const nextCall = call(get, "http://tjenester.nav.no/rest/rest/naermesteleder?fnr=55");
+        const nextCall = call(get, "http://tjenester.nav.no/sykefravaer/rest/naermesteleder?fnr=55");
         expect(generator.next().value).to.deep.equal(nextCall);
     });
 

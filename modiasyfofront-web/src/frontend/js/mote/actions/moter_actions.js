@@ -1,6 +1,7 @@
 export function opprettMote(fnr, data) {
     return {
-        type: 'OPPRETT_MOTE',
-        data: Object.assign({}, data, { fnr }),
+        type: 'OPPRETT_MOTE_FORESPURT',
+        fnr,
+        data,
     };
 }
