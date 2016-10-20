@@ -30,7 +30,7 @@ const Tidspunkter = () => {
                 const klokkeslettfelt = `tidspunkter[${index}].klokkeslett`;
 
                 return (<div key={index} className="motetidspunkter__tidspunkt blokk-xl">
-                    <h4 className="typo-element blokk-l">Alternativ {index + 1}</h4>
+                    <h4 className="typo-element blokk">Alternativ {index + 1}</h4>
                     <div className="blokk">
                         <div className="rad">
                             <div className="kolonne kolonne--auto">
@@ -89,7 +89,7 @@ const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeil
 
         <fieldset className="blokk-xl">
             <legend>1. Fyll inn arbeidsgivers opplysninger</legend>
-            <div className="navInput">
+            <div className="navInput blokk-xl">
                 <label htmlFor="navn">Nærmeste leders navn</label>
                 <Field id="navn" component={TextField} name="deltakere[0].navn" className="input--xxl" />
             </div>
