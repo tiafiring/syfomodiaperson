@@ -153,7 +153,7 @@ describe("MotebookingSkjema", () => {
             const res = getData(values)
             expect(res).to.deep.equal({
                 deltakere: [{"navn":"***REMOVED***","epost":"ole.olsen@nav.no","type":"arbeidsgiver"}],
-                tidspunkter: [{
+                tidOgStedAlternativer: [{
                     "sted": "Oslo",
                     "tid": "2016-08-12T13:00:00.000Z"
                 }, {

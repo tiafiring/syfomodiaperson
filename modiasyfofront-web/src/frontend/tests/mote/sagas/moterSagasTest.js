@@ -3,11 +3,12 @@ import { opprettMote } from '../../../js/mote/sagas/moterSagas.js';
 import { post } from '../../../js/api';
 import { put, call } from 'redux-saga/effects';
 
-xdescribe("moterSagas", () => {
+describe("moterSagas", () => {
 
     beforeEach(() => {
         window.SYFO_SETTINGS = {
-            REST_ROOT: "http://tjenester.nav.no/sykefravaer"
+            REST_ROOT: "http://tjenester.nav.no/sykefravaer",
+            MOTEADMIN_REST_ROOT: "http://tjenester.nav.no/moteadmin"
         }
     })
 
@@ -24,7 +25,7 @@ xdescribe("moterSagas", () => {
     });
 
     it("Skal poste møtet til REST-tjenesten", () => {
-        const nextCall = call(post, "http://tjenester.nav.no/sykefravaer/rest/mote?fnr=55", {
+        const nextCall = call(post, "http://tjenester.nav.no/moteadmin/mote/55/opprett", {
             naermesteLederNavn: "***REMOVED***"
         });
         expect(generator.next().value).to.deep.equal(nextCall);
@@ -32,10 +33,10 @@ xdescribe("moterSagas", () => {
 
     it("Skal dispatche MOTE_OPPRETTET", () => {
         const nextPut = put({type: 'MOTE_OPPRETTET', data: {
-            test: 1
+            naermesteLederNavn: "***REMOVED***"
         }});
         expect(generator.next({
-            test: 1
+            naermesteLederNavn: "***REMOVED***"
         }).value).to.deep.equal(nextPut);
     });
 

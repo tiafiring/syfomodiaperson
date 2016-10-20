@@ -69,7 +69,7 @@ export function getData(values) {
     });
     return {
         deltakere: [deltaker],
-        tidspunkter: values.tidspunkter.map((tidspunkt) => {
+        tidOgStedAlternativer: values.tidspunkter.map((tidspunkt) => {
             return {
                 tid: genererDato(tidspunkt.dato, tidspunkt.klokkeslett),
                 sted: values.sted,
@@ -85,7 +85,7 @@ const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeil
     };
 
     return (<form className="panel" onSubmit={handleSubmit(submit)}>
-        <h3 className="typo-innholdstittel">Møteforespørsel</h3>
+        <h3 className="sidetopp__tittel">Møteforespørsel</h3>
 
         <fieldset className="blokk-xl">
             <legend>1. Fyll inn arbeidsgivers opplysninger</legend>
