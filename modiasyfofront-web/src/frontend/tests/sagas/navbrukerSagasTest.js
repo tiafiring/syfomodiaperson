@@ -19,7 +19,7 @@ describe("navbrukerSagas", () => {
     });
 
     it("Skal dernest hente navbruker", () => {
-        const nextCall = call(get, "http://tjenester.nav.no/sykefravaer/rest/brukerinfo?fnr=55");
+        const nextCall = call(get, "http://tjenester.nav.no/sykefravaer/brukerinfo?fnr=55");
         expect(generator.next().value).to.deep.equal(nextCall);
     });
 

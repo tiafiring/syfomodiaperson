@@ -1,7 +1,18 @@
 import React, { PropTypes } from 'react';
 
+const pad = (nr) => {
+    return nr > 9 ? nr : `0${nr}`;
+};
+
+const getTidFraZulu = (zulutid) => {
+    const d = new Date(zulutid);
+    const dag = pad(d.getDate());
+    const maned = pad(d.getMonth() + 1);
+    return `${dag}.${maned}.${d.getFullYear()} kl. ${pad(d.getHours())}.${pad(d.getMinutes())}`;
+};
+
 const MotebookingStatus = ({ mote }) => {
-    const { tidspunkter, deltakere } = mote;
+    const { tidOgStedAlternativer, deltakere } = mote;
     return (<div>
         <div className="panel">
             <div className="varselstripe varselstripe--suksess">
@@ -17,10 +28,10 @@ const MotebookingStatus = ({ mote }) => {
             <table className="motestatus">
                 <thead>
                     <tr>
-                        <th>Møtetider</th>
+                        <th className="typo-undertittel">Møtetider</th>
                         {
-                            tidspunkter.map((tidspunkt, index) => {
-                                return (<th key={index}>(dato) kl. (klokkeslett</th>);
+                            tidOgStedAlternativer.map((tidspunkt, index) => {
+                                return (<th key={index}>{getTidFraZulu(tidspunkt.tid)}</th>);
                             })
                         }
                     </tr>
@@ -29,10 +40,12 @@ const MotebookingStatus = ({ mote }) => {
                     {
                         deltakere.map((deltaker, index) => {
                             return (<tr key={index}>
-                            <td>{deltaker.navn}</td>
+                            <td><strong>Arbeidsgiver</strong> <span>{deltaker.navn}</span></td>
                                 {
-                                    tidspunkter.map((tidspunkt, index2) => {
-                                        return (<td key={index2}>?</td>);
+                                    tidOgStedAlternativer.map((tidspunkt, index2) => {
+                                        return (<td key={index2} className="motestatus__svar">
+                                            <span className="motestatus__svar__inner">?</span>
+                                        </td>);
                                     })
                                 }
                             </tr>);

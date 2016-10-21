@@ -16,7 +16,6 @@ export function get(url) {
 
 export function post(url, body) {
     return fetch(url, {
-        credentials: 'include',
         method: 'POST',
         body: JSON.stringify(body),
         headers: new Headers({

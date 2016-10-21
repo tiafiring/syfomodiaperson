@@ -28,6 +28,7 @@ const mapStateToProps = (state) => {
     const mote = state.moter.data.filter((m) => {
         return m.fnr === fnr;
     })[0];
+
     return {
         fnr,
         mote,

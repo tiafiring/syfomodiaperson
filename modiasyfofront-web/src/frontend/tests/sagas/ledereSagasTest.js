@@ -19,7 +19,7 @@ describe("ledereSagas", () => {
     });
 
     it("Skal dernest hente ledere", () => {
-        const nextCall = call(get, "http://tjenester.nav.no/sykefravaer/rest/naermesteleder?fnr=55");
+        const nextCall = call(get, "http://tjenester.nav.no/sykefravaer/naermesteleder?fnr=55");
         expect(generator.next().value).to.deep.equal(nextCall);
     });
 

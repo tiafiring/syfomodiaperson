@@ -34,7 +34,8 @@ describe("moterSagas", () => {
     it("Skal dispatche MOTE_OPPRETTET", () => {
         const nextPut = put({type: 'MOTE_OPPRETTET', data: {
             naermesteLederNavn: "***REMOVED***"
-        }});
+        },
+        fnr: "55"});
         expect(generator.next({
             naermesteLederNavn: "***REMOVED***"
         }).value).to.deep.equal(nextPut);
