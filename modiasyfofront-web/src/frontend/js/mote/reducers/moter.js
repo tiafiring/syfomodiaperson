@@ -37,6 +37,33 @@ export default function moter(state = defaultState, action) {
                 sendingFeilet: true,
             });
         }
+        case 'HENTER_MOTER': {
+            return {
+                data: [],
+                sender: false,
+                henter: true,
+                hentingFeilet: false,
+                sendingFeilet: false,
+            };
+        }
+        case 'MOTER_HENTET': {
+            return {
+                data: action.data,
+                sender: false,
+                henter: false,
+                hentingFeilet: false,
+                sendingFeilet: false,
+            };
+        }
+        case 'HENT_MOTER_FEILET': {
+            return {
+                data: [],
+                sender: false,
+                sendingFeilet: false,
+                henter: false,
+                hentingFeilet: true,
+            };
+        }
         default: {
             return state;
         }

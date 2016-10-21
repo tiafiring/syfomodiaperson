@@ -1,14 +1,25 @@
 import { call, put, fork } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-import { post } from '../../api';
+import { post, get } from '../../api';
+import * as actions from '../actions/moter_actions';
 
 export function* opprettMote(action) {
-    yield put({ type: 'OPPRETTER_MOTE' });
+    yield put(actions.oppretterMote());
     try {
         yield call(post, `${window.SYFO_SETTINGS.MOTEADMIN_REST_ROOT}/mote/${action.fnr}/opprett`, action.data);
-        yield put({ type: 'MOTE_OPPRETTET', data: action.data, fnr: action.fnr });
+        yield put(actions.moteOpprettet(action.data, action.fnr));
     } catch (e) {
-        yield put({ type: 'OPPRETT_MOTE_FEILET' });
+        yield put(actions.opprettMoteFeilet());
+    }
+}
+
+export function* hentMoter(action) {
+    yield put(actions.henterMoter());
+    try {
+        const data = yield call(get, `${window.SYFO_SETTINGS.MOTEADMIN_REST_ROOT}/mote/${action.fnr}`);
+        yield put(actions.moterHentet(data));
+    } catch (e) {
+        yield put(actions.hentMoterFeilet());
     }
 }
 
@@ -16,6 +27,13 @@ function* watchOpprettMote() {
     yield* takeEvery('OPPRETT_MOTE_FORESPURT', opprettMote);
 }
 
-export default function* ledereSagas() {
-    yield fork(watchOpprettMote);
+function* watchHentMoter() {
+    yield* takeEvery('HENT_MOTER_FORESPURT', hentMoter);
+}
+
+export default function* moterSagas() {
+    yield [
+        fork(watchOpprettMote),
+        fork(watchHentMoter),
+    ];
 }
