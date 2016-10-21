@@ -32,12 +32,12 @@ const Tidspunkter = () => {
                 return (<div key={index} className="motetidspunkter__tidspunkt blokk-xl">
                     <h4 className="typo-element blokk">Alternativ {index + 1}</h4>
                     <div className="blokk">
-                        <div className="rad">
-                            <div className="kolonne kolonne--auto">
+                        <div className="grid">
+                            <div className="unit half">
                                 <label htmlFor={`dato-${index}`}>Dato</label>
                                 <Field id={`dato-${index}`} component={TextField} name={datofelt} className="input--m" placeholder="dd.mm.åååå" />
                             </div>
-                            <div className="kolonne">
+                            <div className="unit half">
                                 <label htmlFor={`klokkeslett-${index}`}>Klokkeslett</label>
                                 <Field id={`klokkeslett-${index}`} component={TextField} name={klokkeslettfelt} className="input--m" placeholder="F.eks: 09.30" />
                             </div>

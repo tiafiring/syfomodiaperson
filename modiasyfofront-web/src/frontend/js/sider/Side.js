@@ -5,11 +5,11 @@ import GlobalNavigasjonContainer from '../containers/GlobalNavigasjonContainer';
 const Side = ({ children }) => {
     return (<div className="container">
         <NavbrukerinfoContainer />
-        <div className="rad">
-            <nav className="kolonne">
+        <div className="grid">
+            <nav className="unit one-third">
                 <GlobalNavigasjonContainer />
             </nav>
-            <div className="kolonne kolonne--3">
+            <div className="unit two-thirds">
                 {children}
             </div>
         </div>

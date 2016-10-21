@@ -1,20 +1,20 @@
 import React, { PropTypes } from 'react';
 
 const EnLeder = ({ leder }) => {
-    return (<div className="rad naermesteLeder">
-        <div className="kolonne">
+    return (<div className="grid naermesteLeder">
+        <div className="unit one-third">
             <h3>Arbeidsgiver</h3>
             <p>{leder.arbeidsgiver.navn}</p>
             <h3>Org. nummer</h3>
             <p>{leder.arbeidsgiver.orgnummer}</p>
         </div>
-        <div className="kolonne">
+        <div className="unit one-third">
             <h3>Navn</h3>
             <p>{leder.navn}</p>
             <h3>Fødselsdato</h3>
             <p>{leder.fodselsdato}</p>
         </div>
-        <div className="kolonne">
+        <div className="unit one-third">
             <h3>Telefon</h3>
             <p>{leder.tlf}</p>
             <h3>E-post</h3>
@@ -29,20 +29,20 @@ EnLeder.propTypes = {
 };
 
 const FlereLedere = ({ arbeidsgiver, epost, navn, tlf, fodselsdato, erApen, clickHandler }) => {
-    return (<div className={`rad rad--adskilt naermesteLeder ${erApen ? 'naermesteLeder--aktiv' : ''}`} onClick={clickHandler}>
-        <div className="kolonne">
+    return (<div className={`grid rad--adskilt naermesteLeder ${erApen ? 'naermesteLeder--aktiv' : ''}`} onClick={clickHandler}>
+        <div className="unit one-third">
             <h3>Arbeidsgiver</h3>
             <p>{arbeidsgiver.navn}</p>
             { erApen && <h3>Org. nummer</h3> }
             { erApen && <p>{arbeidsgiver.orgnummer}</p> }
         </div>
-        <div className="kolonne">
+        <div className="unit one-third">
             <h3>Navn</h3>
             <p>{navn}</p>
             { erApen && <h3>Fødselsdato</h3> }
             { erApen && <p>{fodselsdato}</p> }
         </div>
-        <div className="kolonne">
+        <div className="unit one-third">
             <h3>Telefon</h3>
             <p>{tlf}</p>
             { erApen && <h3>E-post</h3> }
