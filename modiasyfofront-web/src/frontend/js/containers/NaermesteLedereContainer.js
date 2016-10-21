@@ -24,10 +24,10 @@ class NaermesteLedereSide extends Component {
         return (<Side tittel="Sykefravær" fnr={fnr}>
         {
             (() => {
-                if (henter) {
-                    return <AppSpinner />;
-                } else if (hentingFeilet) {
+                if (hentingFeilet) {
                     return <Feilmelding />;
+                } else if (henter) {
+                    return <AppSpinner />;
                 }
                 return <NaermesteLedere ledere={ledere} toggleApenLeder={actions.toggleApenLeder} navbruker={navbruker} />;
             })()
