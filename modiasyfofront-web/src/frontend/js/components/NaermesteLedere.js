@@ -69,6 +69,7 @@ const NaermesteLedere = ({ ledere, navbruker, toggleApenLeder }) => {
     const tittel = ledere.length > 1 ? 'Nærmeste ledere med personalansvar' : 'Nærmeste leder med personalansvar';
     return (<div className="panel">
         <h2 className="typo-innholdstittel">{tittel}</h2>
+        <p>*kan kontaktes av NAV i forbindelse med oppfølging</p>
         <div className="naermesteLedere">
             {
                 ledere.length === 1 && <EnLeder leder={ledere[0]} />
@@ -84,7 +85,6 @@ const NaermesteLedere = ({ ledere, navbruker, toggleApenLeder }) => {
                 })
             }
         </div>
-        <p>Navn og kontaktinformasjon til den som har personalansvaret for den ansatte, og som NAV kan kontakte i forbindelse med oppfølging.</p>
     </div>);
 };
 
