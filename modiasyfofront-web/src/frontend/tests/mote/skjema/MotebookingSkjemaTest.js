@@ -134,9 +134,15 @@ describe("MotebookingSkjema", () => {
     })
 
     describe("genererDato", () => {
-        it("Skal returnere dato på riktig format", () => {
+        it("Skal returnere dato på riktig format når dato er dd.mm.åååå", () => {
             const klokkeslett = "12.15";
             const dato = "15.06.2017";
+            expect(genererDato(dato, klokkeslett)).to.equal("2017-06-15T10:15:00.000Z");
+        });
+
+        it("Skal returnere dato på riktig format når dato er dd.mm.åå", () => {
+            const klokkeslett = "12.15";
+            const dato = "15.06.17";
             expect(genererDato(dato, klokkeslett)).to.equal("2017-06-15T10:15:00.000Z");
         });
 

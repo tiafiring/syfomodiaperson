@@ -53,9 +53,11 @@ export function genererDato(dato, klokkeslett) {
     const s = new Date();
     const datoArr = dato.split('.');
     const klokkeslettArr = klokkeslett.split('.');
+    const aar = datoArr[2];
+    const aarPadded = aar.length === 2 ? `20${aar}` : aar;
     s.setDate(datoArr[0]);
     s.setMonth(parseInt(datoArr[1], 10) - 1);
-    s.setYear(datoArr[2]);
+    s.setYear(aarPadded);
     s.setHours(klokkeslettArr[0]);
     s.setMinutes(klokkeslettArr[1]);
     s.setSeconds('00');
