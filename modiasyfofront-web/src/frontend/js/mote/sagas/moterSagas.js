@@ -6,7 +6,7 @@ import * as actions from '../actions/moter_actions';
 export function* opprettMote(action) {
     yield put(actions.oppretterMote());
     try {
-        yield call(post, `${window.SYFO_SETTINGS.MOTEADMIN_REST_ROOT}/mote/${action.fnr}/opprett`, action.data);
+        yield call(post, `${window.SYFO_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.fnr}/opprett`, action.data);
         yield put(actions.moteOpprettet(action.data, action.fnr));
     } catch (e) {
         yield put(actions.opprettMoteFeilet());
