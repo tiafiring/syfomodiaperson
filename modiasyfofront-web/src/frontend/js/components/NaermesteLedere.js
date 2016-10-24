@@ -22,12 +22,12 @@ const EnLeder = ({ leder }) => {
                 <p>{leder.arbeidsgiver.orgnummer}</p>
             </div>
             <div className="unit one-third">
-                <h3>Fødselsdato</h3>
-                <p>{leder.fodselsdato}</p>
-            </div>
-            <div className="unit one-third">
                 <h3>E-post</h3>
                 <p><a href={`mailto:${leder.epost}`}>{leder.epost}</a></p>
+            </div>
+            <div className="unit one-third">
+                <h3>Fødselsdato</h3>
+                <p>{leder.fodselsdato}</p>
             </div>
         </div>
     </div>);
@@ -62,12 +62,12 @@ const FlereLedere = ({ arbeidsgiver, epost, navn, tlf, fodselsdato, erApen, clic
                     <p>{arbeidsgiver.orgnummer}</p>
                 </div>
                 <div className="unit one-third">
-                   <h3>Fødselsdato</h3>
-                   <p>{fodselsdato}</p>
+                    <h3>E-post</h3>
+                    <p><a href={`mailto:${epost}`}>{epost}</a></p>
                 </div>
                 <div className="unit one-third">
-                   <h3>E-post</h3>
-                    <p><a href={`mailto:${epost}`}>{epost}</a></p>
+                   <h3>Fødselsdato</h3>
+                   <p>{fodselsdato}</p>
                 </div>
             </div>
             }
