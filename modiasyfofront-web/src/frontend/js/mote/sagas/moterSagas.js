@@ -16,7 +16,7 @@ export function* opprettMote(action) {
 export function* hentMoter(action) {
     yield put(actions.henterMoter());
     try {
-        const data = yield call(get, `${window.SYFO_SETTINGS.MOTEADMIN_REST_ROOT}/mote/${action.fnr}`);
+        const data = yield call(get, `${window.SYFO_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.fnr}`);
         yield put(actions.moterHentet(data));
     } catch (e) {
         yield put(actions.hentMoterFeilet());

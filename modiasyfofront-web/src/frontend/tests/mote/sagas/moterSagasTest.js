@@ -54,7 +54,7 @@ describe("moterSagas", () => {
         });
 
         it("Skal hente møter fra REST-tjenesten", () => {
-            const nextCall = call(get, "http://tjenester.nav.no/moteadmin/mote/123");
+            const nextCall = call(get, "http://tjenester.nav.no/moteadmin/moter/123");
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
