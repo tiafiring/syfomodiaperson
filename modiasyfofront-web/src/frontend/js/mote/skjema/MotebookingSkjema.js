@@ -29,7 +29,7 @@ const Tidspunkter = () => {
                 const datofelt = `tidspunkter[${index}].dato`;
                 const klokkeslettfelt = `tidspunkter[${index}].klokkeslett`;
 
-                return (<div key={index} className="motetidspunkter__tidspunkt blokk-xl">
+                return (<div key={index} className="motetidspunkter__tidspunkt blokk--xl">
                     <h4 className="typo-element blokk">Alternativ {index + 1}</h4>
                     <div className="blokk">
                         <div className="grid">
@@ -89,9 +89,9 @@ const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeil
     return (<form className="panel" onSubmit={handleSubmit(submit)}>
         <h3 className="sidetopp__tittel">Møteforespørsel</h3>
 
-        <fieldset className="blokk-xl">
+        <fieldset className="blokk--xl">
             <legend>1. Fyll inn arbeidsgivers opplysninger</legend>
-            <div className="navInput blokk-xl">
+            <div className="navInput blokk--xl">
                 <label htmlFor="navn">Nærmeste leders navn</label>
                 <Field id="navn" component={TextField} name="deltakere[0].navn" className="input--xxl" />
             </div>
@@ -101,7 +101,7 @@ const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeil
             </div>
         </fieldset>
 
-        <fieldset className="blokk-xl">
+        <fieldset className="blokk--xl">
             <legend>2. Velg dato, tid og sted</legend>
             <Tidspunkter />
             <label htmlFor="sted">Sted</label>

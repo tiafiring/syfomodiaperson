@@ -28,12 +28,13 @@ Varselstripe.propTypes = {
 
 const MotebookingStatus = ({ mote }) => {
     const { tidOgStedAlternativer, deltakere } = mote;
+    const deltakerNavn = deltakere ? deltakere[0].navn : '?';
     return (<div>
-        {
-            deltakere && deltakere[0] && <Varselstripe navn={deltakere[0].navn} />
-        }
+        <Varselstripe navn={deltakerNavn} />
         <div className="panel">
-            <h2 className="typo-innholdstittel">Oversikt over møtetider</h2>
+            <h2 className="typo-innholdstittel blokk--s">Møtested</h2>
+            <p className="blokk--l">{tidOgStedAlternativer[0].sted}</p>
+            <h2 className="typo-innholdstittel blokk--s">Oversikt over møtetider</h2>
             <p className="redaksjonelt">Her ser du en oversikt over alle deltakere som har svart på møteforespørselen din. </p>
             <table className="motestatus">
                 <thead>
@@ -54,7 +55,10 @@ const MotebookingStatus = ({ mote }) => {
                                 {
                                     tidOgStedAlternativer.map((tidspunkt, index2) => {
                                         return (<td key={index2} className="motestatus__svar">
-                                            <span className="motestatus__svar__inner">?</span>
+                                            <span className="motestatus__svar__inner">
+                                                <img src="/sykefravaer/img/svg/status--ikkesvar.svg" alt="" />
+                                                <span className="motestatus__svar--ikkeSvart">Ikke svart</span>
+                                            </span>
                                         </td>);
                                     })
                                 }
