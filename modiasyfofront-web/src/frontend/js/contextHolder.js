@@ -17,11 +17,11 @@ const opprettWebsocketConnection = (callback) => {
         }
         callback(e);
     };
-    connection.onerror = (e) => {
-        callback("onerror");
+    connection.onerror = () => {
+        callback('onerror');
     };
     connection.onclose = () => {
-        callback("onerror");
+        callback('onerror');
     };
 };
 

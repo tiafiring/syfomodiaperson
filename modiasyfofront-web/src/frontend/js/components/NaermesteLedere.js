@@ -40,7 +40,7 @@ EnLeder.propTypes = {
 
 const FlereLedere = ({ arbeidsgiver, epost, navn, tlf, fodselsdato, erApen, clickHandler }) => {
     return (<div className={`rad--adskilt naermesteLeder ${erApen ? 'naermesteLeder--aktiv' : ''}`}
-                 onClick={clickHandler}>
+        onClick={clickHandler}>
             <div className="grid">
                 <div className="unit one-third">
                     <h3>Arbeidsgiver</h3>
@@ -72,10 +72,10 @@ const FlereLedere = ({ arbeidsgiver, epost, navn, tlf, fodselsdato, erApen, clic
             </div>
             }
             <button aria-pressed={erApen} className={`ikonKollaps ${!erApen ? 'ikonKollaps--erKollapsert' : ''}`}
-                    onClick={(event) => {
-            event.stopPropagation();
-            clickHandler();
-        }}>{erApen ? 'Lukk' : 'Åpne'}</button>
+                onClick={(event) => {
+                    event.stopPropagation();
+                    clickHandler();
+                }}>{erApen ? 'Lukk' : 'Åpne'}</button>
         </div>
     );
 };
@@ -97,7 +97,7 @@ const NaermesteLedere = ({ ledere, navbruker, toggleApenLeder }) => {
         <p>*kan kontaktes av NAV i forbindelse med oppfølging</p>
         <div className="naermesteLedere">
             {
-                ledere.length === 1 && <EnLeder leder={ledere[0]}/>
+                ledere.length === 1 && <EnLeder leder={ledere[0]} />
             }
             {
                 ledere.length === 0 && <p>Nærmeste leder med personalansvar for {navbruker.navn} er ikke oppgitt.</p>
@@ -106,7 +106,7 @@ const NaermesteLedere = ({ ledere, navbruker, toggleApenLeder }) => {
                 ledere.length > 1 && ledere.map((leder, index) => {
                     return (<FlereLedere {...leder} key={index} clickHandler={() => {
                         toggleApenLeder(leder.id);
-                    }}/>);
+                    }} />);
                 })
             }
         </div>
