@@ -1,18 +1,33 @@
 .motestatus {
     width: 100%;
 
+    .motestatus__tittel {
+        .typo-undertittel;
+        margin: 0 .5em;
+    }
+
     th, td {
-        padding: 1em 0;
+        padding: .5em .25em;
         width: 33.333333333%;
         text-align: center;
 
         &:first-child {
             text-align: left;
+            padding-left: 0;
+        }
+
+        &:last-child {
+            padding-right: 0;
         }
     }
 
+
+    thead th, thead td {
+        padding-top: 0;
+    }
+
     thead, tbody tr {
-        border-bottom: 2px solid @FargeBorderLys;
+        border-bottom: 1px solid @FargeBorder;
     }
 
     .motestatus__svar {
@@ -32,4 +47,19 @@
         margin-bottom: .5em;
     }
 
+}
+
+.motestatus__ikon {
+    width: 28px;
+    height: 28px;
+    margin-bottom: .5em;
+}
+
+.motestatus__svartekst {
+    display: block;
+    .typo-undertekst();
+}
+
+.motestatus__svartekst--ikkeSvart {
+    color: #979797;
 }

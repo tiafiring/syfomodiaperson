@@ -32,14 +32,19 @@ const MotebookingStatus = ({ mote }) => {
     return (<div>
         <Varselstripe navn={deltakerNavn} />
         <div className="panel">
-            <h2 className="typo-innholdstittel blokk--s">Møtested</h2>
+            <header className="sidetopp">
+                <h2 className="sidetopp__tittel">Svar på foreslått møte</h2>
+                <div className="sidetopp__tekst">
+                    <p>Her ser du en oversikt over hvilke tidspunkter du har foreslått til dialogmøte med arbeidsgiver, og 
+                    hvilke som har svart på møteforespørselen din.</p>
+                </div>
+            </header>
+            <h2 className="typo-undertittel blokk--s">Møtested</h2>
             <p className="blokk--l">{tidOgStedAlternativer[0].sted}</p>
-            <h2 className="typo-innholdstittel blokk--s">Oversikt over møtetider</h2>
-            <p className="redaksjonelt">Her ser du en oversikt over alle deltakere som har svart på møteforespørselen din. </p>
             <table className="motestatus">
                 <thead>
                     <tr>
-                        <th className="typo-undertittel">Møtetider</th>
+                        <th className="motestatus__tittel">Møtetider</th>
                         {
                             tidOgStedAlternativer.map((tidspunkt, index) => {
                                 return (<th key={index}>{getTidFraZulu(tidspunkt.tid)}</th>);
@@ -56,8 +61,8 @@ const MotebookingStatus = ({ mote }) => {
                                     tidOgStedAlternativer.map((tidspunkt, index2) => {
                                         return (<td key={index2} className="motestatus__svar">
                                             <span className="motestatus__svar__inner">
-                                                <img src="/sykefravaer/img/svg/status--ikkesvar.svg" alt="" />
-                                                <span className="motestatus__svar--ikkeSvart">Ikke svart</span>
+                                                <img className="motestatus__ikon" src="/sykefravaer/img/svg/status--ikkesvar.svg" alt="" />
+                                                <span className="motestatus__svartekst motestatus__svartekst--ikkeSvart">Ikke svart</span>
                                             </span>
                                         </td>);
                                     })

@@ -87,7 +87,9 @@ const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeil
     };
 
     return (<form className="panel" onSubmit={handleSubmit(submit)}>
-        <h3 className="sidetopp__tittel">Møteforespørsel</h3>
+        <header className="sidetopp">
+            <h3 className="sidetopp__tittel">Møtebooking</h3>
+        </header>
 
         <fieldset className="blokk--xl">
             <legend>1. Fyll inn arbeidsgivers opplysninger</legend>
