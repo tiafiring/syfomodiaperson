@@ -2,14 +2,21 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-const GlobalNavigasjon = ({ fnr }) => {
-    const menypunkter = [{
-        navn: 'Nærmeste ledere',
-        sti: 'naermeste-ledere',
-    }, {
-        navn: 'Møteplanlegger',
-        sti: 'mote',
-    }];
+const naermesteLederMenypunkt = {
+    navn: 'Nærmeste ledere',
+    sti: 'naermeste-ledere',
+};
+
+const motemodulMenypunkt = {
+    navn: 'Møteplanlegger',
+    sti: 'mote',
+};
+
+const GlobalNavigasjon = ({ fnr, harTilgangMotemodul }) => {
+    const menypunkter = [naermesteLederMenypunkt];
+    if (harTilgangMotemodul) {
+        menypunkter.push(motemodulMenypunkt);
+    }
 
     return (<ul className="navigasjon">
     {
@@ -24,11 +31,13 @@ const GlobalNavigasjon = ({ fnr }) => {
 
 GlobalNavigasjon.propTypes = {
     fnr: PropTypes.string,
+    harTilgangMotemodul: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => {
     return {
         fnr: state.navbruker.data.fnr,
+        harTilgangMotemodul: state.navbruker.data.harTilgang,
     };
 };
 
