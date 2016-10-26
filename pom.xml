@@ -15,9 +15,9 @@
     <artifactId>modiasyfofront</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>modiasyfofront-config</module>
-        <module>modiasyfofront-ear</module>
-        <module>modiasyfofront-web</module>
+        <module>config</module>
+        <module>ear</module>
+        <module>web</module>
     </modules>
 
     <properties>
