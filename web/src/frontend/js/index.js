@@ -11,7 +11,7 @@ import navbruker from './reducers/navbruker';
 import { reducer as formReducer } from 'redux-form';
 import moter from './mote/reducers/moter';
 import rootSaga from './sagas';
-import { hentNavbruker } from './actions/navbruker_actions';
+import { hentNavbruker, sjekkTilgangMoteadmin } from './actions/navbruker_actions';
 
 const rootReducer = combineReducers({
     history,
@@ -31,6 +31,7 @@ sagaMiddleware.run(rootSaga);
 
 const fnr = window.location.pathname.split('/')[2];
 store.dispatch(hentNavbruker(fnr));
+store.dispatch(sjekkTilgangMoteadmin());
 
 render(<Provider store={store}>
         <AppRouter history={history} /></Provider>,

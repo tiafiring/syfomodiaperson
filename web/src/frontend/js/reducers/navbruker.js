@@ -1,5 +1,5 @@
 const defualtState = {
-    data: {},
+    data: { harTilgang: false },
 };
 
 const navbruker = (state = defualtState, action = {}) => {
@@ -17,6 +17,15 @@ const navbruker = (state = defualtState, action = {}) => {
                 hentingFeilet: false,
                 data: Object.assign({}, state.data, {
                     fnr: action.fnr,
+                }),
+            });
+        }
+        case 'TILGANG_MOTEMODUL_HENTET': {
+            return Object.assign({
+                henter: false,
+                hentingFeilet: false,
+                data: Object.assign({}, state.data, {
+                    harTilgang: action.data.harTilgang
                 }),
             });
         }

@@ -4,3 +4,9 @@ export function hentNavbruker(fnr) {
         fnr,
     };
 }
+
+export function sjekkTilgangMoteadmin() {
+    return {
+        type: 'SJEKK_TILGANG_MOTEADMIN_FORESPURT',
+    };
+}
