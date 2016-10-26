@@ -9,7 +9,7 @@ describe("MotebookingSkjema", () => {
 
         beforeEach(() => {
             values = {};
-        })
+        });
 
         it("Skal validere nærmeste leders e-post dersom e-post ikke er fylt ut", () => {
             const res = validate(values);

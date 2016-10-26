@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import MotebookingIkon from './MotebookingIkon';
 
 const pad = (nr) => {
     return nr > 9 ? nr : `0${nr}`;
@@ -29,14 +30,15 @@ Varselstripe.propTypes = {
 const MotebookingStatus = ({ mote }) => {
     const { tidOgStedAlternativer, deltakere } = mote;
     const deltakerNavn = deltakere ? deltakere[0].navn : '?';
+
     return (<div>
         <Varselstripe navn={deltakerNavn} />
         <div className="panel">
             <header className="sidetopp">
                 <h2 className="sidetopp__tittel">Svar på foreslått møte</h2>
                 <div className="sidetopp__tekst">
-                    <p>Her ser du en oversikt over hvilke tidspunkter du har foreslått til dialogmøte med arbeidsgiver, og 
-                    hvilke som har svart på møteforespørselen din.</p>
+                    <p>Her ser du en oversikt over hvilke tidspunkter du har foreslått til dialogmøte
+                        med arbeidsgiver, og hvilke som har svart på møteforespørselen din.</p>
                 </div>
             </header>
             <h2 className="typo-undertittel blokk--s">Møtested</h2>
@@ -54,21 +56,20 @@ const MotebookingStatus = ({ mote }) => {
                 </thead>
                 <tbody>
                     {
-                        deltakere && deltakere.map((deltaker, index) => {
-                            return (<tr key={index}>
+                        deltakere && deltakere
+                            .filter(deltaker => deltaker.type === 'arbeidsgiver')
+                            .map((deltaker, index) => {
+                                return (<tr key={index}>
                             <td><strong>Arbeidsgiver</strong> <span>{deltaker.navn}</span></td>
-                                {
-                                    tidOgStedAlternativer.map((tidspunkt, index2) => {
+                            {
+                                    deltaker.tidOgSted.map((tidspunkt, index2) => {
                                         return (<td key={index2} className="motestatus__svar">
-                                            <span className="motestatus__svar__inner">
-                                                <img className="motestatus__ikon" src="/sykefravaer/img/svg/status--ikkesvar.svg" alt="" />
-                                                <span className="motestatus__svartekst motestatus__svartekst--ikkeSvart">Ikke svart</span>
-                                            </span>
+                                            <MotebookingIkon deltaker={deltaker} index={index2} />
                                         </td>);
                                     })
-                                }
+                            }
                             </tr>);
-                        })
+                            })
                     }
                 </tbody>
             </table>
@@ -77,7 +78,17 @@ const MotebookingStatus = ({ mote }) => {
 };
 
 MotebookingStatus.propTypes = {
-    mote: PropTypes.object,
+    mote: PropTypes.shape({
+        tidOgStedAlternativer: PropTypes.arrayOf(PropTypes.shape({
+            tid: PropTypes.string,
+            sted: PropTypes.string,
+        })),
+        deltakere: PropTypes.arrayOf(PropTypes.shape({
+            navn: PropTypes.string,
+            tidOgSted: PropTypes.array,
+            type: PropTypes.string,
+        })),
+    }),
 };
 
 export default MotebookingStatus;
