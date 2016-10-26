@@ -16,20 +16,20 @@ class MotebookingSide extends Component {
     render() {
         const { henter, hentingFeilet, mote } = this.props;
         return (<Side tittel="Møtebooking">
-        {
-            (() => {
-                if (henter) {
-                    return <AppSpinner />;
-                }
-                if (hentingFeilet) {
-                    return <Feilmelding />;
-                }
-                if (mote) {
-                    return <MotebookingStatus mote={mote} />;
-                }
-                return <MotebookingSkjema {...this.props} />;
-            })()
-        }
+            {
+                (() => {
+                    if (henter) {
+                        return <AppSpinner />;
+                    }
+                    if (hentingFeilet) {
+                        return <Feilmelding />;
+                    }
+                    if (mote) {
+                        return <MotebookingStatus mote={mote} />;
+                    }
+                    return <MotebookingSkjema {...this.props} />;
+                })()
+            }
         </Side>);
     }
 }
