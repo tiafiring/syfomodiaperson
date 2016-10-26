@@ -39,7 +39,7 @@ const navbruker = (state = defualtState, action = {}) => {
                 henter: false,
                 hentingFeilet: false,
                 data: Object.assign({}, state.data, {
-                    harTilgang: action.data.harTilgang
+                    harTilgang: action.data.harTilgang,
                 }),
             });
         }

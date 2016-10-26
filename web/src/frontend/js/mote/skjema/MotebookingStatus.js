@@ -53,7 +53,9 @@ const MotebookingStatus = ({ mote }) => {
                 <tbody>
                     {
                         deltakere && deltakere
-                            .filter(deltaker => deltaker.type === 'arbeidsgiver')
+                            .filter((deltaker) => {
+                                return deltaker.type === 'arbeidsgiver';
+                            })
                             .map((deltaker, index) => {
                                 return (<tr key={index}>
                             <td><strong>Arbeidsgiver</strong> <span>{deltaker.navn}</span></td>

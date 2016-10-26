@@ -33,6 +33,6 @@ function* watchSjekkTilgangMoteadmin() {
 export default function* ledereSagas() {
     yield [
         fork(watchHentNavbruker),
-        fork(watchSjekkTilgangMoteadmin)
+        fork(watchSjekkTilgangMoteadmin),
     ];
 }

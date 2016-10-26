@@ -2,7 +2,13 @@ import React, { PropTypes } from 'react';
 
 const MotebookingIkon = ({ deltaker, index }) => {
     const finnKlasseOgTekst = () => {
-        const harSvart = deltaker.avvik.length > 0 || deltaker.tidOgSted.map(tos => tos.valgt).reduce((acc, b) => { return acc || b; });
+        const harSvart = deltaker.avvik.length > 0 || deltaker.tidOgSted
+        .map((alternativ) => {
+            return alternativ.valgt;
+        })
+        .reduce((acc, b) => {
+            return acc || b;
+        });
 
         if (harSvart) {
             return deltaker.tidOgSted[index].valgt ? { klasse: 'kan', tekst: 'kan' } : { klasse: 'kanikke', tekst: 'kan ikke' };
