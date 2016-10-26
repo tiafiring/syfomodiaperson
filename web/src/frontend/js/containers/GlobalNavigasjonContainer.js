@@ -7,7 +7,7 @@ const GlobalNavigasjon = ({ fnr }) => {
         navn: 'Nærmeste ledere',
         sti: 'naermeste-ledere',
     }, {
-        navn: 'Møtebooking',
+        navn: 'Møteplanlegger',
         sti: 'mote',
     }];
 

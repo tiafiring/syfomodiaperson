@@ -35,11 +35,7 @@ const MotebookingStatus = ({ mote }) => {
         <Varselstripe navn={deltakerNavn} />
         <div className="panel">
             <header className="sidetopp">
-                <h2 className="sidetopp__tittel">Svar på foreslått møte</h2>
-                <div className="sidetopp__tekst">
-                    <p>Her ser du en oversikt over hvilke tidspunkter du har foreslått til dialogmøte
-                        med arbeidsgiver, og hvilke som har svart på møteforespørselen din.</p>
-                </div>
+                <h2 className="sidetopp__tittel">Status for møteforespørselen</h2>
             </header>
             <h2 className="typo-undertittel blokk--s">Møtested</h2>
             <p className="blokk--l">{tidOgStedAlternativer[0].sted}</p>
