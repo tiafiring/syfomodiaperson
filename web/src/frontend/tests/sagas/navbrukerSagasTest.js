@@ -45,12 +45,12 @@ describe("navbrukerSagas", () => {
             expect(generator.next().value).to.deep.equal(nextPut);
         });
 
-        it("Skal dernest hente tilgang", () => {
+        it("Skal dernest kalle REST-tjenesten", () => {
             const nextCall = call(get, "http://tjenester.nav.no/sykefravaer/toggle/tilgangmoteadmin");
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it("Skal dernest hente tilgang", () => {
+        it("Skal dernest store tilgang hentet", () => {
             const nextPut = put({
                 type: 'TILGANG_MOTEMODUL_HENTET',
                 data: {
