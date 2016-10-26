@@ -29,6 +29,7 @@ Varselstripe.propTypes = {
 const MotebookingStatus = ({ mote }) => {
     const { tidOgStedAlternativer, deltakere } = mote;
     const deltakerNavn = deltakere ? deltakere[0].navn : '?';
+
     return (<div>
         <Varselstripe navn={deltakerNavn} />
         <div className="panel">
@@ -54,15 +55,34 @@ const MotebookingStatus = ({ mote }) => {
                 </thead>
                 <tbody>
                     {
-                        deltakere && deltakere.map((deltaker, index) => {
+                        deltakere && deltakere
+                            .filter(deltaker => deltaker.type === 'arbeidsgiver')
+                            .map((deltaker, index) => {
+                                const harSvart = deltaker.avvik.size > 0 || deltaker.tidOgSted.map(tos => tos.valgt).reduce((acc, b) => {return acc || b});
                             return (<tr key={index}>
                             <td><strong>Arbeidsgiver</strong> <span>{deltaker.navn}</span></td>
                                 {
-                                    tidOgStedAlternativer.map((tidspunkt, index2) => {
+                                    deltaker.tidOgSted.map((tidspunkt, index2) => {
+                                        const svarklasse = (harSvart, tidspunkt) => {
+                                            if(harSvart){
+                                                return tidspunkt.valgt ? "kan" : "kanikke";
+                                            } else {
+                                                return "ikkesvar";
+                                            }
+                                        };
+
+                                        const svartekst = (harSvart, tidspunkt) => {
+                                            if(harSvart){
+                                                return tidspunkt.valgt ? "kan" : "kan ikke";
+                                            } else {
+                                                return "ikke svart";
+                                            }
+                                        };
+
                                         return (<td key={index2} className="motestatus__svar">
                                             <span className="motestatus__svar__inner">
-                                                <img className="motestatus__ikon" src="/sykefravaer/img/svg/status--ikkesvar.svg" alt="" />
-                                                <span className="motestatus__svartekst motestatus__svartekst--ikkeSvart">Ikke svart</span>
+                                                <img className="motestatus__ikon" src={`/sykefravaer/img/svg/status--${svarklasse(harSvart, tidspunkt)}.svg`} alt="" />
+                                                <span className={`motestatus__svartekst motestatus__svartekst--${svarklasse(harSvart, tidspunkt)}`}>{svartekst(harSvart, tidspunkt)}</span>
                                             </span>
                                         </td>);
                                     })
@@ -77,7 +97,17 @@ const MotebookingStatus = ({ mote }) => {
 };
 
 MotebookingStatus.propTypes = {
-    mote: PropTypes.object,
+    mote: PropTypes.shape({
+        tidOgStedAlternativer: PropTypes.arrayOf(PropTypes.shape({
+            tid: PropTypes.string,
+            sted: PropTypes.string,
+        })),
+        deltakere: PropTypes.arrayOf(PropTypes.shape({
+            navn: PropTypes.string,
+            tidOgSted: PropTypes.array,
+            type: PropTypes.string,
+        })),
+    }),
 };
 
 export default MotebookingStatus;
