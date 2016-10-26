@@ -8,7 +8,7 @@ describe('navbruker', () => {
     it("Returnerer { data: {} } ved initializering", () => {
         const nextState = navbruker();
         expect(nextState).to.deep.equal({
-            data: {}
+            data: { harTilgang: false }
         });
     });
 

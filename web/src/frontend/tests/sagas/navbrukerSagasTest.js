@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { hentNavbruker } from '../../js/sagas/navbrukerSagas.js';
+import { hentNavbruker, sjekkTilgangMoteadmin } from '../../js/sagas/navbrukerSagas.js';
 import { get } from '../../js/api';
 import { put, call } from 'redux-saga/effects';
 
@@ -38,7 +38,29 @@ describe("navbrukerSagas", () => {
     });
 
     describe("sjekkTilgangMoteadmin", () => {
+        const generator = sjekkTilgangMoteadmin();
 
+        it("Skal dispatche SJEKKER_TILGANG_MOTEADMIN", () => {
+            const nextPut = put({type: 'SJEKKER_TILGANG_MOTEADMIN'});
+            expect(generator.next().value).to.deep.equal(nextPut);
+        });
+
+        it("Skal dernest hente tilgang", () => {
+            const nextCall = call(get, "http://tjenester.nav.no/sykefravaer/toggle/tilgangmoteadmin");
+            expect(generator.next().value).to.deep.equal(nextCall);
+        });
+
+        it("Skal dernest hente tilgang", () => {
+            const nextPut = put({
+                type: 'TILGANG_MOTEMODUL_HENTET',
+                data: {
+                    "harTilgang": true
+                }
+            });
+            expect(generator.next({
+                "harTilgang": true
+            }).value).to.deep.equal(nextPut);
+        });
 
     });
 });
