@@ -20,6 +20,12 @@ const navbruker = (state = defualtState, action = {}) => {
                 }),
             });
         }
+        case 'HENT_NAVBRUKER_FEILET': {
+            return Object.assign({
+                henter: false,
+                hentingFeilet: true,
+            });
+        }
         case 'TILGANG_MOTEMODUL_HENTET': {
             return Object.assign({
                 henter: false,
@@ -27,6 +33,12 @@ const navbruker = (state = defualtState, action = {}) => {
                 data: Object.assign({}, state.data, {
                     harTilgang: action.data.harTilgang
                 }),
+            });
+        }
+        case 'TILGANG_MOTEMODUL_FEILET': {
+            return Object.assign({
+                henter: false,
+                hentingFeilet: true,
             });
         }
         default: {
