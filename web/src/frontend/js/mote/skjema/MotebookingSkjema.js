@@ -88,11 +88,11 @@ const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeil
 
     return (<form className="panel" onSubmit={handleSubmit(submit)}>
         <header className="sidetopp">
-            <h3 className="sidetopp__tittel">Møtebooking</h3>
+            <h3 className="sidetopp__tittel">Møteforespørsel</h3>
         </header>
 
         <fieldset className="blokk--xl">
-            <legend>1. Fyll inn arbeidsgivers opplysninger</legend>
+            <legend>1. Fyll inn arbeidsgiverens opplysninger</legend>
             <div className="navInput blokk--xl">
                 <label htmlFor="navn">Nærmeste leders navn</label>
                 <Field id="navn" component={TextField} name="deltakere[0].navn" className="input--xxl" />

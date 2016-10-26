@@ -37,7 +37,7 @@ const naermesteLederMenypunkt = {
 };
 
 const motemodulMenypunkt = {
-    navn: 'Møtebooking',
+    navn: 'Møteplanlegger',
     sti: 'mote',
 };
 
