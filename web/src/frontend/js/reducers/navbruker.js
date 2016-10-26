@@ -24,6 +24,14 @@ const navbruker = (state = defualtState, action = {}) => {
             return Object.assign({
                 henter: false,
                 hentingFeilet: true,
+                data: Object.assign({}, state.data, action.data),
+            });
+        }
+        case 'SJEKK_TILGANG_MOTEADMIN_FORESPURT': {
+            return Object.assign({
+                henter: true,
+                hentingFeilet: false,
+                data: Object.assign({}, state.data, action.data),
             });
         }
         case 'TILGANG_MOTEMODUL_HENTET': {
@@ -39,6 +47,7 @@ const navbruker = (state = defualtState, action = {}) => {
             return Object.assign({
                 henter: false,
                 hentingFeilet: true,
+                data: Object.assign({}, state.data, action.data),
             });
         }
         default: {

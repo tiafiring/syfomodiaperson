@@ -2,6 +2,16 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
+const naermesteLederMenypunkt = {
+    navn: 'Nærmeste ledere',
+    sti: 'naermeste-ledere',
+};
+
+const motemodulMenypunkt = {
+    navn: 'Møteplanlegger',
+    sti: 'mote',
+};
+
 const GlobalNavigasjon = ({ fnr, harTilgangMotemodul }) => {
     const menypunkter = [naermesteLederMenypunkt];
     if (harTilgangMotemodul) {
@@ -29,16 +39,6 @@ const mapStateToProps = (state) => {
         fnr: state.navbruker.data.fnr,
         harTilgangMotemodul: state.navbruker.data.harTilgang,
     };
-};
-
-const naermesteLederMenypunkt = {
-    navn: 'Nærmeste ledere',
-    sti: 'naermeste-ledere',
-};
-
-const motemodulMenypunkt = {
-    navn: 'Møteplanlegger',
-    sti: 'mote',
 };
 
 const GlobalNavigasjonContainer = connect(mapStateToProps)(GlobalNavigasjon);
