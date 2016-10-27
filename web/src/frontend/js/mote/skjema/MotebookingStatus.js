@@ -29,7 +29,7 @@ Varselstripe.propTypes = {
 
 const MotebookingStatus = ({ mote }) => {
     const { tidOgStedAlternativer, deltakere } = mote;
-    const deltakerNavn = deltakere ? deltakere[0].navn : '?';
+    const deltakerNavn = deltakere ? deltakere[0].epost : '?';
 
     return (<div>
         <Varselstripe navn={deltakerNavn} />
@@ -83,6 +83,7 @@ MotebookingStatus.propTypes = {
         })),
         deltakere: PropTypes.arrayOf(PropTypes.shape({
             navn: PropTypes.string,
+            epost: PropTypes.string,
             tidOgSted: PropTypes.array,
             type: PropTypes.string,
         })),
