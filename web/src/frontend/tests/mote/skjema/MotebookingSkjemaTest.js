@@ -14,7 +14,7 @@ describe("MotebookingSkjema", () => {
         it("Skal validere nærmeste leders e-post dersom e-post ikke er fylt ut", () => {
             const res = validate(values);
             expect(res.deltakere[0].epost).to.equal("Vennligst fyll ut nærmeste leders e-post-adresse");
-        }); 
+        });
 
         it("Skal validere nærmeste leders e-post dersom e-post er ugyldig", () => {
             values.deltakere = [{
@@ -22,7 +22,7 @@ describe("MotebookingSkjema", () => {
             }];
             const res = validate(values);
             expect(res.deltakere[0].epost).to.equal("Vennligst fyll ut en gyldig e-post-adresse");
-        }); 
+        });
 
         it("Skal validere nærmeste leders navn dersom det ikke er fylt ut", () => {
             const res = validate(values);
@@ -71,7 +71,7 @@ describe("MotebookingSkjema", () => {
             }, {}]
             const res = validate(values);
             expect(res.tidspunkter[0].dato).to.equal("Vennligst angi riktig datoformat; dd.mm.åååå");
-        }); 
+        });
 
         it("Skal validere tidspunkter dersom klokkeslett er på feil format", () => {
             values.tidspunkter = [{
@@ -80,7 +80,7 @@ describe("MotebookingSkjema", () => {
             }, {}]
             const res = validate(values);
             expect(res.tidspunkter[0].klokkeslett).to.equal("Vennligst angi riktig format; f.eks. 13.00");
-        }); 
+        });
 
         it("Skal validere tidspunkter dersom andre felt mangler dato", () => {
             values.tidspunkter = [{
@@ -93,7 +93,7 @@ describe("MotebookingSkjema", () => {
             expect(res.tidspunkter).to.deep.equal([{}, {
                 dato: "Vennligst angi dato",
             }])
-        }); 
+        });
 
         it("Skal validere tidspunkter dersom andre felt mangler klokkeslett", () => {
             values.tidspunkter = [{
@@ -154,17 +154,56 @@ describe("MotebookingSkjema", () => {
     });
 
     describe("getData", () => {
-        it("Skal svare med data på riktig format", () => {
-            const values = {"deltakere":[{"navn":"***REMOVED***","epost":"ole.olsen@nav.no"}],"tidspunkter":[{"dato":"12.08.2016","klokkeslett":"15.00"},{"dato":"13.08.2016","klokkeslett":"12.00"}],"sted":"Oslo"};
+        it.only("Skal svare med data på riktig format", () => {
+            const values = {
+                "deltakere": [
+                    {
+                        "navn": "***REMOVED***",
+                        "epost": "ole.olsen@nav.no",
+                    }
+                ],
+                "tidspunkter": [
+                    {
+                        "dato": "12.08.2016",
+                        "klokkeslett": "15.00"
+                    },
+                    {
+                        "dato": "13.08.2016",
+                        "klokkeslett": "12.00"
+                    }
+                ],
+                "sted": "Oslo"
+            };
             const res = getData(values)
             expect(res).to.deep.equal({
-                deltakere: [{"navn":"***REMOVED***","epost":"ole.olsen@nav.no","type":"arbeidsgiver"}],
+                deltakere: [
+                    {
+                        "navn": "***REMOVED***",
+                        "epost": "ole.olsen@nav.no",
+                        "type": "arbeidsgiver",
+                        "tidOgSted": [
+                            {
+                                "sted": "Oslo",
+                                "tid": "2016-08-12T13:00:00.000Z",
+                                "valgt":false,
+                            },
+                            {
+                                "sted": "Oslo",
+                                "tid": "2016-08-13T10:00:00.000Z",
+                                "valgt":false,
+                            }
+                        ],
+                        "avvik": [],
+                    }
+                ],
                 tidOgStedAlternativer: [{
                     "sted": "Oslo",
-                    "tid": "2016-08-12T13:00:00.000Z"
+                    "tid": "2016-08-12T13:00:00.000Z",
+                    "valgt": false
                 }, {
                     "sted": "Oslo",
-                    "tid": "2016-08-13T10:00:00.000Z"
+                    "tid": "2016-08-13T10:00:00.000Z",
+                    "valgt": false
                 }]
             })
         });
