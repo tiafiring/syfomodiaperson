@@ -9,8 +9,6 @@ import javax.servlet.ServletException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
 
 import static java.lang.System.getProperty;
 import static java.net.HttpURLConnection.HTTP_OK;
@@ -19,13 +17,7 @@ import static no.nav.sbl.dialogarena.types.Pingable.Ping.*;
 
 public class SelftestServlet extends SelfTestBaseServlet{
     private static final String APPLIKASJONS_NAVN = "modiasyfofront";
-    private ApplicationContext ctx = null;
 
-    @Override
-    public void init() throws ServletException {
-        ctx = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-        super.init();
-    }
     @Override
     protected String getApplicationName() {
         return APPLIKASJONS_NAVN;
