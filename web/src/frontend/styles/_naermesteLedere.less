@@ -1,3 +1,32 @@
 .naermesteLeder__info {
     width: 100% / 3;
 }
+
+.naermesteLedere {
+    margin-bottom: 2em;
+}
+
+.naermesteLedere .unit {
+    word-wrap: break-word;
+}
+
+.naermesteLeder {
+    padding-right: 3em;
+    position: relative;
+    cursor: pointer;
+
+    h3 {
+        .typo-etikett-liten;
+    }
+}
+
+.naermesteLeder .ikonKollaps {
+    top: 1.5em;
+}
+
+.naermesteLeder:hover .ikonKollaps {
+    &:after, &:before {
+        background-color: @FargeLenke;
+    }
+}
+
