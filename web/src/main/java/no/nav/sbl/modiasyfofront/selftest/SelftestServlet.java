@@ -2,30 +2,20 @@ package no.nav.sbl.modiasyfofront.selftest;
 
 import no.nav.sbl.dialogarena.common.web.selftest.SelfTestBaseServlet;
 import no.nav.sbl.dialogarena.types.Pingable;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import javax.servlet.ServletException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
 
 import static java.lang.System.getProperty;
 import static java.net.HttpURLConnection.HTTP_OK;
 import static java.util.Arrays.asList;
-import static no.nav.sbl.dialogarena.types.Pingable.Ping.*;
+import static no.nav.sbl.dialogarena.types.Pingable.Ping.feilet;
+import static no.nav.sbl.dialogarena.types.Pingable.Ping.lyktes;
 
 public class SelftestServlet extends SelfTestBaseServlet{
     private static final String APPLIKASJONS_NAVN = "modiasyfofront";
-    private ApplicationContext ctx = null;
 
-    @Override
-    public void init() throws ServletException {
-        ctx = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-        super.init();
-    }
     @Override
     protected String getApplicationName() {
         return APPLIKASJONS_NAVN;

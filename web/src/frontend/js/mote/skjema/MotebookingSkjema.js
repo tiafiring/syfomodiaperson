@@ -69,14 +69,18 @@ export function getData(values) {
     const deltaker = Object.assign({}, values.deltakere[0], {
         type: 'arbeidsgiver',
     });
+
+    const tidOgStedAlternativer = values.tidspunkter.map((tidspunkt) => {
+        return {
+            tid: genererDato(tidspunkt.dato, tidspunkt.klokkeslett),
+            sted: values.sted,
+            valgt: false,
+        };
+    });
+
     return {
-        deltakere: [deltaker],
-        tidOgStedAlternativer: values.tidspunkter.map((tidspunkt) => {
-            return {
-                tid: genererDato(tidspunkt.dato, tidspunkt.klokkeslett),
-                sted: values.sted,
-            };
-        }),
+        tidOgStedAlternativer,
+        deltakere: [Object.assign(deltaker, { tidOgSted: tidOgStedAlternativer, avvik: [] })],
     };
 }
 
