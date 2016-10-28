@@ -12,27 +12,27 @@ const getTidFraZulu = (zulutid) => {
     return `${dag}.${maned}.${d.getFullYear()} kl. ${pad(d.getHours())}.${pad(d.getMinutes())}`;
 };
 
-const Varselstripe = ({ navn }) => {
+const Varselstripe = ({ epost }) => {
     return (<div className="panel">
         <div className="varselstripe varselstripe--suksess">
             <div className="varselstripe__ikon">
                 <img src="/sykefravaer/img/svg/suksess.svg" />
             </div>
-            <p className="sist">Møteforespørselen er sendt til {navn}!</p>
+            <p className="sist">Møteforespørselen er sendt til {epost}</p>
         </div>
     </div>);
 };
 
 Varselstripe.propTypes = {
-    navn: PropTypes.string,
+    epost: PropTypes.string,
 };
 
 const MotebookingStatus = ({ mote }) => {
     const { tidOgStedAlternativer, deltakere } = mote;
-    const deltakerNavn = deltakere ? deltakere[0].epost : '?';
+    const deltakerEpost = deltakere ? deltakere[0].epost : '?';
 
     return (<div>
-        <Varselstripe navn={deltakerNavn} />
+        <Varselstripe navn={deltakerEpost} />
         <div className="panel">
             <header className="sidetopp">
                 <h2 className="sidetopp__tittel">Status for møteforespørselen</h2>

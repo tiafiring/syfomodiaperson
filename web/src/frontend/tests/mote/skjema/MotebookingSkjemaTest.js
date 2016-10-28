@@ -154,7 +154,7 @@ describe("MotebookingSkjema", () => {
     });
 
     describe("getData", () => {
-        it.only("Skal svare med data på riktig format", () => {
+        it("Skal svare med data på riktig format", () => {
             const values = {
                 "deltakere": [
                     {
