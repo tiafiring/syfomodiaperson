@@ -32,7 +32,7 @@ const MotebookingStatus = ({ mote }) => {
     const deltakerEpost = deltakere ? deltakere[0].epost : '?';
 
     return (<div>
-        <Varselstripe navn={deltakerEpost} />
+        <Varselstripe epost={deltakerEpost} />
         <div className="panel">
             <header className="sidetopp">
                 <h2 className="sidetopp__tittel">Status for møteforespørselen</h2>
