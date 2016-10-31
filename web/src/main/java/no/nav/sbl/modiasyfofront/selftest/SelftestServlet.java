@@ -24,17 +24,17 @@ public class SelftestServlet extends SelfTestBaseServlet{
     @Override
     protected Collection<? extends Pingable> getPingables() {
         return asList(
-                pingUrl("SYKEFRAVÆR_API", getProperty("sykefravaerapi.fss.url") + "/internal/isAlive", "application/json")
+                pingUrl("SYKEFRAVÆR_API", getProperty("sykefravaerapi.fss.url") + "/internal/isAlive")
         );
     }
 
-    private Pingable pingUrl(final String name, final String url, final String expectedResponseType) {
+    private Pingable pingUrl(final String name, final String url) {
         return () -> {
             HttpURLConnection connection;
             try {
                 connection = (HttpURLConnection) new URL(url).openConnection();
                 connection.setConnectTimeout(10000);
-                if (!(connection.getResponseCode() == HTTP_OK && expectedResponseType != null) || connection.getContentType().startsWith(expectedResponseType)) {
+                if (connection.getResponseCode() == HTTP_OK) {
                     return lyktes(name);
                 } else {
                     return feilet(name, new RuntimeException(connection.getResponseCode() + " " + connection.getResponseMessage()));
