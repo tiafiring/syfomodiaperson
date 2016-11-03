@@ -20,7 +20,7 @@ export class NaermesteLedereSide extends Component {
     }
 
     render() {
-        const { fnr, henter, ledere, hentingFeilet, actions, navbruker } = this.props;
+        const { henter, ledere, hentingFeilet, actions, navbruker } = this.props;
         return (<Side tittel="Nærmeste ledere">
         {
             (() => {
