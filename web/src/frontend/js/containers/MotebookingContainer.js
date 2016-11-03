@@ -2,12 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Side from '../sider/Side';
 import MotebookingSkjema from '../mote/skjema/MotebookingSkjema';
-import MotebookingStatus from '../mote/skjema/MotebookingStatus';
+import MotebookingStatus from '../mote/components/MotebookingStatus';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import * as actionCreators from '../mote/actions/moter_actions';
 
-class MotebookingSide extends Component {
+export class MotebookingSide extends Component {
     constructor(props) {
         super(props);
         this.props.hentMoter(this.props.fnr);
@@ -42,7 +42,7 @@ MotebookingSide.propTypes = {
     hentingFeilet: PropTypes.bool,
 };
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
     const fnr = state.navbruker.data.fnr;
     const mote = state.moter.data && state.moter.data.length > 0 ? state.moter.data[0] : undefined;
 

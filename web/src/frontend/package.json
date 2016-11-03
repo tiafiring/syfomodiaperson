@@ -89,6 +89,7 @@
     "eslint-config-airbnb": "6.2.0",
     "eslint-plugin-react": "4.2.3",
     "express-livereload": "0.0.24",
+    "fetch-mock": "5.5.0",
     "fs": "0.0.2",
     "jsdom": "8.0.4",
     "jsfmt": "0.5.3",

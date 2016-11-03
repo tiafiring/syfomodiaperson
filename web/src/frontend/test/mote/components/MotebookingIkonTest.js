@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import MotebookingIkon from '../../../js/mote/skjema/MotebookingIkon'
+import MotebookingIkon from '../../../js/mote/components/MotebookingIkon'
 import { mount, shallow } from 'enzyme';
 import React from 'react'
 
