@@ -90,7 +90,7 @@ export default function moter(state = defaultState, action) {
         }
         case 'MOTE_AVBRUTT': {
             const data = state.data.map((mote) => {
-                if (mote.moteUuid === action.uid) {
+                if (mote.moteUuid === action.uuid) {
                     return Object.assign({}, mote, {
                         status: 'AVBRUTT',
                     });

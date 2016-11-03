@@ -24,10 +24,10 @@ export function* hentMoter(action) {
 }
 
 export function* avbrytMote(action) {
-    yield put(actions.avbryterMote(action.uid));
+    yield put(actions.avbryterMote(action.uuid));
     try {
-        yield call(post, `${window.SYFO_SETTINGS.MOTEADMIN_REST_ROOT}/mote/${action.uid}/avbryt`);
-        yield put(actions.moteAvbrutt(action.uid));
+        yield call(post, `${window.SYFO_SETTINGS.MOTEADMIN_REST_ROOT}/mote/${action.uuid}/avbryt`);
+        yield put(actions.moteAvbrutt(action.uuid));
     } catch (e) {
         yield put(actions.avbrytMoteFeilet());
     }

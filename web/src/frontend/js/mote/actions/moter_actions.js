@@ -52,17 +52,17 @@ export function hentMoterFeilet() {
     };
 }
 
-export function avbrytMote(uid) {
+export function avbrytMote(uuid) {
     return {
         type: 'AVBRYT_MOTE_FORESPURT',
-        uid,
+        uuid,
     };
 }
 
-export function moteAvbrutt(uid) {
+export function moteAvbrutt(uuid) {
     return {
         type: 'MOTE_AVBRUTT',
-        uid,
+        uuid,
     };
 }
 
@@ -72,9 +72,9 @@ export function avbrytMoteFeilet() {
     };
 }
 
-export function avbryterMote(uid) {
+export function avbryterMote(uuid) {
     return {
         type: 'AVBRYTER_MOTE',
-        uid,
+        uuid,
     };
 }

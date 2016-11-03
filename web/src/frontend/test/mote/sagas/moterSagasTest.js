@@ -67,21 +67,21 @@ describe("moterSagas", () => {
 
     describe("avbrytMote", () => {
         const generator = avbrytMote({
-            uid: "min-fine-mote-uid"
+            uuid: "min-fine-mote-uuid"
         });
 
         it("Skal dispatche AVBRYTER_MOTE", () => {
-            const nextPut = put({type: 'AVBRYTER_MOTE', uid: "min-fine-mote-uid"});
+            const nextPut = put({type: 'AVBRYTER_MOTE', uuid: "min-fine-mote-uuid"});
             expect(generator.next().value).to.deep.equal(nextPut);
         });
 
         it("Skal poste til REST-tjenesten", () => {
-            const nextCall = call(post, "http://tjenester.nav.no/moteadmin/mote/min-fine-mote-uid/avbryt");
+            const nextCall = call(post, "http://tjenester.nav.no/moteadmin/mote/min-fine-mote-uuid/avbryt");
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
         it("Skal dispatche MOTE_AVBRUTT", () => {
-            const nextPut = put({type: 'MOTE_AVBRUTT', uid: "min-fine-mote-uid"});
+            const nextPut = put({type: 'MOTE_AVBRUTT', uuid: "min-fine-mote-uuid"});
             expect(generator.next().value).to.deep.equal(nextPut);
         });
 

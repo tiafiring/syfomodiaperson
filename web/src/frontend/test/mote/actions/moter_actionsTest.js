@@ -50,7 +50,7 @@ describe("moter_actions", () => {
         const action = actions.avbrytMote("fiskekake");
         expect(action).to.deep.equal({
             type: "AVBRYT_MOTE_FORESPURT",
-            uid: "fiskekake"
+            uuid: "fiskekake"
         })
     })
 
