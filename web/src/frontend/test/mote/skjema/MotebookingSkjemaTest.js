@@ -1,7 +1,53 @@
 import { expect } from 'chai';
-import MotebookingSkjema, { validate, genererDato, getData } from '../../../js/mote/skjema/MotebookingSkjema';
+import { MotebookingSkjema, validate, genererDato, getData } from '../../../js/mote/skjema/MotebookingSkjema';
+import Tidspunkter from '../../../js/mote/skjema/Tidspunkter';
+import { Field } from 'redux-form';
+import { mount, shallow, render } from 'enzyme';
+import React from 'react';
+import sinon from 'sinon';
 
 describe("MotebookingSkjema", () => {
+
+    describe("MotebookingSkjema", () => {
+
+        let handleSubmit;
+
+        beforeEach(() => {
+            handleSubmit = sinon.spy();
+        })
+
+        it("Skal inneholde felter for å skrive inn arbeidsgivers opplysninger", () => {
+            const compo = shallow(<MotebookingSkjema handleSubmit={handleSubmit} />);
+            expect(compo.find(".js-arbeidsgiver").find(Field)).to.have.length(2);
+        });
+
+        it("Skal inneholde felter med riktig type for å skrive inn arbeidsgivers opplysninger", () => {
+            const compo = shallow(<MotebookingSkjema handleSubmit={handleSubmit} />);
+            expect(compo.find(".js-arbeidsgiver").find(Field).first().prop("name")).to.equal("deltakere[0].navn")
+            expect(compo.find(".js-arbeidsgiver").find(Field).last().prop("name")).to.equal("deltakere[0].epost")
+        });
+
+        it("Skal inneholde tidspunkter", () => {
+            const compo = shallow(<MotebookingSkjema handleSubmit={handleSubmit} />);
+            expect(compo.contains(<Tidspunkter />)).to.be.true;
+        });
+
+        it("Skal inneholde felt med mulighet for å skrive inn sted", () => {
+            const compo = shallow(<MotebookingSkjema handleSubmit={handleSubmit} />);
+            expect(compo.find(".js-sted").prop("name")).to.equal("sted");
+        });
+
+        it("Skal ikke vise feilmelding hvis sendingFeilet !== true", () => {
+            const compo = shallow(<MotebookingSkjema handleSubmit={handleSubmit} />);
+            expect(compo.text()).not.to.contain("Beklager")
+        });
+
+        it("Skal vise feilmelding hvis sendingFeilet", () => {
+            const compo = shallow(<MotebookingSkjema handleSubmit={handleSubmit} sendingFeilet />);
+            expect(compo.text()).to.contain("Beklager")
+        });
+
+    });
 
     describe("validate", () => {
 

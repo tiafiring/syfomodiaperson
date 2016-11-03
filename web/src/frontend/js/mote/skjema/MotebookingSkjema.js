@@ -1,53 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
-
-const TextField = (props) => {
-    const { meta } = props;
-
-    return (<div>
-        <input autoComplete="off" placeholder={props.placeholder} type={props.type || 'text'} id={props.id}
-            className={`${props.className} ${(meta.touched && meta.error && 'input--feil')}`} {...props.input} />
-        <p className="skjema__feilmelding" aria-live="polite">{meta.touched && meta.error}</p>
-    </div>);
-};
-
-TextField.propTypes = {
-    meta: PropTypes.object,
-    id: PropTypes.string,
-    input: PropTypes.object,
-    type: PropTypes.string,
-    className: PropTypes.string,
-    placeholder: PropTypes.string,
-};
-
-const Tidspunkter = () => {
-    const tidspunkter = [{}, {}];
-
-    return (<div className="motetidspunkter">
-        {
-            tidspunkter.map((tidspunkt, index) => {
-                const datofelt = `tidspunkter[${index}].dato`;
-                const klokkeslettfelt = `tidspunkter[${index}].klokkeslett`;
-
-                return (<div key={index} className="motetidspunkter__tidspunkt blokk--xl">
-                    <h4 className="typo-element blokk">Alternativ {index + 1}</h4>
-                    <div className="blokk">
-                        <div className="grid">
-                            <div className="unit half">
-                                <label htmlFor={`dato-${index}`}>Dato</label>
-                                <Field id={`dato-${index}`} component={TextField} name={datofelt} className="input--m" placeholder="dd.mm.åååå" />
-                            </div>
-                            <div className="unit half">
-                                <label htmlFor={`klokkeslett-${index}`}>Klokkeslett</label>
-                                <Field id={`klokkeslett-${index}`} component={TextField} name={klokkeslettfelt} className="input--m" placeholder="F.eks: 09.30" />
-                            </div>
-                        </div>
-                    </div>
-                </div>);
-            })
-        }
-    </div>);
-};
+import TextField from '../../components/TextField';
+import Tidspunkter from './Tidspunkter';
 
 export function genererDato(dato, klokkeslett) {
     const s = new Date();
@@ -84,7 +38,7 @@ export function getData(values) {
     };
 }
 
-const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeilet }) => {
+export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeilet }) => {
     const submit = (values) => {
         const data = getData(values);
         opprettMote(fnr, data);
@@ -95,7 +49,7 @@ const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeil
             <h3 className="sidetopp__tittel">Møteforespørsel</h3>
         </header>
 
-        <fieldset className="blokk--xl">
+        <fieldset className="blokk--xl js-arbeidsgiver">
             <legend>1. Fyll inn arbeidsgiverens opplysninger</legend>
             <div className="navInput blokk--xl">
                 <label htmlFor="navn">Nærmeste leders navn</label>
@@ -111,7 +65,7 @@ const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeil
             <legend>2. Velg dato, tid og sted</legend>
             <Tidspunkter />
             <label htmlFor="sted">Sted</label>
-            <Field id="sted" component={TextField} name="sted" className="input--xxl" placeholder="Skriv møtested eller om det er et videomøte" />
+            <Field id="sted" component={TextField} name="sted" className="input--xxl js-sted" placeholder="Skriv møtested eller om det er et videomøte" />
         </fieldset>
 
         <div aria-live="polite" role="alert">
