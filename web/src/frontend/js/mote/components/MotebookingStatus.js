@@ -1,18 +1,8 @@
 import React, { PropTypes } from 'react';
 import MotebookingIkon from './MotebookingIkon';
+import { getTidFraZulu } from '../utils';
 
-const pad = (nr) => {
-    return nr > 9 ? nr : `0${nr}`;
-};
-
-const getTidFraZulu = (zulutid) => {
-    const d = new Date(zulutid);
-    const dag = pad(d.getDate());
-    const maned = pad(d.getMonth() + 1);
-    return `${dag}.${maned}.${d.getFullYear()} kl. ${pad(d.getHours())}.${pad(d.getMinutes())}`;
-};
-
-const Varselstripe = ({ epost }) => {
+export const Varselstripe = ({ epost }) => {
     return (<div className="panel">
         <div className="varselstripe varselstripe--suksess">
             <div className="varselstripe__ikon">
