@@ -23,10 +23,10 @@ export function post(url, body) {
         credentials: 'include',
         method: 'POST',
         body: JSON.stringify(body),
-        headers: new Headers({
+        headers: {
             'Content-Type': 'application/json',
             'X-XSRF-TOKEN': getCookie('XSRF-TOKEN-SYFOREST'),
-        }),
+        },
     })
     .then((res) => {
         if (res.status > 400) {

@@ -13,13 +13,4 @@ describe('ledere_actions', () => {
         })
     });
 
-    it("Har en toggleApenLeder()-funksjon", () => {
-        const lederId = 1;
-        const res = actions.toggleApenLeder(lederId);
-        expect(res).to.deep.equal({
-            type: "TOGGLE_APEN_LEDER",
-            lederId: 1
-        })
-    });
-
 });

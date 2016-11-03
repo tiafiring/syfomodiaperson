@@ -25,19 +25,6 @@ const ledere = (state = defaultState, action = {}) => {
                 data: [],
             };
         }
-        case 'TOGGLE_APEN_LEDER': {
-            const data = state.data.map((leder) => {
-                if (leder.id === action.lederId) {
-                    return Object.assign({}, leder, {
-                        erApen: !leder.erApen,
-                    });
-                }
-                return leder;
-            });
-            return Object.assign({}, state, {
-                data,
-            });
-        }
         default: {
             return state;
         }

@@ -7,7 +7,7 @@ import Side from '../sider/Side';
 import * as ledereActions from '../actions/ledere_actions';
 import AppSpinner from '../components/AppSpinner';
 
-class NaermesteLedereSide extends Component {
+export class NaermesteLedereSide extends Component {
     constructor(props) {
         super(props);
         this.props.actions.hentLedere(this.props.fnr);
@@ -21,7 +21,7 @@ class NaermesteLedereSide extends Component {
 
     render() {
         const { fnr, henter, ledere, hentingFeilet, actions, navbruker } = this.props;
-        return (<Side tittel="Sykefravær" fnr={fnr}>
+        return (<Side tittel="Nærmeste ledere">
         {
             (() => {
                 if (hentingFeilet) {
