@@ -44,6 +44,14 @@ describe("moter_actions", () => {
             },
             fnr: "1234"
         })
+    });
+
+    it("Skal ha en avbrytMote()-funksjon som returnerer riktig action", () => {
+        const action = actions.avbrytMote("fiskekake");
+        expect(action).to.deep.equal({
+            type: "AVBRYT_MOTE_FORESPURT",
+            uid: "fiskekake"
+        })
     })
 
 });

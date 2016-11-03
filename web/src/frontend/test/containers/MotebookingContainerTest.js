@@ -38,10 +38,10 @@ describe("MotebookingContainer", () => {
 
         it("Skal vise MotebookingStatus hvis det finnes møte", () => {
             const mote = {};
-            const component = shallow(<MotebookingSide hentMoter={hentMoter} mote={{}} />)
-            expect(component.contains(<MotebookingStatus mote={{}} />)).to.be.true;
+            const avbrytMote = sinon.spy();
+            const component = shallow(<MotebookingSide hentMoter={hentMoter} mote={{}} avbrytMote={avbrytMote} />)
+            expect(component.find(MotebookingStatus)).to.have.length(1);
         });
-
 
     })
 
@@ -73,6 +73,15 @@ describe("MotebookingContainer", () => {
             expect(props.mote).to.deep.equal({
                 id: 1
             });
+        });
+
+        it("Skal ikke returnere avbrutt mote", () => {
+            state.moter.data = [{
+                id: 1,
+                status: 'AVBRUTT'
+            }]
+            const props = mapStateToProps(state);
+            expect(props.mote).to.be.undefined;
         });
 
         it("Skal returnere mote === undefined dersom det ikke finnes møter", () => {

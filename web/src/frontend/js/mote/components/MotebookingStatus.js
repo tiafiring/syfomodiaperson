@@ -17,7 +17,7 @@ Varselstripe.propTypes = {
     epost: PropTypes.string,
 };
 
-const MotebookingStatus = ({ mote }) => {
+const MotebookingStatus = ({ mote, avbrytMote, avbryter, avbrytFeilet }) => {
     const { tidOgStedAlternativer, deltakere } = mote;
     const deltakerEpost = deltakere ? deltakere[0].epost : '?';
 
@@ -29,7 +29,7 @@ const MotebookingStatus = ({ mote }) => {
             </header>
             <h2 className="typo-undertittel blokk--s">Møtested</h2>
             <p className="blokk--l">{tidOgStedAlternativer[0].sted}</p>
-            <table className="motestatus">
+            <table className="motestatus blokk--l">
                 <thead>
                     <tr>
                         <th className="motestatus__tittel">Møtetider</th>
@@ -61,6 +61,14 @@ const MotebookingStatus = ({ mote }) => {
                     }
                 </tbody>
             </table>
+            <div aria-live="polite" role="alert" className={avbrytFeilet ? 'blokk' : ''}>
+                { avbrytFeilet && <p>Beklager, det oppstod en feil. Prøv igjen litt senere.</p>}
+            </div>
+            <div>
+                <button disabled={avbryter} className="rammeknapp js-avbryt" onClick={() => {
+                    avbrytMote(mote.moteUuid);
+                }}>Nytt tidspunkt</button>
+            </div>
         </div>
     </div>);
 };
@@ -78,6 +86,9 @@ MotebookingStatus.propTypes = {
             type: PropTypes.string,
         })),
     }),
+    avbrytMote: PropTypes.func,
+    avbryter: PropTypes.bool,
+    avbrytFeilet: PropTypes.bool,
 };
 
 export default MotebookingStatus;

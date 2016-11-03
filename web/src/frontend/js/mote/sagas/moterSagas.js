@@ -23,8 +23,22 @@ export function* hentMoter(action) {
     }
 }
 
+export function* avbrytMote(action) {
+    yield put(actions.avbryterMote(action.uid));
+    try {
+        yield call(post, `${window.SYFO_SETTINGS.MOTEADMIN_REST_ROOT}/mote/${action.uid}/avbryt`);
+        yield put(actions.moteAvbrutt(action.uid));
+    } catch (e) {
+        yield put(actions.avbrytMoteFeilet());
+    }
+}
+
 function* watchOpprettMote() {
     yield* takeEvery('OPPRETT_MOTE_FORESPURT', opprettMote);
+}
+
+function* watchAvbrytMote() {
+    yield* takeEvery('AVBRYT_MOTE_FORESPURT', avbrytMote);
 }
 
 function* watchHentMoter() {
@@ -35,5 +49,6 @@ export default function* moterSagas() {
     yield [
         fork(watchOpprettMote),
         fork(watchHentMoter),
+        fork(watchAvbrytMote),
     ];
 }
