@@ -14,7 +14,7 @@ export class MotebookingSide extends Component {
     }
 
     render() {
-        const { henter, hentingFeilet, mote } = this.props;
+        const { henter, hentingFeilet, mote, avbrytMote, avbryter, avbrytFeilet } = this.props;
         return (<Side tittel="Møtebooking">
             {
                 (() => {
@@ -25,7 +25,7 @@ export class MotebookingSide extends Component {
                         return <Feilmelding />;
                     }
                     if (mote) {
-                        return <MotebookingStatus mote={mote} />;
+                        return <MotebookingStatus mote={mote} avbrytMote={avbrytMote} avbryter={avbryter} avbrytFeilet={avbrytFeilet} />;
                     }
                     return <MotebookingSkjema {...this.props} />;
                 })()
@@ -40,19 +40,26 @@ MotebookingSide.propTypes = {
     hentMoter: PropTypes.func,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
+    avbrytMote: PropTypes.func,
+    avbryter: PropTypes.bool,
+    avbrytFeilet: PropTypes.bool,
 };
 
 export const mapStateToProps = (state) => {
     const fnr = state.navbruker.data.fnr;
-    const mote = state.moter.data && state.moter.data.length > 0 ? state.moter.data[0] : undefined;
+    const aktivtMote = state.moter.data.filter((mote) => {
+        return mote.status !== 'AVBRUTT';
+    })[0];
 
     return {
         fnr,
-        mote,
+        mote: aktivtMote,
         henter: state.moter.henter,
         sender: state.moter.sender,
+        avbryter: state.moter.avbryter,
         hentingFeilet: state.moter.hentingFeilet,
         sendingFeilet: state.moter.sendingFeilet,
+        avbrytFeilet: state.moter.avbrytFeilet,
     };
 };
 

@@ -14,6 +14,8 @@ export default function moter(state = defaultState, action) {
                 hentingFeilet: false,
                 sender: true,
                 sendingFeilet: false,
+                avbryter: false,
+                avbrytFeilet: false,
             });
         }
         case 'MOTE_OPPRETTET': {
@@ -27,6 +29,8 @@ export default function moter(state = defaultState, action) {
                 hentingFeilet: false,
                 sender: false,
                 sendingFeilet: false,
+                avbryter: false,
+                avbrytFeilet: false,
             });
         }
         case 'OPPRETT_MOTE_FEILET': {
@@ -35,6 +39,8 @@ export default function moter(state = defaultState, action) {
                 hentingFeilet: false,
                 sender: false,
                 sendingFeilet: true,
+                avbryter: false,
+                avbrytFeilet: false,
             });
         }
         case 'HENTER_MOTER': {
@@ -44,6 +50,8 @@ export default function moter(state = defaultState, action) {
                 henter: true,
                 hentingFeilet: false,
                 sendingFeilet: false,
+                avbryter: false,
+                avbrytFeilet: false,
             };
         }
         case 'MOTER_HENTET': {
@@ -53,6 +61,8 @@ export default function moter(state = defaultState, action) {
                 henter: false,
                 hentingFeilet: false,
                 sendingFeilet: false,
+                avbryter: false,
+                avbrytFeilet: false,
             };
         }
         case 'HENT_MOTER_FEILET': {
@@ -62,7 +72,35 @@ export default function moter(state = defaultState, action) {
                 sendingFeilet: false,
                 henter: false,
                 hentingFeilet: true,
+                avbryter: false,
+                avbrytFeilet: false,
             };
+        }
+        case 'AVBRYTER_MOTE': {
+            return Object.assign({}, state, {
+                avbryter: true,
+                avbrytFeilet: false,
+            });
+        }
+        case 'AVBRYT_MOTE_FEILET': {
+            return Object.assign({}, state, {
+                avbrytFeilet: true,
+                avbryter: false,
+            });
+        }
+        case 'MOTE_AVBRUTT': {
+            const data = state.data.map((mote) => {
+                if (mote.moteUuid === action.uuid) {
+                    return Object.assign({}, mote, {
+                        status: 'AVBRUTT',
+                    });
+                }
+                return mote;
+            });
+            return Object.assign({}, state, { data }, {
+                avbryter: false,
+                avbrytFeilet: false,
+            });
         }
         default: {
             return state;

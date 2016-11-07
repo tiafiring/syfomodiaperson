@@ -1,16 +1,20 @@
-.knapp {
-    border: 0;
+.knappBase() {
     text-transform: uppercase;
     font-weight: 600;
+    font-family: @Profilfont; 
+    font-size: 1em;
+    border-radius: .125em;
+    cursor: pointer;
+    letter-spacing: .0625em;
+    line-height: 1;
+}
+
+.knapp {
+    .knappBase();
+    border: 0;
     color: #fff;
     background-color: #0067c5;
     padding: .5em 2.5em .75em 2.5em;
-    font-family: @Profilfont; 
-    font-size: 1em;
-    letter-spacing: .0625em;
-    border-radius: .125em;
-    cursor: pointer;
-    line-height: 1;
     box-shadow: 0 -.125em 0 @FargeTekst inset;
 
     &:active, &:active:hover, &:active:focus {
@@ -46,6 +50,36 @@
         transform: none;
     }
 
+}
+
+.rammeknapp {
+    .knappBase();
+    border: 2px solid #0067c5;
+    color: #0067c5;
+    background-color: transparent;
+    padding: ~'calc(.5em - 2px) calc(2.5em - 2px) calc(.75em - 2px) calc(2.5em - 2px)';
+
+    &:hover {
+        background-color: #0067c5;
+        color: #fff;
+    }
+
+    &:active {
+        background-color: #005b82;
+        border-color: #005b82;
+        color: #fff;
+        transform: translateY(.125em);
+    }
+
+    &:focus {
+        box-shadow:  0 0 0 .1875em @FargeFokus;
+    }
+
+    &:disabled {
+        background-color: @FargeInaktiv;
+        border-color: @FargeInaktiv;
+        color: #fff;
+    }
 }
 
 .knapp--liten {

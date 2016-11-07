@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { opprettMote, hentMoter } from '../../../js/mote/sagas/moterSagas.js';
+import { opprettMote, hentMoter, avbrytMote } from '../../../js/mote/sagas/moterSagas.js';
 import { post, get } from '../../../js/api';
 import { put, call } from 'redux-saga/effects';
 
@@ -63,7 +63,28 @@ describe("moterSagas", () => {
             expect(generator.next([{id: 1}]).value).to.deep.equal(nextPut);
         });        
 
-
     })
+
+    describe("avbrytMote", () => {
+        const generator = avbrytMote({
+            uuid: "min-fine-mote-uuid"
+        });
+
+        it("Skal dispatche AVBRYTER_MOTE", () => {
+            const nextPut = put({type: 'AVBRYTER_MOTE', uuid: "min-fine-mote-uuid"});
+            expect(generator.next().value).to.deep.equal(nextPut);
+        });
+
+        it("Skal poste til REST-tjenesten", () => {
+            const nextCall = call(post, "http://tjenester.nav.no/moteadmin/mote/min-fine-mote-uuid/avbryt");
+            expect(generator.next().value).to.deep.equal(nextCall);
+        });
+
+        it("Skal dispatche MOTE_AVBRUTT", () => {
+            const nextPut = put({type: 'MOTE_AVBRUTT', uuid: "min-fine-mote-uuid"});
+            expect(generator.next().value).to.deep.equal(nextPut);
+        });
+
+    });
 
 });

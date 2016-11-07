@@ -51,3 +51,30 @@ export function hentMoterFeilet() {
         type: 'HENT_MOTER_FEILET',
     };
 }
+
+export function avbrytMote(uuid) {
+    return {
+        type: 'AVBRYT_MOTE_FORESPURT',
+        uuid,
+    };
+}
+
+export function moteAvbrutt(uuid) {
+    return {
+        type: 'MOTE_AVBRUTT',
+        uuid,
+    };
+}
+
+export function avbrytMoteFeilet() {
+    return {
+        type: 'AVBRYT_MOTE_FEILET',
+    };
+}
+
+export function avbryterMote(uuid) {
+    return {
+        type: 'AVBRYTER_MOTE',
+        uuid,
+    };
+}
