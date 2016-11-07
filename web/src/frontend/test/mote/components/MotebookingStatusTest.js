@@ -29,7 +29,7 @@ describe("MotebookingStatus", () => {
 
     it("Skal inneholde en varselstripe", () => {
         const component = shallow(<MotebookingStatus mote={mote} />);
-        expect(component.contains(<Varselstripe epost="***REMOVED***" />)).to.be.true;
+        expect(component.find(Varselstripe)).to.have.length(1);
     });
 
     it("Skal vise sted", () => {

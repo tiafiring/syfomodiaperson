@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { pad, getTidFraZulu } from '../../../js/mote/utils';
+import { pad, getTidFraZulu, getDatoFraZulu } from '../../../js/mote/utils';
 
 describe("utils", () => {
 
@@ -34,6 +34,13 @@ describe("utils", () => {
             expect(s).to.equal("03.11.2016 kl. 12.47");
         }); 
 
+    });
+
+    describe("getDatoFraZulu", () => {
+        it("Skal returnere dato på lesbart format", () => {
+            const s = getDatoFraZulu("2016-11-03T11:47:04.673Z");
+            expect(s).to.equal("03.11.2016");
+        }); 
     })
 
 });

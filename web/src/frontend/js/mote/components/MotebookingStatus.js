@@ -1,28 +1,31 @@
 import React, { PropTypes } from 'react';
 import MotebookingIkon from './MotebookingIkon';
-import { getTidFraZulu } from '../utils';
+import { getTidFraZulu, getDatoFraZulu } from '../utils';
 
-export const Varselstripe = ({ epost }) => {
+export const Varselstripe = ({ navn, dato }) => {
     return (<div className="panel">
         <div className="varselstripe varselstripe--suksess">
             <div className="varselstripe__ikon">
                 <img src="/sykefravaer/img/svg/suksess.svg" />
             </div>
-            <p className="sist">Møteforespørselen er sendt til {epost}</p>
+            <p className="typo-element">Møteforespørselen er sendt til {navn}</p>
+            <p className="sist">Sendt: {dato}</p>
         </div>
     </div>);
 };
 
 Varselstripe.propTypes = {
-    epost: PropTypes.string,
+    navn: PropTypes.string,
+    dato: PropTypes.string,
 };
 
 const MotebookingStatus = ({ mote, avbrytMote, avbryter, avbrytFeilet }) => {
     const { tidOgStedAlternativer, deltakere } = mote;
-    const deltakerEpost = deltakere ? deltakere[0].epost : '?';
+    const deltakerNavn = deltakere ? deltakere[0].navn : '?';
+    const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
 
     return (<div>
-        <Varselstripe epost={deltakerEpost} />
+        <Varselstripe navn={deltakerNavn} dato={sendtDato} />
         <div className="panel">
             <header className="sidetopp">
                 <h2 className="sidetopp__tittel">Status for møteforespørselen</h2>
