@@ -15,7 +15,7 @@ export class MotebookingSide extends Component {
 
     render() {
         const { henter, hentingFeilet, mote, avbrytMote, avbryter, avbrytFeilet } = this.props;
-        return (<Side tittel="Møtebooking">
+        return (<Side tittel="Møteplanlegger">
             {
                 (() => {
                     if (henter) {
