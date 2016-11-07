@@ -61,12 +61,12 @@ describe("NaermesteLedere", () => {
 
     it("Skal vise riktig tittel dersom det er ingen ledere", () => {
         const compo = render(<NaermesteLedere ledere={ledere} navbruker={navbruker} />);
-        expect(compo.find(".js-tittel").text()).to.equal("Nærmeste ledere med personalansvar");
+        expect(compo.find(".js-sidetopp").text()).to.equal("Nærmeste ledere med personalansvar");
     }); 
 
     it("Skal vise riktig tittel dersom det er ingen ledere", () => {
         const compo = render(<NaermesteLedere ledere={[]} navbruker={navbruker} />);
-        expect(compo.find(".js-tittel").text()).to.equal("Nærmeste leder med personalansvar");
+        expect(compo.find(".js-sidetopp").text()).to.equal("Nærmeste leder med personalansvar");
     }); 
 
     it("Skal vise riktig tittel dersom det er én leder", () => {
@@ -81,7 +81,7 @@ describe("NaermesteLedere", () => {
             fodselsdato: "08.02.1975"
         }]
         const compo = render(<NaermesteLedere ledere={ledere2} navbruker={navbruker} />);
-        expect(compo.find(".js-tittel").text()).to.equal("Nærmeste leder med personalansvar");
+        expect(compo.find(".js-sidetopp").text()).to.equal("Nærmeste leder med personalansvar");
     }); 
 
 });

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import MotebookingIkon from './MotebookingIkon';
 import { getTidFraZulu, getDatoFraZulu } from '../utils';
+import Sidetopp from '../../components/Sidetopp';
 
 export const Varselstripe = ({ navn, dato }) => {
     return (<div className="panel">
@@ -27,9 +28,7 @@ const MotebookingStatus = ({ mote, avbrytMote, avbryter, avbrytFeilet }) => {
     return (<div>
         <Varselstripe navn={deltakerNavn} dato={sendtDato} />
         <div className="panel">
-            <header className="sidetopp">
-                <h2 className="sidetopp__tittel">Status for møteforespørselen</h2>
-            </header>
+            <Sidetopp tittel="Status for møteforespørselen" />
             <h2 className="typo-undertittel blokk--s">Møtested</h2>
             <p className="blokk--l">{tidOgStedAlternativer[0].sted}</p>
             <table className="motestatus blokk--l">

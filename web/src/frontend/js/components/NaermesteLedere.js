@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Sidetopp from './Sidetopp';
 
 const Leder = ({ arbeidsgiver, epost, navn, tlf, fodselsdato }) => {
     return (<div className="rad--adskilt naermesteLeder js-leder">
@@ -46,7 +47,7 @@ Leder.propTypes = {
 const NaermesteLedere = ({ ledere = [], navbruker }) => {
     const tittel = ledere.length > 1 ? 'Nærmeste ledere med personalansvar' : 'Nærmeste leder med personalansvar';
     return (<div className="panel">
-        <h2 className="typo-innholdstittel js-tittel">{tittel}</h2>
+        <Sidetopp tittel={tittel} />
         <p>*kan kontaktes av NAV i forbindelse med oppfølging</p>
         <div className="naermesteLedere">
             {

@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import TextField from '../../components/TextField';
 import Tidspunkter from './Tidspunkter';
+import Sidetopp from '../../components/Sidetopp';
 
 export function genererDato(dato, klokkeslett) {
     const s = new Date();
@@ -45,10 +46,7 @@ export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, send
     };
 
     return (<form className="panel" onSubmit={handleSubmit(submit)}>
-        <header className="sidetopp">
-            <h3 className="sidetopp__tittel">Møteforespørsel</h3>
-        </header>
-
+        <Sidetopp tittel="Møteforespørsel" />
         <fieldset className="blokk--xl js-arbeidsgiver">
             <legend>1. Fyll inn arbeidsgiverens opplysninger</legend>
             <div className="navInput blokk--xl">
