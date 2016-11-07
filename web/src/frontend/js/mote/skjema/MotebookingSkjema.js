@@ -82,7 +82,6 @@ export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, send
         <div className="knapperad">
             <input type="submit" className="knapp" value="Send" disabled={sender} />
         </div>
-
     </form>);
 };
 

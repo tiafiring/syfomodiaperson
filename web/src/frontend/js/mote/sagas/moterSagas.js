@@ -45,10 +45,15 @@ function* watchHentMoter() {
     yield* takeEvery('HENT_MOTER_FORESPURT', hentMoter);
 }
 
+function * watchMoteOpprettet() {
+    yield* takeEvery('MOTE_OPPRETTET', hentMoter);
+}
+
 export default function* moterSagas() {
     yield [
         fork(watchOpprettMote),
         fork(watchHentMoter),
         fork(watchAvbrytMote),
+        fork(watchMoteOpprettet),
     ];
 }
