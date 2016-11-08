@@ -13,6 +13,11 @@
         <ear groupId="no.nav.sbl.dialogarena" artifactId="modiasyfofront-ear"/>
     </artifacts>
 
+    <security serviceUserResourceAlias="srvmodiasyfofront">
+        <logins>
+            <spnego/>
+        </logins>
+    </security>
 
     <resources>
         <baseUrl alias="modapp" mapToProperty="modapp"/>

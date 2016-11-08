@@ -17,6 +17,7 @@
             <module name="javaee.api"/>
         </exclusions>
         <dependencies>
+            <module name="org.jboss.security.negotiation" />
             <module name="sun.jdk"/>
             <system>
                 <paths>

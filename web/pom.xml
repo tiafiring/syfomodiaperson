@@ -72,6 +72,17 @@
             <groupId>no.nav.sbl.dialogarena</groupId>
             <artifactId>common-test</artifactId>
         </dependency>
+        <dependency>
+            <groupId>no.nav.modig</groupId>
+            <artifactId>modig-security-loginmodule</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>no.nav.modig</groupId>
+            <artifactId>modig-security-loginmodule</artifactId>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <build>
