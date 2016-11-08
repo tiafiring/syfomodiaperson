@@ -6,14 +6,14 @@ import { Varselstripe } from 'digisyfo-npm';
 
 const MotebookingStatus = ({ mote, avbrytMote, avbryter, avbrytFeilet }) => {
     const { tidOgStedAlternativer, deltakere } = mote;
-    const deltakerNavn = deltakere ? deltakere[0].navn : '?';
+    const deltakerEpost = deltakere ? deltakere[0].epost : '?';
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
 
     return (<div>
         <div className="panel">
             <Varselstripe type="suksess">
                 <div>
-                    <p className="typo-element">Møteforespørselen er sendt til {deltakerNavn}</p>
+                    <p className="typo-element">Møteforespørselen er sendt til {deltakerEpost}</p>
                     <p className="sist">Sendt: {sendtDato}</p>
                 </div>
             </Varselstripe>
