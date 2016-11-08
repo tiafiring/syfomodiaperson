@@ -6,7 +6,7 @@ const getPort = () => {
 };
 
 const ContextholderConnection = () => {
-    return new WebSocket(`${window.SYFO_SETTINGS.WEBSOCKET_PROTOCOL}://${window.location.hostname}${getPort()}/eventdistributer/websocket`);
+    return new WebSocket(`${window.APP_SETTINGS.WEBSOCKET_PROTOCOL}://${window.location.hostname}${getPort()}/eventdistributer/websocket`);
 };
 
 const opprettWebsocketConnection = (callback) => {

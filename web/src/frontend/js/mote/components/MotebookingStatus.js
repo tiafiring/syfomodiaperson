@@ -2,23 +2,7 @@ import React, { PropTypes } from 'react';
 import MotebookingIkon from './MotebookingIkon';
 import { getTidFraZulu, getDatoFraZulu } from '../utils';
 import Sidetopp from '../../components/Sidetopp';
-
-export const Varselstripe = ({ navn, dato }) => {
-    return (<div className="panel">
-        <div className="varselstripe varselstripe--suksess">
-            <div className="varselstripe__ikon">
-                <img src="/sykefravaer/img/svg/suksess.svg" />
-            </div>
-            <p className="typo-element">Møteforespørselen er sendt til {navn}</p>
-            <p className="sist">Sendt: {dato}</p>
-        </div>
-    </div>);
-};
-
-Varselstripe.propTypes = {
-    navn: PropTypes.string,
-    dato: PropTypes.string,
-};
+import { Varselstripe } from 'digisyfo-npm';
 
 const MotebookingStatus = ({ mote, avbrytMote, avbryter, avbrytFeilet }) => {
     const { tidOgStedAlternativer, deltakere } = mote;
@@ -26,7 +10,15 @@ const MotebookingStatus = ({ mote, avbrytMote, avbryter, avbrytFeilet }) => {
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
 
     return (<div>
-        <Varselstripe navn={deltakerNavn} dato={sendtDato} />
+        <div className="panel">
+            <Varselstripe type="suksess">
+                <div>
+                    <p className="typo-element">Møteforespørselen er sendt til {deltakerNavn}</p>
+                    <p className="sist">Sendt: {sendtDato}</p>
+                </div>
+            </Varselstripe>
+        </div>
+        
         <div className="panel">
             <Sidetopp tittel="Status for møteforespørselen" />
             <h2 className="typo-undertittel blokk--s">Møtested</h2>

@@ -1,8 +1,9 @@
 import { expect } from 'chai';
-import MotebookingStatus, { Varselstripe } from '../../../js/mote/components/MotebookingStatus'
+import MotebookingStatus from '../../../js/mote/components/MotebookingStatus'
 import { mount, shallow } from 'enzyme';
 import React from 'react'
 import sinon from 'sinon';
+import { Varselstripe } from 'digisyfo-npm';
 
 describe("MotebookingStatus", () => {
 

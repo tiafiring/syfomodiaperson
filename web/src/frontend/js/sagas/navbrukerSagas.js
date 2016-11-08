@@ -5,7 +5,7 @@ import { get } from '../api';
 export function* hentNavbruker(action) {
     yield put({ type: 'HENTER_NAVBRUKER' });
     try {
-        const data = yield call(get, `${window.SYFO_SETTINGS.REST_ROOT}/brukerinfo?fnr=${action.fnr}`);
+        const data = yield call(get, `${window.APP_SETTINGS.REST_ROOT}/brukerinfo?fnr=${action.fnr}`);
         yield put({ type: 'NAVBRUKER_HENTET', data });
     } catch (e) {
         yield put({ type: 'HENT_NAVBRUKER_FEILET' });
@@ -15,7 +15,7 @@ export function* hentNavbruker(action) {
 export function* sjekkTilgangMoteadmin() {
     yield put({ type: 'SJEKKER_TILGANG_MOTEADMIN' });
     try {
-        const data = yield call(get, `${window.SYFO_SETTINGS.REST_ROOT}/toggle/tilgangmoteadmin`);
+        const data = yield call(get, `${window.APP_SETTINGS.REST_ROOT}/toggle/tilgangmoteadmin`);
         yield put({ type: 'TILGANG_MOTEMODUL_HENTET', data });
     } catch (e) {
         yield put({ type: 'TILGANG_MOTEMODUL_FEILET' });

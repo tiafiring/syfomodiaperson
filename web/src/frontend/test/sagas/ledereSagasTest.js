@@ -3,7 +3,7 @@ import { hentLedere } from '../../js/sagas/ledereSagas.js';
 import { get } from '../../js/api';
 import { put, call } from 'redux-saga/effects';
 
-window.SYFO_SETTINGS = {
+window.APP_SETTINGS = {
     REST_ROOT: "http://tjenester.nav.no/sykefravaer"
 }
 
