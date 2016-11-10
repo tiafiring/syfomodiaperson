@@ -1,5 +1,24 @@
-@digisyfoBaseUrl: "../node_modules/digisyfo-npm/less";
 @modigFrontendBaseUrl: "../node_modules/modig-frontend/modig-frontend-ressurser/src/main/resources/less";
+
+@import "@{modigFrontendBaseUrl}/includes/variables";
+
+@modig-frontend-images-root-url: "/sykefravaer/img/modig-frontend";
+
+@import "@{modigFrontendBaseUrl}/includes/mixins/mixins-grid";
+@import "@{modigFrontendBaseUrl}/includes/mixins/mixins-knapper";
+@import "@{modigFrontendBaseUrl}/includes/mixins/mixins-typografi";
+@import "@{modigFrontendBaseUrl}/includes/mixins/mixins-utils";
+
+@import "@{modigFrontendBaseUrl}/includes/mixins/mixins-utils";
+
+@import "@{modigFrontendBaseUrl}/nav_extra/paneler";
+@import "@{modigFrontendBaseUrl}/nav_extra/hoder";
+@import "@{modigFrontendBaseUrl}/nav_extra/utilities";
+@import "@{modigFrontendBaseUrl}/nav_extra/knapperader";
+@import "@{modigFrontendBaseUrl}/nav_extra/skjema";
+@import "@{modigFrontendBaseUrl}/nav_extra/modaler";
+@import "@{modigFrontendBaseUrl}/nav_extra/hjelpetekst";
+@import "@{modigFrontendBaseUrl}/nav_extra/validering";
 
 @import "vendor/_normalize";
 @import "vendor/_loader";
@@ -7,8 +26,6 @@
 @import "_variables";
 @import "_modus";
 @import "_app";
-@import "_typografi";
-@import "_lenker";
 @import "_layout"; 
 @import "_naermesteLedere";
 @import "_brukerInfo";
@@ -16,12 +33,40 @@
 @import "_opplysninger";
 @import "_navigasjon";
 @import "_inngangspanel";
-@import "_skjema";
 @import "_motestatus";
 @import "_utils";
 @import "_varselstripe";
-@import "_datovelger";
 @import "_knapper";
 @import "_avstander";
-@import "_hoder";
+@import "_lenker";
 @import "_sidetopp";
+@import "_tidslinjeBoble";
+@import "_tidslinjeHendelse";
+@import "_radiofaner";
+@import "_til-modig-frontend";
+
+
+
+.mixin-panel-padding() {
+    padding-left: 1rem; 
+    padding-right: 1rem; 
+
+    @media(min-width: @screen-xs) {
+        padding-left: 2rem; 
+        padding-right: 2rem; 
+    }
+}
+
+.redaksjonelt-innhold {
+
+    // Brukes på redaktørstyrt HTML.
+
+    line-height: 1.6; 
+
+    h2, h3, h4 {
+        .mixin-typo-element(); 
+        margin-top: 20px;
+        margin-bottom: 0; 
+    }
+
+}

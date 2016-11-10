@@ -1,0 +1,29 @@
+.radiofaner {
+  display: flex; 
+  justify-content: center;
+}
+
+.radiofaner__valg {
+  list-style-type: none;
+  padding: 0;
+}
+
+.nav-radioknapp--mork + label:before {
+  border-color: @color-text;
+}
+
+@media(min-width: @screen-xs) {
+  .radiofaner__valg {
+
+    display: flex;
+
+    li {
+      list-style-type: none;
+      margin-right: 2rem;
+    }
+
+    li:last-child {
+      margin-right: 0;
+    }
+  }
+}

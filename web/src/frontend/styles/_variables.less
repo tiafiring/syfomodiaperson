@@ -1,11 +1,15 @@
 @FargeBorder: #b7b1a9;
 @FargeBorderLys: #f8f8f8;
 @FargeLenke: #0067c6;
+@FargeLenkeNegativ: #66cbec;
 @FargeFokus: #ffbd66;
 @FargeEtikett: #7f756c;
 @FargeTekst: #101010;
 @FargeNavigasjonAktiv: #3E3832;
-@FargeInaktiv: @FargeBorder;
+@FargeTooltip: #3e3832;
+
+@FargeInaktiv: darken(@FargeBorder, 30%);
+@FargePlaceholder: @FargeBorder;
 
 @FargeFeil: #ba3a26;
 @FargeSuksess: green;
@@ -13,25 +17,3 @@
 
 @Profilfont: Modus, Arial, Sans-serif;
 @Standardfont: Arial, Sans-serif;
-
-@color-focus: @FargeFokus;
-@rem-as-14px: 1em;
-@color-inactive: #ccc;
-@color-link: @FargeLenke;
-@color-border: @FargeBorder;
-@color-background: #999999;
-@color-text: @FargeTekst;
-@red-nav: red;
-@rem-as-24px: 24em/16;
-@white: #fff;
-@modig-frontend-images-root-url: '';
-
-input.datovelger {
-    width: 8em;
-}
-
-.nav-datovelger {
-    .month {
-        margin: 0;
-    }
-}

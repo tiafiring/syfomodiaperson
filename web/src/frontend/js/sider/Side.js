@@ -3,7 +3,7 @@ import NavbrukerinfoContainer from '../containers/NavbrukerinfoContainer';
 import GlobalNavigasjonContainer from '../containers/GlobalNavigasjonContainer';
 const DocumentTitle = require('react-document-title');
 
-const Side = ({ tittel, children }) => {
+const Side = ({ tittel = '', children }) => {
     return (<DocumentTitle title={tittel + (tittel.length > 0 ? ' - Sykefravær' : 'Sykefravær')}>
         <div className="container">
             <NavbrukerinfoContainer />

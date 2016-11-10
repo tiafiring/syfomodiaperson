@@ -18,7 +18,6 @@ const MotebookingStatus = ({ mote, avbrytMote, avbryter, avbrytFeilet }) => {
                 </div>
             </Varselstripe>
         </div>
-        
         <div className="panel">
             <Sidetopp tittel="Status for møteforespørselen" />
             <h2 className="typo-undertittel blokk--s">Møtested</h2>

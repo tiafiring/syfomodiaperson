@@ -1,23 +1,17 @@
-.brukerInfo {
+.brukerinfo {
     margin-bottom: 2em;
     border-bottom: 1px solid @FargeBorder;
 
     h3 {
-        .typo-etikett-liten;
+        .mixin-typo-etikett-liten();
+        color: @gray-inactive;
+    }
+
+    p {
+        margin-top: 0;
     }
 }
 
-.brukerinfo_arbeidssituasjoner {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-
-    li {
-        display: inline-block;
-        margin-right: 3em;
-    }
-
-    li:last-child {
-        margin-right: 0;
-    }
+.brukerinfo__navn {
+    .mixin-typo-innholdstittel();
 }

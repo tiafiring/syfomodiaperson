@@ -47,23 +47,23 @@ export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, send
 
     return (<form className="panel" onSubmit={handleSubmit(submit)}>
         <Sidetopp tittel="Møteforespørsel" />
-        <fieldset className="blokk--xl js-arbeidsgiver">
+        <fieldset className="skjema-fieldset blokk--xl js-arbeidsgiver">
             <legend>1. Fyll inn arbeidsgiverens opplysninger</legend>
             <div className="navInput blokk--xl">
                 <label htmlFor="navn">Nærmeste leders navn</label>
-                <Field id="navn" component={TextField} name="deltakere[0].navn" className="input--xxl" />
+                <Field id="navn" component={TextField} name="deltakere[0].navn" className="input-xxl" />
             </div>
             <div className="navInput">
                 <label htmlFor="epost">E-post</label>
-                <Field id="epost" component={TextField} type="email" name="deltakere[0].epost" className="input--xxl" />
+                <Field id="epost" component={TextField} type="email" name="deltakere[0].epost" className="input-xxl" />
             </div>
         </fieldset>
 
-        <fieldset className="blokk--xl">
+        <fieldset className="skjema-fieldset blokk--xl">
             <legend>2. Velg dato, tid og sted</legend>
             <Tidspunkter />
             <label htmlFor="sted">Sted</label>
-            <Field id="sted" component={TextField} name="sted" className="input--xxl js-sted" placeholder="Skriv møtested eller om det er et videomøte" />
+            <Field id="sted" component={TextField} name="sted" className="input-xxl js-sted" placeholder="Skriv møtested eller om det er et videomøte" />
         </fieldset>
 
         <div aria-live="polite" role="alert">

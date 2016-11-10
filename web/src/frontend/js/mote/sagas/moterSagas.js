@@ -9,7 +9,6 @@ export function* opprettMote(action) {
         yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.fnr}/opprett`, action.data);
         yield put(actions.moteOpprettet(action.data, action.fnr));
     } catch (e) {
-        console.log("err", e);
         yield put(actions.opprettMoteFeilet());
     }
 }
@@ -20,7 +19,6 @@ export function* hentMoter(action) {
         const data = yield call(get, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.fnr}`);
         yield put(actions.moterHentet(data));
     } catch (e) {
-        console.log("err", e);
         yield put(actions.hentMoterFeilet());
     }
 }
@@ -31,7 +29,6 @@ export function* avbrytMote(action) {
         yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/mote/${action.uuid}/avbryt`);
         yield put(actions.moteAvbrutt(action.uuid));
     } catch (e) {
-        console.log("err", e);
         yield put(actions.avbrytMoteFeilet());
     }
 }

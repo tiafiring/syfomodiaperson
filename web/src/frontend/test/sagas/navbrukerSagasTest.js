@@ -3,11 +3,13 @@ import { hentNavbruker, sjekkTilgangMoteadmin } from '../../js/sagas/navbrukerSa
 import { get } from '../../js/api';
 import { put, call } from 'redux-saga/effects';
 
-window.APP_SETTINGS = {
-    REST_ROOT: "http://tjenester.nav.no/sykefravaer"
-}
-
 describe("navbrukerSagas", () => {
+
+    beforeEach(() => {
+        window.APP_SETTINGS = {
+            REST_ROOT: "http://tjenester.nav.no/sykefravaer"
+        }
+    })
 
     describe("hentNavbruker", () => {
         const generator = hentNavbruker({

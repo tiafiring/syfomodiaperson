@@ -3,11 +3,13 @@ import { hentLedere } from '../../js/sagas/ledereSagas.js';
 import { get } from '../../js/api';
 import { put, call } from 'redux-saga/effects';
 
-window.APP_SETTINGS = {
-    REST_ROOT: "http://tjenester.nav.no/sykefravaer"
-}
-
 describe("ledereSagas", () => {
+
+    beforeEach(() => {
+        window.APP_SETTINGS = {
+            REST_ROOT: "http://tjenester.nav.no/sykefravaer"
+        }
+    });
 
     const generator = hentLedere({
         fnr: "55"
