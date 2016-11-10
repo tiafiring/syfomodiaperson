@@ -1,14 +1,17 @@
 import React, { PropTypes } from 'react';
 import Sidetopp from './Sidetopp';
 
-const Leder = ({ arbeidsgiver, epost, navn, tlf, fodselsdato }) => {
+const Leder = ({ erOppgitt, arbeidsgiver, epost, navn, tlf }) => {
     return (<div className="naermesteLeder js-leder">
             <div className="grid">
                 <div className="unit full">
                     <h3>{arbeidsgiver.navn}</h3>
                 </div>
             </div>
-            <div className="grid">
+            {
+                (() => {
+                    if (erOppgitt) {
+                        return (<div><div className="grid">
                 <div className="unit one-third">
                     <h4>Navn</h4>
                     <p>{navn}</p>
@@ -31,9 +34,12 @@ const Leder = ({ arbeidsgiver, epost, navn, tlf, fodselsdato }) => {
                     <h4>Org. nummer</h4>
                     <p>{arbeidsgiver.orgnummer}</p>
                 </div>
-            </div>
-        </div>
-    );
+            </div></div>);
+                    }
+                    return <p className="naermesteLeder__ikkeOppgitt">Nærmeste leder ikke meldt inn av arbeidsgiver</p>;
+                })()
+            }
+        </div>);
 };
 
 Leder.propTypes = {
@@ -41,7 +47,7 @@ Leder.propTypes = {
     epost: PropTypes.string,
     navn: PropTypes.string,
     tlf: PropTypes.string,
-    fodselsdato: PropTypes.string,
+    erOppgitt: PropTypes.bool,
 };
 
 const NaermesteLedere = ({ ledere = [], navbruker }) => {
