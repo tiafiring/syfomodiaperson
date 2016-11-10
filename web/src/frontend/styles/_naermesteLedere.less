@@ -13,10 +13,27 @@
 .naermesteLeder {
     padding-right: 3em;
     position: relative;
-    cursor: pointer;
+    border-top: 1px solid @color-border;
+    padding-bottom: 1.5em;
+    padding-top: 1em;
+
+    &:last-child {
+        border-bottom: 1px solid @color-border;
+    }
 
     h3 {
+        .mixin-typo-element();
+        margin: 0;
+        margin-bottom: .5em;
+        display: flex;
+        text-transform: uppercase;
+    }
+
+    h4 {
         .mixin-typo-etikett-liten();
+        margin-top: 0;
+        margin-bottom: .5em;
+        .nedtonet;
     }
 }
 
