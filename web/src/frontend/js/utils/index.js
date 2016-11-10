@@ -1,4 +1,3 @@
-//denne burde kanskje over i digisyfo-npm
 const kortManeder = ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'des'];
 
 

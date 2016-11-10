@@ -12,30 +12,32 @@ const Leder = ({ erOppgitt, arbeidsgiver, epost, navn, tlf, fomDato }) => {
             {
                 (() => {
                     if (erOppgitt) {
-                        return (<div><div className="grid">
-                <div className="unit one-third">
-                    <h4>Navn</h4>
-                    <p>{navn}</p>
+                        return (<div>
+                <div className="grid">
+                    <div className="unit one-third">
+                        <h4>Navn</h4>
+                        <p>{navn}</p>
+                    </div>
+                    <div className="unit two-thirds">
+                        <h4>E-post</h4>
+                        <p><a href={`mailto:${epost}`}>{epost}</a></p>
+                    </div>
                 </div>
-                <div className="unit two-thirds">
-                    <h4>E-post</h4>
-                    <p><a href={`mailto:${epost}`}>{epost}</a></p>
+                <div className="grid">
+                    <div className="unit one-third">
+                        <h4>Telefon</h4>
+                        <p>{tlf}</p>
+                    </div>
+                    <div className="unit one-third">
+                        <h4>Meldt inn</h4>
+                        <p>{visDato(fomDato)}</p>
+                    </div>
+                    <div className="unit one-third">
+                        <h4>Org. nummer</h4>
+                        <p>{arbeidsgiver.orgnummer}</p>
+                    </div>
                 </div>
-            </div>
-            <div className="grid">
-                <div className="unit one-third">
-                    <h4>Telefon</h4>
-                    <p>{tlf}</p>
-                </div>
-                <div className="unit one-third">
-                    <h4>Meldt inn</h4>
-                    <p>{visDato(fomDato)}</p>
-                </div>
-                <div className="unit one-third">
-                    <h4>Org. nummer</h4>
-                    <p>{arbeidsgiver.orgnummer}</p>
-                </div>
-            </div></div>);
+            </div>);
                     }
                     return <p className="naermesteLeder__ikkeOppgitt">Nærmeste leder ikke meldt inn av arbeidsgiver</p>;
                 })()
