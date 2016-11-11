@@ -5,7 +5,7 @@ const TextField = (props) => {
 
     return (<div className={meta.touched && meta.error && 'feil'}>
         <input autoComplete="off" placeholder={props.placeholder} type={props.type || 'text'} id={props.id}
-            className={`${props.className} ${(meta.touched && meta.error && 'input--feil')}`} {...props.input} />
+            className={props.className} {...props.input} />
         <p className="skjema-feilmelding" aria-live="polite">{meta.touched && meta.error}</p>
     </div>);
 };

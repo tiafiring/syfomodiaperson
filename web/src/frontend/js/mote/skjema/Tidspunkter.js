@@ -1,6 +1,7 @@
 import React from 'react';
 import TextField from '../../components/TextField';
 import { Field } from 'redux-form';
+import { formaterTid, formaterDato } from '../../utils';
 
 const Tidspunkter = () => {
     const tidspunkter = [{}, {}];
@@ -17,11 +18,15 @@ const Tidspunkter = () => {
                         <div className="grid">
                             <div className="unit half">
                                 <label htmlFor={`dato-${index}`}>Dato</label>
-                                <Field id={`dato-${index}`} component={TextField} name={datoName} className="input--m" placeholder="dd.mm.åååå" />
+                                <Field parse={(e) => {
+                                    return formaterDato(e);
+                                }} id={`dato-${index}`} component={TextField} name={datoName} className="input-m" placeholder="dd.mm.åååå" />
                             </div>
                             <div className="unit half">
                                 <label htmlFor={`klokkeslett-${index}`}>Klokkeslett</label>
-                                <Field id={`klokkeslett-${index}`} component={TextField} name={klokkeslettName} className="input--m" placeholder="F.eks: 09.30" />
+                                <Field parse={(e) => {
+                                    return formaterTid(e);
+                                }} id={`klokkeslett-${index}`} component={TextField} name={klokkeslettName} className="input-m" placeholder="F.eks: 09.30" />
                             </div>
                         </div>
                     </div>
