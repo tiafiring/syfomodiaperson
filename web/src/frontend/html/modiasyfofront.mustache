@@ -19,7 +19,8 @@
             "MOTEADMIN_REST_ROOT": "{{{moteAdminRestRoot}}}",
             "WEBSOCKET_PROTOCOL": "{{{websocketProtocol}}}",
             "CONTEXTHOLDER_ROOT": "{{{contextholderRoot}}}",
-            "APP_ROOT": "/sykefravaer"
+            "APP_ROOT": "/sykefravaer",
+            {{#enableLogging}}"ENABLE_LOGGING": {{{enableLogging}}}{{/enableLogging}}
         };
     </script>
     <script src="{{{buildRoot}}}/{{{bundleFileName}}}?rev={{{timestamp}}}"></script>
