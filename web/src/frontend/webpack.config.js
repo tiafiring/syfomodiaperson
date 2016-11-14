@@ -7,7 +7,7 @@ module.exports = {
     entry: ['babel-polyfill', mainPath, stylesPath],
     output: {
         path: path.resolve(__dirname, "build"),
-        publicPath: "http://localhost:8080/assets/",
+        publicPath: "http://localhost:3040/assets/",
         filename: "bundle.js"
     },
     module: {
