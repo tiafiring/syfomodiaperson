@@ -6,10 +6,8 @@ import React from 'react'
 describe("NaermesteLedere", () => {
 
     const ledere = [{
-        arbeidsgiver: {
-            navn: "BEKK",
-            orgnummer: "123"
-        },
+        organisasjonsnavn: "BEKK",
+        orgnummer: "123",
         navn: "Ole",
         tlf: "11223344",
         epost: "ole@bekk.no",
@@ -17,10 +15,8 @@ describe("NaermesteLedere", () => {
         erOppgitt: true,
         "fomDato":{"year":2016,"month":"OCTOBER","dayOfMonth":26,"dayOfWeek":"WEDNESDAY","dayOfYear":300,"leapYear":true,"monthValue":10,"era":"CE","chronology":{"id":"ISO","calendarType":"iso8601"}}
     }, {
-        arbeidsgiver: {
-            navn: "NAV",
-            orgnummer: "456"
-        },
+        organisasjonsnavn: "NAV",
+        orgnummer: "456",
         navn: "Ole",
         tlf: "11223344",
         epost: "ole@nav.no",
@@ -28,10 +24,8 @@ describe("NaermesteLedere", () => {
         erOppgitt: true,
         "fomDato":{"year":2016,"month":"OCTOBER","dayOfMonth":26,"dayOfWeek":"WEDNESDAY","dayOfYear":300,"leapYear":true,"monthValue":10,"era":"CE","chronology":{"id":"ISO","calendarType":"iso8601"}}
     }, {
-        arbeidsgiver: {
-            navn: "Peppes",
-            orgnummer: "789"
-        },
+        organisasjonsnavn: "Peppes",
+        orgnummer: "789",
         navn: "Ole",
         tlf: "11223344",
         epost: "ole@peppes.no",
@@ -76,10 +70,8 @@ describe("NaermesteLedere", () => {
 
     it("Skal vise riktig tittel dersom det er én leder", () => {
         const ledere2 = [{
-            arbeidsgiver: {
-                navn: "BEKK",
-                orgnummer: "123"
-            },
+            organisasjonsnavn: "BEKK",
+            orgnummer: "123",
             navn: "Ole",
             tlf: "11223344",
             epost: "ole@bekk.no",

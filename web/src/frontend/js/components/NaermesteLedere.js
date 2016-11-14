@@ -2,11 +2,12 @@ import React, { PropTypes } from 'react';
 import Sidetopp from './Sidetopp';
 import { visDato } from '../utils/index';
 
-const Leder = ({ erOppgitt, arbeidsgiver, epost, navn, tlf, fomDato }) => {
+const Leder = ({ erOppgitt, orgnummer, organisasjonsnavn, epost, navn, tlf, fomDato }) => {
+
     return (<div className="naermesteLeder js-leder">
             <div className="grid">
                 <div className="unit full">
-                    <h3>{arbeidsgiver.navn}</h3>
+                    <h3>{organisasjonsnavn}</h3>
                 </div>
             </div>
             {
@@ -34,7 +35,7 @@ const Leder = ({ erOppgitt, arbeidsgiver, epost, navn, tlf, fomDato }) => {
                     </div>
                     <div className="unit one-third">
                         <h4>Org. nummer</h4>
-                        <p>{arbeidsgiver.orgnummer}</p>
+                        <p>{orgnummer}</p>
                     </div>
                 </div>
             </div>);
