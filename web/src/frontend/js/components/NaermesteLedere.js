@@ -2,12 +2,15 @@ import React, { PropTypes } from 'react';
 import Sidetopp from './Sidetopp';
 import { visDato } from '../utils/index';
 
+<<<<<<< HEAD
 const Leder = ({ erOppgitt, orgnummer, organisasjonsnavn, epost, navn, tlf, fomDato }) => {
-
     return (<div className="naermesteLeder js-leder">
             <div className="grid">
                 <div className="unit full">
-                    <h3>{organisasjonsnavn}</h3>
+                    <div className="naermesteLeder__organisasjon">
+                        <img src="/sykefravaer/img/svg/kontorbygg.svg" alt="" />
+                        <h3>{organisasjonsnavn}</h3>
+                    </div>
                 </div>
             </div>
             {
