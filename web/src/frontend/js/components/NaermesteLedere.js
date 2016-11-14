@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import Sidetopp from './Sidetopp';
 import { visDato } from '../utils/index';
 
-<<<<<<< HEAD
 const Leder = ({ erOppgitt, orgnummer, organisasjonsnavn, epost, navn, tlf, fomDato }) => {
     return (<div className="naermesteLeder js-leder">
             <div className="grid">
