@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { opprettMote, hentMoter, avbrytMote } from '../../../js/mote/sagas/moterSagas.js';
-import { post, get, create } from '../../../js/api/index';
+import { post, get } from '../../../js/api/index';
 import { put, call } from 'redux-saga/effects';
 
 describe("moterSagas", () => {
@@ -26,7 +26,7 @@ describe("moterSagas", () => {
         });
 
         it("Skal pute møtet til REST-tjenesten", () => {
-            const nextCall = call(create, "http://tjenester.nav.no/moteadmin/moter", {
+            const nextCall = call(post, "http://tjenester.nav.no/moteadmin/moter", {
                 fnr: "55",
                 naermesteLederNavn: "***REMOVED***"
             });

@@ -1,12 +1,12 @@
 import { call, put, fork } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-import { post, get, create } from '../../api/index';
+import { post, get } from '../../api/index';
 import * as actions from '../actions/moter_actions';
 
 export function* opprettMote(action) {
     yield put(actions.oppretterMote());
     try {
-        yield call(create, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter`, action.data);
+        yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter`, action.data);
         yield put(actions.moteOpprettet(action.data));
     } catch (e) {
         yield put(actions.opprettMoteFeilet());
