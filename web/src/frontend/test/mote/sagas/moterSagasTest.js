@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { opprettMote, hentMoter, avbrytMote } from '../../../js/mote/sagas/moterSagas.js';
-import { post, get } from '../../../js/api';
+import { post, get, create } from '../../../js/api/index';
 import { put, call } from 'redux-saga/effects';
 
 describe("moterSagas", () => {
@@ -14,8 +14,8 @@ describe("moterSagas", () => {
 
     describe("opprettMote", () => {
         const generator = opprettMote({
-            fnr: "55",
             data: {
+                fnr: "55",
                 naermesteLederNavn: "***REMOVED***"
             }
         });
@@ -25,20 +25,22 @@ describe("moterSagas", () => {
             expect(generator.next().value).to.deep.equal(nextPut);
         });
 
-        it("Skal poste møtet til REST-tjenesten", () => {
-            const nextCall = call(post, "http://tjenester.nav.no/moteadmin/moter/55/opprett", {
+        it("Skal pute møtet til REST-tjenesten", () => {
+            const nextCall = call(create, "http://tjenester.nav.no/moteadmin/moter", {
+                fnr: "55",
                 naermesteLederNavn: "***REMOVED***"
             });
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
         it("Skal dispatche MOTE_OPPRETTET", () => {
-            const nextPut = put({type: 'MOTE_OPPRETTET', data: {
-                naermesteLederNavn: "***REMOVED***"
-            },
-            fnr: "55"});
+            const nextPut = put({type: 'MOTE_OPPRETTET', fnr: "55", data: {
+                naermesteLederNavn: "***REMOVED***",
+                fnr: "55"}
+            });
             expect(generator.next({
-                naermesteLederNavn: "***REMOVED***"
+                naermesteLederNavn: "***REMOVED***",
+                fnr: "55",
             }).value).to.deep.equal(nextPut);
         });
     });
@@ -54,7 +56,7 @@ describe("moterSagas", () => {
         });
 
         it("Skal hente møter fra REST-tjenesten", () => {
-            const nextCall = call(get, "http://tjenester.nav.no/moteadmin/moter/123");
+            const nextCall = call(get, "http://tjenester.nav.no/moteadmin/moter?fnr=123");
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
@@ -76,7 +78,7 @@ describe("moterSagas", () => {
         });
 
         it("Skal poste til REST-tjenesten", () => {
-            const nextCall = call(post, "http://tjenester.nav.no/moteadmin/mote/min-fine-mote-uuid/avbryt");
+            const nextCall = call(post, "http://tjenester.nav.no/moteadmin/moter/min-fine-mote-uuid/avbryt");
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 

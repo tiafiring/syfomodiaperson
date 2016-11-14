@@ -1,7 +1,6 @@
-export function opprettMote(fnr, data) {
+export function opprettMote(data) {
     return {
         type: 'OPPRETT_MOTE_FORESPURT',
-        fnr,
         data,
     };
 }
@@ -12,11 +11,11 @@ export function oppretterMote() {
     };
 }
 
-export function moteOpprettet(data, fnr) {
+export function moteOpprettet(data) {
     return {
         type: 'MOTE_OPPRETTET',
-        data,
-        fnr,
+        fnr: data.fnr,
+        data
     };
 }
 

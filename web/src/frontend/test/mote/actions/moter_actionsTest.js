@@ -4,13 +4,14 @@ import * as actions from '../../../js/mote/actions/moter_actions';
 describe("moter_actions", () => {
 
     it("Skal ha en opprettMote()-funksjon som returnerer riktig action", () => {
-        const action = actions.opprettMote("123456", {
-            test: 1
+        const action = actions.opprettMote({
+            test: 1,
+            fnr: "123456"
         });
         expect(action).to.deep.equal({
             type: "OPPRETT_MOTE_FORESPURT",
-            fnr: "123456",
             data: {
+                fnr: "123456",
                 test: 1
             }
         })
@@ -33,14 +34,15 @@ describe("moter_actions", () => {
 
     it("Skal ha en moteOpprettet()-funksjon som returnerer riktig action", () => {
         const data = {
-            test: 1
+            test: 1,
+            fnr: "1234",
         }
-        const fnr = "1234"
-        const action = actions.moteOpprettet(data, fnr);
+        const action = actions.moteOpprettet(data);
         expect(action).to.deep.equal({
             type: "MOTE_OPPRETTET",
             data: {
-                test: 1
+                test: 1,
+                fnr: "1234"
             },
             fnr: "1234"
         })

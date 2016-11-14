@@ -22,7 +22,7 @@ export function genererDato(dato, klokkeslett) {
 
 export function getData(values) {
     const deltaker = Object.assign({}, values.deltakere[0], {
-        type: 'arbeidsgiver',
+        type: 'arbeidsgiver'
     });
 
     const tidOgStedAlternativer = values.tidspunkter.map((tidspunkt) => {
@@ -42,7 +42,8 @@ export function getData(values) {
 export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeilet }) => {
     const submit = (values) => {
         const data = getData(values);
-        opprettMote(fnr, data);
+        data.fnr = fnr;
+        opprettMote(data);
     };
 
     return (<form className="panel" onSubmit={handleSubmit(submit)}>

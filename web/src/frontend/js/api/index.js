@@ -43,3 +43,27 @@ export function post(url, body) {
         throw err;
     });
 }
+
+export function create(url, body) {
+    return fetch(url, {
+        credentials: 'include',
+        method: 'PUT',
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json',
+            'X-XSRF-TOKEN': getCookie('XSRF-TOKEN-SYFOREST'),
+        },
+    })
+        .then((res) => {
+            if (res.status > 400) {
+                log(res);
+                throw new Error('Forespørsel feilet');
+            } else {
+                return res;
+            }
+        })
+        .catch((err) => {
+            log(err);
+            throw err;
+        });
+}
