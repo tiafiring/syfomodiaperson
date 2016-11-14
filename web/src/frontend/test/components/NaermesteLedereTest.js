@@ -13,7 +13,9 @@ describe("NaermesteLedere", () => {
         navn: "Ole",
         tlf: "11223344",
         epost: "ole@bekk.no",
-        fodselsdato: "08.02.1975"
+        fodselsdato: "08.02.1975",
+        erOppgitt: true,
+        "fomDato":{"year":2016,"month":"OCTOBER","dayOfMonth":26,"dayOfWeek":"WEDNESDAY","dayOfYear":300,"leapYear":true,"monthValue":10,"era":"CE","chronology":{"id":"ISO","calendarType":"iso8601"}}
     }, {
         arbeidsgiver: {
             navn: "NAV",
@@ -22,7 +24,9 @@ describe("NaermesteLedere", () => {
         navn: "Ole",
         tlf: "11223344",
         epost: "ole@nav.no",
-        fodselsdato: "08.02.1985"
+        fodselsdato: "08.02.1985",
+        erOppgitt: true,
+        "fomDato":{"year":2016,"month":"OCTOBER","dayOfMonth":26,"dayOfWeek":"WEDNESDAY","dayOfYear":300,"leapYear":true,"monthValue":10,"era":"CE","chronology":{"id":"ISO","calendarType":"iso8601"}}
     }, {
         arbeidsgiver: {
             navn: "Peppes",
@@ -31,7 +35,9 @@ describe("NaermesteLedere", () => {
         navn: "Ole",
         tlf: "11223344",
         epost: "ole@peppes.no",
-        fodselsdato: "08.02.1995"
+        fodselsdato: "08.02.1995",
+        erOppgitt: true,
+        "fomDato":{"year":2016,"month":"OCTOBER","dayOfMonth":26,"dayOfWeek":"WEDNESDAY","dayOfYear":300,"leapYear":true,"monthValue":10,"era":"CE","chronology":{"id":"ISO","calendarType":"iso8601"}}
     }];
 
     const navbruker = {
@@ -51,7 +57,6 @@ describe("NaermesteLedere", () => {
         expect(text).to.contain("Ole");
         expect(text).to.contain("11223344");
         expect(text).to.contain("ole@bekk.no");
-        expect(text).to.contain("08.02.1975");
     });
 
     it("Skal vise en melding dersom ingen ledere er oppgitt", () => {

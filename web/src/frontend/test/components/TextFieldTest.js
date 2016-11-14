@@ -14,20 +14,7 @@ describe("TextField", () => {
         const component = mount(<TextField placeholder="Olsen" meta={meta} />)
         expect(component.find("input").prop("placeholder")).to.equal("Olsen")
     }); 
-
-    it("Skal ha klassen input--feil når touched = true og error 'Feilmelding'", () => {
-        meta.error = "Min feilmelding";
-        meta.touched = true;
-        const component = mount(<TextField placeholder="Olsen" meta={meta} />)
-        expect(component.find("input").hasClass("input--feil")).to.be.true;
-    });
-
-    it("Skal ikke ha klassen input--feil når touched = true og error 'Feilmelding'", () => {
-        meta.touched = true;
-        const component = mount(<TextField placeholder="Olsen" meta={meta} />)
-        expect(component.find("input").hasClass("input--feil")).to.be.false;
-    });
-
+    
     it("Skal vise feilmeldingen når touched = true og error 'Feilmelding'", () => {
         meta.error = "Min feilmelding";
         meta.touched = true;
