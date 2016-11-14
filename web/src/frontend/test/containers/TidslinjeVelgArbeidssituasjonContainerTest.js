@@ -7,7 +7,7 @@ import { Tidslinje } from 'digisyfo-npm';
 import { mapStateToProps, VelgArbeidssituasjon } from '../../js/containers/TidslinjeVelgArbeidssituasjonContainer';
 import sinon from 'sinon';
 
-describe.only("TidslinjeVelgArbeidssituasjonContainer", () => {
+describe("TidslinjeVelgArbeidssituasjonContainer", () => {
 
     describe("mapStateToProps", () => {
         let state;
