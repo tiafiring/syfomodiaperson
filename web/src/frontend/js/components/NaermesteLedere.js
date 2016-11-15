@@ -6,7 +6,10 @@ const Leder = ({ erOppgitt, orgnummer, organisasjonsnavn, epost, navn, tlf, fomD
     return (<div className="naermesteLeder js-leder">
             <div className="grid">
                 <div className="unit full">
-                    <h3>{organisasjonsnavn}</h3>
+                    <div className="naermesteLeder__organisasjon">
+                        <img src="/sykefravaer/img/svg/kontorbygg.svg" alt="" />
+                        <h3>{organisasjonsnavn}</h3>
+                    </div>
                 </div>
             </div>
             {
@@ -46,12 +49,12 @@ const Leder = ({ erOppgitt, orgnummer, organisasjonsnavn, epost, navn, tlf, fomD
 };
 
 Leder.propTypes = {
+    erOppgitt: PropTypes.bool,
     epost: PropTypes.string,
-    orgnummer: PropTypes.string,
-    organisasjonsnavn: PropTypes.string,
     navn: PropTypes.string,
     tlf: PropTypes.string,
-    erOppgitt: PropTypes.bool,
+    orgnummer: PropTypes.string,
+    organisasjonsnavn: PropTypes.string,
     fomDato: PropTypes.object,
 };
 

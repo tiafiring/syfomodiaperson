@@ -5,12 +5,14 @@ import MotebookingSkjema from '../mote/skjema/MotebookingSkjema';
 import MotebookingStatus from '../mote/components/MotebookingStatus';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
-import * as actionCreators from '../mote/actions/moter_actions';
+import * as moterActions from '../mote/actions/moter_actions';
+import * as ledereActions from '../actions/ledere_actions';
 
 export class MotebookingSide extends Component {
     constructor(props) {
         super(props);
         this.props.hentMoter(this.props.fnr);
+        this.props.hentLedere(this.props.fnr);
     }
 
     render() {
@@ -38,6 +40,7 @@ MotebookingSide.propTypes = {
     fnr: PropTypes.string,
     mote: PropTypes.object,
     hentMoter: PropTypes.func,
+    hentLedere: PropTypes.func,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     avbrytMote: PropTypes.func,
@@ -54,15 +57,16 @@ export const mapStateToProps = (state) => {
     return {
         fnr,
         mote: aktivtMote,
-        henter: state.moter.henter,
+        ledere: state.ledere.data,
+        henter: state.moter.henter || state.ledere.henter,
         sender: state.moter.sender,
         avbryter: state.moter.avbryter,
-        hentingFeilet: state.moter.hentingFeilet,
+        hentingFeilet: state.moter.hentingFeilet || state.ledere.hentingFeilet,
         sendingFeilet: state.moter.sendingFeilet,
         avbrytFeilet: state.moter.avbrytFeilet,
     };
 };
 
-const MotebookingContainer = connect(mapStateToProps, actionCreators)(MotebookingSide);
+const MotebookingContainer = connect(mapStateToProps, Object.assign({}, moterActions, ledereActions))(MotebookingSide);
 
 export default MotebookingContainer;
