@@ -13,33 +13,43 @@ describe("MotebookingContainer", () => {
     describe("MotebookingSide", () => {
 
         let hentMoter;
+        let hentLedere;
 
         beforeEach(() => {
             hentMoter = sinon.spy();
-        })
+            hentLedere = sinon.spy();
+        });
 
         it("Skal vise AppSpinner", () => {
             const mote = {};
-            const component = shallow(<MotebookingSide hentMoter={hentMoter} henter={true} />)
+            const component = shallow(<MotebookingSide hentMoter={hentMoter} hentLedere={hentLedere} henter={true} />)
             expect(component.find(AppSpinner)).to.have.length(1)
         });
 
         it("Skal hente møter ved init", () => {
             const mote = {};
-            const component = shallow(<MotebookingSide hentMoter={hentMoter} mote={{}} />)
+            const component = shallow(<MotebookingSide fnr="123" hentMoter={hentMoter} hentLedere={hentLedere} mote={{}} />)
             expect(hentMoter.calledOnce).to.be.true;
+            expect(hentMoter.calledWith("123")).to.be.true;
+        });
+
+        it("Skal hente ledere ved init", () => {
+            const mote = {};
+            const component = shallow(<MotebookingSide fnr="22" hentMoter={hentMoter} hentLedere={hentLedere} mote={{}} />)
+            expect(hentLedere.calledOnce).to.be.true;
+            expect(hentLedere.calledWith("22")).to.be.true;
         });
 
         it("Skal vise feilmelding hvis hentingFeilet", () => {
             const mote = {};
-            const component = shallow(<MotebookingSide hentMoter={hentMoter} mote={{}} hentingFeilet />)
+            const component = shallow(<MotebookingSide hentMoter={hentMoter} hentLedere={hentLedere} mote={{}} hentingFeilet />)
             expect(component.find(Feilmelding)).to.have.length(1)
         });
 
         it("Skal vise MotebookingStatus hvis det finnes møte", () => {
             const mote = {};
             const avbrytMote = sinon.spy();
-            const component = shallow(<MotebookingSide hentMoter={hentMoter} mote={{}} avbrytMote={avbrytMote} />)
+            const component = shallow(<MotebookingSide hentMoter={hentMoter} hentLedere={hentLedere} mote={{}} avbrytMote={avbrytMote} />)
             expect(component.find(MotebookingStatus)).to.have.length(1);
         });
 
@@ -47,17 +57,28 @@ describe("MotebookingContainer", () => {
 
     describe("mapStateToProps", () => {
 
-        const state = {
-            navbruker: {
-                data: {
-                    fnr: "887766",
-                    harTilgang: true,
+        let state; 
+
+        beforeEach(() => {
+            state = {
+                navbruker: {
+                    data: {
+                        fnr: "887766",
+                        harTilgang: true,
+                    },
                 },
-            },
-            moter: {
-                data: []
+                ledere: {
+                    data: [{
+                        navn: "Ole"
+                    }],
+                    henter: false,
+                    hentingFeilet: false
+                },
+                moter: {
+                    data: []
+                }
             }
-        }
+        })
 
         it("Skal returnere fnr", () => {
             const props = mapStateToProps(state);
@@ -90,7 +111,7 @@ describe("MotebookingContainer", () => {
             expect(props.mote).to.be.undefined;
         });
 
-        it("Skal returnere henter", () => {
+        it("Skal returnere henter når det hentes møter", () => {
             state.moter.data = [{
                 id: 1
             }]
@@ -99,13 +120,23 @@ describe("MotebookingContainer", () => {
             expect(props.henter).to.be.true;
         });
 
-        it("Skal returnere henter", () => {
+        it("Skal returnere henter når det ikke hentes møter", () => {
             state.moter.data = [{
                 id: 1
             }]
             state.moter.henter = false;
             const props = mapStateToProps(state);
             expect(props.henter).to.be.false;
+        });
+
+        it("Skal returnere henter når det hentes ledere", () => {
+            state.moter.data = [{
+                id: 1
+            }]
+            state.moter.henter = false;
+            state.ledere.henter = true;
+            const props = mapStateToProps(state);
+            expect(props.henter).to.be.true;
         });
 
         it("Skal returnere sender", () => {
@@ -126,7 +157,7 @@ describe("MotebookingContainer", () => {
             expect(props.sender).to.be.false;
         });
 
-        it("Skal returnere hentingFeilet", () => {
+        it("Skal returnere hentingFeilet når henting av møter feiler", () => {
             state.moter.data = [{
                 id: 1
             }]
@@ -135,11 +166,25 @@ describe("MotebookingContainer", () => {
             expect(props.hentingFeilet).to.be.true;
         });
 
-        it("Skal returnere hentingFeilet", () => {
+        it("Skal returnere hentingFeilet når henting av møter ikke feiler", () => {
             state.moter.data = [{
                 id: 1
             }]
             state.moter.hentingFeilet = false;
+            const props = mapStateToProps(state);
+            expect(props.hentingFeilet).to.be.false;
+        });
+
+        it("Skal returnere hentingFeilet når henting av ledere feiler", () => {
+            state.ledere.data = []
+            state.ledere.hentingFeilet = true;
+            const props = mapStateToProps(state);
+            expect(props.hentingFeilet).to.be.true;
+        });
+
+        it("Skal returnere hentingFeilet når henting av ledere ikke feiler", () => {
+            state.ledere.data = []
+            state.ledere.hentingFeilet = false;
             const props = mapStateToProps(state);
             expect(props.hentingFeilet).to.be.false;
         });
@@ -161,6 +206,11 @@ describe("MotebookingContainer", () => {
             const props = mapStateToProps(state);
             expect(props.sendingFeilet).to.be.false;
         });
+
+        it("Skal returnere ledere", () => {
+            const props = mapStateToProps(state);
+            expect(props.ledere).to.deep.equal([{navn: "Ole"}])
+        })
 
 
     });

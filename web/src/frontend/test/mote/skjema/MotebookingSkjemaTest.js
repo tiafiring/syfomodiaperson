@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { MotebookingSkjema, validate, genererDato, getData } from '../../../js/mote/skjema/MotebookingSkjema';
+import { MotebookingSkjema, VelgLeder, validate, genererDato, getData } from '../../../js/mote/skjema/MotebookingSkjema';
 import Tidspunkter from '../../../js/mote/skjema/Tidspunkter';
 import { Field } from 'redux-form';
 import { mount, shallow, render } from 'enzyme';
@@ -17,34 +17,133 @@ describe("MotebookingSkjema", () => {
         })
 
         it("Skal inneholde felter for å skrive inn arbeidsgivers opplysninger", () => {
-            const compo = shallow(<MotebookingSkjema handleSubmit={handleSubmit} />);
+            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
             expect(compo.find(".js-arbeidsgiver").find(Field)).to.have.length(2);
         });
 
         it("Skal inneholde felter med riktig type for å skrive inn arbeidsgivers opplysninger", () => {
-            const compo = shallow(<MotebookingSkjema handleSubmit={handleSubmit} />);
+            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
             expect(compo.find(".js-arbeidsgiver").find(Field).first().prop("name")).to.equal("deltakere[0].navn")
             expect(compo.find(".js-arbeidsgiver").find(Field).last().prop("name")).to.equal("deltakere[0].epost")
         });
 
         it("Skal inneholde tidspunkter", () => {
-            const compo = shallow(<MotebookingSkjema handleSubmit={handleSubmit} />);
+            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
             expect(compo.contains(<Tidspunkter />)).to.be.true;
         });
 
         it("Skal inneholde felt med mulighet for å skrive inn sted", () => {
-            const compo = shallow(<MotebookingSkjema handleSubmit={handleSubmit} />);
+            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
             expect(compo.find(".js-sted").prop("name")).to.equal("sted");
         });
 
         it("Skal ikke vise feilmelding hvis sendingFeilet !== true", () => {
-            const compo = shallow(<MotebookingSkjema handleSubmit={handleSubmit} />);
+            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
             expect(compo.text()).not.to.contain("Beklager")
         });
 
         it("Skal vise feilmelding hvis sendingFeilet", () => {
-            const compo = shallow(<MotebookingSkjema handleSubmit={handleSubmit} sendingFeilet />);
+            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} sendingFeilet />);
             expect(compo.text()).to.contain("Beklager")
+        });
+
+        it("Skal ikke vise en dropdown dersom det ikke finnes ledere", () => {
+            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} sendingFeilet />);
+            expect(compo.find(VelgLeder)).to.have.length(0);
+        });
+
+        it("Skal ikke vise en dropdown dersom det ikke finnes ledere", () => {
+            const compo = shallow(<MotebookingSkjema ledere={[{
+                navn: "Ole",
+                epost: "ole@ole.no",
+                organisasjonsnavn: "Oles pizza"
+            }]} handleSubmit={handleSubmit} sendingFeilet />);
+            expect(compo.find(VelgLeder)).to.have.length(1);
+        });
+
+        it("Skal fylle ut skjema med leder dersom det bare finnes én leder", () => {
+            const autofill = sinon.spy();
+            const compo = shallow(<MotebookingSkjema autofill={autofill} ledere={[]} handleSubmit={handleSubmit} sendingFeilet />);
+            compo.setProps({
+                ledere: [{
+                    navn: "Ole",
+                    epost: "ole@ole.no"
+                }]
+            })
+            compo.instance().componentDidUpdate({
+                ledere: []
+            });
+            expect(autofill.calledTwice).to.be.true;
+            expect(autofill.calledWith("deltakere[0].navn", "Ole")).to.be.true;
+            expect(autofill.calledWith("deltakere[0].epost", "ole@ole.no")).to.be.true;
+        });
+
+        it("Skal ikke fylle ut skjema med leder dersom det finnes flere enn én leder", () => {
+            const autofill = sinon.spy();
+            const compo = shallow(<MotebookingSkjema autofill={autofill} ledere={[]} handleSubmit={handleSubmit} sendingFeilet />);
+            compo.setProps({
+                ledere: [{
+                    navn: "Ole"
+                }, {
+                    navn: "Nina"
+                }]
+            })
+            compo.instance().componentDidUpdate({
+                ledere: []
+            });
+            expect(autofill.called).to.be.false;
+        });
+
+        it("Skal ikke fylle ut skjema med leder dersom det finnes 0 ledere", () => {
+            const autofill = sinon.spy();
+            const compo = shallow(<MotebookingSkjema autofill={autofill} ledere={[]} handleSubmit={handleSubmit} sendingFeilet />);
+            compo.setProps({
+                ledere: []
+            })
+            compo.instance().componentDidUpdate({
+                ledere: []
+            });
+            expect(autofill.called).to.be.false;
+        });
+
+    });
+
+    describe("VelgLeder", () => {
+
+        let onChange;
+        let ledere;
+
+        beforeEach(() => {
+            onChange = sinon.spy();
+            ledere = [{
+                id: 1,
+                navn: "Bjarne",
+                organisasjonsnavn: "BEKK"
+            }, {
+                id: 2,
+                navn: "Arne", 
+                organisasjonsnavn: "BEKK"
+            }, {
+                id: 3, 
+                navn: "Abba",
+                organisasjonsnavn: "BEKK"
+            }, {
+                id: 4,
+                navn: "Aage",
+                organisasjonsnavn: "ABC Buss"
+            }]
+        });
+
+        it("Skal kalle onChange v/change", () => {
+            const compo = mount(<VelgLeder ledere={ledere} onChange={onChange} />);
+
+            compo.find("select").simulate("change", {
+                target: {
+                    value: "druer"
+                }
+            });
+            expect(onChange.calledOnce).to.be.true;
+            expect(onChange.getCall(0).args[0]).to.equal("druer");
         });
 
     });

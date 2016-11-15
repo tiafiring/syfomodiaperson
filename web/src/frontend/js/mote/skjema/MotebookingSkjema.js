@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import TextField from '../../components/TextField';
 import Tidspunkter from './Tidspunkter';
@@ -39,49 +39,113 @@ export function getData(values) {
     };
 }
 
-export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeilet }) => {
-    const submit = (values) => {
-        const data = getData(values);
-        opprettMote(fnr, data);
-    };
+export const VelgLeder = ({ ledere, onChange }) => {
+    let defaultValue = ledere.length === 1 ? ledere[0] : {};
+    defaultValue = JSON.stringify(defaultValue);
 
-    return (<form className="panel" onSubmit={handleSubmit(submit)}>
-        <Sidetopp tittel="Møteforespørsel" />
-        <fieldset className="skjema-fieldset blokk--xl js-arbeidsgiver">
-            <legend>1. Fyll inn arbeidsgiverens opplysninger</legend>
-            <div className="navInput blokk--xl">
-                <label htmlFor="navn">Nærmeste leders navn</label>
-                <Field id="navn" component={TextField} name="deltakere[0].navn" className="input-xxl" />
-            </div>
-            <div className="navInput">
-                <label htmlFor="epost">E-post</label>
-                <Field id="epost" component={TextField} type="email" name="deltakere[0].epost" className="input-xxl" />
-            </div>
-        </fieldset>
-
-        <fieldset className="skjema-fieldset blokk--xl">
-            <legend>2. Velg dato, tid og sted</legend>
-            <Tidspunkter />
-            <label htmlFor="sted">Sted</label>
-            <Field id="sted" component={TextField} name="sted" className="input-xxl js-sted" placeholder="Skriv møtested eller om det er et videomøte" />
-        </fieldset>
-
-        <div aria-live="polite" role="alert">
-            { sendingFeilet && <div className="panel panel--ramme">
-                <div className="varselstripe varselstripe--feil">
-                    <div className="varselstripe__ikon">
-                        <img src="/sykefravaer/img/svg/utropstegn.svg" />
-                    </div>
-                    <p className="sist">Beklager, det oppstod en feil. Prøv igjen litt senere.</p>
-                </div>
-            </div>}
+    return (<div className="navInput blokk--xl">
+        <label htmlFor="velg-arbeidsgiver">Velg arbeidsgiver</label>
+        <div className="select-container">
+            <select defaultValue={defaultValue} id="velg-arbeidsgiver" className="input-select input-xl" onChange={(event) => {
+                onChange(event.target.value);
+            }}>
+                <option value="{}">Velg arbeidsgiver</option>
+                {
+                    ledere
+                    .sort((a, b) => {
+                        if (a.navn > b.navn) {
+                            return 1;
+                        } else if (b.navn > a.navn) {
+                            return -1;
+                        }
+                        return 0;
+                    })
+                    .sort((a, b) => {
+                        if (a.organisasjonsnavn > b.organisasjonsnavn) {
+                            return 1;
+                        } else if (b.organisasjonsnavn > a.organisasjonsnavn) {
+                            return -1;
+                        }
+                        return 0;
+                    })
+                    .map((leder, idx) => {
+                        return <option value={JSON.stringify(leder)} key={idx}>{`${leder.organisasjonsnavn} (${leder.navn})`}</option>;
+                    })
+                }
+            </select>
         </div>
-
-        <div className="knapperad">
-            <input type="submit" className="knapp" value="Send" disabled={sender} />
-        </div>
-    </form>);
+    </div>);
 };
+
+VelgLeder.propTypes = {
+    ledere: PropTypes.array,
+    onChange: PropTypes.func,
+};
+
+export class MotebookingSkjema extends Component {
+    componentDidUpdate() {
+        if (this.props.ledere.length === 1) {
+            const { autofill, ledere } = this.props;
+            const leder = ledere[0];
+            autofill('deltakere[0].navn', leder.navn || '');
+            autofill('deltakere[0].epost', leder.epost || '');
+        }
+    }
+
+    render() {
+        const { handleSubmit, opprettMote, fnr, sender, sendingFeilet, ledere, autofill } = this.props;
+
+        const submit = (values) => {
+            const data = getData(values);
+            opprettMote(fnr, data);
+        };
+
+        return (<form className="panel" onSubmit={handleSubmit(submit)}>
+            <Sidetopp tittel="Møteforespørsel" />
+
+            <fieldset className="skjema-fieldset blokk--xl js-arbeidsgiver">
+                <legend>1. Fyll inn arbeidsgiverens opplysninger</legend>
+                {
+                    ledere.length && <VelgLeder ledere={ledere} onChange={(value) => {
+                        const leder = JSON.parse(value);
+                        autofill('deltakere[0].navn', leder.navn || '');
+                        autofill('deltakere[0].epost', leder.epost || '');
+                    }} />
+                }
+                <div className="navInput blokk--xl">
+                    <label htmlFor="navn">Nærmeste leders navn</label>
+                    <Field id="navn" component={TextField} name="deltakere[0].navn" className="input-xxl" />
+                </div>
+                <div className="navInput">
+                    <label htmlFor="epost">E-post</label>
+                    <Field id="epost" component={TextField} type="email" name="deltakere[0].epost" className="input-xxl" />
+                </div>
+            </fieldset>
+
+            <fieldset className="skjema-fieldset blokk--xl">
+                <legend>2. Velg dato, tid og sted</legend>
+                <Tidspunkter />
+                <label htmlFor="sted">Sted</label>
+                <Field id="sted" component={TextField} name="sted" className="input-xxl js-sted" placeholder="Skriv møtested eller om det er et videomøte" />
+            </fieldset>
+
+            <div aria-live="polite" role="alert">
+                { sendingFeilet && <div className="panel panel--ramme">
+                    <div className="varselstripe varselstripe--feil">
+                        <div className="varselstripe__ikon">
+                            <img src="/sykefravaer/img/svg/utropstegn.svg" />
+                        </div>
+                        <p className="sist">Beklager, det oppstod en feil. Prøv igjen litt senere.</p>
+                    </div>
+                </div>}
+            </div>
+
+            <div className="knapperad">
+                <input type="submit" className="knapp" value="Send" disabled={sender} />
+            </div>
+        </form>);
+    }
+}
 
 MotebookingSkjema.propTypes = {
     fnr: PropTypes.string,
@@ -90,6 +154,8 @@ MotebookingSkjema.propTypes = {
     opprettMote: PropTypes.func,
     sender: PropTypes.bool,
     sendingFeilet: PropTypes.bool,
+    ledere: PropTypes.array,
+    autofill: PropTypes.func,
 };
 
 function erGyldigEpost(email) {

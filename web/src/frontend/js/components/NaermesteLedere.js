@@ -49,11 +49,12 @@ const Leder = ({ erOppgitt, orgnummer, organisasjonsnavn, epost, navn, tlf, fomD
 };
 
 Leder.propTypes = {
-    arbeidsgiver: PropTypes.object,
+    erOppgitt: PropTypes.bool,
     epost: PropTypes.string,
     navn: PropTypes.string,
     tlf: PropTypes.string,
-    erOppgitt: PropTypes.bool,
+    orgnummer: PropTypes.string,
+    organisasjonsnavn: PropTypes.string,
     fomDato: PropTypes.object,
 };
 
