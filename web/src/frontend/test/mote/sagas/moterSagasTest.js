@@ -25,7 +25,7 @@ describe("moterSagas", () => {
             expect(generator.next().value).to.deep.equal(nextPut);
         });
 
-        it("Skal pute møtet til REST-tjenesten", () => {
+        it("Skal poste møtet til REST-tjenesten", () => {
             const nextCall = call(post, "http://tjenester.nav.no/moteadmin/moter", {
                 fnr: "55",
                 naermesteLederNavn: "***REMOVED***"
