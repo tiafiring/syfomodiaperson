@@ -28,8 +28,9 @@ describe("moter", () => {
                 data: []
             });
             const action = actions.moteOpprettet({
-                "test": "OK"
-            }, "hei")
+                "test": "OK",
+                "fnr": "hei"
+            })
             const nextState = moter(initialState, action);
             expect(nextState).to.deep.equal({
                 data: [{

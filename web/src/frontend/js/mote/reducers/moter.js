@@ -20,7 +20,7 @@ export default function moter(state = defaultState, action) {
         }
         case 'MOTE_OPPRETTET': {
             const mote = Object.assign({}, action.data, {
-                fnr: action.fnr,
+                fnr: action.data.fnr,
             });
             return Object.assign({}, state, {
                 data: [...state.data, mote],

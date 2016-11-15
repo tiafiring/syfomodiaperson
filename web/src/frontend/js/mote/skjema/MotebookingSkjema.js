@@ -97,7 +97,8 @@ export class MotebookingSkjema extends Component {
 
         const submit = (values) => {
             const data = getData(values);
-            opprettMote(fnr, data);
+            data.fnr = fnr;
+            opprettMote(data);
         };
 
         return (<form className="panel" onSubmit={handleSubmit(submit)}>
