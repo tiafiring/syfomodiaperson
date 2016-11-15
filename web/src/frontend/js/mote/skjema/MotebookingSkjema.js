@@ -46,7 +46,7 @@ export const VelgLeder = ({ ledere, onChange }) => {
     return (<div className="navInput blokk--xl">
         <label htmlFor="velg-arbeidsgiver">Velg arbeidsgiver</label>
         <div className="select-container">
-            <select defaultValue={defaultValue} id="velg-arbeidsgiver" className="input-select input-xl" onChange={(event) => {
+            <select defaultValue={defaultValue} id="velg-arbeidsgiver" className="input-select" onChange={(event) => {
                 onChange(event.target.value);
             }}>
                 <option value="{}">Velg arbeidsgiver</option>

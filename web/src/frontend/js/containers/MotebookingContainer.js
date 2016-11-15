@@ -53,11 +53,14 @@ export const mapStateToProps = (state) => {
     const aktivtMote = state.moter.data.filter((mote) => {
         return mote.status !== 'AVBRUTT';
     })[0];
+    const ledere = state.ledere.data.filter((leder) => {
+        return leder.erOppgitt;
+    });
 
     return {
         fnr,
         mote: aktivtMote,
-        ledere: state.ledere.data,
+        ledere,
         henter: state.moter.henter || state.ledere.henter,
         sender: state.moter.sender,
         avbryter: state.moter.avbryter,

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { formaterDato, formaterTid } from '../../js/utils';
+import { formaterDato, formaterTid, lagNummer } from '../../js/utils';
 
 describe("utils", () => {
 
@@ -96,6 +96,18 @@ describe("utils", () => {
 
 
     });
+
+    describe("lagNummer", () => {
+        it("Skal fjerne bokstaver", () => {
+            const n = lagNummer("12f");
+            expect(n).to.equal("12");
+        });
+
+        it("Skal fjerne bindestrek", () => {
+            const n = lagNummer("12f-");
+            expect(n).to.equal("12");
+        });
+    })
 
 })
 

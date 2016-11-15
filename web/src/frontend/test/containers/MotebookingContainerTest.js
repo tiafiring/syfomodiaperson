@@ -69,7 +69,11 @@ describe("MotebookingContainer", () => {
                 },
                 ledere: {
                     data: [{
-                        navn: "Ole"
+                        navn: "Ole",
+                        erOppgitt: true,
+                    }, {
+                        navn: "Per",
+                        erOppgitt: false,
                     }],
                     henter: false,
                     hentingFeilet: false
@@ -207,9 +211,9 @@ describe("MotebookingContainer", () => {
             expect(props.sendingFeilet).to.be.false;
         });
 
-        it("Skal returnere ledere", () => {
+        it("Skal returnere ledere som er oppgitt", () => {
             const props = mapStateToProps(state);
-            expect(props.ledere).to.deep.equal([{navn: "Ole"}])
+            expect(props.ledere).to.deep.equal([{navn: "Ole", erOppgitt: true}])
         })
 
 

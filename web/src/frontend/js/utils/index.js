@@ -5,8 +5,12 @@ export const visDato = (dato) => {
     return `${dato.dayOfMonth}. ${maned} ${dato.year}`;
 };
 
+export const lagNummer = (streng) => {
+    return streng.replace(/[^\d.-]/g, '').replace(/-/g, '');
+}
+
 export const formaterDato = (input) => {
-    const grupper = input.replace(/[^\d.-]/g, '').split('.');
+    const grupper = lagNummer(input).split('.');
     let dato = grupper.join('');
     if (dato.length > 2 || grupper.length > 1) {
         dato = dato.replace(/(.{2})/, '$1.');
@@ -18,7 +22,7 @@ export const formaterDato = (input) => {
 };
 
 export const formaterTid = (input) => {
-    const grupper = input.replace(/[^\d.-]/g, '').split('.');
+    const grupper = lagNummer(input).split('.');
     const tid = grupper.join('');
     if (tid.length > 2 || grupper.length > 1) {
         return tid.replace(/(.{2})/, '$1.');
