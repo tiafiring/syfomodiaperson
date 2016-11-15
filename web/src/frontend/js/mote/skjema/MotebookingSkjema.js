@@ -22,7 +22,7 @@ export function genererDato(dato, klokkeslett) {
 
 export function getData(values) {
     const deltaker = Object.assign({}, values.deltakere[0], {
-        type: 'arbeidsgiver'
+        type: 'arbeidsgiver',
     });
 
     const tidOgStedAlternativer = values.tidspunkter.map((tidspunkt) => {

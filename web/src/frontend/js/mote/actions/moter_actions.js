@@ -15,7 +15,7 @@ export function moteOpprettet(data) {
     return {
         type: 'MOTE_OPPRETTET',
         fnr: data.fnr,
-        data
+        data,
     };
 }
 

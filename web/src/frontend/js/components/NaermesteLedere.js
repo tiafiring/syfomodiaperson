@@ -3,7 +3,6 @@ import Sidetopp from './Sidetopp';
 import { visDato } from '../utils/index';
 
 const Leder = ({ erOppgitt, orgnummer, organisasjonsnavn, epost, navn, tlf, fomDato }) => {
-
     return (<div className="naermesteLeder js-leder">
             <div className="grid">
                 <div className="unit full">
@@ -47,8 +46,9 @@ const Leder = ({ erOppgitt, orgnummer, organisasjonsnavn, epost, navn, tlf, fomD
 };
 
 Leder.propTypes = {
-    arbeidsgiver: PropTypes.object,
     epost: PropTypes.string,
+    orgnummer: PropTypes.string,
+    organisasjonsnavn: PropTypes.string,
     navn: PropTypes.string,
     tlf: PropTypes.string,
     erOppgitt: PropTypes.bool,
