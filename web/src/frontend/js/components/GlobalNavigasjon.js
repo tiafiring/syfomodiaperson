@@ -26,7 +26,7 @@ const GlobalNavigasjon = ({ fnr, harTilgangMotemodul }) => {
     {
         menypunkter.map(({ navn, sti }, key) => {
             return (<li key={key} className="navigasjon__element">
-                <Link className="inngangspanel" activeClassName="inngangspanel--aktiv" to={`/sykefravaer/${fnr}/${sti}`}>{navn}</Link>
+                <Link className="navigasjonspanel" activeClassName="navigasjonspanel--aktiv" to={`/sykefravaer/${fnr}/${sti}`}>{navn}</Link>
             </li>);
         })
     }
