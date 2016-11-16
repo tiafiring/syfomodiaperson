@@ -107,7 +107,7 @@ export class MotebookingSkjema extends Component {
             <fieldset className="skjema-fieldset blokk--xl js-arbeidsgiver">
                 <legend>1. Fyll inn arbeidsgiverens opplysninger</legend>
                 {
-                    ledere.length && <VelgLeder ledere={ledere} onChange={(value) => {
+                    ledere.length > 0 && <VelgLeder ledere={ledere} onChange={(value) => {
                         const leder = JSON.parse(value);
                         autofill('deltakere[0].navn', leder.navn || '');
                         autofill('deltakere[0].epost', leder.epost || '');
