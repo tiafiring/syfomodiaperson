@@ -28,7 +28,8 @@ describe("TidslinjeContainer", () => {
         }
         state.navbruker = {
             data: {
-                fnr: "887766"
+                fnr: "887766",
+                navn: "Helge"
             }
         }
         ownProps.params = {
@@ -48,6 +49,11 @@ describe("TidslinjeContainer", () => {
             const props = mapStateToProps(state, ownProps);
             expect(props.fnr).to.equal(undefined);
         });
+
+        it("Skal returnere NAV-brukerens navn", () => {
+            const props = mapStateToProps(state, ownProps);
+            expect(props.brukernavn).to.equal("Helge")
+        })
 
         it("Skal returnere hendelser", () => {
             const props = mapStateToProps(state, ownProps);

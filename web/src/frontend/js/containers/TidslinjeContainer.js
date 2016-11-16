@@ -1,13 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import Side from '../sider/Side';
-import Sidetopp from '../components/Sidetopp';
+import SidetoppSpeilet from '../components/SidetoppSpeilet';
 import * as tidslinjerActions from '../actions/tidslinjer_actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Tidslinje, setHendelseData } from 'digisyfo-npm';
+import { Tidslinje, setHendelseData, getLedetekst, Varselstripe } from 'digisyfo-npm';
 import TidslinjeVelgArbeidssituasjonContainer from './TidslinjeVelgArbeidssituasjonContainer';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
+import Brodsmuler from '../components/Brodsmuler';
 
 export class TidslinjeSide extends Component {
     componentWillMount() {
@@ -16,7 +17,15 @@ export class TidslinjeSide extends Component {
     }
 
     render() {
-        const { hendelser, ledetekster, actions, valgtArbeidssituasjon, henter, hentingFeilet } = this.props;
+        const { hendelser, ledetekster, actions, valgtArbeidssituasjon, henter, hentingFeilet, brukernavn } = this.props;
+        const htmlIntro = {
+            __html: `<p>${getLedetekst('tidslinje.introtekst', ledetekster)}</p>`,
+        };
+        const brodsmuler = [{
+            tittel: 'Ditt sykefravær',
+        }, {
+            tittel: 'Tidslinjen',
+        }];
         return (<Side tittel="Tidslinje">
         {
             (() => {
@@ -27,9 +36,17 @@ export class TidslinjeSide extends Component {
                     return <Feilmelding />;
                 }
                 return (<div>
-                    <Sidetopp tittel="Tidslinjen" />
-                    <TidslinjeVelgArbeidssituasjonContainer valgtArbeidssituasjon={valgtArbeidssituasjon} />
-                    <Tidslinje hendelser={hendelser} ledetekster={ledetekster} setHendelseData={actions.setHendelseData} />
+                    <div className="panel">
+                        <Varselstripe type="spesial" ikon="/sykefravaer/img/svg/speiling.svg">
+                            <p>Er slik {brukernavn} ser det på nav.no</p>
+                        </Varselstripe>
+                    </div>
+                    <div className="speiling">
+                        <Brodsmuler brodsmuler={brodsmuler} />
+                        <SidetoppSpeilet tittel="Tidslinjen" htmlTekst={htmlIntro} />
+                        <TidslinjeVelgArbeidssituasjonContainer valgtArbeidssituasjon={valgtArbeidssituasjon} />
+                        <Tidslinje hendelser={hendelser} ledetekster={ledetekster} setHendelseData={actions.setHendelseData} />
+                    </div>
                 </div>);
             })()
         }
@@ -47,6 +64,7 @@ TidslinjeSide.propTypes = {
     hentingFeilet: PropTypes.bool,
     hendelser: PropTypes.array,
     ledetekster: PropTypes.object,
+    brukernavn: PropTypes.string,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -87,6 +105,7 @@ export function mapStateToProps(state, ownProps) {
     const henter = state.tidslinjer.henter || state.ledetekster.henter;
     const hentingFeilet = state.tidslinjer.hentingFeilet || state.ledetekster.hentingFeilet;
     return {
+        brukernavn: state.navbruker.data.navn,
         fnr,
         hendelser,
         valgtArbeidssituasjon,

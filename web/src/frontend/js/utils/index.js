@@ -7,7 +7,7 @@ export const visDato = (dato) => {
 
 export const lagNummer = (streng) => {
     return streng.replace(/[^\d.-]/g, '').replace(/-/g, '');
-}
+};
 
 export const formaterDato = (input) => {
     const grupper = lagNummer(input).split('.');
