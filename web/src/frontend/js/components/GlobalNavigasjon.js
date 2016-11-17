@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 const naermesteLederMenypunkt = {
-    navn: 'Nærmeste ledere',
-    sti: 'naermeste-ledere',
+    navn: 'Nærmeste leder',
+    sti: 'naermeste-leder',
 };
 
 const motemodulMenypunkt = {

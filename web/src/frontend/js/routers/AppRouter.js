@@ -9,7 +9,7 @@ const AppRouter = ({ history }) => {
     return (<Router history={history}>
         <Route path="/sykefravaer" component={FeilsideContainer} />
         <Route path="/sykefravaer/:fnr" component={NaermesteLedereContainer} />
-        <Route path="/sykefravaer/:fnr/naermeste-ledere" component={NaermesteLedereContainer} />
+        <Route path="/sykefravaer/:fnr/naermeste-leder" component={NaermesteLedereContainer} />
         <Route path="/sykefravaer/:fnr/mote" component={MotebookingContainer} />
         <Route path="/sykefravaer/:fnr/tidslinjen" component={TidslinjeContainer} />
         <Route path="/sykefravaer/:fnr/tidslinjen/:valgtArbeidssituasjon" component={TidslinjeContainer} />
