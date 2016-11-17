@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 const MotebookingIkon = ({ deltaker, index }) => {
     const finnKlasseOgTekst = () => {
-        const harSvart = deltaker.avvik.length > 0 || deltaker.tidOgSted
+        const harSvart = deltaker.avvik.length > 0 || deltaker.svar
         .map((alternativ) => {
             return alternativ.valgt;
         })
@@ -11,7 +11,7 @@ const MotebookingIkon = ({ deltaker, index }) => {
         });
 
         if (harSvart) {
-            return deltaker.tidOgSted[index].valgt ? { klasse: 'kan', tekst: 'kan' } : { klasse: 'kanikke', tekst: 'kan ikke' };
+            return deltaker.svar[index].valgt ? { klasse: 'kan', tekst: 'kan' } : { klasse: 'kanikke', tekst: 'kan ikke' };
         }
 
         return { klasse: 'ikkesvar', tekst: 'ikke svart' };

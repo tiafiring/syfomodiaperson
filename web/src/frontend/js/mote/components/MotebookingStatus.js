@@ -5,10 +5,9 @@ import Sidetopp from '../../components/Sidetopp';
 import { Varselstripe } from 'digisyfo-npm';
 
 const MotebookingStatus = ({ mote, avbrytMote, avbryter, avbrytFeilet }) => {
-    const { tidOgStedAlternativer, deltakere } = mote;
+    const { alternativer, deltakere } = mote;
     const deltakerEpost = deltakere ? deltakere[0].epost : '?';
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
-
     return (<div>
         <div className="panel">
             <Varselstripe type="suksess">
@@ -20,14 +19,14 @@ const MotebookingStatus = ({ mote, avbrytMote, avbryter, avbrytFeilet }) => {
         </div>
         <div className="panel">
             <Sidetopp tittel="Status for møteforespørselen" />
-            <h2 className="typo-undertittel blokk--s">Møtested</h2>
-            <p className="blokk--l">{tidOgStedAlternativer[0].sted}</p>
-            <table className="motestatus blokk--l">
+            <h2 className="typo-undertittel blokk-s">Møtested</h2>
+            <p className="blokk-l">{alternativer[0].sted}</p>
+            <table className="motestatus blokk-l">
                 <thead>
                     <tr>
                         <th className="motestatus__tittel">Møtetider</th>
                         {
-                            tidOgStedAlternativer.map((tidspunkt, index) => {
+                            alternativer.map((tidspunkt, index) => {
                                 return (<th key={index}>{getTidFraZulu(tidspunkt.tid)}</th>);
                             })
                         }
@@ -43,7 +42,7 @@ const MotebookingStatus = ({ mote, avbrytMote, avbryter, avbrytFeilet }) => {
                                 return (<tr key={index}>
                             <td><strong>Arbeidsgiver</strong> <span>{deltaker.navn}</span></td>
                             {
-                                    deltaker.tidOgSted.map((tidspunkt, index2) => {
+                                    deltaker.svar.map((tidspunkt, index2) => {
                                         return (<td key={index2} className="motestatus__svar">
                                             <MotebookingIkon deltaker={deltaker} index={index2} />
                                         </td>);
@@ -54,8 +53,8 @@ const MotebookingStatus = ({ mote, avbrytMote, avbryter, avbrytFeilet }) => {
                     }
                 </tbody>
             </table>
-            <div aria-live="polite" role="alert" className={avbrytFeilet ? 'blokk' : ''}>
-                { avbrytFeilet && <p>Beklager, det oppstod en feil. Prøv igjen litt senere.</p>}
+            <div aria-live="polite" role="alert">
+                { avbrytFeilet && <div className="blokk"><Varselstripe type="feil"><p>Beklager, det oppstod en feil. Prøv igjen litt senere.</p></Varselstripe></div>}
             </div>
             <div>
                 <button disabled={avbryter} className="rammeknapp js-avbryt" onClick={() => {
@@ -68,7 +67,7 @@ const MotebookingStatus = ({ mote, avbrytMote, avbryter, avbrytFeilet }) => {
 
 MotebookingStatus.propTypes = {
     mote: PropTypes.shape({
-        tidOgStedAlternativer: PropTypes.arrayOf(PropTypes.shape({
+        alternativer: PropTypes.arrayOf(PropTypes.shape({
             tid: PropTypes.string,
             sted: PropTypes.string,
         })),

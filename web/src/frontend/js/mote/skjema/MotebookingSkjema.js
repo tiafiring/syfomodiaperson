@@ -25,7 +25,7 @@ export function getData(values) {
         type: 'arbeidsgiver',
     });
 
-    const tidOgStedAlternativer = values.tidspunkter.map((tidspunkt) => {
+    const alternativer = values.tidspunkter.map((tidspunkt) => {
         return {
             tid: genererDato(tidspunkt.dato, tidspunkt.klokkeslett),
             sted: values.sted,
@@ -34,8 +34,8 @@ export function getData(values) {
     });
 
     return {
-        tidOgStedAlternativer,
-        deltakere: [Object.assign(deltaker, { tidOgSted: tidOgStedAlternativer, avvik: [] })],
+        alternativer,
+        deltakere: [Object.assign(deltaker, { svar: alternativer, avvik: [] })],
     };
 }
 

@@ -21,6 +21,7 @@ export default function moter(state = defaultState, action) {
         case 'MOTE_OPPRETTET': {
             const mote = Object.assign({}, action.data, {
                 fnr: action.data.fnr,
+                status: 'OPPRETTET',
             });
             return Object.assign({}, state, {
                 data: [...state.data, mote],

@@ -90,13 +90,15 @@ describe("MotebookingContainer", () => {
         });
 
 
-        it("Skal returnere mote", () => {
+        it("Skal returnere opprettet møte", () => {
             state.moter.data = [{
-                id: 1
+                id: 1,
+                status: "OPPRETTET"
             }]
             const props = mapStateToProps(state);
             expect(props.mote).to.deep.equal({
-                id: 1
+                id: 1,
+                status: "OPPRETTET"
             });
         });
 

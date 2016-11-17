@@ -7,7 +7,7 @@ describe("MotebookinIkon", () => {
     it("Viser ikke svart om bruker ikke har svart", () => {
 
         const deltaker = {
-            tidOgSted: [
+            svar: [
                 {
                     tid: "2012-12-12T11:12:00Z",
                     sted: "sted1",
@@ -35,7 +35,7 @@ describe("MotebookinIkon", () => {
     it("Viser kan om deltaker kan", () => {
 
         const deltaker = {
-            tidOgSted: [
+            svar: [
                 {
                     tid: "2012-12-12T11:12:00Z",
                     sted: "sted1",
@@ -63,7 +63,7 @@ describe("MotebookinIkon", () => {
     it("Viser kan ikke om deltaker ikke kan", () => {
 
         const deltaker = {
-            tidOgSted: [
+            svar: [
                 {
                     tid: "2012-12-12T11:12:00Z",
                     sted: "sted1",

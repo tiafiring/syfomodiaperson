@@ -11,19 +11,38 @@ describe("MotebookingStatus", () => {
     let avbrytMote;
 
     beforeEach(() => {
-        mote.tidOgStedAlternativer = [{
-            sted: "Oslo"
+        window.APP_SETTINGS = {
+            APP_ROOT: "/sykefravaer"
+        }
+        mote.alternativer = [{
+            "tid": "2012-12-12T11:00:00Z",
+            "sted": "Oslo by",
+            "valgt": false
+        }, {
+            "tid": "2009-09-09T07:00:00Z",
+            "sted": "Oslo by",
+            "valgt": false
         }];
         mote.deltakere = [{
             type: "arbeidsgiver",
             navn: "Helge",
             epost: "***REMOVED***",
-            tidOgSted: [{}],
+            avvik: [],
+            svar: [{
+                "tid": "2012-12-12T11:00:00Z",
+                "sted": "Oslo by",
+                "valgt": false
+            }, {
+                "tid": "2009-09-09T07:00:00Z",
+                "sted": "Oslo by",
+                "valgt": false
+            }],
         }, {
             type: "feil type",
             navn: "Ole",
+            avvik: [],
             epost: "***REMOVED***",
-            tidOgSted: [{}],
+            svar: [{}],
         }];
         avbrytMote = sinon.spy();
     })
@@ -35,12 +54,7 @@ describe("MotebookingStatus", () => {
 
     it("Skal vise sted", () => {
         const component = shallow(<MotebookingStatus mote={mote} />);
-        expect(component.text()).to.contain("Oslo"); 
-    });
-
-    it("Skal vise en tabell", () => {
-        const component = shallow(<MotebookingStatus mote={mote} />);
-        expect(component.find("table")).to.have.length(1);
+        expect(component.text()).to.contain("Oslo by"); 
     });
 
     it("Skal vise en tabell", () => {
@@ -64,7 +78,7 @@ describe("MotebookingStatus", () => {
 
     it("Skal vise feilmelding dersom avbrytFeilet", () => {
         const component = shallow(<MotebookingStatus mote={mote} avbrytMote={avbrytMote} avbrytFeilet />);
-        expect(component.text()).to.contain("Beklager");
+        expect(component.find(Varselstripe)).to.have.length(2);
     });
 
     it("Skal deaktivere knapp når det avbrytes", () => {

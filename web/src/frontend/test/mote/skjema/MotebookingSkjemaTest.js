@@ -326,7 +326,7 @@ describe("MotebookingSkjema", () => {
                         "navn": "***REMOVED***",
                         "epost": "ole.olsen@nav.no",
                         "type": "arbeidsgiver",
-                        "tidOgSted": [
+                        "svar": [
                             {
                                 "sted": "Oslo",
                                 "tid": "2016-08-12T13:00:00.000Z",
@@ -341,7 +341,7 @@ describe("MotebookingSkjema", () => {
                         "avvik": [],
                     }
                 ],
-                tidOgStedAlternativer: [{
+                alternativer: [{
                     "sted": "Oslo",
                     "tid": "2016-08-12T13:00:00.000Z",
                     "valgt": false
