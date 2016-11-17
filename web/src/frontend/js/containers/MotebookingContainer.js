@@ -53,7 +53,6 @@ export const mapStateToProps = (state) => {
     const aktivtMote = state.moter.data.filter((mote) => {
         return mote.status === 'OPPRETTET';
     })[0];
-    console.log(JSON.stringify(aktivtMote));
     const ledere = state.ledere.data.filter((leder) => {
         return leder.erOppgitt;
     });

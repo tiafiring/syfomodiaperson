@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import TextField from '../../components/TextField';
+import TextFieldLocked from '../../components/TextFieldLocked';
 import Tidspunkter from './Tidspunkter';
 import Sidetopp from '../../components/Sidetopp';
 
@@ -40,16 +41,13 @@ export function getData(values) {
 }
 
 export const VelgLeder = ({ ledere, onChange }) => {
-    let defaultValue = ledere.length === 1 ? ledere[0] : {};
-    defaultValue = JSON.stringify(defaultValue);
-
     return (<div className="navInput blokk--xl">
         <label htmlFor="velg-arbeidsgiver">Velg arbeidsgiver</label>
         <div className="select-container">
-            <select defaultValue={defaultValue} id="velg-arbeidsgiver" className="input-select" onChange={(event) => {
+            <select id="velg-arbeidsgiver" className="input-select" onChange={(event) => {
                 onChange(event.target.value);
             }}>
-                <option value="{}">Velg arbeidsgiver</option>
+                <option value={JSON.stringify({ manuell: false })}>Velg arbeidsgiver</option>
                 {
                     ledere
                     .sort((a, b) => {
@@ -72,6 +70,7 @@ export const VelgLeder = ({ ledere, onChange }) => {
                         return <option value={JSON.stringify(leder)} key={idx}>{`${leder.organisasjonsnavn} (${leder.navn})`}</option>;
                     })
                 }
+                <option value={JSON.stringify({ manuell: true })}>Ikke oppgitt &ndash; fyll inn manuelt</option>
             </select>
         </div>
     </div>);
@@ -82,14 +81,30 @@ VelgLeder.propTypes = {
     onChange: PropTypes.func,
 };
 
+export const FyllUtLeder = ({ FieldComponent }) => {
+    return (<div>
+        <div className="navInput blokk--xl">
+            <label htmlFor="js-ledernavn">Nærmeste leders navn</label>
+            <Field id="js-ledernavn" component={FieldComponent} name="deltakere[0].navn" className="input-xxl" />
+        </div>
+        <div className="navInput">
+            <label htmlFor="js-lederepost">E-post</label>
+            <Field id="js-lederepost" component={FieldComponent} type="email" name="deltakere[0].epost" className="input-xxl" />
+        </div>
+    </div>);
+};
+
+FyllUtLeder.propTypes = {
+    FieldComponent: PropTypes.func,
+};
+
 export class MotebookingSkjema extends Component {
-    componentDidUpdate() {
-        if (this.props.ledere.length === 1) {
-            const { autofill, ledere } = this.props;
-            const leder = ledere[0];
-            autofill('deltakere[0].navn', leder.navn || '');
-            autofill('deltakere[0].epost', leder.epost || '');
-        }
+    constructor(props) {
+        super(props);
+        this.state = {
+            visLederValg: this.props.ledere.length === 0,
+            manuell: true,
+        };
     }
 
     render() {
@@ -108,19 +123,14 @@ export class MotebookingSkjema extends Component {
                 <legend>1. Fyll inn arbeidsgiverens opplysninger</legend>
                 {
                     ledere.length > 0 && <VelgLeder ledere={ledere} onChange={(value) => {
-                        const leder = JSON.parse(value);
-                        autofill('deltakere[0].navn', leder.navn || '');
-                        autofill('deltakere[0].epost', leder.epost || '');
+                        const jsonValue = JSON.parse(value);
+                        const visLederValg = jsonValue.manuell || jsonValue.navn !== undefined;
+                        this.setState({ visLederValg, manuell: jsonValue.manuell });
+                        autofill('deltakere[0].navn', jsonValue.navn || '');
+                        autofill('deltakere[0].epost', jsonValue.epost || '');
                     }} />
                 }
-                <div className="navInput blokk--xl">
-                    <label htmlFor="navn">Nærmeste leders navn</label>
-                    <Field id="navn" component={TextField} name="deltakere[0].navn" className="input-xxl" />
-                </div>
-                <div className="navInput">
-                    <label htmlFor="epost">E-post</label>
-                    <Field id="epost" component={TextField} type="email" name="deltakere[0].epost" className="input-xxl" />
-                </div>
+                {this.state.visLederValg && <FyllUtLeder FieldComponent={this.state.manuell ? TextField : TextFieldLocked} /> }
             </fieldset>
 
             <fieldset className="skjema-fieldset blokk--xl">

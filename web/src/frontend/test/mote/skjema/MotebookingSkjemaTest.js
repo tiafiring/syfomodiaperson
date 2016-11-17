@@ -1,5 +1,7 @@
 import { expect } from 'chai';
-import { MotebookingSkjema, VelgLeder, validate, genererDato, getData } from '../../../js/mote/skjema/MotebookingSkjema';
+import { MotebookingSkjema, VelgLeder, FyllUtLeder, validate, genererDato, getData } from '../../../js/mote/skjema/MotebookingSkjema';
+import TextFieldLocked from '../../../js/components/TextFieldLocked';
+import TextField from '../../../js/components/TextField';
 import Tidspunkter from '../../../js/mote/skjema/Tidspunkter';
 import { Field } from 'redux-form';
 import { mount, shallow, render } from 'enzyme';
@@ -15,17 +17,6 @@ describe("MotebookingSkjema", () => {
         beforeEach(() => {
             handleSubmit = sinon.spy();
         })
-
-        it("Skal inneholde felter for å skrive inn arbeidsgivers opplysninger", () => {
-            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
-            expect(compo.find(".js-arbeidsgiver").find(Field)).to.have.length(2);
-        });
-
-        it("Skal inneholde felter med riktig type for å skrive inn arbeidsgivers opplysninger", () => {
-            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
-            expect(compo.find(".js-arbeidsgiver").find(Field).first().prop("name")).to.equal("deltakere[0].navn")
-            expect(compo.find(".js-arbeidsgiver").find(Field).last().prop("name")).to.equal("deltakere[0].epost")
-        });
 
         it("Skal inneholde tidspunkter", () => {
             const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
@@ -47,65 +38,74 @@ describe("MotebookingSkjema", () => {
             expect(compo.text()).to.contain("Beklager")
         });
 
-        it("Skal ikke vise en dropdown dersom det ikke finnes ledere", () => {
-            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} sendingFeilet />);
-            expect(compo.find(VelgLeder)).to.have.length(0);
+        describe("Dersom det ikke finnes ledere", () => {
+            it("SKal vise FyllUtLeder", () => {
+                const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
+                expect(compo.find(FyllUtLeder)).to.have.length(1);
+            })
+
+            it("Skal ikke vise en dropdown dersom det ikke finnes ledere", () => {
+                const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} sendingFeilet />);
+                expect(compo.find(VelgLeder)).to.have.length(0);
+            });
         });
 
-        it("Skal ikke vise en dropdown dersom det ikke finnes ledere", () => {
-            const compo = shallow(<MotebookingSkjema ledere={[{
-                navn: "Ole",
-                epost: "ole@ole.no",
-                organisasjonsnavn: "Oles pizza"
-            }]} handleSubmit={handleSubmit} sendingFeilet />);
-            expect(compo.find(VelgLeder)).to.have.length(1);
-        });
+        describe("Dersom det finnes ledere", () => {
 
-        it("Skal fylle ut skjema med leder dersom det bare finnes én leder", () => {
-            const autofill = sinon.spy();
-            const compo = shallow(<MotebookingSkjema autofill={autofill} ledere={[]} handleSubmit={handleSubmit} sendingFeilet />);
-            compo.setProps({
-                ledere: [{
+            let ledere;
+
+            beforeEach(() => {
+                ledere = [{
                     navn: "Ole",
-                    epost: "ole@ole.no"
-                }]
+                    epost: "ole@ole.no",
+                    organisasjonsnavn: "Oles pizza"
+                }];
             })
-            compo.instance().componentDidUpdate({
-                ledere: []
+
+            it("Skal vise en dropdown dersom det finnes ledere", () => {
+                const compo = shallow(<MotebookingSkjema ledere={ledere} handleSubmit={handleSubmit} sendingFeilet />);
+                expect(compo.find(VelgLeder)).to.have.length(1);
             });
-            expect(autofill.calledTwice).to.be.true;
-            expect(autofill.calledWith("deltakere[0].navn", "Ole")).to.be.true;
-            expect(autofill.calledWith("deltakere[0].epost", "ole@ole.no")).to.be.true;
+
+            it("Skal da ikke inneholde felter for å skrive inn arbeidsgivers opplysninger", () => {
+                const compo = shallow(<MotebookingSkjema ledere={ledere} handleSubmit={handleSubmit} />);
+                expect(compo.find(".js-arbeidsgiver").find(FyllUtLeder)).to.have.length(0);
+            });
+
+            it("Skal vise felter for å skrive inn arbeidsgivers opplysninger når state.visLederValg === true", () => {
+                const compo = shallow(<MotebookingSkjema ledere={ledere} handleSubmit={handleSubmit} />);
+                compo.setState({visLederValg: true})
+                expect(compo.find(".js-arbeidsgiver").find(FyllUtLeder)).to.have.length(1);
+            });
+
+            it("Skal sende inn TextField === TextField dersom manuell === true", () => {
+                const compo = shallow(<MotebookingSkjema ledere={ledere} handleSubmit={handleSubmit} />);
+                compo.setState({visLederValg: true, manuell: true})
+                expect(compo.find(".js-arbeidsgiver").find(FyllUtLeder).prop("FieldComponent")).to.equal(TextField)
+            });
+
+
+            it("Skal sende inn TextField === TextFieldLocked dersom manuell === false", () => {
+                const compo = shallow(<MotebookingSkjema ledere={ledere} handleSubmit={handleSubmit} />);
+                compo.setState({visLederValg: true, manuell: false})
+                expect(compo.find(".js-arbeidsgiver").find(FyllUtLeder).prop("FieldComponent")).to.equal(TextFieldLocked)
+            });
+
+        })
+
+    });
+
+    describe("FyllUtLeder", () => {
+        it("Skal inneholde felter for å skrive inn arbeidsgivers opplysninger", () => {
+            const compo = shallow(<FyllUtLeder />);
+            expect(compo.find(Field)).to.have.length(2);
         });
 
-        it("Skal ikke fylle ut skjema med leder dersom det finnes flere enn én leder", () => {
-            const autofill = sinon.spy();
-            const compo = shallow(<MotebookingSkjema autofill={autofill} ledere={[]} handleSubmit={handleSubmit} sendingFeilet />);
-            compo.setProps({
-                ledere: [{
-                    navn: "Ole"
-                }, {
-                    navn: "Nina"
-                }]
-            })
-            compo.instance().componentDidUpdate({
-                ledere: []
-            });
-            expect(autofill.called).to.be.false;
+        it("Skal inneholde felter med riktig type for å skrive inn arbeidsgivers opplysninger", () => {
+            const compo = shallow(<FyllUtLeder />);
+            expect(compo.find(Field).first().prop("name")).to.equal("deltakere[0].navn")
+            expect(compo.find(Field).last().prop("name")).to.equal("deltakere[0].epost")
         });
-
-        it("Skal ikke fylle ut skjema med leder dersom det finnes 0 ledere", () => {
-            const autofill = sinon.spy();
-            const compo = shallow(<MotebookingSkjema autofill={autofill} ledere={[]} handleSubmit={handleSubmit} sendingFeilet />);
-            compo.setProps({
-                ledere: []
-            })
-            compo.instance().componentDidUpdate({
-                ledere: []
-            });
-            expect(autofill.called).to.be.false;
-        });
-
     });
 
     describe("VelgLeder", () => {
@@ -144,6 +144,12 @@ describe("MotebookingSkjema", () => {
             });
             expect(onChange.calledOnce).to.be.true;
             expect(onChange.getCall(0).args[0]).to.equal("druer");
+        });
+
+        it("Skal inneholde et valg for manuell utfylling", () => {
+            const compo = mount(<VelgLeder ledere={ledere} onChange={onChange} />);
+            expect(compo.find("option")).to.have.length(6);
+            expect(compo.find("option").last().text()).to.contain("fyll inn manuelt")
         });
 
     });
