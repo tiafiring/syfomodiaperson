@@ -11,13 +11,8 @@ const motemodulMenypunkt = {
     sti: 'mote',
 };
 
-const tidslinjeMenypunkt = {
-    navn: 'Tidslinjen',
-    sti: 'tidslinjen',
-};
-
 const GlobalNavigasjon = ({ fnr, harTilgangMotemodul }) => {
-    const menypunkter = [naermesteLederMenypunkt, tidslinjeMenypunkt];
+    const menypunkter = [naermesteLederMenypunkt];
     if (harTilgangMotemodul) {
         menypunkter.push(motemodulMenypunkt);
     }
