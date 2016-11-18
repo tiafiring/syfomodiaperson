@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import Sidetopp from './Sidetopp';
-import { visDato } from '../utils/index';
+import { visDato } from '../utils/';
+import { Varselstripe } from 'digisyfo-npm';
 
 const Leder = ({ erOppgitt, orgnummer, organisasjonsnavn, epost, navn, tlf, fomDato }) => {
     return (<div className="naermesteLeder js-leder">
@@ -62,7 +63,11 @@ const NaermesteLedere = ({ ledere = [], navbruker }) => {
     const tittel = ledere.length > 1 ? 'Nærmeste ledere med personalansvar' : 'Nærmeste leder med personalansvar';
     return (<div className="panel">
         <Sidetopp tittel={tittel} />
-        <p className="blokk--l">Opplysninger under brukes i forbindelse med oppfølging</p>
+        <div className="blokk--l">
+            <Varselstripe>
+                <p>Opplysninger under brukes i forbindelse med oppfølging</p>
+            </Varselstripe>
+        </div>
         <div className="naermesteLedere">
             {
                 ledere.length === 0 && <p>Nærmeste leder med personalansvar for {navbruker.navn} er ikke oppgitt.</p>
