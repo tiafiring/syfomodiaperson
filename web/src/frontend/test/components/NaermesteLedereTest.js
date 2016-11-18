@@ -38,6 +38,12 @@ describe("NaermesteLedere", () => {
         navn: "Knut"
     }
 
+    beforeEach(() => {
+        window.APP_SETTINGS = {
+            APP_ROOT: "/sykefravaer"
+        }
+    })
+
     it("Skal vise en oppføring per leder", () => {
         const compo = mount(<NaermesteLedere ledere={ledere} />);
         expect(compo.find(".js-leder")).to.have.length(3);
