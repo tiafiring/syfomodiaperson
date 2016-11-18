@@ -12,6 +12,7 @@ class TextFieldLocked extends Component {
         if (this.state.erInaktiv !== prevState.erInaktiv) {
             setTimeout(() => {
                 this.refs.input.focus();
+                this.refs.input.select();
             }, 0);
         }
     }
@@ -19,6 +20,7 @@ class TextFieldLocked extends Component {
     render() {
         const { meta, placeholder, type, id, className, input } = this.props;
         return (<div className={meta.touched && meta.error && 'feil'}>
+            <div className="textfieldLocked">
             <input ref="input" disabled={this.state.erInaktiv} autoComplete="off" placeholder={placeholder} type={type || 'text'} id={id}
                 className={className} {...input} />
                 {
@@ -26,8 +28,9 @@ class TextFieldLocked extends Component {
                         this.setState({
                             erInaktiv: false,
                         });
-                    }} className="knapp knapp--liten js-rediger">Rediger</button>
+                    }} className="textfieldLocked__rediger js-rediger" aria-controls={id}>Rediger</button>
                 }
+            </div>
             <p className="skjema-feilmelding" aria-live="polite">{meta.touched && meta.error}</p>
         </div>);
     }

@@ -1,9 +1,10 @@
-import React, { PropTypes, Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
+import React, { PropTypes } from 'react';
+import { Field, Fields, reduxForm } from 'redux-form';
 import TextField from '../../components/TextField';
-import TextFieldLocked from '../../components/TextFieldLocked';
+import LederFields, { FyllUtLeder } from './LederFields';
 import Tidspunkter from './Tidspunkter';
 import Sidetopp from '../../components/Sidetopp';
+import { Varselstripe } from 'digisyfo-npm';
 
 export function genererDato(dato, klokkeslett) {
     const s = new Date();
@@ -40,123 +41,62 @@ export function getData(values) {
     };
 }
 
-export const VelgLeder = ({ ledere, onChange }) => {
-    return (<div className="navInput blokk--xl">
-        <label htmlFor="velg-arbeidsgiver">Velg arbeidsgiver</label>
-        <div className="select-container">
-            <select id="velg-arbeidsgiver" className="input-select" onChange={(event) => {
-                onChange(event.target.value);
-            }}>
-                <option value={JSON.stringify({ manuell: false })}>Velg arbeidsgiver</option>
-                {
-                    ledere
-                    .sort((a, b) => {
-                        if (a.navn > b.navn) {
-                            return 1;
-                        } else if (b.navn > a.navn) {
-                            return -1;
-                        }
-                        return 0;
-                    })
-                    .sort((a, b) => {
-                        if (a.organisasjonsnavn > b.organisasjonsnavn) {
-                            return 1;
-                        } else if (b.organisasjonsnavn > a.organisasjonsnavn) {
-                            return -1;
-                        }
-                        return 0;
-                    })
-                    .map((leder, idx) => {
-                        return <option value={JSON.stringify(leder)} key={idx}>{`${leder.organisasjonsnavn} (${leder.navn})`}</option>;
-                    })
-                }
-                <option value={JSON.stringify({ manuell: true })}>Ikke oppgitt &ndash; fyll inn manuelt</option>
-            </select>
-        </div>
-    </div>);
-};
+export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeilet, ledere, autofill, untouch, hentLedereFeiletBool }) => {
+    const submit = (values) => {
+        const data = getData(values);
+        data.fnr = fnr;
+        opprettMote(data);
+    };
 
-VelgLeder.propTypes = {
-    ledere: PropTypes.array,
-    onChange: PropTypes.func,
-};
+    return (<form className="panel" onSubmit={handleSubmit(submit)}>
+        <Sidetopp tittel="Møteforespørsel" />
 
-export const FyllUtLeder = ({ FieldComponent }) => {
-    return (<div>
-        <div className="navInput blokk--xl">
-            <label htmlFor="js-ledernavn">Nærmeste leders navn</label>
-            <Field id="js-ledernavn" component={FieldComponent} name="deltakere[0].navn" className="input-xxl" />
-        </div>
-        <div className="navInput">
-            <label htmlFor="js-lederepost">E-post</label>
-            <Field id="js-lederepost" component={FieldComponent} type="email" name="deltakere[0].epost" className="input-xxl" />
-        </div>
-    </div>);
-};
+        {
+            hentLedereFeiletBool && <div className="blokk--xl">
+                <Varselstripe>
+                    <p>Beklager, det oppstod en feil ved uthenting av nærmeste ledere. Du kan likevel sende møteforespøsel.</p>
+                </Varselstripe>
+            </div>
+        }
 
-FyllUtLeder.propTypes = {
-    FieldComponent: PropTypes.func,
-};
+        <fieldset className="skjema-fieldset blokk--xl js-arbeidsgiver">
+            <legend>1. Fyll inn arbeidsgiverens opplysninger</legend>
+            {
+                ledere.length > 0 && <Fields
+                    autofill={autofill}
+                    untouch={untouch}
+                    names={['arbeidsgiverType', 'deltakere[0].navn', 'deltakere[0].epost']}
+                    ledere={ledere}
+                    component={LederFields} />
+            }
+            {
+                ledere.length === 0 && <FyllUtLeder />
+            }
+        </fieldset>
 
-export class MotebookingSkjema extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            visLederValg: this.props.ledere.length === 0,
-            manuell: true,
-        };
-    }
+        <fieldset className="skjema-fieldset blokk--xl">
+            <legend>2. Velg dato, tid og sted</legend>
+            <Tidspunkter />
+            <label htmlFor="sted">Sted</label>
+            <Field id="sted" component={TextField} name="sted" className="input-xxl js-sted" placeholder="Skriv møtested eller om det er et videomøte" />
+        </fieldset>
 
-    render() {
-        const { handleSubmit, opprettMote, fnr, sender, sendingFeilet, ledere, autofill } = this.props;
-
-        const submit = (values) => {
-            const data = getData(values);
-            data.fnr = fnr;
-            opprettMote(data);
-        };
-
-        return (<form className="panel" onSubmit={handleSubmit(submit)}>
-            <Sidetopp tittel="Møteforespørsel" />
-
-            <fieldset className="skjema-fieldset blokk--xl js-arbeidsgiver">
-                <legend>1. Fyll inn arbeidsgiverens opplysninger</legend>
-                {
-                    ledere.length > 0 && <VelgLeder ledere={ledere} onChange={(value) => {
-                        const jsonValue = JSON.parse(value);
-                        const visLederValg = jsonValue.manuell || jsonValue.navn !== undefined;
-                        this.setState({ visLederValg, manuell: jsonValue.manuell });
-                        autofill('deltakere[0].navn', jsonValue.navn || '');
-                        autofill('deltakere[0].epost', jsonValue.epost || '');
-                    }} />
-                }
-                {this.state.visLederValg && <FyllUtLeder FieldComponent={this.state.manuell ? TextField : TextFieldLocked} /> }
-            </fieldset>
-
-            <fieldset className="skjema-fieldset blokk--xl">
-                <legend>2. Velg dato, tid og sted</legend>
-                <Tidspunkter />
-                <label htmlFor="sted">Sted</label>
-                <Field id="sted" component={TextField} name="sted" className="input-xxl js-sted" placeholder="Skriv møtested eller om det er et videomøte" />
-            </fieldset>
-
-            <div aria-live="polite" role="alert">
-                { sendingFeilet && <div className="panel panel--ramme">
-                    <div className="varselstripe varselstripe--feil">
-                        <div className="varselstripe__ikon">
-                            <img src="/sykefravaer/img/svg/utropstegn.svg" />
-                        </div>
-                        <p className="sist">Beklager, det oppstod en feil. Prøv igjen litt senere.</p>
+        <div aria-live="polite" role="alert">
+            { sendingFeilet && <div className="panel panel--ramme">
+                <div className="varselstripe varselstripe--feil">
+                    <div className="varselstripe__ikon">
+                        <img src="/sykefravaer/img/svg/utropstegn.svg" />
                     </div>
-                </div>}
-            </div>
+                    <p className="sist">Beklager, det oppstod en feil. Prøv igjen litt senere.</p>
+                </div>
+            </div>}
+        </div>
 
-            <div className="knapperad">
-                <input type="submit" className="knapp" value="Send" disabled={sender} />
-            </div>
-        </form>);
-    }
-}
+        <div className="knapperad">
+            <input type="submit" className="knapp" value="Send" disabled={sender} />
+        </div>
+    </form>);
+};
 
 MotebookingSkjema.propTypes = {
     fnr: PropTypes.string,
@@ -167,6 +107,8 @@ MotebookingSkjema.propTypes = {
     sendingFeilet: PropTypes.bool,
     ledere: PropTypes.array,
     autofill: PropTypes.func,
+    untouch: PropTypes.func,
+    hentLedereFeiletBool: PropTypes.func,
 };
 
 function erGyldigEpost(email) {
@@ -184,7 +126,7 @@ function erGyldigDato(dato) {
     return re.test(dato);
 }
 
-export function validate(values) {
+export function validate(values, props) {
     const feilmeldinger = {};
     const lederFeilmelding = {};
     let tidspunkterFeilmeldinger = [{}, {}];
@@ -235,6 +177,10 @@ export function validate(values) {
 
     if (!values.sted || values.sted.trim() === '') {
         feilmeldinger.sted = 'Vennligst angi møtested';
+    }
+
+    if (values.arbeidsgiverType === 'VELG' || (props.ledere.length > 0 && !values.arbeidsgiverType)) {
+        feilmeldinger.arbeidsgiverType = 'Vennligst velg arbeidsgiver';
     }
 
     return feilmeldinger;

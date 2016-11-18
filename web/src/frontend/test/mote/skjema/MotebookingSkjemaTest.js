@@ -1,10 +1,12 @@
 import { expect } from 'chai';
-import { MotebookingSkjema, VelgLeder, FyllUtLeder, validate, genererDato, getData } from '../../../js/mote/skjema/MotebookingSkjema';
+import { MotebookingSkjema, validate, genererDato, getData } from '../../../js/mote/skjema/MotebookingSkjema';
 import TextFieldLocked from '../../../js/components/TextFieldLocked';
+import LederFields, { FyllUtLeder } from '../../../js/mote/skjema/LederFields';
 import TextField from '../../../js/components/TextField';
 import Tidspunkter from '../../../js/mote/skjema/Tidspunkter';
-import { Field } from 'redux-form';
+import { Field, Fields } from 'redux-form';
 import { mount, shallow, render } from 'enzyme';
+import { Varselstripe } from 'digisyfo-npm';
 import React from 'react';
 import sinon from 'sinon';
 
@@ -38,15 +40,20 @@ describe("MotebookingSkjema", () => {
             expect(compo.text()).to.contain("Beklager")
         });
 
+        it("Skal vise en varselstripe dersom henting av ledere feiler", () => {
+            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} hentLedereFeiletBool />);
+            expect(compo.find(Varselstripe)).to.have.length(1);
+        })
+
         describe("Dersom det ikke finnes ledere", () => {
             it("SKal vise FyllUtLeder", () => {
                 const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
                 expect(compo.find(FyllUtLeder)).to.have.length(1);
             })
 
-            it("Skal ikke vise en dropdown dersom det ikke finnes ledere", () => {
-                const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} sendingFeilet />);
-                expect(compo.find(VelgLeder)).to.have.length(0);
+            it("Skal ikke vise en dropdown", () => {
+                const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
+                expect(compo.find(Fields)).to.have.length(0);
             });
         });
 
@@ -60,110 +67,37 @@ describe("MotebookingSkjema", () => {
                     epost: "ole@ole.no",
                     organisasjonsnavn: "Oles pizza"
                 }];
+            });
+
+            it("SKal ikke vise FyllUtLeder", () => {
+                const compo = shallow(<MotebookingSkjema ledere={ledere} handleSubmit={handleSubmit} />);
+                expect(compo.find(FyllUtLeder)).to.have.length(0);
             })
 
-            it("Skal vise en dropdown dersom det finnes ledere", () => {
-                const compo = shallow(<MotebookingSkjema ledere={ledere} handleSubmit={handleSubmit} sendingFeilet />);
-                expect(compo.find(VelgLeder)).to.have.length(1);
-            });
-
-            it("Skal da ikke inneholde felter for å skrive inn arbeidsgivers opplysninger", () => {
+            it("Skal vise en Fields", () => {
                 const compo = shallow(<MotebookingSkjema ledere={ledere} handleSubmit={handleSubmit} />);
-                expect(compo.find(".js-arbeidsgiver").find(FyllUtLeder)).to.have.length(0);
-            });
-
-            it("Skal vise felter for å skrive inn arbeidsgivers opplysninger når state.visLederValg === true", () => {
-                const compo = shallow(<MotebookingSkjema ledere={ledere} handleSubmit={handleSubmit} />);
-                compo.setState({visLederValg: true})
-                expect(compo.find(".js-arbeidsgiver").find(FyllUtLeder)).to.have.length(1);
-            });
-
-            it("Skal sende inn TextField === TextField dersom manuell === true", () => {
-                const compo = shallow(<MotebookingSkjema ledere={ledere} handleSubmit={handleSubmit} />);
-                compo.setState({visLederValg: true, manuell: true})
-                expect(compo.find(".js-arbeidsgiver").find(FyllUtLeder).prop("FieldComponent")).to.equal(TextField)
-            });
-
-
-            it("Skal sende inn TextField === TextFieldLocked dersom manuell === false", () => {
-                const compo = shallow(<MotebookingSkjema ledere={ledere} handleSubmit={handleSubmit} />);
-                compo.setState({visLederValg: true, manuell: false})
-                expect(compo.find(".js-arbeidsgiver").find(FyllUtLeder).prop("FieldComponent")).to.equal(TextFieldLocked)
+                expect(compo.find(Fields)).to.have.length(1);
+                expect(compo.find(Fields).prop("component")).to.deep.equal(LederFields);
             });
 
         })
 
     });
 
-    describe("FyllUtLeder", () => {
-        it("Skal inneholde felter for å skrive inn arbeidsgivers opplysninger", () => {
-            const compo = shallow(<FyllUtLeder />);
-            expect(compo.find(Field)).to.have.length(2);
-        });
-
-        it("Skal inneholde felter med riktig type for å skrive inn arbeidsgivers opplysninger", () => {
-            const compo = shallow(<FyllUtLeder />);
-            expect(compo.find(Field).first().prop("name")).to.equal("deltakere[0].navn")
-            expect(compo.find(Field).last().prop("name")).to.equal("deltakere[0].epost")
-        });
-    });
-
-    describe("VelgLeder", () => {
-
-        let onChange;
-        let ledere;
-
-        beforeEach(() => {
-            onChange = sinon.spy();
-            ledere = [{
-                id: 1,
-                navn: "Bjarne",
-                organisasjonsnavn: "BEKK"
-            }, {
-                id: 2,
-                navn: "Arne", 
-                organisasjonsnavn: "BEKK"
-            }, {
-                id: 3, 
-                navn: "Abba",
-                organisasjonsnavn: "BEKK"
-            }, {
-                id: 4,
-                navn: "Aage",
-                organisasjonsnavn: "ABC Buss"
-            }]
-        });
-
-        it("Skal kalle onChange v/change", () => {
-            const compo = mount(<VelgLeder ledere={ledere} onChange={onChange} />);
-
-            compo.find("select").simulate("change", {
-                target: {
-                    value: "druer"
-                }
-            });
-            expect(onChange.calledOnce).to.be.true;
-            expect(onChange.getCall(0).args[0]).to.equal("druer");
-        });
-
-        it("Skal inneholde et valg for manuell utfylling", () => {
-            const compo = mount(<VelgLeder ledere={ledere} onChange={onChange} />);
-            expect(compo.find("option")).to.have.length(6);
-            expect(compo.find("option").last().text()).to.contain("fyll inn manuelt")
-        });
-
-    });
-
     describe("validate", () => {
 
         let values;
+        let props;
 
         beforeEach(() => {
             values = {};
+            props = {
+                ledere: []
+            };
         });
 
         it("Skal validere nærmeste leders e-post dersom e-post ikke er fylt ut", () => {
-            const res = validate(values);
+            const res = validate(values, props);
             expect(res.deltakere[0].epost).to.equal("Vennligst fyll ut nærmeste leders e-post-adresse");
         });
 
@@ -171,17 +105,17 @@ describe("MotebookingSkjema", () => {
             values.deltakere = [{
                 epost: "min epost"
             }];
-            const res = validate(values);
+            const res = validate(values, props);
             expect(res.deltakere[0].epost).to.equal("Vennligst fyll ut en gyldig e-post-adresse");
         });
 
         it("Skal validere nærmeste leders navn dersom det ikke er fylt ut", () => {
-            const res = validate(values);
+            const res = validate(values, props);
             expect(res.deltakere[0].navn).to.equal("Vennligst fyll ut nærmeste leders navn");
         });
 
         it("Skal validere tidspunkter dersom ingen felt er angitt (1)", () => {
-            const res = validate(values);
+            const res = validate(values, props);
             expect(res.tidspunkter).to.deep.equal([{
                 dato: "Vennligst angi dato",
                 klokkeslett: "Vennligst angi klokkeslett"
@@ -193,7 +127,7 @@ describe("MotebookingSkjema", () => {
 
         it("Skal validere tidspunkter dersom ingen felt er angitt (2)", () => {
             values.tidspunkter = []
-            const res = validate(values);
+            const res = validate(values, props);
             expect(res.tidspunkter).to.deep.equal([{
                 dato: "Vennligst angi dato",
                 klokkeslett: "Vennligst angi klokkeslett"
@@ -210,7 +144,7 @@ describe("MotebookingSkjema", () => {
                 dato: "22.01.2016",
                 klokkeslett: "10.00"
             }]
-            const res = validate(values);
+            const res = validate(values, props);
             expect(res.tidspunkter).to.deep.equal([{
                 dato: "Vennligst angi dato",
             }, {}])
@@ -220,7 +154,7 @@ describe("MotebookingSkjema", () => {
             values.tidspunkter = [{
                 dato: "A1.12.2016",
             }, {}]
-            const res = validate(values);
+            const res = validate(values, props);
             expect(res.tidspunkter[0].dato).to.equal("Vennligst angi riktig datoformat; dd.mm.åååå");
         });
 
@@ -229,7 +163,7 @@ describe("MotebookingSkjema", () => {
                 dato: "12.12.2016",
                 klokkeslett: "A1.11"
             }, {}]
-            const res = validate(values);
+            const res = validate(values, props);
             expect(res.tidspunkter[0].klokkeslett).to.equal("Vennligst angi riktig format; f.eks. 13.00");
         });
 
@@ -240,7 +174,7 @@ describe("MotebookingSkjema", () => {
             }, {
                 klokkeslett: "10.00"
             }]
-            const res = validate(values);
+            const res = validate(values, props);
             expect(res.tidspunkter).to.deep.equal([{}, {
                 dato: "Vennligst angi dato",
             }])
@@ -253,33 +187,62 @@ describe("MotebookingSkjema", () => {
             }, {
                 dato: "22.01.2016",
             }]
-            const res = validate(values);
+            const res = validate(values, props);
             expect(res.tidspunkter).to.deep.equal([{}, {
                 klokkeslett: "Vennligst angi klokkeslett",
             }])
         });
 
         it("Skal validere sted dersom sted ikke finnes", () => {
-            const res = validate(values)
+            const res = validate(values, props);
             expect(res.sted).to.equal("Vennligst angi møtested")
         });
 
         it("Skal validere sted dersom sted finnes", () => {
             values.sted = "Økernveien 94"
-            const res = validate(values)
+            const res = validate(values, props);
             expect(res.sted).to.be.undefined;
         });
 
         it("Skal validere sted dersom sted er en tom streng (1)", () => {
             values.sted = " ";
-            const res = validate(values)
+            const res = validate(values, props);
             expect(res.sted).to.equal("Vennligst angi møtested")
         });
 
         it("Skal validere sted dersom sted er en tom streng (2)", () => {
             values.sted = "";
-            const res = validate(values)
+            const res = validate(values, props);
             expect(res.sted).to.equal("Vennligst angi møtested")
+        });
+
+        it("Skal validere arbeidsgiverType dersom det finnes ledere", () => {
+            props.ledere = [{id: 1}];
+            const res = validate(values, props);
+            expect(res.arbeidsgiverType).to.equal("Vennligst velg arbeidsgiver");
+        });
+
+        it("Skal ikke validere arbeidsgiverType dersom det ikke finnes ledere", () => {
+            const res = validate(values, props);
+            expect(res.arbeidsgiverType).to.be.undefined;
+        });
+
+        it("Skal ikke klage på arbeidsgiverType dersom det er valgt arbeidsgiverType", () => {
+            values.arbeidsgiverType = "manuell";
+            const res = validate(values, props);
+            expect(res.arbeidsgiverType).to.be.undefined;
+
+            values.arbeidsgiverType = "123";
+            const res2 = validate(values, props);
+            expect(res2.arbeidsgiverType).to.be.undefined;
+        });
+
+
+        it("Skal klage på arbeidsgiverType dersom det er valgt arbeidsgiverType === 'VELG' og det finnes ledere", () => {
+            values.ledere = [{ id: "88"}];
+            values.arbeidsgiverType = "VELG";
+            const res = validate(values, props);
+            expect(res.arbeidsgiverType).to.equal("Vennligst velg arbeidsgiver");
         });
 
     })

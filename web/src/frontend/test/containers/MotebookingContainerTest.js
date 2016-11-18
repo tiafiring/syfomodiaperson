@@ -40,9 +40,9 @@ describe("MotebookingContainer", () => {
             expect(hentLedere.calledWith("22")).to.be.true;
         });
 
-        it("Skal vise feilmelding hvis hentingFeilet", () => {
+        it("Skal vise feilmelding hvis hentMoterFeiletBool", () => {
             const mote = {};
-            const component = shallow(<MotebookingSide hentMoter={hentMoter} hentLedere={hentLedere} mote={{}} hentingFeilet />)
+            const component = shallow(<MotebookingSide hentMoter={hentMoter} hentLedere={hentLedere} mote={{}} hentMoterFeiletBool />)
             expect(component.find(Feilmelding)).to.have.length(1)
         });
 
@@ -169,7 +169,7 @@ describe("MotebookingContainer", () => {
             }]
             state.moter.hentingFeilet = true;
             const props = mapStateToProps(state);
-            expect(props.hentingFeilet).to.be.true;
+            expect(props.hentMoterFeiletBool).to.be.true;
         });
 
         it("Skal returnere hentingFeilet når henting av møter ikke feiler", () => {
@@ -178,21 +178,21 @@ describe("MotebookingContainer", () => {
             }]
             state.moter.hentingFeilet = false;
             const props = mapStateToProps(state);
-            expect(props.hentingFeilet).to.be.false;
+            expect(props.hentMoterFeiletBool).to.be.false;
         });
 
         it("Skal returnere hentingFeilet når henting av ledere feiler", () => {
             state.ledere.data = []
             state.ledere.hentingFeilet = true;
             const props = mapStateToProps(state);
-            expect(props.hentingFeilet).to.be.true;
+            expect(props.hentLedereFeiletBool).to.be.true;
         });
 
         it("Skal returnere hentingFeilet når henting av ledere ikke feiler", () => {
             state.ledere.data = []
             state.ledere.hentingFeilet = false;
             const props = mapStateToProps(state);
-            expect(props.hentingFeilet).to.be.false;
+            expect(props.hentLedereFeiletBool).to.be.false;
         });
 
         it("Skal returnere sendingFeilet", () => {

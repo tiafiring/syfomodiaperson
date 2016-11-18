@@ -16,14 +16,14 @@ export class MotebookingSide extends Component {
     }
 
     render() {
-        const { henter, hentingFeilet, mote, avbrytMote, avbryter, avbrytFeilet } = this.props;
+        const { henter, hentMoterFeiletBool, mote, avbrytMote, avbryter, avbrytFeilet } = this.props;
         return (<Side tittel="Møteplanlegger">
             {
                 (() => {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (hentingFeilet) {
+                    if (hentMoterFeiletBool) {
                         return <Feilmelding />;
                     }
                     if (mote) {
@@ -42,7 +42,8 @@ MotebookingSide.propTypes = {
     hentMoter: PropTypes.func,
     hentLedere: PropTypes.func,
     henter: PropTypes.bool,
-    hentingFeilet: PropTypes.bool,
+    hentMoterFeiletBool: PropTypes.bool,
+    hentLedereFeiletBool: PropTypes.bool,
     avbrytMote: PropTypes.func,
     avbryter: PropTypes.bool,
     avbrytFeilet: PropTypes.bool,
@@ -64,7 +65,8 @@ export const mapStateToProps = (state) => {
         henter: state.moter.henter || state.ledere.henter,
         sender: state.moter.sender,
         avbryter: state.moter.avbryter,
-        hentingFeilet: state.moter.hentingFeilet || state.ledere.hentingFeilet,
+        hentMoterFeiletBool: state.moter.hentingFeilet,
+        hentLedereFeiletBool: state.ledere.hentingFeilet,
         sendingFeilet: state.moter.sendingFeilet,
         avbrytFeilet: state.moter.avbrytFeilet,
     };

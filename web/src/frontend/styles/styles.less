@@ -47,6 +47,7 @@
 @import "_tidslinjeBoble";
 @import "_tidslinjeHendelse";
 @import "_radiofaner";
+@import "_textfieldLocked";
 @import "_til-modig-frontend";
 
 .mixin-panel-padding() {
@@ -75,4 +76,15 @@
 
 .select-container {
     box-sizing: border-box;
+}
+
+select.input-xxl {
+    padding-left: .45rem;
+    width: ~'calc(100% - 1.7rem - .45rem - 2px)';
+    max-width: ~'calc(420px - 1.7rem - .45rem - 2px)';
+
+    option {
+        line-height: 2;
+        .mixin-typo-infotekst();
+    }
 }
