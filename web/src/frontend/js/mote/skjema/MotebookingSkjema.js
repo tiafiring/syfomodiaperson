@@ -108,7 +108,7 @@ MotebookingSkjema.propTypes = {
     ledere: PropTypes.array,
     autofill: PropTypes.func,
     untouch: PropTypes.func,
-    hentLedereFeiletBool: PropTypes.func,
+    hentLedereFeiletBool: PropTypes.bool,
 };
 
 function erGyldigEpost(email) {
