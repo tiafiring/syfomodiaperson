@@ -1,17 +1,24 @@
-a {
+a, button.lenke {
     color: @color-link;
     text-decoration: none;
 }
 
-a:focus {
+a:focus, button.lenke:focus {
     background-color: @color-focus;
     outline: none;
 }
 
-.side-innhold a {
+.side-innhold a, .lenke {
     border-bottom: 1px solid @color-border;
 
     &:hover {
         border-color: @color-link;
     }
+}
+
+button.lenke {
+    border: 0;
+    border-bottom: 1px solid @color-border;
+    padding: 0;
+    background-color: transparent;
 }

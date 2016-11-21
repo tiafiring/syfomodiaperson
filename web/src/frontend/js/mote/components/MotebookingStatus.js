@@ -3,11 +3,19 @@ import MotebookingIkon from './MotebookingIkon';
 import { getTidFraZulu, getDatoFraZulu } from '../utils';
 import Sidetopp from '../../components/Sidetopp';
 import { Varselstripe } from 'digisyfo-npm';
+import { Link } from 'react-router';
 
-const MotebookingStatus = ({ mote, avbrytMote, avbryter, avbrytFeilet }) => {
+const MotebookingStatus = ({ fnr, mote, avbrytMote, avbryter, avbrytFeilet }) => {
     const { alternativer, deltakere } = mote;
     const deltakerEpost = deltakere ? deltakere[0].epost : '?';
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
+    const arbeidsgiverDeltaker = deltakere.filter((deltaker) => {
+        return deltaker.type === 'arbeidsgiver';
+    })[0];
+    const visVelgTidspunkt = arbeidsgiverDeltaker && arbeidsgiverDeltaker.svar.map((svar) => {
+        return svar.valgt;
+    }).length > 0;
+
     return (<div>
         <div className="panel">
             <Varselstripe type="suksess">
@@ -52,15 +60,32 @@ const MotebookingStatus = ({ mote, avbrytMote, avbryter, avbrytFeilet }) => {
                             })
                     }
                 </tbody>
+                {
+                    visVelgTidspunkt && <tfoot>
+                        <tr>
+                            <td />
+                            {
+                                arbeidsgiverDeltaker.svar.map((svar, index) => {
+                                    if (svar.valgt) {
+                                        return (<td key={index} >
+                                            <Link to={`/sykefravaer/${fnr}/mote/bekreft/${svar.id}`} className="lenke js-velg-tidspunkt">Velg tidspunkt for møte</Link>
+                                        </td>)
+                                    }
+                                    return <td key={index} />;
+                                })
+                            }
+                        </tr>
+                    </tfoot>
+                }
             </table>
             <div aria-live="polite" role="alert">
                 { avbrytFeilet && <div className="blokk"><Varselstripe type="feil"><p>Beklager, det oppstod en feil. Prøv igjen litt senere.</p></Varselstripe></div>}
             </div>
-            <div>
-                <button disabled={avbryter} className="rammeknapp js-avbryt" onClick={() => {
-                    avbrytMote(mote.moteUuid);
-                }}>Nytt tidspunkt</button>
-            </div>
+        </div>
+        <div>
+            <button disabled={avbryter} className="knapp js-avbryt" onClick={() => {
+                avbrytMote(mote.moteUuid);
+            }}>Nytt tidspunkt</button>
         </div>
     </div>);
 };

@@ -17,11 +17,13 @@ describe("MotebookingStatus", () => {
         mote.alternativer = [{
             "tid": "2012-12-12T11:00:00Z",
             "sted": "Oslo by",
-            "valgt": false
+            "valgt": false,
+            "id": 1
         }, {
             "tid": "2009-09-09T07:00:00Z",
             "sted": "Oslo by",
-            "valgt": false
+            "valgt": false,
+            "id": 2
         }];
         mote.deltakere = [{
             type: "arbeidsgiver",
@@ -31,11 +33,13 @@ describe("MotebookingStatus", () => {
             svar: [{
                 "tid": "2012-12-12T11:00:00Z",
                 "sted": "Oslo by",
-                "valgt": false
+                "valgt": false,
+                "id": 1
             }, {
                 "tid": "2009-09-09T07:00:00Z",
                 "sted": "Oslo by",
-                "valgt": false
+                "valgt": false,
+                "id": 2
             }],
         }, {
             type: "feil type",
@@ -85,5 +89,25 @@ describe("MotebookingStatus", () => {
         const component = shallow(<MotebookingStatus mote={mote} avbrytMote={avbrytMote} avbryter />);
         expect(component.find(".js-avbryt")).to.be.disabled;
     });
+
+    it("Skal ikke vise en knapp med teksten 'Velg tidspunkt for møte'", () => {
+        const component = shallow(<MotebookingStatus mote={mote} avbrytMote={avbrytMote} />);
+        expect(component.find(".js-velg-tidspunkt")).to.have.length(0);
+    });
+
+
+    describe("Når det er kommet svar fra arbeidsgiver og arbeidsgiver kan stille", () => {
+        
+        beforeEach(() => {
+            mote.deltakere[0].svar[0].valgt = true;
+        });
+
+        it("Skal vise en knapp med teksten 'Velg tidspunkt for møte'", () => {
+            const component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} avbrytMote={avbrytMote} />);
+            expect(component.find(".js-velg-tidspunkt")).to.have.length(1);
+            expect(component.find(".js-velg-tidspunkt")).prop("href").to.equal("/sykefravaer/***REMOVED***/mote/bekreft/1")
+        });
+
+    })
 
 });

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Side from '../sider/Side';
 import MotebookingSkjema from '../mote/skjema/MotebookingSkjema';
-import MotebookingStatus from '../mote/components/MotebookingStatus';
+import MotestatusContainer from '../mote/containers/MotestatusContainer';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import * as moterActions from '../mote/actions/moter_actions';
@@ -16,7 +16,7 @@ export class MotebookingSide extends Component {
     }
 
     render() {
-        const { henter, hentMoterFeiletBool, mote, avbrytMote, avbryter, avbrytFeilet } = this.props;
+        const { henter, hentMoterFeiletBool, mote, avbrytMote, avbryter, avbrytFeilet, fnr } = this.props;
         return (<Side tittel="Møteplanlegger">
             {
                 (() => {
@@ -27,7 +27,7 @@ export class MotebookingSide extends Component {
                         return <Feilmelding />;
                     }
                     if (mote) {
-                        return <MotebookingStatus mote={mote} avbrytMote={avbrytMote} avbryter={avbryter} avbrytFeilet={avbrytFeilet} />;
+                        return <MotestatusContainer moteUuid={mote.moteUuid} />;
                     }
                     return <MotebookingSkjema {...this.props} />;
                 })()
@@ -49,7 +49,7 @@ MotebookingSide.propTypes = {
     avbrytFeilet: PropTypes.bool,
 };
 
-export const mapStateToProps = (state) => {
+export const mapStateToProps = (state, ownProps) => {
     const fnr = state.navbruker.data.fnr;
     const aktivtMote = state.moter.data.filter((mote) => {
         return mote.status === 'OPPRETTET';
@@ -57,18 +57,16 @@ export const mapStateToProps = (state) => {
     const ledere = state.ledere.data.filter((leder) => {
         return leder.erOppgitt;
     });
-
+    
     return {
         fnr,
         mote: aktivtMote,
         ledere,
         henter: state.moter.henter || state.ledere.henter,
         sender: state.moter.sender,
-        avbryter: state.moter.avbryter,
         hentMoterFeiletBool: state.moter.hentingFeilet,
         hentLedereFeiletBool: state.ledere.hentingFeilet,
         sendingFeilet: state.moter.sendingFeilet,
-        avbrytFeilet: state.moter.avbrytFeilet,
     };
 };
 

@@ -4,7 +4,7 @@ import { mount, shallow, render } from 'enzyme';
 import AppSpinner from '../../js/components/AppSpinner';
 import Feilmelding from '../../js/components/Feilmelding';
 import MotebookingSkjema from '../../js/mote/skjema/MotebookingSkjema';
-import MotebookingStatus from '../../js/mote/components/MotebookingStatus';
+import MotestatusContainer from '../../js/mote/containers/MotestatusContainer';
 import { mapStateToProps, MotebookingSide } from '../../js/containers/MotebookingContainer';
 import sinon from 'sinon';
 
@@ -46,11 +46,13 @@ describe("MotebookingContainer", () => {
             expect(component.find(Feilmelding)).to.have.length(1)
         });
 
-        it("Skal vise MotebookingStatus hvis det finnes møte", () => {
-            const mote = {};
+        it("Skal vise MotestatusContainer hvis det finnes møte", () => {
+            const mote = {
+                moteUuid: "8877"
+            };
             const avbrytMote = sinon.spy();
-            const component = shallow(<MotebookingSide hentMoter={hentMoter} hentLedere={hentLedere} mote={{}} avbrytMote={avbrytMote} />)
-            expect(component.find(MotebookingStatus)).to.have.length(1);
+            const component = shallow(<MotebookingSide hentMoter={hentMoter} hentLedere={hentLedere} mote={mote} />)
+            expect(component.contains(<MotestatusContainer moteUuid={"8877"} />)).to.be.true;
         });
 
     })
