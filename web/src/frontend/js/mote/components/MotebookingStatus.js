@@ -5,9 +5,9 @@ import Sidetopp from '../../components/Sidetopp';
 import { Varselstripe } from 'digisyfo-npm';
 import { Link } from 'react-router';
 
-const MotetidspunktValgt = () => {
-    return <div className="motetidspunktValgt">Møtetidspunkt valgt, møteresultat sendt til partene</div>
-}
+export const MotetidspunktValgt = () => {
+    return <div className="motetidspunktValgt">Møtetidspunkt valgt, møteresultat sendt til partene</div>;
+};
 
 const MotebookingStatus = ({ fnr, mote, avbrytMote, avbryter, avbrytFeilet }) => {
     const { alternativer, deltakere } = mote;

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import MotebookingStatus from '../../../js/mote/components/MotebookingStatus'
+import MotebookingStatus, { MotetidspunktValgt } from '../../../js/mote/components/MotebookingStatus'
 import { mount, shallow } from 'enzyme';
 import React from 'react'
 import sinon from 'sinon';
@@ -110,7 +110,7 @@ describe("MotebookingStatus", () => {
 
         it("Skal ikke vise hvilket tidspunkt som er valgt", () => {
             const component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} avbrytMote={avbrytMote} />);
-            expect(component.text()).not.to.contain("Møtetidspunkt valgt, møteresultat sendt til partene")
+            expect(component.find(MotetidspunktValgt)).to.have.length(0);
         });
 
     });
@@ -173,7 +173,7 @@ describe("MotebookingStatus", () => {
 
         it("Skal vise hvilket tidspunkt som er valgt", () => {
             const component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} avbrytMote={avbrytMote} />);
-            expect(component.text()).to.contain("Møtetidspunkt valgt, møteresultat sendt til partene")
+            expect(component.find(MotetidspunktValgt)).to.have.length(1);
         });
 
 
