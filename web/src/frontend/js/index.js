@@ -11,6 +11,7 @@ import navbruker from './reducers/navbruker';
 import { reducer as formReducer } from 'redux-form';
 import { ledetekster, hentLedetekster, tidslinjer } from 'digisyfo-npm';
 import moter from './mote/reducers/moter';
+import epostinnhold from './mote/reducers/epostinnhold';
 import rootSaga from './sagas';
 import { hentNavbruker, sjekkTilgangMoteadmin } from './actions/navbruker_actions';
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
     ledere,
     navbruker,
     moter,
+    epostinnhold,
     tidslinjer,
     ledetekster,
     form: formReducer,

@@ -375,4 +375,130 @@ describe('moter', () => {
         });
     });
 
+    describe("BEKREFT MØTE", () => {
+
+        let initialState;
+
+        beforeEach(() => {
+            initialState = deepFreeze({
+                data: [{
+                    foo: 'bar'
+                }, {
+                    'id': 0,
+                    'status': 'OPPRETTET',
+                    'moteUuid': 'b23ee185-cd29-41cb-a109-48d7aad15dc3',
+                    'opprettetAv': 'testNAVRessurs',
+                    'opprettetTidspunkt': '2016-11-03T13:28:05.244',
+                    'navEnhet': 'navEnhet',
+                    'deltakere': [{
+                        'deltakerUuid': '944c877e-e261-49a4-841e-2ab52349e864',
+                        'navn': '***REMOVED***',
+                        'epost': '***REMOVED***',
+                        'type': 'arbeidsgiver',
+                        'avvik': [],
+                        'svar': [{
+                            'tid': '2012-12-12T11:00:00Z',
+                            'sted': 'Oslo by',
+                            'valgt': false,
+                            'id': 6
+                        }, {
+                            'tid': '2009-09-09T07:00:00Z',
+                            'sted': 'Oslo by',
+                            'valgt': false,
+                            'id': 7
+                        }]
+                    }],
+                    'alternativer': [{
+                        'id': 6,
+                        'tid': '2012-12-12T11:00:00Z',
+                        'sted': 'Oslo by',
+                        'valgt': false
+                    }, {
+                        'id': 7,
+                        'tid': '2009-09-09T07:00:00Z',
+                        'sted': 'Oslo by',
+                        'valgt': false
+                    }]
+                }]
+            });
+        })
+
+        it("Håndterer BEKREFTER_MOTE", () => {
+            const action = actions.bekrefterMote();
+            let nextState = moter(initialState, action);
+            expect(nextState.data).to.deep.equal(initialState.data);
+            expect(nextState.bekrefter).to.be.true;
+            expect(nextState.bekreftFeilet).to.be.false;
+            expect(nextState.avbryter).to.be.false;
+            expect(nextState.avbrytFeilet).to.be.false;
+        });
+
+        it("Håndterer MOTE_BEKREFTET", () => {
+            const action = actions.moteBekreftet('b23ee185-cd29-41cb-a109-48d7aad15dc3', 6);
+            let nextState = moter(initialState, action);
+            expect(nextState.avbryter).to.be.false;
+            expect(nextState.avbrytFeilet).to.be.false;
+            expect(nextState.data).to.deep.equal([{
+                'foo': 'bar'
+            },
+            {
+                'id': 0,
+                'status': 'BEKREFTET',
+                'moteUuid': 'b23ee185-cd29-41cb-a109-48d7aad15dc3',
+                'opprettetAv': 'testNAVRessurs',
+                'opprettetTidspunkt': '2016-11-03T13:28:05.244',
+                'navEnhet': 'navEnhet',
+                'deltakere': [{
+                    'deltakerUuid': '944c877e-e261-49a4-841e-2ab52349e864',
+                    'navn': '***REMOVED***',
+                    'epost': '***REMOVED***',
+                    'type': 'arbeidsgiver',
+                    'avvik': [],
+                    'svar': [{
+                        'tid': '2012-12-12T11:00:00Z',
+                        'sted': 'Oslo by',
+                        'valgt': false,
+                        'id': 6
+                    }, {
+                        'tid': '2009-09-09T07:00:00Z',
+                        'sted': 'Oslo by',
+                        'valgt': false,
+                        'id': 7
+                    }]
+                }],
+                'valgtAlternativ': {
+                    'id': 6,
+                    'tid': '2012-12-12T11:00:00Z',
+                    'sted': 'Oslo by',
+                    'valgt': false
+                },
+                'alternativer': [{
+                    'id': 6,
+                    'tid': '2012-12-12T11:00:00Z',
+                    'sted': 'Oslo by',
+                    'valgt': false
+                }, {
+                    'id': 7,
+                    'tid': '2009-09-09T07:00:00Z',
+                    'sted': 'Oslo by',
+                    'valgt': false
+                }]
+            }]);
+        });
+
+        it("Håndterer bekreftMoteFeilet()", () => {
+            const action = actions.bekreftMoteFeilet();
+            let nextState = moter(initialState, action);
+            expect(nextState.bekrefter).to.be.false;
+            expect(nextState.bekreftFeilet).to.be.true;
+        });
+
+        it("Håndterer bekreftMote()", () => {
+            const action = actions.bekreftMote('b23ee185-cd29-41cb-a109-48d7aad15dc3', 6);
+            let nextState = moter(initialState, action);
+            expect(nextState).to.deep.equal(initialState);
+        });
+
+    });
+
 });

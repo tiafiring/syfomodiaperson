@@ -77,3 +77,32 @@ export function avbryterMote(uuid) {
         uuid,
     };
 }
+
+export function bekreftMote(moteUuid, valgtAlternativId, fnr) {
+    return {
+        type: 'BEKREFT_MOTE_FORESPURT',
+        moteUuid,
+        valgtAlternativId,
+        fnr,
+    };
+}
+
+export function bekrefterMote() {
+    return {
+        type: 'BEKREFTER_MOTE',
+    };
+}
+
+export function moteBekreftet(moteUuid, valgtAlternativId) {
+    return {
+        type: 'MOTE_BEKREFTET',
+        moteUuid,
+        valgtAlternativId,
+    };
+}
+
+export function bekreftMoteFeilet() {
+    return {
+        type: 'BEKREFT_MOTE_FEILET',
+    };
+}

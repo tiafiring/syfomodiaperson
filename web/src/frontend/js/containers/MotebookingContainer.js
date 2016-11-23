@@ -16,7 +16,7 @@ export class MotebookingSide extends Component {
     }
 
     render() {
-        const { henter, hentMoterFeiletBool, mote, avbrytMote, avbryter, avbrytFeilet, fnr } = this.props;
+        const { henter, hentMoterFeiletBool, mote } = this.props;
         return (<Side tittel="Møteplanlegger">
             {
                 (() => {
@@ -44,20 +44,19 @@ MotebookingSide.propTypes = {
     henter: PropTypes.bool,
     hentMoterFeiletBool: PropTypes.bool,
     hentLedereFeiletBool: PropTypes.bool,
-    avbrytMote: PropTypes.func,
     avbryter: PropTypes.bool,
     avbrytFeilet: PropTypes.bool,
 };
 
-export const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state) => {
     const fnr = state.navbruker.data.fnr;
     const aktivtMote = state.moter.data.filter((mote) => {
-        return mote.status === 'OPPRETTET';
+        return mote.status === 'OPPRETTET' || mote.status === 'BEKREFTET';
     })[0];
     const ledere = state.ledere.data.filter((leder) => {
         return leder.erOppgitt;
     });
-    
+
     return {
         fnr,
         mote: aktivtMote,

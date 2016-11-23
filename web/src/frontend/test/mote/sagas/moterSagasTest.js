@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import { opprettMote, hentMoter, avbrytMote } from '../../../js/mote/sagas/moterSagas.js';
+import { opprettMote, hentMoter, avbrytMote, bekreftMote } from '../../../js/mote/sagas/moterSagas.js';
+import * as actions from '../../../js/mote/actions/moter_actions';
 import { post, get } from '../../../js/api/index';
 import { put, call } from 'redux-saga/effects';
 
@@ -84,6 +85,31 @@ describe("moterSagas", () => {
 
         it("Skal dispatche MOTE_AVBRUTT", () => {
             const nextPut = put({type: 'MOTE_AVBRUTT', uuid: "min-fine-mote-uuid"});
+            expect(generator.next().value).to.deep.equal(nextPut);
+        });
+
+    });
+
+    describe("bekreftMote", () => {
+        const moteUuid = "olsen";
+        const valgtAlternativId = 998877;
+
+        action = actions.bekreftMote("olsen", 998877);
+
+        const generator = bekreftMote(action);
+
+        it("Skal dispatche BEKREFTER_MOTE", () => {
+            const nextPut = put({type: 'BEKREFTER_MOTE'});
+            expect(generator.next().value).to.deep.equal(nextPut);
+        });
+
+        it("Skal poste til REST-tjenesten", () => {
+            const nextCall = call(post, "http://tjenester.nav.no/moteadmin/moter/olsen/bekreft?valgtAlternativId=998877");
+            expect(generator.next().value).to.deep.equal(nextCall);
+        });
+
+        it("Skal dispatche MOTE_BEKREFTET", () => {
+            const nextPut = put({type: 'MOTE_BEKREFTET', moteUuid: "olsen", valgtAlternativId: 998877});
             expect(generator.next().value).to.deep.equal(nextPut);
         });
 

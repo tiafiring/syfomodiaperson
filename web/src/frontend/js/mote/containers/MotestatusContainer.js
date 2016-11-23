@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as moteActions from '../actions/moter_actions';
 import MotebookingStatus from '../components/MotebookingStatus';
@@ -8,13 +8,17 @@ export const MotebookingStatusWrapper = (props) => {
         return null;
     }
     return <MotebookingStatus {...props} />;
-}
+};
+
+MotebookingStatusWrapper.propTypes = {
+    henter: PropTypes.bool,
+};
 
 export const mapStateToProps = (state, ownProps) => {
     const fnr = state.navbruker.data.fnr;
     const moteUuid = ownProps.moteUuid;
     const mote = state.moter.data.filter((m) => {
-        return m.moteUuid === moteUuid
+        return m.moteUuid === moteUuid;
     })[0];
 
     return {

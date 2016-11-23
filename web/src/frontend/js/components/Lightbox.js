@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 
 class Lightbox extends Component {
     constructor(props) {
@@ -29,7 +29,7 @@ class Lightbox extends Component {
         }
         return (<div className="lightbox">
             <div className="lightbox__innhold">
-                <button onClick={(e) => {
+                <button onClick={() => {
                     this.lukk();
                 }} className="lightbox__lukk js-lukk" ref="lukk">Lukk</button>
                 {children}
@@ -37,5 +37,10 @@ class Lightbox extends Component {
         </div>);
     }
 }
+
+Lightbox.propTypes = {
+    children: PropTypes.object,
+    onClose: PropTypes.func,
+};
 
 export default Lightbox;

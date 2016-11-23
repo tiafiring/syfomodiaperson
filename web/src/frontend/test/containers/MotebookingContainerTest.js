@@ -104,6 +104,18 @@ describe("MotebookingContainer", () => {
             });
         });
 
+        it("Skal returnere BEKREFTET møte", () => {
+            state.moter.data = [{
+                id: 1,
+                status: "BEKREFTET"
+            }]
+            const props = mapStateToProps(state);
+            expect(props.mote).to.deep.equal({
+                id: 1,
+                status: "BEKREFTET"
+            });
+        });
+
         it("Skal ikke returnere avbrutt mote", () => {
             state.moter.data = [{
                 id: 1,

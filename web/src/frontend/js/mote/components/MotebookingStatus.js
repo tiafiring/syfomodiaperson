@@ -12,7 +12,7 @@ const MotebookingStatus = ({ fnr, mote, avbrytMote, avbryter, avbrytFeilet }) =>
     const arbeidsgiverDeltaker = deltakere.filter((deltaker) => {
         return deltaker.type === 'arbeidsgiver';
     })[0];
-    const visVelgTidspunkt = arbeidsgiverDeltaker && arbeidsgiverDeltaker.svar.map((svar) => {
+    const visVelgTidspunkt = mote.status === 'OPPRETTET' && arbeidsgiverDeltaker && arbeidsgiverDeltaker.svar.map((svar) => {
         return svar.valgt;
     }).length > 0;
 
@@ -68,10 +68,24 @@ const MotebookingStatus = ({ fnr, mote, avbrytMote, avbryter, avbrytFeilet }) =>
                                 arbeidsgiverDeltaker.svar.map((svar, index) => {
                                     if (svar.valgt) {
                                         return (<td key={index} >
-                                            <Link to={`/sykefravaer/${fnr}/mote/bekreft/${svar.id}`} className="lenke js-velg-tidspunkt">Velg tidspunkt for møte</Link>
-                                        </td>)
+                                            <Link to={`/sykefravaer/${fnr}/mote/bekreft/${svar.id}`} className="js-velg-tidspunkt">Velg tidspunkt for møte</Link>
+                                        </td>);
                                     }
                                     return <td key={index} />;
+                                })
+                            }
+                        </tr>
+                    </tfoot>
+                }
+                {
+                    mote.status === 'BEKREFTET' && <tfoot>
+                        <tr>
+                            <td />
+                            {
+                                mote.alternativer.map((alternativ, index) => {
+                                    return (<td key={index}>
+                                        {alternativ.id === mote.valgtAlternativ.id && 'Møtetidspunkt valgt, møteresultat sendt til partene'}
+                                    </td>);
                                 })
                             }
                         </tr>
@@ -106,7 +120,7 @@ MotebookingStatus.propTypes = {
     avbrytMote: PropTypes.func,
     avbryter: PropTypes.bool,
     avbrytFeilet: PropTypes.bool,
+    fnr: PropTypes.string,
 };
 
 export default MotebookingStatus;
-

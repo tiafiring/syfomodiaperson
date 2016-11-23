@@ -4,7 +4,7 @@ import { mount, shallow, render } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
 
-describe.only("Lightbox", () => {
+describe("Lightbox", () => {
 
     it("Skal vise children", () => {
         const component = shallow(<Lightbox><p>Innhold</p></Lightbox>)
