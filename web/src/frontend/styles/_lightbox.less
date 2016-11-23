@@ -23,10 +23,12 @@
     right: 10px;
     width: 2rem;
     height: 2rem;
-    background-color: transparent;
     border: 0;      
     text-indent: -9999px;
     border: 1px solid @FargeBorder;
+    background: transparent url('/sykefravaer/img/modig-frontend/ikoner-svg/ikon-kryss-sort.svg') no-repeat center center;
+    background-size: 1rem 1rem;
+    cursor: pointer;
 
     @media (min-width: 30em) {
         top: 2em;
@@ -36,6 +38,7 @@
     &:hover {
         border-color: @FargeLenke;
         background-color: @FargeLenke;
+        background-image: url('/sykefravaer/img/modig-frontend/ikoner-svg/ikon-kryss-hvit.svg');
     }
 
     &:focus {

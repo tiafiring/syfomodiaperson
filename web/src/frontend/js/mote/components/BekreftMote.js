@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 
-const BekreftMote = ({ deltaker, epostinnhold, onSubmit }) => {
+const BekreftMote = ({ deltaker, epostinnhold, onSubmit, avbrytHref }) => {
     return (<div className="epostinnhold">
         <h2 className="typo-innholdstittel">Send møteresultat</h2>
 
@@ -20,8 +21,9 @@ const BekreftMote = ({ deltaker, epostinnhold, onSubmit }) => {
             </div>
         </article>
 
-        <div className="knapperad knapperad-adskilt">
-            <button className="knapp" onClick={onSubmit}>Send møteresultat</button>
+        <div className="knapperad">
+            <button className="knapp blokk-xs" onClick={onSubmit}>Send møteresultat</button>
+            <p><Link to={avbrytHref}>Avbryt</Link></p>
         </div>
     </div>);
 };
@@ -30,6 +32,7 @@ BekreftMote.propTypes = {
     deltaker: PropTypes.object,
     epostinnhold: PropTypes.object,
     onSubmit: PropTypes.func,
+    avbrytHref: PropTypes.string,
 };
 
 export default BekreftMote;

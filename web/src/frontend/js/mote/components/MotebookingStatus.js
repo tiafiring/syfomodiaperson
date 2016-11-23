@@ -5,6 +5,10 @@ import Sidetopp from '../../components/Sidetopp';
 import { Varselstripe } from 'digisyfo-npm';
 import { Link } from 'react-router';
 
+const MotetidspunktValgt = () => {
+    return <div className="motetidspunktValgt">Møtetidspunkt valgt, møteresultat sendt til partene</div>
+}
+
 const MotebookingStatus = ({ fnr, mote, avbrytMote, avbryter, avbrytFeilet }) => {
     const { alternativer, deltakere } = mote;
     const deltakerEpost = deltakere ? deltakere[0].epost : '?';
@@ -35,7 +39,11 @@ const MotebookingStatus = ({ fnr, mote, avbrytMote, avbryter, avbrytFeilet }) =>
                         <th className="motestatus__tittel">Møtetider</th>
                         {
                             alternativer.map((tidspunkt, index) => {
-                                return (<th key={index}>{getTidFraZulu(tidspunkt.tid)}</th>);
+                                let className = null;
+                                if (mote.valgtAlternativ && tidspunkt.id === mote.valgtAlternativ.id) {
+                                    className = 'bekreftetTidspunkt';
+                                }
+                                return (<th className={className} key={index}>{getTidFraZulu(tidspunkt.tid)}</th>);
                             })
                         }
                     </tr>
@@ -51,7 +59,11 @@ const MotebookingStatus = ({ fnr, mote, avbrytMote, avbryter, avbrytFeilet }) =>
                             <td><strong>Arbeidsgiver</strong> <span>{deltaker.navn}</span></td>
                             {
                                     deltaker.svar.map((tidspunkt, index2) => {
-                                        return (<td key={index2} className="motestatus__svar">
+                                        let className = 'motestatus__svar';
+                                        if (mote.valgtAlternativ && tidspunkt.id === mote.valgtAlternativ.id) {
+                                            className = 'motestatus__svar motestatus__svar--bekreftetTidspunkt';
+                                        }
+                                        return (<td key={index2} className={className}>
                                             <MotebookingIkon deltaker={deltaker} index={index2} />
                                         </td>);
                                     })
@@ -84,7 +96,7 @@ const MotebookingStatus = ({ fnr, mote, avbrytMote, avbryter, avbrytFeilet }) =>
                             {
                                 mote.alternativer.map((alternativ, index) => {
                                     return (<td key={index}>
-                                        {alternativ.id === mote.valgtAlternativ.id && 'Møtetidspunkt valgt, møteresultat sendt til partene'}
+                                        {alternativ.id === mote.valgtAlternativ.id && <MotetidspunktValgt />}
                                     </td>);
                                 })
                             }

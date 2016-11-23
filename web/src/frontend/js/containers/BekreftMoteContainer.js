@@ -56,7 +56,7 @@ export class BekreftMoteSide extends Component {
                                         }
                                         return (<BekreftMote onSubmit={() => {
                                             this.onSubmit();
-                                        }} deltaker={deltaker} epostinnhold={epostinnhold} />);
+                                        }} deltaker={deltaker} epostinnhold={epostinnhold} avbrytHref={`/sykefravaer/${fnr}/mote`} />);
                                     })()
                                 }
                                 </Lightbox>
