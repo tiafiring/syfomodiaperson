@@ -1,3 +1,5 @@
+import { HENTER_EPOSTINNHOLD, EPOSTINNHOLD_HENTET, HENT_EPOSTINNHOLD_FEILET } from '../actions/actiontyper';
+
 const defaultState = {
     data: {},
     henter: false,
@@ -6,13 +8,13 @@ const defaultState = {
 
 export default function epostinnhold(state = defaultState, action = {}) {
     switch (action.type) {
-        case 'HENTER_EPOSTINNHOLD': {
+        case HENTER_EPOSTINNHOLD: {
             return Object.assign({}, state, {
                 henter: true,
                 hentingFeilet: false,
             });
         }
-        case 'EPOSTINNHOLD_HENTET': {
+        case EPOSTINNHOLD_HENTET: {
             return {
                 data: action.data,
                 henter: false,
@@ -20,7 +22,7 @@ export default function epostinnhold(state = defaultState, action = {}) {
                 eposttype: action.eposttype,
             };
         }
-        case 'HENT_EPOSTINNHOLD_FEILET': {
+        case HENT_EPOSTINNHOLD_FEILET: {
             return {
                 data: {},
                 henter: false,

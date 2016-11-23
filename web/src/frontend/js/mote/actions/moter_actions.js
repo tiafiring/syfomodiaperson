@@ -1,19 +1,21 @@
+import * as actions from './actiontyper';
+
 export function opprettMote(data) {
     return {
-        type: 'OPPRETT_MOTE_FORESPURT',
+        type: actions.OPPRETT_MOTE_FORESPURT,
         data,
     };
 }
 
 export function oppretterMote() {
     return {
-        type: 'OPPRETTER_MOTE',
+        type: actions.OPPRETTER_MOTE,
     };
 }
 
 export function moteOpprettet(data) {
     return {
-        type: 'MOTE_OPPRETTET',
+        type: actions.MOTE_OPPRETTET,
         fnr: data.fnr,
         data,
     };
@@ -21,66 +23,66 @@ export function moteOpprettet(data) {
 
 export function opprettMoteFeilet() {
     return {
-        type: 'OPPRETT_MOTE_FEILET',
+        type: actions.OPPRETT_MOTE_FEILET,
     };
 }
 
 export function hentMoter(fnr) {
     return {
-        type: 'HENT_MOTER_FORESPURT',
+        type: actions.HENT_MOTER_FORESPURT,
         fnr,
     };
 }
 
 export function henterMoter() {
     return {
-        type: 'HENTER_MOTER',
+        type: actions.HENTER_MOTER,
     };
 }
 
 export function moterHentet(data) {
     return {
-        type: 'MOTER_HENTET',
+        type: actions.MOTER_HENTET,
         data,
     };
 }
 
 export function hentMoterFeilet() {
     return {
-        type: 'HENT_MOTER_FEILET',
+        type: actions.HENT_MOTER_FEILET,
     };
 }
 
 export function avbrytMote(uuid) {
     return {
-        type: 'AVBRYT_MOTE_FORESPURT',
+        type: actions.AVBRYT_MOTE_FORESPURT,
         uuid,
     };
 }
 
 export function moteAvbrutt(uuid) {
     return {
-        type: 'MOTE_AVBRUTT',
+        type: actions.MOTE_AVBRUTT,
         uuid,
     };
 }
 
 export function avbrytMoteFeilet() {
     return {
-        type: 'AVBRYT_MOTE_FEILET',
+        type: actions.AVBRYT_MOTE_FEILET,
     };
 }
 
 export function avbryterMote(uuid) {
     return {
-        type: 'AVBRYTER_MOTE',
+        type: actions.AVBRYTER_MOTE,
         uuid,
     };
 }
 
 export function bekreftMote(moteUuid, valgtAlternativId, fnr) {
     return {
-        type: 'BEKREFT_MOTE_FORESPURT',
+        type: actions.BEKREFT_MOTE_FORESPURT,
         moteUuid,
         valgtAlternativId,
         fnr,
@@ -89,13 +91,13 @@ export function bekreftMote(moteUuid, valgtAlternativId, fnr) {
 
 export function bekrefterMote() {
     return {
-        type: 'BEKREFTER_MOTE',
+        type: actions.BEKREFTER_MOTE,
     };
 }
 
 export function moteBekreftet(moteUuid, valgtAlternativId) {
     return {
-        type: 'MOTE_BEKREFTET',
+        type: actions.MOTE_BEKREFTET,
         moteUuid,
         valgtAlternativId,
     };
@@ -103,6 +105,6 @@ export function moteBekreftet(moteUuid, valgtAlternativId) {
 
 export function bekreftMoteFeilet() {
     return {
-        type: 'BEKREFT_MOTE_FEILET',
+        type: actions.BEKREFT_MOTE_FEILET,
     };
 }

@@ -1,3 +1,5 @@
+import * as actions from '../actions/actiontyper';
+
 const defaultState = {
     data: [],
     henter: false,
@@ -8,7 +10,7 @@ const defaultState = {
 
 export default function moter(state = defaultState, action) {
     switch (action.type) {
-        case 'OPPRETTER_MOTE': {
+        case actions.OPPRETTER_MOTE: {
             return Object.assign({}, state, {
                 henter: false,
                 hentingFeilet: false,
@@ -18,7 +20,7 @@ export default function moter(state = defaultState, action) {
                 avbrytFeilet: false,
             });
         }
-        case 'MOTE_OPPRETTET': {
+        case actions.MOTE_OPPRETTET: {
             const mote = Object.assign({}, action.data, {
                 fnr: action.data.fnr,
                 status: 'OPPRETTET',
@@ -34,7 +36,7 @@ export default function moter(state = defaultState, action) {
                 avbrytFeilet: false,
             });
         }
-        case 'OPPRETT_MOTE_FEILET': {
+        case actions.OPPRETT_MOTE_FEILET: {
             return Object.assign({}, state, {
                 henter: false,
                 hentingFeilet: false,
@@ -44,7 +46,7 @@ export default function moter(state = defaultState, action) {
                 avbrytFeilet: false,
             });
         }
-        case 'HENTER_MOTER': {
+        case actions.HENTER_MOTER: {
             return {
                 data: [],
                 sender: false,
@@ -55,7 +57,7 @@ export default function moter(state = defaultState, action) {
                 avbrytFeilet: false,
             };
         }
-        case 'MOTER_HENTET': {
+        case actions.MOTER_HENTET: {
             return {
                 data: action.data,
                 sender: false,
@@ -66,7 +68,7 @@ export default function moter(state = defaultState, action) {
                 avbrytFeilet: false,
             };
         }
-        case 'HENT_MOTER_FEILET': {
+        case actions.HENT_MOTER_FEILET: {
             return {
                 data: [],
                 sender: false,
@@ -77,19 +79,19 @@ export default function moter(state = defaultState, action) {
                 avbrytFeilet: false,
             };
         }
-        case 'AVBRYTER_MOTE': {
+        case actions.AVBRYTER_MOTE: {
             return Object.assign({}, state, {
                 avbryter: true,
                 avbrytFeilet: false,
             });
         }
-        case 'AVBRYT_MOTE_FEILET': {
+        case actions.AVBRYT_MOTE_FEILET: {
             return Object.assign({}, state, {
                 avbrytFeilet: true,
                 avbryter: false,
             });
         }
-        case 'MOTE_AVBRUTT': {
+        case actions.MOTE_AVBRUTT: {
             const data = state.data.map((mote) => {
                 if (mote.moteUuid === action.uuid) {
                     return Object.assign({}, mote, {
@@ -103,7 +105,7 @@ export default function moter(state = defaultState, action) {
                 avbrytFeilet: false,
             });
         }
-        case 'BEKREFTER_MOTE': {
+        case actions.BEKREFTER_MOTE: {
             return Object.assign({}, state, {
                 bekrefter: true,
                 bekreftFeilet: false,
@@ -111,7 +113,7 @@ export default function moter(state = defaultState, action) {
                 avbrytFeilet: false,
             });
         }
-        case 'MOTE_BEKREFTET': {
+        case actions.MOTE_BEKREFTET: {
             const data = state.data.map((mote) => {
                 if (mote.moteUuid === action.moteUuid) {
                     const valgtAlternativ = mote.alternativer.filter((alternativ) => {
@@ -131,7 +133,7 @@ export default function moter(state = defaultState, action) {
                 avbrytFeilet: false,
             });
         }
-        case 'BEKREFT_MOTE_FEILET': {
+        case actions.BEKREFT_MOTE_FEILET: {
             return Object.assign({}, state, {
                 bekrefter: false,
                 bekreftFeilet: true,
