@@ -54,7 +54,7 @@ export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, send
         {
             hentLedereFeiletBool && <div className="blokk--xl">
                 <Varselstripe>
-                    <p>Beklager, det oppstod en feil ved uthenting av nærmeste ledere. Du kan likevel sende møteforespøsel.</p>
+                    <p>Beklager, det oppstod en feil ved uthenting av nærmeste leder. Du kan likevel sende møteforespøsel.</p>
                 </Varselstripe>
             </div>
         }

@@ -29,7 +29,7 @@ export const ArbeidsgiverDropdown = ({ meta, input, ledere }) => {
                             return 0;
                         })
                         .map((leder, idx) => {
-                            return <option value={leder.id} key={idx}>{`${leder.organisasjonsnavn} (${leder.navn})`}</option>;
+                            return <option value={leder.id} key={idx}>{leder.organisasjonsnavn}</option>;
                         })
                     }
                     <option value="manuell">Ikke oppgitt &ndash; fyll inn manuelt</option>
