@@ -1,6 +1,7 @@
 import { call, put, fork } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import { post, get } from '../../api/index';
+import history from '../../history';
 import * as actions from '../actions/moter_actions';
 
 export function* opprettMote(action) {
@@ -33,12 +34,27 @@ export function* avbrytMote(action) {
     }
 }
 
+export function* bekreftMote(action) {
+    yield put(actions.bekrefterMote());
+    try {
+        yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.moteUuid}/bekreft?valgtAlternativId=${action.valgtAlternativId}`);
+        yield put(actions.moteBekreftet(action.moteUuid, action.valgtAlternativId));
+        history.replace(`/sykefravaer/${action.fnr}/mote`);
+    } catch (e) {
+        yield put(actions.bekreftMoteFeilet());
+    }
+}
+
 function* watchOpprettMote() {
     yield* takeEvery('OPPRETT_MOTE_FORESPURT', opprettMote);
 }
 
 function* watchAvbrytMote() {
     yield* takeEvery('AVBRYT_MOTE_FORESPURT', avbrytMote);
+}
+
+function* watchBekreftMote() {
+    yield* takeEvery('BEKREFT_MOTE_FORESPURT', bekreftMote);
 }
 
 function* watchHentMoter() {
@@ -54,6 +70,7 @@ export default function* moterSagas() {
         fork(watchOpprettMote),
         fork(watchHentMoter),
         fork(watchAvbrytMote),
+        fork(watchBekreftMote),
         fork(watchMoteOpprettet),
     ];
 }

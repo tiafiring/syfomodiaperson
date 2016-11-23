@@ -103,6 +103,40 @@ export default function moter(state = defaultState, action) {
                 avbrytFeilet: false,
             });
         }
+        case 'BEKREFTER_MOTE': {
+            return Object.assign({}, state, {
+                bekrefter: true,
+                bekreftFeilet: false,
+                avbryter: false,
+                avbrytFeilet: false,
+            });
+        }
+        case 'MOTE_BEKREFTET': {
+            const data = state.data.map((mote) => {
+                if (mote.moteUuid === action.moteUuid) {
+                    const valgtAlternativ = mote.alternativer.filter((alternativ) => {
+                        return alternativ.id === action.valgtAlternativId;
+                    })[0];
+                    return Object.assign({}, mote, {
+                        status: 'BEKREFTET',
+                        valgtAlternativ,
+                    });
+                }
+                return mote;
+            });
+            return Object.assign({}, state, { data }, {
+                bekrefter: false,
+                bekreftFeilet: false,
+                avbryter: false,
+                avbrytFeilet: false,
+            });
+        }
+        case 'BEKREFT_MOTE_FEILET': {
+            return Object.assign({}, state, {
+                bekrefter: false,
+                bekreftFeilet: true,
+            });
+        }
         default: {
             return state;
         }

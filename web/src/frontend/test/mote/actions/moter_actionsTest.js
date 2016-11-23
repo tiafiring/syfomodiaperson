@@ -54,6 +54,39 @@ describe("moter_actions", () => {
             type: "AVBRYT_MOTE_FORESPURT",
             uuid: "fiskekake"
         })
+    });
+
+    it("Skal ha en bekreftMote()-funksjon som rturnerer riktig action", () => {
+        const action = actions.bekreftMote("moteUuid", "valgtAlternativId", "998877");
+        expect(action).to.deep.equal({
+            type: "BEKREFT_MOTE_FORESPURT",
+            moteUuid: "moteUuid",
+            valgtAlternativId: "valgtAlternativId",
+            fnr: "998877"
+        });
+    });
+
+    it("Skal ha en bekrefterMote()-funksjon som rturnerer riktig action", () => {
+        const action = actions.bekrefterMote();
+        expect(action).to.deep.equal({
+            type: "BEKREFTER_MOTE",
+        });
+    });
+
+    it("Skal ha en moteBekreftet()-funksjon som rturnerer riktig action", () => {
+        const action = actions.moteBekreftet("olsen", "valgtAlternativId");
+        expect(action).to.deep.equal({
+            type: "MOTE_BEKREFTET",
+            moteUuid: "olsen",
+            valgtAlternativId: "valgtAlternativId"
+        });
+    });
+
+    it("Skal ha en bekreftMoteFeilet()-funksjon som returnerer riktig action", () => {
+        const action = actions.bekreftMoteFeilet(); 
+        expect(action).to.deep.equal({
+            type: "BEKREFT_MOTE_FEILET",
+        });
     })
 
 });
