@@ -9,7 +9,7 @@ export const MotetidspunktValgt = () => {
     return <div className="motetidspunktValgt">Møtetidspunkt valgt, møteresultat sendt til partene</div>;
 };
 
-const MotebookingStatus = ({ fnr, mote, avbrytMote, avbryter, avbrytFeilet }) => {
+const MotebookingStatus = ({ fnr, mote }) => {
     const { alternativer, deltakere } = mote;
     const deltakerEpost = deltakere ? deltakere[0].epost : '?';
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
@@ -104,14 +104,9 @@ const MotebookingStatus = ({ fnr, mote, avbrytMote, avbryter, avbrytFeilet }) =>
                     </tfoot>
                 }
             </table>
-            <div aria-live="polite" role="alert">
-                { avbrytFeilet && <div className="blokk"><Varselstripe type="feil"><p>Beklager, det oppstod en feil. Prøv igjen litt senere.</p></Varselstripe></div>}
-            </div>
         </div>
         <div>
-            <button disabled={avbryter} className="knapp js-avbryt" onClick={() => {
-                avbrytMote(mote.moteUuid);
-            }}>Nytt tidspunkt</button>
+            <Link role="button" className="knapp" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>Avbryt møte</Link>
         </div>
     </div>);
 };
@@ -129,9 +124,6 @@ MotebookingStatus.propTypes = {
             type: PropTypes.string,
         })),
     }),
-    avbrytMote: PropTypes.func,
-    avbryter: PropTypes.bool,
-    avbrytFeilet: PropTypes.bool,
     fnr: PropTypes.string,
 };
 

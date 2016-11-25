@@ -11,13 +11,13 @@ describe("BekreftMoteContainer", () => {
 
     describe("BekreftMoteSide", () => {
 
-        let hentBekreftMoteEpostInnhold;
+        let hentBekreftMoteEpostinnhold;
         let hentMoter;
         let bekreftMote;
         let deltaker;
 
         beforeEach(() => {
-            hentBekreftMoteEpostInnhold = sinon.spy();
+            hentBekreftMoteEpostinnhold = sinon.spy();
             hentMoter = sinon.spy();
             bekreftMote = sinon.spy();
             deltaker = {
@@ -32,7 +32,7 @@ describe("BekreftMoteContainer", () => {
             const alternativ = {
                 id: 4545
             }
-            const compo = shallow(<BekreftMoteSide fnr="***REMOVED***" bekreftMote={bekreftMote} alternativ={alternativ} mote={mote} deltaker={deltaker} hentBekreftMoteEpostInnhold={hentBekreftMoteEpostInnhold} />);
+            const compo = shallow(<BekreftMoteSide fnr="***REMOVED***" bekreftMote={bekreftMote} alternativ={alternativ} mote={mote} deltaker={deltaker} hentBekreftMoteEpostinnhold={hentBekreftMoteEpostinnhold} />);
             compo.instance().onSubmit();
             expect(bekreftMote.getCall(0).args).to.deep.equal(["Olsen", 4545, "***REMOVED***"]);
         });
@@ -52,11 +52,11 @@ describe("BekreftMoteContainer", () => {
                     status: "OPPRETTET",
                     moteUuid: "123"
                 }
-                compo = shallow(<BekreftMoteSide hentMoter={hentMoter} hentBekreftMoteEpostInnhold={hentBekreftMoteEpostInnhold} alternativ={alternativ} mote={mote} deltaker={deltaker} />)
+                compo = shallow(<BekreftMoteSide hentMoter={hentMoter} hentBekreftMoteEpostinnhold={hentBekreftMoteEpostinnhold} alternativ={alternativ} mote={mote} deltaker={deltaker} />)
             })
 
-            it("Skal kalle på hentBekreftMoteEpostInnhold", () => {
-                expect(hentBekreftMoteEpostInnhold.calledWith("123", 328)).to.be.true;
+            it("Skal kalle på hentBekreftMoteEpostinnhold", () => {
+                expect(hentBekreftMoteEpostinnhold.calledWith("123", 328)).to.be.true;
                 expect(hentMoter.called).to.be.false
             });
 
@@ -67,7 +67,7 @@ describe("BekreftMoteContainer", () => {
             let compo; 
 
             beforeEach(() => {
-                compo = shallow(<BekreftMoteSide hentMoter={hentMoter} hentBekreftMoteEpostInnhold={hentBekreftMoteEpostInnhold} deltaker={deltaker} fnr="5566" />)
+                compo = shallow(<BekreftMoteSide hentMoter={hentMoter} hentBekreftMoteEpostinnhold={hentBekreftMoteEpostinnhold} deltaker={deltaker} fnr="5566" />)
             })
 
             it("Skal hente møter", () => {
@@ -88,8 +88,8 @@ describe("BekreftMoteContainer", () => {
                     }
                 });
                 compo.instance().componentDidUpdate({});
-                expect(hentBekreftMoteEpostInnhold.calledOnce).to.be.true;
-                expect(hentBekreftMoteEpostInnhold.getCall(0).args).to.deep.equal(["123", 328])
+                expect(hentBekreftMoteEpostinnhold.calledOnce).to.be.true;
+                expect(hentBekreftMoteEpostinnhold.getCall(0).args).to.deep.equal(["123", 328])
                 expect(compo.find(AppSpinner)).to.have.length(1);
             });
 
@@ -117,7 +117,7 @@ describe("BekreftMoteContainer", () => {
                     emne: "1",
                     innhold: "2"
                 }
-                compo = shallow(<BekreftMoteSide epostinnhold={epostinnhold} hentMoter={hentMoter} hentBekreftMoteEpostInnhold={hentBekreftMoteEpostInnhold} alternativ={alternativ} mote={mote} deltaker={deltaker} />)
+                compo = shallow(<BekreftMoteSide epostinnhold={epostinnhold} hentMoter={hentMoter} hentBekreftMoteEpostinnhold={hentBekreftMoteEpostinnhold} alternativ={alternativ} mote={mote} deltaker={deltaker} />)
             })
 
 

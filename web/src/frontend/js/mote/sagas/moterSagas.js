@@ -29,6 +29,7 @@ export function* avbrytMote(action) {
     try {
         yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.uuid}/avbryt`);
         yield put(actions.moteAvbrutt(action.uuid));
+        history.replace(`/sykefravaer/${action.fnr}/mote`);
     } catch (e) {
         yield put(actions.avbrytMoteFeilet());
     }

@@ -53,10 +53,11 @@ export function hentMoterFeilet() {
     };
 }
 
-export function avbrytMote(uuid) {
+export function avbrytMote(uuid, fnr) {
     return {
         type: actions.AVBRYT_MOTE_FORESPURT,
         uuid,
+        fnr,
     };
 }
 

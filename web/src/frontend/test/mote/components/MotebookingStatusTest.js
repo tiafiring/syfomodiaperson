@@ -73,24 +73,6 @@ describe("MotebookingStatus", () => {
         expect(component.text()).not.to.contain("Ole")
     });
 
-    it("Skal kalle på avbrytMote(uuid) når man klikker på avbrytMote-knappen", () => {
-        mote.moteUuid = "min-fine-uuid";
-        const component = shallow(<MotebookingStatus mote={mote} avbrytMote={avbrytMote} />);
-        component.find(".js-avbryt").simulate("click");
-        expect(avbrytMote.calledOnce).to.be.true;
-        expect(avbrytMote.withArgs("min-fine-uuid").calledOnce).to.be.true;
-    });
-
-    it("Skal vise feilmelding dersom avbrytFeilet", () => {
-        const component = shallow(<MotebookingStatus mote={mote} avbrytMote={avbrytMote} avbrytFeilet />);
-        expect(component.find(Varselstripe)).to.have.length(2);
-    });
-
-    it("Skal deaktivere knapp når det avbrytes", () => {
-        const component = shallow(<MotebookingStatus mote={mote} avbrytMote={avbrytMote} avbryter />);
-        expect(component.find(".js-avbryt")).to.be.disabled;
-    });
-
     it("Skal ikke vise en knapp med teksten 'Velg tidspunkt for møte'", () => {
         const component = shallow(<MotebookingStatus mote={mote} avbrytMote={avbrytMote} />);
         expect(component.find(".js-velg-tidspunkt")).to.have.length(0);

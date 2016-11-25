@@ -49,10 +49,11 @@ describe("moter_actions", () => {
     });
 
     it("Skal ha en avbrytMote()-funksjon som returnerer riktig action", () => {
-        const action = actions.avbrytMote("fiskekake");
+        const action = actions.avbrytMote("fiskekake", "123");
         expect(action).to.deep.equal({
             type: "AVBRYT_MOTE_FORESPURT",
-            uuid: "fiskekake"
+            uuid: "fiskekake",
+            fnr: "123"
         })
     });
 
