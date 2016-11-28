@@ -57,6 +57,8 @@
     "json-loader": "0.5.4",
     "modig-frontend": "git+http://stash.devillo.no/scm/felles/modig-frontend.git#modig-frontend-3.0.23",
     "moment": "2.11.2",
+    "nav-frontend-core": "1.0.8",
+    "nav-frontend-knapper-design": "1.0.1",
     "nav-react-datepicker": "0.0.23",
     "path": "0.12.7",
     "react": "15.3.2",
