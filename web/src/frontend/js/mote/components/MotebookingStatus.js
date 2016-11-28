@@ -5,8 +5,12 @@ import Sidetopp from '../../components/Sidetopp';
 import { Varselstripe } from 'digisyfo-npm';
 import { Link } from 'react-router';
 
-export const MotetidspunktValgt = () => {
-    return <div className="motetidspunktValgt">Møtetidspunkt valgt, møteresultat sendt til partene</div>;
+export const MotetidspunktValgt = ({ bekreftetTidspunkt }) => {
+    return <div className="motetidspunktValgt">Møtetidspunkt valgt, møteresultat sendt til arbeidsgiver {getDatoFraZulu(bekreftetTidspunkt)}.</div>;
+};
+
+MotetidspunktValgt.propTypes = {
+    bekreftetTidspunkt: PropTypes.string,
 };
 
 const MotebookingStatus = ({ fnr, mote, avbrytMote, avbryter, avbrytFeilet }) => {
@@ -96,7 +100,7 @@ const MotebookingStatus = ({ fnr, mote, avbrytMote, avbryter, avbrytFeilet }) =>
                             {
                                 mote.alternativer.map((alternativ, index) => {
                                     return (<td key={index}>
-                                        {alternativ.id === mote.valgtAlternativ.id && <MotetidspunktValgt />}
+                                        {alternativ.id === mote.valgtAlternativ.id && <MotetidspunktValgt bekreftetTidspunkt={mote.bekreftetTidspunkt} />}
                                     </td>);
                                 })
                             }
