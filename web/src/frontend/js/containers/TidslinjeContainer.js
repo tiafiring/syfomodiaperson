@@ -38,7 +38,7 @@ export class TidslinjeSide extends Component {
                 return (<div>
                     <div className="panel">
                         <Varselstripe type="spesial" ikon="/sykefravaer/img/svg/speiling.svg">
-                            <p>Er slik {brukernavn} ser det på nav.no</p>
+                            <p>Dette er slik {brukernavn} ser det på nav.no</p>
                         </Varselstripe>
                     </div>
                     <div className="speiling">
