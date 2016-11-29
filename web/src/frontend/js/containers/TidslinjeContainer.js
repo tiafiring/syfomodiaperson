@@ -45,7 +45,7 @@ export class TidslinjeSide extends Component {
                         <Brodsmuler brodsmuler={brodsmuler} />
                         <SidetoppSpeilet tittel="Tidslinjen" htmlTekst={htmlIntro} />
                         <TidslinjeVelgArbeidssituasjonContainer valgtArbeidssituasjon={valgtArbeidssituasjon} />
-                        <Tidslinje hendelser={hendelser} ledetekster={ledetekster} setHendelseData={actions.setHendelseData} />
+                        <Tidslinje arbeidssituasjon={valgtArbeidssituasjon} hendelser={hendelser} ledetekster={ledetekster} setHendelseData={actions.setHendelseData} />
                     </div>
                 </div>);
             })()
