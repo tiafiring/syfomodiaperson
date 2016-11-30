@@ -17,7 +17,7 @@ export class TidslinjeSide extends Component {
     }
 
     render() {
-        const { hendelser, ledetekster, actions, valgtArbeidssituasjon, henter, hentingFeilet, brukernavn } = this.props;
+        const { hendelser, ledetekster, actions, valgtArbeidssituasjon, henter, hentingFeilet, brukernavn, ikkeTilgang } = this.props;
         const htmlIntro = {
             __html: `<p>${getLedetekst('tidslinje.introtekst', ledetekster)}</p>`,
         };
@@ -34,6 +34,9 @@ export class TidslinjeSide extends Component {
                 }
                 if (hentingFeilet) {
                     return <Feilmelding />;
+                }
+                if (ikkeTilgang) {
+                    return <Feilmelding tittel="Ikke tilgang" melding="Du har ikke tilgang til å se tidslinjen for denne brukeren." />;
                 }
                 return (<div>
                     <div className="panel">
@@ -62,6 +65,7 @@ TidslinjeSide.propTypes = {
     valgtArbeidssituasjon: PropTypes.string,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
+    ikkeTilgang: PropTypes.bool,
     hendelser: PropTypes.array,
     ledetekster: PropTypes.object,
     brukernavn: PropTypes.string,
@@ -104,6 +108,7 @@ export function mapStateToProps(state, ownProps) {
     const apneHendelseIder = (ownProps && ownProps.location) ? ownProps.location.hash.replace('#', '').split('/') : [];
     const henter = state.tidslinjer.henter || state.ledetekster.henter;
     const hentingFeilet = state.tidslinjer.hentingFeilet || state.ledetekster.hentingFeilet;
+    const ikkeTilgang = state.tidslinjer.ikkeTilgang;
     return {
         brukernavn: state.navbruker.data.navn,
         fnr,
@@ -112,6 +117,7 @@ export function mapStateToProps(state, ownProps) {
         apneHendelseIder,
         henter,
         hentingFeilet,
+        ikkeTilgang,
         ledetekster: state.ledetekster.data,
     };
 }

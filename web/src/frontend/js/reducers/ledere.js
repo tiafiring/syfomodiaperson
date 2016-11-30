@@ -1,5 +1,6 @@
 const defaultState = {
     data: [],
+    ikkeTilgang: false
 };
 
 const ledere = (state = defaultState, action = {}) => {
@@ -22,6 +23,14 @@ const ledere = (state = defaultState, action = {}) => {
             return {
                 henter: false,
                 hentingFeilet: true,
+                data: [],
+            };
+        }
+        case 'HENT_LEDERE_IKKE_TILGANG': {
+            return {
+                henter: false,
+                hentingFeilet: false,
+                ikkeTilgang: true,
                 data: [],
             };
         }

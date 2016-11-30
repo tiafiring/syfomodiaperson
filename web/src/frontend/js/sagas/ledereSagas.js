@@ -10,7 +10,11 @@ export function* hentLedere(action) {
         yield put({ type: 'LEDERE_HENTET', data });
     } catch (e) {
         log(e);
-        yield put({ type: 'HENT_LEDERE_FEILET' });
+        if (e.message === '403') {
+            yield put( { type: 'HENT_LEDERE_IKKE_TILGANG' });
+        } else {
+            yield put({ type: 'HENT_LEDERE_FEILET' });
+        }
     }
 }
 
