@@ -15,6 +15,14 @@ describe("tidslinjer_actions", () => {
         })
     });
 
+    it("Skal ha en hentTidslinjerIkkeTilgang()-funksjon som returnerer riktig action", () => {
+        const res = actions.hentTidslinjerIkkeTilgang();
+        expect(res).to.deep.equal({
+            ikkeTilgang: true,
+            type: 'HENT_TIDSLINJER_IKKE_TILGANG'
+        })
+    });
+
     it("Skal ha en henterTidslinjer()-funksjon som returnerer riktig action", () => {
         const res = actions.henterTidslinjer();
         expect(res).to.deep.equal({

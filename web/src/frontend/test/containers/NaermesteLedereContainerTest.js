@@ -29,6 +29,11 @@ describe("NaermesteLedereContainer", () => {
             expect(comp.find(AppSpinner)).to.have.length(1);
         });
 
+        it("Skal vise en Feilmelding hvis ikke tilgang", () => {
+            const comp = shallow(<NaermesteLedereSide ikkeTilgang={true} actions={actions} />);
+            expect(comp.find(Feilmelding)).to.have.length(1);
+        });
+
         it("Skal hente ledere", () => {
             const comp = shallow(<NaermesteLedereSide hentingFeilet actions={actions} />);
             expect(hentLedere.calledOnce).to.be.true;
