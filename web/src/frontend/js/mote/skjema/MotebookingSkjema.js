@@ -51,6 +51,11 @@ export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, send
     return (<form className="panel" onSubmit={handleSubmit(submit)}>
         <Sidetopp tittel="Møteforespørsel" />
 
+        <div className="skjema__input">
+            <input id="olsem" type="checkbox" className="checkboks" />
+            <label htmlFor="olsem">Hei</label>
+        </div>
+
         {
             hentLedereFeiletBool && <div className="blokk--xl">
                 <Varselstripe>
