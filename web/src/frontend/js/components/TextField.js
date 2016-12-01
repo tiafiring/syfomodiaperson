@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 
 const TextField = (props) => {
-    const { meta } = props;
+    const { meta, className } = props;
 
-    return (<div className={meta.touched && meta.error && 'feil'}>
+    return (<div>
         <input autoComplete="off" placeholder={props.placeholder} type={props.type || 'text'} id={props.id}
-            className={props.className} {...props.input} />
-        <p className="skjema-feilmelding" aria-live="polite">{meta.touched && meta.error}</p>
+            className={`${className}${meta.touched && meta.error ? ' input--feil' : ''}`} {...props.input} />
+        <p className="skjema__feilmelding" aria-live="polite">{meta.touched && meta.error}</p>
     </div>);
 };
 

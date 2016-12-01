@@ -78,7 +78,7 @@ export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, send
             <legend>2. Velg dato, tid og sted</legend>
             <Tidspunkter />
             <label htmlFor="sted">Sted</label>
-            <Field id="sted" component={TextField} name="sted" className="input-xxl js-sted" placeholder="Skriv møtested eller om det er et videomøte" />
+            <Field id="sted" component={TextField} name="sted" className="input--xxl js-sted" placeholder="Skriv møtested eller om det er et videomøte" />
         </fieldset>
 
         <div aria-live="polite" role="alert">
