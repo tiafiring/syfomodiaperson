@@ -20,12 +20,14 @@ export class NaermesteLedereSide extends Component {
     }
 
     render() {
-        const { henter, ledere, hentingFeilet, actions, navbruker } = this.props;
+        const { henter, ledere, hentingFeilet, actions, navbruker, ikkeTilgang } = this.props;
         return (<Side tittel="Nærmeste ledere">
         {
             (() => {
                 if (hentingFeilet) {
                     return <Feilmelding />;
+                } else if (ikkeTilgang) {
+                    return <Feilmelding tittel="Ikke tilgang" melding="Du har ikke tilgang til å se de nærmeste ledere for denne brukeren." />;
                 } else if (henter) {
                     return <AppSpinner />;
                 }
@@ -43,6 +45,7 @@ NaermesteLedereSide.propTypes = {
     actions: PropTypes.object,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
+    ikkeTilgang: PropTypes.bool,
     navbruker: PropTypes.object,
 };
 
@@ -59,6 +62,7 @@ export function mapStateToProps(state, ownProps) {
         henter: state.ledere.henter || state.navbruker.henter,
         hentingFeilet: state.ledere.hentingFeilet,
         navbruker: state.navbruker.data,
+        ikkeTilgang: state.ledere.ikkeTilgang,
         fnr,
     };
 }

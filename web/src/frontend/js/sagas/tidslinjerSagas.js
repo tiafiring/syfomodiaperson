@@ -14,7 +14,11 @@ export function* hentTidslinjer(action) {
         }
     } catch (e) {
         log(e);
-        yield put(actions.hentTidslinjerFeilet());
+        if (e.message === '403') {
+            yield put(actions.hentTidslinjerIkkeTilgang());
+        } else {
+            yield put(actions.hentTidslinjerFeilet());
+        }
     }
 }
 

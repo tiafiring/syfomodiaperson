@@ -7,7 +7,7 @@ describe('ledere', () => {
 
     it("Returnerer { data: [] } ved initializering", () => {
         const nextState = ledere();
-        expect(nextState).to.deep.equal({ data: []});
+        expect(nextState).to.deep.equal({ data: [], ikkeTilgang: false });
     });
 
     it("håndterer LEDERE_HENTET", () => {
@@ -64,6 +64,22 @@ describe('ledere', () => {
         expect(nextState).to.deep.equal({
             henter: false,
             hentingFeilet: true,
+            data: []
+        })
+    });
+
+    it("håndterer HENT_LEDERE_IKKE_TILGANG", () => {
+        const initialState = deepFreeze({
+            henter: false,
+        });
+        const action = {
+            type: 'HENT_LEDERE_IKKE_TILGANG'
+        }
+        const nextState = ledere(initialState, action);
+        expect(nextState).to.deep.equal({
+            henter: false,
+            hentingFeilet: false,
+            ikkeTilgang: true,
             data: []
         })
     });
