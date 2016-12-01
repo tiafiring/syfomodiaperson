@@ -5,9 +5,9 @@
   "main": "index.js",
   "test": "npm run test",
   "scripts": {
-    "prebuild": "title modiasyfofront && node createProdFolders.js",
+    "prebuild": "node createProdFolders.js",
     "dev": "title modiasyfofront && parallelshell \"npm run prebuild\" \"npm run images\" \"npm run static:build:local\" \"npm run scripts:watch\"",
-    "build": "title modiasyfofront && parallelshell \"npm run prebuild\" \"npm run images\" \"npm run static:build\" \"npm run scripts:build\"",
+    "build": "parallelshell \"npm run prebuild\" \"npm run images\" \"npm run static:build\" \"npm run scripts:build\"",
     "test:watch": "title modiasyfofront && cross-env NODE_ENV=test nyc mocha --watch -G --compilers js:babel-core/register --require babel-polyfill ./test/setup.js --recursive test",
     "test": "cross-env NODE_ENV=test nyc mocha -G --compilers js:babel-core/register --require babel-polyfill ./test/setup.js --recursive test",
     "posttest": "nyc report --reporter=html --reporter=lcov",
@@ -16,8 +16,8 @@
     "scripts:build": "set NODE_ENV=production&&node deploy.js",
     "scripts:watch": "title modiasyfofront && webpack-dev-server --inline  --port 3040",
     "lint": "eslint js/. --ext .js",
-    "images": "title modiasyfofront && parallelshell \"cp -R img ../main/webapp\" \"npm run images:modig\"",
-    "images:modig": "title modiasyfofront && cp -R node_modules/modig-frontend/modig-frontend-ressurser/src/main/resources/META-INF/resources/img img/modig-frontend"
+    "images": "parallelshell \"cp -R img ../main/webapp\" \"npm run images:modig\"",
+    "images:modig": "cp -R node_modules/modig-frontend/modig-frontend-ressurser/src/main/resources/META-INF/resources/img img/modig-frontend"
   },
   "nyc": {
     "require": [
