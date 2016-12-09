@@ -20,7 +20,7 @@ class GlobalNavigasjon extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            focus: -1,
+            focusIndex: -1,
         };
     }
 
@@ -29,30 +29,36 @@ class GlobalNavigasjon extends Component {
         this.refs[ref].focus();
     }
 
+    setFocusIndex(index) {
+        this.setState({
+            focus: index,
+        });
+    }
+
     handleKeyup(e) {
         const DOWN = 40;
         const UP = 38;
         switch (e.keyCode) {
             case DOWN: {
-                let nyFokus = this.state.focus + 1;
-                if (nyFokus === this.menypunkter.length) {
-                    nyFokus = 0;
+                let focusIndex = this.state.focus + 1;
+                if (focusIndex === this.menypunkter.length) {
+                    return;
                 }
                 this.setState({
-                    focus: nyFokus,
+                    focusIndex,
                 });
-                this.setFocus(nyFokus);
+                this.setFocus(focusIndex);
                 return;
             }
             case UP: {
-                let nyFokus = this.state.focus - 1;
-                if (nyFokus === -1) {
-                    nyFokus = this.menypunkter.length - 1;
+                let focusIndex = this.state.focus - 1;
+                if (focusIndex === -1) {
+                    return;
                 }
                 this.setState({
-                    focus: nyFokus,
+                    focusIndex,
                 });
-                this.setFocus(nyFokus);
+                this.setFocus(focusIndex);
                 return;
             }
             default: {
@@ -68,13 +74,15 @@ class GlobalNavigasjon extends Component {
             this.menypunkter.push(motemodulMenypunkt);
         }
 
-        return (<ul className="navigasjon" tabIndex="0" onKeyUp={(e) => {
-            this.handleKeyup(e);
-        }}>
+        return (<ul aria-label="Navigasjon" className="navigasjon">
         {
             this.menypunkter.map(({ navn, sti }, index) => {
                 return (<li key={index} className="navigasjon__element">
-                    <a tabIndex="-1" ref={`js-${index}`} className="navigasjonspanel" onClick={(e) => {
+                    <a ref={`js-${index}`} className="navigasjonspanel" onFocus={(e => {
+                        this.setFocusIndex(index);
+                    })} onKeyUp={(e) => {
+                        this.handleKeyup(e);
+                    }} onClick={(e) => {
                         e.preventDefault();
                         browserHistory.push(`/sykefravaer/${fnr}/${sti}`);
                     }} href={`/sykefravaer/${fnr}/${sti}`}>{navn}</a>
