@@ -1,6 +1,6 @@
 const defaultState = {
     data: [],
-    ikkeTilgang: false
+    ikkeTilgang: false,
 };
 
 const ledere = (state = defaultState, action = {}) => {

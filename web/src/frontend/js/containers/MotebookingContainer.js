@@ -7,6 +7,7 @@ import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import * as moterActions from '../mote/actions/moter_actions';
 import * as ledereActions from '../actions/ledere_actions';
+import { MOETEPLANLEGGER } from '../menypunkter';
 
 export class MotebookingSide extends Component {
     constructor(props) {
@@ -17,7 +18,7 @@ export class MotebookingSide extends Component {
 
     render() {
         const { henter, hentMoterFeiletBool, mote } = this.props;
-        return (<Side tittel="Møteplanlegger">
+        return (<Side tittel="Møteplanlegger" aktivtMenypunkt={MOETEPLANLEGGER}>
             {
                 (() => {
                     if (henter) {

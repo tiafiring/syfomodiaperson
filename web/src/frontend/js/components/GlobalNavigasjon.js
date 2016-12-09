@@ -1,19 +1,23 @@
 import React, { Component, PropTypes } from 'react';
 import { browserHistory } from 'react-router';
+import * as menypunkter from '../menypunkter';
 
 const naermesteLederMenypunkt = {
     navn: 'Nærmeste leder',
     sti: 'naermeste-leder',
+    menypunkt: menypunkter.NAERMESTE_LEDER,
 };
 
 const motemodulMenypunkt = {
     navn: 'Møteplanlegger',
     sti: 'mote',
+    menypunkt: menypunkter.MOETEPLANLEGGER,
 };
 
 const tidslinjeMenypunkt = {
     navn: 'Tidslinjen',
     sti: 'tidslinjen',
+    menypunkt: menypunkter.TIDSLINJEN,
 };
 
 class GlobalNavigasjon extends Component {
@@ -25,7 +29,7 @@ class GlobalNavigasjon extends Component {
     }
 
     setFocus(fokusId) {
-        const ref = `js-${fokusId}`;
+        const ref = this.getRef(fokusId);
         this.refs[ref].focus();
     }
 
@@ -35,12 +39,17 @@ class GlobalNavigasjon extends Component {
         });
     }
 
-    handleKeyup(e) {
+    getRef(index) {
+        return `js-${index}`;
+    }
+
+    handleKeyDown(e) {
         const DOWN = 40;
         const UP = 38;
         switch (e.keyCode) {
             case DOWN: {
-                let focusIndex = this.state.focus + 1;
+                e.preventDefault();
+                const focusIndex = this.state.focus + 1;
                 if (focusIndex === this.menypunkter.length) {
                     return;
                 }
@@ -51,7 +60,8 @@ class GlobalNavigasjon extends Component {
                 return;
             }
             case UP: {
-                let focusIndex = this.state.focus - 1;
+                e.preventDefault();
+                const focusIndex = this.state.focus - 1;
                 if (focusIndex === -1) {
                     return;
                 }
@@ -68,7 +78,7 @@ class GlobalNavigasjon extends Component {
     }
 
     render() {
-        const { fnr, harTilgangMotemodul } = this.props;
+        const { fnr, harTilgangMotemodul, aktivtMenypunkt } = this.props;
         this.menypunkter = [naermesteLederMenypunkt, tidslinjeMenypunkt];
         if (harTilgangMotemodul) {
             this.menypunkter.push(motemodulMenypunkt);
@@ -76,14 +86,20 @@ class GlobalNavigasjon extends Component {
 
         return (<ul aria-label="Navigasjon" className="navigasjon">
         {
-            this.menypunkter.map(({ navn, sti }, index) => {
+            this.menypunkter.map(({ navn, sti, menypunkt }, index) => {
+                let className = 'navigasjonspanel';
+                if (menypunkt === aktivtMenypunkt) {
+                    className = `${className} navigasjonspanel--aktiv`;
+                }
                 return (<li key={index} className="navigasjon__element">
-                    <a ref={`js-${index}`} className="navigasjonspanel" onFocus={(e => {
+                    <a ref={this.getRef(index)} className={className} onFocus={() => {
                         this.setFocusIndex(index);
-                    })} onKeyUp={(e) => {
-                        this.handleKeyup(e);
+                    }} onKeyDown={(e) => {
+                        this.handleKeyDown(e);
                     }} onClick={(e) => {
                         e.preventDefault();
+                        // Dette gjøres slik for å slippe å laste siden på nytt.
+                        // <Link /> fra react-router kan ikke brukes da den ikke støtter ref-attributtet.
                         browserHistory.push(`/sykefravaer/${fnr}/${sti}`);
                     }} href={`/sykefravaer/${fnr}/${sti}`}>{navn}</a>
                 </li>);
@@ -96,6 +112,7 @@ class GlobalNavigasjon extends Component {
 GlobalNavigasjon.propTypes = {
     fnr: PropTypes.string,
     harTilgangMotemodul: PropTypes.bool,
+    aktivtMenypunkt: PropTypes.string,
 };
 
 export default GlobalNavigasjon;
