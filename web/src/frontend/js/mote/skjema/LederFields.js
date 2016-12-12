@@ -41,10 +41,11 @@ export const ArbeidsgiverDropdown = ({ meta, input, ledere }) => {
 ArbeidsgiverDropdown.propTypes = {
     meta: PropTypes.object,
     input: PropTypes.object,
+    virksomhet: PropTypes.string,
     ledere: PropTypes.array,
 };
 
-export const FyllUtLeder = ({ FieldComponent = TextField }) => {
+export const FyllUtLeder = ({ FieldComponent = TextField, virksomhet, sjekkOrgnummer }) => {
     return (<div>
         <div className="navInput blokk--xl">
             <label htmlFor="js-ledernavn">Nærmeste leders navn</label>
@@ -54,8 +55,14 @@ export const FyllUtLeder = ({ FieldComponent = TextField }) => {
             <label htmlFor="js-lederepost">E-post</label>
             <Field id="js-lederepost" component={FieldComponent} type="email" name="deltakere[0].epost" className="input--xxl" />
         </div>
+        <div className="navInput">
+            <label htmlFor="js-orgnummer">Org. nummer</label>
+            <Field id="js-orgnummer" component={TextField} name="deltakere[0].orgnummer" className="input--xxl" onBlur={ () => console.log("her") } />
+        </div>
+        <p name="virksomhet">{ virksomhet } </p>
     </div>);
 };
+
 
 FyllUtLeder.propTypes = {
     FieldComponent: PropTypes.func,
@@ -71,24 +78,26 @@ export default class LederFields extends Component {
     }
 
     setLederfelter(valgtArbeidsgiverType) {
-        const { ledere, untouch } = this.props;
+        const { ledere, untouch, nullstillVirksomhet } = this.props;
         if (valgtArbeidsgiverType === 'VELG') {
             this.fyllUtLederfelter();
         } else if (valgtArbeidsgiverType === 'manuell') {
             this.fyllUtLederfelter();
-            untouch('deltakere[0].navn', 'deltakere[0].epost');
+            untouch('deltakere[0].navn', 'deltakere[0].epost', 'deltakere[0].orgnummer');
+            nullstillVirksomhet();
         } else {
             const leder = ledere.filter((l) => {
                 return `${l.id}` === valgtArbeidsgiverType;
             })[0];
-            this.fyllUtLederfelter(leder.navn, leder.epost);
+            this.fyllUtLederfelter(leder.navn, leder.epost, leder.orgnummer);
         }
     }
 
-    fyllUtLederfelter(navn = '', epost = '') {
+    fyllUtLederfelter(navn = '', epost = '', orgnummer = '') {
         const { autofill } = this.props;
         autofill('deltakere[0].navn', navn);
         autofill('deltakere[0].epost', epost);
+        autofill('deltakere[0].orgnummer', orgnummer);
     }
 
     render() {
@@ -97,14 +106,23 @@ export default class LederFields extends Component {
         const FieldComponent = value === 'VELG' || value === 'manuell' ? TextField : TextFieldLocked;
         return (<div>
             <ArbeidsgiverDropdown {...this.props.arbeidsgiverType} ledere={this.props.ledere} />
-            { visInputfelter && <FyllUtLeder FieldComponent={FieldComponent} />}
+            { visInputfelter && <FyllUtLeder FieldComponent={FieldComponent} virksomhet={value === 'manuell' && erOrgnummerFylltUt(this.props) ? this.props.virksomhet : ''} />}
         </div>);
     }
 }
 
+//La den til fordi hvis man først velger AG, og så manuell så ville man her sitte med et orgnummer på deltakere[0] som så ville blitt brukt til å vise virksomhetsnavnet.
+const erOrgnummerFylltUt = (props) => {
+    const deltakere = props.deltakere;
+    return deltakere && deltakere[0].orgnummer && deltakere[0].orgnummer.input && deltakere[0].orgnummer.input.value && deltakere[0].orgnummer.input.value.length === 9
+};
+
+
 LederFields.propTypes = {
     arbeidsgiverType: PropTypes.object,
+    nullstillVirksomhet: PropTypes.func,
     autofill: PropTypes.func,
+    virksomhet: PropTypes.string,
     untouch: PropTypes.func,
     ledere: PropTypes.array,
 };

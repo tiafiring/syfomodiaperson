@@ -79,7 +79,21 @@ describe("MotebookingSkjema", () => {
                 expect(compo.find(Fields)).to.have.length(1);
                 expect(compo.find(Fields).prop("component")).to.deep.equal(LederFields);
             });
+''
+        })
 
+        describe("Dersom det finnes virksomhet", () => {
+
+            let virksomhet;
+
+            beforeEach(() => {
+                virksomhet = "BEKK";
+            });
+
+            it("Skal vise bedriftnavn", () => {
+                const compo = shallow(<MotebookingSkjema  ledere={[]} virksomhet={virksomhet} handleSubmit={handleSubmit} />);
+                expect(compo.text()).not.to.contain("BEKK")
+            })
         })
 
     });
@@ -92,6 +106,8 @@ describe("MotebookingSkjema", () => {
         beforeEach(() => {
             values = {};
             props = {
+                nullstillVirksomhet: Function,
+                hentVirksomhet: Function,
                 ledere: []
             };
         });
@@ -100,6 +116,19 @@ describe("MotebookingSkjema", () => {
             const res = validate(values, props);
             expect(res.deltakere[0].epost).to.equal("Vennligst fyll ut nærmeste leders e-post-adresse");
         });
+
+        it("Skal kalle hentVirksomhet dersom orgnummer består av 9 tegn", () => {
+            values.deltakere = [{ orgnummer:"123456789" }];
+            validate(values, props);
+            expect(props.hentVirksomhet('123456789')).to.have.been.called
+        });
+
+        it("Skal ikke kalle hentVirksomhet dersom orgnummer består av 8 tegn", () => {
+            values.deltakere = [{ orgnummer:"12345678" }];
+            validate(values, props);
+            expect(props.hentVirksomhet('12345678')).to.not.have.been.called
+        });
+
 
         it("Skal validere nærmeste leders e-post dersom e-post er ugyldig", () => {
             values.deltakere = [{

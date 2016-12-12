@@ -10,13 +10,14 @@ import sinon from 'sinon';
 describe("FyllUtLeder", () => {
     it("Skal inneholde felter for å skrive inn arbeidsgivers opplysninger", () => {
         const compo = shallow(<FyllUtLeder />);
-        expect(compo.find(Field)).to.have.length(2);
+        expect(compo.find(Field)).to.have.length(3);
     });
 
     it("Skal inneholde felter med riktig type for å skrive inn arbeidsgivers opplysninger", () => {
         const compo = shallow(<FyllUtLeder />);
-        expect(compo.find(Field).first().prop("name")).to.equal("deltakere[0].navn")
-        expect(compo.find(Field).last().prop("name")).to.equal("deltakere[0].epost")
+        expect(compo.find(Field).first().prop("name")).to.equal("deltakere[0].navn");
+        expect(compo.find(Field).get(1).props.name).equal("deltakere[0].epost");
+        expect(compo.find(Field).last().prop("name")).to.equal("deltakere[0].orgnummer");
     });
 });
 
@@ -70,14 +71,16 @@ describe("LederFields", () => {
             expect(fyllUtLederfelter.calledOnce).to.be.true;
         });
 
-        it("Skal kalle på fyllUtLederfelter og untouch dersom valgtArbeidsgiverType = 'manuell'", () => {
+        it("Skal kalle på fyllUtLederfelter, nullstillVirksomhet og untouch dersom valgtArbeidsgiverType = 'manuell'", () => {
+            const nullstillVirksomhet = sinon.spy();
             const fyllUtLederfelter = sinon.spy();
             const untouch = sinon.spy();
-            compo = shallow(<LederFields untouch={untouch} arbeidsgiverType={arbeidsgiverType} />);
+            compo = shallow(<LederFields untouch={untouch} arbeidsgiverType={arbeidsgiverType} nullstillVirksomhet={nullstillVirksomhet} />);
             compo.instance().fyllUtLederfelter = fyllUtLederfelter;
             compo.instance().setLederfelter('manuell');
             expect(fyllUtLederfelter.calledOnce).to.be.true;
-            expect(untouch.calledWith('deltakere[0].navn', 'deltakere[0].epost')).to.be.true;
+            expect(nullstillVirksomhet.calledOnce).to.be.true;
+            expect(untouch.calledWith('deltakere[0].navn', 'deltakere[0].epost', 'deltakere[0].orgnummer')).to.be.true;
         });
 
         it("Skal kalle på fyllUtLederfelter med leder dersom valgtArbeidsgiverType = '2'", () => {
@@ -101,13 +104,14 @@ describe("LederFields", () => {
     });
 
     describe("fyllUtLederfelter", () => {
-        it("Skal kalle på autofill med navn og epost", () => {
+        it("Skal kalle på autofill med navn, epost og orgnummer", () => {
             const autofill = sinon.spy();
             const compo = shallow(<LederFields arbeidsgiverType={arbeidsgiverType} autofill={autofill} />);
-            compo.instance().fyllUtLederfelter("Helge", "***REMOVED***");
-            expect(autofill.calledTwice).to.be.true;
+            compo.instance().fyllUtLederfelter("Helge", "***REMOVED***", "123456789");
+            expect(autofill.calledThrice).to.be.true;
             expect(autofill.calledWith("deltakere[0].navn", "Helge")).to.be.true;
             expect(autofill.calledWith("deltakere[0].epost", "***REMOVED***")).to.be.true;
+            expect(autofill.calledWith("deltakere[0].orgnummer", "123456789")).to.be.true;
         })
     });
 

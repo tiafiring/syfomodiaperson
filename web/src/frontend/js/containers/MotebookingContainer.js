@@ -7,6 +7,7 @@ import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import * as moterActions from '../mote/actions/moter_actions';
 import * as ledereActions from '../actions/ledere_actions';
+import * as virksomhetActions from '../mote/actions/virksomhet_actions';
 
 export class MotebookingSide extends Component {
     constructor(props) {
@@ -39,8 +40,10 @@ export class MotebookingSide extends Component {
 MotebookingSide.propTypes = {
     fnr: PropTypes.string,
     mote: PropTypes.object,
+    virksomhet: PropTypes.string,
     hentMoter: PropTypes.func,
     hentLedere: PropTypes.func,
+    nullstillVirksomhet: PropTypes.func,
     henter: PropTypes.bool,
     hentMoterFeiletBool: PropTypes.bool,
     hentLedereFeiletBool: PropTypes.bool,
@@ -56,11 +59,13 @@ export const mapStateToProps = (state) => {
     const ledere = state.ledere.data.filter((leder) => {
         return leder.erOppgitt;
     });
+    const virksomhet = state.virksomhet.navn;
 
     return {
         fnr,
         mote: aktivtMote,
         ledere,
+        virksomhet,
         henter: state.moter.henter || state.ledere.henter,
         sender: state.moter.sender,
         hentMoterFeiletBool: state.moter.hentingFeilet,
@@ -69,6 +74,6 @@ export const mapStateToProps = (state) => {
     };
 };
 
-const MotebookingContainer = connect(mapStateToProps, Object.assign({}, moterActions, ledereActions))(MotebookingSide);
+const MotebookingContainer = connect(mapStateToProps, Object.assign({}, moterActions, ledereActions, virksomhetActions))(MotebookingSide);
 
 export default MotebookingContainer;

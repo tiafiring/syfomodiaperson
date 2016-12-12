@@ -41,7 +41,7 @@ export function getData(values) {
     };
 }
 
-export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeilet, ledere, autofill, untouch, hentLedereFeiletBool }) => {
+export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeilet, ledere, virksomhet, autofill, untouch, hentLedereFeiletBool, nullstillVirksomhet }) => {
     const submit = (values) => {
         const data = getData(values);
         data.fnr = fnr;
@@ -65,8 +65,10 @@ export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, send
                 ledere.length > 0 && <Fields
                     autofill={autofill}
                     untouch={untouch}
-                    names={['arbeidsgiverType', 'deltakere[0].navn', 'deltakere[0].epost']}
+                    names={['arbeidsgiverType', 'deltakere[0].navn', 'deltakere[0].epost', 'deltakere[0].orgnummer']}
                     ledere={ledere}
+                    virksomhet={virksomhet}
+                    nullstillVirksomhet={nullstillVirksomhet}
                     component={LederFields} />
             }
             {
@@ -106,8 +108,11 @@ MotebookingSkjema.propTypes = {
     sender: PropTypes.bool,
     sendingFeilet: PropTypes.bool,
     ledere: PropTypes.array,
+    virksomhet: PropTypes.string,
     autofill: PropTypes.func,
     untouch: PropTypes.func,
+    hentVirksomhet: PropTypes.func,
+    nullstillVirksomhet: PropTypes.func,
     hentLedereFeiletBool: PropTypes.bool,
 };
 
@@ -127,7 +132,7 @@ function erGyldigDato(dato) {
 }
 
 export function validate(values, props) {
-    const feilmeldinger = {};
+    const meldinger = {};
     const lederFeilmelding = {};
     let tidspunkterFeilmeldinger = [{}, {}];
 
@@ -141,8 +146,16 @@ export function validate(values, props) {
         lederFeilmelding.epost = 'Vennligst fyll ut en gyldig e-post-adresse';
     }
 
+    if (values.arbeidsgiverType === 'manuell' && values.deltakere && values.deltakere[0].orgnummer) {
+        if (values.deltakere[0].orgnummer.length === 9 && !isNaN(values.deltakere[0].orgnummer)) {
+            props.hentVirksomhet(values.deltakere[0].orgnummer);
+        } else {
+            lederFeilmelding.orgnummer = 'Et orgnummer består av 9 siffer';
+        }
+    }
+
     if (lederFeilmelding.navn || lederFeilmelding.epost) {
-        feilmeldinger.deltakere = [lederFeilmelding];
+        meldinger.deltakere = [lederFeilmelding];
     }
 
     if (!values.tidspunkter || !values.tidspunkter.length) {
@@ -172,18 +185,18 @@ export function validate(values, props) {
     }
 
     if (JSON.stringify(tidspunkterFeilmeldinger) !== JSON.stringify([{}, {}])) {
-        feilmeldinger.tidspunkter = tidspunkterFeilmeldinger;
+        meldinger.tidspunkter = tidspunkterFeilmeldinger;
     }
 
     if (!values.sted || values.sted.trim() === '') {
-        feilmeldinger.sted = 'Vennligst angi møtested';
+        meldinger.sted = 'Vennligst angi møtested';
     }
 
     if (values.arbeidsgiverType === 'VELG' || (props.ledere.length > 0 && !values.arbeidsgiverType)) {
-        feilmeldinger.arbeidsgiverType = 'Vennligst velg arbeidsgiver';
+        meldinger.arbeidsgiverType = 'Vennligst velg arbeidsgiver';
     }
 
-    return feilmeldinger;
+    return meldinger;
 }
 
 const ReduxSkjema = reduxForm({

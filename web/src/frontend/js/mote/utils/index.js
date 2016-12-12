@@ -13,3 +13,4 @@ export const getTidFraZulu = (zulutid) => {
     const d = new Date(zulutid);
     return `${getDatoFraZulu(zulutid)} kl. ${pad(d.getHours())}.${pad(d.getMinutes())}`;
 };
+

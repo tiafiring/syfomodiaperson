@@ -27,6 +27,9 @@ describe("MotestatusContainer", () => {
                     data: {
                         fnr: "123456"
                     }
+                },
+                virksomhet: {
+                    navn: "BEKK"
                 }
             }
         });
