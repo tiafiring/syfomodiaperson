@@ -117,18 +117,33 @@ describe("MotebookingSkjema", () => {
             expect(res.deltakere[0].epost).to.equal("Vennligst fyll ut nærmeste leders e-post-adresse");
         });
 
-        it("Skal kalle hentVirksomhet dersom orgnummer består av 9 tegn", () => {
-            values.deltakere = [{ orgnummer:"123456789" }];
-            validate(values, props);
-            expect(props.hentVirksomhet('123456789')).to.have.been.called
-        });
-
-        it("Skal ikke kalle hentVirksomhet dersom orgnummer består av 8 tegn", () => {
+        it("Skal vise feilmelding dersom orgnummer består av 8 tegn", () => {
             values.deltakere = [{ orgnummer:"12345678" }];
-            validate(values, props);
-            expect(props.hentVirksomhet('12345678')).to.not.have.been.called
+            values.arbeidsgiverType = "manuell";
+            const res = validate(values, props);
+            expect(res.deltakere[0].orgnummer).to.equal("Et orgnummer består av 9 siffer");
         });
 
+        it("Skal ikke vise feilmelding dersom orgnummer består av 9 tegn", () => {
+            values.deltakere = [{ orgnummer:"123456789" }];
+            values.arbeidsgiverType = "manuell";
+            const res = validate(values, props);
+            expect(res.deltakere[0].orgnummer).to.equal(undefined);
+        });
+
+        it("Skal vise feilmelding dersom orgnummer består av 9 tegn, men en bokstav", () => {
+            values.deltakere = [{ orgnummer:"12345678a" }];
+            values.arbeidsgiverType = "manuell";
+            const res = validate(values, props);
+            expect(res.deltakere[0].orgnummer).to.equal("Et orgnummer består av 9 siffer");
+        });
+
+        it("Skal ikke vise feilmelding dersom orgnummer består 8 tegn, men type valg", () => {
+            values.deltakere = [{ orgnummer:"12345678" }];
+            values.arbeidsgiverType = "valg";
+            const res = validate(values, props);
+            expect(res.deltakere[0].orgnummer).to.equal(undefined);
+        });
 
         it("Skal validere nærmeste leders e-post dersom e-post er ugyldig", () => {
             values.deltakere = [{

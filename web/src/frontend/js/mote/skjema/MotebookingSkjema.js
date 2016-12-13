@@ -134,7 +134,7 @@ function erGyldigDato(dato) {
 }
 
 export function validate(values, props) {
-    const meldinger = {};
+    const feilmeldinger = {};
     const lederFeilmelding = {};
     let tidspunkterFeilmeldinger = [{}, {}];
 
@@ -148,14 +148,13 @@ export function validate(values, props) {
         lederFeilmelding.epost = 'Vennligst fyll ut en gyldig e-post-adresse';
     }
 
-    if (values.arbeidsgiverType === 'manuell' && values.deltakere && values.deltakere[0].orgnummer) {
-        if (values.deltakere[0].orgnummer.length !== 9 || isNaN(values.deltakere[0].orgnummer)) {
-            lederFeilmelding.orgnummer = 'Et orgnummer består av 9 siffer';
-        }
+    if (values.arbeidsgiverType === 'manuell' && values.deltakere && values.deltakere[0].orgnummer &&
+        (values.deltakere[0].orgnummer.length !== 9 || isNaN(values.deltakere[0].orgnummer))) {
+        lederFeilmelding.orgnummer = 'Et orgnummer består av 9 siffer';
     }
 
     if (lederFeilmelding.navn || lederFeilmelding.epost) {
-        meldinger.deltakere = [lederFeilmelding];
+        feilmeldinger.deltakere = [lederFeilmelding];
     }
 
     if (!values.tidspunkter || !values.tidspunkter.length) {
@@ -185,18 +184,18 @@ export function validate(values, props) {
     }
 
     if (JSON.stringify(tidspunkterFeilmeldinger) !== JSON.stringify([{}, {}])) {
-        meldinger.tidspunkter = tidspunkterFeilmeldinger;
+        feilmeldinger.tidspunkter = tidspunkterFeilmeldinger;
     }
 
     if (!values.sted || values.sted.trim() === '') {
-        meldinger.sted = 'Vennligst angi møtested';
+        feilmeldinger.sted = 'Vennligst angi møtested';
     }
 
     if (values.arbeidsgiverType === 'VELG' || (props.ledere.length > 0 && !values.arbeidsgiverType)) {
-        meldinger.arbeidsgiverType = 'Vennligst velg arbeidsgiver';
+        feilmeldinger.arbeidsgiverType = 'Vennligst velg arbeidsgiver';
     }
 
-    return meldinger;
+    return feilmeldinger;
 }
 
 const ReduxSkjema = reduxForm({
