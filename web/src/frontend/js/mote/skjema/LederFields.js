@@ -45,14 +45,16 @@ ArbeidsgiverDropdown.propTypes = {
     ledere: PropTypes.array,
 };
 
-export const hentVirksomhetHvis9Siffer = (e, hentVirksomhet) => {
+export const hentVirksomhetHvis9Siffer = (e, hentVirksomhet, nullstillVirksomhet) => {
     const input = e.target.value;
     if (input.length === 9 && !isNaN(input)) {
         hentVirksomhet(input);
+    } else {
+        nullstillVirksomhet();
     }
 };
 
-export const FyllUtLeder = ({ FieldComponent = TextField, virksomhet, hentVirksomhet }) => {
+export const FyllUtLeder = ({ FieldComponent = TextField, virksomhet, hentVirksomhet, nullstillVirksomhet }) => {
     return (<div>
         <div className="navInput blokk--xl">
             <label htmlFor="js-ledernavn">Nærmeste leders navn</label>
@@ -65,7 +67,7 @@ export const FyllUtLeder = ({ FieldComponent = TextField, virksomhet, hentVirkso
         <div className="navInput">
             <label htmlFor="js-orgnummer">Org. nummer</label>
             <Field id="js-orgnummer" component={FieldComponent} name="deltakere[0].orgnummer" className="input--xxl" skjulRedigerKnapp
-                onKeyUp={ (e) => { hentVirksomhetHvis9Siffer(e, hentVirksomhet); }} />
+                onKeyUp={ (e) => { hentVirksomhetHvis9Siffer(e, hentVirksomhet, nullstillVirksomhet); }} />
         </div>
         <p name="virksomhet">{ virksomhet } </p>
     </div>);

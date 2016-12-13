@@ -74,7 +74,7 @@ export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, send
                     component={LederFields} />
             }
             {
-                ledere.length === 0 && <FyllUtLeder />
+                ledere.length === 0 && <FyllUtLeder virksomhet={virksomhet} hentVirksomhet={hentVirksomhet} nullstillVirksomhet={nullstillVirksomhet} />
             }
         </fieldset>
 
@@ -148,7 +148,7 @@ export function validate(values, props) {
         lederFeilmelding.epost = 'Vennligst fyll ut en gyldig e-post-adresse';
     }
 
-    if (values.arbeidsgiverType === 'manuell' && values.deltakere && values.deltakere[0].orgnummer &&
+    if ((!values.arbeidsgiverType || values.arbeidsgiverType === 'manuell') && values.deltakere && values.deltakere[0].orgnummer &&
         (values.deltakere[0].orgnummer.length !== 9 || isNaN(values.deltakere[0].orgnummer))) {
         lederFeilmelding.orgnummer = 'Et orgnummer består av 9 siffer';
     }
