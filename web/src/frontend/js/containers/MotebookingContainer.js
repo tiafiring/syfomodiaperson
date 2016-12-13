@@ -44,6 +44,7 @@ MotebookingSide.propTypes = {
     hentMoter: PropTypes.func,
     hentLedere: PropTypes.func,
     nullstillVirksomhet: PropTypes.func,
+    hentVirksomhet: PropTypes.func,
     henter: PropTypes.bool,
     hentMoterFeiletBool: PropTypes.bool,
     hentLedereFeiletBool: PropTypes.bool,

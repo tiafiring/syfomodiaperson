@@ -42,6 +42,7 @@ TextFieldLocked.propTypes = {
     input: PropTypes.object,
     type: PropTypes.string,
     className: PropTypes.string,
+    skjulRedigerKnapp: PropTypes.bool,
     placeholder: PropTypes.string,
 };
 

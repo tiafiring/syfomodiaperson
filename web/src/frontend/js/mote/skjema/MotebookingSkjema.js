@@ -41,7 +41,8 @@ export function getData(values) {
     };
 }
 
-export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeilet, ledere, virksomhet, autofill, untouch, hentLedereFeiletBool, nullstillVirksomhet }) => {
+export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeilet, ledere,
+    virksomhet, autofill, untouch, hentLedereFeiletBool, hentVirksomhet, nullstillVirksomhet }) => {
     const submit = (values) => {
         const data = getData(values);
         data.fnr = fnr;
@@ -69,6 +70,7 @@ export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, send
                     ledere={ledere}
                     virksomhet={virksomhet}
                     nullstillVirksomhet={nullstillVirksomhet}
+                    hentVirksomhet={hentVirksomhet}
                     component={LederFields} />
             }
             {
@@ -147,9 +149,7 @@ export function validate(values, props) {
     }
 
     if (values.arbeidsgiverType === 'manuell' && values.deltakere && values.deltakere[0].orgnummer) {
-        if (values.deltakere[0].orgnummer.length === 9 && !isNaN(values.deltakere[0].orgnummer)) {
-            props.hentVirksomhet(values.deltakere[0].orgnummer);
-        } else {
+        if (values.deltakere[0].orgnummer.length !== 9 || isNaN(values.deltakere[0].orgnummer)) {
             lederFeilmelding.orgnummer = 'Et orgnummer består av 9 siffer';
         }
     }

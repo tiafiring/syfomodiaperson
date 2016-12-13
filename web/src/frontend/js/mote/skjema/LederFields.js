@@ -45,7 +45,14 @@ ArbeidsgiverDropdown.propTypes = {
     ledere: PropTypes.array,
 };
 
-export const FyllUtLeder = ({ FieldComponent = TextField, virksomhet, sjekkOrgnummer }) => {
+export const hentVirksomhetHvis9Siffer = (e, hentVirksomhet) => {
+    const input = e.target.value;
+    if (input.length === 9 && !isNaN(input)) {
+        hentVirksomhet(input);
+    }
+};
+
+export const FyllUtLeder = ({ FieldComponent = TextField, virksomhet, hentVirksomhet }) => {
     return (<div>
         <div className="navInput blokk--xl">
             <label htmlFor="js-ledernavn">Nærmeste leders navn</label>
@@ -57,15 +64,23 @@ export const FyllUtLeder = ({ FieldComponent = TextField, virksomhet, sjekkOrgnu
         </div>
         <div className="navInput">
             <label htmlFor="js-orgnummer">Org. nummer</label>
-            <Field id="js-orgnummer" component={TextField} name="deltakere[0].orgnummer" className="input--xxl" onBlur={ () => console.log("her") } />
+            <Field id="js-orgnummer" component={FieldComponent} name="deltakere[0].orgnummer" className="input--xxl" skjulRedigerKnapp
+                onKeyUp={ (e) => { hentVirksomhetHvis9Siffer(e, hentVirksomhet); }} />
         </div>
         <p name="virksomhet">{ virksomhet } </p>
     </div>);
 };
 
-
 FyllUtLeder.propTypes = {
     FieldComponent: PropTypes.func,
+    virksomhet: PropTypes.string,
+    hentVirksomhet: PropTypes.func,
+};
+
+//La den til fordi hvis man først velger AG, og så manuell så ville man her sitte med et orgnummer på deltakere[0] som så ville blitt brukt til å vise virksomhetsnavnet.
+const erOrgnummerFylltUt = (props) => {
+    const deltakere = props.deltakere;
+    return deltakere && deltakere[0].orgnummer && deltakere[0].orgnummer.input && deltakere[0].orgnummer.input.value && deltakere[0].orgnummer.input.value.length === 9;
 };
 
 export default class LederFields extends Component {
@@ -106,21 +121,15 @@ export default class LederFields extends Component {
         const FieldComponent = value === 'VELG' || value === 'manuell' ? TextField : TextFieldLocked;
         return (<div>
             <ArbeidsgiverDropdown {...this.props.arbeidsgiverType} ledere={this.props.ledere} />
-            { visInputfelter && <FyllUtLeder FieldComponent={FieldComponent} virksomhet={value === 'manuell' && erOrgnummerFylltUt(this.props) ? this.props.virksomhet : ''} />}
+            { visInputfelter && <FyllUtLeder FieldComponent={FieldComponent} hentVirksomhet={this.props.hentVirksomhet} virksomhet={value === 'manuell' && erOrgnummerFylltUt(this.props) ? this.props.virksomhet : ''} />}
         </div>);
     }
 }
 
-//La den til fordi hvis man først velger AG, og så manuell så ville man her sitte med et orgnummer på deltakere[0] som så ville blitt brukt til å vise virksomhetsnavnet.
-const erOrgnummerFylltUt = (props) => {
-    const deltakere = props.deltakere;
-    return deltakere && deltakere[0].orgnummer && deltakere[0].orgnummer.input && deltakere[0].orgnummer.input.value && deltakere[0].orgnummer.input.value.length === 9
-};
-
-
 LederFields.propTypes = {
     arbeidsgiverType: PropTypes.object,
     nullstillVirksomhet: PropTypes.func,
+    hentVirksomhet: PropTypes.func,
     autofill: PropTypes.func,
     virksomhet: PropTypes.string,
     untouch: PropTypes.func,

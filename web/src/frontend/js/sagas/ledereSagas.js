@@ -11,7 +11,7 @@ export function* hentLedere(action) {
     } catch (e) {
         log(e);
         if (e.message === '403') {
-            yield put( { type: 'HENT_LEDERE_IKKE_TILGANG' });
+            yield put({ type: 'HENT_LEDERE_IKKE_TILGANG' });
         } else {
             yield put({ type: 'HENT_LEDERE_FEILET' });
         }
