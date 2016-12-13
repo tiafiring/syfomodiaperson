@@ -9,6 +9,7 @@ import TidslinjeVelgArbeidssituasjonContainer from './TidslinjeVelgArbeidssituas
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import Brodsmuler from '../components/Brodsmuler';
+import { TIDSLINJEN } from '../menypunkter';
 
 export class TidslinjeSide extends Component {
     componentWillMount() {
@@ -26,7 +27,7 @@ export class TidslinjeSide extends Component {
         }, {
             tittel: 'Tidslinjen',
         }];
-        return (<Side tittel="Tidslinje">
+        return (<Side tittel="Tidslinje" aktivtMenypunkt={TIDSLINJEN}>
         {
             (() => {
                 if (henter) {

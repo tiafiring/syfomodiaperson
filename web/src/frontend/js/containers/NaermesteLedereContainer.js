@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import Side from '../sider/Side';
 import * as ledereActions from '../actions/ledere_actions';
 import AppSpinner from '../components/AppSpinner';
+import { NAERMESTE_LEDER } from '../menypunkter';
 
 export class NaermesteLedereSide extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ export class NaermesteLedereSide extends Component {
 
     render() {
         const { henter, ledere, hentingFeilet, actions, navbruker, ikkeTilgang } = this.props;
-        return (<Side tittel="Nærmeste ledere">
+        return (<Side tittel="Nærmeste ledere" aktivtMenypunkt={NAERMESTE_LEDER}>
         {
             (() => {
                 if (hentingFeilet) {

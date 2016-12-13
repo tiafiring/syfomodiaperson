@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 import GlobalNavigasjon from '../components/GlobalNavigasjon';
 
-export const mapStateToProps = (state) => {
+export const mapStateToProps = (state, ownProps) => {
     return {
         fnr: state.navbruker.data.fnr,
         harTilgangMotemodul: state.navbruker.data.harTilgang,
+        aktivtMenypunkt: ownProps.aktivtMenypunkt,
     };
 };
 
