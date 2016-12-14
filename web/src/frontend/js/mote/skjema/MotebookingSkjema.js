@@ -153,7 +153,7 @@ export function validate(values, props) {
         lederFeilmelding.orgnummer = 'Et orgnummer består av 9 siffer';
     }
 
-    if (lederFeilmelding.navn || lederFeilmelding.epost) {
+    if (lederFeilmelding.navn || lederFeilmelding.epost || lederFeilmelding.orgnummer) {
         feilmeldinger.deltakere = [lederFeilmelding];
     }
 
