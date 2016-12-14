@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { Field } from 'redux-form';
 import TextField from '../../components/TextField';
 import TextFieldLocked from '../../components/TextFieldLocked';
+import { virksomhetsnavn, hentVirksomhetHvis9Siffer } from '../utils/index';
 
 export const ArbeidsgiverDropdown = ({ meta, input, ledere }) => {
     return (<div className="blokk--xl">
@@ -45,29 +46,6 @@ ArbeidsgiverDropdown.propTypes = {
     ledere: PropTypes.array,
 };
 
-export const hentVirksomhetHvis9Siffer = (e, hentVirksomhet, nullstillVirksomhet) => {
-    const input = e.target.value;
-    if (input.length === 9 && !isNaN(input)) {
-        hentVirksomhet(input);
-    } else {
-        nullstillVirksomhet();
-    }
-};
-
-const virksomhetsnavn = (virksomhet) => {
-    if (!virksomhet) {
-        return '';
-    }
-    if (virksomhet.hentingFeilet) {
-        return 'Fant ikke virksomhet';
-    } else if (virksomhet.henter) {
-        return 'henter virksomhet...';
-    } else if (virksomhet.nullstilt) {
-        return '';
-    }
-    return virksomhet.data.navn;
-};
-
 export const FyllUtLeder = ({ FieldComponent = TextField, virksomhet, hentVirksomhet, nullstillVirksomhet }) => {
     return (<div>
         <div className="navInput blokk--xl">
@@ -93,7 +71,6 @@ FyllUtLeder.propTypes = {
     hentVirksomhet: PropTypes.func,
     nullstillVirksomhet: PropTypes.func,
 };
-
 
 export default class LederFields extends Component {
     componentDidUpdate(prevProps) {
