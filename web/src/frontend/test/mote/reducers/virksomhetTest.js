@@ -11,7 +11,7 @@ describe("virksomhet", () => {
             data: {},
             henter: false,
             hentingFeilet: false,
-            navn: ""
+            nullstilt: false
         })
     });
 
@@ -20,15 +20,15 @@ describe("virksomhet", () => {
         const currentState = deepFreeze({})
         const state = virksomhet(currentState, action);
         expect(state).to.deep.equal({
+            data: {},
             henter: true,
             hentingFeilet: false,
-            navn: "henter virksomhet..."
+            nullstilt: false
         })
     });
 
     it("Håndterer virksomhetHentet", () => {
         const data = {
-
             navn: "NAV Consulting",
         }
         const action = actions.virksomhetHentet(data);
@@ -39,7 +39,6 @@ describe("virksomhet", () => {
         };
         const nextState = virksomhet(currentState, action);
         expect(nextState).to.deep.equal({
-            navn: "NAV Consulting",
             data: {
                 navn: "NAV Consulting",
             },
@@ -60,7 +59,6 @@ describe("virksomhet", () => {
             data: {},
             henter: false,
             hentingFeilet: true,
-            navn: "Fant ikke virksomhet",
         })
     });
 
@@ -77,7 +75,7 @@ describe("virksomhet", () => {
             data: {},
             henter: false,
             hentingFeilet: false,
-            navn: "",
+            nullstilt: true,
         })
     });
 

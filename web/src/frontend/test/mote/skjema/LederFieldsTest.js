@@ -85,6 +85,7 @@ describe("LederFields", () => {
 
         it("Skal kalle på fyllUtLederfelter med leder dersom valgtArbeidsgiverType = '2'", () => {
             const fyllUtLederfelter = sinon.spy();
+            const nullstillVirksomhet = sinon.spy();
             const untouch = sinon.spy();
             const ledere = [{
                 navn: "Helge",
@@ -95,7 +96,7 @@ describe("LederFields", () => {
                 epost: "ole@ole.no",
                 id: 2
             }]
-            compo = shallow(<LederFields ledere={ledere} untouch={untouch} arbeidsgiverType={arbeidsgiverType} />);
+            compo = shallow(<LederFields ledere={ledere} untouch={untouch} nullstillVirksomhet={nullstillVirksomhet} arbeidsgiverType={arbeidsgiverType} />);
             compo.instance().fyllUtLederfelter = fyllUtLederfelter;
             compo.instance().setLederfelter('1');
             expect(fyllUtLederfelter.calledOnce).to.be.true;

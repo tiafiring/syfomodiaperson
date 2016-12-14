@@ -110,7 +110,7 @@ MotebookingSkjema.propTypes = {
     sender: PropTypes.bool,
     sendingFeilet: PropTypes.bool,
     ledere: PropTypes.array,
-    virksomhet: PropTypes.string,
+    virksomhet: PropTypes.object,
     autofill: PropTypes.func,
     untouch: PropTypes.func,
     hentVirksomhet: PropTypes.func,

@@ -41,7 +41,7 @@ export const ArbeidsgiverDropdown = ({ meta, input, ledere }) => {
 ArbeidsgiverDropdown.propTypes = {
     meta: PropTypes.object,
     input: PropTypes.object,
-    virksomhet: PropTypes.string,
+    virksomhet: PropTypes.object,
     ledere: PropTypes.array,
 };
 
@@ -52,6 +52,20 @@ export const hentVirksomhetHvis9Siffer = (e, hentVirksomhet, nullstillVirksomhet
     } else {
         nullstillVirksomhet();
     }
+};
+
+const virksomhetsnavn = (virksomhet) => {
+    if (!virksomhet) {
+        return '';
+    }
+    if (virksomhet.hentingFeilet) {
+        return 'Fant ikke virksomhet';
+    } else if (virksomhet.henter) {
+        return 'henter virksomhet...';
+    } else if (virksomhet.nullstilt) {
+        return '';
+    }
+    return virksomhet.data.navn;
 };
 
 export const FyllUtLeder = ({ FieldComponent = TextField, virksomhet, hentVirksomhet, nullstillVirksomhet }) => {
@@ -69,21 +83,17 @@ export const FyllUtLeder = ({ FieldComponent = TextField, virksomhet, hentVirkso
             <Field id="js-orgnummer" component={FieldComponent} name="deltakere[0].orgnummer" className="input--xxl" skjulRedigerKnapp
                 onKeyUp={ (e) => { hentVirksomhetHvis9Siffer(e, hentVirksomhet, nullstillVirksomhet); }} />
         </div>
-        <p name="virksomhet">{ virksomhet } </p>
+        <p name="virksomhet">{ virksomhetsnavn(virksomhet) } </p>
     </div>);
 };
 
 FyllUtLeder.propTypes = {
     FieldComponent: PropTypes.func,
-    virksomhet: PropTypes.string,
+    virksomhet: PropTypes.object,
     hentVirksomhet: PropTypes.func,
+    nullstillVirksomhet: PropTypes.func,
 };
 
-//La den til fordi hvis man først velger AG, og så manuell så ville man her sitte med et orgnummer på deltakere[0] som så ville blitt brukt til å vise virksomhetsnavnet.
-const erOrgnummerFylltUt = (props) => {
-    const deltakere = props.deltakere;
-    return deltakere && deltakere[0].orgnummer && deltakere[0].orgnummer.input && deltakere[0].orgnummer.input.value && deltakere[0].orgnummer.input.value.length === 9;
-};
 
 export default class LederFields extends Component {
     componentDidUpdate(prevProps) {
@@ -107,6 +117,7 @@ export default class LederFields extends Component {
                 return `${l.id}` === valgtArbeidsgiverType;
             })[0];
             this.fyllUtLederfelter(leder.navn, leder.epost, leder.orgnummer);
+            nullstillVirksomhet();
         }
     }
 
@@ -123,7 +134,7 @@ export default class LederFields extends Component {
         const FieldComponent = value === 'VELG' || value === 'manuell' ? TextField : TextFieldLocked;
         return (<div>
             <ArbeidsgiverDropdown {...this.props.arbeidsgiverType} ledere={this.props.ledere} />
-            { visInputfelter && <FyllUtLeder FieldComponent={FieldComponent} hentVirksomhet={this.props.hentVirksomhet} virksomhet={value === 'manuell' && erOrgnummerFylltUt(this.props) ? this.props.virksomhet : ''} />}
+            { visInputfelter && <FyllUtLeder FieldComponent={FieldComponent} nullstillVirksomhet={this.props.nullstillVirksomhet} hentVirksomhet={this.props.hentVirksomhet} virksomhet={this.props.virksomhet} />}
         </div>);
     }
 }
@@ -133,7 +144,7 @@ LederFields.propTypes = {
     nullstillVirksomhet: PropTypes.func,
     hentVirksomhet: PropTypes.func,
     autofill: PropTypes.func,
-    virksomhet: PropTypes.string,
+    virksomhet: PropTypes.object,
     untouch: PropTypes.func,
     ledere: PropTypes.array,
 };

@@ -94,9 +94,9 @@ describe("MotebookingContainer", () => {
             expect(props.fnr).to.equal("887766");
         });
 
-        it("Skal returnere fnr", () => {
+        it("Skal returnere virksomhet", () => {
             const props = mapStateToProps(state);
-            expect(props.virksomhet).to.equal("BEKK");
+            expect(props.virksomhet.navn).to.equal("BEKK");
         });
 
         it("Skal returnere opprettet møte", () => {

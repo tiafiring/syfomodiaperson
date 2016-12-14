@@ -4,16 +4,17 @@ const defaultState = {
     data: {},
     henter: false,
     hentingFeilet: false,
-    navn: '',
+    nullstilt: false,
 };
 
 export default function virksomhet(state = defaultState, action = {}) {
     switch (action.type) {
         case HENTER_VIRKSOMHET: {
             return Object.assign({}, state, {
+                data: {},
                 henter: true,
                 hentingFeilet: false,
-                navn: 'henter virksomhet...',
+                nullstilt: false,
             });
         }
         case VIRKSOMHET_HENTET: {
@@ -21,7 +22,6 @@ export default function virksomhet(state = defaultState, action = {}) {
                 data: action.data,
                 henter: false,
                 hentingFeilet: false,
-                navn: action.data.navn,
             };
         }
         case HENT_VIRKSOMHET_FEILET: {
@@ -29,7 +29,6 @@ export default function virksomhet(state = defaultState, action = {}) {
                 data: {},
                 henter: false,
                 hentingFeilet: true,
-                navn: 'Fant ikke virksomhet',
             };
         }
         case NULLSTILL_VIRKSOMHET: {
@@ -37,7 +36,7 @@ export default function virksomhet(state = defaultState, action = {}) {
                 data: {},
                 henter: false,
                 hentingFeilet: false,
-                navn: '',
+                nullstilt: true,
             };
         }
         default: {
