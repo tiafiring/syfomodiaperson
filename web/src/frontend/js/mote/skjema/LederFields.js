@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { Field } from 'redux-form';
 import TextField from '../../components/TextField';
 import TextFieldLocked from '../../components/TextFieldLocked';
-import { virksomhetsnavn, hentVirksomhetHvis9Siffer } from '../utils/index';
+import FyllUtVirksomhet from './FyllUtVirksomhet';
 
 export const ArbeidsgiverDropdown = ({ meta, input, ledere }) => {
     return (<div className="blokk--xl">
@@ -46,30 +46,32 @@ ArbeidsgiverDropdown.propTypes = {
     ledere: PropTypes.array,
 };
 
-export const FyllUtLeder = ({ FieldComponent = TextField, virksomhet, hentVirksomhet, nullstillVirksomhet }) => {
+export const PreutfyltLeder = () => {
+    return <FyllUtLeder FieldComponent={TextFieldLocked} />;
+};
+
+export const ManuellUtfyltLeder = () => {
+    return (<div>
+        <FyllUtLeder />
+        <FyllUtVirksomhet />
+    </div>);
+};
+
+export const FyllUtLeder = ({ FieldComponent = TextField }) => {
     return (<div>
         <div className="navInput blokk--xl">
             <label htmlFor="js-ledernavn">Nærmeste leders navn</label>
             <Field id="js-ledernavn" component={FieldComponent} name="deltakere[0].navn" className="input--xxl" />
         </div>
-        <div className="navInput">
+        <div className="navInput blokk--xl">
             <label htmlFor="js-lederepost">E-post</label>
             <Field id="js-lederepost" component={FieldComponent} type="email" name="deltakere[0].epost" className="input--xxl" />
         </div>
-        <div className="navInput">
-            <label htmlFor="js-orgnummer">Org. nummer</label>
-            <Field id="js-orgnummer" component={FieldComponent} name="deltakere[0].orgnummer" className="input--xxl" skjulRedigerKnapp
-                onKeyUp={ (e) => { hentVirksomhetHvis9Siffer(e, hentVirksomhet, nullstillVirksomhet); }} />
-        </div>
-        <p name="virksomhet">{ virksomhetsnavn(virksomhet) } </p>
     </div>);
 };
 
 FyllUtLeder.propTypes = {
     FieldComponent: PropTypes.func,
-    virksomhet: PropTypes.object,
-    hentVirksomhet: PropTypes.func,
-    nullstillVirksomhet: PropTypes.func,
 };
 
 export default class LederFields extends Component {
@@ -82,19 +84,17 @@ export default class LederFields extends Component {
     }
 
     setLederfelter(valgtArbeidsgiverType) {
-        const { ledere, untouch, nullstillVirksomhet } = this.props;
+        const { ledere, untouch } = this.props;
         if (valgtArbeidsgiverType === 'VELG') {
             this.fyllUtLederfelter();
         } else if (valgtArbeidsgiverType === 'manuell') {
             this.fyllUtLederfelter();
             untouch('deltakere[0].navn', 'deltakere[0].epost', 'deltakere[0].orgnummer');
-            nullstillVirksomhet();
         } else {
             const leder = ledere.filter((l) => {
                 return `${l.id}` === valgtArbeidsgiverType;
             })[0];
             this.fyllUtLederfelter(leder.navn, leder.epost, leder.orgnummer);
-            nullstillVirksomhet();
         }
     }
 
@@ -108,10 +108,10 @@ export default class LederFields extends Component {
     render() {
         const value = this.props.arbeidsgiverType.input.value;
         const visInputfelter = value && value !== 'VELG';
-        const FieldComponent = value === 'VELG' || value === 'manuell' ? TextField : TextFieldLocked;
         return (<div>
             <ArbeidsgiverDropdown {...this.props.arbeidsgiverType} ledere={this.props.ledere} />
-            { visInputfelter && <FyllUtLeder FieldComponent={FieldComponent} nullstillVirksomhet={this.props.nullstillVirksomhet} hentVirksomhet={this.props.hentVirksomhet} virksomhet={this.props.virksomhet} />}
+            { visInputfelter && value !== 'manuell' && <PreutfyltLeder />}
+            { visInputfelter && value === 'manuell' && <ManuellUtfyltLeder />}
         </div>);
     }
 }

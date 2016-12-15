@@ -1,15 +1,9 @@
-import { HENT_VIRKSOMHET_FORESPURT, HENTER_VIRKSOMHET, VIRKSOMHET_HENTET, HENT_VIRKSOMHET_FEILET, NULLSTILL_VIRKSOMHET } from './actiontyper';
+import { HENT_VIRKSOMHET_FORESPURT, HENTER_VIRKSOMHET, VIRKSOMHET_HENTET, HENT_VIRKSOMHET_FEILET } from './actiontyper';
 
 export const hentVirksomhet = (orgnummer) => {
     return {
         type: HENT_VIRKSOMHET_FORESPURT,
         orgnummer,
-    };
-};
-
-export const nullstillVirksomhet = () => {
-    return {
-        type: NULLSTILL_VIRKSOMHET,
     };
 };
 
@@ -19,9 +13,10 @@ export const henterVirksomhet = () => {
     };
 };
 
-export const virksomhetHentet = (data) => {
+export const virksomhetHentet = (orgnummer, data) => {
     return {
         type: VIRKSOMHET_HENTET,
+        orgnummer,
         data,
     };
 };

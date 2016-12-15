@@ -14,7 +14,8 @@ describe("virksomhetSagas", () => {
     });
 
     describe("Epost for bekreftelse av møtetidspunkt", () => {
-        const action = actions.hentVirksomhet("orgnummer");
+        const orgnummer = "88776655"
+        const action = actions.hentVirksomhet(orgnummer);
         const generator = hentVirksomhet(action);
 
         it("Skal dispatche HENTER_VIRKSOMHET", () => {
@@ -23,7 +24,7 @@ describe("virksomhetSagas", () => {
         });
 
         it("Skal deretter prøve å hente virksomhet", () => {
-            const nextCall = call(get, "http://tjenester.nav.no/moteadmin/virksomhet/orgnummer");
+            const nextCall = call(get, "http://tjenester.nav.no/moteadmin/virksomhet/88776655");
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
@@ -31,7 +32,7 @@ describe("virksomhetSagas", () => {
             const data = {
                 navn: "NAV Consulting",
             }
-            const nextPut = put({type: 'VIRKSOMHET_HENTET', data });
+            const nextPut = put({type: 'VIRKSOMHET_HENTET', orgnummer, data });
             expect(generator.next(data).value).to.deep.equal(nextPut);
         });
     });

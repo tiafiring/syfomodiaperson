@@ -25,20 +25,13 @@ describe("virksomhet_actions", () => {
         });
     });
 
-    it("Har en nullstillVirksomhet()-funksjon som returnerer riktig action", () => {
-        const action = actions.nullstillVirksomhet();
-        expect(action).to.deep.equal({
-            type: "NULLSTILL_VIRKSOMHET",
-        });
-    });
-
-
     it("Har en virksomhetHentet()-funksjon som returnerer riktig action", () => {
-        const action = actions.virksomhetHentet({
+        const action = actions.virksomhetHentet("orgnummer", {
             navn: "test"
         });
         expect(action).to.deep.equal({
             type: "VIRKSOMHET_HENTET",
+            orgnummer: "orgnummer",
             data: {
                 navn: "test"
             }

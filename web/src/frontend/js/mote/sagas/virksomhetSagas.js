@@ -7,7 +7,7 @@ export function* hentVirksomhet(action) {
     yield put(actions.henterVirksomhet());
     try {
         const data = yield call(get, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/virksomhet/${action.orgnummer}`);
-        yield put(actions.virksomhetHentet(data));
+        yield put(actions.virksomhetHentet(action.orgnummer, data));
     } catch (e) {
         yield put(actions.hentVirksomhetFeilet());
     }

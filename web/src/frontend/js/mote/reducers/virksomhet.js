@@ -1,25 +1,24 @@
-import { HENTER_VIRKSOMHET, VIRKSOMHET_HENTET, HENT_VIRKSOMHET_FEILET, NULLSTILL_VIRKSOMHET } from '../actions/actiontyper';
+import { HENTER_VIRKSOMHET, VIRKSOMHET_HENTET, HENT_VIRKSOMHET_FEILET } from '../actions/actiontyper';
 
 const defaultState = {
     data: {},
     henter: false,
     hentingFeilet: false,
-    nullstilt: false,
 };
 
 export default function virksomhet(state = defaultState, action = {}) {
     switch (action.type) {
         case HENTER_VIRKSOMHET: {
             return Object.assign({}, state, {
-                data: {},
                 henter: true,
                 hentingFeilet: false,
-                nullstilt: false,
             });
         }
         case VIRKSOMHET_HENTET: {
+            const nyeData = {};
+            nyeData[action.orgnummer] = action.data.navn;
             return {
-                data: action.data,
+                data: Object.assign({}, state.data, nyeData),
                 henter: false,
                 hentingFeilet: false,
             };
@@ -29,14 +28,6 @@ export default function virksomhet(state = defaultState, action = {}) {
                 data: {},
                 henter: false,
                 hentingFeilet: true,
-            };
-        }
-        case NULLSTILL_VIRKSOMHET: {
-            return {
-                data: {},
-                henter: false,
-                hentingFeilet: false,
-                nullstilt: true,
             };
         }
         default: {
