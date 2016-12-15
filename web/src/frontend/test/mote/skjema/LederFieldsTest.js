@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import LederFields, { VelgArbeidsgiver, FyllUtLeder, ArbeidsgiverDropdown, ManuellUtfyltLeder, PreutfyltLeder } from '../../../js/mote/skjema/LederFields';
+import LederFields, { VelgArbeidsgiver, FyllUtLeder, ManuellUtfyltLeder, PreutfyltLeder } from '../../../js/mote/skjema/LederFields';
+import ArbeidsgiverDropdown from '../../../js/mote/skjema/ArbeidsgiverDropdown';
 import FyllUtVirksomhet from '../../../js/mote/skjema/FyllUtVirksomhet';
 import TextFieldLocked from '../../../js/components/TextFieldLocked';
 import TextField from '../../../js/components/TextField';
@@ -156,38 +157,4 @@ describe("LederFields", () => {
             expect(spy.calledOnce).to.be.false;
         });
     })
-})
-
-describe("ArbeidsgiverDropdown", () => {
-
-    let meta;
-    let ledere;
-
-    beforeEach(() => {
-        meta = {}
-        ledere = [{
-            id: 1,
-            navn: "Bjarne",
-            organisasjonsnavn: "BEKK"
-        }, {
-            id: 2,
-            navn: "Arne", 
-            organisasjonsnavn: "BEKK"
-        }, {
-            id: 3, 
-            navn: "Abba",
-            organisasjonsnavn: "BEKK"
-        }, {
-            id: 4,
-            navn: "Aage",
-            organisasjonsnavn: "ABC Buss"
-        }]
-    });
-
-    it("Skal inneholde et valg for manuell utfylling", () => {
-        const compo = mount(<ArbeidsgiverDropdown meta={meta} ledere={ledere} />);
-        expect(compo.find("option")).to.have.length(6);
-        expect(compo.find("option").last().text()).to.contain("fyll inn manuelt")
-    });
-
 });
