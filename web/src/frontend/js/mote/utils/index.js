@@ -13,26 +13,3 @@ export const getTidFraZulu = (zulutid) => {
     const d = new Date(zulutid);
     return `${getDatoFraZulu(zulutid)} kl. ${pad(d.getHours())}.${pad(d.getMinutes())}`;
 };
-
-export const hentVirksomhetHvis9Siffer = (e, hentVirksomhet, nullstillVirksomhet) => {
-    const input = e.target.value;
-    if (input.length === 9 && !isNaN(input)) {
-        hentVirksomhet(input);
-    } else {
-        nullstillVirksomhet();
-    }
-};
-
-export const virksomhetsnavn = (virksomhet) => {
-    if (!virksomhet) {
-        return '';
-    }
-    if (virksomhet.hentingFeilet) {
-        return 'Fant ikke virksomhet';
-    } else if (virksomhet.henter) {
-        return 'henter virksomhet...';
-    } else if (virksomhet.nullstilt) {
-        return '';
-    }
-    return virksomhet.data.navn;
-};
