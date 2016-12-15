@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Field, Fields, reduxForm } from 'redux-form';
 import TextField from '../../components/TextField';
-import LederFields, { FyllUtLeder } from './LederFields';
+import LederFields, { ManuellUtfyltLeder } from './LederFields';
 import Tidspunkter from './Tidspunkter';
 import Sidetopp from '../../components/Sidetopp';
 import { Varselstripe } from 'digisyfo-npm';
@@ -42,7 +42,7 @@ export function getData(values) {
 }
 
 export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeilet, ledere,
-    virksomhet, autofill, untouch, hentLedereFeiletBool, hentVirksomhet, nullstillVirksomhet }) => {
+    autofill, untouch, hentLedereFeiletBool }) => {
     const submit = (values) => {
         const data = getData(values);
         data.fnr = fnr;
@@ -68,13 +68,10 @@ export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, send
                     untouch={untouch}
                     names={['arbeidsgiverType', 'deltakere[0].navn', 'deltakere[0].epost', 'deltakere[0].orgnummer']}
                     ledere={ledere}
-                    virksomhet={virksomhet}
-                    nullstillVirksomhet={nullstillVirksomhet}
-                    hentVirksomhet={hentVirksomhet}
                     component={LederFields} />
             }
             {
-                ledere.length === 0 && <FyllUtLeder virksomhet={virksomhet} hentVirksomhet={hentVirksomhet} nullstillVirksomhet={nullstillVirksomhet} />
+                ledere.length === 0 && <ManuellUtfyltLeder />
             }
         </fieldset>
 

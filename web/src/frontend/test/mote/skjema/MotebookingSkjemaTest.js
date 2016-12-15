@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { MotebookingSkjema, validate, genererDato, getData } from '../../../js/mote/skjema/MotebookingSkjema';
 import TextFieldLocked from '../../../js/components/TextFieldLocked';
-import LederFields, { FyllUtLeder } from '../../../js/mote/skjema/LederFields';
+import LederFields, { ManuellUtfyltLeder } from '../../../js/mote/skjema/LederFields';
 import TextField from '../../../js/components/TextField';
 import Tidspunkter from '../../../js/mote/skjema/Tidspunkter';
 import { Field, Fields } from 'redux-form';
@@ -46,9 +46,9 @@ describe("MotebookingSkjema", () => {
         })
 
         describe("Dersom det ikke finnes ledere", () => {
-            it("SKal vise FyllUtLeder", () => {
+            it("Skal vise ManuellUtfyltLeder", () => {
                 const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
-                expect(compo.find(FyllUtLeder)).to.have.length(1);
+                expect(compo.find(ManuellUtfyltLeder)).to.have.length(1);
             })
 
             it("Skal ikke vise en dropdown", () => {
@@ -69,9 +69,9 @@ describe("MotebookingSkjema", () => {
                 }];
             });
 
-            it("SKal ikke vise FyllUtLeder", () => {
+            it("SKal ikke vise ManuellUtfyltLeder", () => {
                 const compo = shallow(<MotebookingSkjema ledere={ledere} handleSubmit={handleSubmit} />);
-                expect(compo.find(FyllUtLeder)).to.have.length(0);
+                expect(compo.find(ManuellUtfyltLeder)).to.have.length(0);
             })
 
             it("Skal vise en Fields", () => {
