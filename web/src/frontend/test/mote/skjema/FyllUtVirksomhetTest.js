@@ -34,24 +34,30 @@ describe("FyllUtVirksomhet", () => {
         expect(compo.text()).to.contain("Henter navn på virksomhet");
     });
 
-    it("Skal hente virksomhet ved keyup dersom orgnummer består av 9 siffer", () => {
+    it("Skal hente virksomhet ved componentDidUpdate() dersom orgnummer består av 9 siffer", () => {
         const hentVirksomhet = sinon.spy();
         const compo = shallow(<FyllUtVirksomhet hentVirksomhet={hentVirksomhet} orgnummer="123456789" />);
-        compo.find(Field).simulate("keyup");
+        compo.instance().componentDidUpdate({
+            orgnummer: "12345678"
+        })
         expect(hentVirksomhet.calledWith("123456789")).to.be.true;
     });
 
-    it("Skal ikke hente virksomhet ved keyup dersom orgnummer består av 8 siffer", () => {
+    it("Skal ikke hente virksomhet ved componentDidUpdate() dersom orgnummer består av 8 siffer", () => {
         const hentVirksomhet = sinon.spy();
         const compo = shallow(<FyllUtVirksomhet hentVirksomhet={hentVirksomhet} orgnummer="12356789" />);
-        compo.find(Field).simulate("keyup");
+        compo.instance().componentDidUpdate({
+            orgnummer: "123456789"
+        })
         expect(hentVirksomhet.called).to.be.false;
     });
 
-    it("Skal ikke hente virksomhet ved keyup dersom orgnummer består av 10 siffer", () => {
+    it("Skal ikke hente virksomhet ved componentDidUpdate() dersom orgnummer består av 10 siffer", () => {
         const hentVirksomhet = sinon.spy();
         const compo = shallow(<FyllUtVirksomhet hentVirksomhet={hentVirksomhet} orgnummer="1234567890" />);
-        compo.find(Field).simulate("keyup");
+        compo.instance().componentDidUpdate({
+            orgnummer: "123456789"
+        })
         expect(hentVirksomhet.called).to.be.false;
     });
 
