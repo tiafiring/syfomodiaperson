@@ -58,6 +58,16 @@ export function avbrytMote(uuid, fnr) {
         type: actions.AVBRYT_MOTE_FORESPURT,
         uuid,
         fnr,
+        varsle: true,
+    };
+}
+
+export function avbrytMoteUtenVarsel(uuid, fnr) {
+    return {
+        type: actions.AVBRYT_MOTE_FORESPURT,
+        uuid,
+        fnr,
+        varsle: false,
     };
 }
 

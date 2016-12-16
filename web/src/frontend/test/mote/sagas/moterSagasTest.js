@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { opprettMote, hentMoter, avbrytMote, bekreftMote } from '../../../js/mote/sagas/moterSagas.js';
+import { opprettMote, hentMoter, avbrytMote, avbrytMoteUtenVarsel, bekreftMote } from '../../../js/mote/sagas/moterSagas.js';
 import * as actions from '../../../js/mote/actions/moter_actions';
 import { post, get } from '../../../js/api/index';
 import { put, call } from 'redux-saga/effects';
@@ -69,9 +69,8 @@ describe("moterSagas", () => {
     })
 
     describe("avbrytMote", () => {
-        const generator = avbrytMote({
-            uuid: "min-fine-mote-uuid"
-        });
+        const action = actions.avbrytMote("min-fine-mote-uuid");
+        const generator = avbrytMote(action);
 
         it("Skal dispatche AVBRYTER_MOTE", () => {
             const nextPut = put({type: 'AVBRYTER_MOTE', uuid: "min-fine-mote-uuid"});
@@ -79,7 +78,28 @@ describe("moterSagas", () => {
         });
 
         it("Skal poste til REST-tjenesten", () => {
-            const nextCall = call(post, "http://tjenester.nav.no/moteadmin/moter/min-fine-mote-uuid/avbryt");
+            const nextCall = call(post, "http://tjenester.nav.no/moteadmin/moter/min-fine-mote-uuid/avbryt?varsle=true");
+            expect(generator.next().value).to.deep.equal(nextCall);
+        });
+
+        it("Skal dispatche MOTE_AVBRUTT", () => {
+            const nextPut = put({type: 'MOTE_AVBRUTT', uuid: "min-fine-mote-uuid"});
+            expect(generator.next().value).to.deep.equal(nextPut);
+        });
+
+    });
+
+    describe("avbrytMoteUtenVarsel", () => {
+        const action = actions.avbrytMoteUtenVarsel("min-fine-mote-uuid", "887766");
+        const generator = avbrytMote(action);
+
+        it("Skal dispatche AVBRYTER_MOTE", () => {
+            const nextPut = put({type: 'AVBRYTER_MOTE', uuid: "min-fine-mote-uuid"});
+            expect(generator.next().value).to.deep.equal(nextPut);
+        });
+
+        it("Skal poste til REST-tjenesten", () => {
+            const nextCall = call(post, "http://tjenester.nav.no/moteadmin/moter/min-fine-mote-uuid/avbryt?varsle=false");
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 

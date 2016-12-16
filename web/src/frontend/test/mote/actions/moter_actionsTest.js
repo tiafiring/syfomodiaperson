@@ -53,7 +53,18 @@ describe("moter_actions", () => {
         expect(action).to.deep.equal({
             type: "AVBRYT_MOTE_FORESPURT",
             uuid: "fiskekake",
-            fnr: "123"
+            fnr: "123",
+            varsle: true,
+        })
+    });
+
+    it("Skal ha en avbrytMoteUtenVarsel()-funksjon som returnerer riktig action", () => {
+        const action = actions.avbrytMoteUtenVarsel("fiskekake", "123");
+        expect(action).to.deep.equal({
+            type: "AVBRYT_MOTE_FORESPURT",
+            uuid: "fiskekake",
+            fnr: "123",
+            varsle: false,
         })
     });
 

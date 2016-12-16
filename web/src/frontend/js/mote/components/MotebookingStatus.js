@@ -13,7 +13,7 @@ MotetidspunktValgt.propTypes = {
     bekreftetTidspunkt: PropTypes.string,
 };
 
-const MotebookingStatus = ({ fnr, mote }) => {
+const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel }) => {
     const { alternativer, deltakere } = mote;
     const deltakerEpost = deltakere ? deltakere[0].epost : '?';
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
@@ -108,9 +108,14 @@ const MotebookingStatus = ({ fnr, mote }) => {
                     </tfoot>
                 }
             </table>
+            <div>
+                <Link role="button" className="js-avbryt rammeknapp rammeknapp--mini" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>Avbryt møteforespørsel</Link>
+            </div>
         </div>
         <div>
-            <Link role="button" className="knapp" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>Avbryt møte</Link>
+            <button className="js-ny knapp knapp--mini" onClick={() => {
+                avbrytMoteUtenVarsel(mote.moteUuid, fnr);
+            }}>Ny møteforespørsel</button>
         </div>
     </div>);
 };
@@ -129,6 +134,7 @@ MotebookingStatus.propTypes = {
         })),
     }),
     fnr: PropTypes.string,
+    avbrytMoteUtenVarsel: PropTypes.func,
 };
 
 export default MotebookingStatus;

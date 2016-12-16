@@ -74,8 +74,29 @@ describe("MotebookingStatus", () => {
     });
 
     it("Skal ikke vise en knapp med teksten 'Velg tidspunkt for møte'", () => {
-        const component = shallow(<MotebookingStatus mote={mote} avbrytMote={avbrytMote} />);
+        const component = shallow(<MotebookingStatus mote={mote} />);
         expect(component.find(".js-velg-tidspunkt")).to.have.length(0);
+    });
+
+    it("Skal vise en knapp med teksten Avbryt møteforespørsel", () => {
+        const component = shallow(<MotebookingStatus mote={mote} />);
+        expect(component.find(".js-avbryt").html()).to.contain("Avbryt møteforespørsel");
+    });
+
+    describe("Ny møteforespørsel", () => {
+        it("Skal vise en knapp med teksten Ny møteforespørsel", () => {
+            const component = shallow(<MotebookingStatus mote={mote} />);
+            expect(component.find(".js-ny").text()).to.equal("Ny møteforespørsel");
+        });
+
+        it("Skal kalle på avbrytMoteUtenVarsel med moteUuid og fnr når man klikker på knappen", () => {
+            mote.moteUuid = "min-mote-uuid";
+            const avbrytMoteUtenVarsel = sinon.spy();
+            const component = shallow(<MotebookingStatus mote={mote} fnr="mitt-fnr" avbrytMoteUtenVarsel={avbrytMoteUtenVarsel} />);
+            component.find(".js-ny").simulate("click");
+            expect(avbrytMoteUtenVarsel.calledWith("min-mote-uuid", "mitt-fnr")).to.be.true;
+        })
+        
     });
 
 
@@ -86,12 +107,12 @@ describe("MotebookingStatus", () => {
         });
 
         it("Skal vise en knapp med teksten 'Velg tidspunkt for møte'", () => {
-            const component = mount(<MotebookingStatus fnr="***REMOVED***" mote={mote} avbrytMote={avbrytMote} />);
+            const component = mount(<MotebookingStatus fnr="***REMOVED***" mote={mote} />);
             expect(component.find(".js-velg-tidspunkt")).to.have.length(1);
         });
 
         it("Skal ikke vise hvilket tidspunkt som er valgt", () => {
-            const component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} avbrytMote={avbrytMote} />);
+            const component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} />);
             expect(component.find(MotetidspunktValgt)).to.have.length(0);
         });
 
@@ -149,12 +170,12 @@ describe("MotebookingStatus", () => {
         });
 
         it("Skal ikke vise knapp med tekst 'velg tidspunkt for møte'", () => {
-            const component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} avbrytMote={avbrytMote} />);
+            const component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} />);
             expect(component.find(".js-velg-tidspunkt")).to.have.length(0);
         })
 
         it("Skal vise hvilket tidspunkt som er valgt", () => {
-            const component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} avbrytMote={avbrytMote} />);
+            const component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} />);
             expect(component.find(MotetidspunktValgt)).to.have.length(1);
         });
 
