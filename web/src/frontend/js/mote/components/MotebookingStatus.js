@@ -13,7 +13,7 @@ MotetidspunktValgt.propTypes = {
     bekreftetTidspunkt: PropTypes.string,
 };
 
-const MotebookingStatus = ({ fnr, mote, avbrytMote, avbryter, avbrytFeilet }) => {
+const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel }) => {
     const { alternativer, deltakere } = mote;
     const deltakerEpost = deltakere ? deltakere[0].epost : '?';
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
@@ -108,14 +108,14 @@ const MotebookingStatus = ({ fnr, mote, avbrytMote, avbryter, avbrytFeilet }) =>
                     </tfoot>
                 }
             </table>
-            <div aria-live="polite" role="alert">
-                { avbrytFeilet && <div className="blokk"><Varselstripe type="feil"><p>Beklager, det oppstod en feil. Prøv igjen litt senere.</p></Varselstripe></div>}
+            <div>
+                <Link role="button" className="js-avbryt rammeknapp rammeknapp--mini" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>Avbryt møteforespørsel</Link>
             </div>
         </div>
         <div>
-            <button disabled={avbryter} className="knapp js-avbryt" onClick={() => {
-                avbrytMote(mote.moteUuid);
-            }}>Nytt tidspunkt</button>
+            <button className="js-ny knapp knapp--mini" onClick={() => {
+                avbrytMoteUtenVarsel(mote.moteUuid, fnr);
+            }}>Ny møteforespørsel</button>
         </div>
     </div>);
 };
@@ -133,10 +133,8 @@ MotebookingStatus.propTypes = {
             type: PropTypes.string,
         })),
     }),
-    avbrytMote: PropTypes.func,
-    avbryter: PropTypes.bool,
-    avbrytFeilet: PropTypes.bool,
     fnr: PropTypes.string,
+    avbrytMoteUtenVarsel: PropTypes.func,
 };
 
 export default MotebookingStatus;

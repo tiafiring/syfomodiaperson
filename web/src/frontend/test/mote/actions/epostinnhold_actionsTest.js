@@ -3,17 +3,26 @@ import * as actions from '../../../js/mote/actions/epostinnhold_actions';
 
 describe("epostinnhold_actions", () => {
 
-    it("Har en hentBekreftMoteEpostInnhold()-funksjon som returnerer riktig action", () => {
+    it("Har en hentBekreftMoteEpostinnhold()-funksjon som returnerer riktig action", () => {
         const moteUuid = "olsen";
         const motedeltakerUuid = "hansen";
         const valgtAlternativId = "123"
-        const action = actions.hentBekreftMoteEpostInnhold(motedeltakerUuid, valgtAlternativId);
+        const action = actions.hentBekreftMoteEpostinnhold(motedeltakerUuid, valgtAlternativId);
         expect(action).to.deep.equal({
             type: "HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT",
             motedeltakerUuid: "hansen",
             valgtAlternativId: "123"
         });
     });
+
+    it("Har en hentAvbrytMoteEpostinnhold-funksjon som returnerer riktig action", () => {
+        const motedeltakerUuid = "Olsen";
+        const action = actions.hentAvbrytMoteEpostinnhold(motedeltakerUuid);
+        expect(action).to.deep.equal({
+            type: "HENT_AVBRYT_MOTE_EPOSTINNHOLD_FORESPURT",
+            motedeltakerUuid: "Olsen"
+        });
+    })
 
     it("Har en henterEpostInnhold()-funksjon som returnerer riktig action", () => {
         const action = actions.henterEpostInnhold(); 

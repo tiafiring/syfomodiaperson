@@ -33,7 +33,7 @@ export class BekreftMoteSide extends Component {
     }
 
     hentMoteInnhold() {
-        this.props.hentBekreftMoteEpostInnhold(this.props.deltaker.deltakerUuid, this.props.alternativ.id);
+        this.props.hentBekreftMoteEpostinnhold(this.props.deltaker.deltakerUuid, this.props.alternativ.id);
     }
 
     render() {
@@ -82,7 +82,7 @@ BekreftMoteSide.propTypes = {
     deltaker: PropTypes.object,
     hentMoter: PropTypes.func,
     bekreftMote: PropTypes.func,
-    hentBekreftMoteEpostInnhold: PropTypes.func,
+    hentBekreftMoteEpostinnhold: PropTypes.func,
 };
 
 export const getMoteFraAlternativId = (moter, alternativId) => {

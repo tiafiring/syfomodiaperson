@@ -49,10 +49,22 @@ describe("moter_actions", () => {
     });
 
     it("Skal ha en avbrytMote()-funksjon som returnerer riktig action", () => {
-        const action = actions.avbrytMote("fiskekake");
+        const action = actions.avbrytMote("fiskekake", "123");
         expect(action).to.deep.equal({
             type: "AVBRYT_MOTE_FORESPURT",
-            uuid: "fiskekake"
+            uuid: "fiskekake",
+            fnr: "123",
+            varsle: true,
+        })
+    });
+
+    it("Skal ha en avbrytMoteUtenVarsel()-funksjon som returnerer riktig action", () => {
+        const action = actions.avbrytMoteUtenVarsel("fiskekake", "123");
+        expect(action).to.deep.equal({
+            type: "AVBRYT_MOTE_FORESPURT",
+            uuid: "fiskekake",
+            fnr: "123",
+            varsle: false,
         })
     });
 

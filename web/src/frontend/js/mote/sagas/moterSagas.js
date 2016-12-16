@@ -27,8 +27,9 @@ export function* hentMoter(action) {
 export function* avbrytMote(action) {
     yield put(actions.avbryterMote(action.uuid));
     try {
-        yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.uuid}/avbryt`);
+        yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.uuid}/avbryt?varsle=${action.varsle}`);
         yield put(actions.moteAvbrutt(action.uuid));
+        history.replace(`/sykefravaer/${action.fnr}/mote`);
     } catch (e) {
         yield put(actions.avbrytMoteFeilet());
     }
