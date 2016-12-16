@@ -109,13 +109,13 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel }) => {
                 }
             </table>
             <div>
-                <Link role="button" className="js-avbryt rammeknapp rammeknapp--mini" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>Avbryt møteforespørsel</Link>
+                <Link role="button" className="js-avbryt rammeknapp rammeknapp--mini" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>Avbryt møte</Link>
             </div>
         </div>
         <div>
             <button className="js-ny knapp knapp--mini" onClick={() => {
                 avbrytMoteUtenVarsel(mote.moteUuid, fnr);
-            }}>Ny møteforespørsel</button>
+            }}>Nytt møte</button>
         </div>
     </div>);
 };

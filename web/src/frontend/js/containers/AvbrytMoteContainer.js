@@ -22,10 +22,21 @@ export class AvbrytMoteSide extends Component {
         }
     }
 
+    getArbeidsgiverDeltaker() {
+        const { mote } = this.props;
+        if (!mote) {
+            return undefined;
+        }
+        return mote.deltakere.filter((deltaker) => {
+            return deltaker.type === 'arbeidsgiver';
+        })[0];
+    }
+
     hentInnhold() {
         const { epostinnhold, mote } = this.props;
         if (!epostinnhold && mote) {
-            this.props.hentAvbrytMoteEpostinnhold(mote.deltakere[0].deltakerUuid);
+            const arbeidsgiverDeltaker = this.getArbeidsgiverDeltaker();
+            this.props.hentAvbrytMoteEpostinnhold(arbeidsgiverDeltaker.deltakerUuid);
         } else if (!mote) {
             this.props.hentMoter(this.props.fnr);
         }
@@ -38,6 +49,7 @@ export class AvbrytMoteSide extends Component {
 
     render() {
         const { avbryter, avbrytFeilet, hentingFeiletBool, fnr, mote, henterMoterBool, henterEpostinnholdBool, epostinnhold } = this.props;
+        const arbeidsgiverDeltaker = this.getArbeidsgiverDeltaker();
 
         return (<Side tittel="Avbryt møteforespørsel">
         {
@@ -55,7 +67,7 @@ export class AvbrytMoteSide extends Component {
                             if (henterEpostinnholdBool || !epostinnhold) {
                                 return <AppSpinner />;
                             }
-                            return (<AvbrytMote avbrytFeilet={avbrytFeilet} avbryter={avbryter} deltaker={mote.deltakere[0]} onSubmit={() => {
+                            return (<AvbrytMote avbrytFeilet={avbrytFeilet} avbryter={avbryter} deltaker={arbeidsgiverDeltaker} onSubmit={() => {
                                 this.avbrytMote();
                             }} epostinnhold={epostinnhold} avbrytHref={`/sykefravaer/${fnr}/mote`} />);
                         })()}

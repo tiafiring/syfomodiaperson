@@ -78,15 +78,15 @@ describe("MotebookingStatus", () => {
         expect(component.find(".js-velg-tidspunkt")).to.have.length(0);
     });
 
-    it("Skal vise en knapp med teksten Avbryt møteforespørsel", () => {
+    it("Skal vise en knapp for Avbryt møteforespørsel", () => {
         const component = shallow(<MotebookingStatus mote={mote} />);
-        expect(component.find(".js-avbryt").html()).to.contain("Avbryt møteforespørsel");
+        expect(component.find(".js-avbryt")).to.have.length(1);
     });
 
     describe("Ny møteforespørsel", () => {
-        it("Skal vise en knapp med teksten Ny møteforespørsel", () => {
+        it("Skal vise en knapp for Ny møteforespørsel", () => {
             const component = shallow(<MotebookingStatus mote={mote} />);
-            expect(component.find(".js-ny").text()).to.equal("Ny møteforespørsel");
+            expect(component.find(".js-ny")).to.have.length(1)
         });
 
         it("Skal kalle på avbrytMoteUtenVarsel med moteUuid og fnr når man klikker på knappen", () => {

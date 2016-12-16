@@ -25,7 +25,24 @@ describe("AvbrytMoteContainer", () => {
                 "opprettetTidspunkt": "2016-11-21T11:35:51.870Z",
                 "navEnhet": "navEnhet",
                 "deltakere": [{
-                    "deltakerUuid": "85a12263-d955-4103-b172-bf135df5f37a",
+                    "deltakerUuid": "brukers-deltaker-uuid",
+                    "navn": "***REMOVED***",
+                    "epost": "***REMOVED***",
+                    "type": "Bruker",
+                    "avvik": [],
+                    "svar": [{
+                        "id": 328,
+                        "tid": "2020-12-12T11:00:00Z",
+                        "sted": "Oslo ",
+                        "valgt": false
+                    }, {
+                        "id": 329,
+                        "tid": "2020-09-09T07:00:00Z",
+                        "sted": "Oslo ",
+                        "valgt": false
+                    }]
+                }, {
+                    "deltakerUuid": "arbeidsgivers-deltaker-uuid",
                     "navn": "***REMOVED***",
                     "epost": "***REMOVED***",
                     "type": "arbeidsgiver",
@@ -65,7 +82,7 @@ describe("AvbrytMoteContainer", () => {
 
         it("Skal hente epostinnhold dersom det ikke finnes epostinnhold og møte", () => {
             const compo = shallow(<AvbrytMoteSide mote={mote} hentAvbrytMoteEpostinnhold={hentAvbrytMoteEpostinnhold} />);
-            expect(hentAvbrytMoteEpostinnhold.getCall(0).args).to.deep.equal(["85a12263-d955-4103-b172-bf135df5f37a"])
+            expect(hentAvbrytMoteEpostinnhold.getCall(0).args).to.deep.equal(["arbeidsgivers-deltaker-uuid"])
         });
 
         it("Skal ikke hente epostinnhold dersom det finnes epostinnhold og møte", () => {
@@ -90,7 +107,7 @@ describe("AvbrytMoteContainer", () => {
                 mote,
             });
             compo.instance().componentDidUpdate();
-            expect(hentAvbrytMoteEpostinnhold.getCall(0).args).to.deep.equal(["85a12263-d955-4103-b172-bf135df5f37a"])
+            expect(hentAvbrytMoteEpostinnhold.getCall(0).args).to.deep.equal(["arbeidsgivers-deltaker-uuid"])
         });
 
         it("Skal vise frem AppSpinner når det hentes møter", () => {
@@ -117,7 +134,7 @@ describe("AvbrytMoteContainer", () => {
             const compo = shallow(<AvbrytMoteSide avbrytMote={avbrytMote} mote={mote} epostinnhold={epostinnhold} hentAvbrytMoteEpostinnhold={hentAvbrytMoteEpostinnhold} />);
             expect(compo.find(AvbrytMote)).to.have.length(1);
             expect(compo.find(AvbrytMote).prop("epostinnhold")).to.deep.equal(epostinnhold);
-            expect(compo.find(AvbrytMote).prop("deltaker")).to.deep.equal(mote.deltakere[0]);
+            expect(compo.find(AvbrytMote).prop("deltaker")).to.deep.equal(mote.deltakere[1]);
         });
 
         it("Skal ha en avbrytMote-funksjon som kaller på riktig funksjon", () => {
