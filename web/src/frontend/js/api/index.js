@@ -8,6 +8,9 @@ export function get(url) {
         if (res.status === 404) {
             log(res);
             throw new Error('404');
+        } else if (res.status === 403) {
+            log(res);
+            throw new Error('403');
         }
         if (res.status > 400) {
             throw new Error('Det oppstod en feil');

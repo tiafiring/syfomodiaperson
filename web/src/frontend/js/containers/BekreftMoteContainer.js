@@ -9,6 +9,7 @@ import Lightbox from '../components/Lightbox';
 import history from '../history';
 import BekreftMote from '../mote/components/BekreftMote';
 import Feilmelding from '../components/Feilmelding';
+import { MOETEPLANLEGGER } from '../menypunkter';
 
 export class BekreftMoteSide extends Component {
     constructor(props) {
@@ -38,7 +39,7 @@ export class BekreftMoteSide extends Component {
     render() {
         const { alternativ, henterMoterBool, henterEpostinnholdBool, fnr, mote, epostinnhold, deltaker } = this.props;
 
-        return (<Side tittel="Bekreft møte">
+        return (<Side tittel="Bekreft møte" aktivtMenypunkt={MOETEPLANLEGGER}>
             {
                 (() => {
                     if (henterMoterBool) {

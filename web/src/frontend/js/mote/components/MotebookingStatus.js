@@ -5,8 +5,12 @@ import Sidetopp from '../../components/Sidetopp';
 import { Varselstripe } from 'digisyfo-npm';
 import { Link } from 'react-router';
 
-export const MotetidspunktValgt = () => {
-    return <div className="motetidspunktValgt">Møtetidspunkt valgt, møteresultat sendt til partene</div>;
+export const MotetidspunktValgt = ({ bekreftetTidspunkt }) => {
+    return <div className="motetidspunktValgt">Møtetidspunkt valgt, møteresultat sendt til arbeidsgiver {getDatoFraZulu(bekreftetTidspunkt)}.</div>;
+};
+
+MotetidspunktValgt.propTypes = {
+    bekreftetTidspunkt: PropTypes.string,
 };
 
 const MotebookingStatus = ({ fnr, mote }) => {
@@ -16,7 +20,7 @@ const MotebookingStatus = ({ fnr, mote }) => {
     const arbeidsgiverDeltaker = deltakere.filter((deltaker) => {
         return deltaker.type === 'arbeidsgiver';
     })[0];
-    const visVelgTidspunkt = mote.status === 'OPPRETTET' && arbeidsgiverDeltaker && arbeidsgiverDeltaker.svar.map((svar) => {
+    const visVelgTidspunkt = mote.status === 'OPPRETTET' && arbeidsgiverDeltaker && arbeidsgiverDeltaker.svar.filter((svar) => {
         return svar.valgt;
     }).length > 0;
 
@@ -31,7 +35,7 @@ const MotebookingStatus = ({ fnr, mote }) => {
         </div>
         <div className="panel">
             <Sidetopp tittel="Status for møteforespørselen" />
-            <h2 className="typo-undertittel blokk-s">Møtested</h2>
+            <h4 className="typo-undertittel blokk-s">Møtested</h4>
             <p className="blokk-l">{alternativer[0].sted}</p>
             <table className="motestatus blokk-l">
                 <thead>
@@ -43,7 +47,7 @@ const MotebookingStatus = ({ fnr, mote }) => {
                                 if (mote.valgtAlternativ && tidspunkt.id === mote.valgtAlternativ.id) {
                                     className = 'bekreftetTidspunkt';
                                 }
-                                return (<th className={className} key={index}>{getTidFraZulu(tidspunkt.tid)}</th>);
+                                return (<th scope="col" className={className} key={index}>{getTidFraZulu(tidspunkt.tid)}</th>);
                             })
                         }
                     </tr>
@@ -56,7 +60,7 @@ const MotebookingStatus = ({ fnr, mote }) => {
                             })
                             .map((deltaker, index) => {
                                 return (<tr key={index}>
-                            <td><strong>Arbeidsgiver</strong> <span>{deltaker.navn}</span></td>
+                            <th className="motestatus__deltaker" scope="row"><strong>Arbeidsgiver</strong> <span>{deltaker.navn}</span></th>
                             {
                                     deltaker.svar.map((tidspunkt, index2) => {
                                         let className = 'motestatus__svar';
@@ -96,7 +100,7 @@ const MotebookingStatus = ({ fnr, mote }) => {
                             {
                                 mote.alternativer.map((alternativ, index) => {
                                     return (<td key={index}>
-                                        {alternativ.id === mote.valgtAlternativ.id && <MotetidspunktValgt />}
+                                        {alternativ.id === mote.valgtAlternativ.id && <MotetidspunktValgt bekreftetTidspunkt={mote.bekreftetTidspunkt} />}
                                     </td>);
                                 })
                             }

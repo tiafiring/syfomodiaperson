@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { MotebookingSkjema, validate, genererDato, getData } from '../../../js/mote/skjema/MotebookingSkjema';
 import TextFieldLocked from '../../../js/components/TextFieldLocked';
-import LederFields, { FyllUtLeder } from '../../../js/mote/skjema/LederFields';
+import LederFields, { ManuellUtfyltLeder } from '../../../js/mote/skjema/LederFields';
 import TextField from '../../../js/components/TextField';
 import Tidspunkter from '../../../js/mote/skjema/Tidspunkter';
 import { Field, Fields } from 'redux-form';
@@ -46,9 +46,9 @@ describe("MotebookingSkjema", () => {
         })
 
         describe("Dersom det ikke finnes ledere", () => {
-            it("SKal vise FyllUtLeder", () => {
+            it("Skal vise ManuellUtfyltLeder", () => {
                 const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
-                expect(compo.find(FyllUtLeder)).to.have.length(1);
+                expect(compo.find(ManuellUtfyltLeder)).to.have.length(1);
             })
 
             it("Skal ikke vise en dropdown", () => {
@@ -69,9 +69,9 @@ describe("MotebookingSkjema", () => {
                 }];
             });
 
-            it("SKal ikke vise FyllUtLeder", () => {
+            it("SKal ikke vise ManuellUtfyltLeder", () => {
                 const compo = shallow(<MotebookingSkjema ledere={ledere} handleSubmit={handleSubmit} />);
-                expect(compo.find(FyllUtLeder)).to.have.length(0);
+                expect(compo.find(ManuellUtfyltLeder)).to.have.length(0);
             })
 
             it("Skal vise en Fields", () => {
@@ -79,7 +79,21 @@ describe("MotebookingSkjema", () => {
                 expect(compo.find(Fields)).to.have.length(1);
                 expect(compo.find(Fields).prop("component")).to.deep.equal(LederFields);
             });
+''
+        })
 
+        describe("Dersom det finnes virksomhet", () => {
+
+            let virksomhet;
+
+            beforeEach(() => {
+                virksomhet = "BEKK";
+            });
+
+            it("Skal vise bedriftnavn", () => {
+                const compo = shallow(<MotebookingSkjema  ledere={[]} virksomhet={virksomhet} handleSubmit={handleSubmit} />);
+                expect(compo.text()).not.to.contain("BEKK")
+            })
         })
 
     });
@@ -92,6 +106,8 @@ describe("MotebookingSkjema", () => {
         beforeEach(() => {
             values = {};
             props = {
+                nullstillVirksomhet: Function,
+                hentVirksomhet: Function,
                 ledere: []
             };
         });
@@ -99,6 +115,34 @@ describe("MotebookingSkjema", () => {
         it("Skal validere nærmeste leders e-post dersom e-post ikke er fylt ut", () => {
             const res = validate(values, props);
             expect(res.deltakere[0].epost).to.equal("Vennligst fyll ut nærmeste leders e-post-adresse");
+        });
+
+        it("Skal vise feilmelding dersom orgnummer består av 8 tegn", () => {
+            values.deltakere = [{ orgnummer:"12345678" }];
+            values.arbeidsgiverType = "manuell";
+            const res = validate(values, props);
+            expect(res.deltakere[0].orgnummer).to.equal("Et orgnummer består av 9 siffer");
+        });
+
+        it("Skal ikke vise feilmelding dersom orgnummer består av 9 tegn", () => {
+            values.deltakere = [{ orgnummer:"123456789" }];
+            values.arbeidsgiverType = "manuell";
+            const res = validate(values, props);
+            expect(res.deltakere[0].orgnummer).to.equal(undefined);
+        });
+
+        it("Skal vise feilmelding dersom orgnummer består av 9 tegn, men en bokstav", () => {
+            values.deltakere = [{ orgnummer:"12345678a" }];
+            values.arbeidsgiverType = "manuell";
+            const res = validate(values, props);
+            expect(res.deltakere[0].orgnummer).to.equal("Et orgnummer består av 9 siffer");
+        });
+
+        it("Skal ikke vise feilmelding dersom orgnummer består 8 tegn, men type valg", () => {
+            values.deltakere = [{ orgnummer:"12345678" }];
+            values.arbeidsgiverType = "valg";
+            const res = validate(values, props);
+            expect(res.deltakere[0].orgnummer).to.equal(undefined);
         });
 
         it("Skal validere nærmeste leders e-post dersom e-post er ugyldig", () => {

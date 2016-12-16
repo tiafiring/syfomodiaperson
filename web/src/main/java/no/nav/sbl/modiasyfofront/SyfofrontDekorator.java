@@ -11,7 +11,7 @@ import static java.util.Arrays.asList;
 
 public class SyfofrontDekorator extends DecoratorFilter {
     private static final String FRAGMENTS_URL = "/internarbeidsflatedecorator/index.html";
-    private static final String APPLICATION_NAME = "syfofront";
+    private static final String APPLICATION_NAME = "Sykefravær";
     private static final List<String> NO_DECORATOR_PATTERNS = new ArrayList<>(asList(".*/img/.*", ".*/css/.*", ".*/js/.*", ".*/font/.*", ".*selftest.*"));
     private static final List<String> FRAGMENT_NAMES = new ArrayList<>(asList("header-withmenu", "styles"));
 

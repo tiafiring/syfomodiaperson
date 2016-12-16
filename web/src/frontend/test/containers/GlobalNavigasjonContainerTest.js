@@ -15,10 +15,17 @@ describe("GlobalNavigasjonContainer", () => {
         }
 
         it("Skal returnere fnr og harTilgangMotemodul", () => {
-            const props = mapStateToProps(state);
+            const props = mapStateToProps(state, {});
             expect(props.fnr).to.equal("887766");
             expect(props.harTilgangMotemodul).to.equal(true);
         });
+
+        it("Skal returnere aktivtMenypunkt", () => {
+            const props = mapStateToProps(state, {
+                aktivtMenypunkt: "OLSEN"
+            });
+            expect(props.aktivtMenypunkt).to.equal("OLSEN");
+        })
 
     });
 

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Field, Fields, reduxForm } from 'redux-form';
 import TextField from '../../components/TextField';
-import LederFields, { FyllUtLeder } from './LederFields';
+import LederFields, { ManuellUtfyltLeder } from './LederFields';
 import Tidspunkter from './Tidspunkter';
 import Sidetopp from '../../components/Sidetopp';
 import { Varselstripe } from 'digisyfo-npm';
@@ -41,7 +41,8 @@ export function getData(values) {
     };
 }
 
-export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeilet, ledere, autofill, untouch, hentLedereFeiletBool }) => {
+export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeilet, ledere,
+    autofill, untouch, hentLedereFeiletBool }) => {
     const submit = (values) => {
         const data = getData(values);
         data.fnr = fnr;
@@ -65,12 +66,12 @@ export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, send
                 ledere.length > 0 && <Fields
                     autofill={autofill}
                     untouch={untouch}
-                    names={['arbeidsgiverType', 'deltakere[0].navn', 'deltakere[0].epost']}
+                    names={['arbeidsgiverType', 'deltakere[0].navn', 'deltakere[0].epost', 'deltakere[0].orgnummer']}
                     ledere={ledere}
                     component={LederFields} />
             }
             {
-                ledere.length === 0 && <FyllUtLeder />
+                ledere.length === 0 && <ManuellUtfyltLeder />
             }
         </fieldset>
 
@@ -78,7 +79,7 @@ export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, send
             <legend>2. Velg dato, tid og sted</legend>
             <Tidspunkter />
             <label htmlFor="sted">Sted</label>
-            <Field id="sted" component={TextField} name="sted" className="input-xxl js-sted" placeholder="Skriv møtested eller om det er et videomøte" />
+            <Field id="sted" component={TextField} name="sted" className="input--xxl js-sted" placeholder="Skriv møtested eller om det er et videomøte" />
         </fieldset>
 
         <div aria-live="polite" role="alert">
@@ -106,8 +107,11 @@ MotebookingSkjema.propTypes = {
     sender: PropTypes.bool,
     sendingFeilet: PropTypes.bool,
     ledere: PropTypes.array,
+    virksomhet: PropTypes.object,
     autofill: PropTypes.func,
     untouch: PropTypes.func,
+    hentVirksomhet: PropTypes.func,
+    nullstillVirksomhet: PropTypes.func,
     hentLedereFeiletBool: PropTypes.bool,
 };
 
@@ -141,7 +145,12 @@ export function validate(values, props) {
         lederFeilmelding.epost = 'Vennligst fyll ut en gyldig e-post-adresse';
     }
 
-    if (lederFeilmelding.navn || lederFeilmelding.epost) {
+    if ((!values.arbeidsgiverType || values.arbeidsgiverType === 'manuell') && values.deltakere && values.deltakere[0].orgnummer &&
+        (values.deltakere[0].orgnummer.length !== 9 || isNaN(values.deltakere[0].orgnummer))) {
+        lederFeilmelding.orgnummer = 'Et orgnummer består av 9 siffer';
+    }
+
+    if (lederFeilmelding.navn || lederFeilmelding.epost || lederFeilmelding.orgnummer) {
         feilmeldinger.deltakere = [lederFeilmelding];
     }
 

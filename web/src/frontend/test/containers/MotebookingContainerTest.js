@@ -82,6 +82,9 @@ describe("MotebookingContainer", () => {
                 },
                 moter: {
                     data: []
+                },
+                virksomhet: {
+                    navn: "BEKK"
                 }
             }
         })
@@ -91,6 +94,10 @@ describe("MotebookingContainer", () => {
             expect(props.fnr).to.equal("887766");
         });
 
+        it("Skal returnere virksomhet", () => {
+            const props = mapStateToProps(state);
+            expect(props.virksomhet.navn).to.equal("BEKK");
+        });
 
         it("Skal returnere opprettet møte", () => {
             state.moter.data = [{

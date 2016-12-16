@@ -20,6 +20,7 @@ describe("TidslinjeContainer", () => {
             }],
             hentingFeilet: false,
             henter: false,
+            ikkeTilgang: false,
         };
         state.ledetekster = {
             data: {"min": "tekst"},
@@ -164,10 +165,16 @@ describe("TidslinjeContainer", () => {
             expect(comp.contains(<Feilmelding />)).to.be.true;
         });
 
+        it("Skal vise Feilmelding dersom ikkeTilgang = true", () => {
+            const comp = shallow(<TidslinjeSide ikkeTilgang={true} actions={actions} />);
+            expect(comp.contains(<Feilmelding tittel="Ikke tilgang" melding="Du har ikke tilgang til å se tidslinjen for denne brukeren." />)).to.be.true;
+        });
+
         it("Skal vise TidslinjeVelgArbeidssituasjonContainer og Tidslinje dersom hentingFeilet = true", () => {
-            const comp = shallow(<TidslinjeSide actions={actions} />);
+            const comp = shallow(<TidslinjeSide valgtArbeidssituasjon="MED_ARBEIDSGIVER" actions={actions} />);
             expect(comp.find(TidslinjeVelgArbeidssituasjonContainer)).to.have.length(1);
             expect(comp.find(Tidslinje)).to.have.length(1);
+            expect(comp.find(Tidslinje).prop("arbeidssituasjon")).to.equal("MED_ARBEIDSGIVER");
         });
 
         it("Skal kalle på hentTidslinjer med fnr, apneHendelseIder og arbeidssituasjon", () => {
@@ -175,6 +182,8 @@ describe("TidslinjeContainer", () => {
             expect(hentTidslinjer.calledOnce).to.be.true;
             expect(hentTidslinjer.calledWith("12", [1,2], "banan")).to.be.true;
         });
+
+        it
 
     });
 
