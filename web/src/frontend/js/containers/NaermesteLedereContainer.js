@@ -28,7 +28,8 @@ export class NaermesteLedereSide extends Component {
                 if (hentingFeilet) {
                     return <Feilmelding />;
                 } else if (ikkeTilgang) {
-                    return <Feilmelding tittel="Ikke tilgang" melding="Du har ikke tilgang til å se nærmeste leder for denne brukeren." />;
+                    return <Feilmelding tittel="Under arbeid" melding="Du har foreløpig ikke tilgang til denne tjenesten. Vi jobber med å få på plass riktig tilgangsstyring.
+                        Takk for at du prøver igjen senere!" />;
                 } else if (henter) {
                     return <AppSpinner />;
                 }

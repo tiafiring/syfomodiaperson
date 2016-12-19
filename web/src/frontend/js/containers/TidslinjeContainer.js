@@ -37,7 +37,8 @@ export class TidslinjeSide extends Component {
                     return <Feilmelding />;
                 }
                 if (ikkeTilgang) {
-                    return <Feilmelding tittel="Ikke tilgang" melding="Du har ikke tilgang til å se tidslinjen for denne brukeren." />;
+                    return <Feilmelding tittel="Under arbeid" melding="Du har foreløpig ikke tilgang til denne tjenesten. Vi jobber med å få på plass riktig tilgangsstyring.
+                        Takk for at du prøver igjen senere!" />;
                 }
                 return (<div>
                     <div className="panel">

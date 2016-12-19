@@ -167,7 +167,8 @@ describe("TidslinjeContainer", () => {
 
         it("Skal vise Feilmelding dersom ikkeTilgang = true", () => {
             const comp = shallow(<TidslinjeSide ikkeTilgang={true} actions={actions} />);
-            expect(comp.contains(<Feilmelding tittel="Ikke tilgang" melding="Du har ikke tilgang til å se tidslinjen for denne brukeren." />)).to.be.true;
+            expect(comp.contains(<Feilmelding tittel="Under arbeid" melding="Du har foreløpig ikke tilgang til denne tjenesten. Vi jobber med å få på plass riktig tilgangsstyring.
+                        Takk for at du prøver igjen senere!" />)).to.be.true;
         });
 
         it("Skal vise TidslinjeVelgArbeidssituasjonContainer og Tidslinje dersom hentingFeilet = true", () => {
