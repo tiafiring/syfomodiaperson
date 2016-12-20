@@ -142,9 +142,16 @@ describe("MotebookingSkjema", () => {
                     expect(compo.find(Arbeidstaker)).to.have.length(0); 
                 });
 
-                it("Skal vise info om reservasjon", () => {
+                it("Skal vise info om reservasjon med riktig feilAarsak", () => {
+                    arbeidstaker.kontaktinfo.reservasjon.feilAarsak = "KODE6"
                     const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
-                    expect(compo.find(KontaktinfoFeilmelding)).to.have.length(1);
+                    expect(compo.contains(<KontaktinfoFeilmelding feilAarsak={"KODE6"} />)).to.be.true;
+                });
+
+                it("Skal vise info om reservasjon med riktig feilAarsak", () => {
+                    arbeidstaker.kontaktinfo.reservasjon.feilAarsak = "INGEN_KONTAKTINFORMASJON"
+                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
+                    expect(compo.contains(<KontaktinfoFeilmelding feilAarsak={"INGEN_KONTAKTINFORMASJON"} />)).to.be.true;
                 });
 
                 it("SKal vise riktig nummerering", () => {
