@@ -41,7 +41,65 @@ export function getData(values) {
     };
 }
 
-export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, sendingFeilet, ledere,
+export const KontaktinfoFeilmelding = ({ feilAarsak }) => {
+    return (<div className="panel">
+        <div className="hode hode-informasjon">
+        {
+            (() => {
+                switch (feilAarsak.toUpperCase()) {
+                    case 'RESERVERT': {
+                        return <p>Den sykmeldte har reservert seg mot elektronisk kommunikasjon med det offentlige. Du kan fortsatt sende møteforespørsel til arbeidsgiveren digitalt, men den sykmeldte må kontaktes på annen måte.</p>;
+                    }
+                    case 'INGEN_KONTAKTINFORMASJON': {
+                        return (<div>
+                            <p>Den sykmeldte er ikke registrert i Kontakt- og reservasjonsregisteret (KRR). Du kan fortsatt sende møteforespørsel til arbeidsgiveren digitalt, men den sykmeldte må kontaktes på annen måte.</p>
+                            <p>Den sykmeldte kan registrere kontaktinformasjonen sin her: <a target="_blank"href="http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din">http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din</a></p>
+                        </div>);
+                    }
+                    case 'KODE6': {
+                        return <p>Den sykmeldte er registrert med skjermingskode 6.</p>;
+                    }
+                    case 'KODE7': {
+                        return <p>Den sykmeldte er registrert med skjermingskode 7.</p>;
+                    }
+                    default: {
+                        return <p />;
+                    }
+                }
+            })
+        }
+        </div>
+    </div>);
+};
+
+KontaktinfoFeilmelding.propTypes = {
+    feilAarsak: PropTypes.string,
+};
+
+export const Arbeidstaker = ({ navn, kontaktinfo }) => {
+    return (<div className="arbeidstakersOpplysninger skjema-fieldset blokk--xl">
+        <legend>2. Arbeidstakers opplysninger</legend>
+        <div className="nokkelopplysning">
+            <h4>Navn</h4>
+            <p>{navn}</p>
+        </div>
+        <div className="nokkelopplysning">
+            <h4>E-post</h4>
+            <p>{kontaktinfo.epost}</p>
+        </div>
+        <div className="nokkelopplysning">
+            <h4>Telefon</h4>
+            <p className="sist">{kontaktinfo.tlf}</p>
+        </div>
+    </div>);
+};
+
+Arbeidstaker.propTypes = {
+    navn: PropTypes.string,
+    kontaktinfo: PropTypes.object,
+};
+
+export const MotebookingSkjema = ({ handleSubmit, arbeidstaker, opprettMote, fnr, sender, sendingFeilet, ledere,
     autofill, untouch, hentLedereFeiletBool }) => {
     const submit = (values) => {
         const data = getData(values);
@@ -49,70 +107,75 @@ export const MotebookingSkjema = ({ handleSubmit, opprettMote, fnr, sender, send
         opprettMote(data);
     };
 
-    return (<form className="panel" onSubmit={handleSubmit(submit)}>
-        <Sidetopp tittel="Møteforespørsel" />
+    const visArbeidstaker = arbeidstaker && arbeidstaker.kontaktinfo && arbeidstaker.kontaktinfo.reservasjon.skalHaVarsel;
+    const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
 
-        {
-            hentLedereFeiletBool && <div className="blokk--xl">
-                <Varselstripe>
-                    <p>Beklager, det oppstod en feil ved uthenting av nærmeste leder. Du kan likevel sende møteforespøsel.</p>
-                </Varselstripe>
-            </div>
-        }
+    return (<div>
+        { !visArbeidstaker && <KontaktinfoFeilmelding feilAarsak={feilAarsak} /> }
+        <form className="panel" onSubmit={handleSubmit(submit)}>
+            <Sidetopp tittel="Møteforespørsel" />
 
-        <fieldset className="skjema-fieldset blokk--xl js-arbeidsgiver">
-            <legend>1. Fyll inn arbeidsgiverens opplysninger</legend>
             {
-                ledere.length > 0 && <Fields
-                    autofill={autofill}
-                    untouch={untouch}
-                    names={['arbeidsgiverType', 'deltakere[0].navn', 'deltakere[0].epost', 'deltakere[0].orgnummer']}
-                    ledere={ledere}
-                    component={LederFields} />
-            }
-            {
-                ledere.length === 0 && <ManuellUtfyltLeder />
-            }
-        </fieldset>
-
-        <fieldset className="skjema-fieldset blokk--xl">
-            <legend>2. Velg dato, tid og sted</legend>
-            <Tidspunkter />
-            <label htmlFor="sted">Sted</label>
-            <Field id="sted" component={TextField} name="sted" className="input--xxl js-sted" placeholder="Skriv møtested eller om det er et videomøte" />
-        </fieldset>
-
-        <div aria-live="polite" role="alert">
-            { sendingFeilet && <div className="panel panel--ramme">
-                <div className="varselstripe varselstripe--feil">
-                    <div className="varselstripe__ikon">
-                        <img src="/sykefravaer/img/svg/utropstegn.svg" />
-                    </div>
-                    <p className="sist">Beklager, det oppstod en feil. Prøv igjen litt senere.</p>
+                hentLedereFeiletBool && <div className="blokk--xl">
+                    <Varselstripe>
+                        <p>Beklager, det oppstod en feil ved uthenting av nærmeste leder. Du kan likevel sende møteforespøsel.</p>
+                    </Varselstripe>
                 </div>
-            </div>}
-        </div>
+            }
 
-        <div className="knapperad">
-            <input type="submit" className="knapp" value="Send" disabled={sender} />
-        </div>
-    </form>);
+            <fieldset className="skjema-fieldset js-arbeidsgiver">
+                <legend>1. Fyll inn arbeidsgiverens opplysninger</legend>
+                {
+                    ledere.length > 0 && <Fields
+                        autofill={autofill}
+                        untouch={untouch}
+                        names={['arbeidsgiverType', 'deltakere[0].navn', 'deltakere[0].epost', 'deltakere[0].orgnummer']}
+                        ledere={ledere}
+                        component={LederFields} />
+                }
+                {
+                    ledere.length === 0 && <ManuellUtfyltLeder />
+                }
+            </fieldset>
+            {
+                visArbeidstaker && <Arbeidstaker {...arbeidstaker} />
+            }
+            <fieldset className="skjema-fieldset blokk--xl">
+                <legend>{visArbeidstaker ? '3.' : '2.'} Velg dato, tid og sted</legend>
+                <Tidspunkter />
+                <label htmlFor="sted">Sted</label>
+                <Field id="sted" component={TextField} name="sted" className="input--xxl js-sted" placeholder="Skriv møtested eller om det er et videomøte" />
+            </fieldset>
+
+            <div aria-live="polite" role="alert">
+                { sendingFeilet && <div className="panel panel--ramme">
+                    <div className="varselstripe varselstripe--feil">
+                        <div className="varselstripe__ikon">
+                            <img src="/sykefravaer/img/svg/utropstegn.svg" />
+                        </div>
+                        <p className="sist">Beklager, det oppstod en feil. Prøv igjen litt senere.</p>
+                    </div>
+                </div>}
+            </div>
+
+            <div className="knapperad">
+                <input type="submit" className="knapp" value="Send" disabled={sender} />
+            </div>
+        </form>
+    </div>);
 };
 
 MotebookingSkjema.propTypes = {
     fnr: PropTypes.string,
-    skjemaData: PropTypes.object,
     handleSubmit: PropTypes.func,
     opprettMote: PropTypes.func,
     sender: PropTypes.bool,
     sendingFeilet: PropTypes.bool,
     ledere: PropTypes.array,
-    virksomhet: PropTypes.object,
     autofill: PropTypes.func,
     untouch: PropTypes.func,
-    hentVirksomhet: PropTypes.func,
-    nullstillVirksomhet: PropTypes.func,
     hentLedereFeiletBool: PropTypes.bool,
+    arbeidstaker: PropTypes.object,
 };
 
 function erGyldigEpost(email) {

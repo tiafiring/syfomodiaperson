@@ -22,7 +22,7 @@ export class FyllUtVirksomhet extends Component {
         if (erFeil) {
             className += ' input--feil';
         }
-        return (<div className="navInput">
+        return (<div className="navInput blokk--xl">
             <label htmlFor="js-orgnummer">Virksomhetens organisasjonsnummer (valgfritt)</label>
             <Field id="js-orgnummer" component={TextField} type="text" name="deltakere[0].orgnummer" className={className}
                 parse={(nr) => {
