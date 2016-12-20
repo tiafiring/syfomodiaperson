@@ -29,7 +29,7 @@ export class NaermesteLedereSide extends Component {
                     return <Feilmelding />;
                 } else if (ikkeTilgang) {
                     return <Feilmelding tittel="Under arbeid" melding="Du har foreløpig ikke tilgang til denne tjenesten. Vi jobber med å få på plass riktig tilgangsstyring.
-                        Takk for at du prøver igjen senere!" />;
+                    Veiledere som jobber med sykefraværsoppfølging og veiledere på kontaktsenteret vil etter hver få tilgang. Takk for at du prøver igjen senere!" />;
                 } else if (henter) {
                     return <AppSpinner />;
                 }
