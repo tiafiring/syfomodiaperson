@@ -46,7 +46,7 @@ export const KontaktinfoFeilmelding = ({ feilAarsak }) => {
         <div className="hode hode-informasjon">
         {
             (() => {
-                switch (feilAarsak) {
+                switch (feilAarsak.toUpperCase()) {
                     case 'RESERVERT': {
                         return <p>Den sykmeldte har reservert seg mot elektronisk kommunikasjon med det offentlige. Du kan fortsatt sende møteforespørsel til arbeidsgiveren digitalt, men den sykmeldte må kontaktes på annen måte.</p>;
                     }
@@ -57,7 +57,10 @@ export const KontaktinfoFeilmelding = ({ feilAarsak }) => {
                         </div>);
                     }
                     case 'KODE6': {
-                        return <p>Kode 6-bruker</p>;
+                        return <p>Den sykmeldte er registrert med skjermingskode 6.</p>;
+                    }
+                    case 'KODE7': {
+                        return <p>Den sykmeldte er registrert med skjermingskode 7.</p>;
                     }
                     default: {
                         return <p />;
