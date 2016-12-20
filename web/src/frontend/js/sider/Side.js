@@ -5,7 +5,7 @@ const DocumentTitle = require('react-document-title');
 
 const Side = ({ tittel = '', children, aktivtMenypunkt }) => {
     return (<DocumentTitle title={tittel + (tittel.length > 0 ? ' - Sykefravær' : 'Sykefravær')}>
-        <div className="container">
+        <div className="wrap">
             <NavbrukerinfoContainer />
             <div className="grid">
                 <nav className="unit one-third">
