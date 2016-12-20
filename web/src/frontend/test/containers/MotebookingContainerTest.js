@@ -17,32 +17,25 @@ describe("MotebookingContainer", () => {
 
         beforeEach(() => {
             hentMoter = sinon.spy();
-            hentLedere = sinon.spy();
         });
 
         it("Skal vise AppSpinner", () => {
             const mote = {};
-            const component = shallow(<MotebookingSide hentMoter={hentMoter} hentLedere={hentLedere} henter={true} />)
+            const component = shallow(<MotebookingSide hentMoter={hentMoter} henter={true} />)
             expect(component.find(AppSpinner)).to.have.length(1)
         });
 
         it("Skal hente møter ved init", () => {
             const mote = {};
-            const component = shallow(<MotebookingSide fnr="123" hentMoter={hentMoter} hentLedere={hentLedere} mote={{}} />)
+            const component = shallow(<MotebookingSide fnr="123" hentMoter={hentMoter} mote={{}} />)
             expect(hentMoter.calledOnce).to.be.true;
             expect(hentMoter.calledWith("123")).to.be.true;
         });
 
-        it("Skal hente ledere ved init", () => {
-            const mote = {};
-            const component = shallow(<MotebookingSide fnr="22" hentMoter={hentMoter} hentLedere={hentLedere} mote={{}} />)
-            expect(hentLedere.calledOnce).to.be.true;
-            expect(hentLedere.calledWith("22")).to.be.true;
-        });
 
         it("Skal vise feilmelding hvis hentMoterFeiletBool", () => {
             const mote = {};
-            const component = shallow(<MotebookingSide hentMoter={hentMoter} hentLedere={hentLedere} mote={{}} hentMoterFeiletBool />)
+            const component = shallow(<MotebookingSide hentMoter={hentMoter} mote={{}} hentMoterFeiletBool />)
             expect(component.find(Feilmelding)).to.have.length(1)
         });
 
@@ -51,7 +44,7 @@ describe("MotebookingContainer", () => {
                 moteUuid: "8877"
             };
             const avbrytMote = sinon.spy();
-            const component = shallow(<MotebookingSide hentMoter={hentMoter} hentLedere={hentLedere} mote={mote} />)
+            const component = shallow(<MotebookingSide hentMoter={hentMoter} mote={mote} />)
             expect(component.contains(<MotestatusContainer moteUuid={"8877"} />)).to.be.true;
         });
 
@@ -69,17 +62,6 @@ describe("MotebookingContainer", () => {
                         harTilgang: true,
                     },
                 },
-                ledere: {
-                    data: [{
-                        navn: "Ole",
-                        erOppgitt: true,
-                    }, {
-                        navn: "Per",
-                        erOppgitt: false,
-                    }],
-                    henter: false,
-                    hentingFeilet: false
-                },
                 moter: {
                     data: []
                 },
@@ -93,12 +75,7 @@ describe("MotebookingContainer", () => {
             const props = mapStateToProps(state);
             expect(props.fnr).to.equal("887766");
         });
-
-        it("Skal returnere virksomhet", () => {
-            const props = mapStateToProps(state);
-            expect(props.virksomhet.navn).to.equal("BEKK");
-        });
-
+        
         it("Skal returnere opprettet møte", () => {
             state.moter.data = [{
                 id: 1,
@@ -156,16 +133,6 @@ describe("MotebookingContainer", () => {
             expect(props.henter).to.be.false;
         });
 
-        it("Skal returnere henter når det hentes ledere", () => {
-            state.moter.data = [{
-                id: 1
-            }]
-            state.moter.henter = false;
-            state.ledere.henter = true;
-            const props = mapStateToProps(state);
-            expect(props.henter).to.be.true;
-        });
-
         it("Skal returnere sender", () => {
             state.moter.data = [{
                 id: 1
@@ -202,20 +169,6 @@ describe("MotebookingContainer", () => {
             expect(props.hentMoterFeiletBool).to.be.false;
         });
 
-        it("Skal returnere hentingFeilet når henting av ledere feiler", () => {
-            state.ledere.data = []
-            state.ledere.hentingFeilet = true;
-            const props = mapStateToProps(state);
-            expect(props.hentLedereFeiletBool).to.be.true;
-        });
-
-        it("Skal returnere hentingFeilet når henting av ledere ikke feiler", () => {
-            state.ledere.data = []
-            state.ledere.hentingFeilet = false;
-            const props = mapStateToProps(state);
-            expect(props.hentLedereFeiletBool).to.be.false;
-        });
-
         it("Skal returnere sendingFeilet", () => {
             state.moter.data = [{
                 id: 1
@@ -233,12 +186,6 @@ describe("MotebookingContainer", () => {
             const props = mapStateToProps(state);
             expect(props.sendingFeilet).to.be.false;
         });
-
-        it("Skal returnere ledere som er oppgitt", () => {
-            const props = mapStateToProps(state);
-            expect(props.ledere).to.deep.equal([{navn: "Ole", erOppgitt: true}])
-        })
-
 
     });
 

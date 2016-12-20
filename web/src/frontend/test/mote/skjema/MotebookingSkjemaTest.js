@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { MotebookingSkjema, validate, genererDato, getData } from '../../../js/mote/skjema/MotebookingSkjema';
+import { MotebookingSkjema, validate, genererDato, getData, KontaktinfoFeilmelding, Arbeidstaker } from '../../../js/mote/skjema/MotebookingSkjema';
 import TextFieldLocked from '../../../js/components/TextFieldLocked';
 import LederFields, { ManuellUtfyltLeder } from '../../../js/mote/skjema/LederFields';
 import TextField from '../../../js/components/TextField';
@@ -43,7 +43,7 @@ describe("MotebookingSkjema", () => {
         it("Skal vise en varselstripe dersom henting av ledere feiler", () => {
             const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} hentLedereFeiletBool />);
             expect(compo.find(Varselstripe)).to.have.length(1);
-        })
+        });
 
         describe("Dersom det ikke finnes ledere", () => {
             it("Skal vise ManuellUtfyltLeder", () => {
@@ -79,22 +79,83 @@ describe("MotebookingSkjema", () => {
                 expect(compo.find(Fields)).to.have.length(1);
                 expect(compo.find(Fields).prop("component")).to.deep.equal(LederFields);
             });
-''
-        })
 
-        describe("Dersom det finnes virksomhet", () => {
+        });
 
-            let virksomhet;
+        describe("Visning av arbeidstakers opplysninger", () => {
+
+            let arbeidstaker;
+            let ledere = [];
 
             beforeEach(() => {
-                virksomhet = "BEKK";
+                arbeidstaker = {"navn":"***REMOVED***","kontaktinfo":{"tlf":"+4799999999","epost":"tester.scrambling-script@fellesregistre.no","reservasjon":{"skalHaVarsel":true}}};
             });
 
-            it("Skal vise bedriftnavn", () => {
-                const compo = shallow(<MotebookingSkjema  ledere={[]} virksomhet={virksomhet} handleSubmit={handleSubmit} />);
-                expect(compo.text()).not.to.contain("BEKK")
-            })
-        })
+            describe("Arbeidstaker", () => {
+
+                it("Skal vise arbeidstakers opplysninger", () => {
+                    const compo = shallow(<Arbeidstaker {...arbeidstaker} />);
+                    expect(compo.text()).to.contain("***REMOVED***");
+                    expect(compo.text()).to.contain("4799999999");
+                    expect(compo.text()).to.contain("tester.scrambling-script@fellesregistre.no");
+                });
+
+                it("Skal vise riktig overskrift", () => {
+                    const compo = shallow(<Arbeidstaker {...arbeidstaker} />);
+                    expect(compo.text()).to.contain("2. Arbeidstakers opplysninger")
+                })
+
+            });
+
+
+            describe("Dersom dersom kontaktinfo.reservasjon.skalHaVarsel === true", () => {
+
+                beforeEach(() => {
+                    arbeidstaker.kontaktinfo.reservasjon.skalHaVarsel = true;
+                })
+
+                it("Skal vise arbeidstakers info", () => {
+                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
+                    expect(compo.find(Arbeidstaker)).to.have.length(1); 
+                });
+
+                it("Skal ikke vise info om reservasjon", () => {
+                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
+                    expect(compo.find(KontaktinfoFeilmelding)).to.have.length(0);
+                });
+
+                it("SKal vise riktig nummerering", () => {
+                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
+                    expect(compo.text()).to.contain("3. Velg dato");
+                }); 
+
+            });
+
+            describe("Dersom dersom kontaktinfo.reservasjon.skalHaVarsel === false", () => {
+
+                beforeEach(() => {
+                    arbeidstaker.kontaktinfo.reservasjon.skalHaVarsel = false;
+                })
+
+                it("Skal ikke vise arbeidstakers info ", () => {
+                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
+                    expect(compo.find(Arbeidstaker)).to.have.length(0); 
+                });
+
+                it("Skal vise info om reservasjon", () => {
+                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
+                    expect(compo.find(KontaktinfoFeilmelding)).to.have.length(1);
+                });
+
+                it("SKal vise riktig nummerering", () => {
+                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
+                    expect(compo.text()).not.to.contain("2. Arbeidstakers opplysninger");
+                    expect(compo.text()).to.contain("2. Velg dato");
+                }); 
+
+            });
+
+        });
 
     });
 
