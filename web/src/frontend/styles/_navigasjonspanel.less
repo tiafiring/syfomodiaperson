@@ -1,10 +1,10 @@
 .navigasjonspanel {
     display: block;
     border: 0;
-    background-color: #fff;
+    background-color: @hvit;
     padding: 1em 3em 1em 2em;
     margin-bottom: .5em             ;
-    color: @FargeTekst;
+    color: @navTekst;
     border-left: 0;
     padding-right: 3rem; 
     background-image: url("/sykefravaer/img/svg/pilVidere--graa.svg");
@@ -19,8 +19,9 @@
     }
 
     &:focus {
-        background-color: #fff;
-        box-shadow: 0 0 0 3px @color-focus;
+        background-color: @hvit;
+        box-shadow: 0 0 0 3px @fokusOrange;
+        color: @navTekst;
     }
 }
 
@@ -36,23 +37,24 @@
 
 .navigasjonspanel:hover {
     padding-left: ~"calc(2em - 6px)";
-    border-left: 6px solid @FargeNavigasjonAktiv;
+    border-left: 6px solid @lenkeBlaa;
 }
 
 .navigasjonspanel--aktiv,
 .navigasjonspanel.navigasjonspanel--aktiv:hover {
-    background-color: @FargeLenke;
-    border-left-color: @FargeLenke;
-    color: #fff;
+    background-color: @lenkeBlaa;
+    border-left-color: @lenkeBlaa;
+    color: @hvit;
     background-image: url("/sykefravaer/img/svg/pilVidere--hvit.svg");
 
     &:focus {
-        background-color: @FargeLenke;
+        background-color: @lenkeBlaa;
+        color: @hvit;
     }
 }
 
 .navigasjonspanel:hover {
-    border-color: @FargeLenke;
+    border-color: @lenkeBlaa;
 }
 
 .navigasjonspaneler {
