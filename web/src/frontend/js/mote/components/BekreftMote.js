@@ -22,7 +22,7 @@ const BekreftMote = ({ deltaker, epostinnhold, onSubmit, avbrytHref }) => {
         </article>
 
         <div className="knapperad">
-            <button className="knapp blokk-xs" onClick={onSubmit}>Send møteresultat</button>
+            <button className="knapp blokk--s" onClick={onSubmit}>Send møteresultat</button>
             <p><Link to={avbrytHref}>Avbryt</Link></p>
         </div>
     </div>);

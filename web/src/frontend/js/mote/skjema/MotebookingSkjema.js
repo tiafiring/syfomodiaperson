@@ -116,14 +116,14 @@ export const MotebookingSkjema = ({ handleSubmit, arbeidstaker, opprettMote, fnr
             <Sidetopp tittel="Møteforespørsel" />
 
             {
-                hentLedereFeiletBool && <div className="blokk--xl">
+                hentLedereFeiletBool && <div className="blokk">
                     <Varselstripe>
                         <p>Beklager, det oppstod en feil ved uthenting av nærmeste leder. Du kan likevel sende møteforespøsel.</p>
                     </Varselstripe>
                 </div>
             }
 
-            <fieldset className="skjema-fieldset js-arbeidsgiver">
+            <fieldset className="skjema-fieldset js-arbeidsgiver blokk--l">
                 <legend>1. Fyll inn arbeidsgiverens opplysninger</legend>
                 {
                     ledere.length > 0 && <Fields
@@ -140,7 +140,7 @@ export const MotebookingSkjema = ({ handleSubmit, arbeidstaker, opprettMote, fnr
             {
                 visArbeidstaker && <Arbeidstaker {...arbeidstaker} />
             }
-            <fieldset className="skjema-fieldset blokk--xl">
+            <fieldset className="skjema-fieldset blokk">
                 <legend>{visArbeidstaker ? '3.' : '2.'} Velg dato, tid og sted</legend>
                 <Tidspunkter />
                 <label htmlFor="sted">Sted</label>
@@ -158,7 +158,7 @@ export const MotebookingSkjema = ({ handleSubmit, arbeidstaker, opprettMote, fnr
                 </div>}
             </div>
 
-            <div className="knapperad">
+            <div className="knapperad blokk">
                 <input type="submit" className="knapp" value="Send" disabled={sender} />
             </div>
         </form>

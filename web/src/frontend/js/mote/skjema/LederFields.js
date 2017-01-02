@@ -7,11 +7,11 @@ import ArbeidsgiverDropdown from './ArbeidsgiverDropdown';
 
 export const FyllUtLeder = ({ FieldComponent = TextField }) => {
     return (<div>
-        <div className="navInput blokk--xl">
+        <div className="navInput blokk">
             <label htmlFor="js-ledernavn">Nærmeste leders navn</label>
             <Field id="js-ledernavn" component={FieldComponent} name="deltakere[0].navn" className="input--xxl" />
         </div>
-        <div className="navInput blokk--xl">
+        <div className="navInput blokk">
             <label htmlFor="js-lederepost">E-post</label>
             <Field id="js-lederepost" component={FieldComponent} type="email" name="deltakere[0].epost" className="input--xxl" />
         </div>

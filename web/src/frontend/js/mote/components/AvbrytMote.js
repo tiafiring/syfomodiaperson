@@ -27,7 +27,7 @@ const AvbrytMote = ({ deltaker, epostinnhold, onSubmit, avbrytHref, avbryter, av
         </div>
 
         <div className="knapperad">
-            <button disabled={avbryter} className="knapp blokk-xs" onClick={onSubmit}>Send</button>
+            <button disabled={avbryter} className="knapp blokk--s" onClick={onSubmit}>Send</button>
             <p><Link to={avbrytHref}>Avbryt</Link></p>
         </div>
     </div>);

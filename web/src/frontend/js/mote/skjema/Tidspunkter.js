@@ -12,8 +12,8 @@ const Tidspunkter = () => {
                 const datoName = `tidspunkter[${index}].dato`;
                 const klokkeslettName = `tidspunkter[${index}].klokkeslett`;
 
-                return (<div key={index} className="motetidspunkter__tidspunkt blokk--xl js-tidspunkt">
-                    <h4 className="typo-element blokk">Alternativ {index + 1}</h4>
+                return (<div key={index} className="motetidspunkter__tidspunkt blokk js-tidspunkt">
+                    <h4 className="typo-element blokk--s">Alternativ {index + 1}</h4>
                     <div className="blokk">
                         <div className="grid">
                             <div className="unit half">
