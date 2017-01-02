@@ -5,6 +5,7 @@ import LederFields, { ManuellUtfyltLeder } from './LederFields';
 import Tidspunkter from './Tidspunkter';
 import Sidetopp from '../../components/Sidetopp';
 import { Varselstripe } from 'digisyfo-npm';
+import { getCookieValue } from '../../utils/index';
 
 export function genererDato(dato, klokkeslett) {
     const s = new Date();
@@ -104,6 +105,7 @@ export const MotebookingSkjema = ({ handleSubmit, arbeidstaker, opprettMote, fnr
     const submit = (values) => {
         const data = getData(values);
         data.fnr = fnr;
+        data.navEnhet = getCookieValue('navEnhet');
         opprettMote(data);
     };
 
