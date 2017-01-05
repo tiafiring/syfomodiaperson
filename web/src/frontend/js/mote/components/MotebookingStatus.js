@@ -6,9 +6,9 @@ import { Varselstripe } from 'digisyfo-npm';
 import { Link } from 'react-router';
 
 const deltakertyper = {
-    arbeidsgiver: "Arbeidsgiver",
-    bruker: "Arbeidstaker",
-    arbeidstaker: "Arbeidstaker",
+    arbeidsgiver: 'Arbeidsgiver',
+    bruker: 'Arbeidstaker',
+    arbeidstaker: 'Arbeidstaker',
 };
 
 export const MotetidspunktValgt = ({ bekreftetTidspunkt }) => {
