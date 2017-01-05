@@ -5,6 +5,12 @@ import Sidetopp from '../../components/Sidetopp';
 import { Varselstripe } from 'digisyfo-npm';
 import { Link } from 'react-router';
 
+const deltakertyper = {
+    arbeidsgiver: "Arbeidsgiver",
+    bruker: "Arbeidstaker",
+    arbeidstaker: "Arbeidstaker",
+};
+
 export const MotetidspunktValgt = ({ bekreftetTidspunkt }) => {
     return <div className="motetidspunktValgt">Møtetidspunkt valgt, møteresultat sendt til arbeidsgiver {getDatoFraZulu(bekreftetTidspunkt)}.</div>;
 };
@@ -55,12 +61,9 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel }) => {
                 <tbody>
                     {
                         deltakere && deltakere
-                            .filter((deltaker) => {
-                                return deltaker.type === 'arbeidsgiver';
-                            })
                             .map((deltaker, index) => {
                                 return (<tr key={index}>
-                            <th className="motestatus__deltaker" scope="row"><strong>Arbeidsgiver</strong> <span>{deltaker.navn}</span></th>
+                            <th className="motestatus__deltaker" scope="row"><strong>{deltakertyper[deltaker.type.toLowerCase()]}</strong> <span>{deltaker.navn}</span></th>
                             {
                                     deltaker.svar.map((tidspunkt, index2) => {
                                         let className = 'motestatus__svar';
