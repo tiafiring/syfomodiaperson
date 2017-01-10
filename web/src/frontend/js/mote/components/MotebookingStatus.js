@@ -20,7 +20,7 @@ MotetidspunktValgt.propTypes = {
     bekreftetTidspunkt: PropTypes.string,
 };
 
-const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
+const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
     const { alternativer, deltakere } = mote;
     const deltakerEpost = deltakere ? deltakere[0].epost : '?';
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
@@ -30,9 +30,18 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, antallNyeTidspunkt
     const visVelgTidspunkt = mote.status === 'OPPRETTET' && arbeidsgiverDeltaker && arbeidsgiverDeltaker.svar.filter((svar) => {
         return svar.valgt;
     }).length > 0;
+    console.log("senderNyeAlternativ", senderNyeAlternativ);
+    console.log("nyeAlternativFeilet", nyeAlternativFeilet);
 
     const flereTidspunktBoks = antallNyeTidspunkt ?
-        <FlereTidspunktSkjema flereAlternativ={ flereAlternativ } opprettFlereAlternativ={ opprettFlereAlternativ } avbrytFlereAlternativ={ avbrytFlereAlternativ } antallEksisterendeTidspunkter={ mote.alternativer.length } antallNyeTidspunkt={ antallNyeTidspunkt } /> :
+        <FlereTidspunktSkjema mote={ mote }
+                              flereAlternativ={ flereAlternativ }
+                              opprettFlereAlternativ={ opprettFlereAlternativ }
+                              avbrytFlereAlternativ={ avbrytFlereAlternativ }
+                              senderNyeAlternativ = {senderNyeAlternativ}
+                              nyeAlternativFeilet = {nyeAlternativFeilet}
+                              antallEksisterendeTidspunkter={ mote.alternativer.length }
+                              antallNyeTidspunkt={ antallNyeTidspunkt } /> :
         null;
 
     return (<div>
@@ -148,6 +157,8 @@ MotebookingStatus.propTypes = {
     }),
     antallNyeTidspunkt: PropTypes.number,
     fnr: PropTypes.string,
+    senderNyeAlternativ: PropTypes.bool,
+    nyeAlternativFeilet: PropTypes.bool,
     avbrytMoteUtenVarsel: PropTypes.func,
     flereAlternativ: PropTypes.func,
     opprettFlereAlternativ: PropTypes.func,

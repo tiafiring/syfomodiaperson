@@ -89,10 +89,11 @@ export function opprettFlereAlternativBekreftet() {
     }
 }
 
-export function opprettFlereAlternativ(data) {
+export function opprettFlereAlternativ(data, moteUuid) {
     return {
         type: actions.OPPRETT_FLERE_ALTERNATIV_FORESPURT,
         data,
+        moteUuid,
     }
 }
 

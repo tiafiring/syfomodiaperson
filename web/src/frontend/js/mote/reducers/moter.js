@@ -6,6 +6,8 @@ const defaultState = {
     hentingFeilet: false,
     sender: false,
     sendingFeilet: false,
+    nyeAlternativFeilet: false,
+    senderNyeAlternativ: false,
     antallNyeTidspunkt: 0,
 };
 
@@ -48,7 +50,7 @@ export default function moter(state = defaultState, action) {
             });
         }
         case actions.HENTER_MOTER: {
-            return {
+            return Object.assign({}, state, {
                 data: [],
                 sender: false,
                 henter: true,
@@ -56,10 +58,10 @@ export default function moter(state = defaultState, action) {
                 sendingFeilet: false,
                 avbryter: false,
                 avbrytFeilet: false,
-            };
+            });
         }
         case actions.MOTER_HENTET: {
-            return {
+            return Object.assign({}, state, {
                 data: action.data,
                 sender: false,
                 henter: false,
@@ -67,10 +69,10 @@ export default function moter(state = defaultState, action) {
                 sendingFeilet: false,
                 avbryter: false,
                 avbrytFeilet: false,
-            };
+            });
         }
         case actions.HENT_MOTER_FEILET: {
-            return {
+            return Object.assign({}, state, {
                 data: [],
                 sender: false,
                 sendingFeilet: false,
@@ -78,7 +80,7 @@ export default function moter(state = defaultState, action) {
                 hentingFeilet: true,
                 avbryter: false,
                 avbrytFeilet: false,
-            };
+            });
         }
         case actions.AVBRYTER_MOTE: {
             return Object.assign({}, state, {
@@ -155,6 +157,25 @@ export default function moter(state = defaultState, action) {
         case actions.AVBRYT_FLERE_ALTERNATIV: {
             return Object.assign({}, state, {
                 antallNyeTidspunkt: undefined
+            });
+        }
+        case actions.OPPRETTER_FLERE_ALTERNATIV: {
+            return Object.assign({}, state, {
+                senderNyeAlternativ: true,
+                nyeAlternativFeilet: false,
+            });
+        }
+        case actions.OPPRETT_FLERE_ALTERNATIV_FEILET: {
+            return Object.assign({}, state, {
+                nyeAlternativFeilet: true,
+                senderNyeAlternativ: false,
+            });
+        }
+        case actions.OPPRETT_FLERE_ALTERNATIV_BEKREFTET: {
+            return Object.assign({}, state, {
+                antallNyeTidspunkt: undefined,
+                nyeAlternativFeilet: false,
+                senderNyeAlternativ: false,
             });
         }
         default: {

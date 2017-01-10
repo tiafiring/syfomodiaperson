@@ -47,11 +47,9 @@ export function* bekreftMote(action) {
 }
 
 export function* opprettFlereAlternativ(action) {
-    console.log("her");
-
     yield put(actions.oppretterFlereAlternativ());
     try {
-        yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.moteUuid}/nyealternativer`, action.data);
+        yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.moteUuid}/nyealternativer`, action.data.alternativer);
         yield put(actions.opprettFlereAlternativBekreftet(action.data));
     } catch (e) {
         yield put(actions.opprettFlereAlternativFeilet());

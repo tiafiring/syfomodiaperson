@@ -3,15 +3,22 @@ import Tidspunkter from '../skjema/Tidspunkter'
 import {Field, Fields, reduxForm} from 'redux-form';
 import {genererDato, erGyldigKlokkeslett, erGyldigDato} from '../utils/index';
 
-const FlereTidspunktSkjema = ({antallEksisterendeTidspunkter, antallNyeTidspunkt, opprettFlereAlternativ, flereAlternativ, avbrytFlereAlternativ, handleSubmit}) => {
+const FlereTidspunktSkjema = ({mote, antallEksisterendeTidspunkter, antallNyeTidspunkt, opprettFlereAlternativ, senderNyeAlternativ, nyeAlternativFeilet, flereAlternativ, avbrytFlereAlternativ, handleSubmit}) => {
     let nyeTidspunktListe = [];
     for (let i = 0; i < antallNyeTidspunkt; i++) {
         nyeTidspunktListe.push(i);
     }
     const submit = (values) => {
         const data = getData(values);
-        opprettFlereAlternativ(data);
+        data.alternativer.map(function (alternativ) {
+            alternativ.sted = mote.alternativer[0].sted;
+            return alternativ;
+        });
+        opprettFlereAlternativ(data, mote.moteUuid);
     };
+
+    console.log(senderNyeAlternativ);
+    console.log(nyeAlternativFeilet);
 
     return (
         <div>
@@ -20,7 +27,7 @@ const FlereTidspunktSkjema = ({antallEksisterendeTidspunkter, antallNyeTidspunkt
                 <div className="js-avbryt rammeknapp rammeknapp--mini" onClick={() => flereAlternativ()}>Flere alternativ
                     +
                 </div>
-                <input type="submit" className="knapp" value="Send"/>
+                <input type="submit" className="knapp" value="Send" disabled={senderNyeAlternativ}/>
             </form>
             <button onClick={() => avbrytFlereAlternativ()}>Avbryt</button>
         </div>
@@ -28,6 +35,7 @@ const FlereTidspunktSkjema = ({antallEksisterendeTidspunkter, antallNyeTidspunkt
 };
 
 FlereTidspunktSkjema.propTypes = {
+    mote: PropTypes.object,
     antallEksisterendeTidspunkter: PropTypes.number,
     antallNyeTidspunkt: PropTypes.number,
     flereAlternativ: PropTypes.func,

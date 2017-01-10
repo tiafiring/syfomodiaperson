@@ -28,6 +28,8 @@ export const mapStateToProps = (state, ownProps) => {
         avbryter: state.moter.avbryter,
         henter: state.moter.henter,
         antallNyeTidspunkt: state.moter.antallNyeTidspunkt,
+        nyeAlternativFeilet: state.moter.nyeAlternativFeilet,
+        senderNyeAlternativ: state.moter.senderNyeAlternativ,
     };
 };
 
