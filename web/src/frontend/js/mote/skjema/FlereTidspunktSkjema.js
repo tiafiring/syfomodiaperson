@@ -17,9 +17,6 @@ const FlereTidspunktSkjema = ({mote, antallEksisterendeTidspunkter, antallNyeTid
         opprettFlereAlternativ(data, mote.moteUuid);
     };
 
-    console.log(senderNyeAlternativ);
-    console.log(nyeAlternativFeilet);
-
     return (
         <div>
             <form className="fleretidspunkt" onSubmit={handleSubmit(submit)}>

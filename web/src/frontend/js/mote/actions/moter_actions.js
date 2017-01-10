@@ -83,9 +83,11 @@ export function avbrytFlereAlternativ() {
     }
 }
 
-export function opprettFlereAlternativBekreftet() {
+export function opprettFlereAlternativBekreftet(data, moteUuid) {
     return {
         type: actions.OPPRETT_FLERE_ALTERNATIV_BEKREFTET,
+        data,
+        moteUuid
     }
 }
 

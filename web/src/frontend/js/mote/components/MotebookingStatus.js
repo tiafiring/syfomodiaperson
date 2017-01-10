@@ -30,8 +30,6 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternati
     const visVelgTidspunkt = mote.status === 'OPPRETTET' && arbeidsgiverDeltaker && arbeidsgiverDeltaker.svar.filter((svar) => {
         return svar.valgt;
     }).length > 0;
-    console.log("senderNyeAlternativ", senderNyeAlternativ);
-    console.log("nyeAlternativFeilet", nyeAlternativFeilet);
 
     const flereTidspunktBoks = antallNyeTidspunkt ?
         <FlereTidspunktSkjema mote={ mote }

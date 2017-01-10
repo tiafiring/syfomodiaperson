@@ -103,7 +103,7 @@ export default function moter(state = defaultState, action) {
                 }
                 return mote;
             });
-            return Object.assign({}, state, { data }, {
+            return Object.assign({}, state, {data}, {
                 avbryter: false,
                 avbrytFeilet: false,
             });
@@ -129,7 +129,7 @@ export default function moter(state = defaultState, action) {
                 }
                 return mote;
             });
-            return Object.assign({}, state, { data }, {
+            return Object.assign({}, state, {data}, {
                 bekrefter: false,
                 bekreftFeilet: false,
                 avbryter: false,
@@ -172,6 +172,18 @@ export default function moter(state = defaultState, action) {
             });
         }
         case actions.OPPRETT_FLERE_ALTERNATIV_BEKREFTET: {
+            state.data.filter(function (mote) {
+                return mote.moteUuid === action.moteUuid;
+            }).map(function (mote) {
+                mote.alternativer.push.apply(mote.alternativer, action.data.alternativer);
+                mote.deltakere.forEach(function (deltaker) {
+                    action.data.alternativer.forEach(function(){
+                        deltaker.svar.push({ valgt: false });
+                    });
+                });
+                return mote;
+            });
+
             return Object.assign({}, state, {
                 antallNyeTidspunkt: undefined,
                 nyeAlternativFeilet: false,
