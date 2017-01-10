@@ -5,22 +5,7 @@ import LederFields, { ManuellUtfyltLeder } from './LederFields';
 import Tidspunkter from './Tidspunkter';
 import Sidetopp from '../../components/Sidetopp';
 import { Varselstripe } from 'digisyfo-npm';
-
-export function genererDato(dato, klokkeslett) {
-    const s = new Date();
-    const datoArr = dato.split('.');
-    const klokkeslettArr = klokkeslett.split('.');
-    const aar = datoArr[2];
-    const aarPadded = aar.length === 2 ? `20${aar}` : aar;
-    s.setDate(datoArr[0]);
-    s.setMonth(parseInt(datoArr[1], 10) - 1);
-    s.setYear(aarPadded);
-    s.setHours(klokkeslettArr[0]);
-    s.setMinutes(klokkeslettArr[1]);
-    s.setSeconds('00');
-    s.setMilliseconds('000');
-    return s.toJSON();
-}
+import { genererDato, erGyldigKlokkeslett, erGyldigEpost, erGyldigDato } from '../utils/index';
 
 export function getData(values) {
     const deltaker = Object.assign({}, values.deltakere[0], {
@@ -177,21 +162,6 @@ MotebookingSkjema.propTypes = {
     hentLedereFeiletBool: PropTypes.bool,
     arbeidstaker: PropTypes.object,
 };
-
-function erGyldigEpost(email) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-}
-
-function erGyldigKlokkeslett(klokkeslett) {
-    const re = /^([0-9]|0[0-9]|1[0-9]|2[0-3])\.[0-5][0-9]$/;
-    return re.test(klokkeslett);
-}
-
-function erGyldigDato(dato) {
-    const re = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
-    return re.test(dato);
-}
 
 export function validate(values, props) {
     const feilmeldinger = {};

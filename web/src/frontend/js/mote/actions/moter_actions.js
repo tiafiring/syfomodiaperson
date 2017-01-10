@@ -71,6 +71,43 @@ export function avbrytMoteUtenVarsel(uuid, fnr) {
     };
 }
 
+export function flereAlternativ() {
+    return {
+        type: actions.FLERE_ALTERNATIV,
+    }
+}
+
+export function avbrytFlereAlternativ() {
+    return {
+        type: actions.AVBRYT_FLERE_ALTERNATIV,
+    }
+}
+
+export function opprettFlereAlternativBekreftet() {
+    return {
+        type: actions.OPPRETT_FLERE_ALTERNATIV_BEKREFTET,
+    }
+}
+
+export function opprettFlereAlternativ(data) {
+    return {
+        type: actions.OPPRETT_FLERE_ALTERNATIV_FORESPURT,
+        data,
+    }
+}
+
+export function opprettFlereAlternativFeilet() {
+    return {
+        type: actions.OPPRETT_FLERE_ALTERNATIV_FEILET,
+    }
+}
+
+export function oppretterFlereAlternativ() {
+    return {
+        type: actions.OPPRETTER_FLERE_ALTERNATIV,
+    }
+}
+
 export function moteAvbrutt(uuid) {
     return {
         type: actions.MOTE_AVBRUTT,

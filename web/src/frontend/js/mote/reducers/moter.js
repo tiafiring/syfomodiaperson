@@ -6,6 +6,7 @@ const defaultState = {
     hentingFeilet: false,
     sender: false,
     sendingFeilet: false,
+    antallNyeTidspunkt: 0,
 };
 
 export default function moter(state = defaultState, action) {
@@ -137,6 +138,23 @@ export default function moter(state = defaultState, action) {
             return Object.assign({}, state, {
                 bekrefter: false,
                 bekreftFeilet: true,
+            });
+        }
+        case actions.FLERE_ALTERNATIV: {
+            let antallNyeTidspunkt;
+            if (!state.antallNyeTidspunkt) {
+                antallNyeTidspunkt = 2;
+            } else {
+                antallNyeTidspunkt = state.antallNyeTidspunkt + 1;
+            }
+
+            return Object.assign({}, state, {
+                antallNyeTidspunkt: antallNyeTidspunkt
+            });
+        }
+        case actions.AVBRYT_FLERE_ALTERNATIV: {
+            return Object.assign({}, state, {
+                antallNyeTidspunkt: undefined
             });
         }
         default: {

@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import MotebookingIkon from './MotebookingIkon';
-import { getTidFraZulu, getDatoFraZulu } from '../utils';
+import { getTidFraZulu, getDatoFraZulu } from '../utils/index';
 import Sidetopp from '../../components/Sidetopp';
+import FlereTidspunktSkjema from '../skjema/FlereTidspunktSkjema';
 import { Varselstripe } from 'digisyfo-npm';
 import { Link } from 'react-router';
 
@@ -19,7 +20,7 @@ MotetidspunktValgt.propTypes = {
     bekreftetTidspunkt: PropTypes.string,
 };
 
-const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel }) => {
+const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
     const { alternativer, deltakere } = mote;
     const deltakerEpost = deltakere ? deltakere[0].epost : '?';
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
@@ -29,6 +30,10 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel }) => {
     const visVelgTidspunkt = mote.status === 'OPPRETTET' && arbeidsgiverDeltaker && arbeidsgiverDeltaker.svar.filter((svar) => {
         return svar.valgt;
     }).length > 0;
+
+    const flereTidspunktBoks = antallNyeTidspunkt ?
+        <FlereTidspunktSkjema flereAlternativ={ flereAlternativ } opprettFlereAlternativ={ opprettFlereAlternativ } avbrytFlereAlternativ={ avbrytFlereAlternativ } antallEksisterendeTidspunkter={ mote.alternativer.length } antallNyeTidspunkt={ antallNyeTidspunkt } /> :
+        null;
 
     return (<div>
         <div className="panel">
@@ -110,7 +115,11 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel }) => {
                         </tr>
                     </tfoot>
                 }
-            </table>
+                <button className="js-avbryt rammeknapp rammeknapp--mini" onClick={() => {
+                    flereAlternativ();
+                }}>+ Legg til tidspunkt</button>
+            </table> { flereTidspunktBoks }
+
             <div>
                 <Link role="button" className="js-avbryt rammeknapp rammeknapp--mini" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>Avbryt møte</Link>
             </div>
@@ -121,6 +130,7 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel }) => {
             }}>Nytt møte</button>
         </div>
     </div>);
+
 };
 
 MotebookingStatus.propTypes = {
@@ -136,8 +146,12 @@ MotebookingStatus.propTypes = {
             type: PropTypes.string,
         })),
     }),
+    antallNyeTidspunkt: PropTypes.number,
     fnr: PropTypes.string,
     avbrytMoteUtenVarsel: PropTypes.func,
+    flereAlternativ: PropTypes.func,
+    opprettFlereAlternativ: PropTypes.func,
+    avbrytFlereAlternativ: PropTypes.func,
 };
 
 export default MotebookingStatus;

@@ -27,9 +27,12 @@ export const mapStateToProps = (state, ownProps) => {
         avbrytFeilet: state.moter.avbrytFeilet,
         avbryter: state.moter.avbryter,
         henter: state.moter.henter,
+        antallNyeTidspunkt: state.moter.antallNyeTidspunkt,
     };
 };
 
 const MotestatusContainer = connect(mapStateToProps, moteActions)(MotebookingStatusWrapper);
 
 export default MotestatusContainer;
+
+

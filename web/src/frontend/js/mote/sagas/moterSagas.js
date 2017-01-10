@@ -46,6 +46,22 @@ export function* bekreftMote(action) {
     }
 }
 
+export function* opprettFlereAlternativ(action) {
+    console.log("her");
+
+    yield put(actions.oppretterFlereAlternativ());
+    try {
+        yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.moteUuid}/nyealternativer`, action.data);
+        yield put(actions.opprettFlereAlternativBekreftet(action.data));
+    } catch (e) {
+        yield put(actions.opprettFlereAlternativFeilet());
+    }
+}
+
+export function* watchOpprettFlereAlternativ() {
+    yield* takeEvery('OPPRETT_FLERE_ALTERNATIV_FORESPURT', opprettFlereAlternativ);
+}
+
 function* watchOpprettMote() {
     yield* takeEvery('OPPRETT_MOTE_FORESPURT', opprettMote);
 }
@@ -73,5 +89,6 @@ export default function* moterSagas() {
         fork(watchAvbrytMote),
         fork(watchBekreftMote),
         fork(watchMoteOpprettet),
+        fork(watchOpprettFlereAlternativ),
     ];
 }
