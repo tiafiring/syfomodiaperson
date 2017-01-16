@@ -1,11 +1,11 @@
-import React, { PropTypes } from 'react';
-import { Field, Fields, reduxForm } from 'redux-form';
+import React, {PropTypes} from 'react';
+import {Field, Fields, reduxForm} from 'redux-form';
 import TextField from '../../components/TextField';
-import LederFields, { ManuellUtfyltLeder } from './LederFields';
+import LederFields, {ManuellUtfyltLeder} from './LederFields';
 import Tidspunkter from './Tidspunkter';
 import Sidetopp from '../../components/Sidetopp';
-import { Varselstripe } from 'digisyfo-npm';
-import { genererDato, erGyldigKlokkeslett, erGyldigEpost, erGyldigDato } from '../utils/index';
+import {Varselstripe} from 'digisyfo-npm';
+import {genererDato, erGyldigKlokkeslett, erGyldigEpost, erGyldigDato} from '../utils/index';
 
 export function getData(values) {
     const deltaker = Object.assign({}, values.deltakere[0], {
@@ -22,37 +22,45 @@ export function getData(values) {
 
     return {
         alternativer,
-        deltakere: [Object.assign(deltaker, { svar: alternativer, avvik: [] })],
+        deltakere: [Object.assign(deltaker, {svar: alternativer, avvik: []})],
     };
 }
 
-export const KontaktinfoFeilmelding = ({ feilAarsak }) => {
+
+
+
+const feilAarsakForklaringFunc = (feilAarsak) => {
+    switch (feilAarsak) {
+        case 'RESERVERT': {
+            return <p>Den sykmeldte har reservert seg mot elektronisk kommunikasjon med det offentlige. Du kan fortsatt
+                sende møteforespørsel til arbeidsgiveren digitalt, men den sykmeldte må kontaktes på annen måte.</p>;
+        }
+        case 'INGEN_KONTAKTINFORMASJON': {
+            return (<div>
+                <p>Den sykmeldte er ikke registrert i Kontakt- og reservasjonsregisteret (KRR). Du kan fortsatt sende
+                    møteforespørsel til arbeidsgiveren digitalt, men den sykmeldte må kontaktes på annen måte.</p>
+                <p>Den sykmeldte kan registrere kontaktinformasjonen sin her: <a target="_blank"
+                                                                                 href="http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din">http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din</a>
+                </p>
+            </div>);
+        }
+        case 'KODE6': {
+            return <p>Den sykmeldte er registrert med skjermingskode 6.</p>;
+        }
+        case 'KODE7': {
+            return <p>Den sykmeldte er registrert med skjermingskode 7.</p>;
+        }
+        default: {
+            return <p />;
+        }
+    }
+};
+
+export const KontaktinfoFeilmelding = ({feilAarsak}) => {
+    const feilAarsakForklaring = feilAarsakForklaringFunc(feilAarsak);
     return (<div className="panel">
         <div className="hode hode-informasjon">
-        {
-            (() => {
-                switch (feilAarsak.toUpperCase()) {
-                    case 'RESERVERT': {
-                        return <p>Den sykmeldte har reservert seg mot elektronisk kommunikasjon med det offentlige. Du kan fortsatt sende møteforespørsel til arbeidsgiveren digitalt, men den sykmeldte må kontaktes på annen måte.</p>;
-                    }
-                    case 'INGEN_KONTAKTINFORMASJON': {
-                        return (<div>
-                            <p>Den sykmeldte er ikke registrert i Kontakt- og reservasjonsregisteret (KRR). Du kan fortsatt sende møteforespørsel til arbeidsgiveren digitalt, men den sykmeldte må kontaktes på annen måte.</p>
-                            <p>Den sykmeldte kan registrere kontaktinformasjonen sin her: <a target="_blank"href="http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din">http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din</a></p>
-                        </div>);
-                    }
-                    case 'KODE6': {
-                        return <p>Den sykmeldte er registrert med skjermingskode 6.</p>;
-                    }
-                    case 'KODE7': {
-                        return <p>Den sykmeldte er registrert med skjermingskode 7.</p>;
-                    }
-                    default: {
-                        return <p />;
-                    }
-                }
-            })
-        }
+            { feilAarsakForklaring }
         </div>
     </div>);
 };
@@ -61,7 +69,7 @@ KontaktinfoFeilmelding.propTypes = {
     feilAarsak: PropTypes.string,
 };
 
-export const Arbeidstaker = ({ navn, kontaktinfo }) => {
+export const Arbeidstaker = ({navn, kontaktinfo}) => {
     return (<div className="arbeidstakersOpplysninger skjema-fieldset blokk--xl">
         <legend>2. Arbeidstakers opplysninger</legend>
         <div className="nokkelopplysning">
@@ -84,8 +92,10 @@ Arbeidstaker.propTypes = {
     kontaktinfo: PropTypes.object,
 };
 
-export const MotebookingSkjema = ({ handleSubmit, arbeidstaker, opprettMote, fnr, sender, sendingFeilet, ledere,
-    autofill, untouch, hentLedereFeiletBool }) => {
+export const MotebookingSkjema = ({
+    handleSubmit, arbeidstaker, opprettMote, fnr, sender, sendingFeilet, ledere,
+    autofill, untouch, hentLedereFeiletBool
+}) => {
     const submit = (values) => {
         const data = getData(values);
         data.fnr = fnr;
@@ -96,14 +106,15 @@ export const MotebookingSkjema = ({ handleSubmit, arbeidstaker, opprettMote, fnr
     const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
 
     return (<div>
-        { !visArbeidstaker && <KontaktinfoFeilmelding feilAarsak={feilAarsak} /> }
+        { !visArbeidstaker && <KontaktinfoFeilmelding feilAarsak={feilAarsak}/> }
         <form className="panel" onSubmit={handleSubmit(submit)}>
-            <Sidetopp tittel="Møteforespørsel" />
+            <Sidetopp tittel="Møteforespørsel"/>
 
             {
                 hentLedereFeiletBool && <div className="blokk">
                     <Varselstripe>
-                        <p>Beklager, det oppstod en feil ved uthenting av nærmeste leder. Du kan likevel sende møteforespøsel.</p>
+                        <p>Beklager, det oppstod en feil ved uthenting av nærmeste leder. Du kan likevel sende
+                            møteforespøsel.</p>
                     </Varselstripe>
                 </div>
             }
@@ -116,7 +127,7 @@ export const MotebookingSkjema = ({ handleSubmit, arbeidstaker, opprettMote, fnr
                         untouch={untouch}
                         names={['arbeidsgiverType', 'deltakere[0].navn', 'deltakere[0].epost', 'deltakere[0].orgnummer']}
                         ledere={ledere}
-                        component={LederFields} />
+                        component={LederFields}/>
                 }
                 {
                     ledere.length === 0 && <ManuellUtfyltLeder />
@@ -129,14 +140,15 @@ export const MotebookingSkjema = ({ handleSubmit, arbeidstaker, opprettMote, fnr
                 <legend>{visArbeidstaker ? '3.' : '2.'} Velg dato, tid og sted</legend>
                 <Tidspunkter />
                 <label htmlFor="sted">Sted</label>
-                <Field id="sted" component={TextField} name="sted" className="input--xxl js-sted" placeholder="Skriv møtested eller om det er et videomøte" />
+                <Field id="sted" component={TextField} name="sted" className="input--xxl js-sted"
+                       placeholder="Skriv møtested eller om det er et videomøte"/>
             </fieldset>
 
             <div aria-live="polite" role="alert">
                 { sendingFeilet && <div className="panel panel--ramme">
                     <div className="varselstripe varselstripe--feil">
                         <div className="varselstripe__ikon">
-                            <img src="/sykefravaer/img/svg/utropstegn.svg" />
+                            <img src="/sykefravaer/img/svg/utropstegn.svg"/>
                         </div>
                         <p className="sist">Beklager, det oppstod en feil. Prøv igjen litt senere.</p>
                     </div>
@@ -144,7 +156,7 @@ export const MotebookingSkjema = ({ handleSubmit, arbeidstaker, opprettMote, fnr
             </div>
 
             <div className="knapperad blokk">
-                <input type="submit" className="knapp" value="Send" disabled={sender} />
+                <input type="submit" className="knapp" value="Send" disabled={sender}/>
             </div>
         </form>
     </div>);
