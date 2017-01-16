@@ -33,7 +33,6 @@ const fikkIkkeMoteOpprettetVarsel = (deltaker) => {
 const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
     const { alternativer } = mote;
     let { deltakere } = mote;
-    const deltakerEpost = deltakere ? deltakere[0].epost : '?';
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
     const arbeidsgiverDeltaker = deltakere.filter((deltaker) => {
         return deltaker.type === 'arbeidsgiver';
@@ -60,11 +59,18 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternati
                               antallNyeTidspunkt={ antallNyeTidspunkt } /> :
         null;
 
+    let sendtTil = 'Møteforespørselen ble sendt til ';
+    let navneliste = [];
+    deltakere.forEach(deltaker => {
+        navneliste.push(deltaker.navn);
+    });
+    sendtTil += navneliste.join(" og ");
+
     return (<div>
         <div className="panel">
             <Varselstripe type="suksess">
                 <div>
-                    <p className="typo-element">Møteforespørselen er sendt til {deltakerEpost}</p>
+                    <p className="typo-element">{sendtTil}</p>
                     <p className="sist">Sendt: {sendtDato}</p>
                 </div>
             </Varselstripe>
