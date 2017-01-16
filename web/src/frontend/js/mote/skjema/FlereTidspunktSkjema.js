@@ -21,7 +21,7 @@ const FlereTidspunktSkjema = ({mote, antallEksisterendeTidspunkter, antallNyeTid
         <div>
             <form className="fleretidspunkt" onSubmit={handleSubmit(submit)}>
                 <Tidspunkter tidspunktNummerOffset={antallEksisterendeTidspunkter} tidspunker={nyeTidspunktListe}/>
-                <div className="js-avbryt rammeknapp rammeknapp--mini" onClick={() => flereAlternativ()}>Flere alternativ
+                <div className="js-nyetidspunkt rammeknapp rammeknapp--mini" onClick={() => flereAlternativ()}>Flere alternativ
                     +
                 </div>
                 <input type="submit" className="knapp" value="Send" disabled={senderNyeAlternativ}/>

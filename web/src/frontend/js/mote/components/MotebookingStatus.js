@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import MotebookingIkon from './MotebookingIkon';
 import { getTidFraZulu, getDatoFraZulu } from '../utils/index';
 import Sidetopp from '../../components/Sidetopp';
+import KontaktInfoFeilmelding from './KontaktInfoFeilmelding';
 import FlereTidspunktSkjema from '../skjema/FlereTidspunktSkjema';
 import { Varselstripe } from 'digisyfo-npm';
 import { Link } from 'react-router';
@@ -20,8 +21,18 @@ MotetidspunktValgt.propTypes = {
     bekreftetTidspunkt: PropTypes.string,
 };
 
+
+const fikkIkkeMoteOpprettetVarsel = (deltaker) => {
+    const hendelser = deltaker.hendelser || [];
+    return hendelser.filter(hendelse => {
+        return hendelse.resultat !== 'OK' && hendelse.varseltype === 'OPPRETTET';
+    })[0];
+};
+
+
 const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
-    const { alternativer, deltakere } = mote;
+    const { alternativer } = mote;
+    let { deltakere } = mote;
     const deltakerEpost = deltakere ? deltakere[0].epost : '?';
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
     const arbeidsgiverDeltaker = deltakere.filter((deltaker) => {
@@ -30,6 +41,13 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternati
     const visVelgTidspunkt = mote.status === 'OPPRETTET' && arbeidsgiverDeltaker && arbeidsgiverDeltaker.svar.filter((svar) => {
         return svar.valgt;
     }).length > 0;
+
+    const arbeidstaker = deltakere.filter(deltaker => { return deltaker.type === 'Bruker' })[0];
+    const feilmelding = arbeidstaker && fikkIkkeMoteOpprettetVarsel(arbeidstaker);
+
+    if (feilmelding) {
+        deltakere = deltakere.filter(deltaker => { return deltaker !== arbeidstaker })
+    }
 
     const flereTidspunktBoks = antallNyeTidspunkt ?
         <FlereTidspunktSkjema mote={ mote }
@@ -51,6 +69,9 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternati
                 </div>
             </Varselstripe>
         </div>
+        {
+            feilmelding && <KontaktInfoFeilmelding feilAarsak={feilmelding.resultat} />
+        }
         <div className="panel">
             <Sidetopp tittel="Status for møteforespørselen" />
             <h4 className="typo-undertittel blokk-s">Møtested</h4>
@@ -122,7 +143,7 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternati
                         </tr>
                     </tfoot>
                 }
-                <button className="js-avbryt rammeknapp rammeknapp--mini" onClick={() => {
+                <button className="js-nyetidspunkt rammeknapp rammeknapp--mini" onClick={() => {
                     flereAlternativ();
                 }}>+ Legg til tidspunkt</button>
             </table> { flereTidspunktBoks }
