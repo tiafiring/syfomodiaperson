@@ -30,7 +30,7 @@ const feilAarsakForklaringFunc = (feilAarsak) => {
 const KontaktInfoFeilmelding = ({feilAarsak}) => {
     const feilAarsakForklaring = feilAarsakForklaringFunc(feilAarsak);
     return (<div className="panel">
-        <div className="hode hode-informasjon">
+        <div className="hode hode-feil">
             { feilAarsakForklaring }
         </div>
     </div>);
