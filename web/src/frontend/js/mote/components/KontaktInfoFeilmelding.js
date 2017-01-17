@@ -27,7 +27,7 @@ const feilAarsakForklaringFunc = (feilAarsak) => {
     }
 };
 
-const KontaktinfoFeilmelding = ({feilAarsak}) => {
+const KontaktInfoFeilmelding = ({feilAarsak}) => {
     const feilAarsakForklaring = feilAarsakForklaringFunc(feilAarsak);
     return (<div className="panel">
         <div className="hode hode-informasjon">
@@ -36,8 +36,8 @@ const KontaktinfoFeilmelding = ({feilAarsak}) => {
     </div>);
 };
 
-KontaktinfoFeilmelding.propTypes = {
+KontaktInfoFeilmelding.propTypes = {
     feilAarsak: PropTypes.string,
 };
 
-export default KontaktinfoFeilmelding;
+export default KontaktInfoFeilmelding;
