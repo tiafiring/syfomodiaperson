@@ -6,7 +6,6 @@ import Side from "../sider/Side";
 import AvbrytMote from "../mote/components/AvbrytMote";
 import history from "../history";
 import * as moterActions from "../mote/actions/moter_actions";
-import * as epostinnholdActions from "../mote/actions/epostinnhold_actions";
 import {connect} from "react-redux";
 
 export class AvbrytMoteSide extends Component {
@@ -43,11 +42,8 @@ export class AvbrytMoteSide extends Component {
     }
 
     hentInnhold() {
-        const { epostinnhold, mote } = this.props;
-        if (!epostinnhold && mote) {
-            const arbeidsgiverDeltaker = this.getArbeidsgiverDeltaker();
-            this.props.hentAvbrytMoteEpostinnhold(arbeidsgiverDeltaker.deltakerUuid);
-        } else if (!mote) {
+        const { mote } = this.props;
+        if (!mote) {
             this.props.hentMoter(this.props.fnr);
         }
     }
@@ -58,7 +54,7 @@ export class AvbrytMoteSide extends Component {
     }
 
     render() {
-        const { avbryter, avbrytFeilet, hentingFeiletBool, fnr, mote, henterMoterBool, henterEpostinnholdBool, epostinnhold } = this.props;
+        const { avbryter, avbrytFeilet, hentingFeiletBool, fnr, mote, henterMoterBool } = this.props;
         const arbeidsgiverDeltaker = this.getArbeidsgiverDeltaker();
         const sykmeldtDeltaker = this.getSykmeldtDeltaker();
 
@@ -75,9 +71,6 @@ export class AvbrytMoteSide extends Component {
                         history.replace(`/sykefravaer/${fnr}/mote`);
                     }}>
                         {(() => {
-                            if (henterEpostinnholdBool || !epostinnhold) {
-                                return <AppSpinner />;
-                            }
                             return (<AvbrytMote avbrytFeilet={avbrytFeilet} sykmeldtDeltaker={sykmeldtDeltaker} avbryter={avbryter} deltaker={arbeidsgiverDeltaker} onSubmit={() => {
                                 this.avbrytMote();
                             }} avbrytHref={`/sykefravaer/${fnr}/mote`} />);
@@ -92,14 +85,11 @@ export class AvbrytMoteSide extends Component {
 }
 
 AvbrytMoteSide.propTypes = {
-    epostinnhold: PropTypes.object,
     avbryter: PropTypes.bool,
     fnr: PropTypes.string,
     henterMoterBool: PropTypes.bool,
-    henterEpostinnholdBool: PropTypes.bool,
     hentingFeiletBool: PropTypes.bool,
     mote: PropTypes.object,
-    hentAvbrytMoteEpostinnhold: PropTypes.func,
     hentMoter: PropTypes.func,
     avbrytMote: PropTypes.func,
     avbrytFeilet: PropTypes.bool,
@@ -116,12 +106,10 @@ export function mapStateToProps(state, ownProps) {
         avbryter: state.moter.avbryter,
         avbrytFeilet: state.moter.avbrytFeilet,
         henterMoterBool: state.moter.henter,
-        henterEpostinnholdBool: state.epostinnhold.henter,
-        hentingFeiletBool: state.moter.hentingFeilet || state.epostinnhold.hentingFeilet,
-        epostinnhold: state.epostinnhold.eposttype === 'AVBRYT_TIDSPUNKT' ? state.epostinnhold.data : undefined,
+        hentingFeiletBool: state.moter.hentingFeilet,
     };
 }
 
-const AvbrytMoteContainer = connect(mapStateToProps, Object.assign({}, moterActions, epostinnholdActions))(AvbrytMoteSide);
+const AvbrytMoteContainer = connect(mapStateToProps, Object.assign({}, moterActions))(AvbrytMoteSide);
 
 export default AvbrytMoteContainer;

@@ -1,23 +1,19 @@
-import React from 'react';
-import { expect } from 'chai';
-import { mount, shallow, render } from 'enzyme';
-import MotestatusContainer from '../../js/mote/containers/MotestatusContainer';
-import { mapStateToProps, BekreftMoteSide } from '../../js/containers/BekreftMoteContainer';
-import AppSpinner from '../../js/components/AppSpinner';
-import BekreftMote from '../../js/mote/components/BekreftMote';
-import sinon from 'sinon';
+import React from "react";
+import {expect} from "chai";
+import {mount, shallow, render} from "enzyme";
+import {mapStateToProps, BekreftMoteSide} from "../../js/containers/BekreftMoteContainer";
+import BekreftMote from "../../js/mote/components/BekreftMote";
+import sinon from "sinon";
 
 describe("BekreftMoteContainer", () => {
 
     describe("BekreftMoteSide", () => {
 
-        let hentBekreftMoteEpostinnhold;
         let hentMoter;
         let bekreftMote;
         let deltaker;
 
         beforeEach(() => {
-            hentBekreftMoteEpostinnhold = sinon.spy();
             hentMoter = sinon.spy();
             bekreftMote = sinon.spy();
             deltaker = {
@@ -28,11 +24,14 @@ describe("BekreftMoteContainer", () => {
         it("Skal ha en onSubmit-funksjon som kaller på bekreftMote() med riktige argumenter", () => {
             const mote = {
                 moteUuid: "Olsen",
+                deltakere: [{
+                    type: "Bruker"
+                }]
             };
             const alternativ = {
                 id: 4545
             }
-            const compo = shallow(<BekreftMoteSide fnr="***REMOVED***" bekreftMote={bekreftMote} alternativ={alternativ} mote={mote} deltaker={deltaker} hentBekreftMoteEpostinnhold={hentBekreftMoteEpostinnhold} />);
+            const compo = shallow(<BekreftMoteSide fnr="***REMOVED***" bekreftMote={bekreftMote} alternativ={alternativ} mote={mote} deltaker={deltaker} />);
             compo.instance().onSubmit();
             expect(bekreftMote.getCall(0).args).to.deep.equal(["Olsen", 4545, "***REMOVED***"]);
         });
@@ -52,14 +51,8 @@ describe("BekreftMoteContainer", () => {
                     status: "OPPRETTET",
                     moteUuid: "123"
                 }
-                compo = shallow(<BekreftMoteSide hentMoter={hentMoter} hentBekreftMoteEpostinnhold={hentBekreftMoteEpostinnhold} alternativ={alternativ} mote={mote} deltaker={deltaker} />)
+                compo = shallow(<BekreftMoteSide hentMoter={hentMoter} alternativ={alternativ} mote={mote} deltaker={deltaker} />)
             })
-
-            it("Skal kalle på hentBekreftMoteEpostinnhold", () => {
-                expect(hentBekreftMoteEpostinnhold.calledWith("123", 328)).to.be.true;
-                expect(hentMoter.called).to.be.false
-            });
-
         });
 
         describe("Dersom alternativ ikke finnes", () => {
@@ -67,38 +60,18 @@ describe("BekreftMoteContainer", () => {
             let compo; 
 
             beforeEach(() => {
-                compo = shallow(<BekreftMoteSide hentMoter={hentMoter} hentBekreftMoteEpostinnhold={hentBekreftMoteEpostinnhold} deltaker={deltaker} fnr="5566" />)
+                compo = shallow(<BekreftMoteSide hentMoter={hentMoter} deltaker={deltaker} fnr="5566" />)
             })
 
             it("Skal hente møter", () => {
                 expect(hentMoter.calledWith("5566")).to.be.true;
             });
 
-            it("Skal dernest hente epostinnhold og vise spinner", () => {
-                compo.setProps({
-                    alternativ: {
-                        "id": 328,
-                        "tid": "2020-12-12T11:00:00Z",
-                        "sted": "Oslo ",
-                        "valgt": false
-                    }, 
-                    mote: {
-                        moteUuid: "8877",
-                        status: "OPPRETTET",
-                    }
-                });
-                compo.instance().componentDidUpdate({});
-                expect(hentBekreftMoteEpostinnhold.calledOnce).to.be.true;
-                expect(hentBekreftMoteEpostinnhold.getCall(0).args).to.deep.equal(["123", 328])
-                expect(compo.find(AppSpinner)).to.have.length(1);
-            });
-
         });
 
-        describe("Når alternativ og epostinnhold finnes", () => {
+        describe("Når alternativ finnes", () => {
 
             let compo;
-            let epostinnhold;
             let mote;
             let alternativ
 
@@ -112,18 +85,16 @@ describe("BekreftMoteContainer", () => {
                 mote = {
                     moteUuid: "123",
                     status: "OPPRETTET",
+                    deltakere: [{
+                        type: "Bruker"
+                    }]
                 }
-                epostinnhold = {
-                    emne: "1",
-                    innhold: "2"
-                }
-                compo = shallow(<BekreftMoteSide epostinnhold={epostinnhold} hentMoter={hentMoter} hentBekreftMoteEpostinnhold={hentBekreftMoteEpostinnhold} alternativ={alternativ} mote={mote} deltaker={deltaker} />)
+                compo = shallow(<BekreftMoteSide hentMoter={hentMoter} alternativ={alternativ} mote={mote} deltaker={deltaker} />)
             })
 
 
             it("Skal vise BekreftMote", () => {
                 expect(compo.find(BekreftMote)).to.have.length(1);
-                expect(compo.find(BekreftMote).prop("epostinnhold")).to.deep.equal(epostinnhold);
                 expect(typeof compo.find(BekreftMote).prop("onSubmit")).to.equal("function");
                 expect(compo.find(BekreftMote).prop("deltaker")).to.deep.equal(deltaker)
             });
@@ -143,9 +114,6 @@ describe("BekreftMoteContainer", () => {
                 }
             };
             state = {
-                epostinnhold: {
-
-                },
                 moter: {
                     data: [{
                         "id": 1,
@@ -167,6 +135,23 @@ describe("BekreftMoteContainer", () => {
                                 "valgt": false
                             }, {
                                 "id": 329,
+                                "tid": "2020-09-09T07:00:00Z",
+                                "sted": "Oslo ",
+                                "valgt": false
+                            }]
+                        }, {
+                            "deltakerUuid": "85a12263-d955-4103-b172-bf135df5f37b",
+                            "navn": "Andreas Arbeidstaker",
+                            "epost": "***REMOVED***",
+                            "type": "Bruker",
+                            "avvik": [],
+                            "svar": [{
+                                "id": 330,
+                                "tid": "2020-12-12T11:00:00Z",
+                                "sted": "Oslo ",
+                                "valgt": false
+                            }, {
+                                "id": 331,
                                 "tid": "2020-09-09T07:00:00Z",
                                 "sted": "Oslo ",
                                 "valgt": false
@@ -246,36 +231,6 @@ describe("BekreftMoteContainer", () => {
             const props = mapStateToProps(state, ownProps);
             expect(props.henterMoterBool).to.be.true;
         });
-
-        it("Skal returnere henterEpostinnholdBool når det hentes epostinnhold", () => {
-            state.epostinnhold.henter = true;
-            const props = mapStateToProps(state, ownProps);
-            expect(props.henterEpostinnholdBool).to.be.true;
-        });
-
-        it("Skal returnere epostinnhold når eposttype = 'BEKREFT_TIDSPUNKT'", () => {
-            state.epostinnhold.data = {
-                emne: "1",
-                innhold: "2"
-            };
-            state.epostinnhold.eposttype = "BEKREFT_TIDSPUNKT";
-            const props = mapStateToProps(state, ownProps);
-            expect(props.epostinnhold).to.deep.equal({
-                emne: "1",
-                innhold: "2"
-            })
-        });
-
-        it("Skal returnere epostinnhold når eposttype = 'OLSEN'", () => {
-            state.epostinnhold.data = {
-                emne: "1",
-                innhold: "2"
-            };
-            state.epostinnhold.eposttype = "OLSEN";
-            const props = mapStateToProps(state, ownProps);
-            expect(props.epostinnhold).to.be.undefined;
-        });
-
     });
 
 });

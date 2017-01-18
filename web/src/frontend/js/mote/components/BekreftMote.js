@@ -3,7 +3,6 @@ import {Link} from "react-router";
 import {fikkMoteOpprettetVarsel} from "../utils/index";
 
 const BekreftMote = ({ deltaker, sykmeldtDeltaker, onSubmit, avbrytHref }) => {
-    console.log(sykmeldtDeltaker);
     return (<div className="epostinnhold">
         <h2 className="typo-innholdstittel">Send møteresultat</h2>
 
