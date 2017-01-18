@@ -1,13 +1,13 @@
-import React, { Component, PropTypes } from 'react';
-import AppSpinner from '../components/AppSpinner';
-import Lightbox from '../components/Lightbox';
-import Feilmelding from '../components/Feilmelding';
-import Side from '../sider/Side';
-import AvbrytMote from '../mote/components/AvbrytMote';
-import history from '../history';
-import * as moterActions from '../mote/actions/moter_actions';
-import * as epostinnholdActions from '../mote/actions/epostinnhold_actions';
-import { connect } from 'react-redux';
+import React, {Component, PropTypes} from "react";
+import AppSpinner from "../components/AppSpinner";
+import Lightbox from "../components/Lightbox";
+import Feilmelding from "../components/Feilmelding";
+import Side from "../sider/Side";
+import AvbrytMote from "../mote/components/AvbrytMote";
+import history from "../history";
+import * as moterActions from "../mote/actions/moter_actions";
+import * as epostinnholdActions from "../mote/actions/epostinnhold_actions";
+import {connect} from "react-redux";
 
 export class AvbrytMoteSide extends Component {
     constructor(props) {
@@ -32,6 +32,16 @@ export class AvbrytMoteSide extends Component {
         })[0];
     }
 
+    getSykmeldtDeltaker() {
+        const { mote } = this.props;
+        if (!mote) {
+            return undefined;
+        }
+        return mote.deltakere.filter((deltaker) => {
+            return deltaker.type === 'Bruker';
+        })[0];
+    }
+
     hentInnhold() {
         const { epostinnhold, mote } = this.props;
         if (!epostinnhold && mote) {
@@ -50,6 +60,7 @@ export class AvbrytMoteSide extends Component {
     render() {
         const { avbryter, avbrytFeilet, hentingFeiletBool, fnr, mote, henterMoterBool, henterEpostinnholdBool, epostinnhold } = this.props;
         const arbeidsgiverDeltaker = this.getArbeidsgiverDeltaker();
+        const sykmeldtDeltaker = this.getSykmeldtDeltaker();
 
         return (<Side tittel="Avbryt møteforespørsel">
         {
@@ -67,9 +78,9 @@ export class AvbrytMoteSide extends Component {
                             if (henterEpostinnholdBool || !epostinnhold) {
                                 return <AppSpinner />;
                             }
-                            return (<AvbrytMote avbrytFeilet={avbrytFeilet} avbryter={avbryter} deltaker={arbeidsgiverDeltaker} onSubmit={() => {
+                            return (<AvbrytMote avbrytFeilet={avbrytFeilet} sykmeldtDeltaker={sykmeldtDeltaker} avbryter={avbryter} deltaker={arbeidsgiverDeltaker} onSubmit={() => {
                                 this.avbrytMote();
-                            }} epostinnhold={epostinnhold} avbrytHref={`/sykefravaer/${fnr}/mote`} />);
+                            }} avbrytHref={`/sykefravaer/${fnr}/mote`} />);
                         })()}
                     </Lightbox>);
                 }
