@@ -1,15 +1,15 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import Side from '../sider/Side';
-import MotestatusContainer from '../mote/containers/MotestatusContainer';
-import * as moterActions from '../mote/actions/moter_actions';
-import * as epostinnholdActions from '../mote/actions/epostinnhold_actions';
-import AppSpinner from '../components/AppSpinner';
-import Lightbox from '../components/Lightbox';
-import history from '../history';
-import BekreftMote from '../mote/components/BekreftMote';
-import Feilmelding from '../components/Feilmelding';
-import { MOETEPLANLEGGER } from '../menypunkter';
+import React, {Component, PropTypes} from "react";
+import {connect} from "react-redux";
+import Side from "../sider/Side";
+import MotestatusContainer from "../mote/containers/MotestatusContainer";
+import * as moterActions from "../mote/actions/moter_actions";
+import * as epostinnholdActions from "../mote/actions/epostinnhold_actions";
+import AppSpinner from "../components/AppSpinner";
+import Lightbox from "../components/Lightbox";
+import history from "../history";
+import BekreftMote from "../mote/components/BekreftMote";
+import Feilmelding from "../components/Feilmelding";
+import {MOETEPLANLEGGER} from "../menypunkter";
 
 export class BekreftMoteSide extends Component {
     constructor(props) {
@@ -36,8 +36,19 @@ export class BekreftMoteSide extends Component {
         this.props.hentBekreftMoteEpostinnhold(this.props.deltaker.deltakerUuid, this.props.alternativ.id);
     }
 
+    getSykmeldtDeltaker() {
+        const { mote } = this.props;
+        if (!mote) {
+            return undefined;
+        }
+        return mote.deltakere.filter((deltaker) => {
+            return deltaker.type === 'Bruker';
+        })[0];
+    }
+
     render() {
         const { alternativ, henterMoterBool, henterEpostinnholdBool, fnr, mote, epostinnhold, deltaker } = this.props;
+        const sykmeldtDeltaker = this.getSykmeldtDeltaker();
 
         return (<Side tittel="Bekreft møte" aktivtMenypunkt={MOETEPLANLEGGER}>
             {
@@ -57,7 +68,7 @@ export class BekreftMoteSide extends Component {
                                         }
                                         return (<BekreftMote onSubmit={() => {
                                             this.onSubmit();
-                                        }} deltaker={deltaker} epostinnhold={epostinnhold} avbrytHref={`/sykefravaer/${fnr}/mote`} />);
+                                        }} deltaker={deltaker} sykmeldtDeltaker={sykmeldtDeltaker} epostinnhold={epostinnhold} avbrytHref={`/sykefravaer/${fnr}/mote`} />);
                                     })()
                                 }
                                 </Lightbox>

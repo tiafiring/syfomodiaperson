@@ -1,6 +1,7 @@
 import React, {PropTypes} from "react";
 import {Link} from "react-router";
 import {Varselstripe} from "digisyfo-npm";
+import {fikkMoteOpprettetVarsel} from "../utils/index";
 
 const AvbrytMote = ({ deltaker, sykmeldtDeltaker, onSubmit, avbrytHref, avbryter, avbrytFeilet }) => {
     return (<div className="epostinnhold">
@@ -11,11 +12,12 @@ const AvbrytMote = ({ deltaker, sykmeldtDeltaker, onSubmit, avbrytHref, avbryter
             <p>{deltaker.navn}</p>
         </div>
 
-
+        { fikkMoteOpprettetVarsel(sykmeldtDeltaker) &&
         <div className="epostinnhold__mottakere blokk">
             <h3>Sendes til sykmeldt</h3>
             <p>{sykmeldtDeltaker.navn}</p>
         </div>
+        }
 
         <div className="epostinnhold_infoboks">
             <p>*Partene blir informert at møteforespørselen blir avbrutt på e-post, sms og på nav.no</p>
@@ -34,7 +36,7 @@ const AvbrytMote = ({ deltaker, sykmeldtDeltaker, onSubmit, avbrytHref, avbryter
 
 AvbrytMote.propTypes = {
     deltaker: PropTypes.object,
-    epostinnhold: PropTypes.object,
+    sykmeldtDeltaker: PropTypes.object,
     onSubmit: PropTypes.func,
     avbrytHref: PropTypes.string,
     avbryter: PropTypes.bool,
