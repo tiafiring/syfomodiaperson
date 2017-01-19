@@ -1,8 +1,9 @@
-import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
-import { Varselstripe } from 'digisyfo-npm';
+import React, {PropTypes} from "react";
+import {Link} from "react-router";
+import {Varselstripe} from "digisyfo-npm";
+import {fikkMoteOpprettetVarsel} from "../utils/index";
 
-const AvbrytMote = ({ deltaker, epostinnhold, onSubmit, avbrytHref, avbryter, avbrytFeilet }) => {
+const AvbrytMote = ({ deltaker, sykmeldtDeltaker, onSubmit, avbrytHref, avbryter, avbrytFeilet }) => {
     return (<div className="epostinnhold">
         <h2 className="typo-innholdstittel">Avbryt møteresultat</h2>
 
@@ -11,16 +12,16 @@ const AvbrytMote = ({ deltaker, epostinnhold, onSubmit, avbrytHref, avbryter, av
             <p>{deltaker.navn}</p>
         </div>
 
-        <h3 className="typo-element blokk-xs">Følgende e-post blir sendt til arbeidsgiver:</h3>
+        { fikkMoteOpprettetVarsel(sykmeldtDeltaker) &&
+        <div className="epostinnhold__mottakere blokk">
+            <h3>Sendes til sykmeldt</h3>
+            <p>{sykmeldtDeltaker.navn}</p>
+        </div>
+        }
 
-        <article>
-            <header className="epostinnhold__emne">
-                Emne: {epostinnhold.emne}
-            </header>
-            <div className="epostinnhold__innhold">
-                <div dangerouslySetInnerHTML={{ __html: epostinnhold.innhold }} />
-            </div>
-        </article>
+        <div className="epostinnhold_infoboks">
+            <p>*Partene blir informert at møteforespørselen blir avbrutt på e-post, sms og på nav.no</p>
+        </div>
 
         <div aria-live="polite" role="alert">
             { avbrytFeilet && <div className="blokk"><Varselstripe type="feil"><p>Beklager, det oppstod en feil. Prøv igjen litt senere.</p></Varselstripe></div>}
@@ -35,7 +36,7 @@ const AvbrytMote = ({ deltaker, epostinnhold, onSubmit, avbrytHref, avbryter, av
 
 AvbrytMote.propTypes = {
     deltaker: PropTypes.object,
-    epostinnhold: PropTypes.object,
+    sykmeldtDeltaker: PropTypes.object,
     onSubmit: PropTypes.func,
     avbrytHref: PropTypes.string,
     avbryter: PropTypes.bool,

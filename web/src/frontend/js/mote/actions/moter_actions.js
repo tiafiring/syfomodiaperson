@@ -1,4 +1,4 @@
-import * as actions from './actiontyper';
+import * as actions from "./actiontyper";
 
 export function opprettMote(data) {
     return {
@@ -24,6 +24,12 @@ export function moteOpprettet(data) {
 export function opprettMoteFeilet() {
     return {
         type: actions.OPPRETT_MOTE_FEILET,
+    };
+}
+
+export function ikkeTilgang() {
+    return {
+        type: actions.MOTE_IKKE_TILGANG,
     };
 }
 
@@ -69,6 +75,46 @@ export function avbrytMoteUtenVarsel(uuid, fnr) {
         fnr,
         varsle: false,
     };
+}
+
+export function flereAlternativ() {
+    return {
+        type: actions.FLERE_ALTERNATIV,
+    }
+}
+
+export function avbrytFlereAlternativ() {
+    return {
+        type: actions.AVBRYT_FLERE_ALTERNATIV,
+    }
+}
+
+export function opprettFlereAlternativBekreftet(data, moteUuid) {
+    return {
+        type: actions.OPPRETT_FLERE_ALTERNATIV_BEKREFTET,
+        data,
+        moteUuid
+    }
+}
+
+export function opprettFlereAlternativ(data, moteUuid) {
+    return {
+        type: actions.OPPRETT_FLERE_ALTERNATIV_FORESPURT,
+        data,
+        moteUuid,
+    }
+}
+
+export function opprettFlereAlternativFeilet() {
+    return {
+        type: actions.OPPRETT_FLERE_ALTERNATIV_FEILET,
+    }
+}
+
+export function oppretterFlereAlternativ() {
+    return {
+        type: actions.OPPRETTER_FLERE_ALTERNATIV,
+    }
 }
 
 export function moteAvbrutt(uuid) {

@@ -1,29 +1,20 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import Side from '../sider/Side';
-import MotestatusContainer from '../mote/containers/MotestatusContainer';
-import * as moterActions from '../mote/actions/moter_actions';
-import * as epostinnholdActions from '../mote/actions/epostinnhold_actions';
-import AppSpinner from '../components/AppSpinner';
-import Lightbox from '../components/Lightbox';
-import history from '../history';
-import BekreftMote from '../mote/components/BekreftMote';
-import Feilmelding from '../components/Feilmelding';
-import { MOETEPLANLEGGER } from '../menypunkter';
+import React, {Component, PropTypes} from "react";
+import {connect} from "react-redux";
+import Side from "../sider/Side";
+import MotestatusContainer from "../mote/containers/MotestatusContainer";
+import * as moterActions from "../mote/actions/moter_actions";
+import AppSpinner from "../components/AppSpinner";
+import Lightbox from "../components/Lightbox";
+import history from "../history";
+import BekreftMote from "../mote/components/BekreftMote";
+import Feilmelding from "../components/Feilmelding";
+import {MOETEPLANLEGGER} from "../menypunkter";
 
 export class BekreftMoteSide extends Component {
     constructor(props) {
         super(props);
         if (!this.props.alternativ) {
             this.props.hentMoter(this.props.fnr);
-        } else {
-            this.hentMoteInnhold();
-        }
-    }
-
-    componentDidUpdate(prevProps) {
-        if (!prevProps.alternativ && this.props.alternativ) {
-            this.hentMoteInnhold();
         }
     }
 
@@ -32,12 +23,19 @@ export class BekreftMoteSide extends Component {
         bekreftMote(mote.moteUuid, alternativ.id, fnr);
     }
 
-    hentMoteInnhold() {
-        this.props.hentBekreftMoteEpostinnhold(this.props.deltaker.deltakerUuid, this.props.alternativ.id);
+    getSykmeldtDeltaker() {
+        const { mote } = this.props;
+        if (!mote) {
+            return undefined;
+        }
+        return mote.deltakere.filter((deltaker) => {
+            return deltaker.type === 'Bruker';
+        })[0];
     }
 
     render() {
-        const { alternativ, henterMoterBool, henterEpostinnholdBool, fnr, mote, epostinnhold, deltaker } = this.props;
+        const { alternativ, henterMoterBool, fnr, mote, deltaker } = this.props;
+        const sykmeldtDeltaker = this.getSykmeldtDeltaker();
 
         return (<Side tittel="Bekreft møte" aktivtMenypunkt={MOETEPLANLEGGER}>
             {
@@ -52,12 +50,9 @@ export class BekreftMoteSide extends Component {
                                 }}>
                                 {
                                     (() => {
-                                        if (henterEpostinnholdBool || !epostinnhold) {
-                                            return <AppSpinner />;
-                                        }
                                         return (<BekreftMote onSubmit={() => {
                                             this.onSubmit();
-                                        }} deltaker={deltaker} epostinnhold={epostinnhold} avbrytHref={`/sykefravaer/${fnr}/mote`} />);
+                                        }} deltaker={deltaker} sykmeldtDeltaker={sykmeldtDeltaker} avbrytHref={`/sykefravaer/${fnr}/mote`} />);
                                     })()
                                 }
                                 </Lightbox>
@@ -75,14 +70,11 @@ export class BekreftMoteSide extends Component {
 BekreftMoteSide.propTypes = {
     alternativ: PropTypes.object,
     henterMoterBool: PropTypes.bool,
-    henterEpostinnholdBool: PropTypes.bool,
     fnr: PropTypes.string,
     mote: PropTypes.object,
-    epostinnhold: PropTypes.object,
     deltaker: PropTypes.object,
     hentMoter: PropTypes.func,
     bekreftMote: PropTypes.func,
-    hentBekreftMoteEpostinnhold: PropTypes.func,
 };
 
 export const getMoteFraAlternativId = (moter, alternativId) => {
@@ -115,14 +107,12 @@ export const mapStateToProps = (state, ownProps) => {
     return {
         fnr,
         henterMoterBool: state.moter.henter,
-        henterEpostinnholdBool: state.epostinnhold.henter,
         alternativ,
         mote,
         deltaker,
-        epostinnhold: state.epostinnhold.eposttype === 'BEKREFT_TIDSPUNKT' ? state.epostinnhold.data : undefined,
     };
 };
 
-const BekreftMoteContainer = connect(mapStateToProps, Object.assign({}, moterActions, epostinnholdActions))(BekreftMoteSide);
+const BekreftMoteContainer = connect(mapStateToProps, Object.assign({}, moterActions))(BekreftMoteSide);
 
 export default BekreftMoteContainer;
