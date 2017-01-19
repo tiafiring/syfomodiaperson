@@ -75,26 +75,34 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternati
             <p className="blokk-l">{alternativer[0].sted}</p>
             <table className="motestatus blokk-l">
                 <thead>
-                    <tr>
-                        <th className="motestatus__tittel">Møtetider</th>
-                        {
-                            alternativer.map((tidspunkt, index) => {
-                                let className = null;
-                                if (mote.valgtAlternativ && tidspunkt.id === mote.valgtAlternativ.id) {
-                                    className = 'bekreftetTidspunkt';
-                                }
-                                return (<th scope="col" className={className} key={index}>{getTidFraZulu(tidspunkt.tid)}</th>);
-                            })
-                        }
-                    </tr>
-                </thead>
-                <tbody>
+                <tr>
+                    <th/>
                     {
                         deltakere && deltakere
                             .map((deltaker, index) => {
-                                return (<tr key={index}>
-                            <th className="motestatus__deltaker" scope="row"><strong>{deltakertyper[deltaker.type.toLowerCase()]}</strong> <span>{deltaker.navn}</span></th>
-                            {
+                                return (
+                                <td key={index}>
+                                    <th className="motestatus__deltaker" scope="row">
+                                        <strong>{deltakertyper[deltaker.type.toLowerCase()]}</strong>
+                                        <span>{deltaker.navn}</span>
+                                    </th>
+                                </td>);
+                            })
+                    }
+                </tr>
+                </thead>
+                <tbody>
+
+                {
+                    deltakere && deltakere
+                        .map((deltaker, index) => {
+                            let className = null;
+                            if (mote.valgtAlternativ && deltaker.svar[index].id === mote.valgtAlternativ.id) {
+                                className = 'bekreftetTidspunkt';
+                            }
+                            return (<tr key={index}>
+                                <th scope="col" className={className} key={index}>{getTidFraZulu(deltaker.svar[index].tid)}</th>
+                                {
                                     deltaker.svar.map((tidspunkt, index2) => {
                                         let className = 'motestatus__svar';
                                         if (mote.valgtAlternativ && tidspunkt.id === mote.valgtAlternativ.id) {
@@ -104,10 +112,10 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternati
                                             <MotebookingIkon deltaker={deltaker} index={index2} />
                                         </td>);
                                     })
-                            }
+                                }
                             </tr>);
-                            })
-                    }
+                        })
+                }
                 </tbody>
                 {
                     visVelgTidspunkt && <tfoot>

@@ -1,7 +1,7 @@
-import React, {PropTypes} from 'react';
-import Tidspunkter from '../skjema/Tidspunkter'
-import {Field, Fields, reduxForm} from 'redux-form';
-import {genererDato, erGyldigKlokkeslett, erGyldigDato} from '../utils/index';
+import React, {PropTypes} from "react";
+import Tidspunkter from "../skjema/Tidspunkter";
+import {Field, Fields, reduxForm} from "redux-form";
+import {genererDato, erGyldigKlokkeslett, erGyldigDato} from "../utils/index";
 
 const FlereTidspunktSkjema = ({mote, antallEksisterendeTidspunkter, antallNyeTidspunkt, opprettFlereAlternativ, senderNyeAlternativ, nyeAlternativFeilet, flereAlternativ, avbrytFlereAlternativ, handleSubmit}) => {
     let nyeTidspunktListe = [];
@@ -24,7 +24,7 @@ const FlereTidspunktSkjema = ({mote, antallEksisterendeTidspunkter, antallNyeTid
                 <div className="js-nyetidspunkt rammeknapp rammeknapp--mini" onClick={() => flereAlternativ()}>Flere alternativ
                     +
                 </div>
-                <input type="submit" className="knapp" value="Send" disabled={senderNyeAlternativ}/>
+                <input type="submit" className="knapp" value="Send" disabled={senderNyeAlternativ} />
             </form>
             <button onClick={() => avbrytFlereAlternativ()}>Avbryt</button>
         </div>
