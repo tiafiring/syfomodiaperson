@@ -1,4 +1,4 @@
-import * as actions from './actiontyper';
+import * as actions from "./actiontyper";
 
 export function opprettMote(data) {
     return {
@@ -24,6 +24,12 @@ export function moteOpprettet(data) {
 export function opprettMoteFeilet() {
     return {
         type: actions.OPPRETT_MOTE_FEILET,
+    };
+}
+
+export function ikkeTilgang() {
+    return {
+        type: actions.MOTE_IKKE_TILGANG,
     };
 }
 

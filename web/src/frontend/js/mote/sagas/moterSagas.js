@@ -1,8 +1,8 @@
-import { call, put, fork } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
-import { post, get } from '../../api/index';
-import history from '../../history';
-import * as actions from '../actions/moter_actions';
+import {call, put, fork} from "redux-saga/effects";
+import {takeEvery} from "redux-saga";
+import {post, get} from "../../api/index";
+import history from "../../history";
+import * as actions from "../actions/moter_actions";
 
 export function* opprettMote(action) {
     yield put(actions.oppretterMote());
@@ -20,7 +20,11 @@ export function* hentMoter(action) {
         const data = yield call(get, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter?fnr=${action.fnr}&henttpsdata=true`);
         yield put(actions.moterHentet(data));
     } catch (e) {
-        yield put(actions.hentMoterFeilet());
+        if (e.message === '403') {
+            yield put(actions.ikkeTilgang());
+        } else {
+            yield put(actions.hentMoterFeilet());
+        }
     }
 }
 

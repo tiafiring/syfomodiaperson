@@ -1,4 +1,4 @@
-import * as actions from '../actions/actiontyper';
+import * as actions from "../actions/actiontyper";
 
 const defaultState = {
     data: [],
@@ -9,6 +9,7 @@ const defaultState = {
     nyeAlternativFeilet: false,
     senderNyeAlternativ: false,
     antallNyeTidspunkt: 0,
+    skjermetBruker: false,
 };
 
 export default function moter(state = defaultState, action) {
@@ -188,6 +189,13 @@ export default function moter(state = defaultState, action) {
                 antallNyeTidspunkt: undefined,
                 nyeAlternativFeilet: false,
                 senderNyeAlternativ: false,
+            });
+        }
+        case actions.MOTE_IKKE_TILGANG: {
+            return Object.assign({}, state, {
+                skjermetBruker: true,
+                henter: false,
+                hentingFeilet: false,
             });
         }
         default: {
