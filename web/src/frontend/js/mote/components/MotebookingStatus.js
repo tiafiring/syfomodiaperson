@@ -57,6 +57,8 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternati
     });
     sendtTil += navneliste.join(" og ");
 
+    console.log(mote);
+
     return (<div>
         <div className="panel">
             <Varselstripe type="suksess">
@@ -94,18 +96,18 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternati
                 <tbody>
 
                 {
-                    deltakere && deltakere
-                        .map((deltaker, index) => {
+                    mote.alternativer
+                        .map((alternativ, index) => {
                             let className = null;
-                            if (mote.valgtAlternativ && deltaker.svar[index].id === mote.valgtAlternativ.id) {
+                            if (mote.valgtAlternativ && alternativ.id === mote.valgtAlternativ.id) {
                                 className = 'bekreftetTidspunkt';
                             }
                             return (<tr key={index}>
-                                <th scope="col" className={className} key={index}>{getTidFraZulu(deltaker.svar[index].tid)}</th>
+                                <th scope="col" className={className} key={index}>{getTidFraZulu(alternativ.tid)}</th>
                                 {
-                                    deltaker.svar.map((tidspunkt, index2) => {
+                                    deltakere.map((deltaker, index2) => {
                                         let className = 'motestatus__svar';
-                                        if (mote.valgtAlternativ && tidspunkt.id === mote.valgtAlternativ.id) {
+                                        if (mote.valgtAlternativ && deltaker.svar[index].id === mote.valgtAlternativ.id) {
                                             className = 'motestatus__svar motestatus__svar--bekreftetTidspunkt';
                                         }
                                         return (<td key={index2} className={className}>
