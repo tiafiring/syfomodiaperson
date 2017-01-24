@@ -57,8 +57,6 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternati
     });
     sendtTil += navneliste.join(" og ");
 
-    console.log(mote);
-
     return (<div>
         <div className="panel">
             <Varselstripe type="suksess">
@@ -111,7 +109,7 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternati
                                             className = 'motestatus__svar motestatus__svar--bekreftetTidspunkt';
                                         }
                                         return (<td key={index2} className={className}>
-                                            <MotebookingIkon deltaker={deltaker} index={index2} />
+                                            <MotebookingIkon deltaker={deltaker} index={index} />
                                         </td>);
                                     })
                                 }
