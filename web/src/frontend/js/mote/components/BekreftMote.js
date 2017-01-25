@@ -29,10 +29,6 @@ const BekreftMote = ({ deltaker, sykmeldtDeltaker, onSubmit, avbrytHref, alterna
         </div>
         }
 
-        <div className="epostinnhold_infoboks">
-            <p>*Partene blir informert at møteforespørselen blir avbrutt på e-post, sms og på nav.no</p>
-        </div>
-
         <div className="knapperad">
             <button className="knapp blokk--s" onClick={onSubmit}>Send møteresultat</button>
             <p><Link to={avbrytHref}>Avbryt</Link></p>
