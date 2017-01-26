@@ -58,7 +58,7 @@ export const MotebookingSkjema = ({
     const submit = (values) => {
         const data = getData(values);
         data.fnr = fnr;
-        data.navEnhet = getCookieValue('navEnhet');
+        data.navEnhet = getCookieValue('navEnhet', 'navEnhet');
         opprettMote(data);
     };
 
