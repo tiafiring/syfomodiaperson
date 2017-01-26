@@ -1,8 +1,14 @@
-import { expect } from 'chai';
-import { opprettMote, hentMoter, avbrytMote, avbrytMoteUtenVarsel, bekreftMote } from '../../../js/mote/sagas/moterSagas.js';
-import * as actions from '../../../js/mote/actions/moter_actions';
-import { post, get } from '../../../js/api/index';
-import { put, call } from 'redux-saga/effects';
+import {expect} from "chai";
+import {
+    opprettMote,
+    hentMoter,
+    avbrytMote,
+    avbrytMoteUtenVarsel,
+    bekreftMote
+} from "../../../js/mote/sagas/moterSagas.js";
+import * as actions from "../../../js/mote/actions/moter_actions";
+import {post, get} from "../../../js/api/index";
+import {put, call} from "redux-saga/effects";
 
 describe("moterSagas", () => {
 

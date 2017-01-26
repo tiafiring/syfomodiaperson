@@ -1,14 +1,13 @@
-import React, { PropTypes } from 'react';
-import { Field, Fields, reduxForm } from 'redux-form';
-import TextField from '../../components/TextField';
-import LederFields, { ManuellUtfyltLeder } from './LederFields';
-import Tidspunkter from './Tidspunkter';
-import KontaktInfoFeilmelding from '../components/KontaktInfoFeilmelding';
-import Sidetopp from '../../components/Sidetopp';
-import { Varselstripe} from 'digisyfo-npm';
-import { genererDato, erGyldigKlokkeslett, erGyldigEpost, erGyldigDato } from '../utils/index';
-import { Varselstripe } from 'digisyfo-npm';
-import { getCookieValue } from '../../utils/index';
+import React, {PropTypes} from "react";
+import {Field, Fields, reduxForm} from "redux-form";
+import TextField from "../../components/TextField";
+import LederFields, {ManuellUtfyltLeder} from "./LederFields";
+import Tidspunkter from "./Tidspunkter";
+import KontaktInfoFeilmelding from "../components/KontaktInfoFeilmelding";
+import Sidetopp from "../../components/Sidetopp";
+import {Varselstripe} from "digisyfo-npm";
+import {genererDato, erGyldigKlokkeslett, erGyldigEpost, erGyldigDato} from "../utils/index";
+import {getCookieValue} from "../../utils/index";
 
 export function getData(values) {
     const deltaker = Object.assign({}, values.deltakere[0], {
