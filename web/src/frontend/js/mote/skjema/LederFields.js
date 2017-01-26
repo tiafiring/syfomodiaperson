@@ -1,9 +1,9 @@
-import React, { PropTypes, Component } from 'react';
-import { Field } from 'redux-form';
-import TextField from '../../components/TextField';
-import TextFieldLocked from '../../components/TextFieldLocked';
-import FyllUtVirksomhet from './FyllUtVirksomhet';
-import ArbeidsgiverDropdown from './ArbeidsgiverDropdown';
+import React, {PropTypes, Component} from "react";
+import {Field} from "redux-form";
+import TextField from "../../components/TextField";
+import TextFieldLocked from "../../components/TextFieldLocked";
+import FyllUtVirksomhet from "./FyllUtVirksomhet";
+import ArbeidsgiverDropdown from "./ArbeidsgiverDropdown";
 
 export const FyllUtLeder = ({ FieldComponent = TextField }) => {
     return (<div>

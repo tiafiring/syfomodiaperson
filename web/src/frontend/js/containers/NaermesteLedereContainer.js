@@ -1,12 +1,12 @@
-import React, { PropTypes, Component } from 'react';
-import NaermesteLedere from '../components/NaermesteLedere';
-import Feilmelding from '../components/Feilmelding';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import Side from '../sider/Side';
-import * as ledereActions from '../actions/ledere_actions';
-import AppSpinner from '../components/AppSpinner';
-import { NAERMESTE_LEDER } from '../menypunkter';
+import React, {PropTypes, Component} from "react";
+import NaermesteLedere from "../components/NaermesteLedere";
+import Feilmelding from "../components/Feilmelding";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import Side from "../sider/Side";
+import * as ledereActions from "../actions/ledere_actions";
+import AppSpinner from "../components/AppSpinner";
+import {NAERMESTE_LEDER} from "../menypunkter";
 
 export class NaermesteLedereSide extends Component {
     constructor(props) {

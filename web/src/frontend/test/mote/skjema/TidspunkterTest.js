@@ -1,9 +1,9 @@
-import { expect } from 'chai';
-import Tidspunkter from '../../../js/mote/skjema/Tidspunkter';
-import Tidspunkt from '../../../js/mote/skjema/Tidspunkt';
-import { mount, shallow, render } from 'enzyme';
-import React from 'react'
-import { Field } from 'redux-form';
+import {expect} from "chai";
+import Tidspunkter from "../../../js/mote/skjema/Tidspunkter";
+import Tidspunkt from "../../../js/mote/skjema/Tidspunkt";
+import {mount, shallow, render} from "enzyme";
+import React from "react";
+import {Field} from "redux-form";
 
 describe("Tidspunkter", () => {
 

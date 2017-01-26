@@ -1,14 +1,14 @@
-import { expect } from 'chai';
-import { MotebookingSkjema, validate, getData, Arbeidstaker } from '../../../js/mote/skjema/MotebookingSkjema';
-import { genererDato } from '../../../js/mote/utils/index';
-import KontaktInfoFeilmelding from '../../../js/mote/components/KontaktInfoFeilmelding';
-import LederFields, { ManuellUtfyltLeder } from '../../../js/mote/skjema/LederFields';
-import Tidspunkter from '../../../js/mote/skjema/Tidspunkter';
-import { Field, Fields } from 'redux-form';
-import { mount, shallow, render } from 'enzyme';
-import { Varselstripe } from 'digisyfo-npm';
-import React from 'react';
-import sinon from 'sinon';
+import {expect} from "chai";
+import {MotebookingSkjema, validate, getData, Arbeidstaker} from "../../../js/mote/skjema/MotebookingSkjema";
+import {genererDato} from "../../../js/mote/utils/index";
+import KontaktInfoFeilmelding from "../../../js/mote/components/KontaktInfoFeilmelding";
+import LederFields, {ManuellUtfyltLeder} from "../../../js/mote/skjema/LederFields";
+import Tidspunkter from "../../../js/mote/skjema/Tidspunkter";
+import {Field, Fields} from "redux-form";
+import {mount, shallow, render} from "enzyme";
+import {Varselstripe} from "digisyfo-npm";
+import React from "react";
+import sinon from "sinon";
 
 describe("MotebookingSkjema", () => {
 
