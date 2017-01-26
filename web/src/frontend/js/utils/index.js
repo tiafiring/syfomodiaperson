@@ -29,3 +29,24 @@ export const formaterTid = (input) => {
     }
     return tid;
 };
+
+export const hentDag = (input) => {
+    const date = new Date(input);
+    const dayOfWeek = date.getDay();
+    if (dayOfWeek === 0) {
+        return "Søndag";
+    } else if (dayOfWeek === 1) {
+        return "Mandag";
+    } else if (dayOfWeek === 2) {
+        return "Tirsdag";
+    } else if (dayOfWeek === 3) {
+        return "Onsdag";
+    } else if (dayOfWeek === 4) {
+        return "Torsdag";
+    } else if (dayOfWeek === 5) {
+        return "Fredag";
+    } else if (dayOfWeek === 6) {
+        return "Lørdag";
+    }
+};
+

@@ -75,39 +75,47 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternati
             <p className="blokk-l">{alternativer[0].sted}</p>
             <table className="motestatus blokk-l">
                 <thead>
-                    <tr>
-                        <th className="motestatus__tittel">Møtetider</th>
-                        {
-                            alternativer.map((tidspunkt, index) => {
-                                let className = null;
-                                if (mote.valgtAlternativ && tidspunkt.id === mote.valgtAlternativ.id) {
-                                    className = 'bekreftetTidspunkt';
-                                }
-                                return (<th scope="col" className={className} key={index}>{getTidFraZulu(tidspunkt.tid)}</th>);
-                            })
-                        }
-                    </tr>
-                </thead>
-                <tbody>
+                <tr>
+                    <th/>
                     {
                         deltakere && deltakere
                             .map((deltaker, index) => {
-                                return (<tr key={index}>
-                            <th className="motestatus__deltaker" scope="row"><strong>{deltakertyper[deltaker.type.toLowerCase()]}</strong> <span>{deltaker.navn}</span></th>
-                            {
-                                    deltaker.svar.map((tidspunkt, index2) => {
+                                return (
+                                <td key={index}>
+                                    <th className="motestatus__deltaker" scope="row">
+                                        <strong>{deltakertyper[deltaker.type.toLowerCase()]}</strong>
+                                        <span>{deltaker.navn}</span>
+                                    </th>
+                                </td>);
+                            })
+                    }
+                </tr>
+                </thead>
+                <tbody>
+
+                {
+                    mote.alternativer
+                        .map((alternativ, index) => {
+                            let className = null;
+                            if (mote.valgtAlternativ && alternativ.id === mote.valgtAlternativ.id) {
+                                className = 'bekreftetTidspunkt';
+                            }
+                            return (<tr key={index}>
+                                <th scope="col" className={className} key={index}>{getTidFraZulu(alternativ.tid)}</th>
+                                {
+                                    deltakere.map((deltaker, index2) => {
                                         let className = 'motestatus__svar';
-                                        if (mote.valgtAlternativ && tidspunkt.id === mote.valgtAlternativ.id) {
+                                        if (mote.valgtAlternativ && deltaker.svar[index].id === mote.valgtAlternativ.id) {
                                             className = 'motestatus__svar motestatus__svar--bekreftetTidspunkt';
                                         }
                                         return (<td key={index2} className={className}>
-                                            <MotebookingIkon deltaker={deltaker} index={index2} />
+                                            <MotebookingIkon deltaker={deltaker} index={index} />
                                         </td>);
                                     })
-                            }
+                                }
                             </tr>);
-                            })
-                    }
+                        })
+                }
                 </tbody>
                 {
                     visVelgTidspunkt && <tfoot>
@@ -140,7 +148,12 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternati
                         </tr>
                     </tfoot>
                 }
+
             </table>
+            <button className="js-nyetidspunkt rammeknapp rammeknapp--mini" onClick={() => {
+                flereAlternativ();
+            }}>+ Legg til tidspunkt</button>
+            { flereTidspunktBoks }
 
             <div>
                 <Link role="button" className="js-avbryt rammeknapp rammeknapp--mini" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>Avbryt møte</Link>
