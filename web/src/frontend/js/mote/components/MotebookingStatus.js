@@ -1,9 +1,17 @@
-import React, { PropTypes } from 'react';
-import MotebookingIkon from './MotebookingIkon';
-import { getTidFraZulu, getDatoFraZulu } from '../utils';
-import Sidetopp from '../../components/Sidetopp';
-import { Varselstripe } from 'digisyfo-npm';
-import { Link } from 'react-router';
+import React, {PropTypes} from "react";
+import MotebookingIkon from "./MotebookingIkon";
+import {getTidFraZulu, getDatoFraZulu, fikkIkkeMoteOpprettetVarsel} from "../utils/index";
+import Sidetopp from "../../components/Sidetopp";
+import KontaktInfoFeilmelding from "./KontaktInfoFeilmelding";
+import FlereTidspunktSkjema from "../skjema/FlereTidspunktSkjema";
+import {Varselstripe} from "digisyfo-npm";
+import {Link} from "react-router";
+
+const deltakertyper = {
+    arbeidsgiver: 'Arbeidsgiver',
+    bruker: 'Arbeidstaker',
+    arbeidstaker: 'Arbeidstaker',
+};
 
 export const MotetidspunktValgt = ({ bekreftetTidspunkt }) => {
     return <div className="motetidspunktValgt">Møtetidspunkt valgt, møteresultat sendt til arbeidsgiver {getDatoFraZulu(bekreftetTidspunkt)}.</div>;
@@ -13,9 +21,9 @@ MotetidspunktValgt.propTypes = {
     bekreftetTidspunkt: PropTypes.string,
 };
 
-const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel }) => {
-    const { alternativer, deltakere } = mote;
-    const deltakerEpost = deltakere ? deltakere[0].epost : '?';
+const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
+    const { alternativer } = mote;
+    let { deltakere } = mote;
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
     const arbeidsgiverDeltaker = deltakere.filter((deltaker) => {
         return deltaker.type === 'arbeidsgiver';
@@ -24,57 +32,90 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel }) => {
         return svar.valgt;
     }).length > 0;
 
+    const arbeidstaker = deltakere.filter(deltaker => { return deltaker.type === 'Bruker' })[0];
+    const feilmelding = arbeidstaker && fikkIkkeMoteOpprettetVarsel(arbeidstaker);
+
+    if (feilmelding) {
+        deltakere = deltakere.filter(deltaker => { return deltaker !== arbeidstaker })
+    }
+
+    const flereTidspunktBoks = antallNyeTidspunkt ?
+        <FlereTidspunktSkjema mote={ mote }
+                              flereAlternativ={ flereAlternativ }
+                              opprettFlereAlternativ={ opprettFlereAlternativ }
+                              avbrytFlereAlternativ={ avbrytFlereAlternativ }
+                              senderNyeAlternativ = {senderNyeAlternativ}
+                              nyeAlternativFeilet = {nyeAlternativFeilet}
+                              antallEksisterendeTidspunkter={ mote.alternativer.length }
+                              antallNyeTidspunkt={ antallNyeTidspunkt } /> :
+        null;
+
+    let sendtTil = 'Møteforespørselen ble sendt til ';
+    let navneliste = [];
+    deltakere.forEach(deltaker => {
+        navneliste.push(deltaker.navn);
+    });
+    sendtTil += navneliste.join(" og ");
+
     return (<div>
         <div className="panel">
             <Varselstripe type="suksess">
                 <div>
-                    <p className="typo-element">Møteforespørselen er sendt til {deltakerEpost}</p>
+                    <p className="typo-element">{sendtTil}</p>
                     <p className="sist">Sendt: {sendtDato}</p>
                 </div>
             </Varselstripe>
         </div>
+        {
+            feilmelding && <KontaktInfoFeilmelding feilAarsak={feilmelding.resultat} />
+        }
         <div className="panel">
             <Sidetopp tittel="Status for møteforespørselen" />
             <h4 className="typo-undertittel blokk-s">Møtested</h4>
             <p className="blokk-l">{alternativer[0].sted}</p>
             <table className="motestatus blokk-l">
                 <thead>
-                    <tr>
-                        <th className="motestatus__tittel">Møtetider</th>
-                        {
-                            alternativer.map((tidspunkt, index) => {
-                                let className = null;
-                                if (mote.valgtAlternativ && tidspunkt.id === mote.valgtAlternativ.id) {
-                                    className = 'bekreftetTidspunkt';
-                                }
-                                return (<th scope="col" className={className} key={index}>{getTidFraZulu(tidspunkt.tid)}</th>);
-                            })
-                        }
-                    </tr>
-                </thead>
-                <tbody>
+                <tr>
+                    <th/>
                     {
                         deltakere && deltakere
-                            .filter((deltaker) => {
-                                return deltaker.type === 'arbeidsgiver';
-                            })
                             .map((deltaker, index) => {
-                                return (<tr key={index}>
-                            <th className="motestatus__deltaker" scope="row"><strong>Arbeidsgiver</strong> <span>{deltaker.navn}</span></th>
-                            {
-                                    deltaker.svar.map((tidspunkt, index2) => {
+                                return (
+                                <td key={index}>
+                                    <th className="motestatus__deltaker" scope="row">
+                                        <strong>{deltakertyper[deltaker.type.toLowerCase()]}</strong>
+                                        <span>{deltaker.navn}</span>
+                                    </th>
+                                </td>);
+                            })
+                    }
+                </tr>
+                </thead>
+                <tbody>
+
+                {
+                    mote.alternativer
+                        .map((alternativ, index) => {
+                            let className = null;
+                            if (mote.valgtAlternativ && alternativ.id === mote.valgtAlternativ.id) {
+                                className = 'bekreftetTidspunkt';
+                            }
+                            return (<tr key={index}>
+                                <th scope="col" className={className} key={index}>{getTidFraZulu(alternativ.tid)}</th>
+                                {
+                                    deltakere.map((deltaker, index2) => {
                                         let className = 'motestatus__svar';
-                                        if (mote.valgtAlternativ && tidspunkt.id === mote.valgtAlternativ.id) {
+                                        if (mote.valgtAlternativ && deltaker.svar[index].id === mote.valgtAlternativ.id) {
                                             className = 'motestatus__svar motestatus__svar--bekreftetTidspunkt';
                                         }
                                         return (<td key={index2} className={className}>
-                                            <MotebookingIkon deltaker={deltaker} index={index2} />
+                                            <MotebookingIkon deltaker={deltaker} index={index} />
                                         </td>);
                                     })
-                            }
+                                }
                             </tr>);
-                            })
-                    }
+                        })
+                }
                 </tbody>
                 {
                     visVelgTidspunkt && <tfoot>
@@ -107,7 +148,13 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel }) => {
                         </tr>
                     </tfoot>
                 }
+
             </table>
+            <button className="js-nyetidspunkt rammeknapp rammeknapp--mini" onClick={() => {
+                flereAlternativ();
+            }}>+ Legg til tidspunkt</button>
+            { flereTidspunktBoks }
+
             <div>
                 <Link role="button" className="js-avbryt rammeknapp rammeknapp--mini" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>Avbryt møte</Link>
             </div>
@@ -118,6 +165,7 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel }) => {
             }}>Nytt møte</button>
         </div>
     </div>);
+
 };
 
 MotebookingStatus.propTypes = {
@@ -133,8 +181,14 @@ MotebookingStatus.propTypes = {
             type: PropTypes.string,
         })),
     }),
+    antallNyeTidspunkt: PropTypes.number,
     fnr: PropTypes.string,
+    senderNyeAlternativ: PropTypes.bool,
+    nyeAlternativFeilet: PropTypes.bool,
     avbrytMoteUtenVarsel: PropTypes.func,
+    flereAlternativ: PropTypes.func,
+    opprettFlereAlternativ: PropTypes.func,
+    avbrytFlereAlternativ: PropTypes.func,
 };
 
 export default MotebookingStatus;

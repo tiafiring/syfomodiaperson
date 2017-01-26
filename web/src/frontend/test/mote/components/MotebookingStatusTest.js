@@ -31,6 +31,7 @@ describe("MotebookingStatus", () => {
             navn: "Helge",
             epost: "***REMOVED***",
             avvik: [],
+            hendelser: [],
             svar: [{
                 "tid": "2012-12-12T11:00:00Z",
                 "sted": "Oslo by",
@@ -43,9 +44,10 @@ describe("MotebookingStatus", () => {
                 "id": 2
             }],
         }, {
-            type: "feil type",
+            type: "Bruker",
             navn: "Ole",
             avvik: [],
+            hendelser: [],
             epost: "***REMOVED***",
             svar: [{}],
         }];
@@ -70,7 +72,11 @@ describe("MotebookingStatus", () => {
     it("Skal vise info om arbeidsgiver", () => {
         const component = shallow(<MotebookingStatus mote={mote} />);
         expect(component.text()).to.contain("Helge")
-        expect(component.text()).not.to.contain("Ole")
+    });
+
+    it("Skal vise info om bruker", () => {
+        const component = shallow(<MotebookingStatus mote={mote} />);
+        expect(component.text()).to.contain("Ole")
     });
 
     it("Skal ikke vise en knapp med teksten 'Velg tidspunkt for møte'", () => {

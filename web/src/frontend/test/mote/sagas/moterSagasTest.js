@@ -57,7 +57,7 @@ describe("moterSagas", () => {
         });
 
         it("Skal hente møter fra REST-tjenesten", () => {
-            const nextCall = call(get, "http://tjenester.nav.no/moteadmin/moter?fnr=123");
+            const nextCall = call(get, "http://tjenester.nav.no/moteadmin/moter?fnr=123&henttpsdata=true");
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 

@@ -1,8 +1,8 @@
-import { call, put, fork } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
-import { post, get } from '../../api/index';
-import history from '../../history';
-import * as actions from '../actions/moter_actions';
+import {call, put, fork} from "redux-saga/effects";
+import {takeEvery} from "redux-saga";
+import {post, get} from "../../api/index";
+import history from "../../history";
+import * as actions from "../actions/moter_actions";
 
 export function* opprettMote(action) {
     yield put(actions.oppretterMote());
@@ -17,10 +17,14 @@ export function* opprettMote(action) {
 export function* hentMoter(action) {
     yield put(actions.henterMoter());
     try {
-        const data = yield call(get, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter?fnr=${action.fnr}`);
+        const data = yield call(get, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter?fnr=${action.fnr}&henttpsdata=true`);
         yield put(actions.moterHentet(data));
     } catch (e) {
-        yield put(actions.hentMoterFeilet());
+        if (e.message === '403') {
+            yield put(actions.ikkeTilgang());
+        } else {
+            yield put(actions.hentMoterFeilet());
+        }
     }
 }
 
@@ -44,6 +48,20 @@ export function* bekreftMote(action) {
     } catch (e) {
         yield put(actions.bekreftMoteFeilet());
     }
+}
+
+export function* opprettFlereAlternativ(action) {
+    yield put(actions.oppretterFlereAlternativ());
+    try {
+        yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.moteUuid}/nyealternativer`, action.data.alternativer);
+        yield put(actions.opprettFlereAlternativBekreftet(action.data, action.moteUuid));
+    } catch (e) {
+        yield put(actions.opprettFlereAlternativFeilet());
+    }
+}
+
+export function* watchOpprettFlereAlternativ() {
+    yield* takeEvery('OPPRETT_FLERE_ALTERNATIV_FORESPURT', opprettFlereAlternativ);
 }
 
 function* watchOpprettMote() {
@@ -73,5 +91,6 @@ export default function* moterSagas() {
         fork(watchAvbrytMote),
         fork(watchBekreftMote),
         fork(watchMoteOpprettet),
+        fork(watchOpprettFlereAlternativ),
     ];
 }

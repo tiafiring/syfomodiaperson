@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const ArbeidsgiverDropdown = ({ meta, input, ledere }) => {
-    return (<div className="blokk--xl">
+    return (<div className="blokk">
         <label htmlFor="velg-arbeidsgiver">Velg arbeidsgiver</label>
         <div className="selectContainer input--xxl">
             <select className={meta.touched && meta.error ? 'input--feil' : ''} id="velg-arbeidsgiver" {...input}>

@@ -1,8 +1,8 @@
 import { expect } from 'chai';
-import { MotebookingSkjema, validate, genererDato, getData, KontaktinfoFeilmelding, Arbeidstaker } from '../../../js/mote/skjema/MotebookingSkjema';
-import TextFieldLocked from '../../../js/components/TextFieldLocked';
+import { MotebookingSkjema, validate, getData, Arbeidstaker } from '../../../js/mote/skjema/MotebookingSkjema';
+import { genererDato } from '../../../js/mote/utils/index';
+import KontaktInfoFeilmelding from '../../../js/mote/components/KontaktInfoFeilmelding';
 import LederFields, { ManuellUtfyltLeder } from '../../../js/mote/skjema/LederFields';
-import TextField from '../../../js/components/TextField';
 import Tidspunkter from '../../../js/mote/skjema/Tidspunkter';
 import { Field, Fields } from 'redux-form';
 import { mount, shallow, render } from 'enzyme';
@@ -88,7 +88,7 @@ describe("MotebookingSkjema", () => {
             let ledere = [];
 
             beforeEach(() => {
-                arbeidstaker = {"navn":"***REMOVED***","kontaktinfo":{"tlf":"+4799999999","epost":"tester.scrambling-script@fellesregistre.no","reservasjon":{"skalHaVarsel":true}}};
+                arbeidstaker = {"navn":"***REMOVED***","kontaktinfo":{"tlf":"+4799999999","epost":"tester.scrambling-script@fellesregistre.no","reservasjon":{"skalHaVarsel":true}}, "hendelser": []};
             });
 
             describe("Arbeidstaker", () => {
@@ -121,7 +121,7 @@ describe("MotebookingSkjema", () => {
 
                 it("Skal ikke vise info om reservasjon", () => {
                     const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
-                    expect(compo.find(KontaktinfoFeilmelding)).to.have.length(0);
+                    expect(compo.find(KontaktInfoFeilmelding)).to.have.length(0);
                 });
 
                 it("SKal vise riktig nummerering", () => {
@@ -145,13 +145,13 @@ describe("MotebookingSkjema", () => {
                 it("Skal vise info om reservasjon med riktig feilAarsak", () => {
                     arbeidstaker.kontaktinfo.reservasjon.feilAarsak = "KODE6"
                     const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
-                    expect(compo.contains(<KontaktinfoFeilmelding feilAarsak={"KODE6"} />)).to.be.true;
+                    expect(compo.contains(<KontaktInfoFeilmelding feilAarsak={"KODE6"} />)).to.be.true;
                 });
 
                 it("Skal vise info om reservasjon med riktig feilAarsak", () => {
                     arbeidstaker.kontaktinfo.reservasjon.feilAarsak = "INGEN_KONTAKTINFORMASJON"
                     const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
-                    expect(compo.contains(<KontaktinfoFeilmelding feilAarsak={"INGEN_KONTAKTINFORMASJON"} />)).to.be.true;
+                    expect(compo.contains(<KontaktInfoFeilmelding feilAarsak={"INGEN_KONTAKTINFORMASJON"} />)).to.be.true;
                 });
 
                 it("SKal vise riktig nummerering", () => {

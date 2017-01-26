@@ -13,7 +13,7 @@
 
     <groupId>no.nav.sbl.dialogarena</groupId>
     <artifactId>modiasyfofront</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.173-d6d9e9b</version>
     <modules>
         <module>config</module>
         <module>ear</module>
