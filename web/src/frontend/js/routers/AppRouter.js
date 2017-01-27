@@ -1,11 +1,12 @@
-import React, { PropTypes } from 'react';
-import { Router, Route } from 'react-router';
-import NaermesteLedereContainer from '../containers/NaermesteLedereContainer';
-import FeilsideContainer from '../containers/FeilsideContainer';
-import MotebookingContainer from '../containers/MotebookingContainer';
-import AvbrytMoteContainer from '../containers/AvbrytMoteContainer';
-import BekreftMoteContainer from '../containers/BekreftMoteContainer';
-import TidslinjeContainer from '../containers/TidslinjeContainer';
+import React, {PropTypes} from "react";
+import {Router, Route} from "react-router";
+import NaermesteLedereContainer from "../containers/NaermesteLedereContainer";
+import FeilsideContainer from "../containers/FeilsideContainer";
+import MotebookingContainer from "../containers/MotebookingContainer";
+import AvbrytMoteContainer from "../containers/AvbrytMoteContainer";
+import BekreftMoteContainer from "../containers/BekreftMoteContainer";
+import TidslinjeContainer from "../containers/TidslinjeContainer";
+import SykmeldingerContainer from "../containers/SykmeldingerContainer";
 
 const AppRouter = ({ history }) => {
     return (<Router history={history}>
@@ -16,6 +17,7 @@ const AppRouter = ({ history }) => {
         <Route path="/sykefravaer/:fnr/mote/:moteUuid/avbryt" component={AvbrytMoteContainer} />
         <Route path="/sykefravaer/:fnr/mote/bekreft/:alternativId" component={BekreftMoteContainer} />
         <Route path="/sykefravaer/:fnr/tidslinjen" component={TidslinjeContainer} />
+        <Route path="/sykefravaer/:fnr/sykmeldinger" component={SykmeldingerContainer} />
         <Route path="/sykefravaer/:fnr/tidslinjen/:valgtArbeidssituasjon" component={TidslinjeContainer} />
         <Route path="/" component={FeilsideContainer} />
     </Router>);

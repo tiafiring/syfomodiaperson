@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import { browserHistory } from 'react-router';
-import * as menypunkter from '../menypunkter';
+import React, {Component, PropTypes} from "react";
+import {browserHistory} from "react-router";
+import * as menypunkter from "../menypunkter";
 
 const naermesteLederMenypunkt = {
     navn: 'Nærmeste leder',
@@ -18,6 +18,12 @@ const tidslinjeMenypunkt = {
     navn: 'Tidslinjen',
     sti: 'tidslinjen',
     menypunkt: menypunkter.TIDSLINJEN,
+};
+
+const sykmeldingerMenypunkt = {
+    navn: 'Sykmeldinger',
+    sti: 'sykmeldinger',
+    menypunkt: menypunkter.SYKMELDINGER,
 };
 
 class GlobalNavigasjon extends Component {
@@ -79,7 +85,7 @@ class GlobalNavigasjon extends Component {
 
     render() {
         const { fnr, harTilgangMotemodul, aktivtMenypunkt } = this.props;
-        this.menypunkter = [naermesteLederMenypunkt, tidslinjeMenypunkt];
+        this.menypunkter = [naermesteLederMenypunkt, tidslinjeMenypunkt,  sykmeldingerMenypunkt];
         if (harTilgangMotemodul) {
             this.menypunkter.push(motemodulMenypunkt);
         }
