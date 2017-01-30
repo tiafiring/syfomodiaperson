@@ -5,30 +5,30 @@ const initiellState = {
     data: [],
 };
 
-export default function sykmeldinger(state = initiellState, action) {
+export default function arbeidsgiversSykmeldinger(state = initiellState, action) {
     switch (action.type) {
-        case 'HENT_SYKMELDINGER_FEILET': {
+        case 'HENT_ARBEIDSGIVERS_SYKMELDINGER_FEILET': {
             return Object.assign({}, state, {
                 data: [],
                 henter: false,
                 hentingFeilet: true,
             });
         }
-        case 'HENTER_SYKMELDINGER': {
+        case 'HENTER_ARBEIDSGIVERS_SYKMELDINGER': {
             return {
                 data: [],
                 henter: true,
                 hentingFeilet: false,
             };
         }
-        case 'SYKMELDINGER_HENTET': {
+        case 'ARBEIDSGIVERS_SYKMELDINGER_HENTET': {
             return {
                 henter: false,
                 hentingFeilet: false,
                 data: action.data,
             };
         }
-        case 'HENT_SYKMELDINGER_IKKE_TILGANG': {
+        case 'HENT_ARBEIDSGIVERS_SYKMELDINGER_IKKE_TILGANG': {
             return Object.assign({}, state, {
                 data: [],
                 henter: false,

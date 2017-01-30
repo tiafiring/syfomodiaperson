@@ -3,29 +3,32 @@ import Side from "../sider/Side";
 import {connect} from "react-redux";
 import SidetoppSpeilet from "../components/SidetoppSpeilet";
 import {bindActionCreators} from "redux";
-import {getLedetekst, Varselstripe} from "digisyfo-npm";
-import * as actionCreators from "../actions/sykmeldinger_actions";
+import {getSykmelding, getHtmlLedetekst, getLedetekst, Varselstripe} from "digisyfo-npm";
+import * as sykmeldingerActions from "../actions/sykmeldinger_actions";
+import * as arbeidsgiversSykmeldingerActions from "../actions/arbeidsgiverssykmeldinger_actions";
+import SykmeldingSide from "../sykmeldinger/sykmelding/SykmeldingSide";
 import Feilmelding from "../components/Feilmelding";
 import AppSpinner from "../components/AppSpinner";
-import DineSykmeldinger from "../sykmeldinger/sykmeldinger/DineSykmeldinger";
 import Brodsmuler from "../components/Brodsmuler";
 import {SYKMELDINGER} from "../menypunkter";
 
-export class SykmeldingerSide extends Component {
+export class DinSykmeldingSide extends Component {
+
     componentWillMount() {
         const { fnr } = this.props;
         this.props.actions.hentSykmeldinger(fnr);
+        this.props.actions.hentArbeidsgiversSykmeldinger(fnr);
     }
 
     render() {
-        const { brukernavn, ledetekster, henter, hentingFeilet, ikkeTilgang, sykmeldinger, fnr } = this.props;
-        const htmlIntro = {
-            __html: `<p>${getLedetekst('dine-sykmeldinger.introduksjonstekst', ledetekster)}</p>`,
-        };
+        const { brukernavn, ledetekster, henter, hentingFeilet, ikkeTilgang, dinSykmelding, fnr } = this.props;
+
         const brodsmuler = [{
             tittel: 'Ditt sykefravær',
         }, {
             tittel: 'Dine sykmeldinger',
+        }, {
+            tittel: 'Sykmelding',
         }];
 
         return (<Side tittel="Sykmeldinger" aktivtMenypunkt={SYKMELDINGER}>
@@ -41,6 +44,7 @@ export class SykmeldingerSide extends Component {
                         return (<Feilmelding tittel="Under arbeid" melding="Du har foreløpig ikke tilgang til denne tjenesten. Vi jobber med å få på plass riktig tilgangsstyring.
                     Veiledere som jobber med sykefraværsoppfølging og veiledere på kontaktsenteret vil etter hver få tilgang. Takk for at du prøver igjen senere!" />);
                     }
+
                     return (<div>
                         <div className="panel">
                             <Varselstripe type="spesial" ikon="/sykefravaer/img/svg/speiling.svg">
@@ -49,8 +53,16 @@ export class SykmeldingerSide extends Component {
                         </div>
                         <div className="speiling">
                             <Brodsmuler brodsmuler={brodsmuler} />
-                            <SidetoppSpeilet tittel="Dine sykmeldinger" htmlTekst={htmlIntro} />
-                            <DineSykmeldinger fnr={fnr} sykmeldinger={sykmeldinger} ledetekster={ledetekster} />
+                            <SidetoppSpeilet tittel="Sykmelding" />
+                            <div className="panel">
+                                <div className="media">
+                                    <img src="/sykefravaer/img/svg/nav-ansatt.svg" className="media__img media__img--desktop"
+                                        alt="Ansatt i NAV" />
+                                    <h2 className="typo-syfotittel">{getLedetekst('din-sykmelding.ny-tjeneste.tittel', ledetekster)}</h2>
+                                </div>
+                                <div className="redaksjonelt-innhold" dangerouslySetInnerHTML={getHtmlLedetekst('din-sykmelding.ny-tjeneste.tekst', ledetekster)}></div>
+                            </div>
+                            <SykmeldingSide dinSykmelding={dinSykmelding} ledetekster={ledetekster} arbeidsgiversSykmelding={dinSykmelding} fnr={fnr} />
                         </div>
                     </div>);
                 })()
@@ -59,30 +71,38 @@ export class SykmeldingerSide extends Component {
     }
 }
 
-SykmeldingerSide.propTypes = {
+DinSykmeldingSide.propTypes = {
     fnr: PropTypes.string,
     brukernavn: PropTypes.string,
     actions: PropTypes.object,
-    sykmeldinger: PropTypes.array,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     ikkeTilgang: PropTypes.bool,
     ledetekster: PropTypes.object,
+    dinSykmelding: PropTypes.object,
 };
 
 export function mapDispatchToProps(dispatch) {
-    const actions = Object.assign({}, actionCreators);
+    const actions = Object.assign({}, sykmeldingerActions, arbeidsgiversSykmeldingerActions);
     return {
         actions: bindActionCreators(actions, dispatch),
     };
 }
 
-
-export function mapStateToProps(state) {
+export function mapStateToProps(state, ownProps) {
     const fnr = state.navbruker.data.fnr;
+    const sykmeldingId = ownProps.params.sykmeldingId;
     const henter = state.sykmeldinger.henter || state.ledetekster.henter;
     const hentingFeilet = state.sykmeldinger.hentingFeilet || state.ledetekster.hentingFeilet;
     const ikkeTilgang = state.sykmeldinger.ikkeTilgang;
+    const dinSykmelding = getSykmelding(state.sykmeldinger.data, sykmeldingId);
+    let arbeidsgiversSykmelding = {};
+
+    if (dinSykmelding && (dinSykmelding.status === 'SENDT' || (dinSykmelding.status === 'BEKREFTET' && dinSykmelding.valgtArbeidssituasjon === 'ARBEIDSTAKER'))) {
+        arbeidsgiversSykmelding = getSykmelding(state.arbeidsgiversSykmeldinger.data, sykmeldingId);
+    }
+
+
     return {
         brukernavn: state.navbruker.data.navn,
         fnr,
@@ -90,9 +110,10 @@ export function mapStateToProps(state) {
         hentingFeilet,
         ikkeTilgang,
         ledetekster: state.ledetekster.data,
-        sykmeldinger: state.sykmeldinger.data,
+        dinSykmelding,
+        arbeidsgiversSykmelding,
     };
 }
 
-const SykmeldingerContainer = connect(mapStateToProps, mapDispatchToProps)(SykmeldingerSide);
-export default SykmeldingerContainer;
+const DinSykmeldingContainer = connect(mapStateToProps, mapDispatchToProps)(DinSykmeldingSide);
+export default DinSykmeldingContainer;

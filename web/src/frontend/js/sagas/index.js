@@ -5,6 +5,7 @@ import epostinnholdSagas from "../mote/sagas/epostinnholdSagas";
 import arbeidstakerSagas from "../mote/sagas/arbeidstakerSagas";
 import tidslinjerSagas from "./tidslinjerSagas";
 import sykmeldingerSagas from "./sykmeldingerSagas";
+import arbeidsgiversSykmeldingerSagas from "./arbeidsgiversSykmeldingerSagas";
 import virksomhetSagas from "../mote/sagas/virksomhetSagas";
 import {ledeteksterSagas} from "digisyfo-npm";
 
@@ -19,5 +20,6 @@ export default function * rootSaga() {
         virksomhetSagas(),
         arbeidstakerSagas(),
         sykmeldingerSagas(),
+        arbeidsgiversSykmeldingerSagas(),
     ];
 }

@@ -7,8 +7,9 @@ import {Provider} from "react-redux";
 import createSagaMiddleware from "redux-saga";
 import history from "./history.js";
 import ledere from "./reducers/ledere";
-import sykmeldinger from "./reducers/sykmeldinger";
 import navbruker from "./reducers/navbruker";
+import sykmeldinger from "./reducers/sykmeldinger";
+import arbeidsgiversSykmeldinger from "./reducers/arbeidsgiversSykmeldinger";
 import {reducer as formReducer} from "redux-form";
 import {ledetekster, hentLedetekster, tidslinjer} from "digisyfo-npm";
 import moter from "./mote/reducers/moter";
@@ -28,9 +29,11 @@ const rootReducer = combineReducers({
     arbeidstaker,
     tidslinjer,
     sykmeldinger,
+    arbeidsgiversSykmeldinger,
     ledetekster,
     form: formReducer,
 });
+
 
 const sagaMiddleware = createSagaMiddleware();
 

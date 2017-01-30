@@ -85,7 +85,7 @@ class GlobalNavigasjon extends Component {
 
     render() {
         const { fnr, harTilgangMotemodul, aktivtMenypunkt } = this.props;
-        this.menypunkter = [naermesteLederMenypunkt, tidslinjeMenypunkt,  sykmeldingerMenypunkt];
+        this.menypunkter = [naermesteLederMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt];
         if (harTilgangMotemodul) {
             this.menypunkter.push(motemodulMenypunkt);
         }
