@@ -76,40 +76,32 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternati
             <table className="motestatus blokk-l">
                 <thead>
                 <tr>
-                    <th/>
+                    <th className="motestatus__tittel">Møtetider</th>
                     {
-                        deltakere && deltakere
-                            .map((deltaker, index) => {
-                                return (
-                                <td key={index}>
-                                    <th className="motestatus__deltaker" scope="row">
-                                        <strong>{deltakertyper[deltaker.type.toLowerCase()]}</strong>
-                                        <span>{deltaker.navn}</span>
-                                    </th>
-                                </td>);
-                            })
+                        alternativer.map((tidspunkt, index) => {
+                            let className = null;
+                            if (mote.valgtAlternativ && tidspunkt.id === mote.valgtAlternativ.id) {
+                                className = 'bekreftetTidspunkt';
+                            }
+                            return (<th scope="col" className={className} key={index}>{getTidFraZulu(tidspunkt.tid)}</th>);
+                        })
                     }
                 </tr>
                 </thead>
                 <tbody>
-
                 {
-                    mote.alternativer
-                        .map((alternativ, index) => {
-                            let className = null;
-                            if (mote.valgtAlternativ && alternativ.id === mote.valgtAlternativ.id) {
-                                className = 'bekreftetTidspunkt';
-                            }
+                    deltakere && deltakere
+                        .map((deltaker, index) => {
                             return (<tr key={index}>
-                                <th scope="col" className={className} key={index}>{getTidFraZulu(alternativ.tid)}</th>
+                                <th className="motestatus__deltaker" scope="row"><strong>{deltakertyper[deltaker.type.toLowerCase()]}</strong> <span>{deltaker.navn}</span></th>
                                 {
-                                    deltakere.map((deltaker, index2) => {
+                                    deltaker.svar.map((tidspunkt, index2) => {
                                         let className = 'motestatus__svar';
-                                        if (mote.valgtAlternativ && deltaker.svar[index].id === mote.valgtAlternativ.id) {
+                                        if (mote.valgtAlternativ && tidspunkt.id === mote.valgtAlternativ.id) {
                                             className = 'motestatus__svar motestatus__svar--bekreftetTidspunkt';
                                         }
                                         return (<td key={index2} className={className}>
-                                            <MotebookingIkon deltaker={deltaker} index={index} />
+                                            <MotebookingIkon deltaker={deltaker} index={index2} />
                                         </td>);
                                     })
                                 }
