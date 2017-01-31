@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-import { Field } from 'redux-form';
-import TextField from '../../components/TextField';
-import { connect } from 'react-redux';
-import * as virksomhetActions from '../actions/virksomhet_actions';
+import React, {Component, PropTypes} from "react";
+import {Field} from "redux-form";
+import TextField from "../../components/TextField";
+import {connect} from "react-redux";
+import * as virksomhetActions from "../actions/virksomhet_actions";
 
 export const parseOrgnummer = (orgnummer) => {
     return orgnummer.replace(/\D/g, '').substr(0, 9);

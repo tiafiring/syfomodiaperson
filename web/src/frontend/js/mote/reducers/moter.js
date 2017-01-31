@@ -1,4 +1,4 @@
-import * as actions from '../actions/actiontyper';
+import * as actions from "../actions/actiontyper";
 
 const defaultState = {
     data: [],
@@ -6,6 +6,10 @@ const defaultState = {
     hentingFeilet: false,
     sender: false,
     sendingFeilet: false,
+    nyeAlternativFeilet: false,
+    senderNyeAlternativ: false,
+    antallNyeTidspunkt: 0,
+    skjermetBruker: false,
 };
 
 export default function moter(state = defaultState, action) {
@@ -47,7 +51,7 @@ export default function moter(state = defaultState, action) {
             });
         }
         case actions.HENTER_MOTER: {
-            return {
+            return Object.assign({}, state, {
                 data: [],
                 sender: false,
                 henter: true,
@@ -55,10 +59,10 @@ export default function moter(state = defaultState, action) {
                 sendingFeilet: false,
                 avbryter: false,
                 avbrytFeilet: false,
-            };
+            });
         }
         case actions.MOTER_HENTET: {
-            return {
+            return Object.assign({}, state, {
                 data: action.data,
                 sender: false,
                 henter: false,
@@ -66,10 +70,10 @@ export default function moter(state = defaultState, action) {
                 sendingFeilet: false,
                 avbryter: false,
                 avbrytFeilet: false,
-            };
+            });
         }
         case actions.HENT_MOTER_FEILET: {
-            return {
+            return Object.assign({}, state, {
                 data: [],
                 sender: false,
                 sendingFeilet: false,
@@ -77,7 +81,7 @@ export default function moter(state = defaultState, action) {
                 hentingFeilet: true,
                 avbryter: false,
                 avbrytFeilet: false,
-            };
+            });
         }
         case actions.AVBRYTER_MOTE: {
             return Object.assign({}, state, {
@@ -100,7 +104,7 @@ export default function moter(state = defaultState, action) {
                 }
                 return mote;
             });
-            return Object.assign({}, state, { data }, {
+            return Object.assign({}, state, {data}, {
                 avbryter: false,
                 avbrytFeilet: false,
             });
@@ -126,7 +130,7 @@ export default function moter(state = defaultState, action) {
                 }
                 return mote;
             });
-            return Object.assign({}, state, { data }, {
+            return Object.assign({}, state, {data}, {
                 bekrefter: false,
                 bekreftFeilet: false,
                 avbryter: false,
@@ -137,6 +141,61 @@ export default function moter(state = defaultState, action) {
             return Object.assign({}, state, {
                 bekrefter: false,
                 bekreftFeilet: true,
+            });
+        }
+        case actions.FLERE_ALTERNATIV: {
+            let antallNyeTidspunkt;
+            if (!state.antallNyeTidspunkt) {
+                antallNyeTidspunkt = 2;
+            } else {
+                antallNyeTidspunkt = state.antallNyeTidspunkt + 1;
+            }
+
+            return Object.assign({}, state, {
+                antallNyeTidspunkt: antallNyeTidspunkt
+            });
+        }
+        case actions.AVBRYT_FLERE_ALTERNATIV: {
+            return Object.assign({}, state, {
+                antallNyeTidspunkt: undefined
+            });
+        }
+        case actions.OPPRETTER_FLERE_ALTERNATIV: {
+            return Object.assign({}, state, {
+                senderNyeAlternativ: true,
+                nyeAlternativFeilet: false,
+            });
+        }
+        case actions.OPPRETT_FLERE_ALTERNATIV_FEILET: {
+            return Object.assign({}, state, {
+                nyeAlternativFeilet: true,
+                senderNyeAlternativ: false,
+            });
+        }
+        case actions.OPPRETT_FLERE_ALTERNATIV_BEKREFTET: {
+            state.data.filter(function (mote) {
+                return mote.moteUuid === action.moteUuid;
+            }).map(function (mote) {
+                mote.alternativer.push.apply(mote.alternativer, action.data.alternativer);
+                mote.deltakere.forEach(function (deltaker) {
+                    action.data.alternativer.forEach(function(){
+                        deltaker.svar.push({ valgt: false });
+                    });
+                });
+                return mote;
+            });
+
+            return Object.assign({}, state, {
+                antallNyeTidspunkt: undefined,
+                nyeAlternativFeilet: false,
+                senderNyeAlternativ: false,
+            });
+        }
+        case actions.MOTE_IKKE_TILGANG: {
+            return Object.assign({}, state, {
+                skjermetBruker: true,
+                henter: false,
+                hentingFeilet: false,
             });
         }
         default: {

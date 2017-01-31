@@ -1,9 +1,9 @@
-import { expect } from 'chai';
-import MotebookingStatus, { MotetidspunktValgt } from '../../../js/mote/components/MotebookingStatus'
-import { mount, shallow } from 'enzyme';
-import React from 'react'
-import sinon from 'sinon';
-import { Varselstripe } from 'digisyfo-npm';
+import {expect} from "chai";
+import MotebookingStatus, {MotetidspunktValgt} from "../../../js/mote/components/MotebookingStatus";
+import {mount, shallow} from "enzyme";
+import React from "react";
+import sinon from "sinon";
+import {Varselstripe} from "digisyfo-npm";
 
 describe("MotebookingStatus", () => {
 
@@ -31,6 +31,7 @@ describe("MotebookingStatus", () => {
             navn: "Helge",
             epost: "***REMOVED***",
             avvik: [],
+            hendelser: [],
             svar: [{
                 "tid": "2012-12-12T11:00:00Z",
                 "sted": "Oslo by",
@@ -46,6 +47,7 @@ describe("MotebookingStatus", () => {
             type: "Bruker",
             navn: "Ole",
             avvik: [],
+            hendelser: [],
             epost: "***REMOVED***",
             svar: [{}],
         }];
