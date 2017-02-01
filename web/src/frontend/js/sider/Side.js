@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react';
-import NavbrukerinfoContainer from '../containers/NavbrukerinfoContainer';
-import GlobalNavigasjonContainer from '../containers/GlobalNavigasjonContainer';
+import React, {PropTypes} from "react";
+import NavbrukerinfoContainer from "../containers/NavbrukerinfoContainer";
+import GlobalNavigasjonContainer from "../containers/GlobalNavigasjonContainer";
 const DocumentTitle = require('react-document-title');
 
 const Side = ({ tittel = '', children, aktivtMenypunkt }) => {
@@ -12,7 +12,9 @@ const Side = ({ tittel = '', children, aktivtMenypunkt }) => {
                     <GlobalNavigasjonContainer aktivtMenypunkt={aktivtMenypunkt} />
                 </nav>
                 <div className="unit two-thirds">
+                    <div className="overflow">
                     {children}
+                    </div>
                 </div>
             </div>
         </div>
