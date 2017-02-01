@@ -5,12 +5,6 @@ const DocumentTitle = require('react-document-title');
 
 export class Side extends Component {
 
-    componentDidMount() {
-        const scrollomrade = document.getElementById("modiasyfoscroll");
-        const scrollhoyde = window.innerHeight - scrollomrade.offsetTop - 100;
-        scrollomrade.style.maxHeight = scrollhoyde + 'px';
-    }
-
     render() {
         const { tittel = '', children, aktivtMenypunkt } = this.props;
             return (<DocumentTitle title={tittel + (tittel.length > 0 ? ' - Sykefravær' : 'Sykefravær')}>
@@ -21,9 +15,7 @@ export class Side extends Component {
                             <GlobalNavigasjonContainer aktivtMenypunkt={aktivtMenypunkt} />
                         </nav>
                         <div className="unit two-thirds">
-                            <div className="modiasyfoscroll" id="modiasyfoscroll">
-                                {children}
-                            </div>
+                            {children}
                         </div>
                     </div>
                 </div>
