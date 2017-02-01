@@ -7,7 +7,7 @@ export class Side extends Component {
 
     componentDidMount() {
         const scrollomrade = document.getElementById("modiasyfoscroll");
-        const scrollhoyde = screen.height - scrollomrade.offsetTop;
+        const scrollhoyde = window.innerHeight - scrollomrade.offsetTop - 100;
         scrollomrade.style.maxHeight = scrollhoyde + 'px';
     }
 
