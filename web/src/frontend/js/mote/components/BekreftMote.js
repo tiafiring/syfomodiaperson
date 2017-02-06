@@ -6,7 +6,7 @@ import {hentDag} from "../../utils/index";
 
 const BekreftMote = ({ deltaker, sykmeldtDeltaker, onSubmit, avbrytHref, alternativ, ledetekster }) => {
     return (<div className="epostinnhold">
-        <h2 className="typo-innholdstittel">{getLedetekst('mote.bekreftmote.lightbox-overskift', ledetekster)}</h2>
+        <h2 className="typo-innholdstittel">{getLedetekst('mote.bekreftmote.lightbox-overskrift', ledetekster)}</h2>
 
         <div className="epostinnhold__mottakere blokk">
             <h3>{getLedetekst('mote.bekreftmote.lightbox-tidsted', ledetekster)}</h3>
