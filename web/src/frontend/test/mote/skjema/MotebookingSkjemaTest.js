@@ -10,7 +10,7 @@ import {Varselstripe} from "digisyfo-npm";
 import React from "react";
 import sinon from "sinon";
 
-describe("MotebookingSkjema", () => {
+describe("MotebookingSkjemaTest", () => {
 
     describe("MotebookingSkjema", () => {
 
@@ -86,6 +86,7 @@ describe("MotebookingSkjema", () => {
 
             let arbeidstaker;
             let ledere = [];
+            let ledetekster = {};
 
             beforeEach(() => {
                 arbeidstaker = {"navn":"***REMOVED***","kontaktinfo":{"tlf":"+4799999999","epost":"tester.scrambling-script@fellesregistre.no","reservasjon":{"skalHaVarsel":true}}, "hendelser": []};
@@ -144,14 +145,14 @@ describe("MotebookingSkjema", () => {
 
                 it("Skal vise info om reservasjon med riktig feilAarsak", () => {
                     arbeidstaker.kontaktinfo.reservasjon.feilAarsak = "KODE6"
-                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
-                    expect(compo.contains(<KontaktInfoFeilmelding feilAarsak={"KODE6"} />)).to.be.true;
+                    const compo = shallow(<MotebookingSkjema ledetekster={ledetekster} arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
+                    expect(compo.find(KontaktInfoFeilmelding)).to.have.length(1);
                 });
 
                 it("Skal vise info om reservasjon med riktig feilAarsak", () => {
                     arbeidstaker.kontaktinfo.reservasjon.feilAarsak = "INGEN_KONTAKTINFORMASJON"
-                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
-                    expect(compo.contains(<KontaktInfoFeilmelding feilAarsak={"INGEN_KONTAKTINFORMASJON"} />)).to.be.true;
+                    const compo = shallow(<MotebookingSkjema ledetekster={ledetekster} arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
+                    expect(compo.find(KontaktInfoFeilmelding)).to.have.length(1);
                 });
 
                 it("SKal vise riktig nummerering", () => {

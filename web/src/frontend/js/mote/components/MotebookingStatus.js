@@ -4,7 +4,7 @@ import {getTidFraZulu, getDatoFraZulu, fikkIkkeMoteOpprettetVarsel} from "../uti
 import Sidetopp from "../../components/Sidetopp";
 import KontaktInfoFeilmelding from "./KontaktInfoFeilmelding";
 import FlereTidspunktSkjema from "../skjema/FlereTidspunktSkjema";
-import {Varselstripe} from "digisyfo-npm";
+import {Varselstripe, getHtmlLedetekst} from "digisyfo-npm";
 import {Link} from "react-router";
 
 const deltakertyper = {
@@ -19,6 +19,20 @@ export const MotetidspunktValgt = ({ bekreftetTidspunkt }) => {
 
 MotetidspunktValgt.propTypes = {
     bekreftetTidspunkt: PropTypes.string,
+};
+
+const feilAarsakForklaringFunc = (feilAarsak, ledetekster) => {
+    switch (feilAarsak) {
+        case 'RESERVERT': {
+            return <div dangerouslySetInnerHTML={getHtmlLedetekst('motestatus.krr.reservert', ledetekster)}></div>
+        }
+        case 'INGEN_KONTAKTINFORMASJON': {
+            return <div dangerouslySetInnerHTML={getHtmlLedetekst('motestatus.krr.ingen-kontaktinformasjon', ledetekster)}></div>
+        }
+        default: {
+            return <p />;
+        }
+    }
 };
 
 const MotebookingStatus = ({ ledetekster, fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
@@ -56,6 +70,7 @@ const MotebookingStatus = ({ ledetekster, fnr, mote, avbrytMoteUtenVarsel, sende
         navneliste.push(deltaker.navn);
     });
     sendtTil += navneliste.join(" og ");
+    const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
 
     return (<div>
         <div className="panel">
@@ -67,7 +82,7 @@ const MotebookingStatus = ({ ledetekster, fnr, mote, avbrytMoteUtenVarsel, sende
             </Varselstripe>
         </div>
         {
-            feilmelding && <KontaktInfoFeilmelding feilAarsak={feilmelding.resultat} ledetekster={ledetekster} />
+            feilmelding && <KontaktInfoFeilmelding feilmelding={feilAarsakForklaringFunc(feilAarsak, ledetekster)} />
         }
         <div className="panel">
             <Sidetopp tittel="Status for møteforespørselen" />

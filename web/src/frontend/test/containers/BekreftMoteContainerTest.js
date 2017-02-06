@@ -16,6 +16,7 @@ describe("BekreftMoteContainer", () => {
         beforeEach(() => {
             hentMoter = sinon.spy();
             bekreftMote = sinon.spy();
+            ledetekster = sinon.spy();
             deltaker = {
                 deltakerUuid: "123"
             }
@@ -114,6 +115,7 @@ describe("BekreftMoteContainer", () => {
                 }
             };
             state = {
+                ledetekster: { henter: false, data: {} },
                 moter: {
                     data: [{
                         "id": 1,

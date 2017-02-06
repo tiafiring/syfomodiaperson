@@ -1,11 +1,9 @@
-import React from 'react';
-import { expect } from 'chai';
-import { mount, shallow, render } from 'enzyme';
-import sinon from 'sinon';
-
-import AppSpinner from '../../../js/components/AppSpinner';
-
-import { mapStateToProps, MotebookingSkjemaContainer } from '../../../js/mote/containers/MotebookingSkjemaContainer';
+import React from "react";
+import {expect} from "chai";
+import {mount, shallow, render} from "enzyme";
+import sinon from "sinon";
+import AppSpinner from "../../../js/components/AppSpinner";
+import {mapStateToProps, MotebookingSkjemaContainer} from "../../../js/mote/containers/MotebookingSkjemaContainer";
 
 describe("MotebookingSkjemaContainer", () => {
 
@@ -42,6 +40,7 @@ describe("MotebookingSkjemaContainer", () => {
 
         beforeEach(() => {
             state = {
+                ledetekster: { henter: false, data: {} },
                 ledere: {
                     data: [{
                         navn: "Ole",

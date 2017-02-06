@@ -1,10 +1,9 @@
-import React from 'react';
-import { expect } from 'chai';
-import { mount, shallow, render } from 'enzyme';
+import React from "react";
+import {expect} from "chai";
+import {mount, shallow, render} from "enzyme";
+import {mapStateToProps} from "../../../js/mote/containers/MotestatusContainer";
 
-import { mapStateToProps } from '../../../js/mote/containers/MotestatusContainer';
-
-describe("MotestatusContainer", () => {
+describe("MotestatusContainerTest", () => {
 
     describe("mapStateToProps", () => {
 
@@ -14,6 +13,7 @@ describe("MotestatusContainer", () => {
         beforeEach(() => {
             ownProps = {};
             state = {
+                ledetekster: { henter: false, data: {} },
                 moter: {
                     data: [{
                         moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",

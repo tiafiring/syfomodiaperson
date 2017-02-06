@@ -5,7 +5,7 @@ import LederFields, {ManuellUtfyltLeder} from "./LederFields";
 import Tidspunkter from "./Tidspunkter";
 import KontaktInfoFeilmelding from "../components/KontaktInfoFeilmelding";
 import Sidetopp from "../../components/Sidetopp";
-import {Varselstripe} from "digisyfo-npm";
+import {Varselstripe, getHtmlLedetekst} from "digisyfo-npm";
 import {genererDato, erGyldigKlokkeslett, erGyldigEpost, erGyldigDato} from "../utils/index";
 import {getCookieValue} from "../../utils/index";
 
@@ -51,9 +51,23 @@ Arbeidstaker.propTypes = {
     kontaktinfo: PropTypes.object,
 };
 
+const feilAarsakForklaringFunc = (feilAarsak, ledetekster) => {
+    switch (feilAarsak) {
+        case 'RESERVERT': {
+            return <div dangerouslySetInnerHTML={getHtmlLedetekst('motebooking.krr.reservert', ledetekster)}></div>
+        }
+        case 'INGEN_KONTAKTINFORMASJON': {
+            return <div dangerouslySetInnerHTML={getHtmlLedetekst('motebooking.krr.ingen-kontaktinformasjon', ledetekster)}></div>
+        }
+        default: {
+            return <p />;
+        }
+    }
+};
+
 export const MotebookingSkjema = ({
-    handleSubmit, arbeidstaker, opprettMote, fnr, sender, sendingFeilet, ledere,
-    autofill, untouch, hentLedereFeiletBool, ledetekster
+    ledetekster, handleSubmit, arbeidstaker, opprettMote, fnr, sender, sendingFeilet, ledere,
+    autofill, untouch, hentLedereFeiletBool,
 }) => {
     const submit = (values) => {
         const data = getData(values);
@@ -61,12 +75,11 @@ export const MotebookingSkjema = ({
         data.navEnhet = getCookieValue('navEnhet', 'navEnhet');
         opprettMote(data);
     };
-
     const visArbeidstaker = arbeidstaker && arbeidstaker.kontaktinfo && arbeidstaker.kontaktinfo.reservasjon.skalHaVarsel;
     const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
 
     return (<div>
-        { !visArbeidstaker && <KontaktInfoFeilmelding feilAarsak={feilAarsak} ledetekster={ledetekster}/> }
+        { !visArbeidstaker && <KontaktInfoFeilmelding feilmelding={feilAarsakForklaringFunc(feilAarsak, ledetekster)} /> }
         <form className="panel" onSubmit={handleSubmit(submit)}>
             <Sidetopp tittel="Møteforespørsel"/>
 
