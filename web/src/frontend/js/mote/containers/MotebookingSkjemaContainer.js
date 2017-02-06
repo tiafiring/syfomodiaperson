@@ -40,9 +40,10 @@ export function mapStateToProps(state) {
     return {
         ledere,
         arbeidstaker: state.arbeidstaker.data,
-        henter: state.ledere.henter || state.arbeidstaker.henter,
+        henter: state.ledere.henter || state.arbeidstaker.henter || state.ledetekster.henter,
         hentLedereFeiletBool: state.ledere.hentingFeilet,
         skjermetBruker: state.moter.skjermetBruker,
+        ledetekster: state.ledetekster.data,
         hentArbeidstakerFeilet: state.arbeidstaker.hentingFeilet,
     };
 }

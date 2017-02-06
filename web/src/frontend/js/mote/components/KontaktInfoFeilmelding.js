@@ -1,25 +1,13 @@
 import React, {PropTypes} from "react";
+import {getHtmlLedetekst} from "digisyfo-npm";
 
-const feilAarsakForklaringFunc = (feilAarsak) => {
+const feilAarsakForklaringFunc = (feilAarsak, ledetekster) => {
     switch (feilAarsak) {
         case 'RESERVERT': {
-            return <p>Den sykmeldte har reservert seg mot elektronisk kommunikasjon med det offentlige. Du kan fortsatt
-                sende møteforespørsel til arbeidsgiveren digitalt, men den sykmeldte må kontaktes på annen måte.</p>;
+            return <div dangerouslySetInnerHTML={getHtmlLedetekst('motebooking.krr.reservert', ledetekster)}></div>
         }
         case 'INGEN_KONTAKTINFORMASJON': {
-            return (<div>
-                <p>Den sykmeldte er ikke registrert i Kontakt- og reservasjonsregisteret (KRR). Du kan fortsatt sende
-                    møteforespørsel til arbeidsgiveren digitalt, men den sykmeldte må kontaktes på annen måte.</p>
-                <p>Den sykmeldte kan registrere kontaktinformasjonen sin her: <a target="_blank"
-                                                                                 href="http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din">http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din</a>
-                </p>
-            </div>);
-        }
-        case 'KODE6': {
-            return <p>Den sykmeldte er registrert med skjermingskode 6.</p>;
-        }
-        case 'KODE7': {
-            return <p>Den sykmeldte er registrert med skjermingskode 7.</p>;
+            return <div dangerouslySetInnerHTML={getHtmlLedetekst('motebooking.krr.ingen-kontaktinformasjon', ledetekster)}></div>
         }
         default: {
             return <p />;
@@ -27,8 +15,8 @@ const feilAarsakForklaringFunc = (feilAarsak) => {
     }
 };
 
-const KontaktInfoFeilmelding = ({feilAarsak}) => {
-    const feilAarsakForklaring = feilAarsakForklaringFunc(feilAarsak);
+const KontaktInfoFeilmelding = ({feilAarsak, ledetekster}) => {
+    const feilAarsakForklaring = feilAarsakForklaringFunc(feilAarsak, ledetekster);
     return (<div className="panel">
         <div className="hode hode-feil">
             { feilAarsakForklaring }
@@ -38,6 +26,7 @@ const KontaktInfoFeilmelding = ({feilAarsak}) => {
 
 KontaktInfoFeilmelding.propTypes = {
     feilAarsak: PropTypes.string,
+    ledetekster: PropTypes.object,
 };
 
 export default KontaktInfoFeilmelding;

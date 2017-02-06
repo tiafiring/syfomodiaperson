@@ -53,7 +53,7 @@ Arbeidstaker.propTypes = {
 
 export const MotebookingSkjema = ({
     handleSubmit, arbeidstaker, opprettMote, fnr, sender, sendingFeilet, ledere,
-    autofill, untouch, hentLedereFeiletBool
+    autofill, untouch, hentLedereFeiletBool, ledetekster
 }) => {
     const submit = (values) => {
         const data = getData(values);
@@ -66,7 +66,7 @@ export const MotebookingSkjema = ({
     const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
 
     return (<div>
-        { !visArbeidstaker && <KontaktInfoFeilmelding feilAarsak={feilAarsak}/> }
+        { !visArbeidstaker && <KontaktInfoFeilmelding feilAarsak={feilAarsak} ledetekster={ledetekster}/> }
         <form className="panel" onSubmit={handleSubmit(submit)}>
             <Sidetopp tittel="Møteforespørsel"/>
 
@@ -130,6 +130,7 @@ MotebookingSkjema.propTypes = {
     sendingFeilet: PropTypes.bool,
     ledere: PropTypes.array,
     autofill: PropTypes.func,
+    ledetekster: PropTypes.object,
     untouch: PropTypes.func,
     hentLedereFeiletBool: PropTypes.bool,
     arbeidstaker: PropTypes.object,

@@ -21,7 +21,7 @@ MotetidspunktValgt.propTypes = {
     bekreftetTidspunkt: PropTypes.string,
 };
 
-const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
+const MotebookingStatus = ({ ledetekster, fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
     const { alternativer } = mote;
     let { deltakere } = mote;
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
@@ -67,7 +67,7 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternati
             </Varselstripe>
         </div>
         {
-            feilmelding && <KontaktInfoFeilmelding feilAarsak={feilmelding.resultat} />
+            feilmelding && <KontaktInfoFeilmelding feilAarsak={feilmelding.resultat} ledetekster={ledetekster} />
         }
         <div className="panel">
             <Sidetopp tittel="Status for møteforespørselen" />
@@ -170,6 +170,7 @@ MotebookingStatus.propTypes = {
     fnr: PropTypes.string,
     senderNyeAlternativ: PropTypes.bool,
     nyeAlternativFeilet: PropTypes.bool,
+    ledetekster: PropTypes.object,
     avbrytMoteUtenVarsel: PropTypes.func,
     flereAlternativ: PropTypes.func,
     opprettFlereAlternativ: PropTypes.func,

@@ -24,9 +24,10 @@ export const mapStateToProps = (state, ownProps) => {
     return {
         fnr,
         mote,
-        avbrytFeilet: state.moter.avbrytFeilet,
+        avbrytFeilet: state.moter.avbrytFeilet || state.ledetekster.henter,
         avbryter: state.moter.avbryter,
         henter: state.moter.henter,
+        ledetekster: state.ledetekster.data,
         antallNyeTidspunkt: state.moter.antallNyeTidspunkt,
         nyeAlternativFeilet: state.moter.nyeAlternativFeilet,
         senderNyeAlternativ: state.moter.senderNyeAlternativ,

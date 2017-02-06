@@ -107,8 +107,8 @@ export const mapStateToProps = (state, ownProps) => {
 
     return {
         fnr,
-        henterMoterBool: state.moter.henter,
-        ledetekster: PropTypes.object.isRequired,
+        henterMoterBool: state.moter.henter || state.ledetekster.henter,
+        ledetekster: state.ledetekster.data,
         alternativ,
         mote,
         deltaker,
