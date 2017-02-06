@@ -34,7 +34,7 @@ export class BekreftMoteSide extends Component {
     }
 
     render() {
-        const { alternativ, henterMoterBool, fnr, mote, deltaker } = this.props;
+        const { alternativ, henterMoterBool, fnr, mote, deltaker, ledetekster } = this.props;
         const sykmeldtDeltaker = this.getSykmeldtDeltaker();
 
         return (<Side tittel="Bekreft møte" aktivtMenypunkt={MOETEPLANLEGGER}>
@@ -52,7 +52,7 @@ export class BekreftMoteSide extends Component {
                                     (() => {
                                         return (<BekreftMote onSubmit={() => {
                                             this.onSubmit();
-                                        }} deltaker={deltaker} sykmeldtDeltaker={sykmeldtDeltaker} avbrytHref={`/sykefravaer/${fnr}/mote`} alternativ={alternativ} />);
+                                        }} deltaker={deltaker} ledetekster={ledetekster} sykmeldtDeltaker={sykmeldtDeltaker} avbrytHref={`/sykefravaer/${fnr}/mote`} alternativ={alternativ} />);
                                     })()
                                 }
                                 </Lightbox>
@@ -70,6 +70,7 @@ export class BekreftMoteSide extends Component {
 BekreftMoteSide.propTypes = {
     alternativ: PropTypes.object,
     henterMoterBool: PropTypes.bool,
+    ledetekster: PropTypes.object,
     fnr: PropTypes.string,
     mote: PropTypes.object,
     deltaker: PropTypes.object,
@@ -107,6 +108,7 @@ export const mapStateToProps = (state, ownProps) => {
     return {
         fnr,
         henterMoterBool: state.moter.henter,
+        ledetekster: PropTypes.object.isRequired,
         alternativ,
         mote,
         deltaker,
