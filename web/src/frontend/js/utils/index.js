@@ -1,4 +1,5 @@
 const kortManeder = ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'des'];
+const dager = ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'];
 
 export const visDato = (dato) => {
     const maned = kortManeder[dato.monthValue - 1];
@@ -31,7 +32,7 @@ export const formaterTid = (input) => {
 };
 
 export const getCookieValue = (name, defaultvalue) => {
-    const match = document.cookie.match(new RegExp(name + '=([^;]+)'));
+    const match = document.cookie.match(new RegExp(`${name}=([^;]+)`));
     if (match) {
         return match[1];
     } else {
@@ -42,20 +43,6 @@ export const getCookieValue = (name, defaultvalue) => {
 export const hentDag = (input) => {
     const date = new Date(input);
     const dayOfWeek = date.getDay();
-    if (dayOfWeek === 0) {
-        return "Søndag";
-    } else if (dayOfWeek === 1) {
-        return "Mandag";
-    } else if (dayOfWeek === 2) {
-        return "Tirsdag";
-    } else if (dayOfWeek === 3) {
-        return "Onsdag";
-    } else if (dayOfWeek === 4) {
-        return "Torsdag";
-    } else if (dayOfWeek === 5) {
-        return "Fredag";
-    } else if (dayOfWeek === 6) {
-        return "Lørdag";
-    }
+    return dager[dayOfWeek];
 };
 
