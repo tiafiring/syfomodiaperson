@@ -142,19 +142,12 @@ const MotebookingStatus = ({ fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternati
                 }
 
             </table>
-            <button className="js-nyetidspunkt rammeknapp rammeknapp--mini" onClick={() => {
-                flereAlternativ();
-            }}>+ Legg til tidspunkt</button>
-            { flereTidspunktBoks }
-
-            <div>
-                <Link role="button" className="js-avbryt rammeknapp rammeknapp--mini" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>Avbryt møte</Link>
+            <div className="knapperad-bunn">
+                <Link role="button" className="js-avbryt knapp knapp--mini" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>Avbryt møte</Link>
+                <button className="js-ny knapp knapp--mini" onClick={() => {
+                    avbrytMoteUtenVarsel(mote.moteUuid, fnr);
+                }}>Nytt møte</button>
             </div>
-        </div>
-        <div>
-            <button className="js-ny knapp knapp--mini" onClick={() => {
-                avbrytMoteUtenVarsel(mote.moteUuid, fnr);
-            }}>Nytt møte</button>
         </div>
     </div>);
 
