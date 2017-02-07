@@ -1,8 +1,8 @@
-import React, {PropTypes} from "react";
-import {Link} from "react-router";
-import {getLedetekst} from "digisyfo-npm";
-import {fikkMoteOpprettetVarsel, getTidFraZulu} from "../utils/index";
-import {hentDag} from "../../utils/index";
+import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
+import { getLedetekst } from 'digisyfo-npm';
+import { fikkMoteOpprettetVarsel, getTidFraZulu } from '../utils/index';
+import { hentDag } from '../../utils/index';
 
 const BekreftMote = ({ deltaker, sykmeldtDeltaker, onSubmit, avbrytHref, alternativ, ledetekster }) => {
     return (<div className="epostinnhold">
