@@ -1,15 +1,15 @@
-import React, {Component, PropTypes} from "react";
-import Side from "../sider/Side";
-import {connect} from "react-redux";
-import SidetoppSpeilet from "../components/SidetoppSpeilet";
-import {bindActionCreators} from "redux";
-import {getLedetekst, Varselstripe} from "digisyfo-npm";
-import * as actionCreators from "../actions/sykmeldinger_actions";
-import Feilmelding from "../components/Feilmelding";
-import AppSpinner from "../components/AppSpinner";
-import DineSykmeldinger from "../sykmeldinger/sykmeldinger/DineSykmeldinger";
-import Brodsmuler from "../components/Brodsmuler";
-import {SYKMELDINGER} from "../menypunkter";
+import React, { Component, PropTypes } from 'react';
+import Side from '../sider/Side';
+import { connect } from 'react-redux';
+import SidetoppSpeilet from '../components/SidetoppSpeilet';
+import { bindActionCreators } from 'redux';
+import { getLedetekst, Varselstripe } from 'digisyfo-npm';
+import * as actionCreators from '../actions/sykmeldinger_actions';
+import Feilmelding from '../components/Feilmelding';
+import AppSpinner from '../components/AppSpinner';
+import DineSykmeldinger from '../sykmeldinger/sykmeldinger/DineSykmeldinger';
+import Brodsmuler from '../components/Brodsmuler';
+import { SYKMELDINGER } from '../menypunkter';
 
 export class SykmeldingerSide extends Component {
     componentWillMount() {

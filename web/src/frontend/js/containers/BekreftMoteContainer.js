@@ -1,14 +1,14 @@
-import React, {Component, PropTypes} from "react";
-import {connect} from "react-redux";
-import Side from "../sider/Side";
-import MotestatusContainer from "../mote/containers/MotestatusContainer";
-import * as moterActions from "../mote/actions/moter_actions";
-import AppSpinner from "../components/AppSpinner";
-import Lightbox from "../components/Lightbox";
-import history from "../history";
-import BekreftMote from "../mote/components/BekreftMote";
-import Feilmelding from "../components/Feilmelding";
-import {MOETEPLANLEGGER} from "../menypunkter";
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import Side from '../sider/Side';
+import MotestatusContainer from '../mote/containers/MotestatusContainer';
+import * as moterActions from '../mote/actions/moter_actions';
+import AppSpinner from '../components/AppSpinner';
+import Lightbox from '../components/Lightbox';
+import history from '../history';
+import BekreftMote from '../mote/components/BekreftMote';
+import Feilmelding from '../components/Feilmelding';
+import { MOETEPLANLEGGER } from '../menypunkter';
 
 export class BekreftMoteSide extends Component {
     constructor(props) {

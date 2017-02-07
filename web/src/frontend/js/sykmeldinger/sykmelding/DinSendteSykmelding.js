@@ -1,8 +1,8 @@
-import React, {PropTypes} from "react";
-import StatusPanel from "./StatusPanel";
-import ArbeidsgiversSykmelding from "./ArbeidsgiversSykmelding";
-import {Utvidbar, DineSykmeldingOpplysninger, getLedetekst} from "digisyfo-npm";
-import {ARBEIDSGIVER, INNSENDT_DATO, ORGNUMMER, STATUS} from "./NokkelOpplysningerEnum";
+import React, { PropTypes } from 'react';
+import StatusPanel from './StatusPanel';
+import ArbeidsgiversSykmelding from './ArbeidsgiversSykmelding';
+import { Utvidbar, DineSykmeldingOpplysninger, getLedetekst } from 'digisyfo-npm';
+import { ARBEIDSGIVER, INNSENDT_DATO, ORGNUMMER, STATUS } from './NokkelOpplysningerEnum';
 
 const DinSendteSykmelding = ({ dinSykmelding, ledetekster, arbeidsgiversSykmelding }) => {
     return (<div>

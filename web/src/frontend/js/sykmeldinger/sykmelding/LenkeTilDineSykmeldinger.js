@@ -1,6 +1,6 @@
-import React, {PropTypes} from "react";
-import {Link} from "react-router";
-import {getLedetekst} from "digisyfo-npm";
+import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
+import { getLedetekst } from 'digisyfo-npm';
 
 
 const LenkeTilDineSykmeldinger = ({ ledetekster, fnr }) => {

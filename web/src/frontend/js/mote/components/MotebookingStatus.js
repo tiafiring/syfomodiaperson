@@ -1,11 +1,11 @@
-import React, {PropTypes} from "react";
-import MotebookingIkon from "./MotebookingIkon";
-import {getTidFraZulu, getDatoFraZulu, fikkIkkeMoteOpprettetVarsel} from "../utils/index";
-import Sidetopp from "../../components/Sidetopp";
-import KontaktInfoFeilmelding from "./KontaktInfoFeilmelding";
-import FlereTidspunktSkjema from "../skjema/FlereTidspunktSkjema";
-import {Varselstripe, getHtmlLedetekst} from "digisyfo-npm";
-import {Link} from "react-router";
+import React, { PropTypes } from 'react';
+import MotebookingIkon from './MotebookingIkon';
+import { getTidFraZulu, getDatoFraZulu, fikkIkkeMoteOpprettetVarsel } from '../utils/index';
+import Sidetopp from '../../components/Sidetopp';
+import KontaktInfoFeilmelding from './KontaktInfoFeilmelding';
+import FlereTidspunktSkjema from '../skjema/FlereTidspunktSkjema';
+import { Varselstripe } from 'digisyfo-npm';
+import { Link } from 'react-router';
 
 const deltakertyper = {
     arbeidsgiver: 'Arbeidsgiver',
@@ -46,7 +46,7 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
         return svar.valgt;
     }).length > 0;
 
-    const aktoer = deltakere.filter(deltaker => { return deltaker.type === 'Bruker' })[0];
+    const aktoer = deltakere.filter(deltaker => { return deltaker.type === 'Bruker'; })[0];
     const feilmelding = aktoer && fikkIkkeMoteOpprettetVarsel(aktoer);
     let krrFeilAarsak;
     let krrFeilmeldingkey;
@@ -54,30 +54,18 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
     if (feilmelding) {
         deltakere = deltakere
             .filter(deltaker => {
-                return deltaker !== aktoer || deltaker.svartTidspunkt != null;
+                return deltaker !== aktoer || deltaker.svartTidspunkt !== null;
             });
         krrFeilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
         krrFeilmeldingkey = feilAarsakForklaringFunc(krrFeilAarsak);
     }
 
-
-    const flereTidspunktBoks = antallNyeTidspunkt ?
-        <FlereTidspunktSkjema mote={ mote }
-                              flereAlternativ={ flereAlternativ }
-                              opprettFlereAlternativ={ opprettFlereAlternativ }
-                              avbrytFlereAlternativ={ avbrytFlereAlternativ }
-                              senderNyeAlternativ = {senderNyeAlternativ}
-                              nyeAlternativFeilet = {nyeAlternativFeilet}
-                              antallEksisterendeTidspunkter={ mote.alternativer.length }
-                              antallNyeTidspunkt={ antallNyeTidspunkt } /> :
-        null;
-
     let sendtTil = 'Møteforespørselen ble sendt til ';
-    let navneliste = [];
+    const navneliste = [];
     deltakere.forEach(deltaker => {
         navneliste.push(deltaker.navn);
     });
-    sendtTil += navneliste.join(" og ");
+    sendtTil += navneliste.join(' og ');
     return (<div>
         <div className="panel">
             <Varselstripe type="suksess">
@@ -171,7 +159,6 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
             </div>
         </div>
     </div>);
-
 };
 
 MotebookingStatus.propTypes = {

@@ -1,7 +1,7 @@
-import {call, put, fork} from "redux-saga/effects";
-import {takeEvery} from "redux-saga";
-import {get} from "../api/index";
-import * as actions from "../actions/arbeidsgiverssykmeldinger_actions";
+import { call, put, fork } from 'redux-saga/effects';
+import { takeEvery } from 'redux-saga';
+import { get } from '../api/index';
+import * as actions from '../actions/arbeidsgiverssykmeldinger_actions';
 
 export function* hentArbeidsgiversSykmeldinger(action) {
     yield put(actions.henterArbeidsgiversSykmeldinger());

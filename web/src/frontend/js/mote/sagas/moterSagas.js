@@ -1,8 +1,8 @@
-import {call, put, fork} from "redux-saga/effects";
-import {takeEvery} from "redux-saga";
-import {post, get} from "../../api/index";
-import history from "../../history";
-import * as actions from "../actions/moter_actions";
+import { call, put, fork } from 'redux-saga/effects';
+import { takeEvery } from 'redux-saga';
+import { post, get } from '../../api/index';
+import history from '../../history';
+import * as actions from '../actions/moter_actions';
 
 export function* opprettMote(action) {
     yield put(actions.oppretterMote());

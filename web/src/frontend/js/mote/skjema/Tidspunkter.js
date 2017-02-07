@@ -1,5 +1,5 @@
-import React, {PropTypes} from "react";
-import Tidspunkt from "./Tidspunkt";
+import React, { PropTypes } from 'react';
+import Tidspunkt from './Tidspunkt';
 
 const Tidspunkter = ({ tidspunker, tidspunktNummerOffset }) => {
     const tidspunktListe = tidspunker || [0, 1];

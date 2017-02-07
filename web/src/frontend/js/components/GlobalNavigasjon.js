@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from "react";
-import {browserHistory} from "react-router";
-import * as menypunkter from "../menypunkter";
+import React, { Component, PropTypes } from 'react';
+import { browserHistory } from 'react-router';
+import * as menypunkter from '../menypunkter';
 
 const naermesteLederMenypunkt = {
     navn: 'Nærmeste leder',

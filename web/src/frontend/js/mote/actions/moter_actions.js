@@ -1,4 +1,4 @@
-import * as actions from "./actiontyper";
+import * as actions from './actiontyper';
 
 export function opprettMote(data) {
     return {
@@ -80,21 +80,21 @@ export function avbrytMoteUtenVarsel(uuid, fnr) {
 export function flereAlternativ() {
     return {
         type: actions.FLERE_ALTERNATIV,
-    }
+    };
 }
 
 export function avbrytFlereAlternativ() {
     return {
         type: actions.AVBRYT_FLERE_ALTERNATIV,
-    }
+    };
 }
 
 export function opprettFlereAlternativBekreftet(data, moteUuid) {
     return {
         type: actions.OPPRETT_FLERE_ALTERNATIV_BEKREFTET,
         data,
-        moteUuid
-    }
+        moteUuid,
+    };
 }
 
 export function opprettFlereAlternativ(data, moteUuid) {
@@ -102,19 +102,19 @@ export function opprettFlereAlternativ(data, moteUuid) {
         type: actions.OPPRETT_FLERE_ALTERNATIV_FORESPURT,
         data,
         moteUuid,
-    }
+    };
 }
 
 export function opprettFlereAlternativFeilet() {
     return {
         type: actions.OPPRETT_FLERE_ALTERNATIV_FEILET,
-    }
+    };
 }
 
 export function oppretterFlereAlternativ() {
     return {
         type: actions.OPPRETTER_FLERE_ALTERNATIV,
-    }
+    };
 }
 
 export function moteAvbrutt(uuid) {

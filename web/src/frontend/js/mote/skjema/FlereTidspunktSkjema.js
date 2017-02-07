@@ -1,44 +1,7 @@
-import React, {PropTypes} from "react";
-import Tidspunkter from "../skjema/Tidspunkter";
-import {Field, Fields, reduxForm} from "redux-form";
-import {genererDato, erGyldigKlokkeslett, erGyldigDato} from "../utils/index";
-
-const FlereTidspunktSkjema = ({mote, antallEksisterendeTidspunkter, antallNyeTidspunkt, opprettFlereAlternativ, senderNyeAlternativ, nyeAlternativFeilet, flereAlternativ, avbrytFlereAlternativ, handleSubmit}) => {
-    let nyeTidspunktListe = [];
-    for (let i = 0; i < antallNyeTidspunkt; i++) {
-        nyeTidspunktListe.push(i);
-    }
-    const submit = (values) => {
-        const data = getData(values);
-        data.alternativer.map(function (alternativ) {
-            alternativ.sted = mote.alternativer[0].sted;
-            return alternativ;
-        });
-        opprettFlereAlternativ(data, mote.moteUuid);
-    };
-
-    return (
-        <div className="fleretidspunkt">
-            <form onSubmit={handleSubmit(submit)}>
-                <Tidspunkter tidspunktNummerOffset={antallEksisterendeTidspunkter} tidspunker={nyeTidspunktListe}/>
-                <div>
-                    <button type="button" className="tekst-knapp" onClick={() => flereAlternativ()}>Flere alternativ +</button>
-                </div>
-                <input type="submit" className="knapp" value="Send" disabled={senderNyeAlternativ} />
-                <button type="button" className="tekst-knapp" onClick={() => avbrytFlereAlternativ()}>Avbryt</button>
-            </form>
-        </div>
-    );
-};
-
-FlereTidspunktSkjema.propTypes = {
-    mote: PropTypes.object,
-    antallEksisterendeTidspunkter: PropTypes.number,
-    antallNyeTidspunkt: PropTypes.number,
-    flereAlternativ: PropTypes.func,
-    opprettFlereAlternativ: PropTypes.func,
-    avbrytFlereAlternativ: PropTypes.func,
-};
+import React, { PropTypes } from 'react';
+import Tidspunkter from '../skjema/Tidspunkter';
+import { reduxForm } from 'redux-form';
+import { genererDato, erGyldigKlokkeslett, erGyldigDato } from '../utils/index';
 
 export function getData(values) {
     const alternativer = values.tidspunkter.map((tidspunkt) => {
@@ -54,21 +17,64 @@ export function getData(values) {
     };
 }
 
+const FlereTidspunktSkjema = ({ mote, antallEksisterendeTidspunkter, antallNyeTidspunkt, opprettFlereAlternativ, senderNyeAlternativ,
+    nyeAlternativFeilet, flereAlternativ, avbrytFlereAlternativ, handleSubmit }) => {
+    let nyeTidspunktListe = [];
+    for (let i = 0; i < antallNyeTidspunkt; i++) {
+        nyeTidspunktListe.push(i);
+    }
+    const submit = (values) => {
+        const data = getData(values);
+        data.alternativer.map(alternativ => {
+            alternativ.sted = mote.alternativer[0].sted;
+            return alternativ;
+        });
+        opprettFlereAlternativ(data, mote.moteUuid);
+    };
+
+    return (
+        <div className="fleretidspunkt">
+            <form onSubmit={handleSubmit(submit)}>
+                <Tidspunkter tidspunktNummerOffset={antallEksisterendeTidspunkter} tidspunker={nyeTidspunktListe} />
+                <div>
+                    <button type="button" className="tekst-knapp" onClick={() => { flereAlternativ(); }}>Flere alternativ +</button>
+                </div>
+                {
+                    nyeAlternativFeilet && <p>Det skjedde en feil! Prøv igjen senere!</p>
+                }
+                <input type="submit" className="knapp" value="Send" disabled={senderNyeAlternativ} />
+                <button type="button" className="tekst-knapp" onClick={() => { avbrytFlereAlternativ(); }}>Avbryt</button>
+            </form>
+        </div>
+    );
+};
+
+FlereTidspunktSkjema.propTypes = {
+    mote: PropTypes.object,
+    antallEksisterendeTidspunkter: PropTypes.number,
+    antallNyeTidspunkt: PropTypes.number,
+    flereAlternativ: PropTypes.func,
+    nyeAlternativFeilet: PropTypes.bool,
+    senderNyeAlternativ: PropTypes.bool,
+    opprettFlereAlternativ: PropTypes.func,
+    handleSubmit: PropTypes.func,
+    avbrytFlereAlternativ: PropTypes.func,
+};
+
 export function validate(values, props) {
     const feilmeldinger = {};
-    let tidspunkterFeilmeldinger = Array.apply(null, Array(props.antallNyeTidspunkt)).map(function () {
+    let tidspunkterFeilmeldinger = Array.apply(null, Array(props.antallNyeTidspunkt)).map(() => {
     });
 
     if (!values.tidspunkter || !values.tidspunkter.length) {
-        tidspunkterFeilmeldinger = tidspunkterFeilmeldinger.map(function () {
+        tidspunkterFeilmeldinger = tidspunkterFeilmeldinger.map(() => {
             return {
                 dato: 'Vennligst angi dato',
-                klokkeslett: 'Vennligst angi klokkeslett'
-            }
+                klokkeslett: 'Vennligst angi klokkeslett',
+            };
         });
     } else {
         tidspunkterFeilmeldinger = tidspunkterFeilmeldinger.map((tidspunkt, index) => {
-
             const tidspunktValue = values.tidspunkter[index];
             const feil = {};
             if (!tidspunktValue || !tidspunktValue.klokkeslett) {

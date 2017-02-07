@@ -1,7 +1,7 @@
-import React, {Component, PropTypes} from "react";
-import {Link} from "react-router";
-import {toDatePrettyPrint, getLedetekst} from "digisyfo-npm";
-import SykmeldingPeriodeInfo from "./SykmeldingPeriodeInfo";
+import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
+import { toDatePrettyPrint, getLedetekst } from 'digisyfo-npm';
+import SykmeldingPeriodeInfo from './SykmeldingPeriodeInfo';
 
 const PeriodeListe = ({ perioder, arbeidsgiver, ledetekster }) => {
     return (<ul className="teaser-punktliste js-perioder">

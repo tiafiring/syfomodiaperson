@@ -1,7 +1,7 @@
-import React, {PropTypes} from "react";
-import SykmeldingTeasere from "./SykmeldingTeasere";
-import {getLedetekst, sorterSykmeldingListe, sorterSykmeldingerEldsteFoerst} from "digisyfo-npm";
-import SykmeldingerSorteringContainer from "./SykmeldingerSorteringContainer";
+import React, { PropTypes } from 'react';
+import SykmeldingTeasere from './SykmeldingTeasere';
+import { getLedetekst, sorterSykmeldingListe, sorterSykmeldingerEldsteFoerst } from 'digisyfo-npm';
+import SykmeldingerSorteringContainer from './SykmeldingerSorteringContainer';
 
 const DineSykmeldinger = ({ sykmeldinger = [], ledetekster = {}, sortering, fnr }) => {
     const nyeSykmeldinger = sykmeldinger.filter((sykmld) => {

@@ -1,8 +1,8 @@
-import React, {PropTypes} from "react";
-import StatusPanel from "./StatusPanel";
-import {Utvidbar, DineSykmeldingOpplysninger, getLedetekst} from "digisyfo-npm";
-import {STATUS, INNSENDT_DATO} from "./NokkelOpplysningerEnum";
-import ArbeidsgiversSykmelding from "./ArbeidsgiversSykmelding";
+import React, { PropTypes } from 'react';
+import StatusPanel from './StatusPanel';
+import { Utvidbar, DineSykmeldingOpplysninger, getLedetekst } from 'digisyfo-npm';
+import { STATUS, INNSENDT_DATO } from './NokkelOpplysningerEnum';
+import ArbeidsgiversSykmelding from './ArbeidsgiversSykmelding';
 
 const DinBekreftedeSykmelding = ({ dinSykmelding, arbeidsgiversSykmelding, ledetekster }) => {
     return (<div>

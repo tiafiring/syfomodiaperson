@@ -1,5 +1,5 @@
-import React, {PropTypes} from "react";
-import {getDuration, toDate, getLedetekst} from "digisyfo-npm";
+import React, { PropTypes } from 'react';
+import { getDuration, toDate, getLedetekst } from 'digisyfo-npm';
 
 const SykmeldingPeriodeInfo = ({ periode, arbeidsgiver, Element = 'p', ledetekster }) => {
     let ledetekstNokkel = 'sykmelding.teaser.tekst';

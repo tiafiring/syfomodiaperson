@@ -1,12 +1,12 @@
-import React, {Component, PropTypes} from "react";
-import AppSpinner from "../components/AppSpinner";
-import Lightbox from "../components/Lightbox";
-import Feilmelding from "../components/Feilmelding";
-import Side from "../sider/Side";
-import AvbrytMote from "../mote/components/AvbrytMote";
-import history from "../history";
-import * as moterActions from "../mote/actions/moter_actions";
-import {connect} from "react-redux";
+import React, { Component, PropTypes } from 'react';
+import AppSpinner from '../components/AppSpinner';
+import Lightbox from '../components/Lightbox';
+import Feilmelding from '../components/Feilmelding';
+import Side from '../sider/Side';
+import AvbrytMote from '../mote/components/AvbrytMote';
+import history from '../history';
+import * as moterActions from '../mote/actions/moter_actions';
+import { connect } from 'react-redux';
 
 export class AvbrytMoteSide extends Component {
     constructor(props) {

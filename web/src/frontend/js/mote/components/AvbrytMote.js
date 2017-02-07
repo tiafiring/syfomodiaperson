@@ -1,7 +1,7 @@
-import React, {PropTypes} from "react";
-import {Link} from "react-router";
-import {Varselstripe} from "digisyfo-npm";
-import {fikkMoteOpprettetVarsel} from "../utils/index";
+import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
+import { Varselstripe } from 'digisyfo-npm';
+import { fikkMoteOpprettetVarsel } from '../utils/index';
 
 const AvbrytMote = ({ deltaker, sykmeldtDeltaker, onSubmit, avbrytHref, avbryter, avbrytFeilet }) => {
     return (<div className="epostinnhold">

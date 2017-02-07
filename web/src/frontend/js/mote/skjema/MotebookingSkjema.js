@@ -1,13 +1,13 @@
-import React, {PropTypes} from "react";
-import {Field, Fields, reduxForm} from "redux-form";
-import TextField from "../../components/TextField";
-import LederFields, {ManuellUtfyltLeder} from "./LederFields";
-import Tidspunkter from "./Tidspunkter";
-import KontaktInfoFeilmelding from "../components/KontaktInfoFeilmelding";
-import Sidetopp from "../../components/Sidetopp";
-import {Varselstripe, getHtmlLedetekst} from "digisyfo-npm";
-import {genererDato, erGyldigKlokkeslett, erGyldigEpost, erGyldigDato} from "../utils/index";
-import {getCookieValue} from "../../utils/index";
+import React, { PropTypes } from 'react';
+import { Field, Fields, reduxForm } from 'redux-form';
+import TextField from '../../components/TextField';
+import LederFields, { ManuellUtfyltLeder } from './LederFields';
+import Tidspunkter from './Tidspunkter';
+import KontaktInfoFeilmelding from '../components/KontaktInfoFeilmelding';
+import Sidetopp from '../../components/Sidetopp';
+import { Varselstripe } from 'digisyfo-npm';
+import { genererDato, erGyldigKlokkeslett, erGyldigEpost, erGyldigDato } from '../utils/index';
+import { getCookieValueorDefault } from '../../utils/index';
 
 export function getData(values) {
     const deltaker = Object.assign({}, values.deltakere[0], {
@@ -24,11 +24,11 @@ export function getData(values) {
 
     return {
         alternativer,
-        deltakere: [Object.assign(deltaker, {svar: alternativer, avvik: []})],
+        deltakere: [Object.assign(deltaker, { svar: alternativer, avvik: [] })],
     };
 }
 
-export const Arbeidstaker = ({navn, kontaktinfo}) => {
+export const Arbeidstaker = ({ navn, kontaktinfo }) => {
     return (<div className="arbeidstakersOpplysninger skjema-fieldset blokk--xl">
         <legend>2. Arbeidstakers opplysninger</legend>
         <div className="nokkelopplysning">
@@ -72,7 +72,7 @@ export const MotebookingSkjema = ({
     const submit = (values) => {
         const data = getData(values);
         data.fnr = fnr;
-        data.navEnhet = getCookieValue('navEnhet', 'navEnhet');
+        data.navEnhet = getCookieValueorDefault('navEnhet', 'navEnhet');
         opprettMote(data);
     };
     const visArbeidstaker = arbeidstaker && arbeidstaker.kontaktinfo && arbeidstaker.kontaktinfo.reservasjon.skalHaVarsel;
@@ -82,7 +82,7 @@ export const MotebookingSkjema = ({
     return (<div>
         { !visArbeidstaker && <KontaktInfoFeilmelding feilmeldingkey={feilmeldingkey} ledetekster={ledetekster} /> }
         <form className="panel" onSubmit={handleSubmit(submit)}>
-            <Sidetopp tittel="Møteforespørsel"/>
+            <Sidetopp tittel="Møteforespørsel" />
 
             {
                 hentLedereFeiletBool && <div className="blokk">
@@ -101,7 +101,7 @@ export const MotebookingSkjema = ({
                         untouch={untouch}
                         names={['arbeidsgiverType', 'deltakere[0].navn', 'deltakere[0].epost', 'deltakere[0].orgnummer']}
                         ledere={ledere}
-                        component={LederFields}/>
+                        component={LederFields} />
                 }
                 {
                     ledere.length === 0 && <ManuellUtfyltLeder />
@@ -115,14 +115,14 @@ export const MotebookingSkjema = ({
                 <Tidspunkter />
                 <label htmlFor="sted">Sted</label>
                 <Field id="sted" component={TextField} name="sted" className="input--xxl js-sted"
-                       placeholder="Skriv møtested eller om det er et videomøte"/>
+                    placeholder="Skriv møtested eller om det er et videomøte" />
             </fieldset>
 
             <div aria-live="polite" role="alert">
                 { sendingFeilet && <div className="panel panel--ramme">
                     <div className="varselstripe varselstripe--feil">
                         <div className="varselstripe__ikon">
-                            <img src="/sykefravaer/img/svg/utropstegn.svg"/>
+                            <img src="/sykefravaer/img/svg/utropstegn.svg" />
                         </div>
                         <p className="sist">Beklager, det oppstod en feil. Prøv igjen litt senere.</p>
                     </div>
@@ -130,7 +130,7 @@ export const MotebookingSkjema = ({
             </div>
 
             <div className="knapperad blokk">
-                <input type="submit" className="knapp" value="Send" disabled={sender}/>
+                <input type="submit" className="knapp" value="Send" disabled={sender} />
             </div>
         </form>
     </div>);

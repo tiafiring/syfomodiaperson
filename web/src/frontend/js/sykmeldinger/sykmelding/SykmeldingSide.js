@@ -1,11 +1,11 @@
-import React, {PropTypes} from "react";
-import DinSykmelding from "./DinSykmelding";
-import DinSendteSykmelding from "./DinSendteSykmelding";
-import DinBekreftedeSykmelding from "./DinBekreftedeSykmelding";
-import DinAvbrutteSykmelding from "./DinAvbrutteSykmelding";
-import DinUtgaatteSykmelding from "./DinUtgaatteSykmelding";
-import LenkeTilDineSykmeldinger from "./LenkeTilDineSykmeldinger";
-import Feilmelding from "../../components/Feilmelding";
+import React, { PropTypes } from 'react';
+import DinSykmelding from './DinSykmelding';
+import DinSendteSykmelding from './DinSendteSykmelding';
+import DinBekreftedeSykmelding from './DinBekreftedeSykmelding';
+import DinAvbrutteSykmelding from './DinAvbrutteSykmelding';
+import DinUtgaatteSykmelding from './DinUtgaatteSykmelding';
+import LenkeTilDineSykmeldinger from './LenkeTilDineSykmeldinger';
+import Feilmelding from '../../components/Feilmelding';
 
 const SykmeldingSide = ({ dinSykmelding, arbeidsgiversSykmelding, ledetekster, fnr }) => {
     return (

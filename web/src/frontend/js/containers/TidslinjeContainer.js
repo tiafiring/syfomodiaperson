@@ -1,15 +1,15 @@
-import React, {Component, PropTypes} from "react";
-import Side from "../sider/Side";
-import SidetoppSpeilet from "../components/SidetoppSpeilet";
-import * as tidslinjerActions from "../actions/tidslinjer_actions";
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
-import {Tidslinje, setHendelseData, getLedetekst, Varselstripe} from "digisyfo-npm";
-import TidslinjeVelgArbeidssituasjonContainer from "./TidslinjeVelgArbeidssituasjonContainer";
-import Feilmelding from "../components/Feilmelding";
-import AppSpinner from "../components/AppSpinner";
-import Brodsmuler from "../components/Brodsmuler";
-import {TIDSLINJEN} from "../menypunkter";
+import React, { Component, PropTypes } from 'react';
+import Side from '../sider/Side';
+import SidetoppSpeilet from '../components/SidetoppSpeilet';
+import * as tidslinjerActions from '../actions/tidslinjer_actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Tidslinje, setHendelseData, getLedetekst, Varselstripe } from 'digisyfo-npm';
+import TidslinjeVelgArbeidssituasjonContainer from './TidslinjeVelgArbeidssituasjonContainer';
+import Feilmelding from '../components/Feilmelding';
+import AppSpinner from '../components/AppSpinner';
+import Brodsmuler from '../components/Brodsmuler';
+import { TIDSLINJEN } from '../menypunkter';
 
 export class TidslinjeSide extends Component {
     componentWillMount() {

@@ -1,7 +1,7 @@
-import React, {PropTypes} from "react";
-import {Utvidbar, DineSykmeldingOpplysninger, getLedetekst} from "digisyfo-npm";
-import StatusPanel from "./StatusPanel";
-import {STATUS, INNSENDT_DATO} from "./NokkelOpplysningerEnum";
+import React, { PropTypes } from 'react';
+import { Utvidbar, DineSykmeldingOpplysninger, getLedetekst } from 'digisyfo-npm';
+import StatusPanel from './StatusPanel';
+import { STATUS, INNSENDT_DATO } from './NokkelOpplysningerEnum';
 
 const DinAvbrutteSykmelding = ({ sykmelding, ledetekster }) => {
     return (<div>

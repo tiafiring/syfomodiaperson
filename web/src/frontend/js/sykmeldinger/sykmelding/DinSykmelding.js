@@ -1,6 +1,6 @@
-import React, {PropTypes} from "react";
-import {Link} from "react-router";
-import {Varselstripe, DineSykmeldingOpplysninger, getLedetekst, getHtmlLedetekst} from "digisyfo-npm";
+import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
+import { Varselstripe, DineSykmeldingOpplysninger, getLedetekst } from 'digisyfo-npm';
 
 const DinSykmelding = ({ sykmelding, ledetekster, visEldreSykmeldingVarsel, eldsteSykmeldingId }) => {
     return (<div>

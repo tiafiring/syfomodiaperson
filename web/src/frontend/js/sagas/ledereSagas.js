@@ -1,6 +1,6 @@
 import { call, put, fork } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-import { get } from '../api';
+import { get } from '../api/index';
 import { log } from 'digisyfo-npm';
 
 export function* hentLedere(action) {

@@ -42,6 +42,7 @@ const BekreftMote = ({ deltaker, sykmeldtDeltaker, onSubmit, avbrytHref, alterna
 BekreftMote.propTypes = {
     deltaker: PropTypes.object,
     sykmeldtDeltaker: PropTypes.object,
+    alternativ: PropTypes.object,
     ledetekster: PropTypes.object,
     onSubmit: PropTypes.func,
     avbrytHref: PropTypes.string,

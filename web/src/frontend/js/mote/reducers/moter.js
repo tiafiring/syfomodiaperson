@@ -1,4 +1,4 @@
-import * as actions from "../actions/actiontyper";
+import * as actions from '../actions/actiontyper';
 
 const defaultState = {
     data: [],
@@ -104,7 +104,7 @@ export default function moter(state = defaultState, action) {
                 }
                 return mote;
             });
-            return Object.assign({}, state, {data}, {
+            return Object.assign({}, state, { data }, {
                 avbryter: false,
                 avbrytFeilet: false,
             });
@@ -130,7 +130,7 @@ export default function moter(state = defaultState, action) {
                 }
                 return mote;
             });
-            return Object.assign({}, state, {data}, {
+            return Object.assign({}, state, { data }, {
                 bekrefter: false,
                 bekreftFeilet: false,
                 avbryter: false,
@@ -152,12 +152,12 @@ export default function moter(state = defaultState, action) {
             }
 
             return Object.assign({}, state, {
-                antallNyeTidspunkt: antallNyeTidspunkt
+                antallNyeTidspunkt,
             });
         }
         case actions.AVBRYT_FLERE_ALTERNATIV: {
             return Object.assign({}, state, {
-                antallNyeTidspunkt: undefined
+                antallNyeTidspunkt: undefined,
             });
         }
         case actions.OPPRETTER_FLERE_ALTERNATIV: {
@@ -173,12 +173,12 @@ export default function moter(state = defaultState, action) {
             });
         }
         case actions.OPPRETT_FLERE_ALTERNATIV_BEKREFTET: {
-            state.data.filter(function (mote) {
+            state.data.filter(mote => {
                 return mote.moteUuid === action.moteUuid;
-            }).map(function (mote) {
+            }).map(mote => {
                 mote.alternativer.push.apply(mote.alternativer, action.data.alternativer);
-                mote.deltakere.forEach(function (deltaker) {
-                    action.data.alternativer.forEach(function(){
+                mote.deltakere.forEach(deltaker => {
+                    action.data.alternativer.forEach(() => {
                         deltaker.svar.push({ valgt: false });
                     });
                 });

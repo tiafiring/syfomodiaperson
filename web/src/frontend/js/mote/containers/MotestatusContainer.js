@@ -1,7 +1,7 @@
-import React, {PropTypes} from "react";
-import {connect} from "react-redux";
-import * as moteActions from "../actions/moter_actions";
-import MotebookingStatus from "../components/MotebookingStatus";
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import * as moteActions from '../actions/moter_actions';
+import MotebookingStatus from '../components/MotebookingStatus';
 
 export const MotebookingStatusWrapper = (props) => {
     if (props.henter) {
@@ -37,5 +37,3 @@ export const mapStateToProps = (state, ownProps) => {
 const MotestatusContainer = connect(mapStateToProps, moteActions)(MotebookingStatusWrapper);
 
 export default MotestatusContainer;
-
-

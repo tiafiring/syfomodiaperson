@@ -1,5 +1,5 @@
-import React, {PropTypes} from "react";
-import {getHtmlLedetekst} from "digisyfo-npm";
+import React, { PropTypes } from 'react';
+import { getHtmlLedetekst } from 'digisyfo-npm';
 
 const KontaktInfoFeilmelding = ({ feilmeldingkey, ledetekster }) => {
     return (<div className="panel">
@@ -9,7 +9,7 @@ const KontaktInfoFeilmelding = ({ feilmeldingkey, ledetekster }) => {
 };
 
 KontaktInfoFeilmelding.propTypes = {
-    feilmelding: PropTypes.object,
+    feilmeldingkey: PropTypes.string,
     ledetekster: PropTypes.object,
 };
 

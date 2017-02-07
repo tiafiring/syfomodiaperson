@@ -1,8 +1,8 @@
-import React, {PropTypes} from "react";
-import {connect} from "react-redux";
-import Dropdown from "./Dropdown";
-import * as actionCreators from "../../actions/sykmeldinger_actions";
-import {getLedetekst} from "digisyfo-npm";
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import Dropdown from './Dropdown';
+import * as actionCreators from '../../actions/sykmeldinger_actions';
+import { getLedetekst } from 'digisyfo-npm';
 
 const DropdownContainer = ({ alternativer, sorterSykmeldinger, ledetekster, status }) => {
     return (<div className="header-verktoy">

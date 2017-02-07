@@ -1,13 +1,13 @@
-import React, {PropTypes} from "react";
-import {Router, Route} from "react-router";
-import NaermesteLedereContainer from "../containers/NaermesteLedereContainer";
-import FeilsideContainer from "../containers/FeilsideContainer";
-import MotebookingContainer from "../containers/MotebookingContainer";
-import AvbrytMoteContainer from "../containers/AvbrytMoteContainer";
-import BekreftMoteContainer from "../containers/BekreftMoteContainer";
-import TidslinjeContainer from "../containers/TidslinjeContainer";
-import SykmeldingerContainer from "../containers/SykmeldingerContainer";
-import DinSykmeldingContainer from "../containers/DinSykmeldingContainer";
+import React, { PropTypes } from 'react';
+import { Router, Route } from 'react-router';
+import NaermesteLedereContainer from '../containers/NaermesteLedereContainer';
+import FeilsideContainer from '../containers/FeilsideContainer';
+import MotebookingContainer from '../containers/MotebookingContainer';
+import AvbrytMoteContainer from '../containers/AvbrytMoteContainer';
+import BekreftMoteContainer from '../containers/BekreftMoteContainer';
+import TidslinjeContainer from '../containers/TidslinjeContainer';
+import SykmeldingerContainer from '../containers/SykmeldingerContainer';
+import DinSykmeldingContainer from '../containers/DinSykmeldingContainer';
 
 const AppRouter = ({ history }) => {
     return (<Router history={history}>

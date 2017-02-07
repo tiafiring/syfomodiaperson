@@ -1,7 +1,7 @@
-import React, {PropTypes} from "react";
-import TextField from "../../components/TextField";
-import {Field} from "redux-form";
-import {formaterTid, formaterDato} from "../../utils/index";
+import React, { PropTypes } from 'react';
+import TextField from '../../components/TextField';
+import { Field } from 'redux-form';
+import { formaterTid, formaterDato } from '../../utils/index';
 
 const Tidspunkt = ({ tidspunkt, tidspunktNummerOffset }) => {
     const offset = tidspunktNummerOffset || 0;

@@ -31,13 +31,12 @@ export const formaterTid = (input) => {
     return tid;
 };
 
-export const getCookieValue = (name, defaultvalue) => {
+export const getCookieValueorDefault = (name, defaultvalue) => {
     const match = document.cookie.match(new RegExp(`${name}=([^;]+)`));
     if (match) {
         return match[1];
-    } else {
-        return defaultvalue;
     }
+    return defaultvalue;
 };
 
 export const hentDag = (input) => {
