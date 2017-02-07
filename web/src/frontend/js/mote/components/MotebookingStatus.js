@@ -21,21 +21,22 @@ MotetidspunktValgt.propTypes = {
     bekreftetTidspunkt: PropTypes.string,
 };
 
-const feilAarsakForklaringFunc = (feilAarsak, ledetekster) => {
+const feilAarsakForklaringFunc = (feilAarsak) => {
+    console.log(feilAarsak);
     switch (feilAarsak) {
         case 'RESERVERT': {
-            return <div dangerouslySetInnerHTML={getHtmlLedetekst('motestatus.krr.reservert', ledetekster)}></div>
+            return 'motestatus.krr.reservert';
         }
         case 'INGEN_KONTAKTINFORMASJON': {
-            return <div dangerouslySetInnerHTML={getHtmlLedetekst('motestatus.krr.ingen-kontaktinformasjon', ledetekster)}></div>
+            return 'motestatus.krr.ingen-kontaktinformasjon';
         }
         default: {
-            return <p />;
+            return '';
         }
     }
 };
 
-const MotebookingStatus = ({ ledetekster, fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
+const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
     const { alternativer } = mote;
     let { deltakere } = mote;
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
@@ -46,11 +47,16 @@ const MotebookingStatus = ({ ledetekster, fnr, mote, avbrytMoteUtenVarsel, sende
         return svar.valgt;
     }).length > 0;
 
-    const arbeidstaker = deltakere.filter(deltaker => { return deltaker.type === 'Bruker' })[0];
-    const feilmelding = arbeidstaker && fikkIkkeMoteOpprettetVarsel(arbeidstaker);
+    const aktoer = deltakere.filter(deltaker => { return deltaker.type === 'Bruker' })[0];
+    const feilmelding = aktoer && fikkIkkeMoteOpprettetVarsel(aktoer);
+    let feilAarsak;
+    let feilmeldingkey;
 
     if (feilmelding) {
         deltakere = deltakere.filter(deltaker => { return deltaker !== arbeidstaker })
+        console.log(arbeidstaker);
+        feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
+        feilmeldingkey = feilAarsakForklaringFunc(feilAarsak);
     }
 
     const flereTidspunktBoks = antallNyeTidspunkt ?
@@ -70,8 +76,6 @@ const MotebookingStatus = ({ ledetekster, fnr, mote, avbrytMoteUtenVarsel, sende
         navneliste.push(deltaker.navn);
     });
     sendtTil += navneliste.join(" og ");
-    const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
-
     return (<div>
         <div className="panel">
             <Varselstripe type="suksess">
@@ -82,7 +86,7 @@ const MotebookingStatus = ({ ledetekster, fnr, mote, avbrytMoteUtenVarsel, sende
             </Varselstripe>
         </div>
         {
-            feilmelding && <KontaktInfoFeilmelding feilmelding={feilAarsakForklaringFunc(feilAarsak, ledetekster)} />
+            feilmelding && <KontaktInfoFeilmelding feilmeldingkey={feilmeldingkey} ledetekster={ledetekster} />
         }
         <div className="panel">
             <Sidetopp tittel="Status for møteforespørselen" />
@@ -183,6 +187,7 @@ MotebookingStatus.propTypes = {
     }),
     antallNyeTidspunkt: PropTypes.number,
     fnr: PropTypes.string,
+    arbeidstaker: PropTypes.object,
     senderNyeAlternativ: PropTypes.bool,
     nyeAlternativFeilet: PropTypes.bool,
     ledetekster: PropTypes.object,

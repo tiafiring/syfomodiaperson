@@ -14,6 +14,10 @@ describe("MotestatusContainerTest", () => {
             ownProps = {};
             state = {
                 ledetekster: { henter: false, data: {} },
+                arbeidstaker : {
+                    henter: false,
+                    data: {}
+                },
                 moter: {
                     data: [{
                         moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",

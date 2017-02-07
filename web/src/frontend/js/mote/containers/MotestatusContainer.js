@@ -20,14 +20,14 @@ export const mapStateToProps = (state, ownProps) => {
     const mote = state.moter.data.filter((m) => {
         return m.moteUuid === moteUuid;
     })[0];
-
     return {
         fnr,
         mote,
         avbrytFeilet: state.moter.avbrytFeilet || state.ledetekster.henter,
         avbryter: state.moter.avbryter,
-        henter: state.moter.henter,
+        henter: state.moter.henter || state.arbeidstaker.henter,
         ledetekster: state.ledetekster.data,
+        arbeidstaker: state.arbeidstaker.data,
         antallNyeTidspunkt: state.moter.antallNyeTidspunkt,
         nyeAlternativFeilet: state.moter.nyeAlternativFeilet,
         senderNyeAlternativ: state.moter.senderNyeAlternativ,

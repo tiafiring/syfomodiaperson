@@ -51,16 +51,16 @@ Arbeidstaker.propTypes = {
     kontaktinfo: PropTypes.object,
 };
 
-const feilAarsakForklaringFunc = (feilAarsak, ledetekster) => {
+const feilAarsakForklaringFunc = (feilAarsak) => {
     switch (feilAarsak) {
         case 'RESERVERT': {
-            return <div dangerouslySetInnerHTML={getHtmlLedetekst('motebooking.krr.reservert', ledetekster)}></div>
+            return 'motebooking.krr.reservert';
         }
         case 'INGEN_KONTAKTINFORMASJON': {
-            return <div dangerouslySetInnerHTML={getHtmlLedetekst('motebooking.krr.ingen-kontaktinformasjon', ledetekster)}></div>
+            return 'motebooking.krr.ingen-kontaktinformasjon';
         }
         default: {
-            return <p />;
+            return '';
         }
     }
 };
@@ -77,9 +77,10 @@ export const MotebookingSkjema = ({
     };
     const visArbeidstaker = arbeidstaker && arbeidstaker.kontaktinfo && arbeidstaker.kontaktinfo.reservasjon.skalHaVarsel;
     const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
+    const feilmeldingkey = feilAarsakForklaringFunc(feilAarsak);
 
     return (<div>
-        { !visArbeidstaker && <KontaktInfoFeilmelding feilmelding={feilAarsakForklaringFunc(feilAarsak, ledetekster)} /> }
+        { !visArbeidstaker && <KontaktInfoFeilmelding feilmeldingkey={feilmeldingkey} ledetekster={ledetekster} /> }
         <form className="panel" onSubmit={handleSubmit(submit)}>
             <Sidetopp tittel="Møteforespørsel"/>
 
