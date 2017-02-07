@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import SykmeldingTeaser from './SykmeldingTeaser';
 
 const SykmeldingTeasere = ({ sykmeldinger, ledetekster, fnr, className, tittel = '', ingenSykmeldingerMelding, id, children }) => {
+    console.log("SykmeldingTeasere");
     return (<div className="blokk--l">
         <header className="inngangspanelerHeader">
             <h2 className="inngangspanelerHeader__tittel">{tittel}</h2>

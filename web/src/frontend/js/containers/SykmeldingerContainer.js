@@ -28,6 +28,7 @@ export class SykmeldingerSide extends Component {
             tittel: 'Dine sykmeldinger',
         }];
 
+        console.log("SykmeldingerSide");
         return (<Side tittel="Sykmeldinger" aktivtMenypunkt={SYKMELDINGER}>
             {
                 (() => {

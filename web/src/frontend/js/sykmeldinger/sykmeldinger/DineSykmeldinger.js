@@ -11,6 +11,7 @@ const DineSykmeldinger = ({ sykmeldinger = [], ledetekster = {}, sortering, fnr 
         return sykmld.status !== 'NY';
     });
     const tidligereSortering = sortering && sortering.tidligere ? sortering.tidligere : undefined;
+    console.log("DineSykmeldinger");
     return (<div>
         <SykmeldingTeasere
             sykmeldinger={sorterSykmeldingerEldsteFoerst(nyeSykmeldinger)}
