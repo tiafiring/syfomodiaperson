@@ -22,7 +22,6 @@ MotetidspunktValgt.propTypes = {
 };
 
 const feilAarsakForklaringFunc = (feilAarsak) => {
-    console.log(feilAarsak);
     switch (feilAarsak) {
         case 'RESERVERT': {
             return 'motestatus.krr.reservert';
@@ -49,15 +48,18 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
 
     const aktoer = deltakere.filter(deltaker => { return deltaker.type === 'Bruker' })[0];
     const feilmelding = aktoer && fikkIkkeMoteOpprettetVarsel(aktoer);
-    let feilAarsak;
-    let feilmeldingkey;
+    let krrFeilAarsak;
+    let krrFeilmeldingkey;
 
     if (feilmelding) {
-        deltakere = deltakere.filter(deltaker => { return deltaker !== arbeidstaker })
-        console.log(arbeidstaker);
-        feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
-        feilmeldingkey = feilAarsakForklaringFunc(feilAarsak);
+        deltakere = deltakere
+            .filter(deltaker => {
+                return deltaker !== aktoer || deltaker.svartTidspunkt != null;
+            });
+        krrFeilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
+        krrFeilmeldingkey = feilAarsakForklaringFunc(krrFeilAarsak);
     }
+
 
     const flereTidspunktBoks = antallNyeTidspunkt ?
         <FlereTidspunktSkjema mote={ mote }
@@ -86,7 +88,7 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
             </Varselstripe>
         </div>
         {
-            feilmelding && <KontaktInfoFeilmelding feilmeldingkey={feilmeldingkey} ledetekster={ledetekster} />
+            feilmelding && <KontaktInfoFeilmelding feilmeldingkey={krrFeilmeldingkey} ledetekster={ledetekster} />
         }
         <div className="panel">
             <Sidetopp tittel="Status for møteforespørselen" />
