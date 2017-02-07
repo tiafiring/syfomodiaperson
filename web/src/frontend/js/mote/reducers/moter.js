@@ -173,11 +173,11 @@ export default function moter(state = defaultState, action) {
             });
         }
         case actions.OPPRETT_FLERE_ALTERNATIV_BEKREFTET: {
-            state.data.filter(mote => {
+            state.data.filter((mote) => {
                 return mote.moteUuid === action.moteUuid;
-            }).map(mote => {
+            }).map((mote) => {
                 mote.alternativer.push.apply(mote.alternativer, action.data.alternativer);
-                mote.deltakere.forEach(deltaker => {
+                mote.deltakere.forEach((deltaker) => {
                     action.data.alternativer.forEach(() => {
                         deltaker.svar.push({ valgt: false });
                     });

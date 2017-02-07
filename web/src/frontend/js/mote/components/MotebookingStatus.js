@@ -46,7 +46,7 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
         return svar.valgt;
     }).length > 0;
 
-    const aktoer = deltakere.filter(deltaker => { return deltaker.type === 'Bruker'; })[0];
+    const aktoer = deltakere.filter((deltaker) => { return deltaker.type === 'Bruker'; })[0];
     const feilmelding = aktoer && fikkIkkeMoteOpprettetVarsel(aktoer);
     let krrFeilAarsak;
     let krrFeilmeldingkey;
@@ -62,7 +62,7 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
 
     let sendtTil = 'Møteforespørselen ble sendt til ';
     const navneliste = [];
-    deltakere.forEach(deltaker => {
+    deltakere.forEach((deltaker) => {
         navneliste.push(deltaker.navn);
     });
     sendtTil += navneliste.join(' og ');

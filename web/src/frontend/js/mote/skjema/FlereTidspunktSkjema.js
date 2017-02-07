@@ -25,7 +25,7 @@ const FlereTidspunktSkjema = ({ mote, antallEksisterendeTidspunkter, antallNyeTi
     }
     const submit = (values) => {
         const data = getData(values);
-        data.alternativer.map(alternativ => {
+        data.alternativer.map((alternativ) => {
             alternativ.sted = mote.alternativer[0].sted;
             return alternativ;
         });
