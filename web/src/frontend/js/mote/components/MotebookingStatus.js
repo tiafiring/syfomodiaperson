@@ -14,7 +14,7 @@ const deltakertyper = {
 };
 
 export const MotetidspunktValgt = ({ bekreftetTidspunkt }) => {
-    return <div className="motetidspunktValgt">Møtetidspunkt valgt, møteresultat sendt til arbeidsgiver {getDatoFraZulu(bekreftetTidspunkt)}.</div>;
+    return <div className="motetidspunktValgt">Møtetidspunkt valgt, møteresultat sendt til partene {getDatoFraZulu(bekreftetTidspunkt)}.</div>;
 };
 
 MotetidspunktValgt.propTypes = {
