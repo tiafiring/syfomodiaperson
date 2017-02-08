@@ -54,14 +54,6 @@ export class DinSykmeldingSide extends Component {
                         <div className="speiling">
                             <Brodsmuler brodsmuler={brodsmuler} />
                             <SidetoppSpeilet tittel="Sykmelding" />
-                            <div className="panel">
-                                <div className="media">
-                                    <img src="/sykefravaer/img/svg/nav-ansatt.svg" className="media__img media__img--desktop"
-                                        alt="Ansatt i NAV" />
-                                    <h2 className="typo-syfotittel">{getLedetekst('din-sykmelding.ny-tjeneste.tittel', ledetekster)}</h2>
-                                </div>
-                                <div className="redaksjonelt-innhold" dangerouslySetInnerHTML={getHtmlLedetekst('din-sykmelding.ny-tjeneste.tekst', ledetekster)}></div>
-                            </div>
                             <SykmeldingSide dinSykmelding={dinSykmelding} ledetekster={ledetekster} arbeidsgiversSykmelding={dinSykmelding} fnr={fnr} />
                         </div>
                     </div>);
