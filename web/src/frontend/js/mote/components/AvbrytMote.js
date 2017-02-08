@@ -12,6 +12,7 @@ const AvbrytMote = ({ arbeidsgiver, sykmeldt, onSubmit, avbrytHref, avbryter, av
             <p>{arbeidsgiver.navn}</p>
         </div>
 
+
         { fikkMoteOpprettetVarsel(sykmeldt) &&
         <div className="epostinnhold__mottakere blokk">
             <h3>Sendes til sykmeldt</h3>
@@ -21,9 +22,15 @@ const AvbrytMote = ({ arbeidsgiver, sykmeldt, onSubmit, avbrytHref, avbryter, av
 
         <h2>Informasjon som sendes til partene</h2>
 
-        <div>
-            <button className={valgtDeltaker === arbeidsgiver ? "valgt" : ""} onClick={() => { setValgtDeltaker(arbeidsgiver); hentAvbrytMoteEpostinnhold(arbeidsgiver.deltakerUuid); }}>Arbeidsgiver</button>
-            <button className={valgtDeltaker === sykmeldt ? "valgt" : ""} onClick={() => { setValgtDeltaker(sykmeldt); hentAvbrytMoteEpostinnhold(sykmeldt.deltakerUuid); }}>Sykmeldt</button>
+        <div className="epostinnhold__deltakere">
+            <a href="#" className="epostinnhold_deltakerlenke" onClick={() => {
+                setValgtDeltaker(arbeidsgiver);
+                hentAvbrytMoteEpostinnhold(arbeidsgiver.deltakerUuid);
+            }}>Arbeidsgiver</a>
+            <a href="#" className="epostinnhold_deltakerlenke" onClick={() => {
+                setValgtDeltaker(sykmeldt);
+                hentAvbrytMoteEpostinnhold(sykmeldt.deltakerUuid);
+            }}>Sykmeldt</a>
         </div>
 
         <div className="epostinnhold_infoboks">
