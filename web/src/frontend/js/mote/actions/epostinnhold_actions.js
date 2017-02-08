@@ -35,16 +35,17 @@ export const hentEpostinnholdFeilet = () => {
     };
 };
 
-export const setValgtDeltaker = (deltaker) => {
+export const setValgtDeltaker = (valgtDeltaker) => {
     return {
         type: SET_VALGT_DELTAKER,
-        deltaker,
+        valgtDeltaker,
     };
+
 };
 
-export const setValgtKanal = (kanal) => {
+export const setValgtKanal = (valgtKanal) => {
     return {
         type: SET_VALGT_KANAL,
-        kanal,
+        valgtKanal,
     };
 };

@@ -1,9 +1,10 @@
-import { HENTER_EPOSTINNHOLD, EPOSTINNHOLD_HENTET, HENT_EPOSTINNHOLD_FEILET } from '../actions/actiontyper';
+import { HENTER_EPOSTINNHOLD, EPOSTINNHOLD_HENTET, HENT_EPOSTINNHOLD_FEILET, SET_VALGT_DELTAKER, SET_VALGT_KANAL } from '../actions/actiontyper';
 
 const defaultState = {
     data: {},
     henter: false,
     hentingFeilet: false,
+    valgtDeltaker: {},
 };
 
 export default function epostinnhold(state = defaultState, action = {}) {
@@ -28,6 +29,16 @@ export default function epostinnhold(state = defaultState, action = {}) {
                 henter: false,
                 hentingFeilet: true,
             };
+        }
+        case SET_VALGT_KANAL: {
+            return Object.assign({}, state, {
+                valgtKanal: action.valgtKanal,
+            });
+        }
+        case SET_VALGT_DELTAKER: {
+            return Object.assign({}, state, {
+                valgtDeltaker: action.valgtDeltaker,
+            });
         }
         default: {
             return state;

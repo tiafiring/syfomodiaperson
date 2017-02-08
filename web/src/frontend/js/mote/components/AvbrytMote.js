@@ -3,30 +3,37 @@ import { Link } from 'react-router';
 import { Varselstripe } from 'digisyfo-npm';
 import { fikkMoteOpprettetVarsel } from '../utils/index';
 
-const AvbrytMote = ({ deltaker, sykmeldtDeltaker, onSubmit, avbrytHref, avbryter, avbrytFeilet, innhold, valgtDeltaker, valgtKanal, setValgtDeltaker, setValgtKanal }) => {
-    console.log("innhold", innhold);
-    console.log("valgtDeltaker", valgtDeltaker);
-    console.log("valgtKanal", valgtKanal);
-    console.log("setValgtDeltaker", setValgtDeltaker);
-    console.log("setValgtKanal", setValgtKanal);
+const AvbrytMote = ({ arbeidsgiver, sykmeldt, onSubmit, avbrytHref, avbryter, avbrytFeilet, innhold, valgtDeltaker, valgtKanal, hentAvbrytMoteEpostinnhold, setValgtDeltaker, setValgtKanal }) => {
     return (<div className="epostinnhold">
         <h2 className="typo-innholdstittel">Avbryt møteresultat</h2>
 
         <div className="epostinnhold__mottakere blokk">
             <h3>Sendes til arbeidsgiver</h3>
-            <p>{deltaker.navn}</p>
+            <p>{arbeidsgiver.navn}</p>
         </div>
 
-        { fikkMoteOpprettetVarsel(sykmeldtDeltaker) &&
+        { fikkMoteOpprettetVarsel(sykmeldt) &&
         <div className="epostinnhold__mottakere blokk">
             <h3>Sendes til sykmeldt</h3>
-            <p>{sykmeldtDeltaker.navn}</p>
+            <p>{sykmeldt.navn}</p>
         </div>
         }
 
-        <div className="epostinnhold_infoboks">
-            <p>*Partene blir informert at møteforespørselen blir avbrutt på e-post, sms og på nav.no</p>
+        <h2>Informasjon som sendes til partene</h2>
+
+        <div>
+            <button className={valgtDeltaker === arbeidsgiver ? "valgt" : ""} onClick={() => { setValgtDeltaker(arbeidsgiver); hentAvbrytMoteEpostinnhold(arbeidsgiver.deltakerUuid); }}>Arbeidsgiver</button>
+            <button className={valgtDeltaker === sykmeldt ? "valgt" : ""} onClick={() => { setValgtDeltaker(sykmeldt); hentAvbrytMoteEpostinnhold(sykmeldt.deltakerUuid); }}>Sykmeldt</button>
         </div>
+
+        <div className="epostinnhold_infoboks">
+            <p>{innhold.emne}</p>
+        </div>
+
+        <div className="epostinnhold_infoboks">
+            <p>{innhold.innhold}</p>
+        </div>
+
 
         <div aria-live="polite" role="alert">
             { avbrytFeilet && <div className="blokk"><Varselstripe type="feil"><p>Beklager, det oppstod en feil. Prøv igjen litt senere.</p></Varselstripe></div>}
@@ -40,14 +47,15 @@ const AvbrytMote = ({ deltaker, sykmeldtDeltaker, onSubmit, avbrytHref, avbryter
 };
 
 AvbrytMote.propTypes = {
-    deltaker: PropTypes.object,
-    sykmeldtDeltaker: PropTypes.object,
+    arbeidsgiver: PropTypes.object,
+    sykmeldt: PropTypes.object,
     innhold: PropTypes.object,
     valgtDeltaker: PropTypes.object,
     valgtKanal: PropTypes.string,
     onSubmit: PropTypes.func,
     setValgtDeltaker: PropTypes.func,
     setValgtKanal: PropTypes.func,
+    hentAvbrytMoteEpostinnhold: PropTypes.func,
     avbrytHref: PropTypes.string,
     avbryter: PropTypes.bool,
     avbrytFeilet: PropTypes.bool,

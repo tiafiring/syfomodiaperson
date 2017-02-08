@@ -28,7 +28,6 @@ export class SykmeldingerSide extends Component {
             tittel: 'Dine sykmeldinger',
         }];
 
-        console.log("SykmeldingerSide", brukernavn, ledetekster, henter, hentingFeilet, ikkeTilgang, sykmeldinger, fnr);
         return (<Side tittel="Sykmeldinger" aktivtMenypunkt={SYKMELDINGER}>
             {
                 (() => {

@@ -50,7 +50,7 @@ export class AvbrytMoteSide extends Component {
     }
 
     render() {
-        const { avbryter, avbrytFeilet, hentingFeiletBool, fnr, mote, henterMoterBool, innhold, valgtDeltaker, valgtKanal, setValgtKanal, setValgtDeltaker } = this.props;
+        const { avbryter, avbrytFeilet, hentingFeiletBool, fnr, mote, henterMoterBool, innhold, hentAvbrytMoteEpostinnhold, valgtDeltaker = this.getArbeidsgiverDeltaker(), valgtKanal = "EPOST", setValgtKanal, setValgtDeltaker } = this.props;
         const arbeidsgiverDeltaker = this.getArbeidsgiverDeltaker();
         const sykmeldtDeltaker = this.getSykmeldtDeltaker();
 
@@ -69,11 +69,12 @@ export class AvbrytMoteSide extends Component {
                         {(() => {
                             return (<AvbrytMote
                                 avbrytFeilet={avbrytFeilet}
-                                sykmeldtDeltaker={sykmeldtDeltaker}
+                                sykmeldt={sykmeldtDeltaker}
                                 avbryter={avbryter}
-                                deltaker={arbeidsgiverDeltaker}
+                                arbeidsgiver={arbeidsgiverDeltaker}
                                 setValgtKanal={setValgtKanal}
                                 setValgtDeltaker={setValgtDeltaker}
+                                hentAvbrytMoteEpostinnhold={hentAvbrytMoteEpostinnhold}
                                 onSubmit={() => { this.avbrytMote(); }}
                                 avbrytHref={`/sykefravaer/${fnr}/mote`}
                             innhold={innhold} valgtDeltaker={valgtDeltaker} valgtKanal={valgtKanal} />);
@@ -113,6 +114,7 @@ export function mapStateToProps(state, ownProps) {
         avbrytFeilet: state.moter.avbrytFeilet,
         henterMoterBool: state.moter.henter,
         henterEpostinnholdBool: state.epostinnhold.henter,
+        valgtDeltaker: state.epostinnhold.valgtDeltaker,
         hentingFeiletBool: state.moter.hentingFeilet || state.epostinnhold.hentingFeilet,
         innhold: state.epostinnhold.data,
     };
