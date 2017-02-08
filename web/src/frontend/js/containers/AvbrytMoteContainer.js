@@ -6,19 +6,13 @@ import Side from '../sider/Side';
 import AvbrytMote from '../mote/components/AvbrytMote';
 import history from '../history';
 import * as moterActions from '../mote/actions/moter_actions';
+import * as epostinnholdActions from '../mote/actions/epostinnhold_actions';
 import { connect } from 'react-redux';
 
 export class AvbrytMoteSide extends Component {
     constructor(props) {
         super(props);
         this.hentInnhold();
-    }
-
-    componentDidUpdate() {
-        const { hentingFeiletBool } = this.props;
-        if (!hentingFeiletBool) {
-            this.hentInnhold();
-        }
     }
 
     getArbeidsgiverDeltaker() {
@@ -42,8 +36,10 @@ export class AvbrytMoteSide extends Component {
     }
 
     hentInnhold() {
-        const { mote } = this.props;
-        if (!mote) {
+        const { epostinnhold, mote } = this.props;
+        if (!epostinnhold && mote) {
+            this.props.hentAvbrytMoteEpostinnhold(this.getArbeidsgiverDeltaker().deltakerUuid);
+        } else if (!mote) {
             this.props.hentMoter(this.props.fnr);
         }
     }
@@ -54,7 +50,7 @@ export class AvbrytMoteSide extends Component {
     }
 
     render() {
-        const { avbryter, avbrytFeilet, hentingFeiletBool, fnr, mote, henterMoterBool } = this.props;
+        const { avbryter, avbrytFeilet, hentingFeiletBool, fnr, mote, henterMoterBool, innhold, valgtDeltaker, valgtKanal, setValgtKanal, setValgtDeltaker } = this.props;
         const arbeidsgiverDeltaker = this.getArbeidsgiverDeltaker();
         const sykmeldtDeltaker = this.getSykmeldtDeltaker();
 
@@ -71,9 +67,16 @@ export class AvbrytMoteSide extends Component {
                         history.replace(`/sykefravaer/${fnr}/mote`);
                     }}>
                         {(() => {
-                            return (<AvbrytMote avbrytFeilet={avbrytFeilet} sykmeldtDeltaker={sykmeldtDeltaker} avbryter={avbryter} deltaker={arbeidsgiverDeltaker} onSubmit={() => {
-                                this.avbrytMote();
-                            }} avbrytHref={`/sykefravaer/${fnr}/mote`} />);
+                            return (<AvbrytMote
+                                avbrytFeilet={avbrytFeilet}
+                                sykmeldtDeltaker={sykmeldtDeltaker}
+                                avbryter={avbryter}
+                                deltaker={arbeidsgiverDeltaker}
+                                setValgtKanal={setValgtKanal}
+                                setValgtDeltaker={setValgtDeltaker}
+                                onSubmit={() => { this.avbrytMote(); }}
+                                avbrytHref={`/sykefravaer/${fnr}/mote`}
+                            innhold={innhold} valgtDeltaker={valgtDeltaker} valgtKanal={valgtKanal} />);
                         })()}
                     </Lightbox>);
                 }
@@ -89,6 +92,9 @@ AvbrytMoteSide.propTypes = {
     fnr: PropTypes.string,
     henterMoterBool: PropTypes.bool,
     hentingFeiletBool: PropTypes.bool,
+    innhold: PropTypes.object,
+    valgtDeltaker: PropTypes.object,
+    valgtKanal: PropTypes.string,
     mote: PropTypes.object,
     hentMoter: PropTypes.func,
     avbrytMote: PropTypes.func,
@@ -106,10 +112,12 @@ export function mapStateToProps(state, ownProps) {
         avbryter: state.moter.avbryter,
         avbrytFeilet: state.moter.avbrytFeilet,
         henterMoterBool: state.moter.henter,
-        hentingFeiletBool: state.moter.hentingFeilet,
+        henterEpostinnholdBool: state.epostinnhold.henter,
+        hentingFeiletBool: state.moter.hentingFeilet || state.epostinnhold.hentingFeilet,
+        innhold: state.epostinnhold.data,
     };
 }
 
-const AvbrytMoteContainer = connect(mapStateToProps, Object.assign({}, moterActions))(AvbrytMoteSide);
+const AvbrytMoteContainer = connect(mapStateToProps, Object.assign({}, moterActions, epostinnholdActions))(AvbrytMoteSide);
 
 export default AvbrytMoteContainer;

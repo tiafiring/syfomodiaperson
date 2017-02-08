@@ -3,7 +3,12 @@ import { Link } from 'react-router';
 import { Varselstripe } from 'digisyfo-npm';
 import { fikkMoteOpprettetVarsel } from '../utils/index';
 
-const AvbrytMote = ({ deltaker, sykmeldtDeltaker, onSubmit, avbrytHref, avbryter, avbrytFeilet }) => {
+const AvbrytMote = ({ deltaker, sykmeldtDeltaker, onSubmit, avbrytHref, avbryter, avbrytFeilet, innhold, valgtDeltaker, valgtKanal, setValgtDeltaker, setValgtKanal }) => {
+    console.log("innhold", innhold);
+    console.log("valgtDeltaker", valgtDeltaker);
+    console.log("valgtKanal", valgtKanal);
+    console.log("setValgtDeltaker", setValgtDeltaker);
+    console.log("setValgtKanal", setValgtKanal);
     return (<div className="epostinnhold">
         <h2 className="typo-innholdstittel">Avbryt møteresultat</h2>
 
@@ -37,7 +42,12 @@ const AvbrytMote = ({ deltaker, sykmeldtDeltaker, onSubmit, avbrytHref, avbryter
 AvbrytMote.propTypes = {
     deltaker: PropTypes.object,
     sykmeldtDeltaker: PropTypes.object,
+    innhold: PropTypes.object,
+    valgtDeltaker: PropTypes.object,
+    valgtKanal: PropTypes.string,
     onSubmit: PropTypes.func,
+    setValgtDeltaker: PropTypes.func,
+    setValgtKanal: PropTypes.func,
     avbrytHref: PropTypes.string,
     avbryter: PropTypes.bool,
     avbrytFeilet: PropTypes.bool,
