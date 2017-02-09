@@ -4,7 +4,7 @@ const defaultState = {
     data: {},
     henter: false,
     hentingFeilet: false,
-    valgtDeltaker: {},
+    hentet: false,
 };
 
 export default function epostinnhold(state = defaultState, action = {}) {
@@ -16,19 +16,20 @@ export default function epostinnhold(state = defaultState, action = {}) {
             });
         }
         case EPOSTINNHOLD_HENTET: {
-            return {
+            return Object.assign({}, state, {
                 data: action.data,
                 henter: false,
                 hentingFeilet: false,
                 eposttype: action.eposttype,
-            };
+                hentet: true,
+            });
         }
         case HENT_EPOSTINNHOLD_FEILET: {
-            return {
+            return Object.assign({}, state, {
                 data: {},
                 henter: false,
                 hentingFeilet: true,
-            };
+            });
         }
         case SET_VALGT_KANAL: {
             return Object.assign({}, state, {

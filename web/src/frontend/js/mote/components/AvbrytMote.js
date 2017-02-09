@@ -4,6 +4,8 @@ import { Varselstripe } from 'digisyfo-npm';
 import { fikkMoteOpprettetVarsel } from '../utils/index';
 
 const AvbrytMote = ({ arbeidsgiver, sykmeldt, onSubmit, avbrytHref, avbryter, avbrytFeilet, innhold, valgtDeltaker, valgtKanal, hentAvbrytMoteEpostinnhold, setValgtDeltaker, setValgtKanal }) => {
+    const sykmeldtValgt = sykmeldt === valgtDeltaker ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
+    const arbeidsgiverValgt = arbeidsgiver === valgtDeltaker ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
     return (<div className="epostinnhold">
         <h2 className="typo-innholdstittel">Avbryt møteresultat</h2>
 
@@ -11,7 +13,6 @@ const AvbrytMote = ({ arbeidsgiver, sykmeldt, onSubmit, avbrytHref, avbryter, av
             <h3>Sendes til arbeidsgiver</h3>
             <p>{arbeidsgiver.navn}</p>
         </div>
-
 
         { fikkMoteOpprettetVarsel(sykmeldt) &&
         <div className="epostinnhold__mottakere blokk">
@@ -23,11 +24,11 @@ const AvbrytMote = ({ arbeidsgiver, sykmeldt, onSubmit, avbrytHref, avbryter, av
         <h2>Informasjon som sendes til partene</h2>
 
         <div className="epostinnhold__deltakere">
-            <a href="#" className="epostinnhold_deltakerlenke" onClick={() => {
+            <a href="#" className={`epostinnhold_deltakerlenke ${arbeidsgiverValgt}`} onClick={() => {
                 setValgtDeltaker(arbeidsgiver);
                 hentAvbrytMoteEpostinnhold(arbeidsgiver.deltakerUuid);
             }}>Arbeidsgiver</a>
-            <a href="#" className="epostinnhold_deltakerlenke" onClick={() => {
+            <a href="#" className={`epostinnhold_deltakerlenke ${sykmeldtValgt}`} onClick={() => {
                 setValgtDeltaker(sykmeldt);
                 hentAvbrytMoteEpostinnhold(sykmeldt.deltakerUuid);
             }}>Sykmeldt</a>
@@ -38,9 +39,8 @@ const AvbrytMote = ({ arbeidsgiver, sykmeldt, onSubmit, avbrytHref, avbryter, av
         </div>
 
         <div className="epostinnhold_infoboks">
-            <p>{innhold.innhold}</p>
+            <div dangerouslySetInnerHTML={{ __html: innhold.innhold }}></div>
         </div>
-
 
         <div aria-live="polite" role="alert">
             { avbrytFeilet && <div className="blokk"><Varselstripe type="feil"><p>Beklager, det oppstod en feil. Prøv igjen litt senere.</p></Varselstripe></div>}

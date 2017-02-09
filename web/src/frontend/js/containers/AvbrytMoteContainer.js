@@ -50,7 +50,7 @@ export class AvbrytMoteSide extends Component {
     }
 
     render() {
-        const { avbryter, avbrytFeilet, hentingFeiletBool, fnr, mote, henterMoterBool, innhold, hentAvbrytMoteEpostinnhold, valgtDeltaker = this.getArbeidsgiverDeltaker(), valgtKanal = "EPOST", setValgtKanal, setValgtDeltaker } = this.props;
+        const { avbryter, avbrytFeilet, hentingFeiletBool, fnr, mote, henter, innhold, hentAvbrytMoteEpostinnhold, valgtDeltaker = this.getArbeidsgiverDeltaker(), valgtKanal = "EPOST", setValgtKanal, setValgtDeltaker } = this.props;
         const arbeidsgiverDeltaker = this.getArbeidsgiverDeltaker();
         const sykmeldtDeltaker = this.getSykmeldtDeltaker();
 
@@ -60,7 +60,7 @@ export class AvbrytMoteSide extends Component {
                 if (hentingFeiletBool) {
                     return <Feilmelding />;
                 }
-                if (henterMoterBool) {
+                if (henter) {
                     return <AppSpinner />;
                 } else if (mote) {
                     return (<Lightbox onClose={() => {
@@ -91,7 +91,7 @@ export class AvbrytMoteSide extends Component {
 AvbrytMoteSide.propTypes = {
     avbryter: PropTypes.bool,
     fnr: PropTypes.string,
-    henterMoterBool: PropTypes.bool,
+    henter: PropTypes.bool,
     hentingFeiletBool: PropTypes.bool,
     innhold: PropTypes.object,
     valgtDeltaker: PropTypes.object,
@@ -106,14 +106,12 @@ export function mapStateToProps(state, ownProps) {
     const mote = state.moter.data.filter((m) => {
         return m.moteUuid === ownProps.params.moteUuid;
     })[0];
-
     return {
         fnr: state.navbruker.data.fnr,
         mote,
         avbryter: state.moter.avbryter,
         avbrytFeilet: state.moter.avbrytFeilet,
-        henterMoterBool: state.moter.henter,
-        henterEpostinnholdBool: state.epostinnhold.henter,
+        henter: state.moter.henter || state.epostinnhold.henter || !state.epostinnhold.hentet,
         valgtDeltaker: state.epostinnhold.valgtDeltaker,
         hentingFeiletBool: state.moter.hentingFeilet || state.epostinnhold.hentingFeilet,
         innhold: state.epostinnhold.data,
