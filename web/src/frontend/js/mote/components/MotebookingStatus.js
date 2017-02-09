@@ -54,7 +54,7 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
     if (feilmelding) {
         deltakere = deltakere
             .filter(deltaker => {
-                return deltaker !== aktoer || deltaker.svartTidspunkt !== null;
+                return deltaker !== aktoer || deltaker.svartTidspunkt != null;
             });
         krrFeilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
         krrFeilmeldingkey = feilAarsakForklaringFunc(krrFeilAarsak);
