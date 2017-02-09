@@ -79,7 +79,7 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
             feilmelding && <KontaktInfoFeilmelding feilmeldingkey={krrFeilmeldingkey} ledetekster={ledetekster} />
         }
         <div className="panel">
-            <Sidetopp tittel="Status for møteforespørselen" />
+            <Sidetopp tittel="Status for møteforespørsel" />
             <h4 className="typo-undertittel blokk-s">Møtested</h4>
             <p className="blokk-l">{alternativer[0].sted}</p>
             <table className="motestatus blokk-l">
@@ -152,10 +152,10 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
 
             </table>
             <div className="knapperad-bunn">
-                <Link role="button" className="js-avbryt knapp knapp--mini" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>Avbryt møte</Link>
+                <Link role="button" className="js-avbryt knapp knapp--mini" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>Avbryt</Link>
                 <button className="js-ny knapp knapp--mini" onClick={() => {
                     avbrytMoteUtenVarsel(mote.moteUuid, fnr);
-                }}>Nytt møte</button>
+                }}>Nytt tidspunkt</button>
             </div>
         </div>
     </div>);
