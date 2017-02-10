@@ -79,7 +79,6 @@ export function mapDispatchToProps(dispatch) {
 
 
 export function mapStateToProps(state) {
-    console.log(state);
     const fnr = state.navbruker.data.fnr;
     const henter = state.sykmeldinger.henter || state.ledetekster.henter;
     const hentingFeilet = state.sykmeldinger.hentingFeilet || state.ledetekster.hentingFeilet;
