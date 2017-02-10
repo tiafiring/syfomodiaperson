@@ -115,7 +115,6 @@ describe("AvbrytMoteContainer", () => {
             expect(compo.instance().avbrytMote());
             expect(avbrytMote.getCall(0).args).to.deep.equal(["2fedc0da-efec-4b6e-8597-a021628058ae", "8855"])
         })
-''
     });
 
     describe("mapStateToProps", () => {
