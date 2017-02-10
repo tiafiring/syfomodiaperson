@@ -84,11 +84,6 @@ describe("MotebookingStatus", () => {
         expect(component.find(".js-velg-tidspunkt")).to.have.length(0);
     });
 
-    it("Skal vise en knapp for Avbryt møteforespørsel", () => {
-        const component = shallow(<MotebookingStatus mote={mote} />);
-        expect(component.find(".js-avbryt")).to.have.length(1);
-    });
-
     describe("Ny møteforespørsel", () => {
         it("Skal vise en knapp for Ny møteforespørsel", () => {
             const component = shallow(<MotebookingStatus mote={mote} />);

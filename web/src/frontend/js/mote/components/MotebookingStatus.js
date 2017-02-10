@@ -152,7 +152,7 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
 
             </table>
             <div className="knapperad-bunn">
-                <Link role="button" className="js-avbryt knapp knapp--mini" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>Avbryt møte</Link>
+                <Link role="button" className="luft__right knapp knapp--mini" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>Avbryt møte</Link>
                 <button className="js-ny knapp knapp--mini" onClick={() => {
                     avbrytMoteUtenVarsel(mote.moteUuid, fnr);
                 }}>Nytt møte</button>

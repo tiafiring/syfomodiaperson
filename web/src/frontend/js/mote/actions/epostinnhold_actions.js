@@ -8,10 +8,11 @@ export const hentBekreftMoteEpostinnhold = (motedeltakerUuid, valgtAlternativId)
     };
 };
 
-export const hentAvbrytMoteEpostinnhold = (motedeltakerUuid) => {
+export const hentAvbrytMoteEpostinnhold = (motedeltakerUuid, valgtKanal) => {
     return {
         type: HENT_AVBRYT_MOTE_EPOSTINNHOLD_FORESPURT,
         motedeltakerUuid,
+        valgtKanal,
     };
 };
 
@@ -40,7 +41,6 @@ export const setValgtDeltaker = (valgtDeltaker) => {
         type: SET_VALGT_DELTAKER,
         valgtDeltaker,
     };
-
 };
 
 export const setValgtKanal = (valgtKanal) => {

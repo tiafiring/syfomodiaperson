@@ -9,7 +9,7 @@ import Lightbox from "../../js/components/Lightbox";
 describe("AvbrytMoteContainer", () => {
 
     describe("AvbrytMoteSide", () => {
-
+        let hentAvbrytMoteEpostinnhold;
         let hentMoter;
         let mote;
 
@@ -68,6 +68,7 @@ describe("AvbrytMoteContainer", () => {
                     "valgt": false
                 }]
             };
+            hentAvbrytMoteEpostinnhold = sinon.spy();
             hentMoter = sinon.spy();
         });
 
@@ -76,13 +77,31 @@ describe("AvbrytMoteContainer", () => {
             expect(hentMoter.getCall(0).args).to.deep.equal(["123"]);
         })
 
+        it("Skal hente epostinnhold dersom det ikke finnes epostinnhold og møte", () => {
+            const compo = shallow(<AvbrytMoteSide mote={mote} hentAvbrytMoteEpostinnhold={hentAvbrytMoteEpostinnhold} />);
+            expect(hentAvbrytMoteEpostinnhold.getCall(0).args).to.deep.equal(["arbeidsgivers-deltaker-uuid"])
+        });
+
+        it("Skal ikke hente epostinnhold dersom det finnes epostinnhold og møte", () => {
+            const varselinnhold = {emne: "1"}
+            const compo = shallow(<AvbrytMoteSide varselinnhold={varselinnhold} mote={mote} hentAvbrytMoteEpostinnhold={hentAvbrytMoteEpostinnhold} />);
+            expect(hentAvbrytMoteEpostinnhold.called).to.be.false;
+        });
+
+        it("Skal ikke hente epostinnhold dersom det ikke finnes epostinnhold men heller ikke noe møte", () => {
+            const varselinnhold = undefined;
+            const mote = undefined;
+            const compo = shallow(<AvbrytMoteSide hentMoter={hentMoter} varselinnhold={varselinnhold} mote={mote} hentAvbrytMoteEpostinnhold={hentAvbrytMoteEpostinnhold} />);
+            expect(hentAvbrytMoteEpostinnhold.called).to.be.false;
+        });
+
         it("Skal vise frem AppSpinner når det hentes møter", () => {
-            const compo = shallow(<AvbrytMoteSide hentMoter={hentMoter} henterMoterBool={true} />);
+            const compo = shallow(<AvbrytMoteSide hentMoter={hentMoter} henter={true} />);
             expect(compo.contains(<AppSpinner />)).to.be.true;
         });
 
         it("Skal vise frem Lightbox når møte er hentet", () => {
-            const compo = shallow(<AvbrytMoteSide henterMoterBool={false} mote={mote} />);
+            const compo = shallow(<AvbrytMoteSide henter={false} mote={mote} hentAvbrytMoteEpostinnhold={hentAvbrytMoteEpostinnhold} />);
             expect(compo.find(Lightbox)).to.have.length(1);
         });
 
@@ -92,11 +111,11 @@ describe("AvbrytMoteContainer", () => {
                 innhold: "2"
             }
             const avbrytMote = sinon.spy();
-            const compo = shallow(<AvbrytMoteSide fnr="8855" avbrytMote={avbrytMote} mote={mote} />);
+            const compo = shallow(<AvbrytMoteSide fnr="8855" avbrytMote={avbrytMote} mote={mote} hentAvbrytMoteEpostinnhold={hentAvbrytMoteEpostinnhold} />);
             expect(compo.instance().avbrytMote());
             expect(avbrytMote.getCall(0).args).to.deep.equal(["2fedc0da-efec-4b6e-8597-a021628058ae", "8855"])
         })
-
+''
     });
 
     describe("mapStateToProps", () => {
@@ -110,6 +129,9 @@ describe("AvbrytMoteContainer", () => {
                 }
             }
             state = {
+                epostinnhold: {
+                    hentingFeilet: false,
+                },
                 moter: {
                     hentingFeilet: false,
                     data: [{
@@ -169,14 +191,16 @@ describe("AvbrytMoteContainer", () => {
             expect(props.mote).to.deep.equal(state.moter.data[0]);
         });
 
+
+
         it("Skal returnere henterMoterBool når det hentes møter", () => {
             state.moter.henter = true;
             const props = mapStateToProps(state, ownProps);
-            expect(props.henterMoterBool).to.equal(true);
+            expect(props.henter).to.equal(true);
 
             state.moter.henter = false;
             const props2 = mapStateToProps(state, ownProps);
-            expect(props2.henterMoterBool).to.equal(false);
+            expect(props2.henter).to.equal(false);
         });
 
         it("Skal returnere hentingFeilet når henting av møter feilet", () => {

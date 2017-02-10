@@ -4,7 +4,6 @@ const defaultState = {
     data: {},
     henter: false,
     hentingFeilet: false,
-    hentet: false,
 };
 
 export default function epostinnhold(state = defaultState, action = {}) {
@@ -21,7 +20,6 @@ export default function epostinnhold(state = defaultState, action = {}) {
                 henter: false,
                 hentingFeilet: false,
                 eposttype: action.eposttype,
-                hentet: true,
             });
         }
         case HENT_EPOSTINNHOLD_FEILET: {

@@ -1,11 +1,28 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Varselstripe } from 'digisyfo-npm';
+import AppSpinner from '../../components/AppSpinner';
 import { fikkMoteOpprettetVarsel } from '../utils/index';
 
-const AvbrytMote = ({ arbeidsgiver, sykmeldt, onSubmit, avbrytHref, avbryter, avbrytFeilet, innhold, valgtDeltaker, valgtKanal, hentAvbrytMoteEpostinnhold, setValgtDeltaker, setValgtKanal }) => {
-    const sykmeldtValgt = sykmeldt === valgtDeltaker ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
-    const arbeidsgiverValgt = arbeidsgiver === valgtDeltaker ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
+const AvbrytMote = ({ henterInnhold, arbeidsgiver, sykmeldt, onSubmit, avbrytHref, avbryter, avbrytFeilet, varselinnhold, valgtDeltaker = arbeidsgiver, valgtKanal = 'EPOST', hentAvbrytMoteEpostinnhold, setValgtDeltaker }) => {
+    const sykmeldtValgt = sykmeldt.deltakerUuid === valgtDeltaker.deltakerUuid ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
+    const arbeidsgiverValgt = arbeidsgiver.deltakerUuid === valgtDeltaker.deltakerUuid ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
+
+    let innhold;
+    if (henterInnhold) {
+        innhold = <AppSpinner />;
+    } else {
+        innhold = (<div>
+            {varselinnhold.emne && <div className="epostinnhold_infoboks">
+                <p>{varselinnhold.emne}</p>
+            </div>
+            }
+            <div className="epostinnhold_infoboks">
+                <div dangerouslySetInnerHTML={{ __html: varselinnhold.innhold }}></div>
+            </div>
+        </div>);
+    }
+
     return (<div className="epostinnhold">
         <h2 className="typo-innholdstittel">Avbryt møteresultat</h2>
 
@@ -24,31 +41,25 @@ const AvbrytMote = ({ arbeidsgiver, sykmeldt, onSubmit, avbrytHref, avbryter, av
         <h2>Informasjon som sendes til partene</h2>
 
         <div className="epostinnhold__deltakere">
-            <a href="#" className={`epostinnhold_deltakerlenke ${arbeidsgiverValgt}`} onClick={() => {
+            <button className={`epostinnhold__knapp tekst-knapp ${arbeidsgiverValgt}`} onClick={() => {
                 setValgtDeltaker(arbeidsgiver);
-                hentAvbrytMoteEpostinnhold(arbeidsgiver.deltakerUuid);
-            }}>Arbeidsgiver</a>
-            <a href="#" className={`epostinnhold_deltakerlenke ${sykmeldtValgt}`} onClick={() => {
+                hentAvbrytMoteEpostinnhold(arbeidsgiver.deltakerUuid, valgtKanal);
+            }}>Arbeidsgiver</button>
+            <button className={`epostinnhold__knapp tekst-knapp ${sykmeldtValgt}`} onClick={() => {
                 setValgtDeltaker(sykmeldt);
-                hentAvbrytMoteEpostinnhold(sykmeldt.deltakerUuid);
-            }}>Sykmeldt</a>
+                hentAvbrytMoteEpostinnhold(sykmeldt.deltakerUuid, valgtKanal);
+            }}>Sykmeldt</button>
         </div>
 
-        <div className="epostinnhold_infoboks">
-            <p>{innhold.emne}</p>
-        </div>
-
-        <div className="epostinnhold_infoboks">
-            <div dangerouslySetInnerHTML={{ __html: innhold.innhold }}></div>
-        </div>
+        {innhold}
 
         <div aria-live="polite" role="alert">
             { avbrytFeilet && <div className="blokk"><Varselstripe type="feil"><p>Beklager, det oppstod en feil. Prøv igjen litt senere.</p></Varselstripe></div>}
         </div>
 
-        <div className="knapperad">
-            <button disabled={avbryter} className="knapp blokk--s" onClick={onSubmit}>Send</button>
-            <p><Link to={avbrytHref}>Avbryt</Link></p>
+        <div>
+            <button disabled={avbryter} className="knapp blokk--s luft__right" onClick={onSubmit}>Send</button>
+            <Link to={avbrytHref}>Avbryt</Link>
         </div>
     </div>);
 };
@@ -56,7 +67,7 @@ const AvbrytMote = ({ arbeidsgiver, sykmeldt, onSubmit, avbrytHref, avbryter, av
 AvbrytMote.propTypes = {
     arbeidsgiver: PropTypes.object,
     sykmeldt: PropTypes.object,
-    innhold: PropTypes.object,
+    varselinnhold: PropTypes.object,
     valgtDeltaker: PropTypes.object,
     valgtKanal: PropTypes.string,
     onSubmit: PropTypes.func,
@@ -66,6 +77,7 @@ AvbrytMote.propTypes = {
     avbrytHref: PropTypes.string,
     avbryter: PropTypes.bool,
     avbrytFeilet: PropTypes.bool,
+    henterInnhold: PropTypes.bool,
 };
 
 export default AvbrytMote;

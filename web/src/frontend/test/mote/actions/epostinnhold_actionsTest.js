@@ -17,10 +17,11 @@ describe("epostinnhold_actions", () => {
 
     it("Har en hentAvbrytMoteEpostinnhold-funksjon som returnerer riktig action", () => {
         const motedeltakerUuid = "Olsen";
-        const action = actions.hentAvbrytMoteEpostinnhold(motedeltakerUuid);
+        const action = actions.hentAvbrytMoteEpostinnhold(motedeltakerUuid, "EPOST");
         expect(action).to.deep.equal({
             type: "HENT_AVBRYT_MOTE_EPOSTINNHOLD_FORESPURT",
-            motedeltakerUuid: "Olsen"
+            motedeltakerUuid: "Olsen",
+            valgtKanal: "EPOST",
         });
     })
 
@@ -48,6 +49,26 @@ describe("epostinnhold_actions", () => {
             data: {
                 id: 1
             }
+        });
+    })
+
+    it("Har en setValgtDeltaker()-funksjon som returnerer riktig action", () => {
+        const action = actions.setValgtDeltaker({
+            id: 1
+        });
+        expect(action).to.deep.equal({
+            type: "SET_VALGT_DELTAKER",
+            valgtDeltaker: {
+                id: 1
+            }
+        });
+    })
+
+    it("Har en setValgtKanal()-funksjon som returnerer riktig action", () => {
+        const action = actions.setValgtKanal("SMS");
+        expect(action).to.deep.equal({
+            type: "SET_VALGT_KANAL",
+            valgtKanal: "SMS"
         });
     })
 });

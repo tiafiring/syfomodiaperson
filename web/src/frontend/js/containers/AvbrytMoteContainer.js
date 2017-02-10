@@ -36,8 +36,8 @@ export class AvbrytMoteSide extends Component {
     }
 
     hentInnhold() {
-        const { epostinnhold, mote } = this.props;
-        if (!epostinnhold && mote) {
+        const { varselinnhold, mote } = this.props;
+        if (!varselinnhold && mote) {
             this.props.hentAvbrytMoteEpostinnhold(this.getArbeidsgiverDeltaker().deltakerUuid);
         } else if (!mote) {
             this.props.hentMoter(this.props.fnr);
@@ -50,10 +50,7 @@ export class AvbrytMoteSide extends Component {
     }
 
     render() {
-        const { avbryter, avbrytFeilet, hentingFeiletBool, fnr, mote, henter, innhold, hentAvbrytMoteEpostinnhold, valgtDeltaker = this.getArbeidsgiverDeltaker(), valgtKanal = "EPOST", setValgtKanal, setValgtDeltaker } = this.props;
-        const arbeidsgiverDeltaker = this.getArbeidsgiverDeltaker();
-        const sykmeldtDeltaker = this.getSykmeldtDeltaker();
-
+        const { avbryter, avbrytFeilet, henterInnhold, hentingFeiletBool, fnr, mote, henter, varselinnhold, hentAvbrytMoteEpostinnhold, valgtDeltaker, valgtKanal, setValgtKanal, setValgtDeltaker } = this.props;
         return (<Side tittel="Avbryt møteforespørsel">
         {
             (() => {
@@ -68,16 +65,17 @@ export class AvbrytMoteSide extends Component {
                     }}>
                         {(() => {
                             return (<AvbrytMote
+                                henterInnhold={henterInnhold}
                                 avbrytFeilet={avbrytFeilet}
-                                sykmeldt={sykmeldtDeltaker}
+                                sykmeldt={this.getSykmeldtDeltaker()}
                                 avbryter={avbryter}
-                                arbeidsgiver={arbeidsgiverDeltaker}
+                                arbeidsgiver={this.getArbeidsgiverDeltaker()}
                                 setValgtKanal={setValgtKanal}
                                 setValgtDeltaker={setValgtDeltaker}
                                 hentAvbrytMoteEpostinnhold={hentAvbrytMoteEpostinnhold}
                                 onSubmit={() => { this.avbrytMote(); }}
                                 avbrytHref={`/sykefravaer/${fnr}/mote`}
-                            innhold={innhold} valgtDeltaker={valgtDeltaker} valgtKanal={valgtKanal} />);
+                                varselinnhold={varselinnhold} valgtDeltaker={valgtDeltaker} valgtKanal={valgtKanal} />);
                         })()}
                     </Lightbox>);
                 }
@@ -93,11 +91,15 @@ AvbrytMoteSide.propTypes = {
     fnr: PropTypes.string,
     henter: PropTypes.bool,
     hentingFeiletBool: PropTypes.bool,
-    innhold: PropTypes.object,
+    henterInnhold: PropTypes.bool,
+    varselinnhold: PropTypes.object,
     valgtDeltaker: PropTypes.object,
     valgtKanal: PropTypes.string,
     mote: PropTypes.object,
     hentMoter: PropTypes.func,
+    setValgtDeltaker: PropTypes.func,
+    hentAvbrytMoteEpostinnhold: PropTypes.func,
+    setValgtKanal: PropTypes.func,
     avbrytMote: PropTypes.func,
     avbrytFeilet: PropTypes.bool,
 };
@@ -111,10 +113,12 @@ export function mapStateToProps(state, ownProps) {
         mote,
         avbryter: state.moter.avbryter,
         avbrytFeilet: state.moter.avbrytFeilet,
-        henter: state.moter.henter || state.epostinnhold.henter || !state.epostinnhold.hentet,
+        henter: state.moter.henter,
+        henterInnhold: state.epostinnhold.henter,
         valgtDeltaker: state.epostinnhold.valgtDeltaker,
+        valgtKanal: state.epostinnhold.valgtKanal,
         hentingFeiletBool: state.moter.hentingFeilet || state.epostinnhold.hentingFeilet,
-        innhold: state.epostinnhold.data,
+        varselinnhold: state.epostinnhold.data,
     };
 }
 
