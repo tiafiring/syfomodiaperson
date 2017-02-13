@@ -44,6 +44,7 @@ MotebookingSide.propTypes = {
     nullstillVirksomhet: PropTypes.func,
     hentVirksomhet: PropTypes.func,
     henter: PropTypes.bool,
+    ledetekster: PropTypes.object,
     hentMoterFeiletBool: PropTypes.bool,
     hentLedereFeiletBool: PropTypes.bool,
     avbryter: PropTypes.bool,
@@ -59,8 +60,9 @@ export const mapStateToProps = (state) => {
     return {
         fnr,
         mote: aktivtMote,
-        henter: state.moter.henter,
+        henter: state.moter.henter || state.ledetekster.henter,
         sender: state.moter.sender,
+        ledetekster: state.ledetekster.data,
         hentMoterFeiletBool: state.moter.hentingFeilet,
         sendingFeilet: state.moter.sendingFeilet,
     };

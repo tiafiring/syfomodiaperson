@@ -105,7 +105,7 @@ export const MotebookingSkjema = ({
                         component={LederFields} />
                 }
                 {
-                    ledere.length === 0 && <ManuellUtfyltLeder />
+                    ledere.length === 0 && <ManuellUtfyltLeder ledetekster={ledetekster} />
                 }
             </fieldset>
             {
