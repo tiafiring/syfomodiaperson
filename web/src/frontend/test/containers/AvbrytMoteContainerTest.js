@@ -154,7 +154,10 @@ describe("AvbrytMoteContainer", () => {
                     data: {
                         fnr: "123"
                     }
-                }
+                },
+                ledetekster: {
+                    henter: false,
+                },
             };
 
         });

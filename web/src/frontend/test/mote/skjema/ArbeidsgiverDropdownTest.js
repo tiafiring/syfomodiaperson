@@ -7,9 +7,11 @@ describe("ArbeidsgiverDropdown", () => {
 
     let meta;
     let ledere;
+    let ledetekster;
 
     beforeEach(() => {
         meta = {}
+        ledetekster = {'mote.bookingskjema.dropdown.ikke-oppgitt': "fyll inn manuelt"};
         ledere = [{
             id: 1,
             navn: "Bjarne",
@@ -30,7 +32,7 @@ describe("ArbeidsgiverDropdown", () => {
     });
 
     it("Skal inneholde et valg for manuell utfylling", () => {
-        const compo = mount(<ArbeidsgiverDropdown meta={meta} ledere={ledere} />);
+        const compo = mount(<ArbeidsgiverDropdown meta={meta} ledere={ledere} ledetekster={ledetekster} />);
         expect(compo.find("option")).to.have.length(6);
         expect(compo.find("option").last().text()).to.contain("fyll inn manuelt")
     });

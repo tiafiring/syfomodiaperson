@@ -54,7 +54,7 @@ export class AvbrytMoteSide extends Component {
     }
 
     render() {
-        const { avbryter, avbrytFeilet, hentingFeiletBool, fnr, mote, henterMoterBool } = this.props;
+        const { avbryter, avbrytFeilet, hentingFeiletBool, fnr, mote, henterMoterBool, ledetekster } = this.props;
         const arbeidsgiverDeltaker = this.getArbeidsgiverDeltaker();
         const sykmeldtDeltaker = this.getSykmeldtDeltaker();
 
@@ -71,7 +71,7 @@ export class AvbrytMoteSide extends Component {
                         history.replace(`/sykefravaer/${fnr}/mote`);
                     }}>
                         {(() => {
-                            return (<AvbrytMote avbrytFeilet={avbrytFeilet} sykmeldtDeltaker={sykmeldtDeltaker} avbryter={avbryter} deltaker={arbeidsgiverDeltaker} onSubmit={() => {
+                            return (<AvbrytMote ledetekster={ledetekster} avbrytFeilet={avbrytFeilet} sykmeldtDeltaker={sykmeldtDeltaker} avbryter={avbryter} deltaker={arbeidsgiverDeltaker} onSubmit={() => {
                                 this.avbrytMote();
                             }} avbrytHref={`/sykefravaer/${fnr}/mote`} />);
                         })()}
@@ -90,6 +90,7 @@ AvbrytMoteSide.propTypes = {
     henterMoterBool: PropTypes.bool,
     hentingFeiletBool: PropTypes.bool,
     mote: PropTypes.object,
+    ledetekster: PropTypes.object,
     hentMoter: PropTypes.func,
     avbrytMote: PropTypes.func,
     avbrytFeilet: PropTypes.bool,
@@ -104,8 +105,9 @@ export function mapStateToProps(state, ownProps) {
         fnr: state.navbruker.data.fnr,
         mote,
         avbryter: state.moter.avbryter,
+        ledetekster: state.ledetekster.data,
         avbrytFeilet: state.moter.avbrytFeilet,
-        henterMoterBool: state.moter.henter,
+        henterMoterBool: state.moter.henter || state.ledetekster.henter,
         hentingFeiletBool: state.moter.hentingFeilet,
     };
 }

@@ -3,6 +3,8 @@ import { Field } from 'redux-form';
 import TextField from '../../components/TextField';
 import { connect } from 'react-redux';
 import * as virksomhetActions from '../actions/virksomhet_actions';
+import { getLedetekst } from 'digisyfo-npm';
+
 
 export const parseOrgnummer = (orgnummer) => {
     return orgnummer.replace(/\D/g, '').substr(0, 9);
@@ -17,13 +19,13 @@ export class FyllUtVirksomhet extends Component {
     }
 
     render() {
-        const { virksomhetsnavn, erFeil, henter } = this.props;
+        const { ledetekster, virksomhetsnavn, erFeil, henter } = this.props;
         let className = 'input--m';
         if (erFeil) {
             className += ' input--feil';
         }
         return (<div className="navInput blokk">
-            <label htmlFor="js-orgnummer">Virksomhetens organisasjonsnummer (valgfritt)</label>
+            <label htmlFor="js-orgnummer">{getLedetekst('mote.bookingskjema.fyllutvirksomhet.orgnummer.valgfritt', ledetekster)}</label>
             <Field id="js-orgnummer" component={TextField} type="text" name="deltakere[0].orgnummer" className={className}
                 parse={(nr) => {
                     return parseOrgnummer(nr);
@@ -32,9 +34,9 @@ export class FyllUtVirksomhet extends Component {
                 !erFeil && virksomhetsnavn && <p>{virksomhetsnavn}</p>
             }
             {
-                henter && <p className="js-henter">Henter navn på virksomhet...</p>
+                henter && <p className="js-henter">{getLedetekst('mote.bookingskjema.fyllutvirksomhet.orgnummer.henter', ledetekster)}</p>
             }
-            <p className="skjema__feilmelding js-feilmelding" role="alert" aria-live="polite">{erFeil && !henter && 'Fant ingen virksomhet med dette organisasjonsnummeret'}</p>
+            <p className="skjema__feilmelding js-feilmelding" role="alert" aria-live="polite">{erFeil && !henter && getLedetekst('mote.bookingskjema.fyllutvirksomhet.orgnummer.feilmelding', ledetekster)}</p>
         </div>);
     }
 }
@@ -44,6 +46,7 @@ FyllUtVirksomhet.propTypes = {
     erFeil: PropTypes.bool,
     henter: PropTypes.bool,
     orgnummer: PropTypes.string,
+    ledetekster: PropTypes.object,
     hentVirksomhet: PropTypes.func,
 };
 
@@ -53,7 +56,8 @@ const mapStateToProps = (state) => {
 
     return {
         orgnummer,
-        henter: state.virksomhet.henter,
+        henter: state.virksomhet.henter || state.ledetekster.henter,
+        ledetekster: state.ledetekster.data,
         virksomhetsnavn: virksomheter[orgnummer],
         erFeil: virksomheter[orgnummer] === 'Fant ikke navn',
     };

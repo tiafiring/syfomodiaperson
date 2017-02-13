@@ -1,35 +1,35 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import { Varselstripe } from 'digisyfo-npm';
+import { Varselstripe, getLedetekst } from 'digisyfo-npm';
 import { fikkMoteOpprettetVarsel } from '../utils/index';
 
-const AvbrytMote = ({ deltaker, sykmeldtDeltaker, onSubmit, avbrytHref, avbryter, avbrytFeilet }) => {
+const AvbrytMote = ({ ledetekster, deltaker, sykmeldtDeltaker, onSubmit, avbrytHref, avbryter, avbrytFeilet }) => {
     return (<div className="epostinnhold">
-        <h2 className="typo-innholdstittel">Avbryt møteresultat</h2>
+        <h2 className="typo-innholdstittel">{getLedetekst('mote.avbrytmote.overskrift', ledetekster)}</h2>
 
         <div className="epostinnhold__mottakere blokk">
-            <h3>Sendes til arbeidsgiver</h3>
+            <h3>{getLedetekst('mote.avbrytmote.sendes-til-arbeidsgiver', ledetekster)}</h3>
             <p>{deltaker.navn}</p>
         </div>
 
         { fikkMoteOpprettetVarsel(sykmeldtDeltaker) &&
         <div className="epostinnhold__mottakere blokk">
-            <h3>Sendes til sykmeldt</h3>
+            <h3>{getLedetekst('mote.avbrytmote.sendes-til-sykmeldt', ledetekster)}</h3>
             <p>{sykmeldtDeltaker.navn}</p>
         </div>
         }
 
         <div className="epostinnhold_infoboks">
-            <p>*Partene blir informert at møteforespørselen blir avbrutt på e-post, sms og på nav.no</p>
+            <p>{getLedetekst('mote.avbrytmote.informasjon', ledetekster)}</p>
         </div>
 
         <div aria-live="polite" role="alert">
-            { avbrytFeilet && <div className="blokk"><Varselstripe type="feil"><p>Beklager, det oppstod en feil. Prøv igjen litt senere.</p></Varselstripe></div>}
+            { avbrytFeilet && <div className="blokk"><Varselstripe type="feil"><p>{getLedetekst('mote.avbrytmote.feil', ledetekster)}</p></Varselstripe></div>}
         </div>
 
         <div className="knapperad">
-            <button disabled={avbryter} className="knapp blokk--s" onClick={onSubmit}>Send</button>
-            <p><Link to={avbrytHref}>Avbryt</Link></p>
+            <button disabled={avbryter} className="knapp blokk--s" onClick={onSubmit}>{getLedetekst('mote.avbrytmote.knapp.submit', ledetekster)}</button>
+            <p><Link to={avbrytHref}>{getLedetekst('mote.avbrytmote.knapp.avbryt', ledetekster)}</Link></p>
         </div>
     </div>);
 };

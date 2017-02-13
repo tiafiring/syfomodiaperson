@@ -86,10 +86,13 @@ describe("MotebookingSkjemaTest", () => {
 
             let arbeidstaker;
             let ledere = [];
-            let ledetekster = {};
+            let ledetekster;
 
             beforeEach(() => {
                 arbeidstaker = {"navn":"***REMOVED***","kontaktinfo":{"tlf":"+4799999999","epost":"tester.scrambling-script@fellesregistre.no","reservasjon":{"skalHaVarsel":true}}, "hendelser": []};
+                ledetekster = {
+                    'mote.motebookingskjema.velg-dato-tid-sted': "Velg dato",
+                };
             });
 
             describe("Arbeidstaker", () => {
@@ -126,7 +129,7 @@ describe("MotebookingSkjemaTest", () => {
                 });
 
                 it("SKal vise riktig nummerering", () => {
-                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
+                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} ledetekster={ledetekster} />);
                     expect(compo.text()).to.contain("3. Velg dato");
                 }); 
 
@@ -156,7 +159,7 @@ describe("MotebookingSkjemaTest", () => {
                 });
 
                 it("SKal vise riktig nummerering", () => {
-                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
+                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} ledetekster={ledetekster} />);
                     expect(compo.text()).not.to.contain("2. Arbeidstakers opplysninger");
                     expect(compo.text()).to.contain("2. Velg dato");
                 }); 

@@ -41,8 +41,7 @@ export class DinSykmeldingSide extends Component {
                         return <Feilmelding />;
                     }
                     if (ikkeTilgang) {
-                        return (<Feilmelding tittel="Under arbeid" melding="Du har foreløpig ikke tilgang til denne tjenesten. Vi jobber med å få på plass riktig tilgangsstyring.
-                    Veiledere som jobber med sykefraværsoppfølging og veiledere på kontaktsenteret vil etter hver få tilgang. Takk for at du prøver igjen senere!" />);
+                        return (<Feilmelding tittel={getLedetekst('mote.dinsykmeldingside.ikketilgang.tittel', ledetekster)} melding={getLedetekst('mote.dinsykmeldingside.ikketilgang.melding', ledetekster)} />);
                     }
 
                     return (<div>
@@ -85,7 +84,7 @@ export function mapStateToProps(state, ownProps) {
     const fnr = state.navbruker.data.fnr;
     const sykmeldingId = ownProps.params.sykmeldingId;
     const henter = state.sykmeldinger.henter || state.ledetekster.henter;
-    const hentingFeilet = state.sykmeldinger.hentingFeilet || state.ledetekster.hentingFeilet;
+    const hentingFeilet = state.sykmeldinger.hentingFeilet;
     const ikkeTilgang = state.sykmeldinger.ikkeTilgang;
     const dinSykmelding = getSykmelding(state.sykmeldinger.data, sykmeldingId);
     let arbeidsgiversSykmelding = {};
