@@ -82,12 +82,6 @@ describe("AvbrytMoteContainer", () => {
             expect(hentAvbrytMoteEpostinnhold.getCall(0).args).to.deep.equal(["arbeidsgivers-deltaker-uuid"])
         });
 
-        it("Skal ikke hente epostinnhold dersom det finnes epostinnhold og møte", () => {
-            const varselinnhold = {emne: "1"}
-            const compo = shallow(<AvbrytMoteSide varselinnhold={varselinnhold} mote={mote} hentAvbrytMoteEpostinnhold={hentAvbrytMoteEpostinnhold} />);
-            expect(hentAvbrytMoteEpostinnhold.called).to.be.false;
-        });
-
         it("Skal ikke hente epostinnhold dersom det ikke finnes epostinnhold men heller ikke noe møte", () => {
             const varselinnhold = undefined;
             const mote = undefined;

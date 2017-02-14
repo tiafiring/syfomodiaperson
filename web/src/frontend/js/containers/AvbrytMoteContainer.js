@@ -36,11 +36,11 @@ export class AvbrytMoteSide extends Component {
     }
 
     hentInnhold() {
-        const { varselinnhold, mote } = this.props;
-        if (!varselinnhold && mote) {
-            this.props.hentAvbrytMoteEpostinnhold(this.getArbeidsgiverDeltaker().deltakerUuid);
-        } else if (!mote) {
+        const { mote } = this.props;
+        if (!mote) {
             this.props.hentMoter(this.props.fnr);
+        } else {
+            this.props.hentAvbrytMoteEpostinnhold(this.getArbeidsgiverDeltaker().deltakerUuid);
         }
     }
 
@@ -50,7 +50,7 @@ export class AvbrytMoteSide extends Component {
     }
 
     render() {
-        const { avbryter, avbrytFeilet, henterInnhold, hentingFeiletBool, fnr, mote, henter, varselinnhold, hentAvbrytMoteEpostinnhold, valgtDeltaker, valgtKanal, setValgtKanal, setValgtDeltaker } = this.props;
+        const { ledetekster, avbryter, avbrytFeilet, henterInnhold, hentingFeiletBool, fnr, mote, henter, varselinnhold, hentAvbrytMoteEpostinnhold, valgtDeltaker = this.getArbeidsgiverDeltaker(), valgtKanal, setValgtKanal, setValgtDeltaker } = this.props;
         return (<Side tittel="Avbryt møteforespørsel">
         {
             (() => {
@@ -65,6 +65,7 @@ export class AvbrytMoteSide extends Component {
                     }}>
                         {(() => {
                             return (<AvbrytMote
+                                ledetekster={ledetekster}
                                 henterInnhold={henterInnhold}
                                 avbrytFeilet={avbrytFeilet}
                                 sykmeldt={this.getSykmeldtDeltaker()}
@@ -124,6 +125,8 @@ export function mapStateToProps(state, ownProps) {
     };
 }
 
+
 const AvbrytMoteContainer = connect(mapStateToProps, Object.assign({}, moterActions, epostinnholdActions))(AvbrytMoteSide);
 
 export default AvbrytMoteContainer;
+

@@ -38,10 +38,7 @@ const AvbrytMote = ({ ledetekster, henterInnhold, arbeidsgiver, sykmeldt, onSubm
         </div>
         }
 
-
-       <p>{getLedetekst('mote.avbrytmote.informasjon', ledetekster)}</p>
-
-
+        <p>{getLedetekst('mote.avbrytmote.informasjon', ledetekster)}</p>
         <div className="epostinnhold__deltakere">
             <button className={`epostinnhold__knapp tekst-knapp ${arbeidsgiverValgt}`} onClick={() => {
                 setValgtDeltaker(arbeidsgiver);
@@ -61,7 +58,7 @@ const AvbrytMote = ({ ledetekster, henterInnhold, arbeidsgiver, sykmeldt, onSubm
 
         <div className="knapperad">
             <button disabled={avbryter} className="knapp blokk--s luft__right" onClick={onSubmit}>{getLedetekst('mote.avbrytmote.knapp.submit', ledetekster)}</button>
-            <p><Link to={avbrytHref}>{getLedetekst('mote.avbrytmote.knapp.avbryt', ledetekster)}</Link></p>
+            <Link to={avbrytHref}>{getLedetekst('mote.avbrytmote.knapp.avbryt', ledetekster)}</Link>
         </div>
     </div>);
 };
