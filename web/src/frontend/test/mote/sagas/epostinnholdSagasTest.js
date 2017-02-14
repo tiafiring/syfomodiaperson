@@ -38,7 +38,7 @@ describe("epostinnholdSagas", () => {
     });
 
     describe("Epost for avbryt møtetidspunkt", () => {
-        const action = actions.hentAvbrytMoteEpostinnhold("abc123");
+        const action = actions.hentAvbrytMoteEpostinnhold("abc123", "EPOST");
         const generator = hentAvbrytMoteEpostinnhold(action);
 
         it("Skal dispatche HENTER_EPOSTINNHOLD", () => {
@@ -47,7 +47,7 @@ describe("epostinnholdSagas", () => {
         });
 
         it("Skal deretter prøve å hente epostinnhold", () => {
-            const nextCall = call(get, "http://tjenester.nav.no/moteadmin/epostinnhold/AVBRUTT?motedeltakeruuid=abc123");
+            const nextCall = call(get, "http://tjenester.nav.no/moteadmin/epostinnhold/AVBRUTT?motedeltakeruuid=abc123&kanal=EPOST");
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
