@@ -14,8 +14,9 @@ describe("MotebookingContainer", () => {
 
         let hentMoter;
         let hentLedere;
-
+        let ledetekster;
         beforeEach(() => {
+            ledetekster = {};
             hentMoter = sinon.spy();
         });
 
@@ -52,10 +53,10 @@ describe("MotebookingContainer", () => {
 
     describe("mapStateToProps", () => {
 
-        let state; 
-
+        let state;
         beforeEach(() => {
             state = {
+                ledetekster: {},
                 navbruker: {
                     data: {
                         fnr: "887766",
@@ -129,6 +130,7 @@ describe("MotebookingContainer", () => {
                 id: 1
             }]
             state.moter.henter = false;
+            state.ledetekster.henter = false;
             const props = mapStateToProps(state);
             expect(props.henter).to.be.false;
         });

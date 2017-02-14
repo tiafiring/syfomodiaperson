@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import SykmeldingTeasere from './SykmeldingTeasere';
-import { getLedetekst, sorterSykmeldingListe, sorterSykmeldingerEldsteFoerst } from 'digisyfo-npm';
+import { getLedetekst, sorterSykmeldinger } from 'digisyfo-npm';
 import SykmeldingerSorteringContainer from './SykmeldingerSorteringContainer';
 
 const DineSykmeldinger = ({ sykmeldinger = [], ledetekster = {}, sortering, fnr }) => {
@@ -13,7 +13,7 @@ const DineSykmeldinger = ({ sykmeldinger = [], ledetekster = {}, sortering, fnr 
     const tidligereSortering = sortering && sortering.tidligere ? sortering.tidligere : undefined;
     return (<div>
         <SykmeldingTeasere
-            sykmeldinger={sorterSykmeldingerEldsteFoerst(nyeSykmeldinger)}
+            sykmeldinger={sorterSykmeldinger(nyeSykmeldinger)}
             tittel={getLedetekst('dine-sykmeldinger.nye-sykmeldinger.tittel', ledetekster)}
             ingenSykmeldingerMelding={getLedetekst('dine-sykmeldinger.nye-sykmeldinger.ingen-sykmeldinger.melding', ledetekster)}
             className="js-nye-sykmeldinger"
@@ -22,7 +22,7 @@ const DineSykmeldinger = ({ sykmeldinger = [], ledetekster = {}, sortering, fnr 
             id="sykmelding-liste-nye" />
         {
             tidligereSykmeldinger.length > 0 && <SykmeldingTeasere
-                sykmeldinger={sorterSykmeldingListe(tidligereSykmeldinger, tidligereSortering)}
+                sykmeldinger={sorterSykmeldinger(tidligereSykmeldinger, tidligereSortering)}
                 tittel={getLedetekst('dine-sykmeldinger.tidligere-sykmeldinger.tittel', ledetekster)}
                 ingenSykmeldingerMelding={getLedetekst('dine-sykmeldinger.tidligere-sykmeldinger.ingen-sykmeldinger.melding', ledetekster)}
                 className="js-tidligere-sykmeldinger"

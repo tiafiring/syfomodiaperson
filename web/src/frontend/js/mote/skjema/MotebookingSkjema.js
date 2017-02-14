@@ -5,7 +5,7 @@ import LederFields, { ManuellUtfyltLeder } from './LederFields';
 import Tidspunkter from './Tidspunkter';
 import KontaktInfoFeilmelding from '../components/KontaktInfoFeilmelding';
 import Sidetopp from '../../components/Sidetopp';
-import { Varselstripe } from 'digisyfo-npm';
+import { Varselstripe, getLedetekst } from 'digisyfo-npm';
 import { genererDato, erGyldigKlokkeslett, erGyldigEpost, erGyldigDato } from '../utils/index';
 import { getCookieValueorDefault } from '../../utils/index';
 
@@ -49,6 +49,7 @@ export const Arbeidstaker = ({ navn, kontaktinfo }) => {
 Arbeidstaker.propTypes = {
     navn: PropTypes.string,
     kontaktinfo: PropTypes.object,
+    ledetekster: PropTypes.object,
 };
 
 const feilAarsakForklaringFunc = (feilAarsak) => {
@@ -82,36 +83,36 @@ export const MotebookingSkjema = ({
     return (<div>
         { !visArbeidstaker && <KontaktInfoFeilmelding feilmeldingkey={feilmeldingkey} ledetekster={ledetekster} /> }
         <form className="panel" onSubmit={handleSubmit(submit)}>
-            <Sidetopp tittel="Møteforespørsel" />
+            <Sidetopp tittel={getLedetekst('mote.motebookingskjema.overskrift', ledetekster)} />
 
             {
                 hentLedereFeiletBool && <div className="blokk">
                     <Varselstripe>
-                        <p>Beklager, det oppstod en feil ved uthenting av nærmeste leder. Du kan likevel sende
-                            møteforespøsel.</p>
+                        <p>{getLedetekst('mote.motebookingskjema.feilmelding', ledetekster)}</p>
                     </Varselstripe>
                 </div>
             }
 
             <fieldset className="skjema-fieldset js-arbeidsgiver blokk--l">
-                <legend>1. Fyll inn arbeidsgiverens opplysninger</legend>
+                <legend>{getLedetekst('mote.motebookingskjema.arbeidsgivers-opplysninger', ledetekster)}</legend>
                 {
                     ledere.length > 0 && <Fields
                         autofill={autofill}
                         untouch={untouch}
+                        ledetekster={ledetekster}
                         names={['arbeidsgiverType', 'deltakere[0].navn', 'deltakere[0].epost', 'deltakere[0].orgnummer']}
                         ledere={ledere}
                         component={LederFields} />
                 }
                 {
-                    ledere.length === 0 && <ManuellUtfyltLeder />
+                    ledere.length === 0 && <ManuellUtfyltLeder ledetekster={ledetekster} />
                 }
             </fieldset>
             {
                 visArbeidstaker && <Arbeidstaker {...arbeidstaker} />
             }
             <fieldset className="skjema-fieldset blokk">
-                <legend>{visArbeidstaker ? '3.' : '2.'} Velg dato, tid og sted</legend>
+                <legend>{visArbeidstaker ? '3.' : '2.'} {getLedetekst('mote.motebookingskjema.velg-dato-tid-sted', ledetekster)}</legend>
                 <Tidspunkter />
                 <label htmlFor="sted">Sted</label>
                 <Field id="sted" component={TextField} name="sted" className="input--xxl js-sted"

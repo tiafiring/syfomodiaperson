@@ -4,15 +4,16 @@ import TextField from '../../components/TextField';
 import TextFieldLocked from '../../components/TextFieldLocked';
 import FyllUtVirksomhet from './FyllUtVirksomhet';
 import ArbeidsgiverDropdown from './ArbeidsgiverDropdown';
+import { getLedetekst } from 'digisyfo-npm';
 
-export const FyllUtLeder = ({ FieldComponent = TextField }) => {
+export const FyllUtLeder = ({ FieldComponent = TextField, ledetekster }) => {
     return (<div>
         <div className="navInput blokk">
-            <label htmlFor="js-ledernavn">Nærmeste leders navn</label>
+            <label htmlFor="js-ledernavn">{getLedetekst('mote.bookingskjema.lederfields.ledernavn', ledetekster)}</label>
             <Field id="js-ledernavn" component={FieldComponent} name="deltakere[0].navn" className="input--xxl" />
         </div>
         <div className="navInput blokk">
-            <label htmlFor="js-lederepost">E-post</label>
+            <label htmlFor="js-lederepost">{getLedetekst('mote.bookingskjema.lederfields.epost', ledetekster)}</label>
             <Field id="js-lederepost" component={FieldComponent} type="email" name="deltakere[0].epost" className="input--xxl" />
         </div>
     </div>);
@@ -20,16 +21,17 @@ export const FyllUtLeder = ({ FieldComponent = TextField }) => {
 
 FyllUtLeder.propTypes = {
     FieldComponent: PropTypes.func,
+    ledetekster: PropTypes.object,
 };
 
-export const PreutfyltLeder = () => {
-    return <FyllUtLeder FieldComponent={TextFieldLocked} />;
+export const PreutfyltLeder = ({ ledetekster }) => {
+    return <FyllUtLeder FieldComponent={TextFieldLocked} ledetekster={ledetekster} />;
 };
 
-export const ManuellUtfyltLeder = () => {
+export const ManuellUtfyltLeder = ({ ledetekster }) => {
     return (<div>
-        <FyllUtLeder />
-        <FyllUtVirksomhet />
+        <FyllUtLeder ledetekster={ledetekster} />
+        <FyllUtVirksomhet ledetekster={ledetekster} />
     </div>);
 };
 
@@ -65,12 +67,14 @@ export default class LederFields extends Component {
     }
 
     render() {
-        const value = this.props.arbeidsgiverType.input.value;
+        const { ledetekster, arbeidsgiverType } = this.props;
+        const value = arbeidsgiverType.input.value;
         const visInputfelter = value && value !== 'VELG';
+
         return (<div>
-            <ArbeidsgiverDropdown {...this.props.arbeidsgiverType} ledere={this.props.ledere} />
-            { visInputfelter && value !== 'manuell' && <PreutfyltLeder />}
-            { visInputfelter && value === 'manuell' && <ManuellUtfyltLeder />}
+            <ArbeidsgiverDropdown {...arbeidsgiverType} ledere={this.props.ledere} ledetekster={ledetekster} />
+            { visInputfelter && value !== 'manuell' && <PreutfyltLeder ledetekster={ledetekster} />}
+            { visInputfelter && value === 'manuell' && <ManuellUtfyltLeder ledetekster={ledetekster} />}
         </div>);
     }
 }
@@ -81,6 +85,7 @@ LederFields.propTypes = {
     hentVirksomhet: PropTypes.func,
     autofill: PropTypes.func,
     virksomhet: PropTypes.object,
+    ledetekster: PropTypes.object,
     untouch: PropTypes.func,
     ledere: PropTypes.array,
 };

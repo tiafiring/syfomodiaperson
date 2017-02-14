@@ -11,7 +11,7 @@ import navbruker from './reducers/navbruker';
 import sykmeldinger from './reducers/sykmeldinger';
 import arbeidsgiversSykmeldinger from './reducers/arbeidsgiversSykmeldinger';
 import { reducer as formReducer } from 'redux-form';
-import { ledetekster, hentLedetekster, tidslinjer } from 'digisyfo-npm';
+import { ledetekster, hentLedetekster, tidslinjer, hasURLParameter } from 'digisyfo-npm';
 import moter from './mote/reducers/moter';
 import epostinnhold from './mote/reducers/epostinnhold';
 import arbeidstaker from './mote/reducers/arbeidstaker';
@@ -47,6 +47,12 @@ const fnr = window.location.pathname.split('/')[2];
 store.dispatch(hentNavbruker(fnr));
 store.dispatch(sjekkTilgangMoteadmin());
 store.dispatch(hentLedetekster());
+
+if (hasURLParameter('visLedetekster')) {
+    localStorage.setItem('visLedetekster', true);
+} else {
+    localStorage.removeItem('visLedetekster');
+}
 
 render(<Provider store={store}>
         <AppRouter history={history} /></Provider>,

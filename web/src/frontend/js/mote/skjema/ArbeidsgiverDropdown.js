@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
+import { getLedetekst } from 'digisyfo-npm';
 
-const ArbeidsgiverDropdown = ({ meta, input, ledere }) => {
+const ArbeidsgiverDropdown = ({ meta, input, ledere, ledetekster }) => {
     return (<div className="blokk">
-        <label htmlFor="velg-arbeidsgiver">Velg arbeidsgiver</label>
+        <label htmlFor="velg-arbeidsgiver">{getLedetekst('mote.bookingskjema.dropdown.arbeidsgiver', ledetekster)}</label>
         <div className="selectContainer input--xxl">
             <select className={meta.touched && meta.error ? 'input--feil' : ''} id="velg-arbeidsgiver" {...input}>
-                <option value="VELG">Velg arbeidsgiver</option>
+                <option value="VELG">{getLedetekst('mote.bookingskjema.dropdown.arbeidsgiver', ledetekster)}</option>
                 {
                     ledere
                     .sort((a, b) => {
@@ -28,7 +29,7 @@ const ArbeidsgiverDropdown = ({ meta, input, ledere }) => {
                         return <option value={leder.id} key={idx}>{leder.organisasjonsnavn}</option>;
                     })
                 }
-                <option value="manuell">Ikke oppgitt &ndash; fyll inn manuelt</option>
+                <option value="manuell">{getLedetekst('mote.bookingskjema.dropdown.ikke-oppgitt', ledetekster)}</option>
             </select>
         </div>
         <p className="skjema__feilmelding" aria-live="polite">{meta.touched && meta.error}</p>
@@ -39,6 +40,7 @@ ArbeidsgiverDropdown.propTypes = {
     meta: PropTypes.object,
     input: PropTypes.object,
     virksomhet: PropTypes.object,
+    ledetekster: PropTypes.object,
     ledere: PropTypes.array,
 };
 

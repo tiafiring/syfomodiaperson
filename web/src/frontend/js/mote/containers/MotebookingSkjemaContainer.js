@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import MotebookingSkjema from '../skjema/MotebookingSkjema';
+import { getLedetekst } from 'digisyfo-npm';
 import { connect } from 'react-redux';
 import * as ledereActions from '../../actions/ledere_actions';
 import * as virksomhetActions from '../actions/virksomhet_actions';
@@ -14,12 +15,12 @@ export class MotebookingSkjemaContainer extends Component {
         hentArbeidstaker(fnr);
     }
     render() {
-        const { henter, skjermetBruker } = this.props;
+        const { ledetekster, henter, skjermetBruker } = this.props;
 
         if (henter) {
             return <AppSpinner />;
         } else if (skjermetBruker) {
-            return <Feilmelding tittel = "Ikke mulig å sende møteforespørsel" melding = "Brukeren er registrert med skjermingskode 6 eller 7." />;
+            return <Feilmelding tittel = {getLedetekst('mote.motebookingskjemacontainer.tittel', ledetekster)} melding = {getLedetekst('mote.motebookingskjemacontainer.melding', ledetekster)} />;
         }
         return <MotebookingSkjema {...this.props} />;
     }
@@ -31,6 +32,7 @@ MotebookingSkjemaContainer.propTypes = {
     hentArbeidstaker: PropTypes.func,
     henter: PropTypes.bool,
     skjermetBruker: PropTypes.bool,
+    ledetekster: PropTypes.object,
 };
 
 export function mapStateToProps(state) {

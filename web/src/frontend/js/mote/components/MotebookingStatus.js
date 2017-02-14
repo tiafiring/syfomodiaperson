@@ -4,7 +4,7 @@ import { getTidFraZulu, getDatoFraZulu, fikkIkkeMoteOpprettetVarsel } from '../u
 import Sidetopp from '../../components/Sidetopp';
 import KontaktInfoFeilmelding from './KontaktInfoFeilmelding';
 import FlereTidspunktSkjema from '../skjema/FlereTidspunktSkjema';
-import { Varselstripe } from 'digisyfo-npm';
+import { Varselstripe, getLedetekst } from 'digisyfo-npm';
 import { Link } from 'react-router';
 
 const deltakertyper = {
@@ -13,12 +13,13 @@ const deltakertyper = {
     arbeidstaker: 'Arbeidstaker',
 };
 
-export const MotetidspunktValgt = ({ bekreftetTidspunkt }) => {
-    return <div className="motetidspunktValgt">Møtetidspunkt valgt, møteresultat sendt til arbeidsgiver {getDatoFraZulu(bekreftetTidspunkt)}.</div>;
+export const MotetidspunktValgt = ({ bekreftetTidspunkt, ledetekster }) => {
+    return <div className="motetidspunktValgt">{getLedetekst('mote.bookingstatus.valgt-sendt-til-parter', ledetekster, {'%TID%': getDatoFraZulu(bekreftetTidspunkt)})}</div>;
 };
 
 MotetidspunktValgt.propTypes = {
     bekreftetTidspunkt: PropTypes.string,
+    ledetekster: PropTypes.object,
 };
 
 const feilAarsakForklaringFunc = (feilAarsak) => {
@@ -54,13 +55,13 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
     if (feilmelding) {
         deltakere = deltakere
             .filter(deltaker => {
-                return deltaker !== aktoer || deltaker.svartTidspunkt !== null;
+                return deltaker !== aktoer || deltaker.svartTidspunkt != null;
             });
         krrFeilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
         krrFeilmeldingkey = feilAarsakForklaringFunc(krrFeilAarsak);
     }
 
-    let sendtTil = 'Møteforespørselen ble sendt til ';
+    let sendtTil = getLedetekst('mote.bookingstatus.foresporsel.sendt.til', ledetekster);
     const navneliste = [];
     deltakere.forEach((deltaker) => {
         navneliste.push(deltaker.navn);
@@ -71,7 +72,7 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
             <Varselstripe type="suksess">
                 <div>
                     <p className="typo-element">{sendtTil}</p>
-                    <p className="sist">Sendt: {sendtDato}</p>
+                    <p className="sist">{getLedetekst('mote.bookingstatus.sendt-dato', ledetekster, {'%DATO%': sendtDato})}</p>
                 </div>
             </Varselstripe>
         </div>
@@ -79,13 +80,13 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
             feilmelding && <KontaktInfoFeilmelding feilmeldingkey={krrFeilmeldingkey} ledetekster={ledetekster} />
         }
         <div className="panel">
-            <Sidetopp tittel="Status for møteforespørselen" />
-            <h4 className="typo-undertittel blokk-s">Møtested</h4>
+            <Sidetopp tittel="Status for møteforespørsel" />
+            <h4 className="typo-undertittel blokk-s">{getLedetekst('mote.bookingstatus.sted', ledetekster)}</h4>
             <p className="blokk-l">{alternativer[0].sted}</p>
             <table className="motestatus blokk-l">
                 <thead>
                 <tr>
-                    <th className="motestatus__tittel">Møtetider</th>
+                    <th className="motestatus__tittel">{getLedetekst('mote.bookingstatus.tider', ledetekster)}</th>
                     {
                         alternativer.map((tidspunkt, index) => {
                             let className = null;
@@ -126,7 +127,7 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
                                 arbeidsgiverDeltaker.svar.map((svar, index) => {
                                     if (svar.valgt) {
                                         return (<td key={index} >
-                                            <Link to={`/sykefravaer/${fnr}/mote/bekreft/${svar.id}`} className="js-velg-tidspunkt">Velg tidspunkt for møte</Link>
+                                            <Link to={`/sykefravaer/${fnr}/mote/bekreft/${svar.id}`} className="js-velg-tidspunkt">{getLedetekst('mote.bookingstatus.velgtidspunkt', ledetekster)}</Link>
                                         </td>);
                                     }
                                     return <td key={index} />;
@@ -142,7 +143,7 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
                             {
                                 mote.alternativer.map((alternativ, index) => {
                                     return (<td key={index}>
-                                        {alternativ.id === mote.valgtAlternativ.id && <MotetidspunktValgt bekreftetTidspunkt={mote.bekreftetTidspunkt} />}
+                                        {alternativ.id === mote.valgtAlternativ.id && <MotetidspunktValgt bekreftetTidspunkt={mote.bekreftetTidspunkt} ledetekster={ledetekster} />}
                                     </td>);
                                 })
                             }
@@ -152,10 +153,10 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
 
             </table>
             <div className="knapperad-bunn">
-                <Link role="button" className="luft__right knapp knapp--mini" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>Avbryt møte</Link>
+                <Link role="button" className="luft__right knapp knapp--mini" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>{getLedetekst('mote.bookingstatus.knapp.avbryt', ledetekster)}</Link>
                 <button className="js-ny knapp knapp--mini" onClick={() => {
                     avbrytMoteUtenVarsel(mote.moteUuid, fnr);
-                }}>Nytt møte</button>
+                }}>{getLedetekst('mote.bookingstatus.knapp.nytt-tidspunkt', ledetekster)}</button>
             </div>
         </div>
     </div>);
