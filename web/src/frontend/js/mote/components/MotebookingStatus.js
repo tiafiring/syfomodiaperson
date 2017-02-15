@@ -61,6 +61,17 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
         krrFeilmeldingkey = feilAarsakForklaringFunc(krrFeilAarsak);
     }
 
+    const flereTidspunktBoks = antallNyeTidspunkt ?
+        <FlereTidspunktSkjema mote={ mote }
+                              flereAlternativ={ flereAlternativ }
+                              opprettFlereAlternativ={ opprettFlereAlternativ }
+                              avbrytFlereAlternativ={ avbrytFlereAlternativ }
+                              senderNyeAlternativ = {senderNyeAlternativ}
+                              nyeAlternativFeilet = {nyeAlternativFeilet}
+                              antallEksisterendeTidspunkter={ mote.alternativer.length }
+                              antallNyeTidspunkt={ antallNyeTidspunkt } /> :
+        null;
+
     let sendtTil = getLedetekst('mote.bookingstatus.foresporsel.sendt.til', ledetekster);
     const navneliste = [];
     deltakere.forEach((deltaker) => {
@@ -86,32 +97,39 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
             <table className="motestatus blokk-l">
                 <thead>
                 <tr>
-                    <th className="motestatus__tittel">{getLedetekst('mote.bookingstatus.tider', ledetekster)}</th>
+                    <th/>
                     {
-                        alternativer.map((tidspunkt, index) => {
-                            let className = null;
-                            if (mote.valgtAlternativ && tidspunkt.id === mote.valgtAlternativ.id) {
-                                className = 'bekreftetTidspunkt';
-                            }
-                            return (<th scope="col" className={className} key={index}>{getTidFraZulu(tidspunkt.tid)}</th>);
-                        })
+                        deltakere && deltakere
+                            .map((deltaker, index) => {
+                                return (
+                                    <td key={index}>
+                                        <th className="motestatus__deltaker" scope="row">
+                                            <strong>{deltakertyper[deltaker.type.toLowerCase()]}</strong>
+                                            <span>{deltaker.navn}</span>
+                                        </th>
+                                    </td>);
+                            })
                     }
                 </tr>
                 </thead>
                 <tbody>
                 {
-                    deltakere && deltakere
-                        .map((deltaker, index) => {
+                    mote.alternativer
+                        .map((alternativ, index) => {
+                            let className = null;
+                            if (mote.valgtAlternativ && alternativ.id === mote.valgtAlternativ.id) {
+                                className = 'bekreftetTidspunkt';
+                            }
                             return (<tr key={index}>
-                                <th className="motestatus__deltaker" scope="row"><strong>{deltakertyper[deltaker.type.toLowerCase()]}</strong> <span>{deltaker.navn}</span></th>
+                                <th scope="col" className={className} key={index}>{getTidFraZulu(alternativ.tid)}</th>
                                 {
-                                    deltaker.svar.map((tidspunkt, index2) => {
+                                    deltakere.map((deltaker, index2) => {
                                         let className = 'motestatus__svar';
-                                        if (mote.valgtAlternativ && tidspunkt.id === mote.valgtAlternativ.id) {
+                                        if (mote.valgtAlternativ && deltaker.svar[index].id === mote.valgtAlternativ.id) {
                                             className = 'motestatus__svar motestatus__svar--bekreftetTidspunkt';
                                         }
                                         return (<td key={index2} className={className}>
-                                            <MotebookingIkon deltaker={deltaker} index={index2} />
+                                            <MotebookingIkon deltaker={deltaker} index={index} />
                                         </td>);
                                     })
                                 }
@@ -150,8 +168,12 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
                         </tr>
                     </tfoot>
                 }
-
             </table>
+            <button className="js-nyetidspunkt rammeknapp rammeknapp--mini" onClick={() => {
+                flereAlternativ();
+            }}>{getLedetekst('mote.bookingstatus.knapp.flere-tidspunkt', ledetekster)}</button>
+            { flereTidspunktBoks }
+
             <div className="knapperad-bunn">
                 <Link role="button" className="luft__right knapp knapp--mini" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>{getLedetekst('mote.bookingstatus.knapp.avbryt', ledetekster)}</Link>
                 <button className="js-ny knapp knapp--mini" onClick={() => {
