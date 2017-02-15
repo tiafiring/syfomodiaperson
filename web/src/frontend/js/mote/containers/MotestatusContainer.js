@@ -23,9 +23,9 @@ export const mapStateToProps = (state, ownProps) => {
     return {
         fnr,
         mote,
-        avbrytFeilet: state.moter.avbrytFeilet || state.ledetekster.henter,
+        avbrytFeilet: state.moter.avbrytFeilet,
         avbryter: state.moter.avbryter,
-        henter: state.moter.henter || state.arbeidstaker.henter,
+        henter: state.moter.henter || state.arbeidstaker.henter || state.ledetekster.henter,
         ledetekster: state.ledetekster.data,
         arbeidstaker: state.arbeidstaker.data,
         antallNyeTidspunkt: state.moter.antallNyeTidspunkt,
