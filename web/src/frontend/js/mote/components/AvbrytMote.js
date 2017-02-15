@@ -5,24 +5,6 @@ import AppSpinner from '../../components/AppSpinner';
 import { fikkMoteOpprettetVarsel } from '../utils/index';
 
 const AvbrytMote = ({ ledetekster, henterInnhold, arbeidsgiver, sykmeldt, onSubmit, avbrytHref, avbryter, avbrytFeilet, varselinnhold, valgtDeltaker = arbeidsgiver, valgtKanal = 'EPOST', hentAvbrytMoteEpostinnhold, setValgtDeltaker }) => {
-    const sykmeldtValgt = sykmeldt.deltakerUuid === valgtDeltaker.deltakerUuid ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
-    const arbeidsgiverValgt = arbeidsgiver.deltakerUuid === valgtDeltaker.deltakerUuid ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
-
-    let innhold;
-    if (henterInnhold) {
-        innhold = <AppSpinner />;
-    } else {
-        innhold = (<div>
-            {varselinnhold.emne && <div className="epostinnhold_infoboks">
-                <p>{varselinnhold.emne}</p>
-            </div>
-            }
-            <div className="epostinnhold_infoboks">
-                <div dangerouslySetInnerHTML={{ __html: varselinnhold.innhold }}></div>
-            </div>
-        </div>);
-    }
-
     return (<div className="epostinnhold">
         <h2 className="typo-innholdstittel">{getLedetekst('mote.avbrytmote.overskrift', ledetekster)}</h2>
 
@@ -39,18 +21,6 @@ const AvbrytMote = ({ ledetekster, henterInnhold, arbeidsgiver, sykmeldt, onSubm
         }
 
         <p>{getLedetekst('mote.avbrytmote.informasjon', ledetekster)}</p>
-        <div className="epostinnhold__deltakere">
-            <button className={`epostinnhold__knapp tekst-knapp ${arbeidsgiverValgt}`} onClick={() => {
-                setValgtDeltaker(arbeidsgiver);
-                hentAvbrytMoteEpostinnhold(arbeidsgiver.deltakerUuid, valgtKanal);
-            }}>Arbeidsgiver</button>
-            <button className={`epostinnhold__knapp tekst-knapp ${sykmeldtValgt}`} onClick={() => {
-                setValgtDeltaker(sykmeldt);
-                hentAvbrytMoteEpostinnhold(sykmeldt.deltakerUuid, valgtKanal);
-            }}>Sykmeldt</button>
-        </div>
-
-        {innhold}
 
         <div aria-live="polite" role="alert">
             { avbrytFeilet && <div className="blokk"><Varselstripe type="feil"><p>{getLedetekst('mote.avbrytmote.feil', ledetekster)}</p></Varselstripe></div>}
