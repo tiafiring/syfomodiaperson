@@ -37,6 +37,7 @@ const feilAarsakForklaringFunc = (feilAarsak) => {
 };
 
 const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
+
     const { alternativer } = mote;
     let { deltakere } = mote;
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
