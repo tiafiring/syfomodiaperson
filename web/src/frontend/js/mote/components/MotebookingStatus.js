@@ -120,6 +120,18 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
                             if (mote.valgtAlternativ && alternativ.id === mote.valgtAlternativ.id) {
                                 className = 'bekreftetTidspunkt';
                             }
+
+                            let svarkolonne = <td key={arbeidsgiverDeltaker.svar[index].id} />;
+                            if (visVelgTidspunkt && arbeidsgiverDeltaker.svar[index].valgt) {
+                                svarkolonne = (<td key={arbeidsgiverDeltaker.svar[index].id} >
+                                    <Link to={`/sykefravaer/${fnr}/mote/bekreft/${alternativ.id}`} className="js-velg-tidspunkt">{getLedetekst('mote.bookingstatus.velgtidspunkt', ledetekster)}</Link>
+                                </td>);
+                            } else if ( mote.status === 'BEKREFTET') {
+                                svarkolonne = (<td key={alternativ.id}>
+                                    {alternativ.id === mote.valgtAlternativ.id && <MotetidspunktValgt bekreftetTidspunkt={mote.bekreftetTidspunkt} ledetekster={ledetekster} />}
+                                </td>);
+                            }
+
                             return (<tr key={index}>
                                 <th scope="col" className={className} key={index}>{getTidFraZulu(alternativ.tid)}</th>
                                 {
@@ -133,41 +145,12 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
                                         </td>);
                                     })
                                 }
+                                { svarkolonne }
                             </tr>);
                         })
+
                 }
                 </tbody>
-                {
-                    visVelgTidspunkt && <tfoot>
-                        <tr>
-                            <td />
-                            {
-                                arbeidsgiverDeltaker.svar.map((svar, index) => {
-                                    if (svar.valgt) {
-                                        return (<td key={index} >
-                                            <Link to={`/sykefravaer/${fnr}/mote/bekreft/${svar.id}`} className="js-velg-tidspunkt">{getLedetekst('mote.bookingstatus.velgtidspunkt', ledetekster)}</Link>
-                                        </td>);
-                                    }
-                                    return <td key={index} />;
-                                })
-                            }
-                        </tr>
-                    </tfoot>
-                }
-                {
-                    mote.status === 'BEKREFTET' && <tfoot>
-                        <tr>
-                            <td />
-                            {
-                                mote.alternativer.map((alternativ, index) => {
-                                    return (<td key={index}>
-                                        {alternativ.id === mote.valgtAlternativ.id && <MotetidspunktValgt bekreftetTidspunkt={mote.bekreftetTidspunkt} ledetekster={ledetekster} />}
-                                    </td>);
-                                })
-                            }
-                        </tr>
-                    </tfoot>
-                }
             </table>
             <button className="js-nyetidspunkt rammeknapp rammeknapp--mini" onClick={() => {
                 flereAlternativ();

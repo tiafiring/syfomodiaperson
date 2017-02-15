@@ -85,26 +85,14 @@
 .motetidspunktValgt {
     position: relative;
     border-radius: .25rem;
-    padding: 1rem .5rem; 
+    padding: 1rem .5rem;
+    margin-left: 1em;
     text-align: center;
     line-height: 1.5;
     font-style: italic;
     background-color: #f1f1f1;
     border: 1px solid @ikonGraa;
     .mixin-typo-normal();
-
-    &:after {
-        content: "";
-        position: absolute;
-        height: 1rem;
-        width: 1px;
-        display: block;
-        background-color: @ikonGraa;
-        left: 50%;
-        top: -1rem;
-        margin-top: -1px;
-    }
-
 }
 
 .luft__right {
