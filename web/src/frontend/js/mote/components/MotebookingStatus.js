@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import MotebookingIkon from './MotebookingIkon';
-import { getTidFraZulu, getDatoFraZulu, fikkIkkeMoteOpprettetVarsel } from '../utils/index';
+import { getKlokkeslettFraZulu, getDatoFraZulu, fikkIkkeMoteOpprettetVarsel } from '../utils/index';
 import Sidetopp from '../../components/Sidetopp';
 import KontaktInfoFeilmelding from './KontaktInfoFeilmelding';
 import FlereTidspunktSkjema from '../skjema/FlereTidspunktSkjema';
@@ -133,7 +133,11 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
                             }
 
                             return (<tr key={index}>
-                                <th scope="col" className={className} key={index}>{getTidFraZulu(alternativ.tid)}</th>
+                                <th scope="col" className={className} key={index}>
+                                    <div className="tabellelement">
+                                        {getDatoFraZulu(alternativ.tid)}<br />{getKlokkeslettFraZulu(alternativ.tid)}
+                                    </div>
+                                </th>
                                 {
                                     deltakere.map((deltaker, index2) => {
                                         let className = 'motestatus__svar';

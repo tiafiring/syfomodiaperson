@@ -17,14 +17,12 @@ const MotebookingIkon = ({ deltaker, index }) => {
         return { klasse: 'ikkesvar', tekst: 'ikke svart' };
     };
 
-    const { klasse, tekst } = finnKlasseOgTekst(deltaker, index);
+    const { klasse } = finnKlasseOgTekst(deltaker, index);
 
     return (
         <span className="motestatus__svar__inner">
             <img className="motestatus__ikon"
                 src={`/sykefravaer/img/svg/status--${klasse}.svg`} alt="" />
-            <span
-                className={`motestatus__svartekst motestatus__svartekst--${klasse}`}>{tekst}</span>
         </span>
     );
 };

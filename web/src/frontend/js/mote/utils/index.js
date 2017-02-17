@@ -9,6 +9,11 @@ export const getDatoFraZulu = (zulutid) => {
     return `${dag}.${maned}.${d.getFullYear()}`;
 };
 
+export const getKlokkeslettFraZulu = (zulutid) => {
+    const d = new Date(zulutid);
+    return `kl. ${pad(d.getHours())}.${pad(d.getMinutes())}`;
+};
+
 export const getTidFraZulu = (zulutid) => {
     const d = new Date(zulutid);
     return `${getDatoFraZulu(zulutid)} kl. ${pad(d.getHours())}.${pad(d.getMinutes())}`;
