@@ -27,8 +27,8 @@ public class SelftestServlet extends SelfTestBaseServlet{
     @Override
     protected Collection<? extends Pingable> getPingables() {
         return asList(
-                pingUrl("SYKEFRAVÆR_API", getProperty("sykefravaerapi.fss.url") + "/internal/isAlive"),
-                pingUrl("MOTEADMIN_API", getProperty("moteadminapi.fss.url") + "/internal/isAlive")
+                pingUrl("SYKEFRAVÆR_API", getProperty("modapp.url") + "/modiasyforest/internal/isAlive"),
+                pingUrl("MOTEADMIN_API", getProperty("modapp.url") + "/mote/internal/isAlive")
         );
     }
 
