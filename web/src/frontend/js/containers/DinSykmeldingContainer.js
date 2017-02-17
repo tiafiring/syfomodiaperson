@@ -83,7 +83,7 @@ export function mapDispatchToProps(dispatch) {
 export function mapStateToProps(state, ownProps) {
     const fnr = state.navbruker.data.fnr;
     const sykmeldingId = ownProps.params.sykmeldingId;
-    const henter = state.sykmeldinger.henter || state.ledetekster.henter;
+    const henter = state.sykmeldinger.henter || state.ledetekster.henter || state.arbeidsgiversSykmeldinger.henter;
     const hentingFeilet = state.sykmeldinger.hentingFeilet;
     const ikkeTilgang = state.sykmeldinger.ikkeTilgang;
     const dinSykmelding = getSykmelding(state.sykmeldinger.data, sykmeldingId);
