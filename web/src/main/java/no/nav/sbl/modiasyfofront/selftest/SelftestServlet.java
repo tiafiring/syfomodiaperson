@@ -41,6 +41,7 @@ public class SelftestServlet extends SelfTestBaseServlet{
                 if (connection.getResponseCode() == HTTP_OK) {
                     return lyktes(name);
                 } else {
+                    logger.warn("<<<<<< Could not connect to {} on {}", name, url);
                     return feilet(name, new RuntimeException(connection.getResponseCode() + " " + connection.getResponseMessage()));
                 }
             } catch (Exception e) {
