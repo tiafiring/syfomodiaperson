@@ -99,6 +99,8 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
             <Sidetopp tittel="Status for møteforespørsel" />
             <h4 className="typo-undertittel blokk-s">{getLedetekst('mote.bookingstatus.sted', ledetekster)}</h4>
             <p className="blokk-l">{alternativer[0].sted}</p>
+
+            <h4 className="typo-undertittel blokk-s">{getLedetekst('mote.bookingstatus.motetider', ledetekster)}</h4>
             <table className="motestatus blokk-l">
                 <thead>
                 <tr>
@@ -138,7 +140,7 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
                             }
 
                             return (<tr key={index}>
-                                <th scope="col" className={className} key={index}>
+                                <th scope="col" className="motestatus__kolonne_tidspunkt" key={index}>
                                     <div className="tabellelement">
                                         {getDatoFraZulu(alternativ.tid)}<br />{getKlokkeslettFraZulu(alternativ.tid)}
                                     </div>
@@ -161,12 +163,14 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
                 }
                 </tbody>
             </table>
-            <button className="js-nyetidspunkt rammeknapp rammeknapp--mini" onClick={() => {
-                flereAlternativ();
-            }}>{getLedetekst('mote.bookingstatus.knapp.flere-tidspunkt', ledetekster)}</button>
+            <div className="sentrer-knapp luft__bunn">
+                <button className="js-nyetidspunkt rammeknapp rammeknapp--mini" onClick={() => {
+                    flereAlternativ();
+                }}>{getLedetekst('mote.bookingstatus.knapp.flere-tidspunkt', ledetekster)}</button>
+            </div>
             { flereTidspunktBoks }
 
-            <div className="knapperad-bunn">
+            <div>
                 <Link role="button" className="luft__right knapp knapp--mini" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>{getLedetekst('mote.bookingstatus.knapp.avbryt', ledetekster)}</Link>
                 <button className="js-ny knapp knapp--mini" onClick={() => {
                     avbrytMoteUtenVarsel(mote.moteUuid, fnr);
