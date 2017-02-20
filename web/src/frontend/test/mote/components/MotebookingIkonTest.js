@@ -27,8 +27,6 @@ describe("MotebookinIkon", () => {
 
         let component = shallow(<MotebookingIkon deltaker={deltaker} index={index}/>);
 
-        expect(component.find('.motestatus__svartekst--ikkesvar')).to.length(1);
-        expect(component.find('.motestatus__svartekst--ikkesvar').text()).to.equal('ikke svart');
         expect(component.find('.motestatus__ikon').prop('src')).to.equal('/sykefravaer/img/svg/status--ikkesvar.svg');
     });
 
@@ -55,8 +53,6 @@ describe("MotebookinIkon", () => {
 
         let component = shallow(<MotebookingIkon deltaker={deltaker} index={index}/>);
 
-        expect(component.find('.motestatus__svartekst--kan')).to.length(1);
-        expect(component.find('.motestatus__svartekst--kan').text()).to.equal('kan');
         expect(component.find('.motestatus__ikon').prop('src')).to.equal('/sykefravaer/img/svg/status--kan.svg');
     });
 
@@ -83,8 +79,6 @@ describe("MotebookinIkon", () => {
 
         let component = shallow(<MotebookingIkon deltaker={deltaker} index={index}/>);
 
-        expect(component.find('.motestatus__svartekst--kanikke')).to.length(1);
-        expect(component.find('.motestatus__svartekst--kanikke').text()).to.equal('kan ikke');
         expect(component.find('.motestatus__ikon').prop('src')).to.equal('/sykefravaer/img/svg/status--kanikke.svg');
     });
 });
