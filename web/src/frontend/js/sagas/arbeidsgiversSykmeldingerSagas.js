@@ -7,7 +7,7 @@ export function* hentArbeidsgiversSykmeldinger(action) {
     yield put(actions.henterArbeidsgiversSykmeldinger());
 
     try {
-        const data = yield call(get, `${window.APP_SETTINGS.REST_ROOT}/sykmeldinger?fnr=${action.fnr}?type=arbeidsgiver`);
+        const data = yield call(get, `${window.APP_SETTINGS.REST_ROOT}/sykmeldinger?fnr=${action.fnr}&type=arbeidsgiver`);
         yield put({ type: 'ARBEIDSGIVERS_SYKMELDINGER_HENTET', data });
     } catch (e) {
         if (e.message === '403') {

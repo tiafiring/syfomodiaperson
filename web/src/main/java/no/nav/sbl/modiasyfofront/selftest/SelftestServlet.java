@@ -2,6 +2,7 @@ package no.nav.sbl.modiasyfofront.selftest;
 
 import no.nav.sbl.dialogarena.common.web.selftest.SelfTestBaseServlet;
 import no.nav.sbl.dialogarena.types.Pingable;
+import org.slf4j.Logger;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -12,9 +13,11 @@ import static java.net.HttpURLConnection.HTTP_OK;
 import static java.util.Arrays.asList;
 import static no.nav.sbl.dialogarena.types.Pingable.Ping.feilet;
 import static no.nav.sbl.dialogarena.types.Pingable.Ping.lyktes;
+import static org.slf4j.LoggerFactory.getLogger;
 
 public class SelftestServlet extends SelfTestBaseServlet{
     private static final String APPLIKASJONS_NAVN = "modiasyfofront";
+    private static final Logger logger = getLogger(SelftestServlet.class);
 
     @Override
     protected String getApplicationName() {
@@ -24,8 +27,8 @@ public class SelftestServlet extends SelfTestBaseServlet{
     @Override
     protected Collection<? extends Pingable> getPingables() {
         return asList(
-                pingUrl("SYKEFRAVÆR_API", getProperty("sykefravaerapi.fss.url") + "/internal/isAlive"),
-                pingUrl("MOTEADMIN_API", getProperty("moteadminapi.fss.url") + "/internal/isAlive")
+                pingUrl("SYKEFRAVÆR_API", getProperty("modapp.url") + "/modiasyforest/internal/isAlive"),
+                pingUrl("MOTEADMIN_API", getProperty("modapp.url") + "/mote/internal/isAlive")
         );
     }
 
@@ -38,9 +41,11 @@ public class SelftestServlet extends SelfTestBaseServlet{
                 if (connection.getResponseCode() == HTTP_OK) {
                     return lyktes(name);
                 } else {
+                    logger.warn("<<<<<< Could not connect to {} on {}", name, url);
                     return feilet(name, new RuntimeException(connection.getResponseCode() + " " + connection.getResponseMessage()));
                 }
             } catch (Exception e) {
+                logger.warn("<<<<<< Could not connect to {} on {}", name, url, e);
                 return feilet(name, e);
             }
         };
