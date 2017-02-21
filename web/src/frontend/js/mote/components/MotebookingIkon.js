@@ -10,7 +10,7 @@ const MotebookingIkon = ({ deltaker, index }) => {
             return acc || b;
         });
 
-        if (harSvart) {
+        if (harSvart && new Date(deltaker.svar[index].created) < new Date(deltaker.svartTidspunkt) ) {
             return deltaker.svar[index].valgt ? { klasse: 'kan', tekst: 'kan' } : { klasse: 'kanikke', tekst: 'kan ikke' };
         }
 
