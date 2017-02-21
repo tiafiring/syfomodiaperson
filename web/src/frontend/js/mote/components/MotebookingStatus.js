@@ -123,7 +123,7 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
                 {
                     mote.alternativer
                         .sort((a1, a2) => {
-                            return new Date(a2.tid).getTime() < new Date(a1.tid).getTime();
+                            return new Date(a2.tid).getTime() <= new Date(a1.tid).getTime() ? 1 : -1;
                         })
                         .map((alternativ, index) => {
                             let className = null;
