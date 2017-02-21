@@ -152,7 +152,7 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
                                     deltakere.map((deltaker, index2) => {
                                         let className = 'motestatus__svar';
 
-                                        if (deltaker.svartTidspunkt && deltaker.svartTidspunkt > deltaker.svar[index].created) {
+                                        if (deltaker.svartTidspunkt && new Date(deltaker.svartTidspunkt) > new Date(deltaker.svar[index].created)) {
                                             if (deltaker.svar[index].valgt === true) {
                                                 className = 'motestatus__svar--valgtTidspunkt';
                                             } else {
