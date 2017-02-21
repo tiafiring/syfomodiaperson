@@ -143,7 +143,7 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
                             }
 
                             return (<tr key={index}>
-                                <th scope="col" className="motestatus__kolonne_tidspunkt" key={index}>
+                                <th scope="col" className={`${className} motestatus__kolonne_tidspunkt`} key={index}>
                                     <div className="tabellelement">
                                         {getDatoFraZulu(alternativ.tid)}<br />{getKlokkeslettFraZulu(alternativ.tid)}
                                     </div>
@@ -151,9 +151,13 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
                                 {
                                     deltakere.map((deltaker, index2) => {
                                         let className = 'motestatus__svar';
-                                        if (mote.valgtAlternativ && deltaker.svar[index].id === mote.valgtAlternativ.id) {
-                                            className = 'motestatus__svar motestatus__svar--bekreftetTidspunkt';
+
+                                        if (deltaker.svartTidspunkt > deltaker.svar[index].created && deltaker.svar[index].valgt === true) {
+                                            className = 'motestatus__svar--valgtTidspunkt';
+                                        } else if (deltaker.svartTidspunkt > deltaker.svar[index].created && deltaker.svar[index].valgt === false) {
+                                            className = 'motestatus__svar--avvistTidspunkt';
                                         }
+
                                         return (<td key={index2} className={className}>
                                             <MotebookingIkon deltaker={deltaker} index={index} />
                                         </td>);
