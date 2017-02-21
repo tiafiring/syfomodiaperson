@@ -16,11 +16,13 @@ describe("MotebookingStatus", () => {
         }
         mote.alternativer = [{
             "tid": "2012-12-12T11:00:00Z",
+            "created": "2011-12-12T11:00:00Z",
             "sted": "Oslo by",
             "valgt": false,
             "id": 1
         }, {
             "tid": "2009-09-09T07:00:00Z",
+            "created": "2011-12-12T11:00:00Z",
             "sted": "Oslo by",
             "valgt": false,
             "id": 2
@@ -34,11 +36,13 @@ describe("MotebookingStatus", () => {
             hendelser: [],
             svar: [{
                 "tid": "2012-12-12T11:00:00Z",
+                "created": "2011-12-12T11:00:00Z",
                 "sted": "Oslo by",
                 "valgt": false,
                 "id": 1
             }, {
                 "tid": "2009-09-09T07:00:00Z",
+                "created": "2011-12-12T11:00:00Z",
                 "sted": "Oslo by",
                 "valgt": false,
                 "id": 2
@@ -141,30 +145,35 @@ describe("MotebookingStatus", () => {
                 "svar": [{
                   "id": 344,
                   "tid": "2019-09-09T07:00:00Z",
-                  "sted": "Oslo",
+                    "created": "2011-12-12T11:00:00Z",
+                    "sted": "Oslo",
                   "valgt": true
                 }, {
                   "id": 345,
                   "tid": "2020-09-09T18:00:00Z",
-                  "sted": "Oslo",
+                    "created": "2011-12-12T11:00:00Z",
+                    "sted": "Oslo",
                   "valgt": false
                 }]
               }],
               "valgtAlternativ": {
                 "id": 344,
                 "tid": "2019-09-09T07:00:00Z",
-                "sted": "Oslo",
+                  "created": "2011-12-12T11:00:00Z",
+                  "sted": "Oslo",
                 "valgt": true
               },
               "alternativer": [{
                 "id": 344,
                 "tid": "2019-09-09T07:00:00Z",
-                "sted": "Oslo",
+                  "created": "2011-12-12T11:00:00Z",
+                  "sted": "Oslo",
                 "valgt": true
               }, {
                 "id": 345,
                 "tid": "2020-09-09T18:00:00Z",
-                "sted": "Oslo",
+                  "created": "2011-12-12T11:00:00Z",
+                  "sted": "Oslo",
                 "valgt": false
               }]
             }
