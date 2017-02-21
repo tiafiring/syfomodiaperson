@@ -122,6 +122,9 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
                 <tbody>
                 {
                     mote.alternativer
+                        .sort((a1, a2) => {
+                            return a2.tid < a1.tid;
+                        })
                         .map((alternativ, index) => {
                             let className = null;
                             if (mote.valgtAlternativ && alternativ.id === mote.valgtAlternativ.id) {
