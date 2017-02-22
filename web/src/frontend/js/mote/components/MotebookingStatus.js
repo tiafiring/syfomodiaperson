@@ -3,6 +3,7 @@ import { getDatoFraZulu, fikkIkkeMoteOpprettetVarsel } from '../utils/index';
 import Sidetopp from '../../components/Sidetopp';
 import KontaktInfoFeilmelding from './KontaktInfoFeilmelding';
 import MotebookingStatusTabell from './MotebookingStatusTabell';
+import ValgtMoteTidspunkt from './ValgtMoteTidspunkt';
 import FlereTidspunktSkjema from '../skjema/FlereTidspunktSkjema';
 import { Varselstripe, getLedetekst } from 'digisyfo-npm';
 import { Link } from 'react-router';
@@ -70,6 +71,14 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
         navneliste.push(deltaker.navn);
     });
     sendtTil += navneliste.join(' og ');
+
+    let tabell;
+    if ( mote.status === 'BEKREFTET') {
+        tabell = (<ValgtMoteTidspunkt ledetekster={ledetekster} fnr={fnr} mote={mote} flereAlternativ={flereAlternativ} />);
+    } else {
+        tabell = (<MotebookingStatusTabell ledetekster={ledetekster} fnr={fnr} mote={mote} flereAlternativ={flereAlternativ} />);
+    }
+
     return (<div>
         <div className="panel">
             <Varselstripe type="suksess">
@@ -89,12 +98,8 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
             <p className="blokk-l">{alternativer[0].sted}</p>
 
             <h4 className="typo-undertittel blokk-s">{getLedetekst('mote.bookingstatus.motetider', ledetekster)}</h4>
-            <MotebookingStatusTabell ledetekster={ledetekster} fnr={fnr} mote={mote} />
-            <div className="sentrer-knapp luft__bunn">
-                <button className="js-nyetidspunkt rammeknapp rammeknapp--mini" onClick={() => {
-                    flereAlternativ();
-                }}>{getLedetekst('mote.bookingstatus.knapp.flere-tidspunkt', ledetekster)}</button>
-            </div>
+            { tabell }
+
             { flereTidspunktBoks }
 
             <div>
