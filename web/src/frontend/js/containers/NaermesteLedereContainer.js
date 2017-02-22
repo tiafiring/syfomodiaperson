@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import NaermesteLedere from '../components/NaermesteLedere';
+import { getLedetekst } from 'digisyfo-npm';
 import Feilmelding from '../components/Feilmelding';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -21,15 +22,14 @@ export class NaermesteLedereSide extends Component {
     }
 
     render() {
-        const { henter, ledere, hentingFeilet, actions, navbruker, ikkeTilgang } = this.props;
+        const { henter, ledere, hentingFeilet, actions, navbruker, ikkeTilgang, ledetekster } = this.props;
         return (<Side tittel="Nærmeste ledere" aktivtMenypunkt={NAERMESTE_LEDER}>
         {
             (() => {
                 if (hentingFeilet) {
                     return <Feilmelding />;
                 } else if (ikkeTilgang) {
-                    return (<Feilmelding tittel="Under arbeid" melding="Du har foreløpig ikke tilgang til denne tjenesten. Vi jobber med å få på plass riktig tilgangsstyring.
-                    Veiledere som jobber med sykefraværsoppfølging og veiledere på kontaktsenteret vil etter hver få tilgang. Takk for at du prøver igjen senere!" />);
+                    return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)} melding={getLedetekst('sykefravaer.veileder.feilmelding.melding', ledetekster)} />);
                 } else if (henter) {
                     return <AppSpinner />;
                 }
@@ -61,7 +61,8 @@ export function mapStateToProps(state, ownProps) {
     const fnr = ownProps.params.fnr;
     return {
         ledere: state.ledere.data,
-        henter: state.ledere.henter || state.navbruker.henter,
+        henter: state.ledere.henter || state.navbruker.henter || state.ledetekster.henter,
+        ledetekster: state.ledetekster.data,
         hentingFeilet: state.ledere.hentingFeilet,
         navbruker: state.navbruker.data,
         ikkeTilgang: state.ledere.ikkeTilgang,
