@@ -7,7 +7,7 @@ import { HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT, HENT_AVBRYT_MOTE_EPOSTINNHOLD
 export function* hentBekreftMoteEpostinnhold(action) {
     yield put(actions.henterEpostInnhold());
     try {
-        const data = yield call(get, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/epostinnhold/BEKREFTET?motedeltakeruuid=${action.motedeltakerUuid}&valgtAlternativId=${action.valgtAlternativId}`);
+        const data = yield call(get, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/epostinnhold/BEKREFTET?motedeltakeruuid=${action.motedeltakerUuid}&kanal=${action.valgtKanal}&valgtAlternativId=${action.valgtAlternativId}`);
         yield put(actions.epostInnholdHentet('BEKREFT_TIDSPUNKT', data));
     } catch (e) {
         yield put(actions.hentEpostinnholdFeilet());

@@ -14,7 +14,7 @@ describe("epostinnholdSagas", () => {
     });
 
     describe("Epost for bekreftelse av møtetidspunkt", () => {
-        const action = actions.hentBekreftMoteEpostinnhold("deltakerUuid", "alternativId");
+        const action = actions.hentBekreftMoteEpostinnhold("deltakerUuid", "EPOST", "alternativId");
         const generator = hentBekreftMoteEpostinnhold(action);
 
         it("Skal dispatche HENTER_EPOSTINNHOLD", () => {
@@ -23,7 +23,7 @@ describe("epostinnholdSagas", () => {
         });
 
         it("Skal deretter prøve å hente epostinnhold", () => {
-            const nextCall = call(get, "http://tjenester.nav.no/moteadmin/epostinnhold/BEKREFTET?motedeltakeruuid=deltakerUuid&valgtAlternativId=alternativId");
+            const nextCall = call(get, "http://tjenester.nav.no/moteadmin/epostinnhold/BEKREFTET?motedeltakeruuid=deltakerUuid&kanal=EPOST&valgtAlternativId=alternativId");
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 

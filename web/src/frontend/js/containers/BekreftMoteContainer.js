@@ -8,19 +8,28 @@ import Lightbox from '../components/Lightbox';
 import history from '../history';
 import BekreftMote from '../mote/components/BekreftMote';
 import Feilmelding from '../components/Feilmelding';
+import * as epostinnholdActions from '../mote/actions/epostinnhold_actions';
 import { MOETEPLANLEGGER } from '../menypunkter';
 
 export class BekreftMoteSide extends Component {
     constructor(props) {
         super(props);
-        if (!this.props.alternativ) {
-            this.props.hentMoter(this.props.fnr);
-        }
+        this.hentInnhold();
     }
 
     onSubmit() {
         const { bekreftMote, alternativ, mote, fnr } = this.props;
         bekreftMote(mote.moteUuid, alternativ.id, fnr);
+    }
+
+    getArbeidsgiverDeltaker() {
+        const { mote } = this.props;
+        if (!mote) {
+            return undefined;
+        }
+        return mote.deltakere.filter((deltaker) => {
+            return deltaker.type === 'arbeidsgiver';
+        })[0];
     }
 
     getSykmeldtDeltaker() {
@@ -33,9 +42,19 @@ export class BekreftMoteSide extends Component {
         })[0];
     }
 
+    hentInnhold() {
+        const { alternativ, valgtKanal, hentMoter, fnr, hentBekreftMoteEpostinnhold } = this.props;
+        if (!alternativ) {
+            hentMoter(fnr);
+        } else {
+            hentBekreftMoteEpostinnhold(this.getArbeidsgiverDeltaker().deltakerUuid, valgtKanal, alternativ.id);
+        }
+    }
+
     render() {
-        const { alternativ, henterMoterBool, fnr, mote, deltaker, ledetekster } = this.props;
-        const sykmeldtDeltaker = this.getSykmeldtDeltaker();
+        const { alternativ, henterMoterBool, fnr, mote, deltaker, ledetekster, henterInnhold, varselinnhold, hentBekreftMoteEpostinnhold, valgtDeltaker = this.getArbeidsgiverDeltaker(), valgtKanal="EPOST", setValgtKanal, setValgtDeltaker } = this.props;
+        const sykmeldt = this.getSykmeldtDeltaker();
+        const arbeidsgiver = this.getArbeidsgiverDeltaker();
 
         return (<Side tittel="Bekreft møte" aktivtMenypunkt={MOETEPLANLEGGER}>
             {
@@ -52,7 +71,19 @@ export class BekreftMoteSide extends Component {
                                     (() => {
                                         return (<BekreftMote onSubmit={() => {
                                             this.onSubmit();
-                                        }} deltaker={deltaker} ledetekster={ledetekster} sykmeldtDeltaker={sykmeldtDeltaker} avbrytHref={`/sykefravaer/${fnr}/mote`} alternativ={alternativ} />);
+                                        }} deltaker={deltaker}
+                                                             ledetekster={ledetekster}
+                                                             sykmeldt={sykmeldt}
+                                                             arbeidsgiver={arbeidsgiver}
+                                                             avbrytHref={`/sykefravaer/${fnr}/mote`}
+                                                             alternativ={alternativ}
+                                                             henterInnhold={henterInnhold}
+                                                             setValgtKanal={setValgtKanal}
+                                                             setValgtDeltaker={setValgtDeltaker}
+                                                             hentBekreftMoteEpostinnhold={hentBekreftMoteEpostinnhold}
+                                                             varselinnhold={varselinnhold}
+                                                             valgtDeltaker={valgtDeltaker}
+                                                             valgtKanal={valgtKanal}/>);
                                     })()
                                 }
                                 </Lightbox>
@@ -74,8 +105,13 @@ BekreftMoteSide.propTypes = {
     fnr: PropTypes.string,
     mote: PropTypes.object,
     deltaker: PropTypes.object,
+    setValgtDeltaker: PropTypes.func,
+    varselinnhold: PropTypes.object,
+    valgtDeltaker: PropTypes.object,
+    valgtKanal: PropTypes.string,
     hentMoter: PropTypes.func,
     bekreftMote: PropTypes.func,
+    hentBekreftMoteEpostinnhold: PropTypes.func,
 };
 
 export const getMoteFraAlternativId = (moter, alternativId) => {
@@ -112,9 +148,13 @@ export const mapStateToProps = (state, ownProps) => {
         alternativ,
         mote,
         deltaker,
+        henterInnhold: state.epostinnhold.henter,
+        valgtDeltaker: state.epostinnhold.valgtDeltaker,
+        valgtKanal: state.epostinnhold.valgtKanal,
+        varselinnhold: state.epostinnhold.data,
     };
 };
 
-const BekreftMoteContainer = connect(mapStateToProps, Object.assign({}, moterActions))(BekreftMoteSide);
+const BekreftMoteContainer = connect(mapStateToProps, Object.assign({}, moterActions, epostinnholdActions))(BekreftMoteSide);
 
 export default BekreftMoteContainer;

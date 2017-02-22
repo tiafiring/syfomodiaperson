@@ -7,10 +7,11 @@ describe("epostinnhold_actions", () => {
         const moteUuid = "olsen";
         const motedeltakerUuid = "hansen";
         const valgtAlternativId = "123"
-        const action = actions.hentBekreftMoteEpostinnhold(motedeltakerUuid, valgtAlternativId);
+        const action = actions.hentBekreftMoteEpostinnhold(motedeltakerUuid, "EPOST", valgtAlternativId);
         expect(action).to.deep.equal({
             type: "HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT",
             motedeltakerUuid: "hansen",
+            valgtKanal: "EPOST",
             valgtAlternativId: "123"
         });
     });
