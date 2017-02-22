@@ -97,6 +97,7 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
         }
         <div className="panel">
             <Sidetopp tittel="Status for møteforespørsel" />
+            <p className="blokk-l">{getLedetekst('mote.bookingstatus.forklarendetekst', ledetekster)}</p>
             <h4 className="typo-undertittel blokk-s">{getLedetekst('mote.bookingstatus.sted', ledetekster)}</h4>
             <p className="blokk-l">{alternativer[0].sted}</p>
 
