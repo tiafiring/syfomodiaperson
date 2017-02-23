@@ -3,7 +3,7 @@ import Side from '../sider/Side';
 import { connect } from 'react-redux';
 import SidetoppSpeilet from '../components/SidetoppSpeilet';
 import { bindActionCreators } from 'redux';
-import { getLedetekst, Varselstripe } from 'digisyfo-npm';
+import { getLedetekst, getHtmlLedetekst, Varselstripe } from 'digisyfo-npm';
 import * as actionCreators from '../actions/sykmeldinger_actions';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
@@ -38,7 +38,7 @@ export class SykmeldingerSide extends Component {
                         return <Feilmelding />;
                     }
                     if (ikkeTilgang) {
-                        return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)} melding={getLedetekst('sykefravaer.veileder.feilmelding.melding', ledetekster)} />);
+                        return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)} melding = {getHtmlLedetekst('sykefravaer.veileder.feilmelding.melding', ledetekster)} />);
                     }
                     return (<div>
                         <div className="panel">
