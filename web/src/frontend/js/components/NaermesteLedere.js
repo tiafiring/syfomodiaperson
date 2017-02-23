@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import Sidetopp from './Sidetopp';
-import { visDato } from '../utils/';
 import { Varselstripe } from 'digisyfo-npm';
 
 const Leder = ({ erOppgitt, orgnummer, organisasjonsnavn, epost, navn, tlf, fomDato }) => {
