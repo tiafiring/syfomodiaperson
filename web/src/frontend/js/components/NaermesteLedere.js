@@ -34,7 +34,7 @@ const Leder = ({ erOppgitt, orgnummer, organisasjonsnavn, epost, navn, tlf, fomD
                     </div>
                     <div className="unit one-third">
                         <h4>Meldt inn</h4>
-                        <p>{visDato(fomDato)}</p>
+                        <p>{fomDato}</p>
                     </div>
                     <div className="unit one-third">
                         <h4>Org. nummer</h4>
@@ -56,7 +56,7 @@ Leder.propTypes = {
     tlf: PropTypes.string,
     orgnummer: PropTypes.string,
     organisasjonsnavn: PropTypes.string,
-    fomDato: PropTypes.object,
+    fomDato: PropTypes.string,
 };
 
 const NaermesteLedere = ({ ledere = [], navbruker }) => {
