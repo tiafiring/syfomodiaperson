@@ -22,10 +22,6 @@ MotetidspunktValgt.propTypes = {
 const MotebookingStatusTabell = ({ ledetekster, fnr, mote, flereAlternativ }) => {
     let { deltakere } = mote;
 
-    deltakere = deltakere.sort((d1, d2) => {
-        return d2.type.localeCompare(d1.type);
-    });
-
     const arbeidsgiverDeltaker = deltakere.filter((deltaker) => {
         return deltaker.type === 'arbeidsgiver';
     })[0];
@@ -55,9 +51,6 @@ const MotebookingStatusTabell = ({ ledetekster, fnr, mote, flereAlternativ }) =>
             <tbody>
             {
                 mote.alternativer
-                    .sort((a1, a2) => {
-                        return new Date(a2.tid).getTime() <= new Date(a1.tid).getTime() ? 1 : -1;
-                    })
                     .map((alternativ, index) => {
                         let className = null;
                         if (mote.valgtAlternativ && alternativ.id === mote.valgtAlternativ.id) {

@@ -176,12 +176,10 @@ export default function moter(state = defaultState, action) {
             state.data.filter((mote) => {
                 return mote.moteUuid === action.moteUuid;
             }).map((mote) => {
-                mote.alternativer.push.apply(mote.alternativer, action.data.alternativer);
-                mote.deltakere.forEach((deltaker) => {
-                    action.data.alternativer.forEach(() => {
-                        deltaker.svar.push({ valgt: false });
-                    });
+                mote.deltakere.map((deltaker) => {
+                    return deltaker.svar.push.apply(deltaker.svar, action.data.alternativer);
                 });
+                mote.alternativer.push.apply(mote.alternativer, action.data.alternativer);
                 return mote;
             });
 

@@ -11,7 +11,7 @@ describe("MotestatusContainerTest", () => {
         let ownProps;
 
         beforeEach(() => {
-            ownProps = {};
+            ownProps = { moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986"};
             state = {
                 ledetekster: { henter: false, data: {} },
                 arbeidstaker : {
@@ -21,10 +21,14 @@ describe("MotestatusContainerTest", () => {
                 moter: {
                     data: [{
                         moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
-                        status: "OPPRETTET"
+                        status: "OPPRETTET",
+                        deltakere: [],
+                        alternativer: [],
                     }, {
                         moteUuid: "test",
-                        status: "AVBRUTT"
+                        status: "AVBRUTT",
+                        deltakere: [],
+                        alternativer: [],
                     }]
                 },
                 navbruker: {
@@ -50,7 +54,9 @@ describe("MotestatusContainerTest", () => {
             const props = mapStateToProps(state, ownProps);
             expect(props.mote).to.deep.equal({
                 moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
-                status: "OPPRETTET"
+                status: "OPPRETTET",
+                deltakere: [],
+                alternativer: [],
             });
         });
 

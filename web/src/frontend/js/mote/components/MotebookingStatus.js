@@ -35,10 +35,6 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
     const { alternativer } = mote;
     let { deltakere } = mote;
 
-    deltakere = deltakere.sort((d1, d2) => {
-        return d1.type.localeCompare(d2.type);
-    });
-
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
     const aktoer = deltakere.filter((deltaker) => { return deltaker.type === 'Bruker'; })[0];
     const feilmelding = aktoer && fikkIkkeMoteOpprettetVarsel(aktoer);

@@ -31,6 +31,21 @@ export const mapStateToProps = (state, ownProps) => {
     const mote = state.moter.data.filter((m) => {
         return m.moteUuid === moteUuid;
     })[0];
+
+
+    mote.deltakere = mote.deltakere.sort((d1, d2) => {
+        return d2.type.localeCompare(d1.type);
+    }).map((deltaker) => {
+        deltaker.svar = deltaker.svar.sort((a1, a2) => {
+            return new Date(a2.tid).getTime() <= new Date(a1.tid).getTime() ? 1 : -1;
+        });
+        return deltaker;
+    });
+
+    mote.alternativer = mote.alternativer.sort((a1, a2) => {
+        return new Date(a2.tid).getTime() <= new Date(a1.tid).getTime() ? 1 : -1;
+    });
+
     return {
         fnr,
         mote,
