@@ -13,7 +13,7 @@ describe("NaermesteLedere", () => {
         epost: "ole@bekk.no",
         fodselsdato: "08.02.1975",
         erOppgitt: true,
-        "fomDato":{"year":2016,"month":"OCTOBER","dayOfMonth":26,"dayOfWeek":"WEDNESDAY","dayOfYear":300,"leapYear":true,"monthValue":10,"era":"CE","chronology":{"id":"ISO","calendarType":"iso8601"}}
+        fomDato: "26.10.2016"
     }, {
         organisasjonsnavn: "NAV",
         orgnummer: "456",
@@ -22,7 +22,7 @@ describe("NaermesteLedere", () => {
         epost: "ole@nav.no",
         fodselsdato: "08.02.1985",
         erOppgitt: true,
-        "fomDato":{"year":2016,"month":"OCTOBER","dayOfMonth":26,"dayOfWeek":"WEDNESDAY","dayOfYear":300,"leapYear":true,"monthValue":10,"era":"CE","chronology":{"id":"ISO","calendarType":"iso8601"}}
+        fomDato: "26.10.2016"
     }, {
         organisasjonsnavn: "Peppes",
         orgnummer: "789",
@@ -31,7 +31,7 @@ describe("NaermesteLedere", () => {
         epost: "ole@peppes.no",
         fodselsdato: "08.02.1995",
         erOppgitt: true,
-        "fomDato":{"year":2016,"month":"OCTOBER","dayOfMonth":26,"dayOfWeek":"WEDNESDAY","dayOfYear":300,"leapYear":true,"monthValue":10,"era":"CE","chronology":{"id":"ISO","calendarType":"iso8601"}}
+        fomDato: "26.10.2016"
     }];
 
     const navbruker = {

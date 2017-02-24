@@ -2,15 +2,7 @@ import React, { PropTypes } from 'react';
 
 const MotebookingIkon = ({ deltaker, index }) => {
     const finnKlasseOgTekst = () => {
-        const harSvart = deltaker.avvik.length > 0 || deltaker.svar
-        .map((alternativ) => {
-            return alternativ.valgt;
-        })
-        .reduce((acc, b) => {
-            return acc || b;
-        });
-
-        if (harSvart && new Date(deltaker.svar[index].created) < new Date(deltaker.svartTidspunkt) ) {
+        if (new Date(deltaker.svar[index].created) < new Date(deltaker.svartTidspunkt) ) {
             return deltaker.svar[index].valgt ? { klasse: 'kan', tekst: 'kan' } : { klasse: 'kanikke', tekst: 'kan ikke' };
         }
 

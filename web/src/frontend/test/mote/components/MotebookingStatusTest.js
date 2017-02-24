@@ -55,7 +55,19 @@ describe("MotebookingStatus", () => {
             avvik: [],
             hendelser: [],
             epost: "***REMOVED***",
-            svar: [{}],
+            svar: [{
+                "tid": "2012-12-12T11:00:00Z",
+                "created": "2011-12-12T11:00:00Z",
+                "sted": "Oslo by",
+                "valgt": false,
+                "id": 1
+            }, {
+                "tid": "2009-09-09T07:00:00Z",
+                "created": "2011-12-12T11:00:00Z",
+                "sted": "Oslo by",
+                "valgt": false,
+                "id": 2
+            }],
         }];
         avbrytMote = sinon.spy();
     })
@@ -100,7 +112,10 @@ describe("MotebookingStatus", () => {
     describe("Når det er kommet svar fra arbeidsgiver og arbeidsgiver kan stille", () => {
         
         beforeEach(() => {
-            mote.deltakere[0].svar[0].valgt = true;
+            mote.deltakere[0].svar[0] = {
+                valgt: true,
+                created: "2011-11-12T11:00:00Z"
+            }
         });
 
         it("Skal vise en knapp med teksten 'Velg tidspunkt for møte'", () => {
