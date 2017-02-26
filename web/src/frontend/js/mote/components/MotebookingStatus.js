@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { getDatoFraZulu, fikkIkkeMoteOpprettetVarsel } from '../utils/index';
+import { getDatoFraZulu } from '../utils/index';
 import Sidetopp from '../../components/Sidetopp';
 import KontaktInfoFeilmelding from './KontaktInfoFeilmelding';
 import MotebookingStatusTabell from './MotebookingStatusTabell';
@@ -31,22 +31,13 @@ const feilAarsakForklaringFunc = (feilAarsak) => {
     }
 };
 
-const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
-    const { alternativer } = mote;
-    let { deltakere } = mote;
-
+const MotebookingStatus = ({ ledetekster, visKrrMelding, arbeidstaker, fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
+    const { deltakere, alternativer } = mote;
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
-    const aktoer = deltakere.filter((deltaker) => { return deltaker.type === 'Bruker'; })[0];
-    const feilmelding = aktoer && fikkIkkeMoteOpprettetVarsel(aktoer);
-    let krrFeilAarsak;
-    let krrFeilmeldingkey;
 
-    if (feilmelding) {
-        deltakere = deltakere
-            .filter(deltaker => {
-                return deltaker !== aktoer || deltaker.svartTidspunkt != null;
-            });
-        krrFeilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
+    let krrFeilmeldingkey;
+    if (visKrrMelding) {
+        const krrFeilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
         krrFeilmeldingkey = feilAarsakForklaringFunc(krrFeilAarsak);
     }
 
@@ -85,7 +76,7 @@ const MotebookingStatus = ({ ledetekster, arbeidstaker, fnr, mote, avbrytMoteUte
             </Varselstripe>
         </div>
         {
-            feilmelding && <KontaktInfoFeilmelding feilmeldingkey={krrFeilmeldingkey} ledetekster={ledetekster} />
+            visKrrMelding && <KontaktInfoFeilmelding feilmeldingkey={krrFeilmeldingkey} ledetekster={ledetekster} />
         }
         <div className="panel">
             <Sidetopp tittel={getLedetekst('mote.bookingstatus.sidetittel', ledetekster)} />
@@ -126,6 +117,7 @@ MotebookingStatus.propTypes = {
     arbeidstaker: PropTypes.object,
     senderNyeAlternativ: PropTypes.bool,
     nyeAlternativFeilet: PropTypes.bool,
+    visKrrMelding: PropTypes.bool,
     ledetekster: PropTypes.object,
     avbrytMoteUtenVarsel: PropTypes.func,
     flereAlternativ: PropTypes.func,

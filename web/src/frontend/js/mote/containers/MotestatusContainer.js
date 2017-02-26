@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as arbeidstakerActions from '../actions/arbeidstaker_actions';
 import * as moteActions from '../actions/moter_actions';
 import MotebookingStatus from '../components/MotebookingStatus';
+import { fikkIkkeMoteOpprettetVarsel } from '../utils/index';
 
 export class MotebookingStatusWrapper extends Component {
     componentWillMount() {
@@ -46,9 +47,13 @@ export const mapStateToProps = (state, ownProps) => {
         return new Date(a2.tid).getTime() <= new Date(a1.tid).getTime() ? 1 : -1;
     });
 
+    const aktoer = mote.deltakere.filter((deltaker) => { return deltaker.type === 'Bruker'; })[0];
+    const visKrrMelding = aktoer && fikkIkkeMoteOpprettetVarsel(aktoer);
+
     return {
         fnr,
         mote,
+        visKrrMelding,
         avbrytFeilet: state.moter.avbrytFeilet,
         avbryter: state.moter.avbryter,
         henter: state.moter.henter || state.arbeidstaker.henter || state.ledetekster.henter,
