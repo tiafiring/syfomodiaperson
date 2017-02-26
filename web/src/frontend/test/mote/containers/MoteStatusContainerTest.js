@@ -78,6 +78,59 @@ describe("MotestatusContainerTest", () => {
             expect(props.henter).to.be.true;
         });
 
+        it("Skal filtrere bort reservert bruker", () => {
+            state.moter.data = [{
+                moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
+                status: "OPPRETTET",
+                deltakere: [{
+                    type: "Bruker",
+                    hendelser: [{
+                        resultat: "RESERVERT",
+                        varseltype: "OPPRETTET"
+                    }]
+                }],
+                alternativer: [],
+            }];
+            const props = mapStateToProps(state, ownProps);
+            expect(props.mote).to.deep.equal({
+                moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
+                status: "OPPRETTET",
+                deltakere: [],
+                alternativer: [],
+            });
+        });
+
+        it("Skal ikke filtrere bort reservert bruker dersom brukeren har svart", () => {
+            state.moter.data = [{
+                moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
+                status: "OPPRETTET",
+                deltakere: [{
+                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    type: "Bruker",
+                    hendelser: [{
+                        resultat: "RESERVERT",
+                        varseltype: "OPPRETTET"
+                    }],
+                    svar: []
+                }],
+                alternativer: [],
+            }];
+            const props = mapStateToProps(state, ownProps);
+            expect(props.mote).to.deep.equal({
+                moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
+                status: "OPPRETTET",
+                deltakere: [{
+                    type: "Bruker",
+                    hendelser: [{
+                        resultat: "RESERVERT",
+                        varseltype: "OPPRETTET"
+                    }],
+                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    svar: []
+                }],
+                alternativer: [],
+            });
+        });
 
     })
 
