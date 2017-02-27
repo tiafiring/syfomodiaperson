@@ -32,14 +32,8 @@ const feilAarsakForklaringFunc = (feilAarsak) => {
     }
 };
 
-const MotebookingStatus = ({ ledetekster, fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
+const MotebookingStatus = ({ ledetekster, fikkIkkeOpprettetVarsel, fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
     let { deltakere, alternativer, valgtAlternativ, status, bekreftetTidspunkt } = mote;
-    const aktoer = deltakere.filter((deltaker) => { return deltaker.type === 'Bruker'; })[0];
-    let fikkIkkeOpprettetVarsel = aktoer && fikkIkkeMoteOpprettetVarsel(aktoer);
-
-    if (aktoer && !aktoer.svartTidspunkt && fikkIkkeOpprettetVarsel) {
-       deltakere = deltakere.filter((deltaker) => { return deltaker.type !== 'Bruker'; });
-    }
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
 
     const krrMeldingPanel = fikkIkkeOpprettetVarsel ?
@@ -59,12 +53,13 @@ const MotebookingStatus = ({ ledetekster, fnr, mote, avbrytMoteUtenVarsel, sende
 
     let sendtTil = getLedetekst('mote.bookingstatus.foresporsel.sendt.til', ledetekster);
     const navneliste = [];
-    deltakere.forEach((deltaker) => {
+    deltakere.filter((deltaker) => {
+        return deltaker.type !== 'Bruker' || !(deltaker.type === 'Bruker' && fikkIkkeMoteOpprettetVarsel(deltaker));
+    }).forEach((deltaker) => {
         navneliste.push(deltaker.navn);
     });
     sendtTil += navneliste.join(' og ');
 
-    console.log(mote);
     const tabell = status === 'BEKREFTET' ? <ValgtMoteTidspunkt ledetekster={ledetekster} fnr={fnr} deltakere={deltakere} valgtAlternativ={valgtAlternativ} bekreftetTidspunkt={bekreftetTidspunkt} flereAlternativ={flereAlternativ} /> :
         <MotebookingStatusTabell valgtAlternativ={valgtAlternativ} status={status} deltakere={deltakere} alternativer={alternativer} ledetekster={ledetekster} fnr={fnr} mote={mote} flereAlternativ={flereAlternativ} />;
 
