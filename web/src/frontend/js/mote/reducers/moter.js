@@ -125,6 +125,7 @@ export default function moter(state = defaultState, action) {
                     })[0];
                     return Object.assign({}, mote, {
                         status: 'BEKREFTET',
+                        bekreftetTidspunkt: action.bekreftetTidspunkt,
                         valgtAlternativ,
                     });
                 }

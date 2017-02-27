@@ -9,9 +9,7 @@ const deltakertyper = {
     arbeidstaker: 'Arbeidstaker',
 };
 
-const ValgtMoteTidspunkt = ({ ledetekster, mote }) => {
-    let { valgtAlternativ, deltakere } = mote;
-
+const ValgtMoteTidspunkt = ({ ledetekster, deltakere, valgtAlternativ, bekreftetTidspunkt }) => {
     deltakere = deltakere.sort((d1, d2) => {
         return d2.type.localeCompare(d1.type);
     });
@@ -19,7 +17,7 @@ const ValgtMoteTidspunkt = ({ ledetekster, mote }) => {
     return (<div>
         <Varselstripe type="suksess">
             <div>
-                <p className="typo-element">{getLedetekst('mote.bookingstatus.bekreftet.sendt-dato', ledetekster, {'%DATO%': getDatoFraZulu(mote.bekreftetTidspunkt)})}</p>
+                <p className="typo-element">{getLedetekst('mote.bookingstatus.bekreftet.sendt-dato', ledetekster, {'%DATO%': getDatoFraZulu(bekreftetTidspunkt)})}</p>
             </div>
         </Varselstripe>
         <div className="motestatus__bekreftetmote__tabell">

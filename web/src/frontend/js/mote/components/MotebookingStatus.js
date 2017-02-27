@@ -33,7 +33,7 @@ const feilAarsakForklaringFunc = (feilAarsak) => {
 };
 
 const MotebookingStatus = ({ ledetekster, fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
-    let { deltakere, alternativer, valgtAlternativ, status } = mote;
+    let { deltakere, alternativer, valgtAlternativ, status, bekreftetTidspunkt } = mote;
     const aktoer = deltakere.filter((deltaker) => { return deltaker.type === 'Bruker'; })[0];
     let fikkIkkeOpprettetVarsel = aktoer && fikkIkkeMoteOpprettetVarsel(aktoer);
 
@@ -65,7 +65,7 @@ const MotebookingStatus = ({ ledetekster, fnr, mote, avbrytMoteUtenVarsel, sende
     sendtTil += navneliste.join(' og ');
 
     console.log(mote);
-    const tabell = status === 'BEKREFTET' ? <ValgtMoteTidspunkt ledetekster={ledetekster} fnr={fnr} mote={mote} flereAlternativ={flereAlternativ} /> :
+    const tabell = status === 'BEKREFTET' ? <ValgtMoteTidspunkt ledetekster={ledetekster} fnr={fnr} deltakere={deltakere} valgtAlternativ={valgtAlternativ} bekreftetTidspunkt={bekreftetTidspunkt} flereAlternativ={flereAlternativ} /> :
         <MotebookingStatusTabell valgtAlternativ={valgtAlternativ} status={status} deltakere={deltakere} alternativer={alternativer} ledetekster={ledetekster} fnr={fnr} mote={mote} flereAlternativ={flereAlternativ} />;
 
     return (<div>

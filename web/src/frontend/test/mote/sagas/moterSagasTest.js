@@ -135,7 +135,7 @@ describe("moterSagas", () => {
         });
 
         it("Skal dispatche MOTE_BEKREFTET", () => {
-            const nextPut = put({type: 'MOTE_BEKREFTET', moteUuid: "olsen", valgtAlternativId: 998877});
+            const nextPut = put({type: 'MOTE_BEKREFTET', moteUuid: "olsen", valgtAlternativId: 998877, bekreftetTidspunkt: new Date()});
             expect(generator.next().value).to.deep.equal(nextPut);
         });
 
