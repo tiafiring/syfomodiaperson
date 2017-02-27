@@ -147,8 +147,10 @@ describe("TidslinjeContainer", () => {
 
         let hentTidslinjer;
         let actions;
+        let ledetekster;
 
         beforeEach(() => {
+            ledetekster = { henter: false, data: {} },
             hentTidslinjer = sinon.spy();
             actions = {
                 hentTidslinjer,
@@ -166,7 +168,7 @@ describe("TidslinjeContainer", () => {
         });
 
         it("Skal vise Feilmelding dersom ikkeTilgang = true", () => {
-            const comp = shallow(<TidslinjeSide ikkeTilgang={true} actions={actions} />);
+            const comp = shallow(<TidslinjeSide ikkeTilgang={true} actions={actions} ledetekster={ledetekster} />);
             expect(comp.find(Feilmelding)).to.have.length(1);
         });
 

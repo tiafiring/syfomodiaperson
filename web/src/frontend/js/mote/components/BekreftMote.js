@@ -6,7 +6,7 @@ import AppSpinner from '../../components/AppSpinner';
 
 import { hentDag } from '../../utils/index';
 
-const BekreftMote = ({ deltaker, sykmeldt, arbeidsgiver, onSubmit, avbrytHref, alternativ, ledetekster, henterInnhold, setValgtKanal, setValgtDeltaker, hentBekreftMoteEpostinnhold, varselinnhold, valgtDeltaker, valgtKanal }) => {
+const BekreftMote = ({ deltaker, sykmeldt, arbeidsgiver, onSubmit, avbrytHref, alternativ, ledetekster, henterInnhold, setValgtDeltaker, hentBekreftMoteEpostinnhold, varselinnhold, valgtDeltaker }) => {
     const sykmeldtValgt = sykmeldt.deltakerUuid === valgtDeltaker.deltakerUuid ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
     const arbeidsgiverValgt = arbeidsgiver.deltakerUuid === valgtDeltaker.deltakerUuid ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
 
@@ -47,11 +47,11 @@ const BekreftMote = ({ deltaker, sykmeldt, arbeidsgiver, onSubmit, avbrytHref, a
         <div className="epostinnhold__deltakere">
             <button className={`epostinnhold__knapp tekst-knapp ${arbeidsgiverValgt}`} onClick={() => {
                 setValgtDeltaker(arbeidsgiver);
-                hentBekreftMoteEpostinnhold(arbeidsgiver.deltakerUuid, valgtKanal, alternativ.id);
+                hentBekreftMoteEpostinnhold(arbeidsgiver.deltakerUuid, alternativ.id);
             }}>{getLedetekst('mote.avbrytmote.arbeidsgiver', ledetekster)}</button>
             <button className={`epostinnhold__knapp tekst-knapp ${sykmeldtValgt}`} onClick={() => {
                 setValgtDeltaker(sykmeldt);
-                hentBekreftMoteEpostinnhold(sykmeldt.deltakerUuid, valgtKanal, alternativ.id);
+                hentBekreftMoteEpostinnhold(sykmeldt.deltakerUuid, alternativ.id);
             }}>{getLedetekst('mote.avbrytmote.sykmeldt', ledetekster)}</button>
         </div>
 

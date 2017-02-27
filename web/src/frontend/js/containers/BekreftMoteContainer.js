@@ -43,16 +43,16 @@ export class BekreftMoteSide extends Component {
     }
 
     hentInnhold() {
-        const { alternativ, valgtKanal, hentMoter, fnr, hentBekreftMoteEpostinnhold } = this.props;
+        const { alternativ, hentMoter, fnr, hentBekreftMoteEpostinnhold } = this.props;
         if (!alternativ) {
             hentMoter(fnr);
         } else {
-            hentBekreftMoteEpostinnhold(this.getArbeidsgiverDeltaker().deltakerUuid, valgtKanal, alternativ.id);
+            hentBekreftMoteEpostinnhold(this.getArbeidsgiverDeltaker().deltakerUuid, alternativ.id);
         }
     }
 
     render() {
-        const { alternativ, henterMoterBool, fnr, mote, deltaker, ledetekster, henterInnhold, varselinnhold, hentBekreftMoteEpostinnhold, valgtDeltaker = this.getArbeidsgiverDeltaker(), valgtKanal="EPOST", setValgtKanal, setValgtDeltaker } = this.props;
+        const { alternativ, henterMoterBool, fnr, mote, deltaker, ledetekster, henterInnhold, varselinnhold, hentBekreftMoteEpostinnhold, valgtDeltaker = this.getArbeidsgiverDeltaker(), setValgtDeltaker } = this.props;
         const sykmeldt = this.getSykmeldtDeltaker();
         const arbeidsgiver = this.getArbeidsgiverDeltaker();
 
@@ -78,12 +78,10 @@ export class BekreftMoteSide extends Component {
                                                              avbrytHref={`/sykefravaer/${fnr}/mote`}
                                                              alternativ={alternativ}
                                                              henterInnhold={henterInnhold}
-                                                             setValgtKanal={setValgtKanal}
                                                              setValgtDeltaker={setValgtDeltaker}
                                                              hentBekreftMoteEpostinnhold={hentBekreftMoteEpostinnhold}
                                                              varselinnhold={varselinnhold}
-                                                             valgtDeltaker={valgtDeltaker}
-                                                             valgtKanal={valgtKanal}/>);
+                                                             valgtDeltaker={valgtDeltaker} />);
                                     })()
                                 }
                                 </Lightbox>
@@ -150,7 +148,6 @@ export const mapStateToProps = (state, ownProps) => {
         deltaker,
         henterInnhold: state.epostinnhold.henter,
         valgtDeltaker: state.epostinnhold.valgtDeltaker,
-        valgtKanal: state.epostinnhold.valgtKanal,
         varselinnhold: state.epostinnhold.data,
     };
 };

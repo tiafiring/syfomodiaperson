@@ -61,23 +61,6 @@ describe("epostinnhold", () => {
             hentingFeilet: true,
         })
     })
-
-    it("HÅndterer setValgtKanal", () => {
-        const action = actions.setValgtKanal('SMS');
-        const currentState = {
-            data: {},
-            henter: false,
-            hentingFeilet: false,
-        };
-        const nextState = epostinnhold(currentState, action);
-        expect(nextState).to.deep.equal({
-            data: {},
-            henter: false,
-            hentingFeilet: false,
-            valgtKanal: 'SMS',
-        })
-    })
-
     it("HÅndterer setValgDeltaker", () => {
         const action = actions.setValgtDeltaker({id: 'testmannen'});
         const currentState = {

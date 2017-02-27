@@ -50,7 +50,7 @@ export class AvbrytMoteSide extends Component {
     }
 
     render() {
-        const { ledetekster, avbryter, avbrytFeilet, henterInnhold, hentingFeiletBool, fnr, mote, henter, varselinnhold, hentAvbrytMoteEpostinnhold, valgtDeltaker = this.getArbeidsgiverDeltaker(), valgtKanal, setValgtKanal, setValgtDeltaker } = this.props;
+        const { ledetekster, avbryter, avbrytFeilet, henterInnhold, hentingFeiletBool, fnr, mote, henter, varselinnhold, hentAvbrytMoteEpostinnhold, valgtDeltaker = this.getArbeidsgiverDeltaker(), setValgtDeltaker } = this.props;
         return (<Side tittel="Avbryt møteforespørsel">
         {
             (() => {
@@ -71,12 +71,11 @@ export class AvbrytMoteSide extends Component {
                                 sykmeldt={this.getSykmeldtDeltaker()}
                                 avbryter={avbryter}
                                 arbeidsgiver={this.getArbeidsgiverDeltaker()}
-                                setValgtKanal={setValgtKanal}
                                 setValgtDeltaker={setValgtDeltaker}
                                 hentAvbrytMoteEpostinnhold={hentAvbrytMoteEpostinnhold}
                                 onSubmit={() => { this.avbrytMote(); }}
                                 avbrytHref={`/sykefravaer/${fnr}/mote`}
-                                varselinnhold={varselinnhold} valgtDeltaker={valgtDeltaker} valgtKanal={valgtKanal} />);
+                                varselinnhold={varselinnhold} valgtDeltaker={valgtDeltaker} />);
                         })()}
                     </Lightbox>);
                 }
@@ -95,13 +94,11 @@ AvbrytMoteSide.propTypes = {
     henterInnhold: PropTypes.bool,
     varselinnhold: PropTypes.object,
     valgtDeltaker: PropTypes.object,
-    valgtKanal: PropTypes.string,
     mote: PropTypes.object,
     ledetekster: PropTypes.object,
     hentMoter: PropTypes.func,
     setValgtDeltaker: PropTypes.func,
     hentAvbrytMoteEpostinnhold: PropTypes.func,
-    setValgtKanal: PropTypes.func,
     avbrytMote: PropTypes.func,
     avbrytFeilet: PropTypes.bool,
 };

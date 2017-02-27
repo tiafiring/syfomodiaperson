@@ -10,10 +10,6 @@ const deltakertyper = {
 };
 
 const ValgtMoteTidspunkt = ({ ledetekster, deltakere, valgtAlternativ, bekreftetTidspunkt }) => {
-    deltakere = deltakere.sort((d1, d2) => {
-        return d2.type.localeCompare(d1.type);
-    });
-
     return (<div>
         <Varselstripe type="suksess">
             <div>

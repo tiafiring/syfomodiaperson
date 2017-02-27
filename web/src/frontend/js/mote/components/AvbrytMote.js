@@ -4,7 +4,7 @@ import { Varselstripe, getLedetekst } from 'digisyfo-npm';
 import AppSpinner from '../../components/AppSpinner';
 import { fikkMoteOpprettetVarsel } from '../utils/index';
 
-const AvbrytMote = ({ ledetekster, henterInnhold, arbeidsgiver, sykmeldt, onSubmit, avbrytHref, avbryter, avbrytFeilet, varselinnhold, valgtDeltaker = arbeidsgiver, valgtKanal = 'EPOST', hentAvbrytMoteEpostinnhold, setValgtDeltaker }) => {
+const AvbrytMote = ({ ledetekster, henterInnhold, arbeidsgiver, sykmeldt, onSubmit, avbrytHref, avbryter, avbrytFeilet, varselinnhold, valgtDeltaker = arbeidsgiver, hentAvbrytMoteEpostinnhold, setValgtDeltaker }) => {
     const sykmeldtValgt = sykmeldt.deltakerUuid === valgtDeltaker.deltakerUuid ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
     const arbeidsgiverValgt = arbeidsgiver.deltakerUuid === valgtDeltaker.deltakerUuid ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
 
@@ -42,11 +42,11 @@ const AvbrytMote = ({ ledetekster, henterInnhold, arbeidsgiver, sykmeldt, onSubm
         <div className="epostinnhold__deltakere">
             <button className={`epostinnhold__knapp tekst-knapp ${arbeidsgiverValgt}`} onClick={() => {
                 setValgtDeltaker(arbeidsgiver);
-                hentAvbrytMoteEpostinnhold(arbeidsgiver.deltakerUuid, valgtKanal);
+                hentAvbrytMoteEpostinnhold(arbeidsgiver.deltakerUuid);
             }}>{getLedetekst('mote.avbrytmote.arbeidsgiver', ledetekster)}</button>
             <button className={`epostinnhold__knapp tekst-knapp ${sykmeldtValgt}`} onClick={() => {
                 setValgtDeltaker(sykmeldt);
-                hentAvbrytMoteEpostinnhold(sykmeldt.deltakerUuid, valgtKanal);
+                hentAvbrytMoteEpostinnhold(sykmeldt.deltakerUuid);
             }}>{getLedetekst('mote.avbrytmote.sykmeldt', ledetekster)}</button>
         </div>
 
@@ -68,7 +68,6 @@ AvbrytMote.propTypes = {
     sykmeldt: PropTypes.object,
     varselinnhold: PropTypes.object,
     valgtDeltaker: PropTypes.object,
-    valgtKanal: PropTypes.string,
     onSubmit: PropTypes.func,
     setValgtDeltaker: PropTypes.func,
     setValgtKanal: PropTypes.func,
