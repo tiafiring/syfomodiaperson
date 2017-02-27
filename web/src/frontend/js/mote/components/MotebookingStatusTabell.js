@@ -19,13 +19,11 @@ MotetidspunktValgt.propTypes = {
     ledetekster: PropTypes.object,
 };
 
-const MotebookingStatusTabell = ({ ledetekster, fnr, mote, flereAlternativ }) => {
-    let { deltakere } = mote;
-
+const MotebookingStatusTabell = ({ ledetekster, fnr, deltakere, alternativer, valgtAlternativ, status, flereAlternativ }) => {
     const arbeidsgiverDeltaker = deltakere.filter((deltaker) => {
         return deltaker.type === 'arbeidsgiver';
     })[0];
-    const visVelgTidspunkt = mote.status === 'OPPRETTET' && arbeidsgiverDeltaker && arbeidsgiverDeltaker.svar.filter((svar) => {
+    const visVelgTidspunkt = status === 'OPPRETTET' && arbeidsgiverDeltaker && arbeidsgiverDeltaker.svar.filter((svar) => {
             return svar.valgt;
         }).length > 0;
 
@@ -50,10 +48,10 @@ const MotebookingStatusTabell = ({ ledetekster, fnr, mote, flereAlternativ }) =>
             </thead>
             <tbody>
             {
-                mote.alternativer
+                alternativer
                     .map((alternativ, index) => {
                         let className = null;
-                        if (mote.valgtAlternativ && alternativ.id === mote.valgtAlternativ.id) {
+                        if (valgtAlternativ && alternativ.id === valgtAlternativ.id) {
                             className = 'bekreftetTidspunkt';
                         }
 

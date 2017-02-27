@@ -149,6 +149,7 @@ describe("MotebookingStatus", () => {
                 "type": "arbeidsgiver",
                 "svartTidspunkt": "2016-11-22T12:52:06.489Z",
                 "avvik": [],
+                "hendelser": [],
                 "svar": [{
                   "id": 344,
                   "tid": "2019-09-09T07:00:00Z",
@@ -213,6 +214,7 @@ describe("MotebookingStatus", () => {
                     "type": "arbeidsgiver",
                     "svartTidspunkt": "2016-11-22T12:52:06.489Z",
                     "avvik": [],
+                    "hendelser": [],
                     "svar": [{
                         "id": 344,
                         "tid": "2019-09-09T07:00:00Z",

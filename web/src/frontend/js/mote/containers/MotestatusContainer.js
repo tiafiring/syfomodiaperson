@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import * as arbeidstakerActions from '../actions/arbeidstaker_actions';
 import * as moteActions from '../actions/moter_actions';
 import MotebookingStatus from '../components/MotebookingStatus';
-import { fikkIkkeMoteOpprettetVarsel } from '../utils/index';
 
 export class MotebookingStatusWrapper extends Component {
     componentWillMount() {
@@ -32,13 +31,9 @@ export const mapStateToProps = (state, ownProps) => {
     const mote = state.moter.data.filter((m) => {
         return m.moteUuid === moteUuid;
     })[0];
-    const aktoer = mote.deltakere.filter((deltaker) => { return deltaker.type === 'Bruker'; })[0];
-    const visKrrMelding = aktoer && !aktoer.svartTidspunkt && fikkIkkeMoteOpprettetVarsel(aktoer);
 
     mote.deltakere = mote.deltakere.sort((d1, d2) => {
         return d2.type.localeCompare(d1.type);
-    }).filter(deltaker => {
-        return !(deltaker === aktoer && visKrrMelding);
     }).map((deltaker) => {
         deltaker.svar = deltaker.svar.sort((a1, a2) => {
             return new Date(a2.tid).getTime() <= new Date(a1.tid).getTime() ? 1 : -1;
@@ -53,7 +48,6 @@ export const mapStateToProps = (state, ownProps) => {
     return {
         fnr,
         mote,
-        visKrrMelding,
         avbrytFeilet: state.moter.avbrytFeilet,
         avbryter: state.moter.avbryter,
         henter: state.moter.henter || state.arbeidstaker.henter || state.ledetekster.henter,

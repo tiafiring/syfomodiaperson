@@ -8,14 +8,16 @@ import {Varselstripe} from "digisyfo-npm";
 describe("MotebookingStatus", () => {
 
 
-    let mote = {}
+    let alternativer = {}
+    let status = {}
+    let deltakere = {}
     let avbrytMote;
 
     beforeEach(() => {
         window.APP_SETTINGS = {
             APP_ROOT: "/sykefravaer"
         }
-        mote.alternativer = [{
+        alternativer =  [{
             "tid": "2012-12-12T11:00:00Z",
             "created": "2011-12-12T11:00:00Z",
             "sted": "Oslo by",
@@ -28,8 +30,8 @@ describe("MotebookingStatus", () => {
             "valgt": false,
             "id": 2
         }];
-        mote.status = 'OPPRETTET';
-        mote.deltakere = [{
+        status =  'OPPRETTET';
+        deltakere = [{
             type: "arbeidsgiver",
             navn: "Helge",
             epost: "***REMOVED***",
@@ -60,12 +62,12 @@ describe("MotebookingStatus", () => {
     })
 
     it("Skal vise info om arbeidsgiver", () => {
-        const component = shallow(<MotebookingStatusTabell mote={mote} />);
+        const component = shallow(<MotebookingStatusTabell alternativer={alternativer} deltakere={deltakere} status={status} />);
         expect(component.text()).to.contain("Helge")
     });
 
     it("Skal vise info om bruker", () => {
-        const component = shallow(<MotebookingStatusTabell mote={mote} />);
+        const component = shallow(<MotebookingStatusTabell alternativer={alternativer} deltakere={deltakere} status={status} />);
         expect(component.text()).to.contain("Ole")
     });
 });

@@ -7,6 +7,7 @@ import ValgtMoteTidspunkt from './ValgtMoteTidspunkt';
 import FlereTidspunktSkjema from '../skjema/FlereTidspunktSkjema';
 import { Varselstripe, getLedetekst } from 'digisyfo-npm';
 import { Link } from 'react-router';
+import { fikkIkkeMoteOpprettetVarsel } from '../utils/index';
 
 export const MotetidspunktValgt = ({ bekreftetTidspunkt, ledetekster }) => {
     return <div className="motetidspunktValgt">{getLedetekst('mote.bookingstatus.valgt-sendt-til-parter', ledetekster, {'%TID%': getDatoFraZulu(bekreftetTidspunkt)})}</div>;
@@ -31,15 +32,19 @@ const feilAarsakForklaringFunc = (feilAarsak) => {
     }
 };
 
-const MotebookingStatus = ({ ledetekster, visKrrMelding, arbeidstaker, fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
-    const { deltakere, alternativer } = mote;
+const MotebookingStatus = ({ ledetekster, fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
+    let { deltakere, alternativer, valgtAlternativ, status } = mote;
+    const aktoer = deltakere.filter((deltaker) => { return deltaker.type === 'Bruker'; })[0];
+    let fikkIkkeOpprettetVarsel = aktoer && fikkIkkeMoteOpprettetVarsel(aktoer);
+
+    if (aktoer && !aktoer.svartTidspunkt && fikkIkkeOpprettetVarsel) {
+       deltakere = deltakere.filter((deltaker) => { return deltaker.type !== 'Bruker'; });
+    }
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
 
-    let krrFeilmeldingkey;
-    if (visKrrMelding) {
-        const krrFeilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
-        krrFeilmeldingkey = feilAarsakForklaringFunc(krrFeilAarsak);
-    }
+    const krrMeldingPanel = fikkIkkeOpprettetVarsel ?
+        <KontaktInfoFeilmelding feilmeldingkey={ feilAarsakForklaringFunc(fikkIkkeOpprettetVarsel.resultat)} ledetekster={ledetekster} />
+    : null;
 
     const flereTidspunktBoks = antallNyeTidspunkt ?
         <FlereTidspunktSkjema mote={ mote }
@@ -48,7 +53,7 @@ const MotebookingStatus = ({ ledetekster, visKrrMelding, arbeidstaker, fnr, mote
                               avbrytFlereAlternativ={ avbrytFlereAlternativ }
                               senderNyeAlternativ = {senderNyeAlternativ}
                               nyeAlternativFeilet = {nyeAlternativFeilet}
-                              antallEksisterendeTidspunkter={ mote.alternativer.length }
+                              antallEksisterendeTidspunkter={ alternativer.length }
                               antallNyeTidspunkt={ antallNyeTidspunkt } /> :
         null;
 
@@ -59,12 +64,9 @@ const MotebookingStatus = ({ ledetekster, visKrrMelding, arbeidstaker, fnr, mote
     });
     sendtTil += navneliste.join(' og ');
 
-    let tabell;
-    if ( mote.status === 'BEKREFTET') {
-        tabell = (<ValgtMoteTidspunkt ledetekster={ledetekster} fnr={fnr} mote={mote} flereAlternativ={flereAlternativ} />);
-    } else {
-        tabell = (<MotebookingStatusTabell ledetekster={ledetekster} fnr={fnr} mote={mote} flereAlternativ={flereAlternativ} />);
-    }
+    console.log(mote);
+    const tabell = status === 'BEKREFTET' ? <ValgtMoteTidspunkt ledetekster={ledetekster} fnr={fnr} mote={mote} flereAlternativ={flereAlternativ} /> :
+        <MotebookingStatusTabell valgtAlternativ={valgtAlternativ} status={status} deltakere={deltakere} alternativer={alternativer} ledetekster={ledetekster} fnr={fnr} mote={mote} flereAlternativ={flereAlternativ} />;
 
     return (<div>
         <div className="panel">
@@ -75,9 +77,7 @@ const MotebookingStatus = ({ ledetekster, visKrrMelding, arbeidstaker, fnr, mote
                 </div>
             </Varselstripe>
         </div>
-        {
-            visKrrMelding && <KontaktInfoFeilmelding feilmeldingkey={krrFeilmeldingkey} ledetekster={ledetekster} />
-        }
+        { krrMeldingPanel }
         <div className="panel">
             <Sidetopp tittel={getLedetekst('mote.bookingstatus.sidetittel', ledetekster)} />
             <p className="blokk-l">{getLedetekst('mote.bookingstatus.forklarendetekst', ledetekster)}</p>
@@ -117,7 +117,7 @@ MotebookingStatus.propTypes = {
     arbeidstaker: PropTypes.object,
     senderNyeAlternativ: PropTypes.bool,
     nyeAlternativFeilet: PropTypes.bool,
-    visKrrMelding: PropTypes.bool,
+    fikkIkkeOpprettetVarsel: PropTypes.object,
     ledetekster: PropTypes.object,
     avbrytMoteUtenVarsel: PropTypes.func,
     flereAlternativ: PropTypes.func,
