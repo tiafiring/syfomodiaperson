@@ -4,7 +4,7 @@ import SidetoppSpeilet from '../components/SidetoppSpeilet';
 import * as tidslinjerActions from '../actions/tidslinjer_actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Tidslinje, setHendelseData, getLedetekst, Varselstripe } from 'digisyfo-npm';
+import { Tidslinje, setHendelseData, getLedetekst, getHtmlLedetekst, Varselstripe } from 'digisyfo-npm';
 import TidslinjeVelgArbeidssituasjonContainer from './TidslinjeVelgArbeidssituasjonContainer';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
@@ -37,7 +37,7 @@ export class TidslinjeSide extends Component {
                     return <Feilmelding />;
                 }
                 if (ikkeTilgang) {
-                    return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)} melding={getLedetekst('sykefravaer.veileder.feilmelding.melding', ledetekster)} />);
+                    return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)} melding={getHtmlLedetekst('sykefravaer.veileder.feilmelding.melding', ledetekster)} />);
                 }
                 return (<div>
                     <div className="panel">
