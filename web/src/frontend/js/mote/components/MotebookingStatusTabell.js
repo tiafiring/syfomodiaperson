@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import MotebookingIkon from './MotebookingIkon';
 import { getKlokkeslettFraZulu, getDatoFraZulu } from '../utils/index';
-import { Varselstripe, getLedetekst } from 'digisyfo-npm';
+import { getLedetekst } from 'digisyfo-npm';
 import { Link } from 'react-router';
 
 const deltakertyper = {
@@ -11,7 +11,7 @@ const deltakertyper = {
 };
 
 export const MotetidspunktValgt = ({ bekreftetTidspunkt, ledetekster }) => {
-    return <div className="motetidspunktValgt">{getLedetekst('mote.bookingstatus.valgt-sendt-til-parter', ledetekster, {'%TID%': getDatoFraZulu(bekreftetTidspunkt)})}</div>;
+    return <div className="motetidspunktValgt">{getLedetekst('mote.bookingstatus.valgt-sendt-til-parter', ledetekster, { '%TID%': getDatoFraZulu(bekreftetTidspunkt) })}</div>;
 };
 
 MotetidspunktValgt.propTypes = {
@@ -24,14 +24,14 @@ const MotebookingStatusTabell = ({ ledetekster, fnr, deltakere, alternativer, st
         return deltaker.type === 'arbeidsgiver';
     })[0];
     const visVelgTidspunkt = status === 'OPPRETTET' && arbeidsgiverDeltaker && arbeidsgiverDeltaker.svar.filter((svar) => {
-            return svar.valgt;
-        }).length > 0;
+        return svar.valgt;
+    }).length > 0;
 
-    return ( <div>
+    return (<div>
         <table className="motestatus blokk-l">
             <thead>
             <tr>
-                <th/>
+                <th />
                 {
                     deltakere && deltakere
                         .map((deltaker, index) => {
@@ -88,25 +88,25 @@ const MotebookingStatusTabell = ({ ledetekster, fnr, deltakere, alternativer, st
         </table>
         <div className="sentrer-knapp luft__bunn">
             <button className="js-nyetidspunkt rammeknapp rammeknapp--mini" onClick={() => {
-            flereAlternativ();
-        }}>{getLedetekst('mote.bookingstatus.knapp.flere-tidspunkt', ledetekster)}</button>
+                flereAlternativ();
+            }}>{getLedetekst('mote.bookingstatus.knapp.flere-tidspunkt', ledetekster)}</button>
         </div>
     </div>);
 };
 
 MotebookingStatusTabell.propTypes = {
-    mote: PropTypes.shape({
-        alternativer: PropTypes.arrayOf(PropTypes.shape({
-            tid: PropTypes.string,
-            sted: PropTypes.string,
-        })),
-        deltakere: PropTypes.arrayOf(PropTypes.shape({
-            navn: PropTypes.string,
-            epost: PropTypes.string,
-            tidOgSted: PropTypes.array,
-            type: PropTypes.string,
-        })),
-    }),
+    deltakere: PropTypes.arrayOf(PropTypes.shape({
+        navn: PropTypes.string,
+        epost: PropTypes.string,
+        tidOgSted: PropTypes.array,
+        svar: PropTypes.array,
+        type: PropTypes.string,
+    })),
+    alternativer: PropTypes.arrayOf(PropTypes.shape({
+        tid: PropTypes.string,
+        sted: PropTypes.string,
+    })),
+    status: PropTypes.string,
     fnr: PropTypes.string,
     ledetekster: PropTypes.object,
     flereAlternativ: PropTypes.func,

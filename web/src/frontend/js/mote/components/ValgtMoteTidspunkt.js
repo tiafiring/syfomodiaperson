@@ -13,7 +13,7 @@ const ValgtMoteTidspunkt = ({ ledetekster, deltakere, valgtAlternativ, bekreftet
     return (<div>
         <Varselstripe type="suksess">
             <div>
-                <p className="typo-element">{getLedetekst('mote.bookingstatus.bekreftet.sendt-dato', ledetekster, {'%DATO%': getDatoFraZulu(bekreftetTidspunkt)})}</p>
+                <p className="typo-element">{getLedetekst('mote.bookingstatus.bekreftet.sendt-dato', ledetekster, { '%DATO%': getDatoFraZulu(bekreftetTidspunkt) })}</p>
             </div>
         </Varselstripe>
         <div className="motestatus__bekreftetmote__tabell">
@@ -21,7 +21,7 @@ const ValgtMoteTidspunkt = ({ ledetekster, deltakere, valgtAlternativ, bekreftet
             <table className="motestatus blokk-l">
                 <thead>
                 <tr>
-                    <th/>
+                    <th />
                     {
                         deltakere && deltakere
                             .map((deltaker, index) => {
@@ -48,7 +48,7 @@ const ValgtMoteTidspunkt = ({ ledetekster, deltakere, valgtAlternativ, bekreftet
                     deltakere.map((deltaker, index2) => {
                         let className = 'motestatus__svar';
                         let svarIndex = 0;
-                        for (let i=0; i < deltaker.svar.length; i++) {
+                        for ( let i = 0; i < deltaker.svar.length; i++) {
                             if (valgtAlternativ.id === deltaker.svar[i].id) {
                                 svarIndex = i;
                             }
@@ -74,19 +74,17 @@ const ValgtMoteTidspunkt = ({ ledetekster, deltakere, valgtAlternativ, bekreftet
 };
 
 ValgtMoteTidspunkt.propTypes = {
-    mote: PropTypes.shape({
-        alternativer: PropTypes.arrayOf(PropTypes.shape({
-            tid: PropTypes.string,
-            sted: PropTypes.string,
-        })),
-        deltakere: PropTypes.arrayOf(PropTypes.shape({
-            navn: PropTypes.string,
-            epost: PropTypes.string,
-            tidOgSted: PropTypes.array,
-            type: PropTypes.string,
-        })),
+    valgtAlternativ: PropTypes.shape({
+        tid: PropTypes.string,
+        sted: PropTypes.string,
     }),
-    fnr: PropTypes.string,
+    deltakere: PropTypes.arrayOf(PropTypes.shape({
+        navn: PropTypes.string,
+        epost: PropTypes.string,
+        tidOgSted: PropTypes.array,
+        type: PropTypes.string,
+    })),
+    bekreftetTidspunkt: PropTypes.string,
     ledetekster: PropTypes.object,
 };
 

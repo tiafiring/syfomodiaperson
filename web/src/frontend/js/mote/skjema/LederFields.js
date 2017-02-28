@@ -28,11 +28,19 @@ export const PreutfyltLeder = ({ ledetekster }) => {
     return <FyllUtLeder FieldComponent={TextFieldLocked} ledetekster={ledetekster} />;
 };
 
+PreutfyltLeder.propTypes = {
+    ledetekster: PropTypes.object,
+};
+
 export const ManuellUtfyltLeder = ({ ledetekster }) => {
     return (<div>
         <FyllUtLeder ledetekster={ledetekster} />
         <FyllUtVirksomhet ledetekster={ledetekster} />
     </div>);
+};
+
+ManuellUtfyltLeder.propTypes = {
+    ledetekster: PropTypes.object,
 };
 
 export default class LederFields extends Component {

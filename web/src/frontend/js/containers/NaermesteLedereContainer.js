@@ -49,6 +49,7 @@ NaermesteLedereSide.propTypes = {
     hentingFeilet: PropTypes.bool,
     ikkeTilgang: PropTypes.bool,
     navbruker: PropTypes.object,
+    ledetekster: PropTypes.object,
 };
 
 export function mapDispatchToProps(dispatch) {

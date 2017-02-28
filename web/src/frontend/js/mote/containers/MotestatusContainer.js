@@ -24,6 +24,8 @@ export class MotebookingStatusWrapper extends Component {
 
 MotebookingStatusWrapper.propTypes = {
     henter: PropTypes.bool,
+    fnr: PropTypes.string,
+    hentArbeidstaker: PropTypes.func,
 };
 
 export const mapStateToProps = (state, ownProps) => {
@@ -37,8 +39,8 @@ export const mapStateToProps = (state, ownProps) => {
     const fikkIkkeOpprettetVarsel = aktoer && fikkIkkeMoteOpprettetVarsel(aktoer);
     if (aktoer && !aktoer.svartTidspunkt && fikkIkkeOpprettetVarsel) {
         aktivtMote = Object.assign({}, aktivtMote, {
-            deltakere: aktivtMote.deltakere.filter((deltaker) => { return deltaker.type !== 'Bruker'; })
-        })
+            deltakere: aktivtMote.deltakere.filter((deltaker) => { return deltaker.type !== 'Bruker'; }),
+        });
     }
     aktivtMote = Object.assign({}, aktivtMote, {
         deltakere: aktivtMote && aktivtMote.deltakere.sort((d1, d2) => {
@@ -51,7 +53,7 @@ export const mapStateToProps = (state, ownProps) => {
         }),
         alternativer: aktivtMote && aktivtMote.alternativer.sort((a1, a2) => {
             return new Date(a2.tid).getTime() <= new Date(a1.tid).getTime() ? 1 : -1;
-        })
+        }),
     });
 
     return {

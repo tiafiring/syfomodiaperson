@@ -72,16 +72,16 @@ export class BekreftMoteSide extends Component {
                                         return (<BekreftMote onSubmit={() => {
                                             this.onSubmit();
                                         }} deltaker={deltaker}
-                                                             ledetekster={ledetekster}
-                                                             sykmeldt={sykmeldt}
-                                                             arbeidsgiver={arbeidsgiver}
-                                                             avbrytHref={`/sykefravaer/${fnr}/mote`}
-                                                             alternativ={alternativ}
-                                                             henterInnhold={henterInnhold}
-                                                             setValgtDeltaker={setValgtDeltaker}
-                                                             hentBekreftMoteEpostinnhold={hentBekreftMoteEpostinnhold}
-                                                             varselinnhold={varselinnhold}
-                                                             valgtDeltaker={valgtDeltaker} />);
+                                            ledetekster={ledetekster}
+                                            sykmeldt={sykmeldt}
+                                            arbeidsgiver={arbeidsgiver}
+                                            avbrytHref={`/sykefravaer/${fnr}/mote`}
+                                            alternativ={alternativ}
+                                            henterInnhold={henterInnhold}
+                                            setValgtDeltaker={setValgtDeltaker}
+                                            hentBekreftMoteEpostinnhold={hentBekreftMoteEpostinnhold}
+                                            varselinnhold={varselinnhold}
+                                            valgtDeltaker={valgtDeltaker} />);
                                     })()
                                 }
                                 </Lightbox>
@@ -99,6 +99,7 @@ export class BekreftMoteSide extends Component {
 BekreftMoteSide.propTypes = {
     alternativ: PropTypes.object,
     henterMoterBool: PropTypes.bool,
+    henterInnhold: PropTypes.bool,
     ledetekster: PropTypes.object,
     fnr: PropTypes.string,
     mote: PropTypes.object,

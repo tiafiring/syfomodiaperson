@@ -67,6 +67,7 @@ const AvbrytMote = ({ ledetekster, henterInnhold, arbeidsgiver, sykmeldt, onSubm
 
 AvbrytMote.propTypes = {
     arbeidsgiver: PropTypes.object,
+    ledetekster: PropTypes.object,
     sykmeldt: PropTypes.object,
     varselinnhold: PropTypes.object,
     valgtDeltaker: PropTypes.object,

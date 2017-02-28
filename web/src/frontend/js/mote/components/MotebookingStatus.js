@@ -10,7 +10,7 @@ import { Link } from 'react-router';
 import { fikkIkkeMoteOpprettetVarsel } from '../utils/index';
 
 export const MotetidspunktValgt = ({ bekreftetTidspunkt, ledetekster }) => {
-    return <div className="motetidspunktValgt">{getLedetekst('mote.bookingstatus.valgt-sendt-til-parter', ledetekster, {'%TID%': getDatoFraZulu(bekreftetTidspunkt)})}</div>;
+    return <div className="motetidspunktValgt">{getLedetekst('mote.bookingstatus.valgt-sendt-til-parter', ledetekster, { '%TID%': getDatoFraZulu(bekreftetTidspunkt) })}</div>;
 };
 
 MotetidspunktValgt.propTypes = {
@@ -42,13 +42,13 @@ const MotebookingStatus = ({ ledetekster, fikkIkkeOpprettetVarsel, fnr, mote, av
 
     const flereTidspunktBoks = antallNyeTidspunkt ?
         <FlereTidspunktSkjema mote={ mote }
-                              flereAlternativ={ flereAlternativ }
-                              opprettFlereAlternativ={ opprettFlereAlternativ }
-                              avbrytFlereAlternativ={ avbrytFlereAlternativ }
-                              senderNyeAlternativ = {senderNyeAlternativ}
-                              nyeAlternativFeilet = {nyeAlternativFeilet}
-                              antallEksisterendeTidspunkter={ alternativer.length }
-                              antallNyeTidspunkt={ antallNyeTidspunkt } /> :
+            flereAlternativ={ flereAlternativ }
+            opprettFlereAlternativ={ opprettFlereAlternativ }
+            avbrytFlereAlternativ={ avbrytFlereAlternativ }
+            senderNyeAlternativ = {senderNyeAlternativ}
+            nyeAlternativFeilet = {nyeAlternativFeilet}
+            antallEksisterendeTidspunkter={ alternativer.length }
+            antallNyeTidspunkt={ antallNyeTidspunkt } /> :
         null;
 
     let sendtTil = getLedetekst('mote.bookingstatus.foresporsel.sendt.til', ledetekster);
@@ -68,7 +68,7 @@ const MotebookingStatus = ({ ledetekster, fikkIkkeOpprettetVarsel, fnr, mote, av
             <Varselstripe type="suksess">
                 <div>
                     <p className="typo-element">{sendtTil}</p>
-                    <p className="sist">{getLedetekst('mote.bookingstatus.sendt-dato', ledetekster, {'%DATO%': sendtDato})}</p>
+                    <p className="sist">{ getLedetekst('mote.bookingstatus.sendt-dato', ledetekster, { '%DATO%': sendtDato }) }</p>
                 </div>
             </Varselstripe>
         </div>

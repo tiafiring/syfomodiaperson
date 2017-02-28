@@ -1,10 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { getLedetekst } from 'digisyfo-npm';
-import { fikkMoteOpprettetVarsel, getTidFraZulu } from '../utils/index';
+import { fikkMoteOpprettetVarsel } from '../utils/index';
 import AppSpinner from '../../components/AppSpinner';
-
-import { hentDag } from '../../utils/index';
 
 const BekreftMote = ({ sykmeldt, arbeidsgiver, onSubmit, avbrytHref, alternativ, ledetekster, henterInnhold, setValgtDeltaker, hentBekreftMoteEpostinnhold, varselinnhold, valgtDeltaker = arbeidsgiver }) => {
     const sykmeldtValgt = sykmeldt.deltakerUuid === valgtDeltaker.deltakerUuid ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
@@ -68,7 +66,13 @@ const BekreftMote = ({ sykmeldt, arbeidsgiver, onSubmit, avbrytHref, alternativ,
 
 BekreftMote.propTypes = {
     deltaker: PropTypes.object,
-    sykmeldtDeltaker: PropTypes.object,
+    sykmeldt: PropTypes.object,
+    arbeidsgiver: PropTypes.object,
+    valgtDeltaker: PropTypes.object,
+    henterInnhold: PropTypes.bool,
+    setValgtDeltaker: PropTypes.func,
+    hentBekreftMoteEpostinnhold: PropTypes.func,
+    varselinnhold: PropTypes.object,
     alternativ: PropTypes.object,
     ledetekster: PropTypes.object,
     onSubmit: PropTypes.func,
