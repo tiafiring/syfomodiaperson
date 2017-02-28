@@ -2,6 +2,7 @@ import {expect} from "chai";
 import MotebookingStatus, {MotetidspunktValgt} from "../../../js/mote/components/MotebookingStatus";
 import MotebookingStatusTabell from "../../../js/mote/components/MotebookingStatusTabell";
 import ValgtMoteTidspunkt from "../../../js/mote/components/ValgtMoteTidspunkt";
+import KontaktInfoFeilmelding from "../../../js/mote/components/KontaktInfoFeilmelding";
 import {mount, shallow} from "enzyme";
 import React from "react";
 import sinon from "sinon";
@@ -258,5 +259,155 @@ describe("MotebookingStatus", () => {
         });
 
 
+    });
+
+    describe("Når sykmeldt er reservert i KRR", () => {
+
+        let mote;
+        let fikkIkkeOpprettetVarsel;
+
+        beforeEach(() => {
+            fikkIkkeOpprettetVarsel = {
+                "resultat": "RESERVERT",
+                "varseltype": "OPPRETTET",
+            };
+            mote = {
+                "id": 0,
+                "moteUuid": "f26984a2-e038-4de6-a6af-4f4f5db96b26",
+                "opprettetAv": "Z990562",
+                "status": "OPPRETTET",
+                "opprettetTidspunkt": "2016-11-22T12:56:32.561Z",
+                "navEnhet": "navEnhet",
+                "deltakere": [{
+                    "deltakerUuid": "3b0dc3b2-587c-4105-98df-99b4205d3ce9",
+                    "navn": "***REMOVED***",
+                    "epost": "***REMOVED***",
+                    "type": "arbeidsgiver",
+                    "svartTidspunkt": "2016-11-22T12:52:06.489Z",
+                    "hendelser": [],
+                    "svar": [{
+                        "id": 344,
+                        "tid": "2019-09-09T07:00:00Z",
+                        "created": "2011-12-12T11:00:00Z",
+                        "sted": "Oslo",
+                        "valgt": true
+                    }, {
+                        "id": 345,
+                        "tid": "2020-09-09T18:00:00Z",
+                        "created": "2011-12-12T11:00:00Z",
+                        "sted": "Oslo",
+                        "valgt": false
+                    }]
+                }],
+                "alternativer": [{
+                    "id": 344,
+                    "tid": "2019-09-09T07:00:00Z",
+                    "created": "2011-12-12T11:00:00Z",
+                    "sted": "Oslo",
+                    "valgt": true
+                }, {
+                    "id": 345,
+                    "tid": "2020-09-09T18:00:00Z",
+                    "created": "2011-12-12T11:00:00Z",
+                    "sted": "Oslo",
+                    "valgt": false
+                }]
+            }
+        });
+
+        it("Skal vise KrrMeldingPanel", () => {
+            const component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} fikkIkkeOpprettetVarsel={fikkIkkeOpprettetVarsel} />);
+            expect(component.find(KontaktInfoFeilmelding)).to.have.length(1);
+        });
+        it("Den sykmeldt vises ikke i navnelista", () => {
+            const component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} fikkIkkeOpprettetVarsel={fikkIkkeOpprettetVarsel} />);
+            expect(component.find(".typo-element")).to.have.text("***REMOVED***");
+        });
+    });
+
+    describe("Når sykmeldt er reservert i KRR men har svart!", () => {
+
+        let mote;
+        let fikkIkkeOpprettetVarsel;
+
+        beforeEach(() => {
+            fikkIkkeOpprettetVarsel = {
+                "resultat": "RESERVERT",
+                "varseltype": "OPPRETTET",
+            };
+            mote = {
+                "id": 0,
+                "moteUuid": "f26984a2-e038-4de6-a6af-4f4f5db96b26",
+                "opprettetAv": "Z990562",
+                "status": "OPPRETTET",
+                "opprettetTidspunkt": "2016-11-22T12:56:32.561Z",
+                "navEnhet": "navEnhet",
+                "deltakere": [{
+                    "deltakerUuid": "3b0dc3b2-587c-4105-98df-99b4205d3ce9",
+                    "navn": "***REMOVED***",
+                    "epost": "***REMOVED***",
+                    "type": "arbeidsgiver",
+                    "svartTidspunkt": "2016-11-22T12:52:06.489Z",
+                    "hendelser": [],
+                    "svar": [{
+                        "id": 344,
+                        "tid": "2019-09-09T07:00:00Z",
+                        "created": "2011-12-12T11:00:00Z",
+                        "sted": "Oslo",
+                        "valgt": true
+                    }, {
+                        "id": 345,
+                        "tid": "2020-09-09T18:00:00Z",
+                        "created": "2011-12-12T11:00:00Z",
+                        "sted": "Oslo",
+                        "valgt": false
+                    }]
+                },{
+                    "deltakerUuid": "3b0dc3b2-587c-4105-98df-99b4205d3ce0",
+                    "navn": "Sygve Sykmeldt",
+                    "type": "Bruker",
+                    "svartTidspunkt": "2016-11-22T12:52:06.489Z",
+                    "hendelser": [{
+                        "resultat": "RESERVERT",
+                        "varseltype": "OPPRETTET",
+                    }],
+                    "svar": [{
+                        "id": 344,
+                        "tid": "2019-09-09T07:00:00Z",
+                        "created": "2011-12-12T11:00:00Z",
+                        "sted": "Oslo",
+                        "valgt": true
+                    }, {
+                        "id": 345,
+                        "tid": "2020-09-09T18:00:00Z",
+                        "created": "2011-12-12T11:00:00Z",
+                        "sted": "Oslo",
+                        "valgt": false
+                    }]
+                }],
+                "alternativer": [{
+                    "id": 344,
+                    "tid": "2019-09-09T07:00:00Z",
+                    "created": "2011-12-12T11:00:00Z",
+                    "sted": "Oslo",
+                    "valgt": true
+                }, {
+                    "id": 345,
+                    "tid": "2020-09-09T18:00:00Z",
+                    "created": "2011-12-12T11:00:00Z",
+                    "sted": "Oslo",
+                    "valgt": false
+                }]
+            }
+        });
+
+        it("Skal vise KrrMeldingPanel", () => {
+            const component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} fikkIkkeOpprettetVarsel={fikkIkkeOpprettetVarsel} />);
+            expect(component.find(KontaktInfoFeilmelding)).to.have.length(1);
+        });
+        it("Den sykmeldt vises ikke i navnelista", () => {
+            const component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} fikkIkkeOpprettetVarsel={fikkIkkeOpprettetVarsel} />);
+            expect(component.find(".typo-element")).to.have.text("***REMOVED***");
+        });
     });
 });
