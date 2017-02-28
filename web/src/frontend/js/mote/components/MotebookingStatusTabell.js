@@ -19,7 +19,7 @@ MotetidspunktValgt.propTypes = {
     ledetekster: PropTypes.object,
 };
 
-const MotebookingStatusTabell = ({ ledetekster, fnr, deltakere, alternativer, valgtAlternativ, status, flereAlternativ }) => {
+const MotebookingStatusTabell = ({ ledetekster, fnr, deltakere, alternativer, status, flereAlternativ }) => {
     const arbeidsgiverDeltaker = deltakere.filter((deltaker) => {
         return deltaker.type === 'arbeidsgiver';
     })[0];
@@ -50,11 +50,6 @@ const MotebookingStatusTabell = ({ ledetekster, fnr, deltakere, alternativer, va
             {
                 alternativer
                     .map((alternativ, index) => {
-                        let className = null;
-                        if (valgtAlternativ && alternativ.id === valgtAlternativ.id) {
-                            className = 'bekreftetTidspunkt';
-                        }
-
                         let svarkolonne = <td key={arbeidsgiverDeltaker.svar[index].id} />;
                         if (visVelgTidspunkt && arbeidsgiverDeltaker.svar[index].valgt) {
                             svarkolonne = (<td key={arbeidsgiverDeltaker.svar[index].id} >
@@ -63,7 +58,7 @@ const MotebookingStatusTabell = ({ ledetekster, fnr, deltakere, alternativer, va
                         }
 
                         return (<tr key={index}>
-                            <th scope="col" className={`${className} motestatus__kolonne_tidspunkt`} key={index}>
+                            <th scope="col" className="motestatus__kolonne_tidspunkt" key={index}>
                                 <div className="tabellelement">
                                     {getDatoFraZulu(alternativ.tid)}<br />{getKlokkeslettFraZulu(alternativ.tid)}
                                 </div>
@@ -71,7 +66,6 @@ const MotebookingStatusTabell = ({ ledetekster, fnr, deltakere, alternativer, va
                             {
                                 deltakere.map((deltaker, index2) => {
                                     let className = 'motestatus__svar';
-
                                     if (deltaker.svartTidspunkt && new Date(deltaker.svartTidspunkt) > new Date(deltaker.svar[index].created)) {
                                         if (deltaker.svar[index].valgt === true) {
                                             className = 'motestatus__svar--valgtTidspunkt';

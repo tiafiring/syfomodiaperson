@@ -61,7 +61,7 @@ const MotebookingStatus = ({ ledetekster, fikkIkkeOpprettetVarsel, fnr, mote, av
     sendtTil += navneliste.join(' og ');
 
     const tabell = status === 'BEKREFTET' ? <ValgtMoteTidspunkt ledetekster={ledetekster} fnr={fnr} deltakere={deltakere} valgtAlternativ={valgtAlternativ} bekreftetTidspunkt={bekreftetTidspunkt} flereAlternativ={flereAlternativ} /> :
-        <MotebookingStatusTabell valgtAlternativ={valgtAlternativ} status={status} deltakere={deltakere} alternativer={alternativer} ledetekster={ledetekster} fnr={fnr} mote={mote} flereAlternativ={flereAlternativ} />;
+        <MotebookingStatusTabell status={status} deltakere={deltakere} alternativer={alternativer} ledetekster={ledetekster} fnr={fnr} mote={mote} flereAlternativ={flereAlternativ} />;
 
     return (<div>
         <div className="panel">
