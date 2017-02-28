@@ -134,7 +134,7 @@ export const mapStateToProps = (state, ownProps) => {
         const id = `${alt.id}`;
         return id === `${alternativId}`;
     })[0] : null;
-    const deltaker = mote ? mote.deltakere.filter((_deltaker) => {
+    const arbeidsgiver = mote ? mote.deltakere.filter((_deltaker) => {
         return _deltaker.type === 'arbeidsgiver';
     })[0] : null;
     const fnr = state.navbruker.data.fnr;
@@ -145,7 +145,7 @@ export const mapStateToProps = (state, ownProps) => {
         ledetekster: state.ledetekster.data,
         alternativ,
         mote,
-        deltaker,
+        arbeidsgiver,
         henterInnhold: state.epostinnhold.henter,
         valgtDeltaker: state.epostinnhold.valgtDeltaker,
         varselinnhold: state.epostinnhold.data,

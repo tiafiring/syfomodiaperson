@@ -216,7 +216,7 @@ describe("BekreftMoteContainer", () => {
 
         it("Skal returnere deltaker", () => {
             const props = mapStateToProps(state, ownProps);
-            expect(props.deltaker).to.deep.equal({
+            expect(props.arbeidsgiver).to.deep.equal({
                 "deltakerUuid": "85a12263-d955-4103-b172-bf135df5f37a",
                 "navn": "***REMOVED***",
                 "epost": "***REMOVED***",

@@ -6,7 +6,7 @@ import AppSpinner from '../../components/AppSpinner';
 
 import { hentDag } from '../../utils/index';
 
-const BekreftMote = ({ deltaker, sykmeldt, arbeidsgiver, onSubmit, avbrytHref, alternativ, ledetekster, henterInnhold, setValgtDeltaker, hentBekreftMoteEpostinnhold, varselinnhold, valgtDeltaker }) => {
+const BekreftMote = ({ sykmeldt, arbeidsgiver, onSubmit, avbrytHref, alternativ, ledetekster, henterInnhold, setValgtDeltaker, hentBekreftMoteEpostinnhold, varselinnhold, valgtDeltaker = arbeidsgiver }) => {
     const sykmeldtValgt = sykmeldt.deltakerUuid === valgtDeltaker.deltakerUuid ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
     const arbeidsgiverValgt = arbeidsgiver.deltakerUuid === valgtDeltaker.deltakerUuid ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
 
@@ -31,7 +31,7 @@ const BekreftMote = ({ deltaker, sykmeldt, arbeidsgiver, onSubmit, avbrytHref, a
 
         <div className="epostinnhold__mottakere blokk">
             <h3>{getLedetekst('mote.bekreftmote.lightbox-arbeidsgiver', ledetekster)}</h3>
-            <p>{deltaker.navn}</p>
+            <p>{arbeidsgiver.navn}</p>
             <p>{getLedetekst('mote.bekreftmote.sendes-som-til-arbeidsgiver', ledetekster)}</p>
         </div>
 
@@ -49,10 +49,12 @@ const BekreftMote = ({ deltaker, sykmeldt, arbeidsgiver, onSubmit, avbrytHref, a
                 setValgtDeltaker(arbeidsgiver);
                 hentBekreftMoteEpostinnhold(arbeidsgiver.deltakerUuid, alternativ.id);
             }}>{getLedetekst('mote.avbrytmote.arbeidsgiver', ledetekster)}</button>
+            { fikkMoteOpprettetVarsel(sykmeldt) &&
             <button className={`epostinnhold__knapp tekst-knapp ${sykmeldtValgt}`} onClick={() => {
                 setValgtDeltaker(sykmeldt);
                 hentBekreftMoteEpostinnhold(sykmeldt.deltakerUuid, alternativ.id);
             }}>{getLedetekst('mote.avbrytmote.sykmeldt', ledetekster)}</button>
+            }
         </div>
 
         {innhold}

@@ -44,10 +44,12 @@ const AvbrytMote = ({ ledetekster, henterInnhold, arbeidsgiver, sykmeldt, onSubm
                 setValgtDeltaker(arbeidsgiver);
                 hentAvbrytMoteEpostinnhold(arbeidsgiver.deltakerUuid);
             }}>{getLedetekst('mote.avbrytmote.arbeidsgiver', ledetekster)}</button>
+            { fikkMoteOpprettetVarsel(sykmeldt) &&
             <button className={`epostinnhold__knapp tekst-knapp ${sykmeldtValgt}`} onClick={() => {
                 setValgtDeltaker(sykmeldt);
                 hentAvbrytMoteEpostinnhold(sykmeldt.deltakerUuid);
             }}>{getLedetekst('mote.avbrytmote.sykmeldt', ledetekster)}</button>
+            }
         </div>
 
         {innhold}
