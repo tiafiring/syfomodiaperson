@@ -4,7 +4,7 @@ import { getLedetekst } from 'digisyfo-npm';
 import { fikkMoteOpprettetVarsel } from '../utils/index';
 import AppSpinner from '../../components/AppSpinner';
 
-const BekreftMote = ({ sykmeldt, arbeidsgiver, onSubmit, avbrytHref, alternativ, ledetekster, henterInnhold, setValgtDeltaker, hentBekreftMoteEpostinnhold, varselinnhold, valgtDeltaker = arbeidsgiver }) => {
+const BekreftMote = ({ sykmeldt, arbeidsgiver, onSubmit, bekreftHref, bekrefter, alternativ, ledetekster, henterInnhold, setValgtDeltaker, hentBekreftMoteEpostinnhold, varselinnhold, valgtDeltaker = arbeidsgiver }) => {
     const sykmeldtValgt = sykmeldt.deltakerUuid === valgtDeltaker.deltakerUuid ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
     const arbeidsgiverValgt = arbeidsgiver.deltakerUuid === valgtDeltaker.deltakerUuid ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
 
@@ -57,9 +57,9 @@ const BekreftMote = ({ sykmeldt, arbeidsgiver, onSubmit, avbrytHref, alternativ,
 
         {innhold}
 
-        <div className="knapperad">
-            <button className="knapp blokk--s" onClick={onSubmit}>{getLedetekst('mote.bekreftmote.lightbox-send-knapp', ledetekster)}</button>
-            <p><Link to={avbrytHref}>{getLedetekst('mote.bekreftmote.lightbox-avbryt-knapp', ledetekster)}</Link></p>
+        <div>
+            <button disabled={bekrefter} className="knapp blokk--s luft__right" onClick={onSubmit}>{getLedetekst('mote.bekreftmote.lightbox-send-knapp', ledetekster)}</button>
+            <Link to={bekreftHref}>{getLedetekst('mote.bekreftmote.lightbox-avbryt-knapp', ledetekster)}</Link>
         </div>
     </div>);
 };
@@ -76,7 +76,7 @@ BekreftMote.propTypes = {
     alternativ: PropTypes.object,
     ledetekster: PropTypes.object,
     onSubmit: PropTypes.func,
-    avbrytHref: PropTypes.string,
+    bekreftHref: PropTypes.string,
 };
 
 export default BekreftMote;

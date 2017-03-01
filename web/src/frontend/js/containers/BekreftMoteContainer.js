@@ -54,7 +54,7 @@ export class BekreftMoteSide extends Component {
     render() {
         const { alternativ, henterMoterBool, fnr, mote, deltaker, ledetekster,
             henterInnhold, varselinnhold, hentBekreftMoteEpostinnhold, valgtDeltaker = this.getArbeidsgiverDeltaker(),
-            setValgtDeltaker } = this.props;
+            setValgtDeltaker, bekrefter, bekreftFeilet } = this.props;
         const sykmeldt = this.getSykmeldtDeltaker();
         const arbeidsgiver = this.getArbeidsgiverDeltaker();
 
@@ -77,8 +77,10 @@ export class BekreftMoteSide extends Component {
                                             ledetekster={ledetekster}
                                             sykmeldt={sykmeldt}
                                             arbeidsgiver={arbeidsgiver}
-                                            avbrytHref={`/sykefravaer/${fnr}/mote`}
+                                            bekreftHref={`/sykefravaer/${fnr}/mote`}
                                             alternativ={alternativ}
+                                            bekrefter={bekrefter}
+                                            bekreftFeilet={bekreftFeilet}
                                             henterInnhold={henterInnhold}
                                             setValgtDeltaker={setValgtDeltaker}
                                             hentBekreftMoteEpostinnhold={hentBekreftMoteEpostinnhold}
@@ -99,6 +101,8 @@ export class BekreftMoteSide extends Component {
 }
 
 BekreftMoteSide.propTypes = {
+    bekrefter: PropTypes.bool,
+    bekreftFeilet: PropTypes.bool,
     alternativ: PropTypes.object,
     henterMoterBool: PropTypes.bool,
     henterInnhold: PropTypes.bool,
@@ -144,6 +148,8 @@ export const mapStateToProps = (state, ownProps) => {
 
     return {
         fnr,
+        bekrefter: state.moter.bekrefter,
+        bekreftFeilet: state.moter.bekreftFeilet,
         henterMoterBool: state.moter.henter || state.ledetekster.henter,
         ledetekster: state.ledetekster.data,
         alternativ,
