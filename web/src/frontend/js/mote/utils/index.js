@@ -60,3 +60,17 @@ export const fikkIkkeMoteOpprettetVarsel = (deltaker) => {
 export const fikkMoteOpprettetVarsel = (deltaker) => {
     return !fikkIkkeMoteOpprettetVarsel(deltaker);
 };
+
+export const getLedetekstnokkelFraFeilAarsak = (feilAarsak) => {
+    switch (feilAarsak) {
+        case 'RESERVERT': {
+            return 'motebooking.krr.reservert';
+        }
+        case 'INGEN_KONTAKTINFORMASJON': {
+            return 'motebooking.krr.ingen-kontaktinformasjon';
+        }
+        default: {
+            return '';
+        }
+    }
+};

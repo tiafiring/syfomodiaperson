@@ -58,7 +58,7 @@ const MotebookingStatusTabell = ({ ledetekster, fnr, deltakere, alternativer, st
                         }
 
                         return (<tr key={index}>
-                            <th scope="col" className="motestatus__kolonne_tidspunkt" key={index}>
+                            <th scope="col" className="motestatus__kolonne__tidspunkt" key={index}>
                                 <div className="tabellelement">
                                     {getDatoFraZulu(alternativ.tid)}<br />{getKlokkeslettFraZulu(alternativ.tid)}
                                 </div>
@@ -86,7 +86,7 @@ const MotebookingStatusTabell = ({ ledetekster, fnr, deltakere, alternativer, st
             }
             </tbody>
         </table>
-        <div className="sentrer-knapp luft__bunn">
+        <div className="sentrer-knapp blokk--xl">
             <button className="js-nyetidspunkt rammeknapp rammeknapp--mini" onClick={() => {
                 flereAlternativ();
             }}>{getLedetekst('mote.bookingstatus.knapp.flere-tidspunkt', ledetekster)}</button>

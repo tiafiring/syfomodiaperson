@@ -52,7 +52,9 @@ export class BekreftMoteSide extends Component {
     }
 
     render() {
-        const { alternativ, henterMoterBool, fnr, mote, deltaker, ledetekster, henterInnhold, varselinnhold, hentBekreftMoteEpostinnhold, valgtDeltaker = this.getArbeidsgiverDeltaker(), setValgtDeltaker } = this.props;
+        const { alternativ, henterMoterBool, fnr, mote, deltaker, ledetekster,
+            henterInnhold, varselinnhold, hentBekreftMoteEpostinnhold, valgtDeltaker = this.getArbeidsgiverDeltaker(),
+            setValgtDeltaker } = this.props;
         const sykmeldt = this.getSykmeldtDeltaker();
         const arbeidsgiver = this.getArbeidsgiverDeltaker();
 

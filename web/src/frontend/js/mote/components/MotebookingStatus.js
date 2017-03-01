@@ -7,7 +7,7 @@ import ValgtMoteTidspunkt from './ValgtMoteTidspunkt';
 import FlereTidspunktSkjema from '../skjema/FlereTidspunktSkjema';
 import { Varselstripe, getLedetekst } from 'digisyfo-npm';
 import { Link } from 'react-router';
-import { fikkIkkeMoteOpprettetVarsel } from '../utils/index';
+import { fikkIkkeMoteOpprettetVarsel, getLedetekstnokkelFraFeilAarsak } from '../utils/index';
 
 export const MotetidspunktValgt = ({ bekreftetTidspunkt, ledetekster }) => {
     return <div className="motetidspunktValgt">{getLedetekst('mote.bookingstatus.valgt-sendt-til-parter', ledetekster, { '%TID%': getDatoFraZulu(bekreftetTidspunkt) })}</div>;
@@ -18,26 +18,12 @@ MotetidspunktValgt.propTypes = {
     ledetekster: PropTypes.object,
 };
 
-const feilAarsakForklaringFunc = (feilAarsak) => {
-    switch (feilAarsak) {
-        case 'RESERVERT': {
-            return 'motestatus.krr.reservert';
-        }
-        case 'INGEN_KONTAKTINFORMASJON': {
-            return 'motestatus.krr.ingen-kontaktinformasjon';
-        }
-        default: {
-            return '';
-        }
-    }
-};
-
 const MotebookingStatus = ({ ledetekster, fikkIkkeOpprettetVarsel, fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
     let { deltakere, alternativer, valgtAlternativ, status, bekreftetTidspunkt } = mote;
     const sendtDato = getDatoFraZulu(mote.opprettetTidspunkt);
 
     const krrMeldingPanel = fikkIkkeOpprettetVarsel ?
-        <KontaktInfoFeilmelding feilmeldingkey={ feilAarsakForklaringFunc(fikkIkkeOpprettetVarsel.resultat)} ledetekster={ledetekster} />
+        <KontaktInfoFeilmelding feilmeldingkey={ getLedetekstnokkelFraFeilAarsak(fikkIkkeOpprettetVarsel.resultat)} ledetekster={ledetekster} />
     : null;
 
     const flereTidspunktBoks = antallNyeTidspunkt ?

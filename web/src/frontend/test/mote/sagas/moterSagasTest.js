@@ -9,6 +9,7 @@ import {
 import * as actions from "../../../js/mote/actions/moter_actions";
 import {post, get} from "../../../js/api/index";
 import {put, call} from "redux-saga/effects";
+import sinon from 'sinon';
 
 describe("moterSagas", () => {
 
@@ -134,11 +135,13 @@ describe("moterSagas", () => {
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        //new Date() tuller det til. Må finne en løsning på den
-        // it("Skal dispatche MOTE_BEKREFTET", () => {
-        //     const nextPut = put({type: 'MOTE_BEKREFTET', moteUuid: "olsen", valgtAlternativId: 998877, bekreftetTidspunkt: new Date()});
-        //     expect(generator.next().value).to.deep.equal(nextPut);
-        // });
+        it("Skal dispatche MOTE_BEKREFTET", () => {
+            const date = new Date(2017, 3, 1);
+            const clock = sinon.useFakeTimers(date.getTime());
+            const nextPut = put({type: 'MOTE_BEKREFTET', moteUuid: "olsen", valgtAlternativId: 998877, bekreftetTidspunkt: date});
+            expect(generator.next().value).to.deep.equal(nextPut);
+            clock.restore();
+        });
 
     });
 

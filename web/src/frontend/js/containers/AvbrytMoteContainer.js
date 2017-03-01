@@ -50,7 +50,10 @@ export class AvbrytMoteSide extends Component {
     }
 
     render() {
-        const { ledetekster, avbryter, avbrytFeilet, henterInnhold, hentingFeiletBool, fnr, mote, henter, varselinnhold, hentAvbrytMoteEpostinnhold, valgtDeltaker = this.getArbeidsgiverDeltaker(), setValgtDeltaker } = this.props;
+        const { ledetekster, avbryter, avbrytFeilet, henterInnhold,
+            hentingFeiletBool, fnr, mote, henter, varselinnhold,
+            hentAvbrytMoteEpostinnhold, valgtDeltaker = this.getArbeidsgiverDeltaker(),
+            setValgtDeltaker } = this.props;
         return (<Side tittel="Avbryt møteforespørsel">
         {
             (() => {
