@@ -35,13 +35,10 @@ const MotebookingStatusTabell = ({ ledetekster, fnr, deltakere, alternativer, st
                 {
                     deltakere && deltakere
                         .map((deltaker, index) => {
-                            return (
-                                <td key={index}>
-                                    <th className="motestatus__deltaker" scope="row">
-                                        <strong>{deltakertyper[deltaker.type.toLowerCase()]}</strong>
-                                        <span>{deltaker.navn}</span>
-                                    </th>
-                                </td>);
+                            return (<th className="motestatus__deltaker" scope="row" key={index}>
+                                    <strong>{deltakertyper[deltaker.type.toLowerCase()]}</strong>
+                                    <span>{deltaker.navn}</span>
+                                </th>)
                         })
                 }
             </tr>
