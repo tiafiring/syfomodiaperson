@@ -12,7 +12,8 @@ describe("Feilmelding", () => {
     });
 
     it("Skal vise innsendt tittel/melding", () => {
-        const component = render(<Feilmelding tittel="tittel" melding="melding" />);
+        const m = {__html: "<p>melding</p>"};
+        const component = render(<Feilmelding tittel="tittel" melding={m} />);
         expect(component.find("h3").text()).to.equal("tittel");
         expect(component.find("p").text()).to.equal('melding');
     });

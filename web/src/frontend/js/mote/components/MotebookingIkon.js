@@ -2,29 +2,19 @@ import React, { PropTypes } from 'react';
 
 const MotebookingIkon = ({ deltaker, index }) => {
     const finnKlasseOgTekst = () => {
-        const harSvart = deltaker.avvik.length > 0 || deltaker.svar
-        .map((alternativ) => {
-            return alternativ.valgt;
-        })
-        .reduce((acc, b) => {
-            return acc || b;
-        });
-
-        if (harSvart) {
+        if (new Date(deltaker.svar[index].created) < new Date(deltaker.svartTidspunkt)) {
             return deltaker.svar[index].valgt ? { klasse: 'kan', tekst: 'kan' } : { klasse: 'kanikke', tekst: 'kan ikke' };
         }
 
         return { klasse: 'ikkesvar', tekst: 'ikke svart' };
     };
 
-    const { klasse, tekst } = finnKlasseOgTekst(deltaker, index);
+    const { klasse } = finnKlasseOgTekst(deltaker, index);
 
     return (
         <span className="motestatus__svar__inner">
             <img className="motestatus__ikon"
                 src={`/sykefravaer/img/svg/status--${klasse}.svg`} alt="" />
-            <span
-                className={`motestatus__svartekst motestatus__svartekst--${klasse}`}>{tekst}</span>
         </span>
     );
 };

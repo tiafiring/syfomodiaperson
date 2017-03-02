@@ -1,4 +1,4 @@
-import { HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT, HENTER_EPOSTINNHOLD, EPOSTINNHOLD_HENTET, HENT_EPOSTINNHOLD_FEILET, HENT_AVBRYT_MOTE_EPOSTINNHOLD_FORESPURT, SET_VALGT_DELTAKER, SET_VALGT_KANAL } from './actiontyper';
+import { HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT, HENTER_EPOSTINNHOLD, EPOSTINNHOLD_HENTET, HENT_EPOSTINNHOLD_FEILET, HENT_AVBRYT_MOTE_EPOSTINNHOLD_FORESPURT, SET_VALGT_DELTAKER } from './actiontyper';
 
 export const hentBekreftMoteEpostinnhold = (motedeltakerUuid, valgtAlternativId) => {
     return {
@@ -8,11 +8,10 @@ export const hentBekreftMoteEpostinnhold = (motedeltakerUuid, valgtAlternativId)
     };
 };
 
-export const hentAvbrytMoteEpostinnhold = (motedeltakerUuid, valgtKanal) => {
+export const hentAvbrytMoteEpostinnhold = (motedeltakerUuid) => {
     return {
         type: HENT_AVBRYT_MOTE_EPOSTINNHOLD_FORESPURT,
         motedeltakerUuid,
-        valgtKanal,
     };
 };
 
@@ -40,12 +39,5 @@ export const setValgtDeltaker = (valgtDeltaker) => {
     return {
         type: SET_VALGT_DELTAKER,
         valgtDeltaker,
-    };
-};
-
-export const setValgtKanal = (valgtKanal) => {
-    return {
-        type: SET_VALGT_KANAL,
-        valgtKanal,
     };
 };

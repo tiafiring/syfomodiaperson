@@ -11,7 +11,7 @@ describe("MotestatusContainerTest", () => {
         let ownProps;
 
         beforeEach(() => {
-            ownProps = {};
+            ownProps = { moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986"};
             state = {
                 ledetekster: { henter: false, data: {} },
                 arbeidstaker : {
@@ -21,10 +21,14 @@ describe("MotestatusContainerTest", () => {
                 moter: {
                     data: [{
                         moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
-                        status: "OPPRETTET"
+                        status: "OPPRETTET",
+                        deltakere: [],
+                        alternativer: [],
                     }, {
                         moteUuid: "test",
-                        status: "AVBRUTT"
+                        status: "AVBRUTT",
+                        deltakere: [],
+                        alternativer: [],
                     }]
                 },
                 navbruker: {
@@ -50,7 +54,9 @@ describe("MotestatusContainerTest", () => {
             const props = mapStateToProps(state, ownProps);
             expect(props.mote).to.deep.equal({
                 moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
-                status: "OPPRETTET"
+                status: "OPPRETTET",
+                deltakere: [],
+                alternativer: [],
             });
         });
 
@@ -72,6 +78,164 @@ describe("MotestatusContainerTest", () => {
             expect(props.henter).to.be.true;
         });
 
+        it("Skal filtrere bort reservert bruker", () => {
+            state.moter.data = [{
+                moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
+                status: "OPPRETTET",
+                deltakere: [{
+                    type: "Bruker",
+                    hendelser: [{
+                        resultat: "RESERVERT",
+                        varseltype: "OPPRETTET"
+                    }]
+                }],
+                alternativer: [],
+            }];
+            const props = mapStateToProps(state, ownProps);
+            expect(props.mote).to.deep.equal({
+                moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
+                status: "OPPRETTET",
+                deltakere: [],
+                alternativer: [],
+            });
+        });
+
+        it("Skal ikke filtrere bort reservert bruker dersom brukeren har svart", () => {
+            state.moter.data = [{
+                moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
+                status: "OPPRETTET",
+                deltakere: [{
+                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    type: "Bruker",
+                    hendelser: [{
+                        resultat: "RESERVERT",
+                        varseltype: "OPPRETTET"
+                    }],
+                    svar: []
+                }],
+                alternativer: [],
+            }];
+            const props = mapStateToProps(state, ownProps);
+            expect(props.mote).to.deep.equal({
+                moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
+                status: "OPPRETTET",
+                deltakere: [{
+                    type: "Bruker",
+                    hendelser: [{
+                        resultat: "RESERVERT",
+                        varseltype: "OPPRETTET"
+                    }],
+                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    svar: []
+                }],
+                alternativer: [],
+            });
+            expect(props.fikkIkkeOpprettetVarsel).to.deep.equal({
+                resultat: "RESERVERT",
+                varseltype: "OPPRETTET",
+            });
+        });
+
+        it("Sorterer deltakere etter type", () => {
+            state.moter.data = [{
+                moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
+                status: "OPPRETTET",
+                deltakere: [{
+                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    type: "Bruker",
+                    svar: []
+                },{
+                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    type: "arbeidsgiver",
+                    svar: []
+                },{
+                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    type: "testtype",
+                    svar: []
+                }],
+                alternativer: [],
+            }];
+            const props = mapStateToProps(state, ownProps);
+            expect(props.mote).to.deep.equal({
+                moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
+                status: "OPPRETTET",
+                deltakere: [{
+                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    type: "testtype",
+                    svar: []
+                },{
+                    type: "Bruker",
+                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    svar: []
+                },{
+                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    type: "arbeidsgiver",
+                    svar: []
+                }],
+                alternativer: [],
+            });
+        });
+
+
+        it("Sorterer svar OG alternativer etter tidspunkt", () => {
+            state.moter.data = [{
+                moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
+                status: "OPPRETTET",
+                deltakere: [{
+                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    type: "arbeidsgiver",
+                    svar: [{
+                        id: 1,
+                        tid: "2012-12-12T11:00:00Z",
+                    },{
+                        id: 2,
+                        tid: "2013-12-12T11:00:00Z",
+                    },{
+                        id: 3,
+                        tid: "2011-12-12T11:00:00Z",
+                    }]
+                }],
+                alternativer: [{
+                    id: 1,
+                    tid: "2012-12-12T11:00:00Z",
+                },{
+                    id: 2,
+                    tid: "2013-12-12T11:00:00Z",
+                },{
+                    id: 3,
+                    tid: "2011-12-12T11:00:00Z",
+                }],
+            }];
+            const props = mapStateToProps(state, ownProps);
+            expect(props.mote).to.deep.equal({
+                moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
+                status: "OPPRETTET",
+                deltakere: [{
+                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    type: "arbeidsgiver",
+                    svar: [{
+                        id: 3,
+                        tid: "2011-12-12T11:00:00Z",
+                    },{
+                        id: 1,
+                        tid: "2012-12-12T11:00:00Z",
+                    },{
+                        id: 2,
+                        tid: "2013-12-12T11:00:00Z",
+                    }]
+                }],
+                alternativer: [{
+                    id: 3,
+                    tid: "2011-12-12T11:00:00Z",
+                },{
+                    id: 1,
+                    tid: "2012-12-12T11:00:00Z",
+                },{
+                    id: 2,
+                    tid: "2013-12-12T11:00:00Z",
+                }],
+            });
+        });
 
     })
 

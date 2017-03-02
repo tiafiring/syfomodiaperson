@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import MotebookingSkjema from '../skjema/MotebookingSkjema';
-import { getLedetekst } from 'digisyfo-npm';
+import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import { connect } from 'react-redux';
 import * as ledereActions from '../../actions/ledere_actions';
 import * as virksomhetActions from '../actions/virksomhet_actions';
@@ -20,7 +20,7 @@ export class MotebookingSkjemaContainer extends Component {
         if (henter) {
             return <AppSpinner />;
         } else if (skjermetBruker) {
-            return <Feilmelding tittel = {getLedetekst('mote.motebookingskjemacontainer.tittel', ledetekster)} melding = {getLedetekst('mote.motebookingskjemacontainer.melding', ledetekster)} />;
+            return <Feilmelding tittel = {getLedetekst('mote.motebookingskjemacontainer.tittel', ledetekster)} melding = {getHtmlLedetekst('mote.motebookingskjemacontainer.melding', ledetekster)} />;
         }
         return <MotebookingSkjema {...this.props} />;
     }

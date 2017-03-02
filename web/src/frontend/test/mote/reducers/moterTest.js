@@ -434,7 +434,7 @@ describe('moter', () => {
         });
 
         it("Håndterer MOTE_BEKREFTET", () => {
-            const action = actions.moteBekreftet('b23ee185-cd29-41cb-a109-48d7aad15dc3', 6);
+            const action = actions.moteBekreftet('b23ee185-cd29-41cb-a109-48d7aad15dc3', 6, '2016-11-03T13:28:05.244');
             let nextState = moter(initialState, action);
             expect(nextState.avbryter).to.be.false;
             expect(nextState.avbrytFeilet).to.be.false;
@@ -448,7 +448,8 @@ describe('moter', () => {
                 'opprettetAv': 'testNAVRessurs',
                 'opprettetTidspunkt': '2016-11-03T13:28:05.244',
                 'navEnhet': 'navEnhet',
-                'deltakere': [{
+                "bekreftetTidspunkt": '2016-11-03T13:28:05.244',
+            'deltakere': [{
                     'deltakerUuid': '944c877e-e261-49a4-841e-2ab52349e864',
                     'navn': '***REMOVED***',
                     'epost': '***REMOVED***',

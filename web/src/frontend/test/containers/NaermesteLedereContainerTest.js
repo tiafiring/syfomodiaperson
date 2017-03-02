@@ -75,6 +75,11 @@ describe("NaermesteLedereContainer", () => {
                     navn: "Ole"
                 }
             }
+            state.ledetekster = {
+                data: {
+
+                }
+            }
         });
 
         it("Skal returnere ledere", () => {

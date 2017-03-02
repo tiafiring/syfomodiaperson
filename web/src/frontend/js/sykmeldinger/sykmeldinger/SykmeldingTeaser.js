@@ -39,7 +39,6 @@ class SykmeldingTeaser extends Component {
     }
 
     render() {
-
         const { sykmelding, ledetekster, fnr } = this.props;
         const antallPerioder = sykmelding.mulighetForArbeid.perioder.length;
         const sistePeriodeIndex = antallPerioder - 1;

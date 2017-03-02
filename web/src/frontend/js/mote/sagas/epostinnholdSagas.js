@@ -17,7 +17,7 @@ export function* hentBekreftMoteEpostinnhold(action) {
 export function* hentAvbrytMoteEpostinnhold(action) {
     yield put(actions.henterEpostInnhold());
     try {
-        const data = yield call(get, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/epostinnhold/AVBRUTT?motedeltakeruuid=${action.motedeltakerUuid}&kanal=${action.valgtKanal}`);
+        const data = yield call(get, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/epostinnhold/AVBRUTT?motedeltakeruuid=${action.motedeltakerUuid}`);
         yield put(actions.epostInnholdHentet('AVBRYT_TIDSPUNKT', data));
     } catch (e) {
         yield put(actions.hentEpostinnholdFeilet());

@@ -41,7 +41,7 @@ export class DinSykmeldingSide extends Component {
                         return <Feilmelding />;
                     }
                     if (ikkeTilgang) {
-                        return (<Feilmelding tittel={getLedetekst('mote.dinsykmeldingside.ikketilgang.tittel', ledetekster)} melding={getLedetekst('mote.dinsykmeldingside.ikketilgang.melding', ledetekster)} />);
+                        return (<Feilmelding tittel={getLedetekst('mote.dinsykmeldingside.ikketilgang.tittel', ledetekster)} melding={getHtmlLedetekst('sykefravaer.veileder.feilmelding.melding', ledetekster)} />);
                     }
 
                     return (<div>

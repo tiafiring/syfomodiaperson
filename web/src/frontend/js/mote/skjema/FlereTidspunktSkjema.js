@@ -36,7 +36,7 @@ const FlereTidspunktSkjema = ({ mote, antallEksisterendeTidspunkter, antallNyeTi
         <div className="fleretidspunkt">
             <form onSubmit={handleSubmit(submit)}>
                 <Tidspunkter tidspunktNummerOffset={antallEksisterendeTidspunkter} tidspunker={nyeTidspunktListe} />
-                <div>
+                <div className="blokk--xl">
                     <button type="button" className="tekst-knapp" onClick={() => { flereAlternativ(); }}>Flere alternativ +</button>
                 </div>
                 {

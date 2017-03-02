@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as arbeidstakerActions from '../actions/arbeidstaker_actions';
 import * as moteActions from '../actions/moter_actions';
 import MotebookingStatus from '../components/MotebookingStatus';
+import { fikkIkkeMoteOpprettetVarsel } from '../utils/index';
 
 export class MotebookingStatusWrapper extends Component {
     componentWillMount() {
@@ -23,17 +24,42 @@ export class MotebookingStatusWrapper extends Component {
 
 MotebookingStatusWrapper.propTypes = {
     henter: PropTypes.bool,
+    fnr: PropTypes.string,
+    hentArbeidstaker: PropTypes.func,
 };
 
 export const mapStateToProps = (state, ownProps) => {
     const fnr = state.navbruker.data.fnr;
     const moteUuid = ownProps.moteUuid;
-    const mote = state.moter.data.filter((m) => {
+    let aktivtMote = state.moter.data.filter((m) => {
         return m.moteUuid === moteUuid;
     })[0];
+
+    const aktoer = aktivtMote && aktivtMote.deltakere.filter((deltaker) => { return deltaker.type === 'Bruker'; })[0];
+    const fikkIkkeOpprettetVarsel = aktoer && fikkIkkeMoteOpprettetVarsel(aktoer);
+    if (aktoer && !aktoer.svartTidspunkt && fikkIkkeOpprettetVarsel) {
+        aktivtMote = Object.assign({}, aktivtMote, {
+            deltakere: aktivtMote.deltakere.filter((deltaker) => { return deltaker.type !== 'Bruker'; }),
+        });
+    }
+    aktivtMote = Object.assign({}, aktivtMote, {
+        deltakere: aktivtMote && aktivtMote.deltakere.sort((d1, d2) => {
+            return d2.type.toLowerCase().localeCompare(d1.type.toLowerCase());
+        }).map((deltaker) => {
+            deltaker.svar = deltaker.svar.sort((a1, a2) => {
+                return new Date(a2.tid).getTime() <= new Date(a1.tid).getTime() ? 1 : -1;
+            });
+            return deltaker;
+        }),
+        alternativer: aktivtMote && aktivtMote.alternativer.sort((a1, a2) => {
+            return new Date(a2.tid).getTime() <= new Date(a1.tid).getTime() ? 1 : -1;
+        }),
+    });
+
     return {
         fnr,
-        mote,
+        mote: aktivtMote,
+        fikkIkkeOpprettetVarsel,
         avbrytFeilet: state.moter.avbrytFeilet,
         avbryter: state.moter.avbryter,
         henter: state.moter.henter || state.arbeidstaker.henter || state.ledetekster.henter,

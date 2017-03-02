@@ -86,11 +86,12 @@ describe("moter_actions", () => {
     });
 
     it("Skal ha en moteBekreftet()-funksjon som rturnerer riktig action", () => {
-        const action = actions.moteBekreftet("olsen", "valgtAlternativId");
+        const action = actions.moteBekreftet("olsen", "valgtAlternativId", "2016-11-03T13:28:05.244");
         expect(action).to.deep.equal({
             type: "MOTE_BEKREFTET",
             moteUuid: "olsen",
-            valgtAlternativId: "valgtAlternativId"
+            valgtAlternativId: "valgtAlternativId",
+            bekreftetTidspunkt: "2016-11-03T13:28:05.244",
         });
     });
 

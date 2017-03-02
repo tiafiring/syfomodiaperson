@@ -27,12 +27,16 @@ describe("BekreftMoteContainer", () => {
                 moteUuid: "Olsen",
                 deltakere: [{
                     type: "Bruker"
-                }]
+                },
+                    {
+                        type: "arbeidsgiver",
+                        deltakerUuid: "uuid1",
+                    }]
             };
             const alternativ = {
                 id: 4545
             }
-            const compo = shallow(<BekreftMoteSide fnr="***REMOVED***" bekreftMote={bekreftMote} alternativ={alternativ} mote={mote} deltaker={deltaker} />);
+            const compo = shallow(<BekreftMoteSide fnr="***REMOVED***" hentBekreftMoteEpostinnhold={() => {}} bekreftMote={bekreftMote} alternativ={alternativ} mote={mote} arbeidsgiver={deltaker} />);
             compo.instance().onSubmit();
             expect(bekreftMote.getCall(0).args).to.deep.equal(["Olsen", 4545, "***REMOVED***"]);
         });
@@ -88,9 +92,12 @@ describe("BekreftMoteContainer", () => {
                     status: "OPPRETTET",
                     deltakere: [{
                         type: "Bruker"
+                    }, {
+                        type: "arbeidsgiver",
+                        deltakerUuid: "uuid",
                     }]
                 }
-                compo = shallow(<BekreftMoteSide hentMoter={hentMoter} alternativ={alternativ} mote={mote} deltaker={deltaker} />)
+                compo = shallow(<BekreftMoteSide hentBekreftMoteEpostinnhold={ () => {} } hentMoter={hentMoter} alternativ={alternativ} mote={mote} deltaker={deltaker} />)
             })
 
 
@@ -116,6 +123,7 @@ describe("BekreftMoteContainer", () => {
             };
             state = {
                 ledetekster: { henter: false, data: {} },
+                epostinnhold: { henter: false, data: {} },
                 moter: {
                     data: [{
                         "id": 1,
@@ -208,7 +216,7 @@ describe("BekreftMoteContainer", () => {
 
         it("Skal returnere deltaker", () => {
             const props = mapStateToProps(state, ownProps);
-            expect(props.deltaker).to.deep.equal({
+            expect(props.arbeidsgiver).to.deep.equal({
                 "deltakerUuid": "85a12263-d955-4103-b172-bf135df5f37a",
                 "navn": "***REMOVED***",
                 "epost": "***REMOVED***",

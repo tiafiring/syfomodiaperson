@@ -152,11 +152,12 @@ export function bekrefterMote() {
     };
 }
 
-export function moteBekreftet(moteUuid, valgtAlternativId) {
+export function moteBekreftet(moteUuid, valgtAlternativId, bekreftetTidspunkt) {
     return {
         type: actions.MOTE_BEKREFTET,
         moteUuid,
         valgtAlternativId,
+        bekreftetTidspunkt,
     };
 }
 

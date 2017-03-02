@@ -10,25 +10,24 @@ describe("MotebookinIkon", () => {
             svar: [
                 {
                     tid: "2012-12-12T11:12:00Z",
+                    created: "2012-11-12T11:12:00Z",
                     sted: "sted1",
                     valgt: false,
                 },
                 {
                     tid: "2012-12-12T12:12:00Z",
+                    created: "2012-11-12T12:12:00Z",
                     sted: "sted2",
                     valgt: false,
                 }
             ],
             type: "arbeidsgiver",
-            navn: "navn",
-            avvik: []
+            navn: "navn"
         };
         const index = 0;
 
         let component = shallow(<MotebookingIkon deltaker={deltaker} index={index}/>);
 
-        expect(component.find('.motestatus__svartekst--ikkesvar')).to.length(1);
-        expect(component.find('.motestatus__svartekst--ikkesvar').text()).to.equal('ikke svart');
         expect(component.find('.motestatus__ikon').prop('src')).to.equal('/sykefravaer/img/svg/status--ikkesvar.svg');
     });
 
@@ -38,25 +37,25 @@ describe("MotebookinIkon", () => {
             svar: [
                 {
                     tid: "2012-12-12T11:12:00Z",
+                    created: "2012-11-12T11:12:00Z",
                     sted: "sted1",
                     valgt: true,
                 },
                 {
                     tid: "2012-12-12T12:12:00Z",
+                    created: "2012-11-12T11:12:00Z",
                     sted: "sted2",
                     valgt: false,
                 }
             ],
+            svartTidspunkt: "2012-12-12T11:12:00Z",
             type: "arbeidsgiver",
-            navn: "navn",
-            avvik: []
+            navn: "navn"
         };
         const index = 0;
 
         let component = shallow(<MotebookingIkon deltaker={deltaker} index={index}/>);
 
-        expect(component.find('.motestatus__svartekst--kan')).to.length(1);
-        expect(component.find('.motestatus__svartekst--kan').text()).to.equal('kan');
         expect(component.find('.motestatus__ikon').prop('src')).to.equal('/sykefravaer/img/svg/status--kan.svg');
     });
 
@@ -66,25 +65,25 @@ describe("MotebookinIkon", () => {
             svar: [
                 {
                     tid: "2012-12-12T11:12:00Z",
+                    created: "2012-11-12T11:12:00Z",
                     sted: "sted1",
                     valgt: true,
                 },
                 {
                     tid: "2012-12-12T12:12:00Z",
+                    created: "2012-11-12T11:12:00Z",
                     sted: "sted2",
                     valgt: false,
                 }
             ],
+            svartTidspunkt: "2012-12-12T11:12:00Z",
             type: "arbeidsgiver",
             navn: "navn",
-            avvik: []
         };
         const index = 1;
 
         let component = shallow(<MotebookingIkon deltaker={deltaker} index={index}/>);
 
-        expect(component.find('.motestatus__svartekst--kanikke')).to.length(1);
-        expect(component.find('.motestatus__svartekst--kanikke').text()).to.equal('kan ikke');
         expect(component.find('.motestatus__ikon').prop('src')).to.equal('/sykefravaer/img/svg/status--kanikke.svg');
     });
 });

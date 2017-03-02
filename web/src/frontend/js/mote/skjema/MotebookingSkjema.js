@@ -6,7 +6,7 @@ import Tidspunkter from './Tidspunkter';
 import KontaktInfoFeilmelding from '../components/KontaktInfoFeilmelding';
 import Sidetopp from '../../components/Sidetopp';
 import { Varselstripe, getLedetekst } from 'digisyfo-npm';
-import { genererDato, erGyldigKlokkeslett, erGyldigEpost, erGyldigDato } from '../utils/index';
+import { genererDato, erGyldigKlokkeslett, erGyldigEpost, erGyldigDato, getLedetekstnokkelFraFeilAarsak } from '../utils/index';
 import { getCookieValueorDefault } from '../../utils/index';
 
 export function getData(values) {
@@ -52,20 +52,6 @@ Arbeidstaker.propTypes = {
     ledetekster: PropTypes.object,
 };
 
-const feilAarsakForklaringFunc = (feilAarsak) => {
-    switch (feilAarsak) {
-        case 'RESERVERT': {
-            return 'motebooking.krr.reservert';
-        }
-        case 'INGEN_KONTAKTINFORMASJON': {
-            return 'motebooking.krr.ingen-kontaktinformasjon';
-        }
-        default: {
-            return '';
-        }
-    }
-};
-
 export const MotebookingSkjema = ({
     ledetekster, handleSubmit, arbeidstaker, opprettMote, fnr, sender, sendingFeilet, ledere,
     autofill, untouch, hentLedereFeiletBool,
@@ -78,7 +64,7 @@ export const MotebookingSkjema = ({
     };
     const visArbeidstaker = arbeidstaker && arbeidstaker.kontaktinfo && arbeidstaker.kontaktinfo.reservasjon.skalHaVarsel;
     const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
-    const feilmeldingkey = feilAarsakForklaringFunc(feilAarsak);
+    const feilmeldingkey = getLedetekstnokkelFraFeilAarsak(feilAarsak);
 
     return (<div>
         { !visArbeidstaker && <KontaktInfoFeilmelding feilmeldingkey={feilmeldingkey} ledetekster={ledetekster} /> }

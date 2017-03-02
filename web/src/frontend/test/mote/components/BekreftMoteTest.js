@@ -1,9 +1,9 @@
 import { expect } from 'chai';
-import AvbrytMote from '../../../js/mote/components/AvbrytMote'
+import BekreftMote from '../../../js/mote/components/BekreftMote'
 import { mount, shallow } from 'enzyme';
 import React from 'react'
 
-describe("AvbrytMote", () => {
+describe("BekreftMote", () => {
 
     it("Viser endel selv om varselinnhold av varsel hentes", () => {
         const arbeidsgiver = {
@@ -15,7 +15,7 @@ describe("AvbrytMote", () => {
             navn: "sykmeldt",
         };
 
-        let component = shallow(<AvbrytMote arbeidsgiver={arbeidsgiver} sykmeldt={sykmeldt} henterInnhold={true}/>)
+        let component = shallow(<BekreftMote arbeidsgiver={arbeidsgiver} sykmeldt={sykmeldt} henterInnhold={true}/>)
         expect(component.find('.epostinnhold__mottakere')).to.length(2);
         expect(component.find('.epostinnhold__knapp')).to.length(2);
     });
@@ -34,7 +34,7 @@ describe("AvbrytMote", () => {
             }],
         };
 
-        let component = shallow(<AvbrytMote arbeidsgiver={arbeidsgiver} sykmeldt={sykmeldt} henterInnhold={true}/>)
+        let component = shallow(<BekreftMote arbeidsgiver={arbeidsgiver} sykmeldt={sykmeldt} henterInnhold={true}/>)
         expect(component.find('.epostinnhold__mottakere')).to.length(1);
         expect(component.find('.epostinnhold__knapp')).to.length(1);
     });

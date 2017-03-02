@@ -1,6 +1,7 @@
 .motestatus {
-    width: 100%;
-    margin-bottom: 5em;
+    width: 20em;
+    margin-bottom: 0.5em;
+    border-spacing: 5px;
     .motestatus__tittel {
         .mixin-typo-undertittel();
         margin: 0 .5em;
@@ -9,18 +10,17 @@
     th {
         padding-left: .5em;
         padding-right: .5em;
+        vertical-align: top;
+        text-align: left;
     }
-
-    th, td {
+    td {
         padding-top: .5em;
         padding-bottom: .5em;
-        width: 33.333333333%;
         text-align: center;
 
         &:first-child {
             text-align: left;
-            padding-right: .5em;
-            padding-left: 0;
+
         }
     }
 
@@ -30,14 +30,11 @@
 
     .motestatus__svar {
         text-align: center;
+        background: #e1e1e1;
     }
 
     .motestatus__svar__inner {
         display: block;
-        margin-top: 1em;
-        margin-bottom: 1em;
-        padding: 1em .5em;
-        border-left: 1px solid @ikonGraa;
     }
 
     strong {
@@ -55,14 +52,28 @@
 
 }
 
-.bekreftetTidspunkt, .motestatus__svar--bekreftetTidspunkt {
-    background-color: rgba(6, 137, 58, .15);
+.motestatus__bekreftetmote__tabell {
+  padding: 2rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  background-color: #e9ece6;
+}
+
+.motestatus__svar--valgtTidspunkt {
+    background-color: #cfe3d7;
+}
+
+.motestatus__svar--avvistTidspunkt {
+  background-color: #edced2;
+}
+
+.motestatus__kolonne__tidspunkt {
+  padding: 0 2em 0 0 !important;
 }
 
 .motestatus__ikon {
-    width: 28px;
-    height: 28px;
-    margin-bottom: .5em;
+    width: 36px;
+    height: 36px;
 }
 
 .motestatus__svartekst {
@@ -82,31 +93,41 @@
     color: #D0021B;
 }
 
+.tabellelement {
+  padding: 0.7rem;
+  background: #e1e1e1;
+  display: flex;
+}
+
+
+.tabellelement:after {
+    content: "";
+    display: block;
+    height: 41.26675px;
+    width: 41.26675px;
+    background-color: #e1e1e1;
+    transform: translateX(75%) rotate(45deg) scale(1.0,1.0) skew(5deg, 5deg);
+    right: 1px;
+}
+
+
 .motetidspunktValgt {
     position: relative;
     border-radius: .25rem;
-    padding: 1rem .5rem; 
+    padding: 1rem .5rem;
+    margin-left: 1em;
     text-align: center;
     line-height: 1.5;
     font-style: italic;
     background-color: #f1f1f1;
     border: 1px solid @ikonGraa;
     .mixin-typo-normal();
-
-    &:after {
-        content: "";
-        position: absolute;
-        height: 1rem;
-        width: 1px;
-        display: block;
-        background-color: @ikonGraa;
-        left: 50%;
-        top: -1rem;
-        margin-top: -1px;
-    }
-
 }
 
 .luft__right {
   margin-right: 1em;
+}
+
+.sentrer-knapp {
+  text-align: center;
 }

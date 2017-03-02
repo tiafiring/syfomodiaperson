@@ -9,6 +9,7 @@ import {
 import * as actions from "../../../js/mote/actions/moter_actions";
 import {post, get} from "../../../js/api/index";
 import {put, call} from "redux-saga/effects";
+import sinon from 'sinon';
 
 describe("moterSagas", () => {
 
@@ -135,8 +136,11 @@ describe("moterSagas", () => {
         });
 
         it("Skal dispatche MOTE_BEKREFTET", () => {
-            const nextPut = put({type: 'MOTE_BEKREFTET', moteUuid: "olsen", valgtAlternativId: 998877});
+            const date = new Date(2017, 3, 1);
+            const clock = sinon.useFakeTimers(date.getTime());
+            const nextPut = put({type: 'MOTE_BEKREFTET', moteUuid: "olsen", valgtAlternativId: 998877, bekreftetTidspunkt: date});
             expect(generator.next().value).to.deep.equal(nextPut);
+            clock.restore();
         });
 
     });

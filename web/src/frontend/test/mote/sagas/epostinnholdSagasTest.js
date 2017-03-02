@@ -47,7 +47,7 @@ describe("epostinnholdSagas", () => {
         });
 
         it("Skal deretter prøve å hente epostinnhold", () => {
-            const nextCall = call(get, "http://tjenester.nav.no/moteadmin/epostinnhold/AVBRUTT?motedeltakeruuid=abc123&kanal=EPOST");
+            const nextCall = call(get, "http://tjenester.nav.no/moteadmin/epostinnhold/AVBRUTT?motedeltakeruuid=abc123");
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 

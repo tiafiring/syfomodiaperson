@@ -9,6 +9,11 @@ export const getDatoFraZulu = (zulutid) => {
     return `${dag}.${maned}.${d.getFullYear()}`;
 };
 
+export const getKlokkeslettFraZulu = (zulutid) => {
+    const d = new Date(zulutid);
+    return `kl. ${pad(d.getHours())}.${pad(d.getMinutes())}`;
+};
+
 export const getTidFraZulu = (zulutid) => {
     const d = new Date(zulutid);
     return `${getDatoFraZulu(zulutid)} kl. ${pad(d.getHours())}.${pad(d.getMinutes())}`;
@@ -54,4 +59,18 @@ export const fikkIkkeMoteOpprettetVarsel = (deltaker) => {
 
 export const fikkMoteOpprettetVarsel = (deltaker) => {
     return !fikkIkkeMoteOpprettetVarsel(deltaker);
+};
+
+export const getLedetekstnokkelFraFeilAarsak = (feilAarsak) => {
+    switch (feilAarsak) {
+        case 'RESERVERT': {
+            return 'motebooking.krr.reservert';
+        }
+        case 'INGEN_KONTAKTINFORMASJON': {
+            return 'motebooking.krr.ingen-kontaktinformasjon';
+        }
+        default: {
+            return '';
+        }
+    }
 };

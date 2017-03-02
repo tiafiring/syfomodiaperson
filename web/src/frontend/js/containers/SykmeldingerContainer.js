@@ -3,7 +3,7 @@ import Side from '../sider/Side';
 import { connect } from 'react-redux';
 import SidetoppSpeilet from '../components/SidetoppSpeilet';
 import { bindActionCreators } from 'redux';
-import { getLedetekst, Varselstripe } from 'digisyfo-npm';
+import { getLedetekst, getHtmlLedetekst, Varselstripe } from 'digisyfo-npm';
 import * as actionCreators from '../actions/sykmeldinger_actions';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
@@ -38,8 +38,7 @@ export class SykmeldingerSide extends Component {
                         return <Feilmelding />;
                     }
                     if (ikkeTilgang) {
-                        return (<Feilmelding tittel="Under arbeid" melding="Du har foreløpig ikke tilgang til denne tjenesten. Vi jobber med å få på plass riktig tilgangsstyring.
-                    Veiledere som jobber med sykefraværsoppfølging og veiledere på kontaktsenteret vil etter hver få tilgang. Takk for at du prøver igjen senere!" />);
+                        return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)} melding = {getHtmlLedetekst('sykefravaer.veileder.feilmelding.melding', ledetekster)} />);
                     }
                     return (<div>
                         <div className="panel">

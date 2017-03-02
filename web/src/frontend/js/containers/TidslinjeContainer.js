@@ -4,7 +4,7 @@ import SidetoppSpeilet from '../components/SidetoppSpeilet';
 import * as tidslinjerActions from '../actions/tidslinjer_actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Tidslinje, setHendelseData, getLedetekst, Varselstripe } from 'digisyfo-npm';
+import { Tidslinje, setHendelseData, getLedetekst, getHtmlLedetekst, Varselstripe } from 'digisyfo-npm';
 import TidslinjeVelgArbeidssituasjonContainer from './TidslinjeVelgArbeidssituasjonContainer';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
@@ -37,8 +37,7 @@ export class TidslinjeSide extends Component {
                     return <Feilmelding />;
                 }
                 if (ikkeTilgang) {
-                    return (<Feilmelding tittel="Under arbeid" melding="Du har foreløpig ikke tilgang til denne tjenesten. Vi jobber med å få på plass riktig tilgangsstyring.
-                    Veiledere som jobber med sykefraværsoppfølging og veiledere på kontaktsenteret vil etter hver få tilgang. Takk for at du prøver igjen senere!" />);
+                    return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)} melding={getHtmlLedetekst('sykefravaer.veileder.feilmelding.melding', ledetekster)} />);
                 }
                 return (<div>
                     <div className="panel">
