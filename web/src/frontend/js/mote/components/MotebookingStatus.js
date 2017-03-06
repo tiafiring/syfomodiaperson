@@ -62,7 +62,6 @@ const MotebookingStatus = ({ ledetekster, fikkIkkeOpprettetVarsel, fnr, mote, av
         { krrMeldingPanel }
         <div className="panel">
             <Sidetopp tittel={getLedetekst('mote.bookingstatus.sidetittel', ledetekster)} />
-            <p className="blokk-l">{getLedetekst('mote.bookingstatus.forklarendetekst', ledetekster)}</p>
             <h4 className="typo-undertittel blokk-s">{getLedetekst('mote.bookingstatus.sted', ledetekster)}</h4>
             <p className="blokk-l">{alternativer[0].sted}</p>
 
