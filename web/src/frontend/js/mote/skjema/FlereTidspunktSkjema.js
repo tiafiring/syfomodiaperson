@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import Tidspunkter from '../skjema/Tidspunkter';
 import { reduxForm } from 'redux-form';
+import { getLedetekst } from 'digisyfo-npm';
 import { genererDato, erGyldigKlokkeslett, erGyldigDato } from '../utils/index';
 
 export function getData(values) {
@@ -17,7 +18,7 @@ export function getData(values) {
     };
 }
 
-const FlereTidspunktSkjema = ({ mote, antallEksisterendeTidspunkter, antallNyeTidspunkt, opprettFlereAlternativ, senderNyeAlternativ,
+const FlereTidspunktSkjema = ({ ledetekster, mote, antallEksisterendeTidspunkter, antallNyeTidspunkt, opprettFlereAlternativ, senderNyeAlternativ,
     nyeAlternativFeilet, flereAlternativ, avbrytFlereAlternativ, handleSubmit }) => {
     let nyeTidspunktListe = [];
     for (let i = 0; i < antallNyeTidspunkt; i++) {
@@ -37,13 +38,13 @@ const FlereTidspunktSkjema = ({ mote, antallEksisterendeTidspunkter, antallNyeTi
             <form onSubmit={handleSubmit(submit)}>
                 <Tidspunkter tidspunktNummerOffset={antallEksisterendeTidspunkter} tidspunker={nyeTidspunktListe} />
                 <div className="blokk--xl">
-                    <button type="button" className="tekst-knapp" onClick={() => { flereAlternativ(); }}>Flere alternativ +</button>
+                    <button type="button" className="tekst-knapp" onClick={() => { flereAlternativ(); }}>{getLedetekst('mote.bookingstatus.fleretidspunkt.leggtil', ledetekster)}</button>
                 </div>
                 {
                     nyeAlternativFeilet && <p>Det skjedde en feil! Prøv igjen senere!</p>
                 }
-                <input type="submit" className="knapp" value="Send" disabled={senderNyeAlternativ} />
-                <button type="button" className="tekst-knapp" onClick={() => { avbrytFlereAlternativ(); }}>Avbryt</button>
+                <input type="submit" className="knapp" value={`${getLedetekst('mote.bookingstatus.fleretidspunkt.send', ledetekster)}`} disabled={senderNyeAlternativ} />
+                <button type="button" className="tekst-knapp" onClick={() => { avbrytFlereAlternativ(); }}>{getLedetekst('mote.bookingstatus.fleretidspunkt.avbryt', ledetekster)}</button>
             </form>
         </div>
     );
@@ -51,6 +52,7 @@ const FlereTidspunktSkjema = ({ mote, antallEksisterendeTidspunkter, antallNyeTi
 
 FlereTidspunktSkjema.propTypes = {
     mote: PropTypes.object,
+    ledetekster: PropTypes.object,
     antallEksisterendeTidspunkter: PropTypes.number,
     antallNyeTidspunkt: PropTypes.number,
     flereAlternativ: PropTypes.func,

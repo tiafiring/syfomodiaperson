@@ -28,6 +28,7 @@ const MotebookingStatus = ({ ledetekster, fikkIkkeOpprettetVarsel, fnr, mote, av
 
     const flereTidspunktBoks = antallNyeTidspunkt ?
         <FlereTidspunktSkjema mote={ mote }
+            ledetekster = { ledetekster }
             flereAlternativ={ flereAlternativ }
             opprettFlereAlternativ={ opprettFlereAlternativ }
             avbrytFlereAlternativ={ avbrytFlereAlternativ }
