@@ -43,7 +43,7 @@ const FlereTidspunktSkjema = ({ ledetekster, mote, antallEksisterendeTidspunkter
                 {
                     nyeAlternativFeilet && <p>Det skjedde en feil! Prøv igjen senere!</p>
                 }
-                <input type="submit" className="knapp" value={`${getLedetekst('mote.bookingstatus.fleretidspunkt.send', ledetekster)}`} disabled={senderNyeAlternativ} />
+                <input type="submit" className="knapp dytt-hoyre" value={`${getLedetekst('mote.bookingstatus.fleretidspunkt.send', ledetekster)}`} disabled={senderNyeAlternativ} />
                 <button type="button" className="tekst-knapp" onClick={() => { avbrytFlereAlternativ(); }}>{getLedetekst('mote.bookingstatus.fleretidspunkt.avbryt', ledetekster)}</button>
             </form>
         </div>

@@ -83,7 +83,7 @@ const MotebookingStatusTabell = ({ ledetekster, fnr, deltakere, alternativer, st
             }
             </tbody>
         </table>
-        <div className="sentrer-knapp blokk--xl">
+        <div className="sentrer-knapp blokk">
             <button className="js-nyetidspunkt rammeknapp rammeknapp--mini" onClick={() => {
                 flereAlternativ();
             }}>{getLedetekst('mote.bookingstatus.knapp.flere-tidspunkt', ledetekster)}</button>
