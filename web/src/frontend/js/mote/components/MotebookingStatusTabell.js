@@ -35,7 +35,7 @@ const MotebookingStatusTabell = ({ ledetekster, fnr, deltakere, alternativer, st
                 {
                     deltakere && deltakere
                         .map((deltaker, index) => {
-                            return (<th className="motestatus__deltaker" scope="row" key={index}>
+                            return (<th scope="col" className="motestatus__deltaker" key={index}>
                                     <strong>{deltakertyper[deltaker.type.toLowerCase()]}</strong>
                                     <span>{deltaker.navn}</span>
                                 </th>)
@@ -55,11 +55,11 @@ const MotebookingStatusTabell = ({ ledetekster, fnr, deltakere, alternativer, st
                         }
 
                         return (<tr key={index}>
-                            <th scope="col" className="motestatus__kolonne__tidspunkt" key={index}>
+                            <td scope="row" className="motestatus__kolonne__tidspunkt" key={index}>
                                 <div className="tabellelement">
                                     {getDatoFraZulu(alternativ.tid)}<br />{getKlokkeslettFraZulu(alternativ.tid)}
                                 </div>
-                            </th>
+                            </td>
                             {
                                 deltakere.map((deltaker, index2) => {
                                     let className = 'motestatus__svar';

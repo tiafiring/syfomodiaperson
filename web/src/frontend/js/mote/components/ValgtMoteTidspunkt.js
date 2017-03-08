@@ -25,13 +25,10 @@ const ValgtMoteTidspunkt = ({ ledetekster, deltakere, valgtAlternativ, bekreftet
                     {
                         deltakere && deltakere
                             .map((deltaker, index) => {
-                                return (
-                                    <td key={index}>
-                                        <th className="motestatus__deltaker" scope="row">
-                                            <strong>{deltakertyper[deltaker.type.toLowerCase()]}</strong>
-                                            <span>{deltaker.navn}</span>
-                                        </th>
-                                    </td>);
+                                return (<th key={index} className="motestatus__deltaker" scope="col">
+                                        <strong>{deltakertyper[deltaker.type.toLowerCase()]}</strong>
+                                        <span>{deltaker.navn}</span>
+                                    </th>);
                             })
                     }
                 </tr>
@@ -39,11 +36,11 @@ const ValgtMoteTidspunkt = ({ ledetekster, deltakere, valgtAlternativ, bekreftet
                 <tbody>
 
                 <tr>
-                <th scope="col" className="bekreftetTidspunkt motestatus__kolonne_tidspunkt">
+                <td scope="row">
                     <div className="tabellelement">
                         {getDatoFraZulu(valgtAlternativ.tid)}<br />{getKlokkeslettFraZulu(valgtAlternativ.tid)}
                     </div>
-                </th>
+                </td>
                 {
                     deltakere.map((deltaker, index2) => {
                         let className = 'motestatus__svar';
