@@ -69,6 +69,9 @@ export const getLedetekstnokkelFraFeilAarsak = (feilAarsak) => {
         case 'INGEN_KONTAKTINFORMASJON': {
             return 'motebooking.krr.ingen-kontaktinformasjon';
         }
+        case 'UTGAATT': {
+            return 'motebooking.krr.utgaatt';
+        }
         default: {
             return '';
         }
