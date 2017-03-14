@@ -16,7 +16,7 @@ import moter from './mote/reducers/moter';
 import epostinnhold from './mote/reducers/epostinnhold';
 import arbeidstaker from './mote/reducers/arbeidstaker';
 import virksomhet from './mote/reducers/virksomhet';
-import rootSaga from './sagas';
+import rootSaga from './sagas/index';
 import { hentNavbruker, sjekkTilgangMoteadmin } from './actions/navbruker_actions';
 
 const rootReducer = combineReducers({
@@ -57,6 +57,21 @@ if (hasURLParameter('visLedetekster')) {
 render(<Provider store={store}>
         <AppRouter history={history} /></Provider>,
     document.getElementById('maincontent'));
+
+document.addEventListener('DOMContentLoaded', () => {
+    const config = {
+        config: {
+            toggles: {
+                visEnhet: false,
+                visSokefelt: false,
+                visSaksbehandler: false
+            },
+            fnr: fnr,
+            applicationName: 'Sykefravær',
+        }
+    };
+    renderDecoratorHead(config);
+});
 
 export {
     store,
