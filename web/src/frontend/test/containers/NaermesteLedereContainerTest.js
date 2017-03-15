@@ -13,11 +13,13 @@ describe("NaermesteLedereContainer", () => {
 
         let hentLedere;
         let actions;
+        let ledetekster;
 
         beforeEach(() => {
             hentLedere = sinon.spy();
             actions = { hentLedere };
-        })
+            ledetekster = { };
+        });
         
         it("Skal vise en Feilmelding hvis henting feiler", () => {
             const comp = shallow(<NaermesteLedereSide hentingFeilet actions={actions} />);
@@ -30,7 +32,7 @@ describe("NaermesteLedereContainer", () => {
         });
 
         it("Skal vise en Feilmelding hvis ikke tilgang", () => {
-            const comp = shallow(<NaermesteLedereSide ikkeTilgang={true} actions={actions} />);
+            const comp = shallow(<NaermesteLedereSide ikkeTilgang={true} ledetekster={ledetekster}  actions={actions} />);
             expect(comp.find(Feilmelding)).to.have.length(1);
         });
 
