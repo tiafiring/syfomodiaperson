@@ -6,7 +6,7 @@ import Tidspunkter from './Tidspunkter';
 import KontaktInfoFeilmelding from '../components/KontaktInfoFeilmelding';
 import Sidetopp from '../../components/Sidetopp';
 import { Varselstripe, getLedetekst } from 'digisyfo-npm';
-import { genererDato, erGyldigKlokkeslett, erGyldigEpost, erGyldigDato, getLedetekstnokkelFraFeilAarsak } from '../utils/index';
+import { genererDato, erGyldigKlokkeslett, erGyldigEpost, erGyldigDato } from '../utils/index';
 import { getCookieValueorDefault } from '../../utils/index';
 
 export function getData(values) {
@@ -50,6 +50,23 @@ Arbeidstaker.propTypes = {
     navn: PropTypes.string,
     kontaktinfo: PropTypes.object,
     ledetekster: PropTypes.object,
+};
+
+const getLedetekstnokkelFraFeilAarsak = (feilAarsak) => {
+    switch (feilAarsak) {
+        case 'RESERVERT': {
+            return 'motebooking.krr.reservert';
+        }
+        case 'INGEN_KONTAKTINFORMASJON': {
+            return 'motebooking.krr.ingen-kontaktinformasjon';
+        }
+        case 'UTGAATT': {
+            return 'motebooking.krr.utgaatt';
+        }
+        default: {
+            return '';
+        }
+    }
 };
 
 export const MotebookingSkjema = ({

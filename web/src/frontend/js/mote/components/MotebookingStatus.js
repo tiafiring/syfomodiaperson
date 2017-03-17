@@ -7,7 +7,7 @@ import ValgtMoteTidspunkt from './ValgtMoteTidspunkt';
 import FlereTidspunktSkjema from '../skjema/FlereTidspunktSkjema';
 import { Varselstripe, getLedetekst } from 'digisyfo-npm';
 import { Link } from 'react-router';
-import { fikkIkkeMoteOpprettetVarsel, getLedetekstnokkelFraFeilAarsak } from '../utils/index';
+import { fikkIkkeMoteOpprettetVarsel } from '../utils/index';
 
 export const MotetidspunktValgt = ({ bekreftetTidspunkt, ledetekster }) => {
     return <div className="motetidspunktValgt">{getLedetekst('mote.bookingstatus.valgt-sendt-til-parter', ledetekster, { '%TID%': getDatoFraZulu(bekreftetTidspunkt) })}</div>;
@@ -16,6 +16,23 @@ export const MotetidspunktValgt = ({ bekreftetTidspunkt, ledetekster }) => {
 MotetidspunktValgt.propTypes = {
     bekreftetTidspunkt: PropTypes.string,
     ledetekster: PropTypes.object,
+};
+
+const getLedetekstnokkelFraFeilAarsak = (feilAarsak) => {
+    switch (feilAarsak) {
+        case 'RESERVERT': {
+            return 'motestatus.krr.reservert';
+        }
+        case 'INGEN_KONTAKTINFORMASJON': {
+            return 'motestatus.krr.ingen-kontaktinformasjon';
+        }
+        case 'UTGAATT': {
+            return 'motestatus.krr.utgaatt';
+        }
+        default: {
+            return '';
+        }
+    }
 };
 
 const MotebookingStatus = ({ ledetekster, fikkIkkeOpprettetVarsel, fnr, mote, avbrytMoteUtenVarsel, senderNyeAlternativ, nyeAlternativFeilet, antallNyeTidspunkt, flereAlternativ, avbrytFlereAlternativ, opprettFlereAlternativ }) => {
