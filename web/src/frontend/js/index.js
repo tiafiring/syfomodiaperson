@@ -62,9 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const config = {
         config: {
             toggles: {
-                visEnhet: false,
-                visSokefelt: false,
-                visSaksbehandler: false
+
             },
             fnr: fnr,
             applicationName: 'Sykefravær',
