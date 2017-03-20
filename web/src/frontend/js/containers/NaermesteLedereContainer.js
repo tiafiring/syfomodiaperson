@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import NaermesteLedere from '../components/NaermesteLedere';
-import { getLedetekst } from 'digisyfo-npm';
+import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import Feilmelding from '../components/Feilmelding';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -26,10 +26,10 @@ export class NaermesteLedereSide extends Component {
         return (<Side tittel="Nærmeste ledere" aktivtMenypunkt={NAERMESTE_LEDER}>
         {
             (() => {
-                if (hentingFeilet) {
+                if (ikkeTilgang) {
+                    return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)} melding={getHtmlLedetekst('sykefravaer.veileder.feilmelding.melding', ledetekster)} />);
+                } else if (hentingFeilet) {
                     return <Feilmelding />;
-                } else if (ikkeTilgang) {
-                    return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)} melding={getLedetekst('sykefravaer.veileder.feilmelding.melding', ledetekster)} />);
                 } else if (henter) {
                     return <AppSpinner />;
                 }
@@ -64,7 +64,7 @@ export function mapStateToProps(state, ownProps) {
         ledere: state.ledere.data,
         henter: state.ledere.henter || state.navbruker.henter || state.ledetekster.henter,
         ledetekster: state.ledetekster.data,
-        hentingFeilet: state.ledere.hentingFeilet,
+        hentingFeilet: state.ledere.hentingFeilet || state.navbruker.hentingFeilet,
         navbruker: state.navbruker.data,
         ikkeTilgang: state.ledere.ikkeTilgang,
         fnr,

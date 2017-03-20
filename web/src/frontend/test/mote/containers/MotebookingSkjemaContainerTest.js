@@ -109,10 +109,10 @@ describe("MotebookingSkjemaContainer", () => {
             expect(props.henter).to.be.false;
         });
 
-        it("Skal returnere hentArbeidstakerFeilet når henting av arbeidstaker feiler", () => {
+        it("Skal returnere hentingFeilet når henting av arbeidstaker feiler", () => {
             state.arbeidstaker.hentingFeilet = true;
             const props = mapStateToProps(state);
-            expect(props.hentArbeidstakerFeilet).to.be.true;
+            expect(props.hentingFeilet).to.be.true;
         });
 
     });

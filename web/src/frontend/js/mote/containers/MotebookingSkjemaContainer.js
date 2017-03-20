@@ -15,12 +15,14 @@ export class MotebookingSkjemaContainer extends Component {
         hentArbeidstaker(fnr);
     }
     render() {
-        const { ledetekster, henter, skjermetBruker } = this.props;
+        const { ledetekster, henter, skjermetBruker, hentingFeilet } = this.props;
 
         if (henter) {
             return <AppSpinner />;
         } else if (skjermetBruker) {
             return <Feilmelding tittel = {getLedetekst('mote.motebookingskjemacontainer.tittel', ledetekster)} melding = {getHtmlLedetekst('mote.motebookingskjemacontainer.melding', ledetekster)} />;
+        } else if (hentingFeilet) {
+            return <Feilmelding />;
         }
         return <MotebookingSkjema {...this.props} />;
     }
@@ -32,6 +34,7 @@ MotebookingSkjemaContainer.propTypes = {
     hentArbeidstaker: PropTypes.func,
     henter: PropTypes.bool,
     skjermetBruker: PropTypes.bool,
+    hentingFeilet: PropTypes.bool,
     ledetekster: PropTypes.object,
 };
 
@@ -47,7 +50,7 @@ export function mapStateToProps(state) {
         hentLedereFeiletBool: state.ledere.hentingFeilet,
         skjermetBruker: state.moter.skjermetBruker,
         ledetekster: state.ledetekster.data,
-        hentArbeidstakerFeilet: state.arbeidstaker.hentingFeilet,
+        hentingFeilet: state.arbeidstaker.hentingFeilet,
     };
 }
 
