@@ -3,17 +3,16 @@
 <head>
     <title>Sykefravær</title>
     <meta charset="UTF-8">
-    <link href="{{{decoratorRoot}}}/internarbeidsflatedecorator/styles.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="{{{decoratorRoot}}}/internarbeidsflatedecorator/js/head.min.js" rel="stylesheet" />
 </head>
 <body>
-    {{=<% %>=}}
-    {{fragment.header-withmenu}}
-    <%={{ }}=%>
+    <div id="header"></div>
     <div id="maincontent" class="app-syfofront side-innhold">
         <div class="app-spinner blokk-xl" aria-label="Vent litt mens siden laster"></div>
     </div>
-    <script>
+
+ <script>
         window.APP_SETTINGS = {
             "REST_ROOT": "{{{restRoot}}}",
             "MOTEADMIN_REST_ROOT": "{{{moteAdminRestRoot}}}",
@@ -24,5 +23,6 @@
         };
     </script>
     <script src="{{{buildRoot}}}/{{{bundleFileName}}}?rev={{{timestamp}}}"></script>
+
 </body>
 </html>

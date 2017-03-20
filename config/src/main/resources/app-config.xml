@@ -22,6 +22,7 @@
     <resources>
         <baseUrl alias="modapp" mapToProperty="modapp"/>
         <rest alias="modiasyfoapi" mapToProperty="sykefravaerapi.fss"/>
+        <rest alias="iadecorator-js" mapToProperty="iadecorator"/>
         <rest alias="moteapifss" mapToProperty="moteapifss"/>
     </resources>
 
