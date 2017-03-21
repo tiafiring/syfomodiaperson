@@ -217,7 +217,7 @@ describe('moter', () => {
                         'navn': 'Oslo',
                         'epost': 'oslo@oslo.no',
                         'type': 'arbeidsgiver',
-                        'svartTidspunkt': '2016-11-17T12:57:16.597',
+                        'svartidspunkt': '2016-11-17T12:57:16.597',
                         'avvik': [],
                         'svar': [{
                             'tid': '2020-12-12T11:00:00Z',
@@ -282,7 +282,7 @@ describe('moter', () => {
                     'navn': 'Oslo',
                     'epost': 'oslo@oslo.no',
                     'type': 'arbeidsgiver',
-                    'svartTidspunkt': '2016-11-17T12:57:16.597',
+                    'svartidspunkt': '2016-11-17T12:57:16.597',
                     'avvik': [],
                     'svar': [{
                         'tid': '2020-12-12T11:00:00Z',

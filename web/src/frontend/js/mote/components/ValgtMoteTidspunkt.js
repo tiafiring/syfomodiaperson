@@ -51,7 +51,7 @@ const ValgtMoteTidspunkt = ({ ledetekster, deltakere, valgtAlternativ, bekreftet
                             }
                         }
 
-                        if (deltaker.svartTidspunkt && new Date(deltaker.svartTidspunkt) > new Date(deltaker.svar[svarIndex].created)) {
+                        if (deltaker.svartidspunkt && new Date(deltaker.svartidspunkt) > new Date(deltaker.svar[svarIndex].created)) {
                             if (deltaker.svar[svarIndex].valgt === true) {
                                 className = 'motestatus__svar--valgtTidspunkt';
                             } else {

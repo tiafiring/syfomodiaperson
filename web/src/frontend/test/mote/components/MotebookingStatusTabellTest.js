@@ -101,7 +101,7 @@ describe("MotebookingStatus", () => {
                 avvik: [],
                 hendelser: [],
                 epost: "***REMOVED***",
-                svartTidspunkt: "2012-12-12T11:00:00Z",
+                svartidspunkt: "2012-12-12T11:00:00Z",
                 svar: [{
                     "tid": "2012-12-12T11:00:00Z",
                     "created": "2011-12-12T11:00:00Z",

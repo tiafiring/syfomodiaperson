@@ -37,7 +37,7 @@ export const mapStateToProps = (state, ownProps) => {
 
     const aktoer = aktivtMote && aktivtMote.deltakere.filter((deltaker) => { return deltaker.type === 'Bruker'; })[0];
     const fikkIkkeOpprettetVarsel = aktoer && fikkIkkeMoteOpprettetVarsel(aktoer);
-    if (aktoer && !aktoer.svartTidspunkt && fikkIkkeOpprettetVarsel) {
+    if (aktoer && !aktoer.svartidspunkt && fikkIkkeOpprettetVarsel) {
         aktivtMote = Object.assign({}, aktivtMote, {
             deltakere: aktivtMote.deltakere.filter((deltaker) => { return deltaker.type !== 'Bruker'; }),
         });

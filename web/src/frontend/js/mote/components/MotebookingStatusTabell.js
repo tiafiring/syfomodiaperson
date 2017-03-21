@@ -36,9 +36,9 @@ const MotebookingStatusTabell = ({ ledetekster, fnr, deltakere, alternativer, st
                     deltakere && deltakere
                         .map((deltaker, index) => {
                             return (<th scope="col" className="motestatus__deltaker" key={index}>
-                                    <strong>{deltakertyper[deltaker.type.toLowerCase()]}</strong>
-                                    <span>{deltaker.navn}</span>
-                                </th>)
+                                <strong>{deltakertyper[deltaker.type.toLowerCase()]}</strong>
+                                <span>{deltaker.navn}</span>
+                            </th>)
                         })
                 }
             </tr>
@@ -49,7 +49,7 @@ const MotebookingStatusTabell = ({ ledetekster, fnr, deltakere, alternativer, st
                     .map((alternativ, index) => {
                         let svarkolonne = <td key={arbeidsgiverDeltaker.svar[index].id} />;
                         if (visVelgTidspunkt && arbeidsgiverDeltaker.svar[index].valgt) {
-                            svarkolonne = (<td key={arbeidsgiverDeltaker.svar[index].id} >
+                            svarkolonne = (<td key={arbeidsgiverDeltaker.svar[index].id}>
                                 <Link to={`/sykefravaer/${fnr}/mote/bekreft/${alternativ.id}`} className="js-velg-tidspunkt">{getLedetekst('mote.bookingstatus.velgtidspunkt', ledetekster)}</Link>
                             </td>);
                         }
@@ -63,7 +63,7 @@ const MotebookingStatusTabell = ({ ledetekster, fnr, deltakere, alternativer, st
                             {
                                 deltakere.map((deltaker, index2) => {
                                     let className = 'motestatus__svar';
-                                    if (deltaker.svartTidspunkt && new Date(deltaker.svartTidspunkt) > new Date(deltaker.svar[index].created)) {
+                                    if (deltaker.svartidspunkt && new Date(deltaker.svartidspunkt) > new Date(deltaker.svar[index].created)) {
                                         if (deltaker.svar[index].valgt === true) {
                                             className = 'motestatus__svar--valgtTidspunkt';
                                         } else {

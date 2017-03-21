@@ -48,7 +48,7 @@ describe("MotebookinIkon", () => {
                     valgt: false,
                 }
             ],
-            svartTidspunkt: "2012-12-12T11:12:00Z",
+            svartidspunkt: "2012-12-12T11:12:00Z",
             type: "arbeidsgiver",
             navn: "navn"
         };
@@ -76,7 +76,7 @@ describe("MotebookinIkon", () => {
                     valgt: false,
                 }
             ],
-            svartTidspunkt: "2012-12-12T11:12:00Z",
+            svartidspunkt: "2012-12-12T11:12:00Z",
             type: "arbeidsgiver",
             navn: "navn",
         };

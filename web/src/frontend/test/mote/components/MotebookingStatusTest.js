@@ -148,7 +148,7 @@ describe("MotebookingStatus", () => {
                 "navn": "***REMOVED***",
                 "epost": "***REMOVED***",
                 "type": "arbeidsgiver",
-                "svartTidspunkt": "2016-11-22T12:52:06.489Z",
+                "svartidspunkt": "2016-11-22T12:52:06.489Z",
                 "avvik": [],
                 "hendelser": [],
                 "svar": [{
@@ -213,7 +213,7 @@ describe("MotebookingStatus", () => {
                     "navn": "***REMOVED***",
                     "epost": "***REMOVED***",
                     "type": "arbeidsgiver",
-                    "svartTidspunkt": "2016-11-22T12:52:06.489Z",
+                    "svartidspunkt": "2016-11-22T12:52:06.489Z",
                     "avvik": [],
                     "hendelser": [],
                     "svar": [{
@@ -283,7 +283,7 @@ describe("MotebookingStatus", () => {
                     "navn": "***REMOVED***",
                     "epost": "***REMOVED***",
                     "type": "arbeidsgiver",
-                    "svartTidspunkt": "2016-11-22T12:52:06.489Z",
+                    "svartidspunkt": "2016-11-22T12:52:06.489Z",
                     "hendelser": [],
                     "svar": [{
                         "id": 344,
@@ -347,7 +347,7 @@ describe("MotebookingStatus", () => {
                     "navn": "***REMOVED***",
                     "epost": "***REMOVED***",
                     "type": "arbeidsgiver",
-                    "svartTidspunkt": "2016-11-22T12:52:06.489Z",
+                    "svartidspunkt": "2016-11-22T12:52:06.489Z",
                     "hendelser": [],
                     "svar": [{
                         "id": 344,
@@ -366,7 +366,7 @@ describe("MotebookingStatus", () => {
                     "deltakerUuid": "3b0dc3b2-587c-4105-98df-99b4205d3ce0",
                     "navn": "Sygve Sykmeldt",
                     "type": "Bruker",
-                    "svartTidspunkt": "2016-11-22T12:52:06.489Z",
+                    "svartidspunkt": "2016-11-22T12:52:06.489Z",
                     "hendelser": [{
                         "resultat": "RESERVERT",
                         "varseltype": "OPPRETTET",
