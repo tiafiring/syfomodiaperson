@@ -10,7 +10,7 @@ var dev = {
     timestamp: timestamp,
     buildRoot: 'http://localhost:3040/assets',
     restRoot: 'http://localhost:8084/modiasyforest/rest',
-    moteAdminRestRoot: 'http://localhost:8185/mote/rest',
+    moteAdminRestRoot: 'http://localhost:8196/mote/rest',
     bundleFileName: 'bundle.js',
     decoratorRoot: 'https://modapp-q1.adeo.no',
     websocketProtocol: 'ws',
