@@ -1,10 +1,10 @@
 .sykmeldingPerioder {
 
-	margin-bottom: 2rem; 
+	margin-bottom: 2em; 
 
 	.nokkelopplysning:not(:only-child) {
-		padding-bottom: 1rem;
-		margin-bottom: 1rem;
+		padding-bottom: 1em;
+		margin-bottom: 1em;
 		border-bottom: 1px solid @ikonGraa;
 	}
 
@@ -15,20 +15,23 @@
 		display: flex; 
 
 		.nokkelopplysning {
-			margin-right: 2rem; 
-			width: 60%;
+			width: 50%;
+			padding-right: 1em;
 		}
+	}
+
+	.rad-container:last-child .nokkelopplysning {
+		margin-bottom: 0;
 	}
 }
 
 /* Flere opplysninger fra den som har sykmeldt deg */
 
 .sykmeldingSeksjon {
-	margin-bottom: 2rem; 
+	margin-bottom: 2em; 
 	border-bottom: 1px solid @ikonGraa; 
 
-	&:last-of-type
-	 {
+	&:last-of-type {
 		margin: 0; 
 		border: 0; 
 	}
@@ -36,6 +39,6 @@
 
 .sykmeldingSeksjon__tittel {
 	.mixin-typo-undertittel();
-	margin-bottom: 2rem; 
+	margin-bottom: 2em; 
 	margin-top: 0;
 }
