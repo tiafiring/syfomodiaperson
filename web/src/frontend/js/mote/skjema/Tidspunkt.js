@@ -3,13 +3,12 @@ import TextField from '../../components/TextField';
 import { Field } from 'redux-form';
 import { formaterTid, formaterDato } from '../../utils/index';
 
-const Tidspunkt = ({ tidspunkt, tidspunktNummerOffset }) => {
-    const offset = tidspunktNummerOffset || 0;
+const Tidspunkt = ({ tidspunkt }) => {
     const datoName = `tidspunkter[${tidspunkt}].dato`;
     const klokkeslettName = `tidspunkter[${tidspunkt}].klokkeslett`;
 
-    return (<div key={tidspunkt} className="motetidspunkter__tidspunkt blokk js-tidspunkt">
-        <h4 className="typo-element blokk--s">Alternativ {tidspunkt + 1 + offset}</h4>
+    return (<div className="motetidspunkter__tidspunkt blokk js-tidspunkt">
+        <h4 className="typo-element blokk--s">Nytt tidspunkt</h4>
         <div className="blokk">
             <div className="grid">
                 <div className="unit half">
@@ -33,7 +32,6 @@ const Tidspunkt = ({ tidspunkt, tidspunktNummerOffset }) => {
 
 Tidspunkt.propTypes = {
     tidspunkt: PropTypes.number,
-    tidspunktNummerOffset: PropTypes.number,
 };
 
 

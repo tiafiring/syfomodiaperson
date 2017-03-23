@@ -61,9 +61,7 @@ render(<Provider store={store}>
 document.addEventListener('DOMContentLoaded', () => {
     const config = {
         config: {
-            toggles: {
-
-            },
+            toggles: {},
             fnr: fnr,
             applicationName: 'Sykefravær',
         }

@@ -3,6 +3,7 @@ import { takeEvery } from 'redux-saga';
 import { get } from '../../api/index';
 import * as actions from '../actions/arbeidstaker_actions';
 import { HENT_ARBEIDSTAKER_FORESPURT } from '../actions/actiontyper';
+import { log } from 'digisyfo-npm';
 
 export function* hentArbeidstaker(action) {
     yield put(actions.henterArbeidstaker());
@@ -10,6 +11,7 @@ export function* hentArbeidstaker(action) {
         const data = yield call(get, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/brukerinfo/${action.fnr}`);
         yield put(actions.arbeidstakerHentet(data));
     } catch (e) {
+        log(e);
         yield put(actions.hentArbeidstakerFeilet());
     }
 }

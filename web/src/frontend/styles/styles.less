@@ -1,8 +1,4 @@
 @nodeModulesPath: "node_modules/";
-@modigFrontendBaseUrl: "../node_modules/modig-frontend/modig-frontend-ressurser/src/main/resources/less";
-@import "@{modigFrontendBaseUrl}/includes/mixins/mixins-knapper";
-@import "@{modigFrontendBaseUrl}/includes/mixins/mixins-utils";
-@import "@{modigFrontendBaseUrl}/includes/variables";
 
 @import "~nav-frontend-core/less/styles";
 @import "~nav-frontend-typografi-design/less/styles";
@@ -25,7 +21,6 @@
 @import "_opplysninger";
 @import "_navigasjon";
 @import "_navigasjonspanel";
-@import "_motestatus";
 @import "_utils";
 @import "_varselstripe";
 @import "_media";
@@ -38,17 +33,20 @@
 @import "_radiofaner";
 @import "_textfieldLocked";
 @import "_lightbox";
-@import "_epostinnhold";
-@import "_motebookingSkjema";
 @import "_inngangspanel";
 @import "_sykmelding";
 @import "_sykmeldingArbeidsgiver";
 @import "_utvidbar";
-@import "_til-modig-frontend";
+@import "_motestatus";
+@import "_moteEpostinnhold";
+@import "_motebookingSkjema";
+@import "_moteBekreftetTidspunkt";
 
 @greenLight: #63b282;
 @blueLight: #c3ddf4;
 @textColor: #3e3832;
+@skjermLiten: 30em;
+@skjermMedium: 40em;
 
 body {
   background-color: #f1f1f1;
@@ -81,21 +79,25 @@ body {
         margin-top: 20px;
         margin-bottom: 0; 
     }
+
+    a {
+      .lenke;
+    }
 }
 
-.lenke {
-}
-
-.modiasyfoscroll {
-  overflow-y: scroll;
+a {
+  text-decoration: none;
 }
 
 button.lenke {
   padding: 0;
+  border-left: 0;
+  border-top: 0;
+  border-right: 0;
   background-color: transparent;
-  border: 0;
-  color: #0067c5;
-  border-bottom: 1px solid #b7b1a9;
-  text-decoration: none;
   cursor: pointer;
+}
+
+.knapp--enten {
+  margin-right: 2em;
 }

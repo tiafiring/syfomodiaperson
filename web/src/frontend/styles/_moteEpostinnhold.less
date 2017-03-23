@@ -1,34 +1,35 @@
-.epostinnhold__mottakere {    
+.epostinnhold__tittel {
+  .mixin-typo-innholdstittel();
+  margin: 0 0 1em 0;
+}
+
+.epostinnhold__mottaker {    
     h3 {
         .mixin-typo-etikettLiten();
         .nedtonet;
-        margin-bottom: .25rem;
+        margin-bottom: .25em;
     }
 }
 
 .epostinnhold__emne, .epostinnhold__innhold {
-    padding: 1rem;
+    padding: 1em;
     border: 1px dashed @ikonGraa;
     background: lighen(@ikonGraa, 20%);
 }
 
 .epostinnhold__emne {
-    margin-bottom: .5rem;
+    margin-bottom: .5em;
 }
 
 .epostinnhold__innhold {
-    margin-bottom: 2rem;
+    margin-bottom: 2em;
 }
 
-.epostinnhold_infoboks {
+.epostinnhold__forhandsvis {
   border: dotted 1px #979797;
-  padding: 1rem;
-  margin-bottom: 1rem;
+  padding: 1em;
+  margin-bottom: 1em;
   background-color: #ededed;
-}
-
-.epostinnhold_lenke {
-  margin-right: 2em;
 }
 
 .epostinnhold__deltakere {
@@ -39,17 +40,14 @@
   margin-bottom: 2em;
 }
 
-.epostinnhold__ikke-valgt {
-  color: black;
-}
-
 .epostinnhold__knapp {
-  padding: 0;
-  border-bottom: solid 1px;
+  margin-right: 1em;
 }
 
-.epostinnhold_avgrensning_bunn {
-  padding-bottom: 2rem;
-  border-bottom: 1px solid @ikonGraa;
-}
+.epostinnhold__knapp--ikkeValgt {
+  color: @navTekst;
 
+  &:hover {
+    color: @lenkeBlaa;
+  }
+}

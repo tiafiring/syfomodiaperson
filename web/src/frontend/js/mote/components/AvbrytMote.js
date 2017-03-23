@@ -1,84 +1,59 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Varselstripe, getLedetekst } from 'digisyfo-npm';
-import AppSpinner from '../../components/AppSpinner';
-import { fikkMoteOpprettetVarsel } from '../utils/index';
+import { proptypes as moterPropTypes } from 'moter-npm';
+import { connect } from 'react-redux';
+import * as epostinnholdActions from '../actions/epostinnhold_actions';
+import Innholdsviser from './Innholdsviser';
+import Epostmottakere from './Epostmottakere';
 
-const AvbrytMote = ({ ledetekster, henterInnhold, arbeidsgiver, sykmeldt, onSubmit, avbrytHref, avbryter, avbrytFeilet, varselinnhold, valgtDeltaker = arbeidsgiver, hentAvbrytMoteEpostinnhold, setValgtDeltaker }) => {
-    const sykmeldtValgt = sykmeldt.deltakerUuid === valgtDeltaker.deltakerUuid ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
-    const arbeidsgiverValgt = arbeidsgiver.deltakerUuid === valgtDeltaker.deltakerUuid ? 'epostinnhold__valgt' : 'epostinnhold__ikke-valgt';
+export const mapStateToInnholdsviserProps = (state) => {
+    return {
+        epostinnhold: state.epostinnhold.data,
+        henter: state.epostinnhold.henter === true,
+        hentingFeilet: state.epostinnhold.hentingFeilet === true,
+    };
+};
 
-    let innhold;
-    if (henterInnhold) {
-        innhold = <AppSpinner />;
-    } else {
-        innhold = (<div>
-            {varselinnhold.emne && <div className="epostinnhold_infoboks">
-                <p>{varselinnhold.emne}</p>
-            </div>
-            }
-            <div className="epostinnhold_infoboks">
-                <div dangerouslySetInnerHTML={{ __html: varselinnhold.innhold }}></div>
-            </div>
-        </div>);
-    }
+const actions = Object.assign({}, epostinnholdActions, {
+    hentEpostinnhold: epostinnholdActions.hentAvbrytMoteEpostinnhold,
+});
+
+export const InnholdsviserContainer = connect(mapStateToInnholdsviserProps, actions)(Innholdsviser);
+
+const AvbrytMote = (props) => {
+    const { ledetekster, mote, avbrytFeilet, avbryter, avbrytHref, onSubmit } = props;
 
     return (<div className="epostinnhold">
-        <h2 className="typo-innholdstittel">{getLedetekst('mote.avbrytmote.overskrift', ledetekster)}</h2>
-
-        <div className="epostinnhold__mottakere blokk">
-            <h3>{getLedetekst('mote.avbrytmote.sendes-til-arbeidsgiver', ledetekster)}</h3>
-            <p>{arbeidsgiver.navn}</p>
-        </div>
-
-        { fikkMoteOpprettetVarsel(sykmeldt) &&
-        <div className="epostinnhold__mottakere blokk">
-            <h3>{getLedetekst('mote.avbrytmote.sendes-til-sykmeldt', ledetekster)}</h3>
-            <p>{sykmeldt.navn}</p>
-        </div>
-        }
-
-        <h2>{getLedetekst('mote.avbrytmote.informasjon.sendes.til.partene', ledetekster)}</h2>
-        <div className="epostinnhold__deltakere">
-            <button className={`epostinnhold__knapp tekst-knapp ${arbeidsgiverValgt}`} onClick={() => {
-                setValgtDeltaker(arbeidsgiver);
-                hentAvbrytMoteEpostinnhold(arbeidsgiver.deltakerUuid);
-            }}>{getLedetekst('mote.avbrytmote.arbeidsgiver', ledetekster)}</button>
-            { fikkMoteOpprettetVarsel(sykmeldt) &&
-            <button className={`epostinnhold__knapp tekst-knapp ${sykmeldtValgt}`} onClick={() => {
-                setValgtDeltaker(sykmeldt);
-                hentAvbrytMoteEpostinnhold(sykmeldt.deltakerUuid);
-            }}>{getLedetekst('mote.avbrytmote.sykmeldt', ledetekster)}</button>
-            }
-        </div>
-
-        {innhold}
-
+        <h2 className="epostinnhold__tittel">{getLedetekst('mote.avbrytmote.overskrift', ledetekster)}</h2>
+        <Epostmottakere mote={mote} ledetekster={ledetekster} />
+        <InnholdsviserContainer mote={mote} ledetekster={ledetekster} />
         <div aria-live="polite" role="alert">
-            { avbrytFeilet && <div className="blokk"><Varselstripe type="feil"><p>{getLedetekst('mote.avbrytmote.feil', ledetekster)}</p></Varselstripe></div>}
+            { avbrytFeilet && (<div className="blokk">
+                <Varselstripe type="feil">
+                    <p>{getLedetekst('mote.avbrytmote.feil', ledetekster)}</p>
+                </Varselstripe>
+            </div>)}
         </div>
-
-        <div>
-            <button disabled={avbryter} className="knapp blokk--s luft__right" onClick={onSubmit}>{getLedetekst('mote.avbrytmote.knapp.submit', ledetekster)}</button>
-            <Link to={avbrytHref}>{getLedetekst('mote.avbrytmote.knapp.avbryt', ledetekster)}</Link>
+        <div className="blokk--s">
+            <button
+                disabled={avbryter}
+                className="knapp knapp--enten"
+                onClick={onSubmit}>{getLedetekst('mote.avbrytmote.knapp.submit', ledetekster)}
+                    { avbryter && <span className="knapp__spinner" />}
+                </button>
+            <Link className="lenke" to={avbrytHref}>{getLedetekst('mote.avbrytmote.knapp.avbryt', ledetekster)}</Link>
         </div>
     </div>);
 };
 
 AvbrytMote.propTypes = {
-    arbeidsgiver: PropTypes.object,
     ledetekster: PropTypes.object,
-    sykmeldt: PropTypes.object,
-    varselinnhold: PropTypes.object,
-    valgtDeltaker: PropTypes.object,
     onSubmit: PropTypes.func,
-    setValgtDeltaker: PropTypes.func,
-    setValgtKanal: PropTypes.func,
-    hentAvbrytMoteEpostinnhold: PropTypes.func,
     avbrytHref: PropTypes.string,
     avbryter: PropTypes.bool,
     avbrytFeilet: PropTypes.bool,
-    henterInnhold: PropTypes.bool,
+    mote: moterPropTypes.mote,
 };
 
 export default AvbrytMote;

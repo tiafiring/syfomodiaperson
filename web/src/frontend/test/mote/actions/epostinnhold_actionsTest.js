@@ -6,12 +6,12 @@ describe("epostinnhold_actions", () => {
     it("Har en hentBekreftMoteEpostinnhold()-funksjon som returnerer riktig action", () => {
         const moteUuid = "olsen";
         const motedeltakerUuid = "hansen";
-        const valgtAlternativId = "123"
-        const action = actions.hentBekreftMoteEpostinnhold(motedeltakerUuid, valgtAlternativId);
+        const bekreftetAlternativId = "123"
+        const action = actions.hentBekreftMoteEpostinnhold(motedeltakerUuid, bekreftetAlternativId);
         expect(action).to.deep.equal({
             type: "HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT",
             motedeltakerUuid: "hansen",
-            valgtAlternativId: "123"
+            bekreftetAlternativId: "123"
         });
     });
 
@@ -46,18 +46,6 @@ describe("epostinnhold_actions", () => {
             type: "EPOSTINNHOLD_HENTET",
             eposttype: "olsen",
             data: {
-                id: 1
-            }
-        });
-    })
-
-    it("Har en setValgtDeltaker()-funksjon som returnerer riktig action", () => {
-        const action = actions.setValgtDeltaker({
-            id: 1
-        });
-        expect(action).to.deep.equal({
-            type: "SET_VALGT_DELTAKER",
-            valgtDeltaker: {
                 id: 1
             }
         });

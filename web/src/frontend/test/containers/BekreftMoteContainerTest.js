@@ -41,24 +41,6 @@ describe("BekreftMoteContainer", () => {
             expect(bekreftMote.getCall(0).args).to.deep.equal(["Olsen", 4545, "***REMOVED***"]);
         });
 
-        describe("Dersom alternativ finnes", () => {
-
-            let compo;
-
-            beforeEach(() => {
-                const alternativ = {
-                    "id": 328,
-                    "tid": "2020-12-12T11:00:00Z",
-                    "sted": "Oslo ",
-                    "valgt": false
-                };
-                const mote = {
-                    status: "OPPRETTET",
-                    moteUuid: "123"
-                }
-                compo = shallow(<BekreftMoteSide hentMoter={hentMoter} alternativ={alternativ} mote={mote} deltaker={deltaker} />)
-            })
-        });
 
         describe("Dersom alternativ ikke finnes", () => {
 
@@ -78,7 +60,8 @@ describe("BekreftMoteContainer", () => {
 
             let compo;
             let mote;
-            let alternativ
+            let alternativ;
+            let hentBekreftMoteEpostinnhold;
 
             beforeEach(() => {
                 alternativ = {
@@ -97,14 +80,23 @@ describe("BekreftMoteContainer", () => {
                         deltakerUuid: "uuid",
                     }]
                 }
-                compo = shallow(<BekreftMoteSide hentBekreftMoteEpostinnhold={ () => {} } hentMoter={hentMoter} alternativ={alternativ} mote={mote} deltaker={deltaker} />)
+                hentBekreftMoteEpostinnhold = sinon.spy();
+                compo = shallow(<BekreftMoteSide
+                    hentBekreftMoteEpostinnhold={hentBekreftMoteEpostinnhold}
+                    hentMoter={hentMoter}
+                    alternativ={alternativ}
+                    mote={mote}
+                    deltaker={deltaker} />)
             })
 
 
             it("Skal vise BekreftMote", () => {
                 expect(compo.find(BekreftMote)).to.have.length(1);
                 expect(typeof compo.find(BekreftMote).prop("onSubmit")).to.equal("function");
-                expect(compo.find(BekreftMote).prop("deltaker")).to.deep.equal(deltaker)
+            });
+
+            it("Skal ikke hente møter", () => {
+                expect(hentMoter.called).to.be.false;
             });
 
         });
@@ -213,28 +205,6 @@ describe("BekreftMoteContainer", () => {
                 "valgt": false
             });
         });
-
-        it("Skal returnere deltaker", () => {
-            const props = mapStateToProps(state, ownProps);
-            expect(props.arbeidsgiver).to.deep.equal({
-                "deltakerUuid": "85a12263-d955-4103-b172-bf135df5f37a",
-                "navn": "***REMOVED***",
-                "epost": "***REMOVED***",
-                "type": "arbeidsgiver",
-                "avvik": [],
-                "svar": [{
-                    "id": 328,
-                    "tid": "2020-12-12T11:00:00Z",
-                    "sted": "Oslo ",
-                    "valgt": false
-                }, {
-                    "id": 329,
-                    "tid": "2020-09-09T07:00:00Z",
-                    "sted": "Oslo ",
-                    "valgt": false
-                }]
-            });
-        })
 
         it("Skal returnere henterMoterBool når det hentes møter", () => {
             state.moter.henter = true;

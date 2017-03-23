@@ -137,11 +137,11 @@ export function avbryterMote(uuid) {
     };
 }
 
-export function bekreftMote(moteUuid, valgtAlternativId, fnr) {
+export function bekreftMote(moteUuid, bekreftetAlternativId, fnr) {
     return {
         type: actions.BEKREFT_MOTE_FORESPURT,
         moteUuid,
-        valgtAlternativId,
+        bekreftetAlternativId,
         fnr,
     };
 }
@@ -152,11 +152,11 @@ export function bekrefterMote() {
     };
 }
 
-export function moteBekreftet(moteUuid, valgtAlternativId, bekreftetTidspunkt) {
+export function moteBekreftet(moteUuid, bekreftetAlternativId, bekreftetTidspunkt) {
     return {
         type: actions.MOTE_BEKREFTET,
         moteUuid,
-        valgtAlternativId,
+        bekreftetAlternativId,
         bekreftetTidspunkt,
     };
 }

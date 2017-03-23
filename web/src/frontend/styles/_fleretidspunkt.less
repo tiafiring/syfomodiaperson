@@ -1,42 +1,21 @@
 .fleretidspunkt {
-  background-color: #f1f1f1;
-  padding: 1rem;
-  border: solid #b7b1a9 1px;
-  margin-top: 1rem;
-  margin-bottom: 3rem;
+  background-color: @bakgrunnGraa;
+  padding: 1em 1em 1.5em;
+  border: solid @ikonGraa 1px;
+  margin-top: 2em;
+  position: relative;
 }
 
 .fleretidspunkt:before {
   content: "";
-  height: 42px;
-  width: 42px;
-  margin-left: 240px;
-  position: absolute;
-  border-left: solid #b7b1a9 1px;
-  border-top: solid #b7b1a9 1px;
-  background-color: #f1f1f1;
   display: block;
-  transform: translateY(-90%) rotate(45deg) scale(1.0,1.0) skew(5deg, 5deg);
-}
-
-.dytt-hoyre {
-  margin-right: 1rem;
-}
-
-.js-nyetidspunkt {
-  margin-bottom: 1rem;
-}
-
-.tekst-knapp {
-  background-color: transparent;
-  border: none;
-  color: #0067c5;
-  cursor: pointer;
-  font-weight: 600;
-  font-family: Arial, Sans-serif;
-  letter-spacing: .0625em;
-  line-height: 1;
-  font-size: 1em;
-  padding: 0.5rem;
-  margin-right: 1rem;
+  height: 1.5em;
+  width: 1.5em;
+  left: 8em;
+  position: absolute;
+  top: 0;
+  border-left: solid @ikonGraa 1px;
+  border-top: solid @ikonGraa 1px;
+  background-color: @bakgrunnGraa;
+  transform: translateY(-50%) rotate(45deg) skew(5deg, 5deg);
 }

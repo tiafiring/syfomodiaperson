@@ -467,7 +467,7 @@ describe('moter', () => {
                         'id': 7
                     }]
                 }],
-                'valgtAlternativ': {
+                'bekreftetAlternativ': {
                     'id': 6,
                     'tid': '2012-12-12T11:00:00Z',
                     'sted': 'Oslo by',
