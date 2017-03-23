@@ -85,7 +85,7 @@
     });
 
     function moteRestFssUrl() {
-        if (window.location.host.includes('localhost')) {
+        if (window.location.host.indexOf('localhost') > -1) {
             return 'http://localhost:8196/mote/rest/internal/mocksetup';
         } else {
             return '../../mote/rest/internal/mocksetup';
