@@ -4,7 +4,7 @@ import { toDatePrettyPrint, getLedetekst } from 'digisyfo-npm';
 import SykmeldingPeriodeInfo from './SykmeldingPeriodeInfo';
 
 const PeriodeListe = ({ perioder, arbeidsgiver, ledetekster }) => {
-    return (<ul className="teaser-punktliste js-perioder">
+    return (<ul className="inngangspanel__punktliste js-perioder">
         {perioder.map((periode, index) => {
             return (<SykmeldingPeriodeInfo key={index} periode={periode} arbeidsgiver={arbeidsgiver} Element="li" ledetekster={ledetekster} />);
         })}
