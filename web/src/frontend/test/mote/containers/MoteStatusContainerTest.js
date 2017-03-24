@@ -105,7 +105,7 @@ describe("MotestatusContainerTest", () => {
                 moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
                 status: "OPPRETTET",
                 deltakere: [{
-                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    svartidspunkt: "2011-12-12T11:00:00Z",
                     type: "Bruker",
                     hendelser: [{
                         resultat: "RESERVERT",
@@ -125,7 +125,7 @@ describe("MotestatusContainerTest", () => {
                         resultat: "RESERVERT",
                         varseltype: "OPPRETTET"
                     }],
-                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    svartidspunkt: "2011-12-12T11:00:00Z",
                     svar: []
                 }],
                 alternativer: [],
@@ -141,15 +141,15 @@ describe("MotestatusContainerTest", () => {
                 moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
                 status: "OPPRETTET",
                 deltakere: [{
-                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    svartidspunkt: "2011-12-12T11:00:00Z",
                     type: "Bruker",
                     svar: []
                 },{
-                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    svartidspunkt: "2011-12-12T11:00:00Z",
                     type: "arbeidsgiver",
                     svar: []
                 },{
-                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    svartidspunkt: "2011-12-12T11:00:00Z",
                     type: "testtype",
                     svar: []
                 }],
@@ -160,15 +160,15 @@ describe("MotestatusContainerTest", () => {
                 moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
                 status: "OPPRETTET",
                 deltakere: [{
-                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    svartidspunkt: "2011-12-12T11:00:00Z",
                     type: "testtype",
                     svar: []
                 },{
                     type: "Bruker",
-                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    svartidspunkt: "2011-12-12T11:00:00Z",
                     svar: []
                 },{
-                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    svartidspunkt: "2011-12-12T11:00:00Z",
                     type: "arbeidsgiver",
                     svar: []
                 }],
@@ -182,7 +182,7 @@ describe("MotestatusContainerTest", () => {
                 moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
                 status: "OPPRETTET",
                 deltakere: [{
-                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    svartidspunkt: "2011-12-12T11:00:00Z",
                     type: "arbeidsgiver",
                     svar: [{
                         id: 1,
@@ -211,7 +211,7 @@ describe("MotestatusContainerTest", () => {
                 moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
                 status: "OPPRETTET",
                 deltakere: [{
-                    svartTidspunkt: "2011-12-12T11:00:00Z",
+                    svartidspunkt: "2011-12-12T11:00:00Z",
                     type: "arbeidsgiver",
                     svar: [{
                         id: 3,

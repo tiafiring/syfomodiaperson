@@ -134,7 +134,13 @@ export const MotebookingSkjema = ({
             </div>
 
             <div className="knapperad blokk">
-                <input type="submit" className="knapp" value="Send" disabled={sender} />
+                <button
+                    type="submit"
+                    className="knapp"
+                    disabled={sender}>
+                    Send
+                    { sender && <span className="knapp__spinner" /> }
+                </button>
             </div>
         </form>
     </div>);

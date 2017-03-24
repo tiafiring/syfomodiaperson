@@ -3,6 +3,7 @@ import { takeEvery } from 'redux-saga';
 import { post, get } from '../../api/index';
 import history from '../../history';
 import * as actions from '../actions/moter_actions';
+import { log } from 'digisyfo-npm';
 
 export function* opprettMote(action) {
     yield put(actions.oppretterMote());
@@ -10,6 +11,7 @@ export function* opprettMote(action) {
         yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter`, action.data);
         yield put(actions.moteOpprettet(action.data));
     } catch (e) {
+        log(e);
         yield put(actions.opprettMoteFeilet());
     }
 }
@@ -20,6 +22,7 @@ export function* hentMoter(action) {
         const data = yield call(get, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter?fnr=${action.fnr}&henttpsdata=true`);
         yield put(actions.moterHentet(data));
     } catch (e) {
+        log(e);
         if (e.message === '403') {
             yield put(actions.ikkeTilgang());
         } else {
@@ -35,6 +38,7 @@ export function* avbrytMote(action) {
         yield put(actions.moteAvbrutt(action.uuid));
         history.replace(`/sykefravaer/${action.fnr}/mote`);
     } catch (e) {
+        log(e);
         yield put(actions.avbrytMoteFeilet());
     }
 }
@@ -42,10 +46,11 @@ export function* avbrytMote(action) {
 export function* bekreftMote(action) {
     yield put(actions.bekrefterMote());
     try {
-        yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.moteUuid}/bekreft?valgtAlternativId=${action.valgtAlternativId}`);
-        yield put(actions.moteBekreftet(action.moteUuid, action.valgtAlternativId, new Date()));
+        yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.moteUuid}/bekreft?bekreftetAlternativId=${action.bekreftetAlternativId}`);
+        yield put(actions.moteBekreftet(action.moteUuid, action.bekreftetAlternativId, new Date()));
         history.replace(`/sykefravaer/${action.fnr}/mote`);
     } catch (e) {
+        log(e);
         yield put(actions.bekreftMoteFeilet());
     }
 }
@@ -56,6 +61,7 @@ export function* opprettFlereAlternativ(action) {
         yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.moteUuid}/nyealternativer`, action.data.alternativer);
         yield put(actions.opprettFlereAlternativBekreftet(action.data, action.moteUuid));
     } catch (e) {
+        log(e);
         yield put(actions.opprettFlereAlternativFeilet());
     }
 }

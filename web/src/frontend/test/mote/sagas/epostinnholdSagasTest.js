@@ -23,7 +23,7 @@ describe("epostinnholdSagas", () => {
         });
 
         it("Skal deretter prøve å hente epostinnhold", () => {
-            const nextCall = call(get, "http://tjenester.nav.no/moteadmin/epostinnhold/BEKREFTET?motedeltakeruuid=deltakerUuid&valgtAlternativId=alternativId");
+            const nextCall = call(get, "http://tjenester.nav.no/moteadmin/epostinnhold/BEKREFTET?motedeltakeruuid=deltakerUuid&bekreftetAlternativId=alternativId");
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 

@@ -36,7 +36,10 @@ export class FyllUtVirksomhet extends Component {
             {
                 henter && <p className="js-henter">{getLedetekst('mote.bookingskjema.fyllutvirksomhet.orgnummer.henter', ledetekster)}</p>
             }
-            <p className="skjema__feilmelding js-feilmelding" role="alert" aria-live="polite">{erFeil && !henter && getLedetekst('mote.bookingskjema.fyllutvirksomhet.orgnummer.feilmelding', ledetekster)}</p>
+            <p
+                className="skjema__feilmelding js-feilmelding"
+                role="alert"
+                aria-live="polite">{erFeil && !henter && getLedetekst('mote.bookingskjema.fyllutvirksomhet.orgnummer.feilmelding', ledetekster)}</p>
         </div>);
     }
 }

@@ -1,4 +1,4 @@
-import { HENTER_EPOSTINNHOLD, EPOSTINNHOLD_HENTET, HENT_EPOSTINNHOLD_FEILET, SET_VALGT_DELTAKER } from '../actions/actiontyper';
+import { HENTER_EPOSTINNHOLD, EPOSTINNHOLD_HENTET, HENT_EPOSTINNHOLD_FEILET } from '../actions/actiontyper';
 
 const defaultState = {
     data: {},
@@ -27,11 +27,6 @@ export default function epostinnhold(state = defaultState, action = {}) {
                 data: {},
                 henter: false,
                 hentingFeilet: true,
-            });
-        }
-        case SET_VALGT_DELTAKER: {
-            return Object.assign({}, state, {
-                valgtDeltaker: action.valgtDeltaker,
             });
         }
         default: {

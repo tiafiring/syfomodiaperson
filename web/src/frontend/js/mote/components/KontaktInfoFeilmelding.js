@@ -1,16 +1,16 @@
 import React, { PropTypes } from 'react';
-import { getHtmlLedetekst } from 'digisyfo-npm';
+import { Varselstripe } from 'digisyfo-npm';
 
-const KontaktInfoFeilmelding = ({ feilmeldingkey, ledetekster }) => {
+const KontaktInfoFeilmelding = ({ melding }) => {
     return (<div className="panel">
-        <div className="hode hode-feil" dangerouslySetInnerHTML={getHtmlLedetekst(feilmeldingkey, ledetekster)}>
-        </div>
+        <Varselstripe type="feil">
+            <div dangerouslySetInnerHTML={melding} />
+        </Varselstripe>
     </div>);
 };
 
 KontaktInfoFeilmelding.propTypes = {
-    feilmeldingkey: PropTypes.string,
-    ledetekster: PropTypes.object,
+    melding: PropTypes.object,
 };
 
 export default KontaktInfoFeilmelding;

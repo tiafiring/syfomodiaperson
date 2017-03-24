@@ -120,13 +120,13 @@ export default function moter(state = defaultState, action) {
         case actions.MOTE_BEKREFTET: {
             const data = state.data.map((mote) => {
                 if (mote.moteUuid === action.moteUuid) {
-                    const valgtAlternativ = mote.alternativer.filter((alternativ) => {
-                        return alternativ.id === action.valgtAlternativId;
+                    const bekreftetAlternativ = mote.alternativer.filter((alternativ) => {
+                        return alternativ.id === action.bekreftetAlternativId;
                     })[0];
                     return Object.assign({}, mote, {
                         status: 'BEKREFTET',
                         bekreftetTidspunkt: action.bekreftetTidspunkt,
-                        valgtAlternativ,
+                        bekreftetAlternativ,
                     });
                 }
                 return mote;

@@ -20,7 +20,9 @@ export class MotebookingSkjemaContainer extends Component {
         if (henter) {
             return <AppSpinner />;
         } else if (skjermetBruker) {
-            return <Feilmelding tittel = {getLedetekst('mote.motebookingskjemacontainer.tittel', ledetekster)} melding = {getHtmlLedetekst('mote.motebookingskjemacontainer.melding', ledetekster)} />;
+            return (<Feilmelding
+                tittel={getLedetekst('mote.motebookingskjemacontainer.tittel', ledetekster)}
+                melding={getHtmlLedetekst('mote.motebookingskjemacontainer.melding', ledetekster)} />);
         } else if (hentingFeilet) {
             return <Feilmelding />;
         }

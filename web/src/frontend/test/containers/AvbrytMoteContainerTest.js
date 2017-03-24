@@ -5,6 +5,7 @@ import {mapStateToProps, AvbrytMoteSide} from "../../js/containers/AvbrytMoteCon
 import AppSpinner from "../../js/components/AppSpinner";
 import sinon from "sinon";
 import Lightbox from "../../js/components/Lightbox";
+import AvbrytMote from '../../js/mote/components/AvbrytMote';
 
 describe("AvbrytMoteContainer", () => {
 
@@ -77,17 +78,10 @@ describe("AvbrytMoteContainer", () => {
             expect(hentMoter.getCall(0).args).to.deep.equal(["123"]);
         })
 
-        it("Skal hente epostinnhold dersom det ikke finnes epostinnhold og møte", () => {
-            const compo = shallow(<AvbrytMoteSide mote={mote} hentAvbrytMoteEpostinnhold={hentAvbrytMoteEpostinnhold} />);
-            expect(hentAvbrytMoteEpostinnhold.getCall(0).args).to.deep.equal(["arbeidsgivers-deltaker-uuid"])
-        });
-
-        it("Skal ikke hente epostinnhold dersom det ikke finnes epostinnhold men heller ikke noe møte", () => {
-            const varselinnhold = undefined;
-            const mote = undefined;
-            const compo = shallow(<AvbrytMoteSide hentMoter={hentMoter} varselinnhold={varselinnhold} mote={mote} hentAvbrytMoteEpostinnhold={hentAvbrytMoteEpostinnhold} />);
-            expect(hentAvbrytMoteEpostinnhold.called).to.be.false;
-        });
+        it("Skal ikke hente møte dersom det finnes møte", () => {
+            const compo = shallow(<AvbrytMoteSide mote={mote} fnr="123" hentMoter={hentMoter} />);
+            expect(hentMoter.called).to.be.false;
+        })
 
         it("Skal vise frem AppSpinner når det hentes møter", () => {
             const compo = shallow(<AvbrytMoteSide hentMoter={hentMoter} henter={true} />);
@@ -95,20 +89,30 @@ describe("AvbrytMoteContainer", () => {
         });
 
         it("Skal vise frem Lightbox når møte er hentet", () => {
-            const compo = shallow(<AvbrytMoteSide henter={false} mote={mote} hentAvbrytMoteEpostinnhold={hentAvbrytMoteEpostinnhold} />);
+            const compo = shallow(<AvbrytMoteSide henter={false} mote={mote} />);
             expect(compo.find(Lightbox)).to.have.length(1);
         });
 
+        it("Skal vise frem AvbrytMote når møte er hentet", () => {
+            const compo = shallow(<AvbrytMoteSide
+                henter={false}
+                mote={mote}
+                avbrytFeilet={false}
+                avbryter={true}
+                />);
+            expect(compo.find(AvbrytMote)).to.have.length(1);
+            expect(compo.find(AvbrytMote).prop("avbrytFeilet")).to.be.false;
+            expect(compo.find(AvbrytMote).prop("avbryter")).to.be.true;
+        });
+
         it("Skal ha en avbrytMote-funksjon som kaller på riktig funksjon", () => {
-            const epostinnhold = {
-                emne: "1",
-                innhold: "2"
-            }
             const avbrytMote = sinon.spy();
-            const compo = shallow(<AvbrytMoteSide fnr="8855" avbrytMote={avbrytMote} mote={mote} hentAvbrytMoteEpostinnhold={hentAvbrytMoteEpostinnhold} />);
+            const compo = shallow(<AvbrytMoteSide fnr="8855" avbrytMote={avbrytMote} mote={mote} />);
             expect(compo.instance().avbrytMote());
             expect(avbrytMote.getCall(0).args).to.deep.equal(["2fedc0da-efec-4b6e-8597-a021628058ae", "8855"])
-        })
+        });
+
+
     });
 
     describe("mapStateToProps", () => {
@@ -187,8 +191,6 @@ describe("AvbrytMoteContainer", () => {
             expect(props.mote).to.deep.equal(state.moter.data[0]);
         });
 
-
-
         it("Skal returnere henterMoterBool når det hentes møter", () => {
             state.moter.henter = true;
             const props = mapStateToProps(state, ownProps);
@@ -199,7 +201,7 @@ describe("AvbrytMoteContainer", () => {
             expect(props2.henter).to.equal(false);
         });
 
-        it("Skal returnere hentingFeilet når henting av møter feilet", () => {
+        it("Skal returnere hentingFeiletBool når henting av møter feilet", () => {
             state.moter.hentingFeilet = true;
             const props = mapStateToProps(state, ownProps);
             expect(props.hentingFeiletBool).to.equal(true);
@@ -208,6 +210,18 @@ describe("AvbrytMoteContainer", () => {
             const props2 = mapStateToProps(state, ownProps);
             expect(props2.hentingFeiletBool).to.equal(false);
         });
+
+        it("Skal returnere avbryter når det avbrytes", () => {
+            state.moter.avbryter = true;
+            const props = mapStateToProps(state, ownProps);
+            expect(props.avbryter).to.be.true;
+        });
+
+        it("Skal returnere avbrytFeilet når avbryt har feilet", () => {
+            state.moter.avbrytFeilet = true;
+            const props = mapStateToProps(state, ownProps);
+            expect(props.avbrytFeilet).to.be.true;
+        })
 
     });
 

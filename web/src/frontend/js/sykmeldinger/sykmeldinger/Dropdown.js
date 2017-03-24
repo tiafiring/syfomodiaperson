@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 
-const Dropdown = ({ alternativer, valgtAlternativ, ariaControls, id, onChange }) => {
+const Dropdown = ({ alternativer, bekreftetAlternativ, ariaControls, id, onChange }) => {
     return (<select
         onChange={(event) => {onChange(event.target.value);}}
-        defaultValue={valgtAlternativ}
-        value={valgtAlternativ}
+        defaultValue={bekreftetAlternativ}
+        value={bekreftetAlternativ}
         aria-controls={ariaControls}
         id={id}>
         {alternativer.map((alt, idx) => {
@@ -16,7 +16,7 @@ const Dropdown = ({ alternativer, valgtAlternativ, ariaControls, id, onChange })
 
 Dropdown.propTypes = {
     alternativer: PropTypes.array,
-    valgtAlternativ: PropTypes.string,
+    bekreftetAlternativ: PropTypes.string,
     ariaControls: PropTypes.string,
     id: PropTypes.string,
     onChange: PropTypes.func,

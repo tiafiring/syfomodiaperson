@@ -28,7 +28,7 @@
     transform: translate3d(0, 0, 0);
     display: flex; 
     width: 100%;
-    color: @color-text;
+    color: @navTekst;
     border-bottom-width: 0;
 
     &:hover, &:focus {
@@ -37,7 +37,7 @@
     }
 
     &:visited {
-        color: @color-text;
+        color: @navTekst;
     }
 
     &:focus {
@@ -70,7 +70,7 @@
         margin-bottom: 1.25em;
     }
 
-    @media(min-width: @skjermMini) {
+    @media(min-width: @skjermLiten) {
         background-position: 97% 35px; 
     }
 }
@@ -79,7 +79,7 @@
     display: none; 
 }
 
-@media(min-width: @skjermMini) {
+@media(min-width: @skjermLiten) {
     .inngangspanel__innhold {
         flex: 1;
 
@@ -97,7 +97,7 @@
     }
 }
 
-@media(min-width: @screen-medium) {
+@media(min-width: @skjermMedium) {
 
     .inngangspanel__ikon {
         display: block;

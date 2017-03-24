@@ -1,134 +1,104 @@
-.motestatus {
-    width: 20em;
-    margin-bottom: 0.5em;
-    border-spacing: 5px;
-    .motestatus__tittel {
-        .mixin-typo-undertittel();
-        margin: 0 .5em;
-    }
+.motetidspunkter {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
 
-    th {
-        padding-left: .5em;
-        padding-right: .5em;
-        vertical-align: top;
-        text-align: left;
-    }
-    td {
-        padding-top: .5em;
-        padding-bottom: .5em;
-        text-align: center;
+.motetidspunkter--nyeTidspunkter {
+  margin-bottom: 2em;
+  border-top: 1px solid @ikonGraa;
+  border-bottom: 1px solid @ikonGraa;
+}
 
-        &:first-child {
-            text-align: left;
-            padding-right: 2em;
-        }
-    }
+.motetidspunkter--besvarteTidspunkter {
+  margin-bottom: 3em;
+}
 
-    thead, tbody tr {
-        border-bottom: 1px solid @ikonGraa;
-    }
+.svarstatus {
+  padding: 2em 0;
+  border-top: 1px solid @ikonGraa;
+  border-bottom: 1px solid @ikonGraa;
+  margin-bottom: 2em;
+}
 
-    .motestatus__svar {
-        text-align: center;
-        background: #e1e1e1;
-    }
+.motetidspunkt {
+  list-style-type: none;
+  margin: 0;
+  padding: 1.5em 0;
+}
 
-    .motestatus__svar__inner {
-        display: block;
-    }
+.motetidspunkt--besvart {
+  &:first-child {
+    padding-top: 0;   
+  }
 
-    strong {
-        display: block;
-        margin-bottom: .5em;
-    }
-
-    tfoot td {
-        padding-top: 1em;
-    }
-
-    .motestatus__deltaker {
-        font-weight: 400;
-    }
+  &:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
 
 }
 
-.motestatus__bekreftetmote__tabell {
-  padding: 2rem;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
-  background-color: #e9ece6;
-}
+.motetidspunkt__label {
+  font-weight: normal;
+  margin: 0;
+  margin-bottom: 1em;
+  line-height: 1.35;
 
-.motestatus__svar--valgtTidspunkt {
-    background-color: #cfe3d7;
-}
-
-.motestatus__svar--avvistTidspunkt {
-  background-color: #edced2;
-}
-
-.motestatus__kolonne__tidspunkt {
-  padding: 0 2em 0 0 !important;
-}
-
-.motestatus__ikon {
-    width: 36px;
-    height: 36px;
-}
-
-.motestatus__svartekst {
+  strong {
     display: block;
-    .mixin-typo-undertekst();
+  }
 }
 
-.motestatus__svartekst--ikkeSvart {
-    color: #979797;
+.alternativsvar {
+  margin-left: 2em;
+  padding-left: 0;
 }
 
-.motestatus__svartekst--kan {
-    color: #06893A;
+.alternativsvar__bekreft {
+  margin-top: 2em;
 }
 
-.motestatus__svartekst--kanikke {
-    color: #D0021B;
-}
-
-.tabellelement {
-  padding: 0.7rem;
-  background: #e1e1e1;
+.alternativsvar__svar {
   display: flex;
+  align-items: center;
+  margin-bottom: .5em;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.alternativsvar__tekst {
+  width: 100%;
+
+  p {
+    .mixin-typo-normal();
+    margin: 0;
+  }
+}
+
+.alternativsvar__deltakertype {
   font-weight: 600;
 }
 
+.alternativsvar__ikon {
+  width: 1em;
+  margin-right: ~'calc(2rem - 1em)';
+  align-self: flex-start;
 
-.tabellelement:after {
-    content: "";
-    display: block;
-    height: 41.26675px;
-    width: 41.26675px;
-    background-color: #e1e1e1;
-    transform: translateX(75%) rotate(45deg) scale(1.0,1.0) skew(5deg, 5deg);
-    right: 1px;
+  img {
+    width: 1em;
+    height: 1em;
+  }
 }
 
-
-.motetidspunktValgt {
-    position: relative;
-    border-radius: .25rem;
-    padding: 1rem .5rem;
-    margin-left: 1em;
-    text-align: center;
-    line-height: 1.5;
-    font-style: italic;
-    background-color: #f1f1f1;
-    border: 1px solid @ikonGraa;
-    .mixin-typo-normal();
+.motested {
+  margin-bottom: 2em;
 }
 
-.luft__right {
-  margin-right: 1em;
-}
-
-.sentrer-knapp {
-  text-align: center;
+.motested__tittel {
+  .mixin-typo-element();
+  margin-top: 0;
+  margin-bottom: .5em;
 }
