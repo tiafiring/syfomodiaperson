@@ -61,12 +61,14 @@ render(<Provider store={store}>
 document.addEventListener('DOMContentLoaded', () => {
     const config = {
         config: {
-            toggles: {},
-            fnr: fnr,
+            toggles: {
+
+            },
+            fnr,
             applicationName: 'Sykefravær',
-        }
+        },
     };
-    renderDecoratorHead(config);
+    window.renderDecoratorHead(config);
 });
 
 export {
