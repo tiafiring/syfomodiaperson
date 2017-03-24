@@ -64,11 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
             toggles: {
 
             },
-            fnr: fnr,
+            fnr,
             applicationName: 'Sykefravær',
-        }
+        },
     };
-    renderDecoratorHead(config);
+    window.renderDecoratorHead(config);
 });
 
 export {

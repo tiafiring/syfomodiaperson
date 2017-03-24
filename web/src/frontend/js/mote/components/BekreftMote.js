@@ -70,6 +70,7 @@ BekreftMote.propTypes = {
     arbeidsgiver: PropTypes.object,
     valgtDeltaker: PropTypes.object,
     henterInnhold: PropTypes.bool,
+    bekrefter: PropTypes.bool,
     setValgtDeltaker: PropTypes.func,
     hentBekreftMoteEpostinnhold: PropTypes.func,
     varselinnhold: PropTypes.object,

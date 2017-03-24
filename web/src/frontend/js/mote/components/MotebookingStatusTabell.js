@@ -38,7 +38,7 @@ const MotebookingStatusTabell = ({ ledetekster, fnr, deltakere, alternativer, st
                             return (<th scope="col" className="motestatus__deltaker" key={index}>
                                     <strong>{deltakertyper[deltaker.type.toLowerCase()]}</strong>
                                     <span>{deltaker.navn}</span>
-                                </th>)
+                                </th>);
                         })
                 }
             </tr>

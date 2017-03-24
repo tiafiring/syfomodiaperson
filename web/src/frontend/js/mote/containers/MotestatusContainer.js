@@ -46,10 +46,11 @@ export const mapStateToProps = (state, ownProps) => {
         deltakere: aktivtMote && aktivtMote.deltakere.sort((d1, d2) => {
             return d2.type.toLowerCase().localeCompare(d1.type.toLowerCase());
         }).map((deltaker) => {
-            deltaker.svar = deltaker.svar.sort((a1, a2) => {
-                return new Date(a2.tid).getTime() <= new Date(a1.tid).getTime() ? 1 : -1;
+            return Object.assign({}, deltaker, {
+                svar: deltaker.svar.sort((a1, a2) => {
+                    return new Date(a2.tid).getTime() <= new Date(a1.tid).getTime() ? 1 : -1;
+                }),
             });
-            return deltaker;
         }),
         alternativer: aktivtMote && aktivtMote.alternativer.sort((a1, a2) => {
             return new Date(a2.tid).getTime() <= new Date(a1.tid).getTime() ? 1 : -1;

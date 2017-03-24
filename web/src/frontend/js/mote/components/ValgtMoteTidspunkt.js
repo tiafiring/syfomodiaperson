@@ -45,7 +45,7 @@ const ValgtMoteTidspunkt = ({ ledetekster, deltakere, valgtAlternativ, bekreftet
                     deltakere.map((deltaker, index2) => {
                         let className = 'motestatus__svar';
                         let svarIndex = 0;
-                        for ( let i = 0; i < deltaker.svar.length; i++) {
+                        for (let i = 0; i < deltaker.svar.length; i++) {
                             if (valgtAlternativ.id === deltaker.svar[i].id) {
                                 svarIndex = i;
                             }

@@ -27,8 +27,9 @@ const FlereTidspunktSkjema = ({ ledetekster, mote, antallEksisterendeTidspunkter
     const submit = (values) => {
         const data = getData(values);
         data.alternativer.map((alternativ) => {
-            alternativ.sted = mote.alternativer[0].sted;
-            return alternativ;
+            return Object.assign({}, alternativ, {
+                sted: mote.alternativer[0].sted,
+            });
         });
         opprettFlereAlternativ(data, mote.moteUuid);
     };
@@ -65,8 +66,10 @@ FlereTidspunktSkjema.propTypes = {
 
 export function validate(values, props) {
     const feilmeldinger = {};
-    let tidspunkterFeilmeldinger = Array.apply(null, Array(props.antallNyeTidspunkt)).map(() => {
-    });
+    let tidspunkterFeilmeldinger = [];
+    for (let i = 0; i < props.antallNyeTidspunkt; i++) {
+        tidspunkterFeilmeldinger.push({});
+    }
 
     if (!values.tidspunkter || !values.tidspunkter.length) {
         tidspunkterFeilmeldinger = tidspunkterFeilmeldinger.map(() => {
