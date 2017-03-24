@@ -16,7 +16,7 @@
     "scripts:build": "set NODE_ENV=production&&node deploy.js",
     "scripts:watch": "title modiasyfofront && webpack-dev-server --inline  --port 3040",
     "lint": "eslint js/. --ext .js",
-    "images": "parallelshell \"cp -R img ../main/webapp\"",
+    "images": "parallelshell \"cp -R img ../main/webapp\""
   },
   "nyc": {
     "require": [
