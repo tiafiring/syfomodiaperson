@@ -423,7 +423,6 @@ describe("MotebookingSkjemaTest", () => {
                                 "valgt":false,
                             }
                         ],
-                        "avvik": [],
                     }
                 ],
                 alternativer: [{

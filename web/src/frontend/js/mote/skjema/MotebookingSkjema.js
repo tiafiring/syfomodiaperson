@@ -24,7 +24,7 @@ export function getData(values) {
 
     return {
         alternativer,
-        deltakere: [Object.assign(deltaker, { svar: alternativer, avvik: [] })],
+        deltakere: [Object.assign(deltaker, { svar: alternativer })],
     };
 }
 
