@@ -59,6 +59,18 @@ Innholdsvelger.propTypes = {
     ledetekster: PropTypes.object,
 };
 
+const Feil = ({ melding = 'Beklager, det oppstod en feil' }) => {
+    return (<div className="blokk">
+        <Varselstripe type="feil" fylt>
+            <p>Beklager, det oppstod en feil</p>
+        </Varselstripe>
+    </div>);
+};
+
+Feil.propTypes = {
+    melding: PropTypes.string,
+};
+
 class Innholdsviser extends Component {
     constructor(props) {
         super(props);
@@ -89,9 +101,7 @@ class Innholdsviser extends Component {
             return <AppSpinner />;
         }
         if (hentingFeilet) {
-            return (<Varselstripe type="feil">
-                <p>Beklager, det oppstod en feil</p>
-            </Varselstripe>);
+            return (<Feil melding="Beklager, det oppstod en feil ved uthenting av innhold i e-posten" />);
         }
         if (epostinnhold) {
             return (<div>
@@ -116,9 +126,7 @@ class Innholdsviser extends Component {
                 <Innhold {...epostinnhold} />
             </div>);
         }
-        return (<Varselstripe type="feil">
-            <p>Beklager, det oppstod en feil</p>
-        </Varselstripe>);
+        return (<Feil />);
     }
 }
 
