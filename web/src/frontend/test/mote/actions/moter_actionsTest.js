@@ -69,11 +69,11 @@ describe("moter_actions", () => {
     });
 
     it("Skal ha en bekreftMote()-funksjon som rturnerer riktig action", () => {
-        const action = actions.bekreftMote("moteUuid", "bekreftetAlternativId", "998877");
+        const action = actions.bekreftMote("moteUuid", "valgtAlternativId", "998877");
         expect(action).to.deep.equal({
             type: "BEKREFT_MOTE_FORESPURT",
             moteUuid: "moteUuid",
-            bekreftetAlternativId: "bekreftetAlternativId",
+            valgtAlternativId: "valgtAlternativId",
             fnr: "998877"
         });
     });
@@ -86,11 +86,11 @@ describe("moter_actions", () => {
     });
 
     it("Skal ha en moteBekreftet()-funksjon som rturnerer riktig action", () => {
-        const action = actions.moteBekreftet("olsen", "bekreftetAlternativId", "2016-11-03T13:28:05.244");
+        const action = actions.moteBekreftet("olsen", "valgtAlternativId", "2016-11-03T13:28:05.244");
         expect(action).to.deep.equal({
             type: "MOTE_BEKREFTET",
             moteUuid: "olsen",
-            bekreftetAlternativId: "bekreftetAlternativId",
+            valgtAlternativId: "valgtAlternativId",
             bekreftetTidspunkt: "2016-11-03T13:28:05.244",
         });
     });

@@ -46,8 +46,8 @@ export function* avbrytMote(action) {
 export function* bekreftMote(action) {
     yield put(actions.bekrefterMote());
     try {
-        yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.moteUuid}/bekreft?bekreftetAlternativId=${action.bekreftetAlternativId}`);
-        yield put(actions.moteBekreftet(action.moteUuid, action.bekreftetAlternativId, new Date()));
+        yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.moteUuid}/bekreft?valgtAlternativId=${action.valgtAlternativId}`);
+        yield put(actions.moteBekreftet(action.moteUuid, action.valgtAlternativId, new Date()));
         history.replace(`/sykefravaer/${action.fnr}/mote`);
     } catch (e) {
         log(e);

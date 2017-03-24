@@ -6,12 +6,12 @@ describe("epostinnhold_actions", () => {
     it("Har en hentBekreftMoteEpostinnhold()-funksjon som returnerer riktig action", () => {
         const moteUuid = "olsen";
         const motedeltakerUuid = "hansen";
-        const bekreftetAlternativId = "123"
-        const action = actions.hentBekreftMoteEpostinnhold(motedeltakerUuid, bekreftetAlternativId);
+        const valgtAlternativId = "123"
+        const action = actions.hentBekreftMoteEpostinnhold(motedeltakerUuid, valgtAlternativId);
         expect(action).to.deep.equal({
             type: "HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT",
             motedeltakerUuid: "hansen",
-            bekreftetAlternativId: "123"
+            valgtAlternativId: "123"
         });
     });
 

@@ -119,7 +119,7 @@ describe("moterSagas", () => {
 
     describe("bekreftMote", () => {
         const moteUuid = "olsen";
-        const bekreftetAlternativId = 998877;
+        const valgtAlternativId = 998877;
 
         action = actions.bekreftMote("olsen", 998877);
 
@@ -131,14 +131,14 @@ describe("moterSagas", () => {
         });
 
         it("Skal poste til REST-tjenesten", () => {
-            const nextCall = call(post, "http://tjenester.nav.no/moteadmin/moter/olsen/bekreft?bekreftetAlternativId=998877");
+            const nextCall = call(post, "http://tjenester.nav.no/moteadmin/moter/olsen/bekreft?valgtAlternativId=998877");
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
         it("Skal dispatche MOTE_BEKREFTET", () => {
             const date = new Date(2017, 3, 1);
             const clock = sinon.useFakeTimers(date.getTime());
-            const nextPut = put({type: 'MOTE_BEKREFTET', moteUuid: "olsen", bekreftetAlternativId: 998877, bekreftetTidspunkt: date});
+            const nextPut = put({type: 'MOTE_BEKREFTET', moteUuid: "olsen", valgtAlternativId: 998877, bekreftetTidspunkt: date});
             expect(generator.next().value).to.deep.equal(nextPut);
             clock.restore();
         });

@@ -136,7 +136,7 @@ export default function moter(state = defaultState, action) {
             const data = state.data.map((mote) => {
                 if (mote.moteUuid === action.moteUuid) {
                     const bekreftetAlternativ = mote.alternativer.filter((alternativ) => {
-                        return alternativ.id === action.bekreftetAlternativId;
+                        return alternativ.id === action.valgtAlternativId;
                     })[0];
                     return Object.assign({}, mote, {
                         status: 'BEKREFTET',

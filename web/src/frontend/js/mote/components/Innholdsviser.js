@@ -62,7 +62,7 @@ Innholdsvelger.propTypes = {
 const Feil = ({ melding = 'Beklager, det oppstod en feil' }) => {
     return (<div className="blokk">
         <Varselstripe type="feil" fylt>
-            <p>Beklager, det oppstod en feil</p>
+            <p>{melding}</p>
         </Varselstripe>
     </div>);
 };

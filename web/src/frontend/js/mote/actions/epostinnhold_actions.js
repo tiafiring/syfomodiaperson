@@ -6,11 +6,11 @@ import {
     HENT_AVBRYT_MOTE_EPOSTINNHOLD_FORESPURT,
 } from './actiontyper';
 
-export const hentBekreftMoteEpostinnhold = (motedeltakerUuid, bekreftetAlternativId) => {
+export const hentBekreftMoteEpostinnhold = (motedeltakerUuid, valgtAlternativId) => {
     return {
         type: HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT,
         motedeltakerUuid,
-        bekreftetAlternativId,
+        valgtAlternativId,
     };
 };
 
