@@ -16,8 +16,7 @@
     "scripts:build": "set NODE_ENV=production&&node deploy.js",
     "scripts:watch": "title modiasyfofront && webpack-dev-server --inline  --port 3040",
     "lint": "eslint js/. --ext .js",
-    "images": "parallelshell \"cp -R img ../main/webapp\" \"npm run images:modig\"",
-    "images:modig": "cp -R node_modules/modig-frontend/modig-frontend-ressurser/src/main/resources/META-INF/resources/img img/modig-frontend"
+    "images": "parallelshell \"cp -R img ../main/webapp\"",
   },
   "nyc": {
     "require": [
