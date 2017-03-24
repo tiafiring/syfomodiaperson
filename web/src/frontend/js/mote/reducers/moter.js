@@ -1,4 +1,5 @@
 import * as actions from '../actions/actiontyper';
+import { konverterTid } from 'moter-npm';
 
 const defaultState = {
     data: [],
@@ -26,8 +27,22 @@ export default function moter(state = defaultState, action) {
         }
         case actions.MOTE_OPPRETTET: {
             const mote = Object.assign({}, action.data, {
-                fnr: action.data.fnr,
                 status: 'OPPRETTET',
+            }, {
+                alternativer: action.data.alternativer.map((a) => {
+                    return Object.assign({}, a, {
+                        tid: new Date(a.tid),
+                    });
+                }),
+                deltakere: action.data.deltakere.map((d) => {
+                    return Object.assign({}, d, {
+                        svar: action.data.alternativer.map((a) => {
+                            return Object.assign({}, a, {
+                                tid: new Date(a.tid),
+                            });
+                        }),
+                    });
+                }),
             });
             return Object.assign({}, state, {
                 data: [...state.data, mote],
@@ -63,7 +78,7 @@ export default function moter(state = defaultState, action) {
         }
         case actions.MOTER_HENTET: {
             return Object.assign({}, state, {
-                data: action.data,
+                data: action.data.map(konverterTid),
                 sender: false,
                 henter: false,
                 hentingFeilet: false,
@@ -125,7 +140,7 @@ export default function moter(state = defaultState, action) {
                     })[0];
                     return Object.assign({}, mote, {
                         status: 'BEKREFTET',
-                        bekreftetTidspunkt: action.bekreftetTidspunkt,
+                        bekreftetTidspunkt: new Date(action.bekreftetTidspunkt),
                         bekreftetAlternativ,
                     });
                 }
