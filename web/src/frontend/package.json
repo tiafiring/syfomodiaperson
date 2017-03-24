@@ -104,7 +104,7 @@
     "less-plugin-autoprefix": "1.5.1",
     "mocha": "2.4.5",
     "mock-socket": "6.0.1",
-    "moter-npm": "3.1.6",
+    "moter-npm": "3.1.9",
     "mustache": "2.2.1",
     "nodemon": "1.8.1",
     "nyc": "8.3.2",
