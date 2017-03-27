@@ -19,7 +19,7 @@ export function* opprettMote(action) {
 export function* hentMoter(action) {
     yield put(actions.henterMoter());
     try {
-        const data = yield call(get, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter?fnr=${action.fnr}&henttpsdata=true`);
+        const data = yield call(get, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter?fnr=${action.fnr}&henttpsdata=true&limit=1`);
         yield put(actions.moterHentet(data));
     } catch (e) {
         log(e);
