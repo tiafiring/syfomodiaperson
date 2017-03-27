@@ -9,6 +9,8 @@ import { Varselstripe, getLedetekst } from 'digisyfo-npm';
 import { genererDato, erGyldigKlokkeslett, erGyldigEpost, erGyldigDato } from '../utils/index';
 import { getCookieValueorDefault } from '../../utils/index';
 
+export const OPPRETT_MOTE_SKJEMANAVN = 'opprettMote';
+
 export function getData(values) {
     const deltaker = Object.assign({}, values.deltakere[0], {
         type: 'arbeidsgiver',
@@ -116,7 +118,7 @@ export const MotebookingSkjema = ({
             }
             <fieldset className="skjema-fieldset blokk">
                 <legend>{visArbeidstaker ? '3.' : '2.'} {getLedetekst('mote.motebookingskjema.velg-dato-tid-sted', ledetekster)}</legend>
-                <Tidspunkter />
+                <Tidspunkter skjemanavn={OPPRETT_MOTE_SKJEMANAVN} />
                 <label htmlFor="sted">Sted</label>
                 <Field id="sted" component={TextField} name="sted" className="input--xxl js-sted"
                     placeholder="Skriv møtested eller om det er et videomøte" />
@@ -226,7 +228,7 @@ export function validate(values, props) {
 }
 
 const ReduxSkjema = reduxForm({
-    form: 'opprettMote',
+    form: OPPRETT_MOTE_SKJEMANAVN,
     validate,
 })(MotebookingSkjema);
 

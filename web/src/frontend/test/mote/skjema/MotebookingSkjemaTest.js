@@ -22,7 +22,7 @@ describe("MotebookingSkjemaTest", () => {
 
         it("Skal inneholde tidspunkter", () => {
             const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
-            expect(compo.contains(<Tidspunkter />)).to.be.true;
+            expect(compo.contains(<Tidspunkter skjemanavn="opprettMote" />)).to.be.true;
         });
 
         it("Skal inneholde felt med mulighet for å skrive inn sted", () => {

@@ -1,9 +1,32 @@
 import {expect} from "chai";
-import {validate} from "../../../js/mote/skjema/FlereTidspunktSkjema";
+import { validate, FlereTidspunktSkjema } from "../../../js/mote/skjema/FlereTidspunktSkjema";
 import {mount, shallow, render} from "enzyme";
 import React from "react";
+import Tidspunkter from "../../../js/mote/skjema/Tidspunkter";
+import sinon from 'sinon';
 
 describe("FlereTidspunktSkjemaTest", () => {
+
+    describe("FlereTidspunktSkjema", () => {
+
+        let component; 
+        let handleSubmit;
+
+        beforeEach(() => {
+            handleSubmit = sinon.spy();
+            component = shallow(<FlereTidspunktSkjema antallNyeTidspunkt={2} handleSubmit={handleSubmit} />)
+        })
+
+        it("Inneholder Tidspunkter", () => {
+            expect(component.find(Tidspunkter)).to.have.length(1);
+            expect(component.find(Tidspunkter).prop("tidspunker")).to.deep.equal([0, 1])
+        });
+
+        it("Skal sende riktig skjemanavn videre til Tidspunkter", () => {
+            expect(component.find(Tidspunkter)).to.have.length(1);
+            expect(component.find(Tidspunkter).prop("skjemanavn")).to.equal("flereAlternativ")
+        });
+    })
 
     describe("validate", () => {
 

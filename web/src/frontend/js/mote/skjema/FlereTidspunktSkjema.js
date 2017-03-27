@@ -4,6 +4,8 @@ import { reduxForm } from 'redux-form';
 import { getLedetekst } from 'digisyfo-npm';
 import { genererDato, erGyldigKlokkeslett, erGyldigDato } from '../utils';
 
+const FLERE_TIDSPUNKTER_SKJEMANAVN = 'flereAlternativ';
+
 export function getData(values) {
     const alternativer = values.tidspunkter.map((tidspunkt) => {
         return {
@@ -18,8 +20,17 @@ export function getData(values) {
     };
 }
 
-const FlereTidspunktSkjema = ({ ledetekster, mote, antallNyeTidspunkt, opprettFlereAlternativ, senderNyeAlternativ,
-    nyeAlternativFeilet, flereAlternativ, avbrytFlereAlternativ, handleSubmit }) => {
+export const FlereTidspunktSkjema = (props) => {
+    const {
+        ledetekster,
+        mote,
+        antallNyeTidspunkt,
+        opprettFlereAlternativ,
+        senderNyeAlternativ,
+        nyeAlternativFeilet,
+        flereAlternativ,
+        avbrytFlereAlternativ,
+        handleSubmit } = props;
     let nyeTidspunktListe = [];
     for (let i = 0; i < antallNyeTidspunkt; i++) {
         nyeTidspunktListe.push(i);
@@ -37,7 +48,7 @@ const FlereTidspunktSkjema = ({ ledetekster, mote, antallNyeTidspunkt, opprettFl
     return (
         <div className="fleretidspunkt">
             <form onSubmit={handleSubmit(submit)}>
-                <Tidspunkter tidspunker={nyeTidspunktListe} />
+                <Tidspunkter tidspunker={nyeTidspunktListe} skjemanavn={FLERE_TIDSPUNKTER_SKJEMANAVN} />
                 <div className="blokk--l">
                     <button type="button" className="lenke" onClick={flereAlternativ}>
                     {getLedetekst('mote.bookingstatus.fleretidspunkt.leggtil', ledetekster)}</button>
@@ -111,7 +122,7 @@ export function validate(values, props) {
 }
 
 const ReduxSkjema = reduxForm({
-    form: 'flereAlternativ',
+    form: FLERE_TIDSPUNKTER_SKJEMANAVN,
     validate,
 })(FlereTidspunktSkjema);
 
