@@ -10,18 +10,6 @@ export const lagNummer = (streng) => {
     return streng.replace(/[^\d.-]/g, '').replace(/-/g, '');
 };
 
-export const formaterDato = (input) => {
-    const grupper = lagNummer(input).split('.');
-    let dato = grupper.join('');
-    if (dato.length > 2 || grupper.length > 1) {
-        dato = dato.replace(/(.{2})/, '$1.');
-        if (dato.length >= 6 || grupper.length > 2) {
-            dato = dato.replace(/(.{5})/, '$1.');
-        }
-    }
-    return dato;
-};
-
 export const formaterTid = (input) => {
     const grupper = lagNummer(input).split('.');
     const tid = grupper.join('');
