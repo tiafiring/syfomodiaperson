@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Tidspunkter from './Tidspunkter';
 import { reduxForm } from 'redux-form';
-import { getLedetekst } from 'digisyfo-npm';
+import { getLedetekst, Varselstripe } from 'digisyfo-npm';
 import { genererDato, erGyldigKlokkeslett, erGyldigDato } from '../utils';
 
 const FLERE_TIDSPUNKTER_SKJEMANAVN = 'flereAlternativ';
@@ -18,6 +18,14 @@ export function getData(values) {
     return {
         alternativer,
     };
+}
+
+const Feilmelding = () => {
+    return (<div className="blokk">
+        <Varselstripe type="feil">
+            <p>Beklager, det oppstod en feil. Prøv igjen senere!</p>
+        </Varselstripe>
+    </div>);
 }
 
 export const FlereTidspunktSkjema = (props) => {
@@ -54,7 +62,7 @@ export const FlereTidspunktSkjema = (props) => {
                     {getLedetekst('mote.bookingstatus.fleretidspunkt.leggtil', ledetekster)}</button>
                 </div>
                 {
-                    nyeAlternativFeilet && <p>Det skjedde en feil! Prøv igjen senere!</p>
+                    nyeAlternativFeilet && <Feilmelding />
                 }
                 <button
                     type="submit"
