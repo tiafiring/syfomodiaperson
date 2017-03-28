@@ -34,6 +34,15 @@
     <option value="UTGAATT">Utgått</option>
 </select>
 
+<h2>NORG:</h2>
+<label for="toggleMockNorg">Enable mock:</label>
+<input type="checkbox" id="toggleMockNorg" />
+<label for="norg">Profil:</label>
+<select id="norg" name="norg">
+    <option value="DEFAULT">standard</option>
+    <option value="UVENTET_FEIL">Uventet feil</option>
+</select>
+
 <h2>Møter:</h2>
 <p>NB! Denne typen mocking vil ikke fungere godt med de andre og burde bare brukes for å se raskt på hvordan GUIet forandrer seg. Ikke interaksjon</p>
 <label for="toggleMockMoter">Enable mock:</label>
@@ -77,6 +86,11 @@
             $('#dkif').val(data.dkifMockConfig.mockProfile);
         }
 
+        if (data.norgMockConfig.enabledForSession) {
+            $('#toggleMockNorg')[0].checked = true;
+            $('#norg').val(data.norgMockConfig.mockProfile);
+        }
+
         if (data.moterRessursMockConfig.enabledForSession) {
             $('#toggleMockMoter')[0].checked = true;
             $('#moter').val(data.moterRessursMockConfig.mockProfile);
@@ -99,6 +113,8 @@
         var brukerprofilToggle = $('#toggleMockBrukerprofil')[0].checked;
         var dkif = $('#dkif').val();
         var dkifToggle = $('#toggleMockDkif')[0].checked;
+        var norg = $('#norg').val();
+        var norgToggle = $('#toggleMockNorg')[0].checked;
         var moter = $('#moter').val();
         var toggleMockMoter = $('#toggleMockMoter')[0].checked;
         var config = {
@@ -109,6 +125,10 @@
             dkifMockConfig: {
                 enabledForSession: dkifToggle,
                 mockProfile: dkif,
+            },
+            norgMockConfig: {
+                enabledForSession: norgToggle,
+                mockProfile: norg,
             },
             moterRessursMockConfig: {
                 enabledForSession: toggleMockMoter,
