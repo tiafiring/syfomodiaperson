@@ -22,6 +22,9 @@ const sorterAlternativer = (alternativer) => {
 };
 
 export const getNyeAlternativer = (mote) => {
+    if (!mote.alternativer) {
+        return [];
+    }
     const alternativer = sorterAlternativer(mote.alternativer);
     const nyesteCreated = alternativer[0].created;
     return mote.alternativer.filter((a) => {
@@ -37,6 +40,9 @@ export const getNyeAlternativer = (mote) => {
 };
 
 export const getGamleAlternativer = (mote) => {
+    if (!mote.alternativer) {
+        return [];
+    }
     const alternativer = sorterAlternativer(mote.alternativer);
     const nyesteCreated = alternativer[0].created;
     return mote.alternativer.filter((a) => {

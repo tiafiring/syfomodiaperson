@@ -149,7 +149,13 @@ describe("Svarstatus", () => {
             expect(res[0].id).to.equal(14007)
             expect(res[1].id).to.equal(14005);
             expect(res[2].id).to.equal(14006);
-        })
+        });
+
+        it("Skal returnere tom liste om mote mangler alternativer", () => {
+            const mote = {};
+            const res = getNyeAlternativer(mote);
+            expect(res).to.deep.equal([]);
+        });
     });
 
     describe("getGamleAlternativer", () => {
@@ -158,7 +164,13 @@ describe("Svarstatus", () => {
             expect(res.length).to.equal(4);
             expect(res[0].id).to.equal(14003)
             expect(res[3].id).to.equal(14004)
-        })
+        });
+
+        it("Skal returnere tom liste om mote mangler alternativer", () => {
+            const mote = {};
+            const res = getNyeAlternativer(mote);
+            expect(res).to.deep.equal([]);
+        });
     });
 
     describe("Svarstatus", () => {
