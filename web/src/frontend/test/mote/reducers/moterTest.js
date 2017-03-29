@@ -147,11 +147,13 @@ describe('moter', () => {
                     "alternativer": [{
                         "tid": new Date("2016-08-12T13:00:00.000Z"),
                         "sted": "Oslo",
-                        "valgt": false
+                        "valgt": false,
+                        "created": new Date(),
                     }, {
                         "tid": new Date("2016-08-13T10:00:00.000Z"),
                         "sted": "Oslo",
-                        "valgt": false
+                        "valgt": false,
+                        "created": new Date(),
                     }],
                     "status": "OPPRETTET",
                     "deltakere": [{
@@ -161,11 +163,13 @@ describe('moter', () => {
                         "svar": [{
                             "tid": new Date("2016-08-12T13:00:00.000Z"),
                             "sted": "Oslo",
-                            "valgt": false
+                            "valgt": false,
+                            "created": new Date(),
                         }, {
                             "tid": new Date("2016-08-13T10:00:00.000Z"),
                             "sted": "Oslo",
-                            "valgt": false
+                            "valgt": false,
+                            "created": new Date(),
                         }],
                     }],
                 }],
@@ -635,11 +639,13 @@ describe('moter', () => {
                 "alternativer": [{
                     "tid": new Date("2016-08-12T13:00:00.000Z"),
                     "sted": "Oslo",
-                    "valgt": false
+                    "valgt": false,
+                    "created": new Date(),
                 }, {
                     "tid": new Date("2016-08-13T10:00:00.000Z"),
                     "sted": "Oslo",
-                    "valgt": false
+                    "valgt": false,
+                    "created": new Date(),
                 }],
                 "status": "OPPRETTET",
                 "deltakere": [{
@@ -649,11 +655,13 @@ describe('moter', () => {
                     "svar": [{
                         "tid": new Date("2016-08-12T13:00:00.000Z"),
                         "sted": "Oslo",
-                        "valgt": false
+                        "valgt": false,
+                        "created": new Date(),
                     }, {
                         "tid": new Date("2016-08-13T10:00:00.000Z"),
                         "sted": "Oslo",
-                        "valgt": false
+                        "valgt": false,
+                        "created": new Date(),
                     }],
                 }],
             }]);

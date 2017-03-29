@@ -32,6 +32,7 @@ export default function moter(state = defaultState, action) {
                 alternativer: action.data.alternativer.map((a) => {
                     return Object.assign({}, a, {
                         tid: new Date(a.tid),
+                        created: new Date(),
                     });
                 }),
                 deltakere: action.data.deltakere.map((d) => {
@@ -39,6 +40,7 @@ export default function moter(state = defaultState, action) {
                         svar: action.data.alternativer.map((a) => {
                             return Object.assign({}, a, {
                                 tid: new Date(a.tid),
+                                created: new Date(),
                             });
                         }),
                     });
