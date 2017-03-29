@@ -1,5 +1,6 @@
 import {expect} from "chai";
-import MotebookingStatus, { MotetidspunktValgt, StatusVarsel, SvarStatus } from "../../../js/mote/components/MotebookingStatus";
+import MotebookingStatus, { MotetidspunktValgt, StatusVarsel } from "../../../js/mote/components/MotebookingStatus";
+import Svarstatus from '../../../js/mote/components/Svarstatus';
 import BekreftetMotetidspunkt from "../../../js/mote/components/BekreftetMotetidspunkt";
 import KontaktInfoFeilmelding from "../../../js/mote/components/KontaktInfoFeilmelding";
 import FlereTidspunktSkjema from "../../../js/mote/skjema/FlereTidspunktSkjema";
@@ -175,8 +176,8 @@ describe("MotebookingStatus", () => {
             expect(component.text()).to.contain("Oslo by"); 
         });
 
-        it("Skal inneholde SvarStatus", () => {
-            expect(component.find(SvarStatus)).to.have.length(1);
+        it("Skal inneholde Svarstatus", () => {
+            expect(component.find(Svarstatus)).to.have.length(1);
         });
 
         it("Skal ikke vise en knapp med teksten 'Velg tidspunkt for møte'", () => {
@@ -192,8 +193,8 @@ describe("MotebookingStatus", () => {
             component = shallow(<MotebookingStatus mote={mote} antallNyeTidspunkt={4} />);
         });
 
-        it("Skal vise SvarStatus med FlereTidspunktSkjema", () => {
-            expect(component.find(SvarStatus).find(FlereTidspunktSkjema)).to.have.length(1);
+        it("Skal vise Svarstatus med FlereTidspunktSkjema", () => {
+            expect(component.find(Svarstatus).find(FlereTidspunktSkjema)).to.have.length(1);
         });
 
     });
