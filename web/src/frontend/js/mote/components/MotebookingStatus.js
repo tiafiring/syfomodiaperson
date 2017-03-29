@@ -6,7 +6,8 @@ import BekreftetMotetidspunkt from './BekreftetMotetidspunkt';
 import FlereTidspunktSkjema from '../skjema/FlereTidspunktSkjema';
 import { Varselstripe, getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import { Link } from 'react-router';
-import { BesvarteTidspunkter, proptypes as moterPropTypes, konstanter } from 'moter-npm';
+import { proptypes as moterPropTypes } from 'moter-npm';
+import Svarstatus from './Svarstatus';
 
 export const MotetidspunktValgt = ({ bekreftetTidspunkt, ledetekster }) => {
     return <div className="motetidspunktValgt">{getLedetekst('mote.bookingstatus.valgt-sendt-til-parter', ledetekster, { '%TID%': getDatoFraZulu(bekreftetTidspunkt) })}</div>;
@@ -77,23 +78,6 @@ StatusVarsel.propTypes = {
     ledetekster: PropTypes.object,
 };
 
-export const SvarStatus = ({ mote, flereAlternativ, ledetekster, children, fnr }) => {
-    return (<div className="svarstatus">
-        <BesvarteTidspunkter mote={mote} alternativer={mote.alternativer} deltakertype={konstanter.NAV_VEILEDER} fnr={fnr} ledetekster={ledetekster} />
-        <button className="js-nyetidspunkt rammeknapp" onClick={flereAlternativ}>
-            {getLedetekst('mote.bookingstatus.knapp.flere-tidspunkt', ledetekster)}</button>
-        {children}
-    </div>);
-};
-
-SvarStatus.propTypes = {
-    mote: moterPropTypes.mote,
-    flereAlternativ: PropTypes.func,
-    ledetekster: PropTypes.object,
-    children: PropTypes.object,
-    fnr: PropTypes.string,
-};
-
 const MotebookingStatus = (props) => {
     const { ledetekster, fikkIkkeOpprettetVarsel, fnr, mote, avbrytMoteUtenVarsel, antallNyeTidspunkt } = props;
     const { alternativer, status } = mote;
@@ -108,7 +92,7 @@ const MotebookingStatus = (props) => {
         <div className="panel">
             <Sidetopp tittel={getLedetekst(sidetoppNokkel, ledetekster)} />
             { status === BEKREFTET && <BekreftetMotetidspunkt {...props} /> }
-            { status !== BEKREFTET && <SvarStatus {...props}>{flereTidspunktBoks}</SvarStatus> }
+            { status !== BEKREFTET && <Svarstatus {...props}>{flereTidspunktBoks}</Svarstatus> }
             <div className="motested">
                 <h3 className="motested__tittel">{getLedetekst('mote.bookingstatus.sted', ledetekster)}</h3>
                 <p className="motested__sted">{mote.alternativer[0].sted}</p>

@@ -26,7 +26,7 @@ const Feilmelding = () => {
             <p>Beklager, det oppstod en feil. Prøv igjen senere!</p>
         </Varselstripe>
     </div>);
-}
+};
 
 export const FlereTidspunktSkjema = (props) => {
     const {
@@ -45,12 +45,13 @@ export const FlereTidspunktSkjema = (props) => {
     }
     const submit = (values) => {
         const data = getData(values);
-        data.alternativer.map((alternativ) => {
+        const _data = data.alternativer.map((alternativ) => {
             return Object.assign({}, alternativ, {
                 sted: mote.alternativer[0].sted,
             });
         });
-        opprettFlereAlternativ(data, mote.moteUuid);
+        console.log(_data);
+        opprettFlereAlternativ(_data, mote.moteUuid);
     };
 
     return (
