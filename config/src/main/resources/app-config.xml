@@ -13,17 +13,20 @@
         <ear groupId="no.nav.sbl.dialogarena" artifactId="modiasyfofront-ear"/>
     </artifacts>
 
-    <security serviceUserResourceAlias="srvmodiasyfofront">
-        <logins>
-            <spnego/>
-        </logins>
-    </security>
+    <security serviceUserResourceAlias="srvmodiasyfofront" />
 
     <resources>
+        <applicationProperties alias="modiasyfofront.properties"/>
+
         <baseUrl alias="modapp" mapToProperty="modapp"/>
         <rest alias="modiasyfoapi" mapToProperty="sykefravaerapi.fss"/>
         <rest alias="iadecorator-js" mapToProperty="iadecorator"/>
         <rest alias="moteapifss" mapToProperty="moteapifss"/>
+
+        <baseUrl alias="isso-host"/>
+        <baseUrl alias="isso-jwks"/>
+        <baseUrl alias="isso-issuer"/>
+        <credential alias="isso-rp-user"/>
     </resources>
 
     <loadBalancer isAlive="/sykefravaer/internal/isAlive" />
