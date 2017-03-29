@@ -100,6 +100,40 @@ describe("moter_actions", () => {
         expect(action).to.deep.equal({
             type: "BEKREFT_MOTE_FEILET",
         });
-    })
+    });
+
+    it("Skal ha en opprettFlereAlternativ()-funksjon som returnerer riktig action", () => {
+        const data = [{"tid":"2017-03-30T10:00:00.000Z","sted":"OSlo","valgt":false},{"tid":"2017-03-31T08:00:00.000Z","sted":"OSlo","valgt":false}];
+        const action = actions.opprettFlereAlternativ(data, "mote-uuid");
+        expect(action).to.deep.equal({
+            type: "OPPRETT_FLERE_ALTERNATIV_FORESPURT",
+            data,
+            moteUuid: "mote-uuid",
+        });
+    });
+
+    it("Skal ha en opprettFlereAlternativBekreftet()-funksjon som returnerer riktig action", () => {
+        const data = [{"tid":"2017-03-30T10:00:00.000Z","sted":"OSlo","valgt":false},{"tid":"2017-03-31T08:00:00.000Z","sted":"OSlo","valgt":false}];
+        const action = actions.opprettFlereAlternativBekreftet(data, "mote-uuid");
+        expect(action).to.deep.equal({
+            type: "OPPRETT_FLERE_ALTERNATIV_BEKREFTET",
+            data,
+            moteUuid: "mote-uuid",
+        });
+    });
+
+    it("Skal ha en opprettFlereAlternativFeilet()-funksjon som returnerer riktig action", () => {
+        const action = actions.opprettFlereAlternativFeilet();
+        expect(action).to.deep.equal({
+            type: "OPPRETT_FLERE_ALTERNATIV_FEILET"
+        })
+    });
+
+    it("Skal ha en oppretterFlereAlternativ()-funksjon som returnerer riktig action", () => {
+        const action = actions.oppretterFlereAlternativ();
+        expect(action).to.deep.equal({
+            type: "OPPRETTER_FLERE_ALTERNATIV",
+        });
+    });
 
 });

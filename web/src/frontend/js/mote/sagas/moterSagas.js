@@ -58,7 +58,8 @@ export function* bekreftMote(action) {
 export function* opprettFlereAlternativ(action) {
     yield put(actions.oppretterFlereAlternativ());
     try {
-        yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.moteUuid}/nyealternativer`, action.data.alternativer);
+        const url = `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.moteUuid}/nyealternativer`;
+        yield call(post, url, action.data);
         yield put(actions.opprettFlereAlternativBekreftet(action.data, action.moteUuid));
     } catch (e) {
         log(e);
