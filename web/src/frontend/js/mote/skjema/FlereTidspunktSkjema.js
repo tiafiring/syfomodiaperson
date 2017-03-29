@@ -29,14 +29,6 @@ const Feilmelding = () => {
     </div>);
 };
 
-const Feilmelding = () => {
-    return (<div className="blokk">
-        <Varselstripe type="feil">
-            <p>Beklager, det oppstod en feil. Prøv igjen senere!</p>
-        </Varselstripe>
-    </div>);
-};
-
 export const FlereTidspunktSkjema = (props) => {
     const {
         ledetekster,
