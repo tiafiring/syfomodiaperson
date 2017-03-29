@@ -3,8 +3,101 @@ import moter from '../../../js/mote/reducers/moter';
 import * as actions from '../../../js/mote/actions/moter_actions';
 import { getData } from '../../../js/mote/skjema/MotebookingSkjema';
 import deepFreeze from 'deep-freeze';
+import sinon from 'sinon';
+
+export const getMote = (mote) => {
+    return Object.assign({}, {
+      "status": "OPPRETTET",
+      'moteUuid': 'min-mote-uuid',
+      "opprettetTidspunkt": new Date("2017-02-22T15:18:24.323"),
+      "bekreftetTidspunkt": null,
+      "deltakere": [{
+        "hendelser": [],
+        "deltakerUuid": "uuid1",
+        "navn": "Are Arbeidsgiver",
+        "orgnummer": "***REMOVED***",
+        "epost": "are.arbeidsgiver@nav.no",
+        "type": "arbeidsgiver",
+        "svartidspunkt": null,
+        "svar": [{
+          "id": 1,
+          "tid": new Date("2017-03-07T15:18:24.323"),
+          "created": new Date("2017-02-22T15:18:24.323"),
+          "sted": "Sannergata 2",
+          "valgt": false
+        }, {
+          "id": 3,
+          "tid": new Date("2017-02-25T15:18:24.323"),
+          "created": new Date("2017-02-22T15:18:24.323"),
+          "sted": "Sannergata 2",
+          "valgt": false
+        }, {
+          "id": 2,
+          "tid": new Date("2017-03-09T15:18:24.323"),
+          "created": new Date("2017-02-22T15:18:24.323"),
+          "sted": "Sannergata 2",
+          "valgt": false
+        }]
+      }, {
+        "hendelser": [],
+        "deltakerUuid": "uuid2",
+        "navn": "Sygve Sykmeldt",
+        "orgnummer": null,
+        "epost": null,
+        "type": "Bruker",
+        "svartidspunkt": null,
+        "svar": [{
+          "id": 1,
+          "tid": new Date("2017-03-07T15:18:24.323"),
+          "created": new Date("2017-02-22T15:18:24.323"),
+          "sted": "Sannergata 2",
+          "valgt": false
+        }, {
+          "id": 3,
+          "tid": new Date("2017-02-25T15:18:24.323"),
+          "created": new Date("2017-02-22T15:18:24.323"),
+          "sted": "Sannergata 2",
+          "valgt": false
+        }, {
+          "id": 2,
+          "tid": new Date("2017-03-09T15:18:24.323"),
+          "created": new Date("2017-02-22T15:18:24.323"),
+          "sted": "Sannergata 2",
+          "valgt": false
+        }]
+      }],
+      "bekreftetAlternativ": null,
+      "alternativer": [{
+        "id": 1,
+        "tid": new Date("2017-03-07T15:18:24.323"),
+        "created": new Date("2017-02-22T15:18:24.323"),
+        "sted": "Sannergata 2",
+        "valgt": false
+      }, {
+        "id": 3,
+        "tid": new Date("2017-02-25T15:18:24.323"),
+        "created": new Date("2017-02-22T15:18:24.323"),
+        "sted": "Sannergata 2",
+        "valgt": false
+      }, {
+        "id": 2,
+        "tid": new Date("2017-02-25T15:18:24.323"),
+        "created": new Date("2017-02-22T15:18:24.323"),
+        "sted": "Sannergata 2",
+        "valgt": false
+      }, ]
+    }, mote);
+};
 
 describe('moter', () => {
+
+    beforeEach(() => {
+        clock = sinon.useFakeTimers(1484524800000); // 16. januar 2017
+    })
+
+    afterEach(() => {
+        clock.restore();
+    });
 
     describe('OPPRETT MØTE', () => {
         it('Håndterer OPPRETTER_MOTE', () => {
@@ -651,7 +744,7 @@ describe('moter', () => {
                 'opprettetTidspunkt': '2016-11-03T13:28:05.244',
                 'navEnhet': 'navEnhet',
                 "bekreftetTidspunkt": new Date('2016-11-03T13:28:05.244'),
-            'deltakere': [{
+                'deltakere': [{
                     'deltakerUuid': '944c877e-e261-49a4-841e-2ab52349e864',
                     'navn': '***REMOVED***',
                     'epost': '***REMOVED***',
@@ -703,5 +796,154 @@ describe('moter', () => {
         });
 
     });
+
+    describe("FLERE ALTERNATIVER", () => {
+
+      let mote;
+      let initialState;
+
+      beforeEach(() => {
+        mote = getMote();
+      });
+
+      it("Håndterer opprettFlereAlternativBekreftet", () => {
+        let initialState = deepFreeze({
+          data: [mote]
+        });
+        const data = [{
+          "tid": "2017-03-09T10:00:00.000",
+          "sted": "Sannergata 2",
+          "valgt": false,
+        }, {
+          "tid": "2017-03-10T10:00:00.000",
+          "sted": "Sannergata 2",
+          "valgt": false,
+        }];
+        const action = actions.opprettFlereAlternativBekreftet(data, "min-mote-uuid");
+        const nextState = moter(initialState, action);
+
+        expect(nextState.antallNyeTidspunkt).to.be.undefined;
+        expect(nextState.nyeAlternativFeilet).to.be.false;
+        expect(nextState.senderNyeAlternativ).to.be.false;
+        expect(nextState.data).to.deep.equal([{
+          "status": "OPPRETTET",
+          'moteUuid': 'min-mote-uuid',
+          "opprettetTidspunkt": new Date("2017-02-22T15:18:24.323"),
+          "bekreftetTidspunkt": null,
+          "deltakere": [{
+            "hendelser": [],
+            "deltakerUuid": "uuid1",
+            "navn": "Are Arbeidsgiver",
+            "orgnummer": "***REMOVED***",
+            "epost": "are.arbeidsgiver@nav.no",
+            "type": "arbeidsgiver",
+            "svartidspunkt": null,
+            "svar": [{
+              "id": 1,
+              "tid": new Date("2017-03-07T15:18:24.323"),
+              "created": new Date("2017-02-22T15:18:24.323"),
+              "sted": "Sannergata 2",
+              "valgt": false
+            }, {
+              "id": 2,
+              "tid": new Date("2017-03-09T15:18:24.323"),
+              "created": new Date("2017-02-22T15:18:24.323"),
+              "sted": "Sannergata 2",
+              "valgt": false
+            }, {
+              "id": 3,
+              "tid": new Date("2017-02-25T15:18:24.323"),
+              "created": new Date("2017-02-22T15:18:24.323"),
+              "sted": "Sannergata 2",
+              "valgt": false
+            }, {
+              "id": 4,
+              "tid": new Date("2017-03-09T10:00:00.000"),
+              "created": new Date(),
+              "sted": "Sannergata 2",
+              "valgt": false,
+            }, {
+              "id": 5, 
+              "tid": new Date("2017-03-10T10:00:00.000"),
+              "created": new Date(),
+              "sted": "Sannergata 2",
+              "valgt": false,
+            }]
+          }, {
+            "hendelser": [],
+            "deltakerUuid": "uuid2",
+            "navn": "Sygve Sykmeldt",
+            "orgnummer": null,
+            "epost": null,
+            "type": "Bruker",
+            "svartidspunkt": null,
+            "svar": [{
+              "id": 1,
+              "tid": new Date("2017-03-07T15:18:24.323"),
+              "created": new Date("2017-02-22T15:18:24.323"),
+              "sted": "Sannergata 2",
+              "valgt": false
+            }, {
+              "id": 2,
+              "tid": new Date("2017-03-09T15:18:24.323"),
+              "created": new Date("2017-02-22T15:18:24.323"),
+              "sted": "Sannergata 2",
+              "valgt": false
+            }, {
+              "id": 3,
+              "tid": new Date("2017-02-25T15:18:24.323"),
+              "created": new Date("2017-02-22T15:18:24.323"),
+              "sted": "Sannergata 2",
+              "valgt": false
+            }, {
+              "id": 4,
+              "tid": new Date("2017-03-09T10:00:00.000"),
+              "created": new Date(),
+              "sted": "Sannergata 2",
+              "valgt": false,
+            }, {
+              "id": 5, 
+              "tid": new Date("2017-03-10T10:00:00.000"),
+              "created": new Date(),
+              "sted": "Sannergata 2",
+              "valgt": false,
+            }]
+          }],
+          "bekreftetAlternativ": null,
+          "alternativer": [{
+            "id": 1,
+            "tid": new Date("2017-03-07T15:18:24.323"),
+            "created": new Date("2017-02-22T15:18:24.323"),
+            "sted": "Sannergata 2",
+            "valgt": false
+          }, {
+            "id": 2,
+            "tid": new Date("2017-02-25T15:18:24.323"),
+            "created": new Date("2017-02-22T15:18:24.323"),
+            "sted": "Sannergata 2",
+            "valgt": false
+          }, {
+            "id": 3,
+            "tid": new Date("2017-02-25T15:18:24.323"),
+            "created": new Date("2017-02-22T15:18:24.323"),
+            "sted": "Sannergata 2",
+            "valgt": false
+          }, {
+            "id": 4,
+            "tid": new Date("2017-03-09T10:00:00.000"),
+            "created": new Date(),
+            "sted": "Sannergata 2",
+            "valgt": false,
+          }, {
+            "id": 5, 
+            "tid": new Date("2017-03-10T10:00:00.000"),
+            "created": new Date(),
+            "sted": "Sannergata 2",
+            "valgt": false,
+          }]
+        }])
+      })
+
+    })
 
 });
