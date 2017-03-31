@@ -4,17 +4,6 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
-    <display-name>modiasyfofront</display-name>
-
-    <session-config>
-        <session-timeout>30</session-timeout>
-        <cookie-config>
-            <name>SYFOFRONT_JSESSIONID</name>
-            <http-only>true</http-only>
-            <secure>true</secure>
-        </cookie-config>
-        <tracking-mode>COOKIE</tracking-mode>
-    </session-config>
 
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
