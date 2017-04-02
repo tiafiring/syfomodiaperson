@@ -18,6 +18,7 @@ import arbeidstaker from './mote/reducers/arbeidstaker';
 import virksomhet from './mote/reducers/virksomhet';
 import rootSaga from './sagas/index';
 import { hentNavbruker, sjekkTilgangMoteadmin } from './actions/navbruker_actions';
+import { opprettWebsocketConnection } from './contextHolder';
 
 const rootReducer = combineReducers({
     history,
@@ -67,11 +68,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 visVeileder: true,
                 visSokefelt: true,
             },
+            handlePersonsokSubmit: (nyttFnr) => {
+                if (nyttFnr !== fnr) {
+                    window.pushModiacontext({
+                        fnr: nyttFnr,
+                        callbackFunc: () => { window.location = "/sykefravaer/" + nyttFnr; }
+                    });
+                }
+            },
             fnr,
             applicationName: 'Sykefravær',
         },
     };
     window.renderDecoratorHead(config);
+});
+
+opprettWebsocketConnection(() => {
+    window.hentModiaContext({
+        callbackFunc: ({ aktivBruker }) => {
+            if (aktivBruker !== fnr) {
+                window.location = "/sykefravaer/" + aktivBruker;
+            }
+        }
+    });
 });
 
 export {
