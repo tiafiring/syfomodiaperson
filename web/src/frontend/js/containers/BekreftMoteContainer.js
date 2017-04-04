@@ -51,6 +51,7 @@ export class BekreftMoteSide extends Component {
                                                 this.onSubmit();
                                             }}
                                             mote={mote}
+                                            alternativ={alternativ}
                                             ledetekster={ledetekster}
                                             avbrytHref={`/sykefravaer/${fnr}/mote`}
                                             bekrefter={bekrefter}
