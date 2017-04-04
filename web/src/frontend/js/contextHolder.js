@@ -12,7 +12,6 @@ const ContextholderConnection = () => {
 export const opprettWebsocketConnection = (callback) => {
     const connection = new ContextholderConnection();
     connection.onmessage = (e) => {
-        console.log(e.data);
         if (e.data === 'Connection Established') {
             return;
         }

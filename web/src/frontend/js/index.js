@@ -83,14 +83,29 @@ document.addEventListener('DOMContentLoaded', () => {
     window.renderDecoratorHead(config);
 });
 
-opprettWebsocketConnection(() => {
-    window.hentModiaContext({
-        callbackFunc: ({ aktivBruker }) => {
-            if (aktivBruker !== fnr) {
-                window.location = "/sykefravaer/" + aktivBruker;
+opprettWebsocketConnection((callbackValue) => {
+
+    if (callbackValue === 'NY_AKTIV_BRUKER') {
+        window.hentModiaContext({
+            callbackFunc: ({ aktivBruker }) => {
+                if (aktivBruker !== fnr) {
+                    window.location = "/sykefravaer/" + aktivBruker;
+                }
             }
-        }
-    });
+        });
+    }
+
+    if (callbackValue === 'NY_AKTIV_ENHET') {
+        window.hentModiaContext({
+            callbackFunc: ({ aktivEnhet }) => {
+                if (aktivEnhet) {
+                    console.log(aktivEnhet);
+                }
+            }
+        });
+    }
+
+
 });
 
 export {
