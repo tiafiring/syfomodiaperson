@@ -7,117 +7,119 @@ import { Utvidbar } from 'digisyfo-npm';
 
 describe("Svarstatus", () => {
 
-    let mote; 
+    let mote;
+    let motedata;
 
     beforeEach(() => {
-        mote = konverterTid({
-          "id": 4,
-          "moteUuid": "0afd1d57-db90-4a9b-af97-cbf1055e6ffa",
-          "opprettetAv": "Z990322",
-          "status": "OPPRETTET",
-          "opprettetTidspunkt": "2017-03-28T09:46:37.677Z",
-          "navEnhet": "navEnhet",
-          "deltakere": [{
-            "hendelser": [{
-              "kanal": "EPOST",
-              "adresse": "***REMOVED***",
-              "varseltype": "OPPRETTET",
-              "resultat": "OK"
+        motedata = {
+            "id": 4,
+            "moteUuid": "0afd1d57-db90-4a9b-af97-cbf1055e6ffa",
+            "opprettetAv": "Z990322",
+            "status": "OPPRETTET",
+            "opprettetTidspunkt": "2017-03-28T09:46:37.677Z",
+            "navEnhet": "navEnhet",
+            "deltakere": [{
+                "hendelser": [{
+                    "kanal": "EPOST",
+                    "adresse": "***REMOVED***",
+                    "varseltype": "OPPRETTET",
+                    "resultat": "OK"
+                }],
+                "deltakerUuid": "454a31c0-3691-40f4-9d9e-882ac1d5306e",
+                "navn": "***REMOVED***",
+                "orgnummer": "***REMOVED***",
+                "epost": "***REMOVED***",
+                "type": "arbeidsgiver",
+                "avvik": [],
+                "svar": [{
+                    "id": 14003,
+                    "tid": "2021-12-12T11:00:00Z",
+                    "created": "2017-03-28T09:46:37.682Z",
+                    "sted": "Oslo",
+                    "valgt": false
+                }, {
+                    "id": 14004,
+                    "tid": "2020-12-12T11:00:00Z",
+                    "created": "2017-03-28T09:46:37.684Z",
+                    "sted": "Oslo",
+                    "valgt": false
+                }]
+            }, {
+                "hendelser": [{
+                    "kanal": "TLF",
+                    "adresse": "12345678",
+                    "varseltype": "OPPRETTET",
+                    "resultat": "OK"
+                }, {
+                    "kanal": "EPOST",
+                    "adresse": "test@nav.no",
+                    "varseltype": "OPPRETTET",
+                    "resultat": "OK"
+                }],
+                "deltakerUuid": "0b118a5a-f866-432b-92cd-46a1dbbc7699",
+                "navn": "***REMOVED***",
+                "fnr": "***REMOVED***",
+                "type": "Bruker",
+                "avvik": [],
+                "svar": [{
+                    "id": 14003,
+                    "tid": "2021-12-12T11:00:00Z",
+                    "created": "2017-03-28T09:46:37.682Z",
+                    "sted": "Oslo",
+                    "valgt": false
+                }, {
+                    "id": 14004,
+                    "tid": "2020-12-12T11:00:00Z",
+                    "created": "2017-03-28T09:46:37.684Z",
+                    "sted": "Oslo",
+                    "valgt": false
+                }]
             }],
-            "deltakerUuid": "454a31c0-3691-40f4-9d9e-882ac1d5306e",
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
-            "epost": "***REMOVED***",
-            "type": "arbeidsgiver",
-            "avvik": [],
-            "svar": [{
-              "id": 14003,
-              "tid": "2021-12-12T11:00:00Z",
-              "created": "2017-03-28T09:46:37.682Z",
-              "sted": "Oslo",
-              "valgt": false
+            "alternativer": [{
+                "id": 14001,
+                "tid": "2021-10-12T11:00:00Z",
+                "created": "2017-03-28T09:46:37.682Z",
+                "sted": "Oslo",
+                "valgt": false
             }, {
-              "id": 14004,
-              "tid": "2020-12-12T11:00:00Z",
-              "created": "2017-03-28T09:46:37.684Z",
-              "sted": "Oslo",
-              "valgt": false
+                "id": 14002,
+                "tid": "2021-09-12T11:00:00Z",
+                "created": "2017-03-28T09:46:37.682Z",
+                "sted": "Oslo",
+                "valgt": false
+            }, {
+                "id": 14003,
+                "tid": "2021-07-12T11:00:00Z",
+                "created": "2017-04-28T09:46:37.682Z",
+                "sted": "Oslo",
+                "valgt": false
+            }, {
+                "id": 14004,
+                "tid": "2021-12-12T11:00:00Z",
+                "created": "2017-04-28T09:46:37.682Z",
+                "sted": "Oslo",
+                "valgt": false
+            }, {
+                "id": 14005,
+                "tid": "2020-11-12T11:00:00Z",
+                "created": "2017-05-28T09:46:37.682Z",
+                "sted": "Oslo",
+                "valgt": false
+            }, {
+                "id": 14006,
+                "tid": "2020-12-12T11:00:00Z",
+                "created": "2017-05-28T09:46:37.684Z",
+                "sted": "Oslo",
+                "valgt": false
+            }, {
+                "id": 14007,
+                "tid": "2020-10-12T11:00:00Z",
+                "created": "2017-05-28T09:46:37.686Z",
+                "sted": "Oslo",
+                "valgt": false
             }]
-          }, {
-            "hendelser": [{
-              "kanal": "TLF",
-              "adresse": "12345678",
-              "varseltype": "OPPRETTET",
-              "resultat": "OK"
-            }, {
-              "kanal": "EPOST",
-              "adresse": "test@nav.no",
-              "varseltype": "OPPRETTET",
-              "resultat": "OK"
-            }],
-            "deltakerUuid": "0b118a5a-f866-432b-92cd-46a1dbbc7699",
-            "navn": "***REMOVED***",
-            "fnr": "***REMOVED***",
-            "type": "Bruker",
-            "avvik": [],
-            "svar": [{
-              "id": 14003,
-              "tid": "2021-12-12T11:00:00Z",
-              "created": "2017-03-28T09:46:37.682Z",
-              "sted": "Oslo",
-              "valgt": false
-            }, {
-              "id": 14004,
-              "tid": "2020-12-12T11:00:00Z",
-              "created": "2017-03-28T09:46:37.684Z",
-              "sted": "Oslo",
-              "valgt": false
-            }]
-          }],
-          "alternativer": [{
-            "id": 14001,
-            "tid": "2021-10-12T11:00:00Z",
-            "created": "2017-03-28T09:46:37.682Z",
-            "sted": "Oslo",
-            "valgt": false
-          }, {
-            "id": 14002,
-            "tid": "2021-09-12T11:00:00Z",
-            "created": "2017-03-28T09:46:37.682Z",
-            "sted": "Oslo",
-            "valgt": false
-          }, {
-            "id": 14003,
-            "tid": "2021-07-12T11:00:00Z",
-            "created": "2017-04-28T09:46:37.682Z",
-            "sted": "Oslo",
-            "valgt": false
-          }, {
-            "id": 14004,
-            "tid": "2021-12-12T11:00:00Z",
-            "created": "2017-04-28T09:46:37.682Z",
-            "sted": "Oslo",
-            "valgt": false
-          }, {
-            "id": 14005,
-            "tid": "2020-11-12T11:00:00Z",
-            "created": "2017-05-28T09:46:37.682Z",
-            "sted": "Oslo",
-            "valgt": false
-          }, {
-            "id": 14006,
-            "tid": "2020-12-12T11:00:00Z",
-            "created": "2017-05-28T09:46:37.684Z",
-            "sted": "Oslo",
-            "valgt": false
-          }, {
-            "id": 14007,
-            "tid": "2020-10-12T11:00:00Z",
-            "created": "2017-05-28T09:46:37.686Z",
-            "sted": "Oslo",
-            "valgt": false
-          }]
-        })
+        };
+        mote = konverterTid(motedata);
     });
 
     describe("erSamtidig", () => {
@@ -200,7 +202,7 @@ describe("Svarstatus", () => {
             let mote_;
 
             beforeEach(() => {
-                mote_ = Object.assign({}, mote, {
+                mote_ = Object.assign({}, motedata, {
                     alternativer: [{
                         "id": 14001,
                         "tid": "2021-10-12T11:00:00Z",

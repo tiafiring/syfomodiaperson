@@ -1,12 +1,12 @@
 import React, { PropTypes, Component } from 'react';
 import { Varselstripe, getLedetekst } from 'digisyfo-npm';
 import AppSpinner from '../../components/AppSpinner';
-import { fikkMoteOpprettetVarsel } from '../utils';
+import { fikkMoteOpprettetVarsel } from '../utils/index';
 import { konstanter, proptypes as moterPropTypes } from 'moter-npm';
 
 const { BRUKER, ARBEIDSGIVER } = konstanter;
 
-const Innhold = ({ emne, innhold }) => {
+export const Innhold = ({ emne, innhold }) => {
     return (<div className="blokk">
         <div className="epostinnhold__forhandsvis">
             <p>{emne}</p>
