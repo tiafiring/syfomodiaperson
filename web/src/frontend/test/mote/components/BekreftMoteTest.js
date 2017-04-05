@@ -209,8 +209,6 @@ describe("BekreftMoteSkjemaComponent", () => {
         let component = shallow(<BekreftMoteSkjema mote={mote} ledetekster={ledetekster}/>);
         expect(component.find(InnholdsviserContainer)).to.have.length(1);
     });
-
-
 });
 
 describe("BekreftMoteUtenSvarSkjemaComponent", () => {

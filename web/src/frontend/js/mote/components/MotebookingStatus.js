@@ -3,6 +3,7 @@ import { getDatoFraZulu, fikkIkkeMoteOpprettetVarsel } from '../utils';
 import Sidetopp from '../../components/Sidetopp';
 import KontaktInfoFeilmelding from './KontaktInfoFeilmelding';
 import BekreftetMotetidspunkt from './BekreftetMotetidspunkt';
+import InformasjonSendt from './InformasjonSendt';
 import FlereTidspunktSkjema from '../skjema/FlereTidspunktSkjema';
 import { Varselstripe, getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import { Link } from 'react-router';
@@ -97,6 +98,7 @@ const MotebookingStatus = (props) => {
                 <h3 className="motested__tittel">{getLedetekst('mote.bookingstatus.sted', ledetekster)}</h3>
                 <p className="motested__sted">{mote.alternativer[0].sted}</p>
             </div>
+            { status === BEKREFTET && <InformasjonSendt {...props} /> }
             <div className="knapperad">
                 <Link role="button" className="knapp knapp--enten js-avbryt" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>{getLedetekst('mote.bookingstatus.knapp.avbryt', ledetekster)}</Link>
                 <button className="js-ny knapp" onClick={() => {
