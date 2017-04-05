@@ -82,14 +82,14 @@ describe("BekreftMoteComponent", () => {
         ledetekster = {
             "mote.bekreftmote.lightbox-overskrift": "Bekreft møteforespørsel"
         }
-    })
+    });
 
     it("Viser tittel", () => {
         let component = shallow(<BekreftMote
             mote={mote}
             ledetekster={ledetekster} />);
         expect(component.text()).to.contain("Bekreft møteforespørsel");
-    })
+    });
 
     it("Viser mottakere det er to mottakere", () => {
         let component = shallow(<BekreftMote mote={mote} ledetekster={ledetekster} />);
@@ -102,6 +102,4 @@ describe("BekreftMoteComponent", () => {
         let component = shallow(<BekreftMote mote={mote} ledetekster={ledetekster}/>);
         expect(component.find(InnholdsviserContainer)).to.have.length(1);
     });
-
-
 });

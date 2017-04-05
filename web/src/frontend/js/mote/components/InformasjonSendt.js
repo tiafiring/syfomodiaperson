@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { konstanter, proptypes as moterPropTypes } from 'moter-npm';
 import { Utvidbar } from 'digisyfo-npm';
@@ -20,13 +20,16 @@ const actions = Object.assign({}, epostinnholdActions, {
 
 export const InnholdsviserContainer = connect(mapStateToInnholdsviserProps, actions)(DropdownInnholdsviser);
 
-const InformasjonSendt = ({ mote, ledetekster }) => {
+const InformasjonSendt = ({ fikkIkkeOpprettetVarsel, mote, ledetekster }) => {
     return (<div>
-        <Utvidbar erApen={false} tittel="Arbeidstaker"
-            ikon="svg/person.svg" ikonHover="svg/person_hover.svg" ikonAltTekst="Arbeidstaker" className="blokk" variant="lysebla">
-            <InnholdsviserContainer mote={mote} ledetekster={ledetekster} type={ BRUKER } />
-        </Utvidbar>
-
+        <h2>Informasjon sendt:</h2>
+        { !fikkIkkeOpprettetVarsel &&
+            <Utvidbar erApen={false} tittel="Arbeidstaker"
+                ikon="svg/person.svg" ikonHover="svg/person_hover.svg" ikonAltTekst="Arbeidstaker" className="blokk"
+                variant="lysebla">
+                <InnholdsviserContainer mote={mote} ledetekster={ledetekster} type={ BRUKER } />
+            </Utvidbar>
+        }
         <Utvidbar erApen={false} tittel="Arbeidsgiver"
             ikon="svg/arbeidsgiver.svg" ikonHover="svg/arbeidsgiver_hover.svg" ikonAltTekst="Arbeidsgiver" className="blokk" variant="lilla">
             <InnholdsviserContainer mote={mote} ledetekster={ledetekster} type={ ARBEIDSGIVER } />
@@ -36,7 +39,8 @@ const InformasjonSendt = ({ mote, ledetekster }) => {
 
 InformasjonSendt.propTypes = {
     mote: moterPropTypes.mote,
-    ledetekster: moterPropTypes.ledetekster,
+    fikkIkkeOpprettetVarsel: PropTypes.bool,
+    ledetekster: PropTypes.object,
 };
 
 export default InformasjonSendt;
