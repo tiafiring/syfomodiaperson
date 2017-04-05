@@ -1,40 +1,72 @@
-import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
-import { getLedetekst, Varselstripe } from 'digisyfo-npm';
-import Epostmottakere from './Epostmottakere';
-import { connect } from 'react-redux';
-import Innholdsviser from './Innholdsviser';
-import { mapStateToInnholdsviserProps } from './AvbrytMote';
+import React, { Component, PropTypes } from 'react';
 import { proptypes as motePropTypes } from 'moter-npm';
+import { konstanter } from 'moter-npm';
+import BekreftMoteSkjema from './BekreftMoteSkjema';
+import BekreftMoteUtenSvarSkjema from './BekreftMoteUtenSvarSkjema';
 
-export const InnholdsviserContainer = connect(mapStateToInnholdsviserProps)(Innholdsviser);
+const { ARBEIDSGIVER } = konstanter;
 
-const BekreftMote = (props) => {
-    const { mote, ledetekster, bekrefter, bekreftFeilet, onSubmit, avbrytHref, hentEpostinnhold } = props;
 
-    return (<div className="epostinnhold">
-        <h2 className="epostinnhold__tittel">{getLedetekst('mote.bekreftmote.lightbox-overskrift', ledetekster)}</h2>
-        <Epostmottakere mote={mote} ledetekster={ledetekster} />
-        <InnholdsviserContainer mote={mote} hentEpostinnhold={hentEpostinnhold} ledetekster={ledetekster} />
-        <div aria-live="polite" role="alert">
-            { bekreftFeilet && (<div className="blokk">
-                <Varselstripe type="feil">
-                    <p>{getLedetekst('mote.bekreftmote.feil', ledetekster)}</p>
-                </Varselstripe>
-            </div>)}
-        </div>
-        <div className="blokk--s">
-            <button
-                disabled={bekrefter}
-                className="knapp blokk--s knapp--enten" onClick={onSubmit}>
-                    {getLedetekst('mote.bekreftmote.lightbox-send-knapp', ledetekster)}
-                    { bekrefter && <span className="knapp__spinner" /> }
-                </button>
-            <Link to={avbrytHref} className="lenke">{getLedetekst('mote.bekreftmote.lightbox-avbryt-knapp', ledetekster)}</Link>
-        </div>
-    </div>);
-};
+class BekreftMote extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            bekreftet: false,
+        };
+        this.bekreftMote = this.bekreftMote.bind(this);
+    }
 
+    componentWillMount() {
+        if (this.moteBesvart(this.props.mote, this.props.alternativ)) {
+            this.setState({
+                bekreftet: !this.state.bekreftet,
+            });
+        }
+    }
+    moteBesvart(mote, alternativ) {
+        let arbeidsgiverHarSvart = false;
+
+        const arbeidsgiver = mote.deltakere.filter((d) => {
+            return d.type === ARBEIDSGIVER;
+        })[0];
+        arbeidsgiver.svar.forEach((s) => {
+            if (arbeidsgiver.svartidspunkt !== null && s.valgt && s.id === alternativ.id) {
+                arbeidsgiverHarSvart = true;
+            }
+        });
+        return arbeidsgiverHarSvart;
+    }
+
+    bekreftMote() {
+        this.setState({
+            bekreftet: !this.state.bekreftet,
+        });
+    }
+
+    render() {
+        if (this.state.bekreftet) {
+            return (
+                <BekreftMoteSkjema
+                    onSubmit={this.props.onSubmit}
+                    mote={this.props.mote}
+                    ledetekster={this.props.ledetekster}
+                    avbrytHref={this.props.avbrytHref}
+                    bekrefter={this.props.bekrefter}
+                    hentEpostinnhold={this.props.hentEpostinnhold}
+                    bekreftFeilet={this.props.bekreftFeilet} />
+            );
+        }
+        return (
+            <BekreftMoteUtenSvarSkjema
+                mote={this.props.mote}
+                ledetekster={this.props.ledetekster}
+                avbrytHref={this.props.avbrytHref}
+                bekrefter={this.props.bekrefter}
+                bekreftFeilet={this.props.bekreftFeilet}
+                bekreftMoteUtenSvar={this.bekreftMote} />
+        );
+    }
+}
 BekreftMote.propTypes = {
     ledetekster: PropTypes.object,
     onSubmit: PropTypes.func,
@@ -43,6 +75,7 @@ BekreftMote.propTypes = {
     bekrefter: PropTypes.bool,
     bekreftFeilet: PropTypes.bool,
     hentEpostinnhold: PropTypes.func,
+    alternativ: PropTypes.object,
 };
 
 export default BekreftMote;

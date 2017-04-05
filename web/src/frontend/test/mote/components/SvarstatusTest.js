@@ -209,7 +209,7 @@ describe("Svarstatus", () => {
                         "created": "2017-03-28T09:46:37.682Z",
                         "sted": "Oslo",
                         "valgt": false
-                      }, {
+                    }, {
                         "id": 14002,
                         "tid": "2021-09-12T11:00:00Z",
                         "created": "2017-03-28T09:46:37.685Z",
