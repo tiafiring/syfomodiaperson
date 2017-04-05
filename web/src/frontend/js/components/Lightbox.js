@@ -19,22 +19,38 @@ class Lightbox extends Component {
         });
     }
 
-    render() {
+    renderLightboxInnhold() {
         const { children } = this.props;
+
+        if (this.props.scrollOverflowY) {
+            return (
+                <div className="lightbox__innhold lightbox__innhold--medScroll">
+                    {children}
+                </div>);
+        }
+        return (
+            <div className="lightbox__innhold">
+                {children}
+            </div>);
+    }
+
+    render() {
         if (!this.state.erApen) {
             return null;
         }
-        return (<div className="lightbox">
-            <div className="lightbox__innhold">
-                {children}
-            </div>
-        </div>);
+        return (
+            <div className="lightbox">
+                {this.renderLightboxInnhold()}
+            </div>);
     }
 }
-
+Lightbox.defaultProps = {
+    scrollOverflowY: true,
+};
 Lightbox.propTypes = {
     children: PropTypes.object,
     onClose: PropTypes.func,
+    scrollOverflowY: PropTypes.bool,
 };
 
 export default Lightbox;

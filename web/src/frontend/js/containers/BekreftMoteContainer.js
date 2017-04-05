@@ -16,6 +16,11 @@ export class BekreftMoteSide extends Component {
     constructor(props) {
         super(props);
         this.hentInnhold();
+        this.state = {
+            bekreftet: false,
+            scrollOverflowY: false,
+        };
+        this.bekreftMote = this.bekreftMote.bind(this);
     }
 
     onSubmit() {
@@ -30,6 +35,13 @@ export class BekreftMoteSide extends Component {
         }
     }
 
+    bekreftMote() {
+        this.setState({
+            bekreftet: true,
+            scrollOverflowY: true,
+        });
+    }
+
     render() {
         const { alternativ, henterMoterBool, fnr, mote, ledetekster, bekrefter, bekreftFeilet, hentBekreftMoteEpostinnhold } = this.props;
 
@@ -41,7 +53,7 @@ export class BekreftMoteSide extends Component {
                     } else if (alternativ) {
                         return (<div>
                             {
-                                mote.status === 'OPPRETTET' && <Lightbox onClose={() => {
+                                mote.status === 'OPPRETTET' && <Lightbox scrollOverflowY={this.state.scrollOverflowY} onClose={() => {
                                     history.replace(`/sykefravaer/${fnr}/mote`);
                                 }}>
                                 {
@@ -58,7 +70,9 @@ export class BekreftMoteSide extends Component {
                                             hentEpostinnhold={(moteUuid) => {
                                                 hentBekreftMoteEpostinnhold(moteUuid, alternativ.id);
                                             }}
-                                            bekreftFeilet={bekreftFeilet} />);
+                                            bekreftFeilet={bekreftFeilet}
+                                            bekreftMote={this.bekreftMote}
+                                            moteBekreftet={this.state.bekreftet} />);
                                     })()
                                 }
                                 </Lightbox>

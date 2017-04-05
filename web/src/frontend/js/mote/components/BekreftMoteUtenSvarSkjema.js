@@ -5,7 +5,7 @@ import { getLedetekst, Varselstripe } from 'digisyfo-npm';
 const BekreftMoteUtenSvarSkjema = (props) => {
     const { ledetekster, bekrefter, bekreftFeilet, avbrytHref, bekreftMoteUtenSvar } = props;
 
-    return (<div className="epostinnhold">
+    return (<div className="bekreftutensvarinnhold">
         <h2 className="sidetopp__tittel">{getLedetekst('mote.bekreftmoteutensvar.lightbox-overskrift', ledetekster)}</h2>
         <div className="blokk">
             <p>{getLedetekst('mote.bekreftmoteutensvar.lightbox-tekst', ledetekster)}</p>

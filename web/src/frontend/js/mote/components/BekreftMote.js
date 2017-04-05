@@ -6,23 +6,20 @@ import BekreftMoteUtenSvarSkjema from './BekreftMoteUtenSvarSkjema';
 
 const { ARBEIDSGIVER } = konstanter;
 
-
 class BekreftMote extends Component {
     constructor(props) {
         super(props);
         this.state = {
             bekreftet: false,
         };
-        this.bekreftMote = this.bekreftMote.bind(this);
     }
 
     componentWillMount() {
         if (this.moteBesvart(this.props.mote, this.props.alternativ)) {
-            this.setState({
-                bekreftet: !this.state.bekreftet,
-            });
+            this.props.bekreftMote();
         }
     }
+
     moteBesvart(mote, alternativ) {
         let arbeidsgiverHarSvart = false;
 
@@ -37,14 +34,8 @@ class BekreftMote extends Component {
         return arbeidsgiverHarSvart;
     }
 
-    bekreftMote() {
-        this.setState({
-            bekreftet: !this.state.bekreftet,
-        });
-    }
-
     render() {
-        if (this.state.bekreftet) {
+        if (this.props.moteBekreftet) {
             return (
                 <BekreftMoteSkjema
                     onSubmit={this.props.onSubmit}
@@ -63,7 +54,7 @@ class BekreftMote extends Component {
                 avbrytHref={this.props.avbrytHref}
                 bekrefter={this.props.bekrefter}
                 bekreftFeilet={this.props.bekreftFeilet}
-                bekreftMoteUtenSvar={this.bekreftMote} />
+                bekreftMoteUtenSvar={this.props.bekreftMote} />
         );
     }
 }
@@ -76,6 +67,8 @@ BekreftMote.propTypes = {
     bekreftFeilet: PropTypes.bool,
     hentEpostinnhold: PropTypes.func,
     alternativ: PropTypes.object,
+    bekreftMote: PropTypes.func,
+    moteBekreftet: PropTypes.bool,
 };
 
 export default BekreftMote;
