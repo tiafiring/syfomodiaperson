@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import { validate, FlereTidspunktSkjema } from "../../../js/mote/skjema/FlereTidspunktSkjema";
+import { validate, FlereTidspunktSkjema, getData, dekorerMedSted } from "../../../js/mote/skjema/FlereTidspunktSkjema";
 import {mount, shallow, render} from "enzyme";
 import React from "react";
 import Tidspunkter from "../../../js/mote/skjema/Tidspunkter";
@@ -26,7 +26,46 @@ describe("FlereTidspunktSkjemaTest", () => {
             expect(component.find(Tidspunkter)).to.have.length(1);
             expect(component.find(Tidspunkter).prop("skjemanavn")).to.equal("flereAlternativ")
         });
-    })
+    });
+
+    describe("Transformering av data før sending til server", () => {
+        let values;
+
+        beforeEach(() => {
+            values = {
+                tidspunkter: [{
+                    dato: "20.02.2012",
+                    klokkeslett: "10.20"
+                }, {
+                    dato: "20.02.2013",
+                    klokkeslett: "10.30"
+                }]
+            };
+        })
+        it("getData skal mappe values om til riktig format", () => {
+            expect(getData(values)).to.deep.equal([{
+                tid: "2012-02-20T09:20:00.000Z",
+                valgt: false,
+            }, {
+                tid: "2013-02-20T09:30:00.000Z",
+                valgt: false,
+            }]);
+        });
+
+        it("dekorerMedSted skal legge til sted på data", () => {
+            const data = getData(values);
+            const res = dekorerMedSted(data, "Oslo");
+            expect(res).to.deep.equal([{
+                tid: "2012-02-20T09:20:00.000Z",
+                valgt: false,
+                sted: "Oslo"
+            }, {
+                tid: "2013-02-20T09:30:00.000Z",
+                valgt: false,
+                sted: "Oslo"
+            }])
+        })
+    });
 
     describe("validate", () => {
 

@@ -16,7 +16,7 @@ const BekreftetMotetidspunkt = ({ mote }) => {
     const arbeidsgiversSvar = arbeidsgiver.svar.filter((s) => {
         return s.id === mote.bekreftetAlternativ.id;
     })[0];
-    return (<div className="bekreftetTidspunkt">
+    return (<div className="gronnRammeTidspunkt">
         <DatoOgTid tagName="h4" tid={mote.bekreftetAlternativ.tid} />
         <SvarMedIkon bruker={arbeidsgiver} svar={arbeidsgiversSvar} />
         {

@@ -4,7 +4,8 @@ import {
     hentMoter,
     avbrytMote,
     avbrytMoteUtenVarsel,
-    bekreftMote
+    bekreftMote,
+    opprettFlereAlternativ
 } from "../../../js/mote/sagas/moterSagas.js";
 import * as actions from "../../../js/mote/actions/moter_actions";
 import {post, get} from "../../../js/api/index";
@@ -112,6 +113,30 @@ describe("moterSagas", () => {
 
         it("Skal dispatche MOTE_AVBRUTT", () => {
             const nextPut = put({type: 'MOTE_AVBRUTT', uuid: "min-fine-mote-uuid"});
+            expect(generator.next().value).to.deep.equal(nextPut);
+        });
+
+    });
+
+    describe("opprettFlereAlternativ", () => {
+        const data = [{"tid":"2017-03-30T10:00:00.000Z","sted":"OSlo","valgt":false},{"tid":"2017-03-31T08:00:00.000Z","sted":"OSlo","valgt":false}];
+        const action = actions.opprettFlereAlternativ(data, "min-fine-mote-uuid");
+        const generator = opprettFlereAlternativ(action);
+
+        it("Skal dispatche OPPRETTER_FLERE_ALTERNATIV", () => {
+            const action = actions.oppretterFlereAlternativ();
+            const nextPut = put(action);
+            expect(generator.next().value).to.deep.equal(nextPut);
+        });
+
+        it("Skal poste til REST-tjenesten", () => {
+            const nextCall = call(post, "http://tjenester.nav.no/moteadmin/moter/min-fine-mote-uuid/nyealternativer", data);
+            expect(generator.next().value).to.deep.equal(nextCall);
+        });
+
+        it("Skal dispatche opprettFlereAlternativBekreftet()", () => {
+            const action = actions.opprettFlereAlternativBekreftet(data, "min-fine-mote-uuid");
+            const nextPut = put(action);
             expect(generator.next().value).to.deep.equal(nextPut);
         });
 

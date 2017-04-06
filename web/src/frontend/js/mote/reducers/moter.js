@@ -32,6 +32,7 @@ export default function moter(state = defaultState, action) {
                 alternativer: action.data.alternativer.map((a) => {
                     return Object.assign({}, a, {
                         tid: new Date(a.tid),
+                        created: new Date(),
                     });
                 }),
                 deltakere: action.data.deltakere.map((d) => {
@@ -39,6 +40,7 @@ export default function moter(state = defaultState, action) {
                         svar: action.data.alternativer.map((a) => {
                             return Object.assign({}, a, {
                                 tid: new Date(a.tid),
+                                created: new Date(),
                             });
                         }),
                     });
@@ -189,17 +191,44 @@ export default function moter(state = defaultState, action) {
             });
         }
         case actions.OPPRETT_FLERE_ALTERNATIV_BEKREFTET: {
-            state.data.filter((mote) => {
-                return mote.moteUuid === action.moteUuid;
-            }).map((mote) => {
-                mote.deltakere.map((deltaker) => {
-                    return deltaker.svar.push.apply(deltaker.svar, action.data.alternativer);
+            const sorterEtterId = (alternativer) => {
+                return [...alternativer].sort((a, b) => {
+                    if (a.id < b.id) {
+                        return -1;
+                    }
+                    if (a.id > b.id) {
+                        return 1;
+                    }
+                    return 0;
                 });
-                mote.alternativer.push.apply(mote.alternativer, action.data.alternativer);
-                return mote;
+            };
+            const data = state.data.map((mote) => {
+                if (mote.moteUuid !== action.moteUuid) {
+                    return mote;
+                }
+                const gamleAlternativer = sorterEtterId(mote.alternativer);
+                const nyeAlternativer = action.data.map((alternativ, index) => {
+                    return Object.assign({}, alternativ, {
+                        created: new Date(),
+                        tid: new Date(alternativ.tid),
+                        id: gamleAlternativer[gamleAlternativer.length - 1].id + index + 1,
+                    });
+                });
+                const alternativer = gamleAlternativer.concat(nyeAlternativer);
+                const deltakere = mote.deltakere.map((deltaker) => {
+                    const svar = sorterEtterId(deltaker.svar.concat(nyeAlternativer));
+                    return Object.assign({}, deltaker, {
+                        svar,
+                    });
+                });
+                return Object.assign({}, mote, {
+                    alternativer,
+                    deltakere,
+                });
             });
 
-            return Object.assign({}, state, {
+            return Object.assign({}, {
+                data,
                 antallNyeTidspunkt: undefined,
                 nyeAlternativFeilet: false,
                 senderNyeAlternativ: false,

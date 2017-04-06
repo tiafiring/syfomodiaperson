@@ -1,24 +1,33 @@
 import React, { PropTypes } from 'react';
 import Tidspunkter from './Tidspunkter';
 import { reduxForm } from 'redux-form';
-import { getLedetekst } from 'digisyfo-npm';
+import { getLedetekst, Varselstripe } from 'digisyfo-npm';
 import { genererDato, erGyldigKlokkeslett, erGyldigDato } from '../utils';
 
 const FLERE_TIDSPUNKTER_SKJEMANAVN = 'flereAlternativ';
 
-export function getData(values) {
-    const alternativer = values.tidspunkter.map((tidspunkt) => {
+export const getData = (values) => {
+    return values.tidspunkter.map((tidspunkt) => {
         return {
             tid: genererDato(tidspunkt.dato, tidspunkt.klokkeslett),
-            sted: values.sted,
             valgt: false,
         };
     });
+};
 
-    return {
-        alternativer,
-    };
-}
+export const dekorerMedSted = (data, sted) => {
+    return data.map((alternativ) => {
+        return Object.assign({}, alternativ, { sted });
+    });
+};
+
+const Feilmelding = () => {
+    return (<div className="blokk">
+        <Varselstripe type="feil">
+            <p>Beklager, det oppstod en feil. Prøv igjen senere!</p>
+        </Varselstripe>
+    </div>);
+};
 
 export const FlereTidspunktSkjema = (props) => {
     const {
@@ -36,12 +45,7 @@ export const FlereTidspunktSkjema = (props) => {
         nyeTidspunktListe.push(i);
     }
     const submit = (values) => {
-        const data = getData(values);
-        data.alternativer.map((alternativ) => {
-            return Object.assign({}, alternativ, {
-                sted: mote.alternativer[0].sted,
-            });
-        });
+        const data = dekorerMedSted(getData(values), mote.alternativer[0].sted);
         opprettFlereAlternativ(data, mote.moteUuid);
     };
 
@@ -54,7 +58,7 @@ export const FlereTidspunktSkjema = (props) => {
                     {getLedetekst('mote.bookingstatus.fleretidspunkt.leggtil', ledetekster)}</button>
                 </div>
                 {
-                    nyeAlternativFeilet && <p>Det skjedde en feil! Prøv igjen senere!</p>
+                    nyeAlternativFeilet && <Feilmelding />
                 }
                 <button
                     type="submit"
