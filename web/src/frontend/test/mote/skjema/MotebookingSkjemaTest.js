@@ -367,19 +367,19 @@ describe("MotebookingSkjemaTest", () => {
         it("Skal returnere dato på riktig format når dato er dd.mm.åååå", () => {
             const klokkeslett = "12.15";
             const dato = "15.06.2017";
-            expect(genererDato(dato, klokkeslett)).to.equal("2017-06-15T10:15:00.000");
+            expect(genererDato(dato, klokkeslett)).to.equal("2017-06-15T10:15:00");
         });
 
         it("Skal returnere dato på riktig format når dato er dd.mm.åå", () => {
             const klokkeslett = "12.15";
             const dato = "15.06.17";
-            expect(genererDato(dato, klokkeslett)).to.equal("2017-06-15T10:15:00.000");
+            expect(genererDato(dato, klokkeslett)).to.equal("2017-06-15T10:15:00");
         });
 
         it("Skal returnere dato på riktig format", () => {
             const klokkeslett = "1.15";
             const dato = "15.06.2017";
-            expect(genererDato(dato, klokkeslett)).to.equal("2017-06-14T23:15:00.000");
+            expect(genererDato(dato, klokkeslett)).to.equal("2017-06-14T23:15:00");
         });
     });
 
@@ -414,12 +414,12 @@ describe("MotebookingSkjemaTest", () => {
                         "svar": [
                             {
                                 "sted": "Oslo",
-                                "tid": "2016-08-12T13:00:00.000",
+                                "tid": "2016-08-12T13:00:00",
                                 "valgt":false,
                             },
                             {
                                 "sted": "Oslo",
-                                "tid": "2016-08-13T10:00:00.000",
+                                "tid": "2016-08-13T10:00:00",
                                 "valgt":false,
                             }
                         ],
@@ -427,11 +427,11 @@ describe("MotebookingSkjemaTest", () => {
                 ],
                 alternativer: [{
                     "sted": "Oslo",
-                    "tid": "2016-08-12T13:00:00.000",
+                    "tid": "2016-08-12T13:00:00",
                     "valgt": false
                 }, {
                     "sted": "Oslo",
-                    "tid": "2016-08-13T10:00:00.000",
+                    "tid": "2016-08-13T10:00:00",
                     "valgt": false
                 }]
             })
