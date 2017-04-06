@@ -32,7 +32,7 @@ export function genererDato(dato, klokkeslett) {
     s.setMinutes(klokkeslettArr[1]);
     s.setSeconds('00');
     s.setMilliseconds('000');
-    return s.toJSON();
+    return s.toJSON().slice(0, -1);
 }
 
 export function erGyldigEpost(email) {
