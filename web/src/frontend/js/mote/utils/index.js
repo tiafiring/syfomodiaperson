@@ -31,8 +31,7 @@ export function genererDato(dato, klokkeslett) {
     s.setHours(klokkeslettArr[0]);
     s.setMinutes(klokkeslettArr[1]);
     s.setSeconds('00');
-    s.setMilliseconds('000');
-    return s.toJSON().slice(0, -1);
+    return s.toJSON().slice(0, -5);
 }
 
 export function erGyldigEpost(email) {
