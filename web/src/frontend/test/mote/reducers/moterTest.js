@@ -9,7 +9,7 @@ export const getMote = (mote) => {
     return Object.assign({}, {
         "status": "OPPRETTET",
         'moteUuid': 'min-mote-uuid',
-        "opprettetTidspunkt": new Date("2017-02-22T15:18:24.323"),
+        "opprettetTidspunkt": new Date("2017-02-22T15:18:24.000"),
         "bekreftetTidspunkt": null,
         "deltakere": [{
             "hendelser": [],
@@ -21,20 +21,20 @@ export const getMote = (mote) => {
             "svartidspunkt": null,
             "svar": [{
                 "id": 1,
-                "tid": new Date("2017-03-07T15:18:24.323"),
-                "created": new Date("2017-02-22T15:18:24.323"),
+                "tid": new Date("2017-03-07T15:18:24.000"),
+                "created": new Date("2017-02-22T15:18:24.000"),
                 "sted": "Sannergata 2",
                 "valgt": false
             }, {
                 "id": 3,
-                "tid": new Date("2017-02-25T15:18:24.323"),
-                "created": new Date("2017-02-22T15:18:24.323"),
+                "tid": new Date("2017-02-25T15:18:24.000"),
+                "created": new Date("2017-02-22T15:18:24.000"),
                 "sted": "Sannergata 2",
                 "valgt": false
             }, {
                 "id": 2,
-                "tid": new Date("2017-03-09T15:18:24.323"),
-                "created": new Date("2017-02-22T15:18:24.323"),
+                "tid": new Date("2017-03-09T15:18:24.000"),
+                "created": new Date("2017-02-22T15:18:24.000"),
                 "sted": "Sannergata 2",
                 "valgt": false
             }]
@@ -48,20 +48,20 @@ export const getMote = (mote) => {
             "svartidspunkt": null,
             "svar": [{
                 "id": 1,
-                "tid": new Date("2017-03-07T15:18:24.323"),
-                "created": new Date("2017-02-22T15:18:24.323"),
+                "tid": new Date("2017-03-07T15:18:24.000"),
+                "created": new Date("2017-02-22T15:18:24.000"),
                 "sted": "Sannergata 2",
                 "valgt": false
             }, {
                 "id": 3,
-                "tid": new Date("2017-02-25T15:18:24.323"),
-                "created": new Date("2017-02-22T15:18:24.323"),
+                "tid": new Date("2017-02-25T15:18:24.000"),
+                "created": new Date("2017-02-22T15:18:24.000"),
                 "sted": "Sannergata 2",
                 "valgt": false
             }, {
                 "id": 2,
-                "tid": new Date("2017-03-09T15:18:24.323"),
-                "created": new Date("2017-02-22T15:18:24.323"),
+                "tid": new Date("2017-03-09T15:18:24.000"),
+                "created": new Date("2017-02-22T15:18:24.000"),
                 "sted": "Sannergata 2",
                 "valgt": false
             }]
@@ -69,20 +69,20 @@ export const getMote = (mote) => {
         "bekreftetAlternativ": null,
         "alternativer": [{
             "id": 1,
-            "tid": new Date("2017-03-07T15:18:24.323"),
-            "created": new Date("2017-02-22T15:18:24.323"),
+            "tid": new Date("2017-03-07T15:18:24.000"),
+            "created": new Date("2017-02-22T15:18:24.000"),
             "sted": "Sannergata 2",
             "valgt": false
         }, {
             "id": 3,
-            "tid": new Date("2017-02-25T15:18:24.323"),
-            "created": new Date("2017-02-22T15:18:24.323"),
+            "tid": new Date("2017-02-25T15:18:24.000"),
+            "created": new Date("2017-02-22T15:18:24.000"),
             "sted": "Sannergata 2",
             "valgt": false
         }, {
             "id": 2,
-            "tid": new Date("2017-02-25T15:18:24.323"),
-            "created": new Date("2017-02-22T15:18:24.323"),
+            "tid": new Date("2017-02-25T15:18:24.000"),
+            "created": new Date("2017-02-22T15:18:24.000"),
             "sted": "Sannergata 2",
             "valgt": false
         }, ]
@@ -223,7 +223,7 @@ describe('moter', () => {
             });
             const action = actions.moterHentet([{
                 "status": "OPPRETTET",
-                "opprettetTidspunkt": "2017-02-22T15:18:24.323",
+                "opprettetTidspunkt": "2017-02-22T15:18:24.000",
                 "bekreftetTidspunkt": null,
                 "deltakere": [{
                     "hendelser": [],
@@ -232,17 +232,17 @@ describe('moter', () => {
                     "orgnummer": "***REMOVED***",
                     "epost": "are.arbeidsgiver@nav.no",
                     "type": "arbeidsgiver",
-                    "svartidspunkt": "2017-03-07T15:18:24.323",
+                    "svartidspunkt": "2017-03-07T15:18:24.000",
                     "svar": [{
                         "id": 1,
-                        "tid": "2017-03-07T15:18:24.323",
-                        "created": "2017-02-22T15:18:24.323",
+                        "tid": "2017-03-07T15:18:24.000",
+                        "created": "2017-02-22T15:18:24.000",
                         "sted": "Sannergata 2",
                         "valgt": false
                     }, {
                         "id": 2,
-                        "tid": "2017-03-09T15:18:24.323",
-                        "created": "2017-02-22T15:18:24.323",
+                        "tid": "2017-03-09T15:18:24.000",
+                        "created": "2017-02-22T15:18:24.000",
                         "sted": "Sannergata 2",
                         "valgt": false
                     }]
@@ -256,14 +256,14 @@ describe('moter', () => {
                     "svartidspunkt": null,
                     "svar": [{
                         "id": 1,
-                        "tid": "2017-03-07T15:18:24.323",
-                        "created": "2017-02-22T15:18:24.323",
+                        "tid": "2017-03-07T15:18:24.000",
+                        "created": "2017-02-22T15:18:24.000",
                         "sted": "Sannergata 2",
                         "valgt": false
                     }, {
                         "id": 2,
-                        "tid": "2017-03-09T15:18:24.323",
-                        "created": "2017-02-22T15:18:24.323",
+                        "tid": "2017-03-09T15:18:24.000",
+                        "created": "2017-02-22T15:18:24.000",
                         "sted": "Sannergata 2",
                         "valgt": false
                     }]
@@ -271,14 +271,14 @@ describe('moter', () => {
                 "bekreftetAlternativ": null,
                 "alternativer": [{
                     "id": 1,
-                    "tid": "2017-03-07T15:18:24.323",
-                    "created": "2017-02-22T15:18:24.323",
+                    "tid": "2017-03-07T15:18:24.000",
+                    "created": "2017-02-22T15:18:24.000",
                     "sted": "Sannergata 2",
                     "valgt": false
                 }, {
                     "id": 2,
-                    "tid": "2017-03-09T15:18:24.323",
-                    "created": "2017-02-22T15:18:24.323",
+                    "tid": "2017-03-09T15:18:24.000",
+                    "created": "2017-02-22T15:18:24.000",
                     "sted": "Sannergata 2",
                     "valgt": false
                 }]
@@ -363,8 +363,8 @@ describe('moter', () => {
             });
             const action = actions.moterHentet([{
                 "status": "BEKREFTET",
-                "opprettetTidspunkt": "2017-02-22T15:18:24.323",
-                "bekreftetTidspunkt": "2017-02-25T15:18:24.323",
+                "opprettetTidspunkt": "2017-02-22T15:18:24.000",
+                "bekreftetTidspunkt": "2017-02-25T15:18:24.000",
                 "deltakere": [{
                     "hendelser": [],
                     "deltakerUuid": "uuid1",
@@ -372,17 +372,17 @@ describe('moter', () => {
                     "orgnummer": "***REMOVED***",
                     "epost": "are.arbeidsgiver@nav.no",
                     "type": "arbeidsgiver",
-                    "svartidspunkt": "2017-03-07T15:18:24.323",
+                    "svartidspunkt": "2017-03-07T15:18:24.000",
                     "svar": [{
                         "id": 1,
-                        "tid": "2017-03-07T15:18:24.323",
-                        "created": "2017-02-22T15:18:24.323",
+                        "tid": "2017-03-07T15:18:24.000",
+                        "created": "2017-02-22T15:18:24.000",
                         "sted": "Sannergata 2",
                         "valgt": false
                     }, {
                         "id": 2,
-                        "tid": "2017-03-09T15:18:24.323",
-                        "created": "2017-02-22T15:18:24.323",
+                        "tid": "2017-03-09T15:18:24.000",
+                        "created": "2017-02-22T15:18:24.000",
                         "sted": "Sannergata 2",
                         "valgt": false
                     }]
@@ -396,35 +396,35 @@ describe('moter', () => {
                     "svartidspunkt": null,
                     "svar": [{
                         "id": 1,
-                        "tid": "2017-03-07T15:18:24.323",
-                        "created": "2017-02-22T15:18:24.323",
+                        "tid": "2017-03-07T15:18:24.000",
+                        "created": "2017-02-22T15:18:24.000",
                         "sted": "Sannergata 2",
                         "valgt": false
                     }, {
                         "id": 2,
-                        "tid": "2017-03-09T15:18:24.323",
-                        "created": "2017-02-22T15:18:24.323",
+                        "tid": "2017-03-09T15:18:24.000",
+                        "created": "2017-02-22T15:18:24.000",
                         "sted": "Sannergata 2",
                         "valgt": false
                     }]
                 }],
                 "bekreftetAlternativ": {
                     "id": 1,
-                    "tid": "2017-03-07T15:18:24.323",
-                    "created": "2017-02-22T15:18:24.323",
+                    "tid": "2017-03-07T15:18:24.000",
+                    "created": "2017-02-22T15:18:24.000",
                     "sted": "Sannergata 2",
                     "valgt": false
                 },
                 "alternativer": [{
                     "id": 1,
-                    "tid": "2017-03-07T15:18:24.323",
-                    "created": "2017-02-22T15:18:24.323",
+                    "tid": "2017-03-07T15:18:24.000",
+                    "created": "2017-02-22T15:18:24.000",
                     "sted": "Sannergata 2",
                     "valgt": false
                 }, {
                     "id": 2,
-                    "tid": "2017-03-09T15:18:24.323",
-                    "created": "2017-02-22T15:18:24.323",
+                    "tid": "2017-03-09T15:18:24.000",
+                    "created": "2017-02-22T15:18:24.000",
                     "sted": "Sannergata 2",
                     "valgt": false
                 }]
@@ -836,7 +836,7 @@ describe('moter', () => {
             expect(nextState.data).to.deep.equal([{
                 "status": "OPPRETTET",
                 'moteUuid': 'min-mote-uuid',
-                "opprettetTidspunkt": new Date("2017-02-22T15:18:24.323"),
+                "opprettetTidspunkt": new Date("2017-02-22T15:18:24.000"),
                 "bekreftetTidspunkt": null,
                 "deltakere": [{
                     "hendelser": [],
@@ -848,20 +848,20 @@ describe('moter', () => {
                     "svartidspunkt": null,
                     "svar": [{
                         "id": 1,
-                        "tid": new Date("2017-03-07T15:18:24.323"),
-                        "created": new Date("2017-02-22T15:18:24.323"),
+                        "tid": new Date("2017-03-07T15:18:24.000"),
+                        "created": new Date("2017-02-22T15:18:24.000"),
                         "sted": "Sannergata 2",
                         "valgt": false
                     }, {
                         "id": 2,
-                        "tid": new Date("2017-03-09T15:18:24.323"),
-                        "created": new Date("2017-02-22T15:18:24.323"),
+                        "tid": new Date("2017-03-09T15:18:24.000"),
+                        "created": new Date("2017-02-22T15:18:24.000"),
                         "sted": "Sannergata 2",
                         "valgt": false
                     }, {
                         "id": 3,
-                        "tid": new Date("2017-02-25T15:18:24.323"),
-                        "created": new Date("2017-02-22T15:18:24.323"),
+                        "tid": new Date("2017-02-25T15:18:24.000"),
+                        "created": new Date("2017-02-22T15:18:24.000"),
                         "sted": "Sannergata 2",
                         "valgt": false
                     }, {
@@ -887,20 +887,20 @@ describe('moter', () => {
                     "svartidspunkt": null,
                     "svar": [{
                         "id": 1,
-                        "tid": new Date("2017-03-07T15:18:24.323"),
-                        "created": new Date("2017-02-22T15:18:24.323"),
+                        "tid": new Date("2017-03-07T15:18:24.000"),
+                        "created": new Date("2017-02-22T15:18:24.000"),
                         "sted": "Sannergata 2",
                         "valgt": false
                     }, {
                         "id": 2,
-                        "tid": new Date("2017-03-09T15:18:24.323"),
-                        "created": new Date("2017-02-22T15:18:24.323"),
+                        "tid": new Date("2017-03-09T15:18:24.000"),
+                        "created": new Date("2017-02-22T15:18:24.000"),
                         "sted": "Sannergata 2",
                         "valgt": false
                     }, {
                         "id": 3,
-                        "tid": new Date("2017-02-25T15:18:24.323"),
-                        "created": new Date("2017-02-22T15:18:24.323"),
+                        "tid": new Date("2017-02-25T15:18:24.000"),
+                        "created": new Date("2017-02-22T15:18:24.000"),
                         "sted": "Sannergata 2",
                         "valgt": false
                     }, {
@@ -920,20 +920,20 @@ describe('moter', () => {
                 "bekreftetAlternativ": null,
                 "alternativer": [{
                     "id": 1,
-                    "tid": new Date("2017-03-07T15:18:24.323"),
-                    "created": new Date("2017-02-22T15:18:24.323"),
+                    "tid": new Date("2017-03-07T15:18:24.000"),
+                    "created": new Date("2017-02-22T15:18:24.000"),
                     "sted": "Sannergata 2",
                     "valgt": false
                 }, {
                     "id": 2,
-                    "tid": new Date("2017-02-25T15:18:24.323"),
-                    "created": new Date("2017-02-22T15:18:24.323"),
+                    "tid": new Date("2017-02-25T15:18:24.000"),
+                    "created": new Date("2017-02-22T15:18:24.000"),
                     "sted": "Sannergata 2",
                     "valgt": false
                 }, {
                     "id": 3,
-                    "tid": new Date("2017-02-25T15:18:24.323"),
-                    "created": new Date("2017-02-22T15:18:24.323"),
+                    "tid": new Date("2017-02-25T15:18:24.000"),
+                    "created": new Date("2017-02-22T15:18:24.000"),
                     "sted": "Sannergata 2",
                     "valgt": false
                 }, {
