@@ -77,6 +77,11 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             fnr,
             applicationName: 'Sykefravær',
+            overrideenhetersaga: true,
+            overrideveiledersaga: true,
+            handleChangeEnhet: (enhet) => {
+                console.log(enhet);
+            },
         },
     };
     window.renderDecoratorHead(config);
