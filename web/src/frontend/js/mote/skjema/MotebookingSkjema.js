@@ -7,7 +7,6 @@ import KontaktInfoFeilmelding from '../components/KontaktInfoFeilmelding';
 import Sidetopp from '../../components/Sidetopp';
 import { Varselstripe, getLedetekst } from 'digisyfo-npm';
 import { genererDato, erGyldigKlokkeslett, erGyldigEpost, erGyldigDato } from '../utils/index';
-import { getCookieValueorDefault } from '../../utils/index';
 
 export const OPPRETT_MOTE_SKJEMANAVN = 'opprettMote';
 
@@ -73,12 +72,12 @@ const getLedetekstnokkelFraFeilAarsak = (feilAarsak) => {
 
 export const MotebookingSkjema = ({
     ledetekster, handleSubmit, arbeidstaker, opprettMote, fnr, sender, sendingFeilet, ledere,
-    autofill, untouch, hentLedereFeiletBool,
+    autofill, untouch, hentLedereFeiletBool, valgtEnhet,
 }) => {
     const submit = (values) => {
         const data = getData(values);
         data.fnr = fnr;
-        data.navEnhet = getCookieValueorDefault('navEnhet', 'navEnhet');
+        data.navEnhet = valgtEnhet;
         opprettMote(data);
     };
     const visArbeidstaker = arbeidstaker && arbeidstaker.kontaktinfo && arbeidstaker.kontaktinfo.reservasjon.skalHaVarsel;
@@ -150,6 +149,7 @@ export const MotebookingSkjema = ({
 
 MotebookingSkjema.propTypes = {
     fnr: PropTypes.string,
+    valgtEnhet: PropTypes.string,
     handleSubmit: PropTypes.func,
     opprettMote: PropTypes.func,
     sender: PropTypes.bool,

@@ -15,9 +15,11 @@ import { ledetekster, hentLedetekster, tidslinjer, hasURLParameter } from 'digis
 import moter from './mote/reducers/moter';
 import epostinnhold from './mote/reducers/epostinnhold';
 import arbeidstaker from './mote/reducers/arbeidstaker';
+import enhet from './mote/reducers/enhet';
 import virksomhet from './mote/reducers/virksomhet';
 import rootSaga from './sagas/index';
 import { hentNavbruker, sjekkTilgangMoteadmin } from './actions/navbruker_actions';
+import { valgtEnhet } from './mote/actions/enhet_actions';
 import { opprettWebsocketConnection } from './contextHolder';
 
 const rootReducer = combineReducers({
@@ -28,6 +30,7 @@ const rootReducer = combineReducers({
     virksomhet,
     epostinnhold,
     arbeidstaker,
+    enhet,
     tidslinjer,
     sykmeldinger,
     arbeidsgiversSykmeldinger,
@@ -66,21 +69,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 visEnhetVelger: true,
                 visVeileder: true,
                 visSokefelt: true,
+                overrideenhetersaga: true,
+                overrideveiledersaga: true,
             },
             handlePersonsokSubmit: (nyttFnr) => {
                 if (nyttFnr !== fnr) {
                     window.pushModiacontext({
                         fnr: nyttFnr,
-                        callbackFunc: () => { window.location = "/sykefravaer/" + nyttFnr; }
+                        callbackFunc: () => { window.location = `/sykefravaer/${nyttFnr}`; },
                     });
                 }
             },
             fnr,
             applicationName: 'Sykefravær',
-            overrideenhetersaga: true,
-            overrideveiledersaga: true,
-            handleChangeEnhet: (enhet) => {
-                console.log(enhet);
+            handleChangeEnhet: (data) => {
+                store.dispatch(valgtEnhet(data));
             },
         },
     };
@@ -88,28 +91,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 opprettWebsocketConnection((callbackValue) => {
-
     if (callbackValue === 'NY_AKTIV_BRUKER') {
         window.hentModiaContext({
             callbackFunc: ({ aktivBruker }) => {
                 if (aktivBruker !== fnr) {
-                    window.location = "/sykefravaer/" + aktivBruker;
+                    window.location = `/sykefravaer/${aktivBruker}`;
                 }
-            }
+            },
         });
     }
-
-    if (callbackValue === 'NY_AKTIV_ENHET') {
-        window.hentModiaContext({
-            callbackFunc: ({ aktivEnhet }) => {
-                if (aktivEnhet) {
-                    console.log(aktivEnhet);
-                }
-            }
-        });
-    }
-
-
 });
 
 export {

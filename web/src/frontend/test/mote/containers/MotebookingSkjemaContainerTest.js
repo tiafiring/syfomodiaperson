@@ -40,7 +40,7 @@ describe("MotebookingSkjemaContainer", () => {
 
         beforeEach(() => {
             state = {
-                ledetekster: { henter: false, data: {} },
+                ledetekster: {henter: false, data: {}},
                 ledere: {
                     data: [{
                         navn: "Ole",
@@ -52,8 +52,11 @@ describe("MotebookingSkjemaContainer", () => {
                     henter: false,
                     hentingFeilet: false
                 },
-                moter: {}
-            }
+                moter: {},
+                enhet: {
+                    valgtEnhet: '0021',
+                },
+            };
             state.arbeidstaker = {
                 data: {
                     navn: "Ole"

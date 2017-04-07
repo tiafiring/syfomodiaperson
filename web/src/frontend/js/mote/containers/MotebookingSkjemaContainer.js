@@ -31,6 +31,7 @@ export class MotebookingSkjemaContainer extends Component {
 }
 
 MotebookingSkjemaContainer.propTypes = {
+    valgtEnhet: PropTypes.string,
     fnr: PropTypes.string,
     hentLedere: PropTypes.func,
     hentArbeidstaker: PropTypes.func,
@@ -48,6 +49,7 @@ export function mapStateToProps(state) {
     return {
         ledere,
         arbeidstaker: state.arbeidstaker.data,
+        valgtEnhet: state.enhet.valgtEnhet,
         henter: state.ledere.henter || state.arbeidstaker.henter || state.ledetekster.henter,
         hentLedereFeiletBool: state.ledere.hentingFeilet,
         skjermetBruker: state.moter.skjermetBruker,

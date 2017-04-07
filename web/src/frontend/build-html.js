@@ -12,7 +12,7 @@ var dev = {
     restRoot: 'http://localhost:8084/modiasyforest/rest',
     moteAdminRestRoot: 'http://localhost:8196/mote/rest',
     bundleFileName: 'bundle.js',
-    decoratorRoot: 'https://modapp-q1.adeo.no',
+    decoratorRoot: 'http://localhost:8186',
     websocketProtocol: 'ws',
     contextholderRoot: 'http://localhost:8090/eventdistributer',
     enableLogging: true,
