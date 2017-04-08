@@ -60,9 +60,14 @@ if (hasURLParameter('visLedetekster')) {
 
 render(<Provider store={store}>
         <AppRouter history={history} /></Provider>,
-    document.getElementById('maincontent'));
+    document.getElementById('maincontent'));;
 
 document.addEventListener('DOMContentLoaded', () => {
+    window.pushModiacontext({
+        verdi: fnr,
+        eventType: 'NY_AKTIV_BRUKER',
+    });
+
     const config = {
         config: {
             toggles: {
@@ -74,16 +79,17 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             handlePersonsokSubmit: (nyttFnr) => {
                 if (nyttFnr !== fnr) {
-                    window.pushModiacontext({
-                        fnr: nyttFnr,
-                        callbackFunc: () => { window.location = `/sykefravaer/${nyttFnr}`; },
-                    });
+                    window.location = `/sykefravaer/${nyttFnr}`;
                 }
             },
             fnr,
             applicationName: 'Sykefravær',
             handleChangeEnhet: (data) => {
                 store.dispatch(valgtEnhet(data));
+                window.pushModiacontext({
+                    verdi: data,
+                    eventType: 'NY_AKTIV_ENHET',
+                });
             },
         },
     };
@@ -97,6 +103,12 @@ opprettWebsocketConnection((callbackValue) => {
                 if (aktivBruker !== fnr) {
                     window.location = `/sykefravaer/${aktivBruker}`;
                 }
+            },
+        });
+    } else if (callbackValue === 'NY_AKTIV_ENHET') {
+        window.hentModiaContext({
+            callbackFunc: ({ aktivEnhet }) => {
+                store.dispatch(valgtEnhet(aktivEnhet));
             },
         });
     }
