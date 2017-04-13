@@ -32,11 +32,10 @@ export function henterAktivBruker() {
     };
 }
 
-export function aktivBrukerHentet(data, action) {
+export function aktivBrukerHentet(data) {
     return {
         type: AKTIVBRUKER_HENTET,
         data,
-        action,
     };
 }
 
@@ -86,10 +85,9 @@ export function pushModiaContext(data) {
     };
 }
 
-export function modiaContextPushet(data) {
+export function modiaContextPushet() {
     return {
         type: MODIACONTEXT_PUSHET,
-        data,
     };
 }
 

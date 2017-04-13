@@ -18,9 +18,13 @@ export const opprettWebsocketConnection = (callback) => {
         callback(e);
     };
     connection.onerror = () => {
-        callback('onerror');
+        setTimeout(() => {
+            opprettWebsocketConnection();
+        }, 1000);
     };
     connection.onclose = () => {
-        callback('onerror');
+        setTimeout(() => {
+            opprettWebsocketConnection();
+        }, 1000);
     };
 };
