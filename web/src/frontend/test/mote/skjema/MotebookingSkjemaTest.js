@@ -21,38 +21,38 @@ describe("MotebookingSkjemaTest", () => {
         })
 
         it("Skal inneholde tidspunkter", () => {
-            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
+            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} valgtEnhet="0021" />);
             expect(compo.contains(<Tidspunkter skjemanavn="opprettMote" />)).to.be.true;
         });
 
         it("Skal inneholde felt med mulighet for å skrive inn sted", () => {
-            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
+            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} valgtEnhet="0021" />);
             expect(compo.find(".js-sted").prop("name")).to.equal("sted");
         });
 
         it("Skal ikke vise feilmelding hvis sendingFeilet !== true", () => {
-            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
+            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} valgtEnhet="0021" />);
             expect(compo.text()).not.to.contain("Beklager")
         });
 
         it("Skal vise feilmelding hvis sendingFeilet", () => {
-            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} sendingFeilet />);
+            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} valgtEnhet="0021" sendingFeilet />);
             expect(compo.text()).to.contain("Beklager")
         });
 
         it("Skal vise en varselstripe dersom henting av ledere feiler", () => {
-            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} hentLedereFeiletBool />);
+            const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} valgtEnhet="0021" hentLedereFeiletBool />);
             expect(compo.find(Varselstripe)).to.have.length(1);
         });
 
         describe("Dersom det ikke finnes ledere", () => {
             it("Skal vise ManuellUtfyltLeder", () => {
-                const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
+                const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} valgtEnhet="0021" />);
                 expect(compo.find(ManuellUtfyltLeder)).to.have.length(1);
             })
 
             it("Skal ikke vise en dropdown", () => {
-                const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} />);
+                const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} valgtEnhet="0021" />);
                 expect(compo.find(Fields)).to.have.length(0);
             });
         });
@@ -70,12 +70,12 @@ describe("MotebookingSkjemaTest", () => {
             });
 
             it("SKal ikke vise ManuellUtfyltLeder", () => {
-                const compo = shallow(<MotebookingSkjema ledere={ledere} handleSubmit={handleSubmit} />);
+                const compo = shallow(<MotebookingSkjema ledere={ledere} handleSubmit={handleSubmit} valgtEnhet="0021" />);
                 expect(compo.find(ManuellUtfyltLeder)).to.have.length(0);
             })
 
             it("Skal vise en Fields", () => {
-                const compo = shallow(<MotebookingSkjema ledere={ledere} handleSubmit={handleSubmit} />);
+                const compo = shallow(<MotebookingSkjema ledere={ledere} handleSubmit={handleSubmit} valgtEnhet="0021" />);
                 expect(compo.find(Fields)).to.have.length(1);
                 expect(compo.find(Fields).prop("component")).to.deep.equal(LederFields);
             });
@@ -119,17 +119,17 @@ describe("MotebookingSkjemaTest", () => {
                 })
 
                 it("Skal vise arbeidstakers info", () => {
-                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
+                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} valgtEnhet="0021" />);
                     expect(compo.find(Arbeidstaker)).to.have.length(1); 
                 });
 
                 it("Skal ikke vise info om reservasjon", () => {
-                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
+                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} valgtEnhet="0021" />);
                     expect(compo.find(KontaktInfoFeilmelding)).to.have.length(0);
                 });
 
                 it("SKal vise riktig nummerering", () => {
-                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} ledetekster={ledetekster} />);
+                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} valgtEnhet="0021" ledetekster={ledetekster} />);
                     expect(compo.text()).to.contain("3. Velg dato");
                 }); 
 
@@ -142,24 +142,24 @@ describe("MotebookingSkjemaTest", () => {
                 })
 
                 it("Skal ikke vise arbeidstakers info ", () => {
-                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
+                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} valgtEnhet="0021" />);
                     expect(compo.find(Arbeidstaker)).to.have.length(0); 
                 });
 
                 it("Skal vise info om reservasjon med riktig feilAarsak", () => {
                     arbeidstaker.kontaktinfo.reservasjon.feilAarsak = "KODE6"
-                    const compo = shallow(<MotebookingSkjema ledetekster={ledetekster} arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
+                    const compo = shallow(<MotebookingSkjema ledetekster={ledetekster} arbeidstaker={arbeidstaker} ledere={ledere} valgtEnhet="0021" handleSubmit={handleSubmit} />);
                     expect(compo.find(KontaktInfoFeilmelding)).to.have.length(1);
                 });
 
                 it("Skal vise info om reservasjon med riktig feilAarsak", () => {
                     arbeidstaker.kontaktinfo.reservasjon.feilAarsak = "INGEN_KONTAKTINFORMASJON"
-                    const compo = shallow(<MotebookingSkjema ledetekster={ledetekster} arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} />);
+                    const compo = shallow(<MotebookingSkjema ledetekster={ledetekster} arbeidstaker={arbeidstaker} ledere={ledere} valgtEnhet="0021" handleSubmit={handleSubmit} />);
                     expect(compo.find(KontaktInfoFeilmelding)).to.have.length(1);
                 });
 
                 it("SKal vise riktig nummerering", () => {
-                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} ledetekster={ledetekster} />);
+                    const compo = shallow(<MotebookingSkjema arbeidstaker={arbeidstaker} ledere={ledere} handleSubmit={handleSubmit} valgtEnhet="0021" ledetekster={ledetekster} />);
                     expect(compo.text()).not.to.contain("2. Arbeidstakers opplysninger");
                     expect(compo.text()).to.contain("2. Velg dato");
                 }); 

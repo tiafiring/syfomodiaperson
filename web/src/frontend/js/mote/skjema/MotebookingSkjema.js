@@ -84,6 +84,12 @@ export const MotebookingSkjema = ({
     const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
     const feilmeldingkey = getLedetekstnokkelFraFeilAarsak(feilAarsak);
 
+    if (!valgtEnhet) {
+        return (<div>
+            <p>For å opprette møte må du ha valgt enhet dette møtet skal knyttes til. Dette gjøres øverst på siden. </p>
+        </div>)
+    }
+
     return (<div>
         { !visArbeidstaker && <KontaktInfoFeilmelding feilmeldingkey={feilmeldingkey} ledetekster={ledetekster} /> }
         <form className="panel" onSubmit={handleSubmit(submit)}>
