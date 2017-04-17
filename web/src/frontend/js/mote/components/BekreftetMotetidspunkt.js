@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { DatoOgTid, SvarMedIkon, konstanter, proptypes as moterPropTypes } from 'moter-npm';
-
+import FlereTidspunktSkjema from '../skjema/FlereTidspunktSkjema';
 const { ARBEIDSGIVER, BRUKER } = konstanter;
 
-const BekreftetMotetidspunkt = ({ mote }) => {
+const BekreftetMotetidspunkt = (props) => {
+    const mote = props.mote;
     const arbeidsgiver = mote.deltakere.filter((d) => {
         return d.type === ARBEIDSGIVER;
     })[0];
@@ -22,11 +23,18 @@ const BekreftetMotetidspunkt = ({ mote }) => {
         {
             arbeidstaker && arbeidstakerSvar && <SvarMedIkon bruker={arbeidstaker} svar={arbeidstakerSvar} />
         }
+        <button className="js-nyetidspunkt rammeknapp" onClick={props.flereAlternativ}>Endre tidspunkt</button>
+        {
+            props.antallNyeTidspunkt > 0 && <FlereTidspunktSkjema {...props} antallEksisterendeTidspunkter={props.mote.alternativer.length} />
+        }
+
     </div>);
 };
 
 BekreftetMotetidspunkt.propTypes = {
     mote: moterPropTypes.mote,
+    antallNyeTidspunkt: PropTypes.number,
+    flereAlternativ: PropTypes.func,
 };
 
 export default BekreftetMotetidspunkt;

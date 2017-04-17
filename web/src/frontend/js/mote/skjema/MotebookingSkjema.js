@@ -87,7 +87,7 @@ export const MotebookingSkjema = ({
     if (!valgtEnhet) {
         return (<div>
             <p>For å opprette møte må du ha valgt enhet dette møtet skal knyttes til. Dette gjøres øverst på siden. </p>
-        </div>)
+        </div>);
     }
 
     return (<div>
