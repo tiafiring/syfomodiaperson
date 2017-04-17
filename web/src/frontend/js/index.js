@@ -89,6 +89,7 @@ store.dispatch(hentAktivBruker({
 }));
 store.dispatch(hentAktivEnhet({
     callback: (aktivEnhet) => {
+        store.dispatch(valgtEnhet(aktivEnhet));
         config.config.initiellEnhet = aktivEnhet;
         window.renderDecoratorHead(config);
     },
@@ -123,6 +124,7 @@ opprettWebsocketConnection((wsCallback) => {
         store.dispatch(hentAktivEnhet({
             callback: (aktivEnhet) => {
                 if (config.config.initiellEnhet !== aktivEnhet) {
+                    store.dispatch(valgtEnhet(aktivEnhet));
                     config.config.initiellEnhet = aktivEnhet;
                     window.renderDecoratorHead(config);
                 }
