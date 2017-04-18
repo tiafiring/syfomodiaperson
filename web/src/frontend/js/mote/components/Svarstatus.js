@@ -69,7 +69,7 @@ const Svarstatus = (props) => {
                 deltakertype={konstanter.NAV_VEILEDER}
                 fnr={fnr}
                 ledetekster={ledetekster} />
-            <button className="js-nyetidspunkt" onClick={flereAlternativ}>
+            <button className="nyetidspunktknapp" onClick={flereAlternativ}>
                 {getLedetekst('mote.bookingstatus.knapp.flere-tidspunkt', ledetekster)}</button>
             {children}
         </div>
