@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Tidspunkter from './Tidspunkter';
 import { reduxForm } from 'redux-form';
 import { getLedetekst, Varselstripe } from 'digisyfo-npm';
-import { genererDato, erGyldigKlokkeslett, erGyldigDato } from '../utils';
+import { genererDato, erGyldigKlokkeslett, erGyldigDato } from '../utils/index';
 
 const FLERE_TIDSPUNKTER_SKJEMANAVN = 'flereAlternativ';
 

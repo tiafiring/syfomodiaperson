@@ -23,7 +23,7 @@ const BekreftetMotetidspunkt = (props) => {
         {
             arbeidstaker && arbeidstakerSvar && <SvarMedIkon bruker={arbeidstaker} svar={arbeidstakerSvar} />
         }
-        <button className="js-nyetidspunkt rammeknapp" onClick={props.flereAlternativ}>Endre tidspunkt</button>
+        <button className="js-nyetidspunkt" onClick={props.flereAlternativ}>Endre tidspunkt</button>
         {
             props.antallNyeTidspunkt > 0 && <FlereTidspunktSkjema {...props} antallEksisterendeTidspunkter={props.mote.alternativer.length} />
         }
