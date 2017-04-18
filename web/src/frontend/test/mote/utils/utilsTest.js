@@ -3,6 +3,7 @@ import {
     pad,
     getTidFraZulu,
     getDatoFraZulu,
+    erAlleAlternativerPassert,
     hentVirksomhetHvis9Siffer,
     virksomhetsnavn
 } from '../../../js/mote/utils/index';
@@ -50,4 +51,44 @@ describe("utils", () => {
         });
     })
 
+    describe("erAlleAlternativerPassert", () => {
+        let clock;
+
+        beforeEach(() => {
+            clock = sinon.useFakeTimers(1484524800000); // 16. januar 2017
+        });
+        afterEach(() => {
+            clock.restore();
+        });
+
+        it("gir true på alternativer som er passert", () => {
+            const alternativer = [
+                {
+                    tid: new Date("2017-01-15T11:47:04.673Z")
+                },
+            ];
+            const s = erAlleAlternativerPassert(alternativer);
+            expect(s).to.equal(true);
+        });
+
+        it("gir false på alternativer som er samme dag", () => {
+            const alternativer = [
+                {
+                    tid: new Date("2017-01-16T08:47:04.673Z")
+                },
+            ];
+            const s = erAlleAlternativerPassert(alternativer);
+            expect(s).to.equal(false);
+        });
+
+        it("Gir false på alternativer som ikke er passert", () => {
+            const alternativer = [
+                {
+                    tid: new Date("2017-01-17T11:47:04.673Z")
+                }
+            ];
+            const s = erAlleAlternativerPassert(alternativer);
+            expect(s).to.equal(false);
+        });
+    })
 });

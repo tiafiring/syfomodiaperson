@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { getDatoFraZulu, fikkIkkeMoteOpprettetVarsel } from '../utils';
+import { getDatoFraZulu, fikkIkkeMoteOpprettetVarsel, erAlleAlternativerPassert } from '../utils/index';
 import Sidetopp from '../../components/Sidetopp';
 import KontaktInfoFeilmelding from './KontaktInfoFeilmelding';
 import BekreftetMotetidspunkt from './BekreftetMotetidspunkt';
@@ -87,6 +87,9 @@ const MotebookingStatus = (props) => {
     : null;
     const flereTidspunktBoks = antallNyeTidspunkt ? <FlereTidspunktSkjema {...props} antallEksisterendeTidspunkter={alternativer.length} /> : null;
     const sidetoppNokkel = mote.status === OPPRETTET ? 'mote.bookingstatus.sidetittel' : 'mote.bookingstatus.bekreftet.tittel';
+    const knapp = erAlleAlternativerPassert(mote.alternativer) ? <button className="js-ny knapp" onClick={() => { avbrytMoteUtenVarsel(mote.moteUuid, fnr);}}>{getLedetekst('mote.bookingstatus.knapp.nytt-tidspunkt', ledetekster)}</button>
+        : <Link role="button" className="knapp knapp--enten js-avbryt" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>{getLedetekst('mote.bookingstatus.knapp.avbryt', ledetekster)}</Link>;
+
     return (<div>
         <StatusVarsel mote={mote} ledetekster={ledetekster} />
         {krrMeldingPanel}
@@ -100,10 +103,7 @@ const MotebookingStatus = (props) => {
             </div>
             { status === BEKREFTET && <InformasjonSendt {...props} /> }
             <div className="knapperad">
-                <Link role="button" className="knapp knapp--enten js-avbryt" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>{getLedetekst('mote.bookingstatus.knapp.avbryt', ledetekster)}</Link>
-                <button className="js-ny knapp" onClick={() => {
-                    avbrytMoteUtenVarsel(mote.moteUuid, fnr);
-                }}>{getLedetekst('mote.bookingstatus.knapp.nytt-tidspunkt', ledetekster)}</button>
+                {knapp}
             </div>
         </div>
     </div>);

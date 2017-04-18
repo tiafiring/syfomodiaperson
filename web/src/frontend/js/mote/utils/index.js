@@ -60,3 +60,11 @@ export const fikkIkkeMoteOpprettetVarsel = (deltaker) => {
 export const fikkMoteOpprettetVarsel = (deltaker) => {
     return !fikkIkkeMoteOpprettetVarsel(deltaker);
 };
+
+export const erAlleAlternativerPassert = (alternativer) => {
+    const morgendagen = new Date();
+    morgendagen.setHours(0, 0, 0);
+    return alternativer.filter((alternativ) => {
+        return alternativ.tid > morgendagen;
+    }).length === 0;
+};

@@ -12,33 +12,33 @@ import {Varselstripe} from "digisyfo-npm";
 
 describe("MotebookingStatus", () => {
 
-    let mote = {}
+    let mote = {};
     let avbrytMote;
     let ledetekster = {
         'mote.bookingstatus.bekreftet.tittel': 'Bekreftet møtetidspunkt',
         'mote.bookingstatus.bekreftet.sendt-til': "Møtetidspunkt valgt, møteresultat og varsel er sendt til %DELTAKERE%",
         'mote.bookingstatus.foresporsel.sendt.til': 'Møteforespørselen ble sendt til %DELTAKERE%',
         'mote.bookingstatus.sendt-dato': 'Sendt: %DATO%',
-    }
+    };
 
     beforeEach(() => {
         window.APP_SETTINGS = {
             APP_ROOT: "/sykefravaer"
-        }
+        };
         mote.alternativer = [{
-            "tid": "2012-12-12T11:00:00Z",
-            "created": "2011-12-12T11:00:00Z",
+            "tid": new Date("2012-12-12T11:00:00Z"),
+            "created": new Date("2011-12-12T11:00:00Z"),
             "sted": "Oslo by",
             "valgt": false,
             "id": 1
         }, {
-            "tid": "2009-09-09T07:00:00Z",
-            "created": "2011-12-12T11:00:00Z",
+            "tid": new Date("2009-09-09T07:00:00Z"),
+            "created": new Date("2011-12-12T11:00:00Z"),
             "sted": "Oslo by",
             "valgt": false,
             "id": 2
         }];
-        mote.opprettetTidspunkt = "2016-11-22T12:56:32.561Z";
+        mote.opprettetTidspunkt =  new Date("2016-11-22T12:56:32.561Z");
         mote.status = 'OPPRETTET';
         mote.deltakere = [{
             type: "arbeidsgiver",
@@ -47,14 +47,14 @@ describe("MotebookingStatus", () => {
             avvik: [],
             hendelser: [],
             svar: [{
-                "tid": "2012-12-12T11:00:00Z",
-                "created": "2011-12-12T11:00:00Z",
+                "tid": new Date("2012-12-12T11:00:00Z"),
+                "created": new Date("2011-12-12T11:00:00Z"),
                 "sted": "Oslo by",
                 "valgt": false,
                 "id": 1
             }, {
-                "tid": "2009-09-09T07:00:00Z",
-                "created": "2011-12-12T11:00:00Z",
+                "tid": new Date("2009-09-09T07:00:00Z"),
+                "created": new Date("2011-12-12T11:00:00Z"),
                 "sted": "Oslo by",
                 "valgt": false,
                 "id": 2
@@ -66,14 +66,14 @@ describe("MotebookingStatus", () => {
             hendelser: [],
             epost: "***REMOVED***",
             svar: [{
-                "tid": "2012-12-12T11:00:00Z",
-                "created": "2011-12-12T11:00:00Z",
+                "tid": new Date("2012-12-12T11:00:00Z"),
+                "created": new Date("2011-12-12T11:00:00Z"),
                 "sted": "Oslo by",
                 "valgt": false,
                 "id": 1
             }, {
-                "tid": "2009-09-09T07:00:00Z",
-                "created": "2011-12-12T11:00:00Z",
+                "tid": new Date("2009-09-09T07:00:00Z"),
+                "created": new Date("2011-12-12T11:00:00Z"),
                 "sted": "Oslo by",
                 "valgt": false,
                 "id": 2
@@ -84,48 +84,48 @@ describe("MotebookingStatus", () => {
             "moteUuid": "f26984a2-e038-4de6-a6af-4f4f5db96b26",
             "opprettetAv": "Z990562",
             "status": "BEKREFTET",
-            "opprettetTidspunkt": "2016-11-22T12:56:32.561Z",
-            "bekreftetTidspunkt": "2017-03-23T12:56:32.561Z",
+            "opprettetTidspunkt": new Date("2016-11-22T12:56:32.561Z"),
+            "bekreftetTidspunkt": new Date("2017-03-23T12:56:32.561Z"),
             "navEnhet": "navEnhet",
             "deltakere": [{
                 "deltakerUuid": "3b0dc3b2-587c-4105-98df-99b4205d3ce9",
                 "navn": "***REMOVED***",
                 "epost": "***REMOVED***",
                 "type": "arbeidsgiver",
-                "svartidspunkt": "2016-11-22T12:52:06.489Z",
+                "svartidspunkt": new Date("2016-11-22T12:52:06.489Z"),
                 "avvik": [],
                 "hendelser": [],
                 "svar": [{
                     "id": 344,
-                    "tid": "2019-09-09T07:00:00Z",
-                    "created": "2011-12-12T11:00:00Z",
+                    "tid": new Date("2019-09-09T07:00:00Z"),
+                    "created": new Date("2011-12-12T11:00:00Z"),
                     "sted": "Oslo",
                     "valgt": true
                 }, {
                     "id": 345,
-                    "tid": "2020-09-09T18:00:00Z",
-                    "created": "2011-12-12T11:00:00Z",
+                    "tid": new Date("2020-09-09T18:00:00Z"),
+                    "created": new Date("2011-12-12T11:00:00Z"),
                     "sted": "Oslo",
                     "valgt": false
                 }]
             }],
             "bekreftetAlternativ": {
                 "id": 344,
-                "tid": "2019-09-09T07:00:00Z",
-                "created": "2011-12-12T11:00:00Z",
+                "tid": new Date("2019-09-09T07:00:00Z"),
+                "created": new Date("2011-12-12T11:00:00Z"),
                 "sted": "Oslo",
                 "valgt": true
             },
             "alternativer": [{
                 "id": 344,
-                "tid": "2019-09-09T07:00:00Z",
-                "created": "2011-12-12T11:00:00Z",
+                "tid": new Date("2019-09-09T07:00:00Z"),
+                "created": new Date("2011-12-12T11:00:00Z"),
                 "sted": "Oslo",
                 "valgt": true
             }, {
                 "id": 345,
-                "tid": "2020-09-09T18:00:00Z",
-                "created": "2011-12-12T11:00:00Z",
+                "tid": new Date("2020-09-09T18:00:00Z"),
+                "created": new Date("2011-12-12T11:00:00Z"),
                 "sted": "Oslo",
                 "valgt": false
             }]
@@ -227,7 +227,7 @@ describe("MotebookingStatus", () => {
 
     describe("Verktøylinje", () => {
             
-        it("Skal vise en knapp for Ny møteforespørsel", () => {
+        it("Skal vise en knapp for Ny møteforespørsel dersom tidspunktene for alternativene er passert", () => {
             const component = shallow(<MotebookingStatus mote={mote} />);
             expect(component.find(".js-ny")).to.have.length(1)
         });
@@ -238,14 +238,27 @@ describe("MotebookingStatus", () => {
             const component = shallow(<MotebookingStatus mote={mote} fnr="mitt-fnr" avbrytMoteUtenVarsel={avbrytMoteUtenVarsel} />);
             component.find(".js-ny").simulate("click");
             expect(avbrytMoteUtenVarsel.calledWith("min-mote-uuid", "mitt-fnr")).to.be.true;
-        })
+        });
         
-        it("Skal vise en link til avbryt møte", () => {
+        it("Skal vise en link til avbryt møte dersom tidspunktene for alternativene til møtet ikke er passert", () => {
+            mote.alternativer = [{
+                "tid": new Date("2112-12-12T11:00:00Z"),
+                "created":  new Date("2011-12-12T11:00:00Z"),
+                "sted": "Oslo by",
+                "valgt": false,
+                "id": 1
+            }, {
+                "tid": new Date("2109-09-09T07:00:00Z"),
+                "created":  new Date("2011-12-12T11:00:00Z"),
+                "sted": "Oslo by",
+                "valgt": false,
+                "id": 2
+            }];
             const component = shallow(<MotebookingStatus mote={mote} />);
             expect(component.find(".js-avbryt")).to.have.length(1)
         });
 
-    })
+    });
 
     describe("Når sykmeldt er reservert i KRR", () => {
 
