@@ -232,13 +232,6 @@ describe("BekreftMoteUtenSvarSkjemaComponent", () => {
         expect(component.text()).to.contain("Har du avklart møtet på andre måter?");
     });
 
-    it("Viser tekst", () => {
-        let component = shallow(<BekreftMoteUtenSvarSkjema
-            mote={mote}
-            ledetekster={ledetekster} />);
-        expect(component.text()).to.contain("Du sender nå en inkalling der noen har svart at de ikke kan møte");
-    });
-
     it("Bekrefter at møte er avtalt på annen måte", () => {
         let component = shallow(<BekreftMoteUtenSvarSkjema
             mote={mote}

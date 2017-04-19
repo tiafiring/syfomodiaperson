@@ -35,6 +35,19 @@ export function genererDato(dato, klokkeslett) {
     return s.toJSON();
 }
 
+export const lagJsDate = (dato) => {
+    if (dato) {
+        const year = dato.substring(0, 4);
+        const month = dato.substring(5, 7);
+        const day = dato.substring(8, 10);
+        const hour = dato.substring(11, 13);
+        const minute = dato.substring(14, 16);
+        const seconds = dato.substring(17, 19);
+        return new Date(year, month - 1, day, hour, minute, seconds);
+    }
+    return dato;
+};
+
 export function erGyldigEpost(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
