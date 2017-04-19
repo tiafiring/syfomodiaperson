@@ -28,7 +28,7 @@ export function genererDato(dato, klokkeslett) {
     s.setDate(datoArr[0]);
     s.setMonth(parseInt(datoArr[1], 10) - 1);
     s.setYear(aarPadded);
-    s.setHours(klokkeslettArr[0]);
+    s.setUTCHours(klokkeslettArr[0]);
     s.setMinutes(klokkeslettArr[1]);
     s.setSeconds('00');
     s.setMilliseconds('000');
