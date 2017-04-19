@@ -7,9 +7,6 @@ const BekreftMoteUtenSvarSkjema = (props) => {
 
     return (<div className="bekreftutensvarinnhold">
         <h2 className="sidetopp__tittel">{getLedetekst('mote.bekreftmoteutensvar.lightbox-overskrift', ledetekster)}</h2>
-        <div className="blokk">
-            <p>{getLedetekst('mote.bekreftmoteutensvar.lightbox-tekst', ledetekster)}</p>
-        </div>
         <div aria-live="polite" role="alert">
             { bekreftFeilet && (<div className="blokk">
                 <Varselstripe type="feil">

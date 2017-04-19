@@ -221,7 +221,6 @@ describe("BekreftMoteUtenSvarSkjemaComponent", () => {
         mote = getMoteUtenSvar();
         ledetekster = {
             "mote.bekreftmoteutensvar.lightbox-overskrift": "Har du avklart møtet på andre måter?",
-            "mote.bekreftmoteutensvar.lightbox-tekst": "Du sender nå en inkalling der noen har svart at de ikke kan møte",
         }
 
     });
