@@ -31,8 +31,7 @@ export function genererDato(dato, klokkeslett) {
     s.setUTCHours(klokkeslettArr[0]);
     s.setMinutes(klokkeslettArr[1]);
     s.setSeconds('00');
-    s.setMilliseconds('000');
-    return s.toJSON();
+    return s.toJSON().slice(0, -5);
 }
 
 export const lagJsDate = (dato) => {
