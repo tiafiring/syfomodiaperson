@@ -10,10 +10,10 @@ const BekreftetMotetidspunkt = (props) => {
     const arbeidstaker = mote.deltakere.filter((d) => {
         return d.type === BRUKER;
     })[0];
-    const arbeidstakerSvar = arbeidstaker.svar.filter((s) => {
+    const arbeidstakerSvar = arbeidstaker && arbeidstaker.svar.filter((s) => {
         return s.id === mote.bekreftetAlternativ.id;
     })[0];
-    const arbeidsgiversSvar = arbeidsgiver.svar.filter((s) => {
+    const arbeidsgiversSvar = arbeidsgiver && arbeidsgiver.svar.filter((s) => {
         return s.id === mote.bekreftetAlternativ.id;
     })[0];
     return (<div className="gronnRammeTidspunkt">
