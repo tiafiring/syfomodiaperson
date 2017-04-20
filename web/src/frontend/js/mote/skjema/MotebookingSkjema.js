@@ -90,8 +90,8 @@ export const MotebookingSkjema = ({
         opprettMote(data);
     };
     const visArbeidstaker = arbeidstaker && arbeidstaker.kontaktinfo && arbeidstaker.kontaktinfo.reservasjon.skalHaVarsel;
-    const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
-    const feilmelding = getLedetekstnokkelFraFeilAarsak(feilAarsak, ledetekster);
+    const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : undefined;
+    const feilmelding = feilAarsak && getLedetekstnokkelFraFeilAarsak(feilAarsak, ledetekster);
 
     return (<div>
         { !visArbeidstaker && <KontaktInfoFeilmelding melding={feilmelding} ledetekster={ledetekster} /> }
