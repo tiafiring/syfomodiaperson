@@ -15,7 +15,7 @@ export class MotebookingSkjemaContainer extends Component {
         hentArbeidstaker(fnr);
     }
     render() {
-        const { ledetekster, henter, skjermetBruker, hentingFeilet } = this.props;
+        const { ledetekster, henter, skjermetBruker, hentingFeilet, valgtEnhet } = this.props;
 
         if (henter) {
             return <AppSpinner />;
@@ -25,6 +25,10 @@ export class MotebookingSkjemaContainer extends Component {
                 melding={getHtmlLedetekst('mote.motebookingskjemacontainer.melding', ledetekster)} />);
         } else if (hentingFeilet) {
             return <Feilmelding />;
+        }  if (!valgtEnhet) {
+            return (<Feilmelding
+                tittel='Du må velge Enhet'
+                melding={{ __html: '<p>For at du skal kunne opprette et møte må du velge hvilken enhet dette møtet skal knyttes til. Det styres av hvilken enhet du har valgt i toppmenyen.</p>' }}/>);
         }
         return <MotebookingSkjema {...this.props} />;
     }

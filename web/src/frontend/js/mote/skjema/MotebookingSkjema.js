@@ -5,7 +5,7 @@ import LederFields, { ManuellUtfyltLeder } from './LederFields';
 import Tidspunkter from './Tidspunkter';
 import KontaktInfoFeilmelding from '../components/KontaktInfoFeilmelding';
 import Sidetopp from '../../components/Sidetopp';
-import { Varselstripe, getLedetekst } from 'digisyfo-npm';
+import { Varselstripe, getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import { genererDato, erGyldigKlokkeslett, erGyldigEpost, erGyldigDato } from '../utils/index';
 
 export const OPPRETT_MOTE_SKJEMANAVN = 'opprettMote';
@@ -53,21 +53,30 @@ Arbeidstaker.propTypes = {
     ledetekster: PropTypes.object,
 };
 
-const getLedetekstnokkelFraFeilAarsak = (feilAarsak) => {
+const getLedetekstnokkelFraFeilAarsak = (feilAarsak, ledetekster) => {
+    let nokkel;
     switch (feilAarsak) {
         case 'RESERVERT': {
-            return 'motebooking.krr.reservert';
+            nokkel = 'motebooking.krr.reservert';
+            break;
         }
         case 'INGEN_KONTAKTINFORMASJON': {
-            return 'motebooking.krr.ingen-kontaktinformasjon';
+            nokkel = 'motebooking.krr.ingen-kontaktinformasjon';
+            break;
         }
         case 'UTGAATT': {
-            return 'motebooking.krr.utgaatt';
+            nokkel = 'motebooking.krr.utgaatt';
+            break;
         }
         default: {
-            return '';
+            nokkel = '';
+            break;
         }
     }
+    if (nokkel !== '') {
+        return getHtmlLedetekst(nokkel, ledetekster);
+    }
+    return '';
 };
 
 export const MotebookingSkjema = ({
@@ -82,16 +91,10 @@ export const MotebookingSkjema = ({
     };
     const visArbeidstaker = arbeidstaker && arbeidstaker.kontaktinfo && arbeidstaker.kontaktinfo.reservasjon.skalHaVarsel;
     const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
-    const feilmeldingkey = getLedetekstnokkelFraFeilAarsak(feilAarsak);
-
-    if (!valgtEnhet) {
-        return (<div>
-            <p>For å opprette møte må du ha valgt enhet dette møtet skal knyttes til. Dette gjøres øverst på siden. </p>
-        </div>);
-    }
+    const feilmelding = getLedetekstnokkelFraFeilAarsak(feilAarsak, ledetekster);
 
     return (<div>
-        { !visArbeidstaker && <KontaktInfoFeilmelding feilmeldingkey={feilmeldingkey} ledetekster={ledetekster} /> }
+        { !visArbeidstaker && <KontaktInfoFeilmelding melding={feilmelding} ledetekster={ledetekster} /> }
         <form className="panel" onSubmit={handleSubmit(submit)}>
             <Sidetopp tittel={getLedetekst('mote.motebookingskjema.overskrift', ledetekster)} />
 
