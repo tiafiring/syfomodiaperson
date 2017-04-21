@@ -25,9 +25,9 @@ export function genererDato(dato, klokkeslett) {
     const klokkeslettArr = klokkeslett.split('.');
     const aar = datoArr[2];
     const aarPadded = aar.length === 2 ? `20${aar}` : aar;
-    s.setDate(datoArr[0]);
-    s.setMonth(parseInt(datoArr[1], 10) - 1);
     s.setYear(aarPadded);
+    s.setMonth(parseInt(datoArr[1], 10) - 1);
+    s.setDate(datoArr[0]);
     s.setUTCHours(klokkeslettArr[0]);
     s.setMinutes(klokkeslettArr[1]);
     s.setSeconds('00');

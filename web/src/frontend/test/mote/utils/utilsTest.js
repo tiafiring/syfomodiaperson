@@ -3,6 +3,7 @@ import {
     pad,
     getTidFraZulu,
     getDatoFraZulu,
+    genererDato,
     erAlleAlternativerPassert,
     hentVirksomhetHvis9Siffer,
     virksomhetsnavn
@@ -49,7 +50,7 @@ describe("utils", () => {
             const s = getDatoFraZulu("2016-11-03T11:47:04.673Z");
             expect(s).to.equal("03.11.2016");
         });
-    })
+    });
 
     describe("erAlleAlternativerPassert", () => {
         let clock;
@@ -90,5 +91,12 @@ describe("utils", () => {
             const s = erAlleAlternativerPassert(alternativer);
             expect(s).to.equal(false);
         });
-    })
+    });
+
+    describe("genererDato", () => {
+        it("31. Mai 10.00 blir riktig", () => {
+            const s = genererDato("31.05.2017", "10.00");
+            expect(s).to.equal("2017-05-31T10:00:00");
+        });
+    });
 });
