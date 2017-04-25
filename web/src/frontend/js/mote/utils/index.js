@@ -80,3 +80,18 @@ export const erAlleAlternativerPassert = (alternativer) => {
         return alternativ.tid > morgendagen;
     }).length === 0;
 };
+export const erMotePassert = (mote) => {
+    if (mote.bekreftetAlternativ && mote.bekreftetAlternativ.tid <= new Date()) {
+        return true;
+    }
+    return mote.alternativer.filter((alternativ) => {
+        return alternativ.tid <= new Date();
+    }).length === 2;
+};
+
+export const trekkDagerFraDato = (dato, dager) => {
+    return new Date().setTime(dato.getTime() - (dager * 86400000));
+};
+export const leggTilDagerPaaDato = (dato, dager) => {
+    return new Date().setTime(dato.getTime() + (dager * 86400000));
+};

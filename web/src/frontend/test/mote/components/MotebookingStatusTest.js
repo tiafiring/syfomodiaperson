@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import MotebookingStatus, { MotetidspunktValgt, StatusVarsel } from "../../../js/mote/components/MotebookingStatus";
+import MotebookingStatus, { MotetidspunktValgt, StatusVarsel, PassertVarsel } from "../../../js/mote/components/MotebookingStatus";
 import Svarstatus from '../../../js/mote/components/Svarstatus';
 import BekreftetMotetidspunkt from "../../../js/mote/components/BekreftetMotetidspunkt";
 import KontaktInfoFeilmelding from "../../../js/mote/components/KontaktInfoFeilmelding";
@@ -9,12 +9,17 @@ import {mount, shallow} from "enzyme";
 import React from "react";
 import sinon from "sinon";
 import {Varselstripe} from "digisyfo-npm";
+import {trekkDagerFraDato, leggTilDagerPaaDato} from '../../../js/mote/utils/index';
 
 describe("MotebookingStatus", () => {
 
+    let now;
     let mote = {};
+    let motePassert;
+    let bekreftetMotePassert;
     let avbrytMote;
     let ledetekster = {
+        'mote.bookingstatus.passert.tittel': 'Forrige møte',
         'mote.bookingstatus.bekreftet.tittel': 'Bekreftet møtetidspunkt',
         'mote.bookingstatus.bekreftet.sendt-til': "Møtetidspunkt valgt, møteresultat og varsel er sendt til %DELTAKERE%",
         'mote.bookingstatus.foresporsel.sendt.til': 'Møteforespørselen ble sendt til %DELTAKERE%',
@@ -24,21 +29,22 @@ describe("MotebookingStatus", () => {
     beforeEach(() => {
         window.APP_SETTINGS = {
             APP_ROOT: "/sykefravaer"
-        };
+        }
+        now = new Date();
         mote.alternativer = [{
-            "tid": new Date("2012-12-12T11:00:00Z"),
-            "created": new Date("2011-12-12T11:00:00Z"),
+            "tid": "2012-12-12T11:00:00Z",
+            "created": "2011-12-12T11:00:00Z",
             "sted": "Oslo by",
             "valgt": false,
             "id": 1
         }, {
-            "tid": new Date("2009-09-09T07:00:00Z"),
-            "created": new Date("2011-12-12T11:00:00Z"),
+            "tid": "2009-09-09T07:00:00Z",
+            "created": "2011-12-12T11:00:00Z",
             "sted": "Oslo by",
             "valgt": false,
             "id": 2
         }];
-        mote.opprettetTidspunkt =  new Date("2016-11-22T12:56:32.561Z");
+        mote.opprettetTidspunkt = "2016-11-22T12:56:32.561Z";
         mote.status = 'OPPRETTET';
         mote.deltakere = [{
             type: "arbeidsgiver",
@@ -47,14 +53,14 @@ describe("MotebookingStatus", () => {
             avvik: [],
             hendelser: [],
             svar: [{
-                "tid": new Date("2012-12-12T11:00:00Z"),
-                "created": new Date("2011-12-12T11:00:00Z"),
+                "tid": "2012-12-12T11:00:00Z",
+                "created": "2011-12-12T11:00:00Z",
                 "sted": "Oslo by",
                 "valgt": false,
                 "id": 1
             }, {
-                "tid": new Date("2009-09-09T07:00:00Z"),
-                "created": new Date("2011-12-12T11:00:00Z"),
+                "tid": "2009-09-09T07:00:00Z",
+                "created": "2011-12-12T11:00:00Z",
                 "sted": "Oslo by",
                 "valgt": false,
                 "id": 2
@@ -66,72 +72,108 @@ describe("MotebookingStatus", () => {
             hendelser: [],
             epost: "***REMOVED***",
             svar: [{
-                "tid": new Date("2012-12-12T11:00:00Z"),
-                "created": new Date("2011-12-12T11:00:00Z"),
+                "tid": "2012-12-12T11:00:00Z",
+                "created": "2011-12-12T11:00:00Z",
                 "sted": "Oslo by",
                 "valgt": false,
                 "id": 1
             }, {
-                "tid": new Date("2009-09-09T07:00:00Z"),
-                "created": new Date("2011-12-12T11:00:00Z"),
+                "tid": "2009-09-09T07:00:00Z",
+                "created": "2011-12-12T11:00:00Z",
                 "sted": "Oslo by",
                 "valgt": false,
                 "id": 2
             }],
+        }];
+        motePassert = Object.assign({}, mote);
+        motePassert.alternativer = [{
+            "tid": `${trekkDagerFraDato(now, 6)}`,
+            "created": `${trekkDagerFraDato(now, 10)}`,
+            "sted": "Oslo by",
+            "valgt": false,
+            "id": 1
+        }, {
+            "tid": `${trekkDagerFraDato(now, 8)}`,
+            "created": `${trekkDagerFraDato(now, 10)}`,
+            "sted": "Oslo by",
+            "valgt": false,
+            "id": 2
         }];
         bekreftetMote =  {
             "id": 0,
             "moteUuid": "f26984a2-e038-4de6-a6af-4f4f5db96b26",
             "opprettetAv": "Z990562",
             "status": "BEKREFTET",
-            "opprettetTidspunkt": new Date("2016-11-22T12:56:32.561Z"),
-            "bekreftetTidspunkt": new Date("2017-03-23T12:56:32.561Z"),
+            "opprettetTidspunkt": "2016-11-22T12:56:32.561Z",
+            "bekreftetTidspunkt": "2017-03-23T12:56:32.561Z",
             "navEnhet": "navEnhet",
             "deltakere": [{
                 "deltakerUuid": "3b0dc3b2-587c-4105-98df-99b4205d3ce9",
                 "navn": "***REMOVED***",
                 "epost": "***REMOVED***",
                 "type": "arbeidsgiver",
-                "svartidspunkt": new Date("2016-11-22T12:52:06.489Z"),
+                "svartidspunkt": "2016-11-22T12:52:06.489Z",
                 "avvik": [],
                 "hendelser": [],
                 "svar": [{
                     "id": 344,
-                    "tid": new Date("2019-09-09T07:00:00Z"),
-                    "created": new Date("2011-12-12T11:00:00Z"),
+                    "tid": "2019-09-09T07:00:00Z",
+                    "created": "2011-12-12T11:00:00Z",
                     "sted": "Oslo",
                     "valgt": true
                 }, {
                     "id": 345,
-                    "tid": new Date("2020-09-09T18:00:00Z"),
-                    "created": new Date("2011-12-12T11:00:00Z"),
+                    "tid": "2020-09-09T18:00:00Z",
+                    "created": "2011-12-12T11:00:00Z",
                     "sted": "Oslo",
                     "valgt": false
                 }]
             }],
             "bekreftetAlternativ": {
                 "id": 344,
-                "tid": new Date("2019-09-09T07:00:00Z"),
-                "created": new Date("2011-12-12T11:00:00Z"),
+                "tid": "2019-09-09T07:00:00Z",
+                "created": "2011-12-12T11:00:00Z",
                 "sted": "Oslo",
                 "valgt": true
             },
             "alternativer": [{
                 "id": 344,
-                "tid": new Date("2019-09-09T07:00:00Z"),
-                "created": new Date("2011-12-12T11:00:00Z"),
+                "tid": "2019-09-09T07:00:00Z",
+                "created": "2011-12-12T11:00:00Z",
                 "sted": "Oslo",
                 "valgt": true
             }, {
                 "id": 345,
-                "tid": new Date("2020-09-09T18:00:00Z"),
-                "created": new Date("2011-12-12T11:00:00Z"),
+                "tid": "2020-09-09T18:00:00Z",
+                "created": "2011-12-12T11:00:00Z",
                 "sted": "Oslo",
                 "valgt": false
             }]
         };
+        bekreftetMotePassert = Object.assign({}, bekreftetMote);
+        bekreftetMotePassert.alternativer = [{
+            "tid": `${leggTilDagerPaaDato(now, 6)}`,
+            "created": `${leggTilDagerPaaDato(now, 10)}`,
+            "sted": "Oslo by",
+            "valgt": false,
+            "id": 344
+        }, {
+            "tid": `${trekkDagerFraDato(now, 8)}`,
+            "created": `${trekkDagerFraDato(now, 10)}`,
+            "sted": "Oslo by",
+            "valgt": false,
+            "id": 345
+        }];
+        bekreftetMotePassert.bekreftetAlternativ = {
+            "id": 345,
+            "tid": `${trekkDagerFraDato(now, 8)}`,
+            "created": `${trekkDagerFraDato(now, 10)}`,
+            "sted": "Oslo",
+            "valgt": true
+        };
+
         avbrytMote = sinon.spy();
-    })
+    });
 
     describe("StatusVarsel", () => {
 
@@ -172,16 +214,63 @@ describe("MotebookingStatus", () => {
             expect(component.find(StatusVarsel).prop("mote")).to.deep.equal(mote);
         });
 
+        it("Skal ikke inneholde PassertVarsel", () => {
+            expect(component.find(PassertVarsel)).to.have.length(0);
+        });
+
         it("Skal vise sted", () => {
-            expect(component.text()).to.contain("Oslo by"); 
+            expect(component.text()).to.contain("Oslo by");
         });
 
         it("Skal inneholde Svarstatus", () => {
             expect(component.find(Svarstatus)).to.have.length(1);
         });
 
-        it("Skal ikke vise en knapp med teksten 'Velg tidspunkt for møte'", () => {
-            expect(component.find(".js-velg-tidspunkt")).to.have.length(0);
+        it("Skal ikke vise en knapp med teksten 'Planlegg nytt møte'", () => {
+            expect(component.find(".js-ny")).to.have.length(0);
+        });
+
+        it("Skal vise en knapp med teksten 'Avbryt'", () => {
+            expect(component.find(".js-avbryt")).to.have.length(1);
+        });
+
+    });
+
+    describe("Når møte ikke er bekreftet, tid har passert", () => {
+        let component;
+        let mote;
+
+        beforeEach(() => {
+            mote = motePassert;
+            component = shallow(<MotebookingStatus mote={mote} ledetekster={ledetekster} />);
+        });
+
+        it("Skal vise riktig tittel", () => {
+            expect(component.find(Sidetopp).prop("tittel")).to.equal("Forrige møte")
+        });
+
+        it("Skal inneholde PassertVarsel", () => {
+            expect(component.find(PassertVarsel)).to.have.length(1);
+        });
+
+        it("Skal ikke inneholde StatusVarsel", () => {
+            expect(component.find(StatusVarsel)).to.have.length(0);
+        });
+
+        it("Skal vise sted", () => {
+            expect(component.text()).to.contain("Oslo by");
+        });
+
+        it("Skal ikke inneholde Svarstatus", () => {
+            expect(component.find(Svarstatus)).to.have.length(0);
+        });
+
+        it("Skal vise en knapp med teksten 'Planlegg nytt møte'", () => {
+            expect(component.find(".js-ny")).to.have.length(1);
+        });
+
+        it("Skal ikke vise en knapp med teksten 'Avbryt'", () => {
+            expect(component.find(".js-avbryt")).to.have.length(0);
         });
 
     });
@@ -210,11 +299,67 @@ describe("MotebookingStatus", () => {
 
         it("Skal vise riktig tittel", () => {
             expect(component.find(Sidetopp).prop("tittel")).to.equal("Bekreftet møtetidspunkt")
-        })
+        });
 
         it("Skal inneholde StatusVarsel", () => {
             expect(component.find(StatusVarsel)).to.have.length(1);
             expect(component.find(StatusVarsel).prop("mote")).to.deep.equal(mote);
+        });
+
+        it("Skal ikke inneholde PassertVarsel", () => {
+            expect(component.find(PassertVarsel)).to.have.length(0);
+        });
+
+        it("Skal vise hvilket tidspunkt som er valgt", () => {
+            expect(component.find(BekreftetMotetidspunkt)).to.have.length(1);
+            expect(component.find(BekreftetMotetidspunkt).prop("mote")).to.deep.equal(mote);
+            expect(component.find(BekreftetMotetidspunkt).prop("ledetekster")).to.deep.equal(ledetekster);
+        });
+
+        it("Skal ikke vise en knapp med teksten 'Planlegg nytt møte'", () => {
+            expect(component.find(".js-ny")).to.have.length(0);
+        });
+
+        it("Skal vise en knapp med teksten 'Avbryt'", () => {
+            expect(component.find(".js-avbryt")).to.have.length(1);
+        });
+
+    });
+
+    describe("Når møte er bekreftet, tid har passert", () => {
+        let component;
+        let mote;
+        beforeEach(() => {
+            mote = bekreftetMotePassert;
+            component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} ledetekster={ledetekster} />);
+        });
+
+        it("Skal vise riktig tittel", () => {
+            expect(component.find(Sidetopp).prop("tittel")).to.equal("Forrige møte")
+        });
+
+        it("Skal ikke inneholde PassertVarsel", () => {
+            expect(component.find(PassertVarsel)).to.have.length(0);
+        });
+
+        it("Skal ikke inneholde StatusVarsel", () => {
+            expect(component.find(StatusVarsel)).to.have.length(0);
+        });
+
+        it("Skal vise sted", () => {
+            expect(component.text()).to.contain("Oslo by");
+        });
+
+        it("Skal ikke inneholde Svarstatus", () => {
+            expect(component.find(Svarstatus)).to.have.length(0);
+        });
+
+        it("Skal vise en knapp med teksten 'Planlegg nytt møte'", () => {
+            expect(component.find(".js-ny")).to.have.length(1);
+        });
+
+        it("Skal ikke vise en knapp med teksten 'Avbryt'", () => {
+            expect(component.find(".js-avbryt")).to.have.length(0);
         });
 
         it("Skal vise hvilket tidspunkt som er valgt", () => {
@@ -226,36 +371,18 @@ describe("MotebookingStatus", () => {
     });
 
     describe("Verktøylinje", () => {
-            
-        it("Skal vise en knapp for Ny møteforespørsel dersom tidspunktene for alternativene er passert", () => {
-            const component = shallow(<MotebookingStatus mote={mote} />);
+
+        it("Skal vise en knapp for Ny møteforespørsel", () => {
+            const component = shallow(<MotebookingStatus mote={motePassert} />);
             expect(component.find(".js-ny")).to.have.length(1)
         });
 
         it("Skal kalle på avbrytMoteUtenVarsel med moteUuid og fnr når man klikker på knappen", () => {
-            mote.moteUuid = "min-mote-uuid";
+            motePassert.moteUuid = "min-mote-uuid";
             const avbrytMoteUtenVarsel = sinon.spy();
-            const component = shallow(<MotebookingStatus mote={mote} fnr="mitt-fnr" avbrytMoteUtenVarsel={avbrytMoteUtenVarsel} />);
+            const component = shallow(<MotebookingStatus mote={motePassert} fnr="mitt-fnr" avbrytMoteUtenVarsel={avbrytMoteUtenVarsel} />);
             component.find(".js-ny").simulate("click");
             expect(avbrytMoteUtenVarsel.calledWith("min-mote-uuid", "mitt-fnr")).to.be.true;
-        });
-        
-        it("Skal vise en link til avbryt møte dersom tidspunktene for alternativene til møtet ikke er passert", () => {
-            mote.alternativer = [{
-                "tid": new Date("2112-12-12T11:00:00Z"),
-                "created":  new Date("2011-12-12T11:00:00Z"),
-                "sted": "Oslo by",
-                "valgt": false,
-                "id": 1
-            }, {
-                "tid": new Date("2109-09-09T07:00:00Z"),
-                "created":  new Date("2011-12-12T11:00:00Z"),
-                "sted": "Oslo by",
-                "valgt": false,
-                "id": 2
-            }];
-            const component = shallow(<MotebookingStatus mote={mote} />);
-            expect(component.find(".js-avbryt")).to.have.length(1)
         });
 
     });
