@@ -51,6 +51,7 @@ const store = createStore(rootReducer,
 sagaMiddleware.run(rootSaga);
 
 const fnr = window.location.pathname.split('/')[2];
+let harSjekketEnhetContext = false;
 const config = {
     config: {
         toggles: {
@@ -68,11 +69,16 @@ const config = {
         fnr,
         applicationName: 'Sykefravær',
         handleChangeEnhet: (data) => {
-            store.dispatch(valgtEnhet(data));
-            store.dispatch(pushModiaContext({
-                verdi: data,
-                eventType: 'NY_AKTIV_ENHET',
-            }));
+                if (config.config.initiellEnhet !== data) {
+                    store.dispatch(valgtEnhet(data));
+                    if (harSjekketEnhetContext) {
+                        store.dispatch(pushModiaContext({
+                            verdi: data,
+                            eventType: 'NY_AKTIV_ENHET',
+                        }));
+                    }
+                    config.config.initiellEnhet = data;
+                }
         },
     },
 };
@@ -89,9 +95,12 @@ store.dispatch(hentAktivBruker({
 }));
 store.dispatch(hentAktivEnhet({
     callback: (aktivEnhet) => {
-        store.dispatch(valgtEnhet(aktivEnhet));
-        config.config.initiellEnhet = aktivEnhet;
-        window.renderDecoratorHead(config);
+        harSjekketEnhetContext = true;
+        if (aktivEnhet && config.config.initiellEnhet !== aktivEnhet) {
+                store.dispatch(valgtEnhet(aktivEnhet));
+                config.config.initiellEnhet = aktivEnhet;
+                window.renderDecoratorHead(config);
+        }
     },
 }));
 store.dispatch(sjekkTilgangMoteadmin());
