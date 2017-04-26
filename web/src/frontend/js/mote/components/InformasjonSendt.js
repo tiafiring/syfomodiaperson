@@ -39,7 +39,7 @@ const InformasjonSendt = ({ fikkIkkeOpprettetVarsel, mote, ledetekster }) => {
 
 InformasjonSendt.propTypes = {
     mote: moterPropTypes.mote,
-    fikkIkkeOpprettetVarsel: PropTypes.bool,
+    fikkIkkeOpprettetVarsel: PropTypes.object,
     ledetekster: PropTypes.object,
 };
 

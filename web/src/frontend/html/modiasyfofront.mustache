@@ -4,7 +4,7 @@
     <title>Sykefravær</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <script src="{{{decoratorRoot}}}/internarbeidsflatedecorator/js/head.min.js"></script>
+    <script src="{{{decoratorRoot}}}/internarbeidsflatedecorator/js/head.min.js?rev={{{timestamp}}}"></script>
 </head>
 <body>
     <div id="header"></div>
@@ -16,7 +16,6 @@
         window.APP_SETTINGS = {
             "REST_ROOT": "{{{restRoot}}}",
             "MOTEADMIN_REST_ROOT": "{{{moteAdminRestRoot}}}",
-            "WEBSOCKET_PROTOCOL": "{{{websocketProtocol}}}",
             "CONTEXTHOLDER_ROOT": "{{{contextholderRoot}}}",
             "APP_ROOT": "/sykefravaer",
             {{#enableLogging}}"LOGGING_ENABLED": {{{enableLogging}}}{{/enableLogging}}

@@ -1,5 +1,6 @@
 import * as actions from '../actions/actiontyper';
 import { konverterTid } from 'moter-npm';
+import { lagJsDate } from '../utils/index';
 
 const defaultState = {
     data: [],
@@ -31,7 +32,7 @@ export default function moter(state = defaultState, action) {
             }, {
                 alternativer: action.data.alternativer.map((a) => {
                     return Object.assign({}, a, {
-                        tid: new Date(a.tid),
+                        tid: lagJsDate(a.tid),
                         created: new Date(),
                     });
                 }),
@@ -39,7 +40,7 @@ export default function moter(state = defaultState, action) {
                     return Object.assign({}, d, {
                         svar: action.data.alternativer.map((a) => {
                             return Object.assign({}, a, {
-                                tid: new Date(a.tid),
+                                tid: lagJsDate(a.tid),
                                 created: new Date(),
                             });
                         }),

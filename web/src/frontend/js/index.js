@@ -14,19 +14,26 @@ import { reducer as formReducer } from 'redux-form';
 import { ledetekster, hentLedetekster, tidslinjer, hasURLParameter } from 'digisyfo-npm';
 import moter from './mote/reducers/moter';
 import epostinnhold from './mote/reducers/epostinnhold';
+import modiacontext from './reducers/modiacontext';
 import arbeidstaker from './mote/reducers/arbeidstaker';
+import enhet from './mote/reducers/enhet';
 import virksomhet from './mote/reducers/virksomhet';
 import rootSaga from './sagas/index';
 import { hentNavbruker, sjekkTilgangMoteadmin } from './actions/navbruker_actions';
+import { pushModiaContext, hentAktivBruker, hentAktivEnhet } from './actions/modiacontext_actions';
+import { valgtEnhet } from './mote/actions/enhet_actions';
+import { opprettWebsocketConnection } from './contextHolder';
 
 const rootReducer = combineReducers({
     history,
     ledere,
     navbruker,
+    modiacontext,
     moter,
     virksomhet,
     epostinnhold,
     arbeidstaker,
+    enhet,
     tidslinjer,
     sykmeldinger,
     arbeidsgiversSykmeldinger,
@@ -44,7 +51,54 @@ const store = createStore(rootReducer,
 sagaMiddleware.run(rootSaga);
 
 const fnr = window.location.pathname.split('/')[2];
+const config = {
+    config: {
+        toggles: {
+            visEnhetVelger: true,
+            visVeileder: true,
+            visSokefelt: true,
+            overrideenhetersaga: true,
+            overrideveiledersaga: true,
+        },
+        handlePersonsokSubmit: (nyttFnr) => {
+            if (nyttFnr !== fnr) {
+                window.location = `/sykefravaer/${nyttFnr}`;
+            }
+        },
+        fnr,
+        applicationName: 'Sykefravær',
+        handleChangeEnhet: (data) => {
+                if (config.config.initiellEnhet !== data) {
+                    store.dispatch(valgtEnhet(data));
+                    store.dispatch(pushModiaContext({
+                        verdi: data,
+                        eventType: 'NY_AKTIV_ENHET',
+                    }));
+                    config.config.initiellEnhet = data;
+                }
+        },
+    },
+};
 store.dispatch(hentNavbruker(fnr));
+store.dispatch(hentAktivBruker({
+    callback: (aktivBruker) => {
+        if (aktivBruker !== fnr) {
+            store.dispatch(pushModiaContext({
+                verdi: fnr,
+                eventType: 'NY_AKTIV_BRUKER',
+            }));
+        }
+    },
+}));
+store.dispatch(hentAktivEnhet({
+    callback: (aktivEnhet) => {
+        if (aktivEnhet && config.config.initiellEnhet !== aktivEnhet) {
+                store.dispatch(valgtEnhet(aktivEnhet));
+                config.config.initiellEnhet = aktivEnhet;
+                window.renderDecoratorHead(config);
+        }
+    },
+}));
 store.dispatch(sjekkTilgangMoteadmin());
 store.dispatch(hentLedetekster());
 
@@ -59,16 +113,29 @@ render(<Provider store={store}>
     document.getElementById('maincontent'));
 
 document.addEventListener('DOMContentLoaded', () => {
-    const config = {
-        config: {
-            toggles: {
-
-            },
-            fnr,
-            applicationName: 'Sykefravær',
-        },
-    };
     window.renderDecoratorHead(config);
+});
+
+opprettWebsocketConnection((wsCallback) => {
+    if (wsCallback.data === 'NY_AKTIV_BRUKER') {
+        store.dispatch(hentAktivBruker({
+            callback: (aktivBruker) => {
+                if (aktivBruker !== fnr) {
+                    window.location = `/sykefravaer/${aktivBruker}`;
+                }
+            },
+        }));
+    } else if (wsCallback.data === 'NY_AKTIV_ENHET') {
+        store.dispatch(hentAktivEnhet({
+            callback: (aktivEnhet) => {
+                if (config.config.initiellEnhet !== aktivEnhet) {
+                    store.dispatch(valgtEnhet(aktivEnhet));
+                    config.config.initiellEnhet = aktivEnhet;
+                    window.renderDecoratorHead(config);
+                }
+            },
+        }));
+    }
 });
 
 export {

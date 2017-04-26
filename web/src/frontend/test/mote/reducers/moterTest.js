@@ -117,71 +117,6 @@ describe('moter', () => {
             });
         });
 
-        it('Håndterer MOTE_OPPRETTET', () => {
-            const initialState = deepFreeze({
-                data: []
-            });
-            const data = getData({
-                "deltakere": [
-                    {
-                        "navn": "***REMOVED***",
-                        "epost": "***REMOVED***",
-                    }
-                ],
-                "tidspunkter": [
-                    {
-                        "dato": "12.08.2016",
-                        "klokkeslett": "15.00"
-                    },
-                    {
-                        "dato": "13.08.2016",
-                        "klokkeslett": "12.00"
-                    }
-                ],
-                "sted": "Oslo"
-            })
-            const action = actions.moteOpprettet(data)
-            const nextState = moter(initialState, action);
-            expect(nextState).to.deep.equal({
-                data: [{
-                    "alternativer": [{
-                        "tid": new Date("2016-08-12T13:00:00.000Z"),
-                        "sted": "Oslo",
-                        "valgt": false,
-                        "created": new Date(),
-                    }, {
-                        "tid": new Date("2016-08-13T10:00:00.000Z"),
-                        "sted": "Oslo",
-                        "valgt": false,
-                        "created": new Date(),
-                    }],
-                    "status": "OPPRETTET",
-                    "deltakere": [{
-                        "navn": "***REMOVED***",
-                        "epost": "***REMOVED***",
-                        "type": "arbeidsgiver",
-                        "svar": [{
-                            "tid": new Date("2016-08-12T13:00:00.000Z"),
-                            "sted": "Oslo",
-                            "valgt": false,
-                            "created": new Date(),
-                        }, {
-                            "tid": new Date("2016-08-13T10:00:00.000Z"),
-                            "sted": "Oslo",
-                            "valgt": false,
-                            "created": new Date(),
-                        }],
-                    }],
-                }],
-                sender: false,
-                sendingFeilet: false,
-                henter: false,
-                hentingFeilet: false,
-                avbryter: false,
-                avbrytFeilet: false,
-            });
-        });
-
         it('Håndterer OPPRETT_MOTE_FEILET', () => {
             const initialState = deepFreeze({
                 data: []
@@ -608,65 +543,6 @@ describe('moter', () => {
             expect(nextState.avbryter).to.equal(false);
         });
 
-        it('Håndterer MOTE_AVBRUTT etterfulgt av MOTE_OPPRETTET', () => {
-            const initialState = deepFreeze({
-                data: [{"test": 1}]
-            });
-            const firstAction = actions.moteAvbrutt('3760a0c7-c0df-406b-ba6f-a7da7ad3bfec');
-            const nextState = moter(initialState, firstAction);
-            const data = getData({
-                "deltakere": [
-                    {
-                        "navn": "***REMOVED***",
-                        "epost": "***REMOVED***",
-                    }
-                ],
-                "tidspunkter": [
-                    {
-                        "dato": "12.08.2016",
-                        "klokkeslett": "15.00"
-                    },
-                    {
-                        "dato": "13.08.2016",
-                        "klokkeslett": "12.00"
-                    }
-                ],
-                "sted": "Oslo"
-            })
-            const secondAction = actions.moteOpprettet(data);
-            const finalState = moter(nextState, secondAction);
-            expect(finalState.data).to.deep.equal([{test: 1}, {
-                "alternativer": [{
-                    "tid": new Date("2016-08-12T13:00:00.000Z"),
-                    "sted": "Oslo",
-                    "valgt": false,
-                    "created": new Date(),
-                }, {
-                    "tid": new Date("2016-08-13T10:00:00.000Z"),
-                    "sted": "Oslo",
-                    "valgt": false,
-                    "created": new Date(),
-                }],
-                "status": "OPPRETTET",
-                "deltakere": [{
-                    "navn": "***REMOVED***",
-                    "epost": "***REMOVED***",
-                    "type": "arbeidsgiver",
-                    "svar": [{
-                        "tid": new Date("2016-08-12T13:00:00.000Z"),
-                        "sted": "Oslo",
-                        "valgt": false,
-                        "created": new Date(),
-                    }, {
-                        "tid": new Date("2016-08-13T10:00:00.000Z"),
-                        "sted": "Oslo",
-                        "valgt": false,
-                        "created": new Date(),
-                    }],
-                }],
-            }]);
-        });
-
         it('Håndterer AVBRYT_MOTE_FEILET', () => {
             const initialState = deepFreeze({
                 data: [{}]
@@ -724,7 +600,7 @@ describe('moter', () => {
                     }]
                 }]
             });
-        })
+        });
 
         it("Håndterer BEKREFTER_MOTE", () => {
             const action = actions.bekrefterMote();

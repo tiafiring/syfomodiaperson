@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { getDatoFraZulu, fikkIkkeMoteOpprettetVarsel } from '../utils';
+import { getDatoFraZulu, fikkIkkeMoteOpprettetVarsel, erMotePassert } from '../utils/index';
 import Sidetopp from '../../components/Sidetopp';
 import KontaktInfoFeilmelding from './KontaktInfoFeilmelding';
 import BekreftetMotetidspunkt from './BekreftetMotetidspunkt';
@@ -60,6 +60,15 @@ const getSendtTilTekst = (mote, ledetekster) => {
     });
 };
 
+const getSidetoppNokkel = (mote, motePassert) => {
+    if (motePassert) {
+        return 'mote.bookingstatus.passert.tittel';
+    } else if (mote.status === OPPRETTET) {
+        return 'mote.bookingstatus.sidetittel';
+    }
+    return 'mote.bookingstatus.bekreftet.tittel';
+};
+
 export const StatusVarsel = ({ mote, ledetekster }) => {
     const dato = mote.status === OPPRETTET ? mote.opprettetTidspunkt : mote.bekreftetTidspunkt;
     return (<div className="panel">
@@ -79,31 +88,46 @@ StatusVarsel.propTypes = {
     ledetekster: PropTypes.object,
 };
 
+export const PassertVarsel = ({ ledetekster }) => {
+    return (
+        <Varselstripe>
+            <div>
+                <p className="typo-element">{getLedetekst('mote.bookingstatus.passert.varsel.tekst', ledetekster)}</p>
+                <p className="sist">{getLedetekst('mote.bookingstatus.passert.varsel.undertekst', ledetekster)}</p>
+            </div>
+        </Varselstripe>);
+};
+PassertVarsel.propTypes = {
+    ledetekster: PropTypes.object,
+};
+
 const MotebookingStatus = (props) => {
     const { ledetekster, fikkIkkeOpprettetVarsel, fnr, mote, avbrytMoteUtenVarsel, antallNyeTidspunkt } = props;
     const { alternativer, status } = mote;
     const krrMeldingPanel = fikkIkkeOpprettetVarsel ?
         <KontaktInfoFeilmelding melding={getLedetekstFraFeilAarsak(fikkIkkeOpprettetVarsel.resultat, ledetekster)} />
     : null;
+    const motePassert = erMotePassert(mote);
     const flereTidspunktBoks = antallNyeTidspunkt ? <FlereTidspunktSkjema {...props} antallEksisterendeTidspunkter={alternativer.length} /> : null;
-    const sidetoppNokkel = mote.status === OPPRETTET ? 'mote.bookingstatus.sidetittel' : 'mote.bookingstatus.bekreftet.tittel';
+    const sidetoppNokkel = getSidetoppNokkel(mote, motePassert);
+    const knapp = erMotePassert(mote) ? <button className="js-ny knapp" onClick={() => { avbrytMoteUtenVarsel(mote.moteUuid, fnr);}}>{getLedetekst('mote.bookingstatus.knapp.planlegg-nytt-mote', ledetekster)}</button>
+        : <Link role="button" className="knapp knapp--enten js-avbryt" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>{getLedetekst('mote.bookingstatus.knapp.avbryt', ledetekster)}</Link>;
+
     return (<div>
-        <StatusVarsel mote={mote} ledetekster={ledetekster} />
+        { !motePassert && <StatusVarsel mote={mote} ledetekster={ledetekster} /> }
         {krrMeldingPanel}
         <div className="panel">
             <Sidetopp tittel={getLedetekst(sidetoppNokkel, ledetekster)} />
             { status === BEKREFTET && <BekreftetMotetidspunkt {...props} /> }
-            { status !== BEKREFTET && <Svarstatus {...props}>{flereTidspunktBoks}</Svarstatus> }
+            { status !== BEKREFTET && !motePassert && <Svarstatus {...props}>{flereTidspunktBoks}</Svarstatus> }
+            { status !== BEKREFTET && motePassert && <PassertVarsel ledetekster={ledetekster} /> }
             <div className="motested">
                 <h3 className="motested__tittel">{getLedetekst('mote.bookingstatus.sted', ledetekster)}</h3>
                 <p className="motested__sted">{mote.alternativer[0].sted}</p>
             </div>
-            { status === BEKREFTET && <InformasjonSendt {...props} /> }
+            { status === BEKREFTET && !motePassert && <InformasjonSendt {...props} /> }
             <div className="knapperad">
-                <Link role="button" className="knapp knapp--enten js-avbryt" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>{getLedetekst('mote.bookingstatus.knapp.avbryt', ledetekster)}</Link>
-                <button className="js-ny knapp" onClick={() => {
-                    avbrytMoteUtenVarsel(mote.moteUuid, fnr);
-                }}>{getLedetekst('mote.bookingstatus.knapp.nytt-tidspunkt', ledetekster)}</button>
+                {knapp}
             </div>
         </div>
     </div>);

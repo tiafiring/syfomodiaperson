@@ -44,10 +44,10 @@ describe("FlereTidspunktSkjemaTest", () => {
         })
         it("getData skal mappe values om til riktig format", () => {
             expect(getData(values)).to.deep.equal([{
-                tid: "2012-02-20T09:20:00",
+                tid: "2012-02-20T10:20:00",
                 valgt: false,
             }, {
-                tid: "2013-02-20T09:30:00",
+                tid: "2013-02-20T10:30:00",
                 valgt: false,
             }]);
         });
@@ -56,11 +56,11 @@ describe("FlereTidspunktSkjemaTest", () => {
             const data = getData(values);
             const res = dekorerMedSted(data, "Oslo");
             expect(res).to.deep.equal([{
-                tid: "2012-02-20T09:20:00",
+                tid: "2012-02-20T10:20:00",
                 valgt: false,
                 sted: "Oslo"
             }, {
-                tid: "2013-02-20T09:30:00",
+                tid: "2013-02-20T10:30:00",
                 valgt: false,
                 sted: "Oslo"
             }])

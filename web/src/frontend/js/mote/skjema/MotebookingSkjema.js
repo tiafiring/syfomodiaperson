@@ -5,9 +5,8 @@ import LederFields, { ManuellUtfyltLeder } from './LederFields';
 import Tidspunkter from './Tidspunkter';
 import KontaktInfoFeilmelding from '../components/KontaktInfoFeilmelding';
 import Sidetopp from '../../components/Sidetopp';
-import { Varselstripe, getLedetekst } from 'digisyfo-npm';
+import { Varselstripe, getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import { genererDato, erGyldigKlokkeslett, erGyldigEpost, erGyldigDato } from '../utils/index';
-import { getCookieValueorDefault } from '../../utils/index';
 
 export const OPPRETT_MOTE_SKJEMANAVN = 'opprettMote';
 
@@ -54,39 +53,48 @@ Arbeidstaker.propTypes = {
     ledetekster: PropTypes.object,
 };
 
-const getLedetekstnokkelFraFeilAarsak = (feilAarsak) => {
+const getLedetekstnokkelFraFeilAarsak = (feilAarsak, ledetekster) => {
+    let nokkel;
     switch (feilAarsak) {
         case 'RESERVERT': {
-            return 'motebooking.krr.reservert';
+            nokkel = 'motebooking.krr.reservert';
+            break;
         }
         case 'INGEN_KONTAKTINFORMASJON': {
-            return 'motebooking.krr.ingen-kontaktinformasjon';
+            nokkel = 'motebooking.krr.ingen-kontaktinformasjon';
+            break;
         }
         case 'UTGAATT': {
-            return 'motebooking.krr.utgaatt';
+            nokkel = 'motebooking.krr.utgaatt';
+            break;
         }
         default: {
-            return '';
+            nokkel = '';
+            break;
         }
     }
+    if (nokkel !== '') {
+        return getHtmlLedetekst(nokkel, ledetekster);
+    }
+    return '';
 };
 
 export const MotebookingSkjema = ({
     ledetekster, handleSubmit, arbeidstaker, opprettMote, fnr, sender, sendingFeilet, ledere,
-    autofill, untouch, hentLedereFeiletBool,
+    autofill, untouch, hentLedereFeiletBool, valgtEnhet,
 }) => {
     const submit = (values) => {
         const data = getData(values);
         data.fnr = fnr;
-        data.navEnhet = getCookieValueorDefault('navEnhet', 'navEnhet');
+        data.navEnhet = valgtEnhet;
         opprettMote(data);
     };
     const visArbeidstaker = arbeidstaker && arbeidstaker.kontaktinfo && arbeidstaker.kontaktinfo.reservasjon.skalHaVarsel;
-    const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : '';
-    const feilmeldingkey = getLedetekstnokkelFraFeilAarsak(feilAarsak);
+    const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.reservasjon.feilAarsak : undefined;
+    const feilmelding = feilAarsak && getLedetekstnokkelFraFeilAarsak(feilAarsak, ledetekster);
 
     return (<div>
-        { !visArbeidstaker && <KontaktInfoFeilmelding feilmeldingkey={feilmeldingkey} ledetekster={ledetekster} /> }
+        { !visArbeidstaker && <KontaktInfoFeilmelding melding={feilmelding} ledetekster={ledetekster} /> }
         <form className="panel" onSubmit={handleSubmit(submit)}>
             <Sidetopp tittel={getLedetekst('mote.motebookingskjema.overskrift', ledetekster)} />
 
@@ -150,6 +158,7 @@ export const MotebookingSkjema = ({
 
 MotebookingSkjema.propTypes = {
     fnr: PropTypes.string,
+    valgtEnhet: PropTypes.string,
     handleSubmit: PropTypes.func,
     opprettMote: PropTypes.func,
     sender: PropTypes.bool,
