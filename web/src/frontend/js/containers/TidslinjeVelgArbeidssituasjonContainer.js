@@ -22,7 +22,7 @@ export class VelgArbeidssituasjon extends Component {
     render() {
         return (<Radiofaner
             alternativer={this.props.arbeidssituasjoner}
-            bekreftetAlternativ={this.props.valgtArbeidssituasjon}
+            valgtAlternativ={this.props.valgtArbeidssituasjon}
             changeHandler={(verdi) => {
                 this.changeHandler(verdi);
             }}
