@@ -4,18 +4,21 @@ import { konstanter, proptypes as moterPropTypes } from 'moter-npm';
 import { Utvidbar } from 'digisyfo-npm';
 import DropdownInnholdsviser from './DropdownInnholdsviser';
 import * as epostinnholdActions from '../actions/epostinnhold_actions';
+import * as arbeidsgiverepostinnholdActions from '../actions/arbeidsgiverepostinnhold_actions';
 const { BRUKER, ARBEIDSGIVER } = konstanter;
 
 export const mapStateToInnholdsviserProps = (state) => {
     return {
         epostinnhold: state.epostinnhold.data,
-        henter: state.epostinnhold.henter === true,
-        hentingFeilet: state.epostinnhold.hentingFeilet === true,
+        arbeidsgiverepostinnhold: state.arbeidsgiverEpostinnhold.data,
+        henter: state.epostinnhold.henter === true || state.arbeidsgiverEpostinnhold.henter === true,
+        hentingFeilet: state.epostinnhold.hentingFeilet === true || state.arbeidsgiverEpostinnhold.hentingFeilet === true,
     };
 };
 
 const actions = Object.assign({}, epostinnholdActions, {
     hentEpostinnhold: epostinnholdActions.hentBekreftMoteEpostinnhold,
+    hentArbeidsgiverEpostinnhold: arbeidsgiverepostinnholdActions.hentBekreftMoteArbeidsgiverEpostinnhold,
 });
 
 export const InnholdsviserContainer = connect(mapStateToInnholdsviserProps, actions)(DropdownInnholdsviser);

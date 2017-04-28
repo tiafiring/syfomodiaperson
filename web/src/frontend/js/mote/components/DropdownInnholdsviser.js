@@ -1,7 +1,9 @@
 import React, { PropTypes, Component } from 'react';
 import { Varselstripe } from 'digisyfo-npm';
 import AppSpinner from '../../components/AppSpinner';
-import { proptypes as moterPropTypes } from 'moter-npm';
+import { konstanter, proptypes as moterPropTypes } from 'moter-npm';
+
+const { BRUKER } = konstanter;
 
 export const Innhold = ({ emne, innhold }) => {
     return (<div className="blokk">
@@ -33,7 +35,11 @@ Feil.propTypes = {
 
 class DropdownInnholdsviser extends Component {
     componentDidMount() {
-        this.props.hentEpostinnhold(this.getDeltaker(this.props.type).deltakerUuid, this.props.mote.bekreftetAlternativ.id);
+        if (this.props.type === BRUKER) {
+            this.props.hentEpostinnhold(this.getDeltaker(this.props.type).deltakerUuid, this.props.mote.bekreftetAlternativ.id);
+        } else {
+            this.props.hentArbeidsgiverEpostinnhold(this.getDeltaker(this.props.type).deltakerUuid, this.props.mote.bekreftetAlternativ.id);
+        }
     }
 
     getDeltaker(type) {
@@ -43,16 +49,18 @@ class DropdownInnholdsviser extends Component {
     }
 
     render() {
-        const { henter, hentingFeilet, epostinnhold } = this.props;
+        const { henter, hentingFeilet, epostinnhold, arbeidsgiverepostinnhold } = this.props;
+        const innhold = this.props.type === BRUKER ? epostinnhold : arbeidsgiverepostinnhold;
+
         if (henter) {
             return <AppSpinner />;
         }
         if (hentingFeilet) {
             return (<Feil melding="Beklager, det oppstod en feil ved uthenting av innhold i e-posten" />);
         }
-        if (epostinnhold) {
+        if (innhold) {
             return (<div>
-                <Innhold {...epostinnhold} />
+                <Innhold {...innhold} />
             </div>);
         }
         return (<Feil />);
@@ -63,8 +71,10 @@ DropdownInnholdsviser.propTypes = {
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     epostinnhold: PropTypes.object,
+    arbeidsgiverepostinnhold: PropTypes.object,
     type: PropTypes.string,
     hentEpostinnhold: PropTypes.func,
+    hentArbeidsgiverEpostinnhold: PropTypes.func,
     ledetekster: PropTypes.object,
     mote: moterPropTypes.mote,
 };

@@ -23,7 +23,7 @@ const getMote = (mote) => {
             "navn": "Are Arbeidsgiver",
             "orgnummer": "***REMOVED***",
             "epost": "are.arbeidsgiver@nav.no",
-            "type": "arbeidsgiver",
+            "type": "Arbeidsgiver",
             "svartidspunkt": null,
             "svar": [{
                 "id": 1,
@@ -80,31 +80,55 @@ describe("Innholdsviser", () => {
 
     let mote;
     let hentEpostinnhold;
+    let hentArbeidsgiverEpostinnhold;
     let epostinnhold;
+    let arbeidsgiverepostinnhold;
 
     beforeEach(() => {
         mote = getMote();
         hentEpostinnhold = sinon.spy();
+        hentArbeidsgiverEpostinnhold = sinon.spy();
         epostinnhold = {
-            emne: "Mitt emne",
-            innhold: "<p>Mitt innhold</p>",
-        }
+            emne: "Mitt emne, arbeidstaker",
+            innhold: "<p>Mitt innhold, arbeidstaker</p>",
+        };
+        arbeidsgiverepostinnhold = {
+            emne: "Mitt emne, arbeidsgiver",
+            innhold: "<p>Mitt innhold arbeidsgiver</p>",
+        };
     });
 
-    it("Skal hente epostinnhold", () => {
+    it("Skal hente epostinnhold for arbeidstaker", () => {
         let component = shallow(<DropdownInnholdsviser hentEpostinnhold={hentEpostinnhold} mote={mote} type="Bruker" />);
         component.instance().componentDidMount();
         expect(hentEpostinnhold.calledWith("uuid2", 1)).to.be.true;
     });
 
-    it("Viser AppSpinner når epostinnhold hentes", () => {
+    it("Viser AppSpinner når epostinnhold hentes for arbeidstaker", () => {
         let component = shallow(<DropdownInnholdsviser hentEpostinnhold={hentEpostinnhold} mote={mote} henter={true} type="Bruker" />)
         expect(component.find(AppSpinner)).to.have.length(1);
     });
 
-    it("Viser epostinnhold dersom epostinnhold er hentet", () => {
+    it("Viser epostinnhold dersom epostinnhold er hentet for arbeidstaker", () => {
         let component = shallow(<DropdownInnholdsviser hentEpostinnhold={hentEpostinnhold} mote={mote} epostinnhold={epostinnhold} type="Bruker" />);
-        expect(component.html()).to.contain("Mitt emne");
-        expect(component.html()).to.contain("Mitt innhold");
+        expect(component.html()).to.contain("Mitt emne, arbeidstaker");
+        expect(component.html()).to.contain("Mitt innhold, arbeidstaker");
+    });
+
+    it("Skal hente epostinnhold for arbeidsgiver", () => {
+        let component = shallow(<DropdownInnholdsviser hentArbeidsgiverEpostinnhold={hentArbeidsgiverEpostinnhold} mote={mote} type="Arbeidsgiver" />);
+        component.instance().componentDidMount();
+        expect(hentArbeidsgiverEpostinnhold.calledWith("uuid1", 1)).to.be.true;
+    });
+
+    it("Viser AppSpinner når epostinnhold hentes for arbeidsgiver", () => {
+        let component = shallow(<DropdownInnholdsviser hentArbeidsgiverEpostinnhold={hentArbeidsgiverEpostinnhold} mote={mote} henter={true} type="Arbeidsgiver" />)
+        expect(component.find(AppSpinner)).to.have.length(1);
+    });
+
+    it("Viser epostinnhold dersom epostinnhold er hentet for arbeidsgiver", () => {
+        let component = shallow(<DropdownInnholdsviser hentArbeidsgiverEpostinnhold={hentArbeidsgiverEpostinnhold} mote={mote} arbeidsgiverepostinnhold={arbeidsgiverepostinnhold} type="Arbeidsgiver" />);
+        expect(component.html()).to.contain("Mitt emne, arbeidsgiver");
+        expect(component.html()).to.contain("Mitt innhold arbeidsgiver");
     });
 });

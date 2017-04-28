@@ -14,6 +14,7 @@ import { reducer as formReducer } from 'redux-form';
 import { ledetekster, hentLedetekster, tidslinjer, hasURLParameter } from 'digisyfo-npm';
 import moter from './mote/reducers/moter';
 import epostinnhold from './mote/reducers/epostinnhold';
+import arbeidsgiverEpostinnhold from './mote/reducers/arbeidsgiverEpostinnhold';
 import modiacontext from './reducers/modiacontext';
 import arbeidstaker from './mote/reducers/arbeidstaker';
 import enhet from './mote/reducers/enhet';
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
     moter,
     virksomhet,
     epostinnhold,
+    arbeidsgiverEpostinnhold,
     arbeidstaker,
     enhet,
     tidslinjer,
@@ -68,14 +70,14 @@ const config = {
         fnr,
         applicationName: 'Sykefravær',
         handleChangeEnhet: (data) => {
-                if (config.config.initiellEnhet !== data) {
-                    store.dispatch(valgtEnhet(data));
-                    store.dispatch(pushModiaContext({
-                        verdi: data,
-                        eventType: 'NY_AKTIV_ENHET',
-                    }));
-                    config.config.initiellEnhet = data;
-                }
+            if (config.config.initiellEnhet !== data) {
+                store.dispatch(valgtEnhet(data));
+                store.dispatch(pushModiaContext({
+                    verdi: data,
+                    eventType: 'NY_AKTIV_ENHET',
+                }));
+                config.config.initiellEnhet = data;
+            }
         },
     },
 };
@@ -93,9 +95,9 @@ store.dispatch(hentAktivBruker({
 store.dispatch(hentAktivEnhet({
     callback: (aktivEnhet) => {
         if (aktivEnhet && config.config.initiellEnhet !== aktivEnhet) {
-                store.dispatch(valgtEnhet(aktivEnhet));
-                config.config.initiellEnhet = aktivEnhet;
-                window.renderDecoratorHead(config);
+            store.dispatch(valgtEnhet(aktivEnhet));
+            config.config.initiellEnhet = aktivEnhet;
+            window.renderDecoratorHead(config);
         }
     },
 }));
