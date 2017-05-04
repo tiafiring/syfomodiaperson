@@ -61,6 +61,7 @@ const config = {
             visSokefelt: true,
             overrideenhetersaga: true,
             overrideveiledersaga: true,
+            toggleSendEventVedEnEnhet: true,
         },
         handlePersonsokSubmit: (nyttFnr) => {
             if (nyttFnr !== fnr) {
