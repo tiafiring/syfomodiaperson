@@ -84,9 +84,10 @@ export const erMotePassert = (mote) => {
     if (mote.bekreftetAlternativ && mote.bekreftetAlternativ.tid <= new Date()) {
         return true;
     }
+    const antallAlternativer = mote.alternativer.length;
     return mote.alternativer.filter((alternativ) => {
         return alternativ.tid <= new Date();
-    }).length === 2;
+    }).length === antallAlternativer;
 };
 
 export const trekkDagerFraDato = (dato, dager) => {
