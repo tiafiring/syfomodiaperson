@@ -21,7 +21,7 @@ const BekreftMoteUtenSvarSkjema = (props) => {
                 {getLedetekst('mote.bekreftmoteutensvar.lightbox-send-knapp', ledetekster)}
                 { bekrefter && <span className="knapp__spinner" /> }
             </button>
-            <Link to={avbrytHref} className="lenke">{getLedetekst('mote.bekreftmoteutensvar.lightbox-avbryt-knapp', ledetekster)}</Link>
+            <Link to={avbrytHref} className="hjelpetekstlenke">{getLedetekst('mote.bekreftmoteutensvar.lightbox-avbryt-knapp', ledetekster)}</Link>
         </div>
     </div>);
 };
