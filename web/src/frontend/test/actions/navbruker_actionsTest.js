@@ -12,12 +12,4 @@ describe('navbruker_actions', () => {
             fnr: "44"
         });
     });
-
-    it("Har en sjekkTilgangMoteadmin()-funksjon", () => {
-        const res = actions.sjekkTilgangMoteadmin();
-        expect(res).to.deep.equal({
-            type: 'SJEKK_TILGANG_MOTEADMIN_FORESPURT'
-        });
-    });
-
 });

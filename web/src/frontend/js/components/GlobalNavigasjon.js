@@ -84,11 +84,8 @@ class GlobalNavigasjon extends Component {
     }
 
     render() {
-        const { fnr, harTilgangMotemodul, aktivtMenypunkt } = this.props;
-        this.menypunkter = [naermesteLederMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt];
-        if (harTilgangMotemodul) {
-            this.menypunkter.push(motemodulMenypunkt);
-        }
+        const { fnr, aktivtMenypunkt } = this.props;
+        this.menypunkter = [naermesteLederMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt, motemodulMenypunkt];
 
         return (<ul aria-label="Navigasjon" className="navigasjon">
         {
@@ -117,7 +114,6 @@ class GlobalNavigasjon extends Component {
 
 GlobalNavigasjon.propTypes = {
     fnr: PropTypes.string,
-    harTilgangMotemodul: PropTypes.bool,
     aktivtMenypunkt: PropTypes.string,
 };
 
