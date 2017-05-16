@@ -74,19 +74,20 @@ export const fikkMoteOpprettetVarsel = (deltaker) => {
 };
 
 export const erAlleAlternativerPassert = (alternativer) => {
-    const morgendagen = new Date();
-    morgendagen.setHours(0, 0, 0);
+    const midnatt = new Date();
+    midnatt.setHours(0, 0, 0);
     return alternativer.filter((alternativ) => {
-        return alternativ.tid > morgendagen;
+        return alternativ.tid > midnatt;
     }).length === 0;
 };
 export const erMotePassert = (mote) => {
-    if (mote.bekreftetAlternativ && mote.bekreftetAlternativ.tid <= new Date()) {
+    if (mote.bekreftetAlternativ && mote.bekreftetAlternativ.tid <= newDate()) {
         return true;
     }
     const antallAlternativer = mote.alternativer.length;
+    console.log(mote.alternativer);
     return mote.alternativer.filter((alternativ) => {
-        return alternativ.tid <= new Date();
+        return alternativ.tid <= newDate();
     }).length === antallAlternativer;
 };
 
@@ -95,4 +96,9 @@ export const trekkDagerFraDato = (dato, dager) => {
 };
 export const leggTilDagerPaaDato = (dato, dager) => {
     return new Date().setTime(dato.getTime() + (dager * 86400000));
+};
+
+export const newDate = () => {
+    const now = new Date();
+    return new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getHours(), now.getUTCMinutes(), now.getUTCSeconds());
 };

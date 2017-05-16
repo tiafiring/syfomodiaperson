@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { hentNavbruker, sjekkTilgangMoteadmin } from '../../js/sagas/navbrukerSagas.js';
+import { hentNavbruker } from '../../js/sagas/navbrukerSagas.js';
 import { get } from '../../js/api';
 import { put, call } from 'redux-saga/effects';
 

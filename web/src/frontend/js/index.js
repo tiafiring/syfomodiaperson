@@ -20,7 +20,7 @@ import arbeidstaker from './mote/reducers/arbeidstaker';
 import enhet from './mote/reducers/enhet';
 import virksomhet from './mote/reducers/virksomhet';
 import rootSaga from './sagas/index';
-import { hentNavbruker, sjekkTilgangMoteadmin } from './actions/navbruker_actions';
+import { hentNavbruker } from './actions/navbruker_actions';
 import { pushModiaContext, hentAktivBruker, hentAktivEnhet } from './actions/modiacontext_actions';
 import { valgtEnhet } from './mote/actions/enhet_actions';
 import { opprettWebsocketConnection } from './contextHolder';
@@ -102,7 +102,6 @@ store.dispatch(hentAktivEnhet({
         }
     },
 }));
-store.dispatch(sjekkTilgangMoteadmin());
 store.dispatch(hentLedetekster());
 
 if (hasURLParameter('visLedetekster')) {
