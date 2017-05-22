@@ -23,12 +23,12 @@ export class MotebookingSide extends Component {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (hentMoterFeiletBool) {
-                        return <Feilmelding />;
-                    }
                     if (ikkeTilgang) {
                         return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
+                                             melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
+                    }
+                    if (hentMoterFeiletBool) {
+                        return <Feilmelding />;
                     }
                     if (mote) {
                         return <MotestatusContainer moteUuid={mote.moteUuid} />;

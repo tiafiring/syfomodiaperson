@@ -34,12 +34,12 @@ export class SykmeldingerSide extends Component {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (hentingFeilet) {
-                        return <Feilmelding />;
-                    }
                     if (ikkeTilgang) {
                         return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
+                                             melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
+                    }
+                    if (hentingFeilet) {
+                        return <Feilmelding />;
                     }
                     return (<div>
                         <div className="panel">
