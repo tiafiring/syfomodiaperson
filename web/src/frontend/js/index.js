@@ -21,6 +21,7 @@ import enhet from './mote/reducers/enhet';
 import virksomhet from './mote/reducers/virksomhet';
 import rootSaga from './sagas/index';
 import { hentNavbruker } from './actions/navbruker_actions';
+import { hentLedere } from './actions/ledere_actions';
 import { pushModiaContext, hentAktivBruker, hentAktivEnhet } from './actions/modiacontext_actions';
 import { valgtEnhet } from './mote/actions/enhet_actions';
 import { opprettWebsocketConnection } from './contextHolder';
@@ -83,6 +84,7 @@ const config = {
     },
 };
 store.dispatch(hentNavbruker(fnr));
+store.dispatch(hentLedere(fnr));
 store.dispatch(hentAktivBruker({
     callback: (aktivBruker) => {
         if (aktivBruker !== fnr) {

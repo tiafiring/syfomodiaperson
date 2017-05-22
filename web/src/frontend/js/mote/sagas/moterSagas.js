@@ -24,7 +24,7 @@ export function* hentMoter(action) {
     } catch (e) {
         log(e);
         if (e.message === '403') {
-            yield put(actions.ikkeTilgang());
+            yield put(actions.ikkeTilgangMote());
         } else {
             yield put(actions.hentMoterFeilet());
         }

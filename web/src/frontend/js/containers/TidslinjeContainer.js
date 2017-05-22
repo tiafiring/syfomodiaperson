@@ -18,7 +18,7 @@ export class TidslinjeSide extends Component {
     }
 
     render() {
-        const { hendelser, ledetekster, actions, valgtArbeidssituasjon, henter, hentingFeilet, brukernavn, ikkeTilgang } = this.props;
+        const { hendelser, ledetekster, actions, valgtArbeidssituasjon, henter, hentingFeilet, brukernavn, ikkeTilgang, ikkeTilgangFeilmelding } = this.props;
         const htmlIntro = {
             __html: `<p>${getLedetekst('tidslinje.introtekst', ledetekster)}</p>`,
         };
@@ -37,7 +37,8 @@ export class TidslinjeSide extends Component {
                     return <Feilmelding />;
                 }
                 if (ikkeTilgang) {
-                    return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)} melding={getHtmlLedetekst('sykefravaer.veileder.feilmelding.melding', ledetekster)} />);
+                    return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
+                        melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
                 }
                 return (<div>
                     <div className="panel">
@@ -62,6 +63,7 @@ TidslinjeSide.propTypes = {
     fnr: PropTypes.string,
     apneHendelseIder: PropTypes.array,
     arbeidssituasjon: PropTypes.string,
+    ikkeTilgangFeilmelding: PropTypes.string,
     actions: PropTypes.object,
     valgtArbeidssituasjon: PropTypes.string,
     henter: PropTypes.bool,
@@ -109,7 +111,7 @@ export function mapStateToProps(state, ownProps) {
     const apneHendelseIder = (ownProps && ownProps.location) ? ownProps.location.hash.replace('#', '').split('/') : [];
     const henter = state.tidslinjer.henter || state.ledetekster.henter;
     const hentingFeilet = state.tidslinjer.hentingFeilet || state.ledetekster.hentingFeilet;
-    const ikkeTilgang = state.tidslinjer.ikkeTilgang;
+
     return {
         brukernavn: state.navbruker.data.navn,
         fnr,
@@ -118,7 +120,8 @@ export function mapStateToProps(state, ownProps) {
         apneHendelseIder,
         henter,
         hentingFeilet,
-        ikkeTilgang,
+        ikkeTilgang: state.ledere.ikkeTilgang,
+        ikkeTilgangFeilmelding: state.ledere.ikkeTilgangFeilmelding,
         ledetekster: state.ledetekster.data,
     };
 }

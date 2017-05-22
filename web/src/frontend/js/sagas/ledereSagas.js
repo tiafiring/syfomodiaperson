@@ -1,20 +1,21 @@
 import { call, put, fork } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-import { get } from '../api/index';
+import { getWithoutThrows } from '../api/index';
 import { log } from 'digisyfo-npm';
 
 export function* hentLedere(action) {
     yield put({ type: 'HENTER_LEDERE' });
     try {
-        const data = yield call(get, `${window.APP_SETTINGS.REST_ROOT}/naermesteleder?fnr=${action.fnr}`);
+        const data = yield call(getWithoutThrows, `${window.APP_SETTINGS.REST_ROOT}/naermesteleder?fnr=${action.fnr}`);
+        if (data.id) {
+            const feilmelding = data.id;
+            yield put({ type: 'HENT_LEDERE_IKKE_TILGANG', feilmelding });
+            return;
+        }
         yield put({ type: 'LEDERE_HENTET', data });
     } catch (e) {
         log(e);
-        if (e.message === '403') {
-            yield put({ type: 'HENT_LEDERE_IKKE_TILGANG' });
-        } else {
-            yield put({ type: 'HENT_LEDERE_FEILET' });
-        }
+        yield put({ type: 'HENT_LEDERE_FEILET' });
     }
 }
 

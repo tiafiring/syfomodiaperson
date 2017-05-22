@@ -1,6 +1,8 @@
 const defaultState = {
     data: [],
     ikkeTilgang: false,
+    henter: false,
+    hentingFeilet: false,
 };
 
 const ledere = (state = defaultState, action = {}) => {
@@ -31,6 +33,7 @@ const ledere = (state = defaultState, action = {}) => {
                 henter: false,
                 hentingFeilet: false,
                 ikkeTilgang: true,
+                ikkeTilgangFeilmelding: action.feilmelding,
                 data: [],
             };
         }

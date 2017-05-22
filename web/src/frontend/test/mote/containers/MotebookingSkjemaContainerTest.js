@@ -15,11 +15,6 @@ describe("MotebookingSkjemaContainer", () => {
         beforeEach(() => {
             hentLedere = sinon.spy();
             hentArbeidstaker = sinon.spy();
-        })
-
-        it("Skal hente ledere", () => {
-            var compo = shallow(<MotebookingSkjemaContainer hentLedere={hentLedere} hentArbeidstaker={hentArbeidstaker} fnr="123" />);
-            expect(hentLedere.calledWith("123")).to.be.true;
         });
 
         it("Skal hente arbeidstaker", () => {

@@ -6,10 +6,8 @@ export function get(url) {
     })
     .then((res) => {
         if (res.status === 404) {
-            log(res);
             throw new Error('404');
         } else if (res.status === 403) {
-            log(res);
             throw new Error('403');
         }
         if (res.status > 400) {
@@ -45,4 +43,17 @@ export function post(url, body) {
         log(err);
         throw err;
     });
+}
+
+export function getWithoutThrows(url) {
+    return fetch(url, {
+        credentials: 'include',
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .catch((err) => {
+            log(err);
+            throw err;
+        });
 }

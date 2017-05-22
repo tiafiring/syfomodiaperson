@@ -10,8 +10,7 @@ import Feilmelding from '../../components/Feilmelding';
 
 export class MotebookingSkjemaContainer extends Component {
     componentWillMount() {
-        const { fnr, hentLedere, hentArbeidstaker } = this.props;
-        hentLedere(fnr);
+        const { fnr, hentArbeidstaker } = this.props;
         hentArbeidstaker(fnr);
     }
     render() {
