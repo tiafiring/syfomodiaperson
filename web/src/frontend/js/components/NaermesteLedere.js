@@ -83,7 +83,6 @@ const NaermesteLedere = ({ ledere = [], navbruker }) => {
 NaermesteLedere.propTypes = {
     ledere: PropTypes.array,
     navbruker: PropTypes.object,
-    toggleApenLeder: PropTypes.func,
 };
 
 export default NaermesteLedere;

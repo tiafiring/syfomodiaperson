@@ -18,7 +18,7 @@ export class SykmeldingerSide extends Component {
     }
 
     render() {
-        const { brukernavn, ledetekster, henter, hentingFeilet, ikkeTilgang, sykmeldinger, fnr } = this.props;
+        const { brukernavn, ledetekster, henter, hentingFeilet, ikkeTilgang, sykmeldinger, fnr, ikkeTilgangFeilmelding } = this.props;
         const htmlIntro = {
             __html: `<p>${getLedetekst('dine-sykmeldinger.introduksjonstekst', ledetekster)}</p>`,
         };
@@ -38,7 +38,8 @@ export class SykmeldingerSide extends Component {
                         return <Feilmelding />;
                     }
                     if (ikkeTilgang) {
-                        return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)} melding = {getHtmlLedetekst('sykefravaer.veileder.feilmelding.melding', ledetekster)} />);
+                        return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
+                            melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
                     }
                     return (<div>
                         <div className="panel">
@@ -61,6 +62,7 @@ export class SykmeldingerSide extends Component {
 SykmeldingerSide.propTypes = {
     fnr: PropTypes.string,
     brukernavn: PropTypes.string,
+    ikkeTilgangFeilmelding: PropTypes.string,
     actions: PropTypes.object,
     sykmeldinger: PropTypes.array,
     henter: PropTypes.bool,
@@ -81,15 +83,15 @@ export function mapStateToProps(state) {
     const fnr = state.navbruker.data.fnr;
     const henter = state.sykmeldinger.henter || state.ledetekster.henter;
     const hentingFeilet = state.sykmeldinger.hentingFeilet || state.ledetekster.hentingFeilet;
-    const ikkeTilgang = state.sykmeldinger.ikkeTilgang;
     return {
         brukernavn: state.navbruker.data.navn,
         fnr,
         henter,
         hentingFeilet,
-        ikkeTilgang,
         ledetekster: state.ledetekster.data,
         sykmeldinger: state.sykmeldinger.data,
+        ikkeTilgang: state.ledere.ikkeTilgang,
+        ikkeTilgangFeilmelding: state.ledere.ikkeTilgangFeilmelding,
     };
 }
 

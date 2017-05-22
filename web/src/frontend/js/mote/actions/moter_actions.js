@@ -27,7 +27,7 @@ export function opprettMoteFeilet() {
     };
 }
 
-export function ikkeTilgang() {
+export function ikkeTilgangMote() {
     return {
         type: actions.MOTE_IKKE_TILGANG,
     };

@@ -12,53 +12,33 @@ describe("NaermesteLedereContainer", () => {
     describe("NaermesteLedereSide", () => {
 
         let hentLedere;
-        let actions;
         let ledetekster;
 
         beforeEach(() => {
             hentLedere = sinon.spy();
-            actions = { hentLedere };
             ledetekster = { };
         });
         
         it("Skal vise en Feilmelding hvis henting feiler", () => {
-            const comp = shallow(<NaermesteLedereSide hentingFeilet actions={actions} />);
+            const comp = shallow(<NaermesteLedereSide hentingFeilet />);
             expect(comp.find(Feilmelding)).to.have.length(1);
         });
 
         it("Skal vise en AppSpinner hvis den henter", () => {
-            const comp = shallow(<NaermesteLedereSide henter actions={actions} />);
+            const comp = shallow(<NaermesteLedereSide henter />);
             expect(comp.find(AppSpinner)).to.have.length(1);
         });
 
         it("Skal vise en Feilmelding hvis ikke tilgang", () => {
-            const comp = shallow(<NaermesteLedereSide ikkeTilgang={true} ledetekster={ledetekster}  actions={actions} />);
+            const comp = shallow(<NaermesteLedereSide ikkeTilgang={true} ledetekster={ledetekster} />);
             expect(comp.find(Feilmelding)).to.have.length(1);
         });
 
-        it("Skal hente ledere", () => {
-            const comp = shallow(<NaermesteLedereSide hentingFeilet actions={actions} />);
-            expect(hentLedere.calledOnce).to.be.true;
-        });
 
         it("Skal vise NaermesteLedere hvis den har hentet ledere", () => {
-            const comp = shallow(<NaermesteLedereSide actions={actions} />);
+            const comp = shallow(<NaermesteLedereSide />);
             expect(comp.find(NaermesteLedere)).to.have.length(1);
         });
-
-        it("Skal hente ledere på nytt dersom person byttes", () => {
-            const comp = shallow(<NaermesteLedereSide hentingFeilet actions={actions} fnr="123" />);
-            comp.instance().componentWillUpdate({fnr: "456"});
-            expect(hentLedere.calledTwice).to.be.true;
-        });
-
-        it("Skal ikke hente ledere på nytt dersom person ikke byttes", () => {
-            const comp = shallow(<NaermesteLedereSide hentingFeilet actions={actions} fnr="123" />);
-            comp.instance().componentWillUpdate({fnr: "123"});
-            expect(hentLedere.calledTwice).to.be.false;
-            expect(hentLedere.calledOnce).to.be.true;
-        });
-
     });
 
     describe("mapStateToProps", () => {
@@ -76,7 +56,7 @@ describe("NaermesteLedereContainer", () => {
                     fnr: "123",
                     navn: "Ole"
                 }
-            }
+            };
             state.ledetekster = {
                 data: {
 

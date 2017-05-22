@@ -13,7 +13,6 @@ describe("MotebookingContainer", () => {
     describe("MotebookingSide", () => {
 
         let hentMoter;
-        let hentLedere;
         let ledetekster;
         beforeEach(() => {
             ledetekster = {};
@@ -68,7 +67,10 @@ describe("MotebookingContainer", () => {
                 },
                 virksomhet: {
                     navn: "BEKK"
-                }
+                },
+                ledere: {
+                    ikkeTilgang: false,
+                },
             }
         })
 
@@ -130,7 +132,8 @@ describe("MotebookingContainer", () => {
                 id: 1
             }]
             state.moter.henter = false;
-            state.ledetekster.henter = false;
+            state.moter.henter = false;
+            state.ledere.henter = false;
             const props = mapStateToProps(state);
             expect(props.henter).to.be.false;
         });

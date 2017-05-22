@@ -80,6 +80,12 @@ export const erAlleAlternativerPassert = (alternativer) => {
         return alternativ.tid > midnatt;
     }).length === 0;
 };
+
+export const newDate = () => {
+    const now = new Date();
+    return new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getHours(), now.getUTCMinutes(), now.getUTCSeconds());
+};
+
 export const erMotePassert = (mote) => {
     if (mote.bekreftetAlternativ && mote.bekreftetAlternativ.tid <= newDate()) {
         return true;
@@ -97,7 +103,3 @@ export const leggTilDagerPaaDato = (dato, dager) => {
     return new Date().setTime(dato.getTime() + (dager * 86400000));
 };
 
-export const newDate = () => {
-    const now = new Date();
-    return new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getHours(), now.getUTCMinutes(), now.getUTCSeconds());
-};

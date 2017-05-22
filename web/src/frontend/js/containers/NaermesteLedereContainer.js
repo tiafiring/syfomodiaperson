@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
 import NaermesteLedere from '../components/NaermesteLedere';
 import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import Feilmelding from '../components/Feilmelding';
@@ -9,42 +9,30 @@ import * as ledereActions from '../actions/ledere_actions';
 import AppSpinner from '../components/AppSpinner';
 import { NAERMESTE_LEDER } from '../menypunkter';
 
-export class NaermesteLedereSide extends Component {
-    constructor(props) {
-        super(props);
-        this.props.actions.hentLedere(this.props.fnr);
+export const NaermesteLedereSide = ({ henter, ledere, hentingFeilet, navbruker, ikkeTilgang, ledetekster, ikkeTilgangFeilmelding }) => {
+    return (<Side tittel="Nærmeste ledere" aktivtMenypunkt={NAERMESTE_LEDER}>
+    {
+        (() => {
+            if (ikkeTilgang) {
+                return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
+                    melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
+            } else if (hentingFeilet) {
+                return <Feilmelding />;
+            } else if (henter) {
+                return <AppSpinner />;
+            }
+            return <NaermesteLedere ledere={ledere} navbruker={navbruker} />;
+        })()
     }
+    </Side>);
+};
 
-    componentWillUpdate(nextProps) {
-        if (nextProps.fnr !== this.props.fnr) {
-            this.props.actions.hentLedere(nextProps.fnr);
-        }
-    }
-
-    render() {
-        const { henter, ledere, hentingFeilet, actions, navbruker, ikkeTilgang, ledetekster } = this.props;
-        return (<Side tittel="Nærmeste ledere" aktivtMenypunkt={NAERMESTE_LEDER}>
-        {
-            (() => {
-                if (ikkeTilgang) {
-                    return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)} melding={getHtmlLedetekst('sykefravaer.veileder.feilmelding.melding', ledetekster)} />);
-                } else if (hentingFeilet) {
-                    return <Feilmelding />;
-                } else if (henter) {
-                    return <AppSpinner />;
-                }
-                return <NaermesteLedere ledere={ledere} toggleApenLeder={actions.toggleApenLeder} navbruker={navbruker} />;
-            })()
-        }
-        </Side>);
-    }
-}
 
 NaermesteLedereSide.propTypes = {
     ledere: PropTypes.array,
     toggleApenLeder: PropTypes.func,
     fnr: PropTypes.string,
-    actions: PropTypes.object,
+    ikkeTilgangFeilmelding: PropTypes.string,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     ikkeTilgang: PropTypes.bool,
@@ -67,6 +55,7 @@ export function mapStateToProps(state, ownProps) {
         hentingFeilet: state.ledere.hentingFeilet || state.navbruker.hentingFeilet,
         navbruker: state.navbruker.data,
         ikkeTilgang: state.ledere.ikkeTilgang,
+        ikkeTilgangFeilmelding: state.ledere.ikkeTilgangFeilmelding,
         fnr,
     };
 }

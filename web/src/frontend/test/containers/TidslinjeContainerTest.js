@@ -26,13 +26,16 @@ describe("TidslinjeContainer", () => {
             data: {"min": "tekst"},
             hentingFeilet: false,
             henter: false,
-        }
+        };
+        state.ledere = {
+            ikkeTilgang: false,
+        };
         state.navbruker = {
             data: {
                 fnr: "887766",
                 navn: "Helge"
             }
-        }
+        };
         ownProps.params = {
             valgtArbeidssituasjon: ""
         }

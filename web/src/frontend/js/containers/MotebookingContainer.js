@@ -4,6 +4,7 @@ import Side from '../sider/Side';
 import MotebookingSkjemaContainer from '../mote/containers/MotebookingSkjemaContainer';
 import MotestatusContainer from '../mote/containers/MotestatusContainer';
 import Feilmelding from '../components/Feilmelding';
+import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import AppSpinner from '../components/AppSpinner';
 import * as moterActions from '../mote/actions/moter_actions';
 import { MOETEPLANLEGGER } from '../menypunkter';
@@ -15,7 +16,7 @@ export class MotebookingSide extends Component {
     }
 
     render() {
-        const { henter, hentMoterFeiletBool, mote } = this.props;
+        const { henter, hentMoterFeiletBool, mote, ikkeTilgang, ikkeTilgangFeilmelding, ledetekster } = this.props;
         return (<Side tittel="Møteplanlegger" aktivtMenypunkt={MOETEPLANLEGGER}>
             {
                 (() => {
@@ -24,6 +25,10 @@ export class MotebookingSide extends Component {
                     }
                     if (hentMoterFeiletBool) {
                         return <Feilmelding />;
+                    }
+                    if (ikkeTilgang) {
+                        return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
+                            melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
                     }
                     if (mote) {
                         return <MotestatusContainer moteUuid={mote.moteUuid} />;
@@ -38,6 +43,8 @@ export class MotebookingSide extends Component {
 MotebookingSide.propTypes = {
     fnr: PropTypes.string,
     mote: PropTypes.object,
+    ikkeTilgang: PropTypes.bool,
+    ikkeTilgangFeilmelding: PropTypes.string,
     virksomhet: PropTypes.object,
     hentMoter: PropTypes.func,
     hentLedere: PropTypes.func,
@@ -60,11 +67,13 @@ export const mapStateToProps = (state) => {
     return {
         fnr,
         mote: aktivtMote,
-        henter: state.moter.henter || state.ledetekster.henter,
+        henter: state.moter.henter || state.ledetekster.henter || state.ledere.henter,
         sender: state.moter.sender,
         ledetekster: state.ledetekster.data,
         hentMoterFeiletBool: state.moter.hentingFeilet,
         sendingFeilet: state.moter.sendingFeilet,
+        ikkeTilgang: state.ledere.ikkeTilgang,
+        ikkeTilgangFeilmelding: state.ledere.ikkeTilgangFeilmelding,
     };
 };
 

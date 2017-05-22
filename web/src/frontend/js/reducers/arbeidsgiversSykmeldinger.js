@@ -2,6 +2,7 @@ const initiellState = {
     henter: false,
     hentingFeilet: false,
     ikkeTilgang: false,
+    ikkeTilgangFeilmelding: '',
     data: [],
 };
 
@@ -34,6 +35,7 @@ export default function arbeidsgiversSykmeldinger(state = initiellState, action)
                 henter: false,
                 hentingFeilet: false,
                 ikkeTilgang: true,
+                ikkeTilgangFeilmelding: action.feilmelding,
             });
         }
         default: {
