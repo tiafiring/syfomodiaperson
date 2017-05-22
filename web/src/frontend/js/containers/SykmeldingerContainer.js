@@ -81,8 +81,8 @@ export function mapDispatchToProps(dispatch) {
 
 export function mapStateToProps(state) {
     const fnr = state.navbruker.data.fnr;
-    const henter = state.sykmeldinger.henter || state.ledetekster.henter;
-    const hentingFeilet = state.sykmeldinger.hentingFeilet || state.ledetekster.hentingFeilet;
+    const henter = state.sykmeldinger.henter || state.ledetekster.henter || state.ledere.henter;
+    const hentingFeilet = state.sykmeldinger.hentingFeilet || state.ledetekster.hentingFeilet || state.ledere.hentingFeilet;
     return {
         brukernavn: state.navbruker.data.navn,
         fnr,

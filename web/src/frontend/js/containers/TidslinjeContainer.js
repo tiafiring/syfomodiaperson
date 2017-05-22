@@ -109,8 +109,8 @@ export function mapStateToProps(state, ownProps) {
         setHash(hendelser);
     }
     const apneHendelseIder = (ownProps && ownProps.location) ? ownProps.location.hash.replace('#', '').split('/') : [];
-    const henter = state.tidslinjer.henter || state.ledetekster.henter;
-    const hentingFeilet = state.tidslinjer.hentingFeilet || state.ledetekster.hentingFeilet;
+    const henter = state.tidslinjer.henter || state.ledetekster.henter || state.ledere.henter;
+    const hentingFeilet = state.tidslinjer.hentingFeilet || state.ledetekster.hentingFeilet || state.ledere.hentingFeilet;
 
     return {
         brukernavn: state.navbruker.data.navn,
