@@ -29,6 +29,8 @@ describe("TidslinjeContainer", () => {
         };
         state.ledere = {
             ikkeTilgang: false,
+            hentingFeilet: false,
+            henter: false,
         };
         state.navbruker = {
             data: {
