@@ -21,6 +21,8 @@ export const getTidFraZulu = (zulutid) => {
 
 export function genererDato(dato, klokkeslett) {
     const s = new Date();
+    s.setDate(1);
+
     const datoArr = dato.split('.');
     const klokkeslettArr = klokkeslett.split('.');
     const aar = datoArr[2];
