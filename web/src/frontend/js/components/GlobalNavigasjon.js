@@ -26,6 +26,13 @@ const sykmeldingerMenypunkt = {
     menypunkt: menypunkter.SYKMELDINGER,
 };
 
+
+const oppfoelgingsplanMenypunkt = {
+    navn: 'Oppfølgingsplaner',
+    sti: 'oppfoelgingsplaner',
+    menypunkt: menypunkter.OPPFOELGINGSPLANER,
+};
+
 class GlobalNavigasjon extends Component {
     constructor(props) {
         super(props);
@@ -85,7 +92,7 @@ class GlobalNavigasjon extends Component {
 
     render() {
         const { fnr, aktivtMenypunkt } = this.props;
-        this.menypunkter = [naermesteLederMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt, motemodulMenypunkt];
+        this.menypunkter = [naermesteLederMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt, motemodulMenypunkt, oppfoelgingsplanMenypunkt];
 
         return (<ul aria-label="Navigasjon" className="navigasjon">
         {

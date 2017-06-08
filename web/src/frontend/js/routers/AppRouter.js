@@ -7,6 +7,7 @@ import AvbrytMoteContainer from '../containers/AvbrytMoteContainer';
 import BekreftMoteContainer from '../containers/BekreftMoteContainer';
 import TidslinjeContainer from '../containers/TidslinjeContainer';
 import SykmeldingerContainer from '../containers/SykmeldingerContainer';
+import OppfoelgingsPlanerContainer from '../containers/OppfoelgingsPlanerContainer';
 import DinSykmeldingContainer from '../containers/DinSykmeldingContainer';
 
 const AppRouter = ({ history }) => {
@@ -21,6 +22,7 @@ const AppRouter = ({ history }) => {
         <Route path="/sykefravaer/:fnr/tidslinjen/:valgtArbeidssituasjon" component={TidslinjeContainer} />
         <Route path="/sykefravaer/:fnr/sykmeldinger" component={SykmeldingerContainer} />
         <Route path="/sykefravaer/:fnr/sykmeldinger/:sykmeldingId" component={DinSykmeldingContainer} />
+        <Route path="/sykefravaer/:fnr/oppfoelgingsplaner" component={OppfoelgingsPlanerContainer} />
         <Route path="/" component={FeilsideContainer} />
     </Router>);
 };

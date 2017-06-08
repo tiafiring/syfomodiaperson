@@ -5,6 +5,7 @@ import epostinnholdSagas from '../mote/sagas/epostinnholdSagas';
 import arbeidstakerSagas from '../mote/sagas/arbeidstakerSagas';
 import tidslinjerSagas from './tidslinjerSagas';
 import sykmeldingerSagas from './sykmeldingerSagas';
+import oppfoelgingsdialogerSagas from './oppfoelgingsdialogerSagas';
 import modiacontextSagas from './modiacontextSagas';
 import arbeidsgiversSykmeldingerSagas from './arbeidsgiversSykmeldingerSagas';
 import virksomhetSagas from '../mote/sagas/virksomhetSagas';
@@ -22,6 +23,7 @@ export default function * rootSaga() {
         modiacontextSagas(),
         arbeidstakerSagas(),
         sykmeldingerSagas(),
+        oppfoelgingsdialogerSagas(),
         arbeidsgiversSykmeldingerSagas(),
     ];
 }

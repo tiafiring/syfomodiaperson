@@ -16,6 +16,7 @@ import moter from './mote/reducers/moter';
 import epostinnhold from './mote/reducers/epostinnhold';
 import arbeidsgiverEpostinnhold from './mote/reducers/arbeidsgiverEpostinnhold';
 import modiacontext from './reducers/modiacontext';
+import oppfoelgingsdialoger from './reducers/oppfoelgingsdialoger';
 import arbeidstaker from './mote/reducers/arbeidstaker';
 import enhet from './mote/reducers/enhet';
 import virksomhet from './mote/reducers/virksomhet';
@@ -36,6 +37,7 @@ const rootReducer = combineReducers({
     epostinnhold,
     arbeidsgiverEpostinnhold,
     arbeidstaker,
+    oppfoelgingsdialoger,
     enhet,
     tidslinjer,
     sykmeldinger,
