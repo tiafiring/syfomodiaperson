@@ -2,26 +2,23 @@ import React, { Component, PropTypes } from 'react';
 import Side from '../sider/Side';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getLedetekst, getHtmlLedetekst, Varselstripe } from 'digisyfo-npm';
-import * as actionCreators from '../actions/oppfoelgingsdialoger_actions';
+import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
+import * as oppdialogActions from '../actions/oppfoelgingsdialoger_actions';
+import * as sykmeldingerActions from '../actions/sykmeldinger_actions';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
-import Brodsmuler from '../components/Brodsmuler';
+import Arbeidsgivere from '../components/oppfoelgingsdialoger/Arbeidsgivere';
 import { OPPFOELGINGSPLANER } from '../menypunkter';
 
-export class OppfoelgingsPlanerSide extends Component {
+export class OppfoelgingsPlanerArbeidsgivereSide extends Component {
     componentWillMount() {
         const { fnr } = this.props;
         this.props.actions.hentOppfoelgingsdialoger(fnr);
+        this.props.actions.hentSykmeldinger(fnr);
     }
 
     render() {
-        const { brukernavn, ledetekster, henter, hentingFeilet, ikkeTilgang, fnr, ikkeTilgangFeilmelding } = this.props;
-        const brodsmuler = [{
-            tittel: 'Ditt sykefravær',
-        }, {
-            tittel: 'Dine oppfølgingsplaner',
-        }];
+        const { sykmeldinger, oppfoelgingsdialoger, ledetekster, henter, hentingFeilet, ikkeTilgang, fnr, ikkeTilgangFeilmelding } = this.props;
 
         return (<Side tittel="Oppfølgingsplaner" aktivtMenypunkt={OPPFOELGINGSPLANER}>
             {
@@ -37,14 +34,7 @@ export class OppfoelgingsPlanerSide extends Component {
                         return <Feilmelding />;
                     }
                     return (<div>
-                        <div className="panel">
-                            <Varselstripe type="spesial" ikon="/sykefravaer/img/svg/speiling.svg">
-                                <p>Dette er slik {brukernavn} ser det på nav.no</p>
-                            </Varselstripe>
-                        </div>
-                        <div className="speiling">
-                            <Brodsmuler brodsmuler={brodsmuler} />
-                        </div>
+                        <Arbeidsgivere sykmeldinger={sykmeldinger} oppfoelgingsdialoger={oppfoelgingsdialoger} ledetekster={ledetekster} fnr={fnr} />
                     </div>);
                 })()
             }
@@ -52,12 +42,12 @@ export class OppfoelgingsPlanerSide extends Component {
     }
 }
 
-OppfoelgingsPlanerSide.propTypes = {
+OppfoelgingsPlanerArbeidsgivereSide.propTypes = {
     fnr: PropTypes.string,
-    brukernavn: PropTypes.string,
     ikkeTilgangFeilmelding: PropTypes.string,
     actions: PropTypes.object,
     oppfoelgingsdialoger: PropTypes.array,
+    sykmeldinger: PropTypes.array,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     ikkeTilgang: PropTypes.bool,
@@ -65,7 +55,7 @@ OppfoelgingsPlanerSide.propTypes = {
 };
 
 export function mapDispatchToProps(dispatch) {
-    const actions = Object.assign({}, actionCreators);
+    const actions = Object.assign({}, oppdialogActions, sykmeldingerActions);
     return {
         actions: bindActionCreators(actions, dispatch),
     };
@@ -74,8 +64,8 @@ export function mapDispatchToProps(dispatch) {
 
 export function mapStateToProps(state) {
     const fnr = state.navbruker.data.fnr;
-    const henter = state.oppfoelgingsdialoger.henter || state.ledetekster.henter || state.ledere.henter;
-    const hentingFeilet = state.oppfoelgingsdialoger.hentingFeilet || state.ledetekster.hentingFeilet || state.ledere.hentingFeilet;
+    const henter = state.oppfoelgingsdialoger.henter || state.ledetekster.henter || state.ledere.henter || state.sykmeldinger.henter;
+    const hentingFeilet = state.oppfoelgingsdialoger.hentingFeilet || state.ledetekster.hentingFeilet || state.ledere.hentingFeilet || state.sykmeldinger.hentingFeilet;
     return {
         brukernavn: state.navbruker.data.navn,
         fnr,
@@ -83,10 +73,11 @@ export function mapStateToProps(state) {
         hentingFeilet,
         ledetekster: state.ledetekster.data,
         oppfoelgingsdialoger: state.oppfoelgingsdialoger.data,
+        sykmeldinger: state.sykmeldinger.data,
         ikkeTilgang: state.ledere.ikkeTilgang,
         ikkeTilgangFeilmelding: state.ledere.ikkeTilgangFeilmelding,
     };
 }
 
-const OppfoelgingsPlanerContainer = connect(mapStateToProps, mapDispatchToProps)(OppfoelgingsPlanerSide);
-export default OppfoelgingsPlanerContainer;
+const OppfoelgingsPlanerArbeidsgivereContainer = connect(mapStateToProps, mapDispatchToProps)(OppfoelgingsPlanerArbeidsgivereSide);
+export default OppfoelgingsPlanerArbeidsgivereContainer;

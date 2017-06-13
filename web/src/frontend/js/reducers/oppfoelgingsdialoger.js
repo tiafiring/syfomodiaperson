@@ -1,5 +1,6 @@
 const initiellState = {
     henter: false,
+    hentet: false,
     hentingFeilet: false,
     ikkeTilgang: false,
     ikkeTilgangFeilmelding: '',
@@ -11,6 +12,7 @@ export default function oppfoelgingsdialoger(state = initiellState, action) {
         case 'HENT_OPPFOELGINGSDIALOGER_FEILET': {
             return Object.assign({}, state, {
                 data: [],
+                hentet: true,
                 henter: false,
                 hentingFeilet: true,
             });
@@ -18,6 +20,7 @@ export default function oppfoelgingsdialoger(state = initiellState, action) {
         case 'HENTER_OPPFOELGINGSDIALOGER': {
             return {
                 data: [],
+                hentet: false,
                 henter: true,
                 hentingFeilet: false,
             };
@@ -26,12 +29,14 @@ export default function oppfoelgingsdialoger(state = initiellState, action) {
             return {
                 henter: false,
                 hentingFeilet: false,
+                hentet: true,
                 data: action.data,
             };
         }
         case 'HENT_OPPFOELGINGSDIALOGER_IKKE_TILGANG': {
             return Object.assign({}, state, {
                 data: [],
+                hentet: true,
                 henter: false,
                 hentingFeilet: false,
                 ikkeTilgang: true,
