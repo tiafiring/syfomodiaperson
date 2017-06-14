@@ -25,9 +25,9 @@ const OppfoelgingsPlanerOversikt = ({ oppfoelgingsdialoger, ledetekster = {}, fn
     return (<div>
         <div className="blokk--l">
             <h2>Aktive oppfølgingsplaner</h2>
-            { aktiveDialoger.length === 0 && <Varselstripe>
+            { aktiveDialoger.length === 0 && <div className="panel varselstripe--override"><Varselstripe>
                 <p>Det er ingen aktive oppfølgingsplaner.</p>
-            </Varselstripe>}
+            </Varselstripe></div>}
 
             {
                 aktiveDialoger.map((aktivDialog, index) => {
@@ -41,7 +41,7 @@ const OppfoelgingsPlanerOversikt = ({ oppfoelgingsdialoger, ledetekster = {}, fn
             }
         </div>
         <h2>Tidligere oppfølgingsplaner</h2>
-        { inaktiveDialoger.length === 0 && <div className="panel testoveriide"><Varselstripe>
+        { inaktiveDialoger.length === 0 && <div className="panel varselstripe--override"><Varselstripe>
             <p>Det er ingen tidligere oppfølgingsplaner.</p>
         </Varselstripe></div>}
         {

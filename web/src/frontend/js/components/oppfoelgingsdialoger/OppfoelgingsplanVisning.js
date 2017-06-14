@@ -35,8 +35,8 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdia
     return (<div className="panel">
        <h1>{`Versjon ${versjonertOppfoelgingsdialog.versjon} av oppfølgingsplanen`}</h1>
         <div className="blokk--s">
-            <label>{`Gyldig: ${toDatePrettyPrint(new Date(gyldigFra))} - ${toDatePrettyPrint(evalueresDato)}`}</label>
-            <label>{`Evalueres: ${toDatePrettyPrint(evalueresDato)}`}</label>
+            <label className="oppfoelgingsplan__infotekst">{`Gyldig: ${toDatePrettyPrint(new Date(gyldigFra))} - ${toDatePrettyPrint(evalueresDato)}`}</label>
+            <label className="oppfoelgingsplan__infotekst">{`Evalueres: ${toDatePrettyPrint(evalueresDato)}`}</label>
         </div>
         <div className="oppfoelgingsplan__statuslinjer blokk--s">
             <div className="oppfoelgingsplan__statuslinje">
@@ -101,7 +101,7 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdia
 
         <section className="blokk--l">
             <div className="oppfoelgingsdialog__nokkelinfo">
-                <img src="/sykefravaer/img/svg/oppfolgingsplan-opprett.svg" />
+                <img src="/sykefravaer/img/svg/tiltakIkon.svg" />
                 <div className="oppfoelgingsdialog__nokkelinfo__header">
                     <h2>Tiltak</h2>
                 </div>
