@@ -31,6 +31,15 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdia
     evalueresDato.setMonth(evalueresDato.getMonth() + 2);
 
     const sykmeldtOpprettetVersjon = versjonertOppfoelgingsdialog.godkjentDatoArbeidsgiver > versjonertOppfoelgingsdialog.godkjentDatoArbeidstaker;
+    const arbeidsoppgaverKanGjennomfoeres = versjonertOppfoelgingsdialog.arbeidsoppgaveListe.filter((arbeidsoppgave) => {
+        return !arbeidsoppgave.gjennomfoering.kanGjennomfoeres || arbeidsoppgave.gjennomfoering.kanGjennomfoeres === 'KAN';
+    });
+    const arbeidsoppgaverKanIkkeGjennomfoeres = versjonertOppfoelgingsdialog.arbeidsoppgaveListe.filter((arbeidsoppgave) => {
+        return arbeidsoppgave.gjennomfoering.kanGjennomfoeres === 'KAN_IKKE';
+    });
+    const arbeidsoppgaverKanGjennomfoeresMedTilrettelegging = versjonertOppfoelgingsdialog.arbeidsoppgaveListe.filter((arbeidsoppgave) => {
+        return arbeidsoppgave.gjennomfoering.kanGjennomfoeres === 'TILRETTELEGGING';
+    });
 
     return (<div className="panel">
        <h1>{`Versjon ${versjonertOppfoelgingsdialog.versjon} av oppfølgingsplanen`}</h1>
@@ -89,14 +98,43 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdia
                     <h2>Arbeidsoppgaver</h2>
                 </div>
             </div>
-            {versjonertOppfoelgingsdialog.arbeidsoppgaveListe.map((arbeidsoppgave, index) => {
-                return (<div key={index}>
-                    <h3 className="typo-element">{arbeidsoppgave.arbeidsoppgavenavn}</h3>
-                    <div className="oppfoelgingsdialog__informasjonsboks--faded">
-                        {gjennomFoeringArbeidsoppgave(arbeidsoppgave.gjennomfoering)}
-                    </div>
-                </div>);
-            })}
+            <div className="blokk--l">
+                <h3 className="typo-element">Arbeidsoppgaver som kan gjøres som normalt</h3>
+                {
+                    arbeidsoppgaverKanGjennomfoeres.map((arbeidsoppgave, index) => {
+                        return (<div className="panel--green blokk--s" key={index}>
+                            <h4 className="typo-element">{arbeidsoppgave.arbeidsoppgavenavn}</h4>
+                        </div>);
+                    })
+                }
+            </div>
+
+            <div className="blokk--l">
+                <h3 className="typo-element">Arbeidsoppgaver som kan gjennomføres med hjelp/hjelpemiddel</h3>
+                {
+                    arbeidsoppgaverKanGjennomfoeresMedTilrettelegging.map((arbeidsoppgave, index) => {
+                        return (<div className="panel--yellow blokk--s" key={index}>
+                            <h4 className="typo-bold">{arbeidsoppgave.arbeidsoppgavenavn}</h4>
+                            <label>{oppfoelgingsdialog.arbeidstaker.navn}:</label>
+                            <p>"{arbeidsoppgave.gjennomfoering.kanBeskrivelse}"</p>
+                        </div>);
+                    })
+                }
+            </div>
+
+            <div className="blokk--l">
+                <h3 className="typo-element">Arbeidsoppgaver som ikke kan gjøres som normalt</h3>
+                {
+                    arbeidsoppgaverKanIkkeGjennomfoeres.map((arbeidsoppgave, index) => {
+                        return (<div className="panel--red blokk--s" key={index}>
+                            <h4 className="typo-element">{arbeidsoppgave.arbeidsoppgavenavn}</h4>
+                            <label>{oppfoelgingsdialog.arbeidstaker.navn}:</label>
+                            <p>"{arbeidsoppgave.gjennomfoering.kanIkkeBeskrivelse}"</p>
+                        </div>);
+                    })
+                }
+            </div>
+
         </section>
 
         <section className="blokk--l">
@@ -108,9 +146,9 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdia
             </div>
             {versjonertOppfoelgingsdialog.tiltakListe.map((tiltak, index) => {
                 return (<div key={index}>
-                    <h3>{tiltak.tiltaknavn}</h3>
-                    <div className="oppfoelgingsdialog__informasjonsboks--active">
-                        <label>Beskrivelse:</label>
+                    <div className="panel--lightgray blokk--s">
+                        <h4 className="typo-element">{tiltak.tiltaknavn}</h4>
+                        <label>{tiltak.opprettetAv.navn}:</label>
                         <label>"{tiltak.beskrivelse}"</label>
                     </div>
                 </div>);
