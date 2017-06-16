@@ -55,10 +55,10 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdia
         </div>
         <section className="blokk--l">
             <div className="oppfoelgingsdialog__nokkelinfo">
-                <img src="/sykefravaer/img/svg/oppfolgingsdialogAT.svg" />
                 <div className="oppfoelgingsdialog__nokkelinfo__header">
                     <h2>Den sykmeldtes kontaktinfo</h2>
                 </div>
+
             </div>
             <label className="oppfoelgingsdialog__nokkelinfo--overskrift">Fødselsnummer</label>
             <label className="oppfoelgingsdialog__nokkelinfo--opplysning">{oppfoelgingsdialog.arbeidstaker.fnr}</label>
@@ -72,7 +72,6 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdia
 
         <section className="blokk--l">
             <div className="oppfoelgingsdialog__nokkelinfo">
-                <img src="/sykefravaer/img/svg/oppfolgingsdialogAG.svg" />
                 <div className="oppfoelgingsdialog__nokkelinfo__header">
                     <h2>Arbeidsgiverens kontaktinfo</h2>
                 </div>
@@ -89,7 +88,6 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdia
 
         <section className="blokk--l">
             <div className="oppfoelgingsdialog__nokkelinfo">
-                <img src="/sykefravaer/img/svg/oppfolgingsplan-opprett.svg" />
                 <div className="oppfoelgingsdialog__nokkelinfo__header">
                     <h2>Arbeidsoppgaver</h2>
                 </div>
@@ -135,7 +133,6 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdia
 
         <section className="blokk--l">
             <div className="oppfoelgingsdialog__nokkelinfo">
-                <img src="/sykefravaer/img/svg/tiltakIkon.svg" />
                 <div className="oppfoelgingsdialog__nokkelinfo__header">
                     <h2>Tiltak</h2>
                 </div>
