@@ -45,11 +45,11 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdia
         </div>
         <div className="oppfoelgingsplan__statuslinjer blokk--s">
             <div className="oppfoelgingsplan__statuslinje">
-                <img src="/sykefravaer/img/svg/status--kan.svg" />
+                <img className="ikon--lite" src="/sykefravaer/img/svg/status--kan.svg" />
                 { sykmeldtOpprettetVersjon ? opprettetStatusLinje(oppfoelgingsdialog.arbeidstaker.navn, versjonertOppfoelgingsdialog.godkjentDatoArbeidstaker) : opprettetStatusLinje(oppfoelgingsdialog.arbeidsgiver.navn, versjonertOppfoelgingsdialog.godkjentDatoArbeidsgiver)}
             </div>
             <div className="oppfoelgingsplan__statuslinje">
-                <img src="/sykefravaer/img/svg/status--kan.svg" />
+                <img className="ikon--lite" src="/sykefravaer/img/svg/status--kan.svg" />
                 { sykmeldtOpprettetVersjon ? godkjentStatusLinje(oppfoelgingsdialog.arbeidsgiver.navn, versjonertOppfoelgingsdialog.godkjentDatoArbeidsgiver) : godkjentStatusLinje(oppfoelgingsdialog.arbeidstaker.navn, versjonertOppfoelgingsdialog.godkjentDatoArbeidstaker)}
             </div>
         </div>
