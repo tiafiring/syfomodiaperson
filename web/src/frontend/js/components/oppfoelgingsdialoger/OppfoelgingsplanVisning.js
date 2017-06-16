@@ -26,10 +26,6 @@ const godkjentStatusLinje = (navn, dato) => {
 };
 
 const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdialog, ledetekster = {} }) => {
-    const gyldigFra = versjonertOppfoelgingsdialog.godkjentDatoArbeidsgiver > versjonertOppfoelgingsdialog.godkjentDatoArbeidstaker ? versjonertOppfoelgingsdialog.godkjentDatoArbeidsgiver : versjonertOppfoelgingsdialog.godkjentDatoArbeidstaker;
-    let evalueresDato = new Date(gyldigFra);
-    evalueresDato.setMonth(evalueresDato.getMonth() + 2);
-
     const sykmeldtOpprettetVersjon = versjonertOppfoelgingsdialog.godkjentDatoArbeidsgiver > versjonertOppfoelgingsdialog.godkjentDatoArbeidstaker;
     const arbeidsoppgaverKanGjennomfoeres = versjonertOppfoelgingsdialog.arbeidsoppgaveListe.filter((arbeidsoppgave) => {
         return !arbeidsoppgave.gjennomfoering.kanGjennomfoeres || arbeidsoppgave.gjennomfoering.kanGjennomfoeres === 'KAN';
@@ -44,8 +40,8 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdia
     return (<div className="panel">
        <h1>{`Versjon ${versjonertOppfoelgingsdialog.versjon} av oppfølgingsplanen`}</h1>
         <div className="blokk--s">
-            <label className="oppfoelgingsplan__infotekst">{`Gyldig: ${toDatePrettyPrint(new Date(gyldigFra))} - ${toDatePrettyPrint(evalueresDato)}`}</label>
-            <label className="oppfoelgingsplan__infotekst">{`Evalueres: ${toDatePrettyPrint(evalueresDato)}`}</label>
+            <label className="oppfoelgingsplan__infotekst">{`Gyldig: ${toDatePrettyPrint(versjonertOppfoelgingsdialog.godkjentFom)} - ${toDatePrettyPrint(versjonertOppfoelgingsdialog.godkjentTom)}`}</label>
+            <label className="oppfoelgingsplan__infotekst">{`Evalueres: ${toDatePrettyPrint(versjonertOppfoelgingsdialog.godkjentEvalueres)}`}</label>
         </div>
         <div className="oppfoelgingsplan__statuslinjer blokk--s">
             <div className="oppfoelgingsplan__statuslinje">
