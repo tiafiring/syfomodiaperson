@@ -92,43 +92,49 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdia
                     <h2>Arbeidsoppgaver</h2>
                 </div>
             </div>
-            <div className="blokk--l">
-                <h3 className="typo-element">Arbeidsoppgaver som kan gjøres som normalt</h3>
-                {
-                    arbeidsoppgaverKanGjennomfoeres.map((arbeidsoppgave, index) => {
-                        return (<div className="panel--green blokk--s" key={index}>
-                            <h4 className="typo-element">{arbeidsoppgave.arbeidsoppgavenavn}</h4>
-                        </div>);
-                    })
-                }
-            </div>
+            { versjonertOppfoelgingsdialog.arbeidsoppgaveListe.length === 0 ? <p>Det er ikke lagt til noen arbeidsoppgaver</p> : null }
+            { arbeidsoppgaverKanGjennomfoeres.length > 0 ?
+                <div className="blokk--l">
+                    <h3 className="typo-element">Arbeidsoppgaver som kan gjøres som normalt</h3>
+                    {
+                        arbeidsoppgaverKanGjennomfoeres.map((arbeidsoppgave, index) => {
+                            return (<div className="panel--green blokk--s" key={index}>
+                                <h4 className="typo-element">{arbeidsoppgave.arbeidsoppgavenavn}</h4>
+                            </div>);
+                        })
+                    }
+                </div> : null
+            }
 
-            <div className="blokk--l">
-                <h3 className="typo-element">Arbeidsoppgaver som kan gjennomføres med hjelp/hjelpemiddel</h3>
-                {
-                    arbeidsoppgaverKanGjennomfoeresMedTilrettelegging.map((arbeidsoppgave, index) => {
-                        return (<div className="panel--yellow blokk--s" key={index}>
-                            <h4 className="typo-bold">{arbeidsoppgave.arbeidsoppgavenavn}</h4>
-                            <label>{oppfoelgingsdialog.arbeidstaker.navn}:</label>
-                            <p>"{arbeidsoppgave.gjennomfoering.kanBeskrivelse}"</p>
-                        </div>);
-                    })
-                }
-            </div>
+            { arbeidsoppgaverKanGjennomfoeresMedTilrettelegging.length > 0 ?
+                <div className="blokk--l">
+                    <h3 className="typo-element">Arbeidsoppgaver som kan gjennomføres med hjelp/hjelpemiddel</h3>
+                    {
+                        arbeidsoppgaverKanGjennomfoeresMedTilrettelegging.map((arbeidsoppgave, index) => {
+                            return (<div className="panel--yellow blokk--s" key={index}>
+                                <h4 className="typo-bold">{arbeidsoppgave.arbeidsoppgavenavn}</h4>
+                                <label>{oppfoelgingsdialog.arbeidstaker.navn}:</label>
+                                <p>"{arbeidsoppgave.gjennomfoering.kanBeskrivelse}"</p>
+                            </div>);
+                        })
+                    }
+                </div> : null
+            }
 
-            <div className="blokk--l">
-                <h3 className="typo-element">Arbeidsoppgaver som ikke kan gjøres som normalt</h3>
-                {
-                    arbeidsoppgaverKanIkkeGjennomfoeres.map((arbeidsoppgave, index) => {
-                        return (<div className="panel--red blokk--s" key={index}>
-                            <h4 className="typo-element">{arbeidsoppgave.arbeidsoppgavenavn}</h4>
-                            <label>{oppfoelgingsdialog.arbeidstaker.navn}:</label>
-                            <p>"{arbeidsoppgave.gjennomfoering.kanIkkeBeskrivelse}"</p>
-                        </div>);
-                    })
-                }
-            </div>
-
+            { arbeidsoppgaverKanIkkeGjennomfoeres.length > 0 ?
+                <div className="blokk--l">
+                    <h3 className="typo-element">Arbeidsoppgaver som ikke kan gjøres som normalt</h3>
+                    {
+                        arbeidsoppgaverKanIkkeGjennomfoeres.map((arbeidsoppgave, index) => {
+                            return (<div className="panel--red blokk--s" key={index}>
+                                <h4 className="typo-element">{arbeidsoppgave.arbeidsoppgavenavn}</h4>
+                                <label>{oppfoelgingsdialog.arbeidstaker.navn}:</label>
+                                <p>"{arbeidsoppgave.gjennomfoering.kanIkkeBeskrivelse}"</p>
+                            </div>);
+                        })
+                    }
+                </div> : null
+            }
         </section>
 
         <section className="blokk--l">
@@ -146,6 +152,9 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdia
                     </div>
                 </div>);
             })}
+            {
+                versjonertOppfoelgingsdialog.tiltakListe.length === 0 ? <p>Det er ikke registrert noen tiltak.</p> : null
+            }
         </section>
 
     </div>);
