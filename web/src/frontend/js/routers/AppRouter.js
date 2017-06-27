@@ -7,8 +7,6 @@ import AvbrytMoteContainer from '../containers/AvbrytMoteContainer';
 import BekreftMoteContainer from '../containers/BekreftMoteContainer';
 import TidslinjeContainer from '../containers/TidslinjeContainer';
 import SykmeldingerContainer from '../containers/SykmeldingerContainer';
-import OppfoelgingsPlanerArbeidsgivereContainer from '../containers/OppfoelgingsPlanerArbeidsgivereContainer';
-import OppfoelgingsPlanerVirksomhetContainer from '../containers/OppfoelgingsPlanerVirksomhetContainer';
 import OppfoelgingsPlanerVisningContainer from '../containers/OppfoelgingsPlanerVisningContainer';
 import OppfoelgingsPlanerOversiktContainer from '../containers/OppfoelgingsPlanerOversiktContainer';
 import DinSykmeldingContainer from '../containers/DinSykmeldingContainer';
@@ -26,8 +24,6 @@ const AppRouter = ({ history }) => {
         <Route path="/sykefravaer/:fnr/sykmeldinger" component={SykmeldingerContainer} />
         <Route path="/sykefravaer/:fnr/sykmeldinger/:sykmeldingId" component={DinSykmeldingContainer} />
         <Route path="/sykefravaer/:fnr/oppfoelgingsplaner" component={OppfoelgingsPlanerOversiktContainer} />
-        <Route path="/sykefravaer/:fnr/oppfoelgingsplaner/arbeidsgivere" component={OppfoelgingsPlanerArbeidsgivereContainer} />
-        <Route path="/sykefravaer/:fnr/oppfoelgingsplaner/arbeidsgivere/:virksomhetsnummer" component={OppfoelgingsPlanerVirksomhetContainer} />
         <Route path="/sykefravaer/:fnr/oppfoelgingsplaner/arbeidsgivere/:virksomhetsnummer/:oppfoelgingsdialogId/:versjon" component={OppfoelgingsPlanerVisningContainer} />
         <Route path="/" component={FeilsideContainer} />
     </Router>);

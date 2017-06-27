@@ -19,7 +19,6 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
 
     render() {
         const { oppfoelgingsdialoger, ledetekster, henter, hentingFeilet, ikkeTilgang, ikkeTilgangFeilmelding, fnr } = this.props;
-
         return (<Side tittel="Oppfølgingsplaner" aktivtMenypunkt={OPPFOELGINGSPLANER}>
             {
                 (() => {

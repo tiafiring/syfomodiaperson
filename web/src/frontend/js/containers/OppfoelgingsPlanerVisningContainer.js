@@ -68,7 +68,7 @@ export function mapStateToProps(state, ownParams) {
 
     const oppfoelgingsdialog = state.oppfoelgingsdialoger.data.filter((oppfoelgingsdialog) => {
         return oppfoelgingsdialog.virksomhetsnummer === ownParams.params.virksomhetsnummer
-            && oppfoelgingsdialog.oppfoelgingsdialogId === ownParams.params.oppfoelgingsdialogId;
+            && oppfoelgingsdialog.oppfoelgingsdialogId == ownParams.params.oppfoelgingsdialogId;
     })[0];
 
     const versjonertOppfoelgingsdialog = oppfoelgingsdialog && oppfoelgingsdialog.versjonerteOppfoelgingsdialoger.filter((versjonertOppfoelgingsdialog) => {
