@@ -18,7 +18,7 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
     }
 
     render() {
-        const { oppfoelgingsdialoger, ledetekster, henter, hentingFeilet, ikkeTilgang, ikkeTilgangFeilmelding, fnr } = this.props;
+        const { aktiveDialoger, inaktiveDialoger, ledetekster, henter, hentingFeilet, ikkeTilgang, ikkeTilgangFeilmelding, fnr } = this.props;
         return (<Side tittel="Oppfølgingsplaner" aktivtMenypunkt={OPPFOELGINGSPLANER}>
             {
                 (() => {
@@ -33,7 +33,7 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
                         return <Feilmelding />;
                     }
                     return (<div>
-                        <OppfoelgingsPlanerOversikt oppfoelgingsdialoger={oppfoelgingsdialoger} ledetekster={ledetekster} fnr={fnr} />
+                        <OppfoelgingsPlanerOversikt aktiveDialoger={aktiveDialoger} inaktiveDialoger={inaktiveDialoger} ledetekster={ledetekster} fnr={fnr} />
                     </div>);
                 })()
             }
@@ -44,7 +44,8 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
 OppfoelgingsPlanerOversiktSide.propTypes = {
     ikkeTilgangFeilmelding: PropTypes.string,
     actions: PropTypes.object,
-    oppfoelgingsdialoger: PropTypes.array,
+    aktiveDialoger: PropTypes.array,
+    inaktiveDialoger: PropTypes.array,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     ikkeTilgang: PropTypes.bool,
@@ -65,6 +66,27 @@ export function mapStateToProps(state) {
     const hentetDialoger = state.oppfoelgingsdialoger.hentet;
     const henterDialoger = state.oppfoelgingsdialoger.henter;
 
+    const gyldigeDialoger = state.oppfoelgingsdialoger.data.filter((dialog) => {
+        return new Date(dialog.gyldighetstidspunkt.tom) > new Date();
+    });
+
+    let aktiveDialoger = [];
+    gyldigeDialoger.forEach((dialog1) => {
+        gyldigeDialoger.forEach((dialog2) => {
+           if (dialog1.oppfoelgingsdialogId !== dialog2.oppfoelgingsdialogId && dialog1.virksomhetsnummer === dialog2.virksomhetsnummer) {
+                if (dialog1.deltMedNavDato > dialog2.deltMedNavDato) {
+                    aktiveDialoger.push(dialog1);
+                }
+           }
+       })
+    });
+
+    let inaktiveDialoger = [];
+    state.oppfoelgingsdialoger.data.forEach((dialog) => {
+        if (!aktiveDialoger.includes(dialog)) {
+            return inaktiveDialoger.push(dialog);
+        }
+    });
     return {
         brukernavn: state.navbruker.data.navn,
         fnr,
@@ -73,7 +95,8 @@ export function mapStateToProps(state) {
         hentetDialoger,
         henterDialoger,
         ledetekster: state.ledetekster.data,
-        oppfoelgingsdialoger: state.oppfoelgingsdialoger.data,
+        inaktiveDialoger,
+        aktiveDialoger,
         ikkeTilgang: state.ledere.ikkeTilgang,
         ikkeTilgangFeilmelding: state.ledere.ikkeTilgangFeilmelding,
     };

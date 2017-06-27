@@ -25,32 +25,32 @@ const godkjentStatusLinje = (navn, dato) => {
     return <p>{`${navn} godkjente denne versjonen ${toDatePrettyPrint(dato)}`}</p>;
 };
 
-const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdialog, ledetekster = {} }) => {
-    const sykmeldtOpprettetVersjon = versjonertOppfoelgingsdialog.godkjentDatoArbeidsgiver > versjonertOppfoelgingsdialog.godkjentDatoArbeidstaker;
-    const arbeidsoppgaverKanGjennomfoeres = versjonertOppfoelgingsdialog.arbeidsoppgaveListe.filter((arbeidsoppgave) => {
+const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, ledetekster = {} }) => {
+    const sykmeldtOpprettetVersjon = oppfoelgingsdialog.godkjentDatoArbeidsgiver > oppfoelgingsdialog.godkjentDatoArbeidstaker;
+    const arbeidsoppgaverKanGjennomfoeres = oppfoelgingsdialog.arbeidsoppgaveListe.filter((arbeidsoppgave) => {
         return !arbeidsoppgave.gjennomfoering.kanGjennomfoeres || arbeidsoppgave.gjennomfoering.kanGjennomfoeres === 'KAN';
     });
-    const arbeidsoppgaverKanIkkeGjennomfoeres = versjonertOppfoelgingsdialog.arbeidsoppgaveListe.filter((arbeidsoppgave) => {
+    const arbeidsoppgaverKanIkkeGjennomfoeres = oppfoelgingsdialog.arbeidsoppgaveListe.filter((arbeidsoppgave) => {
         return arbeidsoppgave.gjennomfoering.kanGjennomfoeres === 'KAN_IKKE';
     });
-    const arbeidsoppgaverKanGjennomfoeresMedTilrettelegging = versjonertOppfoelgingsdialog.arbeidsoppgaveListe.filter((arbeidsoppgave) => {
+    const arbeidsoppgaverKanGjennomfoeresMedTilrettelegging = oppfoelgingsdialog.arbeidsoppgaveListe.filter((arbeidsoppgave) => {
         return arbeidsoppgave.gjennomfoering.kanGjennomfoeres === 'TILRETTELEGGING';
     });
 
     return (<div className="panel">
-       <h1>{`Versjon ${versjonertOppfoelgingsdialog.versjon} av oppfølgingsplanen`}</h1>
+       <h1>{`Versjon ${oppfoelgingsdialog.versjon} av oppfølgingsplanen`}</h1>
         <div className="blokk--s">
-            <label className="oppfoelgingsplan__infotekst">{`Gyldig: ${toDatePrettyPrint(versjonertOppfoelgingsdialog.godkjentFom)} - ${toDatePrettyPrint(versjonertOppfoelgingsdialog.godkjentTom)}`}</label>
-            <label className="oppfoelgingsplan__infotekst">{`Evalueres: ${toDatePrettyPrint(versjonertOppfoelgingsdialog.godkjentEvalueres)}`}</label>
+            <label className="oppfoelgingsplan__infotekst">{`Gyldig: ${toDatePrettyPrint(oppfoelgingsdialog.godkjentFom)} - ${toDatePrettyPrint(oppfoelgingsdialog.godkjentTom)}`}</label>
+            <label className="oppfoelgingsplan__infotekst">{`Evalueres: ${toDatePrettyPrint(oppfoelgingsdialog.godkjentEvalueres)}`}</label>
         </div>
         <div className="oppfoelgingsplan__statuslinjer blokk--s">
             <div className="oppfoelgingsplan__statuslinje">
                 <img className="ikon--lite" src="/sykefravaer/img/svg/status--kan.svg" />
-                { sykmeldtOpprettetVersjon ? opprettetStatusLinje(oppfoelgingsdialog.arbeidstaker.navn, versjonertOppfoelgingsdialog.godkjentDatoArbeidstaker) : opprettetStatusLinje(oppfoelgingsdialog.arbeidsgiver.navn, versjonertOppfoelgingsdialog.godkjentDatoArbeidsgiver)}
+                { sykmeldtOpprettetVersjon ? opprettetStatusLinje(oppfoelgingsdialog.arbeidstaker.navn, oppfoelgingsdialog.godkjentDatoArbeidstaker) : opprettetStatusLinje(oppfoelgingsdialog.arbeidsgiver.navn, oppfoelgingsdialog.godkjentDatoArbeidsgiver)}
             </div>
             <div className="oppfoelgingsplan__statuslinje">
                 <img className="ikon--lite" src="/sykefravaer/img/svg/status--kan.svg" />
-                { sykmeldtOpprettetVersjon ? godkjentStatusLinje(oppfoelgingsdialog.arbeidsgiver.navn, versjonertOppfoelgingsdialog.godkjentDatoArbeidsgiver) : godkjentStatusLinje(oppfoelgingsdialog.arbeidstaker.navn, versjonertOppfoelgingsdialog.godkjentDatoArbeidstaker)}
+                { sykmeldtOpprettetVersjon ? godkjentStatusLinje(oppfoelgingsdialog.arbeidsgiver.navn, oppfoelgingsdialog.godkjentDatoArbeidsgiver) : godkjentStatusLinje(oppfoelgingsdialog.arbeidstaker.navn, oppfoelgingsdialog.godkjentDatoArbeidstaker)}
             </div>
         </div>
         <section className="blokk--l">
@@ -92,7 +92,7 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdia
                     <h2>Arbeidsoppgaver</h2>
                 </div>
             </div>
-            { versjonertOppfoelgingsdialog.arbeidsoppgaveListe.length === 0 ? <p>Det er ikke lagt til noen arbeidsoppgaver</p> : null }
+            { oppfoelgingsdialog.arbeidsoppgaveListe.length === 0 ? <p>Det er ikke lagt til noen arbeidsoppgaver</p> : null }
             { arbeidsoppgaverKanGjennomfoeres.length > 0 ?
                 <div className="blokk--l">
                     <h3 className="typo-element">Arbeidsoppgaver som kan gjøres som normalt</h3>
@@ -143,7 +143,7 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdia
                     <h2>Tiltak</h2>
                 </div>
             </div>
-            {versjonertOppfoelgingsdialog.tiltakListe.map((tiltak, index) => {
+            {oppfoelgingsdialog.tiltakListe.map((tiltak, index) => {
                 return (<div key={index}>
                     <div className="panel--lightgray blokk--s">
                         <h4 className="typo-element">{tiltak.tiltaknavn}</h4>
@@ -153,7 +153,7 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdia
                 </div>);
             })}
             {
-                versjonertOppfoelgingsdialog.tiltakListe.length === 0 ? <p>Det er ikke registrert noen tiltak.</p> : null
+                oppfoelgingsdialog.tiltakListe.length === 0 ? <p>Det er ikke registrert noen tiltak.</p> : null
             }
         </section>
 
@@ -162,7 +162,7 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, versjonertOppfoelgingsdia
 
 OppfoelgingsplanVisning.propTypes = {
     oppfoelgingsdialog: PropTypes.object.isRequired,
-    versjonertOppfoelgingsdialog: PropTypes.object.isRequired,
+    oppfoelgingsdialog: PropTypes.object.isRequired,
     ledetekster: PropTypes.object.isRequired,
 };
 

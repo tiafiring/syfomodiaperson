@@ -18,7 +18,7 @@ export class OppfoelgingsPlanerVisningSide extends Component {
     }
 
     render() {
-        const { oppfoelgingsdialog, ledetekster, henter, hentingFeilet, ikkeTilgang, fnr, ikkeTilgangFeilmelding, versjonertOppfoelgingsdialog } = this.props;
+        const { oppfoelgingsdialog, ledetekster, henter, hentingFeilet, ikkeTilgang, fnr, ikkeTilgangFeilmelding } = this.props;
 
         return (<Side tittel="Oppfølgingsplaner" aktivtMenypunkt={OPPFOELGINGSPLANER}>
             {
@@ -34,7 +34,7 @@ export class OppfoelgingsPlanerVisningSide extends Component {
                         return <Feilmelding />;
                     }
                     return (<div>
-                       <OppfoelgingsplanVisning oppfoelgingsdialog={oppfoelgingsdialog} versjonertOppfoelgingsdialog={versjonertOppfoelgingsdialog} ledetekster={ledetekster} fnr={fnr}  />
+                       <OppfoelgingsplanVisning oppfoelgingsdialog={oppfoelgingsdialog} ledetekster={ledetekster} fnr={fnr}  />
                     </div>);
                 })()
             }
@@ -47,7 +47,6 @@ OppfoelgingsPlanerVisningSide.propTypes = {
     ikkeTilgangFeilmelding: PropTypes.string,
     actions: PropTypes.object,
     oppfoelgingsdialog: PropTypes.object,
-    versjonertOppfoelgingsdialog: PropTypes.object,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     ikkeTilgang: PropTypes.bool,
@@ -71,10 +70,6 @@ export function mapStateToProps(state, ownParams) {
             && oppfoelgingsdialog.oppfoelgingsdialogId == ownParams.params.oppfoelgingsdialogId;
     })[0];
 
-    const versjonertOppfoelgingsdialog = oppfoelgingsdialog && oppfoelgingsdialog.versjonerteOppfoelgingsdialoger.filter((versjonertOppfoelgingsdialog) => {
-        return versjonertOppfoelgingsdialog.versjon == ownParams.params.versjon;
-    })[0];
-
     const hentetDialoger = state.oppfoelgingsdialoger.hentet;
     const henterDialoger = state.oppfoelgingsdialoger.henter;
 
@@ -89,7 +84,6 @@ export function mapStateToProps(state, ownParams) {
         oppfoelgingsdialog,
         ikkeTilgang: state.ledere.ikkeTilgang,
         ikkeTilgangFeilmelding: state.ledere.ikkeTilgangFeilmelding,
-        versjonertOppfoelgingsdialog,
     };
 }
 

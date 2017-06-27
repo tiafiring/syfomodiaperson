@@ -2,40 +2,26 @@ import React, { PropTypes } from 'react';
 import { getLedetekst, toDatePrettyPrint, Varselstripe } from 'digisyfo-npm';
 import { Link } from 'react-router';
 
-const OppfoelgingsPlanerOversikt = ({ oppfoelgingsdialoger, ledetekster = {}, fnr }) => {
-    let aktiveDialoger = [];
-    let inaktiveDialoger = [];
-    let toMndSiden = new Date();
-    toMndSiden.setMonth(toMndSiden.getMonth() - 2);
-
-    oppfoelgingsdialoger.forEach((oppfoelgingsdialog) => {
-        oppfoelgingsdialog.versjonerteOppfoelgingsdialoger.forEach((versjonertDialog) => {
-            new Date(versjonertDialog.opprettetDato) > toMndSiden ? aktiveDialoger.push({oppfoelgingsdialog, versjonertDialog}) : inaktiveDialoger.push({oppfoelgingsdialog, versjonertDialog});
-        });
-    });
-
+const OppfoelgingsPlanerOversikt = ({ aktiveDialoger, inaktiveDialoger, ledetekster = {}, fnr }) => {
     aktiveDialoger.sort((a, b) => {
-        return a.versjonertDialog.opprettetDato < b.versjonertDialog.opprettetDato ? 1 : -1;
+        return a.deltMedNav < b.deltMedNav ? 1 : -1;
     });
 
     inaktiveDialoger.sort((a, b) => {
-        return a.versjonertDialog.opprettetDato < b.versjonertDialog.opprettetDato ? 1 : -1;
+        return a.deltMedNav < b.deltMedNav ? 1 : -1;
     });
 
     return (<div>
         <div className="blokk--l">
-            <h2>Aktive oppfølgingsplaner</h2>
+            <h2>Aktuelle oppfølgingsplaner</h2>
             { aktiveDialoger.length === 0 && <div className="panel varselstripe--override"><Varselstripe>
-                <p>Det er ingen aktive oppfølgingsplaner.</p>
+                <p>Det er ingen aktuelle oppfølgingsplaner.</p>
             </Varselstripe></div>}
-
             {
                 aktiveDialoger.map((aktivDialog, index) => {
-                    let evalueresDato = new Date(aktivDialog.versjonertDialog.opprettetDato);
-                    evalueresDato.setMonth(evalueresDato.getMonth() + 2);
-                    return (<Link key={index} className="panel navigasjonspanel" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/arbeidsgivere/${aktivDialog.oppfoelgingsdialog.virksomhetsnummer}/${aktivDialog.oppfoelgingsdialog.oppfoelgingsdialogId}/${aktivDialog.versjonertDialog.versjon}`}>
-                        <h3>{aktivDialog.oppfoelgingsdialog.virksomhetsnavn}</h3>
-                        <p>{`Gyldig: ${toDatePrettyPrint(aktivDialog.versjonertDialog.opprettetDato)} - ${toDatePrettyPrint(evalueresDato)}`}</p>
+                    return (<Link key={index} className="panel navigasjonspanel" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/arbeidsgivere/${aktivDialog.virksomhetsnummer}/${aktivDialog.oppfoelgingsdialogId}/${aktivDialog.versjon}`}>
+                        <h3>{aktivDialog.virksomhetsnavn}</h3>
+                        <p>{`Delt med NAV: ${toDatePrettyPrint(aktivDialog.deltMedNavDato)}`}</p>
                     </Link>);
                 })
             }
@@ -45,12 +31,10 @@ const OppfoelgingsPlanerOversikt = ({ oppfoelgingsdialoger, ledetekster = {}, fn
             <p>Det er ingen tidligere oppfølgingsplaner.</p>
         </Varselstripe></div>}
         {
-            inaktiveDialoger.map((aktivDialog, index) => {
-                let evalueresDato = new Date(aktivDialog.versjonertDialog.opprettetDato);
-                evalueresDato.setMonth(evalueresDato.getMonth() + 2);
-                return (<Link key={index} className="panel navigasjonspanel" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/arbeidsgivere/${aktivDialog.oppfoelgingsdialog.virksomhetsnummer}/${aktivDialog.oppfoelgingsdialog.oppfoelgingsdialogId}/${aktivDialog.versjonertDialog.versjon}`}>
-                    <h3>{aktivDialog.oppfoelgingsdialog.virksomhetsnavn}</h3>
-                    <p>{`Gyldig: ${toDatePrettyPrint(aktivDialog.versjonertDialog.opprettetDato)} - ${toDatePrettyPrint(evalueresDato)}`}</p>
+            inaktiveDialoger.map((inaktivDialog, index) => {
+                return (<Link key={index} className="panel navigasjonspanel" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/arbeidsgivere/${inaktivDialog.virksomhetsnummer}/${inaktivDialog.oppfoelgingsdialogId}/${inaktivDialog.versjon}`}>
+                    <h3>{inaktivDialog.virksomhetsnavn}</h3>
+                    <p>{`Delt med NAV: ${toDatePrettyPrint(inaktivDialog.deltMedNavDato)}`}</p>
                 </Link>);
             })
         }
@@ -58,7 +42,8 @@ const OppfoelgingsPlanerOversikt = ({ oppfoelgingsdialoger, ledetekster = {}, fn
 };
 
 OppfoelgingsPlanerOversikt.propTypes = {
-    oppfoelgingsdialoger: PropTypes.array.isRequired,
+    aktiveDialoger: PropTypes.array.isRequired,
+    inaktiveDialoger: PropTypes.array.isRequired,
     ledetekster: PropTypes.object.isRequired,
     fnr: PropTypes.string.isRequired,
 };
