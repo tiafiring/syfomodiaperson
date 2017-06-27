@@ -51,13 +51,31 @@
   h2 {
     margin-bottom: 0;
   }
+}
 
-  .oppfoelgingsdialog__nokkelinfo__header {
-    width: 100%;
-    border-bottom: 1px solid black;
-    margin-bottom: 2em;
+.oppfoelgingsdialog__nokkelinfo__header {
+  width: 100%;
+  border-bottom: 1px solid black;
+  margin-bottom: 2em;
+
+  h2 {
+    margin: 0;
   }
 }
+
+.oppfoelgingsdialogvisning {
+  table {
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  th {
+    font-weight: 600;
+    margin-right: 40px;
+    text-align: left;
+  }
+}
+
 
 .oppfoelgingsdialog__nokkelinfo--overskrift {
   font-weight: 600;
@@ -94,29 +112,42 @@
 }
 
 .oppfoelgingsplan__infotekst {
-  font-family: 'Source Sans Pro', Arial, Sans-serif;
   color: #36363A;
   margin: 0;
 }
 
-.panel--green {
-  background-color: #CDE7D8;
-  padding: 1em;
+
+
+.oppfoelgingsdialog__header {
+  display: flex;
+  justify-content: space-between;
+  h1 {
+    margin: 0;
+  }
 }
 
-.panel--yellow {
-   background-color: #FFF2E0;
-   padding: 1em;
+.panel--ok {
+  border-left: 4px solid #3DA063;
 }
 
-.panel--red {
-  background-color: #F3E3E3;
-  padding: 1em;
+.panel--maybe {
+  border-left: 4px solid #FDBC6D;
 }
 
-.panel--lightgray {
-  background-color: #F2F2F2;
-  padding: 1em;
+.panel--arbeidsoppgave {
+  padding-left: 1.5em;
+  margin-left: 0.5em;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.panel--not {
+  border-left: 4px solid #D0464E;
+}
+
+.panel--tiltak {
+  margin-top: 0;
+  margin-bottom: 20pt;
 }
 
 .ikon--lite {

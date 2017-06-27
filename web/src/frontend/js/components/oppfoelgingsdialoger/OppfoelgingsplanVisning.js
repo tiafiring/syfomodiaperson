@@ -37,22 +37,32 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, ledetekster = {} }) => {
         return arbeidsoppgave.gjennomfoering.kanGjennomfoeres === 'TILRETTELEGGING';
     });
 
-    return (<div className="panel">
-       <h1>{`Versjon ${oppfoelgingsdialog.versjon} av oppfølgingsplanen`}</h1>
-        <div className="blokk--s">
-            <label className="oppfoelgingsplan__infotekst">{`Gyldig: ${toDatePrettyPrint(oppfoelgingsdialog.godkjentFom)} - ${toDatePrettyPrint(oppfoelgingsdialog.godkjentTom)}`}</label>
-            <label className="oppfoelgingsplan__infotekst">{`Evalueres: ${toDatePrettyPrint(oppfoelgingsdialog.godkjentEvalueres)}`}</label>
-        </div>
-        <div className="oppfoelgingsplan__statuslinjer blokk--s">
-            <div className="oppfoelgingsplan__statuslinje">
-                <img className="ikon--lite" src="/sykefravaer/img/svg/status--kan.svg" />
-                { sykmeldtOpprettetVersjon ? opprettetStatusLinje(oppfoelgingsdialog.arbeidstaker.navn, oppfoelgingsdialog.godkjentDatoArbeidstaker) : opprettetStatusLinje(oppfoelgingsdialog.arbeidsgiver.navn, oppfoelgingsdialog.godkjentDatoArbeidsgiver)}
+    return (<div className="panel oppfoelgingsdialogvisning">
+        <header className="oppfoelgingsdialog__header blokk--xl">
+            <div>
+               <h1>{`Oppfølgingsplanen`}</h1>
+                <p>{`Mellom ${oppfoelgingsdialog.arbeidstaker.navn} og ${oppfoelgingsdialog.arbeidsgiver.navn}`}</p>
             </div>
-            <div className="oppfoelgingsplan__statuslinje">
-                <img className="ikon--lite" src="/sykefravaer/img/svg/status--kan.svg" />
-                { sykmeldtOpprettetVersjon ? godkjentStatusLinje(oppfoelgingsdialog.arbeidsgiver.navn, oppfoelgingsdialog.godkjentDatoArbeidsgiver) : godkjentStatusLinje(oppfoelgingsdialog.arbeidstaker.navn, oppfoelgingsdialog.godkjentDatoArbeidstaker)}
+            <div>
+                <label className="oppfoelgingsplan__infotekst">{`Gyldig: ${toDatePrettyPrint(oppfoelgingsdialog.godkjentFom)} - ${toDatePrettyPrint(oppfoelgingsdialog.godkjentTom)}`}</label>
+                <label className="oppfoelgingsplan__infotekst">{`Evalueres: ${toDatePrettyPrint(oppfoelgingsdialog.godkjentEvalueres)}`}</label>
             </div>
-        </div>
+        </header>
+        <section className="blokk--l">
+            <div className="oppfoelgingsdialog__nokkelinfo__header">
+                <h2>Om denne versjonen av planen</h2>
+            </div>
+            <div className="oppfoelgingsplan__statuslinjer blokk--s">
+                <div className="oppfoelgingsplan__statuslinje">
+                    <img className="ikon--lite" src="/sykefravaer/img/svg/status--kan.svg" />
+                    { sykmeldtOpprettetVersjon ? opprettetStatusLinje(oppfoelgingsdialog.arbeidstaker.navn, oppfoelgingsdialog.godkjentDatoArbeidstaker) : opprettetStatusLinje(oppfoelgingsdialog.arbeidsgiver.navn, oppfoelgingsdialog.godkjentDatoArbeidsgiver)}
+                </div>
+                <div className="oppfoelgingsplan__statuslinje">
+                    <img className="ikon--lite" src="/sykefravaer/img/svg/status--kan.svg" />
+                    { sykmeldtOpprettetVersjon ? godkjentStatusLinje(oppfoelgingsdialog.arbeidsgiver.navn, oppfoelgingsdialog.godkjentDatoArbeidsgiver) : godkjentStatusLinje(oppfoelgingsdialog.arbeidstaker.navn, oppfoelgingsdialog.godkjentDatoArbeidstaker)}
+                </div>
+            </div>
+        </section>
         <section className="blokk--l">
             <div className="oppfoelgingsdialog__nokkelinfo">
                 <div className="oppfoelgingsdialog__nokkelinfo__header">
@@ -60,14 +70,27 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, ledetekster = {} }) => {
                 </div>
 
             </div>
-            <label className="oppfoelgingsdialog__nokkelinfo--overskrift">Fødselsnummer</label>
-            <label className="oppfoelgingsdialog__nokkelinfo--opplysning">{oppfoelgingsdialog.arbeidstaker.fnr}</label>
-            <label className="oppfoelgingsdialog__nokkelinfo--overskrift">Navn</label>
-            <label className="oppfoelgingsdialog__nokkelinfo--opplysning">{oppfoelgingsdialog.arbeidstaker.navn}</label>
-            <label className="oppfoelgingsdialog__nokkelinfo--overskrift">Telefonnummer</label>
-            <label className="oppfoelgingsdialog__nokkelinfo--opplysning">{oppfoelgingsdialog.arbeidstaker.tlf}</label>
-            <label className="oppfoelgingsdialog__nokkelinfo--overskrift">Email</label>
-            <label className="oppfoelgingsdialog__nokkelinfo--opplysning">{oppfoelgingsdialog.arbeidstaker.email}</label>
+            <table>
+                <tr>
+                    <th>Navn</th>
+                    <th>Fødselsnummer</th>
+                </tr>
+                <tr>
+                    <td>{oppfoelgingsdialog.arbeidstaker.navn}</td>
+                    <td>{oppfoelgingsdialog.arbeidstaker.fnr}</td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <th>Telefonnummer</th>
+                    <th>Email</th>
+                </tr>
+                <tr>
+                    <td>{oppfoelgingsdialog.arbeidstaker.tlf}</td>
+                    <td>{oppfoelgingsdialog.arbeidstaker.email}</td>
+                </tr>
+            </table>
         </section>
 
         <section className="blokk--l">
@@ -76,14 +99,36 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, ledetekster = {} }) => {
                     <h2>Arbeidsgiverens kontaktinfo</h2>
                 </div>
             </div>
-            <label className="oppfoelgingsdialog__nokkelinfo--overskrift">Organisasjonsnummer</label>
-            <label className="oppfoelgingsdialog__nokkelinfo--opplysning">{oppfoelgingsdialog.virksomhetsnummer}</label>
-            <label className="oppfoelgingsdialog__nokkelinfo--overskrift">Navn på nærmeste leder</label>
-            <label className="oppfoelgingsdialog__nokkelinfo--opplysning">{oppfoelgingsdialog.arbeidsgiver.navn}</label>
-            <label className="oppfoelgingsdialog__nokkelinfo--overskrift">Telefonnummer</label>
-            <label className="oppfoelgingsdialog__nokkelinfo--opplysning">{oppfoelgingsdialog.arbeidsgiver.tlf}</label>
-            <label className="oppfoelgingsdialog__nokkelinfo--overskrift">Email</label>
-            <label className="oppfoelgingsdialog__nokkelinfo--opplysning">{oppfoelgingsdialog.arbeidsgiver.email}</label>
+            <table>
+                <tr>
+                    <th>Bedriftens navn</th>
+                    <th>Navn på nærmeste leder</th>
+                </tr>
+                <tr>
+                    <td>{oppfoelgingsdialog.virksomhetsnavn}</td>
+                    <td>{oppfoelgingsdialog.arbeidsgiver.navn}</td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th>Organisasjonsnummer</th>
+                    <th>Email</th>
+                </tr>
+                <tr>
+                    <td>{oppfoelgingsdialog.virksomhetsnummer}</td>
+                    <td>{oppfoelgingsdialog.arbeidsgiver.email}</td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Telefonnummer</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>{oppfoelgingsdialog.arbeidsgiver.tlf}</td>
+                </tr>
+            </table>
         </section>
 
         <section className="blokk--l">
@@ -98,7 +143,7 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, ledetekster = {} }) => {
                     <h3 className="typo-element">Arbeidsoppgaver som kan gjøres som normalt</h3>
                     {
                         arbeidsoppgaverKanGjennomfoeres.map((arbeidsoppgave, index) => {
-                            return (<div className="panel--green blokk--s" key={index}>
+                            return (<div className="panel--ok panel--arbeidsoppgave blokk--s" key={index}>
                                 <h4 className="typo-element">{arbeidsoppgave.arbeidsoppgavenavn}</h4>
                             </div>);
                         })
@@ -111,7 +156,7 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, ledetekster = {} }) => {
                     <h3 className="typo-element">Arbeidsoppgaver som kan gjennomføres med hjelp/hjelpemiddel</h3>
                     {
                         arbeidsoppgaverKanGjennomfoeresMedTilrettelegging.map((arbeidsoppgave, index) => {
-                            return (<div className="panel--yellow blokk--s" key={index}>
+                            return (<div className="panel--maybe panel--arbeidsoppgave blokk--s" key={index}>
                                 <h4 className="typo-bold">{arbeidsoppgave.arbeidsoppgavenavn}</h4>
                                 <label>{oppfoelgingsdialog.arbeidstaker.navn}:</label>
                                 <p>"{arbeidsoppgave.gjennomfoering.kanBeskrivelse}"</p>
@@ -126,7 +171,7 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, ledetekster = {} }) => {
                     <h3 className="typo-element">Arbeidsoppgaver som ikke kan gjøres som normalt</h3>
                     {
                         arbeidsoppgaverKanIkkeGjennomfoeres.map((arbeidsoppgave, index) => {
-                            return (<div className="panel--red blokk--s" key={index}>
+                            return (<div className="panel--not panel--arbeidsoppgave blokk--s" key={index}>
                                 <h4 className="typo-element">{arbeidsoppgave.arbeidsoppgavenavn}</h4>
                                 <label>{oppfoelgingsdialog.arbeidstaker.navn}:</label>
                                 <p>"{arbeidsoppgave.gjennomfoering.kanIkkeBeskrivelse}"</p>
@@ -145,7 +190,7 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, ledetekster = {} }) => {
             </div>
             {oppfoelgingsdialog.tiltakListe.map((tiltak, index) => {
                 return (<div key={index}>
-                    <div className="panel--lightgray blokk--s">
+                    <div className="panel--tiltak blokk--s">
                         <h4 className="typo-element">{tiltak.tiltaknavn}</h4>
                         <label>{tiltak.opprettetAv.navn}:</label>
                         <label>"{tiltak.beskrivelse}"</label>
