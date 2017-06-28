@@ -1,23 +1,6 @@
 import React, { PropTypes } from 'react';
 import { getLedetekst, toDatePrettyPrint } from 'digisyfo-npm';
-import { Link } from 'react-router';
 
-
-const gjennomFoeringArbeidsoppgave = (gjennomfoering) => {
-    if (gjennomfoering.kanGjennomfoeres === 'KAN') {
-        return (<div>Kan gjennomføres</div>);
-    } else if (gjennomfoering.kanGjennomfoeres === 'KAN_IKKE') {
-        return (<div>Arbeidsoppgaven kan ikke gjennomføres.<div>"{gjennomfoering.kanIkkeBeskrivelse}"</div></div>);
-    } else if (gjennomfoering.kanGjennomfoeres === 'TILRETTELEGGING') {
-        return (<div>Kan gjennomføres med tilrettelegging.
-            {gjennomfoering.paaAnnetSted ? <div className="oppfoelgingsplan__arbeidsoppgave__gjennomfoering--inntrykk">På annet sted</div> : null}
-            {gjennomfoering.medMerTid ? <div className="oppfoelgingsplan__arbeidsoppgave__gjennomfoering--inntrykk">Med mer tid</div> : null}
-            {gjennomfoering.medHjelp ? <div className="oppfoelgingsplan__arbeidsoppgave__gjennomfoering--inntrykk">Med hjelp</div> : null}
-            <div>"{gjennomfoering.kanBeskrivelse}"</div>
-        </div>);
-    }
-    return <div>Den sykmeldte har ikke tatt hensyn til om dette lar seg gjennomføre.</div>;
-};
 
 const opprettetStatusLinje = (navn, dato) => {
   return <p>{`${navn} opprettet denne versjonen ${toDatePrettyPrint(dato)}`}</p>;
@@ -160,6 +143,15 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, ledetekster = {} }) => {
                         arbeidsoppgaverKanGjennomfoeresMedTilrettelegging.map((arbeidsoppgave, index) => {
                             return (<div className="panel--maybe panel--arbeidsoppgave blokk--s" key={index}>
                                 <h4 className="typo-bold">{arbeidsoppgave.arbeidsoppgavenavn}</h4>
+                                {
+                                    arbeidsoppgave.paaAnnetSted && <p className="tilretteleggesbools">På annet sted</p>
+                                }
+                                {
+                                    arbeidsoppgave.medMerTid && <p className="tilretteleggesbools">Med mer tid</p>
+                                }
+                                {
+                                    arbeidsoppgave.medHjelp && <p className="tilretteleggesbools">Med hjelp</p>
+                                }
                                 <label>{oppfoelgingsdialog.arbeidstaker.navn}:</label>
                                 <p>"{arbeidsoppgave.gjennomfoering.kanBeskrivelse}"</p>
                             </div>);
@@ -205,9 +197,9 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, ledetekster = {} }) => {
         </section>
     </div>
         <div className="oppfoelgingsdialog__visning__lastnedlenke">
-            <Link className="" to={`/oppfoelgingsdialogrest/api/dokument/${oppfoelgingsdialog.oppfoelgingsdialogId}/versjon/${oppfoelgingsdialog.versjon}`}>
+            <a className="" href={`/oppfoelgingsdialogrest/api/dokument/${oppfoelgingsdialog.oppfoelgingsdialogId}/versjon/${oppfoelgingsdialog.versjon}`}>
                 <button className="rammeknapp">LAST NED</button>
-            </Link>
+            </a>
         </div>
     </div>);
 };
