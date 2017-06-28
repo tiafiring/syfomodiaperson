@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import { getLedetekst, toDatePrettyPrint } from 'digisyfo-npm';
+import { Link } from 'react-router';
+
 
 const gjennomFoeringArbeidsoppgave = (gjennomfoering) => {
     if (gjennomfoering.kanGjennomfoeres === 'KAN') {
@@ -37,7 +39,7 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, ledetekster = {} }) => {
         return arbeidsoppgave.gjennomfoering.kanGjennomfoeres === 'TILRETTELEGGING';
     });
 
-    return (<div className="panel oppfoelgingsdialogvisning">
+    return (<div><div className="panel oppfoelgingsdialogvisning">
         <header className="oppfoelgingsdialog__header blokk--xl">
             <div>
                <h1>{`Oppfølgingsplanen`}</h1>
@@ -201,12 +203,16 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, ledetekster = {} }) => {
                 oppfoelgingsdialog.tiltakListe.length === 0 ? <p>Det er ikke registrert noen tiltak.</p> : null
             }
         </section>
-
+    </div>
+        <div className="oppfoelgingsdialog__visning__lastnedlenke">
+            <Link className="" to={`/oppfoelgingsdialogrest/api/dokument/${oppfoelgingsdialog.oppfoelgingsdialogId}/versjon/${oppfoelgingsdialog.versjon}`}>
+                <button className="rammeknapp">LAST NED</button>
+            </Link>
+        </div>
     </div>);
 };
 
 OppfoelgingsplanVisning.propTypes = {
-    oppfoelgingsdialog: PropTypes.object.isRequired,
     oppfoelgingsdialog: PropTypes.object.isRequired,
     ledetekster: PropTypes.object.isRequired,
 };
