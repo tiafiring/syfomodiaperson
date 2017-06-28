@@ -27,7 +27,7 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
                     }
                     if (ikkeTilgang) {
                         return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                                             melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
+                            melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
                     }
                     if (hentingFeilet) {
                         return <Feilmelding />;
@@ -43,11 +43,14 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
 
 OppfoelgingsPlanerOversiktSide.propTypes = {
     ikkeTilgangFeilmelding: PropTypes.string,
+    fnr: PropTypes.string,
     actions: PropTypes.object,
     aktiveDialoger: PropTypes.array,
     inaktiveDialoger: PropTypes.array,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
+    henterDialoger: PropTypes.bool,
+    hentetDialoger: PropTypes.bool,
     ikkeTilgang: PropTypes.bool,
     ledetekster: PropTypes.object,
 };
@@ -70,21 +73,21 @@ export function mapStateToProps(state) {
         return new Date(dialog.gyldighetstidspunkt.tom) > new Date();
     });
 
-    let aktiveDialoger = [];
+    const aktiveDialoger = [];
     gyldigeDialoger.forEach((dialog1) => {
         gyldigeDialoger.forEach((dialog2) => {
-           if (dialog1.oppfoelgingsdialogId !== dialog2.oppfoelgingsdialogId && dialog1.virksomhetsnummer === dialog2.virksomhetsnummer) {
+            if (dialog1.oppfoelgingsdialogId !== dialog2.oppfoelgingsdialogId && dialog1.virksomhetsnummer === dialog2.virksomhetsnummer) {
                 if (dialog1.deltMedNavDato > dialog2.deltMedNavDato) {
                     aktiveDialoger.push(dialog1);
                 }
-           }
-       })
+            }
+        });
     });
 
-    let inaktiveDialoger = [];
+    const inaktiveDialoger = [];
     state.oppfoelgingsdialoger.data.forEach((dialog) => {
         if (!aktiveDialoger.includes(dialog)) {
-            return inaktiveDialoger.push(dialog);
+            inaktiveDialoger.push(dialog);
         }
     });
     return {

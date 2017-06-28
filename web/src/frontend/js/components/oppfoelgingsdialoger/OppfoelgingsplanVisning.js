@@ -3,7 +3,7 @@ import { getLedetekst, toDatePrettyPrint } from 'digisyfo-npm';
 
 
 const opprettetStatusLinje = (navn, dato) => {
-  return <p>{`${navn} opprettet denne versjonen ${toDatePrettyPrint(dato)}`}</p>;
+    return <p>{`${navn} opprettet denne versjonen ${toDatePrettyPrint(dato)}`}</p>;
 };
 
 const godkjentStatusLinje = (navn, dato) => {
@@ -25,7 +25,7 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, ledetekster = {} }) => {
     return (<div><div className="panel oppfoelgingsdialogvisning">
         <header className="oppfoelgingsdialog__header blokk--xl">
             <div>
-               <h1>{`Oppfølgingsplanen`}</h1>
+               <h1>{'Oppfølgingsplanen'}</h1>
                 <p>{`Mellom ${oppfoelgingsdialog.arbeidstaker.navn} og ${oppfoelgingsdialog.arbeidsgiver.navn}`}</p>
             </div>
             <div>
@@ -197,7 +197,7 @@ const OppfoelgingsplanVisning = ({ oppfoelgingsdialog, ledetekster = {} }) => {
         </section>
     </div>
         <div className="oppfoelgingsdialog__visning__lastnedlenke">
-            <a className="" href={`/oppfoelgingsdialogrest/api/dokument/${oppfoelgingsdialog.oppfoelgingsdialogId}/versjon/${oppfoelgingsdialog.versjon}`}>
+            <a href={`/oppfoelgingsdialogrest/api/dokument/${oppfoelgingsdialog.oppfoelgingsdialogId}/versjon/${oppfoelgingsdialog.versjon}`}>
                 <button className="rammeknapp">LAST NED</button>
             </a>
         </div>

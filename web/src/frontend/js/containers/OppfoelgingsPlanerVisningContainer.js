@@ -28,13 +28,13 @@ export class OppfoelgingsPlanerVisningSide extends Component {
                     }
                     if (ikkeTilgang) {
                         return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                                             melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
+                            melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
                     }
                     if (hentingFeilet) {
                         return <Feilmelding />;
                     }
                     return (<div>
-                       <OppfoelgingsplanVisning oppfoelgingsdialog={oppfoelgingsdialog} ledetekster={ledetekster} fnr={fnr}  />
+                       <OppfoelgingsplanVisning oppfoelgingsdialog={oppfoelgingsdialog} ledetekster={ledetekster} fnr={fnr} />
                     </div>);
                 })()
             }
@@ -49,6 +49,8 @@ OppfoelgingsPlanerVisningSide.propTypes = {
     oppfoelgingsdialog: PropTypes.object,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
+    henterDialoger: PropTypes.bool,
+    hentetDialoger: PropTypes.bool,
     ikkeTilgang: PropTypes.bool,
     ledetekster: PropTypes.object,
 };
@@ -65,9 +67,9 @@ export function mapStateToProps(state, ownParams) {
     const henter = state.oppfoelgingsdialoger.henter || state.ledetekster.henter || state.ledere.henter;
     const hentingFeilet = state.oppfoelgingsdialoger.hentingFeilet || state.ledetekster.hentingFeilet || state.ledere.hentingFeilet;
 
-    const oppfoelgingsdialog = state.oppfoelgingsdialoger.data.filter((oppfoelgingsdialog) => {
+    const valgtDialog = state.oppfoelgingsdialoger.data.filter((oppfoelgingsdialog) => {
         return oppfoelgingsdialog.virksomhetsnummer === ownParams.params.virksomhetsnummer
-            && oppfoelgingsdialog.oppfoelgingsdialogId == ownParams.params.oppfoelgingsdialogId;
+            && oppfoelgingsdialog.oppfoelgingsdialogId === Number(ownParams.params.oppfoelgingsdialogId);
     })[0];
 
     const hentetDialoger = state.oppfoelgingsdialoger.hentet;
@@ -81,7 +83,7 @@ export function mapStateToProps(state, ownParams) {
         hentetDialoger,
         henterDialoger,
         ledetekster: state.ledetekster.data,
-        oppfoelgingsdialog,
+        oppfoelgingsdialog: valgtDialog,
         ikkeTilgang: state.ledere.ikkeTilgang,
         ikkeTilgangFeilmelding: state.ledere.ikkeTilgangFeilmelding,
     };

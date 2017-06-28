@@ -9,13 +9,14 @@
     "dev": "title modiasyfofront && parallelshell \"npm run prebuild\" \"npm run images\" \"npm run static:build:local\" \"npm run scripts:watch\"",
     "build": "parallelshell \"npm run prebuild\" \"npm run images\" \"npm run static:build\" \"npm run scripts:build\"",
     "test:watch": "title modiasyfofront && cross-env NODE_ENV=test nyc mocha --watch -G --compilers js:babel-core/register --require babel-polyfill ./test/setup.js --recursive test",
-    "test": "",
-    "posttest": "",
+    "test": "cross-env NODE_ENV=test nyc mocha -G --compilers js:babel-core/register --require babel-polyfill ./test/setup.js --recursive test",
+    "posttest": "nyc report --reporter=html --reporter=lcov",
     "static:build:local": "title modiasyfofront && node build-html.js html/modiasyfofront.mustache local",
     "static:build": "node build-html.js html/modiasyfofront.mustache prod",
     "scripts:build": "set NODE_ENV=production&&node deploy.js",
     "scripts:watch": "title modiasyfofront && webpack-dev-server --inline  --port 3040",
-    "lint": "",
+    "lint": "eslint js/. --ext .js",
+    "lint:fix": "eslint js/. --ext .js --fix",
     "images": "parallelshell \"cp -R img ../main/webapp\""
   },
   "nyc": {

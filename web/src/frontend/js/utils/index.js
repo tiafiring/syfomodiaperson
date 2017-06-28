@@ -7,11 +7,6 @@ export const visDato = (dato) => {
 };
 
 export const visKortDato = (dato) => {
-    console.log(dato);
-    console.log(dato.getDate());
-    console.log(dato.getMonth());
-    console.log(dato.getYear());
-
     return `${dato.getDate()}.${dato.getMonth()}.${dato.getUTCFullYear()}`;
 };
 
