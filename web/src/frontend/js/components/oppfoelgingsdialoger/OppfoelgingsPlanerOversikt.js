@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 import { getLedetekst, toDatePrettyPrint, Varselstripe } from 'digisyfo-npm';
-import { Link } from 'react-router';
 
-const OppfoelgingsPlanerOversikt = ({ aktiveDialoger, inaktiveDialoger, ledetekster = {}, fnr }) => {
+const OppfoelgingsPlanerOversikt = ({ aktiveDialoger, inaktiveDialoger, ledetekster }) => {
     aktiveDialoger.sort((a, b) => {
         return a.deltMedNav < b.deltMedNav ? 1 : -1;
     });
@@ -13,29 +12,35 @@ const OppfoelgingsPlanerOversikt = ({ aktiveDialoger, inaktiveDialoger, ledeteks
 
     return (<div>
         <div className="blokk--l">
-            <h2>Aktuelle oppfølgingsplaner</h2>
+            <h2>{getLedetekst('fss.oppfoelgingsdialog.oversikt.aktuelle')}</h2>
             { aktiveDialoger.length === 0 && <div className="panel varselstripe--override"><Varselstripe>
-                <p>Det er ingen aktuelle oppfølgingsplaner.</p>
+                <p>{getLedetekst('fss.oppfoelgingsdialog.oversikt.aktuelle--ingen')}</p>
             </Varselstripe></div>}
             {
                 aktiveDialoger.map((aktivDialog, index) => {
-                    return (<Link key={index} className="panel navigasjonspanel" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/arbeidsgivere/${aktivDialog.virksomhetsnummer}/${aktivDialog.oppfoelgingsdialogId}/${aktivDialog.versjon}`}>
+                    return (<a key={index} className="panel navigasjonspanel"
+                        href={`/oppfoelgingsdialogrest/api/dokument/${aktivDialog.oppfoelgingsdialogId}/versjon/${aktivDialog.versjon}`}>
                         <h3>{aktivDialog.virksomhetsnavn}</h3>
-                        <p>{`Delt med NAV: ${toDatePrettyPrint(aktivDialog.deltMedNavDato)}`}</p>
-                    </Link>);
+                        <p>{getLedetekst('fss.oppfoelgingsdialog.oversikt.deltmednav', ledetekster, {
+                            '%DELT_MED_NAV_DATO%': toDatePrettyPrint(aktivDialog.deltMedNavDato),
+                        })}</p>
+                    </a>);
                 })
             }
         </div>
-        <h2>Tidligere oppfølgingsplaner</h2>
+        <h2>{getLedetekst('fss.oppfoelgingsdialog.oversikt.inaktive')}</h2>
         { inaktiveDialoger.length === 0 && <div className="panel varselstripe--override"><Varselstripe>
-            <p>Det er ingen tidligere oppfølgingsplaner.</p>
+            <p>{getLedetekst('fss.oppfoelgingsdialog.oversikt.inaktive--ingen')}</p>
         </Varselstripe></div>}
         {
             inaktiveDialoger.map((inaktivDialog, index) => {
-                return (<Link key={index} className="panel navigasjonspanel" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/arbeidsgivere/${inaktivDialog.virksomhetsnummer}/${inaktivDialog.oppfoelgingsdialogId}/${inaktivDialog.versjon}`}>
+                return (<a key={index} className="panel navigasjonspanel"
+                    href={`/oppfoelgingsdialogrest/api/dokument/${inaktivDialog.oppfoelgingsdialogId}/versjon/${inaktivDialog.versjon}`}>
                     <h3>{inaktivDialog.virksomhetsnavn}</h3>
-                    <p>{`Delt med NAV: ${toDatePrettyPrint(inaktivDialog.deltMedNavDato)}`}</p>
-                </Link>);
+                    <p>{getLedetekst('fss.oppfoelgingsdialog.oversikt.deltmednav', ledetekster, {
+                        '%DELT_MED_NAV_DATO%': toDatePrettyPrint(inaktivDialog.deltMedNavDato),
+                    })}</p>
+                </a>);
             })
         }
     </div>);
@@ -45,7 +50,6 @@ OppfoelgingsPlanerOversikt.propTypes = {
     aktiveDialoger: PropTypes.array.isRequired,
     inaktiveDialoger: PropTypes.array.isRequired,
     ledetekster: PropTypes.object.isRequired,
-    fnr: PropTypes.string.isRequired,
 };
 
 export default OppfoelgingsPlanerOversikt;
