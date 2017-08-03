@@ -7,6 +7,8 @@ import AvbrytMoteContainer from '../containers/AvbrytMoteContainer';
 import BekreftMoteContainer from '../containers/BekreftMoteContainer';
 import TidslinjeContainer from '../containers/TidslinjeContainer';
 import SykmeldingerContainer from '../containers/SykmeldingerContainer';
+import SykepengesoknaderContainer from '../containers/SykepengesoknaderContainer';
+import SykepengesoknadContainer from '../containers/SykepengesoknadContainer';
 import OppfoelgingsPlanerOversiktContainer from '../containers/OppfoelgingsPlanerOversiktContainer';
 import DinSykmeldingContainer from '../containers/DinSykmeldingContainer';
 
@@ -21,6 +23,8 @@ const AppRouter = ({ history }) => {
         <Route path="/sykefravaer/:fnr/tidslinjen" component={TidslinjeContainer} />
         <Route path="/sykefravaer/:fnr/tidslinjen/:valgtArbeidssituasjon" component={TidslinjeContainer} />
         <Route path="/sykefravaer/:fnr/sykmeldinger" component={SykmeldingerContainer} />
+        <Route path="/sykefravaer/:fnr/sykepengesoknader" component={SykepengesoknaderContainer} />
+        <Route path="/sykefravaer/:fnr/sykepengesoknader/:sykepengesoknadId" component={SykepengesoknadContainer} />
         <Route path="/sykefravaer/:fnr/sykmeldinger/:sykmeldingId" component={DinSykmeldingContainer} />
         <Route path="/sykefravaer/:fnr/oppfoelgingsplaner" component={OppfoelgingsPlanerOversiktContainer} />
         <Route path="/" component={FeilsideContainer} />

@@ -8,6 +8,7 @@ import sykmeldingerSagas from './sykmeldingerSagas';
 import oppfoelgingsdialogerSagas from './oppfoelgingsdialogerSagas';
 import modiacontextSagas from './modiacontextSagas';
 import arbeidsgiversSykmeldingerSagas from './arbeidsgiversSykmeldingerSagas';
+import sykepengesoknaderSagas from './sykepengesoknaderSagas';
 import virksomhetSagas from '../mote/sagas/virksomhetSagas';
 import { ledeteksterSagas } from 'digisyfo-npm';
 
@@ -24,6 +25,7 @@ export default function * rootSaga() {
         arbeidstakerSagas(),
         sykmeldingerSagas(),
         oppfoelgingsdialogerSagas(),
+        sykepengesoknaderSagas(),
         arbeidsgiversSykmeldingerSagas(),
     ];
 }
