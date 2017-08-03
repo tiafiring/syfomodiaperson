@@ -16,6 +16,7 @@
     "scripts:build": "set NODE_ENV=production&&node deploy.js",
     "scripts:watch": "title modiasyfofront && webpack-dev-server --inline  --port 3040",
     "lint": "eslint js/. --ext .js",
+    "lint:fix": "eslint js/. --ext .js --fix",
     "images": "parallelshell \"cp -R img ../main/webapp\""
   },
   "nyc": {
@@ -79,7 +80,7 @@
     "css-loader": "0.23.1",
     "chai-enzyme": "0.4.2",
     "chai-jquery": "2.0.0",
-    "digisyfo-npm": "1.6.4",
+    "digisyfo-npm": "1.11.6",
     "enzyme": "2.2.0",
     "eslint": "2.5.3",
     "eslint-config-airbnb": "6.2.0",

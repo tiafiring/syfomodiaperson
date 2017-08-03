@@ -5,8 +5,10 @@ import epostinnholdSagas from '../mote/sagas/epostinnholdSagas';
 import arbeidstakerSagas from '../mote/sagas/arbeidstakerSagas';
 import tidslinjerSagas from './tidslinjerSagas';
 import sykmeldingerSagas from './sykmeldingerSagas';
+import oppfoelgingsdialogerSagas from './oppfoelgingsdialogerSagas';
 import modiacontextSagas from './modiacontextSagas';
 import arbeidsgiversSykmeldingerSagas from './arbeidsgiversSykmeldingerSagas';
+import sykepengesoknaderSagas from './sykepengesoknaderSagas';
 import virksomhetSagas from '../mote/sagas/virksomhetSagas';
 import { ledeteksterSagas } from 'digisyfo-npm';
 
@@ -22,6 +24,8 @@ export default function * rootSaga() {
         modiacontextSagas(),
         arbeidstakerSagas(),
         sykmeldingerSagas(),
+        oppfoelgingsdialogerSagas(),
+        sykepengesoknaderSagas(),
         arbeidsgiversSykmeldingerSagas(),
     ];
 }

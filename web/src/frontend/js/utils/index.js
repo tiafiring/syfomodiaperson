@@ -6,6 +6,10 @@ export const visDato = (dato) => {
     return `${dato.dayOfMonth}. ${maned} ${dato.year}`;
 };
 
+export const visKortDato = (dato) => {
+    return `${dato.getDate()}.${dato.getMonth()}.${dato.getUTCFullYear()}`;
+};
+
 export const lagNummer = (streng) => {
     return streng.replace(/[^\d.-]/g, '').replace(/-/g, '');
 };

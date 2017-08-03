@@ -20,6 +20,28 @@
     }
 }
 
+.hode-dekorert {
+    padding-bottom: 1em;
+    &:after {
+        content: "";
+        width: 2rem;
+        height: 1px;
+        left: 50%;
+        bottom: 0;
+        position: absolute;
+        background-color: #FFBD66;
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
+        transform: translateX(-50%);
+    }
+}
+
 .hode--feil:before {
     background-image: url('/sykefravaer/img/svg/report_problem_triangle.svg');
+}
+
+.hode--info:before {
+    background-image: url('/sykefravaer/img/svg/info_symbol.svg');
 }
