@@ -14,7 +14,9 @@ import { sykepengesoknad as sykepengesoknadPt } from '../propTypes';
 export class SykepengesoknaderSide extends Component {
     componentWillMount() {
         const { fnr } = this.props;
-        this.props.actions.hentSykepengesoknader(fnr);
+        if (this.props.hentSykepengesoknader) {
+            this.props.actions.hentSykepengesoknader(fnr);
+        }
     }
 
     render() {
@@ -78,7 +80,10 @@ export function mapStateToProps(state) {
     const fnr = state.navbruker.data.fnr;
     const henter = state.sykepengesoknader.henter || state.ledetekster.henter || state.ledere.henter;
     const hentingFeilet = state.sykepengesoknader.hentingFeilet || state.ledetekster.hentingFeilet || state.ledere.hentingFeilet;
+    const hentSykepengesoknader = !state.sykepengesoknader.henter && !state.sykepengesoknader.hentingFeilet && !state.sykepengesoknader.hentet;
+
     return {
+        hentSykepengesoknader,
         brukernavn: state.navbruker.data.navn,
         fnr,
         henter,

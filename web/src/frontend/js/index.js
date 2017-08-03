@@ -27,6 +27,7 @@ import { hentLedere } from './actions/ledere_actions';
 import { pushModiaContext, hentAktivBruker, hentAktivEnhet } from './actions/modiacontext_actions';
 import { valgtEnhet } from './mote/actions/enhet_actions';
 import { opprettWebsocketConnection } from './contextHolder';
+import { finnMiljoStreng } from './utils/index';
 
 const rootReducer = combineReducers({
     history,
@@ -60,12 +61,14 @@ sagaMiddleware.run(rootSaga);
 const fnr = window.location.pathname.split('/')[2];
 const config = {
     config: {
+        dataSources: {
+            veileder: `https://modapp${finnMiljoStreng()}.adeo.no/mote/rest/veilederinfo`,
+            enheter: `https://modapp${finnMiljoStreng()}.adeo.no/mote/rest/enheter`,
+        },
         toggles: {
             visEnhetVelger: true,
             visVeileder: true,
             visSokefelt: true,
-            overrideenhetersaga: true,
-            overrideveiledersaga: true,
             toggleSendEventVedEnEnhet: true,
         },
         handlePersonsokSubmit: (nyttFnr) => {
