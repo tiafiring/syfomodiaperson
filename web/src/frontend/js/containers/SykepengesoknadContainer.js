@@ -9,7 +9,7 @@ import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import SykepengeSoknad from '../components/sykepengesoknader/sykepengesoknad/SykepengeSoknad';
 import IkkeInnsendtSoknad from '../components/sykepengesoknader/sykepengesoknad/IkkeInnsendtSoknad';
-import Tilbakeknapp from '../components/sykepengesoknader/sykepengesoknad/Tilbakeknapp';
+import TilbakeKnapp from '../components/sykepengesoknader/sykepengesoknad/TilbakeKnapp';
 import Brodsmuler from '../components/Brodsmuler';
 import { SYKEPENGESOKNADER } from '../menypunkter';
 import { sykepengesoknad as sykepengesoknadPt } from '../propTypes';
@@ -46,7 +46,7 @@ export class SykepengesoknadSide extends Component {
                     if (sykepengesoknad.status === 'NY') {
                         return (<div>
                             <IkkeInnsendtSoknad />
-                            <Tilbakeknapp clazz="knapperad--tight" fnr={fnr} />
+                            <TilbakeKnapp clazz="knapperad--tight" fnr={fnr} />
                         </div>);
                     }
                     return (<div>
