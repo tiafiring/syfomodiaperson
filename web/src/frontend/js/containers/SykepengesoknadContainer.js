@@ -59,7 +59,7 @@ export class SykepengesoknadSide extends Component {
                             <Brodsmuler brodsmuler={brodsmuler} />
                             <SidetoppSpeilet tittel="Søknad om sykepenger" />
                             <SykepengeSoknad sykepengesoknad={sykepengesoknad} />
-                            <Tilbakeknapp clazz="knapperad--adskilt" fnr={fnr} />
+                            <TilbakeKnapp clazz="knapperad--adskilt" fnr={fnr} />
                         </div>
                     </div>);
                 })()
