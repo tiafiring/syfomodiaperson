@@ -3,6 +3,8 @@ import { getLedetekst, Soknad } from 'digisyfo-npm';
 import SykmeldingUtdrag from './SykmeldingUtdrag';
 import Statuspanel from './Soknadstatuspanel';
 import { sykepengesoknad as sykepengesoknadPt } from '../../../propTypes';
+import { SENDT, TIL_SENDING } from '../../../enums/sykepengesoknadstatuser';
+import RelaterteSoknaderContainer from './RelaterteSoknaderContainer';
 
 const SykepengeSoknad = ({ sykepengesoknad }) => {
     return (<div>
@@ -15,6 +17,7 @@ const SykepengeSoknad = ({ sykepengesoknad }) => {
             <img src="/sykefravaer/img/png/check-box-1.png" alt="Avkrysset" />
              <span>{getLedetekst('sykepengesoknad.oppsummering.bekreft-korrekt-informasjon.label')}</span>
         </div>
+        { (sykepengesoknad.status === SENDT || sykepengesoknad.status === TIL_SENDING) && <RelaterteSoknaderContainer sykepengesoknadId={sykepengesoknad.id} /> }
     </div>);
 };
 

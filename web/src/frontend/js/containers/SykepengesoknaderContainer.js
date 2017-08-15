@@ -67,6 +67,7 @@ SykepengesoknaderSide.propTypes = {
     hentingFeilet: PropTypes.bool,
     ikkeTilgang: PropTypes.bool,
     ledetekster: PropTypes.object,
+    hentSykepengesoknader: PropTypes.bool,
 };
 
 export function mapDispatchToProps(dispatch) {

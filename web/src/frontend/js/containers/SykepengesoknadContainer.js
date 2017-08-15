@@ -13,6 +13,7 @@ import TilbakeKnapp from '../components/sykepengesoknader/sykepengesoknad/Tilbak
 import Brodsmuler from '../components/Brodsmuler';
 import { SYKEPENGESOKNADER } from '../menypunkter';
 import { sykepengesoknad as sykepengesoknadPt } from '../propTypes';
+import { NY, UTKAST_TIL_KORRIGERING } from '../enums/sykepengesoknadstatuser';
 
 export class SykepengesoknadSide extends Component {
     componentWillMount() {
@@ -43,7 +44,7 @@ export class SykepengesoknadSide extends Component {
                     if (hentingFeilet) {
                         return <Feilmelding />;
                     }
-                    if (sykepengesoknad.status === 'NY') {
+                    if (sykepengesoknad.status === NY || sykepengesoknad.status === UTKAST_TIL_KORRIGERING) {
                         return (<div>
                             <IkkeInnsendtSoknad />
                             <TilbakeKnapp clazz="knapperad--tight" fnr={fnr} />
@@ -64,7 +65,6 @@ export class SykepengesoknadSide extends Component {
                     </div>);
                 })()
             }
-
         </Side>);
     }
 }
@@ -80,6 +80,7 @@ SykepengesoknadSide.propTypes = {
     hentingFeilet: PropTypes.bool,
     ikkeTilgang: PropTypes.bool,
     ledetekster: PropTypes.object,
+    hentSykepengesoknader: PropTypes.bool,
 };
 
 export function mapDispatchToProps(dispatch) {

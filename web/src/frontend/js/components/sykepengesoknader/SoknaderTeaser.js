@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { getLedetekst, toDatePrettyPrint } from 'digisyfo-npm';
 import { tidligsteFom, senesteTom } from '../../utils/periodeUtils';
-import { NY } from '../../enums/sykepengesoknadstatuser';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes';
+import SendtTil from './SendtTil';
 
 class SoknadTeaser extends Component {
 
@@ -29,7 +29,6 @@ class SoknadTeaser extends Component {
     render() {
         const { sykepengesoknad, fnr } = this.props;
         const perioder = sykepengesoknad.aktiviteter.map(a => { return a.periode; });
-        const visStatus = sykepengesoknad.status !== NY;
 
         return (<article aria-labelledby={`soknader-header-${sykepengesoknad.id}`}>
             <Link className="inngangspanel js-panel" to={`/sykefravaer/${fnr}/sykepengesoknader/${sykepengesoknad.id}`}
@@ -49,12 +48,6 @@ class SoknadTeaser extends Component {
                                 {getLedetekst('soknad.teaser.tittel')}
                             </span>
                         </h3>
-                        {
-                            visStatus &&
-                                <p className="inngangspanel__status js-status">
-                                { getLedetekst(`soknad.teaser.status.${sykepengesoknad.status}`, { '%DATO%': toDatePrettyPrint(sykepengesoknad.sendtTilArbeidsgiverDato || sykepengesoknad.sendtTilNAVDato) }) }
-                                </p>
-                        }
                     </header>
                     <p className="inngangspanel__tekst js-tekst">{getLedetekst('soknad.teaser.tekst',
                         {
@@ -63,13 +56,14 @@ class SoknadTeaser extends Component {
                         )
                     }</p>
                     <p className="inngangspanel__undertekst js-undertekst mute">
-                        {getLedetekst('soknad.teaser.undertekst', { '%ARBEIDSGIVER%': sykepengesoknad.arbeidsgiver.navn }) }
+                     <SendtTil sykepengesoknad={sykepengesoknad} />
                     </p>
                 </div>
             </Link>
         </article>);
     }
 }
+
 
 SoknadTeaser.propTypes = {
     sykepengesoknad: sykepengesoknadPt.isRequired,
