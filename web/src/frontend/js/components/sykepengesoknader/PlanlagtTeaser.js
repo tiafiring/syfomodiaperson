@@ -7,9 +7,8 @@ const PlanlagtTeaser = ({ soknad }) => {
     const perioder = soknad.aktiviteter.map(a => {
         return a.periode;
     });
-
     return (<article aria-labelledby={`soknader-header-${soknad.id}`}>
-            <div className="inngangspanel js-panel" style={{ color: 'gray', backgroundImage: 'none' }}>
+            <div className="inngangspanel js-panel" style={{ color: 'gray', backgroundImage: 'none', boxShadow: 'none' }}>
                 <span className="inngangspanel__ikon">
                     <img className="js-ikon" src="/sykefravaer/img/svg/soknader.svg" />
                 </span>
@@ -32,7 +31,7 @@ const PlanlagtTeaser = ({ soknad }) => {
                         })
                     }
                 </p>
-                <p className="js-undertekst mute">Planlagt</p>
+                <p className="js-undertekst mute">{ soknad.arbeidsgiver.navn }</p>
             </div>
         </div>
     </article>);
