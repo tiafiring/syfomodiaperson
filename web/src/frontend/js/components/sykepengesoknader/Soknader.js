@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react';
 import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import Sidetopp from '../Sidetopp';
 import SoknadTeasere from './SoknaderTeasere';
-import { SENDT, TIL_SENDING, UTGAATT, NY, UTKAST_TIL_KORRIGERING } from '../../enums/sykepengesoknadstatuser';
+import PlanlagteTeasere from './PlanlagteTeasere';
+import { SENDT, TIL_SENDING, UTGAATT, NY, UTKAST_TIL_KORRIGERING, FREMTIDIG } from '../../enums/sykepengesoknadstatuser';
 import { sorterEtterDato } from '../../utils/sykepengesoknadUtils';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes';
 
@@ -12,6 +13,9 @@ const Soknader = ({ fnr, sykepengesoknader = [] }) => {
     });
     const sendteSoknader = sykepengesoknader.filter((soknad) => {
         return soknad.status === SENDT || soknad.status === TIL_SENDING || soknad.status === UTGAATT;
+    }).sort(sorterEtterDato);
+    const kommendeSoknader = sykepengesoknader.filter((soknad) => {
+        return soknad.status === FREMTIDIG;
     }).sort(sorterEtterDato);
 
     return (<div>
@@ -27,6 +31,13 @@ const Soknader = ({ fnr, sykepengesoknader = [] }) => {
             className="js-til-behandling"
             id="soknader-list-til-behandling"
         />
+        {
+            kommendeSoknader.length > 0 && <PlanlagteTeasere
+                sykepengesoknader={kommendeSoknader}
+                fnr={fnr}
+                tittel="Planlagte søknader"
+            />
+        }
         {
             sendteSoknader.length > 0 && (<SoknadTeasere
                 sykepengesoknader={sendteSoknader}
