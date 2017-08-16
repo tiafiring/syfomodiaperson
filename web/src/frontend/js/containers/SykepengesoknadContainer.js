@@ -59,7 +59,7 @@ export class SykepengesoknadSide extends Component {
                         <div className="speiling">
                             <Brodsmuler brodsmuler={brodsmuler} />
                             <SidetoppSpeilet tittel="Søknad om sykepenger" />
-                            <SykepengeSoknad sykepengesoknad={sykepengesoknad} />
+                            <SykepengeSoknad fnr={fnr} sykepengesoknad={sykepengesoknad} />
                             <TilbakeKnapp clazz="knapperad--adskilt" fnr={fnr} />
                         </div>
                     </div>);
