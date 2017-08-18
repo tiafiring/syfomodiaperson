@@ -11,7 +11,7 @@ const SykepengeSoknad = ({ sykepengesoknad, fnr }) => {
         <Statuspanel sykepengesoknad={sykepengesoknad} />
         <SykmeldingUtdrag sykepengesoknad={sykepengesoknad} />
 
-        <Soknad apentUtdrag={false} sykepengesoknad={sykepengesoknad} tittel="Oppsummering" />
+        <Soknad apentUtdrag sykepengesoknad={sykepengesoknad} tittel="Oppsummering" />
 
         <div className="oppsummering__avkrysset">
             <img src="/sykefravaer/img/png/check-box-1.png" alt="Avkrysset" />

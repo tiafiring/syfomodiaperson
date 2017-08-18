@@ -4,19 +4,19 @@ import Sidetopp from '../Sidetopp';
 import SoknadTeasere from './SoknaderTeasere';
 import PlanlagteTeasere from './PlanlagteTeasere';
 import { SENDT, TIL_SENDING, UTGAATT, NY, UTKAST_TIL_KORRIGERING, FREMTIDIG } from '../../enums/sykepengesoknadstatuser';
-import { sorterEtterDato } from '../../utils/sykepengesoknadUtils';
+import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sykepengesoknadUtils';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes';
 
 const Soknader = ({ fnr, sykepengesoknader = [] }) => {
     const nyeSoknader = sykepengesoknader.filter((soknad) => {
         return soknad.status === NY || soknad.status === UTKAST_TIL_KORRIGERING;
-    });
+    }).sort(sorterEtterOpprettetDato);
     const sendteSoknader = sykepengesoknader.filter((soknad) => {
         return soknad.status === SENDT || soknad.status === TIL_SENDING || soknad.status === UTGAATT;
-    }).sort(sorterEtterDato);
+    }).sort(sorterEtterPerioder);
     const kommendeSoknader = sykepengesoknader.filter((soknad) => {
         return soknad.status === FREMTIDIG;
-    }).sort(sorterEtterDato);
+    }).sort(sorterEtterPerioder).reverse();
 
     return (<div>
         <Sidetopp

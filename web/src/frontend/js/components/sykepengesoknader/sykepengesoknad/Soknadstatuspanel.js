@@ -109,15 +109,15 @@ SendtUlikt.propTypes = {
 
 const getSistSendtDato = (s) => {
     if (s.sendtTilNAVDato && s.sendtTilArbeidsgiverDato) {
-        if (s.sendtTilNAVDato.getTime() > s.sendtTilArbeidsgiverDato.getTime()) {
-            return s.sendtTilNAVDato;
+        if (new Date(s.sendtTilNAVDato).getTime() > new Date(s.sendtTilArbeidsgiverDato.getTime())) {
+            return new Date(s.sendtTilNAVDato);
         }
-        return s.sendtTilArbeidsgiverDato;
+        return new Date(s.sendtTilArbeidsgiverDato);
     }
     if (s.sendtTilNAVDato) {
-        return s.sendtTilNAVDato;
+        return new Date(s.sendtTilNAVDato);
     }
-    return s.sendtTilArbeidsgiverDato;
+    return new Date(s.sendtTilArbeidsgiverDato);
 };
 
 
@@ -145,7 +145,7 @@ Knapperad.propTypes = {
 };
 
 export const Statuspanel = ({ sykepengesoknad }) => {
-    const sendtTilBeggeMenIkkeSamtidig = sykepengesoknad.sendtTilNAVDato && sykepengesoknad.sendtTilArbeidsgiverDato && sykepengesoknad.sendtTilNAVDato !== sykepengesoknad.sendtTilArbeidsgiverDato;
+    const sendtTilBeggeMenIkkeSamtidig = sykepengesoknad.sendtTilNAVDato && sykepengesoknad.sendtTilArbeidsgiverDato && sykepengesoknad.sendtTilNAVDato.getTime() !== sykepengesoknad.sendtTilArbeidsgiverDato.getTime();
     return (<div className="panel panel--komprimert blokk">
         <Varselstripe type="suksess">
             <div>

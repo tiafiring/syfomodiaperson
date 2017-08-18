@@ -18,3 +18,23 @@ export const sorterEtterDato = (soknad1, soknad2) => {
     }
     return 0;
 };
+
+export const sorterEtterOpprettetDato = (soknad1, soknad2) => {
+    if (new Date(soknad1.opprettetDato).getTime() > new Date(soknad2.opprettetDato).getTime()) {
+        return 1;
+    }
+    if (new Date(soknad1.opprettetDato).getTime() < new Date(soknad2.opprettetDato).getTime()) {
+        return -1;
+    }
+    return 0;
+};
+
+export const sorterEtterPerioder = (soknad1, soknad2) => {
+    if (new Date(soknad1.tom).getTime() < new Date(soknad2.tom).getTime()) {
+        return 1;
+    }
+    if (new Date(soknad1.tom).getTime() > new Date(soknad2.tom).getTime()) {
+        return -1;
+    }
+    return 0;
+};
