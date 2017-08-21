@@ -136,6 +136,9 @@ export const Knapperad = ({ sykepengesoknad }) => {
             {
                 sykepengesoknad.sendtTilNAVDato === null && <button disabled className="rammeknapp rammeknapp--mini js-inaktiv">Send til NAV</button>
             }
+            {
+                sykepengesoknad.sendtTilArbeidsgiverDato === null && <button disabled className="rammeknapp rammeknapp--mini js-inaktiv">Send til arbeidsgiveren din</button>
+            }
         </div>
     </div>);
 };
