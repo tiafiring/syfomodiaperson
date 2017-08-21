@@ -121,7 +121,7 @@ const getSistSendtDato = (s) => {
 };
 
 
-export const Knapperad = (sykepengesoknad) => {
+export const Knapperad = ({ sykepengesoknad }) => {
     const frist = new Date();
     const ANTALL_MAANEDER_KORRIGERING_ER_MULIG = 3;
     frist.setMonth(frist.getMonth() - ANTALL_MAANEDER_KORRIGERING_ER_MULIG);
