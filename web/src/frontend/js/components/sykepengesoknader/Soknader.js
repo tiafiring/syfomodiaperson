@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
+import { getLedetekst } from 'digisyfo-npm';
 import Sidetopp from '../Sidetopp';
 import SoknadTeasere from './SoknaderTeasere';
 import PlanlagteTeasere from './PlanlagteTeasere';
@@ -21,7 +21,6 @@ const Soknader = ({ fnr, sykepengesoknader = [] }) => {
     return (<div>
         <Sidetopp
             tittel={getLedetekst('soknader.sidetittel')}
-            htmlTekst={getHtmlLedetekst('soknader.introduksjonstekst')}
         />
         <SoknadTeasere
             sykepengesoknader={nyeSoknader}
