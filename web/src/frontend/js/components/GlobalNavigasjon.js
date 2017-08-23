@@ -28,7 +28,7 @@ const sykmeldingerMenypunkt = {
 };
 
 const sykepengesoknadMenypunkt = {
-    navn: 'Sykepengesøknader',
+    navn: 'Søknader om sykepenger',
     sti: 'sykepengesoknader',
     menypunkt: menypunkter.SYKEPENGESOKNADER,
 };
