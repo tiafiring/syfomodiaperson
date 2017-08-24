@@ -34,12 +34,6 @@ const sykepengesoknadMenypunkt = {
 };
 
 
-const oppfoelgingsplanMenypunkt = {
-    navn: 'Oppfølgingsplaner',
-    sti: 'oppfoelgingsplaner',
-    menypunkt: menypunkter.OPPFOELGINGSPLANER,
-};
-
 class GlobalNavigasjon extends Component {
     constructor(props) {
         super(props);
