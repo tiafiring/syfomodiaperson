@@ -21,7 +21,7 @@ export class DinSykmeldingSide extends Component {
     }
 
     render() {
-        const { brukernavn, ledetekster, henter, hentingFeilet, ikkeTilgang, dinSykmelding, fnr } = this.props;
+        const { brukernavn, ledetekster, henter, hentingFeilet, ikkeTilgang, dinSykmelding, fnr, arbeidsgiversSykmelding } = this.props;
 
         const brodsmuler = [{
             tittel: 'Ditt sykefravær',
@@ -53,7 +53,7 @@ export class DinSykmeldingSide extends Component {
                         <div className="speiling">
                             <Brodsmuler brodsmuler={brodsmuler} />
                             <SidetoppSpeilet tittel="Sykmelding" />
-                            <SykmeldingSide dinSykmelding={dinSykmelding} ledetekster={ledetekster} arbeidsgiversSykmelding={dinSykmelding} fnr={fnr} />
+                            <SykmeldingSide dinSykmelding={dinSykmelding} ledetekster={ledetekster} arbeidsgiversSykmelding={arbeidsgiversSykmelding} fnr={fnr} />
                         </div>
                     </div>);
                 })()
@@ -71,6 +71,7 @@ DinSykmeldingSide.propTypes = {
     ikkeTilgang: PropTypes.bool,
     ledetekster: PropTypes.object,
     dinSykmelding: PropTypes.object,
+    arbeidsgiversSykmelding: PropTypes.object,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -92,7 +93,6 @@ export function mapStateToProps(state, ownProps) {
     if (dinSykmelding && (dinSykmelding.status === 'SENDT' || (dinSykmelding.status === 'BEKREFTET' && dinSykmelding.valgtArbeidssituasjon === 'ARBEIDSTAKER'))) {
         arbeidsgiversSykmelding = getSykmelding(state.arbeidsgiversSykmeldinger.data, sykmeldingId);
     }
-
 
     return {
         brukernavn: state.navbruker.data.navn,
