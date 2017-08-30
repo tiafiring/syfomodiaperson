@@ -23,6 +23,7 @@
     <properties>
         <modig.security.version>1.0.24</modig.security.version>
         <spring.version>4.3.2.RELEASE</spring.version>
+        <jackson.version>2.9.0</jackson.version>
         <oidc-security.version>2.2.26</oidc-security.version>
     </properties>
 
@@ -67,7 +68,7 @@
             <dependency>
                 <groupId>no.nav.sbl.dialogarena</groupId>
                 <artifactId>common-web</artifactId>
-                <version>3.1.3</version>
+                <version>5.0.16</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
@@ -77,7 +78,7 @@
             <dependency>
                 <groupId>no.nav.sbl.dialogarena</groupId>
                 <artifactId>common-types</artifactId>
-                <version>1.2</version>
+                <version>2.0.10</version>
             </dependency>
             <dependency>
                 <groupId>no.nav.modig</groupId>
@@ -107,6 +108,24 @@
                 <groupId>no.nav.modig</groupId>
                 <artifactId>modig-security-core</artifactId>
                 <version>${modig.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+                <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>no.nav.modig</groupId>
