@@ -1,20 +1,19 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import { Varselstripe, DineSykmeldingOpplysninger, getLedetekst } from 'digisyfo-npm';
+import { Varselstripe, DineSykmeldingOpplysninger, getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
+import IllustrertInnhold from '../../components/IllustrertInnhold';
 
 const DinSykmelding = ({ sykmelding, ledetekster, visEldreSykmeldingVarsel, eldsteSykmeldingId }) => {
     return (<div>
-        <div className="panel blokk">
-            <div className="media illustrertInnhold">
-                <img src="/sykefravaer/img/svg/nav-ansatt.svg" className="media__img media__img--desktop" alt="Ansatt i NAV" />
-                <img src="/sykefravaer/img/svg/nav-ansatt-mobil.svg" className="media__img media__img--mobil" alt="Ansatt i NAV" />
+        <div className="panel blokk--s">
+            <IllustrertInnhold ikon="/sykefravaer/img/svg/din-sykmelding-veileder.svg" ikonAlt="NAV-veileder">
                 <div>
-                    <p>{getLedetekst('din-sykmelding.introtekst.abtest')}</p>
+                    <p>{getLedetekst('din-sykmelding.introtekst.abtest', ledetekster)}</p>
                     <p className="sist introtekst__knapperad">
                         <button className="rammeknapp rammeknapp--mini" type="button" disabled>Gå til utfylling</button>
                     </p>
                 </div>
-            </div>
+            </IllustrertInnhold>
         </div>
         {
             visEldreSykmeldingVarsel && <div className="panel blokk">
