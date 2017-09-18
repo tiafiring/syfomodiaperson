@@ -23,6 +23,12 @@
     margin-right: .25rem;
 }
 
+.opplysning__tittel {
+    .mixin-typo-element();
+    margin-top: 0;
+    margin-bottom: .25rem;
+}
+
 .nokkelopplysning {
     margin-bottom: 2rem;
     page-break-inside: avoid;
@@ -37,8 +43,35 @@
     }   
 
     p {
-        .mixin-typo-infotekst();
+        .mixin-typo-normal();
         margin: 0; 
+    }
+}
+
+.nokkelopplysning__meta,
+p.nokkelopplysning__meta {
+    .mixin-typo-normal();
+}
+
+.hoveddiagnose {
+    .nokkelopplysning--hoveddiagnose {
+        margin-bottom: 0em;
+    }
+    .nokkelopplysning__meta--desktop {
+        display: none;
+    }
+
+    @media (min-width: @skjermMini) {
+        .nokkelopplysning__meta--mobil {
+            display: none;
+        }
+
+        .nokkelopplysning__meta--desktop {
+            display: block;
+        }
+    }
+    .nokkelopplysning__meta:last-child {
+        margin-bottom: 1em;
     }
 }
 
