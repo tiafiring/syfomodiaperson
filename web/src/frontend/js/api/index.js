@@ -28,8 +28,7 @@ export function post(url, body) {
         body: JSON.stringify(body),
         headers: {
             'Content-Type': 'application/json',
-            'X-XSRF-TOKEN': getCookie('XSRF-TOKEN-SYFOREST'),
-            'NAV_CSRF_PROTECTION': getCookie('NAV_CSRF_PROTECTION'),
+            NAV_CSRF_PROTECTION: getCookie('NAV_CSRF_PROTECTION'),
         },
     })
     .then((res) => {
