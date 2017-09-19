@@ -1,8 +1,8 @@
 export const getTidligsteSendtDato = (soknad) => {
-    if (new Date(soknad.sendtTilNAVDato) && new Date(soknad.sendtTilArbeidsgiverDato)) {
-        return new Date(soknad.sendtTilNAVDato) > new Date(soknad.sendtTilArbeidsgiverDato) ? new Date(soknad.sendtTilArbeidsgiverDato) : new Date(soknad.sendtTilNAVDato);
+    if (soknad.sendtTilNAVDato && soknad.sendtTilArbeidsgiverDato) {
+        return soknad.sendtTilNAVDato > soknad.sendtTilArbeidsgiverDato ? soknad.sendtTilArbeidsgiverDato : soknad.sendtTilNAVDato;
     }
-    return new Date(soknad.sendtTilNAVDato) || new Date(soknad.sendtTilArbeidsgiverDato);
+    return soknad.sendtTilNAVDato || soknad.sendtTilArbeidsgiverDato;
 };
 
 export const sorterEtterDato = (soknad1, soknad2) => {
