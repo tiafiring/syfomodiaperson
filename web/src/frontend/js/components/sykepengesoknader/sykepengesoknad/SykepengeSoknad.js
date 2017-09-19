@@ -3,11 +3,13 @@ import { getLedetekst, Soknad } from 'digisyfo-npm';
 import SykmeldingUtdrag from './SykmeldingUtdrag';
 import Statuspanel from './Soknadstatuspanel';
 import { sykepengesoknad as sykepengesoknadPt } from '../../../propTypes';
-import { SENDT, TIL_SENDING } from '../../../enums/sykepengesoknadstatuser';
+import { KORRIGERT, SENDT, TIL_SENDING } from '../../../enums/sykepengesoknadstatuser';
 import RelaterteSoknaderContainer from './RelaterteSoknaderContainer';
+import KorrigertAvContainer from './KorrigertAvContainer';
 
 const SykepengeSoknad = ({ sykepengesoknad, fnr }) => {
     return (<div>
+        { sykepengesoknad.status === KORRIGERT && <KorrigertAvContainer sykepengesoknad={sykepengesoknad} /> }
         <Statuspanel sykepengesoknad={sykepengesoknad} />
         <SykmeldingUtdrag sykepengesoknad={sykepengesoknad} />
 
