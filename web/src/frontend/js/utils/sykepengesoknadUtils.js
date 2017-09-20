@@ -50,8 +50,8 @@ export const mapAktiviteter = (soknad) => {
             });
         })
         .map((aktivitet) => {
-            const fom = aktivitet.periode.fom.getTime() < soknad.fom.getTime() ? soknad.fom : aktivitet.periode.fom;
-            const tom = aktivitet.periode.tom.getTime() > soknad.tom.getTime() ? soknad.tom : aktivitet.periode.tom;
+            const fom = new Date(aktivitet.periode.fom).getTime() < new Date(soknad.fom).getTime() ? soknad.fom : aktivitet.periode.fom;
+            const tom = new Date(aktivitet.periode.tom).getTime() > new Date(soknad.tom).getTime() ? soknad.tom : aktivitet.periode.tom;
             return Object.assign({}, aktivitet, {
                 periode: { fom, tom },
             });
