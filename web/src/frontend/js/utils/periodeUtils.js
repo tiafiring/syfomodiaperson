@@ -37,8 +37,8 @@ const tilDatePeriode = (periode) => {
 };
 
 export const periodeOverlapperMedPeriode = (periodeA_, periodeB_) => {
-    const periodeA = tilDatePeriode(periodeA_);
-    const periodeB = tilDatePeriode(periodeB_);
+    const periodeA = periodeA_;
+    const periodeB = periodeB_;
     try {
         const forstePeriode = periodeA.fom.getTime() < periodeB.fom.getTime() ? periodeA : periodeB;
         const andrePeriode = periodeA.fom.getTime() < periodeB.fom.getTime() ? periodeB : periodeA;
