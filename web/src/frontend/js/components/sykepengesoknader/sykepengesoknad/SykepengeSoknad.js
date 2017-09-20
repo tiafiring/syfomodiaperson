@@ -6,6 +6,7 @@ import { sykepengesoknad as sykepengesoknadPt } from '../../../propTypes';
 import { KORRIGERT, SENDT, TIL_SENDING } from '../../../enums/sykepengesoknadstatuser';
 import RelaterteSoknaderContainer from './RelaterteSoknaderContainer';
 import KorrigertAvContainer from './KorrigertAvContainer';
+import { mapAktiviteter } from '../../../utils/sykepengesoknadUtils';
 
 const SykepengeSoknad = ({ sykepengesoknad, fnr }) => {
     return (<div>
@@ -13,7 +14,7 @@ const SykepengeSoknad = ({ sykepengesoknad, fnr }) => {
         <Statuspanel sykepengesoknad={sykepengesoknad} />
         <SykmeldingUtdrag sykepengesoknad={sykepengesoknad} />
 
-        <Soknad apentUtdrag sykepengesoknad={sykepengesoknad} tittel="Oppsummering" />
+        <Soknad sykepengesoknad={mapAktiviteter(sykepengesoknad)} tittel="Oppsummering" />
 
         <div className="oppsummering__avkrysset">
             <img src="/sykefravaer/img/png/check-box-1.png" alt="Avkrysset" />
