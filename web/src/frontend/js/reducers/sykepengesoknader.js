@@ -1,4 +1,5 @@
 import { tilDato, parseDatoerPeriodeListe, parseDatoerPeriode } from '../utils/serialisering/dato';
+import { parseSykepengesoknad, tidligsteFom, senesteTom } from 'digisyfo-npm';
 
 const initiellState = {
     henter: false,
@@ -28,6 +29,23 @@ const parseAktivitetsdatoer = (aktiviteter) => {
                 periode: parseDatoerPeriode(aktivitet.periode),
             }
         );
+    });
+};
+
+export const settErOppdelt = (soknad) => {
+    const perioder = soknad.aktiviteter.map((a) => {
+        return a.periode;
+    });
+    const _senesteTom = senesteTom(perioder);
+    const _tidligsteFom = tidligsteFom(perioder);
+    const _erOppdelt = (() => {
+        if (!soknad.fom || !soknad.tom) {
+            return false;
+        }
+        return !(soknad.fom.getTime() === _tidligsteFom.getTime() && soknad.tom.getTime() === _senesteTom.getTime());
+    })();
+    return Object.assign({}, soknad, {
+        _erOppdelt,
     });
 };
 
@@ -78,7 +96,7 @@ export default function sykepengesoknader(state = initiellState, action) {
         }
         case 'SYKEPENGESOKNADER_HENTET': {
             const soknader = action.data.map((s) => {
-                const soknad = parseDatofelter(s);
+                const soknad = settErOppdelt(parseSykepengesoknad(s));
                 return sorterAktiviteterEldsteFoerst(soknad);
             });
             return {
