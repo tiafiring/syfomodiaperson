@@ -35,7 +35,6 @@ const Soknader = ({ fnr, sykepengesoknader = [] }) => {
                 sykepengesoknader={kommendeSoknader}
                 fnr={fnr}
                 tittel="Planlagte søknader"
-                className="js-planlagte-soknader"
             />
         }
         {

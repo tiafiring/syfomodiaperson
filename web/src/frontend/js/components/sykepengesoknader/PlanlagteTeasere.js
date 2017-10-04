@@ -7,7 +7,7 @@ const PlanlagteTeasere = ({ sykepengesoknader, tittel = '' }) => {
         <header className="inngangspanelerHeader">
             <h2 className="inngangspanelerHeader__tittel">{tittel}</h2>
         </header>
-        <div>
+        <div className='js-planlagte-soknader'>
             {
                 sykepengesoknader
                     .map((soknad, idx) => {
