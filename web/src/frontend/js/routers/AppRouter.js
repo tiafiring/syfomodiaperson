@@ -11,6 +11,7 @@ import SykepengesoknaderContainer from '../containers/SykepengesoknaderContainer
 import SykepengesoknadContainer from '../containers/SykepengesoknadContainer';
 import OppfoelgingsPlanerOversiktContainer from '../containers/OppfoelgingsPlanerOversiktContainer';
 import DinSykmeldingContainer from '../containers/DinSykmeldingContainer';
+import HistorikkContainer from '../containers/HistorikkContainer';
 
 const AppRouter = ({ history }) => {
     return (<Router history={history}>
@@ -27,6 +28,7 @@ const AppRouter = ({ history }) => {
         <Route path="/sykefravaer/:fnr/sykepengesoknader/:sykepengesoknadId" component={SykepengesoknadContainer} />
         <Route path="/sykefravaer/:fnr/sykmeldinger/:sykmeldingId" component={DinSykmeldingContainer} />
         <Route path="/sykefravaer/:fnr/oppfoelgingsplaner" component={OppfoelgingsPlanerOversiktContainer} />
+        <Route path="/sykefravaer/:fnr/historikk" component={HistorikkContainer} />
         <Route path="/" component={FeilsideContainer} />
     </Router>);
 };

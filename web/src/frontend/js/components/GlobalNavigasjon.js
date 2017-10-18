@@ -2,6 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import * as menypunkter from '../menypunkter';
 
+const historikkMenypunkt = {
+    navn: 'Historikk',
+    sti: 'historikk',
+    menypunkt: menypunkter.HISTORIKK,
+};
+
 const naermesteLederMenypunkt = {
     navn: 'Nærmeste leder',
     sti: 'naermeste-leder',
@@ -33,6 +39,11 @@ const sykepengesoknadMenypunkt = {
     menypunkt: menypunkter.SYKEPENGESOKNADER,
 };
 
+const oppfoelgingsplanMenypunkt = {
+    navn: 'Oppfølgingsplaner',
+    sti: 'oppfoelgingsplaner',
+    menypunkt: menypunkter.OPPFOELGINGSPLANER,
+};
 
 class GlobalNavigasjon extends Component {
     constructor(props) {
@@ -93,7 +104,7 @@ class GlobalNavigasjon extends Component {
 
     render() {
         const { fnr, aktivtMenypunkt } = this.props;
-        this.menypunkter = [naermesteLederMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, motemodulMenypunkt];
+        this.menypunkter = [historikkMenypunkt, naermesteLederMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, motemodulMenypunkt, oppfoelgingsplanMenypunkt];
 
         return (<ul aria-label="Navigasjon" className="navigasjon">
         {
