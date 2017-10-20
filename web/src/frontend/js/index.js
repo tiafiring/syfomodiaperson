@@ -17,6 +17,7 @@ import epostinnhold from './mote/reducers/epostinnhold';
 import arbeidsgiverEpostinnhold from './mote/reducers/arbeidsgiverEpostinnhold';
 import modiacontext from './reducers/modiacontext';
 import historikk from './reducers/historikk';
+import sykeforloep from './reducers/sykeforloep';
 import sykepengesoknader from './reducers/sykepengesoknader';
 import oppfoelgingsdialoger from './reducers/oppfoelgingsdialoger';
 import arbeidstaker from './mote/reducers/arbeidstaker';
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
     ledere,
     navbruker,
     modiacontext,
+    sykeforloep,
     historikk,
     moter,
     virksomhet,

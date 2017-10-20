@@ -1,5 +1,28 @@
 .historikkevent {
-  border-bottom: 1px solid black;
-  display: block;
-  padding-bottom: 2em;
+  li {
+    border-bottom: 1px solid black;
+    display: block;
+    padding-bottom: 2em;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  padding: 0;
+}
+
+.sykeforloepstilfelle {
+  li {
+    display: block;
+  }
+  margin: 0;
+  padding: 0;
+}
+
+.historikkikon {
+  margin-right: 10px;
+}
+
+.historikkinfo {
+  display: flex;
 }

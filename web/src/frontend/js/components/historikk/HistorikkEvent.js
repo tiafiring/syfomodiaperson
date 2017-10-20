@@ -1,14 +1,18 @@
 import React, { PropTypes } from 'react';
 import { toDatePrettyPrint } from 'digisyfo-npm';
+import OppfoelgingsdialogIkon from '../../ikoner/OppfoelgingsdialogIkon';
 
 const HistorikkEvent = ({ event }) => {
-    return (<div className="js-panel">
-        <header className="inngangspanel__header">
-            <small className="inngangspanel__meta js-meta">
-                { toDatePrettyPrint(event.tidspunkt) }
-            </small>
-        </header>
-        { event.tekst }
+    return (<div>
+        <p>
+            { toDatePrettyPrint(event.tidspunkt) }
+        </p>
+        <div className="historikkinfo">
+            <div className="historikkikon">
+                <OppfoelgingsdialogIkon />
+            </div>
+            { event.tekst }
+        </div>
     </div>);
 };
 
