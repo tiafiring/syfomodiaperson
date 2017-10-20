@@ -9,12 +9,12 @@ const Historikk = ({ historikk, sykeforloep, noeFeilet }) => {
             <h1 style={{margin: 0}}>Historikk</h1>
         </div>
         <div>
-            <div className="panel blokk--s">
+            { noeFeilet ? <div className="panel blokk--s">
                 <Varselstripe type="feil" fylt>
                    <p>Det skjedde en feil</p>
                 </Varselstripe>
             </div>
-            { noeFeilet ? <p>Vi fikk ikke hentet alt</p> : null }
+            : null }
             <ol className="sykeforloepstilfelle">
             {
                 sykeforloep.map((forloep, index) => {

@@ -15,10 +15,26 @@ export function* hentHistorikkOppfoelgingsdialog(action) {
     }
 }
 
+export function* hentHistorikkMoter(action) {
+    yield put(actions.henterHistorikk());
+    try {
+        const data = yield call(get, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/historikk?fnr=${action.fnr}`);
+        yield put(actions.historikkHentet(data, 'MOTER'));
+    } catch (e) {
+        log(e);
+        yield put(actions.hentHistorikkFeilet());
+    }
+}
+
 function* watchHentHistorikkOppfoelgingsdialog() {
     yield* takeEvery('HENT_HISTORIKK_FORESPURT', hentHistorikkOppfoelgingsdialog);
 }
 
+function* watchHentHistorikkMoter() {
+    yield* takeEvery('HENT_HISTORIKK_FORESPURT', hentHistorikkMoter);
+}
+
 export default function* historikkSagas() {
     yield fork(watchHentHistorikkOppfoelgingsdialog);
+    yield fork(watchHentHistorikkMoter);
 }
