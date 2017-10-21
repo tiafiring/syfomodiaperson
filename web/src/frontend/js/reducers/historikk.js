@@ -1,29 +1,52 @@
 const defaultState = {
     data: [],
     hentingFeilet: false,
-    henter: false,
+    henterMoter: false,
+    henterOppfoelgingsdialoger: false,
 };
 
 const historikk = (state = defaultState, action = {}) => {
     switch (action.type) {
-        case 'HISTORIKK_HENTET': {
+        case 'HISTORIKK_HENTET_MOTER': {
             const nyHistorikk = action.data.map((event) => {
-                event.kilde = action.kilde;
+                event.kilde = 'MOTER';
                 return event;
             });
-            return {
-                henter: false,
-                data: state.data.concat(nyHistorikk),
-            };
-        }
-        case 'HENTER_HISTORIKK': {
+
             return Object.assign({}, state, {
-                data: [],
-                henter: true,
+                henterMoter: false,
+                data: state.data.concat(nyHistorikk),
             });
         }
-        case 'HENT_HISTORIKK_FEILET': {
+        case 'HISTORIKK_HENTET_OPPFOELGINGSDIALOG': {
+            const nyHistorikk = action.data.map((event) => {
+                event.kilde = 'OPPFOELGINGSDIALOG';
+                return event;
+            });
             return Object.assign({}, state, {
+                henterOppfoelgingsdialoger: false,
+                data: state.data.concat(nyHistorikk),
+            });
+        }
+        case 'HENTER_HISTORIKK_MOTER': {
+            return Object.assign({}, state, {
+                henterMoter: true,
+            });
+        }
+        case 'HENTER_HISTORIKK_OPPFOELGINGSDIALOG': {
+            return Object.assign({}, state, {
+                henterOppfoelgingsdialoger: true,
+            });
+        }
+        case 'HENT_HISTORIKK_FEILET_MOTER': {
+            return Object.assign({}, state, {
+                henterMoter: false,
+                hentingFeilet: true,
+            });
+        }
+        case 'HENT_HISTORIKK_FEILET_OPPFOELGINGSDIALOG': {
+            return Object.assign({}, state, {
+                henterOppfoelgingsdialoger: false,
                 hentingFeilet: true,
             });
         }

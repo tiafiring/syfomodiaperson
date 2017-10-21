@@ -19,12 +19,12 @@ const Historikk = ({ historikk, sykeforloep }) => {
                 : null
             }
             {
-                historikk.henter && <AppSpinner />
+                historikk.henterOppfoelgingsdialoger || historikk.henterMoter && <AppSpinner />
             }
             <ol className="sykeforloepstilfelle">
             {
                 sykeforloep
-                    .sort((s1, s2) => { return new Date(s1.oppfoelgingsdato) - new Date(s2.oppfoelgingsdato) })
+                    .sort((s1, s2) => { return new Date(s2.oppfoelgingsdato) - new Date(s1.oppfoelgingsdato) })
                     .map((forloep, index) => {
                     return <li key={index} className="panel blokk--l">
                             <div>

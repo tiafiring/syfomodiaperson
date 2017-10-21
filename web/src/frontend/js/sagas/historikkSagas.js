@@ -5,24 +5,24 @@ import * as actions from '../actions/historikk_actions';
 import { log } from 'digisyfo-npm';
 
 export function* hentHistorikkOppfoelgingsdialog(action) {
-    yield put(actions.henterHistorikk());
+    yield put(actions.henterHistorikk('OPPFOELGINGSDIALOG'));
     try {
         const data = yield call(get, `${window.APP_SETTINGS.OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialog/v1/${action.fnr}/historikk`);
         yield put(actions.historikkHentet(data, 'OPPFOELGINGSDIALOG'));
     } catch (e) {
         log(e);
-        yield put(actions.hentHistorikkFeilet());
+        yield put(actions.hentHistorikkFeilet('OPPFOELGINGSDIALOG'));
     }
 }
 
 export function* hentHistorikkMoter(action) {
-    yield put(actions.henterHistorikk());
+    yield put(actions.henterHistorikk('MOTER'));
     try {
         const data = yield call(get, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/historikk?fnr=${action.fnr}`);
         yield put(actions.historikkHentet(data, 'MOTER'));
     } catch (e) {
         log(e);
-        yield put(actions.hentHistorikkFeilet());
+        yield put(actions.hentHistorikkFeilet('MOTER'));
     }
 }
 
