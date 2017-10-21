@@ -18,7 +18,7 @@ export class HistorikkSide extends Component {
     }
 
     render() {
-        const { henter, hentingFeilet, ikkeTilgang, ikkeTilgangFeilmelding, ledetekster, historikk, noeFeilet, sykeforloep } = this.props;
+        const { henter, hentingFeilet, ikkeTilgang, ikkeTilgangFeilmelding, ledetekster, historikk, sykeforloep } = this.props;
         return (<Side tittel="Historikk" aktivtMenypunkt={HISTORIKK}>
             {
                 (() => {
@@ -32,7 +32,7 @@ export class HistorikkSide extends Component {
                     if (hentingFeilet) {
                         return <Feilmelding />;
                     }
-                    return <Historikk sykeforloep={sykeforloep} historikk={historikk} noeFeilet={noeFeilet} />;
+                    return <Historikk sykeforloep={sykeforloep} historikk={historikk} />;
                 })()
             }
         </Side>);
@@ -42,14 +42,13 @@ export class HistorikkSide extends Component {
 HistorikkSide.propTypes = {
     hentSykeforloep: PropTypes.func,
     hentHistorikk: PropTypes.func,
-    historikk: PropTypes.array,
+    historikk: PropTypes.object,
     sykeforloep: PropTypes.array,
     ledetekster: PropTypes.object,
     actions: PropTypes.object,
     fnr: PropTypes.string,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
-    noeFeilet: PropTypes.bool,
     ikkeTilgang: PropTypes.bool,
     ikkeTilgangFeilmelding: PropTypes.string,
 };
@@ -67,11 +66,10 @@ export const mapStateToProps = (state) => {
     return {
         fnr,
         sykeforloep: state.sykeforloep.data,
-        historikk: state.historikk.data,
+        historikk: state.historikk,
         henter: state.sykeforloep.henter,
         ledetekster: state.ledetekster.data,
         hentingFeilet: state.sykeforloep.hentingFeilet,
-        noeFeilet: state.historikk.hentingFeilet,
         ikkeTilgang: state.ledere.ikkeTilgang,
         ikkeTilgangFeilmelding: state.ledere.ikkeTilgangFeilmelding,
     };

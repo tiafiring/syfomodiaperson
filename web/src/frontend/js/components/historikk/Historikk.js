@@ -2,29 +2,41 @@ import React, { PropTypes } from 'react';
 import HistorikkEvent from './HistorikkEvent';
 import { toDatePrettyPrint } from 'digisyfo-npm';
 import { Varselstripe } from 'digisyfo-npm';
+import AppSpinner from '../AppSpinner';
 
-const Historikk = ({ historikk, sykeforloep, noeFeilet }) => {
+const Historikk = ({ historikk, sykeforloep }) => {
     return (<div>
         <div className="panel">
             <h1 style={{margin: 0}}>Historikk</h1>
         </div>
         <div>
-            { noeFeilet ? <div className="panel blokk--s">
-                <Varselstripe type="feil" fylt>
-                   <p>Det skjedde en feil</p>
-                </Varselstripe>
-            </div>
-            : null }
+            {
+                historikk.hentingFeilet ? <div className="panel blokk--s">
+                    <Varselstripe type="feil" fylt>
+                       <p>Det skjedde en feil! Det er ikke sikkert du får all historikken som finnes!</p>
+                    </Varselstripe>
+                </div>
+                : null
+            }
+            {
+                historikk.henter && <AppSpinner />
+            }
             <ol className="sykeforloepstilfelle">
             {
-                sykeforloep.map((forloep, index) => {
+                sykeforloep
+                    .sort((s1, s2) => { return new Date(s1.oppfoelgingsdato) - new Date(s2.oppfoelgingsdato) })
+                    .map((forloep, index) => {
                     return <li key={index} className="panel blokk--l">
                             <div>
                                 <h2>Sykefraværstilfellet { toDatePrettyPrint(forloep.oppfoelgingsdato) } - { toDatePrettyPrint(forloep.sluttdato) }</h2>
                                 <ol className="historikkevent">
                                     {
-                                        historikk.map((event, index) => {
-                                            if (new Date(forloep.oppfoelgingsdato) < new Date(event.tidspunkt) && new Date(event.tidspunkt) > new Date(forloep.oppfoelgingsdato)) {
+                                        historikk.data
+                                            .sort((h1, h2) => {
+                                            return new Date(h2.tidspunkt) - new Date(h1.tidspunkt)
+                                        })
+                                            .map((event, index) => {
+                                            if (new Date(forloep.oppfoelgingsdato) < new Date(event.tidspunkt) && new Date(event.tidspunkt) < new Date(forloep.sluttdato)) {
                                                 return <li key={index} className="historikkevent blokk--s"><HistorikkEvent event={event} /></li>;
                                             }
                                             return null;
@@ -41,9 +53,8 @@ const Historikk = ({ historikk, sykeforloep, noeFeilet }) => {
 };
 
 Historikk.propTypes = {
-    noeFeilet: PropTypes.bool,
     sykeforloep: PropTypes.array,
-    historikk: PropTypes.array,
+    historikk: PropTypes.object,
 };
 
 export default Historikk;

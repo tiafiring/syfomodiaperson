@@ -1,6 +1,7 @@
 const defaultState = {
     data: [],
     hentingFeilet: false,
+    henter: false,
 };
 
 const historikk = (state = defaultState, action = {}) => {
@@ -11,12 +12,14 @@ const historikk = (state = defaultState, action = {}) => {
                 return event;
             });
             return {
+                henter: false,
                 data: state.data.concat(nyHistorikk),
             };
         }
         case 'HENTER_HISTORIKK': {
             return Object.assign({}, state, {
                 data: [],
+                henter: true,
             });
         }
         case 'HENT_HISTORIKK_FEILET': {
