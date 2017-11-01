@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import { getLedetekst, toDatePrettyPrint, Varselstripe } from 'digisyfo-npm';
 
-const OppfoelgingsPlanerOversikt = ({ aktiveDialoger, inaktiveDialoger, ledetekster }) => {
+const OppfoelgingsPlanerOversikt = ({ fnr, aktiveDialoger, inaktiveDialoger, ledetekster }) => {
     aktiveDialoger.sort((a, b) => {
-        return a.deltMedNav < b.deltMedNav ? 1 : -1;
+        return new Date(a.godkjentPlan.deltMedNavTidspunkt) < new Date(b.godkjentPlan.deltMedNavTidspunkt) ? 1 : -1;
     });
 
     inaktiveDialoger.sort((a, b) => {
-        return a.deltMedNav < b.deltMedNav ? 1 : -1;
+        return new Date(a.godkjentPlan.deltMedNavTidspunkt) < new Date(b.godkjentPlan.deltMedNavTidspunkt) ? 1 : -1;
     });
 
     return (<div>
@@ -19,10 +19,10 @@ const OppfoelgingsPlanerOversikt = ({ aktiveDialoger, inaktiveDialoger, ledeteks
             {
                 aktiveDialoger.map((aktivDialog, index) => {
                     return (<a key={index} className="panel navigasjonspanel"
-                        href={`/oppfoelgingsdialogrest/api/dokument/${aktivDialog.oppfoelgingsdialogId}/versjon/${aktivDialog.versjon}`}>
+                        href={`/oppfoelgingsdialog-rest/api/oppfoelgingsdialog/v1/${fnr}/dokument/${aktivDialog.id}`}>
                         <h3>{aktivDialog.virksomhetsnavn}</h3>
                         <p>{getLedetekst('fss.oppfoelgingsdialog.oversikt.deltmednav', ledetekster, {
-                            '%DELT_MED_NAV_DATO%': toDatePrettyPrint(aktivDialog.deltMedNavDato),
+                            '%DELT_MED_NAV_DATO%': toDatePrettyPrint(aktivDialog.godkjentPlan.deltMedNAVTidspunkt),
                         })}</p>
                     </a>);
                 })
@@ -35,10 +35,10 @@ const OppfoelgingsPlanerOversikt = ({ aktiveDialoger, inaktiveDialoger, ledeteks
         {
             inaktiveDialoger.map((inaktivDialog, index) => {
                 return (<a key={index} className="panel navigasjonspanel"
-                    href={`/oppfoelgingsdialogrest/api/dokument/${inaktivDialog.oppfoelgingsdialogId}/versjon/${inaktivDialog.versjon}`}>
+                    href={`/oppfoelgingsdialog-rest/api/oppfoelgingsdialog/v1/${fnr}/dokument/${inaktivDialog.id}`}>
                     <h3>{inaktivDialog.virksomhetsnavn}</h3>
                     <p>{getLedetekst('fss.oppfoelgingsdialog.oversikt.deltmednav', ledetekster, {
-                        '%DELT_MED_NAV_DATO%': toDatePrettyPrint(inaktivDialog.deltMedNavDato),
+                        '%DELT_MED_NAV_DATO%': toDatePrettyPrint(inaktivDialog.godkjentPlan.deltMedNAVTidspunkt),
                     })}</p>
                 </a>);
             })
@@ -47,6 +47,7 @@ const OppfoelgingsPlanerOversikt = ({ aktiveDialoger, inaktiveDialoger, ledeteks
 };
 
 OppfoelgingsPlanerOversikt.propTypes = {
+    fnr: PropTypes.string,
     aktiveDialoger: PropTypes.array.isRequired,
     inaktiveDialoger: PropTypes.array.isRequired,
     ledetekster: PropTypes.object.isRequired,

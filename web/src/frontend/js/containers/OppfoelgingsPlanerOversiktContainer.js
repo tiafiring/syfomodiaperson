@@ -69,19 +69,8 @@ export function mapStateToProps(state) {
     const hentetDialoger = state.oppfoelgingsdialoger.hentet;
     const henterDialoger = state.oppfoelgingsdialoger.henter;
 
-    const gyldigeDialoger = state.oppfoelgingsdialoger.data.filter((dialog) => {
-        return new Date(dialog.gyldighetstidspunkt.tom) > new Date();
-    });
-
-    const aktiveDialoger = [];
-    gyldigeDialoger.forEach((dialog1) => {
-        gyldigeDialoger.forEach((dialog2) => {
-            if (dialog1.oppfoelgingsdialogId !== dialog2.oppfoelgingsdialogId && dialog1.virksomhetsnummer === dialog2.virksomhetsnummer) {
-                if (dialog1.deltMedNavDato > dialog2.deltMedNavDato) {
-                    aktiveDialoger.push(dialog1);
-                }
-            }
-        });
+    const aktiveDialoger = state.oppfoelgingsdialoger.data.filter((dialog) => {
+        return dialog.status !== 'AVBRUTT' && new Date(dialog.godkjentPlan.gyldighetstidspunkt.tom) > new Date();
     });
 
     const inaktiveDialoger = [];

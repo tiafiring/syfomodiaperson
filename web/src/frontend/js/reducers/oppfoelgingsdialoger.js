@@ -18,20 +18,20 @@ export default function oppfoelgingsdialoger(state = initiellState, action) {
             });
         }
         case 'HENTER_OPPFOELGINGSDIALOGER': {
-            return {
+            return Object.assign({}, state, {
                 data: [],
                 hentet: false,
                 henter: true,
                 hentingFeilet: false,
-            };
+            });
         }
         case 'OPPFOELGINGSDIALOGER_HENTET': {
-            return {
+            return Object.assign({}, state, {
                 henter: false,
                 hentingFeilet: false,
                 hentet: true,
                 data: action.data,
-            };
+            });
         }
         case 'HENT_OPPFOELGINGSDIALOGER_IKKE_TILGANG': {
             return Object.assign({}, state, {
