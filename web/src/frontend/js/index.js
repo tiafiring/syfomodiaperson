@@ -66,8 +66,8 @@ const fnr = window.location.pathname.split('/')[2];
 const config = {
     config: {
         dataSources: {
-            veileder: `https://modapp${finnMiljoStreng()}.adeo.no/mote/rest/veilederinfo`,
-            enheter: `https://modapp${finnMiljoStreng()}.adeo.no/mote/rest/enheter`,
+            veileder: `${window.location.origin}/mote/rest/veilederinfo`,
+            enheter: `${window.location.origin}/mote/rest/enheter`,
         },
         toggles: {
             visEnhetVelger: true,
