@@ -104,7 +104,7 @@ class GlobalNavigasjon extends Component {
 
     render() {
         const { fnr, aktivtMenypunkt } = this.props;
-        this.menypunkter = [historikkMenypunkt, naermesteLederMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, motemodulMenypunkt, oppfoelgingsplanMenypunkt];
+        this.menypunkter = [naermesteLederMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, motemodulMenypunkt];
 
         return (<ul aria-label="Navigasjon" className="navigasjon">
         {
