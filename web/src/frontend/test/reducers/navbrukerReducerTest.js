@@ -35,7 +35,9 @@ describe('navbruker', () => {
     it("Håndterer NAVBRUKER_HENTET når man har data fra før", () => {
         const initialState = deepFreeze({
             data: {
-                fnr: "12345689"
+                kontaktinfo: {
+                    fnr: "12345689",
+                }
             }
         });
         const action = {
@@ -51,7 +53,9 @@ describe('navbruker', () => {
             hentingFeilet: false,
             data: {
                 navn: "Kurt Nilsen",
-                fnr: "12345689"
+                kontaktinfo: {
+                    fnr: "12345689",
+                }
             }
         });
 
@@ -65,13 +69,15 @@ describe('navbruker', () => {
         });
         const action = {
             type: 'HENT_NAVBRUKER_FORESPURT',
-            fnr: "123456"
+            fnr: "123456",
         };
         const nextState = navbruker(initialState, action);
         expect(nextState).to.deep.equal({
             data: {
                 test: 1,
-                fnr: "123456"
+                kontaktinfo: {
+                    fnr: "123456",
+                },
             },
             henter: true,
             hentingFeilet: false,

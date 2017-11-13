@@ -8,12 +8,6 @@ const historikkMenypunkt = {
     menypunkt: menypunkter.HISTORIKK,
 };
 
-const naermesteLederMenypunkt = {
-    navn: 'Nærmeste leder',
-    sti: 'naermeste-leder',
-    menypunkt: menypunkter.NAERMESTE_LEDER,
-};
-
 const motemodulMenypunkt = {
     navn: 'Møteplanlegger',
     sti: 'mote',
@@ -103,7 +97,7 @@ class GlobalNavigasjon extends Component {
 
     render() {
         const { fnr, aktivtMenypunkt, oppgaver } = this.props;
-        this.menypunkter = [historikkMenypunkt, naermesteLederMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, motemodulMenypunkt, oppfoelgingsplanMenypunkt];
+        this.menypunkter = [historikkMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, motemodulMenypunkt, oppfoelgingsplanMenypunkt];
 
         return (<ul aria-label="Navigasjon" className="navigasjon">
         {

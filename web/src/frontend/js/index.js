@@ -6,6 +6,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import history from './history.js';
+import fastleger from './reducers/fastleger';
 import ledere from './reducers/ledere';
 import navbruker from './reducers/navbruker';
 import sykmeldinger from './reducers/sykmeldinger';
@@ -27,6 +28,8 @@ import arbeidstaker from './reducers/arbeidstaker';
 import enhet from './reducers/enhet';
 import virksomhet from './reducers/virksomhet';
 import veilederinfo from './reducers/veilederinfo';
+import diskresjonskode from './reducers/diskresjonskode';
+import egenansatt from './reducers/egenansatt';
 import rootSaga from './sagas/index';
 import { hentVeilederinfo } from './actions/veilederinfo_actions';
 import { hentBehandlendeEnhet } from './actions/behandlendeEnhet_actions';
@@ -39,6 +42,7 @@ import { opprettWebsocketConnection } from './contextHolder';
 
 const rootReducer = combineReducers({
     history,
+    fastleger,
     ledere,
     navbruker,
     modiacontext,
@@ -56,7 +60,9 @@ const rootReducer = combineReducers({
     sykmeldinger,
     arbeidsgiversSykmeldinger,
     behandlendeEnhet,
+    diskresjonskode,
     dokumentinfo,
+    egenansatt,
     veilederoppgaver,
     veilederinfo,
     ledetekster,

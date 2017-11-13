@@ -1,22 +1,24 @@
-const defualtState = {
+const defaultState = {
     data: {},
 };
 
-const navbruker = (state = defualtState, action = {}) => {
+const navbruker = (state = defaultState, action = {}) => {
     switch (action.type) {
         case 'NAVBRUKER_HENTET': {
-            return {
+            return Object.assign({
                 henter: false,
                 hentingFeilet: false,
                 data: Object.assign({}, state.data, action.data),
-            };
+            });
         }
         case 'HENT_NAVBRUKER_FORESPURT': {
             return Object.assign({
                 henter: true,
                 hentingFeilet: false,
                 data: Object.assign({}, state.data, {
-                    fnr: action.fnr,
+                    kontaktinfo: {
+                        fnr: action.fnr,
+                    },
                 }),
             });
         }

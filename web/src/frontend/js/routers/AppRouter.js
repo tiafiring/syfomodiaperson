@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { Router, Route } from 'react-router';
-import NaermesteLedereContainer from '../containers/NaermesteLedereContainer';
 import FeilsideContainer from '../containers/FeilsideContainer';
 import MotebookingContainer from '../containers/MotebookingContainer';
 import AvbrytMoteContainer from '../containers/AvbrytMoteContainer';
@@ -17,8 +16,8 @@ import HistorikkContainer from '../containers/HistorikkContainer';
 const AppRouter = ({ history }) => {
     return (<Router history={history}>
         <Route path="/sykefravaer" component={FeilsideContainer} />
-        <Route path="/sykefravaer/:fnr" component={NaermesteLedereContainer} />
-        <Route path="/sykefravaer/:fnr/naermeste-leder" component={NaermesteLedereContainer} />
+        <Route path="/sykefravaer/:fnr" component={HistorikkContainer} />
+        <Route path="/sykefravaer/:fnr/logg" component={HistorikkContainer} />
         <Route path="/sykefravaer/:fnr/mote" component={MotebookingContainer} />
         <Route path="/sykefravaer/:fnr/mote/:moteUuid/avbryt" component={AvbrytMoteContainer} />
         <Route path="/sykefravaer/:fnr/mote/bekreft/:alternativId" component={BekreftMoteContainer} />
@@ -30,7 +29,6 @@ const AppRouter = ({ history }) => {
         <Route path="/sykefravaer/:fnr/sykmeldinger/:sykmeldingId" component={DinSykmeldingContainer} />
         <Route path="/sykefravaer/:fnr/oppfoelgingsplaner" component={OppfoelgingsPlanerOversiktContainer} />
         <Route path="/sykefravaer/:fnr/oppfoelgingsplaner/:oppfoelgingsdialogId" component={OppfoelgingsplanContainer} />
-        <Route path="/sykefravaer/:fnr/logg" component={HistorikkContainer} />
         <Route path="/" component={FeilsideContainer} />
     </Router>);
 };

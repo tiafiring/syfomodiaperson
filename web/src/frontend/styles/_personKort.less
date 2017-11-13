@@ -1,0 +1,164 @@
+@skjermLiten: 38em;
+
+.personkort {
+  .utvidbar {
+    border: none;
+  }
+  ul {
+    padding: 0;
+    list-style-type: none;
+    margin-bottom: 3em;
+    li {
+      display: block;
+      margin-bottom: .5em;
+      @media all and(min-width: @skjermMedium) {
+        display: inline-block;
+        margin-bottom: 0;
+        padding-right: .5em;
+      }
+      button {
+        padding: 0;
+        background-color: transparent;
+        border: none;
+        text-transform: uppercase;
+        font-weight: 600;
+
+        &:hover, &.personkort__knapp--aktiv {
+          border-bottom: 0.25em @lenkeBlaa solid;
+        }
+      }
+      &:not(:last-child) {
+        margin-right: 1em;
+      }
+    }
+  }
+}
+
+.personkortTittel {
+  padding: 1em 0;
+  & > div {
+    display: flex;
+    &:first-child {
+      align-items: center;
+    }
+    &:not(:last-child) {
+      margin-bottom: 1em;
+    }
+  }
+  .personkortTittel__info {
+    h3 {
+      text-transform: uppercase;
+      margin: 0;
+    }
+    img, div {
+      display: inline-block;
+    }
+    img {
+      width: 2em;
+      height: auto;
+      margin-right: 1em;
+    }
+  }
+  .personkortTittel__etikker {
+    display: flex;
+    flex-direction: column;
+    @media all and(min-width: @skjermMedium) {
+      flex-direction: row;
+    }
+    & > div {
+      flex-grow: 1;
+      &:not(:last-child) {
+        margin-bottom: 1em;
+      }
+      @media all and(min-width: @skjermMedium) {
+        &:not(:last-child) {
+          margin-bottom: 0;
+          margin-right: 1em;
+        }
+      }
+    }
+  }
+}
+
+.personkort__feilmelding--ingenLeder {
+  color: @navRoed;
+  font-style: italic;
+}
+
+.personkortlement__rad {
+  display: flex;
+  flex-wrap: wrap;
+}
+.personkort__visning {
+  display: flex;
+  flex-direction: column;
+  @media all and(min-width: @skjermMedium) {
+    flex-direction: row;
+  }
+}
+.personkortElement {
+  width: 100%;
+  padding-right: 0;
+  @media all and(min-width: @skjermMedium) {
+    width: 50%;
+    padding-right: 2em;
+  }
+  &:nth-of-type(even) {
+    padding-right: 0;
+  }
+  p {
+    padding-right: 0;
+  }
+}
+
+.personkortElement__tittel {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+  padding-bottom: .5em;
+  border-bottom: 1px solid @ikonGraa;
+  img, h4 {
+    display: inline-block;
+  }
+  img {
+    width: 1.5em;
+    height: auto;
+    margin-right: .5em;
+  }
+  h4 {
+    margin: 0;
+  }
+}
+.personkortElementInformasjon {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  @media all and(min-width: @skjermMedium) {
+    flex-direction: row;
+  }
+  dl {
+    * {
+      margin: 0;
+    }
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    max-width: 50%;
+    margin: 0;
+    margin-bottom: 1em;
+    padding-right: 2em;
+    &:nth-of-type(even) {
+      padding-right: 0;
+    }
+    dt {
+      margin-bottom: .05em;
+      text-transform: uppercase;
+      font-family: Source Sans Pro,Arial,sans-serif;
+      font-size: .87em;
+      font-weight: 400;
+    }
+    dd {
+      margin-bottom: 1em;
+    }
+  }
+}

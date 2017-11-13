@@ -1,4 +1,5 @@
 import ledereSagas from './ledereSagas';
+import fastlegerSagas from './fastlegerSagas';
 import navbrukerSagas from './navbrukerSagas';
 import veilederoppgaverSagas from './veilederoppgaverSagas';
 import moterSagas from './moterSagas';
@@ -16,11 +17,14 @@ import behandlendeEnhetSagas from './behandlendeEnhetSagas';
 import dokumentInfoSagas from './dokumentInfoSagas';
 import virksomhetSagas from './virksomhetSagas';
 import veilederinfoSagas from './veilederinfoSagas';
+import diskresjonskodeSagas from './diskresjonskodeSagas';
+import egenansattSagas from './egenansattSagas';
 import { ledeteksterSagas } from 'digisyfo-npm';
 
 export default function * rootSaga() {
     yield [
         ledereSagas(),
+        fastlegerSagas(),
         navbrukerSagas(),
         moterSagas(),
         ledeteksterSagas(),
@@ -39,5 +43,7 @@ export default function * rootSaga() {
         behandlendeEnhetSagas(),
         dokumentInfoSagas(),
         veilederinfoSagas(),
+        diskresjonskodeSagas(),
+        egenansattSagas(),
     ];
 }
