@@ -12,7 +12,10 @@ describe("GlobalNavigasjonContainer", () => {
                     harTilgang: true,
                 },
             },
-        }
+            veilederoppgaver: {
+                data: [],
+            }
+        };
 
         it("Skal returnere fnr", () => {
             const props = mapStateToProps(state, {});
