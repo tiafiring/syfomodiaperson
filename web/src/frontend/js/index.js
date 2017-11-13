@@ -20,16 +20,17 @@ import historikk from './reducers/historikk';
 import sykeforloep from './reducers/sykeforloep';
 import sykepengesoknader from './reducers/sykepengesoknader';
 import oppfoelgingsdialoger from './reducers/oppfoelgingsdialoger';
+import veilederoppgaver from './reducers/veilederoppgaver';
 import arbeidstaker from './mote/reducers/arbeidstaker';
 import enhet from './mote/reducers/enhet';
 import virksomhet from './mote/reducers/virksomhet';
 import rootSaga from './sagas/index';
+import { hentVeilederOppgaver } from './actions/veilederoppgaver_actions';
 import { hentNavbruker } from './actions/navbruker_actions';
 import { hentLedere } from './actions/ledere_actions';
 import { pushModiaContext, hentAktivBruker, hentAktivEnhet } from './actions/modiacontext_actions';
 import { valgtEnhet } from './mote/actions/enhet_actions';
 import { opprettWebsocketConnection } from './contextHolder';
-import { finnMiljoStreng } from './utils/index';
 
 const rootReducer = combineReducers({
     history,
@@ -49,6 +50,7 @@ const rootReducer = combineReducers({
     tidslinjer,
     sykmeldinger,
     arbeidsgiversSykmeldinger,
+    veilederoppgaver,
     ledetekster,
     form: formReducer,
 });
@@ -94,6 +96,7 @@ const config = {
         },
     },
 };
+store.dispatch(hentVeilederOppgaver(fnr));
 store.dispatch(hentNavbruker(fnr));
 store.dispatch(hentLedere(fnr));
 store.dispatch(hentAktivBruker({

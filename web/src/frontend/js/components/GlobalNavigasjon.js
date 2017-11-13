@@ -26,7 +26,6 @@ const tidslinjeMenypunkt = {
     menypunkt: menypunkter.TIDSLINJEN,
 };
 
-
 const sykmeldingerMenypunkt = {
     navn: 'Sykmeldinger',
     sti: 'sykmeldinger',
@@ -103,8 +102,8 @@ class GlobalNavigasjon extends Component {
     }
 
     render() {
-        const { fnr, aktivtMenypunkt } = this.props;
-        this.menypunkter = [naermesteLederMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, motemodulMenypunkt];
+        const { fnr, aktivtMenypunkt, oppgaver } = this.props;
+        this.menypunkter = [historikkMenypunkt, naermesteLederMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, motemodulMenypunkt, oppfoelgingsplanMenypunkt];
 
         return (<ul aria-label="Navigasjon" className="navigasjon">
         {
@@ -113,7 +112,11 @@ class GlobalNavigasjon extends Component {
                 if (menypunkt === aktivtMenypunkt) {
                     className = `${className} navigasjonspanel--aktiv`;
                 }
-                return (<li key={index} className="navigasjon__element">
+                const antallOppgaver = oppgaver.filter((oppgave) => {
+                    return menypunkt === menypunkter.OPPFOELGINGSPLANER &&
+                        oppgave.type === 'SE_OPPFOLGINGSPLAN';
+                }).length;
+                return (<li key={index} className="navigasjon__element" style={{display: 'flex'}}>
                     <a ref={this.getRef(index)} className={className} onFocus={() => {
                         this.setFocusIndex(index);
                     }} onKeyDown={(e) => {
@@ -123,7 +126,12 @@ class GlobalNavigasjon extends Component {
                         // Dette gjøres slik for å slippe å laste siden på nytt.
                         // <Link /> fra react-router kan ikke brukes da den ikke støtter ref-attributtet.
                         browserHistory.push(`/sykefravaer/${fnr}/${sti}`);
-                    }} href={`/sykefravaer/${fnr}/${sti}`}>{navn}</a>
+                    }} href={`/sykefravaer/${fnr}/${sti}`}>
+                    <label style={{ flex: 1 }}>{navn}</label>
+                        {
+                            antallOppgaver > 0 && <label className="antallNytt">{antallOppgaver}</label>
+                        }
+                    </a>
                 </li>);
             })
         }
@@ -134,6 +142,7 @@ class GlobalNavigasjon extends Component {
 GlobalNavigasjon.propTypes = {
     fnr: PropTypes.string,
     aktivtMenypunkt: PropTypes.string,
+    oppgaver: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default GlobalNavigasjon;
