@@ -1,6 +1,6 @@
 import ledereSagas from './ledereSagas';
 import navbrukerSagas from './navbrukerSagas';
-import veilederOppgaverSagas from './veilederOppgaverSagas';
+import veilederoppgaverSagas from './veilederoppgaverSagas';
 import moterSagas from '../mote/sagas/moterSagas';
 import epostinnholdSagas from '../mote/sagas/epostinnholdSagas';
 import arbeidstakerSagas from '../mote/sagas/arbeidstakerSagas';
@@ -32,6 +32,6 @@ export default function * rootSaga() {
         arbeidsgiversSykmeldingerSagas(),
         sykeforloepSagas(),
         historikkSagas(),
-        veilederOppgaverSagas(),
+        veilederoppgaverSagas(),
     ];
 }

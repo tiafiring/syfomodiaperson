@@ -18,7 +18,7 @@ function* watchHentVeilederOppgaver() {
     yield* takeEvery(actiontype.HENT_VEILEDEROPPGAVER_FORESPURT, veilederOppgaverSaga);
 }
 
-export default function* veilederOppgaverSagas() {
+export default function* veilederoppgaverSagas() {
     yield [
         fork(watchHentVeilederOppgaver),
     ];
