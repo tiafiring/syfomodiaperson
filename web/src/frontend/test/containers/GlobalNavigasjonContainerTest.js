@@ -4,7 +4,6 @@ import { mapStateToProps } from '../../js/containers/GlobalNavigasjonContainer';
 describe("GlobalNavigasjonContainer", () => {
 
     describe("mapStateToProps", () => {
-
         const state = {
             navbruker: {
                 data: {

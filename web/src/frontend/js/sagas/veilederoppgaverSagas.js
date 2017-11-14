@@ -3,7 +3,6 @@ import { takeEvery } from 'redux-saga';
 import { get } from '../api/index';
 import * as actions from '../actions/veilederoppgaver_actions';
 import * as actiontype from '../actions/actiontyper';
-import { finnMiljoStreng } from './util';
 
 export function* veilederOppgaverSaga(action) {
     yield put(actions.henterVeilederOppgaver());
