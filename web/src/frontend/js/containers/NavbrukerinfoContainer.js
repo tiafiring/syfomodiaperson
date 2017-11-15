@@ -6,6 +6,7 @@ import * as navbrukerActions from '../actions/navbruker_actions';
 export function mapStateToProps(state) {
     return {
         navbruker: state.navbruker.data,
+        behandlendeEnhet: state.behandlendeEnhet.data,
     };
 }
 

@@ -3,26 +3,26 @@ import * as actiontype from '../actions/actiontyper';
 const initiellState = {
     henter: false,
     hentingFeilet: false,
-    data: [],
+    data: {},
 };
 
 export default function veilederoppgaver(state = initiellState, action) {
     switch (action.type) {
-        case actiontype.HENT_VEILEDEROPPGAVER_FEILET: {
+        case actiontype.HENT_BEHANDLENDE_ENHET_FEILET: {
             return Object.assign({}, state, {
-                data: [],
+                data: {},
                 henter: false,
                 hentingFeilet: true,
             });
         }
-        case actiontype.HENTER_VEILEDEROPPGAVER: {
+        case actiontype.HENTER_BEHANDLENDE_ENHET: {
             return {
-                data: [],
+                data: {},
                 henter: true,
                 hentingFeilet: false,
             };
         }
-        case actiontype.VEILEDEROPPGAVER_HENTET: {
+        case actiontype.BEHANDLENDE_ENHET_HENTET: {
             return {
                 henter: false,
                 hentingFeilet: false,

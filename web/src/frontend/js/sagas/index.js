@@ -12,6 +12,7 @@ import arbeidsgiversSykmeldingerSagas from './arbeidsgiversSykmeldingerSagas';
 import sykeforloepSagas from './sykeforloepSagas';
 import sykepengesoknaderSagas from './sykepengesoknaderSagas';
 import historikkSagas from './historikkSagas';
+import behandlendeEnhetSagas from './behandlendeEnhetSagas';
 import virksomhetSagas from '../mote/sagas/virksomhetSagas';
 import { ledeteksterSagas } from 'digisyfo-npm';
 
@@ -33,5 +34,6 @@ export default function * rootSaga() {
         sykeforloepSagas(),
         historikkSagas(),
         veilederoppgaverSagas(),
+        behandlendeEnhetSagas(),
     ];
 }
