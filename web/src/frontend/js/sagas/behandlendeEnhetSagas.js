@@ -6,7 +6,6 @@ import * as actiontype from '../actions/actiontyper';
 import { log } from 'digisyfo-npm';
 
 export function* hentBehandlendeEnhetSaga(action) {
-    console.log("her", action)
     yield put(actions.henterBehandlendeEnhet());
     try {
         const data = yield call(get, `${window.APP_SETTINGS.VEILEDEROPPGAVERREST_ROOT}/brukerinfo/${action.fnr}/behandlendeEnhet`);

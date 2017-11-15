@@ -9,7 +9,7 @@ const Infomelding = ({ tittel, melding}) => {
 
 Infomelding.propTypes = {
     tittel: PropTypes.string,
-    melding: PropTypes.object,
+    melding: PropTypes.string,
 };
 
 export default Infomelding;
