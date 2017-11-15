@@ -7,6 +7,7 @@ import * as oppdialogActions from '../actions/oppfoelgingsdialoger_actions';
 import Feilmelding from '../components/Feilmelding';
 import OppfoelgingsPlanerOversikt from '../components/oppfoelgingsdialoger/OppfoelgingsPlanerOversikt';
 import AppSpinner from '../components/AppSpinner';
+import IngenPlaner from '../components/oppfoelgingsdialoger/IngenPlaner';
 import { OPPFOELGINGSPLANER } from '../menypunkter';
 
 export class OppfoelgingsPlanerOversiktSide extends Component {
@@ -31,6 +32,9 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
                     }
                     if (hentingFeilet) {
                         return <Feilmelding />;
+                    }
+                    if (aktiveDialoger.length === 0 && inaktiveDialoger.length === 0) {
+                        return <IngenPlaner />
                     }
                     return (<div>
                         <OppfoelgingsPlanerOversikt aktiveDialoger={aktiveDialoger} inaktiveDialoger={inaktiveDialoger} ledetekster={ledetekster} fnr={fnr} />
