@@ -1,3 +1,5 @@
+import * as actiontype from '../actions/actiontyper';
+
 const defaultState = {
     data: [],
     ikkeTilgang: false,
@@ -7,28 +9,28 @@ const defaultState = {
 
 const ledere = (state = defaultState, action = {}) => {
     switch (action.type) {
-        case 'LEDERE_HENTET': {
+        case actiontype.LEDERE_HENTET: {
             return {
                 data: action.data,
                 henter: false,
                 hentingFeilet: false,
             };
         }
-        case 'HENTER_LEDERE': {
+        case actiontype.HENTER_LEDERE: {
             return {
                 henter: true,
                 hentingFeilet: false,
                 data: [],
             };
         }
-        case 'HENT_LEDERE_FEILET': {
+        case actiontype.HENT_LEDERE_FEILET: {
             return {
                 henter: false,
                 hentingFeilet: true,
                 data: [],
             };
         }
-        case 'HENT_LEDERE_IKKE_TILGANG': {
+        case actiontype.HENT_LEDERE_IKKE_TILGANG: {
             return {
                 henter: false,
                 hentingFeilet: false,
