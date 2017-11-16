@@ -26,12 +26,14 @@ class PlanVisning extends Component {
             bildeUrler.push(`${window.APP_SETTINGS.OPPFOELGINGSDIALOGREST_ROOT}/dokument/${oppfoelgingsdialog.id}/side/${i}`)
         }
         return (<div>
-            <div className="panel">
-                {
-                    bildeUrler.map((bildeUrl, index) => {
-                        return <img className="pdfbilde" key={index} src={bildeUrl} />
-                    })
-                }
+            <div className="blokk--s" style={{ borderBottom: '1px solid #b7b1a9' }}>
+                <div className="panel blokk--s">
+                    {
+                        bildeUrler.map((bildeUrl, index) => {
+                            return <img className="pdfbilde" key={index} src={bildeUrl} />
+                        })
+                    }
+                </div>
             </div>
             <div className="skjema__input blokk--l">
                 <input onClick={() => {
