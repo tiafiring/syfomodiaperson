@@ -10,6 +10,7 @@ import SykmeldingerContainer from '../containers/SykmeldingerContainer';
 import SykepengesoknaderContainer from '../containers/SykepengesoknaderContainer';
 import SykepengesoknadContainer from '../containers/SykepengesoknadContainer';
 import OppfoelgingsPlanerOversiktContainer from '../containers/OppfoelgingsPlanerOversiktContainer';
+import OppfoelgingsplanContainer from '../containers/OppfoelgingsplanContainer';
 import DinSykmeldingContainer from '../containers/DinSykmeldingContainer';
 import HistorikkContainer from '../containers/HistorikkContainer';
 
@@ -28,6 +29,7 @@ const AppRouter = ({ history }) => {
         <Route path="/sykefravaer/:fnr/sykepengesoknader/:sykepengesoknadId" component={SykepengesoknadContainer} />
         <Route path="/sykefravaer/:fnr/sykmeldinger/:sykmeldingId" component={DinSykmeldingContainer} />
         <Route path="/sykefravaer/:fnr/oppfoelgingsplaner" component={OppfoelgingsPlanerOversiktContainer} />
+        <Route path="/sykefravaer/:fnr/oppfoelgingsplaner/:oppfoelgingsdialogId" component={OppfoelgingsplanContainer} />
         <Route path="/sykefravaer/:fnr/historikk" component={HistorikkContainer} />
         <Route path="/" component={FeilsideContainer} />
     </Router>);

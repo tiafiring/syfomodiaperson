@@ -1,3 +1,5 @@
+import * as actiontype from '../actions/actiontyper';
+
 const initiellState = {
     henter: false,
     hentet: false,
@@ -9,7 +11,7 @@ const initiellState = {
 
 export default function oppfoelgingsdialoger(state = initiellState, action) {
     switch (action.type) {
-        case 'HENT_OPPFOELGINGSDIALOGER_FEILET': {
+        case actiontype.HENT_OPPFOELGINGSDIALOGER_FEILET: {
             return Object.assign({}, state, {
                 data: [],
                 hentet: true,
@@ -17,7 +19,7 @@ export default function oppfoelgingsdialoger(state = initiellState, action) {
                 hentingFeilet: true,
             });
         }
-        case 'HENTER_OPPFOELGINGSDIALOGER': {
+        case actiontype.HENTER_OPPFOELGINGSDIALOGER: {
             return Object.assign({}, state, {
                 data: [],
                 hentet: false,
@@ -25,7 +27,7 @@ export default function oppfoelgingsdialoger(state = initiellState, action) {
                 hentingFeilet: false,
             });
         }
-        case 'OPPFOELGINGSDIALOGER_HENTET': {
+        case actiontype.OPPFOELGINGSDIALOGER_HENTET: {
             return Object.assign({}, state, {
                 henter: false,
                 hentingFeilet: false,
@@ -33,7 +35,7 @@ export default function oppfoelgingsdialoger(state = initiellState, action) {
                 data: action.data,
             });
         }
-        case 'HENT_OPPFOELGINGSDIALOGER_IKKE_TILGANG': {
+        case actiontype.HENT_OPPFOELGINGSDIALOGER_IKKE_TILGANG: {
             return Object.assign({}, state, {
                 data: [],
                 hentet: true,

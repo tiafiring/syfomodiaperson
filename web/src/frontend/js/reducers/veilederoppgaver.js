@@ -29,6 +29,19 @@ export default function veilederoppgaver(state = initiellState, action) {
                 data: action.data,
             };
         }
+        case actiontype.OPPGAVE_BEHANDLET: {
+            const data = state.data.map((oppgave) => {
+                if (oppgave.id === action.id) {
+                    return Object.assign({}, oppgave, {
+                        status: action.oppgave.status || oppgave.status,
+                    });
+                }
+                return oppgave;
+            });
+            return {
+                data,
+            };
+        }
         default: {
             return state;
         }

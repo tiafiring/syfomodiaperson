@@ -21,6 +21,7 @@ import sykeforloep from './reducers/sykeforloep';
 import sykepengesoknader from './reducers/sykepengesoknader';
 import oppfoelgingsdialoger from './reducers/oppfoelgingsdialoger';
 import veilederoppgaver from './reducers/veilederoppgaver';
+import dokumentinfo from './reducers/dokumentinfo';
 import behandlendeEnhet from './reducers/behandlendeEnhet';
 import arbeidstaker from './mote/reducers/arbeidstaker';
 import enhet from './mote/reducers/enhet';
@@ -53,6 +54,7 @@ const rootReducer = combineReducers({
     sykmeldinger,
     arbeidsgiversSykmeldinger,
     behandlendeEnhet,
+    dokumentinfo,
     veilederoppgaver,
     ledetekster,
     form: formReducer,

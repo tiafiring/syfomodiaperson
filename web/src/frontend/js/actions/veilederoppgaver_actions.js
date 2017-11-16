@@ -25,3 +25,31 @@ export function hentVeilederOppgaver(fnr) {
         fnr,
     };
 }
+
+
+export function oppgaveBehandletFeilet() {
+    return {
+        type: actionstype.BEHANDLE_OPPGAVE_FEILET,
+    };
+}
+
+export function behandlerOppgave() {
+    return {
+        type: actionstype.BEHANDLER_OPPGAVE,
+    };
+}
+
+export function oppgaveBehandlet(id, oppgave) {
+    return {
+        type: actionstype.OPPGAVE_BEHANDLET,
+        id,
+        oppgave,
+    };
+}
+
+export function behandleOppgave(oppgave) {
+    return {
+        type: actionstype.BEHANDLE_OPPGAVE_FORESPURT,
+        oppgave,
+    };
+}

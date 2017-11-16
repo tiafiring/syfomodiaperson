@@ -2,6 +2,7 @@ import { call, put, fork } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import { get } from '../api/index';
 import * as actions from '../actions/oppfoelgingsdialoger_actions';
+import * as actiontype from '../actions/actiontyper';
 import { log } from 'digisyfo-npm';
 
 export function* hentOppfoelgingsdialoger(action) {
@@ -20,7 +21,7 @@ export function* hentOppfoelgingsdialoger(action) {
 }
 
 function* watchHentOppfoelgingsdialoger() {
-    yield* takeEvery('HENT_OPPFOELGINGSDIALOGER_FORESPURT', hentOppfoelgingsdialoger);
+    yield* takeEvery(actiontype.HENT_OPPFOELGINGSDIALOGER_FORESPURT, hentOppfoelgingsdialoger);
 }
 
 export default function* oppfoelgingsdialogerSagas() {

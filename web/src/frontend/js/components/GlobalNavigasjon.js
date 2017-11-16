@@ -114,7 +114,7 @@ class GlobalNavigasjon extends Component {
                 }
                 const antallOppgaver = oppgaver.filter((oppgave) => {
                     return menypunkt === menypunkter.OPPFOELGINGSPLANER &&
-                        oppgave.type === 'SE_OPPFOLGINGSPLAN';
+                        oppgave.type === 'SE_OPPFOLGINGSPLAN' && oppgave.status !== 'FERDIG';
                 }).length;
                 return (<li key={index} className="navigasjon__element" style={{display: 'flex'}}>
                     <a ref={this.getRef(index)} className={className} onFocus={() => {

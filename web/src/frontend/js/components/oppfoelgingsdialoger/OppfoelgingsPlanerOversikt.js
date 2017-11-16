@@ -19,7 +19,7 @@ const OppfoelgingsPlanerOversikt = ({ fnr, aktiveDialoger, inaktiveDialoger, led
             {
                 aktiveDialoger.map((aktivDialog, index) => {
                     return (<a key={index} className="panel navigasjonspanel"
-                        href={`/oppfoelgingsdialog-rest/api/oppfoelgingsdialog/v1/${fnr}/dokument/${aktivDialog.id}`}>
+                        href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${aktivDialog.id}`}>
                         <h3>{aktivDialog.virksomhetsnavn}</h3>
                         <p>{getLedetekst('fss.oppfoelgingsdialog.oversikt.deltmednav', ledetekster, {
                             '%DELT_MED_NAV_DATO%': toDatePrettyPrint(aktivDialog.godkjentPlan.deltMedNAVTidspunkt),
@@ -35,7 +35,7 @@ const OppfoelgingsPlanerOversikt = ({ fnr, aktiveDialoger, inaktiveDialoger, led
         {
             inaktiveDialoger.map((inaktivDialog, index) => {
                 return (<a key={index} className="panel navigasjonspanel"
-                    href={`/oppfoelgingsdialog-rest/api/oppfoelgingsdialog/v1/${fnr}/dokument/${inaktivDialog.id}`}>
+                    href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${inaktivDialog.id}`}>
                     <h3>{inaktivDialog.virksomhetsnavn}</h3>
                     <p>{getLedetekst('fss.oppfoelgingsdialog.oversikt.deltmednav', ledetekster, {
                         '%DELT_MED_NAV_DATO%': toDatePrettyPrint(inaktivDialog.godkjentPlan.deltMedNAVTidspunkt),
