@@ -1,6 +1,6 @@
 import { call, put, fork } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-import { httpPut, get } from '../api/index';
+import { post, get } from '../api/index';
 import * as actions from '../actions/veilederoppgaver_actions';
 import * as actiontype from '../actions/actiontyper';
 
@@ -21,7 +21,7 @@ function* watchHentVeilederOppgaver() {
 export function* behandleVeilederOppgaverSaga(action) {
     yield put(actions.behandlerOppgave());
     try {
-        const data = yield call(httpPut, `${window.APP_SETTINGS.VEILEDEROPPGAVERREST_ROOT}/veilederoppgaver/v1/actions`, action.oppgave);
+        const data = yield call(post, `${window.APP_SETTINGS.VEILEDEROPPGAVERREST_ROOT}/veilederoppgaver/v1/actions/oppdater`, action.oppgave);
         yield put(actions.oppgaveBehandlet(data, action.oppgave));
     } catch (e) {
         yield put(actions.oppgaveBehandletFeilet());

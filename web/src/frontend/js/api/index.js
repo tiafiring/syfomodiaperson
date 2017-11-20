@@ -36,38 +36,13 @@ export function post(url, body) {
             log(res);
             throw new Error('Forespørsel feilet');
         } else {
-            return res;
+            return res.json();
         }
     })
     .catch((err) => {
         log(err);
         throw err;
     });
-}
-
-
-export function httpPut(url, body) {
-    return fetch(url, {
-        credentials: 'include',
-        method: 'PUT',
-        body: JSON.stringify(body),
-        headers: {
-            'Content-Type': 'application/json',
-            NAV_CSRF_PROTECTION: getCookie('NAV_CSRF_PROTECTION'),
-        },
-    })
-        .then((res) => {
-            if (res.status > 400) {
-                log(res);
-                throw new Error('Forespørsel feilet');
-            } else {
-                return res.json();
-            }
-        })
-        .catch((err) => {
-            log(err);
-            throw err;
-        });
 }
 
 export function getWithoutThrows(url) {
