@@ -6,7 +6,7 @@ import MotestatusContainer from '../mote/containers/MotestatusContainer';
 import Feilmelding from '../components/Feilmelding';
 import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import AppSpinner from '../components/AppSpinner';
-import * as moterActions from '../mote/actions/moter_actions';
+import * as moterActions from '../actions/moter_actions';
 import { MOETEPLANLEGGER } from '../menypunkter';
 
 export class MotebookingSide extends Component {

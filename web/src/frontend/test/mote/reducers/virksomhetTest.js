@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import virksomhet from '../../../js/mote/reducers/virksomhet';
-import * as actions from '../../../js/mote/actions/virksomhet_actions';
+import virksomhet from '../../../js/reducers/virksomhet';
+import * as actions from '../../../js/actions/virksomhet_actions';
 import deepFreeze from 'deep-freeze';
 
 describe("virksomhet", () => {

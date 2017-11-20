@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import enhet from '../../../js/mote/reducers/enhet';
-import * as actions from '../../../js/mote/actions/enhet_actions';
+import enhet from '../../../js/reducers/enhet';
+import * as actions from '../../../js/actions/enhet_actions';
 import deepFreeze from 'deep-freeze';
 
 describe("enhet", () => {

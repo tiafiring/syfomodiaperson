@@ -1,6 +1,6 @@
 import * as actions from '../actions/actiontyper';
 import { konverterTid } from 'moter-npm';
-import { lagJsDate } from '../utils/index';
+import { lagJsDate } from '../mote/utils/index';
 
 const defaultState = {
     data: [],

@@ -3,8 +3,8 @@ import MotebookingSkjema from '../skjema/MotebookingSkjema';
 import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import { connect } from 'react-redux';
 import * as ledereActions from '../../actions/ledere_actions';
-import * as virksomhetActions from '../actions/virksomhet_actions';
-import * as arbeidstakerActions from '../actions/arbeidstaker_actions';
+import * as virksomhetActions from '../../actions/virksomhet_actions';
+import * as arbeidstakerActions from '../../actions/arbeidstaker_actions';
 import AppSpinner from '../../components/AppSpinner';
 import Feilmelding from '../../components/Feilmelding';
 

@@ -6,8 +6,8 @@ import {
     avbrytMoteUtenVarsel,
     bekreftMote,
     opprettFlereAlternativ
-} from "../../../js/mote/sagas/moterSagas.js";
-import * as actions from "../../../js/mote/actions/moter_actions";
+} from "../../../js/sagas/moterSagas.js";
+import * as actions from "../../../js/actions/moter_actions";
 import {post, get} from "../../../js/api/index";
 import {put, call} from "redux-saga/effects";
 import sinon from 'sinon';

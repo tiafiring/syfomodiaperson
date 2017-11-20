@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { konstanter, proptypes as moterPropTypes } from 'moter-npm';
 import { Utvidbar } from 'digisyfo-npm';
 import DropdownInnholdsviser from './DropdownInnholdsviser';
-import * as epostinnholdActions from '../actions/epostinnhold_actions';
-import * as arbeidsgiverepostinnholdActions from '../actions/arbeidsgiverepostinnhold_actions';
+import * as epostinnholdActions from '../../actions/epostinnhold_actions';
+import * as arbeidsgiverepostinnholdActions from '../../actions/arbeidsgiverepostinnhold_actions';
 const { BRUKER, ARBEIDSGIVER } = konstanter;
 
 export const mapStateToInnholdsviserProps = (state) => {

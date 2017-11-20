@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import * as oppdialogActions from '../actions/oppfoelgingsdialoger_actions';
+import * as virksomhetActions from '../actions/virksomhet_actions';
 import Feilmelding from '../components/Feilmelding';
 import OppfoelgingsPlanerOversikt from '../components/oppfoelgingsdialoger/OppfoelgingsPlanerOversikt';
 import AppSpinner from '../components/AppSpinner';
@@ -19,7 +20,7 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
     }
 
     render() {
-        const { aktiveDialoger, inaktiveDialoger, ledetekster, henter, hentingFeilet, ikkeTilgang, ikkeTilgangFeilmelding, fnr } = this.props;
+        const { actions, aktiveDialoger, inaktiveDialoger, ledetekster, henter, hentingFeilet, ikkeTilgang, ikkeTilgangFeilmelding, fnr } = this.props;
         return (<Side tittel="Oppfølgingsplaner" aktivtMenypunkt={OPPFOELGINGSPLANER}>
             {
                 (() => {
@@ -37,7 +38,7 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
                         return <IngenPlaner />
                     }
                     return (<div>
-                        <OppfoelgingsPlanerOversikt aktiveDialoger={aktiveDialoger} inaktiveDialoger={inaktiveDialoger} ledetekster={ledetekster} fnr={fnr} />
+                        <OppfoelgingsPlanerOversikt actions={actions} aktiveDialoger={aktiveDialoger} inaktiveDialoger={inaktiveDialoger} ledetekster={ledetekster} fnr={fnr} />
                     </div>);
                 })()
             }
@@ -60,7 +61,7 @@ OppfoelgingsPlanerOversiktSide.propTypes = {
 };
 
 export function mapDispatchToProps(dispatch) {
-    const actions = Object.assign({}, oppdialogActions);
+    const actions = Object.assign({}, oppdialogActions, virksomhetActions);
     return {
         actions: bindActionCreators(actions, dispatch),
     };

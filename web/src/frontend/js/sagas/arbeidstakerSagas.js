@@ -1,6 +1,6 @@
 import { call, put, fork } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-import { get } from '../../api/index';
+import { get } from '../api/index';
 import * as actions from '../actions/arbeidstaker_actions';
 import { HENT_ARBEIDSTAKER_FORESPURT } from '../actions/actiontyper';
 import { log } from 'digisyfo-npm';

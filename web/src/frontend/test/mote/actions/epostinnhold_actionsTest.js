@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import * as actions from '../../../js/mote/actions/epostinnhold_actions';
+import * as actions from '../../../js/actions/epostinnhold_actions';
 
 describe("epostinnhold_actions", () => {
 

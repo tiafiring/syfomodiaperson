@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import epostinnhold from '../../../js/mote/reducers/epostinnhold';
-import * as actions from '../../../js/mote/actions/epostinnhold_actions';
+import epostinnhold from '../../../js/reducers/epostinnhold';
+import * as actions from '../../../js/actions/epostinnhold_actions';
 import deepFreeze from 'deep-freeze';
 
 describe("epostinnhold", () => {

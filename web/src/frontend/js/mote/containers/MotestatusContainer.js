@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import * as arbeidstakerActions from '../actions/arbeidstaker_actions';
-import * as moteActions from '../actions/moter_actions';
+import * as arbeidstakerActions from '../../actions/arbeidstaker_actions';
+import * as moteActions from '../../actions/moter_actions';
 import MotebookingStatus from '../components/MotebookingStatus';
 import { fikkIkkeMoteOpprettetVarsel } from '../utils/index';
 

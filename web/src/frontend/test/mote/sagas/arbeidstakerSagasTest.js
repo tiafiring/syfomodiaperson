@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import { hentArbeidstaker } from '../../../js/mote/sagas/arbeidstakerSagas.js';
-import * as actions from '../../../js/mote/actions/arbeidstaker_actions.js';
+import { hentArbeidstaker } from '../../../js/sagas/arbeidstakerSagas.js';
+import * as actions from '../../../js/actions/arbeidstaker_actions.js';
 import { get } from '../../../js/api';
 import { put, call } from 'redux-saga/effects';
 

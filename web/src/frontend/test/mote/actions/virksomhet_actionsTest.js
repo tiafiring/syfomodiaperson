@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import * as actions from '../../../js/mote/actions/virksomhet_actions';
+import * as actions from '../../../js/actions/virksomhet_actions';
 
 describe("virksomhet_actions", () => {
 

@@ -12,7 +12,7 @@ const Brukerinfo = ({ navbruker, behandlendeEnhet }) => {
                     </div>
                     <div className="personopplysning" style={{ display: 'inline-block' }}>
                         <h3>Behandlende enhet:</h3>
-                        <p>{`${behandlendeEnhet.enhetId} - ${behandlendeEnhet.navn}`}</p>
+                        <p>{`${behandlendeEnhet.enhetId || ''} - ${behandlendeEnhet.navn || ''}`}</p>
                     </div>
                 </div>
             </div>

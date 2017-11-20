@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { Varselstripe, getLedetekst } from 'digisyfo-npm';
 import { proptypes as moterPropTypes } from 'moter-npm';
 import { connect } from 'react-redux';
-import * as epostinnholdActions from '../actions/epostinnhold_actions';
+import * as epostinnholdActions from '../../actions/epostinnhold_actions';
 import Innholdsviser from './Innholdsviser';
 import Epostmottakere from './Epostmottakere';
 

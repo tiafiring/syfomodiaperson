@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import * as actions from '../../../js/mote/actions/epostinnhold_actions';
-import { hentBekreftMoteEpostinnhold, hentAvbrytMoteEpostinnhold } from '../../../js/mote/sagas/epostinnholdSagas.js';
+import * as actions from '../../../js/actions/epostinnhold_actions';
+import { hentBekreftMoteEpostinnhold, hentAvbrytMoteEpostinnhold } from '../../../js/sagas/epostinnholdSagas.js';
 import { post, get } from '../../../js/api/index';
 import { put, call } from 'redux-saga/effects';
 

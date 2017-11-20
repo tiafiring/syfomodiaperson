@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import * as actions from '../../../js/mote/actions/virksomhet_actions';
-import { hentVirksomhet } from '../../../js/mote/sagas/virksomhetSagas';
+import * as actions from '../../../js/actions/virksomhet_actions';
+import { hentVirksomhet } from '../../../js/sagas/virksomhetSagas';
 import { get } from '../../../js/api/index';
 import { put, call } from 'redux-saga/effects';
 

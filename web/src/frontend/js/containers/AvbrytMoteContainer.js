@@ -5,8 +5,8 @@ import Feilmelding from '../components/Feilmelding';
 import Side from '../sider/Side';
 import AvbrytMote from '../mote/components/AvbrytMote';
 import history from '../history';
-import * as moterActions from '../mote/actions/moter_actions';
-import * as epostinnholdActions from '../mote/actions/epostinnhold_actions';
+import * as moterActions from '../actions/moter_actions';
+import * as epostinnholdActions from '../actions/epostinnhold_actions';
 import { connect } from 'react-redux';
 
 export class AvbrytMoteSide extends Component {

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import arbeidstaker from '../../../js/mote/reducers/arbeidstaker';
-import * as actions from '../../../js/mote/actions/arbeidstaker_actions';
+import arbeidstaker from '../../../js/reducers/arbeidstaker';
+import * as actions from '../../../js/actions/arbeidstaker_actions';
 import deepFreeze from 'deep-freeze';
 
 describe("arbeidstaker", () => {

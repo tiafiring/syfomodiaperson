@@ -35,6 +35,21 @@ export default function oppfoelgingsdialoger(state = initiellState, action) {
                 data: action.data,
             });
         }
+        case actiontype.VIRKSOMHET_HENTET: {
+            const data = state.data.map((dialog) => {
+                if (dialog.virksomhet.virksomhetsnummer === action.orgnummer) {
+                    return Object.assign({}, dialog, {
+                        virksomhet: Object.assign({}, dialog.virksomhet, {
+                            navn: action.data.navn,
+                        }),
+                    });
+                }
+                return dialog;
+            });
+            return Object.assign({}, state, {
+                data,
+            });
+        }
         case actiontype.HENT_OPPFOELGINGSDIALOGER_IKKE_TILGANG: {
             return Object.assign({}, state, {
                 data: [],

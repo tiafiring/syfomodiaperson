@@ -1,9 +1,9 @@
 import ledereSagas from './ledereSagas';
 import navbrukerSagas from './navbrukerSagas';
 import veilederoppgaverSagas from './veilederoppgaverSagas';
-import moterSagas from '../mote/sagas/moterSagas';
-import epostinnholdSagas from '../mote/sagas/epostinnholdSagas';
-import arbeidstakerSagas from '../mote/sagas/arbeidstakerSagas';
+import moterSagas from './moterSagas';
+import epostinnholdSagas from './epostinnholdSagas';
+import arbeidstakerSagas from './arbeidstakerSagas';
 import tidslinjerSagas from './tidslinjerSagas';
 import sykmeldingerSagas from './sykmeldingerSagas';
 import oppfoelgingsdialogerSagas from './oppfoelgingsdialogerSagas';
@@ -14,7 +14,7 @@ import sykepengesoknaderSagas from './sykepengesoknaderSagas';
 import historikkSagas from './historikkSagas';
 import behandlendeEnhetSagas from './behandlendeEnhetSagas';
 import dokumentInfoSagas from './dokumentInfoSagas';
-import virksomhetSagas from '../mote/sagas/virksomhetSagas';
+import virksomhetSagas from './virksomhetSagas';
 import { ledeteksterSagas } from 'digisyfo-npm';
 
 export default function * rootSaga() {
