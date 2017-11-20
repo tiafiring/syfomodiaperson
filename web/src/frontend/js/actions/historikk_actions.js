@@ -10,9 +10,9 @@ export function henterHistorikk(kilde) {
     };
 }
 
-export function hentHistorikk(fnr) {
+export function hentHistorikk(fnr, kilde) {
     return {
-        type: 'HENT_HISTORIKK_FORESPURT',
+        type: `HENT_HISTORIKK_${kilde}_FORESPURT`,
         fnr,
     };
 }

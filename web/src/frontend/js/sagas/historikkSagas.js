@@ -27,11 +27,11 @@ export function* hentHistorikkMoter(action) {
 }
 
 function* watchHentHistorikkOppfoelgingsdialog() {
-    yield* takeEvery('HENT_HISTORIKK_FORESPURT', hentHistorikkOppfoelgingsdialog);
+    yield* takeEvery('HENT_HISTORIKK_OPPFOELGINGSDIALOG_FORESPURT', hentHistorikkOppfoelgingsdialog);
 }
 
 function* watchHentHistorikkMoter() {
-    yield* takeEvery('HENT_HISTORIKK_FORESPURT', hentHistorikkMoter);
+    yield* takeEvery('HENT_HISTORIKK_MOTER_FORESPURT', hentHistorikkMoter);
 }
 
 export default function* historikkSagas() {

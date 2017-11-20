@@ -2,7 +2,9 @@ const defaultState = {
     data: [],
     hentingFeilet: false,
     henterMoter: false,
+    hentetMoter: false,
     henterOppfoelgingsdialoger: false,
+    hentetOppfoelgingsdialoger: false,
 };
 
 const historikk = (state = defaultState, action = {}) => {
@@ -15,6 +17,7 @@ const historikk = (state = defaultState, action = {}) => {
 
             return Object.assign({}, state, {
                 henterMoter: false,
+                hentetMoter: true,
                 data: state.data.concat(nyHistorikk),
             });
         }
@@ -25,6 +28,7 @@ const historikk = (state = defaultState, action = {}) => {
             });
             return Object.assign({}, state, {
                 henterOppfoelgingsdialoger: false,
+                hentetOppfoelgingsdialoger: true,
                 data: state.data.concat(nyHistorikk),
             });
         }
