@@ -20,6 +20,7 @@ const seOppfolgingsplanOppgave = (oppfoelgingsdialog) => {
 class PlanVisning extends Component {
     render() {
         const { oppfoelgingsdialog, dokumentinfo, fnr, actions } = this.props;
+
         const sePlanOppgave = seOppfolgingsplanOppgave(oppfoelgingsdialog);
         const bildeUrler = [];
         for (let i = 1; i <= dokumentinfo.antallSider; i++) {
@@ -37,8 +38,7 @@ class PlanVisning extends Component {
             </div>
             <div className="skjema__input blokk--l">
                 <input onClick={() => {
-                    actions.behandleOppgave({
-                        id: sePlanOppgave.id,
+                    actions.behandleOppgave(sePlanOppgave.id, {
                         status: 'FERDIG',
                     });
                 }} id="marker__utfoert" type="checkbox" className="checkboks" disabled={erOppgaveFullfoert(sePlanOppgave)} checked={erOppgaveFullfoert(sePlanOppgave)} />

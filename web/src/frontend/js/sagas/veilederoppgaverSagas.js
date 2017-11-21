@@ -21,7 +21,7 @@ function* watchHentVeilederOppgaver() {
 export function* behandleVeilederOppgaverSaga(action) {
     yield put(actions.behandlerOppgave());
     try {
-        const data = yield call(post, `${window.APP_SETTINGS.VEILEDEROPPGAVERREST_ROOT}/veilederoppgaver/v1/actions/oppdater`, action.oppgave);
+        const data = yield call(post, `${window.APP_SETTINGS.VEILEDEROPPGAVERREST_ROOT}/veilederoppgaver/v1/actions/${action.id}`, action.oppgave);
         yield put(actions.oppgaveBehandlet(data, action.oppgave));
     } catch (e) {
         yield put(actions.oppgaveBehandletFeilet());
