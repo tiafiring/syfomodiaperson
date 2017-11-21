@@ -36,6 +36,7 @@ class PlanVisning extends Component {
                     }
                 </div>
             </div>
+            { sePlanOppgave ?
             <div className="skjema__input blokk--l">
                 <input onClick={() => {
                     actions.behandleOppgave(sePlanOppgave.id, {
@@ -43,7 +44,8 @@ class PlanVisning extends Component {
                     });
                 }} id="marker__utfoert" type="checkbox" className="checkboks" disabled={erOppgaveFullfoert(sePlanOppgave)} checked={erOppgaveFullfoert(sePlanOppgave)} />
                 <label htmlFor="marker__utfoert">Marker som behandlet</label>
-            </div>
+            </div> : <p>Fant dessverre ingen oppgave knyttet til denne planen</p>
+            }
             <Link to={`/sykefravaer/${fnr}/oppfoelgingsplaner`}>
                 <button className="rammeknapp">Tilbake</button>
             </Link>
