@@ -51,7 +51,7 @@ export class OppfoelgingsPlanerOversikt extends Component {
                     return (<a key={index} className="panel navigasjonspanel" style={{ display: 'block' }}
                                href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${inaktivDialog.id}`}>
                         <h3>{inaktivDialog.virksomhet.navn}</h3>
-                        <p>{`Varighet ${toDatePrettyPrint(aktivDialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDatePrettyPrint(aktivDialog.godkjentPlan.gyldighetstidspunkt.tom)}`}</p>
+                        <p>{`Varighet ${toDatePrettyPrint(inaktivDialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDatePrettyPrint(inaktivDialog.godkjentPlan.gyldighetstidspunkt.tom)}`}</p>
                     </a>);
                 })
             }
