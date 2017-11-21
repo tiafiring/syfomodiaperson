@@ -116,7 +116,7 @@ class GlobalNavigasjon extends Component {
                     return menypunkt === menypunkter.OPPFOELGINGSPLANER &&
                         oppgave.type === 'SE_OPPFOLGINGSPLAN' && oppgave.status !== 'FERDIG';
                 }).length;
-                return (<li key={index} className="navigasjon__element" style={{display: 'flex'}}>
+                return (<li key={index} className="navigasjon__element" style={{ display: 'flex' }}>
                     <a ref={this.getRef(index)} className={className} onFocus={() => {
                         this.setFocusIndex(index);
                     }} onKeyDown={(e) => {

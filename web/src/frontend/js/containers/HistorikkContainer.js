@@ -13,7 +13,7 @@ import { HISTORIKK } from '../menypunkter';
 export class HistorikkSide extends Component {
     constructor(props) {
         super(props);
-        if(!props.historikk.henterMoter && !props.historikk.hentetMoter) {
+        if (!props.historikk.henterMoter && !props.historikk.hentetMoter) {
             props.actions.hentHistorikk(this.props.fnr, 'MOTER');
         }
         if (!props.historikk.henterOppfoelgingsdialoger && !props.historikk.henterOppfoelgingsdialoger) {
@@ -31,8 +31,9 @@ export class HistorikkSide extends Component {
                         return <AppSpinner />;
                     }
                     if (ikkeTilgang) {
-                        return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                               melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
+                        return (<Feilmelding
+                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
+                            melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
                     }
                     if (hentingFeilet) {
                         return <Feilmelding />;
