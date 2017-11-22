@@ -36,7 +36,11 @@ export function post(url, body) {
             log(res);
             throw new Error('Forespørsel feilet');
         } else {
-            return res.json();
+            const contentType = res.headers.get('Content-Type') || '';
+            if (contentType.includes('json')) {
+                return res.json();
+            }
+            return res;
         }
     })
     .catch((err) => {

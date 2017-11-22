@@ -140,6 +140,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.renderDecoratorHead && window.renderDecoratorHead(config);
 });
 
+if (window.location.hostname.indexOf('localhost') !== -1) {
+    store.dispatch(valgtEnhet('0219'));
+}
+
 opprettWebsocketConnection((wsCallback) => {
     if (wsCallback.data === 'NY_AKTIV_BRUKER') {
         store.dispatch(hentAktivBruker({
