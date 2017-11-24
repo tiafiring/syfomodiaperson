@@ -15,6 +15,7 @@ import historikkSagas from './historikkSagas';
 import behandlendeEnhetSagas from './behandlendeEnhetSagas';
 import dokumentInfoSagas from './dokumentInfoSagas';
 import virksomhetSagas from './virksomhetSagas';
+import veilederinfoSagas from './veilederinfoSagas';
 import { ledeteksterSagas } from 'digisyfo-npm';
 
 export default function * rootSaga() {
@@ -37,5 +38,6 @@ export default function * rootSaga() {
         veilederoppgaverSagas(),
         behandlendeEnhetSagas(),
         dokumentInfoSagas(),
+        veilederinfoSagas(),
     ];
 }

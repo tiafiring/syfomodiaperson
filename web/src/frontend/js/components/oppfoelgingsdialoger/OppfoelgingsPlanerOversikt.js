@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { getLedetekst, toDatePrettyPrint, Varselstripe } from 'digisyfo-npm';
+import { Link } from 'react-router';
 
 const finnAntallOppgaver = (dialog) => {
     return dialog.oppgaver.filter((oppgave) => {
@@ -39,15 +40,15 @@ export class OppfoelgingsPlanerOversikt extends Component {
                     <p>{getLedetekst('fss.oppfoelgingsdialog.oversikt.aktuelle--ingen')}</p>
                 </Varselstripe></div>}
                 {
-                    aktiveDialoger.map((aktivDialog, index) => {
-                        return (<a key={index} className="panel navigasjonspanel"
-                            href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${aktivDialog.id}`}>
+                    aktiveDialoger.map((dialog, index) => {
+                        const antallOppgaver = finnAntallOppgaver(dialog);
+                        return (<Link key={index} className="panel navigasjonspanel" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
                             <div className="navigasjonselement">
-                                <h3>{aktivDialog.virksomhet.navn}</h3>
-                                <p>{`Varighet ${toDatePrettyPrint(aktivDialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDatePrettyPrint(aktivDialog.godkjentPlan.gyldighetstidspunkt.tom)}`}</p>
+                                <h3>{dialog.virksomhet.navn}</h3>
+                                <p>{`Varighet ${toDatePrettyPrint(dialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDatePrettyPrint(dialog.godkjentPlan.gyldighetstidspunkt.tom)}`}</p>
                             </div>
-                            <label className="antallNytt" style={{ marginTop: '30px', marginBottom: '30px' }}>{finnAntallOppgaver(aktivDialog)}</label>
-                        </a>);
+                            { antallOppgaver > 0 && <label className="antallNytt" style={{ marginTop: '30px', marginBottom: '30px' }}>{finnAntallOppgaver(dialog)}</label> }
+                        </Link>);
                     })
                 }
             </div>
@@ -56,14 +57,15 @@ export class OppfoelgingsPlanerOversikt extends Component {
                 <p>{getLedetekst('fss.oppfoelgingsdialog.oversikt.inaktive--ingen')}</p>
             </Varselstripe></div>}
             {
-                inaktiveDialoger.map((inaktivDialog, index) => {
-                    return (<a key={index} className="panel navigasjonspanel" href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${inaktivDialog.id}`}>
+                inaktiveDialoger.map((dialog, index) => {
+                    const antallOppgaver = finnAntallOppgaver(dialog);
+                    return (<Link key={index} className="panel navigasjonspanel" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
                         <div className="navigasjonselement">
-                            <h3>{inaktivDialog.virksomhet.navn}</h3>
-                            <p>{`Varighet ${toDatePrettyPrint(inaktivDialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDatePrettyPrint(inaktivDialog.godkjentPlan.gyldighetstidspunkt.tom)}`}</p>
+                            <h3>{dialog.virksomhet.navn}</h3>
+                            <p>{`Varighet ${toDatePrettyPrint(dialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDatePrettyPrint(dialog.godkjentPlan.gyldighetstidspunkt.tom)}`}</p>
                         </div>
-                        <label className="antallNytt" style={{ marginTop: '30px', marginBottom: '30px' }}>{finnAntallOppgaver(inaktivDialog)}</label>
-                    </a>);
+                        { antallOppgaver > 0 && <label className="antallNytt" style={{ marginTop: '30px', marginBottom: '30px' }}>{finnAntallOppgaver(dialog)}</label> }
+                    </Link>);
                 })
             }
         </div>);

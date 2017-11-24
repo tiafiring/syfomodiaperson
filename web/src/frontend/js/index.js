@@ -26,7 +26,9 @@ import behandlendeEnhet from './reducers/behandlendeEnhet';
 import arbeidstaker from './reducers/arbeidstaker';
 import enhet from './reducers/enhet';
 import virksomhet from './reducers/virksomhet';
+import veilederinfo from './reducers/veilederinfo';
 import rootSaga from './sagas/index';
+import { hentVeilederinfo } from './actions/veilederinfo_actions';
 import { hentBehandlendeEnhet } from './actions/behandlendeEnhet_actions';
 import { hentVeilederOppgaver } from './actions/veilederoppgaver_actions';
 import { hentNavbruker } from './actions/navbruker_actions';
@@ -56,6 +58,7 @@ const rootReducer = combineReducers({
     behandlendeEnhet,
     dokumentinfo,
     veilederoppgaver,
+    veilederinfo,
     ledetekster,
     form: formReducer,
 });
@@ -101,6 +104,7 @@ const config = {
         },
     },
 };
+store.dispatch(hentVeilederinfo());
 store.dispatch(hentBehandlendeEnhet(fnr));
 store.dispatch(hentVeilederOppgaver(fnr));
 store.dispatch(hentNavbruker(fnr));

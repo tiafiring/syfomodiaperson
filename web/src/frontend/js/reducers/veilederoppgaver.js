@@ -16,31 +16,33 @@ export default function veilederoppgaver(state = initiellState, action) {
             });
         }
         case actiontype.HENTER_VEILEDEROPPGAVER: {
-            return {
+            return Object.assign({}, state, {
                 data: [],
                 henter: true,
                 hentingFeilet: false,
-            };
+            });
         }
         case actiontype.VEILEDEROPPGAVER_HENTET: {
-            return {
+            return Object.assign({}, state, {
                 henter: false,
                 hentingFeilet: false,
                 data: action.data,
-            };
+            });
         }
         case actiontype.OPPGAVE_BEHANDLET: {
             const data = state.data.map((oppgave) => {
                 if (oppgave.id === action.id) {
                     return Object.assign({}, oppgave, {
-                        status: action.oppgave.status || oppgave.status,
+                        status: action.oppgave.status,
+                        sistEndretAv: action.oppgave.sistEndretAv,
+                        sistEndret: new Date(),
                     });
                 }
                 return oppgave;
             });
-            return {
+            return Object.assign({}, state, {
                 data,
-            };
+            });
         }
         default: {
             return state;

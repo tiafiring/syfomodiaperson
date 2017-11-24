@@ -6,6 +6,7 @@ import * as dokumentActions from '../../actions/dokumentinfo_actions';
 import * as veilederoppgaverActions from '../../actions/veilederoppgaver_actions';
 import Feilmelding from '../../components/Feilmelding';
 import AppSpinner from '../../components/AppSpinner';
+import { toDatePrettyPrint } from 'digisyfo-npm';
 
 const erOppgaveFullfoert = (oppgave) => {
     return oppgave.status === 'FERDIG';
@@ -17,7 +18,7 @@ const seOppfolgingsplanOppgave = (oppfoelgingsdialog) => {
     })[0];
 };
 
-const PlanVisning = ({ oppfoelgingsdialog, dokumentinfo, fnr, actions }) => {
+const PlanVisning = ({ oppfoelgingsdialog, dokumentinfo, fnr, actions, veilederinfo }) => {
     const sePlanOppgave = seOppfolgingsplanOppgave(oppfoelgingsdialog);
     const bildeUrler = [];
     for (let i = 1; i <= dokumentinfo.antallSider; i++) {
@@ -38,9 +39,10 @@ const PlanVisning = ({ oppfoelgingsdialog, dokumentinfo, fnr, actions }) => {
                 <input onClick={() => {
                     actions.behandleOppgave(sePlanOppgave.id, {
                         status: 'FERDIG',
+                        sistEndretAv: veilederinfo.ident,
                     });
                 }} id="marker__utfoert" type="checkbox" className="checkboks" disabled={erOppgaveFullfoert(sePlanOppgave)} checked={erOppgaveFullfoert(sePlanOppgave)} />
-                <label htmlFor="marker__utfoert">Marker som behandlet</label>
+                <label htmlFor="marker__utfoert">{ sePlanOppgave.status === 'FERDIG' ? `Ferdig behandlet av ${sePlanOppgave.sistEndretAv} ${toDatePrettyPrint(sePlanOppgave.sistEndret)}` : 'Marker som behandlet' }</label>
             </div> : <p>Fant dessverre ingen oppgave knyttet til denne planen</p>
         }
         <Link to={`/sykefravaer/${fnr}/oppfoelgingsplaner`}>
@@ -55,6 +57,7 @@ const PlanVisning = ({ oppfoelgingsdialog, dokumentinfo, fnr, actions }) => {
 
 PlanVisning.propTypes = {
     oppfoelgingsdialog: PropTypes.object,
+    veilederinfo: PropTypes.object,
     dokumentinfo: PropTypes.object,
     actions: PropTypes.object,
     fnr: PropTypes.string,
@@ -68,7 +71,7 @@ class OppfoelgingsplanWrapper extends Component {
     }
 
     render() {
-        const { dokumentinfo, oppfoelgingsdialog, fnr, henter, hentingFeilet, actions } = this.props;
+        const { dokumentinfo, oppfoelgingsdialog, fnr, henter, hentingFeilet, actions, veilederinfo } = this.props;
         return (() => {
             if (henter) {
                 return <AppSpinner />;
@@ -77,7 +80,7 @@ class OppfoelgingsplanWrapper extends Component {
                 return <Feilmelding />;
             }
             return (<div>
-                <PlanVisning oppfoelgingsdialog={oppfoelgingsdialog} dokumentinfo={dokumentinfo} fnr={fnr} actions={actions} />
+                <PlanVisning veilederinfo={veilederinfo} oppfoelgingsdialog={oppfoelgingsdialog} dokumentinfo={dokumentinfo} fnr={fnr} actions={actions} />
             </div>);
         })();
     }
@@ -87,6 +90,7 @@ OppfoelgingsplanWrapper.propTypes = {
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     oppfoelgingsdialog: PropTypes.object,
+    veilederinfo: PropTypes.object,
     actions: PropTypes.object,
     dokumentinfo: PropTypes.object,
     fnr: PropTypes.string,
@@ -106,14 +110,17 @@ export function mapStateToProps(state, ownProps) {
             return _oppgave.id === oppgave.id;
         })[0];
     });
+    const veilederinfo = state.veilederinfo.data;
     return {
         henter: state.dokumentinfo.henter || state.veilederoppgaver.henter,
         hentingFeilet: state.dokumentinfo.hentingFeilet,
         dokumentinfo: state.dokumentinfo.data,
         brukernavn: state.navbruker.data.navn,
         oppfoelgingsdialog,
+        veilederinfo,
         ledetekster: state.ledetekster.data,
         fnr: ownProps.fnr,
+        veilderoppgaver: state.veilederoppgaver.data,
     };
 }
 

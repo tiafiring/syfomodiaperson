@@ -85,7 +85,6 @@ export function mapStateToProps(state) {
     const aktiveDialoger = oppfoelgingsdialoger.filter((dialog) => {
         return dialog.status !== 'AVBRUTT' && new Date(dialog.godkjentPlan.gyldighetstidspunkt.tom) > new Date();
     });
-
     const inaktiveDialoger = [];
     oppfoelgingsdialoger.forEach((dialog) => {
         if (!aktiveDialoger.includes(dialog)) {
@@ -100,6 +99,7 @@ export function mapStateToProps(state) {
         hentetDialoger,
         henterDialoger,
         ledetekster: state.ledetekster.data,
+        veilederoppgaver: state.veilederoppgaver.data,
         inaktiveDialoger,
         aktiveDialoger,
         ikkeTilgang: state.ledere.ikkeTilgang,

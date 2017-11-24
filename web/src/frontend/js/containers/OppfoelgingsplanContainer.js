@@ -64,7 +64,7 @@ export function mapDispatchToProps(dispatch) {
 export function mapStateToProps(state, ownProps) {
     const id = parseInt(ownProps.params.oppfoelgingsdialogId, 10);
     const fnr = state.navbruker.data.fnr;
-    const henter = state.oppfoelgingsdialoger.henter || state.ledetekster.henter || state.ledere.henter;
+    const henter = state.oppfoelgingsdialoger.henter || state.ledetekster.henter || state.ledere.henter || state.veilederinfo.henter;
     const hentingFeilet = state.oppfoelgingsdialoger.hentingFeilet || state.ledetekster.hentingFeilet || state.ledere.hentingFeilet;
     const hentetDialoger = state.oppfoelgingsdialoger.hentet;
     const henterDialoger = state.oppfoelgingsdialoger.henter;
