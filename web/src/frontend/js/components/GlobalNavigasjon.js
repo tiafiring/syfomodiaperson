@@ -3,8 +3,8 @@ import { browserHistory } from 'react-router';
 import * as menypunkter from '../menypunkter';
 
 const historikkMenypunkt = {
-    navn: 'Historikk',
-    sti: 'historikk',
+    navn: 'Logg',
+    sti: 'logg',
     menypunkt: menypunkter.HISTORIKK,
 };
 

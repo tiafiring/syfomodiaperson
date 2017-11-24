@@ -30,7 +30,7 @@ const AppRouter = ({ history }) => {
         <Route path="/sykefravaer/:fnr/sykmeldinger/:sykmeldingId" component={DinSykmeldingContainer} />
         <Route path="/sykefravaer/:fnr/oppfoelgingsplaner" component={OppfoelgingsPlanerOversiktContainer} />
         <Route path="/sykefravaer/:fnr/oppfoelgingsplaner/:oppfoelgingsdialogId" component={OppfoelgingsplanContainer} />
-        <Route path="/sykefravaer/:fnr/historikk" component={HistorikkContainer} />
+        <Route path="/sykefravaer/:fnr/logg" component={HistorikkContainer} />
         <Route path="/" component={FeilsideContainer} />
     </Router>);
 };

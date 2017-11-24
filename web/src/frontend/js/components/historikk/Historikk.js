@@ -12,7 +12,7 @@ const Historikk = ({ historikk, sykeforloep }) => {
 
     return (<div>
         <div className="panel">
-            <h1 style={{ margin: 0 }}>Historikk</h1>
+            <h1 style={{ margin: 0 }}>Logg</h1>
         </div>
         <div>
             {

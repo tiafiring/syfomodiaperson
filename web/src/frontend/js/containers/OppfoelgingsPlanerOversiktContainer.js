@@ -74,12 +74,20 @@ export function mapStateToProps(state) {
     const hentetDialoger = state.oppfoelgingsdialoger.hentet;
     const henterDialoger = state.oppfoelgingsdialoger.henter;
 
-    const aktiveDialoger = state.oppfoelgingsdialoger.data.filter((dialog) => {
+    const oppfoelgingsdialoger = state.oppfoelgingsdialoger.data.map((dialog) => {
+        dialog.oppgaver = dialog.oppgaver.map((oppgave) => {
+            return state.veilederoppgaver.data.filter((_oppgave) => {
+                return _oppgave.id === oppgave.id;
+            })[0] || oppgave;
+        });
+        return dialog;
+    });
+    const aktiveDialoger = oppfoelgingsdialoger.filter((dialog) => {
         return dialog.status !== 'AVBRUTT' && new Date(dialog.godkjentPlan.gyldighetstidspunkt.tom) > new Date();
     });
 
     const inaktiveDialoger = [];
-    state.oppfoelgingsdialoger.data.forEach((dialog) => {
+    oppfoelgingsdialoger.forEach((dialog) => {
         if (!aktiveDialoger.includes(dialog)) {
             inaktiveDialoger.push(dialog);
         }

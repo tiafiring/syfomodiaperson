@@ -1,6 +1,12 @@
 import React, { PropTypes, Component } from 'react';
 import { getLedetekst, toDatePrettyPrint, Varselstripe } from 'digisyfo-npm';
 
+const finnAntallOppgaver = (dialog) => {
+    return dialog.oppgaver.filter((oppgave) => {
+        return oppgave.type === 'SE_OPPFOLGINGSPLAN' && status !== 'FERDIG';
+    }).length;
+};
+
 export class OppfoelgingsPlanerOversikt extends Component {
     componentWillMount() {
         const { actions, aktiveDialoger, inaktiveDialoger } = this.props;
@@ -34,10 +40,13 @@ export class OppfoelgingsPlanerOversikt extends Component {
                 </Varselstripe></div>}
                 {
                     aktiveDialoger.map((aktivDialog, index) => {
-                        return (<a key={index} className="panel navigasjonspanel" style={{ display: 'block' }}
+                        return (<a key={index} className="panel navigasjonspanel"
                             href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${aktivDialog.id}`}>
-                            <h3>{aktivDialog.virksomhet.navn}</h3>
-                            <p>{`Varighet ${toDatePrettyPrint(aktivDialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDatePrettyPrint(aktivDialog.godkjentPlan.gyldighetstidspunkt.tom)}`}</p>
+                            <div className="navigasjonselement">
+                                <h3>{aktivDialog.virksomhet.navn}</h3>
+                                <p>{`Varighet ${toDatePrettyPrint(aktivDialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDatePrettyPrint(aktivDialog.godkjentPlan.gyldighetstidspunkt.tom)}`}</p>
+                            </div>
+                            <label className="antallNytt" style={{ marginTop: '30px', marginBottom: '30px' }}>{finnAntallOppgaver(aktivDialog)}</label>
                         </a>);
                     })
                 }
@@ -48,9 +57,12 @@ export class OppfoelgingsPlanerOversikt extends Component {
             </Varselstripe></div>}
             {
                 inaktiveDialoger.map((inaktivDialog, index) => {
-                    return (<a key={index} className="panel navigasjonspanel" style={{ display: 'block' }} href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${inaktivDialog.id}`}>
-                        <h3>{inaktivDialog.virksomhet.navn}</h3>
-                        <p>{`Varighet ${toDatePrettyPrint(inaktivDialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDatePrettyPrint(inaktivDialog.godkjentPlan.gyldighetstidspunkt.tom)}`}</p>
+                    return (<a key={index} className="panel navigasjonspanel" href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${inaktivDialog.id}`}>
+                        <div className="navigasjonselement">
+                            <h3>{inaktivDialog.virksomhet.navn}</h3>
+                            <p>{`Varighet ${toDatePrettyPrint(inaktivDialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDatePrettyPrint(inaktivDialog.godkjentPlan.gyldighetstidspunkt.tom)}`}</p>
+                        </div>
+                        <label className="antallNytt" style={{ marginTop: '30px', marginBottom: '30px' }}>{finnAntallOppgaver(inaktivDialog)}</label>
                     </a>);
                 })
             }
