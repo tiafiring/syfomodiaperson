@@ -3,8 +3,13 @@ import HistorikkEvent from './HistorikkEvent';
 import { toDatePrettyPrint } from 'digisyfo-npm';
 import { Varselstripe } from 'digisyfo-npm';
 import AppSpinner from '../AppSpinner';
+import IngenHistorikk from './IngenHistorikk';
 
 const Historikk = ({ historikk, sykeforloep }) => {
+    if (historikk.hentetMoter && historikk.hentetOppfoelgingsdialoger && historikk.data.length === 0) {
+        return <IngenHistorikk />;
+    }
+
     return (<div>
         <div className="panel">
             <h1 style={{ margin: 0 }}>Historikk</h1>

@@ -29,13 +29,11 @@ export class HistorikkSide extends Component {
                 (() => {
                     if (henter) {
                         return <AppSpinner />;
-                    }
-                    if (ikkeTilgang) {
+                    } else if (ikkeTilgang) {
                         return (<Feilmelding
                             tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
                             melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
-                    }
-                    if (hentingFeilet) {
+                    } else if (hentingFeilet) {
                         return <Feilmelding />;
                     }
                     return <Historikk sykeforloep={sykeforloep} historikk={historikk} />;
