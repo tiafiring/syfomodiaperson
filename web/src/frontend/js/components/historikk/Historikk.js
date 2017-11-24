@@ -6,7 +6,7 @@ import AppSpinner from '../AppSpinner';
 import IngenHistorikk from './IngenHistorikk';
 
 const Historikk = ({ historikk, sykeforloep }) => {
-    if (historikk.hentetMoter && historikk.hentetOppfoelgingsdialoger && historikk.data.length === 0) {
+    if (sykeforloep.length === 0 || (historikk.hentetMoter && historikk.hentetOppfoelgingsdialoger && historikk.data.length === 0)) {
         return <IngenHistorikk />;
     }
 
