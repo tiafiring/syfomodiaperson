@@ -14,7 +14,7 @@ export class MotebookingSkjemaContainer extends Component {
         hentArbeidstaker(fnr);
     }
     render() {
-        const { ledetekster, henter, skjermetBruker, hentingFeilet, valgtEnhet } = this.props;
+        const { ledetekster, henter, skjermetBruker, hentingFeilet, valgtEnhet, ledere } = this.props;
 
         if (henter) {
             return <AppSpinner />;
@@ -24,10 +24,14 @@ export class MotebookingSkjemaContainer extends Component {
                 melding={getHtmlLedetekst('mote.motebookingskjemacontainer.melding', ledetekster)} />);
         } else if (hentingFeilet) {
             return <Feilmelding />;
-        } if (!valgtEnhet) {
+        } else if (!valgtEnhet) {
             return (<Feilmelding
                 tittel="Du må velge Enhet"
                 melding={{ __html: '<p>For at du skal kunne opprette et møte må du velge hvilken enhet dette møtet skal knyttes til. Det styres av hvilken enhet du har valgt i toppmenyen.</p>' }} />);
+        } else if (ledere.length === 0) {
+            return (<Feilmelding
+                tittel="Ingen nærmeste ledere meldt inn"
+                melding={{ __html: '<p>Det må være meldt inn nærmeste leder for at vi kan kalle inn til et dialogmøte. Arbeidsgiver må melde inn hvem som er nærmeste leder i Altinn.</p>' }} />);
         }
         return <MotebookingSkjema {...this.props} />;
     }
@@ -42,6 +46,7 @@ MotebookingSkjemaContainer.propTypes = {
     skjermetBruker: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     ledetekster: PropTypes.object,
+    ledere: PropTypes.array,
 };
 
 export function mapStateToProps(state) {

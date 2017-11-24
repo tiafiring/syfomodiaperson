@@ -2,7 +2,6 @@ import React, { PropTypes, Component } from 'react';
 import { Field } from 'redux-form';
 import TextField from '../../components/TextField';
 import TextFieldLocked from '../../components/TextFieldLocked';
-import FyllUtVirksomhet from './FyllUtVirksomhet';
 import ArbeidsgiverDropdown from './ArbeidsgiverDropdown';
 import { getLedetekst } from 'digisyfo-npm';
 
@@ -32,17 +31,6 @@ PreutfyltLeder.propTypes = {
     ledetekster: PropTypes.object,
 };
 
-export const ManuellUtfyltLeder = ({ ledetekster }) => {
-    return (<div>
-        <FyllUtLeder ledetekster={ledetekster} />
-        <FyllUtVirksomhet ledetekster={ledetekster} />
-    </div>);
-};
-
-ManuellUtfyltLeder.propTypes = {
-    ledetekster: PropTypes.object,
-};
-
 export default class LederFields extends Component {
     componentDidUpdate(prevProps) {
         const valgtArbeidsgiverType = this.props.arbeidsgiverType.input.value;
@@ -53,12 +41,9 @@ export default class LederFields extends Component {
     }
 
     setLederfelter(valgtArbeidsgiverType) {
-        const { ledere, untouch } = this.props;
+        const { ledere } = this.props;
         if (valgtArbeidsgiverType === 'VELG') {
             this.fyllUtLederfelter();
-        } else if (valgtArbeidsgiverType === 'manuell') {
-            this.fyllUtLederfelter();
-            untouch('deltakere[0].navn', 'deltakere[0].epost', 'deltakere[0].orgnummer');
         } else {
             const leder = ledere.filter((l) => {
                 return `${l.id}` === valgtArbeidsgiverType;
@@ -81,8 +66,7 @@ export default class LederFields extends Component {
 
         return (<div>
             <ArbeidsgiverDropdown {...arbeidsgiverType} ledere={this.props.ledere} ledetekster={ledetekster} />
-            { visInputfelter && value !== 'manuell' && <PreutfyltLeder ledetekster={ledetekster} />}
-            { visInputfelter && value === 'manuell' && <ManuellUtfyltLeder ledetekster={ledetekster} />}
+            { visInputfelter && <PreutfyltLeder ledetekster={ledetekster} />}
         </div>);
     }
 }
@@ -94,6 +78,5 @@ LederFields.propTypes = {
     autofill: PropTypes.func,
     virksomhet: PropTypes.object,
     ledetekster: PropTypes.object,
-    untouch: PropTypes.func,
     ledere: PropTypes.array,
 };

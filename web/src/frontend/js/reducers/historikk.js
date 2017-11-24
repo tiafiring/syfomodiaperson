@@ -11,8 +11,9 @@ const historikk = (state = defaultState, action = {}) => {
     switch (action.type) {
         case 'HISTORIKK_HENTET_MOTER': {
             const nyHistorikk = action.data.map((event) => {
-                event.kilde = 'MOTER';
-                return event;
+                return Object.assign({}, event, {
+                    kilde: 'MOTER',
+                });
             });
 
             return Object.assign({}, state, {
@@ -23,8 +24,9 @@ const historikk = (state = defaultState, action = {}) => {
         }
         case 'HISTORIKK_HENTET_OPPFOELGINGSDIALOG': {
             const nyHistorikk = action.data.map((event) => {
-                event.kilde = 'OPPFOELGINGSDIALOG';
-                return event;
+                return Object.assign({}, event, {
+                    kilde: 'OPPFOELGINGSDIALOG',
+                });
             });
             return Object.assign({}, state, {
                 henterOppfoelgingsdialoger: false,

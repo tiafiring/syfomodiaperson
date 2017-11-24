@@ -27,7 +27,7 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
                     }
                     if (ikkeTilgang) {
                         return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                                             melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
+                            melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
                     }
                     if (hentingFeilet) {
                         return <Feilmelding />;

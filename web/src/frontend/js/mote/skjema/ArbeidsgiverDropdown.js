@@ -29,7 +29,6 @@ const ArbeidsgiverDropdown = ({ meta, input, ledere, ledetekster }) => {
                         return <option value={leder.id} key={idx}>{leder.organisasjonsnavn}</option>;
                     })
                 }
-                <option value="manuell">{getLedetekst('mote.bookingskjema.dropdown.ikke-oppgitt', ledetekster)}</option>
             </select>
         </div>
         <p className="skjema__feilmelding" aria-live="polite">{meta.touched && meta.error}</p>

@@ -1,10 +1,7 @@
 import { expect } from 'chai';
-import LederFields, { VelgArbeidsgiver, FyllUtLeder, ManuellUtfyltLeder, PreutfyltLeder } from '../../../js/mote/skjema/LederFields';
+import LederFields, { FyllUtLeder, PreutfyltLeder } from '../../../js/mote/skjema/LederFields';
 import ArbeidsgiverDropdown from '../../../js/mote/skjema/ArbeidsgiverDropdown';
-import FyllUtVirksomhet from '../../../js/mote/skjema/FyllUtVirksomhet';
-import TextFieldLocked from '../../../js/components/TextFieldLocked';
-import TextField from '../../../js/components/TextField';
-import { Fields, Field } from 'redux-form';
+import { Field } from 'redux-form';
 import { mount, shallow, render } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
@@ -21,18 +18,6 @@ describe("FyllUtLeder", () => {
         expect(compo.find(Field).get(1).props.name).equal("deltakere[0].epost");
     });
 });
-
-describe("ManuellUtfyltLeder", () => {
-    it("Skal inneholde FyllUtLeder", () => {
-        const compo = shallow(<ManuellUtfyltLeder />);
-        expect(compo.find(FyllUtLeder)).to.have.length(1);
-    });
-
-    it("Skal inneholde FyllUtVirksomhet", () => {
-        const compo = shallow(<ManuellUtfyltLeder />);
-        expect(compo.find(FyllUtVirksomhet)).to.have.length(1);
-    });
-})
 
 describe("LederFields", () => {
     let arbeidsgiverType;
@@ -52,13 +37,6 @@ describe("LederFields", () => {
         expect(compo.find(FyllUtLeder)).to.have.length(0);
     });
 
-    it("Skal vise ManuellUtfyltLeder dersom arbeidsgiverType === 'manuell'", () => {
-        arbeidsgiverType.input.value = "manuell";
-        const compo = shallow(<LederFields arbeidsgiverType={arbeidsgiverType} />);
-        expect(compo.find(ArbeidsgiverDropdown)).to.have.length(1);
-        expect(compo.find(ManuellUtfyltLeder)).to.have.length(1);
-    });
-
     it("Skal vise PreutfyltLeder dersom arbeidsgiverType === '0'", () => {
         arbeidsgiverType.input.value = "0";
         const compo = shallow(<LederFields arbeidsgiverType={arbeidsgiverType} />);
@@ -66,11 +44,10 @@ describe("LederFields", () => {
         expect(compo.find(PreutfyltLeder)).to.have.length(1);
     });
 
-    it("Skal ikke vise PreutfyltLeder eller ManuellUtfyltLeder dersom arbeidsgiverType === 'VELG'", () => {
+    it("Skal ikke vise PreutfyltLeder dersom arbeidsgiverType === 'VELG'", () => {
         arbeidsgiverType.input.value = "VELG";
         const compo = shallow(<LederFields arbeidsgiverType={arbeidsgiverType} />);
         expect(compo.find(ArbeidsgiverDropdown)).to.have.length(1);
-        expect(compo.find(ManuellUtfyltLeder)).to.have.length(0);
         expect(compo.find(PreutfyltLeder)).to.have.length(0);
     });
 
@@ -81,17 +58,6 @@ describe("LederFields", () => {
             compo.instance().fyllUtLederfelter = fyllUtLederfelter;
             compo.instance().setLederfelter('VELG');
             expect(fyllUtLederfelter.calledOnce).to.be.true;
-        });
-
-        it("Skal kalle på fyllUtLederfelter og untouch dersom valgtArbeidsgiverType = 'manuell'", () => {
-            const nullstillVirksomhet = sinon.spy();
-            const fyllUtLederfelter = sinon.spy();
-            const untouch = sinon.spy();
-            compo = shallow(<LederFields untouch={untouch} arbeidsgiverType={arbeidsgiverType} nullstillVirksomhet={nullstillVirksomhet} />);
-            compo.instance().fyllUtLederfelter = fyllUtLederfelter;
-            compo.instance().setLederfelter('manuell');
-            expect(fyllUtLederfelter.calledOnce).to.be.true;
-            // expect(untouch.calledWith('deltakere[0].navn', 'deltakere[0].epost', 'deltakere[0].orgnummer')).to.be.true;
         });
 
         it("Skal kalle på fyllUtLederfelter med leder dersom valgtArbeidsgiverType = '2'", () => {

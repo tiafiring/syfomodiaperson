@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Field, Fields, reduxForm } from 'redux-form';
 import TextField from '../../components/TextField';
-import LederFields, { ManuellUtfyltLeder } from './LederFields';
+import LederFields from './LederFields';
 import Tidspunkter from './Tidspunkter';
 import KontaktInfoFeilmelding from '../components/KontaktInfoFeilmelding';
 import Sidetopp from '../../components/Sidetopp';
@@ -108,18 +108,13 @@ export const MotebookingSkjema = ({
 
             <fieldset className="skjema-fieldset js-arbeidsgiver blokk--l">
                 <legend>{getLedetekst('mote.motebookingskjema.arbeidsgivers-opplysninger', ledetekster)}</legend>
-                {
-                    ledere.length > 0 && <Fields
-                        autofill={autofill}
-                        untouch={untouch}
-                        ledetekster={ledetekster}
-                        names={['arbeidsgiverType', 'deltakere[0].navn', 'deltakere[0].epost', 'deltakere[0].orgnummer']}
-                        ledere={ledere}
-                        component={LederFields} />
-                }
-                {
-                    ledere.length === 0 && <ManuellUtfyltLeder ledetekster={ledetekster} />
-                }
+                <Fields
+                    autofill={autofill}
+                    untouch={untouch}
+                    ledetekster={ledetekster}
+                    names={['arbeidsgiverType', 'deltakere[0].navn', 'deltakere[0].epost']}
+                    ledere={ledere}
+                    component={LederFields} />
             </fieldset>
             {
                 visArbeidstaker && <Arbeidstaker {...arbeidstaker} />
@@ -184,11 +179,6 @@ export function validate(values, props) {
         lederFeilmelding.epost = 'Vennligst fyll ut nærmeste leders e-post-adresse';
     } else if (!erGyldigEpost(values.deltakere[0].epost)) {
         lederFeilmelding.epost = 'Vennligst fyll ut en gyldig e-post-adresse';
-    }
-
-    if ((!values.arbeidsgiverType || values.arbeidsgiverType === 'manuell') && values.deltakere && values.deltakere[0].orgnummer &&
-        (values.deltakere[0].orgnummer.length !== 9 || isNaN(values.deltakere[0].orgnummer))) {
-        lederFeilmelding.orgnummer = 'Et orgnummer består av 9 siffer';
     }
 
     if (lederFeilmelding.navn || lederFeilmelding.epost || lederFeilmelding.orgnummer) {

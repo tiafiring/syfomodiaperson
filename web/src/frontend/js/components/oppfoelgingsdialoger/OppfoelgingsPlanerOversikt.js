@@ -35,7 +35,7 @@ export class OppfoelgingsPlanerOversikt extends Component {
                 {
                     aktiveDialoger.map((aktivDialog, index) => {
                         return (<a key={index} className="panel navigasjonspanel" style={{ display: 'block' }}
-                                   href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${aktivDialog.id}`}>
+                            href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${aktivDialog.id}`}>
                             <h3>{aktivDialog.virksomhet.navn}</h3>
                             <p>{`Varighet ${toDatePrettyPrint(aktivDialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDatePrettyPrint(aktivDialog.godkjentPlan.gyldighetstidspunkt.tom)}`}</p>
                         </a>);
@@ -48,8 +48,7 @@ export class OppfoelgingsPlanerOversikt extends Component {
             </Varselstripe></div>}
             {
                 inaktiveDialoger.map((inaktivDialog, index) => {
-                    return (<a key={index} className="panel navigasjonspanel" style={{ display: 'block' }}
-                               href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${inaktivDialog.id}`}>
+                    return (<a key={index} className="panel navigasjonspanel" style={{ display: 'block' }} href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${inaktivDialog.id}`}>
                         <h3>{inaktivDialog.virksomhet.navn}</h3>
                         <p>{`Varighet ${toDatePrettyPrint(inaktivDialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDatePrettyPrint(inaktivDialog.godkjentPlan.gyldighetstidspunkt.tom)}`}</p>
                     </a>);
@@ -61,6 +60,7 @@ export class OppfoelgingsPlanerOversikt extends Component {
 
 OppfoelgingsPlanerOversikt.propTypes = {
     fnr: PropTypes.string,
+    actions: PropTypes.object,
     aktiveDialoger: PropTypes.array.isRequired,
     inaktiveDialoger: PropTypes.array.isRequired,
     ledetekster: PropTypes.object.isRequired,

@@ -1,7 +1,7 @@
 import React from 'react';
 
-const MoteIkon = () => (
-    <svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1">
+const MoteIkon = () => {
+    return (<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1">
         <g id="HISTORIKK" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g id="Historikk_oppfølgingsplan-Copy" transform="translate(-370.000000, -762.000000)" stroke="#000000">
                 <g id="Møte_ikon" transform="translate(371.000000, 763.000000)">
@@ -12,7 +12,7 @@ const MoteIkon = () => (
                 </g>
             </g>
         </g>
-    </svg>
-);
+    </svg>);
+};
 
 export default MoteIkon;

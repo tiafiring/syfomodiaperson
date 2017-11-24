@@ -35,7 +35,7 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
                         return <Feilmelding />;
                     }
                     if (aktiveDialoger.length === 0 && inaktiveDialoger.length === 0) {
-                        return <IngenPlaner />
+                        return <IngenPlaner />;
                     }
                     return (<div>
                         <OppfoelgingsPlanerOversikt actions={actions} aktiveDialoger={aktiveDialoger} inaktiveDialoger={inaktiveDialoger} ledetekster={ledetekster} fnr={fnr} />
