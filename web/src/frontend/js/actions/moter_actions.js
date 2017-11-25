@@ -97,11 +97,12 @@ export function opprettFlereAlternativBekreftet(data, moteUuid) {
     };
 }
 
-export function opprettFlereAlternativ(data, moteUuid) {
+export function opprettFlereAlternativ(data, moteUuid, fnr) {
     return {
         type: actions.OPPRETT_FLERE_ALTERNATIV_FORESPURT,
         data,
         moteUuid,
+        fnr,
     };
 }
 

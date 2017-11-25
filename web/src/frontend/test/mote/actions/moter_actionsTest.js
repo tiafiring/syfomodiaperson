@@ -104,11 +104,12 @@ describe("moter_actions", () => {
 
     it("Skal ha en opprettFlereAlternativ()-funksjon som returnerer riktig action", () => {
         const data = [{"tid":"2017-03-30T10:00:00.000Z","sted":"OSlo","valgt":false},{"tid":"2017-03-31T08:00:00.000Z","sted":"OSlo","valgt":false}];
-        const action = actions.opprettFlereAlternativ(data, "mote-uuid");
+        const action = actions.opprettFlereAlternativ(data, "mote-uuid", "fnr");
         expect(action).to.deep.equal({
             type: "OPPRETT_FLERE_ALTERNATIV_FORESPURT",
             data,
             moteUuid: "mote-uuid",
+            fnr: "fnr"
         });
     });
 

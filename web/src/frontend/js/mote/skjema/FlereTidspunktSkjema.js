@@ -31,6 +31,7 @@ const Feilmelding = () => {
 
 export const FlereTidspunktSkjema = (props) => {
     const {
+        fnr,
         ledetekster,
         mote,
         antallNyeTidspunkt,
@@ -46,7 +47,7 @@ export const FlereTidspunktSkjema = (props) => {
     }
     const submit = (values) => {
         const data = dekorerMedSted(getData(values), mote.alternativer[0].sted);
-        opprettFlereAlternativ(data, mote.moteUuid);
+        opprettFlereAlternativ(data, mote.moteUuid, fnr);
     };
 
     return (
@@ -74,6 +75,7 @@ export const FlereTidspunktSkjema = (props) => {
 };
 
 FlereTidspunktSkjema.propTypes = {
+    fnr: PropTypes.string,
     mote: PropTypes.object,
     ledetekster: PropTypes.object,
     antallEksisterendeTidspunkter: PropTypes.number,

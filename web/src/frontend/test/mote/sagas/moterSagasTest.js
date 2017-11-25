@@ -119,8 +119,17 @@ describe("moterSagas", () => {
     });
 
     describe("opprettFlereAlternativ", () => {
-        const data = [{"tid":"2017-03-30T10:00:00.000Z","sted":"OSlo","valgt":false},{"tid":"2017-03-31T08:00:00.000Z","sted":"OSlo","valgt":false}];
-        const action = actions.opprettFlereAlternativ(data, "min-fine-mote-uuid");
+        const data = [{
+                tid:"2017-03-30T10:00:00.000Z",
+                sted:"OSlo",
+                valgt:false
+            },
+            {
+                tid:"2017-03-31T08:00:00.000Z",
+                sted:"OSlo",
+                valgt:false
+            }];
+        const action = actions.opprettFlereAlternativ(data, "min-fine-mote-uuid", "fnr");
         const generator = opprettFlereAlternativ(action);
 
         it("Skal dispatche OPPRETTER_FLERE_ALTERNATIV", () => {
@@ -133,13 +142,6 @@ describe("moterSagas", () => {
             const nextCall = call(post, "http://tjenester.nav.no/moteadmin/moter/min-fine-mote-uuid/nyealternativer", data);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
-
-        it("Skal dispatche opprettFlereAlternativBekreftet()", () => {
-            const action = actions.opprettFlereAlternativBekreftet(data, "min-fine-mote-uuid");
-            const nextPut = put(action);
-            expect(generator.next().value).to.deep.equal(nextPut);
-        });
-
     });
 
     describe("bekreftMote", () => {
