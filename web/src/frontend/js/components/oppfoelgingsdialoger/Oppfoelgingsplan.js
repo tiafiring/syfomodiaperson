@@ -38,6 +38,7 @@ const PlanVisning = ({ oppfoelgingsdialog, dokumentinfo, fnr, actions, veilederi
             <div className="skjema__input blokk--l">
                 <input onClick={() => {
                     actions.behandleOppgave(sePlanOppgave.id, {
+                        fnr,
                         status: 'FERDIG',
                         sistEndretAv: veilederinfo.ident,
                     });

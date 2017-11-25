@@ -3,6 +3,7 @@ import { takeEvery } from 'redux-saga';
 import { post, get } from '../api/index';
 import history from '../history';
 import * as actions from '../actions/moter_actions';
+import * as historikkActions from '../actions/historikk_actions';
 import { log } from 'digisyfo-npm';
 
 export function* opprettMote(action) {
@@ -10,6 +11,7 @@ export function* opprettMote(action) {
     try {
         yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter`, action.data);
         yield put(actions.moteOpprettet(action.data));
+        yield put(historikkActions.hentHistorikk(action.fnr, 'MOTER'));
     } catch (e) {
         log(e);
         yield put(actions.opprettMoteFeilet());
@@ -36,6 +38,7 @@ export function* avbrytMote(action) {
     try {
         yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.uuid}/avbryt?varsle=${action.varsle}`);
         yield put(actions.moteAvbrutt(action.uuid));
+        yield put(historikkActions.hentHistorikk(action.fnr, 'MOTER'));
         history.replace(`/sykefravaer/${action.fnr}/mote`);
     } catch (e) {
         log(e);
@@ -48,6 +51,7 @@ export function* bekreftMote(action) {
     try {
         yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.moteUuid}/bekreft?valgtAlternativId=${action.valgtAlternativId}`);
         yield put(actions.moteBekreftet(action.moteUuid, action.valgtAlternativId, new Date()));
+        yield put(historikkActions.hentHistorikk(action.fnr, 'MOTER'));
         history.replace(`/sykefravaer/${action.fnr}/mote`);
     } catch (e) {
         log(e);
@@ -60,6 +64,7 @@ export function* opprettFlereAlternativ(action) {
     try {
         const url = `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.moteUuid}/nyealternativer`;
         yield call(post, url, action.data);
+        yield put(historikkActions.hentHistorikk(action.fnr, 'MOTER'));
         yield put(actions.opprettFlereAlternativBekreftet(action.data, action.moteUuid));
     } catch (e) {
         log(e);

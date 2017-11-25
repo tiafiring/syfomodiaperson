@@ -2,6 +2,7 @@ import { call, put, fork } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import { post, get } from '../api/index';
 import * as actions from '../actions/veilederoppgaver_actions';
+import * as historikkActions from '../actions/historikk_actions';
 import * as actiontype from '../actions/actiontyper';
 
 export function* veilederOppgaverSaga(action) {
@@ -23,6 +24,7 @@ export function* behandleVeilederOppgaverSaga(action) {
     try {
         const data = yield call(post, `${window.APP_SETTINGS.VEILEDEROPPGAVERREST_ROOT}/veilederoppgaver/v1/actions/${action.id}`, action.oppgave);
         yield put(actions.oppgaveBehandlet(data, action.oppgave));
+        yield put(historikkActions.hentHistorikk(action.fnr, 'OPPFOELGINGSDIALOG'));
     } catch (e) {
         yield put(actions.oppgaveBehandletFeilet());
     }
