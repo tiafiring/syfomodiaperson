@@ -48,7 +48,11 @@ const Historikk = ({ historikk, sykeforloep }) => {
                 eventsEtterSisteSykefravaer.length > 0 &&
                 <ol className="historikkevent">
                     {
-                        eventsEtterSisteSykefravaer.map((event, index) => {
+                        eventsEtterSisteSykefravaer
+                            .sort((h1, h2) => {
+                                return new Date(h2.tidspunkt) - new Date(h1.tidspunkt);
+                            })
+                            .map((event, index) => {
                             return (<li className="blokk--s" key={index}>
                                 <HistorikkEvent event={event} key={index}/>
                             </li>);
