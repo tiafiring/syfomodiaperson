@@ -10,6 +10,22 @@ const Historikk = ({ historikk, sykeforloep }) => {
         return <IngenHistorikk />;
     }
 
+    const sykeforloepSortert = sykeforloep
+        .sort((s1, s2) => { return new Date(s2.oppfoelgingsdato) - new Date(s1.oppfoelgingsdato); });
+    //dette er en hack for at alle historikkEvents skal få en plassering i et sykefraværstilfellet, selv om de skjer "utenfor".
+    for (let i = 0; i < sykeforloepSortert.length; i++) {
+        if (i === (sykeforloepSortert.length - 1)) {
+            sykeforloepSortert[i].skyggeFom = new Date(0);
+        } else {
+            sykeforloepSortert[i].skyggeFom = new Date(sykeforloepSortert[i+1].sluttdato);
+            sykeforloepSortert[i].skyggeFom.setDate(sykeforloepSortert[i].skyggeFom.getDate() + 1);
+        }
+    }
+
+    const eventsEtterSisteSykefravaer = historikk.data.filter((event) => {
+        return new Date(event.tidspunkt) > new Date(sykeforloepSortert[0].sluttdato);
+    });
+
     return (<div>
         <div className="panel">
             <h1 style={{ margin: 0 }}>Logg</h1>
@@ -26,12 +42,24 @@ const Historikk = ({ historikk, sykeforloep }) => {
             {
                 historikk.henterOppfoelgingsdialoger || historikk.henterMoter && <AppSpinner />
             }
-            <ol className="sykeforloepstilfelle">
+            <div className="panel">
             {
-                sykeforloep
-                    .sort((s1, s2) => { return new Date(s2.oppfoelgingsdato) - new Date(s1.oppfoelgingsdato); })
+                eventsEtterSisteSykefravaer.length > 0 &&
+                <ol className="historikkevent">
+                    {
+                        eventsEtterSisteSykefravaer.map((event, index) => {
+                            return (<li className="blokk--s" key={index}>
+                                <HistorikkEvent event={event} key={index}/>
+                            </li>);
+                        })
+                    }
+                </ol>
+            }
+            <ol className="sykeforloepstilfelle" style={{ borderTop: '1px solid black' }}>
+            {
+                sykeforloepSortert
                     .map((forloep, index) => {
-                        return (<li key={index} className="panel blokk--l">
+                        return (<li key={index} className="blokk--l">
                             <div>
                                 <h2>Sykefraværstilfellet { toDatePrettyPrint(forloep.oppfoelgingsdato) } - { toDatePrettyPrint(forloep.sluttdato) }</h2>
                                 <ol className="historikkevent">
@@ -41,8 +69,8 @@ const Historikk = ({ historikk, sykeforloep }) => {
                                                 return new Date(h2.tidspunkt) - new Date(h1.tidspunkt);
                                             })
                                             .map((event, idx) => {
-                                                if (new Date(forloep.oppfoelgingsdato) < new Date(event.tidspunkt) && new Date(event.tidspunkt) < new Date(forloep.sluttdato)) {
-                                                    return <li key={idx} className="historikkevent blokk--s"><HistorikkEvent event={event} /></li>;
+                                                if (new Date(forloep.skyggeFom) < new Date(event.tidspunkt) && new Date(event.tidspunkt) < new Date(forloep.sluttdato)) {
+                                                    return <li key={idx} className="blokk--s"><HistorikkEvent event={event} /></li>;
                                                 }
                                                 return null;
                                             })
@@ -53,6 +81,7 @@ const Historikk = ({ historikk, sykeforloep }) => {
                     })
             }
             </ol>
+            </div>
         </div>
     </div>);
 };
