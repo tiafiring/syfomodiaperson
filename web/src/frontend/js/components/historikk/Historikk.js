@@ -4,6 +4,7 @@ import { toDatePrettyPrint } from 'digisyfo-npm';
 import { Varselstripe } from 'digisyfo-npm';
 import AppSpinner from '../AppSpinner';
 import IngenHistorikk from './IngenHistorikk';
+import UtvidbarHistorikk from './UtvidbarHistorikk';
 
 const Historikk = ({ historikk, sykeforloep }) => {
     if (sykeforloep.length === 0 || (historikk.hentetMoter && historikk.hentetOppfoelgingsdialoger && historikk.data.length === 0)) {
@@ -61,8 +62,8 @@ const Historikk = ({ historikk, sykeforloep }) => {
                     .map((forloep, index) => {
                         return (<li key={index} className="blokk--l">
                             <div>
-                                <h2>Sykefraværstilfellet { toDatePrettyPrint(forloep.oppfoelgingsdato) } - { toDatePrettyPrint(forloep.sluttdato) }</h2>
-                                <ol className="historikkevent">
+                                <UtvidbarHistorikk head={<h2>Sykefraværstilfellet { toDatePrettyPrint(forloep.oppfoelgingsdato) } - { toDatePrettyPrint(forloep.sluttdato) }</h2>}
+                                body={<ol className="historikkevent">
                                     {
                                         historikk.data
                                             .sort((h1, h2) => {
@@ -75,7 +76,8 @@ const Historikk = ({ historikk, sykeforloep }) => {
                                                 return null;
                                             })
                                     }
-                                </ol>
+                                </ol>}
+                                />
                             </div>
                         </li>);
                     })
