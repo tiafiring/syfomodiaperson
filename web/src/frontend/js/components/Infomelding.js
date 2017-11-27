@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 
 const Infomelding = ({ tittel, melding }) => {
-    return (<div className="panel panel--melding">
-        <h3 className="hode hode--info">{tittel}</h3>
+    return (<div className="panel panel--melding" style={{ padding: '0' }}>
+        <h3 className="hode hode--info infomelding">{tittel}</h3>
         <p>{melding}</p>
     </div>);
 };
