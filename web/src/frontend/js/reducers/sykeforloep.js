@@ -1,5 +1,6 @@
 const initiellState = {
     henter: false,
+    hentet: false,
     hentingFeilet: false,
     data: [],
 };
@@ -14,18 +15,19 @@ export default function sykeforloep(state = initiellState, action) {
             });
         }
         case 'HENTER_SYKEFORLOEP': {
-            return {
+            return Object.assign({}, state, {
                 data: [],
                 henter: true,
                 hentingFeilet: false,
-            };
+            });
         }
         case 'SYKEFORLOEP_HENTET': {
-            return {
+            return Object.assign({}, state, {
                 henter: false,
                 hentingFeilet: false,
                 data: action.data,
-            };
+                hentet: true,
+            });
         }
         default: {
             return state;

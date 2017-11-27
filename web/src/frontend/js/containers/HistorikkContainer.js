@@ -16,10 +16,12 @@ export class HistorikkSide extends Component {
         if (!props.historikk.henterMoter && !props.historikk.hentetMoter) {
             props.actions.hentHistorikk(this.props.fnr, 'MOTER');
         }
-        if (!props.historikk.henterOppfoelgingsdialoger && !props.historikk.henterOppfoelgingsdialoger) {
+        if (!props.historikk.henterOppfoelgingsdialoger && !props.historikk.hentetOppfoelgingsdialoger) {
             props.actions.hentHistorikk(this.props.fnr, 'OPPFOELGINGSDIALOG');
         }
-        props.actions.hentSykeforloep(this.props.fnr);
+        if (!props.sykeforloep.henter && !props.sykeforloep.hentet) {
+            props.actions.hentSykeforloep(this.props.fnr);
+        }
     }
 
     render() {
