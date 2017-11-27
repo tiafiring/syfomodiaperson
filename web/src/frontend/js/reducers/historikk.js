@@ -1,5 +1,6 @@
 const defaultState = {
-    data: [],
+    moteHistorikk: [],
+    oppfoelgingsdialogHistorikkk: [],
     hentingFeilet: false,
     henterMoter: false,
     hentetMoter: false,
@@ -19,7 +20,7 @@ const historikk = (state = defaultState, action = {}) => {
             return Object.assign({}, state, {
                 henterMoter: false,
                 hentetMoter: true,
-                data: state.data.concat(nyHistorikk),
+                moteHistorikk: nyHistorikk,
             });
         }
         case 'HISTORIKK_HENTET_OPPFOELGINGSDIALOG': {
@@ -31,7 +32,7 @@ const historikk = (state = defaultState, action = {}) => {
             return Object.assign({}, state, {
                 henterOppfoelgingsdialoger: false,
                 hentetOppfoelgingsdialoger: true,
-                data: state.data.concat(nyHistorikk),
+                oppfoelgingsdialogHistorikkk: nyHistorikk,
             });
         }
         case 'HENTER_HISTORIKK_MOTER': {

@@ -7,7 +7,8 @@ import IngenHistorikk from './IngenHistorikk';
 import UtvidbarHistorikk from './UtvidbarHistorikk';
 
 const Historikk = ({ historikk, sykeforloep }) => {
-    if (sykeforloep.length === 0 || (historikk.hentetMoter && historikk.hentetOppfoelgingsdialoger && historikk.data.length === 0)) {
+    const historikkEvents = historikk.data.moteHistorikk.concat(historikk.data.oppfoelgingsdialogHistorikkk);
+    if (sykeforloep.length === 0 || (historikk.hentetMoter && historikk.hentetOppfoelgingsdialoger && historikkEvents.length === 0)) {
         return <IngenHistorikk />;
     }
 
@@ -23,7 +24,7 @@ const Historikk = ({ historikk, sykeforloep }) => {
         }
     }
 
-    const eventsEtterSisteSykefravaer = historikk.data.filter((event) => {
+    const eventsEtterSisteSykefravaer = historikkEvents.filter((event) => {
         return new Date(event.tidspunkt) > new Date(sykeforloepSortert[0].sluttdato);
     });
 
@@ -69,7 +70,7 @@ const Historikk = ({ historikk, sykeforloep }) => {
                                 <UtvidbarHistorikk head={<h2>Sykefraværstilfellet { toDatePrettyPrint(forloep.oppfoelgingsdato) } - { toDatePrettyPrint(forloep.sluttdato) }</h2>}
                                 body={<ol className="historikkevent">
                                     {
-                                        historikk.data
+                                        historikkEvents
                                             .sort((h1, h2) => {
                                                 return new Date(h2.tidspunkt) - new Date(h1.tidspunkt);
                                             })
