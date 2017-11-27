@@ -7,7 +7,7 @@ import IngenHistorikk from './IngenHistorikk';
 import UtvidbarHistorikk from './UtvidbarHistorikk';
 
 const Historikk = ({ historikk, sykeforloep }) => {
-    const historikkEvents = historikk.data.moteHistorikk.concat(historikk.data.oppfoelgingsdialogHistorikkk);
+    const historikkEvents = historikk.moteHistorikk.concat(historikk.oppfoelgingsdialogHistorikkk);
     if (sykeforloep.length === 0 || (historikk.hentetMoter && historikk.hentetOppfoelgingsdialoger && historikkEvents.length === 0)) {
         return <IngenHistorikk />;
     }
