@@ -64,8 +64,8 @@ export function mapDispatchToProps(dispatch) {
     };
 }
 
-export const mapStateToProps = (state) => {
-    const fnr = state.navbruker.data.fnr;
+export const mapStateToProps = (state, ownProps) => {
+    const fnr = ownProps.params.fnr;
 
     return {
         fnr,
