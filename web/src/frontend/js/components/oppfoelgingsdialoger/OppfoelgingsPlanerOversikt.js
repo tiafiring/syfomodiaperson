@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 const finnAntallOppgaver = (dialog) => {
     return dialog.oppgaver.filter((oppgave) => {
-        return oppgave.type === 'SE_OPPFOLGINGSPLAN' && status !== 'FERDIG';
+        return oppgave.type === 'SE_OPPFOLGINGSPLAN' && oppgave.status !== 'FERDIG';
     }).length;
 };
 
