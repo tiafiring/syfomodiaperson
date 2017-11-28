@@ -27,11 +27,12 @@ export class MotebookingSkjemaContainer extends Component {
         } else if (!valgtEnhet) {
             return (<Feilmelding
                 tittel="Du må velge Enhet"
-                melding={{ __html: '<p>For at du skal kunne opprette et møte må du velge hvilken enhet dette møtet skal knyttes til. Det styres av hvilken enhet du har valgt i toppmenyen.</p>' }} />);
+                melding={{ __html: '<p>For at du skal kunne opprette et møte må du velge hvilken enhet dette møtet skal knyttes til. Det styres av hvilken enhet du har valgt i toppmenyen. ' +
+                'Hvis du får denne og det ser ut som du allerede har valgt riktig enhet, prøv å velg en annen enhet og så tilbake igjen.</p>' }} />);
         } else if (ledere.length === 0) {
             return (<Feilmelding
-                tittel="Ingen nærmeste ledere meldt inn"
-                melding={{ __html: '<p>Det må være meldt inn nærmeste leder for at vi kan kalle inn til et dialogmøte. Arbeidsgiver må melde inn hvem som er nærmeste leder i Altinn.</p>' }} />);
+                tittel="Lederen mangler!"
+                melding={{ __html: '<p>Møteplanleggeren kan bare brukes hvis nærmeste leder er registrert. Arbeidsgiveren må gjøre dette i Altinn.</p>' }} />);
         }
         return <MotebookingSkjema {...this.props} />;
     }
