@@ -38,10 +38,9 @@ const PlanVisning = ({ oppfoelgingsdialog, dokumentinfo, fnr, actions, veilederi
             <div className="skjema__input blokk--l">
                 <input onClick={() => {
                     actions.behandleOppgave(sePlanOppgave.id, {
-                        fnr,
                         status: 'FERDIG',
                         sistEndretAv: veilederinfo.ident,
-                    });
+                    }, fnr);
                 }} id="marker__utfoert" type="checkbox" className="checkboks" disabled={erOppgaveFullfoert(sePlanOppgave)} checked={erOppgaveFullfoert(sePlanOppgave)} />
                 <label htmlFor="marker__utfoert">{ sePlanOppgave.status === 'FERDIG' ? `Ferdig behandlet av ${sePlanOppgave.sistEndretAv} ${toDatePrettyPrint(sePlanOppgave.sistEndret)}` : 'Marker som behandlet' }</label>
             </div> : <p>Fant dessverre ingen oppgave knyttet til denne planen</p>

@@ -47,9 +47,10 @@ export function oppgaveBehandlet(id, oppgave) {
     };
 }
 
-export function behandleOppgave(id, oppgave) {
+export function behandleOppgave(id, oppgave, fnr) {
     return {
         type: actionstype.BEHANDLE_OPPGAVE_FORESPURT,
+        fnr,
         id,
         oppgave,
     };
