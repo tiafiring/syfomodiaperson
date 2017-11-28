@@ -20,10 +20,7 @@
 .inngangspanel:extend(.panel) {
     margin-bottom: 1px; 
     padding-right: 3em; 
-    background-image: data-uri("../img/png/pil-videre-graa.png");
-    background-repeat: no-repeat;
-    background-position: 97% 2em; 
-    background-size: 1em 1em; 
+    background-size: 1em 1em;
     transition: background-position ease-in-out .1s;
     transform: translate3d(0, 0, 0);
     display: flex; 
@@ -46,7 +43,6 @@
     }
 
     &:hover {
-        background-image: data-uri("../img/png/pil-videre-blaa.png");
         box-shadow: #ccc 0 0 4px 2px;
     }
     &:active, &:focus {
@@ -131,6 +127,7 @@
 }
 
 .inngangspanel__status {
+    margin-right: 1em;
     .mixin-typo-normal();
     margin-bottom: 8px;
 }
