@@ -14,12 +14,12 @@ const Historikk = ({ historikk, sykeforloep }) => {
 
     const sykeforloepSortert = sykeforloep
         .sort((s1, s2) => { return new Date(s2.oppfoelgingsdato) - new Date(s1.oppfoelgingsdato); });
-    //dette er en hack for at alle historikkEvents skal få en plassering i et sykefraværstilfellet, selv om de skjer "utenfor".
+    // Dette er en hack for at alle historikkEvents skal få en plassering i et sykefraværstilfellet, selv om de skjer "utenfor".
     for (let i = 0; i < sykeforloepSortert.length; i++) {
         if (i === (sykeforloepSortert.length - 1)) {
             sykeforloepSortert[i].skyggeFom = new Date(0);
         } else {
-            sykeforloepSortert[i].skyggeFom = new Date(sykeforloepSortert[i+1].sluttdato);
+            sykeforloepSortert[i].skyggeFom = new Date(sykeforloepSortert[i + 1].sluttdato);
             sykeforloepSortert[i].skyggeFom.setDate(sykeforloepSortert[i].skyggeFom.getDate() + 1);
         }
     }
@@ -54,10 +54,10 @@ const Historikk = ({ historikk, sykeforloep }) => {
                                 return new Date(h2.tidspunkt) - new Date(h1.tidspunkt);
                             })
                             .map((event, index) => {
-                            return (<li className="blokk--s" key={index}>
-                                <HistorikkEvent event={event} key={index}/>
-                            </li>);
-                        })
+                                return (<li className="blokk--s" key={index}>
+                                    <HistorikkEvent event={event} key={index} />
+                                </li>);
+                            })
                     }
                 </ol>
             }
@@ -67,8 +67,9 @@ const Historikk = ({ historikk, sykeforloep }) => {
                     .map((forloep, index) => {
                         return (<li key={index} className="blokk--l">
                             <div>
-                                <UtvidbarHistorikk head={<h2>Sykefraværstilfellet { toDatePrettyPrint(forloep.oppfoelgingsdato) } - { toDatePrettyPrint(forloep.sluttdato) }</h2>}
-                                body={<ol className="historikkevent">
+                                <UtvidbarHistorikk
+                                    head={<h2>Sykefraværstilfellet { toDatePrettyPrint(forloep.oppfoelgingsdato) } - { toDatePrettyPrint(forloep.sluttdato) }</h2>}
+                                    body={<ol className="historikkevent">
                                     {
                                         historikkEvents
                                             .sort((h1, h2) => {

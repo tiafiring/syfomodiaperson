@@ -75,12 +75,14 @@ export function mapStateToProps(state) {
     const henterDialoger = state.oppfoelgingsdialoger.henter;
 
     const oppfoelgingsdialoger = state.oppfoelgingsdialoger.data.map((dialog) => {
-        dialog.oppgaver = dialog.oppgaver.map((oppgave) => {
+        const oppgaver = dialog.oppgaver.map((oppgave) => {
             return state.veilederoppgaver.data.filter((_oppgave) => {
                 return _oppgave.id === oppgave.id;
             })[0] || oppgave;
         });
-        return dialog;
+        return Object.assign({}, dialog, {
+            oppgaver,
+        });
     });
     const aktiveDialoger = oppfoelgingsdialoger.filter((dialog) => {
         return dialog.status !== 'AVBRUTT' && new Date(dialog.godkjentPlan.gyldighetstidspunkt.tom) > new Date();

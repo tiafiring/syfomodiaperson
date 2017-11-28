@@ -11,12 +11,6 @@ export class UtvidbarHistorikk extends Component {
         };
     }
 
-    toggle() {
-        this.setState({
-            vis: !this.state.vis,
-        });
-    }
-
     onMouseEnter() {
         this.setState({
             farge: '#005B82',
@@ -29,10 +23,19 @@ export class UtvidbarHistorikk extends Component {
         });
     }
 
+    toggle() {
+        this.setState({
+            vis: !this.state.vis,
+        });
+    }
+
     render() {
         return (<div>
-            <div onClick={() => {this.toggle()} } onMouseEnter={() => { this.onMouseEnter(); }} onMouseLeave={() => { this.onMouseLeave(); }}
-                 style={{ cursor: 'pointer', alignItems: 'center', display: 'flex' }}>
+            <div
+                onClick={() => {this.toggle();} }
+                onMouseEnter={() => { this.onMouseEnter(); }}
+                onMouseLeave={() => { this.onMouseLeave(); }}
+                style={{ cursor: 'pointer', alignItems: 'center', display: 'flex' }}>
                 {this.props.head}
                 { this.state.vis ? <PilNed farge={this.state.farge} /> : <PilOpp farge={this.state.farge} />}
             </div>
@@ -42,7 +45,8 @@ export class UtvidbarHistorikk extends Component {
 }
 
 UtvidbarHistorikk.propTypes = {
-
+    head: PropTypes.node,
+    body: PropTypes.node,
 };
 
 export default UtvidbarHistorikk;

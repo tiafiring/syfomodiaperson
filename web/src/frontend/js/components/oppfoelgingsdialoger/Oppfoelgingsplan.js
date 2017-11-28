@@ -104,7 +104,7 @@ export function mapDispatchToProps(dispatch) {
 }
 
 export function mapStateToProps(state, ownProps) {
-    let oppfoelgingsdialog = ownProps.oppfoelgingsdialog;
+    const oppfoelgingsdialog = ownProps.oppfoelgingsdialog;
     oppfoelgingsdialog.oppgaver = oppfoelgingsdialog.oppgaver.map((oppgave) => {
         return state.veilederoppgaver.data.filter((_oppgave) => {
             return _oppgave.id === oppgave.id;
