@@ -74,11 +74,11 @@ class SykmeldingTeaser extends Component {
                     {antallPerioder === 1 ?
                         (<SykmeldingPeriodeInfo
                             periode={sykmelding.mulighetForArbeid.perioder[0]}
-                            arbeidsgiver={sykmelding.arbeidsgiver}
+                            arbeidsgiver={sykmelding.innsendtArbeidsgivernavn}
                             ledetekster={ledetekster} />)
                         : (<PeriodeListe
                             perioder={sykmelding.mulighetForArbeid.perioder}
-                            arbeidsgiver={sykmelding.arbeidsgiver}
+                            arbeidsgiver={sykmelding.innsendtArbeidsgivernavn}
                             ledetekster={ledetekster} />)
                     }
                 </div>
