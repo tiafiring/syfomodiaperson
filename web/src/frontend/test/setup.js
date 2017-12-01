@@ -6,6 +6,9 @@ var window = document.defaultView;
 
 global.document = document;
 global.window = window;
+global.window.APP_SETTINGS = {
+    APP_ROOT: '/sykefravaer',
+};
 let temp = null;
 const localS = {
     getItem: function(key) {
