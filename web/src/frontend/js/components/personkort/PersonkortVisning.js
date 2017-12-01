@@ -112,8 +112,8 @@ export const VisningLege = ({ aktivFastlege, tidligereFastleger, sykmeldtNavn })
         ['telefon', getLedetekst('modiafront.personkort.visning.nokkeltekster.tlf')],
         ['orgnummer', getLedetekst('modiafront.personkort.visning.nokkeltekster.orgnummer')],
     ]);
-    const valgteElementerKontor = (({ navn, telefon, orgnummer }) => ({ navn, telefon, orgnummer }))(aktivFastlege.fastlegekontor);
-    const valgteElementerPasientforhold = (({ fom }) => ({ fom }))(Object.assign({}, aktivFastlege.pasientforhold, {
+    const valgteElementerKontor = aktivFastlege.fastlegekontor && (({ navn, telefon, orgnummer }) => ({ navn, telefon, orgnummer }))(aktivFastlege.fastlegekontor);
+    const valgteElementerPasientforhold = aktivFastlege.pasientforhold && (({ fom }) => ({ fom }))(Object.assign({}, aktivFastlege.pasientforhold, {
         fom: aktivFastlege.pasientforhold.fom && restdatoTildato(aktivFastlege.pasientforhold.fom),
     }));
     const valgteElementer = Object.assign({}, valgteElementerPasientforhold, valgteElementerKontor);
@@ -145,7 +145,7 @@ export const VisningTidligereLeger = ({ tidligereFastleger }) => {
         <ul>
             {
                 tidligereFastleger.map((lege, idx) => {
-                    return (<li key={idx}>
+                    return (lege.pasientforhold && <li key={idx}>
                         <p>
                             {getLedetekst('modiafront.personkort.visningTidligereLeger.pasientforhold', {
                                 '%FOM%': restdatoTildato(lege.pasientforhold.fom),
