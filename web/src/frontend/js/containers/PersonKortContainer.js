@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Personkort from '../components/personkort/PersonKort';
+import Personkort from '../components/personkort/Personkort';
 import * as egenansattActions from '../actions/egenansatt_actions';
 import * as diskresjonskodeActions from '../actions/diskresjonskode_actions';
 import * as fastlegeActions from '../actions/fastleger_actions';
