@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import GlobalNavigasjonContainer from '../containers/GlobalNavigasjonContainer';
-import PersonkortContainer from '../containers/PersonkortContainer';
+import PersonkortContainer from '../containers/PersonKortContainer';
 const DocumentTitle = require('react-document-title');
 
 const Side = ({ tittel = '', children, aktivtMenypunkt, fnr }) => {

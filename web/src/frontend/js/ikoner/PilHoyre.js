@@ -9,4 +9,5 @@ const PilHoyre = ({ farge }) => {
 PilHoyre.propTypes = {
     farge: PropTypes.string,
 };
+
 export default PilHoyre;
