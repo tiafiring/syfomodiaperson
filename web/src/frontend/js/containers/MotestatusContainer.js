@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import * as arbeidstakerActions from '../../actions/arbeidstaker_actions';
-import * as moteActions from '../../actions/moter_actions';
-import MotebookingStatus from '../components/MotebookingStatus';
-import { fikkIkkeMoteOpprettetVarsel } from '../utils/index';
+import * as arbeidstakerActions from '../actions/arbeidstaker_actions';
+import * as moteActions from '../actions/moter_actions';
+import MotebookingStatus from '../mote/components/MotebookingStatus';
+import { fikkIkkeMoteOpprettetVarsel } from '../mote/utils/index';
 
 export class MotebookingStatusWrapper extends Component {
     componentWillMount() {
@@ -29,7 +29,6 @@ MotebookingStatusWrapper.propTypes = {
 };
 
 export const mapStateToProps = (state, ownProps) => {
-    const fnr = state.navbruker.data.fnr;
     const moteUuid = ownProps.moteUuid;
     let aktivtMote = state.moter.data.filter((m) => {
         return m.moteUuid === moteUuid;
@@ -58,7 +57,7 @@ export const mapStateToProps = (state, ownProps) => {
     });
 
     return {
-        fnr,
+        fnr: ownProps.fnr,
         mote: aktivtMote,
         fikkIkkeOpprettetVarsel,
         avbrytFeilet: state.moter.avbrytFeilet,

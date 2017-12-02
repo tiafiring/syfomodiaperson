@@ -29,7 +29,7 @@ export class AvbrytMoteSide extends Component {
 
     render() {
         const { ledetekster, avbryter, avbrytFeilet, hentingFeiletBool, fnr, mote, henter } = this.props;
-        return (<Side tittel="Avbryt møteforespørsel">
+        return (<Side fnr={fnr} tittel="Avbryt møteforespørsel">
         {
             (() => {
                 if (hentingFeiletBool) {
@@ -76,7 +76,7 @@ export function mapStateToProps(state, ownProps) {
         return m.moteUuid === ownProps.params.moteUuid;
     })[0];
     return {
-        fnr: state.navbruker.data.fnr,
+        fnr: ownProps.params.fnr,
         mote,
         hentingFeiletBool: state.moter.hentingFeilet === true || state.ledetekster.hentingFeilet === true,
         avbryter: state.moter.avbryter,

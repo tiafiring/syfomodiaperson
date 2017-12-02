@@ -17,14 +17,19 @@ describe("GlobalNavigasjonContainer", () => {
         };
 
         it("Skal returnere fnr", () => {
-            const props = mapStateToProps(state, {});
+            const ownProps = {
+                fnr: '887766',
+            };
+            const props = mapStateToProps(state, ownProps);
             expect(props.fnr).to.equal("887766");
         });
 
         it("Skal returnere aktivtMenypunkt", () => {
-            const props = mapStateToProps(state, {
-                aktivtMenypunkt: "OLSEN"
-            });
+            const ownProps = {
+                fnr: '887766',
+                aktivtMenypunkt: "OLSEN",
+            };
+            const props = mapStateToProps(state, ownProps);
             expect(props.aktivtMenypunkt).to.equal("OLSEN");
         })
 

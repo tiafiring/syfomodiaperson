@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import MotebookingSkjema from '../skjema/MotebookingSkjema';
+import MotebookingSkjema from '../mote/skjema/MotebookingSkjema';
 import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import { connect } from 'react-redux';
-import * as ledereActions from '../../actions/ledere_actions';
-import * as virksomhetActions from '../../actions/virksomhet_actions';
-import * as arbeidstakerActions from '../../actions/arbeidstaker_actions';
-import AppSpinner from '../../components/AppSpinner';
-import Feilmelding from '../../components/Feilmelding';
+import * as ledereActions from '../actions/ledere_actions';
+import * as virksomhetActions from '../actions/virksomhet_actions';
+import * as arbeidstakerActions from '../actions/arbeidstaker_actions';
+import AppSpinner from '../components/AppSpinner';
+import Feilmelding from '../components/Feilmelding';
 
 export class MotebookingSkjemaContainer extends Component {
     componentWillMount() {

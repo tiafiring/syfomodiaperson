@@ -31,7 +31,7 @@ export class DinSykmeldingSide extends Component {
             tittel: 'Sykmelding',
         }];
 
-        return (<Side tittel="Sykmeldinger" aktivtMenypunkt={SYKMELDINGER}>
+        return (<Side fnr={fnr} tittel="Sykmeldinger" aktivtMenypunkt={SYKMELDINGER}>
             {
                 (() => {
                     if (henter) {
@@ -82,7 +82,6 @@ export function mapDispatchToProps(dispatch) {
 }
 
 export function mapStateToProps(state, ownProps) {
-    const fnr = state.navbruker.data.fnr;
     const sykmeldingId = ownProps.params.sykmeldingId;
     const henter = state.sykmeldinger.henter || state.ledetekster.henter || state.arbeidsgiversSykmeldinger.henter;
     const hentingFeilet = state.sykmeldinger.hentingFeilet;
@@ -96,7 +95,7 @@ export function mapStateToProps(state, ownProps) {
 
     return {
         brukernavn: state.navbruker.data.navn,
-        fnr,
+        fnr: ownProps.params.fnr,
         henter,
         hentingFeilet,
         ikkeTilgang,

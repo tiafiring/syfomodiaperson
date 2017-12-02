@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Side from '../sider/Side';
-import MotestatusContainer from '../mote/containers/MotestatusContainer';
+import MotestatusContainer from './MotestatusContainer';
 import * as moterActions from '../actions/moter_actions';
 import AppSpinner from '../components/AppSpinner';
 import Lightbox from '../components/Lightbox';
@@ -45,7 +45,7 @@ export class BekreftMoteSide extends Component {
     render() {
         const { alternativ, henterMoterBool, fnr, mote, ledetekster, bekrefter, bekreftFeilet, hentBekreftMoteEpostinnhold } = this.props;
 
-        return (<Side tittel="Bekreft møte" aktivtMenypunkt={MOETEPLANLEGGER}>
+        return (<Side fnr={fnr} tittel="Bekreft møte" aktivtMenypunkt={MOETEPLANLEGGER}>
             {
                 (() => {
                     if (henterMoterBool) {
@@ -122,10 +122,9 @@ export const mapStateToProps = (state, ownProps) => {
         const id = `${alt.id}`;
         return id === `${alternativId}`;
     })[0] : null;
-    const fnr = state.navbruker.data.fnr;
 
     return {
-        fnr,
+        fnr: ownProps.params.fnr,
         bekrefter: state.moter.bekrefter,
         bekreftFeilet: state.moter.bekreftFeilet,
         henterMoterBool: state.moter.henter || state.ledetekster.henter,

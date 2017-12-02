@@ -25,7 +25,8 @@ describe("TidslinjeVelgArbeidssituasjonContainer", () => {
             };
 
             ownProps = {
-                valgtArbeidssituasjon: "olsen"
+                valgtArbeidssituasjon: "olsen",
+                fnr: "123"
             }
         });
 

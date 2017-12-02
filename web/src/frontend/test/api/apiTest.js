@@ -1,10 +1,9 @@
 import { expect } from 'chai';
-import { get, post, getAjax } from '../../js/api';
+import { get, post } from '../../js/api';
 import fetchMock from 'fetch-mock';
 
 describe("api", () => {
     describe("get", () => {
-
         afterEach(() => {
             fetchMock.restore();
         })

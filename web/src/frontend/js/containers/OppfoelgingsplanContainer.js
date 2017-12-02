@@ -19,7 +19,7 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
 
     render() {
         const { oppfoelgingsdialog, ledetekster, henter, hentingFeilet, ikkeTilgang, ikkeTilgangFeilmelding, fnr } = this.props;
-        return (<Side tittel="Oppfølgingsplaner" aktivtMenypunkt={OPPFOELGINGSPLANER}>
+        return (<Side fnr={fnr} tittel="Oppfølgingsplaner" aktivtMenypunkt={OPPFOELGINGSPLANER}>
             {
                 (() => {
                     if (henter) {
@@ -63,7 +63,6 @@ export function mapDispatchToProps(dispatch) {
 
 export function mapStateToProps(state, ownProps) {
     const id = parseInt(ownProps.params.oppfoelgingsdialogId, 10);
-    const fnr = state.navbruker.data.fnr;
     const henter = state.oppfoelgingsdialoger.henter || state.ledetekster.henter || state.ledere.henter || state.veilederinfo.henter;
     const hentingFeilet = state.oppfoelgingsdialoger.hentingFeilet || state.ledetekster.hentingFeilet || state.ledere.hentingFeilet;
     const hentetDialoger = state.oppfoelgingsdialoger.hentet;
@@ -75,7 +74,7 @@ export function mapStateToProps(state, ownProps) {
     return {
         brukernavn: state.navbruker.data.navn,
         oppfoelgingsdialog,
-        fnr,
+        fnr: ownProps.params.fnr,
         henter,
         hentingFeilet,
         hentetDialoger,

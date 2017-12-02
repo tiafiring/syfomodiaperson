@@ -39,7 +39,8 @@ describe("TidslinjeContainer", () => {
             }
         };
         ownProps.params = {
-            valgtArbeidssituasjon: ""
+            valgtArbeidssituasjon: "",
+            fnr: "887766"
         }
     });
 
@@ -48,12 +49,6 @@ describe("TidslinjeContainer", () => {
         it("Skal returnere fnr === fnr hvis fnr finnes", () => {
             const props = mapStateToProps(state, ownProps);
             expect(props.fnr).to.equal("887766");
-        });
-
-        it("Skal returnere fnr === undefined hvis fnr ikke finnes", () => {
-            delete state.navbruker.data.fnr;
-            const props = mapStateToProps(state, ownProps);
-            expect(props.fnr).to.equal(undefined);
         });
 
         it("Skal returnere NAV-brukerens navn", () => {

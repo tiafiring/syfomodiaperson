@@ -12,11 +12,13 @@ import OppfoelgingsPlanerOversiktContainer from '../containers/OppfoelgingsPlane
 import OppfoelgingsplanContainer from '../containers/OppfoelgingsplanContainer';
 import DinSykmeldingContainer from '../containers/DinSykmeldingContainer';
 import HistorikkContainer from '../containers/HistorikkContainer';
+import RollerOgAnsvarsomraderContainer from '../containers/RollerOgAnsvarsomraderContainer';
 
 const AppRouter = ({ history }) => {
     return (<Router history={history}>
         <Route path="/sykefravaer" component={FeilsideContainer} />
         <Route path="/sykefravaer/:fnr" component={HistorikkContainer} />
+        <Route path="/sykefravaer/:fnr/roller-og-ansvarsomrader" component={RollerOgAnsvarsomraderContainer} />
         <Route path="/sykefravaer/:fnr/logg" component={HistorikkContainer} />
         <Route path="/sykefravaer/:fnr/mote" component={MotebookingContainer} />
         <Route path="/sykefravaer/:fnr/mote/:moteUuid/avbryt" component={AvbrytMoteContainer} />

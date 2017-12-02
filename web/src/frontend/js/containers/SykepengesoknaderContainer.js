@@ -27,7 +27,7 @@ export class SykepengesoknaderSide extends Component {
             tittel: 'Søknader om sykepenger',
         }];
 
-        return (<Side tittel="Sykepengesøknader" aktivtMenypunkt={SYKEPENGESOKNADER}>
+        return (<Side fnr={fnr} tittel="Sykepengesøknader" aktivtMenypunkt={SYKEPENGESOKNADER}>
             {
                 (() => {
                     if (henter) {
@@ -77,8 +77,7 @@ export function mapDispatchToProps(dispatch) {
     };
 }
 
-export function mapStateToProps(state) {
-    const fnr = state.navbruker.data.fnr;
+export function mapStateToProps(state, ownProps) {
     const henter = state.sykepengesoknader.henter || state.ledetekster.henter || state.ledere.henter;
     const hentingFeilet = state.sykepengesoknader.hentingFeilet || state.ledetekster.hentingFeilet || state.ledere.hentingFeilet;
     const hentSykepengesoknader = !state.sykepengesoknader.henter && !state.sykepengesoknader.hentingFeilet && !state.sykepengesoknader.hentet;
@@ -86,7 +85,7 @@ export function mapStateToProps(state) {
     return {
         hentSykepengesoknader,
         brukernavn: state.navbruker.data.navn,
-        fnr,
+        fnr: ownProps.params.fnr,
         henter,
         hentingFeilet,
         ledetekster: state.ledetekster.data,

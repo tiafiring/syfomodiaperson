@@ -3,7 +3,7 @@ import {expect} from "chai";
 import {mount, shallow, render} from "enzyme";
 import sinon from "sinon";
 import AppSpinner from "../../../js/components/AppSpinner";
-import {mapStateToProps, MotebookingSkjemaContainer} from "../../../js/mote/containers/MotebookingSkjemaContainer";
+import {mapStateToProps, MotebookingSkjemaContainer} from "../../../js/containers/MotebookingSkjemaContainer";
 
 describe("MotebookingSkjemaContainer", () => {
 

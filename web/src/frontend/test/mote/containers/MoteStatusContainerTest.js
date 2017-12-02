@@ -1,7 +1,7 @@
 import React from "react";
 import {expect} from "chai";
 import {mount, shallow, render} from "enzyme";
-import {mapStateToProps} from "../../../js/mote/containers/MotestatusContainer";
+import {mapStateToProps} from "../../../js/containers/MotestatusContainer";
 
 describe("MotestatusContainerTest", () => {
 
@@ -11,7 +11,7 @@ describe("MotestatusContainerTest", () => {
         let ownProps;
 
         beforeEach(() => {
-            ownProps = { moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986"};
+            ownProps = { moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986", fnr: "123456"};
             state = {
                 ledetekster: { henter: false, data: {} },
                 arbeidstaker : {
@@ -49,7 +49,8 @@ describe("MotestatusContainerTest", () => {
 
         it("Skal returnere møte", () => {
             ownProps = {
-                moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986"
+                moteUuid: "dced4bbd-13a6-4c5b-81f4-e04390b8c986",
+                fnr: "123456"
             }
             const props = mapStateToProps(state, ownProps);
             expect(props.mote).to.deep.equal({

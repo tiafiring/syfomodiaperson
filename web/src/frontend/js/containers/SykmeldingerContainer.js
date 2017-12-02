@@ -28,7 +28,7 @@ export class SykmeldingerSide extends Component {
             tittel: 'Dine sykmeldinger',
         }];
 
-        return (<Side tittel="Sykmeldinger" aktivtMenypunkt={SYKMELDINGER}>
+        return (<Side fnr={fnr} tittel="Sykmeldinger" aktivtMenypunkt={SYKMELDINGER}>
             {
                 (() => {
                     if (henter) {
@@ -79,13 +79,12 @@ export function mapDispatchToProps(dispatch) {
 }
 
 
-export function mapStateToProps(state) {
-    const fnr = state.navbruker.data.fnr;
+export function mapStateToProps(state, ownProps) {
     const henter = state.sykmeldinger.henter || state.ledetekster.henter || state.ledere.henter;
     const hentingFeilet = state.sykmeldinger.hentingFeilet || state.ledetekster.hentingFeilet || state.ledere.hentingFeilet;
     return {
         brukernavn: state.navbruker.data.navn,
-        fnr,
+        fnr: ownProps.params.fnr,
         henter,
         hentingFeilet,
         ledetekster: state.ledetekster.data,

@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Side from '../sider/Side';
-import MotebookingSkjemaContainer from '../mote/containers/MotebookingSkjemaContainer';
-import MotestatusContainer from '../mote/containers/MotestatusContainer';
+import MotebookingSkjemaContainer from './MotebookingSkjemaContainer';
+import MotestatusContainer from './MotestatusContainer';
 import Feilmelding from '../components/Feilmelding';
 import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import AppSpinner from '../components/AppSpinner';
@@ -16,8 +16,8 @@ export class MotebookingSide extends Component {
     }
 
     render() {
-        const { henter, hentMoterFeiletBool, mote, ikkeTilgang, ikkeTilgangFeilmelding, ledetekster } = this.props;
-        return (<Side tittel="Møteplanlegger" aktivtMenypunkt={MOETEPLANLEGGER}>
+        const { fnr, henter, hentMoterFeiletBool, mote, ikkeTilgang, ikkeTilgangFeilmelding, ledetekster } = this.props;
+        return (<Side fnr={fnr} tittel="Møteplanlegger" aktivtMenypunkt={MOETEPLANLEGGER}>
             {
                 (() => {
                     if (henter) {
@@ -58,14 +58,13 @@ MotebookingSide.propTypes = {
     avbrytFeilet: PropTypes.bool,
 };
 
-export const mapStateToProps = (state) => {
-    const fnr = state.navbruker.data.fnr;
+export const mapStateToProps = (state, ownProps) => {
     const aktivtMote = state.moter.data.filter((mote) => {
         return mote.status === 'OPPRETTET' || mote.status === 'BEKREFTET';
     })[0];
 
     return {
-        fnr,
+        fnr: ownProps.params.fnr,
         mote: aktivtMote,
         henter: state.moter.henter || state.ledetekster.henter || state.ledere.henter,
         sender: state.moter.sender,

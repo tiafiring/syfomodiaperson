@@ -40,10 +40,9 @@ VelgArbeidssituasjon.propTypes = {
 
 export function mapStateToProps(state, ownProps) {
     const ledetekster = state.ledetekster.data;
-    const fnr = state.navbruker.data.fnr;
     return {
         valgtArbeidssituasjon: ownProps.valgtArbeidssituasjon,
-        fnr,
+        fnr: ownProps.fnr,
         arbeidssituasjoner: [{
             tittel: getLedetekst('tidslinje.filter.med-arbeidsgiver', ledetekster),
             verdi: 'MED_ARBEIDSGIVER',

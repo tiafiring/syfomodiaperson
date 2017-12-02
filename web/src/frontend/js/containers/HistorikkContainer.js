@@ -25,8 +25,8 @@ export class HistorikkSide extends Component {
     }
 
     render() {
-        const { henter, hentingFeilet, ikkeTilgang, ikkeTilgangFeilmelding, ledetekster, historikk, sykeforloep } = this.props;
-        return (<Side tittel="Historikk" aktivtMenypunkt={HISTORIKK}>
+        const { fnr, henter, hentingFeilet, ikkeTilgang, ikkeTilgangFeilmelding, ledetekster, historikk, sykeforloep } = this.props;
+        return (<Side fnr={fnr} tittel="Historikk" aktivtMenypunkt={HISTORIKK}>
             {
                 (() => {
                     if (henter) {
@@ -68,10 +68,8 @@ export function mapDispatchToProps(dispatch) {
 }
 
 export const mapStateToProps = (state, ownProps) => {
-    const fnr = ownProps.params.fnr;
-
     return {
-        fnr,
+        fnr: ownProps.params.fnr,
         sykeforloep: state.sykeforloep.data,
         historikk: state.historikk,
         henter: state.sykeforloep.henter,

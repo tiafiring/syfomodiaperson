@@ -122,7 +122,8 @@ describe("AvbrytMoteContainer", () => {
         beforeEach(() => {
             ownProps = {
                 params: {
-                    moteUuid: "2fedc0da-efec-4b6e-8597-a021628058ae"
+                    moteUuid: "2fedc0da-efec-4b6e-8597-a021628058ae",
+                    fnr: "123"
                 }
             }
             state = {

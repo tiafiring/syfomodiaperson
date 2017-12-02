@@ -18,7 +18,7 @@ export class TidslinjeSide extends Component {
     }
 
     render() {
-        const { hendelser, ledetekster, actions, valgtArbeidssituasjon, henter, hentingFeilet, brukernavn, ikkeTilgang, ikkeTilgangFeilmelding } = this.props;
+        const { fnr, hendelser, ledetekster, actions, valgtArbeidssituasjon, henter, hentingFeilet, brukernavn, ikkeTilgang, ikkeTilgangFeilmelding } = this.props;
         const htmlIntro = {
             __html: `<p>${getLedetekst('tidslinje.introtekst', ledetekster)}</p>`,
         };
@@ -27,7 +27,7 @@ export class TidslinjeSide extends Component {
         }, {
             tittel: 'Tidslinjen',
         }];
-        return (<Side tittel="Tidslinje" aktivtMenypunkt={TIDSLINJEN}>
+        return (<Side fnr={fnr} tittel="Tidslinje" aktivtMenypunkt={TIDSLINJEN}>
         {
             (() => {
                 if (henter) {
@@ -49,7 +49,7 @@ export class TidslinjeSide extends Component {
                     <div className="speiling">
                         <Brodsmuler brodsmuler={brodsmuler} />
                         <SidetoppSpeilet tittel="Tidslinjen" htmlTekst={htmlIntro} />
-                        <TidslinjeVelgArbeidssituasjonContainer valgtArbeidssituasjon={valgtArbeidssituasjon} />
+                        <TidslinjeVelgArbeidssituasjonContainer fnr={fnr} valgtArbeidssituasjon={valgtArbeidssituasjon} />
                         <Tidslinje arbeidssituasjon={valgtArbeidssituasjon} hendelser={hendelser} ledetekster={ledetekster} setHendelseData={actions.setHendelseData} />
                     </div>
                 </div>);
@@ -102,7 +102,6 @@ export function setHash(hendelser) {
 }
 
 export function mapStateToProps(state, ownProps) {
-    const fnr = state.navbruker.data.fnr;
     const hendelser = state.tidslinjer && state.tidslinjer.data && state.tidslinjer.data.length ? state.tidslinjer.data[0].hendelser : [];
     const valgtArbeidssituasjon = getArbeidssituasjon(ownProps.params.valgtArbeidssituasjon);
     if (hendelser.length) {
@@ -114,7 +113,7 @@ export function mapStateToProps(state, ownProps) {
 
     return {
         brukernavn: state.navbruker.data.navn,
-        fnr,
+        fnr: ownProps.params.fnr,
         hendelser,
         valgtArbeidssituasjon,
         apneHendelseIder,
