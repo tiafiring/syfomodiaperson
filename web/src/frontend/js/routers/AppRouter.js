@@ -24,7 +24,6 @@ const AppRouter = ({ history }) => {
         <Route path="/sykefravaer/:fnr/mote/:moteUuid/avbryt" component={AvbrytMoteContainer} />
         <Route path="/sykefravaer/:fnr/mote/bekreft/:alternativId" component={BekreftMoteContainer} />
         <Route path="/sykefravaer/:fnr/tidslinjen" component={TidslinjeContainer} />
-        <Route path="/sykefravaer/:fnr/tidslinjen/:valgtArbeidssituasjon" component={TidslinjeContainer} />
         <Route path="/sykefravaer/:fnr/sykmeldinger" component={SykmeldingerContainer} />
         <Route path="/sykefravaer/:fnr/sykepengesoknader" component={SykepengesoknaderContainer} />
         <Route path="/sykefravaer/:fnr/sykepengesoknader/:sykepengesoknadId" component={SykepengesoknadContainer} />

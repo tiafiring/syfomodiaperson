@@ -12,13 +12,28 @@ import Brodsmuler from '../components/Brodsmuler';
 import { TIDSLINJEN } from '../menypunkter';
 
 export class TidslinjeSide extends Component {
+    constructor() {
+        super();
+        this.state = {
+            arbeidssituasjon: 'MED_ARBEIDSGIVER',
+        };
+        this.endreArbeidssituasjon = this.endreArbeidssituasjon.bind(this);
+    }
+
+    endreArbeidssituasjon(valg) {
+        this.setState({
+            arbeidssituasjon: valg,
+        });
+        this.props.actions.hentTidslinjer(this.props.fnr, [], valg);
+    }
+
     componentWillMount() {
         const { fnr, apneHendelseIder, arbeidssituasjon } = this.props;
         this.props.actions.hentTidslinjer(fnr, apneHendelseIder, arbeidssituasjon);
     }
 
     render() {
-        const { fnr, hendelser, ledetekster, actions, valgtArbeidssituasjon, henter, hentingFeilet, brukernavn, ikkeTilgang, ikkeTilgangFeilmelding } = this.props;
+        const { fnr, hendelser, ledetekster, actions, henter, hentingFeilet, brukernavn, ikkeTilgang, ikkeTilgangFeilmelding } = this.props;
         const htmlIntro = {
             __html: `<p>${getLedetekst('tidslinje.introtekst', ledetekster)}</p>`,
         };
@@ -49,8 +64,8 @@ export class TidslinjeSide extends Component {
                     <div className="speiling">
                         <Brodsmuler brodsmuler={brodsmuler} />
                         <SidetoppSpeilet tittel="Tidslinjen" htmlTekst={htmlIntro} />
-                        <TidslinjeVelgArbeidssituasjonContainer fnr={fnr} valgtArbeidssituasjon={valgtArbeidssituasjon} />
-                        <Tidslinje arbeidssituasjon={valgtArbeidssituasjon} hendelser={hendelser} ledetekster={ledetekster} setHendelseData={actions.setHendelseData} />
+                        <TidslinjeVelgArbeidssituasjonContainer ledetekster={ledetekster} valgtArbeidssituasjon={this.state.arbeidssituasjon} endreArbeidssituasjon={this.endreArbeidssituasjon} />
+                        <Tidslinje arbeidssituasjon={this.state.arbeidssituasjon} hendelser={hendelser} ledetekster={ledetekster} setHendelseData={actions.setHendelseData} />
                     </div>
                 </div>);
             })()
@@ -65,7 +80,6 @@ TidslinjeSide.propTypes = {
     arbeidssituasjon: PropTypes.string,
     ikkeTilgangFeilmelding: PropTypes.string,
     actions: PropTypes.object,
-    valgtArbeidssituasjon: PropTypes.string,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     ikkeTilgang: PropTypes.bool,
@@ -79,13 +93,6 @@ export function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(actions, dispatch),
     };
-}
-
-export function getArbeidssituasjon(arbeidssituasjon) {
-    if (arbeidssituasjon === 'uten-arbeidsgiver') {
-        return 'UTEN_ARBEIDSGIVER';
-    }
-    return 'MED_ARBEIDSGIVER';
 }
 
 export function setHash(hendelser) {
@@ -103,7 +110,6 @@ export function setHash(hendelser) {
 
 export function mapStateToProps(state, ownProps) {
     const hendelser = state.tidslinjer && state.tidslinjer.data && state.tidslinjer.data.length ? state.tidslinjer.data[0].hendelser : [];
-    const valgtArbeidssituasjon = getArbeidssituasjon(ownProps.params.valgtArbeidssituasjon);
     if (hendelser.length) {
         setHash(hendelser);
     }
@@ -115,7 +121,6 @@ export function mapStateToProps(state, ownProps) {
         brukernavn: state.navbruker.data.navn,
         fnr: ownProps.params.fnr,
         hendelser,
-        valgtArbeidssituasjon,
         apneHendelseIder,
         henter,
         hentingFeilet,

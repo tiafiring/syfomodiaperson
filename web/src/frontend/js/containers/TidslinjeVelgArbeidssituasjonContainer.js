@@ -1,62 +1,35 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import history from '../history';
+import React, { PropTypes } from 'react';
 import { getLedetekst, Radiofaner } from 'digisyfo-npm';
-import { hentTidslinjer } from '../actions/tidslinjer_actions';
 
-const verdier = {
-    MED_ARBEIDSGIVER: 'med-arbeidsgiver',
-    UTEN_ARBEIDSGIVER: 'uten-arbeidsgiver',
+const arbeidssituasjoner = (ledetekster) => {
+    return [{
+        tittel: getLedetekst('tidslinje.filter.med-arbeidsgiver', ledetekster),
+        verdi: 'MED_ARBEIDSGIVER',
+    }, {
+        tittel: getLedetekst('tidslinje.filter.uten-arbeidsgiver', ledetekster),
+        verdi: 'UTEN_ARBEIDSGIVER',
+        hjelpetekst: {
+            tittel: getLedetekst('tidslinje.filter.med-arbeidsgiver.hjelpetekst.tittel', ledetekster),
+            tekst: getLedetekst('tidslinje.filter.med-arbeidsgiver.hjelpetekst.tekst', ledetekster),
+        },
+    }];
 };
 
-export class VelgArbeidssituasjon extends Component {
-    redirect(verdi) {
-        history.replace(`/sykefravaer/${this.props.fnr}/tidslinjen/${verdi}`);
-    }
-
-    changeHandler(verdi) {
-        this.redirect(verdier[verdi]);
-        this.props.hentTidslinjer(this.props.fnr, [], verdi);
-    }
-
-    render() {
-        return (<Radiofaner
-            alternativer={this.props.arbeidssituasjoner}
-            valgtAlternativ={this.props.valgtArbeidssituasjon}
-            changeHandler={(verdi) => {
-                this.changeHandler(verdi);
-            }}
-            radioName="tidslinje-arbeidssituasjon"
-            className="blokk-xl" />);
-    }
-}
+const VelgArbeidssituasjon = ({ valgtArbeidssituasjon, endreArbeidssituasjon, ledetekster }) => {
+    return (<Radiofaner
+        alternativer={arbeidssituasjoner(ledetekster)}
+        valgtAlternativ={valgtArbeidssituasjon}
+        changeHandler={(verdi) => {
+            endreArbeidssituasjon(verdi);
+        }}
+        radioName="tidslinje-arbeidssituasjon"
+        className="blokk-xl" />);
+};
 
 VelgArbeidssituasjon.propTypes = {
     arbeidssituasjoner: PropTypes.array,
     valgtArbeidssituasjon: PropTypes.string,
-    hentTidslinjer: PropTypes.func,
-    fnr: PropTypes.string,
+    endreArbeidssituasjon: PropTypes.func,
 };
 
-export function mapStateToProps(state, ownProps) {
-    const ledetekster = state.ledetekster.data;
-    return {
-        valgtArbeidssituasjon: ownProps.valgtArbeidssituasjon,
-        fnr: ownProps.fnr,
-        arbeidssituasjoner: [{
-            tittel: getLedetekst('tidslinje.filter.med-arbeidsgiver', ledetekster),
-            verdi: 'MED_ARBEIDSGIVER',
-        }, {
-            tittel: getLedetekst('tidslinje.filter.uten-arbeidsgiver', ledetekster),
-            verdi: 'UTEN_ARBEIDSGIVER',
-            hjelpetekst: {
-                tittel: getLedetekst('tidslinje.filter.med-arbeidsgiver.hjelpetekst.tittel', ledetekster),
-                tekst: getLedetekst('tidslinje.filter.med-arbeidsgiver.hjelpetekst.tekst', ledetekster),
-            },
-        }],
-    };
-}
-
-const TidslinjeVelgArbeidssituasjonContainer = connect(mapStateToProps, { hentTidslinjer })(VelgArbeidssituasjon);
-
-export default TidslinjeVelgArbeidssituasjonContainer;
+export default VelgArbeidssituasjon;

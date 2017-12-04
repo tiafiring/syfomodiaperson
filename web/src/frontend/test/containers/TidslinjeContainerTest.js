@@ -4,7 +4,7 @@ import { mount, shallow, render } from 'enzyme';
 import AppSpinner from '../../js/components/AppSpinner';
 import Feilmelding from '../../js/components/Feilmelding';
 import { Tidslinje } from 'digisyfo-npm';
-import { mapStateToProps, TidslinjeSide, getArbeidssituasjon } from '../../js/containers/TidslinjeContainer';
+import { mapStateToProps, TidslinjeSide } from '../../js/containers/TidslinjeContainer';
 import TidslinjeVelgArbeidssituasjonContainer from '../../js/containers/TidslinjeVelgArbeidssituasjonContainer';
 import sinon from 'sinon';
 
@@ -61,23 +61,6 @@ describe("TidslinjeContainer", () => {
             expect(props.hendelser).to.deep.equal([{foo: 1}, {foo: 2}]);
         });
 
-        it("Skal returnere valgtArbeidssituasjon", () => {
-            const props = mapStateToProps(state, ownProps);
-            expect(props.valgtArbeidssituasjon).to.equal("MED_ARBEIDSGIVER");
-        });
-
-        it("Skal returnere valgtArbeidssituasjon når det er definert", () => {
-            ownProps.params.valgtArbeidssituasjon = "uten-arbeidsgiver";
-            const props = mapStateToProps(state, ownProps);
-            expect(props.valgtArbeidssituasjon).to.equal("UTEN_ARBEIDSGIVER");
-        });
-
-        it("Skal returnere valgtArbeidssituasjon = MED_ARBEIDSGIVER når det er definert som now weird", () => {
-            ownProps.params.valgtArbeidssituasjon = "noe-weird";
-            const props = mapStateToProps(state, ownProps);
-            expect(props.valgtArbeidssituasjon).to.equal("MED_ARBEIDSGIVER");
-        });
-
         it("Skal returnere hendelser fra hash", () => {
             ownProps.location = {
                 hash: "#1/3"
@@ -124,23 +107,6 @@ describe("TidslinjeContainer", () => {
             expect(props.ledetekster).to.deep.equal({min: "tekst"})
         });
 
-    });
-
-    describe("getArbeidssituasjon", () => {
-        it("Skal returnere arbeidssituasjon når arbeidssituasjon = med-arbeidsgiver", () => {
-            const a = getArbeidssituasjon("med-arbeidsgiver");
-            expect(a).to.equal("MED_ARBEIDSGIVER");
-        });
-
-        it("Skal returnere arbeidssituasjon når arbeidssituasjon = uten-arbeidsgiver", () => {
-            const a = getArbeidssituasjon("uten-arbeidsgiver");
-            expect(a).to.equal("UTEN_ARBEIDSGIVER");
-        });
-
-        it("Skal returnere arbeidssituasjon når arbeidssituasjon = undefined", () => {
-            const a = getArbeidssituasjon(undefined);
-            expect(a).to.equal("MED_ARBEIDSGIVER");
-        });
     });
 
     describe("TidslinjeSide", () => {
