@@ -2,6 +2,13 @@ import React, { PropTypes } from 'react';
 import { getLedetekst } from 'digisyfo-npm';
 import { restdatoTildato } from '../../utils/datoUtils';
 import { PERSONKORTVISNING_TYPE } from '../../konstanter';
+import {
+    formatterNorskAdresse,
+    formatterUstrukturertAdresse,
+    finnMidlertidigAdresseTittel,
+    finnMidlertidigAdresseTekst,
+    finnPostAdresseTittel,
+} from '../../utils/adresseUtils';
 
 export const PersonkortVisningElement = ({ tittel, imgUrl, children }) => {
     const imgAlt = imgUrl.split('/').reverse()[0].split('.')[0];
@@ -29,7 +36,7 @@ export const PersonkortVisningInformasjon = ({ informasjonNokkelTekster, informa
         Object.keys(informasjon).map((nokkel, idx) => {
             return (
                 <dl key={idx} className="personkortElement__infomasjon">
-                    <dt>{informasjonNokkelTekster.get(nokkel)}</dt>
+                    <dt >{informasjonNokkelTekster.get(nokkel)}</dt>
                     <dd>{informasjon[nokkel]}</dd>
                 </dl>
             );
@@ -44,12 +51,22 @@ PersonkortVisningInformasjon.propTypes = {
 
 export const VisningSykmeldt = ({ navbruker }) => {
     const informasjonNokkelTekster = new Map([
-        ['adresse', getLedetekst('modiafront.personkort.visning.nokkeltekster.adresse')],
+        ['folkeregistrert', 'Folkeregistrert Adresse'],
+        ['postadresse', finnPostAdresseTittel(navbruker)],
+        ['midlertidigAdresse', finnMidlertidigAdresseTittel(navbruker)],
         ['fnr', getLedetekst('modiafront.personkort.visning.nokkeltekster.fnr')],
         ['tlf', getLedetekst('modiafront.personkort.visning.nokkeltekster.tlf')],
         ['epost', getLedetekst('modiafront.personkort.visning.nokkeltekster.epost')],
     ]);
-    const valgteElementer = (({ tlf, epost, fnr }) => ({ tlf, epost, fnr }))(navbruker.kontaktinfo);
+    const ER_MIDLERTIDIG_ADRESSE = false;
+    const ER_IKKE_POSTADRESSE = false;
+    const valgteElementerAdresse = (({ folkeregistrert, postadresse, midlertidigAdresse }) => ({ folkeregistrert, postadresse, midlertidigAdresse }))({
+        folkeregistrert: formatterNorskAdresse(navbruker.bostedsadresse, ER_MIDLERTIDIG_ADRESSE),
+        postadresse: formatterUstrukturertAdresse(navbruker.postAdresse, ER_IKKE_POSTADRESSE),
+        midlertidigAdresse: finnMidlertidigAdresseTekst(navbruker),
+    });
+    const valgteElementerKontaktinfo = (({ tlf, epost, fnr }) => ({ tlf, epost, fnr }))(navbruker.kontaktinfo);
+    const valgteElementer = Object.assign({}, valgteElementerAdresse, valgteElementerKontaktinfo);
     return (<div className="personkort__visning visningSykmeldt">
         <PersonkortVisningElement
             tittel="Kontaktinformasjon"
