@@ -3,7 +3,10 @@ import { getLedetekst, Utvidbar } from 'digisyfo-npm';
 import PersonkortVisning from './PersonkortVisning';
 import Etikett from '../Etikett';
 import { hentBrukersAlderFraFnr, hentBrukersKjoennFraFnr } from '../../utils/fnrUtils';
-import { PERSONKORTVISNING_TYPE } from '../../konstanter';
+import {
+    PERSONKORTVISNING_TYPE,
+    KJOENN,
+} from '../../konstanter';
 import {
     henterEllerHarHentetDiskresjonskode,
     henterEllerHarHentetEgenansatt,
@@ -14,7 +17,7 @@ export const PersonkortTittel = ({ diskresjonskode, egenansatt, navbruker }) => 
     const visEtiketter = diskresjonskode.data.diskresjonskode === '6'
     || diskresjonskode.data.diskresjonskode === '7'
     || egenansatt.data.erEgenAnsatt;
-    const tittelImg = hentBrukersKjoennFraFnr(navbruker.kontaktinfo.fnr) === 'kvinne' ?
+    const tittelImg = hentBrukersKjoennFraFnr(navbruker.kontaktinfo.fnr) === KJOENN.KVINNE ?
         '/sykefravaer/img/svg/kvinne.svg' : '/sykefravaer/img/svg/mann.svg';
 
     return (<div className="personkortTittel">
