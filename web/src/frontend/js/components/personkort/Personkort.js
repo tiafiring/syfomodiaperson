@@ -24,7 +24,7 @@ export const PersonkortTittel = ({ diskresjonskode, egenansatt, navbruker }) => 
         <div className="personkortTittel__info">
             <img src={tittelImg} alt="person" />
             <div>
-                <h3>{`${navbruker.navn} (${hentBrukersAlderFraFnr(navbruker.kontaktinfo.fnr)} år)`}</h3>
+                <h3>{`${navbruker.navn ? navbruker.navn : ''} (${hentBrukersAlderFraFnr(navbruker.kontaktinfo.fnr)} år)`}</h3>
                 <p>{navbruker.kontaktinfo.fnr}</p>
             </div>
         </div>

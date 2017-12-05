@@ -34,6 +34,12 @@ export const hentBrukersFoedseldatoFraFnr = (fnr) => {
 export const hentBrukersAlderFraFnr = (fnr) => {
     const dagensDato = new Date();
     const foedselsdato = hentBrukersFoedseldatoFraFnr(fnr);
+
+    const foedselsDatoIAar = new Date(foedselsdato);
+    foedselsDatoIAar.setFullYear(dagensDato.getFullYear());
+    if (foedselsdato && dagensDato.getTime() < foedselsDatoIAar.getTime()) {
+        return dagensDato.getFullYear() - foedselsdato.getFullYear() - 1;
+    }
     return foedselsdato && dagensDato.getFullYear() - foedselsdato.getFullYear();
 };
 
