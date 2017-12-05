@@ -44,8 +44,8 @@ describe("MotebookingContainer", () => {
                 moteUuid: "8877"
             };
             const avbrytMote = sinon.spy();
-            const component = shallow(<MotebookingSide hentMoter={hentMoter} mote={mote} />)
-            expect(component.contains(<MotestatusContainer moteUuid={"8877"} />)).to.be.true;
+            const component = shallow(<MotebookingSide fnr={"fnr"} hentMoter={hentMoter} mote={mote} />)
+            expect(component.contains(<MotestatusContainer fnr={"fnr"} moteUuid={"8877"} />)).to.be.true;
         });
 
     })

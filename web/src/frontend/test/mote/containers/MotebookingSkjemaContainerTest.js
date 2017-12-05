@@ -32,8 +32,12 @@ describe("MotebookingSkjemaContainer", () => {
     describe("mapStateToProps", () => {
 
         let state; 
+        let ownProps;
 
         beforeEach(() => {
+            ownProps = {
+                fnr: 'fnr',
+            };
             state = {
                 ledetekster: {henter: false, data: {}},
                 ledere: {
@@ -57,24 +61,24 @@ describe("MotebookingSkjemaContainer", () => {
                     navn: "Ole"
                 }
             };
-        })
+        });
 
         it("Skal returnere ledere som er oppgitt", () => {
-            const props = mapStateToProps(state);
+            const props = mapStateToProps(state, ownProps);
             expect(props.ledere).to.deep.equal([{navn: "Ole", erOppgitt: true}])
         })
 
         it("Skal returnere hentingFeilet når henting av ledere feiler", () => {
             state.ledere.data = []
             state.ledere.hentingFeilet = true;
-            const props = mapStateToProps(state);
+            const props = mapStateToProps(state, ownProps);
             expect(props.hentLedereFeiletBool).to.be.true;
         });
 
         it("Skal returnere hentingFeilet når henting av ledere ikke feiler", () => {
             state.ledere.data = []
             state.ledere.hentingFeilet = false;
-            const props = mapStateToProps(state);
+            const props = mapStateToProps(state, ownProps);
             expect(props.hentLedereFeiletBool).to.be.false;
         });
 
@@ -84,12 +88,12 @@ describe("MotebookingSkjemaContainer", () => {
             }]
             state.moter.henter = false;
             state.ledere.henter = true;
-            const props = mapStateToProps(state);
+            const props = mapStateToProps(state, ownProps);
             expect(props.henter).to.be.true;
         });
 
         it("Skal returnere arbeidstaker", () => {
-            const props = mapStateToProps(state);
+            const props = mapStateToProps(state, ownProps);
             expect(props.arbeidstaker).to.deep.equal({
                 navn: "Ole"
             });
@@ -97,19 +101,19 @@ describe("MotebookingSkjemaContainer", () => {
 
         it("Skal returnere henter når arbeidstaker hentes", () => {
             state.arbeidstaker.henter = true;
-            const props = mapStateToProps(state);
+            const props = mapStateToProps(state, ownProps);
             expect(props.henter).to.be.true;
         });
 
         it("Skal ikke returnere henter når arbeidstaker ikke hentes", () => {
             state.arbeidstaker.henter = false;
-            const props = mapStateToProps(state);
+            const props = mapStateToProps(state, ownProps);
             expect(props.henter).to.be.false;
         });
 
         it("Skal returnere hentingFeilet når henting av arbeidstaker feiler", () => {
             state.arbeidstaker.hentingFeilet = true;
-            const props = mapStateToProps(state);
+            const props = mapStateToProps(state, ownProps);
             expect(props.hentingFeilet).to.be.true;
         });
 
