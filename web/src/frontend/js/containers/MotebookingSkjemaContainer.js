@@ -50,12 +50,13 @@ MotebookingSkjemaContainer.propTypes = {
     ledere: PropTypes.array,
 };
 
-export function mapStateToProps(state) {
+export function mapStateToProps(state, ownProps) {
     const ledere = state.ledere.data.filter((leder) => {
         return leder.erOppgitt;
     });
 
     return {
+        fnr: ownProps.fnr,
         ledere,
         arbeidstaker: state.arbeidstaker.data,
         valgtEnhet: state.enhet.valgtEnhet,

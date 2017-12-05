@@ -31,7 +31,7 @@ export class MotebookingSide extends Component {
                         return <Feilmelding />;
                     }
                     if (mote) {
-                        return <MotestatusContainer moteUuid={mote.moteUuid} />;
+                        return <MotestatusContainer fnr={fnr} moteUuid={mote.moteUuid} />;
                     }
                     return <MotebookingSkjemaContainer {...this.props} />;
                 })()
