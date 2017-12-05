@@ -85,7 +85,7 @@ export const VisningLeder = ({ ledere }) => {
                     tittel="Nærmeste Leder"
                     imgUrl="/sykefravaer/img/svg/fabrikk.svg">
                     { !leder.erOppgitt ?
-                        <p className="personkort__feilmelding--ingenLeder">
+                        <p className="personkort__feilmelding">
                             {'Nærmeste leder ikke meldt inn av arbeidsgiver'}
                         </p>
                         :
@@ -103,7 +103,7 @@ VisningLeder.propTypes = {
     ledere: PropTypes.array,
 };
 
-export const VisningLege = ({ aktivFastlege, tidligereFastleger, sykmeldtNavn }) => {
+export const VisningLege = ({ fastleger, sykmeldtNavn }) => {
     const informasjonNokkelTekster = new Map([
         ['fom', getLedetekst('modiafront.personkort.visning.nokkeltekster.lege_fom', {
             '%SYKMELDTNAVN%': sykmeldtNavn,
@@ -112,12 +112,18 @@ export const VisningLege = ({ aktivFastlege, tidligereFastleger, sykmeldtNavn })
         ['telefon', getLedetekst('modiafront.personkort.visning.nokkeltekster.tlf')],
         ['orgnummer', getLedetekst('modiafront.personkort.visning.nokkeltekster.orgnummer')],
     ]);
+    const aktivFastlege = fastleger.aktiv;
     const valgteElementerKontor = aktivFastlege.fastlegekontor && (({ navn, telefon, orgnummer }) => ({ navn, telefon, orgnummer }))(aktivFastlege.fastlegekontor);
     const valgteElementerPasientforhold = aktivFastlege.pasientforhold && (({ fom }) => ({ fom }))(Object.assign({}, aktivFastlege.pasientforhold, {
         fom: aktivFastlege.pasientforhold.fom && restdatoTildato(aktivFastlege.pasientforhold.fom),
     }));
     const valgteElementer = Object.assign({}, valgteElementerPasientforhold, valgteElementerKontor);
-    return (<div className="personkort__visning visningLege">
+    return fastleger.hentingFeilet ?
+        <p className="personkort__feilmelding">
+            {'Det kan hende brukeren ikke har en fastlege. Ta kontakt med brukeren for å få behandlers kontaktoppslysninger'}
+        </p>
+        :
+        (<div className="personkort__visning visningLege">
         <PersonkortVisningElement
             tittel={aktivFastlege.navn}
             imgUrl="/sykefravaer/img/svg/medisinskrin.svg"
@@ -128,13 +134,12 @@ export const VisningLege = ({ aktivFastlege, tidligereFastleger, sykmeldtNavn })
             />
         </PersonkortVisningElement>
         <VisningTidligereLeger
-            tidligereFastleger={tidligereFastleger}
+            tidligereFastleger={fastleger.tidligere}
         />
     </div>);
 };
 VisningLege.propTypes = {
-    aktivFastlege: PropTypes.object,
-    tidligereFastleger: PropTypes.array,
+    fastleger: PropTypes.object,
     sykmeldtNavn: PropTypes.string,
 };
 
@@ -187,8 +192,7 @@ VisningEnhet.propTypes = {
 export const PersonkortVisning = ({ navbruker, ledere, fastleger, behandlendeEnhet, visning }) => {
     if (visning === PERSONKORTVISNING_TYPE.LEGE) {
         return (<VisningLege
-            aktivFastlege={fastleger.aktiv}
-            tidligereFastleger={fastleger.tidligere}
+            fastleger={fastleger}
             sykmeldtNavn={navbruker.navn}
         />);
     } else if (visning === PERSONKORTVISNING_TYPE.LEDER) {

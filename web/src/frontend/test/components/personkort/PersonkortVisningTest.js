@@ -143,7 +143,7 @@ describe('PersonkortVisning', () => {
         });
 
         it('Skal vise PersonkortVisningElement med feilmelding, dersom ledere ikke er innmeldt', () => {
-            expect(komponent.find('p.personkort__feilmelding--ingenLeder')).to.have.length(1);
+            expect(komponent.find('p.personkort__feilmelding')).to.have.length(1);
         });
     });
 
@@ -152,10 +152,19 @@ describe('PersonkortVisning', () => {
 
         beforeEach(() => {
             komponent = shallow(<VisningLege
-                aktivFastlege={fastleger.aktiv}
-                tidligereFastleger={fastleger.tidligere}
+                fastleger={fastleger}
                 sykmeldtNavn={navbruker.navn}
             />);
+        });
+
+        it('Skal vise feilmelding, henting av fastleger feilet', () => {
+            const komponent = shallow(<VisningLege
+                fastleger={Object.assign({}, fastleger, {
+                    hentingFeilet: true,
+                })}
+                sykmeldtNavn={navbruker.navn}
+            />);
+            expect(komponent.find('p.personkort__feilmelding')).to.have.length(1);
         });
 
         it('Skal vise PersonkortVisningElement', () => {
