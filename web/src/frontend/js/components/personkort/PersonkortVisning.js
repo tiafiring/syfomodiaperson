@@ -118,7 +118,7 @@ export const VisningLege = ({ fastleger, sykmeldtNavn }) => {
         fom: aktivFastlege.pasientforhold.fom && restdatoTildato(aktivFastlege.pasientforhold.fom),
     }));
     const valgteElementer = Object.assign({}, valgteElementerPasientforhold, valgteElementerKontor);
-    return fastleger.hentingFeilet ?
+    return fastleger.ikkeFunnet ?
         <p className="personkort__feilmelding">
             {'Det kan hende brukeren ikke har en fastlege. Ta kontakt med brukeren for å få behandlers kontaktoppslysninger'}
         </p>

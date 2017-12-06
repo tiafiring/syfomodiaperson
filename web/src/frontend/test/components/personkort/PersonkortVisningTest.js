@@ -157,10 +157,10 @@ describe('PersonkortVisning', () => {
             />);
         });
 
-        it('Skal vise feilmelding, henting av fastleger feilet', () => {
+        it('Skal vise feilmelding, fastleger ikke ble funnet', () => {
             const komponent = shallow(<VisningLege
                 fastleger={Object.assign({}, fastleger, {
-                    hentingFeilet: true,
+                    ikkeFunnet: true,
                 })}
                 sykmeldtNavn={navbruker.navn}
             />);
