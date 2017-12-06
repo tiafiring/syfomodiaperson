@@ -123,20 +123,21 @@ export const VisningLege = ({ fastleger, sykmeldtNavn }) => {
             {'Det kan hende brukeren ikke har en fastlege. Ta kontakt med brukeren for å få behandlers kontaktoppslysninger'}
         </p>
         :
-        (<div className="personkort__visning visningLege">
-        <PersonkortVisningElement
-            tittel={aktivFastlege.navn}
-            imgUrl="/sykefravaer/img/svg/medisinskrin.svg"
-            informasjon={valgteElementer}>
-            <PersonkortVisningInformasjon
-                informasjonNokkelTekster={informasjonNokkelTekster}
-                informasjon={valgteElementer}
-            />
-        </PersonkortVisningElement>
-        <VisningTidligereLeger
-            tidligereFastleger={fastleger.tidligere}
-        />
-    </div>);
+        <div className="personkort__visning visningLege">
+            <PersonkortVisningElement
+                tittel={aktivFastlege.navn}
+                imgUrl="/sykefravaer/img/svg/medisinskrin.svg"
+                informasjon={valgteElementer}>
+                <PersonkortVisningInformasjon
+                    informasjonNokkelTekster={informasjonNokkelTekster}
+                    informasjon={valgteElementer}
+                />
+            </PersonkortVisningElement>
+            { fastleger.tidligere.length > 0 && <VisningTidligereLeger
+                    tidligereFastleger={fastleger.tidligere}
+                />
+            }
+        </div>;
 };
 VisningLege.propTypes = {
     fastleger: PropTypes.object,

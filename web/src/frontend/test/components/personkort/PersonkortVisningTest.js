@@ -178,6 +178,16 @@ describe('PersonkortVisning', () => {
         it('Skal vise VisningTidligereLeger', () => {
             expect(komponent.find(VisningTidligereLeger)).to.have.length(1);
         });
+
+        it('Skal ikke vise VisningTidligereLeger, dersom det ikke er tidligere fastleger', () => {
+            const komponent = shallow(<VisningLege
+                fastleger={Object.assign({}, fastleger, {
+                    tidligere: [],
+                })}
+                sykmeldtNavn={navbruker.navn}
+            />);
+            expect(komponent.find(VisningTidligereLeger)).to.have.length(0);
+        });
     });
 
     describe('VisningTidligereLeger', () => {
