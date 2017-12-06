@@ -51,7 +51,7 @@
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 0 3px @fokusOrange;
+      box-shadow: 0 0 0 3px @orangeFocus;
     }
 
     &:focus, &:hover {
@@ -72,7 +72,7 @@
 
   .DayPicker-Caption {
     display: table-caption;
-    .mixin-typo-undertittel();
+    .typo-undertittel-mixin();
     height: 2em;
     line-height: 2em;
     text-align: center;
@@ -80,7 +80,7 @@
   }
 
   .DayPicker-Weekdays {
-    border-top: 1px solid @ikonGraa;
+    border-top: 1px solid @navGra40;
     display: table-header-group;
   }
 
@@ -92,7 +92,7 @@
         display: table-cell;
         padding: .5em;
         text-align: center;
-        .mixin-typo-element();
+        .typo-element-mixin();
 
         abbr {
           text-decoration: none;
@@ -118,7 +118,7 @@
 
       .DayPicker-Day:focus {
         outline: none;
-        background-color: @fokusOrange;
+        background-color: @orangeFocus;
       }
 
       .DayPicker-Day:hover {
@@ -130,7 +130,7 @@
       }
 
       .DayPicker-Day:last-child {
-        color: @navRoed;
+        color: @navRod;
       }
 
   .DayPicker--interactionDisabled .DayPicker-Day {
@@ -140,12 +140,12 @@
 /* Default modifiers */
 
 .DayPicker-Day--disabled, .DayPicker-Day--disabled:last-child {
-  color: @ikonGraa;
+  color: @navGra40;
   cursor: default;
   font-weight: normal;
 
   &:focus {
-    color: @inaktivGraa;
+    color: @navGra60;
   }
 }
 
@@ -165,21 +165,21 @@
 }
 
 .DayPicker-Day--sunday:not(.DayPicker-Day--today) {
-  color: @navRoed ;
+  color: @navRod ;
 }
 
 .DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
-  background-color: @aktivBlaa;
-  color: @hvit;
+  background-color: @navDypBla;
+  color: @white;
 }
 
 .DayPicker-Day--today {
-  border: 1px solid @ikonGraa;
+  border: 1px solid @navGra40;
 }
 
 .DayPicker:focus {
   outline: none;
-  box-shadow: 0 0 0 3px @fokusOrange;
+  box-shadow: 0 0 0 3px @orangeFocus;
 }
 
 
@@ -207,15 +207,15 @@
   display: none;
 }
 
-@media(min-width: @skjermMini) {
+@media(min-width: @screen-sm-min) {
   .datovelger__DayPicker {
     display: block;
     position: absolute;
     padding: .5em;
     top: 2.5em;
     border-radius: 2px;
-    background-color: @hvit;
-    border: 1px solid @ikonGraa;
+    background-color: @white;
+    border: 1px solid @navGra40;
     z-index: 1;
   }
 
@@ -238,7 +238,7 @@
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 0 3px @fokusOrange;
+      box-shadow: 0 0 0 3px @orangeFocus;
     }
 
     &:hover, &:focus {

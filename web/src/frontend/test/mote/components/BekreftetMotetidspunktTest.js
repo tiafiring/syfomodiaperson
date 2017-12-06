@@ -3,7 +3,6 @@ import BekreftetMotetidspunkt from '../../../js/mote/components/BekreftetMotetid
 import { mount, shallow } from 'enzyme';
 import React from 'react';
 import Sidetopp from '../../../js/components/Sidetopp';
-import { Varselstripe } from 'digisyfo-npm';
 import { DatoOgTid } from 'moter-npm';
 
 describe("BekreftetMotetidspunkt", () => {

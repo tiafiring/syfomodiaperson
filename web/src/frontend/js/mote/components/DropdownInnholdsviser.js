@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Varselstripe } from 'digisyfo-npm';
 import AppSpinner from '../../components/AppSpinner';
 import { konstanter, proptypes as moterPropTypes } from 'moter-npm';

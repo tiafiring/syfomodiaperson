@@ -1,7 +1,8 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { getLedetekst, Utvidbar } from 'digisyfo-npm';
 import PersonkortVisning from './PersonkortVisning';
-import Etikett from '../Etikett';
+import EtikettBase from 'nav-frontend-etiketter';
 import { hentBrukersAlderFraFnr, hentBrukersKjoennFraFnr } from '../../utils/fnrUtils';
 import {
     PERSONKORTVISNING_TYPE,
@@ -30,13 +31,19 @@ export const PersonkortTittel = ({ diskresjonskode, egenansatt, navbruker }) => 
         </div>
         { visEtiketter && <div className="personkortTittel__etikker">
             { diskresjonskode.data.diskresjonskode === '6' && <div>
-                <Etikett tekst="Kode 6" variant="info" />
+                <EtikettBase type="fokus">
+                    Kode 6
+                </EtikettBase>
             </div> }
             { diskresjonskode.data.diskresjonskode === '7' && <div>
-                <Etikett tekst="Kode 7" variant="info" />
+                <EtikettBase type="fokus">
+                    Kode 7
+                </EtikettBase>
             </div> }
             { egenansatt.data.erEgenAnsatt && <div>
-                <Etikett tekst="Egen ansatt" variant="info" />
+                <EtikettBase type="fokus">
+                    Egen ansatt
+                </EtikettBase>
             </div> }
         </div>
         }
@@ -85,60 +92,58 @@ class Personkort extends Component {
         } = this.props;
         const visning = this.state.visning;
 
-        return (<div className="grid personkort">
-            <div className="unit whole">
-                <Utvidbar
-                    erApen={false}
-                    tittel={<PersonkortTittel
-                        diskresjonskode={diskresjonskode}
-                        egenansatt={egenansatt}
-                        navbruker={navbruker}
-                    />}
-                >
-                    <div>
-                        <ul>
-                            <li>
-                                <button
-                                    className={`${visning === PERSONKORTVISNING_TYPE.SYKMELDT && 'personkort__knapp--aktiv'}`}
-                                    aria-pressed={visning === PERSONKORTVISNING_TYPE.SYKMELDT}
-                                    onClick={() => {this.byttVisning(PERSONKORTVISNING_TYPE.SYKMELDT);}}>
-                                    {getLedetekst('modiafront.personkort.visning.sykmeldt.knapp')}
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    className={`${visning === PERSONKORTVISNING_TYPE.LEDER && 'personkort__knapp--aktiv'}`}
-                                    aria-pressed={visning === PERSONKORTVISNING_TYPE.LEDER}
-                                    onClick={() => {this.byttVisning(PERSONKORTVISNING_TYPE.LEDER);}}>
-                                    {getLedetekst('modiafront.personkort.visning.leder.knapp')}
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    className={`${visning === PERSONKORTVISNING_TYPE.LEGE && 'personkort__knapp--aktiv'}`}
-                                    aria-pressed={visning === PERSONKORTVISNING_TYPE.LEGE}
-                                    onClick={() => {this.byttVisning(PERSONKORTVISNING_TYPE.LEGE);}}>
-                                    {getLedetekst('modiafront.personkort.visning.fastlege.knapp')}
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    className={`${visning === PERSONKORTVISNING_TYPE.ENHET && 'personkort__knapp--aktiv'}`}
-                                    aria-pressed={visning === PERSONKORTVISNING_TYPE.ENHET}
-                                    onClick={() => {this.byttVisning(PERSONKORTVISNING_TYPE.ENHET);}}>
-                                    {getLedetekst('modiafront.personkort.visning.enhet.knapp')}
-                                </button>
-                            </li>
-                        </ul>
+        return (<div className="personkort">
+            <Utvidbar
+                erApen={false}
+                tittel={<PersonkortTittel
+                    diskresjonskode={diskresjonskode}
+                    egenansatt={egenansatt}
+                    navbruker={navbruker}
+                />}
+            >
+                <div>
+                    <ul>
+                        <li>
+                            <button
+                                className={`${visning === PERSONKORTVISNING_TYPE.SYKMELDT && 'personkort__knapp--aktiv'}`}
+                                aria-pressed={visning === PERSONKORTVISNING_TYPE.SYKMELDT}
+                                onClick={() => {this.byttVisning(PERSONKORTVISNING_TYPE.SYKMELDT);}}>
+                                {getLedetekst('modiafront.personkort.visning.sykmeldt.knapp')}
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                className={`${visning === PERSONKORTVISNING_TYPE.LEDER && 'personkort__knapp--aktiv'}`}
+                                aria-pressed={visning === PERSONKORTVISNING_TYPE.LEDER}
+                                onClick={() => {this.byttVisning(PERSONKORTVISNING_TYPE.LEDER);}}>
+                                {getLedetekst('modiafront.personkort.visning.leder.knapp')}
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                className={`${visning === PERSONKORTVISNING_TYPE.LEGE && 'personkort__knapp--aktiv'}`}
+                                aria-pressed={visning === PERSONKORTVISNING_TYPE.LEGE}
+                                onClick={() => {this.byttVisning(PERSONKORTVISNING_TYPE.LEGE);}}>
+                                {getLedetekst('modiafront.personkort.visning.fastlege.knapp')}
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                className={`${visning === PERSONKORTVISNING_TYPE.ENHET && 'personkort__knapp--aktiv'}`}
+                                aria-pressed={visning === PERSONKORTVISNING_TYPE.ENHET}
+                                onClick={() => {this.byttVisning(PERSONKORTVISNING_TYPE.ENHET);}}>
+                                {getLedetekst('modiafront.personkort.visning.enhet.knapp')}
+                            </button>
+                        </li>
+                    </ul>
 
-                        <PersonkortVisning
-                            {...this.props}
-                            visning={visning}
-                        />
+                    <PersonkortVisning
+                        {...this.props}
+                        visning={visning}
+                    />
 
-                    </div>
-                </Utvidbar>
-            </div>
+                </div>
+            </Utvidbar>
         </div>);
     }
 }

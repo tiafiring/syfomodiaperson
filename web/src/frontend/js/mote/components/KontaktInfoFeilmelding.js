@@ -1,11 +1,13 @@
-import React, { PropTypes } from 'react';
-import { Varselstripe } from 'digisyfo-npm';
+import React from 'react';
+import PropTypes from 'prop-types';
+import AlertStripe from 'nav-frontend-alertstriper';
 
 const KontaktInfoFeilmelding = ({ melding }) => {
     return (<div className="panel">
-        <Varselstripe type="feil">
+        <AlertStripe
+            type="advarsel">
             <div dangerouslySetInnerHTML={melding} />
-        </Varselstripe>
+        </AlertStripe>
     </div>);
 };
 

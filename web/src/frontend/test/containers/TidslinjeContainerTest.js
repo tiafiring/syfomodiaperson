@@ -1,8 +1,8 @@
 import React from 'react';
 import { expect } from 'chai';
 import { mount, shallow, render } from 'enzyme';
-import AppSpinner from '../../js/components/AppSpinner';
 import Feilmelding from '../../js/components/Feilmelding';
+import AppSpinner from '../../js/components/AppSpinner';
 import { Tidslinje } from 'digisyfo-npm';
 import { mapStateToProps, TidslinjeSide } from '../../js/containers/TidslinjeContainer';
 import TidslinjeVelgArbeidssituasjonContainer from '../../js/containers/TidslinjeVelgArbeidssituasjonContainer';

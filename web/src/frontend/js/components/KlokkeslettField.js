@@ -1,12 +1,13 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import MaskedInput from 'react-maskedinput';
 
 const KlokkeslettField = (props) => {
     const { meta, className } = props;
     return (<div>
         <MaskedInput mask="11.11" autoComplete="off" placeholder={props.placeholder} type={props.type || 'text'} id={props.id}
-            className={`${className}${meta.touched && meta.error ? ' input--feil' : ''}`} {...props.input} />
-        <p className="skjema__feilmelding" aria-live="polite">{meta.touched && meta.error}</p>
+            className={`skjemaelement__input ${className}${meta.touched && meta.error ? ' skjemaelement__input--harFeil' : ''}`} {...props.input} />
+        <p className="skjemaelement__feilmelding" aria-live="polite">{meta.touched && meta.error}</p>
     </div>);
 };
 

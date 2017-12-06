@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const PilHoyre = ({ farge }) => {
     return (<svg width="14" height="14" viewBox="0 0 9.19 16.83">

@@ -1,11 +1,11 @@
 .epostinnhold__tittel {
-  .mixin-typo-innholdstittel();
+  .typo-innholdstittel-mixin();
   margin: 0 0 1em 0;
 }
 
 .epostinnhold__mottaker {    
     h3 {
-        .mixin-typo-etikettLiten();
+        .typo-etikett-liten-mixin();
         .nedtonet;
         margin-bottom: .25em;
     }
@@ -13,8 +13,8 @@
 
 .epostinnhold__emne, .epostinnhold__innhold {
     padding: 1em;
-    border: 1px dashed @ikonGraa;
-    background: lighen(@ikonGraa, 20%);
+    border: 1px dashed @navGra40;
+    background: lighen(@navGra40, 20%);
 }
 
 .epostinnhold__emne {
@@ -45,9 +45,9 @@
 }
 
 .epostinnhold__knapp--ikkeValgt {
-  color: @navTekst;
+  color: @navMorkGra;
 
   &:hover {
-    color: @lenkeBlaa;
+    color: @navBla;
   }
 }

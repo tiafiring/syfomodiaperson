@@ -1,5 +1,7 @@
-import React, { PropTypes } from 'react';
-import { getLedetekst, Radiofaner } from 'digisyfo-npm';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { getLedetekst } from 'digisyfo-npm';
+import Radiofaner from '../Radiofaner';
 
 const arbeidssituasjoner = (ledetekster) => {
     return [{

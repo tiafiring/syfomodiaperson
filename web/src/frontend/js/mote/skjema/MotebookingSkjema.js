@@ -1,11 +1,14 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import TextField from '../../components/TextField';
+import AlertStripe from 'nav-frontend-alertstriper';
+import KnappBase from 'nav-frontend-knapper';
+import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import VelgLeder from './VelgLeder';
 import Tidspunkter from './Tidspunkter';
+import TextField from '../TextField';
 import KontaktInfoFeilmelding from '../components/KontaktInfoFeilmelding';
 import Sidetopp from '../../components/Sidetopp';
-import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import { genererDato, erGyldigKlokkeslett, erGyldigDato } from '../utils/index';
 
 export const OPPRETT_MOTE_SKJEMANAVN = 'opprettMote';
@@ -68,12 +71,16 @@ export class MotebookingSkjema extends Component {
         const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.feilAarsak : undefined;
         const feilmelding = feilAarsak && getLedetekstnokkelFraFeilAarsak(feilAarsak, ledetekster);
         return (<div>
-            { !arbeidstaker.kontaktinfo.skalHaVarsel && <KontaktInfoFeilmelding melding={feilmelding} ledetekster={ledetekster} /> }
+            { !arbeidstaker.kontaktinfo.skalHaVarsel &&
+            <KontaktInfoFeilmelding melding={feilmelding} ledetekster={ledetekster} /> }
             <form className="panel" onSubmit={handleSubmit(submit)}>
                 <Sidetopp tittel={getLedetekst('mote.motebookingskjema.overskrift', ledetekster)} />
                 <div className="skjema-fieldset js-arbeidsgiver blokk--l">
                     <legend>{getLedetekst('mote.motebookingskjema.arbeidsgivers-opplysninger', ledetekster)}</legend>
-                    <VelgLeder ledetekster={ledetekster} ledere={ledere} valgtArbeidsgiver={this.state.valgtArbeidsgiver}
+                    <VelgLeder
+                        ledetekster={ledetekster}
+                        ledere={ledere}
+                        valgtArbeidsgiver={this.state.valgtArbeidsgiver}
                         velgArbeidsgiver={(orgnummer) => {
                             this.setState({
                                 valgtArbeidsgiver: orgnummer,
@@ -84,30 +91,29 @@ export class MotebookingSkjema extends Component {
                 <fieldset className="skjema-fieldset blokk">
                     <legend>2. {getLedetekst('mote.motebookingskjema.velg-dato-tid-sted', ledetekster)}</legend>
                     <Tidspunkter skjemanavn={OPPRETT_MOTE_SKJEMANAVN} />
-                    <label htmlFor="sted">Sted</label>
-                    <Field id="sted" component={TextField} name="sted" className="input--xxl js-sted"
+                    <Field
+                        label="Sted"
+                        id="sted"
+                        component={TextField}
+                        name="sted"
                         placeholder="Skriv møtested eller om det er et videomøte" />
                 </fieldset>
 
                 <div aria-live="polite" role="alert">
                     { sendingFeilet && <div className="panel panel--ramme">
-                        <div className="varselstripe varselstripe--feil">
-                            <div className="varselstripe__ikon">
-                                <img src="/sykefravaer/img/svg/utropstegn.svg" />
-                            </div>
+                        <AlertStripe type="info">
                             <p className="sist">Beklager, det oppstod en feil. Prøv igjen litt senere.</p>
-                        </div>
+                        </AlertStripe>
                     </div>}
                 </div>
 
                 <div className="knapperad blokk">
-                    <button
-                        type="submit"
-                        className="knapp"
+                    <KnappBase
+                        type="hoved"
+                        spinner={sender}
                         disabled={sender || this.state.valgtArbeidsgiver === 'VELG'}>
                         Send
-                        { sender && <span className="knapp__spinner" /> }
-                    </button>
+                    </KnappBase>
                 </div>
             </form>
         </div>);

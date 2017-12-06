@@ -13,12 +13,12 @@
 .naermesteLeder {
     padding-right: 3em;
     position: relative;
-    border-top: 1px solid @ikonGraa;
+    border-top: 1px solid @navGra40;
     padding-bottom: 1.5em;
     padding-top: 1em;
 
     &:last-child {
-        border-bottom: 1px solid @ikonGraa;
+        border-bottom: 1px solid @navGra40;
     }
 
     a {
@@ -26,7 +26,7 @@
     }
 
     h4 {
-        .mixin-typo-etikettLiten();
+        .typo-etikett-liten-mixin();
         margin-top: 0;
         margin-bottom: .5em;
         .nedtonet;
@@ -39,7 +39,7 @@
     margin-bottom: .5em;
 
     h3 {
-        .mixin-typo-element();
+        .typo-element-mixin();
         margin: 0;
         text-transform: uppercase;
     }
@@ -52,7 +52,7 @@
 }
 
 .naermesteLeder__ikkeOppgitt {
-    color: @navRoed;
+    color: @navRod;
     font-style: italic;
 }
 
@@ -62,7 +62,7 @@
 
 .naermesteLeder:hover .ikonKollaps {
     &:after, &:before {
-        background-color: @lenkeBlaa;
+        background-color: @navBla;
     }
 }
 

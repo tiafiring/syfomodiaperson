@@ -1,8 +1,10 @@
-import React, { Component, PropTypes } from 'react';
-import Side from '../sider/Side';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getLedetekst, getHtmlLedetekst, Varselstripe } from 'digisyfo-npm';
+import { Panel } from 'nav-frontend-paneler';
+import Side from '../sider/Side';
 import * as actionCreators from '../actions/sykepengesoknader_actions';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
@@ -41,11 +43,11 @@ export class SykepengesoknaderSide extends Component {
                         return <Feilmelding />;
                     }
                     return (<div>
-                        <div className="panel">
+                        <Panel>
                             <Varselstripe type="spesial" ikon="/sykefravaer/img/svg/speiling.svg">
                                 <p>Dette er slik {brukernavn} ser det på nav.no</p>
                             </Varselstripe>
-                        </div>
+                        </Panel>
                         <div className="speiling">
                             <Brodsmuler brodsmuler={brodsmuler} />
                             <Soknader sykepengesoknader={sykepengesoknader} fnr={fnr} />

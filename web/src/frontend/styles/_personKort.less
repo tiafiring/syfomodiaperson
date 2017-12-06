@@ -1,6 +1,5 @@
-@skjermLiten: 38em;
-
 .personkort {
+  margin-bottom:  1em;
   .utvidbar {
     border: none;
   }
@@ -11,7 +10,7 @@
     li {
       display: block;
       margin-bottom: .5em;
-      @media all and(min-width: @skjermMedium) {
+      @media all and(min-width: @screen-sm-min) {
         display: inline-block;
         margin-bottom: 0;
         padding-right: .5em;
@@ -23,10 +22,10 @@
         font-weight: 600;
         &:focus {
           outline: none;
-          background-color: @knappFokusGul;
+          background-color: @orangeFocus;
         }
         &:hover, &.personkort__knapp--aktiv {
-          border-bottom: 0.25em @lenkeBlaa solid;
+          border-bottom: 0.25em @navBla solid;
         }
       }
       &:not(:last-child) {
@@ -64,7 +63,7 @@
   .personkortTittel__etikker {
     display: flex;
     flex-direction: column;
-    @media all and(min-width: @skjermMedium) {
+    @media all and(min-width: @screen-sm-min) {
       flex-direction: row;
     }
     & > div {
@@ -72,7 +71,7 @@
       &:not(:last-child) {
         margin-bottom: 1em;
       }
-      @media all and(min-width: @skjermMedium) {
+      @media all and(min-width: @screen-sm-min) {
         &:not(:last-child) {
           margin-bottom: 0;
           margin-right: 1em;
@@ -83,7 +82,7 @@
 }
 
 .personkort__feilmelding {
-  color: @navRoed;
+  color: @navRod;
   font-style: italic;
 }
 
@@ -94,13 +93,13 @@
 .personkort__visning {
   display: flex;
   flex-direction: column;
-  @media all and(min-width: @skjermMedium) {
+  @media all and(min-width: @screen-sm-min) {
     flex-direction: row;
   }
 }
 .personkortElement {
   width: 100%;
-  @media all and(min-width: @skjermMedium) {
+  @media all and(min-width: @screen-sm-min) {
     width: calc((100% - 2em)/2);
     margin-right: 2em;
     &:nth-of-type(even) {
@@ -117,7 +116,7 @@
   align-items: center;
   margin-bottom: 1em;
   padding-bottom: .5em;
-  border-bottom: 1px solid @ikonGraa;
+  border-bottom: 1px solid @navGra40;
   img, h4 {
     display: inline-block;
   }
@@ -134,7 +133,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  @media all and(min-width: @skjermMedium) {
+  @media all and(min-width: @screen-sm-min) {
     flex-direction: row;
   }
 }
@@ -145,7 +144,7 @@
   display: flex;
   flex-direction: column;
   margin: 0;
-  @media all and(min-width: @skjermMedium) {
+  @media all and(min-width: @screen-sm-min) {
     @personkortInformasjonBredde: calc(50% - 1em - 2);
     width: @personkortInformasjonBredde;
     margin-right: 1em;
@@ -172,7 +171,7 @@
 
 .visningSykmeldt .personkortElement {
   @personkortInformasjonBreddeSykmeldt: calc(33.33% - 2em - 1);
-  @media all and(min-width: @skjermMedium) {
+  @media all and(min-width: @screen-sm-min) {
     width: 100%;
     .personkortElement__informasjon {
       width: @personkortInformasjonBreddeSykmeldt;

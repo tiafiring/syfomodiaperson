@@ -1,16 +1,17 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { proptypes as moterPropTypes } from 'moter-npm';
 import Side from '../sider/Side';
 import MotestatusContainer from './MotestatusContainer';
 import * as moterActions from '../actions/moter_actions';
-import AppSpinner from '../components/AppSpinner';
 import Lightbox from '../components/Lightbox';
 import history from '../history';
 import BekreftMote from '../mote/components/BekreftMote';
 import Feilmelding from '../components/Feilmelding';
+import AppSpinner from '../components/AppSpinner';
 import * as epostinnholdActions from '../actions/epostinnhold_actions';
 import { MOETEPLANLEGGER } from '../menypunkter';
-import { proptypes as moterPropTypes } from 'moter-npm';
 
 export class BekreftMoteSide extends Component {
     constructor(props) {

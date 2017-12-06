@@ -1,10 +1,12 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Panel } from 'nav-frontend-paneler';
 
 const Feilmelding = ({ tittel = 'Beklager, det oppstod en feil', melding = { __html: '<p>Vennligst prøv igjen litt senere.</p>' } }) => {
-    return (<div className="panel panel--melding">
+    return (<Panel className="panel--melding">
             <h3 className="hode hode--feil">{tittel}</h3>
             <div dangerouslySetInnerHTML={melding} />
-    </div>);
+    </Panel>);
 };
 
 Feilmelding.propTypes = {

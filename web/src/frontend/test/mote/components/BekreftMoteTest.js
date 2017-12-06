@@ -1,12 +1,13 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
+import KnappBase from 'nav-frontend-knapper';
 import BekreftMote, { InnholdsviserContainer } from '../../../js/mote/components/BekreftMoteSkjema';
 import BekreftMoteSkjema from '../../../js/mote/components/BekreftMoteSkjema';
 import BekreftMoteUtenSvarSkjema from '../../../js/mote/components/BekreftMoteUtenSvarSkjema';
 import { mount, shallow } from 'enzyme';
 import React from 'react'
 import { konstanter } from 'moter-npm';
-import Epostmottakere from '../../../js/mote/components/Epostmottakere'
+import Epostmottakere from '../../../js/mote/components/Epostmottakere';
 
 const { BRUKER, ARBEIDSGIVER } = konstanter;
 
@@ -237,7 +238,7 @@ describe("BekreftMoteUtenSvarSkjemaComponent", () => {
             mote={mote}
             ledetekster={ledetekster}
             bekreftMoteUtenSvar={handleSubmit} />);
-        component.find('button.rammeknapp').simulate('click');
+        component.find(KnappBase).simulate('click');
         expect(handleSubmit.calledOnce).to.be.true;
     });
 

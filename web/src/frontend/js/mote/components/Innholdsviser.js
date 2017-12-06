@@ -1,4 +1,6 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Radio } from 'nav-frontend-skjema';
 import { Varselstripe, getLedetekst } from 'digisyfo-npm';
 import AppSpinner from '../../components/AppSpinner';
 import { konstanter, proptypes as moterPropTypes } from 'moter-npm';
@@ -24,30 +26,26 @@ Innhold.propTypes = {
 export const Innholdsvelger = ({ onChange, valgtDeltakertype, ledetekster }) => {
     return (<ul className="radiofaner radiofaner--innholdsvelger">
         <li className="radiofaner__valg">
-            <input
+            <Radio
+                label={getLedetekst('mote.epostinnhold.informasjon-som-sendes.til-arbeidsgiver', ledetekster)}
                 checked={valgtDeltakertype === ARBEIDSGIVER}
                 onChange={() => {
                     onChange(ARBEIDSGIVER);
                 }}
-                type="radio"
                 name="innholdstype"
                 value="arbeidsgiver"
-                className="radioknapp"
                 id="epostinnhold-til-arbeidsgiver" />
-            <label htmlFor="epostinnhold-til-arbeidsgiver">{getLedetekst('mote.epostinnhold.informasjon-som-sendes.til-arbeidsgiver', ledetekster)}</label>
         </li>
         <li className="radiofaner__valg">
-            <input
+            <Radio
+                label={getLedetekst('mote.epostinnhold.informasjon-som-sendes.til-arbeidstaker', ledetekster)}
                 checked={valgtDeltakertype === BRUKER}
                 onChange={() => {
                     onChange(BRUKER);
                 }}
-                type="radio"
                 name="innholdstype"
                 value="arbeidstaker"
-                className="radioknapp"
                 id="epostinnhold-til-arbeidstaker" />
-            <label htmlFor="epostinnhold-til-arbeidstaker">{getLedetekst('mote.epostinnhold.informasjon-som-sendes.til-arbeidstaker', ledetekster)}</label>
         </li>
     </ul>);
 };

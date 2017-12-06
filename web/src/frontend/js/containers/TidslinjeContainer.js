@@ -1,10 +1,12 @@
-import React, { Component, PropTypes } from 'react';
-import Side from '../sider/Side';
-import SidetoppSpeilet from '../components/SidetoppSpeilet';
-import * as tidslinjerActions from '../actions/tidslinjer_actions';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Tidslinje, setHendelseData, getLedetekst, getHtmlLedetekst, Varselstripe } from 'digisyfo-npm';
+import { Panel } from 'nav-frontend-paneler';
+import Side from '../sider/Side';
+import SidetoppSpeilet from '../components/SidetoppSpeilet';
+import * as tidslinjerActions from '../actions/tidslinjer_actions';
 import TidslinjeVelgArbeidssituasjonContainer from './TidslinjeVelgArbeidssituasjonContainer';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
@@ -56,11 +58,11 @@ export class TidslinjeSide extends Component {
                     return <Feilmelding />;
                 }
                 return (<div>
-                    <div className="panel">
+                    <Panel>
                         <Varselstripe type="spesial" ikon="/sykefravaer/img/svg/speiling.svg">
                             <p>Dette er slik {brukernavn} ser det på nav.no</p>
                         </Varselstripe>
-                    </div>
+                    </Panel>
                     <div className="speiling">
                         <Brodsmuler brodsmuler={brodsmuler} />
                         <SidetoppSpeilet tittel="Tidslinjen" htmlTekst={htmlIntro} />

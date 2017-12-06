@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { Radio } from 'nav-frontend-skjema';
 import Innholdsviser, { Innholdsvelger } from '../../../js/mote/components/Innholdsviser';
 import AppSpinner from '../../../js/components/AppSpinner';
 import { mount, shallow } from 'enzyme';
@@ -117,7 +118,7 @@ describe("Innholdsviser", () => {
 
     it("Skal hente epostinnhold når man klikker på en radioknapp i innholdsvelgeren", () => {
       let component = mount(<Innholdsviser arbeidstaker={arbeidstaker} hentEpostinnhold={hentEpostinnhold} mote={mote} epostinnhold={epostinnhold}/>);
-      component.find("#epostinnhold-til-arbeidstaker").simulate("change");
+      component.find("input#epostinnhold-til-arbeidstaker").simulate("change");
       expect(hentEpostinnhold.calledWith("uuid2")).to.be.true;
     });
 
@@ -131,14 +132,14 @@ describe("Innholdsviser", () => {
       });
 
       it("Skal vise to radioknapper", () => {
-        expect(component.find("input[type='radio']")).to.have.length(2);
-      })
+        expect(component.find(Radio)).to.have.length(2);
+      });
 
       it("Skal kalle på onChange med valgt deltakertype når man klikker på en radioknapp", () => {
-        component.find("input[type='radio']").at(0).simulate("change");
+        component.find(Radio).at(0).simulate("change");
         expect(onChange.calledWith(ARBEIDSGIVER)).to.be.true;
 
-        component.find("input[type='radio']").at(1).simulate("change");
+        component.find(Radio).at(1).simulate("change");
         expect(onChange.calledWith(BRUKER)).to.be.true;
       })
     })

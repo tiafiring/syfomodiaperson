@@ -1,4 +1,5 @@
 import {expect} from "chai";
+import AlertStripe from 'nav-frontend-alertstriper';
 import MotebookingStatus, { StatusVarsel, PassertVarsel } from "../../../js/mote/components/MotebookingStatus";
 import Svarstatus from '../../../js/mote/components/Svarstatus';
 import BekreftetMotetidspunkt from "../../../js/mote/components/BekreftetMotetidspunkt";
@@ -8,7 +9,6 @@ import Sidetopp from '../../../js/components/Sidetopp';
 import {mount, shallow} from "enzyme";
 import React from "react";
 import sinon from "sinon";
-import {Varselstripe} from "digisyfo-npm";
 import {trekkDagerFraDato, leggTilDagerPaaDato} from '../../../js/mote/utils/index';
 
 describe("MotebookingStatus", () => {
@@ -179,14 +179,14 @@ describe("MotebookingStatus", () => {
 
         it("Skal vise riktig tekst når møtet er OPPRETTET", () => {
             let component = mount(<StatusVarsel arbeidstaker={arbeidstaker} mote={mote} ledetekster={ledetekster} />)
-            expect(component.find(Varselstripe).text()).to.contain("Møteforespørselen ble sendt til Helge og Ole");
-            expect(component.find(Varselstripe).text()).to.contain("Sendt: 22.11.2016");
+            expect(component.find(AlertStripe).text()).to.contain("Møteforespørselen ble sendt til Helge og Ole");
+            expect(component.find(AlertStripe).text()).to.contain("Sendt: 22.11.2016");
         });
 
         it("Skal vise riktig tekst når møtet er BEKREFTET", () => {
             let component = mount(<StatusVarsel arbeidstaker={arbeidstaker} mote={bekreftetMote} ledetekster={ledetekster} />)
-            expect(component.find(Varselstripe).text()).to.contain("Møtetidspunkt valgt, møteresultat og varsel er sendt til ***REMOVED***");
-            expect(component.find(Varselstripe).text()).to.contain("Sendt: 12.12.2011");
+            expect(component.find(AlertStripe).text()).to.contain("Møtetidspunkt valgt, møteresultat og varsel er sendt til ***REMOVED***");
+            expect(component.find(AlertStripe).text()).to.contain("Sendt: 12.12.2011");
         });
 
     })

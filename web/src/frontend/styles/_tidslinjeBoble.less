@@ -7,7 +7,7 @@
     border-radius: 4px;
     border: 0; 
     text-align: left;
-    background: @hvit;
+    background: @white;
     color: #000;
 
     img {
@@ -16,19 +16,19 @@
     }
 
     &:focus {
-        background: @hvit; 
+        background: @white;
         border: 0; 
         outline: 0; 
     }
 
     &:focus .tidslinjeBoble__tittel {
-        background-color: @hvit; 
-        outline: 3px solid @fokusOrange; 
+        background-color: @white;
+        outline: 3px solid @orangeFocus;
     }
 }
 
 .tidslinjeBoble__header .tidslinjeBoble__headeractive {
-    color: @navTekst; 
+    color: @navMorkGra;
 }
 
 .tidslinjeBoble__header--erApen {
@@ -50,12 +50,12 @@
     h3 {
         margin: 0;
         margin-bottom: .5rem;
-        .mixin-typo-element();
+        .typo-element-mixin();
     }
 
     h3:only-child {
-        margin: 0;  
-        .mixin-typo-infotekst();
+        margin: 0;
+        .typo-normal-mixin();
     }
 
     p {
@@ -103,7 +103,7 @@
     }
 
     h4 {
-        .mixin-typo-element(); 
+        .typo-element-mixin();
         margin-top: 20px;
         margin-bottom: 0; 
     }
@@ -114,7 +114,8 @@
 }
 
 .tidslinjeBoble__innhold:extend(.panel) {
-    border-top: 1px solid @ikonGraa; 
+    background-color: @white;
+    border-top: 1px solid @navGra40;
     margin-bottom: 0;
 }
 
@@ -126,7 +127,7 @@
 
     .tidslinjeBoble__header,
     .tidslinjeBoble__budskapContainer--erApen {
-        outline: 1px solid @hvit;
+        outline: 1px solid @white;
     }
 
     .tidslinjeBoble__tittel {
