@@ -51,12 +51,12 @@ PersonkortVisningInformasjon.propTypes = {
 
 export const VisningSykmeldt = ({ navbruker }) => {
     const informasjonNokkelTekster = new Map([
-        ['folkeregistrert', 'Folkeregistrert Adresse'],
-        ['postadresse', finnPostAdresseTittel(navbruker)],
-        ['midlertidigAdresse', finnMidlertidigAdresseTittel(navbruker)],
         ['fnr', getLedetekst('modiafront.personkort.visning.nokkeltekster.fnr')],
         ['tlf', getLedetekst('modiafront.personkort.visning.nokkeltekster.tlf')],
         ['epost', getLedetekst('modiafront.personkort.visning.nokkeltekster.epost')],
+        ['folkeregistrert', 'Folkeregistrert Adresse'],
+        ['postadresse', finnPostAdresseTittel(navbruker)],
+        ['midlertidigAdresse', finnMidlertidigAdresseTittel(navbruker)],
     ]);
     const ER_MIDLERTIDIG_ADRESSE = false;
     const ER_IKKE_POSTADRESSE = false;
@@ -66,7 +66,7 @@ export const VisningSykmeldt = ({ navbruker }) => {
         midlertidigAdresse: finnMidlertidigAdresseTekst(navbruker),
     });
     const valgteElementerKontaktinfo = (({ tlf, epost, fnr }) => ({ tlf, epost, fnr }))(navbruker.kontaktinfo);
-    const valgteElementer = Object.assign({}, valgteElementerAdresse, valgteElementerKontaktinfo);
+    const valgteElementer = Object.assign({}, valgteElementerKontaktinfo, valgteElementerAdresse);
     return (<div className="personkort__visning visningSykmeldt">
         <PersonkortVisningElement
             tittel="Kontaktinformasjon"
