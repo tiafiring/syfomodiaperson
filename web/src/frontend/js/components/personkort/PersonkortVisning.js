@@ -82,7 +82,7 @@ export const VisningLeder = ({ ledere }) => {
                 }));
                 return (<PersonkortVisningElement
                     key={idx}
-                    tittel="Nærmeste Leder"
+                    tittel={leder.organisasjonsnavn}
                     imgUrl="/sykefravaer/img/svg/fabrikk.svg">
                     { !leder.erOppgitt ?
                         <p className="personkort__feilmelding">
@@ -110,10 +110,9 @@ export const VisningLege = ({ fastleger, sykmeldtNavn }) => {
         })],
         ['navn', getLedetekst('modiafront.personkort.visning.nokkeltekster.legekontor')],
         ['telefon', getLedetekst('modiafront.personkort.visning.nokkeltekster.tlf')],
-        ['orgnummer', getLedetekst('modiafront.personkort.visning.nokkeltekster.orgnummer')],
     ]);
     const aktivFastlege = fastleger.aktiv;
-    const valgteElementerKontor = aktivFastlege.fastlegekontor && (({ navn, telefon, orgnummer }) => ({ navn, telefon, orgnummer }))(aktivFastlege.fastlegekontor);
+    const valgteElementerKontor = aktivFastlege.fastlegekontor && (({ navn, telefon }) => ({ navn, telefon }))(aktivFastlege.fastlegekontor);
     const valgteElementerPasientforhold = aktivFastlege.pasientforhold && (({ fom }) => ({ fom }))(Object.assign({}, aktivFastlege.pasientforhold, {
         fom: aktivFastlege.pasientforhold.fom && restdatoTildato(aktivFastlege.pasientforhold.fom),
     }));
