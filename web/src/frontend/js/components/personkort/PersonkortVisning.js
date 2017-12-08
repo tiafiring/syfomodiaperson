@@ -7,7 +7,7 @@ import {
     formatterUstrukturertAdresse,
     finnMidlertidigAdresseTittel,
     finnMidlertidigAdresseTekst,
-    finnPostAdresseTittel,
+    finnPostadresseTittel,
 } from '../../utils/adresseUtils';
 
 export const PersonkortVisningElement = ({ tittel, imgUrl, children }) => {
@@ -55,7 +55,7 @@ export const VisningSykmeldt = ({ navbruker }) => {
         ['tlf', getLedetekst('modiafront.personkort.visning.nokkeltekster.tlf')],
         ['epost', getLedetekst('modiafront.personkort.visning.nokkeltekster.epost')],
         ['folkeregistrert', 'Folkeregistrert Adresse'],
-        ['postadresse', finnPostAdresseTittel(navbruker)],
+        ['postadresse', finnPostadresseTittel(navbruker)],
         ['midlertidigAdresse', finnMidlertidigAdresseTittel(navbruker)],
     ]);
     const ER_MIDLERTIDIG_ADRESSE = false;
@@ -122,9 +122,7 @@ VisningLeder.propTypes = {
 
 export const VisningLege = ({ fastleger, sykmeldtNavn }) => {
     const informasjonNokkelTekster = new Map([
-        ['fom', getLedetekst('modiafront.personkort.visning.nokkeltekster.lege_fom', {
-            '%SYKMELDTNAVN%': sykmeldtNavn,
-        })],
+        ['fom', getLedetekst('modiafront.personkort.visning.nokkeltekster.lege_fom')],
         ['navn', getLedetekst('modiafront.personkort.visning.nokkeltekster.legekontor')],
         ['telefon', getLedetekst('modiafront.personkort.visning.nokkeltekster.tlf')],
     ]);

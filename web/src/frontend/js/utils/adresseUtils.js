@@ -1,40 +1,27 @@
 import React from 'react';
+import { getLedetekst } from 'digisyfo-npm';
 const emdashCharacterCode = 8212;
 const EMDASH = String.fromCharCode(emdashCharacterCode);
 
-export const formatterNavEnhet = (enhet) => {
-    if (enhet) {
-        return `${enhet.enhetsnummer} ${enhet.navn}`;
-    }
-    return EMDASH;
-};
-
-export const konverterTilLowercase = (ord) => {
-    if (ord) {
-        return ord.substring(0, 1) + ord.substring(1).toLowerCase();
-    }
-    return ord;
-};
-
 export const finnMidlertidigAdresseTittel = (navbruker) => {
     if (navbruker.midlertidigAdresseNorge) {
-        return 'Midlertidig adresse Norge';
+        return getLedetekst('modiafront.personkort.visning.nokkeltekster.adresse.midlertidig-norge');
     } else if (navbruker.midlertidigAdresseUtland) {
-        return 'Midlertidig adresse utlandet';
+        return getLedetekst('modiafront.personkort.visning.nokkeltekster.adresse.midlertidig-utland');
     }
-    return 'Midlertidig adresse';
+    return getLedetekst('modiafront.personkort.visning.nokkeltekster.adresse.midlertidig');
 };
 
-export const finnPostAdresseTittel = (navbruker) => {
+export const finnPostadresseTittel = (navbruker) => {
     const postadresse = navbruker.postAdresse;
     if (postadresse && postadresse.ustrukturertAdresse && postadresse.ustrukturertAdresse.landkode) {
         if (postadresse.ustrukturertAdresse.landkode === 'NOR' ||
             postadresse.ustrukturertAdresse.landkode === 'NORGE') {
-            return 'Postadresse Norge';
+            return getLedetekst('modiafront.personkort.visning.nokkeltekster.adresse.postadresse-norge');
         }
-        return 'Postadresse utlandet';
+        return getLedetekst('modiafront.personkort.visning.nokkeltekster.adresse.postadresse-utland');
     }
-    return 'Postadresse';
+    return getLedetekst('modiafront.personkort.visning.nokkeltekster.adresse.postadresse');
 };
 
 const visLand = (land) => {
@@ -78,7 +65,7 @@ const formatterMatrikkeladresse = (adresse, erMidlertidigAdresse) => {
         `${adresse.postnummer} ${adresse.poststed || ''}`, land, '');
 };
 
-const formatterPostboksAdresse = (adresse, erMidlertidigAdresse) => {
+const formatterPostboksadresse = (adresse, erMidlertidigAdresse) => {
     const postboksanlegg = adresse.postboksanlegg ? `${adresse.postboksanlegg} ` : '';
     const land = visLand(adresse.landkode) ? `${adresse.landkode}` : '';
     const tilleggsadresse = erMidlertidigAdresse ? '' : adresse.tilleggsadresse || '';
@@ -94,7 +81,7 @@ export const formatterNorskAdresse = (adresse, erMidlertidigAdresse) => {
         } else if (adresse.strukturertAdresse.matrikkeladresse) {
             return formatterMatrikkeladresse(adresse.strukturertAdresse.matrikkeladresse, erMidlertidigAdresse);
         } else if (adresse.strukturertAdresse.postboksadresseNorsk) {
-            return formatterPostboksAdresse(adresse.strukturertAdresse.postboksadresseNorsk, erMidlertidigAdresse);
+            return formatterPostboksadresse(adresse.strukturertAdresse.postboksadresseNorsk, erMidlertidigAdresse);
         }
     }
     return <span className="adresselinje">{EMDASH}</span>;
