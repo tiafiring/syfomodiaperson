@@ -22,7 +22,10 @@
         border: none;
         text-transform: uppercase;
         font-weight: 600;
-
+        &:focus {
+          outline: none;
+          background-color: @knappFokusGul;
+        }
         &:hover, &.personkort__knapp--aktiv {
           border-bottom: 0.25em @lenkeBlaa solid;
         }
