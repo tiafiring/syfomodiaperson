@@ -145,6 +145,13 @@ describe('PersonkortVisning', () => {
         it('Skal vise PersonkortVisningElement med feilmelding, dersom ledere ikke er innmeldt', () => {
             expect(komponent.find('p.personkort__feilmelding')).to.have.length(1);
         });
+
+        it('Skal vise PersonkortVisningElement med feilmelding, dersom bruker ikke har noen ledere ', () => {
+            komponent = shallow(<VisningLeder
+                ledere={[]}
+            />);
+            expect(komponent.find('p.personkort__feilmelding')).to.have.length(1);
+        });
     });
 
     describe('VisningLege', () => {

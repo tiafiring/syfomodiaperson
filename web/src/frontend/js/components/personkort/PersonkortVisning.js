@@ -35,7 +35,7 @@ export const PersonkortVisningInformasjon = ({ informasjonNokkelTekster, informa
     {
         Object.keys(informasjon).map((nokkel, idx) => {
             return (
-                <dl key={idx} className="personkortElement__infomasjon">
+                <dl key={idx} className="personkortElement__informasjon">
                     <dt >{informasjonNokkelTekster.get(nokkel)}</dt>
                     <dd>{informasjon[nokkel]}</dd>
                 </dl>
@@ -92,7 +92,11 @@ export const VisningLeder = ({ ledere }) => {
         ['fomDato', getLedetekst('modiafront.personkort.visning.nokkeltekster.leder_fom')],
     ]);
     return (<div className="personkort__visning visningLeder">
-        {
+        { ledere.length === 0 ?
+            <p className="personkort__feilmelding">
+                {'Brukeren har ingen nærmeste leder'}
+            </p>
+            :
             ledere.map((leder, idx) => {
                 const valgteElementer = (({ navn, epost, tlf, orgnummer, fomDato }) => ({ navn, epost, tlf, orgnummer, fomDato }))(Object.assign({}, leder, {
                     fomDato: leder.fomDato && restdatoTildato(leder.fomDato),
@@ -120,7 +124,7 @@ VisningLeder.propTypes = {
     ledere: PropTypes.array,
 };
 
-export const VisningLege = ({ fastleger, sykmeldtNavn }) => {
+export const VisningLege = ({ fastleger }) => {
     const informasjonNokkelTekster = new Map([
         ['fom', getLedetekst('modiafront.personkort.visning.nokkeltekster.lege_fom')],
         ['navn', getLedetekst('modiafront.personkort.visning.nokkeltekster.legekontor')],
@@ -148,14 +152,13 @@ export const VisningLege = ({ fastleger, sykmeldtNavn }) => {
                 />
             </PersonkortVisningElement>
             { fastleger.tidligere.length > 0 && <VisningTidligereLeger
-                    tidligereFastleger={fastleger.tidligere}
-                />
+                tidligereFastleger={fastleger.tidligere}
+            />
             }
         </div>;
 };
 VisningLege.propTypes = {
     fastleger: PropTypes.object,
-    sykmeldtNavn: PropTypes.string,
 };
 
 export const VisningTidligereLeger = ({ tidligereFastleger }) => {
@@ -208,7 +211,6 @@ export const PersonkortVisning = ({ navbruker, ledere, fastleger, behandlendeEnh
     if (visning === PERSONKORTVISNING_TYPE.LEGE) {
         return (<VisningLege
             fastleger={fastleger}
-            sykmeldtNavn={navbruker.navn}
         />);
     } else if (visning === PERSONKORTVISNING_TYPE.LEDER) {
         return (<VisningLeder

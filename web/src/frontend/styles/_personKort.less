@@ -20,7 +20,6 @@
         padding: 0;
         background-color: transparent;
         border: none;
-        text-transform: uppercase;
         font-weight: 600;
         &:focus {
           outline: none;
@@ -99,24 +98,14 @@
     flex-direction: row;
   }
 }
-.visningSykmeldt .personkortElement {
-  @media all and(min-width: @skjermMedium) {
-    width: 100%;
-  }
-  dl {
-    width: 33%;
-    max-width: 33%;
-  }
-}
 .personkortElement {
   width: 100%;
-  padding-right: 0;
   @media all and(min-width: @skjermMedium) {
-    width: 50%;
-    padding-right: 2em;
-  }
-  &:nth-of-type(even) {
-    padding-right: 0;
+    width: calc((100% - 2em)/2);
+    margin-right: 2em;
+    &:nth-of-type(even) {
+      margin-right: 0;
+    }
   }
   p {
     padding-right: 0;
@@ -148,30 +137,51 @@
   @media all and(min-width: @skjermMedium) {
     flex-direction: row;
   }
-  dl {
-    * {
-      margin: 0;
-    }
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    max-width: 50%;
+}
+.personkortElement__informasjon {
+  * {
     margin: 0;
+  }
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  @media all and(min-width: @skjermMedium) {
+    @personkortInformasjonBredde: calc(50% - 1em - 2);
+    width: @personkortInformasjonBredde;
+    margin-right: 1em;
     margin-bottom: 1em;
-    padding-right: 2em;
-    &:nth-of-type(even) {
-      padding-right: 0;
+    &:nth-of-type(2n) {
+      width: @personkortInformasjonBredde;
+      margin-right: 0;
     }
-    dt {
-      margin-bottom: .05em;
-      text-transform: uppercase;
-      font-family: Source Sans Pro,Arial,sans-serif;
-      font-size: .87em;
-      font-weight: 400;
-      color: #7f756c;
-    }
-    dd {
+  }
+  dt {
+    margin-bottom: .1em;
+    text-transform: uppercase;
+    font-family: Source Sans Pro, Arial, sans-serif;
+    font-size: .87em;
+    font-weight: 400;
+    color: #7f756c;
+  }
+  dd {
+    margin-bottom: 1em;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+}
+
+.visningSykmeldt .personkortElement {
+  @personkortInformasjonBreddeSykmeldt: calc(33.33% - 2em - 1);
+  @media all and(min-width: @skjermMedium) {
+    width: 100%;
+    .personkortElement__informasjon {
+      width: @personkortInformasjonBreddeSykmeldt;
+      margin-right: 1em;
       margin-bottom: 1em;
+      &:nth-of-type(3n) {
+        width: @personkortInformasjonBreddeSykmeldt;
+        margin-right: 0;
+      }
     }
   }
 }
