@@ -94,7 +94,7 @@ export const VisningLeder = ({ ledere }) => {
     return (<div className="personkort__visning visningLeder">
         { ledere.length === 0 ?
             <p className="personkort__feilmelding">
-                {'Brukeren har ingen nærmeste leder'}
+                {getLedetekst('modiafront.personkort.visning.leder.feilmelding.ingen-ledere')}
             </p>
             :
             ledere.map((leder, idx) => {
@@ -107,7 +107,7 @@ export const VisningLeder = ({ ledere }) => {
                     imgUrl="/sykefravaer/img/svg/fabrikk.svg">
                     { !leder.erOppgitt ?
                         <p className="personkort__feilmelding">
-                            {'Nærmeste leder ikke meldt inn av arbeidsgiver'}
+                            {getLedetekst('modiafront.personkort.visning.leder.feilmelding.ingen-leder')}
                         </p>
                         :
                         <PersonkortVisningInformasjon
@@ -138,7 +138,7 @@ export const VisningLege = ({ fastleger }) => {
     const valgteElementer = Object.assign({}, valgteElementerPasientforhold, valgteElementerKontor);
     return fastleger.ikkeFunnet ?
         <p className="personkort__feilmelding">
-            {'Det kan hende brukeren ikke har en fastlege. Ta kontakt med brukeren for å få behandlers kontaktoppslysninger'}
+            {getLedetekst('modiafront.personkort.visning.fastlege.feilmelding')}
         </p>
         :
         <div className="personkort__visning visningLege">
