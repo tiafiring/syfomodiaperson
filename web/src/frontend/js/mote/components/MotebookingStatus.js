@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { getDatoFraZulu, fikkIkkeMoteOpprettetVarsel, erMotePassert } from '../utils/index';
+import { getDatoFraZulu, erMotePassert } from '../utils/index';
 import Sidetopp from '../../components/Sidetopp';
 import KontaktInfoFeilmelding from './KontaktInfoFeilmelding';
 import BekreftetMotetidspunkt from './BekreftetMotetidspunkt';
@@ -16,6 +16,7 @@ export const MotetidspunktValgt = ({ bekreftetTidspunkt, ledetekster }) => {
 
 const BEKREFTET = 'BEKREFTET';
 const OPPRETTET = 'OPPRETTET';
+const FLERE_TIDSPUNKT = 'FLERE_TIDSPUNKT';
 
 MotetidspunktValgt.propTypes = {
     bekreftetTidspunkt: PropTypes.string,
@@ -29,7 +30,7 @@ const getLedetekstFraFeilAarsak = (feilAarsak, ledetekster) => {
             nokkel = 'motestatus.krr.reservert';
             break;
         }
-        case 'INGEN_KONTAKTINFORMASJON': {
+        case 'KONTAKTINFO_IKKE_FUNNET': {
             nokkel = 'motestatus.krr.ingen-kontaktinformasjon';
             break;
         }
@@ -48,13 +49,15 @@ const getLedetekstFraFeilAarsak = (feilAarsak, ledetekster) => {
     return '';
 };
 
-const getSendtTilTekst = (mote, ledetekster) => {
-    const navneliste = mote.deltakere.filter((deltaker) => {
-        return deltaker.type !== 'Bruker' || !(deltaker.type === 'Bruker' && fikkIkkeMoteOpprettetVarsel(deltaker));
-    }).map((deltaker) => {
-        return deltaker.navn;
-    });
-    const nokkel = mote.status === OPPRETTET ? 'mote.bookingstatus.foresporsel.sendt.til' : 'mote.bookingstatus.bekreftet.sendt-til';
+const getSendtTilTekst = (mote, ledetekster, arbeidstaker) => {
+    const navneliste = mote.deltakere
+        .filter((deltaker) => {
+            return deltaker.type === 'arbeidsgiver' || arbeidstaker.kontaktinfo.skalHaVarsel;
+        })
+        .map((deltaker) => {
+            return deltaker.navn;
+        });
+    const nokkel = mote.status === OPPRETTET || mote.status === FLERE_TIDSPUNKT ? 'mote.bookingstatus.foresporsel.sendt.til' : 'mote.bookingstatus.bekreftet.sendt-til';
     return getLedetekst(nokkel, ledetekster, {
         '%DELTAKERE%': navneliste.join(' og '),
     });
@@ -63,18 +66,18 @@ const getSendtTilTekst = (mote, ledetekster) => {
 const getSidetoppNokkel = (mote, motePassert) => {
     if (motePassert) {
         return 'mote.bookingstatus.passert.tittel';
-    } else if (mote.status === OPPRETTET) {
+    } else if (mote.status === OPPRETTET || mote.status === FLERE_TIDSPUNKT) {
         return 'mote.bookingstatus.sidetittel';
     }
     return 'mote.bookingstatus.bekreftet.tittel';
 };
 
-export const StatusVarsel = ({ mote, ledetekster }) => {
-    const dato = mote.status === OPPRETTET ? mote.opprettetTidspunkt : mote.bekreftetTidspunkt;
+export const StatusVarsel = ({ mote, ledetekster, arbeidstaker }) => {
+    const dato = mote.status === OPPRETTET || mote.status === FLERE_TIDSPUNKT ? mote.opprettetTidspunkt : mote.bekreftetTidspunkt;
     return (<div className="panel">
         <Varselstripe type="suksess">
             <div>
-                <p className="typo-element">{getSendtTilTekst(mote, ledetekster)}</p>
+                <p className="typo-element">{getSendtTilTekst(mote, ledetekster, arbeidstaker)}</p>
                 <p className="sist">{getLedetekst('mote.bookingstatus.sendt-dato', ledetekster, {
                     '%DATO%': getDatoFraZulu(dato),
                 })}</p>
@@ -86,6 +89,7 @@ export const StatusVarsel = ({ mote, ledetekster }) => {
 StatusVarsel.propTypes = {
     mote: moterPropTypes.mote,
     ledetekster: PropTypes.object,
+    arbeidstaker: PropTypes.object,
 };
 
 export const PassertVarsel = ({ ledetekster }) => {
@@ -102,10 +106,10 @@ PassertVarsel.propTypes = {
 };
 
 const MotebookingStatus = (props) => {
-    const { ledetekster, fikkIkkeOpprettetVarsel, fnr, mote, avbrytMoteUtenVarsel, antallNyeTidspunkt } = props;
+    const { ledetekster, fnr, mote, avbrytMoteUtenVarsel, antallNyeTidspunkt, arbeidstaker } = props;
     const { alternativer, status } = mote;
-    const krrMeldingPanel = fikkIkkeOpprettetVarsel ?
-        <KontaktInfoFeilmelding melding={getLedetekstFraFeilAarsak(fikkIkkeOpprettetVarsel.resultat, ledetekster)} />
+    const krrMeldingPanel = !arbeidstaker.kontaktinfo.skalHaVarsel ?
+        <KontaktInfoFeilmelding melding={getLedetekstFraFeilAarsak(arbeidstaker.kontaktinfo.feilAarsak, ledetekster)} />
     : null;
     const motePassert = erMotePassert(mote);
     const flereTidspunktBoks = antallNyeTidspunkt ? <FlereTidspunktSkjema {...props} antallEksisterendeTidspunkter={alternativer.length} /> : null;
@@ -114,7 +118,7 @@ const MotebookingStatus = (props) => {
         : <Link role="button" className="knapp knapp--enten js-avbryt" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>{getLedetekst('mote.bookingstatus.knapp.avbryt', ledetekster)}</Link>;
 
     return (<div>
-        { !motePassert && <StatusVarsel mote={mote} ledetekster={ledetekster} /> }
+        { !motePassert && <StatusVarsel mote={mote} ledetekster={ledetekster} arbeidstaker={arbeidstaker} /> }
         {krrMeldingPanel}
         <div className="panel">
             <Sidetopp tittel={getLedetekst(sidetoppNokkel, ledetekster)} />

@@ -1,6 +1,5 @@
 import * as actions from '../actions/actiontyper';
 import { konverterTid } from 'moter-npm';
-import { lagJsDate } from '../mote/utils/index';
 
 const defaultState = {
     data: [],
@@ -21,38 +20,6 @@ export default function moter(state = defaultState, action) {
                 henter: false,
                 hentingFeilet: false,
                 sender: true,
-                sendingFeilet: false,
-                avbryter: false,
-                avbrytFeilet: false,
-            });
-        }
-        case actions.MOTE_OPPRETTET: {
-            const mote = Object.assign({}, action.data, {
-                status: 'OPPRETTET',
-            }, {
-                alternativer: action.data.alternativer.map((a) => {
-                    return Object.assign({}, a, {
-                        tid: lagJsDate(a.tid),
-                        created: new Date(),
-                    });
-                }),
-                deltakere: action.data.deltakere.map((d) => {
-                    return Object.assign({}, d, {
-                        svar: action.data.alternativer.map((a) => {
-                            return Object.assign({}, a, {
-                                tid: lagJsDate(a.tid),
-                                created: new Date(),
-                            });
-                        }),
-                    });
-                }),
-            });
-            return Object.assign({}, state, {
-                data: [...state.data, mote],
-            }, {
-                henter: false,
-                hentingFeilet: false,
-                sender: false,
                 sendingFeilet: false,
                 avbryter: false,
                 avbrytFeilet: false,

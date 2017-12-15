@@ -23,10 +23,10 @@ const actions = Object.assign({}, epostinnholdActions, {
 
 export const InnholdsviserContainer = connect(mapStateToInnholdsviserProps, actions)(DropdownInnholdsviser);
 
-const InformasjonSendt = ({ fikkIkkeOpprettetVarsel, mote, ledetekster }) => {
+const InformasjonSendt = ({ arbeidstaker, mote, ledetekster }) => {
     return (<div>
         <h2>Informasjon sendt:</h2>
-        { !fikkIkkeOpprettetVarsel &&
+        { arbeidstaker.kontaktinfo.skalHaVarsel &&
             <Utvidbar erApen={false} tittel="Arbeidstaker"
                 ikon="svg/person.svg" ikonHover="svg/person_hover.svg" ikonAltTekst="Arbeidstaker" className="blokk"
                 variant="lysebla">
@@ -41,6 +41,7 @@ const InformasjonSendt = ({ fikkIkkeOpprettetVarsel, mote, ledetekster }) => {
 };
 
 InformasjonSendt.propTypes = {
+    arbeidstaker: PropTypes.object,
     mote: moterPropTypes.mote,
     fikkIkkeOpprettetVarsel: PropTypes.object,
     ledetekster: PropTypes.object,

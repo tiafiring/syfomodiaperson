@@ -74,6 +74,11 @@ describe("InformasjonSendt", () => {
 
     let ledetekster;
     let mote;
+    const arbeidstaker = {
+        kontaktinfo: {
+            skalHaVarsel: true,
+        }
+    };
 
     beforeEach(() => {
         mote = getMote();
@@ -82,22 +87,24 @@ describe("InformasjonSendt", () => {
     });
 
     it("Viser to InnholdsviserContainere", () => {
-        let component = shallow(<InformasjonSendt mote={mote} ledetekster={ledetekster}/>);
+        let component = shallow(<InformasjonSendt arbeidstaker={arbeidstaker} mote={mote} ledetekster={ledetekster}/>);
         expect(component.find(InnholdsviserContainer)).to.have.length(2);
     });
 
     it("Viser to Utvidbar", () => {
-        let component = shallow(<InformasjonSendt mote={mote} ledetekster={ledetekster}/>);
+        let component = shallow(<InformasjonSendt arbeidstaker={arbeidstaker} mote={mote} ledetekster={ledetekster}/>);
         expect(component.find(Utvidbar)).to.have.length(2);
     });
 
     it("Viser en InnholdsviserContainer", () => {
-        let component = shallow(<InformasjonSendt mote={mote} ledetekster={ledetekster} fikkIkkeOpprettetVarsel={true} />);
+        arbeidstaker.kontaktinfo.skalHaVarsel = false;
+        let component = shallow(<InformasjonSendt arbeidstaker={arbeidstaker} mote={mote} ledetekster={ledetekster} />);
         expect(component.find(InnholdsviserContainer)).to.have.length(1);
     });
 
     it("Viser en Utvidbar", () => {
-        let component = shallow(<InformasjonSendt mote={mote} ledetekster={ledetekster} fikkIkkeOpprettetVarsel={true} />);
+        arbeidstaker.kontaktinfo.skalHaVarsel = false;
+        let component = shallow(<InformasjonSendt arbeidstaker={arbeidstaker} mote={mote} ledetekster={ledetekster} />);
         expect(component.find(Utvidbar)).to.have.length(1);
     });
 });

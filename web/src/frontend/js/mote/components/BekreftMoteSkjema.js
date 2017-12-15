@@ -10,11 +10,11 @@ import { mapStateToInnholdsviserProps } from './AvbrytMote';
 export const InnholdsviserContainer = connect(mapStateToInnholdsviserProps)(Innholdsviser);
 
 const BekreftMoteSkjema = (props) => {
-    const { mote, ledetekster, bekrefter, bekreftFeilet, onSubmit, avbrytHref, hentEpostinnhold } = props;
+    const { mote, ledetekster, bekrefter, bekreftFeilet, onSubmit, avbrytHref, hentEpostinnhold, arbeidstaker } = props;
 
     return (<div className="epostinnhold">
         <h2 className="epostinnhold__tittel">{getLedetekst('mote.bekreftmote.lightbox-overskrift', ledetekster)}</h2>
-        <Epostmottakere mote={mote} ledetekster={ledetekster} />
+        <Epostmottakere mote={mote} ledetekster={ledetekster} arbeidstaker={arbeidstaker} />
         <InnholdsviserContainer mote={mote} hentEpostinnhold={hentEpostinnhold} ledetekster={ledetekster} />
         <div aria-live="polite" role="alert">
             { bekreftFeilet && (<div className="blokk">
@@ -36,6 +36,7 @@ const BekreftMoteSkjema = (props) => {
 };
 BekreftMoteSkjema.propTypes = {
     ledetekster: PropTypes.object,
+    arbeidstaker: PropTypes.object,
     onSubmit: PropTypes.func,
     avbrytHref: PropTypes.string,
     mote: motePropTypes.mote,

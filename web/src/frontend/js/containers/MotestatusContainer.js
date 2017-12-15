@@ -1,19 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import * as arbeidstakerActions from '../actions/arbeidstaker_actions';
 import * as moteActions from '../actions/moter_actions';
 import MotebookingStatus from '../mote/components/MotebookingStatus';
-import { fikkIkkeMoteOpprettetVarsel } from '../mote/utils/index';
 
 export class MotebookingStatusWrapper extends Component {
-    componentWillMount() {
-        const { fnr, hentArbeidstaker } = this.props;
-        hentArbeidstaker(fnr);
-    }
-
     render() {
         const { henter } = this.props;
-
         if (henter) {
             return null;
         }
@@ -25,7 +17,6 @@ export class MotebookingStatusWrapper extends Component {
 MotebookingStatusWrapper.propTypes = {
     henter: PropTypes.bool,
     fnr: PropTypes.string,
-    hentArbeidstaker: PropTypes.func,
 };
 
 export const mapStateToProps = (state, ownProps) => {
@@ -33,10 +24,9 @@ export const mapStateToProps = (state, ownProps) => {
     let aktivtMote = state.moter.data.filter((m) => {
         return m.moteUuid === moteUuid;
     })[0];
-
     const aktoer = aktivtMote && aktivtMote.deltakere.filter((deltaker) => { return deltaker.type === 'Bruker'; })[0];
-    const fikkIkkeOpprettetVarsel = aktoer && fikkIkkeMoteOpprettetVarsel(aktoer);
-    if (aktoer && !aktoer.svartidspunkt && fikkIkkeOpprettetVarsel) {
+    const reservert = state.navbruker.data.kontaktinfo && !state.navbruker.data.kontaktinfo.skalHaVarsel;
+    if (aktoer && !aktoer.svartidspunkt && reservert) {
         aktivtMote = Object.assign({}, aktivtMote, {
             deltakere: aktivtMote.deltakere.filter((deltaker) => { return deltaker.type !== 'Bruker'; }),
         });
@@ -59,18 +49,17 @@ export const mapStateToProps = (state, ownProps) => {
     return {
         fnr: ownProps.fnr,
         mote: aktivtMote,
-        fikkIkkeOpprettetVarsel,
         avbrytFeilet: state.moter.avbrytFeilet,
         avbryter: state.moter.avbryter,
-        henter: state.moter.henter || state.arbeidstaker.henter || state.ledetekster.henter,
+        henter: state.moter.henter || state.navbruker.henter || state.ledetekster.henter,
         ledetekster: state.ledetekster.data,
-        arbeidstaker: state.arbeidstaker.data,
+        arbeidstaker: state.navbruker.data,
         antallNyeTidspunkt: state.moter.antallNyeTidspunkt,
         nyeAlternativFeilet: state.moter.nyeAlternativFeilet,
         senderNyeAlternativ: state.moter.senderNyeAlternativ,
     };
 };
 
-const MotestatusContainer = connect(mapStateToProps, Object.assign({}, moteActions, arbeidstakerActions))(MotebookingStatusWrapper);
+const MotestatusContainer = connect(mapStateToProps, Object.assign({}, moteActions))(MotebookingStatusWrapper);
 
 export default MotestatusContainer;

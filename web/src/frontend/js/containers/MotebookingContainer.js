@@ -60,7 +60,7 @@ MotebookingSide.propTypes = {
 
 export const mapStateToProps = (state, ownProps) => {
     const aktivtMote = state.moter.data.filter((mote) => {
-        return mote.status === 'OPPRETTET' || mote.status === 'BEKREFTET';
+        return mote.status !== 'AVBRUTT';
     })[0];
 
     return {

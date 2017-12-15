@@ -27,7 +27,6 @@ describe("AvbrytMoteContainer", () => {
                     "navn": "***REMOVED***",
                     "epost": "***REMOVED***",
                     "type": "Bruker",
-                    "avvik": [],
                     "svar": [{
                         "id": 328,
                         "tid": "2020-12-12T11:00:00Z",
@@ -44,7 +43,6 @@ describe("AvbrytMoteContainer", () => {
                     "navn": "***REMOVED***",
                     "epost": "***REMOVED***",
                     "type": "arbeidsgiver",
-                    "avvik": [],
                     "svar": [{
                         "id": 328,
                         "tid": "2020-12-12T11:00:00Z",
@@ -144,7 +142,6 @@ describe("AvbrytMoteContainer", () => {
                             "navn": "***REMOVED***",
                             "epost": "***REMOVED***",
                             "type": "arbeidsgiver",
-                            "avvik": [],
                             "svar": [{
                                 "id": 328,
                                 "tid": "2020-12-12T11:00:00Z",
@@ -173,10 +170,14 @@ describe("AvbrytMoteContainer", () => {
                 navbruker: {
                     data: {
                         fnr: "123"
-                    }
+                    },
+                    henter: false,
+                    hentingFeilet: false,
                 },
                 ledetekster: {
                     henter: false,
+                    hentingFeilet: false,
+                    data: {},
                 },
             };
 

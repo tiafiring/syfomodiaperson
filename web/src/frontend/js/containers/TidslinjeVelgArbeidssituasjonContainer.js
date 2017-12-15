@@ -27,6 +27,7 @@ const VelgArbeidssituasjon = ({ valgtArbeidssituasjon, endreArbeidssituasjon, le
 };
 
 VelgArbeidssituasjon.propTypes = {
+    ledetekster: PropTypes.object,
     arbeidssituasjoner: PropTypes.array,
     valgtArbeidssituasjon: PropTypes.string,
     endreArbeidssituasjon: PropTypes.func,

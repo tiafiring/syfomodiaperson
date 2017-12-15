@@ -10,8 +10,8 @@ export function* opprettMote(action) {
     yield put(actions.oppretterMote());
     try {
         yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter`, action.data);
-        yield put(actions.moteOpprettet(action.data));
-        yield put(historikkActions.hentHistorikk(action.fnr, 'MOTER'));
+        yield put(actions.hentMoter(action.data.fnr));
+        yield put(historikkActions.hentHistorikk(action.data.fnr, 'MOTER'));
     } catch (e) {
         log(e);
         yield put(actions.opprettMoteFeilet());

@@ -28,7 +28,7 @@ export class AvbrytMoteSide extends Component {
     }
 
     render() {
-        const { ledetekster, avbryter, avbrytFeilet, hentingFeiletBool, fnr, mote, henter } = this.props;
+        const { ledetekster, avbryter, avbrytFeilet, hentingFeiletBool, fnr, mote, henter, arbeidstaker } = this.props;
         return (<Side fnr={fnr} tittel="Avbryt møteforespørsel">
         {
             (() => {
@@ -43,6 +43,7 @@ export class AvbrytMoteSide extends Component {
                     }}>
                         {(() => {
                             return (<AvbrytMote
+                                arbeidstaker={arbeidstaker}
                                 ledetekster={ledetekster}
                                 avbrytFeilet={avbrytFeilet}
                                 avbryter={avbryter}
@@ -65,6 +66,7 @@ AvbrytMoteSide.propTypes = {
     henter: PropTypes.bool,
     hentingFeiletBool: PropTypes.bool,
     mote: PropTypes.object,
+    arbeidstaker: PropTypes.object,
     ledetekster: PropTypes.object,
     hentMoter: PropTypes.func,
     avbrytMote: PropTypes.func,
@@ -78,11 +80,12 @@ export function mapStateToProps(state, ownProps) {
     return {
         fnr: ownProps.params.fnr,
         mote,
-        hentingFeiletBool: state.moter.hentingFeilet === true || state.ledetekster.hentingFeilet === true,
+        arbeidstaker: state.navbruker.data,
+        hentingFeiletBool: state.moter.hentingFeilet || state.ledetekster.hentingFeilet || state.navbruker.hentingFeilet,
         avbryter: state.moter.avbryter,
         ledetekster: state.ledetekster.data,
         avbrytFeilet: state.moter.avbrytFeilet,
-        henter: state.moter.henter || state.ledetekster.henter,
+        henter: state.moter.henter || state.ledetekster.henter || state.navbruker.henter,
     };
 }
 

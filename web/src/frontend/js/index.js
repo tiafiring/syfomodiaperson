@@ -24,7 +24,6 @@ import oppfoelgingsdialoger from './reducers/oppfoelgingsdialoger';
 import veilederoppgaver from './reducers/veilederoppgaver';
 import dokumentinfo from './reducers/dokumentinfo';
 import behandlendeEnhet from './reducers/behandlendeEnhet';
-import arbeidstaker from './reducers/arbeidstaker';
 import enhet from './reducers/enhet';
 import virksomhet from './reducers/virksomhet';
 import veilederinfo from './reducers/veilederinfo';
@@ -52,7 +51,6 @@ const rootReducer = combineReducers({
     virksomhet,
     epostinnhold,
     arbeidsgiverEpostinnhold,
-    arbeidstaker,
     oppfoelgingsdialoger,
     sykepengesoknader,
     enhet,

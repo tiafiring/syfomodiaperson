@@ -10,8 +10,9 @@ import Epostmottakere from './Epostmottakere';
 export const mapStateToInnholdsviserProps = (state) => {
     return {
         epostinnhold: state.epostinnhold.data,
-        henter: state.epostinnhold.henter === true,
-        hentingFeilet: state.epostinnhold.hentingFeilet === true,
+        arbeidstaker: state.navbruker.data,
+        henter: state.epostinnhold.henter || state.navbruker.henter,
+        hentingFeilet: state.epostinnhold.hentingFeilet || state.navbruker.henter,
     };
 };
 
@@ -22,11 +23,11 @@ const actions = Object.assign({}, epostinnholdActions, {
 export const InnholdsviserContainer = connect(mapStateToInnholdsviserProps, actions)(Innholdsviser);
 
 const AvbrytMote = (props) => {
-    const { ledetekster, mote, avbrytFeilet, avbryter, avbrytHref, onSubmit } = props;
+    const { ledetekster, mote, avbrytFeilet, avbryter, avbrytHref, onSubmit, arbeidstaker } = props;
 
     return (<div className="epostinnhold">
         <h2 className="epostinnhold__tittel">{getLedetekst('mote.avbrytmote.overskrift', ledetekster)}</h2>
-        <Epostmottakere mote={mote} ledetekster={ledetekster} />
+        <Epostmottakere mote={mote} ledetekster={ledetekster} arbeidstaker={arbeidstaker} />
         <InnholdsviserContainer mote={mote} ledetekster={ledetekster} />
         <div aria-live="polite" role="alert">
             { avbrytFeilet && (<div className="blokk">
@@ -49,6 +50,7 @@ const AvbrytMote = (props) => {
 
 AvbrytMote.propTypes = {
     ledetekster: PropTypes.object,
+    arbeidstaker: PropTypes.object,
     onSubmit: PropTypes.func,
     avbrytHref: PropTypes.string,
     avbryter: PropTypes.bool,
