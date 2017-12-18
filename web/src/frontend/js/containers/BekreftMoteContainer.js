@@ -52,7 +52,7 @@ export class BekreftMoteSide extends Component {
                     } else if (alternativ) {
                         return (<div>
                             {
-                                mote.status === 'OPPRETTET' || mote.status === 'FLERE_TIDSPUNKT' && <Lightbox scrollOverflowY={this.state.scrollOverflowY} onClose={() => {
+                                (mote.status === 'OPPRETTET' || mote.status === 'FLERE_TIDSPUNKT') && <Lightbox scrollOverflowY={this.state.scrollOverflowY} onClose={() => {
                                     history.replace(`/sykefravaer/${fnr}/mote`);
                                 }}>
                                 {
