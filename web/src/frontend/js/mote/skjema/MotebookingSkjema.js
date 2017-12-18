@@ -163,10 +163,6 @@ export function validate(values) {
         feilmeldinger.sted = 'Vennligst angi møtested';
     }
 
-    if (values.orgnummer === 'VELG') {
-        feilmeldinger.orgnummer = 'Vennligst velg arbeidsgiver';
-    }
-
     return feilmeldinger;
 }
 

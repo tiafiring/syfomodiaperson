@@ -3,11 +3,12 @@ import MotebookingSkjema from '../mote/skjema/MotebookingSkjema';
 import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import { connect } from 'react-redux';
 import * as ledereActions from '../actions/ledere_actions';
+import * as moteActions from '../actions/moter_actions';
 import * as virksomhetActions from '../actions/virksomhet_actions';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
 
-const MotebookingSkjemaContainer = ({ ledetekster, henter, skjermetBruker, hentingFeilet, valgtEnhet, ledere, arbeidstaker, fnr }) => {
+const MotebookingSkjemaContainer = ({ opprettMote, ledetekster, henter, skjermetBruker, hentingFeilet, valgtEnhet, ledere, arbeidstaker, fnr }) => {
     if (henter) {
         return <AppSpinner />;
     } else if (skjermetBruker) {
@@ -26,13 +27,14 @@ const MotebookingSkjemaContainer = ({ ledetekster, henter, skjermetBruker, henti
             tittel="Lederen mangler!"
             melding={{ __html: '<p>Møteplanleggeren kan bare brukes hvis nærmeste leder er registrert. Arbeidsgiveren må gjøre dette i Altinn.</p>' }} />);
     }
-    return <MotebookingSkjema ledetekster={ledetekster} ledere={ledere} valgtEnhet={valgtEnhet} arbeidstaker={arbeidstaker} fnr={fnr} />;
+    return <MotebookingSkjema opprettMote={opprettMote} ledetekster={ledetekster} ledere={ledere} valgtEnhet={valgtEnhet} arbeidstaker={arbeidstaker} fnr={fnr} />;
 };
 
 MotebookingSkjemaContainer.propTypes = {
     arbeidstaker: PropTypes.object,
     valgtEnhet: PropTypes.string,
     fnr: PropTypes.string,
+    opprettMote: PropTypes.func,
     hentLedere: PropTypes.func,
     hentArbeidstaker: PropTypes.func,
     henter: PropTypes.bool,
@@ -60,6 +62,6 @@ export function mapStateToProps(state, ownProps) {
     };
 }
 
-const container = connect(mapStateToProps, Object.assign({}, ledereActions, virksomhetActions))(MotebookingSkjemaContainer);
+const container = connect(mapStateToProps, Object.assign({}, ledereActions, virksomhetActions, moteActions))(MotebookingSkjemaContainer);
 
 export default container;
