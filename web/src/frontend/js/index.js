@@ -95,7 +95,7 @@ const config = {
             }
         },
         fnr,
-        applicationName: 'Sykefravær',
+        applicationName: 'Sykefraværsoppfølging',
         handleChangeEnhet: (data) => {
             if (config.config.initiellEnhet !== data) {
                 store.dispatch(valgtEnhet(data));
