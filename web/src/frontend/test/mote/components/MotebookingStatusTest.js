@@ -186,7 +186,7 @@ describe("MotebookingStatus", () => {
         it("Skal vise riktig tekst når møtet er BEKREFTET", () => {
             let component = mount(<StatusVarsel arbeidstaker={arbeidstaker} mote={bekreftetMote} ledetekster={ledetekster} />)
             expect(component.find(Varselstripe).text()).to.contain("Møtetidspunkt valgt, møteresultat og varsel er sendt til ***REMOVED***");
-            expect(component.find(Varselstripe).text()).to.contain("Sendt: 23.03.2017");
+            expect(component.find(Varselstripe).text()).to.contain("Sendt: 12.12.2011");
         });
 
     })

@@ -73,7 +73,7 @@ const getSidetoppNokkel = (mote, motePassert) => {
 };
 
 export const StatusVarsel = ({ mote, ledetekster, arbeidstaker }) => {
-    const dato = mote.status === OPPRETTET || mote.status === FLERE_TIDSPUNKT ? mote.opprettetTidspunkt : mote.bekreftetTidspunkt;
+    const dato = (mote.status === OPPRETTET || mote.status === FLERE_TIDSPUNKT) ? mote.opprettetTidspunkt : mote.bekreftetAlternativ.created;
     return (<div className="panel">
         <Varselstripe type="suksess">
             <div>
