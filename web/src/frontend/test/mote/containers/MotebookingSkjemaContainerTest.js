@@ -1,33 +1,9 @@
 import React from "react";
 import {expect} from "chai";
 import {mount, shallow, render} from "enzyme";
-import sinon from "sinon";
-import AppSpinner from "../../../js/components/AppSpinner";
-import {mapStateToProps, MotebookingSkjemaContainer} from "../../../js/containers/MotebookingSkjemaContainer";
+import MotebookingSkjemaContainer, {mapStateToProps} from "../../../js/containers/MotebookingSkjemaContainer";
 
 describe("MotebookingSkjemaContainer", () => {
-
-    describe("MotebookingSkjemaContainer", () => {
-
-        let hentLedere;
-        let hentArbeidstaker;
-
-        beforeEach(() => {
-            hentLedere = sinon.spy();
-            hentArbeidstaker = sinon.spy();
-        });
-
-        it("Skal hente arbeidstaker", () => {
-            var compo = shallow(<MotebookingSkjemaContainer hentLedere={hentLedere} hentArbeidstaker={hentArbeidstaker} fnr="123" />);
-            expect(hentArbeidstaker.calledWith("123")).to.be.true;
-        });
-
-        it("Skal vise spinner dersom noe hentes", () => {
-            var compo = shallow(<MotebookingSkjemaContainer henter hentLedere={hentLedere} hentArbeidstaker={hentArbeidstaker} fnr="123" />);
-            expect(compo.find(AppSpinner)).to.have.length(1);
-        })
-
-    })
 
     describe("mapStateToProps", () => {
 
@@ -56,7 +32,7 @@ describe("MotebookingSkjemaContainer", () => {
                     valgtEnhet: '0021',
                 },
             };
-            state.arbeidstaker = {
+            state.navbruker = {
                 data: {
                     navn: "Ole"
                 }
@@ -100,19 +76,19 @@ describe("MotebookingSkjemaContainer", () => {
         })
 
         it("Skal returnere henter når arbeidstaker hentes", () => {
-            state.arbeidstaker.henter = true;
+            state.navbruker.henter = true;
             const props = mapStateToProps(state, ownProps);
             expect(props.henter).to.be.true;
         });
 
         it("Skal ikke returnere henter når arbeidstaker ikke hentes", () => {
-            state.arbeidstaker.henter = false;
+            state.navbruker.henter = false;
             const props = mapStateToProps(state, ownProps);
             expect(props.henter).to.be.false;
         });
 
         it("Skal returnere hentingFeilet når henting av arbeidstaker feiler", () => {
-            state.arbeidstaker.hentingFeilet = true;
+            state.navbruker.hentingFeilet = true;
             const props = mapStateToProps(state, ownProps);
             expect(props.hentingFeilet).to.be.true;
         });

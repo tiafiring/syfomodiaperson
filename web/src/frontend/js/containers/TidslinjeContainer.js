@@ -20,16 +20,16 @@ export class TidslinjeSide extends Component {
         this.endreArbeidssituasjon = this.endreArbeidssituasjon.bind(this);
     }
 
+    componentWillMount() {
+        const { fnr, apneHendelseIder, arbeidssituasjon } = this.props;
+        this.props.actions.hentTidslinjer(fnr, apneHendelseIder, arbeidssituasjon);
+    }
+
     endreArbeidssituasjon(valg) {
         this.setState({
             arbeidssituasjon: valg,
         });
         this.props.actions.hentTidslinjer(this.props.fnr, [], valg);
-    }
-
-    componentWillMount() {
-        const { fnr, apneHendelseIder, arbeidssituasjon } = this.props;
-        this.props.actions.hentTidslinjer(fnr, apneHendelseIder, arbeidssituasjon);
     }
 
     render() {

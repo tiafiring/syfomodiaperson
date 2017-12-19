@@ -78,6 +78,11 @@ describe("Innholdsviser", () => {
     let mote;
     let hentEpostinnhold;
     let epostinnhold;
+    const arbeidstaker = {
+        kontaktinfo: {
+            skalHaVarsel: true,
+        }
+    };
 
     beforeEach(() => {
         mote = getMote();
@@ -89,40 +94,31 @@ describe("Innholdsviser", () => {
     })
 
     it("Skal hente epostinnhold", () => {
-        let component = shallow(<Innholdsviser hentEpostinnhold={hentEpostinnhold} mote={mote} />);
+        let component = shallow(<Innholdsviser arbeidstaker={arbeidstaker} hentEpostinnhold={hentEpostinnhold} mote={mote} />);
         component.instance().componentDidMount();
         expect(hentEpostinnhold.calledWith("uuid1")).to.be.true;
     })
 
     it("Viser AppSpinner når epostinnhold hentes", () => {
-        let component = shallow(<Innholdsviser hentEpostinnhold={hentEpostinnhold} mote={mote} henter={true}/>)
+        let component = shallow(<Innholdsviser arbeidstaker={arbeidstaker} hentEpostinnhold={hentEpostinnhold} mote={mote} henter={true}/>)
         expect(component.find(AppSpinner)).to.have.length(1);
     });
 
     it("Viser epostinnhold dersom epostinnhold er hentet", () => {
-        let component = shallow(<Innholdsviser hentEpostinnhold={hentEpostinnhold} mote={mote} epostinnhold={epostinnhold}/>);
+        let component = shallow(<Innholdsviser arbeidstaker={arbeidstaker} hentEpostinnhold={hentEpostinnhold} mote={mote} epostinnhold={epostinnhold}/>);
         expect(component.html()).to.contain("Mitt emne");
         expect(component.html()).to.contain("Mitt innhold");
     });
 
     it("Viser Innholdsvelger", () => {
-        let component = shallow(<Innholdsviser hentEpostinnhold={hentEpostinnhold} mote={mote} epostinnhold={epostinnhold}/>);
+        let component = shallow(<Innholdsviser arbeidstaker={arbeidstaker} hentEpostinnhold={hentEpostinnhold} mote={mote} epostinnhold={epostinnhold}/>);
         expect(component.find(Innholdsvelger)).to.have.length(1);
     });
 
     it("Skal hente epostinnhold når man klikker på en radioknapp i innholdsvelgeren", () => {
-      let component = mount(<Innholdsviser hentEpostinnhold={hentEpostinnhold} mote={mote} epostinnhold={epostinnhold}/>);
+      let component = mount(<Innholdsviser arbeidstaker={arbeidstaker} hentEpostinnhold={hentEpostinnhold} mote={mote} epostinnhold={epostinnhold}/>);
       component.find("#epostinnhold-til-arbeidstaker").simulate("change");
       expect(hentEpostinnhold.calledWith("uuid2")).to.be.true;
-    });
-
-    it("Viser ikke Innholdsvelger dersom varsel til bruker ikke ble sendt", () => {
-        mote.deltakere[1].hendelser = [{
-            resultat: "RESERVERT",
-            varseltype: "OPPRETTET"
-        }];
-        let component = shallow(<Innholdsviser hentEpostinnhold={hentEpostinnhold} mote={mote} epostinnhold={epostinnhold}/>);
-        expect(component.find(Innholdsvelger)).to.have.length(0);
     });
 
     describe("Innholdsvelger", () => {
@@ -131,7 +127,7 @@ describe("Innholdsviser", () => {
 
       beforeEach(() => {
           onChange = sinon.spy();
-          component = shallow(<Innholdsvelger onChange={onChange} valgtDeltaker={BRUKER} />);
+          component = shallow(<Innholdsvelger arbeidstaker={arbeidstaker} onChange={onChange} valgtDeltaker={BRUKER} />);
       });
 
       it("Skal vise to radioknapper", () => {
@@ -145,9 +141,5 @@ describe("Innholdsviser", () => {
         component.find("input[type='radio']").at(1).simulate("change");
         expect(onChange.calledWith(BRUKER)).to.be.true;
       })
-
-
-
     })
-
 });

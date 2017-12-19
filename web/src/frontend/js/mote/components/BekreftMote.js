@@ -38,6 +38,7 @@ class BekreftMote extends Component {
         if (this.props.moteBekreftet) {
             return (
                 <BekreftMoteSkjema
+                    arbeidstaker={this.props.arbeidstaker}
                     onSubmit={this.props.onSubmit}
                     mote={this.props.mote}
                     ledetekster={this.props.ledetekster}
@@ -59,6 +60,7 @@ class BekreftMote extends Component {
     }
 }
 BekreftMote.propTypes = {
+    arbeidstaker: PropTypes.object,
     ledetekster: PropTypes.object,
     onSubmit: PropTypes.func,
     avbrytHref: PropTypes.string,

@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import MotebookingStatus, { MotetidspunktValgt, StatusVarsel, PassertVarsel } from "../../../js/mote/components/MotebookingStatus";
+import MotebookingStatus, { StatusVarsel, PassertVarsel } from "../../../js/mote/components/MotebookingStatus";
 import Svarstatus from '../../../js/mote/components/Svarstatus';
 import BekreftetMotetidspunkt from "../../../js/mote/components/BekreftetMotetidspunkt";
 import KontaktInfoFeilmelding from "../../../js/mote/components/KontaktInfoFeilmelding";
@@ -13,8 +13,14 @@ import {trekkDagerFraDato, leggTilDagerPaaDato} from '../../../js/mote/utils/ind
 
 describe("MotebookingStatus", () => {
 
+    const arbeidstaker = {
+        kontaktinfo: {
+            skalHaVarsel: true,
+        }
+    };
     let now;
     let mote = {};
+    let bekreftetMote = {};
     let motePassert;
     let bekreftetMotePassert;
     let avbrytMote;
@@ -50,8 +56,6 @@ describe("MotebookingStatus", () => {
             type: "arbeidsgiver",
             navn: "Helge",
             epost: "***REMOVED***",
-            avvik: [],
-            hendelser: [],
             svar: [{
                 "tid": "2012-12-12T11:00:00Z",
                 "created": "2011-12-12T11:00:00Z",
@@ -68,8 +72,6 @@ describe("MotebookingStatus", () => {
         }, {
             type: "Bruker",
             navn: "Ole",
-            avvik: [],
-            hendelser: [],
             epost: "***REMOVED***",
             svar: [{
                 "tid": "2012-12-12T11:00:00Z",
@@ -113,8 +115,6 @@ describe("MotebookingStatus", () => {
                 "epost": "***REMOVED***",
                 "type": "arbeidsgiver",
                 "svartidspunkt": "2016-11-22T12:52:06.489Z",
-                "avvik": [],
-                "hendelser": [],
                 "svar": [{
                     "id": 344,
                     "tid": "2019-09-09T07:00:00Z",
@@ -178,26 +178,15 @@ describe("MotebookingStatus", () => {
     describe("StatusVarsel", () => {
 
         it("Skal vise riktig tekst når møtet er OPPRETTET", () => {
-            let component = mount(<StatusVarsel mote={mote} ledetekster={ledetekster} />)
+            let component = mount(<StatusVarsel arbeidstaker={arbeidstaker} mote={mote} ledetekster={ledetekster} />)
             expect(component.find(Varselstripe).text()).to.contain("Møteforespørselen ble sendt til Helge og Ole");
             expect(component.find(Varselstripe).text()).to.contain("Sendt: 22.11.2016");
         });
 
-        it("Skal vise riktig tekst når møtet er OPPRETTET og arbeidstaker er reservert i KRR", () => {
-            mote.deltakere[1].hendelser = [{
-                varseltype: "OPPRETTET",
-                resultat: "RESERVERT"
-            }]
-            let component = mount(<StatusVarsel mote={mote} ledetekster={ledetekster} />)
-            expect(component.find(Varselstripe).text()).to.contain("Møteforespørselen ble sendt til Helge");
-            expect(component.find(Varselstripe).text()).not.to.contain("Ole");
-            expect(component.find(Varselstripe).text()).to.contain("Sendt: 22.11.2016");
-        });
-
         it("Skal vise riktig tekst når møtet er BEKREFTET", () => {
-            let component = mount(<StatusVarsel mote={bekreftetMote} ledetekster={ledetekster} />)
+            let component = mount(<StatusVarsel arbeidstaker={arbeidstaker} mote={bekreftetMote} ledetekster={ledetekster} />)
             expect(component.find(Varselstripe).text()).to.contain("Møtetidspunkt valgt, møteresultat og varsel er sendt til ***REMOVED***");
-            expect(component.find(Varselstripe).text()).to.contain("Sendt: 23.03.2017");
+            expect(component.find(Varselstripe).text()).to.contain("Sendt: 12.12.2011");
         });
 
     })
@@ -206,7 +195,7 @@ describe("MotebookingStatus", () => {
         let component;
 
         beforeEach(() => {
-            component = shallow(<MotebookingStatus mote={mote} ledetekster={ledetekster} />);
+            component = shallow(<MotebookingStatus arbeidstaker={arbeidstaker} mote={mote} ledetekster={ledetekster} />);
         });
 
         it("Skal inneholde StatusVarsel", () => {
@@ -242,7 +231,7 @@ describe("MotebookingStatus", () => {
 
         beforeEach(() => {
             mote = motePassert;
-            component = shallow(<MotebookingStatus mote={mote} ledetekster={ledetekster} />);
+            component = shallow(<MotebookingStatus arbeidstaker={arbeidstaker} mote={mote} ledetekster={ledetekster} />);
         });
 
         it("Skal vise riktig tittel", () => {
@@ -279,7 +268,7 @@ describe("MotebookingStatus", () => {
         let component;
 
         beforeEach(() => {
-            component = shallow(<MotebookingStatus mote={mote} antallNyeTidspunkt={4} />);
+            component = shallow(<MotebookingStatus arbeidstaker={arbeidstaker} mote={mote} antallNyeTidspunkt={4} />);
         });
 
         it("Skal vise Svarstatus med FlereTidspunktSkjema", () => {
@@ -291,10 +280,11 @@ describe("MotebookingStatus", () => {
     describe("Når møtet er bekreftet", () => {
 
         let mote;
+        let component;
 
         beforeEach(() => {
             mote = bekreftetMote;
-            component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} ledetekster={ledetekster} />);
+            component = shallow(<MotebookingStatus arbeidstaker={arbeidstaker} fnr="***REMOVED***" mote={mote} ledetekster={ledetekster} />);
         });
 
         it("Skal vise riktig tittel", () => {
@@ -331,7 +321,7 @@ describe("MotebookingStatus", () => {
         let mote;
         beforeEach(() => {
             mote = bekreftetMotePassert;
-            component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} ledetekster={ledetekster} />);
+            component = shallow(<MotebookingStatus arbeidstaker={arbeidstaker} fnr="***REMOVED***" mote={mote} ledetekster={ledetekster} />);
         });
 
         it("Skal vise riktig tittel", () => {
@@ -372,15 +362,17 @@ describe("MotebookingStatus", () => {
 
     describe("Verktøylinje", () => {
 
+
+
         it("Skal vise en knapp for Ny møteforespørsel", () => {
-            const component = shallow(<MotebookingStatus mote={motePassert} />);
+            const component = shallow(<MotebookingStatus arbeidstaker={arbeidstaker} mote={motePassert} />);
             expect(component.find(".js-ny")).to.have.length(1)
         });
 
         it("Skal kalle på avbrytMoteUtenVarsel med moteUuid og fnr når man klikker på knappen", () => {
             motePassert.moteUuid = "min-mote-uuid";
             const avbrytMoteUtenVarsel = sinon.spy();
-            const component = shallow(<MotebookingStatus mote={motePassert} fnr="mitt-fnr" avbrytMoteUtenVarsel={avbrytMoteUtenVarsel} />);
+            const component = shallow(<MotebookingStatus arbeidstaker={arbeidstaker} mote={motePassert} fnr="mitt-fnr" avbrytMoteUtenVarsel={avbrytMoteUtenVarsel} />);
             component.find(".js-ny").simulate("click");
             expect(avbrytMoteUtenVarsel.calledWith("min-mote-uuid", "mitt-fnr")).to.be.true;
         });
@@ -390,12 +382,14 @@ describe("MotebookingStatus", () => {
     describe("Når sykmeldt er reservert i KRR", () => {
 
         let mote;
-        let fikkIkkeOpprettetVarsel;
+        let arbeidstaker;
 
         beforeEach(() => {
-            fikkIkkeOpprettetVarsel = {
-                "resultat": "RESERVERT",
-                "varseltype": "OPPRETTET",
+            arbeidstaker = {
+                kontaktinfo: {
+                    skalHaVarsel: false,
+                    feilAarsak: 'RESERVERT',
+                },
             };
             mote = {
                 "id": 0,
@@ -442,90 +436,7 @@ describe("MotebookingStatus", () => {
         });
 
         it("Skal vise KrrMeldingPanel", () => {
-            const component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} fikkIkkeOpprettetVarsel={fikkIkkeOpprettetVarsel} ledetekster={ledetekster} />);
-            expect(component.find(KontaktInfoFeilmelding)).to.have.length(1);
-        });
-
-    });
-
-    describe("Når sykmeldt er reservert i KRR, men har svart", () => {
-
-        let mote;
-        let fikkIkkeOpprettetVarsel;
-
-        beforeEach(() => {
-            fikkIkkeOpprettetVarsel = {
-                "resultat": "RESERVERT",
-                "varseltype": "OPPRETTET",
-            };
-            mote = {
-                "id": 0,
-                "moteUuid": "f26984a2-e038-4de6-a6af-4f4f5db96b26",
-                "opprettetAv": "Z990562",
-                "status": "OPPRETTET",
-                "opprettetTidspunkt": "2016-11-22T12:56:32.561Z",
-                "navEnhet": "navEnhet",
-                "deltakere": [{
-                    "deltakerUuid": "3b0dc3b2-587c-4105-98df-99b4205d3ce9",
-                    "navn": "***REMOVED***",
-                    "epost": "***REMOVED***",
-                    "type": "arbeidsgiver",
-                    "svartidspunkt": "2016-11-22T12:52:06.489Z",
-                    "hendelser": [],
-                    "svar": [{
-                        "id": 344,
-                        "tid": "2019-09-09T07:00:00Z",
-                        "created": "2011-12-12T11:00:00Z",
-                        "sted": "Oslo",
-                        "valgt": true
-                    }, {
-                        "id": 345,
-                        "tid": "2020-09-09T18:00:00Z",
-                        "created": "2011-12-12T11:00:00Z",
-                        "sted": "Oslo",
-                        "valgt": false
-                    }]
-                },{
-                    "deltakerUuid": "3b0dc3b2-587c-4105-98df-99b4205d3ce0",
-                    "navn": "Sygve Sykmeldt",
-                    "type": "Bruker",
-                    "svartidspunkt": "2016-11-22T12:52:06.489Z",
-                    "hendelser": [{
-                        "resultat": "RESERVERT",
-                        "varseltype": "OPPRETTET",
-                    }],
-                    "svar": [{
-                        "id": 344,
-                        "tid": "2019-09-09T07:00:00Z",
-                        "created": "2011-12-12T11:00:00Z",
-                        "sted": "Oslo",
-                        "valgt": true
-                    }, {
-                        "id": 345,
-                        "tid": "2020-09-09T18:00:00Z",
-                        "created": "2011-12-12T11:00:00Z",
-                        "sted": "Oslo",
-                        "valgt": false
-                    }]
-                }],
-                "alternativer": [{
-                    "id": 344,
-                    "tid": "2019-09-09T07:00:00Z",
-                    "created": "2011-12-12T11:00:00Z",
-                    "sted": "Oslo",
-                    "valgt": true
-                }, {
-                    "id": 345,
-                    "tid": "2020-09-09T18:00:00Z",
-                    "created": "2011-12-12T11:00:00Z",
-                    "sted": "Oslo",
-                    "valgt": false
-                }]
-            }
-        });
-
-        it("Skal vise KrrMeldingPanel", () => {
-            const component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} fikkIkkeOpprettetVarsel={fikkIkkeOpprettetVarsel} ledetekster={ledetekster} />);
+            const component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} arbeidstaker={arbeidstaker} ledetekster={ledetekster} />);
             expect(component.find(KontaktInfoFeilmelding)).to.have.length(1);
         });
 

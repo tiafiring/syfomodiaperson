@@ -1,11 +1,10 @@
 import React, { PropTypes } from 'react';
 import { getLedetekst } from 'digisyfo-npm';
 
-const ArbeidsgiverDropdown = ({ meta, input, ledere, ledetekster }) => {
+const ArbeidsgiverDropdown = ({ velgArbeidsgiver, ledere, ledetekster }) => {
     return (<div className="blokk">
-        <label htmlFor="velg-arbeidsgiver">{getLedetekst('mote.bookingskjema.dropdown.arbeidsgiver', ledetekster)}</label>
         <div className="selectContainer input--xxl">
-            <select className={meta.touched && meta.error ? 'input--feil' : ''} id="velg-arbeidsgiver" {...input}>
+            <select onChange={(e) => { velgArbeidsgiver(e.target.value); } }>
                 <option value="VELG">{getLedetekst('mote.bookingskjema.dropdown.arbeidsgiver', ledetekster)}</option>
                 {
                     ledere
@@ -26,19 +25,16 @@ const ArbeidsgiverDropdown = ({ meta, input, ledere, ledetekster }) => {
                         return 0;
                     })
                     .map((leder, idx) => {
-                        return <option value={leder.id} key={idx}>{leder.organisasjonsnavn}</option>;
+                        return <option value={leder.orgnummer} key={idx}>{leder.organisasjonsnavn}</option>;
                     })
                 }
             </select>
         </div>
-        <p className="skjema__feilmelding" aria-live="polite">{meta.touched && meta.error}</p>
     </div>);
 };
 
 ArbeidsgiverDropdown.propTypes = {
-    meta: PropTypes.object,
-    input: PropTypes.object,
-    virksomhet: PropTypes.object,
+    velgArbeidsgiver: PropTypes.func,
     ledetekster: PropTypes.object,
     ledere: PropTypes.array,
 };

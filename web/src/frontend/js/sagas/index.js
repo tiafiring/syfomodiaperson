@@ -4,7 +4,6 @@ import navbrukerSagas from './navbrukerSagas';
 import veilederoppgaverSagas from './veilederoppgaverSagas';
 import moterSagas from './moterSagas';
 import epostinnholdSagas from './epostinnholdSagas';
-import arbeidstakerSagas from './arbeidstakerSagas';
 import tidslinjerSagas from './tidslinjerSagas';
 import sykmeldingerSagas from './sykmeldingerSagas';
 import oppfoelgingsdialogerSagas from './oppfoelgingsdialogerSagas';
@@ -32,7 +31,6 @@ export default function * rootSaga() {
         epostinnholdSagas(),
         virksomhetSagas(),
         modiacontextSagas(),
-        arbeidstakerSagas(),
         sykmeldingerSagas(),
         oppfoelgingsdialogerSagas(),
         sykepengesoknaderSagas(),

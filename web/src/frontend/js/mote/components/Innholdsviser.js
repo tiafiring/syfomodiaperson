@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { Varselstripe, getLedetekst } from 'digisyfo-npm';
 import AppSpinner from '../../components/AppSpinner';
-import { fikkMoteOpprettetVarsel } from '../utils/index';
 import { konstanter, proptypes as moterPropTypes } from 'moter-npm';
 
 const { BRUKER, ARBEIDSGIVER } = konstanter;
@@ -96,7 +95,7 @@ class Innholdsviser extends Component {
     }
 
     render() {
-        const { henter, hentingFeilet, epostinnhold, hentEpostinnhold, ledetekster } = this.props;
+        const { henter, hentingFeilet, epostinnhold, hentEpostinnhold, ledetekster, arbeidstaker } = this.props;
         if (henter) {
             return <AppSpinner />;
         }
@@ -107,7 +106,7 @@ class Innholdsviser extends Component {
             return (<div>
                 <h3 className="typo-undertittel">{getLedetekst('mote.epostinnhold.informasjon-som-sendes', ledetekster)}</h3>
                 {
-                    fikkMoteOpprettetVarsel(this.getSykmeldt()) && <Innholdsvelger
+                    arbeidstaker.kontaktinfo.skalHaVarsel && <Innholdsvelger
                         ledetekster={ledetekster}
                         valgtDeltakertype={this.state.valgtDeltakertype}
                         onChange={(valgtDeltakertype) => {
@@ -134,6 +133,7 @@ Innholdsviser.propTypes = {
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     epostinnhold: PropTypes.object,
+    arbeidstaker: PropTypes.object,
     hentEpostinnhold: PropTypes.func,
     ledetekster: PropTypes.object,
     mote: moterPropTypes.mote,

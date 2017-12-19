@@ -43,8 +43,7 @@ export class BekreftMoteSide extends Component {
     }
 
     render() {
-        const { alternativ, henterMoterBool, fnr, mote, ledetekster, bekrefter, bekreftFeilet, hentBekreftMoteEpostinnhold } = this.props;
-
+        const { alternativ, henterMoterBool, fnr, mote, ledetekster, bekrefter, bekreftFeilet, hentBekreftMoteEpostinnhold, arbeidstaker } = this.props;
         return (<Side fnr={fnr} tittel="Bekreft møte" aktivtMenypunkt={MOETEPLANLEGGER}>
             {
                 (() => {
@@ -53,7 +52,7 @@ export class BekreftMoteSide extends Component {
                     } else if (alternativ) {
                         return (<div>
                             {
-                                mote.status === 'OPPRETTET' && <Lightbox scrollOverflowY={this.state.scrollOverflowY} onClose={() => {
+                                (mote.status === 'OPPRETTET' || mote.status === 'FLERE_TIDSPUNKT') && <Lightbox scrollOverflowY={this.state.scrollOverflowY} onClose={() => {
                                     history.replace(`/sykefravaer/${fnr}/mote`);
                                 }}>
                                 {
@@ -63,6 +62,7 @@ export class BekreftMoteSide extends Component {
                                                 this.onSubmit();
                                             }}
                                             mote={mote}
+                                            arbeidstaker={arbeidstaker}
                                             alternativ={alternativ}
                                             ledetekster={ledetekster}
                                             avbrytHref={`/sykefravaer/${fnr}/mote`}
@@ -90,6 +90,7 @@ export class BekreftMoteSide extends Component {
 BekreftMoteSide.propTypes = {
     bekrefter: PropTypes.bool,
     bekreftFeilet: PropTypes.bool,
+    arbeidstaker: PropTypes.object,
     alternativ: PropTypes.object,
     henterMoterBool: PropTypes.bool,
     ledetekster: PropTypes.object,
@@ -122,13 +123,13 @@ export const mapStateToProps = (state, ownProps) => {
         const id = `${alt.id}`;
         return id === `${alternativId}`;
     })[0] : null;
-
     return {
         fnr: ownProps.params.fnr,
         bekrefter: state.moter.bekrefter,
         bekreftFeilet: state.moter.bekreftFeilet,
-        henterMoterBool: state.moter.henter || state.ledetekster.henter,
+        henterMoterBool: state.moter.henter || state.ledetekster.henter || state.navbruker.henter,
         ledetekster: state.ledetekster.data,
+        arbeidstaker: state.navbruker.data,
         alternativ,
         mote,
     };

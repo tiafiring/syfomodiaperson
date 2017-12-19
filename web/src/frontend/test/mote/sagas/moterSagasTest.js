@@ -41,17 +41,6 @@ describe("moterSagas", () => {
             });
             expect(generator.next().value).to.deep.equal(nextCall);
         });
-
-        it("Skal dispatche MOTE_OPPRETTET", () => {
-            const nextPut = put({type: 'MOTE_OPPRETTET', fnr: "55", data: {
-                naermesteLederNavn: "***REMOVED***",
-                fnr: "55"}
-            });
-            expect(generator.next({
-                naermesteLederNavn: "***REMOVED***",
-                fnr: "55",
-            }).value).to.deep.equal(nextPut);
-        });
     });
 
     describe("hentMoter", () => {

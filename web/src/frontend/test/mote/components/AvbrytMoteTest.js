@@ -77,6 +77,7 @@ const getMote = (mote) => {
 describe("AvbrytMote-", () => {
 
     let mote;
+    let navbruker;
     let ledetekster;
 
     beforeEach(() => {
@@ -84,23 +85,31 @@ describe("AvbrytMote-", () => {
         ledetekster = {
             'mote.avbrytmote.overskrift': "Avbryt møte"
         };
+        navbruker = {
+            data: {
+                kontaktinfo: {
+                    skalHaVarsel: true,
+                }
+            }
+        };
     });
 
     it("Viser tittel", () => {
         let component = shallow(<AvbrytMote
+            navbruker={navbruker}
             mote={mote}
             ledetekster={ledetekster} />);
         expect(component.text()).to.contain("Avbryt møte");
     })
 
     it("Viser Epostmottakere når det er to mottakere", () => {
-        let component = shallow(<AvbrytMote mote={mote} />);
+        let component = shallow(<AvbrytMote mote={mote} navbruker={navbruker} />);
         expect(component.find(Epostmottakere)).to.have.length(1);
         expect(component.find(Epostmottakere).prop("mote")).to.deep.equal(mote)
     });
 
     it("Viser en InnholdsviserContainer", () => {
-        let component = shallow(<AvbrytMote mote={mote} ledetekster={ledetekster}/>);
+        let component = shallow(<AvbrytMote navbruker={navbruker} mote={mote} ledetekster={ledetekster}/>);
         expect(component.find(InnholdsviserContainer)).to.have.length(1);
     });
 
@@ -113,6 +122,13 @@ describe("AvbrytMote-", () => {
             state = {
                 epostinnhold: {
                     data: {},
+                    henter: false,
+                    hentingFeilet: false,
+                },
+                navbruker: {
+                    data: {},
+                    henter: false,
+                    hentingFeilet: false,
                 }
             }
         });

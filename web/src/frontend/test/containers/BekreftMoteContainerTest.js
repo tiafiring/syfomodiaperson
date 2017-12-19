@@ -89,12 +89,6 @@ describe("BekreftMoteContainer", () => {
                     deltaker={deltaker} />)
             })
 
-
-            it("Skal vise BekreftMote", () => {
-                expect(compo.find(BekreftMote)).to.have.length(1);
-                expect(typeof compo.find(BekreftMote).prop("onSubmit")).to.equal("function");
-            });
-
             it("Skal ikke hente møter", () => {
                 expect(hentMoter.called).to.be.false;
             });
