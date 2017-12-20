@@ -80,7 +80,7 @@
     "css-loader": "0.23.1",
     "chai-enzyme": "0.4.2",
     "chai-jquery": "2.0.0",
-    "digisyfo-npm": "2.6.3",
+    "digisyfo-npm": "2.7.2",
     "enzyme": "2.2.0",
     "eslint": "2.5.3",
     "eslint-config-airbnb": "6.2.0",
