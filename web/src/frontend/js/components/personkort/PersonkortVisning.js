@@ -10,6 +10,13 @@ import {
     finnPostadresseTittel,
 } from '../../utils/adresseUtils';
 
+const kanskjeBooleanTilJaNeiKanskje = (kanskjeBoolean) => {
+    if (kanskjeBoolean === null) {
+        return 'Ikke oppgitt';
+    }
+    return kanskjeBoolean ? 'Ja' : 'Nei';
+};
+
 export const PersonkortVisningElement = ({ tittel, imgUrl, children }) => {
     const imgAlt = imgUrl.split('/').reverse()[0].split('.')[0];
     return (<div className="personkortElement">
@@ -36,7 +43,7 @@ export const PersonkortVisningInformasjon = ({ informasjonNokkelTekster, informa
         Object.keys(informasjon).map((nokkel, idx) => {
             return (
                 <dl key={idx} className="personkortElement__informasjon">
-                    <dt >{informasjonNokkelTekster.get(nokkel)}</dt>
+                    <dt>{informasjonNokkelTekster.get(nokkel)}</dt>
                     <dd>{informasjon[nokkel]}</dd>
                 </dl>
             );
@@ -90,6 +97,7 @@ export const VisningLeder = ({ ledere }) => {
         ['epost', getLedetekst('modiafront.personkort.visning.nokkeltekster.epost')],
         ['orgnummer', getLedetekst('modiafront.personkort.visning.nokkeltekster.orgnummer')],
         ['fomDato', getLedetekst('modiafront.personkort.visning.nokkeltekster.leder_fom')],
+        ['arbeidsgiverForskuttererLoenn', getLedetekst('modiafront.personkort.visning.nokkeltekster.forskutterer')],
     ]);
     return (<div className="personkort__visning visningLeder">
         { ledere.length === 0 ?
@@ -98,8 +106,9 @@ export const VisningLeder = ({ ledere }) => {
             </p>
             :
             ledere.map((leder, idx) => {
-                const valgteElementer = (({ navn, epost, tlf, orgnummer, fomDato }) => ({ navn, epost, tlf, orgnummer, fomDato }))(Object.assign({}, leder, {
+                const valgteElementer = (({ navn, epost, tlf, orgnummer, fomDato, arbeidsgiverForskuttererLoenn }) => ({ navn, epost, tlf, orgnummer, fomDato, arbeidsgiverForskuttererLoenn }))(Object.assign({}, leder, {
                     fomDato: leder.fomDato && restdatoTildato(leder.fomDato),
+                    arbeidsgiverForskuttererLoenn: kanskjeBooleanTilJaNeiKanskje(leder.arbeidsgiverForskuttererLoenn),
                 }));
                 return (<PersonkortVisningElement
                     key={idx}

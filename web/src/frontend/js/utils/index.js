@@ -1,15 +1,3 @@
-const kortManeder = ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'des'];
-const dager = ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'];
-
-export const visDato = (dato) => {
-    const maned = kortManeder[dato.monthValue - 1];
-    return `${dato.dayOfMonth}. ${maned} ${dato.year}`;
-};
-
-export const visKortDato = (dato) => {
-    return `${dato.getDate()}.${dato.getMonth()}.${dato.getUTCFullYear()}`;
-};
-
 export const lagNummer = (streng) => {
     return streng.replace(/[^\d.-]/g, '').replace(/-/g, '');
 };
@@ -21,12 +9,6 @@ export const formaterTid = (input) => {
         return tid.replace(/(.{2})/, '$1.');
     }
     return tid;
-};
-
-export const hentDag = (input) => {
-    const date = new Date(input);
-    const dayOfWeek = date.getDay();
-    return dager[dayOfWeek];
 };
 
 export const finnMiljoStreng = () => {
