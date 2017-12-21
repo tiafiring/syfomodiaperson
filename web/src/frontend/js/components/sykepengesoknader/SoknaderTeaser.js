@@ -66,7 +66,7 @@ class SoknadTeaser extends Component {
 
     render() {
         const { sykepengesoknad, fnr } = this.props;
-        const visStatus = sykepengesoknad.status !== NY && sykepengesoknad.status !== SENDT;
+        const visStatus = sykepengesoknad.status !== NY && sykepengesoknad.status !== SENDT && sykepengesoknad.status !== AVBRUTT;
         const sendtTilBeggeMenIkkeSamtidig = erSendtTilBeggeMenIkkeSamtidig(sykepengesoknad);
 
         return (<article aria-labelledby={`soknader-header-${sykepengesoknad.id}`}>
