@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 import { getLedetekst, toDatePrettyPrint } from 'digisyfo-npm';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes';
-import { NY, SENDT, TIL_SENDING, UTKAST_TIL_KORRIGERING } from '../../enums/sykepengesoknadstatuser';
+import { NY, SENDT, TIL_SENDING, UTKAST_TIL_KORRIGERING, AVBRUTT } from '../../enums/sykepengesoknadstatuser';
 
 export const SendtUlikt = ({ sykepengesoknad }) => {
     return (<span>
@@ -113,17 +113,26 @@ class SoknadTeaser extends Component {
                     </p>
                     <p className="inngangspanel__undertekst js-undertekst mute">
                         {
-                            sykepengesoknad.status !== SENDT && sykepengesoknad.status !== TIL_SENDING && getLedetekst('soknad.teaser.undertekst', { '%ARBEIDSGIVER%': sykepengesoknad.arbeidsgiver.navn })
-                        }
-                        {
-                            sendtTilBeggeMenIkkeSamtidig && sykepengesoknad.status !== NY &&
-                            <SendtUlikt sykepengesoknad={sykepengesoknad} />
-                        }
-                        {
-                            !sendtTilBeggeMenIkkeSamtidig && sykepengesoknad.status !== NY && sykepengesoknad.status !== UTKAST_TIL_KORRIGERING && getLedetekst(`soknad.teaser.status.${sykepengesoknad.status}${getSendtTilSuffix(sykepengesoknad)}`, {
-                                '%DATO%': toDatePrettyPrint(sykepengesoknad.sendtTilArbeidsgiverDato || sykepengesoknad.sendtTilNAVDato),
-                                '%ARBEIDSGIVER%': sykepengesoknad.arbeidsgiver.navn,
-                            })
+                            (() => {
+                                if (sykepengesoknad.status === AVBRUTT) {
+                                    return getLedetekst('soknad.teaser.status.AVBRUTT', {
+                                        '%DATO%': toDatePrettyPrint(new Date(sykepengesoknad.avbruttDato)),
+                                    });
+                                }
+                                if (sykepengesoknad.status !== SENDT && sykepengesoknad.status !== TIL_SENDING) {
+                                    return getLedetekst('soknad.teaser.undertekst', { '%ARBEIDSGIVER%': sykepengesoknad.arbeidsgiver.navn });
+                                }
+                                if (sendtTilBeggeMenIkkeSamtidig && sykepengesoknad.status !== NY) {
+                                    return <SendtUlikt soknad={sykepengesoknad} />;
+                                }
+                                if (sykepengesoknad.status !== NY && sykepengesoknad.status !== UTKAST_TIL_KORRIGERING) {
+                                    return getLedetekst(`soknad.teaser.status.${sykepengesoknad.status}${getSendtTilSuffix(sykepengesoknad)}`, {
+                                        '%DATO%': toDatePrettyPrint(new Date(sykepengesoknad.sendtTilArbeidsgiverDato) || new Date(sykepengesoknad.sendtTilNAVDato)),
+                                        '%ARBEIDSGIVER%': sykepengesoknad.arbeidsgiver.navn,
+                                    });
+                                }
+                                return null;
+                            })()
                         }
                     </p>
                 </div>
