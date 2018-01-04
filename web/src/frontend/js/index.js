@@ -108,21 +108,24 @@ const config = {
         },
     },
 };
-store.dispatch(hentVeilederinfo());
-store.dispatch(hentBehandlendeEnhet(fnr));
-store.dispatch(hentVeilederOppgaver(fnr));
-store.dispatch(hentNavbruker(fnr));
-store.dispatch(hentLedere(fnr));
-store.dispatch(hentAktivBruker({
-    callback: (aktivBruker) => {
-        if (aktivBruker !== fnr) {
-            store.dispatch(pushModiaContext({
-                verdi: fnr,
-                eventType: 'NY_AKTIV_BRUKER',
-            }));
-        }
-    },
-}));
+if (fnr && fnr !== 'undefined') {
+    store.dispatch(hentVeilederinfo());
+    store.dispatch(hentBehandlendeEnhet(fnr));
+    store.dispatch(hentVeilederOppgaver(fnr));
+    store.dispatch(hentNavbruker(fnr));
+    store.dispatch(hentLedere(fnr));
+    store.dispatch(hentAktivBruker({
+        callback: (aktivBruker) => {
+            if (aktivBruker !== fnr) {
+                store.dispatch(pushModiaContext({
+                    verdi: fnr,
+                    eventType: 'NY_AKTIV_BRUKER',
+                }));
+            }
+        },
+    }));
+}
+
 store.dispatch(hentAktivEnhet({
     callback: (aktivEnhet) => {
         if (aktivEnhet && config.config.initiellEnhet !== aktivEnhet) {
