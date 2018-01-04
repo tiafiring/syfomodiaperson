@@ -4,12 +4,17 @@ import { getLedetekst, Soknad } from 'digisyfo-npm';
 import SykmeldingUtdrag from './SykmeldingUtdrag';
 import Statuspanel from './Soknadstatuspanel';
 import { sykepengesoknad as sykepengesoknadPt } from '../../../propTypes';
-import { KORRIGERT, SENDT, TIL_SENDING } from '../../../enums/sykepengesoknadstatuser';
+import { KORRIGERT, SENDT, TIL_SENDING, AVBRUTT } from '../../../enums/sykepengesoknadstatuser';
 import RelaterteSoknaderContainer from './RelaterteSoknaderContainer';
 import KorrigertAvContainer from './KorrigertAvContainer';
+import AvbruttSoknad from './AvbruttSoknad';
 import { mapAktiviteter } from '../../../utils/sykepengesoknadUtils';
 
 const SykepengeSoknad = ({ sykepengesoknad, fnr }) => {
+    if (sykepengesoknad.status === AVBRUTT) {
+        return <AvbruttSoknad sykepengesoknad={sykepengesoknad} />;
+    }
+
     return (<div>
         { sykepengesoknad.status === KORRIGERT && <KorrigertAvContainer sykepengesoknad={sykepengesoknad} /> }
         <Statuspanel sykepengesoknad={sykepengesoknad} />
