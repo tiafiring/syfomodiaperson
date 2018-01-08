@@ -5,7 +5,7 @@ import { sykepengesoknad as sykepengesoknadPt } from '../../../propTypes';
 
 const UtgaattSoknad = ({ sykepengesoknad }) => {
     return (<div>
-        <div className="panel panel--komprimert blokk">
+        <div className="panel blokk">
             <Varselstripe type="info" fylt>
                 <p className="sist">{getLedetekst('sykepengesoknad.utgaatt.info.tekst')}</p>
             </Varselstripe>

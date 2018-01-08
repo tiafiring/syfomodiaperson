@@ -15,7 +15,7 @@ const Verktoylinje = () => {
 
 const AvbruttSoknad = ({ sykepengesoknad }) => {
     return (<div>
-        <div className="panel panel--komprimert blokk--l">
+        <div className="panel blokk--l">
             <Varselstripe ikon="/sykefravaer/img/svg/avbryt-sykmelding.svg">
                 <div>
                     <div>
