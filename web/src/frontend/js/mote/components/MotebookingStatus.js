@@ -36,19 +36,20 @@ const getLedetekstFraFeilAarsak = (feilAarsak, ledetekster) => {
             nokkel = 'motestatus.krr.ingen-kontaktinformasjon';
             break;
         }
+        case 'INGEN_KONTAKTINFORMASJON': {
+            nokkel = 'motestatus.krr.ingen-kontaktinformasjon';
+            break;
+        }
         case 'UTGAATT': {
             nokkel = 'motestatus.krr.utgaatt';
             break;
         }
         default: {
-            nokkel = '';
+            nokkel = 'mote.krr.generell';
             break;
         }
     }
-    if (nokkel !== '') {
-        return getHtmlLedetekst(nokkel, ledetekster);
-    }
-    return '';
+    return getHtmlLedetekst(nokkel, ledetekster);
 };
 
 const getSendtTilTekst = (mote, ledetekster, arbeidstaker) => {

@@ -32,6 +32,10 @@ const getLedetekstnokkelFraFeilAarsak = (feilAarsak, ledetekster) => {
             nokkel = 'motebooking.krr.reservert';
             break;
         }
+        case 'KONTAKTINFO_IKKE_FUNNET': {
+            nokkel = 'motebooking.krr.ingen-kontaktinformasjon';
+            break;
+        }
         case 'INGEN_KONTAKTINFORMASJON': {
             nokkel = 'motebooking.krr.ingen-kontaktinformasjon';
             break;
@@ -41,14 +45,11 @@ const getLedetekstnokkelFraFeilAarsak = (feilAarsak, ledetekster) => {
             break;
         }
         default: {
-            nokkel = '';
+            nokkel = 'mote.krr.generell';
             break;
         }
     }
-    if (nokkel !== '') {
-        return getHtmlLedetekst(nokkel, ledetekster);
-    }
-    return '';
+    return getHtmlLedetekst(nokkel, ledetekster);
 };
 
 export class MotebookingSkjema extends Component {
