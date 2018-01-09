@@ -7,7 +7,7 @@ const Verktoylinje = () => {
     return (<div>
         <div className="verktoylinje">
             <div className="verktoylinje__element">
-                <button disabled className="rammeknapp rammeknapp--mini js-gjenapne">{getLedetekst('sykepengesoknad.gjenapne.knapp')}</button>
+                <button disabled className="rammeknapp rammeknapp--mini">{getLedetekst('sykepengesoknad.gjenapne.knapp')}</button>
             </div>
         </div>
     </div>);
