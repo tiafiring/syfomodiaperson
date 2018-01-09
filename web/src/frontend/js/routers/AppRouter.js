@@ -18,6 +18,8 @@ import RollerOgAnsvarsomraderContainer from '../containers/RollerOgAnsvarsomrade
 const AppRouter = ({ history }) => {
     return (<Router history={history}>
         <Route path="/sykefravaer" component={FeilsideContainer} />
+        <Route path="/sykefravaer/null" component={FeilsideContainer} />
+        <Route path="/sykefravaer/null/mote" component={FeilsideContainer} />
         <Route path="/sykefravaer/undefined" component={FeilsideContainer} />
         <Route path="/sykefravaer/:fnr" component={HistorikkContainer} />
         <Route path="/sykefravaer/:fnr/roller-og-ansvarsomrader" component={RollerOgAnsvarsomraderContainer} />
