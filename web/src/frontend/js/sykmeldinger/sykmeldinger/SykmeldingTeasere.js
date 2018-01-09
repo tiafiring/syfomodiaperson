@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import SykmeldingTeaser from './SykmeldingTeaser';
 
 const SykmeldingTeasere = ({ sykmeldinger, ledetekster, fnr, className, tittel = '', ingenSykmeldingerMelding, id, children }) => {

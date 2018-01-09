@@ -5,9 +5,9 @@ import Feilmelding from '../components/Feilmelding';
 
 export const Feilside = () => {
     return (
-        <Side tittel="Sykefravær">
-            <Feilmelding />
-        </Side>
+        <div >
+            <Feilmelding tittel="Du mangler bruker" melding={{ __html: "<p>Vi kan ikke se at du har søkt opp en bruker. Søk opp brukeren du ønsker å se i søkefeltet øverst på siden.</p>" }} />
+        </div>
     );
 };
 

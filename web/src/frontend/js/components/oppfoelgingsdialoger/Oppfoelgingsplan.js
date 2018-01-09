@@ -1,12 +1,16 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
+import { toDatePrettyPrint } from 'digisyfo-npm';
+import { Checkbox } from 'nav-frontend-skjema';
+import KnappBase from 'nav-frontend-knapper';
+import { Panel } from 'nav-frontend-paneler';
 import * as dokumentActions from '../../actions/dokumentinfo_actions';
 import * as veilederoppgaverActions from '../../actions/veilederoppgaver_actions';
 import Feilmelding from '../../components/Feilmelding';
 import AppSpinner from '../../components/AppSpinner';
-import { toDatePrettyPrint } from 'digisyfo-npm';
 
 const erOppgaveFullfoert = (oppgave) => {
     return oppgave.status === 'FERDIG';
@@ -26,32 +30,36 @@ const PlanVisning = ({ oppfoelgingsdialog, dokumentinfo, fnr, actions, veilederi
     }
     return (<div>
         <div className="blokk--s" style={{ borderBottom: '1px solid #b7b1a9' }}>
-            <div className="panel blokk--s">
+            <Panel className="blokk--s">
                 {
                     bildeUrler.map((bildeUrl, index) => {
                         return <img className="pdfbilde" key={index} src={bildeUrl} height="735px" width="567px" />;
                     })
                 }
-            </div>
+            </Panel>
         </div>
         { sePlanOppgave ?
             <div className="skjema__input blokk--l">
-                <input onClick={() => {
-                    actions.behandleOppgave(sePlanOppgave.id, {
-                        status: 'FERDIG',
-                        sistEndretAv: veilederinfo.ident,
-                    }, fnr);
-                }} id="marker__utfoert" type="checkbox" className="checkboks" disabled={erOppgaveFullfoert(sePlanOppgave)} checked={erOppgaveFullfoert(sePlanOppgave)} />
-                <label htmlFor="marker__utfoert">{ sePlanOppgave.status === 'FERDIG' ? `Ferdig behandlet av ${sePlanOppgave.sistEndretAv} ${toDatePrettyPrint(sePlanOppgave.sistEndret)}` : 'Marker som behandlet' }</label>
+                <Checkbox
+                    label={sePlanOppgave.status === 'FERDIG' ? `Ferdig behandlet av ${sePlanOppgave.sistEndretAv} ${toDatePrettyPrint(sePlanOppgave.sistEndret)}` : 'Marker som behandlet'}
+                    onClick={() => {
+                        actions.behandleOppgave(sePlanOppgave.id, {
+                            status: 'FERDIG',
+                            sistEndretAv: veilederinfo.ident,
+                        }, fnr);
+                    }}
+                    id="marker__utfoert"
+                    disabled={erOppgaveFullfoert(sePlanOppgave)}
+                    checked={erOppgaveFullfoert(sePlanOppgave)} />
             </div> : <p>Fant dessverre ingen oppgave knyttet til denne planen</p>
         }
         <Link to={`/sykefravaer/${fnr}/oppfoelgingsplaner`}>
-            <button className="rammeknapp">Tilbake</button>
+            <KnappBase type="standard">Tilbake</KnappBase>
         </Link>
-        <button className="rammeknapp" onClick={ () => {
+        <KnappBase type="standard" onClick={ () => {
             const newWindow = window.open(`${window.APP_SETTINGS.OPPFOELGINGSDIALOGREST_ROOT}/dokument/${oppfoelgingsdialog.id}`);
             newWindow.print();
-        }}>Skriv ut</button>
+        }}>Skriv ut</KnappBase>
     </div>);
 };
 

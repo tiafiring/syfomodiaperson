@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import StatusPanel from './StatusPanel';
 import { STATUS } from './NokkelOpplysningerEnum';
 import { Utvidbar, DineSykmeldingOpplysninger, getLedetekst } from 'digisyfo-npm';

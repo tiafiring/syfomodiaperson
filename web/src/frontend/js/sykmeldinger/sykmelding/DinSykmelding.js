@@ -1,5 +1,7 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
+import KnappBase from 'nav-frontend-knapper';
 import { Varselstripe, DineSykmeldingOpplysninger, getLedetekst } from 'digisyfo-npm';
 import IllustrertInnhold from '../../components/IllustrertInnhold';
 
@@ -17,7 +19,7 @@ const DinSykmelding = ({ sykmelding, ledetekster, visEldreSykmeldingVarsel, elds
                 <div>
                     <p>{getLedetekst('din-sykmelding.introtekst.abtest', ledetekster)}</p>
                     <p className="sist introtekst__knapperad">
-                        <button className="rammeknapp rammeknapp--mini" type="button" disabled>Gå til utfylling</button>
+                        <KnappBase type="standard" mini disabled>Gå til utfylling</KnappBase>
                     </p>
                 </div>
             </IllustrertInnhold>

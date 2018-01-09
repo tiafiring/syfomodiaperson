@@ -1,3 +1,7 @@
+.inngangspanel {
+    background-color: @white;
+}
+
 .inngangspanelerHeader {
     .mixin-panel-padding(); 
     display: flex; 
@@ -5,13 +9,11 @@
     padding-top: 1.25em;
     padding-bottom: 1.25em; 
     margin-bottom: 1px; 
-    display: flex;  
-    background: @hvit;  
-    margin-bottom: 1px; 
+    background: @white;
 }
 
 .inngangspanelerHeader__tittel {
-    .mixin-typo-element(); 
+    .typo-element-mixin();
     flex: 1;        
     margin: 0;
     align-self: center;
@@ -25,7 +27,7 @@
     transform: translate3d(0, 0, 0);
     display: flex; 
     width: 100%;
-    color: @navTekst;
+    color: @navMorkGra;
     border-bottom-width: 0;
 
     &:hover, &:focus {
@@ -34,12 +36,12 @@
     }
 
     &:visited {
-        color: @navTekst;
+        color: @navMorkGra;
     }
 
     &:focus {
-        background-color: @hvit;
-        outline: 3px solid @fokusOrange;
+        background-color: @white;
+        outline: 3px solid @orangeFocus;
     }
 
     &:hover {
@@ -47,25 +49,25 @@
     }
     &:active, &:focus {
         .inngangspanel__undertekst {
-            color: @aktivBlaa;
+            color: @navDypBla;
         }
     }
 
     p {
         margin-top: 0;
         margin-bottom: .5em;
-        .mixin-typo-infotekst(); 
+        .typo-normal-mixin();
     }
 
     .inngangspanel__undertekst {
-        .mixin-typo-normal();
+        .typo-normal-mixin();
     }
 
     .inngangspanel__tekst {
         margin-bottom: 1.25em;
     }
 
-    @media(min-width: @skjermLiten) {
+    @media(min-width: @screen-sm-min) {
         background-position: 97% 35px; 
     }
 }
@@ -74,12 +76,12 @@
     display: none; 
 }
 
-@media(min-width: @skjermLiten) {
+@media(min-width: @screen-sm-min) {
     .inngangspanel__innhold {
         flex: 1;
 
         .mute {
-            color: @inaktivGraa;
+            color: @navGra60;
         }
     }
 
@@ -92,7 +94,7 @@
     }
 }
 
-@media(min-width: @skjermMedium) {
+@media(min-width: @screen-sm-min) {
 
     .inngangspanel__ikon {
         display: block;
@@ -109,7 +111,7 @@
 }
 
 .inngangspanel__meta {
-    .mixin-typo-normal(); 
+    .typo-normal-mixin();
     display: block; 
     margin-bottom: 8px; 
 }
@@ -119,7 +121,7 @@
 }
 
 .inngangspanel__tittel {
-    .mixin-typo-element(); 
+    .typo-element-mixin();
     display: block; 
     margin: 0; 
     margin-bottom: 8px; 
@@ -128,7 +130,7 @@
 
 .inngangspanel__status {
     margin-right: 1em;
-    .mixin-typo-normal();
+    .typo-normal-mixin();
     margin-bottom: 8px;
 }
 

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router';
 import * as menypunkter from '../menypunkter';
 
@@ -110,7 +111,7 @@ class GlobalNavigasjon extends Component {
                     return menypunkt === menypunkter.OPPFOELGINGSPLANER &&
                         oppgave.type === 'SE_OPPFOLGINGSPLAN' && oppgave.status !== 'FERDIG';
                 }).length;
-                return (<li key={index} className="navigasjon__element" style={{ display: 'flex' }}>
+                return (<li key={index} className="navigasjon__element">
                     <a ref={this.getRef(index)} className={className} onFocus={() => {
                         this.setFocusIndex(index);
                     }} onKeyDown={(e) => {

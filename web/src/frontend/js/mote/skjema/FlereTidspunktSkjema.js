@@ -1,7 +1,10 @@
-import React, { PropTypes } from 'react';
-import Tidspunkter from './Tidspunkter';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
-import { getLedetekst, Varselstripe } from 'digisyfo-npm';
+import AlertStripe from 'nav-frontend-alertstriper';
+import KnappBase from 'nav-frontend-knapper';
+import { getLedetekst } from 'digisyfo-npm';
+import Tidspunkter from './Tidspunkter';
 import { genererDato, erGyldigKlokkeslett, erGyldigDato } from '../utils/index';
 
 const FLERE_TIDSPUNKTER_SKJEMANAVN = 'flereAlternativ';
@@ -23,9 +26,10 @@ export const dekorerMedSted = (data, sted) => {
 
 const Feilmelding = () => {
     return (<div className="blokk">
-        <Varselstripe type="feil">
+        <AlertStripe
+            type="advarsel">
             <p>Beklager, det oppstod en feil. Prøv igjen senere!</p>
-        </Varselstripe>
+        </AlertStripe>
     </div>);
 };
 
@@ -61,13 +65,13 @@ export const FlereTidspunktSkjema = (props) => {
                 {
                     nyeAlternativFeilet && <Feilmelding />
                 }
-                <button
-                    type="submit"
-                    className="knapp knapp--enten"
+                <KnappBase
+                    type="hoved"
+                    className="knapp--enten"
+                    spinner={senderNyeAlternativ}
                     disabled={senderNyeAlternativ}>
                     {`${getLedetekst('mote.bookingstatus.fleretidspunkt.send', ledetekster)}`}
-                    { senderNyeAlternativ && <span className="knapp__spinner" /> }
-                </button>
+                </KnappBase>
                 <button type="button" className="lenke" onClick={() => { avbrytFlereAlternativ(); }}>{getLedetekst('mote.bookingstatus.fleretidspunkt.avbryt', ledetekster)}</button>
             </form>
         </div>

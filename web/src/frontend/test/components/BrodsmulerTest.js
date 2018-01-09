@@ -8,37 +8,36 @@ const expect = chai.expect;
 
 import Brodsmuler from "../../js/components/Brodsmuler";
 
-describe("Brodsmuler", () => { 
-
+describe("Brodsmuler", () => {
     let component;
 
     it("Skal vise Ditt NAV dersom ingen brødsmuler sendes inn", function () {
-        const brodsmuler =  []
-        const component = shallow(<Brodsmuler brodsmuler={brodsmuler} />)
+        const brodsmuler =  [];
+        const component = shallow(<Brodsmuler brodsmuler={brodsmuler} />);
         expect(component).to.contain("Ditt NAV");
         expect(component.find("a")).to.have.length(0);
     });
 
     it("Skal vise Ditt NAV og én brødsmule dersom én brødsmule sendes inn", function () {
         const brodsmuler =  [{
-            tittel: "Sykmelding", 
+            tittel: "Sykmelding",
             erKlikkbar: true
         }];
-        const component = mount(<Brodsmuler brodsmuler={brodsmuler} />)
+        const component = mount(<Brodsmuler brodsmuler={brodsmuler} />);
         expect(component.find(".js-smuletekst").length).to.equal(1);
         expect(component.find(".js-smule").length).to.equal(1);
     });
 
     it("Skal ta hensyn til erKlikkbar-flagget", function () {
         const brodsmuler =  [{
-            tittel: "Dine sykmeldinger", 
+            tittel: "Dine sykmeldinger",
             erKlikkbar: true,
             sti: "/dine-sykmeldinger"
         }, {
             tittel: "Din sykmelding",
             erKlikkbar: false
-        }]
-        const component = mount(<Brodsmuler brodsmuler={brodsmuler} />)
+        }];
+        const component = mount(<Brodsmuler brodsmuler={brodsmuler} />);
         expect(component.find("a").length).to.equal(1);
     });
 
@@ -54,14 +53,14 @@ describe("Brodsmuler", () => {
         }, {
             tittel: "Brødsmule 4"
         }];
-        const component = mount(<Brodsmuler brodsmuler={brodsmuler} />); 
+        const component = mount(<Brodsmuler brodsmuler={brodsmuler} />);
         expect(component.find("a").length).to.equal(2);
-    }); 
+    });
 
     describe("Dersom det er flere enn tre brødsmuler", () => {
         beforeEach(() => {
             const brodsmuler =  [{
-                tittel: "Brødsmule 1", 
+                tittel: "Brødsmule 1",
                 erKlikkbar: true,
                 sti: "/dine-sykmeldinger"
             }, {
@@ -80,25 +79,22 @@ describe("Brodsmuler", () => {
                 tittel: "Brødsmule 5",
                 erKlikkbar: false,
             }];
-            component = mount(<Brodsmuler brodsmuler={brodsmuler} />); 
-        }); 
+            component = mount(<Brodsmuler brodsmuler={brodsmuler} />);
+        });
 
         it("Skal vise en lenke med teksten ...", () => {
             expect(component.find(".js-toggle").text()).to.equal("...");
         });
 
         it("Skal vise de to siste brødsmulene", () => {
-            expect(component.find(".js-smule")).to.have.length(2);
+            expect(component.find("a.js-smule")).to.have.length(1);
+            expect(component.find("span.brodsmule")).to.have.length(2);
         });
 
         it("Skal vise alle dersom man klikker på ...", () => {
             component.find(".js-toggle").simulate("click");
-            expect(component.find(".js-smule")).to.have.length(5);
+            expect(component.find("a.js-smule")).to.have.length(4);
             expect(component.find(".js-toggle")).to.have.length(0);
         })
-
     });
-
-
-
-}); 
+});

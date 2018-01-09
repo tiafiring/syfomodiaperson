@@ -2,7 +2,7 @@
 	.nokkelopplysning:not(:only-child) {
 		padding-bottom: 1em;
 		margin-bottom: 1em;
-		border-bottom: 1px solid @ikonGraa;
+		border-bottom: 1px solid @navGra40;
 	}
 
 }
@@ -11,7 +11,7 @@
 	margin-bottom: 1rem;
 }
 
-@media(min-width: @skjermMini) {
+@media(min-width: @screen-sm-min) {
 	.rad-container {
 		display: flex; 
 
@@ -30,7 +30,7 @@
 
 .sykmeldingSeksjon {
 	margin-bottom: 2em; 
-	border-bottom: 1px solid @ikonGraa; 
+	border-bottom: 1px solid @navGra40;
 
 	&:last-of-type {
 		margin: 0; 
@@ -39,7 +39,7 @@
 }
 
 .sykmeldingSeksjon__tittel {
-	.mixin-typo-undertittel();
+	.typo-undertittel-mixin();
 	margin-bottom: 2em; 
 	margin-top: 0;
 }

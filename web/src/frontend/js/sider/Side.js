@@ -1,21 +1,27 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Container, Row, Column } from 'nav-frontend-grid';
 import GlobalNavigasjonContainer from '../containers/GlobalNavigasjonContainer';
 import PersonkortContainer from '../containers/PersonKortContainer';
 const DocumentTitle = require('react-document-title');
 
 const Side = ({ tittel = '', children, aktivtMenypunkt, fnr }) => {
     return (<DocumentTitle title={tittel + (tittel.length > 0 ? ' - Sykefravær' : 'Sykefravær')}>
-        <div className="wrap">
-            <PersonkortContainer />
-            <div className="grid">
-                <nav className="unit one-third">
+        <Container>
+            <Row>
+                <Column className="col-xs-12">
+                    <PersonkortContainer />
+                </Column>
+            </Row>
+            <Row>
+                <nav className="col-xs-12 col-sm-4">
                     <GlobalNavigasjonContainer fnr={fnr} aktivtMenypunkt={aktivtMenypunkt} />
                 </nav>
-                <div className="unit two-thirds">
+                <Column className="col-xs-12 col-sm-8">
                     {children}
-                </div>
-            </div>
-        </div>
+                </Column>
+            </Row>
+        </Container>
     </DocumentTitle>);
 };
 

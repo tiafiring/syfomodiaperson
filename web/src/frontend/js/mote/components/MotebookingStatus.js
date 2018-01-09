@@ -1,11 +1,13 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import AlertStripe from 'nav-frontend-alertstriper';
 import { getDatoFraZulu, erMotePassert } from '../utils/index';
 import Sidetopp from '../../components/Sidetopp';
 import KontaktInfoFeilmelding from './KontaktInfoFeilmelding';
 import BekreftetMotetidspunkt from './BekreftetMotetidspunkt';
 import InformasjonSendt from './InformasjonSendt';
 import FlereTidspunktSkjema from '../skjema/FlereTidspunktSkjema';
-import { Varselstripe, getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
+import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import { Link } from 'react-router';
 import { proptypes as moterPropTypes } from 'moter-npm';
 import Svarstatus from './Svarstatus';
@@ -34,19 +36,20 @@ const getLedetekstFraFeilAarsak = (feilAarsak, ledetekster) => {
             nokkel = 'motestatus.krr.ingen-kontaktinformasjon';
             break;
         }
+        case 'INGEN_KONTAKTINFORMASJON': {
+            nokkel = 'motestatus.krr.ingen-kontaktinformasjon';
+            break;
+        }
         case 'UTGAATT': {
             nokkel = 'motestatus.krr.utgaatt';
             break;
         }
         default: {
-            nokkel = '';
+            nokkel = 'mote.krr.generell';
             break;
         }
     }
-    if (nokkel !== '') {
-        return getHtmlLedetekst(nokkel, ledetekster);
-    }
-    return '';
+    return getHtmlLedetekst(nokkel, ledetekster);
 };
 
 const getSendtTilTekst = (mote, ledetekster, arbeidstaker) => {
@@ -75,14 +78,14 @@ const getSidetoppNokkel = (mote, motePassert) => {
 export const StatusVarsel = ({ mote, ledetekster, arbeidstaker }) => {
     const dato = (mote.status === OPPRETTET || mote.status === FLERE_TIDSPUNKT) ? mote.opprettetTidspunkt : mote.bekreftetAlternativ.created;
     return (<div className="panel">
-        <Varselstripe type="suksess">
+        <AlertStripe type="suksess">
             <div>
                 <p className="typo-element">{getSendtTilTekst(mote, ledetekster, arbeidstaker)}</p>
                 <p className="sist">{getLedetekst('mote.bookingstatus.sendt-dato', ledetekster, {
                     '%DATO%': getDatoFraZulu(dato),
                 })}</p>
             </div>
-        </Varselstripe>
+        </AlertStripe>
     </div>);
 };
 
@@ -94,12 +97,12 @@ StatusVarsel.propTypes = {
 
 export const PassertVarsel = ({ ledetekster }) => {
     return (
-        <Varselstripe>
+        <AlertStripe type="info">
             <div>
                 <p className="typo-element">{getLedetekst('mote.bookingstatus.passert.varsel.tekst', ledetekster)}</p>
                 <p className="sist">{getLedetekst('mote.bookingstatus.passert.varsel.undertekst', ledetekster)}</p>
             </div>
-        </Varselstripe>);
+        </AlertStripe>);
 };
 PassertVarsel.propTypes = {
     ledetekster: PropTypes.object,

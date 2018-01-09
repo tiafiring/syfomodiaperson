@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { toDatePrettyPrint } from 'digisyfo-npm';
 import OppfoelgingsdialogIkon from '../../ikoner/OppfoelgingsdialogIkon';
 import MoteIkon from '../../ikoner/MoteIkon';

@@ -6,7 +6,7 @@
     margin-bottom: 2rem;
 
     h4, h5, h6 {
-        .mixin-typo-element(); 
+        .typo-element-mixin();
         margin-top: 0;
         margin-bottom: .25rem; 
     }
@@ -24,7 +24,7 @@
 }
 
 .opplysning__tittel {
-    .mixin-typo-element();
+    .typo-element-mixin();
     margin-top: 0;
     margin-bottom: .25rem;
 }
@@ -36,21 +36,21 @@
     width: 100%;
 
     h2, h3, h4 {
-        margin-bottom: .25rem; 
-        .mixin-typo-etikettLiten(); 
-        color: @inaktivGraa; 
+        margin-bottom: .25rem;
+        .typo-etikett-liten-mixin();
+        color: @navGra60;
         margin-top: 0; 
     }   
 
     p {
-        .mixin-typo-normal();
+        .typo-normal-mixin();
         margin: 0; 
     }
 }
 
 .nokkelopplysning__meta,
 p.nokkelopplysning__meta {
-    .mixin-typo-normal();
+    .typo-normal-mixin();
 }
 
 .hoveddiagnose {
@@ -61,7 +61,7 @@ p.nokkelopplysning__meta {
         display: none;
     }
 
-    @media (min-width: @skjermMini) {
+    @media (min-width: @screen-sm-min) {
         .nokkelopplysning__meta--mobil {
             display: none;
         }
@@ -92,7 +92,7 @@ p.nokkelopplysning__meta {
         margin-top: 2px; 
         vertical-align: top; 
 
-        @media(min-width: @skjermMini) {
+        @media(min-width: @screen-sm-min) {
             margin-top: 1px; 
         }
     }

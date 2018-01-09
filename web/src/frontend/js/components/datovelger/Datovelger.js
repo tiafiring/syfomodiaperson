@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { erGyldigDato, erGyldigDatoformat } from '../../utils/datovelgerUtils';
 import { Field } from 'redux-form';
 import Feilmelding from './Feilmelding';
@@ -62,7 +63,7 @@ export class DatoField extends Component {
                         autoComplete="off"
                         placeholder="dd.mm.åååå"
                         id={id}
-                        className={`datovelger__input${meta.touched && meta.error ? ' input--feil' : ''}`} {...input} />
+                        className={`skjemaelement__input datovelger__input${meta.touched && meta.error ? ' skjemaelement__input--harFeil' : ''}`} {...input} />
                     <button
                         className="js-toggle datovelger__toggleDayPicker"
                         ref="toggle"

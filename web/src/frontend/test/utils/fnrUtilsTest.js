@@ -97,9 +97,11 @@ describe('fnrUtils', () => {
 
     describe('hentBrukersAlderFraFnr', () => {
         let clock;
+        let dagensDato;
 
         beforeEach(() => {
             clock = sinon.useFakeTimers(1484524800000); // 16. januar 2017
+            dagensDato = new Date();
         });
 
         afterEach(() => {
@@ -114,12 +116,12 @@ describe('fnrUtils', () => {
             const aar = (dato.getFullYear().toString().substring(2,4));
             return dag + mnd + aar + '33818';
         };
-        const dagensDato = new Date();
         it('Skal returnere rett brukers alder, om bruker har hatt foedselsdag', () => {
             let foedselsDatoPassert = new Date();
             foedselsDatoPassert.setFullYear(foedselsaar);
             const fnrFoedselsDatoPassert = hentFnrFraDato(foedselsDatoPassert);
             const alder = dagensDato.getFullYear() - foedselsDatoPassert.getFullYear();
+            console.log('dagensDato', dagensDato)
 
             expect(hentBrukersAlderFraFnr(fnrFoedselsDatoPassert)).to.equal(alder);
         });

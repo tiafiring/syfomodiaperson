@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const PilOpp = ({ farge }) => {
     return (<svg style={{ flex: 1 }} width="14" height="14" viewBox="0 0 15.15 9">

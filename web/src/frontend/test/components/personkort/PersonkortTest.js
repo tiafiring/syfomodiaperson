@@ -3,9 +3,9 @@ import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
 import { Utvidbar } from 'digisyfo-npm';
+import EtikettBase from 'nav-frontend-etiketter';
 import Personkort, { PersonkortTittel } from '../../../js/components/personkort/Personkort';
 import PersonkortVisning  from '../../../js/components/personkort/PersonkortVisning';
-import Etikett  from '../../../js/components/Etikett';
 import { hentBrukersAlderFraFnr } from '../../../js/utils/fnrUtils';
 
 describe('Personkort', () => {
@@ -97,16 +97,16 @@ describe('Personkort', () => {
             expect(komponent.text()).to.contain(hentBrukersAlderFraFnr(navbruker.kontaktinfo.fnr));
         });
 
-        it('Skal vise ikke vise noen Etikett, om visEtikett gir false', () => {
+        it('Skal vise ikke vise noen EtikettBase, om visEtikett gir false', () => {
             komponent = shallow(<PersonkortTittel
                 diskresjonskode={diskresjonskode}
                 egenansatt={egenansatt}
                 navbruker={navbruker}
             />);
-            expect(komponent.find(Etikett)).to.have.length(0);
+            expect(komponent.find(EtikettBase)).to.have.length(0);
         });
 
-        it('Skal vise en Etikett, om bruker har diskresjonskode er 6', () => {
+        it('Skal vise en EtikettBase, om bruker har diskresjonskode er 6', () => {
             diskresjonskode = {
                 data: {
                     diskresjonskode: '6',
@@ -117,10 +117,10 @@ describe('Personkort', () => {
                 egenansatt={egenansatt}
                 navbruker={navbruker}
             />);
-           expect(komponent.find(Etikett)).to.have.length(1);
+           expect(komponent.find(EtikettBase)).to.have.length(1);
         });
 
-        it('Skal vise en Etikett, om bruker har diskresjonskode 7', () => {
+        it('Skal vise en EtikettBase, om bruker har diskresjonskode 7', () => {
             diskresjonskode = {
                 data: {
                     diskresjonskode: '7',
@@ -131,10 +131,10 @@ describe('Personkort', () => {
                 egenansatt={egenansatt}
                 navbruker={navbruker}
             />);
-            expect(komponent.find(Etikett)).to.have.length(1);
+            expect(komponent.find(EtikettBase)).to.have.length(1);
         });
 
-        it('Skal vise en Etikett, om bruker er egen ansatt', () => {
+        it('Skal vise en EtikettBase, om bruker er egen ansatt', () => {
             egenansatt = {
                 data: {
                     erEgenAnsatt: true,
@@ -145,7 +145,7 @@ describe('Personkort', () => {
                 egenansatt={egenansatt}
                 navbruker={navbruker}
             />);
-            expect(komponent.find(Etikett)).to.have.length(1);
+            expect(komponent.find(EtikettBase)).to.have.length(1);
         });
     });
 });

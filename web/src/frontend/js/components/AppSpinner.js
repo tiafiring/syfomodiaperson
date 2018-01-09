@@ -1,7 +1,13 @@
 import React from 'react';
+import { Row } from 'nav-frontend-grid';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 
 const AppSpinner = () => {
-    return <div className="loader blokk--xl" aria-label="Vent litt mens siden laster">Vent litt mens siden laster</div>;
+    return (<Row className="row-centered blokk--xl" aria-label="Vent litt mens siden laster">
+        <NavFrontendSpinner type="XL">
+            Vent litt mens siden laster
+        </NavFrontendSpinner>
+    </Row>);
 };
 
 export default AppSpinner;

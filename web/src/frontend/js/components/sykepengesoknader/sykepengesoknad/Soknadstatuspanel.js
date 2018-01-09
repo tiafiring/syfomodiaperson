@@ -1,6 +1,7 @@
 import React from 'react';
 import { Varselstripe, SykmeldingNokkelOpplysning } from 'digisyfo-npm';
 import { toDatePrettyPrint, getLedetekst, Hjelpetekst } from 'digisyfo-npm';
+import KnappBase from 'nav-frontend-knapper';
 import { SENDT, TIL_SENDING, KORRIGERT } from '../../../enums/sykepengesoknadstatuser';
 import { sykepengesoknad as sykepengesoknadPt } from '../../../propTypes';
 
@@ -130,14 +131,24 @@ export const Knapperad = ({ sykepengesoknad }) => {
         <div className="verktoylinje">
             {
                 sendtDato.getTime() >= frist.getTime() && <div className="verktoylinje__element">
-                    <button disabled className="rammeknapp rammeknapp--mini js-inaktiv">Endre søknad</button>
+                    <KnappBase
+                        type="standard"
+                        mini disabled>
+                        Endre søknad
+                    </KnappBase>
                 </div>
             }
             {
-                sykepengesoknad.sendtTilNAVDato === null && <button disabled className="rammeknapp rammeknapp--mini js-inaktiv">Send til NAV</button>
+                sykepengesoknad.sendtTilNAVDato === null && <KnappBase
+                    type="standard"
+                    mini disabled>
+                    Send til NAV
+                </KnappBase>
             }
             {
-                sykepengesoknad.sendtTilArbeidsgiverDato === null && <button disabled className="rammeknapp rammeknapp--mini js-inaktiv">Send til arbeidsgiveren din</button>
+                sykepengesoknad.sendtTilArbeidsgiverDato === null && <KnappBase type="standard" mini disabled>
+                    Send til arbeidsgiveren din
+                </KnappBase>
             }
         </div>
     </div>);

@@ -1,18 +1,21 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Dropdown from './Dropdown';
+import { Select } from 'nav-frontend-skjema';
 import * as actionCreators from '../../actions/sykmeldinger_actions';
 import { getLedetekst } from 'digisyfo-npm';
 
 const DropdownContainer = ({ alternativer, sorterSykmeldinger, ledetekster, status }) => {
-    return (<div className="header-verktoy">
-        <label htmlFor="sykmeldinger-sortering" className="header-verktoy-label">{getLedetekst('dine-sykmeldinger.sorter.label', ledetekster)}</label>
-        <div className="selectContainer selectContainer--liten">
-            <Dropdown alternativer={alternativer} id="sykmeldinger-sortering" ariaControls={`sykmelding-liste-${status}`} onChange={(kriterium) => {
-                sorterSykmeldinger(kriterium, status);
-            }} />
-        </div>
-    </div>);
+    return (<Select
+        label={getLedetekst('dine-sykmeldinger.sorter.label', ledetekster)}
+        aria-controls={`sykmelding-liste-${status}`}
+        onChange={(event) => {
+            sorterSykmeldinger(event.target.value, status);
+        }}>
+        {alternativer.map((alt, idx) => {
+            return (<option key={idx} value={alt.verdi}>{alt.tekst}</option>);
+        })}
+    </Select>);
 };
 
 DropdownContainer.propTypes = {

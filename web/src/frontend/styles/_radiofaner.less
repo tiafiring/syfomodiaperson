@@ -1,6 +1,16 @@
 .radiofaner {
-  display: flex; 
+  display: flex;
   justify-content: center;
+  @media(min-width: @screen-sm-min) {
+     .skjemaelement {
+      list-style-type: none;
+      margin-right: 2rem;
+    }
+
+    .skjemaelement:last-child {
+      margin-right: 0;
+    }
+  }
 }
 
 .radiofaner--innholdsvelger {
@@ -19,12 +29,11 @@
 }
 
 .nav-radioknapp--mork + label:before {
-  border-color: @navTekst;
+  border-color: @navMorkGra;
 }
 
-@media(min-width: @skjermMini) {
+@media(min-width: @screen-sm-min) {
   .radiofaner__valg {
-
     display: flex;
 
     li {

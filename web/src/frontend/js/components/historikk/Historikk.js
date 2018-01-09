@@ -1,8 +1,9 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import HistorikkEvent from './HistorikkEvent';
-import { toDatePrettyPrint } from 'digisyfo-npm';
-import { Varselstripe } from 'digisyfo-npm';
-import AppSpinner from '../AppSpinner';
+import { toDatePrettyPrint, Varselstripe } from 'digisyfo-npm';
+import { Panel } from 'nav-frontend-paneler';
+import AppSpinner from '../../components/AppSpinner';
 import IngenHistorikk from './IngenHistorikk';
 import UtvidbarHistorikk from './UtvidbarHistorikk';
 
@@ -29,22 +30,22 @@ const Historikk = ({ historikk, sykeforloep }) => {
     });
 
     return (<div>
-        <div className="panel">
+        <Panel>
             <h1 style={{ margin: 0 }}>Logg</h1>
-        </div>
+        </Panel>
         <div>
             {
-                historikk.hentingFeilet ? <div className="panel blokk--s">
+                historikk.hentingFeilet ? <Panel className="blokk--s">
                     <Varselstripe type="feil" fylt>
                        <p>Det skjedde en feil! Det er ikke sikkert du får all historikken som finnes!</p>
                     </Varselstripe>
-                </div>
+                </Panel>
                 : null
             }
             {
                 historikk.henterOppfoelgingsdialoger || historikk.henterMoter && <AppSpinner />
             }
-            <div className="panel">
+            <Panel>
             {
                 eventsEtterSisteSykefravaer.length > 0 &&
                 <ol className="historikkevent">
@@ -61,7 +62,7 @@ const Historikk = ({ historikk, sykeforloep }) => {
                     }
                 </ol>
             }
-            <ol className="sykeforloepstilfelle" style={{ borderTop: '1px solid black' }}>
+            <ol className="sykeforloepstilfelle">
             {
                 sykeforloepSortert
                     .map((forloep, index) => {
@@ -89,7 +90,7 @@ const Historikk = ({ historikk, sykeforloep }) => {
                     })
             }
             </ol>
-            </div>
+            </Panel>
         </div>
     </div>);
 };

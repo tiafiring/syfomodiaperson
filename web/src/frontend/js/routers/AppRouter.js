@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Router, Route } from 'react-router';
 import FeilsideContainer from '../containers/FeilsideContainer';
 import MotebookingContainer from '../containers/MotebookingContainer';
@@ -17,6 +18,7 @@ import RollerOgAnsvarsomraderContainer from '../containers/RollerOgAnsvarsomrade
 const AppRouter = ({ history }) => {
     return (<Router history={history}>
         <Route path="/sykefravaer" component={FeilsideContainer} />
+        <Route path="/sykefravaer/undefined" component={FeilsideContainer} />
         <Route path="/sykefravaer/:fnr" component={HistorikkContainer} />
         <Route path="/sykefravaer/:fnr/roller-og-ansvarsomrader" component={RollerOgAnsvarsomraderContainer} />
         <Route path="/sykefravaer/:fnr/logg" component={HistorikkContainer} />

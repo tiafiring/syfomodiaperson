@@ -1,10 +1,10 @@
 import {expect} from "chai";
+import AlertStripe from 'nav-frontend-alertstriper';
 import {MotebookingSkjema, validate, getData} from "../../../js/mote/skjema/MotebookingSkjema";
 import {genererDato} from "../../../js/mote/utils/index";
 import KontaktInfoFeilmelding from "../../../js/mote/components/KontaktInfoFeilmelding";
 import Tidspunkter from "../../../js/mote/skjema/Tidspunkter";
 import {mount, shallow, render} from "enzyme";
-import {Varselstripe} from "digisyfo-npm";
 import React from "react";
 import sinon from "sinon";
 
@@ -31,7 +31,7 @@ describe("MotebookingSkjemaTest", () => {
 
         it("Skal inneholde felt med mulighet for å skrive inn sted", () => {
             const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} valgtEnhet="0021" arbeidstaker={arbeidstaker} />);
-            expect(compo.find(".js-sted").prop("name")).to.equal("sted");
+            expect(compo.find("#sted").prop("name")).to.equal("sted");
         });
 
         it("Skal ikke vise feilmelding hvis sendingFeilet !== true", () => {
@@ -41,7 +41,7 @@ describe("MotebookingSkjemaTest", () => {
 
         it("Skal vise feilmelding hvis sendingFeilet", () => {
             const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} valgtEnhet="0021" arbeidstaker={arbeidstaker} sendingFeilet />);
-            expect(compo.text()).to.contain("Beklager")
+            expect(compo.find(AlertStripe)).to.have.length(1);
         });
 
 

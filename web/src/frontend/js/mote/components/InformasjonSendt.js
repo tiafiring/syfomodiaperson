@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { konstanter, proptypes as moterPropTypes } from 'moter-npm';
 import { Utvidbar } from 'digisyfo-npm';

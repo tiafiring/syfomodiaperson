@@ -1,6 +1,9 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { getLedetekst, Varselstripe } from 'digisyfo-npm';
+import AlertStripe from 'nav-frontend-alertstriper';
+import KnappBase from 'nav-frontend-knapper';
+import { getLedetekst } from 'digisyfo-npm';
 import Epostmottakere from './Epostmottakere';
 import { connect } from 'react-redux';
 import { proptypes as motePropTypes } from 'moter-npm';
@@ -18,18 +21,21 @@ const BekreftMoteSkjema = (props) => {
         <InnholdsviserContainer mote={mote} hentEpostinnhold={hentEpostinnhold} ledetekster={ledetekster} />
         <div aria-live="polite" role="alert">
             { bekreftFeilet && (<div className="blokk">
-                <Varselstripe type="feil">
+                <AlertStripe
+                    type="advarsel">
                     <p>{getLedetekst('mote.bekreftmote.feil', ledetekster)}</p>
-                </Varselstripe>
+                </AlertStripe>
             </div>)}
         </div>
         <div className="blokk--s">
-            <button
+            <KnappBase
+                type="hoved"
+                spinner={bekrefter}
                 disabled={bekrefter}
-                className="knapp blokk--s knapp--enten" onClick={onSubmit}>
+                className="blokk--s knapp--enten"
+                onClick={onSubmit}>
                 {getLedetekst('mote.bekreftmote.lightbox-send-knapp', ledetekster)}
-                { bekrefter && <span className="knapp__spinner" /> }
-            </button>
+            </KnappBase>
             <Link to={avbrytHref} className="lenke">{getLedetekst('mote.bekreftmote.lightbox-avbryt-knapp', ledetekster)}</Link>
         </div>
     </div>);

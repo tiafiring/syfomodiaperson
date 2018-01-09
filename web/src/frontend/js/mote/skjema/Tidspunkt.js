@@ -1,4 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Row, Column } from 'nav-frontend-grid';
 import Datovelger from '../../components/datovelger/Datovelger';
 import KlokkeslettField from '../../components/KlokkeslettField';
 import { Field } from 'redux-form';
@@ -12,28 +14,29 @@ const Tidspunkt = ({ tidspunkt, skjemanavn }) => {
     return (<div className="motetidspunkter__tidspunkt blokk js-tidspunkt">
         <h4 className="typo-element blokk--s">Nytt tidspunkt</h4>
         <div className="blokk">
-            <div className="grid">
-                <div className="unit half">
-                    <label htmlFor={`dato-${tidspunkt}`}>Dato</label>
+            <Row>
+                <Column className="col-xs-12 col-sm-6">
+                    <label className="skjemaelement__label" htmlFor={`dato-${tidspunkt}`}>Dato</label>
                     <Datovelger
                         tidligsteFom={tidligsteFom}
                         id={`dato-${tidspunkt}`}
                         name={datoName}
                         placeholder="dd.mm.åååå"
                         skjemanavn={skjemanavn} />
-                </div>
-                <div className="unit half">
-                    <label htmlFor={`klokkeslett-${tidspunkt}`}>Klokkeslett</label>
-                    <Field parse={(e) => {
-                        return formaterTid(e);
-                    }}
+                </Column>
+                <Column className="col-xs-12 col-sm-6">
+                    <label className="skjemaelement__label" htmlFor={`klokkeslett-${tidspunkt}`}>Klokkeslett</label>
+                    <Field
+                        parse={(e) => {
+                            return formaterTid(e);
+                        }}
                         id={`klokkeslett-${tidspunkt}`}
                         component={KlokkeslettField}
                         name={klokkeslettName}
                         className="input--s"
                         placeholder="F.eks: 09.30" />
-                </div>
-            </div>
+                </Column>
+            </Row>
         </div>
     </div>);
 };

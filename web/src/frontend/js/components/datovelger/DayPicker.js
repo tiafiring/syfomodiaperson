@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react';
-import { erGyldigDato, erGyldigDatoformat } from '../../utils/datovelgerUtils';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import DayPicker, { DateUtils, LocaleUtils } from 'react-day-picker';
+import { erGyldigDato, erGyldigDatoformat } from '../../utils/datovelgerUtils';
 
 export const MONTHS = ['januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'desember'];
 export const WEEKDAYS_LONG = ['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag'];
@@ -31,12 +32,13 @@ Caption.propTypes = {
 
 export const NavBar = ({ onNextClick, onPreviousClick, showPreviousButton, showNextButton }) => {
     const className = 'DayPicker-NavButton';
-    return (<div role="toolbar" className="Daypicker-ToolBar">
+    return (<div role="toolbar">
         <button
             tabIndex="-1"
             className={`${className} DayPicker-NavButton--prev`}
             disabled={!showPreviousButton}
-            type="button" onClick={(e) => {
+            type="button"
+            onClick={(e) => {
                 e.preventDefault();
                 onPreviousClick();
             }}>Forrige måned</button>
@@ -105,9 +107,10 @@ class DayPickerComponent extends Component {
     }
 
     render() {
-        const { ariaControlledBy, onKeyUp } = this.props;
-        return (<div className="datovelger__DayPicker"
-            aria-controlledby={ariaControlledBy}
+        const { onKeyUp } = this.props;
+        return (<div
+            className="datovelger__DayPicker"
+            role="application"
             onKeyUp={(e) => {
                 onKeyUp(e);
             }}>
@@ -127,7 +130,7 @@ class DayPickerComponent extends Component {
                 selectedDays={(day) => {
                     return this.selectedDays(day);
                 }}
-                onDayClick={(event, jsDato) => {
+                onDayClick={(jsDato, modifiers, event) => {
                     if (!this.erDeaktivertDag(jsDato)) {
                         this.props.onDayClick(event, jsDato);
                     }
@@ -138,10 +141,9 @@ class DayPickerComponent extends Component {
 }
 
 DayPickerComponent.propTypes = {
-    input: PropTypes.object.isRequired,
+    input: PropTypes.object,
     onKeyUp: PropTypes.func.isRequired,
     lukk: PropTypes.func.isRequired,
-    ariaControlledBy: PropTypes.string,
     onDayClick: PropTypes.func.isRequired,
     senesteTom: PropTypes.instanceOf(Date),
     tidligsteFom: PropTypes.instanceOf(Date),

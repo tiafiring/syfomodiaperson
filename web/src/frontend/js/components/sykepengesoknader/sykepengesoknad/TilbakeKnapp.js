@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
 const TilbakeKnapp = ({ fnr, clazz }) => {
     return (<div className={`knapperad ${clazz}`}>
-        <Link to={`/sykefravaer/${fnr}/sykepengesoknader`} className="rammeknapp rammeknapp--mini">Tilbake</Link>
+        <Link to={`/sykefravaer/${fnr}/sykepengesoknader`} className="knapp--standard knapp--mini">Tilbake</Link>
     </div>);
 };
 
