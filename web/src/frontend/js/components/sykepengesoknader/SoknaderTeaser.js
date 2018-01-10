@@ -128,7 +128,7 @@ class SoknadTeaser extends Component {
                                 }
                                 if (sykepengesoknad.status !== NY && sykepengesoknad.status !== UTKAST_TIL_KORRIGERING) {
                                     return getLedetekst(`soknad.teaser.status.${sykepengesoknad.status}${getSendtTilSuffix(sykepengesoknad)}`, {
-                                        '%DATO%': toDatePrettyPrint(new Date(sykepengesoknad.sendtTilArbeidsgiverDato) || new Date(sykepengesoknad.sendtTilNAVDato)),
+                                        '%DATO%': sykepengesoknad.sendtTilArbeidsgiverDato ? toDatePrettyPrint(new Date(sykepengesoknad.sendtTilArbeidsgiverDato)) : toDatePrettyPrint(new Date(sykepengesoknad.sendtTilNAVDato)),
                                         '%ARBEIDSGIVER%': sykepengesoknad.arbeidsgiver.navn,
                                     });
                                 }
