@@ -16,11 +16,15 @@ import HistorikkContainer from '../containers/HistorikkContainer';
 import RollerOgAnsvarsomraderContainer from '../containers/RollerOgAnsvarsomraderContainer';
 
 const AppRouter = ({ history }) => {
-    return (<Router history={history}>
-        <Route path="/sykefravaer" component={FeilsideContainer} />
-        <Route path="/sykefravaer/null" component={FeilsideContainer} />
-        <Route path="/sykefravaer/null/mote" component={FeilsideContainer} />
-        <Route path="/sykefravaer/undefined" component={FeilsideContainer} />
+    const fnr = window.location.pathname.split('/')[2];
+    const fnrRegex = new RegExp("^[0-9]{11}$");
+    if (!fnrRegex.test(fnr)) {
+        return (<Router history={history}>
+            <Route path="*" component={FeilsideContainer} />
+        </Router>);
+    }
+
+        return (<Router history={history}>
         <Route path="/sykefravaer/:fnr" component={HistorikkContainer} />
         <Route path="/sykefravaer/:fnr/roller-og-ansvarsomrader" component={RollerOgAnsvarsomraderContainer} />
         <Route path="/sykefravaer/:fnr/logg" component={HistorikkContainer} />
