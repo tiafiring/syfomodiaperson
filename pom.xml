@@ -24,7 +24,7 @@
         <modig.security.version>1.0.24</modig.security.version>
         <spring.version>4.3.2.RELEASE</spring.version>
         <jackson.version>2.9.0</jackson.version>
-        <oidc-security.version>2.0-digisyfo</oidc-security.version>
+        <oidc-security.version>2.5-digisyfo</oidc-security.version>
     </properties>
 
     <dependencyManagement>
@@ -39,11 +39,6 @@
                 <groupId>no.nav.dialogarena</groupId>
                 <artifactId>oidc-security</artifactId>
                 <version>${oidc-security.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.geronimo.components</groupId>
-                <artifactId>geronimo-jaspi</artifactId>
-                <version>2.0.0</version>
             </dependency>
             <dependency>
                 <groupId>javax.servlet</groupId>
