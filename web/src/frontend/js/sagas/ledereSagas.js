@@ -10,7 +10,7 @@ export function* hentLedere(action) {
         const data = yield call(getWithoutThrows, `${window.APP_SETTINGS.REST_ROOT}/naermesteleder?fnr=${action.fnr}`);
         if (data.id) {
             const feilmelding = data.id;
-            if (feilmelding === 'feilmelding.sykeforloep.ingen.tilgang') {
+            if (feilmelding) {
                 yield put({ type: actiontype.HENT_LEDERE_IKKE_TILGANG, feilmelding });
                 return;
             }
