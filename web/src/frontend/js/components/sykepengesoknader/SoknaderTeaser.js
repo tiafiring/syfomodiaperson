@@ -124,7 +124,7 @@ class SoknadTeaser extends Component {
                                     return getLedetekst('soknad.teaser.undertekst', { '%ARBEIDSGIVER%': sykepengesoknad.arbeidsgiver.navn });
                                 }
                                 if (sendtTilBeggeMenIkkeSamtidig && sykepengesoknad.status !== NY) {
-                                    return <SendtUlikt soknad={sykepengesoknad} />;
+                                    return <SendtUlikt sykepengesoknad={sykepengesoknad} />;
                                 }
                                 if (sykepengesoknad.status !== NY && sykepengesoknad.status !== UTKAST_TIL_KORRIGERING) {
                                     return getLedetekst(`soknad.teaser.status.${sykepengesoknad.status}${getSendtTilSuffix(sykepengesoknad)}`, {
