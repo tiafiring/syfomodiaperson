@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Router, Route } from 'react-router';
-import FeilsideContainer from '../containers/FeilsideContainer';
+import IngenBrukerContainer from '../containers/IngenBrukerContainer';
 import MotebookingContainer from '../containers/MotebookingContainer';
 import AvbrytMoteContainer from '../containers/AvbrytMoteContainer';
 import BekreftMoteContainer from '../containers/BekreftMoteContainer';
@@ -20,7 +20,7 @@ const AppRouter = ({ history }) => {
     const fnrRegex = new RegExp("^[0-9]{11}$");
     if (!fnrRegex.test(fnr)) {
         return (<Router history={history}>
-            <Route path="*" component={FeilsideContainer} />
+            <Route path="*" component={IngenBrukerContainer} />
         </Router>);
     }
 
@@ -38,7 +38,7 @@ const AppRouter = ({ history }) => {
         <Route path="/sykefravaer/:fnr/sykmeldinger/:sykmeldingId" component={DinSykmeldingContainer} />
         <Route path="/sykefravaer/:fnr/oppfoelgingsplaner" component={OppfoelgingsPlanerOversiktContainer} />
         <Route path="/sykefravaer/:fnr/oppfoelgingsplaner/:oppfoelgingsdialogId" component={OppfoelgingsplanContainer} />
-        <Route path="/" component={FeilsideContainer} />
+        <Route path="/sykefravaer" component={IngenBrukerContainer} />
     </Router>);
 };
 
