@@ -44,6 +44,19 @@ export default function veilederoppgaver(state = initiellState, action) {
                 data,
             });
         }
+        case actiontype.MARKER_OPPGAVE_FERDIG_BEHANDLET: {
+            const data = state.data.map((oppgave) => {
+                if (oppgave.uuid === action.uuid) {
+                    return Object.assign({}, oppgave, {
+                        status: 'FERDIG',
+                    });
+                }
+                return oppgave;
+            });
+            return Object.assign({}, state, {
+                data,
+            });
+        }
         default: {
             return state;
         }
