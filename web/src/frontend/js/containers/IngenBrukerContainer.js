@@ -6,8 +6,10 @@ import Infomelding from '../components/Infomelding';
 export const IngenBrukerSide = () => {
     return (<Container>
         <Row>
-            <Column className="col-xs-8">
-                <Infomelding tittel="Du har ikke valgt hvilken person du ønsker å se" melding="For å se oppfølgingen må du skrive inn fødselsnummeret i menylinjen" />
+            <Column className="col-xs-12">
+                <div style={{ width: '40em', margin: '0 auto' }}>
+                    <Infomelding tittel="Du har ikke valgt hvilken person du ønsker å se" melding="For å se oppfølgingen må du skrive inn fødselsnummeret i menylinjen" />
+                </div>
             </Column>
         </Row>
     </Container>);
