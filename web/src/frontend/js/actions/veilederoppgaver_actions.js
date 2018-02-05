@@ -47,10 +47,9 @@ export function oppgaveBehandlet(id, oppgave) {
     };
 }
 
-export function markerOppgaveFerdigBehandlet(uuid) {
+export function alleSvarMottattOppgaveBehandlet() {
     return {
-        type: actionstype.MARKER_OPPGAVE_FERDIG_BEHANDLET,
-        uuid,
+        type: actionstype.ALLE_SVAR_MOTTATT_OPPGAVE_BEHANDLET,
     };
 }
 

@@ -40,7 +40,7 @@ export function* avbrytMote(action) {
         yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.uuid}/avbryt?varsle=${action.varsle}`);
         yield put(actions.moteAvbrutt(action.uuid));
         yield put(historikkActions.hentHistorikk(action.fnr, 'MOTER'));
-        yield put(veilederoppgaverActions.markerOppgaveFerdigBehandlet(action.uuid));
+        yield put(veilederoppgaverActions.alleSvarMottattOppgaveBehandlet());
         history.replace(`/sykefravaer/${action.fnr}/mote`);
     } catch (e) {
         log(e);
@@ -54,7 +54,7 @@ export function* bekreftMote(action) {
         yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.moteUuid}/bekreft?valgtAlternativId=${action.valgtAlternativId}`);
         yield put(actions.moteBekreftet(action.moteUuid, action.valgtAlternativId, new Date()));
         yield put(historikkActions.hentHistorikk(action.fnr, 'MOTER'));
-        yield put(veilederoppgaverActions.markerOppgaveFerdigBehandlet(action.moteUuid));
+        yield put(veilederoppgaverActions.alleSvarMottattOppgaveBehandlet());
         history.replace(`/sykefravaer/${action.fnr}/mote`);
     } catch (e) {
         log(e);
@@ -69,7 +69,7 @@ export function* opprettFlereAlternativ(action) {
         yield call(post, url, action.data);
         yield put(historikkActions.hentHistorikk(action.fnr, 'MOTER'));
         yield put(actions.opprettFlereAlternativBekreftet(action.data, action.moteUuid));
-        yield put(veilederoppgaverActions.markerOppgaveFerdigBehandlet(action.moteUuid));
+        yield put(veilederoppgaverActions.alleSvarMottattOppgaveBehandlet());
     } catch (e) {
         log(e);
         yield put(actions.opprettFlereAlternativFeilet());
