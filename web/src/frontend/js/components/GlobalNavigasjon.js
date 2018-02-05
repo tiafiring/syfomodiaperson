@@ -46,7 +46,7 @@ const erOppfoelginsdialogOppgave = (menypunkt, oppgave) => {
 };
 
 const erMoteplanleggerOppgave = (menypunkt, oppgave) => {
-    return menypunkt === menypunkter.OPPFOELGINGSPLANER &&
+    return menypunkt === menypunkter.MOETEPLANLEGGER &&
         oppgave.type === 'ALLE_SVAR_MOTTATT' && oppgave.status !== 'FERDIG';
 };
 
