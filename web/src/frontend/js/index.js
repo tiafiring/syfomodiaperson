@@ -108,7 +108,7 @@ const config = {
         },
     },
 };
-const fnrRegex = new RegExp("^[0-9]{11}$");
+const fnrRegex = new RegExp('^[0-9]{11}$');
 if (fnrRegex.test(fnr)) {
     store.dispatch(hentVeilederinfo());
     store.dispatch(hentBehandlendeEnhet(fnr));

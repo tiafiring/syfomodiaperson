@@ -15,7 +15,7 @@ const SykepengeSoknad = ({ sykepengesoknad, fnr }) => {
     if (sykepengesoknad.status === AVBRUTT) {
         return <AvbruttSoknad sykepengesoknad={sykepengesoknad} />;
     } else if (sykepengesoknad.status === UTGAATT) {
-        return <UtgaattSoknad sykepengesoknad={sykepengesoknad} />
+        return <UtgaattSoknad sykepengesoknad={sykepengesoknad} />;
     }
 
     return (<div>

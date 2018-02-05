@@ -17,14 +17,14 @@ import RollerOgAnsvarsomraderContainer from '../containers/RollerOgAnsvarsomrade
 
 const AppRouter = ({ history }) => {
     const fnr = window.location.pathname.split('/')[2];
-    const fnrRegex = new RegExp("^[0-9]{11}$");
+    const fnrRegex = new RegExp('^[0-9]{11}$');
     if (!fnrRegex.test(fnr)) {
         return (<Router history={history}>
             <Route path="*" component={IngenBrukerContainer} />
         </Router>);
     }
 
-        return (<Router history={history}>
+    return (<Router history={history}>
         <Route path="/sykefravaer/:fnr" component={HistorikkContainer} />
         <Route path="/sykefravaer/:fnr/roller-og-ansvarsomrader" component={RollerOgAnsvarsomraderContainer} />
         <Route path="/sykefravaer/:fnr/logg" component={HistorikkContainer} />
