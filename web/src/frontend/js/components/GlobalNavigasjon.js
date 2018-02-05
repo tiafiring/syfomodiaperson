@@ -50,7 +50,7 @@ const erMoteplanleggerOppgave = (menypunkt, oppgave) => {
         oppgave.type === 'ALLE_SVAR_MOTTATT' && oppgave.status !== 'FERDIG';
 };
 
-const antallPrikker = (menypunkt, oppgaver) => {
+const finnAntallPrikker = (menypunkt, oppgaver) => {
     return oppgaver.filter((oppgave) => {
         return erOppfoelginsdialogOppgave(menypunkt, oppgave) || erMoteplanleggerOppgave(menypunkt, oppgave);
     }).length;
@@ -124,7 +124,7 @@ class GlobalNavigasjon extends Component {
                 if (menypunkt === aktivtMenypunkt) {
                     className = `${className} navigasjonspanel--aktiv`;
                 }
-                const antallPrikker = antallPrikker(menypunkt, oppgaver);
+                const antallPrikker = finnAntallPrikker(menypunkt, oppgaver);
                 return (<li key={index} className="navigasjon__element">
                     <a ref={this.getRef(index)} className={className} onFocus={() => {
                         this.setFocusIndex(index);
