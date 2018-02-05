@@ -75,10 +75,8 @@ export function mapStateToProps(state, ownProps) {
     const henterDialoger = state.oppfoelgingsdialoger.henter;
 
     const oppfoelgingsdialoger = state.oppfoelgingsdialoger.data.map((dialog) => {
-        const oppgaver = dialog.oppgaver.map((oppgave) => {
-            return state.veilederoppgaver.data.filter((_oppgave) => {
-                return _oppgave.id === oppgave.id;
-            })[0] || oppgave;
+        const oppgaver = state.veilederoppgaver.data.filter((oppgave) => {
+            return oppgave.type === 'SE_OPPFOLGINGSPLAN' && oppgave.uuid === dialog.uuid;
         });
         return Object.assign({}, dialog, {
             oppgaver,

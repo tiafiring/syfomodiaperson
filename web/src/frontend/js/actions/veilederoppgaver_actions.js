@@ -47,6 +47,13 @@ export function oppgaveBehandlet(id, oppgave) {
     };
 }
 
+export function markerOppgaveFerdigBehandlet(uuid) {
+    return {
+        type: actionstype.MARKER_OPPGAVE_FERDIG_BEHANDLET,
+        uuid,
+    };
+}
+
 export function behandleOppgave(id, oppgave, fnr) {
     return {
         type: actionstype.BEHANDLE_OPPGAVE_FORESPURT,

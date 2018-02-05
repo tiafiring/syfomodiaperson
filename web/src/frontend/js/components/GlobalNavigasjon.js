@@ -39,6 +39,23 @@ const oppfoelgingsplanMenypunkt = {
     menypunkt: menypunkter.OPPFOELGINGSPLANER,
 };
 
+
+const erOppfoelginsdialogOppgave = (menypunkt, oppgave) => {
+    return menypunkt === menypunkter.OPPFOELGINGSPLANER &&
+        oppgave.type === 'SE_OPPFOLGINGSPLAN' && oppgave.status !== 'FERDIG';
+};
+
+const erMoteplanleggerOppgave = (menypunkt, oppgave) => {
+    return menypunkt === menypunkter.OPPFOELGINGSPLANER &&
+        oppgave.type === 'ALLE_SVAR_MOTTATT' && oppgave.status !== 'FERDIG';
+};
+
+const antallPrikker = (menypunkt, oppgaver) => {
+    return oppgaver.filter((oppgave) => {
+        return erOppfoelginsdialogOppgave(menypunkt, oppgave) || erMoteplanleggerOppgave(menypunkt, oppgave);
+    }).length;
+};
+
 class GlobalNavigasjon extends Component {
     constructor(props) {
         super(props);
@@ -107,10 +124,7 @@ class GlobalNavigasjon extends Component {
                 if (menypunkt === aktivtMenypunkt) {
                     className = `${className} navigasjonspanel--aktiv`;
                 }
-                const antallOppgaver = oppgaver.filter((oppgave) => {
-                    return menypunkt === menypunkter.OPPFOELGINGSPLANER &&
-                        oppgave.type === 'SE_OPPFOLGINGSPLAN' && oppgave.status !== 'FERDIG';
-                }).length;
+                const antallPrikker = antallPrikker(menypunkt, oppgaver);
                 return (<li key={index} className="navigasjon__element">
                     <a ref={this.getRef(index)} className={className} onFocus={() => {
                         this.setFocusIndex(index);
@@ -124,7 +138,7 @@ class GlobalNavigasjon extends Component {
                     }} href={`/sykefravaer/${fnr}/${sti}`}>
                     <label style={{ flex: 1 }}>{navn}</label>
                         {
-                            antallOppgaver > 0 && <label className="antallNytt">{antallOppgaver}</label>
+                            antallPrikker > 0 && <label className="antallNytt">{antallPrikker}</label>
                         }
                     </a>
                 </li>);
