@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, Utvidbar, SoknadOppsummering, BekreftetKorrektInformasjon, mapBackendsoknadToSkjemasoknad, mapSkjemasoknadToOppsummeringsoknad } from 'digisyfo-npm';
+import { Utvidbar, SoknadOppsummering, BekreftetKorrektInformasjon, mapBackendsoknadToSkjemasoknad, mapSkjemasoknadToOppsummeringsoknad } from 'digisyfo-npm';
 import SykmeldingUtdrag from './SykmeldingUtdrag';
 import Statuspanel from './Soknadstatuspanel';
 import { sykepengesoknad as sykepengesoknadPt } from '../../../propTypes';
@@ -9,7 +9,6 @@ import RelaterteSoknaderContainer from './RelaterteSoknaderContainer';
 import KorrigertAvContainer from './KorrigertAvContainer';
 import AvbruttSoknad from './AvbruttSoknad';
 import UtgaattSoknad from './UtgaattSoknad';
-import { mapAktiviteter } from '../../../utils/sykepengesoknadUtils';
 
 const SykepengeSoknad = ({ sykepengesoknad, fnr }) => {
     if (sykepengesoknad.status === AVBRUTT) {

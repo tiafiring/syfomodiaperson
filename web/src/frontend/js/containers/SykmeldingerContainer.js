@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getLedetekst, getHtmlLedetekst, Varselstripe } from 'digisyfo-npm';
-import { Panel } from 'nav-frontend-paneler';
+import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import Side from '../sider/Side';
 import SidetoppSpeilet from '../components/SidetoppSpeilet';
 import * as actionCreators from '../actions/sykmeldinger_actions';
@@ -12,6 +11,7 @@ import AppSpinner from '../components/AppSpinner';
 import DineSykmeldinger from '../sykmeldinger/sykmeldinger/DineSykmeldinger';
 import Brodsmuler from '../components/Brodsmuler';
 import { SYKMELDINGER } from '../menypunkter';
+import Speilingvarsel from '../components/Speilingvarsel';
 
 export class SykmeldingerSide extends Component {
     componentWillMount() {
@@ -44,11 +44,7 @@ export class SykmeldingerSide extends Component {
                         return <Feilmelding />;
                     }
                     return (<div>
-                        <Panel>
-                            <Varselstripe type="spesial" ikon="/sykefravaer/img/svg/speiling.svg">
-                                <p>Dette er slik {brukernavn} ser det på nav.no</p>
-                            </Varselstripe>
-                        </Panel>
+                        <Speilingvarsel brukernavn={brukernavn} />
                         <div className="speiling">
                             <Brodsmuler brodsmuler={brodsmuler} />
                             <SidetoppSpeilet tittel="Dine sykmeldinger" htmlTekst={htmlIntro} />
