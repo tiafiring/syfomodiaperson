@@ -30,8 +30,6 @@ const SykepengeSoknad = ({ sykepengesoknad, fnr }) => {
         <Statuspanel sykepengesoknad={sykepengesoknad} />
         <SykmeldingUtdrag sykepengesoknad={sykepengesoknad} />
 
-        <Soknad sykepengesoknad={mapAktiviteter(sykepengesoknad)} tittel="Oppsummering" />
-
         <Utvidbar className="blokk" tittel="Oppsummering" erApen>
             <SoknadOppsummering oppsummeringsoknad={oppsummeringsoknad} />
         </Utvidbar>
