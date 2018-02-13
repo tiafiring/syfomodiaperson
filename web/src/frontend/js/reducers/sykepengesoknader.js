@@ -1,4 +1,3 @@
-import { tilDato, parseDatoerPeriodeListe, parseDatoerPeriode } from '../utils/serialisering/dato';
 import { parseSykepengesoknad, tidligsteFom, senesteTom } from 'digisyfo-npm';
 
 const initiellState = {
@@ -22,16 +21,6 @@ export function sorterAktiviteterEldsteFoerst(soknad) {
     });
 }
 
-const parseAktivitetsdatoer = (aktiviteter) => {
-    return aktiviteter.map((aktivitet) => {
-        return Object.assign({}, aktivitet,
-            {
-                periode: parseDatoerPeriode(aktivitet.periode),
-            }
-        );
-    });
-};
-
 export const settErOppdelt = (soknad) => {
     const perioder = soknad.aktiviteter.map((a) => {
         return a.periode;
@@ -48,33 +37,6 @@ export const settErOppdelt = (soknad) => {
         _erOppdelt,
     });
 };
-
-const parseUtdanningsDato = (utdanning) => {
-    return utdanning && Object.assign({}, utdanning, { utdanningStartdato: tilDato(utdanning.utdanningStartdato) });
-};
-
-const parseUtenlandsopphold = (utenlandsopphold) => {
-    return utenlandsopphold && Object.assign({}, utenlandsopphold, { perioder: parseDatoerPeriodeListe(utenlandsopphold.perioder) });
-};
-
-export const parseDatofelter = (soknad) => {
-    return Object.assign({}, soknad, {
-        aktiviteter: parseAktivitetsdatoer(soknad.aktiviteter),
-        egenmeldingsperioder: soknad.egenmeldingsperioder && parseDatoerPeriodeListe(soknad.egenmeldingsperioder),
-        ferie: soknad.ferie && parseDatoerPeriodeListe(soknad.ferie),
-        permisjon: soknad.permisjon && parseDatoerPeriodeListe(soknad.permisjon),
-        utenlandsopphold: parseUtenlandsopphold(soknad.utenlandsopphold),
-        utdanning: parseUtdanningsDato(soknad.utdanning),
-        gjenopptattArbeidFulltUtDato: tilDato(soknad.gjenopptattArbeidFulltUtDato),
-        identdato: tilDato(soknad.identdato),
-        sendtTilArbeidsgiverDato: tilDato(soknad.sendtTilArbeidsgiverDato),
-        sendtTilNAVDato: tilDato(soknad.sendtTilNAVDato),
-        opprettetDato: tilDato(soknad.opprettetDato),
-        sykmeldingSkrevetDato: tilDato(soknad.sykmeldingSkrevetDato),
-        forrigeSykeforloepTom: tilDato(soknad.forrigeSykeforloepTom),
-    });
-};
-
 
 export default function sykepengesoknader(state = initiellState, action) {
     switch (action.type) {

@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getLedetekst, getHtmlLedetekst, Varselstripe } from 'digisyfo-npm';
-import { Panel } from 'nav-frontend-paneler';
+import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import Side from '../sider/Side';
 import SidetoppSpeilet from '../components/SidetoppSpeilet';
 import * as actionCreators from '../actions/sykepengesoknader_actions';
@@ -11,11 +10,12 @@ import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import SykepengeSoknad from '../components/sykepengesoknader/sykepengesoknad/SykepengeSoknad';
 import IkkeInnsendtSoknad from '../components/sykepengesoknader/sykepengesoknad/IkkeInnsendtSoknad';
-import TilbakeKnapp from '../components/sykepengesoknader/sykepengesoknad/TilbakeKnapp';
 import Brodsmuler from '../components/Brodsmuler';
 import { SYKEPENGESOKNADER } from '../menypunkter';
 import { sykepengesoknad as sykepengesoknadPt } from '../propTypes';
 import { NY, UTKAST_TIL_KORRIGERING } from '../enums/sykepengesoknadstatuser';
+import Speilingvarsel from '../components/Speilingvarsel';
+import Tilbakelenke from '../components/Tilbakelenke';
 
 export class SykepengesoknadSide extends Component {
     componentWillMount() {
@@ -48,21 +48,21 @@ export class SykepengesoknadSide extends Component {
                     }
                     if (sykepengesoknad.status === NY || sykepengesoknad.status === UTKAST_TIL_KORRIGERING) {
                         return (<div>
-                            <IkkeInnsendtSoknad />
-                            <TilbakeKnapp clazz="knapperad--tight" fnr={fnr} />
+                            <div className="blokk">
+                                <IkkeInnsendtSoknad />
+                            </div>
+                            <Tilbakelenke to={`/sykefravaer/${fnr}/sykepengesoknader`} tekst="Gå til sykepengesøknader" />
                         </div>);
                     }
                     return (<div>
-                        <Panel>
-                            <Varselstripe type="spesial" ikon="/sykefravaer/img/svg/speiling.svg">
-                                <p>Dette er slik {brukernavn} ser det på nav.no</p>
-                            </Varselstripe>
-                        </Panel>
+                        <Speilingvarsel brukernavn={brukernavn} />
                         <div className="speiling">
                             <Brodsmuler brodsmuler={brodsmuler} />
                             <SidetoppSpeilet tittel="Søknad om sykepenger" />
-                            <SykepengeSoknad fnr={fnr} sykepengesoknad={sykepengesoknad} />
-                            <TilbakeKnapp clazz="knapperad--adskilt" fnr={fnr} />
+                            <div className="blokk">
+                                <SykepengeSoknad fnr={fnr} sykepengesoknad={sykepengesoknad} />
+                            </div>
+                            <Tilbakelenke to={`/sykefravaer/${fnr}/sykepengesoknader`} tekst="Gå til sykepengesøknader" />
                         </div>
                     </div>);
                 })()

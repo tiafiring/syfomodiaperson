@@ -1,14 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import Tilbakelenke from '../../components/Tilbakelenke';
 import { getLedetekst } from 'digisyfo-npm';
 
 const LenkeTilDineSykmeldinger = ({ ledetekster, fnr }) => {
-    return (<p className="side-innhold ikke-print blokk navigasjonsstripe">
-        <Link to={`/sykefravaer/${fnr}/sykmeldinger`}>
-            {getLedetekst('din-sykmelding.tilbake', ledetekster)}
-        </Link>
-    </p>);
+    return (<Tilbakelenke to={`/sykefravaer/${fnr}/sykmeldinger`} tekst={getLedetekst('din-sykmelding.tilbake', ledetekster)} />);
 };
 
 LenkeTilDineSykmeldinger.propTypes = {

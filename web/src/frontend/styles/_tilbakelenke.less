@@ -16,6 +16,11 @@
 		.mixin-transition(.2s, left);
 	}
 
+	&:focus {
+	   	outline: none;
+		box-shadow: 0 0 0 3px @orangeFocus;
+	}
+
 	&:hover:before,
 	&:focus:before {
 		left: -.25em;

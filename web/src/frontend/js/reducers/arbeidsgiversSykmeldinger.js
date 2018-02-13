@@ -1,3 +1,5 @@
+import { parseSykmelding } from 'digisyfo-npm';
+
 const initiellState = {
     henter: false,
     hentingFeilet: false,
@@ -26,7 +28,7 @@ export default function arbeidsgiversSykmeldinger(state = initiellState, action)
             return {
                 henter: false,
                 hentingFeilet: false,
-                data: action.data,
+                data: action.data.map(parseSykmelding),
             };
         }
         case 'HENT_ARBEIDSGIVERS_SYKMELDINGER_IKKE_TILGANG': {

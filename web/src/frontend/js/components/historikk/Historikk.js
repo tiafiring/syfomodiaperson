@@ -7,6 +7,14 @@ import AppSpinner from '../../components/AppSpinner';
 import IngenHistorikk from './IngenHistorikk';
 import UtvidbarHistorikk from './UtvidbarHistorikk';
 
+const Feilmelding = () => {
+    return (<Panel className="blokk--s">
+        <Varselstripe type="feil" fylt>
+           <p>Det skjedde en feil! Det er ikke sikkert du får all historikken som finnes!</p>
+        </Varselstripe>
+    </Panel>);
+};
+
 const Historikk = ({ historikk, sykeforloep }) => {
     const historikkEvents = historikk.moteHistorikk.concat(historikk.oppfoelgingsdialogHistorikkk);
     if (!sykeforloep || sykeforloep.length === 0 || (historikk.hentetMoter && historikk.hentetOppfoelgingsdialoger && historikkEvents.length === 0)) {
@@ -30,18 +38,13 @@ const Historikk = ({ historikk, sykeforloep }) => {
     });
 
     return (<div>
+        {
+            historikk.hentingFeilet && <Feilmelding />
+        }
         <Panel>
             <h1 style={{ margin: 0 }}>Logg</h1>
         </Panel>
         <div>
-            {
-                historikk.hentingFeilet ? <Panel className="blokk--s">
-                    <Varselstripe type="feil" fylt>
-                       <p>Det skjedde en feil! Det er ikke sikkert du får all historikken som finnes!</p>
-                    </Varselstripe>
-                </Panel>
-                : null
-            }
             {
                 historikk.henterOppfoelgingsdialoger || historikk.henterMoter && <AppSpinner />
             }
