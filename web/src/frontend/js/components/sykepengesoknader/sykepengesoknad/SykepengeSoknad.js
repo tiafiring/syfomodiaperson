@@ -18,12 +18,8 @@ const SykepengeSoknad = ({ sykepengesoknad, fnr }) => {
         return <UtgaattSoknad sykepengesoknad={sykepengesoknad} />;
     }
 
-    let oppsummeringsoknad = sykepengesoknad.oppsummering;
-
-    if (!oppsummeringsoknad) {
-        const skjemasoknad = mapBackendsoknadToSkjemasoknad(sykepengesoknad);
-        oppsummeringsoknad = mapSkjemasoknadToOppsummeringsoknad(skjemasoknad, sykepengesoknad);
-    }
+    const oppsummeringsoknad = sykepengesoknad.oppsummering
+        || mapSkjemasoknadToOppsummeringsoknad(mapbackendToDkjemasoknad(sykepengesoknad), sykepengesoknad);
 
     return (<div>
         { sykepengesoknad.status === KORRIGERT && <KorrigertAvContainer sykepengesoknad={sykepengesoknad} /> }
@@ -36,8 +32,10 @@ const SykepengeSoknad = ({ sykepengesoknad, fnr }) => {
         <div className="bekreftet-container">
             <BekreftetKorrektInformasjon oppsummeringsoknad={oppsummeringsoknad} />
         </div>
-
-        { (sykepengesoknad.status === SENDT || sykepengesoknad.status === TIL_SENDING) && <RelaterteSoknaderContainer fnr={fnr} sykepengesoknadId={sykepengesoknad.id} /> }
+        {
+            (sykepengesoknad.status === SENDT || sykepengesoknad.status === TIL_SENDING) &&
+            <RelaterteSoknaderContainer fnr={fnr} sykepengesoknadId={sykepengesoknad.id} />
+        }
     </div>);
 };
 
