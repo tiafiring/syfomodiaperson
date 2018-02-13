@@ -18,7 +18,7 @@ const SykepengeSoknad = ({ sykepengesoknad, fnr }) => {
     }
 
     const oppsummeringsoknad = sykepengesoknad.oppsummering
-        || mapSkjemasoknadToOppsummeringsoknad(mapbackendToDkjemasoknad(sykepengesoknad), sykepengesoknad);
+        || mapSkjemasoknadToOppsummeringsoknad(mapBackendsoknadToSkjemasoknad(sykepengesoknad), sykepengesoknad);
 
     return (<div>
         { sykepengesoknad.status === KORRIGERT && <KorrigertAvContainer sykepengesoknad={sykepengesoknad} /> }
