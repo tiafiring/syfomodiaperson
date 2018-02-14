@@ -4,6 +4,7 @@ import { post, get } from '../api/index';
 import history from '../history';
 import * as actions from '../actions/moter_actions';
 import * as historikkActions from '../actions/historikk_actions';
+import * as veilederoppgaverActions from '../actions/veilederoppgaver_actions';
 import { log } from 'digisyfo-npm';
 
 export function* opprettMote(action) {
@@ -39,6 +40,7 @@ export function* avbrytMote(action) {
         yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.uuid}/avbryt?varsle=${action.varsle}`);
         yield put(actions.moteAvbrutt(action.uuid));
         yield put(historikkActions.hentHistorikk(action.fnr, 'MOTER'));
+        yield put(veilederoppgaverActions.alleSvarMottattOppgaveBehandlet());
         history.replace(`/sykefravaer/${action.fnr}/mote`);
     } catch (e) {
         log(e);
@@ -52,6 +54,7 @@ export function* bekreftMote(action) {
         yield call(post, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter/${action.moteUuid}/bekreft?valgtAlternativId=${action.valgtAlternativId}`);
         yield put(actions.moteBekreftet(action.moteUuid, action.valgtAlternativId, new Date()));
         yield put(historikkActions.hentHistorikk(action.fnr, 'MOTER'));
+        yield put(veilederoppgaverActions.alleSvarMottattOppgaveBehandlet());
         history.replace(`/sykefravaer/${action.fnr}/mote`);
     } catch (e) {
         log(e);
@@ -66,6 +69,7 @@ export function* opprettFlereAlternativ(action) {
         yield call(post, url, action.data);
         yield put(historikkActions.hentHistorikk(action.fnr, 'MOTER'));
         yield put(actions.opprettFlereAlternativBekreftet(action.data, action.moteUuid));
+        yield put(veilederoppgaverActions.alleSvarMottattOppgaveBehandlet());
     } catch (e) {
         log(e);
         yield put(actions.opprettFlereAlternativFeilet());

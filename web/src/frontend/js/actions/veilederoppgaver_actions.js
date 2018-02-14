@@ -47,6 +47,12 @@ export function oppgaveBehandlet(id, oppgave) {
     };
 }
 
+export function alleSvarMottattOppgaveBehandlet() {
+    return {
+        type: actionstype.ALLE_SVAR_MOTTATT_OPPGAVE_BEHANDLET,
+    };
+}
+
 export function behandleOppgave(id, oppgave, fnr) {
     return {
         type: actionstype.BEHANDLE_OPPGAVE_FORESPURT,
