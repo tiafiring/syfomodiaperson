@@ -6,7 +6,6 @@ import {
     Tidslinje,
     TIDSLINJE_TYPER,
     setHendelseData,
-    apneHendelser,
     hentTidslinjer,
     getLedetekst,
     getHtmlLedetekst,
@@ -38,9 +37,9 @@ export class TidslinjeSide extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const { actions, apneHendelseIder, sykeforloep } = this.props;
+        const { actions, apneHendelseIder, sykeforloep, arbeidssituasjon } = this.props;
         if (!sykeforloep.hentet && nextProps.sykeforloep.hentet) {
-            actions.apneHendelser(apneHendelseIder);
+            actions.hentTidslinjer(apneHendelseIder, arbeidssituasjon, nextProps.sykeforloep.data);
         }
     }
 
@@ -123,7 +122,7 @@ TidslinjeSide.propTypes = {
 export function mapDispatchToProps(dispatch) {
     const actions = Object.assign({},
         sykeforloepActions,
-        { setHendelseData, hentTidslinjer, apneHendelser });
+        { setHendelseData, hentTidslinjer });
     return {
         actions: bindActionCreators(actions, dispatch),
     };
