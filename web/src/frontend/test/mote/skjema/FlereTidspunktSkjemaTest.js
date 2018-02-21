@@ -15,11 +15,11 @@ describe("FlereTidspunktSkjemaTest", () => {
         beforeEach(() => {
             handleSubmit = sinon.spy();
             component = shallow(<FlereTidspunktSkjema antallNyeTidspunkt={2} handleSubmit={handleSubmit} />)
-        })
+        });
 
         it("Inneholder Tidspunkter", () => {
             expect(component.find(Tidspunkter)).to.have.length(1);
-            expect(component.find(Tidspunkter).prop("tidspunker")).to.deep.equal([0, 1])
+            expect(component.find(Tidspunkter).prop("antallNyeTidspunkt")).to.deep.equal(2)
         });
 
         it("Skal sende riktig skjemanavn videre til Tidspunkter", () => {
@@ -41,7 +41,7 @@ describe("FlereTidspunktSkjemaTest", () => {
                     klokkeslett: "10.30"
                 }]
             };
-        })
+        });
         it("getData skal mappe values om til riktig format", () => {
             expect(getData(values)).to.deep.equal([{
                 tid: "2012-02-20T10:20:00",
@@ -84,7 +84,6 @@ describe("FlereTidspunktSkjemaTest", () => {
             };
             props = {
                 antallNyeTidspunkt: 2,
-                antallEksisterendeTidspunkter: 2,
             };
         });
 

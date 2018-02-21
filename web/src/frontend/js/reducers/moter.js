@@ -9,7 +9,7 @@ const defaultState = {
     sendingFeilet: false,
     nyeAlternativFeilet: false,
     senderNyeAlternativ: false,
-    antallNyeTidspunkt: 0,
+    antallNyeTidspunkt: 1,
     skjermetBruker: false,
 };
 
@@ -130,20 +130,14 @@ export default function moter(state = defaultState, action) {
             });
         }
         case actions.FLERE_ALTERNATIV: {
-            let antallNyeTidspunkt;
-            if (!state.antallNyeTidspunkt) {
-                antallNyeTidspunkt = 2;
-            } else {
-                antallNyeTidspunkt = state.antallNyeTidspunkt + 1;
-            }
-
+            const antallNyeTidspunkt = state.antallNyeTidspunkt + 1;
             return Object.assign({}, state, {
                 antallNyeTidspunkt,
             });
         }
         case actions.AVBRYT_FLERE_ALTERNATIV: {
             return Object.assign({}, state, {
-                antallNyeTidspunkt: undefined,
+                antallNyeTidspunkt: 0,
             });
         }
         case actions.OPPRETTER_FLERE_ALTERNATIV: {

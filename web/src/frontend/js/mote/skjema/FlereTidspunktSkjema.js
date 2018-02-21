@@ -38,17 +38,13 @@ export const FlereTidspunktSkjema = (props) => {
         fnr,
         ledetekster,
         mote,
-        antallNyeTidspunkt,
         opprettFlereAlternativ,
         senderNyeAlternativ,
         nyeAlternativFeilet,
         flereAlternativ,
         avbrytFlereAlternativ,
+        antallNyeTidspunkt,
         handleSubmit } = props;
-    let nyeTidspunktListe = [];
-    for (let i = 0; i < antallNyeTidspunkt; i++) {
-        nyeTidspunktListe.push(i);
-    }
     const submit = (values) => {
         const data = dekorerMedSted(getData(values), mote.alternativer[0].sted);
         opprettFlereAlternativ(data, mote.moteUuid, fnr);
@@ -57,7 +53,7 @@ export const FlereTidspunktSkjema = (props) => {
     return (
         <div className="fleretidspunkt">
             <form onSubmit={handleSubmit(submit)}>
-                <Tidspunkter tidspunker={nyeTidspunktListe} skjemanavn={FLERE_TIDSPUNKTER_SKJEMANAVN} />
+                <Tidspunkter antallNyeTidspunkt={antallNyeTidspunkt} skjemanavn={FLERE_TIDSPUNKTER_SKJEMANAVN} />
                 <div className="blokk--l">
                     <button type="button" className="lenke" onClick={flereAlternativ}>
                     {getLedetekst('mote.bookingstatus.fleretidspunkt.leggtil', ledetekster)}</button>
@@ -83,13 +79,13 @@ FlereTidspunktSkjema.propTypes = {
     mote: PropTypes.object,
     ledetekster: PropTypes.object,
     antallEksisterendeTidspunkter: PropTypes.number,
-    antallNyeTidspunkt: PropTypes.number,
     flereAlternativ: PropTypes.func,
     nyeAlternativFeilet: PropTypes.bool,
     senderNyeAlternativ: PropTypes.bool,
     opprettFlereAlternativ: PropTypes.func,
     handleSubmit: PropTypes.func,
     avbrytFlereAlternativ: PropTypes.func,
+    antallNyeTidspunkt: PropTypes.number,
 };
 
 export function validate(values, props) {
@@ -106,6 +102,7 @@ export function validate(values, props) {
                 klokkeslett: 'Vennligst angi klokkeslett',
             };
         });
+        feilmeldinger.tidspunkter = tidspunkterFeilmeldinger;
     } else {
         tidspunkterFeilmeldinger = tidspunkterFeilmeldinger.map((tidspunkt, index) => {
             const tidspunktValue = values.tidspunkter[index];
@@ -122,12 +119,8 @@ export function validate(values, props) {
             }
             return feil;
         });
-    }
-
-    if (JSON.stringify(tidspunkterFeilmeldinger) !== JSON.stringify([{}, {}])) {
         feilmeldinger.tidspunkter = tidspunkterFeilmeldinger;
     }
-
     return feilmeldinger;
 }
 

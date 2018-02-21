@@ -61,7 +61,7 @@ export class MotebookingSkjema extends Component {
     }
 
     render() {
-        const { ledetekster, handleSubmit, arbeidstaker, opprettMote, fnr, sender, sendingFeilet, ledere, valgtEnhet } = this.props;
+        const { ledetekster, handleSubmit, arbeidstaker, opprettMote, fnr, sender, sendingFeilet, ledere, valgtEnhet, flereAlternativ, antallNyeTidspunkt } = this.props;
         const submit = (values) => {
             const data = getData(values);
             data.fnr = fnr;
@@ -91,7 +91,11 @@ export class MotebookingSkjema extends Component {
                 </div>
                 <fieldset className="skjema-fieldset blokk">
                     <legend>2. {getLedetekst('mote.motebookingskjema.velg-dato-tid-sted', ledetekster)}</legend>
-                    <Tidspunkter skjemanavn={OPPRETT_MOTE_SKJEMANAVN} />
+                    <Tidspunkter antallNyeTidspunkt={antallNyeTidspunkt} skjemanavn={OPPRETT_MOTE_SKJEMANAVN} />
+                    <div className="blokk--l">
+                        <button type="button" className="lenke" onClick={flereAlternativ}>
+                            {getLedetekst('mote.bookingstatus.fleretidspunkt.leggtil', ledetekster)}</button>
+                    </div>
                     <Field
                         label="Sted"
                         id="sted"
@@ -131,19 +135,25 @@ MotebookingSkjema.propTypes = {
     ledere: PropTypes.array,
     ledetekster: PropTypes.object,
     arbeidstaker: PropTypes.object,
+    flereAlternativ: PropTypes.func,
+    antallNyeTidspunkt: PropTypes.number,
 };
 
-export function validate(values) {
+export function validate(values, props) {
     const feilmeldinger = {};
-    let tidspunkterFeilmeldinger = [{}, {}];
+    let tidspunkterFeilmeldinger = [];
+    for (let i = 0; i < props.antallNyeTidspunkt; i++) {
+        tidspunkterFeilmeldinger.push({});
+    }
+
     if (!values.tidspunkter || !values.tidspunkter.length) {
-        tidspunkterFeilmeldinger = [{
-            dato: 'Vennligst angi dato',
-            klokkeslett: 'Vennligst angi klokkeslett',
-        }, {
-            dato: 'Vennligst angi dato',
-            klokkeslett: 'Vennligst angi klokkeslett',
-        }];
+        tidspunkterFeilmeldinger = tidspunkterFeilmeldinger.map(() => {
+            return {
+                dato: 'Vennligst angi dato',
+                klokkeslett: 'Vennligst angi klokkeslett',
+            };
+        });
+        feilmeldinger.tidspunkter = tidspunkterFeilmeldinger;
     } else {
         tidspunkterFeilmeldinger = tidspunkterFeilmeldinger.map((tidspunkt, index) => {
             const tidspunktValue = values.tidspunkter[index];
@@ -160,9 +170,6 @@ export function validate(values) {
             }
             return feil;
         });
-    }
-
-    if (JSON.stringify(tidspunkterFeilmeldinger) !== JSON.stringify([{}, {}])) {
         feilmeldinger.tidspunkter = tidspunkterFeilmeldinger;
     }
 

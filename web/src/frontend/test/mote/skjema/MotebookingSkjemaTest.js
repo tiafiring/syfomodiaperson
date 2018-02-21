@@ -83,7 +83,8 @@ describe("MotebookingSkjemaTest", () => {
             props = {
                 nullstillVirksomhet: Function,
                 hentVirksomhet: Function,
-                ledere: []
+                ledere: [],
+                antallNyeTidspunkt: 2,
             };
         });
 

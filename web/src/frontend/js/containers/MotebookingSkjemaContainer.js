@@ -9,7 +9,7 @@ import * as virksomhetActions from '../actions/virksomhet_actions';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
 
-const MotebookingSkjemaContainer = ({ opprettMote, ledetekster, henter, skjermetBruker, hentingFeilet, valgtEnhet, ledere, arbeidstaker, fnr }) => {
+const MotebookingSkjemaContainer = ({ opprettMote, ledetekster, henter, skjermetBruker, hentingFeilet, valgtEnhet, ledere, arbeidstaker, fnr, flereAlternativ, antallNyeTidspunkt }) => {
     if (henter) {
         return <AppSpinner />;
     } else if (skjermetBruker) {
@@ -28,7 +28,7 @@ const MotebookingSkjemaContainer = ({ opprettMote, ledetekster, henter, skjermet
             tittel="Lederen mangler!"
             melding={{ __html: '<p>Møteplanleggeren kan bare brukes hvis nærmeste leder er registrert. Arbeidsgiveren må gjøre dette i Altinn.</p>' }} />);
     }
-    return <MotebookingSkjema opprettMote={opprettMote} ledetekster={ledetekster} ledere={ledere} valgtEnhet={valgtEnhet} arbeidstaker={arbeidstaker} fnr={fnr} />;
+    return <MotebookingSkjema antallNyeTidspunkt={antallNyeTidspunkt} flereAlternativ={flereAlternativ} opprettMote={opprettMote} ledetekster={ledetekster} ledere={ledere} valgtEnhet={valgtEnhet} arbeidstaker={arbeidstaker} fnr={fnr} />;
 };
 
 MotebookingSkjemaContainer.propTypes = {
@@ -43,6 +43,8 @@ MotebookingSkjemaContainer.propTypes = {
     hentingFeilet: PropTypes.bool,
     ledetekster: PropTypes.object,
     ledere: PropTypes.array,
+    flereAlternativ: PropTypes.func,
+    antallNyeTidspunkt: PropTypes.number,
 };
 
 export function mapStateToProps(state, ownProps) {
@@ -58,6 +60,7 @@ export function mapStateToProps(state, ownProps) {
         henter: state.ledere.henter || state.navbruker.henter || state.ledetekster.henter,
         hentLedereFeiletBool: state.ledere.hentingFeilet,
         skjermetBruker: state.moter.skjermetBruker,
+        antallNyeTidspunkt: state.moter.antallNyeTidspunkt,
         ledetekster: state.ledetekster.data,
         hentingFeilet: state.navbruker.hentingFeilet,
     };

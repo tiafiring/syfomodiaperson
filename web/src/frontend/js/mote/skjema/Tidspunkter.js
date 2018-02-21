@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Tidspunkt from './Tidspunkt';
 
-const Tidspunkter = ({ tidspunker, skjemanavn }) => {
-    const tidspunktListe = tidspunker || [0, 1];
-
+const Tidspunkter = ({ antallNyeTidspunkt = 1, skjemanavn }) => {
+    const tidspunker = [];
+    for (let i = 0; i < antallNyeTidspunkt; i++) {
+        tidspunker.push({});
+    }
     return (<div className="motetidspunkter">
         {
-            tidspunktListe.map((tidspunkt, index) => {
+            tidspunker.map((tidspunkt, index) => {
                 return <Tidspunkt skjemanavn={skjemanavn} tidspunkt={index} key={index} />;
             })
         }
@@ -15,8 +17,7 @@ const Tidspunkter = ({ tidspunker, skjemanavn }) => {
 };
 
 Tidspunkter.propTypes = {
-    tidspunker: PropTypes.array,
-    tidspunktNummerOffset: PropTypes.number,
+    antallNyeTidspunkt: PropTypes.number,
     skjemanavn: PropTypes.string.isRequired,
 };
 
