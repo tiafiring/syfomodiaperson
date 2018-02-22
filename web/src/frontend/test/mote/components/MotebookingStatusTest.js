@@ -268,7 +268,7 @@ describe("MotebookingStatus", () => {
         let component;
 
         beforeEach(() => {
-            component = shallow(<MotebookingStatus arbeidstaker={arbeidstaker} mote={mote} antallNyeTidspunkt={4} />);
+            component = shallow(<MotebookingStatus skalViseFlereAlternativ={true} arbeidstaker={arbeidstaker} mote={mote}  antallNyeTidspunkt={4} />);
         });
 
         it("Skal vise Svarstatus med FlereTidspunktSkjema", () => {

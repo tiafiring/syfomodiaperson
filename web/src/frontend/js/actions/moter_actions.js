@@ -89,6 +89,12 @@ export function fjernAlternativ() {
     };
 }
 
+export function visFlereAlternativ() {
+    return {
+        type: actions.VIS_FLERE_ALTERNATIV,
+    };
+}
+
 export function avbrytFlereAlternativ() {
     return {
         type: actions.AVBRYT_FLERE_ALTERNATIV,

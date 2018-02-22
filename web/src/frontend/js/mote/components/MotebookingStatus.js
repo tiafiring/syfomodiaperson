@@ -109,13 +109,13 @@ PassertVarsel.propTypes = {
 };
 
 const MotebookingStatus = (props) => {
-    const { ledetekster, fnr, mote, avbrytMoteUtenVarsel, antallNyeTidspunkt, arbeidstaker } = props;
+    const { ledetekster, fnr, mote, avbrytMoteUtenVarsel, skalViseFlereAlternativ, arbeidstaker } = props;
     const { alternativer, status } = mote;
     const krrMeldingPanel = !arbeidstaker.kontaktinfo.skalHaVarsel ?
         <KontaktInfoFeilmelding melding={getLedetekstFraFeilAarsak(arbeidstaker.kontaktinfo.feilAarsak, ledetekster)} />
     : null;
     const motePassert = erMotePassert(mote);
-    const flereTidspunktBoks = antallNyeTidspunkt ? <FlereTidspunktSkjema {...props} antallEksisterendeTidspunkter={alternativer.length} /> : null;
+    const flereTidspunktBoks = skalViseFlereAlternativ ? <FlereTidspunktSkjema {...props} antallEksisterendeTidspunkter={alternativer.length} /> : null;
     const sidetoppNokkel = getSidetoppNokkel(mote, motePassert);
     const knapp = erMotePassert(mote) ? <button className="js-ny knapp" onClick={() => { avbrytMoteUtenVarsel(mote.moteUuid, fnr);}}>{getLedetekst('mote.bookingstatus.knapp.planlegg-nytt-mote', ledetekster)}</button>
         : <Link role="button" className="knapp knapp--enten js-avbryt" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>{getLedetekst('mote.bookingstatus.knapp.avbryt', ledetekster)}</Link>;
@@ -153,6 +153,7 @@ MotebookingStatus.propTypes = {
     flereAlternativ: PropTypes.func,
     opprettFlereAlternativ: PropTypes.func,
     avbrytFlereAlternativ: PropTypes.func,
+    skalViseFlereAlternativ: PropTypes.bool,
 };
 
 export default MotebookingStatus;

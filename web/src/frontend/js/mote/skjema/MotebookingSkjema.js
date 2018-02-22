@@ -141,6 +141,7 @@ MotebookingSkjema.propTypes = {
     flereAlternativ: PropTypes.func,
     fjernAlternativ: PropTypes.func,
     antallNyeTidspunkt: PropTypes.number,
+    skalViseFlereAlternativ: PropTypes.bool,
 };
 
 export function validate(values, props) {

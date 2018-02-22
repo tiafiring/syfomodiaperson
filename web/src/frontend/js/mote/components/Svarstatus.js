@@ -59,7 +59,7 @@ export const getGamleAlternativer = (mote) => {
 };
 
 const Svarstatus = (props) => {
-    const { mote, flereAlternativ, ledetekster, children, fnr } = props;
+    const { mote, visFlereAlternativ, ledetekster, children, fnr } = props;
     const nyeAlternativer = getNyeAlternativer(mote);
     const gamleAlternativer = getGamleAlternativer(mote);
     return (<div>
@@ -70,7 +70,7 @@ const Svarstatus = (props) => {
                 deltakertype={konstanter.NAV_VEILEDER}
                 fnr={fnr}
                 ledetekster={ledetekster} />
-            <button className="nyetidspunktknapp" onClick={flereAlternativ}>
+            <button className="nyetidspunktknapp" onClick={visFlereAlternativ}>
                 {getLedetekst('mote.bookingstatus.knapp.flere-tidspunkt', ledetekster)}</button>
             {children}
         </div>
@@ -93,7 +93,7 @@ const Svarstatus = (props) => {
 
 Svarstatus.propTypes = {
     mote: moterPropTypes.mote,
-    flereAlternativ: PropTypes.func,
+    visFlereAlternativ: PropTypes.func,
     ledetekster: PropTypes.object,
     children: PropTypes.object,
     fnr: PropTypes.string,

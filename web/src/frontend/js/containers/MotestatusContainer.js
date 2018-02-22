@@ -58,6 +58,7 @@ export const mapStateToProps = (state, ownProps) => {
         antallNyeTidspunkt: state.moter.antallNyeTidspunkt,
         nyeAlternativFeilet: state.moter.nyeAlternativFeilet,
         senderNyeAlternativ: state.moter.senderNyeAlternativ,
+        skalViseFlereAlternativ: state.moter.skalViseFlereAlternativ,
     };
 };
 
