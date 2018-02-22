@@ -9,7 +9,7 @@ import * as virksomhetActions from '../actions/virksomhet_actions';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
 
-const MotebookingSkjemaContainer = ({ opprettMote, ledetekster, henter, skjermetBruker, hentingFeilet, valgtEnhet, ledere, arbeidstaker, fnr, flereAlternativ, antallNyeTidspunkt }) => {
+const MotebookingSkjemaContainer = ({ opprettMote, ledetekster, henter, skjermetBruker, hentingFeilet, valgtEnhet, ledere, arbeidstaker, fnr, flereAlternativ, fjernAlternativ, antallNyeTidspunkt }) => {
     if (henter) {
         return <AppSpinner />;
     } else if (skjermetBruker) {
@@ -28,7 +28,7 @@ const MotebookingSkjemaContainer = ({ opprettMote, ledetekster, henter, skjermet
             tittel="Lederen mangler!"
             melding={{ __html: '<p>Møteplanleggeren kan bare brukes hvis nærmeste leder er registrert. Arbeidsgiveren må gjøre dette i Altinn.</p>' }} />);
     }
-    return <MotebookingSkjema antallNyeTidspunkt={antallNyeTidspunkt} flereAlternativ={flereAlternativ} opprettMote={opprettMote} ledetekster={ledetekster} ledere={ledere} valgtEnhet={valgtEnhet} arbeidstaker={arbeidstaker} fnr={fnr} />;
+    return <MotebookingSkjema antallNyeTidspunkt={antallNyeTidspunkt} fjernAlternativ={fjernAlternativ} flereAlternativ={flereAlternativ} opprettMote={opprettMote} ledetekster={ledetekster} ledere={ledere} valgtEnhet={valgtEnhet} arbeidstaker={arbeidstaker} fnr={fnr} />;
 };
 
 MotebookingSkjemaContainer.propTypes = {
@@ -44,6 +44,7 @@ MotebookingSkjemaContainer.propTypes = {
     ledetekster: PropTypes.object,
     ledere: PropTypes.array,
     flereAlternativ: PropTypes.func,
+    fjernAlternativ: PropTypes.func,
     antallNyeTidspunkt: PropTypes.number,
 };
 

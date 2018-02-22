@@ -135,6 +135,12 @@ export default function moter(state = defaultState, action) {
                 antallNyeTidspunkt,
             });
         }
+        case actions.FJERN_ALTERNATIV: {
+            const antallNyeTidspunkt = state.antallNyeTidspunkt - 1;
+            return Object.assign({}, state, {
+                antallNyeTidspunkt,
+            });
+        }
         case actions.AVBRYT_FLERE_ALTERNATIV: {
             return Object.assign({}, state, {
                 antallNyeTidspunkt: 0,
@@ -191,7 +197,7 @@ export default function moter(state = defaultState, action) {
 
             return Object.assign({}, {
                 data,
-                antallNyeTidspunkt: undefined,
+                antallNyeTidspunkt: 0,
                 nyeAlternativFeilet: false,
                 senderNyeAlternativ: false,
             });

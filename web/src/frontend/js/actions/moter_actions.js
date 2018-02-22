@@ -83,6 +83,12 @@ export function flereAlternativ() {
     };
 }
 
+export function fjernAlternativ() {
+    return {
+        type: actions.FJERN_ALTERNATIV,
+    };
+}
+
 export function avbrytFlereAlternativ() {
     return {
         type: actions.AVBRYT_FLERE_ALTERNATIV,

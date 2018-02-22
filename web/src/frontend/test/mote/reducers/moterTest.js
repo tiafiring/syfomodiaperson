@@ -706,7 +706,6 @@ describe('moter', () => {
             const action = actions.opprettFlereAlternativBekreftet(data, "min-mote-uuid");
             const nextState = moter(initialState, action);
 
-            expect(nextState.antallNyeTidspunkt).to.be.undefined;
             expect(nextState.nyeAlternativFeilet).to.be.false;
             expect(nextState.senderNyeAlternativ).to.be.false;
             expect(nextState.data).to.deep.equal([{

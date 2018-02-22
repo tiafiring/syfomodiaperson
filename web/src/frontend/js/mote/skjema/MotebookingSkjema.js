@@ -61,7 +61,7 @@ export class MotebookingSkjema extends Component {
     }
 
     render() {
-        const { ledetekster, handleSubmit, arbeidstaker, opprettMote, fnr, sender, sendingFeilet, ledere, valgtEnhet, flereAlternativ, antallNyeTidspunkt } = this.props;
+        const { ledetekster, handleSubmit, arbeidstaker, opprettMote, fnr, sender, sendingFeilet, ledere, valgtEnhet, flereAlternativ, fjernAlternativ, antallNyeTidspunkt } = this.props;
         const submit = (values) => {
             const data = getData(values);
             data.fnr = fnr;
@@ -93,8 +93,11 @@ export class MotebookingSkjema extends Component {
                     <legend>2. {getLedetekst('mote.motebookingskjema.velg-dato-tid-sted', ledetekster)}</legend>
                     <Tidspunkter antallNyeTidspunkt={antallNyeTidspunkt} skjemanavn={OPPRETT_MOTE_SKJEMANAVN} />
                     <div className="blokk--l">
-                        <button type="button" className="lenke" onClick={flereAlternativ}>
+                        <button type="button" className="lenke" onClick={flereAlternativ} style={{ marginRight: '1em' }}>
                             {getLedetekst('mote.bookingstatus.fleretidspunkt.leggtil', ledetekster)}</button>
+                        {
+                            antallNyeTidspunkt > 1 && <button type="button" className="lenke" onClick={fjernAlternativ}>Fjern siste</button>
+                        }
                     </div>
                     <Field
                         label="Sted"
@@ -136,6 +139,7 @@ MotebookingSkjema.propTypes = {
     ledetekster: PropTypes.object,
     arbeidstaker: PropTypes.object,
     flereAlternativ: PropTypes.func,
+    fjernAlternativ: PropTypes.func,
     antallNyeTidspunkt: PropTypes.number,
 };
 
