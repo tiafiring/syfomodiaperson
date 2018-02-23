@@ -12,7 +12,12 @@ import navbruker from './reducers/navbruker';
 import sykmeldinger from './reducers/sykmeldinger';
 import arbeidsgiversSykmeldinger from './reducers/arbeidsgiversSykmeldinger';
 import { reducer as formReducer } from 'redux-form';
-import { ledetekster, hentLedetekster, tidslinjer, hasURLParameter } from 'digisyfo-npm';
+import {
+    ledetekster,
+    hentLedetekster,
+    hasURLParameter,
+    tidslinjer,
+} from 'digisyfo-npm';
 import moter from './reducers/moter';
 import epostinnhold from './reducers/epostinnhold';
 import arbeidsgiverEpostinnhold from './reducers/arbeidsgiverEpostinnhold';

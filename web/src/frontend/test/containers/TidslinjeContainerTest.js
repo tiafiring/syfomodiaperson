@@ -1,15 +1,19 @@
 import React from 'react';
 import { expect } from 'chai';
+import sinon from 'sinon';
 import { mount, shallow, render } from 'enzyme';
+import {
+    Tidslinje,
+} from 'digisyfo-npm';
 import Feilmelding from '../../js/components/Feilmelding';
 import AppSpinner from '../../js/components/AppSpinner';
-import { Tidslinje } from 'digisyfo-npm';
-import { mapStateToProps, TidslinjeSide } from '../../js/containers/TidslinjeContainer';
+import {
+    mapStateToProps,
+    TidslinjeSide,
+} from '../../js/containers/TidslinjeContainer';
 import TidslinjeVelgArbeidssituasjonContainer from '../../js/containers/TidslinjeVelgArbeidssituasjonContainer';
-import sinon from 'sinon';
 
-describe("TidslinjeContainer", () => {
-
+describe('TidslinjeContainer', () => {
     let state = {};
     let ownProps = {};
 
@@ -23,7 +27,7 @@ describe("TidslinjeContainer", () => {
             ikkeTilgang: false,
         };
         state.ledetekster = {
-            data: {"min": "tekst"},
+            data: {'min': 'tekst'},
             hentingFeilet: false,
             henter: false,
         };
@@ -34,47 +38,53 @@ describe("TidslinjeContainer", () => {
         };
         state.navbruker = {
             data: {
-                fnr: "887766",
-                navn: "Helge"
+                fnr: '887766',
+                navn: 'Helge',
             }
         };
+        state.sykeforloep = {
+            henter: false,
+            hentet: false,
+            hentingFeilet: false,
+            data: [],
+        };
         ownProps.params = {
-            valgtArbeidssituasjon: "",
-            fnr: "887766"
+            valgtArbeidssituasjon: '',
+            fnr: '887766',
         }
     });
 
-    describe("mapStateToProps", () => {
+    describe('mapStateToProps', () => {
 
-        it("Skal returnere fnr === fnr hvis fnr finnes", () => {
+        it('Skal returnere fnr === fnr hvis fnr finnes', () => {
             const props = mapStateToProps(state, ownProps);
-            expect(props.fnr).to.equal("887766");
+            expect(props.fnr).to.equal('887766');
         });
 
-        it("Skal returnere NAV-brukerens navn", () => {
+        it('Skal returnere NAV-brukerens navn', () => {
             const props = mapStateToProps(state, ownProps);
-            expect(props.brukernavn).to.equal("Helge")
-        })
+            expect(props.brukernavn).to.equal('Helge')
+        });
 
-        it("Skal returnere hendelser", () => {
+        it('Skal returnere hendelser', () => {
             const props = mapStateToProps(state, ownProps);
             expect(props.hendelser).to.deep.equal([{foo: 1}, {foo: 2}]);
         });
 
-        it("Skal returnere hendelser fra hash", () => {
+        it('Skal returnere hendelser fra hash', () => {
             ownProps.location = {
-                hash: "#1/3"
+                hash: '#1/3',
             };
             const props = mapStateToProps(state, ownProps);
-            expect(props.apneHendelseIder).to.deep.equal(["1", "3"])
+            expect(props.apneHendelseIder).to.deep.equal(['1', '3'])
             ownProps.location = {
-                hash: "#8/banan"
+                hash: '#8/banan',
             };
             const props2 = mapStateToProps(state, ownProps);
-            expect(props2.apneHendelseIder).to.deep.equal(["8", "banan"])
+            expect(props2.apneHendelseIder).to.deep.equal(['8', 'banan'])
         });
 
-        it("Skal returnere hentingFeilet", () => {
+        it('Skal returnere hentingFeilet', () => {
             const props0 = mapStateToProps(state, ownProps);
             expect(props0.hentingFeilet).to.be.false;
 
@@ -83,12 +93,12 @@ describe("TidslinjeContainer", () => {
             expect(props1.hentingFeilet).to.be.true;
             
             state.ledetekster.hentingFeilet = false;
-            state.tidslinjer.hentingFeilet = true;
+            state.sykeforloep.hentingFeilet = true;
             const props2 = mapStateToProps(state, ownProps);
             expect(props2.hentingFeilet).to.be.true;
         });
 
-        it("Skal returnere henter", () => {
+        it('Skal returnere henter', () => {
             const props0 = mapStateToProps(state, ownProps);
             expect(props0.henter).to.be.false;
 
@@ -97,62 +107,98 @@ describe("TidslinjeContainer", () => {
             expect(props1.henter).to.be.true;
             
             state.ledetekster.henter = false;
-            state.tidslinjer.henter = true;
+            state.sykeforloep.henter = true;
             const props2 = mapStateToProps(state, ownProps);
             expect(props2.henter).to.be.true;
         });
 
-        it("Skal returnere ledetekster", () => {
+        it('Skal returnere ledetekster', () => {
             const props = mapStateToProps(state, ownProps);
-            expect(props.ledetekster).to.deep.equal({min: "tekst"})
+            expect(props.ledetekster).to.deep.equal({min: 'tekst'})
         });
 
     });
 
-    describe("TidslinjeSide", () => {
-
+    describe('TidslinjeSide', () => {
+        let sykeforloep;
         let hentTidslinjer;
+        let hentSykeforloep;
         let actions;
         let ledetekster;
+        let komponent;
 
         beforeEach(() => {
+            sykeforloep = {
+                henter: false,
+                hentet: false,
+                data: []
+            };
             ledetekster = { henter: false, data: {} },
             hentTidslinjer = sinon.spy();
+            hentSykeforloep = sinon.spy();
             actions = {
                 hentTidslinjer,
+                hentSykeforloep,
             }
-        })
-
-        it("Skal vise AppSpinner dersom henter = true", () => {
-            const comp = shallow(<TidslinjeSide henter actions={actions} />);
-            expect(comp.contains(<AppSpinner />)).to.be.true;
         });
 
-        it("Skal vise Feilmelding dersom hentingFeilet = true", () => {
-            const comp = shallow(<TidslinjeSide hentingFeilet actions={actions} />);
-            expect(comp.contains(<Feilmelding />)).to.be.true;
+        it('Skal vise AppSpinner dersom henter = true', () => {
+            komponent = shallow(<TidslinjeSide
+                henter
+                actions={actions}
+                sykeforloep={sykeforloep}
+            />);
+            expect(komponent.contains(<AppSpinner />)).to.be.true;
         });
 
-        it("Skal vise Feilmelding dersom ikkeTilgang = true", () => {
-            const comp = shallow(<TidslinjeSide ikkeTilgang={true} actions={actions} ledetekster={ledetekster} />);
-            expect(comp.find(Feilmelding)).to.have.length(1);
+        it('Skal vise Feilmelding dersom hentingFeilet = true', () => {
+            komponent = shallow(<TidslinjeSide
+                hentingFeilet
+                actions={actions}
+                sykeforloep={sykeforloep}
+            />);
+            expect(komponent.contains(<Feilmelding />)).to.be.true;
         });
 
-        it("Skal vise TidslinjeVelgArbeidssituasjonContainer og Tidslinje dersom hentingFeilet = true", () => {
-            const comp = shallow(<TidslinjeSide valgtArbeidssituasjon="MED_ARBEIDSGIVER" actions={actions} />);
-            expect(comp.find(TidslinjeVelgArbeidssituasjonContainer)).to.have.length(1);
-            expect(comp.find(Tidslinje)).to.have.length(1);
-            expect(comp.find(Tidslinje).prop("arbeidssituasjon")).to.equal("MED_ARBEIDSGIVER");
+        it('Skal vise Feilmelding dersom ikkeTilgang = true', () => {
+            komponent = shallow(<TidslinjeSide
+                ikkeTilgang
+                actions={actions}
+                ledetekster={ledetekster}
+                sykeforloep={sykeforloep}
+            />);
+            expect(komponent.find(Feilmelding)).to.have.length(1);
         });
 
-        it("Skal kalle på hentTidslinjer med fnr, apneHendelseIder og arbeidssituasjon", () => {
-            const comp = shallow(<TidslinjeSide actions={actions} fnr="12" apneHendelseIder={[1,2]} arbeidssituasjon="banan" />);
-            expect(hentTidslinjer.calledOnce).to.be.true;
-            expect(hentTidslinjer.calledWith("12", [1,2], "banan")).to.be.true;
+        it('Skal vise TidslinjeVelgArbeidssituasjonContainer og Tidslinje dersom hentingFeilet = true', () => {
+            komponent = shallow(<TidslinjeSide
+                arbeidssituasjon="MED_ARBEIDSGIVER"
+                actions={actions}
+                sykeforloep={sykeforloep}
+            />);
+            expect(komponent.find(TidslinjeVelgArbeidssituasjonContainer)).to.have.length(1);
+            expect(komponent.find(Tidslinje)).to.have.length(1);
+            expect(komponent.find(Tidslinje).prop('arbeidssituasjon')).to.equal('MED_ARBEIDSGIVER');
         });
 
-        it
+        it('Skal hente sykeforloep, om sykeforloep ikke er hentet', () => {
+            komponent = shallow(<TidslinjeSide
+                actions={actions}
+                fnr='12'
+                sykeforloep={sykeforloep}
+            />);
+            expect(hentSykeforloep.called).to.be.true;
+        });
 
+        it('Skal ikke hente sykeforloep, om sykeforloep er hentet', () => {
+            komponent = shallow(<TidslinjeSide
+                actions={actions}
+                fnr='12'
+                sykeforloep={Object.assign({}, sykeforloep, {
+                    hentet: true,
+                })}
+            />);
+            expect(hentSykeforloep.called).to.be.false;
+        });
     });
-
 });

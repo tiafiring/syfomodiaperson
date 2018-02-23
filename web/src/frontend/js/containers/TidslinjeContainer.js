@@ -2,40 +2,61 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Tidslinje, setHendelseData, getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
+import {
+    Tidslinje,
+    TIDSLINJE_TYPER,
+    setHendelseData,
+    hentTidslinjer,
+    getLedetekst,
+    getHtmlLedetekst,
+} from 'digisyfo-npm';
 import Side from '../sider/Side';
 import SidetoppSpeilet from '../components/SidetoppSpeilet';
-import * as tidslinjerActions from '../actions/tidslinjer_actions';
-import TidslinjeVelgArbeidssituasjonContainer from './TidslinjeVelgArbeidssituasjonContainer';
+import * as sykeforloepActions from '../actions/sykeforloep_actions';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import Brodsmuler from '../components/Brodsmuler';
 import Speilingvarsel from '../components/Speilingvarsel';
+import TidslinjeVelgArbeidssituasjonContainer from '../containers/TidslinjeVelgArbeidssituasjonContainer';
 import { TIDSLINJEN } from '../menypunkter';
+import { henterEllerHarHentetSykeforloep } from '../utils/reducerUtils';
+import history from '../history';
 
 export class TidslinjeSide extends Component {
-    constructor() {
-        super();
-        this.state = {
-            arbeidssituasjon: 'MED_ARBEIDSGIVER',
-        };
+    constructor(props) {
+        super(props);
         this.endreArbeidssituasjon = this.endreArbeidssituasjon.bind(this);
+        this.setHistoryListener();
     }
 
     componentWillMount() {
-        const { fnr, apneHendelseIder, arbeidssituasjon } = this.props;
-        this.props.actions.hentTidslinjer(fnr, apneHendelseIder, arbeidssituasjon);
+        const { actions, fnr, sykeforloep } = this.props;
+        if (!henterEllerHarHentetSykeforloep(sykeforloep)) {
+            actions.hentSykeforloep(fnr);
+        }
     }
 
-    endreArbeidssituasjon(valg) {
-        this.setState({
-            arbeidssituasjon: valg,
+    componentWillReceiveProps(nextProps) {
+        const { actions, apneHendelseIder, sykeforloep, arbeidssituasjon } = this.props;
+        if (!sykeforloep.hentet && nextProps.sykeforloep.hentet) {
+            actions.hentTidslinjer(apneHendelseIder, arbeidssituasjon, nextProps.sykeforloep.data);
+        }
+    }
+
+    setHistoryListener() {
+        history.listen((location) => {
+            if (location && location.pathname.endsWith('/tidslinjen')) {
+                this.endreArbeidssituasjon(TIDSLINJE_TYPER.MED_ARBEIDSGIVER);
+            }
         });
-        this.props.actions.hentTidslinjer(this.props.fnr, [], valg);
+    }
+
+    endreArbeidssituasjon(arbeidssituasjon) {
+        this.props.actions.hentTidslinjer([], arbeidssituasjon, this.props.sykeforloep.data);
     }
 
     render() {
-        const { fnr, hendelser, ledetekster, actions, henter, hentingFeilet, brukernavn, ikkeTilgang, ikkeTilgangFeilmelding } = this.props;
+        const { fnr, hendelser, ledetekster, actions, henter, hentingFeilet, brukernavn, ikkeTilgang, ikkeTilgangFeilmelding, arbeidssituasjon } = this.props;
         const htmlIntro = {
             __html: `<p>${getLedetekst('tidslinje.introtekst', ledetekster)}</p>`,
         };
@@ -62,8 +83,19 @@ export class TidslinjeSide extends Component {
                     <div className="speiling">
                         <Brodsmuler brodsmuler={brodsmuler} />
                         <SidetoppSpeilet tittel="Tidslinjen" htmlTekst={htmlIntro} />
-                        <TidslinjeVelgArbeidssituasjonContainer ledetekster={ledetekster} valgtArbeidssituasjon={this.state.arbeidssituasjon} endreArbeidssituasjon={this.endreArbeidssituasjon} />
-                        <Tidslinje arbeidssituasjon={this.state.arbeidssituasjon} hendelser={hendelser} ledetekster={ledetekster} setHendelseData={actions.setHendelseData} />
+                        <TidslinjeVelgArbeidssituasjonContainer
+                            ledetekster={ledetekster}
+                            hentTidslinjer={this.endreArbeidssituasjon}
+                            endreUrl={history.replace}
+                            valgtArbeidssituasjon={arbeidssituasjon}
+                            rootUrl={`/sykefravaer/${this.props.fnr}`}
+                        />
+                        <Tidslinje
+                            arbeidssituasjon={arbeidssituasjon}
+                            hendelser={hendelser}
+                            ledetekster={ledetekster}
+                            setHendelseData={actions.setHendelseData}
+                        />
                     </div>
                 </div>);
             })()
@@ -84,17 +116,37 @@ TidslinjeSide.propTypes = {
     hendelser: PropTypes.array,
     ledetekster: PropTypes.object,
     brukernavn: PropTypes.string,
+    sykeforloep: PropTypes.object,
 };
 
 export function mapDispatchToProps(dispatch) {
-    const actions = Object.assign({}, tidslinjerActions, { setHendelseData });
+    const actions = Object.assign({},
+        sykeforloepActions,
+        { setHendelseData, hentTidslinjer });
     return {
         actions: bindActionCreators(actions, dispatch),
     };
 }
 
+export const mapArbeidssituasjonParam = (param) => {
+    switch (param) {
+        case 'uten-arbeidsgiver': {
+            return 'UTEN_ARBEIDSGIVER';
+        }
+        case 'med-arbeidsgiver': {
+            return 'MED_ARBEIDSGIVER';
+        }
+        case undefined: {
+            return undefined;
+        }
+        default: {
+            return 'MED_ARBEIDSGIVER';
+        }
+    }
+};
+
 export function setHash(hendelser) {
-    const apneHendelser = hendelser
+    const hendelserApne = hendelser
         .filter((m) => {
             return m.erApen;
         })
@@ -103,20 +155,29 @@ export function setHash(hendelser) {
         })
         .join('/');
 
-    window.history.replaceState(null, null, `#${apneHendelser}`);
+    window.history.replaceState(null, null, `#${hendelserApne}`);
 }
 
 export function mapStateToProps(state, ownProps) {
+    let arbeidssituasjonParam = (ownProps && ownProps.params) ? ownProps.params.arbeidssituasjon : undefined;
+    arbeidssituasjonParam = mapArbeidssituasjonParam(arbeidssituasjonParam);
+    const arbeidssituasjon = arbeidssituasjonParam || 'MED_ARBEIDSGIVER';
     const hendelser = state.tidslinjer && state.tidslinjer.data && state.tidslinjer.data.length ? state.tidslinjer.data[0].hendelser : [];
     if (hendelser.length) {
         setHash(hendelser);
     }
     const apneHendelseIder = (ownProps && ownProps.location) ? ownProps.location.hash.replace('#', '').split('/') : [];
-    const henter = state.tidslinjer.henter || state.ledetekster.henter || state.ledere.henter;
-    const hentingFeilet = state.tidslinjer.hentingFeilet || state.ledetekster.hentingFeilet || state.ledere.hentingFeilet;
 
+    const henter = state.ledetekster.henter
+        || state.ledere.henter
+        || state.sykeforloep.henter;
+    const hentingFeilet = state.ledetekster.hentingFeilet
+        || state.ledere.hentingFeilet
+        || state.sykeforloep.hentingFeilet;
     return {
+        arbeidssituasjon,
         brukernavn: state.navbruker.data.navn,
+        sykeforloep: state.sykeforloep,
         fnr: ownProps.params.fnr,
         hendelser,
         apneHendelseIder,

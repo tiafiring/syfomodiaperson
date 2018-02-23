@@ -1,25 +1,27 @@
-export function hentSykeforloepFeilet() {
+import * as actiontyper from './actiontyper';
+
+export function hentSykeforloep(fnr) {
     return {
-        type: 'HENT_SYKEFORLOEP_FEILET',
+        type: actiontyper.HENT_SYKEFORLOEP_FORESPURT,
+        fnr,
     };
 }
 
 export function henterSykeforloep() {
     return {
-        type: 'HENTER_SYKEFORLOEP',
+        type: actiontyper.HENTER_SYKEFORLOEP,
     };
 }
 
 export function sykeforloepHentet(data) {
     return {
-        type: 'SYKEFORLOEP_HENTET',
+        type: actiontyper.SYKEFORLOEP_HENTET,
         data,
     };
 }
 
-export function hentSykeforloep(fnr) {
+export function hentSykeforloepFeilet() {
     return {
-        type: 'HENT_SYKEFORLOEP_FORESPURT',
-        fnr,
+        type: actiontyper.HENT_SYKEFORLOEP_FEILET,
     };
 }

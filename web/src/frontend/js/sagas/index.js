@@ -1,10 +1,13 @@
+import {
+    ledeteksterSagas,
+    tidslinjerSagas,
+} from 'digisyfo-npm';
 import ledereSagas from './ledereSagas';
 import fastlegerSagas from './fastlegerSagas';
 import navbrukerSagas from './navbrukerSagas';
 import veilederoppgaverSagas from './veilederoppgaverSagas';
 import moterSagas from './moterSagas';
 import epostinnholdSagas from './epostinnholdSagas';
-import tidslinjerSagas from './tidslinjerSagas';
 import sykmeldingerSagas from './sykmeldingerSagas';
 import oppfoelgingsdialogerSagas from './oppfoelgingsdialogerSagas';
 import modiacontextSagas from './modiacontextSagas';
@@ -18,7 +21,6 @@ import virksomhetSagas from './virksomhetSagas';
 import veilederinfoSagas from './veilederinfoSagas';
 import diskresjonskodeSagas from './diskresjonskodeSagas';
 import egenansattSagas from './egenansattSagas';
-import { ledeteksterSagas } from 'digisyfo-npm';
 
 export default function * rootSaga() {
     yield [
@@ -27,7 +29,6 @@ export default function * rootSaga() {
         navbrukerSagas(),
         moterSagas(),
         ledeteksterSagas(),
-        tidslinjerSagas(),
         epostinnholdSagas(),
         virksomhetSagas(),
         modiacontextSagas(),
@@ -43,5 +44,6 @@ export default function * rootSaga() {
         veilederinfoSagas(),
         diskresjonskodeSagas(),
         egenansattSagas(),
+        tidslinjerSagas(),
     ];
 }

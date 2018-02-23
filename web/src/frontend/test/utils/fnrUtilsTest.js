@@ -121,7 +121,6 @@ describe('fnrUtils', () => {
             foedselsDatoPassert.setFullYear(foedselsaar);
             const fnrFoedselsDatoPassert = hentFnrFraDato(foedselsDatoPassert);
             const alder = dagensDato.getFullYear() - foedselsDatoPassert.getFullYear();
-            console.log('dagensDato', dagensDato)
 
             expect(hentBrukersAlderFraFnr(fnrFoedselsDatoPassert)).to.equal(alder);
         });
