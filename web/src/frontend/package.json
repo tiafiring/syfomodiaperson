@@ -43,7 +43,7 @@
     "chokidar": "1.6.0",
     "classnames": "^2.2.5",
     "deep-freeze": "0.0.1",
-    "digisyfo-npm": "5.9.1",
+    "digisyfo-npm": "6.1.0",
     "fetch": "1.0.1",
     "http-proxy": "1.13.2",
     "isomorphic-fetch": "2.2.1",
