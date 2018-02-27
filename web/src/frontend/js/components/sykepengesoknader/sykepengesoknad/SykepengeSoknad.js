@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Utvidbar, SoknadOppsummering, BekreftetKorrektInformasjon, mapBackendsoknadToSkjemasoknad, mapSkjemasoknadToOppsummeringsoknad } from 'digisyfo-npm';
+import { Utvidbar, SoknadOppsummering, BekreftetKorrektInformasjon } from 'digisyfo-npm';
 import SykmeldingUtdrag from './SykmeldingUtdrag';
 import Statuspanel from './Soknadstatuspanel';
 import { sykepengesoknad as sykepengesoknadPt } from '../../../propTypes';
@@ -17,19 +17,16 @@ const SykepengeSoknad = ({ sykepengesoknad, fnr }) => {
         return <UtgaattSoknad sykepengesoknad={sykepengesoknad} />;
     }
 
-    const oppsummeringsoknad = sykepengesoknad.oppsummering
-        || mapSkjemasoknadToOppsummeringsoknad(mapBackendsoknadToSkjemasoknad(sykepengesoknad), sykepengesoknad);
-
     return (<div>
         { sykepengesoknad.status === KORRIGERT && <KorrigertAvContainer sykepengesoknad={sykepengesoknad} /> }
         <Statuspanel sykepengesoknad={sykepengesoknad} />
         <SykmeldingUtdrag sykepengesoknad={sykepengesoknad} />
 
         <Utvidbar className="blokk" tittel="Oppsummering" erApen>
-            <SoknadOppsummering oppsummeringsoknad={oppsummeringsoknad} />
+            <SoknadOppsummering oppsummeringsoknad={sykepengesoknad.oppsummering} />
         </Utvidbar>
         <div className="bekreftet-container">
-            <BekreftetKorrektInformasjon oppsummeringsoknad={oppsummeringsoknad} />
+            <BekreftetKorrektInformasjon oppsummeringsoknad={sykepengesoknad.oppsummering} />
         </div>
         {
             (sykepengesoknad.status === SENDT || sykepengesoknad.status === TIL_SENDING) &&
