@@ -115,7 +115,7 @@ export function mapStateToProps(state, ownProps) {
     const oppfoelgingsdialog = ownProps.oppfoelgingsdialog;
     oppfoelgingsdialog.oppgaver = oppfoelgingsdialog.oppgaver.map((oppgave) => {
         return state.veilederoppgaver.data.filter((_oppgave) => {
-            return _oppgave.id === oppgave.id;
+            return _oppgave.uuid === oppgave.uuid;
         })[0];
     });
     const veilederinfo = state.veilederinfo.data;
