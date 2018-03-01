@@ -113,10 +113,8 @@ export function mapDispatchToProps(dispatch) {
 
 export function mapStateToProps(state, ownProps) {
     const oppfoelgingsdialog = ownProps.oppfoelgingsdialog;
-    oppfoelgingsdialog.oppgaver = oppfoelgingsdialog.oppgaver.map((oppgave) => {
-        return state.veilederoppgaver.data.filter((_oppgave) => {
-            return _oppgave.uuid === oppgave.uuid;
-        })[0];
+    oppfoelgingsdialog.oppgaver = state.veilederoppgaver.data.filter((_oppgave) => {
+            return _oppgave.uuid === oppfoelgingsdialog.uuid;
     });
     const veilederinfo = state.veilederinfo.data;
     return {
