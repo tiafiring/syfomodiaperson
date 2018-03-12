@@ -1,5 +1,4 @@
 import {
-    ledeteksterSagas,
     tidslinjerSagas,
 } from 'digisyfo-npm';
 import ledereSagas from './ledereSagas';
@@ -21,6 +20,7 @@ import virksomhetSagas from './virksomhetSagas';
 import veilederinfoSagas from './veilederinfoSagas';
 import diskresjonskodeSagas from './diskresjonskodeSagas';
 import egenansattSagas from './egenansattSagas';
+import ledeteksterSagas from './ledeteksterSagas';
 
 export default function * rootSaga() {
     yield [

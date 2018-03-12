@@ -12,8 +12,7 @@ import static no.nav.testconfig.ApiAppTest.setupTestContext;
 public class MainTest {
     public static void main(String[] args) throws Exception {
         setupTestContext();
-        setFrom("test-environment.properties");
-        setProperty("OIDC_REDIRECT_URL", getProperty("VEILARBLOGIN_REDIRECT_URL_URL"));
+        setFrom("test.properties");
         Jetty jetty = usingWar()
                 .at("sykefravaer")
                 .port(8190)

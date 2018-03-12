@@ -13,8 +13,6 @@ import sykmeldinger from './reducers/sykmeldinger';
 import arbeidsgiversSykmeldinger from './reducers/arbeidsgiversSykmeldinger';
 import { reducer as formReducer } from 'redux-form';
 import {
-    ledetekster,
-    hentLedetekster,
     hasURLParameter,
     tidslinjer,
 } from 'digisyfo-npm';
@@ -23,6 +21,7 @@ import epostinnhold from './reducers/epostinnhold';
 import arbeidsgiverEpostinnhold from './reducers/arbeidsgiverEpostinnhold';
 import modiacontext from './reducers/modiacontext';
 import historikk from './reducers/historikk';
+import ledetekster from './reducers/ledetekster';
 import sykeforloep from './reducers/sykeforloep';
 import sykepengesoknader from './reducers/sykepengesoknader';
 import oppfoelgingsdialoger from './reducers/oppfoelgingsdialoger';
@@ -35,6 +34,7 @@ import veilederinfo from './reducers/veilederinfo';
 import diskresjonskode from './reducers/diskresjonskode';
 import egenansatt from './reducers/egenansatt';
 import rootSaga from './sagas/index';
+import { hentLedetekster } from './actions/ledetekster_actions';
 import { hentVeilederinfo } from './actions/veilederinfo_actions';
 import { hentBehandlendeEnhet } from './actions/behandlendeEnhet_actions';
 import { hentVeilederOppgaver } from './actions/veilederoppgaver_actions';

@@ -9,7 +9,8 @@ var timestamp = Date.now().toString();
 var dev = {
     timestamp: timestamp,
     buildRoot: 'http://localhost:3040/assets',
-    restRoot: 'http://localhost:8084/modiasyforest/rest',
+    restRoot: 'http://localhost:8084/modiasyforest/api',
+    teksterRestRoot: 'https://app-t6.adeo.no/syfotekster/api',
     moteAdminRestRoot: 'http://localhost:8196/mote/rest',
     oppfoelgingsdialogRestRoot: 'http://localhost:8583/oppfoelgingsdialog-rest/api',
     veilederoppgaverRestRoot: 'http://localhost:8999/syfoveilederoppgaver/api',
@@ -23,7 +24,8 @@ var dev = {
 var prod = {
     timestamp: timestamp,
     buildRoot: '/sykefravaer/js',
-    restRoot: '/modiasyforest/rest',
+    restRoot: '/modiasyforest/api',
+    teksterRestRoot: '/syfotekster/api',
     moteAdminRestRoot: '/mote/rest',
     oppfoelgingsdialogRestRoot: '/oppfoelgingsdialog-rest/api',
     veilederoppgaverRestRoot: '/syfoveilederoppgaver/api',
