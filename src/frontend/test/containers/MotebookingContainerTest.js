@@ -14,28 +14,32 @@ describe("MotebookingContainer", () => {
 
         let hentMoter;
         let ledetekster;
+        let tilgang;
         beforeEach(() => {
             ledetekster = {};
             hentMoter = sinon.spy();
+            tilgang = {
+                harTilgang: true,
+            }
         });
 
         it("Skal vise AppSpinner", () => {
             const mote = {};
-            const component = shallow(<MotebookingSide hentMoter={hentMoter} henter={true} />)
+            const component = shallow(<MotebookingSide tilgang={tilgang} hentMoter={hentMoter} henter={true} />)
             expect(component.find(AppSpinner)).to.have.length(1)
         });
 
         it("Skal hente møter ved init", () => {
             const mote = {};
-            const component = shallow(<MotebookingSide fnr="123" hentMoter={hentMoter} mote={{}} />)
+            const component = shallow(<MotebookingSide tilgang={tilgang} fnr="123" hentMoter={hentMoter} mote={{}} />)
             expect(hentMoter.calledOnce).to.be.true;
             expect(hentMoter.calledWith("123")).to.be.true;
         });
 
 
-        it("Skal vise feilmelding hvis hentMoterFeiletBool", () => {
+        it("Skal vise feilmelding hvis hentingFeilet", () => {
             const mote = {};
-            const component = shallow(<MotebookingSide hentMoter={hentMoter} mote={{}} hentMoterFeiletBool />)
+            const component = shallow(<MotebookingSide tilgang={tilgang} hentMoter={hentMoter} mote={{}} hentingFeilet />)
             expect(component.find(Feilmelding)).to.have.length(1)
         });
 
@@ -44,7 +48,7 @@ describe("MotebookingContainer", () => {
                 moteUuid: "8877"
             };
             const avbrytMote = sinon.spy();
-            const component = shallow(<MotebookingSide fnr={"fnr"} hentMoter={hentMoter} mote={mote} />)
+            const component = shallow(<MotebookingSide tilgang={tilgang} fnr={"fnr"} hentMoter={hentMoter} mote={mote} />)
             expect(component.contains(<MotestatusContainer fnr={"fnr"} moteUuid={"8877"} />)).to.be.true;
         });
 
@@ -56,11 +60,9 @@ describe("MotebookingContainer", () => {
         let ownProps;
         beforeEach(() => {
             state = {
-                ledetekster: {},
                 navbruker: {
                     data: {
                         fnr: "887766",
-                        harTilgang: true,
                     },
                 },
                 moter: {
@@ -70,8 +72,22 @@ describe("MotebookingContainer", () => {
                     navn: "BEKK"
                 },
                 ledere: {
-                    ikkeTilgang: false,
+                    data: [],
+                    hentingFeilet: false,
+                    henter: false,
                 },
+                tilgang: {
+                    data: {
+                        harTilgang: true,
+                    },
+                    hentingFeilet: false,
+                    henter: false,
+                },
+                ledetekster: {
+                    hentingFeilet: false,
+                    henter: false,
+                    data: {}
+                }
             };
             ownProps = {
                 params: {
@@ -165,10 +181,10 @@ describe("MotebookingContainer", () => {
         it("Skal returnere hentingFeilet når henting av møter feiler", () => {
             state.moter.data = [{
                 id: 1
-            }]
+            }];
             state.moter.hentingFeilet = true;
             const props = mapStateToProps(state, ownProps);
-            expect(props.hentMoterFeiletBool).to.be.true;
+            expect(props.hentingFeilet).to.be.true;
         });
 
         it("Skal returnere hentingFeilet når henting av møter ikke feiler", () => {
@@ -177,13 +193,13 @@ describe("MotebookingContainer", () => {
             }]
             state.moter.hentingFeilet = false;
             const props = mapStateToProps(state, ownProps);
-            expect(props.hentMoterFeiletBool).to.be.false;
+            expect(props.hentingFeilet).to.be.false;
         });
 
         it("Skal returnere sendingFeilet", () => {
             state.moter.data = [{
                 id: 1
-            }]
+            }];
             state.moter.sendingFeilet = true;
             const props = mapStateToProps(state, ownProps);
             expect(props.sendingFeilet).to.be.true;
@@ -192,7 +208,7 @@ describe("MotebookingContainer", () => {
         it("Skal returnere sendingFeilet", () => {
             state.moter.data = [{
                 id: 1
-            }]
+            }];
             state.moter.sendingFeilet = false;
             const props = mapStateToProps(state, ownProps);
             expect(props.sendingFeilet).to.be.false;

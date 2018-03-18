@@ -9,6 +9,7 @@ import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import AppSpinner from '../components/AppSpinner';
 import * as moterActions from '../actions/moter_actions';
 import { MOETEPLANLEGGER } from '../menypunkter';
+import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 
 export class MotebookingSide extends Component {
     constructor(props) {
@@ -17,18 +18,18 @@ export class MotebookingSide extends Component {
     }
 
     render() {
-        const { fnr, henter, hentMoterFeiletBool, mote, ikkeTilgang, ikkeTilgangFeilmelding, ledetekster } = this.props;
+        const { fnr, henter, hentingFeilet, mote, tilgang, ledetekster } = this.props;
         return (<Side fnr={fnr} tittel="Møteplanlegger" aktivtMenypunkt={MOETEPLANLEGGER}>
             {
                 (() => {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (ikkeTilgang) {
+                    if (!tilgang.harTilgang) {
                         return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
+                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)} />);
                     }
-                    if (hentMoterFeiletBool) {
+                    if (hentingFeilet) {
                         return <Feilmelding />;
                     }
                     if (mote) {
@@ -44,8 +45,7 @@ export class MotebookingSide extends Component {
 MotebookingSide.propTypes = {
     fnr: PropTypes.string,
     mote: PropTypes.object,
-    ikkeTilgang: PropTypes.bool,
-    ikkeTilgangFeilmelding: PropTypes.string,
+    tilgang: PropTypes.object,
     virksomhet: PropTypes.object,
     hentMoter: PropTypes.func,
     hentLedere: PropTypes.func,
@@ -53,7 +53,7 @@ MotebookingSide.propTypes = {
     hentVirksomhet: PropTypes.func,
     henter: PropTypes.bool,
     ledetekster: PropTypes.object,
-    hentMoterFeiletBool: PropTypes.bool,
+    hentingFeilet: PropTypes.bool,
     hentLedereFeiletBool: PropTypes.bool,
     avbryter: PropTypes.bool,
     avbrytFeilet: PropTypes.bool,
@@ -67,13 +67,12 @@ export const mapStateToProps = (state, ownProps) => {
     return {
         fnr: ownProps.params.fnr,
         mote: aktivtMote,
-        henter: state.moter.henter || state.ledetekster.henter || state.ledere.henter,
+        henter: state.moter.henter || state.ledetekster.henter || state.ledere.henter || state.tilgang.henter,
         sender: state.moter.sender,
         ledetekster: state.ledetekster.data,
-        hentMoterFeiletBool: state.moter.hentingFeilet,
+        hentingFeilet: state.moter.hentingFeilet || state.tilgang.hentingFeilet || state.ledere.hentingFeilet || state.ledetekster.hentingFeilet,
         sendingFeilet: state.moter.sendingFeilet,
-        ikkeTilgang: state.ledere.ikkeTilgang,
-        ikkeTilgangFeilmelding: state.ledere.ikkeTilgangFeilmelding,
+        tilgang: state.tilgang.data,
     };
 };
 

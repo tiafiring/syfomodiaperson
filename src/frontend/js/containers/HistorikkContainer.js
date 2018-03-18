@@ -10,6 +10,7 @@ import AppSpinner from '../components/AppSpinner';
 import * as historikkActions from '../actions/historikk_actions';
 import * as sykeforloepActions from '../actions/sykeforloep_actions';
 import { HISTORIKK } from '../menypunkter';
+import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 
 export class HistorikkSide extends Component {
     constructor(props) {
@@ -26,16 +27,15 @@ export class HistorikkSide extends Component {
     }
 
     render() {
-        const { fnr, henter, hentingFeilet, ikkeTilgang, ikkeTilgangFeilmelding, ledetekster, historikk, sykeforloep } = this.props;
+        const { fnr, henter, hentingFeilet, tilgang, ledetekster, historikk, sykeforloep } = this.props;
         return (<Side fnr={fnr} tittel="Historikk" aktivtMenypunkt={HISTORIKK}>
             {
                 (() => {
                     if (henter) {
                         return <AppSpinner />;
-                    } else if (ikkeTilgang) {
-                        return (<Feilmelding
-                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
+                    } else if (!tilgang.harTilgang) {
+                        return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
+                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)} />);
                     } else if (hentingFeilet) {
                         return <Feilmelding />;
                     }
@@ -57,8 +57,7 @@ HistorikkSide.propTypes = {
     hentet: PropTypes.bool,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
-    ikkeTilgang: PropTypes.bool,
-    ikkeTilgangFeilmelding: PropTypes.string,
+    tilgang: PropTypes.object,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -73,12 +72,11 @@ export const mapStateToProps = (state, ownProps) => {
         fnr: ownProps.params.fnr,
         sykeforloep: state.sykeforloep.data,
         historikk: state.historikk,
-        henter: state.sykeforloep.henter,
+        henter: state.sykeforloep.henter || state.ledetekster.henter || state.tilgang.henter,
         hentet: state.sykeforloep.hentet,
         ledetekster: state.ledetekster.data,
-        hentingFeilet: state.sykeforloep.hentingFeilet,
-        ikkeTilgang: state.ledere.ikkeTilgang,
-        ikkeTilgangFeilmelding: state.ledere.ikkeTilgangFeilmelding,
+        hentingFeilet: state.sykeforloep.hentingFeilet || state.tilgang.hentingFeilet,
+        tilgang: state.tilgang.data,
     };
 };
 

@@ -10,11 +10,7 @@ export function* hentArbeidsgiversSykmeldinger(action) {
         const data = yield call(get, `${window.APP_SETTINGS.REST_ROOT}/sykmeldinger?fnr=${action.fnr}&type=arbeidsgiver`);
         yield put({ type: 'ARBEIDSGIVERS_SYKMELDINGER_HENTET', data });
     } catch (e) {
-        if (e.message === '403') {
-            yield put(actions.hentArbeidsgiversSykmeldingerIkkeTilgang());
-        } else {
-            yield put(actions.hentArbeidsgiversSykmeldingerFeilet());
-        }
+        yield put(actions.hentArbeidsgiversSykmeldingerFeilet());
     }
 }
 

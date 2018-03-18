@@ -9,6 +9,7 @@ import Feilmelding from '../components/Feilmelding';
 import Oppfoelgingsplan from '../components/oppfoelgingsdialoger/Oppfoelgingsplan';
 import AppSpinner from '../components/AppSpinner';
 import { OPPFOELGINGSPLANER } from '../menypunkter';
+import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 
 export class OppfoelgingsPlanerOversiktSide extends Component {
     componentWillMount() {
@@ -19,16 +20,16 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
     }
 
     render() {
-        const { oppfoelgingsdialog, ledetekster, henter, hentingFeilet, ikkeTilgang, ikkeTilgangFeilmelding, fnr } = this.props;
+        const { oppfoelgingsdialog, ledetekster, henter, hentingFeilet, tilgang, fnr } = this.props;
         return (<Side fnr={fnr} tittel="Oppfølgingsplaner" aktivtMenypunkt={OPPFOELGINGSPLANER}>
             {
                 (() => {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (ikkeTilgang) {
+                    if (!tilgang.harTilgang) {
                         return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
+                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)} />);
                     }
                     if (hentingFeilet) {
                         return <Feilmelding />;
@@ -43,7 +44,6 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
 }
 
 OppfoelgingsPlanerOversiktSide.propTypes = {
-    ikkeTilgangFeilmelding: PropTypes.string,
     fnr: PropTypes.string,
     actions: PropTypes.object,
     oppfoelgingsdialog: PropTypes.object,
@@ -51,7 +51,7 @@ OppfoelgingsPlanerOversiktSide.propTypes = {
     hentingFeilet: PropTypes.bool,
     henterDialoger: PropTypes.bool,
     hentetDialoger: PropTypes.bool,
-    ikkeTilgang: PropTypes.bool,
+    tilgang: PropTypes.object,
     ledetekster: PropTypes.object,
 };
 
@@ -64,8 +64,8 @@ export function mapDispatchToProps(dispatch) {
 
 export function mapStateToProps(state, ownProps) {
     const id = parseInt(ownProps.params.oppfoelgingsdialogId, 10);
-    const henter = state.oppfoelgingsdialoger.henter || state.ledetekster.henter || state.ledere.henter || state.veilederinfo.henter;
-    const hentingFeilet = state.oppfoelgingsdialoger.hentingFeilet || state.ledetekster.hentingFeilet || state.ledere.hentingFeilet;
+    const henter = state.oppfoelgingsdialoger.henter || state.ledetekster.henter || state.tilgang.henter || state.veilederinfo.henter;
+    const hentingFeilet = state.oppfoelgingsdialoger.hentingFeilet || state.ledetekster.hentingFeilet || state.tilgang.hentingFeilet;
     const hentetDialoger = state.oppfoelgingsdialoger.hentet;
     const henterDialoger = state.oppfoelgingsdialoger.henter;
 
@@ -81,8 +81,7 @@ export function mapStateToProps(state, ownProps) {
         hentetDialoger,
         henterDialoger,
         ledetekster: state.ledetekster.data,
-        ikkeTilgang: state.ledere.ikkeTilgang,
-        ikkeTilgangFeilmelding: state.ledere.ikkeTilgangFeilmelding,
+        tilgang: state.tilgang.data,
     };
 }
 

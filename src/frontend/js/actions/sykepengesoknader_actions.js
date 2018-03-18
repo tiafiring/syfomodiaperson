@@ -4,13 +4,6 @@ export function hentSykepengesoknaderFeilet() {
     };
 }
 
-export function hentSykepengesoknaderIkkeTilgang() {
-    return {
-        type: 'HENT_SYKEPENGESOKNADER_IKKE_TILGANG',
-        ikkeTilgang: true,
-    };
-}
-
 export function henterSykepengesoknader() {
     return {
         type: 'HENTER_SYKEPENGESOKNADER',

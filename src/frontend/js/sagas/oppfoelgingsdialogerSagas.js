@@ -12,11 +12,7 @@ export function* hentOppfoelgingsdialoger(action) {
         yield put({ type: 'OPPFOELGINGSDIALOGER_HENTET', data });
     } catch (e) {
         log(e);
-        if (e.message === '403') {
-            yield put(actions.hentOppfoelgingsdialogerIkkeTilgang());
-        } else {
-            yield put(actions.hentOppfoelgingsdialogerFeilet());
-        }
+        yield put(actions.hentOppfoelgingsdialogerFeilet());
     }
 }
 

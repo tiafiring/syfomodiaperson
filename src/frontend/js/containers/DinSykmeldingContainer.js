@@ -13,6 +13,7 @@ import AppSpinner from '../components/AppSpinner';
 import Brodsmuler from '../components/Brodsmuler';
 import Speilingvarsel from '../components/Speilingvarsel';
 import { SYKMELDINGER } from '../menypunkter';
+import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 
 export class DinSykmeldingSide extends Component {
 
@@ -23,7 +24,7 @@ export class DinSykmeldingSide extends Component {
     }
 
     render() {
-        const { brukernavn, ledetekster, henter, hentingFeilet, ikkeTilgang, dinSykmelding, fnr, arbeidsgiversSykmelding } = this.props;
+        const { brukernavn, ledetekster, henter, hentingFeilet, tilgang, dinSykmelding, fnr, arbeidsgiversSykmelding } = this.props;
 
         const brodsmuler = [{
             tittel: 'Ditt sykefravær',
@@ -42,8 +43,9 @@ export class DinSykmeldingSide extends Component {
                     if (hentingFeilet) {
                         return <Feilmelding />;
                     }
-                    if (ikkeTilgang) {
-                        return (<Feilmelding tittel={getLedetekst('mote.dinsykmeldingside.ikketilgang.tittel', ledetekster)} melding={getHtmlLedetekst('sykefravaer.veileder.feilmelding.melding', ledetekster)} />);
+                    if (!tilgang.harTilgang) {
+                        return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
+                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)} />);
                     }
 
                     return (<div>
@@ -66,7 +68,7 @@ DinSykmeldingSide.propTypes = {
     actions: PropTypes.object,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
-    ikkeTilgang: PropTypes.bool,
+    tilgang: PropTypes.object,
     ledetekster: PropTypes.object,
     dinSykmelding: PropTypes.object,
     arbeidsgiversSykmelding: PropTypes.object,
@@ -82,8 +84,7 @@ export function mapDispatchToProps(dispatch) {
 export function mapStateToProps(state, ownProps) {
     const sykmeldingId = ownProps.params.sykmeldingId;
     const henter = state.sykmeldinger.henter || state.ledetekster.henter || state.arbeidsgiversSykmeldinger.henter;
-    const hentingFeilet = state.sykmeldinger.hentingFeilet;
-    const ikkeTilgang = state.sykmeldinger.ikkeTilgang;
+    const hentingFeilet = state.sykmeldinger.hentingFeilet || state.tilgang.hentingFeilet;
     const dinSykmelding = getSykmelding(state.sykmeldinger.data, sykmeldingId);
     let arbeidsgiversSykmelding = {};
 
@@ -96,7 +97,7 @@ export function mapStateToProps(state, ownProps) {
         fnr: ownProps.params.fnr,
         henter,
         hentingFeilet,
-        ikkeTilgang,
+        tilgang: state.tilgang.data,
         ledetekster: state.ledetekster.data,
         dinSykmelding,
         arbeidsgiversSykmelding,

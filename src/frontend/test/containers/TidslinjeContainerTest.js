@@ -24,7 +24,6 @@ describe('TidslinjeContainer', () => {
             }],
             hentingFeilet: false,
             henter: false,
-            ikkeTilgang: false,
         };
         state.ledetekster = {
             data: {'min': 'tekst'},
@@ -32,7 +31,6 @@ describe('TidslinjeContainer', () => {
             henter: false,
         };
         state.ledere = {
-            ikkeTilgang: false,
             hentingFeilet: false,
             henter: false,
         };
@@ -47,6 +45,11 @@ describe('TidslinjeContainer', () => {
             hentet: false,
             hentingFeilet: false,
             data: [],
+        };
+        state.tilgang = {
+            data: {
+                harTilgang: true,
+            }
         };
         ownProps.params = {
             valgtArbeidssituasjon: '',
@@ -125,6 +128,7 @@ describe('TidslinjeContainer', () => {
         let hentSykeforloep;
         let actions;
         let ledetekster;
+        let tilgang;
         let komponent;
 
         beforeEach(() => {
@@ -132,6 +136,9 @@ describe('TidslinjeContainer', () => {
                 henter: false,
                 hentet: false,
                 data: []
+            };
+            tilgang = {
+                harTilgang: true,
             };
             ledetekster = { henter: false, data: {} },
             hentTidslinjer = sinon.spy();
@@ -144,6 +151,7 @@ describe('TidslinjeContainer', () => {
 
         it('Skal vise AppSpinner dersom henter = true', () => {
             komponent = shallow(<TidslinjeSide
+                tilgang={tilgang}
                 henter
                 actions={actions}
                 sykeforloep={sykeforloep}
@@ -153,6 +161,7 @@ describe('TidslinjeContainer', () => {
 
         it('Skal vise Feilmelding dersom hentingFeilet = true', () => {
             komponent = shallow(<TidslinjeSide
+                tilgang={tilgang}
                 hentingFeilet
                 actions={actions}
                 sykeforloep={sykeforloep}
@@ -160,9 +169,12 @@ describe('TidslinjeContainer', () => {
             expect(komponent.contains(<Feilmelding />)).to.be.true;
         });
 
-        it('Skal vise Feilmelding dersom ikkeTilgang = true', () => {
+        it('Skal vise Feilmelding dersom ikke tilgang = true', () => {
+            tilgang = {
+                harTilgang: false,
+            };
             komponent = shallow(<TidslinjeSide
-                ikkeTilgang
+                tilgang={tilgang}
                 actions={actions}
                 ledetekster={ledetekster}
                 sykeforloep={sykeforloep}
@@ -170,8 +182,10 @@ describe('TidslinjeContainer', () => {
             expect(komponent.find(Feilmelding)).to.have.length(1);
         });
 
-        it('Skal vise TidslinjeVelgArbeidssituasjonContainer og Tidslinje dersom hentingFeilet = true', () => {
+        it('Skal vise TidslinjeVelgArbeidssituasjonContainer og Tidslinje dersom hentingFeilet = false', () => {
             komponent = shallow(<TidslinjeSide
+                tilgang={tilgang}
+                hentingFeilet={false}
                 arbeidssituasjon="MED_ARBEIDSGIVER"
                 actions={actions}
                 sykeforloep={sykeforloep}
@@ -183,6 +197,7 @@ describe('TidslinjeContainer', () => {
 
         it('Skal hente sykeforloep, om sykeforloep ikke er hentet', () => {
             komponent = shallow(<TidslinjeSide
+                tilgang={tilgang}
                 actions={actions}
                 fnr='12'
                 sykeforloep={sykeforloep}
@@ -192,6 +207,7 @@ describe('TidslinjeContainer', () => {
 
         it('Skal ikke hente sykeforloep, om sykeforloep er hentet', () => {
             komponent = shallow(<TidslinjeSide
+                tilgang={tilgang}
                 actions={actions}
                 fnr='12'
                 sykeforloep={Object.assign({}, sykeforloep, {

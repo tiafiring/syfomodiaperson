@@ -16,7 +16,6 @@ public class MainTest {
         Jetty jetty = usingWar()
                 .at("sykefravaer")
                 .port(8190)
-                .overrideWebXml()
                 .disableAnnotationScanning()
                 .buildJetty();
         jetty.startAnd(first(waitFor(gotKeypress())).then(jetty.stop));

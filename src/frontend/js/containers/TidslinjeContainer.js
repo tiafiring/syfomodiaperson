@@ -21,6 +21,7 @@ import TidslinjeVelgArbeidssituasjonContainer from '../containers/TidslinjeVelgA
 import { TIDSLINJEN } from '../menypunkter';
 import { henterEllerHarHentetSykeforloep } from '../utils/reducerUtils';
 import history from '../history';
+import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 
 export class TidslinjeSide extends Component {
     constructor(props) {
@@ -56,7 +57,7 @@ export class TidslinjeSide extends Component {
     }
 
     render() {
-        const { fnr, hendelser, ledetekster, actions, henter, hentingFeilet, brukernavn, ikkeTilgang, ikkeTilgangFeilmelding, arbeidssituasjon } = this.props;
+        const { fnr, hendelser, ledetekster, actions, henter, hentingFeilet, brukernavn, tilgang, arbeidssituasjon } = this.props;
         const htmlIntro = {
             __html: `<p>${getLedetekst('tidslinje.introtekst', ledetekster)}</p>`,
         };
@@ -71,9 +72,9 @@ export class TidslinjeSide extends Component {
                 if (henter) {
                     return <AppSpinner />;
                 }
-                if (ikkeTilgang) {
+                if (!tilgang.harTilgang) {
                     return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                        melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
+                        melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)} />);
                 }
                 if (hentingFeilet) {
                     return <Feilmelding />;
@@ -108,11 +109,10 @@ TidslinjeSide.propTypes = {
     fnr: PropTypes.string,
     apneHendelseIder: PropTypes.array,
     arbeidssituasjon: PropTypes.string,
-    ikkeTilgangFeilmelding: PropTypes.string,
     actions: PropTypes.object,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
-    ikkeTilgang: PropTypes.bool,
+    tilgang: PropTypes.object,
     hendelser: PropTypes.array,
     ledetekster: PropTypes.object,
     brukernavn: PropTypes.string,
@@ -169,10 +169,10 @@ export function mapStateToProps(state, ownProps) {
     const apneHendelseIder = (ownProps && ownProps.location) ? ownProps.location.hash.replace('#', '').split('/') : [];
 
     const henter = state.ledetekster.henter
-        || state.ledere.henter
+        || state.tilgang.henter
         || state.sykeforloep.henter;
     const hentingFeilet = state.ledetekster.hentingFeilet
-        || state.ledere.hentingFeilet
+        || state.tilgang.hentingFeilet
         || state.sykeforloep.hentingFeilet;
     return {
         arbeidssituasjon,
@@ -183,8 +183,7 @@ export function mapStateToProps(state, ownProps) {
         apneHendelseIder,
         henter,
         hentingFeilet,
-        ikkeTilgang: state.ledere.ikkeTilgang,
-        ikkeTilgangFeilmelding: state.ledere.ikkeTilgangFeilmelding,
+        tilgang: state.tilgang.data,
         ledetekster: state.ledetekster.data,
     };
 }

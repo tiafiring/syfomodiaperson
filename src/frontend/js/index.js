@@ -29,12 +29,14 @@ import veilederoppgaver from './reducers/veilederoppgaver';
 import dokumentinfo from './reducers/dokumentinfo';
 import behandlendeEnhet from './reducers/behandlendeEnhet';
 import enhet from './reducers/enhet';
+import tilgang from './reducers/tilgang';
 import virksomhet from './reducers/virksomhet';
 import veilederinfo from './reducers/veilederinfo';
 import diskresjonskode from './reducers/diskresjonskode';
 import egenansatt from './reducers/egenansatt';
 import rootSaga from './sagas/index';
 import { hentLedetekster } from './actions/ledetekster_actions';
+import { sjekkTilgang } from './actions/tilgang_actions';
 import { hentVeilederinfo } from './actions/veilederinfo_actions';
 import { hentBehandlendeEnhet } from './actions/behandlendeEnhet_actions';
 import { hentVeilederOppgaver } from './actions/veilederoppgaver_actions';
@@ -69,6 +71,7 @@ const rootReducer = combineReducers({
     veilederoppgaver,
     veilederinfo,
     ledetekster,
+    tilgang,
     form: formReducer,
 });
 
@@ -120,6 +123,7 @@ if (fnrRegex.test(fnr)) {
     store.dispatch(hentVeilederOppgaver(fnr));
     store.dispatch(hentNavbruker(fnr));
     store.dispatch(hentLedere(fnr));
+    store.dispatch(sjekkTilgang(fnr));
     store.dispatch(hentAktivBruker({
         callback: (aktivBruker) => {
             if (aktivBruker !== fnr) {

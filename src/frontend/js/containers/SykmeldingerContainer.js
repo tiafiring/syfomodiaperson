@@ -12,6 +12,7 @@ import DineSykmeldinger from '../sykmeldinger/sykmeldinger/DineSykmeldinger';
 import Brodsmuler from '../components/Brodsmuler';
 import { SYKMELDINGER } from '../menypunkter';
 import Speilingvarsel from '../components/Speilingvarsel';
+import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 
 export class SykmeldingerSide extends Component {
     componentWillMount() {
@@ -20,7 +21,7 @@ export class SykmeldingerSide extends Component {
     }
 
     render() {
-        const { brukernavn, ledetekster, henter, hentingFeilet, ikkeTilgang, sykmeldinger, fnr, ikkeTilgangFeilmelding } = this.props;
+        const { brukernavn, ledetekster, henter, hentingFeilet, tilgang, sykmeldinger, fnr } = this.props;
         const htmlIntro = {
             __html: `<p>${getLedetekst('dine-sykmeldinger.introduksjonstekst', ledetekster)}</p>`,
         };
@@ -36,9 +37,9 @@ export class SykmeldingerSide extends Component {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (ikkeTilgang) {
+                    if (!tilgang.harTilgang) {
                         return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
+                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)} />);
                     }
                     if (hentingFeilet) {
                         return <Feilmelding />;
@@ -60,12 +61,11 @@ export class SykmeldingerSide extends Component {
 SykmeldingerSide.propTypes = {
     fnr: PropTypes.string,
     brukernavn: PropTypes.string,
-    ikkeTilgangFeilmelding: PropTypes.string,
     actions: PropTypes.object,
     sykmeldinger: PropTypes.array,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
-    ikkeTilgang: PropTypes.bool,
+    tilgang: PropTypes.object,
     ledetekster: PropTypes.object,
 };
 
@@ -78,8 +78,8 @@ export function mapDispatchToProps(dispatch) {
 
 
 export function mapStateToProps(state, ownProps) {
-    const henter = state.sykmeldinger.henter || state.ledetekster.henter || state.ledere.henter;
-    const hentingFeilet = state.sykmeldinger.hentingFeilet || state.ledetekster.hentingFeilet || state.ledere.hentingFeilet;
+    const henter = state.sykmeldinger.henter || state.ledetekster.henter || state.tilgang.henter;
+    const hentingFeilet = state.sykmeldinger.hentingFeilet || state.ledetekster.hentingFeilet || state.tilgang.hentingFeilet;
     return {
         brukernavn: state.navbruker.data.navn,
         fnr: ownProps.params.fnr,
@@ -87,8 +87,7 @@ export function mapStateToProps(state, ownProps) {
         hentingFeilet,
         ledetekster: state.ledetekster.data,
         sykmeldinger: state.sykmeldinger.data,
-        ikkeTilgang: state.ledere.ikkeTilgang,
-        ikkeTilgangFeilmelding: state.ledere.ikkeTilgangFeilmelding,
+        tilgang: state.tilgang.data,
     };
 }
 

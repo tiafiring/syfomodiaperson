@@ -2,7 +2,6 @@ import * as actiontype from '../actions/actiontyper';
 
 const defaultState = {
     data: [],
-    ikkeTilgang: false,
     henter: false,
     hentingFeilet: false,
 };
@@ -27,15 +26,6 @@ const ledere = (state = defaultState, action = {}) => {
             return {
                 henter: false,
                 hentingFeilet: true,
-                data: [],
-            };
-        }
-        case actiontype.HENT_LEDERE_IKKE_TILGANG: {
-            return {
-                henter: false,
-                hentingFeilet: false,
-                ikkeTilgang: true,
-                ikkeTilgangFeilmelding: action.feilmelding,
                 data: [],
             };
         }

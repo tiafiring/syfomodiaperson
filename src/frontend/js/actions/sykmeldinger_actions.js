@@ -4,13 +4,6 @@ export function hentSykmeldingerFeilet() {
     };
 }
 
-export function hentSykmeldingerIkkeTilgang() {
-    return {
-        type: 'HENT_SYKMELDINGER_IKKE_TILGANG',
-        ikkeTilgang: true,
-    };
-}
-
 export function henterSykmeldinger() {
     return {
         type: 'HENTER_SYKMELDINGER',

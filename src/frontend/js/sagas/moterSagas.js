@@ -26,11 +26,7 @@ export function* hentMoter(action) {
         yield put(actions.moterHentet(data));
     } catch (e) {
         log(e);
-        if (e.message === '403') {
-            yield put(actions.ikkeTilgangMote());
-        } else {
-            yield put(actions.hentMoterFeilet());
-        }
+        yield put(actions.hentMoterFeilet());
     }
 }
 

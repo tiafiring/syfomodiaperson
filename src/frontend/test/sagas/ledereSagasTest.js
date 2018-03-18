@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { hentLedere } from '../../js/sagas/ledereSagas.js';
-import { getWithoutThrows } from '../../js/api/index';
+import { get } from '../../js/api/index';
 import { put, call } from 'redux-saga/effects';
 
 describe("ledereSagas", () => {
@@ -21,7 +21,7 @@ describe("ledereSagas", () => {
     });
 
     it("Skal dernest hente ledere", () => {
-        const nextCall = call(getWithoutThrows, "http://tjenester.nav.no/sykefravaer/naermesteleder?fnr=55");
+        const nextCall = call(get, "http://tjenester.nav.no/sykefravaer/naermesteleder?fnr=55");
         expect(generator.next().value).to.deep.equal(nextCall);
     });
 
@@ -33,4 +33,4 @@ describe("ledereSagas", () => {
         expect(generator.next("mine data").value).to.deep.equal(nextPut);
     });
 
-})
+});

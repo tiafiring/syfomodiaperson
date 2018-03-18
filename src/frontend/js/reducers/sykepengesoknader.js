@@ -4,8 +4,6 @@ const initiellState = {
     henter: false,
     hentet: false,
     hentingFeilet: false,
-    ikkeTilgang: false,
-    ikkeTilgangFeilmelding: '',
     data: [],
 };
 
@@ -67,16 +65,6 @@ export default function sykepengesoknader(state = initiellState, action) {
                 hentet: true,
                 data: soknader,
             };
-        }
-        case 'HENT_SYKEPENGESOKNADER_IKKE_TILGANG': {
-            return Object.assign({}, state, {
-                data: [],
-                hentet: true,
-                henter: false,
-                hentingFeilet: false,
-                ikkeTilgang: true,
-                ikkeTilgangFeilmelding: action.feilmelding,
-            });
         }
         default: {
             return state;

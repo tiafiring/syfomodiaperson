@@ -12,11 +12,7 @@ export function* hentSykepengesoknader(action) {
         yield put({ type: 'SYKEPENGESOKNADER_HENTET', data });
     } catch (e) {
         log(e);
-        if (e.message === '403') {
-            yield put(actions.hentSykepengesoknaderIkkeTilgang());
-        } else {
-            yield put(actions.hentSykepengesoknaderFeilet());
-        }
+        yield put(actions.hentSykepengesoknaderFeilet());
     }
 }
 

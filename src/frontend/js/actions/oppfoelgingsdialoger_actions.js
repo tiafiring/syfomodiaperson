@@ -4,13 +4,6 @@ export function hentOppfoelgingsdialogerFeilet() {
     };
 }
 
-export function hentOppfoelgingsdialogerIkkeTilgang() {
-    return {
-        type: 'HENT_OPPFOELGINGSDIALOGER_IKKE_TILGANG',
-        ikkeTilgang: true,
-    };
-}
-
 export function henterOppfoelgingsdialoger() {
     return {
         type: 'HENTER_OPPFOELGINGSDIALOGER',

@@ -16,6 +16,7 @@ import { sykepengesoknad as sykepengesoknadPt } from '../propTypes';
 import { NY, UTKAST_TIL_KORRIGERING } from '../enums/sykepengesoknadstatuser';
 import Speilingvarsel from '../components/Speilingvarsel';
 import Tilbakelenke from '../components/Tilbakelenke';
+import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 
 export class SykepengesoknadSide extends Component {
     componentWillMount() {
@@ -26,7 +27,7 @@ export class SykepengesoknadSide extends Component {
     }
 
     render() {
-        const { brukernavn, ledetekster, henter, hentingFeilet, ikkeTilgang, sykepengesoknad, ikkeTilgangFeilmelding, fnr } = this.props;
+        const { brukernavn, ledetekster, henter, hentingFeilet, tilgang, sykepengesoknad, fnr } = this.props;
         const brodsmuler = [{
             tittel: 'Ditt sykefravær',
         }, {
@@ -39,9 +40,9 @@ export class SykepengesoknadSide extends Component {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (ikkeTilgang) {
+                    if (!tilgang.harTilgang) {
                         return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
+                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)} />);
                     }
                     if (hentingFeilet) {
                         return <Feilmelding />;
@@ -80,7 +81,7 @@ SykepengesoknadSide.propTypes = {
     sykepengesoknader: PropTypes.array,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
-    ikkeTilgang: PropTypes.bool,
+    tilgang: PropTypes.object,
     ledetekster: PropTypes.object,
     hentSykepengesoknader: PropTypes.bool,
 };
@@ -93,8 +94,8 @@ export function mapDispatchToProps(dispatch) {
 }
 
 export function mapStateToProps(state, ownProps) {
-    const henter = state.sykepengesoknader.henter || state.ledetekster.henter || state.ledere.henter;
-    const hentingFeilet = state.sykepengesoknader.hentingFeilet || state.ledetekster.hentingFeilet || state.ledere.hentingFeilet;
+    const henter = state.sykepengesoknader.henter || state.ledetekster.henter || state.tilgang.henter;
+    const hentingFeilet = state.sykepengesoknader.hentingFeilet || state.ledetekster.hentingFeilet || state.tilgang.hentingFeilet;
     const sykepengesoknad = state.sykepengesoknader.data.filter((soknad) => { return soknad.id === ownProps.params.sykepengesoknadId; })[0];
     const hentSykepengesoknader = !state.sykepengesoknader.henter && !state.sykepengesoknader.hentingFeilet && !state.sykepengesoknader.hentet;
     return {
@@ -105,8 +106,7 @@ export function mapStateToProps(state, ownProps) {
         hentingFeilet,
         ledetekster: state.ledetekster.data,
         sykepengesoknad,
-        ikkeTilgang: state.ledere.ikkeTilgang,
-        ikkeTilgangFeilmelding: state.ledere.ikkeTilgangFeilmelding,
+        tilgang: state.tilgang.tilgang,
     };
 }
 

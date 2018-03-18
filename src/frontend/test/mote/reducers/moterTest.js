@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import moter from '../../../js/reducers/moter';
 import * as actions from '../../../js/actions/moter_actions';
-import { getData } from '../../../js/mote/skjema/MotebookingSkjema';
 import deepFreeze from 'deep-freeze';
 import sinon from 'sinon';
 

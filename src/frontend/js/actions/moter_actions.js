@@ -27,12 +27,6 @@ export function opprettMoteFeilet() {
     };
 }
 
-export function ikkeTilgangMote() {
-    return {
-        type: actions.MOTE_IKKE_TILGANG,
-    };
-}
-
 export function hentMoter(fnr) {
     return {
         type: actions.HENT_MOTER_FORESPURT,

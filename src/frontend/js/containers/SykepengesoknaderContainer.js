@@ -12,6 +12,7 @@ import Brodsmuler from '../components/Brodsmuler';
 import { SYKEPENGESOKNADER } from '../menypunkter';
 import { sykepengesoknad as sykepengesoknadPt } from '../propTypes';
 import Speilingvarsel from '../components/Speilingvarsel';
+import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 
 export class SykepengesoknaderSide extends Component {
     componentWillMount() {
@@ -22,7 +23,7 @@ export class SykepengesoknaderSide extends Component {
     }
 
     render() {
-        const { brukernavn, ledetekster, henter, hentingFeilet, ikkeTilgang, sykepengesoknader, ikkeTilgangFeilmelding, fnr } = this.props;
+        const { brukernavn, ledetekster, henter, hentingFeilet, tilgang, sykepengesoknader, fnr } = this.props;
         const brodsmuler = [{
             tittel: 'Ditt sykefravær',
         }, {
@@ -35,9 +36,9 @@ export class SykepengesoknaderSide extends Component {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (ikkeTilgang) {
+                    if (!tilgang.harTilgang) {
                         return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(ikkeTilgangFeilmelding, ledetekster)} />);
+                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)} />);
                     }
                     if (hentingFeilet) {
                         return <Feilmelding />;
@@ -58,12 +59,11 @@ export class SykepengesoknaderSide extends Component {
 SykepengesoknaderSide.propTypes = {
     fnr: PropTypes.string,
     brukernavn: PropTypes.string,
-    ikkeTilgangFeilmelding: PropTypes.string,
     actions: PropTypes.object,
     sykepengesoknader: PropTypes.arrayOf(sykepengesoknadPt),
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
-    ikkeTilgang: PropTypes.bool,
+    tilgang: PropTypes.object,
     ledetekster: PropTypes.object,
     hentSykepengesoknader: PropTypes.bool,
 };
@@ -76,8 +76,8 @@ export function mapDispatchToProps(dispatch) {
 }
 
 export function mapStateToProps(state, ownProps) {
-    const henter = state.sykepengesoknader.henter || state.ledetekster.henter || state.ledere.henter;
-    const hentingFeilet = state.sykepengesoknader.hentingFeilet || state.ledetekster.hentingFeilet || state.ledere.hentingFeilet;
+    const henter = state.sykepengesoknader.henter || state.ledetekster.henter || state.tilgang.henter;
+    const hentingFeilet = state.sykepengesoknader.hentingFeilet || state.ledetekster.hentingFeilet || state.tilgang.hentingFeilet;
     const hentSykepengesoknader = !state.sykepengesoknader.henter && !state.sykepengesoknader.hentingFeilet && !state.sykepengesoknader.hentet;
 
     return {
@@ -88,8 +88,7 @@ export function mapStateToProps(state, ownProps) {
         hentingFeilet,
         ledetekster: state.ledetekster.data,
         sykepengesoknader: state.sykepengesoknader.data,
-        ikkeTilgang: state.ledere.ikkeTilgang,
-        ikkeTilgangFeilmelding: state.ledere.ikkeTilgangFeilmelding,
+        tilgang: state.tilgang.data,
     };
 }
 

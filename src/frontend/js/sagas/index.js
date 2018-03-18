@@ -21,6 +21,7 @@ import veilederinfoSagas from './veilederinfoSagas';
 import diskresjonskodeSagas from './diskresjonskodeSagas';
 import egenansattSagas from './egenansattSagas';
 import ledeteksterSagas from './ledeteksterSagas';
+import tilgangSagas from './tilgangSagas';
 
 export default function * rootSaga() {
     yield [
@@ -44,6 +45,7 @@ export default function * rootSaga() {
         veilederinfoSagas(),
         diskresjonskodeSagas(),
         egenansattSagas(),
+        tilgangSagas(),
         tidslinjerSagas(),
     ];
 }
