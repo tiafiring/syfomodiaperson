@@ -106,7 +106,7 @@ export function mapStateToProps(state, ownProps) {
         hentingFeilet,
         ledetekster: state.ledetekster.data,
         sykepengesoknad,
-        tilgang: state.tilgang.tilgang,
+        tilgang: state.tilgang.data,
     };
 }
 
