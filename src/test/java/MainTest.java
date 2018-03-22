@@ -1,7 +1,5 @@
 import no.nav.sbl.dialogarena.common.jetty.Jetty;
 
-import static java.lang.System.getProperty;
-import static java.lang.System.setProperty;
 import static no.nav.sbl.dialogarena.common.jetty.Jetty.usingWar;
 import static no.nav.sbl.dialogarena.common.jetty.JettyStarterUtils.first;
 import static no.nav.sbl.dialogarena.common.jetty.JettyStarterUtils.gotKeypress;

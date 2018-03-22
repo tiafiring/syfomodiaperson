@@ -21,7 +21,7 @@ export class HistorikkSide extends Component {
         if (!props.historikk.henterOppfoelgingsdialoger && !props.historikk.hentetOppfoelgingsdialoger) {
             props.actions.hentHistorikk(this.props.fnr, 'OPPFOELGINGSDIALOG');
         }
-        if (!props.henter && !props.hentet) {
+        if (!props.sykeforloep.henter && !props.sykeforloep.hentet) {
             props.actions.hentSykeforloep(this.props.fnr);
         }
     }
@@ -39,7 +39,7 @@ export class HistorikkSide extends Component {
                     } else if (hentingFeilet) {
                         return <Feilmelding />;
                     }
-                    return <Historikk sykeforloep={sykeforloep} historikk={historikk} />;
+                    return <Historikk sykeforloep={sykeforloep.data} historikk={historikk} />;
                 })()
             }
         </Side>);
@@ -50,7 +50,7 @@ HistorikkSide.propTypes = {
     hentSykeforloep: PropTypes.func,
     hentHistorikk: PropTypes.func,
     historikk: PropTypes.object,
-    sykeforloep: PropTypes.array,
+    sykeforloep: PropTypes.object,
     ledetekster: PropTypes.object,
     actions: PropTypes.object,
     fnr: PropTypes.string,
@@ -70,7 +70,7 @@ export function mapDispatchToProps(dispatch) {
 export const mapStateToProps = (state, ownProps) => {
     return {
         fnr: ownProps.params.fnr,
-        sykeforloep: state.sykeforloep.data,
+        sykeforloep: state.sykeforloep,
         historikk: state.historikk,
         henter: state.sykeforloep.henter || state.ledetekster.henter || state.tilgang.henter,
         hentet: state.sykeforloep.hentet,
