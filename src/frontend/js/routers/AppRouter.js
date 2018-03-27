@@ -14,11 +14,11 @@ import OppfoelgingsplanContainer from '../containers/OppfoelgingsplanContainer';
 import DinSykmeldingContainer from '../containers/DinSykmeldingContainer';
 import HistorikkContainer from '../containers/HistorikkContainer';
 import RollerOgAnsvarsomraderContainer from '../containers/RollerOgAnsvarsomraderContainer';
+import { fnrErGyldig } from '../utils/frnValideringUtils';
 
 const AppRouter = ({ history }) => {
     const fnr = window.location.pathname.split('/')[2];
-    const fnrRegex = new RegExp('^[0-9]{11}$');
-    if (!fnrRegex.test(fnr)) {
+    if (!fnrErGyldig(fnr)) {
         return (<Router history={history}>
             <Route path="*" component={IngenBrukerContainer} />
         </Router>);
