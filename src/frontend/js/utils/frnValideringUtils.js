@@ -36,7 +36,7 @@ function hentKontrollSiffer(fodselsnummer, kontrollrekke) {
 }
 
 export function erGyldigFodselsnummer(fodselsnummer) {
-    if (fodselsnummer.length !== 11) {
+    if (!fodselsnummer.match(new RegExp('[0-9]{11}'))) {
         return false;
     }
     if (!erGyldigFodselsdato(fodselsnummer.substring(0, 6))) {
@@ -47,11 +47,3 @@ export function erGyldigFodselsnummer(fodselsnummer) {
     const kontrollSiffer2 = hentKontrollSiffer(fodselsnummerListe.slice(0, 10), kontrollRekke2);
     return fodselsnummerListe[9] === kontrollSiffer1 && fodselsnummerListe[10] === kontrollSiffer2;
 }
-
-export const fnrErGyldig = (fnr) => {
-    if (!fnr.match(/^\d+$/) || fnr.length > 11 || fnr.length < 11 ||
-        !erGyldigFodselsnummer(fnr)) {
-        return false;
-    }
-    return true;
-};

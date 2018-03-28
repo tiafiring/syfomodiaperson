@@ -14,11 +14,11 @@ import OppfoelgingsplanContainer from '../containers/OppfoelgingsplanContainer';
 import DinSykmeldingContainer from '../containers/DinSykmeldingContainer';
 import HistorikkContainer from '../containers/HistorikkContainer';
 import RollerOgAnsvarsomraderContainer from '../containers/RollerOgAnsvarsomraderContainer';
-import { fnrErGyldig } from '../utils/frnValideringUtils';
+import { erGyldigFodselsnummer } from '../utils/frnValideringUtils';
 
 const AppRouter = ({ history }) => {
     const fnr = window.location.pathname.split('/')[2];
-    if (!fnrErGyldig(fnr)) {
+    if (!erGyldigFodselsnummer(fnr)) {
         return (<Router history={history}>
             <Route path="*" component={IngenBrukerContainer} />
         </Router>);
