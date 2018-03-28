@@ -8,7 +8,7 @@ export const IngenBrukerSide = () => {
         <Row>
             <Column className="col-xs-12">
                 <div style={{ width: '40em', margin: '0 auto' }}>
-                    <Infomelding tittel="Du har ikke valgt hvilken person du ønsker å se" melding="For å se oppfølgingen må du skrive inn fødselsnummeret i menylinjen" />
+                    <Infomelding tittel="Her mangler det fødselsnummer" melding="Det mangler eller er et ugyldig fødselsnummer. Skriv inn et gyldig fødselsnummer i menylinjen" />
                 </div>
             </Column>
         </Row>
