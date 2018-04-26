@@ -104,7 +104,6 @@
     "eslint": "2.5.3",
     "eslint-config-airbnb": "6.2.0",
     "eslint-plugin-react": "4.2.3",
-    "express-livereload": "0.0.24",
     "fetch-mock": "5.5.0",
     "fs": "0.0.2",
     "ignore-styles": "5.0.1",
