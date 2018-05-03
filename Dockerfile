@@ -2,7 +2,7 @@ FROM docker.adeo.no:5000/pus/node as node-builder
 ADD /src/frontend /source
 ADD /src/main /main
 WORKDIR /source
-RUN npm ci && npm run build
+RUN npm ci && npm run test && npm run build
 
 FROM docker.adeo.no:5000/bekkci/maven-builder as maven-builder
 ADD / /source
