@@ -44,7 +44,7 @@ import { hentNavbruker } from './actions/navbruker_actions';
 import { hentLedere } from './actions/ledere_actions';
 import { pushModiaContext, hentAktivBruker, hentAktivEnhet } from './actions/modiacontext_actions';
 import { valgtEnhet } from './actions/enhet_actions';
-import { opprettWebsocketConnection } from './contextHolder';
+import { CONTEXT_EVENT_TYPE } from './konstanter';
 
 const rootReducer = combineReducers({
     history,
@@ -109,7 +109,7 @@ const config = {
                 store.dispatch(valgtEnhet(data));
                 store.dispatch(pushModiaContext({
                     verdi: data,
-                    eventType: 'NY_AKTIV_ENHET',
+                    eventType: CONTEXT_EVENT_TYPE.NY_AKTIV_ENHET,
                 }));
                 config.config.initiellEnhet = data;
             }
@@ -129,7 +129,7 @@ if (fnrRegex.test(fnr)) {
             if (aktivBruker !== fnr) {
                 store.dispatch(pushModiaContext({
                     verdi: fnr,
-                    eventType: 'NY_AKTIV_BRUKER',
+                    eventType: CONTEXT_EVENT_TYPE.NY_AKTIV_BRUKER,
                 }));
             }
         },
@@ -164,28 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
 if (window.location.hostname.indexOf('localhost') !== -1) {
     store.dispatch(valgtEnhet('0219'));
 }
-
-opprettWebsocketConnection((wsCallback) => {
-    if (wsCallback.data === 'NY_AKTIV_BRUKER') {
-        store.dispatch(hentAktivBruker({
-            callback: (aktivBruker) => {
-                if (aktivBruker !== fnr) {
-                    window.location = `/sykefravaer/${aktivBruker}`;
-                }
-            },
-        }));
-    } else if (wsCallback.data === 'NY_AKTIV_ENHET') {
-        store.dispatch(hentAktivEnhet({
-            callback: (aktivEnhet) => {
-                if (config.config.initiellEnhet !== aktivEnhet) {
-                    store.dispatch(valgtEnhet(aktivEnhet));
-                    config.config.initiellEnhet = aktivEnhet;
-                    window.renderDecoratorHead(config);
-                }
-            },
-        }));
-    }
-});
 
 export {
     store,

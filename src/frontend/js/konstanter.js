@@ -9,3 +9,8 @@ export const KJOENN = {
     KVINNE: 'KVINNE',
     MANN: 'MANN',
 };
+
+export const CONTEXT_EVENT_TYPE = {
+    NY_AKTIV_ENHET: 'NY_AKTIV_ENHET',
+    NY_AKTIV_BRUKER: 'NY_AKTIV_BRUKER',
+};

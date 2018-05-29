@@ -1,26 +1,31 @@
-import * as actions from './actiontyper';
+import {
+    HENT_VEILEDERINFO_FORESPURT,
+    HENTER_VEILEDERINFO,
+    VEILEDERINFO_HENTET,
+    HENT_VEILEDERINFO_FEILET,
+} from './actiontyper';
 
 export function hentVeilederinfo() {
     return {
-        type: actions.HENT_VEILEDERINFO_FORESPURT,
-    };
-}
-
-export function hentVeilederinfoFeilet() {
-    return {
-        type: actions.HENT_VEILEDERINFO_FEILET,
+        type: HENT_VEILEDERINFO_FORESPURT,
     };
 }
 
 export function henterVeilederinfo() {
     return {
-        type: actions.HENTER_VEILEDERINFO,
+        type: HENTER_VEILEDERINFO,
     };
 }
 
 export function veilederinfoHentet(data) {
     return {
-        type: actions.VEILEDERINFO_HENTET,
+        type: VEILEDERINFO_HENTET,
         data,
+    };
+}
+
+export function hentVeilederinfoFeilet() {
+    return {
+        type: HENT_VEILEDERINFO_FEILET,
     };
 }
