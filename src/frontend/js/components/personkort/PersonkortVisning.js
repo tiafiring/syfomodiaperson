@@ -134,6 +134,10 @@ VisningLeder.propTypes = {
     ledere: PropTypes.array,
 };
 
+export const hentTekstFastlegeNavn = (fastlege) => {
+    return fastlege ? `${fastlege.fornavn} ${fastlege.etternavn}` : '';
+};
+
 export const VisningLege = ({ fastleger }) => {
     const informasjonNokkelTekster = new Map([
         ['fom', getLedetekst('modiafront.personkort.visning.nokkeltekster.lege_fom')],
@@ -153,7 +157,7 @@ export const VisningLege = ({ fastleger }) => {
         :
         <div className="personkort__visning visningLege">
             <PersonkortVisningElement
-                tittel={aktivFastlege.navn}
+                tittel={hentTekstFastlegeNavn(aktivFastlege)}
                 imgUrl="/sykefravaer/img/svg/medisinskrin.svg"
                 informasjon={valgteElementer}>
                 <PersonkortVisningInformasjon
