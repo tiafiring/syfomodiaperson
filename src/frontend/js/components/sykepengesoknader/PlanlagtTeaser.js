@@ -4,10 +4,10 @@ import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes';
 
 const PlanlagtTeaser = ({ soknad }) => {
     return (<article aria-labelledby={`soknader-header-${soknad.id}`}>
-            <div className="inngangspanel js-panel" style={{ color: 'gray', backgroundImage: 'none', boxShadow: 'none' }}>
-                <span className="inngangspanel__ikon">
-                    <img className="js-ikon" src="/sykefravaer/img/svg/soknader.svg" />
-                </span>
+        <div className="inngangspanel js-panel" style={{ color: 'gray', backgroundImage: 'none', boxShadow: 'none' }}>
+            <span className="inngangspanel__ikon">
+                <img className="js-ikon" src="/sykefravaer/img/svg/soknader.svg" alt="inngangspanel" />
+            </span>
             <div className="inngangspanel__innhold">
                 <header className="inngangspanel__header">
                     <h3 className="js-title" id={`soknad-header-${soknad.id}`}>
@@ -17,7 +17,7 @@ const PlanlagtTeaser = ({ soknad }) => {
                             </small>
                         </div>
                         <span className="inngangspanel__tittel">
-                                {getLedetekst('soknad.teaser.tittel')}
+                            {getLedetekst('soknad.teaser.tittel')}
                         </span>
                     </h3>
                     <p className="inngangspanel__status js-status">

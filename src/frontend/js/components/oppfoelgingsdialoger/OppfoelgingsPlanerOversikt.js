@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, toDatePrettyPrint, Varselstripe } from 'digisyfo-npm';
 import { Link } from 'react-router';
+import {
+    getLedetekst,
+    toDatePrettyPrint,
+    Varselstripe,
+} from 'digisyfo-npm';
 
 const finnAntallOppgaver = (dialog) => {
     return dialog.oppgaver.filter((oppgave) => {
@@ -78,7 +82,6 @@ OppfoelgingsPlanerOversikt.propTypes = {
     actions: PropTypes.object,
     aktiveDialoger: PropTypes.array.isRequired,
     inaktiveDialoger: PropTypes.array.isRequired,
-    ledetekster: PropTypes.object.isRequired,
 };
 
 export default OppfoelgingsPlanerOversikt;

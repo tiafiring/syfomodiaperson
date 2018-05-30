@@ -23,7 +23,7 @@ import egenansattSagas from './egenansattSagas';
 import ledeteksterSagas from './ledeteksterSagas';
 import tilgangSagas from './tilgangSagas';
 
-export default function * rootSaga() {
+export default function* rootSaga() {
     yield [
         ledereSagas(),
         fastlegerSagas(),

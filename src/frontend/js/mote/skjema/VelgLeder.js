@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ArbeidsgiverDropdown from './ArbeidsgiverDropdown';
 import { getLedetekst } from 'digisyfo-npm';
+import ArbeidsgiverDropdown from './ArbeidsgiverDropdown';
 
 const ValgtLeder = ({ valgtArbeidsgiver, ledetekster }) => {
     return (<div>

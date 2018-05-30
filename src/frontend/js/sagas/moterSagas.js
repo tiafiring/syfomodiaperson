@@ -1,11 +1,11 @@
 import { call, put, fork } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
+import { log } from 'digisyfo-npm';
 import { post, get } from '../api/index';
 import history from '../history';
 import * as actions from '../actions/moter_actions';
 import * as historikkActions from '../actions/historikk_actions';
 import * as veilederoppgaverActions from '../actions/veilederoppgaver_actions';
-import { log } from 'digisyfo-npm';
 
 export function* opprettMote(action) {
     yield put(actions.oppretterMote());
@@ -92,7 +92,7 @@ function* watchHentMoter() {
     yield* takeEvery('HENT_MOTER_FORESPURT', hentMoter);
 }
 
-function * watchMoteOpprettet() {
+function* watchMoteOpprettet() {
     yield* takeEvery('MOTE_OPPRETTET', hentMoter);
 }
 

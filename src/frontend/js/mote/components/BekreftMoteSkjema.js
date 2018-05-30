@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 import AlertStripe from 'nav-frontend-alertstriper';
 import KnappBase from 'nav-frontend-knapper';
 import { getLedetekst } from 'digisyfo-npm';
-import Epostmottakere from './Epostmottakere';
-import { connect } from 'react-redux';
 import { proptypes as motePropTypes } from 'moter-npm';
+import Epostmottakere from './Epostmottakere';
 import Innholdsviser from './Innholdsviser';
 import { mapStateToInnholdsviserProps } from './AvbrytMote';
 

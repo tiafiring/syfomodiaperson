@@ -22,7 +22,7 @@ export const hentBrukersFoedseldatoFraFnr = (fnr) => {
     } else {
         return undefined;
     }
-    const foedselsAar = aarhundre * 100 + aar;
+    const foedselsAar = (aarhundre * 100) + aar;
     const foedselsdato = new Date();
     foedselsdato.setUTCDate(foedselsDag);
     foedselsdato.setUTCMonth(foedselsMnd - 1);

@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SykmeldingPerioder, SykmeldingNokkelOpplysning, toDatePrettyPrint } from 'digisyfo-npm';
-import { Utvidbar, getLedetekst } from 'digisyfo-npm';
+import {
+    Utvidbar,
+    getLedetekst,
+    SykmeldingPerioder,
+    SykmeldingNokkelOpplysning,
+    toDatePrettyPrint,
+} from 'digisyfo-npm';
 import { sykepengesoknad as sykepengesoknadPt } from '../../../propTypes';
 
 
@@ -15,12 +20,15 @@ const SykmeldingUtdrag = ({ erApen, sykepengesoknad }) => {
     });
 
     return (<div className="blokk">
-            <Utvidbar
-                Overskrift="h2"
-                erApen={erApen}
-                visLukklenke={!erApen}
-                tittel={getLedetekst('sykepengesoknad.sykmelding-utdrag.tittel')}
-                variant="lysebla" ikon="svg/plaster.svg" ikonHover="svg/plaster--hover.svg" ikonAltTekst="Plaster-ikon">
+        <Utvidbar
+            Overskrift="h2"
+            erApen={erApen}
+            visLukklenke={!erApen}
+            tittel={getLedetekst('sykepengesoknad.sykmelding-utdrag.tittel')}
+            variant="lysebla"
+            ikon="svg/plaster.svg"
+            ikonHover="svg/plaster--hover.svg"
+            ikonAltTekst="Plaster-ikon">
             <div>
                 <SykmeldingPerioder perioder={perioder} />
                 <SykmeldingNokkelOpplysning tittel={getLedetekst('sykepengesoknad.sykmelding-utdrag.arbeidsgiver')}>

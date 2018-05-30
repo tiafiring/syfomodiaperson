@@ -9,7 +9,7 @@ export function mapDispatchToProps(dispatch) {
     const actions = Object.assign({},
         diskresjonskodeActions,
         egenansattActions,
-        fastlegeActions
+        fastlegeActions,
     );
     return {
         actions: bindActionCreators(actions, dispatch),

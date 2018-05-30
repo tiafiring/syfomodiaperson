@@ -7,8 +7,13 @@ import PilHoyre from '../../ikoner/PilHoyre';
 
 const PeriodeListe = ({ perioder, arbeidsgiver, ledetekster }) => {
     return (<ul className="inngangspanel__punktliste js-perioder">
-        {perioder.map((periode, index) => {
-            return (<SykmeldingPeriodeInfo key={index} periode={periode} arbeidsgiver={arbeidsgiver} Element="li" ledetekster={ledetekster} />);
+        { perioder.map((periode, index) => {
+            return (<SykmeldingPeriodeInfo
+                key={index}
+                periode={periode}
+                arbeidsgiver={arbeidsgiver}
+                Element="li"
+                ledetekster={ledetekster} />);
         })}
     </ul>);
 };
@@ -20,7 +25,6 @@ PeriodeListe.propTypes = {
 };
 
 class SykmeldingTeaser extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -50,12 +54,17 @@ class SykmeldingTeaser extends Component {
         const visStatus = sykmelding.status !== 'NY';
 
         return (<article aria-labelledby={`sykmelding-header-${sykmelding.id}`}>
-            <Link className="inngangspanel" to={`/sykefravaer/${fnr}/sykmeldinger/${sykmelding.id}`}
-                onMouseEnter={() => {this.onMouseEnter();}}
-                onMouseLeave={() => {this.onMouseLeave();}}
-            >
+            <Link
+                className="inngangspanel"
+                to={`/sykefravaer/${fnr}/sykmeldinger/${sykmelding.id}`}
+                onMouseEnter={() => {
+                    this.onMouseEnter();
+                }}
+                onMouseLeave={() => {
+                    this.onMouseLeave();
+                }}>
                 <span className="inngangspanel__ikon">
-                    <img src={`/sykefravaer/img/svg/${this.state.ikon}`} />
+                    <img src={`/sykefravaer/img/svg/${this.state.ikon}`} alt="inngangspanel" />
                 </span>
                 <div className="inngangspanel__innhold">
                     <header className="inngangspanel__header">

@@ -1,9 +1,9 @@
 import { call, put, fork } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
+import { log } from 'digisyfo-npm';
 import { get } from '../api/index';
 import * as actions from '../actions/behandlendeEnhet_actions';
 import * as actiontype from '../actions/actiontyper';
-import { log } from 'digisyfo-npm';
 
 export function* hentBehandlendeEnhetSaga(action) {
     yield put(actions.henterBehandlendeEnhet());

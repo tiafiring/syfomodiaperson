@@ -1,5 +1,6 @@
 import React from 'react';
 import { DatoOgTid, SvarMedIkon, konstanter, proptypes as moterPropTypes } from 'moter-npm';
+
 const { ARBEIDSGIVER, BRUKER } = konstanter;
 
 const BekreftetMotetidspunkt = (props) => {

@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { erGyldigDato, erGyldigDatoformat } from '../../utils/datovelgerUtils';
-import { Field } from 'redux-form';
-import Feilmelding from './Feilmelding';
+import { Field, autofill, touch } from 'redux-form';
 import { connect } from 'react-redux';
 import MaskedInput from 'react-maskedinput';
 import { toDatePrettyPrint } from 'digisyfo-npm';
+import Feilmelding from './Feilmelding';
 import DayPickerComponent from './DayPicker';
-import { autofill, touch } from 'redux-form';
-import { fraInputdatoTilJSDato } from '../../utils/datovelgerUtils';
+
+import {
+    erGyldigDato,
+    erGyldigDatoformat,
+    fraInputdatoTilJSDato,
+} from '../../utils/datovelgerUtils';
 
 export class DatoField extends Component {
     constructor(props) {
@@ -49,24 +52,28 @@ export class DatoField extends Component {
     render() {
         const { meta, input, id, tidligsteFom, senesteTom } = this.props;
         return (<div className="datovelger">
-            <div className="datovelger__inner" onClick={(event) => {
-                try {
-                    event.nativeEvent.stopImmediatePropagation();
-                } catch (e) {
-                    event.stopPropagation();
-                }
-            }}>
+            <div
+                className="datovelger__inner"
+                onClick={(event) => {
+                    try {
+                        event.nativeEvent.stopImmediatePropagation();
+                    } catch (e) {
+                        event.stopPropagation();
+                    }
+                }}>
                 <div className="datovelger__inputContainer">
                     <MaskedInput
+                        className={`skjemaelement__input datovelger__input${meta.touched && meta.error ? ' skjemaelement__input--harFeil' : ''}`}
                         type="tel"
                         mask="11.11.1111"
                         autoComplete="off"
                         placeholder="dd.mm.åååå"
                         id={id}
-                        className={`skjemaelement__input datovelger__input${meta.touched && meta.error ? ' skjemaelement__input--harFeil' : ''}`} {...input} />
+                        {...input}
+                    />
                     <button
                         className="js-toggle datovelger__toggleDayPicker"
-                        ref="toggle"
+                        ref='toggle'
                         id={`toggle-${id}`}
                         onKeyUp={(e) => {
                             this.onKeyUp(e);
@@ -137,7 +144,7 @@ export const validerDatoField = (input, alternativer) => {
         return 'Datoen må være på formatet dd.mm.åååå';
     } else if (!erGyldigDato(input)) {
         return 'Datoen er ikke gyldig';
-    } else if (alternativer && alternativer.fra || alternativer.til) {
+    } else if (alternativer && (alternativer.fra || alternativer.til)) {
         return validerPeriode(input, alternativer);
     }
     return undefined;

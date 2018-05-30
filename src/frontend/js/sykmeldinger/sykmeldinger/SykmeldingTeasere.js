@@ -9,11 +9,11 @@ const SykmeldingTeasere = ({ sykmeldinger, ledetekster, fnr, className, tittel =
             {children}
         </header>
         <div id={id} className={className || 'js-content'}>
-        {
-            (sykmeldinger.length ? sykmeldinger.map((sykmelding, idx) => {
-                return <SykmeldingTeaser key={idx} fnr={fnr} sykmelding={sykmelding} ledetekster={ledetekster} />;
-            }) : <p className="panel typo-infotekst">{ingenSykmeldingerMelding}</p>)
-        }
+            {
+                (sykmeldinger.length ? sykmeldinger.map((sykmelding, idx) => {
+                    return <SykmeldingTeaser key={idx} fnr={fnr} sykmelding={sykmelding} ledetekster={ledetekster} />;
+                }) : <p className="panel typo-infotekst">{ingenSykmeldingerMelding}</p>)
+            }
         </div>
     </div>);
 };

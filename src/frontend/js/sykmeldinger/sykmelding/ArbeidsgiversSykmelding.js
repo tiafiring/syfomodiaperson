@@ -11,7 +11,7 @@ const ArbeidsgiversSykmelding = ({ sykmelding, ledetekster, Overskrift = 'H2', e
         erApen={erApen}
         variant="lilla"
         Overskrift={Overskrift}>
-            <ArbeidsgiversSykmeldingOpplysninger sykmelding={sykmelding} ledetekster={ledetekster} />
+        <ArbeidsgiversSykmeldingOpplysninger sykmelding={sykmelding} ledetekster={ledetekster} />
     </Utvidbar>);
 };
 

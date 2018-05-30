@@ -1,8 +1,8 @@
 import { call, put, fork } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
+import { log } from 'digisyfo-npm';
 import { get } from '../api/index';
 import * as actions from '../actions/sykmeldinger_actions';
-import { log } from 'digisyfo-npm';
 
 export function* hentSykmeldinger(action) {
     yield put(actions.henterSykmeldinger());

@@ -6,6 +6,7 @@ import { Utvidbar } from 'digisyfo-npm';
 import DropdownInnholdsviser from './DropdownInnholdsviser';
 import * as epostinnholdActions from '../../actions/epostinnhold_actions';
 import * as arbeidsgiverepostinnholdActions from '../../actions/arbeidsgiverepostinnhold_actions';
+
 const { BRUKER, ARBEIDSGIVER } = konstanter;
 
 export const mapStateToInnholdsviserProps = (state) => {
@@ -28,15 +29,34 @@ const InformasjonSendt = ({ arbeidstaker, mote, ledetekster }) => {
     return (<div>
         <h2>Informasjon sendt:</h2>
         { arbeidstaker.kontaktinfo.skalHaVarsel &&
-            <Utvidbar erApen={false} tittel="Arbeidstaker"
-                ikon="svg/person.svg" ikonHover="svg/person_hover.svg" ikonAltTekst="Arbeidstaker" className="blokk"
+            <Utvidbar
+                className="blokk"
+                erApen={false}
+                tittel="Arbeidstaker"
+                ikon="svg/person.svg"
+                ikonHover="svg/person_hover.svg"
+                ikonAltTekst="Arbeidstaker"
                 variant="lysebla">
-                <InnholdsviserContainer mote={mote} ledetekster={ledetekster} type={ BRUKER } />
+                <InnholdsviserContainer
+                    mote={mote}
+                    ledetekster={ledetekster}
+                    type={BRUKER}
+                />
             </Utvidbar>
         }
-        <Utvidbar erApen={false} tittel="Arbeidsgiver"
-            ikon="svg/arbeidsgiver.svg" ikonHover="svg/arbeidsgiver_hover.svg" ikonAltTekst="Arbeidsgiver" className="blokk" variant="lilla">
-            <InnholdsviserContainer mote={mote} ledetekster={ledetekster} type={ ARBEIDSGIVER } />
+        <Utvidbar
+            className="blokk"
+            erApen={false}
+            tittel="Arbeidsgiver"
+            ikon="svg/arbeidsgiver.svg"
+            ikonHover="svg/arbeidsgiver_hover.svg"
+            ikonAltTekst="Arbeidsgiver"
+            variant="lilla">
+            <InnholdsviserContainer
+                mote={mote}
+                ledetekster={ledetekster}
+                type={ARBEIDSGIVER}
+            />
         </Utvidbar>
     </div>);
 };
@@ -44,7 +64,6 @@ const InformasjonSendt = ({ arbeidstaker, mote, ledetekster }) => {
 InformasjonSendt.propTypes = {
     arbeidstaker: PropTypes.object,
     mote: moterPropTypes.mote,
-    fikkIkkeOpprettetVarsel: PropTypes.object,
     ledetekster: PropTypes.object,
 };
 

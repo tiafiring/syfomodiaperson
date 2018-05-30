@@ -41,8 +41,10 @@ export class SykepengesoknadSide extends Component {
                         return <AppSpinner />;
                     }
                     if (!tilgang.harTilgang) {
-                        return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)} />);
+                        return (<Feilmelding
+                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
+                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
+                        />);
                     }
                     if (hentingFeilet) {
                         return <Feilmelding />;
@@ -76,9 +78,7 @@ SykepengesoknadSide.propTypes = {
     sykepengesoknad: sykepengesoknadPt.isRequired,
     fnr: PropTypes.string,
     brukernavn: PropTypes.string,
-    ikkeTilgangFeilmelding: PropTypes.string,
     actions: PropTypes.object,
-    sykepengesoknader: PropTypes.array,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,

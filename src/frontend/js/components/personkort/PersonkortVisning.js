@@ -40,16 +40,16 @@ PersonkortVisningElement.propTypes = {
 };
 export const PersonkortVisningInformasjon = ({ informasjonNokkelTekster, informasjon }) => {
     return (<div className="personkortElementInformasjon">
-    {
-        Object.keys(informasjon).map((nokkel, idx) => {
-            return (
-                <dl key={idx} className="personkortElement__informasjon">
-                    <dt>{informasjonNokkelTekster.get(nokkel)}</dt>
-                    <dd>{informasjon[nokkel]}</dd>
-                </dl>
-            );
-        })
-    }
+        {
+            Object.keys(informasjon).map((nokkel, idx) => {
+                return (
+                    <dl key={idx} className="personkortElement__informasjon">
+                        <dt>{informasjonNokkelTekster.get(nokkel)}</dt>
+                        <dd>{informasjon[nokkel]}</dd>
+                    </dl>
+                );
+            })
+        }
     </div>);
 };
 PersonkortVisningInformasjon.propTypes = {

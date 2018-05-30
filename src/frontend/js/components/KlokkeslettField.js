@@ -5,9 +5,17 @@ import MaskedInput from 'react-maskedinput';
 const KlokkeslettField = (props) => {
     const { meta, className } = props;
     return (<div>
-        <MaskedInput mask="11.11" autoComplete="off" placeholder={props.placeholder} type={props.type || 'text'} id={props.id}
-            className={`skjemaelement__input ${className}${meta.touched && meta.error ? ' skjemaelement__input--harFeil' : ''}`} {...props.input} />
-        <p className="skjemaelement__feilmelding" aria-live="polite">{meta.touched && meta.error}</p>
+        <MaskedInput
+            className={`skjemaelement__input ${className}${meta.touched && meta.error ? ' skjemaelement__input--harFeil' : ''}`}
+            mask="11.11"
+            autoComplete="off"
+            placeholder={props.placeholder}
+            type={props.type || 'text'}
+            id={props.id}
+            {...props.input} />
+        <p className="skjemaelement__feilmelding" aria-live="polite">
+            {meta.touched && meta.error}
+        </p>
     </div>);
 };
 

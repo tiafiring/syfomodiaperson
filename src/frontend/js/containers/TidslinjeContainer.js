@@ -67,40 +67,42 @@ export class TidslinjeSide extends Component {
             tittel: 'Tidslinjen',
         }];
         return (<Side fnr={fnr} tittel="Tidslinje" aktivtMenypunkt={TIDSLINJEN}>
-        {
-            (() => {
-                if (henter) {
-                    return <AppSpinner />;
-                }
-                if (!tilgang.harTilgang) {
-                    return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                        melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)} />);
-                }
-                if (hentingFeilet) {
-                    return <Feilmelding />;
-                }
-                return (<div>
-                    <Speilingvarsel brukernavn={brukernavn} />
-                    <div className="speiling">
-                        <Brodsmuler brodsmuler={brodsmuler} />
-                        <SidetoppSpeilet tittel="Tidslinjen" htmlTekst={htmlIntro} />
-                        <TidslinjeVelgArbeidssituasjonContainer
-                            ledetekster={ledetekster}
-                            hentTidslinjer={this.endreArbeidssituasjon}
-                            endreUrl={history.replace}
-                            valgtArbeidssituasjon={arbeidssituasjon}
-                            rootUrl={`/sykefravaer/${this.props.fnr}`}
-                        />
-                        <Tidslinje
-                            arbeidssituasjon={arbeidssituasjon}
-                            hendelser={hendelser}
-                            ledetekster={ledetekster}
-                            setHendelseData={actions.setHendelseData}
-                        />
-                    </div>
-                </div>);
-            })()
-        }
+            {
+                (() => {
+                    if (henter) {
+                        return <AppSpinner />;
+                    }
+                    if (!tilgang.harTilgang) {
+                        return (<Feilmelding
+                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
+                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
+                        />);
+                    }
+                    if (hentingFeilet) {
+                        return <Feilmelding />;
+                    }
+                    return (<div>
+                        <Speilingvarsel brukernavn={brukernavn} />
+                        <div className="speiling">
+                            <Brodsmuler brodsmuler={brodsmuler} />
+                            <SidetoppSpeilet tittel="Tidslinjen" htmlTekst={htmlIntro} />
+                            <TidslinjeVelgArbeidssituasjonContainer
+                                ledetekster={ledetekster}
+                                hentTidslinjer={this.endreArbeidssituasjon}
+                                endreUrl={history.replace}
+                                valgtArbeidssituasjon={arbeidssituasjon}
+                                rootUrl={`/sykefravaer/${this.props.fnr}`}
+                            />
+                            <Tidslinje
+                                arbeidssituasjon={arbeidssituasjon}
+                                hendelser={hendelser}
+                                ledetekster={ledetekster}
+                                setHendelseData={actions.setHendelseData}
+                            />
+                        </div>
+                    </div>);
+                })()
+            }
         </Side>);
     }
 }

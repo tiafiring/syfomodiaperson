@@ -45,7 +45,6 @@ export const getSendtTilSuffix = (sykepengesoknad) => {
 
 
 class SoknadTeaser extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -71,7 +70,9 @@ class SoknadTeaser extends Component {
         const sendtTilBeggeMenIkkeSamtidig = erSendtTilBeggeMenIkkeSamtidig(sykepengesoknad);
 
         return (<article aria-labelledby={`soknader-header-${sykepengesoknad.id}`}>
-            <Link className="inngangspanel js-panel" to={`/sykefravaer/${fnr}/sykepengesoknader/${sykepengesoknad.id}`}
+            <Link
+                className="inngangspanel js-panel"
+                to={`/sykefravaer/${fnr}/sykepengesoknader/${sykepengesoknad.id}`}
                 onMouseEnter={() => {
                     this.onMouseEnter();
                 }}
@@ -79,9 +80,9 @@ class SoknadTeaser extends Component {
                     this.onMouseLeave();
                 }}
             >
-             <span className="inngangspanel__ikon">
-                <img className="js-ikon" src={`/sykefravaer/img/svg/${this.state.ikon}`} />
-             </span>
+                <span className="inngangspanel__ikon">
+                    <img className="js-ikon" src={`/sykefravaer/img/svg/${this.state.ikon}`} alt="inngangspanel" />
+                </span>
 
                 <div className="inngangspanel__innhold">
                     <header className="inngangspanel__header">
@@ -90,8 +91,8 @@ class SoknadTeaser extends Component {
                                 {getLedetekst('soknad.teaser.dato', { '%DATO%': toDatePrettyPrint(sykepengesoknad.opprettetDato) })}
                             </small>
                             <span className="inngangspanel__tittel">
-                            {getLedetekst('soknad.teaser.tittel')}
-                        </span>
+                                {getLedetekst('soknad.teaser.tittel')}
+                            </span>
                         </h3>
                         {
                             visStatus &&

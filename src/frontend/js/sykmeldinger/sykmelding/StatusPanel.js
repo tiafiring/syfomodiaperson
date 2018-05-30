@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import StatusOpplysning from './StatusOpplysning';
 import { Varselstripe } from 'digisyfo-npm';
+import StatusOpplysning from './StatusOpplysning';
 
 const StatusPanel = ({ sykmelding, ledetekster, nokkelopplysninger, type }) => {
     const html = nokkelopplysninger.map((rad, index1) => {
@@ -17,8 +17,8 @@ const StatusPanel = ({ sykmelding, ledetekster, nokkelopplysninger, type }) => {
         <div className="panel blokk">
             <Varselstripe type={type}>
                 <div>
-                   {html}
-               </div>
+                    {html}
+                </div>
             </Varselstripe>
         </div>);
 };

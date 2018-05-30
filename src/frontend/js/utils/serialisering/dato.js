@@ -8,5 +8,5 @@ export const parseDatoerPeriode = (periode) => {
 };
 
 export const parseDatoerPeriodeListe = (perioder) => {
-    return perioder.map(p => { return parseDatoerPeriode(p); });
+    return perioder.map((p) => { return parseDatoerPeriode(p); });
 };

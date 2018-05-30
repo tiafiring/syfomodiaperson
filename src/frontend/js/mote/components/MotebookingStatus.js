@@ -1,15 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 import AlertStripe from 'nav-frontend-alertstriper';
+import {
+    getLedetekst,
+    getHtmlLedetekst,
+} from 'digisyfo-npm';
+import { proptypes as moterPropTypes } from 'moter-npm';
 import { getDatoFraZulu, erMotePassert } from '../utils/index';
 import Sidetopp from '../../components/Sidetopp';
 import KontaktInfoFeilmelding from './KontaktInfoFeilmelding';
 import BekreftetMotetidspunkt from './BekreftetMotetidspunkt';
 import InformasjonSendt from './InformasjonSendt';
 import FlereTidspunktSkjema from '../skjema/FlereTidspunktSkjema';
-import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
-import { Link } from 'react-router';
-import { proptypes as moterPropTypes } from 'moter-npm';
 import Svarstatus from './Svarstatus';
 
 export const MotetidspunktValgt = ({ bekreftetTidspunkt, ledetekster }) => {
@@ -113,11 +116,11 @@ const MotebookingStatus = (props) => {
     const { alternativer, status } = mote;
     const krrMeldingPanel = !arbeidstaker.kontaktinfo.skalHaVarsel ?
         <KontaktInfoFeilmelding melding={getLedetekstFraFeilAarsak(arbeidstaker.kontaktinfo.feilAarsak, ledetekster)} />
-    : null;
+        : null;
     const motePassert = erMotePassert(mote);
     const flereTidspunktBoks = skalViseFlereAlternativ ? <FlereTidspunktSkjema {...props} antallEksisterendeTidspunkter={alternativer.length} /> : null;
     const sidetoppNokkel = getSidetoppNokkel(mote, motePassert);
-    const knapp = erMotePassert(mote) ? <button className="js-ny knapp" onClick={() => { avbrytMoteUtenVarsel(mote.moteUuid, fnr);}}>{getLedetekst('mote.bookingstatus.knapp.planlegg-nytt-mote', ledetekster)}</button>
+    const knapp = erMotePassert(mote) ? <button className="js-ny knapp" onClick={() => { avbrytMoteUtenVarsel(mote.moteUuid, fnr); }}>{getLedetekst('mote.bookingstatus.knapp.planlegg-nytt-mote', ledetekster)}</button>
         : <Link role="button" className="knapp knapp--enten js-avbryt" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>{getLedetekst('mote.bookingstatus.knapp.avbryt', ledetekster)}</Link>;
 
     return (<div>

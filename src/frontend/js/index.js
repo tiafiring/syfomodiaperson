@@ -1,21 +1,21 @@
-import './utils/globals';
 import { render } from 'react-dom';
 import React from 'react';
-import AppRouter from './routers/AppRouter.js';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import history from './history.js';
-import fastleger from './reducers/fastleger';
-import ledere from './reducers/ledere';
-import navbruker from './reducers/navbruker';
-import sykmeldinger from './reducers/sykmeldinger';
-import arbeidsgiversSykmeldinger from './reducers/arbeidsgiversSykmeldinger';
 import { reducer as formReducer } from 'redux-form';
 import {
     hasURLParameter,
     tidslinjer,
 } from 'digisyfo-npm';
+import './utils/globals';
+import AppRouter from './routers/AppRouter';
+import history from './history';
+import fastleger from './reducers/fastleger';
+import ledere from './reducers/ledere';
+import navbruker from './reducers/navbruker';
+import sykmeldinger from './reducers/sykmeldinger';
+import arbeidsgiversSykmeldinger from './reducers/arbeidsgiversSykmeldinger';
 import moter from './reducers/moter';
 import epostinnhold from './reducers/epostinnhold';
 import arbeidsgiverEpostinnhold from './reducers/arbeidsgiverEpostinnhold';
@@ -79,7 +79,7 @@ const rootReducer = combineReducers({
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(rootReducer,
-    applyMiddleware(sagaMiddleware)
+    applyMiddleware(sagaMiddleware),
 );
 
 sagaMiddleware.run(rootSaga);
@@ -154,8 +154,8 @@ if (hasURLParameter('visLedetekster')) {
 }
 
 render(<Provider store={store}>
-        <AppRouter history={history} /></Provider>,
-    document.getElementById('maincontent'));
+    <AppRouter history={history} />
+</Provider>, document.getElementById('maincontent'));
 
 document.addEventListener('DOMContentLoaded', () => {
     window.renderDecoratorHead && window.renderDecoratorHead(config);

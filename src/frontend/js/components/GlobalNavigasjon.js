@@ -118,32 +118,38 @@ class GlobalNavigasjon extends Component {
         this.menypunkter = [historikkMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, motemodulMenypunkt, oppfoelgingsplanMenypunkt];
 
         return (<ul aria-label="Navigasjon" className="navigasjon">
-        {
-            this.menypunkter.map(({ navn, sti, menypunkt }, index) => {
-                let className = 'navigasjonspanel';
-                if (menypunkt === aktivtMenypunkt) {
-                    className = `${className} navigasjonspanel--aktiv`;
-                }
-                const antallPrikker = finnAntallPrikker(menypunkt, oppgaver);
-                return (<li key={index} className="navigasjon__element">
-                    <a ref={this.getRef(index)} className={className} onFocus={() => {
-                        this.setFocusIndex(index);
-                    }} onKeyDown={(e) => {
-                        this.handleKeyDown(e);
-                    }} onClick={(e) => {
-                        e.preventDefault();
-                        // Dette gjøres slik for å slippe å laste siden på nytt.
-                        // <Link /> fra react-router kan ikke brukes da den ikke støtter ref-attributtet.
-                        browserHistory.push(`/sykefravaer/${fnr}/${sti}`);
-                    }} href={`/sykefravaer/${fnr}/${sti}`}>
-                    <label style={{ flex: 1 }}>{navn}</label>
-                        {
-                            antallPrikker > 0 && <label className="antallNytt">{antallPrikker}</label>
-                        }
-                    </a>
-                </li>);
-            })
-        }
+            {
+                this.menypunkter.map(({ navn, sti, menypunkt }, index) => {
+                    let className = 'navigasjonspanel';
+                    if (menypunkt === aktivtMenypunkt) {
+                        className = `${className} navigasjonspanel--aktiv`;
+                    }
+                    const antallPrikker = finnAntallPrikker(menypunkt, oppgaver);
+                    return (<li key={index}className="navigasjon__element">
+                        <a
+                            ref={this.getRef(index)}
+                            className={className}
+                            href={`/sykefravaer/${fnr}/${sti}`}
+                            onFocus={() => {
+                                this.setFocusIndex(index);
+                            }}
+                            onKeyDown={(e) => {
+                                this.handleKeyDown(e);
+                            }}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                // Dette gjøres slik for å slippe å laste siden på nytt.
+                                // <Link /> fra react-router kan ikke brukes da den ikke støtter ref-attributtet.
+                                browserHistory.push(`/sykefravaer/${fnr}/${sti}`);
+                            }}>
+                            <label style={{ flex: 1 }}>{navn}</label>
+                            {
+                                antallPrikker > 0 && <label className="antallNytt">{antallPrikker}</label>
+                            }
+                        </a>
+                    </li>);
+                })
+            }
         </ul>);
     }
 }

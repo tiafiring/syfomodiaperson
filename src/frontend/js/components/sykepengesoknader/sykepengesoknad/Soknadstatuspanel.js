@@ -1,6 +1,11 @@
 import React from 'react';
-import { Varselstripe, SykmeldingNokkelOpplysning } from 'digisyfo-npm';
-import { toDatePrettyPrint, getLedetekst, Hjelpetekst } from 'digisyfo-npm';
+import {
+    getLedetekst,
+    toDatePrettyPrint,
+    Hjelpetekst,
+    Varselstripe,
+    SykmeldingNokkelOpplysning,
+} from 'digisyfo-npm';
 import KnappBase from 'nav-frontend-knapper';
 import { SENDT, TIL_SENDING, KORRIGERT } from '../../../enums/sykepengesoknadstatuser';
 import { sykepengesoknad as sykepengesoknadPt } from '../../../propTypes';
@@ -133,7 +138,8 @@ export const Knapperad = ({ sykepengesoknad }) => {
                 sendtDato.getTime() >= frist.getTime() && <div className="verktoylinje__element">
                     <KnappBase
                         type="standard"
-                        mini disabled>
+                        mini
+                        disabled>
                         Endre søknad
                     </KnappBase>
                 </div>
@@ -141,7 +147,8 @@ export const Knapperad = ({ sykepengesoknad }) => {
             {
                 sykepengesoknad.sendtTilNAVDato === null && <KnappBase
                     type="standard"
-                    mini disabled>
+                    mini
+                    disabled>
                     Send til NAV
                 </KnappBase>
             }

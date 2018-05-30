@@ -1,19 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as moteActions from '../actions/moter_actions';
 import MotebookingStatus from '../mote/components/MotebookingStatus';
 
-export class MotebookingStatusWrapper extends Component {
-    render() {
-        const { henter } = this.props;
-        if (henter) {
-            return null;
-        }
-
-        return <MotebookingStatus {...this.props} />;
+export const MotebookingStatusWrapper = ({ henter }) => {
+    if (henter) {
+        return null;
     }
-}
+    return <MotebookingStatus {...this.props} />;
+};
 
 MotebookingStatusWrapper.propTypes = {
     henter: PropTypes.bool,

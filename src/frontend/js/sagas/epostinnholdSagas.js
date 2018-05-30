@@ -1,10 +1,10 @@
 import { call, put, fork } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
+import { log } from 'digisyfo-npm';
 import { get } from '../api/index';
 import * as actions from '../actions/epostinnhold_actions';
 import * as arbeidsgiveractions from '../actions/arbeidsgiverepostinnhold_actions';
 import { HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT, HENT_AVBRYT_MOTE_EPOSTINNHOLD_FORESPURT, HENT_BEKREFT_MOTE_ARBEIDSGIVEREPOSTINNHOLD_FORESPURT } from '../actions/actiontyper';
-import { log } from 'digisyfo-npm';
 
 export function* hentBekreftMoteEpostinnhold(action) {
     yield put(actions.henterEpostInnhold());

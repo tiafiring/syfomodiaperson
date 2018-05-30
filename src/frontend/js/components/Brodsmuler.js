@@ -38,7 +38,6 @@ ToggleLink.propTypes = {
 };
 
 class Brodsmuler extends Component {
-
     constructor(props) {
         super(props);
         this.state = {

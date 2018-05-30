@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+    Utvidbar,
+    DineSykmeldingOpplysninger,
+    getLedetekst,
+} from 'digisyfo-npm';
 import StatusPanel from './StatusPanel';
-import { Utvidbar, DineSykmeldingOpplysninger, getLedetekst } from 'digisyfo-npm';
 import { STATUS, INNSENDT_DATO } from './NokkelOpplysningerEnum';
 import ArbeidsgiversSykmelding from './ArbeidsgiversSykmelding';
 
@@ -12,8 +16,15 @@ const DinBekreftedeSykmelding = ({ dinSykmelding, arbeidsgiversSykmelding, ledet
             ledetekster={ledetekster}
             type="suksess"
             nokkelopplysninger={[[STATUS, INNSENDT_DATO]]} />
-        <Utvidbar erApen tittel={getLedetekst('din-sykmelding.dine-opplysninger.tittel', ledetekster)}
-            ikon="svg/person.svg" ikonHover="svg/person_hover.svg" ikonAltTekst="Du" className="blokk" variant="lysebla" Overskrift="H2">
+        <Utvidbar
+            className="blokk"
+            erApen
+            tittel={getLedetekst('din-sykmelding.dine-opplysninger.tittel', ledetekster)}
+            ikon="svg/person.svg"
+            ikonHover="svg/person_hover.svg"
+            ikonAltTekst="Du"
+            variant="lysebla"
+            Overskrift="H2">
             <DineSykmeldingOpplysninger sykmelding={dinSykmelding} ledetekster={ledetekster} />
         </Utvidbar>
         {

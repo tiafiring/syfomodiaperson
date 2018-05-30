@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Radio } from 'nav-frontend-skjema';
 import { Varselstripe, getLedetekst } from 'digisyfo-npm';
-import AppSpinner from '../../components/AppSpinner';
 import { konstanter, proptypes as moterPropTypes } from 'moter-npm';
+import AppSpinner from '../../components/AppSpinner';
 
 const { BRUKER, ARBEIDSGIVER } = konstanter;
 
@@ -13,7 +13,7 @@ const Innhold = ({ emne, innhold }) => {
             <p>{emne}</p>
         </div>
         <div className="epostinnhold__forhandsvis">
-            <div dangerouslySetInnerHTML={{ __html: innhold }}></div>
+            <div dangerouslySetInnerHTML={{ __html: innhold }} />
         </div>
     </div>);
 };

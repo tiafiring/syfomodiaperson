@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SykmeldingTeasere from './SykmeldingTeasere';
 import { getLedetekst, sorterSykmeldinger } from 'digisyfo-npm';
+import SykmeldingTeasere from './SykmeldingTeasere';
 import SykmeldingerSorteringContainer from './SykmeldingerSorteringContainer';
 
 const DineSykmeldinger = ({ sykmeldinger = [], ledetekster = {}, sortering, fnr }) => {
@@ -30,8 +30,8 @@ const DineSykmeldinger = ({ sykmeldinger = [], ledetekster = {}, sortering, fnr 
                 ledetekster={ledetekster}
                 fnr={fnr}
                 id="sykmelding-liste-tidligere">
-                    <SykmeldingerSorteringContainer status="tidligere" />
-                </SykmeldingTeasere>
+                <SykmeldingerSorteringContainer status="tidligere" />
+            </SykmeldingTeasere>
         }
     </div>);
 };

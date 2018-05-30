@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Select } from 'nav-frontend-skjema';
-import * as actionCreators from '../../actions/sykmeldinger_actions';
 import { getLedetekst } from 'digisyfo-npm';
+import * as actionCreators from '../../actions/sykmeldinger_actions';
 
 const DropdownContainer = ({ alternativer, sorterSykmeldinger, ledetekster, status }) => {
     return (<Select

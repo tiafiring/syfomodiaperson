@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import AppSpinner from '../components/AppSpinner';
 import Lightbox from '../components/Lightbox';
 import Feilmelding from '../components/Feilmelding';
@@ -8,7 +9,6 @@ import AvbrytMote from '../mote/components/AvbrytMote';
 import history from '../history';
 import * as moterActions from '../actions/moter_actions';
 import * as epostinnholdActions from '../actions/epostinnhold_actions';
-import { connect } from 'react-redux';
 
 export class AvbrytMoteSide extends Component {
     constructor(props) {
@@ -31,32 +31,33 @@ export class AvbrytMoteSide extends Component {
     render() {
         const { ledetekster, avbryter, avbrytFeilet, hentingFeiletBool, fnr, mote, henter, arbeidstaker } = this.props;
         return (<Side fnr={fnr} tittel="Avbryt møteforespørsel">
-        {
-            (() => {
-                if (hentingFeiletBool) {
+            {
+                (() => {
+                    if (hentingFeiletBool) {
+                        return <Feilmelding />;
+                    }
+                    if (henter) {
+                        return <AppSpinner />;
+                    } else if (mote) {
+                        return (<Lightbox onClose={() => {
+                            history.replace(`/sykefravaer/${fnr}/mote`);
+                        }}>
+                            {(() => {
+                                return (<AvbrytMote
+                                    arbeidstaker={arbeidstaker}
+                                    ledetekster={ledetekster}
+                                    avbrytFeilet={avbrytFeilet}
+                                    avbryter={avbryter}
+                                    mote={mote}
+                                    onSubmit={() => { this.avbrytMote(); }}
+                                    avbrytHref={`/sykefravaer/${fnr}/mote`}
+                                />);
+                            })()}
+                        </Lightbox>);
+                    }
                     return <Feilmelding />;
-                }
-                if (henter) {
-                    return <AppSpinner />;
-                } else if (mote) {
-                    return (<Lightbox onClose={() => {
-                        history.replace(`/sykefravaer/${fnr}/mote`);
-                    }}>
-                        {(() => {
-                            return (<AvbrytMote
-                                arbeidstaker={arbeidstaker}
-                                ledetekster={ledetekster}
-                                avbrytFeilet={avbrytFeilet}
-                                avbryter={avbryter}
-                                mote={mote}
-                                onSubmit={() => { this.avbrytMote(); }}
-                                avbrytHref={`/sykefravaer/${fnr}/mote`} />);
-                        })()}
-                    </Lightbox>);
-                }
-                return <Feilmelding />;
-            })()
-        }
+                })()
+            }
         </Side>);
     }
 }

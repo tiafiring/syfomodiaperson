@@ -4,7 +4,7 @@ import Tidspunkt from './Tidspunkt';
 
 const Tidspunkter = ({ antallNyeTidspunkt = 1, skjemanavn }) => {
     const tidspunker = [];
-    for (let i = 0; i < antallNyeTidspunkt; i++) {
+    for (let i = 0; i < antallNyeTidspunkt; i += 1) {
         tidspunker.push({});
     }
     return (<div className="motetidspunkter">

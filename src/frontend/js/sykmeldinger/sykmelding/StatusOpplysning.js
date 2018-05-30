@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+    getLedetekst,
+    toDatePrettyPrint,
+    SykmeldingNokkelOpplysning,
+} from 'digisyfo-npm';
 import { ARBEIDSGIVER, INNSENDT_DATO, ORGNUMMER, STATUS } from './NokkelOpplysningerEnum';
-import { getLedetekst, toDatePrettyPrint, SykmeldingNokkelOpplysning } from 'digisyfo-npm';
 
 
 const Status = ({ ledetekster, status }) => {

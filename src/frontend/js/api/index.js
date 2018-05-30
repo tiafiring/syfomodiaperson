@@ -4,21 +4,21 @@ export function get(url) {
     return fetch(url, {
         credentials: 'include',
     })
-    .then((res) => {
-        if (res.status === 404) {
-            throw new Error('404');
-        } else if (res.status === 403) {
-            throw new Error('403');
-        }
-        if (res.status > 400) {
-            throw new Error('Det oppstod en feil');
-        }
-        return res.json();
-    })
-    .catch((err) => {
-        log(err);
-        throw err;
-    });
+        .then((res) => {
+            if (res.status === 404) {
+                throw new Error('404');
+            } else if (res.status === 403) {
+                throw new Error('403');
+            }
+            if (res.status > 400) {
+                throw new Error('Det oppstod en feil');
+            }
+            return res.json();
+        })
+        .catch((err) => {
+            log(err);
+            throw err;
+        });
 }
 
 export function post(url, body) {
@@ -31,22 +31,22 @@ export function post(url, body) {
             NAV_CSRF_PROTECTION: getCookie('NAV_CSRF_PROTECTION'),
         },
     })
-    .then((res) => {
-        if (res.status > 400) {
-            log(res);
-            throw new Error('Forespørsel feilet');
-        } else {
-            const contentType = res.headers.get('Content-Type') || '';
-            if (contentType.includes('json')) {
-                return res.json();
+        .then((res) => {
+            if (res.status > 400) {
+                log(res);
+                throw new Error('Forespørsel feilet');
+            } else {
+                const contentType = res.headers.get('Content-Type') || '';
+                if (contentType.includes('json')) {
+                    return res.json();
+                }
+                return res;
             }
-            return res;
-        }
-    })
-    .catch((err) => {
-        log(err);
-        throw err;
-    });
+        })
+        .catch((err) => {
+            log(err);
+            throw err;
+        });
 }
 
 export function getWithoutThrows(url) {

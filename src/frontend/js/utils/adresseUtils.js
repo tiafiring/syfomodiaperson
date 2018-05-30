@@ -1,5 +1,6 @@
 import React from 'react';
 import { getLedetekst } from 'digisyfo-npm';
+
 const emdashCharacterCode = 8212;
 const EMDASH = String.fromCharCode(emdashCharacterCode);
 

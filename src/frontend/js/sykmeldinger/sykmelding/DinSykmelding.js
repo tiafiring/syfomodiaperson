@@ -36,8 +36,10 @@ const DinSykmelding = ({ sykmelding, ledetekster, visEldreSykmeldingVarsel, elds
         }
         <header className="panelHeader panelHeader--lysebla">
             <img className="panelHeader__ikon" src="/sykefravaer/img/svg/person.svg" alt="Du" />
-            <img className="panelHeader__ikon panelHeader__ikon--hoykontrast"
-                src="/sykefravaer/img/svg/person-highcontrast.svg" alt="Du" />
+            <img
+                className="panelHeader__ikon panelHeader__ikon--hoykontrast"
+                src="/sykefravaer/img/svg/person-highcontrast.svg"
+                alt="Du" />
             <h2 className="panelHeader__tittel">{navn(sykmelding.pasient)}</h2>
         </header>
         <div className="panel blokk">

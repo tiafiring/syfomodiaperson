@@ -1,9 +1,9 @@
 import { call, put, fork } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
+import { log } from 'digisyfo-npm';
 import { getWithoutThrows } from '../api/index';
 import * as actions from '../actions/tilgang_actions';
 import * as actiontype from '../actions/actiontyper';
-import { log } from 'digisyfo-npm';
 
 export function* sjekkTilgang(action) {
     yield put(actions.sjekkerTilgang());

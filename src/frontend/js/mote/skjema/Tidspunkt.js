@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Field } from 'redux-form';
 import { Row, Column } from 'nav-frontend-grid';
 import Datovelger from '../../components/datovelger/Datovelger';
 import KlokkeslettField from '../../components/KlokkeslettField';
-import { Field } from 'redux-form';
 import { formaterTid } from '../../utils';
 
 const Tidspunkt = ({ tidspunkt, skjemanavn }) => {

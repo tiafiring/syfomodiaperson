@@ -1,8 +1,8 @@
 import { call, put, fork } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
+import { log } from 'digisyfo-npm';
 import { get } from '../api/index';
 import * as actions from '../actions/sykeforloep_actions';
-import { log } from 'digisyfo-npm';
 import { HENT_SYKEFORLOEP_FORESPURT } from '../actions/actiontyper';
 
 export function* hentSykeforloep(action) {

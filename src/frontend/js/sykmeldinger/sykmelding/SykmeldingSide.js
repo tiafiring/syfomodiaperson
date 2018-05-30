@@ -39,8 +39,8 @@ const SykmeldingSide = ({ dinSykmelding, arbeidsgiversSykmelding, ledetekster, f
                     <DinSykmelding
                         sykmelding={dinSykmelding}
                         ledetekster={ledetekster} />
-                        <LenkeTilDineSykmeldinger ledetekster={ledetekster} fnr={fnr} />
-                    </div>);
+                    <LenkeTilDineSykmeldinger ledetekster={ledetekster} fnr={fnr} />
+                </div>);
             } else if (dinSykmelding.status === 'AVBRUTT') {
                 return (<div>
                     <DinAvbrutteSykmelding
@@ -51,7 +51,7 @@ const SykmeldingSide = ({ dinSykmelding, arbeidsgiversSykmelding, ledetekster, f
             }
             return <Feilmelding tittel="Sykmeldingen har ukjent status" />;
         })()
-        );
+    );
 };
 
 SykmeldingSide.propTypes = {

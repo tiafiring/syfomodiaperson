@@ -11,9 +11,18 @@ const DinAvbrutteSykmelding = ({ sykmelding, ledetekster }) => {
             ledetekster={ledetekster}
             type="avbrutt"
             nokkelopplysninger={[[STATUS, INNSENDT_DATO]]} />
-        <Utvidbar erApen tittel={getLedetekst('din-sykmelding.dine-opplysninger.tittel', ledetekster)}
-            ikon="svg/person.svg" ikonHover="svg/person_hover.svg" ikonAltTekst="Du" className="blokk" variant="lysebla" Overskrift="H2">
-            <DineSykmeldingOpplysninger sykmelding={sykmelding} ledetekster={ledetekster} />
+        <Utvidbar
+            className="blokk"
+            erApen
+            tittel={getLedetekst('din-sykmelding.dine-opplysninger.tittel', ledetekster)}
+            ikon="svg/person.svg"
+            ikonHover="svg/person_hover.svg"
+            ikonAltTekst="Du"
+            variant="lysebla"
+            Overskrift="H2">
+            <DineSykmeldingOpplysninger
+                sykmelding={sykmelding}
+                ledetekster={ledetekster} />
         </Utvidbar>
     </div>);
 };

@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MotebookingSkjema from '../mote/skjema/MotebookingSkjema';
-import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import { connect } from 'react-redux';
+import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import * as ledereActions from '../actions/ledere_actions';
 import * as moteActions from '../actions/moter_actions';
 import * as virksomhetActions from '../actions/virksomhet_actions';
+import MotebookingSkjema from '../mote/skjema/MotebookingSkjema';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
 
@@ -36,8 +36,6 @@ MotebookingSkjemaContainer.propTypes = {
     valgtEnhet: PropTypes.string,
     fnr: PropTypes.string,
     opprettMote: PropTypes.func,
-    hentLedere: PropTypes.func,
-    hentArbeidstaker: PropTypes.func,
     henter: PropTypes.bool,
     skjermetBruker: PropTypes.bool,
     hentingFeilet: PropTypes.bool,

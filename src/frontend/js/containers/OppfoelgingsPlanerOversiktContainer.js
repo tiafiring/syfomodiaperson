@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Side from '../sider/Side';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
+import Side from '../sider/Side';
 import * as oppdialogActions from '../actions/oppfoelgingsdialoger_actions';
 import * as virksomhetActions from '../actions/virksomhet_actions';
 import Feilmelding from '../components/Feilmelding';
@@ -30,8 +30,10 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
                         return <AppSpinner />;
                     }
                     if (!tilgang.harTilgang) {
-                        return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)} />);
+                        return (<Feilmelding
+                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
+                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
+                        />);
                     }
                     if (hentingFeilet) {
                         return <Feilmelding />;
@@ -40,7 +42,12 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
                         return <IngenPlaner />;
                     }
                     return (<div>
-                        <OppfoelgingsPlanerOversikt actions={actions} aktiveDialoger={aktiveDialoger} inaktiveDialoger={inaktiveDialoger} ledetekster={ledetekster} fnr={fnr} />
+                        <OppfoelgingsPlanerOversikt
+                            actions={actions}
+                            aktiveDialoger={aktiveDialoger}
+                            inaktiveDialoger={inaktiveDialoger}
+                            fnr={fnr}
+                        />
                     </div>);
                 })()
             }
@@ -49,7 +56,6 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
 }
 
 OppfoelgingsPlanerOversiktSide.propTypes = {
-    ikkeTilgangFeilmelding: PropTypes.string,
     fnr: PropTypes.string,
     actions: PropTypes.object,
     aktiveDialoger: PropTypes.array,

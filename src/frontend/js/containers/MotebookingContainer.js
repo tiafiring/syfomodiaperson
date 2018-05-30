@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import {
+    getLedetekst,
+    getHtmlLedetekst,
+} from 'digisyfo-npm';
 import Side from '../sider/Side';
 import MotebookingSkjemaContainer from './MotebookingSkjemaContainer';
 import MotestatusContainer from './MotestatusContainer';
 import Feilmelding from '../components/Feilmelding';
-import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import AppSpinner from '../components/AppSpinner';
 import * as moterActions from '../actions/moter_actions';
 import { MOETEPLANLEGGER } from '../menypunkter';
@@ -26,8 +29,10 @@ export class MotebookingSide extends Component {
                         return <AppSpinner />;
                     }
                     if (!tilgang.harTilgang) {
-                        return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)} />);
+                        return (<Feilmelding
+                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
+                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
+                        />);
                     }
                     if (hentingFeilet) {
                         return <Feilmelding />;

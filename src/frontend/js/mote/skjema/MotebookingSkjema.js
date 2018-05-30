@@ -141,13 +141,12 @@ MotebookingSkjema.propTypes = {
     flereAlternativ: PropTypes.func,
     fjernAlternativ: PropTypes.func,
     antallNyeTidspunkt: PropTypes.number,
-    skalViseFlereAlternativ: PropTypes.bool,
 };
 
 export function validate(values, props) {
     const feilmeldinger = {};
     let tidspunkterFeilmeldinger = [];
-    for (let i = 0; i < props.antallNyeTidspunkt; i++) {
+    for (let i = 0; i < props.antallNyeTidspunkt; i += 1) {
         tidspunkterFeilmeldinger.push({});
     }
 

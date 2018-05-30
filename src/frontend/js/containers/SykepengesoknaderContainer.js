@@ -37,8 +37,10 @@ export class SykepengesoknaderSide extends Component {
                         return <AppSpinner />;
                     }
                     if (!tilgang.harTilgang) {
-                        return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)} />);
+                        return (<Feilmelding
+                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
+                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
+                        />);
                     }
                     if (hentingFeilet) {
                         return <Feilmelding />;

@@ -16,7 +16,6 @@ import { SYKMELDINGER } from '../menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 
 export class DinSykmeldingSide extends Component {
-
     componentWillMount() {
         const { fnr } = this.props;
         this.props.actions.hentSykmeldinger(fnr);
@@ -44,8 +43,10 @@ export class DinSykmeldingSide extends Component {
                         return <Feilmelding />;
                     }
                     if (!tilgang.harTilgang) {
-                        return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)} />);
+                        return (<Feilmelding
+                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
+                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
+                        />);
                     }
 
                     return (<div>

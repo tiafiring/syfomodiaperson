@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Side from '../sider/Side';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
+import Side from '../sider/Side';
 import * as oppdialogActions from '../actions/oppfoelgingsdialoger_actions';
 import Feilmelding from '../components/Feilmelding';
 import Oppfoelgingsplan from '../components/oppfoelgingsdialoger/Oppfoelgingsplan';
@@ -28,8 +28,10 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
                         return <AppSpinner />;
                     }
                     if (!tilgang.harTilgang) {
-                        return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)} />);
+                        return (<Feilmelding
+                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
+                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
+                        />);
                     }
                     if (hentingFeilet) {
                         return <Feilmelding />;

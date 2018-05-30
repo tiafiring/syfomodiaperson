@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import {
+    getLedetekst,
+    getHtmlLedetekst,
+} from 'digisyfo-npm';
 import Side from '../sider/Side';
 import Historikk from '../components/historikk/Historikk';
-import { bindActionCreators } from 'redux';
 import Feilmelding from '../components/Feilmelding';
-import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import AppSpinner from '../components/AppSpinner';
 import * as historikkActions from '../actions/historikk_actions';
 import * as sykeforloepActions from '../actions/sykeforloep_actions';
@@ -34,8 +37,10 @@ export class HistorikkSide extends Component {
                     if (henter) {
                         return <AppSpinner />;
                     } else if (!tilgang.harTilgang) {
-                        return (<Feilmelding tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)} />);
+                        return (<Feilmelding
+                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
+                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
+                        />);
                     } else if (hentingFeilet) {
                         return <Feilmelding />;
                     }

@@ -53,29 +53,33 @@ export class BekreftMoteSide extends Component {
                     } else if (alternativ) {
                         return (<div>
                             {
-                                (mote.status === 'OPPRETTET' || mote.status === 'FLERE_TIDSPUNKT') && <Lightbox scrollOverflowY={this.state.scrollOverflowY} onClose={() => {
-                                    history.replace(`/sykefravaer/${fnr}/mote`);
-                                }}>
-                                {
-                                    (() => {
-                                        return (<BekreftMote
-                                            onSubmit={() => {
-                                                this.onSubmit();
-                                            }}
-                                            mote={mote}
-                                            arbeidstaker={arbeidstaker}
-                                            alternativ={alternativ}
-                                            ledetekster={ledetekster}
-                                            avbrytHref={`/sykefravaer/${fnr}/mote`}
-                                            bekrefter={bekrefter}
-                                            hentEpostinnhold={(moteUuid) => {
-                                                hentBekreftMoteEpostinnhold(moteUuid, alternativ.id);
-                                            }}
-                                            bekreftFeilet={bekreftFeilet}
-                                            bekreftMote={this.bekreftMote}
-                                            moteBekreftet={this.state.bekreftet} />);
-                                    })()
-                                }
+                                (mote.status === 'OPPRETTET' || mote.status === 'FLERE_TIDSPUNKT') &&
+                                <Lightbox
+                                    scrollOverflowY={this.state.scrollOverflowY}
+                                    onClose={() => {
+                                        history.replace(`/sykefravaer/${fnr}/mote`);
+                                    }}>
+                                    {
+                                        (() => {
+                                            return (<BekreftMote
+                                                onSubmit={() => {
+                                                    this.onSubmit();
+                                                }}
+                                                mote={mote}
+                                                arbeidstaker={arbeidstaker}
+                                                alternativ={alternativ}
+                                                ledetekster={ledetekster}
+                                                avbrytHref={`/sykefravaer/${fnr}/mote`}
+                                                bekrefter={bekrefter}
+                                                hentEpostinnhold={(moteUuid) => {
+                                                    hentBekreftMoteEpostinnhold(moteUuid, alternativ.id);
+                                                }}
+                                                bekreftFeilet={bekreftFeilet}
+                                                bekreftMote={this.bekreftMote}
+                                                moteBekreftet={this.state.bekreftet}
+                                            />);
+                                        })()
+                                    }
                                 </Lightbox>
                             }
                             <MotestatusContainer moteUuid={mote.moteUuid} />

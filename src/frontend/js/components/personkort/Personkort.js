@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import EtikettBase from 'nav-frontend-etiketter';
 import { getLedetekst, Utvidbar } from 'digisyfo-npm';
 import PersonkortVisning from './PersonkortVisning';
-import EtikettBase from 'nav-frontend-etiketter';
 import { hentBrukersAlderFraFnr, hentBrukersKjoennFraFnr } from '../../utils/fnrUtils';
 import {
     PERSONKORTVISNING_TYPE,
@@ -107,7 +107,7 @@ class Personkort extends Component {
                             <button
                                 className={`${visning === PERSONKORTVISNING_TYPE.SYKMELDT && 'personkort__knapp--aktiv'}`}
                                 aria-pressed={visning === PERSONKORTVISNING_TYPE.SYKMELDT}
-                                onClick={() => {this.byttVisning(PERSONKORTVISNING_TYPE.SYKMELDT);}}>
+                                onClick={() => { this.byttVisning(PERSONKORTVISNING_TYPE.SYKMELDT); }}>
                                 {getLedetekst('modiafront.personkort.visning.sykmeldt.knapp')}
                             </button>
                         </li>
@@ -115,7 +115,7 @@ class Personkort extends Component {
                             <button
                                 className={`${visning === PERSONKORTVISNING_TYPE.LEDER && 'personkort__knapp--aktiv'}`}
                                 aria-pressed={visning === PERSONKORTVISNING_TYPE.LEDER}
-                                onClick={() => {this.byttVisning(PERSONKORTVISNING_TYPE.LEDER);}}>
+                                onClick={() => { this.byttVisning(PERSONKORTVISNING_TYPE.LEDER); }}>
                                 {getLedetekst('modiafront.personkort.visning.leder.knapp')}
                             </button>
                         </li>
@@ -123,7 +123,7 @@ class Personkort extends Component {
                             <button
                                 className={`${visning === PERSONKORTVISNING_TYPE.LEGE && 'personkort__knapp--aktiv'}`}
                                 aria-pressed={visning === PERSONKORTVISNING_TYPE.LEGE}
-                                onClick={() => {this.byttVisning(PERSONKORTVISNING_TYPE.LEGE);}}>
+                                onClick={() => { this.byttVisning(PERSONKORTVISNING_TYPE.LEGE); }}>
                                 {getLedetekst('modiafront.personkort.visning.fastlege.knapp')}
                             </button>
                         </li>
@@ -131,7 +131,7 @@ class Personkort extends Component {
                             <button
                                 className={`${visning === PERSONKORTVISNING_TYPE.ENHET && 'personkort__knapp--aktiv'}`}
                                 aria-pressed={visning === PERSONKORTVISNING_TYPE.ENHET}
-                                onClick={() => {this.byttVisning(PERSONKORTVISNING_TYPE.ENHET);}}>
+                                onClick={() => { this.byttVisning(PERSONKORTVISNING_TYPE.ENHET); }}>
                                 {getLedetekst('modiafront.personkort.visning.enhet.knapp')}
                             </button>
                         </li>

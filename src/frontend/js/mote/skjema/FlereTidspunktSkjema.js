@@ -56,7 +56,8 @@ export const FlereTidspunktSkjema = (props) => {
                 <Tidspunkter antallNyeTidspunkt={antallNyeTidspunkt} skjemanavn={FLERE_TIDSPUNKTER_SKJEMANAVN} />
                 <div className="blokk--l">
                     <button type="button" className="lenke" onClick={flereAlternativ}>
-                    {getLedetekst('mote.bookingstatus.fleretidspunkt.leggtil', ledetekster)}</button>
+                        {getLedetekst('mote.bookingstatus.fleretidspunkt.leggtil', ledetekster)}
+                    </button>
                 </div>
                 {
                     nyeAlternativFeilet && <Feilmelding />
@@ -78,7 +79,6 @@ FlereTidspunktSkjema.propTypes = {
     fnr: PropTypes.string,
     mote: PropTypes.object,
     ledetekster: PropTypes.object,
-    antallEksisterendeTidspunkter: PropTypes.number,
     flereAlternativ: PropTypes.func,
     nyeAlternativFeilet: PropTypes.bool,
     senderNyeAlternativ: PropTypes.bool,
@@ -91,7 +91,7 @@ FlereTidspunktSkjema.propTypes = {
 export function validate(values, props) {
     const feilmeldinger = {};
     let tidspunkterFeilmeldinger = [];
-    for (let i = 0; i < props.antallNyeTidspunkt; i++) {
+    for (let i = 0; i < props.antallNyeTidspunkt; i += 1) {
         tidspunkterFeilmeldinger.push({});
     }
 

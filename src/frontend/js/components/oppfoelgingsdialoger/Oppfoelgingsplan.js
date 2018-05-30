@@ -25,7 +25,7 @@ const seOppfolgingsplanOppgave = (oppfoelgingsdialog) => {
 const PlanVisning = ({ oppfoelgingsdialog, dokumentinfo, fnr, actions, veilederinfo }) => {
     const sePlanOppgave = seOppfolgingsplanOppgave(oppfoelgingsdialog);
     const bildeUrler = [];
-    for (let i = 1; i <= dokumentinfo.antallSider; i++) {
+    for (let i = 1; i <= dokumentinfo.antallSider; i += 1) {
         bildeUrler.push(`${window.APP_SETTINGS.OPPFOELGINGSDIALOGREST_ROOT}/dokument/${oppfoelgingsdialog.id}/side/${i}`);
     }
     return (<div>
@@ -33,7 +33,7 @@ const PlanVisning = ({ oppfoelgingsdialog, dokumentinfo, fnr, actions, veilederi
             <Panel className="blokk--s">
                 {
                     bildeUrler.map((bildeUrl, index) => {
-                        return <img className="pdfbilde" key={index} src={bildeUrl} height="735px" width="567px" />;
+                        return <img className="pdfbilde" key={index} src={bildeUrl} height="735px" width="567px" alt="plan" />;
                     })
                 }
             </Panel>
@@ -56,10 +56,14 @@ const PlanVisning = ({ oppfoelgingsdialog, dokumentinfo, fnr, actions, veilederi
         <Link to={`/sykefravaer/${fnr}/oppfoelgingsplaner`}>
             <KnappBase type="standard">Tilbake</KnappBase>
         </Link>
-        <KnappBase type="standard" onClick={ () => {
-            const newWindow = window.open(`${window.APP_SETTINGS.OPPFOELGINGSDIALOGREST_ROOT}/dokument/${oppfoelgingsdialog.id}`);
-            newWindow.print();
-        }}>Skriv ut</KnappBase>
+        <KnappBase
+            type="standard"
+            onClick={() => {
+                const newWindow = window.open(`${window.APP_SETTINGS.OPPFOELGINGSDIALOGREST_ROOT}/dokument/${oppfoelgingsdialog.id}`);
+                newWindow.print();
+            }}>
+            Skriv ut
+        </KnappBase>
     </div>);
 };
 
@@ -72,7 +76,6 @@ PlanVisning.propTypes = {
 };
 
 class OppfoelgingsplanWrapper extends Component {
-
     componentWillMount() {
         const { actions, oppfoelgingsdialog } = this.props;
         actions.hentDokumentinfo(oppfoelgingsdialog.id);
@@ -114,7 +117,7 @@ export function mapDispatchToProps(dispatch) {
 export function mapStateToProps(state, ownProps) {
     const oppfoelgingsdialog = ownProps.oppfoelgingsdialog;
     oppfoelgingsdialog.oppgaver = state.veilederoppgaver.data.filter((_oppgave) => {
-            return _oppgave.uuid === oppfoelgingsdialog.uuid;
+        return _oppgave.uuid === oppfoelgingsdialog.uuid;
     });
     const veilederinfo = state.veilederinfo.data;
     return {

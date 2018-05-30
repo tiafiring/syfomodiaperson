@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { proptypes as motePropTypes } from 'moter-npm';
-import { konstanter } from 'moter-npm';
+import {
+    konstanter,
+    proptypes as motePropTypes,
+} from 'moter-npm';
 import BekreftMoteSkjema from './BekreftMoteSkjema';
 import BekreftMoteUtenSvarSkjema from './BekreftMoteUtenSvarSkjema';
 
