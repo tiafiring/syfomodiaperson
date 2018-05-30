@@ -49,7 +49,7 @@ const Historikk = ({ historikk, sykeforloep }) => {
         </Panel>
         <div>
             {
-                (historikk.henterOppfoelgingsdialoger || historikk.henterMoter) && <AppSpinner />
+                historikk.henterOppfoelgingsdialoger || (historikk.henterMoter && <AppSpinner />)
             }
             <Panel>
                 { eventsEtterSisteSykefravaer.length > 0 &&
