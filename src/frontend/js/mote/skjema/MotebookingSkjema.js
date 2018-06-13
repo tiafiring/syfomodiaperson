@@ -73,7 +73,11 @@ export class MotebookingSkjema extends Component {
         const feilmelding = feilAarsak && getLedetekstnokkelFraFeilAarsak(feilAarsak, ledetekster);
         return (<div>
             { !arbeidstaker.kontaktinfo.skalHaVarsel &&
-            <KontaktInfoFeilmelding melding={feilmelding} ledetekster={ledetekster} /> }
+                <KontaktInfoFeilmelding
+                    ledetekster={ledetekster}
+                    melding={feilmelding}
+                />
+            }
             <form className="panel" onSubmit={handleSubmit(submit)}>
                 <Sidetopp tittel={getLedetekst('mote.motebookingskjema.overskrift', ledetekster)} />
                 <div className="skjema-fieldset js-arbeidsgiver blokk--l">

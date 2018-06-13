@@ -29,8 +29,10 @@ const SykepengeSoknad = ({ sykepengesoknad, fnr }) => {
             <BekreftetKorrektInformasjon oppsummeringsoknad={sykepengesoknad.oppsummering} />
         </div>
         {
-            (sykepengesoknad.status === SENDT || sykepengesoknad.status === TIL_SENDING) &&
-            <RelaterteSoknaderContainer fnr={fnr} sykepengesoknadId={sykepengesoknad.id} />
+            (sykepengesoknad.status === SENDT || sykepengesoknad.status === TIL_SENDING) && <RelaterteSoknaderContainer
+                fnr={fnr}
+                sykepengesoknadId={sykepengesoknad.id}
+            />
         }
     </div>);
 };

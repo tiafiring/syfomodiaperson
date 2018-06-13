@@ -73,7 +73,7 @@ export class DatoField extends Component {
                     />
                     <button
                         className="js-toggle datovelger__toggleDayPicker"
-                        ref='toggle'
+                        ref="toggle"
                         id={`toggle-${id}`}
                         onKeyUp={(e) => {
                             this.onKeyUp(e);

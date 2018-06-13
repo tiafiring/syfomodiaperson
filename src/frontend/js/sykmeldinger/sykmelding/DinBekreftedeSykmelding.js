@@ -27,8 +27,7 @@ const DinBekreftedeSykmelding = ({ dinSykmelding, arbeidsgiversSykmelding, ledet
             Overskrift="H2">
             <DineSykmeldingOpplysninger sykmelding={dinSykmelding} ledetekster={ledetekster} />
         </Utvidbar>
-        {
-            dinSykmelding.valgtArbeidssituasjon === 'ARBEIDSTAKER' &&
+        { dinSykmelding.valgtArbeidssituasjon === 'ARBEIDSTAKER' &&
             <div className="blokk">
                 <ArbeidsgiversSykmelding sykmelding={arbeidsgiversSykmelding} ledetekster={ledetekster} />
             </div>

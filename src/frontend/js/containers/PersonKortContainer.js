@@ -6,11 +6,11 @@ import * as diskresjonskodeActions from '../actions/diskresjonskode_actions';
 import * as fastlegeActions from '../actions/fastleger_actions';
 
 export function mapDispatchToProps(dispatch) {
-    const actions = Object.assign({},
+    const actions = Object.assign({}, {
         diskresjonskodeActions,
         egenansattActions,
         fastlegeActions,
-    );
+    });
     return {
         actions: bindActionCreators(actions, dispatch),
     };

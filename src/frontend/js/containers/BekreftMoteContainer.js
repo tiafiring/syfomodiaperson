@@ -52,8 +52,7 @@ export class BekreftMoteSide extends Component {
                         return <AppSpinner />;
                     } else if (alternativ) {
                         return (<div>
-                            {
-                                (mote.status === 'OPPRETTET' || mote.status === 'FLERE_TIDSPUNKT') &&
+                            { (mote.status === 'OPPRETTET' || mote.status === 'FLERE_TIDSPUNKT') &&
                                 <Lightbox
                                     scrollOverflowY={this.state.scrollOverflowY}
                                     onClose={() => {

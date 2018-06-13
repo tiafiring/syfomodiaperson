@@ -94,8 +94,7 @@ class SoknadTeaser extends Component {
                                 {getLedetekst('soknad.teaser.tittel')}
                             </span>
                         </h3>
-                        {
-                            visStatus &&
+                        { visStatus &&
                             <p className="inngangspanel__status js-status">
                                 {
                                     getLedetekst(`soknad.teaser.status.${sykepengesoknad.status}`, {

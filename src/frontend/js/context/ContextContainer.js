@@ -13,6 +13,7 @@ import { hentVeilederinfo } from '../actions/veilederinfo_actions';
 import { opprettWebsocketConnection } from './contextHolder';
 
 const opprettWSConnection = (actions, veilederinfo) => {
+    const fnr = window.location.pathname.split('/')[2];
     const ident = veilederinfo.data.ident;
     opprettWebsocketConnection(ident, (wsCallback) => {
         if (wsCallback.data === CONTEXT_EVENT_TYPE.NY_AKTIV_BRUKER) {
@@ -65,11 +66,11 @@ export class Context extends Component {
 
         return (<div className="contextContainer">
             { veilederinfo.hentingFeilet &&
-            <AlertStripe
-                className="contextContainer__alertstripe"
-                type="advarsel">
-                <div dangerouslySetInnerHTML={{ __html: '<p>Det skjedde en feil: Vi fant ikke din ident</p>' }} />
-            </AlertStripe>
+                <AlertStripe
+                    className="contextContainer__alertstripe"
+                    type="advarsel">
+                    <div dangerouslySetInnerHTML={{ __html: '<p>Det skjedde en feil: Vi fant ikke din ident</p>' }} />
+                </AlertStripe>
             }
         </div>);
     }
