@@ -1,3 +1,4 @@
+import './utils/globals';
 import { render } from 'react-dom';
 import React from 'react';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -8,7 +9,6 @@ import {
     hasURLParameter,
     tidslinjer,
 } from 'digisyfo-npm';
-import './utils/globals';
 import AppRouter from './routers/AppRouter';
 import history from './history';
 import fastleger from './reducers/fastleger';
