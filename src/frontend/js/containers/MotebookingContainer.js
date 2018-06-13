@@ -21,7 +21,15 @@ export class MotebookingSide extends Component {
     }
 
     render() {
-        const { fnr, henter, hentingFeilet, mote, tilgang, ledetekster } = this.props;
+        const {
+            fnr,
+            henter,
+            hentingFeilet,
+            mote,
+            tilgang,
+            ledetekster,
+            moterTilgang,
+        } = this.props;
         return (<Side fnr={fnr} tittel="Møteplanlegger" aktivtMenypunkt={MOETEPLANLEGGER}>
             {
                 (() => {
@@ -36,6 +44,12 @@ export class MotebookingSide extends Component {
                     }
                     if (hentingFeilet) {
                         return <Feilmelding />;
+                    }
+                    if (moterTilgang.harTilgang === false) {
+                        return (<Feilmelding
+                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
+                            melding={getHtmlLedetekst(hentBegrunnelseTekst(moterTilgang.begrunnelse), ledetekster)}
+                        />);
                     }
                     if (mote) {
                         return <MotestatusContainer fnr={fnr} moteUuid={mote.moteUuid} />;
@@ -62,6 +76,7 @@ MotebookingSide.propTypes = {
     hentLedereFeiletBool: PropTypes.bool,
     avbryter: PropTypes.bool,
     avbrytFeilet: PropTypes.bool,
+    moterTilgang: PropTypes.object,
 };
 
 export const mapStateToProps = (state, ownProps) => {
@@ -78,6 +93,7 @@ export const mapStateToProps = (state, ownProps) => {
         hentingFeilet: state.moter.hentingFeilet || state.tilgang.hentingFeilet || state.ledere.hentingFeilet || state.ledetekster.hentingFeilet,
         sendingFeilet: state.moter.sendingFeilet,
         tilgang: state.tilgang.data,
+        moterTilgang: state.moter.tilgang,
     };
 };
 

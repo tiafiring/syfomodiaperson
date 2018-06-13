@@ -1,4 +1,5 @@
 import { getCookie, log } from 'digisyfo-npm';
+import { Error403 } from './errors';
 
 export function get(url) {
     return fetch(url, {
@@ -7,13 +8,20 @@ export function get(url) {
         .then((res) => {
             if (res.status === 404) {
                 throw new Error('404');
-            } else if (res.status === 403) {
-                throw new Error('403');
             }
-            if (res.status > 400) {
+            if (res.status > 400 && res.status !== 403) {
                 throw new Error('Det oppstod en feil');
             }
-            return res.json();
+            return res.json().then((data) => {
+                if (res.status === 403) {
+                    const tilgang = {
+                        harTilgang: data.harTilgang,
+                        begrunnelse: data.begrunnelse,
+                    };
+                    throw new Error403('403', 403, tilgang);
+                }
+                return data;
+            });
         })
         .catch((err) => {
             log(err);

@@ -25,6 +25,10 @@ export function* hentMoter(action) {
         const data = yield call(get, `${window.APP_SETTINGS.MOTEADMIN_REST_ROOT}/moter?fnr=${action.fnr}&henttpsdata=true&limit=1`);
         yield put(actions.moterHentet(data));
     } catch (e) {
+        if (e.status === 403) {
+            yield put(actions.hentMoterIkkeTilgang(e.tilgang));
+            return;
+        }
         log(e);
         yield put(actions.hentMoterFeilet());
     }

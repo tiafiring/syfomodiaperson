@@ -53,6 +53,13 @@ export function hentMoterFeilet() {
     };
 }
 
+export function hentMoterIkkeTilgang(tilgang) {
+    return {
+        type: actions.HENT_MOTER_IKKE_TILGANG,
+        tilgang,
+    };
+}
+
 export function avbrytMote(uuid, fnr) {
     return {
         type: actions.AVBRYT_MOTE_FORESPURT,

@@ -11,6 +11,7 @@ const defaultState = {
     senderNyeAlternativ: false,
     skalViseFlereAlternativ: false,
     antallNyeTidspunkt: 1,
+    tilgang: {},
 };
 
 export default function moter(state = defaultState, action) {
@@ -66,6 +67,18 @@ export default function moter(state = defaultState, action) {
                 hentingFeilet: true,
                 avbryter: false,
                 avbrytFeilet: false,
+            });
+        }
+        case actions.HENT_MOTER_IKKE_TILGANG: {
+            return Object.assign({}, state, {
+                data: [],
+                sender: false,
+                sendingFeilet: false,
+                henter: false,
+                hentingFeilet: false,
+                avbryter: false,
+                avbrytFeilet: false,
+                tilgang: action.tilgang,
             });
         }
         case actions.AVBRYTER_MOTE: {

@@ -22,13 +22,24 @@ describe("api", () => {
         });
 
         it("Skal kalle kaste en 403-exception hvis det returneres 403", (done) => {
-
-            fetchMock.get("*", 403);
-            get("/ingen-url").catch((e) => {
-                expect(e.message).to.equal("403")
-                done();
+            const tilgang = {
+                harTilgang: false,
+                begrunnelse: 'begrunnelse',
+            };
+            fetchMock.get("*", {
+                body: tilgang,
+                status: 403,
             });
 
+            get("/ingen-url")
+                .then((data) => {
+                    expect(data.harTilgang).to.equal(tilgang.harTilgang);
+                    expect(data.begrunnelse).to.equal(tilgang.begrunnelse);
+                })
+                .catch((e) => {
+                    expect(e.message).to.equal('403');
+                    done();
+                });
         });
 
         it("Skal kalle kaste en 404-exception hvis det returneres 404", (done) => {
