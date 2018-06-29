@@ -10,5 +10,5 @@ WORKDIR /source
 COPY --from=node-builder /main/webapp /source/src/main/webapp
 RUN mvn package
 
-FROM docker.adeo.no:5000/bekkci/nais-java-app
+FROM docker.adeo.no:5000/pus/nais-java-app
 COPY --from=maven-builder /source/target/modiasyfofront /app
