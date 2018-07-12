@@ -12,6 +12,7 @@ describe("BekreftMoteContainer", () => {
         let hentMoter;
         let bekreftMote;
         let deltaker;
+        let ledetekster;
 
         beforeEach(() => {
             hentMoter = sinon.spy();
@@ -99,6 +100,7 @@ describe("BekreftMoteContainer", () => {
 
     describe("mapStateToProps", () => {
 
+        let ownProps;
         let state;
 
         beforeEach(() => {

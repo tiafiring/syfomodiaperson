@@ -22,9 +22,10 @@ describe("Datovelger", () => {
     let preventDefault;
     let stopImmediatePropagation;
     let clock;
+    const today = new Date('2017-01-16');
 
     beforeEach(() => {
-        clock = sinon.useFakeTimers(1484524800000); // 16. januar 2017
+        clock = sinon.useFakeTimers(today.getTime()); // 16. januar 2017
     })
 
     afterEach(() => {

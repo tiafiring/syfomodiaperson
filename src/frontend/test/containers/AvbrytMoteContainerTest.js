@@ -115,7 +115,8 @@ describe("AvbrytMoteContainer", () => {
 
     describe("mapStateToProps", () => {
 
-        let state; 
+        let ownProps;
+        let state;
 
         beforeEach(() => {
             ownProps = {

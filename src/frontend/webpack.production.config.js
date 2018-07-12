@@ -1,7 +1,7 @@
 var Webpack = require('webpack');
 var path = require('path');
 var nodeModulesPath = path.resolve(__dirname, 'node_modules');
-var buildPath = '../main/webapp/js';
+var buildPath = path.resolve(__dirname, '../main/webapp/js');
 var mainPath = path.resolve(__dirname, 'js', 'index.js');
 var stylesPath = path.resolve(__dirname, 'styles', 'styles.less');
 
@@ -17,9 +17,9 @@ var config = {
   module: {
     loaders: [{
       test: /\.js$/,
-      loader: 'babel',
+      loader: 'babel-loader',
       query: {
-        presets: ["react", "es2015"]
+        presets: ["react", "env"]
       },
       exclude: [nodeModulesPath]
     },
