@@ -54,9 +54,10 @@ describe("utils", () => {
 
     describe("erAlleAlternativerPassert", () => {
         let clock;
+        const today = new Date('2017-01-16');
 
         beforeEach(() => {
-            clock = sinon.useFakeTimers(1484524800000); // 16. januar 2017
+            clock = sinon.useFakeTimers(today.getTime()); // 16. januar 2017
         });
         afterEach(() => {
             clock.restore();
@@ -94,13 +95,16 @@ describe("utils", () => {
     });
 
     describe("genererDato", () => {
+        let clock;
+        const today = new Date('2017-05-31');
+
         it("31. Mai 10.00 blir riktig", () => {
             const s = genererDato("31.05.2017", "10.00");
             expect(s).to.equal("2017-05-31T10:00:00");
         });
 
         it("31. Mai 10.00 blir riktig", () => {
-            clock = sinon.useFakeTimers(1496222296305); // 31. Mai 2017
+            clock = sinon.useFakeTimers(today.getTime()); // 31. Mai 2017
             const s = genererDato("16.06.2017", "10.00");
             expect(s).to.equal("2017-06-16T10:00:00");
         });

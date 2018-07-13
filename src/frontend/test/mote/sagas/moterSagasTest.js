@@ -137,7 +137,7 @@ describe("moterSagas", () => {
         const moteUuid = "olsen";
         const valgtAlternativId = 998877;
 
-        action = actions.bekreftMote("olsen", 998877);
+        const action = actions.bekreftMote("olsen", 998877);
 
         const generator = bekreftMote(action);
 
