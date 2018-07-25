@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="52px" height="52px" viewBox="0 0 52 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Møteikon_blåbg</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Etterspørre-møte" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="NY_Velge-nye-tidspunkter" transform="translate(-368.000000, -602.000000)">
+            <g id="Møteikon_blåbg" transform="translate(368.000000, 602.000000)">
+                <circle id="Oval-Copy-5" fill="#C2EAF7" cx="26" cy="26" r="26"></circle>
+                <g id="Møte_ikon" transform="translate(13.000000, 13.000000)" stroke="#000000">
+                    <g id="Group">
+                        <polyline id="Shape" points="4.875 2.70833333 0.541666667 2.70833333 0.541666667 25.4583333 25.4583333 25.4583333 25.4583333 2.70833333 21.125 2.70833333"></polyline>
+                        <path d="M4.875,0.541666667 L8.125,0.541666667 L8.125,4.875 L4.875,4.875 L4.875,0.541666667 Z M17.875,0.541666667 L21.125,0.541666667 L21.125,4.875 L17.875,4.875 L17.875,0.541666667 Z M8.125,2.70833333 L17.875,2.70833333 L8.125,2.70833333 Z M0.541666667,8.125 L25.4583333,8.125 L0.541666667,8.125 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

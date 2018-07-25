@@ -11,7 +11,7 @@ const historikkMenypunkt = {
 
 const motemodulMenypunkt = {
     navn: 'Møteplanlegger',
-    sti: 'mote',
+    sti: 'moteoversikt',
     menypunkt: menypunkter.MOETEPLANLEGGER,
 };
 
@@ -56,12 +56,20 @@ const finnAntallPrikker = (menypunkt, oppgaver) => {
     }).length;
 };
 
+const setMotemodulSti = (motebehovet) => {
+    if (motebehovet) {
+        return 'moteoversikt';
+    }
+    return 'mote';
+};
+
 class GlobalNavigasjon extends Component {
     constructor(props) {
         super(props);
         this.state = {
             focusIndex: -1,
         };
+        this.props.hentMotebehov(this.props.fnr);
     }
 
     setFocus(fokusId) {
@@ -114,7 +122,7 @@ class GlobalNavigasjon extends Component {
     }
 
     render() {
-        const { fnr, aktivtMenypunkt, oppgaver } = this.props;
+        const { fnr, aktivtMenypunkt, oppgaver, motebehovet, hentingFeilet } = this.props;
         this.menypunkter = [historikkMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, motemodulMenypunkt, oppfoelgingsplanMenypunkt];
 
         return (<ul aria-label="Navigasjon" className="navigasjon">
@@ -124,8 +132,11 @@ class GlobalNavigasjon extends Component {
                     if (menypunkt === aktivtMenypunkt) {
                         className = `${className} navigasjonspanel--aktiv`;
                     }
+                    if (menypunkt === menypunkter.MOETEPLANLEGGER && !hentingFeilet) {
+                        sti = setMotemodulSti(motebehovet);
+                    }
                     const antallPrikker = finnAntallPrikker(menypunkt, oppgaver);
-                    return (<li key={index}className="navigasjon__element">
+                    return (<li key={index} className="navigasjon__element">
                         <a
                             ref={this.getRef(index)}
                             className={className}
@@ -158,6 +169,9 @@ GlobalNavigasjon.propTypes = {
     fnr: PropTypes.string,
     aktivtMenypunkt: PropTypes.string,
     oppgaver: PropTypes.arrayOf(PropTypes.object),
+    motebehovet: PropTypes.object,
+    hentingFeilet: PropTypes.bool,
+    hentMotebehov: PropTypes.func,
 };
 
 export default GlobalNavigasjon;

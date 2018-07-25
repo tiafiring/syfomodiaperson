@@ -15,7 +15,7 @@ import { MOETEPLANLEGGER } from '../menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 
 export class MotebookingSide extends Component {
-    constructor(props) {
+    constructor(props = false) {
         super(props);
         this.props.hentMoter(this.props.fnr);
     }
