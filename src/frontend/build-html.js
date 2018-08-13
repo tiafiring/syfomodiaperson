@@ -19,6 +19,7 @@ var dev = {
     bundleFileName: 'bundle.js',
     decoratorRoot: 'http://localhost:8186',
     contextholderRoot: 'http://localhost:8090/eventdistributer',
+    motebehovRoot: 'http://localhost:8811/syfomotebehov/api',
     enableLogging: true,
 };
 
@@ -35,6 +36,7 @@ var prod = {
     bundleFileName: 'bundle-prod.js',
     decoratorRoot: '',
     contextholderRoot: '/eventdistributer',
+    motebehovRoot: '/syfomotebehov/api',
     enableLogging: false,
 };
 

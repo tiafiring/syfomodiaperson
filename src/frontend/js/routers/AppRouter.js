@@ -15,6 +15,8 @@ import DinSykmeldingContainer from '../containers/DinSykmeldingContainer';
 import HistorikkContainer from '../containers/HistorikkContainer';
 import RollerOgAnsvarsomraderContainer from '../containers/RollerOgAnsvarsomraderContainer';
 import { erGyldigFodselsnummer } from '../utils/frnValideringUtils';
+import MotelandingssideContainer from '../containers/MotelandingssideContainer';
+import MotebehovContainer from '../containers/MotebehovContainer';
 
 const AppRouter = ({ history }) => {
     const fnr = window.location.pathname.split('/')[2];
@@ -28,7 +30,9 @@ const AppRouter = ({ history }) => {
         <Route path="/sykefravaer/:fnr" component={HistorikkContainer} />
         <Route path="/sykefravaer/:fnr/roller-og-ansvarsomrader" component={RollerOgAnsvarsomraderContainer} />
         <Route path="/sykefravaer/:fnr/logg" component={HistorikkContainer} />
+        <Route path="/sykefravaer/:fnr/moteoversikt" component={MotelandingssideContainer} />
         <Route path="/sykefravaer/:fnr/mote" component={MotebookingContainer} />
+        <Route path="/sykefravaer/:fnr/motebehov" component={MotebehovContainer} />
         <Route path="/sykefravaer/:fnr/mote/:moteUuid/avbryt" component={AvbrytMoteContainer} />
         <Route path="/sykefravaer/:fnr/mote/bekreft/:alternativId" component={BekreftMoteContainer} />
         <Route path="/sykefravaer/:fnr/tidslinjen" component={TidslinjeContainer} />

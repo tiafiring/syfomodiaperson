@@ -6,6 +6,7 @@ import fastlegerSagas from './fastlegerSagas';
 import navbrukerSagas from './navbrukerSagas';
 import veilederoppgaverSagas from './veilederoppgaverSagas';
 import moterSagas from './moterSagas';
+import motebehovSagas from './motebehovSagas';
 import epostinnholdSagas from './epostinnholdSagas';
 import sykmeldingerSagas from './sykmeldingerSagas';
 import oppfoelgingsdialogerSagas from './oppfoelgingsdialogerSagas';
@@ -29,6 +30,7 @@ export default function* rootSaga() {
         fastlegerSagas(),
         navbrukerSagas(),
         moterSagas(),
+        motebehovSagas(),
         ledeteksterSagas(),
         epostinnholdSagas(),
         virksomhetSagas(),

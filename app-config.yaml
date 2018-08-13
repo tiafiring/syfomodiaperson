@@ -1,5 +1,6 @@
 # ref https://raw.githubusercontent.com/nais/naisd/master/nais_example.yaml
 image: docker.adeo.no:5000/digisyfo/modiasyfofront
+team: sykefravaer
 replicas:
   min: 1
   max: 2
@@ -12,7 +13,13 @@ healthcheck:
   readiness:
     path: sykefravaer/internal/isAlive
     initialDelay: 20
+prometheus:
+  enabled: true
+  path: /actuator/metrics
 resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
   requests:
     cpu: 200m
     memory: 256Mi
