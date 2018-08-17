@@ -11,10 +11,12 @@ describe("MotebehovContainer", () => {
 
     describe("MotebehovSide", () => {
 
+        let actions;
         let hentMotebehov;
         let ledetekster;
         let tilgang;
         let motebehovTilgang;
+        let motebehovForsokthentet;
         beforeEach(() => {
             ledetekster = {};
             hentMotebehov = sinon.spy();
@@ -22,45 +24,49 @@ describe("MotebehovContainer", () => {
                 harTilgang: true,
             };
             motebehovTilgang = {};
+            actions = {
+                hentMotebehov,
+            };
         });
 
-        it("Skal vise AppSpinner", () => {
+        it("Skal vise AppSpinner hvis man henter møtebehov/ledetekster", () => {
             const motebehovet = {};
 
             const component = shallow(<MotebehovSide
                 tilgang={tilgang}
-                hentMotebehov={hentMotebehov}
+                actions={actions}
                 henter={true}
+                motebehovForsoktHentet={true}
+
                 motebehovTilgang={motebehovTilgang}
             />);
 
             expect(component.find(AppSpinner)).to.have.length(1)
         });
 
-        it("Skal hente møtebehov ved init", () => {
+        it("Skal vise AppSpinner hvis møtebehov ikke er forsøkt hentet", () => {
             const motebehovet = {};
 
             const component = shallow(<MotebehovSide
                 tilgang={tilgang}
-                fnr="123"
-                hentMotebehov={hentMotebehov}
-                motebehovet={{}}
+                actions={actions}
+                motebehovForsoktHentet={false}
+
                 motebehovTilgang={motebehovTilgang}
             />);
 
-            expect(hentMotebehov.calledOnce).to.be.true;
-            expect(hentMotebehov.calledWith("123")).to.be.true;
+            expect(component.find(AppSpinner)).to.have.length(1)
         });
-
 
         it("Skal vise feilmelding hvis hentingFeilet", () => {
             const motebehovet = {};
 
             const component = shallow(<MotebehovSide
                 tilgang={tilgang}
-                hentMotebehov={hentMotebehov}
+                actions={actions}
                 motebehovet={{}}
                 motebehovTilgang={motebehovTilgang}
+                motebehovForsoktHentet={true}
                 hentingFeilet
             />);
 
@@ -76,9 +82,10 @@ describe("MotebehovContainer", () => {
             const component = shallow(<MotebehovSide
                 tilgang={tilgang}
                 fnr={"fnr"}
-                hentMotebehov={hentMotebehov}
+                actions={actions}
                 motebehovet={motebehovet}
                 motebehovTilgang={motebehovTilgang}
+                motebehovForsoktHentet={true}
             />);
 
             expect(component.find(MotebehovKvittering)).to.have.length(1)
@@ -111,6 +118,12 @@ describe("MotebehovContainer", () => {
                     hentingFeilet: false,
                     henter: false,
                     data: {}
+                },
+                veilederoppgaver: {
+                    data: [],
+                },
+                veilederinfo: {
+                    data: {},
                 }
             };
             ownProps = {

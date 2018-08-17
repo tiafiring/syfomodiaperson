@@ -7,6 +7,7 @@ export const mapStateToProps = (state, ownProps) => {
         oppgaver: state.veilederoppgaver.data,
         fnr: ownProps.fnr,
         aktivtMenypunkt: ownProps.aktivtMenypunkt,
+        motebehovForsoktHentet: state.motebehov.henter || state.motebehov.hentet || state.motebehov.hentingFeilet,
         motebehovet: state.motebehov.data[0],
         hentingFeilet: state.motebehov.hentingFeilet,
     };

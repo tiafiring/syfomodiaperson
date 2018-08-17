@@ -12,11 +12,15 @@ import * as motebehovActions from '../actions/motebehov_actions';
 import { MOETEPLANLEGGER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { MotebehovKvittering } from '../components/MotebehovKvittering';
+import { bindActionCreators } from 'redux';
+import * as veilederoppgaverActions from '../actions/veilederoppgaver_actions';
 
 export class MotebehovSide extends Component {
     constructor(props = false) {
         super(props);
-        this.props.hentMotebehov(this.props.fnr);
+        if (!this.props.motebehovForsoktHentet) {
+            this.props.actions.hentMotebehov(this.props.fnr);
+        }
     }
 
     render() {
@@ -28,11 +32,15 @@ export class MotebehovSide extends Component {
             tilgang,
             ledetekster,
             motebehovTilgang,
+            oppgaver,
+            veilederinfo,
+            actions,
+            motebehovForsoktHentet,
         } = this.props;
         return (<Side fnr={fnr} tittel="Møtebehov" aktivtMenypunkt={MOETEPLANLEGGER}>
             {
                 (() => {
-                    if (henter) {
+                    if (!motebehovForsoktHentet || henter) {
                         return <AppSpinner />;
                     }
                     if (!tilgang.harTilgang) {
@@ -51,7 +59,15 @@ export class MotebehovSide extends Component {
                         return <Feilmelding />;
                     }
                     if (motebehovet && motebehovet.motebehovSvar) {
-                        return <MotebehovKvittering ledetekster={ledetekster} motebehov={motebehovet} />;
+                        return (<MotebehovKvittering
+                            ledetekster={ledetekster}
+                            motebehov={motebehovet}
+                            oppgaver={oppgaver}
+                            veilederinfo={veilederinfo}
+                            fnr={fnr}
+                            actions={actions}
+                            motebehovet={motebehovet}
+                        />);
                     }
                     return (<Feilmelding
                         tittel={getLedetekst('mote.motebehov.feilmelding.tittel', ledetekster)}
@@ -65,27 +81,40 @@ export class MotebehovSide extends Component {
 
 MotebehovSide.propTypes = {
     fnr: PropTypes.string,
+    motebehovForsoktHentet: PropTypes.bool,
     motebehovet: PropTypes.object,
-    hentMotebehov: PropTypes.func,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
     ledetekster: PropTypes.object,
     motebehovTilgang: PropTypes.object,
+    oppgaver: PropTypes.arrayOf(PropTypes.object),
+    veilederinfo: PropTypes.object,
+    actions: PropTypes.object,
 };
+
+export function mapDispatchToProps(dispatch) {
+    const actions = Object.assign({}, motebehovActions, veilederoppgaverActions);
+    return {
+        actions: bindActionCreators(actions, dispatch),
+    };
+}
 
 export const mapStateToProps = (state, ownProps) => {
     return {
         fnr: ownProps.params.fnr,
+        motebehovForsoktHentet: state.motebehov.henter || state.motebehov.hentet || state.motebehov.hentingFeilet,
         motebehovet: state.motebehov.data[0],
         henter: state.motebehov.henter || state.ledetekster.henter,
         hentingFeilet: state.motebehov.hentingFeilet || state.ledetekster.hentingFeilet,
         tilgang: state.tilgang.data,
         ledetekster: state.ledetekster.data,
         motebehovTilgang: state.motebehov.tilgang,
+        oppgaver: state.veilederoppgaver.data,
+        veilederinfo: state.veilederinfo.data,
     };
 };
 
-const MotebehovContainer = connect(mapStateToProps, motebehovActions)(MotebehovSide);
+const MotebehovContainer = connect(mapStateToProps, mapDispatchToProps)(MotebehovSide);
 
 export default MotebehovContainer;

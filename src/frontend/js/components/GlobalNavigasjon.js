@@ -48,7 +48,7 @@ const erOppfoelginsdialogOppgave = (menypunkt, oppgave) => {
 
 const erMoteplanleggerOppgave = (menypunkt, oppgave) => {
     return menypunkt === menypunkter.MOETEPLANLEGGER &&
-        oppgave.type === 'ALLE_SVAR_MOTTATT' && oppgave.status !== 'FERDIG';
+        (oppgave.type === 'ALLE_SVAR_MOTTATT' || oppgave.type === 'MOTEBEHOV_MOTTATT') && oppgave.status !== 'FERDIG';
 };
 
 const finnAntallPrikker = (menypunkt, oppgaver) => {
@@ -64,13 +64,22 @@ const setMotemodulSti = (motebehovet) => {
     return 'mote';
 };
 
+const setNySti = (sti, menypunkt, motebehovet, hentingFeilet) => {
+    if (menypunkt === menypunkter.MOETEPLANLEGGER) {
+        return hentingFeilet ? sti : setMotemodulSti(motebehovet);
+    }
+    return sti;
+};
+
 class GlobalNavigasjon extends Component {
     constructor(props) {
         super(props);
         this.state = {
             focusIndex: -1,
         };
-        this.props.hentMotebehov(this.props.fnr);
+        if (!this.props.motebehovForsoktHentet) {
+            this.props.hentMotebehov(this.props.fnr);
+        }
     }
 
     setFocus(fokusId) {
@@ -131,15 +140,13 @@ class GlobalNavigasjon extends Component {
                     const className = cn('navigasjonspanel', {
                         'navigasjonspanel--aktiv': menypunkt === aktivtMenypunkt,
                     });
-                    if (menypunkt === menypunkter.MOETEPLANLEGGER && !hentingFeilet) {
-                        sti = setMotemodulSti(motebehovet);
-                    }
+                    const nySti = setNySti(sti, menypunkt, motebehovet, hentingFeilet);
                     const antallPrikker = finnAntallPrikker(menypunkt, oppgaver);
                     return (<li key={index} className="navigasjon__element">
                         <a
                             ref={this.getRef(index)}
                             className={className}
-                            href={`/sykefravaer/${fnr}/${sti}`}
+                            href={`/sykefravaer/${fnr}/${nySti}`}
                             onFocus={() => {
                                 this.setFocusIndex(index);
                             }}
@@ -150,7 +157,7 @@ class GlobalNavigasjon extends Component {
                                 e.preventDefault();
                                 // Dette gjøres slik for å slippe å laste siden på nytt.
                                 // <Link /> fra react-router kan ikke brukes da den ikke støtter ref-attributtet.
-                                browserHistory.push(`/sykefravaer/${fnr}/${sti}`);
+                                browserHistory.push(`/sykefravaer/${fnr}/${nySti}`);
                             }}>
                             <span className="navigasjon__element__tekst" dangerouslySetInnerHTML={{ __html: navn }} />
                             {
@@ -168,6 +175,7 @@ GlobalNavigasjon.propTypes = {
     fnr: PropTypes.string,
     aktivtMenypunkt: PropTypes.string,
     oppgaver: PropTypes.arrayOf(PropTypes.object),
+    motebehovForsoktHentet: PropTypes.bool,
     motebehovet: PropTypes.object,
     hentingFeilet: PropTypes.bool,
     hentMotebehov: PropTypes.func,

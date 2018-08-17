@@ -7,6 +7,7 @@ export const sorterEtterDato = (a, b) => {
 const defaultState = {
     data: [],
     henter: false,
+    hentet: false,
     hentingFeilet: false,
     tilgang: {},
 };
@@ -17,6 +18,7 @@ export default function motebehov(state = defaultState, action) {
             return Object.assign({}, state, {
                 data: [],
                 henter: true,
+                hentet: false,
                 hentingFeilet: false,
             });
         }
@@ -24,6 +26,7 @@ export default function motebehov(state = defaultState, action) {
             return Object.assign({}, state, {
                 data: action.data.sort(sorterEtterDato),
                 henter: false,
+                hentet: true,
                 hentingFeilet: false,
             });
         }
@@ -31,6 +34,7 @@ export default function motebehov(state = defaultState, action) {
             return Object.assign({}, state, {
                 data: [],
                 henter: false,
+                hentet: false,
                 hentingFeilet: true,
             });
         }
@@ -38,6 +42,7 @@ export default function motebehov(state = defaultState, action) {
             return Object.assign({}, state, {
                 data: [],
                 henter: false,
+                hentet: false,
                 hentingFeilet: false,
                 tilgang: action.tilgang,
             });

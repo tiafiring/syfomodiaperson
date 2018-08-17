@@ -63,24 +63,6 @@ describe("MotelandingssideContainer", () => {
             expect(hentMoter.calledWith("123")).to.be.true;
         });
 
-        it("Skal hente møtebehov ved init", () => {
-            const mote = {};
-            const motebehovet = {};
-
-            const component = shallow(<MotelandingssideSide
-                tilgang={tilgang}
-                fnr="123"
-                hentMoter={hentMoter}
-                hentMotebehov={hentMotebehov}
-                mote={{}}
-                motebehovet={{}}
-                moterTilgang={moterTilgang}
-            />);
-
-            expect(hentMotebehov.calledOnce).to.be.true;
-            expect(hentMotebehov.calledWith("123")).to.be.true;
-        });
-
         it("Skal vise feilmelding hvis hentingFeilet", () => {
             const mote = {};
             const motebehovet = {};
