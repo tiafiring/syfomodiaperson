@@ -106,7 +106,7 @@ class SoknadTeaser extends Component {
                     </header>
                     <p className="inngangspanel__tekst js-tekst">
                         {
-                            getLedetekst('soknad.teaser.tekst', {
+                            getLedetekst('soknad.teaser.tekst-2', {
                                 '%FRA%': toDatePrettyPrint(sykepengesoknad.fom),
                                 '%TIL%': toDatePrettyPrint(sykepengesoknad.tom),
                             })

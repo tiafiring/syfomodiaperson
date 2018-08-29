@@ -26,7 +26,7 @@ const PlanlagtTeaser = ({ soknad }) => {
                 </header>
                 <p className="inngangspanel__tekst js-tekst">
                     {
-                        getLedetekst('soknad.teaser.tekst', {
+                        getLedetekst('soknad.teaser.tekst-2', {
                             '%FRA%': toDatePrettyPrint(new Date(soknad.fom)),
                             '%TIL%': toDatePrettyPrint(new Date(soknad.tom)),
                         })
