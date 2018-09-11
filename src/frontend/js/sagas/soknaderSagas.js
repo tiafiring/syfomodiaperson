@@ -6,7 +6,7 @@ import {
     HENT_SOKNADER_FORESPURT,
 } from '../actions/actiontyper';
 import mockSoknader from '../../test/mockdata/mockSoknader';
-import { toggleMockSoknader } from '../selectors/toggleSelectors';
+import { erDev } from '../selectors/toggleSelectors';
 
 export function* hentSoknader() {
     yield put(actions.henterSoknader());
@@ -15,7 +15,7 @@ export function* hentSoknader() {
         yield put(actions.soknaderHentet(data));
     } catch (e) {
         log(e);
-        if (toggleMockSoknader()) {
+        if (erDev()) {
             yield put(actions.soknaderHentet(mockSoknader));
         } else {
             yield put(actions.hentSoknaderFeilet());

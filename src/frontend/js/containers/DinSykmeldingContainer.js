@@ -14,7 +14,7 @@ import Brodsmuler from '../components/Brodsmuler';
 import Speilingvarsel from '../components/Speilingvarsel';
 import { SYKMELDINGER } from '../menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
-import { toggleMockSoknader } from '../selectors/toggleSelectors';
+import { erDev } from '../selectors/toggleSelectors';
 import { ARBEIDSTAKER } from '../enums/arbeidssituasjoner';
 
 export class DinSykmeldingSide extends Component {
@@ -41,10 +41,10 @@ export class DinSykmeldingSide extends Component {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (hentingFeilet && !toggleMockSoknader()) {
+                    if (hentingFeilet && !erDev()) {
                         return <Feilmelding />;
                     }
-                    if (!tilgang.harTilgang && !toggleMockSoknader()) {
+                    if (!tilgang.harTilgang && !erDev()) {
                         return (<Feilmelding
                             tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
                             melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}

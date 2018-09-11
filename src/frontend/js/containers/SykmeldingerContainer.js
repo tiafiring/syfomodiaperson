@@ -13,7 +13,7 @@ import Brodsmuler from '../components/Brodsmuler';
 import { SYKMELDINGER } from '../menypunkter';
 import Speilingvarsel from '../components/Speilingvarsel';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
-import { toggleMockSoknader } from '../selectors/toggleSelectors';
+import { erDev } from '../selectors/toggleSelectors';
 
 export class SykmeldingerSide extends Component {
     componentWillMount() {
@@ -38,13 +38,13 @@ export class SykmeldingerSide extends Component {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (!tilgang.harTilgang && !toggleMockSoknader()) {
+                    if (!tilgang.harTilgang && !erDev()) {
                         return (<Feilmelding
                             tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
                             melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
                         />);
                     }
-                    if (hentingFeilet && !toggleMockSoknader()) {
+                    if (hentingFeilet && !erDev()) {
                         return <Feilmelding />;
                     }
                     return (<div>

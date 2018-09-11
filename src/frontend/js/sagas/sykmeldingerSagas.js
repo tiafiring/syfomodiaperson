@@ -5,7 +5,7 @@ import { get } from '../api/index';
 import * as actions from '../actions/sykmeldinger_actions';
 import { sykmeldingerHentet } from '../actions/sykmeldinger_actions';
 import { HENT_SYKMELDINGER_FORESPURT } from '../actions/actiontyper';
-import { toggleMockSoknader } from '../selectors/toggleSelectors';
+import { erDev } from '../selectors/toggleSelectors';
 import mockSykmeldinger from '../../test/mockdata/mockSykmeldinger';
 
 export function* hentSykmeldinger(action) {
@@ -15,7 +15,7 @@ export function* hentSykmeldinger(action) {
         yield put(sykmeldingerHentet(data));
     } catch (e) {
         log(e);
-        if (toggleMockSoknader()) {
+        if (erDev()) {
             yield put(sykmeldingerHentet(mockSykmeldinger));
         } else {
             yield put(actions.hentSykmeldingerFeilet());

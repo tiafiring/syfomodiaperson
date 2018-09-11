@@ -8,12 +8,12 @@ import DinAvbrutteSykmelding from './DinAvbrutteSykmelding';
 import DinUtgaatteSykmelding from './DinUtgaatteSykmelding';
 import LenkeTilDineSykmeldinger from './LenkeTilDineSykmeldinger';
 import Feilmelding from '../Feilmelding';
-import { toggleMockSoknader } from '../../selectors/toggleSelectors';
+import { erDev } from '../../selectors/toggleSelectors';
 
 const SykmeldingSide = ({ dinSykmelding, arbeidsgiversSykmelding, ledetekster, fnr }) => {
     return (
         (() => {
-            if (dinSykmelding.status === sykmeldingstatuser.SENDT && (arbeidsgiversSykmelding || toggleMockSoknader())) {
+            if (dinSykmelding.status === sykmeldingstatuser.SENDT && (arbeidsgiversSykmelding || erDev())) {
                 return (<div>
                     <DinSendteSykmelding
                         dinSykmelding={dinSykmelding}

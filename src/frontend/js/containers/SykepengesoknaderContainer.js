@@ -14,7 +14,7 @@ import { SYKEPENGESOKNADER } from '../menypunkter';
 import { sykepengesoknad as sykepengesoknadPt, soknad as soknadPt } from '../propTypes';
 import Speilingvarsel from '../components/Speilingvarsel';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
-import { toggleMockSoknader } from '../selectors/toggleSelectors';
+import { erDev } from '../selectors/toggleSelectors';
 import Feilstripe from '../components/Feilstripe';
 
 export class SykepengesoknaderSide extends Component {
@@ -53,13 +53,13 @@ export class SykepengesoknaderSide extends Component {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (!tilgang.harTilgang && !toggleMockSoknader()) {
+                    if (!tilgang.harTilgang && !erDev()) {
                         return (<Feilmelding
                             tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
                             melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
                         />);
                     }
-                    if (hentingFeilet && !toggleMockSoknader()) {
+                    if (hentingFeilet && !erDev()) {
                         return <Feilmelding />;
                     }
                     return (<div>

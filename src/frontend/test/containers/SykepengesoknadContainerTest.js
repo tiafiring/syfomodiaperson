@@ -49,7 +49,7 @@ describe('SykepengesoknadContainer', () => {
         settOwnPropsId = (soknadId) => {
             ownProps.params.sykepengesoknadId = soknadId;
         };
-        toggleStub = sinon.stub(toggleSelectors, 'toggleMockSoknader').returns(false);
+        toggleStub = sinon.stub(toggleSelectors, 'erDev').returns(false);
     });
 
     afterEach(() => {

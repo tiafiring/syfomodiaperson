@@ -4,7 +4,7 @@ import { log } from 'digisyfo-npm';
 import { get } from '../api/index';
 import * as actions from '../actions/sykepengesoknader_actions';
 import { sykepengesoknaderHentet } from '../actions/sykepengesoknader_actions';
-import { toggleMockSoknader } from '../selectors/toggleSelectors';
+import { erDev } from '../selectors/toggleSelectors';
 import mockSykepengesoknader from '../../test/mockdata/mockSykepengesoknader';
 
 export function* hentSykepengesoknader(action) {
@@ -15,7 +15,7 @@ export function* hentSykepengesoknader(action) {
         yield put(sykepengesoknaderHentet(data));
     } catch (e) {
         log(e);
-        if (toggleMockSoknader()) {
+        if (erDev()) {
             yield put(sykepengesoknaderHentet(mockSykepengesoknader));
         } else {
             yield put(actions.hentSykepengesoknaderFeilet());
