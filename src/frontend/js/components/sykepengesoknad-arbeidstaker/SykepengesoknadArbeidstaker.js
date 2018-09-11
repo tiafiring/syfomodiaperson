@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { sykepengesoknad as sykepengesoknadPt } from 'digisyfo-npm';
-import { NY, UTKAST_TIL_KORRIGERING } from '../../enums/sykepengesoknadstatuser';
+import { sykepengesoknad as sykepengesoknadPt, sykepengesoknadstatuser } from 'digisyfo-npm';
 import IkkeInnsendtSoknad from '../sykepengesoknad-felles/IkkeInnsendtSoknad';
 import BehandletSykepengesoknad from './BehandletSykepengesoknad';
 import SoknadSpeiling from '../sykepengesoknad-felles/SoknadSpeiling';
 import { brodsmule } from '../../propTypes/index';
+
+const { NY, UTKAST_TIL_KORRIGERING } = sykepengesoknadstatuser;
 
 const SykepengesoknadArbeidstaker = ({ sykepengesoknad, fnr, brukernavn, brodsmuler }) => {
     switch (sykepengesoknad.status) {

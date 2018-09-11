@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { getLedetekst, toDatePrettyPrint } from 'digisyfo-npm';
+import { getLedetekst, toDatePrettyPrint, sykepengesoknadstatuser } from 'digisyfo-npm';
 import { soknadEllerSykepengesoknad } from '../../propTypes';
-import { NY, SENDT, TIL_SENDING, UTKAST_TIL_KORRIGERING, AVBRUTT } from '../../enums/sykepengesoknadstatuser';
 import { OPPHOLD_UTLAND, SELVSTENDIGE_OG_FRILANSERE } from '../../enums/soknadstyper';
+
+const { NY, SENDT, TIL_SENDING, UTKAST_TIL_KORRIGERING, AVBRUTT } = sykepengesoknadstatuser;
 
 export const SendtUlikt = ({ soknad }) => {
     return (<span>

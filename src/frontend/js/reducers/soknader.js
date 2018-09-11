@@ -44,7 +44,6 @@ const parseSporsmal = (sporsmal) => {
 };
 
 export const parseSoknad = (soknad) => {
-    console.log(soknad);
     return {
         ...soknad,
         fom: new Date(soknad.fom),

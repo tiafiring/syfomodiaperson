@@ -6,8 +6,10 @@ import {
     SykmeldingNokkelOpplysning,
 } from 'digisyfo-npm';
 import KnappBase from 'nav-frontend-knapper';
-import { SENDT, TIL_SENDING, KORRIGERT } from '../../enums/sykepengesoknadstatuser';
+import { sykepengesoknadstatuser } from 'digisyfo-npm';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
+
+const { SENDT, TIL_SENDING, KORRIGERT } = sykepengesoknadstatuser;
 
 const getSendtTilSuffix = (sykepengesoknad) => {
     if (sykepengesoknad.sendtTilArbeidsgiverDato && sykepengesoknad.sendtTilNAVDato) {

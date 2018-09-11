@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Utvidbar, SoknadOppsummering, BekreftetKorrektInformasjon } from 'digisyfo-npm';
+import { Utvidbar, SoknadOppsummering, BekreftetKorrektInformasjon, sykepengesoknadstatuser } from 'digisyfo-npm';
 import Statuspanel from './Soknadstatuspanel';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
-import { KORRIGERT, SENDT, TIL_SENDING, AVBRUTT, UTGAATT } from '../../enums/sykepengesoknadstatuser';
 import RelaterteSoknaderContainer from './RelaterteSoknaderContainer';
 import KorrigertAvContainer from './KorrigertAvContainer';
 import AvbruttSoknad from './AvbruttSoknad';
 import UtgaattSoknad from './UtgaattSoknad';
 import SykmeldingUtdrag from '../../connected-components/SykmeldingUtdrag';
+
+const { KORRIGERT, SENDT, TIL_SENDING, AVBRUTT, UTGAATT } = sykepengesoknadstatuser;
 
 const BehandletSykepengesoknad = ({ sykepengesoknad, fnr }) => {
     switch (sykepengesoknad.status) {

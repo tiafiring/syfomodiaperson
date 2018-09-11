@@ -10,13 +10,12 @@ import mockSykmeldinger from '../mockdata/mockSykmeldinger';
 import { sykmeldingerHentet } from '../../js/actions/sykmeldinger_actions';
 import ledetekster from '../../js/reducers/ledetekster';
 
-describe.only('SykmeldingUtdrag', () => {
+describe('SykmeldingUtdrag', () => {
     let state;
     let actions;
     let hentSykmeldinger;
     let ownProps;
     const ARBEIDSTAKERSOKNAD_ID = 'b9732cc7-6101-446e-a1ef-ec25a425b4fb';
-    const NAERINGSDRIVENDESOKNAD_ID = 'faadf7c1-3aac-4758-8673-e9cee1316a3c';
     let sykmelding;
 
     beforeEach(() => {

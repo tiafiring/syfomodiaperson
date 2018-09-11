@@ -1,16 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Utvidbar, DineSykmeldingOpplysninger, getLedetekst } from 'digisyfo-npm';
-import StatusPanel from './StatusPanel';
-import { STATUS, INNSENDT_DATO } from './NokkelOpplysningerEnum';
+import SykmeldingStatuspanel from '../sykmeldingstatuspanel/SykmeldingStatuspanel';
 
 const DinAvbrutteSykmelding = ({ sykmelding, ledetekster }) => {
     return (<div>
-        <StatusPanel
-            sykmelding={sykmelding}
-            ledetekster={ledetekster}
-            type="avbrutt"
-            nokkelopplysninger={[[STATUS, INNSENDT_DATO]]} />
+        <SykmeldingStatuspanel sykmelding={sykmelding} />
         <Utvidbar
             className="blokk"
             erApen

@@ -11,7 +11,6 @@ import Feilmelding from '../Feilmelding';
 import { toggleMockSoknader } from '../../selectors/toggleSelectors';
 
 const SykmeldingSide = ({ dinSykmelding, arbeidsgiversSykmelding, ledetekster, fnr }) => {
-    console.log(dinSykmelding, arbeidsgiversSykmelding);
     return (
         (() => {
             if (dinSykmelding.status === sykmeldingstatuser.SENDT && (arbeidsgiversSykmelding || toggleMockSoknader())) {

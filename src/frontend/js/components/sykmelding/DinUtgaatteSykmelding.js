@@ -5,18 +5,11 @@ import {
     DineSykmeldingOpplysninger,
     getLedetekst,
 } from 'digisyfo-npm';
-import StatusPanel from './StatusPanel';
-import { STATUS } from './NokkelOpplysningerEnum';
+import SykmeldingStatuspanel from '../sykmeldingstatuspanel/SykmeldingStatuspanel';
 
 const DinUtgatteSykmelding = ({ sykmelding, ledetekster }) => {
     return (<div>
-        <StatusPanel
-            sykmelding={sykmelding}
-            ledetekster={ledetekster}
-            type="info"
-            nokkelopplysninger={[
-                [STATUS],
-            ]} />
+        <SykmeldingStatuspanel sykmelding={sykmelding} />
         <Utvidbar
             className="blokk"
             erApen

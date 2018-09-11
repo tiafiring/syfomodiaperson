@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getSykmelding, getHtmlLedetekst, getLedetekst } from 'digisyfo-npm';
+import { getSykmelding, getHtmlLedetekst, getLedetekst, sykmeldingstatuser } from 'digisyfo-npm';
 import Side from '../sider/Side';
 import SidetoppSpeilet from '../components/SidetoppSpeilet';
 import * as sykmeldingerActions from '../actions/sykmeldinger_actions';
@@ -15,6 +15,7 @@ import Speilingvarsel from '../components/Speilingvarsel';
 import { SYKMELDINGER } from '../menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { toggleMockSoknader } from '../selectors/toggleSelectors';
+import { ARBEIDSTAKER } from '../enums/arbeidssituasjoner';
 
 export class DinSykmeldingSide extends Component {
     componentWillMount() {
@@ -90,7 +91,12 @@ export function mapStateToProps(state, ownProps) {
     const dinSykmelding = getSykmelding(state.sykmeldinger.data, sykmeldingId);
     let arbeidsgiversSykmelding = {};
 
-    if (dinSykmelding && (dinSykmelding.status === 'SENDT' || (dinSykmelding.status === 'BEKREFTET' && dinSykmelding.valgtArbeidssituasjon === 'ARBEIDSTAKER'))) {
+    if (dinSykmelding
+        && (
+            dinSykmelding.status === sykmeldingstatuser.SENDT
+            || (dinSykmelding.status === sykmeldingstatuser.BEKREFTET && dinSykmelding.valgtArbeidssituasjon === ARBEIDSTAKER)
+        )
+    ) {
         arbeidsgiversSykmelding = getSykmelding(state.arbeidsgiversSykmeldinger.data, sykmeldingId);
     }
 
