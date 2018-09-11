@@ -4,30 +4,41 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
 import Side from '../sider/Side';
-import SidetoppSpeilet from '../components/SidetoppSpeilet';
-import * as actionCreators from '../actions/sykepengesoknader_actions';
+import * as sykepengesoknaderActions from '../actions/sykepengesoknader_actions';
+import * as soknaderActions from '../actions/soknader_actions';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
-import SykepengeSoknad from '../components/sykepengesoknader/sykepengesoknad/SykepengeSoknad';
-import IkkeInnsendtSoknad from '../components/sykepengesoknader/sykepengesoknad/IkkeInnsendtSoknad';
-import Brodsmuler from '../components/Brodsmuler';
 import { SYKEPENGESOKNADER } from '../menypunkter';
-import { sykepengesoknad as sykepengesoknadPt } from '../propTypes';
-import { NY, UTKAST_TIL_KORRIGERING } from '../enums/sykepengesoknadstatuser';
-import Speilingvarsel from '../components/Speilingvarsel';
-import Tilbakelenke from '../components/Tilbakelenke';
+import { sykepengesoknad as sykepengesoknadPt, soknad as soknadPt } from '../propTypes';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
+import { toggleMockSoknader } from '../selectors/toggleSelectors';
+import SykepengesoknadArbeidstaker from '../components/sykepengesoknad-arbeidstaker/SykepengesoknadArbeidstaker';
+import { OPPHOLD_UTLAND, SELVSTENDIGE_OG_FRILANSERE } from '../enums/soknadstyper';
+import SykepengesoknadSelvstendig from '../components/sykepengesoknad-selvstendig/SykepengesoknadSelvstendig';
+import SykepengesoknadUtland from '../components/sykepengesoknad-utland/SykepengesoknadUtland';
 
-export class SykepengesoknadSide extends Component {
+export class Container extends Component {
     componentWillMount() {
         const { fnr } = this.props;
-        if (this.props.hentSykepengesoknader) {
+        if (this.props.skalHenteSykepengesoknader) {
             this.props.actions.hentSykepengesoknader(fnr);
+        }
+        if (this.props.skalHenteSoknader) {
+            this.props.actions.hentSoknader(fnr);
         }
     }
 
     render() {
-        const { brukernavn, ledetekster, henter, hentingFeilet, tilgang, sykepengesoknad, fnr } = this.props;
+        const {
+            brukernavn,
+            ledetekster,
+            henter,
+            hentingFeilet,
+            tilgang,
+            sykepengesoknad,
+            soknad,
+            fnr,
+        } = this.props;
         const brodsmuler = [{
             tittel: 'Ditt sykefravær',
         }, {
@@ -40,41 +51,44 @@ export class SykepengesoknadSide extends Component {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (!tilgang.harTilgang) {
+                    if (!tilgang.harTilgang && !toggleMockSoknader()) {
                         return (<Feilmelding
                             tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
                             melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
                         />);
                     }
-                    if (hentingFeilet) {
+                    if (hentingFeilet && !toggleMockSoknader()) {
                         return <Feilmelding />;
                     }
-                    if (sykepengesoknad.status === NY || sykepengesoknad.status === UTKAST_TIL_KORRIGERING) {
-                        return (<div>
-                            <div className="blokk">
-                                <IkkeInnsendtSoknad />
-                            </div>
-                            <Tilbakelenke to={`/sykefravaer/${fnr}/sykepengesoknader`} tekst="Gå til sykepengesøknader" />
-                        </div>);
+                    if (sykepengesoknad) {
+                        return (<SykepengesoknadArbeidstaker
+                            fnr={fnr}
+                            brodsmuler={brodsmuler}
+                            brukernavn={brukernavn}
+                            sykepengesoknad={sykepengesoknad} />);
                     }
-                    return (<div>
-                        <Speilingvarsel brukernavn={brukernavn} />
-                        <div className="speiling">
-                            <Brodsmuler brodsmuler={brodsmuler} />
-                            <SidetoppSpeilet tittel="Søknad om sykepenger" />
-                            <div className="blokk">
-                                <SykepengeSoknad fnr={fnr} sykepengesoknad={sykepengesoknad} />
-                            </div>
-                            <Tilbakelenke to={`/sykefravaer/${fnr}/sykepengesoknader`} tekst="Gå til sykepengesøknader" />
-                        </div>
-                    </div>);
+                    if (soknad && soknad.soknadstype === SELVSTENDIGE_OG_FRILANSERE) {
+                        return (<SykepengesoknadSelvstendig
+                            fnr={fnr}
+                            brodsmuler={brodsmuler}
+                            brukernavn={brukernavn}
+                            soknad={soknad} />);
+                    }
+                    if (soknad && soknad.soknadstype === OPPHOLD_UTLAND) {
+                        return (<SykepengesoknadUtland
+                            fnr={fnr}
+                            brodsmuler={brodsmuler}
+                            brukernavn={brukernavn}
+                            soknad={soknad} />);
+                    }
+                    return <Feilmelding />;
                 })()
             }
         </Side>);
     }
 }
 
-SykepengesoknadSide.propTypes = {
+Container.propTypes = {
     sykepengesoknad: sykepengesoknadPt.isRequired,
     fnr: PropTypes.string,
     brukernavn: PropTypes.string,
@@ -83,32 +97,51 @@ SykepengesoknadSide.propTypes = {
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
     ledetekster: PropTypes.object,
-    hentSykepengesoknader: PropTypes.bool,
+    skalHenteSykepengesoknader: PropTypes.bool,
+    skalHenteSoknader: PropTypes.bool,
+    soknad: soknadPt,
 };
 
 export function mapDispatchToProps(dispatch) {
-    const actions = Object.assign({}, actionCreators);
+    const actions = Object.assign({}, sykepengesoknaderActions, soknaderActions);
     return {
         actions: bindActionCreators(actions, dispatch),
     };
 }
 
 export function mapStateToProps(state, ownProps) {
-    const henter = state.sykepengesoknader.henter || state.ledetekster.henter || state.tilgang.henter;
-    const hentingFeilet = state.sykepengesoknader.hentingFeilet || state.ledetekster.hentingFeilet || state.tilgang.hentingFeilet;
-    const sykepengesoknad = state.sykepengesoknader.data.filter((soknad) => { return soknad.id === ownProps.params.sykepengesoknadId; })[0];
-    const hentSykepengesoknader = !state.sykepengesoknader.henter && !state.sykepengesoknader.hentingFeilet && !state.sykepengesoknader.hentet;
+    const henter = state.sykepengesoknader.henter
+        || state.soknader.henter
+        || state.ledetekster.henter
+        || state.tilgang.henter;
+    const hentingFeilet = state.ledetekster.hentingFeilet
+        || state.tilgang.hentingFeilet;
+    const skalHenteSykepengesoknader = !state.sykepengesoknader.henter
+        && !state.sykepengesoknader.hentingFeilet
+        && !state.sykepengesoknader.hentet;
+    const skalHenteSoknader = !state.soknader.henter
+        && !state.soknader.hentingFeilet
+        && !state.soknader.hentet;
+    const sykepengesoknad = state.sykepengesoknader.data.find((s) => {
+        return s.id === ownProps.params.sykepengesoknadId;
+    });
+    const soknad = state.soknader.data.find((s) => {
+        return s.id === ownProps.params.sykepengesoknadId;
+    });
+
     return {
-        hentSykepengesoknader,
+        skalHenteSykepengesoknader,
+        skalHenteSoknader,
         brukernavn: state.navbruker.data.navn,
         fnr: ownProps.params.fnr,
         henter,
         hentingFeilet,
         ledetekster: state.ledetekster.data,
-        sykepengesoknad,
         tilgang: state.tilgang.data,
+        sykepengesoknad,
+        soknad,
     };
 }
 
-const SykepengesoknadContainer = connect(mapStateToProps, mapDispatchToProps)(SykepengesoknadSide);
+const SykepengesoknadContainer = connect(mapStateToProps, mapDispatchToProps)(Container);
 export default SykepengesoknadContainer;

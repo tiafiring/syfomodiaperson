@@ -23,6 +23,7 @@ import diskresjonskodeSagas from './diskresjonskodeSagas';
 import egenansattSagas from './egenansattSagas';
 import ledeteksterSagas from './ledeteksterSagas';
 import tilgangSagas from './tilgangSagas';
+import soknaderSagas from './soknaderSagas';
 
 export default function* rootSaga() {
     yield [
@@ -49,5 +50,6 @@ export default function* rootSaga() {
         egenansattSagas(),
         tilgangSagas(),
         tidslinjerSagas(),
+        soknaderSagas(),
     ];
 }

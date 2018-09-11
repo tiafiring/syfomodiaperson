@@ -6,16 +6,17 @@ import SoknadTeasere from './SoknaderTeasere';
 import PlanlagteTeasere from './PlanlagteTeasere';
 import { SENDT, TIL_SENDING, UTGAATT, NY, UTKAST_TIL_KORRIGERING, FREMTIDIG, AVBRUTT } from '../../enums/sykepengesoknadstatuser';
 import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sykepengesoknadUtils';
-import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes';
+import { soknad as soknadPt, sykepengesoknad as sykepengesoknadPt } from '../../propTypes';
 
-const Soknader = ({ fnr, sykepengesoknader = [] }) => {
-    const nyeSoknader = sykepengesoknader.filter((soknad) => {
+const Soknader = ({ fnr, sykepengesoknader = [], soknader = [] }) => {
+    const alleSoknader = [...sykepengesoknader, ...soknader];
+    const nyeSoknader = alleSoknader.filter((soknad) => {
         return soknad.status === NY || soknad.status === UTKAST_TIL_KORRIGERING;
     }).sort(sorterEtterOpprettetDato);
-    const sendteSoknader = sykepengesoknader.filter((soknad) => {
+    const sendteSoknader = alleSoknader.filter((soknad) => {
         return soknad.status === SENDT || soknad.status === TIL_SENDING || soknad.status === UTGAATT || soknad.status === AVBRUTT;
     }).sort(sorterEtterPerioder);
-    const kommendeSoknader = sykepengesoknader.filter((soknad) => {
+    const kommendeSoknader = alleSoknader.filter((soknad) => {
         return soknad.status === FREMTIDIG;
     }).sort(sorterEtterPerioder).reverse();
 
@@ -53,6 +54,7 @@ const Soknader = ({ fnr, sykepengesoknader = [] }) => {
 
 Soknader.propTypes = {
     sykepengesoknader: PropTypes.arrayOf(sykepengesoknadPt),
+    soknader: PropTypes.arrayOf(soknadPt),
     fnr: PropTypes.string,
 };
 

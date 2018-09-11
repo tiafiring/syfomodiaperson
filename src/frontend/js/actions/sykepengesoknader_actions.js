@@ -16,3 +16,10 @@ export function hentSykepengesoknader(fnr) {
         fnr,
     };
 }
+
+export function sykepengesoknaderHentet(data) {
+    return {
+        type: 'SYKEPENGESOKNADER_HENTET',
+        data,
+    };
+}

@@ -68,12 +68,12 @@ export const VisningSykmeldt = ({ navbruker }) => {
     ]);
     const ER_MIDLERTIDIG_ADRESSE = false;
     const ER_IKKE_POSTADRESSE = false;
-    const valgteElementerAdresse = (({ folkeregistrert, postadresse, midlertidigAdresse }) => ({ folkeregistrert, postadresse, midlertidigAdresse }))({
+    const valgteElementerAdresse = (({ folkeregistrert, postadresse, midlertidigAdresse }) => { return { folkeregistrert, postadresse, midlertidigAdresse }; })({
         folkeregistrert: formatterNorskAdresse(navbruker.bostedsadresse, ER_MIDLERTIDIG_ADRESSE),
         postadresse: formatterUstrukturertAdresse(navbruker.postAdresse, ER_IKKE_POSTADRESSE),
         midlertidigAdresse: finnMidlertidigAdresseTekst(navbruker),
     });
-    const valgteElementerKontaktinfo = (({ tlf, epost, fnr }) => ({ tlf, epost, fnr }))(navbruker.kontaktinfo);
+    const valgteElementerKontaktinfo = (({ tlf, epost, fnr }) => { return { tlf, epost, fnr }; })(navbruker.kontaktinfo);
     const valgteElementer = Object.assign({}, valgteElementerKontaktinfo, valgteElementerAdresse);
     return (<div className="personkort__visning visningSykmeldt">
         <PersonkortVisningElement
@@ -107,7 +107,7 @@ export const VisningLeder = ({ ledere }) => {
             </p>
             :
             ledere.map((leder, idx) => {
-                const valgteElementer = (({ navn, epost, tlf, orgnummer, fomDato, arbeidsgiverForskuttererLoenn }) => ({ navn, epost, tlf, orgnummer, fomDato, arbeidsgiverForskuttererLoenn }))(Object.assign({}, leder, {
+                const valgteElementer = (({ navn, epost, tlf, orgnummer, fomDato, arbeidsgiverForskuttererLoenn }) => { return { navn, epost, tlf, orgnummer, fomDato, arbeidsgiverForskuttererLoenn }; })(Object.assign({}, leder, {
                     fomDato: leder.fomDato && restdatoTildato(leder.fomDato),
                     arbeidsgiverForskuttererLoenn: kanskjeBooleanTilJaNeiKanskje(leder.arbeidsgiverForskuttererLoenn),
                 }));
@@ -145,8 +145,8 @@ export const VisningLege = ({ fastleger }) => {
         ['telefon', getLedetekst('modiafront.personkort.visning.nokkeltekster.tlf')],
     ]);
     const aktivFastlege = fastleger.aktiv;
-    const valgteElementerKontor = aktivFastlege.fastlegekontor && (({ navn, telefon }) => ({ navn, telefon }))(aktivFastlege.fastlegekontor);
-    const valgteElementerPasientforhold = aktivFastlege.pasientforhold && (({ fom }) => ({ fom }))(Object.assign({}, aktivFastlege.pasientforhold, {
+    const valgteElementerKontor = aktivFastlege.fastlegekontor && (({ navn, telefon }) => { return { navn, telefon }; })(aktivFastlege.fastlegekontor);
+    const valgteElementerPasientforhold = aktivFastlege.pasientforhold && (({ fom }) => { return { fom }; })(Object.assign({}, aktivFastlege.pasientforhold, {
         fom: aktivFastlege.pasientforhold.fom && restdatoTildato(aktivFastlege.pasientforhold.fom),
     }));
     const valgteElementer = Object.assign({}, valgteElementerPasientforhold, valgteElementerKontor);
@@ -204,7 +204,7 @@ export const VisningEnhet = ({ behandlendeEnhet }) => {
     const informasjonNokkelTekster = new Map([
         ['enhetId', getLedetekst('modiafront.personkort.visning.nokkeltekster.enhet')],
     ]);
-    const valgteElementer = (({ enhetId }) => ({ enhetId }))(behandlendeEnhet);
+    const valgteElementer = (({ enhetId }) => { return { enhetId }; })(behandlendeEnhet);
     return (<div className="personkort__visning visningEnhet">
         <PersonkortVisningElement
             tittel={behandlendeEnhet.navn}

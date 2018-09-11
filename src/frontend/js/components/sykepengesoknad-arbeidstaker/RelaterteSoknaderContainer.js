@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toDatePrettyPrint, getLedetekst } from 'digisyfo-npm';
 import { Link } from 'react-router';
-import { getTidligsteSendtDato, sorterEtterDato } from '../../../utils/sykepengesoknadUtils';
-import { sykepengesoknad as sykepengesoknadPt } from '../../../propTypes';
+import { getTidligsteSendtDato, sorterEtterDato } from '../../utils/sykepengesoknadUtils';
+import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
 
 const RelaterteSoknader = ({ relaterteSoknader, fnr }) => {
     if (relaterteSoknader.length === 0) {

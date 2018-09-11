@@ -3,12 +3,11 @@ import {
     getLedetekst,
     toDatePrettyPrint,
     Hjelpetekst,
-    Varselstripe,
     SykmeldingNokkelOpplysning,
 } from 'digisyfo-npm';
 import KnappBase from 'nav-frontend-knapper';
-import { SENDT, TIL_SENDING, KORRIGERT } from '../../../enums/sykepengesoknadstatuser';
-import { sykepengesoknad as sykepengesoknadPt } from '../../../propTypes';
+import { SENDT, TIL_SENDING, KORRIGERT } from '../../enums/sykepengesoknadstatuser';
+import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
 
 const getSendtTilSuffix = (sykepengesoknad) => {
     if (sykepengesoknad.sendtTilArbeidsgiverDato && sykepengesoknad.sendtTilNAVDato) {
@@ -168,21 +167,17 @@ Knapperad.propTypes = {
 export const Statuspanel = ({ sykepengesoknad }) => {
     const sendtTilBeggeMenIkkeSamtidig = sykepengesoknad.sendtTilNAVDato && sykepengesoknad.sendtTilArbeidsgiverDato && sykepengesoknad.sendtTilNAVDato.getTime() !== sykepengesoknad.sendtTilArbeidsgiverDato.getTime();
     return (<div className="panel panel--komprimert blokk">
-        <Varselstripe type="suksess">
-            <div>
-                <div>
-                    {
-                        (() => {
-                            if (sendtTilBeggeMenIkkeSamtidig) {
-                                return <SendtUlikt sykepengesoknad={sykepengesoknad} />;
-                            }
-                            return <SendtLikt sykepengesoknad={sykepengesoknad} />;
-                        })()
+        <div>
+            {
+                (() => {
+                    if (sendtTilBeggeMenIkkeSamtidig) {
+                        return <SendtUlikt sykepengesoknad={sykepengesoknad} />;
                     }
-                </div>
-                <Knapperad sykepengesoknad={sykepengesoknad} />
-            </div>
-        </Varselstripe>
+                    return <SendtLikt sykepengesoknad={sykepengesoknad} />;
+                })()
+            }
+        </div>
+        <Knapperad sykepengesoknad={sykepengesoknad} />
     </div>);
 };
 

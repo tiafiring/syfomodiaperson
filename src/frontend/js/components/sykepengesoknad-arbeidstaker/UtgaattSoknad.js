@@ -1,7 +1,7 @@
 import React from 'react';
 import { getLedetekst, Varselstripe } from 'digisyfo-npm';
-import SykmeldingUtdrag from './SykmeldingUtdrag';
-import { sykepengesoknad as sykepengesoknadPt } from '../../../propTypes';
+import SykmeldingUtdrag from '../sykepengesoknad-felles/SykmeldingUtdrag';
+import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
 
 const UtgaattSoknad = ({ sykepengesoknad }) => {
     return (<div>

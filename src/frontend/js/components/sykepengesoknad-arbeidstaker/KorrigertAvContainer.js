@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Varselstripe, getLedetekst, toDatePrettyPrint } from 'digisyfo-npm';
-import { sykepengesoknad as sykepengesoknadPt } from '../../../propTypes';
-import { getTidligsteSendtDato } from '../../../utils/sykepengesoknadUtils';
+import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
+import { getTidligsteSendtDato } from '../../utils/sykepengesoknadUtils';
 
 export const KorrigertAv = ({ korrigertAvSoknad }) => {
     return (<div className="panel panel--komprimert blokk">

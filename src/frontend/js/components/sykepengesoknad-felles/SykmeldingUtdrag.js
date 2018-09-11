@@ -7,7 +7,7 @@ import {
     SykmeldingNokkelOpplysning,
     toDatePrettyPrint,
 } from 'digisyfo-npm';
-import { sykepengesoknad as sykepengesoknadPt } from '../../../propTypes';
+import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
 
 
 const SykmeldingUtdrag = ({ erApen, sykepengesoknad }) => {

@@ -32,9 +32,11 @@ const PlanlagtTeaser = ({ soknad }) => {
                         })
                     }
                 </p>
-                <p className="inngangspanel__undertekst js-undertekst mute">
-                    {soknad.arbeidsgiver.navn}
-                </p>
+                {
+                    soknad.arbeidsgiver && (<p className="inngangspanel__undertekst js-undertekst mute">
+                        {soknad.arbeidsgiver.navn}
+                    </p>)
+                }
             </div>
         </div>
     </article>);

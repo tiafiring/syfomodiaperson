@@ -3,7 +3,7 @@ import { Panel } from 'nav-frontend-paneler';
 import { Varselstripe } from 'digisyfo-npm';
 import PropTypes from 'prop-types';
 
-const S = ({ brukernavn }) => {
+const Speilingvarsel = ({ brukernavn }) => {
     return (<Panel className="blokk--s">
         <Varselstripe type="spesial" ikon="/sykefravaer/img/svg/speiling.svg">
             <p>Dette er slik {brukernavn} ser det på nav.no</p>
@@ -11,8 +11,8 @@ const S = ({ brukernavn }) => {
     </Panel>);
 };
 
-S.propTypes = {
+Speilingvarsel.propTypes = {
     brukernavn: PropTypes.string,
 };
 
-export default S;
+export default Speilingvarsel;
