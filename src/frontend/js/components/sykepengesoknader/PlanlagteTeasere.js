@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PlanlagtTeaser from './PlanlagtTeaser';
-import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes';
+import { soknadEllerSykepengesoknad } from '../../propTypes';
 
 const PlanlagteTeasere = ({ sykepengesoknader, tittel = '' }) => {
     return (<div className="blokk--l">
@@ -20,7 +20,7 @@ const PlanlagteTeasere = ({ sykepengesoknader, tittel = '' }) => {
 };
 
 PlanlagteTeasere.propTypes = {
-    sykepengesoknader: PropTypes.arrayOf(sykepengesoknadPt),
+    sykepengesoknader: PropTypes.arrayOf(soknadEllerSykepengesoknad),
     tittel: PropTypes.string,
 };
 

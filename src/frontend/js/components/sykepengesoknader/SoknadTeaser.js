@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { Link } from 'react-router';
-import { getLedetekst, toDatePrettyPrint, sykepengesoknadstatuser } from 'digisyfo-npm';
-import { soknadEllerSykepengesoknad } from '../../propTypes';
-import { OPPHOLD_UTLAND, SELVSTENDIGE_OG_FRILANSERE } from '../../enums/soknadstyper';
+import { getLedetekst, toDatePrettyPrint, sykepengesoknadstatuser, tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from 'digisyfo-npm';
+import { sykepengesoknad as sykepengesoknadPt, soknadEllerSykepengesoknad } from '../../propTypes';
+import { getSendtTilSuffix, erSendtTilBeggeMenIkkeSamtidig } from '../../utils/sykepengesoknadUtils';
+import { OPPHOLD_UTLAND, SELVSTENDIGE_OG_FRILANSERE } from '../../enums/soknadtyper';
 
 const { NY, SENDT, TIL_SENDING, UTKAST_TIL_KORRIGERING, AVBRUTT } = sykepengesoknadstatuser;
 
@@ -25,96 +25,46 @@ export const SendtUlikt = ({ soknad }) => {
 };
 
 SendtUlikt.propTypes = {
-    soknad: soknadEllerSykepengesoknad,
+    soknad: sykepengesoknadPt.isRequired,
 };
 
-export const erSendtTilBeggeMenIkkeSamtidig = (sykepengesoknad) => {
-    return sykepengesoknad.sendtTilNAVDato
-        && sykepengesoknad.sendtTilArbeidsgiverDato
-        && sykepengesoknad.sendtTilNAVDato.getTime() !== sykepengesoknad.sendtTilArbeidsgiverDato.getTime();
+const visIkon = (soknadstype) => {
+    return soknadstype === OPPHOLD_UTLAND
+        ? (<img alt="" className="js-ikon" src="/sykefravaer/img/svg/globe.svg" />)
+        : <img alt="" className="js-ikon" src="/sykefravaer/img/svg/soknader.svg" />;
 };
 
-export const getSendtTilSuffix = (sykepengesoknad) => {
-    if (sykepengesoknad.sendtTilArbeidsgiverDato && sykepengesoknad.sendtTilNAVDato) {
-        return '.til-arbeidsgiver-og-nav';
-    }
-    if (sykepengesoknad.sendtTilArbeidsgiverDato) {
-        return '.til-arbeidsgiver';
-    }
-    if (sykepengesoknad.sendtTilNAVDato) {
-        return '.til-nav';
-    }
-    return '';
-};
-
-const TeaserStatus = ({ soknad }) => {
-    const vis = soknad.status !== NY && soknad.status !== SENDT && soknad.status !== AVBRUTT;
-    return vis
-        ? (<p className="inngangspanel__status js-status">
-            {
-                getLedetekst(`soknad.teaser.status.${soknad.status}`, {
-                    '%DATO%': toDatePrettyPrint(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
-                })
-            }
-        </p>)
-        : null;
-};
-
-TeaserStatus.propTypes = {
-    soknad: soknadEllerSykepengesoknad,
-};
-
-const TeaserHeader = ({ soknad }) => {
-    return (<header className="inngangspanel__header">
-        <h3 className="js-title" id={`soknad-header-${soknad.id}`}>
-            <small className="inngangspanel__meta js-meta">
-                {getLedetekst('soknad.teaser.dato', { '%DATO%': toDatePrettyPrint(soknad.opprettetDato) })}
-            </small>
-            <span className="inngangspanel__tittel">
-                {getLedetekst('soknad.teaser.tittel')}
-            </span>
-        </h3>
-        <TeaserStatus soknad={soknad} />
-    </header>);
-};
-
-TeaserHeader.propTypes = {
-    soknad: soknadEllerSykepengesoknad,
+const visIkonHover = (soknadstype) => {
+    return soknadstype === OPPHOLD_UTLAND
+        ? (<img alt="" className="js-ikon" src="/sykefravaer/img/svg/globe-hover.svg" />)
+        : <img alt="" className="js-ikon" src="/sykefravaer/img/svg/soknader_hover-blue.svg" />;
 };
 
 const beregnUndertekst = (soknad) => {
+    const sendtTilBeggeMenIkkeSamtidig = erSendtTilBeggeMenIkkeSamtidig(soknad);
     if (soknad.status === AVBRUTT) {
         return getLedetekst('soknad.teaser.status.AVBRUTT', {
-            '%DATO%': toDatePrettyPrint(new Date(soknad.avbruttDato)),
+            '%DATO%': tilLesbarDatoMedArstall(soknad.avbruttDato),
         });
     }
-    if (soknad.status !== SENDT
-        && soknad.status !== TIL_SENDING
-        && !soknad.soknadstype) {
-        return getLedetekst('soknad.teaser.undertekst', {
-            '%ARBEIDSGIVER%': soknad.arbeidsgiver.navn,
-        });
+    if (soknad.status !== SENDT && soknad.status !== TIL_SENDING && !soknad.soknadstype) {
+        return getLedetekst('soknad.teaser.undertekst', { '%ARBEIDSGIVER%': soknad.arbeidsgiver.navn });
     }
-    if (erSendtTilBeggeMenIkkeSamtidig(soknad) && soknad.status !== NY) {
+    if (sendtTilBeggeMenIkkeSamtidig && soknad.status !== NY) {
         return <SendtUlikt soknad={soknad} />;
     }
     if (soknad.status === NY && soknad.soknadstype === OPPHOLD_UTLAND) {
         return null;
     }
     if (soknad.status !== NY && soknad.status !== UTKAST_TIL_KORRIGERING) {
-        if (
-            (soknad.soknadstype === OPPHOLD_UTLAND
-                || soknad.soknadstype === SELVSTENDIGE_OG_FRILANSERE)
-            && soknad.status === SENDT) {
+        if ((soknad.soknadstype === OPPHOLD_UTLAND || soknad.soknadstype === SELVSTENDIGE_OG_FRILANSERE) && soknad.status === SENDT) {
             return getLedetekst('soknad.teaser.status.SENDT.til-nav', {
-                '%DATO%': toDatePrettyPrint(soknad.innsendtDato),
+                '%DATO%': tilLesbarDatoMedArstall(soknad.innsendtDato),
             });
         }
         return getLedetekst(`soknad.teaser.status.${soknad.status}${getSendtTilSuffix(soknad)}`, {
-            '%DATO%': soknad.sendtTilArbeidsgiverDato
-                ? toDatePrettyPrint(new Date(soknad.sendtTilArbeidsgiverDato))
-                : toDatePrettyPrint(new Date(soknad.sendtTilNAVDato)),
-            '%ARBEIDSGIVER%': soknad.arbeidsgiver.navn,
+            '%DATO%': tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
+            '%ARBEIDSGIVER%': soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : null,
         });
     }
     return null;
@@ -122,79 +72,100 @@ const beregnUndertekst = (soknad) => {
 
 export const TeaserUndertekst = ({ soknad }) => {
     const tekst = beregnUndertekst(soknad);
-    return tekst
-        ? <p className="inngangspanel__undertekst js-undertekst mute">{tekst}</p>
-        : null;
+    return tekst ? (<p className="inngangspanel__undertekst js-undertekst mute">
+        {tekst}
+    </p>) : null;
 };
 
 TeaserUndertekst.propTypes = {
     soknad: soknadEllerSykepengesoknad,
 };
 
-const TeaserPeriode = ({ soknad }) => {
-    return (<p className="inngangspanel__tekst js-tekst">
+export const TeaserStatus = ({ soknad }) => {
+    const visStatus = [NY, SENDT, AVBRUTT].indexOf(soknad.status) === -1;
+    return visStatus ? (<p className="inngangspanel__status js-status">
         {
-            getLedetekst('soknad.teaser.tekst-2', {
-                '%FRA%': toDatePrettyPrint(soknad.fom),
-                '%TIL%': toDatePrettyPrint(soknad.tom),
+            getLedetekst(`soknad.teaser.status.${soknad.status}`, {
+                '%DATO%': tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
             })
         }
-    </p>);
+    </p>) : null;
+};
+
+TeaserStatus.propTypes = {
+    soknad: soknadEllerSykepengesoknad,
+};
+
+export const TeaserTittel = ({ soknad }) => {
+    return (<h3 className="js-title" id={`soknad-header-${soknad.id}`}>
+        <small className="inngangspanel__meta js-meta">
+            {
+                getLedetekst('soknad.teaser.dato', {
+                    '%DATO%':
+                        tilLesbarDatoMedArstall(
+                            soknad.soknadstype === OPPHOLD_UTLAND || soknad.soknadstype === SELVSTENDIGE_OG_FRILANSERE
+                                ? soknad.opprettetDato
+                                : soknad.tom,
+                        ),
+                })
+            }
+        </small>
+        <span className="inngangspanel__tittel">
+            {
+                getLedetekst(soknad.soknadstype === OPPHOLD_UTLAND
+                    ? 'soknad.utland.teaser.tittel'
+                    : 'soknad.teaser.tittel')
+            }
+        </span>
+    </h3>);
+};
+
+TeaserTittel.propTypes = {
+    soknad: soknadEllerSykepengesoknad,
+};
+
+export const TeaserPeriode = ({ soknad }) => {
+    return soknad.soknadstype !== OPPHOLD_UTLAND
+        ? (<p className="inngangspanel__tekst js-tekst">
+            {
+                getLedetekst('soknad.teaser.tekst', {
+                    '%PERIODE%': tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom),
+                })
+            }
+        </p>)
+        : null;
 };
 
 TeaserPeriode.propTypes = {
     soknad: soknadEllerSykepengesoknad,
 };
 
-class SoknadTeaser extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            ikon: 'soknader.svg',
-        };
-    }
-
-    onMouseEnter() {
-        this.setState({
-            ikon: 'soknader_hover-blue.svg',
-        });
-    }
-
-    onMouseLeave() {
-        this.setState({
-            ikon: 'soknader.svg',
-        });
-    }
-
-    render() {
-        const { soknad, fnr } = this.props;
-
-        return (<article aria-labelledby={`soknader-header-${soknad.id}`}>
-            <Link
-                className="inngangspanel js-panel"
-                to={`/sykefravaer/${fnr}/sykepengesoknader/${soknad.id}`}
-                onMouseEnter={() => {
-                    this.onMouseEnter();
-                }}
-                onMouseLeave={() => {
-                    this.onMouseLeave();
-                }}>
-                <span className="inngangspanel__ikon">
-                    <img className="js-ikon" src={`/sykefravaer/img/svg/${this.state.ikon}`} alt="inngangspanel" />
-                </span>
-                <div className="inngangspanel__innhold">
-                    <TeaserHeader soknad={soknad} />
-                    <TeaserPeriode soknad={soknad} />
-                    <TeaserUndertekst soknad={soknad} />
-                </div>
-            </Link>
-        </article>);
-    }
-}
-
-SoknadTeaser.propTypes = {
-    soknad: soknadEllerSykepengesoknad.isRequired,
-    fnr: PropTypes.string,
+const SykepengesoknadTeaser = ({ soknad, fnr }) => {
+    const status = soknad.status ? soknad.status.toLowerCase() : '';
+    return (<article aria-labelledby={`soknader-header-${soknad.id}`}>
+        <Link
+            className={`inngangspanel js-panel js-soknad-${status}`}
+            to={`/sykefravaer/${fnr}/sykepengesoknader/${soknad.id}`}>
+            <span className="inngangspanel__ikon inngangspanel__ikon--normal">
+                {visIkon(soknad.soknadstype)}
+            </span>
+            <span className="inngangspanel__ikon inngangspanel__ikon--hover">
+                {visIkonHover(soknad.soknadstype)}
+            </span>
+            <div className="inngangspanel__innhold">
+                <header className="inngangspanel__header">
+                    <TeaserTittel soknad={soknad} />
+                    <TeaserStatus soknad={soknad} />
+                </header>
+                <TeaserPeriode soknad={soknad} />
+                <TeaserUndertekst soknad={soknad} />
+            </div>
+        </Link>
+    </article>);
 };
 
-export default SoknadTeaser;
+SykepengesoknadTeaser.propTypes = {
+    soknad: soknadEllerSykepengesoknad,
+};
+
+export default SykepengesoknadTeaser;

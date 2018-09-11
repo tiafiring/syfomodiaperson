@@ -1,7 +1,3 @@
-.inngangspanel {
-    background-color: @white;
-}
-
 .inngangspanelerHeader {
     .mixin-panel-padding();
     display: flex;
@@ -9,7 +5,9 @@
     padding-top: 1.25em;
     padding-bottom: 1.25em;
     margin-bottom: 1px;
+    display: flex;
     background: @white;
+    margin-bottom: 1px;
 }
 
 .inngangspanelerHeader__tittel {
@@ -19,16 +17,27 @@
     align-self: center;
 }
 
+.inngangspanelerHeader__verktoy {
+    .typo-normal-mixin();
+}
+
 .inngangspanel:extend(.panel) {
+    background: @white;
     margin-bottom: 1px;
     padding-right: 3em;
-    background-size: 1em 1em;
+    background-image: data-uri("../img/svg/pil-videre-graa.svg");
+    background-repeat: no-repeat;
+    background-position: 97% 2em;
+    background-size: 1rem 1em;
     transition: background-position ease-in-out .1s;
     transform: translate3d(0, 0, 0);
     display: flex;
     width: 100%;
     color: @navMorkGra;
     border-bottom-width: 0;
+    font-size: 1em;
+    text-align: left;
+    border: 0;
 
     &:hover, &:focus {
         position: relative;
@@ -45,34 +54,78 @@
     }
 
     &:hover {
-        box-shadow: #ccc 0 0 4px 2px;
-    }
-    &:active, &:focus {
-        .inngangspanel__undertekst {
-            color: @navDypBla;
-        }
+        background-image: data-uri("../img/svg/pil-videre-blaa.svg");
+        box-shadow: #ccc 0 0 4px 2px; /* hentet fra saksoversikt */
     }
 
-    p {
-        margin-top: 0;
-        margin-bottom: .5em;
-        .typo-normal-mixin();
+    @media(min-width: 20em) {
+        background-position: 97% 35px;
     }
+}
 
+.inngangspanel {
     .inngangspanel__undertekst {
         .typo-normal-mixin();
+        margin-bottom: 0;
     }
 
     .inngangspanel__tekst {
         margin-bottom: 1.25em;
-
-        &:last-child {
-            margin-bottom: 0;
-        }
     }
 
-    @media(min-width: @screen-sm-min) {
-        background-position: 97% 35px;
+    .inngangspanel__tekst:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.inngangspanel--inaktivt, .inngangspanel--inaktivt:hover {
+    background-image: none;
+    color: @navGra60;
+
+    .inngangspanel__status {
+        color: @navMorkGra;
+    }
+}
+
+.inngangspanel--ekstern {
+    border: 5px solid #669db4;
+    background-position: 97% center;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 5px @grayBackground, 0 0 0 10px @orangeFocus;
+    }
+
+    .inngangspanel__tittel {
+        margin-bottom: 0;
+    }
+
+    .inngangspanel__innhold {
+        align-self: center;
+    }
+}
+
+.inaktivtInngangspanel__inner {
+    color: @navGra60;
+    display: flex;
+    width: 100%;
+
+    .inngangspanel__status {
+        color: @navMorkGra;
+    }
+}
+
+.inngangspanel__innhold .mute {
+    color: @navGra60;
+}
+
+.inngangspanel--sykmelding .inngangspanel__tekst {
+    p {
+        margin-top: 0;
+        margin-bottom: .5em;
+        .typo-normal-mixin();
     }
 }
 
@@ -80,13 +133,9 @@
     display: none;
 }
 
-@media(min-width: @screen-sm-min) {
+@media(min-width: 20em) {
     .inngangspanel__innhold {
         flex: 1;
-
-        .mute {
-            color: @navGra60;
-        }
     }
 
     .inngangspanel__header {
@@ -98,7 +147,17 @@
     }
 }
 
-@media(min-width: @screen-sm-min) {
+@media(min-width: 25em) {
+
+    .inngangspanelerHeader__verktoy {
+        display: flex;
+    }
+
+    .inngangspanelerHeader__verktoyLabel {
+        margin-bottom: 0;
+        align-self: center;
+        margin-right: .5em;
+    }
 
     .inngangspanel__ikon {
         display: block;
@@ -112,6 +171,18 @@
             height: auto;
         }
     }
+
+    .inngangspanel__ikon--hover {
+        display: none;
+    }
+
+    .inngangspanel:hover .inngangspanel__ikon--hover {
+        display: block;
+    }
+
+    .inngangspanel:hover .inngangspanel__ikon--normal {
+        display: none;
+    }
 }
 
 .inngangspanel__meta {
@@ -122,6 +193,7 @@
 
 .inngangspanel__header h3 {
     margin: 0;
+    font-size: 1em;
 }
 
 .inngangspanel__tittel {
@@ -133,13 +205,12 @@
 }
 
 .inngangspanel__status {
-    margin-right: 1em;
     .typo-normal-mixin();
+    padding-right: 8px;
     margin-bottom: 8px;
 }
 
 .inngangspanel__punktliste {
     margin: 0;
     padding-left: 1em;
-    line-height: 1.4;
 }

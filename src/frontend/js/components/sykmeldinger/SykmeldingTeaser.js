@@ -1,27 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { toDatePrettyPrint, getLedetekst, sykmeldingstatuser } from 'digisyfo-npm';
+import { getLedetekst, tidligsteFom, senesteTom, sykmeldingstatuser, tilLesbarPeriodeMedArstall } from 'digisyfo-npm';
 import SykmeldingPeriodeInfo from './SykmeldingPeriodeInfo';
-import PilHoyre from '../../ikoner/PilHoyre';
+import { sykmelding as sykmeldingPt, sykmeldingperiode } from '../../propTypes';
 
-const PeriodeListe = ({ perioder, arbeidsgiver, ledetekster }) => {
-    return (<ul className="inngangspanel__punktliste js-perioder">
-        { perioder.map((periode, index) => {
-            return (<SykmeldingPeriodeInfo
-                key={index}
-                periode={periode}
-                arbeidsgiver={arbeidsgiver}
-                Element="li"
-                ledetekster={ledetekster} />);
+const PeriodeListe = ({ perioder, arbeidsgiver }) => {
+    return (<ul className="teaser-punktliste js-perioder">
+        {perioder.map((periode, index) => {
+            return (<SykmeldingPeriodeInfo key={index} periode={periode} arbeidsgiver={arbeidsgiver} Element="li" />);
         })}
     </ul>);
 };
 
 PeriodeListe.propTypes = {
     arbeidsgiver: PropTypes.string,
-    ledetekster: PropTypes.object,
-    perioder: PropTypes.array,
+    perioder: PropTypes.arrayOf(sykmeldingperiode),
 };
 
 class SykmeldingTeaser extends Component {
@@ -29,34 +23,30 @@ class SykmeldingTeaser extends Component {
         super(props);
         this.state = {
             ikon: 'sykmeldinger.svg',
-            farge: '#3E3832',
         };
     }
 
     onMouseEnter() {
         this.setState({
             ikon: 'sykmeldinger_hover-blue.svg',
-            farge: '#005B82',
         });
     }
 
     onMouseLeave() {
         this.setState({
             ikon: 'sykmeldinger.svg',
-            farge: '#3E3832',
         });
     }
 
     render() {
-        const { sykmelding, ledetekster, fnr } = this.props;
+        const { sykmelding } = this.props;
         const antallPerioder = sykmelding.mulighetForArbeid.perioder.length;
-        const sistePeriodeIndex = antallPerioder - 1;
         const visStatus = sykmelding.status !== sykmeldingstatuser.NY;
 
-        return (<article aria-labelledby={`sykmelding-header-${sykmelding.id}`}>
+        return (<article aria-labelledby={`sykmelding-header-${this.props.sykmelding.id}`}>
             <Link
-                className="inngangspanel"
-                to={`/sykefravaer/${fnr}/sykmeldinger/${sykmelding.id}`}
+                className="inngangspanel inngangspanel--sykmelding"
+                to={`/sykefravaer/${this.props.fnr}/sykmeldinger/${this.props.sykmelding.id}`}
                 onMouseEnter={() => {
                     this.onMouseEnter();
                 }}
@@ -64,44 +54,41 @@ class SykmeldingTeaser extends Component {
                     this.onMouseLeave();
                 }}>
                 <span className="inngangspanel__ikon">
-                    <img src={`/sykefravaer/img/svg/${this.state.ikon}`} alt="inngangspanel" />
+                    <img alt="" src={`/sykefravaer/img/svg/${this.state.ikon}`} />
                 </span>
                 <div className="inngangspanel__innhold">
                     <header className="inngangspanel__header">
-                        <h3 className="js-title" id={`sykmelding-header-${sykmelding.id}`}>
-                            <small className="inngangspanel__meta">{getLedetekst('sykmelding.teaser.dato', ledetekster, {
-                                '%FOM%': toDatePrettyPrint(sykmelding.mulighetForArbeid.perioder[0].fom),
-                                '%TOM%': toDatePrettyPrint(sykmelding.mulighetForArbeid.perioder[sistePeriodeIndex].tom),
-                            })} </small>
+                        <h3 className="js-title" id={`sykmelding-header-${this.props.sykmelding.id}`}>
+                            <small className="inngangspanel__meta">
+                                {tilLesbarPeriodeMedArstall(tidligsteFom(sykmelding.mulighetForArbeid.perioder), senesteTom(sykmelding.mulighetForArbeid.perioder))}
+                            </small>
                             <span className="inngangspanel__tittel">
-                                {getLedetekst('sykmelding.teaser.tittel', ledetekster)}
+                                {getLedetekst('sykmelding.teaser.tittel')}
                             </span>
                         </h3>
                         {
-                            visStatus && <p className="inngangspanel__status">{getLedetekst(`sykmelding.teaser.status.${sykmelding.status}`, ledetekster)}</p>
+                            visStatus && <p className="inngangspanel__status">{getLedetekst(`sykmelding.teaser.status.${sykmelding.status}`)}</p>
                         }
                     </header>
-                    {antallPerioder === 1 ?
-                        (<SykmeldingPeriodeInfo
-                            periode={sykmelding.mulighetForArbeid.perioder[0]}
-                            arbeidsgiver={sykmelding.innsendtArbeidsgivernavn}
-                            ledetekster={ledetekster} />)
-                        : (<PeriodeListe
-                            perioder={sykmelding.mulighetForArbeid.perioder}
-                            arbeidsgiver={sykmelding.innsendtArbeidsgivernavn}
-                            ledetekster={ledetekster} />)
-                    }
+                    <div className="inngangspanel__tekst">
+                        {antallPerioder === 1 ?
+                            (<SykmeldingPeriodeInfo
+                                periode={sykmelding.mulighetForArbeid.perioder[0]}
+                                arbeidsgiver={sykmelding.innsendtArbeidsgivernavn} />)
+                            : (<PeriodeListe
+                                perioder={sykmelding.mulighetForArbeid.perioder}
+                                arbeidsgiver={sykmelding.innsendtArbeidsgivernavn} />)
+                        }
+                    </div>
                 </div>
-                <PilHoyre farge={this.state.farge} />
             </Link>
         </article>);
     }
 }
 
 SykmeldingTeaser.propTypes = {
-    sykmelding: PropTypes.object.isRequired,
+    sykmelding: sykmeldingPt,
     fnr: PropTypes.string,
-    ledetekster: PropTypes.object,
 };
 
 export default SykmeldingTeaser;

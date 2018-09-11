@@ -13,7 +13,7 @@ import { sykepengesoknad as sykepengesoknadPt, soknad as soknadPt } from '../pro
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { erDev } from '../selectors/toggleSelectors';
 import SykepengesoknadArbeidstaker from '../components/sykepengesoknad-arbeidstaker/SykepengesoknadArbeidstaker';
-import { OPPHOLD_UTLAND, SELVSTENDIGE_OG_FRILANSERE } from '../enums/soknadstyper';
+import { OPPHOLD_UTLAND, SELVSTENDIGE_OG_FRILANSERE } from '../enums/soknadtyper';
 import SykepengesoknadSelvstendig from '../components/sykepengesoknad-selvstendig/SykepengesoknadSelvstendig';
 import SykepengesoknadUtland from '../components/sykepengesoknad-utland/SykepengesoknadUtland';
 

@@ -6,12 +6,12 @@ import SidetoppSpeilet from '../SidetoppSpeilet';
 import TilbakeTilSoknader from './TilbakeTilSoknader';
 import { brodsmule } from '../../propTypes/index';
 
-const SoknadSpeiling = ({ fnr, brukernavn, children, brodsmuler }) => {
+const SoknadSpeiling = ({ fnr, brukernavn, children, brodsmuler, tittel = 'Søknad om sykepenger' }) => {
     return (<div>
         <Speilingvarsel brukernavn={brukernavn} />
         <div className="speiling">
             <Brodsmuler brodsmuler={brodsmuler} />
-            <SidetoppSpeilet tittel="Søknad om sykepenger" />
+            <SidetoppSpeilet tittel={tittel} />
             <div className="blokk">
                 {children}
             </div>
@@ -25,6 +25,7 @@ SoknadSpeiling.propTypes = {
     brukernavn: PropTypes.string,
     children: PropTypes.node,
     brodsmuler: PropTypes.arrayOf(brodsmule),
+    tittel: PropTypes.string,
 };
 
 export default SoknadSpeiling;
