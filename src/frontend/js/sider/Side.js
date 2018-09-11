@@ -21,10 +21,10 @@ const Side = ({ tittel = '', children, aktivtMenypunkt, fnr }) => {
                 </Column>
             </Row>
             <Row>
-                <nav className="col-xs-12 col-sm-4">
+                <nav className="col-xs-12 col-sm-3">
                     <GlobalNavigasjonContainer fnr={fnr} aktivtMenypunkt={aktivtMenypunkt} />
                 </nav>
-                <Column className="col-xs-12 col-sm-8">
+                <Column className="col-xs-12 col-sm-9">
                     {children}
                 </Column>
             </Row>
