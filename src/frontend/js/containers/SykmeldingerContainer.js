@@ -8,11 +8,12 @@ import SidetoppSpeilet from '../components/SidetoppSpeilet';
 import * as actionCreators from '../actions/sykmeldinger_actions';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
-import DineSykmeldinger from '../sykmeldinger/sykmeldinger/DineSykmeldinger';
+import DineSykmeldinger from '../components/sykmeldinger/DineSykmeldinger';
 import Brodsmuler from '../components/Brodsmuler';
 import { SYKMELDINGER } from '../menypunkter';
 import Speilingvarsel from '../components/Speilingvarsel';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
+import { toggleMockSoknader } from '../selectors/toggleSelectors';
 
 export class SykmeldingerSide extends Component {
     componentWillMount() {
@@ -37,13 +38,13 @@ export class SykmeldingerSide extends Component {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (!tilgang.harTilgang) {
+                    if (!tilgang.harTilgang && !toggleMockSoknader()) {
                         return (<Feilmelding
                             tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
                             melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
                         />);
                     }
-                    if (hentingFeilet) {
+                    if (hentingFeilet && !toggleMockSoknader()) {
                         return <Feilmelding />;
                     }
                     return (<div>

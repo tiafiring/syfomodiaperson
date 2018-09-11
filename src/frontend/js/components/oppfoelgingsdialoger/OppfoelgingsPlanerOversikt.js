@@ -4,8 +4,8 @@ import { Link } from 'react-router';
 import {
     getLedetekst,
     toDatePrettyPrint,
-    Varselstripe,
 } from 'digisyfo-npm';
+import Alertstripe from 'nav-frontend-alertstriper';
 
 const finnAntallOppgaver = (dialog) => {
     return dialog.oppgaver.filter((oppgave) => {
@@ -41,9 +41,9 @@ export class OppfoelgingsPlanerOversikt extends Component {
         return (<div>
             <div className="blokk--l">
                 <h2>{getLedetekst('fss.oppfoelgingsdialog.oversikt.aktuelle')}</h2>
-                {aktiveDialoger.length === 0 && <div className="panel varselstripe--override"><Varselstripe>
+                {aktiveDialoger.length === 0 && <Alertstripe type="info">
                     <p>{getLedetekst('fss.oppfoelgingsdialog.oversikt.aktuelle--ingen')}</p>
-                </Varselstripe></div>}
+                </Alertstripe>}
                 {
                     aktiveDialoger.map((dialog, index) => {
                         const antallOppgaver = finnAntallOppgaver(dialog);
@@ -58,9 +58,9 @@ export class OppfoelgingsPlanerOversikt extends Component {
                 }
             </div>
             <h2>{getLedetekst('fss.oppfoelgingsdialog.oversikt.inaktive')}</h2>
-            {inaktiveDialoger.length === 0 && <div className="panel varselstripe--override"><Varselstripe>
+            {inaktiveDialoger.length === 0 && <Alertstripe type="info">
                 <p>{getLedetekst('fss.oppfoelgingsdialog.oversikt.inaktive--ingen')}</p>
-            </Varselstripe></div>}
+            </Alertstripe>}
             {
                 inaktiveDialoger.map((dialog, index) => {
                     const antallOppgaver = finnAntallOppgaver(dialog);

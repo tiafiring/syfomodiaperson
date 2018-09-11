@@ -41,3 +41,4 @@ Statuspanel.propTypes = {
 };
 
 export default Statuspanel;
+

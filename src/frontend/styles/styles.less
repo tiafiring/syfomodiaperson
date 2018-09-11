@@ -54,7 +54,7 @@
 @import "_temp_hode";
 @import "_typografi";
 @import "_utils";
-@import "_varselstripe";
+@import "_statuspanel";
 @import "_utvidbar";
 @import "_digisyfonpm-komponenter";
 
@@ -68,12 +68,12 @@ body {
 }
 
 .mixin-panel-padding() {
-    padding-left: 1rem; 
-    padding-right: 1rem; 
+    padding-left: 1rem;
+    padding-right: 1rem;
 
     @media(min-width: @screen-sm-min) {
-        padding-left: 2rem; 
-        padding-right: 2rem; 
+        padding-left: 2rem;
+        padding-right: 2rem;
     }
 }
 
@@ -87,12 +87,12 @@ body {
 
     // Brukes på redaktørstyrt HTML.
 
-    line-height: 1.6; 
+    line-height: 1.6;
 
     h2, h3, h4 {
         .typo-element-mixin();
         margin-top: 20px;
-        margin-bottom: 0; 
+        margin-bottom: 0;
     }
   .lenke--disabled {
     color: @navGra60;

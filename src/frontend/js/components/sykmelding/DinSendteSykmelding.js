@@ -5,17 +5,12 @@ import {
     DineSykmeldingOpplysninger,
     getLedetekst,
 } from 'digisyfo-npm';
-import StatusPanel from './StatusPanel';
-import { STATUS, INNSENDT_DATO } from './NokkelOpplysningerEnum';
 import ArbeidsgiversSykmelding from './ArbeidsgiversSykmelding';
+import SykmeldingStatuspanel from '../sykmeldingstatuspanel/SykmeldingStatuspanel';
 
-const DinBekreftedeSykmelding = ({ dinSykmelding, arbeidsgiversSykmelding, ledetekster }) => {
+const DinSendteSykmelding = ({ dinSykmelding, ledetekster, arbeidsgiversSykmelding }) => {
     return (<div>
-        <StatusPanel
-            sykmelding={dinSykmelding}
-            ledetekster={ledetekster}
-            type="suksess"
-            nokkelopplysninger={[[STATUS, INNSENDT_DATO]]} />
+        <SykmeldingStatuspanel sykmelding={dinSykmelding} />
         <Utvidbar
             className="blokk"
             erApen
@@ -27,18 +22,16 @@ const DinBekreftedeSykmelding = ({ dinSykmelding, arbeidsgiversSykmelding, ledet
             Overskrift="H2">
             <DineSykmeldingOpplysninger sykmelding={dinSykmelding} ledetekster={ledetekster} />
         </Utvidbar>
-        { dinSykmelding.valgtArbeidssituasjon === 'ARBEIDSTAKER' &&
-            <div className="blokk">
-                <ArbeidsgiversSykmelding sykmelding={arbeidsgiversSykmelding} ledetekster={ledetekster} />
-            </div>
-        }
+        <div className="blokk--l">
+            <ArbeidsgiversSykmelding sykmelding={arbeidsgiversSykmelding} ledetekster={ledetekster} />
+        </div>
     </div>);
 };
 
-DinBekreftedeSykmelding.propTypes = {
+DinSendteSykmelding.propTypes = {
     ledetekster: PropTypes.object,
     dinSykmelding: PropTypes.object,
     arbeidsgiversSykmelding: PropTypes.object,
 };
 
-export default DinBekreftedeSykmelding;
+export default DinSendteSykmelding;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Varselstripe } from 'digisyfo-npm';
+import Alertstripe from 'nav-frontend-alertstriper';
 import { konstanter, proptypes as moterPropTypes } from 'moter-npm';
 import AppSpinner from '../../components/AppSpinner';
 
@@ -23,11 +23,9 @@ Innhold.propTypes = {
 };
 
 const Feil = ({ melding = 'Beklager, det oppstod en feil' }) => {
-    return (<div className="blokk">
-        <Varselstripe type="feil" fylt>
-            <p>{melding}</p>
-        </Varselstripe>
-    </div>);
+    return (<Alertstripe type="feil" className="blokk">
+        <p>{melding}</p>
+    </Alertstripe>);
 };
 
 Feil.propTypes = {

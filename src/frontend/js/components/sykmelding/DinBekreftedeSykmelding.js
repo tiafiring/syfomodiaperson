@@ -5,20 +5,12 @@ import {
     DineSykmeldingOpplysninger,
     getLedetekst,
 } from 'digisyfo-npm';
-import StatusPanel from './StatusPanel';
 import ArbeidsgiversSykmelding from './ArbeidsgiversSykmelding';
-import { ARBEIDSGIVER, INNSENDT_DATO, ORGNUMMER, STATUS } from './NokkelOpplysningerEnum';
+import BekreftetSykmeldingStatuspanel from '../sykmeldingstatuspanel/BekreftetSykmeldingStatuspanel';
 
-const DinSendteSykmelding = ({ dinSykmelding, ledetekster, arbeidsgiversSykmelding }) => {
+const DinBekreftedeSykmelding = ({ dinSykmelding, arbeidsgiversSykmelding, ledetekster }) => {
     return (<div>
-        <StatusPanel
-            sykmelding={dinSykmelding}
-            ledetekster={ledetekster}
-            type="suksess"
-            nokkelopplysninger={[
-                [STATUS, INNSENDT_DATO],
-                [ARBEIDSGIVER, ORGNUMMER],
-            ]} />
+        <BekreftetSykmeldingStatuspanel sykmelding={dinSykmelding} />
         <Utvidbar
             className="blokk"
             erApen
@@ -30,16 +22,18 @@ const DinSendteSykmelding = ({ dinSykmelding, ledetekster, arbeidsgiversSykmeldi
             Overskrift="H2">
             <DineSykmeldingOpplysninger sykmelding={dinSykmelding} ledetekster={ledetekster} />
         </Utvidbar>
-        <div className="blokk--l">
-            <ArbeidsgiversSykmelding sykmelding={arbeidsgiversSykmelding} ledetekster={ledetekster} />
-        </div>
+        { dinSykmelding.valgtArbeidssituasjon === 'ARBEIDSTAKER' &&
+            <div className="blokk">
+                <ArbeidsgiversSykmelding sykmelding={arbeidsgiversSykmelding} ledetekster={ledetekster} />
+            </div>
+        }
     </div>);
 };
 
-DinSendteSykmelding.propTypes = {
+DinBekreftedeSykmelding.propTypes = {
     ledetekster: PropTypes.object,
     dinSykmelding: PropTypes.object,
     arbeidsgiversSykmelding: PropTypes.object,
 };
 
-export default DinSendteSykmelding;
+export default DinBekreftedeSykmelding;

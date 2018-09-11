@@ -1,20 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Panel } from 'nav-frontend-paneler';
-import {
-    toDatePrettyPrint,
-    Varselstripe,
-} from 'digisyfo-npm';
+import { toDatePrettyPrint } from 'digisyfo-npm';
 import HistorikkEvent from './HistorikkEvent';
 import AppSpinner from '../../components/AppSpinner';
 import IngenHistorikk from './IngenHistorikk';
 import UtvidbarHistorikk from './UtvidbarHistorikk';
+import Alertstripe from 'nav-frontend-alertstriper';
 
 const Feilmelding = () => {
     return (<Panel className="blokk--s">
-        <Varselstripe type="feil" fylt>
+        <Alertstripe type="feil">
             <p>Det skjedde en feil! Det er ikke sikkert du får all historikken som finnes!</p>
-        </Varselstripe>
+        </Alertstripe>
     </Panel>);
 };
 

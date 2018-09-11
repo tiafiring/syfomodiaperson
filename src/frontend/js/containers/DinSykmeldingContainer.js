@@ -7,13 +7,14 @@ import Side from '../sider/Side';
 import SidetoppSpeilet from '../components/SidetoppSpeilet';
 import * as sykmeldingerActions from '../actions/sykmeldinger_actions';
 import * as arbeidsgiversSykmeldingerActions from '../actions/arbeidsgiverssykmeldinger_actions';
-import SykmeldingSide from '../sykmeldinger/sykmelding/SykmeldingSide';
+import SykmeldingSide from '../components/sykmelding/SykmeldingSide';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import Brodsmuler from '../components/Brodsmuler';
 import Speilingvarsel from '../components/Speilingvarsel';
 import { SYKMELDINGER } from '../menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
+import { toggleMockSoknader } from '../selectors/toggleSelectors';
 
 export class DinSykmeldingSide extends Component {
     componentWillMount() {
@@ -39,10 +40,10 @@ export class DinSykmeldingSide extends Component {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (hentingFeilet) {
+                    if (hentingFeilet && !toggleMockSoknader()) {
                         return <Feilmelding />;
                     }
-                    if (!tilgang.harTilgang) {
+                    if (!tilgang.harTilgang && !toggleMockSoknader()) {
                         return (<Feilmelding
                             tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
                             melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}

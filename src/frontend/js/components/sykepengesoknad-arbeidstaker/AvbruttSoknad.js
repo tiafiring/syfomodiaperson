@@ -1,7 +1,7 @@
 import React from 'react';
 import { getLedetekst, SykmeldingNokkelOpplysning, toDatePrettyPrint } from 'digisyfo-npm';
 import KnappBase from 'nav-frontend-knapper';
-import SykmeldingUtdrag from '../sykepengesoknad-felles/SykmeldingUtdrag';
+import SykmeldingUtdrag from '../../connected-components/SykmeldingUtdrag';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
 
 const Verktoylinje = () => {
@@ -36,7 +36,7 @@ const AvbruttSoknad = ({ sykepengesoknad }) => {
             </div>
             <Verktoylinje />
         </div>
-        <SykmeldingUtdrag sykepengesoknad={sykepengesoknad} erApen />
+        <SykmeldingUtdrag soknad={sykepengesoknad} erApen />
     </div>);
 };
 

@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import KnappBase from 'nav-frontend-knapper';
-import { Varselstripe, DineSykmeldingOpplysninger, getLedetekst } from 'digisyfo-npm';
-import IllustrertInnhold from '../../components/IllustrertInnhold';
+import { DineSykmeldingOpplysninger, getLedetekst } from 'digisyfo-npm';
+import IllustrertInnhold from '../IllustrertInnhold';
+import Alertstripe from 'nav-frontend-alertstriper';
 
 const navn = (pasient) => {
     if (pasient.mellomnavn) {
@@ -25,14 +26,12 @@ const DinSykmelding = ({ sykmelding, ledetekster, visEldreSykmeldingVarsel, elds
             </IllustrertInnhold>
         </div>
         {
-            visEldreSykmeldingVarsel && <div className="panel blokk">
-                <Varselstripe type="info">
+            visEldreSykmeldingVarsel && (<Alertstripe type="info">
                     <p className="sist side-innhold">
                         <span>{getLedetekst('starte-sykmelding.eldre-sykmeldinger.tekst', ledetekster)} </span>
                         <Link to={`/sykefravaer/sykmeldinger/${eldsteSykmeldingId}`}>{getLedetekst('starte-sykmelding.eldre-sykmeldinger.lenke', ledetekster)}</Link>
                     </p>
-                </Varselstripe>
-            </div>
+                </Alertstripe>)
         }
         <header className="panelHeader panelHeader--lysebla">
             <img className="panelHeader__ikon" src="/sykefravaer/img/svg/person.svg" alt="Du" />

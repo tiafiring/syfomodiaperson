@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { sykmeldingstatuser } from 'digisyfo-npm';
 import DinSykmelding from './DinSykmelding';
 import DinSendteSykmelding from './DinSendteSykmelding';
 import DinBekreftedeSykmelding from './DinBekreftedeSykmelding';
 import DinAvbrutteSykmelding from './DinAvbrutteSykmelding';
 import DinUtgaatteSykmelding from './DinUtgaatteSykmelding';
 import LenkeTilDineSykmeldinger from './LenkeTilDineSykmeldinger';
-import Feilmelding from '../../components/Feilmelding';
+import Feilmelding from '../Feilmelding';
+import { toggleMockSoknader } from '../../selectors/toggleSelectors';
 
 const SykmeldingSide = ({ dinSykmelding, arbeidsgiversSykmelding, ledetekster, fnr }) => {
+    console.log(dinSykmelding, arbeidsgiversSykmelding);
     return (
         (() => {
-            if (dinSykmelding.status === 'SENDT' && arbeidsgiversSykmelding && arbeidsgiversSykmelding) {
+            if (dinSykmelding.status === sykmeldingstatuser.SENDT && (arbeidsgiversSykmelding || toggleMockSoknader())) {
                 return (<div>
                     <DinSendteSykmelding
                         dinSykmelding={dinSykmelding}
@@ -19,7 +22,7 @@ const SykmeldingSide = ({ dinSykmelding, arbeidsgiversSykmelding, ledetekster, f
                         ledetekster={ledetekster} />
                     <LenkeTilDineSykmeldinger ledetekster={ledetekster} fnr={fnr} />
                 </div>);
-            } else if (dinSykmelding.status === 'BEKREFTET') {
+            } else if (dinSykmelding.status === sykmeldingstatuser.BEKREFTET) {
                 return (<div>
                     <DinBekreftedeSykmelding
                         dinSykmelding={dinSykmelding}
@@ -27,21 +30,21 @@ const SykmeldingSide = ({ dinSykmelding, arbeidsgiversSykmelding, ledetekster, f
                         ledetekster={ledetekster} />
                     <LenkeTilDineSykmeldinger ledetekster={ledetekster} fnr={fnr} />
                 </div>);
-            } else if (dinSykmelding.status === 'UTGAATT') {
+            } else if (dinSykmelding.status === sykmeldingstatuser.UTGAATT) {
                 return (<div>
                     <DinUtgaatteSykmelding
                         sykmelding={dinSykmelding}
                         ledetekster={ledetekster} />
                     <LenkeTilDineSykmeldinger ledetekster={ledetekster} fnr={fnr} />
                 </div>);
-            } else if (dinSykmelding.status === 'NY') {
+            } else if (dinSykmelding.status === sykmeldingstatuser.NY) {
                 return (<div>
                     <DinSykmelding
                         sykmelding={dinSykmelding}
                         ledetekster={ledetekster} />
                     <LenkeTilDineSykmeldinger ledetekster={ledetekster} fnr={fnr} />
                 </div>);
-            } else if (dinSykmelding.status === 'AVBRUTT') {
+            } else if (dinSykmelding.status === sykmeldingstatuser.AVBRUTT) {
                 return (<div>
                     <DinAvbrutteSykmelding
                         sykmelding={dinSykmelding}
