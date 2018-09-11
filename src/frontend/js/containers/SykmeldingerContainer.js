@@ -22,7 +22,7 @@ export class SykmeldingerSide extends Component {
     }
 
     render() {
-        const { brukernavn, ledetekster, henter, hentingFeilet, tilgang, sykmeldinger, fnr } = this.props;
+        const { brukernavn, ledetekster, henter, hentingFeilet, tilgang, sykmeldinger, fnr, sortering } = this.props;
         const htmlIntro = {
             __html: `<p>${getLedetekst('dine-sykmeldinger.introduksjonstekst', ledetekster)}</p>`,
         };
@@ -52,7 +52,11 @@ export class SykmeldingerSide extends Component {
                         <div className="speiling">
                             <Brodsmuler brodsmuler={brodsmuler} />
                             <SidetoppSpeilet tittel="Dine sykmeldinger" htmlTekst={htmlIntro} />
-                            <DineSykmeldinger fnr={fnr} sykmeldinger={sykmeldinger} ledetekster={ledetekster} />
+                            <DineSykmeldinger
+                                fnr={fnr}
+                                sykmeldinger={sykmeldinger}
+                                ledetekster={ledetekster}
+                                sortering={sortering} />
                         </div>
                     </div>);
                 })()
@@ -70,6 +74,7 @@ SykmeldingerSide.propTypes = {
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
     ledetekster: PropTypes.object,
+    sortering: PropTypes.shape(),
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -91,6 +96,7 @@ export function mapStateToProps(state, ownProps) {
         ledetekster: state.ledetekster.data,
         sykmeldinger: state.sykmeldinger.data,
         tilgang: state.tilgang.data,
+        sortering: state.sykmeldinger.sortering,
     };
 }
 

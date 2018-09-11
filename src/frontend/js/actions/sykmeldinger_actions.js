@@ -2,7 +2,7 @@ import {
     HENT_SYKMELDINGER_FEILET,
     HENT_SYKMELDINGER_FORESPURT,
     HENTER_SYKMELDINGER,
-    SET_SORTERING,
+    SYKMELDINGER_SORTERT,
     SYKMELDINGER_HENTET,
 } from './actiontyper';
 
@@ -20,7 +20,7 @@ export function henterSykmeldinger() {
 
 export function sorterSykmeldinger(kriterium, status) {
     return {
-        type: SET_SORTERING,
+        type: SYKMELDINGER_SORTERT,
         kriterium,
         status,
     };

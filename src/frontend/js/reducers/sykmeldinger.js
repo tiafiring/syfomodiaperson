@@ -1,5 +1,5 @@
 import { parseSykmelding } from 'digisyfo-npm';
-import { HENT_SYKMELDINGER_FEILET, HENTER_SYKMELDINGER, SYKMELDINGER_HENTET } from '../actions/actiontyper';
+import { HENT_SYKMELDINGER_FEILET, HENTER_SYKMELDINGER, SYKMELDINGER_HENTET, SYKMELDINGER_SORTERT } from '../actions/actiontyper';
 
 const initiellState = {
     henter: false,
@@ -28,6 +28,18 @@ export default function sykmeldinger(state = initiellState, action = {}) {
                 henter: false,
                 hentingFeilet: false,
                 data: action.data.map(parseSykmelding),
+            };
+        }
+        case SYKMELDINGER_SORTERT: {
+            let sortering = {};
+            sortering[action.status] = action.kriterium;
+            sortering = {
+                ...state.sortering,
+                ...sortering,
+            };
+            return {
+                ...state,
+                sortering,
             };
         }
         default: {
