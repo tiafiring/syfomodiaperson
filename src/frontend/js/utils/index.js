@@ -28,3 +28,7 @@ export const Vis = ({ hvis, children, render }) => {
             ? children
             : null;
 };
+
+export const formaterOrgnr = (orgnr) => {
+    return orgnr.replace(/(...)(...)(...)/g, '$1 $2 $3');
+};
