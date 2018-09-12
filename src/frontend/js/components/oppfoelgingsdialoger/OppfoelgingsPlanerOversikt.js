@@ -47,12 +47,12 @@ export class OppfoelgingsPlanerOversikt extends Component {
                 {
                     aktiveDialoger.map((dialog, index) => {
                         const antallOppgaver = finnAntallOppgaver(dialog);
-                        return (<Link key={index} className="panel navigasjonspanel" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
+                        return (<Link key={index} className="navigasjonspanel navigasjonspanel--stor" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
                             <div className="navigasjonselement">
                                 <h3>{dialog.virksomhet.navn}</h3>
                                 <p>{`Varighet ${toDatePrettyPrint(dialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDatePrettyPrint(dialog.godkjentPlan.gyldighetstidspunkt.tom)}`}</p>
                             </div>
-                            { antallOppgaver > 0 && <label className="antallNytt" style={{ marginTop: '30px', marginBottom: '30px' }}>{finnAntallOppgaver(dialog)}</label> }
+                            { antallOppgaver > 0 && <i className="antallNytt">{antallOppgaver}</i> }
                         </Link>);
                     })
                 }
@@ -64,12 +64,12 @@ export class OppfoelgingsPlanerOversikt extends Component {
             {
                 inaktiveDialoger.map((dialog, index) => {
                     const antallOppgaver = finnAntallOppgaver(dialog);
-                    return (<Link key={index} className="panel navigasjonspanel" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
+                    return (<Link key={index} className="navigasjonspanel navigasjonspanel--stor" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
                         <div className="navigasjonselement">
                             <h3>{dialog.virksomhet.navn}</h3>
                             <p>{`Varighet ${toDatePrettyPrint(dialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDatePrettyPrint(dialog.godkjentPlan.gyldighetstidspunkt.tom)}`}</p>
                         </div>
-                        { antallOppgaver > 0 && <label className="antallNytt" style={{ marginTop: '30px', marginBottom: '30px' }}>{finnAntallOppgaver(dialog)}</label> }
+                        { antallOppgaver > 0 && <i className="antallNytt">{antallOppgaver}</i> }
                     </Link>);
                 })
             }
