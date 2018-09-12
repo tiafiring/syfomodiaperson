@@ -8,7 +8,7 @@ import * as oppdialogActions from '../actions/oppfoelgingsdialoger_actions';
 import Feilmelding from '../components/Feilmelding';
 import Oppfoelgingsplan from '../components/oppfoelgingsdialoger/Oppfoelgingsplan';
 import AppSpinner from '../components/AppSpinner';
-import { OPPFOELGINGSPLANER } from '../menypunkter';
+import { OPPFOELGINGSPLANER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 
 export class OppfoelgingsPlanerOversiktSide extends Component {

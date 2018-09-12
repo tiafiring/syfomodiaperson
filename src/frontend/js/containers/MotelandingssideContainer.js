@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { getHtmlLedetekst, getLedetekst } from 'digisyfo-npm';
 import Side from '../sider/Side';
-import { MOETEPLANLEGGER } from '../menypunkter';
+import { MOETEPLANLEGGER } from '../enums/menypunkter';
 import { hentMoter } from '../actions/moter_actions';
 import { hentMotebehov } from '../actions/motebehov_actions';
 import AppSpinner from '../components/AppSpinner';

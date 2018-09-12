@@ -18,7 +18,7 @@ import AppSpinner from '../components/AppSpinner';
 import Brodsmuler from '../components/Brodsmuler';
 import Speilingvarsel from '../components/Speilingvarsel';
 import TidslinjeVelgArbeidssituasjonContainer from '../containers/TidslinjeVelgArbeidssituasjonContainer';
-import { TIDSLINJEN } from '../menypunkter';
+import { TIDSLINJEN } from '../enums/menypunkter';
 import { henterEllerHarHentetSykeforloep } from '../utils/reducerUtils';
 import history from '../history';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';

@@ -10,7 +10,7 @@ import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import Soknader from '../components/sykepengesoknader/Soknader';
 import Brodsmuler from '../components/Brodsmuler';
-import { SYKEPENGESOKNADER } from '../menypunkter';
+import { SYKEPENGESOKNADER } from '../enums/menypunkter';
 import { sykepengesoknad as sykepengesoknadPt, soknad as soknadPt } from '../propTypes';
 import Speilingvarsel from '../components/Speilingvarsel';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';

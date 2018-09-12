@@ -9,7 +9,7 @@ import Side from '../sider/Side';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import * as motebehovActions from '../actions/motebehov_actions';
-import { MOETEPLANLEGGER } from '../menypunkter';
+import { MOETEPLANLEGGER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { MotebehovKvittering } from '../components/MotebehovKvittering';
 

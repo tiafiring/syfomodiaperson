@@ -10,7 +10,7 @@ import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import DineSykmeldinger from '../components/sykmeldinger/DineSykmeldinger';
 import Brodsmuler from '../components/Brodsmuler';
-import { SYKMELDINGER } from '../menypunkter';
+import { SYKMELDINGER } from '../enums/menypunkter';
 import Speilingvarsel from '../components/Speilingvarsel';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { erDev } from '../selectors/toggleSelectors';

@@ -12,7 +12,7 @@ import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import * as historikkActions from '../actions/historikk_actions';
 import * as sykeforloepActions from '../actions/sykeforloep_actions';
-import { HISTORIKK } from '../menypunkter';
+import { HISTORIKK } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 
 export class HistorikkSide extends Component {
