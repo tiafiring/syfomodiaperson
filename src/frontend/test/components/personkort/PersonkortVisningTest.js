@@ -1,17 +1,15 @@
 import React from 'react'
 import { expect } from 'chai';
-import { mount, shallow } from 'enzyme';
-import { Utvidbar } from 'digisyfo-npm';
-import PersonkortVisning, {
-    PersonkortVisningElement,
-    PersonkortVisningInformasjon,
-    VisningSykmeldt,
-    VisningLeder,
-    VisningLege,
-    VisningTidligereLeger,
-    VisningEnhet,
-} from '../../../js/components/personkort/PersonkortVisning'
+import { mount } from 'enzyme';
+import Alertstripe from 'nav-frontend-alertstriper';
+import PersonkortVisning from '../../../js/components/personkort/PersonkortVisning'
 import { PERSONKORTVISNING_TYPE } from '../../../js/konstanter';
+import PersonkortElement from "../../../js/components/personkort/PersonkortElement";
+import PersonkortInformasjon from "../../../js/components/personkort/PersonkortInformasjon";
+import PersonkortLedere from "../../../js/components/personkort/PersonkortLedere";
+import PersonkortSykmeldt from "../../../js/components/personkort/PersonkortSykmeldt";
+import PersonkortEnhet from "../../../js/components/personkort/PersonkortEnhet";
+import PersonkortLege, { TidligereLeger }  from "../../../js/components/personkort/PersonkortLege";
 
 describe('PersonkortVisning', () => {
     let ledere;
@@ -61,7 +59,7 @@ describe('PersonkortVisning', () => {
                 fnr: '1234',
             },
         };
-        komponent = shallow(<PersonkortVisning
+        komponent = mount(<PersonkortVisning
             visning={''}
             ledere={ledere}
             fastleger={fastleger}
@@ -70,138 +68,139 @@ describe('PersonkortVisning', () => {
         />);
     });
 
-    it('Skal vise VisningSykmeldt, som initielt valg', () => {
-        expect(komponent.find(VisningSykmeldt)).to.have.length(1);
+    it('Skal vise PersonkortSykmeldt, som initielt valg', () => {
+        expect(komponent.find(PersonkortSykmeldt)).to.have.length(1);
     });
 
-    it('Skal vise VisningLeder, dersom visning for leder er valgt', () => {
-        const komponent = shallow(<PersonkortVisning
+    it('Skal vise PersonkortLedere, dersom visning for leder er valgt', () => {
+        const komponent = mount(<PersonkortVisning
             visning={PERSONKORTVISNING_TYPE.LEDER}
             ledere={ledere}
             fastleger={fastleger}
             navbruker={navbruker}
             behandlendeEnhet={behandlendeEnhet}
         />);
-        expect(komponent.find(VisningLeder)).to.have.length(1);
+        expect(komponent.find(PersonkortLedere)).to.have.length(1);
     });
 
     it('Skal vise VisningLege, dersom visning for lege er valgt', () => {
-        const komponent = shallow(<PersonkortVisning
+        const komponent = mount(<PersonkortVisning
             visning={PERSONKORTVISNING_TYPE.LEGE}
             ledere={ledere}
             fastleger={fastleger}
             navbruker={navbruker}
             behandlendeEnhet={behandlendeEnhet}
         />);
-        expect(komponent.find(VisningLege)).to.have.length(1);
+        expect(komponent.find(PersonkortLege)).to.have.length(1);
     });
 
     it('Skal vise VisningEnhet, dersom visning for lege er valgt', () => {
-        const komponent = shallow(<PersonkortVisning
+        const komponent = mount(<PersonkortVisning
             visning={PERSONKORTVISNING_TYPE.ENHET}
             ledere={ledere}
             fastleger={fastleger}
             navbruker={navbruker}
             behandlendeEnhet={behandlendeEnhet}
         />);
-        expect(komponent.find(VisningEnhet)).to.have.length(1);
+        expect(komponent.find(PersonkortEnhet)).to.have.length(1);
     });
 
-    describe('VisningSykmeldt', () => {
+    describe('PersonkortSykmeldt', () => {
         let komponent;
 
         beforeEach(() => {
-            komponent = shallow(<VisningSykmeldt
+            komponent = mount(<PersonkortSykmeldt
                 navbruker={navbruker}
             />);
         });
 
-        it('Skal vise PersonkortVisningElement', () => {
-            expect(komponent.find(PersonkortVisningElement)).to.have.length(1);
+        it('Skal vise PersonkortElement', () => {
+            expect(komponent.find(PersonkortElement)).to.have.length(1);
         });
 
-        it('Skal vise PersonkortVisningInformasjon', () => {
-            expect(komponent.find(PersonkortVisningInformasjon)).to.have.length(1);
+        it('Skal vise PersonkortInformasjon', () => {
+            expect(komponent.find(PersonkortInformasjon)).to.have.length(1);
         });
     });
 
-    describe('VisningLeder', () => {
+    describe('PersonkortLedere', () => {
         let komponent;
 
         beforeEach(() => {
-            komponent = shallow(<VisningLeder
+            komponent = mount(<PersonkortLedere
                 ledere={ledere}
             />);
         });
 
-        it('Skal vise antall PersonkortVisningElement lik antall ledere', () => {
-            expect(komponent.find(PersonkortVisningElement)).to.have.length(ledere.length);
+        it('Skal vise antall PersonkortElement lik antall ledere', () => {
+            expect(komponent.find(PersonkortElement)).to.have.length(ledere.length);
         });
 
-        it('Skal vise antall PersonkortVisningInformasjon for ledere som er oppgitt', () => {
-            expect(komponent.find(PersonkortVisningInformasjon)).to.have.length(1);
+        it('Skal vise antall PersonkortInformasjon for ledere som er oppgitt', () => {
+            expect(komponent.find(PersonkortInformasjon)).to.have.length(1);
         });
 
-        it('Skal vise PersonkortVisningElement med feilmelding, dersom ledere ikke er innmeldt', () => {
-            expect(komponent.find('p.personkort__feilmelding')).to.have.length(1);
+        it('Skal vise PersonkortElement med feilmelding, dersom ledere ikke er innmeldt', () => {
+            expect(komponent.find(Alertstripe)).to.have.length(1);
         });
 
-        it('Skal vise PersonkortVisningElement med feilmelding, dersom bruker ikke har noen ledere ', () => {
-            komponent = shallow(<VisningLeder
+        it('Skal vise PersonkortElement med feilmelding, dersom bruker ikke har noen ledere ', () => {
+            komponent = mount(<PersonkortLedere
                 ledere={[]}
             />);
-            expect(komponent.find('p.personkort__feilmelding')).to.have.length(1);
+            expect(komponent.find(Alertstripe)).to.have.length(1);
         });
     });
 
-    describe('VisningLege', () => {
+    describe('PersonkortLege', () => {
         let komponent;
 
         beforeEach(() => {
-            komponent = shallow(<VisningLege
+            komponent = mount(<PersonkortLege
                 fastleger={fastleger}
                 sykmeldtNavn={navbruker.navn}
             />);
         });
 
         it('Skal vise feilmelding, fastleger ikke ble funnet', () => {
-            const komponent = shallow(<VisningLege
+            const komponent = mount(<PersonkortLege
                 fastleger={Object.assign({}, fastleger, {
                     ikkeFunnet: true,
                 })}
                 sykmeldtNavn={navbruker.navn}
             />);
-            expect(komponent.find('p.personkort__feilmelding')).to.have.length(1);
+            expect(komponent.find(Alertstripe)).to.have.length(1);
         });
 
-        it('Skal vise PersonkortVisningElement', () => {
-            expect(komponent.find(PersonkortVisningElement)).to.have.length(1);
+        it('Skal vise PersonkortElement', () => {
+            expect(komponent.find(PersonkortElement)).to.have.length(2);
         });
 
-        it('Skal vise PersonkortVisningInformasjon', () => {
-            expect(komponent.find(PersonkortVisningInformasjon)).to.have.length(1);
+        it('Skal vise PersonkortInformasjon', () => {
+            expect(komponent.find(PersonkortInformasjon)).to.have.length(1);
         });
 
-        it('Skal vise VisningTidligereLeger', () => {
-            expect(komponent.find(VisningTidligereLeger)).to.have.length(1);
+        it('Skal vise TidligereLeger', () => {
+            expect(komponent.find(TidligereLeger)).to.have.length(1);
         });
 
-        it('Skal ikke vise VisningTidligereLeger, dersom det ikke er tidligere fastleger', () => {
-            const komponent = shallow(<VisningLege
+        it('Skal ikke tidligere leger dersom det ikke er tidligere fastleger', () => {
+            const komponent = mount(<PersonkortLege
                 fastleger={Object.assign({}, fastleger, {
                     tidligere: [],
                 })}
                 sykmeldtNavn={navbruker.navn}
             />);
-            expect(komponent.find(VisningTidligereLeger)).to.have.length(0);
+            expect(komponent.find(TidligereLeger)).to.have.length(1);
+            expect(komponent.find(TidligereLeger).html()).to.equal(null);
         });
     });
 
-    describe('VisningTidligereLeger', () => {
+    describe('TidligereLeger', () => {
         let komponent;
 
         beforeEach(() => {
-            komponent = shallow(<VisningTidligereLeger
+            komponent = mount(<TidligereLeger
                 tidligereFastleger={fastleger.tidligere}
             />);
         });

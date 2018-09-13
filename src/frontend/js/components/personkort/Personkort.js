@@ -1,59 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import EtikettBase from 'nav-frontend-etiketter';
 import { getLedetekst, Utvidbar } from 'digisyfo-npm';
 import PersonkortVisning from './PersonkortVisning';
-import { hentBrukersAlderFraFnr, hentBrukersKjoennFraFnr } from '../../utils/fnrUtils';
-import {
-    PERSONKORTVISNING_TYPE,
-    KJOENN,
-} from '../../konstanter';
+import { PERSONKORTVISNING_TYPE } from '../../konstanter';
 import {
     henterEllerHarHentetDiskresjonskode,
     henterEllerHarHentetEgenansatt,
     henterEllerHarHentetFastleger,
 } from '../../utils/reducerUtils';
-
-export const PersonkortTittel = ({ diskresjonskode, egenansatt, navbruker }) => {
-    const visEtiketter = diskresjonskode.data.diskresjonskode === '6'
-    || diskresjonskode.data.diskresjonskode === '7'
-    || egenansatt.data.erEgenAnsatt;
-    const tittelImg = hentBrukersKjoennFraFnr(navbruker.kontaktinfo.fnr) === KJOENN.KVINNE ?
-        '/sykefravaer/img/svg/kvinne.svg' : '/sykefravaer/img/svg/mann.svg';
-
-    return (<div className="personkortTittel">
-        <div className="personkortTittel__info">
-            <img src={tittelImg} alt="person" />
-            <div>
-                <h3>{`${navbruker.navn ? navbruker.navn : ''} (${hentBrukersAlderFraFnr(navbruker.kontaktinfo.fnr)} år)`}</h3>
-                <p>{navbruker.kontaktinfo.fnr}</p>
-            </div>
-        </div>
-        { visEtiketter && <div className="personkortTittel__etikker">
-            { diskresjonskode.data.diskresjonskode === '6' && <div>
-                <EtikettBase type="fokus">
-                    Kode 6
-                </EtikettBase>
-            </div> }
-            { diskresjonskode.data.diskresjonskode === '7' && <div>
-                <EtikettBase type="fokus">
-                    Kode 7
-                </EtikettBase>
-            </div> }
-            { egenansatt.data.erEgenAnsatt && <div>
-                <EtikettBase type="fokus">
-                    Egen ansatt
-                </EtikettBase>
-            </div> }
-        </div>
-        }
-    </div>);
-};
-PersonkortTittel.propTypes = {
-    egenansatt: PropTypes.object,
-    diskresjonskode: PropTypes.object,
-    navbruker: PropTypes.object,
-};
+import PersonkortHeader from './PersonkortHeader';
 
 class Personkort extends Component {
     constructor() {
@@ -95,7 +50,7 @@ class Personkort extends Component {
         return (<div className="personkort">
             <Utvidbar
                 erApen={false}
-                tittel={<PersonkortTittel
+                tittel={<PersonkortHeader
                     diskresjonskode={diskresjonskode}
                     egenansatt={egenansatt}
                     navbruker={navbruker}
@@ -137,11 +92,12 @@ class Personkort extends Component {
                         </li>
                     </ul>
 
-                    <PersonkortVisning
-                        {...this.props}
-                        visning={visning}
-                    />
-
+                    <div aria-live="polite">
+                        <PersonkortVisning
+                            {...this.props}
+                            visning={visning}
+                        />
+                    </div>
                 </div>
             </Utvidbar>
         </div>);

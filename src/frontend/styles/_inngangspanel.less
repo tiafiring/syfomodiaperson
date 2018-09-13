@@ -21,7 +21,11 @@
     .typo-normal-mixin();
 }
 
-.inngangspanel:extend(.panel) {
+.inngangspanel {
+    padding: 1em;
+    @media(min-width: @screen-sm-min) {
+        padding: 2em;
+    }
     background: @white;
     margin-bottom: 1px;
     padding-right: 3em;
@@ -58,7 +62,7 @@
         box-shadow: #ccc 0 0 4px 2px; /* hentet fra saksoversikt */
     }
 
-    @media(min-width: 20em) {
+    @media(min-width: @screen-sm-min) {
         background-position: 97% 35px;
     }
 }

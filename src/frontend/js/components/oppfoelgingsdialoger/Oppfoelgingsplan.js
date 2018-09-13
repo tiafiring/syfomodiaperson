@@ -50,7 +50,7 @@ const PlanVisning = ({ oppfoelgingsdialog, dokumentinfo, fnr, actions, veilederi
                     checked={erOppgaveFullfoert(sePlanOppgave)} />
                     : (<Alertstripe type="info">
                     <p>Fant dessverre ingen oppgave knyttet til denne planen</p>
-                </Alertstripe>)
+                </Alertstripe>);
     };
 
     const TilbakeTilOppfolgingsplaner = () => {
