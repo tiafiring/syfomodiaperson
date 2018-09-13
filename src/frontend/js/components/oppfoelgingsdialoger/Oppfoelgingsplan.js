@@ -3,17 +3,19 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
-import { toDatePrettyPrint } from 'digisyfo-npm';
+import { tilLesbarDatoMedArstall } from 'digisyfo-npm';
 import { Checkbox } from 'nav-frontend-skjema';
-import KnappBase from 'nav-frontend-knapper';
-import { Panel } from 'nav-frontend-paneler';
+import Alertstripe from 'nav-frontend-alertstriper';
+import Knapp from 'nav-frontend-knapper';
 import * as dokumentActions from '../../actions/dokumentinfo_actions';
 import * as veilederoppgaverActions from '../../actions/veilederoppgaver_actions';
 import Feilmelding from '../../components/Feilmelding';
 import AppSpinner from '../../components/AppSpinner';
 
+const FERDIG = 'FERDIG';
+
 const erOppgaveFullfoert = (oppgave) => {
-    return oppgave.status === 'FERDIG';
+    return oppgave.status === FERDIG;
 };
 
 const seOppfolgingsplanOppgave = (oppfoelgingsdialog) => {
@@ -28,42 +30,60 @@ const PlanVisning = ({ oppfoelgingsdialog, dokumentinfo, fnr, actions, veilederi
     for (let i = 1; i <= dokumentinfo.antallSider; i += 1) {
         bildeUrler.push(`${window.APP_SETTINGS.OPPFOELGINGSDIALOGREST_ROOT}/dokument/${oppfoelgingsdialog.id}/side/${i}`);
     }
-    return (<div>
-        <div className="blokk--s" style={{ borderBottom: '1px solid #b7b1a9' }}>
-            <Panel className="blokk--s">
-                {
-                    bildeUrler.map((bildeUrl, index) => {
-                        return <img className="pdfbilde" key={index} src={bildeUrl} height="735px" width="567px" alt="plan" />;
-                    })
-                }
-            </Panel>
-        </div>
-        { sePlanOppgave ?
-            <div className="skjema__input blokk--l">
-                <Checkbox
-                    label={sePlanOppgave.status === 'FERDIG' ? `Ferdig behandlet av ${sePlanOppgave.sistEndretAv} ${toDatePrettyPrint(sePlanOppgave.sistEndret)}` : 'Marker som behandlet'}
+
+    const Skjema = () => {
+        return sePlanOppgave && sePlanOppgave.status === FERDIG
+            ? <Alertstripe type="suksess">
+                <p>Ferdig behandlet av {sePlanOppgave.sistEndretAv} {tilLesbarDatoMedArstall(sePlanOppgave.sistEndret)}</p>
+            </Alertstripe>
+                : sePlanOppgave && sePlanOppgave.status !== FERDIG
+                ? <Checkbox
+                    label="Marker som behandlet"
                     onClick={() => {
                         actions.behandleOppgave(sePlanOppgave.id, {
-                            status: 'FERDIG',
+                            status: FERDIG,
                             sistEndretAv: veilederinfo.ident,
                         }, fnr);
                     }}
                     id="marker__utfoert"
                     disabled={erOppgaveFullfoert(sePlanOppgave)}
                     checked={erOppgaveFullfoert(sePlanOppgave)} />
-            </div> : <p>Fant dessverre ingen oppgave knyttet til denne planen</p>
-        }
-        <Link to={`/sykefravaer/${fnr}/oppfoelgingsplaner`}>
-            <KnappBase type="standard">Tilbake</KnappBase>
-        </Link>
-        <KnappBase
-            type="standard"
-            onClick={() => {
-                const newWindow = window.open(`${window.APP_SETTINGS.OPPFOELGINGSDIALOGREST_ROOT}/dokument/${oppfoelgingsdialog.id}`);
-                newWindow.print();
-            }}>
-            Skriv ut
-        </KnappBase>
+                    : (<Alertstripe type="info">
+                    <p>Fant dessverre ingen oppgave knyttet til denne planen</p>
+                </Alertstripe>)
+    };
+
+    const TilbakeTilOppfolgingsplaner = () => {
+        return (<div className="blokk">
+            <Link to={`/sykefravaer/${fnr}/oppfoelgingsplaner`} className="tilbakelenke">Til oppfølgingsplaner</Link>
+        </div>);
+    };
+
+    return (<div className="blokk--l">
+        <div className="blokk">
+            <Skjema />
+        </div>
+        <TilbakeTilOppfolgingsplaner />
+        <div className="pdfbilder blokk--s">
+            {
+                bildeUrler.map((bildeUrl) => {
+                    return (<div className="pdfbilde">
+                        <img width="944" height="1222" className="pdfbilde__bilde" key={bildeUrl} src={bildeUrl} alt="Bilde av oppfølgingsplan" />
+                    </div>);
+                })
+            }
+        </div>
+        <TilbakeTilOppfolgingsplaner />
+        <div className="knapperad">
+            <Knapp
+                type="standard"
+                onClick={() => {
+                    const newWindow = window.open(`${window.APP_SETTINGS.OPPFOELGINGSDIALOGREST_ROOT}/dokument/${oppfoelgingsdialog.id}`);
+                    newWindow.print();
+                }}>
+                Skriv ut
+            </Knapp>
+        </div>
     </div>);
 };
 
@@ -90,9 +110,12 @@ class OppfoelgingsplanWrapper extends Component {
             if (hentingFeilet) {
                 return <Feilmelding />;
             }
-            return (<div>
-                <PlanVisning veilederinfo={veilederinfo} oppfoelgingsdialog={oppfoelgingsdialog} dokumentinfo={dokumentinfo} fnr={fnr} actions={actions} />
-            </div>);
+            return (<PlanVisning
+                veilederinfo={veilederinfo}
+                oppfoelgingsdialog={oppfoelgingsdialog}
+                dokumentinfo={dokumentinfo}
+                fnr={fnr}
+                actions={actions} />);
         })();
     }
 }
