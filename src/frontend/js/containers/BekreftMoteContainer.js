@@ -11,7 +11,7 @@ import BekreftMote from '../mote/components/BekreftMote';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import * as epostinnholdActions from '../actions/epostinnhold_actions';
-import { MOETEPLANLEGGER } from '../menypunkter';
+import { MOETEPLANLEGGER } from '../enums/menypunkter';
 
 export class BekreftMoteSide extends Component {
     constructor(props) {

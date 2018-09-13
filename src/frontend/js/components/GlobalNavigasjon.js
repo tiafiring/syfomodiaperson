@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router';
-import * as menypunkter from '../menypunkter';
+import * as menypunkter from '../enums/menypunkter';
+import cn from 'classnames';
 
 const historikkMenypunkt = {
     navn: 'Logg',
@@ -10,7 +11,7 @@ const historikkMenypunkt = {
 };
 
 const motemodulMenypunkt = {
-    navn: 'Møteplanlegger',
+    navn: 'Møte&shy;planlegger',
     sti: 'moteoversikt',
     menypunkt: menypunkter.MOETEPLANLEGGER,
 };
@@ -34,7 +35,7 @@ const sykepengesoknadMenypunkt = {
 };
 
 const oppfoelgingsplanMenypunkt = {
-    navn: 'Oppfølgingsplaner',
+    navn: 'Oppfølgings&shy;planer',
     sti: 'oppfoelgingsplaner',
     menypunkt: menypunkter.OPPFOELGINGSPLANER,
 };
@@ -127,10 +128,9 @@ class GlobalNavigasjon extends Component {
         return (<ul aria-label="Navigasjon" className="navigasjon">
             {
                 this.menypunkter.map(({ navn, sti, menypunkt }, index) => {
-                    let className = 'navigasjonspanel';
-                    if (menypunkt === aktivtMenypunkt) {
-                        className = `${className} navigasjonspanel--aktiv`;
-                    }
+                    const className = cn('navigasjonspanel', {
+                        'navigasjonspanel--aktiv': menypunkt === aktivtMenypunkt,
+                    });
                     if (menypunkt === menypunkter.MOETEPLANLEGGER && !hentingFeilet) {
                         sti = setMotemodulSti(motebehovet);
                     }
@@ -152,9 +152,9 @@ class GlobalNavigasjon extends Component {
                                 // <Link /> fra react-router kan ikke brukes da den ikke støtter ref-attributtet.
                                 browserHistory.push(`/sykefravaer/${fnr}/${sti}`);
                             }}>
-                            <label style={{ flex: 1 }}>{navn}</label>
+                            <span className="navigasjon__element__tekst" dangerouslySetInnerHTML={{__html: navn}} />
                             {
-                                antallPrikker > 0 && <label className="antallNytt">{antallPrikker}</label>
+                                antallPrikker > 0 && <i className="antallNytt">{antallPrikker}</i>
                             }
                         </a>
                     </li>);

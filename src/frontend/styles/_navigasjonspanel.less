@@ -3,26 +3,35 @@
     width: 100%;
     border: 0;
     background-color: @white;
-    padding: 1em 3em 1em 2em;
+    padding: 1em 1.5em 1em 1em;
     margin-bottom: .5em             ;
     color: @navMorkGra;
     border-left: 0;
-    padding-right: 3rem; 
     background-image: url("/sykefravaer/img/svg/pilVidere--graa.svg");
     background-repeat: no-repeat;
-    background-position: 97% center; 
-    background-size: 1rem 1rem; 
+    background-position: 97% center;
+    background-size: 1rem 1rem;
     transition: background-position ease-in-out .1s;
     transform: translate3d(0, 0, 0);
 
     &:hover {
         background-image: url("/sykefravaer/img/svg/pilVidere--blaa.svg");
+        padding-left: ~"calc(1em - 6px)";
+        border-left: 6px solid @navBla;
     }
 
     &:focus {
         background-color: @white;
         box-shadow: 0 0 0 3px @orangeFocus;
         color: @navMorkGra;
+    }
+}
+
+.navigasjonspanel--stor {
+    padding: 2em 4em 2em 2em;
+
+    &:hover {
+        padding-left: ~"calc(2em - 6px)";
     }
 }
 
@@ -34,11 +43,6 @@
 .navigasjonspanel__tittel {
     font-size: 1em;
     margin: .2em 0;
-}
-
-.navigasjonspanel:hover {
-    padding-left: ~"calc(2em - 6px)";
-    border-left: 6px solid @navBla;
 }
 
 .navigasjonspanel--aktiv,

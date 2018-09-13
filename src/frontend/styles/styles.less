@@ -4,9 +4,9 @@
 @import "~nav-frontend-typografi-style/src/index";
 
 @import "_mixins";
+@import "_lenker";
 @import "_app";
 @import "_antallNytt";
-@import "_artikkel";
 @import "_avstander";
 @import "_contextContainer";
 @import "_etiketter";
@@ -36,8 +36,9 @@
 @import "_opplysninger";
 @import "_personKort";
 @import "_personopplysninger";
-@import "_pdfvisning";
+@import "_pdfbilde";
 @import "_radiofaner";
+@import "_redaksjonelt-innhold";
 @import "_sidetopp";
 @import "_sidetoppSpeilet";
 @import "_speiling";
@@ -67,40 +68,10 @@ body {
   background-color: #f1f1f1;
 }
 
-.mixin-panel-padding() {
-    padding-left: 1rem;
-    padding-right: 1rem;
-
-    @media(min-width: @screen-sm-min) {
-        padding-left: 2rem;
-        padding-right: 2rem;
-    }
-}
-
 .medHjelpetekst {
     display: flex;
     position: relative;
     padding-right: 2em;
-}
-
-.redaksjonelt-innhold {
-
-    // Brukes på redaktørstyrt HTML.
-
-    line-height: 1.6;
-
-    h2, h3, h4 {
-        .typo-element-mixin();
-        margin-top: 20px;
-        margin-bottom: 0;
-    }
-  .lenke--disabled {
-    color: @navGra60;
-  }
-    a {
-      .lenke;
-
-    }
 }
 
 .hjelpetekstlenke {
@@ -109,30 +80,8 @@ body {
   text-decoration: none;
 }
 
-a {
-  text-decoration: none;
-}
-
-button.lenke {
-  padding: 0;
-  border-left: 0;
-  border-top: 0;
-  border-right: 0;
-  background-color: transparent;
-  cursor: pointer;
-}
-
 .knapp--enten, .knapp--standard {
   margin-right: 2em;
-}
-
-@media (min-width: 24em) {
-  .brodsmuler__ikon {
-    width: 2em;
-    height: 2em;
-    display: inline-block;
-    margin-right: 1em;
-  }
 }
 
 fieldset {

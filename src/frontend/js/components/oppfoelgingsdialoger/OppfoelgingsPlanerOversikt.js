@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import {
     getLedetekst,
     toDatePrettyPrint,
+    tilLesbarPeriodeMedArstall,
 } from 'digisyfo-npm';
 import Alertstripe from 'nav-frontend-alertstriper';
 
@@ -47,29 +48,30 @@ export class OppfoelgingsPlanerOversikt extends Component {
                 {
                     aktiveDialoger.map((dialog, index) => {
                         const antallOppgaver = finnAntallOppgaver(dialog);
-                        return (<Link key={index} className="panel navigasjonspanel" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
+                        return (<Link key={index} className="navigasjonspanel navigasjonspanel--stor" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
                             <div className="navigasjonselement">
-                                <h3>{dialog.virksomhet.navn}</h3>
-                                <p>{`Varighet ${toDatePrettyPrint(dialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDatePrettyPrint(dialog.godkjentPlan.gyldighetstidspunkt.tom)}`}</p>
+                                <h3 className="panel__tittel">{dialog.virksomhet.navn}</h3>
+                                <p>Varighet {tilLesbarPeriodeMedArstall(dialog.godkjentPlan.gyldighetstidspunkt.fom, dialog.godkjentPlan.gyldighetstidspunkt.tom)}</p>
                             </div>
-                            { antallOppgaver > 0 && <label className="antallNytt" style={{ marginTop: '30px', marginBottom: '30px' }}>{finnAntallOppgaver(dialog)}</label> }
+                            { antallOppgaver > 0 && <i className="antallNytt">{antallOppgaver}</i> }
                         </Link>);
                     })
                 }
             </div>
             <h2>{getLedetekst('fss.oppfoelgingsdialog.oversikt.inaktive')}</h2>
-            {inaktiveDialoger.length === 0 && <Alertstripe type="info">
+            {
+                inaktiveDialoger.length === 0 && <Alertstripe type="info">
                 <p>{getLedetekst('fss.oppfoelgingsdialog.oversikt.inaktive--ingen')}</p>
             </Alertstripe>}
             {
                 inaktiveDialoger.map((dialog, index) => {
                     const antallOppgaver = finnAntallOppgaver(dialog);
-                    return (<Link key={index} className="panel navigasjonspanel" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
+                    return (<Link key={index} className="navigasjonspanel navigasjonspanel--stor" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
                         <div className="navigasjonselement">
                             <h3>{dialog.virksomhet.navn}</h3>
-                            <p>{`Varighet ${toDatePrettyPrint(dialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDatePrettyPrint(dialog.godkjentPlan.gyldighetstidspunkt.tom)}`}</p>
+                            <p>Varighet {tilLesbarPeriodeMedArstall(dialog.godkjentPlan.gyldighetstidspunkt.fom, dialog.godkjentPlan.gyldighetstidspunkt.tom)}</p>
                         </div>
-                        { antallOppgaver > 0 && <label className="antallNytt" style={{ marginTop: '30px', marginBottom: '30px' }}>{finnAntallOppgaver(dialog)}</label> }
+                        { antallOppgaver > 0 && <i className="antallNytt">{antallOppgaver}</i> }
                     </Link>);
                 })
             }

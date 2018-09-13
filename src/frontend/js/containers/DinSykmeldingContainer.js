@@ -12,7 +12,7 @@ import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import Brodsmuler from '../components/Brodsmuler';
 import Speilingvarsel from '../components/Speilingvarsel';
-import { SYKMELDINGER } from '../menypunkter';
+import { SYKMELDINGER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { erDev } from '../selectors/toggleSelectors';
 import { ARBEIDSTAKER } from '../enums/arbeidssituasjoner';

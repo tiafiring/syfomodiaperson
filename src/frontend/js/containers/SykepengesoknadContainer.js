@@ -8,7 +8,7 @@ import * as sykepengesoknaderActions from '../actions/sykepengesoknader_actions'
 import * as soknaderActions from '../actions/soknader_actions';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
-import { SYKEPENGESOKNADER } from '../menypunkter';
+import { SYKEPENGESOKNADER } from '../enums/menypunkter';
 import { sykepengesoknad as sykepengesoknadPt, soknad as soknadPt } from '../propTypes';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { erDev } from '../selectors/toggleSelectors';

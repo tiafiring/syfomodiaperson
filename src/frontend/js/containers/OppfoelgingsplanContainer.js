@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
-import Side from '../sider/Side';
+import SideFullbredde from '../sider/SideFullbredde';
 import * as oppdialogActions from '../actions/oppfoelgingsdialoger_actions';
 import Feilmelding from '../components/Feilmelding';
 import Oppfoelgingsplan from '../components/oppfoelgingsdialoger/Oppfoelgingsplan';
 import AppSpinner from '../components/AppSpinner';
-import { OPPFOELGINGSPLANER } from '../menypunkter';
+import { OPPFOELGINGSPLANER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 
 export class OppfoelgingsPlanerOversiktSide extends Component {
@@ -21,7 +21,7 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
 
     render() {
         const { oppfoelgingsdialog, ledetekster, henter, hentingFeilet, tilgang, fnr } = this.props;
-        return (<Side fnr={fnr} tittel="Oppfølgingsplaner" aktivtMenypunkt={OPPFOELGINGSPLANER}>
+        return (<SideFullbredde fnr={fnr} tittel="Oppfølgingsplan" aktivtMenypunkt={OPPFOELGINGSPLANER}>
             {
                 (() => {
                     if (henter) {
@@ -36,12 +36,10 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
                     if (hentingFeilet) {
                         return <Feilmelding />;
                     }
-                    return (<div>
-                        <Oppfoelgingsplan oppfoelgingsdialog={oppfoelgingsdialog} fnr={fnr} />
-                    </div>);
+                    return <Oppfoelgingsplan oppfoelgingsdialog={oppfoelgingsdialog} fnr={fnr} />;
                 })()
             }
-        </Side>);
+        </SideFullbredde>);
     }
 }
 

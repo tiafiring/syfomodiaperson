@@ -10,7 +10,7 @@ import Feilmelding from '../components/Feilmelding';
 import OppfoelgingsPlanerOversikt from '../components/oppfoelgingsdialoger/OppfoelgingsPlanerOversikt';
 import AppSpinner from '../components/AppSpinner';
 import IngenPlaner from '../components/oppfoelgingsdialoger/IngenPlaner';
-import { OPPFOELGINGSPLANER } from '../menypunkter';
+import { OPPFOELGINGSPLANER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 
 export class OppfoelgingsPlanerOversiktSide extends Component {

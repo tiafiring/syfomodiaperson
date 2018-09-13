@@ -11,7 +11,7 @@ import MotestatusContainer from './MotestatusContainer';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import * as moterActions from '../actions/moter_actions';
-import { MOETEPLANLEGGER } from '../menypunkter';
+import { MOETEPLANLEGGER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 
 export class MotebookingSide extends Component {

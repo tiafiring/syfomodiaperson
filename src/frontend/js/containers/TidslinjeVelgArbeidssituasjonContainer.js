@@ -4,7 +4,7 @@ import {
     getLedetekst,
     TIDSLINJE_TYPER,
 } from 'digisyfo-npm';
-import Radiofaner from '../Radiofaner';
+import Radiofaner from '../components/Radiofaner';
 
 const verdier = {};
 verdier[TIDSLINJE_TYPER.MED_ARBEIDSGIVER] = 'med-arbeidsgiver';
