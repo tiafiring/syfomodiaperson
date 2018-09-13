@@ -2,18 +2,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getSykmelding, getHtmlLedetekst, getLedetekst } from 'digisyfo-npm';
+import { getSykmelding, getHtmlLedetekst, getLedetekst, sykmeldingstatuser } from 'digisyfo-npm';
 import Side from '../sider/Side';
 import SidetoppSpeilet from '../components/SidetoppSpeilet';
 import * as sykmeldingerActions from '../actions/sykmeldinger_actions';
 import * as arbeidsgiversSykmeldingerActions from '../actions/arbeidsgiverssykmeldinger_actions';
-import SykmeldingSide from '../sykmeldinger/sykmelding/SykmeldingSide';
+import SykmeldingSide from '../components/sykmelding/SykmeldingSide';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import Brodsmuler from '../components/Brodsmuler';
 import Speilingvarsel from '../components/Speilingvarsel';
 import { SYKMELDINGER } from '../menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
+import { erDev } from '../selectors/toggleSelectors';
+import { ARBEIDSTAKER } from '../enums/arbeidssituasjoner';
 
 export class DinSykmeldingSide extends Component {
     componentWillMount() {
@@ -39,10 +41,10 @@ export class DinSykmeldingSide extends Component {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (hentingFeilet) {
+                    if (hentingFeilet && !erDev()) {
                         return <Feilmelding />;
                     }
-                    if (!tilgang.harTilgang) {
+                    if (!tilgang.harTilgang && !erDev()) {
                         return (<Feilmelding
                             tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
                             melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
@@ -89,7 +91,12 @@ export function mapStateToProps(state, ownProps) {
     const dinSykmelding = getSykmelding(state.sykmeldinger.data, sykmeldingId);
     let arbeidsgiversSykmelding = {};
 
-    if (dinSykmelding && (dinSykmelding.status === 'SENDT' || (dinSykmelding.status === 'BEKREFTET' && dinSykmelding.valgtArbeidssituasjon === 'ARBEIDSTAKER'))) {
+    if (dinSykmelding
+        && (
+            dinSykmelding.status === sykmeldingstatuser.SENDT
+            || (dinSykmelding.status === sykmeldingstatuser.BEKREFTET && dinSykmelding.valgtArbeidssituasjon === ARBEIDSTAKER)
+        )
+    ) {
         arbeidsgiversSykmelding = getSykmelding(state.arbeidsgiversSykmeldinger.data, sykmeldingId);
     }
 

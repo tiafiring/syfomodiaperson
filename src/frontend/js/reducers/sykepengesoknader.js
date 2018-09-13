@@ -36,7 +36,7 @@ export const settErOppdelt = (soknad) => {
     });
 };
 
-export default function sykepengesoknader(state = initiellState, action) {
+export default function sykepengesoknader(state = initiellState, action = {}) {
     switch (action.type) {
         case 'HENT_SYKEPENGESOKNADER_FEILET': {
             return Object.assign({}, state, {

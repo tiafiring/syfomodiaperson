@@ -38,9 +38,9 @@ const setUndertittel = (punkt, mote) => {
     let undertittel;
     if (mote) {
         if (mote.status === 'BEKREFTET' && mote.bekreftetAlternativ) {
-            undertittel = 'Dialogmøte ' + tilDatoMedUkedagOgMaanedNavn(mote.bekreftetAlternativ.tid);
+            undertittel = `Dialogmøte ${tilDatoMedUkedagOgMaanedNavn(mote.bekreftetAlternativ.tid)}`;
         } else if (mote.opprettetTidspunkt) {
-            undertittel = 'Møteforespørsel sendt ' + tilDatoMedUkedagOgMaanedNavn(mote.opprettetTidspunkt);
+            undertittel = `Møteforespørsel sendt ${tilDatoMedUkedagOgMaanedNavn(mote.opprettetTidspunkt)}`;
         }
     } else {
         undertittel = 'Ingen møter planlagt';
@@ -106,7 +106,7 @@ export class MotelandingssideSide extends Component {
                                                 <header className="inngangspanel__header">
                                                     <h3 className="js-title" id={`soknad-header-${sti}`}>
                                                         <span className="inngangspanel__tittel">
-                                                          {navn}
+                                                            {navn}
                                                         </span>
                                                     </h3>
                                                 </header>

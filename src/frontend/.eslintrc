@@ -25,7 +25,6 @@
         "react/no-danger": 0,
         "react/no-array-index-key": 0,
         "react/no-find-dom-node": 0,
-        "react/forbid-prop-types": 0,
         "max-len": ["error", 300],
         "prefer-template": 1,
         "linebreak-style": 0,

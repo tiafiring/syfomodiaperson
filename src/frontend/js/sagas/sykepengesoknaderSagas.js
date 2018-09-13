@@ -3,16 +3,23 @@ import { takeEvery } from 'redux-saga';
 import { log } from 'digisyfo-npm';
 import { get } from '../api/index';
 import * as actions from '../actions/sykepengesoknader_actions';
+import { sykepengesoknaderHentet } from '../actions/sykepengesoknader_actions';
+import { erDev } from '../selectors/toggleSelectors';
+import mockSykepengesoknader from '../../test/mockdata/mockSykepengesoknader';
 
 export function* hentSykepengesoknader(action) {
     yield put(actions.henterSykepengesoknader());
 
     try {
         const data = yield call(get, `${window.APP_SETTINGS.REST_ROOT}/sykepengesoknader?fnr=${action.fnr}`);
-        yield put({ type: 'SYKEPENGESOKNADER_HENTET', data });
+        yield put(sykepengesoknaderHentet(data));
     } catch (e) {
         log(e);
-        yield put(actions.hentSykepengesoknaderFeilet());
+        if (erDev()) {
+            yield put(sykepengesoknaderHentet(mockSykepengesoknader));
+        } else {
+            yield put(actions.hentSykepengesoknaderFeilet());
+        }
     }
 }
 

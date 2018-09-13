@@ -17,7 +17,7 @@ import navbruker from './reducers/navbruker';
 import sykmeldinger from './reducers/sykmeldinger';
 import arbeidsgiversSykmeldinger from './reducers/arbeidsgiversSykmeldinger';
 import moter from './reducers/moter';
-import motebehov from './reducers/motebehov'
+import motebehov from './reducers/motebehov';
 import epostinnhold from './reducers/epostinnhold';
 import arbeidsgiverEpostinnhold from './reducers/arbeidsgiverEpostinnhold';
 import modiacontext from './reducers/modiacontext';
@@ -46,6 +46,7 @@ import { hentLedere } from './actions/ledere_actions';
 import { pushModiaContext, hentAktivBruker, hentAktivEnhet } from './actions/modiacontext_actions';
 import { valgtEnhet } from './actions/enhet_actions';
 import { CONTEXT_EVENT_TYPE } from './konstanter';
+import soknader from './reducers/soknader';
 
 const rootReducer = combineReducers({
     history,
@@ -75,14 +76,13 @@ const rootReducer = combineReducers({
     ledetekster,
     tilgang,
     form: formReducer,
+    soknader,
 });
 
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(rootReducer,
-    applyMiddleware(sagaMiddleware),
-);
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(rootSaga);
 

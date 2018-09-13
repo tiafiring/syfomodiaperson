@@ -8,11 +8,12 @@ import SidetoppSpeilet from '../components/SidetoppSpeilet';
 import * as actionCreators from '../actions/sykmeldinger_actions';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
-import DineSykmeldinger from '../sykmeldinger/sykmeldinger/DineSykmeldinger';
+import DineSykmeldinger from '../components/sykmeldinger/DineSykmeldinger';
 import Brodsmuler from '../components/Brodsmuler';
 import { SYKMELDINGER } from '../menypunkter';
 import Speilingvarsel from '../components/Speilingvarsel';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
+import { erDev } from '../selectors/toggleSelectors';
 
 export class SykmeldingerSide extends Component {
     componentWillMount() {
@@ -21,7 +22,7 @@ export class SykmeldingerSide extends Component {
     }
 
     render() {
-        const { brukernavn, ledetekster, henter, hentingFeilet, tilgang, sykmeldinger, fnr } = this.props;
+        const { brukernavn, ledetekster, henter, hentingFeilet, tilgang, sykmeldinger, fnr, sortering } = this.props;
         const htmlIntro = {
             __html: `<p>${getLedetekst('dine-sykmeldinger.introduksjonstekst', ledetekster)}</p>`,
         };
@@ -37,13 +38,13 @@ export class SykmeldingerSide extends Component {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (!tilgang.harTilgang) {
+                    if (!tilgang.harTilgang && !erDev()) {
                         return (<Feilmelding
                             tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
                             melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
                         />);
                     }
-                    if (hentingFeilet) {
+                    if (hentingFeilet && !erDev()) {
                         return <Feilmelding />;
                     }
                     return (<div>
@@ -51,7 +52,11 @@ export class SykmeldingerSide extends Component {
                         <div className="speiling">
                             <Brodsmuler brodsmuler={brodsmuler} />
                             <SidetoppSpeilet tittel="Dine sykmeldinger" htmlTekst={htmlIntro} />
-                            <DineSykmeldinger fnr={fnr} sykmeldinger={sykmeldinger} ledetekster={ledetekster} />
+                            <DineSykmeldinger
+                                fnr={fnr}
+                                sykmeldinger={sykmeldinger}
+                                ledetekster={ledetekster}
+                                sortering={sortering} />
                         </div>
                     </div>);
                 })()
@@ -69,6 +74,7 @@ SykmeldingerSide.propTypes = {
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
     ledetekster: PropTypes.object,
+    sortering: PropTypes.shape(),
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -90,6 +96,7 @@ export function mapStateToProps(state, ownProps) {
         ledetekster: state.ledetekster.data,
         sykmeldinger: state.sykmeldinger.data,
         tilgang: state.tilgang.data,
+        sortering: state.sykmeldinger.sortering,
     };
 }
 
