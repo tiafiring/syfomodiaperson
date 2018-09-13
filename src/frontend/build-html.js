@@ -1,13 +1,11 @@
 var fs = require("fs");
 var Mustache = require("mustache");
 
-front = process.argv[2];
-env = process.argv[3];
-
-var timestamp = Date.now().toString();
+var env = process.argv[2];
+var timestamp = process.argv[3] || Date.now().toString();
 
 var dev = {
-    timestamp: timestamp,
+    timestamp,
     buildRoot: 'http://localhost:3040/assets',
     restRoot: 'http://localhost:8084/modiasyforest/api',
     teksterRestRoot: 'http://localhost:8080/syfotekster/api',
@@ -21,10 +19,11 @@ var dev = {
     contextholderRoot: 'http://localhost:8090/eventdistributer',
     motebehovRoot: 'http://localhost:8811/syfomotebehov/api',
     enableLogging: true,
+    isProd: false,
 };
 
 var prod = {
-    timestamp: timestamp,
+    timestamp,
     buildRoot: '/sykefravaer/js',
     restRoot: '/modiasyforest/api',
     teksterRestRoot: '/syfotekster/api',
@@ -38,9 +37,10 @@ var prod = {
     contextholderRoot: '/eventdistributer',
     motebehovRoot: '/syfomotebehov/api',
     enableLogging: false,
+    isProd: true,
 };
 
-fs.readFile(front, function (err, data) {
+fs.readFile('html/modiasyfofront.mustache', function (err, data) {
     if (err) throw err;
     const html = Mustache.render(data.toString(), env === 'prod' ? prod : dev);
     fs.writeFile('../main/webapp/syfofront.html', html, 'utf-8', (err) => {

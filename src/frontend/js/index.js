@@ -47,6 +47,7 @@ import { pushModiaContext, hentAktivBruker, hentAktivEnhet } from './actions/mod
 import { valgtEnhet } from './actions/enhet_actions';
 import { CONTEXT_EVENT_TYPE } from './konstanter';
 import soknader from './reducers/soknader';
+import '../styles/styles.less';
 
 const rootReducer = combineReducers({
     history,

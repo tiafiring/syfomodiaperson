@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <script src="{{{decoratorRoot}}}/internarbeidsflatedecorator/js/head.min.js"></script>
+    {{#isProd}}
+        <link href="/sykefravaer/js/styles.{{timestamp}}.css" rel="stylesheet"/>
+    {{/isProd}}
 </head>
 <body>
     <div id="header"></div>

@@ -1,51 +1,81 @@
 var Webpack = require('webpack');
 var path = require('path');
-var nodeModulesPath = path.resolve(__dirname, 'node_modules');
 var buildPath = path.resolve(__dirname, '../main/webapp/js');
 var mainPath = path.resolve(__dirname, 'js', 'index.js');
-var stylesPath = path.resolve(__dirname, 'styles', 'styles.less');
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
+var autoprefixer = require('autoprefixer');
 
-var config = {
+var config = function (opts) {
+    var timestamp = opts.timestamp;
+    var extractLess = new MiniCssExtractPlugin({
+        filename: 'styles.' + timestamp + '.css',
+        disable: false,
+    });
 
-  // We change to normal source mapping
-  devtool: 'source-map',
-  entry: [mainPath, stylesPath],
-  output: {
-    path: buildPath,
-    filename: 'bundle-prod.js'
-  },
-  module: {
-    loaders: [{
-      test: /\.js$/,
-      loader: 'babel-loader',
-      query: {
-        presets: ["react", "env"]
-      },
-      exclude: [nodeModulesPath]
-    },
-        {
-            test: /\.less$/,
-            loaders: ['style-loader', 'css-loader', 'less-loader?{"globalVars":{"nodeModulesPath":"\'~\'", "coreModulePath":"\'~\'"}}']
+    return {
+        // We change to normal source mapping
+        devtool: 'source-map',
+        entry: [mainPath],
+        output: {
+            path: buildPath,
+            filename: 'bundle-prod.js',
         },
-        {
-            test: /\.json$/,
-            loader: 'json'
+        mode: 'production',
+        resolve: {
+            alias: {
+                react: path.join(__dirname, 'node_modules', 'react'),
+            },
         },
-        {
-            test: /\.((woff2?|svg)(\?v=[0-9]\.[0-9]\.[0-9]))|(woff2?|svg|jpe?g|png|gif|ico)$/,
-            loader: 'url?limit=10000'
+        module: {
+            rules: [
+                {
+                    test: /\.less$/,
+                    use: [{
+                        loader: MiniCssExtractPlugin.loader
+                    }, {
+                        loader: 'css-loader',
+                    }, {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: function() {
+                                return [autoprefixer]
+                            },
+                        },
+                    }, {
+                        loader: 'less-loader',
+                        options: {
+                            globalVars: {
+                                nodeModulesPath: '~',
+                                coreModulePath: '~',
+                            },
+                        },
+                    }],
+                },
+                {
+                    test: /\.js$/,
+                    exclude: [/node_modules/],
+                    use: [{
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['react', 'env', 'babel-preset-stage-0'],
+                        },
+                    }],
+                },
+                {
+                    test: /\.((woff2?|svg)(\?v=[0-9]\.[0-9]\.[0-9]))|(woff2?|svg|jpe?g|png|gif|ico)$/,
+                    use: [{
+                        loader: 'svg-url-loader',
+                    }],
+                },
+            ],
         },
-        {
-            test: /\.((ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9]))|(ttf|eot)$/,
-            loader: 'file'
-        }]
-  },
-
-  plugins: [
-    new Webpack.DefinePlugin({
-      "process.env.NODE_ENV": "'production'"
-    })
-  ]
-};
+        plugins: [
+            extractLess,
+            new Webpack.DefinePlugin({
+                'process.env.NODE_ENV': '"production"',
+            }),
+        ],
+    };
+}
 
 module.exports = config;
