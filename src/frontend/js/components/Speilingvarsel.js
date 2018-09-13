@@ -1,11 +1,11 @@
 import React from 'react';
-import Alertstripe from 'nav-frontend-alertstriper';
+import Panel from 'nav-frontend-paneler';
 import PropTypes from 'prop-types';
 
 const Speilingvarsel = ({ brukernavn }) => {
-    return (<Alertstripe type="info" className="blokk--s">
-        <p>Dette er slik {brukernavn} ser det på nav.no</p>
-    </Alertstripe>);
+    return (<Panel className="panel panel--komprimert blokk--s">
+        <p>Dette er slik <strong>{brukernavn}</strong> ser det på nav.no</p>
+    </Panel>);
 };
 
 Speilingvarsel.propTypes = {

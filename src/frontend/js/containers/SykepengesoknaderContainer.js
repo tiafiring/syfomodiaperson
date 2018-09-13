@@ -65,7 +65,7 @@ export class SykepengesoknaderSide extends Component {
                     return (<div>
                         <Feilstripe
                             className="blokk--s"
-                            tekst={`Beklager – vi kunne ikke hente alle sykepengesøknadene til ${brukernavn}`}
+                            tekst="Foreløpig vises ikke søknader for selvstendig næringsdrivende, frilansere og søknad om å beholde sykepenger under opphold utenfor Norge."
                             vis={hentingFeiletSoknader || hentingFeiletSykepengesoknader} />
                         <Speilingvarsel brukernavn={brukernavn} />
                         <div className="speiling">
