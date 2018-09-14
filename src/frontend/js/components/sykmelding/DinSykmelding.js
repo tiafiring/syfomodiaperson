@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import KnappBase from 'nav-frontend-knapper';
-import { DineSykmeldingOpplysninger, getLedetekst } from 'digisyfo-npm';
-import IllustrertInnhold from '../IllustrertInnhold';
+import { DineSykmeldingOpplysninger, getLedetekst, Bjorn } from 'digisyfo-npm';
 import Alertstripe from 'nav-frontend-alertstriper';
 
 const navn = (pasient) => {
@@ -13,18 +11,35 @@ const navn = (pasient) => {
     return `${pasient.fornavn} ${pasient.etternavn}`;
 };
 
+export const getSykmeldtFornavn = (sykmelding) => {
+    return sykmelding.pasient.mellomnavn
+        ? `${sykmelding.pasient.fornavn} ${sykmelding.pasient.mellomnavn}`
+        : `${sykmelding.pasient.fornavn}`;
+};
+
+
 const DinSykmelding = ({ sykmelding, ledetekster, visEldreSykmeldingVarsel, eldsteSykmeldingId }) => {
     return (<div>
-        <div className="panel blokk--s">
-            <IllustrertInnhold ikon="/sykefravaer/img/svg/din-sykmelding-veileder.svg" ikonAlt="NAV-veileder">
-                <div>
-                    <p>{getLedetekst('din-sykmelding.introtekst.abtest', ledetekster)}</p>
-                    <p className="sist introtekst__knapperad">
-                        <KnappBase type="standard" mini disabled>Gå til utfylling</KnappBase>
-                    </p>
-                </div>
-            </IllustrertInnhold>
-        </div>
+        <Bjorn
+            className="blokk"
+            hvit
+            stor
+            rootUrl="/sykefravaer">
+            <div>
+                <p>
+                    {
+                        getLedetekst('din-sykmelding.introtekst.bjorn', {
+                            '%NAVN%': getSykmeldtFornavn(sykmelding),
+                        })
+                    }
+                </p>
+                <p className="introtekst__knapperad">
+                    <button
+                        disabled
+                        className="knapp knapp--mini">Gå til utfylling</button>
+                </p>
+            </div>
+        </Bjorn>
         {
             visEldreSykmeldingVarsel && (<Alertstripe type="info">
                     <p className="sist side-innhold">
