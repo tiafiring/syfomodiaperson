@@ -9,6 +9,14 @@ import UtvidbarHistorikk from './UtvidbarHistorikk';
 import Alertstripe from 'nav-frontend-alertstriper';
 import Sidetopp from '../Sidetopp';
 
+const hentSykeforloepMedEvents = (sykeforloepliste, eventliste) => {
+    return sykeforloepliste.filter((forloep) => {
+        return eventliste.filter((event) => {
+            return new Date(forloep.skyggeFom) < new Date(event.tidspunkt) && new Date(event.tidspunkt) < new Date(forloep.sluttdato);
+        }).length > 0;
+    });
+}
+
 const Feilmelding = () => {
     return (<Alertstripe type="advarsel" className="blokk">
         <p>Det skjedde en feil! Det er ikke sikkert du får all historikken som finnes.</p>
@@ -37,6 +45,8 @@ const Historikk = ({ historikk, sykeforloep }) => {
         return new Date(event.tidspunkt) > new Date(sykeforloepSortert[0].sluttdato);
     });
 
+    const sykeforloepMedEvents = hentSykeforloepMedEvents(sykeforloepSortert, historikkEvents);
+
     return (<div>
         {
             historikk.hentingFeilet && <Feilmelding />
@@ -64,11 +74,11 @@ const Historikk = ({ historikk, sykeforloep }) => {
                 </Panel>)
             }
             {
-                sykeforloepSortert.length > 0
+                sykeforloepMedEvents.length > 0
                 && (<div className="blokk--l">
                         <h2 className="panel__tittel">Sykefraværstilfeller</h2>
                         {
-                            sykeforloepSortert
+                            sykeforloepMedEvents
                                 .map((forloep, index) => {
                                     return (<UtvidbarHistorikk key={index} tittel={tilLesbarPeriodeMedArstall(forloep.oppfoelgingsdato, forloep.sluttdato)}>
                                         <ol className="historikkeventliste">
