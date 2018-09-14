@@ -4,9 +4,10 @@ import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
 import { Utvidbar } from 'digisyfo-npm';
 import EtikettBase from 'nav-frontend-etiketter';
-import Personkort, { PersonkortTittel } from '../../../js/components/personkort/Personkort';
+import Personkort from '../../../js/components/personkort/Personkort';
 import PersonkortVisning  from '../../../js/components/personkort/PersonkortVisning';
 import { hentBrukersAlderFraFnr } from '../../../js/utils/fnrUtils';
+import PersonkortHeader from "../../../js/components/personkort/PersonkortHeader";
 
 describe('Personkort', () => {
     let hentDiskresjonskode;
@@ -50,7 +51,7 @@ describe('Personkort', () => {
         />);
     });
 
-    it('Skal vise PersonkortTittel', () => {
+    it('Skal vise PersonkortHeader', () => {
         const komponent = mount(<Personkort
             actions={actions}
             diskresjonskode={diskresjonskode}
@@ -58,7 +59,7 @@ describe('Personkort', () => {
             fastleger={fastleger}
             navbruker={navbruker}
         />);
-        expect(komponent.find(PersonkortTittel)).to.have.length(1);
+        expect(komponent.find(PersonkortHeader)).to.have.length(1);
     });
 
     it('Skal vise Utvidbar', () => {
@@ -69,7 +70,7 @@ describe('Personkort', () => {
         expect(komponent.find(PersonkortVisning)).to.have.length(1);
     });
 
-    describe('PersonkortTittel', () => {
+    describe('PersonkortHeader', () => {
         let diskresjonskode;
         let egenansatt;
         let navbruker;
@@ -84,7 +85,7 @@ describe('Personkort', () => {
                     fnr: '1234',
                 }
             };
-            komponent = shallow(<PersonkortTittel
+            komponent = shallow(<PersonkortHeader
                 diskresjonskode={diskresjonskode}
                 egenansatt={egenansatt}
                 navbruker={navbruker}
@@ -98,7 +99,7 @@ describe('Personkort', () => {
         });
 
         it('Skal vise ikke vise noen EtikettBase, om visEtikett gir false', () => {
-            komponent = shallow(<PersonkortTittel
+            komponent = shallow(<PersonkortHeader
                 diskresjonskode={diskresjonskode}
                 egenansatt={egenansatt}
                 navbruker={navbruker}
@@ -112,7 +113,7 @@ describe('Personkort', () => {
                     diskresjonskode: '6',
                 },
             };
-            komponent = shallow(<PersonkortTittel
+            komponent = shallow(<PersonkortHeader
                 diskresjonskode={diskresjonskode}
                 egenansatt={egenansatt}
                 navbruker={navbruker}
@@ -126,7 +127,7 @@ describe('Personkort', () => {
                     diskresjonskode: '7',
                 },
             };
-            komponent = shallow(<PersonkortTittel
+            komponent = shallow(<PersonkortHeader
                 diskresjonskode={diskresjonskode}
                 egenansatt={egenansatt}
                 navbruker={navbruker}
@@ -140,7 +141,7 @@ describe('Personkort', () => {
                     erEgenAnsatt: true,
                 },
             };
-            komponent = shallow(<PersonkortTittel
+            komponent = shallow(<PersonkortHeader
                 diskresjonskode={diskresjonskode}
                 egenansatt={egenansatt}
                 navbruker={navbruker}

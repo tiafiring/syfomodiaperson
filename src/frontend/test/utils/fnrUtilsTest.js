@@ -5,6 +5,7 @@ import {
     hentBrukersFoedseldatoFraFnr,
     hentBrukersAlderFraFnr,
     hentBrukersKjoennFraFnr,
+    formaterFnr,
 } from '../../js/utils/fnrUtils';
 
 describe('fnrUtils', () => {
@@ -136,4 +137,11 @@ describe('fnrUtils', () => {
             expect(hentBrukersAlderFraFnr(fnrFoedselsDatoIkkePassert)).to.equal(alder);
         });
     });
+
+    describe("formaterFnr", () => {
+        it("Skal formatere fnr", () => {
+            const s = formaterFnr("12121233333");
+            expect(s).to.equal("121212 33333");
+        })
+    })
 });

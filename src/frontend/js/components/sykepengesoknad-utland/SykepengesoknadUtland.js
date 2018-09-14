@@ -33,6 +33,6 @@ SykepengesoknadUtland.propTypes = {
     brodsmuler: PropTypes.arrayOf(brodsmule),
     soknad: soknadPt,
     fnr: PropTypes.string,
-}
+};
 
 export default SykepengesoknadUtland;

@@ -68,7 +68,7 @@ export class OppfoelgingsPlanerOversikt extends Component {
                     const antallOppgaver = finnAntallOppgaver(dialog);
                     return (<Link key={index} className="navigasjonspanel navigasjonspanel--stor" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
                         <div className="navigasjonselement">
-                            <h3>{dialog.virksomhet.navn}</h3>
+                            <h3 className="panel__tittel">{dialog.virksomhet.navn}</h3>
                             <p>Varighet {tilLesbarPeriodeMedArstall(dialog.godkjentPlan.gyldighetstidspunkt.fom, dialog.godkjentPlan.gyldighetstidspunkt.tom)}</p>
                         </div>
                         { antallOppgaver > 0 && <i className="antallNytt">{antallOppgaver}</i> }

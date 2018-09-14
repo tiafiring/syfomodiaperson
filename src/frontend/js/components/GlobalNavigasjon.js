@@ -152,7 +152,7 @@ class GlobalNavigasjon extends Component {
                                 // <Link /> fra react-router kan ikke brukes da den ikke støtter ref-attributtet.
                                 browserHistory.push(`/sykefravaer/${fnr}/${sti}`);
                             }}>
-                            <span className="navigasjon__element__tekst" dangerouslySetInnerHTML={{__html: navn}} />
+                            <span className="navigasjon__element__tekst" dangerouslySetInnerHTML={{ __html: navn }} />
                             {
                                 antallPrikker > 0 && <i className="antallNytt">{antallPrikker}</i>
                             }
