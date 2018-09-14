@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { toDatePrettyPrint } from 'digisyfo-npm';
+import { tilLesbarDatoMedArstall } from 'digisyfo-npm';
 import OppfoelgingsdialogIkon from '../../ikoner/OppfoelgingsdialogIkon';
 import MoteIkon from '../../ikoner/MoteIkon';
 
@@ -14,17 +14,17 @@ const hentIkon = (event) => {
 };
 
 const HistorikkEvent = ({ event }) => {
-    return (<div>
-        <p>
-            { toDatePrettyPrint(event.tidspunkt) }
+    return (<li className="historikkevent">
+        <p className="historikkevent__meta">
+            {tilLesbarDatoMedArstall(event.tidspunkt)}
         </p>
-        <div className="historikkinfo">
-            <div className="historikkikon">
-                { hentIkon(event) }
+        <div className="historikkevent__info">
+            <div className="historikkevent__ikon">
+                {hentIkon(event)}
             </div>
-            { event.tekst }
+            <p className="historikkevent__tekst">{event.tekst}</p>
         </div>
-    </div>);
+    </li>);
 };
 
 HistorikkEvent.propTypes = {

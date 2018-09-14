@@ -7,6 +7,7 @@ import {
     tilLesbarPeriodeMedArstall,
 } from 'digisyfo-npm';
 import Alertstripe from 'nav-frontend-alertstriper';
+import Sidetopp from '../Sidetopp';
 
 const finnAntallOppgaver = (dialog) => {
     return dialog.oppgaver.filter((oppgave) => {
@@ -40,8 +41,9 @@ export class OppfoelgingsPlanerOversikt extends Component {
         });
 
         return (<div>
+            <Sidetopp tittel="Oppfølgingsplaner" />
             <div className="blokk--l">
-                <h2>{getLedetekst('fss.oppfoelgingsdialog.oversikt.aktuelle')}</h2>
+                <h2 className="typo-systemtittel blokk--xs">{getLedetekst('fss.oppfoelgingsdialog.oversikt.aktuelle')}</h2>
                 {aktiveDialoger.length === 0 && <Alertstripe type="info">
                     <p>{getLedetekst('fss.oppfoelgingsdialog.oversikt.aktuelle--ingen')}</p>
                 </Alertstripe>}
@@ -58,7 +60,7 @@ export class OppfoelgingsPlanerOversikt extends Component {
                     })
                 }
             </div>
-            <h2>{getLedetekst('fss.oppfoelgingsdialog.oversikt.inaktive')}</h2>
+            <h2 className="typo-systemtittel blokk--xs">{getLedetekst('fss.oppfoelgingsdialog.oversikt.inaktive')}</h2>
             {
                 inaktiveDialoger.length === 0 && <Alertstripe type="info">
                 <p>{getLedetekst('fss.oppfoelgingsdialog.oversikt.inaktive--ingen')}</p>

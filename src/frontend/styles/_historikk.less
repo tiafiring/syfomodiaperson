@@ -1,25 +1,36 @@
-.historikkevent {
-  li {
-    border-top: 1px solid black;
-    display: block;
-    padding-top: 2em;
-  }
-  padding: 0;
+.historikkeventliste {
+  margin-bottom: 2em;
 }
 
-.sykeforloepstilfelle {
-  borderTop: 1px solid black;
-  li {
-    display: block;
-  }
+.sykeforloepstilfelleliste {
   margin: 0;
   padding: 0;
 }
 
-.historikkikon {
+.sykeforloepstilfelle {
+  display: block;
+}
+
+.historikkeventliste {
+  margin: 0;
+  padding: 0;
+}
+
+.historikkevent {
+  .typo-normal-mixin();
+  border-bottom: 1px solid @navGra40;
+  padding: 1.5em 0;
+  display: block;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.historikkevent__ikon {
   margin-right: 10px;
 }
 
-.historikkinfo {
+.historikkevent__info {
   display: flex;
 }
