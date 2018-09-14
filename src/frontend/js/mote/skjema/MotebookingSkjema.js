@@ -78,8 +78,8 @@ export class MotebookingSkjema extends Component {
                     melding={feilmelding}
                 />
             }
+            <Sidetopp tittel={getLedetekst('mote.motebookingskjema.overskrift', ledetekster)} />
             <form className="panel" onSubmit={handleSubmit(submit)}>
-                <Sidetopp tittel={getLedetekst('mote.motebookingskjema.overskrift', ledetekster)} />
                 <div className="skjema-fieldset js-arbeidsgiver blokk--l">
                     <legend>{getLedetekst('mote.motebookingskjema.arbeidsgivers-opplysninger', ledetekster)}</legend>
                     <VelgLeder

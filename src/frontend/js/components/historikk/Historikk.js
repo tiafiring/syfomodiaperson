@@ -1,19 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Panel } from 'nav-frontend-paneler';
-import { toDatePrettyPrint } from 'digisyfo-npm';
+import { toDatePrettyPrint, tilLesbarPeriodeMedArstall } from 'digisyfo-npm';
 import HistorikkEvent from './HistorikkEvent';
 import AppSpinner from '../../components/AppSpinner';
 import IngenHistorikk from './IngenHistorikk';
 import UtvidbarHistorikk from './UtvidbarHistorikk';
 import Alertstripe from 'nav-frontend-alertstriper';
+import Sidetopp from '../Sidetopp';
 
 const Feilmelding = () => {
-    return (<Panel className="blokk--s">
-        <Alertstripe type="feil">
-            <p>Det skjedde en feil! Det er ikke sikkert du får all historikken som finnes!</p>
-        </Alertstripe>
-    </Panel>);
+    return (<Alertstripe type="advarsel" className="blokk">
+        <p>Det skjedde en feil! Det er ikke sikkert du får all historikken som finnes.</p>
+    </Alertstripe>);
 };
 
 const Historikk = ({ historikk, sykeforloep }) => {
@@ -42,56 +41,55 @@ const Historikk = ({ historikk, sykeforloep }) => {
         {
             historikk.hentingFeilet && <Feilmelding />
         }
-        <Panel>
-            <h1 style={{ margin: 0 }}>Logg</h1>
-        </Panel>
+        <Sidetopp tittel="Logg" />
         <div>
             {
                 historikk.henterOppfoelgingsdialoger || (historikk.henterMoter && <AppSpinner />)
             }
-            <Panel>
-                { eventsEtterSisteSykefravaer.length > 0 &&
-                    <ol className="historikkevent">
+            {
+                eventsEtterSisteSykefravaer.length > 0
+                && (<Panel className="blokk">
+                    <h2 className="panel__tittel">Hendelser</h2>
+                    <ol className="historikkeventliste">
                         {
                             eventsEtterSisteSykefravaer
                                 .sort((h1, h2) => {
                                     return new Date(h2.tidspunkt) - new Date(h1.tidspunkt);
                                 })
                                 .map((event, index) => {
-                                    return (<li className="blokk--s" key={index}>
-                                        <HistorikkEvent event={event} key={index} />
-                                    </li>);
+                                    return (<HistorikkEvent event={event} key={index} />);
                                 })
                         }
                     </ol>
-                }
-                <ol className="sykeforloepstilfelle">
-                    { sykeforloepSortert
-                        .map((forloep, index) => {
-                            return (<li key={index} className="blokk--l">
-                                <div>
-                                    <UtvidbarHistorikk
-                                        head={<h2>Sykefraværstilfellet { toDatePrettyPrint(forloep.oppfoelgingsdato) } - { toDatePrettyPrint(forloep.sluttdato) }</h2>}
-                                        body={<ol className="historikkevent">
-                                            { historikkEvents
-                                                .sort((h1, h2) => {
-                                                    return new Date(h2.tidspunkt) - new Date(h1.tidspunkt);
-                                                })
-                                                .map((event, idx) => {
-                                                    if (new Date(forloep.skyggeFom) < new Date(event.tidspunkt) && new Date(event.tidspunkt) < new Date(forloep.sluttdato)) {
-                                                        return <li key={idx} className="blokk--s"><HistorikkEvent event={event} /></li>;
-                                                    }
-                                                    return null;
-                                                })
+                </Panel>)
+            }
+            {
+                sykeforloepSortert.length > 0
+                && (<div className="blokk--l">
+                        <h2 className="panel__tittel">Sykefraværstilfeller</h2>
+                        {
+                            sykeforloepSortert
+                                .map((forloep, index) => {
+                                    return (<UtvidbarHistorikk key={index} tittel={tilLesbarPeriodeMedArstall(forloep.oppfoelgingsdato, forloep.sluttdato)}>
+                                        <ol className="historikkeventliste">
+                                            {
+                                                historikkEvents
+                                                    .sort((h1, h2) => {
+                                                        return new Date(h2.tidspunkt) - new Date(h1.tidspunkt);
+                                                    })
+                                                    .map((event, idx) => {
+                                                        if (new Date(forloep.skyggeFom) < new Date(event.tidspunkt) && new Date(event.tidspunkt) < new Date(forloep.sluttdato)) {
+                                                            return <HistorikkEvent key={idx} event={event} />;
+                                                        }
+                                                        return null;
+                                                    })
                                             }
-                                        </ol>}
-                                    />
-                                </div>
-                            </li>);
-                        })
-                    }
-                </ol>
-            </Panel>
+                                        </ol>
+                                    </UtvidbarHistorikk>);
+                                })
+                        }
+                </div>)
+            }
         </div>
     </div>);
 };
