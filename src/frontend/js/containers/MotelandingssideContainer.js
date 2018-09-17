@@ -5,33 +5,33 @@ import { Link } from 'react-router';
 import { getHtmlLedetekst, getLedetekst } from 'digisyfo-npm';
 import Side from '../sider/Side';
 import { MOETEPLANLEGGER } from '../enums/menypunkter';
-import { hentMoter } from '../actions/moter_actions';
-import { hentMotebehov } from '../actions/motebehov_actions';
+import * as moterActions from '../actions/moter_actions';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { tilDatoMedUkedagOgMaanedNavn } from '../utils/datoUtils';
 
 const moteMenypunkt = {
-    navn: 'Møte',
     sti: 'mote',
     punkt: 'MOTE',
 };
 
 const avklaringMenypunkt = {
-    navn: 'Møtebehov',
     sti: 'motebehov',
     punkt: 'MOTEBEHOV',
 };
 
-const setNavn = (mote) => {
-    if (mote) {
-        if (mote.status === 'BEKREFTET') {
-            return 'Bekreftet møte';
+const setTittel = (punkt, mote) => {
+    if (punkt === 'MOTE') {
+        if (mote) {
+            if (mote.status === 'BEKREFTET') {
+                return 'Bekreftet møte';
+            }
+            return 'Se møtestatus';
         }
-        return 'Se møtestatus';
+        return 'Forespør møte';
     }
-    return 'Book møte';
+    return 'Møtebehov';
 };
 
 const setUndertittel = (punkt, mote) => {
@@ -56,7 +56,6 @@ export class MotelandingssideSide extends Component {
     constructor(props = false) {
         super(props);
         this.props.hentMoter(this.props.fnr);
-        this.props.hentMotebehov(this.props.fnr);
     }
 
     render() {
@@ -92,11 +91,9 @@ export class MotelandingssideSide extends Component {
                         </div>
                         <ul aria-label="Navigasjon" className="motelandingsside__punktliste">
                             {
-                                this.menypunkter.map(({ navn, sti, punkt }, index) => {
+                                this.menypunkter.map(({ sti, punkt }, index) => {
                                     const undertittel = setUndertittel(punkt, mote);
-                                    if (punkt === 'MOTE') {
-                                        navn = setNavn(mote);
-                                    }
+                                    const tittel = setTittel(punkt, mote);
                                     return (<li key={index} className="navigasjon__element">
                                         <Link
                                             className="motelandingsside__panel"
@@ -106,7 +103,7 @@ export class MotelandingssideSide extends Component {
                                                 <header className="inngangspanel__header">
                                                     <h3 className="js-title" id={`soknad-header-${sti}`}>
                                                         <span className="inngangspanel__tittel">
-                                                            {navn}
+                                                          {tittel}
                                                         </span>
                                                     </h3>
                                                 </header>
@@ -127,8 +124,6 @@ export class MotelandingssideSide extends Component {
 MotelandingssideSide.propTypes = {
     fnr: PropTypes.string,
     mote: PropTypes.object,
-    motebehovet: PropTypes.object,
-    hentMotebehov: PropTypes.func,
     tilgang: PropTypes.object,
     hentMoter: PropTypes.func,
     henter: PropTypes.bool,
@@ -148,15 +143,9 @@ export const mapStateToProps = (state, ownProps) => {
         ledetekster: state.ledetekster.data,
         hentingFeilet: state.tilgang.hentingFeilet || state.ledetekster.hentingFeilet,
         tilgang: state.tilgang.data,
-        motebehovet: state.motebehov.data[0],
     };
 };
 
-export const mapDispatchToProps = {
-    hentMoter,
-    hentMotebehov,
-};
-
-const MotelandingssideContainer = connect(mapStateToProps, mapDispatchToProps)(MotelandingssideSide);
+const MotelandingssideContainer = connect(mapStateToProps, moterActions)(MotelandingssideSide);
 
 export default MotelandingssideContainer;

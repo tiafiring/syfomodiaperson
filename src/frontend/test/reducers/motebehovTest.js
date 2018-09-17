@@ -26,6 +26,7 @@ describe('motebehov', () => {
             expect(nextState).to.deep.equal({
                 data: [],
                 henter: true,
+                hentet: false,
                 hentingFeilet: false,
             });
         });
@@ -100,6 +101,7 @@ describe('motebehov', () => {
                     }
                 }],
                 henter: false,
+                hentet: true,
                 hentingFeilet: false,
             });
         });
@@ -113,6 +115,7 @@ describe('motebehov', () => {
             expect(nextState).to.deep.equal({
                 data: [],
                 henter: false,
+                hentet: false,
                 hentingFeilet: true,
             });
         });

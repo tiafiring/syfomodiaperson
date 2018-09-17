@@ -53,3 +53,5 @@ fasitResources:
     resourceType: restservice
   - alias: moteapifss
     resourceType: restservice
+  - alias: syfomotebehovapi
+    resourceType: restservice

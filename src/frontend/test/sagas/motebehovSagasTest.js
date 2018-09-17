@@ -1,15 +1,15 @@
-import {expect} from "chai";
-import {hentMotebehov} from "../../js/sagas/motebehovSagas.js";
-import {get} from "../../js/api/index";
-import {call, put} from "redux-saga/effects";
+import { expect } from "chai";
+import { hentMotebehov } from "../../js/sagas/motebehovSagas.js";
+import { get } from "../../js/api/index";
+import { call, put } from "redux-saga/effects";
 
 describe("motebehovSagas", () => {
 
     beforeEach(() => {
         window.APP_SETTINGS = {
-            REST_ROOT: "http://tjenester.nav.no/sykefravaer",
+            REST_ROOT: "http://tjenester.nav.no/",
             SYFOMOTEBEHOV_ROOT: "http://tjenester.nav.no/syfomotebehov/api"
-        }
+        };
     });
 
     describe("hentMotebehov", () => {
@@ -23,18 +23,16 @@ describe("motebehovSagas", () => {
             expect(generator.next().value).to.deep.equal(nextPut);
         });
 
-        xit("Skal hente et array bestående av motebehov", () => {
-            const nextCall = call(get, "http://tjenester.nav.no/syfomotebehov/motebehov?fnr=123");
+        it("Skal hente et array bestående av motebehov", () => {
+            const nextCall = call(get, "https://syfomotebehov-q1.nais.preprod.local/syfomotebehov/api/veileder/motebehov?fnr=123");
 
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        xit("Skal dispatche MOTEBEHOV_HENTET", () => {
+        it("Skal dispatche MOTEBEHOV_HENTET", () => {
             const nextPut = put({type: 'MOTEBEHOV_HENTET', data: [{id: 1}]});
 
             expect(generator.next([{id: 1}]).value).to.deep.equal(nextPut);
-        });        
-
+        });
     })
-
 });
