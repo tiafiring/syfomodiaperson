@@ -123,10 +123,10 @@ class GlobalNavigasjon extends Component {
                     focusIndex,
                 });
                 this.setFocus(focusIndex);
+                break;
             }
-            default: {
-
-            }
+            default:
+                break;
         }
     }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { getLedetekst, toDatePrettyPrint, sykepengesoknadstatuser, tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from 'digisyfo-npm';
 import { sykepengesoknad as sykepengesoknadPt, soknadEllerSykepengesoknad } from '../../propTypes';
@@ -105,7 +106,7 @@ export const TeaserTittel = ({ soknad }) => {
                         tilLesbarDatoMedArstall(
                             soknad.soknadstype === OPPHOLD_UTLAND || soknad.soknadstype === SELVSTENDIGE_OG_FRILANSERE
                                 ? soknad.opprettetDato
-                                : soknad.tom,
+                                : soknad.tom
                         ),
                 })
             }
@@ -166,6 +167,7 @@ const SykepengesoknadTeaser = ({ soknad, fnr }) => {
 
 SykepengesoknadTeaser.propTypes = {
     soknad: soknadEllerSykepengesoknad,
+    fnr: PropTypes.string,
 };
 
 export default SykepengesoknadTeaser;

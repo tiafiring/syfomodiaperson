@@ -36,17 +36,19 @@ const DinSykmelding = ({ sykmelding, ledetekster, visEldreSykmeldingVarsel, elds
                 <p className="introtekst__knapperad">
                     <button
                         disabled
-                        className="knapp knapp--mini">Gå til utfylling</button>
+                        className="knapp knapp--mini">
+                        Gå til utfylling
+                    </button>
                 </p>
             </div>
         </Bjorn>
         {
             visEldreSykmeldingVarsel && (<Alertstripe type="info">
-                    <p className="sist side-innhold">
-                        <span>{getLedetekst('starte-sykmelding.eldre-sykmeldinger.tekst', ledetekster)} </span>
-                        <Link to={`/sykefravaer/sykmeldinger/${eldsteSykmeldingId}`}>{getLedetekst('starte-sykmelding.eldre-sykmeldinger.lenke', ledetekster)}</Link>
-                    </p>
-                </Alertstripe>)
+                <p className="sist side-innhold">
+                    <span>{getLedetekst('starte-sykmelding.eldre-sykmeldinger.tekst', ledetekster)} </span>
+                    <Link to={`/sykefravaer/sykmeldinger/${eldsteSykmeldingId}`}>{getLedetekst('starte-sykmelding.eldre-sykmeldinger.lenke', ledetekster)}</Link>
+                </p>
+            </Alertstripe>)
         }
         <header className="panelHeader panelHeader--lysebla">
             <img className="panelHeader__ikon" src="/sykefravaer/img/svg/person.svg" alt="Du" />
@@ -57,7 +59,10 @@ const DinSykmelding = ({ sykmelding, ledetekster, visEldreSykmeldingVarsel, elds
             <h2 className="panelHeader__tittel">{navn(sykmelding.pasient)}</h2>
         </header>
         <div className="panel blokk">
-            <DineSykmeldingOpplysninger sykmelding={sykmelding} ledetekster={ledetekster} />
+            <DineSykmeldingOpplysninger
+                sykmelding={sykmelding}
+                ledetekster={ledetekster}
+            />
         </div>
     </div>);
 };

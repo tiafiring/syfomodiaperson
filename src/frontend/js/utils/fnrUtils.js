@@ -55,4 +55,4 @@ export const formaterFnr = (fnr) => {
     return fnr
         ? fnr.replace(/(......)(.....)/g, '$1 $2')
         : null;
-}
+};

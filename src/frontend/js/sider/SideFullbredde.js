@@ -6,7 +6,7 @@ import ContextContainer from '../context/ContextContainer';
 
 const DocumentTitle = require('react-document-title');
 
-const Side = ({ tittel = '', children, aktivtMenypunkt, fnr }) => {
+const Side = ({ tittel = '', children }) => {
     return (<DocumentTitle title={tittel + (tittel.length > 0 ? ' - Sykefravær' : 'Sykefravær')}>
         <Container>
             <Row>

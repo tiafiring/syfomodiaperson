@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import EtikettBase from 'nav-frontend-etiketter';
-import {formaterFnr, hentBrukersAlderFraFnr, hentBrukersKjoennFraFnr} from '../../utils/fnrUtils';
+import {
+    formaterFnr,
+    hentBrukersAlderFraFnr,
+    hentBrukersKjoennFraFnr,
+} from '../../utils/fnrUtils';
 import { KJOENN } from '../../konstanter';
 
 const PersonkortHeader = ({ diskresjonskode, egenansatt, navbruker }) => {
@@ -30,8 +34,8 @@ const PersonkortHeader = ({ diskresjonskode, egenansatt, navbruker }) => {
                     && (<EtikettBase type="fokus">Kode 7</EtikettBase>)
                 }
                 {
-                    egenansatt.data.erEgenAnsatt &&
-                    <EtikettBase type="fokus">Egen ansatt</EtikettBase>
+                    egenansatt.data.erEgenAnsatt
+                    && <EtikettBase type="fokus">Egen ansatt</EtikettBase>
                 }
             </div>
         }

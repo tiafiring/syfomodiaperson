@@ -18,6 +18,7 @@ const opprettWSConnection = (actions, veilederinfo) => {
         if (wsCallback.data === CONTEXT_EVENT_TYPE.NY_AKTIV_BRUKER) {
             actions.hentAktivEnhet({
                 callback: (aktivBruker) => {
+                    // eslint-disable-next-line no-undef
                     if (aktivBruker !== fnr) {
                         window.location = `/sykefravaer/${aktivBruker}`;
                     }

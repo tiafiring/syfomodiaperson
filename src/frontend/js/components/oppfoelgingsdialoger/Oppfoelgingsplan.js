@@ -47,8 +47,9 @@ const PlanVisning = ({ oppfoelgingsdialog, dokumentinfo, fnr, actions, veilederi
                     }}
                     id="marker__utfoert"
                     disabled={erOppgaveFullfoert(sePlanOppgave)}
-                    checked={erOppgaveFullfoert(sePlanOppgave)} />
-                    : (<Alertstripe type="info">
+                    checked={erOppgaveFullfoert(sePlanOppgave)}
+                />
+                : (<Alertstripe type="info">
                     <p>Fant dessverre ingen oppgave knyttet til denne planen</p>
                 </Alertstripe>);
     };

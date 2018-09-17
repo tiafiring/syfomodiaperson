@@ -5,11 +5,12 @@ import * as egenansattActions from '../actions/egenansatt_actions';
 import * as diskresjonskodeActions from '../actions/diskresjonskode_actions';
 import * as fastlegeActions from '../actions/fastleger_actions';
 
+
 export function mapDispatchToProps(dispatch) {
     const actions = Object.assign({},
         diskresjonskodeActions,
         egenansattActions,
-        fastlegeActions,
+        fastlegeActions
     );
     return {
         actions: bindActionCreators(actions, dispatch),

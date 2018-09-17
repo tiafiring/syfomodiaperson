@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Panel } from 'nav-frontend-paneler';
-import { toDatePrettyPrint, tilLesbarPeriodeMedArstall } from 'digisyfo-npm';
+import Alertstripe from 'nav-frontend-alertstriper';
+import { tilLesbarPeriodeMedArstall } from 'digisyfo-npm';
 import HistorikkEvent from './HistorikkEvent';
 import AppSpinner from '../../components/AppSpinner';
 import IngenHistorikk from './IngenHistorikk';
 import UtvidbarHistorikk from './UtvidbarHistorikk';
-import Alertstripe from 'nav-frontend-alertstriper';
 import Sidetopp from '../Sidetopp';
 
 const hentSykeforloepMedEvents = (sykeforloepliste, eventliste) => {
@@ -15,7 +15,7 @@ const hentSykeforloepMedEvents = (sykeforloepliste, eventliste) => {
             return new Date(forloep.skyggeFom) < new Date(event.tidspunkt) && new Date(event.tidspunkt) < new Date(forloep.sluttdato);
         }).length > 0;
     });
-}
+};
 
 const Feilmelding = () => {
     return (<Alertstripe type="advarsel" className="blokk">
@@ -57,8 +57,8 @@ const Historikk = ({ historikk, sykeforloep }) => {
                 historikk.henterOppfoelgingsdialoger || (historikk.henterMoter && <AppSpinner />)
             }
             {
-                eventsEtterSisteSykefravaer.length > 0
-                && (<Panel className="blokk">
+                eventsEtterSisteSykefravaer.length > 0 &&
+                (<Panel className="blokk">
                     <h2 className="panel__tittel">Hendelser</h2>
                     <ol className="historikkeventliste">
                         {
@@ -74,30 +74,30 @@ const Historikk = ({ historikk, sykeforloep }) => {
                 </Panel>)
             }
             {
-                sykeforloepMedEvents.length > 0
-                && (<div className="blokk--l">
-                        <h2 className="panel__tittel">Sykefraværstilfeller</h2>
-                        {
-                            sykeforloepMedEvents
-                                .map((forloep, index) => {
-                                    return (<UtvidbarHistorikk key={index} tittel={tilLesbarPeriodeMedArstall(forloep.oppfoelgingsdato, forloep.sluttdato)}>
-                                        <ol className="historikkeventliste">
-                                            {
-                                                historikkEvents
-                                                    .sort((h1, h2) => {
-                                                        return new Date(h2.tidspunkt) - new Date(h1.tidspunkt);
-                                                    })
-                                                    .map((event, idx) => {
-                                                        if (new Date(forloep.skyggeFom) < new Date(event.tidspunkt) && new Date(event.tidspunkt) < new Date(forloep.sluttdato)) {
-                                                            return <HistorikkEvent key={idx} event={event} />;
-                                                        }
-                                                        return null;
-                                                    })
-                                            }
-                                        </ol>
-                                    </UtvidbarHistorikk>);
-                                })
-                        }
+                sykeforloepMedEvents.length > 0 &&
+                (<div className="blokk--l">
+                    <h2 className="panel__tittel">Sykefraværstilfeller</h2>
+                    {
+                        sykeforloepMedEvents
+                            .map((forloep, index) => {
+                                return (<UtvidbarHistorikk key={index} tittel={tilLesbarPeriodeMedArstall(forloep.oppfoelgingsdato, forloep.sluttdato)}>
+                                    <ol className="historikkeventliste">
+                                        {
+                                            historikkEvents
+                                                .sort((h1, h2) => {
+                                                    return new Date(h2.tidspunkt) - new Date(h1.tidspunkt);
+                                                })
+                                                .map((event, idx) => {
+                                                    if (new Date(forloep.skyggeFom) < new Date(event.tidspunkt) && new Date(event.tidspunkt) < new Date(forloep.sluttdato)) {
+                                                        return <HistorikkEvent key={idx} event={event} />;
+                                                    }
+                                                    return null;
+                                                })
+                                        }
+                                    </ol>
+                                </UtvidbarHistorikk>);
+                            })
+                    }
                 </div>)
             }
         </div>

@@ -10,7 +10,6 @@ const DropdownContainer = ({ alternativer, sorterSykmeldinger, ledetekster, stat
         label={getLedetekst('dine-sykmeldinger.sorter.label', ledetekster)}
         aria-controls={`sykmelding-liste-${status}`}
         onChange={(event) => {
-            console.log('event', event.target.value, status);
             sorterSykmeldinger(event.target.value, status);
         }}>
         {alternativer.map((alt, idx) => {

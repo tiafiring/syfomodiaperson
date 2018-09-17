@@ -22,12 +22,10 @@ export const Sykmeldingstatus = ({ sykmelding }) => {
     return (<StatusNokkelopplysning tittel={getLedetekst('statuspanel.status')}>
         {
             sykmelding.status === TIL_SENDING
-                ? (
-                    <div className="medHjelpetekst">
-                        <span>{getLedetekst(`statuspanel.status.${sykmelding.status}`)}</span>
-                        {tilSendingHjelpetekst()}
-                    </div>
-                )
+                ? (<div className="medHjelpetekst">
+                    <span>{getLedetekst(`statuspanel.status.${sykmelding.status}`)}</span>
+                    {tilSendingHjelpetekst()}
+                </div>)
                 : <p className="js-status">{getLedetekst(`statuspanel.status.${sykmelding.status}`)}</p>
         }
     </StatusNokkelopplysning>);

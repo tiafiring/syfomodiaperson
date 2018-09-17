@@ -5,6 +5,6 @@ const UtvidbarHistorikk = (props) => {
     return (<div className="blokk--s">
         <Ekspanderbartpanel {...props} />
     </div>);
-}
+};
 
 export default UtvidbarHistorikk;

@@ -5,8 +5,8 @@ import { formaterOrgnr } from '../../utils';
 import { restdatoTilLesbarDato } from '../../utils/datoUtils';
 import PersonkortFeilmelding from './PersonkortFeilmelding';
 import PersonkortInformasjon from './PersonkortInformasjon';
-import kanskjeBooleanTilJaNeiKanskje from "./kanskjeBooleanTilJaNeiKanskje";
-import PersonkortElement from "./PersonkortElement";
+import kanskjeBooleanTilJaNeiKanskje from './kanskjeBooleanTilJaNeiKanskje';
+import PersonkortElement from './PersonkortElement';
 
 export const PersonkortLedere = ({ ledere }) => {
     const informasjonNokkelTekster = new Map([
@@ -39,7 +39,12 @@ export const PersonkortLedere = ({ ledere }) => {
                 }));
 
             return (
-                <PersonkortElement key={idx} tittel={leder.organisasjonsnavn} imgUrl="/sykefravaer/img/svg/fabrikk.svg" antallKolonner={3}>
+                <PersonkortElement
+                    key={idx}
+                    tittel={leder.organisasjonsnavn}
+                    imgUrl="/sykefravaer/img/svg/fabrikk.svg"
+                    antallKolonner={3}
+                >
                     {
                         !leder.erOppgitt
                             ? (<PersonkortFeilmelding>

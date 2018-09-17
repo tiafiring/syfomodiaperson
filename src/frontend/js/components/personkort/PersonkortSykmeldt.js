@@ -10,7 +10,7 @@ import {
 } from '../../utils/adresseUtils';
 import PersonkortElement from './PersonkortElement';
 import PersonkortInformasjon from './PersonkortInformasjon';
-import { formaterFnr } from "../../utils/fnrUtils";
+import { formaterFnr } from '../../utils/fnrUtils';
 
 const PersonkortSykmeldt = ({ navbruker }) => {
     const informasjonNokkelTekster = new Map([

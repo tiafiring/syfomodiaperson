@@ -161,6 +161,7 @@ render(<Provider store={store}>
 </Provider>, document.getElementById('maincontent'));
 
 document.addEventListener('DOMContentLoaded', () => {
+    // eslint-disable-next-line no-unused-expressions
     window.renderDecoratorHead && window.renderDecoratorHead(config);
 });
 

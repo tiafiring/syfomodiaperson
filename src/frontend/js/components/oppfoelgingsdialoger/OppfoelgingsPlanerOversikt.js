@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import {
     getLedetekst,
-    toDatePrettyPrint,
     tilLesbarPeriodeMedArstall,
 } from 'digisyfo-npm';
 import Alertstripe from 'nav-frontend-alertstriper';
@@ -62,9 +61,13 @@ export class OppfoelgingsPlanerOversikt extends Component {
             </div>
             <h2 className="typo-systemtittel blokk--xs">{getLedetekst('fss.oppfoelgingsdialog.oversikt.inaktive')}</h2>
             {
-                inaktiveDialoger.length === 0 && <Alertstripe type="info">
-                <p>{getLedetekst('fss.oppfoelgingsdialog.oversikt.inaktive--ingen')}</p>
-            </Alertstripe>}
+                inaktiveDialoger.length === 0 &&
+                    <Alertstripe type="info">
+                        <p>
+                            {getLedetekst('fss.oppfoelgingsdialog.oversikt.inaktive--ingen')}
+                        </p>
+                    </Alertstripe>
+            }
             {
                 inaktiveDialoger.map((dialog, index) => {
                     const antallOppgaver = finnAntallOppgaver(dialog);
