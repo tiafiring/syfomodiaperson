@@ -9,7 +9,7 @@ export const mapStateToProps = (state, ownProps) => {
         aktivtMenypunkt: ownProps.aktivtMenypunkt,
         motebehovForsoktHentet: state.motebehov.henter || state.motebehov.hentet || state.motebehov.hentingFeilet,
         motebehovet: state.motebehov.data[0],
-        hentingFeilet: state.motebehov.hentingFeilet,
+        motebehovReducer: state.motebehov,
     };
 };
 

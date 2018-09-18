@@ -57,16 +57,16 @@ const finnAntallPrikker = (menypunkt, oppgaver) => {
     }).length;
 };
 
-const setMotemodulSti = (motebehovet) => {
-    if (motebehovet) {
+const setMotemodulSti = (motebehovReducer, motebehovet) => {
+    if (motebehovReducer.hentet && motebehovet) {
         return 'moteoversikt';
     }
     return 'mote';
 };
 
-const setNySti = (sti, menypunkt, motebehovet, hentingFeilet) => {
+const setNySti = (sti, menypunkt, motebehovet, motebehovReducer) => {
     if (menypunkt === menypunkter.MOETEPLANLEGGER) {
-        return hentingFeilet ? sti : setMotemodulSti(motebehovet);
+        return setMotemodulSti(motebehovReducer, motebehovet);
     }
     return sti;
 };
@@ -131,7 +131,7 @@ class GlobalNavigasjon extends Component {
     }
 
     render() {
-        const { fnr, aktivtMenypunkt, oppgaver, motebehovet, hentingFeilet } = this.props;
+        const { fnr, aktivtMenypunkt, oppgaver, motebehovet, motebehovReducer } = this.props;
         this.menypunkter = [historikkMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, motemodulMenypunkt, oppfoelgingsplanMenypunkt];
 
         return (<ul aria-label="Navigasjon" className="navigasjon">
@@ -140,7 +140,7 @@ class GlobalNavigasjon extends Component {
                     const className = cn('navigasjonspanel', {
                         'navigasjonspanel--aktiv': menypunkt === aktivtMenypunkt,
                     });
-                    const nySti = setNySti(sti, menypunkt, motebehovet, hentingFeilet);
+                    const nySti = setNySti(sti, menypunkt, motebehovet, motebehovReducer);
                     const antallPrikker = finnAntallPrikker(menypunkt, oppgaver);
                     return (<li key={index} className="navigasjon__element">
                         <a
@@ -177,7 +177,7 @@ GlobalNavigasjon.propTypes = {
     oppgaver: PropTypes.arrayOf(PropTypes.object),
     motebehovForsoktHentet: PropTypes.bool,
     motebehovet: PropTypes.object,
-    hentingFeilet: PropTypes.bool,
+    motebehovReducer: PropTypes.object,
     hentMotebehov: PropTypes.func,
 };
 
