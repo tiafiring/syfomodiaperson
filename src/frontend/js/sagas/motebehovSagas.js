@@ -7,7 +7,7 @@ import * as actiontyper from '../actions/actiontyper';
 
 export const hentSyfomotebehovUrl = () => {
     const apiUrl = 'syfomotebehov/api/veileder';
-    if (window.location.href.indexOf('tjenester.nav') > -1) {
+    if (window.location.href.indexOf('app.adeo.no') > -1) {
         // Prod
         return `https://app.adeo.no/${apiUrl}`;
     } else if (window.location.href.indexOf('localhost') > -1) {
