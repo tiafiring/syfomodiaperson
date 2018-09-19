@@ -7,6 +7,7 @@ import {
 } from 'digisyfo-npm';
 import { tilDatoMedUkedagOgMaanedNavn } from '../utils/datoUtils';
 import { Checkbox } from 'nav-frontend-skjema';
+import Sidetopp from './Sidetopp';
 
 export const MotebehovKvitteringInnhold = (
     {
@@ -114,11 +115,7 @@ export const MotebehovKvittering = (
         motebehovet,
     }) => {
     return (<div className="avklaring">
-        <div className="panel motebehovKvittering__header">
-            <h1>
-                {getLedetekst('mote.motebehov.veileder.sidetittel', ledetekster)}
-            </h1>
-        </div>
+        <Sidetopp tittel={getLedetekst('mote.motebehov.veileder.sidetittel')} />
 
         <MotebehovKvitteringInnhold
             ledetekster={ledetekster}

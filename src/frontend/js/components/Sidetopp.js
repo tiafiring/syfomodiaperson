@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Sidetopp = ({ tittel, htmlTekst }) => {
     return (<header className="sidetopp js-sidetopp">
-        <h3 className="sidetopp__tittel">{tittel}</h3>
+        <h1 className="sidetopp__tittel">{tittel}</h1>
         {
             htmlTekst && <div className="sidetopp__intro js-intro">
                 <p dangerouslySetInnerHTML={htmlTekst} />

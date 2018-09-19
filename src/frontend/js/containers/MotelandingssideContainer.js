@@ -10,6 +10,7 @@ import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { tilDatoMedUkedagOgMaanedNavn } from '../utils/datoUtils';
+import Sidetopp from '../components/Sidetopp';
 
 const moteMenypunkt = {
     sti: 'mote',
@@ -84,11 +85,7 @@ export class MotelandingssideSide extends Component {
                         return <Feilmelding />;
                     }
                     return (<div className="moteLandingsside">
-                        <div className="panel motelandingsside__header">
-                            <h1>
-                                {getLedetekst('mote.motelandingsside.sidetittel', ledetekster)}
-                            </h1>
-                        </div>
+                        <Sidetopp tittel={getLedetekst('mote.motelandingsside.sidetittel', ledetekster)} />
                         <ul aria-label="Navigasjon" className="motelandingsside__punktliste">
                             {
                                 this.menypunkter.map(({ sti, punkt }, index) => {
