@@ -26,6 +26,17 @@ export function* hentHistorikkMoter(action) {
     }
 }
 
+export function* hentHistorikkMotebehov(action) {
+    yield put(actions.henterHistorikk('MOTEBEHOV'));
+    try {
+        const data = yield call(get, `${window.APP_SETTINGS.SYFOMOTEBEHOV_ROOT}/veileder/historikk?fnr=${action.fnr}`);
+        yield put(actions.historikkHentet(data, 'MOTEBEHOV'));
+    } catch (e) {
+        log(e);
+        yield put(actions.hentHistorikkFeilet('MOTEBEHOV'));
+    }
+}
+
 function* watchHentHistorikkOppfoelgingsdialog() {
     yield* takeEvery('HENT_HISTORIKK_OPPFOELGINGSDIALOG_FORESPURT', hentHistorikkOppfoelgingsdialog);
 }
@@ -34,7 +45,12 @@ function* watchHentHistorikkMoter() {
     yield* takeEvery('HENT_HISTORIKK_MOTER_FORESPURT', hentHistorikkMoter);
 }
 
+function* watchHentHistorikkMotebehov() {
+    yield* takeEvery('HENT_HISTORIKK_MOTEBEHOV_FORESPURT', hentHistorikkMotebehov);
+}
+
 export default function* historikkSagas() {
     yield fork(watchHentHistorikkOppfoelgingsdialog);
     yield fork(watchHentHistorikkMoter);
+    yield fork(watchHentHistorikkMotebehov);
 }

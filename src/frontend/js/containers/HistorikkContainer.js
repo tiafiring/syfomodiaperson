@@ -21,6 +21,9 @@ export class HistorikkSide extends Component {
         if (!props.historikk.henterMoter && !props.historikk.hentetMoter) {
             props.actions.hentHistorikk(this.props.fnr, 'MOTER');
         }
+        if (!props.historikk.henterMotebehov && !props.historikk.hentetMotebehov) {
+            props.actions.hentHistorikk(this.props.fnr, 'MOTEBEHOV');
+        }
         if (!props.historikk.henterOppfoelgingsdialoger && !props.historikk.hentetOppfoelgingsdialoger) {
             props.actions.hentHistorikk(this.props.fnr, 'OPPFOELGINGSDIALOG');
         }
