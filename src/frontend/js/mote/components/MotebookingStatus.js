@@ -124,10 +124,10 @@ const MotebookingStatus = (props) => {
         : <Link role="button" className="knapp knapp--enten js-avbryt" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>{getLedetekst('mote.bookingstatus.knapp.avbryt', ledetekster)}</Link>;
 
     return (<div>
+        <Sidetopp tittel={getLedetekst(sidetoppNokkel, ledetekster)} />
         { !motePassert && <StatusVarsel mote={mote} ledetekster={ledetekster} arbeidstaker={arbeidstaker} /> }
         {krrMeldingPanel}
         <div className="panel">
-            <Sidetopp tittel={getLedetekst(sidetoppNokkel, ledetekster)} />
             { status === BEKREFTET && <BekreftetMotetidspunkt {...props} /> }
             { status !== BEKREFTET && !motePassert && <Svarstatus {...props}>{flereTidspunktBoks}</Svarstatus> }
             { status !== BEKREFTET && motePassert && <PassertVarsel ledetekster={ledetekster} /> }
