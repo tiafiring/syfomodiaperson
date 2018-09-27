@@ -8,7 +8,7 @@ describe("motebehovSagas", () => {
     beforeEach(() => {
         window.APP_SETTINGS = {
             REST_ROOT: "http://tjenester.nav.no/",
-            SYFOMOTEBEHOV_ROOT: "http://tjenester.nav.no/syfomotebehov/api"
+            SYFOMOTEBEHOV_ROOT: "https://app-q1.adeo.no/syfomotebehov/api"
         };
     });
 
@@ -24,7 +24,7 @@ describe("motebehovSagas", () => {
         });
 
         it("Skal hente et array bestående av motebehov", () => {
-            const nextCall = call(get, "https://syfomotebehov-q1.nais.preprod.local/syfomotebehov/api/veileder/motebehov?fnr=123");
+            const nextCall = call(get, `${window.APP_SETTINGS.SYFOMOTEBEHOV_ROOT}/veileder/motebehov?fnr=123`);
 
             expect(generator.next().value).to.deep.equal(nextCall);
         });

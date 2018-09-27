@@ -1,4 +1,7 @@
-import { getCookie, log } from 'digisyfo-npm';
+import {
+    log,
+    getCookie,
+} from 'digisyfo-npm';
 import { Error403 } from './errors';
 
 export function get(url) {

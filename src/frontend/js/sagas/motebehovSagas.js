@@ -5,24 +5,11 @@ import { get } from '../api/index';
 import * as actions from '../actions/motebehov_actions';
 import * as actiontyper from '../actions/actiontyper';
 
-export const hentSyfomotebehovUrl = () => {
-    const apiUrl = 'syfomotebehov/api/veileder';
-    if (window.location.href.indexOf('app.adeo.no') > -1) {
-        // Prod
-        return `https://app.adeo.no/${apiUrl}`;
-    } else if (window.location.href.indexOf('localhost') > -1) {
-        // Lokalt
-        return `http://localhost:8811/${apiUrl}`;
-    }
-    // Q1
-    return `https://syfomotebehov-q1.nais.preprod.local/${apiUrl}`;
-};
-
 export function* hentMotebehov(action) {
     const fnr = action.fnr ? action.fnr : '';
     yield put(actions.henterMotebehov());
     try {
-        const url = `${hentSyfomotebehovUrl()}/motebehov?fnr=${fnr}`;
+        const url = `${window.APP_SETTINGS.SYFOMOTEBEHOV_ROOT}/veileder/motebehov?fnr=${fnr}`;
         const data = yield call(get, url);
         yield put(actions.motebehovHentet(data));
     } catch (e) {
