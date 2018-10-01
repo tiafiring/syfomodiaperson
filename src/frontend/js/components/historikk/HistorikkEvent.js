@@ -5,7 +5,7 @@ import OppfoelgingsdialogIkon from '../../ikoner/OppfoelgingsdialogIkon';
 import MoteIkon from '../../ikoner/MoteIkon';
 
 const hentIkon = (event) => {
-    if (event.kilde === 'MOTER') {
+    if (event.kilde === 'MOTER' || event.kilde === 'MOTEBEHOV') {
         return <MoteIkon />;
     } else if (event.kilde === 'OPPFOELGINGSDIALOG') {
         return <OppfoelgingsdialogIkon />;

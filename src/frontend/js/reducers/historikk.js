@@ -1,9 +1,12 @@
 const defaultState = {
     moteHistorikk: [],
-    oppfoelgingsdialogHistorikkk: [],
+    motebehovHistorikk: [],
+    oppfoelgingsdialogHistorikk: [],
     hentingFeilet: false,
     henterMoter: false,
     hentetMoter: false,
+    henterMotebehov: false,
+    hentetMotebehov: false,
     henterOppfoelgingsdialoger: false,
     hentetOppfoelgingsdialoger: false,
 };
@@ -23,6 +26,18 @@ const historikk = (state = defaultState, action = {}) => {
                 moteHistorikk: nyHistorikk,
             });
         }
+        case 'HISTORIKK_HENTET_MOTEBEHOV': {
+            const nyHistorikk = action.data.map((event) => {
+                return Object.assign({}, event, {
+                    kilde: 'MOTEBEHOV',
+                });
+            });
+            return Object.assign({}, state, {
+                henterMotebehov: false,
+                hentetMotebehov: true,
+                motebehovHistorikk: nyHistorikk,
+            });
+        }
         case 'HISTORIKK_HENTET_OPPFOELGINGSDIALOG': {
             const nyHistorikk = action.data.map((event) => {
                 return Object.assign({}, event, {
@@ -32,12 +47,17 @@ const historikk = (state = defaultState, action = {}) => {
             return Object.assign({}, state, {
                 henterOppfoelgingsdialoger: false,
                 hentetOppfoelgingsdialoger: true,
-                oppfoelgingsdialogHistorikkk: nyHistorikk,
+                oppfoelgingsdialogHistorikk: nyHistorikk,
             });
         }
         case 'HENTER_HISTORIKK_MOTER': {
             return Object.assign({}, state, {
                 henterMoter: true,
+            });
+        }
+        case 'HENTER_HISTORIKK_MOTEBEHOV': {
+            return Object.assign({}, state, {
+                henterMotebehov: true,
             });
         }
         case 'HENTER_HISTORIKK_OPPFOELGINGSDIALOG': {
@@ -50,6 +70,12 @@ const historikk = (state = defaultState, action = {}) => {
                 henterMoter: false,
                 hentingFeilet: true,
             });
+        }
+        case 'HENT_HISTORIKK_FEILET_MOTEBEHOV': {
+            return Object.assign({}, state, {
+                henterMotebehov: false,
+                hentingFeilet: true,
+                })
         }
         case 'HENT_HISTORIKK_FEILET_OPPFOELGINGSDIALOG': {
             return Object.assign({}, state, {

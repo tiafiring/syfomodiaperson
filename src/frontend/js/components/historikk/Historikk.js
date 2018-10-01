@@ -24,8 +24,8 @@ const Feilmelding = () => {
 };
 
 const Historikk = ({ historikk, sykeforloep }) => {
-    const historikkEvents = historikk.moteHistorikk.concat(historikk.oppfoelgingsdialogHistorikkk);
-    if (!sykeforloep || sykeforloep.length === 0 || (historikk.hentetMoter && historikk.hentetOppfoelgingsdialoger && historikkEvents.length === 0)) {
+    const historikkEvents = historikk.motebehovHistorikk.concat(historikk.moteHistorikk).concat(historikk.oppfoelgingsdialogHistorikk);
+    if (!sykeforloep || sykeforloep.length === 0 || (historikk.hentetMoter && historikk.hentetMotebehov && historikk.hentetOppfoelgingsdialoger && historikkEvents.length === 0)) {
         return <IngenHistorikk />;
     }
 
@@ -54,7 +54,7 @@ const Historikk = ({ historikk, sykeforloep }) => {
         <Sidetopp tittel="Logg" />
         <div>
             {
-                historikk.henterOppfoelgingsdialoger || (historikk.henterMoter && <AppSpinner />)
+                (historikk.henterOppfoelgingsdialoger || historikk.henterMotebehov || historikk.henterMoter) && <AppSpinner />
             }
             {
                 eventsEtterSisteSykefravaer.length > 0 &&
