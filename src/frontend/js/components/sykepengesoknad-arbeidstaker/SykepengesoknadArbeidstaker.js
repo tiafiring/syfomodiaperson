@@ -19,7 +19,7 @@ const SykepengesoknadArbeidstaker = ({ sykepengesoknad, fnr, brukernavn, brodsmu
                 brodsmuler={brodsmuler}
                 fnr={fnr}
                 brukernavn={brukernavn}>
-                <BehandletSykepengesoknad sykepengesoknad={sykepengesoknad} />
+                <BehandletSykepengesoknad sykepengesoknad={sykepengesoknad} fnr={fnr} />
             </SoknadSpeiling>);
         }
     }

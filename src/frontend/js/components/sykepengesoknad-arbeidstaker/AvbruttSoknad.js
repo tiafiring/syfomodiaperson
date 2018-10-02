@@ -3,6 +3,7 @@ import { getLedetekst, SykmeldingNokkelOpplysning, toDatePrettyPrint } from 'dig
 import KnappBase from 'nav-frontend-knapper';
 import SykmeldingUtdrag from '../../connected-components/SykmeldingUtdrag';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
+import PropTypes from 'prop-types';
 
 const Verktoylinje = () => {
     return (<div className="verktoylinje">
@@ -17,7 +18,7 @@ const Verktoylinje = () => {
     </div>);
 };
 
-const AvbruttSoknad = ({ sykepengesoknad }) => {
+const AvbruttSoknad = ({ sykepengesoknad, fnr }) => {
     return (<div>
         <div className="panel panel--komprimert blokk">
             <div>
@@ -36,12 +37,13 @@ const AvbruttSoknad = ({ sykepengesoknad }) => {
             </div>
             <Verktoylinje />
         </div>
-        <SykmeldingUtdrag soknad={sykepengesoknad} erApen />
+        <SykmeldingUtdrag soknad={sykepengesoknad} fnr={fnr} erApen />
     </div>);
 };
 
 AvbruttSoknad.propTypes = {
     sykepengesoknad: sykepengesoknadPt,
+    fnr: PropTypes.string,
 };
 
 export default AvbruttSoknad;
