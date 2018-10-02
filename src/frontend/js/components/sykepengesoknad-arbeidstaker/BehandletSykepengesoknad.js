@@ -14,16 +14,16 @@ const { KORRIGERT, SENDT, TIL_SENDING, AVBRUTT, UTGAATT } = sykepengesoknadstatu
 const BehandletSykepengesoknad = ({ sykepengesoknad, fnr }) => {
     switch (sykepengesoknad.status) {
         case AVBRUTT: {
-            return <AvbruttSoknad sykepengesoknad={sykepengesoknad} />;
+            return <AvbruttSoknad sykepengesoknad={sykepengesoknad} fnr={fnr} />;
         }
         case UTGAATT: {
-            return <UtgaattSoknad sykepengesoknad={sykepengesoknad} />;
+            return <UtgaattSoknad sykepengesoknad={sykepengesoknad} fnr={fnr} />;
         }
         default: {
             return (<div>
                 { sykepengesoknad.status === KORRIGERT && <KorrigertAvContainer sykepengesoknad={sykepengesoknad} /> }
                 <Statuspanel sykepengesoknad={sykepengesoknad} />
-                <SykmeldingUtdrag soknad={sykepengesoknad} />
+                <SykmeldingUtdrag soknad={sykepengesoknad} fnr={fnr} />
                 <Utvidbar className="blokk" tittel="Oppsummering" erApen>
                     <SoknadOppsummering oppsummeringsoknad={sykepengesoknad.oppsummering} />
                 </Utvidbar>
