@@ -75,7 +75,7 @@ const historikk = (state = defaultState, action = {}) => {
             return Object.assign({}, state, {
                 henterMotebehov: false,
                 hentingFeilet: true,
-                })
+            });
         }
         case 'HENT_HISTORIKK_FEILET_OPPFOELGINGSDIALOG': {
             return Object.assign({}, state, {
