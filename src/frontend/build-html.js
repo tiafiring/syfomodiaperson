@@ -8,7 +8,7 @@ var dev = {
     timestamp,
     buildRoot: 'http://localhost:3040/assets',
     restRoot: 'http://localhost:8084/modiasyforest/api',
-    teksterRestRoot: 'http://localhost:8080/syfotekster/api',
+    teksterRestRoot: 'http://localhost:8803/syfotekster/api',
     tilgangskontrollRestRoot: 'http://localhost:8586/syfo-tilgangskontroll/api',
     moteAdminRestRoot: 'http://localhost:8196/mote/rest',
     oppfoelgingsdialogRestRoot: 'http://localhost:8583/oppfoelgingsdialog-rest/api',

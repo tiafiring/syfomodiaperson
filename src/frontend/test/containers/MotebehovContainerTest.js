@@ -17,6 +17,7 @@ describe("MotebehovContainer", () => {
         let tilgang;
         let motebehovTilgang;
         let motebehovForsokthentet;
+        let ledere;
         beforeEach(() => {
             ledetekster = {};
             hentMotebehov = sinon.spy();
@@ -124,6 +125,9 @@ describe("MotebehovContainer", () => {
                 },
                 veilederinfo: {
                     data: {},
+                },
+                ledere: {
+                    data: [],
                 }
             };
             ownProps = {

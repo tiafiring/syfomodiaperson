@@ -11,7 +11,7 @@ const historikkMenypunkt = {
 };
 
 const motemodulMenypunkt = {
-    navn: 'Møte&shy;planlegger',
+    navn: 'Dialogmøter',
     sti: 'moteoversikt',
     menypunkt: menypunkter.MOETEPLANLEGGER,
 };
@@ -132,7 +132,7 @@ class GlobalNavigasjon extends Component {
 
     render() {
         const { fnr, aktivtMenypunkt, oppgaver, motebehovet, motebehovReducer } = this.props;
-        this.menypunkter = [historikkMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, motemodulMenypunkt, oppfoelgingsplanMenypunkt];
+        this.menypunkter = [historikkMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, oppfoelgingsplanMenypunkt, motemodulMenypunkt];
 
         return (<ul aria-label="Navigasjon" className="navigasjon">
             {
