@@ -36,6 +36,7 @@ export class MotebehovSide extends Component {
             veilederinfo,
             actions,
             motebehovForsoktHentet,
+            ledere,
         } = this.props;
         return (<Side fnr={fnr} tittel="Møtebehov" aktivtMenypunkt={MOETEPLANLEGGER}>
             {
@@ -67,6 +68,7 @@ export class MotebehovSide extends Component {
                             fnr={fnr}
                             actions={actions}
                             motebehovet={motebehovet}
+                            ledere={ledere}
                         />);
                     }
                     return (<Feilmelding
@@ -91,6 +93,7 @@ MotebehovSide.propTypes = {
     oppgaver: PropTypes.arrayOf(PropTypes.object),
     veilederinfo: PropTypes.object,
     actions: PropTypes.object,
+    ledere: PropTypes.array,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -112,6 +115,7 @@ export const mapStateToProps = (state, ownProps) => {
         motebehovTilgang: state.motebehov.tilgang,
         oppgaver: state.veilederoppgaver.data,
         veilederinfo: state.veilederinfo.data,
+        ledere: state.ledere.data,
     };
 };
 

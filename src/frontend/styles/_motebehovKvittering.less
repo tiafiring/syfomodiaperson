@@ -1,17 +1,58 @@
-.motebehovKvittering {
+.motebehovKvitteringInnhold {
     padding-top: .5em;
     margin-bottom: 1.25em;
+    padding-bottom: 2em;
     label {
+        margin-left: 0.75em;
         display: block;
-        text-transform: uppercase;
         margin-top: .5em;
+        font-weight: bold;
     }
     p {
+        margin-left: 0.75em;
         overflow-wrap: break-word;
         word-wrap: break-word;
     }
 }
+
+.motebehovKvitteringHeader {
+    margin-top: 0;
+    border-bottom: 1px solid @navGra40;
+    background-color: @white;
+    .datoLinje {
+        margin-left: 1.5em;
+        border-top: 1em solid @white;
+        margin-bottom: 0;
+    }
+    .fraLinje {
+        margin-left: 1.5em;
+        font-weight: bold;
+        margin-bottom: 1em;
+    }
+}
+
+.motebehovSpeilBilde {
+    display: flex;
+    align-items: center;
+    span {
+        margin-left: 1em;
+    }
+}
+
+.motebehovSpeilInfo {
+    margin-left: 0.75em;
+    margin-top: 3em;
+    .forSvar {
+        font-weight: bold;
+    }
+    ul {
+        margin-top: -0.5em;
+    }
+    a {
+        color: @navBla;
+    }
+}
+
 .behandleMotebehovKnapp {
-    padding-top: 1.25em;
-    border-top: 1px solid #b7b1a9;
+    margin-left: 1.5em;
 }
