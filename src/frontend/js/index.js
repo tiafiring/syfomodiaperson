@@ -151,9 +151,9 @@ store.dispatch(hentAktivEnhet({
 store.dispatch(hentLedetekster());
 
 if (hasURLParameter('visLedetekster')) {
-    localStorage.setItem('visLedetekster', true);
+    window.APP_SETTINGS.VIS_LEDETEKSTNOKLER = true;
 } else {
-    localStorage.removeItem('visLedetekster');
+    window.APP_SETTINGS.VIS_LEDETEKSTNOKLER = false;
 }
 
 render(<Provider store={store}>
