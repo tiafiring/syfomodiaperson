@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
     getLedetekst,
+    getHtmlLedetekst,
     keyValue,
     toDatePrettyPrint,
 } from 'digisyfo-npm';
@@ -9,32 +10,102 @@ import { tilDatoMedUkedagOgMaanedNavn } from '../utils/datoUtils';
 import { Checkbox } from 'nav-frontend-skjema';
 import Sidetopp from './Sidetopp';
 
+export const finnRiktigLeder = (motebehov, ledere) => {
+    return ledere.filter(leder => {
+        return leder.orgnummer === motebehov.virksomhetsnummer;
+    })[0];
+};
+
+export const MotebehovKvitteringHeader = (
+    {
+        motebehov,
+        ledetekster,
+        ledere,
+    }) => {
+    const riktigLeder = finnRiktigLeder(motebehov, ledere);
+    return (<div className="motebehovKvitteringHeader" >
+        {
+            motebehov.opprettetDato && <p className="datoLinje">{tilDatoMedUkedagOgMaanedNavn(motebehov.opprettetDato)}</p>
+        }
+        {
+            riktigLeder ?
+                <p className="fraLinje">
+                    {
+                        getLedetekst('mote.motebehovSvar.innsendtAv', ledetekster, {
+                            '%NAERMESTELEDER%': riktigLeder.navn,
+                            '%ORGANISASJONSNAVN%': riktigLeder.organisasjonsnavn,
+                        })
+                    }
+                </p>
+                :
+                <p className="fraLinje">
+                    {
+                        getLedetekst('mote.motebehovSvar.innsendtAv.ingenLeder', ledetekster)
+                    }
+                </p>
+        }
+    </div>);
+};
+
+MotebehovKvitteringHeader.propTypes = {
+    motebehov: PropTypes.object,
+    ledetekster: keyValue,
+    ledere: PropTypes.array,
+};
+
+export const MotebehovSpeilBilde = (
+    {
+        ledetekster,
+    }) => {
+    const bildeSti = '/sykefravaer/img/svg/nav-ansatt--mannlig.svg';
+    const bildeAlt = 'nav-ansatt--mannlig';
+    return (<div className="motebehovSpeilBilde">
+        <img src={bildeSti} alt={bildeAlt} />
+        <span>{getLedetekst('mote.motebehov.dialogmoteInfo.bjorn', ledetekster)}</span>
+    </div>);
+};
+
+MotebehovSpeilBilde.propTypes = {
+    ledetekster: keyValue,
+};
+
+export const MotebehovSpeilInfo = (
+    {
+        ledetekster,
+    }) => {
+    return (<div className="motebehovSpeilInfo">
+        <p className="forSvar">Før du svarer:</p>
+        <div dangerouslySetInnerHTML={getHtmlLedetekst('mote.motebehov.dialogmoteInfo.kulepunkt', ledetekster)} />
+        <div dangerouslySetInnerHTML={getHtmlLedetekst('mote.motebehov.dialogmoteInfo', ledetekster)} />
+    </div>);
+};
+
+MotebehovSpeilInfo.propTypes = {
+    ledetekster: keyValue,
+};
+
+export const MotebehovSpeil = (
+    {
+        ledetekster,
+    }) => {
+    return (<div className="panel motebehovSpeil">
+        <MotebehovSpeilBilde ledetekster={ledetekster} />
+
+        <MotebehovSpeilInfo ledetekster={ledetekster} />
+    </div>);
+};
+
+MotebehovSpeil.propTypes = {
+    ledetekster: keyValue,
+};
+
 export const MotebehovKvitteringInnhold = (
     {
         ledetekster,
         motebehov,
     }) => {
     const motebehovSvar = motebehov.motebehovSvar;
-    return (<div className="panel motebehovKvittering">
-        { motebehov.opprettetDato &&
-            <h3>{tilDatoMedUkedagOgMaanedNavn(motebehov.opprettetDato)}</h3>
-        }
-
-        { motebehovSvar.friskmeldingForventning && [
-            <label key={0}>{getLedetekst('mote.svarMotebehovSkjema.friskmeldingForventning.spoersmaal', ledetekster)}</label>,
-            <p key={1}>{motebehovSvar.friskmeldingForventning}</p>,
-        ]}
-
-        { motebehovSvar.tiltak && [
-            <label key={0}>{getLedetekst('mote.svarMotebehovSkjema.tiltak.spoersmaal', ledetekster)}</label>,
-            <p key={1}>{motebehovSvar.tiltak}</p>,
-        ]}
-
-        { motebehovSvar.tiltakResultat && [
-            <label key={0}>{getLedetekst('mote.svarMotebehovSkjema.tiltakResultat.spoersmaal', ledetekster)}</label>,
-            <p key={1}>{motebehovSvar.tiltakResultat}</p>,
-        ]}
-
+    return (<div className="panel motebehovKvitteringInnhold">
         { motebehovSvar.harMotebehov !== undefined && [
             <label key={0}>{getLedetekst('mote.svarMotebehovSkjema.harMotebehov.spoersmaal', ledetekster)}</label>,
             <p key={1}>
@@ -77,9 +148,9 @@ export const BehandleMotebehovKnapp = (
         motebehovet,
     }) => {
     const gjeldendeOppgave = seMotebehovOppgave(oppgaver, motebehovet);
-    return (<div>
+    return (<div className="behandleMotebehovKnapp">
         {gjeldendeOppgave ?
-            <div className="skjema__input behandleMotebehovKnapp">
+            <div className="skjema__input">
                 <Checkbox
                     label={gjeldendeOppgave.status === 'FERDIG' ? `Ferdig behandlet av ${gjeldendeOppgave.sistEndretAv} ${toDatePrettyPrint(gjeldendeOppgave.sistEndret)}` : 'Marker som behandlet'}
                     onClick={() => {
@@ -113,9 +184,20 @@ export const MotebehovKvittering = (
         fnr,
         actions,
         motebehovet,
+        ledere,
     }) => {
-    return (<div className="avklaring">
+    return (<div className="motebehovKvittering">
         <Sidetopp tittel={getLedetekst('mote.motebehov.veileder.sidetittel')} />
+
+        <MotebehovKvitteringHeader
+            motebehov={motebehov}
+            ledetekster={ledetekster}
+            ledere={ledere}
+        />
+
+        <MotebehovSpeil
+            motebehov={motebehov}
+        />
 
         <MotebehovKvitteringInnhold
             ledetekster={ledetekster}
@@ -140,6 +222,7 @@ MotebehovKvittering.propTypes = {
     fnr: PropTypes.string,
     actions: PropTypes.object,
     motebehovet: PropTypes.object,
+    ledere: PropTypes.array,
 };
 
 export default MotebehovKvittering;
