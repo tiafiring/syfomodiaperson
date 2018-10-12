@@ -36,6 +36,7 @@ var prod = {
     decoratorRoot: '',
     contextholderRoot: '/eventdistributer',
     syfomotebehovRoot: '/syfomotebehov/api',
+    syfosoknadRoot: `/syfosoknad/api`,
     enableLogging: false,
     isProd: true,
 };

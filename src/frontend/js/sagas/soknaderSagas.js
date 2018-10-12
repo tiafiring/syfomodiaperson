@@ -1,6 +1,7 @@
 import { call, fork, put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-import { log, get } from 'digisyfo-npm';
+import { log } from 'digisyfo-npm';
+import { get } from '../api/index';
 import * as actions from '../actions/soknader_actions';
 import {
     HENT_SOKNADER_FORESPURT,
@@ -8,10 +9,11 @@ import {
 import mockSoknader from '../../test/mockdata/mockSoknader';
 import { erDev } from '../selectors/toggleSelectors';
 
-export function* hentSoknader() {
+export function* hentSoknader(action) {
+    const fnr = action.fnr ? action.fnr : '';
     yield put(actions.henterSoknader());
     try {
-        const data = yield call(get, '/syfosoknad/soknader');
+        const data = yield call(get, `${window.APP_SETTINGS.SYFOSOKNAD_ROOT}/veileder/soknader?fnr=${fnr}`);
         yield put(actions.soknaderHentet(data));
     } catch (e) {
         log(e);

@@ -24,8 +24,9 @@ export const hentSoknaderFeilet = () => {
     };
 };
 
-export const hentSoknader = () => {
+export const hentSoknader = (fnr) => {
     return {
         type: HENT_SOKNADER_FORESPURT,
+        fnr,
     };
 };
