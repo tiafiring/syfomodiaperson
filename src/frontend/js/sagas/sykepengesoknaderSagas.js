@@ -16,7 +16,7 @@ export function* hentSykepengesoknader(action) {
     } catch (e) {
         log(e);
         if (erDev()) {
-            yield put(sykepengesoknaderHentet(mockSykepengesoknader));
+            yield put(sykepengesoknaderHentet([]));
         } else {
             yield put(actions.hentSykepengesoknaderFeilet());
         }

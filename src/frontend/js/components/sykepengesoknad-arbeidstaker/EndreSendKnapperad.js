@@ -1,27 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Knapp from 'nav-frontend-knapper';
 import { sykepengesoknad as sykepengesoknadPt } from 'digisyfo-npm';
-
-export const Verktoylinje = ({ children }) => {
-    return (<div className="verktoylinje">
-        {children}
-    </div>);
-};
-
-Verktoylinje.propTypes = {
-    children: PropTypes.node,
-};
-
-export const VerktoyKnapp = ({ children }) => {
-    return (<div className="verktoylinje__element">
-        <Knapp mini disabled>{children}</Knapp>
-    </div>);
-};
-
-VerktoyKnapp.propTypes = {
-    children: PropTypes.string,
-};
+import { VerktoyKnapp, Verktoylinje } from '../Verktoylinje';
 
 const getSistSendtDato = (s) => {
     if (s.sendtTilNAVDato && s.sendtTilArbeidsgiverDato) {

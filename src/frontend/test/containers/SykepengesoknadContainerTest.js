@@ -6,6 +6,7 @@ import sinon from 'sinon';
 import soknader from '../../js/reducers/soknader';
 import sykepengesoknader from '../../js/reducers/sykepengesoknader';
 import ledetekster from '../../js/reducers/ledetekster';
+import sykmeldinger from '../../js/reducers/sykmeldinger';
 import { soknaderHentet } from '../../js/actions/soknader_actions';
 import mockSykepengesoknader from '../mockdata/mockSykepengesoknader';
 import mockSoknader from '../mockdata/mockSoknader';
@@ -15,6 +16,7 @@ import Feilmelding from '../../js/components/Feilmelding';
 import SykepengesoknadSelvstendig from '../../js/components/sykepengesoknad-selvstendig/SykepengesoknadSelvstendig';
 import * as toggleSelectors from '../../js/selectors/toggleSelectors';
 import SykepengesoknadUtland from '../../js/components/sykepengesoknad-utland/SykepengesoknadUtland';
+import { sykmeldingerHentet } from '../../js/actions/sykmeldinger_actions';
 
 describe('SykepengesoknadContainer', () => {
     let toggleStub;
@@ -29,6 +31,7 @@ describe('SykepengesoknadContainer', () => {
         state = {
             soknader: soknader(soknader(), soknaderHentet(mockSoknader)),
             sykepengesoknader: sykepengesoknader(sykepengesoknader(), sykepengesoknaderHentet(mockSykepengesoknader)),
+            sykmeldinger: sykmeldinger(sykmeldinger(), sykmeldingerHentet([])),
             ledetekster: ledetekster(),
             tilgang: {
                 data: {
@@ -59,6 +62,7 @@ describe('SykepengesoknadContainer', () => {
     describe('Visning av sykepengesøknad for arbeidstakere', () => {
         it('Skal vise SykepengesoknadArbeidstaker', () => {
             settOwnPropsId(ARBEIDSTAKERSOKNAD_ID);
+            console.log(state.sykmeldinger)
             const component = shallow(<Container {...mapStateToProps(state, ownProps)} />);
             expect(component.find(SykepengesoknadArbeidstaker).length).to.equal(1);
         });

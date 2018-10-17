@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
+import { getLedetekst, getHtmlLedetekst, sykmelding as sykmeldingPt } from 'digisyfo-npm';
 import Side from '../sider/Side';
 import * as sykepengesoknaderActions from '../actions/sykepengesoknader_actions';
 import * as soknaderActions from '../actions/soknader_actions';
+import * as sykmeldingerActions from '../actions/sykmeldinger_actions';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import { SYKEPENGESOKNADER } from '../enums/menypunkter';
@@ -26,6 +27,9 @@ export class Container extends Component {
         if (this.props.skalHenteSoknader) {
             this.props.actions.hentSoknader(fnr);
         }
+        if (this.props.skalHenteSykmeldinger) {
+            this.props.actions.hentSykmeldinger(fnr);
+        }
     }
 
     render() {
@@ -38,6 +42,7 @@ export class Container extends Component {
             sykepengesoknad,
             soknad,
             fnr,
+            sykmelding,
         } = this.props;
         const brodsmuler = [{
             tittel: 'Ditt sykefravær',
@@ -65,6 +70,7 @@ export class Container extends Component {
                             fnr={fnr}
                             brodsmuler={brodsmuler}
                             brukernavn={brukernavn}
+                            sykmelding={sykmelding}
                             sykepengesoknad={sykepengesoknad} />);
                     }
                     if (soknad && soknad.soknadstype === SELVSTENDIGE_OG_FRILANSERE) {
@@ -72,6 +78,7 @@ export class Container extends Component {
                             fnr={fnr}
                             brodsmuler={brodsmuler}
                             brukernavn={brukernavn}
+                            sykmelding={sykmelding}
                             soknad={soknad} />);
                     }
                     if (soknad && soknad.soknadstype === OPPHOLD_UTLAND) {
@@ -99,11 +106,13 @@ Container.propTypes = {
     ledetekster: PropTypes.object,
     skalHenteSykepengesoknader: PropTypes.bool,
     skalHenteSoknader: PropTypes.bool,
+    skalHenteSykmeldinger: PropTypes.bool,
     soknad: soknadPt,
+    sykmelding: sykmeldingPt,
 };
 
 export function mapDispatchToProps(dispatch) {
-    const actions = Object.assign({}, sykepengesoknaderActions, soknaderActions);
+    const actions = Object.assign({}, sykepengesoknaderActions, soknaderActions, sykmeldingerActions);
     return {
         actions: bindActionCreators(actions, dispatch),
     };
@@ -122,16 +131,27 @@ export function mapStateToProps(state, ownProps) {
     const skalHenteSoknader = !state.soknader.henter
         && !state.soknader.hentingFeilet
         && !state.soknader.hentet;
+    const skalHenteSykmeldinger = !state.sykmeldinger.henter
+        && !state.sykmeldinger.hentingFeilet
+        && !state.sykmeldinger.hentet;
     const sykepengesoknad = state.sykepengesoknader.data.find((s) => {
         return s.id === ownProps.params.sykepengesoknadId;
     });
     const soknad = state.soknader.data.find((s) => {
         return s.id === ownProps.params.sykepengesoknadId;
     });
+    const sykmelding = state.sykmeldinger.data.find((s) => {
+        return sykepengesoknad
+            ? s.id === sykepengesoknad.sykmeldingId
+            : soknad
+                ? s.id === soknad.sykmeldingId
+                : false;
+    });
 
     return {
         skalHenteSykepengesoknader,
         skalHenteSoknader,
+        skalHenteSykmeldinger,
         brukernavn: state.navbruker.data.navn,
         fnr: ownProps.params.fnr,
         henter,
@@ -140,6 +160,7 @@ export function mapStateToProps(state, ownProps) {
         tilgang: state.tilgang.data,
         sykepengesoknad,
         soknad,
+        sykmelding,
     };
 }
 
