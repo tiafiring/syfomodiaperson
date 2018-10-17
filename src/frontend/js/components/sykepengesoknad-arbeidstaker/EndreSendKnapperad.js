@@ -3,10 +3,20 @@ import PropTypes from 'prop-types';
 import Knapp from 'nav-frontend-knapper';
 import { sykepengesoknad as sykepengesoknadPt } from 'digisyfo-npm';
 
-const VerktoyKnapp = ({ children }) => {
+export const Verktoylinje = ({ children }) => {
+    return (<div className="verktoylinje">
+        {children}
+    </div>);
+};
+
+Verktoylinje.propTypes = {
+    children: PropTypes.node,
+};
+
+export const VerktoyKnapp = ({ children }) => {
     return (<div className="verktoylinje__element">
         <Knapp mini disabled>{children}</Knapp>
-    </div>)
+    </div>);
 };
 
 VerktoyKnapp.propTypes = {
@@ -37,12 +47,12 @@ const EndreSendKnapperad = ({ sykepengesoknad }) => {
 
     return (visEndreknapp
         || visSendTilNavKnapp
-        || visSendTilArbeidsgiver)
-            && (<div className="verktoylinje">
+        || visSendTilArbeidsgiverKnapp)
+            && (<Verktoylinje>
             { visEndreknapp && <VerktoyKnapp>Endre søknad</VerktoyKnapp> }
             { visSendTilNavKnapp && <VerktoyKnapp>Send til NAV</VerktoyKnapp> }
             { visSendTilArbeidsgiverKnapp && <VerktoyKnapp>Send til arbeidsgiver</VerktoyKnapp> }
-        </div>)
+            </Verktoylinje>);
 };
 
 EndreSendKnapperad.propTypes = {

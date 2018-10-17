@@ -15,8 +15,13 @@ import { VAER_KLAR_OVER_AT } from '../../enums/tagtyper';
 import SoknadSpeiling from '../sykepengesoknad-felles/SoknadSpeiling';
 import { FREMTIDIG, NY } from '../../enums/soknadstatuser';
 import IkkeInnsendtSoknad from '../sykepengesoknad-felles/IkkeInnsendtSoknad';
+import { VerktoyKnapp, Verktoylinje } from '../sykepengesoknad-arbeidstaker/EndreSendKnapperad';
 
 const SendtSoknadSelvstendigStatuspanel = ({ soknad }) => {
+    const ETT_AAR_SIDEN = new Date();
+    ETT_AAR_SIDEN.setYear(ETT_AAR_SIDEN.getFullYear() - 1);
+    const visEndreknapp = soknad.opprettetDato >= ETT_AAR_SIDEN;
+
     return (<Statuspanel>
         <Statusopplysninger>
             <StatusNokkelopplysning tittel={getLedetekst('statuspanel.status')}>
@@ -29,6 +34,12 @@ const SendtSoknadSelvstendigStatuspanel = ({ soknad }) => {
                 <p dangerouslySetInnerHTML={getHtmlLedetekst('sykepengesoknad.sykepengeinfo.til-nav')} />
             </SykmeldingNokkelOpplysning>
         </Statusopplysninger>
+        {
+            visEndreknapp
+                && (<Verktoylinje>
+                    <VerktoyKnapp>Endre søknad</VerktoyKnapp>
+                </Verktoylinje>)
+        }
     </Statuspanel>);
 };
 
@@ -45,6 +56,7 @@ const SykepengesoknadSelvstendig = (props) => {
         }
         default: {
             return (<SoknadSpeiling {...props}>
+                <SendtSoknadSelvstendigStatuspanel soknad={props.soknad} />
                 <Utvidbar tittel={getLedetekst('sykepengesoknad.oppsummering.tittel')} className="blokk js-soknad-oppsummering" erApen>
                     <Oppsummeringsvisning
                         soknad={Object.assign({}, soknad, {
