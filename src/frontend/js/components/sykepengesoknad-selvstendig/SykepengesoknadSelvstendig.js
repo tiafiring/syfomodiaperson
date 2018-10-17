@@ -19,17 +19,19 @@ const SykepengesoknadSelvstendig = (props) => {
             return <IkkeInnsendtSoknad fnr={fnr} />;
         }
         case AVBRUTT: {
-            console.log("syk", props.sykmelding)
             return (<SoknadSpeiling {...props}>
                 <AvbruttSoknadSelvstendigStatuspanel soknad={props.soknad} />
-                <SykmeldingUtdragForSelvstendige sykmelding={props.sykmelding} />
+                {
+                    props.sykmelding && props.sykmelding.sporsmal
+                        && <SykmeldingUtdragForSelvstendige sykmelding={props.sykmelding} />
+                }
             </SoknadSpeiling>);
         }
         default: {
             return (<SoknadSpeiling {...props}>
                 <SendtSoknadSelvstendigStatuspanel soknad={props.soknad} />
                 {
-                    props.sykmelding
+                    props.sykmelding && props.sykmelding.sporsmal
                         && <SykmeldingUtdragForSelvstendige sykmelding={props.sykmelding} />
                 }
                 <Utvidbar tittel={getLedetekst('sykepengesoknad.oppsummering.tittel')} className="blokk js-soknad-oppsummering" erApen>
