@@ -23,7 +23,7 @@ const SykepengesoknadSelvstendig = (props) => {
                 <AvbruttSoknadSelvstendigStatuspanel soknad={props.soknad} />
                 {
                     props.sykmelding && props.sykmelding.sporsmal
-                        && <SykmeldingUtdragForSelvstendige sykmelding={props.sykmelding} />
+                        && <SykmeldingUtdragForSelvstendige sykmelding={props.sykmelding} erApen />
                 }
             </SoknadSpeiling>);
         }
@@ -32,7 +32,7 @@ const SykepengesoknadSelvstendig = (props) => {
                 <SendtSoknadSelvstendigStatuspanel soknad={props.soknad} />
                 {
                     props.sykmelding && props.sykmelding.sporsmal
-                        && <SykmeldingUtdragForSelvstendige sykmelding={props.sykmelding} />
+                        && <SykmeldingUtdragForSelvstendige sykmelding={props.sykmelding} erApen />
                 }
                 <Utvidbar tittel={getLedetekst('sykepengesoknad.oppsummering.tittel')} className="blokk js-soknad-oppsummering" erApen>
                     <Oppsummeringsvisning
