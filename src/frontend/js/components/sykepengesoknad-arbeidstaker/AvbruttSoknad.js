@@ -4,8 +4,7 @@ import SykmeldingUtdrag from '../../connected-components/SykmeldingUtdrag';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
 import PropTypes from 'prop-types';
 import Statuspanel, { StatusNokkelopplysning, Statusopplysninger } from '../Statuspanel';
-import { VerktoyKnapp } from '../Verktoylinje';
-import { Verktoylinje } from '../Verktoylinje';
+import { Verktoylinje, VerktoyKnapp } from '../Verktoylinje';
 
 const VerktoylinjeGjenapne = () => {
     return (<Verktoylinje>

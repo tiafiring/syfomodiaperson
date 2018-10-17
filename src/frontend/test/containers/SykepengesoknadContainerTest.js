@@ -62,7 +62,6 @@ describe('SykepengesoknadContainer', () => {
     describe('Visning av sykepengesøknad for arbeidstakere', () => {
         it('Skal vise SykepengesoknadArbeidstaker', () => {
             settOwnPropsId(ARBEIDSTAKERSOKNAD_ID);
-            console.log(state.sykmeldinger)
             const component = shallow(<Container {...mapStateToProps(state, ownProps)} />);
             expect(component.find(SykepengesoknadArbeidstaker).length).to.equal(1);
         });

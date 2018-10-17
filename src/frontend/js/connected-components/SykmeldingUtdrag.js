@@ -39,7 +39,6 @@ export const mapStateToProps = (state, ownProps) => {
     const sykmelding = state.sykmeldinger.data.find((s) => {
         return s.id === ownProps.soknad.sykmeldingId;
     });
-    console.log('sykmelding', sykmelding);
     return {
         ledetekster: state.ledetekster.data,
         skalHenteSykmeldinger,

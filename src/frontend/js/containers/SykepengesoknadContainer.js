@@ -140,11 +140,11 @@ export function mapStateToProps(state, ownProps) {
     const soknad = state.soknader.data.find((s) => {
         return s.id === ownProps.params.sykepengesoknadId;
     });
-    const sykmelding = state.sykmeldinger.data.find((s) => {
+    const sykmelding = state.sykmeldinger.data.find((sykmld) => {
         return sykepengesoknad
-            ? s.id === sykepengesoknad.sykmeldingId
+            ? sykmld.id === sykepengesoknad.sykmeldingId
             : soknad
-                ? s.id === soknad.sykmeldingId
+                ? sykmld.id === soknad.sykmeldingId
                 : false;
     });
 
