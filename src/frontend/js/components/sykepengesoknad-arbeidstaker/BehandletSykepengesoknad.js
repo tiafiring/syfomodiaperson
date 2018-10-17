@@ -30,7 +30,7 @@ const BehandletSykepengesoknad = ({ sykepengesoknad, fnr }) => {
                 <Utvidbar className="blokk" tittel="Oppsummering" erApen>
                     <SoknadOppsummering oppsummeringsoknad={sykepengesoknad.oppsummering} />
                 </Utvidbar>
-                <div className="bekreftet-container">
+                <div className="bekreftet-container blokk">
                     <BekreftetKorrektInformasjon oppsummeringsoknad={sykepengesoknad.oppsummering} />
                 </div>
                 {
