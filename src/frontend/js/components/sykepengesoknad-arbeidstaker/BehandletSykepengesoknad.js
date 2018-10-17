@@ -8,6 +8,7 @@ import KorrigertAvContainer from './KorrigertAvContainer';
 import AvbruttSoknad from './AvbruttSoknad';
 import UtgaattSoknad from './UtgaattSoknad';
 import SykmeldingUtdrag from '../../connected-components/SykmeldingUtdrag';
+import EndreSendKnapperad from './EndreSendKnapperad';
 
 const { KORRIGERT, SENDT, TIL_SENDING, AVBRUTT, UTGAATT } = sykepengesoknadstatuser;
 
@@ -22,12 +23,14 @@ const BehandletSykepengesoknad = ({ sykepengesoknad, fnr }) => {
         default: {
             return (<div>
                 { sykepengesoknad.status === KORRIGERT && <KorrigertAvContainer sykepengesoknad={sykepengesoknad} /> }
-                <Statuspanel sykepengesoknad={sykepengesoknad} />
+                <Statuspanel sykepengesoknad={sykepengesoknad}>
+                    <EndreSendKnapperad sykepengesoknad={sykepengesoknad} />
+                </Statuspanel>
                 <SykmeldingUtdrag soknad={sykepengesoknad} fnr={fnr} />
                 <Utvidbar className="blokk" tittel="Oppsummering" erApen>
                     <SoknadOppsummering oppsummeringsoknad={sykepengesoknad.oppsummering} />
                 </Utvidbar>
-                <div className="bekreftet-container">
+                <div className="bekreftet-container blokk">
                     <BekreftetKorrektInformasjon oppsummeringsoknad={sykepengesoknad.oppsummering} />
                 </div>
                 {

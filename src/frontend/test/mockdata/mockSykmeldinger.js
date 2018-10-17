@@ -947,7 +947,7 @@ const mockSykmeldinger = [
             "utenArbeidsgiverAntarTilbakeIArbeidDato": null,
             "utenArbeidsgiverTilbakemelding": null
         },
-        "id": "f85a7102-9c35-4bc1-bae5-47e821e1752a",
+        "id": "d8406dc2-fbf3-44a7-be15-b9f9c2927672",
         "identdato": "2018-08-28",
         "innsendtArbeidsgivernavn": null,
         "innspillTilArbeidsgiver": null,

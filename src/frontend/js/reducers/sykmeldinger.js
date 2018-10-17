@@ -4,6 +4,7 @@ import { HENT_SYKMELDINGER_FEILET, HENTER_SYKMELDINGER, SYKMELDINGER_HENTET, SYK
 const initiellState = {
     henter: false,
     hentingFeilet: false,
+    hentet: false,
     data: [],
 };
 
@@ -13,6 +14,7 @@ export default function sykmeldinger(state = initiellState, action = {}) {
             return Object.assign({}, state, {
                 data: [],
                 henter: false,
+                hentet: true,
                 hentingFeilet: true,
             });
         }
@@ -20,6 +22,7 @@ export default function sykmeldinger(state = initiellState, action = {}) {
             return {
                 data: [],
                 henter: true,
+                hentet: false,
                 hentingFeilet: false,
             };
         }
@@ -27,6 +30,7 @@ export default function sykmeldinger(state = initiellState, action = {}) {
             return {
                 henter: false,
                 hentingFeilet: false,
+                hentet: true,
                 data: action.data.map(parseSykmelding),
             };
         }

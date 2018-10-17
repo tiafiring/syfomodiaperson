@@ -1,42 +1,34 @@
 import React from 'react';
-import { getLedetekst, SykmeldingNokkelOpplysning, toDatePrettyPrint } from 'digisyfo-npm';
-import KnappBase from 'nav-frontend-knapper';
+import { getLedetekst, toDatePrettyPrint } from 'digisyfo-npm';
 import SykmeldingUtdrag from '../../connected-components/SykmeldingUtdrag';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
 import PropTypes from 'prop-types';
+import Statuspanel, { StatusNokkelopplysning, Statusopplysninger } from '../Statuspanel';
+import { Verktoylinje, VerktoyKnapp } from '../Verktoylinje';
 
-const Verktoylinje = () => {
-    return (<div className="verktoylinje">
-        <div className="verktoylinje__element">
-            <KnappBase
-                type="standard"
-                mini
-                disabled>
-                {getLedetekst('sykepengesoknad.gjenapne.knapp')}
-            </KnappBase>
-        </div>
-    </div>);
+const VerktoylinjeGjenapne = () => {
+    return (<Verktoylinje>
+        <VerktoyKnapp>{getLedetekst('sykepengesoknad.gjenapne.knapp')}</VerktoyKnapp>
+    </Verktoylinje>);
 };
 
 const AvbruttSoknad = ({ sykepengesoknad, fnr }) => {
     return (<div>
-        <div className="panel panel--komprimert blokk">
-            <div>
-                <div className="statusopplysninger">
-                    <SykmeldingNokkelOpplysning className="nokkelopplysning--statusopplysning" Overskrift="h2" tittel="Status">
-                        <p>
-                            {getLedetekst(`sykepengesoknad.status.${sykepengesoknad.status}`)}
-                        </p>
-                    </SykmeldingNokkelOpplysning>
-                    <SykmeldingNokkelOpplysning className="nokkelopplysning--statusopplysning" Overskrift="h2" tittel="Dato avbrutt">
-                        <p>
-                            {toDatePrettyPrint(sykepengesoknad.avbruttDato)}
-                        </p>
-                    </SykmeldingNokkelOpplysning>
-                </div>
-            </div>
-            <Verktoylinje />
-        </div>
+        <Statuspanel>
+            <Statusopplysninger>
+                <StatusNokkelopplysning tittel="Status">
+                    <p>
+                        {getLedetekst(`sykepengesoknad.status.${sykepengesoknad.status}`)}
+                    </p>
+                </StatusNokkelopplysning>
+                <StatusNokkelopplysning tittel="Dato avbrutt">
+                    <p>
+                        {toDatePrettyPrint(sykepengesoknad.avbruttDato)}
+                    </p>
+                </StatusNokkelopplysning>
+            </Statusopplysninger>
+            <VerktoylinjeGjenapne />
+        </Statuspanel>
         <SykmeldingUtdrag soknad={sykepengesoknad} fnr={fnr} erApen />
     </div>);
 };
