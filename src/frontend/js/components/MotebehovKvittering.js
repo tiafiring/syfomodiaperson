@@ -178,39 +178,45 @@ BehandleMotebehovKnapp.propTypes = {
 export const MotebehovKvittering = (
     {
         ledetekster,
-        motebehov,
         oppgaver,
         veilederinfo,
         fnr,
         actions,
-        motebehovet,
+        motebehovListe,
         ledere,
     }) => {
-    return (<div className="motebehovKvittering">
-        <Sidetopp tittel={getLedetekst('mote.motebehov.veileder.sidetittel')} />
+    return (<div className="motebehovSide">
+        {[
+            <Sidetopp key={0} tittel={getLedetekst('mote.motebehov.veileder.sidetittel')} />,
+            motebehovListe.map(({}, index) => {
+                return (
+                    <div key={index + 1} className="motebehovKvittering">
+                        <MotebehovKvitteringHeader
+                            motebehov={motebehovListe[index]}
+                            ledetekster={ledetekster}
+                            ledere={ledere}
+                        />
 
-        <MotebehovKvitteringHeader
-            motebehov={motebehov}
-            ledetekster={ledetekster}
-            ledere={ledere}
-        />
+                        <MotebehovSpeil
+                            motebehov={motebehovListe[index]}
+                        />
 
-        <MotebehovSpeil
-            motebehov={motebehov}
-        />
+                        <MotebehovKvitteringInnhold
+                            ledetekster={ledetekster}
+                            motebehov={motebehovListe[index]}
+                        />
 
-        <MotebehovKvitteringInnhold
-            ledetekster={ledetekster}
-            motebehov={motebehov}
-        />
-
-        <BehandleMotebehovKnapp
-            oppgaver={oppgaver}
-            veilederinfo={veilederinfo}
-            fnr={fnr}
-            actions={actions}
-            motebehovet={motebehovet}
-        />
+                        <BehandleMotebehovKnapp
+                            oppgaver={oppgaver}
+                            veilederinfo={veilederinfo}
+                            fnr={fnr}
+                            actions={actions}
+                            motebehovet={motebehovListe[index]}
+                        />
+                    </div>
+                );
+            }),
+        ]}
     </div>);
 };
 
@@ -221,7 +227,7 @@ MotebehovKvittering.propTypes = {
     veilederinfo: PropTypes.object,
     fnr: PropTypes.string,
     actions: PropTypes.object,
-    motebehovet: PropTypes.object,
+    motebehovListe: PropTypes.array,
     ledere: PropTypes.array,
 };
 

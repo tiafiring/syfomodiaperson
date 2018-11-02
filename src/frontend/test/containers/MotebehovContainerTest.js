@@ -65,7 +65,7 @@ describe("MotebehovContainer", () => {
             const component = shallow(<MotebehovSide
                 tilgang={tilgang}
                 actions={actions}
-                motebehovet={{}}
+                motebehovListe={[]}
                 motebehovTilgang={motebehovTilgang}
                 motebehovForsoktHentet={true}
                 hentingFeilet
@@ -75,16 +75,18 @@ describe("MotebehovContainer", () => {
         });
 
         it("Skal vise MotebehovKvittering hvis det finnes møtebehov som har motebehovSvar", () => {
-            const motebehovet = {
-                id: '123',
-                motebehovSvar: {},
-            };
+            const motebehovListe = [
+                {
+                    id: '123',
+                    motebehovSvar: {},
+                },
+            ];
 
             const component = shallow(<MotebehovSide
                 tilgang={tilgang}
                 fnr={"fnr"}
                 actions={actions}
-                motebehovet={motebehovet}
+                motebehovListe={motebehovListe}
                 motebehovTilgang={motebehovTilgang}
                 motebehovForsoktHentet={true}
             />);
@@ -193,6 +195,66 @@ describe("MotebehovContainer", () => {
             const props = mapStateToProps(state, ownProps);
 
             expect(props.hentingFeilet).to.be.false;
+        });
+
+        it("Skal returnere ett element i motebehovListe hvis alle motebehovsvar er fra samme virksomhet", () => {
+            state.motebehov.data = [
+                {
+                    id: '1',
+                    virksomhetsnummer: '123',
+                },
+                {
+                    id: '2',
+                    virksomhetsnummer: '123',
+                },
+            ];
+
+            const props = mapStateToProps(state, ownProps);
+
+            expect(props.motebehovListe).to.have.length(1);
+        });
+
+        it("Skal returnere to elementer i motebehovListe hvis to motebehovSvar er fra ulike virksomheter", () => {
+            state.motebehov.data = [
+                {
+                    id: '1',
+                    virksomhetsnummer: '123',
+                },
+                {
+                    id: '2',
+                    virksomhetsnummer: '123',
+                },
+                {
+                    id: '3',
+                    virksomhetsnummer: '999',
+                }
+            ];
+
+            const props = mapStateToProps(state, ownProps);
+
+            expect(props.motebehovListe).to.have.length(2);
+        });
+
+        it("Skal returnere det nyeste motebehovsvaret når det finnes flere fra samme virksomhet", () => {
+            const eldsteDato = new Date("2018-05-05");
+            const nyesteDato = new Date("2018-10-10");
+            state.motebehov.data = [
+                {
+                    id: '1',
+                    virksomhetsnummer: '123',
+                    opprettetDato: eldsteDato,
+                },
+                {
+                    id: '2',
+                    virksomhetsnummer: '123',
+                    opprettetDato: nyesteDato,
+                },
+            ];
+
+            const props = mapStateToProps(state, ownProps);
+            const motebehovet = props.motebehovListe[0];
+
+            expect(motebehovet.opprettetDato).to.equal(nyesteDato);
         });
 
     });
