@@ -28,7 +28,7 @@ export class MotebehovSide extends Component {
             fnr,
             henter,
             hentingFeilet,
-            motebehovet,
+            motebehovListe,
             tilgang,
             ledetekster,
             motebehovTilgang,
@@ -59,15 +59,14 @@ export class MotebehovSide extends Component {
                     if (hentingFeilet) {
                         return <Feilmelding />;
                     }
-                    if (motebehovet && motebehovet.motebehovSvar) {
+                    if (motebehovListe.length > 0) {
                         return (<MotebehovKvittering
                             ledetekster={ledetekster}
-                            motebehov={motebehovet}
                             oppgaver={oppgaver}
                             veilederinfo={veilederinfo}
                             fnr={fnr}
                             actions={actions}
-                            motebehovet={motebehovet}
+                            motebehovListe={motebehovListe}
                             ledere={ledere}
                         />);
                     }
@@ -84,7 +83,7 @@ export class MotebehovSide extends Component {
 MotebehovSide.propTypes = {
     fnr: PropTypes.string,
     motebehovForsoktHentet: PropTypes.bool,
-    motebehovet: PropTypes.object,
+    motebehovListe: PropTypes.array,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
@@ -96,6 +95,18 @@ MotebehovSide.propTypes = {
     ledere: PropTypes.array,
 };
 
+export const sorterMotebehovDataEtterDato = (a, b) => {
+    return b.opprettetDato === a.opprettetDato ? 0 : b.opprettetDato > a.opprettetDato ? 1 : -1;
+};
+
+export const finnNyesteMotebehovsvarFraHverLeder = (motebehovData) => {
+    return motebehovData.filter((motebehov1, index) => {
+        return motebehovData.findIndex(motebehov2 => {
+            return motebehov1.virksomhetsnummer === motebehov2.virksomhetsnummer;
+        }) === index;
+    });
+};
+
 export function mapDispatchToProps(dispatch) {
     const actions = Object.assign({}, motebehovActions, veilederoppgaverActions);
     return {
@@ -104,10 +115,13 @@ export function mapDispatchToProps(dispatch) {
 }
 
 export const mapStateToProps = (state, ownProps) => {
+    const motebehovData = state.motebehov.data;
+    const sortertMotebehovData = motebehovData && motebehovData.sort(sorterMotebehovDataEtterDato);
+    const motebehovListe = sortertMotebehovData && sortertMotebehovData.length > 0 ? finnNyesteMotebehovsvarFraHverLeder(sortertMotebehovData) : [];
     return {
         fnr: ownProps.params.fnr,
         motebehovForsoktHentet: state.motebehov.henter || state.motebehov.hentet || state.motebehov.hentingFeilet,
-        motebehovet: state.motebehov.data[0],
+        motebehovListe,
         henter: state.motebehov.henter || state.ledetekster.henter,
         hentingFeilet: state.motebehov.hentingFeilet || state.ledetekster.hentingFeilet,
         tilgang: state.tilgang.data,
