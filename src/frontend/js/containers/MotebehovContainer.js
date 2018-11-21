@@ -9,39 +9,55 @@ import Side from '../sider/Side';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import * as motebehovActions from '../actions/motebehov_actions';
+import * as veilederoppgaverActions from '../actions/veilederoppgaver_actions';
 import { MOETEPLANLEGGER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
+import {
+    sorterMotebehovDataEtterDato,
+    finnNyesteMotebehovsvarFraHverDeltaker,
+} from '../utils/motebehovUtils';
+import {
+    harForsoktHentetLedetekster,
+    harForsoktHentetMotebehov,
+    ikkeHenterEllerForsoktHentetMotebehov,
+} from '../utils/reducerUtils';
 import { MotebehovKvittering } from '../components/MotebehovKvittering';
 import { bindActionCreators } from 'redux';
-import * as veilederoppgaverActions from '../actions/veilederoppgaver_actions';
+
 
 export class MotebehovSide extends Component {
-    constructor(props = false) {
-        super(props);
-        if (!this.props.motebehovForsoktHentet) {
-            this.props.actions.hentMotebehov(this.props.fnr);
+    componentDidMount() {
+        const {
+            actions,
+            fnr,
+            skalHenteMotebehov,
+        } = this.props;
+        if (skalHenteMotebehov) {
+            actions.hentMotebehov(fnr);
         }
     }
 
     render() {
         const {
+            actions,
             fnr,
             henter,
             hentingFeilet,
-            motebehovListe,
-            tilgang,
+            ledereData,
+            ledereUtenInnsendtMotebehov,
             ledetekster,
+            motebehovListeUtenFlereSvarFraSammePerson,
             motebehovTilgang,
             oppgaver,
+            sykmeldt,
+            tilgang,
+            ufiltrertMotebehovListeTilOppgaveBehandling,
             veilederinfo,
-            actions,
-            motebehovForsoktHentet,
-            ledere,
         } = this.props;
         return (<Side fnr={fnr} tittel="Møtebehov" aktivtMenypunkt={MOETEPLANLEGGER}>
             {
                 (() => {
-                    if (!motebehovForsoktHentet || henter) {
+                    if (henter) {
                         return <AppSpinner />;
                     }
                     if (!tilgang.harTilgang) {
@@ -59,15 +75,17 @@ export class MotebehovSide extends Component {
                     if (hentingFeilet) {
                         return <Feilmelding />;
                     }
-                    if (motebehovListe.length > 0) {
+                    if (motebehovListeUtenFlereSvarFraSammePerson.length > 0) {
                         return (<MotebehovKvittering
-                            ledetekster={ledetekster}
-                            oppgaver={oppgaver}
-                            veilederinfo={veilederinfo}
-                            fnr={fnr}
                             actions={actions}
-                            motebehovListe={motebehovListe}
-                            ledere={ledere}
+                            fnr={fnr}
+                            ledereData={ledereData}
+                            ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
+                            motebehovListe={motebehovListeUtenFlereSvarFraSammePerson}
+                            oppgaver={oppgaver}
+                            sykmeldt={sykmeldt}
+                            ufiltrertMotebehovListeTilOppgaveBehandling={ufiltrertMotebehovListeTilOppgaveBehandling}
+                            veilederinfo={veilederinfo}
                         />);
                     }
                     return (<Feilmelding
@@ -81,30 +99,42 @@ export class MotebehovSide extends Component {
 }
 
 MotebehovSide.propTypes = {
+    actions: PropTypes.object,
     fnr: PropTypes.string,
-    motebehovForsoktHentet: PropTypes.bool,
-    motebehovListe: PropTypes.array,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
-    tilgang: PropTypes.object,
+    ledereData: PropTypes.array,
+    ledereUtenInnsendtMotebehov: PropTypes.array,
     ledetekster: PropTypes.object,
+    motebehovListeUtenFlereSvarFraSammePerson: PropTypes.array,
     motebehovTilgang: PropTypes.object,
     oppgaver: PropTypes.arrayOf(PropTypes.object),
+    skalHenteMotebehov: PropTypes.bool,
+    sykmeldt: PropTypes.object,
+    tilgang: PropTypes.object,
+    ufiltrertMotebehovListeTilOppgaveBehandling: PropTypes.array,
     veilederinfo: PropTypes.object,
-    actions: PropTypes.object,
-    ledere: PropTypes.array,
 };
 
-export const sorterMotebehovDataEtterDato = (a, b) => {
-    return b.opprettetDato === a.opprettetDato ? 0 : b.opprettetDato > a.opprettetDato ? 1 : -1;
-};
-
-export const finnNyesteMotebehovsvarFraHverLeder = (motebehovData) => {
-    return motebehovData.filter((motebehov1, index) => {
-        return motebehovData.findIndex(motebehov2 => {
-            return motebehov1.virksomhetsnummer === motebehov2.virksomhetsnummer;
-        }) === index;
+export const filtrerLederePaaArbeidstakersMotebehov = (ledereData, motebehovData) => {
+    return ledereData.filter((leder) => {
+        return motebehovData.findIndex((motebehov) => {
+            return motebehov.opprettetAv === motebehov.aktorId && leder.orgnummer === motebehov.virksomhetsnummer;
+        }) >= 0;
     });
+};
+
+export const fjernLedereMedInnsendtMotebehov = (ledereListe, motebehovData) => {
+    return ledereListe.filter((leder) => {
+        return motebehovData.findIndex((motebehov) => {
+            return motebehov.opprettetAv !== motebehov.aktorId && motebehov.virksomhetsnummer === leder.orgnummer;
+        }) < 0;
+    });
+};
+
+export const finnLedereutenInnsendtMotebehov = (ledereData, motebehovData) => {
+    const ledereFiltrertPaaArbeidstakersMotebehov = filtrerLederePaaArbeidstakersMotebehov(ledereData, motebehovData);
+    return fjernLedereMedInnsendtMotebehov(ledereFiltrertPaaArbeidstakersMotebehov, motebehovData);
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -116,20 +146,31 @@ export function mapDispatchToProps(dispatch) {
 
 export const mapStateToProps = (state, ownProps) => {
     const motebehovData = state.motebehov.data;
-    const sortertMotebehovData = motebehovData && motebehovData.sort(sorterMotebehovDataEtterDato);
-    const motebehovListe = sortertMotebehovData && sortertMotebehovData.length > 0 ? finnNyesteMotebehovsvarFraHverLeder(sortertMotebehovData) : [];
+    const sortertMotebehovListe = motebehovData.sort(sorterMotebehovDataEtterDato);
+    const motebehovListeUtenFlereSvarFraSammePerson = finnNyesteMotebehovsvarFraHverDeltaker(sortertMotebehovListe);
+
+    const ledereData = state.ledere.data;
+    const ledereUtenInnsendtMotebehov = finnLedereutenInnsendtMotebehov(ledereData, motebehovData);
+
+    const harForsoktHentetAlt = harForsoktHentetMotebehov(state.motebehov)
+    && harForsoktHentetLedetekster(state.ledetekster);
     return {
         fnr: ownProps.params.fnr,
-        motebehovForsoktHentet: state.motebehov.henter || state.motebehov.hentet || state.motebehov.hentingFeilet,
-        motebehovListe,
-        henter: state.motebehov.henter || state.ledetekster.henter,
-        hentingFeilet: state.motebehov.hentingFeilet || state.ledetekster.hentingFeilet,
-        tilgang: state.tilgang.data,
+        henter: !harForsoktHentetAlt,
+        hentingFeilet:
+        state.motebehov.hentingFeilet
+        || state.ledetekster.hentingFeilet,
+        ledereData,
+        ledereUtenInnsendtMotebehov,
         ledetekster: state.ledetekster.data,
+        motebehovListeUtenFlereSvarFraSammePerson,
         motebehovTilgang: state.motebehov.tilgang,
         oppgaver: state.veilederoppgaver.data,
+        skalHenteMotebehov: ikkeHenterEllerForsoktHentetMotebehov(state.motebehov),
+        sykmeldt: state.navbruker.data,
+        tilgang: state.tilgang.data,
+        ufiltrertMotebehovListeTilOppgaveBehandling: state.motebehov.data,
         veilederinfo: state.veilederinfo.data,
-        ledere: state.ledere.data,
     };
 };
 

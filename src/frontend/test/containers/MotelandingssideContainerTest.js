@@ -37,9 +37,7 @@ describe("MotelandingssideContainer", () => {
             const component = shallow(<MotelandingssideSide
                 tilgang={tilgang}
                 hentMoter={hentMoter}
-                hentMotebehov={hentMotebehov}
                 henter={true}
-                moterTilgang={moterTilgang}
             />);
 
             expect(component.find(AppSpinner)).to.have.length(1)
@@ -47,16 +45,12 @@ describe("MotelandingssideContainer", () => {
 
         it("Skal hente møter ved init", () => {
             const mote = {};
-            const motebehovet = {};
 
             const component = shallow(<MotelandingssideSide
                 tilgang={tilgang}
                 fnr="123"
                 hentMoter={hentMoter}
-                hentMotebehov={hentMotebehov}
                 mote={{}}
-                motebehovet={{}}
-                moterTilgang={moterTilgang}
             />);
 
             expect(hentMoter.calledOnce).to.be.true;
@@ -65,15 +59,11 @@ describe("MotelandingssideContainer", () => {
 
         it("Skal vise feilmelding hvis hentingFeilet", () => {
             const mote = {};
-            const motebehovet = {};
 
             const component = shallow(<MotelandingssideSide
                 tilgang={tilgang}
                 hentMoter={hentMoter}
-                hentMotebehov={hentMotebehov}
                 mote={{}}
-                motebehovet={{}}
-                moterTilgang={moterTilgang}
                 hentingFeilet
             />);
 
@@ -174,14 +164,6 @@ describe("MotelandingssideContainer", () => {
             expect(props.mote).to.be.undefined;
         });
 
-        it("Skal returnere motebehov === undefined dersom det ikke finnes motebehov", () => {
-            state.motebehov.data = [];
-
-            const props = mapStateToProps(state, ownProps);
-
-            expect(props.motebehovet).to.be.undefined;
-        });
-
         it("Skal returnere henter når det hentes møter", () => {
             state.moter.data = [{
                 id: 1
@@ -198,28 +180,6 @@ describe("MotelandingssideContainer", () => {
                 id: 1
             }];
             state.moter.henter = false;
-
-            const props = mapStateToProps(state, ownProps);
-
-            expect(props.henter).to.be.false;
-        });
-
-        it("Skal returnere henter når det hentes motebehov", () => {
-            state.motebehov.data = [{
-                id: 1
-            }];
-            state.motebehov.henter = true;
-
-            const props = mapStateToProps(state, ownProps);
-
-            expect(props.henter).to.be.true;
-        });
-
-        it("Skal returnere henter når det ikke hentes motebehov", () => {
-            state.motebehov.data = [{
-                id: 1
-            }];
-            state.motebehov.henter = false;
 
             const props = mapStateToProps(state, ownProps);
 

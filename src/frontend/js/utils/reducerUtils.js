@@ -10,3 +10,15 @@ export const henterEllerHarHentetFastleger = (fastleger) => {
 export const henterEllerHarHentetSykeforloep = (sykeforloep) => {
     return sykeforloep.henter || sykeforloep.hentet;
 };
+
+export const harForsoktHentetMotebehov = (motebehovReducer) => {
+    return motebehovReducer.hentet || motebehovReducer.hentingFeilet;
+};
+
+export const ikkeHenterEllerForsoktHentetMotebehov = (motebehovReducer) => {
+    return !(motebehovReducer.henter || harForsoktHentetMotebehov(motebehovReducer));
+};
+
+export const harForsoktHentetLedetekster = (ledeteksterReducer) => {
+    return ledeteksterReducer.hentet || ledeteksterReducer.hentingFeilet;
+};

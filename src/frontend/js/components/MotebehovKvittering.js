@@ -1,234 +1,230 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-    getLedetekst,
-    getHtmlLedetekst,
-    keyValue,
     toDatePrettyPrint,
 } from 'digisyfo-npm';
-import { tilDatoMedUkedagOgMaanedNavn } from '../utils/datoUtils';
+import { finnArbeidstakerMotebehovSvar } from '../utils/motebehovUtils';
 import { Checkbox } from 'nav-frontend-skjema';
 import Sidetopp from './Sidetopp';
 
-export const finnRiktigLeder = (motebehov, ledere) => {
-    return ledere.filter(leder => {
-        return leder.orgnummer === motebehov.virksomhetsnummer;
-    })[0];
+export const finnRiktigLeder = (virksomhetsnummer, ledere) => {
+    return ledere.find((leder) => {
+        return leder.orgnummer === virksomhetsnummer;
+    });
 };
 
-export const MotebehovKvitteringHeader = (
-    {
-        motebehov,
-        ledetekster,
-        ledere,
-    }) => {
-    const riktigLeder = finnRiktigLeder(motebehov, ledere);
-    return (<div className="motebehovKvitteringHeader" >
-        {
-            motebehov.opprettetDato && <p className="datoLinje">{tilDatoMedUkedagOgMaanedNavn(motebehov.opprettetDato)}</p>
-        }
-        {
-            riktigLeder ?
-                <p className="fraLinje">
-                    {
-                        getLedetekst('mote.motebehovSvar.innsendtAv', ledetekster, {
-                            '%NAERMESTELEDER%': riktigLeder.navn,
-                            '%ORGANISASJONSNAVN%': riktigLeder.organisasjonsnavn,
-                        })
-                    }
-                </p>
-                :
-                <p className="fraLinje">
-                    {
-                        getLedetekst('mote.motebehovSvar.innsendtAv.ingenLeder', ledetekster)
-                    }
-                </p>
-        }
-    </div>);
+export const setSvarIkon = (deltakerOnskerMote) => {
+    if (deltakerOnskerMote === true) {
+        return '/sykefravaer/img/svg/motebehov--kan.svg';
+    }
+    if (deltakerOnskerMote === false) {
+        return '/sykefravaer/img/svg/motebehov--kanikke.svg';
+    }
+    return '/sykefravaer/img/svg/motebehov--ikkesvart.svg';
 };
 
-MotebehovKvitteringHeader.propTypes = {
-    motebehov: PropTypes.object,
-    ledetekster: keyValue,
-    ledere: PropTypes.array,
+export const setSvarTekst = (deltakerOnskerMote) => {
+    if (deltakerOnskerMote === true) {
+        return ' har svart JA';
+    }
+    if (deltakerOnskerMote === false) {
+        return ' har svart NEI';
+    }
+    return ' har ikke svart';
 };
 
-export const MotebehovSpeilBilde = (
-    {
-        ledetekster,
-    }) => {
-    const bildeSti = '/sykefravaer/img/svg/nav-ansatt--mannlig.svg';
-    const bildeAlt = 'nav-ansatt--mannlig';
-    return (<div className="motebehovSpeilBilde">
-        <img src={bildeSti} alt={bildeAlt} />
-        <span>{getLedetekst('mote.motebehov.dialogmoteInfo.bjorn', ledetekster)}</span>
-    </div>);
+export const setArbeidsgiverTekst = (leder, arbeidsgiverOnskerMote) => {
+    const arbeidsgiverNavn = leder && leder.navn ? `${leder.navn},` : '';
+    const arbeidsgiverBedrift = leder && leder.organisasjonsnavn ? `${leder.organisasjonsnavn},` : '';
+    return `<b>Arbeidsgiveren: </b> ${arbeidsgiverNavn} ${arbeidsgiverBedrift} ${setSvarTekst(arbeidsgiverOnskerMote)}`;
 };
 
-MotebehovSpeilBilde.propTypes = {
-    ledetekster: keyValue,
+const getGjeldendeOppgaver = (oppgaveListe, motebehovListe) => {
+    return oppgaveListe.filter((oppgave) => {
+        return oppgave.type === 'MOTEBEHOV_MOTTATT' && motebehovListe.findIndex((motebehov) => {
+            return oppgave.uuid === motebehov.id;
+        }) >= 0;
+    });
 };
 
-export const MotebehovSpeilInfo = (
-    {
-        ledetekster,
-    }) => {
-    return (<div className="motebehovSpeilInfo">
-        <p className="forSvar">Før du svarer:</p>
-        <div dangerouslySetInnerHTML={getHtmlLedetekst('mote.motebehov.dialogmoteInfo.kulepunkt', ledetekster)} />
-        <div dangerouslySetInnerHTML={getHtmlLedetekst('mote.motebehov.dialogmoteInfo', ledetekster)} />
-    </div>);
+export const getIkkeFullforteOppgaver = (oppgaveListe) => {
+    return oppgaveListe.filter((oppgave) => {
+        return oppgave.status !== 'FERDIG';
+    });
 };
 
-MotebehovSpeilInfo.propTypes = {
-    ledetekster: keyValue,
-};
-
-export const MotebehovSpeil = (
-    {
-        ledetekster,
-    }) => {
-    return (<div className="panel motebehovSpeil">
-        <MotebehovSpeilBilde ledetekster={ledetekster} />
-
-        <MotebehovSpeilInfo ledetekster={ledetekster} />
-    </div>);
-};
-
-MotebehovSpeil.propTypes = {
-    ledetekster: keyValue,
-};
-
-export const MotebehovKvitteringInnhold = (
-    {
-        ledetekster,
-        motebehov,
-    }) => {
-    const motebehovSvar = motebehov.motebehovSvar;
-    return (<div className="panel motebehovKvitteringInnhold">
-        { motebehovSvar.harMotebehov !== undefined && [
-            <label key={0}>{getLedetekst('mote.svarMotebehovSkjema.harMotebehov.spoersmaal', ledetekster)}</label>,
-            <p key={1}>
-                {`${motebehovSvar.harMotebehov ?
-                    getLedetekst('mote.svarMotebehovSkjema.harMotebehov.svar.ja', ledetekster)
-                    :
-                    getLedetekst('mote.svarMotebehovSkjema.harMotebehov.svar.nei', ledetekster)
-                }`}
-            </p>,
-        ]}
-
-        { motebehovSvar.forklaring && [
-            <label key={0}>{getLedetekst('mote.svarMotebehovSkjema.forklaring.spoersmaal')}</label>,
-            <p key={1}>{motebehovSvar.forklaring}</p>,
-        ]}
-    </div>);
-};
-
-MotebehovKvitteringInnhold.propTypes = {
-    ledetekster: keyValue,
-    motebehov: PropTypes.object,
-};
-
-const erOppgaveFullfoert = (oppgave) => {
-    return oppgave.status === 'FERDIG';
-};
-
-const seMotebehovOppgave = (oppgaver, motebehovet) => {
-    return oppgaver.filter((oppgave) => {
-        return oppgave.type === 'MOTEBEHOV_MOTTATT' && oppgave.uuid === motebehovet.id;
+export const getSistEndretOppgave = (gjeldendeOppgaver) => {
+    return gjeldendeOppgaver.sort((oppgave1, oppgave2) => {
+        return oppgave2.sistEndret === oppgave1.sistEndret ? 0 : oppgave2.sistEndret > oppgave1.sistEndret ? 1 : -1;
     })[0];
 };
 
 export const BehandleMotebehovKnapp = (
     {
+        actions,
+        fnr,
+        motebehovListe,
         oppgaver,
         veilederinfo,
-        fnr,
-        actions,
-        motebehovet,
     }) => {
-    const gjeldendeOppgave = seMotebehovOppgave(oppgaver, motebehovet);
-    return (<div className="behandleMotebehovKnapp">
-        {gjeldendeOppgave ?
+    const gjeldendeOppgaver = getGjeldendeOppgaver(oppgaver, motebehovListe);
+    const sistEndretOppgave = getSistEndretOppgave(gjeldendeOppgaver);
+    const ikkeFullforteOppgaver = getIkkeFullforteOppgaver(gjeldendeOppgaver);
+    const erAlleOppgaverFullfort = ikkeFullforteOppgaver.length === 0;
+    return (<div className="panel behandleMotebehovKnapp">
+        {gjeldendeOppgaver.length > 0 ?
             <div className="skjema__input">
                 <Checkbox
-                    label={gjeldendeOppgave.status === 'FERDIG' ? `Ferdig behandlet av ${gjeldendeOppgave.sistEndretAv} ${toDatePrettyPrint(gjeldendeOppgave.sistEndret)}` : 'Marker som behandlet'}
+                    label={erAlleOppgaverFullfort ? `Ferdig behandlet av ${sistEndretOppgave.sistEndretAv} ${toDatePrettyPrint(sistEndretOppgave.sistEndret)}` : 'Marker som behandlet'}
                     onClick={() => {
-                        actions.behandleOppgave(gjeldendeOppgave.id, {
-                            status: 'FERDIG',
-                            sistEndretAv: veilederinfo.ident,
-                        }, fnr);
+                        ikkeFullforteOppgaver.forEach((oppgave) => {
+                            actions.behandleOppgave(oppgave.id, {
+                                status: 'FERDIG',
+                                sistEndretAv: veilederinfo.ident,
+                            }, fnr);
+                        });
                     }}
                     id="marker__utfoert"
-                    disabled={erOppgaveFullfoert(gjeldendeOppgave)}
-                    checked={erOppgaveFullfoert(gjeldendeOppgave)} />
-            </div> : <p>Fant dessverre ingen oppgave knyttet til denne avklaringen</p>
+                    disabled={erAlleOppgaverFullfort}
+                    checked={erAlleOppgaverFullfort} />
+            </div> : <p>Fant dessverre ingen oppgaver knyttet til denne avklaringen</p>
         }
     </div>);
 };
 
 BehandleMotebehovKnapp.propTypes = {
+    actions: PropTypes.object,
+    fnr: PropTypes.string,
+    motebehovListe: PropTypes.array,
     oppgaver: PropTypes.arrayOf(PropTypes.object),
     veilederinfo: PropTypes.object,
-    fnr: PropTypes.string,
-    actions: PropTypes.object,
-    motebehovet: PropTypes.object,
 };
 
-export const MotebehovKvittering = (
+export const MotebehovKvitteringBoksInnhold = (
     {
-        ledetekster,
-        oppgaver,
-        veilederinfo,
-        fnr,
-        actions,
+        deltakerOnskerMote,
+        ikon,
+        motebehov,
+        tekst,
+    }
+) => {
+    return (<div className="motebehovKvitteringBoksInnhold">
+        <div>
+            <img key={0} className="svarstatus__ikon" src={ikon} alt="svarstatusikon" />
+        </div>
+        <div>
+            <span key={1} dangerouslySetInnerHTML={{ __html: tekst }} />
+            { deltakerOnskerMote === false && <p key={2}>{motebehov.motebehovSvar.forklaring}</p> }
+        </div>
+    </div>);
+};
+
+MotebehovKvitteringBoksInnhold.propTypes = {
+    deltakerOnskerMote: PropTypes.bool,
+    ikon: PropTypes.string,
+    motebehov: PropTypes.object,
+    tekst: PropTypes.string,
+};
+
+export const MotebehovKvitteringBoks = (
+    {
+        ledereData,
+        ledereUtenInnsendtMotebehov,
         motebehovListe,
-        ledere,
-    }) => {
-    return (<div className="motebehovSide">
+        sykmeldt,
+    }
+) => {
+    const arbeidstakerMotebehov = finnArbeidstakerMotebehovSvar(motebehovListe);
+    const arbeidstakerOnskerMote = arbeidstakerMotebehov ? arbeidstakerMotebehov.motebehovSvar.harMotebehov : null;
+    const arbeidstakerIkon = setSvarIkon(arbeidstakerOnskerMote);
+    const arbeidstakerTekst = `<b>Den sykmeldte: </b> ${sykmeldt.navn} ${setSvarTekst(arbeidstakerOnskerMote)}`;
+
+    return (<div className="panel motebehovKvitteringInnhold">
         {[
-            <Sidetopp key={0} tittel={getLedetekst('mote.motebehov.veileder.sidetittel')} />,
-            motebehovListe.map(({}, index) => {
-                return (
-                    <div key={index + 1} className="motebehovKvittering">
-                        <MotebehovKvitteringHeader
-                            motebehov={motebehovListe[index]}
-                            ledetekster={ledetekster}
-                            ledere={ledere}
-                        />
-
-                        <MotebehovSpeil
-                            motebehov={motebehovListe[index]}
-                        />
-
-                        <MotebehovKvitteringInnhold
-                            ledetekster={ledetekster}
-                            motebehov={motebehovListe[index]}
-                        />
-
-                        <BehandleMotebehovKnapp
-                            oppgaver={oppgaver}
-                            veilederinfo={veilederinfo}
-                            fnr={fnr}
-                            actions={actions}
-                            motebehovet={motebehovListe[index]}
-                        />
-                    </div>
-                );
+            <MotebehovKvitteringBoksInnhold
+                key={0}
+                deltakerOnskerMote={arbeidstakerOnskerMote}
+                ikon={arbeidstakerIkon}
+                motebehov={arbeidstakerMotebehov}
+                tekst={arbeidstakerTekst}
+            />,
+            motebehovListe.map((motebehov, index) => {
+                if (motebehov.opprettetAv !== motebehov.aktorId) {
+                    const arbeidsgiverOnskerMote = motebehov.motebehovSvar ? motebehov.motebehovSvar.harMotebehov : null;
+                    const riktigLeder = finnRiktigLeder(motebehov.virksomhetsnummer, ledereData);
+                    const arbeidsgiverIkon = setSvarIkon(arbeidsgiverOnskerMote);
+                    const arbeidsgiverTekst = setArbeidsgiverTekst(riktigLeder, arbeidsgiverOnskerMote);
+                    return (<MotebehovKvitteringBoksInnhold
+                        key={index + 1}
+                        deltakerOnskerMote={arbeidsgiverOnskerMote}
+                        ikon={arbeidsgiverIkon}
+                        motebehov={motebehov}
+                        tekst={arbeidsgiverTekst}
+                    />);
+                }
+                return null;
+            }),
+            ledereUtenInnsendtMotebehov.map((leder, index) => {
+                const arbeidsgiverTekst = setArbeidsgiverTekst(leder, null);
+                return (<MotebehovKvitteringBoksInnhold
+                    key={motebehovListe.length + index + 1}
+                    deltakerOnskerMote={null}
+                    ikon={'/sykefravaer/img/svg/motebehov--ikkesvart.svg'}
+                    motebehov={null}
+                    tekst={arbeidsgiverTekst}
+                />);
             }),
         ]}
     </div>);
 };
 
-MotebehovKvittering.propTypes = {
-    ledetekster: keyValue,
-    motebehov: PropTypes.object,
-    oppgaver: PropTypes.arrayOf(PropTypes.object),
-    veilederinfo: PropTypes.object,
-    fnr: PropTypes.string,
-    actions: PropTypes.object,
+MotebehovKvitteringBoks.propTypes = {
+    ledereData: PropTypes.array,
+    ledereUtenInnsendtMotebehov: PropTypes.array,
     motebehovListe: PropTypes.array,
-    ledere: PropTypes.array,
+    sykmeldt: PropTypes.object,
+};
+
+export const MotebehovKvittering = (
+    {
+        actions,
+        fnr,
+        ledereData,
+        ledereUtenInnsendtMotebehov,
+        motebehovListe,
+        oppgaver,
+        sykmeldt,
+        ufiltrertMotebehovListeTilOppgaveBehandling,
+        veilederinfo,
+    }) => {
+    return (<div className="motebehovSide">
+        <Sidetopp tittel={'Avklaring dialogmøte'} />
+        <MotebehovKvitteringBoks
+            ledereData={ledereData}
+            ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
+            motebehovListe={motebehovListe}
+            sykmeldt={sykmeldt}
+        />
+        <BehandleMotebehovKnapp
+            actions={actions}
+            fnr={fnr}
+            motebehovListe={ufiltrertMotebehovListeTilOppgaveBehandling}
+            oppgaver={oppgaver}
+            veilederinfo={veilederinfo}
+        />
+    </div>);
+};
+
+MotebehovKvittering.propTypes = {
+    actions: PropTypes.object,
+    fnr: PropTypes.string,
+    ledereData: PropTypes.array,
+    ledereUtenInnsendtMotebehov: PropTypes.array,
+    motebehovListe: PropTypes.array,
+    oppgaver: PropTypes.arrayOf(PropTypes.object),
+    sykmeldt: PropTypes.object,
+    ufiltrertMotebehovListeTilOppgaveBehandling: PropTypes.array,
+    veilederinfo: PropTypes.object,
 };
 
 export default MotebehovKvittering;
