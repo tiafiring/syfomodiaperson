@@ -21,7 +21,8 @@ import {
     harForsoktHentetMotebehov,
     ikkeHenterEllerForsoktHentetMotebehov,
 } from '../utils/reducerUtils';
-import { MotebehovKvittering } from '../components/MotebehovKvittering';
+import { finnLedereUtenInnsendtMotebehov } from '../utils/ledereUtils';
+import { Motebehov } from '../components/Motebehov';
 import { bindActionCreators } from 'redux';
 
 
@@ -51,7 +52,7 @@ export class MotebehovSide extends Component {
             oppgaver,
             sykmeldt,
             tilgang,
-            ufiltrertMotebehovListeTilOppgaveBehandling,
+            ufiltrertMotebehovListeTilOppgavebehandling,
             veilederinfo,
         } = this.props;
         return (<Side fnr={fnr} tittel="Møtebehov" aktivtMenypunkt={MOETEPLANLEGGER}>
@@ -76,7 +77,7 @@ export class MotebehovSide extends Component {
                         return <Feilmelding />;
                     }
                     if (motebehovListeUtenFlereSvarFraSammePerson.length > 0) {
-                        return (<MotebehovKvittering
+                        return (<Motebehov
                             actions={actions}
                             fnr={fnr}
                             ledereData={ledereData}
@@ -84,7 +85,7 @@ export class MotebehovSide extends Component {
                             motebehovListe={motebehovListeUtenFlereSvarFraSammePerson}
                             oppgaver={oppgaver}
                             sykmeldt={sykmeldt}
-                            ufiltrertMotebehovListeTilOppgaveBehandling={ufiltrertMotebehovListeTilOppgaveBehandling}
+                            ufiltrertMotebehovListeTilOppgavebehandling={ufiltrertMotebehovListeTilOppgavebehandling}
                             veilederinfo={veilederinfo}
                         />);
                     }
@@ -103,38 +104,17 @@ MotebehovSide.propTypes = {
     fnr: PropTypes.string,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
-    ledereData: PropTypes.array,
-    ledereUtenInnsendtMotebehov: PropTypes.array,
+    ledereData: PropTypes.arrayOf(PropTypes.object),
+    ledereUtenInnsendtMotebehov: PropTypes.arrayOf(PropTypes.object),
     ledetekster: PropTypes.object,
-    motebehovListeUtenFlereSvarFraSammePerson: PropTypes.array,
+    motebehovListeUtenFlereSvarFraSammePerson: PropTypes.arrayOf(PropTypes.object),
     motebehovTilgang: PropTypes.object,
     oppgaver: PropTypes.arrayOf(PropTypes.object),
     skalHenteMotebehov: PropTypes.bool,
     sykmeldt: PropTypes.object,
     tilgang: PropTypes.object,
-    ufiltrertMotebehovListeTilOppgaveBehandling: PropTypes.array,
+    ufiltrertMotebehovListeTilOppgavebehandling: PropTypes.arrayOf(PropTypes.object),
     veilederinfo: PropTypes.object,
-};
-
-export const filtrerLederePaaArbeidstakersMotebehov = (ledereData, motebehovData) => {
-    return ledereData.filter((leder) => {
-        return motebehovData.findIndex((motebehov) => {
-            return motebehov.opprettetAv === motebehov.aktorId && leder.orgnummer === motebehov.virksomhetsnummer;
-        }) >= 0;
-    });
-};
-
-export const fjernLedereMedInnsendtMotebehov = (ledereListe, motebehovData) => {
-    return ledereListe.filter((leder) => {
-        return motebehovData.findIndex((motebehov) => {
-            return motebehov.opprettetAv !== motebehov.aktorId && motebehov.virksomhetsnummer === leder.orgnummer;
-        }) < 0;
-    });
-};
-
-export const finnLedereutenInnsendtMotebehov = (ledereData, motebehovData) => {
-    const ledereFiltrertPaaArbeidstakersMotebehov = filtrerLederePaaArbeidstakersMotebehov(ledereData, motebehovData);
-    return fjernLedereMedInnsendtMotebehov(ledereFiltrertPaaArbeidstakersMotebehov, motebehovData);
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -150,7 +130,7 @@ export const mapStateToProps = (state, ownProps) => {
     const motebehovListeUtenFlereSvarFraSammePerson = finnNyesteMotebehovsvarFraHverDeltaker(sortertMotebehovListe);
 
     const ledereData = state.ledere.data;
-    const ledereUtenInnsendtMotebehov = finnLedereutenInnsendtMotebehov(ledereData, motebehovData);
+    const ledereUtenInnsendtMotebehov = finnLedereUtenInnsendtMotebehov(ledereData, motebehovData);
 
     const harForsoktHentetAlt = harForsoktHentetMotebehov(state.motebehov)
     && harForsoktHentetLedetekster(state.ledetekster);
@@ -169,7 +149,7 @@ export const mapStateToProps = (state, ownProps) => {
         skalHenteMotebehov: ikkeHenterEllerForsoktHentetMotebehov(state.motebehov),
         sykmeldt: state.navbruker.data,
         tilgang: state.tilgang.data,
-        ufiltrertMotebehovListeTilOppgaveBehandling: state.motebehov.data,
+        ufiltrertMotebehovListeTilOppgavebehandling: state.motebehov.data,
         veilederinfo: state.veilederinfo.data,
     };
 };

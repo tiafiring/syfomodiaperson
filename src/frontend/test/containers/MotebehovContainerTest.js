@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { mount, shallow, render } from 'enzyme';
 import AppSpinner from '../../js/components/AppSpinner';
 import Feilmelding from '../../js/components/Feilmelding';
-import MotebehovKvittering from '../../js/components/MotebehovKvittering.js';
+import Motebehov from '../../js/components/Motebehov.js';
 import { mapStateToProps, MotebehovSide } from '../../js/containers/MotebehovContainer';
 import sinon from 'sinon';
 
@@ -74,7 +74,7 @@ describe("MotebehovContainer", () => {
             expect(component.find(Feilmelding)).to.have.length(1)
         });
 
-        it("Skal vise MotebehovKvittering hvis det finnes innsendte møtebehov", () => {
+        it("Skal vise Motebehov hvis det finnes innsendte møtebehov", () => {
             const motebehovListeUtenFlereSvarFraSammePerson = [
                 {
                     id: '123',
@@ -91,7 +91,7 @@ describe("MotebehovContainer", () => {
                 skalHenteMotebehov={false}
             />);
 
-            expect(component.find(MotebehovKvittering)).to.have.length(1)
+            expect(component.find(Motebehov)).to.have.length(1)
         });
 
     });

@@ -33,7 +33,7 @@ export const MotelandingssideMoteElement = (
 ) => {
     const undertittel = setUndertittel(mote);
     const tittel = setTittel(mote);
-    return (<li key={0} className="motelandingssidepanel">
+    return (<li className="motelandingssidepanel">
         <Link
             className="motelandingssidepanel__innhold"
             to={`/sykefravaer/${fnr}/mote`}>
@@ -60,7 +60,7 @@ export const MotelandingssideMotebehovElement = (
         fnr,
     }
 ) => {
-    return (<li key={2} className="motelandingssidepanel">
+    return (<li className="motelandingssidepanel">
         <Link
             className="motelandingssidepanel__innhold"
             to={`/sykefravaer/${fnr}/motebehov`}>
@@ -91,17 +91,13 @@ export const Motelandingsside = (
     return (<div>
         <Sidetopp tittel={'Dialogmøter'} />
         <ul>
-            {
-                <MotelandingssideMoteElement
-                    fnr={fnr}
-                    mote={mote}
-                />
-            }
-            {
-                <MotelandingssideMotebehovElement
-                    fnr={fnr}
-                />
-            }
+            <MotelandingssideMoteElement
+                fnr={fnr}
+                mote={mote}
+            />
+            <MotelandingssideMotebehovElement
+                fnr={fnr}
+            />
         </ul>
     </div>);
 };
