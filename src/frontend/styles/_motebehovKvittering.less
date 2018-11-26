@@ -1,60 +1,43 @@
 .motebehovKvitteringInnhold {
     padding-top: .5em;
-    margin-bottom: 1.25em;
-    padding-bottom: 2em;
+    margin-bottom: 1em;
+    padding-bottom: .5em;
     label {
-        margin-left: 0.75em;
+        margin-left: .75em;
         display: block;
         margin-top: .5em;
         font-weight: bold;
     }
-    p {
-        margin-left: 0.75em;
-        overflow-wrap: break-word;
-        word-wrap: break-word;
-    }
 }
 
-.motebehovKvitteringHeader {
-    margin-top: 0;
-    border-bottom: 1px solid @navGra40;
-    background-color: @white;
-    .datoLinje {
-        margin-left: 1.5em;
-        border-top: 1em solid @white;
-        margin-bottom: 0;
-    }
-    .fraLinje {
-        margin-left: 1.5em;
-        font-weight: bold;
-        margin-bottom: 1em;
-    }
-}
-
-.motebehovSpeilBilde {
+.motebehovKvitteringBoksInnhold {
+    margin-bottom: 1em;
+    margin-top: 1em;
     display: flex;
-    align-items: center;
-    span {
-        margin-left: 1em;
+    @media all and (max-width: @screen-xs-max) {
+        flex-direction: column;
+        div:first-child {
+            margin-bottom: .5em;
+            display: flex;
+            justify-content: center;
+        }
     }
-}
-
-.motebehovSpeilInfo {
-    margin-left: 0.75em;
-    margin-top: 3em;
-    .forSvar {
-        font-weight: bold;
+    img {
+        width: 23px;
+        height: auto;
     }
-    ul {
-        margin-top: -0.5em;
+    div:first-child {
+        flex-grow: 0;
+        margin-right: 1em;
     }
-    a {
-        color: @navBla;
+    div:last-child {
+        flex-grow: 1;
     }
 }
 
 .behandleMotebehovKnapp {
-    margin-left: 1.5em;
-    margin-bottom: 3em;
-    border-bottom: 1px solid @navGra20;
+    border: 1px solid @navGra20;
+    .skjemaelement {
+        margin: 0;
+    }
 }

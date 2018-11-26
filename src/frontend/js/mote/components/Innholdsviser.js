@@ -58,7 +58,7 @@ Innholdsvelger.propTypes = {
 };
 
 const Feil = ({ melding = 'Beklager, det oppstod en feil' }) => {
-    return (<Alertstripe type="feil" className="blokk">
+    return (<Alertstripe type="advarsel" className="blokk">
         <p>{melding}</p>
     </Alertstripe>);
 };

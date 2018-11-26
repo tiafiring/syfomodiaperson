@@ -1,234 +1,162 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    getLedetekst,
-    getHtmlLedetekst,
-    keyValue,
-    toDatePrettyPrint,
-} from 'digisyfo-npm';
-import { tilDatoMedUkedagOgMaanedNavn } from '../utils/datoUtils';
-import { Checkbox } from 'nav-frontend-skjema';
-import Sidetopp from './Sidetopp';
+import { finnArbeidstakerMotebehovSvar } from '../utils/motebehovUtils';
 
-export const finnRiktigLeder = (motebehov, ledere) => {
-    return ledere.filter(leder => {
-        return leder.orgnummer === motebehov.virksomhetsnummer;
-    })[0];
+export const finnRiktigLeder = (virksomhetsnummer, ledere) => {
+    return ledere.find((leder) => {
+        return leder.orgnummer === virksomhetsnummer;
+    });
 };
 
-export const MotebehovKvitteringHeader = (
-    {
-        motebehov,
-        ledetekster,
-        ledere,
-    }) => {
-    const riktigLeder = finnRiktigLeder(motebehov, ledere);
-    return (<div className="motebehovKvitteringHeader" >
-        {
-            motebehov.opprettetDato && <p className="datoLinje">{tilDatoMedUkedagOgMaanedNavn(motebehov.opprettetDato)}</p>
+export const setSvarIkon = (deltakerOnskerMote) => {
+    switch (deltakerOnskerMote) {
+        case true: {
+            return '/sykefravaer/img/svg/motebehov--kan.svg';
         }
-        {
-            riktigLeder ?
-                <p className="fraLinje">
-                    {
-                        getLedetekst('mote.motebehovSvar.innsendtAv', ledetekster, {
-                            '%NAERMESTELEDER%': riktigLeder.navn,
-                            '%ORGANISASJONSNAVN%': riktigLeder.organisasjonsnavn,
-                        })
-                    }
-                </p>
-                :
-                <p className="fraLinje">
-                    {
-                        getLedetekst('mote.motebehovSvar.innsendtAv.ingenLeder', ledetekster)
-                    }
-                </p>
+        case false: {
+            return '/sykefravaer/img/svg/motebehov--kanikke.svg';
         }
-    </div>);
+        default: {
+            return '/sykefravaer/img/svg/motebehov--ikkesvart.svg';
+        }
+    }
 };
 
-MotebehovKvitteringHeader.propTypes = {
-    motebehov: PropTypes.object,
-    ledetekster: keyValue,
-    ledere: PropTypes.array,
+export const setSvarTekst = (deltakerOnskerMote) => {
+    switch (deltakerOnskerMote) {
+        case true: {
+            return ' har svart JA';
+        }
+        case false: {
+            return ' har svart NEI';
+        }
+        default: {
+            return ' har ikke svart';
+        }
+    }
 };
 
-export const MotebehovSpeilBilde = (
-    {
-        ledetekster,
-    }) => {
-    const bildeSti = '/sykefravaer/img/svg/nav-ansatt--mannlig.svg';
-    const bildeAlt = 'nav-ansatt--mannlig';
-    return (<div className="motebehovSpeilBilde">
-        <img src={bildeSti} alt={bildeAlt} />
-        <span>{getLedetekst('mote.motebehov.dialogmoteInfo.bjorn', ledetekster)}</span>
-    </div>);
+export const bareArbeidsgiversMotebehov = (motebehov) => {
+    return motebehov.opprettetAv !== motebehov.aktorId;
 };
 
-MotebehovSpeilBilde.propTypes = {
-    ledetekster: keyValue,
-};
-
-export const MotebehovSpeilInfo = (
-    {
-        ledetekster,
-    }) => {
-    return (<div className="motebehovSpeilInfo">
-        <p className="forSvar">Før du svarer:</p>
-        <div dangerouslySetInnerHTML={getHtmlLedetekst('mote.motebehov.dialogmoteInfo.kulepunkt', ledetekster)} />
-        <div dangerouslySetInnerHTML={getHtmlLedetekst('mote.motebehov.dialogmoteInfo', ledetekster)} />
-    </div>);
-};
-
-MotebehovSpeilInfo.propTypes = {
-    ledetekster: keyValue,
-};
-
-export const MotebehovSpeil = (
-    {
-        ledetekster,
-    }) => {
-    return (<div className="panel motebehovSpeil">
-        <MotebehovSpeilBilde ledetekster={ledetekster} />
-
-        <MotebehovSpeilInfo ledetekster={ledetekster} />
-    </div>);
-};
-
-MotebehovSpeil.propTypes = {
-    ledetekster: keyValue,
+export const setArbeidsgiverTekst = (leder, arbeidsgiverOnskerMote) => {
+    const arbeidsgiverNavn = leder && leder.navn ? `${leder.navn},` : '';
+    const arbeidsgiverBedrift = leder && leder.organisasjonsnavn ? `${leder.organisasjonsnavn},` : '';
+    return `<b>Arbeidsgiveren: </b> ${arbeidsgiverNavn} ${arbeidsgiverBedrift} ${setSvarTekst(arbeidsgiverOnskerMote)}`;
 };
 
 export const MotebehovKvitteringInnhold = (
     {
-        ledetekster,
+        deltakerOnskerMote,
         motebehov,
-    }) => {
-    const motebehovSvar = motebehov.motebehovSvar;
-    return (<div className="panel motebehovKvitteringInnhold">
-        { motebehovSvar.harMotebehov !== undefined && [
-            <label key={0}>{getLedetekst('mote.svarMotebehovSkjema.harMotebehov.spoersmaal', ledetekster)}</label>,
-            <p key={1}>
-                {`${motebehovSvar.harMotebehov ?
-                    getLedetekst('mote.svarMotebehovSkjema.harMotebehov.svar.ja', ledetekster)
-                    :
-                    getLedetekst('mote.svarMotebehovSkjema.harMotebehov.svar.nei', ledetekster)
-                }`}
-            </p>,
-        ]}
-
-        { motebehovSvar.forklaring && [
-            <label key={0}>{getLedetekst('mote.svarMotebehovSkjema.forklaring.spoersmaal')}</label>,
-            <p key={1}>{motebehovSvar.forklaring}</p>,
-        ]}
+        tekst,
+    }
+) => {
+    return (<div className="motebehovKvitteringBoksInnhold">
+        <div>
+            <img className="svarstatus__ikon" src={setSvarIkon(deltakerOnskerMote)} alt="svarstatusikon" />
+        </div>
+        <div>
+            <span dangerouslySetInnerHTML={{ __html: tekst }} />
+            { deltakerOnskerMote === false && <p >{motebehov.motebehovSvar.forklaring}</p> }
+        </div>
     </div>);
 };
 
 MotebehovKvitteringInnhold.propTypes = {
-    ledetekster: keyValue,
+    deltakerOnskerMote: PropTypes.bool,
     motebehov: PropTypes.object,
+    tekst: PropTypes.string,
 };
 
-const erOppgaveFullfoert = (oppgave) => {
-    return oppgave.status === 'FERDIG';
-};
-
-const seMotebehovOppgave = (oppgaver, motebehovet) => {
-    return oppgaver.filter((oppgave) => {
-        return oppgave.type === 'MOTEBEHOV_MOTTATT' && oppgave.uuid === motebehovet.id;
-    })[0];
-};
-
-export const BehandleMotebehovKnapp = (
+export const MotebehovKvitteringInnholdArbeidstaker = (
     {
-        oppgaver,
-        veilederinfo,
-        fnr,
-        actions,
-        motebehovet,
-    }) => {
-    const gjeldendeOppgave = seMotebehovOppgave(oppgaver, motebehovet);
-    return (<div className="behandleMotebehovKnapp">
-        {gjeldendeOppgave ?
-            <div className="skjema__input">
-                <Checkbox
-                    label={gjeldendeOppgave.status === 'FERDIG' ? `Ferdig behandlet av ${gjeldendeOppgave.sistEndretAv} ${toDatePrettyPrint(gjeldendeOppgave.sistEndret)}` : 'Marker som behandlet'}
-                    onClick={() => {
-                        actions.behandleOppgave(gjeldendeOppgave.id, {
-                            status: 'FERDIG',
-                            sistEndretAv: veilederinfo.ident,
-                        }, fnr);
-                    }}
-                    id="marker__utfoert"
-                    disabled={erOppgaveFullfoert(gjeldendeOppgave)}
-                    checked={erOppgaveFullfoert(gjeldendeOppgave)} />
-            </div> : <p>Fant dessverre ingen oppgave knyttet til denne avklaringen</p>
-        }
-    </div>);
+        arbeidstakersMotebehov,
+        sykmeldt,
+    }
+) => {
+    const arbeidstakerOnskerMote = arbeidstakersMotebehov && arbeidstakersMotebehov.motebehovSvar.harMotebehov;
+    const arbeidstakerTekst = `<b>Den sykmeldte: </b> ${sykmeldt.navn} ${setSvarTekst(arbeidstakerOnskerMote)}`;
+    return (<MotebehovKvitteringInnhold
+        deltakerOnskerMote={arbeidstakerOnskerMote}
+        motebehov={arbeidstakersMotebehov}
+        tekst={arbeidstakerTekst}
+    />);
 };
 
-BehandleMotebehovKnapp.propTypes = {
-    oppgaver: PropTypes.arrayOf(PropTypes.object),
-    veilederinfo: PropTypes.object,
-    fnr: PropTypes.string,
-    actions: PropTypes.object,
-    motebehovet: PropTypes.object,
+MotebehovKvitteringInnholdArbeidstaker.propTypes = {
+    arbeidstakersMotebehov: PropTypes.object,
+    sykmeldt: PropTypes.object,
+};
+
+export const MotebehovKvitteringInnholdArbeidsgiver = (
+    {
+        motebehovListeMedBareArbeidsgiversMotebehov,
+        ledereData,
+    }
+) => {
+    return motebehovListeMedBareArbeidsgiversMotebehov.map((motebehov, index) => {
+        const arbeidsgiverOnskerMote = motebehov.motebehovSvar.harMotebehov;
+        const riktigLeder = finnRiktigLeder(motebehov.virksomhetsnummer, ledereData);
+        return (<MotebehovKvitteringInnhold
+            key={index}
+            deltakerOnskerMote={arbeidsgiverOnskerMote}
+            motebehov={motebehov}
+            tekst={setArbeidsgiverTekst(riktigLeder, arbeidsgiverOnskerMote)}
+        />);
+    });
+};
+
+MotebehovKvitteringInnholdArbeidsgiver.propTypes = {
+    motebehovListeMedBareArbeidsgiversMotebehov: PropTypes.arrayOf(PropTypes.object),
+    ledereData: PropTypes.arrayOf(PropTypes.object),
+};
+
+export const MotebehovKvitteringInnholdArbeidsgiverUtenMotebehov = (
+    {
+        ledereUtenInnsendtMotebehov,
+    }
+) => {
+    return ledereUtenInnsendtMotebehov.map((leder, index) => {
+        return (<MotebehovKvitteringInnhold
+            key={index}
+            tekst={setArbeidsgiverTekst(leder)}
+        />);
+    });
+};
+
+MotebehovKvitteringInnholdArbeidsgiverUtenMotebehov.propTypes = {
+    ledereUtenInnsendtMotebehov: PropTypes.array,
 };
 
 export const MotebehovKvittering = (
     {
-        ledetekster,
-        oppgaver,
-        veilederinfo,
-        fnr,
-        actions,
+        ledereData,
+        ledereUtenInnsendtMotebehov,
         motebehovListe,
-        ledere,
-    }) => {
-    return (<div className="motebehovSide">
-        {[
-            <Sidetopp key={0} tittel={getLedetekst('mote.motebehov.veileder.sidetittel')} />,
-            motebehovListe.map(({}, index) => {
-                return (
-                    <div key={index + 1} className="motebehovKvittering">
-                        <MotebehovKvitteringHeader
-                            motebehov={motebehovListe[index]}
-                            ledetekster={ledetekster}
-                            ledere={ledere}
-                        />
-
-                        <MotebehovSpeil
-                            motebehov={motebehovListe[index]}
-                        />
-
-                        <MotebehovKvitteringInnhold
-                            ledetekster={ledetekster}
-                            motebehov={motebehovListe[index]}
-                        />
-
-                        <BehandleMotebehovKnapp
-                            oppgaver={oppgaver}
-                            veilederinfo={veilederinfo}
-                            fnr={fnr}
-                            actions={actions}
-                            motebehovet={motebehovListe[index]}
-                        />
-                    </div>
-                );
-            }),
-        ]}
+        sykmeldt,
+    }
+) => {
+    return (<div className="panel motebehovKvitteringInnhold">
+        <MotebehovKvitteringInnholdArbeidstaker
+            arbeidstakersMotebehov={finnArbeidstakerMotebehovSvar(motebehovListe)}
+            sykmeldt={sykmeldt}
+        />
+        <MotebehovKvitteringInnholdArbeidsgiver
+            motebehovListeMedBareArbeidsgiversMotebehov={motebehovListe.filter(bareArbeidsgiversMotebehov)}
+            ledereData={ledereData}
+        />
+        <MotebehovKvitteringInnholdArbeidsgiverUtenMotebehov
+            ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
+        />
     </div>);
 };
 
 MotebehovKvittering.propTypes = {
-    ledetekster: keyValue,
-    motebehov: PropTypes.object,
-    oppgaver: PropTypes.arrayOf(PropTypes.object),
-    veilederinfo: PropTypes.object,
-    fnr: PropTypes.string,
-    actions: PropTypes.object,
-    motebehovListe: PropTypes.array,
-    ledere: PropTypes.array,
+    ledereData: PropTypes.arrayOf(PropTypes.object),
+    ledereUtenInnsendtMotebehov: PropTypes.arrayOf(PropTypes.object),
+    motebehovListe: PropTypes.arrayOf(PropTypes.object),
+    sykmeldt: PropTypes.object,
 };
-
 export default MotebehovKvittering;
