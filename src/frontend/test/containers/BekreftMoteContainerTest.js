@@ -37,9 +37,9 @@ describe("BekreftMoteContainer", () => {
             const alternativ = {
                 id: 4545
             }
-            const compo = shallow(<BekreftMoteSide fnr="***REMOVED***" hentBekreftMoteEpostinnhold={() => {}} bekreftMote={bekreftMote} alternativ={alternativ} mote={mote} arbeidsgiver={deltaker} />);
+            const compo = shallow(<BekreftMoteSide fnr="44556677889" hentBekreftMoteEpostinnhold={() => {}} bekreftMote={bekreftMote} alternativ={alternativ} mote={mote} arbeidsgiver={deltaker} />);
             compo.instance().onSubmit();
-            expect(bekreftMote.getCall(0).args).to.deep.equal(["Olsen", 4545, "***REMOVED***"]);
+            expect(bekreftMote.getCall(0).args).to.deep.equal(["Olsen", 4545, "44556677889"]);
         });
 
 
@@ -123,8 +123,8 @@ describe("BekreftMoteContainer", () => {
                         "navEnhet": "navEnhet",
                         "deltakere": [{
                             "deltakerUuid": "85a12263-d955-4103-b172-bf135df5f37a",
-                            "navn": "***REMOVED***",
-                            "epost": "***REMOVED***",
+                            "navn": "Arve Arbeidsgiver",
+                            "epost": "arve.arbeidsgiver@nav.no",
                             "type": "arbeidsgiver",
                             "avvik": [],
                             "svar": [{
@@ -141,7 +141,7 @@ describe("BekreftMoteContainer", () => {
                         }, {
                             "deltakerUuid": "85a12263-d955-4103-b172-bf135df5f37b",
                             "navn": "Andreas Arbeidstaker",
-                            "epost": "***REMOVED***",
+                            "epost": "andreas.arbeidstaker@nav.no",
                             "type": "Bruker",
                             "avvik": [],
                             "svar": [{

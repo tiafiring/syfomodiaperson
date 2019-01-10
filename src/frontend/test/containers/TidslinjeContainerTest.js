@@ -37,7 +37,7 @@ describe('TidslinjeContainer', () => {
         state.navbruker = {
             data: {
                 fnr: '887766',
-                navn: 'Helge',
+                navn: 'Hulgis',
             }
         };
         state.sykeforloep = {
@@ -66,7 +66,7 @@ describe('TidslinjeContainer', () => {
 
         it('Skal returnere NAV-brukerens navn', () => {
             const props = mapStateToProps(state, ownProps);
-            expect(props.brukernavn).to.equal('Helge')
+            expect(props.brukernavn).to.equal('Hulgis')
         });
 
         it('Skal returnere hendelser', () => {

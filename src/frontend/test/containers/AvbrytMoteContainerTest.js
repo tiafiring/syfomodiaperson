@@ -24,8 +24,8 @@ describe("AvbrytMoteContainer", () => {
                 "navEnhet": "navEnhet",
                 "deltakere": [{
                     "deltakerUuid": "brukers-deltaker-uuid",
-                    "navn": "***REMOVED***",
-                    "epost": "***REMOVED***",
+                    "navn": "Andreas Arbeidstaker",
+                    "epost": "andreas.arbeidstaker@nav.no",
                     "type": "Bruker",
                     "svar": [{
                         "id": 328,
@@ -40,8 +40,8 @@ describe("AvbrytMoteContainer", () => {
                     }]
                 }, {
                     "deltakerUuid": "arbeidsgivers-deltaker-uuid",
-                    "navn": "***REMOVED***",
-                    "epost": "***REMOVED***",
+                    "navn": "Arve Arbeidsgiver",
+                    "epost": "arve.arbeidsgiver@nav.no",
                     "type": "arbeidsgiver",
                     "svar": [{
                         "id": 328,
@@ -140,8 +140,8 @@ describe("AvbrytMoteContainer", () => {
                         "navEnhet": "navEnhet",
                         "deltakere": [{
                             "deltakerUuid": "85a12263-d955-4103-b172-bf135df5f37a",
-                            "navn": "***REMOVED***",
-                            "epost": "***REMOVED***",
+                            "navn": "Arve Arbeidsgiver",
+                            "epost": "arve.arbeidsgiver@nav.no",
                             "type": "arbeidsgiver",
                             "svar": [{
                                 "id": 328,

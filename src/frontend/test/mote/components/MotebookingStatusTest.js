@@ -54,8 +54,8 @@ describe("MotebookingStatus", () => {
         mote.status = 'OPPRETTET';
         mote.deltakere = [{
             type: "arbeidsgiver",
-            navn: "Helge",
-            epost: "***REMOVED***",
+            navn: "Arve Arbeidsgiver",
+            epost: "arve.arbeidsgiver@nav.no",
             svar: [{
                 "tid": "2012-12-12T11:00:00Z",
                 "created": "2011-12-12T11:00:00Z",
@@ -71,8 +71,8 @@ describe("MotebookingStatus", () => {
             }],
         }, {
             type: "Bruker",
-            navn: "Ole",
-            epost: "***REMOVED***",
+            navn: "Andreas Arbeidstaker",
+            epost: "andreas.arbeidstaker@nav.no",
             svar: [{
                 "tid": "2012-12-12T11:00:00Z",
                 "created": "2011-12-12T11:00:00Z",
@@ -111,8 +111,8 @@ describe("MotebookingStatus", () => {
             "navEnhet": "navEnhet",
             "deltakere": [{
                 "deltakerUuid": "3b0dc3b2-587c-4105-98df-99b4205d3ce9",
-                "navn": "***REMOVED***",
-                "epost": "***REMOVED***",
+                "navn": "Arve Arbeidsgiver",
+                "epost": "arve.arbeidsgiver@nav.no",
                 "type": "arbeidsgiver",
                 "svartidspunkt": "2016-11-22T12:52:06.489Z",
                 "svar": [{
@@ -179,13 +179,13 @@ describe("MotebookingStatus", () => {
 
         it("Skal vise riktig tekst når møtet er OPPRETTET", () => {
             let component = mount(<StatusVarsel arbeidstaker={arbeidstaker} mote={mote} ledetekster={ledetekster} />)
-            expect(component.find(AlertStripe).text()).to.contain("Møteforespørselen ble sendt til Helge og Ole");
+            expect(component.find(AlertStripe).text()).to.contain("Møteforespørselen ble sendt til Arve Arbeidsgiver og Andreas Arbeidstaker");
             expect(component.find(AlertStripe).text()).to.contain("Sendt: 22.11.2016");
         });
 
         it("Skal vise riktig tekst når møtet er BEKREFTET", () => {
             let component = mount(<StatusVarsel arbeidstaker={arbeidstaker} mote={bekreftetMote} ledetekster={ledetekster} />)
-            expect(component.find(AlertStripe).text()).to.contain("Møtetidspunkt valgt, møteresultat og varsel er sendt til ***REMOVED***");
+            expect(component.find(AlertStripe).text()).to.contain("Møtetidspunkt valgt, møteresultat og varsel er sendt til Arve Arbeidsgiver");
             expect(component.find(AlertStripe).text()).to.contain("Sendt: 12.12.2011");
         });
 
@@ -284,7 +284,7 @@ describe("MotebookingStatus", () => {
 
         beforeEach(() => {
             mote = bekreftetMote;
-            component = shallow(<MotebookingStatus arbeidstaker={arbeidstaker} fnr="***REMOVED***" mote={mote} ledetekster={ledetekster} />);
+            component = shallow(<MotebookingStatus arbeidstaker={arbeidstaker} fnr="99887766554" mote={mote} ledetekster={ledetekster} />);
         });
 
         it("Skal vise riktig tittel", () => {
@@ -321,7 +321,7 @@ describe("MotebookingStatus", () => {
         let mote;
         beforeEach(() => {
             mote = bekreftetMotePassert;
-            component = shallow(<MotebookingStatus arbeidstaker={arbeidstaker} fnr="***REMOVED***" mote={mote} ledetekster={ledetekster} />);
+            component = shallow(<MotebookingStatus arbeidstaker={arbeidstaker} fnr="99887766554" mote={mote} ledetekster={ledetekster} />);
         });
 
         it("Skal vise riktig tittel", () => {
@@ -400,8 +400,8 @@ describe("MotebookingStatus", () => {
                 "navEnhet": "navEnhet",
                 "deltakere": [{
                     "deltakerUuid": "3b0dc3b2-587c-4105-98df-99b4205d3ce9",
-                    "navn": "***REMOVED***",
-                    "epost": "***REMOVED***",
+                    "navn": "Arve Arbeidsgiver",
+                    "epost": "arve.arbeidsgiver@nav.no",
                     "type": "arbeidsgiver",
                     "svartidspunkt": "2016-11-22T12:52:06.489Z",
                     "hendelser": [],
@@ -436,7 +436,7 @@ describe("MotebookingStatus", () => {
         });
 
         it("Skal vise KrrMeldingPanel", () => {
-            const component = shallow(<MotebookingStatus fnr="***REMOVED***" mote={mote} arbeidstaker={arbeidstaker} ledetekster={ledetekster} />);
+            const component = shallow(<MotebookingStatus fnr="99887766554" mote={mote} arbeidstaker={arbeidstaker} ledetekster={ledetekster} />);
             expect(component.find(KontaktInfoFeilmelding)).to.have.length(1);
         });
 

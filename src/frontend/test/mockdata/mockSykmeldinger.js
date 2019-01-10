@@ -5,10 +5,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-09-01"
         },
         "diagnose": {
@@ -74,7 +74,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -131,10 +131,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-09-01"
         },
         "diagnose": {
@@ -169,16 +169,16 @@ const mockSykmeldinger = [
         },
         "id": "b118ea54-5e46-4ac7-ae32-64eb7926f36d",
         "identdato": "2018-09-01",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -201,10 +201,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -261,10 +261,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-25"
         },
         "diagnose": {
@@ -299,16 +299,16 @@ const mockSykmeldinger = [
         },
         "id": "031182c9-0b9a-47ba-892b-70a3064f0562",
         "identdato": "2018-08-25",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -331,10 +331,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -391,10 +391,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-25"
         },
         "diagnose": {
@@ -429,16 +429,16 @@ const mockSykmeldinger = [
         },
         "id": "e13ecca3-3d19-49c7-b5e5-1678f61a330b",
         "identdato": "2018-08-25",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -461,10 +461,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -521,10 +521,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-25"
         },
         "diagnose": {
@@ -559,16 +559,16 @@ const mockSykmeldinger = [
         },
         "id": "4017e61f-005c-4c64-9173-694fca3da1ba",
         "identdato": "2018-08-25",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -591,10 +591,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -651,10 +651,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-27"
         },
         "diagnose": {
@@ -689,16 +689,16 @@ const mockSykmeldinger = [
         },
         "id": "7565fac5-dbcb-41c4-bf5b-02a0a1fd372f",
         "identdato": "2018-08-10",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -721,10 +721,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED*** ",
+            "fnr": "99887766554 ",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -781,10 +781,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-28"
         },
         "diagnose": {
@@ -819,16 +819,16 @@ const mockSykmeldinger = [
         },
         "id": "5aee2076-5a73-43ca-b781-389aea9bac2a",
         "identdato": "2018-08-28",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -851,10 +851,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -911,10 +911,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-28"
         },
         "diagnose": {
@@ -980,7 +980,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -1037,10 +1037,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-28"
         },
         "diagnose": {
@@ -1106,7 +1106,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -1163,10 +1163,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-28"
         },
         "diagnose": {
@@ -1201,16 +1201,16 @@ const mockSykmeldinger = [
         },
         "id": "2522be27-2aed-4bed-8912-be4fa3fd89b0",
         "identdato": "2018-08-28",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -1233,10 +1233,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -1293,10 +1293,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-28"
         },
         "diagnose": {
@@ -1362,7 +1362,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -1419,10 +1419,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-26"
         },
         "diagnose": {
@@ -1457,16 +1457,16 @@ const mockSykmeldinger = [
         },
         "id": "6c2f6583-21b2-4e2c-8219-a21930ff74f8",
         "identdato": "2018-08-26",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -1489,10 +1489,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -1549,10 +1549,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-25"
         },
         "diagnose": {
@@ -1587,16 +1587,16 @@ const mockSykmeldinger = [
         },
         "id": "2071c4f8-ccd2-4731-944a-e80a3765ca2c",
         "identdato": "2018-08-25",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -1619,10 +1619,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -1679,10 +1679,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-26"
         },
         "diagnose": {
@@ -1717,16 +1717,16 @@ const mockSykmeldinger = [
         },
         "id": "d0bda351-b004-43ca-80d0-8805d062eadc",
         "identdato": "2018-08-26",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -1749,10 +1749,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -1809,10 +1809,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-26"
         },
         "diagnose": {
@@ -1847,16 +1847,16 @@ const mockSykmeldinger = [
         },
         "id": "f81149ec-483b-45f3-a711-02d82c1e551d",
         "identdato": "2018-08-26",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -1879,10 +1879,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -1939,10 +1939,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-29"
         },
         "diagnose": {
@@ -1977,16 +1977,16 @@ const mockSykmeldinger = [
         },
         "id": "e425a750-7f39-4974-9a06-fa1775f987c9",
         "identdato": "2018-08-18",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -2009,10 +2009,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -2069,10 +2069,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-29"
         },
         "diagnose": {
@@ -2107,16 +2107,16 @@ const mockSykmeldinger = [
         },
         "id": "9b808952-52ad-4a5c-b01d-9e21d88a2e92",
         "identdato": "2018-08-29",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -2139,10 +2139,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -2199,10 +2199,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-28"
         },
         "diagnose": {
@@ -2237,16 +2237,16 @@ const mockSykmeldinger = [
         },
         "id": "d096644c-9ae4-4bb0-b32b-fc733389a7a5",
         "identdato": "2018-08-28",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -2269,10 +2269,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -2329,10 +2329,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-28"
         },
         "diagnose": {
@@ -2398,7 +2398,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -2455,10 +2455,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-28"
         },
         "diagnose": {
@@ -2524,7 +2524,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -2581,10 +2581,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-29"
         },
         "diagnose": {
@@ -2619,16 +2619,16 @@ const mockSykmeldinger = [
         },
         "id": "97878622-a5f7-4ee1-9109-2af71b065f99",
         "identdato": "2018-08-29",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -2651,10 +2651,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -2711,10 +2711,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-09-01"
         },
         "diagnose": {
@@ -2780,7 +2780,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -2831,10 +2831,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-09-01"
         },
         "diagnose": {
@@ -2900,7 +2900,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -2951,10 +2951,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-09-01"
         },
         "diagnose": {
@@ -3020,7 +3020,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -3071,10 +3071,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-09-01"
         },
         "diagnose": {
@@ -3140,7 +3140,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -3191,10 +3191,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-09-01"
         },
         "diagnose": {
@@ -3260,7 +3260,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -3311,10 +3311,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-25"
         },
         "diagnose": {
@@ -3380,7 +3380,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -3437,10 +3437,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-25"
         },
         "diagnose": {
@@ -3506,7 +3506,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -3563,10 +3563,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-25"
         },
         "diagnose": {
@@ -3632,7 +3632,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -3689,10 +3689,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-25"
         },
         "diagnose": {
@@ -3727,16 +3727,16 @@ const mockSykmeldinger = [
         },
         "id": "164368fa-1fcc-4341-b3dc-820c8f20a384",
         "identdato": "2018-08-25",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -3759,10 +3759,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -3819,10 +3819,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-25"
         },
         "diagnose": {
@@ -3888,7 +3888,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -3945,10 +3945,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-25"
         },
         "diagnose": {
@@ -4014,7 +4014,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -4071,10 +4071,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-25"
         },
         "diagnose": {
@@ -4140,7 +4140,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -4197,10 +4197,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-25"
         },
         "diagnose": {
@@ -4266,7 +4266,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -4323,10 +4323,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-25"
         },
         "diagnose": {
@@ -4392,7 +4392,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -4449,9 +4449,9 @@ const mockSykmeldinger = [
             "tiltakAndre": "Andre tiltak må iverksettes",
             "tiltakNAV": "NAV må gjøre tiltak"
         },
-        "arbeidsgiver": "Gilde",
+        "arbeidsgiver": "TEST KJØTTMAKER AS",
         "bekreftelse": {
-            "sykmelder": "Haldor Hansen",
+            "sykmelder": "Syvert Sykmelder",
             "sykmelderTlf": "98765432",
             "utstedelsesdato": "2018-08-25"
         },
@@ -4492,16 +4492,16 @@ const mockSykmeldinger = [
         },
         "id": "377058f0-ec65-445d-81f4-4e5d78b54af9",
         "identdato": "2018-08-25",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": "Arbeidsgiver må prioritere pasientens behov for tilrettelagte arbeidsoppgaver!\n    ",
         "meldingTilNav": {
             "navBoerTaTakISaken": true,
             "navBoerTaTakISakenBegrunnelse": "Hjelp fra NAV ønskes snarest"
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -4524,10 +4524,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Danser",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Line",
             "mellomnavn": "Tango"
         },
@@ -4631,10 +4631,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-25"
         },
         "diagnose": {
@@ -4669,16 +4669,16 @@ const mockSykmeldinger = [
         },
         "id": "8df7b467-4ed1-4279-954a-0dd544a78f35",
         "identdato": "2018-08-25",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": null,
@@ -4697,10 +4697,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -4757,10 +4757,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-29"
         },
         "diagnose": {
@@ -4795,16 +4795,16 @@ const mockSykmeldinger = [
         },
         "id": "54cecb8f-6ea2-4898-8668-9d01a2465982",
         "identdato": "2018-08-29",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -4827,10 +4827,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -4887,10 +4887,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-25"
         },
         "diagnose": {
@@ -4925,16 +4925,16 @@ const mockSykmeldinger = [
         },
         "id": "38f40907-f66c-4e90-93d2-bbbc8f013750",
         "identdato": "2018-08-25",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -4957,10 +4957,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -5017,10 +5017,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-25"
         },
         "diagnose": {
@@ -5055,16 +5055,16 @@ const mockSykmeldinger = [
         },
         "id": "d25cd545-2c0c-4c69-9bdc-51ae11476969",
         "identdato": "2018-08-25",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -5087,10 +5087,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -5147,10 +5147,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-09-01"
         },
         "diagnose": {
@@ -5216,7 +5216,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -5273,10 +5273,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-29"
         },
         "diagnose": {
@@ -5311,16 +5311,16 @@ const mockSykmeldinger = [
         },
         "id": "bff51855-21a4-4047-acc5-7e32d6265e3e",
         "identdato": "2018-08-29",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -5343,10 +5343,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -5403,10 +5403,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-09-01"
         },
         "diagnose": {
@@ -5472,7 +5472,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -5523,10 +5523,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-09-01"
         },
         "diagnose": {
@@ -5592,7 +5592,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -5643,10 +5643,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-09-01"
         },
         "diagnose": {
@@ -5712,7 +5712,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -5763,10 +5763,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-09-01"
         },
         "diagnose": {
@@ -5832,7 +5832,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -5889,10 +5889,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-09-01"
         },
         "diagnose": {
@@ -5927,16 +5927,16 @@ const mockSykmeldinger = [
         },
         "id": "0a4a691b-b79a-46f9-be13-6938710fb81f",
         "identdato": "2018-09-01",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -5959,10 +5959,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -6019,10 +6019,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-09-01"
         },
         "diagnose": {
@@ -6088,7 +6088,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -6139,10 +6139,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-09-01"
         },
         "diagnose": {
@@ -6208,7 +6208,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -6265,10 +6265,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-28"
         },
         "diagnose": {
@@ -6334,7 +6334,7 @@ const mockSykmeldinger = [
         "orgnummer": null,
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
@@ -6391,10 +6391,10 @@ const mockSykmeldinger = [
             "tiltakAndre": null,
             "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. "
         },
-        "arbeidsgiver": "***REMOVED***",
+        "arbeidsgiver": "TEST BARNHEGAE AS",
         "bekreftelse": {
-            "sykmelder": "Frida Perma Frost",
-            "sykmelderTlf": "***REMOVED***",
+            "sykmelder": "Lego Legesen",
+            "sykmelderTlf": "99889988",
             "utstedelsesdato": "2018-08-28"
         },
         "diagnose": {
@@ -6429,16 +6429,16 @@ const mockSykmeldinger = [
         },
         "id": "cca2c09c-8bd0-45fa-9e67-29e75b0e3500",
         "identdato": "2018-08-28",
-        "innsendtArbeidsgivernavn": "***REMOVED***",
+        "innsendtArbeidsgivernavn": "KONKURS BEDRIFT OG VENNER AS",
         "innspillTilArbeidsgiver": null,
         "meldingTilNav": {
             "navBoerTaTakISaken": false,
             "navBoerTaTakISakenBegrunnelse": null
         },
         "mottakendeArbeidsgiver": {
-            "juridiskOrgnummer": "***REMOVED***",
-            "navn": "***REMOVED***",
-            "virksomhetsnummer": "***REMOVED***"
+            "juridiskOrgnummer": "000999000",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "virksomhetsnummer": "000111222"
         },
         "mulighetForArbeid": {
             "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
@@ -6461,10 +6461,10 @@ const mockSykmeldinger = [
             ]
         },
         "naermesteLederStatus": null,
-        "orgnummer": "***REMOVED***",
+        "orgnummer": "000111222",
         "pasient": {
             "etternavn": "Frost",
-            "fnr": "***REMOVED***",
+            "fnr": "99887766554",
             "fornavn": "Frida",
             "mellomnavn": "Perma"
         },
