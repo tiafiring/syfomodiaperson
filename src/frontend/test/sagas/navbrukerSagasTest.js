@@ -30,11 +30,11 @@ describe("navbrukerSagas", () => {
             const nextPut = put({
                 type: 'NAVBRUKER_HENTET',
                 data: {
-                    "navn": "Test Testesen"
+                    "navn": "Test Bestesen"
                 }
             });
             expect(generator.next({
-                "navn": "Test Testesen"
+                "navn": "Test Bestesen"
             }).value).to.deep.equal(nextPut);
         });
     });
