@@ -1,6 +1,6 @@
 const mockSoknader = [
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": "2018-09-01",
         "id": "28da7826-bfae-4e85-a7c6-02582f357244",
         "innsendtDato": null,
@@ -335,7 +335,7 @@ const mockSoknader = [
         "tom": "2018-09-09"
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": "2018-09-01",
         "id": "2f5958ff-a609-4194-a088-23040be347f7",
         "innsendtDato": null,
@@ -670,7 +670,7 @@ const mockSoknader = [
         "tom": "2018-09-09"
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": "2018-09-01",
         "id": "19fb320a-dc70-422a-a89c-33c4fdc407bc",
         "innsendtDato": null,
@@ -1005,7 +1005,7 @@ const mockSoknader = [
         "tom": "2018-09-09"
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": "2018-09-01",
         "id": "88c357c3-60e0-4007-8be6-435e2de75729",
         "innsendtDato": null,
@@ -1340,7 +1340,7 @@ const mockSoknader = [
         "tom": "2018-09-09"
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": "2018-08-28",
         "id": "a76483db-fa36-4df4-b2ec-28511c36f41c",
         "innsendtDato": null,
@@ -1675,7 +1675,7 @@ const mockSoknader = [
         "tom": "2018-09-10"
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": "2018-08-28",
         "id": "43670400-ee80-4791-9cbb-2f26ed49baaa",
         "innsendtDato": null,
@@ -2010,7 +2010,7 @@ const mockSoknader = [
         "tom": "2018-09-10"
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": "2018-08-28",
         "id": "172a10b7-d448-41a4-8828-e1541ddcca7e",
         "innsendtDato": null,
@@ -2345,7 +2345,7 @@ const mockSoknader = [
         "tom": "2018-09-10"
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": "2018-08-28",
         "id": "db2201f2-197e-4a45-b1b1-1e3708051828",
         "innsendtDato": null,
@@ -2680,7 +2680,7 @@ const mockSoknader = [
         "tom": "2018-09-10"
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": "2018-08-28",
         "id": "ebd2382d-fcab-4808-bcd0-b5f33fec990b",
         "innsendtDato": null,
@@ -3015,7 +3015,7 @@ const mockSoknader = [
         "tom": "2018-09-11"
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": "2018-08-28",
         "id": "990af614-3970-4ec3-b4f1-d93fe3b38880",
         "innsendtDato": null,
@@ -3350,7 +3350,7 @@ const mockSoknader = [
         "tom": "2018-09-10"
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": null,
         "id": "248775e4-c9f2-4816-8cb3-b4a3d1f548d6",
         "innsendtDato": "2018-09-05",
@@ -3472,7 +3472,7 @@ const mockSoknader = [
         "tom": null
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": null,
         "id": "497a0b64-1c59-40d1-9db4-ae26cf1dc020",
         "innsendtDato": "2018-09-05",
@@ -3602,7 +3602,7 @@ const mockSoknader = [
         "tom": null
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": null,
         "id": "177730fa-69f1-432c-981a-abeb22f527e6",
         "innsendtDato": "2018-09-05",
@@ -3732,7 +3732,7 @@ const mockSoknader = [
         "tom": null
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": null,
         "id": "4a7e51a1-bdda-4630-ac72-5b8f89b6751c",
         "innsendtDato": "2018-09-10",
@@ -3862,7 +3862,7 @@ const mockSoknader = [
         "tom": null
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": "2018-08-25",
         "id": "726e5e0d-4a9b-44da-abdf-e0a87b43cff2",
         "innsendtDato": "2018-09-03",
@@ -4233,7 +4233,7 @@ const mockSoknader = [
         "tom": "2018-09-02"
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": "2018-08-25",
         "id": "23050c09-2207-4b60-a944-271f215ae9b4",
         "innsendtDato": "2018-09-03",
@@ -4652,7 +4652,7 @@ const mockSoknader = [
         "tom": "2018-09-02"
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": "2018-08-25",
         "id": "c316258d-e770-4216-8243-32fa75edd177",
         "innsendtDato": null,
@@ -4987,7 +4987,7 @@ const mockSoknader = [
         "tom": "2018-09-20"
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": "2018-08-25",
         "id": "5e184210-c5dc-4eb0-af87-cf6a99083f5c",
         "innsendtDato": "2018-09-05",
@@ -5350,7 +5350,7 @@ const mockSoknader = [
         "tom": "2018-09-02"
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": "2018-08-25",
         "id": "d8406dc2-fbf3-44a7-be15-b9f9c2927672",
         "innsendtDato": "2018-09-10",
@@ -5721,7 +5721,7 @@ const mockSoknader = [
         "tom": "2018-09-10"
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": "2018-08-02",
         "id": "faadf7c1-3aac-4758-8673-e9cee1316a3c",
         "innsendtDato": "2018-09-03",
@@ -6084,7 +6084,7 @@ const mockSoknader = [
         "tom": "2018-08-15"
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": null,
         "id": "e16ff778-8475-47e1-b5dc-d2ce4ad6b9ee",
         "innsendtDato": "2018-09-03",
@@ -6214,7 +6214,7 @@ const mockSoknader = [
         "tom": null
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": null,
         "id": "175b19a8-0cbd-4e03-bb24-bddcdd844c73",
         "innsendtDato": "2018-09-03",
@@ -6344,7 +6344,7 @@ const mockSoknader = [
         "tom": null
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": null,
         "id": "da960777-c11a-43ef-a24f-ae4607a0d0b4",
         "innsendtDato": "2018-09-06",
@@ -6474,7 +6474,7 @@ const mockSoknader = [
         "tom": null
     },
     {
-        "aktorId": "***REMOVED***",
+        "aktorId": "0101010101010",
         "fom": null,
         "id": "40fefc24-d7ea-4926-bcb3-07879fe10cdb",
         "innsendtDato": "2018-09-05",

@@ -29,19 +29,19 @@ describe("BekreftetMotetidspunkt", () => {
           "deltakere": [{
             "hendelser": [{
               "kanal": "EPOST",
-              "adresse": "***REMOVED***",
+              "adresse": "arbe.idsgiver@nav.no",
               "varseltype": "OPPRETTET",
               "resultat": "OK"
             }, {
               "kanal": "EPOST",
-              "adresse": "***REMOVED***",
+              "adresse": "arbe.idsgiver@nav.no",
               "varseltype": "BEKREFTET",
               "resultat": "OK"
             }],
             "deltakerUuid": "68815365-28c4-452c-8bd7-2b2649ef2a68",
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
-            "epost": "***REMOVED***",
+            "navn": "Arbe Idsgiver",
+            "orgnummer": "012345678",
+            "epost": "arbe.idsgiver@nav.no",
             "type": "arbeidsgiver",
             "svartidspunkt": "2017-03-22T11:13:35.726Z",
             "avvik": [],
@@ -81,8 +81,8 @@ describe("BekreftetMotetidspunkt", () => {
               "resultat": "OK"
             }],
             "deltakerUuid": "b3579888-fa3f-44bf-89b8-9ad4cb3997fe",
-            "navn": "***REMOVED***",
-            "fnr": "***REMOVED***",
+            "navn": "Andreas Arbeidstaker",
+            "fnr": "77665544332",
             "type": "Bruker",
             "avvik": [],
             "svar": [{

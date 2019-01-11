@@ -25,7 +25,7 @@ describe("moterSagas", () => {
         const generator = opprettMote({
             data: {
                 fnr: "55",
-                naermesteLederNavn: "***REMOVED***"
+                naermesteLederNavn: "Test Testesen"
             }
         });
 
@@ -37,7 +37,7 @@ describe("moterSagas", () => {
         it("Skal poste møtet til REST-tjenesten", () => {
             const nextCall = call(post, "http://tjenester.nav.no/moteadmin/moter", {
                 fnr: "55",
-                naermesteLederNavn: "***REMOVED***"
+                naermesteLederNavn: "Test Testesen"
             });
             expect(generator.next().value).to.deep.equal(nextCall);
         });

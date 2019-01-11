@@ -14,7 +14,7 @@ const getMote = (mote) => {
             "hendelser": [],
             "deltakerUuid": "uuid1",
             "navn": "Are Arbeidsgiver",
-            "orgnummer": "***REMOVED***",
+            "orgnummer": "012345678",
             "epost": "are.arbeidsgiver@nav.no",
             "type": "arbeidsgiver",
             "svartidspunkt": null,

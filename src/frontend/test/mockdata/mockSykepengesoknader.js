@@ -15,8 +15,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": false,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -60,8 +60,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": false,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -105,8 +105,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": true,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -164,7 +164,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "Var du tilbake i fullt arbeid hos ***REMOVED*** før 03.09.2018?",
+                        "tekst": "Var du tilbake i fullt arbeid hos KONKURS BEDRIFT OG VENNER AS før 03.09.2018?",
                         "verdier": {}
                     },
                     "svar": [
@@ -204,7 +204,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "I perioden 25.08.2018 – 02.09.2018 var du 100 % sykmeldt fra ***REMOVED***. Jobbet du noe i denne perioden?",
+                        "tekst": "I perioden 25.08.2018 – 02.09.2018 var du 100 % sykmeldt fra KONKURS BEDRIFT OG VENNER AS. Jobbet du noe i denne perioden?",
                         "verdier": {}
                     },
                     "svar": [
@@ -224,7 +224,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "Har du andre inntektskilder, eller jobber du for andre enn ***REMOVED***?",
+                        "tekst": "Har du andre inntektskilder, eller jobber du for andre enn KONKURS BEDRIFT OG VENNER AS?",
                         "verdier": {}
                     },
                     "svar": [
@@ -318,8 +318,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": true,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -377,7 +377,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "Var du tilbake i fullt arbeid hos ***REMOVED*** før 03.09.2018?",
+                        "tekst": "Var du tilbake i fullt arbeid hos KONKURS BEDRIFT OG VENNER AS før 03.09.2018?",
                         "verdier": {}
                     },
                     "svar": [
@@ -417,7 +417,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "I perioden 25.08.2018 – 02.09.2018 skulle du jobbe 50 % av ditt normale arbeid hos ***REMOVED***. Jobbet du mer enn dette?",
+                        "tekst": "I perioden 25.08.2018 – 02.09.2018 skulle du jobbe 50 % av ditt normale arbeid hos KONKURS BEDRIFT OG VENNER AS. Jobbet du mer enn dette?",
                         "verdier": {}
                     },
                     "svar": [
@@ -453,7 +453,7 @@ const mockSykepengesoknader = [
                                 {
                                     "ledetekst": {
                                         "nokkel": null,
-                                        "tekst": "Hvor mye jobbet du totalt i denne perioden hos ***REMOVED***?",
+                                        "tekst": "Hvor mye jobbet du totalt i denne perioden hos KONKURS BEDRIFT OG VENNER AS?",
                                         "verdier": {}
                                     },
                                     "svar": [
@@ -478,7 +478,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "Har du andre inntektskilder, eller jobber du for andre enn ***REMOVED***?",
+                        "tekst": "Har du andre inntektskilder, eller jobber du for andre enn KONKURS BEDRIFT OG VENNER AS?",
                         "verdier": {}
                     },
                     "svar": [
@@ -597,8 +597,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": true,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -661,7 +661,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "Var du tilbake i fullt arbeid hos ***REMOVED*** før 03.09.2018?",
+                        "tekst": "Var du tilbake i fullt arbeid hos KONKURS BEDRIFT OG VENNER AS før 03.09.2018?",
                         "verdier": {}
                     },
                     "svar": [
@@ -830,7 +830,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "I perioden 25.08.2018 – 31.08.2018 var du 100 % sykmeldt fra ***REMOVED***. Jobbet du noe i denne perioden?",
+                        "tekst": "I perioden 25.08.2018 – 31.08.2018 var du 100 % sykmeldt fra KONKURS BEDRIFT OG VENNER AS. Jobbet du noe i denne perioden?",
                         "verdier": {}
                     },
                     "svar": [
@@ -866,7 +866,7 @@ const mockSykepengesoknader = [
                                 {
                                     "ledetekst": {
                                         "nokkel": null,
-                                        "tekst": "Hvor mye jobbet du totalt i denne perioden hos ***REMOVED***?",
+                                        "tekst": "Hvor mye jobbet du totalt i denne perioden hos KONKURS BEDRIFT OG VENNER AS?",
                                         "verdier": {}
                                     },
                                     "svar": [
@@ -891,7 +891,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "Har du andre inntektskilder, eller jobber du for andre enn ***REMOVED***?",
+                        "tekst": "Har du andre inntektskilder, eller jobber du for andre enn KONKURS BEDRIFT OG VENNER AS?",
                         "verdier": {}
                     },
                     "svar": [
@@ -1218,8 +1218,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": true,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -1282,7 +1282,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "Var du tilbake i fullt arbeid hos ***REMOVED*** før 03.09.2018?",
+                        "tekst": "Var du tilbake i fullt arbeid hos KONKURS BEDRIFT OG VENNER AS før 03.09.2018?",
                         "verdier": {}
                     },
                     "svar": [
@@ -1360,7 +1360,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "I perioden 25.08.2018 – 02.09.2018 var du 100 % sykmeldt fra ***REMOVED***. Jobbet du noe i denne perioden?",
+                        "tekst": "I perioden 25.08.2018 – 02.09.2018 var du 100 % sykmeldt fra KONKURS BEDRIFT OG VENNER AS. Jobbet du noe i denne perioden?",
                         "verdier": {}
                     },
                     "svar": [
@@ -1396,7 +1396,7 @@ const mockSykepengesoknader = [
                                 {
                                     "ledetekst": {
                                         "nokkel": null,
-                                        "tekst": "Hvor mye jobbet du totalt i denne perioden hos ***REMOVED***?",
+                                        "tekst": "Hvor mye jobbet du totalt i denne perioden hos KONKURS BEDRIFT OG VENNER AS?",
                                         "verdier": {}
                                     },
                                     "svar": [
@@ -1428,7 +1428,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "Har du andre inntektskilder, eller jobber du for andre enn ***REMOVED***?",
+                        "tekst": "Har du andre inntektskilder, eller jobber du for andre enn KONKURS BEDRIFT OG VENNER AS?",
                         "verdier": {}
                     },
                     "svar": [
@@ -1517,8 +1517,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": false,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -1567,8 +1567,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": true,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -1626,7 +1626,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "Var du tilbake i fullt arbeid hos ***REMOVED*** før 03.09.2018?",
+                        "tekst": "Var du tilbake i fullt arbeid hos KONKURS BEDRIFT OG VENNER AS før 03.09.2018?",
                         "verdier": {}
                     },
                     "svar": [
@@ -1666,7 +1666,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "I perioden 25.08.2018 – 02.09.2018 var du 100 % sykmeldt fra ***REMOVED***. Jobbet du noe i denne perioden?",
+                        "tekst": "I perioden 25.08.2018 – 02.09.2018 var du 100 % sykmeldt fra KONKURS BEDRIFT OG VENNER AS. Jobbet du noe i denne perioden?",
                         "verdier": {}
                     },
                     "svar": [
@@ -1702,7 +1702,7 @@ const mockSykepengesoknader = [
                                 {
                                     "ledetekst": {
                                         "nokkel": null,
-                                        "tekst": "Hvor mye jobbet du totalt i denne perioden hos ***REMOVED***?",
+                                        "tekst": "Hvor mye jobbet du totalt i denne perioden hos KONKURS BEDRIFT OG VENNER AS?",
                                         "verdier": {}
                                     },
                                     "svar": [
@@ -1727,7 +1727,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "Har du andre inntektskilder, eller jobber du for andre enn ***REMOVED***?",
+                        "tekst": "Har du andre inntektskilder, eller jobber du for andre enn KONKURS BEDRIFT OG VENNER AS?",
                         "verdier": {}
                     },
                     "svar": [
@@ -1816,8 +1816,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": false,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -1861,8 +1861,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": false,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -1906,8 +1906,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": false,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -1951,8 +1951,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": false,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -1996,8 +1996,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": false,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -2041,8 +2041,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": false,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -2086,8 +2086,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": true,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -2145,7 +2145,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "Var du tilbake i fullt arbeid hos ***REMOVED*** før 11.09.2018?",
+                        "tekst": "Var du tilbake i fullt arbeid hos KONKURS BEDRIFT OG VENNER AS før 11.09.2018?",
                         "verdier": {}
                     },
                     "svar": [
@@ -2185,7 +2185,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "I perioden 25.08.2018 – 10.09.2018 var du 100 % sykmeldt fra ***REMOVED***. Jobbet du noe i denne perioden?",
+                        "tekst": "I perioden 25.08.2018 – 10.09.2018 var du 100 % sykmeldt fra KONKURS BEDRIFT OG VENNER AS. Jobbet du noe i denne perioden?",
                         "verdier": {}
                     },
                     "svar": [
@@ -2205,7 +2205,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "Har du andre inntektskilder, eller jobber du for andre enn ***REMOVED***?",
+                        "tekst": "Har du andre inntektskilder, eller jobber du for andre enn KONKURS BEDRIFT OG VENNER AS?",
                         "verdier": {}
                     },
                     "svar": [
@@ -2294,8 +2294,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": false,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -2339,8 +2339,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": false,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -2389,8 +2389,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": true,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -2475,7 +2475,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "Var du tilbake i fullt arbeid hos ***REMOVED*** før 11.09.2018?",
+                        "tekst": "Var du tilbake i fullt arbeid hos KONKURS BEDRIFT OG VENNER AS før 11.09.2018?",
                         "verdier": {}
                     },
                     "svar": [
@@ -2644,7 +2644,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "I perioden 28.08.2018 – 04.09.2018 var du 100 % sykmeldt fra ***REMOVED***. Jobbet du noe i denne perioden?",
+                        "tekst": "I perioden 28.08.2018 – 04.09.2018 var du 100 % sykmeldt fra KONKURS BEDRIFT OG VENNER AS. Jobbet du noe i denne perioden?",
                         "verdier": {}
                     },
                     "svar": [
@@ -2664,7 +2664,7 @@ const mockSykepengesoknader = [
                 {
                     "ledetekst": {
                         "nokkel": null,
-                        "tekst": "Har du andre inntektskilder, eller jobber du for andre enn ***REMOVED***?",
+                        "tekst": "Har du andre inntektskilder, eller jobber du for andre enn KONKURS BEDRIFT OG VENNER AS?",
                         "verdier": {}
                     },
                     "svar": [
@@ -2852,8 +2852,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": false,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -2897,8 +2897,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": false,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -2942,8 +2942,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": false,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,
@@ -2987,8 +2987,8 @@ const mockSykepengesoknader = [
         "ansvarBekreftet": false,
         "arbeidsgiver": {
             "naermesteLeder": null,
-            "navn": "***REMOVED***",
-            "orgnummer": "***REMOVED***",
+            "navn": "KONKURS BEDRIFT OG VENNER AS",
+            "orgnummer": "000111222",
             "stilling": null
         },
         "arbeidsgiverForskutterer": null,

@@ -21,14 +21,14 @@ describe("Svarstatus", () => {
             "deltakere": [{
                 "hendelser": [{
                     "kanal": "EPOST",
-                    "adresse": "***REMOVED***",
+                    "adresse": "arbe.idsgiver@nav.no",
                     "varseltype": "OPPRETTET",
                     "resultat": "OK"
                 }],
                 "deltakerUuid": "454a31c0-3691-40f4-9d9e-882ac1d5306e",
-                "navn": "***REMOVED***",
-                "orgnummer": "***REMOVED***",
-                "epost": "***REMOVED***",
+                "navn": "Arbe Idsgiver",
+                "orgnummer": "012345678",
+                "epost": "arbe.idsgiver@nav.no",
                 "type": "arbeidsgiver",
                 "avvik": [],
                 "svar": [{
@@ -57,8 +57,8 @@ describe("Svarstatus", () => {
                     "resultat": "OK"
                 }],
                 "deltakerUuid": "0b118a5a-f866-432b-92cd-46a1dbbc7699",
-                "navn": "***REMOVED***",
-                "fnr": "***REMOVED***",
+                "navn": "Ane Arbeidstaker",
+                "fnr": "88776655443",
                 "type": "Bruker",
                 "avvik": [],
                 "svar": [{
