@@ -52,7 +52,7 @@ describe("MotebookingSkjemaTest", () => {
             let ledetekster;
 
             beforeEach(() => {
-                arbeidstaker = {"navn":"Test Testesen","kontaktinfo":{"tlf":"+4799999999","epost":"tester.scrambling-script@fellesregistre.no","reservasjon":{"skalHaVarsel":true}}, "hendelser": []};
+                arbeidstaker = {"navn":"Test Bestesen","kontaktinfo":{"tlf":"+4799999999","epost":"tester.scrambling-script@fellesregistre.no","reservasjon":{"skalHaVarsel":true}}, "hendelser": []};
                 ledetekster = {
                     'mote.motebookingskjema.velg-dato-tid-sted': "Velg dato",
                 };
