@@ -2,8 +2,9 @@ import React from 'react';
 import {expect} from "chai";
 import {mount, shallow} from "enzyme";
 import Svarstatus, { erSamtidig, getNyeAlternativer, getGamleAlternativer } from '../../../js/mote/components/Svarstatus';
-import { konverterTid, BesvarteTidspunkter } from 'moter-npm';
+import { BesvarteTidspunkter } from 'moter-npm';
 import { Utvidbar } from 'digisyfo-npm';
+import { konverterTid } from '../../../js/utils/datoUtils';
 
 describe("Svarstatus", () => {
 

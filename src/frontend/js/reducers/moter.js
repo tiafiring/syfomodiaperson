@@ -1,5 +1,5 @@
-import { konverterTid } from 'moter-npm';
 import * as actions from '../actions/actiontyper';
+import { konverterTid } from '../utils/datoUtils';
 
 const defaultState = {
     data: [],
