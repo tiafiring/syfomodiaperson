@@ -1,7 +1,6 @@
 import React from 'react';
-import { DatoOgTid, SvarMedIkon, konstanter, proptypes as moterPropTypes } from 'moter-npm';
-
-const { ARBEIDSGIVER, BRUKER } = konstanter;
+import { DatoOgTid, SvarMedIkon, proptypes as moterPropTypes } from 'moter-npm';
+import { ARBEIDSGIVER, BRUKER } from '../../konstanter';
 
 const BekreftetMotetidspunkt = (props) => {
     const mote = props.mote;

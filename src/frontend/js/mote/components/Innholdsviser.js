@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import { Radio } from 'nav-frontend-skjema';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { getLedetekst } from 'digisyfo-npm';
-import { konstanter, proptypes as moterPropTypes } from 'moter-npm';
+import { proptypes as moterPropTypes } from 'moter-npm';
 import AppSpinner from '../../components/AppSpinner';
+import {
+    BRUKER,
+    ARBEIDSGIVER,
+} from '../../konstanter';
 
-const { BRUKER, ARBEIDSGIVER } = konstanter;
 
 const Innhold = ({ emne, innhold }) => {
     return (<div className="blokk">

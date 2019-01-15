@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { proptypes as moterPropTypes, BesvarteTidspunkter, konstanter } from 'moter-npm';
+import { proptypes as moterPropTypes, BesvarteTidspunkter } from 'moter-npm';
 import { getLedetekst, Utvidbar } from 'digisyfo-npm';
+import { NAV_VEILEDER } from '../../konstanter';
 
 export const erSamtidig = (createdA, createdB, offset = 1000) => {
     const a = createdA.getTime();
@@ -67,7 +68,7 @@ const Svarstatus = (props) => {
             <BesvarteTidspunkter
                 mote={mote}
                 alternativer={nyeAlternativer}
-                deltakertype={konstanter.NAV_VEILEDER}
+                deltakertype={NAV_VEILEDER}
                 fnr={fnr}
                 ledetekster={ledetekster} />
             <button className="nyetidspunktknapp" onClick={visFlereAlternativ}>
@@ -83,7 +84,7 @@ const Svarstatus = (props) => {
                 <BesvarteTidspunkter
                     mote={mote}
                     alternativer={gamleAlternativer}
-                    deltakertype={konstanter.NAV_VEILEDER}
+                    deltakertype={NAV_VEILEDER}
                     fnr={fnr}
                     ledetekster={ledetekster} />
             </Utvidbar>

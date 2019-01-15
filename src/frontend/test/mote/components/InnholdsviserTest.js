@@ -5,9 +5,10 @@ import AppSpinner from '../../../js/components/AppSpinner';
 import { mount, shallow } from 'enzyme';
 import React from 'react'
 import sinon from 'sinon';
-import { konstanter } from 'moter-npm';
-
-const { BRUKER, ARBEIDSGIVER } = konstanter;
+import {
+    BRUKER,
+    ARBEIDSGIVER,
+} from '../../../js/konstanter';
 
 const getMote = (mote) => {
     return Object.assign({}, {
@@ -20,7 +21,7 @@ const getMote = (mote) => {
         "navn": "Are Arbeidsgiver",
         "orgnummer": "012345678",
         "epost": "are.arbeidsgiver@nav.no",
-        "type": "arbeidsgiver",
+        "type": ARBEIDSGIVER,
         "svartidspunkt": null,
         "svar": [{
           "id": 1,
@@ -41,7 +42,7 @@ const getMote = (mote) => {
         "navn": "Sygve Sykmeldt",
         "orgnummer": null,
         "epost": null,
-        "type": "Bruker",
+        "type": BRUKER,
         "svartidspunkt": null,
         "svar": [{
           "id": 1,

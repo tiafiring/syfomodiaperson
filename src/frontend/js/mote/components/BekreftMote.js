@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-    konstanter,
-    proptypes as motePropTypes,
-} from 'moter-npm';
+import { proptypes as motePropTypes } from 'moter-npm';
+import { ARBEIDSGIVER } from '../../konstanter';
 import BekreftMoteSkjema from './BekreftMoteSkjema';
 import BekreftMoteUtenSvarSkjema from './BekreftMoteUtenSvarSkjema';
-
-const { ARBEIDSGIVER } = konstanter;
 
 class BekreftMote extends Component {
     constructor(props) {

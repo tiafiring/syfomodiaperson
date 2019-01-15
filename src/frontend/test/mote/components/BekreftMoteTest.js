@@ -6,10 +6,12 @@ import BekreftMoteSkjema from '../../../js/mote/components/BekreftMoteSkjema';
 import BekreftMoteUtenSvarSkjema from '../../../js/mote/components/BekreftMoteUtenSvarSkjema';
 import { mount, shallow } from 'enzyme';
 import React from 'react'
-import { konstanter } from 'moter-npm';
+import {
+    BRUKER,
+    ARBEIDSGIVER,
+} from '../../../js/konstanter';
 import Epostmottakere from '../../../js/mote/components/Epostmottakere';
 
-const { BRUKER, ARBEIDSGIVER } = konstanter;
 
 const getMoteUtenSvar = (mote) => {
     return Object.assign({}, {
@@ -22,7 +24,7 @@ const getMoteUtenSvar = (mote) => {
         "navn": "Are Arbeidsgiver",
         "orgnummer": "012345678",
         "epost": "are.arbeidsgiver@nav.no",
-        "type": "arbeidsgiver",
+        "type": ARBEIDSGIVER,
         "svartidspunkt": null,
         "svar": [{
           "id": 1,
@@ -43,7 +45,7 @@ const getMoteUtenSvar = (mote) => {
         "navn": "Sygve Sykmeldt",
         "orgnummer": null,
         "epost": null,
-        "type": "Bruker",
+        "type": BRUKER,
         "svartidspunkt": null,
         "svar": [{
           "id": 1,
@@ -87,7 +89,7 @@ const getMoteMedSvar = (mote) => {
             "navn": "Are Arbeidsgiver",
             "orgnummer": "012345678",
             "epost": "are.arbeidsgiver@nav.no",
-            "type": "arbeidsgiver",
+            "type": ARBEIDSGIVER,
             "svartidspunkt": new Date("2017-03-07T15:18:24.323"),
             "svar": [{
                 "id": 1,
@@ -108,7 +110,7 @@ const getMoteMedSvar = (mote) => {
             "navn": "Sygve Sykmeldt",
             "orgnummer": null,
             "epost": null,
-            "type": "Bruker",
+            "type": BRUKER,
             "svartidspunkt": new Date("2017-03-07T15:18:24.323"),
             "svar": [{
                 "id": 1,

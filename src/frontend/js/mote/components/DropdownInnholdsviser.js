@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Alertstripe from 'nav-frontend-alertstriper';
-import { konstanter, proptypes as moterPropTypes } from 'moter-npm';
+import { proptypes as moterPropTypes } from 'moter-npm';
 import AppSpinner from '../../components/AppSpinner';
-
-const { BRUKER } = konstanter;
+import { BRUKER } from '../../konstanter';
 
 export const Innhold = ({ emne, innhold }) => {
     return (<div className="blokk">

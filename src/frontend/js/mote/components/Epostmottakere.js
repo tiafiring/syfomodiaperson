@@ -1,14 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getLedetekst } from 'digisyfo-npm';
-import { konstanter, proptypes as moterPropTypes } from 'moter-npm';
+import { proptypes as moterPropTypes } from 'moter-npm';
+import {
+    BRUKER,
+    ARBEIDSGIVER,
+} from '../../konstanter';
 
 const Epostmottakere = ({ mote, ledetekster, arbeidstaker }) => {
     const sykmeldt = mote.deltakere.filter((d) => {
-        return d.type === konstanter.BRUKER;
+        return d.type === BRUKER;
     })[0];
     const arbeidsgiver = mote.deltakere.filter((d) => {
-        return d.type === konstanter.ARBEIDSGIVER;
+        return d.type === ARBEIDSGIVER;
     })[0];
 
     return (<div className="mottakere">
