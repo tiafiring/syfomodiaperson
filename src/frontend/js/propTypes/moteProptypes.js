@@ -13,7 +13,7 @@ export const motealternativPt = PropTypes.shape({
     valgt: PropTypes.bool,
 });
 
-const motesvarPt = PropTypes.shape({
+export const motesvarPt = PropTypes.shape({
     id: PropTypes.number,
     tid: PropTypes.instanceOf(Date),
     created: PropTypes.instanceOf(Date),

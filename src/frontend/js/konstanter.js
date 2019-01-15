@@ -18,3 +18,9 @@ export const CONTEXT_EVENT_TYPE = {
 export const BRUKER = 'Bruker';
 export const ARBEIDSGIVER = 'arbeidsgiver';
 export const NAV_VEILEDER = 'NAV-veileder';
+
+export const MULIGE_SVAR = {
+    IKKE_SVART: 'IKKE_SVART',
+    PASSER: 'PASSER',
+    PASSER_IKKE: 'PASSER_IKKE',
+};

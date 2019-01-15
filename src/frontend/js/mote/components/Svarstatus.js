@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BesvarteTidspunkter } from 'moter-npm';
 import { getLedetekst, Utvidbar } from 'digisyfo-npm';
 import * as moterPropTypes from '../../propTypes';
 import { NAV_VEILEDER } from '../../konstanter';
+import BesvarteTidspunkter from './BesvarteTidspunkter';
 
 export const erSamtidig = (createdA, createdB, offset = 1000) => {
     const a = createdA.getTime();

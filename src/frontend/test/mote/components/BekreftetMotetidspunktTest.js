@@ -3,7 +3,7 @@ import BekreftetMotetidspunkt from '../../../js/mote/components/BekreftetMotetid
 import { mount, shallow } from 'enzyme';
 import React from 'react';
 import Sidetopp from '../../../js/components/Sidetopp';
-import { DatoOgTid } from 'moter-npm';
+import DatoOgTid from '../../../js/mote/components/DatoOgTid';
 
 describe("BekreftetMotetidspunkt", () => {
 

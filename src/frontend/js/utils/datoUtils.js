@@ -1,6 +1,30 @@
 import { tilLesbarDatoMedArstall } from 'digisyfo-npm';
 
+const maneder = ['januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'desember'];
+const dager = ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag', 'Søndag'];
+
 export const ANTALL_MS_DAG = 1000 * 60 * 60 * 24;
+
+const pad = (int) => {
+    if (int < 10) {
+        return `0${int}`;
+    }
+    return int;
+};
+
+export const visDato = (d) => {
+    const maned = maneder[d.getMonth()];
+    return `${dager[d.getDay()]} ${d.getDate()}. ${maned} ${d.getFullYear()}`;
+};
+
+export const visKlokkeslett = (d) => {
+    if (typeof d === 'undefined' || d === null) {
+        return null;
+    }
+    const hour = pad(d.getHours());
+    const minute = pad(d.getMinutes());
+    return `${hour}.${minute}`;
+};
 
 export const lagJsDate = (dato) => {
     if (dato) {

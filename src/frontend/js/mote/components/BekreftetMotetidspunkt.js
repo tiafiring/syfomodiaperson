@@ -1,7 +1,8 @@
 import React from 'react';
-import { DatoOgTid, SvarMedIkon } from 'moter-npm';
 import * as moterPropTypes from '../../propTypes';
 import { ARBEIDSGIVER, BRUKER } from '../../konstanter';
+import DatoOgTid from './DatoOgTid';
+import SvarMedIkon from './SvarMedIkon';
 
 const BekreftetMotetidspunkt = (props) => {
     const mote = props.mote;
