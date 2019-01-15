@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Alertstripe from 'nav-frontend-alertstriper';
-import { proptypes as moterPropTypes } from 'moter-npm';
+import * as moterPropTypes from '../../propTypes';
 import AppSpinner from '../../components/AppSpinner';
 import { BRUKER } from '../../konstanter';
 
@@ -74,7 +74,7 @@ DropdownInnholdsviser.propTypes = {
     hentEpostinnhold: PropTypes.func,
     hentArbeidsgiverEpostinnhold: PropTypes.func,
     ledetekster: PropTypes.object,
-    mote: moterPropTypes.mote,
+    mote: moterPropTypes.motePt,
 };
 
 export default DropdownInnholdsviser;

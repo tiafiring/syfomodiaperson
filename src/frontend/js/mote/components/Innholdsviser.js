@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Radio } from 'nav-frontend-skjema';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { getLedetekst } from 'digisyfo-npm';
-import { proptypes as moterPropTypes } from 'moter-npm';
+import * as moterPropTypes from '../../propTypes';
 import AppSpinner from '../../components/AppSpinner';
 import {
     BRUKER,
@@ -56,7 +56,7 @@ export const Innholdsvelger = ({ onChange, valgtDeltakertype, ledetekster }) => 
 
 Innholdsvelger.propTypes = {
     onChange: PropTypes.func,
-    valgtDeltakertype: moterPropTypes.deltakertype,
+    valgtDeltakertype: moterPropTypes.motedeltakertypePt,
     ledetekster: PropTypes.object,
 };
 
@@ -136,7 +136,7 @@ Innholdsviser.propTypes = {
     arbeidstaker: PropTypes.object,
     hentEpostinnhold: PropTypes.func,
     ledetekster: PropTypes.object,
-    mote: moterPropTypes.mote,
+    mote: moterPropTypes.motePt,
 };
 
 export default Innholdsviser;

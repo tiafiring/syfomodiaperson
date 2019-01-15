@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { proptypes as moterPropTypes, BesvarteTidspunkter } from 'moter-npm';
+import { BesvarteTidspunkter } from 'moter-npm';
 import { getLedetekst, Utvidbar } from 'digisyfo-npm';
+import * as moterPropTypes from '../../propTypes';
 import { NAV_VEILEDER } from '../../konstanter';
 
 export const erSamtidig = (createdA, createdB, offset = 1000) => {
@@ -93,7 +94,7 @@ const Svarstatus = (props) => {
 };
 
 Svarstatus.propTypes = {
-    mote: moterPropTypes.mote,
+    mote: moterPropTypes.motePt,
     visFlereAlternativ: PropTypes.func,
     ledetekster: PropTypes.object,
     children: PropTypes.object,

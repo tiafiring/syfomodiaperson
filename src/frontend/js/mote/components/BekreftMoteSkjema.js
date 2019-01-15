@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import AlertStripe from 'nav-frontend-alertstriper';
 import KnappBase from 'nav-frontend-knapper';
 import { getLedetekst } from 'digisyfo-npm';
-import { proptypes as motePropTypes } from 'moter-npm';
+import * as motePropTypes from '../../propTypes';
 import Epostmottakere from './Epostmottakere';
 import Innholdsviser from './Innholdsviser';
 import { mapStateToInnholdsviserProps } from './AvbrytMote';
@@ -45,7 +45,7 @@ BekreftMoteSkjema.propTypes = {
     arbeidstaker: PropTypes.object,
     onSubmit: PropTypes.func,
     avbrytHref: PropTypes.string,
-    mote: motePropTypes.mote,
+    mote: motePropTypes.motePt,
     bekrefter: PropTypes.bool,
     bekreftFeilet: PropTypes.bool,
     hentEpostinnhold: PropTypes.func,

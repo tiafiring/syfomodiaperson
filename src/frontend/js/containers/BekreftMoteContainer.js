@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { proptypes as moterPropTypes } from 'moter-npm';
+import * as moterPropTypes from '../propTypes';
 import Side from '../sider/Side';
 import MotestatusContainer from './MotestatusContainer';
 import * as moterActions from '../actions/moter_actions';
@@ -99,7 +99,7 @@ BekreftMoteSide.propTypes = {
     henterMoterBool: PropTypes.bool,
     ledetekster: PropTypes.object,
     fnr: PropTypes.string,
-    mote: moterPropTypes.mote,
+    mote: moterPropTypes.motePt,
     hentMoter: PropTypes.func,
     hentBekreftMoteEpostinnhold: PropTypes.func,
     bekreftMote: PropTypes.func,

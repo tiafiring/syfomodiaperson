@@ -5,6 +5,8 @@ import { sykepengesoknad } from 'digisyfo-npm';
 
 export { sykepengesoknad, sykmelding } from 'digisyfo-npm';
 
+export * from './moteProptypes';
+
 export const arbeidssituasjon = PropTypes.oneOf([
     arbeidssituasjoner.ARBEIDSTAKER,
     arbeidssituasjoner.NAERINGSDRIVENDE,

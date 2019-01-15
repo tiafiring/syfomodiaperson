@@ -1,5 +1,6 @@
 import React from 'react';
-import { DatoOgTid, SvarMedIkon, proptypes as moterPropTypes } from 'moter-npm';
+import { DatoOgTid, SvarMedIkon } from 'moter-npm';
+import * as moterPropTypes from '../../propTypes';
 import { ARBEIDSGIVER, BRUKER } from '../../konstanter';
 
 const BekreftetMotetidspunkt = (props) => {
@@ -26,7 +27,7 @@ const BekreftetMotetidspunkt = (props) => {
 };
 
 BekreftetMotetidspunkt.propTypes = {
-    mote: moterPropTypes.mote,
+    mote: moterPropTypes.motePt,
 };
 
 export default BekreftetMotetidspunkt;

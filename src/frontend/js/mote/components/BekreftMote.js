@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { proptypes as motePropTypes } from 'moter-npm';
+import * as motePropTypes from '../../propTypes';
 import { ARBEIDSGIVER } from '../../konstanter';
 import BekreftMoteSkjema from './BekreftMoteSkjema';
 import BekreftMoteUtenSvarSkjema from './BekreftMoteUtenSvarSkjema';
@@ -63,7 +63,7 @@ BekreftMote.propTypes = {
     ledetekster: PropTypes.object,
     onSubmit: PropTypes.func,
     avbrytHref: PropTypes.string,
-    mote: motePropTypes.mote,
+    mote: motePropTypes.motePt,
     bekrefter: PropTypes.bool,
     bekreftFeilet: PropTypes.bool,
     hentEpostinnhold: PropTypes.func,

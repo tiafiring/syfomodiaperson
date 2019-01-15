@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { getLedetekst } from 'digisyfo-npm';
-import { proptypes as moterPropTypes } from 'moter-npm';
+import * as moterPropTypes from '../../propTypes';
 import { connect } from 'react-redux';
 import AlertStripe from 'nav-frontend-alertstriper';
 import KnappBase from 'nav-frontend-knapper';
@@ -61,7 +61,7 @@ AvbrytMote.propTypes = {
     avbrytHref: PropTypes.string,
     avbryter: PropTypes.bool,
     avbrytFeilet: PropTypes.bool,
-    mote: moterPropTypes.mote,
+    mote: moterPropTypes.motePt,
 };
 
 export default AvbrytMote;

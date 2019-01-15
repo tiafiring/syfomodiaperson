@@ -6,7 +6,7 @@ import {
     getLedetekst,
     getHtmlLedetekst,
 } from 'digisyfo-npm';
-import { proptypes as moterPropTypes } from 'moter-npm';
+import * as moterPropTypes from '../../propTypes';
 import { getDatoFraZulu, erMotePassert } from '../utils/index';
 import Sidetopp from '../../components/Sidetopp';
 import KontaktInfoFeilmelding from './KontaktInfoFeilmelding';
@@ -93,7 +93,7 @@ export const StatusVarsel = ({ mote, ledetekster, arbeidstaker }) => {
 };
 
 StatusVarsel.propTypes = {
-    mote: moterPropTypes.mote,
+    mote: moterPropTypes.motePt,
     ledetekster: PropTypes.object,
     arbeidstaker: PropTypes.object,
 };
@@ -144,7 +144,7 @@ const MotebookingStatus = (props) => {
 };
 
 MotebookingStatus.propTypes = {
-    mote: moterPropTypes.mote,
+    mote: moterPropTypes.motePt,
     antallNyeTidspunkt: PropTypes.number,
     fnr: PropTypes.string,
     arbeidstaker: PropTypes.object,
