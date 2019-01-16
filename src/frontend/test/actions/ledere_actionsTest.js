@@ -1,16 +1,13 @@
 import { expect } from 'chai';
-import deepFreeze from 'deep-freeze';
-
-import * as actions from '../../js/actions/ledere_actions.js';
+import * as actions from '../../js/actions/ledere_actions';
+import { HENT_LEDERE_FORESPURT } from '../../js/actions/actiontyper';
 
 describe('ledere_actions', () => {
-
-    it("Har en hentLedere()-funksjon", () => {
-        const res = actions.hentLedere("44");
+    it('Har en hentLedere()-funksjon', () => {
+        const res = actions.hentLedere('44');
         expect(res).to.deep.equal({
-            type: "HENT_LEDERE_FORESPURT",
-            fnr: "44"
-        })
+            type: HENT_LEDERE_FORESPURT,
+            fnr: '44',
+        });
     });
-
 });

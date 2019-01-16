@@ -1,23 +1,19 @@
 import React from 'react';
 import { expect } from 'chai';
-import { mount, shallow, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import AppSpinner from '../../js/components/AppSpinner';
 import Feilmelding from '../../js/components/Feilmelding';
-import Motebehov from '../../js/components/Motebehov.js';
+import Motebehov from '../../js/components/Motebehov';
 import { mapStateToProps, MotebehovSide } from '../../js/containers/MotebehovContainer';
 import sinon from 'sinon';
 
-describe("MotebehovContainer", () => {
-
-    describe("MotebehovSide", () => {
-
+describe('MotebehovContainer', () => {
+    describe('MotebehovSide', () => {
         let actions;
         let hentMotebehov;
         let ledetekster;
         let tilgang;
         let motebehovTilgang;
-        let motebehovForsokthentet;
-        let ledere;
         beforeEach(() => {
             ledetekster = {};
             hentMotebehov = sinon.spy();
@@ -30,9 +26,7 @@ describe("MotebehovContainer", () => {
             };
         });
 
-        it("Skal vise AppSpinner hvis man henter møtebehov/ledetekster", () => {
-            const motebehovet = {};
-
+        it('Skal vise AppSpinner hvis man henter møtebehov/ledetekster', () => {
             const component = shallow(<MotebehovSide
                 tilgang={tilgang}
                 actions={actions}
@@ -45,9 +39,7 @@ describe("MotebehovContainer", () => {
             expect(component.find(AppSpinner)).to.have.length(1)
         });
 
-        it("Skal vise AppSpinner hvis noe blir hentet", () => {
-            const motebehovet = {};
-
+        it('Skal vise AppSpinner hvis noe blir hentet', () => {
             const component = shallow(<MotebehovSide
                 tilgang={tilgang}
                 actions={actions}
@@ -59,10 +51,8 @@ describe("MotebehovContainer", () => {
             expect(component.find(AppSpinner)).to.have.length(1)
         });
 
-        it("Skal vise feilmelding hvis hentingFeilet", () => {
-            const motebehovet = {};
-
-            const component = shallow(<MotebehovSide
+        it('Skal vise feilmelding hvis hentingFeilet', () => {
+           const component = shallow(<MotebehovSide
                 tilgang={tilgang}
                 actions={actions}
                 motebehovListe={[]}
@@ -74,7 +64,7 @@ describe("MotebehovContainer", () => {
             expect(component.find(Feilmelding)).to.have.length(1)
         });
 
-        it("Skal vise Motebehov hvis det finnes innsendte møtebehov", () => {
+        it('Skal vise Motebehov hvis det finnes innsendte møtebehov', () => {
             const motebehovListeUtenFlereSvarFraSammePerson = [
                 {
                     id: '123',
@@ -84,7 +74,7 @@ describe("MotebehovContainer", () => {
 
             const component = shallow(<MotebehovSide
                 tilgang={tilgang}
-                fnr={"fnr"}
+                fnr={'fnr'}
                 actions={actions}
                 motebehovListeUtenFlereSvarFraSammePerson={motebehovListeUtenFlereSvarFraSammePerson}
                 motebehovTilgang={motebehovTilgang}
@@ -96,19 +86,18 @@ describe("MotebehovContainer", () => {
 
     });
 
-    describe("mapStateToProps", () => {
-
+    describe('mapStateToProps', () => {
         let state;
         let ownProps;
         beforeEach(() => {
             state = {
                 navbruker: {
                     data: {
-                        fnr: "887766",
+                        fnr: '887766',
                     },
                 },
                 motebehov: {
-                    data: []
+                    data: [],
                 },
                 tilgang: {
                     data: {
@@ -120,7 +109,7 @@ describe("MotebehovContainer", () => {
                 ledetekster: {
                     hentingFeilet: false,
                     henter: false,
-                    data: {}
+                    data: {},
                 },
                 veilederoppgaver: {
                     data: [],
@@ -130,30 +119,30 @@ describe("MotebehovContainer", () => {
                 },
                 ledere: {
                     data: [],
-                }
+                },
             };
             ownProps = {
                 params: {
-                    fnr: "887766",
-                }
-            }
+                    fnr: '887766',
+                },
+            };
         });
 
-        it("Skal returnere fnr", () => {
+        it('Skal returnere fnr', () => {
             const props = mapStateToProps(state, ownProps);
 
-            expect(props.fnr).to.equal("887766");
+            expect(props.fnr).to.equal('887766');
         });
 
-        it("Skal returnere motebehov === undefined dersom det ikke finnes møtebehov", () => {
+        it('Skal returnere motebehov === undefined dersom det ikke finnes møtebehov', () => {
             state.motebehov.data = [];
 
             const props = mapStateToProps(state, ownProps);
 
-            expect(props.motebehov).to.be.undefined;
+            expect(props.motebehov).to.be.equal(undefined);
         });
 
-        it("Skal returnere henter når møtebehov og ledetekster ikke har blitt forsøkt hentet", () => {
+        it('Skal returnere henter når møtebehov og ledetekster ikke har blitt forsøkt hentet', () => {
             state.motebehov.data = [{
                 id: 1
             }];
@@ -165,10 +154,10 @@ describe("MotebehovContainer", () => {
 
             const props = mapStateToProps(state, ownProps);
 
-            expect(props.henter).to.be.true;
+            expect(props.henter).to.be.equal(true);
         });
 
-        it("Skal ikke returnere henter når møtebehov og ledetekster er forsøkt hentet", () => {
+        it('Skal ikke returnere henter når møtebehov og ledetekster er forsøkt hentet', () => {
             state.motebehov.data = [{
                 id: 1
             }];
@@ -177,10 +166,10 @@ describe("MotebehovContainer", () => {
 
             const props = mapStateToProps(state, ownProps);
 
-            expect(props.henter).to.be.false;
+            expect(props.henter).to.be.equal(false);
         });
 
-        it("Skal returnere hentingFeilet når henting av møtebehov feiler", () => {
+        it('Skal returnere hentingFeilet når henting av møtebehov feiler', () => {
             state.motebehov.data = [{
                 id: 1
             }];
@@ -188,10 +177,10 @@ describe("MotebehovContainer", () => {
 
             const props = mapStateToProps(state, ownProps);
 
-            expect(props.hentingFeilet).to.be.true;
+            expect(props.hentingFeilet).to.be.equal(true);
         });
 
-        it("Skal returnere hentingFeilet når henting av møtebehov ikke feiler", () => {
+        it('Skal returnere hentingFeilet når henting av møtebehov ikke feiler', () => {
             state.motebehov.data = [{
                 id: 1
             }];
@@ -199,10 +188,10 @@ describe("MotebehovContainer", () => {
 
             const props = mapStateToProps(state, ownProps);
 
-            expect(props.hentingFeilet).to.be.false;
+            expect(props.hentingFeilet).to.be.equal(false);
         });
 
-        it("Skal returnere ett element i listen med møtebehov hvis alle motebehovsvar er fra samme person", () => {
+        it('Skal returnere ett element i listen med møtebehov hvis alle motebehovsvar er fra samme person', () => {
             state.motebehov.data = [
                 {
                     id: '1',
@@ -219,7 +208,7 @@ describe("MotebehovContainer", () => {
             expect(props.motebehovListeUtenFlereSvarFraSammePerson).to.have.length(1);
         });
 
-        it("Skal returnere to elementer i listen med møtebehov hvis to motebehovSvar er fra ulike personer", () => {
+        it('Skal returnere to elementer i listen med møtebehov hvis to motebehovSvar er fra ulike personer', () => {
             state.motebehov.data = [
                 {
                     id: '1',
@@ -243,9 +232,9 @@ describe("MotebehovContainer", () => {
             expect(props.motebehovListeUtenFlereSvarFraSammePerson).to.have.length(2);
         });
 
-        it("Skal returnere det nyeste motebehovsvaret når det finnes flere svar", () => {
-            const eldsteDato = new Date("2018-05-05");
-            const nyesteDato = new Date("2018-10-10");
+        it('Skal returnere det nyeste motebehovsvaret når det finnes flere svar', () => {
+            const eldsteDato = new Date('2018-05-05');
+            const nyesteDato = new Date('2018-10-10');
             state.motebehov.data = [
                 {
                     id: '1',
@@ -310,8 +299,6 @@ describe("MotebehovContainer", () => {
                 aktoerId: leder1,
                 orgnummer: virksomhet1,
             });
-        })
-
+        });
     });
-
 });

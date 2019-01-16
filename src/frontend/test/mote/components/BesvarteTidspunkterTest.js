@@ -18,7 +18,7 @@ chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('BesvarteTidspunkter', () => {
-    let comp;
+    let component;
     let getComp;
 
     beforeEach(() => {
@@ -36,90 +36,90 @@ describe('BesvarteTidspunkter', () => {
     });
 
     it('Skal inneholde et .js-alternativ for hvert alternativ', () => {
-        comp = getComp(moteBesvartMedNyeAlternativerIkkeBesvart);
-        expect(comp.find('.js-alternativ')).to.have.length(2);
+        component = getComp(moteBesvartMedNyeAlternativerIkkeBesvart);
+        expect(component.find('.js-alternativ')).to.have.length(2);
     });
 
     it('Skal vise svar til annen bruker', () => {
-        comp = getComp(moteBesvartMedNyeAlternativerIkkeBesvart);
-        expect(comp.find('.js-alternativ')).to.have.length(2);
+        component = getComp(moteBesvartMedNyeAlternativerIkkeBesvart);
+        expect(component.find('.js-alternativ')).to.have.length(2);
     });
 
     it('Skal vise svaret til NAV', () => {
-        expect(comp.find(NavKan)).to.have.length(2);
+        expect(component.find(NavKan)).to.have.length(2);
     });
 
     it('Skal ikke vise "Bekreft tidspunkt"-knapp', () => {
-        expect(comp.find('.js-bekreft-tidspunkt')).to.have.length(0);
+        expect(component.find('.js-bekreft-tidspunkt')).to.have.length(0);
     });
 
     describe('Når deltakertype === "arbeidsgiver"', () => {
         beforeEach(() => {
-            comp = getComp(moteBesvartMedNyeAlternativerBesvart, {
+            component = getComp(moteBesvartMedNyeAlternativerBesvart, {
                 deltakertype: ARBEIDSGIVER,
             });
         });
 
         it('Skal vise svar til annen bruker', () => {
-            expect(comp.find('.js-alternativ')).to.have.length(4);
+            expect(component.find('.js-alternativ')).to.have.length(4);
         });
 
         it('SKal vise svar til innlogget bruker', () => {
-            expect(comp.find('.js-alternativ')).to.have.length(4);
+            expect(component.find('.js-alternativ')).to.have.length(4);
         });
 
         it('Skal ikke vise "Bekreft tidspunkt"-knapp', () => {
-            expect(comp.find('.js-bekreft-tidspunkt')).to.have.length(0);
+            expect(component.find('.js-bekreft-tidspunkt')).to.have.length(0);
         });
 
         it('Skal vise NavKan', () => {
-            expect(comp.find(NavKan)).to.have.length(4);
+            expect(component.find(NavKan)).to.have.length(4);
         });
     });
 
     describe('Når deltakertype === "NAV_VEILEDER" når moteBesvartTrueAvArbeidsgiver', () => {
         beforeEach(() => {
-            comp = mount(<BesvarteTidspunkter
+            component = mount(<BesvarteTidspunkter
                 mote={moteBesvartTrueAvArbeidsgiver}
                 alternativer={moteBesvartTrueAvArbeidsgiver.alternativer}
                 deltakertype={NAV_VEILEDER}
-                fnr="123"
+                fnr='123'
             />);
         });
 
         it('Skal vise "Bekreft tidspunkt"-lenker', () => {
-            expect(comp.find(Link)).to.have.length(2);
-            expect(comp.find('a.js-bekreft-tidspunkt')).to.have.length(2);
+            expect(component.find(Link)).to.have.length(2);
+            expect(component.find('a.js-bekreft-tidspunkt')).to.have.length(2);
         });
 
         it('Lenken skal ha riktig to-parameter', () => {
-            comp.find(Link).forEach((l) => {
+            component.find(Link).forEach((l) => {
                 expect(l.prop('to')).to.contain('/sykefravaer/123/mote/bekreft/');
             });
         });
 
         it('Skal ikke vise NavKan', () => {
-            expect(comp.find(NavKan)).to.have.length(0);
+            expect(component.find(NavKan)).to.have.length(0);
         });
     });
 
     describe('Når deltakertype === "NAV_VEILEDER" når moteIkkeBesvart', () => {
         beforeEach(() => {
-            comp = mount(<BesvarteTidspunkter
+            component = mount(<BesvarteTidspunkter
                 mote={moteIkkeBesvart}
                 alternativer={moteIkkeBesvart.alternativer}
                 deltakertype={NAV_VEILEDER}
-                fnr="123"
+                fnr='123'
             />);
         });
 
         it('Skal vise "Bekreft tidspunkt"-lenker', () => {
-            expect(comp.find(Link)).to.have.length(2);
-            expect(comp.find('a.js-bekreft-tidspunkt')).to.have.length(2);
+            expect(component.find(Link)).to.have.length(2);
+            expect(component.find('a.js-bekreft-tidspunkt')).to.have.length(2);
         });
 
         it('Lenken skal ha riktig to-parameter', () => {
-            comp.find(Link).forEach((l) => {
+            component.find(Link).forEach((l) => {
                 expect(l.prop('to')).to.contain('/sykefravaer/123/mote/bekreft/');
             });
         });
@@ -132,11 +132,11 @@ describe('BesvarteTidspunkter', () => {
                     return d.type === ARBEIDSGIVER;
                 }),
             });
-            comp = mount(<BesvarteTidspunkter
+            component = mount(<BesvarteTidspunkter
                 mote={mote}
                 alternativer={moteBesvartTrueAvArbeidsgiver.alternativer}
                 deltakertype={NAV_VEILEDER}
-                fnr="123"
+                fnr='123'
             />);
         });
     });
@@ -148,11 +148,11 @@ describe('BesvarteTidspunkter', () => {
                     return d.type === BRUKER;
                 }),
             });
-            comp = mount(<BesvarteTidspunkter
+            component = mount(<BesvarteTidspunkter
                 mote={mote}
                 alternativer={moteBesvartTrueAvArbeidsgiver.alternativer}
                 deltakertype={NAV_VEILEDER}
-                fnr="123"
+                fnr='123'
             />);
         });
     });

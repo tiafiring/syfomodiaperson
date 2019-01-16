@@ -1,12 +1,11 @@
+import { expect } from 'chai';
 import deepFreeze from 'deep-freeze';
-import {expect} from 'chai';
 import * as actions from '../../js/actions/fastleger_actions';
 import fastleger from '../../js/reducers/fastleger';
 
 describe('fastleger', () => {
-
     describe('henter', () => {
-        let initialState = deepFreeze({
+        const initialState = deepFreeze({
             henter: false,
             hentet: false,
             ikkeFunnet: false,
@@ -40,13 +39,13 @@ describe('fastleger', () => {
                     pasientforhold: {
                         fom: forrigeDag,
                         tom: nesteDag,
-                    }
+                    },
                 },
                 {
                     pasientforhold: {
                         fom: forrigeDag,
                         tom: forrigeDag,
-                    }
+                    },
                 },
             ];
             const action = actions.fastlegerHentet(leger);
@@ -76,5 +75,4 @@ describe('fastleger', () => {
             });
         });
     });
-
 });

@@ -29,11 +29,11 @@ propagateToGlobal(window);
 
 function propagateToGlobal (window) {
     for(let key in window) {
-        if(!window.hasOwnProperty(key)) {
+        if (!window.hasOwnProperty(key)) {
             continue;
         }
 
-        if(key in global) {
+        if (key in global) {
             continue;
         }
         global[key] = window[key];

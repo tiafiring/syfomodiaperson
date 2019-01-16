@@ -1,23 +1,21 @@
 import { expect } from 'chai';
 import deepFreeze from 'deep-freeze';
-
-import navbruker from '../../js/reducers/navbruker.js';
+import navbruker from '../../js/reducers/navbruker';
 
 describe('navbruker', () => {
-
-    it("Returnerer { data: {} } ved initializering", () => {
+    it('Returnerer { data: {} } ved initializering', () => {
         const nextState = navbruker();
         expect(nextState).to.deep.equal({
-            data: {}
+            data: {},
         });
     });
 
-    it("Håndterer NAVBRUKER_HENTET når man ikke har data fra før", () => {
+    it('Håndterer NAVBRUKER_HENTET når man ikke har data fra før', () => {
         const initialState = deepFreeze({});
         const action = {
             type: 'NAVBRUKER_HENTET',
             data: {
-                navn: "Kurt Nilsen"
+                navn: 'Kurt Nilsen',
             },
         };
         const nextState = navbruker(initialState, action);
@@ -26,24 +24,24 @@ describe('navbruker', () => {
             henter: false,
             hentingFeilet: false,
             data: {
-                navn: "Kurt Nilsen"
-            }
+                navn: 'Kurt Nilsen',
+            },
         });
 
     });
 
-    it("Håndterer NAVBRUKER_HENTET når man har data fra før", () => {
+    it('Håndterer NAVBRUKER_HENTET når man har data fra før', () => {
         const initialState = deepFreeze({
             data: {
                 kontaktinfo: {
-                    fnr: "12345689",
-                }
-            }
+                    fnr: '12345689',
+                },
+            },
         });
         const action = {
             type: 'NAVBRUKER_HENTET',
             data: {
-                navn: "Kurt Nilsen",
+                navn: 'Kurt Nilsen',
             },
         };
         const nextState = navbruker(initialState, action);
@@ -52,31 +50,31 @@ describe('navbruker', () => {
             henter: false,
             hentingFeilet: false,
             data: {
-                navn: "Kurt Nilsen",
+                navn: 'Kurt Nilsen',
                 kontaktinfo: {
-                    fnr: "12345689",
-                }
-            }
+                    fnr: '12345689',
+                },
+            },
         });
 
     });
 
-    it("Håndterer HENT_NAVBRUKER_FORESPURT", () => {
+    it('Håndterer HENT_NAVBRUKER_FORESPURT', () => {
         const initialState = deepFreeze({
             data: {
-                test: 1
-            }
+                test: 1,
+            },
         });
         const action = {
             type: 'HENT_NAVBRUKER_FORESPURT',
-            fnr: "123456",
+            fnr: '123456',
         };
         const nextState = navbruker(initialState, action);
         expect(nextState).to.deep.equal({
             data: {
                 test: 1,
                 kontaktinfo: {
-                    fnr: "123456",
+                    fnr: '123456',
                 },
             },
             henter: true,
@@ -84,14 +82,14 @@ describe('navbruker', () => {
         })
     });
 
-    it("Håndterer HENT_NAVBRUKER_FEILET", () => {
+    it('Håndterer HENT_NAVBRUKER_FEILET', () => {
         const initialState = deepFreeze({
             data: {
-                test: 1
+                test: 1,
             }
         });
         const action = {
-            type: 'HENT_NAVBRUKER_FEILET'
+            type: 'HENT_NAVBRUKER_FEILET',
         };
         const nextState = navbruker(initialState, action);
         expect(nextState).to.deep.equal({

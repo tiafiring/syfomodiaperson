@@ -6,7 +6,6 @@ import {
 } from '../../js/utils/datoUtils';
 
 describe('datoUtils', () => {
-
     describe('visKlokkeslett', () => {
         it('Skal vise klokkeslett på riktig format', () => {
             const d = visKlokkeslett(new Date(2017, 4, 3, 9, 0));
@@ -22,7 +21,7 @@ describe('datoUtils', () => {
         });
     });
 
-    describe('restdatoTilLesbarDato', function () {
+    describe('restdatoTilLesbarDato', () => {
         it('Skal konvertere dato fra rest til rett format', () => {
             const restDato = '2017-02-01';
             const dato = restdatoTilLesbarDato(restDato);

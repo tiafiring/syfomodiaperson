@@ -14,7 +14,7 @@ var bundle = function() {
 }
 
 fs.exists("../main/webapp/js", function(exists) {
-	if(!exists) {
+	if (!exists) {
 		console.log("JS-mappe finnes ikke, og vi lager den")
 		// Lager JS-mappe hvis den ikke finnes
 		fs.mkdir("../main/webapp/js", function() {

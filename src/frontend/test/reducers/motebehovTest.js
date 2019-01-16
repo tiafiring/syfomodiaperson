@@ -1,8 +1,8 @@
 import { expect } from 'chai';
-import motebehov, {sorterEtterDato} from '../../js/reducers/motebehov';
-import * as actions from '../../js/actions/motebehov_actions';
 import deepFreeze from 'deep-freeze';
 import sinon from 'sinon';
+import motebehov, { sorterEtterDato } from '../../js/reducers/motebehov';
+import * as actions from '../../js/actions/motebehov_actions';
 
 describe('motebehov', () => {
     let clock;
@@ -36,70 +36,74 @@ describe('motebehov', () => {
                 data: [],
                 henter: true,
             });
-            const action = actions.motebehovHentet([{
-                "id": "1",
-                "opprettetDato": "2017-02-22",
-                "opprettetAv": "123",
-                "arbeidstaker": {
-                    "fnr": "123"
-                },
-                "motebehovSvar": {
-                    "friskmeldingForventning": 'Ja, i morgen',
-                    "tiltak": 'Ligge paa sofaen',
-                    "tiltakResultat": "Funket bra",
-                    "harMotebehov": true,
-                    "forklaring": "Flere tiltak"
-                }
-            },
+            const action = actions.motebehovHentet([
                 {
-                    "id": "2",
-                    "opprettetDato": "2017-02-24",
-                    "opprettetAv": "123",
-                    "arbeidstaker": {
-                        "fnr": "123"
+                    id: '1',
+                    opprettetDato: '2017-02-22',
+                    opprettetAv: '123',
+                    arbeidstaker: {
+                        fnr: '123',
                     },
-                    "motebehovSvar": {
-                        "friskmeldingForventning": 'Nei',
-                        "tiltak": 'Ligge paa sofaen',
-                        "tiltakResultat": "Funket daarlig",
-                        "harMotebehov": false,
-                        "forklaring": "Jeg vil ikke ha hjelp!"
-                    }
-                }]);
+                    motebehovSvar: {
+                        friskmeldingForventning: 'Ja, i morgen',
+                        tiltak: 'Ligge paa sofaen',
+                        tiltakResultat: 'Funket bra',
+                        harMotebehov: true,
+                        forklaring: 'Flere tiltak',
+                    },
+                },
+                {
+                    id: '2',
+                    opprettetDato: '2017-02-24',
+                    opprettetAv: '123',
+                    arbeidstaker: {
+                        fnr: '123',
+                    },
+                    motebehovSvar: {
+                        friskmeldingForventning: 'Nei',
+                        tiltak: 'Ligge paa sofaen',
+                        tiltakResultat: 'Funket daarlig',
+                        harMotebehov: false,
+                        forklaring: 'Jeg vil ikke ha hjelp!',
+                    },
+                },
+            ]);
 
             const nextState = motebehov(initialState, action);
 
             expect(nextState).to.deep.equal({
-                data: [{
-                    "id": "2",
-                    "opprettetDato": "2017-02-24",
-                    "opprettetAv": "123",
-                    "arbeidstaker": {
-                        "fnr": "123"
-                    },
-                    "motebehovSvar": {
-                        "friskmeldingForventning": 'Nei',
-                        "tiltak": 'Ligge paa sofaen',
-                        "tiltakResultat": "Funket daarlig",
-                        "harMotebehov": false,
-                        "forklaring": "Jeg vil ikke ha hjelp!"
-                    }
-                },
+                data: [
                     {
-                    "id": "1",
-                    "opprettetDato": "2017-02-22",
-                    "opprettetAv": "123",
-                    "arbeidstaker": {
-                        "fnr": "123"
+                        id: '2',
+                        opprettetDato: '2017-02-24',
+                        opprettetAv: '123',
+                        arbeidstaker: {
+                            fnr: '123',
+                        },
+                        motebehovSvar: {
+                            friskmeldingForventning: 'Nei',
+                            tiltak: 'Ligge paa sofaen',
+                            tiltakResultat: 'Funket daarlig',
+                            harMotebehov: false,
+                            forklaring: 'Jeg vil ikke ha hjelp!',
+                        },
                     },
-                    "motebehovSvar": {
-                        "friskmeldingForventning": 'Ja, i morgen',
-                        "tiltak": 'Ligge paa sofaen',
-                        "tiltakResultat": "Funket bra",
-                        "harMotebehov": true,
-                        "forklaring": "Flere tiltak"
-                    }
-                }],
+                    {
+                        id: '1',
+                        opprettetDato: '2017-02-22',
+                        opprettetAv: '123',
+                        arbeidstaker: {
+                            fnr: '123',
+                        },
+                        motebehovSvar: {
+                            friskmeldingForventning: 'Ja, i morgen',
+                            tiltak: 'Ligge paa sofaen',
+                            tiltakResultat: 'Funket bra',
+                            harMotebehov: true,
+                            forklaring: 'Flere tiltak',
+                        },
+                    },
+                ],
                 henter: false,
                 hentet: true,
                 hentingFeilet: false,
@@ -125,16 +129,16 @@ describe('motebehov', () => {
         it('Returnerer nyeste dato', () => {
             const eldsteMotebehov = {
                 id: '1',
-                opprettetDato: new Date(Date.now() - 3600000)
+                opprettetDato: new Date(Date.now() - 3600000),
             };
             const nyesteMotebehov = {
                 id: '2',
-                opprettetDato: new Date(Date.now())
+                opprettetDato: new Date(Date.now()),
             };
 
-           const resultat = sorterEtterDato(eldsteMotebehov, nyesteMotebehov);
+            const resultat = sorterEtterDato(eldsteMotebehov, nyesteMotebehov);
 
-           expect(resultat).to.equal(1);
+            expect(resultat).to.equal(1);
         });
     });
 });

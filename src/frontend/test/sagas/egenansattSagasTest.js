@@ -1,8 +1,11 @@
 import { expect } from 'chai';
-import { hentEgenansattSaga } from '../../js/sagas/egenansattSagas.js';
-import { get } from '../../js/api/index';
 import { put, call } from 'redux-saga/effects';
-import * as actiontyper from '../../js/actions/actiontyper';
+import { get } from '../../js/api/index';
+import { hentEgenansattSaga } from '../../js/sagas/egenansattSagas';
+import {
+    HENTER_EGENANSATT,
+    EGENANSATT_HENTET,
+} from '../../js/actions/actiontyper';
 
 describe('egenansattSagas', () => {
     beforeEach(() => {
@@ -15,9 +18,9 @@ describe('egenansattSagas', () => {
         fnr: '1',
     });
 
-    it('Skal dispatche HENTER_EGENANSATT', () => {
+    it(`Skal dispatche ${HENTER_EGENANSATT}`, () => {
         const nextPut = put({
-            type: actiontyper.HENTER_EGENANSATT,
+            type: HENTER_EGENANSATT,
         });
         expect(generator.next().value).to.deep.equal(nextPut);
     });
@@ -27,9 +30,9 @@ describe('egenansattSagas', () => {
         expect(generator.next().value).to.deep.equal(nextCall);
     });
 
-    it('Skal dernest sette EGENANSATT_HENTET', () => {
+    it(`Skal dernest sette ${EGENANSATT_HENTET}`, () => {
         const nextPut = put({
-            type: actiontyper.EGENANSATT_HENTET,
+            type: EGENANSATT_HENTET,
             data: 'mine data',
         });
         expect(generator.next('mine data').value).to.deep.equal(nextPut);

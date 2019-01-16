@@ -1,16 +1,14 @@
 import React from 'react';
 import { expect } from 'chai';
-import { mount, shallow, render } from 'enzyme';
+import { shallow } from 'enzyme';
+import sinon from 'sinon';
 import AppSpinner from '../../js/components/AppSpinner';
 import Feilmelding from '../../js/components/Feilmelding';
 import MotelandingssideContainer from '../../js/containers/MotelandingssideContainer';
 import { mapStateToProps, MotelandingssideSide } from '../../js/containers/MotelandingssideContainer';
-import sinon from 'sinon';
 
-describe("MotelandingssideContainer", () => {
-
-    describe("MotelandingssideSide", () => {
-
+describe('MotelandingssideContainer', () => {
+    describe('MotelandingssideSide', () => {
         let hentMoter;
         let hentMotebehov;
         let ledetekster;
@@ -30,37 +28,29 @@ describe("MotelandingssideContainer", () => {
             moterTilgang = {};
         });
 
-        it("Skal vise AppSpinner", () => {
-            const mote = {};
-            const motebehovet = {};
-
+        it('Skal vise AppSpinner', () => {
             const component = shallow(<MotelandingssideSide
                 tilgang={tilgang}
                 hentMoter={hentMoter}
-                henter={true}
+                henter
             />);
 
             expect(component.find(AppSpinner)).to.have.length(1)
         });
 
-        it("Skal hente møter ved init", () => {
-            const mote = {};
-
+        it('Skal hente møter ved init', () => {
             const component = shallow(<MotelandingssideSide
                 tilgang={tilgang}
-                fnr="123"
+                fnr='123'
                 hentMoter={hentMoter}
                 mote={{}}
             />);
 
-            expect(hentMoter.calledOnce).to.be.true;
-            expect(hentMoter.calledWith("123")).to.be.true;
+            expect(hentMoter.calledOnce).to.be.equal(true);
+            expect(hentMoter.calledWith('123')).to.be.equal(true);
         });
 
-        it("Skal vise feilmelding hvis hentingFeilet", () => {
-            const mote = {};
-
-            const component = shallow(<MotelandingssideSide
+        it('Skal vise feilmelding hvis hentingFeilet', () => {const component = shallow(<MotelandingssideSide
                 tilgang={tilgang}
                 hentMoter={hentMoter}
                 mote={{}}
@@ -71,25 +61,25 @@ describe("MotelandingssideContainer", () => {
         });
     });
 
-    describe("mapStateToProps", () => {
-
+    describe('mapStateToProps', () => {
         let state;
         let ownProps;
+
         beforeEach(() => {
             state = {
                 navbruker: {
                     data: {
-                        fnr: "887766",
+                        fnr: '887766',
                     },
                 },
                 moter: {
-                    data: []
+                    data: [],
                 },
                 motebehov: {
-                    data: []
+                    data: [],
                 },
                 virksomhet: {
-                    navn: "BEKK"
+                    navn: 'BEKK',
                 },
                 tilgang: {
                     data: {
@@ -101,81 +91,81 @@ describe("MotelandingssideContainer", () => {
                 ledetekster: {
                     hentingFeilet: false,
                     henter: false,
-                    data: {}
-                }
+                    data: {},
+                },
             };
             ownProps = {
                 params: {
-                    fnr: "887766",
-                }
-            }
+                    fnr: '887766',
+                },
+            };
         });
 
-        it("Skal returnere fnr", () => {
+        it('Skal returnere fnr', () => {
             const props = mapStateToProps(state, ownProps);
 
-            expect(props.fnr).to.equal("887766");
+            expect(props.fnr).to.equal('887766');
         });
-        
-        it("Skal returnere opprettet møte", () => {
+
+        it('Skal returnere opprettet møte', () => {
             state.moter.data = [{
                 id: 1,
-                status: "OPPRETTET"
+                status: 'OPPRETTET',
             }];
 
             const props = mapStateToProps(state, ownProps);
 
             expect(props.mote).to.deep.equal({
                 id: 1,
-                status: "OPPRETTET"
+                status: 'OPPRETTET',
             });
         });
 
-        it("Skal returnere BEKREFTET møte", () => {
+        it('Skal returnere BEKREFTET møte', () => {
             state.moter.data = [{
                 id: 1,
-                status: "BEKREFTET"
+                status: 'BEKREFTET',
             }];
 
             const props = mapStateToProps(state, ownProps);
 
             expect(props.mote).to.deep.equal({
                 id: 1,
-                status: "BEKREFTET"
+                status: 'BEKREFTET',
             });
         });
 
-        it("Skal ikke returnere avbrutt mote", () => {
+        it('Skal ikke returnere avbrutt mote', () => {
             state.moter.data = [{
                 id: 1,
-                status: 'AVBRUTT'
+                status: 'AVBRUTT',
             }];
 
             const props = mapStateToProps(state, ownProps);
 
-            expect(props.mote).to.be.undefined;
+            expect(props.mote).to.be.equal(undefined);
         });
 
-        it("Skal returnere mote === undefined dersom det ikke finnes møter", () => {
+        it('Skal returnere mote === undefined dersom det ikke finnes møter', () => {
             state.moter.data = [];
 
             const props = mapStateToProps(state, ownProps);
 
-            expect(props.mote).to.be.undefined;
+            expect(props.mote).to.be.equal(undefined);
         });
 
-        it("Skal returnere henter når det hentes møter", () => {
+        it('Skal returnere henter når det hentes møter', () => {
             state.moter.data = [{
-                id: 1
+                id: 1,
             }];
             state.moter.henter = true;
 
             const props = mapStateToProps(state, ownProps);
 
-            expect(props.henter).to.be.true;
+            expect(props.henter).to.be.equal(true);
         });
 
-        it("Skal returnere henter når det ikke hentes møter", () => {
+        it('Skal returnere henter når det ikke hentes møter', () => {
             state.moter.data = [{
                 id: 1
             }];
@@ -183,7 +173,7 @@ describe("MotelandingssideContainer", () => {
 
             const props = mapStateToProps(state, ownProps);
 
-            expect(props.henter).to.be.false;
+            expect(props.henter).to.be.equal(false);
         });
     });
 });

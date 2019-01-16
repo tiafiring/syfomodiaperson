@@ -9,7 +9,6 @@ import {
 } from '../../js/utils/fnrUtils';
 
 describe('fnrUtils', () => {
-
     describe('hentBrukersFoedseldatoFraFnr', () => {
         const assertLik = (verdi, resultat) => {
             expect(hentBrukersFoedseldatoFraFnr(verdi).getTime()).to.equal(resultat.getTime());
@@ -23,17 +22,17 @@ describe('fnrUtils', () => {
         });
 
         it('Skal returnere rett foedselsdato, med gyldig D-nummer', () => {
-            const foedselsdato =  new Date('1980-01-14');
+            const foedselsdato = new Date('1980-01-14');
             assertLik('54018010088', foedselsdato);
         });
 
         it('Skal returnere rett foedselsdato, med gyldig H-nummer', () => {
-            const foedselsdato =  new Date('1980-01-14');
+            const foedselsdato = new Date('1980-01-14');
             assertLik('14418010088', foedselsdato);
         });
 
         describe('Personer foedt [1900-1999], med individsifre:[000, 499]', () => {
-            const foedselsdato =  new Date('1980-01-14');
+            const foedselsdato = new Date('1980-01-14');
             it('Skal returnere rett foedselsdato, for individsifre 000', () => {
                 assertLik('14018000088', foedselsdato);
             });
@@ -43,8 +42,8 @@ describe('fnrUtils', () => {
             });
         });
 
-        describe('Personer foedt [1855-1899], med individsifre:[500, 749]' , () => {
-            const foedselsdato =  new Date('1880-01-14');
+        describe('Personer foedt [1855-1899], med individsifre:[500, 749]', () => {
+            const foedselsdato = new Date('1880-01-14');
             it('Skal returnere rett foedselsdato, for individsifre 500', () => {
                 assertLik('14018050088', foedselsdato);
             });
@@ -55,7 +54,7 @@ describe('fnrUtils', () => {
         });
 
         describe('Personer foedt [2000-2039], med individsifre:[500, 999]', () => {
-            const foedselsdato =  new Date('2000-01-14');
+            const foedselsdato = new Date('2000-01-14');
             it('Skal returnere rett foedselsdato, for individsifre 500', () => {
                 assertLik('14010050088', foedselsdato);
             });
@@ -69,13 +68,13 @@ describe('fnrUtils', () => {
             });
 
             it('Skal returnere rett foedselsdato', () => {
-                const foedselsdato =  new Date('2039-01-14');
+                const foedselsdato = new Date('2039-01-14');
                 assertLik('14013999988', foedselsdato);
             });
         });
 
         describe('Personer foedt [1940-1999], med individsifre:[900, 999]', () => {
-            const foedselsdato =  new Date('1940-01-14');
+            const foedselsdato = new Date('1940-01-14');
             it('Skal returnere rett foedselsdato, for individsifre 900', () => {
                 assertLik('14014090088', foedselsdato);
             });
@@ -109,15 +108,21 @@ describe('fnrUtils', () => {
         afterEach(() => {
             clock.restore();
         });
+
         const foedselsaar = 1958;
         const hentFnrFraDato = (dato) => {
             let dag = dato.getDate().toString();
-            dag = dag.length === 1 ? '0' + dag : dag;
+            dag = dag.length === 1
+                ? '0' + dag
+                : dag;
             let mnd = (dato.getMonth() + 1).toString();
-            mnd = mnd.length === 1 ? '0' + mnd : mnd;
-            const aar = (dato.getFullYear().toString().substring(2,4));
+            mnd = mnd.length === 1
+                ? '0' + mnd
+                : mnd;
+            const aar = dato.getFullYear().toString().substring(2,4);
             return dag + mnd + aar + '33818';
         };
+
         it('Skal returnere rett brukers alder, om bruker har hatt foedselsdag', () => {
             let foedselsDatoPassert = new Date();
             foedselsDatoPassert.setFullYear(foedselsaar);
@@ -138,10 +143,10 @@ describe('fnrUtils', () => {
         });
     });
 
-    describe("formaterFnr", () => {
-        it("Skal formatere fnr", () => {
-            const s = formaterFnr("12121233333");
-            expect(s).to.equal("121212 33333");
-        })
-    })
+    describe('formaterFnr', () => {
+        it('Skal formatere fnr', () => {
+            const s = formaterFnr('12121233333');
+            expect(s).to.equal('121212 33333');
+        });
+    });
 });

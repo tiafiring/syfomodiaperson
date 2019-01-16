@@ -1,11 +1,11 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
+import deepFreeze from 'deep-freeze';
 import virksomhet from '../../../js/reducers/virksomhet';
 import * as actions from '../../../js/actions/virksomhet_actions';
-import deepFreeze from 'deep-freeze';
 
-describe("virksomhet", () => {
+describe('virksomhet', () => {
 
-    it("Har en default state", () => {
+    it('Har en default state', () => {
         const state = virksomhet();
         expect(state).to.deep.equal({
             data: {},
@@ -14,7 +14,7 @@ describe("virksomhet", () => {
         })
     });
 
-    it("Håndterer henterVirksomhet()", () => {
+    it('Håndterer henterVirksomhet()', () => {
         const action = actions.henterVirksomhet();
         const state = virksomhet(undefined, action);
         expect(state).to.deep.equal({
@@ -24,36 +24,36 @@ describe("virksomhet", () => {
         })
     });
 
-    it("Håndterer virksomhetHentet når det ikke finnes data fra før", () => {
+    it('Håndterer virksomhetHentet når det ikke finnes data fra før', () => {
         const data = {
-            navn: "NAV Consulting",
-        }
-        const orgnummer = "8877766";
+            navn: 'NAV Consulting',
+        };
+        const orgnummer = '8877766';
         const action = actions.virksomhetHentet(orgnummer, data);
         const currentState = deepFreeze({
             data: {},
             henter: true,
-            hentingFeilet: false
+            hentingFeilet: false,
         });
         const nextState = virksomhet(currentState, action);
         expect(nextState).to.deep.equal({
             data: {
-                "8877766": "NAV Consulting"
+                '8877766': 'NAV Consulting'
             },
             henter: false,
             hentingFeilet: false,
         })
     });
 
-    it("Håndterer virksomhetHentet når det finnes data fra før", () => {
+    it('Håndterer virksomhetHentet når det finnes data fra før', () => {
         const data = {
-            navn: "NAV Consulting",
-        }
-        const orgnummer = "8877766";
+            navn: 'NAV Consulting',
+        };
+        const orgnummer = '8877766';
         const action = actions.virksomhetHentet(orgnummer, data);
         const currentState = deepFreeze({
             data: {
-                "123": "BEKK"
+                '123': 'BEKK',
             },
             henter: true,
             hentingFeilet: false
@@ -61,15 +61,15 @@ describe("virksomhet", () => {
         const nextState = virksomhet(currentState, action);
         expect(nextState).to.deep.equal({
             data: {
-                "8877766": "NAV Consulting",
-                "123": "BEKK"
+                '8877766': 'NAV Consulting',
+                '123': 'BEKK',
             },
             henter: false,
             hentingFeilet: false,
         })
     });
 
-    it("Håndterer hentVirksomhetFeilet", () => {
+    it('Håndterer hentVirksomhetFeilet', () => {
         const action = actions.hentVirksomhetFeilet();
         const currentState = deepFreeze({
             data: {},
@@ -83,5 +83,4 @@ describe("virksomhet", () => {
             hentingFeilet: true,
         })
     });
-
 });

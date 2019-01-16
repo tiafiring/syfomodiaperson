@@ -1,8 +1,11 @@
 import { expect } from 'chai';
-import { hentDiskresjonskodeSaga } from '../../js/sagas/diskresjonskodeSagas.js';
-import { get } from '../../js/api/index';
 import { put, call } from 'redux-saga/effects';
-import * as actiontyper from '../../js/actions/actiontyper';
+import { hentDiskresjonskodeSaga } from '../../js/sagas/diskresjonskodeSagas';
+import { get } from '../../js/api/index';
+import {
+    HENTER_DISKRESJONSKODE,
+    DISKRESJONSKODE_HENTET,
+} from '../../js/actions/actiontyper';
 
 describe('diskresjonskodeSagas', () => {
     beforeEach(() => {
@@ -15,9 +18,9 @@ describe('diskresjonskodeSagas', () => {
         fnr: '1',
     });
 
-    it('Skal dispatche HENTER_DISKRESJONSKODE', () => {
+    it(`Skal dispatche ${HENTER_DISKRESJONSKODE}`, () => {
         const nextPut = put({
-            type: actiontyper.HENTER_DISKRESJONSKODE,
+            type: HENTER_DISKRESJONSKODE,
         });
         expect(generator.next().value).to.deep.equal(nextPut);
     });
@@ -27,9 +30,9 @@ describe('diskresjonskodeSagas', () => {
         expect(generator.next().value).to.deep.equal(nextCall);
     });
 
-    it('Skal dernest sette DISKRESJONSKODE_HENTET', () => {
+    it(`Skal dernest sette ${DISKRESJONSKODE_HENTET}`, () => {
         const nextPut = put({
-            type: actiontyper.DISKRESJONSKODE_HENTET,
+            type: DISKRESJONSKODE_HENTET,
             data: 'mine data',
         });
         expect(generator.next('mine data').value).to.deep.equal(nextPut);

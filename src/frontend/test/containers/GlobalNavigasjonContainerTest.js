@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import { mapStateToProps } from '../../js/containers/GlobalNavigasjonContainer';
 
 describe('GlobalNavigasjonContainer', () => {
-
     describe('mapStateToProps', () => {
         const state = {
             navbruker: {
@@ -18,7 +17,7 @@ describe('GlobalNavigasjonContainer', () => {
             },
             motebehov: {
                 data: [],
-            }
+            },
         };
 
         it('Skal returnere fnr', () => {
@@ -46,7 +45,7 @@ describe('GlobalNavigasjonContainer', () => {
 
             const props = mapStateToProps(state, ownProps);
 
-            expect(props.motebehov).to.be.undefined;
+            expect(props.motebehov).to.be.equal(undefined);
         });
 
         it('Skal returnere hentingFeilet når henting av møtebehov feiler', () => {
@@ -58,7 +57,7 @@ describe('GlobalNavigasjonContainer', () => {
 
             const props = mapStateToProps(state, ownProps);
 
-            expect(props.motebehovReducer.hentingFeilet).to.be.true;
+            expect(props.motebehovReducer.hentingFeilet).to.be.equal(true);
         });
 
         it('Skal returnere hentingFeilet når henting av møtebehov ikke feiler', () => {
@@ -70,7 +69,7 @@ describe('GlobalNavigasjonContainer', () => {
 
             const props = mapStateToProps(state, ownProps);
 
-            expect(props.motebehovReducer.hentingFeilet).to.be.false;
+            expect(props.motebehovReducer.hentingFeilet).to.be.equal(false);
         });
     });
 });

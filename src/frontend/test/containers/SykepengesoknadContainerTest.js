@@ -1,8 +1,8 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import { Container, mapStateToProps } from '../../js/containers/SykepengesoknadContainer';
 import sinon from 'sinon';
+import { Container, mapStateToProps } from '../../js/containers/SykepengesoknadContainer';
 import soknader from '../../js/reducers/soknader';
 import sykepengesoknader from '../../js/reducers/sykepengesoknader';
 import ledetekster from '../../js/reducers/ledetekster';
@@ -117,5 +117,4 @@ describe('SykepengesoknadContainer', () => {
             expect(component.find(Feilmelding).length).to.equal(1);
         });
     });
-
 });

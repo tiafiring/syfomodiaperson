@@ -5,19 +5,13 @@ import {
     getSvar,
 } from '../../js/utils/moteplanleggerUtils';
 import {
-    moteBekreftet,
-    moteAvbrutt,
     moteIkkeBesvart,
-    bareEtAlternativ,
-    moteBekreftetFlereAlternativer,
-    moteBesvartAvArbeidsgiver,
     moteBesvartAlleAlternativer,
     moteBesvartMedNyeAlternativerBesvart,
     moteBesvartMedNyeAlternativerIkkeBesvart,
 } from '../mockdata/mockMoteforesporsel';
 
 describe('moteplanleggerUtils', () => {
-
     describe('getTidligereAlternativer', () => {
         describe('Når innlogget bruker er "Bruker"', () => {
             it('Skal returnere ingen dersom bruker ikke har svart tidligere', () => {

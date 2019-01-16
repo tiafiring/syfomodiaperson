@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { mount, shallow, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import {
     Tidslinje,
 } from 'digisyfo-npm';
@@ -58,7 +58,6 @@ describe('TidslinjeContainer', () => {
     });
 
     describe('mapStateToProps', () => {
-
         it('Skal returnere fnr === fnr hvis fnr finnes', () => {
             const props = mapStateToProps(state, ownProps);
             expect(props.fnr).to.equal('887766');
@@ -79,7 +78,7 @@ describe('TidslinjeContainer', () => {
                 hash: '#1/3',
             };
             const props = mapStateToProps(state, ownProps);
-            expect(props.apneHendelseIder).to.deep.equal(['1', '3'])
+            expect(props.apneHendelseIder).to.deep.equal(['1', '3']);
             ownProps.location = {
                 hash: '#8/banan',
             };
@@ -89,37 +88,36 @@ describe('TidslinjeContainer', () => {
 
         it('Skal returnere hentingFeilet', () => {
             const props0 = mapStateToProps(state, ownProps);
-            expect(props0.hentingFeilet).to.be.false;
+            expect(props0.hentingFeilet).to.be.equal(false);
 
             state.ledetekster.hentingFeilet = true;
             const props1 = mapStateToProps(state, ownProps);
-            expect(props1.hentingFeilet).to.be.true;
-            
+            expect(props1.hentingFeilet).to.be.equal(true);
+
             state.ledetekster.hentingFeilet = false;
             state.sykeforloep.hentingFeilet = true;
             const props2 = mapStateToProps(state, ownProps);
-            expect(props2.hentingFeilet).to.be.true;
+            expect(props2.hentingFeilet).to.be.equal(true);
         });
 
         it('Skal returnere henter', () => {
             const props0 = mapStateToProps(state, ownProps);
-            expect(props0.henter).to.be.false;
+            expect(props0.henter).to.be.equal(false);
 
             state.ledetekster.henter = true;
             const props1 = mapStateToProps(state, ownProps);
-            expect(props1.henter).to.be.true;
-            
+            expect(props1.henter).to.be.equal(true);
+
             state.ledetekster.henter = false;
             state.sykeforloep.henter = true;
             const props2 = mapStateToProps(state, ownProps);
-            expect(props2.henter).to.be.true;
+            expect(props2.henter).to.be.equal(true);
         });
 
         it('Skal returnere ledetekster', () => {
             const props = mapStateToProps(state, ownProps);
-            expect(props.ledetekster).to.deep.equal({min: 'tekst'})
+            expect(props.ledetekster).to.deep.equal({min: 'tekst'});
         });
-
     });
 
     describe('TidslinjeSide', () => {
@@ -135,12 +133,12 @@ describe('TidslinjeContainer', () => {
             sykeforloep = {
                 henter: false,
                 hentet: false,
-                data: []
+                data: [],
             };
             tilgang = {
                 harTilgang: true,
             };
-            ledetekster = { henter: false, data: {} },
+            ledetekster = { henter: false, data: {} };
             hentTidslinjer = sinon.spy();
             hentSykeforloep = sinon.spy();
             actions = {
@@ -156,7 +154,7 @@ describe('TidslinjeContainer', () => {
                 actions={actions}
                 sykeforloep={sykeforloep}
             />);
-            expect(komponent.contains(<AppSpinner />)).to.be.true;
+            expect(komponent.contains(<AppSpinner />)).to.be.equal(true);
         });
 
         it('Skal vise Feilmelding dersom hentingFeilet = true', () => {
@@ -166,7 +164,7 @@ describe('TidslinjeContainer', () => {
                 actions={actions}
                 sykeforloep={sykeforloep}
             />);
-            expect(komponent.contains(<Feilmelding />)).to.be.true;
+            expect(komponent.contains(<Feilmelding />)).to.be.equal(true);
         });
 
         it('Skal vise Feilmelding dersom ikke tilgang = true', () => {
@@ -202,7 +200,7 @@ describe('TidslinjeContainer', () => {
                 fnr='12'
                 sykeforloep={sykeforloep}
             />);
-            expect(hentSykeforloep.called).to.be.true;
+            expect(hentSykeforloep.called).to.be.equal(true);
         });
 
         it('Skal ikke hente sykeforloep, om sykeforloep er hentet', () => {
@@ -214,7 +212,7 @@ describe('TidslinjeContainer', () => {
                     hentet: true,
                 })}
             />);
-            expect(hentSykeforloep.called).to.be.false;
+            expect(hentSykeforloep.called).to.be.equal(false);
         });
     });
 });
