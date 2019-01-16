@@ -52,7 +52,10 @@ export class MotebookingSide extends Component {
                         />);
                     }
                     if (mote) {
-                        return <MotestatusContainer fnr={fnr} moteUuid={mote.moteUuid} />;
+                        return (<MotestatusContainer
+                            fnr={fnr}
+                            moteUuid={mote.moteUuid}
+                        />);
                     }
                     return <MotebookingSkjemaContainer {...this.props} />;
                 })()

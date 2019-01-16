@@ -216,7 +216,7 @@ export default function moter(state = defaultState, action) {
                 });
             });
 
-            return Object.assign({}, {
+            return Object.assign({}, state, {
                 data,
                 antallNyeTidspunkt: 0,
                 nyeAlternativFeilet: false,
