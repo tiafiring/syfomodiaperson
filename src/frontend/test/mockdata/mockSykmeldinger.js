@@ -181,12 +181,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -311,12 +311,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -441,12 +441,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -571,12 +571,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -701,12 +701,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -831,12 +831,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -957,12 +957,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -1083,12 +1083,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -1213,12 +1213,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -1474,7 +1474,7 @@ const mockSykmeldinger = [
             aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -1599,12 +1599,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -1729,12 +1729,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -1859,12 +1859,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -1989,12 +1989,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -2119,12 +2119,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -2249,12 +2249,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -2375,12 +2375,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -2501,12 +2501,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -2631,12 +2631,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -2757,12 +2757,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -2877,12 +2877,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -2997,12 +2997,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -3117,12 +3117,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -3237,12 +3237,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -3357,12 +3357,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -3483,12 +3483,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -3609,12 +3609,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -3739,12 +3739,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -3865,12 +3865,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -3991,12 +3991,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -4117,12 +4117,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -4243,12 +4243,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -4369,12 +4369,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -4504,12 +4504,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -4681,10 +4681,10 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: null,
-           aarsakAktivitetIkkeMulig434: null,
-           aktivitetIkkeMulig433: null,
-           aktivitetIkkeMulig434: null,
+            aarsakAktivitetIkkeMulig433: null,
+            aarsakAktivitetIkkeMulig434: null,
+            aktivitetIkkeMulig433: null,
+            aktivitetIkkeMulig434: null,
             perioder: [
                 {
                     avventende: null,
@@ -4807,12 +4807,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -4937,12 +4937,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -5067,12 +5067,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -5193,12 +5193,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -5323,12 +5323,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -5449,12 +5449,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -5569,12 +5569,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -5689,12 +5689,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -5809,12 +5809,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -5939,12 +5939,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -6065,12 +6065,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -6185,12 +6185,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -6311,12 +6311,12 @@ const mockSykmeldinger = [
         },
         mottakendeArbeidsgiver: null,
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [
@@ -6441,12 +6441,12 @@ const mockSykmeldinger = [
             virksomhetsnummer: '000111222',
         },
         mulighetForArbeid: {
-           aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
-           aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-           aktivitetIkkeMulig433: [
+            aarsakAktivitetIkkeMulig433: 'andre årsaker til sykefravær',
+            aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
+            aktivitetIkkeMulig433: [
                 'Annet',
             ],
-           aktivitetIkkeMulig434: [
+            aktivitetIkkeMulig434: [
                 'Annet',
             ],
             perioder: [

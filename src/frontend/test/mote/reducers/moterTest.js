@@ -1,90 +1,90 @@
 import { expect } from 'chai';
-import moter from '../../../js/reducers/moter';
-import * as actions from '../../../js/actions/moter_actions';
 import deepFreeze from 'deep-freeze';
 import sinon from 'sinon';
+import moter from '../../../js/reducers/moter';
+import * as actions from '../../../js/actions/moter_actions';
 
 export const getMote = (mote) => {
     return Object.assign({}, {
-       status: 'OPPRETTET',
-       moteUuid: 'min-mote-uuid',
-       opprettetTidspunkt: new Date('2017-02-22T15:18:24.000Z'),
-       bekreftetTidspunkt: null,
-       deltakere: [{
-           hendelser: [],
-           deltakerUuid: 'uuid1',
-           navn: 'Are Arbeidsgiver',
-           orgnummer: '012345678',
-           epost: 'are.arbeidsgiver@nav.no',
-           type: 'arbeidsgiver',
-           svartidspunkt: null,
-           svar: [{
-               id: 1,
-               tid: new Date('2017-03-07T15:18:24.000Z'),
-               created: new Date('2017-02-22T15:18:24.000Z'),
-               sted: 'Testveien 2',
-               valgt: false
+        status: 'OPPRETTET',
+        moteUuid: 'min-mote-uuid',
+        opprettetTidspunkt: new Date('2017-02-22T15:18:24.000Z'),
+        bekreftetTidspunkt: null,
+        deltakere: [{
+            hendelser: [],
+            deltakerUuid: 'uuid1',
+            navn: 'Are Arbeidsgiver',
+            orgnummer: '012345678',
+            epost: 'are.arbeidsgiver@nav.no',
+            type: 'arbeidsgiver',
+            svartidspunkt: null,
+            svar: [{
+                id: 1,
+                tid: new Date('2017-03-07T15:18:24.000Z'),
+                created: new Date('2017-02-22T15:18:24.000Z'),
+                sted: 'Testveien 2',
+                valgt: false
             }, {
-               id: 3,
-               tid: new Date('2017-02-25T15:18:24.000Z'),
-               created: new Date('2017-02-22T15:18:24.000Z'),
-               sted: 'Testveien 2',
-               valgt: false
+                id: 3,
+                tid: new Date('2017-02-25T15:18:24.000Z'),
+                created: new Date('2017-02-22T15:18:24.000Z'),
+                sted: 'Testveien 2',
+                valgt: false
             }, {
-               id: 2,
-               tid: new Date('2017-03-09T15:18:24.000Z'),
-               created: new Date('2017-02-22T15:18:24.000Z'),
-               sted: 'Testveien 2',
-               valgt: false
+                id: 2,
+                tid: new Date('2017-03-09T15:18:24.000Z'),
+                created: new Date('2017-02-22T15:18:24.000Z'),
+                sted: 'Testveien 2',
+                valgt: false
             }],
         }, {
-           hendelser: [],
-           deltakerUuid: 'uuid2',
-           navn: 'Sygve Sykmeldt',
-           orgnummer: null,
-           epost: null,
-           type: 'Bruker',
-           svartidspunkt: null,
-           svar: [{
-               id: 1,
-               tid: new Date('2017-03-07T15:18:24.000Z'),
-               created: new Date('2017-02-22T15:18:24.000Z'),
-               sted: 'Testveien 2',
-               valgt: false
+            hendelser: [],
+            deltakerUuid: 'uuid2',
+            navn: 'Sygve Sykmeldt',
+            orgnummer: null,
+            epost: null,
+            type: 'Bruker',
+            svartidspunkt: null,
+            svar: [{
+                id: 1,
+                tid: new Date('2017-03-07T15:18:24.000Z'),
+                created: new Date('2017-02-22T15:18:24.000Z'),
+                sted: 'Testveien 2',
+                valgt: false
             }, {
-               id: 3,
-               tid: new Date('2017-02-25T15:18:24.000Z'),
-               created: new Date('2017-02-22T15:18:24.000Z'),
-               sted: 'Testveien 2',
-               valgt: false
+                id: 3,
+                tid: new Date('2017-02-25T15:18:24.000Z'),
+                created: new Date('2017-02-22T15:18:24.000Z'),
+                sted: 'Testveien 2',
+                valgt: false
             }, {
-               id: 2,
-               tid: new Date('2017-03-09T15:18:24.000Z'),
-               created: new Date('2017-02-22T15:18:24.000Z'),
-               sted: 'Testveien 2',
-               valgt: false
+                id: 2,
+                tid: new Date('2017-03-09T15:18:24.000Z'),
+                created: new Date('2017-02-22T15:18:24.000Z'),
+                sted: 'Testveien 2',
+                valgt: false
             }],
         }],
-       bekreftetAlternativ: null,
-       alternativer: [{
-           id: 1,
-           tid: new Date('2017-03-07T15:18:24.000Z'),
-           created: new Date('2017-02-22T15:18:24.000Z'),
-           sted: 'Testveien 2',
-           valgt: false
+        bekreftetAlternativ: null,
+        alternativer: [{
+            id: 1,
+            tid: new Date('2017-03-07T15:18:24.000Z'),
+            created: new Date('2017-02-22T15:18:24.000Z'),
+            sted: 'Testveien 2',
+            valgt: false
         }, {
-           id: 3,
-           tid: new Date('2017-02-25T15:18:24.000Z'),
-           created: new Date('2017-02-22T15:18:24.000Z'),
-           sted: 'Testveien 2',
-           valgt: false
+            id: 3,
+            tid: new Date('2017-02-25T15:18:24.000Z'),
+            created: new Date('2017-02-22T15:18:24.000Z'),
+            sted: 'Testveien 2',
+            valgt: false
         }, {
-           id: 2,
-           tid: new Date('2017-02-25T15:18:24.000Z'),
-           created: new Date('2017-02-22T15:18:24.000Z'),
-           sted: 'Testveien 2',
-           valgt: false
-        }, ],
+            id: 2,
+            tid: new Date('2017-02-25T15:18:24.000Z'),
+            created: new Date('2017-02-22T15:18:24.000Z'),
+            sted: 'Testveien 2',
+            valgt: false
+        },],
     }, mote);
 };
 
@@ -158,129 +158,129 @@ describe('moter', () => {
                 henter: true,
             });
             const action = actions.moterHentet([{
-               status: 'OPPRETTET',
-               opprettetTidspunkt: '2017-02-22T15:18:24.000Z',
-               bekreftetTidspunkt: null,
-               deltakere: [{
-                   hendelser: [],
-                   deltakerUuid: 'uuid1',
-                   navn: 'Are Arbeidsgiver',
-                   orgnummer: '012345678',
-                   epost: 'are.arbeidsgiver@nav.no',
-                   type: 'arbeidsgiver',
-                   svartidspunkt: '2017-03-07T15:18:24.000Z',
-                   svar: [{
-                       id: 1,
-                       tid: '2017-03-07T15:18:24.000Z',
-                       created: '2017-02-22T15:18:24.000Z',
-                       sted: 'Testveien 2',
-                       valgt: false
+                status: 'OPPRETTET',
+                opprettetTidspunkt: '2017-02-22T15:18:24.000Z',
+                bekreftetTidspunkt: null,
+                deltakere: [{
+                    hendelser: [],
+                    deltakerUuid: 'uuid1',
+                    navn: 'Are Arbeidsgiver',
+                    orgnummer: '012345678',
+                    epost: 'are.arbeidsgiver@nav.no',
+                    type: 'arbeidsgiver',
+                    svartidspunkt: '2017-03-07T15:18:24.000Z',
+                    svar: [{
+                        id: 1,
+                        tid: '2017-03-07T15:18:24.000Z',
+                        created: '2017-02-22T15:18:24.000Z',
+                        sted: 'Testveien 2',
+                        valgt: false
                     }, {
-                       id: 2,
-                       tid: '2017-03-09T15:18:24.000Z',
-                       created: '2017-02-22T15:18:24.000Z',
-                       sted: 'Testveien 2',
-                       valgt: false
+                        id: 2,
+                        tid: '2017-03-09T15:18:24.000Z',
+                        created: '2017-02-22T15:18:24.000Z',
+                        sted: 'Testveien 2',
+                        valgt: false
                     }],
                 }, {
-                   hendelser: [],
-                   deltakerUuid: 'uuid2',
-                   navn: 'Sygve Sykmeldt',
-                   orgnummer: null,
-                   epost: null,
-                   type: 'Bruker',
-                   svartidspunkt: null,
-                   svar: [{
-                       id: 1,
-                       tid: '2017-03-07T15:18:24.000Z',
-                       created: '2017-02-22T15:18:24.000Z',
-                       sted: 'Testveien 2',
-                       valgt: false
+                    hendelser: [],
+                    deltakerUuid: 'uuid2',
+                    navn: 'Sygve Sykmeldt',
+                    orgnummer: null,
+                    epost: null,
+                    type: 'Bruker',
+                    svartidspunkt: null,
+                    svar: [{
+                        id: 1,
+                        tid: '2017-03-07T15:18:24.000Z',
+                        created: '2017-02-22T15:18:24.000Z',
+                        sted: 'Testveien 2',
+                        valgt: false
                     }, {
-                       id: 2,
-                       tid: '2017-03-09T15:18:24.000Z',
-                       created: '2017-02-22T15:18:24.000Z',
-                       sted: 'Testveien 2',
-                       valgt: false
+                        id: 2,
+                        tid: '2017-03-09T15:18:24.000Z',
+                        created: '2017-02-22T15:18:24.000Z',
+                        sted: 'Testveien 2',
+                        valgt: false
                     }],
                 }],
-               bekreftetAlternativ: null,
-               alternativer: [{
-                   id: 1,
-                   tid: '2017-03-07T15:18:24.000Z',
-                   created: '2017-02-22T15:18:24.000Z',
-                   sted: 'Testveien 2',
-                   valgt: false
+                bekreftetAlternativ: null,
+                alternativer: [{
+                    id: 1,
+                    tid: '2017-03-07T15:18:24.000Z',
+                    created: '2017-02-22T15:18:24.000Z',
+                    sted: 'Testveien 2',
+                    valgt: false
                 }, {
-                   id: 2,
-                   tid: '2017-03-09T15:18:24.000Z',
-                   created: '2017-02-22T15:18:24.000Z',
-                   sted: 'Testveien 2',
-                   valgt: false
+                    id: 2,
+                    tid: '2017-03-09T15:18:24.000Z',
+                    created: '2017-02-22T15:18:24.000Z',
+                    sted: 'Testveien 2',
+                    valgt: false
                 }],
             }]);
             const nextState = moter(initialState, action);
             expect(nextState).to.deep.equal({
                 data: [{
-                   status: 'OPPRETTET',
-                   opprettetTidspunkt: new Date('2017-02-22T15:18:24.000Z'),
-                   bekreftetTidspunkt: null,
-                   deltakere: [{
-                       hendelser: [],
-                       deltakerUuid: 'uuid1',
-                       navn: 'Are Arbeidsgiver',
-                       orgnummer: '012345678',
-                       epost: 'are.arbeidsgiver@nav.no',
-                       type: 'arbeidsgiver',
-                       svartidspunkt: new Date('2017-03-07T15:18:24.000Z'),
-                       svar: [{
-                           id: 1,
-                           tid: new Date('2017-03-07T15:18:24.000Z'),
-                           created: new Date('2017-02-22T15:18:24.000Z'),
-                           sted: 'Testveien 2',
-                           valgt: false
+                    status: 'OPPRETTET',
+                    opprettetTidspunkt: new Date('2017-02-22T15:18:24.000Z'),
+                    bekreftetTidspunkt: null,
+                    deltakere: [{
+                        hendelser: [],
+                        deltakerUuid: 'uuid1',
+                        navn: 'Are Arbeidsgiver',
+                        orgnummer: '012345678',
+                        epost: 'are.arbeidsgiver@nav.no',
+                        type: 'arbeidsgiver',
+                        svartidspunkt: new Date('2017-03-07T15:18:24.000Z'),
+                        svar: [{
+                            id: 1,
+                            tid: new Date('2017-03-07T15:18:24.000Z'),
+                            created: new Date('2017-02-22T15:18:24.000Z'),
+                            sted: 'Testveien 2',
+                            valgt: false
                         }, {
-                           id: 2,
-                           tid: new Date('2017-03-09T15:18:24.000Z'),
-                           created: new Date('2017-02-22T15:18:24.000Z'),
-                           sted: 'Testveien 2',
-                           valgt: false
+                            id: 2,
+                            tid: new Date('2017-03-09T15:18:24.000Z'),
+                            created: new Date('2017-02-22T15:18:24.000Z'),
+                            sted: 'Testveien 2',
+                            valgt: false
                         }],
                     }, {
-                       hendelser: [],
-                       deltakerUuid: 'uuid2',
-                       navn: 'Sygve Sykmeldt',
-                       orgnummer: null,
-                       epost: null,
-                       type: 'Bruker',
-                       svartidspunkt: null,
-                       svar: [{
-                           id: 1,
-                           tid: new Date('2017-03-07T15:18:24.000Z'),
-                           created: new Date('2017-02-22T15:18:24.000Z'),
-                           sted: 'Testveien 2',
-                           valgt: false
+                        hendelser: [],
+                        deltakerUuid: 'uuid2',
+                        navn: 'Sygve Sykmeldt',
+                        orgnummer: null,
+                        epost: null,
+                        type: 'Bruker',
+                        svartidspunkt: null,
+                        svar: [{
+                            id: 1,
+                            tid: new Date('2017-03-07T15:18:24.000Z'),
+                            created: new Date('2017-02-22T15:18:24.000Z'),
+                            sted: 'Testveien 2',
+                            valgt: false
                         }, {
-                           id: 2,
-                           tid: new Date('2017-03-09T15:18:24.000Z'),
-                           created: new Date('2017-02-22T15:18:24.000Z'),
-                           sted: 'Testveien 2',
-                           valgt: false
+                            id: 2,
+                            tid: new Date('2017-03-09T15:18:24.000Z'),
+                            created: new Date('2017-02-22T15:18:24.000Z'),
+                            sted: 'Testveien 2',
+                            valgt: false
                         }],
                     }],
-                   bekreftetAlternativ: null,
-                   alternativer: [{
-                       id: 1,
-                       tid: new Date('2017-03-07T15:18:24.000Z'),
-                       created: new Date('2017-02-22T15:18:24.000Z'),
-                       sted: 'Testveien 2',
-                       valgt: false
+                    bekreftetAlternativ: null,
+                    alternativer: [{
+                        id: 1,
+                        tid: new Date('2017-03-07T15:18:24.000Z'),
+                        created: new Date('2017-02-22T15:18:24.000Z'),
+                        sted: 'Testveien 2',
+                        valgt: false
                     }, {
-                       id: 2,
-                       tid: new Date('2017-03-09T15:18:24.000Z'),
-                       created: new Date('2017-02-22T15:18:24.000Z'),
-                       sted: 'Testveien 2',
-                       valgt: false
+                        id: 2,
+                        tid: new Date('2017-03-09T15:18:24.000Z'),
+                        created: new Date('2017-02-22T15:18:24.000Z'),
+                        sted: 'Testveien 2',
+                        valgt: false
                     }],
                 }],
                 henter: false,
@@ -298,141 +298,141 @@ describe('moter', () => {
                 henter: true,
             });
             const action = actions.moterHentet([{
-               status: 'BEKREFTET',
-               opprettetTidspunkt: '2017-02-22T15:18:24.000Z',
-               bekreftetTidspunkt: '2017-02-25T15:18:24.000Z',
-               deltakere: [{
-                   hendelser: [],
-                   deltakerUuid: 'uuid1',
-                   navn: 'Are Arbeidsgiver',
-                   orgnummer: '012345678',
-                   epost: 'are.arbeidsgiver@nav.no',
-                   type: 'arbeidsgiver',
-                   svartidspunkt: '2017-03-07T15:18:24.000Z',
-                   svar: [{
-                       id: 1,
-                       tid: '2017-03-07T15:18:24.000Z',
-                       created: '2017-02-22T15:18:24.000Z',
-                       sted: 'Testveien 2',
-                       valgt: false
+                status: 'BEKREFTET',
+                opprettetTidspunkt: '2017-02-22T15:18:24.000Z',
+                bekreftetTidspunkt: '2017-02-25T15:18:24.000Z',
+                deltakere: [{
+                    hendelser: [],
+                    deltakerUuid: 'uuid1',
+                    navn: 'Are Arbeidsgiver',
+                    orgnummer: '012345678',
+                    epost: 'are.arbeidsgiver@nav.no',
+                    type: 'arbeidsgiver',
+                    svartidspunkt: '2017-03-07T15:18:24.000Z',
+                    svar: [{
+                        id: 1,
+                        tid: '2017-03-07T15:18:24.000Z',
+                        created: '2017-02-22T15:18:24.000Z',
+                        sted: 'Testveien 2',
+                        valgt: false
                     }, {
-                       id: 2,
-                       tid: '2017-03-09T15:18:24.000Z',
-                       created: '2017-02-22T15:18:24.000Z',
-                       sted: 'Testveien 2',
-                       valgt: false
+                        id: 2,
+                        tid: '2017-03-09T15:18:24.000Z',
+                        created: '2017-02-22T15:18:24.000Z',
+                        sted: 'Testveien 2',
+                        valgt: false
                     }],
                 }, {
-                   hendelser: [],
-                   deltakerUuid: 'uuid2',
-                   navn: 'Sygve Sykmeldt',
-                   orgnummer: null,
-                   epost: null,
-                   type: 'Bruker',
-                   svartidspunkt: null,
-                   svar: [{
-                       id: 1,
-                       tid: '2017-03-07T15:18:24.000Z',
-                       created: '2017-02-22T15:18:24.000Z',
-                       sted: 'Testveien 2',
-                       valgt: false
+                    hendelser: [],
+                    deltakerUuid: 'uuid2',
+                    navn: 'Sygve Sykmeldt',
+                    orgnummer: null,
+                    epost: null,
+                    type: 'Bruker',
+                    svartidspunkt: null,
+                    svar: [{
+                        id: 1,
+                        tid: '2017-03-07T15:18:24.000Z',
+                        created: '2017-02-22T15:18:24.000Z',
+                        sted: 'Testveien 2',
+                        valgt: false
                     }, {
-                       id: 2,
-                       tid: '2017-03-09T15:18:24.000Z',
-                       created: '2017-02-22T15:18:24.000Z',
-                       sted: 'Testveien 2',
-                       valgt: false
+                        id: 2,
+                        tid: '2017-03-09T15:18:24.000Z',
+                        created: '2017-02-22T15:18:24.000Z',
+                        sted: 'Testveien 2',
+                        valgt: false
                     }],
                 }],
-               bekreftetAlternativ: {
-                   id: 1,
-                   tid: '2017-03-07T15:18:24.000Z',
-                   created: '2017-02-22T15:18:24.000Z',
-                   sted: 'Testveien 2',
-                   valgt: false
+                bekreftetAlternativ: {
+                    id: 1,
+                    tid: '2017-03-07T15:18:24.000Z',
+                    created: '2017-02-22T15:18:24.000Z',
+                    sted: 'Testveien 2',
+                    valgt: false
                 },
-               alternativer: [{
-                   id: 1,
-                   tid: '2017-03-07T15:18:24.000Z',
-                   created: '2017-02-22T15:18:24.000Z',
-                   sted: 'Testveien 2',
-                   valgt: false
+                alternativer: [{
+                    id: 1,
+                    tid: '2017-03-07T15:18:24.000Z',
+                    created: '2017-02-22T15:18:24.000Z',
+                    sted: 'Testveien 2',
+                    valgt: false
                 }, {
-                   id: 2,
-                   tid: '2017-03-09T15:18:24.000Z',
-                   created: '2017-02-22T15:18:24.000Z',
-                   sted: 'Testveien 2',
-                   valgt: false
+                    id: 2,
+                    tid: '2017-03-09T15:18:24.000Z',
+                    created: '2017-02-22T15:18:24.000Z',
+                    sted: 'Testveien 2',
+                    valgt: false
                 }],
             }]);
             const nextState = moter(initialState, action);
             expect(nextState).to.deep.equal({
                 data: [{
-                   status: 'BEKREFTET',
-                   opprettetTidspunkt: new Date('2017-02-22T15:18:24.000Z'),
-                   bekreftetTidspunkt: new Date('2017-02-25T15:18:24.000Z'),
-                   deltakere: [{
-                       hendelser: [],
-                       deltakerUuid: 'uuid1',
-                       navn: 'Are Arbeidsgiver',
-                       orgnummer: '012345678',
-                       epost: 'are.arbeidsgiver@nav.no',
-                       type: 'arbeidsgiver',
-                       svartidspunkt: new Date('2017-03-07T15:18:24.000Z'),
-                       svar: [{
-                           id: 1,
-                           tid: new Date('2017-03-07T15:18:24.000Z'),
-                           created: new Date('2017-02-22T15:18:24.000Z'),
-                           sted: 'Testveien 2',
-                           valgt: false
+                    status: 'BEKREFTET',
+                    opprettetTidspunkt: new Date('2017-02-22T15:18:24.000Z'),
+                    bekreftetTidspunkt: new Date('2017-02-25T15:18:24.000Z'),
+                    deltakere: [{
+                        hendelser: [],
+                        deltakerUuid: 'uuid1',
+                        navn: 'Are Arbeidsgiver',
+                        orgnummer: '012345678',
+                        epost: 'are.arbeidsgiver@nav.no',
+                        type: 'arbeidsgiver',
+                        svartidspunkt: new Date('2017-03-07T15:18:24.000Z'),
+                        svar: [{
+                            id: 1,
+                            tid: new Date('2017-03-07T15:18:24.000Z'),
+                            created: new Date('2017-02-22T15:18:24.000Z'),
+                            sted: 'Testveien 2',
+                            valgt: false
                         }, {
-                           id: 2,
-                           tid: new Date('2017-03-09T15:18:24.000Z'),
-                           created: new Date('2017-02-22T15:18:24.000Z'),
-                           sted: 'Testveien 2',
-                           valgt: false
+                            id: 2,
+                            tid: new Date('2017-03-09T15:18:24.000Z'),
+                            created: new Date('2017-02-22T15:18:24.000Z'),
+                            sted: 'Testveien 2',
+                            valgt: false
                         }],
                     }, {
-                       hendelser: [],
-                       deltakerUuid: 'uuid2',
-                       navn: 'Sygve Sykmeldt',
-                       orgnummer: null,
-                       epost: null,
-                       type: 'Bruker',
-                       svartidspunkt: null,
-                       svar: [{
-                           id: 1,
-                           tid: new Date('2017-03-07T15:18:24.000Z'),
-                           created: new Date('2017-02-22T15:18:24.000Z'),
-                           sted: 'Testveien 2',
-                           valgt: false,
+                        hendelser: [],
+                        deltakerUuid: 'uuid2',
+                        navn: 'Sygve Sykmeldt',
+                        orgnummer: null,
+                        epost: null,
+                        type: 'Bruker',
+                        svartidspunkt: null,
+                        svar: [{
+                            id: 1,
+                            tid: new Date('2017-03-07T15:18:24.000Z'),
+                            created: new Date('2017-02-22T15:18:24.000Z'),
+                            sted: 'Testveien 2',
+                            valgt: false,
                         }, {
-                           id: 2,
-                           tid: new Date('2017-03-09T15:18:24.000Z'),
-                           created: new Date('2017-02-22T15:18:24.000Z'),
-                           sted: 'Testveien 2',
-                           valgt: false,
+                            id: 2,
+                            tid: new Date('2017-03-09T15:18:24.000Z'),
+                            created: new Date('2017-02-22T15:18:24.000Z'),
+                            sted: 'Testveien 2',
+                            valgt: false,
                         }],
                     }],
-                   bekreftetAlternativ: {
-                       id: 1,
-                       tid: new Date('2017-03-07T15:18:24.000Z'),
-                       created: new Date('2017-02-22T15:18:24.000Z'),
-                       sted: 'Testveien 2',
-                       valgt: false,
+                    bekreftetAlternativ: {
+                        id: 1,
+                        tid: new Date('2017-03-07T15:18:24.000Z'),
+                        created: new Date('2017-02-22T15:18:24.000Z'),
+                        sted: 'Testveien 2',
+                        valgt: false,
                     },
-                   alternativer: [{
-                       id: 1,
-                       tid: new Date('2017-03-07T15:18:24.000Z'),
-                       created: new Date('2017-02-22T15:18:24.000Z'),
-                       sted: 'Testveien 2',
-                       valgt: false,
+                    alternativer: [{
+                        id: 1,
+                        tid: new Date('2017-03-07T15:18:24.000Z'),
+                        created: new Date('2017-02-22T15:18:24.000Z'),
+                        sted: 'Testveien 2',
+                        valgt: false,
                     }, {
-                       id: 2,
-                       tid: new Date('2017-03-09T15:18:24.000Z'),
-                       created: new Date('2017-02-22T15:18:24.000Z'),
-                       sted: 'Testveien 2',
-                       valgt: false,
+                        id: 2,
+                        tid: new Date('2017-03-09T15:18:24.000Z'),
+                        created: new Date('2017-02-22T15:18:24.000Z'),
+                        sted: 'Testveien 2',
+                        valgt: false,
                     }],
                 }],
                 henter: false,
@@ -464,35 +464,35 @@ describe('moter', () => {
         it('Håndterer AVBRYTER_MOTE', () => {
             const initialState = deepFreeze({
                 data: [{
-                   id: 0,
-                   moteUuid: 'b23ee185-cd29-41cb-a109-48d7aad15dc3',
-                   opprettetAv: 'testNAVRessurs',
-                   opprettetTidspunkt: '2016-11-03T13:28:05.244',
-                   navEnhet: 'navEnhet',
-                   deltakere: [{
-                       deltakerUuid: '944c877e-e261-49a4-841e-2ab52349e864',
-                       navn: 'Arve Arbeidsgiver',
-                       epost: 'arve.arbeidsgiver@nav.no',
-                       type: 'arbeidsgiver',
-                       avvik: [],
-                       svar: [{
-                           tid: '2012-12-12T11:00:00Z',
-                           sted: 'Oslo by',
-                           valgt: false,
+                    id: 0,
+                    moteUuid: 'b23ee185-cd29-41cb-a109-48d7aad15dc3',
+                    opprettetAv: 'testNAVRessurs',
+                    opprettetTidspunkt: '2016-11-03T13:28:05.244',
+                    navEnhet: 'navEnhet',
+                    deltakere: [{
+                        deltakerUuid: '944c877e-e261-49a4-841e-2ab52349e864',
+                        navn: 'Arve Arbeidsgiver',
+                        epost: 'arve.arbeidsgiver@nav.no',
+                        type: 'arbeidsgiver',
+                        avvik: [],
+                        svar: [{
+                            tid: '2012-12-12T11:00:00Z',
+                            sted: 'Oslo by',
+                            valgt: false,
                         }, {
-                           tid: '2009-09-09T07:00:00Z',
-                           sted: 'Oslo by',
-                           valgt: false,
+                            tid: '2009-09-09T07:00:00Z',
+                            sted: 'Oslo by',
+                            valgt: false,
                         }],
                     }],
-                   alternativer: [{
-                       tid: '2012-12-12T11:00:00Z',
-                       sted: 'Oslo by',
-                       valgt: false,
+                    alternativer: [{
+                        tid: '2012-12-12T11:00:00Z',
+                        sted: 'Oslo by',
+                        valgt: false,
                     }, {
-                       tid: '2009-09-09T07:00:00Z',
-                       sted: 'Oslo by',
-                       valgt: false,
+                        tid: '2009-09-09T07:00:00Z',
+                        sted: 'Oslo by',
+                        valgt: false,
                     }],
                 }],
             });
@@ -505,35 +505,35 @@ describe('moter', () => {
         it('Håndterer MOTE_AVBRUTT', () => {
             const initialState = deepFreeze({
                 data: [{
-                   id: 0,
-                   moteUuid: 'b23ee185-cd29-41cb-a109-48d7aad15dc3',
-                   opprettetAv: 'testNAVRessurs',
-                   opprettetTidspunkt: '2016-11-03T13:28:05.244',
-                   navEnhet: 'navEnhet',
-                   deltakere: [{
-                       deltakerUuid: '944c877e-e261-49a4-841e-2ab52349e864',
-                       navn: 'Arve Arbeidsgiver',
-                       epost: 'arve.arbeidsgiver@nav.no',
-                       type: 'arbeidsgiver',
-                       avvik: [],
-                       svar: [{
-                           tid: '2012-12-12T11:00:00Z',
-                           sted: 'Oslo by',
-                           valgt: false,
+                    id: 0,
+                    moteUuid: 'b23ee185-cd29-41cb-a109-48d7aad15dc3',
+                    opprettetAv: 'testNAVRessurs',
+                    opprettetTidspunkt: '2016-11-03T13:28:05.244',
+                    navEnhet: 'navEnhet',
+                    deltakere: [{
+                        deltakerUuid: '944c877e-e261-49a4-841e-2ab52349e864',
+                        navn: 'Arve Arbeidsgiver',
+                        epost: 'arve.arbeidsgiver@nav.no',
+                        type: 'arbeidsgiver',
+                        avvik: [],
+                        svar: [{
+                            tid: '2012-12-12T11:00:00Z',
+                            sted: 'Oslo by',
+                            valgt: false,
                         }, {
-                           tid: '2009-09-09T07:00:00Z',
-                           sted: 'Oslo by',
-                           valgt: false,
+                            tid: '2009-09-09T07:00:00Z',
+                            sted: 'Oslo by',
+                            valgt: false,
                         }],
                     }],
-                   alternativer: [{
-                       tid: '2012-12-12T11:00:00Z',
-                       sted: 'Oslo by',
-                       valgt: false,
+                    alternativer: [{
+                        tid: '2012-12-12T11:00:00Z',
+                        sted: 'Oslo by',
+                        valgt: false,
                     }, {
-                       tid: '2009-09-09T07:00:00Z',
-                       sted: 'Oslo by',
-                       valgt: false,
+                        tid: '2009-09-09T07:00:00Z',
+                        sted: 'Oslo by',
+                        valgt: false,
                     }],
                 }],
             });
@@ -563,40 +563,40 @@ describe('moter', () => {
                 data: [{
                     foo: 'bar'
                 }, {
-                   id: 0,
-                   status: 'OPPRETTET',
-                   moteUuid: 'b23ee185-cd29-41cb-a109-48d7aad15dc3',
-                   opprettetAv: 'testNAVRessurs',
-                   opprettetTidspunkt: '2016-11-03T13:28:05.244',
-                   navEnhet: 'navEnhet',
-                   deltakere: [{
-                       deltakerUuid: '944c877e-e261-49a4-841e-2ab52349e864',
-                       navn: 'Arve Arbeidsgiver',
-                       epost: 'arve.arbeidsgiver@nav.no',
-                       type: 'arbeidsgiver',
-                       avvik: [],
-                       svar: [{
-                           tid: '2012-12-12T11:00:00Z',
-                           sted: 'Oslo by',
-                           valgt: false,
-                           id: 6,
+                    id: 0,
+                    status: 'OPPRETTET',
+                    moteUuid: 'b23ee185-cd29-41cb-a109-48d7aad15dc3',
+                    opprettetAv: 'testNAVRessurs',
+                    opprettetTidspunkt: '2016-11-03T13:28:05.244',
+                    navEnhet: 'navEnhet',
+                    deltakere: [{
+                        deltakerUuid: '944c877e-e261-49a4-841e-2ab52349e864',
+                        navn: 'Arve Arbeidsgiver',
+                        epost: 'arve.arbeidsgiver@nav.no',
+                        type: 'arbeidsgiver',
+                        avvik: [],
+                        svar: [{
+                            tid: '2012-12-12T11:00:00Z',
+                            sted: 'Oslo by',
+                            valgt: false,
+                            id: 6,
                         }, {
-                           tid: '2009-09-09T07:00:00Z',
-                           sted: 'Oslo by',
-                           valgt: false,
-                           id: 7
+                            tid: '2009-09-09T07:00:00Z',
+                            sted: 'Oslo by',
+                            valgt: false,
+                            id: 7
                         }],
                     }],
-                   alternativer: [{
-                       id: 6,
-                       tid: '2012-12-12T11:00:00Z',
-                       sted: 'Oslo by',
-                       valgt: false,
+                    alternativer: [{
+                        id: 6,
+                        tid: '2012-12-12T11:00:00Z',
+                        sted: 'Oslo by',
+                        valgt: false,
                     }, {
-                       id: 7,
-                       tid: '2009-09-09T07:00:00Z',
-                       sted: 'Oslo by',
-                       valgt: false,
+                        id: 7,
+                        tid: '2009-09-09T07:00:00Z',
+                        sted: 'Oslo by',
+                        valgt: false,
                     }],
                 }],
             });
@@ -618,50 +618,50 @@ describe('moter', () => {
             expect(nextState.avbryter).to.be.equal(false);
             expect(nextState.avbrytFeilet).to.be.equal(false);
             expect(nextState.data).to.deep.equal([{
-               foo: 'bar'
+                foo: 'bar'
             },
                 {
-                   id: 0,
-                   status: 'BEKREFTET',
-                   moteUuid: 'b23ee185-cd29-41cb-a109-48d7aad15dc3',
-                   opprettetAv: 'testNAVRessurs',
-                   opprettetTidspunkt: '2016-11-03T13:28:05.244',
-                   navEnhet: 'navEnhet',
-                   bekreftetTidspunkt: new Date('2016-11-03T13:28:05.244'),
-                   deltakere: [{
-                       deltakerUuid: '944c877e-e261-49a4-841e-2ab52349e864',
-                       navn: 'Arve Arbeidsgiver',
-                       epost: 'arve.arbeidsgiver@nav.no',
-                       type: 'arbeidsgiver',
-                       avvik: [],
-                       svar: [{
-                           tid: '2012-12-12T11:00:00Z',
-                           sted: 'Oslo by',
-                           valgt: false,
-                           id: 6
+                    id: 0,
+                    status: 'BEKREFTET',
+                    moteUuid: 'b23ee185-cd29-41cb-a109-48d7aad15dc3',
+                    opprettetAv: 'testNAVRessurs',
+                    opprettetTidspunkt: '2016-11-03T13:28:05.244',
+                    navEnhet: 'navEnhet',
+                    bekreftetTidspunkt: new Date('2016-11-03T13:28:05.244'),
+                    deltakere: [{
+                        deltakerUuid: '944c877e-e261-49a4-841e-2ab52349e864',
+                        navn: 'Arve Arbeidsgiver',
+                        epost: 'arve.arbeidsgiver@nav.no',
+                        type: 'arbeidsgiver',
+                        avvik: [],
+                        svar: [{
+                            tid: '2012-12-12T11:00:00Z',
+                            sted: 'Oslo by',
+                            valgt: false,
+                            id: 6
                         }, {
-                           tid: '2009-09-09T07:00:00Z',
-                           sted: 'Oslo by',
-                           valgt: false,
-                           id: 7
+                            tid: '2009-09-09T07:00:00Z',
+                            sted: 'Oslo by',
+                            valgt: false,
+                            id: 7
                         }],
                     }],
-                   bekreftetAlternativ: {
-                       id: 6,
-                       tid: '2012-12-12T11:00:00Z',
-                       sted: 'Oslo by',
-                       valgt: false,
+                    bekreftetAlternativ: {
+                        id: 6,
+                        tid: '2012-12-12T11:00:00Z',
+                        sted: 'Oslo by',
+                        valgt: false,
                     },
-                   alternativer: [{
-                       id: 6,
-                       tid: '2012-12-12T11:00:00Z',
-                       sted: 'Oslo by',
-                       valgt: false,
+                    alternativer: [{
+                        id: 6,
+                        tid: '2012-12-12T11:00:00Z',
+                        sted: 'Oslo by',
+                        valgt: false,
                     }, {
-                       id: 7,
-                       tid: '2009-09-09T07:00:00Z',
-                       sted: 'Oslo by',
-                       valgt: false,
+                        id: 7,
+                        tid: '2009-09-09T07:00:00Z',
+                        sted: 'Oslo by',
+                        valgt: false,
                     }],
                 }]);
         });
@@ -692,13 +692,13 @@ describe('moter', () => {
                 data: [mote],
             });
             const data = [{
-               tid: '2017-03-09T10:00:00.000',
-               sted: 'Testveien 2',
-               valgt: false,
+                tid: '2017-03-09T10:00:00.000',
+                sted: 'Testveien 2',
+                valgt: false,
             }, {
-               tid: '2017-03-10T10:00:00.000',
-               sted: 'Testveien 2',
-               valgt: false,
+                tid: '2017-03-10T10:00:00.000',
+                sted: 'Testveien 2',
+                valgt: false,
             }];
             const action = actions.opprettFlereAlternativBekreftet(data, 'min-mote-uuid');
             const nextState = moter(initialState, action);
@@ -706,120 +706,120 @@ describe('moter', () => {
             expect(nextState.nyeAlternativFeilet).to.be.equal(false);
             expect(nextState.senderNyeAlternativ).to.be.equal(false);
             expect(nextState.data).to.deep.equal([{
-               status: 'OPPRETTET',
-               moteUuid: 'min-mote-uuid',
-               opprettetTidspunkt: new Date('2017-02-22T15:18:24.000Z'),
-               bekreftetTidspunkt: null,
-               deltakere: [{
-                   hendelser: [],
-                   deltakerUuid: 'uuid1',
-                   navn: 'Are Arbeidsgiver',
-                   orgnummer: '012345678',
-                   epost: 'are.arbeidsgiver@nav.no',
-                   type: 'arbeidsgiver',
-                   svartidspunkt: null,
-                   svar: [{
-                       id: 1,
-                       tid: new Date('2017-03-07T15:18:24.000Z'),
-                       created: new Date('2017-02-22T15:18:24.000Z'),
-                       sted: 'Testveien 2',
-                       valgt: false
+                status: 'OPPRETTET',
+                moteUuid: 'min-mote-uuid',
+                opprettetTidspunkt: new Date('2017-02-22T15:18:24.000Z'),
+                bekreftetTidspunkt: null,
+                deltakere: [{
+                    hendelser: [],
+                    deltakerUuid: 'uuid1',
+                    navn: 'Are Arbeidsgiver',
+                    orgnummer: '012345678',
+                    epost: 'are.arbeidsgiver@nav.no',
+                    type: 'arbeidsgiver',
+                    svartidspunkt: null,
+                    svar: [{
+                        id: 1,
+                        tid: new Date('2017-03-07T15:18:24.000Z'),
+                        created: new Date('2017-02-22T15:18:24.000Z'),
+                        sted: 'Testveien 2',
+                        valgt: false
                     }, {
-                       id: 2,
-                       tid: new Date('2017-03-09T15:18:24.000Z'),
-                       created: new Date('2017-02-22T15:18:24.000Z'),
-                       sted: 'Testveien 2',
-                       valgt: false
+                        id: 2,
+                        tid: new Date('2017-03-09T15:18:24.000Z'),
+                        created: new Date('2017-02-22T15:18:24.000Z'),
+                        sted: 'Testveien 2',
+                        valgt: false
                     }, {
-                       id: 3,
-                       tid: new Date('2017-02-25T15:18:24.000Z'),
-                       created: new Date('2017-02-22T15:18:24.000Z'),
-                       sted: 'Testveien 2',
-                       valgt: false
+                        id: 3,
+                        tid: new Date('2017-02-25T15:18:24.000Z'),
+                        created: new Date('2017-02-22T15:18:24.000Z'),
+                        sted: 'Testveien 2',
+                        valgt: false
                     }, {
-                       id: 4,
-                       tid: new Date('2017-03-09T10:00:00.000'),
-                       created: new Date(),
-                       sted: 'Testveien 2',
-                       valgt: false,
+                        id: 4,
+                        tid: new Date('2017-03-09T10:00:00.000'),
+                        created: new Date(),
+                        sted: 'Testveien 2',
+                        valgt: false,
                     }, {
-                       id: 5,
-                       tid: new Date('2017-03-10T10:00:00.000'),
-                       created: new Date(),
-                       sted: 'Testveien 2',
-                       valgt: false,
+                        id: 5,
+                        tid: new Date('2017-03-10T10:00:00.000'),
+                        created: new Date(),
+                        sted: 'Testveien 2',
+                        valgt: false,
                     }],
                 }, {
-                   hendelser: [],
-                   deltakerUuid: 'uuid2',
-                   navn: 'Sygve Sykmeldt',
-                   orgnummer: null,
-                   epost: null,
-                   type: 'Bruker',
-                   svartidspunkt: null,
-                   svar: [{
-                       id: 1,
-                       tid: new Date('2017-03-07T15:18:24.000Z'),
-                       created: new Date('2017-02-22T15:18:24.000Z'),
-                       sted: 'Testveien 2',
-                       valgt: false,
+                    hendelser: [],
+                    deltakerUuid: 'uuid2',
+                    navn: 'Sygve Sykmeldt',
+                    orgnummer: null,
+                    epost: null,
+                    type: 'Bruker',
+                    svartidspunkt: null,
+                    svar: [{
+                        id: 1,
+                        tid: new Date('2017-03-07T15:18:24.000Z'),
+                        created: new Date('2017-02-22T15:18:24.000Z'),
+                        sted: 'Testveien 2',
+                        valgt: false,
                     }, {
-                       id: 2,
-                       tid: new Date('2017-03-09T15:18:24.000Z'),
-                       created: new Date('2017-02-22T15:18:24.000Z'),
-                       sted: 'Testveien 2',
-                       valgt: false,
+                        id: 2,
+                        tid: new Date('2017-03-09T15:18:24.000Z'),
+                        created: new Date('2017-02-22T15:18:24.000Z'),
+                        sted: 'Testveien 2',
+                        valgt: false,
                     }, {
-                       id: 3,
-                       tid: new Date('2017-02-25T15:18:24.000Z'),
-                       created: new Date('2017-02-22T15:18:24.000Z'),
-                       sted: 'Testveien 2',
-                       valgt: false
+                        id: 3,
+                        tid: new Date('2017-02-25T15:18:24.000Z'),
+                        created: new Date('2017-02-22T15:18:24.000Z'),
+                        sted: 'Testveien 2',
+                        valgt: false
                     }, {
-                       id: 4,
-                       tid: new Date('2017-03-09T10:00:00.000'),
-                       created: new Date(),
-                       sted: 'Testveien 2',
-                       valgt: false,
+                        id: 4,
+                        tid: new Date('2017-03-09T10:00:00.000'),
+                        created: new Date(),
+                        sted: 'Testveien 2',
+                        valgt: false,
                     }, {
-                       id: 5,
-                       tid: new Date('2017-03-10T10:00:00.000'),
-                       created: new Date(),
-                       sted: 'Testveien 2',
-                       valgt: false,
+                        id: 5,
+                        tid: new Date('2017-03-10T10:00:00.000'),
+                        created: new Date(),
+                        sted: 'Testveien 2',
+                        valgt: false,
                     }],
                 }],
-               bekreftetAlternativ: null,
-               alternativer: [{
-                   id: 1,
-                   tid: new Date('2017-03-07T15:18:24.000Z'),
-                   created: new Date('2017-02-22T15:18:24.000Z'),
-                   sted: 'Testveien 2',
-                   valgt: false,
+                bekreftetAlternativ: null,
+                alternativer: [{
+                    id: 1,
+                    tid: new Date('2017-03-07T15:18:24.000Z'),
+                    created: new Date('2017-02-22T15:18:24.000Z'),
+                    sted: 'Testveien 2',
+                    valgt: false,
                 }, {
-                   id: 2,
-                   tid: new Date('2017-02-25T15:18:24.000Z'),
-                   created: new Date('2017-02-22T15:18:24.000Z'),
-                   sted: 'Testveien 2',
-                   valgt: false,
+                    id: 2,
+                    tid: new Date('2017-02-25T15:18:24.000Z'),
+                    created: new Date('2017-02-22T15:18:24.000Z'),
+                    sted: 'Testveien 2',
+                    valgt: false,
                 }, {
-                   id: 3,
-                   tid: new Date('2017-02-25T15:18:24.000Z'),
-                   created: new Date('2017-02-22T15:18:24.000Z'),
-                   sted: 'Testveien 2',
-                   valgt: false
+                    id: 3,
+                    tid: new Date('2017-02-25T15:18:24.000Z'),
+                    created: new Date('2017-02-22T15:18:24.000Z'),
+                    sted: 'Testveien 2',
+                    valgt: false
                 }, {
-                   id: 4,
-                   tid: new Date('2017-03-09T10:00:00.000'),
-                   created: new Date(),
-                   sted: 'Testveien 2',
-                   valgt: false,
+                    id: 4,
+                    tid: new Date('2017-03-09T10:00:00.000'),
+                    created: new Date(),
+                    sted: 'Testveien 2',
+                    valgt: false,
                 }, {
-                   id: 5,
-                   tid: new Date('2017-03-10T10:00:00.000'),
-                   created: new Date(),
-                   sted: 'Testveien 2',
-                   valgt: false,
+                    id: 5,
+                    tid: new Date('2017-03-10T10:00:00.000'),
+                    created: new Date(),
+                    sted: 'Testveien 2',
+                    valgt: false,
                 }],
             }]);
         });

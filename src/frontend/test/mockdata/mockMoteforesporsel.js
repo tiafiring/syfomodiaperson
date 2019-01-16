@@ -110,7 +110,7 @@ export const bareEtAlternativ = () => {
     });
 };
 
-export const moteAvbrutt = getMote({ status: 'AVBRUTT' });
+export const moteAvbrutt = getMote({status: 'AVBRUTT'});
 
 export const moteBekreftet = getMote({
     status: 'BEKREFTET',

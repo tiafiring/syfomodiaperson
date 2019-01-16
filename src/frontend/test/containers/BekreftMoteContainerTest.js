@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
-import { shallow} from 'enzyme';
-import {mapStateToProps, BekreftMoteSide} from '../../js/containers/BekreftMoteContainer';
+import { shallow } from 'enzyme';
+import { BekreftMoteSide, mapStateToProps } from '../../js/containers/BekreftMoteContainer';
 import sinon from 'sinon';
 
 describe('BekreftMoteContainer', () => {
@@ -34,7 +34,8 @@ describe('BekreftMoteContainer', () => {
             const alternativ = {
                 id: 4545
             };
-            const compo = shallow(<BekreftMoteSide fnr='44556677889' hentBekreftMoteEpostinnhold={() => {}} bekreftMote={bekreftMote} alternativ={alternativ} mote={mote} arbeidsgiver={deltaker} />);
+            const compo = shallow(<BekreftMoteSide fnr='44556677889' hentBekreftMoteEpostinnhold={() => {
+            }} bekreftMote={bekreftMote} alternativ={alternativ} mote={mote} arbeidsgiver={deltaker}/>);
             compo.instance().onSubmit();
             expect(bekreftMote.getCall(0).args).to.deep.equal(['Olsen', 4545, '44556677889']);
         });
@@ -43,7 +44,7 @@ describe('BekreftMoteContainer', () => {
             let compo;
 
             beforeEach(() => {
-                compo = shallow(<BekreftMoteSide hentMoter={hentMoter} deltaker={deltaker} fnr='5566' />)
+                compo = shallow(<BekreftMoteSide hentMoter={hentMoter} deltaker={deltaker} fnr='5566'/>)
             });
 
             it('Skal hente møter', () => {
@@ -59,10 +60,10 @@ describe('BekreftMoteContainer', () => {
 
             beforeEach(() => {
                 alternativ = {
-                   id: 328,
-                   tid: '2020-12-12T11:00:00Z',
-                   sted: 'Oslo ',
-                   valgt: false,
+                    id: 328,
+                    tid: '2020-12-12T11:00:00Z',
+                    sted: 'Oslo ',
+                    valgt: false,
                 };
                 mote = {
                     moteUuid: '123',
@@ -80,7 +81,7 @@ describe('BekreftMoteContainer', () => {
                     hentMoter={hentMoter}
                     alternativ={alternativ}
                     mote={mote}
-                    deltaker={deltaker} />)
+                    deltaker={deltaker}/>)
             });
 
             it('Skal ikke hente møter', () => {
@@ -101,61 +102,61 @@ describe('BekreftMoteContainer', () => {
                 },
             };
             state = {
-                ledetekster: { henter: false, data: {} },
-                epostinnhold: { henter: false, data: {} },
+                ledetekster: {henter: false, data: {}},
+                epostinnhold: {henter: false, data: {}},
                 moter: {
                     data: [{
-                       id: 1,
-                       moteUuid: '2fedc0da-efec-4b6e-8597-a021628058ae',
-                       opprettetAv: 'Z990562',
-                       status: 'OPPRETTET',
-                       opprettetTidspunkt: '2016-11-21T11:35:51.870Z',
-                       navEnhet: 'navEnhet',
-                       deltakere: [{
-                           deltakerUuid: '85a12263-d955-4103-b172-bf135df5f37a',
-                           navn: 'Arve Arbeidsgiver',
-                           epost: 'arve.arbeidsgiver@nav.no',
-                           type: 'arbeidsgiver',
-                           avvik: [],
-                           svar: [{
-                               id: 328,
-                               tid: '2020-12-12T11:00:00Z',
-                               sted: 'Oslo ',
-                               valgt: false,
+                        id: 1,
+                        moteUuid: '2fedc0da-efec-4b6e-8597-a021628058ae',
+                        opprettetAv: 'Z990562',
+                        status: 'OPPRETTET',
+                        opprettetTidspunkt: '2016-11-21T11:35:51.870Z',
+                        navEnhet: 'navEnhet',
+                        deltakere: [{
+                            deltakerUuid: '85a12263-d955-4103-b172-bf135df5f37a',
+                            navn: 'Arve Arbeidsgiver',
+                            epost: 'arve.arbeidsgiver@nav.no',
+                            type: 'arbeidsgiver',
+                            avvik: [],
+                            svar: [{
+                                id: 328,
+                                tid: '2020-12-12T11:00:00Z',
+                                sted: 'Oslo ',
+                                valgt: false,
                             }, {
-                               id: 329,
-                               tid: '2020-09-09T07:00:00Z',
-                               sted: 'Oslo ',
-                               valgt: false,
+                                id: 329,
+                                tid: '2020-09-09T07:00:00Z',
+                                sted: 'Oslo ',
+                                valgt: false,
                             }],
                         }, {
-                           deltakerUuid: '85a12263-d955-4103-b172-bf135df5f37b',
-                           navn: 'Andreas Arbeidstaker',
-                           epost: 'andreas.arbeidstaker@nav.no',
-                           type: 'Bruker',
-                           avvik: [],
-                           svar: [{
-                               id: 330,
-                               tid: '2020-12-12T11:00:00Z',
-                               sted: 'Oslo ',
-                               valgt: false,
+                            deltakerUuid: '85a12263-d955-4103-b172-bf135df5f37b',
+                            navn: 'Andreas Arbeidstaker',
+                            epost: 'andreas.arbeidstaker@nav.no',
+                            type: 'Bruker',
+                            avvik: [],
+                            svar: [{
+                                id: 330,
+                                tid: '2020-12-12T11:00:00Z',
+                                sted: 'Oslo ',
+                                valgt: false,
                             }, {
-                               id: 331,
-                               tid: '2020-09-09T07:00:00Z',
-                               sted: 'Oslo ',
-                               valgt: false,
+                                id: 331,
+                                tid: '2020-09-09T07:00:00Z',
+                                sted: 'Oslo ',
+                                valgt: false,
                             }],
                         }],
-                       alternativer: [{
-                           id: 328,
-                           tid: '2020-12-12T11:00:00Z',
-                           sted: 'Oslo ',
-                           valgt: false,
+                        alternativer: [{
+                            id: 328,
+                            tid: '2020-12-12T11:00:00Z',
+                            sted: 'Oslo ',
+                            valgt: false,
                         }, {
-                           id: 329,
-                           tid: '2020-09-09T07:00:00Z',
-                           sted: 'Oslo ',
-                           valgt: false,
+                            id: 329,
+                            tid: '2020-09-09T07:00:00Z',
+                            sted: 'Oslo ',
+                            valgt: false,
                         }],
                     }],
                 },
@@ -186,10 +187,10 @@ describe('BekreftMoteContainer', () => {
         it('Skal returnere alternativ', () => {
             const props = mapStateToProps(state, ownProps);
             expect(props.alternativ).to.deep.equal({
-               id: 328,
-               tid: '2020-12-12T11:00:00Z',
-               sted: 'Oslo ',
-               valgt: false,
+                id: 328,
+                tid: '2020-12-12T11:00:00Z',
+                sted: 'Oslo ',
+                valgt: false,
             });
         });
 

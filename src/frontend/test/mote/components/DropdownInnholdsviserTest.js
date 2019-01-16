@@ -7,71 +7,71 @@ import AppSpinner from '../../../js/components/AppSpinner';
 
 const getMote = (mote) => {
     return Object.assign({}, {
-       status: 'OPPRETTET',
-       opprettetTidspunkt: new Date('2017-02-22T15:18:24.323'),
-       bekreftetTidspunkt: new Date('2017-02-22T15:18:24.323'),
-       bekreftetAlternativ: {
-           id: 1,
-           tid: new Date('2017-03-07T15:18:24.323'),
-           created: new Date('2017-02-22T15:18:24.323'),
-           sted: 'Testveien 2',
-           valgt: false,
+        status: 'OPPRETTET',
+        opprettetTidspunkt: new Date('2017-02-22T15:18:24.323'),
+        bekreftetTidspunkt: new Date('2017-02-22T15:18:24.323'),
+        bekreftetAlternativ: {
+            id: 1,
+            tid: new Date('2017-03-07T15:18:24.323'),
+            created: new Date('2017-02-22T15:18:24.323'),
+            sted: 'Testveien 2',
+            valgt: false,
         },
-       deltakere: [{
-           hendelser: [],
-           deltakerUuid: 'uuid1',
-           navn: 'Are Arbeidsgiver',
-           orgnummer: '012345678',
-           epost: 'are.arbeidsgiver@nav.no',
-           type: 'Arbeidsgiver',
-           svartidspunkt: null,
-           svar: [{
-               id: 1,
-               tid: new Date('2017-03-07T15:18:24.323'),
-               created: new Date('2017-02-22T15:18:24.323'),
-               sted: 'Testveien 2',
-               valgt: false,
+        deltakere: [{
+            hendelser: [],
+            deltakerUuid: 'uuid1',
+            navn: 'Are Arbeidsgiver',
+            orgnummer: '012345678',
+            epost: 'are.arbeidsgiver@nav.no',
+            type: 'Arbeidsgiver',
+            svartidspunkt: null,
+            svar: [{
+                id: 1,
+                tid: new Date('2017-03-07T15:18:24.323'),
+                created: new Date('2017-02-22T15:18:24.323'),
+                sted: 'Testveien 2',
+                valgt: false,
             }, {
-               id: 2,
-               tid: new Date('2017-03-09T15:18:24.323'),
-               created: new Date('2017-02-22T15:18:24.323'),
-               sted: 'Testveien 2',
-               valgt: false,
+                id: 2,
+                tid: new Date('2017-03-09T15:18:24.323'),
+                created: new Date('2017-02-22T15:18:24.323'),
+                sted: 'Testveien 2',
+                valgt: false,
             }],
         }, {
-           hendelser: [],
-           deltakerUuid: 'uuid2',
-           navn: 'Sygve Sykmeldt',
-           orgnummer: null,
-           epost: null,
-           type: 'Bruker',
-           svartidspunkt: null,
-           svar: [{
-               id: 1,
-               tid: new Date('2017-03-07T15:18:24.323'),
-               created: new Date('2017-02-22T15:18:24.323'),
-               sted: 'Testveien 2',
-               valgt: false,
+            hendelser: [],
+            deltakerUuid: 'uuid2',
+            navn: 'Sygve Sykmeldt',
+            orgnummer: null,
+            epost: null,
+            type: 'Bruker',
+            svartidspunkt: null,
+            svar: [{
+                id: 1,
+                tid: new Date('2017-03-07T15:18:24.323'),
+                created: new Date('2017-02-22T15:18:24.323'),
+                sted: 'Testveien 2',
+                valgt: false,
             }, {
-               id: 2,
-               tid: new Date('2017-03-09T15:18:24.323'),
-               created: new Date('2017-02-22T15:18:24.323'),
-               sted: 'Testveien 2',
-               valgt: false,
+                id: 2,
+                tid: new Date('2017-03-09T15:18:24.323'),
+                created: new Date('2017-02-22T15:18:24.323'),
+                sted: 'Testveien 2',
+                valgt: false,
             }],
         }],
-       alternativer: [{
-           id: 1,
-           tid: new Date('2017-03-07T15:18:24.323'),
-           created: new Date('2017-02-22T15:18:24.323'),
-           sted: 'Testveien 2',
-           valgt: false,
+        alternativer: [{
+            id: 1,
+            tid: new Date('2017-03-07T15:18:24.323'),
+            created: new Date('2017-02-22T15:18:24.323'),
+            sted: 'Testveien 2',
+            valgt: false,
         }, {
-           id: 2,
-           tid: new Date('2017-02-25T15:18:24.323'),
-           created: new Date('2017-02-22T15:18:24.323'),
-           sted: 'Testveien 2',
-           valgt: false,
+            id: 2,
+            tid: new Date('2017-02-25T15:18:24.323'),
+            created: new Date('2017-02-22T15:18:24.323'),
+            sted: 'Testveien 2',
+            valgt: false,
         }],
     }, mote);
 };
@@ -140,7 +140,8 @@ describe('Innholdsviser', () => {
     });
 
     it('Viser AppSpinner når epostinnhold hentes for arbeidsgiver', () => {
-        component = shallow(<DropdownInnholdsviser hentArbeidsgiverEpostinnhold={hentArbeidsgiverEpostinnhold} mote={mote} henter={true} type='Arbeidsgiver' />)
+        component = shallow(<DropdownInnholdsviser hentArbeidsgiverEpostinnhold={hentArbeidsgiverEpostinnhold}
+                                                   mote={mote} henter={true} type='Arbeidsgiver'/>)
         expect(component.find(AppSpinner)).to.have.length(1);
     });
 

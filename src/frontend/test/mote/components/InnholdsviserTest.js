@@ -5,73 +5,70 @@ import sinon from 'sinon';
 import { Radio } from 'nav-frontend-skjema';
 import Innholdsviser, { Innholdsvelger } from '../../../js/mote/components/Innholdsviser';
 import AppSpinner from '../../../js/components/AppSpinner';
-import {
-    BRUKER,
-    ARBEIDSGIVER,
-} from '../../../js/konstanter';
+import { ARBEIDSGIVER, BRUKER } from '../../../js/konstanter';
 
 const getMote = (mote) => {
     return Object.assign({}, {
-     status: 'OPPRETTET',
-     opprettetTidspunkt: new Date('2017-02-22T15:18:24.323'),
-     bekreftetTidspunkt: null,
-     deltakere: [{
-       hendelser: [],
-       deltakerUuid: 'uuid1',
-       navn: 'Are Arbeidsgiver',
-       orgnummer: '012345678',
-       epost: 'are.arbeidsgiver@nav.no',
-       type: ARBEIDSGIVER,
-       svartidspunkt: null,
-       svar: [{
-         id: 1,
-         tid: new Date('2017-03-07T15:18:24.323'),
-         created: new Date('2017-02-22T15:18:24.323'),
-         sted: 'Testveien 2',
-         valgt: false,
+        status: 'OPPRETTET',
+        opprettetTidspunkt: new Date('2017-02-22T15:18:24.323'),
+        bekreftetTidspunkt: null,
+        deltakere: [{
+            hendelser: [],
+            deltakerUuid: 'uuid1',
+            navn: 'Are Arbeidsgiver',
+            orgnummer: '012345678',
+            epost: 'are.arbeidsgiver@nav.no',
+            type: ARBEIDSGIVER,
+            svartidspunkt: null,
+            svar: [{
+                id: 1,
+                tid: new Date('2017-03-07T15:18:24.323'),
+                created: new Date('2017-02-22T15:18:24.323'),
+                sted: 'Testveien 2',
+                valgt: false,
+            }, {
+                id: 2,
+                tid: new Date('2017-03-09T15:18:24.323'),
+                created: new Date('2017-02-22T15:18:24.323'),
+                sted: 'Testveien 2',
+                valgt: false,
+            }],
         }, {
-         id: 2,
-         tid: new Date('2017-03-09T15:18:24.323'),
-         created: new Date('2017-02-22T15:18:24.323'),
-         sted: 'Testveien 2',
-         valgt: false,
+            hendelser: [],
+            deltakerUuid: 'uuid2',
+            navn: 'Sygve Sykmeldt',
+            orgnummer: null,
+            epost: null,
+            type: BRUKER,
+            svartidspunkt: null,
+            svar: [{
+                id: 1,
+                tid: new Date('2017-03-07T15:18:24.323'),
+                created: new Date('2017-02-22T15:18:24.323'),
+                sted: 'Testveien 2',
+                valgt: false,
+            }, {
+                id: 2,
+                tid: new Date('2017-03-09T15:18:24.323'),
+                created: new Date('2017-02-22T15:18:24.323'),
+                sted: 'Testveien 2',
+                valgt: false,
+            }],
         }],
-      }, {
-       hendelser: [],
-       deltakerUuid: 'uuid2',
-       navn: 'Sygve Sykmeldt',
-       orgnummer: null,
-       epost: null,
-       type: BRUKER,
-       svartidspunkt: null,
-       svar: [{
-         id: 1,
-         tid: new Date('2017-03-07T15:18:24.323'),
-         created: new Date('2017-02-22T15:18:24.323'),
-         sted: 'Testveien 2',
-         valgt: false,
+        bekreftetAlternativ: null,
+        alternativer: [{
+            id: 1,
+            tid: new Date('2017-03-07T15:18:24.323'),
+            created: new Date('2017-02-22T15:18:24.323'),
+            sted: 'Testveien 2',
+            valgt: false,
         }, {
-         id: 2,
-         tid: new Date('2017-03-09T15:18:24.323'),
-         created: new Date('2017-02-22T15:18:24.323'),
-         sted: 'Testveien 2',
-         valgt: false,
+            id: 2,
+            tid: new Date('2017-02-25T15:18:24.323'),
+            created: new Date('2017-02-22T15:18:24.323'),
+            sted: 'Testveien 2',
+            valgt: false,
         }],
-      }],
-     bekreftetAlternativ: null,
-     alternativer: [{
-       id: 1,
-       tid: new Date('2017-03-07T15:18:24.323'),
-       created: new Date('2017-02-22T15:18:24.323'),
-       sted: 'Testveien 2',
-       valgt: false,
-      }, {
-       id: 2,
-       tid: new Date('2017-02-25T15:18:24.323'),
-       created: new Date('2017-02-22T15:18:24.323'),
-       sted: 'Testveien 2',
-       valgt: false,
-      }],
     }, mote);
 };
 
@@ -150,12 +147,12 @@ describe('Innholdsviser', () => {
         let onChange;
 
         beforeEach(() => {
-          onChange = sinon.spy();
-          component = shallow(<Innholdsvelger
-              arbeidstaker={arbeidstaker}
-              onChange={onChange}
-              valgtDeltaker={BRUKER}
-          />);
+            onChange = sinon.spy();
+            component = shallow(<Innholdsvelger
+                arbeidstaker={arbeidstaker}
+                onChange={onChange}
+                valgtDeltaker={BRUKER}
+            />);
         });
 
         it('Skal vise to radioknapper', () => {

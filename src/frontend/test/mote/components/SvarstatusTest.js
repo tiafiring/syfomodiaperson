@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
 import { Utvidbar } from 'digisyfo-npm';
-import Svarstatus, { erSamtidig, getNyeAlternativer, getGamleAlternativer } from '../../../js/mote/components/Svarstatus';
+import Svarstatus, {erSamtidig, getGamleAlternativer, getNyeAlternativer} from '../../../js/mote/components/Svarstatus';
 import BesvarteTidspunkter from '../../../js/mote/components/BesvarteTidspunkter';
 import { konverterTid } from '../../../js/utils/datoUtils';
 
@@ -12,111 +12,111 @@ describe('Svarstatus', () => {
 
     beforeEach(() => {
         motedata = {
-           id: 4,
-           moteUuid: '0afd1d57-db90-4a9b-af97-cbf1055e6ffa',
-           opprettetAv: 'Z990322',
-           status: 'OPPRETTET',
-           opprettetTidspunkt: '2017-03-28T09:46:37.677Z',
-           navEnhet: 'navEnhet',
-           deltakere: [{
-               hendelser: [{
-                   kanal: 'EPOST',
-                   adresse: 'arbe.idsgiver@nav.no',
-                   varseltype: 'OPPRETTET',
-                   resultat: 'OK'
+            id: 4,
+            moteUuid: '0afd1d57-db90-4a9b-af97-cbf1055e6ffa',
+            opprettetAv: 'Z990322',
+            status: 'OPPRETTET',
+            opprettetTidspunkt: '2017-03-28T09:46:37.677Z',
+            navEnhet: 'navEnhet',
+            deltakere: [{
+                hendelser: [{
+                    kanal: 'EPOST',
+                    adresse: 'arbe.idsgiver@nav.no',
+                    varseltype: 'OPPRETTET',
+                    resultat: 'OK'
                 }],
-               deltakerUuid: '454a31c0-3691-40f4-9d9e-882ac1d5306e',
-               navn: 'Arbe Idsgiver',
-               orgnummer: '012345678',
-               epost: 'arbe.idsgiver@nav.no',
-               type: 'arbeidsgiver',
-               avvik: [],
-               svar: [{
-                   id: 14003,
-                   tid: '2021-12-12T11:00:00Z',
-                   created: '2017-03-28T09:46:37.682Z',
-                   sted: 'Oslo',
-                   valgt: false,
+                deltakerUuid: '454a31c0-3691-40f4-9d9e-882ac1d5306e',
+                navn: 'Arbe Idsgiver',
+                orgnummer: '012345678',
+                epost: 'arbe.idsgiver@nav.no',
+                type: 'arbeidsgiver',
+                avvik: [],
+                svar: [{
+                    id: 14003,
+                    tid: '2021-12-12T11:00:00Z',
+                    created: '2017-03-28T09:46:37.682Z',
+                    sted: 'Oslo',
+                    valgt: false,
                 }, {
-                   id: 14004,
-                   tid: '2020-12-12T11:00:00Z',
-                   created: '2017-03-28T09:46:37.684Z',
-                   sted: 'Oslo',
-                   valgt: false,
+                    id: 14004,
+                    tid: '2020-12-12T11:00:00Z',
+                    created: '2017-03-28T09:46:37.684Z',
+                    sted: 'Oslo',
+                    valgt: false,
                 }],
             }, {
-               hendelser: [{
-                   kanal: 'TLF',
-                   adresse: '12345678',
-                   varseltype: 'OPPRETTET',
-                   resultat: 'OK'
+                hendelser: [{
+                    kanal: 'TLF',
+                    adresse: '12345678',
+                    varseltype: 'OPPRETTET',
+                    resultat: 'OK'
                 }, {
-                   kanal: 'EPOST',
-                   adresse: 'test@nav.no',
-                   varseltype: 'OPPRETTET',
-                   resultat: 'OK'
+                    kanal: 'EPOST',
+                    adresse: 'test@nav.no',
+                    varseltype: 'OPPRETTET',
+                    resultat: 'OK'
                 }],
-               deltakerUuid: '0b118a5a-f866-432b-92cd-46a1dbbc7699',
-               navn: 'Ane Arbeidstaker',
-               fnr: '88776655443',
-               type: 'Bruker',
-               avvik: [],
-               svar: [{
-                   id: 14003,
-                   tid: '2021-12-12T11:00:00Z',
-                   created: '2017-03-28T09:46:37.682Z',
-                   sted: 'Oslo',
-                   valgt: false,
+                deltakerUuid: '0b118a5a-f866-432b-92cd-46a1dbbc7699',
+                navn: 'Ane Arbeidstaker',
+                fnr: '88776655443',
+                type: 'Bruker',
+                avvik: [],
+                svar: [{
+                    id: 14003,
+                    tid: '2021-12-12T11:00:00Z',
+                    created: '2017-03-28T09:46:37.682Z',
+                    sted: 'Oslo',
+                    valgt: false,
                 }, {
-                   id: 14004,
-                   tid: '2020-12-12T11:00:00Z',
-                   created: '2017-03-28T09:46:37.684Z',
-                   sted: 'Oslo',
-                   valgt: false,
+                    id: 14004,
+                    tid: '2020-12-12T11:00:00Z',
+                    created: '2017-03-28T09:46:37.684Z',
+                    sted: 'Oslo',
+                    valgt: false,
                 }],
             }],
-           alternativer: [{
-               id: 14001,
-               tid: '2021-10-12T11:00:00Z',
-               created: '2017-03-28T09:46:37.682Z',
-               sted: 'Oslo',
-               valgt: false,
+            alternativer: [{
+                id: 14001,
+                tid: '2021-10-12T11:00:00Z',
+                created: '2017-03-28T09:46:37.682Z',
+                sted: 'Oslo',
+                valgt: false,
             }, {
-               id: 14002,
-               tid: '2021-09-12T11:00:00Z',
-               created: '2017-03-28T09:46:37.682Z',
-               sted: 'Oslo',
-               valgt: false,
+                id: 14002,
+                tid: '2021-09-12T11:00:00Z',
+                created: '2017-03-28T09:46:37.682Z',
+                sted: 'Oslo',
+                valgt: false,
             }, {
-               id: 14003,
-               tid: '2021-07-12T11:00:00Z',
-               created: '2017-04-28T09:46:37.682Z',
-               sted: 'Oslo',
-               valgt: false,
+                id: 14003,
+                tid: '2021-07-12T11:00:00Z',
+                created: '2017-04-28T09:46:37.682Z',
+                sted: 'Oslo',
+                valgt: false,
             }, {
-               id: 14004,
-               tid: '2021-12-12T11:00:00Z',
-               created: '2017-04-28T09:46:37.682Z',
-               sted: 'Oslo',
-               valgt: false,
+                id: 14004,
+                tid: '2021-12-12T11:00:00Z',
+                created: '2017-04-28T09:46:37.682Z',
+                sted: 'Oslo',
+                valgt: false,
             }, {
-               id: 14005,
-               tid: '2020-11-12T11:00:00Z',
-               created: '2017-05-28T09:46:37.682Z',
-               sted: 'Oslo',
-               valgt: false,
+                id: 14005,
+                tid: '2020-11-12T11:00:00Z',
+                created: '2017-05-28T09:46:37.682Z',
+                sted: 'Oslo',
+                valgt: false,
             }, {
-               id: 14006,
-               tid: '2020-12-12T11:00:00Z',
-               created: '2017-05-28T09:46:37.684Z',
-               sted: 'Oslo',
-               valgt: false,
+                id: 14006,
+                tid: '2020-12-12T11:00:00Z',
+                created: '2017-05-28T09:46:37.684Z',
+                sted: 'Oslo',
+                valgt: false,
             }, {
-               id: 14007,
-               tid: '2020-10-12T11:00:00Z',
-               created: '2017-05-28T09:46:37.686Z',
-               sted: 'Oslo',
-               valgt: false,
+                id: 14007,
+                tid: '2020-10-12T11:00:00Z',
+                created: '2017-05-28T09:46:37.686Z',
+                sted: 'Oslo',
+                valgt: false,
             }],
         };
         mote = konverterTid(motedata);
@@ -182,12 +182,12 @@ describe('Svarstatus', () => {
 
         describe('Hvis møtet har både nye og gamle alternativer', () => {
             it('Skal inneholde to stk BesvarteTidspunkter', () => {
-                const component = shallow(<Svarstatus mote={mote} />);
+                const component = shallow(<Svarstatus mote={mote}/>);
                 expect(component.find(BesvarteTidspunkter)).to.have.length(2);
             });
 
             it('Skal inneholde en Utvidbar', () => {
-                const component = shallow(<Svarstatus mote={mote} ledetekster={ledetekster} />);
+                const component = shallow(<Svarstatus mote={mote} ledetekster={ledetekster}/>);
                 expect(component.find(Utvidbar)).to.have.length(1);
                 expect(component.find(Utvidbar).prop('tittel')).to.equal('Tidspunkt foreslått tidligere');
             });
@@ -199,17 +199,17 @@ describe('Svarstatus', () => {
             beforeEach(() => {
                 mote_ = Object.assign({}, motedata, {
                     alternativer: [{
-                       id: 14001,
-                       tid: '2021-10-12T11:00:00Z',
-                       created: '2017-03-28T09:46:37.682Z',
-                       sted: 'Oslo',
-                       valgt: false,
+                        id: 14001,
+                        tid: '2021-10-12T11:00:00Z',
+                        created: '2017-03-28T09:46:37.682Z',
+                        sted: 'Oslo',
+                        valgt: false,
                     }, {
-                       id: 14002,
-                       tid: '2021-09-12T11:00:00Z',
-                       created: '2017-03-28T09:46:37.685Z',
-                       sted: 'Oslo',
-                       valgt: false,
+                        id: 14002,
+                        tid: '2021-09-12T11:00:00Z',
+                        created: '2017-03-28T09:46:37.685Z',
+                        sted: 'Oslo',
+                        valgt: false,
                     }],
                 });
 
@@ -217,12 +217,12 @@ describe('Svarstatus', () => {
             });
 
             it('Skal inneholde 1 stk BesvarteTidspunkter', () => {
-                const component = shallow(<Svarstatus mote={mote_} />);
+                const component = shallow(<Svarstatus mote={mote_}/>);
                 expect(component.find(BesvarteTidspunkter)).to.have.length(1);
             });
 
             it('Skal ikke inneholde en Utvidbar', () => {
-                const component = shallow(<Svarstatus mote={mote_} ledetekster={ledetekster} />);
+                const component = shallow(<Svarstatus mote={mote_} ledetekster={ledetekster}/>);
                 expect(component.find(Utvidbar)).to.have.length(0);
             });
         });

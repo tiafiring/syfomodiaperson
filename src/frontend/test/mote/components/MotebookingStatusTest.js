@@ -3,13 +3,13 @@ import { mount, shallow } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
 import AlertStripe from 'nav-frontend-alertstriper';
-import MotebookingStatus, { StatusVarsel, PassertVarsel } from '../../../js/mote/components/MotebookingStatus';
+import MotebookingStatus, { PassertVarsel, StatusVarsel} from '../../../js/mote/components/MotebookingStatus';
 import Svarstatus from '../../../js/mote/components/Svarstatus';
 import BekreftetMotetidspunkt from '../../../js/mote/components/BekreftetMotetidspunkt';
 import KontaktInfoFeilmelding from '../../../js/mote/components/KontaktInfoFeilmelding';
 import FlereTidspunktSkjema from '../../../js/mote/skjema/FlereTidspunktSkjema';
 import Sidetopp from '../../../js/components/Sidetopp';
-import { trekkDagerFraDato, leggTilDagerPaaDato } from '../../../js/mote/utils/index';
+import  {leggTilDagerPaaDato, trekkDagerFraDato } from '../../../js/mote/utils/index';
 
 describe('MotebookingStatus', () => {
     const arbeidstaker = {
@@ -37,17 +37,17 @@ describe('MotebookingStatus', () => {
         };
         now = new Date();
         mote.alternativer = [{
-           tid: '2012-12-12T11:00:00Z',
-           created: '2011-12-12T11:00:00Z',
-           sted: 'Oslo by',
-           valgt: false,
-           id: 1
+            tid: '2012-12-12T11:00:00Z',
+            created: '2011-12-12T11:00:00Z',
+            sted: 'Oslo by',
+            valgt: false,
+            id: 1
         }, {
-           tid: '2009-09-09T07:00:00Z',
-           created: '2011-12-12T11:00:00Z',
-           sted: 'Oslo by',
-           valgt: false,
-           id: 2
+            tid: '2009-09-09T07:00:00Z',
+            created: '2011-12-12T11:00:00Z',
+            sted: 'Oslo by',
+            valgt: false,
+            id: 2
         }];
         mote.opprettetTidspunkt = '2016-11-22T12:56:32.561Z';
         mote.status = 'OPPRETTET';
@@ -56,119 +56,119 @@ describe('MotebookingStatus', () => {
             navn: 'Arve Arbeidsgiver',
             epost: 'arve.arbeidsgiver@nav.no',
             svar: [{
-               tid: '2012-12-12T11:00:00Z',
-               created: '2011-12-12T11:00:00Z',
-               sted: 'Oslo by',
-               valgt: false,
-               id: 1
+                tid: '2012-12-12T11:00:00Z',
+                created: '2011-12-12T11:00:00Z',
+                sted: 'Oslo by',
+                valgt: false,
+                id: 1
             }, {
-               tid: '2009-09-09T07:00:00Z',
-               created: '2011-12-12T11:00:00Z',
-               sted: 'Oslo by',
-               valgt: false,
-               id: 2
+                tid: '2009-09-09T07:00:00Z',
+                created: '2011-12-12T11:00:00Z',
+                sted: 'Oslo by',
+                valgt: false,
+                id: 2
             }],
         }, {
             type: 'Bruker',
             navn: 'Andreas Arbeidstaker',
             epost: 'andreas.arbeidstaker@nav.no',
             svar: [{
-               tid: '2012-12-12T11:00:00Z',
-               created: '2011-12-12T11:00:00Z',
-               sted: 'Oslo by',
-               valgt: false,
-               id: 1
+                tid: '2012-12-12T11:00:00Z',
+                created: '2011-12-12T11:00:00Z',
+                sted: 'Oslo by',
+                valgt: false,
+                id: 1
             }, {
-               tid: '2009-09-09T07:00:00Z',
-               created: '2011-12-12T11:00:00Z',
-               sted: 'Oslo by',
-               valgt: false,
-               id: 2
+                tid: '2009-09-09T07:00:00Z',
+                created: '2011-12-12T11:00:00Z',
+                sted: 'Oslo by',
+                valgt: false,
+                id: 2
             }],
         }];
         motePassert = Object.assign({}, mote);
         motePassert.alternativer = [{
-           tid: `${trekkDagerFraDato(now, 6)}`,
-           created: `${trekkDagerFraDato(now, 10)}`,
-           sted: 'Oslo by',
-           valgt: false,
-           id: 1
+            tid: `${trekkDagerFraDato(now, 6)}`,
+            created: `${trekkDagerFraDato(now, 10)}`,
+            sted: 'Oslo by',
+            valgt: false,
+            id: 1
         }, {
-           tid: `${trekkDagerFraDato(now, 8)}`,
-           created: `${trekkDagerFraDato(now, 10)}`,
-           sted: 'Oslo by',
-           valgt: false,
-           id: 2
+            tid: `${trekkDagerFraDato(now, 8)}`,
+            created: `${trekkDagerFraDato(now, 10)}`,
+            sted: 'Oslo by',
+            valgt: false,
+            id: 2
         }];
-        bekreftetMote =  {
-           id: 0,
-           moteUuid: 'f26984a2-e038-4de6-a6af-4f4f5db96b26',
-           opprettetAv: 'Z990562',
-           status: 'BEKREFTET',
-           opprettetTidspunkt: '2016-11-22T12:56:32.561Z',
-           bekreftetTidspunkt: '2017-03-23T12:56:32.561Z',
-           navEnhet: 'navEnhet',
-           deltakere: [{
-               deltakerUuid: '3b0dc3b2-587c-4105-98df-99b4205d3ce9',
-               navn: 'Arve Arbeidsgiver',
-               epost: 'arve.arbeidsgiver@nav.no',
-               type: 'arbeidsgiver',
-               svartidspunkt: '2016-11-22T12:52:06.489Z',
-               svar: [{
-                   id: 344,
-                   tid: '2019-09-09T07:00:00Z',
-                   created: '2011-12-12T11:00:00Z',
-                   sted: 'Oslo',
-                   valgt: true,
+        bekreftetMote = {
+            id: 0,
+            moteUuid: 'f26984a2-e038-4de6-a6af-4f4f5db96b26',
+            opprettetAv: 'Z990562',
+            status: 'BEKREFTET',
+            opprettetTidspunkt: '2016-11-22T12:56:32.561Z',
+            bekreftetTidspunkt: '2017-03-23T12:56:32.561Z',
+            navEnhet: 'navEnhet',
+            deltakere: [{
+                deltakerUuid: '3b0dc3b2-587c-4105-98df-99b4205d3ce9',
+                navn: 'Arve Arbeidsgiver',
+                epost: 'arve.arbeidsgiver@nav.no',
+                type: 'arbeidsgiver',
+                svartidspunkt: '2016-11-22T12:52:06.489Z',
+                svar: [{
+                    id: 344,
+                    tid: '2019-09-09T07:00:00Z',
+                    created: '2011-12-12T11:00:00Z',
+                    sted: 'Oslo',
+                    valgt: true,
                 }, {
-                   id: 345,
-                   tid: '2020-09-09T18:00:00Z',
-                   created: '2011-12-12T11:00:00Z',
-                   sted: 'Oslo',
-                   valgt: false,
+                    id: 345,
+                    tid: '2020-09-09T18:00:00Z',
+                    created: '2011-12-12T11:00:00Z',
+                    sted: 'Oslo',
+                    valgt: false,
                 }],
             }],
-           bekreftetAlternativ: {
-               id: 344,
-               tid: '2019-09-09T07:00:00Z',
-               created: '2011-12-12T11:00:00Z',
-               sted: 'Oslo',
-               valgt: true,
+            bekreftetAlternativ: {
+                id: 344,
+                tid: '2019-09-09T07:00:00Z',
+                created: '2011-12-12T11:00:00Z',
+                sted: 'Oslo',
+                valgt: true,
             },
-           alternativer: [{
-               id: 344,
-               tid: '2019-09-09T07:00:00Z',
-               created: '2011-12-12T11:00:00Z',
-               sted: 'Oslo',
-               valgt: true,
+            alternativer: [{
+                id: 344,
+                tid: '2019-09-09T07:00:00Z',
+                created: '2011-12-12T11:00:00Z',
+                sted: 'Oslo',
+                valgt: true,
             }, {
-               id: 345,
-               tid: '2020-09-09T18:00:00Z',
-               created: '2011-12-12T11:00:00Z',
-               sted: 'Oslo',
-               valgt: false,
+                id: 345,
+                tid: '2020-09-09T18:00:00Z',
+                created: '2011-12-12T11:00:00Z',
+                sted: 'Oslo',
+                valgt: false,
             }],
         };
         bekreftetMotePassert = Object.assign({}, bekreftetMote);
         bekreftetMotePassert.alternativer = [{
-           tid: `${leggTilDagerPaaDato(now, 6)}`,
-           created: `${leggTilDagerPaaDato(now, 10)}`,
-           sted: 'Oslo by',
-           valgt: false,
-           id: 344,
+            tid: `${leggTilDagerPaaDato(now, 6)}`,
+            created: `${leggTilDagerPaaDato(now, 10)}`,
+            sted: 'Oslo by',
+            valgt: false,
+            id: 344,
         }, {
-           tid: `${trekkDagerFraDato(now, 8)}`,
-           created: `${trekkDagerFraDato(now, 10)}`,
-           sted: 'Oslo by',
-           valgt: false,
-           id: 345,
+            tid: `${trekkDagerFraDato(now, 8)}`,
+            created: `${trekkDagerFraDato(now, 10)}`,
+            sted: 'Oslo by',
+            valgt: false,
+            id: 345,
         }];
         bekreftetMotePassert.bekreftetAlternativ = {
-           id: 345,
-           tid: `${trekkDagerFraDato(now, 8)}`,
-           created: `${trekkDagerFraDato(now, 10)}`,
-           sted: 'Oslo',
-           valgt: true,
+            id: 345,
+            tid: `${trekkDagerFraDato(now, 8)}`,
+            created: `${trekkDagerFraDato(now, 10)}`,
+            sted: 'Oslo',
+            valgt: true,
         };
 
         avbrytMote = sinon.spy();
@@ -239,7 +239,7 @@ describe('MotebookingStatus', () => {
 
         beforeEach(() => {
             mote = motePassert;
-            component = shallow(<MotebookingStatus arbeidstaker={arbeidstaker} mote={mote} ledetekster={ledetekster} />);
+            component = shallow(<MotebookingStatus arbeidstaker={arbeidstaker} mote={mote} ledetekster={ledetekster}/>);
         });
 
         it('Skal vise riktig tittel', () => {
@@ -415,45 +415,45 @@ describe('MotebookingStatus', () => {
                 },
             };
             mote = {
-               id: 0,
-               moteUuid: 'f26984a2-e038-4de6-a6af-4f4f5db96b26',
-               opprettetAv: 'Z990562',
-               status: 'OPPRETTET',
-               opprettetTidspunkt: '2016-11-22T12:56:32.561Z',
-               navEnhet: 'navEnhet',
-               deltakere: [{
-                   deltakerUuid: '3b0dc3b2-587c-4105-98df-99b4205d3ce9',
-                   navn: 'Arve Arbeidsgiver',
-                   epost: 'arve.arbeidsgiver@nav.no',
-                   type: 'arbeidsgiver',
-                   svartidspunkt: '2016-11-22T12:52:06.489Z',
-                   hendelser: [],
-                   svar: [{
-                       id: 344,
-                       tid: '2019-09-09T07:00:00Z',
-                       created: '2011-12-12T11:00:00Z',
-                       sted: 'Oslo',
-                       valgt: true,
+                id: 0,
+                moteUuid: 'f26984a2-e038-4de6-a6af-4f4f5db96b26',
+                opprettetAv: 'Z990562',
+                status: 'OPPRETTET',
+                opprettetTidspunkt: '2016-11-22T12:56:32.561Z',
+                navEnhet: 'navEnhet',
+                deltakere: [{
+                    deltakerUuid: '3b0dc3b2-587c-4105-98df-99b4205d3ce9',
+                    navn: 'Arve Arbeidsgiver',
+                    epost: 'arve.arbeidsgiver@nav.no',
+                    type: 'arbeidsgiver',
+                    svartidspunkt: '2016-11-22T12:52:06.489Z',
+                    hendelser: [],
+                    svar: [{
+                        id: 344,
+                        tid: '2019-09-09T07:00:00Z',
+                        created: '2011-12-12T11:00:00Z',
+                        sted: 'Oslo',
+                        valgt: true,
                     }, {
-                       id: 345,
-                       tid: '2020-09-09T18:00:00Z',
-                       created: '2011-12-12T11:00:00Z',
-                       sted: 'Oslo',
-                       valgt: false,
+                        id: 345,
+                        tid: '2020-09-09T18:00:00Z',
+                        created: '2011-12-12T11:00:00Z',
+                        sted: 'Oslo',
+                        valgt: false,
                     }],
                 }],
-               alternativer: [{
-                   id: 344,
-                   tid: '2019-09-09T07:00:00Z',
-                   created: '2011-12-12T11:00:00Z',
-                   sted: 'Oslo',
-                   valgt: true,
+                alternativer: [{
+                    id: 344,
+                    tid: '2019-09-09T07:00:00Z',
+                    created: '2011-12-12T11:00:00Z',
+                    sted: 'Oslo',
+                    valgt: true,
                 }, {
-                   id: 345,
-                   tid: '2020-09-09T18:00:00Z',
-                   created: '2011-12-12T11:00:00Z',
-                   sted: 'Oslo',
-                   valgt: false,
+                    id: 345,
+                    tid: '2020-09-09T18:00:00Z',
+                    created: '2011-12-12T11:00:00Z',
+                    sted: 'Oslo',
+                    valgt: false,
                 }],
             };
         });
