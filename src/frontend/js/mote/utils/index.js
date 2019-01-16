@@ -9,11 +9,6 @@ export const getDatoFraZulu = (zulutid) => {
     return `${dag}.${maned}.${d.getFullYear()}`;
 };
 
-export const getTidFraZulu = (zulutid) => {
-    const d = new Date(zulutid);
-    return `${getDatoFraZulu(zulutid)} kl. ${pad(d.getHours())}.${pad(d.getMinutes())}`;
-};
-
 export function genererDato(dato, klokkeslett) {
     const s = new Date();
     s.setDate(1);

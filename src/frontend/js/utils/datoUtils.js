@@ -28,13 +28,7 @@ export const visKlokkeslett = (d) => {
 
 export const lagJsDate = (dato) => {
     if (dato) {
-        const year = dato.substring(0, 4);
-        const month = dato.substring(5, 7);
-        const day = dato.substring(8, 10);
-        const hour = dato.substring(11, 13);
-        const minute = dato.substring(14, 16);
-        const seconds = dato.substring(17, 19);
-        return new Date(year, month - 1, day, hour, minute, seconds);
+        return new Date(dato);
     }
     return dato;
 };

@@ -1,16 +1,25 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
+import sinon from 'sinon';
 import {
     pad,
-    getTidFraZulu,
     getDatoFraZulu,
     genererDato,
     erAlleAlternativerPassert,
     hentVirksomhetHvis9Siffer,
     virksomhetsnavn
 } from '../../../js/mote/utils/index';
-import sinon from 'sinon';
 
 describe("utils", () => {
+    let clock;
+    const today = new Date('2017-02-01');
+
+    beforeEach(() => {
+        clock = sinon.useFakeTimers(today.getTime());
+    });
+
+    afterEach(() => {
+        clock.restore();
+    });
 
     describe("pad", () => {
 
@@ -27,20 +36,6 @@ describe("utils", () => {
         it("Skal ikke legge til en 0 før tall som består av to siffer", () => {
             const s = pad("08");
             expect(s).to.equal("08");
-        });
-
-    });
-
-    describe("getTidFraZulu", () => {
-
-        it("Skal returnere tid på lesbart format", () => {
-            const s = getTidFraZulu("2016-11-03T11:47:04.673Z");
-            expect(s).to.equal("03.11.2016 kl. 12.47");
-        });
-
-        it("Skal returnere tid på lesbart format når millisekunder ikke er med", () => {
-            const s = getTidFraZulu("2016-11-03T11:47:04Z");
-            expect(s).to.equal("03.11.2016 kl. 12.47");
         });
 
     });
@@ -95,16 +90,16 @@ describe("utils", () => {
     });
 
     describe("genererDato", () => {
-        let clock;
         const today = new Date('2017-05-31');
 
         it("31. Mai 10.00 blir riktig", () => {
+            clock = sinon.useFakeTimers(today.getTime());
             const s = genererDato("31.05.2017", "10.00");
             expect(s).to.equal("2017-05-31T10:00:00");
         });
 
         it("31. Mai 10.00 blir riktig", () => {
-            clock = sinon.useFakeTimers(today.getTime()); // 31. Mai 2017
+            clock = sinon.useFakeTimers(today.getTime());
             const s = genererDato("16.06.2017", "10.00");
             expect(s).to.equal("2017-06-16T10:00:00");
         });
