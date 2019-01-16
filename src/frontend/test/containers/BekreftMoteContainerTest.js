@@ -29,7 +29,7 @@ describe('BekreftMoteContainer', () => {
                     {
                         type: 'arbeidsgiver',
                         deltakerUuid: 'uuid1',
-                    }]
+                    }],
             };
             const alternativ = {
                 id: 4545
@@ -62,7 +62,7 @@ describe('BekreftMoteContainer', () => {
                    id: 328,
                    tid: '2020-12-12T11:00:00Z',
                    sted: 'Oslo ',
-                   valgt: false
+                   valgt: false,
                 };
                 mote = {
                     moteUuid: '123',
@@ -72,7 +72,7 @@ describe('BekreftMoteContainer', () => {
                     }, {
                         type: 'arbeidsgiver',
                         deltakerUuid: 'uuid',
-                    }]
+                    }],
                 };
                 hentBekreftMoteEpostinnhold = sinon.spy();
                 compo = shallow(<BekreftMoteSide
@@ -84,7 +84,7 @@ describe('BekreftMoteContainer', () => {
             });
 
             it('Skal ikke hente møter', () => {
-                expect(hentMoter.called).to.be.false;
+                expect(hentMoter.called).to.be.equal(false);
             });
         });
     });
@@ -121,12 +121,12 @@ describe('BekreftMoteContainer', () => {
                                id: 328,
                                tid: '2020-12-12T11:00:00Z',
                                sted: 'Oslo ',
-                               valgt: false
+                               valgt: false,
                             }, {
                                id: 329,
                                tid: '2020-09-09T07:00:00Z',
                                sted: 'Oslo ',
-                               valgt: false
+                               valgt: false,
                             }],
                         }, {
                            deltakerUuid: '85a12263-d955-4103-b172-bf135df5f37b',
@@ -138,24 +138,24 @@ describe('BekreftMoteContainer', () => {
                                id: 330,
                                tid: '2020-12-12T11:00:00Z',
                                sted: 'Oslo ',
-                               valgt: false
+                               valgt: false,
                             }, {
                                id: 331,
                                tid: '2020-09-09T07:00:00Z',
                                sted: 'Oslo ',
-                               valgt: false
-                            }]
+                               valgt: false,
+                            }],
                         }],
                        alternativer: [{
                            id: 328,
                            tid: '2020-12-12T11:00:00Z',
                            sted: 'Oslo ',
-                           valgt: false
+                           valgt: false,
                         }, {
                            id: 329,
                            tid: '2020-09-09T07:00:00Z',
                            sted: 'Oslo ',
-                           valgt: false
+                           valgt: false,
                         }],
                     }],
                 },
@@ -189,7 +189,7 @@ describe('BekreftMoteContainer', () => {
                id: 328,
                tid: '2020-12-12T11:00:00Z',
                sted: 'Oslo ',
-               valgt: false
+               valgt: false,
             });
         });
 

@@ -31,13 +31,13 @@ describe("AvbrytMoteContainer", () => {
                         "id": 328,
                         "tid": "2020-12-12T11:00:00Z",
                         "sted": "Oslo ",
-                        "valgt": false
+                        "valgt": false,
                     }, {
                         "id": 329,
                         "tid": "2020-09-09T07:00:00Z",
                         "sted": "Oslo ",
-                        "valgt": false
-                    }]
+                        "valgt": false,
+                    }],
                 }, {
                     "deltakerUuid": "arbeidsgivers-deltaker-uuid",
                     "navn": "Arve Arbeidsgiver",
@@ -47,25 +47,25 @@ describe("AvbrytMoteContainer", () => {
                         "id": 328,
                         "tid": "2020-12-12T11:00:00Z",
                         "sted": "Oslo ",
-                        "valgt": false
+                        "valgt": false,
                     }, {
                         "id": 329,
                         "tid": "2020-09-09T07:00:00Z",
                         "sted": "Oslo ",
-                        "valgt": false
-                    }]
+                        "valgt": false,
+                    }],
                 }],
                 "alternativer": [{
                     "id": 328,
                     "tid": "2020-12-12T11:00:00Z",
                     "sted": "Oslo ",
-                    "valgt": false
+                    "valgt": false,
                 }, {
                     "id": 329,
                     "tid": "2020-09-09T07:00:00Z",
                     "sted": "Oslo ",
-                    "valgt": false
-                }]
+                    "valgt": false,
+                }],
             };
             hentAvbrytMoteEpostinnhold = sinon.spy();
             hentMoter = sinon.spy();
@@ -78,12 +78,12 @@ describe("AvbrytMoteContainer", () => {
 
         it("Skal ikke hente møte dersom det finnes møte", () => {
             const compo = shallow(<AvbrytMoteSide mote={mote} fnr="123" hentMoter={hentMoter} />);
-            expect(hentMoter.called).to.be.false;
+            expect(hentMoter.called).to.be.equal(false);
         })
 
         it("Skal vise frem AppSpinner når det hentes møter", () => {
             const compo = shallow(<AvbrytMoteSide hentMoter={hentMoter} henter={true} />);
-            expect(compo.contains(<AppSpinner />)).to.be.true;
+            expect(compo.contains(<AppSpinner />)).to.be.equal(true);
         });
 
         it("Skal vise frem Lightbox når møte er hentet", () => {
@@ -99,8 +99,8 @@ describe("AvbrytMoteContainer", () => {
                 avbryter={true}
                 />);
             expect(compo.find(AvbrytMote)).to.have.length(1);
-            expect(compo.find(AvbrytMote).prop("avbrytFeilet")).to.be.false;
-            expect(compo.find(AvbrytMote).prop("avbryter")).to.be.true;
+            expect(compo.find(AvbrytMote).prop("avbrytFeilet")).to.be.equal(false);
+            expect(compo.find(AvbrytMote).prop("avbryter")).to.be.equal(true);
         });
 
         it("Skal ha en avbrytMote-funksjon som kaller på riktig funksjon", () => {
@@ -147,26 +147,26 @@ describe("AvbrytMoteContainer", () => {
                                 "id": 328,
                                 "tid": "2020-12-12T11:00:00Z",
                                 "sted": "Oslo ",
-                                "valgt": false
+                                "valgt": false,
                             }, {
                                 "id": 329,
                                 "tid": "2020-09-09T07:00:00Z",
                                 "sted": "Oslo ",
-                                "valgt": false
-                            }]
+                                "valgt": false,
+                            }],
                         }],
                         "alternativer": [{
                             "id": 328,
                             "tid": "2020-12-12T11:00:00Z",
                             "sted": "Oslo ",
-                            "valgt": false
+                            "valgt": false,
                         }, {
                             "id": 329,
                             "tid": "2020-09-09T07:00:00Z",
                             "sted": "Oslo ",
-                            "valgt": false
-                        }]
-                    }]
+                            "valgt": false,
+                        }],
+                    }],
                 },
                 navbruker: {
                     data: {
@@ -217,13 +217,13 @@ describe("AvbrytMoteContainer", () => {
         it("Skal returnere avbryter når det avbrytes", () => {
             state.moter.avbryter = true;
             const props = mapStateToProps(state, ownProps);
-            expect(props.avbryter).to.be.true;
+            expect(props.avbryter).to.be.equal(true);
         });
 
         it("Skal returnere avbrytFeilet når avbryt har feilet", () => {
             state.moter.avbrytFeilet = true;
             const props = mapStateToProps(state, ownProps);
-            expect(props.avbrytFeilet).to.be.true;
+            expect(props.avbrytFeilet).to.be.equal(true);
         })
 
     });

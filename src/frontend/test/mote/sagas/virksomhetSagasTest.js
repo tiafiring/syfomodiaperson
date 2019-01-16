@@ -8,7 +8,7 @@ describe('virksomhetSagas', () => {
     beforeEach(() => {
         window.APP_SETTINGS = {
             REST_ROOT: 'http://tjenester.nav.no/sykefravaer',
-            MOTEADMIN_REST_ROOT: 'http://tjenester.nav.no/moteadmin'
+            MOTEADMIN_REST_ROOT: 'http://tjenester.nav.no/moteadmin',
         };
     });
 
@@ -18,7 +18,7 @@ describe('virksomhetSagas', () => {
         const generator = hentVirksomhet(action);
 
         it('Skal dispatche HENTER_VIRKSOMHET', () => {
-            const nextPut = put({type: 'HENTER_VIRKSOMHET'});
+            const nextPut = put({ type: 'HENTER_VIRKSOMHET' });
             expect(generator.next().value).to.deep.equal(nextPut);
         });
 
@@ -31,7 +31,11 @@ describe('virksomhetSagas', () => {
             const data = {
                 navn: 'NAV Consulting',
             };
-            const nextPut = put({type: 'VIRKSOMHET_HENTET', orgnummer, data });
+            const nextPut = put({
+                type: 'VIRKSOMHET_HENTET',
+                orgnummer,
+                data,
+            });
             expect(generator.next(data).value).to.deep.equal(nextPut);
         });
     });

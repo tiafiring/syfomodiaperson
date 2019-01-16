@@ -25,15 +25,15 @@ const getMote = (mote) => {
                id: 1,
                tid: new Date('2017-03-07T15:18:24.323'),
                created: new Date('2017-02-22T15:18:24.323'),
-               sted: 'Sannergata 2',
-               valgt: false
+               sted: 'Testveien 2',
+               valgt: false,
             }, {
                id: 2,
                tid: new Date('2017-03-09T15:18:24.323'),
                created: new Date('2017-02-22T15:18:24.323'),
-               sted: 'Sannergata 2',
-               valgt: false
-            }]
+               sted: 'Testveien 2',
+               valgt: false,
+            }],
         }, {
            hendelser: [],
            deltakerUuid: 'uuid2',
@@ -46,30 +46,30 @@ const getMote = (mote) => {
                id: 1,
                tid: new Date('2017-03-07T15:18:24.323'),
                created: new Date('2017-02-22T15:18:24.323'),
-               sted: 'Sannergata 2',
-               valgt: false
+               sted: 'Testveien 2',
+               valgt: false,
             }, {
                id: 2,
                tid: new Date('2017-03-09T15:18:24.323'),
                created: new Date('2017-02-22T15:18:24.323'),
-               sted: 'Sannergata 2',
-               valgt: false
-            }]
+               sted: 'Testveien 2',
+               valgt: false,
+            }],
         }],
        bekreftetAlternativ: null,
        alternativer: [{
            id: 1,
            tid: new Date('2017-03-07T15:18:24.323'),
            created: new Date('2017-02-22T15:18:24.323'),
-           sted: 'Sannergata 2',
-           valgt: false
+           sted: 'Testveien 2',
+           valgt: false,
         }, {
            id: 2,
            tid: new Date('2017-02-25T15:18:24.323'),
            created: new Date('2017-02-22T15:18:24.323'),
-           sted: 'Sannergata 2',
-           valgt: false
-        }]
+           sted: 'Testveien 2',
+           valgt: false,
+        }],
     }, mote);
 };
 

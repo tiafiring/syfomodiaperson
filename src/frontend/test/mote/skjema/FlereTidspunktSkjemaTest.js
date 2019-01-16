@@ -65,8 +65,8 @@ describe('FlereTidspunktSkjemaTest', () => {
                 tid: '2013-02-20T10:30:00',
                 valgt: false,
                 sted: 'Oslo',
-            }])
-        })
+            }]);
+        });
     });
 
     describe('validate', () => {
@@ -78,7 +78,7 @@ describe('FlereTidspunktSkjemaTest', () => {
                 tidspunkter: [{
                     dato: null,
                     klokkeslett: null,
-                },{
+                }, {
                     dato: '27.02.17',
                     klokkeslett: '09.00',
                 }],
@@ -100,7 +100,7 @@ describe('FlereTidspunktSkjemaTest', () => {
                 tidspunkter: [{
                     dato: '27.02.17',
                     klokkeslett: '09.00',
-                },{
+                }, {
                     dato: null,
                     klokkeslett: null,
                 }],

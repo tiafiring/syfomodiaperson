@@ -16,7 +16,7 @@ import DaypickerComponent from '../../js/components/datovelger/DayPicker';
 
 describe("Datovelger", () => {
 
-    let component; 
+    let component;
     let input;
     let meta;
     let preventDefault;
@@ -55,7 +55,7 @@ describe("Datovelger", () => {
     describe("validerDatoField", () => {
         it("Skal returnere undefined hvis dato ikke er sendt inn", () => {
             const res = validerDatoField();
-            expect(res).to.be.undefined;
+            expect(res).to.be.equal(undefined);
         });
 
         it("Skal returnere Datoen må være på formatet dd.mm.åååå hvis dato er på feil format", () => {
@@ -84,7 +84,7 @@ describe("Datovelger", () => {
                 fra: new Date("2018-12-01"),
                 til: new Date("2018-12-10"),
             });
-            expect(res).to.be.undefined;
+            expect(res).to.be.equal(undefined);
         });
 
         it("Skal ikke klage hvis datoen er etter fra", () => {
@@ -92,7 +92,7 @@ describe("Datovelger", () => {
                 fra: new Date("2018-12-01"),
                 til: new Date("2018-12-10"),
             });
-            expect(res).to.be.undefined;
+            expect(res).to.be.equal(undefined);
         });
 
         it("Skal klage hvis datoen er etter til", () => {
@@ -108,7 +108,7 @@ describe("Datovelger", () => {
                 fra: new Date("2018-12-01"),
                 til: new Date("2018-12-10"),
             });
-            expect(res).to.be.undefined;
+            expect(res).to.be.equal(undefined);
         });
 
         it("Skal klage hvis datoen er etter til hvis bare til er oppgitt", () => {
@@ -122,14 +122,14 @@ describe("Datovelger", () => {
             const res = validerDatoField("11.12.2018", {
                 til: new Date("2018-12-11"),
             });
-            expect(res).to.be.undefined;
+            expect(res).to.be.equal(undefined);
         });
 
         it("Skal ikke klage hvis datoen er før til hvis bare til er oppgitt", () => {
             const res = validerDatoField("10.12.2018", {
                 til: new Date("2018-12-11"),
             });
-            expect(res).to.be.undefined;
+            expect(res).to.be.equal(undefined);
         });
 
         it("Skal klage hvis datoen er før fra hvis bare fra er oppgitt", () => {
@@ -143,14 +143,14 @@ describe("Datovelger", () => {
             const res = validerDatoField("11.12.2018", {
                 fra: new Date("2018-12-11"),
             });
-            expect(res).to.be.undefined;
+            expect(res).to.be.equal(undefined);
         });
 
         it("Skal ikke klage hvis datoen er etter fra hvis bare fra er oppgitt", () => {
             const res = validerDatoField("12.12.2018", {
                 fra: new Date("2018-12-11"),
             });
-            expect(res).to.be.undefined;
+            expect(res).to.be.equal(undefined);
         });
 
     });
@@ -168,7 +168,7 @@ describe("Datovelger", () => {
             component = shallow(<DatoField input={input} meta={meta} id="olsen" />);
             preventDefault = sinon.spy();
             stopImmediatePropagation = sinon.spy();
-            
+
         });
 
 

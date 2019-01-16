@@ -27,7 +27,6 @@ describe('navbruker', () => {
                 navn: 'Kurt Nilsen',
             },
         });
-
     });
 
     it('Håndterer NAVBRUKER_HENTET når man har data fra før', () => {
@@ -56,7 +55,6 @@ describe('navbruker', () => {
                 },
             },
         });
-
     });
 
     it('Håndterer HENT_NAVBRUKER_FORESPURT', () => {
@@ -79,14 +77,14 @@ describe('navbruker', () => {
             },
             henter: true,
             hentingFeilet: false,
-        })
+        });
     });
 
     it('Håndterer HENT_NAVBRUKER_FEILET', () => {
         const initialState = deepFreeze({
             data: {
                 test: 1,
-            }
+            },
         });
         const action = {
             type: 'HENT_NAVBRUKER_FEILET',
@@ -98,6 +96,6 @@ describe('navbruker', () => {
             },
             henter: false,
             hentingFeilet: true,
-        })
+        });
     });
 });

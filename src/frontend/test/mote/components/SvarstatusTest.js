@@ -36,14 +36,14 @@ describe('Svarstatus', () => {
                    tid: '2021-12-12T11:00:00Z',
                    created: '2017-03-28T09:46:37.682Z',
                    sted: 'Oslo',
-                   valgt: false
+                   valgt: false,
                 }, {
                    id: 14004,
                    tid: '2020-12-12T11:00:00Z',
                    created: '2017-03-28T09:46:37.684Z',
                    sted: 'Oslo',
-                   valgt: false
-                }]
+                   valgt: false,
+                }],
             }, {
                hendelser: [{
                    kanal: 'TLF',
@@ -66,14 +66,14 @@ describe('Svarstatus', () => {
                    tid: '2021-12-12T11:00:00Z',
                    created: '2017-03-28T09:46:37.682Z',
                    sted: 'Oslo',
-                   valgt: false
+                   valgt: false,
                 }, {
                    id: 14004,
                    tid: '2020-12-12T11:00:00Z',
                    created: '2017-03-28T09:46:37.684Z',
                    sted: 'Oslo',
                    valgt: false,
-                }]
+                }],
             }],
            alternativer: [{
                id: 14001,
@@ -117,7 +117,7 @@ describe('Svarstatus', () => {
                created: '2017-05-28T09:46:37.686Z',
                sted: 'Oslo',
                valgt: false,
-            }]
+            }],
         };
         mote = konverterTid(motedata);
     });
@@ -210,7 +210,7 @@ describe('Svarstatus', () => {
                        created: '2017-03-28T09:46:37.685Z',
                        sted: 'Oslo',
                        valgt: false,
-                    }]
+                    }],
                 });
 
                 mote_ = konverterTid(mote_);

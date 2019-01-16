@@ -15,7 +15,7 @@ describe('MotebookingStatus', () => {
     const arbeidstaker = {
         kontaktinfo: {
             skalHaVarsel: true,
-        }
+        },
     };
     let now;
     let mote = {};
@@ -119,35 +119,35 @@ describe('MotebookingStatus', () => {
                    tid: '2019-09-09T07:00:00Z',
                    created: '2011-12-12T11:00:00Z',
                    sted: 'Oslo',
-                   valgt: true
+                   valgt: true,
                 }, {
                    id: 345,
                    tid: '2020-09-09T18:00:00Z',
                    created: '2011-12-12T11:00:00Z',
                    sted: 'Oslo',
-                   valgt: false
-                }]
+                   valgt: false,
+                }],
             }],
            bekreftetAlternativ: {
                id: 344,
                tid: '2019-09-09T07:00:00Z',
                created: '2011-12-12T11:00:00Z',
                sted: 'Oslo',
-               valgt: true
+               valgt: true,
             },
            alternativer: [{
                id: 344,
                tid: '2019-09-09T07:00:00Z',
                created: '2011-12-12T11:00:00Z',
                sted: 'Oslo',
-               valgt: true
+               valgt: true,
             }, {
                id: 345,
                tid: '2020-09-09T18:00:00Z',
                created: '2011-12-12T11:00:00Z',
                sted: 'Oslo',
-               valgt: false
-            }]
+               valgt: false,
+            }],
         };
         bekreftetMotePassert = Object.assign({}, bekreftetMote);
         bekreftetMotePassert.alternativer = [{
@@ -433,27 +433,27 @@ describe('MotebookingStatus', () => {
                        tid: '2019-09-09T07:00:00Z',
                        created: '2011-12-12T11:00:00Z',
                        sted: 'Oslo',
-                       valgt: true
+                       valgt: true,
                     }, {
                        id: 345,
                        tid: '2020-09-09T18:00:00Z',
                        created: '2011-12-12T11:00:00Z',
                        sted: 'Oslo',
-                       valgt: false
-                    }]
+                       valgt: false,
+                    }],
                 }],
                alternativer: [{
                    id: 344,
                    tid: '2019-09-09T07:00:00Z',
                    created: '2011-12-12T11:00:00Z',
                    sted: 'Oslo',
-                   valgt: true
+                   valgt: true,
                 }, {
                    id: 345,
                    tid: '2020-09-09T18:00:00Z',
                    created: '2011-12-12T11:00:00Z',
                    sted: 'Oslo',
-                   valgt: false
+                   valgt: false,
                 }],
             };
         });

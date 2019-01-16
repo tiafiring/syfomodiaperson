@@ -9,7 +9,6 @@ import { MotebookingSkjema, validate, getData } from '../../../js/mote/skjema/Mo
 import Tidspunkter from '../../../js/mote/skjema/Tidspunkter';
 
 describe('MotebookingSkjemaTest', () => {
-
     describe('MotebookingSkjema', () => {
         let handleSubmit;
         let arbeidstaker;
@@ -25,7 +24,7 @@ describe('MotebookingSkjemaTest', () => {
 
         it('Skal inneholde tidspunkter', () => {
             const compo = shallow(<MotebookingSkjema ledere={[]} handleSubmit={handleSubmit} valgtEnhet='0021' arbeidstaker={arbeidstaker} />);
-            expect(compo.contains(<Tidspunkter skjemanavn='opprettMote' />)).to.be.true;
+            expect(compo.contains(<Tidspunkter skjemanavn='opprettMote' />)).to.be.equal(true);
         });
 
         it('Skal inneholde felt med mulighet for å skrive inn sted', () => {
@@ -56,7 +55,6 @@ describe('MotebookingSkjemaTest', () => {
             });
 
             describe('Dersom dersom kontaktinfo.skalHaVarsel === true', () => {
-
                 beforeEach(() => {
                     arbeidstaker.kontaktinfo.skalHaVarsel = true;
                 });
@@ -228,7 +226,7 @@ describe('MotebookingSkjemaTest', () => {
                 }, {
                     'sted': 'Oslo',
                     'tid': '2016-08-13T12:00:00',
-                }]
+                }],
             })
         });
     })

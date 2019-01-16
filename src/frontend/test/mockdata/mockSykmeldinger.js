@@ -3517,7 +3517,7 @@ const mockSykmeldinger = [
             dekningsgrad: 100,
             fravaersperioder: [],
             harAnnetFravaer: false,
-            harForsikring: true
+            harForsikring: true,
         },
         startLegemeldtFravaer: '2018-08-25',
         status: 'BEKREFTET',
@@ -3643,7 +3643,7 @@ const mockSykmeldinger = [
             dekningsgrad: 75,
             fravaersperioder: [],
             harAnnetFravaer: false,
-            harForsikring: true
+            harForsikring: true,
         },
         startLegemeldtFravaer: '2018-08-25',
         status: 'BEKREFTET',
@@ -4025,7 +4025,7 @@ const mockSykmeldinger = [
             dekningsgrad: 100,
             fravaersperioder: [],
             harAnnetFravaer: false,
-            harForsikring: true
+            harForsikring: true,
         },
         startLegemeldtFravaer: '2018-08-25',
         status: 'BEKREFTET',
@@ -4151,7 +4151,7 @@ const mockSykmeldinger = [
             dekningsgrad: 100,
             fravaersperioder: [],
             harAnnetFravaer: false,
-            harForsikring: true
+            harForsikring: true,
         },
         startLegemeldtFravaer: '2018-08-25',
         status: 'BEKREFTET',

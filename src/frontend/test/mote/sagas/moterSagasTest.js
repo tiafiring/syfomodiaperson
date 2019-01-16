@@ -7,7 +7,7 @@ import {
     hentMoter,
     avbrytMote,
     bekreftMote,
-    opprettFlereAlternativ
+    opprettFlereAlternativ,
 } from '../../../js/sagas/moterSagas';
 import * as actions from '../../../js/actions/moter_actions';
 
@@ -15,8 +15,8 @@ describe('moterSagas', () => {
     beforeEach(() => {
         window.APP_SETTINGS = {
             REST_ROOT: 'http://tjenester.nav.no/sykefravaer',
-            MOTEADMIN_REST_ROOT: 'http://tjenester.nav.no/moteadmin'
-        }
+            MOTEADMIN_REST_ROOT: 'http://tjenester.nav.no/moteadmin',
+        };
     });
 
     describe('opprettMote', () => {
@@ -35,7 +35,7 @@ describe('moterSagas', () => {
         it('Skal poste møtet til REST-tjenesten', () => {
             const nextCall = call(post, 'http://tjenester.nav.no/moteadmin/moter', {
                 fnr: '55',
-                naermesteLederNavn: 'Test Bestesen'
+                naermesteLederNavn: 'Test Bestesen',
             });
             expect(generator.next().value).to.deep.equal(nextCall);
         });
@@ -119,20 +119,20 @@ describe('moterSagas', () => {
 
     describe('opprettFlereAlternativ', () => {
         const data = [{
-                tid:'2017-03-30T10:00:00.000Z',
-                sted:'Oslo',
-                valgt: false,
-            },
-            {
-                tid:'2017-03-31T08:00:00.000Z',
-                sted:'Oslo',
-                valgt: false,
-            }];
-        const action = actions.opprettFlereAlternativ(data, 'min-fine-mote-uuid', 'fnr');
+            tid: '2017-03-30T10:00:00.000Z',
+            sted: 'Oslo',
+            valgt: false,
+        },
+        {
+            tid: '2017-03-31T08:00:00.000Z',
+            sted: 'Oslo',
+            valgt: false,
+        }];
+        let action = actions.opprettFlereAlternativ(data, 'min-fine-mote-uuid', 'fnr');
         const generator = opprettFlereAlternativ(action);
 
         it('Skal dispatche OPPRETTER_FLERE_ALTERNATIV', () => {
-            const action = actions.oppretterFlereAlternativ();
+            action = actions.oppretterFlereAlternativ();
             const nextPut = put(action);
             expect(generator.next().value).to.deep.equal(nextPut);
         });
@@ -149,7 +149,7 @@ describe('moterSagas', () => {
         const generator = bekreftMote(action);
 
         it('Skal dispatche BEKREFTER_MOTE', () => {
-            const nextPut = put({type: 'BEKREFTER_MOTE'});
+            const nextPut = put({ type: 'BEKREFTER_MOTE' });
             expect(generator.next().value).to.deep.equal(nextPut);
         });
 

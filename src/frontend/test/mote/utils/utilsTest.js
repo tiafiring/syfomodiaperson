@@ -9,7 +9,7 @@ import {
 
 describe('utils', () => {
     let clock;
-    const today = new Date('2017-02-01');
+    let today = new Date('2017-02-01');
 
     beforeEach(() => {
         clock = sinon.useFakeTimers(today.getTime());
@@ -44,10 +44,9 @@ describe('utils', () => {
     });
 
     describe('erAlleAlternativerPassert', () => {
-        const today = new Date('2017-01-16');
-
         beforeEach(() => {
             clock = sinon.useFakeTimers(today.getTime());
+            today = new Date('2017-01-16');
         });
         afterEach(() => {
             clock.restore();
@@ -77,7 +76,7 @@ describe('utils', () => {
             const alternativer = [
                 {
                     tid: new Date('2017-01-17T11:47:04.673Z'),
-                }
+                },
             ];
             const s = erAlleAlternativerPassert(alternativer);
             expect(s).to.equal(false);
@@ -85,7 +84,13 @@ describe('utils', () => {
     });
 
     describe('genererDato', () => {
-        const today = new Date('2017-05-31');
+        beforeEach(() => {
+            today = new Date('2017-05-31');
+            clock = sinon.useFakeTimers(today.getTime());
+        });
+        afterEach(() => {
+            clock.restore();
+        });
 
         it('31. Mai 10.00 blir riktig', () => {
             clock = sinon.useFakeTimers(today.getTime());

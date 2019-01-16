@@ -34,7 +34,7 @@ describe("virksomhet_actions", () => {
             orgnummer: "orgnummer",
             data: {
                 navn: "test"
-            }
+            },
         });
     })
 });

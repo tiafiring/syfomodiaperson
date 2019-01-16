@@ -46,7 +46,7 @@ describe("DaypickerComponent", () => {
     });
 
     it("Skal ha en selectedDays-funksjon som returnere false (fordi dato ikke er satt)", () => {
-        expect(component.instance().selectedDays(new Date())).to.be.false;
+        expect(component.instance().selectedDays(new Date())).to.be.equal(false);
     });
 
     it("Skal sette initialMonth til dagens måned", () => {
@@ -65,11 +65,11 @@ describe("DaypickerComponent", () => {
         });
 
         it("Skal ha en selectedDays-funksjon som returnere true hvis innsendt dato er lik valgt dato", () => {
-            expect(component.instance().selectedDays(new Date("2017-02-22"))).to.be.true;
+            expect(component.instance().selectedDays(new Date("2017-02-22"))).to.be.equal(true);
         });
 
         it("Skal ha en selectedDays-funksjon som returnere true hvis innsendt dato ikke er lik valgt dato", () => {
-            expect(component.instance().selectedDays(new Date("2017-02-21"))).to.be.false;
+            expect(component.instance().selectedDays(new Date("2017-02-21"))).to.be.equal(false);
         });
     });
 
@@ -85,7 +85,7 @@ describe("DaypickerComponent", () => {
         });
 
         it("Skal ha en selectedDays-funksjon som returnerer false", () => {
-            expect(component.instance().selectedDays(new Date("2017-02-22"))).to.be.false;
+            expect(component.instance().selectedDays(new Date("2017-02-22"))).to.be.equal(false);
         });
     });
 
@@ -99,19 +99,19 @@ describe("DaypickerComponent", () => {
 
         it("Skal kalle på innsendt onDayClick hvis dag er aktiv", () => {
             dp.prop("onDayClick")(new Date("2017-01-12"));
-            expect(onDayClick.called).to.be.true;
+            expect(onDayClick.called).to.be.equal(true);
         });
 
         it("Skal kalle på innsendt onDayClick hvis dag er aktiv og det ikke finnes tidligsteFom/senesteTom", () => {
             component = shallow(<DaypickerComponent input={input} meta={meta} onKeyUp={onKeyUp} onDayClick={onDayClick} />)
             dp = component.find(DayPicker);
             dp.prop("onDayClick")(new Date("2017-01-12"));
-            expect(onDayClick.called).to.be.true;
+            expect(onDayClick.called).to.be.equal(true);
         });
 
         it("Skal ikke kalle på innsendt onDayClick hvis dag er deaktivert", () => {
             dp.prop("onDayClick")(new Date("2017-01-09"));
-            expect(onDayClick.called).to.be.false;
+            expect(onDayClick.called).to.be.equal(false);
         });
     });
 
@@ -126,31 +126,31 @@ describe("DaypickerComponent", () => {
         });
 
         it("Skal returnere true hvis innsendt dato er før tidligsteFom", () => {
-            expect(component.instance().erDeaktivertDag(new Date("2017-01-08"))).to.be.true;
+            expect(component.instance().erDeaktivertDag(new Date("2017-01-08"))).to.be.equal(true);
         });
 
         it("Skal returnere true hvis innsendt dato er etter senesteTom", () => {
-            expect(component.instance().erDeaktivertDag(new Date("2017-01-21"))).to.be.true;
+            expect(component.instance().erDeaktivertDag(new Date("2017-01-21"))).to.be.equal(true);
         });
 
         it("Skal returnere false hvis innsendt dato er samme dag som tidligsteFom", () => {
-            expect(component.instance().erDeaktivertDag(new Date("2017-01-10"))).to.be.false;
+            expect(component.instance().erDeaktivertDag(new Date("2017-01-10"))).to.be.equal(false);
         });
 
         it("Skal returnere false hvis innsendt dato er samme dag som senesteTom", () => {
-            expect(component.instance().erDeaktivertDag(new Date("2017-01-20"))).to.be.false;
+            expect(component.instance().erDeaktivertDag(new Date("2017-01-20"))).to.be.equal(false);
         });
 
         it("Skal returnere false hvis innsendt dato er mellom tidligsteFom og senesteTom", () => {
-            expect(component.instance().erDeaktivertDag(new Date("2017-01-11"))).to.be.false;
-            expect(component.instance().erDeaktivertDag(new Date("2017-01-19"))).to.be.false;
+            expect(component.instance().erDeaktivertDag(new Date("2017-01-11"))).to.be.equal(false);
+            expect(component.instance().erDeaktivertDag(new Date("2017-01-19"))).to.be.equal(false);
         });
 
         it("Feil med tidssone", () => {
             const day = new Date("Wed Jul 20 2016 12:00:00 GMT+0200 (Central Europe Daylight Time)");
             const senesteTom = new Date("Wed Jul 20 2016 02:00:00 GMT+0200 (Central Europe Daylight Time)");
             component = shallow(<DaypickerComponent input={input} meta={meta} id="olsen" senesteTom={senesteTom} onKeyUp={onKeyUp} onDayClick={onDayClick}  />);
-            expect(component.instance().erDeaktivertDag(day)).to.be.false;
+            expect(component.instance().erDeaktivertDag(day)).to.be.equal(false);
         });
 
         describe("erDeaktivertDag med bare tidligsteFom", () => {
@@ -160,15 +160,15 @@ describe("DaypickerComponent", () => {
             });
 
             it("Skal returnere true hvis innsendt dato er før tidligsteFom", () => {
-                expect(component.instance().erDeaktivertDag(new Date("2017-01-08"))).to.be.true;
+                expect(component.instance().erDeaktivertDag(new Date("2017-01-08"))).to.be.equal(true);
             });
 
             it("Skal returnere false hvis innsendt dato er samme dag som tidligsteFom", () => {
-                expect(component.instance().erDeaktivertDag(new Date("2017-01-10"))).to.be.false;
+                expect(component.instance().erDeaktivertDag(new Date("2017-01-10"))).to.be.equal(false);
             });
 
             it("Skal returnere false hvis innsendt dato er etter tidligsteFom", () => {
-                expect(component.instance().erDeaktivertDag(new Date("2017-01-11"))).to.be.false;
+                expect(component.instance().erDeaktivertDag(new Date("2017-01-11"))).to.be.equal(false);
             });
         });
 
@@ -180,15 +180,15 @@ describe("DaypickerComponent", () => {
             });
 
             it("Skal returnere true hvis innsendt dato er etter senesteTom", () => {
-                expect(component.instance().erDeaktivertDag(new Date("2017-01-21"))).to.be.true;
+                expect(component.instance().erDeaktivertDag(new Date("2017-01-21"))).to.be.equal(true);
             });
 
             it("Skal returnere false hvis innsendt dato er samme dag som senesteTom", () => {
-                expect(component.instance().erDeaktivertDag(new Date("2017-01-20"))).to.be.false;
+                expect(component.instance().erDeaktivertDag(new Date("2017-01-20"))).to.be.equal(false);
             });
 
             it("Skal returnere false hvis innsendt dato er før senesteTom", () => {
-                expect(component.instance().erDeaktivertDag(new Date("2017-01-11"))).to.be.false;
+                expect(component.instance().erDeaktivertDag(new Date("2017-01-11"))).to.be.equal(false);
             });
         });
     });

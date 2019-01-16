@@ -20,7 +20,7 @@ describe('TidslinjeContainer', () => {
     beforeEach(() => {
         state.tidslinjer = {
             data: [{
-                hendelser: [{foo: 1}, {foo: 2}]
+                hendelser: [{foo: 1}, {foo: 2}],
             }],
             hentingFeilet: false,
             henter: false,

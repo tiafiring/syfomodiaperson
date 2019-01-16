@@ -1,6 +1,4 @@
-import React from 'react';
 import { expect } from 'chai';
-import { mount, shallow, render } from 'enzyme';
 import { mapStateToProps } from '../../../js/containers/MotestatusContainer';
 
 describe('MotestatusContainerTest', () => {
@@ -9,7 +7,10 @@ describe('MotestatusContainerTest', () => {
         let ownProps;
 
         beforeEach(() => {
-            ownProps = { moteUuid: 'dced4bbd-13a6-4c5b-81f4-e04390b8c986', fnr: '123456'};
+            ownProps = {
+                moteUuid: 'dced4bbd-13a6-4c5b-81f4-e04390b8c986',
+                fnr: '123456',
+            };
             state = {
                 ledetekster: { henter: false, data: {} },
                 moter: {
@@ -87,7 +88,7 @@ describe('MotestatusContainerTest', () => {
                         resultat: 'RESERVERT',
                         varseltype: 'OPPRETTET'
                     }],
-                    svar: []
+                    svar: [],
                 }],
                 alternativer: [],
             }];
@@ -102,7 +103,7 @@ describe('MotestatusContainerTest', () => {
                         varseltype: 'OPPRETTET'
                     }],
                     svartidspunkt: '2011-12-12T11:00:00Z',
-                    svar: []
+                    svar: [],
                 }],
                 alternativer: [],
             });
@@ -115,15 +116,15 @@ describe('MotestatusContainerTest', () => {
                 deltakere: [{
                     svartidspunkt: '2011-12-12T11:00:00Z',
                     type: 'Bruker',
-                    svar: []
+                    svar: [],
                 },{
                     svartidspunkt: '2011-12-12T11:00:00Z',
                     type: 'arbeidsgiver',
-                    svar: []
+                    svar: [],
                 },{
                     svartidspunkt: '2011-12-12T11:00:00Z',
                     type: 'testtype',
-                    svar: []
+                    svar: [],
                 }],
                 alternativer: [],
             }];
@@ -134,15 +135,15 @@ describe('MotestatusContainerTest', () => {
                 deltakere: [{
                     svartidspunkt: '2011-12-12T11:00:00Z',
                     type: 'testtype',
-                    svar: []
+                    svar: [],
                 },{
                     type: 'Bruker',
                     svartidspunkt: '2011-12-12T11:00:00Z',
-                    svar: []
+                    svar: [],
                 },{
                     svartidspunkt: '2011-12-12T11:00:00Z',
                     type: 'arbeidsgiver',
-                    svar: []
+                    svar: [],
                 }],
                 alternativer: [],
             });
@@ -165,15 +166,15 @@ describe('MotestatusContainerTest', () => {
                     },{
                         id: 3,
                         tid: '2011-12-12T11:00:00Z',
-                    }]
+                    }],
                 }],
                 alternativer: [{
                     id: 1,
                     tid: '2012-12-12T11:00:00Z',
-                },{
+                }, {
                     id: 2,
                     tid: '2013-12-12T11:00:00Z',
-                },{
+                }, {
                     id: 3,
                     tid: '2011-12-12T11:00:00Z',
                 }],
@@ -188,25 +189,25 @@ describe('MotestatusContainerTest', () => {
                     svar: [{
                         id: 3,
                         tid: '2011-12-12T11:00:00Z',
-                    },{
+                    }, {
                         id: 1,
                         tid: '2012-12-12T11:00:00Z',
-                    },{
+                    }, {
                         id: 2,
                         tid: '2013-12-12T11:00:00Z',
-                    }]
+                    }],
                 }],
                 alternativer: [{
                     id: 3,
                     tid: '2011-12-12T11:00:00Z',
-                },{
+                }, {
                     id: 1,
                     tid: '2012-12-12T11:00:00Z',
-                },{
+                }, {
                     id: 2,
                     tid: '2013-12-12T11:00:00Z',
                 }],
             });
         });
-    })
+    });
 });

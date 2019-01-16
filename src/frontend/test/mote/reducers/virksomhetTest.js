@@ -4,14 +4,13 @@ import virksomhet from '../../../js/reducers/virksomhet';
 import * as actions from '../../../js/actions/virksomhet_actions';
 
 describe('virksomhet', () => {
-
     it('Har en default state', () => {
         const state = virksomhet();
         expect(state).to.deep.equal({
             data: {},
             henter: false,
             hentingFeilet: false,
-        })
+        });
     });
 
     it('Håndterer henterVirksomhet()', () => {
@@ -21,7 +20,7 @@ describe('virksomhet', () => {
             data: {},
             henter: true,
             hentingFeilet: false,
-        })
+        });
     });
 
     it('Håndterer virksomhetHentet når det ikke finnes data fra før', () => {
@@ -38,11 +37,11 @@ describe('virksomhet', () => {
         const nextState = virksomhet(currentState, action);
         expect(nextState).to.deep.equal({
             data: {
-                '8877766': 'NAV Consulting'
+                8877766: 'NAV Consulting',
             },
             henter: false,
             hentingFeilet: false,
-        })
+        });
     });
 
     it('Håndterer virksomhetHentet når det finnes data fra før', () => {
@@ -53,20 +52,20 @@ describe('virksomhet', () => {
         const action = actions.virksomhetHentet(orgnummer, data);
         const currentState = deepFreeze({
             data: {
-                '123': 'BEKK',
+                123: 'BEKK',
             },
             henter: true,
-            hentingFeilet: false
+            hentingFeilet: false,
         });
         const nextState = virksomhet(currentState, action);
         expect(nextState).to.deep.equal({
             data: {
-                '8877766': 'NAV Consulting',
-                '123': 'BEKK',
+                8877766: 'NAV Consulting',
+                123: 'BEKK',
             },
             henter: false,
             hentingFeilet: false,
-        })
+        });
     });
 
     it('Håndterer hentVirksomhetFeilet', () => {
@@ -81,6 +80,6 @@ describe('virksomhet', () => {
             data: {},
             henter: false,
             hentingFeilet: true,
-        })
+        });
     });
 });

@@ -35,7 +35,7 @@ describe("Brodsmuler", () => {
             sti: "/dine-sykmeldinger"
         }, {
             tittel: "Din sykmelding",
-            erKlikkbar: false
+            erKlikkbar: false,
         }];
         const component = mount(<Brodsmuler brodsmuler={brodsmuler} />);
         expect(component.find("a").length).to.equal(1);

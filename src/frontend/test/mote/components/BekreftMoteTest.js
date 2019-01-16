@@ -29,13 +29,13 @@ const getMoteUtenSvar = (mote) => {
                 id: 1,
                 tid: new Date('2017-03-07T15:18:24.323'),
                 created: new Date('2017-02-22T15:18:24.323'),
-                sted: 'Sannergata 2',
+                sted: 'Testveien 2',
                 valgt: false,
             }, {
                 id: 2,
                 tid: new Date('2017-03-09T15:18:24.323'),
                 created: new Date('2017-02-22T15:18:24.323'),
-                sted: 'Sannergata 2',
+                sted: 'Testveien 2',
                 valgt: false,
             }],
         }, {
@@ -50,13 +50,13 @@ const getMoteUtenSvar = (mote) => {
                 id: 1,
                 tid: new Date('2017-03-07T15:18:24.323'),
                 created: new Date('2017-02-22T15:18:24.323'),
-                sted: 'Sannergata 2',
+                sted: 'Testveien 2',
                 valgt: false,
             }, {
                 id: 2,
                 tid: new Date('2017-03-09T15:18:24.323'),
                 created: new Date('2017-02-22T15:18:24.323'),
-                sted: 'Sannergata 2',
+                sted: 'Testveien 2',
                 valgt: false,
             }],
         }],
@@ -65,13 +65,13 @@ const getMoteUtenSvar = (mote) => {
             id: 1,
             tid: new Date('2017-03-07T15:18:24.323'),
             created: new Date('2017-02-22T15:18:24.323'),
-            sted: 'Sannergata 2',
+            sted: 'Testveien 2',
             valgt: false,
         }, {
             id: 2,
             tid: new Date('2017-02-25T15:18:24.323'),
             created: new Date('2017-02-22T15:18:24.323'),
-            sted: 'Sannergata 2',
+            sted: 'Testveien 2',
             valgt: false,
       }],
     }, mote);
@@ -94,15 +94,15 @@ const getMoteMedSvar = (mote) => {
                id: 1,
                tid: new Date('2017-03-07T15:18:24.323'),
                created: new Date('2017-02-22T15:18:24.323'),
-               sted: 'Sannergata 2',
+               sted: 'Testveien 2',
                valgt: false,
             }, {
                id: 2,
                tid: new Date('2017-03-09T15:18:24.323'),
                created: new Date('2017-02-22T15:18:24.323'),
-               sted: 'Sannergata 2',
+               sted: 'Testveien 2',
                valgt: true,
-            }]
+            }],
         }, {
            hendelser: [],
            deltakerUuid: 'uuid2',
@@ -115,30 +115,30 @@ const getMoteMedSvar = (mote) => {
                id: 1,
                tid: new Date('2017-03-07T15:18:24.323'),
                created: new Date('2017-02-22T15:18:24.323'),
-               sted: 'Sannergata 2',
-               valgt: false
+               sted: 'Testveien 2',
+               valgt: false,
             }, {
                id: 2,
                tid: new Date('2017-03-09T15:18:24.323'),
                created: new Date('2017-02-22T15:18:24.323'),
-               sted: 'Sannergata 2',
-               valgt: true
-            }]
+               sted: 'Testveien 2',
+               valgt: true,
+            }],
         }],
        bekreftetAlternativ: 1,
        alternativer: [{
            id: 1,
            tid: new Date('2017-03-07T15:18:24.323'),
            created: new Date('2017-02-22T15:18:24.323'),
-           sted: 'Sannergata 2',
-           valgt: false
+           sted: 'Testveien 2',
+           valgt: false,
         }, {
            id: 2,
            tid: new Date('2017-02-25T15:18:24.323'),
            created: new Date('2017-02-22T15:18:24.323'),
-           sted: 'Sannergata 2',
-           valgt: true
-        }]
+           sted: 'Testveien 2',
+           valgt: true,
+        }],
     }, mote);
 };
 const getAlternativUtenSvar = (alternativ) => {
@@ -146,8 +146,8 @@ const getAlternativUtenSvar = (alternativ) => {
        id: 1,
        tid: new Date('2017-02-25T15:18:24.323'),
        created: new Date('2017-02-22T15:18:24.323'),
-       sted: 'Sannergata 2',
-       valgt: false
+       sted: 'Testveien 2',
+       valgt: false,
     }, alternativ);
 };
 const getAlternativMedSvar = (alternativ) => {
@@ -155,8 +155,8 @@ const getAlternativMedSvar = (alternativ) => {
        id: 2,
        tid: new Date('2017-02-25T15:18:24.323'),
        created: new Date('2017-02-22T15:18:24.323'),
-       sted: 'Sannergata 2',
-       valgt: true
+       sted: 'Testveien 2',
+       valgt: true,
     }, alternativ);
 };
 
