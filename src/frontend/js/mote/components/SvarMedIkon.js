@@ -9,7 +9,7 @@ import { getSvar } from '../../utils/moteplanleggerUtils';
 import { ARBEIDSGIVER, MULIGE_SVAR } from '../../konstanter';
 
 const getIkonsti = (filnavn) => {
-    return `sykefravaer/img/svg/${filnavn}`;
+    return `/sykefravaer/img/svg/${filnavn}`;
 };
 
 const Ikon = ({ ikon }) => {
