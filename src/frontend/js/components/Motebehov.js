@@ -4,7 +4,7 @@ import Sidetopp from './Sidetopp';
 import MotebehovKvittering from './MotebehovKvittering';
 import BehandleMotebehovKnapp from './BehandleMotebehovKnapp';
 
-export const Motebehov = (
+const Motebehov = (
     {
         actions,
         fnr,

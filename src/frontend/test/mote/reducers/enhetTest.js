@@ -1,4 +1,4 @@
-import { expect} from 'chai';
+import { expect } from 'chai';
 import deepFreeze from 'deep-freeze';
 import enhet from '../../../js/reducers/enhet';
 import * as actions from '../../../js/actions/enhet_actions';

@@ -1,16 +1,15 @@
 import chai from 'chai';
-import React from 'react'
-import {mount, shallow} from 'enzyme';
+import React from 'react';
+import { mount, shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import { Field } from 'redux-form';
-import MaskedInput from 'react-maskedinput';
+import Datovelger, { DatoField, MONTHS, WEEKDAYS_LONG, WEEKDAYS_SHORT, validerDatoField } from '../../js/components/datovelger/Datovelger';
+import DaypickerComponent from '../../js/components/datovelger/DayPicker';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
 
-import Datovelger, { DatoField, Caption, MONTHS, WEEKDAYS_LONG, WEEKDAYS_SHORT, validerDatoField } from '../../js/components/datovelger/Datovelger';
-import DaypickerComponent from '../../js/components/datovelger/DayPicker';
 
 describe('Datovelger', () => {
     let component;
@@ -31,7 +30,7 @@ describe('Datovelger', () => {
 
     describe('Datovelger', () => {
         beforeEach(() => {
-            component = shallow(<Datovelger name='halla' prop='minprop' skjemanavn='OLSEN' />);
+            component = shallow(<Datovelger name="halla" prop="minprop" skjemanavn="OLSEN" />);
         });
 
         it('Skal inneholde et Field', () => {
@@ -41,12 +40,12 @@ describe('Datovelger', () => {
 
         it('Skal sende en validate-funksjon videre til Field', () => {
             expect(typeof component.find(Field).prop('validate')).to.equal('function');
-        })
+        });
 
         it('Skal sende props videre til Field', () => {
             expect(component.find(Field).prop('name')).to.equal('halla');
             expect(component.find(Field).prop('prop')).to.equal('minprop');
-        })
+        });
     });
 
     describe('validerDatoField', () => {
@@ -58,7 +57,7 @@ describe('Datovelger', () => {
         it('Skal returnere Datoen må være på formatet dd.mm.åååå hvis dato er på feil format', () => {
             const s = 'Datoen må være på formatet dd.mm.åååå';
             const res = validerDatoField('olsen');
-            const res2 = validerDatoField('22.02.200')
+            const res2 = validerDatoField('22.02.200');
             expect(res).to.equal(s);
             expect(res2).to.equal(s);
         });
@@ -155,15 +154,14 @@ describe('Datovelger', () => {
         beforeEach(() => {
             input = {
                 value: '',
-            },
+            };
             meta = {
                 touched: false,
                 error: '',
-            },
-            component = shallow(<DatoField input={input} meta={meta} id='olsen' />);
+            };
+            component = shallow(<DatoField input={input} meta={meta} id="olsen" />);
             preventDefault = sinon.spy();
             stopImmediatePropagation = sinon.spy();
-
         });
 
         it('Skal sette erApen til false', () => {
@@ -178,7 +176,7 @@ describe('Datovelger', () => {
 
         it('Skal inneholde et MaskedInput-felt med riktig ID', () => {
             expect(component.find('MaskedInput[type="tel"]')).to.have.length(1);
-            expect(component.find('MaskedInput').prop('id')).to.equal('olsen')
+            expect(component.find('MaskedInput').prop('id')).to.equal('olsen');
         });
 
         describe('Når man klikker på toggle', () => {
@@ -186,7 +184,7 @@ describe('Datovelger', () => {
 
             beforeEach(() => {
                 component.find('.js-toggle').simulate('click', {
-                    preventDefault
+                    preventDefault,
                 });
                 dp = component.find(DaypickerComponent);
             });
@@ -198,20 +196,20 @@ describe('Datovelger', () => {
             it('Skal sende med dager, måneder og år på norsk', () => {
                 expect(dp.prop('weekdaysShort')).to.equal(WEEKDAYS_SHORT);
                 expect(dp.prop('weekdaysLong')).to.equal(WEEKDAYS_LONG);
-                expect(dp.prop('months')).to.equal(MONTHS)
+                expect(dp.prop('months')).to.equal(MONTHS);
             });
         });
 
         describe('Når man klikker på toggle to ganger', () => {
             beforeEach(() => {
-                component = mount(<DatoField input={input} meta={meta} id='olsen' />);
+                component = mount(<DatoField input={input} meta={meta} id="olsen" />);
                 component.find('.js-toggle').simulate('click', {
                     preventDefault,
-                    stopImmediatePropagation
+                    stopImmediatePropagation,
                 });
                 component.find('.js-toggle').simulate('click', {
                     preventDefault,
-                    stopImmediatePropagation
+                    stopImmediatePropagation,
                 });
             });
 

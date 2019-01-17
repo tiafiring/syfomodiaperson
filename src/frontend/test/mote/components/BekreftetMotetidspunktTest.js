@@ -1,7 +1,7 @@
 import { expect } from 'chai';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
-import BekreftetMotetidspunkt from '../../../js/mote/components/BekreftetMotetidspunkt'
+import BekreftetMotetidspunkt from '../../../js/mote/components/BekreftetMotetidspunkt';
 import DatoOgTid from '../../../js/mote/components/DatoOgTid';
 
 describe('BekreftetMotetidspunkt', () => {
@@ -11,7 +11,7 @@ describe('BekreftetMotetidspunkt', () => {
 
     beforeEach(() => {
         window.APP_SETTINGS = {
-            APP_ROOT: '/'
+            APP_ROOT: '/',
         };
         mote = {
             id: 0,
@@ -124,7 +124,7 @@ describe('BekreftetMotetidspunkt', () => {
         component = shallow(<BekreftetMotetidspunkt
             ledetekster={ledetekster}
             mote={mote}
-        />)
+        />);
     });
 
     it('Skal inneholde det bekreftede tidspunktet', () => {

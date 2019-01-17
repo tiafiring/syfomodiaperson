@@ -47,5 +47,5 @@ describe('epostinnhold_actions', () => {
                 id: 1,
             },
         });
-    })
+    });
 });

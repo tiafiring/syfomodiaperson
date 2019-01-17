@@ -35,7 +35,7 @@ describe('MotestatusContainerTest', () => {
                     },
                 },
                 virksomhet: {
-                    navn: 'BEKK'
+                    navn: 'BEKK',
                 },
             };
         });
@@ -48,7 +48,7 @@ describe('MotestatusContainerTest', () => {
         it('Skal returnere møte', () => {
             ownProps = {
                 moteUuid: 'dced4bbd-13a6-4c5b-81f4-e04390b8c986',
-                fnr: '123456'
+                fnr: '123456',
             };
             const props = mapStateToProps(state, ownProps);
             expect(props.mote).to.deep.equal({
@@ -86,7 +86,7 @@ describe('MotestatusContainerTest', () => {
                     type: 'Bruker',
                     hendelser: [{
                         resultat: 'RESERVERT',
-                        varseltype: 'OPPRETTET'
+                        varseltype: 'OPPRETTET',
                     }],
                     svar: [],
                 }],
@@ -100,7 +100,7 @@ describe('MotestatusContainerTest', () => {
                     type: 'Bruker',
                     hendelser: [{
                         resultat: 'RESERVERT',
-                        varseltype: 'OPPRETTET'
+                        varseltype: 'OPPRETTET',
                     }],
                     svartidspunkt: '2011-12-12T11:00:00Z',
                     svar: [],
@@ -117,11 +117,11 @@ describe('MotestatusContainerTest', () => {
                     svartidspunkt: '2011-12-12T11:00:00Z',
                     type: 'Bruker',
                     svar: [],
-                },{
+                }, {
                     svartidspunkt: '2011-12-12T11:00:00Z',
                     type: 'arbeidsgiver',
                     svar: [],
-                },{
+                }, {
                     svartidspunkt: '2011-12-12T11:00:00Z',
                     type: 'testtype',
                     svar: [],
@@ -136,11 +136,11 @@ describe('MotestatusContainerTest', () => {
                     svartidspunkt: '2011-12-12T11:00:00Z',
                     type: 'testtype',
                     svar: [],
-                },{
+                }, {
                     type: 'Bruker',
                     svartidspunkt: '2011-12-12T11:00:00Z',
                     svar: [],
-                },{
+                }, {
                     svartidspunkt: '2011-12-12T11:00:00Z',
                     type: 'arbeidsgiver',
                     svar: [],
@@ -160,10 +160,10 @@ describe('MotestatusContainerTest', () => {
                     svar: [{
                         id: 1,
                         tid: '2012-12-12T11:00:00Z',
-                    },{
+                    }, {
                         id: 2,
                         tid: '2013-12-12T11:00:00Z',
-                    },{
+                    }, {
                         id: 3,
                         tid: '2011-12-12T11:00:00Z',
                     }],

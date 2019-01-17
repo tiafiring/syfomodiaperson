@@ -1,10 +1,12 @@
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+
 Enzyme.configure({ adapter: new Adapter() });
 
-require("babel-core/register");
-//disable
+require('babel-core/register');
+// disable
 const jsdom = require('jsdom');
+
 const document = jsdom.jsdom('<!doctype html><html><body></body></html>');
 const window = document.defaultView;
 
@@ -15,20 +17,20 @@ global.window.APP_SETTINGS = {
 };
 let temp = null;
 const localS = {
-    getItem: function(key) {
+    getItem(key) {
         return temp;
     },
-    setItem: function(key, value) {
+    setItem(key, value) {
         temp = value;
-    }
+    },
 };
 
 global.localStorage = localS;
 
 propagateToGlobal(window);
 
-function propagateToGlobal (window) {
-    for(let key in window) {
+function propagateToGlobal(window) {
+    for (const key in window) {
         if (!window.hasOwnProperty(key)) {
             continue;
         }

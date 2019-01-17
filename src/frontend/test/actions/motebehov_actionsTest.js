@@ -8,7 +8,6 @@ import {
 } from '../../js/actions/actiontyper';
 
 describe('moter_actions', () => {
-
     it('Skal ha en hentMoter()-funksjon som returnerer riktig action', () => {
         const action = actions.hentMotebehov('123');
 
@@ -38,7 +37,7 @@ describe('moter_actions', () => {
             type: MOTEBEHOV_HENTET,
             data: {
                 id: 1,
-                opprettetAv: '1234'
+                opprettetAv: '1234',
             },
         });
     });

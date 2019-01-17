@@ -1,5 +1,4 @@
 import chai from 'chai';
-import React from 'react';
 import chaiEnzyme from 'chai-enzyme';
 import {
     HENT_DISKRESJONSKODE_FORESPURT,
@@ -7,7 +6,7 @@ import {
     DISKRESJONSKODE_HENTET,
     HENT_DISKRESJONSKODE_FEILET,
 } from '../../js/actions/actiontyper';
-import * as actions  from '../../js/actions/diskresjonskode_actions';
+import * as actions from '../../js/actions/diskresjonskode_actions';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;

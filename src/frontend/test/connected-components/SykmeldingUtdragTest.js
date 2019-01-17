@@ -37,7 +37,11 @@ describe('SykmeldingUtdrag', () => {
     });
 
     it('Skal hente sykmeldinger', () => {
-        shallow(<Container {...mapStateToProps(state, ownProps)} {...ownProps} {...actions} />);
+        shallow(<Container
+            {...mapStateToProps(state, ownProps)}
+            {...ownProps}
+            {...actions}
+        />);
         expect(hentSykmeldinger.called).to.equal(true);
     });
 
@@ -47,13 +51,17 @@ describe('SykmeldingUtdrag', () => {
         expect(props.sykmelding.id).to.equal(sykmelding.id);
     });
 
-    describe("Når søknaden er en arbeidstaker-søknad", () => {
+    describe('Når søknaden er en arbeidstaker-søknad', () => {
         beforeEach(() => {
             state.sykmeldinger = sykmeldinger(sykmeldinger(), sykmeldingerHentet(mockSykmeldinger));
         });
 
-        it("Skal vise et SykmeldingUtdrag", () => {
-            const component = shallow(<Container {...mapStateToProps(state, ownProps)} {...ownProps} {...actions} />);
+        it('Skal vise et SykmeldingUtdrag', () => {
+            const component = shallow(<Container
+                {...mapStateToProps(state, ownProps)}
+                {...ownProps}
+                {...actions}
+            />);
             expect(component.find(SykmeldingUtdrag).length).to.equal(1);
         });
     });

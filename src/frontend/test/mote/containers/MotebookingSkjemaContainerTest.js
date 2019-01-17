@@ -1,7 +1,5 @@
-import React from 'react';
 import { expect } from 'chai';
-import { shallow } from 'enzyme';
-import MotebookingSkjemaContainer, { mapStateToProps } from '../../../js/containers/MotebookingSkjemaContainer';
+import { mapStateToProps } from '../../../js/containers/MotebookingSkjemaContainer';
 
 describe('MotebookingSkjemaContainer', () => {
     describe('mapStateToProps', () => {
@@ -15,7 +13,7 @@ describe('MotebookingSkjemaContainer', () => {
             state = {
                 ledetekster: {
                     henter: false,
-                    data: {}
+                    data: {},
                 },
                 ledere: {
                     data: [{
@@ -35,7 +33,7 @@ describe('MotebookingSkjemaContainer', () => {
             };
             state.navbruker = {
                 data: {
-                    navn: 'Ole'
+                    navn: 'Ole',
                 },
             };
         });

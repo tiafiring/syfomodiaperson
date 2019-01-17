@@ -22,7 +22,7 @@ import {
     ikkeHenterEllerForsoktHentetMotebehov,
 } from '../utils/reducerUtils';
 import { finnLedereUtenInnsendtMotebehov } from '../utils/ledereUtils';
-import { Motebehov } from '../components/Motebehov';
+import Motebehov from '../components/Motebehov';
 import { bindActionCreators } from 'redux';
 
 

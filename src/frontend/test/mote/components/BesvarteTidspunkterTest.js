@@ -83,7 +83,7 @@ describe('BesvarteTidspunkter', () => {
                 mote={moteBesvartTrueAvArbeidsgiver}
                 alternativer={moteBesvartTrueAvArbeidsgiver.alternativer}
                 deltakertype={NAV_VEILEDER}
-                fnr='123'
+                fnr="123"
             />);
         });
 
@@ -109,7 +109,7 @@ describe('BesvarteTidspunkter', () => {
                 mote={moteIkkeBesvart}
                 alternativer={moteIkkeBesvart.alternativer}
                 deltakertype={NAV_VEILEDER}
-                fnr='123'
+                fnr="123"
             />);
         });
 
@@ -136,7 +136,7 @@ describe('BesvarteTidspunkter', () => {
                 mote={mote}
                 alternativer={moteBesvartTrueAvArbeidsgiver.alternativer}
                 deltakertype={NAV_VEILEDER}
-                fnr='123'
+                fnr="123"
             />);
         });
     });
@@ -152,7 +152,7 @@ describe('BesvarteTidspunkter', () => {
                 mote={mote}
                 alternativer={moteBesvartTrueAvArbeidsgiver.alternativer}
                 deltakertype={NAV_VEILEDER}
-                fnr='123'
+                fnr="123"
             />);
         });
     });

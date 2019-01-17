@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const mockSykepengesoknader = [
     {
         aktiviteter: [
@@ -1204,7 +1205,7 @@ const mockSykepengesoknader = [
                     arbeidsgrad: null,
                     arbeidstimerNormalUke: 20.0,
                     beregnetArbeidsgrad: 83,
-                    timer: 10.0
+                    timer: 10.0,
                 },
                 grad: 100,
                 id: 115004,
@@ -3018,3 +3019,4 @@ const mockSykepengesoknader = [
     },
 ];
 export default mockSykepengesoknader;
+/* eslint-enable max-len */

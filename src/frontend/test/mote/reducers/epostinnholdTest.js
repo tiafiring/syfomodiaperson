@@ -20,7 +20,7 @@ describe('epostinnhold', () => {
         expect(state).to.deep.equal({
             henter: true,
             hentingFeilet: false,
-        })
+        });
     });
 
     it('Håndterer epostInnholdHentet', () => {

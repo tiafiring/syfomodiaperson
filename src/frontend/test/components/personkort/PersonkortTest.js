@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
 import { Utvidbar } from 'digisyfo-npm';
 import EtikettBase from 'nav-frontend-etiketter';
 import Personkort from '../../../js/components/personkort/Personkort';
-import PersonkortVisning  from '../../../js/components/personkort/PersonkortVisning';
+import PersonkortVisning from '../../../js/components/personkort/PersonkortVisning';
 import { hentBrukersAlderFraFnr } from '../../../js/utils/fnrUtils';
-import PersonkortHeader from "../../../js/components/personkort/PersonkortHeader";
+import PersonkortHeader from '../../../js/components/personkort/PersonkortHeader';
 
 describe('Personkort', () => {
     let hentDiskresjonskode;
@@ -52,7 +52,7 @@ describe('Personkort', () => {
     });
 
     it('Skal vise PersonkortHeader', () => {
-        const komponent = mount(<Personkort
+        komponent = mount(<Personkort
             actions={actions}
             diskresjonskode={diskresjonskode}
             egenansatt={egenansatt}
@@ -71,11 +71,6 @@ describe('Personkort', () => {
     });
 
     describe('PersonkortHeader', () => {
-        let diskresjonskode;
-        let egenansatt;
-        let navbruker;
-        let komponent;
-
         beforeEach(() => {
             diskresjonskode = { data: {} };
             egenansatt = { data: {} };
@@ -83,7 +78,7 @@ describe('Personkort', () => {
                 navn: 'Knut',
                 kontaktinfo: {
                     fnr: '1234',
-                }
+                },
             };
             komponent = shallow(<PersonkortHeader
                 diskresjonskode={diskresjonskode}
@@ -118,7 +113,7 @@ describe('Personkort', () => {
                 egenansatt={egenansatt}
                 navbruker={navbruker}
             />);
-           expect(komponent.find(EtikettBase)).to.have.length(1);
+            expect(komponent.find(EtikettBase)).to.have.length(1);
         });
 
         it('Skal vise en EtikettBase, om bruker har diskresjonskode 7', () => {

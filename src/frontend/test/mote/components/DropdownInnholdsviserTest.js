@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import { mount, shallow } from 'enzyme';
-import React from 'react'
+import { shallow } from 'enzyme';
+import React from 'react';
 import sinon from 'sinon';
 import DropdownInnholdsviser from '../../../js/mote/components/DropdownInnholdsviser';
 import AppSpinner from '../../../js/components/AppSpinner';
@@ -102,7 +102,7 @@ describe('Innholdsviser', () => {
         component = shallow(<DropdownInnholdsviser
             hentEpostinnhold={hentEpostinnhold}
             mote={mote}
-            type='Bruker'
+            type="Bruker"
         />);
         component.instance().componentDidMount();
         expect(hentEpostinnhold.calledWith('uuid2', 1)).to.be.equal(true);
@@ -113,7 +113,7 @@ describe('Innholdsviser', () => {
             hentEpostinnhold={hentEpostinnhold}
             mote={mote}
             henter
-            type='Bruker'
+            type="Bruker"
         />);
         expect(component.find(AppSpinner)).to.have.length(1);
     });
@@ -123,7 +123,7 @@ describe('Innholdsviser', () => {
             hentEpostinnhold={hentEpostinnhold}
             mote={mote}
             epostinnhold={epostinnhold}
-            type='Bruker'
+            type="Bruker"
         />);
         expect(component.html()).to.contain('Mitt emne, arbeidstaker');
         expect(component.html()).to.contain('Mitt innhold, arbeidstaker');
@@ -133,15 +133,19 @@ describe('Innholdsviser', () => {
         component = shallow(<DropdownInnholdsviser
             hentArbeidsgiverEpostinnhold={hentArbeidsgiverEpostinnhold}
             mote={mote}
-            type='Arbeidsgiver'
+            type="Arbeidsgiver"
         />);
         component.instance().componentDidMount();
         expect(hentArbeidsgiverEpostinnhold.calledWith('uuid1', 1)).to.be.equal(true);
     });
 
     it('Viser AppSpinner når epostinnhold hentes for arbeidsgiver', () => {
-        component = shallow(<DropdownInnholdsviser hentArbeidsgiverEpostinnhold={hentArbeidsgiverEpostinnhold}
-                                                   mote={mote} henter={true} type='Arbeidsgiver'/>)
+        component = shallow(<DropdownInnholdsviser
+            hentArbeidsgiverEpostinnhold={hentArbeidsgiverEpostinnhold}
+            mote={mote}
+            henter
+            type="Arbeidsgiver"
+        />);
         expect(component.find(AppSpinner)).to.have.length(1);
     });
 
@@ -150,7 +154,7 @@ describe('Innholdsviser', () => {
             hentArbeidsgiverEpostinnhold={hentArbeidsgiverEpostinnhold}
             mote={mote}
             arbeidsgiverepostinnhold={arbeidsgiverepostinnhold}
-            type='Arbeidsgiver'
+            type="Arbeidsgiver"
         />);
         expect(component.html()).to.contain('Mitt emne, arbeidsgiver');
         expect(component.html()).to.contain('Mitt innhold arbeidsgiver');

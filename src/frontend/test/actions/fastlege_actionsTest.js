@@ -1,5 +1,4 @@
 import chai from 'chai';
-import React from 'react';
 import chaiEnzyme from 'chai-enzyme';
 import {
     HENT_FASTLEGER_FORESPURT,
@@ -7,7 +6,7 @@ import {
     FASTLEGER_HENTET,
     HENT_FASTLEGER_FEILET,
 } from '../../js/actions/actiontyper';
-import * as actions  from '../../js/actions/fastleger_actions';
+import * as actions from '../../js/actions/fastleger_actions';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;

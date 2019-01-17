@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import {mount, shallow  } from 'enzyme';
-import React from 'react'
+import { shallow } from 'enzyme';
+import React from 'react';
 import sinon from 'sinon';
 import KnappBase from 'nav-frontend-knapper';
 import BekreftMoteSkjema, { InnholdsviserContainer } from '../../../js/mote/components/BekreftMoteSkjema';
@@ -140,42 +140,6 @@ const getMoteMedSvar = (mote) => {
         }],
     }, mote);
 };
-const getAlternativUtenSvar = (alternativ) => {
-    return Object.assign({}, {
-        id: 1,
-        tid: new Date('2017-02-25T15:18:24.323'),
-        created: new Date('2017-02-22T15:18:24.323'),
-        sted: 'Testveien 2',
-        valgt: false,
-    }, alternativ);
-};
-const getAlternativMedSvar = (alternativ) => {
-    return Object.assign({}, {
-        id: 2,
-        tid: new Date('2017-02-25T15:18:24.323'),
-        created: new Date('2017-02-22T15:18:24.323'),
-        sted: 'Testveien 2',
-        valgt: true,
-    }, alternativ);
-};
-
-describe('BekreftMoteComponent', () => {
-    let ledetekster;
-    let moteUtenSvar;
-    let moteMedSvar;
-    let alternativMedSvar;
-    let alternativUtenSvar;
-
-    beforeEach(() => {
-        moteUtenSvar = getMoteUtenSvar();
-        moteMedSvar = getMoteMedSvar();
-        alternativMedSvar = getAlternativMedSvar();
-        alternativUtenSvar = getAlternativUtenSvar();
-        ledetekster = {
-            'mote.bekreftmote.lightbox-overskrift': 'Bekreft møteforespørsel uten svar'
-        };
-    });
-});
 
 describe('BekreftMoteSkjemaComponent', () => {
     let component;
@@ -185,14 +149,15 @@ describe('BekreftMoteSkjemaComponent', () => {
     beforeEach(() => {
         mote = getMoteMedSvar();
         ledetekster = {
-            'mote.bekreftmote.lightbox-overskrift': 'Bekreft møteforespørsel'
+            'mote.bekreftmote.lightbox-overskrift': 'Bekreft møteforespørsel',
         };
     });
 
     it('Viser tittel', () => {
         component = shallow(<BekreftMoteSkjema
             mote={mote}
-            ledetekster={ledetekster}/>);
+            ledetekster={ledetekster}
+        />);
         expect(component.text()).to.contain('Bekreft møteforespørsel');
     });
 
@@ -207,7 +172,10 @@ describe('BekreftMoteSkjemaComponent', () => {
     });
 
     it('Viser en InnholdsviserContainer', () => {
-        component = shallow(<BekreftMoteSkjema mote={mote} ledetekster={ledetekster}/>);
+        component = shallow(<BekreftMoteSkjema
+            mote={mote}
+            ledetekster={ledetekster}
+        />);
         expect(component.find(InnholdsviserContainer)).to.have.length(1);
     });
 });
@@ -216,13 +184,14 @@ describe('BekreftMoteUtenSvarSkjemaComponent', () => {
     let component;
     let ledetekster;
     let mote;
-    let handleSubmit = sinon.spy();
+    let handleSubmit;
 
     beforeEach(() => {
         mote = getMoteUtenSvar();
         ledetekster = {
             'mote.bekreftmoteutensvar.lightbox-overskrift': 'Har du avklart møtet på andre måter?',
         };
+        handleSubmit = sinon.spy();
     });
 
     it('Viser tittel', () => {

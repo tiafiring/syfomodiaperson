@@ -10,15 +10,15 @@ import { mapStateToProps, MotebookingSide } from '../../js/containers/Motebookin
 describe('MotebookingContainer', () => {
     describe('MotebookingSide', () => {
         let hentMoter;
-        let ledetekster;
         let tilgang;
         let moterTilgang;
+        let component;
         const harIkkeMoterTilgang = {
             harTilgang: false,
-            begrunnelse: 'KODE7'
+            begrunnelse: 'KODE7',
         };
+
         beforeEach(() => {
-            ledetekster = {};
             hentMoter = sinon.spy();
             tilgang = {
                 harTilgang: true,
@@ -27,19 +27,19 @@ describe('MotebookingContainer', () => {
         });
 
         it('Skal vise AppSpinner', () => {
-            const component = shallow(<MotebookingSide
+            component = shallow(<MotebookingSide
                 tilgang={tilgang}
                 hentMoter={hentMoter}
                 henter
                 moterTilgang={moterTilgang}
             />);
-            expect(component.find(AppSpinner)).to.have.length(1)
+            expect(component.find(AppSpinner)).to.have.length(1);
         });
 
         it('Skal hente møter ved init', () => {
-            const component = shallow(<MotebookingSide
+            component = shallow(<MotebookingSide
                 tilgang={tilgang}
-                fnr='123'
+                fnr="123"
                 hentMoter={hentMoter}
                 mote={{}}
                 moterTilgang={moterTilgang}
@@ -49,31 +49,31 @@ describe('MotebookingContainer', () => {
         });
 
         it('Skal vise feilmelding hvis hentingFeilet', () => {
-            const component = shallow(<MotebookingSide
+            component = shallow(<MotebookingSide
                 tilgang={tilgang}
                 hentMoter={hentMoter}
                 mote={{}}
                 moterTilgang={moterTilgang}
                 hentingFeilet
             />);
-            expect(component.find(Feilmelding)).to.have.length(1)
+            expect(component.find(Feilmelding)).to.have.length(1);
         });
 
         it('Skal vise Feilmelding dersom hentMoter gir ikke tilgang', () => {
-            const component = shallow(<MotebookingSide
+            component = shallow(<MotebookingSide
                 tilgang={tilgang}
                 hentMoter={hentMoter}
                 mote={{}}
                 moterTilgang={harIkkeMoterTilgang}
             />);
-            expect(component.find(Feilmelding)).to.have.length(1)
+            expect(component.find(Feilmelding)).to.have.length(1);
         });
 
         it('Skal vise MotestatusContainer hvis det finnes møte', () => {
             const mote = {
-                moteUuid: '8877'
+                moteUuid: '8877',
             };
-            const component = shallow(<MotebookingSide
+            component = shallow(<MotebookingSide
                 tilgang={tilgang}
                 fnr={'fnr'}
                 hentMoter={hentMoter}
@@ -120,7 +120,7 @@ describe('MotebookingContainer', () => {
                     hentingFeilet: false,
                     henter: false,
                     data: {},
-                }
+                },
             };
             ownProps = {
                 params: {
@@ -184,7 +184,7 @@ describe('MotebookingContainer', () => {
 
         it('Skal returnere henter når det ikke hentes møter', () => {
             state.moter.data = [{
-                id: 1.
+                id: 1,
             }];
             state.moter.henter = false;
             state.moter.henter = false;
@@ -240,7 +240,7 @@ describe('MotebookingContainer', () => {
 
         it('Skal returnere sendingFeilet', () => {
             state.moter.data = [{
-                id: 1
+                id: 1,
             }];
             state.moter.sendingFeilet = false;
             const props = mapStateToProps(state, ownProps);

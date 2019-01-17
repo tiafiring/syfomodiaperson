@@ -4,7 +4,7 @@ import { getLedetekst } from 'digisyfo-npm';
 import PersonkortElement from './PersonkortElement';
 import PersonkortInformasjon from './PersonkortInformasjon';
 
-export const PersonkortEnhet = ({ behandlendeEnhet }) => {
+const PersonkortEnhet = ({ behandlendeEnhet }) => {
     const informasjonNokkelTekster = new Map([
         ['enhetId', getLedetekst('modiafront.personkort.visning.nokkeltekster.enhet')],
     ]);

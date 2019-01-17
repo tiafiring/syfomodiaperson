@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const mockSoknader = [
     {
         aktorId: '0101010101010',
@@ -204,7 +205,7 @@ const mockSoknader = [
                                 undertekst: null,
                             },
                         ],
-                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV'
+                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV',
                     },
                 ],
                 undertekst: null,
@@ -255,7 +256,7 @@ const mockSoknader = [
                                 svartype: 'IKKE_RELEVANT',
                                 tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                                 undersporsmal: [],
-                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>'
+                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>',
                             },
                         ],
                         undertekst: null,
@@ -327,12 +328,12 @@ const mockSoknader = [
                 svartype: 'IKKE_RELEVANT',
                 tag: 'VAER_KLAR_OVER_AT',
                 undersporsmal: [],
-                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>'
+                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>',
             },
         ],
         status: 'NY',
         sykmeldingId: '0645158f-7816-42e6-afbd-2262c3182f1f',
-        tom: '2018-09-09'
+        tom: '2018-09-09',
     },
     {
         aktorId: '0101010101010',
@@ -539,7 +540,7 @@ const mockSoknader = [
                                 undertekst: null,
                             },
                         ],
-                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV'
+                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV',
                     },
                 ],
                 undertekst: null,
@@ -590,7 +591,7 @@ const mockSoknader = [
                                 svartype: 'IKKE_RELEVANT',
                                 tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                                 undersporsmal: [],
-                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>'
+                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>',
                             },
                         ],
                         undertekst: null,
@@ -662,12 +663,12 @@ const mockSoknader = [
                 svartype: 'IKKE_RELEVANT',
                 tag: 'VAER_KLAR_OVER_AT',
                 undersporsmal: [],
-                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>'
+                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>',
             },
         ],
         status: 'NY',
         sykmeldingId: '579bc5e5-3158-4db0-8a79-5e91436bce02',
-        tom: '2018-09-09'
+        tom: '2018-09-09',
     },
     {
         aktorId: '0101010101010',
@@ -874,7 +875,7 @@ const mockSoknader = [
                                 undertekst: null,
                             },
                         ],
-                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV'
+                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV',
                     },
                 ],
                 undertekst: null,
@@ -925,7 +926,7 @@ const mockSoknader = [
                                 svartype: 'IKKE_RELEVANT',
                                 tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                                 undersporsmal: [],
-                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>'
+                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>',
                             },
                         ],
                         undertekst: null,
@@ -997,12 +998,12 @@ const mockSoknader = [
                 svartype: 'IKKE_RELEVANT',
                 tag: 'VAER_KLAR_OVER_AT',
                 undersporsmal: [],
-                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>'
+                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>',
             },
         ],
         status: 'NY',
         sykmeldingId: '2b793071-4ec2-47ef-b538-976066475bd3',
-        tom: '2018-09-09'
+        tom: '2018-09-09',
     },
     {
         aktorId: '0101010101010',
@@ -1209,7 +1210,7 @@ const mockSoknader = [
                                 undertekst: null,
                             },
                         ],
-                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV'
+                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV',
                     },
                 ],
                 undertekst: null,
@@ -1260,7 +1261,7 @@ const mockSoknader = [
                                 svartype: 'IKKE_RELEVANT',
                                 tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                                 undersporsmal: [],
-                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>'
+                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>',
                             },
                         ],
                         undertekst: null,
@@ -1332,12 +1333,12 @@ const mockSoknader = [
                 svartype: 'IKKE_RELEVANT',
                 tag: 'VAER_KLAR_OVER_AT',
                 undersporsmal: [],
-                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>'
+                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>',
             },
         ],
         status: 'NY',
         sykmeldingId: '650404f5-941c-4f3b-9658-136dec137e24',
-        tom: '2018-09-09'
+        tom: '2018-09-09',
     },
     {
         aktorId: '0101010101010',
@@ -1544,7 +1545,7 @@ const mockSoknader = [
                                 undertekst: null,
                             },
                         ],
-                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV'
+                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV',
                     },
                 ],
                 undertekst: null,
@@ -1595,7 +1596,7 @@ const mockSoknader = [
                                 svartype: 'IKKE_RELEVANT',
                                 tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                                 undersporsmal: [],
-                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>'
+                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>',
                             },
                         ],
                         undertekst: null,
@@ -1667,12 +1668,12 @@ const mockSoknader = [
                 svartype: 'IKKE_RELEVANT',
                 tag: 'VAER_KLAR_OVER_AT',
                 undersporsmal: [],
-                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>'
+                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>',
             },
         ],
         status: 'NY',
         sykmeldingId: '098437f7-f442-4f95-b517-803ecf8aceaf',
-        tom: '2018-09-10'
+        tom: '2018-09-10',
     },
     {
         aktorId: '0101010101010',
@@ -1879,7 +1880,7 @@ const mockSoknader = [
                                 undertekst: null,
                             },
                         ],
-                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV'
+                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV',
                     },
                 ],
                 undertekst: null,
@@ -1930,7 +1931,7 @@ const mockSoknader = [
                                 svartype: 'IKKE_RELEVANT',
                                 tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                                 undersporsmal: [],
-                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>'
+                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>',
                             },
                         ],
                         undertekst: null,
@@ -2002,12 +2003,12 @@ const mockSoknader = [
                 svartype: 'IKKE_RELEVANT',
                 tag: 'VAER_KLAR_OVER_AT',
                 undersporsmal: [],
-                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>'
+                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>',
             },
         ],
         status: 'NY',
         sykmeldingId: 'f85a7102-9c35-4bc1-bae5-47e821e1752a',
-        tom: '2018-09-10'
+        tom: '2018-09-10',
     },
     {
         aktorId: '0101010101010',
@@ -2214,7 +2215,7 @@ const mockSoknader = [
                                 undertekst: null,
                             },
                         ],
-                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV'
+                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV',
                     },
                 ],
                 undertekst: null,
@@ -2265,7 +2266,7 @@ const mockSoknader = [
                                 svartype: 'IKKE_RELEVANT',
                                 tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                                 undersporsmal: [],
-                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>'
+                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>',
                             },
                         ],
                         undertekst: null,
@@ -2337,12 +2338,12 @@ const mockSoknader = [
                 svartype: 'IKKE_RELEVANT',
                 tag: 'VAER_KLAR_OVER_AT',
                 undersporsmal: [],
-                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>'
+                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>',
             },
         ],
         status: 'NY',
         sykmeldingId: 'c839e3bb-597e-442a-875c-f54e47a1268d',
-        tom: '2018-09-10'
+        tom: '2018-09-10',
     },
     {
         aktorId: '0101010101010',
@@ -2549,7 +2550,7 @@ const mockSoknader = [
                                 undertekst: null,
                             },
                         ],
-                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV'
+                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV',
                     },
                 ],
                 undertekst: null,
@@ -2600,7 +2601,7 @@ const mockSoknader = [
                                 svartype: 'IKKE_RELEVANT',
                                 tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                                 undersporsmal: [],
-                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>'
+                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>',
                             },
                         ],
                         undertekst: null,
@@ -2672,12 +2673,12 @@ const mockSoknader = [
                 svartype: 'IKKE_RELEVANT',
                 tag: 'VAER_KLAR_OVER_AT',
                 undersporsmal: [],
-                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>'
+                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>',
             },
         ],
         status: 'NY',
         sykmeldingId: '1079135a-10bc-4374-885c-201470810d4c',
-        tom: '2018-09-10'
+        tom: '2018-09-10',
     },
     {
         aktorId: '0101010101010',
@@ -2884,7 +2885,7 @@ const mockSoknader = [
                                 undertekst: null,
                             },
                         ],
-                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV'
+                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV',
                     },
                 ],
                 undertekst: null,
@@ -2935,7 +2936,7 @@ const mockSoknader = [
                                 svartype: 'IKKE_RELEVANT',
                                 tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                                 undersporsmal: [],
-                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>'
+                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>',
                             },
                         ],
                         undertekst: null,
@@ -3007,12 +3008,12 @@ const mockSoknader = [
                 svartype: 'IKKE_RELEVANT',
                 tag: 'VAER_KLAR_OVER_AT',
                 undersporsmal: [],
-                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>'
+                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>',
             },
         ],
         status: 'FREMTIDIG',
         sykmeldingId: '42136749-3e2c-4e53-8f78-7c7a3e735b9d',
-        tom: '2018-09-11'
+        tom: '2018-09-11',
     },
     {
         aktorId: '0101010101010',
@@ -3219,7 +3220,7 @@ const mockSoknader = [
                                 undertekst: null,
                             },
                         ],
-                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV'
+                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV',
                     },
                 ],
                 undertekst: null,
@@ -3270,7 +3271,7 @@ const mockSoknader = [
                                 svartype: 'IKKE_RELEVANT',
                                 tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                                 undersporsmal: [],
-                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>'
+                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>',
                             },
                         ],
                         undertekst: null,
@@ -3342,12 +3343,12 @@ const mockSoknader = [
                 svartype: 'IKKE_RELEVANT',
                 tag: 'VAER_KLAR_OVER_AT',
                 undersporsmal: [],
-                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>'
+                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>',
             },
         ],
         status: 'NY',
         sykmeldingId: 'd402c93a-315e-4bd9-af3c-56594e4e6900',
-        tom: '2018-09-10'
+        tom: '2018-09-10',
     },
     {
         aktorId: '0101010101010',
@@ -3366,7 +3367,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Når skal du være utenfor Norge?',
                 svar: [
                     {
-                        verdi: '{\'fom\':\'2018-09-06\',\'tom\':\'2018-09-07\'}'
+                        verdi: '{\'fom\':\'2018-09-06\',\'tom\':\'2018-09-07\'}',
                     },
                 ],
                 svartype: 'PERIODER',
@@ -3383,7 +3384,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Hvor skal du reise?',
                 svar: [
                     {
-                        verdi: 'KKls'
+                        verdi: 'KKls',
                     },
                 ],
                 svartype: 'FRITEKST',
@@ -3400,7 +3401,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du arbeidsgiver?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -3455,7 +3456,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Jeg bekrefter de tre punktene ovenfor. Jeg har avklart reisen med legen.',
                         svar: [
                             {
-                                verdi: 'CHECKED'
+                                verdi: 'CHECKED',
                             },
                         ],
                         svartype: 'CHECKBOX_PANEL',
@@ -3464,7 +3465,7 @@ const mockSoknader = [
                         undertekst: null,
                     },
                 ],
-                undertekst: '<ul>\n    <li>Reisen vil ikke gjøre at jeg blir dårligere </li>\n    <li>Reisen vil ikke gjøre at sykefraværet blir lengre</li>\n    <li>Reisen vil ikke hindre planlagt behandling eller oppfølging med NAV</li>\n</ul>'
+                undertekst: '<ul>\n    <li>Reisen vil ikke gjøre at jeg blir dårligere </li>\n    <li>Reisen vil ikke gjøre at sykefraværet blir lengre</li>\n    <li>Reisen vil ikke hindre planlagt behandling eller oppfølging med NAV</li>\n</ul>',
             },
         ],
         status: 'SENDT',
@@ -3488,7 +3489,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Når skal du være utenfor Norge?',
                 svar: [
                     {
-                        verdi: '{\'fom\':\'2018-09-05\',\'tom\':\'2018-09-07\'}'
+                        verdi: '{\'fom\':\'2018-09-05\',\'tom\':\'2018-09-07\'}',
                     },
                 ],
                 svartype: 'PERIODER',
@@ -3505,7 +3506,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Hvor skal du reise?',
                 svar: [
                     {
-                        verdi: 'Ængland'
+                        verdi: 'Ængland',
                     },
                 ],
                 svartype: 'FRITEKST',
@@ -3522,7 +3523,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du arbeidsgiver?',
                 svar: [
                     {
-                        verdi: 'JA'
+                        verdi: 'JA',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -3537,7 +3538,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Er du 100 % sykmeldt?',
                         svar: [
                             {
-                                verdi: 'NEI'
+                                verdi: 'NEI',
                             },
                         ],
                         svartype: 'JA_NEI',
@@ -3554,7 +3555,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?',
                         svar: [
                             {
-                                verdi: 'NEI'
+                                verdi: 'NEI',
                             },
                         ],
                         svartype: 'JA_NEI',
@@ -3585,7 +3586,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Jeg bekrefter de tre punktene ovenfor. Jeg har avklart reisen med legen og arbeidsgiveren min.',
                         svar: [
                             {
-                                verdi: 'CHECKED'
+                                verdi: 'CHECKED',
                             },
                         ],
                         svartype: 'CHECKBOX_PANEL',
@@ -3594,7 +3595,7 @@ const mockSoknader = [
                         undertekst: null,
                     },
                 ],
-                undertekst: '<ul>\n    <li>Reisen vil ikke gjøre at jeg blir dårligere </li>\n    <li>Reisen vil ikke gjøre at sykefraværet blir lengre</li>\n    <li>Reisen vil ikke hindre planlagt behandling eller oppfølging med NAV eller arbeidsgiver</li>\n</ul>'
+                undertekst: '<ul>\n    <li>Reisen vil ikke gjøre at jeg blir dårligere </li>\n    <li>Reisen vil ikke gjøre at sykefraværet blir lengre</li>\n    <li>Reisen vil ikke hindre planlagt behandling eller oppfølging med NAV eller arbeidsgiver</li>\n</ul>',
             },
         ],
         status: 'SENDT',
@@ -3618,7 +3619,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Når skal du være utenfor Norge?',
                 svar: [
                     {
-                        verdi: '{\'fom\':\'2018-09-05\',\'tom\':\'2018-09-14\'}'
+                        verdi: '{\'fom\':\'2018-09-05\',\'tom\':\'2018-09-14\'}',
                     },
                 ],
                 svartype: 'PERIODER',
@@ -3635,7 +3636,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Hvor skal du reise?',
                 svar: [
                     {
-                        verdi: 'Knut'
+                        verdi: 'Knut',
                     },
                 ],
                 svartype: 'FRITEKST',
@@ -3652,7 +3653,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du arbeidsgiver?',
                 svar: [
                     {
-                        verdi: 'JA'
+                        verdi: 'JA',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -3667,7 +3668,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Er du 100 % sykmeldt?',
                         svar: [
                             {
-                                verdi: 'NEI'
+                                verdi: 'NEI',
                             },
                         ],
                         svartype: 'JA_NEI',
@@ -3684,7 +3685,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?',
                         svar: [
                             {
-                                verdi: 'NEI'
+                                verdi: 'NEI',
                             },
                         ],
                         svartype: 'JA_NEI',
@@ -3715,7 +3716,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Jeg bekrefter de tre punktene ovenfor. Jeg har avklart reisen med legen og arbeidsgiveren min.',
                         svar: [
                             {
-                                verdi: 'CHECKED'
+                                verdi: 'CHECKED',
                             },
                         ],
                         svartype: 'CHECKBOX_PANEL',
@@ -3724,7 +3725,7 @@ const mockSoknader = [
                         undertekst: null,
                     },
                 ],
-                undertekst: '<ul>\n    <li>Reisen vil ikke gjøre at jeg blir dårligere </li>\n    <li>Reisen vil ikke gjøre at sykefraværet blir lengre</li>\n    <li>Reisen vil ikke hindre planlagt behandling eller oppfølging fra NAV eller arbeidsgiveren min</li>\n</ul>'
+                undertekst: '<ul>\n    <li>Reisen vil ikke gjøre at jeg blir dårligere </li>\n    <li>Reisen vil ikke gjøre at sykefraværet blir lengre</li>\n    <li>Reisen vil ikke hindre planlagt behandling eller oppfølging fra NAV eller arbeidsgiveren min</li>\n</ul>',
             },
         ],
         status: 'SENDT',
@@ -3748,7 +3749,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Når skal du være utenfor Norge?',
                 svar: [
                     {
-                        verdi: '{\'fom\':\'2018-09-12\',\'tom\':\'2018-09-16\'}'
+                        verdi: '{\'fom\':\'2018-09-12\',\'tom\':\'2018-09-16\'}',
                     },
                 ],
                 svartype: 'PERIODER',
@@ -3765,7 +3766,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Hvor skal du reise?',
                 svar: [
                     {
-                        verdi: 'dd'
+                        verdi: 'dd',
                     },
                 ],
                 svartype: 'FRITEKST',
@@ -3782,7 +3783,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du arbeidsgiver?',
                 svar: [
                     {
-                        verdi: 'JA'
+                        verdi: 'JA',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -3797,7 +3798,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Er du 100 % sykmeldt?',
                         svar: [
                             {
-                                verdi: 'JA'
+                                verdi: 'JA',
                             },
                         ],
                         svartype: 'JA_NEI',
@@ -3814,7 +3815,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?',
                         svar: [
                             {
-                                verdi: 'NEI'
+                                verdi: 'NEI',
                             },
                         ],
                         svartype: 'JA_NEI',
@@ -3845,7 +3846,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Jeg bekrefter de tre punktene ovenfor. Jeg har avklart reisen med legen og arbeidsgiveren min.',
                         svar: [
                             {
-                                verdi: 'CHECKED'
+                                verdi: 'CHECKED',
                             },
                         ],
                         svartype: 'CHECKBOX_PANEL',
@@ -3854,7 +3855,7 @@ const mockSoknader = [
                         undertekst: null,
                     },
                 ],
-                undertekst: '<ul>\n    <li>Reisen vil ikke gjøre at jeg blir dårligere </li>\n    <li>Reisen vil ikke gjøre at sykefraværet blir lengre</li>\n    <li>Reisen vil ikke hindre planlagt behandling eller oppfølging fra NAV eller arbeidsgiveren min</li>\n</ul>'
+                undertekst: '<ul>\n    <li>Reisen vil ikke gjøre at jeg blir dårligere </li>\n    <li>Reisen vil ikke gjøre at sykefraværet blir lengre</li>\n    <li>Reisen vil ikke hindre planlagt behandling eller oppfølging fra NAV eller arbeidsgiveren min</li>\n</ul>',
             },
         ],
         status: 'SENDT',
@@ -3878,7 +3879,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Jeg vet at dersom jeg gir uriktige opplysninger, eller holder tilbake opplysninger som har betydning for min rett til sykepenger, kan pengene holdes tilbake eller kreves tilbake, og/eller det kan medføre straffeansvar. Jeg er også klar over at jeg må melde fra til NAV dersom jeg sitter i varetekt, soner straff eller er under forvaring.',
                 svar: [
                     {
-                        verdi: 'CHECKED'
+                        verdi: 'CHECKED',
                     },
                 ],
                 svartype: 'CHECKBOX',
@@ -3895,7 +3896,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Var du tilbake i fullt arbeid som selvstendig næringsdrivende før sykmeldingsperioden utløp 02.09.2018?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -3926,7 +3927,7 @@ const mockSoknader = [
                 sporsmalstekst: 'I perioden 25.08.2018 - 02.09.2018 var du 100% sykmeldt som selvstendig næringsdrivende. Jobbet du noe i denne perioden?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -3970,7 +3971,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du andre inntektskilder eller arbeidsforhold?',
                 svar: [
                     {
-                        verdi: 'JA'
+                        verdi: 'JA',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -4023,7 +4024,7 @@ const mockSoknader = [
                                 sporsmalstekst: 'Jordbruker / Fisker / Reindriftsutøver',
                                 svar: [
                                     {
-                                        verdi: 'CHECKED'
+                                        verdi: 'CHECKED',
                                     },
                                 ],
                                 svartype: 'CHECKBOX',
@@ -4038,7 +4039,7 @@ const mockSoknader = [
                                         sporsmalstekst: 'Er du sykmeldt fra dette?',
                                         svar: [
                                             {
-                                                verdi: 'NEI'
+                                                verdi: 'NEI',
                                             },
                                         ],
                                         svartype: 'JA_NEI',
@@ -4090,7 +4091,7 @@ const mockSoknader = [
                                 undertekst: null,
                             },
                         ],
-                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV'
+                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV',
                     },
                 ],
                 undertekst: null,
@@ -4104,7 +4105,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du oppholdt deg utenfor Norge i perioden 25.08.2018 - 02.09.2018?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -4145,7 +4146,7 @@ const mockSoknader = [
                                 svartype: 'IKKE_RELEVANT',
                                 tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                                 undersporsmal: [],
-                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>'
+                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>',
                             },
                         ],
                         undertekst: null,
@@ -4162,7 +4163,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du vært under utdanning i løpet av perioden 25.08.2018 - 02.09.2018?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -4208,7 +4209,7 @@ const mockSoknader = [
                 svartype: 'IKKE_RELEVANT',
                 tag: 'VAER_KLAR_OVER_AT',
                 undersporsmal: [],
-                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>'
+                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>',
             },
             {
                 id: '15918',
@@ -4219,7 +4220,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
                 svar: [
                     {
-                        verdi: 'CHECKED'
+                        verdi: 'CHECKED',
                     },
                 ],
                 svartype: 'CHECKBOX',
@@ -4230,7 +4231,7 @@ const mockSoknader = [
         ],
         status: 'SENDT',
         sykmeldingId: '9f5532be-7167-47cb-84a4-a0538890172f',
-        tom: '2018-09-02'
+        tom: '2018-09-02',
     },
     {
         aktorId: '0101010101010',
@@ -4249,7 +4250,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Jeg vet at dersom jeg gir uriktige opplysninger, eller holder tilbake opplysninger som har betydning for min rett til sykepenger, kan pengene holdes tilbake eller kreves tilbake, og/eller det kan medføre straffeansvar. Jeg er også klar over at jeg må melde fra til NAV dersom jeg sitter i varetekt, soner straff eller er under forvaring.',
                 svar: [
                     {
-                        verdi: 'CHECKED'
+                        verdi: 'CHECKED',
                     },
                 ],
                 svartype: 'CHECKBOX',
@@ -4266,7 +4267,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Var du tilbake i fullt arbeid som selvstendig næringsdrivende før sykmeldingsperioden utløp 02.09.2018?',
                 svar: [
                     {
-                        verdi: 'JA'
+                        verdi: 'JA',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -4281,7 +4282,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Når var du tilbake i arbeid?',
                         svar: [
                             {
-                                verdi: '2018-09-01'
+                                verdi: '2018-09-01',
                             },
                         ],
                         svartype: 'DATO',
@@ -4301,7 +4302,7 @@ const mockSoknader = [
                 sporsmalstekst: 'I perioden 25.08.2018 - 02.09.2018 var du 100% sykmeldt som selvstendig næringsdrivende. Jobbet du noe i denne perioden?',
                 svar: [
                     {
-                        verdi: 'JA'
+                        verdi: 'JA',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -4316,7 +4317,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Hvor mange timer jobber du normalt per uke som selvstendig næringsdrivende?',
                         svar: [
                             {
-                                verdi: '20'
+                                verdi: '20',
                             },
                         ],
                         svartype: 'TIMER',
@@ -4333,7 +4334,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Hvor mye jobbet du totalt i denne perioden som selvstendig næringsdrivende?',
                         svar: [
                             {
-                                verdi: '20'
+                                verdi: '20',
                             },
                         ],
                         svartype: 'PROSENT',
@@ -4353,7 +4354,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du andre inntektskilder eller arbeidsforhold?',
                 svar: [
                     {
-                        verdi: 'JA'
+                        verdi: 'JA',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -4379,7 +4380,7 @@ const mockSoknader = [
                                 sporsmalstekst: 'Arbeidsforhold',
                                 svar: [
                                     {
-                                        verdi: 'CHECKED'
+                                        verdi: 'CHECKED',
                                     },
                                 ],
                                 svartype: 'CHECKBOX',
@@ -4394,7 +4395,7 @@ const mockSoknader = [
                                         sporsmalstekst: 'Er du sykmeldt fra dette?',
                                         svar: [
                                             {
-                                                verdi: 'JA'
+                                                verdi: 'JA',
                                             },
                                         ],
                                         svartype: 'JA_NEI',
@@ -4414,7 +4415,7 @@ const mockSoknader = [
                                 sporsmalstekst: 'Jordbruker / Fisker / Reindriftsutøver',
                                 svar: [
                                     {
-                                        verdi: 'CHECKED'
+                                        verdi: 'CHECKED',
                                     },
                                 ],
                                 svartype: 'CHECKBOX',
@@ -4429,7 +4430,7 @@ const mockSoknader = [
                                         sporsmalstekst: 'Er du sykmeldt fra dette?',
                                         svar: [
                                             {
-                                                verdi: 'JA'
+                                                verdi: 'JA',
                                             },
                                         ],
                                         svartype: 'JA_NEI',
@@ -4449,7 +4450,7 @@ const mockSoknader = [
                                 sporsmalstekst: 'Frilanser',
                                 svar: [
                                     {
-                                        verdi: 'CHECKED'
+                                        verdi: 'CHECKED',
                                     },
                                 ],
                                 svartype: 'CHECKBOX',
@@ -4464,7 +4465,7 @@ const mockSoknader = [
                                         sporsmalstekst: 'Er du sykmeldt fra dette?',
                                         svar: [
                                             {
-                                                verdi: 'JA'
+                                                verdi: 'JA',
                                             },
                                         ],
                                         svartype: 'JA_NEI',
@@ -4484,7 +4485,7 @@ const mockSoknader = [
                                 sporsmalstekst: 'Annet',
                                 svar: [
                                     {
-                                        verdi: 'CHECKED'
+                                        verdi: 'CHECKED',
                                     },
                                 ],
                                 svartype: 'CHECKBOX',
@@ -4493,7 +4494,7 @@ const mockSoknader = [
                                 undertekst: null,
                             },
                         ],
-                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV'
+                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV',
                     },
                 ],
                 undertekst: null,
@@ -4507,7 +4508,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du oppholdt deg utenfor Norge i perioden 25.08.2018 - 02.09.2018?',
                 svar: [
                     {
-                        verdi: 'JA'
+                        verdi: 'JA',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -4522,7 +4523,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Når oppholdt du deg utenfor Norge?',
                         svar: [
                             {
-                                verdi: '{\'fom\':\'2018-09-01\',\'tom\':\'2018-09-02\'}'
+                                verdi: '{\'fom\':\'2018-09-01\',\'tom\':\'2018-09-02\'}',
                             },
                         ],
                         svartype: 'PERIODER',
@@ -4539,7 +4540,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Har du søkt om å beholde sykepenger under dette oppholdet utenfor Norge?',
                         svar: [
                             {
-                                verdi: 'NEI'
+                                verdi: 'NEI',
                             },
                         ],
                         svartype: 'JA_NEI',
@@ -4556,7 +4557,7 @@ const mockSoknader = [
                                 svartype: 'IKKE_RELEVANT',
                                 tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                                 undersporsmal: [],
-                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>'
+                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>',
                             },
                         ],
                         undertekst: null,
@@ -4573,7 +4574,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du vært under utdanning i løpet av perioden 25.08.2018 - 02.09.2018?',
                 svar: [
                     {
-                        verdi: 'JA'
+                        verdi: 'JA',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -4588,7 +4589,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Når startet du på utdanningen?',
                         svar: [
                             {
-                                verdi: '2018-09-01'
+                                verdi: '2018-09-01',
                             },
                         ],
                         svartype: 'DATO',
@@ -4605,7 +4606,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Er utdanningen et fulltidsstudium?',
                         svar: [
                             {
-                                verdi: 'JA'
+                                verdi: 'JA',
                             },
                         ],
                         svartype: 'JA_NEI',
@@ -4627,7 +4628,7 @@ const mockSoknader = [
                 svartype: 'IKKE_RELEVANT',
                 tag: 'VAER_KLAR_OVER_AT',
                 undersporsmal: [],
-                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>'
+                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>',
             },
             {
                 id: '15966',
@@ -4638,7 +4639,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
                 svar: [
                     {
-                        verdi: 'CHECKED'
+                        verdi: 'CHECKED',
                     },
                 ],
                 svartype: 'CHECKBOX',
@@ -4649,7 +4650,7 @@ const mockSoknader = [
         ],
         status: 'SENDT',
         sykmeldingId: 'ae4a9147-f003-4a9e-8a37-845c5d14aaba',
-        tom: '2018-09-02'
+        tom: '2018-09-02',
     },
     {
         aktorId: '0101010101010',
@@ -4856,7 +4857,7 @@ const mockSoknader = [
                                 undertekst: null,
                             },
                         ],
-                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV'
+                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV',
                     },
                 ],
                 undertekst: null,
@@ -4907,7 +4908,7 @@ const mockSoknader = [
                                 svartype: 'IKKE_RELEVANT',
                                 tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                                 undersporsmal: [],
-                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>'
+                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>',
                             },
                         ],
                         undertekst: null,
@@ -4966,7 +4967,7 @@ const mockSoknader = [
                 svartype: 'IKKE_RELEVANT',
                 tag: 'VAER_KLAR_OVER_AT',
                 undersporsmal: [],
-                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>'
+                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>',
             },
             {
                 id: '15942',
@@ -4984,7 +4985,7 @@ const mockSoknader = [
         ],
         status: 'FREMTIDIG',
         sykmeldingId: '2bf16de8-c3ab-4d72-9cc2-3f9ff6f520b1',
-        tom: '2018-09-20'
+        tom: '2018-09-20',
     },
     {
         aktorId: '0101010101010',
@@ -5003,7 +5004,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Jeg vet at dersom jeg gir uriktige opplysninger, eller holder tilbake opplysninger som har betydning for min rett til sykepenger, kan pengene holdes tilbake eller kreves tilbake, og/eller det kan medføre straffeansvar. Jeg er også klar over at jeg må melde fra til NAV dersom jeg sitter i varetekt, soner straff eller er under forvaring.',
                 svar: [
                     {
-                        verdi: 'CHECKED'
+                        verdi: 'CHECKED',
                     },
                 ],
                 svartype: 'CHECKBOX',
@@ -5020,7 +5021,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Var du tilbake i fullt arbeid som frilanser før sykmeldingsperioden utløp 02.09.2018?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -5051,7 +5052,7 @@ const mockSoknader = [
                 sporsmalstekst: 'I perioden 25.08.2018 - 02.09.2018 var du 100% sykmeldt som frilanser. Jobbet du noe i denne perioden?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -5095,7 +5096,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du andre inntektskilder eller arbeidsforhold?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -5207,7 +5208,7 @@ const mockSoknader = [
                                 undertekst: null,
                             },
                         ],
-                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV'
+                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV',
                     },
                 ],
                 undertekst: null,
@@ -5221,7 +5222,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du oppholdt deg utenfor Norge i perioden 25.08.2018 - 02.09.2018?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -5262,7 +5263,7 @@ const mockSoknader = [
                                 svartype: 'IKKE_RELEVANT',
                                 tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                                 undersporsmal: [],
-                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>'
+                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>',
                             },
                         ],
                         undertekst: null,
@@ -5279,7 +5280,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du vært under utdanning i løpet av perioden 25.08.2018 - 02.09.2018?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -5325,7 +5326,7 @@ const mockSoknader = [
                 svartype: 'IKKE_RELEVANT',
                 tag: 'VAER_KLAR_OVER_AT',
                 undersporsmal: [],
-                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>'
+                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>',
             },
             {
                 id: '15990',
@@ -5336,7 +5337,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
                 svar: [
                     {
-                        verdi: 'CHECKED'
+                        verdi: 'CHECKED',
                     },
                 ],
                 svartype: 'CHECKBOX',
@@ -5347,7 +5348,7 @@ const mockSoknader = [
         ],
         status: 'SENDT',
         sykmeldingId: 'd844b1db-65ea-435f-a7dd-89bb6985615c',
-        tom: '2018-09-02'
+        tom: '2018-09-02',
     },
     {
         aktorId: '0101010101010',
@@ -5366,7 +5367,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Jeg vet at dersom jeg gir uriktige opplysninger, eller holder tilbake opplysninger som har betydning for min rett til sykepenger, kan pengene holdes tilbake eller kreves tilbake, og/eller det kan medføre straffeansvar. Jeg er også klar over at jeg må melde fra til NAV dersom jeg sitter i varetekt, soner straff eller er under forvaring.',
                 svar: [
                     {
-                        verdi: 'CHECKED'
+                        verdi: 'CHECKED',
                     },
                 ],
                 svartype: 'CHECKBOX',
@@ -5383,7 +5384,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Var du tilbake i fullt arbeid som selvstendig næringsdrivende før sykmeldingsperioden utløp 10.09.2018?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -5414,7 +5415,7 @@ const mockSoknader = [
                 sporsmalstekst: 'I perioden 25.08.2018 - 10.09.2018 var du 100% sykmeldt som selvstendig næringsdrivende. Jobbet du noe i denne perioden?',
                 svar: [
                     {
-                        verdi: 'JA'
+                        verdi: 'JA',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -5429,7 +5430,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Hvor mange timer jobber du normalt per uke som selvstendig næringsdrivende?',
                         svar: [
                             {
-                                verdi: '140'
+                                verdi: '140',
                             },
                         ],
                         svartype: 'TIMER',
@@ -5446,7 +5447,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Hvor mye jobbet du totalt i denne perioden som selvstendig næringsdrivende?',
                         svar: [
                             {
-                                verdi: '99'
+                                verdi: '99',
                             },
                         ],
                         svartype: 'PROSENT',
@@ -5466,7 +5467,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du andre inntektskilder eller arbeidsforhold?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -5578,7 +5579,7 @@ const mockSoknader = [
                                 undertekst: null,
                             },
                         ],
-                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV'
+                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV',
                     },
                 ],
                 undertekst: null,
@@ -5592,7 +5593,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du oppholdt deg utenfor Norge i perioden 25.08.2018 - 10.09.2018?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -5633,7 +5634,7 @@ const mockSoknader = [
                                 svartype: 'IKKE_RELEVANT',
                                 tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                                 undersporsmal: [],
-                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>'
+                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>',
                             },
                         ],
                         undertekst: null,
@@ -5650,7 +5651,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du vært under utdanning i løpet av perioden 25.08.2018 - 10.09.2018?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -5696,7 +5697,7 @@ const mockSoknader = [
                 svartype: 'IKKE_RELEVANT',
                 tag: 'VAER_KLAR_OVER_AT',
                 undersporsmal: [],
-                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>'
+                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>',
             },
             {
                 id: '16014',
@@ -5707,7 +5708,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
                 svar: [
                     {
-                        verdi: 'CHECKED'
+                        verdi: 'CHECKED',
                     },
                 ],
                 svartype: 'CHECKBOX',
@@ -5718,7 +5719,7 @@ const mockSoknader = [
         ],
         status: 'SENDT',
         sykmeldingId: 'c0087d29-281f-4dfc-8a24-0723cb8e7d1f',
-        tom: '2018-09-10'
+        tom: '2018-09-10',
     },
     {
         aktorId: '0101010101010',
@@ -5737,7 +5738,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Jeg vet at dersom jeg gir uriktige opplysninger, eller holder tilbake opplysninger som har betydning for min rett til sykepenger, kan pengene holdes tilbake eller kreves tilbake, og/eller det kan medføre straffeansvar. Jeg er også klar over at jeg må melde fra til NAV dersom jeg sitter i varetekt, soner straff eller er under forvaring.',
                 svar: [
                     {
-                        verdi: 'CHECKED'
+                        verdi: 'CHECKED',
                     },
                 ],
                 svartype: 'CHECKBOX',
@@ -5754,7 +5755,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Var du tilbake i fullt arbeid som selvstendig næringsdrivende før sykmeldingsperioden utløp 15.08.2018?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -5785,7 +5786,7 @@ const mockSoknader = [
                 sporsmalstekst: 'I perioden 02.08.2018 - 15.08.2018 var du 100% sykmeldt som selvstendig næringsdrivende. Jobbet du noe i denne perioden?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -5829,7 +5830,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du andre inntektskilder eller arbeidsforhold?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -5941,7 +5942,7 @@ const mockSoknader = [
                                 undertekst: null,
                             },
                         ],
-                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV'
+                        undertekst: 'Du trenger ikke oppgi andre ytelser fra NAV',
                     },
                 ],
                 undertekst: null,
@@ -5955,7 +5956,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du oppholdt deg utenfor Norge i perioden 02.08.2018 - 15.08.2018?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -5996,7 +5997,7 @@ const mockSoknader = [
                                 svartype: 'IKKE_RELEVANT',
                                 tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                                 undersporsmal: [],
-                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>'
+                                undertekst: '<p>Som hovedregel kan du bare få sykepenger når du oppholder deg i Norge. Du kan lese mer om <a target=\'_blank\' href=\'https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold\'>sykepenger under utenlandsopphold på denne siden</a>.</p>',
                             },
                         ],
                         undertekst: null,
@@ -6013,7 +6014,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du vært under utdanning i løpet av perioden 02.08.2018 - 15.08.2018?',
                 svar: [
                     {
-                        verdi: 'NEI'
+                        verdi: 'NEI',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -6059,7 +6060,7 @@ const mockSoknader = [
                 svartype: 'IKKE_RELEVANT',
                 tag: 'VAER_KLAR_OVER_AT',
                 undersporsmal: [],
-                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>'
+                undertekst: '<ul><li>rett til sykepenger forutsetter at du er borte fra arbeid på grunn av egen sykdom. Sosiale eller økonomiske problemer gir ikke rett til sykepenger</li><li>du kan miste retten til sykepenger hvis du uten rimelig grunn nekter å opplyse om egen funksjonsevne eller nekter å ta imot tilbud om behandling og/eller tilrettelegging</li><li>sykepenger utbetales i maksimum 52 uker, også for gradert (delvis) sykmelding</li><li>fristen for å søke sykepenger er som hovedregel 3 måneder</li></ul>',
             },
             {
                 id: '16038',
@@ -6070,7 +6071,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
                 svar: [
                     {
-                        verdi: 'CHECKED'
+                        verdi: 'CHECKED',
                     },
                 ],
                 svartype: 'CHECKBOX',
@@ -6081,7 +6082,7 @@ const mockSoknader = [
         ],
         status: 'SENDT',
         sykmeldingId: '5784d264-28b3-4452-b345-e02b1d00ab5f',
-        tom: '2018-08-15'
+        tom: '2018-08-15',
     },
     {
         aktorId: '0101010101010',
@@ -6100,7 +6101,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Når skal du være utenfor Norge?',
                 svar: [
                     {
-                        verdi: '{\'fom\':\'2018-09-12\',\'tom\':\'2018-09-14\'}'
+                        verdi: '{\'fom\':\'2018-09-12\',\'tom\':\'2018-09-14\'}',
                     },
                 ],
                 svartype: 'PERIODER',
@@ -6117,7 +6118,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Hvor skal du reise?',
                 svar: [
                     {
-                        verdi: 'Norge'
+                        verdi: 'Norge',
                     },
                 ],
                 svartype: 'FRITEKST',
@@ -6134,7 +6135,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du arbeidsgiver?',
                 svar: [
                     {
-                        verdi: 'JA'
+                        verdi: 'JA',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -6149,7 +6150,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Er du 100 % sykmeldt?',
                         svar: [
                             {
-                                verdi: 'NEI'
+                                verdi: 'NEI',
                             },
                         ],
                         svartype: 'JA_NEI',
@@ -6166,7 +6167,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?',
                         svar: [
                             {
-                                verdi: 'NEI'
+                                verdi: 'NEI',
                             },
                         ],
                         svartype: 'JA_NEI',
@@ -6197,7 +6198,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Jeg bekrefter de tre punktene ovenfor. Jeg har avklart reisen med legen og arbeidsgiveren min.',
                         svar: [
                             {
-                                verdi: 'CHECKED'
+                                verdi: 'CHECKED',
                             },
                         ],
                         svartype: 'CHECKBOX_PANEL',
@@ -6206,7 +6207,7 @@ const mockSoknader = [
                         undertekst: null,
                     },
                 ],
-                undertekst: '<ul>\n    <li>Reisen vil ikke gjøre at jeg blir dårligere </li>\n    <li>Reisen vil ikke gjøre at sykefraværet blir lengre</li>\n    <li>Reisen vil ikke hindre planlagt behandling eller oppfølging</li>\n</ul>'
+                undertekst: '<ul>\n    <li>Reisen vil ikke gjøre at jeg blir dårligere </li>\n    <li>Reisen vil ikke gjøre at sykefraværet blir lengre</li>\n    <li>Reisen vil ikke hindre planlagt behandling eller oppfølging</li>\n</ul>',
             },
         ],
         status: 'SENDT',
@@ -6230,7 +6231,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Når skal du være utenfor Norge?',
                 svar: [
                     {
-                        verdi: '{\'fom\':\'2018-09-05\',\'tom\':\'2018-09-09\'}'
+                        verdi: '{\'fom\':\'2018-09-05\',\'tom\':\'2018-09-09\'}',
                     },
                 ],
                 svartype: 'PERIODER',
@@ -6247,7 +6248,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Hvor skal du reise?',
                 svar: [
                     {
-                        verdi: 'Uganda'
+                        verdi: 'Uganda',
                     },
                 ],
                 svartype: 'FRITEKST',
@@ -6264,7 +6265,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du arbeidsgiver?',
                 svar: [
                     {
-                        verdi: 'JA'
+                        verdi: 'JA',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -6279,7 +6280,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Er du 100 % sykmeldt?',
                         svar: [
                             {
-                                verdi: 'NEI'
+                                verdi: 'NEI',
                             },
                         ],
                         svartype: 'JA_NEI',
@@ -6296,7 +6297,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?',
                         svar: [
                             {
-                                verdi: 'NEI'
+                                verdi: 'NEI',
                             },
                         ],
                         svartype: 'JA_NEI',
@@ -6327,7 +6328,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Jeg bekrefter de tre punktene ovenfor. Jeg har avklart reisen med legen og arbeidsgiveren min.',
                         svar: [
                             {
-                                verdi: 'CHECKED'
+                                verdi: 'CHECKED',
                             },
                         ],
                         svartype: 'CHECKBOX_PANEL',
@@ -6336,7 +6337,7 @@ const mockSoknader = [
                         undertekst: null,
                     },
                 ],
-                undertekst: '<ul>\n    <li>Reisen vil ikke gjøre at jeg blir dårligere </li>\n    <li>Reisen vil ikke gjøre at sykefraværet blir lengre</li>\n    <li>Reisen vil ikke hindre planlagt behandling eller oppfølging</li>\n</ul>'
+                undertekst: '<ul>\n    <li>Reisen vil ikke gjøre at jeg blir dårligere </li>\n    <li>Reisen vil ikke gjøre at sykefraværet blir lengre</li>\n    <li>Reisen vil ikke hindre planlagt behandling eller oppfølging</li>\n</ul>',
             },
         ],
         status: 'SENDT',
@@ -6360,7 +6361,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Når skal du være utenfor Norge?',
                 svar: [
                     {
-                        verdi: '{\'fom\':\'2018-10-10\',\'tom\':\'2018-10-12\'}'
+                        verdi: '{\'fom\':\'2018-10-10\',\'tom\':\'2018-10-12\'}',
                     },
                 ],
                 svartype: 'PERIODER',
@@ -6377,7 +6378,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Hvor skal du reise?',
                 svar: [
                     {
-                        verdi: 'Hellas'
+                        verdi: 'Hellas',
                     },
                 ],
                 svartype: 'FRITEKST',
@@ -6394,7 +6395,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du arbeidsgiver?',
                 svar: [
                     {
-                        verdi: 'JA'
+                        verdi: 'JA',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -6409,7 +6410,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Er du 100 % sykmeldt?',
                         svar: [
                             {
-                                verdi: 'JA'
+                                verdi: 'JA',
                             },
                         ],
                         svartype: 'JA_NEI',
@@ -6426,7 +6427,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?',
                         svar: [
                             {
-                                verdi: 'NEI'
+                                verdi: 'NEI',
                             },
                         ],
                         svartype: 'JA_NEI',
@@ -6457,7 +6458,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Jeg bekrefter de tre punktene ovenfor. Jeg har avklart reisen med legen og arbeidsgiveren min.',
                         svar: [
                             {
-                                verdi: 'CHECKED'
+                                verdi: 'CHECKED',
                             },
                         ],
                         svartype: 'CHECKBOX_PANEL',
@@ -6466,7 +6467,7 @@ const mockSoknader = [
                         undertekst: null,
                     },
                 ],
-                undertekst: '<ul>\n    <li>Reisen vil ikke gjøre at jeg blir dårligere </li>\n    <li>Reisen vil ikke gjøre at sykefraværet blir lengre</li>\n    <li>Reisen vil ikke hindre planlagt behandling eller oppfølging fra NAV eller arbeidsgiveren min</li>\n</ul>'
+                undertekst: '<ul>\n    <li>Reisen vil ikke gjøre at jeg blir dårligere </li>\n    <li>Reisen vil ikke gjøre at sykefraværet blir lengre</li>\n    <li>Reisen vil ikke hindre planlagt behandling eller oppfølging fra NAV eller arbeidsgiveren min</li>\n</ul>',
             },
         ],
         status: 'SENDT',
@@ -6490,7 +6491,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Når skal du være utenfor Norge?',
                 svar: [
                     {
-                        verdi: '{\'fom\':\'2018-09-20\',\'tom\':\'2018-09-22\'}'
+                        verdi: '{\'fom\':\'2018-09-20\',\'tom\':\'2018-09-22\'}',
                     },
                 ],
                 svartype: 'PERIODER',
@@ -6507,7 +6508,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Hvor skal du reise?',
                 svar: [
                     {
-                        verdi: 'Spania'
+                        verdi: 'Spania',
                     },
                 ],
                 svartype: 'FRITEKST',
@@ -6524,7 +6525,7 @@ const mockSoknader = [
                 sporsmalstekst: 'Har du arbeidsgiver?',
                 svar: [
                     {
-                        verdi: 'JA'
+                        verdi: 'JA',
                     },
                 ],
                 svartype: 'JA_NEI',
@@ -6539,7 +6540,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Er du 100 % sykmeldt?',
                         svar: [
                             {
-                                verdi: 'JA'
+                                verdi: 'JA',
                             },
                         ],
                         svartype: 'JA_NEI',
@@ -6556,7 +6557,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Har du avtalt med arbeidsgiveren din at du skal ha ferie i hele perioden?',
                         svar: [
                             {
-                                verdi: 'NEI'
+                                verdi: 'NEI',
                             },
                         ],
                         svartype: 'JA_NEI',
@@ -6587,7 +6588,7 @@ const mockSoknader = [
                         sporsmalstekst: 'Jeg bekrefter de tre punktene ovenfor. Jeg har avklart reisen med legen og arbeidsgiveren min.',
                         svar: [
                             {
-                                verdi: 'CHECKED'
+                                verdi: 'CHECKED',
                             },
                         ],
                         svartype: 'CHECKBOX_PANEL',
@@ -6596,7 +6597,7 @@ const mockSoknader = [
                         undertekst: null,
                     },
                 ],
-                undertekst: '<ul>\n    <li>Reisen vil ikke gjøre at jeg blir dårligere </li>\n    <li>Reisen vil ikke gjøre at sykefraværet blir lengre</li>\n    <li>Reisen vil ikke hindre planlagt behandling eller oppfølging fra NAV eller arbeidsgiveren min</li>\n</ul>'
+                undertekst: '<ul>\n    <li>Reisen vil ikke gjøre at jeg blir dårligere </li>\n    <li>Reisen vil ikke gjøre at sykefraværet blir lengre</li>\n    <li>Reisen vil ikke hindre planlagt behandling eller oppfølging fra NAV eller arbeidsgiveren min</li>\n</ul>',
             },
         ],
         status: 'SENDT',
@@ -6606,3 +6607,4 @@ const mockSoknader = [
 ];
 
 export default mockSoknader;
+/* eslint-enable max-len */

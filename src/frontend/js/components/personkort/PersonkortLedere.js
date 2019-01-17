@@ -8,7 +8,7 @@ import PersonkortInformasjon from './PersonkortInformasjon';
 import kanskjeBooleanTilJaNeiKanskje from './kanskjeBooleanTilJaNeiKanskje';
 import PersonkortElement from './PersonkortElement';
 
-export const PersonkortLedere = ({ ledere }) => {
+const PersonkortLedere = ({ ledere }) => {
     const informasjonNokkelTekster = new Map([
         ['navn', getLedetekst('modiafront.personkort.visning.nokkeltekster.navn')],
         ['tlf', getLedetekst('modiafront.personkort.visning.nokkeltekster.tlf')],

@@ -1,22 +1,21 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import { BekreftMoteSide, mapStateToProps } from '../../js/containers/BekreftMoteContainer';
 import sinon from 'sinon';
+import { BekreftMoteSide, mapStateToProps } from '../../js/containers/BekreftMoteContainer';
 
 describe('BekreftMoteContainer', () => {
     describe('BekreftMoteSide', () => {
         let hentMoter;
         let bekreftMote;
         let deltaker;
-        let ledetekster;
+        let compo;
 
         beforeEach(() => {
             hentMoter = sinon.spy();
             bekreftMote = sinon.spy();
-            ledetekster = sinon.spy();
             deltaker = {
-                deltakerUuid: '123'
+                deltakerUuid: '123',
             };
         });
 
@@ -24,27 +23,34 @@ describe('BekreftMoteContainer', () => {
             const mote = {
                 moteUuid: 'Olsen',
                 deltakere: [{
-                    type: 'Bruker'
-                },
-                    {
-                        type: 'arbeidsgiver',
-                        deltakerUuid: 'uuid1',
-                    }],
+                    type: 'Bruker',
+                }, {
+                    type: 'arbeidsgiver',
+                    deltakerUuid: 'uuid1',
+                }],
             };
             const alternativ = {
-                id: 4545
+                id: 4545,
             };
-            const compo = shallow(<BekreftMoteSide fnr='44556677889' hentBekreftMoteEpostinnhold={() => {
-            }} bekreftMote={bekreftMote} alternativ={alternativ} mote={mote} arbeidsgiver={deltaker}/>);
+            compo = shallow(<BekreftMoteSide
+                fnr="44556677889"
+                hentBekreftMoteEpostinnhold={() => {}}
+                bekreftMote={bekreftMote}
+                alternativ={alternativ}
+                mote={mote}
+                arbeidsgiver={deltaker}
+            />);
             compo.instance().onSubmit();
             expect(bekreftMote.getCall(0).args).to.deep.equal(['Olsen', 4545, '44556677889']);
         });
 
         describe('Dersom alternativ ikke finnes', () => {
-            let compo;
-
             beforeEach(() => {
-                compo = shallow(<BekreftMoteSide hentMoter={hentMoter} deltaker={deltaker} fnr='5566'/>)
+                compo = shallow(<BekreftMoteSide
+                    hentMoter={hentMoter}
+                    deltaker={deltaker}
+                    fnr="5566"
+                />);
             });
 
             it('Skal hente møter', () => {
@@ -53,7 +59,6 @@ describe('BekreftMoteContainer', () => {
         });
 
         describe('Når alternativ finnes', () => {
-            let compo;
             let mote;
             let alternativ;
             let hentBekreftMoteEpostinnhold;
@@ -69,7 +74,7 @@ describe('BekreftMoteContainer', () => {
                     moteUuid: '123',
                     status: 'OPPRETTET',
                     deltakere: [{
-                        type: 'Bruker'
+                        type: 'Bruker',
                     }, {
                         type: 'arbeidsgiver',
                         deltakerUuid: 'uuid',
@@ -81,7 +86,8 @@ describe('BekreftMoteContainer', () => {
                     hentMoter={hentMoter}
                     alternativ={alternativ}
                     mote={mote}
-                    deltaker={deltaker}/>)
+                    deltaker={deltaker}
+                />);
             });
 
             it('Skal ikke hente møter', () => {
@@ -98,12 +104,12 @@ describe('BekreftMoteContainer', () => {
             ownProps = {
                 params: {
                     alternativId: '328',
-                    fnr: '123'
+                    fnr: '123',
                 },
             };
             state = {
-                ledetekster: {henter: false, data: {}},
-                epostinnhold: {henter: false, data: {}},
+                ledetekster: { henter: false, data: {} },
+                epostinnhold: { henter: false, data: {} },
                 moter: {
                     data: [{
                         id: 1,
@@ -162,7 +168,7 @@ describe('BekreftMoteContainer', () => {
                 },
                 navbruker: {
                     data: {
-                        fnr: '123'
+                        fnr: '123',
                     },
                 },
             };
@@ -170,18 +176,18 @@ describe('BekreftMoteContainer', () => {
 
         it('Skal returnere mote', () => {
             const props = mapStateToProps(state, ownProps);
-            expect(props.mote.moteUuid).to.equal('2fedc0da-efec-4b6e-8597-a021628058ae')
+            expect(props.mote.moteUuid).to.equal('2fedc0da-efec-4b6e-8597-a021628058ae');
         });
 
         it('Skal returnere mote når mote.status === "BEKREFTET"', () => {
             state.moter.data[0].status = 'BEKREFTET';
             const props = mapStateToProps(state, ownProps);
-            expect(props.mote.moteUuid).to.equal('2fedc0da-efec-4b6e-8597-a021628058ae')
+            expect(props.mote.moteUuid).to.equal('2fedc0da-efec-4b6e-8597-a021628058ae');
         });
 
         it('Skal returnere fnr', () => {
             const props = mapStateToProps(state, ownProps);
-            expect(props.fnr).to.equal('123')
+            expect(props.fnr).to.equal('123');
         });
 
         it('Skal returnere alternativ', () => {

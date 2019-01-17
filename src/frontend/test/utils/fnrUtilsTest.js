@@ -113,18 +113,18 @@ describe('fnrUtils', () => {
         const hentFnrFraDato = (dato) => {
             let dag = dato.getDate().toString();
             dag = dag.length === 1
-                ? '0' + dag
+                ? `0${dag}`
                 : dag;
             let mnd = (dato.getMonth() + 1).toString();
             mnd = mnd.length === 1
-                ? '0' + mnd
+                ? `0${mnd}`
                 : mnd;
-            const aar = dato.getFullYear().toString().substring(2,4);
-            return dag + mnd + aar + '33818';
+            const aar = dato.getFullYear().toString().substring(2, 4);
+            return `${dag + mnd + aar}33818`;
         };
 
         it('Skal returnere rett brukers alder, om bruker har hatt foedselsdag', () => {
-            let foedselsDatoPassert = new Date();
+            const foedselsDatoPassert = new Date();
             foedselsDatoPassert.setFullYear(foedselsaar);
             const fnrFoedselsDatoPassert = hentFnrFraDato(foedselsDatoPassert);
             const alder = dagensDato.getFullYear() - foedselsDatoPassert.getFullYear();
@@ -133,9 +133,9 @@ describe('fnrUtils', () => {
         });
 
         it('Skal returnere rett brukers alder, om bruker ikke har hatt foedselsdag', () => {
-            let foedselsdatoIkkePassert = new Date();
+            const foedselsdatoIkkePassert = new Date();
             foedselsdatoIkkePassert.setFullYear(foedselsaar);
-            foedselsdatoIkkePassert.setTime(foedselsdatoIkkePassert.getTime() + (24*60*60*1000));
+            foedselsdatoIkkePassert.setTime(foedselsdatoIkkePassert.getTime() + (24 * 60 * 60 * 1000));
             const fnrFoedselsDatoIkkePassert = hentFnrFraDato(foedselsdatoIkkePassert);
             const alder = dagensDato.getFullYear() - foedselsdatoIkkePassert.getFullYear() - 1;
 

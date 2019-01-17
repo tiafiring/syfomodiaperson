@@ -4,60 +4,51 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import AppSpinner from '../../js/components/AppSpinner';
 import Feilmelding from '../../js/components/Feilmelding';
-import MotelandingssideContainer from '../../js/containers/MotelandingssideContainer';
 import { mapStateToProps, MotelandingssideSide } from '../../js/containers/MotelandingssideContainer';
 
 describe('MotelandingssideContainer', () => {
     describe('MotelandingssideSide', () => {
         let hentMoter;
-        let hentMotebehov;
-        let ledetekster;
         let tilgang;
-        let moterTilgang;
-        const harIkkeMoterTilgang = {
-            harTilgang: false,
-            begrunnelse: 'KODE7'
-        };
+        let component;
+
         beforeEach(() => {
-            ledetekster = {};
             hentMoter = sinon.spy();
-            hentMotebehov = sinon.spy();
             tilgang = {
                 harTilgang: true,
             };
-            moterTilgang = {};
         });
 
         it('Skal vise AppSpinner', () => {
-            const component = shallow(<MotelandingssideSide
+            component = shallow(<MotelandingssideSide
                 tilgang={tilgang}
                 hentMoter={hentMoter}
                 henter
             />);
 
-            expect(component.find(AppSpinner)).to.have.length(1)
+            expect(component.find(AppSpinner)).to.have.length(1);
         });
 
         it('Skal hente møter ved init', () => {
-            const component = shallow(<MotelandingssideSide
+            component = shallow(<MotelandingssideSide
                 tilgang={tilgang}
-                fnr='123'
+                fnr="123"
                 hentMoter={hentMoter}
                 mote={{}}
             />);
-
             expect(hentMoter.calledOnce).to.be.equal(true);
             expect(hentMoter.calledWith('123')).to.be.equal(true);
         });
 
-        it('Skal vise feilmelding hvis hentingFeilet', () => {const component = shallow(<MotelandingssideSide
+        it('Skal vise feilmelding hvis hentingFeilet', () => {
+            component = shallow(<MotelandingssideSide
                 tilgang={tilgang}
                 hentMoter={hentMoter}
                 mote={{}}
                 hentingFeilet
             />);
 
-            expect(component.find(Feilmelding)).to.have.length(1)
+            expect(component.find(Feilmelding)).to.have.length(1);
         });
     });
 
@@ -167,7 +158,7 @@ describe('MotelandingssideContainer', () => {
 
         it('Skal returnere henter når det ikke hentes møter', () => {
             state.moter.data = [{
-                id: 1
+                id: 1,
             }];
             state.moter.henter = false;
 

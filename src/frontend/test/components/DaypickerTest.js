@@ -1,6 +1,6 @@
 import chai from 'chai';
-import React from 'react'
-import {mount, shallow} from 'enzyme';
+import React from 'react';
+import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import DayPicker from 'react-day-picker';
@@ -13,8 +13,6 @@ describe('DaypickerComponent', () => {
     let component;
     let input;
     let meta;
-    let preventDefault;
-    let stopImmediatePropagation;
     let clock;
     let dp;
     let onKeyUp;
@@ -32,7 +30,12 @@ describe('DaypickerComponent', () => {
         };
         onKeyUp = sinon.spy();
         onDayClick = sinon.spy();
-        component = shallow(<DaypickerComponent input={input} meta={meta} onKeyUp={onKeyUp} onDayClick={onDayClick}/>)
+        component = shallow(<DaypickerComponent
+            input={input}
+            meta={meta}
+            onKeyUp={onKeyUp}
+            onDayClick={onDayClick}
+        />);
         dp = component.find(DayPicker);
     });
 
@@ -45,19 +48,23 @@ describe('DaypickerComponent', () => {
     });
 
     it('Skal sette initialMonth til dagens måned', () => {
-        expect(dp.prop('initialMonth')).to.deep.equal(new Date())
+        expect(dp.prop('initialMonth')).to.deep.equal(new Date());
     });
 
     describe('Når dato er satt', () => {
         beforeEach(() => {
             input.value = '22.02.2017';
-            component = shallow(<DaypickerComponent onKeyUp={onKeyUp} onDayClick={onDayClick} input={input}
-                                                    meta={meta}/>);
-            component.setState({erApen: true});
+            component = shallow(<DaypickerComponent
+                onKeyUp={onKeyUp}
+                onDayClick={onDayClick}
+                input={input}
+                meta={meta}
+            />);
+            component.setState({ erApen: true });
         });
 
         it('Skal sette initialMonth til valgt måned', () => {
-            expect(component.find(DayPicker).prop('initialMonth')).to.deep.equal(new Date('2017-02-22'))
+            expect(component.find(DayPicker).prop('initialMonth')).to.deep.equal(new Date('2017-02-22'));
         });
 
         it('Skal ha en selectedDays-funksjon som returnere true hvis innsendt dato er lik valgt dato', () => {
@@ -72,13 +79,18 @@ describe('DaypickerComponent', () => {
     describe('Når dato er satt til noe ugyldig', () => {
         beforeEach(() => {
             input.value = '22.02.201';
-            component = shallow(<DaypickerComponent input={input} meta={meta} id='olsen' onKeyUp={onKeyUp}
-                                                    onDayClick={onDayClick}/>);
-            component.setState({erApen: true});
+            component = shallow(<DaypickerComponent
+                input={input}
+                meta={meta}
+                id="olsen"
+                onKeyUp={onKeyUp}
+                onDayClick={onDayClick}
+            />);
+            component.setState({ erApen: true });
         });
 
         it('Skal sette initialMonth til dagens måned', () => {
-            expect(component.find(DayPicker).prop('initialMonth')).to.deep.equal(new Date())
+            expect(component.find(DayPicker).prop('initialMonth')).to.deep.equal(new Date());
         });
 
         it('Skal ha en selectedDays-funksjon som returnerer false', () => {
@@ -90,8 +102,14 @@ describe('DaypickerComponent', () => {
         beforeEach(() => {
             const tidligsteFom = new Date('2017-01-10');
             const senesteTom = new Date('2017-01-20');
-            component = shallow(<DaypickerComponent input={input} meta={meta} onKeyUp={onKeyUp} onDayClick={onDayClick}
-                                                    tidligsteFom={tidligsteFom} senesteTom={senesteTom}/>);
+            component = shallow(<DaypickerComponent
+                input={input}
+                meta={meta}
+                onKeyUp={onKeyUp}
+                onDayClick={onDayClick}
+                tidligsteFom={tidligsteFom}
+                senesteTom={senesteTom}
+            />);
             dp = component.find(DayPicker);
         });
 
@@ -101,8 +119,12 @@ describe('DaypickerComponent', () => {
         });
 
         it('Skal kalle på innsendt onDayClick hvis dag er aktiv og det ikke finnes tidligsteFom/senesteTom', () => {
-            component = shallow(<DaypickerComponent input={input} meta={meta} onKeyUp={onKeyUp}
-                                                    onDayClick={onDayClick}/>)
+            component = shallow(<DaypickerComponent
+                input={input}
+                meta={meta}
+                onKeyUp={onKeyUp}
+                onDayClick={onDayClick}
+            />);
             dp = component.find(DayPicker);
             dp.prop('onDayClick')(new Date('2017-01-12'));
             expect(onDayClick.called).to.be.equal(true);
@@ -115,15 +137,18 @@ describe('DaypickerComponent', () => {
     });
 
     describe('erDeaktivertDag', () => {
-        let erDeaktivertDag;
-        let component;
-
         beforeEach(() => {
             const tidligsteFom = new Date('2017-01-10');
             const senesteTom = new Date('2017-01-20');
-            component = shallow(<DaypickerComponent input={input} meta={meta} id='olsen' tidligsteFom={tidligsteFom}
-                                                    senesteTom={senesteTom} onKeyUp={onKeyUp}
-                                                    onDayClick={onDayClick}/>);
+            component = shallow(<DaypickerComponent
+                input={input}
+                meta={meta}
+                id="olsen"
+                tidligsteFom={tidligsteFom}
+                senesteTom={senesteTom}
+                onKeyUp={onKeyUp}
+                onDayClick={onDayClick}
+            />);
         });
 
         it('Skal returnere true hvis innsendt dato er før tidligsteFom', () => {
@@ -150,16 +175,28 @@ describe('DaypickerComponent', () => {
         it('Feil med tidssone', () => {
             const day = new Date('Wed Jul 20 2016 12:00:00 GMT+0200 (Central Europe Daylight Time)');
             const senesteTom = new Date('Wed Jul 20 2016 02:00:00 GMT+0200 (Central Europe Daylight Time)');
-            component = shallow(<DaypickerComponent input={input} meta={meta} id='olsen' senesteTom={senesteTom}
-                                                    onKeyUp={onKeyUp} onDayClick={onDayClick}/>);
+            component = shallow(<DaypickerComponent
+                input={input}
+                meta={meta}
+                id="olsen"
+                senesteTom={senesteTom}
+                onKeyUp={onKeyUp}
+                onDayClick={onDayClick}
+            />);
             expect(component.instance().erDeaktivertDag(day)).to.be.equal(false);
         });
 
         describe('erDeaktivertDag med bare tidligsteFom', () => {
             beforeEach(() => {
                 const tidligsteFom = new Date('2017-01-10');
-                component = shallow(<DaypickerComponent input={input} meta={meta} id='olsen' tidligsteFom={tidligsteFom}
-                                                        onKeyUp={onKeyUp} onDayClick={onDayClick}/>);
+                component = shallow(<DaypickerComponent
+                    input={input}
+                    meta={meta}
+                    id="olsen"
+                    tidligsteFom={tidligsteFom}
+                    onKeyUp={onKeyUp}
+                    onDayClick={onDayClick}
+                />);
             });
 
             it('Skal returnere true hvis innsendt dato er før tidligsteFom', () => {
@@ -176,11 +213,16 @@ describe('DaypickerComponent', () => {
         });
 
         describe('erDeaktivertDag med bare senesteTom', () => {
-
             beforeEach(() => {
                 const senesteTom = new Date('2017-01-20');
-                component = shallow(<DaypickerComponent input={input} meta={meta} id='olsen' senesteTom={senesteTom}
-                                                        onKeyUp={onKeyUp} onDayClick={onDayClick}/>);
+                component = shallow(<DaypickerComponent
+                    input={input}
+                    meta={meta}
+                    id="olsen"
+                    senesteTom={senesteTom}
+                    onKeyUp={onKeyUp}
+                    onDayClick={onDayClick}
+                />);
             });
 
             it('Skal returnere true hvis innsendt dato er etter senesteTom', () => {

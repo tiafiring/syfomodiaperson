@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
-import React from 'react'
+import React from 'react';
 import sinon from 'sinon';
 import { Radio } from 'nav-frontend-skjema';
 import Innholdsviser, { Innholdsvelger } from '../../../js/mote/components/Innholdsviser';
@@ -107,7 +107,7 @@ describe('Innholdsviser', () => {
             arbeidstaker={arbeidstaker}
             hentEpostinnhold={hentEpostinnhold}
             mote={mote}
-            henter={true}
+            henter
         />);
         expect(component.find(AppSpinner)).to.have.length(1);
     });
@@ -127,7 +127,8 @@ describe('Innholdsviser', () => {
         component = shallow(<Innholdsviser
             arbeidstaker={arbeidstaker}
             hentEpostinnhold={hentEpostinnhold}
-            mote={mote} epostinnhold={epostinnhold}
+            mote={mote}
+            epostinnhold={epostinnhold}
         />);
         expect(component.find(Innholdsvelger)).to.have.length(1);
     });

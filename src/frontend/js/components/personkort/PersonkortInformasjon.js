@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const PersonkortInformasjon = ({ informasjonNokkelTekster, informasjon }) => {
+const PersonkortInformasjon = ({ informasjonNokkelTekster, informasjon }) => {
     return Object.keys(informasjon).map((nokkel, idx) => {
         return (
             <dl key={`${nokkel}.${idx}`} className="personkortElement__informasjon">

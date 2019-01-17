@@ -7,7 +7,7 @@ describe('GlobalNavigasjonContainer', () => {
             navbruker: {
                 data: {
                     kontaktinfo: {
-                        fnr: '887766'
+                        fnr: '887766',
                     },
                     harTilgang: true,
                 },

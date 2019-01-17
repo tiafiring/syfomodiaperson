@@ -14,19 +14,19 @@ import {
 import TidslinjeVelgArbeidssituasjonContainer from '../../js/containers/TidslinjeVelgArbeidssituasjonContainer';
 
 describe('TidslinjeContainer', () => {
-    let state = {};
-    let ownProps = {};
+    const state = {};
+    const ownProps = {};
 
     beforeEach(() => {
         state.tidslinjer = {
             data: [{
-                hendelser: [{foo: 1}, {foo: 2}],
+                hendelser: [{ foo: 1 }, { foo: 2 }],
             }],
             hentingFeilet: false,
             henter: false,
         };
         state.ledetekster = {
-            data: {'min': 'tekst'},
+            data: { min: 'tekst' },
             hentingFeilet: false,
             henter: false,
         };
@@ -38,7 +38,7 @@ describe('TidslinjeContainer', () => {
             data: {
                 fnr: '887766',
                 navn: 'Hulgis',
-            }
+            },
         };
         state.sykeforloep = {
             henter: false,
@@ -49,12 +49,12 @@ describe('TidslinjeContainer', () => {
         state.tilgang = {
             data: {
                 harTilgang: true,
-            }
+            },
         };
         ownProps.params = {
             valgtArbeidssituasjon: '',
             fnr: '887766',
-        }
+        };
     });
 
     describe('mapStateToProps', () => {
@@ -65,12 +65,12 @@ describe('TidslinjeContainer', () => {
 
         it('Skal returnere NAV-brukerens navn', () => {
             const props = mapStateToProps(state, ownProps);
-            expect(props.brukernavn).to.equal('Hulgis')
+            expect(props.brukernavn).to.equal('Hulgis');
         });
 
         it('Skal returnere hendelser', () => {
             const props = mapStateToProps(state, ownProps);
-            expect(props.hendelser).to.deep.equal([{foo: 1}, {foo: 2}]);
+            expect(props.hendelser).to.deep.equal([{ foo: 1 }, { foo: 2 }]);
         });
 
         it('Skal returnere hendelser fra hash', () => {
@@ -83,7 +83,7 @@ describe('TidslinjeContainer', () => {
                 hash: '#8/banan',
             };
             const props2 = mapStateToProps(state, ownProps);
-            expect(props2.apneHendelseIder).to.deep.equal(['8', 'banan'])
+            expect(props2.apneHendelseIder).to.deep.equal(['8', 'banan']);
         });
 
         it('Skal returnere hentingFeilet', () => {
@@ -116,7 +116,7 @@ describe('TidslinjeContainer', () => {
 
         it('Skal returnere ledetekster', () => {
             const props = mapStateToProps(state, ownProps);
-            expect(props.ledetekster).to.deep.equal({min: 'tekst'});
+            expect(props.ledetekster).to.deep.equal({ min: 'tekst' });
         });
     });
 
@@ -144,7 +144,7 @@ describe('TidslinjeContainer', () => {
             actions = {
                 hentTidslinjer,
                 hentSykeforloep,
-            }
+            };
         });
 
         it('Skal vise AppSpinner dersom henter = true', () => {
@@ -197,7 +197,7 @@ describe('TidslinjeContainer', () => {
             komponent = shallow(<TidslinjeSide
                 tilgang={tilgang}
                 actions={actions}
-                fnr='12'
+                fnr="12"
                 sykeforloep={sykeforloep}
             />);
             expect(hentSykeforloep.called).to.be.equal(true);
@@ -207,7 +207,7 @@ describe('TidslinjeContainer', () => {
             komponent = shallow(<TidslinjeSide
                 tilgang={tilgang}
                 actions={actions}
-                fnr='12'
+                fnr="12"
                 sykeforloep={Object.assign({}, sykeforloep, {
                     hentet: true,
                 })}

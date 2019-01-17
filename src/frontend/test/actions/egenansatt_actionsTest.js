@@ -1,5 +1,4 @@
 import chai from 'chai';
-import React from 'react';
 import chaiEnzyme from 'chai-enzyme';
 import {
     HENT_EGENANSATT_FORESPURT,
@@ -7,7 +6,7 @@ import {
     EGENANSATT_HENTET,
     HENT_EGENANSATT_FEILET,
 } from '../../js/actions/actiontyper';
-import * as actions  from '../../js/actions/egenansatt_actions';
+import * as actions from '../../js/actions/egenansatt_actions';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;

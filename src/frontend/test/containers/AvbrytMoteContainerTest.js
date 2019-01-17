@@ -1,101 +1,110 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+import sinon from 'sinon';
 import { AvbrytMoteSide, mapStateToProps } from '../../js/containers/AvbrytMoteContainer';
 import AppSpinner from '../../js/components/AppSpinner';
-import sinon from 'sinon';
 import Lightbox from '../../js/components/Lightbox';
 import AvbrytMote from '../../js/mote/components/AvbrytMote';
 
 describe('AvbrytMoteContainer', () => {
     describe('AvbrytMoteSide', () => {
-        let hentAvbrytMoteEpostinnhold;
         let hentMoter;
         let mote;
+        let compo;
 
         beforeEach(() => {
             mote = {
-               id: 1,
-               moteUuid: '2fedc0da-efec-4b6e-8597-a021628058ae',
-               opprettetAv: 'Z990562',
-               status: 'OPPRETTET',
-               opprettetTidspunkt: '2016-11-21T11:35:51.870Z',
-               navEnhet: 'navEnhet',
-               deltakere: [{
-                   deltakerUuid: 'brukers-deltaker-uuid',
-                   navn: 'Andreas Arbeidstaker',
-                   epost: 'andreas.arbeidstaker@nav.no',
-                   type: 'Bruker',
-                   svar: [{
-                       id: 328,
-                       tid: '2020-12-12T11:00:00Z',
-                       sted: 'Oslo ',
-                       valgt: false,
+                id: 1,
+                moteUuid: '2fedc0da-efec-4b6e-8597-a021628058ae',
+                opprettetAv: 'Z990562',
+                status: 'OPPRETTET',
+                opprettetTidspunkt: '2016-11-21T11:35:51.870Z',
+                navEnhet: 'navEnhet',
+                deltakere: [{
+                    deltakerUuid: 'brukers-deltaker-uuid',
+                    navn: 'Andreas Arbeidstaker',
+                    epost: 'andreas.arbeidstaker@nav.no',
+                    type: 'Bruker',
+                    svar: [{
+                        id: 328,
+                        tid: '2020-12-12T11:00:00Z',
+                        sted: 'Oslo ',
+                        valgt: false,
                     }, {
-                       id: 329,
-                       tid: '2020-09-09T07:00:00Z',
-                       sted: 'Oslo ',
-                       valgt: false,
+                        id: 329,
+                        tid: '2020-09-09T07:00:00Z',
+                        sted: 'Oslo ',
+                        valgt: false,
                     }],
                 }, {
-                   deltakerUuid: 'arbeidsgivers-deltaker-uuid',
-                   navn: 'Arve Arbeidsgiver',
-                   epost: 'arve.arbeidsgiver@nav.no',
-                   type: 'arbeidsgiver',
-                   svar: [{
-                       id: 328,
-                       tid: '2020-12-12T11:00:00Z',
-                       sted: 'Oslo ',
-                       valgt: false,
+                    deltakerUuid: 'arbeidsgivers-deltaker-uuid',
+                    navn: 'Arve Arbeidsgiver',
+                    epost: 'arve.arbeidsgiver@nav.no',
+                    type: 'arbeidsgiver',
+                    svar: [{
+                        id: 328,
+                        tid: '2020-12-12T11:00:00Z',
+                        sted: 'Oslo ',
+                        valgt: false,
                     }, {
-                       id: 329,
-                       tid: '2020-09-09T07:00:00Z',
-                       sted: 'Oslo ',
-                       valgt: false,
+                        id: 329,
+                        tid: '2020-09-09T07:00:00Z',
+                        sted: 'Oslo ',
+                        valgt: false,
                     }],
                 }],
-               alternativer: [{
-                   id: 328,
-                   tid: '2020-12-12T11:00:00Z',
-                   sted: 'Oslo ',
-                   valgt: false,
+                alternativer: [{
+                    id: 328,
+                    tid: '2020-12-12T11:00:00Z',
+                    sted: 'Oslo ',
+                    valgt: false,
                 }, {
-                   id: 329,
-                   tid: '2020-09-09T07:00:00Z',
-                   sted: 'Oslo ',
-                   valgt: false,
+                    id: 329,
+                    tid: '2020-09-09T07:00:00Z',
+                    sted: 'Oslo ',
+                    valgt: false,
                 }],
             };
-            hentAvbrytMoteEpostinnhold = sinon.spy();
             hentMoter = sinon.spy();
         });
 
         it('Skal hente møte dersom det ikke finnes møte', () => {
-            const compo = shallow(<AvbrytMoteSide fnr='123' hentMoter={hentMoter}/>);
+            compo = shallow(<AvbrytMoteSide
+                fnr="123"
+                hentMoter={hentMoter}
+            />);
             expect(hentMoter.getCall(0).args).to.deep.equal(['123']);
         });
 
         it('Skal ikke hente møte dersom det finnes møte', () => {
-            const compo = shallow(<AvbrytMoteSide mote={mote} fnr='123' hentMoter={hentMoter}/>);
+            compo = shallow(<AvbrytMoteSide
+                mote={mote}
+                fnr="123"
+                hentMoter={hentMoter}
+            />);
             expect(hentMoter.called).to.be.equal(false);
         });
 
         it('Skal vise frem AppSpinner når det hentes møter', () => {
-            const compo = shallow(<AvbrytMoteSide hentMoter={hentMoter} henter={true}/>);
-            expect(compo.contains(<AppSpinner/>)).to.be.equal(true);
+            compo = shallow(<AvbrytMoteSide
+                hentMoter={hentMoter}
+                henter
+            />);
+            expect(compo.contains(<AppSpinner />)).to.be.equal(true);
         });
 
         it('Skal vise frem Lightbox når møte er hentet', () => {
-            const compo = shallow(<AvbrytMoteSide henter={false} mote={mote}/>);
+            compo = shallow(<AvbrytMoteSide henter={false} mote={mote} />);
             expect(compo.find(Lightbox)).to.have.length(1);
         });
 
         it('Skal vise frem AvbrytMote når møte er hentet', () => {
-            const compo = shallow(<AvbrytMoteSide
+            compo = shallow(<AvbrytMoteSide
                 henter={false}
                 mote={mote}
                 avbrytFeilet={false}
-                avbryter={true}
+                avbryter
             />);
             expect(compo.find(AvbrytMote)).to.have.length(1);
             expect(compo.find(AvbrytMote).prop('avbrytFeilet')).to.be.equal(false);
@@ -104,9 +113,13 @@ describe('AvbrytMoteContainer', () => {
 
         it('Skal ha en avbrytMote-funksjon som kaller på riktig funksjon', () => {
             const avbrytMote = sinon.spy();
-            const compo = shallow(<AvbrytMoteSide fnr='8855' avbrytMote={avbrytMote} mote={mote}/>);
+            compo = shallow(<AvbrytMoteSide
+                fnr="8855"
+                avbrytMote={avbrytMote}
+                mote={mote}
+            />);
             expect(compo.instance().avbrytMote());
-            expect(avbrytMote.getCall(0).args).to.deep.equal(['2fedc0da-efec-4b6e-8597-a021628058ae', '8855'])
+            expect(avbrytMote.getCall(0).args).to.deep.equal(['2fedc0da-efec-4b6e-8597-a021628058ae', '8855']);
         });
     });
 
@@ -118,9 +131,9 @@ describe('AvbrytMoteContainer', () => {
             ownProps = {
                 params: {
                     moteUuid: '2fedc0da-efec-4b6e-8597-a021628058ae',
-                    fnr: '123'
+                    fnr: '123',
                 },
-            },
+            };
             state = {
                 epostinnhold: {
                     hentingFeilet: false,
@@ -128,45 +141,45 @@ describe('AvbrytMoteContainer', () => {
                 moter: {
                     hentingFeilet: false,
                     data: [{
-                       id: 1,
-                       moteUuid: '2fedc0da-efec-4b6e-8597-a021628058ae',
-                       opprettetAv: 'Z990562',
-                       status: 'OPPRETTET',
-                       opprettetTidspunkt: '2016-11-21T11:35:51.870Z',
-                       navEnhet: 'navEnhet',
-                       deltakere: [{
-                           deltakerUuid: '85a12263-d955-4103-b172-bf135df5f37a',
-                           navn: 'Arve Arbeidsgiver',
-                           epost: 'arve.arbeidsgiver@nav.no',
-                           type: 'arbeidsgiver',
-                           svar: [{
-                               id: 328,
-                               tid: '2020-12-12T11:00:00Z',
-                               sted: 'Oslo ',
-                               valgt: false,
+                        id: 1,
+                        moteUuid: '2fedc0da-efec-4b6e-8597-a021628058ae',
+                        opprettetAv: 'Z990562',
+                        status: 'OPPRETTET',
+                        opprettetTidspunkt: '2016-11-21T11:35:51.870Z',
+                        navEnhet: 'navEnhet',
+                        deltakere: [{
+                            deltakerUuid: '85a12263-d955-4103-b172-bf135df5f37a',
+                            navn: 'Arve Arbeidsgiver',
+                            epost: 'arve.arbeidsgiver@nav.no',
+                            type: 'arbeidsgiver',
+                            svar: [{
+                                id: 328,
+                                tid: '2020-12-12T11:00:00Z',
+                                sted: 'Oslo ',
+                                valgt: false,
                             }, {
-                               id: 329,
-                               tid: '2020-09-09T07:00:00Z',
-                               sted: 'Oslo ',
-                               valgt: false,
+                                id: 329,
+                                tid: '2020-09-09T07:00:00Z',
+                                sted: 'Oslo ',
+                                valgt: false,
                             }],
                         }],
-                       alternativer: [{
-                           id: 328,
-                           tid: '2020-12-12T11:00:00Z',
-                           sted: 'Oslo ',
-                           valgt: false,
+                        alternativer: [{
+                            id: 328,
+                            tid: '2020-12-12T11:00:00Z',
+                            sted: 'Oslo ',
+                            valgt: false,
                         }, {
-                           id: 329,
-                           tid: '2020-09-09T07:00:00Z',
-                           sted: 'Oslo ',
-                           valgt: false,
+                            id: 329,
+                            tid: '2020-09-09T07:00:00Z',
+                            sted: 'Oslo ',
+                            valgt: false,
                         }],
                     }],
                 },
                 navbruker: {
                     data: {
-                        fnr: '123'
+                        fnr: '123',
                     },
                     henter: false,
                     hentingFeilet: false,
@@ -177,7 +190,6 @@ describe('AvbrytMoteContainer', () => {
                     data: {},
                 },
             };
-
         });
 
         it('Skal returnere fnr', () => {
@@ -220,6 +232,6 @@ describe('AvbrytMoteContainer', () => {
             state.moter.avbrytFeilet = true;
             const props = mapStateToProps(state, ownProps);
             expect(props.avbrytFeilet).to.be.equal(true);
-        })
+        });
     });
 });

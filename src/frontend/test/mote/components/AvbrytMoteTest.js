@@ -1,16 +1,15 @@
 import { expect } from 'chai';
-import { mount, shallow } from 'enzyme';
-import React from 'react'
+import { shallow } from 'enzyme';
+import React from 'react';
 import AvbrytMote, {
-    Innholdsviser,
     InnholdsviserContainer,
-    mapStateToInnholdsviserProps
+    mapStateToInnholdsviserProps,
 } from '../../../js/mote/components/AvbrytMote';
 import Epostmottakere from '../../../js/mote/components/Epostmottakere';
 import {
     ARBEIDSGIVER,
     BRUKER,
-}from '../../../js/konstanter';
+} from '../../../js/konstanter';
 
 const getMote = (mote) => {
     return Object.assign({}, {
@@ -86,7 +85,7 @@ describe('AvbrytMote-', () => {
     beforeEach(() => {
         mote = getMote();
         ledetekster = {
-            'mote.avbrytmote.overskrift': 'Avbryt møte'
+            'mote.avbrytmote.overskrift': 'Avbryt møte',
         };
         navbruker = {
             data: {
@@ -112,7 +111,7 @@ describe('AvbrytMote-', () => {
             navbruker={navbruker}
         />);
         expect(component.find(Epostmottakere)).to.have.length(1);
-        expect(component.find(Epostmottakere).prop('mote')).to.deep.equal(mote)
+        expect(component.find(Epostmottakere).prop('mote')).to.deep.equal(mote);
     });
 
     it('Viser en InnholdsviserContainer', () => {

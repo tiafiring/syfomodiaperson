@@ -23,19 +23,19 @@ export const getMote = (mote) => {
                 tid: new Date('2017-03-07T15:18:24.000Z'),
                 created: new Date('2017-02-22T15:18:24.000Z'),
                 sted: 'Testveien 2',
-                valgt: false
+                valgt: false,
             }, {
                 id: 3,
                 tid: new Date('2017-02-25T15:18:24.000Z'),
                 created: new Date('2017-02-22T15:18:24.000Z'),
                 sted: 'Testveien 2',
-                valgt: false
+                valgt: false,
             }, {
                 id: 2,
                 tid: new Date('2017-03-09T15:18:24.000Z'),
                 created: new Date('2017-02-22T15:18:24.000Z'),
                 sted: 'Testveien 2',
-                valgt: false
+                valgt: false,
             }],
         }, {
             hendelser: [],
@@ -50,19 +50,19 @@ export const getMote = (mote) => {
                 tid: new Date('2017-03-07T15:18:24.000Z'),
                 created: new Date('2017-02-22T15:18:24.000Z'),
                 sted: 'Testveien 2',
-                valgt: false
+                valgt: false,
             }, {
                 id: 3,
                 tid: new Date('2017-02-25T15:18:24.000Z'),
                 created: new Date('2017-02-22T15:18:24.000Z'),
                 sted: 'Testveien 2',
-                valgt: false
+                valgt: false,
             }, {
                 id: 2,
                 tid: new Date('2017-03-09T15:18:24.000Z'),
                 created: new Date('2017-02-22T15:18:24.000Z'),
                 sted: 'Testveien 2',
-                valgt: false
+                valgt: false,
             }],
         }],
         bekreftetAlternativ: null,
@@ -71,20 +71,20 @@ export const getMote = (mote) => {
             tid: new Date('2017-03-07T15:18:24.000Z'),
             created: new Date('2017-02-22T15:18:24.000Z'),
             sted: 'Testveien 2',
-            valgt: false
+            valgt: false,
         }, {
             id: 3,
             tid: new Date('2017-02-25T15:18:24.000Z'),
             created: new Date('2017-02-22T15:18:24.000Z'),
             sted: 'Testveien 2',
-            valgt: false
+            valgt: false,
         }, {
             id: 2,
             tid: new Date('2017-02-25T15:18:24.000Z'),
             created: new Date('2017-02-22T15:18:24.000Z'),
             sted: 'Testveien 2',
-            valgt: false
-        },],
+            valgt: false,
+        }],
     }, mote);
 };
 
@@ -174,13 +174,13 @@ describe('moter', () => {
                         tid: '2017-03-07T15:18:24.000Z',
                         created: '2017-02-22T15:18:24.000Z',
                         sted: 'Testveien 2',
-                        valgt: false
+                        valgt: false,
                     }, {
                         id: 2,
                         tid: '2017-03-09T15:18:24.000Z',
                         created: '2017-02-22T15:18:24.000Z',
                         sted: 'Testveien 2',
-                        valgt: false
+                        valgt: false,
                     }],
                 }, {
                     hendelser: [],
@@ -195,13 +195,13 @@ describe('moter', () => {
                         tid: '2017-03-07T15:18:24.000Z',
                         created: '2017-02-22T15:18:24.000Z',
                         sted: 'Testveien 2',
-                        valgt: false
+                        valgt: false,
                     }, {
                         id: 2,
                         tid: '2017-03-09T15:18:24.000Z',
                         created: '2017-02-22T15:18:24.000Z',
                         sted: 'Testveien 2',
-                        valgt: false
+                        valgt: false,
                     }],
                 }],
                 bekreftetAlternativ: null,
@@ -210,13 +210,13 @@ describe('moter', () => {
                     tid: '2017-03-07T15:18:24.000Z',
                     created: '2017-02-22T15:18:24.000Z',
                     sted: 'Testveien 2',
-                    valgt: false
+                    valgt: false,
                 }, {
                     id: 2,
                     tid: '2017-03-09T15:18:24.000Z',
                     created: '2017-02-22T15:18:24.000Z',
                     sted: 'Testveien 2',
-                    valgt: false
+                    valgt: false,
                 }],
             }]);
             const nextState = moter(initialState, action);
@@ -238,13 +238,13 @@ describe('moter', () => {
                             tid: new Date('2017-03-07T15:18:24.000Z'),
                             created: new Date('2017-02-22T15:18:24.000Z'),
                             sted: 'Testveien 2',
-                            valgt: false
+                            valgt: false,
                         }, {
                             id: 2,
                             tid: new Date('2017-03-09T15:18:24.000Z'),
                             created: new Date('2017-02-22T15:18:24.000Z'),
                             sted: 'Testveien 2',
-                            valgt: false
+                            valgt: false,
                         }],
                     }, {
                         hendelser: [],
@@ -259,13 +259,13 @@ describe('moter', () => {
                             tid: new Date('2017-03-07T15:18:24.000Z'),
                             created: new Date('2017-02-22T15:18:24.000Z'),
                             sted: 'Testveien 2',
-                            valgt: false
+                            valgt: false,
                         }, {
                             id: 2,
                             tid: new Date('2017-03-09T15:18:24.000Z'),
                             created: new Date('2017-02-22T15:18:24.000Z'),
                             sted: 'Testveien 2',
-                            valgt: false
+                            valgt: false,
                         }],
                     }],
                     bekreftetAlternativ: null,
@@ -274,13 +274,13 @@ describe('moter', () => {
                         tid: new Date('2017-03-07T15:18:24.000Z'),
                         created: new Date('2017-02-22T15:18:24.000Z'),
                         sted: 'Testveien 2',
-                        valgt: false
+                        valgt: false,
                     }, {
                         id: 2,
                         tid: new Date('2017-03-09T15:18:24.000Z'),
                         created: new Date('2017-02-22T15:18:24.000Z'),
                         sted: 'Testveien 2',
-                        valgt: false
+                        valgt: false,
                     }],
                 }],
                 henter: false,
@@ -314,13 +314,13 @@ describe('moter', () => {
                         tid: '2017-03-07T15:18:24.000Z',
                         created: '2017-02-22T15:18:24.000Z',
                         sted: 'Testveien 2',
-                        valgt: false
+                        valgt: false,
                     }, {
                         id: 2,
                         tid: '2017-03-09T15:18:24.000Z',
                         created: '2017-02-22T15:18:24.000Z',
                         sted: 'Testveien 2',
-                        valgt: false
+                        valgt: false,
                     }],
                 }, {
                     hendelser: [],
@@ -335,13 +335,13 @@ describe('moter', () => {
                         tid: '2017-03-07T15:18:24.000Z',
                         created: '2017-02-22T15:18:24.000Z',
                         sted: 'Testveien 2',
-                        valgt: false
+                        valgt: false,
                     }, {
                         id: 2,
                         tid: '2017-03-09T15:18:24.000Z',
                         created: '2017-02-22T15:18:24.000Z',
                         sted: 'Testveien 2',
-                        valgt: false
+                        valgt: false,
                     }],
                 }],
                 bekreftetAlternativ: {
@@ -349,20 +349,20 @@ describe('moter', () => {
                     tid: '2017-03-07T15:18:24.000Z',
                     created: '2017-02-22T15:18:24.000Z',
                     sted: 'Testveien 2',
-                    valgt: false
+                    valgt: false,
                 },
                 alternativer: [{
                     id: 1,
                     tid: '2017-03-07T15:18:24.000Z',
                     created: '2017-02-22T15:18:24.000Z',
                     sted: 'Testveien 2',
-                    valgt: false
+                    valgt: false,
                 }, {
                     id: 2,
                     tid: '2017-03-09T15:18:24.000Z',
                     created: '2017-02-22T15:18:24.000Z',
                     sted: 'Testveien 2',
-                    valgt: false
+                    valgt: false,
                 }],
             }]);
             const nextState = moter(initialState, action);
@@ -384,13 +384,13 @@ describe('moter', () => {
                             tid: new Date('2017-03-07T15:18:24.000Z'),
                             created: new Date('2017-02-22T15:18:24.000Z'),
                             sted: 'Testveien 2',
-                            valgt: false
+                            valgt: false,
                         }, {
                             id: 2,
                             tid: new Date('2017-03-09T15:18:24.000Z'),
                             created: new Date('2017-02-22T15:18:24.000Z'),
                             sted: 'Testveien 2',
-                            valgt: false
+                            valgt: false,
                         }],
                     }, {
                         hendelser: [],
@@ -561,7 +561,7 @@ describe('moter', () => {
         beforeEach(() => {
             initialState = deepFreeze({
                 data: [{
-                    foo: 'bar'
+                    foo: 'bar',
                 }, {
                     id: 0,
                     status: 'OPPRETTET',
@@ -584,7 +584,7 @@ describe('moter', () => {
                             tid: '2009-09-09T07:00:00Z',
                             sted: 'Oslo by',
                             valgt: false,
-                            id: 7
+                            id: 7,
                         }],
                     }],
                     alternativer: [{
@@ -604,7 +604,7 @@ describe('moter', () => {
 
         it('Håndterer BEKREFTER_MOTE', () => {
             const action = actions.bekrefterMote();
-            let nextState = moter(initialState, action);
+            const nextState = moter(initialState, action);
             expect(nextState.data).to.deep.equal(initialState.data);
             expect(nextState.bekrefter).to.be.equal(true);
             expect(nextState.bekreftFeilet).to.be.equal(false);
@@ -614,68 +614,68 @@ describe('moter', () => {
 
         it('Håndterer MOTE_BEKREFTET', () => {
             const action = actions.moteBekreftet('b23ee185-cd29-41cb-a109-48d7aad15dc3', 6, '2016-11-03T13:28:05.244');
-            let nextState = moter(initialState, action);
+            const nextState = moter(initialState, action);
             expect(nextState.avbryter).to.be.equal(false);
             expect(nextState.avbrytFeilet).to.be.equal(false);
             expect(nextState.data).to.deep.equal([{
-                foo: 'bar'
+                foo: 'bar',
             },
-                {
-                    id: 0,
-                    status: 'BEKREFTET',
-                    moteUuid: 'b23ee185-cd29-41cb-a109-48d7aad15dc3',
-                    opprettetAv: 'testNAVRessurs',
-                    opprettetTidspunkt: '2016-11-03T13:28:05.244',
-                    navEnhet: 'navEnhet',
-                    bekreftetTidspunkt: new Date('2016-11-03T13:28:05.244'),
-                    deltakere: [{
-                        deltakerUuid: '944c877e-e261-49a4-841e-2ab52349e864',
-                        navn: 'Arve Arbeidsgiver',
-                        epost: 'arve.arbeidsgiver@nav.no',
-                        type: 'arbeidsgiver',
-                        avvik: [],
-                        svar: [{
-                            tid: '2012-12-12T11:00:00Z',
-                            sted: 'Oslo by',
-                            valgt: false,
-                            id: 6
-                        }, {
-                            tid: '2009-09-09T07:00:00Z',
-                            sted: 'Oslo by',
-                            valgt: false,
-                            id: 7
-                        }],
-                    }],
-                    bekreftetAlternativ: {
-                        id: 6,
+            {
+                id: 0,
+                status: 'BEKREFTET',
+                moteUuid: 'b23ee185-cd29-41cb-a109-48d7aad15dc3',
+                opprettetAv: 'testNAVRessurs',
+                opprettetTidspunkt: '2016-11-03T13:28:05.244',
+                navEnhet: 'navEnhet',
+                bekreftetTidspunkt: new Date('2016-11-03T13:28:05.244'),
+                deltakere: [{
+                    deltakerUuid: '944c877e-e261-49a4-841e-2ab52349e864',
+                    navn: 'Arve Arbeidsgiver',
+                    epost: 'arve.arbeidsgiver@nav.no',
+                    type: 'arbeidsgiver',
+                    avvik: [],
+                    svar: [{
                         tid: '2012-12-12T11:00:00Z',
                         sted: 'Oslo by',
                         valgt: false,
-                    },
-                    alternativer: [{
                         id: 6,
-                        tid: '2012-12-12T11:00:00Z',
-                        sted: 'Oslo by',
-                        valgt: false,
                     }, {
-                        id: 7,
                         tid: '2009-09-09T07:00:00Z',
                         sted: 'Oslo by',
                         valgt: false,
+                        id: 7,
                     }],
-                }]);
+                }],
+                bekreftetAlternativ: {
+                    id: 6,
+                    tid: '2012-12-12T11:00:00Z',
+                    sted: 'Oslo by',
+                    valgt: false,
+                },
+                alternativer: [{
+                    id: 6,
+                    tid: '2012-12-12T11:00:00Z',
+                    sted: 'Oslo by',
+                    valgt: false,
+                }, {
+                    id: 7,
+                    tid: '2009-09-09T07:00:00Z',
+                    sted: 'Oslo by',
+                    valgt: false,
+                }],
+            }]);
         });
 
         it('Håndterer bekreftMoteFeilet()', () => {
             const action = actions.bekreftMoteFeilet();
-            let nextState = moter(initialState, action);
+            const nextState = moter(initialState, action);
             expect(nextState.bekrefter).to.be.equal(false);
             expect(nextState.bekreftFeilet).to.be.equal(true);
         });
 
         it('Håndterer bekreftMote()', () => {
             const action = actions.bekreftMote('b23ee185-cd29-41cb-a109-48d7aad15dc3', 6);
-            let nextState = moter(initialState, action);
+            const nextState = moter(initialState, action);
             expect(nextState).to.deep.equal(initialState);
         });
     });
@@ -688,7 +688,7 @@ describe('moter', () => {
         });
 
         it('Håndterer opprettFlereAlternativBekreftet', () => {
-            let initialState = deepFreeze({
+            const initialState = deepFreeze({
                 data: [mote],
             });
             const data = [{
@@ -723,19 +723,19 @@ describe('moter', () => {
                         tid: new Date('2017-03-07T15:18:24.000Z'),
                         created: new Date('2017-02-22T15:18:24.000Z'),
                         sted: 'Testveien 2',
-                        valgt: false
+                        valgt: false,
                     }, {
                         id: 2,
                         tid: new Date('2017-03-09T15:18:24.000Z'),
                         created: new Date('2017-02-22T15:18:24.000Z'),
                         sted: 'Testveien 2',
-                        valgt: false
+                        valgt: false,
                     }, {
                         id: 3,
                         tid: new Date('2017-02-25T15:18:24.000Z'),
                         created: new Date('2017-02-22T15:18:24.000Z'),
                         sted: 'Testveien 2',
-                        valgt: false
+                        valgt: false,
                     }, {
                         id: 4,
                         tid: new Date('2017-03-09T10:00:00.000'),
@@ -774,7 +774,7 @@ describe('moter', () => {
                         tid: new Date('2017-02-25T15:18:24.000Z'),
                         created: new Date('2017-02-22T15:18:24.000Z'),
                         sted: 'Testveien 2',
-                        valgt: false
+                        valgt: false,
                     }, {
                         id: 4,
                         tid: new Date('2017-03-09T10:00:00.000'),
@@ -807,7 +807,7 @@ describe('moter', () => {
                     tid: new Date('2017-02-25T15:18:24.000Z'),
                     created: new Date('2017-02-22T15:18:24.000Z'),
                     sted: 'Testveien 2',
-                    valgt: false
+                    valgt: false,
                 }, {
                     id: 4,
                     tid: new Date('2017-03-09T10:00:00.000'),

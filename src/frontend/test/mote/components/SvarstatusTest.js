@@ -1,8 +1,8 @@
 import React from 'react';
 import { expect } from 'chai';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import { Utvidbar } from 'digisyfo-npm';
-import Svarstatus, {erSamtidig, getGamleAlternativer, getNyeAlternativer} from '../../../js/mote/components/Svarstatus';
+import Svarstatus, { erSamtidig, getGamleAlternativer, getNyeAlternativer } from '../../../js/mote/components/Svarstatus';
 import BesvarteTidspunkter from '../../../js/mote/components/BesvarteTidspunkter';
 import { konverterTid } from '../../../js/utils/datoUtils';
 
@@ -23,7 +23,7 @@ describe('Svarstatus', () => {
                     kanal: 'EPOST',
                     adresse: 'arbe.idsgiver@nav.no',
                     varseltype: 'OPPRETTET',
-                    resultat: 'OK'
+                    resultat: 'OK',
                 }],
                 deltakerUuid: '454a31c0-3691-40f4-9d9e-882ac1d5306e',
                 navn: 'Arbe Idsgiver',
@@ -49,12 +49,12 @@ describe('Svarstatus', () => {
                     kanal: 'TLF',
                     adresse: '12345678',
                     varseltype: 'OPPRETTET',
-                    resultat: 'OK'
+                    resultat: 'OK',
                 }, {
                     kanal: 'EPOST',
                     adresse: 'test@nav.no',
                     varseltype: 'OPPRETTET',
-                    resultat: 'OK'
+                    resultat: 'OK',
                 }],
                 deltakerUuid: '0b118a5a-f866-432b-92cd-46a1dbbc7699',
                 navn: 'Ane Arbeidstaker',
@@ -154,7 +154,7 @@ describe('Svarstatus', () => {
         });
 
         it('Skal returnere tom liste om mote mangler alternativer', () => {
-            const mote = {};
+            mote = {};
             const res = getNyeAlternativer(mote);
             expect(res).to.deep.equal([]);
         });
@@ -169,25 +169,28 @@ describe('Svarstatus', () => {
         });
 
         it('Skal returnere tom liste om mote mangler alternativer', () => {
-            const mote = {};
+            mote = {};
             const res = getNyeAlternativer(mote);
             expect(res).to.deep.equal([]);
         });
     });
 
     describe('Svarstatus', () => {
-        let ledetekster = {
+        const ledetekster = {
             'mote.bookingstatus.tidspunkt-foreslatt-tidligere.tittel': 'Tidspunkt foreslått tidligere',
         };
 
         describe('Hvis møtet har både nye og gamle alternativer', () => {
             it('Skal inneholde to stk BesvarteTidspunkter', () => {
-                const component = shallow(<Svarstatus mote={mote}/>);
+                const component = shallow(<Svarstatus mote={mote} />);
                 expect(component.find(BesvarteTidspunkter)).to.have.length(2);
             });
 
             it('Skal inneholde en Utvidbar', () => {
-                const component = shallow(<Svarstatus mote={mote} ledetekster={ledetekster}/>);
+                const component = shallow(<Svarstatus
+                    mote={mote}
+                    ledetekster={ledetekster}
+                />);
                 expect(component.find(Utvidbar)).to.have.length(1);
                 expect(component.find(Utvidbar).prop('tittel')).to.equal('Tidspunkt foreslått tidligere');
             });
@@ -217,12 +220,15 @@ describe('Svarstatus', () => {
             });
 
             it('Skal inneholde 1 stk BesvarteTidspunkter', () => {
-                const component = shallow(<Svarstatus mote={mote_}/>);
+                const component = shallow(<Svarstatus mote={mote_} />);
                 expect(component.find(BesvarteTidspunkter)).to.have.length(1);
             });
 
             it('Skal ikke inneholde en Utvidbar', () => {
-                const component = shallow(<Svarstatus mote={mote_} ledetekster={ledetekster}/>);
+                const component = shallow(<Svarstatus
+                    mote={mote_}
+                    ledetekster={ledetekster}
+                />);
                 expect(component.find(Utvidbar)).to.have.length(0);
             });
         });

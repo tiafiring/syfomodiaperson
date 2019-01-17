@@ -1,12 +1,12 @@
-import {expect} from 'chai';
-import { mount, shallow } from 'enzyme';
-import React from 'react'
+import { expect } from 'chai';
+import { shallow } from 'enzyme';
+import React from 'react';
 import { Utvidbar } from 'digisyfo-npm';
 import {
     ARBEIDSGIVER,
     BRUKER,
 } from '../../../js/konstanter';
-import InformasjonSendt, {InnholdsviserContainer} from '../../../js/mote/components/InformasjonSendt'
+import InformasjonSendt, { InnholdsviserContainer } from '../../../js/mote/components/InformasjonSendt';
 
 const getMote = (mote) => {
     return Object.assign({}, {

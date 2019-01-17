@@ -29,7 +29,7 @@ describe('modiacontext_actions', () => {
                 verdi: '0022',
                 eventType: 'NY_AKTIV_ENHET',
             },
-        })
+        });
     });
 
     it('har en henterAktivEnhet-funksjon som returnerer riktig action', () => {
@@ -57,7 +57,7 @@ describe('modiacontext_actions', () => {
                 verdi: 'fnr',
                 eventType: 'NY_AKTIV_BRUKER',
             },
-        })
+        });
     });
 
     it('har en henterAktivBruker-funksjon som returnerer riktig action', () => {
@@ -71,7 +71,7 @@ describe('modiacontext_actions', () => {
         const action = actions.hentAktivBrukerFeilet();
         expect(action).to.deep.equal({
             type: HENT_AKTIVBRUKER_FEILET,
-        })
+        });
     });
 
     it('har en pushModiaContext-funksjon som returnerer riktig action', () => {
