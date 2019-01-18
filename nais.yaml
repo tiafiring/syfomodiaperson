@@ -51,8 +51,6 @@ fasitResources:
     resourceType: restservice
   - alias: modiasyfoapi
     resourceType: restservice
-  - alias: moteapifss
-    resourceType: restservice
   - alias: syfomoteadminapi
     resourceType: restservice
   - alias: syfomotebehovapi
