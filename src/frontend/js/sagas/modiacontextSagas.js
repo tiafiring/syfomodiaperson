@@ -1,5 +1,4 @@
-import { call, put, fork } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
+import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
 import { get, post } from '../api/index';
 import * as actions from '../actions/modiacontext_actions';
 import { PUSH_MODIACONTEXT_FORESPURT, HENT_AKTIVBRUKER_FORESPURT, HENT_AKTIVENHET_FORESPURT } from '../actions/actiontyper';
@@ -38,21 +37,21 @@ export function* aktivEnhetSaga(action) {
 }
 
 function* watchPushModiacontext() {
-    yield* takeEvery(PUSH_MODIACONTEXT_FORESPURT, pushModiacontextSaga);
+    yield takeEvery(PUSH_MODIACONTEXT_FORESPURT, pushModiacontextSaga);
 }
 
 function* watchAktivBruker() {
-    yield* takeEvery(HENT_AKTIVBRUKER_FORESPURT, aktivBrukerSaga);
+    yield takeEvery(HENT_AKTIVBRUKER_FORESPURT, aktivBrukerSaga);
 }
 
 function* watchAktivEnhet() {
-    yield* takeEvery(HENT_AKTIVENHET_FORESPURT, aktivEnhetSaga);
+    yield takeEvery(HENT_AKTIVENHET_FORESPURT, aktivEnhetSaga);
 }
 
 export default function* modiacontextSagas() {
-    yield [
+    yield all([
         fork(watchPushModiacontext),
         fork(watchAktivBruker),
         fork(watchAktivEnhet),
-    ];
+    ]);
 }

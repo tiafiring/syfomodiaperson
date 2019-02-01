@@ -1,4 +1,4 @@
-import { parseSykmelding } from 'digisyfo-npm';
+import { parseSykmelding } from '@navikt/digisyfo-npm';
 
 const initiellState = {
     henter: false,

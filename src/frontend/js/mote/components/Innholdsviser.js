@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Radio } from 'nav-frontend-skjema';
 import Alertstripe from 'nav-frontend-alertstriper';
-import { getLedetekst } from 'digisyfo-npm';
+import { getLedetekst } from '@navikt/digisyfo-npm';
 import * as moterPropTypes from '../../propTypes';
 import AppSpinner from '../../components/AppSpinner';
 import {

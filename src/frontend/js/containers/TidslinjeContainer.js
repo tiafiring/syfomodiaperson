@@ -9,7 +9,7 @@ import {
     hentTidslinjer,
     getLedetekst,
     getHtmlLedetekst,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
 import SidetoppSpeilet from '../components/SidetoppSpeilet';
 import * as sykeforloepActions from '../actions/sykeforloep_actions';

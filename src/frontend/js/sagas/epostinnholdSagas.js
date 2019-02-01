@@ -1,6 +1,5 @@
-import { call, put, fork } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
-import { log } from 'digisyfo-npm';
+import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
+import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api/index';
 import * as actions from '../actions/epostinnhold_actions';
 import * as arbeidsgiveractions from '../actions/arbeidsgiverepostinnhold_actions';
@@ -40,22 +39,22 @@ export function* hentAvbrytMoteEpostinnhold(action) {
 }
 
 function* watchHentBekreftMoteEpostinnhold() {
-    yield* takeEvery(HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT, hentBekreftMoteEpostinnhold);
+    yield takeEvery(HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT, hentBekreftMoteEpostinnhold);
 }
 
 function* watchHentBekreftMoteArbeidsgiverEpostinnhold() {
-    yield* takeEvery(HENT_BEKREFT_MOTE_ARBEIDSGIVEREPOSTINNHOLD_FORESPURT, hentBekreftMoteArbeidsgiverEpostinnhold);
+    yield takeEvery(HENT_BEKREFT_MOTE_ARBEIDSGIVEREPOSTINNHOLD_FORESPURT, hentBekreftMoteArbeidsgiverEpostinnhold);
 }
 
 function* watchHentAvbrytMoteEpostinnhold() {
-    yield* takeEvery(HENT_AVBRYT_MOTE_EPOSTINNHOLD_FORESPURT, hentAvbrytMoteEpostinnhold);
+    yield takeEvery(HENT_AVBRYT_MOTE_EPOSTINNHOLD_FORESPURT, hentAvbrytMoteEpostinnhold);
 }
 
 export default function* epostinnholdSagas() {
-    yield [
+    yield all([
         fork(watchHentBekreftMoteEpostinnhold),
         fork(watchHentAvbrytMoteEpostinnhold),
         fork(watchHentAvbrytMoteEpostinnhold),
         fork(watchHentBekreftMoteArbeidsgiverEpostinnhold),
-    ];
+    ]);
 }

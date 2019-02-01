@@ -1,5 +1,5 @@
 import React from 'react';
-import { getHtmlLedetekst, getLedetekst, SykmeldingNokkelOpplysning, tilLesbarDatoMedArstall } from 'digisyfo-npm';
+import { getHtmlLedetekst, getLedetekst, SykmeldingNokkelOpplysning, tilLesbarDatoMedArstall } from '@navikt/digisyfo-npm';
 import Statuspanel, { Statusopplysninger, StatusNokkelopplysning } from '../Statuspanel';
 import { soknad as soknadPt } from '../../propTypes';
 import { VerktoyKnapp, Verktoylinje } from '../Verktoylinje';

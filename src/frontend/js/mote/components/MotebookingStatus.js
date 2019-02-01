@@ -5,7 +5,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import {
     getLedetekst,
     getHtmlLedetekst,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import * as moterPropTypes from '../../propTypes';
 import { getDatoFraZulu, erMotePassert } from '../utils/index';
 import Sidetopp from '../../components/Sidetopp';

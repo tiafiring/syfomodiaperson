@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { DineSykmeldingOpplysninger, getLedetekst, Bjorn } from 'digisyfo-npm';
+import { DineSykmeldingOpplysninger, getLedetekst, Bjorn } from '@navikt/digisyfo-npm';
 import Alertstripe from 'nav-frontend-alertstriper';
 
 const navn = (pasient) => {

@@ -8,7 +8,7 @@ import { reducer as formReducer } from 'redux-form';
 import {
     hasURLParameter,
     tidslinjer,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import AppRouter from './routers/AppRouter';
 import history from './history';
 import fastleger from './reducers/fastleger';

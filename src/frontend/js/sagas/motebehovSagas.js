@@ -1,6 +1,5 @@
-import { call, put, fork } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
-import { log } from 'digisyfo-npm';
+import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
+import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api/index';
 import * as actions from '../actions/motebehov_actions';
 import * as actiontyper from '../actions/actiontyper';
@@ -23,11 +22,11 @@ export function* hentMotebehov(action) {
 }
 
 function* watchHentMotebehov() {
-    yield* takeEvery(actiontyper.HENT_MOTEBEHOV_FORESPURT, hentMotebehov);
+    yield takeEvery(actiontyper.HENT_MOTEBEHOV_FORESPURT, hentMotebehov);
 }
 
 export default function* motebehovSagas() {
-    yield [
+    yield all([
         fork(watchHentMotebehov),
-    ];
+    ]);
 }

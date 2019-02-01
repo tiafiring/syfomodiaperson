@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
-import { tilLesbarDatoMedArstall } from 'digisyfo-npm';
+import { tilLesbarDatoMedArstall } from '@navikt/digisyfo-npm';
 import { Checkbox } from 'nav-frontend-skjema';
 import Alertstripe from 'nav-frontend-alertstriper';
 import Knapp from 'nav-frontend-knapper';

@@ -6,7 +6,7 @@ import {
     SykmeldingPerioder,
     SykmeldingNokkelOpplysning,
     toDatePrettyPrint,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
 
 

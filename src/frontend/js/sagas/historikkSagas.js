@@ -1,6 +1,5 @@
-import { call, put, fork } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
-import { log } from 'digisyfo-npm';
+import { call, put, fork, takeEvery } from 'redux-saga/effects';
+import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api/index';
 import * as actions from '../actions/historikk_actions';
 
@@ -38,15 +37,15 @@ export function* hentHistorikkMotebehov(action) {
 }
 
 function* watchHentHistorikkOppfoelgingsdialog() {
-    yield* takeEvery('HENT_HISTORIKK_OPPFOELGINGSDIALOG_FORESPURT', hentHistorikkOppfoelgingsdialog);
+    yield takeEvery('HENT_HISTORIKK_OPPFOELGINGSDIALOG_FORESPURT', hentHistorikkOppfoelgingsdialog);
 }
 
 function* watchHentHistorikkMoter() {
-    yield* takeEvery('HENT_HISTORIKK_MOTER_FORESPURT', hentHistorikkMoter);
+    yield takeEvery('HENT_HISTORIKK_MOTER_FORESPURT', hentHistorikkMoter);
 }
 
 function* watchHentHistorikkMotebehov() {
-    yield* takeEvery('HENT_HISTORIKK_MOTEBEHOV_FORESPURT', hentHistorikkMotebehov);
+    yield takeEvery('HENT_HISTORIKK_MOTEBEHOV_FORESPURT', hentHistorikkMotebehov);
 }
 
 export default function* historikkSagas() {

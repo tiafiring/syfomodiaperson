@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import * as arbeidssituasjoner from '../enums/arbeidssituasjoner';
 import * as svartyper from '../enums/svartyper';
-import { sykepengesoknad } from 'digisyfo-npm';
+import { sykepengesoknad } from '@navikt/digisyfo-npm';
 
-export { sykepengesoknad, sykmelding } from 'digisyfo-npm';
+export { sykepengesoknad, sykmelding } from '@navikt/digisyfo-npm';
 
 export * from './moteProptypes';
 

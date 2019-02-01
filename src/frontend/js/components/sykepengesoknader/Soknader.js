@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, sykepengesoknadstatuser } from 'digisyfo-npm';
+import { getLedetekst, sykepengesoknadstatuser } from '@navikt/digisyfo-npm';
 import Sidetopp from '../Sidetopp';
 import SoknadTeasere from './SoknaderTeasere';
 import PlanlagteTeasere from './PlanlagteTeasere';

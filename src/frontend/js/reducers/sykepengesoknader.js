@@ -1,4 +1,4 @@
-import { parseSykepengesoknad, tidligsteFom, senesteTom } from 'digisyfo-npm';
+import { parseSykepengesoknad, tidligsteFom, senesteTom } from '@navikt/digisyfo-npm';
 
 const initiellState = {
     henter: false,

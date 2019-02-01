@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import {
     getLedetekst,
     tilLesbarPeriodeMedArstall,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import Alertstripe from 'nav-frontend-alertstriper';
 import Sidetopp from '../Sidetopp';
 

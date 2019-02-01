@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Panel } from 'nav-frontend-paneler';
 import Alertstripe from 'nav-frontend-alertstriper';
-import { tilLesbarPeriodeMedArstall } from 'digisyfo-npm';
+import { tilLesbarPeriodeMedArstall } from '@navikt/digisyfo-npm';
 import HistorikkEvent from './HistorikkEvent';
 import AppSpinner from '../../components/AppSpinner';
 import IngenHistorikk from './IngenHistorikk';

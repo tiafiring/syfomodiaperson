@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
     getLedetekst,
     TIDSLINJE_TYPER,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import Radiofaner from '../components/Radiofaner';
 
 const verdier = {};

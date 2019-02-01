@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
-import { SykmeldingUtdrag } from 'digisyfo-npm';
+import { SykmeldingUtdrag } from '@navikt/digisyfo-npm';
 import { Container, mapStateToProps } from '../../js/connected-components/SykmeldingUtdrag';
 import sykmeldinger from '../../js/reducers/sykmeldinger';
 import mockSykepengesoknader from '../mockdata/mockSykepengesoknader';

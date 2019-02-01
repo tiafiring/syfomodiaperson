@@ -1,5 +1,5 @@
 import React from 'react';
-import { sykepengesoknad as sykepengesoknadPt } from 'digisyfo-npm';
+import { sykepengesoknad as sykepengesoknadPt } from '@navikt/digisyfo-npm';
 import { VerktoyKnapp, Verktoylinje } from '../Verktoylinje';
 
 const getSistSendtDato = (s) => {

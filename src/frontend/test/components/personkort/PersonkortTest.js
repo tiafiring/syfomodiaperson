@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
-import { Utvidbar } from 'digisyfo-npm';
+import { Utvidbar } from '@navikt/digisyfo-npm';
 import EtikettBase from 'nav-frontend-etiketter';
 import Personkort from '../../../js/components/personkort/Personkort';
 import PersonkortVisning from '../../../js/components/personkort/PersonkortVisning';

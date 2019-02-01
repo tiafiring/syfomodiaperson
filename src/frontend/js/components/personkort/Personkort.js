@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, Utvidbar } from 'digisyfo-npm';
+import { getLedetekst, Utvidbar } from '@navikt/digisyfo-npm';
 import PersonkortVisning from './PersonkortVisning';
 import { PERSONKORTVISNING_TYPE } from '../../konstanter';
 import {

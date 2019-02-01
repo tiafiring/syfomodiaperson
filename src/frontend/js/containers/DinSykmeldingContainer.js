@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getSykmelding, getHtmlLedetekst, getLedetekst, sykmeldingstatuser } from 'digisyfo-npm';
+import { getSykmelding, getHtmlLedetekst, getLedetekst, sykmeldingstatuser } from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
 import SidetoppSpeilet from '../components/SidetoppSpeilet';
 import * as sykmeldingerActions from '../actions/sykmeldinger_actions';

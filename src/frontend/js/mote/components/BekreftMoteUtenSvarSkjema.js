@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import AlertStripe from 'nav-frontend-alertstriper';
 import KnappBase from 'nav-frontend-knapper';
-import { getLedetekst } from 'digisyfo-npm';
+import { getLedetekst } from '@navikt/digisyfo-npm';
 
 const BekreftMoteUtenSvarSkjema = (props) => {
     const { ledetekster, bekrefter, bekreftFeilet, avbrytHref, bekreftMoteUtenSvar } = props;

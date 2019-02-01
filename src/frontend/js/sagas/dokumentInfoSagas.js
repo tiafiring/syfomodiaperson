@@ -1,5 +1,4 @@
-import { call, put, fork } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
+import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
 import { get } from '../api/index';
 import * as actions from '../actions/dokumentinfo_actions';
 import * as actiontype from '../actions/actiontyper';
@@ -15,11 +14,11 @@ export function* dokumentInfoSaga(action) {
 }
 
 function* watchHentDokumentInfo() {
-    yield* takeEvery(actiontype.HENT_DOKUMENTINFO_FORESPURT, dokumentInfoSaga);
+    yield takeEvery(actiontype.HENT_DOKUMENTINFO_FORESPURT, dokumentInfoSaga);
 }
 
 export default function* dokumentInfoSagas() {
-    yield [
+    yield all([
         fork(watchHentDokumentInfo),
-    ];
+    ]);
 }

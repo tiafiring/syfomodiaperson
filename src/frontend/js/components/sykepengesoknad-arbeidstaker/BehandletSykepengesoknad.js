@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Utvidbar, SoknadOppsummering, BekreftetKorrektInformasjon, sykepengesoknadstatuser } from 'digisyfo-npm';
+import { Utvidbar, SoknadOppsummering, BekreftetKorrektInformasjon, sykepengesoknadstatuser } from '@navikt/digisyfo-npm';
 import Statuspanel from './Soknadstatuspanel';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
 import RelaterteSoknaderContainer from './RelaterteSoknaderContainer';

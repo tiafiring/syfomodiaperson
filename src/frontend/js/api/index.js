@@ -1,7 +1,7 @@
 import {
     log,
     getCookie,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import { Error403 } from './errors';
 
 export function get(url) {

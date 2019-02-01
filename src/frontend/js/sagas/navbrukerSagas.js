@@ -1,6 +1,5 @@
-import { call, put, fork } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
-import { log } from 'digisyfo-npm';
+import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
+import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api/index';
 import {
     HENT_NAVBRUKER_FORESPURT,
@@ -21,11 +20,11 @@ export function* hentNavbruker(action) {
 }
 
 function* watchHentNavbruker() {
-    yield* takeEvery(HENT_NAVBRUKER_FORESPURT, hentNavbruker);
+    yield takeEvery(HENT_NAVBRUKER_FORESPURT, hentNavbruker);
 }
 
 export default function* ledereSagas() {
-    yield [
+    yield all([
         fork(watchHentNavbruker),
-    ];
+    ]);
 }

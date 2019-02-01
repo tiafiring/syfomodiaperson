@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { getLedetekst, toDatePrettyPrint } from 'digisyfo-npm';
+import { getLedetekst, toDatePrettyPrint } from '@navikt/digisyfo-npm';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
 import { getTidligsteSendtDato } from '../../utils/sykepengesoknadUtils';
 
