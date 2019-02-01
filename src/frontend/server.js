@@ -82,13 +82,7 @@ const startServer = (html) => {
     server.get('/health/isReady', (req, res) => {
         res.sendStatus(200);
     });
-    /*
-    if (env === 'opplaering') {
-        require('./mock/mockEndepunkter').mockForOpplaeringsmiljo(server);
-        require('./mock/mockEndepunkter').mockPilotEndepunkterForOpplaeringsmiljo(server);
-        require('./mock/mockEndepunkter').mockUnleashOpplaeringsmiljo(server);
-    }
-    */
+
     if (env === 'local') {
         require('./mock/mockEndepunkter').mockForLokal(server);
     }
@@ -106,4 +100,4 @@ const logError = (errorMessage, details) => {
 renderApp()
     .then(startServer, (error) => {
         logError('Failed to render app', error);
-    })
+    });
