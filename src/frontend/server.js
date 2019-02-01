@@ -88,14 +88,11 @@ const startServer = (html) => {
         require('./mock/mockEndepunkter').mockPilotEndepunkterForOpplaeringsmiljo(server);
         require('./mock/mockEndepunkter').mockUnleashOpplaeringsmiljo(server);
     }
-
-    if (env === 'local') {
-        require('./mock/mockEndepunkter').mockForOpplaeringsmiljo(server);
-        require('./mock/mockEndepunkter').mockEndepunkterSomEndrerState(server);
-        require('./mock/mockEndepunkter').mockPilotEndepunkterForLokalmiljo(server);
-        require('./mock/mockEndepunkter').mockUnleashLokal(server);
-    }
     */
+    if (env === 'local') {
+        require('./mock/mockEndepunkter').mockForLokal(server);
+    }
+
     const port = process.env.PORT || 8191;
     server.listen(port, () => {
         console.log(`App listening on port: ${port}`);
