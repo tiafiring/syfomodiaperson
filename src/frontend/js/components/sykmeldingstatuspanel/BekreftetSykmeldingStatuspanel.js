@@ -1,5 +1,5 @@
 import React from 'react';
-import { getLedetekst, sykmelding as sykmeldingPt, tilLesbarDatoMedArstall } from 'digisyfo-npm';
+import { getLedetekst, sykmelding as sykmeldingPt, tilLesbarDatoMedArstall } from '@navikt/digisyfo-npm';
 import { Frilansersporsmal } from './SykmeldingStatuspanelOpplysning';
 import Statuspanel, { StatusNokkelopplysning, Statusopplysninger } from '../Statuspanel';
 import AngreBekreftSykmelding from '../../connected-components/AngreBekreftSykmelding';

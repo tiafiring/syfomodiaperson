@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getLedetekst, getHtmlLedetekst } from 'digisyfo-npm';
+import { getLedetekst, getHtmlLedetekst } from '@navikt/digisyfo-npm';
 import * as ledereActions from '../actions/ledere_actions';
 import * as moteActions from '../actions/moter_actions';
 import * as virksomhetActions from '../actions/virksomhet_actions';

@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import {
     Tidslinje,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import Feilmelding from '../../js/components/Feilmelding';
 import AppSpinner from '../../js/components/AppSpinner';
 import {

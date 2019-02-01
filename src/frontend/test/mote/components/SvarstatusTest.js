@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import { Utvidbar } from 'digisyfo-npm';
+import { Utvidbar } from '@navikt/digisyfo-npm';
 import Svarstatus, { erSamtidig, getGamleAlternativer, getNyeAlternativer } from '../../../js/mote/components/Svarstatus';
 import BesvarteTidspunkter from '../../../js/mote/components/BesvarteTidspunkter';
 import { konverterTid } from '../../../js/utils/datoUtils';

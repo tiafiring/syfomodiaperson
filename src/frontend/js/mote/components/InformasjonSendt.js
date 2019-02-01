@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as moterPropTypes from '../../propTypes';
-import { Utvidbar } from 'digisyfo-npm';
+import { Utvidbar } from '@navikt/digisyfo-npm';
 import DropdownInnholdsviser from './DropdownInnholdsviser';
 import * as epostinnholdActions from '../../actions/epostinnhold_actions';
 import * as arbeidsgiverepostinnholdActions from '../../actions/arbeidsgiverepostinnhold_actions';

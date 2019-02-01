@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from 'digisyfo-npm';
+import { getLedetekst } from '@navikt/digisyfo-npm';
 import { restdatoTilLesbarDato } from '../../utils/datoUtils';
 import PersonkortFeilmelding from './PersonkortFeilmelding';
 import PersonkortElement from './PersonkortElement';

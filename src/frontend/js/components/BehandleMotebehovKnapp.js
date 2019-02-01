@@ -6,7 +6,7 @@ import {
     getSistEndretOppgave,
 } from '../utils/veilederoppgaverUtils';
 import { Checkbox } from 'nav-frontend-skjema';
-import { toDatePrettyPrint } from 'digisyfo-npm';
+import { toDatePrettyPrint } from '@navikt/digisyfo-npm';
 
 export const BehandleMotebehovKnapp = (
     {

@@ -1,4 +1,4 @@
-import { parseSykmelding } from 'digisyfo-npm';
+import { parseSykmelding } from '@navikt/digisyfo-npm';
 import { HENT_SYKMELDINGER_FEILET, HENTER_SYKMELDINGER, SYKMELDINGER_HENTET, SYKMELDINGER_SORTERT } from '../actions/actiontyper';
 
 const initiellState = {

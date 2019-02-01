@@ -1,6 +1,5 @@
-import { call, put, fork } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
-import { log } from 'digisyfo-npm';
+import { call, put, fork, takeEvery } from 'redux-saga/effects';
+import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api/index';
 import * as actiontype from '../actions/actiontyper';
 
@@ -16,7 +15,7 @@ export function* hentLedere(action) {
 }
 
 function* watchHentLedere() {
-    yield* takeEvery(actiontype.HENT_LEDERE_FORESPURT, hentLedere);
+    yield takeEvery(actiontype.HENT_LEDERE_FORESPURT, hentLedere);
 }
 
 export default function* ledereSagas() {

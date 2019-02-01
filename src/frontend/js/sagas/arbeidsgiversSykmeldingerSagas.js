@@ -1,5 +1,4 @@
-import { call, put, fork } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
+import { call, put, fork, takeEvery } from 'redux-saga/effects';
 import { get } from '../api/index';
 import * as actions from '../actions/arbeidsgiverssykmeldinger_actions';
 
@@ -15,7 +14,7 @@ export function* hentArbeidsgiversSykmeldinger(action) {
 }
 
 function* watchHentArbeidsgiversSykmeldinger() {
-    yield* takeEvery('HENT_ARBEIDSGIVERS_SYKMELDINGER_FORESPURT', hentArbeidsgiversSykmeldinger);
+    yield takeEvery('HENT_ARBEIDSGIVERS_SYKMELDINGER_FORESPURT', hentArbeidsgiversSykmeldinger);
 }
 
 export default function* ArbeidsgiversSykmeldingerSagas() {

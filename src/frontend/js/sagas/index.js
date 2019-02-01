@@ -1,6 +1,7 @@
 import {
     tidslinjerSagas,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
+import { all } from 'redux-saga/effects';
 import ledereSagas from './ledereSagas';
 import fastlegerSagas from './fastlegerSagas';
 import navbrukerSagas from './navbrukerSagas';
@@ -26,7 +27,7 @@ import tilgangSagas from './tilgangSagas';
 import soknaderSagas from './soknaderSagas';
 
 export default function* rootSaga() {
-    yield [
+    yield all([
         ledereSagas(),
         fastlegerSagas(),
         navbrukerSagas(),
@@ -51,5 +52,5 @@ export default function* rootSaga() {
         tilgangSagas(),
         tidslinjerSagas(),
         soknaderSagas(),
-    ];
+    ]);
 }

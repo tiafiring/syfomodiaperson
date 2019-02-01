@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {
     getLedetekst,
     getHtmlLedetekst,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
 import MotebookingSkjemaContainer from './MotebookingSkjemaContainer';
 import MotestatusContainer from './MotestatusContainer';

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { tilLesbarDatoMedArstall } from 'digisyfo-npm';
+import { tilLesbarDatoMedArstall } from '@navikt/digisyfo-npm';
 import OppfoelgingsdialogIkon from '../../ikoner/OppfoelgingsdialogIkon';
 import MoteIkon from '../../ikoner/MoteIkon';
 

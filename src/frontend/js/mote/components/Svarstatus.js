@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, Utvidbar } from 'digisyfo-npm';
+import { getLedetekst, Utvidbar } from '@navikt/digisyfo-npm';
 import * as moterPropTypes from '../../propTypes';
 import { NAV_VEILEDER } from '../../konstanter';
 import BesvarteTidspunkter from './BesvarteTidspunkter';

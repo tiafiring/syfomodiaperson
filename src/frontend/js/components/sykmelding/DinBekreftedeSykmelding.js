@@ -4,7 +4,7 @@ import {
     Utvidbar,
     DineSykmeldingOpplysninger,
     getLedetekst,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import ArbeidsgiversSykmelding from './ArbeidsgiversSykmelding';
 import BekreftetSykmeldingStatuspanel from '../sykmeldingstatuspanel/BekreftetSykmeldingStatuspanel';
 

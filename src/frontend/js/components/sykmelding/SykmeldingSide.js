@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { sykmeldingstatuser } from 'digisyfo-npm';
+import { sykmeldingstatuser } from '@navikt/digisyfo-npm';
 import DinSykmelding from './DinSykmelding';
 import DinSendteSykmelding from './DinSendteSykmelding';
 import DinBekreftedeSykmelding from './DinBekreftedeSykmelding';

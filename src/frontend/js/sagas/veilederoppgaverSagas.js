@@ -1,5 +1,4 @@
-import { call, put, fork } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
+import { call, put, fork, all, takeEvery } from 'redux-saga/effects';
 import { post, get } from '../api/index';
 import * as actions from '../actions/veilederoppgaver_actions';
 import * as historikkActions from '../actions/historikk_actions';
@@ -16,7 +15,7 @@ export function* veilederOppgaverSaga(action) {
 }
 
 function* watchHentVeilederOppgaver() {
-    yield* takeEvery(actiontype.HENT_VEILEDEROPPGAVER_FORESPURT, veilederOppgaverSaga);
+    yield takeEvery(actiontype.HENT_VEILEDEROPPGAVER_FORESPURT, veilederOppgaverSaga);
 }
 
 export function* behandleVeilederOppgaverSaga(action) {
@@ -31,12 +30,12 @@ export function* behandleVeilederOppgaverSaga(action) {
 }
 
 function* watchBehandleVeilederOppgaver() {
-    yield* takeEvery(actiontype.BEHANDLE_OPPGAVE_FORESPURT, behandleVeilederOppgaverSaga);
+    yield takeEvery(actiontype.BEHANDLE_OPPGAVE_FORESPURT, behandleVeilederOppgaverSaga);
 }
 
 export default function* veilederoppgaverSagas() {
-    yield [
+    yield all([
         fork(watchBehandleVeilederOppgaver),
         fork(watchHentVeilederOppgaver),
-    ];
+    ]);
 }

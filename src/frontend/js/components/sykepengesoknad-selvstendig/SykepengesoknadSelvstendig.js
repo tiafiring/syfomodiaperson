@@ -1,5 +1,5 @@
 import React from 'react';
-import { getLedetekst, sykmelding as sykmeldingPt, Utvidbar } from 'digisyfo-npm';
+import { getLedetekst, sykmelding as sykmeldingPt, Utvidbar } from '@navikt/digisyfo-npm';
 import PropTypes from 'prop-types';
 import Oppsummeringsvisning from '../soknad-felles-oppsummering/Oppsummeringsvisning';
 import { soknad as soknadPt } from '../../propTypes';

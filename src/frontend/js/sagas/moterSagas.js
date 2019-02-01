@@ -1,6 +1,5 @@
-import { call, put, fork } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
-import { log } from 'digisyfo-npm';
+import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
+import { log } from '@navikt/digisyfo-npm';
 import { post, get } from '../api/index';
 import history from '../history';
 import * as actions from '../actions/moter_actions';
@@ -77,36 +76,36 @@ export function* opprettFlereAlternativ(action) {
 }
 
 export function* watchOpprettFlereAlternativ() {
-    yield* takeEvery('OPPRETT_FLERE_ALTERNATIV_FORESPURT', opprettFlereAlternativ);
+    yield takeEvery('OPPRETT_FLERE_ALTERNATIV_FORESPURT', opprettFlereAlternativ);
 }
 
 function* watchOpprettMote() {
-    yield* takeEvery('OPPRETT_MOTE_FORESPURT', opprettMote);
+    yield takeEvery('OPPRETT_MOTE_FORESPURT', opprettMote);
 }
 
 function* watchAvbrytMote() {
-    yield* takeEvery('AVBRYT_MOTE_FORESPURT', avbrytMote);
+    yield takeEvery('AVBRYT_MOTE_FORESPURT', avbrytMote);
 }
 
 function* watchBekreftMote() {
-    yield* takeEvery('BEKREFT_MOTE_FORESPURT', bekreftMote);
+    yield takeEvery('BEKREFT_MOTE_FORESPURT', bekreftMote);
 }
 
 function* watchHentMoter() {
-    yield* takeEvery('HENT_MOTER_FORESPURT', hentMoter);
+    yield takeEvery('HENT_MOTER_FORESPURT', hentMoter);
 }
 
 function* watchMoteOpprettet() {
-    yield* takeEvery('MOTE_OPPRETTET', hentMoter);
+    yield takeEvery('MOTE_OPPRETTET', hentMoter);
 }
 
 export default function* moterSagas() {
-    yield [
+    yield all([
         fork(watchOpprettMote),
         fork(watchHentMoter),
         fork(watchAvbrytMote),
         fork(watchBekreftMote),
         fork(watchMoteOpprettet),
         fork(watchOpprettFlereAlternativ),
-    ];
+    ]);
 }

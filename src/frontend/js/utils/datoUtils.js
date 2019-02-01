@@ -1,4 +1,4 @@
-import { tilLesbarDatoMedArstall } from 'digisyfo-npm';
+import { tilLesbarDatoMedArstall } from '@navikt/digisyfo-npm';
 
 const maneder = ['januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'desember'];
 const dager = ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag', 'Søndag'];

@@ -1,6 +1,5 @@
-import { call, fork, put } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
-import { log } from 'digisyfo-npm';
+import { call, fork, put, takeEvery } from 'redux-saga/effects';
+import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api/index';
 import * as actions from '../actions/soknader_actions';
 import {
@@ -26,7 +25,7 @@ export function* hentSoknader(action) {
 }
 
 function* watchHentSoknader() {
-    yield* takeEvery(HENT_SOKNADER_FORESPURT, hentSoknader);
+    yield takeEvery(HENT_SOKNADER_FORESPURT, hentSoknader);
 }
 
 export default function* soknaderSagas() {

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {
     getLedetekst,
     getHtmlLedetekst,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
 import Historikk from '../components/historikk/Historikk';
 import Feilmelding from '../components/Feilmelding';

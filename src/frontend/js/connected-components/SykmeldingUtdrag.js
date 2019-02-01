@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { SykmeldingUtdrag } from 'digisyfo-npm';
+import { SykmeldingUtdrag } from '@navikt/digisyfo-npm';
 import { connect } from 'react-redux';
-import { sykmelding as sykmeldingPt } from 'digisyfo-npm';
+import { sykmelding as sykmeldingPt } from '@navikt/digisyfo-npm';
 import { hentSykmeldinger } from '../actions/sykmeldinger_actions';
 import { soknadEllerSykepengesoknad } from '../propTypes';
 

@@ -1,25 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, sykepengesoknadstatuser } from 'digisyfo-npm';
+import { getLedetekst, sykepengesoknadstatuser } from '@navikt/digisyfo-npm';
 import Sidetopp from '../Sidetopp';
 import SoknadTeasere from './SoknaderTeasere';
 import PlanlagteTeasere from './PlanlagteTeasere';
 import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sykepengesoknadUtils';
 import { soknad as soknadPt, sykepengesoknad as sykepengesoknadPt } from '../../propTypes';
+import { OPPHOLD_UTLAND } from '../../enums/soknadtyper';
 
 const { SENDT, TIL_SENDING, UTGAATT, NY, UTKAST_TIL_KORRIGERING, FREMTIDIG, AVBRUTT } = sykepengesoknadstatuser;
 
 const Soknader = ({ fnr, sykepengesoknader = [], soknader = [] }) => {
-    const alleSoknader = [...sykepengesoknader, ...soknader];
-    const nyeSoknader = alleSoknader.filter((soknad) => {
-        return soknad.status === NY || soknad.status === UTKAST_TIL_KORRIGERING;
-    }).sort(sorterEtterOpprettetDato);
-    const sendteSoknader = alleSoknader.filter((soknad) => {
-        return soknad.status === SENDT || soknad.status === TIL_SENDING || soknad.status === UTGAATT || soknad.status === AVBRUTT;
-    }).sort(sorterEtterPerioder);
-    const kommendeSoknader = alleSoknader.filter((soknad) => {
-        return soknad.status === FREMTIDIG;
-    }).sort(sorterEtterPerioder).reverse();
+    const alleSoknader = [
+        ...sykepengesoknader,
+        ...soknader,
+    ];
+    const nyeSoknader = alleSoknader
+        .filter((soknad) => {
+            return (soknad.status === NY || soknad.status === UTKAST_TIL_KORRIGERING)
+                && soknad.soknadstype !== OPPHOLD_UTLAND;
+        })
+        .sort(sorterEtterOpprettetDato);
+    const sendteSoknader = alleSoknader
+        .filter((soknad) => {
+            return soknad.status === SENDT
+                || soknad.status === TIL_SENDING
+                || soknad.status === UTGAATT
+                || soknad.status === AVBRUTT;
+        })
+        .sort(sorterEtterPerioder);
+    const kommendeSoknader = alleSoknader
+        .filter((soknad) => {
+            return soknad.status === FREMTIDIG;
+        })
+        .sort(sorterEtterPerioder)
+        .reverse();
 
     return (<div>
         <Sidetopp
