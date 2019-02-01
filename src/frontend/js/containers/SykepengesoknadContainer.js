@@ -14,9 +14,12 @@ import { sykepengesoknad as sykepengesoknadPt, soknad as soknadPt } from '../pro
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { erDev } from '../selectors/toggleSelectors';
 import SykepengesoknadArbeidstaker from '../components/sykepengesoknad-arbeidstaker/SykepengesoknadArbeidstaker';
-import { OPPHOLD_UTLAND, SELVSTENDIGE_OG_FRILANSERE } from '../enums/soknadtyper';
+import { ARBEIDSTAKERE, OPPHOLD_UTLAND, SELVSTENDIGE_OG_FRILANSERE } from '../enums/soknadtyper';
 import SykepengesoknadSelvstendig from '../components/sykepengesoknad-selvstendig/SykepengesoknadSelvstendig';
 import SykepengesoknadUtland from '../components/sykepengesoknad-utland/SykepengesoknadUtland';
+import SendtSoknadArbeidstakerNy from '../components/sykepengesoknad-arbeidstaker-ny/SendtSoknadArbeidstakerNy';
+import { SENDT } from '../enums/soknadstatuser';
+import IkkeInnsendtSoknad from '../components/sykepengesoknad-felles/IkkeInnsendtSoknad';
 
 export class Container extends Component {
     componentWillMount() {
@@ -87,6 +90,15 @@ export class Container extends Component {
                             brodsmuler={brodsmuler}
                             brukernavn={brukernavn}
                             soknad={soknad} />);
+                    }
+                    if (soknad && soknad.soknadstype === ARBEIDSTAKERE) {
+                        return soknad.status === SENDT
+                            ? (<SendtSoknadArbeidstakerNy
+                                fnr={fnr}
+                                brodsmuler={brodsmuler}
+                                brukernavn={brukernavn}
+                                soknad={soknad} />)
+                            : <IkkeInnsendtSoknad fnr={fnr} />;
                     }
                     return <Feilmelding />;
                 })()
