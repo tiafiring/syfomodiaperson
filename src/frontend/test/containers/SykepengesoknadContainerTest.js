@@ -66,7 +66,7 @@ describe('SykepengesoknadContainer', () => {
             expect(component.find(SykepengesoknadArbeidstaker).length).to.equal(1);
         });
 
-        it('Skal vise SykepengesoknadUtland', () => {
+        it('Skal vise SendtSoknadArbeidstakerNy', () => {
             settOwnPropsId(OPPHOLD_UTLAND_ID);
             const component = shallow(<Container {...mapStateToProps(state, ownProps)} />);
             expect(component.find(SykepengesoknadUtland).length).to.equal(1);

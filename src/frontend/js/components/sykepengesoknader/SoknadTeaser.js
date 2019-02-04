@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { getLedetekst, toDatePrettyPrint, sykepengesoknadstatuser, tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '@navikt/digisyfo-npm';
-import { sykepengesoknad as sykepengesoknadPt, soknadEllerSykepengesoknad } from '../../propTypes';
+import { sykepengesoknad as sykepengesoknadPt, soknad as soknadPt } from '../../propTypes';
 import { getSendtTilSuffix, erSendtTilBeggeMenIkkeSamtidig } from '../../utils/sykepengesoknadUtils';
-import { OPPHOLD_UTLAND, SELVSTENDIGE_OG_FRILANSERE } from '../../enums/soknadtyper';
+import { ARBEIDSTAKERE, OPPHOLD_UTLAND, SELVSTENDIGE_OG_FRILANSERE } from '../../enums/soknadtyper';
+import { FREMTIDIG } from '../../enums/soknadstatuser';
 
 const { NY, SENDT, TIL_SENDING, UTKAST_TIL_KORRIGERING, AVBRUTT } = sykepengesoknadstatuser;
 
@@ -31,55 +32,93 @@ SendtUlikt.propTypes = {
 
 const visIkon = (soknadstype) => {
     return soknadstype === OPPHOLD_UTLAND
-        ? (<img alt="" className="js-ikon" src="/sykefravaer/img/svg/globe.svg" />)
-        : <img alt="" className="js-ikon" src="/sykefravaer/img/svg/soknader.svg" />;
+        ? (<img alt="" className="js-ikon" src={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/globe.svg`} />)
+        : <img alt="" className="js-ikon" src={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/soknader.svg`} />;
 };
 
 const visIkonHover = (soknadstype) => {
     return soknadstype === OPPHOLD_UTLAND
-        ? (<img alt="" className="js-ikon" src="/sykefravaer/img/svg/globe-hover.svg" />)
-        : <img alt="" className="js-ikon" src="/sykefravaer/img/svg/soknader_hover-blue.svg" />;
+        ? (<img alt="" className="js-ikon" src={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/globe-hover.svg`} />)
+        : <img alt="" className="js-ikon" src={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/soknader_hover-blue.svg`} />;
 };
 
 const beregnUndertekst = (soknad) => {
     const sendtTilBeggeMenIkkeSamtidig = erSendtTilBeggeMenIkkeSamtidig(soknad);
+
     if (soknad.status === AVBRUTT) {
         return getLedetekst('soknad.teaser.status.AVBRUTT', {
             '%DATO%': tilLesbarDatoMedArstall(soknad.avbruttDato),
         });
     }
-    if (soknad.status !== SENDT && soknad.status !== TIL_SENDING && !soknad.soknadstype) {
-        return getLedetekst('soknad.teaser.undertekst', { '%ARBEIDSGIVER%': soknad.arbeidsgiver.navn });
+
+    if (soknad.status === FREMTIDIG) {
+        return getLedetekst(`soknad.teaser.status.${FREMTIDIG}`);
     }
-    if (sendtTilBeggeMenIkkeSamtidig && soknad.status !== NY) {
-        return <SendtUlikt soknad={soknad} />;
-    }
-    if (soknad.status === NY && soknad.soknadstype === OPPHOLD_UTLAND) {
-        return null;
-    }
-    if (soknad.status !== NY && soknad.status !== UTKAST_TIL_KORRIGERING) {
-        if ((soknad.soknadstype === OPPHOLD_UTLAND || soknad.soknadstype === SELVSTENDIGE_OG_FRILANSERE) && soknad.status === SENDT) {
-            return getLedetekst('soknad.teaser.status.SENDT.til-nav', {
-                '%DATO%': tilLesbarDatoMedArstall(soknad.innsendtDato),
-            });
+
+    switch (soknad.soknadstype) {
+        case OPPHOLD_UTLAND:
+        case SELVSTENDIGE_OG_FRILANSERE: {
+            return soknad.status === SENDT
+                ? getLedetekst('soknad.teaser.status.SENDT.til-nav', {
+                    '%DATO%': tilLesbarDatoMedArstall(soknad.innsendtDato),
+                })
+                : null;
         }
-        return getLedetekst(`soknad.teaser.status.${soknad.status}${getSendtTilSuffix(soknad)}`, {
-            '%DATO%': tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
-            '%ARBEIDSGIVER%': soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : null,
-        });
+        case ARBEIDSTAKERE: {
+            switch (soknad.status) {
+                case UTKAST_TIL_KORRIGERING:
+                case NY: {
+                    const arbeidsgiver = soknad.arbeidsgiver
+                        ? soknad.arbeidsgiver.navn
+                        : soknad.sykmelding
+                            ? soknad.sykmelding.innsendtArbeidsgivernavn
+                            : null;
+                    return arbeidsgiver
+                        ? getLedetekst('soknad.teaser.undertekst', {
+                            '%ARBEIDSGIVER%': arbeidsgiver,
+                        })
+                        : null;
+                }
+                default: {
+                    return null;
+                }
+            }
+        }
+        default: {
+            switch (soknad.status) {
+                case SENDT:
+                case TIL_SENDING: {
+                    return sendtTilBeggeMenIkkeSamtidig
+                        ? <SendtUlikt soknad={soknad} />
+                        : getLedetekst(`soknad.teaser.status.${soknad.status}${getSendtTilSuffix(soknad)}`, {
+                            '%DATO%': tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
+                            '%ARBEIDSGIVER%': soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : null,
+                        });
+                }
+                case NY:
+                case UTKAST_TIL_KORRIGERING: {
+                    return getLedetekst('soknad.teaser.undertekst', {
+                        '%ARBEIDSGIVER%': soknad.arbeidsgiver.navn,
+                    });
+                }
+                default: {
+                    return null;
+                }
+            }
+        }
     }
-    return null;
 };
 
 export const TeaserUndertekst = ({ soknad }) => {
     const tekst = beregnUndertekst(soknad);
+
     return tekst ? (<p className="inngangspanel__undertekst js-undertekst mute">
         {tekst}
     </p>) : null;
 };
 
 TeaserUndertekst.propTypes = {
-    soknad: soknadEllerSykepengesoknad,
+    soknad: PropTypes.oneOfType([sykepengesoknadPt, soknadPt]).isRequired,
 };
 
 export const TeaserStatus = ({ soknad }) => {
@@ -94,7 +133,7 @@ export const TeaserStatus = ({ soknad }) => {
 };
 
 TeaserStatus.propTypes = {
-    soknad: soknadEllerSykepengesoknad,
+    soknad: PropTypes.oneOfType([sykepengesoknadPt, soknadPt]).isRequired,
 };
 
 export const TeaserTittel = ({ soknad }) => {
@@ -102,12 +141,7 @@ export const TeaserTittel = ({ soknad }) => {
         <small className="inngangspanel__meta js-meta">
             {
                 getLedetekst('soknad.teaser.dato', {
-                    '%DATO%':
-                        tilLesbarDatoMedArstall(
-                            soknad.soknadstype === OPPHOLD_UTLAND || soknad.soknadstype === SELVSTENDIGE_OG_FRILANSERE
-                                ? soknad.opprettetDato
-                                : soknad.tom
-                        ),
+                    '%DATO%': tilLesbarDatoMedArstall(soknad.opprettetDato),
                 })
             }
         </small>
@@ -122,7 +156,7 @@ export const TeaserTittel = ({ soknad }) => {
 };
 
 TeaserTittel.propTypes = {
-    soknad: soknadEllerSykepengesoknad,
+    soknad: PropTypes.oneOfType([sykepengesoknadPt, soknadPt]).isRequired,
 };
 
 export const TeaserPeriode = ({ soknad }) => {
@@ -138,7 +172,7 @@ export const TeaserPeriode = ({ soknad }) => {
 };
 
 TeaserPeriode.propTypes = {
-    soknad: soknadEllerSykepengesoknad,
+    soknad: PropTypes.oneOfType([sykepengesoknadPt, soknadPt]).isRequired,
 };
 
 const SykepengesoknadTeaser = ({ soknad, fnr }) => {
@@ -166,7 +200,7 @@ const SykepengesoknadTeaser = ({ soknad, fnr }) => {
 };
 
 SykepengesoknadTeaser.propTypes = {
-    soknad: soknadEllerSykepengesoknad,
+    soknad: PropTypes.oneOfType([sykepengesoknadPt, soknadPt]).isRequired,
     fnr: PropTypes.string,
 };
 
