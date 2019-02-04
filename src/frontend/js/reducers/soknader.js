@@ -3,7 +3,7 @@ import {
     HENTER_SOKNADER,
     SOKNADER_HENTET,
 } from '../actions/actiontyper';
-import { TIMER, DATO, PERIODER, PROSENT } from '../enums/svartyper';
+import { TIMER, DATO, PERIODER, PROSENT, TALL } from '../enums/svartyper';
 
 const initiellState = {
     data: [],
@@ -21,6 +21,7 @@ const getMinMax = (sporsmal) => {
                 max: sporsmal.max ? new Date(sporsmal.max) : sporsmal.max,
             };
         }
+        case TALL:
         case TIMER:
         case PROSENT: {
             return {
@@ -49,6 +50,7 @@ export const parseSoknad = (soknad) => {
         fom: new Date(soknad.fom),
         tom: new Date(soknad.tom),
         opprettetDato: new Date(soknad.opprettetDato),
+        innsendtDato: soknad.innsendtDato ? new Date(soknad.innsendtDato) : undefined,
         sporsmal: [...soknad.sporsmal].map(parseSporsmal),
     };
 };
