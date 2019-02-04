@@ -7,6 +7,7 @@ const SOKNADER = 'soknader';
 const SYKEPENGESOKNADER = 'sykepengesoknader';
 const BRUKERINFO = 'brukerinfo';
 const TEKSTER = 'tekster';
+const SYKMELDINGER = 'sykmeldinger';
 
 const lastFilTilMinne = (filnavn) => {
     fs.readFile(path.join(__dirname, `/data/${filnavn}.json`), (err, data) => {
@@ -18,6 +19,7 @@ const lastFilTilMinne = (filnavn) => {
 lastFilTilMinne(SOKNADER);
 lastFilTilMinne(SYKEPENGESOKNADER);
 lastFilTilMinne(BRUKERINFO);
+lastFilTilMinne(SYKMELDINGER);
 
 let teksterFraProd;
 
@@ -62,6 +64,11 @@ function mockForLokal(server) {
     server.get('/sykepengesoknader', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[SYKEPENGESOKNADER]));
+    });
+
+    server.get('/sykmeldinger', (req, res) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(mockData[SYKMELDINGER]));
     });
 }
 
