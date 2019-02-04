@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { sykmelding as sykmeldingPt } from '@navikt/digisyfo-npm';
 import { hentSykmeldinger } from '../actions/sykmeldinger_actions';
 import { soknadEllerSykepengesoknad } from '../propTypes';
+import { ARBEIDSTAKERE } from '../enums/soknadtyper';
 
 export class Container extends Component {
     componentDidMount() {
@@ -15,7 +16,7 @@ export class Container extends Component {
 
     render() {
         const { sykmelding, soknad } = this.props;
-        if (sykmelding && soknad && !soknad.soknadstype) {
+        if (sykmelding && soknad && (!soknad.soknadstype || soknad.soknadstype === ARBEIDSTAKERE)) {
             return (<SykmeldingUtdrag
                 rootUrl={'/sykefravaer'}
                 {...this.props} />);
@@ -39,6 +40,7 @@ export const mapStateToProps = (state, ownProps) => {
     const sykmelding = state.sykmeldinger.data.find((s) => {
         return s.id === ownProps.soknad.sykmeldingId;
     });
+
     return {
         ledetekster: state.ledetekster.data,
         skalHenteSykmeldinger,
