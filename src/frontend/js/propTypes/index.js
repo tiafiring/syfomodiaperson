@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { sykepengesoknad } from '@navikt/digisyfo-npm';
 import * as soknadtyper from '../enums/soknadtyper';
-import * as soknadstatuser from '../enums/soknadstatuser':
+import * as soknadstatuser from '../enums/soknadstatuser';
 import * as arbeidssituasjoner from '../enums/arbeidssituasjoner';
 import * as svartyper from '../enums/svartyper';
 
