@@ -25,7 +25,7 @@ export const Sykmeldinger = (
         oppfolgingstilfelleperioder,
         sykmeldinger,
     }) => {
-    const sykmeldingerInnenforMotebehovPeriodenOgOppfolgingstilfellet = finnSykmeldingerInnenforMotebehovPeriodenOgOppfolgingstilfellet(sykmeldinger, oppfolgingstilfelleperioder);
+    const sykmeldingerInnenforMotebehovPeriodenOgOppfolgingstilfellet = finnSykmeldingerInnenforMotebehovPeriodenOgOppfolgingstilfellet({ sykmeldinger, oppfolgingstilfelleperioder });
     return (<div className="utdragFraSykefravaeret__sykmeldinger">
         <h3>Sykmeldinger</h3>
         {

@@ -97,6 +97,22 @@ describe('MotebehovContainer', () => {
 
             expect(component.find(Motebehov)).to.have.length(1);
         });
+
+        it('Skal vise Motebehov hvis det ikke finnes innsendte møtebehov', () => {
+            const motebehovListeUtenFlereSvarFraSammePerson = [];
+
+            const component = shallow(<MotebehovSide
+                tilgang={tilgang}
+                fnr="fnr"
+                actions={actions}
+                motebehovListeUtenFlereSvarFraSammePerson={motebehovListeUtenFlereSvarFraSammePerson}
+                motebehovTilgang={motebehovTilgang}
+                skalHenteMotebehov
+                ledereData={ledereData}
+            />);
+
+            expect(component.find(Motebehov)).to.have.length(1);
+        });
     });
 
     describe('mapStateToProps', () => {
