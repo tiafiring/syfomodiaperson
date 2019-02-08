@@ -10,6 +10,10 @@ import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import * as motebehovActions from '../actions/motebehov_actions';
 import * as veilederoppgaverActions from '../actions/veilederoppgaver_actions';
+import * as oppfoelgingsdialogerActions from '../actions/oppfoelgingsdialoger_actions';
+import * as sykeforloepsActions from '../actions/sykeforloep_actions';
+import * as oppfolgingstilfelleperioderActions from '../actions/oppfolgingstilfelleperioder_actions';
+import * as sykmeldingerActions from '../actions/sykmeldinger_actions';
 import { MOETEPLANLEGGER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import {
@@ -32,15 +36,24 @@ export class MotebehovSide extends Component {
             actions,
             fnr,
             skalHenteMotebehov,
+            ledereData,
         } = this.props;
         if (skalHenteMotebehov) {
             actions.hentMotebehov(fnr);
+            actions.hentOppfoelgingsdialoger(fnr);
+            actions.hentSykeforloep(fnr);
         }
+        ledereData.forEach((leder) => {
+            actions.hentOppfolgingstilfelleperioder(fnr, leder.orgnummer);
+        });
+
+        actions.hentSykmeldinger(fnr);
     }
 
     render() {
         const {
             actions,
+            aktiveDialoger,
             fnr,
             henter,
             hentingFeilet,
@@ -54,6 +67,8 @@ export class MotebehovSide extends Component {
             tilgang,
             ufiltrertMotebehovListeTilOppgavebehandling,
             veilederinfo,
+            oppfolgingstilfelleperioder,
+            sykmeldinger,
         } = this.props;
         return (<Side fnr={fnr} tittel="Møtebehov" aktivtMenypunkt={MOETEPLANLEGGER}>
             {
@@ -82,11 +97,15 @@ export class MotebehovSide extends Component {
                             fnr={fnr}
                             ledereData={ledereData}
                             ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
+                            ledetekster={ledetekster}
                             motebehovListe={motebehovListeUtenFlereSvarFraSammePerson}
                             oppgaver={oppgaver}
                             sykmeldt={sykmeldt}
                             ufiltrertMotebehovListeTilOppgavebehandling={ufiltrertMotebehovListeTilOppgavebehandling}
                             veilederinfo={veilederinfo}
+                            aktiveDialoger={aktiveDialoger}
+                            oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
+                            sykmeldinger={sykmeldinger}
                         />);
                     }
                     return (<Feilmelding
@@ -101,6 +120,7 @@ export class MotebehovSide extends Component {
 
 MotebehovSide.propTypes = {
     actions: PropTypes.object,
+    aktiveDialoger: PropTypes.array,
     fnr: PropTypes.string,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
@@ -115,10 +135,12 @@ MotebehovSide.propTypes = {
     tilgang: PropTypes.object,
     ufiltrertMotebehovListeTilOppgavebehandling: PropTypes.arrayOf(PropTypes.object),
     veilederinfo: PropTypes.object,
+    oppfolgingstilfelleperioder: PropTypes.object,
+    sykmeldinger: PropTypes.arrayOf(PropTypes.object),
 };
 
 export function mapDispatchToProps(dispatch) {
-    const actions = Object.assign({}, motebehovActions, veilederoppgaverActions);
+    const actions = Object.assign({}, motebehovActions, veilederoppgaverActions, oppfoelgingsdialogerActions, sykeforloepsActions, oppfolgingstilfelleperioderActions, sykmeldingerActions);
     return {
         actions: bindActionCreators(actions, dispatch),
     };
@@ -131,6 +153,19 @@ export const mapStateToProps = (state, ownProps) => {
 
     const ledereData = state.ledere.data;
     const ledereUtenInnsendtMotebehov = finnLedereUtenInnsendtMotebehov(ledereData, motebehovData);
+
+    const oppfoelgingsdialoger = state.oppfoelgingsdialoger.data.map((dialog) => {
+        const oppgaver = state.veilederoppgaver.data.filter((oppgave) => {
+            return oppgave.type === 'SE_OPPFOLGINGSPLAN' && oppgave.uuid === dialog.uuid;
+        });
+        return Object.assign({}, dialog, {
+            oppgaver,
+        });
+    });
+
+    const aktiveDialoger = oppfoelgingsdialoger.filter((dialog) => {
+        return dialog.status !== 'AVBRUTT' && new Date(dialog.godkjentPlan.gyldighetstidspunkt.tom) > new Date();
+    });
 
     const harForsoktHentetAlt = harForsoktHentetMotebehov(state.motebehov)
     && harForsoktHentetLedetekster(state.ledetekster);
@@ -151,6 +186,9 @@ export const mapStateToProps = (state, ownProps) => {
         tilgang: state.tilgang.data,
         ufiltrertMotebehovListeTilOppgavebehandling: state.motebehov.data,
         veilederinfo: state.veilederinfo.data,
+        aktiveDialoger,
+        oppfolgingstilfelleperioder: state.oppfolgingstilfelleperioder,
+        sykmeldinger: state.sykmeldinger.data,
     };
 };
 

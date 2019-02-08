@@ -35,6 +35,7 @@ import virksomhet from './reducers/virksomhet';
 import veilederinfo from './reducers/veilederinfo';
 import diskresjonskode from './reducers/diskresjonskode';
 import egenansatt from './reducers/egenansatt';
+import oppfolgingstilfelleperioder from './reducers/oppfolgingstilfelleperioder';
 import rootSaga from './sagas/index';
 import { hentLedetekster } from './actions/ledetekster_actions';
 import { sjekkTilgang } from './actions/tilgang_actions';
@@ -78,6 +79,7 @@ const rootReducer = combineReducers({
     tilgang,
     form: formReducer,
     soknader,
+    oppfolgingstilfelleperioder,
 });
 
 

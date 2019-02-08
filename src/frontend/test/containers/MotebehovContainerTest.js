@@ -11,17 +11,31 @@ describe('MotebehovContainer', () => {
     describe('MotebehovSide', () => {
         let actions;
         let hentMotebehov;
+        let hentOppfoelgingsdialoger;
+        let hentSykeforloep;
+        let hentOppfolgingstilfelleperioder;
+        let hentSykmeldinger;
         let tilgang;
         let motebehovTilgang;
+        let ledereData;
         beforeEach(() => {
             hentMotebehov = sinon.spy();
+            hentOppfoelgingsdialoger = sinon.spy();
+            hentSykeforloep = sinon.spy();
+            hentOppfolgingstilfelleperioder = sinon.spy();
+            hentSykmeldinger = sinon.spy();
             tilgang = {
                 harTilgang: true,
             };
             motebehovTilgang = {};
             actions = {
                 hentMotebehov,
+                hentOppfoelgingsdialoger,
+                hentSykeforloep,
+                hentOppfolgingstilfelleperioder,
+                hentSykmeldinger,
             };
+            ledereData = [];
         });
 
         it('Skal vise AppSpinner hvis man henter møtebehov/ledetekster', () => {
@@ -31,6 +45,7 @@ describe('MotebehovContainer', () => {
                 henter
                 motebehovForsoktHentet
                 motebehovTilgang={motebehovTilgang}
+                ledereData={ledereData}
             />);
 
             expect(component.find(AppSpinner)).to.have.length(1);
@@ -42,6 +57,7 @@ describe('MotebehovContainer', () => {
                 actions={actions}
                 henter
                 motebehovTilgang={motebehovTilgang}
+                ledereData={ledereData}
             />);
 
             expect(component.find(AppSpinner)).to.have.length(1);
@@ -55,6 +71,7 @@ describe('MotebehovContainer', () => {
                 motebehovTilgang={motebehovTilgang}
                 motebehovForsoktHentet
                 hentingFeilet
+                ledereData={ledereData}
             />);
 
             expect(component.find(Feilmelding)).to.have.length(1);
@@ -75,6 +92,7 @@ describe('MotebehovContainer', () => {
                 motebehovListeUtenFlereSvarFraSammePerson={motebehovListeUtenFlereSvarFraSammePerson}
                 motebehovTilgang={motebehovTilgang}
                 skalHenteMotebehov
+                ledereData={ledereData}
             />);
 
             expect(component.find(Motebehov)).to.have.length(1);
@@ -115,6 +133,12 @@ describe('MotebehovContainer', () => {
                 ledere: {
                     data: [],
                 },
+                oppfoelgingsdialoger: {
+                    data: [],
+                },
+                sykmeldinger: {
+                    data: [],
+                }
             };
             ownProps = {
                 params: {
