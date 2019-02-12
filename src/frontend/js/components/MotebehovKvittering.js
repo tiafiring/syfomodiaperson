@@ -53,13 +53,14 @@ export const MotebehovKvitteringInnhold = (
         tekst,
     }
 ) => {
+    const skalViseForklaring = motebehov && motebehov.motebehovSvar && motebehov.motebehovSvar.forklaring;
     return (<div className="motebehovKvitteringBoksInnhold">
         <div>
             <img className="svarstatus__ikon" src={setSvarIkon(deltakerOnskerMote)} alt="svarstatusikon" />
         </div>
         <div>
             <span dangerouslySetInnerHTML={{ __html: tekst }} />
-            { deltakerOnskerMote === false && <p >{motebehov.motebehovSvar.forklaring}</p> }
+            { skalViseForklaring && <p>{motebehov.motebehovSvar.forklaring}</p> }
         </div>
     </div>);
 };
