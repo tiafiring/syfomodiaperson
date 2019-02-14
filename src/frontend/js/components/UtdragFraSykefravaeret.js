@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
-import { tilLesbarPeriodeMedArstall } from '@navikt/digisyfo-npm';
+import {
+    tilLesbarPeriodeMedArstall,
+    tilLesbarDatoMedArstall,
+} from '@navikt/digisyfo-npm';
 import { Utvidbar } from '@navikt/digisyfo-npm';
-import SykmeldingSide from './sykmelding/SykmeldingSide';
+import { SykmeldingMotebehovVisning } from './SykmeldingMotebehovVisning';
+import {erEkstraInformasjonISykmeldingen} from "../utils/sykmeldingUtils";
 
 const finnSykmeldingerInnenforMotebehovPeriodenOgOppfolgingstilfellet = ({ sykmeldinger, oppfolgingstilfelleperioder }) => {
     return sykmeldinger.filter((sykmelding) => {
@@ -31,11 +35,12 @@ export const Sykmeldinger = (
         {
             sykmeldingerInnenforMotebehovPeriodenOgOppfolgingstilfellet.length > 0
                 ? sykmeldingerInnenforMotebehovPeriodenOgOppfolgingstilfellet.map((sykmelding, index) => {
+                    const erViktigInformasjon = erEkstraInformasjonISykmeldingen(sykmelding);
                     return (<div key={index}>
                         <Utvidbar
-                            tittel={`${sykmelding.arbeidsgiver} ${tilLesbarPeriodeMedArstall(sykmelding.mulighetForArbeid.perioder[0].fom, sykmelding.mulighetForArbeid.perioder[0].tom)}: ${sykmelding.mulighetForArbeid.perioder[0].grad}%`}
+                            tittel={`${sykmelding.arbeidsgiver} ${tilLesbarPeriodeMedArstall(sykmelding.mulighetForArbeid.perioder[0].fom, sykmelding.mulighetForArbeid.perioder[0].tom)}: ${sykmelding.mulighetForArbeid.perioder[0].grad}% ${erViktigInformasjon ? 'VIKTIG!!!!' : ''}`}
                             visLukkLenke={false}
-                            children={<SykmeldingSide dinSykmelding={sykmelding} ledetekster={ledetekster} fnr={fnr} />}
+                            children={<SykmeldingMotebehovVisning sykmelding={sykmelding}/>}
                         />
                     </div>);
                 })
