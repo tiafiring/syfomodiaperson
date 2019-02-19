@@ -14,6 +14,7 @@ export default function oppfolgingstilfelleperioder(state = initiellState, actio
                 henter: false,
                 hentet: false,
                 hentingFeilet: true,
+                hentingForsokt: true,
                 data: state[action.orgnummer] ? state[action.orgnummer].data : [],
             };
             return { ...state, ...arbeidsgiver };
@@ -22,6 +23,7 @@ export default function oppfolgingstilfelleperioder(state = initiellState, actio
                 henter: true,
                 hentet: false,
                 hentingFeilet: false,
+                hentingForsokt: false,
                 data: state[action.orgnummer] ? state[action.orgnummer].data : [],
             };
             return { ...state, ...arbeidsgiver };
@@ -30,6 +32,7 @@ export default function oppfolgingstilfelleperioder(state = initiellState, actio
                 henter: false,
                 hentet: true,
                 hentingFeilet: false,
+                hentingForsokt: true,
                 data: action.data,
             };
             return { ...state, ...arbeidsgiver };

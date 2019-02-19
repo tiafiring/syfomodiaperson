@@ -3,6 +3,7 @@ import * as actiontype from '../actions/actiontyper';
 const defaultState = {
     data: [],
     henter: false,
+    hentet: false,
     hentingFeilet: false,
 };
 
@@ -12,12 +13,14 @@ const ledere = (state = defaultState, action = {}) => {
             return {
                 data: action.data,
                 henter: false,
+                hentet: true,
                 hentingFeilet: false,
             };
         }
         case actiontype.HENTER_LEDERE: {
             return {
                 henter: true,
+                hentet: false,
                 hentingFeilet: false,
                 data: [],
             };
@@ -25,6 +28,7 @@ const ledere = (state = defaultState, action = {}) => {
         case actiontype.HENT_LEDERE_FEILET: {
             return {
                 henter: false,
+                hentet: false,
                 hentingFeilet: true,
                 data: [],
             };

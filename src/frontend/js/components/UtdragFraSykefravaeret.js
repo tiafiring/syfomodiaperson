@@ -1,57 +1,75 @@
 import React from 'react';
-import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import {
+    senesteTom,
+    tidligsteFom,
     tilLesbarPeriodeMedArstall,
-    tilLesbarDatoMedArstall,
 } from '@navikt/digisyfo-npm';
 import { Utvidbar } from '@navikt/digisyfo-npm';
-import { SykmeldingMotebehovVisning } from './SykmeldingMotebehovVisning';
-import {erEkstraInformasjonISykmeldingen} from "../utils/sykmeldingUtils";
+import SykmeldingMotebehovVisning from './SykmeldingMotebehovVisning';
+import {
+    erEkstraInformasjonISykmeldingen,
+    finnSykmeldingerInnenforOppfolgingstilfellet,
+    sorterSykmeldingerPaaUtstedelsesdato,
+} from '../utils/sykmeldingUtils';
+import { finnMiljoStreng } from '../utils';
+import Lenke from 'nav-frontend-lenker';
 
-const finnSykmeldingerInnenforMotebehovPeriodenOgOppfolgingstilfellet = ({ sykmeldinger, oppfolgingstilfelleperioder }) => {
-    return sykmeldinger.filter((sykmelding) => {
-        const tilfelleperioderReducer = oppfolgingstilfelleperioder[sykmelding.orgnummer];
-        const sykmeldingStart = new Date(sykmelding.startLegemeldtFravaer).setHours(0);
 
-        const tilfelleStart = tilfelleperioderReducer && tilfelleperioderReducer.data && tilfelleperioderReducer.data[0].fom
-            ? new Date(tilfelleperioderReducer.data[0].fom).setHours(0)
-            : new Date();
+export const UtdragFraSykefravaeretHeader = () => {
+    return (<div className="utdragFraSykefravaeret__header">
+        <p>Utdrag fra sykefraværet</p>
+    </div>);
+};
 
-        return sykmeldingStart - tilfelleStart >= 0;
-    });
+export const UtvidbarTittel = (
+    {
+        sykmelding,
+    }) => {
+    const erViktigInformasjon = erEkstraInformasjonISykmeldingen(sykmelding);
+    return (<div className="utdragFraSykefravaeret__utvidbarTittel">
+        <div>
+            <span className="utvidbarTittel__periode">{`${sykmelding.arbeidsgiver} ${tilLesbarPeriodeMedArstall(tidligsteFom(sykmelding.mulighetForArbeid.perioder), senesteTom(sykmelding.mulighetForArbeid.perioder))}: `}</span>
+            <span className="utvidbarTittel__grad">{` ${sykmelding.mulighetForArbeid.perioder[0].grad}%`}</span>
+        </div>
+        {
+            erViktigInformasjon && <div className="utvidbarTittel__erViktig">
+                <img alt="Mer" src={'/sykefravaer/img/svg/merInformasjon.svg'} />
+            </div>
+        }
+    </div>);
+};
+
+UtvidbarTittel.propTypes = {
+    sykmelding: PropTypes.object,
 };
 
 export const Sykmeldinger = (
     {
-        fnr,
-        ledetekster,
         oppfolgingstilfelleperioder,
         sykmeldinger,
     }) => {
-    const sykmeldingerInnenforMotebehovPeriodenOgOppfolgingstilfellet = finnSykmeldingerInnenforMotebehovPeriodenOgOppfolgingstilfellet({ sykmeldinger, oppfolgingstilfelleperioder });
+    const sykmeldingerInnenforOppfolgingstilfellet = finnSykmeldingerInnenforOppfolgingstilfellet({ sykmeldinger, oppfolgingstilfelleperioder });
+    const sorterteSykmeldinger = sorterSykmeldingerPaaUtstedelsesdato(sykmeldingerInnenforOppfolgingstilfellet);
     return (<div className="utdragFraSykefravaeret__sykmeldinger">
         <h3>Sykmeldinger</h3>
         {
-            sykmeldingerInnenforMotebehovPeriodenOgOppfolgingstilfellet.length > 0
-                ? sykmeldingerInnenforMotebehovPeriodenOgOppfolgingstilfellet.map((sykmelding, index) => {
-                    const erViktigInformasjon = erEkstraInformasjonISykmeldingen(sykmelding);
+            sorterteSykmeldinger.length > 0
+                ? sorterteSykmeldinger.map((sykmelding, index) => {
                     return (<div key={index}>
                         <Utvidbar
-                            tittel={`${sykmelding.arbeidsgiver} ${tilLesbarPeriodeMedArstall(sykmelding.mulighetForArbeid.perioder[0].fom, sykmelding.mulighetForArbeid.perioder[0].tom)}: ${sykmelding.mulighetForArbeid.perioder[0].grad}% ${erViktigInformasjon ? 'VIKTIG!!!!' : ''}`}
+                            tittel={<UtvidbarTittel sykmelding={sykmelding} />}
                             visLukkLenke={false}
-                            children={<SykmeldingMotebehovVisning sykmelding={sykmelding}/>}
+                            children={<SykmeldingMotebehovVisning sykmelding={sykmelding} />}
                         />
                     </div>);
                 })
-                : <div><p>Ingenting her!</p></div>
+                : <p>Finner ingen sykmeldinger</p>
         }
     </div>);
 };
 
 Sykmeldinger.propTypes = {
-    fnr: PropTypes.string,
-    ledetekster: PropTypes.object,
     oppfolgingstilfelleperioder: PropTypes.object,
     sykmeldinger: PropTypes.arrayOf(PropTypes.object),
 };
@@ -61,18 +79,18 @@ export const Oppfolgingsplaner = (
         aktiveDialoger,
         fnr,
     }) => {
-    return (<div>
+    return (<div className="utdragFraSykefravaeret__oppfolgingsplaner">
         <h3>Oppfølgingsplan</h3>
         {
             aktiveDialoger && aktiveDialoger.length > 0
                 ? aktiveDialoger.map((dialog, index) => {
                     return (<div key={index} className="utdragFraSykefravaeret__oppfolgingsplan">
                         <span>
-                            <Link to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
-                                <span className="navn">{dialog.virksomhet.navn}</span>
-                            </Link>
+                            <Lenke className="lenke" href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
+                                {dialog.virksomhet.navn}
+                            </Lenke>
                         </span>
-                        <span className="gyldighet">{tilLesbarPeriodeMedArstall(dialog.godkjentPlan.gyldighetstidspunkt.fom, dialog.godkjentPlan.gyldighetstidspunkt.tom)}</span>
+                        <span className="gyldighetsperiode">{tilLesbarPeriodeMedArstall(dialog.godkjentPlan.gyldighetstidspunkt.fom, dialog.godkjentPlan.gyldighetstidspunkt.tom)}</span>
                     </div>);
                 })
                 : <p>Ingen planer er delt med NAV</p>
@@ -85,6 +103,23 @@ Oppfolgingsplaner.propTypes = {
     fnr: PropTypes.string,
 };
 
+export const Samtalereferat = (
+    {
+        fnr,
+    }
+) => {
+    return (<div className="utdragFraSykefravaeret__samtalereferat">
+        <h3>Samtalereferat</h3>
+        <Lenke className="lenke" href={`https://modapp${finnMiljoStreng()}.adeo.no/modiabrukerdialog/person/${fnr}?7#!meldinger`}>
+            Samtalereferat
+        </Lenke>
+    </div>);
+};
+
+Samtalereferat.propTypes = {
+    fnr: PropTypes.string,
+};
+
 const UtdragFraSykefravaeret = (
     {
         aktiveDialoger,
@@ -92,26 +127,31 @@ const UtdragFraSykefravaeret = (
         oppfolgingstilfelleperioder,
         sykmeldinger,
     }) => {
-    return (<div className="panel utdragFraSykefravaeret">
-        <Sykmeldinger
-            sykmeldinger={sykmeldinger}
-            oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
-            fnr={fnr}
-        />
+    return (<div>
+        <UtdragFraSykefravaeretHeader />
 
-        <Oppfolgingsplaner
-            aktiveDialoger={aktiveDialoger}
-            fnr={fnr}
-            oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
-        />
+        <div className="panel utdragFraSykefravaeret">
+            <Sykmeldinger
+                fnr={fnr}
+                oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
+                sykmeldinger={sykmeldinger}
+            />
+
+            <Oppfolgingsplaner
+                aktiveDialoger={aktiveDialoger}
+                fnr={fnr}
+            />
+
+            <Samtalereferat
+                fnr={fnr}
+            />
+        </div>
     </div>);
 };
 
 UtdragFraSykefravaeret.propTypes = {
-    actions: PropTypes.object,
     aktiveDialoger: PropTypes.arrayOf(PropTypes.object),
     fnr: PropTypes.string,
-    ledetekster: PropTypes.object,
     oppfolgingstilfelleperioder: PropTypes.object,
     sykmeldinger: PropTypes.arrayOf(PropTypes.object),
 };

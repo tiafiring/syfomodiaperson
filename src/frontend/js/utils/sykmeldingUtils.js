@@ -69,3 +69,27 @@ export const erEkstraInformasjonISykmeldingen = (sykmelding) => {
         || !!erMeldingTilArbeidsgiverInformasjon(sykmelding)
         || !!erTilbakeDateringInformasjon(sykmelding);
 };
+
+export const finnSykmeldingerInnenforOppfolgingstilfellet = ({ sykmeldinger, oppfolgingstilfelleperioder }) => {
+    return sykmeldinger.filter((sykmelding) => {
+        const tilfelleperioderReducer = oppfolgingstilfelleperioder[sykmelding.orgnummer];
+        const sykmeldingStart = new Date(sykmelding.startLegemeldtFravaer).setHours(0);
+
+        const tilfelleStart = tilfelleperioderReducer && tilfelleperioderReducer.data && tilfelleperioderReducer.data[0] && tilfelleperioderReducer.data[0].fom
+            ? new Date(tilfelleperioderReducer.data[0].fom).setHours(0)
+            : new Date();
+
+        return sykmeldingStart - tilfelleStart >= 0;
+    });
+};
+
+export const sorterSykmeldingerPaaUtstedelsesdato = (sykmeldinger) => {
+    return sykmeldinger.sort((sykmelding1, sykmelding2) => {
+        const dato1 = new Date(sykmelding1.bekreftelse.utstedelsesdato);
+        const dato2 = new Date(sykmelding2.bekreftelse.utstedelsesdato);
+
+        return dato1 > dato2
+            ? -1
+            : 1;
+    });
+};

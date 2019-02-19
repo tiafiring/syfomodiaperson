@@ -36,16 +36,13 @@ export class MotebehovSide extends Component {
             actions,
             fnr,
             skalHenteMotebehov,
-            ledereData,
         } = this.props;
         if (skalHenteMotebehov) {
             actions.hentMotebehov(fnr);
             actions.hentOppfoelgingsdialoger(fnr);
             actions.hentSykeforloep(fnr);
         }
-        ledereData.forEach((leder) => {
-            actions.hentOppfolgingstilfelleperioder(fnr, leder.orgnummer);
-        });
+        actions.hentOppfolgingstilfelleperioder(fnr);
 
         actions.hentSykmeldinger(fnr);
     }
@@ -91,20 +88,26 @@ export class MotebehovSide extends Component {
                     if (hentingFeilet) {
                         return <Feilmelding />;
                     }
-                    return (<Motebehov
-                        actions={actions}
-                        fnr={fnr}
-                        ledereData={ledereData}
-                        ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
-                        ledetekster={ledetekster}
-                        motebehovListe={motebehovListeUtenFlereSvarFraSammePerson}
-                        oppgaver={oppgaver}
-                        sykmeldt={sykmeldt}
-                        ufiltrertMotebehovListeTilOppgavebehandling={ufiltrertMotebehovListeTilOppgavebehandling}
-                        veilederinfo={veilederinfo}
-                        aktiveDialoger={aktiveDialoger}
-                        oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
-                        sykmeldinger={sykmeldinger}
+                    if (motebehovListeUtenFlereSvarFraSammePerson.length > 0) {
+                        return (<Motebehov
+                            actions={actions}
+                            fnr={fnr}
+                            ledereData={ledereData}
+                            ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
+                            ledetekster={ledetekster}
+                            motebehovListe={motebehovListeUtenFlereSvarFraSammePerson}
+                            oppgaver={oppgaver}
+                            sykmeldt={sykmeldt}
+                            ufiltrertMotebehovListeTilOppgavebehandling={ufiltrertMotebehovListeTilOppgavebehandling}
+                            veilederinfo={veilederinfo}
+                            aktiveDialoger={aktiveDialoger}
+                            oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
+                            sykmeldinger={sykmeldinger}
+                        />);
+                    }
+                    return (<Feilmelding
+                        tittel={getLedetekst('mote.motebehov.feilmelding.tittel', ledetekster)}
+                        melding={getHtmlLedetekst('mote.motebehov.feilmelding.ikkeFunnet', ledetekster)}
                     />);
                 })()
             }

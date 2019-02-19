@@ -3,17 +3,17 @@ export const HENT_OPPFOLGINGSTILFELLEPERIODER_HENTER = 'HENT_OPPFOLGINGSTILFELLE
 export const HENT_OPPFOLGINGSTILFELLEPERIODER_HENTET = 'HENT_OPPFOLGINGSTILFELLEPERIODER_HENTET';
 export const HENT_OPPFOLGINGSTILFELLEPERIODER_FEILET = 'HENT_OPPFOLGINGSTILFELLEPERIODER_FEILET';
 
-export function hentOppfolgingstilfelleperioder(fnr, orgnummer) {
+export function hentOppfolgingstilfelleperioder(fnr) {
     return {
         type: HENT_OPPFOLGINGSTILFELLEPERIODER_FORESPURT,
         fnr,
-        orgnummer,
     };
 }
 
-export function hentOppfolgingstilfelleperioderHenter() {
+export function hentOppfolgingstilfelleperioderHenter(orgnummer) {
     return {
         type: HENT_OPPFOLGINGSTILFELLEPERIODER_HENTER,
+        orgnummer,
     };
 }
 
