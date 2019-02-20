@@ -22,10 +22,14 @@ import {
     finnNyesteMotebehovsvarFraHverDeltaker,
 } from '../utils/motebehovUtils';
 import {
+    harForsoktHentetLedere,
     harForsoktHentetLedetekster,
     harForsoktHentetMotebehov,
+    harForsoktHentetOppfoelgingsdialoger,
     ikkeHenterEllerForsoktHentetLedere,
     ikkeHenterEllerForsoktHentetMotebehov,
+    ikkeHenterEllerForsoktHentetOppfoelgingsdialoger,
+    ikkeHenterEllerForsoktHentetSykmeldinger,
 } from '../utils/reducerUtils';
 import { finnLedereUtenInnsendtMotebehov } from '../utils/ledereUtils';
 import Motebehov from '../components/Motebehov';
@@ -38,16 +42,31 @@ export class MotebehovSide extends Component {
             fnr,
             skalHenteMotebehov,
             skalHenteLedere,
+            skalHenteSykmeldinger,
         } = this.props;
         if (skalHenteMotebehov) {
             actions.hentMotebehov(fnr);
         }
-        actions.hentOppfoelgingsdialoger(fnr);
+
         if (skalHenteLedere) {
             actions.hentLedere(fnr);
         }
+
+        if (skalHenteSykmeldinger) {
+            actions.hentSykmeldinger(fnr);
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const {
+            actions,
+            fnr,
+            skalHenteOppfoelgingsdialoger,
+        } = nextProps;
         actions.hentOppfolgingstilfelleperioder(fnr);
-        actions.hentSykmeldinger(fnr);
+        if (skalHenteOppfoelgingsdialoger) {
+            actions.hentOppfoelgingsdialoger(fnr);
+        }
     }
 
     render() {
@@ -132,6 +151,8 @@ MotebehovSide.propTypes = {
     oppgaver: PropTypes.arrayOf(PropTypes.object),
     skalHenteLedere: PropTypes.bool,
     skalHenteMotebehov: PropTypes.bool,
+    skalHenteOppfoelgingsdialoger: PropTypes.bool,
+    skalHenteSykmeldinger: PropTypes.bool,
     sykmeldt: PropTypes.object,
     tilgang: PropTypes.object,
     ufiltrertMotebehovListeTilOppgavebehandling: PropTypes.arrayOf(PropTypes.object),
@@ -169,7 +190,9 @@ export const mapStateToProps = (state, ownProps) => {
     });
 
     const harForsoktHentetAlt = harForsoktHentetMotebehov(state.motebehov)
-    && harForsoktHentetLedetekster(state.ledetekster);
+    && harForsoktHentetLedetekster(state.ledetekster)
+    && harForsoktHentetOppfoelgingsdialoger(state.oppfoelgingsdialoger)
+    && harForsoktHentetLedere(state.ledere);
     return {
         fnr: ownProps.params.fnr,
         henter: !harForsoktHentetAlt,
@@ -184,6 +207,8 @@ export const mapStateToProps = (state, ownProps) => {
         oppgaver: state.veilederoppgaver.data,
         skalHenteLedere: ikkeHenterEllerForsoktHentetLedere(state.ledere),
         skalHenteMotebehov: ikkeHenterEllerForsoktHentetMotebehov(state.motebehov),
+        skalHenteOppfoelgingsdialoger: ikkeHenterEllerForsoktHentetOppfoelgingsdialoger(state.oppfoelgingsdialoger),
+        skalHenteSykmeldinger: ikkeHenterEllerForsoktHentetSykmeldinger(state.sykmeldinger),
         sykmeldt: state.navbruker.data,
         tilgang: state.tilgang.data,
         ufiltrertMotebehovListeTilOppgavebehandling: state.motebehov.data,

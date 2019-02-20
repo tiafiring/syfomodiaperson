@@ -176,12 +176,14 @@ describe('MotebehovContainer', () => {
             expect(props.henter).to.be.equal(true);
         });
 
-        it('Skal ikke returnere henter når møtebehov og ledetekster er forsøkt hentet', () => {
+        it('Skal ikke returnere henter når alt er forsøkt hentet', () => {
             state.motebehov.data = [{
                 id: 1,
             }];
             state.motebehov.hentet = true;
             state.ledetekster.hentet = true;
+            state.oppfoelgingsdialoger.hentet = true;
+            state.ledere.hentet = true;
 
             const props = mapStateToProps(state, ownProps);
 
