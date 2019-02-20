@@ -84,10 +84,15 @@ export const Oppfolgingsplaner = (
         {
             aktiveDialoger && aktiveDialoger.length > 0
                 ? aktiveDialoger.map((dialog, index) => {
+                    const virksomhetsNavn = dialog.virksomhet.navn;
                     return (<div key={index} className="utdragFraSykefravaeret__oppfolgingsplan">
                         <span>
                             <Lenke className="lenke" href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
-                                {dialog.virksomhet.navn}
+                                {
+                                    virksomhetsNavn && virksomhetsNavn.length > 0
+                                        ? virksomhetsNavn
+                                        : dialog.virksomhet.virksomhetsnummer
+                                }
                             </Lenke>
                         </span>
                         <span className="gyldighetsperiode">{tilLesbarPeriodeMedArstall(dialog.godkjentPlan.gyldighetstidspunkt.fom, dialog.godkjentPlan.gyldighetstidspunkt.tom)}</span>

@@ -1,50 +1,64 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Sidetopp from './Sidetopp';
 import MotebehovKvittering from './MotebehovKvittering';
 import BehandleMotebehovKnapp from './BehandleMotebehovKnapp';
 import UtdragFraSykefravaeret from './UtdragFraSykefravaeret';
 
-const Motebehov = (
-    {
-        actions,
-        aktiveDialoger,
-        fnr,
-        ledereData,
-        ledereUtenInnsendtMotebehov,
-        ledetekster,
-        motebehovListe,
-        oppgaver,
-        sykmeldt,
-        ufiltrertMotebehovListeTilOppgavebehandling,
-        veilederinfo,
-        oppfolgingstilfelleperioder,
-        sykmeldinger,
-    }) => {
-    return (<div className="motebehovSide">
-        <Sidetopp tittel={'Avklaring dialogmøte'} />
-        <MotebehovKvittering
-            ledereData={ledereData}
-            ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
-            motebehovListe={motebehovListe}
-            sykmeldt={sykmeldt}
-        />
-        <UtdragFraSykefravaeret
-            aktiveDialoger={aktiveDialoger}
-            fnr={fnr}
-            ledetekster={ledetekster}
-            oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
-            sykmeldinger={sykmeldinger}
-        />
-        <BehandleMotebehovKnapp
-            actions={actions}
-            fnr={fnr}
-            motebehovListe={ufiltrertMotebehovListeTilOppgavebehandling}
-            oppgaver={oppgaver}
-            veilederinfo={veilederinfo}
-        />
-    </div>);
-};
+export class Motebehov extends Component {
+    componentDidMount() {
+        const {
+            actions,
+            aktiveDialoger,
+        } = this.props;
+        aktiveDialoger.forEach((dialog) => {
+            if (!dialog.virksomhet.navn) {
+                actions.hentVirksomhet(dialog.virksomhet.virksomhetsnummer);
+            }
+        });
+    }
+
+    render() {
+        const {
+            actions,
+            aktiveDialoger,
+            fnr,
+            ledereData,
+            ledereUtenInnsendtMotebehov,
+            ledetekster,
+            motebehovListe,
+            oppgaver,
+            sykmeldt,
+            ufiltrertMotebehovListeTilOppgavebehandling,
+            veilederinfo,
+            oppfolgingstilfelleperioder,
+            sykmeldinger,
+        } = this.props;
+        return (<div className="motebehovSide">
+            <Sidetopp tittel={'Avklaring dialogmøte'} />
+            <MotebehovKvittering
+                ledereData={ledereData}
+                ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
+                motebehovListe={motebehovListe}
+                sykmeldt={sykmeldt}
+            />
+            <UtdragFraSykefravaeret
+                aktiveDialoger={aktiveDialoger}
+                fnr={fnr}
+                ledetekster={ledetekster}
+                oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
+                sykmeldinger={sykmeldinger}
+            />
+            <BehandleMotebehovKnapp
+                actions={actions}
+                fnr={fnr}
+                motebehovListe={ufiltrertMotebehovListeTilOppgavebehandling}
+                oppgaver={oppgaver}
+                veilederinfo={veilederinfo}
+            />
+        </div>);
+    }
+}
 
 Motebehov.propTypes = {
     actions: PropTypes.object,

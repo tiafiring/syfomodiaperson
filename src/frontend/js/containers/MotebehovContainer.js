@@ -11,9 +11,10 @@ import AppSpinner from '../components/AppSpinner';
 import * as motebehovActions from '../actions/motebehov_actions';
 import * as veilederoppgaverActions from '../actions/veilederoppgaver_actions';
 import * as oppfoelgingsdialogerActions from '../actions/oppfoelgingsdialoger_actions';
-import * as sykeforloepsActions from '../actions/sykeforloep_actions';
 import * as oppfolgingstilfelleperioderActions from '../actions/oppfolgingstilfelleperioder_actions';
 import * as sykmeldingerActions from '../actions/sykmeldinger_actions';
+import * as ledereActions from '../actions/ledere_actions';
+import * as virksomhetActions from '../actions/virksomhet_actions';
 import { MOETEPLANLEGGER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import {
@@ -23,12 +24,12 @@ import {
 import {
     harForsoktHentetLedetekster,
     harForsoktHentetMotebehov,
+    ikkeHenterEllerForsoktHentetLedere,
     ikkeHenterEllerForsoktHentetMotebehov,
 } from '../utils/reducerUtils';
 import { finnLedereUtenInnsendtMotebehov } from '../utils/ledereUtils';
 import Motebehov from '../components/Motebehov';
 import { bindActionCreators } from 'redux';
-
 
 export class MotebehovSide extends Component {
     componentDidMount() {
@@ -36,14 +37,16 @@ export class MotebehovSide extends Component {
             actions,
             fnr,
             skalHenteMotebehov,
+            skalHenteLedere,
         } = this.props;
         if (skalHenteMotebehov) {
             actions.hentMotebehov(fnr);
-            actions.hentOppfoelgingsdialoger(fnr);
-            actions.hentSykeforloep(fnr);
+        }
+        actions.hentOppfoelgingsdialoger(fnr);
+        if (skalHenteLedere) {
+            actions.hentLedere(fnr);
         }
         actions.hentOppfolgingstilfelleperioder(fnr);
-
         actions.hentSykmeldinger(fnr);
     }
 
@@ -127,6 +130,7 @@ MotebehovSide.propTypes = {
     motebehovListeUtenFlereSvarFraSammePerson: PropTypes.arrayOf(PropTypes.object),
     motebehovTilgang: PropTypes.object,
     oppgaver: PropTypes.arrayOf(PropTypes.object),
+    skalHenteLedere: PropTypes.bool,
     skalHenteMotebehov: PropTypes.bool,
     sykmeldt: PropTypes.object,
     tilgang: PropTypes.object,
@@ -137,7 +141,7 @@ MotebehovSide.propTypes = {
 };
 
 export function mapDispatchToProps(dispatch) {
-    const actions = Object.assign({}, motebehovActions, veilederoppgaverActions, oppfoelgingsdialogerActions, sykeforloepsActions, oppfolgingstilfelleperioderActions, sykmeldingerActions);
+    const actions = Object.assign({}, motebehovActions, veilederoppgaverActions, oppfoelgingsdialogerActions, oppfolgingstilfelleperioderActions, sykmeldingerActions, ledereActions, virksomhetActions);
     return {
         actions: bindActionCreators(actions, dispatch),
     };
@@ -178,6 +182,7 @@ export const mapStateToProps = (state, ownProps) => {
         motebehovListeUtenFlereSvarFraSammePerson,
         motebehovTilgang: state.motebehov.tilgang,
         oppgaver: state.veilederoppgaver.data,
+        skalHenteLedere: ikkeHenterEllerForsoktHentetLedere(state.ledere),
         skalHenteMotebehov: ikkeHenterEllerForsoktHentetMotebehov(state.motebehov),
         sykmeldt: state.navbruker.data,
         tilgang: state.tilgang.data,
