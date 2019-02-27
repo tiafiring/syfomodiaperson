@@ -1,3 +1,10 @@
+import { sykmeldingstatuser } from '@navikt/digisyfo-npm';
+import {
+    ARBEIDSLEDIG,
+    NAERINGSDRIVENDE,
+    FRILANSER,
+} from '../enums/arbeidssituasjoner';
+
 export const erEkstraDiagnoseInformasjon = (sykmelding) => {
     return sykmelding.diagnose
         && (sykmelding.diagnose.fravaersgrunnLovfestet
@@ -70,7 +77,30 @@ export const erEkstraInformasjonISykmeldingen = (sykmelding) => {
         || !!erTilbakeDateringInformasjon(sykmelding);
 };
 
-export const finnSykmeldingerInnenforOppfolgingstilfellet = ({ sykmeldinger, oppfolgingstilfelleperioder }) => {
+export const finnArbeidssituasjonEllerArbeidsgiver = (sykmelding) => {
+    if (sykmelding.innsendtArbeidsgivernavn && sykmelding.innsendtArbeidsgivernavn.length > 0) {
+        return sykmelding.innsendtArbeidsgivernavn;
+    }
+
+    switch (sykmelding.valgtArbeidssituasjon) {
+        case ARBEIDSLEDIG:
+            return 'Ingen arbeidsgiver';
+        case NAERINGSDRIVENDE:
+            return 'Selvstendig næringsdrivende';
+        case FRILANSER:
+            return 'Frilanser';
+        default:
+            return 'Annet';
+    }
+};
+
+export const finnInnsendteSykmeldinger = (sykmeldinger) => {
+    return sykmeldinger.filter((sykmelding) => {
+        return sykmelding.status === sykmeldingstatuser.SENDT;
+    });
+};
+
+export const finnSykmeldingerInnenforOppfolgingstilfellet = (sykmeldinger, oppfolgingstilfelleperioder) => {
     return sykmeldinger.filter((sykmelding) => {
         const tilfelleperioderReducer = oppfolgingstilfelleperioder[sykmelding.orgnummer];
         const sykmeldingStart = new Date(sykmelding.startLegemeldtFravaer);
