@@ -13,6 +13,7 @@ import {
     finnInnsendteSykmeldinger,
     finnSykmeldingerInnenforOppfolgingstilfellet,
     sorterSykmeldingerPaaUtstedelsesdato,
+    sorterSykmeldingerPaaVirksomhetsnummer,
 } from '../utils/sykmeldingUtils';
 import { finnMiljoStreng } from '../utils';
 import Lenke from 'nav-frontend-lenker';
@@ -65,7 +66,7 @@ export const UtvidbarTittel = (
     const erViktigInformasjon = erEkstraInformasjonISykmeldingen(sykmelding);
     return (<div className="utdragFraSykefravaeret__utvidbarTittel">
         <div>
-            <span className="utvidbarTittel__periode">{`Sendt til: ${finnArbeidssituasjonEllerArbeidsgiver(sykmelding)} - ${tilLesbarPeriodeMedArstall(tidligsteFom(sykmelding.mulighetForArbeid.perioder), senesteTom(sykmelding.mulighetForArbeid.perioder))}: `}</span>
+            <span className="utvidbarTittel__periode">{`${tilLesbarPeriodeMedArstall(tidligsteFom(sykmelding.mulighetForArbeid.perioder), senesteTom(sykmelding.mulighetForArbeid.perioder))}: `}</span>
             <span className="utvidbarTittel__grad">{` ${sykmelding.mulighetForArbeid.perioder[0].grad}%`}</span>
         </div>
         {
@@ -80,6 +81,30 @@ UtvidbarTittel.propTypes = {
     sykmelding: PropTypes.object,
 };
 
+export const SykmeldingerForVirksomhet = (
+    {
+        sykmeldinger,
+    }) => {
+    return (<div className="utdragFraSykefravaeret__sykmeldingerForVirksomhet">
+        <h4>{finnArbeidssituasjonEllerArbeidsgiver(sykmeldinger[0])}</h4>
+        {
+            sykmeldinger.map((sykmelding, index) => {
+                return (<div key={index}>
+                    <Utvidbar
+                        tittel={<UtvidbarTittel sykmelding={sykmelding} />}
+                        visLukkLenke={false}
+                        children={<SykmeldingMotebehovVisning sykmelding={sykmelding} />}
+                    />
+                </div>);
+            })
+        }
+    </div>);
+};
+
+SykmeldingerForVirksomhet.propTypes = {
+    sykmeldinger: PropTypes.arrayOf(PropTypes.object),
+};
+
 export const Sykmeldinger = (
     {
         oppfolgingstilfelleperioder,
@@ -87,21 +112,17 @@ export const Sykmeldinger = (
     }) => {
     const innsendteSykmeldinger = finnInnsendteSykmeldinger(sykmeldinger);
     const sykmeldingerInnenforOppfolgingstilfellet = finnSykmeldingerInnenforOppfolgingstilfellet(innsendteSykmeldinger, oppfolgingstilfelleperioder);
-    const sorterteSykmeldinger = sorterSykmeldingerPaaUtstedelsesdato(sykmeldingerInnenforOppfolgingstilfellet);
+    const sykmeldingerSortertPaaUtstedelsesdato = sorterSykmeldingerPaaUtstedelsesdato(sykmeldingerInnenforOppfolgingstilfellet);
+    const sykmeldingerSortertPaaVirksomhet = sorterSykmeldingerPaaVirksomhetsnummer(sykmeldingerSortertPaaUtstedelsesdato);
     return (<div className="utdragFraSykefravaeret__sykmeldinger">
         <h3>Sykmeldinger</h3>
         {
-            sorterteSykmeldinger.length > 0
-                ? sorterteSykmeldinger.map((sykmelding, index) => {
-                    return (<div key={index}>
-                        <Utvidbar
-                            tittel={<UtvidbarTittel sykmelding={sykmelding} />}
-                            visLukkLenke={false}
-                            children={<SykmeldingMotebehovVisning sykmelding={sykmelding} />}
-                        />
-                    </div>);
-                })
-                : <p>Finner ingen sykmeldinger</p>
+            Object.keys(sykmeldingerSortertPaaVirksomhet).map((key, index) => {
+                return (<SykmeldingerForVirksomhet
+                    key={index}
+                    sykmeldinger={sykmeldingerSortertPaaVirksomhet[key]}
+                />);
+            })
         }
     </div>);
 };

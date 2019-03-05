@@ -82,7 +82,7 @@ export const finnArbeidssituasjonEllerArbeidsgiver = (sykmelding) => {
         return sykmelding.innsendtArbeidsgivernavn;
     }
 
-    switch (sykmelding.valgtArbeidssituasjon) {
+    switch (sykmelding.sporsmal.arbeidssituasjon) {
         case ARBEIDSLEDIG:
             return 'Ingen arbeidsgiver';
         case NAERINGSDRIVENDE:
@@ -124,4 +124,16 @@ export const sorterSykmeldingerPaaUtstedelsesdato = (sykmeldinger) => {
             ? -1
             : 1;
     });
+};
+
+export const sorterSykmeldingerPaaVirksomhetsnummer = (sykmeldinger) => {
+    return sykmeldinger && sykmeldinger.length > 0 && sykmeldinger.reduce((memo, sykmelding) => {
+        const virksomhetsnummer = sykmelding.mottakendeArbeidsgiver && sykmelding.mottakendeArbeidsgiver.virksomhetsnummer;
+        const memo2 = { ...memo };
+        if (!memo2[virksomhetsnummer]) {
+            memo2[virksomhetsnummer] = [];
+        }
+        memo2[virksomhetsnummer] = [...memo2[virksomhetsnummer], sykmelding];
+        return memo2;
+    }, {});
 };
