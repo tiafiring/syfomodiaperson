@@ -87,3 +87,20 @@ export const tilDatoMedUkedagOgMaanedNavn = (dato) => {
     return `${ukeDag} ${dag}. ${maaned} ${aar}`;
 };
 
+const dayOrMonthWithTwoDigits = (arg) => {
+    return arg > 9
+        ? `${arg}`
+        : `0${arg}`;
+};
+
+export const tilLesbarDatoMedAarUtenMaanedNavn = (datoArg) => {
+    const date = new Date(datoArg);
+    const day = dayOrMonthWithTwoDigits(date.getDate());
+    const month = dayOrMonthWithTwoDigits(date.getMonth() + 1);
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`;
+};
+
+export const tilLesbarPeriodeMedAarUtenMaanednavn = (fomArg, tomArg) => {
+    return `${tilLesbarDatoMedAarUtenMaanedNavn(fomArg)} - ${tilLesbarDatoMedAarUtenMaanedNavn(tomArg)}`;
+};

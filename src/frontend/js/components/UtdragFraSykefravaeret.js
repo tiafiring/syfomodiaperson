@@ -4,6 +4,7 @@ import {
     senesteTom,
     tidligsteFom,
     tilLesbarPeriodeMedArstall,
+    sykmelding as sykmeldingPt,
 } from '@navikt/digisyfo-npm';
 import { Utvidbar } from '@navikt/digisyfo-npm';
 import SykmeldingMotebehovVisning from './SykmeldingMotebehovVisning';
@@ -14,14 +15,31 @@ import {
     finnSykmeldingerInnenforOppfolgingstilfellet,
     sorterSykmeldingerPaaUtstedelsesdato,
     sorterSykmeldingerPaaVirksomhetsnummer,
+    sorterSykmeldingPerioderEtterDato,
+    stringMedAlleGraderingerFraSykmeldingPerioder,
 } from '../utils/sykmeldingUtils';
 import { finnMiljoStreng } from '../utils';
 import Lenke from 'nav-frontend-lenker';
 
 
+const tekster = {
+    header: 'Utdrag fra sykefraværet',
+    oppfolgingsplaner: {
+        header: 'Oppfølgingsplan',
+        ingenPlanerDelt: 'Ingen planer er delt med NAV',
+    },
+    sykmeldinger: {
+        header: 'Sykmeldinger',
+    },
+    samtalereferat: {
+        header: 'Samtalereferat',
+        lenkeTekst: 'Samtalereferat',
+    },
+};
+
 export const UtdragFraSykefravaeretHeader = () => {
     return (<div className="utdragFraSykefravaeret__header">
-        <p>Utdrag fra sykefraværet</p>
+        <h2>{tekster.header}</h2>
     </div>);
 };
 
@@ -31,7 +49,7 @@ export const Oppfolgingsplaner = (
         fnr,
     }) => {
     return (<div className="utdragFraSykefravaeret__oppfolgingsplaner">
-        <h3>Oppfølgingsplan</h3>
+        <h3>{tekster.oppfolgingsplaner.header}</h3>
         {
             aktiveDialoger && aktiveDialoger.length > 0
                 ? aktiveDialoger.map((dialog, index) => {
@@ -49,7 +67,7 @@ export const Oppfolgingsplaner = (
                         <span className="gyldighetsperiode">{tilLesbarPeriodeMedArstall(dialog.godkjentPlan.gyldighetstidspunkt.fom, dialog.godkjentPlan.gyldighetstidspunkt.tom)}</span>
                     </div>);
                 })
-                : <p>Ingen planer er delt med NAV</p>
+                : <p>{tekster.oppfolgingsplaner.ingenPlanerDelt}</p>
         }
     </div>);
 };
@@ -64,10 +82,11 @@ export const UtvidbarTittel = (
         sykmelding,
     }) => {
     const erViktigInformasjon = erEkstraInformasjonISykmeldingen(sykmelding);
+    const sykmeldingPerioderSortertEtterDato = sorterSykmeldingPerioderEtterDato(sykmelding.mulighetForArbeid.perioder);
     return (<div className="utdragFraSykefravaeret__utvidbarTittel">
         <div>
             <span className="utvidbarTittel__periode">{`${tilLesbarPeriodeMedArstall(tidligsteFom(sykmelding.mulighetForArbeid.perioder), senesteTom(sykmelding.mulighetForArbeid.perioder))}: `}</span>
-            <span className="utvidbarTittel__grad">{` ${sykmelding.mulighetForArbeid.perioder[0].grad}%`}</span>
+            <span className="utvidbarTittel__grad">{` ${stringMedAlleGraderingerFraSykmeldingPerioder(sykmeldingPerioderSortertEtterDato)}%`}</span>
         </div>
         {
             erViktigInformasjon && <div className="utvidbarTittel__erViktig">
@@ -78,7 +97,7 @@ export const UtvidbarTittel = (
 };
 
 UtvidbarTittel.propTypes = {
-    sykmelding: PropTypes.object,
+    sykmelding: sykmeldingPt,
 };
 
 export const SykmeldingerForVirksomhet = (
@@ -102,7 +121,7 @@ export const SykmeldingerForVirksomhet = (
 };
 
 SykmeldingerForVirksomhet.propTypes = {
-    sykmeldinger: PropTypes.arrayOf(PropTypes.object),
+    sykmeldinger: PropTypes.arrayOf(sykmeldingPt),
 };
 
 export const Sykmeldinger = (
@@ -115,7 +134,7 @@ export const Sykmeldinger = (
     const sykmeldingerSortertPaaUtstedelsesdato = sorterSykmeldingerPaaUtstedelsesdato(sykmeldingerInnenforOppfolgingstilfellet);
     const sykmeldingerSortertPaaVirksomhet = sorterSykmeldingerPaaVirksomhetsnummer(sykmeldingerSortertPaaUtstedelsesdato);
     return (<div className="utdragFraSykefravaeret__sykmeldinger">
-        <h3>Sykmeldinger</h3>
+        <h3>{tekster.sykmeldinger.header}</h3>
         {
             Object.keys(sykmeldingerSortertPaaVirksomhet).map((key, index) => {
                 return (<SykmeldingerForVirksomhet
@@ -129,7 +148,7 @@ export const Sykmeldinger = (
 
 Sykmeldinger.propTypes = {
     oppfolgingstilfelleperioder: PropTypes.object,
-    sykmeldinger: PropTypes.arrayOf(PropTypes.object),
+    sykmeldinger: PropTypes.arrayOf(sykmeldingPt),
 };
 
 export const Samtalereferat = (
@@ -138,9 +157,9 @@ export const Samtalereferat = (
     }
 ) => {
     return (<div className="utdragFraSykefravaeret__samtalereferat">
-        <h3>Samtalereferat</h3>
+        <h3>{tekster.samtalereferat.header}</h3>
         <Lenke className="lenke" href={`https://modapp${finnMiljoStreng()}.adeo.no/modiabrukerdialog/person/${fnr}?7#!meldinger`} target="_blank" >
-            Samtalereferat
+            {tekster.samtalereferat.lenkeTekst}
         </Lenke>
     </div>);
 };
@@ -182,7 +201,7 @@ UtdragFraSykefravaeret.propTypes = {
     aktiveDialoger: PropTypes.arrayOf(PropTypes.object),
     fnr: PropTypes.string,
     oppfolgingstilfelleperioder: PropTypes.object,
-    sykmeldinger: PropTypes.arrayOf(PropTypes.object),
+    sykmeldinger: PropTypes.arrayOf(sykmeldingPt),
 };
 
 export default UtdragFraSykefravaeret;

@@ -137,3 +137,19 @@ export const sorterSykmeldingerPaaVirksomhetsnummer = (sykmeldinger) => {
         return memo2;
     }, {});
 };
+
+export const sorterSykmeldingPerioderEtterDato = (perioder) => {
+    return perioder.sort((periode1, periode2) => {
+        return periode1.fom > periode2.fom
+            ? 1
+            : periode1.fom < periode2.fom
+                ? -1
+                 : 0;
+    });
+};
+
+export const stringMedAlleGraderingerFraSykmeldingPerioder = (sykmeldingPerioderSortertEtterDato) => {
+    return sykmeldingPerioderSortertEtterDato.map((periode) => {
+        return periode.grad;
+    }).join('% - ');
+};

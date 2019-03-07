@@ -37,16 +37,33 @@
     }
 }
 
-.sykmeldingMotebehovVisning__checkbox {
-    margin-left: -1em;
+.sykmeldingMotebehovVisning__perioder {
+    margin-bottom: 2em;
+
+    .sporsmaal {
+        margin-top: -1em;
+        margin-bottom: .5em;
+    }
+
+    & > .sykmeldingMotebehovVisning__periodeBoks:nth-child(odd) {
+        background-color: rgba(233, 231, 231, 0.5);
+    }
+
+    .sykmeldingMotebehovVisning__boksRad--tittel {
+        margin-bottom: .5em;
+    }
 }
 
 .sykmeldingMotebehovVisning__diagnoseBoks {
-    .sykmeldingMotebehovVisning__diagnoseBoks--tittel {
+    .sykmeldingMotebehovVisning__boksRad--tittel {
         font-weight: bold;
     }
 
-    .sykmeldingMotebehovVisning__diagnoseBoks--tekst {
+    .sykmeldingMotebehovVisning__boksRad--tekst {
         margin-bottom: 1em;
     }
+}
+
+.sykmeldingMotebehovVisning__checkbox {
+    margin-left: -1em;
 }

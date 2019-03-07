@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {
     getLedetekst,
     getHtmlLedetekst,
+    sykmelding as sykmeldingPt,
 } from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
 import Feilmelding from '../components/Feilmelding';
@@ -158,7 +159,7 @@ MotebehovSide.propTypes = {
     ufiltrertMotebehovListeTilOppgavebehandling: PropTypes.arrayOf(PropTypes.object),
     veilederinfo: PropTypes.object,
     oppfolgingstilfelleperioder: PropTypes.object,
-    sykmeldinger: PropTypes.arrayOf(PropTypes.object),
+    sykmeldinger: PropTypes.arrayOf(sykmeldingPt),
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -176,16 +177,7 @@ export const mapStateToProps = (state, ownProps) => {
     const ledereData = state.ledere.data;
     const ledereUtenInnsendtMotebehov = finnLedereUtenInnsendtMotebehov(ledereData, motebehovData);
 
-    const oppfoelgingsdialoger = state.oppfoelgingsdialoger.data.map((dialog) => {
-        const oppgaver = state.veilederoppgaver.data.filter((oppgave) => {
-            return oppgave.type === 'SE_OPPFOLGINGSPLAN' && oppgave.uuid === dialog.uuid;
-        });
-        return Object.assign({}, dialog, {
-            oppgaver,
-        });
-    });
-
-    const aktiveDialoger = oppfoelgingsdialoger.filter((dialog) => {
+    const aktiveDialoger = state.oppfoelgingsdialoger.data.filter((dialog) => {
         return dialog.status !== 'AVBRUTT' && new Date(dialog.godkjentPlan.gyldighetstidspunkt.tom) > new Date();
     });
 

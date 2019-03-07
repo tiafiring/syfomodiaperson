@@ -4,6 +4,7 @@ import Sidetopp from './Sidetopp';
 import MotebehovKvittering from './MotebehovKvittering';
 import BehandleMotebehovKnapp from './BehandleMotebehovKnapp';
 import UtdragFraSykefravaeret from './UtdragFraSykefravaeret';
+import { sykmelding as sykmeldingPt } from '@navikt/digisyfo-npm';
 
 export class Motebehov extends Component {
     componentWillMount() {
@@ -73,7 +74,7 @@ Motebehov.propTypes = {
     ufiltrertMotebehovListeTilOppgavebehandling: PropTypes.arrayOf(PropTypes.object),
     veilederinfo: PropTypes.object,
     oppfolgingstilfelleperioder: PropTypes.object,
-    sykmeldinger: PropTypes.arrayOf(PropTypes.object),
+    sykmeldinger: PropTypes.arrayOf(sykmeldingPt),
 };
 
 export default Motebehov;
