@@ -1,11 +1,12 @@
 import React from 'react';
-import { getLedetekst, sykmelding as sykmeldingPt } from '@navikt/digisyfo-npm';
+import {getLedetekst, sykmelding as sykmeldingPt, Utvidbar} from '@navikt/digisyfo-npm';
 import PropTypes from 'prop-types';
 import Oppsummeringsvisning from '../soknad-felles-oppsummering/Oppsummeringsvisning';
 import { brodsmule, soknad as soknadPt } from '../../propTypes';
 import SoknadSpeiling from '../sykepengesoknad-felles/SoknadSpeiling';
 import SykmeldingUtdrag from '../../connected-components/SykmeldingUtdrag';
 import SykepengesoknadStatuspanel from './SykepengesoknadStatuspanel';
+import {VAER_KLAR_OVER_AT} from "../../enums/tagtyper";
 
 const OppsummeringPanel = ({ soknad }) => {
     return (<div className="panel blokk">
@@ -26,7 +27,20 @@ const SendtSoknadArbeidstakerNy = ({ brukernavn, brodsmuler, soknad, fnr }) => {
         fnr={fnr}>
         <SykepengesoknadStatuspanel soknad={soknad} />
         <SykmeldingUtdrag soknad={soknad} fnr={fnr} />
-        <OppsummeringPanel soknad={soknad} />
+        <OppsummeringPanel
+            soknad={Object.assign({}, soknad, {
+                sporsmal: soknad.sporsmal.filter((s) => {
+                    return s.tag !== VAER_KLAR_OVER_AT;
+                }),
+            })} />
+        <div className="panel">
+            <Oppsummeringsvisning
+                soknad={Object.assign({}, soknad, {
+                    sporsmal: soknad.sporsmal.filter((s) => {
+                        return s.tag === VAER_KLAR_OVER_AT;
+                    }),
+                })} />
+        </div>
     </SoknadSpeiling>);
 };
 
