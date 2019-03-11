@@ -25,6 +25,7 @@ import egenansattSagas from './egenansattSagas';
 import ledeteksterSagas from './ledeteksterSagas';
 import tilgangSagas from './tilgangSagas';
 import soknaderSagas from './soknaderSagas';
+import oppfolgingstilfelleperioderSagas from './oppfolgingstilfelleperioderSagas';
 
 export default function* rootSaga() {
     yield all([
@@ -52,5 +53,6 @@ export default function* rootSaga() {
         tilgangSagas(),
         tidslinjerSagas(),
         soknaderSagas(),
+        oppfolgingstilfelleperioderSagas(),
     ]);
 }
