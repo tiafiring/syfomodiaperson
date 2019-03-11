@@ -1,30 +1,36 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { getLedetekst, toDatePrettyPrint } from '@navikt/digisyfo-npm';
-import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
+import { getLedetekst, tilLesbarDatoMedArstall } from '@navikt/digisyfo-npm';
+import { soknadEllerSykepengesoknad } from '../../propTypes/index';
 import { getTidligsteSendtDato } from '../../utils/sykepengesoknadUtils';
+import AlertStripe from 'nav-frontend-alertstriper';
 
-export const KorrigertAv = ({ korrigertAvSoknad }) => {
-    return (<div className="panel panel--komprimert blokk">
+export const KorrigertAv = ({ korrigertAvSoknad, fnr }) => {
+    return (<AlertStripe type="info" className="blokk">
         <p className="sist">
             {getLedetekst('sykepengesoknad.korrigert.tekst', {
-                '%DATO%': toDatePrettyPrint(getTidligsteSendtDato(korrigertAvSoknad)),
+                '%DATO%': tilLesbarDatoMedArstall(getTidligsteSendtDato(korrigertAvSoknad)),
             })}
         </p>
         <p className="sist">
-            <Link className="lenke" to={`/sykefravaer/soknader/${korrigertAvSoknad.id}`}>{getLedetekst('sykepengesoknad.korrigert.lenketekst')}</Link>
+            <Link className="lenke" to={`/sykefravaer/${fnr}/sykepengesoknader/${korrigertAvSoknad.id}`}>{getLedetekst('sykepengesoknad.korrigert.lenketekst')}</Link>
         </p>
-    </div>);
+    </AlertStripe>);
 };
 
 KorrigertAv.propTypes = {
-    korrigertAvSoknad: sykepengesoknadPt,
+    korrigertAvSoknad: soknadEllerSykepengesoknad,
+    fnr: PropTypes.string,
 };
 
 export const mapStateToProps = (state, ownProps) => {
     const id = ownProps.sykepengesoknad.id;
-    const sykepengesoknader = state.sykepengesoknader.data;
+    const sykepengesoknader = [
+        ...state.sykepengesoknader.data,
+        ...state.soknader.data,
+    ];
     let korrigertAvSoknad = { id };
 
     sykepengesoknader.forEach(() => {

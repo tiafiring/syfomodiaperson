@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { toDatePrettyPrint, getLedetekst } from '@navikt/digisyfo-npm';
+import { tilLesbarDatoMedArstall, getLedetekst } from '@navikt/digisyfo-npm';
 import { Link } from 'react-router';
 import { getTidligsteSendtDato, sorterEtterDato } from '../../utils/sykepengesoknadUtils';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
@@ -18,7 +18,7 @@ const RelaterteSoknader = ({ relaterteSoknader, fnr }) => {
                     .sort(sorterEtterDato)
                     .map((s, index) => {
                         return (<li key={index}>
-                            <Link to={`/sykefravaer/${fnr}/sykepengesoknader/${s.id}`}>{getLedetekst('relaterte-soknader.sendt')} {toDatePrettyPrint(getTidligsteSendtDato(s))}</Link>
+                            <Link to={`/sykefravaer/${fnr}/sykepengesoknader/${s.id}`}>{getLedetekst('relaterte-soknader.sendt')} {tilLesbarDatoMedArstall(getTidligsteSendtDato(s))}</Link>
                         </li>);
                     })
             }
@@ -35,7 +35,10 @@ export const mapStateToProps = (state, ownProps) => {
     const relaterteSoknader = [];
     const sykepengesoknadId = ownProps.sykepengesoknadId;
     const fnr = ownProps.fnr;
-    const sykepengesoknader = state.sykepengesoknader.data;
+    const sykepengesoknader = [
+        ...state.sykepengesoknader.data,
+        ...state.soknader.data,
+    ];
     let sykepengesoknad = sykepengesoknader.filter((s) => {
         return s.id === sykepengesoknadId;
     })[0];

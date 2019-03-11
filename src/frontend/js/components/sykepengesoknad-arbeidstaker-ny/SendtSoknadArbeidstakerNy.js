@@ -1,21 +1,25 @@
 import React from 'react';
-import {getLedetekst, sykmelding as sykmeldingPt, Utvidbar} from '@navikt/digisyfo-npm';
+import { getLedetekst, sykmelding as sykmeldingPt, Utvidbar } from '@navikt/digisyfo-npm';
 import PropTypes from 'prop-types';
 import Oppsummeringsvisning from '../soknad-felles-oppsummering/Oppsummeringsvisning';
 import { brodsmule, soknad as soknadPt } from '../../propTypes';
 import SoknadSpeiling from '../sykepengesoknad-felles/SoknadSpeiling';
 import SykmeldingUtdrag from '../../connected-components/SykmeldingUtdrag';
 import SykepengesoknadStatuspanel from './SykepengesoknadStatuspanel';
-import {VAER_KLAR_OVER_AT} from "../../enums/tagtyper";
+import { VAER_KLAR_OVER_AT } from '../../enums/tagtyper';
+import { KORRIGERT } from '../../enums/soknadstatuser';
+import KorrigertAvContainer from '../sykepengesoknad-arbeidstaker/KorrigertAvContainer';
+import RelaterteSoknaderContainer from '../sykepengesoknad-arbeidstaker/RelaterteSoknaderContainer';
 
-const OppsummeringPanel = ({ soknad }) => {
-    return (<div className="panel blokk">
-        <h2 className="panel__tittel blokk--xs"> {getLedetekst('sykepengesoknad.oppsummering.undertittel')}</h2>
+const OppsummeringUtvidbar = ({ soknad }) => {
+    return (<Utvidbar
+        className="blokk"
+        tittel={getLedetekst('sykepengesoknad.oppsummering.tittel')}>
         <Oppsummeringsvisning soknad={soknad} />
-    </div>);
+    </Utvidbar>);
 };
 
-OppsummeringPanel.propTypes = {
+OppsummeringUtvidbar.propTypes = {
     soknad: soknadPt,
 };
 
@@ -25,15 +29,16 @@ const SendtSoknadArbeidstakerNy = ({ brukernavn, brodsmuler, soknad, fnr }) => {
         brukernavn={brukernavn}
         brodsmuler={brodsmuler}
         fnr={fnr}>
+        { soknad.status === KORRIGERT && <KorrigertAvContainer sykepengesoknad={soknad} fnr={fnr} /> }
         <SykepengesoknadStatuspanel soknad={soknad} />
         <SykmeldingUtdrag soknad={soknad} fnr={fnr} />
-        <OppsummeringPanel
+        <OppsummeringUtvidbar
             soknad={Object.assign({}, soknad, {
                 sporsmal: soknad.sporsmal.filter((s) => {
                     return s.tag !== VAER_KLAR_OVER_AT;
                 }),
             })} />
-        <div className="panel">
+        <div className="panel blokk">
             <Oppsummeringsvisning
                 soknad={Object.assign({}, soknad, {
                     sporsmal: soknad.sporsmal.filter((s) => {
@@ -41,6 +46,7 @@ const SendtSoknadArbeidstakerNy = ({ brukernavn, brodsmuler, soknad, fnr }) => {
                     }),
                 })} />
         </div>
+        <RelaterteSoknaderContainer sykepengesoknadId={soknad.id} fnr={fnr} />
     </SoknadSpeiling>);
 };
 
