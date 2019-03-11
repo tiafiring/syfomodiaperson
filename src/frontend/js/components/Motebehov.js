@@ -36,7 +36,7 @@ export class Motebehov extends Component {
             sykmeldinger,
         } = this.props;
         return (<div className="motebehovSide">
-            <Sidetopp tittel={'Avklaring dialogmøte'} />
+            <Sidetopp tittel={'Behov for dialogmøte'} />
             <MotebehovKvittering
                 ledereData={ledereData}
                 ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
