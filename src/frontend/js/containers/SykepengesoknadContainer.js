@@ -18,7 +18,7 @@ import { ARBEIDSTAKERE, OPPHOLD_UTLAND, SELVSTENDIGE_OG_FRILANSERE } from '../en
 import SykepengesoknadSelvstendig from '../components/sykepengesoknad-selvstendig/SykepengesoknadSelvstendig';
 import SykepengesoknadUtland from '../components/sykepengesoknad-utland/SykepengesoknadUtland';
 import SendtSoknadArbeidstakerNy from '../components/sykepengesoknad-arbeidstaker-ny/SendtSoknadArbeidstakerNy';
-import { SENDT } from '../enums/soknadstatuser';
+import { KORRIGERT, SENDT } from '../enums/soknadstatuser';
 import IkkeInnsendtSoknad from '../components/sykepengesoknad-felles/IkkeInnsendtSoknad';
 
 export class Container extends Component {
@@ -92,7 +92,7 @@ export class Container extends Component {
                             soknad={soknad} />);
                     }
                     if (soknad && soknad.soknadstype === ARBEIDSTAKERE) {
-                        return soknad.status === SENDT
+                        return soknad.status === SENDT || soknad.status === KORRIGERT
                             ? (<SendtSoknadArbeidstakerNy
                                 fnr={fnr}
                                 brodsmuler={brodsmuler}

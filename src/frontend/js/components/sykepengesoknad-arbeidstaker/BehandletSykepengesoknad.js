@@ -22,7 +22,7 @@ const BehandletSykepengesoknad = ({ sykepengesoknad, fnr }) => {
         }
         default: {
             return (<div>
-                { sykepengesoknad.status === KORRIGERT && <KorrigertAvContainer sykepengesoknad={sykepengesoknad} /> }
+                { sykepengesoknad.status === KORRIGERT && <KorrigertAvContainer sykepengesoknad={sykepengesoknad} fnr={fnr} /> }
                 <Statuspanel sykepengesoknad={sykepengesoknad}>
                     <EndreSendKnapperad sykepengesoknad={sykepengesoknad} />
                 </Statuspanel>
