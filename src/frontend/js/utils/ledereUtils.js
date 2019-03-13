@@ -5,6 +5,7 @@ import {
 import {
     erOppfoelgingsdatoPassertMed16UkerOgIkke26Uker,
     erOppfolgingstilfelleSluttDatoPassert,
+    harArbeidstakerSvartPaaMotebehov,
 } from './motebehovUtils';
 
 export const filtrerLederePaaArbeidstakersMotebehov = (ledereData, motebehovData) => {
@@ -32,7 +33,6 @@ export const filtrerLederePaaOppfolgingstilfelleperioder = (ledereData, oppfolgi
             ? senesteTom(oppfolgingstilfelleperioder[leder.orgnummer].data)
             : new Date();
 
-
         return (startOppfolgingsdato && sluttOppfolgingsdato)
             && !erOppfolgingstilfelleSluttDatoPassert(sluttOppfolgingsdato)
             && erOppfoelgingsdatoPassertMed16UkerOgIkke26Uker(startOppfolgingsdato);
@@ -41,6 +41,10 @@ export const filtrerLederePaaOppfolgingstilfelleperioder = (ledereData, oppfolgi
 
 
 export const finnLedereUtenInnsendtMotebehov = (ledereData, motebehovData, oppfolgingstilfelleperioder) => {
-    const ledereFiltrertPaaOppfolgingstilfelleperioder = filtrerLederePaaOppfolgingstilfelleperioder(ledereData, oppfolgingstilfelleperioder);
-    return fjernLedereMedInnsendtMotebehov(ledereFiltrertPaaOppfolgingstilfelleperioder, motebehovData);
+    const arbeidstakerHarSvartPaaMotebehov = motebehovData && harArbeidstakerSvartPaaMotebehov(motebehovData);
+
+    const filtrertLederListe = arbeidstakerHarSvartPaaMotebehov
+        ? filtrerLederePaaArbeidstakersMotebehov(ledereData, motebehovData)
+        : filtrerLederePaaOppfolgingstilfelleperioder(ledereData, oppfolgingstilfelleperioder);
+    return fjernLedereMedInnsendtMotebehov(filtrertLederListe, motebehovData);
 };

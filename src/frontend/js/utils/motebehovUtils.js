@@ -53,3 +53,7 @@ export const erOppfolgingstilfelleSluttDatoPassert = (sluttOppfolgingsdato) => {
 
     return dagensDato > oppfolgingstilfelleSluttDato;
 };
+
+export const harArbeidstakerSvartPaaMotebehov = (motebehovData) => {
+    return !!finnArbeidstakerMotebehovSvar(motebehovData);
+};
