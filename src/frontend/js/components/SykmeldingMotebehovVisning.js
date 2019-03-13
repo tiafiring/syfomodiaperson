@@ -160,7 +160,9 @@ export const Diagnoser = (
         biDiagnoser,
     }) => {
     return (<div className="sykmeldingMotebehovVisning__diagnoser">
-        <DiagnoseBoks diagnose={hovedDiagnose} />
+        {
+            hovedDiagnose && <DiagnoseBoks diagnose={hovedDiagnose} />
+        }
 
         {
             biDiagnoser.map((diagnose, index) => {
