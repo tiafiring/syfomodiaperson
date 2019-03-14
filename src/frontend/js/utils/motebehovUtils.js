@@ -12,18 +12,6 @@ export const finnNyesteMotebehovsvarFraHverDeltaker = (sortertMotebehovListe) =>
     });
 };
 
-export const filtrerMotebehovPaaVirksomhetsnummer = (motebehovData, virksomhetsnummer) => {
-    return motebehovData.filter((motebehov) => {
-        return motebehov.virksomhetsnummer === virksomhetsnummer;
-    });
-};
-
-export const finnArbeidsgiverMotebehovSvar = (motebehovListe) => {
-    return motebehovListe.find((motebehov) => {
-        return motebehov.opprettetAv !== motebehov.aktorId;
-    });
-};
-
 export const finnArbeidstakerMotebehovSvar = (motebehovListe) => {
     return motebehovListe.find((motebehov) => {
         return motebehov.opprettetAv === motebehov.aktorId;
