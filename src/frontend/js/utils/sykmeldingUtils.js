@@ -6,75 +6,85 @@ import {
 } from '../enums/arbeidssituasjoner';
 
 export const erEkstraDiagnoseInformasjon = (sykmelding) => {
-    return sykmelding.diagnose
+    const erEkstraInformasjon = sykmelding.diagnose
         && (sykmelding.diagnose.fravaersgrunnLovfestet
         || sykmelding.diagnose.svangerskap
         || sykmelding.diagnose.yrkesskade);
+    return !!erEkstraInformasjon;
 };
 
 export const erMulighetForArbeidInformasjon = (sykmelding) => {
-    return sykmelding.mulighetForArbeid
+    const erEkstraInformasjon = sykmelding.mulighetForArbeid
     && ((sykmelding.mulighetForArbeid.aktivitetIkkeMulig433 && sykmelding.mulighetForArbeid.aktivitetIkkeMulig433.length > 0)
         || sykmelding.mulighetForArbeid.aarsakAktivitetIkkeMulig433
         || (sykmelding.mulighetForArbeid.aktivitetIkkeMulig434 && sykmelding.mulighetForArbeid.aktivitetIkkeMulig434.length > 0)
         || sykmelding.mulighetForArbeid.aarsakAktivitetIkkeMulig434);
+    return !!erEkstraInformasjon;
 };
 
 export const erFriskmeldingInformasjon = (sykmelding) => {
-    return sykmelding.friskmelding
+    const erEkstraInformasjon = sykmelding.friskmelding
         && (sykmelding.friskmelding.antarReturSammeArbeidsgiver
         || sykmelding.friskmelding.antarReturAnnenArbeidsgiver
         || sykmelding.friskmelding.utenArbeidsgiverAntarTilbakeIArbeid);
+    return !!erEkstraInformasjon;
 };
 
 export const erArbeidsforEtterPerioden = (sykmelding) => {
-    return sykmelding.friskmelding && sykmelding.friskmelding.arbeidsfoerEtterPerioden;
+    const erEkstraInformasjon = sykmelding.friskmelding && sykmelding.friskmelding.arbeidsfoerEtterPerioden;
+    return !!erEkstraInformasjon;
 };
 
 export const erHensynPaaArbeidsplassenInformasjon = (sykmelding) => {
-    return sykmelding.friskmelding && sykmelding.friskmelding.hensynPaaArbeidsplassen;
+    const erEkstraInformasjon = sykmelding.friskmelding && sykmelding.friskmelding.hensynPaaArbeidsplassen;
+    return !!erEkstraInformasjon;
 };
 
 export const erUtdypendeOpplysningerInformasjon = (sykmelding) => {
-    return sykmelding.utdypendeOpplysninger
+    const erEkstraInformasjon = sykmelding.utdypendeOpplysninger
         && (sykmelding.utdypendeOpplysninger.sykehistorie
             || sykmelding.utdypendeOpplysninger.paavirkningArbeidsevne
             || sykmelding.utdypendeOpplysninger.resultatAvBehandling
             || sykmelding.utdypendeOpplysninger.henvisningUtredningBehandling);
+    return !!erEkstraInformasjon;
 };
 
 export const erBedringAvArbeidsevnenInformasjon = (sykmelding) => {
-    return sykmelding.arbeidsevne
+    const erEkstraInformasjon = sykmelding.arbeidsevne
         && (sykmelding.arbeidsevne.tilretteleggingArbeidsplass
             || sykmelding.arbeidsevne.tiltakNAV
             || sykmelding.arbeidsevne.tiltakAndre);
+    return !!erEkstraInformasjon;
 };
 
 export const erMeldingTilNavInformasjon = (sykmelding) => {
-    return sykmelding.meldingTilNav && sykmelding.meldingTilNav.navBoerTaTakISaken;
+    const erEkstraInformasjon = sykmelding.meldingTilNav && sykmelding.meldingTilNav.navBoerTaTakISaken;
+    return !!erEkstraInformasjon;
 };
 
 export const erMeldingTilArbeidsgiverInformasjon = (sykmelding) => {
-    return sykmelding.innspillTilArbeidsgiver;
+    const erEkstraInformasjon = sykmelding.innspillTilArbeidsgiver;
+    return !!erEkstraInformasjon;
 };
 
 export const erTilbakeDateringInformasjon = (sykmelding) => {
-    return sykmelding.tilbakedatering
+    const erEkstraInformasjon = sykmelding.tilbakedatering
         && (sykmelding.tilbakedatering.dokumenterbarPasientkontakt
             || sykmelding.tilbakedatering.tilbakedatertBegrunnelse);
+    return !!erEkstraInformasjon;
 };
 
 export const erEkstraInformasjonISykmeldingen = (sykmelding) => {
-    return !!erEkstraDiagnoseInformasjon(sykmelding)
-        || !!erMulighetForArbeidInformasjon(sykmelding)
-        || !!erFriskmeldingInformasjon(sykmelding)
-        || !!erArbeidsforEtterPerioden(sykmelding)
-        || !!erHensynPaaArbeidsplassenInformasjon(sykmelding)
-        || !!erUtdypendeOpplysningerInformasjon(sykmelding)
-        || !!erBedringAvArbeidsevnenInformasjon(sykmelding)
-        || !!erMeldingTilNavInformasjon(sykmelding)
-        || !!erMeldingTilArbeidsgiverInformasjon(sykmelding)
-        || !!erTilbakeDateringInformasjon(sykmelding);
+    return erEkstraDiagnoseInformasjon(sykmelding)
+        || erMulighetForArbeidInformasjon(sykmelding)
+        || erFriskmeldingInformasjon(sykmelding)
+        || erArbeidsforEtterPerioden(sykmelding)
+        || erHensynPaaArbeidsplassenInformasjon(sykmelding)
+        || erUtdypendeOpplysningerInformasjon(sykmelding)
+        || erBedringAvArbeidsevnenInformasjon(sykmelding)
+        || erMeldingTilNavInformasjon(sykmelding)
+        || erMeldingTilArbeidsgiverInformasjon(sykmelding)
+        || erTilbakeDateringInformasjon(sykmelding);
 };
 
 export const finnArbeidssituasjonEllerArbeidsgiver = (sykmelding) => {

@@ -33,7 +33,7 @@ describe('sykmeldingUtils', () => {
 
            const erEkstraInfo = erEkstraDiagnoseInformasjon(sykmelding);
 
-           expect(!!erEkstraInfo).to.equal(true);
+           expect(erEkstraInfo).to.equal(true);
         });
         it('skal returnere false dersom sykmeldingen ikke inneholder ekstra informasjon om diagnose', () => {
             const sykmelding = {
@@ -47,7 +47,7 @@ describe('sykmeldingUtils', () => {
 
             const erIkkeEkstraInfo = erEkstraDiagnoseInformasjon(sykmelding);
 
-            expect(!!erIkkeEkstraInfo).to.equal(false);
+            expect(erIkkeEkstraInfo).to.equal(false);
         });
     });
 
@@ -86,7 +86,7 @@ describe('sykmeldingUtils', () => {
 
            const erEkstraInfo = erMulighetForArbeidInformasjon(sykmelding);
 
-           expect(!!erEkstraInfo).to.equal(true);
+           expect(erEkstraInfo).to.equal(true);
         });
         it('skal returnere false dersom sykmeldingen ikke inneholder informasjon om mulighet for arbeid', () => {
             const sykmelding = {
@@ -106,7 +106,7 @@ describe('sykmeldingUtils', () => {
 
             const erIkkeEkstraInfo = erMulighetForArbeidInformasjon(sykmelding);
 
-            expect(!!erIkkeEkstraInfo).to.equal(false);
+            expect(erIkkeEkstraInfo).to.equal(false);
         });
     });
 
@@ -122,7 +122,7 @@ describe('sykmeldingUtils', () => {
 
            const erEkstraInfo = erFriskmeldingInformasjon(sykmelding);
 
-           expect(!!erEkstraInfo).to.equal(true);
+           expect(erEkstraInfo).to.equal(true);
         });
         it('skal returnere false dersom sykmeldingen ikke inneholder informasjon om friskmelding', () => {
             const sykmelding = {
@@ -136,7 +136,7 @@ describe('sykmeldingUtils', () => {
 
             const erIkkeEkstraInfo = erFriskmeldingInformasjon(sykmelding);
 
-            expect(!!erIkkeEkstraInfo).to.equal(false);
+            expect(erIkkeEkstraInfo).to.equal(false);
         });
     });
 
@@ -150,7 +150,7 @@ describe('sykmeldingUtils', () => {
 
            const erEkstraInfo = erArbeidsforEtterPerioden(sykmelding);
 
-           expect(!!erEkstraInfo).to.equal(true);
+           expect(erEkstraInfo).to.equal(true);
         });
         it('skal returnere false dersom sykmeldingen ikke inneholder informasjon om den sykmeldte er arbeidsfør etter perioden', () => {
             const sykmelding = {
@@ -161,7 +161,7 @@ describe('sykmeldingUtils', () => {
 
             const erIkkeEkstraInfo = erArbeidsforEtterPerioden(sykmelding);
 
-            expect(!!erIkkeEkstraInfo).to.equal(false);
+            expect(erIkkeEkstraInfo).to.equal(false);
         });
     });
 
@@ -175,7 +175,7 @@ describe('sykmeldingUtils', () => {
 
            const erEkstraInfo = erHensynPaaArbeidsplassenInformasjon(sykmelding);
 
-           expect(!!erEkstraInfo).to.equal(true);
+           expect(erEkstraInfo).to.equal(true);
         });
         it('skal returnere false dersom sykmeldingen ikke inneholder informasjon om hensyn på arbeidsplassen', () => {
             const sykmelding = {
@@ -187,7 +187,7 @@ describe('sykmeldingUtils', () => {
 
             const erIkkeEkstraInfo = erHensynPaaArbeidsplassenInformasjon(sykmelding);
 
-            expect(!!erIkkeEkstraInfo).to.equal(false);
+            expect(erIkkeEkstraInfo).to.equal(false);
         });
     });
 
@@ -204,7 +204,7 @@ describe('sykmeldingUtils', () => {
 
            const erEkstraInfo = erUtdypendeOpplysningerInformasjon(sykmelding);
 
-           expect(!!erEkstraInfo).to.equal(true);
+           expect(erEkstraInfo).to.equal(true);
         });
         it('skal returnere false dersom sykmeldingen ikke inneholder utdypende opplysninger', () => {
             const sykmelding = {
@@ -219,7 +219,7 @@ describe('sykmeldingUtils', () => {
 
             const erIkkeEkstraInfo = erUtdypendeOpplysningerInformasjon(sykmelding);
 
-            expect(!!erIkkeEkstraInfo).to.equal(false);
+            expect(erIkkeEkstraInfo).to.equal(false);
         });
     });
 
@@ -235,7 +235,7 @@ describe('sykmeldingUtils', () => {
 
            const erEkstraInfo = erBedringAvArbeidsevnenInformasjon(sykmelding);
 
-           expect(!!erEkstraInfo).to.equal(true);
+           expect(erEkstraInfo).to.equal(true);
         });
         it('skal returnere false dersom sykmeldingen ikke inneholder informasjon om bedring av arbeidsevnen', () => {
             const sykmelding = {
@@ -249,7 +249,7 @@ describe('sykmeldingUtils', () => {
 
             const erIkkeEkstraInfo = erBedringAvArbeidsevnenInformasjon(sykmelding);
 
-            expect(!!erIkkeEkstraInfo).to.equal(false);
+            expect(erIkkeEkstraInfo).to.equal(false);
         });
     });
 
@@ -263,7 +263,7 @@ describe('sykmeldingUtils', () => {
 
            const erEkstraInfo = erMeldingTilNavInformasjon(sykmelding);
 
-           expect(!!erEkstraInfo).to.equal(true);
+           expect(erEkstraInfo).to.equal(true);
         });
         it('skal returnere false dersom sykmeldingen ikke inneholder informasjon om melding til nav', () => {
             const sykmelding = {
@@ -275,7 +275,7 @@ describe('sykmeldingUtils', () => {
 
             const erIkkeEkstraInfo = erMeldingTilNavInformasjon(sykmelding);
 
-            expect(!!erIkkeEkstraInfo).to.equal(false);
+            expect(erIkkeEkstraInfo).to.equal(false);
         });
     });
 
@@ -287,7 +287,7 @@ describe('sykmeldingUtils', () => {
 
            const erEkstraInfo = erMeldingTilArbeidsgiverInformasjon(sykmelding);
 
-           expect(!!erEkstraInfo).to.equal(true);
+           expect(erEkstraInfo).to.equal(true);
         });
         it('skal returnere false dersom sykmeldingen ikke inneholder informasjon om melding til arbeidsgiver', () => {
             const sykmelding = {
@@ -297,7 +297,7 @@ describe('sykmeldingUtils', () => {
 
             const erIkkeEkstraInfo = erMeldingTilArbeidsgiverInformasjon(sykmelding);
 
-            expect(!!erIkkeEkstraInfo).to.equal(false);
+            expect(erIkkeEkstraInfo).to.equal(false);
         });
     });
 
@@ -312,7 +312,7 @@ describe('sykmeldingUtils', () => {
 
            const erEkstraInfo = erTilbakeDateringInformasjon(sykmelding);
 
-           expect(!!erEkstraInfo).to.equal(true);
+           expect(erEkstraInfo).to.equal(true);
         });
         it('skal returnere false dersom sykmeldingen ikke inneholder informasjon om tilbakedatering', () => {
             const sykmelding = {
@@ -325,7 +325,7 @@ describe('sykmeldingUtils', () => {
 
             const erIkkeEkstraInfo = erTilbakeDateringInformasjon(sykmelding);
 
-            expect(!!erIkkeEkstraInfo).to.equal(false);
+            expect(erIkkeEkstraInfo).to.equal(false);
         });
     });
 
