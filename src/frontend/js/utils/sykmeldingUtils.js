@@ -87,7 +87,7 @@ export const erEkstraInformasjonISykmeldingen = (sykmelding) => {
         || erTilbakeDateringInformasjon(sykmelding);
 };
 
-export const finnArbeidssituasjonEllerArbeidsgiver = (sykmelding) => {
+export const arbeidsgivernavnEllerArbeidssituasjon = (sykmelding) => {
     if (sykmelding.innsendtArbeidsgivernavn && sykmelding.innsendtArbeidsgivernavn.length > 0) {
         return sykmelding.innsendtArbeidsgivernavn;
     }
@@ -104,13 +104,13 @@ export const finnArbeidssituasjonEllerArbeidsgiver = (sykmelding) => {
     }
 };
 
-export const finnInnsendteSykmeldinger = (sykmeldinger) => {
+export const sykmeldingerMedStatusSendt = (sykmeldinger) => {
     return sykmeldinger.filter((sykmelding) => {
         return sykmelding.status === sykmeldingstatuser.SENDT;
     });
 };
 
-export const finnSykmeldingerInnenforOppfolgingstilfellet = (sykmeldinger, oppfolgingstilfelleperioder) => {
+export const sykmeldingerInnenforOppfolgingstilfellet = (sykmeldinger, oppfolgingstilfelleperioder) => {
     return sykmeldinger.filter((sykmelding) => {
         const tilfelleperioderReducer = oppfolgingstilfelleperioder[sykmelding.orgnummer];
         const sykmeldingStart = new Date(sykmelding.startLegemeldtFravaer);
@@ -125,7 +125,7 @@ export const finnSykmeldingerInnenforOppfolgingstilfellet = (sykmeldinger, oppfo
     });
 };
 
-export const sorterSykmeldingerPaaUtstedelsesdato = (sykmeldinger) => {
+export const sykmeldingerSortertNyestTilEldst = (sykmeldinger) => {
     return sykmeldinger.sort((sykmelding1, sykmelding2) => {
         const dato1 = new Date(sykmelding1.bekreftelse.utstedelsesdato);
         const dato2 = new Date(sykmelding2.bekreftelse.utstedelsesdato);
@@ -136,7 +136,7 @@ export const sorterSykmeldingerPaaUtstedelsesdato = (sykmeldinger) => {
     });
 };
 
-export const sorterSykmeldingerPaaVirksomhetsnummer = (sykmeldinger) => {
+export const sykmeldingerGruppertEtterVirksomhet = (sykmeldinger) => {
     return sykmeldinger && sykmeldinger.length > 0 && sykmeldinger.reduce((memo, sykmelding) => {
         const virksomhetsnummer = sykmelding.mottakendeArbeidsgiver && sykmelding.mottakendeArbeidsgiver.virksomhetsnummer;
         const memo2 = { ...memo };
@@ -148,7 +148,7 @@ export const sorterSykmeldingerPaaVirksomhetsnummer = (sykmeldinger) => {
     }, {});
 };
 
-export const sorterSykmeldingPerioderEtterDato = (perioder) => {
+export const sykmeldingperioderSortertEldstTilNyest = (perioder) => {
     return perioder.sort((periode1, periode2) => {
         return periode1.fom > periode2.fom
             ? 1

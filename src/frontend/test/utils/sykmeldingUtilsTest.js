@@ -10,12 +10,12 @@ import {
     erMulighetForArbeidInformasjon,
     erTilbakeDateringInformasjon,
     erUtdypendeOpplysningerInformasjon,
-    finnArbeidssituasjonEllerArbeidsgiver,
-    finnInnsendteSykmeldinger,
-    finnSykmeldingerInnenforOppfolgingstilfellet,
-    sorterSykmeldingerPaaUtstedelsesdato,
-    sorterSykmeldingerPaaVirksomhetsnummer,
-    sorterSykmeldingPerioderEtterDato,
+    arbeidsgivernavnEllerArbeidssituasjon,
+    sykmeldingerMedStatusSendt,
+    sykmeldingerInnenforOppfolgingstilfellet,
+    sykmeldingerSortertNyestTilEldst,
+    sykmeldingerGruppertEtterVirksomhet,
+    sykmeldingperioderSortertEldstTilNyest,
     stringMedAlleGraderingerFraSykmeldingPerioder,
 } from '../../js/utils/sykmeldingUtils';
 import { ANTALL_MS_DAG } from '../../js/utils/datoUtils';
@@ -329,13 +329,13 @@ describe('sykmeldingUtils', () => {
         });
     });
 
-    describe('finnArbeidssituasjonEllerArbeidsgiver', () => {
+    describe('arbeidsgivernavnEllerArbeidssituasjon', () => {
         it('skal returnere navnet på arbeidsgiveren dersom det er satt', () => {
             const sykmelding = {
                 innsendtArbeidsgivernavn: 'Test Arbeidsgiver',
             };
 
-           const innsendtArbeidsgivernavn = finnArbeidssituasjonEllerArbeidsgiver(sykmelding);
+           const innsendtArbeidsgivernavn = arbeidsgivernavnEllerArbeidssituasjon(sykmelding);
 
            expect(innsendtArbeidsgivernavn).to.equal('Test Arbeidsgiver');
         });
@@ -348,13 +348,13 @@ describe('sykmeldingUtils', () => {
             };
 
 
-            const arbeidssituasjon = finnArbeidssituasjonEllerArbeidsgiver(sykmelding);
+            const arbeidssituasjon = arbeidsgivernavnEllerArbeidssituasjon(sykmelding);
 
             expect(arbeidssituasjon).to.equal('Selvstendig næringsdrivende');
         });
     });
 
-    describe('finnInnsendteSykmeldinger', () => {
+    describe('sykmeldingerMedStatusSendt', () => {
         it('skal returnere en liste med bare innsendte sykmeldinger', () => {
             const sykmeldinger = [
                 {
@@ -369,16 +369,16 @@ describe('sykmeldingUtils', () => {
             ];
 
 
-           const sendteSykmeldinger = finnInnsendteSykmeldinger(sykmeldinger);
+           const sendteSykmeldinger = sykmeldingerMedStatusSendt(sykmeldinger);
 
            expect(sendteSykmeldinger.length).to.equal(1);
         });
     });
 
-    describe('finnSykmeldingerInnenforOppfolgingstilfellet', () => {
+    describe('sykmeldingerInnenforOppfolgingstilfellet', () => {
         it('skal returnere en liste med bare sykmeldinger innenfor oppfølgingstilfellet', () => {
-            let oppfolgingstilfeller = [];
-            oppfolgingstilfeller['123'] = {
+            let oppfolgingstilfelleperioder = [];
+            oppfolgingstilfelleperioder['123'] = {
                 data: [
                     {
                         orgnummer: '123',
@@ -403,7 +403,7 @@ describe('sykmeldingUtils', () => {
                 ],
             };
 
-            oppfolgingstilfeller['321'] = {
+            oppfolgingstilfelleperioder['321'] = {
                 data: [
                     {
                         orgnummer: '321',
@@ -430,14 +430,14 @@ describe('sykmeldingUtils', () => {
             ];
 
 
-           const sykmeldingerInnenforOppfolgingstilfellet = finnSykmeldingerInnenforOppfolgingstilfellet(sykmeldinger, oppfolgingstilfeller);
+           const sykmeldingerIOppfolgingstilfellet = sykmeldingerInnenforOppfolgingstilfellet(sykmeldinger, oppfolgingstilfelleperioder);
 
-           expect(sykmeldingerInnenforOppfolgingstilfellet.length).to.equal(1);
-           expect(sykmeldingerInnenforOppfolgingstilfellet[0].orgnummer).to.equal('123');
+           expect(sykmeldingerIOppfolgingstilfellet.length).to.equal(1);
+           expect(sykmeldingerIOppfolgingstilfellet[0].orgnummer).to.equal('123');
         });
     });
 
-    describe('sorterSykmeldingerPaaUtstedelsesdato', () => {
+    describe('sykmeldingerSortertNyestTilEldst', () => {
         it('skal returnere en liste med sykmeldinger sortert etter utstedelsesdato', () => {
 
             const sykmeldinger = [
@@ -469,7 +469,7 @@ describe('sykmeldingUtils', () => {
             ];
 
 
-           const sykmeldingerSortertPaaUtstedelsesdato = sorterSykmeldingerPaaUtstedelsesdato(sykmeldinger);
+           const sykmeldingerSortertPaaUtstedelsesdato = sykmeldingerSortertNyestTilEldst(sykmeldinger);
 
            expect(sykmeldingerSortertPaaUtstedelsesdato.length).to.equal(5);
            expect(sykmeldingerSortertPaaUtstedelsesdato[0].bekreftelse.utstedelsesdato).to.equal('2019-01-05');
@@ -480,7 +480,7 @@ describe('sykmeldingUtils', () => {
         });
     });
 
-    describe('sorterSykmeldingerPaaVirksomhetsnummer', () => {
+    describe('sykmeldingerGruppertEtterVirksomhet', () => {
         it('skal returnere en liste med én liste av sykmeldinger per virksomhet', () => {
 
             const sykmeldinger = [
@@ -517,7 +517,7 @@ describe('sykmeldingUtils', () => {
             ];
 
 
-           const sykmeldingerSortertPaaVirksomhetsnummer = sorterSykmeldingerPaaVirksomhetsnummer(sykmeldinger);
+           const sykmeldingerSortertPaaVirksomhetsnummer = sykmeldingerGruppertEtterVirksomhet(sykmeldinger);
 
            expect(Object.keys(sykmeldingerSortertPaaVirksomhetsnummer).length).to.equal(3);
            expect(Object.keys(sykmeldingerSortertPaaVirksomhetsnummer['1']).length).to.equal(3);
@@ -527,7 +527,7 @@ describe('sykmeldingUtils', () => {
         });
     });
 
-    describe('sorterSykmeldingPerioderEtterDato', () => {
+    describe('sykmeldingperioderSortertEldstTilNyest', () => {
         it('skal returnere en liste med perioder sortert etter dato', () => {
 
             const sykmeldingperioder = [
@@ -549,7 +549,7 @@ describe('sykmeldingUtils', () => {
             ];
 
 
-           const sykmeldingperioderSortertEtterDato = sorterSykmeldingPerioderEtterDato(sykmeldingperioder);
+           const sykmeldingperioderSortertEtterDato = sykmeldingperioderSortertEldstTilNyest(sykmeldingperioder);
 
            expect(sykmeldingperioderSortertEtterDato.length).to.equal(5);
            expect(sykmeldingperioderSortertEtterDato[0].fom).to.equal('2019-01-01');

@@ -1,14 +1,14 @@
 import { expect } from 'chai';
 import {
-    filtrerLederePaaArbeidstakersMotebehov,
-    filtrerLederePaaOppfolgingstilfelleperioder,
-    finnLedereUtenInnsendtMotebehov,
+    ledereIVirksomheterMedMotebehovsvarFraArbeidstaker,
+    ledereMedOppfolgingstilfelleInnenforMotebehovperioden,
+    ledereUtenMotebehovsvar,
     fjernLedereMedInnsendtMotebehov,
 } from '../../js/utils/ledereUtils';
-import {ANTALL_MS_DAG} from "../../js/utils/datoUtils";
+import { ANTALL_MS_DAG } from '../../js/utils/datoUtils';
 
 describe('ledereUtils', () => {
-    describe('filtrerLederePaaArbeidstakersMotebehov', () => {
+    describe('ledereIVirksomheterMedMotebehovsvarFraArbeidstaker', () => {
         it('skal finne alle ledere som hører til en bedrift den sykmeldte har sendt inn møtebehovsvar for', () => {
             const ledere = [
                 {
@@ -37,7 +37,7 @@ describe('ledereUtils', () => {
                 },
             ];
 
-            const filtrertLederListe = filtrerLederePaaArbeidstakersMotebehov(ledere, motebehovData);
+            const filtrertLederListe = ledereIVirksomheterMedMotebehovsvarFraArbeidstaker(ledere, motebehovData);
 
             expect(filtrertLederListe.length).to.equal(2);
             expect(filtrertLederListe[0].orgnummer).to.equal('123');
@@ -70,7 +70,7 @@ describe('ledereUtils', () => {
            expect(filtrertLederListe[0].orgnummer).to.equal('321')
         });
     });
-    describe('filtrerLederePaaOppfolgingstilfelleperioder', () => {
+    describe('ledereMedOppfolgingstilfelleInnenforMotebehovperioden', () => {
         it('skal fjerne ledere uten oppfølgingstilfelle innenfor møtebehovperioden', () => {
             const ledere = [
                 {
@@ -123,13 +123,13 @@ describe('ledereUtils', () => {
                 ],
             };
 
-           const filtrertLederListe = filtrerLederePaaOppfolgingstilfelleperioder(ledere, oppfolgingstilfeller);
+           const filtrertLederListe = ledereMedOppfolgingstilfelleInnenforMotebehovperioden(ledere, oppfolgingstilfeller);
 
            expect(filtrertLederListe.length).to.equal(1);
            expect(filtrertLederListe[0].orgnummer).to.equal('123')
         });
     });
-    describe('finnLedereUtenInnsendtMotebehov', () => {
+    describe('ledereUtenMotebehovsvar', () => {
         it('skal finne ledere som ikke har sendt inn møtebehov, men som er i møtebehovperioden', () => {
             const ledere = [
                 {
@@ -219,13 +219,11 @@ describe('ledereUtils', () => {
                 },
             ];
 
-           const filtrertLederListe = finnLedereUtenInnsendtMotebehov(ledere, motebehovData, oppfolgingstilfeller);
+           const filtrertLederListe = ledereUtenMotebehovsvar(ledere, motebehovData, oppfolgingstilfeller);
 
            expect(filtrertLederListe.length).to.equal(1);
            expect(filtrertLederListe[0].orgnummer).to.equal('999')
         });
-    });
-    describe('finnLedereUtenInnsendtMotebehov', () => {
         it('skal finne ledere som ikke har sendt inn møtebehov men hadde muligheten, og SM svarte', () => {
             const oppfolgingstilfeller = [];
             const ledere = [
@@ -260,10 +258,10 @@ describe('ledereUtils', () => {
                 },
             ];
 
-           const filtrertLederListe = finnLedereUtenInnsendtMotebehov(ledere, motebehovData, oppfolgingstilfeller);
+            const filtrertLederListe = ledereUtenMotebehovsvar(ledere, motebehovData, oppfolgingstilfeller);
 
-           expect(filtrertLederListe.length).to.equal(1);
-           expect(filtrertLederListe[0].orgnummer).to.equal('123')
+            expect(filtrertLederListe.length).to.equal(1);
+            expect(filtrertLederListe[0].orgnummer).to.equal('123')
         });
     });
 });

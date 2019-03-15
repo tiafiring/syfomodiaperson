@@ -1,4 +1,4 @@
-import { hentDagerMellomDatoer } from './datoUtils';
+import { dagerMellomDatoer } from './datoUtils';
 
 export const sorterMotebehovDataEtterDato = (a, b) => {
     return b.opprettetDato === a.opprettetDato ? 0 : b.opprettetDato > a.opprettetDato ? 1 : -1;
@@ -27,7 +27,7 @@ export const erOppfoelgingsdatoPassertMed16UkerOgIkke26Uker = (startOppfolgingsd
     const dagensDato = new Date();
     dagensDato.setHours(0, 0, 0, 0);
 
-    const antallDagerSidenOppfoelgingsTilfelleStart = hentDagerMellomDatoer(oppfoelgingstilfelleStartDato, dagensDato);
+    const antallDagerSidenOppfoelgingsTilfelleStart = dagerMellomDatoer(oppfoelgingstilfelleStartDato, dagensDato);
 
     return antallDagerSidenOppfoelgingsTilfelleStart >= OPPFOLGINGSFORLOP_MOTEBEHOV_START_DAGER
         && antallDagerSidenOppfoelgingsTilfelleStart < OPPFOLGINGSFORLOP_MOTEBEHOV_SLUTT_DAGER;

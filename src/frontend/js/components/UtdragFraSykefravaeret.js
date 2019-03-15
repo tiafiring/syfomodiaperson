@@ -10,12 +10,12 @@ import { Utvidbar } from '@navikt/digisyfo-npm';
 import SykmeldingMotebehovVisning from './SykmeldingMotebehovVisning';
 import {
     erEkstraInformasjonISykmeldingen,
-    finnArbeidssituasjonEllerArbeidsgiver,
-    finnInnsendteSykmeldinger,
-    finnSykmeldingerInnenforOppfolgingstilfellet,
-    sorterSykmeldingerPaaUtstedelsesdato,
-    sorterSykmeldingerPaaVirksomhetsnummer,
-    sorterSykmeldingPerioderEtterDato,
+    arbeidsgivernavnEllerArbeidssituasjon,
+    sykmeldingerMedStatusSendt,
+    sykmeldingerInnenforOppfolgingstilfellet,
+    sykmeldingerSortertNyestTilEldst,
+    sykmeldingerGruppertEtterVirksomhet,
+    sykmeldingperioderSortertEldstTilNyest,
     stringMedAlleGraderingerFraSykmeldingPerioder,
 } from '../utils/sykmeldingUtils';
 import { finnMiljoStreng } from '../utils';
@@ -82,7 +82,7 @@ export const UtvidbarTittel = (
         sykmelding,
     }) => {
     const erViktigInformasjon = erEkstraInformasjonISykmeldingen(sykmelding);
-    const sykmeldingPerioderSortertEtterDato = sorterSykmeldingPerioderEtterDato(sykmelding.mulighetForArbeid.perioder);
+    const sykmeldingPerioderSortertEtterDato = sykmeldingperioderSortertEldstTilNyest(sykmelding.mulighetForArbeid.perioder);
     return (<div className="utdragFraSykefravaeret__utvidbarTittel">
         <div>
             <span className="utvidbarTittel__periode">{`${tilLesbarPeriodeMedArstall(tidligsteFom(sykmelding.mulighetForArbeid.perioder), senesteTom(sykmelding.mulighetForArbeid.perioder))}: `}</span>
@@ -105,7 +105,7 @@ export const SykmeldingerForVirksomhet = (
         sykmeldinger,
     }) => {
     return (<div className="utdragFraSykefravaeret__sykmeldingerForVirksomhet">
-        <h4>{finnArbeidssituasjonEllerArbeidsgiver(sykmeldinger[0])}</h4>
+        <h4>{arbeidsgivernavnEllerArbeidssituasjon(sykmeldinger[0])}</h4>
         {
             sykmeldinger.map((sykmelding, index) => {
                 return (<div key={index}>
@@ -129,10 +129,10 @@ export const Sykmeldinger = (
         oppfolgingstilfelleperioder,
         sykmeldinger,
     }) => {
-    const innsendteSykmeldinger = finnInnsendteSykmeldinger(sykmeldinger);
-    const sykmeldingerInnenforOppfolgingstilfellet = finnSykmeldingerInnenforOppfolgingstilfellet(innsendteSykmeldinger, oppfolgingstilfelleperioder);
-    const sykmeldingerSortertPaaUtstedelsesdato = sorterSykmeldingerPaaUtstedelsesdato(sykmeldingerInnenforOppfolgingstilfellet);
-    const sykmeldingerSortertPaaVirksomhet = sorterSykmeldingerPaaVirksomhetsnummer(sykmeldingerSortertPaaUtstedelsesdato);
+    const innsendteSykmeldinger = sykmeldingerMedStatusSendt(sykmeldinger);
+    const sykmeldingerIOppfolgingstilfellet = sykmeldingerInnenforOppfolgingstilfellet(innsendteSykmeldinger, oppfolgingstilfelleperioder);
+    const sykmeldingerSortertPaaUtstedelsesdato = sykmeldingerSortertNyestTilEldst(sykmeldingerIOppfolgingstilfellet);
+    const sykmeldingerSortertPaaVirksomhet = sykmeldingerGruppertEtterVirksomhet(sykmeldingerSortertPaaUtstedelsesdato);
     return (<div className="utdragFraSykefravaeret__sykmeldinger">
         <h3>{tekster.sykmeldinger.header}</h3>
         {

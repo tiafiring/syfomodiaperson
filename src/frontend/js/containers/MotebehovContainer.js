@@ -32,7 +32,7 @@ import {
     ikkeHenterEllerForsoktHentetOppfoelgingsdialoger,
     ikkeHenterEllerForsoktHentetSykmeldinger,
 } from '../utils/reducerUtils';
-import { finnLedereUtenInnsendtMotebehov } from '../utils/ledereUtils';
+import { ledereUtenMotebehovsvar } from '../utils/ledereUtils';
 import Motebehov from '../components/Motebehov';
 import { bindActionCreators } from 'redux';
 
@@ -170,7 +170,7 @@ export const mapStateToProps = (state, ownProps) => {
 
     const ledereData = state.ledere.data;
     const oppfolgingstilfelleperioder = state.oppfolgingstilfelleperioder;
-    const ledereUtenInnsendtMotebehov = finnLedereUtenInnsendtMotebehov(ledereData, motebehovData, oppfolgingstilfelleperioder);
+    const ledereUtenInnsendtMotebehov = ledereUtenMotebehovsvar(ledereData, motebehovData, oppfolgingstilfelleperioder);
 
     const aktiveDialoger = state.oppfoelgingsdialoger.data.filter((dialog) => {
         return dialog.status !== 'AVBRUTT' && new Date(dialog.godkjentPlan.gyldighetstidspunkt.tom) > new Date();

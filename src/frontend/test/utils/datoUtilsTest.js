@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import {
-    hentDagerMellomDatoer,
+    dagerMellomDatoer,
     restdatoTildato,
     restdatoTilLesbarDato,
     tilDatoMedUkedagOgMaanedNavn,
@@ -50,16 +50,16 @@ describe('datoUtils', () => {
         it('Skal gi en string med periode der begge datoer har dato, måned og år, skilt av punktum, uten dag- eller månednavn', () => {
             const restDatoFom = '2019-03-11';
             const restDatoTom = '2019-10-02';
-            const dato = tilLesbarPeriodeMedAarUtenMaanednavn(restDatoFom, restDatoTom);
-            expect(dato).to.equal('11.03.2019 - 02.10.2019');
+            const periode = tilLesbarPeriodeMedAarUtenMaanednavn(restDatoFom, restDatoTom);
+            expect(periode).to.equal('11.03.2019 - 02.10.2019');
         });
     });
-    describe('hentDagerMellomDatoer', () => {
+    describe('dagerMellomDatoer', () => {
         it('Skal gi antall dager mellom to datoer', () => {
             const restDatoFom = new Date('2019-03-11');
             const restDatoTom = new Date('2019-03-15');
-            const dato = hentDagerMellomDatoer(restDatoFom, restDatoTom);
-            expect(dato).to.equal(4);
+            const antallDager = dagerMellomDatoer(restDatoFom, restDatoTom);
+            expect(antallDager).to.equal(4);
         });
     });
 });
