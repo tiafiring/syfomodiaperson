@@ -1,7 +1,11 @@
 import { expect } from 'chai';
 import {
+    dagerMellomDatoer,
     restdatoTildato,
     restdatoTilLesbarDato,
+    tilDatoMedUkedagOgMaanedNavn,
+    tilLesbarDatoMedAarUtenMaanedNavn,
+    tilLesbarPeriodeMedAarUtenMaanednavn,
     visKlokkeslett,
 } from '../../js/utils/datoUtils';
 
@@ -26,6 +30,36 @@ describe('datoUtils', () => {
             const restDato = '2017-02-01';
             const dato = restdatoTilLesbarDato(restDato);
             expect(dato).to.equal('1. februar 2017');
+        });
+    });
+    describe('tilDatoMedUkedagOgMaanedNavn', () => {
+        it('Skal gi en string med dato, ukedag, månednavn, og år', () => {
+            const restDato = '2019-03-11';
+            const dato = tilDatoMedUkedagOgMaanedNavn(restDato);
+            expect(dato).to.equal('Mandag 11. mars 2019');
+        });
+    });
+    describe('tilLesbarDatoMedAarUtenMaanedNavn', () => {
+        it('Skal gi en string med dato, måned og år, skilt av punktum, uten dag- eller månednavn', () => {
+            const restDato = '2019-03-11';
+            const dato = tilLesbarDatoMedAarUtenMaanedNavn(restDato);
+            expect(dato).to.equal('11.03.2019');
+        });
+    });
+    describe('tilLesbarPeriodeMedAarUtenMaanednavn', () => {
+        it('Skal gi en string med periode der begge datoer har dato, måned og år, skilt av punktum, uten dag- eller månednavn', () => {
+            const restDatoFom = '2019-03-11';
+            const restDatoTom = '2019-10-02';
+            const periode = tilLesbarPeriodeMedAarUtenMaanednavn(restDatoFom, restDatoTom);
+            expect(periode).to.equal('11.03.2019 - 02.10.2019');
+        });
+    });
+    describe('dagerMellomDatoer', () => {
+        it('Skal gi antall dager mellom to datoer', () => {
+            const restDatoFom = new Date('2019-03-11');
+            const restDatoTom = new Date('2019-03-15');
+            const antallDager = dagerMellomDatoer(restDatoFom, restDatoTom);
+            expect(antallDager).to.equal(4);
         });
     });
 });

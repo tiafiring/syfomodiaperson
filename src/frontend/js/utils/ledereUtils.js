@@ -8,7 +8,7 @@ import {
     harArbeidstakerSvartPaaMotebehov,
 } from './motebehovUtils';
 
-export const filtrerLederePaaArbeidstakersMotebehov = (ledereData, motebehovData) => {
+export const ledereIVirksomheterMedMotebehovsvarFraArbeidstaker = (ledereData, motebehovData) => {
     return ledereData.filter((leder) => {
         return motebehovData.findIndex((motebehov) => {
             return motebehov.opprettetAv === motebehov.aktorId && leder.orgnummer === motebehov.virksomhetsnummer;
@@ -24,7 +24,7 @@ export const fjernLedereMedInnsendtMotebehov = (ledereListe, motebehovData) => {
     });
 };
 
-export const filtrerLederePaaOppfolgingstilfelleperioder = (ledereData, oppfolgingstilfelleperioder) => {
+export const ledereMedOppfolgingstilfelleInnenforMotebehovperioden = (ledereData, oppfolgingstilfelleperioder) => {
     return ledereData.filter((leder) => {
         const startOppfolgingsdato = oppfolgingstilfelleperioder[leder.orgnummer] && oppfolgingstilfelleperioder[leder.orgnummer].data
             ? tidligsteFom(oppfolgingstilfelleperioder[leder.orgnummer].data)
@@ -40,11 +40,11 @@ export const filtrerLederePaaOppfolgingstilfelleperioder = (ledereData, oppfolgi
 };
 
 
-export const finnLedereUtenInnsendtMotebehov = (ledereData, motebehovData, oppfolgingstilfelleperioder) => {
+export const ledereUtenMotebehovsvar = (ledereData, motebehovData, oppfolgingstilfelleperioder) => {
     const arbeidstakerHarSvartPaaMotebehov = motebehovData && harArbeidstakerSvartPaaMotebehov(motebehovData);
 
     const filtrertLederListe = arbeidstakerHarSvartPaaMotebehov
-        ? filtrerLederePaaArbeidstakersMotebehov(ledereData, motebehovData)
-        : filtrerLederePaaOppfolgingstilfelleperioder(ledereData, oppfolgingstilfelleperioder);
+        ? ledereIVirksomheterMedMotebehovsvarFraArbeidstaker(ledereData, motebehovData)
+        : ledereMedOppfolgingstilfelleInnenforMotebehovperioden(ledereData, oppfolgingstilfelleperioder);
     return fjernLedereMedInnsendtMotebehov(filtrertLederListe, motebehovData);
 };

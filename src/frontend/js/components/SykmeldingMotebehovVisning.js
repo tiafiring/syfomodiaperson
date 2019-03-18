@@ -16,7 +16,7 @@ import {
     erMeldingTilArbeidsgiverInformasjon,
     erMeldingTilNavInformasjon,
     erUtdypendeOpplysningerInformasjon,
-    sorterSykmeldingPerioderEtterDato,
+    sykmeldingperioderSortertEldstTilNyest,
 } from '../utils/sykmeldingUtils';
 import { tilLesbarPeriodeMedAarUtenMaanednavn } from '../utils/datoUtils';
 
@@ -185,7 +185,7 @@ export const GenerellSykmeldingInfo = (
     const biDiagnoser = sykmelding.diagnose.bidiagnoser
         ? sykmelding.diagnose.bidiagnoser
         : [];
-    const sykmeldingPerioderSortertEtterDato = sorterSykmeldingPerioderEtterDato(sykmelding.mulighetForArbeid.perioder);
+    const sykmeldingPerioderSortertEtterDato = sykmeldingperioderSortertEldstTilNyest(sykmelding.mulighetForArbeid.perioder);
     return (<div className="sykmeldingMotebehovVisning__avsnitt">
         <Perioder perioder={sykmeldingPerioderSortertEtterDato} />
 
