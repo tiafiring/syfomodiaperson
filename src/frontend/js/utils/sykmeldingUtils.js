@@ -67,12 +67,6 @@ export const erMeldingTilArbeidsgiverInformasjon = (sykmelding) => {
     return !!erEkstraInformasjon;
 };
 
-export const erTilbakeDateringInformasjon = (sykmelding) => {
-    const erEkstraInformasjon = sykmelding.tilbakedatering
-        && (sykmelding.tilbakedatering.dokumenterbarPasientkontakt
-            || sykmelding.tilbakedatering.tilbakedatertBegrunnelse);
-    return !!erEkstraInformasjon;
-};
 
 export const erEkstraInformasjonISykmeldingen = (sykmelding) => {
     return erEkstraDiagnoseInformasjon(sykmelding)
@@ -83,8 +77,7 @@ export const erEkstraInformasjonISykmeldingen = (sykmelding) => {
         || erUtdypendeOpplysningerInformasjon(sykmelding)
         || erBedringAvArbeidsevnenInformasjon(sykmelding)
         || erMeldingTilNavInformasjon(sykmelding)
-        || erMeldingTilArbeidsgiverInformasjon(sykmelding)
-        || erTilbakeDateringInformasjon(sykmelding);
+        || erMeldingTilArbeidsgiverInformasjon(sykmelding);
 };
 
 export const arbeidsgivernavnEllerArbeidssituasjon = (sykmelding) => {
