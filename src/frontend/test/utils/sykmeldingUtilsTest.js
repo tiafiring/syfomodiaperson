@@ -8,7 +8,6 @@ import {
     erMeldingTilArbeidsgiverInformasjon,
     erMeldingTilNavInformasjon,
     erMulighetForArbeidInformasjon,
-    erTilbakeDateringInformasjon,
     erUtdypendeOpplysningerInformasjon,
     arbeidsgivernavnEllerArbeidssituasjon,
     sykmeldingerMedStatusSendt,
@@ -296,34 +295,6 @@ describe('sykmeldingUtils', () => {
 
 
             const erIkkeEkstraInfo = erMeldingTilArbeidsgiverInformasjon(sykmelding);
-
-            expect(erIkkeEkstraInfo).to.equal(false);
-        });
-    });
-
-    describe('erTilbakeDateringInformasjon', () => {
-        it('skal returnere true dersom sykmeldingen inneholder informasjon om tilbakedatering', () => {
-            const sykmelding = {
-                tilbakedatering: {
-                    dokumenterbarPasientkontakt: '2018-09-05',
-                    tilbakedatertBegrunnelse: 'Pasienten ville heller ligge på sofaen!',
-                },
-            };
-
-           const erEkstraInfo = erTilbakeDateringInformasjon(sykmelding);
-
-           expect(erEkstraInfo).to.equal(true);
-        });
-        it('skal returnere false dersom sykmeldingen ikke inneholder informasjon om tilbakedatering', () => {
-            const sykmelding = {
-                tilbakedatering: {
-                    dokumenterbarPasientkontakt: null,
-                    tilbakedatertBegrunnelse: null,
-                },
-            };
-
-
-            const erIkkeEkstraInfo = erTilbakeDateringInformasjon(sykmelding);
 
             expect(erIkkeEkstraInfo).to.equal(false);
         });
