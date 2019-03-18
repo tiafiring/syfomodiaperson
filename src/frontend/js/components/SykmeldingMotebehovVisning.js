@@ -213,7 +213,7 @@ export const TilbakeIArbeid = (
     {
         sykmelding,
     }) => {
-    const harArbeidsgiver = sykmelding.arbeidsgiver;
+    const harArbeidsgiver = sykmelding.mottakendeArbeidsgiver;
     const friskmelding = sykmelding.friskmelding;
     const skalVise = erFriskmeldingInformasjon(sykmelding);
     return (
@@ -227,13 +227,13 @@ export const TilbakeIArbeid = (
                         <p>{tilLesbarDatoMedArstall(friskmelding.antattDatoReturSammeArbeidsgiver)}</p>
 
                         <Checkbox className="sykmeldingMotebehovVisning__checkbox" label={tekster.tilbakeIArbeid.medArbeidsgiver.returAnnenArbeidsgiver} checked={friskmelding.antarReturAnnenArbeidsgiver} disabled />
-                        <h6 className="sporsmaal">{`Hvis usikker: ${tekster.tilbakeIArbeid.medArbeidsgiver.usikkerDatoSporsmaal}`}</h6>
+                        <h6 className="sporsmaal">{tekster.tilbakeIArbeid.medArbeidsgiver.usikkerDatoSporsmaal}</h6>
                         <p>{tilLesbarDatoMedArstall(friskmelding.tilbakemeldingReturArbeid)}</p>
                     </div>)
                     : (<div>
                         <h5 className="undertittel">{tekster.tilbakeIArbeid.utenArbeidsgiver.header}</h5>
                         <Checkbox className="sykmeldingMotebehovVisning__checkbox" label={tekster.tilbakeIArbeid.utenArbeidsgiver.retur} checked={friskmelding.utenArbeidsgiverAntarTilbakeIArbeid} disabled />
-                        <h6 className="sporsmaal">{`Hvis usikker: ${tekster.tilbakeIArbeid.utenArbeidsgiver.usikkerDatoSporsmaal}`}</h6>
+                        <h6 className="sporsmaal">{tekster.tilbakeIArbeid.utenArbeidsgiver.usikkerDatoSporsmaal}</h6>
                         <p>{tilLesbarDatoMedArstall(friskmelding.utenArbeidsgiverAntarTilbakeIArbeidDato)}</p>
                     </div>)
             }
