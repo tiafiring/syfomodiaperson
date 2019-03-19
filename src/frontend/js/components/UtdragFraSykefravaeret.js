@@ -59,7 +59,7 @@ export const Oppfolgingsplaner = (
                             <Lenke className="lenke" href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
                                 {
                                     virksomhetsNavn && virksomhetsNavn.length > 0
-                                        ? virksomhetsNavn
+                                        ? virksomhetsNavn.toLowerCase()
                                         : dialog.virksomhet.virksomhetsnummer
                                 }
                             </Lenke>
@@ -105,7 +105,7 @@ export const SykmeldingerForVirksomhet = (
         sykmeldinger,
     }) => {
     return (<div className="utdragFraSykefravaeret__sykmeldingerForVirksomhet">
-        <h4>{arbeidsgivernavnEllerArbeidssituasjon(sykmeldinger[0])}</h4>
+        <h4>{arbeidsgivernavnEllerArbeidssituasjon(sykmeldinger[0]).toLowerCase()}</h4>
         {
             sykmeldinger.map((sykmelding, index) => {
                 return (<div key={index}>
