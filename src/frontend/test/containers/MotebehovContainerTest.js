@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import AppSpinner from '../../js/components/AppSpinner';
 import Feilmelding from '../../js/components/Feilmelding';
-import Motebehov from '../../js/components/Motebehov';
+import Motebehov from '../../js/components/motebehov/Motebehov';
 import { mapStateToProps, MotebehovSide } from '../../js/containers/MotebehovContainer';
 import { ANTALL_MS_DAG } from '../../js/utils/datoUtils';
 

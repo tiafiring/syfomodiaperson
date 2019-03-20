@@ -33,7 +33,7 @@ import {
     ikkeHenterEllerForsoktHentetSykmeldinger,
 } from '../utils/reducerUtils';
 import { ledereUtenMotebehovsvar } from '../utils/ledereUtils';
-import Motebehov from '../components/Motebehov';
+import Motebehov from '../components/motebehov/Motebehov';
 import { bindActionCreators } from 'redux';
 
 export class MotebehovSide extends Component {

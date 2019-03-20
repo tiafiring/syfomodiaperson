@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { finnArbeidstakerMotebehovSvar } from '../utils/motebehovUtils';
+import { finnArbeidstakerMotebehovSvar } from '../../utils/motebehovUtils';
 
 export const finnRiktigLeder = (virksomhetsnummer, ledere) => {
     return ledere.find((leder) => {

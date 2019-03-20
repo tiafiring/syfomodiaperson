@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Sidetopp from './Sidetopp';
+import Sidetopp from '../Sidetopp';
 import MotebehovKvittering from './MotebehovKvittering';
 import BehandleMotebehovKnapp from './BehandleMotebehovKnapp';
 import UtdragFraSykefravaeret from './UtdragFraSykefravaeret';
