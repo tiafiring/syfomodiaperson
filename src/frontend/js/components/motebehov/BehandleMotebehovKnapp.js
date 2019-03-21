@@ -4,7 +4,7 @@ import {
     getGjeldendeMotebehovOppgaver,
     getIkkeFullforteOppgaver,
     getSistEndretOppgave,
-} from '../utils/veilederoppgaverUtils';
+} from '../../utils/veilederoppgaverUtils';
 import { Checkbox } from 'nav-frontend-skjema';
 import { toDatePrettyPrint } from '@navikt/digisyfo-npm';
 
