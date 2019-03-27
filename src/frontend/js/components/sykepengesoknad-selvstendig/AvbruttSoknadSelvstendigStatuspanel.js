@@ -1,27 +1,8 @@
 import React from 'react';
 import { getLedetekst, tilLesbarDatoMedArstall } from '@navikt/digisyfo-npm';
-import Statuspanel, { Statusopplysninger, StatusNokkelopplysning } from '../Statuspanel';
+import Statuspanel, { StatusNokkelopplysning, Statusopplysninger } from '../Statuspanel';
 import { soknad as soknadPt } from '../../propTypes';
-import { VerktoyKnapp } from '../Verktoylinje';
-import { Verktoylinje } from '../Verktoylinje';
-
-export const soknadKanGjenapnes = (opprettetDato) => {
-    const ETT_AAR_SIDEN = new Date();
-    ETT_AAR_SIDEN.setYear(ETT_AAR_SIDEN.getFullYear() - 1);
-    return opprettetDato >= ETT_AAR_SIDEN;
-};
-
-const GjenapneSoknad = ({ soknad }) => {
-    return soknadKanGjenapnes(soknad.opprettetDato)
-        ? (<Verktoylinje>
-            <VerktoyKnapp>{getLedetekst('sykepengesoknad.gjenapne.knapp')}</VerktoyKnapp>
-        </Verktoylinje>)
-        : null;
-};
-
-GjenapneSoknad.propTypes = {
-    soknad: soknadPt,
-};
+import VerktoylinjeGjenapneSoknad from '../sykepengesoknad-felles/VerktoylinjeGjenapneSoknad';
 
 const AvbruttSoknadSelvstendigStatuspanel = ({ soknad }) => {
     return (<Statuspanel>
@@ -35,7 +16,7 @@ const AvbruttSoknadSelvstendigStatuspanel = ({ soknad }) => {
                 </p>
             </StatusNokkelopplysning>
         </Statusopplysninger>
-        <GjenapneSoknad soknad={soknad} />
+        <VerktoylinjeGjenapneSoknad soknad={soknad} />
     </Statuspanel>);
 };
 

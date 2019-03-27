@@ -4,13 +4,7 @@ import SykmeldingUtdrag from '../../connected-components/SykmeldingUtdrag';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
 import PropTypes from 'prop-types';
 import Statuspanel, { StatusNokkelopplysning, Statusopplysninger } from '../Statuspanel';
-import { Verktoylinje, VerktoyKnapp } from '../Verktoylinje';
-
-const VerktoylinjeGjenapne = () => {
-    return (<Verktoylinje>
-        <VerktoyKnapp>{getLedetekst('sykepengesoknad.gjenapne.knapp')}</VerktoyKnapp>
-    </Verktoylinje>);
-};
+import VerktoylinjeGjenapne from '../sykepengesoknad-felles/VerktoylinjeGjenapneSoknad';
 
 const AvbruttSoknad = ({ sykepengesoknad, fnr }) => {
     return (<div>
@@ -27,7 +21,7 @@ const AvbruttSoknad = ({ sykepengesoknad, fnr }) => {
                     </p>
                 </StatusNokkelopplysning>
             </Statusopplysninger>
-            <VerktoylinjeGjenapne />
+            <VerktoylinjeGjenapne soknad={sykepengesoknad} />
         </Statuspanel>
         <SykmeldingUtdrag soknad={sykepengesoknad} fnr={fnr} erApen />
     </div>);

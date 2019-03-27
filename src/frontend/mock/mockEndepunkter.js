@@ -52,7 +52,6 @@ function mockForLokal(server) {
 
     server.get('/brukerinfo', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
-        console.log(mockData[BRUKERINFO]);
         res.send(JSON.stringify(mockData[BRUKERINFO]));
     });
 
