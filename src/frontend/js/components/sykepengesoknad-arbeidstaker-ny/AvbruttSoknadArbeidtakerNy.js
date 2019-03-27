@@ -19,7 +19,7 @@ const AvbruttSoknadArbeidstakerStatuspanel = ({ soknad }) => {
                 </p>
             </StatusNokkelopplysning>
         </Statusopplysninger>
-        <VerktoylinjeGjenapne />
+        <VerktoylinjeGjenapne soknad={soknad} />
     </Statuspanel>);
 };
 

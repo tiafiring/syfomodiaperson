@@ -21,7 +21,7 @@ const AvbruttSoknad = ({ sykepengesoknad, fnr }) => {
                     </p>
                 </StatusNokkelopplysning>
             </Statusopplysninger>
-            <VerktoylinjeGjenapne />
+            <VerktoylinjeGjenapne soknad={sykepengesoknad} />
         </Statuspanel>
         <SykmeldingUtdrag soknad={sykepengesoknad} fnr={fnr} erApen />
     </div>);
