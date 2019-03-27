@@ -18,8 +18,9 @@ import { ARBEIDSTAKERE, OPPHOLD_UTLAND, SELVSTENDIGE_OG_FRILANSERE } from '../en
 import SykepengesoknadSelvstendig from '../components/sykepengesoknad-selvstendig/SykepengesoknadSelvstendig';
 import SykepengesoknadUtland from '../components/sykepengesoknad-utland/SykepengesoknadUtland';
 import SendtSoknadArbeidstakerNy from '../components/sykepengesoknad-arbeidstaker-ny/SendtSoknadArbeidstakerNy';
-import { KORRIGERT, SENDT } from '../enums/soknadstatuser';
+import { AVBRUTT, KORRIGERT, SENDT } from '../enums/soknadstatuser';
 import IkkeInnsendtSoknad from '../components/sykepengesoknad-felles/IkkeInnsendtSoknad';
+import AvbruttSoknadArbeidtakerNy from '../components/sykepengesoknad-arbeidstaker-ny/AvbruttSoknadArbeidtakerNy';
 
 export class Container extends Component {
     componentWillMount() {
@@ -98,7 +99,13 @@ export class Container extends Component {
                                 brodsmuler={brodsmuler}
                                 brukernavn={brukernavn}
                                 soknad={soknad} />)
-                            : <IkkeInnsendtSoknad fnr={fnr} />;
+                            : soknad.status === AVBRUTT
+                                ? <AvbruttSoknadArbeidtakerNy
+                                    fnr={fnr}
+                                    brodsmuler={brodsmuler}
+                                    brukernavn={brukernavn}
+                                    soknad={soknad} />
+                                : <IkkeInnsendtSoknad fnr={fnr} />;
                     }
                     return <Feilmelding />;
                 })()
