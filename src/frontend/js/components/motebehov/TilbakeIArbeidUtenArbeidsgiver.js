@@ -10,26 +10,36 @@ const tekster = {
     usikkerDatoSporsmaal: 'Når antar du å kunne gi tilbakemelding på dette?',
 };
 
+const getTilbakeIArbeidCheckbox = (returDato) => {
+    return (<TilbakeIArbeidCheckboxMedSporsmaalOgDato
+        checkboxLabel={tekster.retur}
+        sporsmaal={tekster.returDatoSporsmaal}
+        returDato={returDato}
+    />);
+};
+
+const getUsikkerIArbeidCheckbox = (returDato) => {
+    return (<TilbakeIArbeidCheckboxMedSporsmaalOgDato
+        checkboxLabel={tekster.usikkerCheckboxLabel}
+        sporsmaal={tekster.usikkerDatoSporsmaal}
+        returDato={returDato}
+    />);
+};
+
 const TilbakeIArbeidUtenArbeidsgiver = (
     {
         friskmelding,
     }) => {
     const skalVise = friskmelding.utenArbeidsgiverAntarTilbakeIArbeid || friskmelding.utenArbeidsgiverTilbakemelding;
-    const skalViseCheckbox = friskmelding.utenArbeidsgiverAntarTilbakeIArbeid;
+    const antarTilbakeIArbeid = friskmelding.utenArbeidsgiverAntarTilbakeIArbeid;
+    const tilbakeIArbeidCheckbox = getTilbakeIArbeidCheckbox(friskmelding.utenArbeidsgiverAntarTilbakeIArbeidDato);
+    const usikkerIArbeidCheckbox = getUsikkerIArbeidCheckbox(friskmelding.utenArbeidsgiverTilbakemelding);
     return (skalVise && <div className="sykmeldingMotebehovVisning__tilbakeIArbeid--utenArbeidsgiver">
         <h5 className="undertittel">{tekster.header}</h5>
         {
-            skalViseCheckbox
-                ? (<TilbakeIArbeidCheckboxMedSporsmaalOgDato
-                    checkboxLabel={tekster.retur}
-                    sporsmaal={tekster.returDatoSporsmaal}
-                    returDato={friskmelding.utenArbeidsgiverAntarTilbakeIArbeidDato}
-                />)
-                : (<TilbakeIArbeidCheckboxMedSporsmaalOgDato
-                    checkboxLabel={tekster.usikkerCheckboxLabel}
-                    sporsmaal={tekster.usikkerDatoSporsmaal}
-                    returDato={friskmelding.utenArbeidsgiverTilbakemelding}
-                />)
+            antarTilbakeIArbeid
+                ? tilbakeIArbeidCheckbox
+                : usikkerIArbeidCheckbox
         }
     </div>);
 };
