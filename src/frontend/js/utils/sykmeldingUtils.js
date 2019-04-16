@@ -25,8 +25,10 @@ export const erMulighetForArbeidInformasjon = (sykmelding) => {
 export const erFriskmeldingInformasjon = (sykmelding) => {
     const erEkstraInformasjon = sykmelding.friskmelding
         && (sykmelding.friskmelding.antarReturSammeArbeidsgiver
-        || sykmelding.friskmelding.antarReturAnnenArbeidsgiver
-        || sykmelding.friskmelding.utenArbeidsgiverAntarTilbakeIArbeid);
+            || sykmelding.friskmelding.antarReturAnnenArbeidsgiver
+            || sykmelding.friskmelding.tilbakemeldingReturArbeid
+            || sykmelding.friskmelding.utenArbeidsgiverAntarTilbakeIArbeid
+            || sykmelding.friskmelding.utenArbeidsgiverTilbakemelding);
     return !!erEkstraInformasjon;
 };
 
