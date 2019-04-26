@@ -1,76 +1,33 @@
-const path = require('path');
-const fs = require('fs');
-const request = require('request');
+const express = require('express');
+const mockFastlegerest = require('./mockFastlegerest');
+const mockModiacontextholder = require('./mockModiacontextholder');
+const mockModiasyforest = require('./mockModiasyforest');
+const mockSyfomoteadmin = require('./mockSyfomoteadmin');
+const mockSyfomotebehov = require('./mockSyfomotebehov');
+const mockSyfooppfolgingsplanservice = require('./mockSyfooppfolgingsplanservice');
+const mockSyfosoknad = require('./mockSyfosoknad');
+const mockSyfotekster = require('./mockSyfotekster');
+const mockSyfotilgangskoontroll = require('./mockSyfotilgangskontroll');
+const mockSyfoveilederoppgaver = require('./mockSyfoveilederoppgaver');
 
-const mockData = {};
-const SOKNADER = 'soknader';
-const SYKEPENGESOKNADER = 'sykepengesoknader';
-const BRUKERINFO = 'brukerinfo';
-const TEKSTER = 'tekster';
-const SYKMELDINGER = 'sykmeldinger';
+function mockEndepunkter(server, erLokal) {
+    server.use(express.json());
+    server.use(express.urlencoded());
 
-const lastFilTilMinne = (filnavn) => {
-    fs.readFile(path.join(__dirname, `/data/${filnavn}.json`), (err, data) => {
-        if (err) throw err;
-        mockData[filnavn] = JSON.parse(data.toString());
-    });
-};
-
-lastFilTilMinne(SOKNADER);
-lastFilTilMinne(SYKEPENGESOKNADER);
-lastFilTilMinne(BRUKERINFO);
-lastFilTilMinne(SYKMELDINGER);
-
-let teksterFraProd;
-
-function hentTeksterFraProd() {
-    const TEKSTER_URL = 'https://syfoapi.nav.no/syfotekster/api/tekster';
-    request(TEKSTER_URL, (error, response, body) => {
-        if (error) {
-            console.log('Kunne ikke hente tekster fra prod', error);
-        } else {
-            teksterFraProd = JSON.parse(body);
-            console.log('Tekster hentet fra prod');
-        }
+    [
+        mockFastlegerest,
+        mockModiacontextholder,
+        mockModiasyforest,
+        mockSyfomoteadmin,
+        mockSyfomotebehov,
+        mockSyfooppfolgingsplanservice,
+        mockSyfosoknad,
+        mockSyfotekster,
+        mockSyfotilgangskoontroll,
+        mockSyfoveilederoppgaver,
+    ].forEach((func) => {
+        func(server, erLokal);
     });
 }
 
-
-function mockTekster(server) {
-    const HVERT_FEMTE_MINUTT = 1000 * 60 * 5;
-    hentTeksterFraProd();
-    setInterval(hentTeksterFraProd, HVERT_FEMTE_MINUTT);
-
-    server.get('/tekster', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(teksterFraProd || mockData[TEKSTER]));
-    });
-}
-
-function mockForLokal(server) {
-    mockTekster(server);
-
-    server.get('/brukerinfo', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[BRUKERINFO]));
-    });
-
-    server.get('/veileder/soknader', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[SOKNADER]));
-    });
-
-    server.get('/sykepengesoknader', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[SYKEPENGESOKNADER]));
-    });
-
-    server.get('/sykmeldinger', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[SYKMELDINGER]));
-    });
-}
-
-module.exports = {
-    mockForLokal,
-};
+module.exports = mockEndepunkter;
