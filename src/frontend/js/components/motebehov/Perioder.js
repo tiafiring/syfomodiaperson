@@ -25,7 +25,7 @@ export const Perioder = (
         perioder,
     }) => {
     return (<div className="sykmeldingMotebehovVisning__perioder">
-        <h6 className="sporsmaal">Perioder</h6>
+        <h6 className="sporsmal">Perioder</h6>
         {
             perioder.map((periode, index) => {
                 return (<PeriodeBoks key={index} periode={periode} />);

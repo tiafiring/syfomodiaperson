@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox } from 'nav-frontend-skjema';
-import TilbakeIArbeidCheckboxMedSporsmaalOgDato from './TilbakeIArbeidCheckboxMedSporsmaalOgDato';
+import TilbakeIArbeidCheckboxMedSporsmalOgDato from './TilbakeIArbeidCheckboxMedSporsmalOgDato';
 
 const tekster = {
     header: '8 uker: Pasient med arbeidsgiver, utdypende opplysninger',
     returSammeArbeidsgiver: 'Jeg antar at pasienten på sikt kan komme tilbake til samme arbeidsgiver',
-    datoSporsmaal: 'Anslå når du tror dette kan skje',
+    datoSporsmal: 'Anslå når du tror dette kan skje',
     returAnnenArbeidsgiver: 'Jeg antar at pasienten på sikt kan komme i arbeid hos annen arbeidsgiver',
-    usikkerDatoSporsmaal: 'Når antar du å kunne gi tilbakemelding på dette?',
+    usikkerDatoSporsmal: 'Når antar du å kunne gi tilbakemelding på dette?',
     usikkerCheckboxLabel: 'Jeg er usikker på om pasienten kan komme tilbake i arbeid hos egen eller annen arbeidsgiver',
 };
 
@@ -18,9 +18,9 @@ const ReturSammeArbeidsgiver = (
     }) => {
     return (<div>
         {
-            friskmelding.antarReturSammeArbeidsgiver && <TilbakeIArbeidCheckboxMedSporsmaalOgDato
+            friskmelding.antarReturSammeArbeidsgiver && <TilbakeIArbeidCheckboxMedSporsmalOgDato
                 checkboxLabel={tekster.returSammeArbeidsgiver}
-                sporsmaal={tekster.datoSporsmaal}
+                sporsmal={tekster.datoSporsmal}
                 returDato={friskmelding.antattDatoReturSammeArbeidsgiver}
             />
         }
@@ -46,9 +46,9 @@ const TilbakeIArbeidMedArbeidsgiver = (
         {
             antarRetur
                 ? (<ReturSammeArbeidsgiver friskmelding={friskmelding} />)
-                : (<TilbakeIArbeidCheckboxMedSporsmaalOgDato
+                : (<TilbakeIArbeidCheckboxMedSporsmalOgDato
                     checkboxLabel={tekster.usikkerCheckboxLabel}
-                    sporsmaal={tekster.usikkerDatoSporsmaal}
+                    sporsmal={tekster.usikkerDatoSporsmal}
                     returDato={friskmelding.tilbakemeldingReturArbeid}
                 />)
         }

@@ -27,7 +27,7 @@ export const MeldingTilNav = (
             {
                 meldingTilNav.navBoerTaTakISakenBegrunnelse &&
                 [
-                    <h6 key={0} className="sporsmaal">{tekster.meldingTilNav.navBoerTaTakISaken.begrunnelseTittel}</h6>,
+                    <h6 key={0} className="sporsmal">{tekster.meldingTilNav.navBoerTaTakISaken.begrunnelseTittel}</h6>,
                     <p key={1}>{meldingTilNav.navBoerTaTakISakenBegrunnelse}</p>,
                 ]
             }

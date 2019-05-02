@@ -31,7 +31,7 @@ const AktivitetIkkeMulig = (
         {
             beskrivelse &&
             [
-                <h6 key={0} className="sporsmaal">{tekster.mulighetForArbeid.beskrivelse}</h6>,
+                <h6 key={0} className="sporsmal">{tekster.mulighetForArbeid.beskrivelse}</h6>,
                 <p key={1}>{beskrivelse}</p>,
             ]
         }

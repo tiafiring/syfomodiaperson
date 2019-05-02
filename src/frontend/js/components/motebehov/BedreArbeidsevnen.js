@@ -22,21 +22,21 @@ export const BedreArbeidsevnen = (
 
             {
                 arbeidsevne.tilretteleggingArbeidsplass && <div>
-                    <h6 className="sporsmaal">{tekster.bedreArbeidsevnen.tilretteleggingTittel}</h6>
+                    <h6 className="sporsmal">{tekster.bedreArbeidsevnen.tilretteleggingTittel}</h6>
                     <p>{arbeidsevne.tilretteleggingArbeidsplass}</p>
                 </div>
             }
 
             {
                 arbeidsevne.tiltakNAV && <div>
-                    <h6 className="sporsmaal">{tekster.bedreArbeidsevnen.tiltakNavTittel}</h6>
+                    <h6 className="sporsmal">{tekster.bedreArbeidsevnen.tiltakNavTittel}</h6>
                     <p>{arbeidsevne.tiltakNAV}</p>
                 </div>
             }
 
             {
                 arbeidsevne.tiltakAndre && <div>
-                    <h6 className="sporsmaal">{tekster.bedreArbeidsevnen.tiltakAndreTittel}</h6>
+                    <h6 className="sporsmal">{tekster.bedreArbeidsevnen.tiltakAndreTittel}</h6>
                     <p>{arbeidsevne.tiltakAndre}</p>
                 </div>
             }
