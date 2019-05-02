@@ -1,10 +1,10 @@
 {
-  "navn": "Fanny Storm",
+  "navn": "Samuel \"Sam\" Jones",
   "kontaktinfo": {
-    "fnr": "18026902092",
-    "epost": null,
-    "tlf": null,
-    "skalHaVarsel": false,
+    "fnr": "110110110110",
+    "epost": "samuel@pontypandyfire.gov.uk",
+    "tlf": "99887766",
+    "skalHaVarsel": true,
     "feilAarsak": "KONTAKTINFO_IKKE_FUNNET"
   },
   "arbeidssituasjon": "ARBEIDSTAKER",
