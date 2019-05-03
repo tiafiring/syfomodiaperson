@@ -78,7 +78,7 @@ export const capitalizeFoersteBokstav = (ord) => {
     return ord.charAt(0).toUpperCase() + ord.slice(1);
 };
 
-export const tilDatoMedUkedagOgMaanedNavn = (dato) => {
+export const tilDatoMedUkedagOgManedNavn = (dato) => {
     const nyDato = new Date(dato);
     const ukeDag = capitalizeFoersteBokstav(ukedagListe[nyDato.getDay()]);
     const dag = nyDato.getDate();
@@ -93,7 +93,7 @@ const dayOrMonthWithTwoDigits = (arg) => {
         : `0${arg}`;
 };
 
-export const tilLesbarDatoMedAarUtenMaanedNavn = (datoArg) => {
+export const tilLesbarDatoMedArUtenManedNavn = (datoArg) => {
     const date = new Date(datoArg);
     const day = dayOrMonthWithTwoDigits(date.getDate());
     const month = dayOrMonthWithTwoDigits(date.getMonth() + 1);
@@ -101,8 +101,8 @@ export const tilLesbarDatoMedAarUtenMaanedNavn = (datoArg) => {
     return `${day}.${month}.${year}`;
 };
 
-export const tilLesbarPeriodeMedAarUtenMaanednavn = (fomArg, tomArg) => {
-    return `${tilLesbarDatoMedAarUtenMaanedNavn(fomArg)} - ${tilLesbarDatoMedAarUtenMaanedNavn(tomArg)}`;
+export const tilLesbarPeriodeMedArUtenManednavn = (fomArg, tomArg) => {
+    return `${tilLesbarDatoMedArUtenManedNavn(fomArg)} - ${tilLesbarDatoMedArUtenManedNavn(tomArg)}`;
 };
 
 export const dagerMellomDatoer = (startDato, sluttDato) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox } from 'nav-frontend-skjema';
 import { erEkstraDiagnoseInformasjon } from '../../utils/sykmeldingUtils';
-import { tilDatoMedUkedagOgMaanedNavn } from '../../utils/datoUtils';
+import { tilDatoMedUkedagOgManedNavn } from '../../utils/datoUtils';
 
 const tekster = {
     ekstraDiagnoseInformasjon: {
@@ -51,7 +51,7 @@ const Yrkesskade = (
             diagnose.yrkesskadeDato &&
             [
                 <h6 key={0} className="sporsmal">{tekster.ekstraDiagnoseInformasjon.yrkesskade.skadedato}</h6>,
-                <p key={1} className="yrkesskadeDato">{tilDatoMedUkedagOgMaanedNavn(diagnose.yrkesskadeDato)}</p>,
+                <p key={1} className="yrkesskadeDato">{tilDatoMedUkedagOgManedNavn(diagnose.yrkesskadeDato)}</p>,
             ]
         }
     </div>);

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { tilDatoMedUkedagOgMaanedNavn } from '../utils/datoUtils';
+import { tilDatoMedUkedagOgManedNavn } from '../utils/datoUtils';
 import Sidetopp from '../components/Sidetopp';
 import { Link } from 'react-router';
 
@@ -17,9 +17,9 @@ const setTittel = (mote) => {
 const setUndertittel = (mote) => {
     if (mote) {
         if (mote.status === 'BEKREFTET' && mote.bekreftetAlternativ) {
-            return `Dialogmøte ${tilDatoMedUkedagOgMaanedNavn(mote.bekreftetAlternativ.tid)}`;
+            return `Dialogmøte ${tilDatoMedUkedagOgManedNavn(mote.bekreftetAlternativ.tid)}`;
         } else if (mote.opprettetTidspunkt) {
-            return `Møteforespørsel sendt ${tilDatoMedUkedagOgMaanedNavn(mote.opprettetTidspunkt)}`;
+            return `Møteforespørsel sendt ${tilDatoMedUkedagOgManedNavn(mote.opprettetTidspunkt)}`;
         }
     }
     return 'Ingen møter planlagt';

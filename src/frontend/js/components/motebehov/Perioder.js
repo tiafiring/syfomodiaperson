@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { tilLesbarPeriodeMedAarUtenMaanednavn } from '../../utils/datoUtils';
+import { tilLesbarPeriodeMedArUtenManednavn } from '../../utils/datoUtils';
 import BoksRad from './BoksRad';
 
 export const PeriodeBoks = (
@@ -9,7 +9,7 @@ export const PeriodeBoks = (
     }) => {
     return (<div className="sykmeldingMotebehovVisning__periodeBoks">
         <BoksRad
-            kolonne1Tekst={`${tilLesbarPeriodeMedAarUtenMaanednavn(periode.fom, periode.tom)}`}
+            kolonne1Tekst={`${tilLesbarPeriodeMedArUtenManednavn(periode.fom, periode.tom)}`}
             kolonne2Tekst={`${periode.grad}%`}
             erTittel
         />
