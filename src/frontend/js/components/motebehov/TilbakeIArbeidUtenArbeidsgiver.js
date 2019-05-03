@@ -1,27 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TilbakeIArbeidCheckboxMedSporsmaalOgDato from './TilbakeIArbeidCheckboxMedSporsmaalOgDato';
+import TilbakeIArbeidCheckboxMedSporsmalOgDato from './TilbakeIArbeidCheckboxMedSporsmalOgDato';
 
 const tekster = {
     header: '8 uker: Pasient uten arbeidsgiver, utdypende opplysninger',
     retur: 'Jeg antar at pasienten på sikt kan komme tilbake i arbeid',
-    returDatoSporsmaal: 'Anslå når du tror dette kan skje',
+    returDatoSporsmal: 'Anslå når du tror dette kan skje',
     usikkerCheckboxLabel: 'Jeg er usikker på om pasienten kan komme tilbake i arbeid',
-    usikkerDatoSporsmaal: 'Når antar du å kunne gi tilbakemelding på dette?',
+    usikkerDatoSporsmal: 'Når antar du å kunne gi tilbakemelding på dette?',
 };
 
 const getTilbakeIArbeidCheckbox = (returDato) => {
-    return (<TilbakeIArbeidCheckboxMedSporsmaalOgDato
+    return (<TilbakeIArbeidCheckboxMedSporsmalOgDato
         checkboxLabel={tekster.retur}
-        sporsmaal={tekster.returDatoSporsmaal}
+        sporsmal={tekster.returDatoSporsmal}
         returDato={returDato}
     />);
 };
 
 const getUsikkerIArbeidCheckbox = (returDato) => {
-    return (<TilbakeIArbeidCheckboxMedSporsmaalOgDato
+    return (<TilbakeIArbeidCheckboxMedSporsmalOgDato
         checkboxLabel={tekster.usikkerCheckboxLabel}
-        sporsmaal={tekster.usikkerDatoSporsmaal}
+        sporsmal={tekster.usikkerDatoSporsmal}
         returDato={returDato}
     />);
 };

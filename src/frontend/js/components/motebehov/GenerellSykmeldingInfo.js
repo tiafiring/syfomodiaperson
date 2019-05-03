@@ -44,7 +44,7 @@ export const GenerellSykmeldingInfo = (
         {
             erHensynPaaArbeidsplassenInformasjon(sykmelding) &&
             [
-                <h6 key={0} className="sporsmaal">{tekster.generellSykmeldingInfo.hensynPaaArbeidsplassen.tittel}</h6>,
+                <h6 key={0} className="sporsmal">{tekster.generellSykmeldingInfo.hensynPaaArbeidsplassen.tittel}</h6>,
                 <p key={1}>{sykmelding.friskmelding.hensynPaaArbeidsplassen}</p>,
             ]
         }

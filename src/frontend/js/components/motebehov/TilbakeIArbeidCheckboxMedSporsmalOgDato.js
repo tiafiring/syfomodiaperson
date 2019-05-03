@@ -3,23 +3,23 @@ import PropTypes from 'prop-types';
 import { tilLesbarDatoMedArstall } from '@navikt/digisyfo-npm';
 import { Checkbox } from 'nav-frontend-skjema';
 
-const TilbakeIArbeidCheckboxMedSporsmaalOgDato = (
+const TilbakeIArbeidCheckboxMedSporsmalOgDato = (
     {
         checkboxLabel,
-        sporsmaal,
+        sporsmal,
         returDato,
     }) => {
     return (<div>
         <Checkbox className="sykmeldingMotebehovVisning__checkbox" label={checkboxLabel} checked disabled />
-        <h6 className="sporsmaal">{sporsmaal}</h6>
+        <h6 className="sporsmal">{sporsmal}</h6>
         <p>{tilLesbarDatoMedArstall(returDato)}</p>
     </div>);
 };
 
-TilbakeIArbeidCheckboxMedSporsmaalOgDato.propTypes = {
+TilbakeIArbeidCheckboxMedSporsmalOgDato.propTypes = {
     checkboxLabel: PropTypes.string,
-    sporsmaal: PropTypes.string,
+    sporsmal: PropTypes.string,
     returDato: PropTypes.instanceOf(Date),
 };
 
-export default TilbakeIArbeidCheckboxMedSporsmaalOgDato;
+export default TilbakeIArbeidCheckboxMedSporsmalOgDato;

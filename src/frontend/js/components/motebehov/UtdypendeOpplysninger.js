@@ -24,28 +24,28 @@ export const UtdypendeOpplysninger = (
 
             {
                 utdypendeOpplysninger.sykehistorie && <div>
-                    <h6 className="sporsmaal">{tekster.UtdypendeOpplysninger.sykehistorieTittel}</h6>
+                    <h6 className="sporsmal">{tekster.UtdypendeOpplysninger.sykehistorieTittel}</h6>
                     <p>{utdypendeOpplysninger.sykehistorie}</p>
                 </div>
             }
 
             {
                 utdypendeOpplysninger.paavirkningArbeidsevne && <div>
-                    <h6 className="sporsmaal">{tekster.UtdypendeOpplysninger.paavirkningArbeidsevneTittel}</h6>
+                    <h6 className="sporsmal">{tekster.UtdypendeOpplysninger.paavirkningArbeidsevneTittel}</h6>
                     <p>{utdypendeOpplysninger.paavirkningArbeidsevne}</p>
                 </div>
             }
 
             {
                 utdypendeOpplysninger.resultatAvBehandling && <div>
-                    <h6 className="sporsmaal">{tekster.UtdypendeOpplysninger.behandlingsResultatTittel}</h6>
+                    <h6 className="sporsmal">{tekster.UtdypendeOpplysninger.behandlingsResultatTittel}</h6>
                     <p>{utdypendeOpplysninger.resultatAvBehandling}</p>
                 </div>
             }
 
             {
                 utdypendeOpplysninger.henvisningUtredningBehandling && <div>
-                    <h6 className="sporsmaal">{tekster.UtdypendeOpplysninger.henvisningTittel}</h6>
+                    <h6 className="sporsmal">{tekster.UtdypendeOpplysninger.henvisningTittel}</h6>
                     <p>{utdypendeOpplysninger.henvisningUtredningBehandling}</p>
                 </div>
             }

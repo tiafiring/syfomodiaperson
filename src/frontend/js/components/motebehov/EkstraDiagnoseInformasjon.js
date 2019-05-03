@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox } from 'nav-frontend-skjema';
 import { erEkstraDiagnoseInformasjon } from '../../utils/sykmeldingUtils';
-import { tilDatoMedUkedagOgMaanedNavn } from '../../utils/datoUtils';
+import { tilDatoMedUkedagOgManedNavn } from '../../utils/datoUtils';
 
 const tekster = {
     ekstraDiagnoseInformasjon: {
@@ -25,12 +25,12 @@ const AnnenLovfestetFravaersgrunn = (
         diagnose,
     }) => {
     return (<div className="annenLovfestetFravaersgrunn">
-        <h6 className="sporsmaal">{tekster.ekstraDiagnoseInformasjon.fravaersgrunnLovfestet.lovfestetGrunn}</h6>
+        <h6 className="sporsmal">{tekster.ekstraDiagnoseInformasjon.fravaersgrunnLovfestet.lovfestetGrunn}</h6>
         <p>{diagnose.fravaersgrunnLovfestet}</p>
         {
             diagnose.fravaerBeskrivelse &&
             [
-                <h6 key={0} className="sporsmaal">{tekster.ekstraDiagnoseInformasjon.fravaersgrunnLovfestet.beskrivFravaeret}</h6>,
+                <h6 key={0} className="sporsmal">{tekster.ekstraDiagnoseInformasjon.fravaersgrunnLovfestet.beskrivFravaeret}</h6>,
                 <p key={1} className="annenLovfestetFravaersgrunnBeskrivelse">{diagnose.fravaerBeskrivelse}</p>,
             ]
         }
@@ -50,8 +50,8 @@ const Yrkesskade = (
         {
             diagnose.yrkesskadeDato &&
             [
-                <h6 key={0} className="sporsmaal">{tekster.ekstraDiagnoseInformasjon.yrkesskade.skadedato}</h6>,
-                <p key={1} className="yrkesskadeDato">{tilDatoMedUkedagOgMaanedNavn(diagnose.yrkesskadeDato)}</p>,
+                <h6 key={0} className="sporsmal">{tekster.ekstraDiagnoseInformasjon.yrkesskade.skadedato}</h6>,
+                <p key={1} className="yrkesskadeDato">{tilDatoMedUkedagOgManedNavn(diagnose.yrkesskadeDato)}</p>,
             ]
         }
     </div>);

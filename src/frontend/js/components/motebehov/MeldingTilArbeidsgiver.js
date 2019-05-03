@@ -21,7 +21,7 @@ export const MeldingTilArbeidsgiver = (
             {
                 innspillTilArbeidsgiver &&
                 (<div>
-                    <h6 className="sporsmaal">{tekster.meldingTilArbeidsgiver.innspillTittel}</h6>
+                    <h6 className="sporsmal">{tekster.meldingTilArbeidsgiver.innspillTittel}</h6>
                     <p>{innspillTilArbeidsgiver}</p>
                 </div>)
             }
