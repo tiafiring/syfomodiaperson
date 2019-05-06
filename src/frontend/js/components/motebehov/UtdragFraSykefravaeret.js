@@ -86,7 +86,7 @@ export const UtvidbarTittel = (
     return (<div className="utdragFraSykefravaeret__utvidbarTittel">
         <div>
             <span className="utvidbarTittel__periode">{`${tilLesbarPeriodeMedArstall(tidligsteFom(sykmelding.mulighetForArbeid.perioder), senesteTom(sykmelding.mulighetForArbeid.perioder))}: `}</span>
-            <span className="utvidbarTittel__grad">{` ${stringMedAlleGraderingerFraSykmeldingPerioder(sykmeldingPerioderSortertEtterDato)}%`}</span>
+            <span className="utvidbarTittel__grad">{stringMedAlleGraderingerFraSykmeldingPerioder(sykmeldingPerioderSortertEtterDato)}</span>
         </div>
         {
             erViktigInformasjon && <div className="utvidbarTittel__erViktig">

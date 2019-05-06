@@ -5,6 +5,22 @@ import {
     FRILANSER,
 } from '../enums/arbeidssituasjoner';
 
+export const finnAvventendeSykmeldingTekst = (sykmelding) => {
+    const avventendePeriode = sykmelding.mulighetForArbeid.perioder
+        && sykmelding.mulighetForArbeid.perioder.find((periode) => {
+            return !!periode.avventende;
+        });
+    return avventendePeriode && avventendePeriode.avventende;
+};
+
+export const erBehandlingsdagerEllerReisetilskudd = (sykmelding) => {
+    const erEkstraInformasjon = sykmelding.mulighetForArbeid.perioder
+        && sykmelding.mulighetForArbeid.perioder.find((periode) => {
+            return !!periode.reisetilskudd || !!periode.behandlingsdager;
+        });
+    return !!erEkstraInformasjon;
+};
+
 export const erEkstraDiagnoseInformasjon = (sykmelding) => {
     const erEkstraInformasjon = sykmelding.diagnose
         && (sykmelding.diagnose.fravaersgrunnLovfestet
@@ -79,7 +95,8 @@ export const erEkstraInformasjonISykmeldingen = (sykmelding) => {
         || erUtdypendeOpplysningerInformasjon(sykmelding)
         || erBedringAvArbeidsevnenInformasjon(sykmelding)
         || erMeldingTilNavInformasjon(sykmelding)
-        || erMeldingTilArbeidsgiverInformasjon(sykmelding);
+        || erMeldingTilArbeidsgiverInformasjon(sykmelding)
+        || erBehandlingsdagerEllerReisetilskudd(sykmelding);
 };
 
 export const arbeidsgivernavnEllerArbeidssituasjon = (sykmelding) => {
@@ -153,8 +170,19 @@ export const sykmeldingperioderSortertEldstTilNyest = (perioder) => {
     });
 };
 
+const sykmeldingperioderMedGradering = (sykmeldingperioder) => {
+    return sykmeldingperioder.filter((periode) => {
+        return !!periode.grad;
+    });
+};
+
 export const stringMedAlleGraderingerFraSykmeldingPerioder = (sykmeldingPerioderSortertEtterDato) => {
-    return sykmeldingPerioderSortertEtterDato.map((periode) => {
+    const perioderMedGradering = sykmeldingperioderMedGradering(sykmeldingPerioderSortertEtterDato);
+    const stringMedAlleGraderinger = perioderMedGradering.map((periode) => {
         return periode.grad;
     }).join('% - ');
+
+    return !!stringMedAlleGraderinger
+        ? `${stringMedAlleGraderinger}%`
+        : '';
 };

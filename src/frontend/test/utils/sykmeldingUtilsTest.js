@@ -16,10 +16,122 @@ import {
     sykmeldingerGruppertEtterVirksomhet,
     sykmeldingperioderSortertEldstTilNyest,
     stringMedAlleGraderingerFraSykmeldingPerioder,
+    erBehandlingsdagerEllerReisetilskudd,
+    finnAvventendeSykmeldingTekst,
 } from '../../js/utils/sykmeldingUtils';
 import { ANTALL_MS_DAG } from '../../js/utils/datoUtils';
 
 describe('sykmeldingUtils', () => {
+    describe('finnAvventendeSykmeldingTekst', () => {
+        it('skal returnere teksten fra avventende-feltet i en periode, hvis det finnes', () => {
+            const innspillTilArbeidsgiver = 'Innspill til arbeidsgiver';
+            const sykmelding = {
+                mulighetForArbeid: {
+                    perioder: [
+                        {
+                            avventende: innspillTilArbeidsgiver,
+                            behandlingsdager: null,
+                            fom: "2019-01-01",
+                            grad: 100,
+                            reisetilskudd: null,
+                            tom: "2019-01-10",
+                        },
+                    ],
+                },
+            };
+
+            const avventende = finnAvventendeSykmeldingTekst(sykmelding);
+
+            expect(avventende).to.equal(innspillTilArbeidsgiver);
+        });
+
+        it('skal returnere undefined hvis ingen av periodene er avventende', () => {
+            const sykmelding = {
+                mulighetForArbeid: {
+                    perioder: [
+                        {
+                            avventende: null,
+                            behandlingsdager: null,
+                            fom: "2019-01-01",
+                            grad: null,
+                            reisetilskudd: null,
+                            tom: "2019-01-10",
+                        },
+                    ],
+                },
+            };
+
+            const avventende = finnAvventendeSykmeldingTekst(sykmelding);
+
+            expect(avventende).to.equal(undefined);
+        });
+    });
+
+    describe('erBehandlingsdagerEllerReisetilskudd', () => {
+        it('skal returnere true dersom minst én av sykmeldingperiodene er huket av på behandlingsdager', () => {
+            const sykmelding = {
+                mulighetForArbeid: {
+                    perioder: [
+                        {
+                            avventende: null,
+                            behandlingsdager: 4,
+                            fom: "2019-01-01",
+                            grad: null,
+                            reisetilskudd: null,
+                            tom: "2019-02-01",
+                        },
+                    ],
+                },
+            };
+
+            const erEkstraInfo = erBehandlingsdagerEllerReisetilskudd(sykmelding);
+
+            expect(erEkstraInfo).to.equal(true);
+        });
+
+        it('skal returnere true dersom minst én av sykmeldingperiodene er huket av på reisetilskudd', () => {
+            const sykmelding = {
+                mulighetForArbeid: {
+                    perioder: [
+                        {
+                            avventende: null,
+                            behandlingsdager: null,
+                            fom: "2019-01-01",
+                            grad: 40,
+                            reisetilskudd: true,
+                            tom: "2019-02-01",
+                        },
+                    ],
+                },
+            };
+
+            const erEkstraInfo = erBehandlingsdagerEllerReisetilskudd(sykmelding);
+
+            expect(erEkstraInfo).to.equal(true);
+        });
+
+        it('skal returnere false dersom ingen av sykmeldingperiodene er huket av på reisetilskudd eller behandlingsdager', () => {
+            const sykmelding = {
+                mulighetForArbeid: {
+                    perioder: [
+                        {
+                            avventende: null,
+                            behandlingsdager: null,
+                            fom: "2019-01-01",
+                            grad: 100,
+                            reisetilskudd: null,
+                            tom: "2019-02-01",
+                        },
+                    ],
+                },
+            };
+
+            const erEkstraInfo = erBehandlingsdagerEllerReisetilskudd(sykmelding);
+
+            expect(erEkstraInfo).to.equal(false);
+        });
+    });
+
     describe('erEkstraDiagnoseInformasjon', () => {
         it('skal returnere true dersom sykmeldingen inneholder ekstra informasjon om diagnose', () => {
             const sykmelding = {
@@ -532,7 +644,7 @@ describe('sykmeldingUtils', () => {
     });
 
     describe('stringMedAlleGraderingerFraSykmeldingPerioder', () => {
-        it('skal returnere en string med alle graderinger fra en sykmelding', () => {
+        it('skal returnere en string med alle graderinger fra en sykmelding som ikke er 0/null', () => {
 
             const sykmeldingPerioderSortertEtterDato = [
                 {
@@ -542,6 +654,12 @@ describe('sykmeldingUtils', () => {
                     grad: 100,
                 },
                 {
+                    grad: 0,
+                },
+                {
+                    grad: null,
+                },
+                {
                     grad: 50,
                 },
             ];
@@ -549,9 +667,24 @@ describe('sykmeldingUtils', () => {
 
            const stringMedAllegraderinger = stringMedAlleGraderingerFraSykmeldingPerioder(sykmeldingPerioderSortertEtterDato);
 
-           expect(stringMedAllegraderinger).to.equal('20% - 100% - 50');
+           expect(stringMedAllegraderinger).to.equal('20% - 100% - 50%');
+        });
+
+        it('skal returnere en tom string hvis alle perioder har 0/null som grad', () => {
+
+            const sykmeldingPerioderSortertEtterDato = [
+                {
+                    grad: null,
+                },
+                {
+                    grad: 0,
+                },
+            ];
+
+
+           const stringMedAllegraderinger = stringMedAlleGraderingerFraSykmeldingPerioder(sykmeldingPerioderSortertEtterDato);
+
+           expect(stringMedAllegraderinger).to.equal('');
         });
     });
-
-
 });
