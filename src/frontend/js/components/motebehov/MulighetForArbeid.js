@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox } from 'nav-frontend-skjema';
-import { erMulighetForArbeidInformasjon } from '../../utils/sykmeldingUtils';
+import {
+    erMulighetForArbeidInformasjon,
+    finnAvventendeSykmeldingTekst,
+} from '../../utils/sykmeldingUtils';
 
 const tekster = {
     mulighetForArbeid: {
+        avventende: {
+            tittel: 'Innspill til arbeidsgiveren ved avventende sykmelding',
+        },
         beskrivelse: 'Nærmere beskrivelse',
         medisinskAarsak: {
             tittel: 'Det er medisinske årsaker som hindrer arbeidsrelatert aktivitet',
@@ -13,6 +19,20 @@ const tekster = {
             tittel: 'Forhold på arbeidsplassen vanskeliggjør arbeidsrelatert aktivitet',
         },
     },
+};
+
+const AvventendeSykmelding = (
+    {
+        avventendeTekst,
+    }) => {
+    return (<div>
+        <h5 className="undertittel">{tekster.mulighetForArbeid.avventende.tittel}</h5>
+        <p>{avventendeTekst}</p>
+    </div>);
+};
+
+AvventendeSykmelding.propTypes = {
+    avventendeTekst: PropTypes.string,
 };
 
 const AktivitetIkkeMulig = (
@@ -49,12 +69,17 @@ export const MulighetForArbeid = (
         sykmelding,
     }) => {
     const mulighetForArbeid = sykmelding.mulighetForArbeid;
+    const avventendeTekst = finnAvventendeSykmeldingTekst(sykmelding);
     const aktivitetIkkeMulig433 = mulighetForArbeid.aktivitetIkkeMulig433;
     const aarsakAktivitetIkkeMulig433 = mulighetForArbeid.aarsakAktivitetIkkeMulig433;
     const aktivitetIkkeMulig434 = mulighetForArbeid.aktivitetIkkeMulig434;
     const aarsakAktivitetIkkeMulig434 = mulighetForArbeid.aarsakAktivitetIkkeMulig434;
     const skalVise = erMulighetForArbeidInformasjon(sykmelding);
-    return (skalVise && <div className="sykmeldingMotebehovVisning__avsnitt">
+    return ((skalVise || !!avventendeTekst) && <div className="sykmeldingMotebehovVisning__avsnitt">
+        {
+            !!avventendeTekst &&
+                <AvventendeSykmelding avventendeTekst={avventendeTekst} />
+        }
         {
             aktivitetIkkeMulig433 && aktivitetIkkeMulig433.length > 0 &&
                 <AktivitetIkkeMulig beskrivelse={aarsakAktivitetIkkeMulig433} ikkeMuligListe={aktivitetIkkeMulig433} tittel={tekster.mulighetForArbeid.medisinskAarsak.tittel} />

@@ -3,6 +3,23 @@ import PropTypes from 'prop-types';
 import { tilLesbarPeriodeMedArUtenManednavn } from '../../utils/datoUtils';
 import BoksRad from './BoksRad';
 
+const kolonne2Tekst = (periode) => {
+    if (!!periode.behandlingsdager) {
+        return periode.behandlingsdager === 1
+            ? `${periode.behandlingsdager} behandlingsdag`
+            : `${periode.behandlingsdager} behandlingsdager`;
+    }
+    if (!!periode.reisetilskudd) {
+        return !!periode.grad
+            ? `${periode.grad}% sykmeldt med reisetilskudd`
+            : 'Full jobb med reisetilskudd';
+    }
+    if (!!periode.avventende) {
+        return `${periode.grad}% Avventende`;
+    }
+    return `${periode.grad}%`;
+};
+
 export const PeriodeBoks = (
     {
         periode,
@@ -10,7 +27,7 @@ export const PeriodeBoks = (
     return (<div className="sykmeldingMotebehovVisning__periodeBoks">
         <BoksRad
             kolonne1Tekst={`${tilLesbarPeriodeMedArUtenManednavn(periode.fom, periode.tom)}`}
-            kolonne2Tekst={`${periode.grad}%`}
+            kolonne2Tekst={kolonne2Tekst(periode)}
             erTittel
         />
     </div>);
