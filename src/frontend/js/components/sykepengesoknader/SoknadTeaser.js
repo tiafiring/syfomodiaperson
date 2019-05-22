@@ -79,6 +79,15 @@ const beregnUndertekst = (soknad) => {
                         })
                         : null;
                 }
+                case SENDT:
+                case TIL_SENDING: {
+                    return sendtTilBeggeMenIkkeSamtidig
+                            ? <SendtUlikt soknad={soknad} />
+                            : getLedetekst(`soknad.teaser.status.${soknad.status}${getSendtTilSuffix(soknad)}`, {
+                                '%DATO%': tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
+                                '%ARBEIDSGIVER%': soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : null,
+                            });
+                }
                 default: {
                     return null;
                 }
