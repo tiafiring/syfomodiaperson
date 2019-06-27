@@ -16,3 +16,5 @@ Du må ha Node installert.
     - Eventuelt kan komandoene kjøres fra `package.json` i intellij.
 * Kjør tester med `npm test` eller `npm test:watch`
 * Lint JS-kode med `npm run lint` eller `npm run lint:fix`
+
+Appen nås på [localhost:8191](http://localhost:8191/sykefravaer/fnr)
