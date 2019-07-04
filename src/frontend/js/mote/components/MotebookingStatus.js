@@ -22,6 +22,11 @@ export const MotetidspunktValgt = ({ bekreftetTidspunkt, ledetekster }) => {
 const BEKREFTET = 'BEKREFTET';
 const OPPRETTET = 'OPPRETTET';
 const FLERE_TIDSPUNKT = 'FLERE_TIDSPUNKT';
+export const kvitteringTekst = {
+    overskrift: 'Blir det sendt spørsmål om behov for møte til sykmeldt og nærmeste leder?',
+    forUke16: 'Hvis du har brukt møteplanleggeren før uke 16: Spørsmålet om behov for møte vil ikke bli sendt ut.',
+    etterUke16: 'Hvis du har sendt forslag til møtetidspunkt etter uke 16: Spørsmålet om behov forsvinner fra nav.no hvis de ikke har svart ennå.',
+};
 
 MotetidspunktValgt.propTypes = {
     bekreftetTidspunkt: PropTypes.string,
@@ -80,13 +85,24 @@ const getSidetoppNokkel = (mote, motePassert) => {
 
 export const StatusVarsel = ({ mote, ledetekster, arbeidstaker }) => {
     const dato = (mote.status === OPPRETTET || mote.status === FLERE_TIDSPUNKT) ? mote.opprettetTidspunkt : mote.bekreftetAlternativ.created;
-    return (<div className="panel">
+    return (<div className="panel statusVarsel">
         <AlertStripe type="suksess">
-            <div>
+            <div className="panel">
                 <p className="typo-element">{getSendtTilTekst(mote, ledetekster, arbeidstaker)}</p>
                 <p className="sist">{getLedetekst('mote.bookingstatus.sendt-dato', ledetekster, {
                     '%DATO%': getDatoFraZulu(dato),
                 })}</p>
+            </div>
+        </AlertStripe>
+        <AlertStripe type="info">
+            <div className="panel">
+                <p className="typo-element">{kvitteringTekst.overskrift}</p>
+                <p className="siste">{
+                    <ul>
+                        <li>{kvitteringTekst.forUke16}</li>
+                        <li>{kvitteringTekst.etterUke16}</li>
+                    </ul>
+                }</p>
             </div>
         </AlertStripe>
     </div>);

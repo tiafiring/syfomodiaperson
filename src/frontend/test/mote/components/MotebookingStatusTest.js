@@ -3,7 +3,7 @@ import { mount, shallow } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
 import AlertStripe from 'nav-frontend-alertstriper';
-import MotebookingStatus, { PassertVarsel, StatusVarsel } from '../../../js/mote/components/MotebookingStatus';
+import MotebookingStatus, { PassertVarsel, StatusVarsel, kvitteringTekst } from '../../../js/mote/components/MotebookingStatus';
 import Svarstatus from '../../../js/mote/components/Svarstatus';
 import BekreftetMotetidspunkt from '../../../js/mote/components/BekreftetMotetidspunkt';
 import KontaktInfoFeilmelding from '../../../js/mote/components/KontaktInfoFeilmelding';
@@ -181,8 +181,9 @@ describe('MotebookingStatus', () => {
                 mote={mote}
                 ledetekster={ledetekster}
             />);
-            expect(component.find(AlertStripe).text()).to.contain('Møteforespørselen ble sendt til Arve Arbeidsgiver og Andreas Arbeidstaker');
-            expect(component.find(AlertStripe).text()).to.contain('Sendt: 22.11.2016');
+            expect(component.find(AlertStripe)).to.have.lengthOf(2);
+            expect(component.find(AlertStripe).first().text()).to.contain('Møteforespørselen ble sendt til Arve Arbeidsgiver og Andreas Arbeidstaker');
+            expect(component.find(AlertStripe).at(1).text()).to.contain(kvitteringTekst.overskrift);
         });
 
         it('Skal vise riktig tekst når møtet er BEKREFTET', () => {
@@ -191,8 +192,9 @@ describe('MotebookingStatus', () => {
                 mote={bekreftetMote}
                 ledetekster={ledetekster}
             />);
-            expect(component.find(AlertStripe).text()).to.contain('Møtetidspunkt valgt, møteresultat og varsel er sendt til Arve Arbeidsgiver');
-            expect(component.find(AlertStripe).text()).to.contain('Sendt: 12.12.2011');
+            expect(component.find(AlertStripe)).to.have.lengthOf(2);
+            expect(component.find(AlertStripe).first().text()).to.contain('Møtetidspunkt valgt, møteresultat og varsel er sendt til Arve Arbeidsgiver');
+            expect(component.find(AlertStripe).at(1).text()).to.contain(kvitteringTekst.overskrift);
         });
     });
 
