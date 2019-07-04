@@ -10,6 +10,7 @@ import KontaktInfoFeilmelding from '../../../js/mote/components/KontaktInfoFeilm
 import FlereTidspunktSkjema from '../../../js/mote/skjema/FlereTidspunktSkjema';
 import Sidetopp from '../../../js/components/Sidetopp';
 import { leggTilDagerPaaDato, trekkDagerFraDato } from '../../../js/mote/utils/index';
+import { kvitteringTekst } from "../../../js/mote/components/MotebookingStatus";
 
 describe('MotebookingStatus', () => {
     let arbeidstaker = {
@@ -183,6 +184,7 @@ describe('MotebookingStatus', () => {
             />);
             expect(component.find(AlertStripe)).to.have.lengthOf(2);
             expect(component.find(AlertStripe).first().text()).to.contain('Møteforespørselen ble sendt til Arve Arbeidsgiver og Andreas Arbeidstaker');
+            expect(component.find(AlertStripe).at(1).text()).to.contain(kvitteringTekst.overskrift);
         });
 
         it('Skal vise riktig tekst når møtet er BEKREFTET', () => {
@@ -193,7 +195,7 @@ describe('MotebookingStatus', () => {
             />);
             expect(component.find(AlertStripe)).to.have.lengthOf(2);
             expect(component.find(AlertStripe).first().text()).to.contain('Møtetidspunkt valgt, møteresultat og varsel er sendt til Arve Arbeidsgiver');
-
+            expect(component.find(AlertStripe).at(1).text()).to.contain(kvitteringTekst.overskrift);
         });
     });
 
