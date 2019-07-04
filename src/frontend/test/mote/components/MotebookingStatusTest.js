@@ -3,14 +3,13 @@ import { mount, shallow } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
 import AlertStripe from 'nav-frontend-alertstriper';
-import MotebookingStatus, { PassertVarsel, StatusVarsel } from '../../../js/mote/components/MotebookingStatus';
+import MotebookingStatus, { PassertVarsel, StatusVarsel, kvitteringTekst } from '../../../js/mote/components/MotebookingStatus';
 import Svarstatus from '../../../js/mote/components/Svarstatus';
 import BekreftetMotetidspunkt from '../../../js/mote/components/BekreftetMotetidspunkt';
 import KontaktInfoFeilmelding from '../../../js/mote/components/KontaktInfoFeilmelding';
 import FlereTidspunktSkjema from '../../../js/mote/skjema/FlereTidspunktSkjema';
 import Sidetopp from '../../../js/components/Sidetopp';
 import { leggTilDagerPaaDato, trekkDagerFraDato } from '../../../js/mote/utils/index';
-import { kvitteringTekst } from "../../../js/mote/components/MotebookingStatus";
 
 describe('MotebookingStatus', () => {
     let arbeidstaker = {
