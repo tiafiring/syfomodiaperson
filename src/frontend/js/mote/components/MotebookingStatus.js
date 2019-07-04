@@ -81,14 +81,29 @@ const getSidetoppNokkel = (mote, motePassert) => {
 export const StatusVarsel = ({ mote, ledetekster, arbeidstaker }) => {
     const dato = (mote.status === OPPRETTET || mote.status === FLERE_TIDSPUNKT) ? mote.opprettetTidspunkt : mote.bekreftetAlternativ.created;
     return (<div className="panel">
-        <AlertStripe type="suksess">
-            <div>
-                <p className="typo-element">{getSendtTilTekst(mote, ledetekster, arbeidstaker)}</p>
-                <p className="sist">{getLedetekst('mote.bookingstatus.sendt-dato', ledetekster, {
-                    '%DATO%': getDatoFraZulu(dato),
-                })}</p>
-            </div>
-        </AlertStripe>
+        <div className="panelmotekvittering--gronn">
+            <AlertStripe type="suksess">
+                <div className="panel">
+                    <p className="typo-element">{getSendtTilTekst(mote, ledetekster, arbeidstaker)}</p>
+                    <p className="sist">{getLedetekst('mote.bookingstatus.sendt-dato', ledetekster, {
+                        '%DATO%': getDatoFraZulu(dato),
+                    })}</p>
+                </div>
+            </AlertStripe>
+        </div>
+        <div className="panelmotekvittering--gul">
+            <AlertStripe type="info">
+                <div className="panel">
+                    <p className="typo-element">{'Blir det sendt spørsmål om behov for møte til sykmeldt og nærmeste leder?'}</p>
+                    <p className="siste">{
+                        <ul>
+                            <li>Hvis du har brukt møteplanleggeren før uke 16: Spørsmålet om behov for møte vil ikke bli sendt ut.</li>
+                            <li>Hvis du har sendt forslag til møtetidspunkt etter uke 16: Spørsmålet om behov forsvinner fra nav.no hvis de ikke har svart ennå.</li>
+                        </ul>
+                    }</p>
+                </div>
+            </AlertStripe>
+        </div>
     </div>);
 };
 

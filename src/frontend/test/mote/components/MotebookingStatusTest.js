@@ -181,8 +181,8 @@ describe('MotebookingStatus', () => {
                 mote={mote}
                 ledetekster={ledetekster}
             />);
-            expect(component.find(AlertStripe).text()).to.contain('Møteforespørselen ble sendt til Arve Arbeidsgiver og Andreas Arbeidstaker');
-            expect(component.find(AlertStripe).text()).to.contain('Sendt: 22.11.2016');
+            expect(component.find(AlertStripe)).to.have.lengthOf(2);
+            expect(component.find(AlertStripe).first().text()).to.contain('Møteforespørselen ble sendt til Arve Arbeidsgiver og Andreas Arbeidstaker');
         });
 
         it('Skal vise riktig tekst når møtet er BEKREFTET', () => {
@@ -191,8 +191,9 @@ describe('MotebookingStatus', () => {
                 mote={bekreftetMote}
                 ledetekster={ledetekster}
             />);
-            expect(component.find(AlertStripe).text()).to.contain('Møtetidspunkt valgt, møteresultat og varsel er sendt til Arve Arbeidsgiver');
-            expect(component.find(AlertStripe).text()).to.contain('Sendt: 12.12.2011');
+            expect(component.find(AlertStripe)).to.have.lengthOf(2);
+            expect(component.find(AlertStripe).first().text()).to.contain('Møtetidspunkt valgt, møteresultat og varsel er sendt til Arve Arbeidsgiver');
+
         });
     });
 
