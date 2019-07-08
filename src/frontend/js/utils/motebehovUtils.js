@@ -1,4 +1,5 @@
 import { dagerMellomDatoer } from './datoUtils';
+import { erAlleVeilederoppgaverBehandlet } from './veilederoppgaverUtils';
 
 export const sorterMotebehovDataEtterDato = (a, b) => {
     return b.opprettetDato === a.opprettetDato ? 0 : b.opprettetDato > a.opprettetDato ? 1 : -1;
@@ -44,4 +45,24 @@ export const erOppfolgingstilfelleSluttDatoPassert = (sluttOppfolgingsdato) => {
 
 export const harArbeidstakerSvartPaaMotebehov = (motebehovData) => {
     return !!finnArbeidstakerMotebehovSvar(motebehovData);
+};
+
+const erAlleMotebehovSvarBehandlet = (motebehovListe) => {
+    return motebehovListe.filter((motebehov) => {
+        return !motebehov.behandletTidspunkt;
+    }).length === 0;
+};
+
+export const erMotebehovBehandlet = (motebehovListe, gjeldendeOppgaver) => {
+    return erAlleMotebehovSvarBehandlet(motebehovListe) && erAlleVeilederoppgaverBehandlet(gjeldendeOppgaver);
+};
+
+export const harUbehandletMotebehov = (motebehovListe) => {
+    return !erAlleMotebehovSvarBehandlet(motebehovListe);
+};
+
+export const hentSistBehandletMotebehov = (motebehovListe) => {
+    return [...motebehovListe].sort((mb1, mb2) => {
+        return mb2.behandletTidspunkt > mb1.behandletTidspunkt;
+    })[0] || {};
 };
