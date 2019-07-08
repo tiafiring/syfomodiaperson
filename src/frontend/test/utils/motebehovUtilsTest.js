@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import {
+    erMotebehovBehandlet,
     erOppfoelgingsdatoPassertMed16UkerOgIkke26Uker,
     erOppfolgingstilfelleSluttDatoPassert,
     finnArbeidstakerMotebehovSvar,
@@ -170,6 +171,41 @@ describe('motebehovUtils', () => {
             const harArbeidstakerSvart = harArbeidstakerSvartPaaMotebehov(motebehovData);
 
             expect(harArbeidstakerSvart).to.equal(false);
+        });
+    });
+
+    describe('erMotebehovBehandlet', () => {
+        const motebehovBehandlet = {
+            behandletTidspunkt: new Date(),
+            behandletVeilederIdent: "Z990000",
+        };
+        const motebehovUbehandlet = {
+            behandletTidspunkt: null,
+            behandletVeilederIdent: null,
+        };
+
+        describe('med motebehov og uten veilederoppgaver', () => {
+            it('er false, om det eksisterer minst 1 ubehandlet motebehov', () => {
+                const exp = erMotebehovBehandlet([motebehovBehandlet, motebehovUbehandlet], []);
+                expect(exp).to.equal(false)
+            });
+
+            it('er false, om det eksisterer kun 1 ubehandlet motebehov', () => {
+                const exp = erMotebehovBehandlet([motebehovUbehandlet], []);
+                expect(exp).to.equal(false)
+            });
+
+            it('er true, om det kun behandlet motebehov', () => {
+                const exp = erMotebehovBehandlet([motebehovBehandlet], []);
+                expect(exp).to.equal(true)
+            });
+        });
+
+        describe('uten motebehov og uten veilederoppgaver', () => {
+            it('er true, om det er ingen motebehov eller veilederoppgaver', () => {
+                const exp = erMotebehovBehandlet([], []);
+                expect(exp).to.equal(true)
+            });
         });
     });
 });

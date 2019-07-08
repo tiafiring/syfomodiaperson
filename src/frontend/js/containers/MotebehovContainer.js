@@ -16,6 +16,7 @@ import * as oppfolgingstilfelleperioderActions from '../actions/oppfolgingstilfe
 import * as sykmeldingerActions from '../actions/sykmeldinger_actions';
 import * as ledereActions from '../actions/ledere_actions';
 import * as virksomhetActions from '../actions/virksomhet_actions';
+import * as behandleMotebehovActions from '../actions/behandlemotebehov_actions';
 import { MOETEPLANLEGGER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import {
@@ -157,7 +158,7 @@ MotebehovSide.propTypes = {
 };
 
 export function mapDispatchToProps(dispatch) {
-    const actions = Object.assign({}, motebehovActions, veilederoppgaverActions, oppfoelgingsdialogerActions, oppfolgingstilfelleperioderActions, sykmeldingerActions, ledereActions, virksomhetActions);
+    const actions = Object.assign({}, motebehovActions, veilederoppgaverActions, oppfoelgingsdialogerActions, oppfolgingstilfelleperioderActions, sykmeldingerActions, ledereActions, virksomhetActions, behandleMotebehovActions);
     return {
         actions: bindActionCreators(actions, dispatch),
     };

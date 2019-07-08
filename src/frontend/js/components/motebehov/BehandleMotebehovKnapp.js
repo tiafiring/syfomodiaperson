@@ -3,10 +3,26 @@ import PropTypes from 'prop-types';
 import {
     getGjeldendeMotebehovOppgaver,
     getIkkeFullforteOppgaver,
-    getSistEndretOppgave,
 } from '../../utils/veilederoppgaverUtils';
+import {
+    erMotebehovBehandlet,
+    harUbehandletMotebehov,
+    hentSistBehandletMotebehov,
+} from '../../utils/motebehovUtils';
 import { Checkbox } from 'nav-frontend-skjema';
 import { toDatePrettyPrint } from '@navikt/digisyfo-npm';
+
+export const behandleMotebehovOgVeilederoppgaver = (actions, fnr, veilederinfo, motebehovListe, ikkeFullforteOppgaver) => {
+    if (harUbehandletMotebehov(motebehovListe)) {
+        actions.behandleMotebehov(fnr, veilederinfo.ident);
+    }
+    ikkeFullforteOppgaver.forEach((oppgave) => {
+        actions.behandleOppgave(oppgave.id, {
+            status: 'FERDIG',
+            sistEndretAv: veilederinfo.ident,
+        }, fnr);
+    });
+};
 
 export const BehandleMotebehovKnapp = (
     {
@@ -17,26 +33,23 @@ export const BehandleMotebehovKnapp = (
         veilederinfo,
     }) => {
     const gjeldendeOppgaver = getGjeldendeMotebehovOppgaver(oppgaver, motebehovListe);
-    const sistEndretOppgave = getSistEndretOppgave(gjeldendeOppgaver);
     const ikkeFullforteOppgaver = getIkkeFullforteOppgaver(gjeldendeOppgaver);
-    const erAlleOppgaverFullfort = ikkeFullforteOppgaver.length === 0;
+    const sistBehandletMotebehov = hentSistBehandletMotebehov(motebehovListe);
+    const erBehandlet = erMotebehovBehandlet(motebehovListe, gjeldendeOppgaver);
+
     return (<div className="panel behandleMotebehovKnapp">
-        {gjeldendeOppgaver.length > 0 ?
-            <div className="skjema__input">
+        { (motebehovListe.length > 0 || gjeldendeOppgaver.length > 0)
+            ? <div className="skjema__input">
                 <Checkbox
-                    label={erAlleOppgaverFullfort ? `Ferdig behandlet av ${sistEndretOppgave.sistEndretAv} ${toDatePrettyPrint(sistEndretOppgave.sistEndret)}` : 'Marker som behandlet'}
+                    label={erBehandlet ? `Ferdig behandlet av ${sistBehandletMotebehov.behandletVeilederIdent} ${toDatePrettyPrint(sistBehandletMotebehov.behandletTidspunkt)}` : 'Marker som behandlet'}
                     onClick={() => {
-                        ikkeFullforteOppgaver.forEach((oppgave) => {
-                            actions.behandleOppgave(oppgave.id, {
-                                status: 'FERDIG',
-                                sistEndretAv: veilederinfo.ident,
-                            }, fnr);
-                        });
+                        behandleMotebehovOgVeilederoppgaver(actions, fnr, veilederinfo, motebehovListe, ikkeFullforteOppgaver);
                     }}
                     id="marker__utfoert"
-                    disabled={erAlleOppgaverFullfort}
-                    checked={erAlleOppgaverFullfort} />
-            </div> : <p>Fant dessverre ingen oppgaver knyttet til denne avklaringen</p>
+                    disabled={erBehandlet}
+                    checked={erBehandlet} />
+            </div>
+            : <p>Fant dessverre ingen oppgaver knyttet til denne avklaringen</p>
         }
     </div>);
 };

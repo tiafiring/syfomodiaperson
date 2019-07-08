@@ -1,4 +1,5 @@
 import * as actions from '../actions/actiontyper';
+import { BEHANDLE_MOTEBEHOV_BEHANDLET } from '../actions/behandlemotebehov_actions';
 
 export const sorterEtterDato = (a, b) => {
     return b.opprettetDato === a.opprettetDato ? 0 : b.opprettetDato > a.opprettetDato ? 1 : -1;
@@ -46,6 +47,19 @@ export default function motebehov(state = defaultState, action) {
                 hentingFeilet: false,
                 tilgang: action.tilgang,
             });
+        }
+        case BEHANDLE_MOTEBEHOV_BEHANDLET: {
+            const data = [...state.data].map((mb) => {
+                return {
+                    ...mb,
+                    behandletTidspunkt: new Date(),
+                    behandletVeilederIdent: action.veilederIdent,
+                };
+            });
+            return {
+                ...state,
+                data,
+            };
         }
         default: {
             return state;

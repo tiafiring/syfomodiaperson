@@ -7,6 +7,10 @@ function mockForLokal(server) {
         res.send(JSON.stringify(mockData[enums.MOTEBEHOV]));
     });
 
+    server.post('/veileder/motebehov/:fnr/behandle', (req, res) => {
+        res.sendStatus(200);
+    });
+
     server.get('/veileder/historikk', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[enums.HISTORIKKMOTEBEHOV]));
