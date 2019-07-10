@@ -22,7 +22,7 @@ describe('epostinnholdSagas', () => {
         const generator = hentBekreftMoteEpostinnhold(action);
 
         it('Skal dispatche HENTER_EPOSTINNHOLD', () => {
-            const nextPut = put({ type: 'HENTER_EPOSTINNHOLD' });
+            const nextPut = put({ type: actions.HENTER_EPOSTINNHOLD });
             expect(generator.next().value).to.deep.equal(nextPut);
         });
 
@@ -37,7 +37,7 @@ describe('epostinnholdSagas', () => {
                 innhold: 'Mitt flotte innhold',
             };
             const nextPut = put({
-                type: 'EPOSTINNHOLD_HENTET',
+                type: actions.EPOSTINNHOLD_HENTET,
                 eposttype: 'BEKREFT_TIDSPUNKT',
                 data,
             });
@@ -50,7 +50,7 @@ describe('epostinnholdSagas', () => {
         const generator = hentAvbrytMoteEpostinnhold(action);
 
         it('Skal dispatche HENTER_EPOSTINNHOLD', () => {
-            const nextPut = put({ type: 'HENTER_EPOSTINNHOLD' });
+            const nextPut = put({ type: actions.HENTER_EPOSTINNHOLD });
             expect(generator.next().value).to.deep.equal(nextPut);
         });
 
@@ -65,7 +65,7 @@ describe('epostinnholdSagas', () => {
                 innhold: 'Mitt flotte innhold',
             };
             const nextPut = put({
-                type: 'EPOSTINNHOLD_HENTET',
+                type: actions.EPOSTINNHOLD_HENTET,
                 eposttype: 'AVBRYT_TIDSPUNKT',
                 data,
             });

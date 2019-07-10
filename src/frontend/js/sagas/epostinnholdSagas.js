@@ -3,7 +3,7 @@ import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api/index';
 import * as actions from '../actions/epostinnhold_actions';
 import * as arbeidsgiveractions from '../actions/arbeidsgiverepostinnhold_actions';
-import { HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT, HENT_AVBRYT_MOTE_EPOSTINNHOLD_FORESPURT, HENT_BEKREFT_MOTE_ARBEIDSGIVEREPOSTINNHOLD_FORESPURT } from '../actions/actiontyper';
+import { HENT_BEKREFT_MOTE_ARBEIDSGIVEREPOSTINNHOLD_FORESPURT } from '../actions/actiontyper';
 
 export function* hentBekreftMoteEpostinnhold(action) {
     yield put(actions.henterEpostInnhold());
@@ -39,7 +39,7 @@ export function* hentAvbrytMoteEpostinnhold(action) {
 }
 
 function* watchHentBekreftMoteEpostinnhold() {
-    yield takeEvery(HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT, hentBekreftMoteEpostinnhold);
+    yield takeEvery(actions.HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT, hentBekreftMoteEpostinnhold);
 }
 
 function* watchHentBekreftMoteArbeidsgiverEpostinnhold() {
@@ -47,7 +47,7 @@ function* watchHentBekreftMoteArbeidsgiverEpostinnhold() {
 }
 
 function* watchHentAvbrytMoteEpostinnhold() {
-    yield takeEvery(HENT_AVBRYT_MOTE_EPOSTINNHOLD_FORESPURT, hentAvbrytMoteEpostinnhold);
+    yield takeEvery(actions.HENT_AVBRYT_MOTE_EPOSTINNHOLD_FORESPURT, hentAvbrytMoteEpostinnhold);
 }
 
 export default function* epostinnholdSagas() {

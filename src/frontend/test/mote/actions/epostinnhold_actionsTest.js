@@ -7,7 +7,7 @@ describe('epostinnhold_actions', () => {
         const valgtAlternativId = '123';
         const action = actions.hentBekreftMoteEpostinnhold(motedeltakerUuid, valgtAlternativId);
         expect(action).to.deep.equal({
-            type: 'HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT',
+            type: actions.HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT,
             motedeltakerUuid: 'hansen',
             valgtAlternativId: '123',
         });
@@ -17,7 +17,7 @@ describe('epostinnhold_actions', () => {
         const motedeltakerUuid = 'Olsen';
         const action = actions.hentAvbrytMoteEpostinnhold(motedeltakerUuid);
         expect(action).to.deep.equal({
-            type: 'HENT_AVBRYT_MOTE_EPOSTINNHOLD_FORESPURT',
+            type: actions.HENT_AVBRYT_MOTE_EPOSTINNHOLD_FORESPURT,
             motedeltakerUuid: 'Olsen',
         });
     });
@@ -25,14 +25,14 @@ describe('epostinnhold_actions', () => {
     it('Har en henterEpostInnhold()-funksjon som returnerer riktig action', () => {
         const action = actions.henterEpostInnhold();
         expect(action).to.deep.equal({
-            type: 'HENTER_EPOSTINNHOLD',
+            type: actions.HENTER_EPOSTINNHOLD,
         });
     });
 
     it('Har en hentEpostinnholdFeilet()-funksjon som returnerer riktig action', () => {
         const action = actions.hentEpostinnholdFeilet();
         expect(action).to.deep.equal({
-            type: 'HENT_EPOSTINNHOLD_FEILET',
+            type: actions.HENT_EPOSTINNHOLD_FEILET,
         });
     });
 
@@ -41,7 +41,7 @@ describe('epostinnhold_actions', () => {
             id: 1,
         });
         expect(action).to.deep.equal({
-            type: 'EPOSTINNHOLD_HENTET',
+            type: actions.EPOSTINNHOLD_HENTET,
             eposttype: 'olsen',
             data: {
                 id: 1,

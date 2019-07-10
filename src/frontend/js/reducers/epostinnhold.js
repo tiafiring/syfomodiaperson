@@ -1,4 +1,8 @@
-import { HENTER_EPOSTINNHOLD, EPOSTINNHOLD_HENTET, HENT_EPOSTINNHOLD_FEILET } from '../actions/actiontyper';
+import {
+    HENTER_EPOSTINNHOLD,
+    EPOSTINNHOLD_HENTET,
+    HENT_EPOSTINNHOLD_FEILET,
+} from '../actions/epostinnhold_actions';
 
 const defaultState = {
     data: {},
