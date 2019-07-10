@@ -1,4 +1,9 @@
-import * as actiontype from '../actions/actiontyper';
+import {
+    SJEKKER_TILGANG,
+    HAR_TILGANG,
+    HAR_IKKE_TILGANG,
+    SJEKK_TILGANG_FEILET,
+} from '../actions/tilgang_actions';
 
 const initiellState = {
     hentet: false,
@@ -11,13 +16,13 @@ const initiellState = {
 
 export default function tilgang(state = initiellState, action = {}) {
     switch (action.type) {
-        case actiontype.SJEKKER_TILGANG: {
+        case SJEKKER_TILGANG: {
             return Object.assign({}, state, {
                 henter: true,
                 hentingFeilet: false,
             });
         }
-        case actiontype.HAR_TILGANG: {
+        case HAR_TILGANG: {
             return Object.assign({}, state, {
                 data: Object.assign({}, state.data, {
                     harTilgang: true,
@@ -27,7 +32,7 @@ export default function tilgang(state = initiellState, action = {}) {
                 hentet: true,
             });
         }
-        case actiontype.HAR_IKKE_TILGANG: {
+        case HAR_IKKE_TILGANG: {
             return Object.assign({}, state, {
                 data: Object.assign({}, state.data, {
                     harTilgang: false,
@@ -38,7 +43,7 @@ export default function tilgang(state = initiellState, action = {}) {
                 hentet: true,
             });
         }
-        case actiontype.SJEKK_TILGANG_FEILET: {
+        case SJEKK_TILGANG_FEILET: {
             return Object.assign({}, state, {
                 henter: false,
                 hentingFeilet: true,

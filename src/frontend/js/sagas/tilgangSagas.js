@@ -2,7 +2,6 @@ import { call, put, fork, takeEvery } from 'redux-saga/effects';
 import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api/index';
 import * as actions from '../actions/tilgang_actions';
-import * as actiontype from '../actions/actiontyper';
 
 export function* sjekkTilgang(action) {
     yield put(actions.sjekkerTilgang());
@@ -22,7 +21,7 @@ export function* sjekkTilgang(action) {
 }
 
 function* watchSjekkTilgang() {
-    yield takeEvery(actiontype.SJEKK_TILGANG_FORESPURT, sjekkTilgang);
+    yield takeEvery(actions.SJEKK_TILGANG_FORESPURT, sjekkTilgang);
 }
 
 export default function* tilgangSagas() {
