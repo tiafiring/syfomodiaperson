@@ -2,9 +2,6 @@ import { call, fork, put, takeEvery } from 'redux-saga/effects';
 import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api/index';
 import * as actions from '../actions/soknader_actions';
-import {
-    HENT_SOKNADER_FORESPURT,
-} from '../actions/actiontyper';
 import mockSoknader from '../../test/mockdata/mockSoknader';
 import { erDev } from '../selectors/toggleSelectors';
 
@@ -25,7 +22,7 @@ export function* hentSoknader(action) {
 }
 
 function* watchHentSoknader() {
-    yield takeEvery(HENT_SOKNADER_FORESPURT, hentSoknader);
+    yield takeEvery(actions.HENT_SOKNADER_FORESPURT, hentSoknader);
 }
 
 export default function* soknaderSagas() {

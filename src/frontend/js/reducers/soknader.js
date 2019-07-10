@@ -2,7 +2,7 @@ import {
     HENT_SOKNADER_FEILET,
     HENTER_SOKNADER,
     SOKNADER_HENTET,
-} from '../actions/actiontyper';
+} from '../actions/soknader_actions';
 import { TIMER, DATO, PERIODER, PROSENT, TALL } from '../enums/svartyper';
 
 const initiellState = {

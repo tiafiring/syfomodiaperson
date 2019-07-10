@@ -1,9 +1,7 @@
-import {
-    SOKNADER_HENTET,
-    HENTER_SOKNADER,
-    HENT_SOKNADER_FEILET,
-    HENT_SOKNADER_FORESPURT,
-} from './actiontyper';
+export const SOKNADER_HENTET = 'SOKNADER_HENTET';
+export const HENTER_SOKNADER = 'HENTER_SOKNADER';
+export const HENT_SOKNADER_FEILET = 'HENT_SOKNADER_FEILET';
+export const HENT_SOKNADER_FORESPURT = 'HENT_SOKNADER_FORESPURT';
 
 export const soknaderHentet = (soknader) => {
     return {
