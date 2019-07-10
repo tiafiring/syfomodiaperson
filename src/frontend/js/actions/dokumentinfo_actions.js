@@ -1,27 +1,30 @@
-import * as actionstype from './actiontyper';
+export const HENT_DOKUMENTINFO_FORESPURT = 'HENT_DOKUMENTINFO_FORESPURT';
+export const HENTER_DOKUMENTINFO = 'HENTER_DOKUMENTINFO';
+export const HENT_DOKUMENTINFO_FEILET = 'HENT_DOKUMENTINFO_FEILET';
+export const DOKUMENTINFO_HENTET = 'DOKUMENTINFO_HENTET';
 
 export function hentDokumentinfoFeilet() {
     return {
-        type: actionstype.HENT_DOKUMENTINFO_FEILET,
+        type: HENT_DOKUMENTINFO_FEILET,
     };
 }
 
 export function henterDokumentinfo() {
     return {
-        type: actionstype.HENTER_DOKUMENTINFO,
+        type: HENTER_DOKUMENTINFO,
     };
 }
 
 export function dokumentinfoHentet(data) {
     return {
-        type: actionstype.DOKUMENTINFO_HENTET,
+        type: DOKUMENTINFO_HENTET,
         data,
     };
 }
 
 export function hentDokumentinfo(id) {
     return {
-        type: actionstype.HENT_DOKUMENTINFO_FORESPURT,
+        type: HENT_DOKUMENTINFO_FORESPURT,
         id,
     };
 }
