@@ -15,14 +15,28 @@ import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 
 export class OppfoelgingsPlanerOversiktSide extends Component {
     componentWillMount() {
-        const { fnr, actions, henterDialoger, hentetDialoger } = this.props;
+        const {
+            fnr,
+            actions,
+            henterDialoger,
+            hentetDialoger,
+        } = this.props;
         if (!henterDialoger && !hentetDialoger) {
             actions.hentOppfoelgingsdialoger(fnr);
         }
     }
 
     render() {
-        const { actions, aktiveDialoger, inaktiveDialoger, ledetekster, henter, hentingFeilet, tilgang, fnr } = this.props;
+        const {
+            actions,
+            aktiveDialoger,
+            inaktiveDialoger,
+            ledetekster,
+            henter,
+            hentingFeilet,
+            tilgang,
+            fnr,
+        } = this.props;
         return (<Side fnr={fnr} tittel="Oppfølgingsplaner" aktivtMenypunkt={OPPFOELGINGSPLANER}>
             {
                 (() => {

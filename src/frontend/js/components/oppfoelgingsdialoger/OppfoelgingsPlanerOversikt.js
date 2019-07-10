@@ -16,7 +16,11 @@ const finnAntallOppgaver = (dialog) => {
 
 export class OppfoelgingsPlanerOversikt extends Component {
     componentWillMount() {
-        const { actions, aktiveDialoger, inaktiveDialoger } = this.props;
+        const {
+            actions,
+            aktiveDialoger,
+            inaktiveDialoger,
+        } = this.props;
         const virksomhetsnummerSet = new Set();
         aktiveDialoger.forEach((dialog) => {
             virksomhetsnummerSet.add(dialog.virksomhet.virksomhetsnummer);
@@ -30,7 +34,11 @@ export class OppfoelgingsPlanerOversikt extends Component {
     }
 
     render() {
-        const { fnr, aktiveDialoger, inaktiveDialoger } = this.props;
+        const {
+            fnr,
+            aktiveDialoger,
+            inaktiveDialoger,
+        } = this.props;
         aktiveDialoger.sort((a, b) => {
             return new Date(a.godkjentPlan.deltMedNavTidspunkt) < new Date(b.godkjentPlan.deltMedNavTidspunkt) ? 1 : -1;
         });
