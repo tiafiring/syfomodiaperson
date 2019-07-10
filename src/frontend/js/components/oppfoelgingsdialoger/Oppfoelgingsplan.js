@@ -18,17 +18,24 @@ const erOppgaveFullfoert = (oppgave) => {
     return oppgave.status === FERDIG;
 };
 
-const seOppfolgingsplanOppgave = (oppfoelgingsdialog) => {
-    return oppfoelgingsdialog.oppgaver.filter((oppgave) => {
+const seOppfolgingsplanOppgave = (oppfolgingsplan) => {
+    return oppfolgingsplan.oppgaver.filter((oppgave) => {
         return oppgave.type === 'SE_OPPFOLGINGSPLAN';
     })[0];
 };
 
-const PlanVisning = ({ oppfoelgingsdialog, dokumentinfo, fnr, actions, veilederinfo }) => {
-    const sePlanOppgave = seOppfolgingsplanOppgave(oppfoelgingsdialog);
+const PlanVisning = (
+    {
+        actions,
+        dokumentinfo,
+        fnr,
+        oppfolgingsplan,
+        veilederinfo,
+    }) => {
+    const sePlanOppgave = seOppfolgingsplanOppgave(oppfolgingsplan);
     const bildeUrler = [];
     for (let i = 1; i <= dokumentinfo.antallSider; i += 1) {
-        bildeUrler.push(`${window.APP_SETTINGS.OPPFOELGINGSDIALOGREST_ROOT}/dokument/${oppfoelgingsdialog.id}/side/${i}`);
+        bildeUrler.push(`${window.APP_SETTINGS.OPPFOELGINGSDIALOGREST_ROOT}/dokument/${oppfolgingsplan.id}/side/${i}`);
     }
 
     const Skjema = () => {
@@ -79,7 +86,7 @@ const PlanVisning = ({ oppfoelgingsdialog, dokumentinfo, fnr, actions, veilederi
             <Knapp
                 type="standard"
                 onClick={() => {
-                    const newWindow = window.open(`${window.APP_SETTINGS.OPPFOELGINGSDIALOGREST_ROOT}/dokument/${oppfoelgingsdialog.id}`);
+                    const newWindow = window.open(`${window.APP_SETTINGS.OPPFOELGINGSDIALOGREST_ROOT}/dokument/${oppfolgingsplan.id}`);
                     newWindow.print();
                 }}>
                 Skriv ut
@@ -89,7 +96,7 @@ const PlanVisning = ({ oppfoelgingsdialog, dokumentinfo, fnr, actions, veilederi
 };
 
 PlanVisning.propTypes = {
-    oppfoelgingsdialog: PropTypes.object,
+    oppfolgingsplan: PropTypes.object,
     veilederinfo: PropTypes.object,
     dokumentinfo: PropTypes.object,
     actions: PropTypes.object,
@@ -98,12 +105,23 @@ PlanVisning.propTypes = {
 
 class OppfoelgingsplanWrapper extends Component {
     componentWillMount() {
-        const { actions, oppfoelgingsdialog } = this.props;
-        actions.hentDokumentinfo(oppfoelgingsdialog.id);
+        const {
+            actions,
+            oppfolgingsplan,
+        } = this.props;
+        actions.hentDokumentinfo(oppfolgingsplan.id);
     }
 
     render() {
-        const { dokumentinfo, oppfoelgingsdialog, fnr, henter, hentingFeilet, actions, veilederinfo } = this.props;
+        const {
+            actions,
+            dokumentinfo,
+            fnr,
+            henter,
+            hentingFeilet,
+            oppfolgingsplan,
+            veilederinfo,
+        } = this.props;
         return (() => {
             if (henter) {
                 return <AppSpinner />;
@@ -113,7 +131,7 @@ class OppfoelgingsplanWrapper extends Component {
             }
             return (<PlanVisning
                 veilederinfo={veilederinfo}
-                oppfoelgingsdialog={oppfoelgingsdialog}
+                oppfolgingsplan={oppfolgingsplan}
                 dokumentinfo={dokumentinfo}
                 fnr={fnr}
                 actions={actions} />);
@@ -124,7 +142,7 @@ class OppfoelgingsplanWrapper extends Component {
 OppfoelgingsplanWrapper.propTypes = {
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
-    oppfoelgingsdialog: PropTypes.object,
+    oppfolgingsplan: PropTypes.object,
     veilederinfo: PropTypes.object,
     actions: PropTypes.object,
     dokumentinfo: PropTypes.object,
@@ -139,9 +157,9 @@ export function mapDispatchToProps(dispatch) {
 }
 
 export function mapStateToProps(state, ownProps) {
-    const oppfoelgingsdialog = ownProps.oppfoelgingsdialog;
-    oppfoelgingsdialog.oppgaver = state.veilederoppgaver.data.filter((_oppgave) => {
-        return _oppgave.uuid === oppfoelgingsdialog.uuid;
+    const oppfolgingsplan = ownProps.oppfoelgingsdialog;
+    oppfolgingsplan.oppgaver = state.veilederoppgaver.data.filter((_oppgave) => {
+        return _oppgave.uuid === oppfolgingsplan.uuid;
     });
     const veilederinfo = state.veilederinfo.data;
     return {
@@ -149,7 +167,7 @@ export function mapStateToProps(state, ownProps) {
         hentingFeilet: state.dokumentinfo.hentingFeilet,
         dokumentinfo: state.dokumentinfo.data,
         brukernavn: state.navbruker.data.navn,
-        oppfoelgingsdialog,
+        oppfolgingsplan,
         veilederinfo,
         ledetekster: state.ledetekster.data,
         fnr: ownProps.fnr,
