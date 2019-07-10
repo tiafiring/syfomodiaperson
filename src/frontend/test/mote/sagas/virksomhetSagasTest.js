@@ -17,8 +17,8 @@ describe('virksomhetSagas', () => {
         const action = actions.hentVirksomhet(orgnummer);
         const generator = hentVirksomhet(action);
 
-        it('Skal dispatche HENTER_VIRKSOMHET', () => {
-            const nextPut = put({ type: 'HENTER_VIRKSOMHET' });
+        it(`Skal dispatche ${actions.HENTER_VIRKSOMHET}`, () => {
+            const nextPut = put({ type: actions.HENTER_VIRKSOMHET });
             expect(generator.next().value).to.deep.equal(nextPut);
         });
 
@@ -27,12 +27,12 @@ describe('virksomhetSagas', () => {
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal deretter si i fra om at virksomhet er hentet', () => {
+        it(`Skal deretter dispatche ${actions.HENTER_VIRKSOMHET}`, () => {
             const data = {
                 navn: 'NAV Consulting',
             };
             const nextPut = put({
-                type: 'VIRKSOMHET_HENTET',
+                type: actions.VIRKSOMHET_HENTET,
                 orgnummer,
                 data,
             });

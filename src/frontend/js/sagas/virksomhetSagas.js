@@ -15,7 +15,7 @@ export function* hentVirksomhet(action) {
 }
 
 function* watchHentVirksomhet() {
-    yield takeEvery('HENT_VIRKSOMHET_FORESPURT', hentVirksomhet);
+    yield takeEvery(actions.HENT_VIRKSOMHET_FORESPURT, hentVirksomhet);
 }
 
 export default function* virksomhetSagas() {

@@ -1,4 +1,5 @@
 import * as actiontype from '../actions/actiontyper';
+import { VIRKSOMHET_HENTET } from '../actions/virksomhet_actions';
 
 const initiellState = {
     henter: false,
@@ -33,7 +34,7 @@ export default function oppfoelgingsdialoger(state = initiellState, action) {
                 data: action.data,
             });
         }
-        case actiontype.VIRKSOMHET_HENTET: {
+        case VIRKSOMHET_HENTET: {
             const data = state.data.map((dialog) => {
                 if (dialog.virksomhet.virksomhetsnummer === action.orgnummer) {
                     return Object.assign({}, dialog, {

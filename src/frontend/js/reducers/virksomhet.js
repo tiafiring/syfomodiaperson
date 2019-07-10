@@ -1,4 +1,8 @@
-import { HENTER_VIRKSOMHET, VIRKSOMHET_HENTET, HENT_VIRKSOMHET_FEILET } from '../actions/actiontyper';
+import {
+    HENTER_VIRKSOMHET,
+    VIRKSOMHET_HENTET,
+    HENT_VIRKSOMHET_FEILET,
+} from '../actions/virksomhet_actions';
 
 const defaultState = {
     data: {},
