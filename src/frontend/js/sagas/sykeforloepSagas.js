@@ -2,7 +2,6 @@ import { call, put, fork, takeEvery } from 'redux-saga/effects';
 import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api/index';
 import * as actions from '../actions/sykeforloep_actions';
-import { HENT_SYKEFORLOEP_FORESPURT } from '../actions/actiontyper';
 
 export function* hentSykeforloep(action) {
     yield put(actions.henterSykeforloep());
@@ -16,7 +15,7 @@ export function* hentSykeforloep(action) {
 }
 
 function* watchHentSykeforloep() {
-    yield takeEvery(HENT_SYKEFORLOEP_FORESPURT, hentSykeforloep);
+    yield takeEvery(actions.HENT_SYKEFORLOEP_FORESPURT, hentSykeforloep);
 }
 
 export default function* sykeforloepSagas() {

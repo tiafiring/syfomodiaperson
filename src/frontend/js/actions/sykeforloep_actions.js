@@ -1,27 +1,30 @@
-import * as actiontyper from './actiontyper';
+export const HENT_SYKEFORLOEP_FORESPURT = 'HENT_SYKEFORLOEP_FORESPURT';
+export const HENTER_SYKEFORLOEP = 'HENTER_SYKEFORLOEP';
+export const SYKEFORLOEP_HENTET = 'SYKEFORLOEP_HENTET';
+export const HENT_SYKEFORLOEP_FEILET = 'HENT_SYKEFORLOEP_FEILET';
 
 export function hentSykeforloep(fnr) {
     return {
-        type: actiontyper.HENT_SYKEFORLOEP_FORESPURT,
+        type: HENT_SYKEFORLOEP_FORESPURT,
         fnr,
     };
 }
 
 export function henterSykeforloep() {
     return {
-        type: actiontyper.HENTER_SYKEFORLOEP,
+        type: HENTER_SYKEFORLOEP,
     };
 }
 
 export function sykeforloepHentet(data) {
     return {
-        type: actiontyper.SYKEFORLOEP_HENTET,
+        type: SYKEFORLOEP_HENTET,
         data,
     };
 }
 
 export function hentSykeforloepFeilet() {
     return {
-        type: actiontyper.HENT_SYKEFORLOEP_FEILET,
+        type: HENT_SYKEFORLOEP_FEILET,
     };
 }

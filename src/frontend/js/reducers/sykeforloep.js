@@ -1,3 +1,9 @@
+import {
+    HENTER_SYKEFORLOEP,
+    SYKEFORLOEP_HENTET,
+    HENT_SYKEFORLOEP_FEILET,
+} from '../actions/sykeforloep_actions';
+
 const initiellState = {
     henter: false,
     hentet: false,
@@ -7,21 +13,21 @@ const initiellState = {
 
 export default function sykeforloep(state = initiellState, action) {
     switch (action.type) {
-        case 'HENT_SYKEFORLOEP_FEILET': {
+        case HENT_SYKEFORLOEP_FEILET: {
             return Object.assign({}, state, {
                 data: [],
                 henter: false,
                 hentingFeilet: true,
             });
         }
-        case 'HENTER_SYKEFORLOEP': {
+        case HENTER_SYKEFORLOEP: {
             return Object.assign({}, state, {
                 data: [],
                 henter: true,
                 hentingFeilet: false,
             });
         }
-        case 'SYKEFORLOEP_HENTET': {
+        case SYKEFORLOEP_HENTET: {
             return Object.assign({}, state, {
                 henter: false,
                 hentingFeilet: false,
