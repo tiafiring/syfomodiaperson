@@ -3,7 +3,6 @@ import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api/index';
 import * as actions from '../actions/sykmeldinger_actions';
 import { sykmeldingerHentet } from '../actions/sykmeldinger_actions';
-import { HENT_SYKMELDINGER_FORESPURT } from '../actions/actiontyper';
 import { erDev } from '../selectors/toggleSelectors';
 import mockSykmeldinger from '../../test/mockdata/mockSykmeldinger';
 
@@ -23,7 +22,7 @@ export function* hentSykmeldinger(action) {
 }
 
 function* watchHentSykmeldinger() {
-    yield takeEvery(HENT_SYKMELDINGER_FORESPURT, hentSykmeldinger);
+    yield takeEvery(actions.HENT_SYKMELDINGER_FORESPURT, hentSykmeldinger);
 }
 
 export default function* sykmeldingerSagas() {
