@@ -3,8 +3,8 @@ import { call, put } from 'redux-saga/effects';
 import { get } from '../../js/api/index';
 import { hentMotebehov } from '../../js/sagas/motebehovSagas';
 import {
-    HENTER_MOTEBEHOV,
-    MOTEBEHOV_HENTET,
+    HENT_MOTEBEHOV_HENTER,
+    HENT_MOTEBEHOV_HENTET,
 } from '../../js/actions/motebehov_actions';
 
 describe('motebehovSagas', () => {
@@ -20,8 +20,8 @@ describe('motebehovSagas', () => {
             fnr: '123',
         });
 
-        it(`Skal dispatche ${HENTER_MOTEBEHOV}`, () => {
-            const nextPut = put({ type: HENTER_MOTEBEHOV });
+        it(`Skal dispatche ${HENT_MOTEBEHOV_HENTER}`, () => {
+            const nextPut = put({ type: HENT_MOTEBEHOV_HENTER });
 
             expect(generator.next().value).to.deep.equal(nextPut);
         });
@@ -32,9 +32,9 @@ describe('motebehovSagas', () => {
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it(`Skal dispatche ${MOTEBEHOV_HENTET}`, () => {
+        it(`Skal dispatche ${HENT_MOTEBEHOV_HENTET}`, () => {
             const nextPut = put({
-                type: MOTEBEHOV_HENTET,
+                type: HENT_MOTEBEHOV_HENTET,
                 data: [{ id: 1 }],
             });
 

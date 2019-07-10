@@ -53,7 +53,7 @@ describe('motebehov', () => {
     });
 
     describe('HENT MØTEBEHOV', () => {
-        it('Håndterer HENTER_MOTEBEHOV', () => {
+        it('Håndterer HENT_MOTEBEHOV_HENTER', () => {
             const initialState = deepFreeze({});
             const action = actions.henterMotebehov();
 
@@ -67,7 +67,7 @@ describe('motebehov', () => {
             });
         });
 
-        it('Håndterer MOTEBEHOV_HENTET, med sortert motebehovliste', () => {
+        it('Håndterer HENT_MOTEBEHOV_HENTET, med sortert motebehovliste', () => {
             const initialState = deepFreeze({
                 data: [],
                 henter: true,

@@ -15,7 +15,7 @@ describe('moter_actions', () => {
         const action = actions.henterMotebehov();
 
         expect(action).to.deep.equal({
-            type: actions.HENTER_MOTEBEHOV,
+            type: actions.HENT_MOTEBEHOV_HENTER,
         });
     });
 
@@ -28,7 +28,7 @@ describe('moter_actions', () => {
         const action = actions.motebehovHentet(data);
 
         expect(action).to.deep.equal({
-            type: actions.MOTEBEHOV_HENTET,
+            type: actions.HENT_MOTEBEHOV_HENTET,
             data: {
                 id: 1,
                 opprettetAv: '1234',
