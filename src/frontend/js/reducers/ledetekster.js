@@ -1,4 +1,8 @@
-import * as actiontyper from '../actions/actiontyper';
+import {
+    LEDETEKSTER_HENTET,
+    HENTER_LEDETEKSTER,
+    HENT_LEDETEKSTER_FEILET,
+} from '../actions/ledetekster_actions';
 
 const initiellState = {
     henter: false,
@@ -9,21 +13,21 @@ const initiellState = {
 
 export default function ledetekster(state = initiellState, action = {}) {
     switch (action.type) {
-        case actiontyper.LEDETEKSTER_HENTET:
+        case LEDETEKSTER_HENTET:
             return {
                 data: action.ledetekster,
                 henter: false,
                 hentingFeilet: false,
                 hentet: true,
             };
-        case actiontyper.HENTER_LEDETEKSTER:
+        case HENTER_LEDETEKSTER:
             return {
                 data: {},
                 henter: true,
                 hentingFeilet: false,
                 hentet: false,
             };
-        case actiontyper.HENT_LEDETEKSTER_FEILET:
+        case HENT_LEDETEKSTER_FEILET:
             return {
                 data: {},
                 henter: false,

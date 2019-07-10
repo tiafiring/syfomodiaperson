@@ -2,7 +2,6 @@ import { call, put, fork, takeEvery } from 'redux-saga/effects';
 import { setLedetekster, log } from '@navikt/digisyfo-npm';
 import { get } from '../api';
 import * as actions from '../actions/ledetekster_actions';
-import * as actiontyper from '../actions/actiontyper';
 
 export function* hentLedetekster() {
     yield put(actions.henterLedetekster());
@@ -17,7 +16,7 @@ export function* hentLedetekster() {
 }
 
 function* watchHentLedetekster() {
-    yield takeEvery(actiontyper.HENT_LEDETEKSTER_FORESPURT, hentLedetekster);
+    yield takeEvery(actions.HENT_LEDETEKSTER_FORESPURT, hentLedetekster);
 }
 
 export default function* ledeteksterSagas() {
