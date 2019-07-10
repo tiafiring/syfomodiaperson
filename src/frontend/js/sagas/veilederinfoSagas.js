@@ -1,7 +1,6 @@
 import { call, put, fork, all, takeEvery } from 'redux-saga/effects';
 import { get } from '../api/index';
 import * as actions from '../actions/veilederinfo_actions';
-import { HENT_VEILEDERINFO_FORESPURT } from '../actions/actiontyper';
 
 export function* hentVeilederinfoSaga() {
     yield put(actions.henterVeilederinfo());
@@ -14,7 +13,7 @@ export function* hentVeilederinfoSaga() {
 }
 
 function* watchHentVeilederinfo() {
-    yield takeEvery(HENT_VEILEDERINFO_FORESPURT, hentVeilederinfoSaga);
+    yield takeEvery(actions.HENT_VEILEDERINFO_FORESPURT, hentVeilederinfoSaga);
 }
 
 export default function* veilederinfoSagas() {

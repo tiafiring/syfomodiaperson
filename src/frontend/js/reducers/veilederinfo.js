@@ -2,7 +2,7 @@ import {
     HENTER_VEILEDERINFO,
     VEILEDERINFO_HENTET,
     HENT_VEILEDERINFO_FEILET,
-} from '../actions/actiontyper';
+} from '../actions/veilederinfo_actions';
 
 const initiellState = {
     hentet: false,
