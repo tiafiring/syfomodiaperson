@@ -1,7 +1,6 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
 import { get } from '../api/index';
 import * as actions from '../actions/egenansatt_actions';
-import * as actiontyper from '../actions/actiontyper';
 
 export function* hentEgenansattSaga(action) {
     yield put(actions.henterEgenansatt());
@@ -13,7 +12,7 @@ export function* hentEgenansattSaga(action) {
     }
 }
 function* watchHentEgenansatt() {
-    yield takeEvery(actiontyper.HENT_EGENANSATT_FORESPURT, hentEgenansattSaga);
+    yield takeEvery(actions.HENT_EGENANSATT_FORESPURT, hentEgenansattSaga);
 }
 
 export default function* egenansattSagas() {

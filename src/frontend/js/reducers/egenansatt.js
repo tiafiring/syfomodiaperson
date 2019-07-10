@@ -1,4 +1,8 @@
-import * as actiontyper from '../actions/actiontyper';
+import {
+    HENTER_EGENANSATT,
+    EGENANSATT_HENTET,
+    HENT_EGENANSATT_FEILET,
+} from '../actions/egenansatt_actions';
 
 const initiellState = {
     henter: false,
@@ -9,7 +13,7 @@ const initiellState = {
 
 export default function egenansatt(state = initiellState, action) {
     switch (action.type) {
-        case actiontyper.HENTER_EGENANSATT: {
+        case HENTER_EGENANSATT: {
             return Object.assign({}, state, {
                 henter: true,
                 hentet: false,
@@ -17,14 +21,14 @@ export default function egenansatt(state = initiellState, action) {
                 data: {},
             });
         }
-        case actiontyper.EGENANSATT_HENTET: {
+        case EGENANSATT_HENTET: {
             return Object.assign({}, state, {
                 henter: false,
                 hentet: true,
                 data: action.data,
             });
         }
-        case actiontyper.HENT_EGENANSATT_FEILET: {
+        case HENT_EGENANSATT_FEILET: {
             return Object.assign({}, state, {
                 henter: false,
                 hentingFeilet: true,

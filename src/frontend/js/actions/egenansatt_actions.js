@@ -1,27 +1,30 @@
-import * as actiontype from './actiontyper';
+export const HENT_EGENANSATT_FORESPURT = 'HENT_EGENANSATT_FORESPURT';
+export const HENTER_EGENANSATT = 'HENTER_EGENANSATT';
+export const HENT_EGENANSATT_FEILET = 'HENT_EGENANSATT_FEILET';
+export const EGENANSATT_HENTET = 'EGENANSATT_HENTET';
 
 export function hentEgenansatt(fnr) {
     return {
-        type: actiontype.HENT_EGENANSATT_FORESPURT,
+        type: HENT_EGENANSATT_FORESPURT,
         fnr,
     };
 }
 
 export function hentEgenansattFeilet() {
     return {
-        type: actiontype.HENT_EGENANSATT_FEILET,
+        type: HENT_EGENANSATT_FEILET,
     };
 }
 
 export function henterEgenansatt() {
     return {
-        type: actiontype.HENTER_EGENANSATT,
+        type: HENTER_EGENANSATT,
     };
 }
 
 export function egenansattHentet(data) {
     return {
-        type: actiontype.EGENANSATT_HENTET,
+        type: EGENANSATT_HENTET,
         data,
     };
 }

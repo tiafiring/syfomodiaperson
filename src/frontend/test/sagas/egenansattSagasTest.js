@@ -5,7 +5,7 @@ import { hentEgenansattSaga } from '../../js/sagas/egenansattSagas';
 import {
     HENTER_EGENANSATT,
     EGENANSATT_HENTET,
-} from '../../js/actions/actiontyper';
+} from '../../js/actions/egenansatt_actions';
 
 describe('egenansattSagas', () => {
     beforeEach(() => {
