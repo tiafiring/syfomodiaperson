@@ -6,7 +6,6 @@ import {
 } from '../api/index';
 import * as actions from '../actions/motebehov_actions';
 import * as behandleActions from '../actions/behandlemotebehov_actions';
-import * as actiontyper from '../actions/actiontyper';
 
 export function* hentMotebehov(action) {
     const fnr = action.fnr ? action.fnr : '';
@@ -43,7 +42,7 @@ export function* behandleMotebehov(action) {
 }
 
 function* watchHentMotebehov() {
-    yield takeEvery(actiontyper.HENT_MOTEBEHOV_FORESPURT, hentMotebehov);
+    yield takeEvery(actions.HENT_MOTEBEHOV_FORESPURT, hentMotebehov);
 }
 
 function* watchbehandleMotebehov() {

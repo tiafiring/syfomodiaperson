@@ -1,4 +1,9 @@
-import * as actions from '../actions/actiontyper';
+import {
+    HENTER_MOTEBEHOV,
+    MOTEBEHOV_HENTET,
+    HENT_MOTEBEHOV_FEILET,
+    HENT_MOTEBEHOV_IKKE_TILGANG,
+} from '../actions/motebehov_actions';
 import { BEHANDLE_MOTEBEHOV_BEHANDLET } from '../actions/behandlemotebehov_actions';
 
 export const sorterEtterDato = (a, b) => {
@@ -15,7 +20,7 @@ const defaultState = {
 
 export default function motebehov(state = defaultState, action) {
     switch (action.type) {
-        case actions.HENTER_MOTEBEHOV: {
+        case HENTER_MOTEBEHOV: {
             return Object.assign({}, state, {
                 data: [],
                 henter: true,
@@ -23,7 +28,7 @@ export default function motebehov(state = defaultState, action) {
                 hentingFeilet: false,
             });
         }
-        case actions.MOTEBEHOV_HENTET: {
+        case MOTEBEHOV_HENTET: {
             return Object.assign({}, state, {
                 data: action.data.sort(sorterEtterDato),
                 henter: false,
@@ -31,7 +36,7 @@ export default function motebehov(state = defaultState, action) {
                 hentingFeilet: false,
             });
         }
-        case actions.HENT_MOTEBEHOV_FEILET: {
+        case HENT_MOTEBEHOV_FEILET: {
             return Object.assign({}, state, {
                 data: [],
                 henter: false,
@@ -39,7 +44,7 @@ export default function motebehov(state = defaultState, action) {
                 hentingFeilet: true,
             });
         }
-        case actions.HENT_MOTEBEHOV_IKKE_TILGANG: {
+        case HENT_MOTEBEHOV_IKKE_TILGANG: {
             return Object.assign({}, state, {
                 data: [],
                 henter: false,

@@ -5,7 +5,7 @@ import { hentMotebehov } from '../../js/sagas/motebehovSagas';
 import {
     HENTER_MOTEBEHOV,
     MOTEBEHOV_HENTET,
-} from '../../js/actions/actiontyper';
+} from '../../js/actions/motebehov_actions';
 
 describe('motebehovSagas', () => {
     beforeEach(() => {
