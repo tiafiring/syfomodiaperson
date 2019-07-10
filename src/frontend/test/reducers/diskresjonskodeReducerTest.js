@@ -1,6 +1,11 @@
 import deepFreeze from 'deep-freeze';
 import { expect } from 'chai';
 import * as actions from '../../js/actions/diskresjonskode_actions';
+import {
+    DISKRESJONSKODE_HENTET,
+    HENT_DISKRESJONSKODE_FEILET,
+    HENTER_DISKRESJONSKODE
+} from '../../js/actions/diskresjonskode_actions';
 import diskresjonskode from '../../js/reducers/diskresjonskode';
 
 describe('diskresjonskode', () => {
@@ -12,7 +17,7 @@ describe('diskresjonskode', () => {
             data: {},
         });
 
-        it('håndterer HENTER_DISKRESJONSKODE', () => {
+        it(`håndterer ${HENTER_DISKRESJONSKODE}`, () => {
             const action = actions.henterDiskresjonskode();
             const nextState = diskresjonskode(initialState, action);
             expect(nextState).to.deep.equal({
@@ -23,7 +28,7 @@ describe('diskresjonskode', () => {
             });
         });
 
-        it('håndterer DISKRESJONSKODE_HENTET', () => {
+        it(`håndterer ${DISKRESJONSKODE_HENTET}`, () => {
             const data = { diskresjonskode: 1 };
             const action = actions.diskresjonskodeHentet(data);
             const nextState = diskresjonskode(initialState, action);
@@ -35,7 +40,7 @@ describe('diskresjonskode', () => {
             });
         });
 
-        it('håndterer HENT_DISKRESJONSKODE_FEILET', () => {
+        it(`håndterer ${HENT_DISKRESJONSKODE_FEILET}`, () => {
             const action = actions.hentDiskresjonskodeFeilet();
             const nextState = diskresjonskode(initialState, action);
             expect(nextState).to.deep.equal({

@@ -2,6 +2,11 @@ import { expect } from 'chai';
 import deepFreeze from 'deep-freeze';
 import * as actions from '../../js/actions/egenansatt_actions';
 import egenansatt from '../../js/reducers/egenansatt';
+import {
+    HENTER_EGENANSATT,
+    EGENANSATT_HENTET,
+    HENT_EGENANSATT_FEILET,
+} from "../../js/actions/egenansatt_actions";
 
 describe('egenansatt', () => {
     describe('henter', () => {
@@ -12,7 +17,7 @@ describe('egenansatt', () => {
             data: {},
         });
 
-        it('håndterer HENTER_EGENANSATT', () => {
+        it(`håndterer ${HENTER_EGENANSATT}`, () => {
             const action = actions.henterEgenansatt();
             const nextState = egenansatt(initialState, action);
             expect(nextState).to.deep.equal({
@@ -23,7 +28,7 @@ describe('egenansatt', () => {
             });
         });
 
-        it('håndterer EGENANSATT_HENTET', () => {
+        it(`håndterer ${EGENANSATT_HENTET}`, () => {
             const data = { erEgenAnsatt: 1 };
             const action = actions.egenansattHentet(data);
             const nextState = egenansatt(initialState, action);
@@ -35,7 +40,7 @@ describe('egenansatt', () => {
             });
         });
 
-        it('håndterer HENT_EGENANSATT_FEILET', () => {
+        it(`håndterer ${HENT_EGENANSATT_FEILET}`, () => {
             const action = actions.hentEgenansattFeilet();
             const nextState = egenansatt(initialState, action);
             expect(nextState).to.deep.equal({
