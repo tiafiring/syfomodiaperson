@@ -1,4 +1,8 @@
-import * as actiontype from '../actions/actiontyper';
+import {
+    HENT_BEHANDLENDE_ENHET_FEILET,
+    HENTER_BEHANDLENDE_ENHET,
+    BEHANDLENDE_ENHET_HENTET,
+} from '../actions/behandlendeEnhet_actions';
 
 const initiellState = {
     henter: false,
@@ -8,21 +12,21 @@ const initiellState = {
 
 export default function veilederoppgaver(state = initiellState, action) {
     switch (action.type) {
-        case actiontype.HENT_BEHANDLENDE_ENHET_FEILET: {
+        case HENT_BEHANDLENDE_ENHET_FEILET: {
             return Object.assign({}, state, {
                 data: {},
                 henter: false,
                 hentingFeilet: true,
             });
         }
-        case actiontype.HENTER_BEHANDLENDE_ENHET: {
+        case HENTER_BEHANDLENDE_ENHET: {
             return {
                 data: {},
                 henter: true,
                 hentingFeilet: false,
             };
         }
-        case actiontype.BEHANDLENDE_ENHET_HENTET: {
+        case BEHANDLENDE_ENHET_HENTET: {
             return {
                 henter: false,
                 hentingFeilet: false,

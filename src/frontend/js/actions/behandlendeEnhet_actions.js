@@ -1,27 +1,30 @@
-import * as actionstype from './actiontyper';
+export const HENT_BEHANDLENDE_ENHET_FORESPURT = 'HENT_BEHANDLENDE_ENHET_FORESPURT';
+export const HENTER_BEHANDLENDE_ENHET = 'HENTER_BEHANDLENDE_ENHET';
+export const HENT_BEHANDLENDE_ENHET_FEILET = 'HENT_BEHANDLENDE_ENHET_FEILET';
+export const BEHANDLENDE_ENHET_HENTET = 'BEHANDLENDE_ENHET_HENTET';
 
-export function hentBehandlendeEnhetFeilet() {
+export function hentBehandlendeEnhet(fnr) {
     return {
-        type: actionstype.HENT_BEHANDLENDE_ENHET_FEILET,
+        type: HENT_BEHANDLENDE_ENHET_FORESPURT,
+        fnr,
     };
 }
 
 export function henterBehandlendeEnhet() {
     return {
-        type: actionstype.HENTER_BEHANDLENDE_ENHET,
+        type: HENTER_BEHANDLENDE_ENHET,
     };
 }
 
 export function behandlendeEnhetHentet(data) {
     return {
-        type: actionstype.BEHANDLENDE_ENHET_HENTET,
+        type: BEHANDLENDE_ENHET_HENTET,
         data,
     };
 }
 
-export function hentBehandlendeEnhet(fnr) {
+export function hentBehandlendeEnhetFeilet() {
     return {
-        type: actionstype.HENT_BEHANDLENDE_ENHET_FORESPURT,
-        fnr,
+        type: HENT_BEHANDLENDE_ENHET_FEILET,
     };
 }
