@@ -1,7 +1,6 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
 import { get } from '../api/index';
 import * as actions from '../actions/diskresjonskode_actions';
-import * as actiontyper from '../actions/actiontyper';
 
 export function* hentDiskresjonskodeSaga(action) {
     yield put(actions.henterDiskresjonskode());
@@ -13,7 +12,7 @@ export function* hentDiskresjonskodeSaga(action) {
     }
 }
 function* watchHentDiskresjonskode() {
-    yield takeEvery(actiontyper.HENT_DISKRESJONSKODE_FORESPURT, hentDiskresjonskodeSaga);
+    yield takeEvery(actions.HENT_DISKRESJONSKODE_FORESPURT, hentDiskresjonskodeSaga);
 }
 
 export default function* diskresjonskodeSagas() {

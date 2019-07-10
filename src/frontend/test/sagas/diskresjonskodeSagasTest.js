@@ -5,7 +5,7 @@ import { get } from '../../js/api/index';
 import {
     HENTER_DISKRESJONSKODE,
     DISKRESJONSKODE_HENTET,
-} from '../../js/actions/actiontyper';
+} from '../../js/actions/diskresjonskode_actions';
 
 describe('diskresjonskodeSagas', () => {
     beforeEach(() => {

@@ -1,4 +1,8 @@
-import * as actiontyper from '../actions/actiontyper';
+import {
+    HENTER_DISKRESJONSKODE,
+    DISKRESJONSKODE_HENTET,
+    HENT_DISKRESJONSKODE_FEILET,
+} from '../actions/diskresjonskode_actions';
 
 const initiellState = {
     henter: false,
@@ -9,7 +13,7 @@ const initiellState = {
 
 export default function diskresjonskode(state = initiellState, action) {
     switch (action.type) {
-        case actiontyper.HENTER_DISKRESJONSKODE: {
+        case HENTER_DISKRESJONSKODE: {
             return Object.assign({}, state, {
                 henter: true,
                 hentet: false,
@@ -17,14 +21,14 @@ export default function diskresjonskode(state = initiellState, action) {
                 data: {},
             });
         }
-        case actiontyper.DISKRESJONSKODE_HENTET: {
+        case DISKRESJONSKODE_HENTET: {
             return Object.assign({}, state, {
                 henter: false,
                 hentet: true,
                 data: action.data,
             });
         }
-        case actiontyper.HENT_DISKRESJONSKODE_FEILET: {
+        case HENT_DISKRESJONSKODE_FEILET: {
             return Object.assign({}, state, {
                 henter: false,
                 hentingFeilet: true,
