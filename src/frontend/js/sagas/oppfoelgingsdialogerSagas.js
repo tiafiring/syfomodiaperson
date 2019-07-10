@@ -2,13 +2,12 @@ import { call, put, fork, takeEvery } from 'redux-saga/effects';
 import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api/index';
 import * as actions from '../actions/oppfoelgingsdialoger_actions';
-import * as actiontype from '../actions/actiontyper';
 
 export function* hentOppfoelgingsdialoger(action) {
     yield put(actions.henterOppfoelgingsdialoger());
     try {
         const data = yield call(get, `${window.APP_SETTINGS.OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialog/v1/${action.fnr}`);
-        yield put({ type: 'OPPFOELGINGSDIALOGER_HENTET', data });
+        yield put(actions.hentOppfolgingsdialogerHentet(data));
     } catch (e) {
         log(e);
         yield put(actions.hentOppfoelgingsdialogerFeilet());
@@ -16,7 +15,7 @@ export function* hentOppfoelgingsdialoger(action) {
 }
 
 function* watchHentOppfoelgingsdialoger() {
-    yield takeEvery(actiontype.HENT_OPPFOELGINGSDIALOGER_FORESPURT, hentOppfoelgingsdialoger);
+    yield takeEvery(actions.HENT_OPPFOELGINGSDIALOGER_FORESPURT, hentOppfoelgingsdialoger);
 }
 
 export default function* oppfoelgingsdialogerSagas() {
