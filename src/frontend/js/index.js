@@ -176,4 +176,5 @@ if (window.location.hostname.indexOf('localhost') !== -1) {
 export {
     store,
     history,
+    config,
 };

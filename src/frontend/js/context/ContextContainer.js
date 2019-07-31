@@ -13,21 +13,21 @@ import { hentVeilederinfo } from '../actions/veilederinfo_actions';
 import { opprettWebsocketConnection } from './contextHolder';
 
 const opprettWSConnection = (actions, veilederinfo) => {
+    const config = require('../index').config;
     const ident = veilederinfo.data.ident;
     opprettWebsocketConnection(ident, (wsCallback) => {
         if (wsCallback.data === CONTEXT_EVENT_TYPE.NY_AKTIV_BRUKER) {
-            actions.hentAktivEnhet({
+            actions.hentAktivBruker({
                 callback: (aktivBruker) => {
-                    // eslint-disable-next-line no-undef
-                    if (aktivBruker !== fnr) {
-                        window.location = `/sykefravaer/${aktivBruker}`;
+                    if (aktivBruker !== config.config.fnr) {
+                        window.location.href = `/sykefravaer/${aktivBruker}`;
                     }
                 },
             });
         } else if (wsCallback.data === CONTEXT_EVENT_TYPE.NY_AKTIV_ENHET) {
             actions.hentAktivEnhet({
                 callback: (aktivEnhet) => {
-                    if (config.config.initiellEnhet !== aktivEnhet) {
+                    if (aktivEnhet !== config.config.initiellEnhet) {
                         actions.valgtEnhet(aktivEnhet);
                         config.config.initiellEnhet = aktivEnhet;
                         window.renderDecoratorHead(config);
