@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import AlertStripe from 'nav-frontend-alertstriper';
+import { Knapp } from 'nav-frontend-knapper';
+import ModalWrapper from 'nav-frontend-modal';
 import { CONTEXT_EVENT_TYPE } from '../konstanter';
 import {
     hentAktivBruker,
@@ -12,11 +14,8 @@ import {
 import { valgtEnhet } from '../actions/enhet_actions';
 import { hentVeilederinfo } from '../actions/veilederinfo_actions';
 import { opprettWebsocketConnection } from './contextHolder';
-import ModalWrapper from 'nav-frontend-modal';
-import { Knapp } from 'nav-frontend-knapper';
 import { config } from '../global';
 import { isNullOrUndefined } from 'util';
-import Lenke from 'nav-frontend-lenker';
 
 const redirectTilNyBruker = (nyttFnr) => {
     window.location.href = `/sykefravaer/${nyttFnr}`;
@@ -51,7 +50,7 @@ const tekster = {
 };
 
 const endretSideModal = (endretType, byttTilNyClickHandler, beholdGammelClickHandler) => {
-    const modalTekster = endretType === 'bruker' 
+    const modalTekster = endretType === 'bruker'
         ? tekster.endretBrukerModal
         : tekster.endretEnhetModal;
 
