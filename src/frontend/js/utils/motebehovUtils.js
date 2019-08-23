@@ -49,7 +49,7 @@ export const harArbeidstakerSvartPaaMotebehov = (motebehovData) => {
 
 const erAlleMotebehovSvarBehandlet = (motebehovListe) => {
     return motebehovListe.filter((motebehov) => {
-        return !motebehov.behandletTidspunkt;
+        return motebehov.motebehovSvar && motebehov.motebehovSvar.harMotebehov && !motebehov.behandletTidspunkt;
     }).length === 0;
 };
 

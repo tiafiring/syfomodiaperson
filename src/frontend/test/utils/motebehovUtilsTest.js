@@ -175,29 +175,62 @@ describe('motebehovUtils', () => {
     });
 
     describe('erMotebehovBehandlet', () => {
-        const motebehovBehandlet = {
+        const motebehovMedBehovBehandlet = {
+            motebehovSvar: {
+                harMotebehov: true,
+            },
             behandletTidspunkt: new Date(),
-            behandletVeilederIdent: "Z990000",
+            behandletVeilederIdent: 'Z990000',
         };
-        const motebehovUbehandlet = {
+        const motebehovMedBehovUbehandlet = {
+            motebehovSvar: {
+                harMotebehov: true,
+            },
+            behandletTidspunkt: null,
+            behandletVeilederIdent: null,
+        };
+        const motebehovUtenBehovUbehandlet = {
+            motebehovSvar: {
+                harMotebehov: false,
+            },
             behandletTidspunkt: null,
             behandletVeilederIdent: null,
         };
 
-        describe('med motebehov og uten veilederoppgaver', () => {
-            it('er false, om det eksisterer minst 1 ubehandlet motebehov', () => {
-                const exp = erMotebehovBehandlet([motebehovBehandlet, motebehovUbehandlet], []);
-                expect(exp).to.equal(false)
-            });
-
-            it('er false, om det eksisterer kun 1 ubehandlet motebehov', () => {
-                const exp = erMotebehovBehandlet([motebehovUbehandlet], []);
-                expect(exp).to.equal(false)
-            });
-
-            it('er true, om det kun behandlet motebehov', () => {
-                const exp = erMotebehovBehandlet([motebehovBehandlet], []);
+        describe('med motebehovsvar og uten veilederoppgaver', () => {
+            it('er true, med 1 behandlet svar med behov', () => {
+                const exp = erMotebehovBehandlet([motebehovMedBehovBehandlet], []);
                 expect(exp).to.equal(true)
+            });
+
+            it('er false, med 1 ubehandlet svar med behov', () => {
+                const exp = erMotebehovBehandlet([motebehovMedBehovUbehandlet], []);
+                expect(exp).to.equal(false)
+            });
+
+            it('er true, med 1 ubehandlet svar uten behov', () => {
+                const exp = erMotebehovBehandlet([motebehovUtenBehovUbehandlet], []);
+                expect(exp).to.equal(true)
+            });
+
+            it('er false, med 1 behandlet svar med behov, 1 ubehandlet svar med behov', () => {
+                const exp = erMotebehovBehandlet([motebehovMedBehovBehandlet, motebehovMedBehovUbehandlet], []);
+                expect(exp).to.equal(false)
+            });
+
+            it('er false, med 1 ubehandlet svar med behov og 1 ubehandlet svar uten behov', () => {
+                const exp = erMotebehovBehandlet([motebehovMedBehovUbehandlet, motebehovUtenBehovUbehandlet], []);
+                expect(exp).to.equal(false)
+            });
+
+            it('er true, med 1 behandlet svar med behov og 1 ubehandlet svar uten behov', () => {
+                const exp = erMotebehovBehandlet([motebehovMedBehovBehandlet, motebehovUtenBehovUbehandlet], []);
+                expect(exp).to.equal(true)
+            });
+
+            it('er false, med 1 behandlet svar med behov, 1 ubehandlet svar med behov, 1 ubehandlet svar uten behov', () => {
+                const exp = erMotebehovBehandlet([motebehovMedBehovBehandlet, motebehovMedBehovUbehandlet, motebehovUtenBehovUbehandlet], []);
+                expect(exp).to.equal(false)
             });
         });
 
