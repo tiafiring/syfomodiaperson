@@ -158,7 +158,7 @@ export const Samtalereferat = (
 ) => {
     return (<div className="utdragFraSykefravaeret__samtalereferat">
         <h3>{tekster.samtalereferat.header}</h3>
-        <Lenke className="lenke" href={`https://modapp${finnMiljoStreng()}.adeo.no/modiabrukerdialog/person/${fnr}?7#!meldinger`} target="_blank" >
+        <Lenke className="lenke" href={`https://modapp${finnMiljoStreng()}.adeo.no/modiabrukerdialog/person/${fnr}#!meldinger`} target="_blank" >
             {tekster.samtalereferat.lenkeTekst}
         </Lenke>
     </div>);
