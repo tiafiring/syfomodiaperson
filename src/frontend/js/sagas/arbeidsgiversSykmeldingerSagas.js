@@ -1,4 +1,9 @@
-import { call, put, fork, takeEvery } from 'redux-saga/effects';
+import {
+    call,
+    put,
+    fork,
+    takeEvery,
+} from 'redux-saga/effects';
 import { get } from '../api/index';
 import * as actions from '../actions/arbeidsgiverssykmeldinger_actions';
 
