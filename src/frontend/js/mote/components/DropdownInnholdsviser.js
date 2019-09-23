@@ -48,8 +48,15 @@ class DropdownInnholdsviser extends Component {
     }
 
     render() {
-        const { henter, hentingFeilet, epostinnhold, arbeidsgiverepostinnhold } = this.props;
-        const innhold = this.props.type === BRUKER ? epostinnhold : arbeidsgiverepostinnhold;
+        const {
+            henter,
+            hentingFeilet,
+            epostinnhold,
+            arbeidsgiverepostinnhold,
+        } = this.props;
+        const innhold = this.props.type === BRUKER
+            ? epostinnhold
+            : arbeidsgiverepostinnhold;
 
         if (henter) {
             return <AppSpinner />;

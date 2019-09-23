@@ -172,14 +172,20 @@ export function setHash(hendelser) {
 }
 
 export function mapStateToProps(state, ownProps) {
-    let arbeidssituasjonParam = (ownProps && ownProps.params) ? ownProps.params.arbeidssituasjon : undefined;
+    let arbeidssituasjonParam = (ownProps && ownProps.params)
+        ? ownProps.params.arbeidssituasjon
+        : undefined;
     arbeidssituasjonParam = mapArbeidssituasjonParam(arbeidssituasjonParam);
     const arbeidssituasjon = arbeidssituasjonParam || 'MED_ARBEIDSGIVER';
-    const hendelser = state.tidslinjer && state.tidslinjer.data && state.tidslinjer.data.length ? state.tidslinjer.data[0].hendelser : [];
+    const hendelser = state.tidslinjer && state.tidslinjer.data && state.tidslinjer.data.length
+        ? state.tidslinjer.data[0].hendelser
+        : [];
     if (hendelser.length) {
         setHash(hendelser);
     }
-    const apneHendelseIder = (ownProps && ownProps.location) ? ownProps.location.hash.replace('#', '').split('/') : [];
+    const apneHendelseIder = (ownProps && ownProps.location)
+        ? ownProps.location.hash.replace('#', '').split('/')
+        : [];
 
     const henter = state.ledetekster.henter
         || state.tilgang.henter

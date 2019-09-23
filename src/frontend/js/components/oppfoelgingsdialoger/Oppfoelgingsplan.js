@@ -43,7 +43,7 @@ const PlanVisning = (
             ? <Alertstripe type="suksess">
                 <p>Ferdig behandlet av {sePlanOppgave.sistEndretAv} {tilLesbarDatoMedArstall(sePlanOppgave.sistEndret)}</p>
             </Alertstripe>
-                : sePlanOppgave && sePlanOppgave.status !== FERDIG
+            : sePlanOppgave && sePlanOppgave.status !== FERDIG
                 ? <Checkbox
                     label="Marker som behandlet"
                     onClick={() => {

@@ -94,7 +94,9 @@ export const StatusVarsel = (
         ledetekster,
         arbeidstaker,
     }) => {
-    const dato = (mote.status === OPPRETTET || mote.status === FLERE_TIDSPUNKT) ? mote.opprettetTidspunkt : mote.bekreftetAlternativ.created;
+    const dato = (mote.status === OPPRETTET || mote.status === FLERE_TIDSPUNKT)
+        ? mote.opprettetTidspunkt
+        : mote.bekreftetAlternativ.created;
     return (<div className="panel statusVarsel">
         <AlertStripe type="suksess">
             <div className="panel">
