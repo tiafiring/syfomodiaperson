@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import {
     getLedetekst,
     getHtmlLedetekst,
+    keyValue,
 } from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
 import * as sykepengesoknaderActions from '../actions/sykepengesoknader_actions';
@@ -98,7 +99,7 @@ SykepengesoknaderSide.propTypes = {
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     skalHenteSykepengesoknader: PropTypes.bool,
     skalHenteSoknader: PropTypes.bool,
     hentingFeiletSoknader: PropTypes.bool,

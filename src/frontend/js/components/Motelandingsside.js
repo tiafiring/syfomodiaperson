@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 import { tilDatoMedUkedagOgManedNavn } from '../utils/datoUtils';
 import Sidetopp from '../components/Sidetopp';
-import { Link } from 'react-router';
 
 const setTittel = (mote) => {
     if (mote) {

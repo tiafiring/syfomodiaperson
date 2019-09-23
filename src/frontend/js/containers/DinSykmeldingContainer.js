@@ -7,6 +7,7 @@ import {
     getHtmlLedetekst,
     getLedetekst,
     sykmeldingstatuser,
+    keyValue,
 } from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
 import SidetoppSpeilet from '../components/SidetoppSpeilet';
@@ -86,7 +87,7 @@ DinSykmeldingSide.propTypes = {
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     dinSykmelding: PropTypes.object,
     arbeidsgiversSykmelding: PropTypes.object,
 };

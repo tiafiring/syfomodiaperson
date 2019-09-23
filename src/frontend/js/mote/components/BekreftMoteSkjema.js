@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import AlertStripe from 'nav-frontend-alertstriper';
 import KnappBase from 'nav-frontend-knapper';
+import { keyValue } from '@navikt/digisyfo-npm';
 import * as motePropTypes from '../../propTypes';
 import Epostmottakere from './Epostmottakere';
 import Innholdsviser from './Innholdsviser';
@@ -51,7 +52,7 @@ const BekreftMoteSkjema = (props) => {
     </div>);
 };
 BekreftMoteSkjema.propTypes = {
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     arbeidstaker: PropTypes.object,
     onSubmit: PropTypes.func,
     avbrytHref: PropTypes.string,

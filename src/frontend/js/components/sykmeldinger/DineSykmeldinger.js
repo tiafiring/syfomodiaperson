@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, sorterSykmeldinger, sykmeldingstatuser } from '@navikt/digisyfo-npm';
+import {
+    getLedetekst,
+    keyValue,
+    sorterSykmeldinger,
+    sykmeldingstatuser,
+} from '@navikt/digisyfo-npm';
 import SykmeldingTeasere from './SykmeldingTeasere';
 import SykmeldingerSorteringContainer from './SykmeldingerSorteringContainer';
 
@@ -38,7 +43,7 @@ const DineSykmeldinger = ({ sykmeldinger = [], ledetekster = {}, sortering, fnr 
 
 DineSykmeldinger.propTypes = {
     sykmeldinger: PropTypes.array.isRequired,
-    ledetekster: PropTypes.object.isRequired,
+    ledetekster: keyValue.isRequired,
     sortering: PropTypes.object,
     fnr: PropTypes.string,
 };

@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { getLedetekst } from '@navikt/digisyfo-npm';
+import {
+    getLedetekst,
+    keyValue,
+} from '@navikt/digisyfo-npm';
 import * as moterPropTypes from '../../propTypes';
 import { connect } from 'react-redux';
 import AlertStripe from 'nav-frontend-alertstriper';
@@ -55,7 +58,7 @@ const AvbrytMote = (props) => {
 };
 
 AvbrytMote.propTypes = {
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     arbeidstaker: PropTypes.object,
     onSubmit: PropTypes.func,
     avbrytHref: PropTypes.string,

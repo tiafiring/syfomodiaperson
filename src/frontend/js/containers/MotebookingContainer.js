@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {
     getLedetekst,
     getHtmlLedetekst,
+    keyValue,
 } from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
 import MotebookingSkjemaContainer from './MotebookingSkjemaContainer';
@@ -74,7 +75,7 @@ MotebookingSide.propTypes = {
     nullstillVirksomhet: PropTypes.func,
     hentVirksomhet: PropTypes.func,
     henter: PropTypes.bool,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     hentingFeilet: PropTypes.bool,
     hentLedereFeiletBool: PropTypes.bool,
     avbryter: PropTypes.bool,

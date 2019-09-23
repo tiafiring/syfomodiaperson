@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import AlertStripe from 'nav-frontend-alertstriper';
 import KnappBase from 'nav-frontend-knapper';
-import { getLedetekst, getHtmlLedetekst } from '@navikt/digisyfo-npm';
+import {
+    getLedetekst,
+    getHtmlLedetekst,
+    keyValue,
+} from '@navikt/digisyfo-npm';
 import VelgLeder from './VelgLeder';
 import Tidspunkter from './Tidspunkter';
 import TextField from '../TextField';
@@ -140,7 +144,7 @@ MotebookingSkjema.propTypes = {
     sender: PropTypes.bool,
     sendingFeilet: PropTypes.bool,
     ledere: PropTypes.array,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     arbeidstaker: PropTypes.object,
     flereAlternativ: PropTypes.func,
     fjernAlternativ: PropTypes.func,

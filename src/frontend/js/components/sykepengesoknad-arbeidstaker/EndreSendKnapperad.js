@@ -1,6 +1,9 @@
 import React from 'react';
 import { sykepengesoknad as sykepengesoknadPt } from '@navikt/digisyfo-npm';
-import { VerktoyKnapp, Verktoylinje } from '../Verktoylinje';
+import {
+    VerktoyKnapp,
+    Verktoylinje,
+} from '../Verktoylinje';
 
 const getSistSendtDato = (s) => {
     if (s.sendtTilNAVDato && s.sendtTilArbeidsgiverDato) {
@@ -28,9 +31,9 @@ const EndreSendKnapperad = ({ sykepengesoknad }) => {
         || visSendTilNavKnapp
         || visSendTilArbeidsgiverKnapp)
             && (<Verktoylinje>
-            { visEndreknapp && <VerktoyKnapp>Endre søknad</VerktoyKnapp> }
-            { visSendTilNavKnapp && <VerktoyKnapp>Send til NAV</VerktoyKnapp> }
-            { visSendTilArbeidsgiverKnapp && <VerktoyKnapp>Send til arbeidsgiver</VerktoyKnapp> }
+                { visEndreknapp && <VerktoyKnapp>Endre søknad</VerktoyKnapp> }
+                { visSendTilNavKnapp && <VerktoyKnapp>Send til NAV</VerktoyKnapp> }
+                { visSendTilArbeidsgiverKnapp && <VerktoyKnapp>Send til arbeidsgiver</VerktoyKnapp> }
             </Verktoylinje>);
 };
 

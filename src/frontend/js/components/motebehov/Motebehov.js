@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import {
+    keyValue,
+    sykmelding as sykmeldingPt,
+} from '@navikt/digisyfo-npm';
 import Sidetopp from '../Sidetopp';
 import MotebehovKvittering from './MotebehovKvittering';
 import BehandleMotebehovKnapp from './BehandleMotebehovKnapp';
 import UtdragFraSykefravaeret from './UtdragFraSykefravaeret';
-import { sykmelding as sykmeldingPt } from '@navikt/digisyfo-npm';
 
 export class Motebehov extends Component {
     componentWillMount() {
@@ -67,7 +70,7 @@ Motebehov.propTypes = {
     fnr: PropTypes.string,
     ledereData: PropTypes.arrayOf(PropTypes.object),
     ledereUtenInnsendtMotebehov: PropTypes.arrayOf(PropTypes.object),
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     motebehovListe: PropTypes.arrayOf(PropTypes.object),
     oppgaver: PropTypes.arrayOf(PropTypes.object),
     sykmeldt: PropTypes.object,

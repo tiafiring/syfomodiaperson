@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {
     getHtmlLedetekst,
     getLedetekst,
+    keyValue,
 } from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
 import { MOETEPLANLEGGER } from '../enums/menypunkter';
@@ -61,7 +62,7 @@ MotelandingssideSide.propTypes = {
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     hentMoter: PropTypes.func,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     mote: PropTypes.object,
     tilgang: PropTypes.object,
 };

@@ -5,6 +5,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import {
     getLedetekst,
     getHtmlLedetekst,
+    keyValue,
 } from '@navikt/digisyfo-npm';
 import * as moterPropTypes from '../../propTypes';
 import { getDatoFraZulu, erMotePassert } from '../utils/index';
@@ -34,7 +35,7 @@ export const kvitteringTekst = {
 
 MotetidspunktValgt.propTypes = {
     bekreftetTidspunkt: PropTypes.string,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
 };
 
 const getLedetekstFraFeilAarsak = (feilAarsak, ledetekster) => {
@@ -119,7 +120,7 @@ export const StatusVarsel = (
 
 StatusVarsel.propTypes = {
     mote: moterPropTypes.motePt,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     arbeidstaker: PropTypes.object,
 };
 
@@ -133,7 +134,7 @@ export const PassertVarsel = ({ ledetekster }) => {
         </AlertStripe>);
 };
 PassertVarsel.propTypes = {
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
 };
 
 const MotebookingStatus = (props) => {
@@ -190,7 +191,7 @@ MotebookingStatus.propTypes = {
     senderNyeAlternativ: PropTypes.bool,
     nyeAlternativFeilet: PropTypes.bool,
     fikkIkkeOpprettetVarsel: PropTypes.object,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     avbrytMoteUtenVarsel: PropTypes.func,
     flereAlternativ: PropTypes.func,
     opprettFlereAlternativ: PropTypes.func,

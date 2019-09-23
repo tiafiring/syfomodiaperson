@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import {
     getLedetekst,
     getHtmlLedetekst,
+    keyValue,
 } from '@navikt/digisyfo-npm';
 import SideFullbredde from '../sider/SideFullbredde';
 import * as oppdialogActions from '../actions/oppfoelgingsdialoger_actions';
@@ -62,7 +63,7 @@ OppfoelgingsPlanerOversiktSide.propTypes = {
     henterDialoger: PropTypes.bool,
     hentetDialoger: PropTypes.bool,
     tilgang: PropTypes.object,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
 };
 
 export function mapDispatchToProps(dispatch) {

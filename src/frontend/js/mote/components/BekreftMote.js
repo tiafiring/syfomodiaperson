@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { keyValue } from '@navikt/digisyfo-npm';
 import * as motePropTypes from '../../propTypes';
 import { ARBEIDSGIVER } from '../../konstanter';
 import BekreftMoteSkjema from './BekreftMoteSkjema';
@@ -59,7 +60,7 @@ class BekreftMote extends Component {
 }
 BekreftMote.propTypes = {
     arbeidstaker: PropTypes.object,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     onSubmit: PropTypes.func,
     avbrytHref: PropTypes.string,
     mote: motePropTypes.motePt,

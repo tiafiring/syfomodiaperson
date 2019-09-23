@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
     getLedetekst,
     getHtmlLedetekst,
+    keyValue,
     sykmelding as sykmeldingPt,
 } from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
@@ -35,7 +37,6 @@ import {
 } from '../utils/reducerUtils';
 import { ledereUtenMotebehovsvar } from '../utils/ledereUtils';
 import Motebehov from '../components/motebehov/Motebehov';
-import { bindActionCreators } from 'redux';
 
 export class MotebehovSide extends Component {
     componentDidMount() {
@@ -141,7 +142,7 @@ MotebehovSide.propTypes = {
     hentingFeilet: PropTypes.bool,
     ledereData: PropTypes.arrayOf(PropTypes.object),
     ledereUtenInnsendtMotebehov: PropTypes.arrayOf(PropTypes.object),
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     motebehovListeUtenFlereSvarFraSammePerson: PropTypes.arrayOf(PropTypes.object),
     motebehovTilgang: PropTypes.object,
     oppgaver: PropTypes.arrayOf(PropTypes.object),

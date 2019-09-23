@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Radio } from 'nav-frontend-skjema';
 import Alertstripe from 'nav-frontend-alertstriper';
-import { getLedetekst } from '@navikt/digisyfo-npm';
+import {
+    getLedetekst,
+    keyValue,
+} from '@navikt/digisyfo-npm';
 import * as moterPropTypes from '../../propTypes';
 import AppSpinner from '../../components/AppSpinner';
 import {
@@ -57,7 +60,7 @@ export const Innholdsvelger = ({ onChange, valgtDeltakertype, ledetekster }) => 
 Innholdsvelger.propTypes = {
     onChange: PropTypes.func,
     valgtDeltakertype: moterPropTypes.motedeltakertypePt,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
 };
 
 const Feil = ({ melding = 'Beklager, det oppstod en feil' }) => {
@@ -135,7 +138,7 @@ Innholdsviser.propTypes = {
     epostinnhold: PropTypes.object,
     arbeidstaker: PropTypes.object,
     hentEpostinnhold: PropTypes.func,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     mote: moterPropTypes.motePt,
 };
 

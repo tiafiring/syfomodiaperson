@@ -4,6 +4,7 @@ import {
     Utvidbar,
     DineSykmeldingOpplysninger,
     getLedetekst,
+    keyValue,
 } from '@navikt/digisyfo-npm';
 import ArbeidsgiversSykmelding from './ArbeidsgiversSykmelding';
 import BekreftetSykmeldingStatuspanel from '../sykmeldingstatuspanel/BekreftetSykmeldingStatuspanel';
@@ -31,7 +32,7 @@ const DinBekreftedeSykmelding = ({ dinSykmelding, arbeidsgiversSykmelding, ledet
 };
 
 DinBekreftedeSykmelding.propTypes = {
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     dinSykmelding: PropTypes.object,
     arbeidsgiversSykmelding: PropTypes.object,
 };

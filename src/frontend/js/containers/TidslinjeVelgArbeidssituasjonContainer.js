@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
     getLedetekst,
     TIDSLINJE_TYPER,
+    keyValue,
 } from '@navikt/digisyfo-npm';
 import Radiofaner from '../components/Radiofaner';
 
@@ -42,7 +43,7 @@ export class VelgArbeidssituasjon extends Component {
 }
 
 VelgArbeidssituasjon.propTypes = {
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     valgtArbeidssituasjon: PropTypes.string,
     hentTidslinjer: PropTypes.func,
     endreUrl: PropTypes.func,

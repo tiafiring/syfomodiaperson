@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { sykmeldingstatuser } from '@navikt/digisyfo-npm';
+import {
+    keyValue,
+    sykmeldingstatuser,
+} from '@navikt/digisyfo-npm';
 import DinSykmelding from './DinSykmelding';
 import DinSendteSykmelding from './DinSendteSykmelding';
 import DinBekreftedeSykmelding from './DinBekreftedeSykmelding';
@@ -57,7 +60,7 @@ const SykmeldingSide = ({ dinSykmelding, arbeidsgiversSykmelding, ledetekster, f
 };
 
 SykmeldingSide.propTypes = {
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     dinSykmelding: PropTypes.object,
     arbeidsgiversSykmelding: PropTypes.object,
     fnr: PropTypes.string,

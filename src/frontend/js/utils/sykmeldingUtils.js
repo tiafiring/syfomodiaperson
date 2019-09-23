@@ -166,7 +166,7 @@ export const sykmeldingperioderSortertEldstTilNyest = (perioder) => {
             ? 1
             : periode1.fom < periode2.fom
                 ? -1
-                 : 0;
+                : 0;
     });
 };
 
@@ -182,7 +182,7 @@ export const stringMedAlleGraderingerFraSykmeldingPerioder = (sykmeldingPerioder
         return periode.grad;
     }).join('% - ');
 
-    return !!stringMedAlleGraderinger
+    return stringMedAlleGraderinger
         ? `${stringMedAlleGraderinger}%`
         : '';
 };

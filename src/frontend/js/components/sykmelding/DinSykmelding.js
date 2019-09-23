@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { DineSykmeldingOpplysninger, getLedetekst, Bjorn } from '@navikt/digisyfo-npm';
+import {
+    DineSykmeldingOpplysninger,
+    getLedetekst,
+    keyValue,
+    Bjorn,
+} from '@navikt/digisyfo-npm';
 import Alertstripe from 'nav-frontend-alertstriper';
 
 const navn = (pasient) => {
@@ -69,7 +74,7 @@ const DinSykmelding = ({ sykmelding, ledetekster, visEldreSykmeldingVarsel, elds
 
 DinSykmelding.propTypes = {
     sykmelding: PropTypes.object,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     visEldreSykmeldingVarsel: PropTypes.bool,
     eldsteSykmeldingId: PropTypes.string,
 };

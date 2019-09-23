@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import {
     getLedetekst,
     getHtmlLedetekst,
+    keyValue,
 } from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
 import Historikk from '../components/historikk/Historikk';
@@ -67,7 +68,7 @@ HistorikkSide.propTypes = {
     hentHistorikk: PropTypes.func,
     historikk: PropTypes.object,
     sykeforloep: PropTypes.object,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     actions: PropTypes.object,
     fnr: PropTypes.string,
     hentet: PropTypes.bool,

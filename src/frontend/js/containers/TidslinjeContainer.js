@@ -9,6 +9,7 @@ import {
     hentTidslinjer,
     getLedetekst,
     getHtmlLedetekst,
+    keyValue,
 } from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
 import SidetoppSpeilet from '../components/SidetoppSpeilet';
@@ -126,7 +127,7 @@ TidslinjeSide.propTypes = {
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
     hendelser: PropTypes.array,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     brukernavn: PropTypes.string,
     sykeforloep: PropTypes.object,
 };

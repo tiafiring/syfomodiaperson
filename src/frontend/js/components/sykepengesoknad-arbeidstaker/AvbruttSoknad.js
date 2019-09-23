@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getLedetekst, toDatePrettyPrint } from '@navikt/digisyfo-npm';
 import SykmeldingUtdrag from '../../connected-components/SykmeldingUtdrag';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
-import PropTypes from 'prop-types';
 import Statuspanel, { StatusNokkelopplysning, Statusopplysninger } from '../Statuspanel';
 import VerktoylinjeGjenapne from '../sykepengesoknad-felles/VerktoylinjeGjenapneSoknad';
 

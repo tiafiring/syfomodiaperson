@@ -3,9 +3,16 @@ import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 import AlertStripe from 'nav-frontend-alertstriper';
 import KnappBase from 'nav-frontend-knapper';
-import { getLedetekst } from '@navikt/digisyfo-npm';
+import {
+    getLedetekst,
+    keyValue,
+} from '@navikt/digisyfo-npm';
 import Tidspunkter from './Tidspunkter';
-import { genererDato, erGyldigKlokkeslett, erGyldigDato } from '../utils/index';
+import {
+    genererDato,
+    erGyldigKlokkeslett,
+    erGyldigDato,
+} from '../utils/index';
 
 const FLERE_TIDSPUNKTER_SKJEMANAVN = 'flereAlternativ';
 
@@ -78,7 +85,7 @@ export const FlereTidspunktSkjema = (props) => {
 FlereTidspunktSkjema.propTypes = {
     fnr: PropTypes.string,
     mote: PropTypes.object,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     flereAlternativ: PropTypes.func,
     nyeAlternativFeilet: PropTypes.bool,
     senderNyeAlternativ: PropTypes.bool,

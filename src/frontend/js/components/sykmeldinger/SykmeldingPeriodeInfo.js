@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getDuration, toDate, getLedetekst } from '@navikt/digisyfo-npm';
+import {
+    getDuration,
+    toDate,
+    getLedetekst,
+    keyValue,
+} from '@navikt/digisyfo-npm';
 
 const SykmeldingPeriodeInfo = ({ periode, arbeidsgiver, Element = 'p', ledetekster }) => {
     let ledetekstNokkel = 'sykmelding.teaser.tekst';
@@ -40,7 +45,7 @@ SykmeldingPeriodeInfo.propTypes = {
     periode: PropTypes.object,
     arbeidsgiver: PropTypes.string,
     Element: PropTypes.string,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
 };
 
 export default SykmeldingPeriodeInfo;

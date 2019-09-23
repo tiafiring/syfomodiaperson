@@ -1,6 +1,6 @@
 import React from 'react';
-import { VerktoyKnapp, Verktoylinje } from '../Verktoylinje';
 import { getLedetekst } from '@navikt/digisyfo-npm';
+import { VerktoyKnapp, Verktoylinje } from '../Verktoylinje';
 import { soknad as soknadPt } from '../../propTypes';
 
 export const soknadKanGjenapnes = (opprettetDato) => {

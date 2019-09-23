@@ -2,7 +2,6 @@ import { call, put, fork, takeEvery } from 'redux-saga/effects';
 import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api/index';
 import * as actions from '../actions/sykepengesoknader_actions';
-import { sykepengesoknaderHentet } from '../actions/sykepengesoknader_actions';
 import { erDev } from '../selectors/toggleSelectors';
 import mockSykepengesoknader from '../../test/mockdata/mockSykepengesoknader';
 
@@ -11,11 +10,11 @@ export function* hentSykepengesoknader(action) {
 
     try {
         const data = yield call(get, `${window.APP_SETTINGS.REST_ROOT}/sykepengesoknader?fnr=${action.fnr}`);
-        yield put(sykepengesoknaderHentet(data));
+        yield put(actions.sykepengesoknaderHentet(data));
     } catch (e) {
         log(e);
         if (erDev()) {
-            yield put(sykepengesoknaderHentet(mockSykepengesoknader));
+            yield put(actions.sykepengesoknaderHentet(mockSykepengesoknader));
         } else {
             yield put(actions.hentSykepengesoknaderFeilet());
         }

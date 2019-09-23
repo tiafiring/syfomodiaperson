@@ -8,7 +8,6 @@ import {
 import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api/index';
 import * as actions from '../actions/oppfolgingstilfelleperioder_actions';
-import { HENT_OPPFOLGINGSTILFELLEPERIODER_FORESPURT } from '../actions/oppfolgingstilfelleperioder_actions';
 
 export function* hentOppfolgingstilfelleperioder(action, orgnummer) {
     yield put(actions.hentOppfolgingstilfelleperioderHenter(orgnummer));
@@ -45,7 +44,7 @@ export function* hentOppfolgingstilfelleperioderHvisIkkeHentet(action) {
 }
 
 function* watchHentOppfolgingstilfelleperioder() {
-    yield takeEvery(HENT_OPPFOLGINGSTILFELLEPERIODER_FORESPURT, hentOppfolgingstilfelleperioderHvisIkkeHentet);
+    yield takeEvery(actions.HENT_OPPFOLGINGSTILFELLEPERIODER_FORESPURT, hentOppfolgingstilfelleperioderHvisIkkeHentet);
 }
 
 export default function* oppfolgingstilfelleperioderSagas() {

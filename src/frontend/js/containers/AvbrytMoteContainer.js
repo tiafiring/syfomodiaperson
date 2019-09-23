@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { keyValue } from '@navikt/digisyfo-npm';
 import AppSpinner from '../components/AppSpinner';
 import Lightbox from '../components/Lightbox';
 import Feilmelding from '../components/Feilmelding';
@@ -82,7 +83,7 @@ AvbrytMoteSide.propTypes = {
     hentingFeiletBool: PropTypes.bool,
     mote: PropTypes.object,
     arbeidstaker: PropTypes.object,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     hentMoter: PropTypes.func,
     avbrytMote: PropTypes.func,
     avbrytFeilet: PropTypes.bool,

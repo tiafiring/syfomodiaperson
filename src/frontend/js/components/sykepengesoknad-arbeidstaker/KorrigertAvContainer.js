@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import AlertStripe from 'nav-frontend-alertstriper';
 import { getLedetekst, tilLesbarDatoMedArstall } from '@navikt/digisyfo-npm';
 import { soknadEllerSykepengesoknad } from '../../propTypes/index';
 import { getTidligsteSendtDato } from '../../utils/sykepengesoknadUtils';
-import AlertStripe from 'nav-frontend-alertstriper';
 
 export const KorrigertAv = ({ korrigertAvSoknad, fnr }) => {
     return (<AlertStripe type="info" className="blokk">

@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ArbeidsgiversSykmeldingOpplysninger, Utvidbar } from '@navikt/digisyfo-npm';
+import {
+    ArbeidsgiversSykmeldingOpplysninger,
+    Utvidbar,
+    keyValue,
+} from '@navikt/digisyfo-npm';
 
 const ArbeidsgiversSykmelding = ({ sykmelding, ledetekster, Overskrift = 'H2', erApen = false }) => {
     return (<Utvidbar
@@ -17,7 +21,7 @@ const ArbeidsgiversSykmelding = ({ sykmelding, ledetekster, Overskrift = 'H2', e
 
 ArbeidsgiversSykmelding.propTypes = {
     sykmelding: PropTypes.object,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     Overskrift: PropTypes.string,
     erApen: PropTypes.bool,
 };

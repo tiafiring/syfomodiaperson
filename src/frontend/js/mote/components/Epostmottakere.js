@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
+import {
+    getLedetekst,
+    keyValue,
+} from '@navikt/digisyfo-npm';
 import * as moterPropTypes from '../../propTypes';
 import {
     BRUKER,
@@ -30,7 +33,7 @@ const Epostmottakere = ({ mote, ledetekster, arbeidstaker }) => {
 Epostmottakere.propTypes = {
     arbeidstaker: PropTypes.object,
     mote: moterPropTypes.motePt,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
 };
 
 export default Epostmottakere;

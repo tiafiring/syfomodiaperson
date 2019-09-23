@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import {
+    Utvidbar,
+    keyValue,
+} from '@navikt/digisyfo-npm';
 import * as moterPropTypes from '../../propTypes';
-import { Utvidbar } from '@navikt/digisyfo-npm';
 import DropdownInnholdsviser from './DropdownInnholdsviser';
 import * as epostinnholdActions from '../../actions/epostinnhold_actions';
 import * as arbeidsgiverepostinnholdActions from '../../actions/arbeidsgiverepostinnhold_actions';
@@ -66,7 +69,7 @@ const InformasjonSendt = ({ arbeidstaker, mote, ledetekster }) => {
 InformasjonSendt.propTypes = {
     arbeidstaker: PropTypes.object,
     mote: moterPropTypes.motePt,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
 };
 
 export default InformasjonSendt;

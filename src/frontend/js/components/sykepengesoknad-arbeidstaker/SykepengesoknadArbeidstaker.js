@@ -8,7 +8,13 @@ import { brodsmule } from '../../propTypes/index';
 
 const { NY, UTKAST_TIL_KORRIGERING } = sykepengesoknadstatuser;
 
-const SykepengesoknadArbeidstaker = ({ sykepengesoknad, fnr, brukernavn, brodsmuler }) => {
+const SykepengesoknadArbeidstaker = (
+    {
+        sykepengesoknad,
+        fnr,
+        brukernavn,
+        brodsmuler,
+    }) => {
     switch (sykepengesoknad.status) {
         case NY:
         case UTKAST_TIL_KORRIGERING: {
@@ -28,7 +34,6 @@ const SykepengesoknadArbeidstaker = ({ sykepengesoknad, fnr, brukernavn, brodsmu
 SykepengesoknadArbeidstaker.propTypes = {
     fnr: PropTypes.string,
     brukernavn: PropTypes.string,
-    children: PropTypes.node,
     brodsmuler: PropTypes.arrayOf(brodsmule),
     sykepengesoknad: sykepengesoknadPt,
 };

@@ -33,7 +33,7 @@ const Side = ({ tittel = '', children, aktivtMenypunkt, fnr }) => {
 };
 
 Side.propTypes = {
-    children: PropTypes.object,
+    children: PropTypes.element,
     fnr: PropTypes.string,
     tittel: PropTypes.string,
     aktivtMenypunkt: PropTypes.string,

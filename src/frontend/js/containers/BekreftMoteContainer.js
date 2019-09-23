@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as moterPropTypes from '../propTypes';
+import { keyValue } from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
 import MotestatusContainer from './MotestatusContainer';
 import * as moterActions from '../actions/moter_actions';
@@ -107,7 +108,7 @@ BekreftMoteSide.propTypes = {
     arbeidstaker: PropTypes.object,
     alternativ: PropTypes.object,
     henterMoterBool: PropTypes.bool,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     fnr: PropTypes.string,
     mote: moterPropTypes.motePt,
     hentMoter: PropTypes.func,

@@ -4,6 +4,7 @@ import {
     Utvidbar,
     DineSykmeldingOpplysninger,
     getLedetekst,
+    keyValue,
 } from '@navikt/digisyfo-npm';
 import SykmeldingStatuspanel from '../sykmeldingstatuspanel/SykmeldingStatuspanel';
 
@@ -24,7 +25,7 @@ const DinUtgatteSykmelding = ({ sykmelding, ledetekster }) => {
 };
 
 DinUtgatteSykmelding.propTypes = {
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     sykmelding: PropTypes.object,
 };
 

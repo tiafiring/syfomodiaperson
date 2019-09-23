@@ -7,7 +7,7 @@ export const sorterMotebehovDataEtterDato = (a, b) => {
 
 export const finnNyesteMotebehovsvarFraHverDeltaker = (sortertMotebehovListe) => {
     return sortertMotebehovListe.filter((motebehov1, index) => {
-        return sortertMotebehovListe.findIndex(motebehov2 => {
+        return sortertMotebehovListe.findIndex((motebehov2) => {
             return motebehov1.opprettetAv === motebehov2.opprettetAv;
         }) === index;
     });
@@ -18,7 +18,6 @@ export const finnArbeidstakerMotebehovSvar = (motebehovListe) => {
         return motebehov.opprettetAv === motebehov.aktorId;
     });
 };
-
 export const OPPFOLGINGSFORLOP_MOTEBEHOV_START_DAGER = 16 * 7;
 export const OPPFOLGINGSFORLOP_MOTEBEHOV_SLUTT_DAGER = 26 * 7;
 

@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Select } from 'nav-frontend-skjema';
-import { getLedetekst } from '@navikt/digisyfo-npm';
+import {
+    getLedetekst,
+    keyValue,
+} from '@navikt/digisyfo-npm';
 
 const ArbeidsgiverDropdown = ({ velgArbeidsgiver, ledere, ledetekster }) => {
     return (<div className="blokk">
@@ -36,7 +39,7 @@ const ArbeidsgiverDropdown = ({ velgArbeidsgiver, ledere, ledetekster }) => {
 
 ArbeidsgiverDropdown.propTypes = {
     velgArbeidsgiver: PropTypes.func,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     ledere: PropTypes.array,
 };
 

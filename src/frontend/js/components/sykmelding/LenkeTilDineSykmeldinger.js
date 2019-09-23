@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
+import {
+    getLedetekst,
+    keyValue,
+} from '@navikt/digisyfo-npm';
 import Tilbakelenke from '../Tilbakelenke';
 
 const LenkeTilDineSykmeldinger = ({ ledetekster, fnr }) => {
@@ -8,7 +11,7 @@ const LenkeTilDineSykmeldinger = ({ ledetekster, fnr }) => {
 };
 
 LenkeTilDineSykmeldinger.propTypes = {
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     fnr: PropTypes.string,
 };
 

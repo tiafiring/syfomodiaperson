@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, Utvidbar } from '@navikt/digisyfo-npm';
+import {
+    getLedetekst,
+    keyValue,
+    Utvidbar,
+} from '@navikt/digisyfo-npm';
 import * as moterPropTypes from '../../propTypes';
 import { NAV_VEILEDER } from '../../konstanter';
 import BesvarteTidspunkter from './BesvarteTidspunkter';
@@ -96,8 +100,8 @@ const Svarstatus = (props) => {
 Svarstatus.propTypes = {
     mote: moterPropTypes.motePt,
     visFlereAlternativ: PropTypes.func,
-    ledetekster: PropTypes.object,
-    children: PropTypes.object,
+    ledetekster: keyValue,
+    children: PropTypes.element,
     fnr: PropTypes.string,
 };
 

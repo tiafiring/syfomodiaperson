@@ -29,10 +29,8 @@ const Side = ({ tittel = '', children }) => {
 };
 
 Side.propTypes = {
-    children: PropTypes.object,
-    fnr: PropTypes.string,
+    children: PropTypes.element,
     tittel: PropTypes.string,
-    aktivtMenypunkt: PropTypes.string,
 };
 
 export default Side;

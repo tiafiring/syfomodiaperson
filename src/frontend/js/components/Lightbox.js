@@ -49,7 +49,7 @@ Lightbox.defaultProps = {
     scrollOverflowY: true,
 };
 Lightbox.propTypes = {
-    children: PropTypes.object,
+    children: PropTypes.element,
     onClose: PropTypes.func,
     scrollOverflowY: PropTypes.bool,
 };

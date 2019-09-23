@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, Utvidbar } from '@navikt/digisyfo-npm';
+import {
+    getLedetekst,
+    keyValue,
+    Utvidbar,
+} from '@navikt/digisyfo-npm';
 import PersonkortVisning from './PersonkortVisning';
 import { PERSONKORTVISNING_TYPE } from '../../konstanter';
 import {
@@ -104,7 +108,7 @@ class Personkort extends Component {
     }
 }
 Personkort.propTypes = {
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     actions: PropTypes.object,
     diskresjonskode: PropTypes.object,
     egenansatt: PropTypes.object,

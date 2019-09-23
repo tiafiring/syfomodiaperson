@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {
     getLedetekst,
     getHtmlLedetekst,
+    keyValue,
 } from '@navikt/digisyfo-npm';
 import * as ledereActions from '../actions/ledere_actions';
 import * as moteActions from '../actions/moter_actions';
@@ -66,7 +67,7 @@ MotebookingSkjemaContainer.propTypes = {
     flereAlternativ: PropTypes.func,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     ledere: PropTypes.array,
     opprettMote: PropTypes.func,
     skjermetBruker: PropTypes.bool,

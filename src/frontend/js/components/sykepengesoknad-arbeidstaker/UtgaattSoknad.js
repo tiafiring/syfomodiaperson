@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getLedetekst } from '@navikt/digisyfo-npm';
 import Alertstripe from 'nav-frontend-alertstriper';
 import SykmeldingUtdrag from '../../connected-components/SykmeldingUtdrag';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes/index';
-import PropTypes from 'prop-types';
 
 const UtgaattSoknad = ({ sykepengesoknad, fnr }) => {
     return (<div>

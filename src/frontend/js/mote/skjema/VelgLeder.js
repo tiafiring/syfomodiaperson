@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
+import {
+    getLedetekst,
+    keyValue,
+} from '@navikt/digisyfo-npm';
 import ArbeidsgiverDropdown from './ArbeidsgiverDropdown';
 
 const ValgtLeder = ({ valgtArbeidsgiver, ledetekster }) => {
@@ -17,7 +20,7 @@ const ValgtLeder = ({ valgtArbeidsgiver, ledetekster }) => {
 };
 
 ValgtLeder.propTypes = {
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     valgtArbeidsgiver: PropTypes.object,
 };
 
@@ -34,7 +37,7 @@ const VelgLeder = ({ ledetekster, ledere, valgtArbeidsgiver, velgArbeidsgiver })
 VelgLeder.propTypes = {
     velgArbeidsgiver: PropTypes.func,
     valgtArbeidsgiver: PropTypes.string,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     ledere: PropTypes.array,
 };
 

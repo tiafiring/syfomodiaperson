@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import {
     getLedetekst,
     getHtmlLedetekst,
+    keyValue,
 } from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
 import SidetoppSpeilet from '../components/SidetoppSpeilet';
@@ -86,7 +87,7 @@ SykmeldingerSide.propTypes = {
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     sortering: PropTypes.shape(),
 };
 

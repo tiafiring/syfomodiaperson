@@ -1,10 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { getLedetekst, toDatePrettyPrint, sykepengesoknadstatuser, tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '@navikt/digisyfo-npm';
-import { sykepengesoknad as sykepengesoknadPt, soknad as soknadPt } from '../../propTypes';
-import { getSendtTilSuffix, erSendtTilBeggeMenIkkeSamtidig } from '../../utils/sykepengesoknadUtils';
-import { ARBEIDSTAKERE, OPPHOLD_UTLAND, SELVSTENDIGE_OG_FRILANSERE } from '../../enums/soknadtyper';
+import {
+    getLedetekst,
+    toDatePrettyPrint,
+    sykepengesoknadstatuser,
+    tilLesbarDatoMedArstall,
+    tilLesbarPeriodeMedArstall,
+} from '@navikt/digisyfo-npm';
+import {
+    sykepengesoknad as sykepengesoknadPt,
+    soknad as soknadPt,
+} from '../../propTypes';
+import {
+    getSendtTilSuffix,
+    erSendtTilBeggeMenIkkeSamtidig,
+} from '../../utils/sykepengesoknadUtils';
+import {
+    ARBEIDSTAKERE,
+    OPPHOLD_UTLAND,
+    SELVSTENDIGE_OG_FRILANSERE,
+} from '../../enums/soknadtyper';
 import { FREMTIDIG } from '../../enums/soknadstatuser';
 
 const { NY, SENDT, TIL_SENDING, UTKAST_TIL_KORRIGERING, AVBRUTT } = sykepengesoknadstatuser;
@@ -82,11 +98,11 @@ const beregnUndertekst = (soknad) => {
                 case SENDT:
                 case TIL_SENDING: {
                     return sendtTilBeggeMenIkkeSamtidig
-                            ? <SendtUlikt soknad={soknad} />
-                            : getLedetekst(`soknad.teaser.status.${soknad.status}${getSendtTilSuffix(soknad)}`, {
-                                '%DATO%': tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
-                                '%ARBEIDSGIVER%': soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : null,
-                            });
+                        ? <SendtUlikt soknad={soknad} />
+                        : getLedetekst(`soknad.teaser.status.${soknad.status}${getSendtTilSuffix(soknad)}`, {
+                            '%DATO%': tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
+                            '%ARBEIDSGIVER%': soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : null,
+                        });
                 }
                 default: {
                     return null;

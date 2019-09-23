@@ -1,8 +1,14 @@
 import React from 'react';
-import { getLedetekst, sykmelding as sykmeldingPt, Utvidbar } from '@navikt/digisyfo-npm';
+import {
+    getLedetekst,
+    Utvidbar,
+} from '@navikt/digisyfo-npm';
 import PropTypes from 'prop-types';
 import Oppsummeringsvisning from '../soknad-felles-oppsummering/Oppsummeringsvisning';
-import { brodsmule, soknad as soknadPt } from '../../propTypes';
+import {
+    brodsmule,
+    soknad as soknadPt,
+} from '../../propTypes';
 import SoknadSpeiling from '../sykepengesoknad-felles/SoknadSpeiling';
 import SykmeldingUtdrag from '../../connected-components/SykmeldingUtdrag';
 import SykepengesoknadStatuspanel from './SykepengesoknadStatuspanel';
@@ -55,7 +61,6 @@ SendtSoknadArbeidstakerNy.propTypes = {
     brodsmuler: PropTypes.arrayOf(brodsmule),
     soknad: soknadPt,
     fnr: PropTypes.string,
-    sykmelding: sykmeldingPt,
 };
 
 export default SendtSoknadArbeidstakerNy;

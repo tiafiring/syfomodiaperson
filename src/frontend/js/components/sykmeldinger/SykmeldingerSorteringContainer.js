@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Select } from 'nav-frontend-skjema';
-import { getLedetekst } from '@navikt/digisyfo-npm';
+import {
+    getLedetekst,
+    keyValue,
+} from '@navikt/digisyfo-npm';
 import * as actionCreators from '../../actions/sykmeldinger_actions';
 
 const DropdownContainer = ({ alternativer, sorterSykmeldinger, ledetekster, status }) => {
@@ -21,7 +24,7 @@ const DropdownContainer = ({ alternativer, sorterSykmeldinger, ledetekster, stat
 DropdownContainer.propTypes = {
     alternativer: PropTypes.array,
     sorterSykmeldinger: PropTypes.func,
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     status: PropTypes.string,
 };
 

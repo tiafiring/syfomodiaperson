@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Utvidbar, DineSykmeldingOpplysninger, getLedetekst } from '@navikt/digisyfo-npm';
+import {
+    Utvidbar,
+    DineSykmeldingOpplysninger,
+    getLedetekst,
+    keyValue,
+} from '@navikt/digisyfo-npm';
 import SykmeldingStatuspanel from '../sykmeldingstatuspanel/SykmeldingStatuspanel';
 
 const DinAvbrutteSykmelding = ({ sykmelding, ledetekster }) => {
@@ -23,7 +28,7 @@ const DinAvbrutteSykmelding = ({ sykmelding, ledetekster }) => {
 };
 
 DinAvbrutteSykmelding.propTypes = {
-    ledetekster: PropTypes.object,
+    ledetekster: keyValue,
     sykmelding: PropTypes.object,
 };
 
