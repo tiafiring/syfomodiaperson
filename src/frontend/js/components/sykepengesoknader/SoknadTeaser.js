@@ -26,20 +26,22 @@ import { FREMTIDIG } from '../../enums/soknadstatuser';
 const { NY, SENDT, TIL_SENDING, UTKAST_TIL_KORRIGERING, AVBRUTT } = sykepengesoknadstatuser;
 
 export const SendtUlikt = ({ soknad }) => {
-    return (<span>
-        {
-            getLedetekst('soknad.teaser.status.SENDT.til-arbeidsgiver', {
-                '%DATO%': toDatePrettyPrint(soknad.sendtTilArbeidsgiverDato),
-                '%ARBEIDSGIVER%': soknad.arbeidsgiver.navn,
-            })
-        }
-        <br />
-        {
-            getLedetekst('soknad.teaser.status.SENDT.til-nav', {
-                '%DATO%': toDatePrettyPrint(soknad.sendtTilNAVDato),
-            })
-        }
-    </span>);
+    return (
+        <span>
+            {
+                getLedetekst('soknad.teaser.status.SENDT.til-arbeidsgiver', {
+                    '%DATO%': toDatePrettyPrint(soknad.sendtTilArbeidsgiverDato),
+                    '%ARBEIDSGIVER%': soknad.arbeidsgiver.navn,
+                })
+            }
+            <br />
+            {
+                getLedetekst('soknad.teaser.status.SENDT.til-nav', {
+                    '%DATO%': toDatePrettyPrint(soknad.sendtTilNAVDato),
+                })
+            }
+        </span>
+    );
 };
 
 SendtUlikt.propTypes = {
@@ -123,7 +125,7 @@ const beregnUndertekst = (soknad) => {
                 case NY:
                 case UTKAST_TIL_KORRIGERING: {
                     return getLedetekst('soknad.teaser.undertekst', {
-                        '%ARBEIDSGIVER%': soknad.arbeidsgiver.navn,
+                        '%ARBEIDSGIVER%': soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : null,
                     });
                 }
                 default: {
@@ -137,9 +139,11 @@ const beregnUndertekst = (soknad) => {
 export const TeaserUndertekst = ({ soknad }) => {
     const tekst = beregnUndertekst(soknad);
 
-    return tekst ? (<p className="inngangspanel__undertekst js-undertekst mute">
-        {tekst}
-    </p>) : null;
+    return tekst ? (
+        <p className="inngangspanel__undertekst js-undertekst mute">
+            {tekst}
+        </p>
+    ) : null;
 };
 
 TeaserUndertekst.propTypes = {
@@ -148,13 +152,13 @@ TeaserUndertekst.propTypes = {
 
 export const TeaserStatus = ({ soknad }) => {
     const visStatus = [NY, SENDT, AVBRUTT].indexOf(soknad.status) === -1;
-    return visStatus ? (<p className="inngangspanel__status js-status">
-        {
-            getLedetekst(`soknad.teaser.status.${soknad.status}`, {
+    return visStatus ? (
+        <p className="inngangspanel__status js-status">
+            {getLedetekst(`soknad.teaser.status.${soknad.status}`, {
                 '%DATO%': tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
-            })
-        }
-    </p>) : null;
+            })}
+        </p>
+    ) : null;
 };
 
 TeaserStatus.propTypes = {
@@ -162,22 +166,21 @@ TeaserStatus.propTypes = {
 };
 
 export const TeaserTittel = ({ soknad }) => {
-    return (<h3 className="js-title" id={`soknad-header-${soknad.id}`}>
-        <small className="inngangspanel__meta js-meta">
-            {
-                getLedetekst('soknad.teaser.dato', {
+    return (
+        <h3 className="js-title" id={`soknad-header-${soknad.id}`}>
+            <small className="inngangspanel__meta js-meta">
+                {getLedetekst('soknad.teaser.dato', {
                     '%DATO%': tilLesbarDatoMedArstall(soknad.opprettetDato),
-                })
-            }
-        </small>
-        <span className="inngangspanel__tittel">
-            {
-                getLedetekst(soknad.soknadstype === OPPHOLD_UTLAND
+                })}
+            </small>
+            <span className="inngangspanel__tittel">
+                {getLedetekst(soknad.soknadstype === OPPHOLD_UTLAND
                     ? 'soknad.utland.teaser.tittel'
                     : 'soknad.teaser.tittel')
-            }
-        </span>
-    </h3>);
+                }
+            </span>
+        </h3>
+    );
 };
 
 TeaserTittel.propTypes = {
@@ -187,11 +190,9 @@ TeaserTittel.propTypes = {
 export const TeaserPeriode = ({ soknad }) => {
     return soknad.soknadstype !== OPPHOLD_UTLAND
         ? (<p className="inngangspanel__tekst js-tekst">
-            {
-                getLedetekst('soknad.teaser.tekst', {
-                    '%PERIODE%': tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom),
-                })
-            }
+            {getLedetekst('soknad.teaser.tekst', {
+                '%PERIODE%': tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom),
+            })}
         </p>)
         : null;
 };
@@ -202,26 +203,29 @@ TeaserPeriode.propTypes = {
 
 const SykepengesoknadTeaser = ({ soknad, fnr }) => {
     const status = soknad.status ? soknad.status.toLowerCase() : '';
-    return (<article aria-labelledby={`soknader-header-${soknad.id}`}>
-        <Link
-            className={`inngangspanel js-panel js-soknad-${status}`}
-            to={`/sykefravaer/${fnr}/sykepengesoknader/${soknad.id}`}>
-            <span className="inngangspanel__ikon inngangspanel__ikon--normal">
-                {visIkon(soknad.soknadstype)}
-            </span>
-            <span className="inngangspanel__ikon inngangspanel__ikon--hover">
-                {visIkonHover(soknad.soknadstype)}
-            </span>
-            <div className="inngangspanel__innhold">
-                <header className="inngangspanel__header">
-                    <TeaserTittel soknad={soknad} />
-                    <TeaserStatus soknad={soknad} />
-                </header>
-                <TeaserPeriode soknad={soknad} />
-                <TeaserUndertekst soknad={soknad} />
-            </div>
-        </Link>
-    </article>);
+    return (
+        <article aria-labelledby={`soknader-header-${soknad.id}`}>
+            <Link
+                className={`inngangspanel js-panel js-soknad-${status}`}
+                to={`/sykefravaer/${fnr}/sykepengesoknader/${soknad.id}`}
+            >
+                <span className="inngangspanel__ikon inngangspanel__ikon--normal">
+                    {visIkon(soknad.soknadstype)}
+                </span>
+                <span className="inngangspanel__ikon inngangspanel__ikon--hover">
+                    {visIkonHover(soknad.soknadstype)}
+                </span>
+                <div className="inngangspanel__innhold">
+                    <header className="inngangspanel__header">
+                        <TeaserTittel soknad={soknad} />
+                        <TeaserStatus soknad={soknad} />
+                    </header>
+                    <TeaserPeriode soknad={soknad} />
+                    <TeaserUndertekst soknad={soknad} />
+                </div>
+            </Link>
+        </article>
+    );
 };
 
 SykepengesoknadTeaser.propTypes = {

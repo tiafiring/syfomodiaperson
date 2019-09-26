@@ -993,5 +993,95 @@
       "sykehistorie": null
     },
     "valgtArbeidssituasjon": null
-  }
+  },
+  {
+        "id": "289148ba-4c3c-4b3f-b7a3-385b7e7c927d",
+        "startLegemeldtFravaer": "2018-11-06",
+        "skalViseSkravertFelt": true,
+        "identdato": "2018-11-06",
+        "status": "NY",
+        "naermesteLederStatus": null,
+        "innsendtArbeidsgivernavn": "",
+        "valgtArbeidssituasjon": null,
+        "mottakendeArbeidsgiver": {
+            "navn": "",
+            "virksomhetsnummer": "",
+            "juridiskOrgnummer": ""
+        },
+        "orgnummer": "",
+        "sendtdato": "2018-11-15T10:49:03",
+        "sporsmal": null,
+        "pasient": {
+            "fnr": "110110110110",
+            "fornavn": "Samuel \"Sam\"",
+            "mellomnavn": "Peyton",
+            "etternavn": "Jones"
+        },
+        "arbeidsgiver": "",
+        "stillingsprosent": 100,
+        "diagnose": {
+            "hoveddiagnose": null,
+            "bidiagnoser": [],
+            "fravaersgrunnLovfestet": null,
+            "fravaerBeskrivelse": null,
+            "svangerskap": null,
+            "yrkesskade": null,
+            "yrkesskadeDato": null
+        },
+        "mulighetForArbeid": {
+            "perioder": [
+                {
+                    "fom": "2018-11-11",
+                    "tom": "2019-02-03",
+                    "grad": 100,
+                    "behandlingsdager": null,
+                    "reisetilskudd": null,
+                    "avventende": null
+                }
+            ],
+            "aktivitetIkkeMulig433": [],
+            "aktivitetIkkeMulig434": [
+                "Annet"
+            ],
+            "aarsakAktivitetIkkeMulig433": null,
+            "aarsakAktivitetIkkeMulig434": "andre årsaker til sykefravær"
+        },
+        "friskmelding": {
+            "arbeidsfoerEtterPerioden": true,
+            "hensynPaaArbeidsplassen": "Må ta det pent",
+            "antarReturSammeArbeidsgiver": true,
+            "antattDatoReturSammeArbeidsgiver": "2018-11-11",
+            "antarReturAnnenArbeidsgiver": true,
+            "tilbakemeldingReturArbeid": null,
+            "utenArbeidsgiverAntarTilbakeIArbeid": false,
+            "utenArbeidsgiverAntarTilbakeIArbeidDato": null,
+            "utenArbeidsgiverTilbakemelding": null
+        },
+        "utdypendeOpplysninger": {
+            "sykehistorie": null,
+            "paavirkningArbeidsevne": null,
+            "resultatAvBehandling": null,
+            "henvisningUtredningBehandling": null,
+            "grupper": []
+        },
+        "arbeidsevne": {
+            "tilretteleggingArbeidsplass": "Fortsett som sist.",
+            "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. ",
+            "tiltakAndre": null
+        },
+        "meldingTilNav": {
+            "navBoerTaTakISaken": false,
+            "navBoerTaTakISakenBegrunnelse": null
+        },
+        "innspillTilArbeidsgiver": null,
+        "tilbakedatering": {
+            "dokumenterbarPasientkontakt": null,
+            "tilbakedatertBegrunnelse": null
+        },
+        "bekreftelse": {
+            "utstedelsesdato": "2018-11-06",
+            "sykmelder": "Helen Flood",
+            "sykmelderTlf": "113"
+        }
+    }
 ]
