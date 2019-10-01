@@ -17,15 +17,22 @@ const erUndersporsmalStilt = (svar, kriterieForVisningAvUndersporsmal) => {
 };
 
 const OppsummeringJaEllerNei = ({ svar, sporsmalstekst, tag, overskriftsnivaa = 3, kriterieForVisningAvUndersporsmal, undersporsmal }) => {
+    if (svar[0] === undefined) {
+        return '';
+    }
     const svartekst = getLedetekstFraSvar(svar[0].verdi);
-    return (<OppsummeringSporsmalscontainer tag={tag}>
-        <OppsummeringSporsmalstekst overskriftsnivaa={overskriftsnivaa}>{sporsmalstekst}</OppsummeringSporsmalstekst>
-        <OppsummeringAvkrysset tekst={svartekst} />
-        {
-            erUndersporsmalStilt(svar, kriterieForVisningAvUndersporsmal)
-            && <OppsummeringUndersporsmalsliste sporsmalsliste={undersporsmal} overskriftsnivaa={overskriftsnivaa + 1} />
-        }
-    </OppsummeringSporsmalscontainer>);
+    return (
+        <OppsummeringSporsmalscontainer tag={tag}>
+            <OppsummeringSporsmalstekst overskriftsnivaa={overskriftsnivaa}>
+                {sporsmalstekst}
+            </OppsummeringSporsmalstekst>
+            <OppsummeringAvkrysset tekst={svartekst} />
+            {
+                erUndersporsmalStilt(svar, kriterieForVisningAvUndersporsmal)
+                && <OppsummeringUndersporsmalsliste sporsmalsliste={undersporsmal} overskriftsnivaa={overskriftsnivaa + 1} />
+            }
+        </OppsummeringSporsmalscontainer>
+    );
 };
 
 OppsummeringJaEllerNei.propTypes = oppsummeringSporsmal;

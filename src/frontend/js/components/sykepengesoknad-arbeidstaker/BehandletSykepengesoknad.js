@@ -21,25 +21,28 @@ const BehandletSykepengesoknad = ({ sykepengesoknad, fnr }) => {
             return <UtgaattSoknad sykepengesoknad={sykepengesoknad} fnr={fnr} />;
         }
         default: {
-            return (<div>
-                { sykepengesoknad.status === KORRIGERT && <KorrigertAvContainer sykepengesoknad={sykepengesoknad} fnr={fnr} /> }
-                <Statuspanel sykepengesoknad={sykepengesoknad}>
-                    <EndreSendKnapperad sykepengesoknad={sykepengesoknad} />
-                </Statuspanel>
-                <SykmeldingUtdrag soknad={sykepengesoknad} fnr={fnr} />
-                <Utvidbar className="blokk" tittel="Oppsummering" erApen>
-                    <SoknadOppsummering oppsummeringsoknad={sykepengesoknad.oppsummering} />
-                </Utvidbar>
-                <div className="bekreftet-container blokk">
-                    <BekreftetKorrektInformasjon oppsummeringsoknad={sykepengesoknad.oppsummering} />
+            return (
+                <div>
+                    {sykepengesoknad.status === KORRIGERT && <KorrigertAvContainer sykepengesoknad={sykepengesoknad} fnr={fnr} />}
+                    <Statuspanel sykepengesoknad={sykepengesoknad}>
+                        <EndreSendKnapperad sykepengesoknad={sykepengesoknad} />
+                    </Statuspanel>
+                    <SykmeldingUtdrag soknad={sykepengesoknad} fnr={fnr} />
+                    <Utvidbar className="blokk" tittel="Oppsummering" erApen>
+                        <SoknadOppsummering oppsummeringsoknad={sykepengesoknad.oppsummering} />
+                    </Utvidbar>
+                    <div className="bekreftet-container blokk">
+                        <BekreftetKorrektInformasjon oppsummeringsoknad={sykepengesoknad.oppsummering} />
+                    </div>
+                    {
+                        (sykepengesoknad.status === SENDT || sykepengesoknad.status === TIL_SENDING) &&
+                        <RelaterteSoknaderContainer
+                            fnr={fnr}
+                            sykepengesoknadId={sykepengesoknad.id}
+                        />
+                    }
                 </div>
-                {
-                    (sykepengesoknad.status === SENDT || sykepengesoknad.status === TIL_SENDING) && <RelaterteSoknaderContainer
-                        fnr={fnr}
-                        sykepengesoknadId={sykepengesoknad.id}
-                    />
-                }
-            </div>);
+            );
         }
     }
 };

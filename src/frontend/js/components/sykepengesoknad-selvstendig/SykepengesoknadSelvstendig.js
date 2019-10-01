@@ -19,38 +19,44 @@ const SykepengesoknadSelvstendig = (props) => {
             return <IkkeInnsendtSoknad fnr={fnr} />;
         }
         case AVBRUTT: {
-            return (<SoknadSpeiling {...props}>
-                <AvbruttSoknadSelvstendigStatuspanel soknad={props.soknad} />
-                {
-                    props.sykmelding && props.sykmelding.sporsmal
+            return (
+                <SoknadSpeiling {...props}>
+                    <AvbruttSoknadSelvstendigStatuspanel soknad={props.soknad} />
+                    {
+                        props.sykmelding && props.sykmelding.sporsmal
                         && <SykmeldingUtdragForSelvstendige sykmelding={props.sykmelding} erApen />
-                }
-            </SoknadSpeiling>);
+                    }
+                </SoknadSpeiling>
+            );
         }
         default: {
-            return (<SoknadSpeiling {...props}>
-                <SendtSoknadSelvstendigStatuspanel soknad={props.soknad} />
-                {
-                    props.sykmelding && props.sykmelding.sporsmal
+            return (
+                <SoknadSpeiling {...props}>
+                    <SendtSoknadSelvstendigStatuspanel soknad={props.soknad} />
+                    {
+                        props.sykmelding && props.sykmelding.sporsmal
                         && <SykmeldingUtdragForSelvstendige sykmelding={props.sykmelding} erApen />
-                }
-                <Utvidbar tittel={getLedetekst('sykepengesoknad.oppsummering.tittel')} className="blokk js-soknad-oppsummering" erApen>
-                    <Oppsummeringsvisning
-                        soknad={Object.assign({}, soknad, {
-                            sporsmal: soknad.sporsmal.filter((s) => {
-                                return s.tag !== VAER_KLAR_OVER_AT;
-                            }),
-                        })} />
-                </Utvidbar>
-                <div className="panel">
-                    <Oppsummeringsvisning
-                        soknad={Object.assign({}, soknad, {
-                            sporsmal: soknad.sporsmal.filter((s) => {
-                                return s.tag === VAER_KLAR_OVER_AT;
-                            }),
-                        })} />
-                </div>
-            </SoknadSpeiling>);
+                    }
+                    <Utvidbar tittel={getLedetekst('sykepengesoknad.oppsummering.tittel')} className="blokk js-soknad-oppsummering" erApen>
+                        <Oppsummeringsvisning
+                            soknad={Object.assign({}, soknad, {
+                                sporsmal: soknad.sporsmal.filter((s) => {
+                                    return s.tag !== VAER_KLAR_OVER_AT;
+                                }),
+                            })}
+                        />
+                    </Utvidbar>
+                    <div className="panel">
+                        <Oppsummeringsvisning
+                            soknad={Object.assign({}, soknad, {
+                                sporsmal: soknad.sporsmal.filter((s) => {
+                                    return s.tag === VAER_KLAR_OVER_AT;
+                                }),
+                            })}
+                        />
+                    </div>
+                </SoknadSpeiling>
+            );
         }
     }
 };
