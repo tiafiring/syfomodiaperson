@@ -17,6 +17,7 @@ import {
     erSendtTilBeggeMenIkkeSamtidig,
 } from '../../utils/sykepengesoknadUtils';
 import {
+    ARBEIDSLEDIG,
     ARBEIDSTAKERE,
     OPPHOLD_UTLAND,
     SELVSTENDIGE_OG_FRILANSERE,
@@ -75,12 +76,13 @@ const beregnUndertekst = (soknad) => {
 
     switch (soknad.soknadstype) {
         case OPPHOLD_UTLAND:
+        case ARBEIDSLEDIG:
         case SELVSTENDIGE_OG_FRILANSERE: {
-            return soknad.status === SENDT
+            return soknad.status === SENDT && soknad.innsendtDato
                 ? getLedetekst('soknad.teaser.status.SENDT.til-nav', {
                     '%DATO%': tilLesbarDatoMedArstall(soknad.innsendtDato),
                 })
-                : null;
+                : '';
         }
         case ARBEIDSTAKERE: {
             switch (soknad.status) {
@@ -90,12 +92,12 @@ const beregnUndertekst = (soknad) => {
                         ? soknad.arbeidsgiver.navn
                         : soknad.sykmelding
                             ? soknad.sykmelding.innsendtArbeidsgivernavn
-                            : null;
+                            : '';
                     return arbeidsgiver
                         ? getLedetekst('soknad.teaser.undertekst', {
                             '%ARBEIDSGIVER%': arbeidsgiver,
                         })
-                        : null;
+                        : '';
                 }
                 case SENDT:
                 case TIL_SENDING: {
@@ -103,11 +105,11 @@ const beregnUndertekst = (soknad) => {
                         ? <SendtUlikt soknad={soknad} />
                         : getLedetekst(`soknad.teaser.status.${soknad.status}${getSendtTilSuffix(soknad)}`, {
                             '%DATO%': tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
-                            '%ARBEIDSGIVER%': soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : null,
+                            '%ARBEIDSGIVER%': soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : '',
                         });
                 }
                 default: {
-                    return null;
+                    return '';
                 }
             }
         }
@@ -119,17 +121,17 @@ const beregnUndertekst = (soknad) => {
                         ? <SendtUlikt soknad={soknad} />
                         : getLedetekst(`soknad.teaser.status.${soknad.status}${getSendtTilSuffix(soknad)}`, {
                             '%DATO%': tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
-                            '%ARBEIDSGIVER%': soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : null,
+                            '%ARBEIDSGIVER%': soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : '',
                         });
                 }
                 case NY:
                 case UTKAST_TIL_KORRIGERING: {
                     return getLedetekst('soknad.teaser.undertekst', {
-                        '%ARBEIDSGIVER%': soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : null,
+                        '%ARBEIDSGIVER%': soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : '',
                     });
                 }
                 default: {
-                    return null;
+                    return '';
                 }
             }
         }
@@ -143,7 +145,7 @@ export const TeaserUndertekst = ({ soknad }) => {
         <p className="inngangspanel__undertekst js-undertekst mute">
             {tekst}
         </p>
-    ) : null;
+    ) : '';
 };
 
 TeaserUndertekst.propTypes = {
@@ -158,7 +160,7 @@ export const TeaserStatus = ({ soknad }) => {
                 '%DATO%': tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
             })}
         </p>
-    ) : null;
+    ) : '';
 };
 
 TeaserStatus.propTypes = {
@@ -189,12 +191,12 @@ TeaserTittel.propTypes = {
 
 export const TeaserPeriode = ({ soknad }) => {
     return soknad.soknadstype !== OPPHOLD_UTLAND
-        ? (<p className="inngangspanel__tekst js-tekst">
+        ? <p className="inngangspanel__tekst js-tekst">
             {getLedetekst('soknad.teaser.tekst', {
                 '%PERIODE%': tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom),
             })}
-        </p>)
-        : null;
+        </p>
+        : '';
 };
 
 TeaserPeriode.propTypes = {

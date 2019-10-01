@@ -8,19 +8,21 @@ export const getKey = (tag, id) => {
 };
 
 const Oppsummeringsvisning = ({ soknad }) => {
-    return (<div>
-        {
-            soknad.sporsmal
+    return (
+        <React.Fragment>
+            {soknad.sporsmal
                 .filter((sporsmal) => {
                     return (sporsmal.svar.length > 0 || sporsmal.undersporsmal.length > 0 || sporsmal.svartype === IKKE_RELEVANT);
                 })
                 .map((sporsmal) => {
-                    return (<div className="oppsummering__seksjon" key={getKey(sporsmal.tag, sporsmal.id)}>
-                        <OppsummeringSporsmal {...sporsmal} />
-                    </div>);
-                })
-        }
-    </div>);
+                    return (
+                        <div className="oppsummering__seksjon" key={getKey(sporsmal.tag, sporsmal.id)}>
+                            <OppsummeringSporsmal {...sporsmal} />
+                        </div>
+                    );
+                })}
+        </React.Fragment>
+    );
 };
 
 Oppsummeringsvisning.propTypes = {

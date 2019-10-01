@@ -26,6 +26,7 @@ import {
     ARBEIDSTAKERE,
     OPPHOLD_UTLAND,
     SELVSTENDIGE_OG_FRILANSERE,
+    ARBEIDSLEDIG,
 } from '../enums/soknadtyper';
 import SykepengesoknadSelvstendig from '../components/sykepengesoknad-selvstendig/SykepengesoknadSelvstendig';
 import SykepengesoknadUtland from '../components/sykepengesoknad-utland/SykepengesoknadUtland';
@@ -70,63 +71,78 @@ export class Container extends Component {
             tittel: 'Søknad om sykepenger',
         }];
 
-        return (<Side fnr={fnr} tittel="Sykepengesøknader" aktivtMenypunkt={SYKEPENGESOKNADER}>
-            {
-                (() => {
-                    if (henter) {
-                        return <AppSpinner />;
-                    }
-                    if (!tilgang.harTilgang && !erDev()) {
-                        return (<Feilmelding
-                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
-                        />);
-                    }
-                    if (hentingFeilet && !erDev()) {
-                        return <Feilmelding />;
-                    }
-                    if (sykepengesoknad) {
-                        return (<SykepengesoknadArbeidstaker
-                            fnr={fnr}
-                            brodsmuler={brodsmuler}
-                            brukernavn={brukernavn}
-                            sykmelding={sykmelding}
-                            sykepengesoknad={sykepengesoknad} />);
-                    }
-                    if (soknad && soknad.soknadstype === SELVSTENDIGE_OG_FRILANSERE) {
-                        return (<SykepengesoknadSelvstendig
-                            fnr={fnr}
-                            brodsmuler={brodsmuler}
-                            brukernavn={brukernavn}
-                            sykmelding={sykmelding}
-                            soknad={soknad} />);
-                    }
-                    if (soknad && soknad.soknadstype === OPPHOLD_UTLAND) {
-                        return (<SykepengesoknadUtland
-                            fnr={fnr}
-                            brodsmuler={brodsmuler}
-                            brukernavn={brukernavn}
-                            soknad={soknad} />);
-                    }
-                    if (soknad && soknad.soknadstype === ARBEIDSTAKERE) {
-                        return soknad.status === SENDT || soknad.status === KORRIGERT
-                            ? (<SendtSoknadArbeidstakerNy
-                                fnr={fnr}
-                                brodsmuler={brodsmuler}
-                                brukernavn={brukernavn}
-                                soknad={soknad} />)
-                            : soknad.status === AVBRUTT
-                                ? <AvbruttSoknadArbeidtakerNy
+        return (
+            <Side fnr={fnr} tittel="Sykepengesøknader" aktivtMenypunkt={SYKEPENGESOKNADER}>
+                {
+                    (() => {
+                        if (henter) {
+                            return <AppSpinner />;
+                        }
+                        if (!tilgang.harTilgang && !erDev()) {
+                            return (
+                                <Feilmelding
+                                    tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
+                                    melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
+                                />
+                            );
+                        }
+                        if (hentingFeilet && !erDev()) {
+                            return <Feilmelding />;
+                        }
+                        if (sykepengesoknad) {
+                            return (
+                                <SykepengesoknadArbeidstaker
                                     fnr={fnr}
                                     brodsmuler={brodsmuler}
                                     brukernavn={brukernavn}
-                                    soknad={soknad} />
-                                : <IkkeInnsendtSoknad fnr={fnr} />;
-                    }
-                    return <Feilmelding />;
-                })()
-            }
-        </Side>);
+                                    sykmelding={sykmelding}
+                                    sykepengesoknad={sykepengesoknad}
+                                />
+                            );
+                        }
+                        if (soknad && (soknad.soknadstype === SELVSTENDIGE_OG_FRILANSERE || soknad.soknadstype === ARBEIDSLEDIG)) {
+                            return (
+                                <SykepengesoknadSelvstendig
+                                    fnr={fnr}
+                                    brodsmuler={brodsmuler}
+                                    brukernavn={brukernavn}
+                                    sykmelding={sykmelding}
+                                    soknad={soknad}
+                                />
+                            );
+                        }
+                        if (soknad && soknad.soknadstype === OPPHOLD_UTLAND) {
+                            return (
+                                <SykepengesoknadUtland
+                                    fnr={fnr}
+                                    brodsmuler={brodsmuler}
+                                    brukernavn={brukernavn}
+                                    soknad={soknad}
+                                />
+                            );
+                        }
+                        if (soknad && soknad.soknadstype === ARBEIDSTAKERE) {
+                            return soknad.status === SENDT || soknad.status === KORRIGERT
+                                ? <SendtSoknadArbeidstakerNy
+                                    fnr={fnr}
+                                    brodsmuler={brodsmuler}
+                                    brukernavn={brukernavn}
+                                    soknad={soknad}
+                                />
+                                : soknad.status === AVBRUTT
+                                    ? <AvbruttSoknadArbeidtakerNy
+                                        fnr={fnr}
+                                        brodsmuler={brodsmuler}
+                                        brukernavn={brukernavn}
+                                        soknad={soknad}
+                                    />
+                                    : <IkkeInnsendtSoknad fnr={fnr} />;
+                        }
+                        return <Feilmelding />;
+                    })()
+                }
+            </Side>
+        );
     }
 }
 

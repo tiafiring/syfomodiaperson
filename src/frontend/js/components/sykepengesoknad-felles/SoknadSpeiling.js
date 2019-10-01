@@ -7,17 +7,19 @@ import TilbakeTilSoknader from './TilbakeTilSoknader';
 import { brodsmule } from '../../propTypes/index';
 
 const SoknadSpeiling = ({ fnr, brukernavn, children, brodsmuler, tittel = 'Søknad om sykepenger' }) => {
-    return (<div>
-        <Speilingvarsel brukernavn={brukernavn} />
-        <div className="speiling">
-            <Brodsmuler brodsmuler={brodsmuler} />
-            <SidetoppSpeilet tittel={tittel} />
-            <div className="blokk">
-                {children}
+    return (
+        <div>
+            <Speilingvarsel brukernavn={brukernavn} />
+            <div className="speiling">
+                <Brodsmuler brodsmuler={brodsmuler} />
+                <SidetoppSpeilet tittel={tittel} />
+                <div className="blokk">
+                    {children}
+                </div>
+                <TilbakeTilSoknader fnr={fnr} />
             </div>
-            <TilbakeTilSoknader fnr={fnr} />
         </div>
-    </div>);
+    );
 };
 
 SoknadSpeiling.propTypes = {

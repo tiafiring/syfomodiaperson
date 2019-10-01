@@ -103,11 +103,11 @@ export const SykmeldingopplysningForsikring = ({ sykmelding, className }) => {
         ? 'sykepengesoknad.sykmelding-utdrag.forsikring-ja-2'
         : 'sykepengesoknad.sykmelding-utdrag.forsikring-nei';
     return sykmelding.sporsmal.harForsikring !== null
-        ? (<SykmeldingNokkelOpplysning
+        ? <SykmeldingNokkelOpplysning
             className={className}
             tittel={getLedetekst('sykepengesoknad.sykmelding-utdrag.forsikring')}>
             <p>{getLedetekst(nokkel)}</p>
-        </SykmeldingNokkelOpplysning>)
+        </SykmeldingNokkelOpplysning>
         : null;
 };
 
@@ -117,26 +117,24 @@ SykmeldingopplysningForsikring.propTypes = {
 };
 
 export const Frilansersporsmal = ({ sykmelding }) => {
-    return (<Vis
-        hvis={
-            sykmelding.sporsmal
-                && (
-                    sykmelding.sporsmal.harAnnetFravaer !== null
-                    || sykmelding.sporsmal.harForsikring !== null
-                )
-        }
-        render={() => {
-            return ([
-                <SykmeldingopplysningFravaersperioder
-                    key={`fravaersperioder-${sykmelding.id}`}
-                    sykmelding={sykmelding}
-                    className="nokkelopplysning--statusopplysning" />,
-                <SykmeldingopplysningForsikring
-                    key={`forsikring-${sykmelding.id}`}
-                    sykmelding={sykmelding}
-                    className="nokkelopplysning--statusopplysning" />,
-            ]);
-        }} />);
+    return (
+        <Vis
+            hvis={sykmelding.sporsmal && (sykmelding.sporsmal.harAnnetFravaer !== null || sykmelding.sporsmal.harForsikring !== null)}
+            render={() => {
+                return ([
+                    <SykmeldingopplysningFravaersperioder
+                        key={`fravaersperioder-${sykmelding.id}`}
+                        sykmelding={sykmelding}
+                        className="nokkelopplysning--statusopplysning"
+                    />,
+                    <SykmeldingopplysningForsikring
+                        key={`forsikring-${sykmelding.id}`}
+                        sykmelding={sykmelding}
+                        className="nokkelopplysning--statusopplysning"
+                    />,
+                ]);
+            }} />
+    );
 };
 
 Frilansersporsmal.propTypes = {

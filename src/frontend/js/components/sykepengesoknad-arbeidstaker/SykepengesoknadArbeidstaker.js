@@ -21,12 +21,15 @@ const SykepengesoknadArbeidstaker = (
             return (<IkkeInnsendtSoknad fnr={fnr} />);
         }
         default: {
-            return (<SoknadSpeiling
-                brodsmuler={brodsmuler}
-                fnr={fnr}
-                brukernavn={brukernavn}>
-                <BehandletSykepengesoknad sykepengesoknad={sykepengesoknad} fnr={fnr} />
-            </SoknadSpeiling>);
+            return (
+                <SoknadSpeiling
+                    brodsmuler={brodsmuler}
+                    fnr={fnr}
+                    brukernavn={brukernavn}
+                >
+                    <BehandletSykepengesoknad sykepengesoknad={sykepengesoknad} fnr={fnr} />
+                </SoknadSpeiling>
+            );
         }
     }
 };
