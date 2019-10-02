@@ -36,10 +36,10 @@ const BehandletSykepengesoknad = ({ sykepengesoknad, fnr }) => {
                     </div>
                     {
                         (sykepengesoknad.status === SENDT || sykepengesoknad.status === TIL_SENDING) &&
-                        <RelaterteSoknaderContainer
-                            fnr={fnr}
-                            sykepengesoknadId={sykepengesoknad.id}
-                        />
+                            <RelaterteSoknaderContainer
+                                fnr={fnr}
+                                sykepengesoknadId={sykepengesoknad.id}
+                            />
                     }
                 </div>
             );
