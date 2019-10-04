@@ -310,6 +310,8 @@ describe('sykmeldingUtils', () => {
                     paavirkningArbeidsevne: 'Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket',
                     resultatAvBehandling: 'Nei',
                     sykehistorie: 'Langvarig korsryggsmerter. Ømhet og smerte',
+                    sykehistoriePunkt63: "Pkt. 6.3.1: Langvarig korsryggsmerter. Ømhet og smerte",
+                    henvisningUtredningBehandlingPunkt63: "Pkt. 6.3.2: Henvist til fysio, dette påvirker arbeidsevnen"
                 },
             };
 
@@ -324,6 +326,8 @@ describe('sykmeldingUtils', () => {
                     paavirkningArbeidsevne: null,
                     resultatAvBehandling: null,
                     sykehistorie: null,
+                    sykehistoriePunkt63: null,
+                    henvisningUtredningBehandlingPunkt63: null,
                 },
             };
 

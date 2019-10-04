@@ -9,6 +9,8 @@ const tekster = {
         paavirkningArbeidsevneTittel: 'Hvordan påvirker sykdommen arbeidsevnen?',
         behandlingsResultatTittel: 'Har behandlingen frem til nå bedret arbeidsevnen?',
         henvisningTittel: 'Beskriv pågående og planlagt henvisning, utredning og/eller behandling',
+        sykehistoriePunkt63Tittel: 'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon',
+        henvisningUtredningBehandlingPunkt63Tittel: 'Beskriv pågående og planlagt henvisning, utredning og/eller behandling. Lar dette seg kombinere med delvis arbeid?',
     },
 };
 
@@ -47,6 +49,18 @@ export const UtdypendeOpplysninger = (
                 utdypendeOpplysninger.henvisningUtredningBehandling && <div>
                     <h6 className="sporsmal">{tekster.UtdypendeOpplysninger.henvisningTittel}</h6>
                     <p>{utdypendeOpplysninger.henvisningUtredningBehandling}</p>
+                </div>
+            }
+            {
+                utdypendeOpplysninger.sykehistoriePunkt63 && <div>
+                    <h6 className="sporsmal">{tekster.UtdypendeOpplysninger.sykehistoriePunkt63Tittel}</h6>
+                    <p>{utdypendeOpplysninger.sykehistoriePunkt63}</p>
+                </div>
+            }
+            {
+                utdypendeOpplysninger.henvisningUtredningBehandlingPunkt63 && <div>
+                    <h6 className="sporsmal">{tekster.UtdypendeOpplysninger.henvisningUtredningBehandlingPunkt63Tittel}</h6>
+                    <p>{utdypendeOpplysninger.henvisningUtredningBehandlingPunkt63}</p>
                 </div>
             }
         </div>);
