@@ -63,7 +63,10 @@ export const erUtdypendeOpplysningerInformasjon = (sykmelding) => {
         && (sykmelding.utdypendeOpplysninger.sykehistorie
             || sykmelding.utdypendeOpplysninger.paavirkningArbeidsevne
             || sykmelding.utdypendeOpplysninger.resultatAvBehandling
-            || sykmelding.utdypendeOpplysninger.henvisningUtredningBehandling);
+            || sykmelding.utdypendeOpplysninger.henvisningUtredningBehandling
+            || sykmelding.utdypendeOpplysninger.sykehistoriePunkt63
+            || sykmelding.utdypendeOpplysninger.henvisningUtredningBehandlingPunkt63
+        );
     return !!erEkstraInformasjon;
 };
 
