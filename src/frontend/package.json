@@ -20,7 +20,7 @@
   "author": "Team DigiSyfo <digisyfo@nav.no>",
   "license": "ISC",
   "dependencies": {
-    "@navikt/digisyfo-npm": "17.2.0",
+    "@navikt/digisyfo-npm": "17.3.0",
     "babel-loader": "7.1.4",
     "babel-polyfill": "6.26.0",
     "cheerio": "0.20.0",
