@@ -30,7 +30,10 @@ const renderApp = () => {
     return new Promise((resolve, reject) => {
         server.render(
             'index.html',
-            settings,
+            Object.assign(
+                {},
+                settings,
+            ),
             (err, html) => {
                 if (err) {
                     reject(err);

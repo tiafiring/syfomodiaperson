@@ -96,29 +96,12 @@
         {{#isProd}}
         script.src = "/sykefravaer/resources/bundle-prod.js?ts={{timestamp}}";
         {{/isProd}}
-        {{^isProd}}
-        script.src = "http://localhost:9090/assets/bundle.js";
-        {{/isProd}}
-
-        script.onerror = visFeilmelding;
-        document.body.appendChild(script);
-    })();
-</script>
-<script>
-    window.APP_SETTINGS = {
-        "REST_ROOT": "{{{restRoot}}}",
-        "TEKSTER_REST_ROOT": "{{{teksterRestRoot}}}",
-        "TILGANGSKONTROLL_RESTROOT": "{{{tilgangskontrollRestRoot}}}",
-        "MOTEADMIN_REST_ROOT": "{{{moteAdminRestRoot}}}",
-        "OPPFOELGINGSDIALOGREST_ROOT": "{{{oppfoelgingsdialogRestRoot}}}",
-        "VEILEDEROPPGAVERREST_ROOT": "{{{veilederoppgaverRestRoot}}}",
-        "FASTLEGEREST_ROOT": "{{{fastlegerestRoot}}}",
-        "CONTEXTHOLDER_ROOT": "{{{contextholderRoot}}}",
-        "SYFOMOTEBEHOV_ROOT": "{{{syfomotebehovRoot}}}",
-        "SYFOSOKNAD_ROOT": "{{{syfosoknadRoot}}}",
-        "APP_ROOT": "/sykefravaer",
-    {{#enableLogging}}"LOGGING_ENABLED": {{{enableLogging}}}{{/enableLogging}}
-    };
+            {{^isProd}}
+            script.src = "http://localhost:9090/assets/bundle.js";
+            {{/isProd}}
+                script.onerror = visFeilmelding;
+                document.body.appendChild(script);
+            })();
 </script>
 </body>
 </html>
