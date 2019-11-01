@@ -66,23 +66,16 @@ function mockForLokal(server) {
 
 function mockEndepunkterSomEndrerState(server) {
     server.post('/syfomoteadmin/api/moter/:uuid/avbryt', (req, res) => {
-        console.log('AVBRYTER');
         const { uuid } = req.params;
         const oppdaterteMoter = mockData.moter.map((mote) => {
-            console.log('LOOP');
             if (mote.moteUuid.toString() === uuid.toString()) {
-                console.log('SETT AVRBUTT');
                 mote.status = "AVBRUTT";
             }
         });
-        console.log('FERDIG LOOP');
         Object.assign(mockData.moter, ...oppdaterteMoter);
-        console.log('FERDIG OBJECT ASSIGN');
 
         res.setHeader('Content-Type', 'application/json');
-        console.log('SATT HEADER');
         res.send(JSON.stringify({}));
-        console.log('SENDT');
     });
 
     server.post('/syfomoteadmin/api/moter/:uuid/bekreft', (req, res) => {
