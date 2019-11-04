@@ -7,9 +7,8 @@ var autoprefixer = require('autoprefixer');
 var Dotenv = require('dotenv-webpack');
 
 var config = function (opts) {
-    var timestamp = opts.timestamp;
     var extractLess = new MiniCssExtractPlugin({
-        filename: 'styles.' + timestamp + '.css',
+        filename: 'styles.css',
         disable: false,
     });
 
