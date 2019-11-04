@@ -16,7 +16,7 @@ var config = function (opts) {
     return {
         // We change to normal source mapping
         devtool: 'source-map',
-        entry: [mainPath],
+        entry: ['babel-polyfill', mainPath],
         output: {
             path: buildPath,
             filename: 'bundle-prod.js',
@@ -78,6 +78,6 @@ var config = function (opts) {
             new Dotenv(),
         ],
     };
-}
+};
 
 module.exports = config;
