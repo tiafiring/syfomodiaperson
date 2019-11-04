@@ -94,7 +94,7 @@
         var script = document.createElement("script");
 
         {{#isProd}}
-        script.src = "/sykefravaer/dist/resources/bundle-prod.js?ts={{timestamp}}";
+        script.src = "/sykefravaer/resources/bundle-prod.js?ts={{timestamp}}";
         {{/isProd}}
             {{^isProd}}
             script.src = "http://localhost:9090/assets/bundle.js";
