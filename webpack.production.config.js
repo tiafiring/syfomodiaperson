@@ -15,7 +15,7 @@ var config = function (opts) {
     return {
         // We change to normal source mapping
         devtool: 'source-map',
-        entry: ['babel-polyfill', mainPath],
+        entry: mainPath,
         output: {
             path: buildPath,
             filename: 'bundle-prod.js',
