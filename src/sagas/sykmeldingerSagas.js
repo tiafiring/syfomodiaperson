@@ -8,7 +8,8 @@ import mockSykmeldinger from '../../test/mockdata/mockSykmeldinger';
 export function* hentSykmeldinger(action) {
     yield put(actions.henterSykmeldinger());
     try {
-        const data = yield call(get, `${process.env.REACT_APP_REST_ROOT}/sykmeldinger?fnr=${action.fnr}`);
+        const path = `${process.env.REACT_APP_REST_ROOT}/internad/sykmeldinger?fnr=${action.fnr}`;
+        const data = yield call(get, path);
         yield put(actions.sykmeldingerHentet(data));
     } catch (e) {
         log(e);

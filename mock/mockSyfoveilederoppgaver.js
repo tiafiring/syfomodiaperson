@@ -7,11 +7,6 @@ function mockForLokal(server) {
         res.send(JSON.stringify(mockData[enums.BRUKERINFO]));
     });
 
-    server.get('/syfoveilederoppgaver/api/veilederinfo', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[enums.VEILEDERINFO]));
-    });
-
     server.get('/syfoveilederoppgaver/api/veilederoppgaver/v1/', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[enums.VEILEDEROPPGAVER]));

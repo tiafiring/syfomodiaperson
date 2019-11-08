@@ -11,7 +11,8 @@ import * as actions from '../actions/tilgang_actions';
 export function* sjekkTilgang(action) {
     yield put(actions.sjekkerTilgang());
     try {
-        const data = yield call(get, `${process.env.REACT_APP_TILGANGSKONTROLL_RESTROOT}/tilgang/tilgangtilbruker?fnr=${action.fnr}`);
+        const path = `${process.env.REACT_APP_TILGANGSKONTROLL_RESTROOT}/tilgang/bruker?fnr=${action.fnr}`;
+        const data = yield call(get, path);
         if (data.harTilgang === true) {
             yield put(actions.harTilgang());
         }

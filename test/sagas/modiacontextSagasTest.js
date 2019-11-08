@@ -11,6 +11,8 @@ import {
     PUSHER_MODIACONTEXT,
     HENTER_AKTIVBRUKER,
 } from '../../src/actions/actiontyper';
+import { HOST_NAMES } from '../../src/konstanter';
+import { fullNaisUrlDefault } from '../../src/utils/miljoUtil';
 
 describe('modiacontextSagas', () => {
     describe('aktivEnhetSaga', () => {
@@ -22,7 +24,10 @@ describe('modiacontextSagas', () => {
         });
 
         it('Skal dernest hente aktiv enhet', () => {
-            const nextCall = call(get, 'null/modiacontextholder/api/context/aktivenhet');
+            const host = HOST_NAMES.SYFOMODIACONTEXTHOLDER;
+            const path = 'undefined/aktivenhet';
+            const url = fullNaisUrlDefault(host, path);
+            const nextCall = call(get, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
     });
@@ -36,7 +41,10 @@ describe('modiacontextSagas', () => {
         });
 
         it('Skal dernest hente aktiv bruker', () => {
-            const nextCall = call(get, 'null/modiacontextholder/api/context/aktivbruker');
+            const host = HOST_NAMES.SYFOMODIACONTEXTHOLDER;
+            const path = 'undefined/aktivbruker';
+            const url = fullNaisUrlDefault(host, path);
+            const nextCall = call(get, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
     });
@@ -56,7 +64,10 @@ describe('modiacontextSagas', () => {
         });
 
         it('Skal dernest pushe context', () => {
-            const nextCall = call(post, 'null/modiacontextholder/api/context', {
+            const host = HOST_NAMES.SYFOMODIACONTEXTHOLDER;
+            const path = 'undefined/context';
+            const url = fullNaisUrlDefault(host, path);
+            const nextCall = call(post, url, {
                 verdi: 'fnr',
                 eventType: 'event1',
             });

@@ -48,24 +48,29 @@ function mockMoteDeltakere(alternativer, orgnummer) {
 }
 
 function mockForLokal(server) {
-    server.get('/syfomoteadmin/api/enheter', (req, res) => {
+    server.get('/syfomoteadmin/api/internad/enheter', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[enums.ENHETER]));
     });
 
-    server.get('/syfomoteadmin/api/moter', (req, res) => {
+    server.get('/syfomoteadmin/api/internad/moter', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[enums.MOTER]));
     });
 
-    server.get('/syfomoteadmin/api/historikk', (req, res) => {
+    server.get('/syfomoteadmin/api/internad/historikk', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[enums.HISTORIKKMOTER]));
+    });
+
+    server.get('/syfomoteadmin/api/internad/veilederinfo', (req, res) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(mockData[enums.VEILEDERINFO]));
     });
 }
 
 function mockEndepunkterSomEndrerState(server) {
-    server.post('/syfomoteadmin/api/moter/:uuid/avbryt', (req, res) => {
+    server.post('/syfomoteadmin/api/internad/moter/:uuid/avbryt', (req, res) => {
         const { uuid } = req.params;
         const oppdaterteMoter = mockData.moter.map((mote) => {
             if (mote.moteUuid.toString() === uuid.toString()) {
@@ -78,7 +83,7 @@ function mockEndepunkterSomEndrerState(server) {
         res.send(JSON.stringify({}));
     });
 
-    server.post('/syfomoteadmin/api/moter/:uuid/bekreft', (req, res) => {
+    server.post('/syfomoteadmin/api/internad/moter/:uuid/bekreft', (req, res) => {
         const { valgtAlternativId } = req.query;
         const { uuid } = req.params;
         const oppdaterteMoter = mockData.moter.map((mote) => {
@@ -95,7 +100,7 @@ function mockEndepunkterSomEndrerState(server) {
         res.send(JSON.stringify({}));
     });
 
-    server.post('/syfomoteadmin/api/moter/:uuid/nyealternativer', (req, res) => {
+    server.post('/syfomoteadmin/api/internad/moter/:uuid/nyealternativer', (req, res) => {
         res.json({ requestBody: req.body });
 
         const reqBody = req.body;
@@ -117,7 +122,7 @@ function mockEndepunkterSomEndrerState(server) {
         res.send(JSON.stringify({}));
     });
 
-    server.post('/syfomoteadmin/api/moter', (req, res) => {
+    server.post('/syfomoteadmin/api/internad/moter', (req, res) => {
         res.json({ requestBody: req.body });
 
         const reqBody = req.body;

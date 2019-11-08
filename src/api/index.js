@@ -3,12 +3,38 @@ import {
     getCookie,
 } from '@navikt/digisyfo-npm';
 import { Error403 } from './errors';
+import { erProd } from '../utils/miljoUtil';
+
+export const hentLoginUrl = () => {
+    if (erProd()) {
+        return 'https://loginservice.nais.adeo.no/login';
+    }
+    // Preprod
+    return 'https://loginservice.nais.preprod.local/login';
+};
+
+export const hentRedirectBaseUrl = (windowLocationHref) => {
+    if (erProd()) {
+        return 'https://syfomodiaperson.nais.adeo.no/sykefravaer/';
+    }
+    return 'https://syfomodiaperson.nais.preprod.local/sykefravaer/';
+
+};
+
+export const lagreRedirectUrlILocalStorage = (href) => {
+    localStorage.setItem('redirecturl', href);
+};
 
 export function get(url) {
     return fetch(url, {
         credentials: 'include',
     })
         .then((res) => {
+            if (res.status === 401) {
+                log(res, 'Redirect til login');
+                lagreRedirectUrlILocalStorage(window.location.href);
+                window.location.href = `${hentLoginUrl()}?redirect=${hentRedirectBaseUrl(window.location.href)}`;
+            }
             if (res.status === 404) {
                 throw new Error('404');
             }
@@ -39,10 +65,15 @@ export function post(url, body) {
         body: JSON.stringify(body),
         headers: {
             'Content-Type': 'application/json',
-            NAV_CSRF_PROTECTION: getCookie('NAV_CSRF_PROTECTION'),
         },
     })
         .then((res) => {
+            if (res.status === 401) {
+                log(res, 'Redirect til login');
+                lagreRedirectUrlILocalStorage(window.location.href);
+                window.location.href = `${hentLoginUrl()}?redirect=${hentRedirectBaseUrl(window.location.href)}`;
+                return null;
+            }
             if (res.status >= 400) {
                 log(res);
                 throw new Error('Forespørsel feilet');

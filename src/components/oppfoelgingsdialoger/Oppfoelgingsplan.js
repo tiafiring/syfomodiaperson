@@ -35,7 +35,7 @@ const PlanVisning = (
     const sePlanOppgave = seOppfolgingsplanOppgave(oppfolgingsplan);
     const bildeUrler = [];
     for (let i = 1; i <= dokumentinfo.antallSider; i += 1) {
-        bildeUrler.push(`${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/dokument/${oppfolgingsplan.id}/side/${i}`);
+        bildeUrler.push(`${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/dokument/${oppfolgingsplan.id}/side/${i}`);
     }
 
     const Skjema = () => {
@@ -86,7 +86,7 @@ const PlanVisning = (
             <Knapp
                 type="standard"
                 onClick={() => {
-                    const newWindow = window.open(`${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/dokument/${oppfolgingsplan.id}`);
+                    const newWindow = window.open(`${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/dokument/${oppfolgingsplan.id}`);
                     newWindow.print();
                 }}>
                 Skriv ut

@@ -9,7 +9,8 @@ export function* hentSykepengesoknader(action) {
     yield put(actions.henterSykepengesoknader());
 
     try {
-        const data = yield call(get, `${process.env.REACT_APP_REST_ROOT}/sykepengesoknader?fnr=${action.fnr}`);
+        const path = `${process.env.REACT_APP_REST_ROOT}/internad/sykepengesoknader?fnr=${action.fnr}`;
+        const data = yield call(get, path);
         yield put(actions.sykepengesoknaderHentet(data));
     } catch (e) {
         log(e);

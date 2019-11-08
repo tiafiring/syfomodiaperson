@@ -6,7 +6,8 @@ import * as actions from '../actions/ledetekster_actions';
 export function* hentLedetekster() {
     yield put(actions.henterLedetekster());
     try {
-        const ledetekster = yield call(get, `${process.env.REACT_APP_TEKSTER_REST_ROOT}/tekster`);
+        const path = `${process.env.REACT_APP_TEKSTER_REST_ROOT}/tekster`;
+        const ledetekster = yield call(get, path);
         setLedetekster(ledetekster);
         yield put(actions.ledeteksterHentet(ledetekster));
     } catch (e) {

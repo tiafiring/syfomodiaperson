@@ -26,7 +26,7 @@ describe('diskresjonskodeSagas', () => {
     });
 
     it('Skal dernest kalle resttjenesten', () => {
-        const nextCall = call(get, `${process.env.REACT_APP_REST_ROOT}/diskresjonskode/1`);
+        const nextCall = call(get, `${process.env.REACT_APP_REST_ROOT}/internad/diskresjonskode/1`);
         expect(generator.next().value).to.deep.equal(nextCall);
     });
 

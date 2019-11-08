@@ -17,7 +17,8 @@ import {
 export function* hentNavbruker(action) {
     yield put({ type: HENTER_NAVBRUKER });
     try {
-        const data = yield call(get, `${process.env.REACT_APP_REST_ROOT}/brukerinfo?fnr=${action.fnr}`);
+        const path = `${process.env.REACT_APP_REST_ROOT}/internad/brukerinfo?fnr=${action.fnr}`;
+        const data = yield call(get, path);
         yield put({ type: NAVBRUKER_HENTET, data });
     } catch (e) {
         log(e);

@@ -6,6 +6,8 @@ import {
     HENT_MOTEBEHOV_HENTER,
     HENT_MOTEBEHOV_HENTET,
 } from '../../src/actions/motebehov_actions';
+import { fullNaisUrlDefault } from '../../src/utils/miljoUtil';
+import { HOST_NAMES } from '../../src/konstanter';
 
 describe('motebehovSagas', () => {
     beforeEach(() => {
@@ -27,7 +29,7 @@ describe('motebehovSagas', () => {
         });
 
         it('Skal hente et array bestående av motebehov', () => {
-            const nextCall = call(get, `${process.env.REACT_APP_SYFOMOTEBEHOV_ROOT}/veileder/motebehov?fnr=123`);
+            const nextCall = call(get, fullNaisUrlDefault(HOST_NAMES.SYFOMOTEBEHOV, `${process.env.REACT_APP_SYFOMOTEBEHOV_ROOT}/internad/veileder/motebehov?fnr=123`));
 
             expect(generator.next().value).to.deep.equal(nextCall);
         });

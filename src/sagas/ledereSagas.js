@@ -6,7 +6,8 @@ import * as actiontype from '../actions/actiontyper';
 export function* hentLedere(action) {
     yield put({ type: actiontype.HENTER_LEDERE });
     try {
-        const data = yield call(get, `${process.env.REACT_APP_REST_ROOT}/naermesteleder?fnr=${action.fnr}`);
+        const path = `${process.env.REACT_APP_REST_ROOT}/internad/naermesteleder?fnr=${action.fnr}`;
+        const data = yield call(get, path);
         yield put({ type: actiontype.LEDERE_HENTET, data });
     } catch (e) {
         log(e);

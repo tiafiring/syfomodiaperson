@@ -11,7 +11,8 @@ import * as actions from '../actions/dokumentinfo_actions';
 export function* dokumentInfoSaga(action) {
     yield put(actions.henterDokumentinfo());
     try {
-        const data = yield call(get, `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/dokument/${action.id}/dokumentinfo`);
+        const path = `${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/dokument/${action.id}/dokumentinfo`;
+        const data = yield call(get, path);
         yield put(actions.dokumentinfoHentet(data));
     } catch (e) {
         yield put(actions.hentDokumentinfoFeilet());

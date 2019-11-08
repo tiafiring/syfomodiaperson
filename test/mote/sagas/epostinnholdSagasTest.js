@@ -6,14 +6,16 @@ import {
     hentBekreftMoteEpostinnhold,
     hentAvbrytMoteEpostinnhold,
 } from '../../../src/sagas/epostinnholdSagas';
+import {fullAppAdeoUrl, fullNaisUrlDefault} from '../../../src/utils/miljoUtil';
+import {HOST_NAMES} from "../../../src/konstanter";
 
 describe('epostinnholdSagas', () => {
     let action;
 
     beforeEach(() => {
         process.env = {
-            REACT_APP_REST_ROOT: 'http://tjenester.nav.no/sykefravaer',
-            REACT_APP_MOTEADMIN_REST_ROOT: 'http://tjenester.nav.no/moteadmin',
+            REACT_APP_REST_ROOT: '/sykefravaer',
+            REACT_APP_MOTEADMIN_REST_ROOT: '/moteadmin',
         };
     });
 
@@ -27,7 +29,10 @@ describe('epostinnholdSagas', () => {
         });
 
         it('Skal deretter prøve å hente epostinnhold', () => {
-            const nextCall = call(get, 'http://tjenester.nav.no/moteadmin/epostinnhold/BEKREFTET?motedeltakeruuid=deltakerUuid&valgtAlternativId=alternativId');
+            const host = HOST_NAMES.SYFOMOTEADMIN;
+            const path = '/moteadmin/internad/epostinnhold/BEKREFTET?motedeltakeruuid=deltakerUuid&valgtAlternativId=alternativId';
+            const url = fullNaisUrlDefault(host,path);
+            const nextCall = call(get, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
@@ -55,7 +60,10 @@ describe('epostinnholdSagas', () => {
         });
 
         it('Skal deretter prøve å hente epostinnhold', () => {
-            const nextCall = call(get, 'http://tjenester.nav.no/moteadmin/epostinnhold/AVBRUTT?motedeltakeruuid=abc123');
+            const host = HOST_NAMES.SYFOMOTEADMIN;
+            const path = '/moteadmin/internad/epostinnhold/AVBRUTT?motedeltakeruuid=abc123';
+            const url = fullNaisUrlDefault(host,path);
+            const nextCall = call(get, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 

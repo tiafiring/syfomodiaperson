@@ -24,3 +24,18 @@ export const MULIGE_SVAR = {
     PASSER: 'PASSER',
     PASSER_IKKE: 'PASSER_IKKE',
 };
+
+export const HOST_NAMES = {
+    FASTLEGEREST: 'fastlegerest',
+    MODIASYFOREST: 'modiasyforest',
+    SYFOMODIACONTEXTHOLDER: 'syfomodiacontextholder',
+    SYFOMOTEADMIN: 'syfomoteadmin',
+    SYFOMOTEBEHOV: 'syfomotebehov',
+    SYFOOPPFOLGINGSPLANSERVICE: 'syfooppfolgingsplanservice',
+    SYFOOVERSIKTSRV: 'syfooversiktsrv',
+    SYFOPERSON: 'syfoperson',
+    SYFOSOKNAD: 'syfosoknad',
+    SYFOVEILEDER: 'syfoveileder',
+    SYFOVEILEDEROPPGAVER: 'syfoveilederoppgaver',
+    SYFO_TILGANGSKONTROLL: 'syfo-tilgangskontroll',
+};

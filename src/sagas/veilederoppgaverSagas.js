@@ -7,7 +7,8 @@ import * as actiontype from '../actions/actiontyper';
 export function* veilederOppgaverSaga(action) {
     yield put(actions.henterVeilederOppgaver());
     try {
-        const data = yield call(get, `${process.env.REACT_APP_VEILEDEROPPGAVERREST_ROOT}/veilederoppgaver/v1?fnr=${action.fnr}`);
+        const path = `${process.env.REACT_APP_REST_ROOT}/internad/veilederoppgaver/${action.fnr}`;
+        const data = yield call(get, path);
         yield put(actions.veilederOppgaverHentet(data));
     } catch (e) {
         yield put(actions.hentVeilederOppgaverFeilet());
@@ -21,7 +22,8 @@ function* watchHentVeilederOppgaver() {
 export function* behandleVeilederOppgaverSaga(action) {
     yield put(actions.behandlerOppgave());
     try {
-        const data = yield call(post, `${process.env.REACT_APP_VEILEDEROPPGAVERREST_ROOT}/veilederoppgaver/v1/actions/${action.id}`, action.oppgave);
+        const path = `${process.env.REACT_APP_REST_ROOT}/internad/veilederoppgaver/${action.id}/update`;
+        const data = yield call(post, path, action.oppgave);
         yield put(actions.oppgaveBehandlet(data, action.oppgave));
         yield put(historikkActions.hentHistorikk(action.fnr, 'OPPFOELGINGSDIALOG'));
     } catch (e) {

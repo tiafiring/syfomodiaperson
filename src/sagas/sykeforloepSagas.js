@@ -6,7 +6,8 @@ import * as actions from '../actions/sykeforloep_actions';
 export function* hentSykeforloep(action) {
     yield put(actions.henterSykeforloep());
     try {
-        const data = yield call(get, `${process.env.REACT_APP_REST_ROOT}/sykeforloep?fnr=${action.fnr}`);
+        const path = `${process.env.REACT_APP_REST_ROOT}/internad/oppfolgingstilfelle?fnr=${action.fnr}`;
+        const data = yield call(get, path);
         yield put(actions.sykeforloepHentet(data));
     } catch (e) {
         log(e);

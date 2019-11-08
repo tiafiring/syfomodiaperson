@@ -17,7 +17,7 @@ describe('soknaderSagas', () => {
         });
 
         it('Skal hente søknader', () => {
-            const nextCall = call(get, `${process.env.REACT_APP_SYFOSOKNAD_ROOT}/veileder/soknader?fnr=${fnr}`);
+            const nextCall = call(get, `${process.env.REACT_APP_SYFOSOKNAD_ROOT}/veileder/internad/soknader?fnr=${fnr}`);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 

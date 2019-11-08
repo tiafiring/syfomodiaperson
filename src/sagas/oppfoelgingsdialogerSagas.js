@@ -6,7 +6,8 @@ import * as actions from '../actions/oppfoelgingsdialoger_actions';
 export function* hentOppfoelgingsdialoger(action) {
     yield put(actions.henterOppfoelgingsdialoger());
     try {
-        const data = yield call(get, `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialog/v1/${action.fnr}`);
+        const path = `${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/v1/oppfolgingsplan/${action.fnr}`;
+        const data = yield call(get, path);
         yield put(actions.hentOppfolgingsdialogerHentet(data));
     } catch (e) {
         log(e);

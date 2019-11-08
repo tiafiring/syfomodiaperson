@@ -5,11 +5,16 @@ import history from '../history';
 import * as actions from '../actions/moter_actions';
 import * as historikkActions from '../actions/historikk_actions';
 import * as veilederoppgaverActions from '../actions/veilederoppgaver_actions';
+import { fullNaisUrlDefault } from '../utils/miljoUtil';
+import { HOST_NAMES } from '../konstanter';
 
 export function* opprettMote(action) {
     yield put(actions.oppretterMote());
     try {
-        yield call(post, `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/moter`, action.data);
+        const host = HOST_NAMES.SYFOMOTEADMIN;
+        const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/moter`;
+        const url = fullNaisUrlDefault(host, path);
+        yield call(post, url, action.data);
         yield put(actions.hentMoter(action.data.fnr));
         yield put(historikkActions.hentHistorikk(action.data.fnr, 'MOTER'));
     } catch (e) {
@@ -21,7 +26,10 @@ export function* opprettMote(action) {
 export function* hentMoter(action) {
     yield put(actions.henterMoter());
     try {
-        const data = yield call(get, `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/moter?fnr=${action.fnr}&henttpsdata=true&limit=1`);
+        const host = HOST_NAMES.SYFOMOTEADMIN;
+        const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/moter?fnr=${action.fnr}&henttpsdata=true&limit=1`;
+        const url = fullNaisUrlDefault(host, path);
+        const data = yield call(get, url);
         yield put(actions.moterHentet(data));
     } catch (e) {
         if (e.status === 403) {
@@ -36,7 +44,11 @@ export function* hentMoter(action) {
 export function* avbrytMote(action) {
     yield put(actions.avbryterMote(action.uuid));
     try {
-        yield call(post, `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/moter/${action.uuid}/avbryt?varsle=${action.varsle}`);
+        const host = HOST_NAMES.SYFOMOTEADMIN;
+        const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/moter/${action.uuid}/avbryt?varsle=${action.varsle}`;
+        const url = fullNaisUrlDefault(host, path);
+        yield call(post, url);
+
         yield put(actions.moteAvbrutt(action.uuid));
         yield put(historikkActions.hentHistorikk(action.fnr, 'MOTER'));
         yield put(veilederoppgaverActions.alleSvarMottattOppgaveBehandlet());
@@ -50,7 +62,11 @@ export function* avbrytMote(action) {
 export function* bekreftMote(action) {
     yield put(actions.bekrefterMote());
     try {
-        yield call(post, `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/moter/${action.moteUuid}/bekreft?valgtAlternativId=${action.valgtAlternativId}`);
+        const host = HOST_NAMES.SYFOMOTEADMIN;
+        const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/moter/${action.moteUuid}/bekreft?valgtAlternativId=${action.valgtAlternativId}`;
+        const url = fullNaisUrlDefault(host, path);
+        yield call(post, url);
+
         yield put(actions.moteBekreftet(action.moteUuid, action.valgtAlternativId, new Date()));
         yield put(historikkActions.hentHistorikk(action.fnr, 'MOTER'));
         yield put(veilederoppgaverActions.alleSvarMottattOppgaveBehandlet());
@@ -64,8 +80,11 @@ export function* bekreftMote(action) {
 export function* opprettFlereAlternativ(action) {
     yield put(actions.oppretterFlereAlternativ());
     try {
-        const url = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/moter/${action.moteUuid}/nyealternativer`;
+        const host = HOST_NAMES.SYFOMOTEADMIN;
+        const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/moter/${action.moteUuid}/nyealternativer`;
+        const url = fullNaisUrlDefault(host, path);
         yield call(post, url, action.data);
+
         yield put(historikkActions.hentHistorikk(action.fnr, 'MOTER'));
         yield put(actions.opprettFlereAlternativBekreftet(action.data, action.moteUuid));
         yield put(veilederoppgaverActions.alleSvarMottattOppgaveBehandlet());

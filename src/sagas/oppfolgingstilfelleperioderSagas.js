@@ -12,7 +12,8 @@ import * as actions from '../actions/oppfolgingstilfelleperioder_actions';
 export function* hentOppfolgingstilfelleperioder(action, orgnummer) {
     yield put(actions.hentOppfolgingstilfelleperioderHenter(orgnummer));
     try {
-        const data = yield call(get, `${process.env.REACT_APP_REST_ROOT}/oppfolgingstilfelleperioder?fnr=${action.fnr}&orgnummer=${orgnummer}`);
+        const path = `${process.env.REACT_APP_REST_ROOT}/internad/oppfolgingstilfelleperioder?fnr=${action.fnr}&orgnummer=${orgnummer}`;
+        const data = yield call(get, path);
         yield put(actions.hentOppfolgingstilfelleperioderHentet(data, orgnummer));
     } catch (e) {
         log(e);

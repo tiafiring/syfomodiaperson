@@ -5,6 +5,7 @@ const path = require('path');
 const mustacheExpress = require('mustache-express');
 const Promise = require('promise');
 const prometheus = require('prom-client');
+const proxy = require('express-http-proxy');
 
 // Prometheus metrics
 const collectDefaultMetrics = prometheus.collectDefaultMetrics;
@@ -89,6 +90,67 @@ const startServer = (html) => {
 
     if (env === 'local') {
         require('./mock/mockEndepunkter')(server, env === 'local');
+    } else {
+        server.use('/syfo-tilgangskontroll/api', proxy('syfo-tilgangskontroll.default',  {
+            https: false,
+            proxyReqPathResolver: function(req) {
+                return `/syfo-tilgangskontroll/api${req.url}`
+            },
+            proxyErrorHandler: function(err, res, next) {
+                console.error("Error in proxy for tilgang", err);
+                next(err);
+            },
+        }));
+        server.use('/modiasyforest/api', proxy('modiasyforest.default',  {
+            https: false,
+            proxyReqPathResolver: function(req) {
+                return `/modiasyforest/api${req.url}`
+            },
+            proxyErrorHandler: function(err, res, next) {
+                console.error("Error in proxy for modiasyforest", err);
+                next(err);
+            },
+        }));
+        server.use('/syfooppfolgingsplanservice/api', proxy('syfooppfolgingsplanservice.default',  {
+            https: false,
+            proxyReqPathResolver: function(req) {
+                return `/syfooppfolgingsplanservice/api${req.url}`
+            },
+            proxyErrorHandler: function(err, res, next) {
+                console.error("Error in proxy for syfooppfolgingsplanservice", err);
+                next(err);
+            },
+        }));
+        server.use('/syfotekster/api', proxy('syfotekster.default',  {
+            https: false,
+            proxyReqPathResolver: function(req) {
+                return `/syfotekster/api${req.path}`
+            },
+            proxyErrorHandler: function(err, res, next) {
+                console.error("Error in proxy for tekster", err);
+                next(err);
+            },
+        }));
+        server.use('/syfosoknad/api', proxy('syfosoknad.default',  {
+            https: false,
+            proxyReqPathResolver: function(req) {
+                return `/syfosoknad/api${req.url}`
+            },
+            proxyErrorHandler: function(err, res, next) {
+                console.error("Error in proxy for syfosoknad", err);
+                next(err);
+            },
+        }));
+        server.use('/syfobehandlendeenhet/api', proxy('syfobehandlendenhet.default',  {
+            https: false,
+            proxyReqPathResolver: function(req) {
+                return `/api${req.url}`
+            },
+            proxyErrorHandler: function(err, res, next) {
+                console.error("Error in proxy for syfobehandlendeenhet", err);
+                next(err);
+            },
+        }));
     }
 
     const port = process.env.PORT || 8191;

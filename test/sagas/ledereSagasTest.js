@@ -10,7 +10,7 @@ import {
 describe('ledereSagas', () => {
     beforeEach(() => {
         process.env = {
-            REACT_APP_REST_ROOT: 'http://tjenester.nav.no/sykefravaer',
+            REACT_APP_REST_ROOT: '/sykefravaer',
         };
     });
 
@@ -24,7 +24,7 @@ describe('ledereSagas', () => {
     });
 
     it('Skal dernest hente ledere', () => {
-        const nextCall = call(get, 'http://tjenester.nav.no/sykefravaer/naermesteleder?fnr=55');
+        const nextCall = call(get, '/sykefravaer/internad/naermesteleder?fnr=55');
         expect(generator.next().value).to.deep.equal(nextCall);
     });
 

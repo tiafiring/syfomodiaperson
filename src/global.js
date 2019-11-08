@@ -1,10 +1,13 @@
+import { fullNaisUrlDefault } from './utils/miljoUtil';
+import { HOST_NAMES } from './konstanter';
+
 const fnr = window.location.pathname.split('/')[2];
 
 export const config = {
     config: {
         dataSources: {
-            veileder: `${window.location.origin}/syfomoteadmin/api/veilederinfo`,
-            enheter: `${window.location.origin}/syfomoteadmin/api/enheter`,
+            veileder: `${fullNaisUrlDefault(HOST_NAMES.SYFOMOTEADMIN, `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/veilederinfo`)}`,
+            enheter: `${fullNaisUrlDefault(HOST_NAMES.SYFOMOTEADMIN, `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/veilederinfo/enheter`)}`,
         },
         toggles: {
             visEnhetVelger: true,

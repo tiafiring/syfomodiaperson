@@ -10,7 +10,7 @@ import {
 describe('navbrukerSagas', () => {
     beforeEach(() => {
         process.env = {
-            REACT_APP_REST_ROOT: 'http://tjenester.nav.no/sykefravaer',
+            REACT_APP_REST_ROOT: '/sykefravaer',
         };
     });
 
@@ -25,7 +25,7 @@ describe('navbrukerSagas', () => {
         });
 
         it('Skal dernest hente navbruker', () => {
-            const nextCall = call(get, 'http://tjenester.nav.no/sykefravaer/brukerinfo?fnr=55');
+            const nextCall = call(get, '/sykefravaer/internad/brukerinfo?fnr=55');
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 

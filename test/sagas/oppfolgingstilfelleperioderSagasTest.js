@@ -26,7 +26,7 @@ describe('oppfolgingstilfelleSagas', () => {
         });
 
         it('Skal dernest kalle resttjenesten', () => {
-            const nextCall = call(get, `${process.env.REACT_APP_REST_ROOT}/oppfolgingstilfelleperioder?fnr=${fnr}&orgnummer=${orgnummer}`);
+            const nextCall = call(get, `${process.env.REACT_APP_REST_ROOT}/internad/oppfolgingstilfelleperioder?fnr=${fnr}&orgnummer=${orgnummer}`);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 

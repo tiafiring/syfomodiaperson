@@ -3,12 +3,14 @@ import { put, call } from 'redux-saga/effects';
 import { get } from '../../../src/api';
 import * as actions from '../../../src/actions/virksomhet_actions';
 import { hentVirksomhet } from '../../../src/sagas/virksomhetSagas';
+import { fullNaisUrlDefault } from '../../../src/utils/miljoUtil';
+import { HOST_NAMES } from '../../../src/konstanter';
 
 describe('virksomhetSagas', () => {
     beforeEach(() => {
         process.env = {
-            REACT_APP_REST_ROOT: 'http://tjenester.nav.no/sykefravaer',
-            REACT_APP_MOTEADMIN_REST_ROOT: 'http://tjenester.nav.no/moteadmin',
+            REACT_APP_REST_ROOT: '/sykefravaer',
+            REACT_APP_MOTEADMIN_REST_ROOT: '/moteadmin',
         };
     });
 
@@ -23,7 +25,10 @@ describe('virksomhetSagas', () => {
         });
 
         it('Skal deretter prøve å hente virksomhet', () => {
-            const nextCall = call(get, 'http://tjenester.nav.no/moteadmin/virksomhet/88776655');
+            const host = HOST_NAMES.SYFOMOTEADMIN;
+            const path = '/moteadmin/internad/virksomhet/88776655';
+            const url = fullNaisUrlDefault(host,path);
+            const nextCall = call(get, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 

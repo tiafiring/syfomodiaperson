@@ -5,7 +5,8 @@ import * as actions from '../actions/diskresjonskode_actions';
 export function* hentDiskresjonskodeSaga(action) {
     yield put(actions.henterDiskresjonskode());
     try {
-        const data = yield call(get, `${process.env.REACT_APP_REST_ROOT}/diskresjonskode/${action.fnr}`);
+        const path = `${process.env.REACT_APP_REST_ROOT}/internad/diskresjonskode/${action.fnr}`;
+        const data = yield call(get, path);
         yield put(actions.diskresjonskodeHentet(data));
     } catch (e) {
         yield put(actions.hentDiskresjonskodeFeilet());

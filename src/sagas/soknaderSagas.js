@@ -14,7 +14,8 @@ export function* hentSoknader(action) {
     const fnr = action.fnr ? action.fnr : '';
     yield put(actions.henterSoknader());
     try {
-        const data = yield call(get, `${process.env.REACT_APP_SYFOSOKNAD_ROOT}/veileder/soknader?fnr=${fnr}`);
+        const path = `${process.env.REACT_APP_SYFOSOKNAD_ROOT}/veileder/internad/soknader?fnr=${fnr}`;
+        const data = yield call(get, path);
         yield put(actions.soknaderHentet(data));
     } catch (e) {
         log(e);
