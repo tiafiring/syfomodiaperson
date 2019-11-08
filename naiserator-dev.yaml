@@ -1,0 +1,87 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: syfomodiaperson
+  namespace: default
+  labels:
+    team: teamsykefravr
+spec:
+  image: "docker.pkg.github.com/navikt/modiasyfofront:{{tag}}"
+  replicas:
+    min: 1
+    max: 2
+    cpuThresholdPercentage: 90
+  port: 8080
+  liveness:
+    path: /health/isAlive
+    initialDelay: 10
+    timeout: 5
+    periodSeconds: 5
+    failureThreshold: 30
+  readiness:
+    path: /health/isReady
+    initialDelay: 30
+    periodSeconds: 5
+    timeout: 5
+  prometheus:
+    enabled: true
+    path: /actuator/metrics
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  webproxy: false
+  ingresses:
+    - "https://syfomodiaperson.nais.preprod.local"
+  env:
+    - name: SRVMODIASYFOFRONT_USERNAME
+      value: srvmodiasyfofront
+    - name: SRVMODIASYFOFRONT_PASSWORD
+      value: <passord>
+    - name: LOADBALANCER_MODIASYFOFRONT_CONTEXTROOTS
+      value: sykefravaer
+    - name: LOADBALANCER_MODIASYFOFRONT_URL
+      value: app-q1.adeo.no
+    - name: LOADBALANCER_MODIASYFOFRONT_POOLNAME
+      value: nais
+    - name: APPDYNAMICS_CONTROLLER_HOST_NAME
+      value: appdynamics.adeo.no
+    - name: APPDYNAMICS_CONTROLLER_PORT
+      value: 443
+    - name: APPDYNAMICS_CONTROLLER_SSL_ENABLED
+      value: true
+    - name: APPDYNAMICS_AGENT_ACCOUNT_NAME
+      value: NON-PROD
+    - name: APPDYNAMICS_AGENT_ACCOUNT_ACCESS_KEY
+      value: 5ed4d975-ed5b-40b2-8ac6-9e0c0e61a67e
+    - name: SECURITYTOKENSERVICE_URL
+      value: https://sts-q1.preprod.local/SecurityTokenServiceProvider/
+    - name: ISSO_HOST_URL
+      value: https://isso-q.adeo.no/isso/oauth2
+    - name: ISSO_JWKS_URL
+      value: https://isso-q.adeo.no/isso/oauth2/connect/jwk_uri
+    - name: ISSO_ISSUER_URL
+      value: https://isso-q.adeo.no:443/isso/oauth2
+    - name: ISSO_ISALIVE_URL
+      value: https://isso-q.adeo.no/isso/isAlive.jsp
+    - name: ISSO_RP_USER_USERNAME
+      value: veilarblogin-q1
+    - name: ISSO_RP_USER_PASSWORD
+      value: <passord>
+    - name: VEILARBLOGIN_REDIRECT_URL_DESCRIPTION
+      value: Login for veilarb
+    - name: VEILARBLOGIN_REDIRECT_URL_URL
+      value: https://app-q1.adeo.no/veilarblogin/api/login
+    - name: FASTLEGEAPI_URL
+      value: https://fastlegerest.nais.preprod.local/fastlegerest/api/fastlege/v1
+    - name: IADECORATOR_JS_URL
+      value: https://internarbeidsflatedecorator-q1.nais.preprod.local/internarbeidsflatedecorator/js/head.min.js
+    - name: MODIASYFOAPI_URL
+      value: https://modiasyforest.nais.preprod.local/modiasyforest/api
+    - name: SYFOMOTEADMINAPI_URL
+      value: https://syfomoteadmin.nais.preprod.local/syfomoteadmin/api
+    - name: SYFOMOTEBEHOVAPI_URL
+      value: https://syfomotebehov.nais.preprod.local/syfomotebehov/api
