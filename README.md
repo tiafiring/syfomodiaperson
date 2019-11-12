@@ -17,4 +17,5 @@ Du må ha Node installert.
 * Kjør tester med `npm test` eller `npm test:watch`
 * Lint JS-kode med `npm run lint` eller `npm run lint:fix`
 
-Appen nås på [localhost:8191](http://localhost:8191/sykefravaer/fnr)
+Appen nås på [localhost:8191](http://localhost:8191/sykefravaer/fnr) hvor 'fnr' må ha et gyldig format.
+Eksempler finnes på https://confluence.adeo.no/display/Digisyfo/Testdata+-+Fiktive+brukere (NAV-intern lenke)
