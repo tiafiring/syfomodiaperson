@@ -8,11 +8,12 @@ import AppSpinner from '../AppSpinner';
 import IngenHistorikk from './IngenHistorikk';
 import UtvidbarHistorikk from './UtvidbarHistorikk';
 import Sidetopp from '../Sidetopp';
+import { tilfellerFromTilfelleperioder } from '../../utils/periodeUtils';
 
-const hentSykeforloepMedEvents = (sykeforloepliste, eventliste) => {
-    return sykeforloepliste.filter((forloep) => {
+const hentSykeforloepMedEvents = (periodeliste, eventliste) => {
+    return periodeliste.filter((periode) => {
         return eventliste.filter((event) => {
-            return new Date(forloep.skyggeFom) < new Date(event.tidspunkt) && new Date(event.tidspunkt) < new Date(forloep.sluttdato);
+            return new Date(periode.skyggeFom) < new Date(event.tidspunkt) && new Date(event.tidspunkt) < new Date(periode.tom);
         }).length > 0;
     });
 };
@@ -23,29 +24,54 @@ const Feilmelding = () => {
     </Alertstripe>);
 };
 
-const Historikk = ({ historikk, sykeforloep }) => {
+const TidligereHendelser = ({eventsForForsteSykefravaer}) => {
+    return (<React.Fragment>
+    {eventsForForsteSykefravaer.length > 0 &&
+        (<UtvidbarHistorikk tittel={'Tidligere hendelser'}>
+            <ol className="historikkeventliste">
+                {
+                    eventsForForsteSykefravaer
+                        .sort((h1, h2) => {
+                            return new Date(h2.tidspunkt) - new Date(h1.tidspunkt);
+                        })
+                        .map((event, idx) => {
+                            return <HistorikkEvent key={idx} event={event} />;
+                        })
+                }
+            </ol>
+        </UtvidbarHistorikk>)
+    }
+    </React.Fragment>);
+};
+
+const Historikk = ({ historikk, oppfolgingstilfelleperioder }) => {
+    const tilfeller = tilfellerFromTilfelleperioder(oppfolgingstilfelleperioder);
     const historikkEvents = historikk.motebehovHistorikk.concat(historikk.moteHistorikk).concat(historikk.oppfoelgingsdialogHistorikk);
-    if (!sykeforloep || sykeforloep.length === 0 || (historikk.hentetMoter && historikk.hentetMotebehov && historikk.hentetOppfoelgingsdialoger && historikkEvents.length === 0)) {
+    if (!tilfeller || tilfeller.length === 0 || (historikk.hentetMoter && historikk.hentetMotebehov && historikk.hentetOppfoelgingsdialoger && historikkEvents.length === 0)) {
         return <IngenHistorikk />;
     }
 
-    const sykeforloepSortert = sykeforloep
-        .sort((s1, s2) => { return new Date(s2.oppfoelgingsdato) - new Date(s1.oppfoelgingsdato); });
+    const tilfellerSortert = tilfeller
+        .sort((s1, s2) => { return new Date(s2.fom) - new Date(s1.fom); });
     // Dette er en hack for at alle historikkEvents skal få en plassering i et sykefraværstilfellet, selv om de skjer "utenfor".
-    for (let i = 0; i < sykeforloepSortert.length; i += 1) {
-        if (i === (sykeforloepSortert.length - 1)) {
-            sykeforloepSortert[i].skyggeFom = new Date(0);
+    for (let i = 0; i < tilfellerSortert.length; i += 1) {
+        if (i === (tilfellerSortert.length - 1)) {
+            tilfellerSortert[i].skyggeFom = new Date(tilfellerSortert[i].fom);
         } else {
-            sykeforloepSortert[i].skyggeFom = new Date(sykeforloepSortert[i + 1].sluttdato);
-            sykeforloepSortert[i].skyggeFom.setDate(sykeforloepSortert[i].skyggeFom.getDate() + 1);
+            tilfellerSortert[i].skyggeFom = new Date(tilfellerSortert[i + 1].tom);
+            tilfellerSortert[i].skyggeFom.setDate(tilfellerSortert[i].skyggeFom.getDate() + 1);
         }
     }
 
     const eventsEtterSisteSykefravaer = historikkEvents.filter((event) => {
-        return new Date(event.tidspunkt) > new Date(sykeforloepSortert[0].sluttdato);
+        return new Date(event.tidspunkt) > new Date(tilfellerSortert[0].tom);
     });
 
-    const sykeforloepMedEvents = hentSykeforloepMedEvents(sykeforloepSortert, historikkEvents);
+    const eventsForForsteSykefravaer = historikkEvents.filter((event) => {
+        return new Date(event.tidspunkt) < new Date(tilfellerSortert[tilfellerSortert.length -1].fom);
+    });
+
+    const perioderMedEvents = hentSykeforloepMedEvents(tilfellerSortert, historikkEvents);
 
     return (<div>
         {
@@ -74,13 +100,13 @@ const Historikk = ({ historikk, sykeforloep }) => {
                 </Panel>)
             }
             {
-                sykeforloepMedEvents.length > 0 &&
+                perioderMedEvents.length > 0 &&
                 (<div className="blokk--l">
                     <h2 className="panel__tittel">Sykefraværstilfeller</h2>
                     {
-                        sykeforloepMedEvents
-                            .map((forloep, index) => {
-                                return (<UtvidbarHistorikk key={index} tittel={tilLesbarPeriodeMedArstall(forloep.oppfoelgingsdato, forloep.sluttdato)}>
+                        perioderMedEvents
+                            .map((periode, index) => {
+                                return (<UtvidbarHistorikk key={index} tittel={tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}>
                                     <ol className="historikkeventliste">
                                         {
                                             historikkEvents
@@ -88,7 +114,7 @@ const Historikk = ({ historikk, sykeforloep }) => {
                                                     return new Date(h2.tidspunkt) - new Date(h1.tidspunkt);
                                                 })
                                                 .map((event, idx) => {
-                                                    if (new Date(forloep.skyggeFom) < new Date(event.tidspunkt) && new Date(event.tidspunkt) < new Date(forloep.sluttdato)) {
+                                                    if (new Date(periode.skyggeFom) < new Date(event.tidspunkt) && new Date(event.tidspunkt) < new Date(periode.tom)) {
                                                         return <HistorikkEvent key={idx} event={event} />;
                                                     }
                                                     return null;
@@ -98,6 +124,7 @@ const Historikk = ({ historikk, sykeforloep }) => {
                                 </UtvidbarHistorikk>);
                             })
                     }
+                    <TidligereHendelser eventsForForsteSykefravaer={eventsForForsteSykefravaer} />
                 </div>)
             }
         </div>
@@ -105,7 +132,7 @@ const Historikk = ({ historikk, sykeforloep }) => {
 };
 
 Historikk.propTypes = {
-    sykeforloep: PropTypes.array,
+    oppfolgingstilfelleperioder: PropTypes.object,
     historikk: PropTypes.object,
 };
 

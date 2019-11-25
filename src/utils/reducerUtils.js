@@ -7,9 +7,6 @@ export const henterEllerHarHentetEgenansatt = (egenansatt) => {
 export const henterEllerHarHentetFastleger = (fastleger) => {
     return fastleger.henter || fastleger.hentet;
 };
-export const henterEllerHarHentetSykeforloep = (sykeforloep) => {
-    return sykeforloep.henter || sykeforloep.hentet;
-};
 
 export const harForsoktHentetMotebehov = (motebehovReducer) => {
     return motebehovReducer.hentet || motebehovReducer.hentingFeilet;

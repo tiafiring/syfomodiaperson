@@ -13,7 +13,6 @@ describe('MotebehovContainer', () => {
         let actions;
         let hentMotebehov;
         let hentOppfoelgingsdialoger;
-        let hentSykeforloep;
         let hentOppfolgingstilfelleperioder;
         let hentSykmeldinger;
         let tilgang;
@@ -22,7 +21,6 @@ describe('MotebehovContainer', () => {
         beforeEach(() => {
             hentMotebehov = sinon.spy();
             hentOppfoelgingsdialoger = sinon.spy();
-            hentSykeforloep = sinon.spy();
             hentOppfolgingstilfelleperioder = sinon.spy();
             hentSykmeldinger = sinon.spy();
             tilgang = {
@@ -32,7 +30,6 @@ describe('MotebehovContainer', () => {
             actions = {
                 hentMotebehov,
                 hentOppfoelgingsdialoger,
-                hentSykeforloep,
                 hentOppfolgingstilfelleperioder,
                 hentSykmeldinger,
             };

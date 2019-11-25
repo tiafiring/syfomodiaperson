@@ -3,6 +3,7 @@ import {
     periodeOverlapperMedPeriode,
     senesteTom,
     tidligsteFom,
+    tilfellerFromTilfelleperioder,
 } from '../../src/utils/periodeUtils';
 
 describe('periodeUtils', () => {
@@ -90,4 +91,139 @@ describe('periodeUtils', () => {
             expect(periodeneOverlapper).to.equal(false);
         });
     });
+
+    describe('tilfellerFromTilfelleperioder', () => {
+        it('Skal gi en tom liste hvis oppfolgingstilfelleperioder er tom', () => {
+            const oppfolgingstilfelleperioder = {};
+
+            const tilfeller = tilfellerFromTilfelleperioder(oppfolgingstilfelleperioder);
+
+            expect(tilfeller.length).to.equal(0);
+        });
+        it('Skal gi en tom liste hvis ingen bedrifter har hentet data', () => {
+            const oppfolgingstilfelleperioder = {
+                '555666444': {
+                    data: [],
+                },
+            };
+
+            const tilfeller = tilfellerFromTilfelleperioder(oppfolgingstilfelleperioder);
+
+            expect(tilfeller.length).to.equal(0);
+        });
+        it('Skal gi riktig tilfelle hvis det bare er én periode', () => {
+            const oppfolgingstilfelleperioder = {
+                '555666444': {
+                    data: [
+                        {
+                            orgnummer: '555666444',
+                            fom: '2019-06-05',
+                            tom: '2019-12-11',
+                            grad: 100,
+                            aktivitet: 'Heihei'
+                        },
+                    ]
+                },
+            };
+
+            const expectedTilfelle = [
+                {
+                    fom: '2019-06-05',
+                    tom: '2019-12-11',
+                },
+            ];
+
+            const tilfeller = tilfellerFromTilfelleperioder(oppfolgingstilfelleperioder);
+
+            expect(tilfeller).to.deep.equal(expectedTilfelle);
+        });
+        it('Skal gi riktig tilfelle selv om periodene ikke ligger i riktig rekkefølge', () => {
+            const oppfolgingstilfelleperioder = {
+                '555666444': {
+                    data: [
+                        {
+                            orgnummer: '555666444',
+                            fom: '2019-06-05',
+                            tom: '2019-12-11',
+                            grad: 100,
+                            aktivitet: 'Heihei'
+                        },
+                        {
+                            orgnummer: '555666444',
+                            fom: '2019-01-05',
+                            tom: '2019-10-11',
+                            grad: 100,
+                            aktivitet: 'Heihei'
+                        },
+                        {
+                            orgnummer: '555666444',
+                            fom: '2019-07-05',
+                            tom: '2019-12-24',
+                            grad: 100,
+                            aktivitet: 'Heihei'
+                        },
+                    ],
+                },
+            };
+
+            const expectedTilfelle = [
+                {
+                    fom: '2019-01-05',
+                    tom: '2019-12-24',
+                },
+            ];
+
+            const tilfeller = tilfellerFromTilfelleperioder(oppfolgingstilfelleperioder);
+
+            expect(tilfeller).to.deep.equal(expectedTilfelle);
+        });
+        it('Skal gi en liste med to objekter hvis det er to bedrifter med tilfelleperioder', () => {
+            const oppfolgingstilfelleperioder = {
+                '110110110': {
+                    data: [
+                        {
+                            orgnummer: '110110110',
+                            fom: '2019-06-07',
+                            tom: '2019-07-10',
+                            grad: 100,
+                            aktivitet: 'Heihei'
+                        },
+                        {
+                            orgnummer: '110110110',
+                            fom: '2019-07-11',
+                            tom: '2019-08-26',
+                            grad: 100,
+                            aktivitet: 'Heihei'
+                        },
+                    ],
+                },
+                '555666444': {
+                    data: [
+                        {
+                            orgnummer: '555666444',
+                            fom: '2019-06-05',
+                            tom: '2019-12-11',
+                            grad: 100,
+                            aktivitet: 'Heihei'
+                        },
+                    ]
+                },
+            };
+
+            const expectedTilfeller = [
+                {
+                    fom: '2019-06-07',
+                    tom: '2019-08-26',
+                },
+                {
+                    fom: '2019-06-05',
+                    tom: '2019-12-11',
+                },
+            ];
+
+            const tilfeller = tilfellerFromTilfelleperioder(oppfolgingstilfelleperioder);
+
+            expect(tilfeller).to.deep.equal(expectedTilfeller);
+        });
+    })
 });

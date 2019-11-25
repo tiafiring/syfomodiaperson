@@ -27,7 +27,6 @@ lastFilTilMinne(enums.MOTER);
 lastFilTilMinne(enums.OPPFOELGINGSDIALOGER);
 lastFilTilMinne(enums.OPPFOLGINGSTILFELLEPERIODER);
 lastFilTilMinne(enums.SOKNADER);
-lastFilTilMinne(enums.SYKEFORLOEP);
 lastFilTilMinne(enums.SYKEPENGESOKNADER);
 lastFilTilMinne(enums.SYKMELDINGER);
 lastFilTilMinne(enums.TEKSTER);

@@ -12,7 +12,8 @@ import Historikk from '../components/historikk/Historikk';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import * as historikkActions from '../actions/historikk_actions';
-import * as sykeforloepActions from '../actions/sykeforloep_actions';
+import * as oppfolgingstilfelleperioderActions from '../actions/oppfolgingstilfelleperioder_actions';
+import * as ledereActions from '../actions/ledere_actions';
 import { HISTORIKK } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 
@@ -28,8 +29,18 @@ export class HistorikkSide extends Component {
         if (!props.historikk.henterOppfoelgingsdialoger && !props.historikk.hentetOppfoelgingsdialoger) {
             props.actions.hentHistorikk(this.props.fnr, 'OPPFOELGINGSDIALOG');
         }
-        if (!props.sykeforloep.henter && !props.sykeforloep.hentet) {
-            props.actions.hentSykeforloep(this.props.fnr);
+
+        props.actions.hentLedere(this.props.fnr);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const {
+            actions,
+            fnr,
+            ledereData,
+        } = nextProps;
+        if (ledereData && ledereData.length > 0) {
+            actions.hentOppfolgingstilfelleperioder(fnr);
         }
     }
 
@@ -40,8 +51,8 @@ export class HistorikkSide extends Component {
             hentingFeilet,
             historikk,
             ledetekster,
-            sykeforloep,
             tilgang,
+            oppfolgingstilfelleperioder,
         } = this.props;
         return (<Side fnr={fnr} tittel="Historikk" aktivtMenypunkt={HISTORIKK}>
             {
@@ -56,7 +67,7 @@ export class HistorikkSide extends Component {
                     } else if (hentingFeilet) {
                         return <Feilmelding />;
                     }
-                    return <Historikk sykeforloep={sykeforloep.data} historikk={historikk} />;
+                    return <Historikk oppfolgingstilfelleperioder={oppfolgingstilfelleperioder} historikk={historikk} />;
                 })()
             }
         </Side>);
@@ -64,10 +75,10 @@ export class HistorikkSide extends Component {
 }
 
 HistorikkSide.propTypes = {
-    hentSykeforloep: PropTypes.func,
+    hentLedere: PropTypes.func,
+    hentOppfolgingstilfelleperioder: PropTypes.func,
     hentHistorikk: PropTypes.func,
     historikk: PropTypes.object,
-    sykeforloep: PropTypes.object,
     ledetekster: keyValue,
     actions: PropTypes.object,
     fnr: PropTypes.string,
@@ -75,25 +86,32 @@ HistorikkSide.propTypes = {
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
+    oppfolgingstilfelleperioder: PropTypes.object,
+    ledereData: PropTypes.array,
 };
 
 export function mapDispatchToProps(dispatch) {
-    const actions = Object.assign({}, historikkActions, sykeforloepActions);
+    const actions = Object.assign({}, historikkActions, oppfolgingstilfelleperioderActions, ledereActions);
     return {
         actions: bindActionCreators(actions, dispatch),
     };
 }
 
 export const mapStateToProps = (state, ownProps) => {
+    const oppfolgingstilfelleperioder = state.oppfolgingstilfelleperioder;
+    const henterTilfeller = Object.keys(oppfolgingstilfelleperioder).findIndex((orgnummer) => {
+        return oppfolgingstilfelleperioder[orgnummer].henter;
+    }) !== -1;
+    const henter = state.ledetekster.henter || state.tilgang.henter || state.ledere.henter || henterTilfeller;
     return {
         fnr: ownProps.params.fnr,
-        sykeforloep: state.sykeforloep,
+        oppfolgingstilfelleperioder,
         historikk: state.historikk,
-        henter: state.sykeforloep.henter || state.ledetekster.henter || state.tilgang.henter,
-        hentet: state.sykeforloep.hentet,
+        henter,
         ledetekster: state.ledetekster.data,
-        hentingFeilet: state.sykeforloep.hentingFeilet || state.tilgang.hentingFeilet,
+        hentingFeilet: state.tilgang.hentingFeilet || state.ledere.hentingFeilet,
         tilgang: state.tilgang.data,
+        ledereData: state.ledere.data,
     };
 };
 

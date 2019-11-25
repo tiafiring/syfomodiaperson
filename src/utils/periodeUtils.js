@@ -30,3 +30,15 @@ export const periodeOverlapperMedPeriode = (periodeA_, periodeB_) => {
     }
 };
 
+export const tilfellerFromTilfelleperioder = (oppfolgingstilfelleperioder) => {
+    return Object.keys(oppfolgingstilfelleperioder).map((orgnummer) => {
+        const perioder = oppfolgingstilfelleperioder[orgnummer].data;
+        const fom = tidligsteFom(perioder);
+        const tom = senesteTom(perioder);
+
+        return { fom, tom };
+    }).filter((element) => {
+        return !!element.fom && !!element.tom;
+    });
+};
+

@@ -5,7 +5,6 @@ import IngenBrukerContainer from '../containers/IngenBrukerContainer';
 import MotebookingContainer from '../containers/MotebookingContainer';
 import AvbrytMoteContainer from '../containers/AvbrytMoteContainer';
 import BekreftMoteContainer from '../containers/BekreftMoteContainer';
-import TidslinjeContainer from '../containers/TidslinjeContainer';
 import SykmeldingerContainer from '../containers/SykmeldingerContainer';
 import SykepengesoknaderContainer from '../containers/SykepengesoknaderContainer';
 import SykepengesoknadContainer from '../containers/SykepengesoknadContainer';
@@ -33,8 +32,6 @@ const AppRouter = ({ history }) => {
         <Route path="/sykefravaer/:fnr/motebehov" component={MotebehovContainer} />
         <Route path="/sykefravaer/:fnr/mote/:moteUuid/avbryt" component={AvbrytMoteContainer} />
         <Route path="/sykefravaer/:fnr/mote/bekreft/:alternativId" component={BekreftMoteContainer} />
-        <Route path="/sykefravaer/:fnr/tidslinjen" component={TidslinjeContainer} />
-        <Route path="/sykefravaer/:fnr/tidslinjen/:arbeidssituasjon" component={TidslinjeContainer} />
         <Route path="/sykefravaer/:fnr/sykmeldinger" component={SykmeldingerContainer} />
         <Route path="/sykefravaer/:fnr/sykepengesoknader" component={SykepengesoknaderContainer} />
         <Route path="/sykefravaer/:fnr/sykepengesoknader/:sykepengesoknadId" component={SykepengesoknadContainer} />

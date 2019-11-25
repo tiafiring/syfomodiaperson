@@ -16,12 +16,6 @@ const motemodulMenypunkt = {
     menypunkt: menypunkter.MOETEPLANLEGGER,
 };
 
-const tidslinjeMenypunkt = {
-    navn: 'Tidslinjen',
-    sti: 'tidslinjen',
-    menypunkt: menypunkter.TIDSLINJEN,
-};
-
 const sykmeldingerMenypunkt = {
     navn: 'Sykmeldinger',
     sti: 'sykmeldinger',
@@ -116,7 +110,7 @@ class GlobalNavigasjon extends Component {
 
     render() {
         const { fnr, aktivtMenypunkt, oppgaver } = this.props;
-        this.menypunkter = [historikkMenypunkt, tidslinjeMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, oppfoelgingsplanMenypunkt, motemodulMenypunkt];
+        this.menypunkter = [historikkMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, oppfoelgingsplanMenypunkt, motemodulMenypunkt];
 
         return (<ul aria-label="Navigasjon" className="navigasjon">
             {

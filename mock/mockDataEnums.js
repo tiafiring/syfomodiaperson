@@ -15,7 +15,6 @@ const MOTER = 'moter';
 const OPPFOELGINGSDIALOGER = 'oppfoelgingsdialoger';
 const OPPFOLGINGSTILFELLEPERIODER = 'oppfolgingstilfelleperioder';
 const SOKNADER = 'soknader';
-const SYKEFORLOEP = 'sykeforloep';
 const SYKEPENGESOKNADER = 'sykepengesoknader';
 const SYKMELDINGER = 'sykmeldinger';
 const TEKSTER = 'tekster';
@@ -43,7 +42,6 @@ module.exports = {
     OPPFOELGINGSDIALOGER,
     OPPFOLGINGSTILFELLEPERIODER,
     SOKNADER,
-    SYKEFORLOEP,
     SYKEPENGESOKNADER,
     SYKMELDINGER,
     TEKSTER,
