@@ -24,9 +24,9 @@ const Feilmelding = () => {
     </Alertstripe>);
 };
 
-const TidligereHendelser = ({eventsForForsteSykefravaer}) => {
+const TidligereHendelser = ({ eventsForForsteSykefravaer }) => {
     return (<React.Fragment>
-    {eventsForForsteSykefravaer.length > 0 &&
+        {eventsForForsteSykefravaer.length > 0 &&
         (<UtvidbarHistorikk tittel={'Tidligere hendelser'}>
             <ol className="historikkeventliste">
                 {
@@ -40,8 +40,12 @@ const TidligereHendelser = ({eventsForForsteSykefravaer}) => {
                 }
             </ol>
         </UtvidbarHistorikk>)
-    }
+        }
     </React.Fragment>);
+};
+
+TidligereHendelser.propTypes = {
+    eventsForForsteSykefravaer: PropTypes.arrayOf(PropTypes.object),
 };
 
 const Historikk = ({ historikk, oppfolgingstilfelleperioder }) => {
@@ -68,7 +72,7 @@ const Historikk = ({ historikk, oppfolgingstilfelleperioder }) => {
     });
 
     const eventsForForsteSykefravaer = historikkEvents.filter((event) => {
-        return new Date(event.tidspunkt) < new Date(tilfellerSortert[tilfellerSortert.length -1].fom);
+        return new Date(event.tidspunkt) < new Date(tilfellerSortert[tilfellerSortert.length - 1].fom);
     });
 
     const perioderMedEvents = hentSykeforloepMedEvents(tilfellerSortert, historikkEvents);

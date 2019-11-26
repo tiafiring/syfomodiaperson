@@ -18,8 +18,8 @@ import {
     sykmeldingperioderSortertEldstTilNyest,
     stringMedAlleGraderingerFraSykmeldingPerioder,
 } from '../../utils/sykmeldingUtils';
-import { finnMiljoStreng } from '../../utils';
 import Lenke from 'nav-frontend-lenker';
+import { finnMiljoStreng } from '../../utils/miljoUtil';
 
 
 const tekster = {

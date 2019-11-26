@@ -8,7 +8,7 @@ const mockSyfooppfolgingsplanservice = require('./mockSyfooppfolgingsplanservice
 const mockSyfosoknad = require('./mockSyfosoknad');
 const mockSyfotekster = require('./mockSyfotekster');
 const mockSyfotilgangskoontroll = require('./mockSyfotilgangskontroll');
-const mockSyfoveilederoppgaver = require('./mockSyfoveilederoppgaver');
+const mockSyfobehandlendeenhet = require('./mockSyfobehandlendeenhet');
 
 function mockEndepunkter(server, erLokal) {
     server.use(express.json());
@@ -24,7 +24,7 @@ function mockEndepunkter(server, erLokal) {
         mockSyfosoknad,
         mockSyfotekster,
         mockSyfotilgangskoontroll,
-        mockSyfoveilederoppgaver,
+        mockSyfobehandlendeenhet,
     ].forEach((func) => {
         func(server, erLokal);
     });

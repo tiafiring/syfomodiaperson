@@ -35,4 +35,4 @@ spec:
       memory: 128Mi
   webproxy: false
   ingresses:
-    - "https://syfomodiaperson.nais.preprod.local"
+    - "https://syfomodiaperson.nais.adeo.no"

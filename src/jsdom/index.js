@@ -1,4 +1,4 @@
-'use strict';
+/* eslint-disable */
 
 var jsdom = require('jsdom');
 

@@ -50,7 +50,6 @@ import { CONTEXT_EVENT_TYPE } from './konstanter';
 import soknader from './reducers/soknader';
 import { config, setContextHolderEventHandlers } from './global';
 import './styles/styles.less';
-import { erPreProd } from './utils/miljoUtil';
 
 const rootReducer = combineReducers({
     history,
@@ -142,12 +141,9 @@ store.dispatch(hentAktivEnhet({
 if (!fnr || fnr.length < 1) {
     store.dispatch(hentAktivBruker({
         callback: (aktivBruker) => {
-            if (erPreProd()) {
-                window.location.href = `/sykefravaer/${aktivBruker}`;
-            }
             window.location.href = `/sykefravaer/${aktivBruker}`;
         },
-    }))
+    }));
 }
 
 store.dispatch(hentLedetekster());

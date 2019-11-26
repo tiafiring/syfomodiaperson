@@ -5,14 +5,14 @@ import * as actions from '../actions/epostinnhold_actions';
 import * as arbeidsgiveractions from '../actions/arbeidsgiverepostinnhold_actions';
 import { HENT_BEKREFT_MOTE_ARBEIDSGIVEREPOSTINNHOLD_FORESPURT } from '../actions/actiontyper';
 import { fullNaisUrlDefault } from '../utils/miljoUtil';
-import { HOST_NAMES } from "../konstanter";
+import { HOST_NAMES } from '../konstanter';
 
 export function* hentBekreftMoteEpostinnhold(action) {
     yield put(actions.henterEpostInnhold());
     try {
         const host = HOST_NAMES.SYFOMOTEADMIN;
         const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/epostinnhold/BEKREFTET?motedeltakeruuid=${action.motedeltakerUuid}&valgtAlternativId=${action.valgtAlternativId}`;
-        const url = fullNaisUrlDefault(host,path);
+        const url = fullNaisUrlDefault(host, path);
         const data = yield call(get, url);
         yield put(actions.epostInnholdHentet('BEKREFT_TIDSPUNKT', data));
     } catch (e) {
@@ -26,7 +26,7 @@ export function* hentBekreftMoteArbeidsgiverEpostinnhold(action) {
     try {
         const host = HOST_NAMES.SYFOMOTEADMIN;
         const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/epostinnhold/BEKREFTET?motedeltakeruuid=${action.motedeltakerUuid}&valgtAlternativId=${action.valgtAlternativId}`;
-        const url = fullNaisUrlDefault(host,path);
+        const url = fullNaisUrlDefault(host, path);
         const data = yield call(get, url);
         yield put(arbeidsgiveractions.arbeidsgiverEpostInnholdHentet('BEKREFT_TIDSPUNKT', data));
     } catch (e) {
@@ -40,7 +40,7 @@ export function* hentAvbrytMoteEpostinnhold(action) {
     try {
         const host = HOST_NAMES.SYFOMOTEADMIN;
         const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/epostinnhold/AVBRUTT?motedeltakeruuid=${action.motedeltakerUuid}`;
-        const url = fullNaisUrlDefault(host,path);
+        const url = fullNaisUrlDefault(host, path);
         const data = yield call(get, url);
         yield put(actions.epostInnholdHentet('AVBRYT_TIDSPUNKT', data));
     } catch (e) {

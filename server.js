@@ -141,7 +141,7 @@ const startServer = (html) => {
                 next(err);
             },
         }));
-        server.use('/syfobehandlendeenhet/api', proxy('syfobehandlendenhet.default',  {
+        server.use('/syfobehandlendeenhet/api', proxy('syfobehandlendeenhet.default',  {
             https: false,
             proxyReqPathResolver: function(req) {
                 return `/api${req.url}`

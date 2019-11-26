@@ -3,7 +3,7 @@ import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api';
 import * as actions from '../actions/virksomhet_actions';
 import { fullNaisUrlDefault } from '../utils/miljoUtil';
-import {HOST_NAMES} from "../konstanter";
+import { HOST_NAMES } from '../konstanter';
 
 export function* hentVirksomhet(action) {
     yield put(actions.henterVirksomhet());

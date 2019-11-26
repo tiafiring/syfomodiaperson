@@ -1,4 +1,4 @@
-import { finnMiljoStreng } from '../utils';
+import { finnMiljoStreng } from '../utils/miljoUtil';
 
 const ContextholderConnection = (ident) => {
     return new WebSocket(`wss://veilederflatehendelser${finnMiljoStreng()}.adeo.no/modiaeventdistribution/ws/${ident}`);

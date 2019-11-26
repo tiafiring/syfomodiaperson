@@ -8,9 +8,9 @@
     "lenke": "/sykefravaer/110110110110/motebehov/",
     "fnr": "110110110110",
     "virksomhetsnummer": "110110110",
-    "created": "2018-12-07T14:10:05.744+01:00",
-    "sistEndret": "2018-12-07T14:28:30.173+01:00",
-    "sistEndretAv": "Z990197",
+    "created": "2019-01-07T13:53:57.047+01:00",
+    "sistEndret": null,
+    "sistEndretAv": null,
     "status": "IKKE_STARTET"
   },
   {
@@ -22,24 +22,24 @@
     "lenke": "/sykefravaer/110110110110/motebehov/",
     "fnr": "110110110110",
     "virksomhetsnummer": "110110110",
-    "created": "2018-11-28T08:48:26.476+01:00",
-    "sistEndret": "2018-11-28T08:51:54.221+01:00",
+    "created": "2019-01-05T13:53:57.047+01:00",
+    "sistEndret": "2019-01-06T13:53:57.047+01:00",
     "sistEndretAv": "Z990197",
     "status": "FERDIG"
   },
   {
     "id": 506081,
-    "uuid": "d6619409-dfa6-4148-9659-a24c29ae04b2",
+    "uuid": "b415b37c-ee10-44b6-bddf-54d049ef25f2",
     "type": "MOTEBEHOV_MOTTATT",
     "tildeltIdent": null,
     "tildeltEnhet": "0330",
     "lenke": "/sykefravaer/110110110110/motebehov/",
     "fnr": "110110110110",
-    "virksomhetsnummer": "110110110",
-    "created": "2018-12-06T16:29:50.806+01:00",
-    "sistEndret": "2018-12-06T16:29:50.806+01:00",
+    "virksomhetsnummer": "000999000",
+    "created": "2019-01-08T13:53:57.047+01:00",
+    "sistEndret": null,
     "sistEndretAv": null,
-    "status": "FERDIG"
+    "status": "IKKE_STARTET"
   },
   {
     "id": 506106,

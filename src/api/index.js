@@ -1,7 +1,4 @@
-import {
-    log,
-    getCookie,
-} from '@navikt/digisyfo-npm';
+import { log } from '@navikt/digisyfo-npm';
 import { Error403 } from './errors';
 import { erProd } from '../utils/miljoUtil';
 
@@ -13,12 +10,11 @@ export const hentLoginUrl = () => {
     return 'https://loginservice.nais.preprod.local/login';
 };
 
-export const hentRedirectBaseUrl = (windowLocationHref) => {
+export const hentRedirectBaseUrl = () => {
     if (erProd()) {
         return 'https://syfomodiaperson.nais.adeo.no/sykefravaer/';
     }
     return 'https://syfomodiaperson.nais.preprod.local/sykefravaer/';
-
 };
 
 export const lagreRedirectUrlILocalStorage = (href) => {
@@ -33,7 +29,7 @@ export function get(url) {
             if (res.status === 401) {
                 log(res, 'Redirect til login');
                 lagreRedirectUrlILocalStorage(window.location.href);
-                window.location.href = `${hentLoginUrl()}?redirect=${hentRedirectBaseUrl(window.location.href)}`;
+                window.location.href = `${hentLoginUrl()}?redirect=${hentRedirectBaseUrl()}`;
             }
             if (res.status === 404) {
                 throw new Error('404');
@@ -71,7 +67,7 @@ export function post(url, body) {
             if (res.status === 401) {
                 log(res, 'Redirect til login');
                 lagreRedirectUrlILocalStorage(window.location.href);
-                window.location.href = `${hentLoginUrl()}?redirect=${hentRedirectBaseUrl(window.location.href)}`;
+                window.location.href = `${hentLoginUrl()}?redirect=${hentRedirectBaseUrl()}`;
                 return null;
             }
             if (res.status >= 400) {

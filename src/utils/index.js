@@ -11,16 +11,6 @@ export const formaterTid = (input) => {
     return tid;
 };
 
-export const finnMiljoStreng = () => {
-    const host = window.location.host;
-    const bindestrekIndex = host.indexOf('-');
-    if (bindestrekIndex === -1) {
-        return '';
-    }
-    const dotIndex = host.indexOf('.');
-    return host.substring(bindestrekIndex, dotIndex);
-};
-
 export const Vis = ({ hvis, children, render }) => {
     return hvis && render
         ? render()
