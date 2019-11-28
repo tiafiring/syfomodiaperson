@@ -1,16 +1,24 @@
 import React from 'react';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 
 const emdashCharacterCode = 8212;
 const EMDASH = String.fromCharCode(emdashCharacterCode);
 
+const texts = {
+    tempAddressNorway: 'Midlertidig adresse Norge',
+    tempAddressUtland: 'Midlertidig adresse utlandet',
+    tempAddress: 'Midlertidig adresse',
+    mailAddressNorway: 'Postadresse Norge',
+    mailAddressUtland: 'Postadresse utlandet',
+    mailAddress: 'Postadresse',
+};
+
 export const finnMidlertidigAdresseTittel = (navbruker) => {
     if (navbruker.midlertidigAdresseNorge) {
-        return getLedetekst('modiafront.personkort.visning.nokkeltekster.adresse.midlertidig-norge');
+        return texts.tempAddressNorway;
     } else if (navbruker.midlertidigAdresseUtland) {
-        return getLedetekst('modiafront.personkort.visning.nokkeltekster.adresse.midlertidig-utland');
+        return texts.tempAddressUtland;
     }
-    return getLedetekst('modiafront.personkort.visning.nokkeltekster.adresse.midlertidig');
+    return texts.tempAddress;
 };
 
 export const finnPostadresseTittel = (navbruker) => {
@@ -18,11 +26,11 @@ export const finnPostadresseTittel = (navbruker) => {
     if (postadresse && postadresse.ustrukturertAdresse && postadresse.ustrukturertAdresse.landkode) {
         if (postadresse.ustrukturertAdresse.landkode === 'NOR' ||
             postadresse.ustrukturertAdresse.landkode === 'NORGE') {
-            return getLedetekst('modiafront.personkort.visning.nokkeltekster.adresse.postadresse-norge');
+            return texts.mailAddressNorway;
         }
-        return getLedetekst('modiafront.personkort.visning.nokkeltekster.adresse.postadresse-utland');
+        return texts.mailAddressUtland;
     }
-    return getLedetekst('modiafront.personkort.visning.nokkeltekster.adresse.postadresse');
+    return texts.mailAddress;
 };
 
 const visLand = (land) => {

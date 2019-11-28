@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import {
     finnMidlertidigAdresseTekst,
     finnMidlertidigAdresseTittel,
@@ -12,12 +11,19 @@ import PersonkortElement from './PersonkortElement';
 import PersonkortInformasjon from './PersonkortInformasjon';
 import { formaterFnr } from '../../utils/fnrUtils';
 
+const texts = {
+    fnr: 'F.nummer',
+    phone: 'Telefon',
+    email: 'E-post',
+    folkeregistrert: 'Folkeregistrert Adresse',
+};
+
 const PersonkortSykmeldt = ({ navbruker }) => {
     const informasjonNokkelTekster = new Map([
-        ['fnr', getLedetekst('modiafront.personkort.visning.nokkeltekster.fnr')],
-        ['tlf', getLedetekst('modiafront.personkort.visning.nokkeltekster.tlf')],
-        ['epost', getLedetekst('modiafront.personkort.visning.nokkeltekster.epost')],
-        ['folkeregistrert', 'Folkeregistrert Adresse'],
+        ['fnr', texts.fnr],
+        ['tlf', texts.phone],
+        ['epost', texts.email],
+        ['folkeregistrert', texts.folkeregistrert],
         ['postadresse', finnPostadresseTittel(navbruker)],
         ['midlertidigAdresse', finnMidlertidigAdresseTittel(navbruker)],
     ]);

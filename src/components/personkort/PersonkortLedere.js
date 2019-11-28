@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { formaterOrgnr } from '../../utils';
 import { restdatoTilLesbarDato } from '../../utils/datoUtils';
 import PersonkortFeilmelding from './PersonkortFeilmelding';
@@ -8,18 +7,29 @@ import PersonkortInformasjon from './PersonkortInformasjon';
 import kanskjeBooleanTilJaNeiKanskje from './kanskjeBooleanTilJaNeiKanskje';
 import PersonkortElement from './PersonkortElement';
 
+const texts = {
+    name: 'Navn',
+    phone: 'Telefon',
+    email: 'E-post',
+    orgnummer: 'Org.nummer',
+    startDate: 'Meldt inn',
+    forskuttererLonn: 'Forskutterer arbeidsgiver lønn?',
+    error: 'Nærmeste leder mangler. Arbeidsgiveren må melde inn nærmeste leder i Altinn.',
+    noLeder: 'Nærmeste leder ikke meldt inn av arbeidsgiver',
+};
+
 const PersonkortLedere = ({ ledere }) => {
     const informasjonNokkelTekster = new Map([
-        ['navn', getLedetekst('modiafront.personkort.visning.nokkeltekster.navn')],
-        ['tlf', getLedetekst('modiafront.personkort.visning.nokkeltekster.tlf')],
-        ['epost', getLedetekst('modiafront.personkort.visning.nokkeltekster.epost')],
-        ['orgnummer', getLedetekst('modiafront.personkort.visning.nokkeltekster.orgnummer')],
-        ['fomDato', getLedetekst('modiafront.personkort.visning.nokkeltekster.leder_fom')],
-        ['arbeidsgiverForskuttererLoenn', getLedetekst('modiafront.personkort.visning.nokkeltekster.forskutterer')],
+        ['navn', texts.name],
+        ['tlf', texts.phone],
+        ['epost', texts.email],
+        ['orgnummer', texts.orgnummer],
+        ['fomDato', texts.startDate],
+        ['arbeidsgiverForskuttererLoenn', texts.forskuttererLonn],
     ]);
     return ledere.length === 0
         ? (<PersonkortFeilmelding>
-            {getLedetekst('modiafront.personkort.visning.leder.feilmelding.ingen-ledere')}
+            {texts.error}
         </PersonkortFeilmelding>)
         : ledere.map((leder, idx) => {
             const valgteElementer = (({ navn, epost, tlf, orgnummer, fomDato, arbeidsgiverForskuttererLoenn }) => {
@@ -48,7 +58,7 @@ const PersonkortLedere = ({ ledere }) => {
                     {
                         !leder.erOppgitt
                             ? (<PersonkortFeilmelding>
-                                {getLedetekst('modiafront.personkort.visning.leder.feilmelding.ingen-leder')}
+                                {texts.noLeder}
                             </PersonkortFeilmelding>)
                             : (<PersonkortInformasjon
                                 informasjonNokkelTekster={informasjonNokkelTekster}

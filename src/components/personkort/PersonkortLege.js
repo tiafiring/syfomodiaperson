@@ -1,13 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { restdatoTilLesbarDato } from '../../utils/datoUtils';
 import PersonkortFeilmelding from './PersonkortFeilmelding';
 import PersonkortElement from './PersonkortElement';
 import PersonkortInformasjon from './PersonkortInformasjon';
 
+const texts = {
+    startDate: 'Brukers fastlege siden',
+    name: 'Legekontor',
+    phone: 'Telefon',
+    error: 'Det kan hende brukeren ikke har en fastlege. Ta kontakt med brukeren for å få behandlers kontaktopplysninger.',
+};
+
 export const hentTekstFastlegeNavn = (fastlege) => {
     return fastlege ? `${fastlege.fornavn} ${fastlege.etternavn}` : '';
+};
+
+const tidligereLegerTekst = (fastlege) => {
+    return `${restdatoTilLesbarDato(fastlege.pasientforhold.fom)} - ${restdatoTilLesbarDato(fastlege.pasientforhold.tom)} ${hentTekstFastlegeNavn(fastlege)}`;
 };
 
 export const TidligereLeger = ({ tidligereFastleger }) => {
@@ -21,11 +31,7 @@ export const TidligereLeger = ({ tidligereFastleger }) => {
                     fastlegerMedPasientforhold.map((lege, idx) => {
                         return (<li key={idx}>
                             {
-                                getLedetekst('modiafront.personkort.visningTidligereLeger.pasientforhold', {
-                                    '%FOM%': restdatoTilLesbarDato(lege.pasientforhold.fom),
-                                    '%TOM%': restdatoTilLesbarDato(lege.pasientforhold.tom),
-                                    '%LEGENAVN%': lege.navn,
-                                })
+                                tidligereLegerTekst(lege)
                             }
                         </li>);
                     })
@@ -41,9 +47,9 @@ TidligereLeger.propTypes = {
 
 const PersonkortLege = ({ fastleger }) => {
     const informasjonNokkelTekster = new Map([
-        ['fom', getLedetekst('modiafront.personkort.visning.nokkeltekster.lege_fom')],
-        ['navn', getLedetekst('modiafront.personkort.visning.nokkeltekster.legekontor')],
-        ['telefon', getLedetekst('modiafront.personkort.visning.nokkeltekster.tlf')],
+        ['fom', texts.startDate],
+        ['navn', texts.name],
+        ['telefon', texts.phone],
     ]);
     const aktivFastlege = fastleger.aktiv;
     const valgteElementerKontor = aktivFastlege.fastlegekontor && (({ navn, telefon }) => {
@@ -57,7 +63,7 @@ const PersonkortLege = ({ fastleger }) => {
     const valgteElementer = Object.assign({}, valgteElementerPasientforhold, valgteElementerKontor);
     return fastleger.ikkeFunnet
         ? (<PersonkortFeilmelding>
-            {getLedetekst('modiafront.personkort.visning.fastlege.feilmelding')}
+            {texts.error}
         </PersonkortFeilmelding>)
         : ([<PersonkortElement tittel={hentTekstFastlegeNavn(aktivFastlege)} imgUrl="/sykefravaer/img/svg/medisinskrin.svg">
             <PersonkortInformasjon informasjonNokkelTekster={informasjonNokkelTekster} informasjon={valgteElementer} />
