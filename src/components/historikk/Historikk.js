@@ -128,9 +128,9 @@ const Historikk = ({ historikk, oppfolgingstilfelleperioder }) => {
                                 </UtvidbarHistorikk>);
                             })
                     }
-                    <TidligereHendelser eventsForForsteSykefravaer={eventsForForsteSykefravaer} />
                 </div>)
             }
+            <TidligereHendelser eventsForForsteSykefravaer={eventsForForsteSykefravaer} />
         </div>
     </div>);
 };
