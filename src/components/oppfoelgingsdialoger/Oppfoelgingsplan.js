@@ -169,7 +169,6 @@ export function mapStateToProps(state, ownProps) {
         brukernavn: state.navbruker.data.navn,
         oppfolgingsplan,
         veilederinfo,
-        ledetekster: state.ledetekster.data,
         fnr: ownProps.fnr,
         veilderoppgaver: state.veilederoppgaver.data,
     };

@@ -1,14 +1,25 @@
+const texts = {
+    geografisk: '<p>Du har ikke tilgang til å se denne personen fordi den har geografisk tilhørighet som du ikke har tilgang til.</p>',
+    syfo: '<p>Alle veiledere og saksbehandlere som har behov for å se opplysninger om sykefravær og sykefraværsoppfølging bør ha tilgang. Din lokale identansvarlige kan tildele tilgangen som heter «sykefraværsoppfølging».</p>',
+    kode6: '<p>Brukeren er registrert med skjermingskode 6.</p>',
+    kode7: '<p>Brukeren er registrert med skjermingskode 7.</p>',
+    egenAnsatt: '<p>Du har ikke tilgang til å se personer som er registrert som egen ansatt.</p>',
+    genericError: 'Det skjedde en feil',
+};
+
 export const hentBegrunnelseTekst = (begrunnelse) => {
+    let begrunnelseTekst = texts.genericError;
     if (begrunnelse === 'GEOGRAFISK') {
-        return 'sykefravaer.veileder.feilmelding.GEOGRAFISK.melding';
+        begrunnelseTekst = texts.geografisk;
     } else if (begrunnelse === 'SYFO') {
-        return 'sykefravaer.veileder.feilmelding.SENSITIV.melding';
+        begrunnelseTekst = texts.syfo;
     } else if (begrunnelse === 'KODE6') {
-        return 'sykefravaer.veileder.feilmelding.KODE6.melding';
+        begrunnelseTekst = texts.kode6;
     } else if (begrunnelse === 'KODE7') {
-        return 'sykefravaer.veileder.feilmelding.KODE7.melding';
+        begrunnelseTekst = texts.kode7;
     } else if (begrunnelse === 'EGEN_ANSATT') {
-        return 'sykefravaer.veileder.feilmelding.EGENANSATT.melding';
+        begrunnelseTekst = texts.egenAnsatt;
     }
-    return 'feilmelding.generell.feil';
+
+    return { __html: begrunnelseTekst };
 };
