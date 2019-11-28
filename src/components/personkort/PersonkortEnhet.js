@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import PersonkortElement from './PersonkortElement';
 import PersonkortInformasjon from './PersonkortInformasjon';
 
+const texts = {
+    enhet: 'Enhet',
+};
+
 const PersonkortEnhet = ({ behandlendeEnhet }) => {
     const informasjonNokkelTekster = new Map([
-        ['enhetId', getLedetekst('modiafront.personkort.visning.nokkeltekster.enhet')],
+        ['enhetId', texts.enhet],
     ]);
     const valgteElementer = (({ enhetId }) => {
         return { enhetId };
