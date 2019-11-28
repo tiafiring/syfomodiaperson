@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {
-    getLedetekst,
-    getHtmlLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
 import SideFullbredde from '../sider/SideFullbredde';
 import * as oppdialogActions from '../actions/oppfoelgingsdialoger_actions';
 import Feilmelding from '../components/Feilmelding';
@@ -14,6 +9,10 @@ import Oppfoelgingsplan from '../components/oppfoelgingsdialoger/Oppfoelgingspla
 import AppSpinner from '../components/AppSpinner';
 import { OPPFOELGINGSPLANER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
+
+const texts = {
+    errorTitle: 'Du har ikke tilgang til denne tjenesten',
+};
 
 export class OppfoelgingsPlanerOversiktSide extends Component {
     componentWillMount() {
@@ -28,7 +27,6 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
             fnr,
             henter,
             hentingFeilet,
-            ledetekster,
             oppfoelgingsdialog,
             tilgang,
         } = this.props;
@@ -40,8 +38,8 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
                     }
                     if (!tilgang.harTilgang) {
                         return (<Feilmelding
-                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
+                            tittel={texts.errorTitle}
+                            melding={hentBegrunnelseTekst(tilgang.begrunnelse)}
                         />);
                     }
                     if (hentingFeilet) {
@@ -63,7 +61,6 @@ OppfoelgingsPlanerOversiktSide.propTypes = {
     henterDialoger: PropTypes.bool,
     hentetDialoger: PropTypes.bool,
     tilgang: PropTypes.object,
-    ledetekster: keyValue,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -75,8 +72,8 @@ export function mapDispatchToProps(dispatch) {
 
 export function mapStateToProps(state, ownProps) {
     const id = parseInt(ownProps.params.oppfoelgingsdialogId, 10);
-    const henter = state.oppfoelgingsdialoger.henter || state.ledetekster.henter || state.tilgang.henter || state.veilederinfo.henter;
-    const hentingFeilet = state.oppfoelgingsdialoger.hentingFeilet || state.ledetekster.hentingFeilet || state.tilgang.hentingFeilet;
+    const henter = state.oppfoelgingsdialoger.henter || state.tilgang.henter || state.veilederinfo.henter;
+    const hentingFeilet = state.oppfoelgingsdialoger.hentingFeilet || state.tilgang.hentingFeilet;
     const hentetDialoger = state.oppfoelgingsdialoger.hentet;
     const henterDialoger = state.oppfoelgingsdialoger.henter;
 
@@ -91,7 +88,6 @@ export function mapStateToProps(state, ownProps) {
         hentingFeilet,
         hentetDialoger,
         henterDialoger,
-        ledetekster: state.ledetekster.data,
         tilgang: state.tilgang.data,
     };
 }

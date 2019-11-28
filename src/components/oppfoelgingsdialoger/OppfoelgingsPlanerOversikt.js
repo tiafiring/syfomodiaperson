@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import {
-    getLedetekst,
-    tilLesbarPeriodeMedArstall,
-} from '@navikt/digisyfo-npm';
+import { tilLesbarPeriodeMedArstall } from '@navikt/digisyfo-npm';
 import Alertstripe from 'nav-frontend-alertstriper';
 import Sidetopp from '../Sidetopp';
+
+const texts = {
+    titles: {
+        relevantOppfolgingsplaner: 'Aktuelle oppfølgingsplaner',
+        inactiveOppfolgingsplaner: 'Tidligere oppfølgingsplaner',
+    },
+    alertMessages: {
+        noRelevantOppfolgingsplaner: 'Det er ingen aktuelle oppfølgingsplaner.',
+        noInactiveOppfolgingsplaner: 'Det er ingen tidligere oppfølgingsplaner.',
+    },
+    duration: 'Varighet',
+};
+
+const durationText = (dialog) => {
+    return `${texts.duration} ${tilLesbarPeriodeMedArstall(dialog.godkjentPlan.gyldighetstidspunkt.fom, dialog.godkjentPlan.gyldighetstidspunkt.tom)}`;
+};
 
 const finnAntallOppgaver = (dialog) => {
     return dialog.oppgaver.filter((oppgave) => {
@@ -50,9 +63,9 @@ export class OppfoelgingsPlanerOversikt extends Component {
         return (<div>
             <Sidetopp tittel="Oppfølgingsplaner" />
             <div className="blokk--l">
-                <h2 className="typo-systemtittel blokk--xs">{getLedetekst('fss.oppfoelgingsdialog.oversikt.aktuelle')}</h2>
+                <h2 className="typo-systemtittel blokk--xs">{texts.titles.relevantOppfolgingsplaner}</h2>
                 {aktiveDialoger.length === 0 && <Alertstripe type="info">
-                    <p>{getLedetekst('fss.oppfoelgingsdialog.oversikt.aktuelle--ingen')}</p>
+                    <p>{texts.alertMessages.noRelevantOppfolgingsplaner}</p>
                 </Alertstripe>}
                 {
                     aktiveDialoger.map((dialog, index) => {
@@ -60,20 +73,18 @@ export class OppfoelgingsPlanerOversikt extends Component {
                         return (<Link key={index} className="navigasjonspanel navigasjonspanel--stor" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
                             <div className="navigasjonselement">
                                 <h3 className="panel__tittel">{dialog.virksomhet.navn}</h3>
-                                <p>Varighet {tilLesbarPeriodeMedArstall(dialog.godkjentPlan.gyldighetstidspunkt.fom, dialog.godkjentPlan.gyldighetstidspunkt.tom)}</p>
+                                <p>{durationText(dialog)}</p>
                             </div>
                             { antallOppgaver > 0 && <i className="antallNytt">{antallOppgaver}</i> }
                         </Link>);
                     })
                 }
             </div>
-            <h2 className="typo-systemtittel blokk--xs">{getLedetekst('fss.oppfoelgingsdialog.oversikt.inaktive')}</h2>
+            <h2 className="typo-systemtittel blokk--xs">{texts.titles.inactiveOppfolgingsplaner}</h2>
             {
                 inaktiveDialoger.length === 0 &&
                     <Alertstripe type="info">
-                        <p>
-                            {getLedetekst('fss.oppfoelgingsdialog.oversikt.inaktive--ingen')}
-                        </p>
+                        <p>{texts.alertMessages.noInactiveOppfolgingsplaner}</p>
                     </Alertstripe>
             }
             {
@@ -82,7 +93,7 @@ export class OppfoelgingsPlanerOversikt extends Component {
                     return (<Link key={index} className="navigasjonspanel navigasjonspanel--stor" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
                         <div className="navigasjonselement">
                             <h3 className="panel__tittel">{dialog.virksomhet.navn}</h3>
-                            <p>Varighet {tilLesbarPeriodeMedArstall(dialog.godkjentPlan.gyldighetstidspunkt.fom, dialog.godkjentPlan.gyldighetstidspunkt.tom)}</p>
+                            <p>{durationText(dialog)}</p>
                         </div>
                         { antallOppgaver > 0 && <i className="antallNytt">{antallOppgaver}</i> }
                     </Link>);
