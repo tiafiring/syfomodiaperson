@@ -29,6 +29,19 @@ export const fullNaisUrlDefault = (host, path) => {
     return `https://${host}${finnNaisUrlDefault()}${path}`;
 };
 
+export const finnNaisUrlQ1 = () => {
+    return erPreProd() ?
+        '-q1.nais.preprod.local'
+        : '.nais.adeo.no';
+};
+
+export const fullNaisUrlQ1 = (host, path) => {
+    if (erLokal()) {
+        return path;
+    }
+    return `https://${host}${finnNaisUrlQ1()}${path}`;
+};
+
 export const fullAppAdeoUrl = (path) => {
     if (erLokal()) {
         return path;

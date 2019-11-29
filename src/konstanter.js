@@ -28,7 +28,7 @@ export const MULIGE_SVAR = {
 export const HOST_NAMES = {
     FASTLEGEREST: 'fastlegerest',
     MODIASYFOREST: 'modiasyforest',
-    SYFOMODIACONTEXTHOLDER: 'syfomodiacontextholder',
+    MODIACONTEXTHOLDER: 'modiacontextholder',
     SYFOMOTEADMIN: 'syfomoteadmin',
     SYFOMOTEBEHOV: 'syfomotebehov',
     SYFOOPPFOLGINGSPLANSERVICE: 'syfooppfolgingsplanservice',

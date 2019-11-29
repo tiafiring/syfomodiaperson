@@ -12,9 +12,19 @@ import {
     HENTER_AKTIVBRUKER,
 } from '../../src/actions/actiontyper';
 import { HOST_NAMES } from '../../src/konstanter';
-import { fullNaisUrlDefault } from '../../src/utils/miljoUtil';
+import { fullNaisUrlQ1 } from '../../src/utils/miljoUtil';
 
 describe('modiacontextSagas', () => {
+
+    let apiPath;
+
+    beforeEach(() => {
+        apiPath = '/modiacontextholder/api';
+        process.env = {
+            REACT_APP_CONTEXTHOLDER_ROOT: apiPath,
+        };
+    });
+
     describe('aktivEnhetSaga', () => {
         const generator = aktivEnhetSaga();
 
@@ -24,9 +34,9 @@ describe('modiacontextSagas', () => {
         });
 
         it('Skal dernest hente aktiv enhet', () => {
-            const host = HOST_NAMES.SYFOMODIACONTEXTHOLDER;
-            const path = 'undefined/aktivenhet';
-            const url = fullNaisUrlDefault(host, path);
+            const host = HOST_NAMES.MODIACONTEXTHOLDER;
+            const path = `${apiPath}/context/aktivenhet`;
+            const url = fullNaisUrlQ1(host, path);
             const nextCall = call(get, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
@@ -41,9 +51,9 @@ describe('modiacontextSagas', () => {
         });
 
         it('Skal dernest hente aktiv bruker', () => {
-            const host = HOST_NAMES.SYFOMODIACONTEXTHOLDER;
-            const path = 'undefined/aktivbruker';
-            const url = fullNaisUrlDefault(host, path);
+            const host = HOST_NAMES.MODIACONTEXTHOLDER;
+            const path = `${apiPath}/context/aktivbruker`;
+            const url = fullNaisUrlQ1(host, path);
             const nextCall = call(get, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
@@ -64,9 +74,9 @@ describe('modiacontextSagas', () => {
         });
 
         it('Skal dernest pushe context', () => {
-            const host = HOST_NAMES.SYFOMODIACONTEXTHOLDER;
-            const path = 'undefined/context';
-            const url = fullNaisUrlDefault(host, path);
+            const host = HOST_NAMES.MODIACONTEXTHOLDER;
+            const path = `${apiPath}/context`;
+            const url = fullNaisUrlQ1(host, path);
             const nextCall = call(post, url, {
                 verdi: 'fnr',
                 eventType: 'event1',
