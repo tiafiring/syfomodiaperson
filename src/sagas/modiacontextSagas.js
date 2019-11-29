@@ -3,14 +3,14 @@ import { get, post } from '../api';
 import * as actions from '../actions/modiacontext_actions';
 import { PUSH_MODIACONTEXT_FORESPURT, HENT_AKTIVBRUKER_FORESPURT, HENT_AKTIVENHET_FORESPURT } from '../actions/actiontyper';
 import { HOST_NAMES } from '../konstanter';
-import { fullNaisUrlDefault } from '../utils/miljoUtil';
+import { fullNaisUrlQ1 } from '../utils/miljoUtil';
 
 export function* pushModiacontextSaga(action) {
     yield put(actions.pusherModiaContext());
     try {
-        const host = HOST_NAMES.SYFOMODIACONTEXTHOLDER;
-        const path = `${process.env.REACT_APP_SYFOMODIACONTEXTHOLDER_ROOT}/context`;
-        const url = fullNaisUrlDefault(host, path);
+        const host = HOST_NAMES.MODIACONTEXTHOLDER;
+        const path = `${process.env.REACT_APP_CONTEXTHOLDER_ROOT}/context`;
+        const url = fullNaisUrlQ1(host, path);
         yield call(
             post,
             url,
@@ -28,9 +28,9 @@ export function* pushModiacontextSaga(action) {
 export function* aktivBrukerSaga(action) {
     yield put(actions.henterAktivBruker());
     try {
-        const host = HOST_NAMES.SYFOMODIACONTEXTHOLDER;
-        const path = `${process.env.REACT_APP_SYFOMODIACONTEXTHOLDER_ROOT}/aktivbruker`;
-        const url = fullNaisUrlDefault(host, path);
+        const host = HOST_NAMES.MODIACONTEXTHOLDER;
+        const path = `${process.env.REACT_APP_CONTEXTHOLDER_ROOT}/context/aktivbruker`;
+        const url = fullNaisUrlQ1(host, path);
         const data = yield call(get, url);
         action.data.callback(data.aktivBruker);
     } catch (e) {
@@ -41,9 +41,9 @@ export function* aktivBrukerSaga(action) {
 export function* aktivEnhetSaga(action) {
     yield put(actions.henterAktivEnhet());
     try {
-        const host = HOST_NAMES.SYFOMODIACONTEXTHOLDER;
-        const path = `${process.env.REACT_APP_SYFOMODIACONTEXTHOLDER_ROOT}/aktivenhet`;
-        const url = fullNaisUrlDefault(host, path);
+        const host = HOST_NAMES.MODIACONTEXTHOLDER;
+        const path = `${process.env.REACT_APP_CONTEXTHOLDER_ROOT}/context/aktivenhet`;
+        const url = fullNaisUrlQ1(host, path);
         const data = yield call(
             get,
             url
