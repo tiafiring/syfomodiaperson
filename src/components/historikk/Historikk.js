@@ -10,6 +10,13 @@ import UtvidbarHistorikk from './UtvidbarHistorikk';
 import Sidetopp from '../Sidetopp';
 import { tilfellerFromTilfelleperioder } from '../../utils/periodeUtils';
 
+const texts = {
+    errorMessage: 'Det skjedde en feil! Det er ikke sikkert du får all historikken som finnes.',
+    tidligereHendelserUtvidbarTitle: 'Tidligere hendelser',
+    laterEventsTitle: 'Hendelser',
+    tilfellerTitle: 'Sykefraværstilfeller',
+};
+
 const hentSykeforloepMedEvents = (periodeliste, eventliste) => {
     return periodeliste.filter((periode) => {
         return eventliste.filter((event) => {
@@ -20,14 +27,14 @@ const hentSykeforloepMedEvents = (periodeliste, eventliste) => {
 
 const Feilmelding = () => {
     return (<Alertstripe type="advarsel" className="blokk">
-        <p>Det skjedde en feil! Det er ikke sikkert du får all historikken som finnes.</p>
+        <p>{texts.errorMessage}</p>
     </Alertstripe>);
 };
 
 const TidligereHendelser = ({ eventsForForsteSykefravaer }) => {
     return (<React.Fragment>
         {eventsForForsteSykefravaer.length > 0 &&
-        (<UtvidbarHistorikk tittel={'Tidligere hendelser'}>
+        (<UtvidbarHistorikk tittel={texts.tidligereHendelserUtvidbarTitle}>
             <ol className="historikkeventliste">
                 {
                     eventsForForsteSykefravaer
@@ -89,7 +96,7 @@ const Historikk = ({ historikk, oppfolgingstilfelleperioder }) => {
             {
                 eventsEtterSisteSykefravaer.length > 0 &&
                 (<Panel className="blokk">
-                    <h2 className="panel__tittel">Hendelser</h2>
+                    <h2 className="panel__tittel">{texts.laterEventsTitle}</h2>
                     <ol className="historikkeventliste">
                         {
                             eventsEtterSisteSykefravaer
@@ -106,7 +113,7 @@ const Historikk = ({ historikk, oppfolgingstilfelleperioder }) => {
             {
                 perioderMedEvents.length > 0 &&
                 (<div className="blokk--l">
-                    <h2 className="panel__tittel">Sykefraværstilfeller</h2>
+                    <h2 className="panel__tittel">{texts.tilfellerTitle}</h2>
                     {
                         perioderMedEvents
                             .map((periode, index) => {
