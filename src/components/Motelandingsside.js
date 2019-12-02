@@ -4,25 +4,45 @@ import { Link } from 'react-router';
 import { tilDatoMedUkedagOgManedNavn } from '../utils/datoUtils';
 import Sidetopp from './Sidetopp';
 
+const texts = {
+    pageHeader: 'Dialogmøter',
+    moteElement: {
+        titles: {
+            confirmed: 'Bekreftet møte',
+            seeStatus: 'Se møtestatus',
+            requestMeeting: 'Forespør møte',
+        },
+        subtitles: {
+            dialogmote: 'Dialogmøte',
+            requestSent: 'Møteforespørsel sendt',
+            noMeetings: 'Ingen møter planlagt',
+        },
+    },
+    motebehovElement: {
+        title: 'BEHOV FOR DIALOGMØTE',
+        subtitle: 'Avklaring om møtebehov',
+    },
+};
+
 const setTittel = (mote) => {
     if (mote) {
         if (mote.status === 'BEKREFTET') {
-            return 'Bekreftet møte';
+            return texts.moteElement.titles.confirmed;
         }
-        return 'Se møtestatus';
+        return texts.moteElement.titles.seeStatus;
     }
-    return 'Forespør møte';
+    return texts.moteElement.titles.requestMeeting;
 };
 
 const setUndertittel = (mote) => {
     if (mote) {
         if (mote.status === 'BEKREFTET' && mote.bekreftetAlternativ) {
-            return `Dialogmøte ${tilDatoMedUkedagOgManedNavn(mote.bekreftetAlternativ.tid)}`;
+            return `${texts.moteElement.subtitles.dialogmote} ${tilDatoMedUkedagOgManedNavn(mote.bekreftetAlternativ.tid)}`;
         } else if (mote.opprettetTidspunkt) {
-            return `Møteforespørsel sendt ${tilDatoMedUkedagOgManedNavn(mote.opprettetTidspunkt)}`;
+            return `${texts.moteElement.subtitles.requestSent} ${tilDatoMedUkedagOgManedNavn(mote.opprettetTidspunkt)}`;
         }
     }
-    return 'Ingen møter planlagt';
+    return texts.moteElement.subtitles.noMeetings;
 };
 
 export const MotelandingssideMoteElement = (
@@ -69,10 +89,10 @@ export const MotelandingssideMotebehovElement = (
             <div className="motelandingssidepanel__tekst">
                 <header className="motelandingssidepanel__tekst--tittel">
                     <h3 className="js-title" id="soknad-header-mote">
-                        {'BEHOV FOR DIALOGMØTE'}
+                        {texts.motebehovElement.title}
                     </h3>
                 </header>
-                <p className="inngangspanel__tekst--undertittel js-tekst">{'Avklaring om møtebehov'}</p>
+                <p className="inngangspanel__tekst--undertittel js-tekst">{texts.motebehovElement.subtitle}</p>
             </div>
         </Link>
     </li>);
@@ -89,7 +109,7 @@ export const Motelandingsside = (
     }
 ) => {
     return (<div>
-        <Sidetopp tittel={'Dialogmøter'} />
+        <Sidetopp tittel={texts.pageHeader} />
         <ul>
             <MotelandingssideMoteElement
                 fnr={fnr}

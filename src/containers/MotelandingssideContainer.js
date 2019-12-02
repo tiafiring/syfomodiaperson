@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-    getHtmlLedetekst,
-    getLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
 import { MOETEPLANLEGGER } from '../enums/menypunkter';
 import * as moterActions from '../actions/moter_actions';
@@ -13,6 +8,11 @@ import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
 import Motelandingsside from '../components/Motelandingsside';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
+
+const texts = {
+    pageTitle: 'Møtelandingsside',
+    errorTitle: 'Du har ikke tilgang til denne tjenesten',
+};
 
 export class MotelandingssideSide extends Component {
     componentDidMount() {
@@ -28,11 +28,10 @@ export class MotelandingssideSide extends Component {
             fnr,
             henter,
             hentingFeilet,
-            ledetekster,
             mote,
             tilgang,
         } = this.props;
-        return (<Side fnr={fnr} tittel="Møtelandingsside" aktivtMenypunkt={MOETEPLANLEGGER}>
+        return (<Side fnr={fnr} tittel={texts.pageTitle} aktivtMenypunkt={MOETEPLANLEGGER}>
             {
                 (() => {
                     if (henter) {
@@ -40,8 +39,8 @@ export class MotelandingssideSide extends Component {
                     }
                     if (!tilgang.harTilgang) {
                         return (<Feilmelding
-                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
+                            tittel={texts.errorTitle}
+                            melding={hentBegrunnelseTekst(tilgang.begrunnelse)}
                         />);
                     }
                     if (hentingFeilet) {
@@ -62,7 +61,6 @@ MotelandingssideSide.propTypes = {
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     hentMoter: PropTypes.func,
-    ledetekster: keyValue,
     mote: PropTypes.object,
     tilgang: PropTypes.object,
 };
@@ -75,11 +73,8 @@ export const mapStateToProps = (state, ownProps) => {
     return {
         fnr: ownProps.params.fnr,
         henter: state.tilgang.henter
-        || state.ledetekster.henter
         || state.moter.henter,
-        hentingFeilet: state.tilgang.hentingFeilet
-        || state.ledetekster.hentingFeilet,
-        ledetekster: state.ledetekster.data,
+        hentingFeilet: state.tilgang.hentingFeilet,
         mote: aktivtMote,
         tilgang: state.tilgang.data,
     };
