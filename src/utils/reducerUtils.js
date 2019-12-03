@@ -9,7 +9,7 @@ export const henterEllerHarHentetFastleger = (fastleger) => {
 };
 
 export const harForsoktHentetMotebehov = (motebehovReducer) => {
-    return motebehovReducer.hentet || motebehovReducer.hentingFeilet || (motebehovReducer.tilgang && !motebehovReducer.tilgang.harTilgang);
+    return motebehovReducer.hentet || motebehovReducer.hentingFeilet || (motebehovReducer.tilgang && motebehovReducer.tilgang.harTilgang !== undefined);
 };
 
 export const ikkeHenterEllerForsoktHentetMotebehov = (motebehovReducer) => {
