@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Select } from 'nav-frontend-skjema';
-import {
-    getLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
 
-const ArbeidsgiverDropdown = ({ velgArbeidsgiver, ledere, ledetekster }) => {
+const texts = {
+    chooseArbeidsgiver: 'Velg arbeidsgiver',
+};
+
+const ArbeidsgiverDropdown = ({ velgArbeidsgiver, ledere }) => {
     return (<div className="blokk">
         <Select
             onChange={(e) => { velgArbeidsgiver(e.target.value); }}>
-            <option value="VELG">{getLedetekst('mote.bookingskjema.dropdown.arbeidsgiver', ledetekster)}</option>
+            <option value="VELG">{texts.chooseArbeidsgiver}</option>
             {
                 ledere
                     .sort((a, b) => {
@@ -39,7 +39,6 @@ const ArbeidsgiverDropdown = ({ velgArbeidsgiver, ledere, ledetekster }) => {
 
 ArbeidsgiverDropdown.propTypes = {
     velgArbeidsgiver: PropTypes.func,
-    ledetekster: keyValue,
     ledere: PropTypes.array,
 };
 

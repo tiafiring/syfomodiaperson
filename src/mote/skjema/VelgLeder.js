@@ -1,43 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    getLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
 import ArbeidsgiverDropdown from './ArbeidsgiverDropdown';
 
-const ValgtLeder = ({ valgtArbeidsgiver, ledetekster }) => {
+const texts = {
+    name: 'Nærmeste leders navn',
+    email: 'E-post',
+};
+
+const ValgtLeder = ({ valgtArbeidsgiver }) => {
     return (<div>
         <div className="navInput blokk">
-            <label htmlFor="js-ledernavn">{getLedetekst('mote.bookingskjema.lederfields.ledernavn', ledetekster)}</label>
+            <label htmlFor="js-ledernavn">{texts.name}</label>
             <label className="input--xxl textfieldLocked">{valgtArbeidsgiver.navn}</label>
         </div>
         <div className="navInput blokk ">
-            <label htmlFor="js-lederepost">{getLedetekst('mote.bookingskjema.lederfields.epost', ledetekster)}</label>
+            <label htmlFor="js-lederepost">{texts.email}</label>
             <label className="input--xxl textfieldLocked">{valgtArbeidsgiver.epost}</label>
         </div>
     </div>);
 };
 
 ValgtLeder.propTypes = {
-    ledetekster: keyValue,
     valgtArbeidsgiver: PropTypes.object,
 };
 
-const VelgLeder = ({ ledetekster, ledere, valgtArbeidsgiver, velgArbeidsgiver }) => {
+const VelgLeder = ({ ledere, valgtArbeidsgiver, velgArbeidsgiver }) => {
     const valgtLeder = ledere.filter((leder) => {
         return leder.orgnummer === valgtArbeidsgiver;
     })[0] || null;
     return (<div>
-        <ArbeidsgiverDropdown velgArbeidsgiver={velgArbeidsgiver} ledere={ledere} ledetekster={ledetekster} />
-        { valgtArbeidsgiver !== 'VELG' && <ValgtLeder valgtArbeidsgiver={valgtLeder} ledetekster={ledetekster} />}
+        <ArbeidsgiverDropdown velgArbeidsgiver={velgArbeidsgiver} ledere={ledere} />
+        { valgtArbeidsgiver !== 'VELG' && <ValgtLeder valgtArbeidsgiver={valgtLeder} />}
     </div>);
 };
 
 VelgLeder.propTypes = {
     velgArbeidsgiver: PropTypes.func,
     valgtArbeidsgiver: PropTypes.string,
-    ledetekster: keyValue,
     ledere: PropTypes.array,
 };
 
