@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { finnArbeidstakerMotebehovSvar } from '../../utils/motebehovUtils';
+import { tilLesbarDatoMedArUtenManedNavn } from '../../utils/datoUtils';
 
 export const finnRiktigLeder = (virksomhetsnummer, ledere) => {
     return ledere.find((leder) => {
@@ -36,6 +37,12 @@ export const setSvarTekst = (deltakerOnskerMote) => {
     }
 };
 
+const svarTidspunkt = (motebehov) => {
+    return motebehov && motebehov.opprettetDato
+        ? tilLesbarDatoMedArUtenManedNavn(motebehov.opprettetDato)
+        : 'Ikke svart';
+};
+
 export const bareArbeidsgiversMotebehov = (motebehov) => {
     return motebehov.opprettetAv !== motebehov.aktorId;
 };
@@ -57,6 +64,7 @@ export const MotebehovKvitteringInnhold = (
     return (<div className="motebehovKvitteringBoksInnhold">
         <div>
             <img className="svarstatus__ikon" src={setSvarIkon(deltakerOnskerMote)} alt="svarstatusikon" />
+            <span>{svarTidspunkt(motebehov)}</span>
         </div>
         <div>
             <span dangerouslySetInnerHTML={{ __html: tekst }} />
