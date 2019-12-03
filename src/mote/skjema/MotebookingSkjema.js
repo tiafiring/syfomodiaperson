@@ -3,17 +3,44 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import AlertStripe from 'nav-frontend-alertstriper';
 import KnappBase from 'nav-frontend-knapper';
-import {
-    getLedetekst,
-    getHtmlLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
 import VelgLeder from './VelgLeder';
 import Tidspunkter from './Tidspunkter';
 import TextField from '../TextField';
 import KontaktInfoFeilmelding from '../components/KontaktInfoFeilmelding';
 import Sidetopp from '../../components/Sidetopp';
 import { genererDato, erGyldigKlokkeslett, erGyldigDato } from '../utils';
+
+const texts = {
+    pageHeader: 'Møteforespørsel',
+    kontaktinfoErrorMessage: {
+        reservert: '<p>Den sykmeldte har reservert seg mot elektronisk kommunikasjon med det offentlige.' +
+            'Du kan fortsatt sende møteforespørsel til arbeidsgiveren digitalt, men den sykmeldte må kontaktes på annen måte.</p>',
+        ingenKontaktinfo: '<div><p>Den sykmeldte er ikke registrert i Kontakt- og reservasjonsregisteret (KRR).' +
+            'Du kan fortsatt sende møteforespørsel til arbeidsgiveren digitalt, men den sykmeldte må kontaktes på annen måte</p>' +
+            '<p>Den sykmeldte kan registrere kontaktinformasjonen sin her: <a target="_blank" href="http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din">http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din</a></p></div>',
+        utgatt: '<div><p>Den sykmeldtes kontaktinformasjon i Kontakt- og reservasjonsregisteret (KRR) er for gammel og kan ikke brukes.' +
+            'Du kan fortsatt sende møteforespørsel til arbeidsgiveren digitalt, men den sykmeldte må kontaktes på annen måte.</p>' +
+            '    <p>Den sykmeldte kan oppdatere kontaktinformasjonen sin her: <a target="_blank" href="http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din">http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din</a></p></div>',
+        generell: '<div><p>Vi klarte ikke å finne kontaktinformasjon om den sykmeldte og kan derfor ikke sende varsler til personen.</p></div>',
+    },
+    captions: {
+        eomployerInfo: '1. Fyll inn arbeidsgiverens opplysninger',
+        timeAndPlace: '2. Velg dato, tid og sted',
+    },
+    flereTidspunkt: {
+        add: 'Flere alternativer',
+        remove: 'Fjern siste',
+    },
+    stedPlaceholder: 'Skriv møtested eller om det er et videomøte',
+    sendingFeilerErrorMessage: 'Beklager, det oppstod en feil. Prøv igjen litt senere.',
+    validationErrorMessage: {
+        dateMissing: 'Vennligst angi dato',
+        dateWrongFormat: 'Vennligst angi riktig datoformat; dd.mm.åååå',
+        timeMissing: 'Vennligst angi klokkeslett',
+        timeWrongFormat: 'Vennligst angi riktig format; f.eks. 13.00',
+        placeMissing: 'Vennligst angi møtested',
+    },
+};
 
 export const OPPRETT_MOTE_SKJEMANAVN = 'opprettMote';
 
@@ -29,31 +56,24 @@ export function getData(values) {
     };
 }
 
-const getLedetekstnokkelFraFeilAarsak = (feilAarsak, ledetekster) => {
-    let nokkel;
+const getErrerMessageFromFeilAarsak = (feilAarsak) => {
     switch (feilAarsak) {
         case 'RESERVERT': {
-            nokkel = 'motebooking.krr.reservert';
-            break;
+            return { __html: texts.kontaktinfoErrorMessage.reservert };
         }
         case 'KONTAKTINFO_IKKE_FUNNET': {
-            nokkel = 'motebooking.krr.ingen-kontaktinformasjon';
-            break;
+            return { __html: texts.kontaktinfoErrorMessage.ingenKontaktinfo };
         }
         case 'INGEN_KONTAKTINFORMASJON': {
-            nokkel = 'motebooking.krr.ingen-kontaktinformasjon';
-            break;
+            return { __html: texts.kontaktinfoErrorMessage.ingenKontaktinfo };
         }
         case 'UTGAATT': {
-            nokkel = 'motebooking.krr.utgaatt';
-            break;
+            return { __html: texts.kontaktinfoErrorMessage.utgatt };
         }
         default: {
-            nokkel = 'mote.krr.generell';
-            break;
+            return { __html: texts.kontaktinfoErrorMessage.generell };
         }
     }
-    return getHtmlLedetekst(nokkel, ledetekster);
 };
 
 export class MotebookingSkjema extends Component {
@@ -65,7 +85,7 @@ export class MotebookingSkjema extends Component {
     }
 
     render() {
-        const { ledetekster, handleSubmit, arbeidstaker, opprettMote, fnr, sender, sendingFeilet, ledere, valgtEnhet, flereAlternativ, fjernAlternativ, antallNyeTidspunkt } = this.props;
+        const { handleSubmit, arbeidstaker, opprettMote, fnr, sender, sendingFeilet, ledere, valgtEnhet, flereAlternativ, fjernAlternativ, antallNyeTidspunkt } = this.props;
         const submit = (values) => {
             const data = getData(values);
             data.fnr = fnr;
@@ -74,20 +94,18 @@ export class MotebookingSkjema extends Component {
             opprettMote(data);
         };
         const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.feilAarsak : undefined;
-        const feilmelding = feilAarsak && getLedetekstnokkelFraFeilAarsak(feilAarsak, ledetekster);
+        const feilmelding = feilAarsak && getErrerMessageFromFeilAarsak(feilAarsak);
         return (<div>
             { !arbeidstaker.kontaktinfo.skalHaVarsel &&
                 <KontaktInfoFeilmelding
-                    ledetekster={ledetekster}
                     melding={feilmelding}
                 />
             }
-            <Sidetopp tittel={getLedetekst('mote.motebookingskjema.overskrift', ledetekster)} />
+            <Sidetopp tittel={texts.pageHeader} />
             <form className="panel" onSubmit={handleSubmit(submit)}>
                 <div className="skjema-fieldset js-arbeidsgiver blokk--l">
-                    <legend>{getLedetekst('mote.motebookingskjema.arbeidsgivers-opplysninger', ledetekster)}</legend>
+                    <legend>{texts.captions.eomployerInfo}</legend>
                     <VelgLeder
-                        ledetekster={ledetekster}
                         ledere={ledere}
                         valgtArbeidsgiver={this.state.valgtArbeidsgiver}
                         velgArbeidsgiver={(orgnummer) => {
@@ -98,13 +116,13 @@ export class MotebookingSkjema extends Component {
                     />
                 </div>
                 <fieldset className="skjema-fieldset blokk">
-                    <legend>2. {getLedetekst('mote.motebookingskjema.velg-dato-tid-sted', ledetekster)}</legend>
+                    <legend>{texts.captions.timeAndPlace}</legend>
                     <Tidspunkter antallNyeTidspunkt={antallNyeTidspunkt} skjemanavn={OPPRETT_MOTE_SKJEMANAVN} />
                     <div className="blokk--l">
                         <button type="button" className="lenke" onClick={flereAlternativ} style={{ marginRight: '1em' }}>
-                            {getLedetekst('mote.bookingstatus.fleretidspunkt.leggtil', ledetekster)}</button>
+                            {texts.flereTidspunkt.add}</button>
                         {
-                            antallNyeTidspunkt > 1 && <button type="button" className="lenke" onClick={fjernAlternativ}>Fjern siste</button>
+                            antallNyeTidspunkt > 1 && <button type="button" className="lenke" onClick={fjernAlternativ}>{texts.flereTidspunkt.remove}</button>
                         }
                     </div>
                     <Field
@@ -112,13 +130,13 @@ export class MotebookingSkjema extends Component {
                         id="sted"
                         component={TextField}
                         name="sted"
-                        placeholder="Skriv møtested eller om det er et videomøte" />
+                        placeholder={texts.stedPlaceholder} />
                 </fieldset>
 
                 <div aria-live="polite" role="alert">
                     { sendingFeilet && <div className="panel panel--ramme">
                         <AlertStripe type="info">
-                            <p className="sist">Beklager, det oppstod en feil. Prøv igjen litt senere.</p>
+                            <p className="sist">{texts.sendingFeilerErrorMessage}</p>
                         </AlertStripe>
                     </div>}
                 </div>
@@ -144,7 +162,6 @@ MotebookingSkjema.propTypes = {
     sender: PropTypes.bool,
     sendingFeilet: PropTypes.bool,
     ledere: PropTypes.array,
-    ledetekster: keyValue,
     arbeidstaker: PropTypes.object,
     flereAlternativ: PropTypes.func,
     fjernAlternativ: PropTypes.func,
@@ -161,8 +178,8 @@ export function validate(values, props) {
     if (!values.tidspunkter || !values.tidspunkter.length) {
         tidspunkterFeilmeldinger = tidspunkterFeilmeldinger.map(() => {
             return {
-                dato: 'Vennligst angi dato',
-                klokkeslett: 'Vennligst angi klokkeslett',
+                dato: texts.validationErrorMessage.dateMissing,
+                klokkeslett: texts.validationErrorMessage.timeMissing,
             };
         });
         feilmeldinger.tidspunkter = tidspunkterFeilmeldinger;
@@ -171,14 +188,14 @@ export function validate(values, props) {
             const tidspunktValue = values.tidspunkter[index];
             const feil = {};
             if (!tidspunktValue || !tidspunktValue.klokkeslett) {
-                feil.klokkeslett = 'Vennligst angi klokkeslett';
+                feil.klokkeslett = texts.validationErrorMessage.timeMissing;
             } else if (!erGyldigKlokkeslett(tidspunktValue.klokkeslett)) {
-                feil.klokkeslett = 'Vennligst angi riktig format; f.eks. 13.00';
+                feil.klokkeslett = texts.validationErrorMessage.timeWrongFormat;
             }
             if (!tidspunktValue || !tidspunktValue.dato) {
-                feil.dato = 'Vennligst angi dato';
+                feil.dato = texts.validationErrorMessage.dateMissing;
             } else if (!erGyldigDato(tidspunktValue.dato)) {
-                feil.dato = 'Vennligst angi riktig datoformat; dd.mm.åååå';
+                feil.dato = texts.validationErrorMessage.dateWrongFormat;
             }
             return feil;
         });
@@ -186,7 +203,7 @@ export function validate(values, props) {
     }
 
     if (!values.sted || values.sted.trim() === '') {
-        feilmeldinger.sted = 'Vennligst angi møtested';
+        feilmeldinger.sted = texts.validationErrorMessage.placeMissing;
     }
 
     return feilmeldinger;

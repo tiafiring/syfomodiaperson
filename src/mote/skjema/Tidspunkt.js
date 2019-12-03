@@ -6,26 +6,34 @@ import Datovelger from '../../components/datovelger/Datovelger';
 import KlokkeslettField from '../../components/KlokkeslettField';
 import { formaterTid } from '../../utils';
 
+const texts = {
+    header: 'Nytt tidspunkt',
+    dateLabel: 'Dato',
+    datePlaceholder: 'dd.mm.åååå',
+    timeLabel: 'Klokkeslett',
+    timePlaceholder: 'F.eks: 09.30',
+};
+
 const Tidspunkt = ({ tidspunkt, skjemanavn }) => {
     const datoName = `tidspunkter[${tidspunkt}].dato`;
     const klokkeslettName = `tidspunkter[${tidspunkt}].klokkeslett`;
     const tidligsteFom = new Date();
 
     return (<div className="motetidspunkter__tidspunkt blokk js-tidspunkt">
-        <h4 className="typo-element blokk--s">Nytt tidspunkt</h4>
+        <h4 className="typo-element blokk--s">{texts.header}</h4>
         <div className="blokk">
             <Row>
                 <Column className="col-xs-12 col-sm-6">
-                    <label className="skjemaelement__label" htmlFor={`dato-${tidspunkt}`}>Dato</label>
+                    <label className="skjemaelement__label" htmlFor={`dato-${tidspunkt}`}>{texts.dateLabel}</label>
                     <Datovelger
                         tidligsteFom={tidligsteFom}
                         id={`dato-${tidspunkt}`}
                         name={datoName}
-                        placeholder="dd.mm.åååå"
+                        placeholder={texts.datePlaceholder}
                         skjemanavn={skjemanavn} />
                 </Column>
                 <Column className="col-xs-12 col-sm-6">
-                    <label className="skjemaelement__label" htmlFor={`klokkeslett-${tidspunkt}`}>Klokkeslett</label>
+                    <label className="skjemaelement__label" htmlFor={`klokkeslett-${tidspunkt}`}>{texts.timeLabel}</label>
                     <Field
                         parse={(e) => {
                             return formaterTid(e);
@@ -34,7 +42,7 @@ const Tidspunkt = ({ tidspunkt, skjemanavn }) => {
                         component={KlokkeslettField}
                         name={klokkeslettName}
                         className="input--s"
-                        placeholder="F.eks: 09.30" />
+                        placeholder={texts.timePlaceholder} />
                 </Column>
             </Row>
         </div>

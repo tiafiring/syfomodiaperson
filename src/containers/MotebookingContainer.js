@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-    getLedetekst,
-    getHtmlLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
 import MotebookingSkjemaContainer from './MotebookingSkjemaContainer';
 import MotestatusContainer from './MotestatusContainer';
@@ -14,6 +9,11 @@ import AppSpinner from '../components/AppSpinner';
 import * as moterActions from '../actions/moter_actions';
 import { MOETEPLANLEGGER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
+
+const texts = {
+    pageTitle: 'Møteplanlegger',
+    errorTitle: 'Du har ikke tilgang til denne tjenesten',
+};
 
 export class MotebookingSide extends Component {
     constructor(props = false) {
@@ -28,10 +28,9 @@ export class MotebookingSide extends Component {
             hentingFeilet,
             mote,
             tilgang,
-            ledetekster,
             moterTilgang,
         } = this.props;
-        return (<Side fnr={fnr} tittel="Møteplanlegger" aktivtMenypunkt={MOETEPLANLEGGER}>
+        return (<Side fnr={fnr} tittel={texts.pageTitle} aktivtMenypunkt={MOETEPLANLEGGER}>
             {
                 (() => {
                     if (henter) {
@@ -39,8 +38,8 @@ export class MotebookingSide extends Component {
                     }
                     if (!tilgang.harTilgang) {
                         return (<Feilmelding
-                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
+                            tittel={texts.errorTitle}
+                            melding={hentBegrunnelseTekst(tilgang.begrunnelse)}
                         />);
                     }
                     if (hentingFeilet) {
@@ -48,8 +47,8 @@ export class MotebookingSide extends Component {
                     }
                     if (moterTilgang.harTilgang === false) {
                         return (<Feilmelding
-                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(hentBegrunnelseTekst(moterTilgang.begrunnelse), ledetekster)}
+                            tittel={texts.errorTitle}
+                            melding={hentBegrunnelseTekst(moterTilgang.begrunnelse)}
                         />);
                     }
                     if (mote) {
@@ -75,7 +74,6 @@ MotebookingSide.propTypes = {
     nullstillVirksomhet: PropTypes.func,
     hentVirksomhet: PropTypes.func,
     henter: PropTypes.bool,
-    ledetekster: keyValue,
     hentingFeilet: PropTypes.bool,
     hentLedereFeiletBool: PropTypes.bool,
     avbryter: PropTypes.bool,
@@ -91,10 +89,9 @@ export const mapStateToProps = (state, ownProps) => {
     return {
         fnr: ownProps.params.fnr,
         mote: aktivtMote,
-        henter: state.moter.henter || state.ledetekster.henter || state.ledere.henter || state.tilgang.henter,
+        henter: state.moter.henter || state.ledere.henter || state.tilgang.henter,
         sender: state.moter.sender,
-        ledetekster: state.ledetekster.data,
-        hentingFeilet: state.moter.hentingFeilet || state.tilgang.hentingFeilet || state.ledere.hentingFeilet || state.ledetekster.hentingFeilet,
+        hentingFeilet: state.moter.hentingFeilet || state.tilgang.hentingFeilet || state.ledere.hentingFeilet,
         sendingFeilet: state.moter.sendingFeilet,
         tilgang: state.tilgang.data,
         moterTilgang: state.moter.tilgang,

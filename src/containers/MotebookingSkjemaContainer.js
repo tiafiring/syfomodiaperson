@@ -1,11 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-    getLedetekst,
-    getHtmlLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
 import * as ledereActions from '../actions/ledere_actions';
 import * as moteActions from '../actions/moter_actions';
 import * as virksomhetActions from '../actions/virksomhet_actions';
@@ -13,9 +8,24 @@ import MotebookingSkjema from '../mote/skjema/MotebookingSkjema';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
 
+const texts = {
+    skjermetBrukerError: {
+        title: 'Ikke mulig å sende møteforespørsel',
+        message: '<p>Brukeren er registrert med skjermingskode 6 eller 7.</p>',
+    },
+    noValgtEnhetError: {
+        title: 'Du må velge Enhet',
+        message: '<p>For at du skal kunne opprette et møte må du velge hvilken enhet dette møtet skal knyttes til. Det styres av hvilken enhet du har valgt i toppmenyen. ' +
+            'Hvis du får denne og det ser ut som du allerede har valgt riktig enhet, prøv å velg en annen enhet og så tilbake igjen.</p>',
+    },
+    noLederError: {
+        title: 'Lederen mangler!',
+        message: '<p>Møteplanleggeren kan bare brukes hvis nærmeste leder er registrert. Arbeidsgiveren må gjøre dette i Altinn.</p>',
+    },
+};
+
 const MotebookingSkjemaContainer = (
     {
-        ledetekster,
         antallNyeTidspunkt,
         arbeidstaker,
         fjernAlternativ,
@@ -32,19 +42,18 @@ const MotebookingSkjemaContainer = (
         return <AppSpinner />;
     } else if (skjermetBruker) {
         return (<Feilmelding
-            tittel={getLedetekst('mote.motebookingskjemacontainer.tittel', ledetekster)}
-            melding={getHtmlLedetekst('mote.motebookingskjemacontainer.melding', ledetekster)} />);
+            tittel={texts.skjermetBrukerError.title}
+            melding={{ __html: texts.skjermetBrukerError.message }} />);
     } else if (hentingFeilet) {
         return <Feilmelding />;
     } else if (!valgtEnhet) {
         return (<Feilmelding
-            tittel="Du må velge Enhet"
-            melding={{ __html: '<p>For at du skal kunne opprette et møte må du velge hvilken enhet dette møtet skal knyttes til. Det styres av hvilken enhet du har valgt i toppmenyen. ' +
-            'Hvis du får denne og det ser ut som du allerede har valgt riktig enhet, prøv å velg en annen enhet og så tilbake igjen.</p>' }} />);
+            tittel={texts.noValgtEnhetError.title}
+            melding={{ __html: texts.noValgtEnhetError.message }} />);
     } else if (ledere.length === 0) {
         return (<Feilmelding
-            tittel="Lederen mangler!"
-            melding={{ __html: '<p>Møteplanleggeren kan bare brukes hvis nærmeste leder er registrert. Arbeidsgiveren må gjøre dette i Altinn.</p>' }} />);
+            tittel={texts.noLederError.title}
+            melding={{ __html: texts.noLederError.message }} />);
     }
     return (<MotebookingSkjema
         antallNyeTidspunkt={antallNyeTidspunkt}
@@ -52,7 +61,6 @@ const MotebookingSkjemaContainer = (
         fjernAlternativ={fjernAlternativ}
         flereAlternativ={flereAlternativ}
         fnr={fnr}
-        ledetekster={ledetekster}
         ledere={ledere}
         opprettMote={opprettMote}
         valgtEnhet={valgtEnhet}
@@ -67,7 +75,6 @@ MotebookingSkjemaContainer.propTypes = {
     flereAlternativ: PropTypes.func,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
-    ledetekster: keyValue,
     ledere: PropTypes.array,
     opprettMote: PropTypes.func,
     skjermetBruker: PropTypes.bool,
@@ -84,11 +91,10 @@ export function mapStateToProps(state, ownProps) {
         ledere,
         arbeidstaker: state.navbruker.data,
         valgtEnhet: state.enhet.valgtEnhet,
-        henter: state.ledere.henter || state.navbruker.henter || state.ledetekster.henter,
+        henter: state.ledere.henter || state.navbruker.henter,
         hentLedereFeiletBool: state.ledere.hentingFeilet,
         skjermetBruker: state.moter.skjermetBruker,
         antallNyeTidspunkt: state.moter.antallNyeTidspunkt,
-        ledetekster: state.ledetekster.data,
         hentingFeilet: state.navbruker.hentingFeilet,
     };
 }
