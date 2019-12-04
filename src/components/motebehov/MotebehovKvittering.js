@@ -9,6 +9,12 @@ export const finnRiktigLeder = (virksomhetsnummer, ledere) => {
     });
 };
 
+export const arbeidsgiverNavnEllerTomStreng = (leder) => {
+    return leder && leder.navn
+        ? `${leder.navn}`
+        : '';
+};
+
 export const setSvarIkon = (deltakerOnskerMote) => {
     switch (deltakerOnskerMote) {
         case true: {
@@ -43,12 +49,26 @@ const svarTidspunkt = (motebehov) => {
         : 'Ikke svart';
 };
 
+const ikonAlternativTekst = (deltakerOnskerMote) => {
+    switch (deltakerOnskerMote) {
+        case true: {
+            return 'Svart ja.';
+        }
+        case false: {
+            return 'Svart nei.';
+        }
+        default: {
+            return 'Ikke svart.';
+        }
+    }
+};
+
 export const bareArbeidsgiversMotebehov = (motebehov) => {
     return motebehov.opprettetAv !== motebehov.aktorId;
 };
 
 export const setArbeidsgiverTekst = (leder, arbeidsgiverOnskerMote) => {
-    const arbeidsgiverNavn = leder && leder.navn ? `${leder.navn},` : '';
+    const arbeidsgiverNavn = arbeidsgiverNavnEllerTomStreng(leder);
     const arbeidsgiverBedrift = leder && leder.organisasjonsnavn ? `${leder.organisasjonsnavn},` : '';
     return `<b>Arbeidsgiveren: </b> ${arbeidsgiverNavn} ${arbeidsgiverBedrift} ${setSvarTekst(arbeidsgiverOnskerMote)}`;
 };
@@ -56,6 +76,7 @@ export const setArbeidsgiverTekst = (leder, arbeidsgiverOnskerMote) => {
 export const MotebehovKvitteringInnhold = (
     {
         deltakerOnskerMote,
+        ikonAltTekst,
         motebehov,
         tekst,
     }
@@ -63,7 +84,7 @@ export const MotebehovKvitteringInnhold = (
     const skalViseForklaring = motebehov && motebehov.motebehovSvar && motebehov.motebehovSvar.forklaring;
     return (<div className="motebehovKvitteringBoksInnhold">
         <div>
-            <img className="svarstatus__ikon" src={setSvarIkon(deltakerOnskerMote)} alt="svarstatusikon" />
+            <img className="svarstatus__ikon" src={setSvarIkon(deltakerOnskerMote)} alt={ikonAltTekst} />
             <span>{svarTidspunkt(motebehov)}</span>
         </div>
         <div>
@@ -75,6 +96,7 @@ export const MotebehovKvitteringInnhold = (
 
 MotebehovKvitteringInnhold.propTypes = {
     deltakerOnskerMote: PropTypes.bool,
+    ikonAltTekst: PropTypes.string,
     motebehov: PropTypes.object,
     tekst: PropTypes.string,
 };
@@ -87,8 +109,11 @@ export const MotebehovKvitteringInnholdArbeidstaker = (
 ) => {
     const arbeidstakerOnskerMote = arbeidstakersMotebehov && arbeidstakersMotebehov.motebehovSvar.harMotebehov;
     const arbeidstakerTekst = `<b>Den sykmeldte: </b> ${sykmeldt.navn} ${setSvarTekst(arbeidstakerOnskerMote)}`;
+    const ikonAltTekst = `Sykmeldt ${ikonAlternativTekst(arbeidstakerOnskerMote)}`;
+
     return (<MotebehovKvitteringInnhold
         deltakerOnskerMote={arbeidstakerOnskerMote}
+        ikonAltTekst={ikonAltTekst}
         motebehov={arbeidstakersMotebehov}
         tekst={arbeidstakerTekst}
     />);
@@ -108,9 +133,12 @@ export const MotebehovKvitteringInnholdArbeidsgiver = (
     return motebehovListeMedBareArbeidsgiversMotebehov.map((motebehov, index) => {
         const arbeidsgiverOnskerMote = motebehov.motebehovSvar.harMotebehov;
         const riktigLeder = finnRiktigLeder(motebehov.virksomhetsnummer, ledereData);
+        const ikonAltTekst = `Arbeidsgiver ${arbeidsgiverNavnEllerTomStreng(riktigLeder)} ${ikonAlternativTekst(arbeidsgiverOnskerMote)}`;
+
         return (<MotebehovKvitteringInnhold
             key={index}
             deltakerOnskerMote={arbeidsgiverOnskerMote}
+            ikonAltTekst={ikonAltTekst}
             motebehov={motebehov}
             tekst={setArbeidsgiverTekst(riktigLeder, arbeidsgiverOnskerMote)}
         />);
@@ -128,8 +156,10 @@ export const MotebehovKvitteringInnholdArbeidsgiverUtenMotebehov = (
     }
 ) => {
     return ledereUtenInnsendtMotebehov.map((leder, index) => {
+        const ikonAltTekst = `Arbeidsgiver ${arbeidsgiverNavnEllerTomStreng(leder)} ${ikonAlternativTekst(undefined)}`;
         return (<MotebehovKvitteringInnhold
             key={index}
+            ikonAltTekst={ikonAltTekst}
             tekst={setArbeidsgiverTekst(leder)}
         />);
     });
