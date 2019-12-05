@@ -65,3 +65,9 @@ export const hentSistBehandletMotebehov = (motebehovListe) => {
         return mb2.behandletTidspunkt > mb1.behandletTidspunkt;
     })[0] || {};
 };
+
+export const motebehovlisteMedKunJaSvar = (motebehovliste) => {
+    return motebehovliste.filter((motebehov) => {
+        return motebehov.motebehovSvar && motebehov.motebehovSvar.harMotebehov;
+    });
+};
