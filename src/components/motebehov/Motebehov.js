@@ -40,6 +40,13 @@ export class Motebehov extends Component {
         } = this.props;
         return (<div className="motebehovSide">
             <Sidetopp tittel={'Behov for dialogmøte'} />
+            <BehandleMotebehovKnapp
+                actions={actions}
+                fnr={fnr}
+                motebehovListe={motebehovListeMedJaSvarTilOppgavebehandling}
+                oppgaver={oppgaver}
+                veilederinfo={veilederinfo}
+            />
             <MotebehovKvittering
                 ledereData={ledereData}
                 ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
