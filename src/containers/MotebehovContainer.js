@@ -24,6 +24,7 @@ import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import {
     sorterMotebehovDataEtterDato,
     finnNyesteMotebehovsvarFraHverDeltaker,
+    motebehovlisteMedKunJaSvar,
 } from '../utils/motebehovUtils';
 import {
     harForsoktHentetLedere,
@@ -87,7 +88,7 @@ export class MotebehovSide extends Component {
             oppgaver,
             sykmeldt,
             tilgang,
-            ufiltrertMotebehovListeTilOppgavebehandling,
+            motebehovListeMedJaSvarTilOppgavebehandling,
             veilederinfo,
             oppfolgingstilfelleperioder,
             sykmeldinger,
@@ -122,7 +123,7 @@ export class MotebehovSide extends Component {
                         motebehovListe={motebehovListeUtenFlereSvarFraSammePerson}
                         oppgaver={oppgaver}
                         sykmeldt={sykmeldt}
-                        ufiltrertMotebehovListeTilOppgavebehandling={ufiltrertMotebehovListeTilOppgavebehandling}
+                        motebehovListeMedJaSvarTilOppgavebehandling={motebehovListeMedJaSvarTilOppgavebehandling}
                         veilederinfo={veilederinfo}
                         aktiveDialoger={aktiveDialoger}
                         oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
@@ -152,7 +153,7 @@ MotebehovSide.propTypes = {
     skalHenteSykmeldinger: PropTypes.bool,
     sykmeldt: PropTypes.object,
     tilgang: PropTypes.object,
-    ufiltrertMotebehovListeTilOppgavebehandling: PropTypes.arrayOf(PropTypes.object),
+    motebehovListeMedJaSvarTilOppgavebehandling: PropTypes.arrayOf(PropTypes.object),
     veilederinfo: PropTypes.object,
     oppfolgingstilfelleperioder: PropTypes.object,
     sykmeldinger: PropTypes.arrayOf(sykmeldingPt),
@@ -169,6 +170,8 @@ export const mapStateToProps = (state, ownProps) => {
     const motebehovData = state.motebehov.data;
     const sortertMotebehovListe = motebehovData.sort(sorterMotebehovDataEtterDato);
     const motebehovListeUtenFlereSvarFraSammePerson = finnNyesteMotebehovsvarFraHverDeltaker(sortertMotebehovListe);
+
+    const motebehovListeMedJaSvarTilOppgavebehandling = motebehovlisteMedKunJaSvar(motebehovData);
 
     const ledereData = state.ledere.data;
     const oppfolgingstilfelleperioder = state.oppfolgingstilfelleperioder;
@@ -200,7 +203,7 @@ export const mapStateToProps = (state, ownProps) => {
         skalHenteSykmeldinger: ikkeHenterEllerForsoktHentetSykmeldinger(state.sykmeldinger),
         sykmeldt: state.navbruker.data,
         tilgang: state.tilgang.data,
-        ufiltrertMotebehovListeTilOppgavebehandling: state.motebehov.data,
+        motebehovListeMedJaSvarTilOppgavebehandling,
         veilederinfo: state.veilederinfo.data,
         aktiveDialoger,
         oppfolgingstilfelleperioder,

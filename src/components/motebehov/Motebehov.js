@@ -33,7 +33,7 @@ export class Motebehov extends Component {
             motebehovListe,
             oppgaver,
             sykmeldt,
-            ufiltrertMotebehovListeTilOppgavebehandling,
+            motebehovListeMedJaSvarTilOppgavebehandling,
             veilederinfo,
             oppfolgingstilfelleperioder,
             sykmeldinger,
@@ -56,7 +56,7 @@ export class Motebehov extends Component {
             <BehandleMotebehovKnapp
                 actions={actions}
                 fnr={fnr}
-                motebehovListe={ufiltrertMotebehovListeTilOppgavebehandling}
+                motebehovListe={motebehovListeMedJaSvarTilOppgavebehandling}
                 oppgaver={oppgaver}
                 veilederinfo={veilederinfo}
             />
@@ -74,7 +74,7 @@ Motebehov.propTypes = {
     motebehovListe: PropTypes.arrayOf(PropTypes.object),
     oppgaver: PropTypes.arrayOf(PropTypes.object),
     sykmeldt: PropTypes.object,
-    ufiltrertMotebehovListeTilOppgavebehandling: PropTypes.arrayOf(PropTypes.object),
+    motebehovListeMedJaSvarTilOppgavebehandling: PropTypes.arrayOf(PropTypes.object),
     veilederinfo: PropTypes.object,
     oppfolgingstilfelleperioder: PropTypes.object,
     sykmeldinger: PropTypes.arrayOf(sykmeldingPt),
