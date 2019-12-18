@@ -10,7 +10,7 @@ import {
 describe('egenansattSagas', () => {
     beforeEach(() => {
         process.env = {
-            REACT_APP_REST_ROOT: 'http://tjenester.nav.no',
+            REACT_APP_SYFOPERSON_ROOT: 'http://syfoperson',
         };
     });
 
@@ -26,15 +26,15 @@ describe('egenansattSagas', () => {
     });
 
     it('Skal dernest kalle resttjenesten', () => {
-        const nextCall = call(get, `${process.env.REACT_APP_REST_ROOT}/internad/egenansatt/1`);
+        const nextCall = call(get, `${process.env.REACT_APP_SYFOPERSON_ROOT}/person/egenansatt/1`);
         expect(generator.next().value).to.deep.equal(nextCall);
     });
 
     it(`Skal dernest sette ${EGENANSATT_HENTET}`, () => {
         const nextPut = put({
             type: EGENANSATT_HENTET,
-            data: 'mine data',
+            data: true,
         });
-        expect(generator.next('mine data').value).to.deep.equal(nextPut);
+        expect(generator.next(true).value).to.deep.equal(nextPut);
     });
 });

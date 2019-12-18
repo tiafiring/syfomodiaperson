@@ -3,7 +3,6 @@ const AKTIVENHET = 'aktivenhet';
 const BEHANDLENDEENHET = 'behandlendeenhet';
 const BRUKERINFO = 'brukerinfo';
 const DISKRESJONSKODE = 'diskresjonskode';
-const EGENANSATT = 'egenansatt';
 const ENHETER = 'enheter';
 const FASTLEGER = 'fastleger';
 const HISTORIKKMOTEBEHOV = 'historikkmotebehov';
@@ -30,7 +29,6 @@ module.exports = {
     BEHANDLENDEENHET,
     BRUKERINFO,
     DISKRESJONSKODE,
-    EGENANSATT,
     ENHETER,
     FASTLEGER,
     HISTORIKKMOTEBEHOV,
