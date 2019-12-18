@@ -25,7 +25,9 @@ export default function diskresjonskode(state = initiellState, action) {
             return Object.assign({}, state, {
                 henter: false,
                 hentet: true,
-                data: action.data,
+                data: {
+                    diskresjonskode: action.data.toString(),
+                },
             });
         }
         case HENT_DISKRESJONSKODE_FEILET: {

@@ -10,7 +10,7 @@ import {
 describe('diskresjonskodeSagas', () => {
     beforeEach(() => {
         process.env = {
-            REACT_APP_REST_ROOT: 'http://tjenester.nav.no',
+            REACT_APP_SYFOPERSON_ROOT: 'http://syfoperson',
         };
     });
 
@@ -26,15 +26,16 @@ describe('diskresjonskodeSagas', () => {
     });
 
     it('Skal dernest kalle resttjenesten', () => {
-        const nextCall = call(get, `${process.env.REACT_APP_REST_ROOT}/internad/diskresjonskode/1`);
+        const nextCall = call(get, `${process.env.REACT_APP_SYFOPERSON_ROOT}/person/diskresjonskode/1`);
         expect(generator.next().value).to.deep.equal(nextCall);
     });
 
     it(`Skal dernest sette ${DISKRESJONSKODE_HENTET}`, () => {
+        const diskresjonskode = '7';
         const nextPut = put({
             type: DISKRESJONSKODE_HENTET,
-            data: 'mine data',
+            data: diskresjonskode,
         });
-        expect(generator.next('mine data').value).to.deep.equal(nextPut);
+        expect(generator.next(diskresjonskode).value).to.deep.equal(nextPut);
     });
 });

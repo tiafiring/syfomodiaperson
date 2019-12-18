@@ -23,11 +23,6 @@ function mockForLokal(server) {
         res.send(JSON.stringify(mockData[enums.OPPFOLGINGSTILFELLEPERIODER][orgnummer]));
     });
 
-    server.get('/modiasyforest/api/internad/diskresjonskode/:fnr', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[enums.DISKRESJONSKODE]));
-    });
-
     server.get('/modiasyforest/api/internad/brukerinfo', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[enums.BRUKERINFO]));
