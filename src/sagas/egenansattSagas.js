@@ -5,7 +5,7 @@ import * as actions from '../actions/egenansatt_actions';
 export function* hentEgenansattSaga(action) {
     yield put(actions.henterEgenansatt());
     try {
-        const path = `${process.env.REACT_APP_REST_ROOT}/internad/egenansatt/${action.fnr}`;
+        const path = `${process.env.REACT_APP_SYFOPERSON_ROOT}/person/egenansatt/${action.fnr}`;
         const data = yield call(get, path);
         yield put(actions.egenansattHentet(data));
     } catch (e) {

@@ -25,7 +25,9 @@ export default function egenansatt(state = initiellState, action) {
             return Object.assign({}, state, {
                 henter: false,
                 hentet: true,
-                data: action.data,
+                data: {
+                    erEgenAnsatt: action.data,
+                },
             });
         }
         case HENT_EGENANSATT_FEILET: {

@@ -15,7 +15,6 @@ lastFilTilMinne(enums.AKTIVBRUKER);
 lastFilTilMinne(enums.BEHANDLENDEENHET);
 lastFilTilMinne(enums.BRUKERINFO);
 lastFilTilMinne(enums.DISKRESJONSKODE);
-lastFilTilMinne(enums.EGENANSATT);
 lastFilTilMinne(enums.ENHETER);
 lastFilTilMinne(enums.FASTLEGER);
 lastFilTilMinne(enums.HISTORIKKMOTEBEHOV);

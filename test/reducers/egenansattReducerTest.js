@@ -29,14 +29,16 @@ describe('egenansatt', () => {
         });
 
         it(`håndterer ${EGENANSATT_HENTET}`, () => {
-            const data = { erEgenAnsatt: 1 };
+            const data = true;
             const action = actions.egenansattHentet(data);
             const nextState = egenansatt(initialState, action);
             expect(nextState).to.deep.equal({
                 henter: false,
                 hentet: true,
                 hentingFeilet: false,
-                data,
+                data: {
+                    erEgenAnsatt: data,
+                },
             });
         });
 
