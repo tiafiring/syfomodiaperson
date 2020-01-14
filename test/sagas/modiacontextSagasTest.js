@@ -11,8 +11,6 @@ import {
     PUSHER_MODIACONTEXT,
     HENTER_AKTIVBRUKER,
 } from '../../src/actions/actiontyper';
-import { HOST_NAMES } from '../../src/konstanter';
-import { fullNaisUrlQ1 } from '../../src/utils/miljoUtil';
 
 describe('modiacontextSagas', () => {
 
@@ -34,10 +32,8 @@ describe('modiacontextSagas', () => {
         });
 
         it('Skal dernest hente aktiv enhet', () => {
-            const host = HOST_NAMES.MODIACONTEXTHOLDER;
             const path = `${apiPath}/context/aktivenhet`;
-            const url = fullNaisUrlQ1(host, path);
-            const nextCall = call(get, url);
+            const nextCall = call(get, path);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
     });
@@ -51,14 +47,11 @@ describe('modiacontextSagas', () => {
         });
 
         it('Skal dernest hente aktiv bruker', () => {
-            const host = HOST_NAMES.MODIACONTEXTHOLDER;
             const path = `${apiPath}/context/aktivbruker`;
-            const url = fullNaisUrlQ1(host, path);
-            const nextCall = call(get, url);
+            const nextCall = call(get, path);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
     });
-
 
     describe('pushModiacontextSaga', () => {
         const generator = pushModiacontextSaga({
@@ -74,10 +67,8 @@ describe('modiacontextSagas', () => {
         });
 
         it('Skal dernest pushe context', () => {
-            const host = HOST_NAMES.MODIACONTEXTHOLDER;
             const path = `${apiPath}/context`;
-            const url = fullNaisUrlQ1(host, path);
-            const nextCall = call(post, url, {
+            const nextCall = call(post, path, {
                 verdi: 'fnr',
                 eventType: 'event1',
             });

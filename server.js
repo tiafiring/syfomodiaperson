@@ -27,6 +27,10 @@ server.set('views', `${__dirname}/dist`);
 server.set('view engine', 'mustache');
 server.engine('html', mustacheExpress());
 
+const modiacontextholderUrl =  process.env.NAIS_CONTEXT === 'dev'
+    ? 'modiacontextholder.q1'
+    : 'modiacontextholder.default';
+
 const renderApp = () => {
     return new Promise((resolve, reject) => {
         server.render(
@@ -98,6 +102,16 @@ const startServer = (html) => {
             },
             proxyErrorHandler: function(err, res, next) {
                 console.error("Error in proxy for tilgang", err);
+                next(err);
+            },
+        }));
+        server.use('/modiacontextholder/api', proxy(modiacontextholderUrl,  {
+            https: false,
+            proxyReqPathResolver: function(req) {
+                return `/modiacontextholder/api${req.url}`
+            },
+            proxyErrorHandler: function(err, res, next) {
+                console.error("Error in proxy for modiacontextholder", err);
                 next(err);
             },
         }));

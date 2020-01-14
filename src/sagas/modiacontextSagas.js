@@ -2,18 +2,14 @@ import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
 import { get, post } from '../api';
 import * as actions from '../actions/modiacontext_actions';
 import { PUSH_MODIACONTEXT_FORESPURT, HENT_AKTIVBRUKER_FORESPURT, HENT_AKTIVENHET_FORESPURT } from '../actions/actiontyper';
-import { HOST_NAMES } from '../konstanter';
-import { fullNaisUrlQ1 } from '../utils/miljoUtil';
 
 export function* pushModiacontextSaga(action) {
     yield put(actions.pusherModiaContext());
     try {
-        const host = HOST_NAMES.MODIACONTEXTHOLDER;
         const path = `${process.env.REACT_APP_CONTEXTHOLDER_ROOT}/context`;
-        const url = fullNaisUrlQ1(host, path);
         yield call(
             post,
-            url,
+            path,
             {
                 verdi: action.data.verdi,
                 eventType: action.data.eventType,
@@ -28,10 +24,8 @@ export function* pushModiacontextSaga(action) {
 export function* aktivBrukerSaga(action) {
     yield put(actions.henterAktivBruker());
     try {
-        const host = HOST_NAMES.MODIACONTEXTHOLDER;
         const path = `${process.env.REACT_APP_CONTEXTHOLDER_ROOT}/context/aktivbruker`;
-        const url = fullNaisUrlQ1(host, path);
-        const data = yield call(get, url);
+        const data = yield call(get, path);
         action.data.callback(data.aktivBruker);
     } catch (e) {
         yield put(actions.hentAktivBrukerFeilet());
@@ -41,12 +35,10 @@ export function* aktivBrukerSaga(action) {
 export function* aktivEnhetSaga(action) {
     yield put(actions.henterAktivEnhet());
     try {
-        const host = HOST_NAMES.MODIACONTEXTHOLDER;
         const path = `${process.env.REACT_APP_CONTEXTHOLDER_ROOT}/context/aktivenhet`;
-        const url = fullNaisUrlQ1(host, path);
         const data = yield call(
             get,
-            url
+            path
         );
         action.data.callback(data.aktivEnhet);
     } catch (e) {
