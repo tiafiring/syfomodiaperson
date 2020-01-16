@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Radio } from 'nav-frontend-skjema';
 import Alertstripe from 'nav-frontend-alertstriper';
-import {
-    getLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
 import * as moterPropTypes from '../../propTypes';
 import AppSpinner from '../../components/AppSpinner';
 import {
@@ -13,6 +9,11 @@ import {
     ARBEIDSGIVER,
 } from '../../konstanter';
 
+const texts = {
+    info: 'Informasjon som sendes',
+    tilArbeidsgiver: 'til arbeidsgiver',
+    tilArbeidstaker: 'til arbeidstaker',
+};
 
 const Innhold = ({ emne, innhold }) => {
     return (<div className="blokk">
@@ -30,11 +31,11 @@ Innhold.propTypes = {
     innhold: PropTypes.string,
 };
 
-export const Innholdsvelger = ({ onChange, valgtDeltakertype, ledetekster }) => {
+export const Innholdsvelger = ({ onChange, valgtDeltakertype }) => {
     return (<ul className="radiofaner radiofaner--innholdsvelger">
         <li className="radiofaner__valg">
             <Radio
-                label={getLedetekst('mote.epostinnhold.informasjon-som-sendes.til-arbeidsgiver', ledetekster)}
+                label={texts.tilArbeidsgiver}
                 checked={valgtDeltakertype === ARBEIDSGIVER}
                 onChange={() => {
                     onChange(ARBEIDSGIVER);
@@ -45,7 +46,7 @@ export const Innholdsvelger = ({ onChange, valgtDeltakertype, ledetekster }) => 
         </li>
         <li className="radiofaner__valg">
             <Radio
-                label={getLedetekst('mote.epostinnhold.informasjon-som-sendes.til-arbeidstaker', ledetekster)}
+                label={texts.tilArbeidstaker}
                 checked={valgtDeltakertype === BRUKER}
                 onChange={() => {
                     onChange(BRUKER);
@@ -60,7 +61,6 @@ export const Innholdsvelger = ({ onChange, valgtDeltakertype, ledetekster }) => 
 Innholdsvelger.propTypes = {
     onChange: PropTypes.func,
     valgtDeltakertype: moterPropTypes.motedeltakertypePt,
-    ledetekster: keyValue,
 };
 
 const Feil = ({ melding = 'Beklager, det oppstod en feil' }) => {
@@ -98,7 +98,7 @@ class Innholdsviser extends Component {
     }
 
     render() {
-        const { henter, hentingFeilet, epostinnhold, hentEpostinnhold, ledetekster, arbeidstaker } = this.props;
+        const { henter, hentingFeilet, epostinnhold, hentEpostinnhold, arbeidstaker } = this.props;
         if (henter) {
             return <AppSpinner />;
         }
@@ -107,10 +107,9 @@ class Innholdsviser extends Component {
         }
         if (epostinnhold) {
             return (<div>
-                <h3 className="typo-undertittel">{getLedetekst('mote.epostinnhold.informasjon-som-sendes', ledetekster)}</h3>
+                <h3 className="typo-undertittel">{texts.info}</h3>
                 {
                     arbeidstaker.kontaktinfo.skalHaVarsel && <Innholdsvelger
-                        ledetekster={ledetekster}
                         valgtDeltakertype={this.state.valgtDeltakertype}
                         onChange={(valgtDeltakertype) => {
                             this.setState({
@@ -138,7 +137,6 @@ Innholdsviser.propTypes = {
     epostinnhold: PropTypes.object,
     arbeidstaker: PropTypes.object,
     hentEpostinnhold: PropTypes.func,
-    ledetekster: keyValue,
     mote: moterPropTypes.motePt,
 };
 

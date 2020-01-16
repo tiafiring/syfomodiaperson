@@ -1,13 +1,17 @@
 import React from 'react';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import OppsummeringSporsmalscontainer from './OppsummeringSporsmalscontainer';
 import OppsummeringSporsmalstekst from './OppsummeringSporsmalstekst';
 import OppsummeringAvkrysset from './OppsummeringAvkrysset';
 import OppsummeringUndersporsmalsliste from './OppsummeringUndersporsmalsliste';
 import { oppsummeringSporsmal } from '../../propTypes';
 
+const texts = {
+    ja: 'Ja',
+    nei: 'Nei',
+};
+
 const getLedetekstFraSvar = (svar) => {
-    return getLedetekst(`soknad.${svar.toLowerCase()}`);
+    return svar.toLowerCase() === 'ja' ? texts.ja : texts.nei;
 };
 
 const erUndersporsmalStilt = (svar, kriterieForVisningAvUndersporsmal) => {

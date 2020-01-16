@@ -1,24 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { tilLesbarDatoMedArstall, getLedetekst } from '@navikt/digisyfo-npm';
+import { tilLesbarDatoMedArstall } from '@navikt/digisyfo-npm';
 import { Link } from 'react-router';
 import { getTidligsteSendtDato, sorterEtterDato } from '../../utils/sykepengesoknadUtils';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes';
+
+const texts = {
+    tittel: 'Tidligere utgaver som du har sendt',
+    sendt: 'Sendt',
+};
 
 const RelaterteSoknader = ({ relaterteSoknader, fnr }) => {
     if (relaterteSoknader.length === 0) {
         return null;
     }
     return (<div className="panel tidligereVersjoner">
-        <h2 className="tidligereVersjoner__tittel">{getLedetekst('relaterte-soknader.tittel')}</h2>
+        <h2 className="tidligereVersjoner__tittel">{texts.tittel}</h2>
         <ul className="tidligereVersjoner__liste">
             {
                 relaterteSoknader
                     .sort(sorterEtterDato)
                     .map((s, index) => {
                         return (<li key={index}>
-                            <Link to={`/sykefravaer/${fnr}/sykepengesoknader/${s.id}`}>{getLedetekst('relaterte-soknader.sendt')} {tilLesbarDatoMedArstall(getTidligsteSendtDato(s))}</Link>
+                            <Link to={`/sykefravaer/${fnr}/sykepengesoknader/${s.id}`}>{texts.sendt} {tilLesbarDatoMedArstall(getTidligsteSendtDato(s))}</Link>
                         </li>);
                     })
             }

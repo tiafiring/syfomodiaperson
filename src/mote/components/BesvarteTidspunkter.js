@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { getLedetekst, keyValue } from '@navikt/digisyfo-npm';
+import { keyValue } from '@navikt/digisyfo-npm';
 import {
     BRUKER,
     ARBEIDSGIVER,
@@ -16,6 +16,10 @@ import {
 import { getSvar } from '../../utils/moteplanleggerUtils';
 import SvarMedIkon, { NavKan } from './SvarMedIkon';
 import DatoOgTid from './DatoOgTid';
+
+const texts = {
+    bekreft: 'Bekreft tidspunkt',
+};
 
 const BesvarteTidspunkter = ({ mote, alternativer, deltakertype = BRUKER, ledetekster, fnr }) => {
     const arbeidsgiver = mote.deltakere.filter((d) => {
@@ -74,7 +78,7 @@ const BesvarteTidspunkter = ({ mote, alternativer, deltakertype = BRUKER, ledete
                             (<div className="alternativsvar__bekreft">
                                 <Link
                                     to={`/sykefravaer/${fnr}/mote/bekreft/${field.id}`}
-                                    className="knapp knapp--hoved knapp--mini js-bekreft-tidspunkt">{getLedetekst('mote.bookingstatus.velgtidspunkt', ledetekster)}</Link>
+                                    className="knapp knapp--hoved knapp--mini js-bekreft-tidspunkt">{texts.bekreft}</Link>
                             </div>)
                         }
                     </li>);

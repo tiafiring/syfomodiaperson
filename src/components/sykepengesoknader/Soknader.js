@@ -1,12 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, sykepengesoknadstatuser } from '@navikt/digisyfo-npm';
+import { sykepengesoknadstatuser } from '@navikt/digisyfo-npm';
 import Sidetopp from '../Sidetopp';
 import SoknadTeasere from './SoknaderTeasere';
 import PlanlagteTeasere from './PlanlagteTeasere';
 import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sykepengesoknadUtils';
 import { soknad as soknadPt, sykepengesoknad as sykepengesoknadPt } from '../../propTypes';
 import { OPPHOLD_UTLAND } from '../../enums/soknadtyper';
+
+const texts = {
+    sidetittel: 'Søknad on sykepenger',
+    nyeSoknader: 'Nye søknader',
+    ingenSoknader: 'Du har ingen nye søknader om sykepenger. Den neste søknaden du kan fylle ut kommer etter at sykmeldingsperioden er over.',
+    tidligereSoknader: 'Tidligere søknader',
+};
 
 const { SENDT, TIL_SENDING, UTGAATT, NY, UTKAST_TIL_KORRIGERING, FREMTIDIG, AVBRUTT } = sykepengesoknadstatuser;
 
@@ -38,13 +45,13 @@ const Soknader = ({ fnr, sykepengesoknader = [], soknader = [] }) => {
 
     return (<div>
         <Sidetopp
-            tittel={getLedetekst('soknader.sidetittel')}
+            tittel={texts.sidetittel}
         />
         <SoknadTeasere
             sykepengesoknader={nyeSoknader}
             fnr={fnr}
-            tittel={getLedetekst('soknader.venter-paa-behandling.tittel')}
-            tomListeTekst={getLedetekst('soknader.venter-paa-behandling.ingen-soknader')}
+            tittel={texts.nyeSoknader}
+            tomListeTekst={texts.ingenSoknader}
             className="js-til-behandling"
             id="soknader-list-til-behandling"
         />
@@ -59,8 +66,8 @@ const Soknader = ({ fnr, sykepengesoknader = [], soknader = [] }) => {
             sendteSoknader.length > 0 && (<SoknadTeasere
                 sykepengesoknader={sendteSoknader}
                 fnr={fnr}
-                tittel={getLedetekst('soknader.sendt.tittel')}
-                tomListeTekst={getLedetekst('soknader.sendt.ingen-soknader')}
+                tittel={texts.tidligereSoknader}
+                tomListeTekst={texts.tidligereSoknader}
                 className="js-sendt"
                 id="soknader-sendt"
             />)

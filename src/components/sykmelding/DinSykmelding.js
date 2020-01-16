@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import {
     DineSykmeldingOpplysninger,
-    getLedetekst,
     keyValue,
     Bjorn,
 } from '@navikt/digisyfo-npm';
 import Alertstripe from 'nav-frontend-alertstriper';
+
+const texts = {
+    eldreSykmeldinger: 'Du har eldre sykmeldinger som du bør behandle før denne.',
+    eldreSykmeldingerLenke: 'Gå til den eldste sykmeldingen.',
+    bjorn: 'Hei, her sjekker du opplysningene fra den som sykmeldte deg. Stemmer det med det dere ble enige om? Du velger selv om du vil bruke sykmeldingen.',
+};
 
 const navn = (pasient) => {
     if (pasient.mellomnavn) {
@@ -32,11 +37,7 @@ const DinSykmelding = ({ sykmelding, ledetekster, visEldreSykmeldingVarsel, elds
             rootUrl="/sykefravaer">
             <div>
                 <p>
-                    {
-                        getLedetekst('din-sykmelding.introtekst.bjorn', {
-                            '%NAVN%': getSykmeldtFornavn(sykmelding),
-                        })
-                    }
+                    {texts.bjorn}
                 </p>
                 <p className="introtekst__knapperad">
                     <button
@@ -50,8 +51,8 @@ const DinSykmelding = ({ sykmelding, ledetekster, visEldreSykmeldingVarsel, elds
         {
             visEldreSykmeldingVarsel && (<Alertstripe type="info">
                 <p className="sist side-innhold">
-                    <span>{getLedetekst('starte-sykmelding.eldre-sykmeldinger.tekst', ledetekster)} </span>
-                    <Link to={`/sykefravaer/sykmeldinger/${eldsteSykmeldingId}`}>{getLedetekst('starte-sykmelding.eldre-sykmeldinger.lenke', ledetekster)}</Link>
+                    <span>{texts.eldreSykmeldinger} </span>
+                    <Link to={`/sykefravaer/sykmeldinger/${eldsteSykmeldingId}`}>{texts.eldreSykmeldingerLenke}</Link>
                 </p>
             </Alertstripe>)
         }

@@ -1,9 +1,13 @@
 import React from 'react';
-import { getLedetekst, toDatePrettyPrint } from '@navikt/digisyfo-npm';
+import { toDatePrettyPrint } from '@navikt/digisyfo-npm';
 import { getKey } from './Oppsummeringsvisning';
 import OppsummeringSporsmalscontainer from './OppsummeringSporsmalscontainer';
 import OppsummeringSporsmalstekst from './OppsummeringSporsmalstekst';
 import { oppsummeringSporsmal } from '../../propTypes';
+
+const textFomTom = (fom, tom) => {
+    return `Fra ${fom} til ${tom}`;
+};
 
 const OppsummeringPerioder = ({ svar, sporsmalstekst, tag, overskriftsnivaa }) => {
     return (<OppsummeringSporsmalscontainer tag={tag}>
@@ -12,10 +16,7 @@ const OppsummeringPerioder = ({ svar, sporsmalstekst, tag, overskriftsnivaa }) =
             {
                 svar.map((p, i) => {
                     const periode = JSON.parse(p.verdi);
-                    return (<p key={getKey(tag, i)} className="oppsummering__dato">{getLedetekst('soknad.periode', {
-                        '%FOM%': toDatePrettyPrint(periode.fom),
-                        '%TOM%': toDatePrettyPrint(periode.tom),
-                    })}</p>);
+                    return (<p key={getKey(tag, i)} className="oppsummering__dato">{textFomTom(toDatePrettyPrint(periode.fom), toDatePrettyPrint(periode.tom))}</p>);
                 })
             }
         </div>

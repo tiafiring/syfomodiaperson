@@ -2,11 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import AlertStripe from 'nav-frontend-alertstriper';
-import {
-    getLedetekst,
-    getHtmlLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
 import * as moterPropTypes from '../../propTypes';
 import { getDatoFraZulu, erMotePassert } from '../utils';
 import Sidetopp from '../../components/Sidetopp';
@@ -16,12 +11,30 @@ import InformasjonSendt from './InformasjonSendt';
 import FlereTidspunktSkjema from '../skjema/FlereTidspunktSkjema';
 import Svarstatus from './Svarstatus';
 
+const texts = {
+    valgSendtTilParter: 'Møtetidspunkt valgt, møteresultat sendt til partene',
+    foresporselSendtTil: 'Møteforespørselen ble sendt til',
+    bekreftetSendtTil: 'Møtetidspunkt valgt, møteresultat og varsel er sendt til',
+    sendt: 'Sendt:',
+    passert: 'De foreslåtte tidspunktene er passert',
+    passertVarsel: 'Ingen av tidspunktene ble bekreftet',
+    planleggNyttMote: 'Planlegg nytt møte',
+    avbrytMote: 'Avbryt møte',
+    motested: 'Møtested:',
+    forrigeMote: 'Forrige møte',
+    bookingTittel: 'Svar på møteforespørsel',
+    bekreftetBooking: 'Bekreftet møtetidspunkt',
+};
+
+const textWithParameter = (text, date) => {
+    return `${text} ${date}`;
+};
+
 export const MotetidspunktValgt = (
     {
         bekreftetTidspunkt,
-        ledetekster,
     }) => {
-    return <div className="motetidspunktValgt">{getLedetekst('mote.bookingstatus.valgt-sendt-til-parter', ledetekster, { '%TID%': getDatoFraZulu(bekreftetTidspunkt) })}</div>;
+    return <div className="motetidspunktValgt">{textWithParameter(texts.valgSendtTilParter, getDatoFraZulu(bekreftetTidspunkt))}</div>;
 };
 
 const BEKREFTET = 'BEKREFTET';
@@ -35,37 +48,49 @@ export const kvitteringTekst = {
 
 MotetidspunktValgt.propTypes = {
     bekreftetTidspunkt: PropTypes.string,
-    ledetekster: keyValue,
 };
 
-const getLedetekstFraFeilAarsak = (feilAarsak, ledetekster) => {
-    let nokkel;
+const getLedetekstFraFeilAarsak = (feilAarsak) => {
+    let text;
     switch (feilAarsak) {
         case 'RESERVERT': {
-            nokkel = 'motestatus.krr.reservert';
+            text = {
+                __html: '<p>Den sykmeldte har reservert seg mot elektronisk kommunikasjon med det offentlige. Møteforespørsel er sendt til arbeidsgiveren, men den sykmeldte må kontaktes på annen måte</p>',
+            };
             break;
         }
         case 'KONTAKTINFO_IKKE_FUNNET': {
-            nokkel = 'motestatus.krr.ingen-kontaktinformasjon';
+            text = {
+                // eslint-disable-next-line max-len
+                __html: '<div><p>Den sykmeldte er ikke registrert i Kontakt- og reservasjonsregisteret (KRR). Møteforespørsel er sendt til arbeidsgiveren, men den sykmeldte må kontaktes på annen måte.</p><p>Den sykmeldte kan registrere kontaktinformasjonen sin her: <a target=\"_blank\" href=\"http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din\">http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din</a></p></div>',
+            };
             break;
         }
         case 'INGEN_KONTAKTINFORMASJON': {
-            nokkel = 'motestatus.krr.ingen-kontaktinformasjon';
+            text = {
+                // eslint-disable-next-line max-len
+                __html: '<div><p>Den sykmeldte er ikke registrert i Kontakt- og reservasjonsregisteret (KRR). Møteforespørsel er sendt til arbeidsgiveren, men den sykmeldte må kontaktes på annen måte.</p><p>Den sykmeldte kan registrere kontaktinformasjonen sin her: <a target=\"_blank\" href=\"http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din\">http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din</a></p></div>',
+            };
             break;
         }
         case 'UTGAATT': {
-            nokkel = 'motestatus.krr.utgaatt';
+            text = {
+                // eslint-disable-next-line max-len
+                __html: '<div><p>Den sykmeldtes kontaktinformasjon i Kontakt- og reservasjonsregisteret (KRR) er for gammel og kan ikke brukes. Møteforespørsel er sendt til arbeidsgiveren, men den sykmeldte må kontaktes på annen måte.</p><p>Den sykmeldte kan oppdatere kontaktinformasjonen sin her: <a target=\"_blank\" href=\"http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din\">http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din</a></p></div>',
+            };
             break;
         }
         default: {
-            nokkel = 'mote.krr.generell';
+            text = {
+                __html: '<div>\n<p>Vi klarte ikke å finne kontaktinformasjon om den sykmeldte og kan derfor ikke sende varsler til personen.</p>\n</div>',
+            };
             break;
         }
     }
-    return getHtmlLedetekst(nokkel, ledetekster);
+    return text;
 };
 
-const getSendtTilTekst = (mote, ledetekster, arbeidstaker) => {
+const getSendtTilTekst = (mote, arbeidstaker) => {
     const navneliste = mote.deltakere
         .filter((deltaker) => {
             return deltaker.type === 'arbeidsgiver' || arbeidstaker.kontaktinfo.skalHaVarsel;
@@ -73,25 +98,22 @@ const getSendtTilTekst = (mote, ledetekster, arbeidstaker) => {
         .map((deltaker) => {
             return deltaker.navn;
         });
-    const nokkel = mote.status === OPPRETTET || mote.status === FLERE_TIDSPUNKT ? 'mote.bookingstatus.foresporsel.sendt.til' : 'mote.bookingstatus.bekreftet.sendt-til';
-    return getLedetekst(nokkel, ledetekster, {
-        '%DELTAKERE%': navneliste.join(' og '),
-    });
+    const text = mote.status === OPPRETTET || mote.status === FLERE_TIDSPUNKT ? texts.foresporselSendtTil : texts.bekreftetSendtTil;
+    return textWithParameter(text, navneliste.join(' og '));
 };
 
-const getSidetoppNokkel = (mote, motePassert) => {
+const getSidetoppTekst = (mote, motePassert) => {
     if (motePassert) {
-        return 'mote.bookingstatus.passert.tittel';
+        return texts.forrigeMote;
     } else if (mote.status === OPPRETTET || mote.status === FLERE_TIDSPUNKT) {
-        return 'mote.bookingstatus.sidetittel';
+        return texts.bookingTittel;
     }
-    return 'mote.bookingstatus.bekreftet.tittel';
+    return texts.bekreftetBooking;
 };
 
 export const StatusVarsel = (
     {
         mote,
-        ledetekster,
         arbeidstaker,
     }) => {
     const dato = (mote.status === OPPRETTET || mote.status === FLERE_TIDSPUNKT)
@@ -100,10 +122,8 @@ export const StatusVarsel = (
     return (<div className="panel statusVarsel">
         <AlertStripe type="suksess">
             <div className="panel">
-                <p className="typo-element">{getSendtTilTekst(mote, ledetekster, arbeidstaker)}</p>
-                <p className="sist">{getLedetekst('mote.bookingstatus.sendt-dato', ledetekster, {
-                    '%DATO%': getDatoFraZulu(dato),
-                })}</p>
+                <p className="typo-element">{getSendtTilTekst(mote, arbeidstaker)}</p>
+                <p className="sist">{textWithParameter(texts.sendt, getDatoFraZulu(dato))}</p>
             </div>
         </AlertStripe>
         <AlertStripe type="info">
@@ -122,26 +142,21 @@ export const StatusVarsel = (
 
 StatusVarsel.propTypes = {
     mote: moterPropTypes.motePt,
-    ledetekster: keyValue,
     arbeidstaker: PropTypes.object,
 };
 
-export const PassertVarsel = ({ ledetekster }) => {
+export const PassertVarsel = () => {
     return (
         <AlertStripe type="info">
             <div>
-                <p className="typo-element">{getLedetekst('mote.bookingstatus.passert.varsel.tekst', ledetekster)}</p>
-                <p className="sist">{getLedetekst('mote.bookingstatus.passert.varsel.undertekst', ledetekster)}</p>
+                <p className="typo-element">{texts.passert}</p>
+                <p className="sist">{texts.passertVarsel}</p>
             </div>
         </AlertStripe>);
-};
-PassertVarsel.propTypes = {
-    ledetekster: keyValue,
 };
 
 const MotebookingStatus = (props) => {
     const {
-        ledetekster,
         fnr,
         mote,
         avbrytMoteUtenVarsel,
@@ -150,31 +165,30 @@ const MotebookingStatus = (props) => {
     } = props;
     const { alternativer, status } = mote;
     const krrMeldingPanel = !arbeidstaker.kontaktinfo.skalHaVarsel ?
-        <KontaktInfoFeilmelding melding={getLedetekstFraFeilAarsak(arbeidstaker.kontaktinfo.feilAarsak, ledetekster)} />
+        <KontaktInfoFeilmelding melding={getLedetekstFraFeilAarsak(arbeidstaker.kontaktinfo.feilAarsak)} />
         : null;
     const motePassert = erMotePassert(mote);
     const flereTidspunktBoks = skalViseFlereAlternativ
         ? <FlereTidspunktSkjema {...props} antallEksisterendeTidspunkter={alternativer.length} />
         : null;
-    const sidetoppNokkel = getSidetoppNokkel(mote, motePassert);
+    const sidetoppTekst = getSidetoppTekst(mote, motePassert);
     const knapp = erMotePassert(mote)
-        ? <button className="js-ny knapp" onClick={() => { avbrytMoteUtenVarsel(mote.moteUuid, fnr); }}>{getLedetekst('mote.bookingstatus.knapp.planlegg-nytt-mote', ledetekster)}</button>
-        : <Link role="button" className="knapp knapp--enten js-avbryt" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>{getLedetekst('mote.bookingstatus.knapp.avbryt', ledetekster)}</Link>;
+        ? <button className="js-ny knapp" onClick={() => { avbrytMoteUtenVarsel(mote.moteUuid, fnr); }}>{texts.planleggNyttMote}</button>
+        : <Link role="button" className="knapp knapp--enten js-avbryt" to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}>{texts.avbrytMote}</Link>;
 
     return (<div>
-        <Sidetopp tittel={getLedetekst(sidetoppNokkel, ledetekster)} />
+        <Sidetopp tittel={sidetoppTekst} />
         { !motePassert && <StatusVarsel
             mote={mote}
-            ledetekster={ledetekster}
             arbeidstaker={arbeidstaker}
         /> }
         {krrMeldingPanel}
         <div className="panel">
             { status === BEKREFTET && <BekreftetMotetidspunkt {...props} /> }
             { status !== BEKREFTET && !motePassert && <Svarstatus {...props}>{flereTidspunktBoks}</Svarstatus> }
-            { status !== BEKREFTET && motePassert && <PassertVarsel ledetekster={ledetekster} /> }
+            { status !== BEKREFTET && motePassert && <PassertVarsel /> }
             <div className="motested">
-                <h3 className="motested__tittel">{getLedetekst('mote.bookingstatus.sted', ledetekster)}</h3>
+                <h3 className="motested__tittel">{texts.motested}</h3>
                 <p className="motested__sted">{mote.alternativer[0].sted}</p>
             </div>
             { status === BEKREFTET && !motePassert && <InformasjonSendt {...props} /> }
@@ -193,7 +207,6 @@ MotebookingStatus.propTypes = {
     senderNyeAlternativ: PropTypes.bool,
     nyeAlternativFeilet: PropTypes.bool,
     fikkIkkeOpprettetVarsel: PropTypes.object,
-    ledetekster: keyValue,
     avbrytMoteUtenVarsel: PropTypes.func,
     flereAlternativ: PropTypes.func,
     opprettFlereAlternativ: PropTypes.func,

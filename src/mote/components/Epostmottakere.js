@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    getLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
 import * as moterPropTypes from '../../propTypes';
 import {
     BRUKER,
     ARBEIDSGIVER,
 } from '../../konstanter';
 
-const Epostmottakere = ({ mote, ledetekster, arbeidstaker }) => {
+const texts = {
+    arbeidsgiver: 'Sendes til arbeidsgiver',
+    arbeidstaker: 'Sendes til arbeidstaker',
+};
+
+const Epostmottakere = ({ mote, arbeidstaker }) => {
     const sykmeldt = mote.deltakere.filter((d) => {
         return d.type === BRUKER;
     })[0];
@@ -20,11 +21,11 @@ const Epostmottakere = ({ mote, ledetekster, arbeidstaker }) => {
 
     return (<div className="mottakere">
         <div className="epostinnhold__mottaker js-mottaker blokk">
-            <h3>{getLedetekst('mote.avbrytmote.sendes-til-arbeidsgiver', ledetekster)}</h3>
+            <h3>{texts.arbeidsgiver}</h3>
             <p>{arbeidsgiver.navn}</p>
         </div>
         { arbeidstaker.kontaktinfo.skalHaVarsel && (<div className="epostinnhold__mottaker js-mottaker blokk">
-            <h3>{getLedetekst('mote.avbrytmote.sendes-til-arbeidstaker', ledetekster)}</h3>
+            <h3>{texts.arbeidstaker}</h3>
             <p>{sykmeldt.navn}</p>
         </div>) }
     </div>);
@@ -33,7 +34,6 @@ const Epostmottakere = ({ mote, ledetekster, arbeidstaker }) => {
 Epostmottakere.propTypes = {
     arbeidstaker: PropTypes.object,
     mote: moterPropTypes.motePt,
-    ledetekster: keyValue,
 };
 
 export default Epostmottakere;

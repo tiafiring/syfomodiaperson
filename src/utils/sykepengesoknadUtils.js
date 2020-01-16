@@ -57,3 +57,4 @@ export const getSendtTilSuffix = (sykepengesoknad) => {
     }
     return '';
 };
+

@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-    getLedetekst,
-    Utvidbar,
-} from '@navikt/digisyfo-npm';
+import { Utvidbar } from '@navikt/digisyfo-npm';
 import PropTypes from 'prop-types';
 import Oppsummeringsvisning from '../soknad-felles-oppsummering/Oppsummeringsvisning';
 import {
@@ -17,10 +14,14 @@ import { KORRIGERT } from '../../enums/soknadstatuser';
 import KorrigertAvContainer from '../sykepengesoknad-arbeidstaker/KorrigertAvContainer';
 import RelaterteSoknaderContainer from '../sykepengesoknad-arbeidstaker/RelaterteSoknaderContainer';
 
+const texts = {
+    tittel: 'Oppsummering',
+};
+
 const OppsummeringUtvidbar = ({ soknad }) => {
     return (<Utvidbar
         className="blokk"
-        tittel={getLedetekst('sykepengesoknad.oppsummering.tittel')}>
+        tittel={texts.tittel}>
         <Oppsummeringsvisning soknad={soknad} />
     </Utvidbar>);
 };

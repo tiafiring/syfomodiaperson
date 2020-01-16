@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import {
     Utvidbar,
     DineSykmeldingOpplysninger,
-    getLedetekst,
     keyValue,
 } from '@navikt/digisyfo-npm';
 import ArbeidsgiversSykmelding from './ArbeidsgiversSykmelding';
 import SykmeldingStatuspanel from '../sykmeldingstatuspanel/SykmeldingStatuspanel';
+
+const texts = {
+    tittel: 'Dine opplysinger',
+};
 
 const DinSendteSykmelding = ({ dinSykmelding, ledetekster, arbeidsgiversSykmelding }) => {
     return (<div>
@@ -15,7 +18,7 @@ const DinSendteSykmelding = ({ dinSykmelding, ledetekster, arbeidsgiversSykmeldi
         <Utvidbar
             className="blokk"
             erApen
-            tittel={getLedetekst('din-sykmelding.dine-opplysninger.tittel', ledetekster)}
+            tittel={texts.tittel}
             ikon="svg/person.svg"
             ikonHover="svg/person_hover.svg"
             ikonAltTekst="Du"

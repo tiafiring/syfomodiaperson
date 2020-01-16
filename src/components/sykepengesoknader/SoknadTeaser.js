@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import {
-    getLedetekst,
     toDatePrettyPrint,
     sykepengesoknadstatuser,
     tilLesbarDatoMedArstall,
@@ -24,23 +23,43 @@ import {
 } from '../../enums/soknadtyper';
 import { FREMTIDIG } from '../../enums/soknadstatuser';
 
+const texts = {
+    sendt: 'Sent til',
+    fremtidig: 'Planlagt',
+    avbrutt: 'Avbrutt av deg',
+    teaser: 'Gjelder perioden',
+    utland: 'Søknad om å beholde sykepenger utenfor EØS\n',
+    tittel: 'Søknad om sykepenger',
+};
+
+const textDato = (dato) => {
+    return `Opprettet ${dato}`;
+};
+
+const textSendtTilArbeidsgiver = (dato, arbeidsgiver) => {
+    return `${texts.sendt} ${arbeidsgiver} ${dato}`;
+};
+
+const textSendtTilNav = (dato) => {
+    return `${texts.sendt} NAV ${dato}`;
+};
+
+const textAvbrutt = (dato) => {
+    return `${texts.avbrutt} ${dato}`;
+};
+
+const textTeaserTekst = (periode) => {
+    return `Gjelder for perioden ${periode}`;
+};
+
 const { NY, SENDT, TIL_SENDING, UTKAST_TIL_KORRIGERING, AVBRUTT } = sykepengesoknadstatuser;
 
 export const SendtUlikt = ({ soknad }) => {
     return (
         <span>
-            {
-                getLedetekst('soknad.teaser.status.SENDT.til-arbeidsgiver', {
-                    '%DATO%': toDatePrettyPrint(soknad.sendtTilArbeidsgiverDato),
-                    '%ARBEIDSGIVER%': soknad.arbeidsgiver.navn,
-                })
-            }
+            {textSendtTilArbeidsgiver(toDatePrettyPrint(soknad.sendtTilArbeidsgiverDato), soknad.arbeidsgiver.navn)}
             <br />
-            {
-                getLedetekst('soknad.teaser.status.SENDT.til-nav', {
-                    '%DATO%': toDatePrettyPrint(soknad.sendtTilNAVDato),
-                })
-            }
+            {textSendtTilNav(soknad.arbeidsgiver.navn)}
         </span>
     );
 };
@@ -61,17 +80,42 @@ const visIkonHover = (soknadstype) => {
         : <img alt="" className="js-ikon" src={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/soknader_hover-blue.svg`} />;
 };
 
+
+const textSoknadTeaserStatus = (key, dato, arbeidsgiver) => {
+    switch (key) {
+        case 'TIL_SENDING':
+            return 'Sender...';
+        case 'TIL_SENDING.til-arbeidsgiver-og-nav':
+            return `Sender til ${arbeidsgiver} og NAV...`;
+        case 'SENDT':
+            return `Sendt ${dato}`;
+        case 'SENDT.til-nav':
+            return `Sendt til NAV ${dato}`;
+        case 'SENDT.til-arbeidsgiver':
+            return `Sendt til ${arbeidsgiver} ${dato}`;
+        case 'UTKAST_TIL_KORRIGERING':
+            return 'Utkast til endring';
+        case 'UTGAATT':
+            return 'Ikke brukt på nett';
+        case 'FREMTIDIG':
+            return 'Planlagt';
+        case 'AVBRUTT':
+            return textAvbrutt(dato);
+        default:
+            return '';
+    }
+};
+
+
 const beregnUndertekst = (soknad) => {
     const sendtTilBeggeMenIkkeSamtidig = erSendtTilBeggeMenIkkeSamtidig(soknad);
 
     if (soknad.status === AVBRUTT) {
-        return getLedetekst('soknad.teaser.status.AVBRUTT', {
-            '%DATO%': tilLesbarDatoMedArstall(soknad.avbruttDato),
-        });
+        return textAvbrutt(tilLesbarDatoMedArstall(soknad.avbruttDato));
     }
 
     if (soknad.status === FREMTIDIG) {
-        return getLedetekst(`soknad.teaser.status.${FREMTIDIG}`);
+        return texts.fremtidig;
     }
 
     switch (soknad.soknadstype) {
@@ -79,9 +123,7 @@ const beregnUndertekst = (soknad) => {
         case ARBEIDSLEDIG:
         case SELVSTENDIGE_OG_FRILANSERE: {
             return soknad.status === SENDT && soknad.innsendtDato
-                ? getLedetekst('soknad.teaser.status.SENDT.til-nav', {
-                    '%DATO%': tilLesbarDatoMedArstall(soknad.innsendtDato),
-                })
+                ? textSendtTilNav(tilLesbarDatoMedArstall(soknad.innsendtDato))
                 : '';
         }
         case ARBEIDSTAKERE: {
@@ -93,20 +135,17 @@ const beregnUndertekst = (soknad) => {
                         : soknad.sykmelding
                             ? soknad.sykmelding.innsendtArbeidsgivernavn
                             : '';
-                    return arbeidsgiver
-                        ? getLedetekst('soknad.teaser.undertekst', {
-                            '%ARBEIDSGIVER%': arbeidsgiver,
-                        })
-                        : '';
+                    return arbeidsgiver;
                 }
                 case SENDT:
                 case TIL_SENDING: {
                     return sendtTilBeggeMenIkkeSamtidig
                         ? <SendtUlikt soknad={soknad} />
-                        : getLedetekst(`soknad.teaser.status.${soknad.status}${getSendtTilSuffix(soknad)}`, {
-                            '%DATO%': tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
-                            '%ARBEIDSGIVER%': soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : '',
-                        });
+                        : textSoknadTeaserStatus(
+                            `soknad.teaser.status.${soknad.status}${getSendtTilSuffix(soknad)}`,
+                            tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
+                            soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : ''
+                        );
                 }
                 default: {
                     return '';
@@ -119,16 +158,15 @@ const beregnUndertekst = (soknad) => {
                 case TIL_SENDING: {
                     return sendtTilBeggeMenIkkeSamtidig
                         ? <SendtUlikt soknad={soknad} />
-                        : getLedetekst(`soknad.teaser.status.${soknad.status}${getSendtTilSuffix(soknad)}`, {
-                            '%DATO%': tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
-                            '%ARBEIDSGIVER%': soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : '',
-                        });
+                        : textSoknadTeaserStatus(
+                            `soknad.teaser.status.${soknad.status}${getSendtTilSuffix(soknad)}`,
+                            tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
+                            soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : ''
+                        );
                 }
                 case NY:
                 case UTKAST_TIL_KORRIGERING: {
-                    return getLedetekst('soknad.teaser.undertekst', {
-                        '%ARBEIDSGIVER%': soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : '',
-                    });
+                    return soknad.arbeidsgiver ? soknad.arbeidsgiver.navn : '';
                 }
                 default: {
                     return '';
@@ -156,9 +194,7 @@ export const TeaserStatus = ({ soknad }) => {
     const visStatus = [NY, SENDT, AVBRUTT].indexOf(soknad.status) === -1;
     return visStatus ? (
         <p className="inngangspanel__status js-status">
-            {getLedetekst(`soknad.teaser.status.${soknad.status}`, {
-                '%DATO%': tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato),
-            })}
+            {textSoknadTeaserStatus(`soknad.teaser.status.${soknad.status}`, tilLesbarDatoMedArstall(soknad.sendtTilArbeidsgiverDato || soknad.sendtTilNAVDato), null)}
         </p>
     ) : '';
 };
@@ -171,14 +207,12 @@ export const TeaserTittel = ({ soknad }) => {
     return (
         <h3 className="js-title" id={`soknad-header-${soknad.id}`}>
             <small className="inngangspanel__meta js-meta">
-                {getLedetekst('soknad.teaser.dato', {
-                    '%DATO%': tilLesbarDatoMedArstall(soknad.opprettetDato),
-                })}
+                {textDato(tilLesbarDatoMedArstall(soknad.opprettetDato))}
             </small>
             <span className="inngangspanel__tittel">
-                {getLedetekst(soknad.soknadstype === OPPHOLD_UTLAND
-                    ? 'soknad.utland.teaser.tittel'
-                    : 'soknad.teaser.tittel')
+                {soknad.soknadstype === OPPHOLD_UTLAND
+                    ? texts.utland
+                    : texts.tittel
                 }
             </span>
         </h3>
@@ -191,11 +225,7 @@ TeaserTittel.propTypes = {
 
 export const TeaserPeriode = ({ soknad }) => {
     return soknad.soknadstype !== OPPHOLD_UTLAND
-        ? <p className="inngangspanel__tekst js-tekst">
-            {getLedetekst('soknad.teaser.tekst', {
-                '%PERIODE%': tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom),
-            })}
-        </p>
+        ? <p className="inngangspanel__tekst js-tekst">{textTeaserTekst(tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom))}</p>
         : '';
 };
 

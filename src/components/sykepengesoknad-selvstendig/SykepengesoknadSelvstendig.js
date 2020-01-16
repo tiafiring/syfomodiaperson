@@ -1,5 +1,8 @@
 import React from 'react';
-import { getLedetekst, sykmelding as sykmeldingPt, Utvidbar } from '@navikt/digisyfo-npm';
+import {
+    sykmelding as sykmeldingPt,
+    Utvidbar,
+} from '@navikt/digisyfo-npm';
 import PropTypes from 'prop-types';
 import Oppsummeringsvisning from '../soknad-felles-oppsummering/Oppsummeringsvisning';
 import { soknad as soknadPt } from '../../propTypes';
@@ -10,6 +13,10 @@ import IkkeInnsendtSoknad from '../sykepengesoknad-felles/IkkeInnsendtSoknad';
 import SendtSoknadSelvstendigStatuspanel from './SendtSoknadSelvstendigStatuspanel';
 import AvbruttSoknadSelvstendigStatuspanel from './AvbruttSoknadSelvstendigStatuspanel';
 import SykmeldingUtdragForSelvstendige from './SykmeldingutdragForSelvstendige';
+
+const texts = {
+    oppsummering: 'Oppsummering',
+};
 
 const SykepengesoknadSelvstendig = (props) => {
     const { soknad, fnr } = props;
@@ -37,7 +44,7 @@ const SykepengesoknadSelvstendig = (props) => {
                         props.sykmelding && props.sykmelding.sporsmal
                         && <SykmeldingUtdragForSelvstendige sykmelding={props.sykmelding} erApen />
                     }
-                    <Utvidbar tittel={getLedetekst('sykepengesoknad.oppsummering.tittel')} className="blokk js-soknad-oppsummering" erApen>
+                    <Utvidbar tittel={texts.oppsummering} className="blokk js-soknad-oppsummering" erApen>
                         <Oppsummeringsvisning
                             soknad={Object.assign({}, soknad, {
                                 sporsmal: soknad.sporsmal.filter((s) => {

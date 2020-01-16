@@ -1,13 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { tilLesbarDatoMedArstall, getLedetekst, getHtmlLedetekst, sykepengesoknadstatuser } from '@navikt/digisyfo-npm';
+import {
+    tilLesbarDatoMedArstall,
+    sykepengesoknadstatuser,
+} from '@navikt/digisyfo-npm';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes';
-import { erSendtTilBeggeMenIkkeSamtidig, getSendtTilSuffix } from '../../utils/sykepengesoknadUtils';
+import { erSendtTilBeggeMenIkkeSamtidig } from '../../utils/sykepengesoknadUtils';
 import { formaterOrgnr } from '../../utils';
-import Statuspanel, { StatusNokkelopplysning, Statusopplysninger } from '../Statuspanel';
+import Statuspanel, {
+    StatusNokkelopplysning,
+    Statusopplysninger,
+} from '../Statuspanel';
 
 const { SENDT, TIL_SENDING, KORRIGERT } = sykepengesoknadstatuser;
+
+const texts = {
+    sykepengeinfo: {
+        tittel: 'Utbetaling av sykepenger',
+    },
+    riktig: 'Du har gjort det riktig! Det kan bare ta noen minutter før den er kommet fram til mottakeren. Du trenger ikke gjøre noe mer.',
+    status: 'Status',
+    sendtTilNav: 'Sendt til NAV:',
+
+    korrigert: 'Korrigert',
+};
+
 
 const getParams = (sykepengesoknad) => {
     return {
@@ -18,32 +36,81 @@ const getParams = (sykepengesoknad) => {
     };
 };
 
+const textSendtTilDato = (sykepengesoknad, params) => {
+    const { arbeidsgiver, orgnr, sendtTilNavDato, sendtTilArbeidsgiverDato } = params;
+
+    if (sykepengesoknad.sendtTilArbeidsgiverDato && sykepengesoknad.sendtTilNAVDato) {
+        return `Sendt til NAV og ${arbeidsgiver} (org. nr. ${orgnr}): ${sendtTilNavDato}`;
+    }
+    if (sykepengesoknad.sendtTilArbeidsgiverDato) {
+        return `Sendt til ${arbeidsgiver} (org. nr. ${orgnr}): ${sendtTilArbeidsgiverDato}`;
+    }
+    if (sykepengesoknad.sendtTilNAVDato) {
+        return `Sendt til NAV: ${sendtTilNavDato}`;
+    }
+    return '';
+};
+
+const textSenderTil = (sykepengesoknad, params) => {
+    const { arbeidsgiver, orgnr } = params;
+
+    if (sykepengesoknad.sendtTilArbeidsgiverDato && sykepengesoknad.sendtTilNAVDato) {
+        return `Sender til NAV og ${arbeidsgiver} (org. nr. ${orgnr})...`;
+    }
+    if (sykepengesoknad.sendtTilArbeidsgiverDato) {
+        return `Sender til ${arbeidsgiver} (org. nr. ${orgnr})...}`;
+    }
+    if (sykepengesoknad.sendtTilNAVDato) {
+        return 'Sender til NAV...';
+    }
+    return '';
+};
+
 const getStatusTekst = (sykepengesoknad) => {
     const params = getParams(sykepengesoknad);
     switch (sykepengesoknad.status) {
-        case SENDT: {
-            return getLedetekst(`sykepengesoknad.status-2.SENDT${getSendtTilSuffix(sykepengesoknad)}`, params);
-        }
-        case TIL_SENDING: {
-            return getLedetekst(`sykepengesoknad.status-2.TIL_SENDING${getSendtTilSuffix(sykepengesoknad)}`, params);
-        }
-        case KORRIGERT: {
-            return getLedetekst('sykepengesoknad.status-2.KORRIGERT');
-        }
-        default: {
+        case SENDT:
+            return textSendtTilDato(sykepengesoknad, params);
+
+        case TIL_SENDING:
+            return textSenderTil(sykepengesoknad, params);
+
+        case KORRIGERT:
+            return texts.korrigert;
+
+        default:
             return 'Ukjent status';
-        }
+
     }
 };
 
-export const tilSendingHjelpetekst = () => {
-    return (<Hjelpetekst>{getLedetekst('sykepengesoknad.til-sending.hjelpetekst.tekst')}</Hjelpetekst>);
+const tilSendingHjelpetekst = () => {
+    return (<Hjelpetekst>{texts.riktig}</Hjelpetekst>);
+};
+
+const textFromSykepengesoknad = (sykepengesoknad) => {
+    if (sykepengesoknad.sendtTilArbeidsgiverDato && sykepengesoknad.sendtTilNAVDato) {
+        return {
+            __html: '<a href=\"https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Utbetalinger/Utbetalinger/Utbetalingsdatoer%2C+feriepenger+og+skattetrekk?kap=499628\" target=\"_blank\">Les om sykepenger og saksbehandlingstider.</a>',
+        };
+    }
+    if (sykepengesoknad.sendtTilArbeidsgiverDato) {
+        return { __html: 'Du får sykepengene utbetalt fra arbeidsgiveren din.' };
+    }
+    if (sykepengesoknad.sendtTilNAVDato) {
+        return {
+            __html: 'Sykepenger utbetales etter at NAV har innvilget søknaden. <a href=\"https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Utbetalinger/Utbetalinger/Utbetalingsdatoer%2C+feriepenger+og+skattetrekk?kap=499628\" target=\"_blank\">Les om sykepenger og saksbehandlingstider.</a>',
+        };
+    }
+    return '';
 };
 
 export const SykepengerInfo = ({ sykepengesoknad }) => {
-    return (<StatusNokkelopplysning tittel={getLedetekst('sykepengesoknad.sykepengeinfo.tittel')}>
-        <p dangerouslySetInnerHTML={getHtmlLedetekst(`sykepengesoknad.sykepengeinfo${getSendtTilSuffix(sykepengesoknad)}`)} />
-    </StatusNokkelopplysning>);
+    return (
+        <StatusNokkelopplysning tittel={texts.sykepengeinfo.tittel}>
+            <p dangerouslySetInnerHTML={textFromSykepengesoknad(sykepengesoknad)} />
+        </StatusNokkelopplysning>
+    );
 };
 
 SykepengerInfo.propTypes = {
@@ -53,7 +120,7 @@ SykepengerInfo.propTypes = {
 const SendtLikt = ({ sykepengesoknad }) => {
     const tekst = getStatusTekst(sykepengesoknad);
     return (<Statusopplysninger>
-        <StatusNokkelopplysning tittel={getLedetekst('sykepengesoknad.status-2.tittel')}>
+        <StatusNokkelopplysning tittel={texts.status}>
             {
                 sykepengesoknad.status === TIL_SENDING
                     ? (<div>
@@ -72,11 +139,14 @@ SendtLikt.propTypes = {
 
 const SendtUlikt = ({ sykepengesoknad }) => {
     const params = getParams(sykepengesoknad);
+
+    const { arbeidsgiver, orgnr, sendtTilNavDato, sendtTilArbeidsgiverDato } = params;
+
     return (<Statusopplysninger>
-        <StatusNokkelopplysning tittel={getLedetekst('sykepengesoknad.status-2.tittel')}>
+        <StatusNokkelopplysning tittel={texts.status}>
             <p>
-                {getLedetekst('sykepengesoknad.status-2.SENDT.til-nav', params)}<br />
-                {getLedetekst('sykepengesoknad.status-2.SENDT.til-arbeidsgiver', params)}
+                {`Sendt til NAV: ${sendtTilNavDato}`}<br />
+                {`Sendt til ${arbeidsgiver} (org. nr. ${orgnr}): ${sendtTilArbeidsgiverDato}`}
             </p>
         </StatusNokkelopplysning>
         <SykepengerInfo sykepengesoknad={sykepengesoknad} />

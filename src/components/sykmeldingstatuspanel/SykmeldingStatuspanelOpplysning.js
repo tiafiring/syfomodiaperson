@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-    getLedetekst,
     SykmeldingNokkelOpplysning,
     sykmeldingstatuser,
     tilLesbarPeriodeMedArstall,
@@ -12,21 +11,56 @@ import { sykmelding as sykmeldingPt } from '../../propTypes';
 import { Vis } from '../../utils';
 import { StatusNokkelopplysning } from '../Statuspanel';
 
+const texts = {
+    hjelpetekst: 'Du har gjort det riktig! Det kan bare ta noen minutter før den er kommet fram til mottakeren. Du trenger ikke gjøre noe mer.',
+    status: {
+        tittel: 'Status',
+        sender: 'Sender...',
+        avbrutt: 'Avbrutt av deg',
+        bekreftet: 'Bekreftet av deg',
+    },
+    dato: {
+        bekreftet: 'Dato bekreftet',
+        avbrutt: 'Dato avbrutt',
+        sendt: 'Dato sendt',
+    },
+    arbeidsgiver: 'Arbeidsgiver',
+    orgnr: 'Organisasjonsnummer',
+    egenmeldingPapir: 'Egenmelding og/eller sykmelding på papir',
+    egenmeldingPapirNei: 'Har ikke hatt egenmelding og/eller sykmelding på papir',
+    forsikring: 'Forsikring',
+    ja: 'Ja',
+    nei: 'Har ikke forsikring som … dagene av sykefraværet',
+};
+
 const { BEKREFTET, AVBRUTT, TIL_SENDING } = sykmeldingstatuser;
 
+const textStatus = (status) => {
+    switch (status) {
+        case BEKREFTET:
+            return texts.status.bekreftet;
+        case AVBRUTT:
+            return texts.status.avbrutt;
+        case TIL_SENDING:
+            return texts.status.sender;
+        default:
+            return '';
+    }
+};
+
 const tilSendingHjelpetekst = () => {
-    return (<Hjelpetekst>{getLedetekst('sykepengesoknad.til-sending.hjelpetekst.tekst')}</Hjelpetekst>);
+    return (<Hjelpetekst>{texts.hjelpetekst}</Hjelpetekst>);
 };
 
 export const Sykmeldingstatus = ({ sykmelding }) => {
-    return (<StatusNokkelopplysning tittel={getLedetekst('statuspanel.status')}>
+    return (<StatusNokkelopplysning tittel={texts.status.tittel}>
         {
             sykmelding.status === TIL_SENDING
                 ? (<div className="medHjelpetekst">
-                    <span>{getLedetekst(`statuspanel.status.${sykmelding.status}`)}</span>
+                    <span>{textStatus(sykmelding.status)}</span>
                     {tilSendingHjelpetekst()}
                 </div>)
-                : <p className="js-status">{getLedetekst(`statuspanel.status.${sykmelding.status}`)}</p>
+                : <p className="js-status">{textStatus(sykmelding.status)}</p>
         }
     </StatusNokkelopplysning>);
 };
@@ -36,12 +70,12 @@ Sykmeldingstatus.propTypes = {
 };
 
 export const SendtDato = ({ sykmelding }) => {
-    const nokkel = sykmelding.status === BEKREFTET
-        ? 'statuspanel.dato.bekreftet'
+    const tittel = sykmelding.status === BEKREFTET
+        ? texts.dato.bekreftet
         : sykmelding.status === AVBRUTT
-            ? 'statuspanel.dato.avbrutt'
-            : 'statuspanel.dato.innsendt';
-    return (<StatusNokkelopplysning tittel={getLedetekst(nokkel)}>
+            ? texts.dato.avbrutt
+            : texts.dato.sendt;
+    return (<StatusNokkelopplysning tittel={tittel}>
         <p className="js-dato">{tilLesbarDatoMedArstall(sykmelding.sendtdato)}</p>
     </StatusNokkelopplysning>);
 };
@@ -51,7 +85,7 @@ SendtDato.propTypes = {
 };
 
 export const Arbeidsgiver = ({ sykmelding }) => {
-    return (<StatusNokkelopplysning tittel={getLedetekst('statuspanel.arbeidsgiver')}>
+    return (<StatusNokkelopplysning tittel={texts.arbeidsgiver}>
         <p className="js-arbeidsgiver">{sykmelding.innsendtArbeidsgivernavn}</p>
     </StatusNokkelopplysning>);
 };
@@ -64,7 +98,7 @@ export const Orgnummer = ({ sykmelding }) => {
     const orgnummer = sykmelding.orgnummer
         ? sykmelding.orgnummer.replace(/(...)(...)(...)/g, '$1 $2 $3')
         : null;
-    return (<StatusNokkelopplysning tittel={getLedetekst('statuspanel.organisasjonsnummer')}>
+    return (<StatusNokkelopplysning tittel={texts.orgnr}>
         <p className="js-organisasjonsnummer">{orgnummer}</p>
     </StatusNokkelopplysning>);
 };
@@ -77,7 +111,7 @@ export const SykmeldingopplysningFravaersperioder = ({ sykmelding, className }) 
     return sykmelding.sporsmal.harAnnetFravaer !== null
         ? (<SykmeldingNokkelOpplysning
             className={className}
-            tittel={getLedetekst('sykepengesoknad.sykmelding-utdrag.egenmelding-papir')}>
+            tittel={texts.egenmeldingPapir}>
             {
                 sykmelding.sporsmal.fravaersperioder.length > 0
                     ? (<ul className="nokkelopplysning__liste">
@@ -87,7 +121,7 @@ export const SykmeldingopplysningFravaersperioder = ({ sykmelding, className }) 
                             })
                         }
                     </ul>)
-                    : (<p>{getLedetekst('sykepengesoknad.sykmelding-utdrag.egenmelding-papir-nei')}</p>)
+                    : (<p>{texts.egenmeldingPapirNei}</p>)
             }
         </SykmeldingNokkelOpplysning>)
         : null;
@@ -99,14 +133,14 @@ SykmeldingopplysningFravaersperioder.propTypes = {
 };
 
 export const SykmeldingopplysningForsikring = ({ sykmelding, className }) => {
-    const nokkel = sykmelding.sporsmal.harForsikring
-        ? 'sykepengesoknad.sykmelding-utdrag.forsikring-ja-2'
-        : 'sykepengesoknad.sykmelding-utdrag.forsikring-nei';
+    const text = sykmelding.sporsmal.harForsikring
+        ? texts.ja
+        : texts.nei;
     return sykmelding.sporsmal.harForsikring !== null
         ? <SykmeldingNokkelOpplysning
             className={className}
-            tittel={getLedetekst('sykepengesoknad.sykmelding-utdrag.forsikring')}>
-            <p>{getLedetekst(nokkel)}</p>
+            tittel={texts.forsikring}>
+            <p>{text}</p>
         </SykmeldingNokkelOpplysning>
         : null;
 };

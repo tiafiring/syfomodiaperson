@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    getLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
 import Tilbakelenke from '../Tilbakelenke';
 
-const LenkeTilDineSykmeldinger = ({ ledetekster, fnr }) => {
-    return (<Tilbakelenke to={`/sykefravaer/${fnr}/sykmeldinger`} tekst={getLedetekst('din-sykmelding.tilbake', ledetekster)} />);
+const texts = {
+    tilbake: 'Gå til dine sykmeldinger\n',
+};
+
+const LenkeTilDineSykmeldinger = ({ fnr }) => {
+    return (<Tilbakelenke to={`/sykefravaer/${fnr}/sykmeldinger`} tekst={texts.tilbake} />);
 };
 
 LenkeTilDineSykmeldinger.propTypes = {
-    ledetekster: keyValue,
     fnr: PropTypes.string,
 };
 

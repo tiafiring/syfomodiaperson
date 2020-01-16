@@ -1,10 +1,13 @@
 import React from 'react';
-import { getLedetekst } from '@navikt/digisyfo-npm';
+
+const texts = {
+    bruk: 'Bruk sykmeldingen',
+};
 
 const GjenapneSykmelding = () => {
     return (<div className="verktoylinje">
         <button className="knapp knapp--mini js-gjenaapne-sykmelding">
-            {getLedetekst('din-sykmelding.avbrutt.gjenaapne')}
+            {texts.bruk}
         </button>
     </div>);
 };

@@ -1,12 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, keyValue } from '@navikt/digisyfo-npm';
+import { keyValue } from '@navikt/digisyfo-npm';
 import {
     motedeltakerPt,
     motesvarPt,
 } from '../../propTypes';
 import { getSvar } from '../../utils/moteplanleggerUtils';
 import { ARBEIDSGIVER, MULIGE_SVAR } from '../../konstanter';
+
+const texts = {
+    kanMote: 'kan møte på dette tidspunktet',
+    kanIkkeMote: 'kan ikke møte på dette tidspunktet',
+    ikkeSvart: 'har ikke svart ennå',
+};
+
+const textWithName = (text, name) => {
+    return `${name} ${text}`;
+};
 
 const getIkonsti = (filnavn) => {
     return `/sykefravaer/img/svg/${filnavn}`;
@@ -22,23 +32,17 @@ Ikon.propTypes = {
     ikon: PropTypes.string.isRequired,
 };
 
-const getSvartekst = (bruker, svar, ledetekster) => {
+const getSvartekst = (bruker, svar) => {
     const svarstr = getSvar(svar, bruker.svartidspunkt);
     switch (svarstr) {
         case MULIGE_SVAR.PASSER: {
-            return getLedetekst('mote.svar.status.kan-mote', ledetekster, {
-                '%NAVN%': bruker.navn,
-            });
+            return textWithName(texts.kanMote, bruker.navn);
         }
         case MULIGE_SVAR.PASSER_IKKE: {
-            return getLedetekst('mote.svar.status.kan-ikke-mote', ledetekster, {
-                '%NAVN%': bruker.navn,
-            });
+            return textWithName(texts.kanIkkeMote, bruker.navn);
         }
         default: {
-            return getLedetekst('mote.svar.status.ikke-svart', ledetekster, {
-                '%NAVN%': bruker.navn,
-            });
+            return textWithName(texts.ikkeSvart, bruker.navn);
         }
     }
 };
@@ -69,14 +73,12 @@ Svartekst.propTypes = {
     deltakertype: PropTypes.string.isRequired,
 };
 
-export const NavKan = ({ ledetekster }) => {
+export const NavKan = () => {
     return (<li className="alternativsvar__svar js-navssvar">
         <Ikon ikon="status--kan.svg" />
         <Svartekst
             deltakertype="NAV"
-            tekst={getLedetekst('mote.svar.status.kan-mote', ledetekster, {
-                '%NAVN%': 'Veilederen',
-            })} />
+            tekst={ textWithName(texts.kanMote, 'Veilederen')} />
     </li>);
 };
 
@@ -84,11 +86,11 @@ NavKan.propTypes = {
     ledetekster: keyValue,
 };
 
-const SvarMedIkon = ({ bruker, svar, ledetekster }) => {
+const SvarMedIkon = ({ bruker, svar }) => {
     const deltakertype = bruker.type === ARBEIDSGIVER ? 'Arbeidsgiver' : 'Arbeidstaker';
     return (<li className="alternativsvar__svar js-annenssvar">
         <Ikon ikon={getIkonFilnavn(bruker, svar)} />
-        <Svartekst deltakertype={`${deltakertype}en`} navn={bruker.navn} tekst={getSvartekst(bruker, svar, ledetekster)} />
+        <Svartekst deltakertype={`${deltakertype}en`} navn={bruker.navn} tekst={getSvartekst(bruker, svar)} />
     </li>);
 };
 

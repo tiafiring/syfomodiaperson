@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
-    getLedetekst,
-    getHtmlLedetekst,
     keyValue,
     sykmelding as sykmeldingPt,
 } from '@navikt/digisyfo-npm';
@@ -39,6 +37,10 @@ import {
 import IkkeInnsendtSoknad from '../components/sykepengesoknad-felles/IkkeInnsendtSoknad';
 import AvbruttSoknadArbeidtakerNy from '../components/sykepengesoknad-arbeidstaker-ny/AvbruttSoknadArbeidtakerNy';
 
+const texts = {
+    feilmedling: 'Du har ikke itllgang til denne tjenesten',
+};
+
 export class Container extends Component {
     componentWillMount() {
         const { fnr } = this.props;
@@ -56,7 +58,6 @@ export class Container extends Component {
     render() {
         const {
             brukernavn,
-            ledetekster,
             henter,
             hentingFeilet,
             tilgang,
@@ -81,8 +82,8 @@ export class Container extends Component {
                         if (!tilgang.harTilgang && !erDev()) {
                             return (
                                 <Feilmelding
-                                    tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                                    melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
+                                    tittel={texts.feilmedling}
+                                    melding={hentBegrunnelseTekst(tilgang.begrunnelse)}
                                 />
                             );
                         }

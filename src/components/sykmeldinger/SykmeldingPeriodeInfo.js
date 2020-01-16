@@ -3,49 +3,100 @@ import PropTypes from 'prop-types';
 import {
     getDuration,
     toDate,
-    getLedetekst,
-    keyValue,
 } from '@navikt/digisyfo-npm';
 
-const SykmeldingPeriodeInfo = ({ periode, arbeidsgiver, Element = 'p', ledetekster }) => {
-    let ledetekstNokkel = 'sykmelding.teaser.tekst';
-    if (periode.behandlingsdager === 1) {
-        ledetekstNokkel = 'sykmelding.teaser.tekst.behandlingsdag';
+const textBehandlingsdagEnDag = (behandlingsdager, dager) => {
+    return `${behandlingsdager} behandlingsdag i løpet av ${dager} dag\n`;
+};
+
+const textBehandlingsdager = (behandlingsdager, dager) => {
+    return `${behandlingsdager} behandlingsdag i løpet av ${dager} dager\n`;
+};
+
+const textEnDagIngenGrad = (behandlingsdager) => {
+    return `${behandlingsdager} behandlingsdag\n`;
+};
+
+const textReisetilskuddEnDag = (dager) => {
+    return `Reisetilskudd i ${dager} dag\n`;
+};
+
+const textReisetilskudd = (dager) => {
+    return `Reisetilskudd i ${dager} dager\n`;
+};
+
+const textReisetilskuddGradert = (grad, dager) => {
+    return `${grad} sykmelding med reisetilskudd i % ${dager} dager\n`;
+};
+
+const textAvventende = (arbeidsgiver, dager) => {
+    return `Avventende sykmelding fra ${arbeidsgiver} i ${dager} dager`;
+};
+
+
+const textAvventendeEnDag = (arbeidsgiver, dager) => {
+    return `Avventende sykmelding fra ${arbeidsgiver} i ${dager} dag`;
+};
+
+const textAvventedneEnDagUtenArbeidsgiver = (dager) => {
+    return `Avventende sykemelding i ${dager} dag\n`;
+};
+
+const textAvventedneUtenArbeidsgiver = (dager) => {
+    return `Avventende sykemelding i ${dager} dager\n`;
+}
+
+const SykmeldingPeriodeInfo = ({ periode, arbeidsgiver, Element = 'p' }) => {
+    const enDag = toDate(periode.fom).getTime() === toDate(periode.tom).getTime();
+    const ingenGrad = periode.grad === null;
+    const utenArbeidsgiver = !arbeidsgiver;
+    const gradert = periode.reisetilskudd && periode.grad;
+
+    let text = '';
+
+    if (periode.behandlingsdager === 1 && ((enDag && utenArbeidsgiver && ingenGrad) || (enDag && ingenGrad))) {
+        text = textBehandlingsdagEnDag(periode.behandlingsdager, getDuration(periode.fom, periode.tom));
     }
+
     if (periode.behandlingsdager > 1) {
-        ledetekstNokkel = 'sykmelding.teaser.tekst.behandlingsdager';
+        text = textBehandlingsdager(periode.behandlingsdager, getDuration(periode.fom, periode.tom));
+
+        if (enDag && ingenGrad) {
+            text = textEnDagIngenGrad(periode.behandlingsdager);
+        }
     }
     if (periode.reisetilskudd) {
-        ledetekstNokkel = 'sykmelding.teaser.tekst.reisetilskudd';
+        text = textReisetilskudd(getDuration(periode.fom, periode.tom));
+
+        if (enDag) {
+            text = textReisetilskuddEnDag(getDuration(periode.fom, periode.tom));
+        }
+
+        if (gradert) {
+            text = textReisetilskuddGradert(periode.grad, getDuration(periode.fom, periode.tom));
+        }
     }
     if (periode.avventende) {
-        ledetekstNokkel = 'sykmelding.teaser.tekst.avventende';
+        text = textAvventende(arbeidsgiver, getDuration(periode.fom, periode.tom));
+
+        if (enDag) {
+            text = textAvventendeEnDag(arbeidsgiver, getDuration(periode.fom, periode.tom));
+        }
+
+        if (enDag && utenArbeidsgiver) {
+            text = textAvventedneEnDagUtenArbeidsgiver(arbeidsgiver, getDuration(periode.fom, periode.tom));
+        }
+        if (utenArbeidsgiver) {
+            text = textAvventedneUtenArbeidsgiver(getDuration(periode.fom, periode.tom));
+        }
     }
-    if (toDate(periode.fom).getTime() === toDate(periode.tom).getTime()) {
-        ledetekstNokkel += '.en-dag';
-    }
-    if (!arbeidsgiver) {
-        ledetekstNokkel += '.uten-arbeidsgiver';
-    }
-    if (periode.grad === null) {
-        ledetekstNokkel += '.ingen-grad';
-    }
-    if (periode.reisetilskudd && periode.grad) {
-        ledetekstNokkel += '.gradert';
-    }
-    return (<Element className="js-periode">{getLedetekst(ledetekstNokkel, ledetekster, {
-        '%GRAD%': periode.grad,
-        '%ARBEIDSGIVER%': arbeidsgiver,
-        '%DAGER%': getDuration(periode.fom, periode.tom),
-        '%BEHANDLINGSDAGER%': periode.behandlingsdager,
-    })}</Element>);
+    return (<Element className="js-periode">{text}</Element>);
 };
 
 SykmeldingPeriodeInfo.propTypes = {
     periode: PropTypes.object,
     arbeidsgiver: PropTypes.string,
     Element: PropTypes.string,
-    ledetekster: keyValue,
 };
 
 export default SykmeldingPeriodeInfo;
