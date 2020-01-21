@@ -11,7 +11,9 @@ const texts = {
 };
 
 const getLedetekstFraSvar = (svar) => {
-    return svar.toLowerCase() === 'ja' ? texts.ja : texts.nei;
+    return svar.toLowerCase() === 'ja'
+        ? texts.ja
+        : texts.nei;
 };
 
 const erUndersporsmalStilt = (svar, kriterieForVisningAvUndersporsmal) => {
