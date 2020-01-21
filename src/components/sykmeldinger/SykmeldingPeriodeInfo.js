@@ -44,7 +44,7 @@ const textAvventedneEnDagUtenArbeidsgiver = (dager) => {
 
 const textAvventedneUtenArbeidsgiver = (dager) => {
     return `Avventende sykemelding i ${dager} dager\n`;
-}
+};
 
 const SykmeldingPeriodeInfo = ({ periode, arbeidsgiver, Element = 'p' }) => {
     const enDag = toDate(periode.fom).getTime() === toDate(periode.tom).getTime();
