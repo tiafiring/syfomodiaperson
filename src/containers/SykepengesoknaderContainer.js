@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {
-    getLedetekst,
-    getHtmlLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
 import * as sykepengesoknaderActions from '../actions/sykepengesoknader_actions';
 import * as soknaderActions from '../actions/soknader_actions';
@@ -24,6 +19,10 @@ import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { erDev } from '../selectors/toggleSelectors';
 import Feilstripe from '../components/Feilstripe';
 
+const texts = {
+    feilmelding: 'Du har ikke tilgang til denne tjenesten',
+};
+
 export class SykepengesoknaderSide extends Component {
     componentWillMount() {
         const { fnr } = this.props;
@@ -38,7 +37,6 @@ export class SykepengesoknaderSide extends Component {
     render() {
         const {
             brukernavn,
-            ledetekster,
             henter,
             hentingFeilet,
             hentingFeiletSykepengesoknader,
@@ -62,8 +60,8 @@ export class SykepengesoknaderSide extends Component {
                     }
                     if (!tilgang.harTilgang && !erDev()) {
                         return (<Feilmelding
-                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
+                            tittel={texts.feilmelding}
+                            melding={hentBegrunnelseTekst(tilgang.begrunnelse)}
                         />);
                     }
                     if (hentingFeilet && !erDev()) {
@@ -99,7 +97,6 @@ SykepengesoknaderSide.propTypes = {
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
-    ledetekster: keyValue,
     skalHenteSykepengesoknader: PropTypes.bool,
     skalHenteSoknader: PropTypes.bool,
     hentingFeiletSoknader: PropTypes.bool,

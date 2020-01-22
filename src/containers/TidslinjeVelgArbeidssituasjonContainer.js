@@ -1,26 +1,31 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-    getLedetekst,
     TIDSLINJE_TYPER,
     keyValue,
 } from '@navikt/digisyfo-npm';
 import Radiofaner from '../components/Radiofaner';
 
+const texts = {
+    harArbeidsgiver: 'Jeg har arbeidsgiver',
+    harIkkeArbeidsgiver: 'Jeg har ikke arbeidsgiver',
+    hjelpetekst: 'Velg «Jeg har ikke arbeidsgiver» dersom du er for eks. selvstendig næringsdrivende, frilanser eller arbeidsledig.',
+};
+
 const verdier = {};
 verdier[TIDSLINJE_TYPER.MED_ARBEIDSGIVER] = 'med-arbeidsgiver';
 verdier[TIDSLINJE_TYPER.UTEN_ARBEIDSGIVER] = 'uten-arbeidsgiver';
 
-const arbeidssituasjoner = (ledetekster) => {
+const arbeidssituasjoner = () => {
     return [{
-        tittel: getLedetekst('tidslinje.filter.med-arbeidsgiver', ledetekster),
+        tittel: texts.harArbeidsgiver,
         verdi: TIDSLINJE_TYPER.MED_ARBEIDSGIVER,
     }, {
-        tittel: getLedetekst('tidslinje.filter.uten-arbeidsgiver', ledetekster),
+        tittel: texts.harIkkeArbeidsgiver,
         verdi: TIDSLINJE_TYPER.UTEN_ARBEIDSGIVER,
         hjelpetekst: {
-            tittel: getLedetekst('tidslinje.filter.med-arbeidsgiver.hjelpetekst.tittel', ledetekster),
-            tekst: getLedetekst('tidslinje.filter.med-arbeidsgiver.hjelpetekst.tekst', ledetekster),
+            tittel: texts.harIkkeArbeidsgiver,
+            tekst: texts.hjelpetekst,
         },
     }];
 };
@@ -31,9 +36,9 @@ export class VelgArbeidssituasjon extends Component {
         this.props.hentTidslinjer(verdi);
     }
     render() {
-        const { valgtArbeidssituasjon, ledetekster } = this.props;
+        const { valgtArbeidssituasjon } = this.props;
         return (<Radiofaner
-            alternativer={arbeidssituasjoner(ledetekster)}
+            alternativer={arbeidssituasjoner()}
             valgtAlternativ={valgtArbeidssituasjon}
             changeHandler={(v) => { this.changeHandler(v); }}
             radioName="tidslinje-arbeidssituasjon"

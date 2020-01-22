@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
     getSykmelding,
-    getHtmlLedetekst,
-    getLedetekst,
     sykmeldingstatuser,
     keyValue,
 } from '@navikt/digisyfo-npm';
@@ -22,6 +20,10 @@ import { SYKMELDINGER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { erDev } from '../selectors/toggleSelectors';
 import { ARBEIDSTAKER } from '../enums/arbeidssituasjoner';
+
+const texts = {
+    feilmelding: 'Du har ikke tilgang til denne tjenesten',
+};
 
 export class DinSykmeldingSide extends Component {
     componentWillMount() {
@@ -61,8 +63,8 @@ export class DinSykmeldingSide extends Component {
                     }
                     if (!tilgang.harTilgang && !erDev()) {
                         return (<Feilmelding
-                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
+                            tittel={texts.feilmelding}
+                            melding={hentBegrunnelseTekst(tilgang.begrunnelse)}
                         />);
                     }
 

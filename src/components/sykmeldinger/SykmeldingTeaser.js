@@ -1,9 +1,37 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { getLedetekst, tidligsteFom, senesteTom, sykmeldingstatuser, tilLesbarPeriodeMedArstall } from '@navikt/digisyfo-npm';
+import {
+    tidligsteFom,
+    senesteTom,
+    sykmeldingstatuser,
+    tilLesbarPeriodeMedArstall,
+} from '@navikt/digisyfo-npm';
 import SykmeldingPeriodeInfo from './SykmeldingPeriodeInfo';
-import { sykmelding as sykmeldingPt, sykmeldingperiode } from '../../propTypes';
+import {
+    sykmelding as sykmeldingPt,
+    sykmeldingperiode,
+} from '../../propTypes';
+
+const texts = {
+    teaserTekst: 'Sykmelding\n',
+    sendt: 'Sendt til arbeidsgiver\n',
+    utgaatt: 'Ikke brukt på nett\n',
+    tilSending: 'Sender...',
+    avbrutt: 'Avbrutt av deg\n',
+    bekreftet: 'Bekreftet av deg\n',
+};
+
+const textStatus = (status) => {
+    switch (status) {
+        case 'SENDT': return texts.sendt;
+        case 'UTGAATT': return texts.utgaatt;
+        case 'TIL_SENDING': return texts.tilSending;
+        case 'AVBRUTT': return texts.avbrutt;
+        case 'BEKREFTET': return texts.bekreftet;
+        default: return '';
+    }
+};
 
 const PeriodeListe = ({ perioder, arbeidsgiver }) => {
     return (<ul className="teaser-punktliste js-perioder">
@@ -63,11 +91,11 @@ class SykmeldingTeaser extends Component {
                                 {tilLesbarPeriodeMedArstall(tidligsteFom(sykmelding.mulighetForArbeid.perioder), senesteTom(sykmelding.mulighetForArbeid.perioder))}
                             </small>
                             <span className="inngangspanel__tittel">
-                                {getLedetekst('sykmelding.teaser.tittel')}
+                                {texts.teaserTittel}
                             </span>
                         </h3>
                         {
-                            visStatus && <p className="inngangspanel__status">{getLedetekst(`sykmelding.teaser.status.${sykmelding.status}`)}</p>
+                            visStatus && <p className="inngangspanel__status">{textStatus(sykmelding.status)}</p>
                         }
                     </header>
                     <div className="inngangspanel__tekst">

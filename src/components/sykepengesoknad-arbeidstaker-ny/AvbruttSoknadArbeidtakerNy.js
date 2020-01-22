@@ -1,17 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, sykmelding as sykmeldingPt, tilLesbarDatoMedArstall } from '@navikt/digisyfo-npm';
+import {
+    sykmelding as sykmeldingPt,
+    tilLesbarDatoMedArstall,
+} from '@navikt/digisyfo-npm';
 import { brodsmule, soknadPt } from '../../propTypes';
 import Statuspanel, { StatusNokkelopplysning, Statusopplysninger } from '../Statuspanel';
 import SoknadSpeiling from '../sykepengesoknad-felles/SoknadSpeiling';
 import SykmeldingUtdrag from '../../connected-components/SykmeldingUtdrag';
 import VerktoylinjeGjenapne from '../sykepengesoknad-felles/VerktoylinjeGjenapneSoknad';
 
+const texts = {
+    avbrutt: 'Avbrutt av deg',
+    status: 'Status',
+};
+
 const AvbruttSoknadArbeidstakerStatuspanel = ({ soknad }) => {
     return (<Statuspanel>
         <Statusopplysninger>
-            <StatusNokkelopplysning tittel={getLedetekst('statuspanel.status')}>
-                <p>{getLedetekst('sykepengesoknad.status.AVBRUTT')}</p>
+            <StatusNokkelopplysning tittel={texts.status}>
+                <p>{texts.avbrutt}</p>
             </StatusNokkelopplysning>
             <StatusNokkelopplysning tittel="Dato avbrutt">
                 <p>

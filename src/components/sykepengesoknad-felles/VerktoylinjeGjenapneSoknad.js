@@ -1,7 +1,10 @@
 import React from 'react';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { VerktoyKnapp, Verktoylinje } from '../Verktoylinje';
 import { soknad as soknadPt } from '../../propTypes';
+
+const texts = {
+    gjenapne: 'Gjenåpne søknad',
+};
 
 export const soknadKanGjenapnes = (opprettetDato) => {
     const ETT_AAR_SIDEN = new Date();
@@ -12,7 +15,7 @@ export const soknadKanGjenapnes = (opprettetDato) => {
 const VerktoylinjeGjenapneSoknad = ({ soknad }) => {
     return soknadKanGjenapnes(soknad.opprettetDato)
         ? (<Verktoylinje>
-            <VerktoyKnapp>{getLedetekst('sykepengesoknad.gjenapne.knapp')}</VerktoyKnapp>
+            <VerktoyKnapp>{texts.gjenapne}</VerktoyKnapp>
         </Verktoylinje>)
         : null;
 };

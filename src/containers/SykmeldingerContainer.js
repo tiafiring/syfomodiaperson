@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {
-    getLedetekst,
-    getHtmlLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
 import SidetoppSpeilet from '../components/SidetoppSpeilet';
 import * as actionCreators from '../actions/sykmeldinger_actions';
@@ -18,6 +13,11 @@ import { SYKMELDINGER } from '../enums/menypunkter';
 import Speilingvarsel from '../components/Speilingvarsel';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { erDev } from '../selectors/toggleSelectors';
+
+const texts = {
+    introduksjonstekst: 'NAV mottar alle sykmeldinger. Ser du den ikke her? Det betyr at den som har sykmeldt deg ikke sender den digitalt til NAV. Da bruker du papirsykmeldingen i stedet.',
+    feilmelding: 'Du har ikke tilgang til denne tjenesten',
+};
 
 export class SykmeldingerSide extends Component {
     componentWillMount() {
@@ -31,13 +31,12 @@ export class SykmeldingerSide extends Component {
             fnr,
             henter,
             hentingFeilet,
-            ledetekster,
             sortering,
             sykmeldinger,
             tilgang,
         } = this.props;
         const htmlIntro = {
-            __html: `<p>${getLedetekst('dine-sykmeldinger.introduksjonstekst', ledetekster)}</p>`,
+            __html: `<p>${texts.introduksjonstekst}</p>`,
         };
         const brodsmuler = [{
             tittel: 'Ditt sykefravær',
@@ -53,8 +52,8 @@ export class SykmeldingerSide extends Component {
                     }
                     if (!tilgang.harTilgang && !erDev()) {
                         return (<Feilmelding
-                            tittel={getLedetekst('sykefravaer.veileder.feilmelding.tittel', ledetekster)}
-                            melding={getHtmlLedetekst(hentBegrunnelseTekst(tilgang.begrunnelse), ledetekster)}
+                            tittel={texts.feilmelding}
+                            melding={hentBegrunnelseTekst(tilgang.begrunnelse)}
                         />);
                     }
                     if (hentingFeilet && !erDev()) {
@@ -68,7 +67,6 @@ export class SykmeldingerSide extends Component {
                             <DineSykmeldinger
                                 fnr={fnr}
                                 sykmeldinger={sykmeldinger}
-                                ledetekster={ledetekster}
                                 sortering={sortering}
                             />
                         </div>
@@ -87,7 +85,6 @@ SykmeldingerSide.propTypes = {
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
-    ledetekster: keyValue,
     sortering: PropTypes.shape(),
 };
 

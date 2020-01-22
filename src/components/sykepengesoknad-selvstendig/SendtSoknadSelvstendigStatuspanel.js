@@ -1,8 +1,21 @@
 import React from 'react';
-import { getHtmlLedetekst, getLedetekst, SykmeldingNokkelOpplysning, tilLesbarDatoMedArstall } from '@navikt/digisyfo-npm';
+import {
+    SykmeldingNokkelOpplysning,
+    tilLesbarDatoMedArstall,
+} from '@navikt/digisyfo-npm';
 import Statuspanel, { Statusopplysninger, StatusNokkelopplysning } from '../Statuspanel';
 import { soknad as soknadPt } from '../../propTypes';
 import { VerktoyKnapp, Verktoylinje } from '../Verktoylinje';
+
+const texts = {
+    status: 'Status',
+    sendtTilNav: 'Sendt til NAV',
+    innsendt: 'Dato sendt',
+    tittel: 'Utbetaling av sykepenger',
+    tilNav: {
+        __html: 'Sykepenger utbetales etter at NAV har innvilget søknaden. <a href=\"https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Utbetalinger/Utbetalinger/Utbetalingsdatoer%2C+feriepenger+og+skattetrekk?kap=499628\" target=\"_blank\">Les om sykepenger og saksbehandlingstider.</a>',
+    },
+};
 
 const SendtSoknadSelvstendigStatuspanel = ({ soknad }) => {
     const ETT_AAR_SIDEN = new Date();
@@ -11,14 +24,14 @@ const SendtSoknadSelvstendigStatuspanel = ({ soknad }) => {
 
     return (<Statuspanel>
         <Statusopplysninger>
-            <StatusNokkelopplysning tittel={getLedetekst('statuspanel.status')}>
-                <p>{getLedetekst('sykepengesoknad.status.SENDT.til-nav')}</p>
+            <StatusNokkelopplysning tittel={texts.status}>
+                <p>{texts.sendtTilNav}</p>
             </StatusNokkelopplysning>
-            <StatusNokkelopplysning tittel={getLedetekst('statuspanel.dato.innsendt')}>
+            <StatusNokkelopplysning tittel={texts.innsendt}>
                 <p>{tilLesbarDatoMedArstall(soknad.innsendtDato)}</p>
             </StatusNokkelopplysning>
-            <SykmeldingNokkelOpplysning className="sist" tittel={getLedetekst('sykepengesoknad.sykepengeinfo.tittel')}>
-                <p dangerouslySetInnerHTML={getHtmlLedetekst('sykepengesoknad.sykepengeinfo.til-nav')} />
+            <SykmeldingNokkelOpplysning className="sist" tittel={texts.tittel}>
+                <p dangerouslySetInnerHTML={texts.tilNav} />
             </SykmeldingNokkelOpplysning>
         </Statusopplysninger>
         {

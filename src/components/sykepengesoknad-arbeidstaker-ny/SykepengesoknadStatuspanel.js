@@ -1,17 +1,22 @@
 import React from 'react';
-import { getLedetekst, sykepengesoknadstatuser } from '@navikt/digisyfo-npm';
+import { sykepengesoknadstatuser } from '@navikt/digisyfo-npm';
 import Statuspanel, { StatusNokkelopplysning, Statusopplysninger } from '../Statuspanel';
 import hentStatustekst from '../../utils/soknad-felles/hentSoknadStatustekst';
 import hentSykepengetekst from '../../utils/soknad-felles/hentSykepengetekst';
 import { soknad as soknadPt } from '../../propTypes';
 import { VerktoyKnapp, Verktoylinje } from '../Verktoylinje';
 
+const texts = {
+    status: 'Status',
+    tittel: 'Utbetaling av sykepenger',
+};
+
 const StatusOgSykepengeopplysninger = ({ soknad }) => {
     return (<Statusopplysninger>
-        <StatusNokkelopplysning tittel={getLedetekst('statuspanel.status')}>
+        <StatusNokkelopplysning tittel={texts.status}>
             <p>{hentStatustekst(soknad)}</p>
         </StatusNokkelopplysning>
-        <StatusNokkelopplysning tittel={getLedetekst('sykepengesoknad.sykepengeinfo.tittel')}>
+        <StatusNokkelopplysning tittel={texts.tittel}>
             <p dangerouslySetInnerHTML={hentSykepengetekst(soknad)} />
         </StatusNokkelopplysning>
     </Statusopplysninger>);

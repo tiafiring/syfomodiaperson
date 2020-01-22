@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-    getLedetekst,
     keyValue,
     Utvidbar,
 } from '@navikt/digisyfo-npm';
 import * as moterPropTypes from '../../propTypes';
 import { NAV_VEILEDER } from '../../konstanter';
 import BesvarteTidspunkter from './BesvarteTidspunkter';
+
+const texts = {
+    flereTidpunkt: '+ Legg til tidspunkt',
+    foreslattTidligere: 'Tidspunkt foreslått tidligere',
+};
 
 export const erSamtidig = (createdA, createdB, offset = 1000) => {
     const a = createdA.getTime();
@@ -77,7 +81,7 @@ const Svarstatus = (props) => {
                 fnr={fnr}
                 ledetekster={ledetekster} />
             <button className="nyetidspunktknapp" onClick={visFlereAlternativ}>
-                {getLedetekst('mote.bookingstatus.knapp.flere-tidspunkt', ledetekster)}</button>
+                {texts.flereTidpunkt}</button>
             {children}
         </div>
         {
@@ -85,7 +89,7 @@ const Svarstatus = (props) => {
                 ikon="svg/kalender--sort.svg"
                 ikonHover="svg/kalender--blaa.svg"
                 className="blokk"
-                tittel={getLedetekst('mote.bookingstatus.tidspunkt-foreslatt-tidligere.tittel', ledetekster)}>
+                tittel={texts.foreslattTidligere}>
                 <BesvarteTidspunkter
                     mote={mote}
                     alternativer={gamleAlternativer}

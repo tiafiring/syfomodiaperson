@@ -3,16 +3,19 @@ import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 import AlertStripe from 'nav-frontend-alertstriper';
 import KnappBase from 'nav-frontend-knapper';
-import {
-    getLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
+import { keyValue } from '@navikt/digisyfo-npm';
 import Tidspunkter from './Tidspunkter';
 import {
     genererDato,
     erGyldigKlokkeslett,
     erGyldigDato,
 } from '../utils';
+
+const texts = {
+    leggTil: 'Felere alterntiver',
+    send: 'Send',
+    avbryt: 'Avbryt',
+};
 
 const FLERE_TIDSPUNKTER_SKJEMANAVN = 'flereAlternativ';
 
@@ -43,7 +46,6 @@ const Feilmelding = () => {
 export const FlereTidspunktSkjema = (props) => {
     const {
         fnr,
-        ledetekster,
         mote,
         opprettFlereAlternativ,
         senderNyeAlternativ,
@@ -63,7 +65,7 @@ export const FlereTidspunktSkjema = (props) => {
                 <Tidspunkter antallNyeTidspunkt={antallNyeTidspunkt} skjemanavn={FLERE_TIDSPUNKTER_SKJEMANAVN} />
                 <div className="blokk--l">
                     <button type="button" className="lenke" onClick={flereAlternativ}>
-                        {getLedetekst('mote.bookingstatus.fleretidspunkt.leggtil', ledetekster)}
+                        {texts.leggTil}
                     </button>
                 </div>
                 {
@@ -74,9 +76,9 @@ export const FlereTidspunktSkjema = (props) => {
                     className="knapp--enten"
                     spinner={senderNyeAlternativ}
                     disabled={senderNyeAlternativ}>
-                    {`${getLedetekst('mote.bookingstatus.fleretidspunkt.send', ledetekster)}`}
+                    {texts.send}
                 </KnappBase>
-                <button type="button" className="lenke" onClick={() => { avbrytFlereAlternativ(); }}>{getLedetekst('mote.bookingstatus.fleretidspunkt.avbryt', ledetekster)}</button>
+                <button type="button" className="lenke" onClick={() => { avbrytFlereAlternativ(); }}>{texts.avbryt}</button>
             </form>
         </div>
     );

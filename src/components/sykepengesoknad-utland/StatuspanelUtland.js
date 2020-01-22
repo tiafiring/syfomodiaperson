@@ -1,22 +1,29 @@
 import React from 'react';
 import {
     tilLesbarDatoMedArstall,
-    getLedetekst,
     sykepengesoknadstatuser,
 } from '@navikt/digisyfo-npm';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { soknad as soknadPt } from '../../propTypes';
 import Statuspanel, { StatusNokkelopplysning, Statusopplysninger } from '../Statuspanel';
 
+const texts = {
+    sendt: 'Sendt til NAV',
+    sender: 'Sender til NAV',
+    hjelpetekst: 'Du har gjort det riktig! Det kan bare ta noen minutter før den er kommet fram til mottakeren. Du trenger ikke gjøre noe mer.',
+    dato: 'Dato',
+    status: 'Status',
+};
+
 const { SENDT, TIL_SENDING } = sykepengesoknadstatuser;
 
 const getStatusTekst = (soknad) => {
     switch (soknad.status) {
         case SENDT: {
-            return getLedetekst('sykepengesoknad-utland.status.sendt');
+            return texts.sendt;
         }
         case TIL_SENDING: {
-            return getLedetekst('sykepengesoknad-utland.status.til-sending');
+            return texts.sender;
         }
         default: {
             return 'Ukjent status';
@@ -25,12 +32,12 @@ const getStatusTekst = (soknad) => {
 };
 
 export const tilSendingHjelpetekst = () => {
-    return (<Hjelpetekst>{getLedetekst('sykepengesoknad.til-sending.hjelpetekst.tekst')}</Hjelpetekst>);
+    return (<Hjelpetekst>{texts.hjelpetekst}</Hjelpetekst>);
 };
 
 const SendtDato = ({ soknad }) => {
     return (<StatusNokkelopplysning
-        tittel={getLedetekst('sykepengesoknad.sykepengeinfo.tittel.dato')}>
+        tittel={texts.dato}>
         <p>{tilLesbarDatoMedArstall(soknad.innsendtDato)}</p>
     </StatusNokkelopplysning>);
 };
@@ -44,7 +51,7 @@ const StatuspanelUtland = ({ soknad }) => {
     return (<Statuspanel>
         <Statusopplysninger>
             <StatusNokkelopplysning
-                tittel={getLedetekst('sykepengesoknad.status-2.tittel')}>
+                tittel={texts.status}>
                 {
                     soknad.status === TIL_SENDING
                         ? (<div>

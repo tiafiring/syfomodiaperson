@@ -1,13 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-    getLedetekst,
     keyValue,
     sorterSykmeldinger,
     sykmeldingstatuser,
 } from '@navikt/digisyfo-npm';
 import SykmeldingTeasere from './SykmeldingTeasere';
 import SykmeldingerSorteringContainer from './SykmeldingerSorteringContainer';
+
+const texts = {
+    ingenSykmeldinger: 'Tidligere sykmeldinger',
+    ingenNyeSykmeldinger: 'Du har ingen nye sykmeldinger',
+    nyeSykmeldinger: 'Nye sykmeldinger',
+};
 
 const DineSykmeldinger = ({ sykmeldinger = [], ledetekster = {}, sortering, fnr }) => {
     const nyeSykmeldinger = sykmeldinger.filter((sykmld) => {
@@ -20,8 +25,8 @@ const DineSykmeldinger = ({ sykmeldinger = [], ledetekster = {}, sortering, fnr 
     return (<div>
         <SykmeldingTeasere
             sykmeldinger={sorterSykmeldinger(nyeSykmeldinger)}
-            tittel={getLedetekst('dine-sykmeldinger.nye-sykmeldinger.tittel', ledetekster)}
-            ingenSykmeldingerMelding={getLedetekst('dine-sykmeldinger.nye-sykmeldinger.ingen-sykmeldinger.melding', ledetekster)}
+            tittel={texts.nyeSykmeldinger}
+            ingenSykmeldingerMelding={texts.ingenNyeSykmeldinger}
             className="js-nye-sykmeldinger"
             ledetekster={ledetekster}
             fnr={fnr}
@@ -29,8 +34,8 @@ const DineSykmeldinger = ({ sykmeldinger = [], ledetekster = {}, sortering, fnr 
         {
             tidligereSykmeldinger.length > 0 && <SykmeldingTeasere
                 sykmeldinger={sorterSykmeldinger(tidligereSykmeldinger, tidligereSortering)}
-                tittel={getLedetekst('dine-sykmeldinger.tidligere-sykmeldinger.tittel', ledetekster)}
-                ingenSykmeldingerMelding={getLedetekst('dine-sykmeldinger.tidligere-sykmeldinger.ingen-sykmeldinger.melding', ledetekster)}
+                tittel={texts.ingenSykmeldinger}
+                ingenSykmeldingerMelding={texts.ingenSykmeldinger}
                 className="js-tidligere-sykmeldinger"
                 ledetekster={ledetekster}
                 fnr={fnr}

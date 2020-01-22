@@ -2,8 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Knapp from 'nav-frontend-knapper';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { sykmeldingHarSoknad } from '../selectors/soknaderSelectors';
+
+const texts = {
+    angre: 'Endre opplysninger',
+};
 
 function Verktoy({ vis }) {
     return vis ? (
@@ -13,7 +16,7 @@ function Verktoy({ vis }) {
                     type="standard"
                     mini
                     disabled>
-                    {getLedetekst('din-sykmelding.godkjennt.angre')}
+                    {texts.angre}
                 </Knapp>
             </div>
         </div>

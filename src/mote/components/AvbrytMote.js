@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import {
-    getLedetekst,
     keyValue,
 } from '@navikt/digisyfo-npm';
 import * as moterPropTypes from '../../propTypes';
@@ -12,6 +11,13 @@ import KnappBase from 'nav-frontend-knapper';
 import * as epostinnholdActions from '../../actions/epostinnhold_actions';
 import Innholdsviser from './Innholdsviser';
 import Epostmottakere from './Epostmottakere';
+
+const texts = {
+    overskrift: 'Avbryt møteforespørsel',
+    feil: 'Beklager, det oppstod en…Prøv igjen litt senere.',
+    avbryt: 'Avbryt',
+    submit: 'Send',
+};
 
 export const mapStateToInnholdsviserProps = (state) => {
     return {
@@ -32,14 +38,14 @@ const AvbrytMote = (props) => {
     const { ledetekster, mote, avbrytFeilet, avbryter, avbrytHref, onSubmit, arbeidstaker } = props;
 
     return (<div className="epostinnhold">
-        <h2 className="epostinnhold__tittel">{getLedetekst('mote.avbrytmote.overskrift', ledetekster)}</h2>
+        <h2 className="epostinnhold__tittel">{texts.overskrift}</h2>
         <Epostmottakere mote={mote} ledetekster={ledetekster} arbeidstaker={arbeidstaker} />
         <InnholdsviserContainer mote={mote} ledetekster={ledetekster} />
         <div aria-live="polite" role="alert">
             { avbrytFeilet && (<div className="blokk">
                 <AlertStripe
                     type="advarsel">
-                    <p>{getLedetekst('mote.avbrytmote.feil', ledetekster)}</p>
+                    <p>{texts.feil}</p>
                 </AlertStripe>
             </div>)}
         </div>
@@ -50,9 +56,9 @@ const AvbrytMote = (props) => {
                 disabled={avbryter}
                 className="knapp--enten"
                 onClick={onSubmit}>
-                {getLedetekst('mote.avbrytmote.knapp.submit', ledetekster)}
+                {texts.submit}
             </KnappBase>
-            <Link className="lenke" to={avbrytHref}>{getLedetekst('mote.avbrytmote.knapp.avbryt', ledetekster)}</Link>
+            <Link className="lenke" to={avbrytHref}>{texts.avbryt}</Link>
         </div>
     </div>);
 };

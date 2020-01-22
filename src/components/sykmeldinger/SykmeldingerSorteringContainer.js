@@ -2,15 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Select } from 'nav-frontend-skjema';
-import {
-    getLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
 import * as actionCreators from '../../actions/sykmeldinger_actions';
 
-const DropdownContainer = ({ alternativer, sorterSykmeldinger, ledetekster, status }) => {
+const texts = {
+    dato: 'Dato',
+    arbeidsgiver: 'Arbeidsgiver',
+    label: 'Sorter etter',
+};
+
+const DropdownContainer = ({ alternativer, sorterSykmeldinger, status }) => {
     return (<Select
-        label={getLedetekst('dine-sykmeldinger.sorter.label', ledetekster)}
+        label={texts.label}
         aria-controls={`sykmelding-liste-${status}`}
         onChange={(event) => {
             sorterSykmeldinger(event.target.value, status);
@@ -24,7 +26,6 @@ const DropdownContainer = ({ alternativer, sorterSykmeldinger, ledetekster, stat
 DropdownContainer.propTypes = {
     alternativer: PropTypes.array,
     sorterSykmeldinger: PropTypes.func,
-    ledetekster: keyValue,
     status: PropTypes.string,
 };
 
@@ -34,10 +35,10 @@ function mapStateToProps(state) {
     return {
         ledetekster,
         alternativer: [{
-            tekst: getLedetekst('dine-sykmeldinger.sorter.dato', ledetekster),
+            tekst: texts.dato,
             verdi: 'fom',
         }, {
-            tekst: getLedetekst('dine-sykmeldinger.sorter.arbeidsgiver', ledetekster),
+            tekst: texts.arbeidsgiver,
             verdi: 'arbeidsgiver',
         }],
     };
