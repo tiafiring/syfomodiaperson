@@ -1,6 +1,6 @@
 import React from 'react';
 import { soknad as soknadPt } from '../../propTypes';
-import Statuspanel, { StatusNokkelopplysning } from '../Statuspanel';
+import { StatusNokkelopplysning } from '../Statuspanel';
 import hentSykepengetekst from '../../utils/soknad-felles/hentSykepengetekst';
 import hentSoknadStatustekst from '../../utils/soknad-felles/hentSoknadStatustekst';
 
