@@ -17,7 +17,7 @@ import {
 } from '../../utils/sykepengesoknadUtils';
 import {
     ARBEIDSLEDIG,
-    ARBEIDSTAKERE,
+    ARBEIDSTAKERE, BEHANDLINGSDAGER,
     OPPHOLD_UTLAND,
     SELVSTENDIGE_OG_FRILANSERE,
 } from '../../enums/soknadtyper';
@@ -121,6 +121,7 @@ const beregnUndertekst = (soknad) => {
     switch (soknad.soknadstype) {
         case OPPHOLD_UTLAND:
         case ARBEIDSLEDIG:
+        case BEHANDLINGSDAGER:
         case SELVSTENDIGE_OG_FRILANSERE: {
             return soknad.status === SENDT && soknad.innsendtDato
                 ? textSendtTilNav(tilLesbarDatoMedArstall(soknad.innsendtDato))
