@@ -34,6 +34,7 @@ export const HOST_NAMES = {
     SYFOOPPFOLGINGSPLANSERVICE: 'syfooppfolgingsplanservice',
     SYFOOVERSIKTSRV: 'syfooversiktsrv',
     SYFOPERSON: 'syfoperson',
+    SYFOSMREGISTER: 'syfosmregister',
     SYFOSOKNAD: 'syfosoknad',
     SYFOVEILEDER: 'syfoveileder',
     SYFOVEILEDEROPPGAVER: 'syfoveilederoppgaver',
