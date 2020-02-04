@@ -14,20 +14,6 @@ const texts = {
     bjorn: 'Hei, her sjekker du opplysningene fra den som sykmeldte deg. Stemmer det med det dere ble enige om? Du velger selv om du vil bruke sykmeldingen.',
 };
 
-const navn = (pasient) => {
-    if (pasient.mellomnavn) {
-        return `${pasient.fornavn} ${pasient.mellomnavn} ${pasient.etternavn}`;
-    }
-    return `${pasient.fornavn} ${pasient.etternavn}`;
-};
-
-export const getSykmeldtFornavn = (sykmelding) => {
-    return sykmelding.pasient.mellomnavn
-        ? `${sykmelding.pasient.fornavn} ${sykmelding.pasient.mellomnavn}`
-        : `${sykmelding.pasient.fornavn}`;
-};
-
-
 const DinSykmelding = ({ sykmelding, ledetekster, visEldreSykmeldingVarsel, eldsteSykmeldingId }) => {
     return (<div>
         <Bjorn
@@ -62,7 +48,6 @@ const DinSykmelding = ({ sykmelding, ledetekster, visEldreSykmeldingVarsel, elds
                 className="panelHeader__ikon panelHeader__ikon--hoykontrast"
                 src="/sykefravaer/img/svg/person-highcontrast.svg"
                 alt="Du" />
-            <h2 className="panelHeader__tittel">{navn(sykmelding.pasient)}</h2>
         </header>
         <div className="panel blokk">
             <DineSykmeldingOpplysninger

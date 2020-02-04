@@ -1,4 +1,4 @@
-import { parseSykmelding } from '@navikt/digisyfo-npm';
+import { oldFormatSMForAG } from '../utils/sykmeldinger/sykmeldingParser';
 
 const initiellState = {
     henter: false,
@@ -26,7 +26,7 @@ export default function arbeidsgiversSykmeldinger(state = initiellState, action)
             return {
                 henter: false,
                 hentingFeilet: false,
-                data: action.data.map(parseSykmelding),
+                data: action.data.map((sykmelding) => {return oldFormatSMForAG(sykmelding, action.sykmeldtFnr);}),
             };
         }
         default: {

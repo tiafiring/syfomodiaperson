@@ -5,7 +5,7 @@ import {
     erArbeidsforEtterPerioden,
     erHensynPaaArbeidsplassenInformasjon,
     sykmeldingperioderSortertEldstTilNyest,
-} from '../../utils/sykmeldingUtils';
+} from '../../utils/sykmeldinger/sykmeldingUtils';
 import Diagnoser from './Diagnoser';
 import Perioder from './Perioder';
 import EkstraDiagnoseInformasjon from './EkstraDiagnoseInformasjon';

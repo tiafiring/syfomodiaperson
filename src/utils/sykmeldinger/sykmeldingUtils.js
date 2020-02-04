@@ -1,9 +1,9 @@
-import { sykmeldingstatuser } from '@navikt/digisyfo-npm';
+import { gamleSMStatuser } from './sykmeldingstatuser';
 import {
     ARBEIDSLEDIG,
     NAERINGSDRIVENDE,
     FRILANSER,
-} from '../enums/arbeidssituasjoner';
+} from '../../enums/arbeidssituasjoner';
 
 export const finnAvventendeSykmeldingTekst = (sykmelding) => {
     const avventendePeriode = sykmelding.mulighetForArbeid.perioder
@@ -121,7 +121,7 @@ export const arbeidsgivernavnEllerArbeidssituasjon = (sykmelding) => {
 
 export const sykmeldingerMedStatusSendt = (sykmeldinger) => {
     return sykmeldinger.filter((sykmelding) => {
-        return sykmelding.status === sykmeldingstatuser.SENDT;
+        return sykmelding.status === gamleSMStatuser.SENDT;
     });
 };
 

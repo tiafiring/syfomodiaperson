@@ -108,3 +108,12 @@ export const tilLesbarPeriodeMedArUtenManednavn = (fomArg, tomArg) => {
 export const dagerMellomDatoer = (startDato, sluttDato) => {
     return Math.round(Math.abs((sluttDato.getTime() - startDato.getTime()) / (ANTALL_MS_DAG)));
 };
+
+export const toDate = (dato) => {
+    if (typeof dato === 'undefined' || dato === null) {
+        return null;
+    } else if (typeof date === 'string' && dato.includes('T') && !dato.includes('Z')) {
+        return new Date(`${dato}Z`);
+    }
+    return new Date(dato);
+};

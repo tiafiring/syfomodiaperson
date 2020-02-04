@@ -187,10 +187,11 @@ const startServer = (html) => {
             const url = `http://syfosmregister.default/api/v1/internal/sykmeldinger?fnr=${fnr}`;
             axios.get(url, options)
                 .then(response => {
-                    res.send(response.data) // <= send data to the client
+                    res.send(response.data)
                 })
                 .catch(err => {
-                    res.send({ err }) // <= send error
+                    console.error('Error in proxy for syfosmregister', err);
+                    res.send({ err })
                 });
         });
     }

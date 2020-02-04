@@ -1,1113 +1,656 @@
 [
   {
-    "arbeidsevne": {
-      "tilretteleggingArbeidsplass": "Trenger nye sko",
-      "tiltakAndre": "Pasienten vil ha nye sko!",
-      "tiltakNAV": "NAV må gi pasienten skosåler til de nye skoene"
-    },
-    "arbeidsgiver": "TEST BARNEHAGE AS",
-    "bekreftelse": {
-      "sykmelder": "Lego Legesen",
-      "sykmelderTlf": "99889988",
-      "utstedelsesdato": "2019-06-08"
-    },
-    "diagnose": {
-      "bidiagnoser": [
+    "id": "e425a750-7f39-4974-9a06-fa1775f987c9",
+    "mottattTidspunkt": "2020-01-21T23:00:00Z",
+    "behandlingsutfall": {
+      "status": "MANUAL_PROCESSING",
+      "ruleHits": [
         {
-          "diagnose": "GANGLION SENE",
-          "diagnosekode": "L87",
-          "diagnosesystem": "ICPC-2"
+          "messageForSender": "Behandlers TSS-ident er ikke funnet automatisk av systemet",
+          "messageForUser": "Behandlers TSS-ident er ikke funnet automatisk av systemet",
+          "ruleName": "TSS_IDENT_MANGLER",
+          "ruleStatus": "MANUAL_PROCESSING"
+        }
+      ]
+    },
+    "legekontorOrgnummer": "223456789",
+    "arbeidsgiver": {
+      "navn": "PONTYPANDY FIRE SERVICE",
+      "stillingsprosent": 100
+    },
+    "sykmeldingsperioder": [
+      {
+        "aktivitetIkkeMulig": {
+          "medisinskArsak": {
+            "beskrivelse": "Medisinsk årsak som hindrer arbeid",
+            "arsak": [
+              "TILSTAND_HINDRER_AKTIVITET",
+              "ANNET"
+            ]
+          },
+          "arbeidsrelatertArsak": {
+            "beskrivelse": "Forhold på arbeidsplassen vanskeliggjør arbeid",
+            "arsak": [
+              "MANGLENDE_TILRETTELEGGING",
+              "ANNET"
+            ]
+          }
+        },
+        "fom": "2020-01-22",
+        "tom": "2020-02-22",
+        "gradert": null,
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "AKTIVITET_IKKE_MULIG"
+      },
+      {
+        "aktivitetIkkeMulig": null,
+        "fom": "2020-01-25",
+        "tom": "2020-02-20",
+        "gradert": {
+          "grad": 50,
+          "reisetilskudd": true
+        },
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "GRADERT"
+      },
+      {
+        "aktivitetIkkeMulig": null,
+        "fom": "2020-01-25",
+        "tom": "2020-02-20",
+        "gradert": {
+          "grad": 50,
+          "reisetilskudd": false
+        },
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "GRADERT"
+      },
+      {
+        "aktivitetIkkeMulig": null,
+        "fom": "2020-01-25",
+        "tom": "2020-02-20",
+        "gradert": null,
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "REISETILSKUDD"
+      },
+      {
+        "aktivitetIkkeMulig": null,
+        "fom": "2020-01-25",
+        "tom": "2020-01-25",
+        "gradert": null,
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "REISETILSKUDD"
+      },
+      {
+        "aktivitetIkkeMulig": null,
+        "fom": "2020-01-25",
+        "tom": "2020-01-25",
+        "gradert": null,
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "AVVENTENDE"
+      },
+      {
+        "aktivitetIkkeMulig": null,
+        "fom": "2020-01-25",
+        "tom": "2020-02-25",
+        "gradert": null,
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "AVVENTENDE"
+      }
+    ],
+    "sykmeldingStatus": {
+      "statusEvent": "SENDT",
+      "timestamp": "2020-01-29T09:38:05.414834Z",
+      "arbeidsgiver": {
+        "orgnummer": "110110110",
+        "juridiskOrgnummer": "110110110",
+        "orgNavn": "PONTYPANDY FIRE SERVICE"
+      },
+      "sporsmalOgSvarListe": [
+        {
+          "tekst": "Jobber du?",
+          "svar": {
+            "svar": "ARBEIDSTAKER",
+            "svartype": "ARBEIDSSITUASJON"
+          },
+          "shortName": "ARBEIDSSITUASJON"
+        },
+        {
+          "tekst": "Har du forsikring?",
+          "svar": {
+            "svar": "true",
+            "svartype": "JA_NEI"
+          },
+          "shortName": "FORSIKRING"
+        },
+        {
+          "tekst": "Har du annet fravær?",
+          "svar": {
+            "svar": "false",
+            "svartype": "JA_NEI"
+          },
+          "shortName": "FRAVAER"
+        },
+        {
+          "tekst": "Fravaersperioder?!",
+          "svar": {
+            "svar": "Perioder",
+            "svartype": "PERIODER"
+          },
+          "shortName": "PERIODE"
+        },
+        {
+          "tekst": "Ny nærmeste leder?!",
+          "svar": {
+            "svar": "true",
+            "svartype": "JA_NEI"
+          },
+          "shortName": "NY_NARMESTE_LEDER"
+        }
+      ]
+    },
+    "medisinskVurdering": {
+      "hovedDiagnose": {
+        "kode": "L87",
+        "system": "2.16.578.1.12.4.1.1.7170",
+        "tekst": "TENDINITT INA"
+      },
+      "biDiagnoser": [
+        {
+          "kode": "L87",
+          "system": "2.16.578.1.12.4.1.1.7170",
+          "tekst": "GANGLION SENE"
         }
       ],
-      "fravaerBeskrivelse": "Medising årsak i kategorien annet",
-      "fravaersgrunnLovfestet": "Lovfestet grunn!",
-      "hoveddiagnose": {
-        "diagnose": "TENDINITT INA",
-        "diagnosekode": "L87",
-        "diagnosesystem": "ICPC-2"
-      },
       "svangerskap": true,
-      "yrkesskade": true,
-      "yrkesskadeDato": "2019-06-08"
-    },
-    "friskmelding": {
-      "antarReturAnnenArbeidsgiver": true,
-      "antarReturSammeArbeidsgiver": true,
-      "antattDatoReturSammeArbeidsgiver": "2019-12-10",
-      "arbeidsfoerEtterPerioden": true,
-      "hensynPaaArbeidsplassen": "Må ta det pent",
-      "tilbakemeldingReturArbeid": "2019-12-10",
-      "utenArbeidsgiverAntarTilbakeIArbeid": false,
-      "utenArbeidsgiverAntarTilbakeIArbeidDato": null,
-      "utenArbeidsgiverTilbakemelding": null
-    },
-    "id": "2522be27-2aed-4bed-8912-be4fa3fd89b0",
-    "identdato": "2019-06-08",
-    "innsendtArbeidsgivernavn": "PONTYPANDY FIRE SERVICE",
-    "innspillTilArbeidsgiver": "Arbeidsgiver må gjøre noe!",
-    "meldingTilNav": {
-      "navBoerTaTakISaken": true,
-      "navBoerTaTakISakenBegrunnelse": "Dette er viktig!!"
-    },
-    "mottakendeArbeidsgiver": {
-      "juridiskOrgnummer": "110110110",
-      "navn": "PONTYPANDY FIRE SERVICE",
-      "virksomhetsnummer": "110110110"
-    },
-    "mulighetForArbeid": {
-      "aarsakAktivitetIkkeMulig433": "andre årsaker til sykefravær",
-      "aarsakAktivitetIkkeMulig434": "andre årsaker til sykefravær",
-      "aktivitetIkkeMulig433": [
-        "Annet"
-      ],
-      "aktivitetIkkeMulig434": [
-        "Annet"
-      ],
-      "perioder": [
-        {
-          "avventende": null,
-          "behandlingsdager": null,
-          "fom": "2019-06-08",
-          "grad": 100,
-          "reisetilskudd": null,
-          "tom": "2019-12-10"
-        },
-        {
-          "avventende": "Tilbakemelding",
-          "behandlingsdager": null,
-          "fom": "2019-09-01",
-          "grad": 21,
-          "reisetilskudd": null,
-          "tom": "2019-12-15"
-        }
-      ]
-    },
-    "naermesteLederStatus": null,
-    "orgnummer": "110110110",
-    "pasient": {
-      "etternavn": "Jones",
-      "fnr": "110110110110",
-      "fornavn": "Samuel",
-      "mellomnavn": "\"Sam\""
-    },
-    "sendtdato": "2018-09-06T10:29:12",
-    "skalViseSkravertFelt": true,
-    "sporsmal": {
-      "arbeidssituasjon": "ARBEIDSTAKER",
-      "dekningsgrad": null,
-      "fravaersperioder": [],
-      "harAnnetFravaer": null,
-      "harForsikring": null
-    },
-    "startLegemeldtFravaer": "2019-06-08",
-    "status": "AVBRUTT",
-    "stillingsprosent": 100,
-    "tilbakedatering": {
-      "dokumenterbarPasientkontakt": "2018-09-05",
-      "tilbakedatertBegrunnelse": "Pasienten ville heller ligge på sofaen!"
-    },
-    "utdypendeOpplysninger": {
-      "grupper": [
-        {
-          "id": "6.2",
-          "sporsmal": [
-            {
-              "id": "6.2.1",
-              "svar": "Langvarig korsryggsmerter. Ømhet og smerte"
-            },
-            {
-              "id": "6.2.2",
-              "svar": "Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket"
-            },
-            {
-              "id": "6.2.3",
-              "svar": "Nei"
-            },
-            {
-              "id": "6.2.4",
-              "svar": "Henvist til fysio"
-            }
-          ]
-        }
-      ],
-      "henvisningUtredningBehandling": "Henvist til fysio",
-      "paavirkningArbeidsevne": "Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket",
-      "resultatAvBehandling": "Nei",
-      "sykehistorie": "Langvarig korsryggsmerter. Ømhet og smerte",
-      "sykehistoriePunkt63": "Langvarig korsryggsmerter. Ømhet og smerte. Nytt punkt 6.3",
-      "henvisningUtredningBehandlingPunkt63": "Henvist til fysio. Nytt punkt 6.3"
-    },
-    "valgtArbeidssituasjon": null
-  },
-  {
-    "arbeidsevne": {
-      "tilretteleggingArbeidsplass": "Det kan bare være små branner",
-      "tiltakAndre": null,
-      "tiltakNAV": null
-    },
-    "arbeidsgiver": "TEST BUTIKK AS",
-    "bekreftelse": {
-      "sykmelder": "Lego Legesen",
-      "sykmelderTlf": "99889988",
-      "utstedelsesdato": "2019-06-08"
-    },
-    "diagnose": {
-      "bidiagnoser": [
-        {
-          "diagnose": "Annen Diagnose",
-          "diagnosekode": "L87",
-          "diagnosesystem": "ICPC-2"
-        }
-      ],
-      "fravaerBeskrivelse": "Medising årsak i kategorien annet",
-      "fravaersgrunnLovfestet": null,
-      "hoveddiagnose": {
-        "diagnose": "TENDINITT INA",
-        "diagnosekode": "L87",
-        "diagnosesystem": "ICPC-2"
-      },
-      "svangerskap": false,
       "yrkesskade": false,
       "yrkesskadeDato": null
     },
-    "friskmelding": {
-      "antarReturAnnenArbeidsgiver": true,
-      "antarReturSammeArbeidsgiver": true,
-      "antattDatoReturSammeArbeidsgiver": "2019-12-10",
-      "arbeidsfoerEtterPerioden": true,
-      "hensynPaaArbeidsplassen": "Må ta det pent",
-      "tilbakemeldingReturArbeid": "2019-12-10",
-      "utenArbeidsgiverAntarTilbakeIArbeid": false,
-      "utenArbeidsgiverAntarTilbakeIArbeidDato": null,
-      "utenArbeidsgiverTilbakemelding": "2020-04-15"
-    },
-    "id": "d096644c-9ae4-4bb0-b32b-fc733389a7a5",
-    "identdato": "2018-11-28",
-    "innsendtArbeidsgivernavn": "PONTYPANDY FIRE SERVICE",
-    "innspillTilArbeidsgiver": "Arbeidsgiver må være støttende!",
-    "meldingTilNav": {
-      "navBoerTaTakISaken": true,
-      "navBoerTaTakISakenBegrunnelse": "NAV må hjelpe til!"
-    },
-    "mottakendeArbeidsgiver": {
-      "juridiskOrgnummer": "110110110",
-      "navn": "PONTYPANDY FIRE SERVICE",
-      "virksomhetsnummer": "110110110"
-    },
-    "mulighetForArbeid": {
-      "aarsakAktivitetIkkeMulig433": "Dårlig helse!",
-      "aarsakAktivitetIkkeMulig434": "For høye fysiske krav",
-      "aktivitetIkkeMulig433": [
-        "Helsetilstanden hindrer pasienten å være i aktivitet",
-        "Annet"
-      ],
-      "aktivitetIkkeMulig434": [
-        "Annet"
-      ],
-      "perioder": [
-        {
-          "avventende": null,
-          "behandlingsdager": null,
-          "fom": "2019-09-21",
-          "grad": 100,
-          "reisetilskudd": true,
-          "tom": "2019-10-01"
-        },
-        {
-          "avventende": "Dette er innspill til arbeidsgiver!",
-          "behandlingsdager": null,
-          "fom": "2019-06-08",
-          "grad": 100,
-          "reisetilskudd": null,
-          "tom": "2019-06-30"
-        },
-        {
-          "avventende": null,
-          "behandlingsdager": null,
-          "fom": "2019-07-01",
-          "grad": 79.87654,
-          "reisetilskudd": null,
-          "tom": "2019-09-20"
-        },
-        {
-          "avventende": null,
-          "behandlingsdager": 11,
-          "fom": "2019-10-02",
-          "grad": null,
-          "reisetilskudd": null,
-          "tom": "2019-10-15"
-        }
-      ]
-    },
-    "naermesteLederStatus": null,
-    "orgnummer": "110110110",
-    "pasient": {
-      "etternavn": "Jones",
-      "fnr": "110110110110",
-      "fornavn": "Samuel",
-      "mellomnavn": "\"Sam\""
-    },
-    "sendtdato": "2019-06-08T11:01:06",
-    "skalViseSkravertFelt": true,
-    "sporsmal": {
-      "arbeidssituasjon": "ARBEIDSTAKER",
-      "dekningsgrad": null,
-      "fravaersperioder": [],
-      "harAnnetFravaer": null,
-      "harForsikring": null
-    },
-    "startLegemeldtFravaer": "2019-06-08",
-    "status": "SENDT",
-    "stillingsprosent": 100,
-    "tilbakedatering": {
-      "dokumenterbarPasientkontakt": null,
-      "tilbakedatertBegrunnelse": null
+    "skjermesForPasient": false,
+    "prognose": {
+      "arbeidsforEtterPeriode": true,
+      "hensynArbeidsplassen": "Må ta det pent",
+      "erIArbeid": {
+        "egetArbeidPaSikt": true,
+        "annetArbeidPaSikt": true,
+        "arbeidFOM": "2020-01-22",
+        "vurderingsdato": "2020-01-22"
+      },
+      "erIkkeIArbeid": null
     },
     "utdypendeOpplysninger": {
-      "grupper": [
-        {
-          "id": "6.2",
-          "sporsmal": [
-            {
-              "id": "6.2.1",
-              "svar": "Langvarig korsryggsmerter. Ømhet og smerte"
-            },
-            {
-              "id": "6.2.2",
-              "svar": "Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket"
-            },
-            {
-              "id": "6.2.3",
-              "svar": "Nei"
-            },
-            {
-              "id": "6.2.4",
-              "svar": "Henvist til fysio. TESTTESTTEST!!!!"
-            }
+      "6.2": {
+        "6.2.1": {
+          "sporsmal": "Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.",
+          "svar": "Langvarig korsryggsmerter. Ømhet og smerte",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
           ]
         },
-        {
-          "id": "6.3",
-          "sporsmal": [
-            {
-              "id": "6.3.1",
-              "svar": "svar 6.3.1"
-            },
-            {
-              "id": "6.3.2",
-              "svar": "svar 6.3.2"
-            }
+        "6.2.2": {
+          "sporsmal": "Hvordan påvirker sykdommen arbeidsevnen",
+          "svar": "Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket.",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
+          ]
+        },
+        "6.2.3": {
+          "sporsmal": "Har behandlingen frem til nå bedret arbeidsevnen?",
+          "svar": "Nei",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
+          ]
+        },
+        "6.2.4": {
+          "sporsmal": "Beskriv Pågående og planlagt henvisning, utredning og/eller behandling",
+          "svar": "Henvist til fysio",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
           ]
         }
-      ],
-      "henvisningUtredningBehandling": "Lorem ipsum dolor sit amet, pro ea suas scripta mnesarchum. Platonem tincidunt per te. Adolescens constituto ut nam. Et nisl quaeque est, rebum soluta gloriatur id eum. Ne rationibus appellantur sea, et alii consectetuer eos, et laudem argumentum his. Vim aliquip ocurreret suscipiantur te, vis cu mutat suscipiantur. Mentitum mandamus definitiones cu nam. Has harum fastidii invenire cu. Mei ut novum scaevola, eos lucilius mandamus ex.",
-      "paavirkningArbeidsevne": "Lorem ipsum dolor sit amet, pro ea suas scripta mnesarchum. Platonem tincidunt per te. Adolescens constituto ut nam. Et nisl quaeque est, rebum soluta gloriatur id eum. Ne rationibus appellantur sea, et alii consectetuer eos, et laudem argumentum his. Vim aliquip ocurreret suscipiantur te, vis cu mutat suscipiantur. Mentitum mandamus definitiones cu nam. Has harum fastidii invenire cu. Mei ut novum scaevola, eos lucilius mandamus ex.",
-      "resultatAvBehandling": "Lorem ipsum dolor sit amet, pro ea suas scripta mnesarchum. Platonem tincidunt per te. Adolescens constituto ut nam. Et nisl quaeque est, rebum soluta gloriatur id eum. Ne rationibus appellantur sea, et alii consectetuer eos, et laudem argumentum his. Vim aliquip ocurreret suscipiantur te, vis cu mutat suscipiantur. Mentitum mandamus definitiones cu nam. Has harum fastidii invenire cu. Mei ut novum scaevola, eos lucilius mandamus ex.",
-      "sykehistorie": "Lorem ipsum dolor sit amet, pro ea suas scripta mnesarchum. Platonem tincidunt per te. Adolescens constituto ut nam. Et nisl quaeque est, rebum soluta gloriatur id eum. Ne rationibus appellantur sea, et alii consectetuer eos, et laudem argumentum his. Vim aliquip ocurreret suscipiantur te, vis cu mutat suscipiantur. Mentitum mandamus definitiones cu nam. Has harum fastidii invenire cu. Mei ut novum scaevola, eos lucilius mandamus ex.",
-      "sykehistoriePunkt63": "Nytt punkt 6.3  Lorem ipsum dolor sit amet, pro ea suas scripta mnesarchum. Platonem tincidunt per te. Adolescens constituto ut nam. Et nisl quaeque est, rebum soluta gloriatur id eum. Ne rationibus appellantur sea, et alii consectetuer eos, et laudem argumentum his. Vim aliquip ocurreret suscipiantur te, vis cu mutat suscipiantur. Mentitum mandamus definitiones cu nam. Has harum fastidii invenire cu. Mei ut novum scaevola, eos lucilius mandamus ex.",
-      "henvisningUtredningBehandlingPunkt63": "Nytt punkt 6.3  Lorem ipsum dolor sit amet, pro ea suas scripta mnesarchum. Platonem tincidunt per te. Adolescens constituto ut nam. Et nisl quaeque est, rebum soluta gloriatur id eum. Ne rationibus appellantur sea, et alii consectetuer eos, et laudem argumentum his. Vim aliquip ocurreret suscipiantur te, vis cu mutat suscipiantur. Mentitum mandamus definitiones cu nam. Has harum fastidii invenire cu. Mei ut novum scaevola, eos lucilius mandamus ex."
+      }
     },
-    "valgtArbeidssituasjon": null
-  },
-  {
-    "arbeidsevne": {
-      "tilretteleggingArbeidsplass": null,
-      "tiltakAndre": null,
-      "tiltakNAV": null
+    "tiltakArbeidsplassen": "Fortsett som sist.",
+    "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. ",
+    "andreTiltak": null,
+    "meldingTilNAV": null,
+    "meldingTilArbeidsgiver": null,
+    "kontaktMedPasient": {
+      "kontaktDato": "2020-01-22",
+      "begrunnelseIkkeKontakt": "Jeg vil tilbakedatere!!!"
     },
-    "arbeidsgiver": "ANNEN ARBEIDSGIVER",
-    "bekreftelse": {
-      "sykmelder": "Lego Legesen",
-      "sykmelderTlf": "99889988",
-      "utstedelsesdato": "2019-06-08"
-    },
-    "diagnose": {
-      "bidiagnoser": [
-        {
-          "diagnose": "Arbeidsløs",
-          "diagnosekode": "L1",
-          "diagnosesystem": "ICPC-29"
-        },
-        {
-          "diagnose": "Pengelens",
-          "diagnosekode": "NOK",
-          "diagnosesystem": "ICPC-12"
-        }
-      ],
-      "fravaerBeskrivelse": null,
-      "fravaersgrunnLovfestet": null,
-      "hoveddiagnose": {
-        "diagnose": "SNART HJEMLØS",
-        "diagnosekode": "L2",
-        "diagnosesystem": "ICPC-29"
+    "behandletTidspunkt": "2020-01-21T22:00:00Z",
+    "behandler": {
+      "fornavn": "Lego",
+      "mellomnavn": "Las",
+      "etternavn": "Legesen",
+      "aktoerId": "1000014797129",
+      "fnr": "99900011122",
+      "hpr": null,
+      "her": 7777777,
+      "adresse": {
+        "gate": "Kirkegårdsveien 3",
+        "postnummer": 1348,
+        "kommune": "Rykkinn",
+        "postboks": null,
+        "land": "Country"
       },
-      "svangerskap": false,
-      "yrkesskade": false,
-      "yrkesskadeDato": null
+      "tlf": "tel:94431152"
     },
-    "friskmelding": {
-      "antarReturAnnenArbeidsgiver": false,
-      "antarReturSammeArbeidsgiver": false,
-      "antattDatoReturSammeArbeidsgiver": null,
-      "arbeidsfoerEtterPerioden": null,
-      "hensynPaaArbeidsplassen": null,
-      "tilbakemeldingReturArbeid": null,
-      "utenArbeidsgiverAntarTilbakeIArbeid": false,
-      "utenArbeidsgiverAntarTilbakeIArbeidDato": null,
-      "utenArbeidsgiverTilbakemelding": null
-    },
-    "id": "cca2c09c-8bd0-45fa-9e67-29e75b0e3500",
-    "identdato": "2019-06-08",
-    "innsendtArbeidsgivernavn": "PONTYPANDY FIRE SERVICE",
-    "innspillTilArbeidsgiver": null,
-    "meldingTilNav": {
-      "navBoerTaTakISaken": false,
-      "navBoerTaTakISakenBegrunnelse": null
-    },
-    "mottakendeArbeidsgiver": {
-      "juridiskOrgnummer": null,
-      "navn": "PONTYPANDY FIRE SERVICE",
-      "virksomhetsnummer": "110110110"
-    },
-    "mulighetForArbeid": {
-      "aarsakAktivitetIkkeMulig433": null,
-      "aarsakAktivitetIkkeMulig434": null,
-      "aktivitetIkkeMulig433": [],
-      "aktivitetIkkeMulig434": [],
-      "perioder": [
-        {
-          "avventende": "Tilbakemelding til arbeidsgiver!",
-          "behandlingsdager": null,
-          "fom": "2019-06-08",
-          "grad": 100,
-          "reisetilskudd": null,
-          "tom": "2019-10-01"
-        },
-        {
-          "avventende": null,
-          "behandlingsdager": null,
-          "fom": "2019-10-02",
-          "grad": 99.999,
-          "reisetilskudd": null,
-          "tom": "2019-10-22"
-        }
-      ]
-    },
-    "naermesteLederStatus": null,
-    "pasient": {
-      "etternavn": "Jones",
-      "fnr": "110110110110",
-      "fornavn": "Samuel",
-      "mellomnavn": "\"Sam\""
-    },
-    "sendtdato": "2019-06-09T10:45:31",
-    "skalViseSkravertFelt": true,
-    "sporsmal": {
-      "arbeidssituasjon": "ARBEIDSLØS",
-      "dekningsgrad": null,
-      "fravaersperioder": [],
-      "harAnnetFravaer": null,
-      "harForsikring": null
-    },
-    "startLegemeldtFravaer": "2019-06-08",
-    "status": "SENDT",
-    "stillingsprosent": 100,
-    "tilbakedatering": {
-      "dokumenterbarPasientkontakt": null,
-      "tilbakedatertBegrunnelse": null
-    },
-    "utdypendeOpplysninger": {
-      "grupper": [],
-      "henvisningUtredningBehandling": null,
-      "paavirkningArbeidsevne": null,
-      "resultatAvBehandling": null,
-      "sykehistorie": null
-    },
-    "valgtArbeidssituasjon": "NAERINGSDRIVENDE"
-  },
-  {
-    "arbeidsevne": {
-      "tilretteleggingArbeidsplass": null,
-      "tiltakAndre": null,
-      "tiltakNAV": null
-    },
-    "arbeidsgiver": "KONKURS BEDRIFT OG VENNER AS",
-    "bekreftelse": {
-      "sykmelder": "Lego Legesen",
-      "sykmelderTlf": "99889988",
-      "utstedelsesdato": "2019-06-08"
-    },
-    "diagnose": {
-      "bidiagnoser": [
-        {
-          "diagnose": "Teit",
-          "diagnosekode": "L1",
-          "diagnosesystem": "ICPC-29"
-        },
-        {
-          "diagnose": "Veldig teit",
-          "diagnosekode": "NOK",
-          "diagnosesystem": "ICPC-12"
-        }
-      ],
-      "fravaerBeskrivelse": null,
-      "fravaersgrunnLovfestet": null,
-      "hoveddiagnose": {
-        "diagnose": "Tull og tøys",
-        "diagnosekode": "L2",
-        "diagnosesystem": "ICPC-29"
-      },
-      "svangerskap": false,
-      "yrkesskade": false,
-      "yrkesskadeDato": null
-    },
-    "friskmelding": {
-      "antarReturAnnenArbeidsgiver": false,
-      "antarReturSammeArbeidsgiver": false,
-      "antattDatoReturSammeArbeidsgiver": null,
-      "arbeidsfoerEtterPerioden": null,
-      "hensynPaaArbeidsplassen": null,
-      "tilbakemeldingReturArbeid": "2020-02-02",
-      "utenArbeidsgiverAntarTilbakeIArbeid": true,
-      "utenArbeidsgiverAntarTilbakeIArbeidDato": "9999-12-31",
-      "utenArbeidsgiverTilbakemelding": "2020-04-16"
-    },
-    "id": "cca2c09c-8bd0-45fa-9e67-29e75b0e3501",
-    "identdato": "2019-06-08",
-    "innsendtArbeidsgivernavn": "PONTYPANDY FIRE SERVICE",
-    "innspillTilArbeidsgiver": null,
-    "meldingTilNav": {
-      "navBoerTaTakISaken": false,
-      "navBoerTaTakISakenBegrunnelse": null
-    },
-    "mottakendeArbeidsgiver": {
-      "juridiskOrgnummer": null,
-      "navn": "PONTYPANDY FIRE SERVICE",
-      "virksomhetsnummer": "110110110"
-    },
-    "mulighetForArbeid": {
-      "aarsakAktivitetIkkeMulig433": null,
-      "aarsakAktivitetIkkeMulig434": null,
-      "aktivitetIkkeMulig433": [],
-      "aktivitetIkkeMulig434": [],
-      "perioder": [
-        {
-          "avventende": null,
-          "behandlingsdager": null,
-          "fom": "2019-06-08",
-          "grad": 48.123,
-          "reisetilskudd": null,
-          "tom": "2019-10-01"
-        },
-        {
-          "avventende": null,
-          "behandlingsdager": null,
-          "fom": "2019-10-02",
-          "grad": 0,
-          "reisetilskudd": true,
-          "tom": "2019-10-22"
-        }
-      ]
-    },
-    "naermesteLederStatus": null,
-    "orgnummer": "110110110",
-    "pasient": {
-      "etternavn": "Jones",
-      "fnr": "110110110110",
-      "fornavn": "Samuel",
-      "mellomnavn": "\"Sam\""
-    },
-    "sendtdato": "2019-06-09T10:45:31",
-    "skalViseSkravertFelt": true,
-    "sporsmal": {
-      "arbeidssituasjon": "ARBEIDSTAKER",
-      "dekningsgrad": null,
-      "fravaersperioder": [],
-      "harAnnetFravaer": null,
-      "harForsikring": null
-    },
-    "startLegemeldtFravaer": "2019-06-08",
-    "status": "SENDT",
-    "stillingsprosent": 100,
-    "tilbakedatering": {
-      "dokumenterbarPasientkontakt": null,
-      "tilbakedatertBegrunnelse": null
-    },
-    "utdypendeOpplysninger": {
-      "grupper": [],
-      "henvisningUtredningBehandling": null,
-      "paavirkningArbeidsevne": null,
-      "resultatAvBehandling": null,
-      "sykehistorie": null,
-      "sykehistoriePunkt63": "Ny Sykmelding pkt. 6.3.1: Test test",
-      "henvisningUtredningBehandlingPunkt63": "Ny Sykmelding pkt. 6.3.2: Test2 test2"
-    },
-    "valgtArbeidssituasjon": "ARBEIDSTAKER"
-  },
-  {
-    "arbeidsevne": {
-      "tilretteleggingArbeidsplass": null,
-      "tiltakAndre": null,
-      "tiltakNAV": null
-    },
-    "arbeidsgiver": null,
-    "bekreftelse": {
-      "sykmelder": "Lego Legesen",
-      "sykmelderTlf": "99889988",
-      "utstedelsesdato": "2019-06-08"
-    },
-    "diagnose": {
-      "bidiagnoser": [
-        {
-          "diagnose": "Teit",
-          "diagnosekode": "L1",
-          "diagnosesystem": "ICPC-29"
-        },
-        {
-          "diagnose": "Veldig teit",
-          "diagnosekode": "NOK",
-          "diagnosesystem": "ICPC-12"
-        }
-      ],
-      "fravaerBeskrivelse": null,
-      "fravaersgrunnLovfestet": null,
-      "hoveddiagnose": {
-        "diagnose": "Tull og tøys",
-        "diagnosekode": "L2",
-        "diagnosesystem": "ICPC-29"
-      },
-      "svangerskap": false,
-      "yrkesskade": false,
-      "yrkesskadeDato": null
-    },
-    "friskmelding": {
-      "antarReturAnnenArbeidsgiver": false,
-      "antarReturSammeArbeidsgiver": false,
-      "antattDatoReturSammeArbeidsgiver": null,
-      "arbeidsfoerEtterPerioden": null,
-      "hensynPaaArbeidsplassen": null,
-      "tilbakemeldingReturArbeid": null,
-      "utenArbeidsgiverAntarTilbakeIArbeid": true,
-      "utenArbeidsgiverAntarTilbakeIArbeidDato": "2019-10-22",
-      "utenArbeidsgiverTilbakemelding": null
-    },
-    "id": "cca2c09c-8bd0-45fa-9e67-29e75b0e3502",
-    "identdato": "2019-06-08",
-    "innsendtArbeidsgivernavn": null,
-    "innspillTilArbeidsgiver": null,
-    "meldingTilNav": {
-      "navBoerTaTakISaken": false,
-      "navBoerTaTakISakenBegrunnelse": null
-    },
-    "mottakendeArbeidsgiver": {
-      "juridiskOrgnummer": null,
-      "navn": null,
-      "virksomhetsnummer": null
-    },
-    "mulighetForArbeid": {
-      "aarsakAktivitetIkkeMulig433": null,
-      "aarsakAktivitetIkkeMulig434": null,
-      "aktivitetIkkeMulig433": [],
-      "aktivitetIkkeMulig434": [],
-      "perioder": [
-        {
-          "avventende": null,
-          "behandlingsdager": null,
-          "fom": "2019-06-08",
-          "grad": 48.123,
-          "reisetilskudd": null,
-          "tom": "2019-10-01"
-        },
-        {
-          "avventende": null,
-          "behandlingsdager": 13,
-          "fom": "2019-10-02",
-          "grad": null,
-          "reisetilskudd": null,
-          "tom": "2019-10-22"
-        }
-      ]
-    },
-    "naermesteLederStatus": null,
-    "orgnummer": null,
-    "pasient": {
-      "etternavn": "Jones",
-      "fnr": "110110110110",
-      "fornavn": "Samuel",
-      "mellomnavn": "\"Sam\""
-    },
-    "sendtdato": "2019-06-09T10:45:31",
-    "skalViseSkravertFelt": true,
-    "sporsmal": {
-      "arbeidssituasjon": "NAERINGSDRIVENDE",
-      "dekningsgrad": null,
-      "fravaersperioder": [],
-      "harAnnetFravaer": null,
-      "harForsikring": null
-    },
-    "startLegemeldtFravaer": "2019-06-08",
-    "status": "SENDT",
-    "stillingsprosent": 0,
-    "tilbakedatering": {
-      "dokumenterbarPasientkontakt": null,
-      "tilbakedatertBegrunnelse": null
-    },
-    "utdypendeOpplysninger": {
-      "grupper": [],
-      "henvisningUtredningBehandling": null,
-      "paavirkningArbeidsevne": null,
-      "resultatAvBehandling": null,
-      "sykehistorie": null,
-      "sykehistoriePunkt63": "Ny Sykmelding pkt. 6.3.1: Test test",
-      "henvisningUtredningBehandlingPunkt63": "Ny Sykmelding pkt. 6.3.2: Test2 test2"
-    },
-    "valgtArbeidssituasjon": null
-  },
-  {
-    "arbeidsevne": {
-      "tilretteleggingArbeidsplass": null,
-      "tiltakAndre": null,
-      "tiltakNAV": null
-    },
-    "arbeidsgiver": null,
-    "bekreftelse": {
-      "sykmelder": "Lego Legesen",
-      "sykmelderTlf": "99889988",
-      "utstedelsesdato": "2019-06-08"
-    },
-    "diagnose": {
-      "bidiagnoser": [
-        {
-          "diagnose": "Teit",
-          "diagnosekode": "L1",
-          "diagnosesystem": "ICPC-29"
-        },
-        {
-          "diagnose": "Veldig teit",
-          "diagnosekode": "NOK",
-          "diagnosesystem": "ICPC-12"
-        }
-      ],
-      "fravaerBeskrivelse": null,
-      "fravaersgrunnLovfestet": null,
-      "hoveddiagnose": {
-        "diagnose": "Tull og tøys",
-        "diagnosekode": "L2",
-        "diagnosesystem": "ICPC-29"
-      },
-      "svangerskap": false,
-      "yrkesskade": false,
-      "yrkesskadeDato": null
-    },
-    "friskmelding": {
-      "antarReturAnnenArbeidsgiver": false,
-      "antarReturSammeArbeidsgiver": false,
-      "antattDatoReturSammeArbeidsgiver": null,
-      "arbeidsfoerEtterPerioden": null,
-      "hensynPaaArbeidsplassen": null,
-      "tilbakemeldingReturArbeid": null,
-      "utenArbeidsgiverAntarTilbakeIArbeid": false,
-      "utenArbeidsgiverAntarTilbakeIArbeidDato": null,
-      "utenArbeidsgiverTilbakemelding": null
-    },
-    "id": "cca2c09c-8bd0-45fa-9e67-29e75b0e3503",
-    "identdato": "2019-06-08",
-    "innsendtArbeidsgivernavn": null,
-    "innspillTilArbeidsgiver": null,
-    "meldingTilNav": {
-      "navBoerTaTakISaken": false,
-      "navBoerTaTakISakenBegrunnelse": null
-    },
-    "mottakendeArbeidsgiver": {
-      "juridiskOrgnummer": null,
-      "navn": null,
-      "virksomhetsnummer": null
-    },
-    "mulighetForArbeid": {
-      "aarsakAktivitetIkkeMulig433": null,
-      "aarsakAktivitetIkkeMulig434": null,
-      "aktivitetIkkeMulig433": [],
-      "aktivitetIkkeMulig434": [],
-      "perioder": [
-        {
-          "avventende": null,
-          "behandlingsdager": null,
-          "fom": "2019-06-08",
-          "grad": 48.123,
-          "reisetilskudd": null,
-          "tom": "2019-10-01"
-        },
-        {
-          "avventende": null,
-          "behandlingsdager": 13,
-          "fom": "2019-10-02",
-          "grad": null,
-          "reisetilskudd": null,
-          "tom": "2019-10-22"
-        }
-      ]
-    },
-    "naermesteLederStatus": null,
-    "orgnummer": null,
-    "pasient": {
-      "etternavn": "Jones",
-      "fnr": "110110110110",
-      "fornavn": "Samuel",
-      "mellomnavn": "\"Sam\""
-    },
-    "sendtdato": "2019-06-09T10:45:31",
-    "skalViseSkravertFelt": true,
-    "sporsmal": {
-      "arbeidssituasjon": "ARBEIDSLEDIG",
-      "dekningsgrad": null,
-      "fravaersperioder": [],
-      "harAnnetFravaer": null,
-      "harForsikring": null
-    },
-    "startLegemeldtFravaer": "2019-06-08",
-    "status": "SENDT",
-    "stillingsprosent": 0,
-    "tilbakedatering": {
-      "dokumenterbarPasientkontakt": null,
-      "tilbakedatertBegrunnelse": null
-    },
-    "utdypendeOpplysninger": {
-      "grupper": [],
-      "henvisningUtredningBehandling": null,
-      "paavirkningArbeidsevne": null,
-      "resultatAvBehandling": null,
-      "sykehistorie": null,
-      "sykehistoriePunkt63": "Ny Sykmelding pkt. 6.3.1: Test test",
-      "henvisningUtredningBehandlingPunkt63": "Ny Sykmelding pkt. 6.3.2: Test2 test2"
-    },
-    "valgtArbeidssituasjon": "NAERINGSDRIVENDE"
-  },
-  {
-    "arbeidsevne": {
-      "tilretteleggingArbeidsplass": null,
-      "tiltakAndre": null,
-      "tiltakNAV": null
-    },
-    "arbeidsgiver": "BRANN OG BIL AS",
-    "bekreftelse": {
-      "sykmelder": "Lego Legesen",
-      "sykmelderTlf": "99889988",
-      "utstedelsesdato": "2019-06-08"
-    },
-    "diagnose": {
-      "bidiagnoser": [
-        {
-          "diagnose": "Teit",
-          "diagnosekode": "L1",
-          "diagnosesystem": "ICPC-29"
-        },
-        {
-          "diagnose": "Veldig teit",
-          "diagnosekode": "NOK",
-          "diagnosesystem": "ICPC-12"
-        }
-      ],
-      "fravaerBeskrivelse": null,
-      "fravaersgrunnLovfestet": null,
-      "hoveddiagnose": {
-        "diagnose": "Tull og tøys",
-        "diagnosekode": "L2",
-        "diagnosesystem": "ICPC-29"
-      },
-      "svangerskap": false,
-      "yrkesskade": false,
-      "yrkesskadeDato": null
-    },
-    "friskmelding": {
-      "antarReturAnnenArbeidsgiver": false,
-      "antarReturSammeArbeidsgiver": false,
-      "antattDatoReturSammeArbeidsgiver": null,
-      "arbeidsfoerEtterPerioden": null,
-      "hensynPaaArbeidsplassen": null,
-      "tilbakemeldingReturArbeid": null,
-      "utenArbeidsgiverAntarTilbakeIArbeid": false,
-      "utenArbeidsgiverAntarTilbakeIArbeidDato": null,
-      "utenArbeidsgiverTilbakemelding": null
-    },
-    "id": "cca2c09c-8bd0-45fa-9e67-29e75b0e3504",
-    "identdato": "2019-06-08",
-    "innsendtArbeidsgivernavn": "BRANN OG BIL AS",
-    "innspillTilArbeidsgiver": null,
-    "meldingTilNav": {
-      "navBoerTaTakISaken": false,
-      "navBoerTaTakISakenBegrunnelse": null
-    },
-    "mottakendeArbeidsgiver": {
-      "juridiskOrgnummer": "555666444",
-      "navn": "BRANN OG BIL AS",
-      "virksomhetsnummer": "555666444"
-    },
-    "mulighetForArbeid": {
-      "aarsakAktivitetIkkeMulig433": null,
-      "aarsakAktivitetIkkeMulig434": null,
-      "aktivitetIkkeMulig433": [],
-      "aktivitetIkkeMulig434": [],
-      "perioder": [
-        {
-          "avventende": null,
-          "behandlingsdager": null,
-          "fom": "2019-06-08",
-          "grad": null,
-          "reisetilskudd": true,
-          "tom": "2019-10-01"
-        },
-        {
-          "avventende": null,
-          "behandlingsdager": 8,
-          "fom": "2019-10-01",
-          "grad": null,
-          "reisetilskudd": null,
-          "tom": "2019-10-10"
-        }
-      ]
-    },
-    "naermesteLederStatus": null,
-    "orgnummer": "555666444",
-    "pasient": {
-      "etternavn": "Jones",
-      "fnr": "110110110110",
-      "fornavn": "Samuel",
-      "mellomnavn": "\"Sam\""
-    },
-    "sendtdato": "2019-06-09T10:45:31",
-    "skalViseSkravertFelt": true,
-    "sporsmal": {
-      "arbeidssituasjon": "ARBEIDSTAKER",
-      "dekningsgrad": null,
-      "fravaersperioder": [],
-      "harAnnetFravaer": null,
-      "harForsikring": null
-    },
-    "startLegemeldtFravaer": "2019-06-08",
-    "status": "SENDT",
-    "stillingsprosent": 100,
-    "tilbakedatering": {
-      "dokumenterbarPasientkontakt": null,
-      "tilbakedatertBegrunnelse": null
-    },
-    "utdypendeOpplysninger": {
-      "grupper": [],
-      "henvisningUtredningBehandling": null,
-      "paavirkningArbeidsevne": null,
-      "resultatAvBehandling": null,
-      "sykehistorie": null,
-      "sykehistoriePunkt63": "6.3.1: Syk Syk ( ͡° ͜ʖ ͡°) (╯ ͠° ͟ʖ ͡°)╯┻━┻",
-      "henvisningUtredningBehandlingPunkt63": "6.3.2: Henvisning, utredning, behandling, Kan kanskje kombineres med arbeid, hvem vet? ¯\\_(ツ)_/¯"
-    },
-    "valgtArbeidssituasjon": "ARBEIDSTAKER"
-  },
-  {
-    "arbeidsevne": {
-      "tilretteleggingArbeidsplass": null,
-      "tiltakAndre": null,
-      "tiltakNAV": null
-    },
-    "arbeidsgiver": "BRANN OG BIL AS",
-    "bekreftelse": {
-      "sykmelder": "Lego Legesen",
-      "sykmelderTlf": "99889988",
-      "utstedelsesdato": "2019-06-08"
-    },
-    "diagnose": {
-      "bidiagnoser": [
-        {
-          "diagnose": "Teit",
-          "diagnosekode": "L1",
-          "diagnosesystem": "ICPC-29"
-        },
-        {
-          "diagnose": "Veldig teit",
-          "diagnosekode": "NOK",
-          "diagnosesystem": "ICPC-12"
-        }
-      ],
-      "fravaerBeskrivelse": null,
-      "fravaersgrunnLovfestet": null,
-      "hoveddiagnose": {
-        "diagnose": "Tull og tøys",
-        "diagnosekode": "L2",
-        "diagnosesystem": "ICPC-29"
-      },
-      "svangerskap": false,
-      "yrkesskade": false,
-      "yrkesskadeDato": null
-    },
-    "friskmelding": {
-      "antarReturAnnenArbeidsgiver": false,
-      "antarReturSammeArbeidsgiver": false,
-      "antattDatoReturSammeArbeidsgiver": null,
-      "arbeidsfoerEtterPerioden": null,
-      "hensynPaaArbeidsplassen": null,
-      "tilbakemeldingReturArbeid": null,
-      "utenArbeidsgiverAntarTilbakeIArbeid": false,
-      "utenArbeidsgiverAntarTilbakeIArbeidDato": null,
-      "utenArbeidsgiverTilbakemelding": null
-    },
-    "id": "cca2c09c-8bd0-45fa-9e67-29e75b0e3505",
-    "identdato": "2019-06-08",
-    "innsendtArbeidsgivernavn": "BRANN OG BIL AS",
-    "innspillTilArbeidsgiver": null,
-    "meldingTilNav": {
-      "navBoerTaTakISaken": false,
-      "navBoerTaTakISakenBegrunnelse": null
-    },
-    "mottakendeArbeidsgiver": {
-      "juridiskOrgnummer": null,
-      "navn": null,
-      "virksomhetsnummer": null
-    },
-    "mulighetForArbeid": {
-      "aarsakAktivitetIkkeMulig433": null,
-      "aarsakAktivitetIkkeMulig434": null,
-      "aktivitetIkkeMulig433": [],
-      "aktivitetIkkeMulig434": [],
-      "perioder": [
-        {
-          "avventende": null,
-          "behandlingsdager": null,
-          "fom": "2019-06-08",
-          "grad": 48.123,
-          "reisetilskudd": true,
-          "tom": "2019-10-01"
-        },
-        {
-          "avventende": null,
-          "behandlingsdager": 8,
-          "fom": "2019-10-02",
-          "grad": null,
-          "reisetilskudd": null,
-          "tom": "2019-10-10"
-        }
-      ]
-    },
-    "naermesteLederStatus": null,
-    "orgnummer": "555666444",
-    "pasient": {
-      "etternavn": "Jones",
-      "fnr": "110110110110",
-      "fornavn": "Samuel",
-      "mellomnavn": "\"Sam\""
-    },
-    "sendtdato": "2019-06-10T10:45:31",
-    "skalViseSkravertFelt": true,
-    "sporsmal": {
-      "arbeidssituasjon": "ARBEIDSTAKER",
-      "dekningsgrad": null,
-      "fravaersperioder": [],
-      "harAnnetFravaer": null,
-      "harForsikring": null
-    },
-    "startLegemeldtFravaer": "2019-06-08",
-    "status": "NY",
-    "stillingsprosent": 100,
-    "tilbakedatering": {
-      "dokumenterbarPasientkontakt": null,
-      "tilbakedatertBegrunnelse": null
-    },
-    "utdypendeOpplysninger": {
-      "grupper": [],
-      "henvisningUtredningBehandling": null,
-      "paavirkningArbeidsevne": null,
-      "resultatAvBehandling": null,
-      "sykehistorie": null,
-      "sykehistoriePunkt63": "Ny Sykmelding pkt. 6.3.1: Test test",
-      "henvisningUtredningBehandlingPunkt63": "Ny Sykmelding pkt. 6.3.2: Test2 test2"
-    },
-    "valgtArbeidssituasjon": null
+    "syketilfelleStartDato": "2020-01-22",
+    "navnFastlege": "Lego Las Legesen"
   },
   {
     "id": "289148ba-4c3c-4b3f-b7a3-385b7e7c927d",
-    "startLegemeldtFravaer": "2019-06-08",
-    "skalViseSkravertFelt": true,
-    "identdato": "2019-06-08",
-    "status": "NY",
-    "naermesteLederStatus": null,
-    "innsendtArbeidsgivernavn": "",
-    "valgtArbeidssituasjon": null,
-    "mottakendeArbeidsgiver": {
-      "navn": "",
-      "virksomhetsnummer": "",
-      "juridiskOrgnummer": ""
-    },
-    "orgnummer": "",
-    "sendtdato": "2019-06-09T10:49:03",
-    "sporsmal": null,
-    "pasient": {
-      "fnr": "110110110110",
-      "fornavn": "Samuel \"Sam\"",
-      "mellomnavn": "Peyton",
-      "etternavn": "Jones"
-    },
-    "arbeidsgiver": "",
-    "stillingsprosent": 100,
-    "diagnose": {
-      "hoveddiagnose": null,
-      "bidiagnoser": [],
-      "fravaersgrunnLovfestet": null,
-      "fravaerBeskrivelse": null,
-      "svangerskap": null,
-      "yrkesskade": null,
-      "yrkesskadeDato": null
-    },
-    "mulighetForArbeid": {
-      "perioder": [
+    "mottattTidspunkt": "2020-01-21T23:00:00Z",
+    "behandlingsutfall": {
+      "status": "MANUAL_PROCESSING",
+      "ruleHits": [
         {
-          "fom": "2019-06-08",
-          "tom": "2019-10-22",
-          "grad": 100,
-          "behandlingsdager": null,
-          "reisetilskudd": null,
-          "avventende": null
+          "messageForSender": "Behandlers TSS-ident er ikke funnet automatisk av systemet",
+          "messageForUser": "Behandlers TSS-ident er ikke funnet automatisk av systemet",
+          "ruleName": "TSS_IDENT_MANGLER",
+          "ruleStatus": "MANUAL_PROCESSING"
         }
-      ],
-      "aktivitetIkkeMulig433": [],
-      "aktivitetIkkeMulig434": [
-        "Annet"
-      ],
-      "aarsakAktivitetIkkeMulig433": null,
-      "aarsakAktivitetIkkeMulig434": "andre årsaker til sykefravær"
+      ]
     },
-    "friskmelding": {
-      "arbeidsfoerEtterPerioden": true,
-      "hensynPaaArbeidsplassen": "Må ta det pent",
-      "antarReturSammeArbeidsgiver": true,
-      "antattDatoReturSammeArbeidsgiver": "2019-10-22",
-      "antarReturAnnenArbeidsgiver": true,
-      "tilbakemeldingReturArbeid": null,
-      "utenArbeidsgiverAntarTilbakeIArbeid": false,
-      "utenArbeidsgiverAntarTilbakeIArbeidDato": null,
-      "utenArbeidsgiverTilbakemelding": null
+    "legekontorOrgnummer": "223456789",
+    "arbeidsgiver": {
+      "navn": "PONTYPANDY FIRE SERVICE",
+      "stillingsprosent": 100
+    },
+    "sykmeldingsperioder": [
+      {
+        "fom": "2020-01-22",
+        "tom": "2020-02-22",
+        "gradert": null,
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "AKTIVITET_IKKE_MULIG"
+      },
+      {
+        "fom": "2020-01-25",
+        "tom": "2020-02-20",
+        "gradert": {
+          "grad": 50,
+          "reisetilskudd": true
+        },
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "GRADERT"
+      },
+      {
+        "fom": "2020-01-25",
+        "tom": "2020-02-20",
+        "gradert": {
+          "grad": 50,
+          "reisetilskudd": false
+        },
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "GRADERT"
+      },
+      {
+        "fom": "2020-01-25",
+        "tom": "2020-02-20",
+        "gradert": null,
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "REISETILSKUDD"
+      },
+      {
+        "fom": "2020-01-25",
+        "tom": "2020-01-25",
+        "gradert": null,
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "REISETILSKUDD"
+      }
+    ],
+    "sykmeldingStatus": {
+      "statusEvent": "APEN",
+      "timestamp": "2020-01-29T09:38:05.414834Z",
+      "arbeidsgiver": null,
+      "sporsmalOgSvarListe": null
+    },
+    "medisinskVurdering": {
+      "hovedDiagnose": {
+        "kode": "L87",
+        "system": "2.16.578.1.12.4.1.1.7170",
+        "tekst": "TENDINITT INA"
+      },
+      "biDiagnoser": [
+        {
+          "kode": "L87",
+          "system": "2.16.578.1.12.4.1.1.7170",
+          "tekst": "GANGLION SENE"
+        }
+      ]
+    },
+    "skjermesForPasient": false,
+    "prognose": {
+      "arbeidsforEtterPeriode": true,
+      "hensynArbeidsplassen": "Må ta det pent",
+      "erIArbeid": {
+        "egetArbeidPaSikt": true,
+        "annetArbeidPaSikt": true,
+        "arbeidFOM": "2020-01-22",
+        "vurderingsdato": "2020-01-22"
+      },
+      "erIkkeIArbeid": null
     },
     "utdypendeOpplysninger": {
-      "sykehistorie": null,
-      "paavirkningArbeidsevne": null,
-      "resultatAvBehandling": null,
-      "henvisningUtredningBehandling": null,
-      "grupper": []
+      "6.2": {
+        "6.2.1": {
+          "sporsmal": "Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.",
+          "svar": "Langvarig korsryggsmerter. Ømhet og smerte",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
+          ]
+        },
+        "6.2.2": {
+          "sporsmal": "Hvordan påvirker sykdommen arbeidsevnen",
+          "svar": "Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: 6828077b-bfce-488d-b04b-22afe7f64500",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
+          ]
+        },
+        "6.2.3": {
+          "sporsmal": "Har behandlingen frem til nå bedret arbeidsevnen?",
+          "svar": "Nei",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
+          ]
+        },
+        "6.2.4": {
+          "sporsmal": "Beskriv Pågående og planlagt henvisning, utredning og/eller behandling",
+          "svar": "Henvist til fysio",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
+          ]
+        }
+      }
     },
-    "arbeidsevne": {
-      "tilretteleggingArbeidsplass": "Fortsett som sist.",
-      "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. ",
-      "tiltakAndre": null
+    "tiltakArbeidsplassen": "Fortsett som sist.",
+    "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. ",
+    "andreTiltak": null,
+    "meldingTilNAV": null,
+    "meldingTilArbeidsgiver": null,
+    "kontaktMedPasient": {
+      "kontaktDato": null,
+      "begrunnelseIkkeKontakt": null
     },
-    "meldingTilNav": {
-      "navBoerTaTakISaken": false,
-      "navBoerTaTakISakenBegrunnelse": null
+    "behandletTidspunkt": "2020-01-21T22:00:00Z",
+    "behandler": {
+      "fornavn": "Lego",
+      "mellomnavn": "Las",
+      "etternavn": "Legesen",
+      "aktoerId": "1000014797129",
+      "fnr": "99900011122",
+      "hpr": null,
+      "her": 7777777,
+      "adresse": {
+        "gate": "Kirkegårdsveien 3",
+        "postnummer": 1348,
+        "kommune": "Rykkinn",
+        "postboks": null,
+        "land": "Country"
+      },
+      "tlf": "tel:94431152"
     },
-    "innspillTilArbeidsgiver": null,
-    "tilbakedatering": {
-      "dokumenterbarPasientkontakt": null,
-      "tilbakedatertBegrunnelse": null
+    "syketilfelleStartDato": "2020-01-22",
+    "navnFastlege": "Lego Las Legesen"
+  },
+  {
+    "id": "289148ba-4c3c-4b3f-b7a3-385b7e7c927d",
+    "mottattTidspunkt": "2020-01-21T23:00:00Z",
+    "behandlingsutfall": {
+      "status": "INVALID",
+      "ruleHits": [
+        {
+          "messageForSender": "Sykmeldingen kan ikke rettes, det må skrives en ny. Pasienten har fått beskjed om å vente på ny sykmelding fra deg. Grunnet følgende:Kodeverk for hoveddiagnose er feil eller mangler.",
+          "messageForUser": "Den må ha riktig kode for hoveddiagnose.",
+          "ruleName": "UGYLDIG_KODEVERK_FOR_HOVEDDIAGNOSE",
+          "ruleStatus": "INVALID"
+        }
+      ]
     },
-    "bekreftelse": {
-      "utstedelsesdato": "2019-06-08",
-      "sykmelder": "Helen Flood",
-      "sykmelderTlf": "113"
-    }
+    "legekontorOrgnummer": "223456789",
+    "arbeidsgiver": {
+      "navn": "PONTYPANDY FIRE SERVICE",
+      "stillingsprosent": 100
+    },
+    "sykmeldingsperioder": [
+      {
+        "fom": "2020-02-22",
+        "tom": "2020-04-22",
+        "gradert": null,
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "AKTIVITET_IKKE_MULIG"
+      }
+    ],
+    "sykmeldingStatus": {
+      "statusEvent": "APEN",
+      "timestamp": "2020-02-21T09:38:05.414834Z",
+      "arbeidsgiver": null,
+      "sporsmalOgSvarListe": null
+    },
+    "medisinskVurdering": {
+      "hovedDiagnose": {
+        "kode": "L87",
+        "system": "2.16.578.1.12.4.1.1.7170",
+        "tekst": "TENDINITT INA"
+      },
+      "biDiagnoser": [
+        {
+          "kode": "L87",
+          "system": "2.16.578.1.12.4.1.1.7170",
+          "tekst": "GANGLION SENE"
+        }
+      ]
+    },
+    "skjermesForPasient": false,
+    "prognose": {
+      "arbeidsforEtterPeriode": true,
+      "hensynArbeidsplassen": "Må ta det pent",
+      "erIArbeid": {
+        "egetArbeidPaSikt": true,
+        "annetArbeidPaSikt": true,
+        "arbeidFOM": "2020-01-22",
+        "vurderingsdato": "2020-01-22"
+      },
+      "erIkkeIArbeid": null
+    },
+    "utdypendeOpplysninger": {
+      "6.2": {
+        "6.2.1": {
+          "sporsmal": "Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.",
+          "svar": "Langvarig korsryggsmerter. Ømhet og smerte",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
+          ]
+        },
+        "6.2.2": {
+          "sporsmal": "Hvordan påvirker sykdommen arbeidsevnen",
+          "svar": "Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: 6828077b-bfce-488d-b04b-22afe7f64500",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
+          ]
+        },
+        "6.2.3": {
+          "sporsmal": "Har behandlingen frem til nå bedret arbeidsevnen?",
+          "svar": "Nei",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
+          ]
+        },
+        "6.2.4": {
+          "sporsmal": "Beskriv Pågående og planlagt henvisning, utredning og/eller behandling",
+          "svar": "Henvist til fysio",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
+          ]
+        }
+      }
+    },
+    "tiltakArbeidsplassen": "Fortsett som sist.",
+    "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. ",
+    "andreTiltak": null,
+    "meldingTilNAV": null,
+    "meldingTilArbeidsgiver": null,
+    "kontaktMedPasient": {
+      "kontaktDato": null,
+      "begrunnelseIkkeKontakt": null
+    },
+    "behandletTidspunkt": "2020-01-21T22:00:00Z",
+    "behandler": {
+      "fornavn": "Lego",
+      "mellomnavn": "Las",
+      "etternavn": "Legesen",
+      "aktoerId": "1000014797129",
+      "fnr": "99900011122",
+      "hpr": null,
+      "her": 7777777,
+      "adresse": {
+        "gate": "Kirkegårdsveien 3",
+        "postnummer": 1348,
+        "kommune": "Rykkinn",
+        "postboks": null,
+        "land": "Country"
+      },
+      "tlf": "tel:94431152"
+    },
+    "syketilfelleStartDato": "2020-01-22",
+    "navnFastlege": "Lego Las Legesen"
+  },
+  {
+    "id": "289148ba-4c3c-4b3f-b7a3-385b7e7c927d",
+    "mottattTidspunkt": "2020-01-21T23:00:00Z",
+    "behandlingsutfall": {
+      "status": "INVALID",
+      "ruleHits": [
+        {
+          "messageForSender": "Sykmeldingen kan ikke rettes, det må skrives en ny. Pasienten har fått beskjed om å vente på ny sykmelding fra deg. Grunnet følgende:Kodeverk for hoveddiagnose er feil eller mangler.",
+          "messageForUser": "Den må ha riktig kode for hoveddiagnose.",
+          "ruleName": "UGYLDIG_KODEVERK_FOR_HOVEDDIAGNOSE",
+          "ruleStatus": "INVALID"
+        }
+      ]
+    },
+    "legekontorOrgnummer": "223456789",
+    "arbeidsgiver": {
+      "navn": "PONTYPANDY FIRE SERVICE",
+      "stillingsprosent": 100
+    },
+    "sykmeldingsperioder": [
+      {
+        "fom": "2020-02-20",
+        "tom": "2020-04-22",
+        "gradert": null,
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "AKTIVITET_IKKE_MULIG"
+      }
+    ],
+    "sykmeldingStatus": {
+      "statusEvent": "BEKREFTET",
+      "timestamp": "2020-02-20T09:38:05.414834Z",
+      "arbeidsgiver": null,
+      "sporsmalOgSvarListe": null
+    },
+    "medisinskVurdering": {
+      "hovedDiagnose": {
+        "kode": "L87",
+        "system": "2.16.578.1.12.4.1.1.7170",
+        "tekst": "TENDINITT INA"
+      },
+      "biDiagnoser": [
+        {
+          "kode": "L87",
+          "system": "2.16.578.1.12.4.1.1.7170",
+          "tekst": "GANGLION SENE"
+        }
+      ]
+    },
+    "skjermesForPasient": false,
+    "prognose": {
+      "arbeidsforEtterPeriode": true,
+      "hensynArbeidsplassen": "Må ta det pent",
+      "erIArbeid": {
+        "egetArbeidPaSikt": true,
+        "annetArbeidPaSikt": true,
+        "arbeidFOM": "2020-04-22",
+        "vurderingsdato": "2020-01-22"
+      },
+      "erIkkeIArbeid": null
+    },
+    "utdypendeOpplysninger": {
+      "6.2": {
+        "6.2.1": {
+          "sporsmal": "Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.",
+          "svar": "Langvarig korsryggsmerter. Ømhet og smerte",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
+          ]
+        },
+        "6.2.2": {
+          "sporsmal": "Hvordan påvirker sykdommen arbeidsevnen",
+          "svar": "Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: 6828077b-bfce-488d-b04b-22afe7f64500",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
+          ]
+        },
+        "6.2.3": {
+          "sporsmal": "Har behandlingen frem til nå bedret arbeidsevnen?",
+          "svar": "Nei",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
+          ]
+        },
+        "6.2.4": {
+          "sporsmal": "Beskriv Pågående og planlagt henvisning, utredning og/eller behandling",
+          "svar": "Henvist til fysio",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
+          ]
+        }
+      }
+    },
+    "tiltakArbeidsplassen": "Fortsett som sist.",
+    "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. ",
+    "andreTiltak": null,
+    "meldingTilNAV": null,
+    "meldingTilArbeidsgiver": null,
+    "kontaktMedPasient": {
+      "kontaktDato": null,
+      "begrunnelseIkkeKontakt": null
+    },
+    "behandletTidspunkt": "2020-01-21T22:00:00Z",
+    "behandler": {
+      "fornavn": "Lego",
+      "mellomnavn": "Las",
+      "etternavn": "Legesen",
+      "aktoerId": "1000014797129",
+      "fnr": "99900011122",
+      "hpr": null,
+      "her": 7777777,
+      "adresse": {
+        "gate": "Kirkegårdsveien 3",
+        "postnummer": 1348,
+        "kommune": "Rykkinn",
+        "postboks": null,
+        "land": "Country"
+      },
+      "tlf": "tel:94431152"
+    },
+    "syketilfelleStartDato": "2020-02-20",
+    "navnFastlege": "Lego Las Legesen"
   }
 ]

@@ -4,7 +4,7 @@ import { Checkbox } from 'nav-frontend-skjema';
 import {
     erMulighetForArbeidInformasjon,
     finnAvventendeSykmeldingTekst,
-} from '../../utils/sykmeldingUtils';
+} from '../../utils/sykmeldinger/sykmeldingUtils';
 
 const tekster = {
     mulighetForArbeid: {

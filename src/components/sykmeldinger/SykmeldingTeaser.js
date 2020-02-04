@@ -4,7 +4,6 @@ import { Link } from 'react-router';
 import {
     tidligsteFom,
     senesteTom,
-    sykmeldingstatuser,
     tilLesbarPeriodeMedArstall,
 } from '@navikt/digisyfo-npm';
 import SykmeldingPeriodeInfo from './SykmeldingPeriodeInfo';
@@ -12,6 +11,10 @@ import {
     sykmelding as sykmeldingPt,
     sykmeldingperiode,
 } from '../../propTypes';
+import {
+    behandlingsutfallStatuser,
+    gamleSMStatuser,
+} from '../../utils/sykmeldinger/sykmeldingstatuser';
 
 const texts = {
     teaserTekst: 'Sykmelding\n',
@@ -20,9 +23,13 @@ const texts = {
     tilSending: 'Sender...',
     avbrutt: 'Avbrutt av deg\n',
     bekreftet: 'Bekreftet av deg\n',
+    avvist: 'Avvist av NAV\n',
 };
 
-const textStatus = (status) => {
+const textStatus = (status, behandlingsutfallStatus) => {
+    if (behandlingsutfallStatus === behandlingsutfallStatuser.INVALID) {
+        return texts.avvist;
+    }
     switch (status) {
         case 'SENDT': return texts.sendt;
         case 'UTGAATT': return texts.utgaatt;
@@ -46,40 +53,53 @@ PeriodeListe.propTypes = {
     perioder: PropTypes.arrayOf(sykmeldingperiode),
 };
 
+const setStateIkon = (behandlingsutfallStatus) => {
+    return behandlingsutfallStatus === behandlingsutfallStatuser.INVALID
+        ? 'report_problem_triangle.svg'
+        : 'sykmeldinger.svg';
+};
+
+const setStateIkonHover = (behandlingsutfallStatus) => {
+    return behandlingsutfallStatus === behandlingsutfallStatuser.INVALID
+        ? 'report_problem_triangle.svg'
+        : 'sykmeldinger_hover-blue.svg';
+};
+
 class SykmeldingTeaser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ikon: 'sykmeldinger.svg',
+            ikon: setStateIkon(props.sykmelding.behandlingsutfall.status),
         };
     }
 
-    onMouseEnter() {
+    onMouseEnter(behandlingsutfallStatus) {
         this.setState({
-            ikon: 'sykmeldinger_hover-blue.svg',
+            ikon: setStateIkonHover(behandlingsutfallStatus),
         });
     }
 
-    onMouseLeave() {
+    onMouseLeave(behandlingsutfallStatus) {
         this.setState({
-            ikon: 'sykmeldinger.svg',
+            ikon: setStateIkon(behandlingsutfallStatus),
         });
     }
 
     render() {
         const { sykmelding } = this.props;
         const antallPerioder = sykmelding.mulighetForArbeid.perioder.length;
-        const visStatus = sykmelding.status !== sykmeldingstatuser.NY;
+        const behandlingsutfallStatus = sykmelding.behandlingsutfall.status;
+        const visStatus = sykmelding.status !== gamleSMStatuser.NY || behandlingsutfallStatus === behandlingsutfallStatuser.INVALID;
 
         return (<article aria-labelledby={`sykmelding-header-${this.props.sykmelding.id}`}>
             <Link
                 className="inngangspanel inngangspanel--sykmelding"
                 to={`/sykefravaer/${this.props.fnr}/sykmeldinger/${this.props.sykmelding.id}`}
                 onMouseEnter={() => {
-                    this.onMouseEnter();
+                    this.onMouseEnter(behandlingsutfallStatus);
                 }}
                 onMouseLeave={() => {
-                    this.onMouseLeave();
+                    this.onMouseLeave(behandlingsutfallStatus);
                 }}>
                 <span className="inngangspanel__ikon">
                     <img alt="" src={`/sykefravaer/img/svg/${this.state.ikon}`} />
@@ -95,7 +115,7 @@ class SykmeldingTeaser extends Component {
                             </span>
                         </h3>
                         {
-                            visStatus && <p className="inngangspanel__status">{textStatus(sykmelding.status)}</p>
+                            visStatus && <p className="inngangspanel__status">{textStatus(status, behandlingsutfallStatus)}</p>
                         }
                     </header>
                     <div className="inngangspanel__tekst">

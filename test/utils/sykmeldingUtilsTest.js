@@ -18,7 +18,7 @@ import {
     stringMedAlleGraderingerFraSykmeldingPerioder,
     erBehandlingsdagerEllerReisetilskudd,
     finnAvventendeSykmeldingTekst,
-} from '../../src/utils/sykmeldingUtils';
+} from '../../src/utils/sykmeldinger/sykmeldingUtils';
 import { ANTALL_MS_DAG } from '../../src/utils/datoUtils';
 
 describe('sykmeldingUtils', () => {

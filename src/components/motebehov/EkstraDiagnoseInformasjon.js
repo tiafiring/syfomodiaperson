@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox } from 'nav-frontend-skjema';
-import { erEkstraDiagnoseInformasjon } from '../../utils/sykmeldingUtils';
+import { erEkstraDiagnoseInformasjon } from '../../utils/sykmeldinger/sykmeldingUtils';
 import { tilDatoMedUkedagOgManedNavn } from '../../utils/datoUtils';
 
 const tekster = {

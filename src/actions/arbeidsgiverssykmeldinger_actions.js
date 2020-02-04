@@ -16,3 +16,11 @@ export function hentArbeidsgiversSykmeldinger(fnr) {
         fnr,
     };
 }
+
+export function arbeidsgiversSykmeldingerHentet(data, sykmeldtFnr) {
+    return {
+        type: 'ARBEIDSGIVERS_SYKMELDINGER_HENTET',
+        data,
+        sykmeldtFnr,
+    };
+}

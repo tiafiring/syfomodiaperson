@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox } from 'nav-frontend-skjema';
-import { erMeldingTilNavInformasjon } from '../../utils/sykmeldingUtils';
+import { erMeldingTilNavInformasjon } from '../../utils/sykmeldinger/sykmeldingUtils';
 
 const tekster = {
     meldingTilNav: {
