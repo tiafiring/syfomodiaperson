@@ -26,7 +26,7 @@ const textReisetilskudd = (dager) => {
 };
 
 const textReisetilskuddGradert = (grad, dager) => {
-    return `${grad} sykmelding med reisetilskudd i % ${dager} dager\n`;
+    return `${grad} % sykmelding med reisetilskudd i ${dager} dager\n`;
 };
 
 const textAvventende = (arbeidsgiver, dager) => {
