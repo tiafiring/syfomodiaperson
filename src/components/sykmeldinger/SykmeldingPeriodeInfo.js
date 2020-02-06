@@ -46,8 +46,8 @@ const textAvventedneUtenArbeidsgiver = (dager) => {
     return `Avventende sykemelding i ${dager} dager\n`;
 };
 
-const textDefault = (grad, arbeidsgiver) => {
-    return `${grad} % sykmeldt fra ${arbeidsgiver} i  dager`;
+const textDefault = (grad, arbeidsgiver, dager) => {
+    return `${grad} % sykmeldt fra ${arbeidsgiver} i ${dager} dager`;
 };
 
 const SykmeldingPeriodeInfo = ({ periode, arbeidsgiver, Element = 'p' }) => {
@@ -56,7 +56,7 @@ const SykmeldingPeriodeInfo = ({ periode, arbeidsgiver, Element = 'p' }) => {
     const utenArbeidsgiver = !arbeidsgiver;
     const gradert = periode.reisetilskudd && periode.grad;
 
-    let text = textDefault(periode.grad, arbeidsgiver);
+    let text = textDefault(periode.grad, arbeidsgiver, getDuration(periode.fom, periode.tom));
 
     if (periode.behandlingsdager === 1 && ((enDag && utenArbeidsgiver && ingenGrad) || (enDag && ingenGrad))) {
         text = textBehandlingsdagEnDag(periode.behandlingsdager, getDuration(periode.fom, periode.tom));
