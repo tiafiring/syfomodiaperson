@@ -91,7 +91,7 @@ class SykmeldingTeaser extends Component {
                                 {tilLesbarPeriodeMedArstall(tidligsteFom(sykmelding.mulighetForArbeid.perioder), senesteTom(sykmelding.mulighetForArbeid.perioder))}
                             </small>
                             <span className="inngangspanel__tittel">
-                                {texts.teaserTittel}
+                                {texts.teaserTekst}
                             </span>
                         </h3>
                         {
