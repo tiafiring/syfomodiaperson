@@ -54,7 +54,7 @@ const SykmeldingPeriodeInfo = ({ periode, arbeidsgiver, Element = 'p' }) => {
     const enDag = toDate(periode.fom).getTime() === toDate(periode.tom).getTime();
     const ingenGrad = periode.grad === null;
     const utenArbeidsgiver = !arbeidsgiver;
-    const gradert = periode.reisetilskudd && periode.grad;
+    const gradert = periode.grad && periode.grad !== 100;
 
     let text = textDefault(periode.grad, arbeidsgiver, getDuration(periode.fom, periode.tom));
 
