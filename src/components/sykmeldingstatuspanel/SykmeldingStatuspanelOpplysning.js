@@ -18,6 +18,7 @@ const texts = {
         sender: 'Sender...',
         avbrutt: 'Avbrutt av deg',
         bekreftet: 'Bekreftet av deg',
+        sendt: 'Sendt til arbeidsgiver',
     },
     dato: {
         bekreftet: 'Dato bekreftet',
@@ -30,10 +31,10 @@ const texts = {
     egenmeldingPapirNei: 'Har ikke hatt egenmelding og/eller sykmelding på papir',
     forsikring: 'Forsikring',
     ja: 'Ja',
-    nei: 'Har ikke forsikring som … dagene av sykefraværet',
+    nei: 'Har ikke forsikring som gjelder de første 16 dagene av sykefraværet',
 };
 
-const { BEKREFTET, AVBRUTT, TIL_SENDING } = sykmeldingstatuser;
+const { BEKREFTET, AVBRUTT, TIL_SENDING, SENDT } = sykmeldingstatuser;
 
 const textStatus = (status) => {
     switch (status) {
@@ -43,6 +44,8 @@ const textStatus = (status) => {
             return texts.status.avbrutt;
         case TIL_SENDING:
             return texts.status.sender;
+        case SENDT:
+            return texts.status.sendt;
         default:
             return '';
     }
