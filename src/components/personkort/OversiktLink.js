@@ -7,10 +7,11 @@ const texts = {
 
 const OversiktLink = () => {
     return (
-        <a href={fullNaisUrlDefault('syfooversikt', '/enhet')} alt="syfooversikt" className="oversiktlenke">
-            {texts.link}
-        </a>
-    );
+        <div className="oversiktlenke">
+            <a href={fullNaisUrlDefault('syfooversikt', '/enhet')} alt="syfooversikt" className="lenke oversiktlenke__lenke">
+                {texts.link}
+            </a>
+        </div>);
 };
 
 export default OversiktLink;
