@@ -8,7 +8,11 @@ import {
     IKKE_RELEVANT,
     JA_NEI,
     PERIODER,
-    PROSENT, RADIO_GRUPPE, RADIO_GRUPPE_TIMER_PROSENT, TALL,
+    PROSENT,
+    RADIO_GRUPPE,
+    RADIO_GRUPPE_TIMER_PROSENT,
+    RADIO_GRUPPE_UKEKALENDER,
+    TALL,
     TIMER,
 } from '../../enums/svartyper';
 import OppsummeringPerioder from './OppsummeringPerioder';
@@ -21,6 +25,7 @@ import { svartypePt } from '../../propTypes';
 import OppsummeringFritekst from './OppsummeringFritekst';
 import OppsummeringUndertekst from './OppsummeringUndertekst';
 import OppsummeringRadioGruppe from './OppsummeringRadioGruppe';
+import OppsummeringGruppeRadioUkekalender from './OppsummeringGruppeRadioUkekalender';
 
 const OppsummeringSporsmal = (props) => {
     switch (props.svartype) {
@@ -55,6 +60,8 @@ const OppsummeringSporsmal = (props) => {
         case RADIO_GRUPPE: {
             return <OppsummeringRadioGruppe {...props} />;
         }
+        case RADIO_GRUPPE_UKEKALENDER:
+            return <OppsummeringGruppeRadioUkekalender {...props} />;
         default: {
             return null;
         }

@@ -25,6 +25,7 @@ import {
     OPPHOLD_UTLAND,
     SELVSTENDIGE_OG_FRILANSERE,
     ARBEIDSLEDIG,
+    BEHANDLINGSDAGER,
 } from '../enums/soknadtyper';
 import SykepengesoknadSelvstendig from '../components/sykepengesoknad-selvstendig/SykepengesoknadSelvstendig';
 import SykepengesoknadUtland from '../components/sykepengesoknad-utland/SykepengesoknadUtland';
@@ -36,6 +37,7 @@ import {
 } from '../enums/soknadstatuser';
 import IkkeInnsendtSoknad from '../components/sykepengesoknad-felles/IkkeInnsendtSoknad';
 import AvbruttSoknadArbeidtakerNy from '../components/sykepengesoknad-arbeidstaker-ny/AvbruttSoknadArbeidtakerNy';
+import SykepengesoknadBehandlingsdager from '../components/sykepengesoknad-behandlingsdager/SykepengesoknadBehandlingsdager';
 
 const texts = {
     feilmedling: 'Du har ikke itllgang til denne tjenesten',
@@ -138,6 +140,17 @@ export class Container extends Component {
                                         soknad={soknad}
                                     />
                                     : <IkkeInnsendtSoknad fnr={fnr} />;
+                        }
+                        if (soknad && soknad.soknadstype === BEHANDLINGSDAGER) {
+                            console.log('soknad', soknad); // eslint-disable-line
+                            return (
+                                <SykepengesoknadBehandlingsdager
+                                    fnr={fnr}
+                                    brodsmuler={brodsmuler}
+                                    brukernavn={brukernavn}
+                                    soknad={soknad}
+                                />
+                            );
                         }
                         return <Feilmelding />;
                     })()

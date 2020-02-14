@@ -22,12 +22,14 @@ const Soknader = ({ fnr, sykepengesoknader = [], soknader = [] }) => {
         ...sykepengesoknader,
         ...soknader,
     ];
+
     const nyeSoknader = alleSoknader
         .filter((soknad) => {
             return (soknad.status === NY || soknad.status === UTKAST_TIL_KORRIGERING)
                 && soknad.soknadstype !== OPPHOLD_UTLAND;
         })
         .sort(sorterEtterOpprettetDato);
+
     const sendteSoknader = alleSoknader
         .filter((soknad) => {
             return soknad.status === SENDT
@@ -36,6 +38,7 @@ const Soknader = ({ fnr, sykepengesoknader = [], soknader = [] }) => {
                 || soknad.status === AVBRUTT;
         })
         .sort(sorterEtterPerioder);
+
     const kommendeSoknader = alleSoknader
         .filter((soknad) => {
             return soknad.status === FREMTIDIG;
@@ -43,36 +46,40 @@ const Soknader = ({ fnr, sykepengesoknader = [], soknader = [] }) => {
         .sort(sorterEtterPerioder)
         .reverse();
 
-    return (<div>
-        <Sidetopp
-            tittel={texts.sidetittel}
-        />
-        <SoknadTeasere
-            sykepengesoknader={nyeSoknader}
-            fnr={fnr}
-            tittel={texts.nyeSoknader}
-            tomListeTekst={texts.ingenSoknader}
-            className="js-til-behandling"
-            id="soknader-list-til-behandling"
-        />
-        {
-            kommendeSoknader.length > 0 && <PlanlagteTeasere
-                sykepengesoknader={kommendeSoknader}
-                fnr={fnr}
-                tittel="Planlagte søknader"
+    return (
+        <React.Fragment>
+            <Sidetopp
+                tittel={texts.sidetittel}
             />
-        }
-        {
-            sendteSoknader.length > 0 && (<SoknadTeasere
-                sykepengesoknader={sendteSoknader}
+            <SoknadTeasere
+                sykepengesoknader={nyeSoknader}
                 fnr={fnr}
-                tittel={texts.tidligereSoknader}
-                tomListeTekst={texts.tidligereSoknader}
-                className="js-sendt"
-                id="soknader-sendt"
-            />)
-        }
-    </div>);
+                tittel={texts.nyeSoknader}
+                tomListeTekst={texts.ingenSoknader}
+                className="js-til-behandling"
+                id="soknader-list-til-behandling"
+            />
+
+            {kommendeSoknader.length > 0 && (
+                <PlanlagteTeasere
+                    sykepengesoknader={kommendeSoknader}
+                    fnr={fnr}
+                    tittel="Planlagte søknader"
+                />
+            )}
+
+            {sendteSoknader.length > 0 && (
+                <SoknadTeasere
+                    sykepengesoknader={sendteSoknader}
+                    fnr={fnr}
+                    tittel={texts.tidligereSoknader}
+                    tomListeTekst={texts.tidligereSoknader}
+                    className="js-sendt"
+                    id="soknader-sendt"
+                />
+            )}
+        </React.Fragment>
+    );
 };
 
 Soknader.propTypes = {
