@@ -9,7 +9,7 @@ import { soknad as soknadPt, sykepengesoknad as sykepengesoknadPt } from '../../
 import { OPPHOLD_UTLAND } from '../../enums/soknadtyper';
 
 const texts = {
-    sidetittel: 'Søknad on sykepenger',
+    sidetittel: 'Søknad om sykepenger',
     nyeSoknader: 'Nye søknader',
     ingenSoknader: 'Du har ingen nye søknader om sykepenger. Den neste søknaden du kan fylle ut kommer etter at sykmeldingsperioden er over.',
     tidligereSoknader: 'Tidligere søknader',
