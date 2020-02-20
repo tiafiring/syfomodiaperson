@@ -179,12 +179,15 @@ const startServer = (html) => {
         }));
         server.use('/syfosmregister/api', cookieParser(), (req, res) => {
             const token = req.cookies['isso-idtoken'];
-            const options = {
-                headers: {'Authorization': `Bearer ${token}`}
-            };
             const fnr = req.query.fnr;
+            const options = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'fnr': fnr,
+                }
+            };
 
-            const url = `http://syfosmregister.default/api/v1/internal/sykmeldinger?fnr=${fnr}`;
+            const url = `http://syfosmregister.default/api/v1/internal/sykmeldinger`;
             axios.get(url, options)
                 .then(response => {
                     res.send(response.data)
