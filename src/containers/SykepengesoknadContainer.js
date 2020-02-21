@@ -142,7 +142,6 @@ export class Container extends Component {
                                     : <IkkeInnsendtSoknad fnr={fnr} />;
                         }
                         if (soknad && soknad.soknadstype === BEHANDLINGSDAGER) {
-                            console.log('soknad', soknad); // eslint-disable-line
                             return (
                                 <SykepengesoknadBehandlingsdager
                                     fnr={fnr}

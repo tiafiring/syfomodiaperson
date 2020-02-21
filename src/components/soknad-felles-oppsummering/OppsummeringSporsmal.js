@@ -6,6 +6,7 @@ import {
     DATO,
     FRITEKST,
     IKKE_RELEVANT,
+    INFO_BEHANDLINGSDAGER,
     JA_NEI,
     PERIODER,
     PROSENT,
@@ -46,6 +47,9 @@ const OppsummeringSporsmal = (props) => {
             return <OppsummeringFritekst {...props} />;
         }
         case IKKE_RELEVANT: {
+            return <OppsummeringUndertekst {...props} />;
+        }
+        case INFO_BEHANDLINGSDAGER: {
             return <OppsummeringUndertekst {...props} />;
         }
         case CHECKBOX_GRUPPE: {
