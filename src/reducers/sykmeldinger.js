@@ -1,4 +1,4 @@
-import { parseSykmelding } from '@navikt/digisyfo-npm';
+import { newSMFormat2OldFormat } from '../utils/sykmeldinger/sykmeldingParser';
 import {
     HENT_SYKMELDINGER_FEILET,
     HENTER_SYKMELDINGER,
@@ -36,7 +36,7 @@ export default function sykmeldinger(state = initiellState, action = {}) {
                 henter: false,
                 hentingFeilet: false,
                 hentet: true,
-                data: action.data.map(parseSykmelding),
+                data: action.data.map((sykmelding) => {return newSMFormat2OldFormat(sykmelding, action.fnr);}),
             };
         }
         case SYKMELDINGER_SORTERT: {

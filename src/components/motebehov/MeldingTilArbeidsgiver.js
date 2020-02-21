@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { erMeldingTilArbeidsgiverInformasjon } from '../../utils/sykmeldingUtils';
+import { erMeldingTilArbeidsgiverInformasjon } from '../../utils/sykmeldinger/sykmeldingUtils';
 
 const tekster = {
     meldingTilArbeidsgiver: {

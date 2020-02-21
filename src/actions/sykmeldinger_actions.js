@@ -31,9 +31,10 @@ export function hentSykmeldinger(fnr) {
     };
 }
 
-export function sykmeldingerHentet(data) {
+export function sykmeldingerHentet(data, fnr) {
     return {
         type: SYKMELDINGER_HENTET,
         data,
+        fnr,
     };
 }

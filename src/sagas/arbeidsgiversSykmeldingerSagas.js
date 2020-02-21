@@ -11,8 +11,14 @@ export function* hentArbeidsgiversSykmeldinger(action) {
     yield put(actions.henterArbeidsgiversSykmeldinger());
 
     try {
-        const data = yield call(get, `${process.env.REACT_APP_REST_ROOT}/sykmeldinger?fnr=${action.fnr}&type=arbeidsgiver`);
-        yield put({ type: 'ARBEIDSGIVERS_SYKMELDINGER_HENTET', data });
+        const path = `${process.env.REACT_APP_SYFOSMREGISTER_ROOT}/v1/internal/sykmeldinger?fnr=${action.fnr}`;
+        const data = yield call(get, path);
+
+        if (!!data.err) {
+            yield put(actions.hentArbeidsgiversSykmeldingerFeilet());
+        } else {
+            yield put(actions.arbeidsgiversSykmeldingerHentet(data, action.fnr));
+        }
     } catch (e) {
         yield put(actions.hentArbeidsgiversSykmeldingerFeilet());
     }

@@ -17,7 +17,7 @@ import {
     sykmeldingerGruppertEtterVirksomhet,
     sykmeldingperioderSortertEldstTilNyest,
     stringMedAlleGraderingerFraSykmeldingPerioder,
-} from '../../utils/sykmeldingUtils';
+} from '../../utils/sykmeldinger/sykmeldingUtils';
 import Lenke from 'nav-frontend-lenker';
 import { finnMiljoStreng } from '../../utils/miljoUtil';
 

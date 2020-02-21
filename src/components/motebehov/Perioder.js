@@ -15,7 +15,7 @@ const kolonne2Tekst = (periode) => {
             : 'Full jobb med reisetilskudd';
     }
     if (!!periode.avventende) {
-        return `${periode.grad}% Avventende`;
+        return 'Avventende';
     }
     return `${periode.grad}%`;
 };

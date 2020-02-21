@@ -6,6 +6,8 @@ const mustacheExpress = require('mustache-express');
 const Promise = require('promise');
 const prometheus = require('prom-client');
 const proxy = require('express-http-proxy');
+const cookieParser = require('cookie-parser');
+const axios = require('axios');
 
 // Prometheus metrics
 const collectDefaultMetrics = prometheus.collectDefaultMetrics;
@@ -175,6 +177,26 @@ const startServer = (html) => {
                 next(err);
             },
         }));
+        server.use('/syfosmregister/api', cookieParser(), (req, res) => {
+            const token = req.cookies['isso-idtoken'];
+            const fnr = req.query.fnr;
+            const options = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'fnr': fnr,
+                }
+            };
+
+            const url = `http://syfosmregister.default/api/v1/internal/sykmeldinger`;
+            axios.get(url, options)
+                .then(response => {
+                    res.send(response.data)
+                })
+                .catch(err => {
+                    console.error('Error in proxy for syfosmregister', err);
+                    res.send({ err })
+                });
+        });
     }
 
     const port = process.env.PORT || 8191;

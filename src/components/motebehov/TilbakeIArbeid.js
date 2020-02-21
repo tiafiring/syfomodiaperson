@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { erFriskmeldingInformasjon } from '../../utils/sykmeldingUtils';
+import { erFriskmeldingInformasjon } from '../../utils/sykmeldinger/sykmeldingUtils';
 import TilbakeIArbeidMedArbeidsgiver from './TilbakeIArbeidMedArbeidsgiver';
 import TilbakeIArbeidUtenArbeidsgiver from './TilbakeIArbeidUtenArbeidsgiver';
 
