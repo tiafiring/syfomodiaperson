@@ -192,6 +192,13 @@ const mapSendtdato = (sykmelding) => {
         : null;
 };
 
+const mapBekreftetDato = (sykmelding) => {
+    const sykmeldingStatus = sykmelding.sykmeldingStatus;
+    return sykmeldingStatus.statusEvent === nyeSMStatuser.BEKREFTET
+        ? toDate(sykmeldingStatus.timestamp)
+        : null;
+};
+
 const mapTilbakedatering = (sykmelding) => {
     const kontaktMedPasient = sykmelding.kontaktMedPasient;
     return {
@@ -377,6 +384,8 @@ export const newSMFormat2OldFormat = (sykmelding, fnr) => {
         orgnummer: mapOrgnummer(sykmelding),
         pasient: mapPasient(fnr),
         sendtdato: mapSendtdato(sykmelding),
+        bekreftetDato: mapBekreftetDato(sykmelding),
+        mottattTidspunkt: sykmelding.mottattTidspunkt,
         skalViseSkravertFelt: !sykmelding.skjermesForPasient,
         sporsmal: mapSporsmal(sykmelding),
         startLegemeldtFravaer: toDate(sykmelding.syketilfelleStartDato),
