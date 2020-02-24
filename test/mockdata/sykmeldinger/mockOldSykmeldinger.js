@@ -75,6 +75,8 @@ const mockOldSykmeldinger = [
             mellomnavn: null,
         },
         sendtdato: toDate('2020-01-29T09:38:05.414834Z'),
+        bekreftetDato: null,
+        mottattTidspunkt: '2020-01-21T23:00:00Z',
         skalViseSkravertFelt: true,
         sporsmal: {
             arbeidssituasjon: null,

@@ -12,11 +12,21 @@ import DinUtgaatteSykmelding from './DinUtgaatteSykmelding';
 import LenkeTilDineSykmeldinger from './LenkeTilDineSykmeldinger';
 import Feilmelding from '../Feilmelding';
 import { erDev } from '../../selectors/toggleSelectors';
+import { behandlingsutfallStatuser } from '../../utils/sykmeldinger/sykmeldingstatuser';
+import AvvistSykmelding from './avvisteSykmeldinger/AvvistSykmelding';
 
 const SykmeldingSide = ({ dinSykmelding, arbeidsgiversSykmelding, ledetekster, fnr }) => {
     return (
         (() => {
-            if (dinSykmelding.status === sykmeldingstatuser.SENDT && (arbeidsgiversSykmelding || erDev())) {
+            if (dinSykmelding.behandlingsutfall.status === behandlingsutfallStatuser.INVALID) {
+                return (<div>
+                    <AvvistSykmelding
+                        sykmelding={dinSykmelding}
+                        ledetekster={ledetekster}
+                    />
+                    <LenkeTilDineSykmeldinger ledetekster={ledetekster} fnr={fnr} />
+                </div>);
+            } else if (dinSykmelding.status === sykmeldingstatuser.SENDT && (arbeidsgiversSykmelding || erDev())) {
                 return (<div>
                     <DinSendteSykmelding
                         dinSykmelding={dinSykmelding}
