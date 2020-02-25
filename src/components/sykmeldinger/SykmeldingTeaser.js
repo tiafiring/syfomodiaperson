@@ -115,7 +115,7 @@ class SykmeldingTeaser extends Component {
                             </span>
                         </h3>
                         {
-                            visStatus && <p className="inngangspanel__status">{textStatus(status, behandlingsutfallStatus)}</p>
+                            visStatus && <p className="inngangspanel__status">{textStatus(sykmelding.status, behandlingsutfallStatus)}</p>
                         }
                     </header>
                     <div className="inngangspanel__tekst">
