@@ -3,14 +3,24 @@ import PropTypes from 'prop-types';
 import { tilLesbarDatoMedArstall } from '@navikt/digisyfo-npm';
 import OppfoelgingsdialogIkon from '../../ikoner/OppfoelgingsdialogIkon';
 import MoteIkon from '../../ikoner/MoteIkon';
+import LederIkon from '../../ikoner/LederIkon';
 
 const hentIkon = (event) => {
-    if (event.kilde === 'MOTER' || event.kilde === 'MOTEBEHOV') {
-        return <MoteIkon />;
-    } else if (event.kilde === 'OPPFOELGINGSDIALOG') {
-        return <OppfoelgingsdialogIkon />;
+    switch (event.kilde) {
+        case 'MOTER':
+        case 'MOTEBEHOV': {
+            return <MoteIkon />;
+        }
+        case 'OPPFOELGINGSDIALOG': {
+            return <OppfoelgingsdialogIkon />;
+        }
+        case 'LEDER': {
+            return <LederIkon />;
+        }
+        default: {
+            return null;
+        }
     }
-    return null;
 };
 
 const HistorikkEvent = ({ event }) => {

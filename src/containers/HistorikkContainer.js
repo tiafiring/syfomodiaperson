@@ -50,6 +50,7 @@ export class HistorikkSide extends Component {
             henter,
             hentingFeilet,
             historikk,
+            ledereData,
             tilgang,
             oppfolgingstilfelleperioder,
         } = this.props;
@@ -66,7 +67,7 @@ export class HistorikkSide extends Component {
                     } else if (hentingFeilet) {
                         return <Feilmelding />;
                     }
-                    return <Historikk oppfolgingstilfelleperioder={oppfolgingstilfelleperioder} historikk={historikk} />;
+                    return <Historikk oppfolgingstilfelleperioder={oppfolgingstilfelleperioder} historikk={historikk} ledere={ledereData} />;
                 })()
             }
         </Side>);

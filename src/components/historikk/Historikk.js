@@ -25,6 +25,17 @@ const hentSykeforloepMedEvents = (periodeliste, eventliste) => {
     });
 };
 
+const createHistorikkEventsFromLedere = (ledere) => {
+    return ledere.map((leder) => {
+        return {
+            opprettetAv: leder.organisasjonsnavn,
+            tekst: `${leder.organisasjonsnavn} har oppgitt ${leder.navn} som nærmeste leder`,
+            tidspunkt: leder.fomDato,
+            kilde: 'LEDER',
+        };
+    });
+};
+
 const Feilmelding = () => {
     return (<Alertstripe type="advarsel" className="blokk">
         <p>{texts.errorMessage}</p>
@@ -55,9 +66,10 @@ TidligereHendelser.propTypes = {
     eventsForForsteSykefravaer: PropTypes.arrayOf(PropTypes.object),
 };
 
-const Historikk = ({ historikk, oppfolgingstilfelleperioder }) => {
+const Historikk = ({ historikk, oppfolgingstilfelleperioder, ledere }) => {
     const tilfeller = tilfellerFromTilfelleperioder(oppfolgingstilfelleperioder);
-    const historikkEvents = historikk.motebehovHistorikk.concat(historikk.moteHistorikk).concat(historikk.oppfoelgingsdialogHistorikk);
+    const lederHistorikk = createHistorikkEventsFromLedere(ledere);
+    const historikkEvents = historikk.motebehovHistorikk.concat(historikk.moteHistorikk).concat(historikk.oppfoelgingsdialogHistorikk).concat(lederHistorikk);
     if (!tilfeller || tilfeller.length === 0 || (historikk.hentetMoter && historikk.hentetMotebehov && historikk.hentetOppfoelgingsdialoger && historikkEvents.length === 0)) {
         return <IngenHistorikk />;
     }
@@ -145,6 +157,7 @@ const Historikk = ({ historikk, oppfolgingstilfelleperioder }) => {
 Historikk.propTypes = {
     oppfolgingstilfelleperioder: PropTypes.object,
     historikk: PropTypes.object,
+    ledere: PropTypes.array,
 };
 
 export default Historikk;
