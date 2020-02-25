@@ -41,7 +41,7 @@ export const BehandleMotebehovKnapp = (
         { (motebehovListe.length > 0 || gjeldendeOppgaver.length > 0)
             ? <div className="skjema__input">
                 <Checkbox
-                    label={erBehandlet ? `Ferdig behandlet av ${sistBehandletMotebehov.behandletVeilederIdent} ${toDatePrettyPrint(sistBehandletMotebehov.behandletTidspunkt)}` : 'Marker som behandlet'}
+                    label={erBehandlet ? `Ferdigbehandlet av ${sistBehandletMotebehov.behandletVeilederIdent} ${toDatePrettyPrint(sistBehandletMotebehov.behandletTidspunkt)}` : 'Marker som behandlet'}
                     onClick={() => {
                         behandleMotebehovOgVeilederoppgaver(actions, fnr, veilederinfo, motebehovListe, ikkeFullforteOppgaver);
                     }}
