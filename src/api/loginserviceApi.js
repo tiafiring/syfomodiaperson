@@ -37,13 +37,13 @@ export const hentRedirectBaseUrl = (windowLocationHref) => {
     if (window.location.href.indexOf('app.adeo.no') > -1) {
         // Prod
         if (windowLocationHref.indexOf('sykefravaer') > -1) {
-            return 'https://modiasyfofront.nais.adeo.no';
+            return 'https://syfomodiaperson.nais.adeo.no';
         } else if (windowLocationHref.indexOf('sykefravaersoppfoelging') > -1) {
             return 'https://sykefravaersoppfoelgingfront.nais.adeo.no';
         }
     }
     if (windowLocationHref.indexOf('sykefravaer') > -1) {
-        return 'https://modiasyfofront-q1.nais.preprod.local';
+        return 'https://syfomodiaperson.nais.preprod.local';
     } else if (windowLocationHref.indexOf('sykefravaersoppfoelging') > -1) {
         return 'https://sykefravaersoppfoelgingfront-q1.nais.preprod.local';
     }

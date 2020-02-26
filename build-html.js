@@ -41,7 +41,7 @@ var prod = {
     isProd: true,
 };
 
-fs.readFile('html/modiasyfofront.mustache', function (err, data) {
+fs.readFile('html/syfomodiaperson.mustache', function (err, data) {
     if (err) throw err;
     const html = Mustache.render(data.toString(), env === 'prod' ? prod : dev);
     fs.writeFile('../main/webapp/syfofront.html', html, 'utf-8', (err) => {
