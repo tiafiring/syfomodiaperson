@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router';
 import * as menypunkter from '../enums/menypunkter';
 import cn from 'classnames';
+import { harUbehandletMotebehov } from '../utils/motebehovUtils';
 
 const historikkMenypunkt = {
     navn: 'Logg',
@@ -40,15 +41,26 @@ const erOppfoelginsdialogOppgave = (menypunkt, oppgave) => {
         oppgave.type === 'SE_OPPFOLGINGSPLAN' && oppgave.status !== 'FERDIG';
 };
 
-const erMoteplanleggerOppgave = (menypunkt, oppgave) => {
+const isUnfinishedMotebehovTask = (menypunkt, motebehovReducer) => {
     return menypunkt === menypunkter.MOETEPLANLEGGER &&
-        (oppgave.type === 'ALLE_SVAR_MOTTATT' || oppgave.type === 'MOTEBEHOV_MOTTATT') && oppgave.status !== 'FERDIG';
+        harUbehandletMotebehov(motebehovReducer.data);
 };
 
-const finnAntallPrikker = (menypunkt, oppgaver) => {
-    return oppgaver.filter((oppgave) => {
+const erMoteplanleggerOppgave = (menypunkt, oppgave) => {
+    return menypunkt === menypunkter.MOETEPLANLEGGER &&
+        (oppgave.type === 'ALLE_SVAR_MOTTATT' && oppgave.status !== 'FERDIG');
+};
+
+const finnAntallPrikker = (menypunkt, oppgaver, motebehovReducer) => {
+    const oppgavePrikker = oppgaver.filter((oppgave) => {
         return erOppfoelginsdialogOppgave(menypunkt, oppgave) || erMoteplanleggerOppgave(menypunkt, oppgave);
     }).length;
+
+    const motebehovPrikker = isUnfinishedMotebehovTask(menypunkt, motebehovReducer)
+        ? 1
+        : 0;
+
+    return oppgavePrikker + motebehovPrikker;
 };
 
 
@@ -58,6 +70,7 @@ class GlobalNavigasjon extends Component {
         this.state = {
             focusIndex: -1,
         };
+        props.hentMotebehov(props.fnr);
     }
 
     setFocus(fokusId) {
@@ -109,7 +122,7 @@ class GlobalNavigasjon extends Component {
     }
 
     render() {
-        const { fnr, aktivtMenypunkt, oppgaver } = this.props;
+        const { fnr, aktivtMenypunkt, oppgaver, motebehovReducer } = this.props;
         this.menypunkter = [historikkMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, oppfoelgingsplanMenypunkt, motemodulMenypunkt];
 
         return (<ul aria-label="Navigasjon" className="navigasjon">
@@ -118,7 +131,7 @@ class GlobalNavigasjon extends Component {
                     const className = cn('navigasjonspanel', {
                         'navigasjonspanel--aktiv': menypunkt === aktivtMenypunkt,
                     });
-                    const antallPrikker = finnAntallPrikker(menypunkt, oppgaver);
+                    const antallPrikker = finnAntallPrikker(menypunkt, oppgaver, motebehovReducer);
                     return (<li key={index} className="navigasjon__element">
                         <a
                             ref={this.getRef(index)}
@@ -152,6 +165,8 @@ GlobalNavigasjon.propTypes = {
     fnr: PropTypes.string,
     aktivtMenypunkt: PropTypes.string,
     oppgaver: PropTypes.arrayOf(PropTypes.object),
+    motebehovReducer: PropTypes.object,
+    hentMotebehov: PropTypes.func,
 };
 
 export default GlobalNavigasjon;

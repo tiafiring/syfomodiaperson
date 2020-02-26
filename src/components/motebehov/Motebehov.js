@@ -31,7 +31,6 @@ export class Motebehov extends Component {
             ledereUtenInnsendtMotebehov,
             ledetekster,
             motebehovListe,
-            oppgaver,
             sykmeldt,
             motebehovListeMedJaSvarTilOppgavebehandling,
             veilederinfo,
@@ -44,7 +43,6 @@ export class Motebehov extends Component {
                 actions={actions}
                 fnr={fnr}
                 motebehovListe={motebehovListeMedJaSvarTilOppgavebehandling}
-                oppgaver={oppgaver}
                 veilederinfo={veilederinfo}
             />
             <MotebehovKvittering
@@ -64,7 +62,6 @@ export class Motebehov extends Component {
                 actions={actions}
                 fnr={fnr}
                 motebehovListe={motebehovListeMedJaSvarTilOppgavebehandling}
-                oppgaver={oppgaver}
                 veilederinfo={veilederinfo}
             />
         </div>);
@@ -79,7 +76,6 @@ Motebehov.propTypes = {
     ledereUtenInnsendtMotebehov: PropTypes.arrayOf(PropTypes.object),
     ledetekster: keyValue,
     motebehovListe: PropTypes.arrayOf(PropTypes.object),
-    oppgaver: PropTypes.arrayOf(PropTypes.object),
     sykmeldt: PropTypes.object,
     motebehovListeMedJaSvarTilOppgavebehandling: PropTypes.arrayOf(PropTypes.object),
     veilederinfo: PropTypes.object,
