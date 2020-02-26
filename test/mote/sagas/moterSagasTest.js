@@ -10,8 +10,6 @@ import {
     opprettFlereAlternativ,
 } from '../../../src/sagas/moterSagas';
 import * as actions from '../../../src/actions/moter_actions';
-import { fullNaisUrlDefault } from '../../../src/utils/miljoUtil';
-import { HOST_NAMES } from '../../../src/konstanter';
 
 describe('moterSagas', () => {
     beforeEach(() => {
@@ -35,7 +33,7 @@ describe('moterSagas', () => {
         });
 
         it('Skal poste møtet til REST-tjenesten', () => {
-            const nextCall = call(post, fullNaisUrlDefault(HOST_NAMES.SYFOMOTEADMIN, '/moteadmin/internad/moter'), {
+            const nextCall = call(post, '/moteadmin/internad/moter', {
                 fnr: '55',
                 naermesteLederNavn: 'Test Bestesen',
             });
@@ -54,7 +52,7 @@ describe('moterSagas', () => {
         });
 
         it('Skal hente et array bestående av ett møte fra REST-tjenesten', () => {
-            const nextCall = call(get, fullNaisUrlDefault(HOST_NAMES.SYFOMOTEADMIN, '/moteadmin/internad/moter?fnr=123&henttpsdata=true&limit=1'));
+            const nextCall = call(get, '/moteadmin/internad/moter?fnr=123&henttpsdata=true&limit=1');
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
@@ -80,7 +78,7 @@ describe('moterSagas', () => {
         });
 
         it('Skal poste til REST-tjenesten', () => {
-            const nextCall = call(post, fullNaisUrlDefault(HOST_NAMES.SYFOMOTEADMIN, '/moteadmin/internad/moter/min-fine-mote-uuid/avbryt?varsle=true'));
+            const nextCall = call(post, '/moteadmin/internad/moter/min-fine-mote-uuid/avbryt?varsle=true');
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
@@ -106,7 +104,7 @@ describe('moterSagas', () => {
         });
 
         it('Skal poste til REST-tjenesten', () => {
-            const nextCall = call(post, fullNaisUrlDefault(HOST_NAMES.SYFOMOTEADMIN, '/moteadmin/internad/moter/min-fine-mote-uuid/avbryt?varsle=false'));
+            const nextCall = call(post, '/moteadmin/internad/moter/min-fine-mote-uuid/avbryt?varsle=false');
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
@@ -140,7 +138,7 @@ describe('moterSagas', () => {
         });
 
         it('Skal poste til REST-tjenesten', () => {
-            const nextCall = call(post, fullNaisUrlDefault(HOST_NAMES.SYFOMOTEADMIN, '/moteadmin/internad/moter/min-fine-mote-uuid/nyealternativer'), data);
+            const nextCall = call(post, '/moteadmin/internad/moter/min-fine-mote-uuid/nyealternativer', data);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
     });
@@ -156,7 +154,7 @@ describe('moterSagas', () => {
         });
 
         it('Skal poste til REST-tjenesten', () => {
-            const nextCall = call(post, fullNaisUrlDefault(HOST_NAMES.SYFOMOTEADMIN, '/moteadmin/internad/moter/olsen/bekreft?valgtAlternativId=998877'));
+            const nextCall = call(post, '/moteadmin/internad/moter/olsen/bekreft?valgtAlternativId=998877');
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 

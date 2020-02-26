@@ -97,6 +97,16 @@ const startServer = (html) => {
     if (env === 'local') {
         require('./mock/mockEndepunkter')(server, env === 'local');
     } else {
+        server.use('/fastlegerest/api', proxy('fastlegerest.default',  {
+            https: false,
+            proxyReqPathResolver: function(req) {
+                return `/fastlegerest/api${req.url}`
+            },
+            proxyErrorHandler: function(err, res, next) {
+                console.error("Error in proxy for fastlegerest", err);
+                next(err);
+            },
+        }));
         server.use('/syfo-tilgangskontroll/api', proxy('syfo-tilgangskontroll.default',  {
             https: false,
             proxyReqPathResolver: function(req) {
@@ -134,6 +144,26 @@ const startServer = (html) => {
             },
             proxyErrorHandler: function(err, res, next) {
                 console.error("Error in proxy for syfooppfolgingsplanservice", err);
+                next(err);
+            },
+        }));
+        server.use('/syfomoteadmin/api', proxy('syfomoteadmin.default',  {
+            https: false,
+            proxyReqPathResolver: function(req) {
+                return `/syfomoteadmin/api${req.url}`
+            },
+            proxyErrorHandler: function(err, res, next) {
+                console.error("Error in proxy for syfomoteadmin", err);
+                next(err);
+            },
+        }));
+        server.use('/syfomotebehov/api', proxy('syfomotebehov.default',  {
+            https: false,
+            proxyReqPathResolver: function(req) {
+                return `/syfomotebehov/api${req.url}`
+            },
+            proxyErrorHandler: function(err, res, next) {
+                console.error("Error in proxy for syfomotebehov", err);
                 next(err);
             },
         }));

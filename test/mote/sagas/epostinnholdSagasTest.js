@@ -6,8 +6,6 @@ import {
     hentBekreftMoteEpostinnhold,
     hentAvbrytMoteEpostinnhold,
 } from '../../../src/sagas/epostinnholdSagas';
-import {fullAppAdeoUrl, fullNaisUrlDefault} from '../../../src/utils/miljoUtil';
-import {HOST_NAMES} from "../../../src/konstanter";
 
 describe('epostinnholdSagas', () => {
     let action;
@@ -29,10 +27,8 @@ describe('epostinnholdSagas', () => {
         });
 
         it('Skal deretter prøve å hente epostinnhold', () => {
-            const host = HOST_NAMES.SYFOMOTEADMIN;
             const path = '/moteadmin/internad/epostinnhold/BEKREFTET?motedeltakeruuid=deltakerUuid&valgtAlternativId=alternativId';
-            const url = fullNaisUrlDefault(host,path);
-            const nextCall = call(get, url);
+            const nextCall = call(get, path);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
@@ -60,10 +56,8 @@ describe('epostinnholdSagas', () => {
         });
 
         it('Skal deretter prøve å hente epostinnhold', () => {
-            const host = HOST_NAMES.SYFOMOTEADMIN;
             const path = '/moteadmin/internad/epostinnhold/AVBRUTT?motedeltakeruuid=abc123';
-            const url = fullNaisUrlDefault(host,path);
-            const nextCall = call(get, url);
+            const nextCall = call(get, path);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 

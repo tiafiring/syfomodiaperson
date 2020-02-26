@@ -6,8 +6,6 @@ import {
     HENTER_FASTLEGER,
     FASTLEGER_HENTET,
 } from '../../src/actions/actiontyper';
-import { fullNaisUrlDefault } from '../../src/utils/miljoUtil';
-import { HOST_NAMES } from '../../src/konstanter';
 
 describe('fastlegerSagas', () => {
     beforeEach(() => {
@@ -28,7 +26,7 @@ describe('fastlegerSagas', () => {
     });
 
     it('Skal dernest kalle resttjenesten', () => {
-        const nextCall = call(get, fullNaisUrlDefault(HOST_NAMES.FASTLEGEREST, `${process.env.REACT_APP_FASTLEGEREST_ROOT}/internad/fastlege/v1/fastleger?fnr=1`));
+        const nextCall = call(get, `${process.env.REACT_APP_FASTLEGEREST_ROOT}/internad/fastlege/v1/fastleger?fnr=1`);
         expect(generator.next().value).to.deep.equal(nextCall);
     });
 
