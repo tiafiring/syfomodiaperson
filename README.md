@@ -1,4 +1,4 @@
-# Modiasyfofront
+# Syfomodiaperson
 Frontend i Modia for en bruker sin sykefraværsoppfølging  
 
 ## TL;DR
