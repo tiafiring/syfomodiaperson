@@ -2,8 +2,6 @@ import { call, put, fork, takeEvery } from 'redux-saga/effects';
 import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api';
 import * as actions from '../actions/historikk_actions';
-import { fullNaisUrlDefault } from '../utils/miljoUtil';
-import { HOST_NAMES } from '../konstanter';
 
 export function* hentHistorikkOppfoelgingsdialog(action) {
     yield put(actions.henterHistorikk('OPPFOELGINGSDIALOG'));
@@ -20,10 +18,8 @@ export function* hentHistorikkOppfoelgingsdialog(action) {
 export function* hentHistorikkMoter(action) {
     yield put(actions.henterHistorikk('MOTER'));
     try {
-        const host = HOST_NAMES.SYFOMOTEADMIN;
         const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/historikk?fnr=${action.fnr}`;
-        const url = fullNaisUrlDefault(host, path);
-        const data = yield call(get, url);
+        const data = yield call(get, path);
         yield put(actions.historikkHentet(data, 'MOTER'));
     } catch (e) {
         log(e);
@@ -34,10 +30,8 @@ export function* hentHistorikkMoter(action) {
 export function* hentHistorikkMotebehov(action) {
     yield put(actions.henterHistorikk('MOTEBEHOV'));
     try {
-        const host = HOST_NAMES.SYFOMOTEBEHOV;
         const path = `${process.env.REACT_APP_SYFOMOTEBEHOV_ROOT}/internad/veileder/historikk?fnr=${action.fnr}`;
-        const url = fullNaisUrlDefault(host, path);
-        const data = yield call(get, url);
+        const data = yield call(get, path);
         yield put(actions.historikkHentet(data, 'MOTEBEHOV'));
     } catch (e) {
         log(e);

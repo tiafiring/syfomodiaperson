@@ -3,8 +3,6 @@ import { put, call } from 'redux-saga/effects';
 import { get } from '../../../src/api';
 import * as actions from '../../../src/actions/virksomhet_actions';
 import { hentVirksomhet } from '../../../src/sagas/virksomhetSagas';
-import { fullNaisUrlDefault } from '../../../src/utils/miljoUtil';
-import { HOST_NAMES } from '../../../src/konstanter';
 
 describe('virksomhetSagas', () => {
     beforeEach(() => {
@@ -25,10 +23,8 @@ describe('virksomhetSagas', () => {
         });
 
         it('Skal deretter prøve å hente virksomhet', () => {
-            const host = HOST_NAMES.SYFOMOTEADMIN;
             const path = '/moteadmin/internad/virksomhet/88776655';
-            const url = fullNaisUrlDefault(host,path);
-            const nextCall = call(get, url);
+            const nextCall = call(get, path);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
