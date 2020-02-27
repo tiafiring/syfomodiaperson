@@ -517,7 +517,7 @@ describe('sykmeldingParser', () => {
             const expectedSporsmal = {
                 arbeidssituasjon: null,
                 dekningsgrad: null,
-                fravaersperioder: null,
+                fravaersperioder: [],
                 harAnnetFravaer: null,
                 harForsikring: null,
             };

@@ -81,7 +81,7 @@ const mockOldSykmeldinger = [
         sporsmal: {
             arbeidssituasjon: null,
             dekningsgrad: null,
-            fravaersperioder: null,
+            fravaersperioder: [],
             harAnnetFravaer: null,
             harForsikring: null,
         },
