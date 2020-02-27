@@ -1,3 +1,4 @@
+import { isNullOrUndefined } from 'util';
 import {
     gamleSMStatuser,
     nyeSMStatuser,
@@ -327,6 +328,13 @@ const sporsmalOfType = (sporsmalOgSvarListe, type) => {
     });
 };
 
+const mapFravaersperioder = (sporsmal) => {
+    if (isNullOrUndefined(sporsmal) || isNullOrUndefined(sporsmal.svar)) {
+        return [];
+    }
+    return sporsmal.svar.svar;
+};
+
 const mapSporsmal = (sykmelding) => {
     const sporsmalOgSvarListe = sykmelding.sykmeldingStatus.sporsmalOgSvarListe;
     const arbeidssituasjonSporsmal = sporsmalOfType(sporsmalOgSvarListe, sporsmalTypeShortNames.ARBEIDSSITUASJON);
@@ -339,7 +347,7 @@ const mapSporsmal = (sykmelding) => {
     return {
         arbeidssituasjon: arbeidssituasjonSporsmal && arbeidssituasjonSporsmal.svar.svar,
         dekningsgrad: null,
-        fravaersperioder: periodeSporsmal && periodeSporsmal.svar.svar,
+        fravaersperioder: mapFravaersperioder(periodeSporsmal),
         harAnnetFravaer: fravaerSporsmal && fravaerSporsmal.svar.svar,
         harForsikring: forsikringSporsmal && forsikringSporsmal.svar.svar,
     };
