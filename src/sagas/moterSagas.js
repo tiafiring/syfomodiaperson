@@ -4,7 +4,6 @@ import { post, get } from '../api';
 import history from '../history';
 import * as actions from '../actions/moter_actions';
 import * as historikkActions from '../actions/historikk_actions';
-import * as veilederoppgaverActions from '../actions/veilederoppgaver_actions';
 
 export function* opprettMote(action) {
     yield put(actions.oppretterMote());
@@ -43,7 +42,6 @@ export function* avbrytMote(action) {
 
         yield put(actions.moteAvbrutt(action.uuid));
         yield put(historikkActions.hentHistorikk(action.fnr, 'MOTER'));
-        yield put(veilederoppgaverActions.alleSvarMottattOppgaveBehandlet());
         history.replace(`/sykefravaer/${action.fnr}/mote`);
     } catch (e) {
         log(e);
@@ -59,7 +57,6 @@ export function* bekreftMote(action) {
 
         yield put(actions.moteBekreftet(action.moteUuid, action.valgtAlternativId, new Date()));
         yield put(historikkActions.hentHistorikk(action.fnr, 'MOTER'));
-        yield put(veilederoppgaverActions.alleSvarMottattOppgaveBehandlet());
         history.replace(`/sykefravaer/${action.fnr}/mote`);
     } catch (e) {
         log(e);
@@ -75,7 +72,6 @@ export function* opprettFlereAlternativ(action) {
 
         yield put(historikkActions.hentHistorikk(action.fnr, 'MOTER'));
         yield put(actions.opprettFlereAlternativBekreftet(action.data, action.moteUuid));
-        yield put(veilederoppgaverActions.alleSvarMottattOppgaveBehandlet());
     } catch (e) {
         log(e);
         yield put(actions.opprettFlereAlternativFeilet());

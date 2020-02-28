@@ -85,6 +85,7 @@ export const getMote = (mote) => {
             sted: 'Testveien 2',
             valgt: false,
         }],
+        trengerBehandling: false,
     }, mote);
 };
 
@@ -821,6 +822,7 @@ describe('moter', () => {
                     sted: 'Testveien 2',
                     valgt: false,
                 }],
+                trengerBehandling: false,
             }]);
         });
     });

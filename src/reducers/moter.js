@@ -213,6 +213,7 @@ export default function moter(state = defaultState, action) {
                 return Object.assign({}, mote, {
                     alternativer,
                     deltakere,
+                    trengerBehandling: false,
                 });
             });
 

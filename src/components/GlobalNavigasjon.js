@@ -46,21 +46,28 @@ const isUnfinishedMotebehovTask = (menypunkt, motebehovReducer) => {
         harUbehandletMotebehov(motebehovReducer.data);
 };
 
-const erMoteplanleggerOppgave = (menypunkt, oppgave) => {
-    return menypunkt === menypunkter.MOETEPLANLEGGER &&
-        (oppgave.type === 'ALLE_SVAR_MOTTATT' && oppgave.status !== 'FERDIG');
+const isUnfinishedMoterTask = (menypunkt, moterReducer) => {
+    return menypunkt === menypunkter.MOETEPLANLEGGER
+        && moterReducer
+        && moterReducer.data
+        && moterReducer.data[0]
+        && moterReducer.data[0].trengerBehandling;
 };
 
-const finnAntallPrikker = (menypunkt, oppgaver, motebehovReducer) => {
+const finnAntallPrikker = (menypunkt, oppgaver, motebehovReducer, moterReducer) => {
     const oppgavePrikker = oppgaver.filter((oppgave) => {
-        return erOppfoelginsdialogOppgave(menypunkt, oppgave) || erMoteplanleggerOppgave(menypunkt, oppgave);
+        return erOppfoelginsdialogOppgave(menypunkt, oppgave);
     }).length;
 
     const motebehovPrikker = isUnfinishedMotebehovTask(menypunkt, motebehovReducer)
         ? 1
         : 0;
 
-    return oppgavePrikker + motebehovPrikker;
+    const moterPrikker = isUnfinishedMoterTask(menypunkt, moterReducer)
+        ? 1
+        : 0;
+
+    return oppgavePrikker + motebehovPrikker + moterPrikker;
 };
 
 
@@ -71,6 +78,7 @@ class GlobalNavigasjon extends Component {
             focusIndex: -1,
         };
         props.hentMotebehov(props.fnr);
+        props.hentMoter(props.fnr);
     }
 
     setFocus(fokusId) {
@@ -122,7 +130,7 @@ class GlobalNavigasjon extends Component {
     }
 
     render() {
-        const { fnr, aktivtMenypunkt, oppgaver, motebehovReducer } = this.props;
+        const { fnr, aktivtMenypunkt, oppgaver, motebehovReducer, moterReducer } = this.props;
         this.menypunkter = [historikkMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, oppfoelgingsplanMenypunkt, motemodulMenypunkt];
 
         return (<ul aria-label="Navigasjon" className="navigasjon">
@@ -131,7 +139,7 @@ class GlobalNavigasjon extends Component {
                     const className = cn('navigasjonspanel', {
                         'navigasjonspanel--aktiv': menypunkt === aktivtMenypunkt,
                     });
-                    const antallPrikker = finnAntallPrikker(menypunkt, oppgaver, motebehovReducer);
+                    const antallPrikker = finnAntallPrikker(menypunkt, oppgaver, motebehovReducer, moterReducer);
                     return (<li key={index} className="navigasjon__element">
                         <a
                             ref={this.getRef(index)}
@@ -167,6 +175,8 @@ GlobalNavigasjon.propTypes = {
     oppgaver: PropTypes.arrayOf(PropTypes.object),
     motebehovReducer: PropTypes.object,
     hentMotebehov: PropTypes.func,
+    moterReducer: PropTypes.object,
+    hentMoter: PropTypes.func,
 };
 
 export default GlobalNavigasjon;
