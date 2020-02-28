@@ -10,7 +10,6 @@ import Side from '../sider/Side';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import * as motebehovActions from '../actions/motebehov_actions';
-import * as veilederoppgaverActions from '../actions/veilederoppgaver_actions';
 import * as oppfoelgingsdialogerActions from '../actions/oppfoelgingsdialoger_actions';
 import * as oppfolgingstilfelleperioderActions from '../actions/oppfolgingstilfelleperioder_actions';
 import * as sykmeldingerActions from '../actions/sykmeldinger_actions';
@@ -87,7 +86,6 @@ export class MotebehovSide extends Component {
             ledetekster,
             motebehovListeUtenFlereSvarFraSammePerson,
             motebehovTilgang,
-            oppgaver,
             sykmeldt,
             tilgang,
             motebehovListeMedJaSvarTilOppgavebehandling,
@@ -123,7 +121,6 @@ export class MotebehovSide extends Component {
                         ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
                         ledetekster={ledetekster}
                         motebehovListe={motebehovListeUtenFlereSvarFraSammePerson}
-                        oppgaver={oppgaver}
                         sykmeldt={sykmeldt}
                         motebehovListeMedJaSvarTilOppgavebehandling={motebehovListeMedJaSvarTilOppgavebehandling}
                         veilederinfo={veilederinfo}
@@ -148,7 +145,6 @@ MotebehovSide.propTypes = {
     ledetekster: keyValue,
     motebehovListeUtenFlereSvarFraSammePerson: PropTypes.arrayOf(PropTypes.object),
     motebehovTilgang: PropTypes.object,
-    oppgaver: PropTypes.arrayOf(PropTypes.object),
     skalHenteLedere: PropTypes.bool,
     skalHenteMotebehov: PropTypes.bool,
     skalHenteOppfoelgingsdialoger: PropTypes.bool,
@@ -162,7 +158,7 @@ MotebehovSide.propTypes = {
 };
 
 export function mapDispatchToProps(dispatch) {
-    const actions = Object.assign({}, motebehovActions, veilederoppgaverActions, oppfoelgingsdialogerActions, oppfolgingstilfelleperioderActions, sykmeldingerActions, ledereActions, virksomhetActions, behandleMotebehovActions);
+    const actions = Object.assign({}, motebehovActions, oppfoelgingsdialogerActions, oppfolgingstilfelleperioderActions, sykmeldingerActions, ledereActions, virksomhetActions, behandleMotebehovActions);
     return {
         actions: bindActionCreators(actions, dispatch),
     };
@@ -198,7 +194,6 @@ export const mapStateToProps = (state, ownProps) => {
         ledetekster: state.ledetekster.data,
         motebehovListeUtenFlereSvarFraSammePerson,
         motebehovTilgang: state.motebehov.tilgang,
-        oppgaver: state.veilederoppgaver.data,
         skalHenteLedere: ikkeHenterEllerForsoktHentetLedere(state.ledere),
         skalHenteMotebehov: ikkeHenterEllerForsoktHentetMotebehov(state.motebehov),
         skalHenteOppfoelgingsdialoger: ikkeHenterEllerForsoktHentetOppfoelgingsdialoger(state.oppfoelgingsdialoger),

@@ -1,5 +1,4 @@
 import { dagerMellomDatoer } from './datoUtils';
-import { erAlleVeilederoppgaverBehandlet } from './veilederoppgaverUtils';
 
 export const sorterMotebehovDataEtterDato = (a, b) => {
     return b.opprettetDato === a.opprettetDato ? 0 : b.opprettetDato > a.opprettetDato ? 1 : -1;
@@ -52,8 +51,8 @@ const erAlleMotebehovSvarBehandlet = (motebehovListe) => {
     }).length === 0;
 };
 
-export const erMotebehovBehandlet = (motebehovListe, gjeldendeOppgaver) => {
-    return erAlleMotebehovSvarBehandlet(motebehovListe) && erAlleVeilederoppgaverBehandlet(gjeldendeOppgaver);
+export const erMotebehovBehandlet = (motebehovListe) => {
+    return erAlleMotebehovSvarBehandlet(motebehovListe);
 };
 
 export const harUbehandletMotebehov = (motebehovListe) => {

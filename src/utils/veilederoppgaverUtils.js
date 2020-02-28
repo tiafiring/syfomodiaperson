@@ -17,7 +17,3 @@ export const getSistEndretOppgave = (gjeldendeOppgaver) => {
         return oppgave2.sistEndret === oppgave1.sistEndret ? 0 : oppgave2.sistEndret > oppgave1.sistEndret ? 1 : -1;
     })[0];
 };
-
-export const erAlleVeilederoppgaverBehandlet = (gjeldendeOppgaver) => {
-    return getIkkeFullforteOppgaver(gjeldendeOppgaver).length === 0;
-};

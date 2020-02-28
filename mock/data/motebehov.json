@@ -1,7 +1,7 @@
 [
   {
-    "UUID": "198a6dbf-c987-4b57-a401-a3915ec11429198a6dbf-c987-4b57-a401-a3915ec11429",
-    "id": "b415b37c-ee10-44b6-bddf-54d049ef25f9",
+    "UUID": "11111111-c987-4b57-a401-a3915ec11429198a6dbf-c987-4b57-a401-a3915ec11429",
+    "id": "11111111-ee10-44b6-bddf-54d049ef25f9",
     "opprettetDato": "2019-01-07T13:53:57.047+01:00",
     "aktorId": "1",
     "opprettetAv": "1",
@@ -13,11 +13,13 @@
       "tiltakResultat": "",
       "forklaring": ""
     },
-    "tildeltEnhet": "0330"
+    "tildeltEnhet": "0330",
+    "behandletTidspunkt": null,
+    "behandletVeilederIdent": null
   },
   {
-    "UUID": "198a6dbf-c987-4b57-a401-a3915ec11421",
-    "id": "c815ae0b-9e9b-40b0-bd1c-d1c39dc5f481",
+    "UUID": "22222222-c987-4b57-a401-a3915ec11421",
+    "id": "22222222-9e9b-40b0-bd1c-d1c39dc5f481",
     "opprettetDato": "2019-01-07T13:53:57.047+01:00",
     "aktorId": "1",
     "opprettetAv": "2",
@@ -29,11 +31,13 @@
       "tiltakResultat": "",
       "forklaring": "Jeg liker ikke møte!!"
     },
-    "tildeltEnhet": "0330"
+    "tildeltEnhet": "0330",
+    "behandletTidspunkt": null,
+    "behandletVeilederIdent": null
   },
   {
-    "UUID": "198a6dbf-c987-4b57-a401-a3915ec11411",
-    "id": "b415b37c-ee10-44b6-bddf-54d049ef25f2",
+    "UUID": "33333333-c987-4b57-a401-a3915ec11411",
+    "id": "33333333-ee10-44b6-bddf-54d049ef25f2",
     "opprettetDato": "2019-01-08T13:53:57.047+01:00",
     "aktorId": "1",
     "opprettetAv": "1",
@@ -45,6 +49,8 @@
       "tiltakResultat": "",
       "forklaring": "Møter er bra!"
     },
-    "tildeltEnhet": "0330"
+    "tildeltEnhet": "0330",
+    "behandletTidspunkt": "2019-01-10T13:53:57.047+01:00",
+    "behandletVeilederIdent": "Z990000"
   }
 ]
