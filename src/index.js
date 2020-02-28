@@ -138,14 +138,6 @@ store.dispatch(hentAktivEnhet({
     },
 }));
 
-if (!fnr || fnr.length < 1) {
-    store.dispatch(hentAktivBruker({
-        callback: (aktivBruker) => {
-            window.location.href = `/sykefravaer/${aktivBruker}`;
-        },
-    }));
-}
-
 store.dispatch(hentLedetekster());
 
 if (hasURLParameter('visLedetekster')) {
