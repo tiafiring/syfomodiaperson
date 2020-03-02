@@ -54,12 +54,12 @@ export const hentHandlingsstreng = (sykmelding) => {
         return 'Du må oppsøke en som har rett til å sykmelde. ';
     }
 
-    return `Når du har fått ny sykmelding fra ${sykmelding.legeNavn}, får du en ny beskjed fra oss om å logge deg inn på nav.no slik at du kan sende inn sykmeldingen.\nGår det mange dager, bør du kontakte ${sykmelding.legeNavn} som skal skrive den nye sykmeldingen.`;
+    return `Når du har fått ny sykmelding fra ${sykmelding.bekreftelse.sykmelder}, får du en ny beskjed fra oss om å logge deg inn på nav.no slik at du kan sende inn sykmeldingen.\nGår det mange dager, bør du kontakte ${sykmelding.bekreftelse.sykmelder} som skal skrive den nye sykmeldingen.`;
 };
 
 const hentIntrotekst = (sykmelding) => {
     const intro = 'Du trenger en ny sykmelding fordi';
-    const standardtekst = `${intro} det er gjort en feil i utfyllingen. Vi har gitt beskjed til ${sykmelding.legeNavn} om hva som er feil, og at du må få en ny sykmelding.`;
+    const standardtekst = `${intro} det er gjort en feil i utfyllingen. Vi har gitt beskjed til ${sykmelding.bekreftelse.sykmelder} om hva som er feil, og at du må få en ny sykmelding.`;
     const overSyttitekst = `${intro} du er over 70 år. `;
     const ugyldigSykmeldingversjonTekst = `${intro} det er brukt en ugyldig versjon av sykmeldingen. `;
     const ingenAutorisasjonTekst = `${intro} den som skrev sykmeldingen manglet autorisasjon.`;
