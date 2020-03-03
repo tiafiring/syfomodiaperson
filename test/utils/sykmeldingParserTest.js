@@ -266,11 +266,11 @@ describe('sykmeldingParser', () => {
 
     describe('innsendtArbeidsgivernavn', () => {
         it('Returns correct innsendtArbeidsgivernavn', () => {
-            const incomingSykmeldingWithArbeidsgiver = mockSykmeldingWithArbeidsgiver;
+            const incomingSykmeldingWithMottakendeArbeidsgiver = mockSykmeldingWithMottakendeArbeidsgiver;
 
-            const expectedInnsendtArbeidsgivernavn = 'AG';
+            const expectedInnsendtArbeidsgivernavn = 'Bedrift';
 
-            const outputSM = newSMFormat2OldFormat(incomingSykmeldingWithArbeidsgiver, sykmeldtFnr);
+            const outputSM = newSMFormat2OldFormat(incomingSykmeldingWithMottakendeArbeidsgiver, sykmeldtFnr);
 
             expect(outputSM.innsendtArbeidsgivernavn).to.deep.equal(expectedInnsendtArbeidsgivernavn);
         });
@@ -278,9 +278,11 @@ describe('sykmeldingParser', () => {
         it('Returns correct innsendtArbeidsgivernavn withouth info', () => {
             const mockSM = mockSykmeldinger[0];
 
+            const expectedInnsendtArbeidsgivernavn = 'PONTYPANDY FIRE SERVICE';
+
             const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
 
-            expect(outputSM.innsendtArbeidsgivernavn).to.deep.equal(null);
+            expect(outputSM.innsendtArbeidsgivernavn).to.deep.equal(expectedInnsendtArbeidsgivernavn);
         });
     });
 
