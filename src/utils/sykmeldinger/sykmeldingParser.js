@@ -83,6 +83,10 @@ const mapFriskmelding = (sykmelding) => {
     };
 };
 
+const mapInnsendtArbeidsgivernavn = (sykmelding) => {
+    return sykmelding.sykmeldingStatus.arbeidsgiver && sykmelding.sykmeldingStatus.arbeidsgiver.orgNavn;
+};
+
 const mapMeldingTilNav = (sykmelding) => {
     const meldingTilNav = sykmelding.meldingTilNAV;
     return {
@@ -383,7 +387,7 @@ export const newSMFormat2OldFormat = (sykmelding, fnr) => {
         friskmelding: mapFriskmelding(sykmelding),
         id: sykmelding.id,
         identdato: null,
-        innsendtArbeidsgivernavn: sykmelding.arbeidsgiver && sykmelding.arbeidsgiver.navn,
+        innsendtArbeidsgivernavn: mapInnsendtArbeidsgivernavn(sykmelding),
         innspillTilArbeidsgiver: sykmelding.meldingTilArbeidsgiver,
         meldingTilNav: mapMeldingTilNav(sykmelding),
         mottakendeArbeidsgiver: mapMottakendeArbeidsgiver(sykmelding),

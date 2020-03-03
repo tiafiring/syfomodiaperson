@@ -39,7 +39,7 @@ const mockOldSykmeldinger = [
         },
         id: 'e425a750-7f39-4974-9a06-fa1775f987c9',
         identdato: null,
-        innsendtArbeidsgivernavn: null,
+        innsendtArbeidsgivernavn: 'PONTYPANDY FIRE SERVICE',
         innspillTilArbeidsgiver: null,
         meldingTilNav: {
             navBoerTaTakISaken: null,
