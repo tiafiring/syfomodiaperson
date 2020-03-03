@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { tilLesbarPeriodeMedArstall } from '@navikt/digisyfo-npm';
 import Alertstripe from 'nav-frontend-alertstriper';
 import Sidetopp from '../Sidetopp';
+import { restdatoTilLesbarDato } from '../../utils/datoUtils';
 
 const texts = {
     titles: {
@@ -15,10 +16,16 @@ const texts = {
         noInactiveOppfolgingsplaner: 'Det er ingen tidligere oppfølgingsplaner.',
     },
     duration: 'Varighet',
+    shared: 'Delt med NAV',
 };
 
 const durationText = (dialog) => {
     return `${texts.duration} ${tilLesbarPeriodeMedArstall(dialog.godkjentPlan.gyldighetstidspunkt.fom, dialog.godkjentPlan.gyldighetstidspunkt.tom)}`;
+};
+
+const deltMedNavText = (dialog) => {
+    const sharedDate = dialog.godkjentPlan && restdatoTilLesbarDato(dialog.godkjentPlan.deltMedNAVTidspunkt);
+    return `${texts.shared} ${sharedDate}`;
 };
 
 const finnAntallOppgaver = (dialog) => {
@@ -72,8 +79,9 @@ export class OppfoelgingsPlanerOversikt extends Component {
                         const antallOppgaver = finnAntallOppgaver(dialog);
                         return (<Link key={index} className="navigasjonspanel navigasjonspanel--stor" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
                             <div className="navigasjonselement">
-                                <h3 className="panel__tittel">{dialog.virksomhet.navn}</h3>
-                                <p>{durationText(dialog)}</p>
+                                <h3 className="panel__tittel navigasjonselement__tittel">{dialog.virksomhet.navn}</h3>
+                                <p className="navigasjonselement__undertittel">{durationText(dialog)}</p>
+                                <p className="navigasjonselement__undertekst">{deltMedNavText(dialog)}</p>
                             </div>
                             { antallOppgaver > 0 && <i className="antallNytt">{antallOppgaver}</i> }
                         </Link>);
@@ -92,8 +100,9 @@ export class OppfoelgingsPlanerOversikt extends Component {
                     const antallOppgaver = finnAntallOppgaver(dialog);
                     return (<Link key={index} className="navigasjonspanel navigasjonspanel--stor" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
                         <div className="navigasjonselement">
-                            <h3 className="panel__tittel">{dialog.virksomhet.navn}</h3>
-                            <p>{durationText(dialog)}</p>
+                            <h3 className="panel__tittel navigasjonselement__tittel">{dialog.virksomhet.navn}</h3>
+                            <p className="navigasjonselement__undertittel">{durationText(dialog)}</p>
+                            <p className="navigasjonselement__undertekst">{deltMedNavText(dialog)}</p>
                         </div>
                         { antallOppgaver > 0 && <i className="antallNytt">{antallOppgaver}</i> }
                     </Link>);

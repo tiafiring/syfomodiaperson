@@ -3,21 +3,21 @@
     "id": 2956,
     "uuid": "5f1e2629-062b-442d-ae1f-3b08e9574cd1",
     "sistEndretAvAktoerId": "1101101101102",
-    "sistEndretDato": "2018-12-30T08:49:05.621",
-    "status": "UTDATERT",
+    "sistEndretDato": "2020-01-30T08:49:05.621",
+    "status": "AKTIV",
     "virksomhet": {
       "navn": "PONTYPANDY FIRE STATION",
       "virksomhetsnummer": "110110110"
     },
     "godkjentPlan": {
-      "opprettetTidspunkt": "2018-12-29T14:04:22.787",
+      "opprettetTidspunkt": "2020-01-30T08:49:05.621",
       "gyldighetstidspunkt": {
-        "fom": "2018-12-29",
-        "tom": "2019-01-01",
-        "evalueres": "2018-12-31"
+        "fom": "2020-01-30",
+        "tom": "2020-04-30",
+        "evalueres": "2020-03-31"
       },
       "tvungenGodkjenning": false,
-      "deltMedNAVTidspunkt": "2018-12-30T08:49:05.449",
+      "deltMedNAVTidspunkt": "2020-01-30T08:49:05.621",
       "deltMedNAV": true,
       "deltMedFastlegeTidspunkt": null,
       "deltMedFastlege": false,
