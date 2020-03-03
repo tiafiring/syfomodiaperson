@@ -46,8 +46,22 @@ const textAvventedneUtenArbeidsgiver = (dager) => {
     return `Avventende sykemelding i ${dager} dager\n`;
 };
 
+const textDefaultArbeidsgiver = (arbeidsgiver) => {
+    return arbeidsgiver
+        ? ` sykmeldt fra ${arbeidsgiver}`
+        : '';
+};
+
+const textDefaultDager = (dager) => {
+    return dager === 1
+        ? ` i ${dager} dag`
+        : ` i ${dager} dager`;
+};
+
 const textDefault = (grad, arbeidsgiver, dager) => {
-    return `${grad} % sykmeldt fra ${arbeidsgiver} i ${dager} dager`;
+    const textArbeidsgiver = textDefaultArbeidsgiver(arbeidsgiver);
+    const textDager = textDefaultDager(dager);
+    return `${grad} %${textArbeidsgiver}${textDager}`;
 };
 
 const SykmeldingPeriodeInfo = ({ periode, arbeidsgiver, Element = 'p' }) => {
