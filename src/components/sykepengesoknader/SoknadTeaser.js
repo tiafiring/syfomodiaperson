@@ -24,7 +24,7 @@ import {
 import { FREMTIDIG } from '../../enums/soknadstatuser';
 
 const texts = {
-    sendt: 'Sent til',
+    sendt: 'Sendt til',
     fremtidig: 'Planlagt',
     avbrutt: 'Avbrutt av deg',
     teaser: 'Gjelder perioden',
@@ -83,23 +83,25 @@ const visIkonHover = (soknadstype) => {
 
 const textSoknadTeaserStatus = (key, dato, arbeidsgiver) => {
     switch (key) {
-        case 'TIL_SENDING':
+        case 'soknad.teaser.status.TIL_SENDING':
             return 'Sender...';
-        case 'TIL_SENDING.til-arbeidsgiver-og-nav':
+        case 'soknad.teaser.status.TIL_SENDING.til-arbeidsgiver-og-nav':
             return `Sender til ${arbeidsgiver} og NAV...`;
-        case 'SENDT':
+        case 'soknad.teaser.status.SENDT':
             return `Sendt ${dato}`;
-        case 'SENDT.til-nav':
+        case 'soknad.teaser.status.SENDT.til-nav':
             return `Sendt til NAV ${dato}`;
-        case 'SENDT.til-arbeidsgiver':
+        case 'soknad.teaser.status.SENDT.til-arbeidsgiver':
             return `Sendt til ${arbeidsgiver} ${dato}`;
-        case 'UTKAST_TIL_KORRIGERING':
+        case 'soknad.teaser.status.SENDT.til-arbeidsgiver-og-nav':
+            return `Sendt til ${arbeidsgiver} og NAV ${dato}`;
+        case 'soknad.teaser.status.UTKAST_TIL_KORRIGERING':
             return 'Utkast til endring';
-        case 'UTGAATT':
+        case 'soknad.teaser.status.UTGAATT':
             return 'Ikke brukt på nett';
-        case 'FREMTIDIG':
+        case 'soknad.teaser.status.FREMTIDIG':
             return 'Planlagt';
-        case 'AVBRUTT':
+        case 'soknad.teaser.status.AVBRUTT':
             return textAvbrutt(dato);
         default:
             return '';
