@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router';
 import * as menypunkter from '../enums/menypunkter';
 import cn from 'classnames';
-import { harUbehandletMotebehov } from '../utils/motebehovUtils';
+import UnfinishedTasks from './UnfinishedTasks';
+import { numberOfTasks } from '../utils/GlobalNavigasjonUtils';
 
 const historikkMenypunkt = {
     navn: 'Logg',
@@ -35,42 +36,6 @@ const oppfoelgingsplanMenypunkt = {
     menypunkt: menypunkter.OPPFOELGINGSPLANER,
 };
 
-
-const erOppfoelginsdialogOppgave = (menypunkt, oppgave) => {
-    return menypunkt === menypunkter.OPPFOELGINGSPLANER &&
-        oppgave.type === 'SE_OPPFOLGINGSPLAN' && oppgave.status !== 'FERDIG';
-};
-
-const isUnfinishedMotebehovTask = (menypunkt, motebehovReducer) => {
-    return menypunkt === menypunkter.MOETEPLANLEGGER &&
-        harUbehandletMotebehov(motebehovReducer.data);
-};
-
-const isUnfinishedMoterTask = (menypunkt, moterReducer) => {
-    return menypunkt === menypunkter.MOETEPLANLEGGER
-        && moterReducer
-        && moterReducer.data
-        && moterReducer.data[0]
-        && moterReducer.data[0].trengerBehandling;
-};
-
-const finnAntallPrikker = (menypunkt, oppgaver, motebehovReducer, moterReducer) => {
-    const oppgavePrikker = oppgaver.filter((oppgave) => {
-        return erOppfoelginsdialogOppgave(menypunkt, oppgave);
-    }).length;
-
-    const motebehovPrikker = isUnfinishedMotebehovTask(menypunkt, motebehovReducer)
-        ? 1
-        : 0;
-
-    const moterPrikker = isUnfinishedMoterTask(menypunkt, moterReducer)
-        ? 1
-        : 0;
-
-    return oppgavePrikker + motebehovPrikker + moterPrikker;
-};
-
-
 class GlobalNavigasjon extends Component {
     constructor(props) {
         super(props);
@@ -79,6 +44,7 @@ class GlobalNavigasjon extends Component {
         };
         props.hentMotebehov(props.fnr);
         props.hentMoter(props.fnr);
+        props.hentOppfoelgingsdialoger(props.fnr);
     }
 
     setFocus(fokusId) {
@@ -130,7 +96,7 @@ class GlobalNavigasjon extends Component {
     }
 
     render() {
-        const { fnr, aktivtMenypunkt, oppgaver, motebehovReducer, moterReducer } = this.props;
+        const { fnr, aktivtMenypunkt, motebehovReducer, moterReducer, oppfolgingsplanerReducer } = this.props;
         this.menypunkter = [historikkMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, oppfoelgingsplanMenypunkt, motemodulMenypunkt];
 
         return (<ul aria-label="Navigasjon" className="navigasjon">
@@ -139,7 +105,7 @@ class GlobalNavigasjon extends Component {
                     const className = cn('navigasjonspanel', {
                         'navigasjonspanel--aktiv': menypunkt === aktivtMenypunkt,
                     });
-                    const antallPrikker = finnAntallPrikker(menypunkt, oppgaver, motebehovReducer, moterReducer);
+                    const tasks = numberOfTasks(menypunkt, motebehovReducer, moterReducer, oppfolgingsplanerReducer);
                     return (<li key={index} className="navigasjon__element">
                         <a
                             ref={this.getRef(index)}
@@ -159,7 +125,7 @@ class GlobalNavigasjon extends Component {
                             }}>
                             <span className="navigasjon__element__tekst" dangerouslySetInnerHTML={{ __html: navn }} />
                             {
-                                antallPrikker > 0 && <i className="antallNytt">{antallPrikker}</i>
+                                tasks > 0 && <UnfinishedTasks tasks={tasks} menypunkt={menypunkt} />
                             }
                         </a>
                     </li>);
@@ -172,11 +138,12 @@ class GlobalNavigasjon extends Component {
 GlobalNavigasjon.propTypes = {
     fnr: PropTypes.string,
     aktivtMenypunkt: PropTypes.string,
-    oppgaver: PropTypes.arrayOf(PropTypes.object),
     motebehovReducer: PropTypes.object,
     hentMotebehov: PropTypes.func,
     moterReducer: PropTypes.object,
     hentMoter: PropTypes.func,
+    oppfolgingsplanerReducer: PropTypes.object,
+    hentOppfoelgingsdialoger: PropTypes.func,
 };
 
 export default GlobalNavigasjon;

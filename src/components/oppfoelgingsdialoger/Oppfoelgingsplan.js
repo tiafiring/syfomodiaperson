@@ -3,63 +3,21 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
-import { tilLesbarDatoMedArstall } from '@navikt/digisyfo-npm';
-import { Checkbox } from 'nav-frontend-skjema';
-import Alertstripe from 'nav-frontend-alertstriper';
 import Knapp from 'nav-frontend-knapper';
 import * as dokumentActions from '../../actions/dokumentinfo_actions';
-import * as veilederoppgaverActions from '../../actions/veilederoppgaver_actions';
 import Feilmelding from '../Feilmelding';
 import AppSpinner from '../AppSpinner';
 
-const FERDIG = 'FERDIG';
-
-const erOppgaveFullfoert = (oppgave) => {
-    return oppgave.status === FERDIG;
-};
-
-const seOppfolgingsplanOppgave = (oppfolgingsplan) => {
-    return oppfolgingsplan.oppgaver.filter((oppgave) => {
-        return oppgave.type === 'SE_OPPFOLGINGSPLAN';
-    })[0];
-};
-
 const PlanVisning = (
     {
-        actions,
         dokumentinfo,
         fnr,
         oppfolgingsplan,
-        veilederinfo,
     }) => {
-    const sePlanOppgave = seOppfolgingsplanOppgave(oppfolgingsplan);
     const bildeUrler = [];
     for (let i = 1; i <= dokumentinfo.antallSider; i += 1) {
         bildeUrler.push(`${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/dokument/${oppfolgingsplan.id}/side/${i}`);
     }
-
-    const Skjema = () => {
-        return sePlanOppgave && sePlanOppgave.status === FERDIG
-            ? <Alertstripe type="suksess">
-                <p>Ferdig behandlet av {sePlanOppgave.sistEndretAv} {tilLesbarDatoMedArstall(sePlanOppgave.sistEndret)}</p>
-            </Alertstripe>
-            : sePlanOppgave && sePlanOppgave.status !== FERDIG
-                ? <Checkbox
-                    label="Marker som behandlet"
-                    onClick={() => {
-                        actions.behandleOppgave(sePlanOppgave.id, {
-                            status: FERDIG,
-                            sistEndretAv: veilederinfo.ident,
-                        }, fnr);
-                    }}
-                    id="marker__utfoert"
-                    disabled={erOppgaveFullfoert(sePlanOppgave)}
-                    checked={erOppgaveFullfoert(sePlanOppgave)}
-                />
-                : (<Alertstripe type="info">
-                    <p>Fant dessverre ingen oppgave knyttet til denne planen</p>
-                </Alertstripe>);
-    };
 
     const TilbakeTilOppfolgingsplaner = () => {
         return (<div className="blokk">
@@ -68,9 +26,6 @@ const PlanVisning = (
     };
 
     return (<div className="blokk--l">
-        <div className="blokk">
-            <Skjema />
-        </div>
         <TilbakeTilOppfolgingsplaner />
         <div className="pdfbilder blokk--s">
             {
@@ -150,7 +105,7 @@ OppfoelgingsplanWrapper.propTypes = {
 };
 
 export function mapDispatchToProps(dispatch) {
-    const actions = Object.assign({}, dokumentActions, veilederoppgaverActions);
+    const actions = Object.assign({}, dokumentActions);
     return {
         actions: bindActionCreators(actions, dispatch),
     };
@@ -158,9 +113,6 @@ export function mapDispatchToProps(dispatch) {
 
 export function mapStateToProps(state, ownProps) {
     const oppfolgingsplan = ownProps.oppfoelgingsdialog;
-    oppfolgingsplan.oppgaver = state.veilederoppgaver.data.filter((_oppgave) => {
-        return _oppgave.uuid === oppfolgingsplan.uuid;
-    });
     const veilederinfo = state.veilederinfo.data;
     let oppfolgingsplanDokumentinfoReducer = {};
     if (oppfolgingsplan) {
@@ -174,7 +126,6 @@ export function mapStateToProps(state, ownProps) {
         oppfolgingsplan,
         veilederinfo,
         fnr: ownProps.fnr,
-        veilderoppgaver: state.veilederoppgaver.data,
     };
 }
 

@@ -96,14 +96,8 @@ export function mapStateToProps(state, ownProps) {
     const hentetDialoger = state.oppfoelgingsdialoger.hentet;
     const henterDialoger = state.oppfoelgingsdialoger.henter;
 
-    const oppfoelgingsdialoger = state.oppfoelgingsdialoger.data.map((dialog) => {
-        const oppgaver = state.veilederoppgaver.data.filter((oppgave) => {
-            return oppgave.type === 'SE_OPPFOLGINGSPLAN' && oppgave.uuid === dialog.uuid;
-        });
-        return Object.assign({}, dialog, {
-            oppgaver,
-        });
-    });
+    const oppfoelgingsdialoger = state.oppfoelgingsdialoger.data;
+
     const aktiveDialoger = oppfoelgingsdialoger.filter((dialog) => {
         return dialog.status !== 'AVBRUTT' && new Date(dialog.godkjentPlan.gyldighetstidspunkt.tom) > new Date();
     });
@@ -120,7 +114,6 @@ export function mapStateToProps(state, ownProps) {
         hentingFeilet,
         hentetDialoger,
         henterDialoger,
-        veilederoppgaver: state.veilederoppgaver.data,
         inaktiveDialoger,
         aktiveDialoger,
         tilgang: state.tilgang.data,
