@@ -35,8 +35,6 @@ const PlanVisning = (
     const sePlanOppgave = seOppfolgingsplanOppgave(oppfolgingsplan);
     const bildeUrler = [];
     for (let i = 1; i <= dokumentinfo.antallSider; i += 1) {
-        console.log('dette er i', i);
-        console.log('dette er antallSide', dokumentinfo.antallSider);
         bildeUrler.push(`${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/dokument/${oppfolgingsplan.id}/side/${i}`);
     }
 
@@ -164,10 +162,14 @@ export function mapStateToProps(state, ownProps) {
         return _oppgave.uuid === oppfolgingsplan.uuid;
     });
     const veilederinfo = state.veilederinfo.data;
+    let oppfolgingsplanDokumentinfoReducer = {};
+    if (oppfolgingsplan) {
+        oppfolgingsplanDokumentinfoReducer = state.dokumentinfo[oppfolgingsplan.id] || {};
+    }
     return {
-        henter: state.dokumentinfo.henter || state.veilederoppgaver.henter,
-        hentingFeilet: state.dokumentinfo.hentingFeilet,
-        dokumentinfo: state.dokumentinfo.data,
+        henter: !oppfolgingsplanDokumentinfoReducer.hentingForsokt || state.veilederoppgaver.henter,
+        hentingFeilet: oppfolgingsplanDokumentinfoReducer.hentingFeilet,
+        dokumentinfo: oppfolgingsplanDokumentinfoReducer && oppfolgingsplanDokumentinfoReducer.data,
         brukernavn: state.navbruker.data.navn,
         oppfolgingsplan,
         veilederinfo,
