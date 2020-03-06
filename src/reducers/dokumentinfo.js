@@ -6,33 +6,42 @@ import {
 
 const initiellState = {
     henter: false,
+    hentet: false,
     hentingFeilet: false,
+    hentingForsokt: false,
     data: {},
 };
 
 export default function dokumentinfo(state = initiellState, action) {
+    const oppfolgingsplanDokument = {};
     switch (action.type) {
-        case HENT_DOKUMENTINFO_FEILET: {
-            return Object.assign({}, state, {
-                data: {},
-                henter: false,
-                hentingFeilet: true,
-            });
-        }
-        case HENTER_DOKUMENTINFO: {
-            return {
+        case HENTER_DOKUMENTINFO:
+            oppfolgingsplanDokument[action.planId] = {
                 data: {},
                 henter: true,
+                hentet: false,
                 hentingFeilet: false,
+                hentingForsokt: false,
             };
-        }
-        case DOKUMENTINFO_HENTET: {
-            return {
-                henter: false,
-                hentingFeilet: false,
+            return { ...state, ...oppfolgingsplanDokument };
+        case DOKUMENTINFO_HENTET:
+            oppfolgingsplanDokument[action.planId] = {
                 data: action.data,
+                henter: false,
+                hentet: true,
+                hentingFeilet: false,
+                hentingForsokt: true,
             };
-        }
+            return { ...state, ...oppfolgingsplanDokument };
+        case HENT_DOKUMENTINFO_FEILET:
+            oppfolgingsplanDokument[action.planId] = {
+                data: {},
+                henter: false,
+                hentet: false,
+                hentingFeilet: false,
+                hentingForsokt: true,
+            };
+            return { ...state, ...oppfolgingsplanDokument };
         default: {
             return state;
         }
