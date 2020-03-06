@@ -1,6 +1,8 @@
 const mockData = require('./mockData');
 const enums = require('./mockDataEnums');
 
+const dokumentinfo = { antallSider: 4 };
+
 function mockForLokal(server) {
     server.get('/syfooppfolgingsplanservice/api/internad/v1/oppfolgingsplan/:fnr', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
@@ -10,6 +12,11 @@ function mockForLokal(server) {
     server.get('/syfooppfolgingsplanservice/api/internad/v1/oppfolgingsplan/:fnr/historikk', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[enums.HISTORIKKOPPFOLGINGSPLAN]));
+    });
+
+    server.get('/syfooppfolgingsplanservice/api/internad/dokument/:id/dokumentinfo', (req, res) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(dokumentinfo));
     });
 }
 

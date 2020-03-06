@@ -35,6 +35,8 @@ const PlanVisning = (
     const sePlanOppgave = seOppfolgingsplanOppgave(oppfolgingsplan);
     const bildeUrler = [];
     for (let i = 1; i <= dokumentinfo.antallSider; i += 1) {
+        console.log('dette er i', i);
+        console.log('dette er antallSide', dokumentinfo.antallSider);
         bildeUrler.push(`${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/dokument/${oppfolgingsplan.id}/side/${i}`);
     }
 
