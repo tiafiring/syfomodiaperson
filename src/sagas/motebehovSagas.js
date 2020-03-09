@@ -41,6 +41,9 @@ export function* behandleMotebehov(action) {
         if (e.status === 403) {
             yield put(behandleActions.behandleMotebehovForbudt());
             return;
+        } else if (e.message === '409') {
+            window.location.reload();
+            return;
         }
         log(e);
         yield put(behandleActions.behandleMotebehovFeilet());

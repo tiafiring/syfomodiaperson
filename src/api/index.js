@@ -69,8 +69,10 @@ export function post(url, body) {
                 lagreRedirectUrlILocalStorage(window.location.href);
                 window.location.href = `${hentLoginUrl()}?redirect=${hentRedirectBaseUrl()}`;
                 return null;
-            }
-            if (res.status >= 400) {
+            } else if (res.status === 409) {
+                log(res);
+                throw new Error('409');
+            } else if (res.status >= 400) {
                 log(res);
                 throw new Error('Forespørsel feilet');
             } else {
