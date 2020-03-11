@@ -28,6 +28,34 @@
     "arbeidstaker": null
   },
   {
+    "id": 2957,
+    "uuid": "2f1e2629-062b-442d-ae1f-3b08e9574cd1",
+    "sistEndretAvAktoerId": "1101101101102",
+    "sistEndretDato": "2020-01-30T08:49:05.621",
+    "status": "AKTIV",
+    "virksomhet": {
+      "navn": "BRANN OG BIL AS",
+      "virksomhetsnummer": "555666444"
+    },
+    "godkjentPlan": {
+      "opprettetTidspunkt": "2020-01-20T08:49:05.621",
+      "gyldighetstidspunkt": {
+        "fom": "2020-01-20",
+        "tom": "2020-03-30",
+        "evalueres": "2020-03-21"
+      },
+      "tvungenGodkjenning": false,
+      "deltMedNAVTidspunkt": "2020-01-20T08:49:05.621",
+      "deltMedNAV": true,
+      "deltMedFastlegeTidspunkt": "2020-01-20T08:49:05.621",
+      "deltMedFastlege": true,
+      "dokumentUuid": "264fb21f-48c3-4669-82ca-d61f51d20c84"
+    },
+    "oppgaver": [],
+    "arbeidsgiver": null,
+    "arbeidstaker": null
+  },
+  {
     "id": 2963,
     "uuid": "7ad362e9-c5a7-42c0-b2d0-2a053518272b",
     "sistEndretAvAktoerId": "1101101101102",

@@ -8,11 +8,11 @@ import { restdatoTilLesbarDato } from '../../utils/datoUtils';
 
 const texts = {
     titles: {
-        relevantOppfolgingsplaner: 'Aktuelle oppfølgingsplaner',
+        relevantOppfolgingsplaner: 'Aktive oppfølgingsplaner',
         inactiveOppfolgingsplaner: 'Tidligere oppfølgingsplaner',
     },
     alertMessages: {
-        noRelevantOppfolgingsplaner: 'Det er ingen aktuelle oppfølgingsplaner.',
+        noRelevantOppfolgingsplaner: 'Det er ingen aktive oppfølgingsplaner.',
         noInactiveOppfolgingsplaner: 'Det er ingen tidligere oppfølgingsplaner.',
     },
     duration: 'Varighet',
@@ -26,12 +26,6 @@ const durationText = (dialog) => {
 const deltMedNavText = (dialog) => {
     const sharedDate = dialog.godkjentPlan && restdatoTilLesbarDato(dialog.godkjentPlan.deltMedNAVTidspunkt);
     return `${texts.shared} ${sharedDate}`;
-};
-
-const finnAntallOppgaver = (dialog) => {
-    return dialog.oppgaver.filter((oppgave) => {
-        return oppgave.type === 'SE_OPPFOLGINGSPLAN' && oppgave.status !== 'FERDIG';
-    }).length;
 };
 
 export class OppfoelgingsPlanerOversikt extends Component {
@@ -76,14 +70,12 @@ export class OppfoelgingsPlanerOversikt extends Component {
                 </Alertstripe>}
                 {
                     aktiveDialoger.map((dialog, index) => {
-                        const antallOppgaver = finnAntallOppgaver(dialog);
                         return (<Link key={index} className="navigasjonspanel navigasjonspanel--stor" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
                             <div className="navigasjonselement">
                                 <h3 className="panel__tittel navigasjonselement__tittel">{dialog.virksomhet.navn}</h3>
                                 <p className="navigasjonselement__undertittel">{durationText(dialog)}</p>
                                 <p className="navigasjonselement__undertekst">{deltMedNavText(dialog)}</p>
                             </div>
-                            { antallOppgaver > 0 && <i className="antallNytt">{antallOppgaver}</i> }
                         </Link>);
                     })
                 }
@@ -97,14 +89,12 @@ export class OppfoelgingsPlanerOversikt extends Component {
             }
             {
                 inaktiveDialoger.map((dialog, index) => {
-                    const antallOppgaver = finnAntallOppgaver(dialog);
                     return (<Link key={index} className="navigasjonspanel navigasjonspanel--stor" to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}>
                         <div className="navigasjonselement">
                             <h3 className="panel__tittel navigasjonselement__tittel">{dialog.virksomhet.navn}</h3>
                             <p className="navigasjonselement__undertittel">{durationText(dialog)}</p>
                             <p className="navigasjonselement__undertekst">{deltMedNavText(dialog)}</p>
                         </div>
-                        { antallOppgaver > 0 && <i className="antallNytt">{antallOppgaver}</i> }
                     </Link>);
                 })
             }
