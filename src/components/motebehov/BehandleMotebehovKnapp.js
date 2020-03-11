@@ -31,19 +31,16 @@ export const BehandleMotebehovKnapp = (
     const erBehandlet = erMotebehovBehandlet(motebehovListe);
 
     return (<div className="panel behandleMotebehovKnapp">
-        { motebehovListe.length > 0
-            ? <div className="skjema__input">
-                <Checkbox
-                    label={behandleMotebehovKnappLabel(erBehandlet, sistBehandletMotebehov)}
-                    onClick={() => {
-                        behandleMotebehov(actions, fnr, veilederinfo, motebehovListe);
-                    }}
-                    id="marker__utfoert"
-                    disabled={erBehandlet}
-                    checked={erBehandlet} />
-            </div>
-            : <p>Fant dessverre ingen oppgaver knyttet til denne avklaringen</p>
-        }
+        <div className="skjema__input">
+            <Checkbox
+                label={behandleMotebehovKnappLabel(erBehandlet, sistBehandletMotebehov)}
+                onClick={() => {
+                    behandleMotebehov(actions, fnr, veilederinfo, motebehovListe);
+                }}
+                id="marker__utfoert"
+                disabled={erBehandlet}
+                checked={erBehandlet} />
+        </div>
     </div>);
 };
 

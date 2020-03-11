@@ -39,12 +39,12 @@ export class Motebehov extends Component {
         } = this.props;
         return (<div className="motebehovSide">
             <Sidetopp tittel={'Behov for dialogmøte'} />
-            <BehandleMotebehovKnapp
+            {motebehovListeMedJaSvarTilOppgavebehandling.length > 0 && (<BehandleMotebehovKnapp
                 actions={actions}
                 fnr={fnr}
                 motebehovListe={motebehovListeMedJaSvarTilOppgavebehandling}
                 veilederinfo={veilederinfo}
-            />
+            />)}
             <MotebehovKvittering
                 ledereData={ledereData}
                 ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
@@ -58,12 +58,12 @@ export class Motebehov extends Component {
                 oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
                 sykmeldinger={sykmeldinger}
             />
-            <BehandleMotebehovKnapp
+            {motebehovListeMedJaSvarTilOppgavebehandling.length > 0 && (<BehandleMotebehovKnapp
                 actions={actions}
                 fnr={fnr}
                 motebehovListe={motebehovListeMedJaSvarTilOppgavebehandling}
                 veilederinfo={veilederinfo}
-            />
+            />)}
         </div>);
     }
 }
