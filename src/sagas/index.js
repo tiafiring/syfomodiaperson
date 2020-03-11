@@ -5,7 +5,6 @@ import { all } from 'redux-saga/effects';
 import ledereSagas from './ledereSagas';
 import fastlegerSagas from './fastlegerSagas';
 import navbrukerSagas from './navbrukerSagas';
-import veilederoppgaverSagas from './veilederoppgaverSagas';
 import moterSagas from './moterSagas';
 import motebehovSagas from './motebehovSagas';
 import epostinnholdSagas from './epostinnholdSagas';
@@ -42,7 +41,6 @@ export default function* rootSaga() {
         sykepengesoknaderSagas(),
         arbeidsgiversSykmeldingerSagas(),
         historikkSagas(),
-        veilederoppgaverSagas(),
         behandlendeEnhetSagas(),
         dokumentInfoSagas(),
         veilederinfoSagas(),

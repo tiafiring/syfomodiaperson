@@ -12,9 +12,6 @@ describe('GlobalNavigasjonContainer', () => {
                     harTilgang: true,
                 },
             },
-            veilederoppgaver: {
-                data: [],
-            },
             motebehov: {
                 data: [],
             },

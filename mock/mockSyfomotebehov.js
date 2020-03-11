@@ -17,7 +17,23 @@ function mockForLokal(server) {
     });
 }
 
-function mockSyfomotebehov(server) {
+function mockEndepunkterSomEndrerState(server) {
+    server.post('/syfomotebehov/api/internad/veileder/motebehov/:fnr/behandle', (req, res) => {
+        const oppdaterteMotebehov = mockData.motebehov.map((motebehov) => {
+            motebehov.behandletTidspunkt = new Date();
+            motebehov.behandletVeilederIdent = 'Z990000';
+        });
+
+        Object.assign(mockData.motebehov, ...oppdaterteMotebehov);
+
+        res.sendStatus(200);
+    });
+}
+
+function mockSyfomotebehov(server, erLokal) {
+    if (erLokal) {
+        mockEndepunkterSomEndrerState(server);
+    }
     mockForLokal(server);
 }
 

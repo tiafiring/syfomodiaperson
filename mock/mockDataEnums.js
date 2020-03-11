@@ -18,7 +18,6 @@ const SYKMELDINGER = 'sykmeldinger';
 const TEKSTER = 'tekster';
 const TILGANGTILBRUKER = 'tilgangtilbruker';
 const VEILEDERINFO = 'veilederinfo';
-const VEILEDEROPPGAVER = 'veilederoppgaver';
 
 
 
@@ -43,5 +42,4 @@ module.exports = {
     TEKSTER,
     TILGANGTILBRUKER,
     VEILEDERINFO,
-    VEILEDEROPPGAVER,
 };

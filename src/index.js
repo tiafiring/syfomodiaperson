@@ -26,7 +26,6 @@ import historikk from './reducers/historikk';
 import ledetekster from './reducers/ledetekster';
 import sykepengesoknader from './reducers/sykepengesoknader';
 import oppfoelgingsdialoger from './reducers/oppfoelgingsdialoger';
-import veilederoppgaver from './reducers/veilederoppgaver';
 import dokumentinfo from './reducers/dokumentinfo';
 import behandlendeEnhet from './reducers/behandlendeEnhet';
 import enhet from './reducers/enhet';
@@ -41,7 +40,6 @@ import { hentLedetekster } from './actions/ledetekster_actions';
 import { sjekkTilgang } from './actions/tilgang_actions';
 import { hentVeilederinfo } from './actions/veilederinfo_actions';
 import { hentBehandlendeEnhet } from './actions/behandlendeEnhet_actions';
-import { hentVeilederOppgaver } from './actions/veilederoppgaver_actions';
 import { hentNavbruker } from './actions/navbruker_actions';
 import { hentLedere } from './actions/ledere_actions';
 import { pushModiaContext, hentAktivBruker, hentAktivEnhet } from './actions/modiacontext_actions';
@@ -74,7 +72,6 @@ const rootReducer = combineReducers({
     diskresjonskode,
     dokumentinfo,
     egenansatt,
-    veilederoppgaver,
     veilederinfo,
     ledetekster,
     tilgang,
@@ -112,7 +109,6 @@ const fnrRegex = new RegExp('^[0-9]{11}$');
 if (fnrRegex.test(fnr)) {
     store.dispatch(hentVeilederinfo());
     store.dispatch(hentBehandlendeEnhet(fnr));
-    store.dispatch(hentVeilederOppgaver(fnr));
     store.dispatch(hentNavbruker(fnr));
     store.dispatch(hentLedere(fnr));
     store.dispatch(sjekkTilgang(fnr));
