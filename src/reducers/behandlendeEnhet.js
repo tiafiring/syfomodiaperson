@@ -10,7 +10,7 @@ const initiellState = {
     data: {},
 };
 
-export default function veilederoppgaver(state = initiellState, action) {
+export default function behandlendeEnhet(state = initiellState, action) {
     switch (action.type) {
         case HENT_BEHANDLENDE_ENHET_FEILET: {
             return Object.assign({}, state, {

@@ -52,9 +52,7 @@ const PlanVisning = (
 
 PlanVisning.propTypes = {
     oppfolgingsplan: PropTypes.object,
-    veilederinfo: PropTypes.object,
     dokumentinfo: PropTypes.object,
-    actions: PropTypes.object,
     fnr: PropTypes.string,
 };
 
@@ -69,13 +67,11 @@ class OppfoelgingsplanWrapper extends Component {
 
     render() {
         const {
-            actions,
             dokumentinfo,
             fnr,
             henter,
             hentingFeilet,
             oppfolgingsplan,
-            veilederinfo,
         } = this.props;
         return (() => {
             if (henter) {
@@ -85,11 +81,9 @@ class OppfoelgingsplanWrapper extends Component {
                 return <Feilmelding />;
             }
             return (<PlanVisning
-                veilederinfo={veilederinfo}
                 oppfolgingsplan={oppfolgingsplan}
                 dokumentinfo={dokumentinfo}
-                fnr={fnr}
-                actions={actions} />);
+                fnr={fnr} />);
         })();
     }
 }
@@ -98,7 +92,6 @@ OppfoelgingsplanWrapper.propTypes = {
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     oppfolgingsplan: PropTypes.object,
-    veilederinfo: PropTypes.object,
     actions: PropTypes.object,
     dokumentinfo: PropTypes.object,
     fnr: PropTypes.string,
@@ -113,18 +106,16 @@ export function mapDispatchToProps(dispatch) {
 
 export function mapStateToProps(state, ownProps) {
     const oppfolgingsplan = ownProps.oppfoelgingsdialog;
-    const veilederinfo = state.veilederinfo.data;
     let oppfolgingsplanDokumentinfoReducer = {};
     if (oppfolgingsplan) {
         oppfolgingsplanDokumentinfoReducer = state.dokumentinfo[oppfolgingsplan.id] || {};
     }
     return {
-        henter: !oppfolgingsplanDokumentinfoReducer.hentingForsokt || state.veilederoppgaver.henter,
+        henter: !oppfolgingsplanDokumentinfoReducer.hentingForsokt,
         hentingFeilet: oppfolgingsplanDokumentinfoReducer.hentingFeilet,
         dokumentinfo: oppfolgingsplanDokumentinfoReducer && oppfolgingsplanDokumentinfoReducer.data,
         brukernavn: state.navbruker.data.navn,
         oppfolgingsplan,
-        veilederinfo,
         fnr: ownProps.fnr,
     };
 }

@@ -122,9 +122,6 @@ describe('MotebehovContainer', () => {
                     henter: false,
                     data: {},
                 },
-                veilederoppgaver: {
-                    data: [],
-                },
                 veilederinfo: {
                     data: {},
                 },

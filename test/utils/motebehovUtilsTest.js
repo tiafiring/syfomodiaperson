@@ -197,7 +197,7 @@ describe('motebehovUtils', () => {
             behandletVeilederIdent: null,
         };
 
-        describe('med motebehovsvar og uten veilederoppgaver', () => {
+        describe('med motebehovsvar', () => {
             it('er true, med 1 behandlet svar med behov', () => {
                 const exp = erMotebehovBehandlet([motebehovMedBehovBehandlet]);
                 expect(exp).to.equal(true)
@@ -234,8 +234,8 @@ describe('motebehovUtils', () => {
             });
         });
 
-        describe('uten motebehov og uten veilederoppgaver', () => {
-            it('er true, om det er ingen motebehov eller veilederoppgaver', () => {
+        describe('uten motebehov', () => {
+            it('er true, om det er ingen motebehov', () => {
                 const exp = erMotebehovBehandlet([]);
                 expect(exp).to.equal(true)
             });

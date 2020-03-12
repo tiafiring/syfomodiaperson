@@ -30,6 +30,5 @@ lastFilTilMinne(enums.SYKMELDINGER);
 lastFilTilMinne(enums.TEKSTER);
 lastFilTilMinne(enums.TILGANGTILBRUKER);
 lastFilTilMinne(enums.VEILEDERINFO);
-lastFilTilMinne(enums.VEILEDEROPPGAVER);
 
 module.exports = mockData;
