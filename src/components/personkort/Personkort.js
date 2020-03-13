@@ -41,6 +41,7 @@ class Personkort extends Component {
         if (brukerFnr && !henterEllerHarHentetFastleger(fastleger)) {
             this.props.actions.hentFastleger(brukerFnr);
         }
+        this.props.actions.hentSykmeldinger(brukerFnr);
     }
 
     byttVisning(visning) {
@@ -54,6 +55,7 @@ class Personkort extends Component {
             diskresjonskode,
             egenansatt,
             navbruker,
+            sykmeldinger,
         } = this.props;
         const visning = this.state.visning;
 
@@ -65,6 +67,7 @@ class Personkort extends Component {
                     diskresjonskode={diskresjonskode}
                     egenansatt={egenansatt}
                     navbruker={navbruker}
+                    sykmeldinger={sykmeldinger}
                 />}
             >
                 <div>
@@ -122,6 +125,6 @@ Personkort.propTypes = {
     navbruker: PropTypes.object,
     ledere: PropTypes.array,
     behandlendeEnhet: PropTypes.object,
-
+    sykmeldinger: PropTypes.arrayOf(PropTypes.object),
 };
 export default Personkort;
