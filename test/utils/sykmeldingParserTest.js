@@ -7,6 +7,8 @@ import {
 import mockSykmeldinger from '../mockdata/sykmeldinger/mockSykmeldinger';
 import {
     mockSykmeldingerWithBekreftelse,
+    mockSykmeldingerWithEgenmeldt,
+    mockSykmeldingerWithHarRedusertArbeidsgiverperiode,
     mockSykmeldingerWithUtdypendeOpplysningerPkt62,
     mockSykmeldingerWithUtdypendeOpplysningerPkt63,
     mockSykmeldingWithArbeidsevne,
@@ -689,6 +691,38 @@ describe('sykmeldingParser', () => {
             const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
 
             expect(outputSM.valgtArbeidssituasjon).to.deep.equal(null);
+        });
+    });
+
+    describe('egenmeldt', () => {
+        it('Returns correct egenmeldt', () => {
+            const outputSM = newSMFormat2OldFormat(mockSykmeldingerWithEgenmeldt, sykmeldtFnr);
+
+            expect(outputSM.egenmeldt).to.deep.equal(true);
+        });
+
+        it('Returns correct egenmeldt without info', () => {
+            const mockSM = mockSykmeldinger[0];
+
+            const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
+
+            expect(outputSM.egenmeldt).to.deep.equal(null);
+        });
+    });
+
+    describe('harRedusertArbeidsgiverperiode', () => {
+        it('Returns correct harRedusertArbeidsgiverperiode', () => {
+            const outputSM = newSMFormat2OldFormat(mockSykmeldingerWithHarRedusertArbeidsgiverperiode, sykmeldtFnr);
+
+            expect(outputSM.harRedusertArbeidsgiverperiode).to.deep.equal(true);
+        });
+
+        it('Returns correct harRedusertArbeidsgiverperiode without info', () => {
+            const mockSM = mockSykmeldinger[0];
+
+            const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
+
+            expect(outputSM.harRedusertArbeidsgiverperiode).to.deep.equal(null);
         });
     });
 });

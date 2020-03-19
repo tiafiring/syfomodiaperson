@@ -309,3 +309,13 @@ export const mockSykmeldingerWithUtdypendeOpplysningerPkt63 = {
         },
     },
 };
+
+export const mockSykmeldingerWithEgenmeldt = {
+    ...mockSM,
+    egenmeldt: true,
+};
+
+export const mockSykmeldingerWithHarRedusertArbeidsgiverperiode = {
+    ...mockSM,
+    harRedusertArbeidsgiverperiode: true,
+};
