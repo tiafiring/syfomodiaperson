@@ -130,7 +130,7 @@ describe('Personkort', () => {
             expect(komponent.find(EtikettBase)).to.have.length(1);
         });
 
-        it('Skal vise en EtikettBase, om bruker er egen ansatt', () => {
+        it('Skal vise en EtikettBase, om bruker er egenansatt', () => {
             egenansatt = {
                 data: {
                     erEgenAnsatt: true,
