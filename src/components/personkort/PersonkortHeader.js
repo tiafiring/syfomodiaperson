@@ -35,7 +35,7 @@ const PersonkortHeader = ({ diskresjonskode, egenansatt, navbruker }) => {
                 }
                 {
                     egenansatt.data.erEgenAnsatt
-                    && <EtikettBase type="fokus">Egen ansatt</EtikettBase>
+                    && <EtikettBase type="fokus">Egenansatt</EtikettBase>
                 }
             </div>
         }
