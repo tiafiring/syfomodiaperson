@@ -111,6 +111,8 @@ const mockOldSykmeldinger = [
                 ruleStatus: null,
             }],
         },
+        egenmeldt: null,
+        harRedusertArbeidsgiverperiode: null,
     }
 ];
 

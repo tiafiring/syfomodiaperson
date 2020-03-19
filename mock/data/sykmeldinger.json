@@ -163,9 +163,9 @@
       },
       "biDiagnoser": [
         {
-          "kode": "L87",
-          "system": "2.16.578.1.12.4.1.1.7170",
-          "tekst": "GANGLION SENE"
+          "kode": "R991",
+          "system": "ICPC-2",
+          "tekst": "Covid-19"
         }
       ],
       "svangerskap": true,
@@ -244,7 +244,9 @@
       "tlf": "tel:94431152"
     },
     "syketilfelleStartDato": "2020-01-22",
-    "navnFastlege": "Lego Las Legesen"
+    "navnFastlege": "Lego Las Legesen",
+    "egenmeldt": true,
+    "harRedusertArbeidsgiverperiode": true
   },
   {
     "id": "289148ba-4c3c-4b3f-b7a3-385b7e7c927d",
@@ -405,7 +407,9 @@
       "tlf": "tel:94431152"
     },
     "syketilfelleStartDato": "2020-01-22",
-    "navnFastlege": "Lego Las Legesen"
+    "navnFastlege": "Lego Las Legesen",
+    "egenmeldt": false,
+    "harRedusertArbeidsgiverperiode": false
   },
   {
     "id": "333148ba-4c3c-4b3f-b7a3-385b7e7c927d",
@@ -528,7 +532,9 @@
       "tlf": "tel:94431152"
     },
     "syketilfelleStartDato": "2020-01-22",
-    "navnFastlege": "Lego Las Legesen"
+    "navnFastlege": "Lego Las Legesen",
+    "egenmeldt": false,
+    "harRedusertArbeidsgiverperiode": false
   },
   {
     "id": "444148ba-4c3c-4b3f-b7a3-385b7e7c927d",
@@ -651,6 +657,8 @@
       "tlf": "tel:94431152"
     },
     "syketilfelleStartDato": "2020-02-20",
-    "navnFastlege": "Lego Las Legesen"
+    "navnFastlege": "Lego Las Legesen",
+    "egenmeldt": false,
+    "harRedusertArbeidsgiverperiode": false
   }
 ]
