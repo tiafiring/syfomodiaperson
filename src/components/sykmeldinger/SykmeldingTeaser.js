@@ -18,12 +18,19 @@ import {
 
 const texts = {
     teaserTekst: 'Sykmelding\n',
+    egenmeldtTeaserTekst: 'Egenmeldt sykmelding\n',
     sendt: 'Sendt til arbeidsgiver\n',
     utgaatt: 'Ikke brukt på nett\n',
     tilSending: 'Sender...',
     avbrutt: 'Avbrutt av deg\n',
     bekreftet: 'Bekreftet av deg\n',
     avvist: 'Avvist av NAV\n',
+};
+
+const teaserText = (egenmeldt) => {
+    return egenmeldt
+        ? texts.egenmeldtTeaserTekst
+        : texts.teaserTekst;
 };
 
 const textStatus = (status, behandlingsutfallStatus) => {
@@ -111,7 +118,7 @@ class SykmeldingTeaser extends Component {
                                 {tilLesbarPeriodeMedArstall(tidligsteFom(sykmelding.mulighetForArbeid.perioder), senesteTom(sykmelding.mulighetForArbeid.perioder))}
                             </small>
                             <span className="inngangspanel__tittel">
-                                {texts.teaserTekst}
+                                {teaserText(sykmelding.egenmeldt)}
                             </span>
                         </h3>
                         {
