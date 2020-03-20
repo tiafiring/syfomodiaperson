@@ -12,14 +12,12 @@ const MOTEBEHOV = 'motebehov';
 const MOTER = 'moter';
 const OPPFOELGINGSDIALOGER = 'oppfoelgingsdialoger';
 const OPPFOLGINGSTILFELLEPERIODER = 'oppfolgingstilfelleperioder';
-const SOKNADER = 'soknader';
+const SOKNADER = 'soknader-annet-arbeidsforhold'; // TODO: Husk å fjerne
 const SYKEPENGESOKNADER = 'sykepengesoknader';
-const SYKMELDINGER = 'sykmeldinger';
+const SYKMELDINGER = 'sykmeldinger-annet-arbeidsforhold'; // TODO: Husk å fjerne
 const TEKSTER = 'tekster';
 const TILGANGTILBRUKER = 'tilgangtilbruker';
 const VEILEDERINFO = 'veilederinfo';
-
-
 
 module.exports = {
     AKTIVBRUKER,

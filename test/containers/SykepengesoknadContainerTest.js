@@ -11,11 +11,11 @@ import { soknaderHentet } from '../../src/actions/soknader_actions';
 import mockSykepengesoknader from '../mockdata/mockSykepengesoknader';
 import mockSoknader from '../mockdata/mockSoknader';
 import { sykepengesoknaderHentet } from '../../src/actions/sykepengesoknader_actions';
-import SykepengesoknadArbeidstaker from '../../src/components/sykepengesoknad-arbeidstaker/SykepengesoknadArbeidstaker';
+import SykepengesoknadArbeidstaker from '../../src/components/soknad-arbeidstaker/SykepengesoknadArbeidstaker';
 import Feilmelding from '../../src/components/Feilmelding';
-import SykepengesoknadSelvstendig from '../../src/components/sykepengesoknad-selvstendig/SykepengesoknadSelvstendig';
+import SykepengesoknadSelvstendig from '../../src/components/soknad-selvstendig/SykepengesoknadSelvstendig';
 import * as toggleSelectors from '../../src/selectors/toggleSelectors';
-import SykepengesoknadUtland from '../../src/components/sykepengesoknad-utland/SykepengesoknadUtland';
+import SykepengesoknadUtland from '../../src/components/soknad-utland/SykepengesoknadUtland';
 import { sykmeldingerHentet } from '../../src/actions/sykmeldinger_actions';
 
 describe('SykepengesoknadContainer', () => {

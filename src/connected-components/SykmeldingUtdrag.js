@@ -19,9 +19,7 @@ export class Container extends Component {
     render() {
         const { sykmelding, soknad } = this.props;
         if (sykmelding && soknad && (!soknad.soknadstype || soknad.soknadstype === ARBEIDSTAKERE)) {
-            return (<SykmeldingUtdrag
-                rootUrl={'/sykefravaer'}
-                {...this.props} />);
+            return <SykmeldingUtdrag rootUrl={'/sykefravaer'} {...this.props} />;
         }
         return null;
     }

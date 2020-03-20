@@ -5,7 +5,7 @@
     "opprettetAv": "Z990000",
     "aktorId": "1",
     "status": "OPPRETTET",
-    "fnr": "110110110110",
+    "fnr": "11011011011",
     "opprettetTidspunkt": "2019-10-13",
     "navEnhet": "0315",
     "eier": "Z990000",
@@ -13,7 +13,7 @@
       {
         "deltakerUuid": "66f1d827-94db-43d4-b6de-2f7902e76bf8",
         "navn": "Samuel Jones",
-        "fnr": "110110110110",
+        "fnr": "11011011011",
         "orgnummer": "110110110",
         "epost": "samuel@pontypandyfire.gov.uk",
         "type": "Bruker",
