@@ -26,6 +26,7 @@ import {
     SELVSTENDIGE_OG_FRILANSERE,
     ARBEIDSLEDIG,
     BEHANDLINGSDAGER,
+    ANNET_ARBEIDSFORHOLD,
 } from '../enums/soknadtyper';
 import SykepengesoknadSelvstendig from '../components/soknad-selvstendig/SykepengesoknadSelvstendig';
 import SykepengesoknadUtland from '../components/soknad-utland/SykepengesoknadUtland';
@@ -103,7 +104,11 @@ export class Container extends Component {
                                 />
                             );
                         }
-                        if (soknad && (soknad.soknadstype === SELVSTENDIGE_OG_FRILANSERE || soknad.soknadstype === ARBEIDSLEDIG)) {
+                        if (soknad && (
+                            soknad.soknadstype === SELVSTENDIGE_OG_FRILANSERE ||
+                            soknad.soknadstype === ARBEIDSLEDIG ||
+                            soknad.soknadstype === ANNET_ARBEIDSFORHOLD
+                        )) {
                             return (
                                 <SykepengesoknadSelvstendig
                                     fnr={fnr}
