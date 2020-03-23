@@ -37,6 +37,7 @@ const MotebookingSkjemaContainer = (
         opprettMote,
         skjermetBruker,
         valgtEnhet,
+        sender,
     }) => {
     if (henter) {
         return <AppSpinner />;
@@ -64,6 +65,7 @@ const MotebookingSkjemaContainer = (
         ledere={ledere}
         opprettMote={opprettMote}
         valgtEnhet={valgtEnhet}
+        sender={sender}
     />);
 };
 
@@ -79,6 +81,7 @@ MotebookingSkjemaContainer.propTypes = {
     opprettMote: PropTypes.func,
     skjermetBruker: PropTypes.bool,
     valgtEnhet: PropTypes.string,
+    sender: PropTypes.bool,
 };
 
 export function mapStateToProps(state, ownProps) {

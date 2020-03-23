@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import AlertStripe from 'nav-frontend-alertstriper';
-import KnappBase from 'nav-frontend-knapper';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import VelgLeder from './VelgLeder';
 import Tidspunkter from './Tidspunkter';
 import TextField from '../TextField';
@@ -24,7 +24,7 @@ const texts = {
         generell: '<div><p>Vi klarte ikke å finne kontaktinformasjon om den sykmeldte og kan derfor ikke sende varsler til personen.</p></div>',
     },
     captions: {
-        eomployerInfo: '1. Fyll inn arbeidsgiverens opplysninger',
+        employerInfo: '1. Fyll inn arbeidsgiverens opplysninger',
         timeAndPlace: '2. Velg dato, tid og sted',
     },
     flereTidspunkt: {
@@ -40,6 +40,7 @@ const texts = {
         timeWrongFormat: 'Vennligst angi riktig format; f.eks. 13.00',
         placeMissing: 'Vennligst angi møtested',
     },
+    send: 'Send',
 };
 
 export const OPPRETT_MOTE_SKJEMANAVN = 'opprettMote';
@@ -95,6 +96,7 @@ export class MotebookingSkjema extends Component {
         };
         const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.feilAarsak : undefined;
         const feilmelding = feilAarsak && getErrerMessageFromFeilAarsak(feilAarsak);
+
         return (<div>
             { !arbeidstaker.kontaktinfo.skalHaVarsel &&
                 <KontaktInfoFeilmelding
@@ -104,7 +106,7 @@ export class MotebookingSkjema extends Component {
             <Sidetopp tittel={texts.pageHeader} />
             <form className="panel" onSubmit={handleSubmit(submit)}>
                 <div className="skjema-fieldset js-arbeidsgiver blokk--l">
-                    <legend>{texts.captions.eomployerInfo}</legend>
+                    <legend>{texts.captions.employerInfo}</legend>
                     <VelgLeder
                         ledere={ledere}
                         valgtArbeidsgiver={this.state.valgtArbeidsgiver}
@@ -142,12 +144,11 @@ export class MotebookingSkjema extends Component {
                 </div>
 
                 <div className="knapperad blokk">
-                    <KnappBase
-                        type="hoved"
+                    <Hovedknapp
                         spinner={sender}
                         disabled={sender || this.state.valgtArbeidsgiver === 'VELG'}>
-                        Send
-                    </KnappBase>
+                        {texts.send}
+                    </Hovedknapp>
                 </div>
             </form>
         </div>);
