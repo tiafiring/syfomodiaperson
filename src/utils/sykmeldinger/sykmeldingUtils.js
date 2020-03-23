@@ -4,6 +4,10 @@ import {
     NAERINGSDRIVENDE,
     FRILANSER,
 } from '../../enums/arbeidssituasjoner';
+import {
+    senesteTom,
+    tidligsteFom,
+} from '../periodeUtils';
 
 export const finnAvventendeSykmeldingTekst = (sykmelding) => {
     const avventendePeriode = sykmelding.mulighetForArbeid.perioder
@@ -188,4 +192,39 @@ export const stringMedAlleGraderingerFraSykmeldingPerioder = (sykmeldingPerioder
     return stringMedAlleGraderinger
         ? `${stringMedAlleGraderinger}%`
         : '';
+};
+
+const isSykmeldingSendtOrBekreftet = (sykmelding) => {
+    return sykmelding.status === gamleSMStatuser.SENDT || sykmelding.status === gamleSMStatuser.BEKREFTET;
+};
+
+const isSykmeldingActiveToday = (sykmelding) => {
+    const today = new Date();
+    return tidligsteFom(sykmelding.mulighetForArbeid.perioder) <= today && today <= senesteTom(sykmelding.mulighetForArbeid.perioder);
+};
+
+const activeSykmeldinger = (sykmeldinger) => {
+    return sykmeldinger.filter((sykmelding) => {
+        return isSykmeldingSendtOrBekreftet(sykmelding) && isSykmeldingActiveToday(sykmelding);
+    });
+};
+
+const coronaDiagnosekoder = ['R991', 'U071'];
+
+const sykmeldingHasCoronaHoveddiagnose = (sykmelding) => {
+    return coronaDiagnosekoder.includes(sykmelding.diagnose.hoveddiagnose.diagnosekode);
+};
+
+const sykmeldingHasCoronaBidiagnose = (sykmelding) => {
+    return sykmelding.diagnose.bidiagnoser.findIndex((diagnose) => {
+        return coronaDiagnosekoder.includes(diagnose.diagnosekode);
+    }) > -1;
+};
+
+export const sykmeldingerHasCoronaDiagnose = (sykmeldinger) => {
+    const sykmeldingerActiveNow = activeSykmeldinger(sykmeldinger);
+    return sykmeldingerActiveNow.length > 0 && sykmeldingerActiveNow.findIndex((sykmelding) => {
+        return (sykmeldingHasCoronaHoveddiagnose(sykmelding)
+            || sykmeldingHasCoronaBidiagnose(sykmelding));
+    }) > -1;
 };

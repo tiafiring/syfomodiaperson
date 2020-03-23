@@ -4,13 +4,15 @@ import Personkort from '../components/personkort/Personkort';
 import * as egenansattActions from '../actions/egenansatt_actions';
 import * as diskresjonskodeActions from '../actions/diskresjonskode_actions';
 import * as fastlegeActions from '../actions/fastleger_actions';
+import * as sykmeldingerActions from '../actions/sykmeldinger_actions';
 
 
 export function mapDispatchToProps(dispatch) {
     const actions = Object.assign({},
         diskresjonskodeActions,
         egenansattActions,
-        fastlegeActions
+        fastlegeActions,
+        sykmeldingerActions
     );
     return {
         actions: bindActionCreators(actions, dispatch),
@@ -26,6 +28,7 @@ export const mapStateToProps = (state) => {
         fastleger: state.fastleger,
         ledere: state.ledere.data,
         navbruker: state.navbruker.data,
+        sykmeldinger: state.sykmeldinger.data,
     };
 };
 

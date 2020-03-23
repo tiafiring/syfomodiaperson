@@ -96,8 +96,8 @@
       },
       {
         "aktivitetIkkeMulig": null,
-        "fom": "2020-01-25",
-        "tom": "2020-02-25",
+        "fom": "2020-02-25",
+        "tom": "2020-04-25",
         "gradert": null,
         "behandlingsdager": null,
         "innspillTilArbeidsgiver": null,
@@ -157,8 +157,8 @@
     },
     "medisinskVurdering": {
       "hovedDiagnose": {
-        "kode": "L87",
-        "system": "2.16.578.1.12.4.1.1.7170",
+        "kode": "U071",
+        "system": "ICD-10",
         "tekst": "TENDINITT INA"
       },
       "biDiagnoser": [
@@ -329,8 +329,8 @@
       },
       "biDiagnoser": [
         {
-          "kode": "L87",
-          "system": "2.16.578.1.12.4.1.1.7170",
+          "kode": "U071",
+          "system": "ICD-10",
           "tekst": "GANGLION SENE"
         }
       ]

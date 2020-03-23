@@ -18,6 +18,7 @@ import {
     stringMedAlleGraderingerFraSykmeldingPerioder,
     erBehandlingsdagerEllerReisetilskudd,
     finnAvventendeSykmeldingTekst,
+    sykmeldingerHasCoronaDiagnose,
 } from '../../src/utils/sykmeldinger/sykmeldingUtils';
 import { ANTALL_MS_DAG } from '../../src/utils/datoUtils';
 
@@ -689,6 +690,142 @@ describe('sykmeldingUtils', () => {
            const stringMedAllegraderinger = stringMedAlleGraderingerFraSykmeldingPerioder(sykmeldingPerioderSortertEtterDato);
 
            expect(stringMedAllegraderinger).to.equal('');
+        });
+    });
+
+    describe('sykmeldingerHasCoronaDiagnose', () => {
+        it('skal returnere true hvis det finnes minst én aktiv sykmelding med korona-diagnose', () => {
+            const sykmeldinger = [
+                {
+                    status: 'SENDT',
+                    mulighetForArbeid: {
+                        perioder: [
+                            {
+                                fom: new Date(Date.now() - 1000),
+                                tom: new Date(Date.now() + 1000),
+                            },
+                        ],
+                    },
+                    diagnose: {
+                        hoveddiagnose: {
+                            diagnosekode: 'R991',
+                        },
+                        bidiagnoser: [],
+                    },
+                },
+            ];
+
+            const hasCorona = sykmeldingerHasCoronaDiagnose(sykmeldinger);
+
+            expect(hasCorona).to.equal(true);
+        });
+
+        it('skal returnere true hvis det finnes minst én aktiv sykmelding med korona-bidiagnose', () => {
+            const sykmeldinger = [
+                {
+                    status: 'SENDT',
+                    mulighetForArbeid: {
+                        perioder: [
+                            {
+                                fom: new Date(Date.now() - 1000),
+                                tom: new Date(Date.now() + 1000),
+                            },
+                        ],
+                    },
+                    diagnose: {
+                        hoveddiagnose: {
+                            diagnosekode: 'L87',
+                        },
+                        bidiagnoser: [
+                            {
+                                diagnosekode: 'R991',
+                            },
+                        ],
+                    },
+                },
+            ];
+
+            const hasCorona = sykmeldingerHasCoronaDiagnose(sykmeldinger);
+
+            expect(hasCorona).to.equal(true);
+        });
+
+        it('skal returnere false hvis sykmelding med korona-diagnose ikke er innsendt eller bekreftet', () => {
+            const sykmeldinger = [
+                {
+                    status: 'NY',
+                    mulighetForArbeid: {
+                        perioder: [
+                            {
+                                fom: new Date(Date.now() - 1000),
+                                tom: new Date(Date.now() + 1000),
+                            },
+                        ],
+                    },
+                    diagnose: {
+                        hoveddiagnose: {
+                            diagnosekode: 'R991',
+                        },
+                        bidiagnoser: [],
+                    },
+                },
+            ];
+
+            const hasCorona = sykmeldingerHasCoronaDiagnose(sykmeldinger);
+
+            expect(hasCorona).to.equal(false);
+        });
+
+        it('skal returnere false hvis aktiv sykmelding ikke har korona-diagnose', () => {
+            const sykmeldinger = [
+                {
+                    status: 'SENDT',
+                    mulighetForArbeid: {
+                        perioder: [
+                            {
+                                fom: new Date(Date.now() - 1000),
+                                tom: new Date(Date.now() + 1000),
+                            },
+                        ],
+                    },
+                    diagnose: {
+                        hoveddiagnose: {
+                            diagnosekode: 'L87',
+                        },
+                        bidiagnoser: [],
+                    },
+                },
+            ];
+
+            const hasCorona = sykmeldingerHasCoronaDiagnose(sykmeldinger);
+
+            expect(hasCorona).to.equal(false);
+        });
+
+        it('skal returnere false hvis sykmeldingen ikke er aktiv i dag', () => {
+            const sykmeldinger = [
+                {
+                    status: 'SENDT',
+                    mulighetForArbeid: {
+                        perioder: [
+                            {
+                                fom: new Date(Date.now() + 1000),
+                                tom: new Date(Date.now() + 2000),
+                            },
+                        ],
+                    },
+                    diagnose: {
+                        hoveddiagnose: {
+                            diagnosekode: 'R991',
+                        },
+                        bidiagnoser: [],
+                    },
+                },
+            ];
+
+            const hasCorona = sykmeldingerHasCoronaDiagnose(sykmeldinger);
+
+            expect(hasCorona).to.equal(false);
         });
     });
 });

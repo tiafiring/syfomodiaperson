@@ -7,11 +7,14 @@ import {
     hentBrukersKjoennFraFnr,
 } from '../../utils/fnrUtils';
 import { KJOENN } from '../../konstanter';
+import { sykmeldingerHasCoronaDiagnose } from '../../utils/sykmeldinger/sykmeldingUtils';
 
-const PersonkortHeader = ({ diskresjonskode, egenansatt, navbruker }) => {
+const PersonkortHeader = ({ diskresjonskode, egenansatt, navbruker, sykmeldinger }) => {
+    const hasCoronaDiagnose = sykmeldingerHasCoronaDiagnose(sykmeldinger);
     const visEtiketter = diskresjonskode.data.diskresjonskode === '6'
         || diskresjonskode.data.diskresjonskode === '7'
-        || egenansatt.data.erEgenAnsatt;
+        || egenansatt.data.erEgenAnsatt
+        || hasCoronaDiagnose;
     const tittelImg = hentBrukersKjoennFraFnr(navbruker.kontaktinfo.fnr) === KJOENN.KVINNE ?
         '/sykefravaer/img/svg/kvinne.svg' : '/sykefravaer/img/svg/mann.svg';
 
@@ -37,6 +40,10 @@ const PersonkortHeader = ({ diskresjonskode, egenansatt, navbruker }) => {
                     egenansatt.data.erEgenAnsatt
                     && <EtikettBase type="fokus">Egenansatt</EtikettBase>
                 }
+                {
+                    hasCoronaDiagnose
+                    && <EtikettBase type="fokus">Koronasykmeldt</EtikettBase>
+                }
             </div>
         }
     </div>);
@@ -46,6 +53,7 @@ PersonkortHeader.propTypes = {
     egenansatt: PropTypes.object,
     diskresjonskode: PropTypes.object,
     navbruker: PropTypes.object,
+    sykmeldinger: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default PersonkortHeader;

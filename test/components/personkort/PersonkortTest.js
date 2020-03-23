@@ -8,17 +8,20 @@ import Personkort from '../../../src/components/personkort/Personkort';
 import PersonkortVisning from '../../../src/components/personkort/PersonkortVisning';
 import { hentBrukersAlderFraFnr } from '../../../src/utils/fnrUtils';
 import PersonkortHeader from '../../../src/components/personkort/PersonkortHeader';
+import mockOldSykmeldinger from '../../mockdata/sykmeldinger/mockOldSykmeldinger';
 
 describe('Personkort', () => {
     let hentDiskresjonskode;
     let hentEgenansatt;
     let hentFastleger;
+    let hentSykmeldinger;
     let actions;
     let egenansatt;
     let diskresjonskode;
     let navbruker;
     let fastleger;
     let komponent;
+    let sykmeldinger;
 
     beforeEach(() => {
         diskresjonskode = { data: {} };
@@ -34,13 +37,16 @@ describe('Personkort', () => {
                 fnr: '1234',
             },
         };
+        sykmeldinger = mockOldSykmeldinger;
         hentDiskresjonskode = sinon.spy();
         hentEgenansatt = sinon.spy();
         hentFastleger = sinon.spy();
+        hentSykmeldinger = sinon.spy();
         actions = {
             hentDiskresjonskode,
             hentEgenansatt,
             hentFastleger,
+            hentSykmeldinger,
         };
         komponent = shallow(<Personkort
             actions={actions}
@@ -48,6 +54,7 @@ describe('Personkort', () => {
             egenansatt={egenansatt}
             fastleger={fastleger}
             navbruker={navbruker}
+            sykmeldinger={sykmeldinger}
         />);
     });
 
@@ -58,6 +65,7 @@ describe('Personkort', () => {
             egenansatt={egenansatt}
             fastleger={fastleger}
             navbruker={navbruker}
+            sykmeldinger={sykmeldinger}
         />);
         expect(komponent.find(PersonkortHeader)).to.have.length(1);
     });
@@ -84,6 +92,7 @@ describe('Personkort', () => {
                 diskresjonskode={diskresjonskode}
                 egenansatt={egenansatt}
                 navbruker={navbruker}
+                sykmeldinger={sykmeldinger}
             />);
         });
 
@@ -98,6 +107,7 @@ describe('Personkort', () => {
                 diskresjonskode={diskresjonskode}
                 egenansatt={egenansatt}
                 navbruker={navbruker}
+                sykmeldinger={sykmeldinger}
             />);
             expect(komponent.find(EtikettBase)).to.have.length(0);
         });
@@ -112,6 +122,7 @@ describe('Personkort', () => {
                 diskresjonskode={diskresjonskode}
                 egenansatt={egenansatt}
                 navbruker={navbruker}
+                sykmeldinger={sykmeldinger}
             />);
             expect(komponent.find(EtikettBase)).to.have.length(1);
         });
@@ -126,6 +137,7 @@ describe('Personkort', () => {
                 diskresjonskode={diskresjonskode}
                 egenansatt={egenansatt}
                 navbruker={navbruker}
+                sykmeldinger={sykmeldinger}
             />);
             expect(komponent.find(EtikettBase)).to.have.length(1);
         });
@@ -140,6 +152,7 @@ describe('Personkort', () => {
                 diskresjonskode={diskresjonskode}
                 egenansatt={egenansatt}
                 navbruker={navbruker}
+                sykmeldinger={sykmeldinger}
             />);
             expect(komponent.find(EtikettBase)).to.have.length(1);
         });
