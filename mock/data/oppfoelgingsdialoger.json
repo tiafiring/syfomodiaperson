@@ -45,7 +45,7 @@
         "evalueres": "2020-03-21"
       },
       "tvungenGodkjenning": false,
-      "deltMedNAVTidspunkt": "2020-01-20T08:49:05.621",
+      "deltMedNAVTidspunkt": "2020-02-20T08:49:05.621",
       "deltMedNAV": true,
       "deltMedFastlegeTidspunkt": "2020-01-20T08:49:05.621",
       "deltMedFastlege": true,
@@ -68,12 +68,12 @@
     "godkjentPlan": {
       "opprettetTidspunkt": "2019-02-20T11:41:09.374",
       "gyldighetstidspunkt": {
-        "fom": "2019-02-20",
-        "tom": "2019-04-01",
+        "fom": "2020-02-20",
+        "tom": "2020-04-01",
         "evalueres": "2019-03-29"
       },
       "tvungenGodkjenning": false,
-      "deltMedNAVTidspunkt": "2019-03-27T11:41:18.165",
+      "deltMedNAVTidspunkt": "2020-03-27T11:41:18.165",
       "deltMedNAV": true,
       "deltMedFastlegeTidspunkt": null,
       "deltMedFastlege": false,

@@ -1,5 +1,6 @@
 import * as menypunkter from '../enums/menypunkter';
 import { harUbehandletMotebehov } from './motebehovUtils';
+import { activeOppfolgingsplaner } from './oppfolgingsplanerUtils';
 
 const isUnfinishedMotebehovTask = (motebehovReducer) => {
     return harUbehandletMotebehov(motebehovReducer.data);
@@ -10,14 +11,6 @@ const isUnfinishedMoterTask = (moterReducer) => {
         && moterReducer.data
         && moterReducer.data[0]
         && moterReducer.data[0].trengerBehandling;
-};
-
-const activeOppfolgingsplaner = (oppfolgingsplanerReducer) => {
-    return oppfolgingsplanerReducer
-        && oppfolgingsplanerReducer.data
-        && oppfolgingsplanerReducer.data.filter((dialog) => {
-            return dialog.status !== 'AVBRUTT' && new Date(dialog.godkjentPlan.gyldighetstidspunkt.tom) > new Date();
-        }).length;
 };
 
 const moteplanleggerTasks = (motebehovReducer, moterReducer) => {
@@ -32,12 +25,18 @@ const moteplanleggerTasks = (motebehovReducer, moterReducer) => {
     return motebehovPrikker + moterPrikker;
 };
 
+const numberOfActiveOppfolgingsplaner = (oppfolgingsplanerReducer) => {
+    return oppfolgingsplanerReducer
+        && oppfolgingsplanerReducer.data
+        && activeOppfolgingsplaner(oppfolgingsplanerReducer.data).length;
+};
+
 export const numberOfTasks = (menypunkt, motebehovReducer, moterReducer, oppfolgingsplanerReducer) => {
     switch (menypunkt) {
         case menypunkter.MOETEPLANLEGGER:
             return moteplanleggerTasks(motebehovReducer, moterReducer);
         case menypunkter.OPPFOELGINGSPLANER:
-            return activeOppfolgingsplaner(oppfolgingsplanerReducer);
+            return numberOfActiveOppfolgingsplaner(oppfolgingsplanerReducer);
         default:
             return 0;
     }
