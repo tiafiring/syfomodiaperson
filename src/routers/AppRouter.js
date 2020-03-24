@@ -25,7 +25,7 @@ const AppRouter = ({ history }) => {
     }
 
     return (<Router history={history}>
-        <Route path="/sykefravaer/:fnr" component={HistorikkContainer} />
+        <Route path="/sykefravaer/:fnr" component={SykmeldingerContainer} />
         <Route path="/sykefravaer/:fnr/logg" component={HistorikkContainer} />
         <Route path="/sykefravaer/:fnr/moteoversikt" component={MotelandingssideContainer} />
         <Route path="/sykefravaer/:fnr/mote" component={MotebookingContainer} />
@@ -38,7 +38,7 @@ const AppRouter = ({ history }) => {
         <Route path="/sykefravaer/:fnr/sykmeldinger/:sykmeldingId" component={DinSykmeldingContainer} />
         <Route path="/sykefravaer/:fnr/oppfoelgingsplaner" component={OppfoelgingsPlanerOversiktContainer} />
         <Route path="/sykefravaer/:fnr/oppfoelgingsplaner/:oppfoelgingsdialogId" component={OppfoelgingsplanContainer} />
-        <Route path="/sykefravaer/:fnr/*" component={HistorikkContainer} />
+        <Route path="/sykefravaer/:fnr/*" component={SykmeldingerContainer} />
         <Route path="/sykefravaer" component={IngenBrukerContainer} />
     </Router>);
 };
