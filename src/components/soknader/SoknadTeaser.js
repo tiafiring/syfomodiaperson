@@ -20,6 +20,7 @@ import {
     ARBEIDSTAKERE, BEHANDLINGSDAGER,
     OPPHOLD_UTLAND,
     SELVSTENDIGE_OG_FRILANSERE,
+    ANNET_ARBEIDSFORHOLD,
 } from '../../enums/soknadtyper';
 import { FREMTIDIG } from '../../enums/soknadstatuser';
 
@@ -123,6 +124,7 @@ const beregnUndertekst = (soknad) => {
     switch (soknad.soknadstype) {
         case OPPHOLD_UTLAND:
         case ARBEIDSLEDIG:
+        case ANNET_ARBEIDSFORHOLD:
         case BEHANDLINGSDAGER:
         case SELVSTENDIGE_OG_FRILANSERE: {
             return soknad.status === SENDT && soknad.innsendtDato

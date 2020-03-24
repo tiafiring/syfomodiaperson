@@ -7,7 +7,7 @@ import {
 import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api';
 import * as actions from '../actions/soknader_actions';
-import mockSoknader from '../../test/mockdata/mockSoknader';
+import mockSoknader from '../../mock/data/soknader';
 import { erDev } from '../selectors/toggleSelectors';
 
 export function* hentSoknader(action) {

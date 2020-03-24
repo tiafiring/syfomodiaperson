@@ -6,9 +6,9 @@ import {
 } from '@navikt/digisyfo-npm';
 import { brodsmule, soknadPt } from '../../propTypes';
 import Statuspanel, { StatusNokkelopplysning, Statusopplysninger } from '../Statuspanel';
-import SoknadSpeiling from '../sykepengesoknad-felles/SoknadSpeiling';
+import SoknadSpeiling from '../soknad-felles/SoknadSpeiling';
 import SykmeldingUtdrag from '../../connected-components/SykmeldingUtdrag';
-import VerktoylinjeGjenapne from '../sykepengesoknad-felles/VerktoylinjeGjenapneSoknad';
+import VerktoylinjeGjenapne from '../soknad-felles/VerktoylinjeGjenapneSoknad';
 
 const texts = {
     avbrutt: 'Avbrutt av deg',

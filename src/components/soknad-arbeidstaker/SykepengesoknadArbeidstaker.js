@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { sykepengesoknad as sykepengesoknadPt, sykepengesoknadstatuser } from '@navikt/digisyfo-npm';
-import IkkeInnsendtSoknad from '../sykepengesoknad-felles/IkkeInnsendtSoknad';
+import IkkeInnsendtSoknad from '../soknad-felles/IkkeInnsendtSoknad';
 import BehandletSykepengesoknad from './BehandletSykepengesoknad';
-import SoknadSpeiling from '../sykepengesoknad-felles/SoknadSpeiling';
+import SoknadSpeiling from '../soknad-felles/SoknadSpeiling';
 import { brodsmule } from '../../propTypes';
 
 const { NY, UTKAST_TIL_KORRIGERING } = sykepengesoknadstatuser;

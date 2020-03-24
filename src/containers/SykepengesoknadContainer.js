@@ -19,25 +19,26 @@ import {
 } from '../propTypes';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { erDev } from '../selectors/toggleSelectors';
-import SykepengesoknadArbeidstaker from '../components/sykepengesoknad-arbeidstaker/SykepengesoknadArbeidstaker';
+import SykepengesoknadArbeidstaker from '../components/soknad-arbeidstaker/SykepengesoknadArbeidstaker';
 import {
     ARBEIDSTAKERE,
     OPPHOLD_UTLAND,
     SELVSTENDIGE_OG_FRILANSERE,
     ARBEIDSLEDIG,
     BEHANDLINGSDAGER,
+    ANNET_ARBEIDSFORHOLD,
 } from '../enums/soknadtyper';
-import SykepengesoknadSelvstendig from '../components/sykepengesoknad-selvstendig/SykepengesoknadSelvstendig';
-import SykepengesoknadUtland from '../components/sykepengesoknad-utland/SykepengesoknadUtland';
-import SendtSoknadArbeidstakerNy from '../components/sykepengesoknad-arbeidstaker-ny/SendtSoknadArbeidstakerNy';
+import SykepengesoknadSelvstendig from '../components/soknad-selvstendig/SykepengesoknadSelvstendig';
+import SykepengesoknadUtland from '../components/soknad-utland/SykepengesoknadUtland';
+import SendtSoknadArbeidstakerNy from '../components/soknad-arbeidstaker-ny/SendtSoknadArbeidstakerNy';
 import {
     AVBRUTT,
     KORRIGERT,
     SENDT,
 } from '../enums/soknadstatuser';
-import IkkeInnsendtSoknad from '../components/sykepengesoknad-felles/IkkeInnsendtSoknad';
-import AvbruttSoknadArbeidtakerNy from '../components/sykepengesoknad-arbeidstaker-ny/AvbruttSoknadArbeidtakerNy';
-import SykepengesoknadBehandlingsdager from '../components/sykepengesoknad-behandlingsdager/SykepengesoknadBehandlingsdager';
+import IkkeInnsendtSoknad from '../components/soknad-felles/IkkeInnsendtSoknad';
+import AvbruttSoknadArbeidtakerNy from '../components/soknad-arbeidstaker-ny/AvbruttSoknadArbeidtakerNy';
+import SykepengesoknadBehandlingsdager from '../components/soknad-behandlingsdager/SykepengesoknadBehandlingsdager';
 
 const texts = {
     feilmedling: 'Du har ikke itllgang til denne tjenesten',
@@ -103,7 +104,11 @@ export class Container extends Component {
                                 />
                             );
                         }
-                        if (soknad && (soknad.soknadstype === SELVSTENDIGE_OG_FRILANSERE || soknad.soknadstype === ARBEIDSLEDIG)) {
+                        if (soknad && (
+                            soknad.soknadstype === SELVSTENDIGE_OG_FRILANSERE ||
+                            soknad.soknadstype === ARBEIDSLEDIG ||
+                            soknad.soknadstype === ANNET_ARBEIDSFORHOLD
+                        )) {
                             return (
                                 <SykepengesoknadSelvstendig
                                     fnr={fnr}

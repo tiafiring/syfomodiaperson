@@ -19,8 +19,6 @@ const TEKSTER = 'tekster';
 const TILGANGTILBRUKER = 'tilgangtilbruker';
 const VEILEDERINFO = 'veilederinfo';
 
-
-
 module.exports = {
     AKTIVBRUKER,
     AKTIVENHET,

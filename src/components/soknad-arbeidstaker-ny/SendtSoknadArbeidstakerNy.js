@@ -6,13 +6,13 @@ import {
     brodsmule,
     soknad as soknadPt,
 } from '../../propTypes';
-import SoknadSpeiling from '../sykepengesoknad-felles/SoknadSpeiling';
+import SoknadSpeiling from '../soknad-felles/SoknadSpeiling';
 import SykmeldingUtdrag from '../../connected-components/SykmeldingUtdrag';
 import SykepengesoknadStatuspanel from './SykepengesoknadStatuspanel';
 import { VAER_KLAR_OVER_AT } from '../../enums/tagtyper';
 import { KORRIGERT } from '../../enums/soknadstatuser';
-import KorrigertAvContainer from '../sykepengesoknad-arbeidstaker/KorrigertAvContainer';
-import RelaterteSoknaderContainer from '../sykepengesoknad-arbeidstaker/RelaterteSoknaderContainer';
+import KorrigertAvContainer from '../soknad-arbeidstaker/KorrigertAvContainer';
+import RelaterteSoknaderContainer from '../soknad-arbeidstaker/RelaterteSoknaderContainer';
 
 const texts = {
     tittel: 'Oppsummering',

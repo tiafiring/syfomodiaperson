@@ -2,7 +2,7 @@ import React from 'react';
 import { tilLesbarDatoMedArstall } from '@navikt/digisyfo-npm';
 import Statuspanel, { StatusNokkelopplysning, Statusopplysninger } from '../Statuspanel';
 import { soknad as soknadPt } from '../../propTypes';
-import VerktoylinjeGjenapneSoknad from '../sykepengesoknad-felles/VerktoylinjeGjenapneSoknad';
+import VerktoylinjeGjenapneSoknad from '../soknad-felles/VerktoylinjeGjenapneSoknad';
 
 const texts = {
     status: 'Status\n',

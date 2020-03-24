@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Oppsummeringsvisning from '../soknad-felles-oppsummering/Oppsummeringsvisning';
 import { brodsmule, soknad as soknadPt } from '../../propTypes';
-import SoknadSpeiling from '../sykepengesoknad-felles/SoknadSpeiling';
+import SoknadSpeiling from '../soknad-felles/SoknadSpeiling';
 import StatuspanelUtland from './StatuspanelUtland';
 
 const texts = {

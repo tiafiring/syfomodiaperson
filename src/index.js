@@ -142,9 +142,11 @@ if (hasURLParameter('visLedetekster')) {
     window.VIS_LEDETEKSTNOKLER = false;
 }
 
-render(<Provider store={store}>
-    <AppRouter history={history} />
-</Provider>, document.getElementById('maincontent'));
+render(
+    <Provider store={store}>
+        <AppRouter history={history} />
+    </Provider>, document.getElementById('maincontent')
+);
 
 document.addEventListener('DOMContentLoaded', () => {
     // eslint-disable-next-line no-unused-expressions

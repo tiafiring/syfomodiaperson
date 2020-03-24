@@ -7,7 +7,7 @@ import * as sykepengesoknaderActions from '../actions/sykepengesoknader_actions'
 import * as soknaderActions from '../actions/soknader_actions';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
-import Soknader from '../components/sykepengesoknader/Soknader';
+import Soknader from '../components/soknader/Soknader';
 import Brodsmuler from '../components/Brodsmuler';
 import { SYKEPENGESOKNADER } from '../enums/menypunkter';
 import {

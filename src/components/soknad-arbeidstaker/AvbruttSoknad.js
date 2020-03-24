@@ -4,7 +4,7 @@ import { toDatePrettyPrint } from '@navikt/digisyfo-npm';
 import SykmeldingUtdrag from '../../connected-components/SykmeldingUtdrag';
 import { sykepengesoknad as sykepengesoknadPt } from '../../propTypes';
 import Statuspanel, { StatusNokkelopplysning, Statusopplysninger } from '../Statuspanel';
-import VerktoylinjeGjenapne from '../sykepengesoknad-felles/VerktoylinjeGjenapneSoknad';
+import VerktoylinjeGjenapne from '../soknad-felles/VerktoylinjeGjenapneSoknad';
 
 const texts = {
     korrigert: 'Sendt',
