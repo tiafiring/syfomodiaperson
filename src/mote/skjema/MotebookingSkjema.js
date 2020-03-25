@@ -76,12 +76,11 @@ export class MotebookingSkjema extends Component {
             opprettMote(data);
         };
         const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.feilAarsak : undefined;
-        const feilmelding = feilAarsak && getLedetekstFraFeilAarsak(feilAarsak);
 
         return (<div>
             { !arbeidstaker.kontaktinfo.skalHaVarsel &&
                 <KontaktInfoFeilmelding
-                    melding={feilmelding}
+                    melding={getLedetekstFraFeilAarsak(feilAarsak)}
                 />
             }
             <Sidetopp tittel={texts.pageHeader} />

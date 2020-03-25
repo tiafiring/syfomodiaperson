@@ -50,44 +50,10 @@ MotetidspunktValgt.propTypes = {
     bekreftetTidspunkt: PropTypes.string,
 };
 
-export const getLedetekstFraFeilAarsak = (feilAarsak) => {
-    let text;
-    switch (feilAarsak) {
-        case 'RESERVERT': {
-            text = {
-                __html: '<p>Den sykmeldte har reservert seg mot elektronisk kommunikasjon med det offentlige. Møteforespørsel er sendt til arbeidsgiveren, men den sykmeldte må kontaktes på annen måte</p>',
-            };
-            break;
-        }
-        case 'KONTAKTINFO_IKKE_FUNNET': {
-            text = {
-                // eslint-disable-next-line max-len
-                __html: '<div><p>Den sykmeldte er ikke registrert i Kontakt- og reservasjonsregisteret (KRR). Møteforespørsel er sendt til arbeidsgiveren, men den sykmeldte må kontaktes på annen måte.</p><p>Den sykmeldte kan registrere kontaktinformasjonen sin her: <a target=\"_blank\" href=\"http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din\">http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din</a></p></div>',
-            };
-            break;
-        }
-        case 'INGEN_KONTAKTINFORMASJON': {
-            text = {
-                // eslint-disable-next-line max-len
-                __html: '<div><p>Den sykmeldte er ikke registrert i Kontakt- og reservasjonsregisteret (KRR). Møteforespørsel er sendt til arbeidsgiveren, men den sykmeldte må kontaktes på annen måte.</p><p>Den sykmeldte kan registrere kontaktinformasjonen sin her: <a target=\"_blank\" href=\"http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din\">http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din</a></p></div>',
-            };
-            break;
-        }
-        case 'UTGAATT': {
-            text = {
-                // eslint-disable-next-line max-len
-                __html: '<div><p>Den sykmeldtes kontaktinformasjon i Kontakt- og reservasjonsregisteret (KRR) er for gammel og kan ikke brukes. Møteforespørsel er sendt til arbeidsgiveren, men den sykmeldte må kontaktes på annen måte.</p><p>Den sykmeldte kan oppdatere kontaktinformasjonen sin her: <a target=\"_blank\" href=\"http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din\">http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din</a></p></div>',
-            };
-            break;
-        }
-        default: {
-            text = {
-                __html: '<div>\n<p>Vi klarte ikke å finne kontaktinformasjon om den sykmeldte og kan derfor ikke sende varsler til personen.</p>\n</div>',
-            };
-            break;
-        }
-    }
-    return text;
+export const getLedetekstFraFeilAarsak = () => {
+    return {
+        __html: '<div>\n<p>Vi klarte ikke å finne kontaktinformasjon om den sykmeldte og kan derfor ikke sende varsler til personen.</p>\n</div>',
+    };
 };
 
 const getSendtTilTekst = (mote, arbeidstaker) => {
@@ -165,7 +131,7 @@ const MotebookingStatus = (props) => {
     } = props;
     const { alternativer, status } = mote;
     const krrMeldingPanel = !arbeidstaker.kontaktinfo.skalHaVarsel ?
-        <KontaktInfoFeilmelding melding={getLedetekstFraFeilAarsak(arbeidstaker.kontaktinfo.feilAarsak)} />
+        <KontaktInfoFeilmelding melding={getLedetekstFraFeilAarsak()} />
         : null;
     const motePassert = erMotePassert(mote);
     const flereTidspunktBoks = skalViseFlereAlternativ
