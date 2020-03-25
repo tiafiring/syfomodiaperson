@@ -505,9 +505,14 @@ describe('sykmeldingParser', () => {
             const expectedSporsmal = {
                 arbeidssituasjon: 'ARBEIDSTAKER',
                 dekningsgrad: null,
-                fravaersperioder: 'Perioder',
-                harAnnetFravaer: 'false',
-                harForsikring: 'true',
+                fravaersperioder: [
+                    {
+                        fom: '2020-02-24',
+                        tom: '2020-03-22',
+                    },
+                ],
+                harAnnetFravaer: true,
+                harForsikring: false,
             };
 
             const outputSM = newSMFormat2OldFormat(sykmeldingWithSporsmalOgSvarListe, sykmeldtFnr);

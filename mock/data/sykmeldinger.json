@@ -112,48 +112,7 @@
         "juridiskOrgnummer": "110110110",
         "orgNavn": "PONTYPANDY FIRE SERVICE"
       },
-      "sporsmalOgSvarListe": [
-        {
-          "tekst": "Jobber du?",
-          "svar": {
-            "svar": "ARBEIDSTAKER",
-            "svartype": "ARBEIDSSITUASJON"
-          },
-          "shortName": "ARBEIDSSITUASJON"
-        },
-        {
-          "tekst": "Har du forsikring?",
-          "svar": {
-            "svar": "true",
-            "svartype": "JA_NEI"
-          },
-          "shortName": "FORSIKRING"
-        },
-        {
-          "tekst": "Har du annet fravær?",
-          "svar": {
-            "svar": "false",
-            "svartype": "JA_NEI"
-          },
-          "shortName": "FRAVAER"
-        },
-        {
-          "tekst": "Fravaersperioder?!",
-          "svar": {
-            "svar": "Perioder",
-            "svartype": "PERIODER"
-          },
-          "shortName": "PERIODE"
-        },
-        {
-          "tekst": "Ny nærmeste leder?!",
-          "svar": {
-            "svar": "true",
-            "svartype": "JA_NEI"
-          },
-          "shortName": "NY_NARMESTE_LEDER"
-        }
-      ]
+      "sporsmalOgSvarListe": null
     },
     "medisinskVurdering": {
       "hovedDiagnose": {
@@ -660,5 +619,198 @@
     "navnFastlege": "Lego Las Legesen",
     "egenmeldt": false,
     "harRedusertArbeidsgiverperiode": false
+  },
+  {
+    "id": "7895a750-7f39-4974-9a06-fa1775f987c9",
+    "mottattTidspunkt": "2020-03-21T23:00:00Z",
+    "behandlingsutfall": {
+      "status": "MANUAL_PROCESSING",
+      "ruleHits": [
+        {
+          "messageForSender": "Behandlers TSS-ident er ikke funnet automatisk av systemet",
+          "messageForUser": "Behandlers TSS-ident er ikke funnet automatisk av systemet",
+          "ruleName": "TSS_IDENT_MANGLER",
+          "ruleStatus": "MANUAL_PROCESSING"
+        }
+      ]
+    },
+    "legekontorOrgnummer": "223456789",
+    "arbeidsgiver": {
+      "navn": "PONTYPANDY FIRE SERVICE",
+      "stillingsprosent": 100
+    },
+    "sykmeldingsperioder": [
+      {
+        "aktivitetIkkeMulig": {
+          "medisinskArsak": {
+            "beskrivelse": "Medisinsk årsak som hindrer arbeid",
+            "arsak": [
+              "TILSTAND_HINDRER_AKTIVITET",
+              "ANNET"
+            ]
+          },
+          "arbeidsrelatertArsak": {
+            "beskrivelse": "Forhold på arbeidsplassen vanskeliggjør arbeid",
+            "arsak": [
+              "MANGLENDE_TILRETTELEGGING",
+              "ANNET"
+            ]
+          }
+        },
+        "fom": "2020-03-22",
+        "tom": "2020-04-22",
+        "gradert": null,
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "AKTIVITET_IKKE_MULIG"
+      },
+      {
+        "aktivitetIkkeMulig": null,
+        "fom": "2020-04-25",
+        "tom": "2020-05-20",
+        "gradert": {
+          "grad": 67,
+          "reisetilskudd": true
+        },
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "GRADERT"
+      }
+    ],
+    "sykmeldingStatus": {
+      "statusEvent": "BEKREFTET",
+      "timestamp": "2020-01-29T09:38:05.414834Z",
+      "arbeidsgiver": {
+        "orgnummer": "110110110",
+        "juridiskOrgnummer": "110110110",
+        "orgNavn": "PONTYPANDY FIRE SERVICE"
+      },
+      "sporsmalOgSvarListe": [
+        {
+          "tekst": "Hvilke dager var du borte fra jobb før datoen sykmeldingen gjelder fra?",
+          "shortName": "PERIODE",
+          "svar": {
+            "svarType": "PERIODER",
+            "svar": "[{\"fom\":\"2020-02-24\",\"tom\":\"2020-03-22\"}]"
+          }
+        },
+        {
+          "tekst": "Brukte du egenmelding eller noen annen sykmelding før datoen denne sykmeldingen gjelder fra?",
+          "shortName": "FRAVAER",
+          "svar": {
+            "svarType": "JA_NEI",
+            "svar": "JA"
+          }
+        },
+        {
+          "tekst": "Har du forsikring som gjelder de første 16 dagene av sykefraværet?",
+          "shortName": "FORSIKRING",
+          "svar": {
+            "svarType": "JA_NEI",
+            "svar": "NEI"
+          }
+        },
+        {
+          "tekst": "Jeg er sykmeldt fra",
+          "shortName": "ARBEIDSSITUASJON",
+          "svar": {
+            "svarType": "ARBEIDSSITUASJON",
+            "svar": "NAERINGSDRIVENDE"
+          }
+        }
+      ]
+    },
+    "medisinskVurdering": {
+      "hovedDiagnose": {
+        "kode": "U071",
+        "system": "ICD-10",
+        "tekst": "TENDINITT INA"
+      },
+      "biDiagnoser": [
+        {
+          "kode": "R991",
+          "system": "ICPC-2",
+          "tekst": "Covid-19"
+        }
+      ],
+      "svangerskap": true,
+      "yrkesskade": false,
+      "yrkesskadeDato": null
+    },
+    "skjermesForPasient": false,
+    "prognose": {
+      "arbeidsforEtterPeriode": true,
+      "hensynArbeidsplassen": "Må ta det pent",
+      "erIArbeid": {
+        "egetArbeidPaSikt": true,
+        "annetArbeidPaSikt": true,
+        "arbeidFOM": "2020-01-22",
+        "vurderingsdato": "2020-01-22"
+      },
+      "erIkkeIArbeid": null
+    },
+    "utdypendeOpplysninger": {
+      "6.2": {
+        "6.2.1": {
+          "sporsmal": "Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.",
+          "svar": "Langvarig korsryggsmerter. Ømhet og smerte",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
+          ]
+        },
+        "6.2.2": {
+          "sporsmal": "Hvordan påvirker sykdommen arbeidsevnen",
+          "svar": "Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket.",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
+          ]
+        },
+        "6.2.3": {
+          "sporsmal": "Har behandlingen frem til nå bedret arbeidsevnen?",
+          "svar": "Nei",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
+          ]
+        },
+        "6.2.4": {
+          "sporsmal": "Beskriv Pågående og planlagt henvisning, utredning og/eller behandling",
+          "svar": "Henvist til fysio",
+          "restriksjoner": [
+            "SKJERMET_FOR_ARBEIDSGIVER"
+          ]
+        }
+      }
+    },
+    "tiltakArbeidsplassen": "Fortsett som sist.",
+    "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. ",
+    "andreTiltak": null,
+    "meldingTilNAV": null,
+    "meldingTilArbeidsgiver": null,
+    "kontaktMedPasient": {
+      "kontaktDato": null,
+      "begrunnelseIkkeKontakt": null
+    },
+    "behandletTidspunkt": "2020-03-21T22:00:00Z",
+    "behandler": {
+      "fornavn": "Lego",
+      "mellomnavn": "Las",
+      "etternavn": "Legesen",
+      "aktoerId": "1000014797129",
+      "fnr": "99900011122",
+      "hpr": null,
+      "her": 7777777,
+      "adresse": {
+        "gate": "Kirkegårdsveien 3",
+        "postnummer": 1348,
+        "kommune": "Rykkinn",
+        "postboks": null,
+        "land": "Country"
+      },
+      "tlf": "tel:94431152"
+    },
+    "syketilfelleStartDato": "2020-03-22",
+    "navnFastlege": "Lego Las Legesen",
+    "egenmeldt": false,
+    "harRedusertArbeidsgiverperiode": true
   }
 ]
