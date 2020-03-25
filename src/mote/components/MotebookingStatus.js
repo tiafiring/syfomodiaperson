@@ -50,7 +50,7 @@ MotetidspunktValgt.propTypes = {
     bekreftetTidspunkt: PropTypes.string,
 };
 
-const getLedetekstFraFeilAarsak = (feilAarsak) => {
+export const getLedetekstFraFeilAarsak = (feilAarsak) => {
     let text;
     switch (feilAarsak) {
         case 'RESERVERT': {

@@ -9,6 +9,7 @@ import TextField from '../TextField';
 import KontaktInfoFeilmelding from '../components/KontaktInfoFeilmelding';
 import Sidetopp from '../../components/Sidetopp';
 import { genererDato, erGyldigKlokkeslett, erGyldigDato } from '../utils';
+import { getLedetekstFraFeilAarsak } from '../components/MotebookingStatus';
 
 const texts = {
     pageHeader: 'Møteforespørsel',
@@ -57,26 +58,6 @@ export function getData(values) {
     };
 }
 
-const getErrerMessageFromFeilAarsak = (feilAarsak) => {
-    switch (feilAarsak) {
-        case 'RESERVERT': {
-            return { __html: texts.kontaktinfoErrorMessage.reservert };
-        }
-        case 'KONTAKTINFO_IKKE_FUNNET': {
-            return { __html: texts.kontaktinfoErrorMessage.ingenKontaktinfo };
-        }
-        case 'INGEN_KONTAKTINFORMASJON': {
-            return { __html: texts.kontaktinfoErrorMessage.ingenKontaktinfo };
-        }
-        case 'UTGAATT': {
-            return { __html: texts.kontaktinfoErrorMessage.utgatt };
-        }
-        default: {
-            return { __html: texts.kontaktinfoErrorMessage.generell };
-        }
-    }
-};
-
 export class MotebookingSkjema extends Component {
     constructor() {
         super();
@@ -95,7 +76,7 @@ export class MotebookingSkjema extends Component {
             opprettMote(data);
         };
         const feilAarsak = arbeidstaker && arbeidstaker.kontaktinfo ? arbeidstaker.kontaktinfo.feilAarsak : undefined;
-        const feilmelding = feilAarsak && getErrerMessageFromFeilAarsak(feilAarsak);
+        const feilmelding = feilAarsak && getLedetekstFraFeilAarsak(feilAarsak);
 
         return (<div>
             { !arbeidstaker.kontaktinfo.skalHaVarsel &&
