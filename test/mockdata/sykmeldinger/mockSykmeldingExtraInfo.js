@@ -201,7 +201,7 @@ export const mockSykmeldingWithSporsmalOgSvarListe = {
     sykmeldingStatus: {
         sporsmalOgSvarListe: [
             {
-                tekst: 'Jobber du?',
+                tekst: 'Jeg er sykmeldt fra',
                 svar: {
                     svar: 'ARBEIDSTAKER',
                     svartype: 'ARBEIDSSITUASJON',
@@ -209,28 +209,28 @@ export const mockSykmeldingWithSporsmalOgSvarListe = {
                 shortName: 'ARBEIDSSITUASJON',
             },
             {
-                tekst: 'Har du forsikring?',
+                tekst: 'Har du forsikring som gjelder de første 16 dagene av sykefraværet?',
                 svar: {
-                    svar: 'true',
+                    svar: 'NEI',
                     svartype: 'JA_NEI',
                 },
                 shortName: 'FORSIKRING',
             },
             {
-                tekst: 'Har du annet fravær?',
+                tekst: 'Brukte du egenmelding eller noen annen sykmelding før datoen denne sykmeldingen gjelder fra?',
                 svar: {
-                    svar: 'false',
+                    svar: 'JA',
                     svartype: 'JA_NEI',
                 },
                 shortName: 'FRAVAER',
             },
             {
-                tekst: 'Fravaersperioder?!',
-                svar: {
-                    svar: 'Perioder',
-                    svartype: 'PERIODER',
-                },
+                tekst: 'Hvilke dager var du borte fra jobb før datoen sykmeldingen gjelder fra?',
                 shortName: 'PERIODE',
+                svar: {
+                    svarType: 'PERIODER',
+                    svar: '[{"fom":"2020-02-24","tom":"2020-03-22"}]'
+                }
             },
             {
                 tekst: 'Ny nærmeste leder?!',

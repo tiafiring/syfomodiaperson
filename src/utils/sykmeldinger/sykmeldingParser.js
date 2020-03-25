@@ -336,7 +336,11 @@ const mapFravaersperioder = (sporsmal) => {
     if (isNullOrUndefined(sporsmal) || isNullOrUndefined(sporsmal.svar)) {
         return [];
     }
-    return sporsmal.svar.svar;
+    return JSON.parse(sporsmal.svar.svar);
+};
+
+const mapJaNeiSporsmalToBoolean = (sporsmal) => {
+    return sporsmal && sporsmal.svar && sporsmal.svar.svar === 'JA';
 };
 
 const mapSporsmal = (sykmelding) => {
@@ -352,8 +356,8 @@ const mapSporsmal = (sykmelding) => {
         arbeidssituasjon: arbeidssituasjonSporsmal && arbeidssituasjonSporsmal.svar.svar,
         dekningsgrad: null,
         fravaersperioder: mapFravaersperioder(periodeSporsmal),
-        harAnnetFravaer: fravaerSporsmal && fravaerSporsmal.svar.svar,
-        harForsikring: forsikringSporsmal && forsikringSporsmal.svar.svar,
+        harAnnetFravaer: mapJaNeiSporsmalToBoolean(fravaerSporsmal),
+        harForsikring: mapJaNeiSporsmalToBoolean(forsikringSporsmal),
     };
 };
 
