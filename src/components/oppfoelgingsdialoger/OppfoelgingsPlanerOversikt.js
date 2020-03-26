@@ -54,11 +54,11 @@ export class OppfoelgingsPlanerOversikt extends Component {
             inaktiveDialoger,
         } = this.props;
         aktiveDialoger.sort((a, b) => {
-            return new Date(a.godkjentPlan.deltMedNavTidspunkt) < new Date(b.godkjentPlan.deltMedNavTidspunkt) ? 1 : -1;
+            return new Date(b.godkjentPlan.deltMedNAVTidspunkt) - new Date(a.godkjentPlan.deltMedNAVTidspunkt);
         });
 
         inaktiveDialoger.sort((a, b) => {
-            return new Date(a.godkjentPlan.deltMedNavTidspunkt) < new Date(b.godkjentPlan.deltMedNavTidspunkt) ? 1 : -1;
+            return new Date(b.godkjentPlan.deltMedNAVTidspunkt) - new Date(a.godkjentPlan.deltMedNAVTidspunkt);
         });
 
         return (<div>
