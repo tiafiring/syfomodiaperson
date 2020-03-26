@@ -6,6 +6,10 @@ import PersonkortFeilmelding from './PersonkortFeilmelding';
 import PersonkortInformasjon from './PersonkortInformasjon';
 import kanskjeBooleanTilJaNeiKanskje from './kanskjeBooleanTilJaNeiKanskje';
 import PersonkortElement from './PersonkortElement';
+import {
+    lederHasActiveSykmelding,
+    ledereWithActiveLedereFirst,
+} from '../../utils/ledereUtils';
 
 const texts = {
     name: 'Navn',
@@ -16,9 +20,11 @@ const texts = {
     forskuttererLonn: 'Forskutterer arbeidsgiver lønn?',
     error: 'Nærmeste leder mangler. Arbeidsgiveren må melde inn nærmeste leder i Altinn.',
     noLeder: 'Nærmeste leder ikke meldt inn av arbeidsgiver',
+    activeSykmelding: 'Sykmeldt nå',
 };
 
-const PersonkortLedere = ({ ledere }) => {
+const PersonkortLedere = ({ ledere, sykmeldinger }) => {
+    const ledereWithActiveFirst = ledereWithActiveLedereFirst(ledere, sykmeldinger);
     const informasjonNokkelTekster = new Map([
         ['navn', texts.name],
         ['tlf', texts.phone],
@@ -27,11 +33,11 @@ const PersonkortLedere = ({ ledere }) => {
         ['fomDato', texts.startDate],
         ['arbeidsgiverForskuttererLoenn', texts.forskuttererLonn],
     ]);
-    return ledere.length === 0
+    return ledereWithActiveFirst.length === 0
         ? (<PersonkortFeilmelding>
             {texts.error}
         </PersonkortFeilmelding>)
-        : ledere.map((leder, idx) => {
+        : ledereWithActiveFirst.map((leder, idx) => {
             const valgteElementer = (({ navn, epost, tlf, orgnummer, fomDato, arbeidsgiverForskuttererLoenn }) => {
                 return {
                     navn,
@@ -48,12 +54,15 @@ const PersonkortLedere = ({ ledere }) => {
                     arbeidsgiverForskuttererLoenn: kanskjeBooleanTilJaNeiKanskje(leder.arbeidsgiverForskuttererLoenn),
                 }));
 
+            const titleLabelText = lederHasActiveSykmelding(leder, sykmeldinger) && texts.activeSykmelding;
+
             return (
                 <PersonkortElement
                     key={idx}
                     tittel={leder.organisasjonsnavn}
                     imgUrl="/sykefravaer/img/svg/fabrikk.svg"
                     antallKolonner={3}
+                    titleLabelText={titleLabelText}
                 >
                     {
                         !leder.erOppgitt
@@ -70,6 +79,7 @@ const PersonkortLedere = ({ ledere }) => {
 
 PersonkortLedere.propTypes = {
     ledere: PropTypes.array,
+    sykmeldinger: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default PersonkortLedere;

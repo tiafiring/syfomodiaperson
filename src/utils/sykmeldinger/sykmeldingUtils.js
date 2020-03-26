@@ -228,3 +228,9 @@ export const sykmeldingerHasCoronaDiagnose = (sykmeldinger) => {
             || sykmeldingHasCoronaBidiagnose(sykmelding));
     }) > -1;
 };
+
+export const activeSykmeldingerSentToArbeidsgiver = (sykmeldinger) => {
+    return sykmeldinger.filter((sykmelding) => {
+        return sykmelding.status === gamleSMStatuser.SENDT && isSykmeldingActiveToday(sykmelding);
+    });
+};
