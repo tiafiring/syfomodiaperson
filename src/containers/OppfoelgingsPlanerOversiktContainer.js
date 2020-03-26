@@ -11,6 +11,7 @@ import AppSpinner from '../components/AppSpinner';
 import IngenPlaner from '../components/oppfoelgingsdialoger/IngenPlaner';
 import { OPPFOELGINGSPLANER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
+import { activeOppfolgingsplaner } from '../utils/oppfolgingsplanerUtils';
 
 const texts = {
     errorTitle: 'Du har ikke tilgang til denne tjenesten',
@@ -98,9 +99,7 @@ export function mapStateToProps(state, ownProps) {
 
     const oppfoelgingsdialoger = state.oppfoelgingsdialoger.data;
 
-    const aktiveDialoger = oppfoelgingsdialoger.filter((dialog) => {
-        return dialog.status !== 'AVBRUTT' && new Date(dialog.godkjentPlan.gyldighetstidspunkt.tom) > new Date();
-    });
+    const aktiveDialoger = activeOppfolgingsplaner(oppfoelgingsdialoger);
     const inaktiveDialoger = [];
     oppfoelgingsdialoger.forEach((dialog) => {
         if (!aktiveDialoger.includes(dialog)) {
