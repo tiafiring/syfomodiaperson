@@ -14,6 +14,9 @@ import Feilmelding from '../Feilmelding';
 import { erDev } from '../../selectors/toggleSelectors';
 import { behandlingsutfallStatuser } from '../../utils/sykmeldinger/sykmeldingstatuser';
 import AvvistSykmelding from './avvisteSykmeldinger/AvvistSykmelding';
+import KoronaSykmeldingBekreftet from './koronasykmeldinger/KoronaSykmelding-Bekreftet';
+import KoronaSykmeldingNy from './koronasykmeldinger/KoronaSykmelding-Ny';
+import KoronaSykmeldingAvbrutt from './koronasykmeldinger/KoronaSykmelding-Avbrutt';
 
 const SykmeldingSide = ({ dinSykmelding, arbeidsgiversSykmelding, ledetekster, fnr }) => {
     return (
@@ -26,6 +29,32 @@ const SykmeldingSide = ({ dinSykmelding, arbeidsgiversSykmelding, ledetekster, f
                     />
                     <LenkeTilDineSykmeldinger ledetekster={ledetekster} fnr={fnr} />
                 </div>);
+            }
+            if (dinSykmelding.egenmeldt) {
+                switch (dinSykmelding.status) {
+                    case sykmeldingstatuser.BEKREFTET: {
+                        return (
+                            <div>
+                                <KoronaSykmeldingBekreftet dinSykmelding={dinSykmelding} />
+                                <LenkeTilDineSykmeldinger />
+                            </div>
+                        );
+                    }
+                    case sykmeldingstatuser.NY: {
+                        return (<KoronaSykmeldingNy sykmelding={dinSykmelding} />);
+                    }
+                    case sykmeldingstatuser.AVBRUTT: {
+                        return (
+                            <div>
+                                <KoronaSykmeldingAvbrutt sykmelding={dinSykmelding} />
+                                <LenkeTilDineSykmeldinger />
+                            </div>
+                        );
+                    }
+                    default: {
+                        return <Feilmelding tittel="Egenmeldingen har ukjent status" />;
+                    }
+                }
             } else if (dinSykmelding.status === sykmeldingstatuser.SENDT && (arbeidsgiversSykmelding || erDev())) {
                 return (<div>
                     <DinSendteSykmelding

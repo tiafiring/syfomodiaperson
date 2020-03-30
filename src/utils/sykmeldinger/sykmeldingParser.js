@@ -190,13 +190,6 @@ const mapPasient = (fnr) => {
     };
 };
 
-const mapSendtdato = (sykmelding) => {
-    const sykmeldingStatus = sykmelding.sykmeldingStatus;
-    return (sykmeldingStatus.statusEvent === nyeSMStatuser.SENDT || sykmeldingStatus.statusEvent === nyeSMStatuser.BEKREFTET)
-        ? toDate(sykmeldingStatus.timestamp)
-        : null;
-};
-
 const mapTilbakedatering = (sykmelding) => {
     const kontaktMedPasient = sykmelding.kontaktMedPasient;
     return {
@@ -332,8 +325,11 @@ const mapFravaersperioder = (sporsmal) => {
     return JSON.parse(sporsmal.svar.svar);
 };
 
-const mapJaNeiSporsmalToBoolean = (sporsmal) => {
-    return sporsmal && sporsmal.svar && sporsmal.svar.svar === 'JA';
+const mapJaNeiSporsmalToBooleanEllerNull = (sporsmal) => {
+    if (isNullOrUndefined(sporsmal) || isNullOrUndefined(sporsmal.svar)) {
+        return null;
+    }
+    return sporsmal.svar.svar === 'JA';
 };
 
 const mapSporsmal = (sykmelding) => {
@@ -349,8 +345,8 @@ const mapSporsmal = (sykmelding) => {
         arbeidssituasjon: arbeidssituasjonSporsmal && arbeidssituasjonSporsmal.svar.svar,
         dekningsgrad: null,
         fravaersperioder: mapFravaersperioder(periodeSporsmal),
-        harAnnetFravaer: mapJaNeiSporsmalToBoolean(fravaerSporsmal),
-        harForsikring: mapJaNeiSporsmalToBoolean(forsikringSporsmal),
+        harAnnetFravaer: mapJaNeiSporsmalToBooleanEllerNull(fravaerSporsmal),
+        harForsikring: mapJaNeiSporsmalToBooleanEllerNull(forsikringSporsmal),
     };
 };
 
@@ -392,7 +388,7 @@ export const newSMFormat2OldFormat = (sykmelding, fnr) => {
         naermesteLederStatus: null,
         orgnummer: mapOrgnummer(sykmelding),
         pasient: mapPasient(fnr),
-        sendtdato: mapSendtdato(sykmelding),
+        sendtdato: toDate(sykmelding.sykmeldingStatus.timestamp),
         mottattTidspunkt: sykmelding.mottattTidspunkt,
         skalViseSkravertFelt: !sykmelding.skjermesForPasient,
         sporsmal: mapSporsmal(sykmelding),
