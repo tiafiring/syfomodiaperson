@@ -10,6 +10,7 @@ import PersonkortLedere from '../../../src/components/personkort/PersonkortLeder
 import PersonkortSykmeldt from '../../../src/components/personkort/PersonkortSykmeldt';
 import PersonkortEnhet from '../../../src/components/personkort/PersonkortEnhet';
 import PersonkortLege, { TidligereLeger } from '../../../src/components/personkort/PersonkortLege';
+import mockOldSykmeldinger from '../../mockdata/sykmeldinger/mockOldSykmeldinger';
 
 describe('PersonkortVisning', () => {
     let ledere;
@@ -17,6 +18,7 @@ describe('PersonkortVisning', () => {
     let behandlendeEnhet;
     let fastleger;
     let komponent;
+    let sykmeldinger;
 
     beforeEach(() => {
         ledere = [{ erOppgitt: true }, { erOppgitt: false }];
@@ -59,6 +61,9 @@ describe('PersonkortVisning', () => {
                 fnr: '1234',
             },
         };
+
+        sykmeldinger = mockOldSykmeldinger;
+
         komponent = mount(<PersonkortVisning
             visning={''}
             ledere={ledere}
@@ -79,6 +84,7 @@ describe('PersonkortVisning', () => {
             fastleger={fastleger}
             navbruker={navbruker}
             behandlendeEnhet={behandlendeEnhet}
+            sykmeldinger={sykmeldinger}
         />);
         expect(komponent.find(PersonkortLedere)).to.have.length(1);
     });
@@ -125,6 +131,7 @@ describe('PersonkortVisning', () => {
         beforeEach(() => {
             komponent = mount(<PersonkortLedere
                 ledere={ledere}
+                sykmeldinger={sykmeldinger}
             />);
         });
 

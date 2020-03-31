@@ -7,6 +7,7 @@ import {
     erOppfolgingstilfelleSluttDatoPassert,
     harArbeidstakerSvartPaaMotebehov,
 } from './motebehovUtils';
+import { activeSykmeldingerSentToArbeidsgiver } from './sykmeldinger/sykmeldingUtils';
 
 export const ledereIVirksomheterMedMotebehovsvarFraArbeidstaker = (ledereData, motebehovData) => {
     return ledereData.filter((leder) => {
@@ -47,4 +48,27 @@ export const ledereUtenMotebehovsvar = (ledereData, motebehovData, oppfolgingsti
         ? ledereIVirksomheterMedMotebehovsvarFraArbeidstaker(ledereData, motebehovData)
         : ledereMedOppfolgingstilfelleInnenforMotebehovperioden(ledereData, oppfolgingstilfelleperioder);
     return fjernLedereMedInnsendtMotebehov(filtrertLederListe, motebehovData);
+};
+
+export const lederHasActiveSykmelding = (leder, sykmeldinger) => {
+    const activeSykmeldingerWithArbeidsgiver = activeSykmeldingerSentToArbeidsgiver(sykmeldinger);
+
+    return activeSykmeldingerWithArbeidsgiver.findIndex((sykmelding) => {
+        return sykmelding.mottakendeArbeidsgiver.virksomhetsnummer === leder.orgnummer;
+    }) > -1;
+};
+
+export const ledereWithActiveLedereFirst = (ledereData, sykmeldinger) => {
+    return ledereData.sort((leder1, leder2) => {
+        const leder1Active = lederHasActiveSykmelding(leder1, sykmeldinger);
+        const leder2Active = lederHasActiveSykmelding(leder2, sykmeldinger);
+
+        if (leder1Active && !leder2Active) {
+            return -1;
+        }
+        if (leder2Active && !leder1Active) {
+            return 1;
+        }
+        return 0;
+    });
 };

@@ -34,7 +34,7 @@
     "tlf": "87654321",
     "epost": "test3@test.no",
     "aktiv": null,
-    "erOppgitt": true,
+    "erOppgitt": false,
     "fomDato": "2018-12-03T12:00:00+01:00",
     "orgnummer": "555666444",
     "organisasjonsnavn": "BRANN OG BIL AS",

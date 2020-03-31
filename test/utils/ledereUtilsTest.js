@@ -1,11 +1,21 @@
 import { expect } from 'chai';
+import sinon from 'sinon';
 import {
     ledereIVirksomheterMedMotebehovsvarFraArbeidstaker,
     ledereMedOppfolgingstilfelleInnenforMotebehovperioden,
     ledereUtenMotebehovsvar,
     fjernLedereMedInnsendtMotebehov,
+    lederHasActiveSykmelding,
+    ledereWithActiveLedereFirst,
 } from '../../src/utils/ledereUtils';
 import { ANTALL_MS_DAG } from '../../src/utils/datoUtils';
+import {
+    mockActiveSykmeldingForLeder,
+    mockInactiveSykmeldingForLeder,
+    mockLederWithActiveSykmelding,
+    mockLederWithoutActiveSykmelding,
+    mockSykmeldingWithStatusNyForLeder,
+} from '../mockdata/mockLedere';
 
 describe('ledereUtils', () => {
     describe('ledereIVirksomheterMedMotebehovsvarFraArbeidstaker', () => {
@@ -264,4 +274,76 @@ describe('ledereUtils', () => {
             expect(filtrertLederListe[0].orgnummer).to.equal('123')
         });
     });
+
+    describe('lederHasActiveSykmelding', () => {
+        let clock;
+        const today = new Date(Date.now());
+
+        beforeEach(() => {
+            clock = sinon.useFakeTimers(today.getTime());
+        });
+
+        afterEach(() => {
+            clock.restore();
+        });
+
+        it('Returns true if there is an active sykmelding for leders virksomhet', () => {
+            const leder = mockLederWithActiveSykmelding;
+            const sykmeldinger = [mockActiveSykmeldingForLeder];
+
+            const hasActiveSykmelding = lederHasActiveSykmelding(leder, sykmeldinger);
+
+            expect(hasActiveSykmelding).to.be.equal(true);
+        });
+
+        it('Returns false if sykmelding for leders virksomhet is not active', () => {
+            const leder = mockLederWithoutActiveSykmelding;
+            const sykmeldinger = [mockInactiveSykmeldingForLeder];
+
+            const hasActiveSykmelding = lederHasActiveSykmelding(leder, sykmeldinger);
+
+            expect(hasActiveSykmelding).to.be.equal(false);
+        });
+
+        it('Returns false if there are no sykmeldinger for leders virksomhet', () => {
+            const leder = mockLederWithActiveSykmelding;
+            const sykmeldinger = [mockInactiveSykmeldingForLeder];
+
+            const hasActiveSykmelding = lederHasActiveSykmelding(leder, sykmeldinger);
+
+            expect(hasActiveSykmelding).to.be.equal(false);
+        });
+
+        it('Returns false if sykmelding for leders virksomhet does not have status SENDT, regardless of acive dates', () => {
+            const leder = mockLederWithActiveSykmelding;
+            const sykmeldinger = [mockSykmeldingWithStatusNyForLeder];
+
+            const hasActiveSykmelding = lederHasActiveSykmelding(leder, sykmeldinger);
+
+            expect(hasActiveSykmelding).to.be.equal(false);
+        });
+    });
+
+    describe('sortLedereWithActiveLedereFirst', () => {
+        let clock;
+        const today = new Date(Date.now());
+
+        beforeEach(() => {
+            clock = sinon.useFakeTimers(today.getTime());
+        });
+
+        afterEach(() => {
+            clock.restore();
+        });
+
+        it('Returns a list where leder for virksomhet that has active sykmelding comes first', () => {
+            const lederList = [mockLederWithoutActiveSykmelding, mockLederWithActiveSykmelding];
+            const sykmeldinger = [mockActiveSykmeldingForLeder, mockInactiveSykmeldingForLeder];
+
+            const sortedList = ledereWithActiveLedereFirst(lederList, sykmeldinger);
+
+            expect(sortedList[0]).to.deep.equal(mockLederWithActiveSykmelding);
+            expect(sortedList[1]).to.deep.equal(mockLederWithoutActiveSykmelding);
+        })
+    })
 });
