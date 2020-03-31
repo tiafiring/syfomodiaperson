@@ -490,12 +490,6 @@ describe('sykmeldingParser', () => {
 
             expect(outputSM.sendtdato).to.deep.equal(expectedMottakendeArbeidsgiver);
         });
-
-        it('Returns correct sendtdato when status is not SENDT', () => {
-            const outputSM = newSMFormat2OldFormat(mockSykmeldingWithStatus(nyeSMStatuser.APEN), sykmeldtFnr);
-
-            expect(outputSM.sendtdato).to.deep.equal(null);
-        });
     });
 
     describe('sporsmal', () => {

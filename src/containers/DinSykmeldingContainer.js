@@ -22,7 +22,15 @@ import { erDev } from '../selectors/toggleSelectors';
 import { ARBEIDSTAKER } from '../enums/arbeidssituasjoner';
 
 const texts = {
+    pageTitleSykmelding: 'Sykmelding',
+    pageTitleEgenmelding: 'Egenmelding',
     feilmelding: 'Du har ikke tilgang til denne tjenesten',
+};
+
+const pageTitle = (dinSykmelding) => {
+    return dinSykmelding.egenmeldt
+        ? texts.pageTitleEgenmelding
+        : texts.pageTitleSykmelding;
 };
 
 export class DinSykmeldingSide extends Component {
@@ -72,7 +80,7 @@ export class DinSykmeldingSide extends Component {
                         <Speilingvarsel brukernavn={brukernavn} />
                         <div className="speiling">
                             <Brodsmuler brodsmuler={brodsmuler} />
-                            <SidetoppSpeilet tittel="Sykmelding" />
+                            <SidetoppSpeilet tittel={pageTitle(dinSykmelding)} />
                             <SykmeldingSide dinSykmelding={dinSykmelding} ledetekster={ledetekster} arbeidsgiversSykmelding={arbeidsgiversSykmelding} fnr={fnr} />
                         </div>
                     </div>);

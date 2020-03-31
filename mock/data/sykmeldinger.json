@@ -1,6 +1,6 @@
 [
   {
-    "id": "e425a750-7f39-4974-9a06-fa1775f987c9",
+    "id": "1111a750-7f39-4974-9a06-fa1775f987c9",
     "mottattTidspunkt": "2020-01-21T23:00:00Z",
     "behandlingsutfall": {
       "status": "MANUAL_PROCESSING",
@@ -204,11 +204,11 @@
     },
     "syketilfelleStartDato": "2020-01-22",
     "navnFastlege": "Lego Las Legesen",
-    "egenmeldt": true,
+    "egenmeldt": false,
     "harRedusertArbeidsgiverperiode": true
   },
   {
-    "id": "289148ba-4c3c-4b3f-b7a3-385b7e7c927d",
+    "id": "222248ba-4c3c-4b3f-b7a3-385b7e7c927d",
     "mottattTidspunkt": "2020-01-21T23:00:00Z",
     "behandlingsutfall": {
       "status": "MANUAL_PROCESSING",
@@ -621,7 +621,7 @@
     "harRedusertArbeidsgiverperiode": false
   },
   {
-    "id": "7895a750-7f39-4974-9a06-fa1775f987c9",
+    "id": "5555a750-7f39-4974-9a06-fa1775f987c9",
     "mottattTidspunkt": "2020-03-21T23:00:00Z",
     "behandlingsutfall": {
       "status": "MANUAL_PROCESSING",
@@ -811,6 +811,288 @@
     "syketilfelleStartDato": "2020-03-22",
     "navnFastlege": "Lego Las Legesen",
     "egenmeldt": false,
+    "harRedusertArbeidsgiverperiode": true
+  },
+  {
+    "id": "6666cab3-bcb0-4dcb-9c97-bdb2ec867ec8",
+    "mottattTidspunkt": "2020-03-30T15:31:45.629405Z",
+    "behandlingsutfall": {
+      "status": "MANUAL_PROCESSING",
+      "ruleHits": [
+        {
+          "messageForSender": "Hvis pasienten ikke finnes i infotrygd",
+          "messageForUser": "Hvis pasienten ikke finnes i infotrygd",
+          "ruleName": "PATIENT_NOT_IN_IP",
+          "ruleStatus": "MANUAL_PROCESSING"
+        }
+      ]
+    },
+    "legekontorOrgnummer": "889640782",
+    "arbeidsgiver": {
+      "navn": null,
+      "stillingsprosent": null
+    },
+    "sykmeldingsperioder": [
+      {
+        "fom": "2020-03-30",
+        "tom": "2020-04-14",
+        "gradert": null,
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "AKTIVITET_IKKE_MULIG",
+        "aktivitetIkkeMulig": {
+          "medisinskArsak": {
+            "beskrivelse": null,
+            "arsak": []
+          },
+          "arbeidsrelatertArsak": null
+        },
+        "reisetilskudd": false
+      }
+    ],
+    "sykmeldingStatus": {
+      "statusEvent": "APEN",
+      "timestamp": "2020-03-30T17:31:45.629405Z",
+      "arbeidsgiver": null,
+      "sporsmalOgSvarListe": []
+    },
+    "medisinskVurdering": {
+      "hovedDiagnose": {
+        "kode": "R991",
+        "system": "ICPC-2",
+        "tekst": "Covid-19 (mistenkt eller bekreftet)"
+      },
+      "biDiagnoser": [],
+      "annenFraversArsak": null,
+      "svangerskap": false,
+      "yrkesskade": false,
+      "yrkesskadeDato": null
+    },
+    "skjermesForPasient": false,
+    "prognose": null,
+    "utdypendeOpplysninger": {},
+    "tiltakArbeidsplassen": null,
+    "tiltakNAV": null,
+    "andreTiltak": null,
+    "meldingTilNAV": null,
+    "meldingTilArbeidsgiver": null,
+    "kontaktMedPasient": {
+      "kontaktDato": "2020-03-30",
+      "begrunnelseIkkeKontakt": null
+    },
+    "behandletTidspunkt": "2020-03-30T17:31:45.629313Z",
+    "behandler": {
+      "fornavn": "Samuel \"Sam\"",
+      "mellomnavn": null,
+      "etternavn": "Jones",
+      "aktoerId": "110110110111",
+      "fnr": "11011011011",
+      "hpr": "egenmeldt",
+      "her": null,
+      "adresse": {
+        "gate": null,
+        "postnummer": null,
+        "kommune": null,
+        "postboks": null,
+        "land": null
+      },
+      "tlf": "tel:55553336"
+    },
+    "syketilfelleStartDato": "2020-03-30",
+    "navnFastlege": null,
+    "egenmeldt": true,
+    "papirsykmelding": false,
+    "harRedusertArbeidsgiverperiode": true
+  },
+  {
+    "id": "7777cab3-bcb0-4dcb-9c97-bdb2ec867ec8",
+    "mottattTidspunkt": "2020-03-30T15:31:45.629405Z",
+    "behandlingsutfall": {
+      "status": "MANUAL_PROCESSING",
+      "ruleHits": [
+        {
+          "messageForSender": "Hvis pasienten ikke finnes i infotrygd",
+          "messageForUser": "Hvis pasienten ikke finnes i infotrygd",
+          "ruleName": "PATIENT_NOT_IN_IP",
+          "ruleStatus": "MANUAL_PROCESSING"
+        }
+      ]
+    },
+    "legekontorOrgnummer": "889640782",
+    "arbeidsgiver": {
+      "navn": null,
+      "stillingsprosent": null
+    },
+    "sykmeldingsperioder": [
+      {
+        "fom": "2020-03-30",
+        "tom": "2020-04-14",
+        "gradert": null,
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "AKTIVITET_IKKE_MULIG",
+        "aktivitetIkkeMulig": {
+          "medisinskArsak": {
+            "beskrivelse": null,
+            "arsak": []
+          },
+          "arbeidsrelatertArsak": null
+        },
+        "reisetilskudd": false
+      }
+    ],
+    "sykmeldingStatus": {
+      "statusEvent": "BEKREFTET",
+      "timestamp": "2020-03-30T17:55:12.426177Z",
+      "arbeidsgiver": null,
+      "sporsmalOgSvarListe": [
+        {
+          "tekst": "Jeg er sykmeldt fra",
+          "shortName": "ARBEIDSSITUASJON",
+          "svar": {
+            "svarType": "ARBEIDSSITUASJON",
+            "svar": "NAERINGSDRIVENDE"
+          }
+        }
+      ]
+    },
+    "medisinskVurdering": {
+      "hovedDiagnose": {
+        "kode": "R991",
+        "system": "ICPC-2",
+        "tekst": "Covid-19 (mistenkt eller bekreftet)"
+      },
+      "biDiagnoser": [],
+      "annenFraversArsak": null,
+      "svangerskap": false,
+      "yrkesskade": false,
+      "yrkesskadeDato": null
+    },
+    "skjermesForPasient": false,
+    "prognose": null,
+    "utdypendeOpplysninger": {},
+    "tiltakArbeidsplassen": null,
+    "tiltakNAV": null,
+    "andreTiltak": null,
+    "meldingTilNAV": null,
+    "meldingTilArbeidsgiver": null,
+    "kontaktMedPasient": {
+      "kontaktDato": "2020-03-30",
+      "begrunnelseIkkeKontakt": null
+    },
+    "behandletTidspunkt": "2020-03-30T17:31:45.629313Z",
+    "behandler": {
+      "fornavn": "Samuel \"Sam\"",
+      "mellomnavn": null,
+      "etternavn": "Jones",
+      "aktoerId": "110110110111",
+      "fnr": "11011011011",
+      "hpr": "egenmeldt",
+      "her": null,
+      "adresse": {
+        "gate": null,
+        "postnummer": null,
+        "kommune": null,
+        "postboks": null,
+        "land": null
+      },
+      "tlf": "tel:55553336"
+    },
+    "syketilfelleStartDato": "2020-03-30",
+    "navnFastlege": null,
+    "egenmeldt": true,
+    "papirsykmelding": false,
+    "harRedusertArbeidsgiverperiode": true
+  },
+  {
+    "id": "8888895e-b124-4c14-bc12-94a182da3ff6",
+    "mottattTidspunkt": "2020-03-30T18:24:34.496227Z",
+    "behandlingsutfall": {
+      "status": "MANUAL_PROCESSING",
+      "ruleHits": [
+        {
+          "messageForSender": "Infotrygd returnerte en feil, vi kan ikke automatisk oppdatere Infotrygd",
+          "messageForUser": "Infotrygd returnerte en feil, vi kan ikke automatisk oppdatere Infotrygd",
+          "ruleName": "ERROR_FROM_IT_HOUVED_STATUS_KODEMELDING",
+          "ruleStatus": "MANUAL_PROCESSING"
+        }
+      ]
+    },
+    "legekontorOrgnummer": "889640782",
+    "arbeidsgiver": {
+      "navn": null,
+      "stillingsprosent": null
+    },
+    "sykmeldingsperioder": [
+      {
+        "fom": "2020-03-01",
+        "tom": "2020-03-16",
+        "gradert": null,
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "AKTIVITET_IKKE_MULIG",
+        "aktivitetIkkeMulig": {
+          "medisinskArsak": {
+            "beskrivelse": null,
+            "arsak": []
+          },
+          "arbeidsrelatertArsak": null
+        },
+        "reisetilskudd": false
+      }
+    ],
+    "sykmeldingStatus": {
+      "statusEvent": "AVBRUTT",
+      "timestamp": "2020-03-30T20:25:38.90325Z",
+      "arbeidsgiver": null,
+      "sporsmalOgSvarListe": []
+    },
+    "medisinskVurdering": {
+      "hovedDiagnose": {
+        "kode": "R991",
+        "system": "ICPC-2",
+        "tekst": "Covid-19 (mistenkt eller bekreftet)"
+      },
+      "biDiagnoser": [],
+      "annenFraversArsak": null,
+      "svangerskap": false,
+      "yrkesskade": false,
+      "yrkesskadeDato": null
+    },
+    "skjermesForPasient": false,
+    "prognose": null,
+    "utdypendeOpplysninger": {},
+    "tiltakArbeidsplassen": null,
+    "tiltakNAV": null,
+    "andreTiltak": null,
+    "meldingTilNAV": null,
+    "meldingTilArbeidsgiver": null,
+    "kontaktMedPasient": {
+      "kontaktDato": "2020-03-30",
+      "begrunnelseIkkeKontakt": null
+    },
+    "behandletTidspunkt": "2020-03-30T20:24:34.496114Z",
+    "behandler": {
+      "fornavn": "Samuel \"Sam\"",
+      "mellomnavn": null,
+      "etternavn": "Jones",
+      "aktoerId": "110110110111",
+      "fnr": "11011011011",
+      "hpr": "egenmeldt",
+      "her": null,
+      "adresse": {
+        "gate": null,
+        "postnummer": null,
+        "kommune": null,
+        "postboks": null,
+        "land": null
+      },
+      "tlf": "tel:55553336"
+    },
+    "syketilfelleStartDato": "2020-03-01",
+    "navnFastlege": null,
+    "egenmeldt": true,
+    "papirsykmelding": false,
     "harRedusertArbeidsgiverperiode": true
   }
 ]
