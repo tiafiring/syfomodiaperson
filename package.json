@@ -26,7 +26,7 @@
   "author": "Team DigiSyfo <digisyfo@nav.no>",
   "license": "ISC",
   "dependencies": {
-    "@navikt/digisyfo-npm": "17.4.3",
+    "@navikt/digisyfo-npm": "17.4.4",
     "axios": "0.19.2",
     "babel-loader": "7.1.4",
     "babel-polyfill": "6.26.0",

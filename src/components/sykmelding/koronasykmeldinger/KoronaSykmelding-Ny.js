@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    Bjorn,
     DineKoronaSykmeldingOpplysninger,
     sykmelding as sykmeldingPt,
 } from '@navikt/digisyfo-npm';
@@ -7,24 +8,43 @@ import {
     Undertittel,
     Normaltekst,
 } from 'nav-frontend-typografi';
+import { Knapp } from 'nav-frontend-knapper';
 
 const texts = {
     pageSubtitle: 'for selvstendig næringsdrivende og frilansere',
-    infotext1: 'Her sjekker du at opplysningene fra da du opprettet egenmeldingen stemmer. Om alt stemmer kan du bekrefte og sende inn egenmeldingen.',
-    infoText2: 'Vennligst se nøye over og påse at opplysningene du har oppgitt er riktige.',
+    infotext1: 'Her sjekker du at opplysningene fra når du opprettet egenmeldingen stemmer. Om alt stemmer kan du bekrefte og sende inn egenmeldingen.',
+    infoText2: 'Vennligst se nøye over at opplysningene du har oppgitt er riktige.',
+    button: 'Gå til utfyllingen',
 };
 
 const KoronaSykmeldingNy = ({ sykmelding }) => {
     return (
         <div>
             <Undertittel style={{ marginBottom: '2.5rem', textAlign: 'center' }}>{texts.pageSubtitle}</Undertittel>
-            <Normaltekst style={{ marginBottom: '1rem' }}>{texts.infotext1}</Normaltekst>
-            <Normaltekst style={{ marginBottom: '2rem' }}>{texts.infoText2}</Normaltekst>
+            <Bjorn
+                className="blokk"
+                hvit
+                stor>
+                <Normaltekst style={{ marginBottom: '1rem' }}>
+                    {texts.infotext1}
+                </Normaltekst>
+                <Normaltekst>
+                    {texts.infoText2}
+                </Normaltekst>
+                <div className="skjul-pa-desktop">
+                    <Knapp
+                        mini
+                        disabled
+                        style={{ marginTop: '2rem' }}>
+                        {texts.button}
+                    </Knapp>
+                </div>
+            </Bjorn>
             <article>
                 <header className="panelHeader panelHeader--lysebla">
                     <img
                         className="panelHeader__ikon"
-                        src={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/person.svg`}
+                        src="/sykefravaer/img/svg/person.svg"
                         alt="Du"
                     />
                     <h2 className="panelHeader__tittel">
