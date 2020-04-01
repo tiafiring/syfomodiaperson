@@ -9,6 +9,7 @@ import PersonkortElement from './PersonkortElement';
 import {
     lederHasActiveSykmelding,
     ledereWithActiveLedereFirst,
+    virksomheterWithoutLeder,
 } from '../../utils/ledereUtils';
 
 const texts = {
@@ -24,7 +25,9 @@ const texts = {
 };
 
 const PersonkortLedere = ({ ledere, sykmeldinger }) => {
-    const ledereWithActiveFirst = ledereWithActiveLedereFirst(ledere, sykmeldinger);
+    const virksomheterFromSykmeldinger = virksomheterWithoutLeder(ledere, sykmeldinger);
+    const ledereAndVirksomheter = [...ledere, ...virksomheterFromSykmeldinger];
+    const ledereWithActiveFirst = ledereWithActiveLedereFirst(ledereAndVirksomheter, sykmeldinger);
     const informasjonNokkelTekster = new Map([
         ['navn', texts.name],
         ['tlf', texts.phone],

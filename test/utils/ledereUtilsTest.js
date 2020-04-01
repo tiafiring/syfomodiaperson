@@ -7,6 +7,7 @@ import {
     fjernLedereMedInnsendtMotebehov,
     lederHasActiveSykmelding,
     ledereWithActiveLedereFirst,
+    virksomheterWithoutLeder,
 } from '../../src/utils/ledereUtils';
 import { ANTALL_MS_DAG } from '../../src/utils/datoUtils';
 import {
@@ -324,7 +325,7 @@ describe('ledereUtils', () => {
         });
     });
 
-    describe('sortLedereWithActiveLedereFirst', () => {
+    describe('ledereWithActiveLedereFirst', () => {
         let clock;
         const today = new Date(Date.now());
 
@@ -344,6 +345,69 @@ describe('ledereUtils', () => {
 
             expect(sortedList[0]).to.deep.equal(mockLederWithActiveSykmelding);
             expect(sortedList[1]).to.deep.equal(mockLederWithoutActiveSykmelding);
-        })
-    })
+        });
+    });
+
+    describe('virksomheterWithoutLeder', () => {
+        let clock;
+        const today = new Date(Date.now());
+
+        beforeEach(() => {
+            clock = sinon.useFakeTimers(today.getTime());
+        });
+
+        afterEach(() => {
+            clock.restore();
+        });
+
+        it('Returns a list with one leder if virksomhet in sykmelding does not have leder ', () => {
+            const lederList = [mockLederWithoutActiveSykmelding];
+            const sykmeldinger = [mockActiveSykmeldingForLeder];
+
+            const ledereFromSykmeldinger = virksomheterWithoutLeder(lederList, sykmeldinger);
+
+            const expectedLeder = {
+                erOppgitt: false,
+                orgnummer: mockActiveSykmeldingForLeder.mottakendeArbeidsgiver.virksomhetsnummer,
+                organisasjonsnavn: mockActiveSykmeldingForLeder.mottakendeArbeidsgiver.navn,
+            };
+
+            expect(ledereFromSykmeldinger.length).to.equal(1);
+            expect(ledereFromSykmeldinger[0]).to.deep.equal(expectedLeder);
+        });
+
+        it('Returns empty list if there are no sykmeldinger', () => {
+            const lederList = [];
+            const sykmeldinger = [];
+
+            const ledereFromSykmeldinger = virksomheterWithoutLeder(lederList, sykmeldinger);
+
+            expect(ledereFromSykmeldinger.length).to.be.equal(0);
+        });
+
+        it('Returns empty list if virksomhet in sykmeldinger has leder', () => {
+            const lederList = [mockLederWithActiveSykmelding];
+            const sykmeldinger = [mockActiveSykmeldingForLeder];
+
+            const ledereFromSykmeldinger = virksomheterWithoutLeder(lederList, sykmeldinger);
+
+            expect(ledereFromSykmeldinger.length).to.be.equal(0);
+        });
+
+        it('Returns only one leder even if there are more than one active sykmelding for virksomhet without leder', () => {
+            const lederList = [mockLederWithoutActiveSykmelding];
+            const sykmeldinger = [mockActiveSykmeldingForLeder, mockActiveSykmeldingForLeder];
+
+            const ledereFromSykmeldinger = virksomheterWithoutLeder(lederList, sykmeldinger);
+
+            const expectedLeder = {
+                erOppgitt: false,
+                orgnummer: mockActiveSykmeldingForLeder.mottakendeArbeidsgiver.virksomhetsnummer,
+                organisasjonsnavn: mockActiveSykmeldingForLeder.mottakendeArbeidsgiver.navn,
+            };
+
+            expect(ledereFromSykmeldinger.length).to.equal(1);
+            expect(ledereFromSykmeldinger[0]).to.deep.equal(expectedLeder);
+        });
+    });
 });

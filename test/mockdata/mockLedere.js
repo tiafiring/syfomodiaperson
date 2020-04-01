@@ -42,6 +42,7 @@ export const mockActiveSykmeldingForLeder = {
     status: 'SENDT',
     mottakendeArbeidsgiver: {
         virksomhetsnummer: VIRKSOMHETSNUMMER_WITH_ACTIVE_SYKMELDING,
+        navn: 'FBI',
     },
     mulighetForArbeid: {
         perioder: [
@@ -57,6 +58,7 @@ export const mockInactiveSykmeldingForLeder = {
     status: 'SENDT',
     mottakendeArbeidsgiver: {
         virksomhetsnummer: VIRKSOMHETSNUMMER_WITHOUT_ACTIVE_SYKMELDING,
+        navn: 'The Syndicate',
     },
     mulighetForArbeid: {
         perioder: [
@@ -72,6 +74,7 @@ export const mockSykmeldingWithStatusNyForLeder = {
     status: 'NY',
     mottakendeArbeidsgiver: {
         virksomhetsnummer: VIRKSOMHETSNUMMER_WITHOUT_ACTIVE_SYKMELDING,
+        navn: 'The Syndicate',
     },
     mulighetForArbeid: {
         perioder: [

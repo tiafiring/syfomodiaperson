@@ -72,3 +72,37 @@ export const ledereWithActiveLedereFirst = (ledereData, sykmeldinger) => {
         return 0;
     });
 };
+
+const sykmeldingerWithoutMatchingLeder = (ledere, sykmeldinger) => {
+    return sykmeldinger.filter((sykmelding) => {
+        return ledere.findIndex((leder) => {
+            return leder.orgnummer === sykmelding.mottakendeArbeidsgiver.virksomhetsnummer;
+        }) === -1;
+    });
+};
+
+const sykmelding2Leder = (sykmelding) => {
+    return {
+        erOppgitt: false,
+        orgnummer: sykmelding.mottakendeArbeidsgiver.virksomhetsnummer,
+        organisasjonsnavn: sykmelding.mottakendeArbeidsgiver.navn,
+    };
+};
+
+const removeDuplicatesFromLederList = (ledere) => {
+    return ledere.filter((leder, index) => {
+        return ledere.findIndex((leder2) => {
+            return leder2.orgnummer === leder.orgnummer;
+        }) === index;
+    });
+};
+
+export const virksomheterWithoutLeder = (ledere, sykmeldinger) => {
+    const activeSykmeldinger = activeSykmeldingerSentToArbeidsgiver(sykmeldinger);
+
+    const sykmeldingerWithoutLeder = sykmeldingerWithoutMatchingLeder(ledere, activeSykmeldinger);
+
+    const virksomheterAsLedere = sykmeldingerWithoutLeder.map(sykmelding2Leder);
+
+    return removeDuplicatesFromLederList(virksomheterAsLedere);
+};
