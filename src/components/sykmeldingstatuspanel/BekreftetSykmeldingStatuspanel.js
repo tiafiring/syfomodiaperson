@@ -9,9 +9,10 @@ import Statuspanel, {
     Statusopplysninger,
 } from '../Statuspanel';
 import AngreBekreftSykmelding from '../../connected-components/AngreBekreftSykmelding';
+import { tilStorForbokstav } from '../../utils';
 
 const texts = {
-    tittel: 'Hva passer best for deg?',
+    tittel: 'Jeg er sykmeldt fra',
     tilSending: 'Sender...',
     avbrutt: 'Avbrutt av deg',
     sendt: 'Send til arbeidsgiver',
@@ -84,7 +85,7 @@ const BekreftetSykmeldingStatuspanel = ({ sykmelding }) => {
             </StatusNokkelopplysning>
             <StatusNokkelopplysning tittel={texts.tittel}>
                 <p className="js-arbeidssituasjon">
-                    {textArbeidssituasjon(sykmelding.valgtArbeidssituasjon.toLowerCase())}
+                    {tilStorForbokstav(textArbeidssituasjon(`${sykmelding.valgtArbeidssituasjon.toLowerCase()}.2`))}
                 </p>
             </StatusNokkelopplysning>
             <Frilansersporsmal sykmelding={sykmelding} />

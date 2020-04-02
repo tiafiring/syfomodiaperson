@@ -24,3 +24,9 @@ export const formaterOrgnr = (orgnr) => {
         ? orgnr.replace(/(...)(...)(...)/g, '$1 $2 $3')
         : null;
 };
+
+export const tilStorForbokstav = (streng) => {
+    return streng.replace(/^\w/, (c) => {
+        return c.toUpperCase();
+    });
+};
