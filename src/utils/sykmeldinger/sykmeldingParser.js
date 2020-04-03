@@ -400,6 +400,7 @@ export const newSMFormat2OldFormat = (sykmelding, fnr) => {
         valgtArbeidssituasjon: mapValgtArbeidssituasjon(sykmelding),
         behandlingsutfall: sykmelding.behandlingsutfall,
         egenmeldt: sykmelding.egenmeldt,
+        papirsykmelding: sykmelding.papirsykmelding,
         harRedusertArbeidsgiverperiode: sykmelding.harRedusertArbeidsgiverperiode,
     };
 };

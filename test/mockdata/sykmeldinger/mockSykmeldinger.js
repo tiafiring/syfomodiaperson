@@ -75,6 +75,7 @@ const mockSykmeldinger = [
         syketilfelleStartDato: null,
         navnFastlege: null,
         egenmeldt: null,
+        papirsykmelding: null,
         harRedusertArbeidsgiverperiode: null,
     },
 ];

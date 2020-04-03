@@ -319,3 +319,8 @@ export const mockSykmeldingerWithHarRedusertArbeidsgiverperiode = {
     ...mockSM,
     harRedusertArbeidsgiverperiode: true,
 };
+
+export const mockSykmeldingerWithPapirsykmelding = {
+    ...mockSM,
+    papirsykmelding: true,
+};
