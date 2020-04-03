@@ -111,6 +111,7 @@ const mockOldSykmeldinger = [
             }],
         },
         egenmeldt: null,
+        papirsykmelding: null,
         harRedusertArbeidsgiverperiode: null,
     }
 ];

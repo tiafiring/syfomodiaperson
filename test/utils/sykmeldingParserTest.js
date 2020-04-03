@@ -9,6 +9,7 @@ import {
     mockSykmeldingerWithBekreftelse,
     mockSykmeldingerWithEgenmeldt,
     mockSykmeldingerWithHarRedusertArbeidsgiverperiode,
+    mockSykmeldingerWithPapirsykmelding,
     mockSykmeldingerWithUtdypendeOpplysningerPkt62,
     mockSykmeldingerWithUtdypendeOpplysningerPkt63,
     mockSykmeldingWithArbeidsevne,
@@ -722,6 +723,22 @@ describe('sykmeldingParser', () => {
             const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
 
             expect(outputSM.harRedusertArbeidsgiverperiode).to.deep.equal(null);
+        });
+    });
+
+    describe('papirsykmelding', () => {
+        it('Returns correct papirsykmelding', () => {
+            const outputSM = newSMFormat2OldFormat(mockSykmeldingerWithPapirsykmelding, sykmeldtFnr);
+
+            expect(outputSM.papirsykmelding).to.deep.equal(true);
+        });
+
+        it('Returns correct papirsykmelding without info', () => {
+            const mockSM = mockSykmeldinger[0];
+
+            const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
+
+            expect(outputSM.papirsykmelding).to.deep.equal(null);
         });
     });
 });
