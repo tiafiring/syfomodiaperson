@@ -1,19 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input } from 'nav-frontend-skjema';
+import { Textarea } from 'nav-frontend-skjema';
 
 const TextField = (props) => {
-    const { meta, className, label } = props;
-    return (<Input
-        label={label}
-        feil={meta.touched && meta.error ? { feilmelding: meta.error } : undefined}
-        autoComplete="off"
-        placeholder={props.placeholder}
-        type={props.type || 'text'}
-        id={props.id}
-        className={`input--xxl ${className}`}
-        {...props.input}
-    />);
+    const {
+        meta,
+        label,
+        id,
+        input,
+        maxLength,
+    } = props;
+    const feilmelding = meta.touched && meta.error ? { feilmelding: meta.error } : undefined;
+    return (
+        <Textarea
+            id={id}
+            label={label}
+            feil={feilmelding}
+            maxLength={maxLength}
+            {...input}
+        />
+    );
 };
 
 TextField.propTypes = {
@@ -22,9 +28,9 @@ TextField.propTypes = {
     id: PropTypes.string,
     input: PropTypes.object,
     type: PropTypes.string,
-    className: PropTypes.string,
     onKeyUp: PropTypes.func,
     placeholder: PropTypes.string,
+    maxLength: PropTypes.number,
 };
 
 export default TextField;
