@@ -13,12 +13,10 @@ import { SYKMELDINGER } from '../enums/menypunkter';
 import Speilingvarsel from '../components/Speilingvarsel';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { erDev } from '../selectors/toggleSelectors';
-import Feilstripe from '../components/Feilstripe';
 
 const texts = {
     introduksjonstekst: 'NAV mottar alle sykmeldinger. Ser du den ikke her? Det betyr at den som har sykmeldt deg ikke sender den digitalt til NAV. Da bruker du papirsykmeldingen i stedet.',
     feilmelding: 'Du har ikke tilgang til denne tjenesten',
-    sykmeldingIssues: 'Sykmeldinger vises ikke på grunn av en feil. Vi jobber med å finne en løsning. I mellomtiden kan du lese sykmeldingene i Gosys',
 };
 
 export class SykmeldingerSide extends Component {
@@ -62,11 +60,6 @@ export class SykmeldingerSide extends Component {
                         return <Feilmelding />;
                     }
                     return (<div>
-                        <Feilstripe
-                            vis
-                            className="sykmeldingAlertstripe"
-                            tekst={texts.sykmeldingIssues}
-                        />
                         <Speilingvarsel brukernavn={brukernavn} />
                         <div className="speiling">
                             <Brodsmuler brodsmuler={brodsmuler} />

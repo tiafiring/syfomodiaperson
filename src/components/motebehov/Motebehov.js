@@ -8,11 +8,6 @@ import Sidetopp from '../Sidetopp';
 import MotebehovKvittering from './MotebehovKvittering';
 import BehandleMotebehovKnapp from './BehandleMotebehovKnapp';
 import UtdragFraSykefravaeret from './UtdragFraSykefravaeret';
-import Feilstripe from '../Feilstripe';
-
-const texts = {
-    sykmeldingIssues: 'Sykmeldinger vises ikke på grunn av en feil. Vi jobber med å finne en løsning. I mellomtiden kan du lese sykmeldingene i Gosys',
-};
 
 export class Motebehov extends Component {
     componentWillMount() {
@@ -43,11 +38,6 @@ export class Motebehov extends Component {
             sykmeldinger,
         } = this.props;
         return (<div className="motebehovSide">
-            <Feilstripe
-                vis
-                className="sykmeldingAlertstripe"
-                tekst={texts.sykmeldingIssues}
-            />
             <Sidetopp tittel={'Behov for dialogmøte'} />
             {motebehovListeMedJaSvarTilOppgavebehandling.length > 0 && (<BehandleMotebehovKnapp
                 actions={actions}
