@@ -13,7 +13,7 @@ function mockForLokal(server) {
     });
 
     server.post('/modiacontextholder/api/context', (req, res) => {
-        res.send(204);
+        res.send().status(204);
     });
 }
 
