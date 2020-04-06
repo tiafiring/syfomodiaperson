@@ -7,6 +7,7 @@ import {
     sykmelding as sykmeldingPt,
 } from '@navikt/digisyfo-npm';
 import { Utvidbar } from '@navikt/digisyfo-npm';
+import EtikettBase from 'nav-frontend-etiketter';
 import SykmeldingMotebehovVisning from './SykmeldingMotebehovVisning';
 import {
     erEkstraInformasjonISykmeldingen,
@@ -30,6 +31,7 @@ const tekster = {
     },
     sykmeldinger: {
         header: 'Sykmeldinger',
+        papirLabelText: 'Papir',
     },
     samtalereferat: {
         header: 'Samtalereferat',
@@ -83,10 +85,12 @@ export const UtvidbarTittel = (
     }) => {
     const erViktigInformasjon = erEkstraInformasjonISykmeldingen(sykmelding);
     const sykmeldingPerioderSortertEtterDato = sykmeldingperioderSortertEldstTilNyest(sykmelding.mulighetForArbeid.perioder);
+    const showPapirLabel = sykmelding.papirsykmelding;
     return (<div className="utdragFraSykefravaeret__utvidbarTittel">
         <div>
             <span className="utvidbarTittel__periode">{`${tilLesbarPeriodeMedArstall(tidligsteFom(sykmelding.mulighetForArbeid.perioder), senesteTom(sykmelding.mulighetForArbeid.perioder))}: `}</span>
             <span className="utvidbarTittel__grad">{stringMedAlleGraderingerFraSykmeldingPerioder(sykmeldingPerioderSortertEtterDato)}</span>
+            {showPapirLabel && <EtikettBase className="utvidbarTittel__etikett" type="info">{tekster.sykmeldinger.papirLabelText}</EtikettBase>}
         </div>
         {
             erViktigInformasjon && <div className="utvidbarTittel__erViktig">

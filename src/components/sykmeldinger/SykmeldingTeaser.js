@@ -6,6 +6,7 @@ import {
     senesteTom,
     tilLesbarPeriodeMedArstall,
 } from '@navikt/digisyfo-npm';
+import EtikettBase from 'nav-frontend-etiketter';
 import SykmeldingPeriodeInfo from './SykmeldingPeriodeInfo';
 import {
     sykmelding as sykmeldingPt,
@@ -25,6 +26,7 @@ const texts = {
     avbrutt: 'Avbrutt av deg\n',
     bekreftet: 'Bekreftet av deg\n',
     avvist: 'Avvist av NAV\n',
+    papirLabelText: 'Papir',
 };
 
 const teaserText = (egenmeldt) => {
@@ -97,6 +99,7 @@ class SykmeldingTeaser extends Component {
         const antallPerioder = sykmelding.mulighetForArbeid.perioder.length;
         const behandlingsutfallStatus = sykmelding.behandlingsutfall.status;
         const visStatus = sykmelding.status !== gamleSMStatuser.NY || behandlingsutfallStatus === behandlingsutfallStatuser.INVALID;
+        const showPapirLabel = !!sykmelding.papirsykmelding;
 
         return (<article aria-labelledby={`sykmelding-header-${this.props.sykmelding.id}`}>
             <Link
@@ -119,6 +122,7 @@ class SykmeldingTeaser extends Component {
                             </small>
                             <span className="inngangspanel__tittel">
                                 {teaserText(sykmelding.egenmeldt)}
+                                {showPapirLabel && <EtikettBase className="inngangspanel__merkelapp" type="info">{texts.papirLabelText}</EtikettBase>}
                             </span>
                         </h3>
                         {
