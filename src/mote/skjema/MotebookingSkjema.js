@@ -11,6 +11,8 @@ import Sidetopp from '../../components/Sidetopp';
 import { genererDato, erGyldigKlokkeslett, erGyldigDato } from '../utils';
 import { getLedetekstFraFeilAarsak } from '../components/MotebookingStatus';
 
+export const MAX_LENGTH_STED = 200;
+
 const texts = {
     pageHeader: 'Møteforespørsel',
     kontaktinfoErrorMessage: {
@@ -40,6 +42,7 @@ const texts = {
         timeMissing: 'Vennligst angi klokkeslett',
         timeWrongFormat: 'Vennligst angi riktig format; f.eks. 13.00',
         placeMissing: 'Vennligst angi møtested',
+        placeTooLong: `Maks ${MAX_LENGTH_STED} tegn tillatt`,
     },
     send: 'Send',
 };
@@ -112,7 +115,9 @@ export class MotebookingSkjema extends Component {
                         id="sted"
                         component={TextField}
                         name="sted"
-                        placeholder={texts.stedPlaceholder} />
+                        maxLength={MAX_LENGTH_STED}
+                        placeholder={texts.stedPlaceholder}
+                    />
                 </fieldset>
 
                 <div aria-live="polite" role="alert">
@@ -185,6 +190,8 @@ export function validate(values, props) {
 
     if (!values.sted || values.sted.trim() === '') {
         feilmeldinger.sted = texts.validationErrorMessage.placeMissing;
+    } else if (values.sted.length > MAX_LENGTH_STED) {
+        feilmeldinger.sted = texts.validationErrorMessage.placeTooLong;
     }
 
     return feilmeldinger;
