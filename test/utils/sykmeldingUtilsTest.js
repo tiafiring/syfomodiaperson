@@ -694,7 +694,7 @@ describe('sykmeldingUtils', () => {
     });
 
     describe('sykmeldingerHasCoronaDiagnose', () => {
-        it('skal returnere true hvis det finnes minst én aktiv sykmelding med korona-diagnose', () => {
+        it('skal returnere true hvis det finnes minst én aktiv sykmelding med harRedusertArbeidsgiverperiode=true', () => {
             const sykmeldinger = [
                 {
                     status: 'SENDT',
@@ -712,36 +712,7 @@ describe('sykmeldingUtils', () => {
                         },
                         bidiagnoser: [],
                     },
-                },
-            ];
-
-            const hasCorona = sykmeldingerHasCoronaDiagnose(sykmeldinger);
-
-            expect(hasCorona).to.equal(true);
-        });
-
-        it('skal returnere true hvis det finnes minst én aktiv sykmelding med korona-bidiagnose', () => {
-            const sykmeldinger = [
-                {
-                    status: 'SENDT',
-                    mulighetForArbeid: {
-                        perioder: [
-                            {
-                                fom: new Date(Date.now() - 1000),
-                                tom: new Date(Date.now() + 1000),
-                            },
-                        ],
-                    },
-                    diagnose: {
-                        hoveddiagnose: {
-                            diagnosekode: 'L87',
-                        },
-                        bidiagnoser: [
-                            {
-                                diagnosekode: 'R991',
-                            },
-                        ],
-                    },
+                    harRedusertArbeidsgiverperiode: true,
                 },
             ];
 
@@ -768,6 +739,7 @@ describe('sykmeldingUtils', () => {
                         },
                         bidiagnoser: [],
                     },
+                    harRedusertArbeidsgiverperiode: true,
                 },
             ];
 
@@ -776,7 +748,7 @@ describe('sykmeldingUtils', () => {
             expect(hasCorona).to.equal(false);
         });
 
-        it('skal returnere false hvis aktiv sykmelding ikke har korona-diagnose', () => {
+        it('skal returnere false hvis aktiv sykmelding harRedusertArbeidsgiverperiode=false', () => {
             const sykmeldinger = [
                 {
                     status: 'SENDT',
@@ -794,6 +766,7 @@ describe('sykmeldingUtils', () => {
                         },
                         bidiagnoser: [],
                     },
+                    harRedusertArbeidsgiverperiode: false,
                 },
             ];
 
@@ -820,6 +793,7 @@ describe('sykmeldingUtils', () => {
                         },
                         bidiagnoser: [],
                     },
+                    harRedusertArbeidsgiverperiode: true,
                 },
             ];
 

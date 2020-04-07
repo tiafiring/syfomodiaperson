@@ -209,23 +209,10 @@ const activeSykmeldinger = (sykmeldinger) => {
     });
 };
 
-const coronaDiagnosekoder = ['R991', 'U071'];
-
-const sykmeldingHasCoronaHoveddiagnose = (sykmelding) => {
-    return coronaDiagnosekoder.includes(sykmelding.diagnose.hoveddiagnose.diagnosekode);
-};
-
-const sykmeldingHasCoronaBidiagnose = (sykmelding) => {
-    return sykmelding.diagnose.bidiagnoser.findIndex((diagnose) => {
-        return coronaDiagnosekoder.includes(diagnose.diagnosekode);
-    }) > -1;
-};
-
 export const sykmeldingerHasCoronaDiagnose = (sykmeldinger) => {
     const sykmeldingerActiveNow = activeSykmeldinger(sykmeldinger);
     return sykmeldingerActiveNow.length > 0 && sykmeldingerActiveNow.findIndex((sykmelding) => {
-        return (sykmeldingHasCoronaHoveddiagnose(sykmelding)
-            || sykmeldingHasCoronaBidiagnose(sykmelding));
+        return sykmelding.harRedusertArbeidsgiverperiode;
     }) > -1;
 };
 
