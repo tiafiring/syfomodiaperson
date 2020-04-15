@@ -41,7 +41,15 @@ class Personkort extends Component {
         if (brukerFnr && !henterEllerHarHentetFastleger(fastleger)) {
             this.props.actions.hentFastleger(brukerFnr);
         }
-        this.props.actions.hentSykmeldinger(brukerFnr);
+    }
+
+    componentDidMount() {
+        const {
+            actions,
+            navbruker,
+        } = this.props;
+        const brukerFnr = navbruker.kontaktinfo && navbruker.kontaktinfo.fnr;
+        actions.hentSykmeldinger(brukerFnr);
     }
 
     byttVisning(visning) {

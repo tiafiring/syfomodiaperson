@@ -31,7 +31,6 @@ import {
     ikkeHenterEllerForsoktHentetLedere,
     ikkeHenterEllerForsoktHentetMotebehov,
     ikkeHenterEllerForsoktHentetOppfoelgingsdialoger,
-    ikkeHenterEllerForsoktHentetSykmeldinger,
 } from '../utils/reducerUtils';
 import { ledereUtenMotebehovsvar } from '../utils/ledereUtils';
 import Motebehov from '../components/motebehov/Motebehov';
@@ -47,18 +46,13 @@ export class MotebehovSide extends Component {
             fnr,
             skalHenteMotebehov,
             skalHenteLedere,
-            skalHenteSykmeldinger,
         } = this.props;
+        actions.hentSykmeldinger(fnr);
         if (skalHenteMotebehov) {
             actions.hentMotebehov(fnr);
         }
-
         if (skalHenteLedere) {
             actions.hentLedere(fnr);
-        }
-
-        if (skalHenteSykmeldinger) {
-            actions.hentSykmeldinger(fnr);
         }
     }
 
@@ -148,7 +142,6 @@ MotebehovSide.propTypes = {
     skalHenteLedere: PropTypes.bool,
     skalHenteMotebehov: PropTypes.bool,
     skalHenteOppfoelgingsdialoger: PropTypes.bool,
-    skalHenteSykmeldinger: PropTypes.bool,
     sykmeldt: PropTypes.object,
     tilgang: PropTypes.object,
     motebehovListeMedJaSvarTilOppgavebehandling: PropTypes.arrayOf(PropTypes.object),
@@ -197,7 +190,6 @@ export const mapStateToProps = (state, ownProps) => {
         skalHenteLedere: ikkeHenterEllerForsoktHentetLedere(state.ledere),
         skalHenteMotebehov: ikkeHenterEllerForsoktHentetMotebehov(state.motebehov),
         skalHenteOppfoelgingsdialoger: ikkeHenterEllerForsoktHentetOppfoelgingsdialoger(state.oppfoelgingsdialoger),
-        skalHenteSykmeldinger: ikkeHenterEllerForsoktHentetSykmeldinger(state.sykmeldinger),
         sykmeldt: state.navbruker.data,
         tilgang: state.tilgang.data,
         motebehovListeMedJaSvarTilOppgavebehandling,

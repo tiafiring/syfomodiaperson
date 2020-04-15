@@ -20,14 +20,20 @@ import { sykmeldingerHentet } from '../../src/actions/sykmeldinger_actions';
 
 describe('SykepengesoknadContainer', () => {
     let toggleStub;
+    let actions;
     let state;
     let ownProps;
     let settOwnPropsId;
+    let hentSykmeldinger;
     const ARBEIDSTAKERSOKNAD_ID = 'b9732cc7-6101-446e-a1ef-ec25a425b4fb';
     const NAERINGSDRIVENDESOKNAD_ID = 'faadf7c1-3aac-4758-8673-e9cee1316a3c';
     const OPPHOLD_UTLAND_ID = 'e16ff778-8475-47e1-b5dc-d2ce4ad6b9ee';
 
     beforeEach(() => {
+        hentSykmeldinger = sinon.spy();
+        actions = {
+            hentSykmeldinger,
+        };
         state = {
             soknader: soknader(soknader(), soknaderHentet(mockSoknader)),
             sykepengesoknader: sykepengesoknader(sykepengesoknader(), sykepengesoknaderHentet(mockSykepengesoknader)),
@@ -62,13 +68,13 @@ describe('SykepengesoknadContainer', () => {
     describe('Visning av sykepengesøknad for arbeidstakere', () => {
         it('Skal vise SykepengesoknadArbeidstaker', () => {
             settOwnPropsId(ARBEIDSTAKERSOKNAD_ID);
-            const component = shallow(<Container {...mapStateToProps(state, ownProps)} />);
+            const component = shallow(<Container {...mapStateToProps(state, ownProps)} actions={actions} />);
             expect(component.find(SykepengesoknadArbeidstaker).length).to.equal(1);
         });
 
         it('Skal vise SendtSoknadArbeidstakerNy', () => {
             settOwnPropsId(OPPHOLD_UTLAND_ID);
-            const component = shallow(<Container {...mapStateToProps(state, ownProps)} />);
+            const component = shallow(<Container {...mapStateToProps(state, ownProps)} actions={actions} />);
             expect(component.find(SykepengesoknadUtland).length).to.equal(1);
         });
     });
@@ -78,7 +84,7 @@ describe('SykepengesoknadContainer', () => {
             settOwnPropsId(ARBEIDSTAKERSOKNAD_ID);
             state.sykepengesoknader.hentingFeilet = true;
             state.sykepengesoknader.data = [];
-            const component = shallow(<Container {...mapStateToProps(state, ownProps)} />);
+            const component = shallow(<Container {...mapStateToProps(state, ownProps)} actions={actions} />);
             expect(component.find(Feilmelding)).to.have.length(1);
         });
 
@@ -86,7 +92,7 @@ describe('SykepengesoknadContainer', () => {
             settOwnPropsId(ARBEIDSTAKERSOKNAD_ID);
             state.soknader.hentingFeilet = true;
             state.soknader.data = [];
-            const component = shallow(<Container {...mapStateToProps(state, ownProps)} />);
+            const component = shallow(<Container {...mapStateToProps(state, ownProps)} actions={actions} />);
             expect(component.find(SykepengesoknadArbeidstaker).length).to.equal(1);
             expect(component.find(Feilmelding).length).to.equal(0);
         });
@@ -95,7 +101,7 @@ describe('SykepengesoknadContainer', () => {
             settOwnPropsId(NAERINGSDRIVENDESOKNAD_ID);
             state.soknader.hentingFeilet = true;
             state.soknader.data = [];
-            const component = shallow(<Container {...mapStateToProps(state, ownProps)} />);
+            const component = shallow(<Container {...mapStateToProps(state, ownProps)} actions={actions} />);
             expect(component.find(Feilmelding)).to.have.length(1);
         });
 
@@ -103,7 +109,7 @@ describe('SykepengesoknadContainer', () => {
             settOwnPropsId(NAERINGSDRIVENDESOKNAD_ID);
             state.sykepengesoknader.hentingFeilet = true;
             state.sykepengesoknader.data = [];
-            const component = shallow(<Container {...mapStateToProps(state, ownProps)} />);
+            const component = shallow(<Container {...mapStateToProps(state, ownProps)} actions={actions} />);
             expect(component.find(SykepengesoknadSelvstendig).length).to.equal(1);
             expect(component.find(Feilmelding).length).to.equal(0);
         });
@@ -113,7 +119,7 @@ describe('SykepengesoknadContainer', () => {
             state.tilgang.data = {
                 harTilgang: false,
             };
-            const component = shallow(<Container {...mapStateToProps(state, ownProps)} />);
+            const component = shallow(<Container {...mapStateToProps(state, ownProps)} actions={actions} />);
             expect(component.find(Feilmelding).length).to.equal(1);
         });
     });

@@ -1,4 +1,10 @@
-import { call, put, fork, takeEvery } from 'redux-saga/effects';
+import {
+    call,
+    put,
+    fork,
+    select,
+    takeEvery,
+} from 'redux-saga/effects';
 import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api';
 import * as actions from '../actions/sykmeldinger_actions';
@@ -20,8 +26,20 @@ export function* hentSykmeldinger(action) {
     }
 }
 
+export const skalHenteSykmeldinger = (state) => {
+    const reducer = state.sykmeldinger;
+    return !(reducer.henter || reducer.hentet || reducer.hentingFeilet);
+};
+
+export function* hentSykmeldingerHvisIkkeHentet(action) {
+    const skalHente = yield select(skalHenteSykmeldinger);
+    if (skalHente) {
+        yield hentSykmeldinger(action);
+    }
+}
+
 function* watchHentSykmeldinger() {
-    yield takeEvery(actions.HENT_SYKMELDINGER_FORESPURT, hentSykmeldinger);
+    yield takeEvery(actions.HENT_SYKMELDINGER_FORESPURT, hentSykmeldingerHvisIkkeHentet);
 }
 
 export default function* sykmeldingerSagas() {
