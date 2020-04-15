@@ -1,6 +1,3 @@
-export const henterEllerHarHentetDiskresjonskode = (diskresjonskode) => {
-    return diskresjonskode.henter || diskresjonskode.hentet;
-};
 export const henterEllerHarHentetEgenansatt = (egenansatt) => {
     return egenansatt.henter || egenansatt.hentet;
 };
