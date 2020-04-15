@@ -38,6 +38,7 @@ const MotebookingSkjemaContainer = (
         skjermetBruker,
         valgtEnhet,
         sender,
+        sendingFeilet,
     }) => {
     if (henter) {
         return <AppSpinner />;
@@ -66,6 +67,7 @@ const MotebookingSkjemaContainer = (
         opprettMote={opprettMote}
         valgtEnhet={valgtEnhet}
         sender={sender}
+        sendingFeilet={sendingFeilet}
     />);
 };
 
@@ -82,6 +84,7 @@ MotebookingSkjemaContainer.propTypes = {
     skjermetBruker: PropTypes.bool,
     valgtEnhet: PropTypes.string,
     sender: PropTypes.bool,
+    sendingFeilet: PropTypes.bool,
 };
 
 export function mapStateToProps(state, ownProps) {
@@ -99,6 +102,8 @@ export function mapStateToProps(state, ownProps) {
         skjermetBruker: state.moter.skjermetBruker,
         antallNyeTidspunkt: state.moter.antallNyeTidspunkt,
         hentingFeilet: state.navbruker.hentingFeilet,
+        sender: state.moter.sender,
+        sendingFeilet: state.moter.sendingFeilet,
     };
 }
 
