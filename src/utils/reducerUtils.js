@@ -1,7 +1,3 @@
-export const henterEllerHarHentetEgenansatt = (egenansatt) => {
-    return egenansatt.henter || egenansatt.hentet;
-};
-
 export const harForsoktHentetMotebehov = (motebehovReducer) => {
     return motebehovReducer.hentet || motebehovReducer.hentingFeilet || (motebehovReducer.tilgang && motebehovReducer.tilgang.harTilgang !== undefined);
 };

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Utvidbar } from '@navikt/digisyfo-npm';
 import PersonkortVisning from './PersonkortVisning';
 import { PERSONKORTVISNING_TYPE } from '../../konstanter';
-import { henterEllerHarHentetEgenansatt } from '../../utils/reducerUtils';
 import PersonkortHeader from './PersonkortHeader';
 import OversiktLink from './OversiktLink';
 
@@ -25,14 +24,6 @@ class Personkort extends Component {
         this.byttVisning = this.byttVisning.bind(this);
     }
 
-    componentWillMount() {
-        const { egenansatt } = this.props;
-        const brukerFnr = this.props.navbruker.kontaktinfo && this.props.navbruker.kontaktinfo.fnr;
-        if (brukerFnr && !henterEllerHarHentetEgenansatt(egenansatt)) {
-            this.props.actions.hentEgenansatt(brukerFnr);
-        }
-    }
-
     componentDidMount() {
         const {
             actions,
@@ -41,6 +32,7 @@ class Personkort extends Component {
         const brukerFnr = navbruker.kontaktinfo && navbruker.kontaktinfo.fnr;
         if (brukerFnr) {
             actions.hentDiskresjonskode(brukerFnr);
+            actions.hentEgenansatt(brukerFnr);
             actions.hentFastleger(brukerFnr);
             actions.hentSykmeldinger(brukerFnr);
         }
