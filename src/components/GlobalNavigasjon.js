@@ -42,13 +42,13 @@ class GlobalNavigasjon extends Component {
         this.state = {
             focusIndex: -1,
         };
-        props.hentOppfoelgingsdialoger(props.fnr);
     }
 
     componentDidMount() {
         const { fnr } = this.props;
         this.props.hentMotebehov(fnr);
         this.props.hentMoter(fnr);
+        this.props.hentOppfoelgingsdialoger(fnr);
     }
 
     setFocus(fokusId) {

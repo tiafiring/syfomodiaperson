@@ -14,10 +14,6 @@ export const harForsoktHentetOppfoelgingsdialoger = (oppfoelgingsdialogerReducer
     return oppfoelgingsdialogerReducer.hentet || oppfoelgingsdialogerReducer.hentingFeilet;
 };
 
-export const ikkeHenterEllerForsoktHentetOppfoelgingsdialoger = (oppfoelgingsdialogerReducer) => {
-    return !(oppfoelgingsdialogerReducer.henter || harForsoktHentetOppfoelgingsdialoger(oppfoelgingsdialogerReducer));
-};
-
 export const harForsoktHentetSykmeldinger = (sykmeldingerReducer) => {
     return sykmeldingerReducer.hentet || sykmeldingerReducer.hentingFeilet;
 };
