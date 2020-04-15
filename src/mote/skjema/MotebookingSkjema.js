@@ -121,11 +121,11 @@ export class MotebookingSkjema extends Component {
                 </fieldset>
 
                 <div aria-live="polite" role="alert">
-                    { sendingFeilet && <div className="panel panel--ramme">
+                    { sendingFeilet &&
                         <AlertStripe type="info">
                             <p className="sist">{texts.sendingFeilerErrorMessage}</p>
                         </AlertStripe>
-                    </div>}
+                    }
                 </div>
 
                 <div className="knapperad blokk">
