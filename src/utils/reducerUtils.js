@@ -14,6 +14,14 @@ export const harForsoktHentetOppfoelgingsdialoger = (oppfoelgingsdialogerReducer
     return oppfoelgingsdialogerReducer.hentet || oppfoelgingsdialogerReducer.hentingFeilet;
 };
 
+export const harForsoktHentetSoknader = (soknaderReducer) => {
+    return soknaderReducer.hentet || soknaderReducer.hentingFeilet;
+};
+
+export const harForsoktHentetSykepengesoknader = (sykepengesoknaderReducer) => {
+    return sykepengesoknaderReducer.hentet || sykepengesoknaderReducer.hentingFeilet;
+};
+
 export const harForsoktHentetSykmeldinger = (sykmeldingerReducer) => {
     return sykmeldingerReducer.hentet || sykmeldingerReducer.hentingFeilet;
 };

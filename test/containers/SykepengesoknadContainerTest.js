@@ -24,14 +24,20 @@ describe('SykepengesoknadContainer', () => {
     let state;
     let ownProps;
     let settOwnPropsId;
+    let hentSoknader;
+    let hentSykepengesoknader;
     let hentSykmeldinger;
     const ARBEIDSTAKERSOKNAD_ID = 'b9732cc7-6101-446e-a1ef-ec25a425b4fb';
     const NAERINGSDRIVENDESOKNAD_ID = 'faadf7c1-3aac-4758-8673-e9cee1316a3c';
     const OPPHOLD_UTLAND_ID = 'e16ff778-8475-47e1-b5dc-d2ce4ad6b9ee';
 
     beforeEach(() => {
+        hentSoknader = sinon.spy();
+        hentSykepengesoknader = sinon.spy();
         hentSykmeldinger = sinon.spy();
         actions = {
+            hentSoknader,
+            hentSykepengesoknader,
             hentSykmeldinger,
         };
         state = {

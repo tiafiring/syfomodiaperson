@@ -2,6 +2,7 @@ import {
     call,
     fork,
     put,
+    select,
     takeEvery,
 } from 'redux-saga/effects';
 import { log } from '@navikt/digisyfo-npm';
@@ -27,8 +28,20 @@ export function* hentSoknader(action) {
     }
 }
 
+export const skalHenteSoknader = (state) => {
+    const reducer = state.soknader;
+    return !(reducer.henter || reducer.hentet || reducer.hentingFeilet);
+};
+
+export function* hentSoknaderHvisIkkeHentet(action) {
+    const skalHente = yield select(skalHenteSoknader);
+    if (skalHente) {
+        yield hentSoknader(action);
+    }
+}
+
 function* watchHentSoknader() {
-    yield takeEvery(actions.HENT_SOKNADER_FORESPURT, hentSoknader);
+    yield takeEvery(actions.HENT_SOKNADER_FORESPURT, hentSoknaderHvisIkkeHentet);
 }
 
 export default function* soknaderSagas() {
