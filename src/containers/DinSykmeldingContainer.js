@@ -20,6 +20,7 @@ import { SYKMELDINGER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { erDev } from '../selectors/toggleSelectors';
 import { ARBEIDSTAKER } from '../enums/arbeidssituasjoner';
+import { harForsoktHentetSykmeldinger } from '../utils/reducerUtils';
 
 const texts = {
     pageTitleSykmelding: 'Sykmelding',
@@ -36,8 +37,15 @@ const pageTitle = (dinSykmelding) => {
 export class DinSykmeldingSide extends Component {
     componentWillMount() {
         const { fnr } = this.props;
-        this.props.actions.hentSykmeldinger(fnr);
         this.props.actions.hentArbeidsgiversSykmeldinger(fnr);
+    }
+
+    componentDidMount() {
+        const {
+            actions,
+            fnr,
+        } = this.props;
+        actions.hentSykmeldinger(fnr);
     }
 
     render() {
@@ -111,7 +119,8 @@ export function mapDispatchToProps(dispatch) {
 
 export function mapStateToProps(state, ownProps) {
     const sykmeldingId = ownProps.params.sykmeldingId;
-    const henter = state.sykmeldinger.henter || state.ledetekster.henter || state.arbeidsgiversSykmeldinger.henter;
+    const harForsoktHentetAlt = harForsoktHentetSykmeldinger(state.sykmeldinger);
+    const henter = !harForsoktHentetAlt || state.ledetekster.henter || state.arbeidsgiversSykmeldinger.henter;
     const hentingFeilet = state.sykmeldinger.hentingFeilet || state.tilgang.hentingFeilet;
     const dinSykmelding = getSykmelding(state.sykmeldinger.data, sykmeldingId);
     let arbeidsgiversSykmelding = {};

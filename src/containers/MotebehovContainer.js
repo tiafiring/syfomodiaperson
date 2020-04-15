@@ -28,10 +28,6 @@ import {
     harForsoktHentetLedetekster,
     harForsoktHentetMotebehov,
     harForsoktHentetOppfoelgingsdialoger,
-    ikkeHenterEllerForsoktHentetLedere,
-    ikkeHenterEllerForsoktHentetMotebehov,
-    ikkeHenterEllerForsoktHentetOppfoelgingsdialoger,
-    ikkeHenterEllerForsoktHentetSykmeldinger,
 } from '../utils/reducerUtils';
 import { ledereUtenMotebehovsvar } from '../utils/ledereUtils';
 import Motebehov from '../components/motebehov/Motebehov';
@@ -45,31 +41,19 @@ export class MotebehovSide extends Component {
         const {
             actions,
             fnr,
-            skalHenteMotebehov,
-            skalHenteLedere,
-            skalHenteSykmeldinger,
         } = this.props;
-        if (skalHenteMotebehov) {
-            actions.hentMotebehov(fnr);
-        }
-
-        if (skalHenteLedere) {
-            actions.hentLedere(fnr);
-        }
-
-        if (skalHenteSykmeldinger) {
-            actions.hentSykmeldinger(fnr);
-        }
+        actions.hentLedere(fnr);
+        actions.hentSykmeldinger(fnr);
+        actions.hentMotebehov(fnr);
     }
 
     componentWillReceiveProps(nextProps) {
         const {
             actions,
             fnr,
-            skalHenteOppfoelgingsdialoger,
         } = nextProps;
         actions.hentOppfolgingstilfelleperioder(fnr);
-        if (skalHenteOppfoelgingsdialoger) {
+        if (fnr) {
             actions.hentOppfoelgingsdialoger(fnr);
         }
     }
@@ -145,10 +129,6 @@ MotebehovSide.propTypes = {
     ledetekster: keyValue,
     motebehovListeUtenFlereSvarFraSammePerson: PropTypes.arrayOf(PropTypes.object),
     motebehovTilgang: PropTypes.object,
-    skalHenteLedere: PropTypes.bool,
-    skalHenteMotebehov: PropTypes.bool,
-    skalHenteOppfoelgingsdialoger: PropTypes.bool,
-    skalHenteSykmeldinger: PropTypes.bool,
     sykmeldt: PropTypes.object,
     tilgang: PropTypes.object,
     motebehovListeMedJaSvarTilOppgavebehandling: PropTypes.arrayOf(PropTypes.object),
@@ -194,10 +174,6 @@ export const mapStateToProps = (state, ownProps) => {
         ledetekster: state.ledetekster.data,
         motebehovListeUtenFlereSvarFraSammePerson,
         motebehovTilgang: state.motebehov.tilgang,
-        skalHenteLedere: ikkeHenterEllerForsoktHentetLedere(state.ledere),
-        skalHenteMotebehov: ikkeHenterEllerForsoktHentetMotebehov(state.motebehov),
-        skalHenteOppfoelgingsdialoger: ikkeHenterEllerForsoktHentetOppfoelgingsdialoger(state.oppfoelgingsdialoger),
-        skalHenteSykmeldinger: ikkeHenterEllerForsoktHentetSykmeldinger(state.sykmeldinger),
         sykmeldt: state.navbruker.data,
         tilgang: state.tilgang.data,
         motebehovListeMedJaSvarTilOppgavebehandling,

@@ -1,4 +1,11 @@
-import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
+import {
+    all,
+    call,
+    fork,
+    put,
+    select,
+    takeEvery,
+} from 'redux-saga/effects';
 import { log } from '@navikt/digisyfo-npm';
 import { post, get } from '../api';
 import history from '../history';
@@ -31,6 +38,18 @@ export function* hentMoter(action) {
         }
         log(e);
         yield put(actions.hentMoterFeilet());
+    }
+}
+
+export const skalHenteMoter = (state) => {
+    const reducer = state.ledere;
+    return !(reducer.henter || reducer.hentet || reducer.hentingFeilet);
+};
+
+export function* hentMoterHvisIkkeHentet(action) {
+    const skalHente = yield select(skalHenteMoter);
+    if (skalHente) {
+        yield hentMoter(action);
     }
 }
 
@@ -95,7 +114,7 @@ function* watchBekreftMote() {
 }
 
 function* watchHentMoter() {
-    yield takeEvery('HENT_MOTER_FORESPURT', hentMoter);
+    yield takeEvery('HENT_MOTER_FORESPURT', hentMoterHvisIkkeHentet);
 }
 
 function* watchMoteOpprettet() {

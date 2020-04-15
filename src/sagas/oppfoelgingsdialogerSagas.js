@@ -1,4 +1,10 @@
-import { call, put, fork, takeEvery } from 'redux-saga/effects';
+import {
+    call,
+    fork,
+    put,
+    select,
+    takeEvery,
+} from 'redux-saga/effects';
 import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api';
 import * as actions from '../actions/oppfoelgingsdialoger_actions';
@@ -15,8 +21,20 @@ export function* hentOppfoelgingsdialoger(action) {
     }
 }
 
+export const skalHenteOppfolgingsplaner = (state) => {
+    const reducer = state.oppfoelgingsdialoger;
+    return !(reducer.henter || reducer.hentet || reducer.hentingFeilet);
+};
+
+export function* hentOppfolgingsplanerHvisIkkeHentet(action) {
+    const skalHente = yield select(skalHenteOppfolgingsplaner);
+    if (skalHente) {
+        yield hentOppfoelgingsdialoger(action);
+    }
+}
+
 function* watchHentOppfoelgingsdialoger() {
-    yield takeEvery(actions.HENT_OPPFOELGINGSDIALOGER_FORESPURT, hentOppfoelgingsdialoger);
+    yield takeEvery(actions.HENT_OPPFOELGINGSDIALOGER_FORESPURT, hentOppfolgingsplanerHvisIkkeHentet);
 }
 
 export default function* oppfoelgingsdialogerSagas() {

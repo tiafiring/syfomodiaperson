@@ -13,6 +13,7 @@ import { SYKMELDINGER } from '../enums/menypunkter';
 import Speilingvarsel from '../components/Speilingvarsel';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { erDev } from '../selectors/toggleSelectors';
+import { harForsoktHentetSykmeldinger } from '../utils/reducerUtils';
 
 const texts = {
     introduksjonstekst: 'NAV mottar alle sykmeldinger. Ser du den ikke her? Det betyr at den som har sykmeldt deg ikke sender den digitalt til NAV. Da bruker du papirsykmeldingen i stedet.',
@@ -20,9 +21,12 @@ const texts = {
 };
 
 export class SykmeldingerSide extends Component {
-    componentWillMount() {
-        const { fnr } = this.props;
-        this.props.actions.hentSykmeldinger(fnr);
+    componentDidMount() {
+        const {
+            actions,
+            fnr,
+        } = this.props;
+        actions.hentSykmeldinger(fnr);
     }
 
     render() {
@@ -97,7 +101,8 @@ export function mapDispatchToProps(dispatch) {
 
 
 export function mapStateToProps(state, ownProps) {
-    const henter = state.sykmeldinger.henter || state.ledetekster.henter || state.tilgang.henter;
+    const harForsoektHentetAlt = harForsoktHentetSykmeldinger(state.sykmeldinger);
+    const henter = !harForsoektHentetAlt || state.ledetekster.henter || state.tilgang.henter;
     const hentingFeilet = state.sykmeldinger.hentingFeilet || state.ledetekster.hentingFeilet || state.tilgang.hentingFeilet;
     return {
         brukernavn: state.navbruker.data.navn,

@@ -39,23 +39,25 @@ import {
 import IkkeInnsendtSoknad from '../components/soknad-felles/IkkeInnsendtSoknad';
 import AvbruttSoknadArbeidtakerNy from '../components/soknad-arbeidstaker-ny/AvbruttSoknadArbeidtakerNy';
 import SykepengesoknadBehandlingsdager from '../components/soknad-behandlingsdager/SykepengesoknadBehandlingsdager';
+import {
+    harForsoktHentetSoknader,
+    harForsoktHentetSykepengesoknader,
+    harForsoktHentetSykmeldinger,
+} from '../utils/reducerUtils';
 
 const texts = {
     feilmedling: 'Du har ikke itllgang til denne tjenesten',
 };
 
 export class Container extends Component {
-    componentWillMount() {
-        const { fnr } = this.props;
-        if (this.props.skalHenteSykepengesoknader) {
-            this.props.actions.hentSykepengesoknader(fnr);
-        }
-        if (this.props.skalHenteSoknader) {
-            this.props.actions.hentSoknader(fnr);
-        }
-        if (this.props.skalHenteSykmeldinger) {
-            this.props.actions.hentSykmeldinger(fnr);
-        }
+    componentDidMount() {
+        const {
+            actions,
+            fnr,
+        } = this.props;
+        actions.hentSykmeldinger(fnr);
+        actions.hentSoknader(fnr);
+        actions.hentSykepengesoknader(fnr);
     }
 
     render() {
@@ -173,9 +175,6 @@ Container.propTypes = {
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
     ledetekster: keyValue,
-    skalHenteSykepengesoknader: PropTypes.bool,
-    skalHenteSoknader: PropTypes.bool,
-    skalHenteSykmeldinger: PropTypes.bool,
     soknad: soknadPt,
     sykmelding: sykmeldingPt,
 };
@@ -188,21 +187,14 @@ export function mapDispatchToProps(dispatch) {
 }
 
 export function mapStateToProps(state, ownProps) {
-    const henter = state.sykepengesoknader.henter
-        || state.soknader.henter
+    const harForsoktHentetAlt = harForsoktHentetSykmeldinger(state.sykmeldinger)
+    && harForsoktHentetSoknader(state.soknader)
+    && harForsoktHentetSykepengesoknader(state.sykepengesoknader);
+    const henter = !harForsoktHentetAlt
         || state.ledetekster.henter
         || state.tilgang.henter;
     const hentingFeilet = state.ledetekster.hentingFeilet
         || state.tilgang.hentingFeilet;
-    const skalHenteSykepengesoknader = !state.sykepengesoknader.henter
-        && !state.sykepengesoknader.hentingFeilet
-        && !state.sykepengesoknader.hentet;
-    const skalHenteSoknader = !state.soknader.henter
-        && !state.soknader.hentingFeilet
-        && !state.soknader.hentet;
-    const skalHenteSykmeldinger = !state.sykmeldinger.henter
-        && !state.sykmeldinger.hentingFeilet
-        && !state.sykmeldinger.hentet;
     const sykepengesoknad = state.sykepengesoknader.data.find((s) => {
         return s.id === ownProps.params.sykepengesoknadId;
     });
@@ -218,9 +210,6 @@ export function mapStateToProps(state, ownProps) {
     });
 
     return {
-        skalHenteSykepengesoknader,
-        skalHenteSoknader,
-        skalHenteSykmeldinger,
         brukernavn: state.navbruker.data.navn,
         fnr: ownProps.params.fnr,
         henter,

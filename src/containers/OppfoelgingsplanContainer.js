@@ -9,17 +9,19 @@ import Oppfoelgingsplan from '../components/oppfoelgingsdialoger/Oppfoelgingspla
 import AppSpinner from '../components/AppSpinner';
 import { OPPFOELGINGSPLANER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
+import { harForsoktHentetOppfoelgingsdialoger } from '../utils/reducerUtils';
 
 const texts = {
     errorTitle: 'Du har ikke tilgang til denne tjenesten',
 };
 
 export class OppfoelgingsPlanerOversiktSide extends Component {
-    componentWillMount() {
-        const { fnr, actions, henterDialoger, hentetDialoger } = this.props;
-        if (!henterDialoger && !hentetDialoger) {
-            actions.hentOppfoelgingsdialoger(fnr);
-        }
+    componentDidMount() {
+        const {
+            actions,
+            fnr,
+        } = this.props;
+        actions.hentOppfoelgingsdialoger(fnr);
     }
 
     render() {
@@ -58,8 +60,6 @@ OppfoelgingsPlanerOversiktSide.propTypes = {
     oppfoelgingsdialog: PropTypes.object,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
-    henterDialoger: PropTypes.bool,
-    hentetDialoger: PropTypes.bool,
     tilgang: PropTypes.object,
 };
 
@@ -72,10 +72,9 @@ export function mapDispatchToProps(dispatch) {
 
 export function mapStateToProps(state, ownProps) {
     const id = parseInt(ownProps.params.oppfoelgingsdialogId, 10);
-    const henter = state.oppfoelgingsdialoger.henter || state.tilgang.henter || state.veilederinfo.henter;
+    const harForsoktHentetAlt = harForsoktHentetOppfoelgingsdialoger(state.oppfoelgingsdialoger);
+    const henter = !harForsoktHentetAlt || state.tilgang.henter || state.veilederinfo.henter;
     const hentingFeilet = state.oppfoelgingsdialoger.hentingFeilet || state.tilgang.hentingFeilet;
-    const hentetDialoger = state.oppfoelgingsdialoger.hentet;
-    const henterDialoger = state.oppfoelgingsdialoger.henter;
 
     const oppfoelgingsdialog = state.oppfoelgingsdialoger.data.filter((dialog) => {
         return dialog.id === id;
@@ -86,8 +85,6 @@ export function mapStateToProps(state, ownProps) {
         fnr: ownProps.params.fnr,
         henter,
         hentingFeilet,
-        hentetDialoger,
-        henterDialoger,
         tilgang: state.tilgang.data,
     };
 }
