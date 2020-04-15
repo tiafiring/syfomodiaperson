@@ -11,6 +11,7 @@ import { ANTALL_MS_DAG } from '../../src/utils/datoUtils';
 describe('MotebehovContainer', () => {
     describe('MotebehovSide', () => {
         let actions;
+        let hentLedere;
         let hentMotebehov;
         let hentOppfoelgingsdialoger;
         let hentOppfolgingstilfelleperioder;
@@ -19,6 +20,7 @@ describe('MotebehovContainer', () => {
         let motebehovTilgang;
         let ledereData;
         beforeEach(() => {
+            hentLedere = sinon.spy();
             hentMotebehov = sinon.spy();
             hentOppfoelgingsdialoger = sinon.spy();
             hentOppfolgingstilfelleperioder = sinon.spy();
@@ -28,6 +30,7 @@ describe('MotebehovContainer', () => {
             };
             motebehovTilgang = {};
             actions = {
+                hentLedere,
                 hentMotebehov,
                 hentOppfoelgingsdialoger,
                 hentOppfolgingstilfelleperioder,

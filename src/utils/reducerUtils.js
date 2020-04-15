@@ -10,10 +10,6 @@ export const harForsoktHentetLedere = (ledereReducer) => {
     return ledereReducer.hentet || ledereReducer.hentingFeilet;
 };
 
-export const ikkeHenterEllerForsoktHentetLedere = (ledereReducer) => {
-    return !(ledereReducer.henter || harForsoktHentetLedere(ledereReducer));
-};
-
 export const harForsoktHentetOppfoelgingsdialoger = (oppfoelgingsdialogerReducer) => {
     return oppfoelgingsdialogerReducer.hentet || oppfoelgingsdialogerReducer.hentingFeilet;
 };
