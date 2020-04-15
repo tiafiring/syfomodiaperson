@@ -3,6 +3,7 @@ import {
     call,
     fork,
     put,
+    select,
     takeEvery,
 } from 'redux-saga/effects';
 import { log } from '@navikt/digisyfo-npm';
@@ -30,6 +31,18 @@ export function* hentMotebehov(action) {
     }
 }
 
+export const skalHenteMotebehov = (state) => {
+    const reducer = state.motebehov;
+    return !(reducer.henter || reducer.hentet || reducer.hentingFeilet);
+};
+
+export function* hentMotebehovHvisIkkeHentet(action) {
+    const skalHente = yield select(skalHenteMotebehov);
+    if (skalHente) {
+        yield hentMotebehov(action);
+    }
+}
+
 export function* behandleMotebehov(action) {
     const fnr = action.fnr;
     yield put(behandleActions.behandleMotebehovBehandler());
@@ -51,7 +64,7 @@ export function* behandleMotebehov(action) {
 }
 
 function* watchHentMotebehov() {
-    yield takeEvery(actions.HENT_MOTEBEHOV_FORESPURT, hentMotebehov);
+    yield takeEvery(actions.HENT_MOTEBEHOV_FORESPURT, hentMotebehovHvisIkkeHentet);
 }
 
 function* watchbehandleMotebehov() {

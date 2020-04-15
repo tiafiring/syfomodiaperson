@@ -2,10 +2,6 @@ export const harForsoktHentetMotebehov = (motebehovReducer) => {
     return motebehovReducer.hentet || motebehovReducer.hentingFeilet || (motebehovReducer.tilgang && motebehovReducer.tilgang.harTilgang !== undefined);
 };
 
-export const ikkeHenterEllerForsoktHentetMotebehov = (motebehovReducer) => {
-    return !(motebehovReducer.henter || harForsoktHentetMotebehov(motebehovReducer));
-};
-
 export const harForsoktHentetLedetekster = (ledeteksterReducer) => {
     return ledeteksterReducer.hentet || ledeteksterReducer.hentingFeilet;
 };
