@@ -12,22 +12,19 @@ import IngenPlaner from '../components/oppfoelgingsdialoger/IngenPlaner';
 import { OPPFOELGINGSPLANER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { activeOppfolgingsplaner } from '../utils/oppfolgingsplanerUtils';
+import { harForsoktHentetOppfoelgingsdialoger } from '../utils/reducerUtils';
 
 const texts = {
     errorTitle: 'Du har ikke tilgang til denne tjenesten',
 };
 
 export class OppfoelgingsPlanerOversiktSide extends Component {
-    componentWillMount() {
+    componentDidMount() {
         const {
             fnr,
             actions,
-            henterDialoger,
-            hentetDialoger,
         } = this.props;
-        if (!henterDialoger && !hentetDialoger) {
-            actions.hentOppfoelgingsdialoger(fnr);
-        }
+        actions.hentOppfoelgingsdialoger(fnr);
     }
 
     render() {
@@ -79,8 +76,6 @@ OppfoelgingsPlanerOversiktSide.propTypes = {
     inaktiveDialoger: PropTypes.array,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
-    henterDialoger: PropTypes.bool,
-    hentetDialoger: PropTypes.bool,
     tilgang: PropTypes.object,
 };
 
@@ -92,10 +87,9 @@ export function mapDispatchToProps(dispatch) {
 }
 
 export function mapStateToProps(state, ownProps) {
-    const henter = state.oppfoelgingsdialoger.henter || state.tilgang.henter;
+    const harForsoktHentetAlt = harForsoktHentetOppfoelgingsdialoger(state.oppfoelgingsdialoger);
+    const henter = !harForsoktHentetAlt || state.tilgang.henter;
     const hentingFeilet = state.oppfoelgingsdialoger.hentingFeilet || state.tilgang.hentingFeilet || state.tilgang.hentingFeilet;
-    const hentetDialoger = state.oppfoelgingsdialoger.hentet;
-    const henterDialoger = state.oppfoelgingsdialoger.henter;
 
     const oppfoelgingsdialoger = state.oppfoelgingsdialoger.data;
 
@@ -111,8 +105,6 @@ export function mapStateToProps(state, ownProps) {
         fnr: ownProps.params.fnr,
         henter,
         hentingFeilet,
-        hentetDialoger,
-        henterDialoger,
         inaktiveDialoger,
         aktiveDialoger,
         tilgang: state.tilgang.data,
