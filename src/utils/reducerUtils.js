@@ -25,7 +25,3 @@ export const harForsoktHentetSykepengesoknader = (sykepengesoknaderReducer) => {
 export const harForsoktHentetSykmeldinger = (sykmeldingerReducer) => {
     return sykmeldingerReducer.hentet || sykmeldingerReducer.hentingFeilet;
 };
-
-export const ikkeHenterEllerForsoktHentetSykmeldinger = (sykmeldingerReducer) => {
-    return !(sykmeldingerReducer.henter || harForsoktHentetSykmeldinger(sykmeldingerReducer));
-};
