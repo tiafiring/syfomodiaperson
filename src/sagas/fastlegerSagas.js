@@ -2,6 +2,7 @@ import {
     call,
     fork,
     put,
+    select,
     takeEvery,
 } from 'redux-saga/effects';
 import { get } from '../api';
@@ -19,8 +20,20 @@ export function* hentFastleger(action) {
     }
 }
 
+export const skalHenteFastleger = (state) => {
+    const reducer = state.fastleger;
+    return !(reducer.henter || reducer.hentet || reducer.hentingFeilet);
+};
+
+export function* hentFastlegerHvisIkkeHentet(action) {
+    const skalHente = yield select(skalHenteFastleger);
+    if (skalHente) {
+        yield hentFastleger(action);
+    }
+}
+
 function* watchHentFastleger() {
-    yield takeEvery(actiontyper.HENT_FASTLEGER_FORESPURT, hentFastleger);
+    yield takeEvery(actiontyper.HENT_FASTLEGER_FORESPURT, hentFastlegerHvisIkkeHentet);
 }
 
 export default function* fastlegerSagas() {

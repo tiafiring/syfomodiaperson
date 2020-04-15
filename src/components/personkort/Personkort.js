@@ -6,7 +6,6 @@ import { PERSONKORTVISNING_TYPE } from '../../konstanter';
 import {
     henterEllerHarHentetDiskresjonskode,
     henterEllerHarHentetEgenansatt,
-    henterEllerHarHentetFastleger,
 } from '../../utils/reducerUtils';
 import PersonkortHeader from './PersonkortHeader';
 import OversiktLink from './OversiktLink';
@@ -30,16 +29,13 @@ class Personkort extends Component {
     }
 
     componentWillMount() {
-        const { diskresjonskode, egenansatt, fastleger } = this.props;
+        const { diskresjonskode, egenansatt } = this.props;
         const brukerFnr = this.props.navbruker.kontaktinfo && this.props.navbruker.kontaktinfo.fnr;
         if (brukerFnr && !henterEllerHarHentetDiskresjonskode(diskresjonskode)) {
             this.props.actions.hentDiskresjonskode(brukerFnr);
         }
         if (brukerFnr && !henterEllerHarHentetEgenansatt(egenansatt)) {
             this.props.actions.hentEgenansatt(brukerFnr);
-        }
-        if (brukerFnr && !henterEllerHarHentetFastleger(fastleger)) {
-            this.props.actions.hentFastleger(brukerFnr);
         }
     }
 
@@ -49,7 +45,10 @@ class Personkort extends Component {
             navbruker,
         } = this.props;
         const brukerFnr = navbruker.kontaktinfo && navbruker.kontaktinfo.fnr;
-        actions.hentSykmeldinger(brukerFnr);
+        if (brukerFnr) {
+            actions.hentFastleger(brukerFnr);
+            actions.hentSykmeldinger(brukerFnr);
+        }
     }
 
     byttVisning(visning) {

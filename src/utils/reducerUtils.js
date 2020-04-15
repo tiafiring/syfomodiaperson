@@ -4,9 +4,6 @@ export const henterEllerHarHentetDiskresjonskode = (diskresjonskode) => {
 export const henterEllerHarHentetEgenansatt = (egenansatt) => {
     return egenansatt.henter || egenansatt.hentet;
 };
-export const henterEllerHarHentetFastleger = (fastleger) => {
-    return fastleger.henter || fastleger.hentet;
-};
 
 export const harForsoktHentetMotebehov = (motebehovReducer) => {
     return motebehovReducer.hentet || motebehovReducer.hentingFeilet || (motebehovReducer.tilgang && motebehovReducer.tilgang.harTilgang !== undefined);
