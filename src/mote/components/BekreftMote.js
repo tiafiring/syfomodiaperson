@@ -12,9 +12,6 @@ class BekreftMote extends Component {
         this.state = {
             bekreftet: false,
         };
-    }
-
-    componentWillMount() {
         if (this.moteBesvart(this.props.mote, this.props.alternativ)) {
             this.props.bekreftMote();
         }
