@@ -11,7 +11,6 @@ import epostinnholdSagas from './epostinnholdSagas';
 import sykmeldingerSagas from './sykmeldingerSagas';
 import oppfoelgingsdialogerSagas from './oppfoelgingsdialogerSagas';
 import modiacontextSagas from './modiacontextSagas';
-import arbeidsgiversSykmeldingerSagas from './arbeidsgiversSykmeldingerSagas';
 import sykepengesoknaderSagas from './sykepengesoknaderSagas';
 import historikkSagas from './historikkSagas';
 import behandlendeEnhetSagas from './behandlendeEnhetSagas';
@@ -39,7 +38,6 @@ export default function* rootSaga() {
         sykmeldingerSagas(),
         oppfoelgingsdialogerSagas(),
         sykepengesoknaderSagas(),
-        arbeidsgiversSykmeldingerSagas(),
         historikkSagas(),
         behandlendeEnhetSagas(),
         dokumentInfoSagas(),
