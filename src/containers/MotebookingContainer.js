@@ -16,8 +16,7 @@ const texts = {
 };
 
 export class MotebookingSide extends Component {
-    constructor(props = false) {
-        super(props);
+    componentDidMount() {
         this.props.hentMoter(this.props.fnr);
     }
 
@@ -86,10 +85,11 @@ export const mapStateToProps = (state, ownProps) => {
         return mote.status !== 'AVBRUTT';
     })[0];
 
+    const harForsoktHentetAlt = state.moter.hentingForsokt;
     return {
         fnr: ownProps.params.fnr,
         mote: aktivtMote,
-        henter: state.moter.henter || state.ledere.henter || state.tilgang.henter,
+        henter: !harForsoktHentetAlt || state.ledere.henter || state.tilgang.henter,
         sender: state.moter.sender,
         hentingFeilet: state.moter.hentingFeilet || state.tilgang.hentingFeilet || state.ledere.hentingFeilet,
         sendingFeilet: state.moter.sendingFeilet,

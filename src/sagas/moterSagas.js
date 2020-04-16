@@ -42,8 +42,8 @@ export function* hentMoter(action) {
 }
 
 export const skalHenteMoter = (state) => {
-    const reducer = state.ledere;
-    return !(reducer.henter || reducer.hentet || reducer.hentingFeilet);
+    const reducer = state.moter;
+    return !reducer.henter && !reducer.hentingForsokt;
 };
 
 export function* hentMoterHvisIkkeHentet(action) {

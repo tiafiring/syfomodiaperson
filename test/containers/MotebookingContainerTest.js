@@ -182,15 +182,24 @@ describe('MotebookingContainer', () => {
             expect(props.henter).to.be.equal(true);
         });
 
-        it('Skal returnere henter når det ikke hentes møter', () => {
+        it('Skal returnere henter false når møter er forsokt henter', () => {
             state.moter.data = [{
                 id: 1,
             }];
-            state.moter.henter = false;
-            state.moter.henter = false;
+            state.moter.hentingForsokt = true;
             state.ledere.henter = false;
             const props = mapStateToProps(state, ownProps);
             expect(props.henter).to.be.equal(false);
+        });
+
+        it('Skal returnere henter når møter ikke er forsokt henter', () => {
+            state.moter.data = [{
+                id: 1,
+            }];
+            state.moter.hentingForsokt = false;
+            state.ledere.henter = false;
+            const props = mapStateToProps(state, ownProps);
+            expect(props.henter).to.be.equal(true);
         });
 
         it('Skal returnere sender', () => {
