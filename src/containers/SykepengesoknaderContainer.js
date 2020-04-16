@@ -18,20 +18,23 @@ import Speilingvarsel from '../components/Speilingvarsel';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { erDev } from '../selectors/toggleSelectors';
 import Feilstripe from '../components/Feilstripe';
+import {
+    harForsoktHentetSoknader,
+    harForsoktHentetSykepengesoknader,
+} from '../utils/reducerUtils';
 
 const texts = {
     feilmelding: 'Du har ikke tilgang til denne tjenesten',
 };
 
 export class SykepengesoknaderSide extends Component {
-    componentWillMount() {
-        const { fnr } = this.props;
-        if (this.props.skalHenteSykepengesoknader) {
-            this.props.actions.hentSykepengesoknader(fnr);
-        }
-        if (this.props.skalHenteSoknader) {
-            this.props.actions.hentSoknader(fnr);
-        }
+    componentDidMount() {
+        const {
+            actions,
+            fnr,
+        } = this.props;
+        actions.hentSoknader(fnr);
+        actions.hentSykepengesoknader(fnr);
     }
 
     render() {
@@ -97,8 +100,6 @@ SykepengesoknaderSide.propTypes = {
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
-    skalHenteSykepengesoknader: PropTypes.bool,
-    skalHenteSoknader: PropTypes.bool,
     hentingFeiletSoknader: PropTypes.bool,
     hentingFeiletSykepengesoknader: PropTypes.bool,
     soknader: PropTypes.arrayOf(soknadPt),
@@ -111,24 +112,17 @@ export function mapDispatchToProps(dispatch) {
 }
 
 export function mapStateToProps(state, ownProps) {
-    const henter = state.sykepengesoknader.henter
-        || state.soknader.henter
+    const harForsoktHentetAlt = harForsoktHentetSoknader(state.soknader)
+        && harForsoktHentetSykepengesoknader(state.sykepengesoknader);
+    const henter = !harForsoktHentetAlt
         || state.ledetekster.henter
         || state.tilgang.henter;
     const hentingFeilet = state.ledetekster.hentingFeilet
         || state.tilgang.hentingFeilet;
     const hentingFeiletSykepengesoknader = state.sykepengesoknader.hentingFeilet;
     const hentingFeiletSoknader = state.soknader.hentingFeilet;
-    const skalHenteSykepengesoknader = !state.sykepengesoknader.henter
-        && !state.sykepengesoknader.hentingFeilet
-        && !state.sykepengesoknader.hentet;
-    const skalHenteSoknader = !state.soknader.henter
-        && !state.soknader.hentingFeilet
-        && !state.soknader.hentet;
 
     return {
-        skalHenteSoknader,
-        skalHenteSykepengesoknader,
         brukernavn: state.navbruker.data.navn,
         fnr: ownProps.params.fnr,
         henter,
