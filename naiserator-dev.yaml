@@ -20,7 +20,7 @@ spec:
     failureThreshold: 30
   readiness:
     path: /health/isReady
-    initialDelay: 30
+    initialDelay: 20
     periodSeconds: 5
     timeout: 5
   prometheus:
