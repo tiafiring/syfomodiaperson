@@ -1,5 +1,6 @@
 const mockData = require('./mockData');
 const enums = require('./mockDataEnums');
+const mockVirksomhet = require('./data/mockVirksomhet');
 
 function mockOpprettetIdResultat() {
     mockOpprettetIdResultat.rollingCounter += 1;
@@ -66,6 +67,16 @@ function mockForLokal(server) {
     server.get('/syfomoteadmin/api/internad/veilederinfo', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[enums.VEILEDERINFO]));
+    });
+
+    server.get('/syfomoteadmin/api/internad/virksomhet/110110110', (req, res) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(mockVirksomhet.getVirksomhet('Fire Station'));
+    });
+
+    server.get('/syfomoteadmin/api/internad/virksomhet/:virksomhetsnummer', (req, res) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(mockVirksomhet.getVirksomhet());
     });
 }
 

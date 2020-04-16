@@ -6,7 +6,7 @@
     "sistEndretDato": "2020-01-30T08:49:05.621",
     "status": "AKTIV",
     "virksomhet": {
-      "navn": "PONTYPANDY FIRE STATION",
+      "navn": null,
       "virksomhetsnummer": "110110110"
     },
     "godkjentPlan": {
@@ -62,7 +62,7 @@
     "sistEndretDato": "2019-02-20T11:41:18.336",
     "status": "AVBRUTT",
     "virksomhet": {
-      "navn": "PONTYPANDY FIRE STATION",
+      "navn": null,
       "virksomhetsnummer": "110110110"
     },
     "godkjentPlan": {
@@ -90,7 +90,7 @@
     "sistEndretDato": "2019-02-12T08:36:32.186",
     "status": "AKTIV",
     "virksomhet": {
-      "navn": "PONTYPANDY FIRE STATION",
+      "navn": null,
       "virksomhetsnummer": "110110110"
     },
     "godkjentPlan": {

@@ -4,22 +4,28 @@ import virksomhet from '../../../src/reducers/virksomhet';
 import * as actions from '../../../src/actions/virksomhet_actions';
 
 describe('virksomhet', () => {
+    const initState = deepFreeze({});
+    let orgnummer;
+    beforeEach(() => {
+        orgnummer = '8877766';
+    });
+
     it('Har en default state', () => {
         const state = virksomhet();
-        expect(state).to.deep.equal({
-            data: {},
-            henter: false,
-            hentingFeilet: false,
-        });
+        expect(state).to.deep.equal({});
     });
 
     it('Håndterer henterVirksomhet()', () => {
-        const action = actions.henterVirksomhet();
-        const state = virksomhet(undefined, action);
+        const action = actions.henterVirksomhet(orgnummer);
+        const state = virksomhet(initState, action);
         expect(state).to.deep.equal({
-            data: {},
-            henter: true,
-            hentingFeilet: false,
+            [orgnummer]: {
+                data: {},
+                henter: true,
+                hentet: false,
+                hentingFeilet: false,
+                hentingForsokt: false,
+            },
         });
     });
 
@@ -27,20 +33,27 @@ describe('virksomhet', () => {
         const data = {
             navn: 'NAV Consulting',
         };
-        const orgnummer = '8877766';
         const action = actions.virksomhetHentet(orgnummer, data);
         const currentState = deepFreeze({
-            data: {},
-            henter: true,
-            hentingFeilet: false,
+            [orgnummer]: {
+                data: {},
+                henter: false,
+                hentet: true,
+                hentingFeilet: false,
+                hentingForsokt: true,
+            },
         });
         const nextState = virksomhet(currentState, action);
         expect(nextState).to.deep.equal({
-            data: {
-                8877766: 'NAV Consulting',
+            [orgnummer]: {
+                data: {
+                    8877766: 'NAV Consulting',
+                },
+                henter: false,
+                hentet: true,
+                hentingFeilet: false,
+                hentingForsokt: true,
             },
-            henter: false,
-            hentingFeilet: false,
         });
     });
 
@@ -48,38 +61,53 @@ describe('virksomhet', () => {
         const data = {
             navn: 'NAV Consulting',
         };
-        const orgnummer = '8877766';
         const action = actions.virksomhetHentet(orgnummer, data);
         const currentState = deepFreeze({
-            data: {
-                123: 'BEKK',
+            [orgnummer]: {
+                data: {
+                    123: 'BEKK',
+                },
+                henter: true,
+                hentet: false,
+                hentingFeilet: false,
+                hentingForsokt: false,
             },
-            henter: true,
-            hentingFeilet: false,
         });
         const nextState = virksomhet(currentState, action);
         expect(nextState).to.deep.equal({
-            data: {
-                8877766: 'NAV Consulting',
-                123: 'BEKK',
+            [orgnummer]: {
+                data: {
+                    8877766: 'NAV Consulting',
+                    123: 'BEKK',
+                },
+                henter: false,
+                hentet: true,
+                hentingFeilet: false,
+                hentingForsokt: true,
             },
-            henter: false,
-            hentingFeilet: false,
         });
     });
 
     it('Håndterer hentVirksomhetFeilet', () => {
-        const action = actions.hentVirksomhetFeilet();
+        const action = actions.hentVirksomhetFeilet(orgnummer);
         const currentState = deepFreeze({
-            data: {},
-            henter: true,
-            hentingFeilet: false,
+            [orgnummer]: {
+                data: {},
+                henter: true,
+                hentet: false,
+                hentingFeilet: false,
+                hentingForsokt: false,
+            },
         });
         const nextState = virksomhet(currentState, action);
         expect(nextState).to.deep.equal({
-            data: {},
-            henter: false,
-            hentingFeilet: true,
+            [orgnummer]: {
+                data: {},
+                henter: false,
+                hentet: false,
+                hentingFeilet: true,
+                hentingForsokt: true,
+            },
         });
     });
 });

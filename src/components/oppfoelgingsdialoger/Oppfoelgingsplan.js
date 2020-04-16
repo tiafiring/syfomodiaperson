@@ -57,7 +57,7 @@ PlanVisning.propTypes = {
 };
 
 class OppfoelgingsplanWrapper extends Component {
-    componentWillMount() {
+    componentDidMount() {
         const {
             actions,
             oppfolgingsplan,
@@ -110,8 +110,9 @@ export function mapStateToProps(state, ownProps) {
     if (oppfolgingsplan) {
         oppfolgingsplanDokumentinfoReducer = state.dokumentinfo[oppfolgingsplan.id] || {};
     }
+    const harForsoktHentetAlt = oppfolgingsplanDokumentinfoReducer.hentingForsokt;
     return {
-        henter: !oppfolgingsplanDokumentinfoReducer.hentingForsokt,
+        henter: !harForsoktHentetAlt,
         hentingFeilet: oppfolgingsplanDokumentinfoReducer.hentingFeilet,
         dokumentinfo: oppfolgingsplanDokumentinfoReducer && oppfolgingsplanDokumentinfoReducer.data,
         brukernavn: state.navbruker.data.navn,

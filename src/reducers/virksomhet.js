@@ -4,35 +4,49 @@ import {
     HENT_VIRKSOMHET_FEILET,
 } from '../actions/virksomhet_actions';
 
-const defaultState = {
-    data: {},
-    henter: false,
-    hentingFeilet: false,
-};
+const initiellState = {};
 
-export default function virksomhet(state = defaultState, action = {}) {
+export default function virksomhet(state = initiellState, action = {}) {
+    const virksomhetTemp = {};
     switch (action.type) {
         case HENTER_VIRKSOMHET: {
-            return Object.assign({}, state, {
+            virksomhetTemp[action.orgnummer] = {
                 henter: true,
+                hentet: false,
                 hentingFeilet: false,
-            });
+                hentingForsokt: false,
+                data: state[action.orgnummer]
+                    ? state[action.orgnummer].data
+                    : {},
+            };
+            return { ...state, ...virksomhetTemp };
         }
         case VIRKSOMHET_HENTET: {
             const nyeData = {};
             nyeData[action.orgnummer] = action.data.navn;
-            return {
-                data: Object.assign({}, state.data, nyeData),
+            virksomhetTemp[action.orgnummer] = {
                 henter: false,
+                hentet: true,
                 hentingFeilet: false,
+                hentingForsokt: true,
+                data: {
+                    ...state[action.orgnummer].data,
+                    ...nyeData,
+                },
             };
+            return { ...state, ...virksomhetTemp };
         }
         case HENT_VIRKSOMHET_FEILET: {
-            return {
-                data: {},
+            virksomhetTemp[action.orgnummer] = {
                 henter: false,
+                hentet: false,
                 hentingFeilet: true,
+                hentingForsokt: true,
+                data: state[action.orgnummer]
+                    ? state[action.orgnummer].data
+                    : {},
             };
+            return { ...state, ...virksomhetTemp };
         }
         default: {
             return state;

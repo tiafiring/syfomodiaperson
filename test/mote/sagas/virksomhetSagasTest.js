@@ -18,7 +18,10 @@ describe('virksomhetSagas', () => {
         const generator = hentVirksomhet(action);
 
         it(`Skal dispatche ${actions.HENTER_VIRKSOMHET}`, () => {
-            const nextPut = put({ type: actions.HENTER_VIRKSOMHET });
+            const nextPut = put({
+                type: actions.HENTER_VIRKSOMHET,
+                orgnummer,
+            });
             expect(generator.next().value).to.deep.equal(nextPut);
         });
 

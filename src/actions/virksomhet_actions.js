@@ -10,9 +10,10 @@ export const hentVirksomhet = (orgnummer) => {
     };
 };
 
-export const henterVirksomhet = () => {
+export const henterVirksomhet = (orgnummer) => {
     return {
         type: HENTER_VIRKSOMHET,
+        orgnummer,
     };
 };
 
@@ -24,8 +25,9 @@ export const virksomhetHentet = (orgnummer, data) => {
     };
 };
 
-export const hentVirksomhetFeilet = () => {
+export const hentVirksomhetFeilet = (orgnummer) => {
     return {
         type: HENT_VIRKSOMHET_FEILET,
+        orgnummer,
     };
 };
