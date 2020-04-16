@@ -3,6 +3,7 @@ import {
     call,
     fork,
     put,
+    select,
     takeEvery,
 } from 'redux-saga/effects';
 import { get } from '../api';
@@ -19,8 +20,21 @@ export function* dokumentInfoSaga(action) {
     }
 }
 
+export const skalHenteDokumentInfo = (state, action) => {
+    const planId = action.id || {};
+    const reducer = state.dokumentinfo[planId] || {};
+    return (!reducer.henter && !reducer.hentingForsokt) || false;
+};
+
+export function* hentMotebehovHvisIkkeHentet(action) {
+    const skalHente = yield select(skalHenteDokumentInfo, action);
+    if (skalHente) {
+        yield dokumentInfoSaga(action);
+    }
+}
+
 function* watchHentDokumentInfo() {
-    yield takeEvery(actions.HENT_DOKUMENTINFO_FORESPURT, dokumentInfoSaga);
+    yield takeEvery(actions.HENT_DOKUMENTINFO_FORESPURT, hentMotebehovHvisIkkeHentet);
 }
 
 export default function* dokumentInfoSagas() {

@@ -4,13 +4,7 @@ import {
     DOKUMENTINFO_HENTET,
 } from '../actions/dokumentinfo_actions';
 
-const initiellState = {
-    henter: false,
-    hentet: false,
-    hentingFeilet: false,
-    hentingForsokt: false,
-    data: {},
-};
+const initiellState = {};
 
 export default function dokumentinfo(state = initiellState, action) {
     const oppfolgingsplanDokument = {};
