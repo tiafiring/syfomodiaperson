@@ -10,7 +10,6 @@ import {
 import Side from '../sider/Side';
 import SidetoppSpeilet from '../components/SidetoppSpeilet';
 import * as sykmeldingerActions from '../actions/sykmeldinger_actions';
-import * as arbeidsgiversSykmeldingerActions from '../actions/arbeidsgiverssykmeldinger_actions';
 import SykmeldingSide from '../components/sykmelding/SykmeldingSide';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
@@ -35,11 +34,6 @@ const pageTitle = (dinSykmelding) => {
 };
 
 export class DinSykmeldingSide extends Component {
-    componentWillMount() {
-        const { fnr } = this.props;
-        this.props.actions.hentArbeidsgiversSykmeldinger(fnr);
-    }
-
     componentDidMount() {
         const {
             actions,
@@ -111,7 +105,7 @@ DinSykmeldingSide.propTypes = {
 };
 
 export function mapDispatchToProps(dispatch) {
-    const actions = Object.assign({}, sykmeldingerActions, arbeidsgiversSykmeldingerActions);
+    const actions = Object.assign({}, sykmeldingerActions);
     return {
         actions: bindActionCreators(actions, dispatch),
     };
@@ -120,7 +114,7 @@ export function mapDispatchToProps(dispatch) {
 export function mapStateToProps(state, ownProps) {
     const sykmeldingId = ownProps.params.sykmeldingId;
     const harForsoktHentetAlt = harForsoktHentetSykmeldinger(state.sykmeldinger);
-    const henter = !harForsoktHentetAlt || state.ledetekster.henter || state.arbeidsgiversSykmeldinger.henter;
+    const henter = !harForsoktHentetAlt || state.ledetekster.henter;
     const hentingFeilet = state.sykmeldinger.hentingFeilet || state.tilgang.hentingFeilet;
     const dinSykmelding = getSykmelding(state.sykmeldinger.data, sykmeldingId);
     let arbeidsgiversSykmelding = {};
@@ -131,7 +125,7 @@ export function mapStateToProps(state, ownProps) {
             || (dinSykmelding.status === sykmeldingstatuser.BEKREFTET && dinSykmelding.valgtArbeidssituasjon === ARBEIDSTAKER)
         )
     ) {
-        arbeidsgiversSykmelding = getSykmelding(state.arbeidsgiversSykmeldinger.data, sykmeldingId);
+        arbeidsgiversSykmelding = getSykmelding(state.sykmeldinger.arbeidsgiverssykmeldinger, sykmeldingId);
     }
 
     return {

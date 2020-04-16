@@ -15,7 +15,6 @@ import fastleger from './reducers/fastleger';
 import ledere from './reducers/ledere';
 import navbruker from './reducers/navbruker';
 import sykmeldinger from './reducers/sykmeldinger';
-import arbeidsgiversSykmeldinger from './reducers/arbeidsgiversSykmeldinger';
 import moter from './reducers/moter';
 import motebehov from './reducers/motebehov';
 import motebehovBehandling from './reducers/motebehovBehandling';
@@ -67,7 +66,6 @@ const rootReducer = combineReducers({
     enhet,
     tidslinjer,
     sykmeldinger,
-    arbeidsgiversSykmeldinger,
     behandlendeEnhet,
     diskresjonskode,
     dokumentinfo,

@@ -1,4 +1,7 @@
-import { newSMFormat2OldFormat } from '../utils/sykmeldinger/sykmeldingParser';
+import {
+    newSMFormat2OldFormat,
+    oldFormatSMForAG,
+} from '../utils/sykmeldinger/sykmeldingParser';
 import {
     HENT_SYKMELDINGER_FEILET,
     HENTER_SYKMELDINGER,
@@ -11,6 +14,7 @@ const initiellState = {
     hentingFeilet: false,
     hentet: false,
     data: [],
+    arbeidsgiverssykmeldinger: [],
 };
 
 export default function sykmeldinger(state = initiellState, action = {}) {
@@ -18,6 +22,7 @@ export default function sykmeldinger(state = initiellState, action = {}) {
         case HENT_SYKMELDINGER_FEILET: {
             return Object.assign({}, state, {
                 data: [],
+                arbeidsgiverssykmeldinger: [],
                 henter: false,
                 hentet: true,
                 hentingFeilet: true,
@@ -26,6 +31,7 @@ export default function sykmeldinger(state = initiellState, action = {}) {
         case HENTER_SYKMELDINGER: {
             return {
                 data: [],
+                arbeidsgiverssykmeldinger: [],
                 henter: true,
                 hentet: false,
                 hentingFeilet: false,
@@ -37,6 +43,7 @@ export default function sykmeldinger(state = initiellState, action = {}) {
                 hentingFeilet: false,
                 hentet: true,
                 data: action.data.map((sykmelding) => {return newSMFormat2OldFormat(sykmelding, action.fnr);}),
+                arbeidsgiverssykmeldinger: action.data.map((sykmelding) => { return oldFormatSMForAG(sykmelding, action.fnr); }),
             };
         }
         case SYKMELDINGER_SORTERT: {
