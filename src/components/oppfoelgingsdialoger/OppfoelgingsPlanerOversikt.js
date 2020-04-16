@@ -29,18 +29,18 @@ const deltMedNavText = (dialog) => {
 };
 
 export class OppfoelgingsPlanerOversikt extends Component {
-    componentWillMount() {
+    componentDidMount() {
         const {
             actions,
             aktiveDialoger,
             inaktiveDialoger,
         } = this.props;
         const virksomhetsnummerSet = new Set();
-        aktiveDialoger.forEach((dialog) => {
-            virksomhetsnummerSet.add(dialog.virksomhet.virksomhetsnummer);
+        aktiveDialoger.forEach((plan) => {
+            virksomhetsnummerSet.add(plan.virksomhet.virksomhetsnummer);
         });
-        inaktiveDialoger.forEach((dialog) => {
-            virksomhetsnummerSet.add(dialog.virksomhet.virksomhetsnummer);
+        inaktiveDialoger.forEach((plan) => {
+            virksomhetsnummerSet.add(plan.virksomhet.virksomhetsnummer);
         });
         virksomhetsnummerSet.forEach((virksomhetsnummer) => {
             actions.hentVirksomhet(virksomhetsnummer);

@@ -10,7 +10,7 @@ import BehandleMotebehovKnapp from './BehandleMotebehovKnapp';
 import UtdragFraSykefravaeret from './UtdragFraSykefravaeret';
 
 export class Motebehov extends Component {
-    componentWillMount() {
+    componentDidMount() {
         const {
             actions,
             aktiveDialoger,
