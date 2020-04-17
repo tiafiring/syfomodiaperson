@@ -89,7 +89,7 @@ export function mapDispatchToProps(dispatch) {
 export function mapStateToProps(state, ownProps) {
     const harForsoktHentetAlt = harForsoktHentetOppfoelgingsdialoger(state.oppfoelgingsdialoger);
     const henter = !harForsoktHentetAlt || state.tilgang.henter;
-    const hentingFeilet = state.oppfoelgingsdialoger.hentingFeilet || state.tilgang.hentingFeilet || state.tilgang.hentingFeilet;
+    const hentingFeilet = state.oppfoelgingsdialoger.hentingFeilet || state.tilgang.hentingFeilet;
 
     const oppfoelgingsdialoger = state.oppfoelgingsdialoger.data;
 
