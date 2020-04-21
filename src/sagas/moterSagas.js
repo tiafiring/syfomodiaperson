@@ -17,6 +17,7 @@ export function* opprettMote(action) {
     try {
         const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/moter`;
         yield call(post, path, action.data);
+        yield put(actions.moteOpprettet(action.data));
         yield put(actions.hentMoter(action.data.fnr));
         yield put(historikkActions.hentHistorikk(action.data.fnr, 'MOTER'));
     } catch (e) {

@@ -27,6 +27,11 @@ export default function moter(state = defaultState, action) {
                 avbrytFeilet: false,
             });
         }
+        case actions.MOTE_OPPRETTET: {
+            return Object.assign({}, state, {
+                sender: false,
+            });
+        }
         case actions.OPPRETT_MOTE_FEILET: {
             return Object.assign({}, state, {
                 henter: false,
