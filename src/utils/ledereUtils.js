@@ -106,3 +106,15 @@ export const virksomheterWithoutLeder = (ledere, sykmeldinger) => {
 
     return removeDuplicatesFromLederList(virksomheterAsLedere);
 };
+
+export const currentLedere = (ledere) => {
+    return ledere.filter((leder) => {
+        return leder.aktivTom === null;
+    });
+};
+
+export const formerLedere = (ledere) => {
+    return ledere.filter((leder) => {
+        return leder.aktivTom !== null;
+    });
+};

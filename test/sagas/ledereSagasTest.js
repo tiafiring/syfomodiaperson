@@ -24,7 +24,7 @@ describe('ledereSagas', () => {
     });
 
     it('Skal dernest hente ledere', () => {
-        const nextCall = call(get, '/sykefravaer/internad/naermesteleder?fnr=55');
+        const nextCall = call(get, '/sykefravaer/internad/allnaermesteledere?fnr=55');
         expect(generator.next().value).to.deep.equal(nextCall);
     });
 
