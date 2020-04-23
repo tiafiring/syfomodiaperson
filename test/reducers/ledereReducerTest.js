@@ -12,6 +12,7 @@ describe('ledere', () => {
         const nextState = ledere();
         expect(nextState).to.deep.equal({
             data: [],
+            formerLedere: [],
             henter: false,
             hentet: false,
             hentingFeilet: false,
@@ -24,10 +25,13 @@ describe('ledere', () => {
             type: LEDERE_HENTET,
             data: [{
                 navn: 'Kurt Nilsen',
+                aktivTom: null,
             }, {
                 navn: 'Hans Hansen',
+                aktivTom: "2020-02-20T12:00:00+01:00",
             }, {
                 navn: 'Nina Knutsen',
+                aktivTom: null,
             }],
         };
         const nextState = ledere(initialState, action);
@@ -38,11 +42,15 @@ describe('ledere', () => {
             hentingFeilet: false,
             data: [{
                 navn: 'Kurt Nilsen',
-            }, {
-                navn: 'Hans Hansen',
+                aktivTom: null,
             }, {
                 navn: 'Nina Knutsen',
+                aktivTom: null,
             }],
+            formerLedere: [{
+                navn: 'Hans Hansen',
+                aktivTom: "2020-02-20T12:00:00+01:00",
+            }]
         });
     });
 
@@ -54,6 +62,7 @@ describe('ledere', () => {
         const nextState = ledere(initialState, action);
         expect(nextState).to.deep.equal({
             data: [],
+            formerLedere: [],
             henter: true,
             hentet: false,
             hentingFeilet: false,
@@ -71,6 +80,7 @@ describe('ledere', () => {
             hentet: false,
             hentingFeilet: true,
             data: [],
+            formerLedere: [],
         });
     });
 });

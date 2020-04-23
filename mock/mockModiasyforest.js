@@ -12,7 +12,7 @@ function mockForLokal(server) {
         res.send(JSON.stringify(mockData[enums.SYKMELDINGER]));
     });
 
-    server.get('/modiasyforest/api/internad/naermesteleder', (req, res) => {
+    server.get('/modiasyforest/api/internad/allnaermesteledere', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[enums.LEDERE]));
     });

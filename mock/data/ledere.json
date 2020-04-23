@@ -35,10 +35,24 @@
     "epost": "test3@test.no",
     "aktiv": null,
     "erOppgitt": true,
-    "fomDato": "2018-12-03T12:00:00+01:00",
+    "fomDato": "2019-03-10T12:00:00+01:00",
     "orgnummer": "555666444",
     "organisasjonsnavn": "BRANN OG BIL AS",
     "aktivTom": null,
+    "arbeidsgiverForskuttererLoenn": null
+  },
+  {
+    "navn": "F. Orrige Leder",
+    "id": 3,
+    "aktoerId": "9909909909902",
+    "tlf": "87654329",
+    "epost": "test4@test.no",
+    "aktiv": false,
+    "erOppgitt": true,
+    "fomDato": "2019-02-03T12:00:00+01:00",
+    "orgnummer": "000999000",
+    "organisasjonsnavn": "KONKURS BEDRIFT OG VENNER AS",
+    "aktivTom": "2020-02-02T12:00:00+01:00",
     "arbeidsgiverForskuttererLoenn": null
   }
 ]
