@@ -37,9 +37,9 @@ export class HistorikkSide extends Component {
         const {
             actions,
             fnr,
-            ledereData,
+            ledere,
         } = nextProps;
-        if (ledereData && ledereData.length > 0) {
+        if (ledere && ledere.length > 0) {
             actions.hentOppfolgingstilfelleperioder(fnr);
         }
     }
@@ -50,7 +50,7 @@ export class HistorikkSide extends Component {
             henter,
             hentingFeilet,
             historikk,
-            ledereData,
+            ledere,
             tilgang,
             oppfolgingstilfelleperioder,
         } = this.props;
@@ -67,7 +67,7 @@ export class HistorikkSide extends Component {
                     } else if (hentingFeilet) {
                         return <Feilmelding />;
                     }
-                    return <Historikk oppfolgingstilfelleperioder={oppfolgingstilfelleperioder} historikk={historikk} ledere={ledereData} />;
+                    return <Historikk oppfolgingstilfelleperioder={oppfolgingstilfelleperioder} historikk={historikk} ledere={ledere} />;
                 })()
             }
         </Side>);
@@ -86,7 +86,7 @@ HistorikkSide.propTypes = {
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
     oppfolgingstilfelleperioder: PropTypes.object,
-    ledereData: PropTypes.array,
+    ledere: PropTypes.array,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -102,6 +102,11 @@ export const mapStateToProps = (state, ownProps) => {
         return oppfolgingstilfelleperioder[orgnummer].henter;
     }) !== -1;
     const henter = state.tilgang.henter || state.ledere.henter || henterTilfeller;
+
+    const currentLedere = state.ledere.data;
+    const formerLedere = state.ledere.formerLedere;
+    const allLedere = [...currentLedere, ... formerLedere];
+
     return {
         fnr: ownProps.params.fnr,
         oppfolgingstilfelleperioder,
@@ -109,7 +114,7 @@ export const mapStateToProps = (state, ownProps) => {
         henter,
         hentingFeilet: state.tilgang.hentingFeilet || state.ledere.hentingFeilet,
         tilgang: state.tilgang.data,
-        ledereData: state.ledere.data,
+        ledere: allLedere,
     };
 };
 
