@@ -14,6 +14,8 @@ describe('Personkort', () => {
     let hentDiskresjonskode;
     let hentEgenansatt;
     let hentFastleger;
+    let hentLedere;
+    let hentOppfolgingstilfelleperioder;
     let hentSykmeldinger;
     let actions;
     let egenansatt;
@@ -41,11 +43,15 @@ describe('Personkort', () => {
         hentDiskresjonskode = sinon.spy();
         hentEgenansatt = sinon.spy();
         hentFastleger = sinon.spy();
+        hentLedere = sinon.spy();
+        hentOppfolgingstilfelleperioder = sinon.spy();
         hentSykmeldinger = sinon.spy();
         actions = {
             hentDiskresjonskode,
             hentEgenansatt,
             hentFastleger,
+            hentLedere,
+            hentOppfolgingstilfelleperioder,
             hentSykmeldinger,
         };
         komponent = shallow(<Personkort

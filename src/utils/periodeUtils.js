@@ -1,3 +1,8 @@
+import {
+    dagerMellomDatoer,
+    isDate16DaysAgoOrLater,
+} from './datoUtils';
+
 export const tidligsteFom = (perioder) => {
     return perioder.map((p) => { return p.fom; }).sort((p1, p2) => {
         if (p1 > p2) {
@@ -42,3 +47,55 @@ export const tilfellerFromTilfelleperioder = (oppfolgingstilfelleperioder) => {
     });
 };
 
+export const tilfellerNewestToOldest = (oppfolgingstilfeller) => {
+    return oppfolgingstilfeller.sort((s1, s2) => { return new Date(s2.fom) - new Date(s1.fom); });
+};
+
+const latestTilfelle = (oppfolgingstilfeller) => {
+    const sortedTilfeller = tilfellerNewestToOldest(oppfolgingstilfeller);
+    return sortedTilfeller[0];
+};
+
+export const candidateTilfelleIsConnectedToTilfelle = (tilfelle, candidateTilfelle) => {
+    const tilfelleStartDate = new Date(tilfelle.fom);
+    const tilfelleEndDate = new Date(tilfelle.tom);
+    const candidateStartDate = new Date(candidateTilfelle.fom);
+    const candidateEndDate = new Date(candidateTilfelle.tom);
+
+    const candidateStartBeforeTilfelleStart = candidateStartDate - tilfelleStartDate < 0;
+
+    if (periodeOverlapperMedPeriode(tilfelle, candidateTilfelle)) {
+        return true;
+    }
+
+    if (candidateStartBeforeTilfelleStart) {
+        return dagerMellomDatoer(tilfelleStartDate, candidateEndDate) <= 16;
+    }
+
+    return dagerMellomDatoer(tilfelleEndDate, candidateStartDate) <= 16;
+};
+
+const tilfellerConnectedToGivenTilfelle = (tilfelle, candidateTilfeller) => {
+    return candidateTilfeller.filter((candidateTilfelle) => {
+        return candidateTilfelleIsConnectedToTilfelle(tilfelle, candidateTilfelle);
+    });
+};
+
+export const startDateFromLatestActiveTilfelle = (oppfolgingstilfelleperioder) => {
+    const tilfeller = tilfellerFromTilfelleperioder(oppfolgingstilfelleperioder);
+
+    if (tilfeller.length === 1) {
+        return isDate16DaysAgoOrLater(senesteTom(tilfeller))
+            ? tidligsteFom(tilfeller)
+            : null;
+    }
+
+    const nyesteTilfelle = latestTilfelle(tilfeller);
+
+    const tilfellerConnectedToNewestTilfelle = tilfellerConnectedToGivenTilfelle(nyesteTilfelle, tilfeller);
+    const isActiveTilfelle = isDate16DaysAgoOrLater(senesteTom(tilfellerConnectedToNewestTilfelle));
+
+    return isActiveTilfelle
+        ? tidligsteFom(tilfellerConnectedToNewestTilfelle)
+        : null;
+};

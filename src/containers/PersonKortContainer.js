@@ -4,6 +4,8 @@ import Personkort from '../components/personkort/Personkort';
 import * as egenansattActions from '../actions/egenansatt_actions';
 import * as diskresjonskodeActions from '../actions/diskresjonskode_actions';
 import * as fastlegeActions from '../actions/fastleger_actions';
+import * as ledereActions from '../actions/ledere_actions';
+import * as oppfolgingstilfelleperioderActions from '../actions/oppfolgingstilfelleperioder_actions';
 import * as sykmeldingerActions from '../actions/sykmeldinger_actions';
 
 
@@ -12,6 +14,8 @@ export function mapDispatchToProps(dispatch) {
         diskresjonskodeActions,
         egenansattActions,
         fastlegeActions,
+        ledereActions,
+        oppfolgingstilfelleperioderActions,
         sykmeldingerActions
     );
     return {
@@ -28,6 +32,7 @@ export const mapStateToProps = (state) => {
         fastleger: state.fastleger,
         ledere: state.ledere.data,
         navbruker: state.navbruker.data,
+        oppfolgingstilfelleperioder: state.oppfolgingstilfelleperioder,
         sykmeldinger: state.sykmeldinger.data,
     };
 };
