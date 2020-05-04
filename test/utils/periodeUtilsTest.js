@@ -1,10 +1,28 @@
-import { expect } from 'chai';
+import chai from 'chai';
+import chaiDatetime from 'chai-datetime';
+import sinon from 'sinon';
 import {
+    candidateTilfelleIsConnectedToTilfelle,
+    startDateFromLatestActiveTilfelle,
     periodeOverlapperMedPeriode,
     senesteTom,
     tidligsteFom,
     tilfellerFromTilfelleperioder,
 } from '../../src/utils/periodeUtils';
+import {
+    oppfolgingstilfelleperioderMoreThanOneTilfelleInactive,
+    oppfolgingstilfelleperioderOneTilfelleInactive,
+    oppfolgingstilfelleperioderWithOneTilfelle,
+    oppfolgingstilfelleperioderWithTwoConnectedTilfeller,
+    oppfolgingstilfelleperioderWithTwoPerioderInOneTilfelle,
+    oppfolgingstilfelleperioderWithTwoUnconnectedTilfeller,
+    START_DATE_NEWEST_TILFELLE,
+    START_DATE_OLDEST_TILFELLE,
+    TODAY,
+} from '../mockdata/mockOppfolgingstilfelleperioder';
+
+chai.use(chaiDatetime);
+const expect = chai.expect;
 
 describe('periodeUtils', () => {
     describe('tidligsteFom', () => {
@@ -225,5 +243,144 @@ describe('periodeUtils', () => {
 
             expect(tilfeller).to.deep.equal(expectedTilfeller);
         });
-    })
+    });
+
+    describe('candidateTilfelleIsConnectedToTilfelle', () => {
+        it('Should return true if periods overlap', () => {
+            const tilfelle = {
+                fom: '2020-04-01',
+                tom: '2020-04-10',
+            };
+
+            const overlappingCandidateTilfelle = {
+                fom: '2020-03-20',
+                tom: '2020-04-05',
+            };
+
+            const isConnected = candidateTilfelleIsConnectedToTilfelle(tilfelle, overlappingCandidateTilfelle);
+
+            expect(isConnected).to.be.true;
+        });
+
+        it('Should return true if candidate starts before tilfelle, and ends 16 or less days before', () => {
+            const tilfelle = {
+                fom: '2020-04-01',
+                tom: '2020-04-10',
+            };
+
+            const connectedEarlierCandidateTilfelle = {
+                fom: '2020-03-20',
+                tom: '2020-03-29',
+            };
+
+            const isConnected = candidateTilfelleIsConnectedToTilfelle(tilfelle, connectedEarlierCandidateTilfelle);
+
+            expect(isConnected).to.be.true;
+        });
+
+        it('Should return false if candidate starts before tilfelle, and ends more than 16 days before', () => {
+            const tilfelle = {
+                fom: '2020-04-01',
+                tom: '2020-04-10',
+            };
+
+            const unconnectedEarlierCandidateTilfelle = {
+                fom: '2020-03-01',
+                tom: '2020-03-10',
+            };
+
+            const isConnected = candidateTilfelleIsConnectedToTilfelle(tilfelle, unconnectedEarlierCandidateTilfelle);
+
+            expect(isConnected).to.be.false;
+        });
+
+        it('Should return true if candidate starts 16 or less days after after tilfelle', () => {
+            const tilfelle = {
+                fom: '2020-04-01',
+                tom: '2020-04-10',
+            };
+
+            const connectedLaterCandidateTilfelle = {
+                fom: '2020-04-26',
+                tom: '2020-04-30',
+            };
+
+            const isConnected = candidateTilfelleIsConnectedToTilfelle(tilfelle, connectedLaterCandidateTilfelle);
+
+            expect(isConnected).to.be.true;
+        });
+
+        it('Should return false if candidate starts more than 16 days after after tilfelle', () => {
+            const tilfelle = {
+                fom: '2020-04-01',
+                tom: '2020-04-10',
+            };
+
+            const unconnectedLaterCandidateTilfelle = {
+                fom: '2020-04-30',
+                tom: '2020-05-10',
+            };
+
+            const isConnected = candidateTilfelleIsConnectedToTilfelle(tilfelle, unconnectedLaterCandidateTilfelle);
+
+            expect(isConnected).to.be.false;
+        });
+    });
+
+    describe('startDateFromLatestActiveTilfelle', () => {
+        let clock;
+        const today = new Date(TODAY);
+
+        beforeEach(() => {
+            clock = sinon.useFakeTimers(today.getTime());
+        });
+
+        afterEach(() => {
+            clock.restore();
+        });
+
+        it('Should return earliest start date when only one periode', () => {
+            const expectedEarliestDate = START_DATE_NEWEST_TILFELLE;
+
+            const actualEarliestStartDate = startDateFromLatestActiveTilfelle(oppfolgingstilfelleperioderWithOneTilfelle);
+
+            expect(new Date(actualEarliestStartDate)).to.equalDate(new Date(expectedEarliestDate));
+        });
+
+        it('Should return earliest start date when multiple perioder in one tilfelle', () => {
+            const expectedEarliestDate = START_DATE_OLDEST_TILFELLE;
+
+            const actualEarliestStartDate = startDateFromLatestActiveTilfelle(oppfolgingstilfelleperioderWithTwoPerioderInOneTilfelle);
+
+            expect(new Date(actualEarliestStartDate)).to.equalDate(new Date(expectedEarliestDate));
+        });
+
+        it('Should return start date of earliest tilfelle, when it ended less than, or exactly, 16 days before start of newest tilfelle', () => {
+            const expectedEarliestDate = START_DATE_OLDEST_TILFELLE;
+
+            const actualEarliestStartDate = startDateFromLatestActiveTilfelle(oppfolgingstilfelleperioderWithTwoConnectedTilfeller);
+
+            expect(new Date(actualEarliestStartDate)).to.equalDate(new Date(expectedEarliestDate));
+        });
+
+        it('Should return start date of newest tilfelle, when no other tilfeller connects to it with the 16 day rule', () => {
+            const expectedEarliestDate = START_DATE_NEWEST_TILFELLE;
+
+            const actualEarliestStartDate = startDateFromLatestActiveTilfelle(oppfolgingstilfelleperioderWithTwoUnconnectedTilfeller);
+
+            expect(new Date(actualEarliestStartDate)).to.equalDate(new Date(expectedEarliestDate));
+        });
+
+        it('Should return null if newest tilfelle is more than 16 days in the past, and there is only one tilfelle', () => {
+            const actualEarliestStartDate = startDateFromLatestActiveTilfelle(oppfolgingstilfelleperioderOneTilfelleInactive);
+
+            expect(actualEarliestStartDate).to.equal(null);
+        });
+
+        it('Should return null if newest tilfelle is more than 16 days in the past, and there is more than one tilfelle', () => {
+            const actualEarliestStartDate = startDateFromLatestActiveTilfelle(oppfolgingstilfelleperioderMoreThanOneTilfelleInactive);
+
+            expect(actualEarliestStartDate).to.equal(null);
+        });
+    });
 });

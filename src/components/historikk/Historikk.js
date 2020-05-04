@@ -8,7 +8,10 @@ import AppSpinner from '../AppSpinner';
 import IngenHistorikk from './IngenHistorikk';
 import UtvidbarHistorikk from './UtvidbarHistorikk';
 import Sidetopp from '../Sidetopp';
-import { tilfellerFromTilfelleperioder } from '../../utils/periodeUtils';
+import {
+    tilfellerFromTilfelleperioder,
+    tilfellerNewestToOldest,
+} from '../../utils/periodeUtils';
 
 const texts = {
     errorMessage: 'Det skjedde en feil! Det er ikke sikkert du får all historikken som finnes.',
@@ -74,8 +77,7 @@ const Historikk = ({ historikk, oppfolgingstilfelleperioder, ledere }) => {
         return <IngenHistorikk />;
     }
 
-    const tilfellerSortert = tilfeller
-        .sort((s1, s2) => { return new Date(s2.fom) - new Date(s1.fom); });
+    const tilfellerSortert = tilfellerNewestToOldest(tilfeller);
     // Dette er en hack for at alle historikkEvents skal få en plassering i et sykefraværstilfellet, selv om de skjer "utenfor".
     for (let i = 0; i < tilfellerSortert.length; i += 1) {
         if (i === (tilfellerSortert.length - 1)) {

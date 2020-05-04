@@ -34,7 +34,21 @@ class Personkort extends Component {
             actions.hentDiskresjonskode(brukerFnr);
             actions.hentEgenansatt(brukerFnr);
             actions.hentFastleger(brukerFnr);
+            actions.hentLedere(brukerFnr);
             actions.hentSykmeldinger(brukerFnr);
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        const {
+            actions,
+            navbruker,
+            ledere,
+        } = this.props;
+        const brukerFnr = navbruker.kontaktinfo && navbruker.kontaktinfo.fnr;
+
+        if (ledere !== prevProps.ledere) {
+            actions.hentOppfolgingstilfelleperioder(brukerFnr);
         }
     }
 
@@ -49,6 +63,7 @@ class Personkort extends Component {
             diskresjonskode,
             egenansatt,
             navbruker,
+            oppfolgingstilfelleperioder,
             sykmeldinger,
         } = this.props;
         const visning = this.state.visning;
@@ -61,6 +76,7 @@ class Personkort extends Component {
                     diskresjonskode={diskresjonskode}
                     egenansatt={egenansatt}
                     navbruker={navbruker}
+                    oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
                     sykmeldinger={sykmeldinger}
                 />}
             >
@@ -119,6 +135,7 @@ Personkort.propTypes = {
     navbruker: PropTypes.object,
     ledere: PropTypes.array,
     behandlendeEnhet: PropTypes.object,
+    oppfolgingstilfelleperioder: PropTypes.object,
     sykmeldinger: PropTypes.arrayOf(PropTypes.object),
 };
 export default Personkort;
