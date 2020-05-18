@@ -12,7 +12,7 @@ import {
 } from '../utils';
 
 const texts = {
-    leggTil: 'Felere alterntiver',
+    leggTil: 'Flere alternativer',
     send: 'Send',
     avbryt: 'Avbryt',
 };
