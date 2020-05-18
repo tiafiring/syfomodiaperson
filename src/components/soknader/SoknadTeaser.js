@@ -125,12 +125,12 @@ const beregnUndertekst = (soknad) => {
         case OPPHOLD_UTLAND:
         case ARBEIDSLEDIG:
         case ANNET_ARBEIDSFORHOLD:
-        case BEHANDLINGSDAGER:
         case SELVSTENDIGE_OG_FRILANSERE: {
             return soknad.status === SENDT && soknad.innsendtDato
                 ? textSendtTilNav(tilLesbarDatoMedArstall(soknad.innsendtDato))
                 : '';
         }
+        case BEHANDLINGSDAGER:
         case ARBEIDSTAKERE: {
             switch (soknad.status) {
                 case UTKAST_TIL_KORRIGERING:
