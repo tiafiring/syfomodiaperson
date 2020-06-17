@@ -12,11 +12,10 @@ Du må ha Node installert.
 
 * For å kjøre koden lokalt: 
     - `$ npm install`
-    - `$ npm run dev`
-    - I et annet vindu `$ npm run start-local`
+    - `$ npm start`
     - Eventuelt kan komandoene kjøres fra `package.json` i intellij.
 * Kjør tester med `npm test` eller `npm test:watch`
 * Lint JS-kode med `npm run lint` eller `npm run lint:fix`
 
-Appen nås på [localhost:8080](http://localhost:8080/sykefravaer/fnr) hvor 'fnr' må ha et gyldig format.
+Appen nås på [http://localhost:8080/sykefravaer/:fnr](http://localhost:8080/sykefravaer/:fnr) hvor 'fnr' må ha et gyldig format.
 Eksempler finnes på https://confluence.adeo.no/display/Digisyfo/Testdata+-+Fiktive+brukere (NAV-intern lenke)

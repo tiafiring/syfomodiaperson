@@ -16,13 +16,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Use Node
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: '14'
       - name: Cache node modules
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -36,9 +36,15 @@ jobs:
       - name: Run tests
         run: |
           npm run test
+      - name: Security audit
+        run: |
+          npm run sec-audit
       - name: Build
         run: |
-          npm run nais-build
+          npm run build
+      - name: Prune
+        run: |
+          npm prune --production
       - name: Login to Github Package Registry
         env:
           DOCKER_USERNAME: x-access-token

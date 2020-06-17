@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { fullNaisUrlDefault } from '../../utils/miljoUtil';
 
 const texts = {
@@ -8,10 +8,9 @@ const texts = {
 const OversiktLink = () => {
     return (
         <div className="oversiktlenke">
-            <a href={fullNaisUrlDefault('syfooversikt', '/enhet')} alt="syfooversikt" className="lenke oversiktlenke__lenke">
-                {texts.link}
-            </a>
-        </div>);
+            <a href={fullNaisUrlDefault('syfooversikt', '/enhet')} className="lenke oversiktlenke__lenke">{texts.link}</a>
+        </div>
+    );
 };
 
 export default OversiktLink;
