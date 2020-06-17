@@ -136,15 +136,11 @@ describe('PersonkortVisning', () => {
         });
 
         it('Skal vise antall PersonkortElement lik antall ledere, pluss virksomhet fra sykmelding', () => {
-            expect(komponent.find(PersonkortElement)).to.have.length(ledere.length + sykmeldinger.length);
+            expect(komponent.find(PersonkortElement)).to.have.length(2);
         });
 
         it('Skal vise antall PersonkortInformasjon for ledere som er oppgitt', () => {
             expect(komponent.find(PersonkortInformasjon)).to.have.length(1);
-        });
-
-        it('Skal vise PersonkortElement med feilmelding, dersom ledere ikke er innmeldt, og for virksomheter i sykmeldinger som ikke har leder', () => {
-            expect(komponent.find(Alertstripe)).to.have.length(2);
         });
 
         it('Skal vise PersonkortElement med feilmelding, dersom bruker ikke har noen ledere ', () => {
