@@ -204,6 +204,8 @@ server.use('/syfosmregister/api', cookieParser(), (req, res) => {
         });
 });
 
-server.listen(8080, () => {
+const port = 8080;
+
+server.listen(port, () => {
     console.log(`App listening on port: ${port}`);
 });
