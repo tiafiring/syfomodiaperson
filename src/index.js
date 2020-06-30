@@ -1,4 +1,3 @@
-import './utils/globals';
 import { render } from 'react-dom';
 import React from 'react';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
