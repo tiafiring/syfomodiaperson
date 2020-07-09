@@ -87,15 +87,15 @@ export const StatusVarsel = (
         : mote.bekreftetAlternativ.created;
     return (<div className="panel statusVarsel">
         <AlertStripe type="suksess">
-            <div className="panel">
+            <div>
                 <p className="typo-element">{getSendtTilTekst(mote, arbeidstaker)}</p>
                 <p className="sist">{textWithParameter(texts.sendt, getDatoFraZulu(dato))}</p>
             </div>
         </AlertStripe>
         <AlertStripe type="info">
-            <div className="panel">
+            <div>
                 <p className="typo-element">{kvitteringTekst.overskrift}</p>
-                <p className="siste">{
+                <p className="sist">{
                     <ul>
                         <li>{kvitteringTekst.forUke16}</li>
                         <li>{kvitteringTekst.etterUke16}</li>
