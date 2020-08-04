@@ -18,6 +18,8 @@ const httpRequestDurationMicroseconds = new prometheus.Histogram({
 });
 const server = express();
 
+server.use(express.json())
+
 const modiacontextholderUrl = process.env.NAIS_CONTEXT === 'dev'
     ? 'modiacontextholder.q1'
     : 'modiacontextholder.default';
@@ -34,7 +36,7 @@ const HTML_FILE = path.join(DIST_DIR, 'index.html');
 
 server.use(
     '/sykefravaer/img',
-    express.static(path.resolve(__dirname, 'img'))
+    express.static(path.resolve(__dirname, 'img')),
 );
 
 server.use('/static', express.static(DIST_DIR));
@@ -46,7 +48,7 @@ server.get('/sykefravaer/*',
         httpRequestDurationMicroseconds
             .labels(req.route.path)
             .observe(10);
-    }
+    },
 );
 
 server.get('/actuator/metrics', (req, res) => {
@@ -203,6 +205,46 @@ server.use('/syfosmregister/api', cookieParser(), (req, res) => {
             res.send({ err });
         });
 });
+
+server.use('/ispengestopp/api/v1/person/status', cookieParser(), (req, res) => {
+        const token = req.cookies['isso-idtoken'];
+        const fnr = req.query.fnr;
+        const options = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                fnr,
+            },
+        };
+
+        axios.get(`http://ispengestopp/api/v1/person/status`, options)
+            .then(response => {
+                res.send(response.data);
+            })
+            .catch(err => {
+                console.error('Error in proxy for ispengestopp', err);
+                res.send({ err });
+            });
+
+    },
+);
+
+server.use('/ispengestopp/api/v1/person/flagg', cookieParser(), (req, res) => {
+        const token = req.cookies['isso-idtoken'];
+        const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+        };
+
+        const data = req.body;
+
+        axios.post(`http://ispengestopp/api/v1/person/flagg`, data, { headers }).then(response => {
+            res.sendStatus(response.status);
+        }).catch(err => {
+            res.status(err.response.status).send(err.message);
+        });
+    },
+);
+
 
 const port = 8080;
 

@@ -69,6 +69,7 @@ export class SykmeldingerSide extends Component {
                             <Brodsmuler brodsmuler={brodsmuler} />
                             <SidetoppSpeilet tittel="Dine sykmeldinger" htmlTekst={htmlIntro} />
                             <DineSykmeldinger
+                                brukernavn={brukernavn}
                                 fnr={fnr}
                                 sykmeldinger={sykmeldinger}
                                 sortering={sortering}

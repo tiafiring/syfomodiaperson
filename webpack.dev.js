@@ -6,7 +6,7 @@ const express = require('express');
 
 module.exports = merge(common, {
     mode: 'development',
-    devtool: 'source-map',
+    devtool: 'eval-source-map',
     output: {
         publicPath: '/static',
     },
@@ -22,9 +22,7 @@ module.exports = merge(common, {
             app.use('/sykefravaer/img', express.static(path.resolve(__dirname, 'img')));
             app.use('/static', express.static(path.resolve(__dirname, 'dist')));
 
-            app.use('*', (req, res, next) => {
-
-
+            app.use('*', (req, res) => {
                 const filename = path.join(compiler.outputPath, 'index.html');
                 compiler.outputFileSystem.readFile(filename, (err, result) => {
                     if (err) {
@@ -37,7 +35,6 @@ module.exports = merge(common, {
                     res.end();
                 });
             });
-
         },
     },
 });
