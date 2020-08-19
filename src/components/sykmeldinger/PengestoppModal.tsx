@@ -152,7 +152,12 @@ const mapDispatchToProps = (dispatch: typeof store.dispatch) => {
     };
 };
 
-const mapStateToProps = (state: { enhet: { data: any }, veilederinfo: { data: any } }) => {
+interface IMapStateToProps {
+    enhet: { data: any },
+    veilederinfo: { data: any }
+}
+
+const mapStateToProps = (state: IMapStateToProps) => {
     const { enhet, veilederinfo } = state;
     return { enhet, veilederinfo };
 };
