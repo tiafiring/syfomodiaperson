@@ -4,7 +4,7 @@ import {
     HENT_STATUS_FEILET,
     HENTER_STATUS,
     STATUS_ENDRET,
-    STATUS_HENTET
+    STATUS_HENTET,
 } from '../actions/flaggperson_actions';
 import { StatusEndring } from '../types/FlaggPerson';
 

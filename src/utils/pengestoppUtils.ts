@@ -2,7 +2,7 @@ import {
     Arbeidsgiver,
     Status,
     StatusEndring,
-    Sykmelding
+    Sykmelding,
 } from '../types/FlaggPerson';
 import { senesteTom } from './periodeUtils';
 import { gamleSMStatuser } from './sykmeldinger/sykmeldingstatuser';

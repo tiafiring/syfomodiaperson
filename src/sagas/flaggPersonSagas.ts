@@ -4,11 +4,11 @@ import {
     fork,
     put,
     select,
-    takeEvery
+    takeEvery,
 } from 'redux-saga/effects';
 import {
     get,
-    post
+    post,
 } from '../api';
 import * as actions from '../actions/flaggperson_actions';
 

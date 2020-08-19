@@ -16,7 +16,7 @@ import {
     arbeidsgivereWithStoppAutomatikkStatus,
     sykmeldingerToArbeidsgiver,
     unikeArbeidsgivereMedSykmeldingSiste3Maneder,
-    uniqueArbeidsgivere
+    uniqueArbeidsgivere,
 } from '../../utils/pengestoppUtils';
 
 const texts = {
@@ -36,10 +36,10 @@ interface IPengestoppProps {
 
 
 const Pengestopp = ({ brukernavn, sykmeldinger, flaggperson }: IPengestoppProps) => {
-    const [modalIsOpen, setModelIsOpen] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const toggleModal = () => {
-        setModelIsOpen(!modalIsOpen);
+        setModalIsOpen(!modalIsOpen);
     };
 
     const data: StatusEndring[] = flaggperson.data;
