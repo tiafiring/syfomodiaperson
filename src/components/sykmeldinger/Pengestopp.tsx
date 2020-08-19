@@ -11,7 +11,13 @@ import {
     Sykmelding,
 } from '../../types/FlaggPerson';
 import { initialState as FlaggPerson } from '../../reducers/flaggperson';
-import { allStoppAutomatikkStatusEndringer, arbeidsgivereWithStoppAutomatikkStatus, sykmeldingerToArbeidsgiver, unikeArbeidsgivereMedSykmeldingSiste3Maneder, uniqueArbeidsgivere } from '../../utils/pengestoppUtils';
+import {
+    allStoppAutomatikkStatusEndringer,
+    arbeidsgivereWithStoppAutomatikkStatus,
+    sykmeldingerToArbeidsgiver,
+    unikeArbeidsgivereMedSykmeldingSiste3Maneder,
+    uniqueArbeidsgivere
+} from '../../utils/pengestoppUtils';
 
 const texts = {
     stansSykepenger: 'Stans sykepenger',
