@@ -4,17 +4,16 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import { Checkbox, CheckboxGruppe } from 'nav-frontend-skjema';
 import { Element } from 'nav-frontend-typografi';
 import { tilDatoMedUkedagOgManedNavn } from '../../utils/datoUtils';
-import { Arbeidsgiver } from './Pengestopp';
+import { Arbeidsgiver } from '../../types/FlaggPerson';
 
 const texts = {
     tittel: 'Automatisk behandling av sykepenger er stanset',
     stans: 'Stanset: ',
-    gosys: 'Lag oppgave i GoSys'
 };
 
 interface IPengestoppDropdown {
     dato: Date
-    stoppedArbeidsgivere: Array<Arbeidsgiver>
+    stoppedArbeidsgivere: Arbeidsgiver[]
 }
 
 const PengestoppDropdown = ({ dato, stoppedArbeidsgivere }: IPengestoppDropdown) => {

@@ -12,8 +12,8 @@ import {
     CheckboxGruppe,
 } from 'nav-frontend-skjema';
 import styled from 'styled-components';
-import { Arbeidsgiver } from './Pengestopp';
 import {
+    Arbeidsgiver,
     StatusEndring,
     StoppAutomatikk,
     VirksomhetNr,
@@ -26,18 +26,16 @@ import { connect } from 'react-redux';
 const texts = {
     tittel: 'Stans automatisk behanding av sykepenger',
     arbeidsgiver: 'Velg arbeidsgiver',
-    årsak: 'Årsak til at sykepenger stanses',
     stansSykepenger: 'Stans sykepenger',
     avbryt: 'Avbryt',
-    gosys: 'Lag oppgave i GoSys',
     submitError: 'Du må velge minst én arbeidsgiver',
 };
 
 interface IPengestoppModal {
     brukernavn: String,
     isOpen: boolean,
-    arbeidsgivere: Array<Arbeidsgiver>,
-    statusEndringer: Array<StatusEndring>,
+    arbeidsgivere: Arbeidsgiver[],
+    statusEndringer: StatusEndring[],
     enhet: any,
     veilederinfo: any,
 

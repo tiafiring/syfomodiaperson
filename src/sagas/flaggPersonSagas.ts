@@ -1,5 +1,15 @@
-import { all, call, fork, put, select, takeEvery } from 'redux-saga/effects';
-import { get, post } from '../api';
+import {
+    all,
+    call,
+    fork,
+    put,
+    select,
+    takeEvery
+} from 'redux-saga/effects';
+import {
+    get,
+    post
+} from '../api';
 import * as actions from '../actions/flaggperson_actions';
 
 export function* hentStatus(action: any) {

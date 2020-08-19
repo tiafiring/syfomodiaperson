@@ -1,3 +1,24 @@
+export interface Arbeidsgiver {
+    navn: string,
+    orgnummer: string,
+}
+
+export interface Periode {
+    tom: Date,
+}
+
+export interface Sykmelding {
+    arbeidsgiver: string,
+    orgnummer: string,
+    pasient: {
+        fnr: string
+    },
+    mulighetForArbeid: {
+        perioder: Periode[]
+    }
+    status: String,
+}
+
 export interface SykmeldtFnr {
     value: string
 }
@@ -16,7 +37,7 @@ export interface EnhetNr {
 
 export interface StoppAutomatikk {
     sykmeldtFnr: SykmeldtFnr,
-    virksomhetNr: Array<VirksomhetNr>,
+    virksomhetNr: VirksomhetNr[],
     veilederIdent: VeilederIdent,
     enhetNr: EnhetNr
 }
@@ -30,13 +51,4 @@ export interface StatusEndring {
     virksomhetNr: VirksomhetNr,
     opprettet: Date,
     enhetNr: EnhetNr
-}
-
-export const initialStatus: StatusEndring = {
-    sykmeldtFnr: { value: ''},
-    status: Status.NORMAL,
-    virksomhetNr: { value: ''},
-    opprettet: new Date(),
-    enhetNr: { value: ''},
-    veilederIdent: { value: ''},
 }
