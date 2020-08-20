@@ -50,9 +50,9 @@ const Pengestopp = ({ brukernavn, sykmeldinger, flaggperson }: IPengestoppProps)
     const statusEndringerWithStoppedAutomatikk = allStoppAutomatikkStatusEndringer(data);
     const uniqueArbeidsgivereWithSykmeldingLast3Months = unikeArbeidsgivereMedSykmeldingSiste3Maneder(sykmeldinger);
 
-    const allTimeUniqueArbeidsgivere = uniqueArbeidsgivere(sykmeldingerToArbeidsgiver(sykmeldinger));
+    const allArbeidsgivere = uniqueArbeidsgivere(sykmeldingerToArbeidsgiver(sykmeldinger));
 
-    const stoppedArbeidsgivere = arbeidsgivereWithStoppAutomatikkStatus(allTimeUniqueArbeidsgivere, statusEndringerWithStoppedAutomatikk); // TODO Dette må gjøres om til å bli alle AGer som er stoppet, uavhengig av om de har aktiv sykmelding eller ikke.
+    const stoppedArbeidsgivere = arbeidsgivereWithStoppAutomatikkStatus(allArbeidsgivere, statusEndringerWithStoppedAutomatikk);
 
     return (
         <Wrapper>

@@ -25,7 +25,7 @@ function createStatusList(stoppAutomatikk) {
 }
 
 function mockForLokal(server) {
-    let STATUSLIST = null;
+    let STATUSLIST = undefined;
 
     server.get('/ispengestopp/api/v1/person/status', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
