@@ -8,6 +8,7 @@ import {
 import SykmeldingTeasere from './SykmeldingTeasere';
 import SykmeldingerSorteringContainer from './SykmeldingerSorteringContainer';
 import Pengestopp from './Pengestopp';
+import { erPreProd } from '../../utils/miljoUtil';
 
 const texts = {
     ingenSykmeldinger: 'Tidligere sykmeldinger',
@@ -24,7 +25,7 @@ const DineSykmeldinger = ({ sykmeldinger = [], ledetekster = {}, sortering, fnr,
     });
     const tidligereSortering = sortering && sortering.tidligere ? sortering.tidligere : undefined;
     return (<div>
-        <Pengestopp brukernavn={brukernavn} fnr={fnr} sykmeldinger={sykmeldinger} />
+        {erPreProd() && <Pengestopp brukernavn={brukernavn} fnr={fnr} sykmeldinger={sykmeldinger} />}
         <SykmeldingTeasere
             sykmeldinger={sorterSykmeldinger(nyeSykmeldinger)}
             tittel={texts.nyeSykmeldinger}
