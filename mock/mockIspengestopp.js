@@ -35,7 +35,7 @@ function mockForLokal(server) {
         const body = req.body;
         STATUSLIST = createStatusList(body);
 
-        const stoppAutomatikk = body.sykmeldtFnr && body.virksomhetNr && body.veilederIdent && body.enhetNr;
+        const stoppAutomatikk = body.sykmeldtFnr && body.virksomhetNr && body.enhetNr;
         console.assert(stoppAutomatikk, { stoppAutomatikk, errorMsg: 'invalid stoppAutomatikk object' });
         res.sendStatus(201);
         console.log('StoppAutomatikk: 201 CREATED');

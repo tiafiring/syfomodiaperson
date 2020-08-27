@@ -240,7 +240,7 @@ server.use('/ispengestopp/api/v1/person/flagg', cookieParser(), (req, res) => {
         axios.post(`http://ispengestopp/api/v1/person/flagg`, data, { headers }).then(response => {
             res.sendStatus(response.status);
         }).catch(err => {
-            res.status(err.response.status).send(err.message);
+            res.status(err.status).send(err.message);
         });
     },
 );

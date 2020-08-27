@@ -37,7 +37,6 @@ interface IPengestoppModal {
     arbeidsgivere: Arbeidsgiver[],
     statusEndringer: StatusEndring[],
     enhet: any,
-    veilederinfo: any,
 
     flagg(stoppAutomatikk: StoppAutomatikk): void
     toggle(): void
@@ -51,7 +50,7 @@ const Group = styled.div`
     margin: 1rem 0;
 `;
 
-const PengestoppModal = ({ brukernavn, isOpen, arbeidsgivere, toggle, flagg, enhet, veilederinfo }: IPengestoppModal) => {
+const PengestoppModal = ({ brukernavn, isOpen, arbeidsgivere, toggle, flagg, enhet }: IPengestoppModal) => {
     const [stopped, setStopped] = useState(false);
     const [selected, setSelected] = useState<VirksomhetNr[]>([]);
     const [submitError, setSubmitError] = useState(false);
@@ -59,9 +58,8 @@ const PengestoppModal = ({ brukernavn, isOpen, arbeidsgivere, toggle, flagg, enh
     const fnr = window.location.pathname.split('/')[2];
     const [stoppAutomatikk, setStoppAutomatikk] = useState<StoppAutomatikk>({
         sykmeldtFnr: { value: fnr },
-        veilederIdent: { value: veilederinfo.data.ident },
-        enhetNr: { value: enhet.valgtEnhet },
         virksomhetNr: [],
+        enhetNr: { value: enhet.valgtEnhet },
     });
 
     useEffect(() => {
@@ -154,12 +152,11 @@ const mapDispatchToProps = (dispatch: typeof store.dispatch) => {
 
 interface IMapStateToProps {
     enhet: { data: any },
-    veilederinfo: { data: any }
 }
 
 const mapStateToProps = (state: IMapStateToProps) => {
-    const { enhet, veilederinfo } = state;
-    return { enhet, veilederinfo };
+    const { enhet } = state;
+    return { enhet };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PengestoppModal);

@@ -38,7 +38,6 @@ export interface EnhetNr {
 export interface StoppAutomatikk {
     sykmeldtFnr: SykmeldtFnr,
     virksomhetNr: VirksomhetNr[],
-    veilederIdent: VeilederIdent,
     enhetNr: EnhetNr
 }
 
