@@ -7,6 +7,8 @@ import {
 } from '@navikt/digisyfo-npm';
 import SykmeldingTeasere from './SykmeldingTeasere';
 import SykmeldingerSorteringContainer from './SykmeldingerSorteringContainer';
+import Pengestopp from './Pengestopp';
+import { erPreProd } from '../../utils/miljoUtil';
 
 const texts = {
     ingenSykmeldinger: 'Tidligere sykmeldinger',
@@ -14,7 +16,7 @@ const texts = {
     nyeSykmeldinger: 'Nye sykmeldinger',
 };
 
-const DineSykmeldinger = ({ sykmeldinger = [], ledetekster = {}, sortering, fnr }) => {
+const DineSykmeldinger = ({ sykmeldinger = [], ledetekster = {}, sortering, fnr, brukernavn }) => {
     const nyeSykmeldinger = sykmeldinger.filter((sykmld) => {
         return sykmld.status === sykmeldingstatuser.NY;
     });
@@ -23,6 +25,7 @@ const DineSykmeldinger = ({ sykmeldinger = [], ledetekster = {}, sortering, fnr 
     });
     const tidligereSortering = sortering && sortering.tidligere ? sortering.tidligere : undefined;
     return (<div>
+        {erPreProd() && <Pengestopp brukernavn={brukernavn} fnr={fnr} sykmeldinger={sykmeldinger} />}
         <SykmeldingTeasere
             sykmeldinger={sorterSykmeldinger(nyeSykmeldinger)}
             tittel={texts.nyeSykmeldinger}
@@ -47,6 +50,7 @@ const DineSykmeldinger = ({ sykmeldinger = [], ledetekster = {}, sortering, fnr 
 };
 
 DineSykmeldinger.propTypes = {
+    brukernavn: PropTypes.string,
     sykmeldinger: PropTypes.array.isRequired,
     ledetekster: keyValue.isRequired,
     sortering: PropTypes.object,

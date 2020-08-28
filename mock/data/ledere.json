@@ -54,5 +54,19 @@
     "organisasjonsnavn": "KONKURS BEDRIFT OG VENNER AS",
     "aktivTom": "2020-02-02T12:00:00+01:00",
     "arbeidsgiverForskuttererLoenn": null
+  },
+  {
+    "navn": "Jean-Luc Picard",
+    "id": 4,
+    "aktoerId": "9909909909903",
+    "tlf": "87654321",
+    "epost": "test5@test.no",
+    "aktiv": true,
+    "erOppgitt": true,
+    "fomDato": "2019-02-04T12:00:00+01:00",
+    "orgnummer": "170100000",
+    "organisasjonsnavn": "USS Enterprise",
+    "aktivTom": null,
+    "arbeidsgiverForskuttererLoenn": null
   }
 ]

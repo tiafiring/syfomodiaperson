@@ -11,6 +11,7 @@ const mockSyfotilgangskoontroll = require('./mockSyfotilgangskontroll');
 const mockSyfobehandlendeenhet = require('./mockSyfobehandlendeenhet');
 const mockSyfoperson = require('./mockSyfoperson');
 const mockSyfosmregiser = require('./mockSyfosmregister');
+const mockIspengestopp = require('./mockIspengestopp');
 
 function mockEndepunkter(server, erLokal) {
     server.use(express.json());
@@ -29,6 +30,7 @@ function mockEndepunkter(server, erLokal) {
         mockSyfobehandlendeenhet,
         mockSyfoperson,
         mockSyfosmregiser,
+        mockIspengestopp,
     ].forEach((func) => {
         func(server, erLokal);
     });

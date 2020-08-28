@@ -33,6 +33,7 @@ import veilederinfo from './reducers/veilederinfo';
 import diskresjonskode from './reducers/diskresjonskode';
 import egenansatt from './reducers/egenansatt';
 import oppfolgingstilfelleperioder from './reducers/oppfolgingstilfelleperioder';
+import flaggperson from './reducers/flaggperson';
 import rootSaga from './sagas/index';
 import { hentLedetekster } from './actions/ledetekster_actions';
 import { sjekkTilgang } from './actions/tilgang_actions';
@@ -75,6 +76,7 @@ const rootReducer = combineReducers({
     form: formReducer,
     soknader,
     oppfolgingstilfelleperioder,
+    flaggperson,
 });
 
 const sagaMiddleware = createSagaMiddleware();
