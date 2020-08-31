@@ -20,7 +20,7 @@ import {
 } from '../../utils/pengestoppUtils';
 
 export const texts = {
-    stansSykepenger: 'Stans sykepenger',
+    stansSykepenger: 'Stopp utbetaling',
 };
 
 const Wrapper = styled.div`

@@ -7,7 +7,6 @@ import {
 } from '@navikt/digisyfo-npm';
 import SykmeldingTeasere from './SykmeldingTeasere';
 import SykmeldingerSorteringContainer from './SykmeldingerSorteringContainer';
-import { TemporaryPengestopp } from '../pengestopp/TemporaryPengestopp';
 
 const texts = {
     ingenSykmeldinger: 'Tidligere sykmeldinger',
@@ -24,8 +23,6 @@ const DineSykmeldinger = ({ sykmeldinger = [], ledetekster = {}, sortering, fnr 
     });
     const tidligereSortering = sortering && sortering.tidligere ? sortering.tidligere : undefined;
     return (<div>
-        <TemporaryPengestopp />
-
         <SykmeldingTeasere
             sykmeldinger={sorterSykmeldinger(nyeSykmeldinger)}
             tittel={texts.nyeSykmeldinger}

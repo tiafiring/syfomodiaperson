@@ -8,7 +8,7 @@ import { InformationIconWithText } from './InformationIconWithText';
 
 const texts = {
     ...pengestoppTexts,
-    information: 'Her vil det komme ny funksjonalitet for å stanse automatisk utbetaling av sykepenger.',
+    information: 'Her vil det komme ny funksjonalitet for å stoppe automatisk utbetaling av sykepenger.',
 }
 const GrayPanel = styled.div`
   border: #979797 dashed 1px;

@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import NavFrontendChevron from 'nav-frontend-chevron';
 
 const texts = {
-    buttonText: 'Les mer om funksjonaliteten “Stans sykepenger”',
+    buttonText: 'Les mer om funksjonaliteten “Stopp utbetaling”',
     infoBulletpoints: [
-        'Til å begynne med vil denne funksjonaliteten bare gjelder sykmeldte med arbeidsgiver',
-        'Du vil få mulighet til å velge hvilken bedrift du ønsker å stanse automatisk utbetaling for',
-        'Etter at du har stanset sykepengene, kan du opprette sak i Gosys',
+        'Til å begynne med kan du bare stoppe utbetalingen til sykmeldte med arbeidsgiver.',
+        'Når du stopper den automatiske utbetalingen, blir saken sendt til en saksbehandler.',
+        'For å stoppe utbetalingen helt, må du følge den gamle rutinen i Gosys.',
     ],
 }
 
