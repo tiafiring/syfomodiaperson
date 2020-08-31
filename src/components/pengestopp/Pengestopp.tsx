@@ -19,7 +19,7 @@ import {
     uniqueArbeidsgivere,
 } from '../../utils/pengestoppUtils';
 
-const texts = {
+export const texts = {
     stansSykepenger: 'Stans sykepenger',
 };
 
