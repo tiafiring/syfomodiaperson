@@ -10,7 +10,7 @@ const TextField = (props) => {
         input,
         maxLength,
     } = props;
-    const feilmelding = meta.touched && meta.error ? { feilmelding: meta.error } : undefined;
+    const feilmelding = meta.touched && meta.error ? meta.error : undefined;
     return (
         <Textarea
             id={id}
