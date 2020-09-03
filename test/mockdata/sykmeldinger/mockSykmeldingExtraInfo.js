@@ -310,6 +310,28 @@ export const mockSykmeldingerWithUtdypendeOpplysningerPkt63 = {
     },
 };
 
+export const mockSykmeldingerWithUtdypendeOpplysningerPkt62SomeFieldsOmitted = {
+    ...mockSM,
+    utdypendeOpplysninger: {
+        '6.2': {
+            '6.2.1': {
+                sporsmal: 'Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.',
+                svar: 'Pkt. 6.2.1',
+                restriksjoner: [
+                    'SKJERMET_FOR_ARBEIDSGIVER',
+                ],
+            },
+            '6.2.2': {
+                sporsmal: 'Hvordan påvirker sykdommen arbeidsevnen',
+                svar: 'Pkt. 6.2.2',
+                restriksjoner: [
+                    'SKJERMET_FOR_ARBEIDSGIVER',
+                ],
+            },
+        },
+    },
+};
+
 export const mockSykmeldingerWithEgenmeldt = {
     ...mockSM,
     egenmeldt: true,
