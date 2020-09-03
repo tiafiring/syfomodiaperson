@@ -205,19 +205,19 @@ const mapUtdypendeOpplysninger62 = (utdypendeOpplysninger) => {
         sporsmal: [
             {
                 id: '6.2.1',
-                svar: utdypendeOpplysninger62['6.2.1'].svar,
+                svar: utdypendeOpplysninger62['6.2.1'] && utdypendeOpplysninger62['6.2.1'].svar,
             },
             {
                 id: '6.2.2',
-                svar: utdypendeOpplysninger62['6.2.2'].svar,
+                svar: utdypendeOpplysninger62['6.2.2'] && utdypendeOpplysninger62['6.2.2'].svar,
             },
             {
                 id: '6.2.3',
-                svar: utdypendeOpplysninger62['6.2.3'].svar,
+                svar: utdypendeOpplysninger62['6.2.3'] && utdypendeOpplysninger62['6.2.3'].svar,
             },
             {
                 id: '6.2.4',
-                svar: utdypendeOpplysninger62['6.2.4'].svar,
+                svar: utdypendeOpplysninger62['6.2.4'] && utdypendeOpplysninger62['6.2.4'].svar,
             },
         ],
     };
@@ -230,11 +230,11 @@ const mapUtdypendeOpplysninger63 = (utdypendeOpplysninger) => {
         sporsmal: [
             {
                 id: '6.3.1',
-                svar: utdypendeOpplysninger63['6.3.1'].svar,
+                svar: utdypendeOpplysninger63['6.3.1'] && utdypendeOpplysninger63['6.3.1'].svar,
             },
             {
                 id: '6.3.2',
-                svar: utdypendeOpplysninger63['6.3.2'].svar,
+                svar: utdypendeOpplysninger63['6.3.2'] && utdypendeOpplysninger63['6.3.2'].svar,
             },
         ],
     };

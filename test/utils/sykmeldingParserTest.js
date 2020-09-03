@@ -11,6 +11,7 @@ import {
     mockSykmeldingerWithHarRedusertArbeidsgiverperiode,
     mockSykmeldingerWithPapirsykmelding,
     mockSykmeldingerWithUtdypendeOpplysningerPkt62,
+    mockSykmeldingerWithUtdypendeOpplysningerPkt62SomeFieldsOmitted,
     mockSykmeldingerWithUtdypendeOpplysningerPkt63,
     mockSykmeldingWithArbeidsevne,
     mockSykmeldingWithArbeidsgiver,
@@ -673,6 +674,46 @@ describe('sykmeldingParser', () => {
             };
 
             const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
+
+            expect(outputSM.utdypendeOpplysninger).to.deep.equal(expectedUtdypendeOpplysninger);
+        });
+
+        it('Returns correct utdypendeOpplysninger with only some fields', () => {
+            const sykmeldingWithUtdypendeOpplysningerPkt62 = mockSykmeldingerWithUtdypendeOpplysningerPkt62SomeFieldsOmitted;
+
+            const expectedUtdypendeOpplysninger = {
+                grupper: [
+                    {
+                        id: '6.2',
+                        sporsmal: [
+                            {
+                                id: '6.2.1',
+                                svar: 'Pkt. 6.2.1',
+                            },
+                            {
+                                id: '6.2.2',
+                                svar: 'Pkt. 6.2.2',
+                            },
+                            {
+                                id: '6.2.3',
+                                svar: undefined,
+                            },
+                            {
+                                id: '6.2.4',
+                                svar: undefined,
+                            },
+                        ],
+                    },
+                ],
+                henvisningUtredningBehandling: undefined,
+                paavirkningArbeidsevne: 'Pkt. 6.2.2',
+                resultatAvBehandling: undefined,
+                sykehistorie: 'Pkt. 6.2.1',
+                sykehistoriePunkt63: undefined,
+                henvisningUtredningBehandlingPunkt63: undefined,
+            };
+
+            const outputSM = newSMFormat2OldFormat(sykmeldingWithUtdypendeOpplysningerPkt62, sykmeldtFnr);
 
             expect(outputSM.utdypendeOpplysninger).to.deep.equal(expectedUtdypendeOpplysninger);
         });
