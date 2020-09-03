@@ -137,15 +137,21 @@ export const validerPeriode = (input, alternativer) => {
     return undefined;
 };
 
-export const validerDatoField = (input, alternativer) => {
-    if (!input) {
+export const validerDatoField = (value) => {
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0);
+    const alternativer = {
+        fra: startOfDay,
+        til: undefined,
+    };
+    if (!value) {
         return undefined;
-    } else if (!erGyldigDatoformat(input)) {
+    } else if (!erGyldigDatoformat(value)) {
         return 'Datoen må være på formatet dd.mm.åååå';
-    } else if (!erGyldigDato(input)) {
+    } else if (!erGyldigDato(value)) {
         return 'Datoen er ikke gyldig';
     } else if (alternativer && (alternativer.fra || alternativer.til)) {
-        return validerPeriode(input, alternativer);
+        return validerPeriode(value, alternativer);
     }
     return undefined;
 };
@@ -153,18 +159,9 @@ export const validerDatoField = (input, alternativer) => {
 const Datovelger = (props) => {
     return (<Field
         component={ConnectedDatoField}
-        validate={(input) => {
-            return validerDatoField(input, {
-                fra: props.tidligsteFom,
-                til: props.senesteTom,
-            });
-        }}
-        {...props} />);
-};
-
-Datovelger.propTypes = {
-    tidligsteFom: PropTypes.instanceOf(Date),
-    senesteTom: PropTypes.instanceOf(Date),
+        validate={validerDatoField}
+        {...props}
+    />);
 };
 
 export default Datovelger;
