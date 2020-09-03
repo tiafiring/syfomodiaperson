@@ -17,7 +17,6 @@ const texts = {
 const Tidspunkt = ({ tidspunkt, skjemanavn }) => {
     const datoName = `tidspunkter[${tidspunkt}].dato`;
     const klokkeslettName = `tidspunkter[${tidspunkt}].klokkeslett`;
-    const tidligsteFom = new Date();
 
     return (<div className="motetidspunkter__tidspunkt blokk js-tidspunkt">
         <h4 className="typo-element blokk--s">{texts.header}</h4>
@@ -26,7 +25,6 @@ const Tidspunkt = ({ tidspunkt, skjemanavn }) => {
                 <Column className="col-xs-12 col-sm-6">
                     <label className="skjemaelement__label" htmlFor={`dato-${tidspunkt}`}>{texts.dateLabel}</label>
                     <Datovelger
-                        tidligsteFom={tidligsteFom}
                         id={`dato-${tidspunkt}`}
                         name={datoName}
                         placeholder={texts.datePlaceholder}
