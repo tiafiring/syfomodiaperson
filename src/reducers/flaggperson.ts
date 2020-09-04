@@ -26,11 +26,15 @@ const flaggperson = (state = initialState, action = { type: '', data: [] }) => {
             return {
                 ...state,
                 henter: true,
+                hentingFeilet: false,
+                hentet: false,
             };
         }
         case STATUS_HENTET: {
             return {
                 ...state,
+                henter: false,
+                hentingFeilet: false,
                 hentet: true,
                 data: action.data.map((se: StatusEndring & {opprettet: string} ) => (
                     {
@@ -44,24 +48,32 @@ const flaggperson = (state = initialState, action = { type: '', data: [] }) => {
         case HENT_STATUS_FEILET: {
             return {
                 ...state,
+                henter: false,
                 hentingFeilet: true,
+                hentet: false,
             };
         }
         case ENDRER_STATUS: {
             return {
                 ...state,
                 endrer: true,
+                endret: false,
+                endringFeilet: false,
             };
         }
         case STATUS_ENDRET: {
             return {
                 ...state,
+                endrer: false,
                 endret: true,
+                endringFeilet: false,
             };
         }
         case ENDRE_STATUS_FEILET: {
             return {
                 ...state,
+                endrer: false,
+                endret: false,
                 endringFeilet: true,
             };
         }
