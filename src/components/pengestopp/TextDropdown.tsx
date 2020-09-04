@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import NavFrontendChevron from 'nav-frontend-chevron';
 
 const texts = {
-    buttonText: 'Les mer om funksjonaliteten “Stopp utbetaling”',
+    buttonText: 'Les mer om “Stopp utbetaling”',
     infoBulletpoints: [
-        'Til å begynne med kan du bare stoppe utbetalingen til sykmeldte med arbeidsgiver.',
-        'Når du stopper den automatiske utbetalingen, blir saken sendt til en saksbehandler.',
-        'For å stoppe utbetalingen helt, må du følge den gamle rutinen i Gosys.',
+        'Når du stopper den automatiske utbetalingen, blir saken sendt til en saksbehandler før utbetaling.',
+        'Du må også sende en “Vurder konsekvens for ytelse”-oppgave i Gosys, jf servicerutinene.',
+        'Til å begynne med kan du bare stoppe utbetalingen til sykmeldte med arbeidsgiver. Sykmeldte uten arbeidsgiver behandles foreløpig ikke i vedtaksløsningen.',
     ],
 }
 
