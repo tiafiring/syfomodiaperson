@@ -14,6 +14,7 @@ import Speilingvarsel from '../components/Speilingvarsel';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { erDev } from '../selectors/toggleSelectors';
 import { harForsoktHentetSykmeldinger } from '../utils/reducerUtils';
+import { TemporaryPengestopp } from '../components/pengestopp/TemporaryPengestopp';
 
 const texts = {
     introduksjonstekst: 'NAV mottar alle sykmeldinger. Ser du den ikke her? Det betyr at den som har sykmeldt deg ikke sender den digitalt til NAV. Da bruker du papirsykmeldingen i stedet.',
@@ -64,12 +65,12 @@ export class SykmeldingerSide extends Component {
                         return <Feilmelding />;
                     }
                     return (<div>
+                        <TemporaryPengestopp />
                         <Speilingvarsel brukernavn={brukernavn} />
                         <div className="speiling">
                             <Brodsmuler brodsmuler={brodsmuler} />
                             <SidetoppSpeilet tittel="Dine sykmeldinger" htmlTekst={htmlIntro} />
                             <DineSykmeldinger
-                                brukernavn={brukernavn}
                                 fnr={fnr}
                                 sykmeldinger={sykmeldinger}
                                 sortering={sortering}

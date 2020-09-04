@@ -19,8 +19,8 @@ import {
     uniqueArbeidsgivere,
 } from '../../utils/pengestoppUtils';
 
-const texts = {
-    stansSykepenger: 'Stans sykepenger',
+export const texts = {
+    stansSykepenger: 'Stopp utbetaling',
 };
 
 const Wrapper = styled.div`
