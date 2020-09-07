@@ -17,6 +17,7 @@ export function* hentStatus(action: any) {
     try {
         const path = `${process.env.REACT_APP_ISPENGESTOPP_ROOT}/v1/person/status?fnr=${action.fnr}`;
         const data = yield call(get, path);
+        console.log(data);
 
         if (data && !!data.err) {
             yield put(actions.hentStatusFeilet());

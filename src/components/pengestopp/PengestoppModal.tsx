@@ -41,16 +41,16 @@ interface IPengestoppModal {
     arbeidsgivere: Arbeidsgiver[],
     statusEndringer: StatusEndring[],
     enhet: any,
-    endringFeilet: boolean
-    endret: boolean
+    endringFeilet: boolean,
+    endret: boolean,
 
     flagg(stoppAutomatikk: StoppAutomatikk): Response
     toggle(): void
 }
 
 const Modal = styled(ModalWrapper)`
-    padding: 2rem 2.5rem;
-    max-width: 50rem;
+    padding: 2em 2.5em;
+    max-width: 50em;
     width: 100%;
 `;
 
@@ -59,7 +59,7 @@ const Group = styled.div`
 `;
 
 const BottomGroup = styled.div`
-    margin-top: 1rem;
+    margin-top: 1em;
 `;
 
 const PengestoppModal = ({ brukernavn, isOpen, arbeidsgivere, toggle, flagg, enhet, endringFeilet, endret }: IPengestoppModal) => {
@@ -169,7 +169,7 @@ const mapDispatchToProps = (dispatch: typeof store.dispatch) => {
 };
 
 interface IMapStateToProps {
-    flaggperson: any
+    flaggperson: any,
     enhet: { data: any },
 }
 
