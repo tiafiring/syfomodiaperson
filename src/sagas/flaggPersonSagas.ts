@@ -50,8 +50,6 @@ export function* endreStatus(action: any) {
         const path = `${process.env.REACT_APP_ISPENGESTOPP_ROOT}/v1/person/flagg`;
         const res = yield call(post, path, action.stoppAutomatikk);
 
-        console.log(res);
-
         if (res.ok) {
             yield put(actions.statusEndret());
             const fnr = action.stoppAutomatikk.sykmeldtFnr.value;

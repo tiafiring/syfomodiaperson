@@ -6,7 +6,10 @@ import {
 } from 'react';
 import ModalWrapper from 'nav-frontend-modal';
 import { Knapp } from 'nav-frontend-knapper';
-import { Systemtittel, Feilmelding } from 'nav-frontend-typografi';
+import {
+    Systemtittel,
+    Feilmelding,
+} from 'nav-frontend-typografi';
 import {
     Checkbox,
     CheckboxGruppe,
