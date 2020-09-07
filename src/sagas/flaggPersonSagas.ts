@@ -22,7 +22,11 @@ export function* hentStatus(action: any) {
         if (data && !!data.err) {
             yield put(actions.hentStatusFeilet());
         } else {
-            yield put(actions.statusHentet(data, action.fnr));
+            const statuses = data
+                ? data
+                : [];
+
+            yield put(actions.statusHentet(statuses, action.fnr));
         }
     } catch (e) {
         yield put(actions.hentStatusFeilet());
@@ -54,7 +58,6 @@ export function* endreStatus(action: any) {
         if (res.ok) {
             yield put(actions.statusEndret());
             yield put(actions.statusHentet(stoppAutomatikk2StatusEndring(action.stoppAutomatikk), action.fnr));
-
         } else {
             yield put(actions.endreStatusFeilet());
         }

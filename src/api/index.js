@@ -37,6 +37,9 @@ export function get(url) {
             if (res.status >= 400 && res.status !== 403) {
                 throw new Error('Det oppstod en feil');
             }
+            if (res.status === 204) {
+                return null;
+            }
             return res.json().then((data) => {
                 if (res.status === 403) {
                     const tilgang = {
