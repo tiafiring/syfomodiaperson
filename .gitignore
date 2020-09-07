@@ -6,3 +6,6 @@ npm-debug.log*
 dist/
 settings.json
 **/.DS_Store
+.floo
+.flooignore
+.vscode/
