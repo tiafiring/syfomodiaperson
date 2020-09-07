@@ -7,7 +7,7 @@ import { tilDatoMedUkedagOgManedNavn } from '../../utils/datoUtils';
 import { Arbeidsgiver } from '../../types/FlaggPerson';
 
 const texts = {
-    tittel: 'Automatisk behandling av sykepenger er stanset',
+    tittel: 'Automatisk utbetaling av sykepenger er stoppet',
     stans: 'Stanset: ',
 };
 
