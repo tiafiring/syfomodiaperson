@@ -11,6 +11,7 @@ import {
     post,
 } from '../api';
 import * as actions from '../actions/flaggperson_actions';
+import { stoppAutomatikk2StatusEndring } from '../utils/pengestoppUtils';
 
 export function* hentStatus(action: any) {
     yield put(actions.henterStatus());
@@ -52,8 +53,7 @@ export function* endreStatus(action: any) {
 
         if (res.ok) {
             yield put(actions.statusEndret());
-            const fnr = action.stoppAutomatikk.sykmeldtFnr.value;
-            yield hentStatus({ fnr });
+            yield put(actions.statusHentet(stoppAutomatikk2StatusEndring(action.stoppAutomatikk), action.fnr));
 
         } else {
             yield put(actions.endreStatusFeilet());

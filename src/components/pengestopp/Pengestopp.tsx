@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { Knapp } from 'nav-frontend-knapper';
-import PengestoppModal from './PengestoppModal';
+import AlertStripe from 'nav-frontend-alertstriper';
 import styled from 'styled-components';
-import PengestoppDropdown from './PengestoppDropdown';
 import { connect } from 'react-redux';
+import PengestoppModal from './PengestoppModal';
+import PengestoppDropdown from './PengestoppDropdown';
 import {
     Status,
     StatusEndring,
     Sykmelding,
 } from '../../types/FlaggPerson';
-import { initialState as FlaggPerson } from '../../reducers/flaggperson';
+import { FlaggpersonState } from '../../reducers/flaggperson';
 import {
     allStoppAutomatikkStatusEndringer,
     arbeidsgivereWithStoppAutomatikkStatus,
@@ -21,6 +22,9 @@ import {
 
 export const texts = {
     stansSykepenger: 'Stopp utbetaling',
+    hentingFeiletMessage: 'Vi klarte dessverre ikke å hente status på denne personen ¯\\_(⊙_ʖ⊙)_/¯ ' +
+        'Du kan likevel stoppe utbetalingen, men vi vil ikke klare å vise frem status her i modia før baksystemene er oppe. ' +
+        'Dersom du allerede har trykket, har stoppingen gått gjennom, og du trenger ikke trykke igjen selv om det ikke vises her.',
 };
 
 const Wrapper = styled.div`
@@ -30,10 +34,13 @@ const Wrapper = styled.div`
 interface IPengestoppProps {
     brukernavn: String,
     sykmeldinger: Sykmelding[],
-    flaggperson: typeof FlaggPerson,
+    flaggperson: FlaggpersonState,
     fnr: string,
 }
 
+const Alert = styled(AlertStripe)`
+  margin-bottom: 1em;
+`
 
 const Pengestopp = ({ brukernavn, sykmeldinger, flaggperson }: IPengestoppProps) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -56,6 +63,7 @@ const Pengestopp = ({ brukernavn, sykmeldinger, flaggperson }: IPengestoppProps)
 
     return (
         <Wrapper>
+            {flaggperson.hentingFeilet && <Alert type="feil">{texts.hentingFeiletMessage}</Alert>}
             {pengestopp?.status === Status.STOPP_AUTOMATIKK
                 ? <PengestoppDropdown dato={pengestopp.opprettet} stoppedArbeidsgivere={stoppedArbeidsgivere} />
                 : <Knapp type="fare" onClick={toggleModal}>{texts.stansSykepenger}</Knapp>
@@ -66,7 +74,7 @@ const Pengestopp = ({ brukernavn, sykmeldinger, flaggperson }: IPengestoppProps)
     );
 };
 
-const mapStateToProps = (state: { flaggperson: { data: StatusEndring[] } }) => {
+const mapStateToProps = (state: { flaggperson: FlaggpersonState }) => {
     const { flaggperson } = state;
     return { flaggperson };
 };
