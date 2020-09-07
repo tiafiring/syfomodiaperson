@@ -17,6 +17,7 @@ export function* hentStatus(action: any) {
     try {
         const path = `${process.env.REACT_APP_ISPENGESTOPP_ROOT}/v1/person/status?fnr=${action.fnr}`;
         const data = yield call(get, path);
+
         if (data && !!data.err) {
             yield put(actions.hentStatusFeilet());
         } else {
@@ -47,11 +48,19 @@ export function* endreStatus(action: any) {
     yield put(actions.endrerStatus());
     try {
         const path = `${process.env.REACT_APP_ISPENGESTOPP_ROOT}/v1/person/flagg`;
-        yield call(post, path, action.stoppAutomatikk);
+        const res = yield call(post, path, action.stoppAutomatikk);
 
-        yield put(actions.statusEndret());
-        const fnr = action.stoppAutomatikk.sykmeldtFnr.value;
-        yield hentStatus({fnr});
+        console.log(res);
+
+        if (res.ok) {
+            yield put(actions.statusEndret());
+            const fnr = action.stoppAutomatikk.sykmeldtFnr.value;
+            yield hentStatus({ fnr });
+
+        } else {
+            yield put(actions.endreStatusFeilet());
+        }
+
     } catch (e) {
         yield put(actions.endreStatusFeilet());
     }

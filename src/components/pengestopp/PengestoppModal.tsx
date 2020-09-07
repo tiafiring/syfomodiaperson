@@ -6,7 +6,7 @@ import {
 } from 'react';
 import ModalWrapper from 'nav-frontend-modal';
 import { Knapp } from 'nav-frontend-knapper';
-import { Systemtittel } from 'nav-frontend-typografi';
+import { Systemtittel, Feilmelding } from 'nav-frontend-typografi';
 import {
     Checkbox,
     CheckboxGruppe,
@@ -29,6 +29,7 @@ const texts = {
     stansSykepenger: 'Stans sykepenger',
     avbryt: 'Avbryt',
     submitError: 'Du må velge minst én arbeidsgiver',
+    serverError: 'Det er ikke mulig å stoppe automatisk utbetaling av sykepenger akkurat nå. Prøv igjen senere.'
 };
 
 interface IPengestoppModal {
@@ -37,23 +38,32 @@ interface IPengestoppModal {
     arbeidsgivere: Arbeidsgiver[],
     statusEndringer: StatusEndring[],
     enhet: any,
+    endringFeilet: boolean
+    endret: boolean
 
-    flagg(stoppAutomatikk: StoppAutomatikk): void
+    flagg(stoppAutomatikk: StoppAutomatikk): Response
     toggle(): void
 }
 
-const Wrapper = styled.div`
+const Modal = styled(ModalWrapper)`
     padding: 2rem 2.5rem;
+    max-width: 50rem;
+    width: 100%;
 `;
 
 const Group = styled.div`
     margin: 1rem 0;
 `;
 
-const PengestoppModal = ({ brukernavn, isOpen, arbeidsgivere, toggle, flagg, enhet }: IPengestoppModal) => {
+const BottomGroup = styled.div`
+    margin-top: 1rem;
+`;
+
+const PengestoppModal = ({ brukernavn, isOpen, arbeidsgivere, toggle, flagg, enhet, endringFeilet, endret }: IPengestoppModal) => {
     const [stopped, setStopped] = useState(false);
     const [selected, setSelected] = useState<VirksomhetNr[]>([]);
-    const [submitError, setSubmitError] = useState(false);
+    const [submitError, setSubmitError] = useState<boolean>(false);
+    const [serverError, setServerError] = useState<boolean>(false);
 
     const fnr = window.location.pathname.split('/')[2];
     const [stoppAutomatikk, setStoppAutomatikk] = useState<StoppAutomatikk>({
@@ -71,7 +81,12 @@ const PengestoppModal = ({ brukernavn, isOpen, arbeidsgivere, toggle, flagg, enh
             setSubmitError(true);
         } else {
             flagg(stoppAutomatikk);
-            setStopped(true);
+
+            if (!endringFeilet && endret) {
+                setStopped(true);
+            } else {
+                setServerError(true)
+            }
         }
     }
 
@@ -99,7 +114,7 @@ const PengestoppModal = ({ brukernavn, isOpen, arbeidsgivere, toggle, flagg, enh
     }
 
     return (
-        <ModalWrapper
+        <Modal
             // @ts-ignore
             ariaHideApp={false}
             contentLabel={texts.stansSykepenger}
@@ -107,37 +122,37 @@ const PengestoppModal = ({ brukernavn, isOpen, arbeidsgivere, toggle, flagg, enh
             closeButton={true}
             onRequestClose={handleCloseModal}
         >
-            <Wrapper>
-                <Systemtittel>{texts.tittel}</Systemtittel>
+            <Systemtittel>{texts.tittel}</Systemtittel>
 
-                {!stopped
-                    ? <>
-                        <Group>
-                            <CheckboxGruppe legend={texts.arbeidsgiver} feil={submitError && texts.submitError}>
-                                {
-                                    arbeidsgivere.map((arbeidsgiver: Arbeidsgiver, index: number) => {
-                                        return (<Checkbox
-                                            key={index}
-                                            label={arbeidsgiver.navn}
-                                            onChange={handleChange}
-                                            name={arbeidsgiver.orgnummer}
-                                        />);
-                                    })
-                                }
-                            </CheckboxGruppe>
-                        </Group>
-                        <Knapp type="flat" onClick={handleCloseModal}>{texts.avbryt}</Knapp>
-                        <Knapp type="fare" onClick={handleStoppAutomatikkButtonPress}>{texts.stansSykepenger}</Knapp>
-                    </>
-                    : <>
-                        <Group>
-                            <AlertStripeInfo>{`Sykepengene til ${brukernavn} er stanset. Du kan lage en oppgave i Gosys nå for stans av sykepenger. Det er også mulig å gjøre dette senere`}</AlertStripeInfo>
-                        </Group>
-                        <Knapp type="flat" onClick={toggle}>{texts.avbryt}</Knapp>
-                    </>
-                }
-            </Wrapper>
-        </ModalWrapper>
+            {!stopped
+                ? <>
+                    <Group>
+                        <CheckboxGruppe legend={texts.arbeidsgiver} feil={submitError && texts.submitError}>
+                            {
+                                arbeidsgivere.map((arbeidsgiver: Arbeidsgiver, index: number) => {
+                                    return (<Checkbox
+                                        key={index}
+                                        label={arbeidsgiver.navn}
+                                        onChange={handleChange}
+                                        name={arbeidsgiver.orgnummer}
+                                    />);
+                                })
+                            }
+                        </CheckboxGruppe>
+                    </Group>
+                    <Knapp type="flat" onClick={handleCloseModal}>{texts.avbryt}</Knapp>
+                    <Knapp type="fare" onClick={handleStoppAutomatikkButtonPress}>{texts.stansSykepenger}</Knapp>
+
+                </>
+                : <>
+                    <Group>
+                        <AlertStripeInfo>{`Sykepengene til ${brukernavn} er stanset. Du kan lage en oppgave i Gosys nå for stans av sykepenger. Det er også mulig å gjøre dette senere`}</AlertStripeInfo>
+                    </Group>
+                    <Knapp type="flat" onClick={toggle}>{texts.avbryt}</Knapp>
+                </>
+            }
+            {serverError && <BottomGroup><Feilmelding>{texts.serverError}</Feilmelding></BottomGroup>}
+        </Modal>
 
     );
 };
@@ -151,12 +166,13 @@ const mapDispatchToProps = (dispatch: typeof store.dispatch) => {
 };
 
 interface IMapStateToProps {
+    flaggperson: any
     enhet: { data: any },
 }
 
 const mapStateToProps = (state: IMapStateToProps) => {
-    const { enhet } = state;
-    return { enhet };
+    const { enhet, flaggperson } = state;
+    return { enhet, endret: flaggperson.endret, endringFeilet: flaggperson.endringFeilet };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PengestoppModal);
