@@ -22,9 +22,7 @@ import {
 
 export const texts = {
     stansSykepenger: 'Stopp utbetaling',
-    hentingFeiletMessage: 'Vi klarte dessverre ikke å hente status på denne personen ¯\\_(⊙_ʖ⊙)_/¯ ' +
-        'Du kan likevel stoppe utbetalingen, men vi vil ikke klare å vise frem status her i modia før baksystemene er oppe. ' +
-        'Dersom du allerede har trykket, har stoppingen gått gjennom, og du trenger ikke trykke igjen selv om det ikke vises her.',
+    hentingFeiletMessage: 'Vi har problemer med baksystemene. Du kan stoppe utbetalingen, men det vil ikke bli synlig her før vi er tilbake i normal drift',
 };
 
 const Wrapper = styled.div`

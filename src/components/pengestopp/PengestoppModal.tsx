@@ -28,7 +28,7 @@ import { connect } from 'react-redux';
 import { FlaggpersonState } from '../../reducers/flaggperson';
 
 const texts = {
-    tittel: 'Stans automatisk behanding av sykepenger',
+    tittel: 'Stopp automatisk utbetaling av sykepenger',
     arbeidsgiver: 'Velg arbeidsgiver',
     stansSykepenger: 'Stans sykepenger',
     avbryt: 'Avbryt',
