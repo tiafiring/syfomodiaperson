@@ -17,14 +17,15 @@ import {
 import styled from 'styled-components';
 import {
     Arbeidsgiver,
-    StatusEndring,
     StoppAutomatikk,
     VirksomhetNr,
 } from '../../types/FlaggPerson';
-import { store } from '../../index';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
-import { endreStatus } from '../../actions/flaggperson_actions';
-import { connect } from 'react-redux';
+import {
+    useSelector,
+    useDispatch,
+} from 'react-redux';
+import { ENDRE_STATUS_FORESPURT } from '../../actions/flaggperson_actions';
 import { FlaggpersonState } from '../../reducers/flaggperson';
 
 const texts = {
@@ -40,12 +41,7 @@ interface IPengestoppModal {
     brukernavn: String,
     isOpen: boolean,
     arbeidsgivere: Arbeidsgiver[],
-    statusEndringer: StatusEndring[],
-    enhet: any,
-    endringFeilet: boolean,
-    endret: boolean,
 
-    flagg(stoppAutomatikk: StoppAutomatikk): Response
     toggle(): void
 }
 
@@ -63,7 +59,12 @@ const BottomGroup = styled.div`
     margin-top: 1em;
 `;
 
-const PengestoppModal = ({ brukernavn, isOpen, arbeidsgivere, toggle, flagg, enhet, endringFeilet, endret }: IPengestoppModal) => {
+const PengestoppModal = ({ brukernavn, isOpen, arbeidsgivere, toggle }: IPengestoppModal) => {
+    const enhet = useSelector((state: any) => state.enhet);
+    const flaggperson: FlaggpersonState = useSelector((state: any) => state.flaggperson);
+
+    const dispatch = useDispatch();
+
     const [stopped, setStopped] = useState(false);
     const [selected, setSelected] = useState<VirksomhetNr[]>([]);
     const [submitError, setSubmitError] = useState<boolean>(false);
@@ -80,17 +81,19 @@ const PengestoppModal = ({ brukernavn, isOpen, arbeidsgivere, toggle, flagg, enh
         setStoppAutomatikk({ ...stoppAutomatikk, virksomhetNr: selected });
     }, [selected]);
 
+    useEffect(() => {
+        if (flaggperson.endret && !flaggperson.endrer && !flaggperson.endringFeilet) {
+            setStopped(true);
+        } else if (!flaggperson.endret && !flaggperson.endrer && flaggperson.endringFeilet) {
+            setServerError(true);
+        }
+    }, [flaggperson]);
+
     const handleStoppAutomatikkButtonPress = () => {
         if (stoppAutomatikk.virksomhetNr.length <= 0) {
             setSubmitError(true);
         } else {
-            flagg(stoppAutomatikk);
-
-            if (!endringFeilet && endret) {
-                setStopped(true);
-            } else {
-                setServerError(true)
-            }
+            dispatch({ type: ENDRE_STATUS_FORESPURT, stoppAutomatikk });
         }
     }
 
@@ -161,22 +164,4 @@ const PengestoppModal = ({ brukernavn, isOpen, arbeidsgivere, toggle, flagg, enh
     );
 };
 
-const mapDispatchToProps = (dispatch: typeof store.dispatch) => {
-    return {
-        flagg: (stoppAutomatikk: StoppAutomatikk) => {
-            dispatch(endreStatus(stoppAutomatikk));
-        },
-    };
-};
-
-interface IMapStateToProps {
-    flaggperson: FlaggpersonState,
-    enhet: { data: any },
-}
-
-const mapStateToProps = (state: IMapStateToProps) => {
-    const { enhet, flaggperson } = state;
-    return { enhet, endret: flaggperson.endret, endringFeilet: flaggperson.endringFeilet };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(PengestoppModal);
+export default PengestoppModal;
