@@ -25,6 +25,7 @@ import { store } from '../../index';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import { endreStatus } from '../../actions/flaggperson_actions';
 import { connect } from 'react-redux';
+import { FlaggpersonState } from '../../reducers/flaggperson';
 
 const texts = {
     tittel: 'Stans automatisk behanding av sykepenger',
@@ -169,7 +170,7 @@ const mapDispatchToProps = (dispatch: typeof store.dispatch) => {
 };
 
 interface IMapStateToProps {
-    flaggperson: any,
+    flaggperson: FlaggpersonState,
     enhet: { data: any },
 }
 

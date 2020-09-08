@@ -29,7 +29,11 @@ function mockForLokal(server) {
 
     server.get('/ispengestopp/api/v1/person/status', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(STATUSLIST));
+        if (!STATUSLIST) {
+            res.sendStatus(204)
+        } else {
+            res.send(JSON.stringify(STATUSLIST));
+        }
     });
     server.post('/ispengestopp/api/v1/person/flagg', (req, res) => {
         const body = req.body;

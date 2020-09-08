@@ -2,6 +2,7 @@ import {
     Arbeidsgiver,
     Status,
     StatusEndring,
+    StoppAutomatikk,
     Sykmelding,
 } from '../types/FlaggPerson';
 import { senesteTom } from './periodeUtils';
@@ -52,3 +53,16 @@ export const unikeArbeidsgivereMedSykmeldingSiste3Maneder = (sykmeldinger: Sykme
 
     return uniqueArbeidsgivere(arbeidsgiverFromSykmeldinger);
 };
+
+export const stoppAutomatikk2StatusEndring = (stoppAutomatikk: StoppAutomatikk) => {
+    return stoppAutomatikk.virksomhetNr.map((virksomhet) => {
+        return {
+            veilederIdent: {value: ''},
+            sykmeldtFnr: stoppAutomatikk.sykmeldtFnr,
+            status: Status.STOPP_AUTOMATIKK,
+            virksomhetNr: virksomhet,
+            opprettet: new Date(),
+            enhetNr: stoppAutomatikk.enhetNr
+        }
+    })
+}

@@ -8,7 +8,19 @@ import {
 } from '../actions/flaggperson_actions';
 import { StatusEndring } from '../types/FlaggPerson';
 
-export const initialState = {
+export interface FlaggpersonState {
+    henter: boolean,
+    hentingFeilet: boolean,
+    hentet: boolean,
+
+    endrer: boolean,
+    endret: boolean,
+    endringFeilet: boolean,
+
+    data: StatusEndring[],
+}
+
+export const initialState: FlaggpersonState = {
     henter: false,
     hentingFeilet: false,
     hentet: false,

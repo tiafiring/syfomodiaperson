@@ -218,7 +218,11 @@ server.use('/ispengestopp/api/v1/person/status', cookieParser(), (req, res) => {
 
         axios.get(`http://ispengestopp/api/v1/person/status`, options)
             .then(response => {
-                res.send(response.data);
+                if (response.status === 204) {
+                    res.sendStatus(204);
+                } else {
+                    res.send(response.data);
+                }
             })
             .catch(err => {
                 console.error('Error in proxy for ispengestopp', err);
