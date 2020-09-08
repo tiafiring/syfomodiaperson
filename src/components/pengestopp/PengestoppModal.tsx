@@ -180,5 +180,3 @@ const mapStateToProps = (state: IMapStateToProps) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PengestoppModal);
-
-
