@@ -25,7 +25,7 @@ import {
     useSelector,
     useDispatch,
 } from 'react-redux';
-import { ENDRE_STATUS_FORESPURT, endreStatus } from '../../actions/flaggperson_actions';
+import { endreStatus } from '../../actions/flaggperson_actions';
 import { FlaggpersonState } from '../../reducers/flaggperson';
 
 const texts = {
