@@ -25,7 +25,7 @@ import {
     useSelector,
     useDispatch,
 } from 'react-redux';
-import { ENDRE_STATUS_FORESPURT } from '../../actions/flaggperson_actions';
+import { ENDRE_STATUS_FORESPURT, endreStatus } from '../../actions/flaggperson_actions';
 import { FlaggpersonState } from '../../reducers/flaggperson';
 
 const texts = {
@@ -93,7 +93,7 @@ const PengestoppModal = ({ brukernavn, isOpen, arbeidsgivere, toggle }: IPengest
         if (stoppAutomatikk.virksomhetNr.length <= 0) {
             setSubmitError(true);
         } else {
-            dispatch({ type: ENDRE_STATUS_FORESPURT, stoppAutomatikk });
+            dispatch(endreStatus(stoppAutomatikk));
         }
     }
 
