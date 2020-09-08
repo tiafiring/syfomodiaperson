@@ -12,6 +12,7 @@ import {
 } from '../api';
 import * as actions from '../actions/flaggperson_actions';
 import { stoppAutomatikk2StatusEndring } from '../utils/pengestoppUtils';
+import { FlaggpersonState } from '../reducers/flaggperson';
 
 export function* hentStatus(action: any) {
     yield put(actions.henterStatus());
@@ -49,26 +50,33 @@ function* watchHentStatus() {
     yield takeEvery(actions.HENT_STATUS_FORESPURT, hentStatusHvisIkkeHentet);
 }
 
+export const skalEndreStatus = (state: { flaggperson: FlaggpersonState }) => {
+    const reducer = state.flaggperson;
+    return !(reducer.endrer || reducer.endret);
+}
+
+export function* endreStatusHvisIkkeEndret(action: any) {
+    const skalEndre = yield select(skalEndreStatus);
+    if (skalEndre) {
+        yield endreStatus(action);
+    }
+}
+
 export function* endreStatus(action: any) {
     yield put(actions.endrerStatus());
     try {
         const path = `${process.env.REACT_APP_ISPENGESTOPP_ROOT}/v1/person/flagg`;
-        const res = yield call(post, path, action.stoppAutomatikk);
 
-        if (res.ok) {
-            yield put(actions.statusEndret());
-            yield put(actions.statusHentet(stoppAutomatikk2StatusEndring(action.stoppAutomatikk), action.fnr));
-        } else {
-            yield put(actions.endreStatusFeilet());
-        }
-
+        yield call(post, path, action.stoppAutomatikk);
+        yield put(actions.statusEndret());
+        yield put(actions.statusHentet(stoppAutomatikk2StatusEndring(action.stoppAutomatikk), action.fnr));
     } catch (e) {
         yield put(actions.endreStatusFeilet());
     }
 }
 
 function* watchEndreStatus() {
-    yield takeEvery(actions.ENDRE_STATUS_FORESPURT, endreStatus);
+    yield takeEvery(actions.ENDRE_STATUS_FORESPURT, endreStatusHvisIkkeEndret);
 }
 
 export default function* flaggPersonSagas() {
