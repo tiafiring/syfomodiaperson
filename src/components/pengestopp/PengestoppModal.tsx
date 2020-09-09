@@ -148,7 +148,7 @@ const PengestoppModal = ({ brukernavn, isOpen, arbeidsgivere, toggle }: IPengest
                         </CheckboxGruppe>
                     </Group>
                     <Knapp type="flat" onClick={handleCloseModal}>{texts.avbryt}</Knapp>
-                    <Knapp type="fare" onClick={handleStoppAutomatikkButtonPress}>{texts.stansSykepenger}</Knapp>
+                    <Knapp type="fare" spinner={flaggperson.endrer} disabled={flaggperson.endrer} onClick={handleStoppAutomatikkButtonPress}>{texts.stansSykepenger}</Knapp>
 
                 </>
                 : <>
