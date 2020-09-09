@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import PengestoppModal from './PengestoppModal';
 import PengestoppDropdown from './PengestoppDropdown';
 import {
+    Arbeidsgiver,
     Status,
     StatusEndring,
     Sykmelding,
@@ -23,6 +24,7 @@ import {
 export const texts = {
     stansSykepenger: 'Stopp utbetaling',
     hentingFeiletMessage: 'Vi har problemer med baksystemene. Du kan stoppe utbetalingen, men det vil ikke bli synlig her før vi er tilbake i normal drift',
+    sykmeldtNotEligibleError: 'Den sykmeldte behandles ikke i vedtaksløsningen. Du må sende en “Vurder konsekvens for ytelse”-oppgave i Gosys, jf servicerutinene.',
 };
 
 const Wrapper = styled.div`
@@ -43,9 +45,15 @@ const Alert = styled(AlertStripe)`
 const Pengestopp = ({ brukernavn, sykmeldinger }: IPengestoppProps) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const flaggperson: FlaggpersonState = useSelector((state: any) => state.flaggperson);
+    const [sykmeldtNotEligible, setSykmeldtNotEligible] = useState(false);
 
-    const toggleModal = () => {
-        setModalIsOpen(!modalIsOpen);
+    const toggleModal = (arbeidsgivere: Arbeidsgiver[]) => {
+        if (arbeidsgivere.length === 0) {
+            setSykmeldtNotEligible(true);
+        } else {
+            setSykmeldtNotEligible(false)
+            setModalIsOpen(!modalIsOpen);
+        }
     };
 
     const data: StatusEndring[] = flaggperson.data;
@@ -63,12 +71,13 @@ const Pengestopp = ({ brukernavn, sykmeldinger }: IPengestoppProps) => {
     return (
         <Wrapper>
             {flaggperson.hentingFeilet && <Alert type="feil">{texts.hentingFeiletMessage}</Alert>}
+            {sykmeldtNotEligible && <Alert type="feil">{texts.sykmeldtNotEligibleError}</Alert>}
             {pengestopp?.status === Status.STOPP_AUTOMATIKK
                 ? <PengestoppDropdown dato={pengestopp.opprettet} stoppedArbeidsgivere={stoppedArbeidsgivere} />
-                : <Knapp type="fare" onClick={toggleModal}>{texts.stansSykepenger}</Knapp>
+                : <Knapp type="fare" onClick={() => {toggleModal(uniqueArbeidsgivereWithSykmeldingLast3Months)}}>{texts.stansSykepenger}</Knapp>
             }
 
-            <PengestoppModal brukernavn={brukernavn} arbeidsgivere={uniqueArbeidsgivereWithSykmeldingLast3Months} isOpen={modalIsOpen} toggle={toggleModal} />
+            <PengestoppModal brukernavn={brukernavn} arbeidsgivere={uniqueArbeidsgivereWithSykmeldingLast3Months} isOpen={modalIsOpen} toggle={() => {toggleModal(uniqueArbeidsgivereWithSykmeldingLast3Months)}} />
         </Wrapper>
     );
 };
