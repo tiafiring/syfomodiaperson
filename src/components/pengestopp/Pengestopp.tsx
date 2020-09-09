@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Knapp } from 'nav-frontend-knapper';
 import AlertStripe from 'nav-frontend-alertstriper';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import PengestoppModal from './PengestoppModal';
 import PengestoppDropdown from './PengestoppDropdown';
 import {
@@ -40,8 +40,9 @@ const Alert = styled(AlertStripe)`
   margin-bottom: 1em;
 `
 
-const Pengestopp = ({ brukernavn, sykmeldinger, flaggperson }: IPengestoppProps) => {
+const Pengestopp = ({ brukernavn, sykmeldinger }: IPengestoppProps) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const flaggperson: FlaggpersonState = useSelector((state: any) => state.flaggperson);
 
     const toggleModal = () => {
         setModalIsOpen(!modalIsOpen);
@@ -67,14 +68,9 @@ const Pengestopp = ({ brukernavn, sykmeldinger, flaggperson }: IPengestoppProps)
                 : <Knapp type="fare" onClick={toggleModal}>{texts.stansSykepenger}</Knapp>
             }
 
-            <PengestoppModal brukernavn={brukernavn} statusEndringer={data} arbeidsgivere={uniqueArbeidsgivereWithSykmeldingLast3Months} isOpen={modalIsOpen} toggle={toggleModal} />
+            <PengestoppModal brukernavn={brukernavn} arbeidsgivere={uniqueArbeidsgivereWithSykmeldingLast3Months} isOpen={modalIsOpen} toggle={toggleModal} />
         </Wrapper>
     );
 };
 
-const mapStateToProps = (state: { flaggperson: FlaggpersonState }) => {
-    const { flaggperson } = state;
-    return { flaggperson };
-};
-
-export default connect(mapStateToProps)(Pengestopp);
+export default Pengestopp;
