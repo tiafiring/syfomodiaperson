@@ -8,8 +8,6 @@ import {
 import { log } from '@navikt/digisyfo-npm';
 import { get } from '../api';
 import * as actions from '../actions/soknader_actions';
-import mockSoknader from '../../mock/data/soknader';
-import { erDev } from '../selectors/toggleSelectors';
 
 export function* hentSoknader(action) {
     const fnr = action.fnr ? action.fnr : '';
@@ -20,11 +18,7 @@ export function* hentSoknader(action) {
         yield put(actions.soknaderHentet(data));
     } catch (e) {
         log(e);
-        if (erDev()) {
-            yield put(actions.soknaderHentet(mockSoknader));
-        } else {
-            yield put(actions.hentSoknaderFeilet());
-        }
+        yield put(actions.hentSoknaderFeilet());
     }
 }
 

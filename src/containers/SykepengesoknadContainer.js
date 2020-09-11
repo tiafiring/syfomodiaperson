@@ -18,7 +18,6 @@ import {
     soknad as soknadPt,
 } from '../propTypes';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
-import { erDev } from '../selectors/toggleSelectors';
 import SykepengesoknadArbeidstaker from '../components/soknad-arbeidstaker/SykepengesoknadArbeidstaker';
 import {
     ARBEIDSTAKERE,
@@ -84,7 +83,7 @@ export class Container extends Component {
                         if (henter) {
                             return <AppSpinner />;
                         }
-                        if (!tilgang.harTilgang && !erDev()) {
+                        if (!tilgang.harTilgang) {
                             return (
                                 <Feilmelding
                                     tittel={texts.feilmedling}
@@ -92,7 +91,7 @@ export class Container extends Component {
                                 />
                             );
                         }
-                        if (hentingFeilet && !erDev()) {
+                        if (hentingFeilet) {
                             return <Feilmelding />;
                         }
                         if (sykepengesoknad) {

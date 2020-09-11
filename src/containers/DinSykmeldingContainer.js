@@ -17,7 +17,6 @@ import Brodsmuler from '../components/Brodsmuler';
 import Speilingvarsel from '../components/Speilingvarsel';
 import { SYKMELDINGER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
-import { erDev } from '../selectors/toggleSelectors';
 import { ARBEIDSTAKER } from '../enums/arbeidssituasjoner';
 import { harForsoktHentetSykmeldinger } from '../utils/reducerUtils';
 
@@ -68,10 +67,10 @@ export class DinSykmeldingSide extends Component {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (hentingFeilet && !erDev()) {
+                    if (hentingFeilet) {
                         return <Feilmelding />;
                     }
-                    if (!tilgang.harTilgang && !erDev()) {
+                    if (!tilgang.harTilgang) {
                         return (<Feilmelding
                             tittel={texts.feilmelding}
                             melding={hentBegrunnelseTekst(tilgang.begrunnelse)}

@@ -14,12 +14,10 @@ import { sykepengesoknaderHentet } from '../../src/actions/sykepengesoknader_act
 import SykepengesoknadArbeidstaker from '../../src/components/soknad-arbeidstaker/SykepengesoknadArbeidstaker';
 import Feilmelding from '../../src/components/Feilmelding';
 import SykepengesoknadSelvstendig from '../../src/components/soknad-selvstendig/SykepengesoknadSelvstendig';
-import * as toggleSelectors from '../../src/selectors/toggleSelectors';
 import SykepengesoknadUtland from '../../src/components/soknad-utland/SykepengesoknadUtland';
 import { sykmeldingerHentet } from '../../src/actions/sykmeldinger_actions';
 
 describe('SykepengesoknadContainer', () => {
-    let toggleStub;
     let actions;
     let state;
     let ownProps;
@@ -64,11 +62,6 @@ describe('SykepengesoknadContainer', () => {
         settOwnPropsId = (soknadId) => {
             ownProps.params.sykepengesoknadId = soknadId;
         };
-        toggleStub = sinon.stub(toggleSelectors, 'erDev').returns(false);
-    });
-
-    afterEach(() => {
-        toggleStub.restore();
     });
 
     describe('Visning av sykepengesøknad for arbeidstakere', () => {

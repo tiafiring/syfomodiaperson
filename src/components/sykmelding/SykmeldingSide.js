@@ -11,7 +11,6 @@ import DinAvbrutteSykmelding from './DinAvbrutteSykmelding';
 import DinUtgaatteSykmelding from './DinUtgaatteSykmelding';
 import LenkeTilDineSykmeldinger from './LenkeTilDineSykmeldinger';
 import Feilmelding from '../Feilmelding';
-import { erDev } from '../../selectors/toggleSelectors';
 import { behandlingsutfallStatuser } from '../../utils/sykmeldinger/sykmeldingstatuser';
 import AvvistSykmelding from './avvisteSykmeldinger/AvvistSykmelding';
 import KoronaSykmeldingBekreftet from './koronasykmeldinger/KoronaSykmelding-Bekreftet';
@@ -55,7 +54,7 @@ const SykmeldingSide = ({ dinSykmelding, arbeidsgiversSykmelding, ledetekster, f
                         return <Feilmelding tittel="Egenmeldingen har ukjent status" />;
                     }
                 }
-            } else if (dinSykmelding.status === sykmeldingstatuser.SENDT && (arbeidsgiversSykmelding || erDev())) {
+            } else if (dinSykmelding.status === sykmeldingstatuser.SENDT && arbeidsgiversSykmelding) {
                 return (<div>
                     <DinSendteSykmelding
                         dinSykmelding={dinSykmelding}

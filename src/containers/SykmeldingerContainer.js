@@ -12,7 +12,6 @@ import Brodsmuler from '../components/Brodsmuler';
 import { SYKMELDINGER } from '../enums/menypunkter';
 import Speilingvarsel from '../components/Speilingvarsel';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
-import { erDev } from '../selectors/toggleSelectors';
 import { harForsoktHentetSykmeldinger } from '../utils/reducerUtils';
 import { TemporaryPengestopp } from '../components/pengestopp/TemporaryPengestopp';
 import Pengestopp from '../components/pengestopp/Pengestopp';
@@ -60,13 +59,13 @@ export class SykmeldingerSide extends Component {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (!tilgang.harTilgang && !erDev()) {
+                    if (!tilgang.harTilgang) {
                         return (<Feilmelding
                             tittel={texts.feilmelding}
                             melding={hentBegrunnelseTekst(tilgang.begrunnelse)}
                         />);
                     }
-                    if (hentingFeilet && !erDev()) {
+                    if (hentingFeilet) {
                         return <Feilmelding />;
                     }
                     return (<div>
