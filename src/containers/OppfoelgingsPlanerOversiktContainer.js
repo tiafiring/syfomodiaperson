@@ -11,7 +11,7 @@ import * as oppdialogActions from '../actions/oppfoelgingsdialoger_actions';
 import Feilmelding from '../components/Feilmelding';
 import OppfoelgingsPlanerOversikt from '../components/oppfoelgingsdialoger/OppfoelgingsPlanerOversikt';
 import AppSpinner from '../components/AppSpinner';
-import IngenPlaner from '../components/oppfoelgingsdialoger/IngenPlaner';
+import IngenPlaner from '../components/oppfoelgingsdialoger/IngenPlaner.tsx';
 import { OPPFOELGINGSPLANER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { activeOppfolgingsplaner } from '../utils/oppfolgingsplanerUtils';
