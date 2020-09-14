@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React, {
+    useEffect,
+} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {
+    connect,
+    useDispatch,
+} from 'react-redux';
 import Side from '../sider/Side';
 import * as oppdialogActions from '../actions/oppfoelgingsdialoger_actions';
-import * as virksomhetActions from '../actions/virksomhet_actions';
 import Feilmelding from '../components/Feilmelding';
 import OppfoelgingsPlanerOversikt from '../components/oppfoelgingsdialoger/OppfoelgingsPlanerOversikt';
 import AppSpinner from '../components/AppSpinner';
@@ -18,26 +21,24 @@ const texts = {
     errorTitle: 'Du har ikke tilgang til denne tjenesten',
 };
 
-export class OppfoelgingsPlanerOversiktSide extends Component {
-    componentDidMount() {
-        const {
-            fnr,
-            actions,
-        } = this.props;
-        actions.hentOppfoelgingsdialoger(fnr);
+const OppfoelgingsPlanerOversiktSide = (
+    {
+        aktiveDialoger,
+        inaktiveDialoger,
+        henter,
+        hentingFeilet,
+        tilgang,
+        fnr,
     }
+) => {
+    const dispatch = useDispatch();
 
-    render() {
-        const {
-            actions,
-            aktiveDialoger,
-            inaktiveDialoger,
-            henter,
-            hentingFeilet,
-            tilgang,
-            fnr,
-        } = this.props;
-        return (<Side fnr={fnr} tittel="Oppfølgingsplaner" aktivtMenypunkt={OPPFOELGINGSPLANER}>
+    useEffect(() => {
+        dispatch(oppdialogActions.hentOppfoelgingsdialoger(fnr));
+    }, []);
+
+    return (
+        <Side fnr={fnr} tittel="Oppfølgingsplaner" aktivtMenypunkt={OPPFOELGINGSPLANER}>
             {
                 (() => {
                     if (henter) {
@@ -55,36 +56,28 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
                     if (aktiveDialoger.length === 0 && inaktiveDialoger.length === 0) {
                         return <IngenPlaner />;
                     }
-                    return (<div>
+                    return (
                         <OppfoelgingsPlanerOversikt
-                            actions={actions}
                             aktiveDialoger={aktiveDialoger}
                             inaktiveDialoger={inaktiveDialoger}
                             fnr={fnr}
                         />
-                    </div>);
+                    );
                 })()
             }
-        </Side>);
-    }
-}
+        </Side>
+    );
+};
+
 
 OppfoelgingsPlanerOversiktSide.propTypes = {
     fnr: PropTypes.string,
-    actions: PropTypes.object,
     aktiveDialoger: PropTypes.array,
     inaktiveDialoger: PropTypes.array,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
 };
-
-export function mapDispatchToProps(dispatch) {
-    const actions = Object.assign({}, oppdialogActions, virksomhetActions);
-    return {
-        actions: bindActionCreators(actions, dispatch),
-    };
-}
 
 export function mapStateToProps(state, ownProps) {
     const harForsoktHentetAlt = harForsoktHentetOppfoelgingsdialoger(state.oppfoelgingsdialoger);
@@ -111,5 +104,5 @@ export function mapStateToProps(state, ownProps) {
     };
 }
 
-const OppfoelgingsPlanerOversiktContainer = connect(mapStateToProps, mapDispatchToProps)(OppfoelgingsPlanerOversiktSide);
+const OppfoelgingsPlanerOversiktContainer = connect(mapStateToProps)(OppfoelgingsPlanerOversiktSide);
 export default OppfoelgingsPlanerOversiktContainer;

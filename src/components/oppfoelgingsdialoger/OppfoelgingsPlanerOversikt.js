@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router';
 import { tilLesbarPeriodeMedArstall } from '@navikt/digisyfo-npm';
 import Alertstripe from 'nav-frontend-alertstriper';
 import Sidetopp from '../Sidetopp';
 import { restdatoTilLesbarDato } from '../../utils/datoUtils';
+import { hentVirksomhet } from '../../actions/virksomhet_actions';
 
 const texts = {
     titles: {
@@ -28,13 +30,16 @@ const deltMedNavText = (dialog) => {
     return `${texts.shared} ${sharedDate}`;
 };
 
-export class OppfoelgingsPlanerOversikt extends Component {
-    componentDidMount() {
-        const {
-            actions,
-            aktiveDialoger,
-            inaktiveDialoger,
-        } = this.props;
+const OppfoelgingsPlanerOversikt = (
+    {
+        fnr,
+        aktiveDialoger,
+        inaktiveDialoger,
+    }
+) => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
         const virksomhetsnummerSet = new Set();
         aktiveDialoger.forEach((plan) => {
             virksomhetsnummerSet.add(plan.virksomhet.virksomhetsnummer);
@@ -43,25 +48,20 @@ export class OppfoelgingsPlanerOversikt extends Component {
             virksomhetsnummerSet.add(plan.virksomhet.virksomhetsnummer);
         });
         virksomhetsnummerSet.forEach((virksomhetsnummer) => {
-            actions.hentVirksomhet(virksomhetsnummer);
+            dispatch(hentVirksomhet(virksomhetsnummer));
         });
-    }
+    }, []);
 
-    render() {
-        const {
-            fnr,
-            aktiveDialoger,
-            inaktiveDialoger,
-        } = this.props;
-        aktiveDialoger.sort((a, b) => {
-            return new Date(b.godkjentPlan.deltMedNAVTidspunkt) - new Date(a.godkjentPlan.deltMedNAVTidspunkt);
-        });
+    aktiveDialoger.sort((a, b) => {
+        return new Date(b.godkjentPlan.deltMedNAVTidspunkt) - new Date(a.godkjentPlan.deltMedNAVTidspunkt);
+    });
 
-        inaktiveDialoger.sort((a, b) => {
-            return new Date(b.godkjentPlan.deltMedNAVTidspunkt) - new Date(a.godkjentPlan.deltMedNAVTidspunkt);
-        });
+    inaktiveDialoger.sort((a, b) => {
+        return new Date(b.godkjentPlan.deltMedNAVTidspunkt) - new Date(a.godkjentPlan.deltMedNAVTidspunkt);
+    });
 
-        return (<div>
+    return (
+        <div>
             <Sidetopp tittel="Oppfølgingsplaner" />
             <div className="blokk--l">
                 <h2 className="typo-systemtittel blokk--xs">{texts.titles.relevantOppfolgingsplaner}</h2>
@@ -83,9 +83,9 @@ export class OppfoelgingsPlanerOversikt extends Component {
             <h2 className="typo-systemtittel blokk--xs">{texts.titles.inactiveOppfolgingsplaner}</h2>
             {
                 inaktiveDialoger.length === 0 &&
-                    <Alertstripe type="info">
-                        <p>{texts.alertMessages.noInactiveOppfolgingsplaner}</p>
-                    </Alertstripe>
+                <Alertstripe type="info">
+                    <p>{texts.alertMessages.noInactiveOppfolgingsplaner}</p>
+                </Alertstripe>
             }
             {
                 inaktiveDialoger.map((dialog, index) => {
@@ -98,13 +98,12 @@ export class OppfoelgingsPlanerOversikt extends Component {
                     </Link>);
                 })
             }
-        </div>);
-    }
-}
+        </div>
+    );
+};
 
 OppfoelgingsPlanerOversikt.propTypes = {
     fnr: PropTypes.string,
-    actions: PropTypes.object,
     aktiveDialoger: PropTypes.array.isRequired,
     inaktiveDialoger: PropTypes.array.isRequired,
 };
