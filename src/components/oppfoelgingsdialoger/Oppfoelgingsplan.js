@@ -29,8 +29,8 @@ const PlanVisning = (
         <TilbakeTilOppfolgingsplaner />
         <div className="pdfbilder blokk--s">
             {
-                bildeUrler.map((bildeUrl) => {
-                    return (<div className="pdfbilde">
+                bildeUrler.map((bildeUrl, index) => {
+                    return (<div key={index} className="pdfbilde">
                         <img width="944" height="1222" className="pdfbilde__bilde" key={bildeUrl} src={bildeUrl} alt="Bilde av oppfølgingsplan" />
                     </div>);
                 })
