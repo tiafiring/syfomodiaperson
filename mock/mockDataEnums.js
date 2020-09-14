@@ -10,7 +10,6 @@ const HISTORIKKOPPFOLGINGSPLAN = 'historikkoppfolgingsplan';
 const LEDERE = 'ledere';
 const MOTEBEHOV = 'motebehov';
 const MOTER = 'moter';
-const OPPFOELGINGSDIALOGER = 'oppfoelgingsdialoger';
 const OPPFOLGINGSTILFELLEPERIODER = 'oppfolgingstilfelleperioder';
 const SOKNADER = 'soknader';
 const SYKEPENGESOKNADER = 'sykepengesoknader';
@@ -32,7 +31,6 @@ module.exports = {
     LEDERE,
     MOTEBEHOV,
     MOTER,
-    OPPFOELGINGSDIALOGER,
     OPPFOLGINGSTILFELLEPERIODER,
     SOKNADER,
     SYKEPENGESOKNADER,
