@@ -75,6 +75,17 @@ server.use('/fastlegerest/api', proxy('fastlegerest.default', {
     },
 }));
 
+server.use('/ispersonoppgave/api', proxy('ispersonoppgave.default',  {
+    https: false,
+    proxyReqPathResolver: function(req) {
+        return `/api${req.path}`
+    },
+    proxyErrorHandler: function(err, res, next) {
+        console.error("Error in proxy for ispersonoppgave", err);
+        next(err);
+    }
+}));
+
 server.use('/syfo-tilgangskontroll/api', proxy('syfo-tilgangskontroll.default', {
     https: false,
     proxyReqPathResolver: function (req) {

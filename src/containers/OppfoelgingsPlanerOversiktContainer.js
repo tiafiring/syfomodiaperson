@@ -16,6 +16,8 @@ import { OPPFOELGINGSPLANER } from '../enums/menypunkter';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { activeOppfolgingsplaner } from '../utils/oppfolgingsplanerUtils';
 import { harForsoktHentetOppfoelgingsdialoger } from '../utils/reducerUtils';
+import { hentOppfolgingsplanerLPS } from '../actions/oppfolgingsplanerlps_actions';
+import { hentPersonOppgaver } from '../actions/personoppgave_actions';
 
 const texts = {
     errorTitle: 'Du har ikke tilgang til denne tjenesten',
@@ -25,6 +27,8 @@ const OppfoelgingsPlanerOversiktSide = (
     {
         aktiveDialoger,
         inaktiveDialoger,
+        personOppgaveList,
+        oppfolgingsplanerLPS,
         henter,
         hentingFeilet,
         tilgang,
@@ -33,9 +37,15 @@ const OppfoelgingsPlanerOversiktSide = (
 ) => {
     const dispatch = useDispatch();
 
-    useEffect(() => {
+    useEffect(  () => {
         dispatch(oppdialogActions.hentOppfoelgingsdialoger(fnr));
+        dispatch(hentOppfolgingsplanerLPS(fnr));
+        dispatch(hentPersonOppgaver(fnr));
     }, []);
+
+    useEffect(() => {
+        dispatch(hentOppfolgingsplanerLPS(fnr));
+    }, [personOppgaveList]);
 
     return (
         <Side fnr={fnr} tittel="Oppfølgingsplaner" aktivtMenypunkt={OPPFOELGINGSPLANER}>
@@ -53,13 +63,17 @@ const OppfoelgingsPlanerOversiktSide = (
                     if (hentingFeilet) {
                         return <Feilmelding />;
                     }
-                    if (aktiveDialoger.length === 0 && inaktiveDialoger.length === 0) {
+                    if (
+                        aktiveDialoger.length === 0
+                        && inaktiveDialoger.length === 0
+                        && oppfolgingsplanerLPS.length === 0) {
                         return <IngenPlaner />;
                     }
                     return (
                         <OppfoelgingsPlanerOversikt
                             aktiveDialoger={aktiveDialoger}
                             inaktiveDialoger={inaktiveDialoger}
+                            oppfolgingsplanerLPS={oppfolgingsplanerLPS}
                             fnr={fnr}
                         />
                     );
@@ -74,17 +88,27 @@ OppfoelgingsPlanerOversiktSide.propTypes = {
     fnr: PropTypes.string,
     aktiveDialoger: PropTypes.array,
     inaktiveDialoger: PropTypes.array,
+    oppfolgingsplanerLPS: PropTypes.array,
+    personOppgaveList: PropTypes.array,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
 };
 
 export function mapStateToProps(state, ownProps) {
-    const harForsoktHentetAlt = harForsoktHentetOppfoelgingsdialoger(state.oppfoelgingsdialoger);
+    const harForsoktHentetAlt = harForsoktHentetOppfoelgingsdialoger(state.oppfoelgingsdialoger)
+    && state.oppfolgingsplanerlps.hentingForsokt
+    && state.personoppgaver.hentingForsokt;
     const henter = !harForsoktHentetAlt || state.tilgang.henter;
-    const hentingFeilet = state.oppfoelgingsdialoger.hentingFeilet || state.tilgang.hentingFeilet;
+    const hentingFeilet = state.oppfoelgingsdialoger.hentingFeilet
+        || state.oppfolgingsplanerlps.hentingFeilet
+        || state.personoppgaver.hentingFeilet
+        || state.tilgang.hentingFeilet;
 
     const oppfoelgingsdialoger = state.oppfoelgingsdialoger.data;
+    const oppfolgingsplanerLPS = state.oppfolgingsplanerlps.data;
+
+    const personOppgaveList = state.personoppgaver.data;
 
     const aktiveDialoger = activeOppfolgingsplaner(oppfoelgingsdialoger);
     const inaktiveDialoger = [];
@@ -100,6 +124,8 @@ export function mapStateToProps(state, ownProps) {
         hentingFeilet,
         inaktiveDialoger,
         aktiveDialoger,
+        oppfolgingsplanerLPS,
+        personOppgaveList,
         tilgang: state.tilgang.data,
     };
 }
