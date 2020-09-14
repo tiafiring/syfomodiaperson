@@ -1,7 +1,11 @@
-import React, { Component } from 'react';
+import React, {
+    useEffect,
+} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {
+    connect,
+    useDispatch,
+} from 'react-redux';
 import SideFullbredde from '../sider/SideFullbredde';
 import * as oppdialogActions from '../actions/oppfoelgingsdialoger_actions';
 import Feilmelding from '../components/Feilmelding';
@@ -15,24 +19,26 @@ const texts = {
     errorTitle: 'Du har ikke tilgang til denne tjenesten',
 };
 
-export class OppfoelgingsPlanerOversiktSide extends Component {
-    componentDidMount() {
-        const {
-            actions,
-            fnr,
-        } = this.props;
-        actions.hentOppfoelgingsdialoger(fnr);
+const OppfoelgingsPlanerOversiktSide = (
+    {
+        fnr,
+        henter,
+        hentingFeilet,
+        oppfoelgingsdialog,
+        tilgang,
     }
+) => {
+    const dispatch = useDispatch();
 
-    render() {
-        const {
-            fnr,
-            henter,
-            hentingFeilet,
-            oppfoelgingsdialog,
-            tilgang,
-        } = this.props;
-        return (<SideFullbredde fnr={fnr} tittel="Oppfølgingsplan" aktivtMenypunkt={OPPFOELGINGSPLANER}>
+    useEffect(() => {
+        dispatch(oppdialogActions.hentOppfoelgingsdialoger(fnr));
+    }, []);
+
+    return (
+        <SideFullbredde
+            fnr={fnr}
+            tittel="Oppfølgingsplan"
+            aktivtMenypunkt={OPPFOELGINGSPLANER}>
             {
                 (() => {
                     if (henter) {
@@ -50,25 +56,17 @@ export class OppfoelgingsPlanerOversiktSide extends Component {
                     return <Oppfoelgingsplan oppfoelgingsdialog={oppfoelgingsdialog} fnr={fnr} />;
                 })()
             }
-        </SideFullbredde>);
-    }
-}
+        </SideFullbredde>
+    );
+};
 
 OppfoelgingsPlanerOversiktSide.propTypes = {
     fnr: PropTypes.string,
-    actions: PropTypes.object,
     oppfoelgingsdialog: PropTypes.object,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
 };
-
-export function mapDispatchToProps(dispatch) {
-    const actions = Object.assign({}, oppdialogActions);
-    return {
-        actions: bindActionCreators(actions, dispatch),
-    };
-}
 
 export function mapStateToProps(state, ownProps) {
     const id = parseInt(ownProps.params.oppfoelgingsdialogId, 10);
@@ -89,5 +87,5 @@ export function mapStateToProps(state, ownProps) {
     };
 }
 
-const OppfoelgingsPlanerOversiktContainer = connect(mapStateToProps, mapDispatchToProps)(OppfoelgingsPlanerOversiktSide);
+const OppfoelgingsPlanerOversiktContainer = connect(mapStateToProps)(OppfoelgingsPlanerOversiktSide);
 export default OppfoelgingsPlanerOversiktContainer;
