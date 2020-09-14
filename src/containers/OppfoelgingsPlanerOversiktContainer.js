@@ -6,10 +6,8 @@ import {
     connect,
     useDispatch,
 } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import Side from '../sider/Side';
 import * as oppdialogActions from '../actions/oppfoelgingsdialoger_actions';
-import * as virksomhetActions from '../actions/virksomhet_actions';
 import Feilmelding from '../components/Feilmelding';
 import OppfoelgingsPlanerOversikt from '../components/oppfoelgingsdialoger/OppfoelgingsPlanerOversikt';
 import AppSpinner from '../components/AppSpinner';
@@ -25,7 +23,6 @@ const texts = {
 
 const OppfoelgingsPlanerOversiktSide = (
     {
-        actions,
         aktiveDialoger,
         inaktiveDialoger,
         henter,
@@ -61,7 +58,6 @@ const OppfoelgingsPlanerOversiktSide = (
                     }
                     return (
                         <OppfoelgingsPlanerOversikt
-                            actions={actions}
                             aktiveDialoger={aktiveDialoger}
                             inaktiveDialoger={inaktiveDialoger}
                             fnr={fnr}
@@ -76,20 +72,12 @@ const OppfoelgingsPlanerOversiktSide = (
 
 OppfoelgingsPlanerOversiktSide.propTypes = {
     fnr: PropTypes.string,
-    actions: PropTypes.object,
     aktiveDialoger: PropTypes.array,
     inaktiveDialoger: PropTypes.array,
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
 };
-
-export function mapDispatchToProps(dispatch) {
-    const actions = Object.assign({}, oppdialogActions, virksomhetActions);
-    return {
-        actions: bindActionCreators(actions, dispatch),
-    };
-}
 
 export function mapStateToProps(state, ownProps) {
     const harForsoktHentetAlt = harForsoktHentetOppfoelgingsdialoger(state.oppfoelgingsdialoger);
@@ -116,5 +104,5 @@ export function mapStateToProps(state, ownProps) {
     };
 }
 
-const OppfoelgingsPlanerOversiktContainer = connect(mapStateToProps, mapDispatchToProps)(OppfoelgingsPlanerOversiktSide);
+const OppfoelgingsPlanerOversiktContainer = connect(mapStateToProps)(OppfoelgingsPlanerOversiktSide);
 export default OppfoelgingsPlanerOversiktContainer;
