@@ -18,4 +18,3 @@ Du må ha Node installert.
 * Lint JS-kode med `npm run lint` eller `npm run lint:fix`
 
 Appen nås på [http://localhost:8080/sykefravaer/:fnr](http://localhost:8080/sykefravaer/:fnr) hvor 'fnr' må ha et gyldig format.
-Eksempler finnes på https://confluence.adeo.no/display/Digisyfo/Testdata+-+Fiktive+brukere (NAV-intern lenke)
