@@ -1,4 +1,5 @@
 import {
+    all,
     call,
     fork,
     put,
@@ -40,7 +41,7 @@ function* watchHentVirksomhet() {
 }
 
 export default function* virksomhetSagas() {
-    yield [
+    yield all([
         fork(watchHentVirksomhet),
-    ];
+    ]);
 }
