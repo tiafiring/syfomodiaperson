@@ -16,7 +16,6 @@ import {
 } from '../propTypes';
 import Speilingvarsel from '../components/Speilingvarsel';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
-import { erDev } from '../selectors/toggleSelectors';
 import Feilstripe from '../components/Feilstripe';
 import {
     harForsoktHentetSoknader,
@@ -61,13 +60,13 @@ export class SykepengesoknaderSide extends Component {
                     if (henter) {
                         return <AppSpinner />;
                     }
-                    if (!tilgang.harTilgang && !erDev()) {
+                    if (!tilgang.harTilgang) {
                         return (<Feilmelding
                             tittel={texts.feilmelding}
                             melding={hentBegrunnelseTekst(tilgang.begrunnelse)}
                         />);
                     }
-                    if (hentingFeilet && !erDev()) {
+                    if (hentingFeilet) {
                         return <Feilmelding />;
                     }
                     return (<div>
