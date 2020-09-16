@@ -49,6 +49,7 @@ class GlobalNavigasjon extends Component {
         this.props.hentMotebehov(fnr);
         this.props.hentMoter(fnr);
         this.props.hentOppfoelgingsdialoger(fnr);
+        this.props.hentPersonOppgaver(fnr);
     }
 
     setFocus(fokusId) {
@@ -100,7 +101,7 @@ class GlobalNavigasjon extends Component {
     }
 
     render() {
-        const { fnr, aktivtMenypunkt, motebehovReducer, moterReducer, oppfolgingsplanerReducer } = this.props;
+        const { fnr, aktivtMenypunkt, motebehovReducer, moterReducer, oppfolgingsplanerReducer, personOppgaverReducer } = this.props;
         this.menypunkter = [historikkMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, oppfoelgingsplanMenypunkt, motemodulMenypunkt];
 
         return (<ul aria-label="Navigasjon" className="navigasjon">
@@ -109,7 +110,7 @@ class GlobalNavigasjon extends Component {
                     const className = cn('navigasjonspanel', {
                         'navigasjonspanel--aktiv': menypunkt === aktivtMenypunkt,
                     });
-                    const tasks = numberOfTasks(menypunkt, motebehovReducer, moterReducer, oppfolgingsplanerReducer);
+                    const tasks = numberOfTasks(menypunkt, motebehovReducer, moterReducer, oppfolgingsplanerReducer, personOppgaverReducer);
                     return (<li key={index} className="navigasjon__element">
                         <a
                             ref={this.getRef(index)}
@@ -147,7 +148,9 @@ GlobalNavigasjon.propTypes = {
     moterReducer: PropTypes.object,
     hentMoter: PropTypes.func,
     oppfolgingsplanerReducer: PropTypes.object,
+    personOppgaverReducer: PropTypes.object,
     hentOppfoelgingsdialoger: PropTypes.func,
+    hentPersonOppgaver: PropTypes.func,
 };
 
 export default GlobalNavigasjon;

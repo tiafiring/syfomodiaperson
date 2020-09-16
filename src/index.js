@@ -24,6 +24,7 @@ import historikk from './reducers/historikk';
 import ledetekster from './reducers/ledetekster';
 import sykepengesoknader from './reducers/sykepengesoknader';
 import oppfoelgingsdialoger from './reducers/oppfoelgingsdialoger';
+import oppfolgingsplanerlps from './reducers/oppfolgingsplanerlps';
 import dokumentinfo from './reducers/dokumentinfo';
 import behandlendeEnhet from './reducers/behandlendeEnhet';
 import enhet from './reducers/enhet';
@@ -33,6 +34,7 @@ import veilederinfo from './reducers/veilederinfo';
 import diskresjonskode from './reducers/diskresjonskode';
 import egenansatt from './reducers/egenansatt';
 import oppfolgingstilfelleperioder from './reducers/oppfolgingstilfelleperioder';
+import personoppgaver from './reducers/personoppgaver';
 import flaggperson from './reducers/flaggperson';
 import rootSaga from './sagas/index';
 import { hentLedetekster } from './actions/ledetekster_actions';
@@ -62,6 +64,7 @@ const rootReducer = combineReducers({
     epostinnhold,
     arbeidsgiverEpostinnhold,
     oppfoelgingsdialoger,
+    oppfolgingsplanerlps,
     sykepengesoknader,
     enhet,
     tidslinjer,
@@ -76,6 +79,7 @@ const rootReducer = combineReducers({
     form: formReducer,
     soknader,
     oppfolgingstilfelleperioder,
+    personoppgaver,
     flaggperson,
 });
 

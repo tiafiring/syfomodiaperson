@@ -1,6 +1,7 @@
 import * as menypunkter from '../enums/menypunkter';
 import { harUbehandletMotebehov } from './motebehovUtils';
 import { activeOppfolgingsplaner } from './oppfolgingsplanerUtils';
+import { PersonOppgaveType } from '../reducers/personoppgaver';
 
 const isUnfinishedMotebehovTask = (motebehovReducer) => {
     return harUbehandletMotebehov(motebehovReducer.data);
@@ -31,12 +32,20 @@ const numberOfActiveOppfolgingsplaner = (oppfolgingsplanerReducer) => {
         && activeOppfolgingsplaner(oppfolgingsplanerReducer.data).length;
 };
 
-export const numberOfTasks = (menypunkt, motebehovReducer, moterReducer, oppfolgingsplanerReducer) => {
+const numberOfUnprocessedPersonOppgaver = (personOppgaverReducer, type) => {
+    return personOppgaverReducer
+        && personOppgaverReducer.data
+        && personOppgaverReducer.data.filter((personoppgave) =>{
+            return personoppgave.type === type && !personoppgave.behandletTidspunkt;
+        }).length > 0;
+};
+
+export const numberOfTasks = (menypunkt, motebehovReducer, moterReducer, oppfolgingsplanerReducer, personOppgaverReducer) => {
     switch (menypunkt) {
         case menypunkter.MOETEPLANLEGGER:
             return moteplanleggerTasks(motebehovReducer, moterReducer);
         case menypunkter.OPPFOELGINGSPLANER:
-            return numberOfActiveOppfolgingsplaner(oppfolgingsplanerReducer);
+            return numberOfActiveOppfolgingsplaner(oppfolgingsplanerReducer) + numberOfUnprocessedPersonOppgaver(personOppgaverReducer, PersonOppgaveType.OPPFOLGINGSPLANLPS);
         default:
             return 0;
     }

@@ -1,5 +1,6 @@
 const express = require('express');
 const mockFastlegerest = require('./mockFastlegerest');
+const mockIspersonoppgave = require('./ispersonoppgave/mockIspersonoppgave');
 const mockModiacontextholder = require('./mockModiacontextholder');
 const mockModiasyforest = require('./mockModiasyforest');
 const mockSyfomoteadmin = require('./mockSyfomoteadmin');
@@ -19,6 +20,7 @@ function mockEndepunkter(server, erLokal) {
 
     [
         mockFastlegerest,
+        mockIspersonoppgave,
         mockModiacontextholder,
         mockModiasyforest,
         mockSyfomoteadmin,

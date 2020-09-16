@@ -3,6 +3,7 @@ import GlobalNavigasjon from '../components/GlobalNavigasjon';
 import * as motebehovActions from '../actions/motebehov_actions';
 import * as moterActions from '../actions/moter_actions';
 import * as oppfoelgingsdialogerActions from '../actions/oppfoelgingsdialoger_actions';
+import * as personOppgaverActions from '../actions/personoppgave_actions';
 
 export const mapStateToProps = (state, ownProps) => {
     return {
@@ -11,9 +12,18 @@ export const mapStateToProps = (state, ownProps) => {
         motebehovReducer: state.motebehov,
         moterReducer: state.moter,
         oppfolgingsplanerReducer: state.oppfoelgingsdialoger,
+        personOppgaverReducer: state.personoppgaver,
     };
 };
 
-const GlobalNavigasjonContainer = connect(mapStateToProps, Object.assign({}, motebehovActions, moterActions, oppfoelgingsdialogerActions))(GlobalNavigasjon);
+const GlobalNavigasjonContainer = connect(
+    mapStateToProps,
+    Object.assign(
+        {},
+        motebehovActions,
+        moterActions,
+        oppfoelgingsdialogerActions,
+        personOppgaverActions
+    ))(GlobalNavigasjon);
 
 export default GlobalNavigasjonContainer;

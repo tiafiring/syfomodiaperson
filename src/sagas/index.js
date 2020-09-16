@@ -10,6 +10,7 @@ import motebehovSagas from './motebehovSagas';
 import epostinnholdSagas from './epostinnholdSagas';
 import sykmeldingerSagas from './sykmeldingerSagas';
 import oppfoelgingsdialogerSagas from './oppfoelgingsdialogerSagas';
+import oppfolgingsplanerLPSSagas from './oppfolgingsplanerLPSSagas';
 import modiacontextSagas from './modiacontextSagas';
 import sykepengesoknaderSagas from './sykepengesoknaderSagas';
 import historikkSagas from './historikkSagas';
@@ -23,6 +24,7 @@ import ledeteksterSagas from './ledeteksterSagas';
 import tilgangSagas from './tilgangSagas';
 import soknaderSagas from './soknaderSagas';
 import oppfolgingstilfelleperioderSagas from './oppfolgingstilfelleperioderSagas';
+import personoppgaveSagas from './personoppgaveSagas';
 import flaggPersonSagas from './flaggPersonSagas';
 
 export default function* rootSaga() {
@@ -38,6 +40,7 @@ export default function* rootSaga() {
         modiacontextSagas(),
         sykmeldingerSagas(),
         oppfoelgingsdialogerSagas(),
+        oppfolgingsplanerLPSSagas(),
         sykepengesoknaderSagas(),
         historikkSagas(),
         behandlendeEnhetSagas(),
@@ -49,6 +52,7 @@ export default function* rootSaga() {
         tidslinjerSagas(),
         soknaderSagas(),
         oppfolgingstilfelleperioderSagas(),
+        personoppgaveSagas(),
         flaggPersonSagas(),
     ]);
 }

@@ -2,6 +2,8 @@ import { log } from '@navikt/digisyfo-npm';
 import { Error403 } from './errors';
 import { erProd } from '../utils/miljoUtil';
 
+export const NAV_PERSONIDENT_HEADER = 'nav-personident';
+
 export const hentLoginUrl = () => {
     if (erProd()) {
         return 'https://loginservice.nais.adeo.no/login';
@@ -21,9 +23,12 @@ export const lagreRedirectUrlILocalStorage = (href) => {
     localStorage.setItem('redirecturl', href);
 };
 
-export function get(url) {
+export function get(url, personIdent = '') {
     return fetch(url, {
         credentials: 'include',
+        headers: {
+            [NAV_PERSONIDENT_HEADER]: personIdent
+        }
     })
         .then((res) => {
             if (res.status === 401) {
