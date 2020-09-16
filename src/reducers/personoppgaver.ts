@@ -3,6 +3,7 @@ import {
     HENT_PERSONOPPGAVER_HENTER,
     HENT_PERSONOPPGAVER_HENTET,
     HENT_PERSONOPPGAVER_FEILET,
+    BEHANDLE_PERSONOPPGAVE_BEHANDLET,
 } from '../actions/personoppgave_actions';
 import { PersonOppgave } from '../types/PersonOppgave';
 
@@ -55,6 +56,22 @@ const oppfolgingsplanerlps: Reducer<PersonOppgaverState> = (
                 henter: false,
                 hentingFeilet: true,
                 hentingForsokt: true,
+            };
+        }
+        case BEHANDLE_PERSONOPPGAVE_BEHANDLET: {
+            const data = [...state.data].map((personOppgave) => {
+                if (personOppgave.uuid  === action.uuid) {
+                    return {
+                        ...personOppgave,
+                        behandletTidspunkt: new Date(),
+                        behandletVeilederIdent: action.veilederIdent,
+                    };
+                }
+                return personOppgave
+            });
+            return {
+                ...state,
+                data,
             };
         }
         default:

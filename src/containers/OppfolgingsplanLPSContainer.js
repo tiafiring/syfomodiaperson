@@ -28,6 +28,7 @@ const OppfolgingsplanLPSSide = (
         hentingFeilet,
         oppfolgingsplanLPS,
         personOppgaveList,
+        veilederIdent,
         tilgang,
     }
 ) => {
@@ -66,7 +67,10 @@ const OppfolgingsplanLPSSide = (
                         return <Feilmelding />;
                     }
                     return (
-                        <OppfolgingsplanLPSContent oppfolgingsplanLPS={oppfolgingsplanLPS} />
+                        <OppfolgingsplanLPSContent
+                            oppfolgingsplanLPS={oppfolgingsplanLPS}
+                            veilederIdent={veilederIdent}
+                        />
                     );
                 })()
             }
@@ -81,6 +85,7 @@ OppfolgingsplanLPSSide.propTypes = {
     oppfolgingsplanLPS: PropTypes.object,
     personOppgaveList: PropTypes.array,
     tilgang: PropTypes.object,
+    veilederIdent: PropTypes.string,
 };
 
 export function mapStateToProps(state, ownProps) {
@@ -108,6 +113,7 @@ export function mapStateToProps(state, ownProps) {
         oppfolgingsplanLPS,
         personOppgaveList,
         tilgang: state.tilgang.data,
+        veilederIdent: state.veilederinfo.data.ident
     };
 }
 
