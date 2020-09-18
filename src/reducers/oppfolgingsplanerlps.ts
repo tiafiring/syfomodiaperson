@@ -4,9 +4,10 @@ import {
     HENT_OPPFOLGINGSPLANER_LPS_HENTER,
     HENT_OPPFOLGINGSPLANER_LPS_HENTET,
 } from '../actions/oppfolgingsplanerlps_actions';
-import { VIRKSOMHET_HENTET } from "../actions/virksomhet_actions";
+import { VIRKSOMHET_HENTET } from '../actions/virksomhet_actions';
 import { OppfolgingsplanLPS } from '../types/OppfolgingsplanLPS';
-import { PersonOppgave } from "../types/PersonOppgave";
+import { PersonOppgave } from '../types/PersonOppgave';
+import { BEHANDLE_PERSONOPPGAVE_BEHANDLET } from '../actions/personoppgave_actions';
 
 export interface OppfolgingsplanerlpsState {
     henter: boolean,
@@ -67,6 +68,25 @@ const oppfolgingsplanerlps: Reducer<OppfolgingsplanerlpsState> = (
                 henter: false,
                 hentingFeilet: true,
                 hentingForsokt: true,
+            };
+        }
+        case BEHANDLE_PERSONOPPGAVE_BEHANDLET: {
+            const data = [...state.data].map((oppfolgingsplanLPS) => {
+                if (oppfolgingsplanLPS.uuid === action.referanseUuid) {
+                    return {
+                        ...oppfolgingsplanLPS,
+                        personoppgave: {
+                            ...oppfolgingsplanLPS.personoppgave,
+                            behandletTidspunkt: new Date(),
+                            behandletVeilederIdent: action.veilederIdent,
+                        },
+                    };
+                }
+                return oppfolgingsplanLPS
+            });
+            return {
+                ...state,
+                data,
             };
         }
         case VIRKSOMHET_HENTET: {

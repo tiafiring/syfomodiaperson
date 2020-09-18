@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import OppfolgingsplanLPSEtikett from './OppfolgingsplanLPSEtikett';
+import BehandleOppfolgingsplanLPS from './BehandleOppfolgingsplanLPS';
 
 const texts = {
     buttonDownload: 'Last ned oppfølgingsplan',
@@ -26,20 +27,28 @@ ButtonDownload.propTypes = {
 const OppfolgingsplanLPSContent = (
     {
         oppfolgingsplanLPS,
+        veilederIdent,
     }
 ) => {
     return (
-        <div className="panel">
-            <p>Virksomhetsnummer: {oppfolgingsplanLPS.virksomhetsnummer}</p>
-            <p>Virksomhetsnavn: {oppfolgingsplanLPS.virksomhetsnavn}</p>
-            <ButtonDownload oppfolgingsplanLPS={oppfolgingsplanLPS} />
-            <OppfolgingsplanLPSEtikett />
+        <div>
+            <BehandleOppfolgingsplanLPS
+                oppfolgingsplanLPS={oppfolgingsplanLPS}
+                veilederIdent={veilederIdent}
+            />
+            <div className="panel">
+                <p>Virksomhetsnummer: {oppfolgingsplanLPS.virksomhetsnummer}</p>
+                <p>Virksomhetsnavn: {oppfolgingsplanLPS.virksomhetsnavn}</p>
+                <ButtonDownload oppfolgingsplanLPS={oppfolgingsplanLPS} />
+                <OppfolgingsplanLPSEtikett />
+            </div>
         </div>
     );
 };
 
 OppfolgingsplanLPSContent.propTypes = {
     oppfolgingsplanLPS: PropTypes.object,
+    veilederIdent: PropTypes.string,
 };
 
 export default OppfolgingsplanLPSContent;

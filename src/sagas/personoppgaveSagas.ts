@@ -6,7 +6,10 @@ import {
     select,
     takeEvery,
 } from 'redux-saga/effects';
-import { get } from '../api';
+import {
+    get,
+    post,
+} from '../api';
 import * as actions from '../actions/personoppgave_actions';
 
 export function* hentPersonOppgaver(action: any) {
@@ -37,8 +40,35 @@ function* watchHentPersonOppgaver() {
     yield takeEvery(actions.HENT_PERSONOPPGAVER_FORESPURT, hentPersonOppgaverHvisIkkeHentet);
 }
 
+export function* behandlePersonOppgave(action: any) {
+    const uuid = action.uuid;
+    const referanseUuid = action.referanseUuid;
+    const veilederIdent = action.veilederIdent;
+    yield put(actions.behandlePersonOppgaveBehandler());
+    try {
+        const path = `/ispersonoppgave/api/v1/personoppgave/${uuid}/behandle`;
+        yield call(post, path);
+        yield put(actions.behandlePersonOppgaveBehandlet(
+            uuid,
+            referanseUuid,
+            veilederIdent,
+        ));
+    } catch (e) {
+        if (e.message === '409') {
+            window.location.reload();
+            return;
+        }
+        yield put(actions.behandlePersonOppgaveFeilet());
+    }
+}
+
+function* watchBehandlePersonOppgave() {
+    yield takeEvery(actions.BEHANDLE_PERSONOPPGAVE_FORESPURT, behandlePersonOppgave);
+}
+
 export default function* personOppgaveSagas() {
     yield all([
         fork(watchHentPersonOppgaver),
+        fork(watchBehandlePersonOppgave),
     ]);
 }

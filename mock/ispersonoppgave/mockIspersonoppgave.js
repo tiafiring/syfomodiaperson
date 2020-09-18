@@ -43,6 +43,10 @@ function mockForLokal(server) {
             res.status(400).send();
         }
     });
+
+    server.post('/ispersonoppgave/api/v1/personoppgave/:uuid/behandle', (req, res) => {
+        res.sendStatus(200);
+    });
 }
 
 function mockIspersonoppgave(server) {
