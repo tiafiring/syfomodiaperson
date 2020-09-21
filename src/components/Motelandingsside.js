@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { tilDatoMedUkedagOgManedNavn } from '../utils/datoUtils';
 import Sidetopp from './Sidetopp';
+import MotelandingssidePrikk from './MotelandingssidePrikk';
 
 const texts = {
     pageHeader: 'Dialogmøter',
@@ -49,6 +50,7 @@ export const MotelandingssideMoteElement = (
     {
         fnr,
         mote,
+        skalVisePrikk,
     }
 ) => {
     const undertittel = setUndertittel(mote);
@@ -66,6 +68,9 @@ export const MotelandingssideMoteElement = (
                 </header>
                 <p className="inngangspanel__tekst--undertittel js-tekst">{undertittel}</p>
             </div>
+            {
+                skalVisePrikk && (<MotelandingssidePrikk />)
+            }
         </Link>
     </li>);
 };
@@ -73,11 +78,13 @@ export const MotelandingssideMoteElement = (
 MotelandingssideMoteElement.propTypes = {
     fnr: PropTypes.string,
     mote: PropTypes.object,
+    skalVisePrikk: PropTypes.bool,
 };
 
 export const MotelandingssideMotebehovElement = (
     {
         fnr,
+        skalVisePrikk,
     }
 ) => {
     return (<li className="motelandingssidepanel">
@@ -94,18 +101,24 @@ export const MotelandingssideMotebehovElement = (
                 </header>
                 <p className="inngangspanel__tekst--undertittel js-tekst">{texts.motebehovElement.subtitle}</p>
             </div>
+            {
+                skalVisePrikk && (<MotelandingssidePrikk />)
+            }
         </Link>
     </li>);
 };
 
 MotelandingssideMotebehovElement.propTypes = {
     fnr: PropTypes.string,
+    skalVisePrikk: PropTypes.bool,
 };
 
 export const Motelandingsside = (
     {
         fnr,
         mote,
+        skalViseMotebehovPrikk,
+        skalViseMotePrikk,
     }
 ) => {
     return (<div>
@@ -114,9 +127,11 @@ export const Motelandingsside = (
             <MotelandingssideMoteElement
                 fnr={fnr}
                 mote={mote}
+                skalVisePrikk={skalViseMotePrikk}
             />
             <MotelandingssideMotebehovElement
                 fnr={fnr}
+                skalVisePrikk={skalViseMotebehovPrikk}
             />
         </ul>
     </div>);
@@ -125,6 +140,8 @@ export const Motelandingsside = (
 Motelandingsside.propTypes = {
     fnr: PropTypes.string,
     mote: PropTypes.object,
+    skalViseMotebehovPrikk: PropTypes.bool,
+    skalViseMotePrikk: PropTypes.bool,
 };
 
 export default Motelandingsside;
