@@ -10,7 +10,6 @@ import SykepengesoknaderContainer from '../containers/SykepengesoknaderContainer
 import SykepengesoknadContainer from '../containers/SykepengesoknadContainer';
 import OppfoelgingsPlanerOversiktContainer from '../containers/OppfoelgingsPlanerOversiktContainer';
 import OppfoelgingsplanContainer from '../containers/OppfoelgingsplanContainer';
-import OppfolgingsplanLPSContainer from '../containers/OppfolgingsplanLPSContainer';
 import DinSykmeldingContainer from '../containers/DinSykmeldingContainer';
 import HistorikkContainer from '../containers/HistorikkContainer';
 import { erGyldigFodselsnummer } from '../utils/frnValideringUtils';
@@ -39,7 +38,6 @@ const AppRouter = ({ history }) => {
         <Route path="/sykefravaer/:fnr/sykmeldinger/:sykmeldingId" component={DinSykmeldingContainer} />
         <Route path="/sykefravaer/:fnr/oppfoelgingsplaner" component={OppfoelgingsPlanerOversiktContainer} />
         <Route path="/sykefravaer/:fnr/oppfoelgingsplaner/:oppfoelgingsdialogId" component={OppfoelgingsplanContainer} />
-        <Route path="/sykefravaer/:fnr/oppfolgingsplan/lps/:oppfolgingsplanUuid" component={OppfolgingsplanLPSContainer} />
         <Route path="/sykefravaer/:fnr/*" component={SykmeldingerContainer} />
         <Route path="/sykefravaer" component={IngenBrukerContainer} />
     </Router>);

@@ -2,13 +2,12 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router';
-import styled from 'styled-components';
 import { tilLesbarPeriodeMedArstall } from '@navikt/digisyfo-npm';
 import Alertstripe from 'nav-frontend-alertstriper';
-import OppfolgingsplanLPSEtikett from '../oppfolgingsplan/lps/OppfolgingsplanLPSEtikett';
 import Sidetopp from '../Sidetopp';
 import { restdatoTilLesbarDato } from '../../utils/datoUtils';
 import { hentVirksomhet } from '../../actions/virksomhet_actions';
+import OppfolgingsplanerOversiktLPS from '../oppfolgingsplan/lps/OppfolgingsplanerOversiktLPS';
 
 const texts = {
     titles: {
@@ -34,50 +33,13 @@ const deltMedNavText = (dialog) => {
     return `${texts.shared} ${sharedDate}`;
 };
 
-const RedDot = styled.span`
-  height: 1em;
-  width: 1em;
-  background-color: #C30000;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 0.5em;
-`;
-
-const UnderTittelInline = styled.h3`
-  display: inline-block;
-`;
-
-
-const OppfolgingsplanerOversiktLPS = (
-    {
-        fnr,
-        oppfolgingsplanLPSBistandsbehov,
-    }
-) => {
-    return (
-        <Link className="navigasjonspanel navigasjonspanel--stor" to={`/sykefravaer/${fnr}/oppfolgingsplan/lps/${oppfolgingsplanLPSBistandsbehov.uuid}`}>
-            <div className="navigasjonselement">
-                { !oppfolgingsplanLPSBistandsbehov.personoppgave.behandletTidspunkt &&
-                    <RedDot />
-                }
-                <UnderTittelInline className="panel__tittel navigasjonselement__tittel">{oppfolgingsplanLPSBistandsbehov.virksomhetsnavn}</UnderTittelInline>
-                <p className="navigasjonselement__undertittel">Mottatt: {restdatoTilLesbarDato(oppfolgingsplanLPSBistandsbehov.opprettet)}</p>
-                <OppfolgingsplanLPSEtikett />
-            </div>
-        </Link>
-    );
-};
-OppfolgingsplanerOversiktLPS.propTypes = {
-    fnr: PropTypes.string,
-    oppfolgingsplanLPSBistandsbehov: PropTypes.object.isRequired,
-};
-
 const OppfoelgingsPlanerOversikt = (
     {
         fnr,
         aktiveDialoger,
         inaktiveDialoger,
         oppfolgingsplanerLPS,
+        veilederIdent,
     }
 ) => {
     const dispatch = useDispatch();
@@ -130,6 +92,7 @@ const OppfoelgingsPlanerOversikt = (
                                 key={index}
                                 fnr={fnr}
                                 oppfolgingsplanLPSBistandsbehov={planLPS}
+                                veilederIdent={veilederIdent}
                             />
                         );
                     })
@@ -172,6 +135,7 @@ const OppfoelgingsPlanerOversikt = (
                             key={index}
                             fnr={fnr}
                             oppfolgingsplanLPSBistandsbehov={planLPS}
+                            veilederIdent={veilederIdent}
                         />
                     );
                 })
@@ -185,6 +149,7 @@ OppfoelgingsPlanerOversikt.propTypes = {
     aktiveDialoger: PropTypes.array.isRequired,
     inaktiveDialoger: PropTypes.array.isRequired,
     oppfolgingsplanerLPS: PropTypes.array.isRequired,
+    veilederIdent: PropTypes.string,
 };
 
 export default OppfoelgingsPlanerOversikt;

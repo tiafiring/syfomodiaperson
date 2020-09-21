@@ -33,6 +33,7 @@ const OppfoelgingsPlanerOversiktSide = (
         hentingFeilet,
         tilgang,
         fnr,
+        veilederIdent,
     }
 ) => {
     const dispatch = useDispatch();
@@ -75,6 +76,7 @@ const OppfoelgingsPlanerOversiktSide = (
                             inaktiveDialoger={inaktiveDialoger}
                             oppfolgingsplanerLPS={oppfolgingsplanerLPS}
                             fnr={fnr}
+                            veilederIdent={veilederIdent}
                         />
                     );
                 })()
@@ -93,6 +95,7 @@ OppfoelgingsPlanerOversiktSide.propTypes = {
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     tilgang: PropTypes.object,
+    veilederIdent: PropTypes.string,
 };
 
 export function mapStateToProps(state, ownProps) {
@@ -127,6 +130,7 @@ export function mapStateToProps(state, ownProps) {
         oppfolgingsplanerLPS,
         personOppgaveList,
         tilgang: state.tilgang.data,
+        veilederIdent: state.veilederinfo.data.ident,
     };
 }
 
