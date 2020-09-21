@@ -8,6 +8,10 @@ import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
 import Motelandingsside from '../components/Motelandingsside';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
+import {
+    isUnfinishedMotebehovTask,
+    isUnfinishedMoterTask,
+} from '../utils/GlobalNavigasjonUtils';
 
 const texts = {
     pageTitle: 'Møtelandingsside',
@@ -29,6 +33,8 @@ export class MotelandingssideSide extends Component {
             henter,
             hentingFeilet,
             mote,
+            skalViseMotebehovPrikk,
+            skalViseMotePrikk,
             tilgang,
         } = this.props;
         return (<Side fnr={fnr} tittel={texts.pageTitle} aktivtMenypunkt={MOETEPLANLEGGER}>
@@ -49,6 +55,8 @@ export class MotelandingssideSide extends Component {
                     return (<Motelandingsside
                         fnr={fnr}
                         mote={mote}
+                        skalViseMotebehovPrikk={skalViseMotebehovPrikk}
+                        skalViseMotePrikk={skalViseMotePrikk}
                     />);
                 })()
             }
@@ -62,6 +70,8 @@ MotelandingssideSide.propTypes = {
     hentingFeilet: PropTypes.bool,
     hentMoter: PropTypes.func,
     mote: PropTypes.object,
+    skalViseMotebehovPrikk: PropTypes.bool,
+    skalViseMotePrikk: PropTypes.bool,
     tilgang: PropTypes.object,
 };
 
@@ -70,12 +80,17 @@ export const mapStateToProps = (state, ownProps) => {
         return mote.status !== 'AVBRUTT';
     })[0];
 
+    const skalViseMotebehovPrikk = isUnfinishedMotebehovTask(state.motebehov);
+    const skalViseMotePrikk = isUnfinishedMoterTask(state.moter);
+
     return {
         fnr: ownProps.params.fnr,
         henter: state.tilgang.henter
         || state.moter.henter,
         hentingFeilet: state.tilgang.hentingFeilet,
         mote: aktivtMote,
+        skalViseMotebehovPrikk,
+        skalViseMotePrikk,
         tilgang: state.tilgang.data,
     };
 };

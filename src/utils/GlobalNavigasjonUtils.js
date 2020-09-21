@@ -3,11 +3,11 @@ import { harUbehandletMotebehov } from './motebehovUtils';
 import { activeOppfolgingsplaner } from './oppfolgingsplanerUtils';
 import { PersonOppgaveType } from '../reducers/personoppgaver';
 
-const isUnfinishedMotebehovTask = (motebehovReducer) => {
+export const isUnfinishedMotebehovTask = (motebehovReducer) => {
     return harUbehandletMotebehov(motebehovReducer.data);
 };
 
-const isUnfinishedMoterTask = (moterReducer) => {
+export const isUnfinishedMoterTask = (moterReducer) => {
     return moterReducer
         && moterReducer.data
         && moterReducer.data[0]
