@@ -17,6 +17,7 @@ const SYKMELDINGER = 'sykmeldinger';
 const TEKSTER = 'tekster';
 const TILGANGTILBRUKER = 'tilgangtilbruker';
 const VEILEDERINFO = 'veilederinfo';
+const PREDIKSJON = 'prediksjon';
 
 module.exports = {
     AKTIVBRUKER,
@@ -38,4 +39,5 @@ module.exports = {
     TEKSTER,
     TILGANGTILBRUKER,
     VEILEDERINFO,
+    PREDIKSJON,
 };
