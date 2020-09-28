@@ -260,6 +260,31 @@ server.use('/ispengestopp/api/v1/person/flagg', cookieParser(), (req, res) => {
     },
 );
 
+server.use('/isprediksjon/api/v1/prediksjon', cookieParser(), (req, res) => {
+        const token = req.cookies['isso-idtoken'];
+        const fnr = req.query.fnr;
+        const options = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                fnr,
+            },
+        };
+
+        axios.get(`http://isprediksjon/api/v1/prediksjon`, options)
+            .then(response => {
+                if (response.status === 204) {
+                    res.sendStatus(204);
+                } else {
+                    res.send(response.data);
+                }
+            })
+            .catch(err => {
+                console.error('Error in proxy for isprediksjon', err);
+                res.send({ err });
+            });
+
+    },
+);
 
 const port = 8080;
 

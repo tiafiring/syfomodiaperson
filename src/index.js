@@ -36,6 +36,7 @@ import egenansatt from './reducers/egenansatt';
 import oppfolgingstilfelleperioder from './reducers/oppfolgingstilfelleperioder';
 import personoppgaver from './reducers/personoppgaver';
 import flaggperson from './reducers/flaggperson';
+import prediksjon from './reducers/prediksjon';
 import rootSaga from './sagas/index';
 import { hentLedetekster } from './actions/ledetekster_actions';
 import { sjekkTilgang } from './actions/tilgang_actions';
@@ -81,6 +82,7 @@ const rootReducer = combineReducers({
     oppfolgingstilfelleperioder,
     personoppgaver,
     flaggperson,
+    prediksjon,
 });
 
 const sagaMiddleware = createSagaMiddleware();
