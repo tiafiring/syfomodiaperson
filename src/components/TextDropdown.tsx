@@ -3,15 +3,6 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import NavFrontendChevron from 'nav-frontend-chevron';
 
-const texts = {
-    buttonText: 'Les mer om “Stopp utbetaling”',
-    infoBulletpoints: [
-        'Når du stopper den automatiske utbetalingen, blir saken sendt til en saksbehandler før utbetaling.',
-        'Du må også sende en “Vurder konsekvens for ytelse”-oppgave i Gosys, jf servicerutinene.',
-        'Til å begynne med kan du bare stoppe utbetalingen til sykmeldte med arbeidsgiver. Sykmeldte uten arbeidsgiver behandles foreløpig ikke i vedtaksløsningen.',
-    ],
-}
-
 const BlueText = styled.span`
   color: #0067C5;
 `
@@ -20,17 +11,12 @@ const TextAndChevronWrapper = styled.div`
   cursor: pointer;
 `
 
-const InfoBox = () => {
-    return <div>
-        <ul>
-            {texts.infoBulletpoints.map((text, index) => {
-                return <li key={index}><p>{text}</p></li>
-            })}
-        </ul>
-    </div>
+interface TextDropdownProps {
+    children: any,
+    title: string,
 }
 
-export const TextDropdown = () => {
+const TextDropdown = ({ children, title }: TextDropdownProps) => {
     const [showInfo, setShowInfo] = useState(false)
     const [chevronDirection, setChevronDirection] = useState<'ned' | 'opp'>('ned')
 
@@ -45,10 +31,12 @@ export const TextDropdown = () => {
 
     return (<div>
         <TextAndChevronWrapper tabIndex={0} onClick={handleClick} onKeyPress={handleClick}>
-            <BlueText>{texts.buttonText}</BlueText>
+            <BlueText>{title}</BlueText>
             <NavFrontendChevron type={chevronDirection} />
         </TextAndChevronWrapper>
 
-        {showInfo && <InfoBox />}
+        {showInfo && children}
     </div>)
 }
+
+export default TextDropdown;
