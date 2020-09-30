@@ -65,11 +65,11 @@ const List = styled.ul`
 `
 
 const FaktorParagraf = ({ faktor }: FaktorParagrafProps) => {
-    const listItems = faktorForklaringer[faktor] || ["Fant ikke informasjon!"];
+    const forklaringForUsedFaktorer = faktorForklaringer[faktor];
     return (<>
         <BoldText>{faktor}</BoldText>
         <List>
-            {listItems.map((item: string, index: number) => {
+            {forklaringForUsedFaktorer.map((item: string, index: number) => {
                 return (<li key={index}>{item}</li>)
             })}
         </List>
@@ -79,7 +79,7 @@ const FaktorParagraf = ({ faktor }: FaktorParagrafProps) => {
 const FaktorerInfo = ({ faktorer }: FaktorerInfoProps) => {
     return (<>
         {faktorer.map((faktor: string, index: number) => {
-            return (<FaktorParagraf key={index} faktor={faktor} />)
+            return faktorForklaringer[faktor] && (<FaktorParagraf key={index} faktor={faktor} />)
         })}
     </>)
 }

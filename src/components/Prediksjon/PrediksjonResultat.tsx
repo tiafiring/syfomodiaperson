@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import {Prediksjon} from '../../reducers/prediksjon';
-import {tilDatoMedUkedagOgManedNavn} from "../../utils/datoUtils";
+import { Prediksjon } from '../../reducers/prediksjon';
+import { tilDatoMedUkedagOgManedNavn } from '../../utils/datoUtils';
 
 interface PrediksjonResultatProps {
     prediksjon: Prediksjon,
@@ -25,11 +25,13 @@ const TextWithBottomMargin = styled.p`
 `
 
 const ResultText = ({ langt, certainty }: ResultTextProps) => {
-    const firstWord = langt
+    const yesOrNo = langt
         ? 'Ja'
         : 'Nei';
 
-    return (<TextWithBottomMargin>{`${firstWord}, med `}<strong>{`${certainty}%`}</strong>{' sannsynlighet'}</TextWithBottomMargin>);
+    return (<TextWithBottomMargin>
+        {`${yesOrNo}, med `} <b>{`${certainty}%`}</b> {' sannsynlighet'}
+    </TextWithBottomMargin>);
 }
 
 const CalculationText = ({ prediksjonsDato }: CalculationTextProps) => {

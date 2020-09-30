@@ -16,15 +16,7 @@ interface PrediksjonProps {
 }
 
 const PrediksjonPanel = styled.div`
-    padding-top: .5em;
-    margin: 1em 0;
-    padding-bottom: .5em;
-    label {
-        margin-left: .75em;
-        display: block;
-        margin-top: .5em;
-        font-weight: bold;
-    }
+    margin-bottom: 1em;
 `
 
 const PrediksjonVisning = ({fnr}: PrediksjonProps) => {

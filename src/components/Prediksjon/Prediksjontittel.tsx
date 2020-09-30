@@ -13,18 +13,22 @@ const texts = {
     },
 };
 
+const PrediksjontittelHeader = styled.h3`
+  margin: 0;
+`
+
 const BoldText = styled.p`
   font-weight: bold;
 `
 
 const InfoText = () => {
-    return <>
-        <h4>{texts.info.title}</h4>
+    return (<>
+        <BoldText>{texts.info.title}</BoldText>
         <BoldText>{texts.info.subtitle}</BoldText>
         <p>{texts.info.factors}</p>
         <p>{texts.info.comparison}</p>
         <p>{texts.info.week17}</p>
-    </>
+    </>)
 }
 
 const TittelWrapper = styled.div`
@@ -32,10 +36,11 @@ const TittelWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: .5em;
 `
 const Prediksjontittel = () => {
     return (<TittelWrapper>
-        <h3>{texts.title}</h3>
+        <PrediksjontittelHeader>{texts.title}</PrediksjontittelHeader>
         <Hjelpetekst type="under" id="1">
             <InfoText />
         </Hjelpetekst>
