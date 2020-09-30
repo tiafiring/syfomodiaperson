@@ -8,6 +8,8 @@ import Sidetopp from '../Sidetopp';
 import MotebehovKvittering from './MotebehovKvittering';
 import BehandleMotebehovKnapp from './BehandleMotebehovKnapp';
 import UtdragFraSykefravaeret from './UtdragFraSykefravaeret';
+import PrediksjonVisning from '../Prediksjon/PrediksjonVisning';
+import { erLokal } from '../../utils/miljoUtil';
 
 export class Motebehov extends Component {
     componentDidMount() {
@@ -51,6 +53,9 @@ export class Motebehov extends Component {
                 motebehovListe={motebehovListe}
                 sykmeldt={sykmeldt}
             />
+
+            {erLokal() && (<PrediksjonVisning fnr={fnr} />)}
+
             <UtdragFraSykefravaeret
                 aktiveDialoger={aktiveDialoger}
                 fnr={fnr}

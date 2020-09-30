@@ -5,9 +5,11 @@ import {
 } from '../actions/prediksjon_actions';
 
 export interface Prediksjon {
+    kortereVarighetGrunner: string[],
     langt: boolean,
-    treffsikkerhetProsent: number,
+    lengreVarighetGrunner: string[],
     prediksjonsDato: string,
+    treffsikkerhetProsent: number,
 }
 
 export interface PrediksjonState {
