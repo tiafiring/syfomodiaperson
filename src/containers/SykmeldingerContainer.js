@@ -70,7 +70,7 @@ export class SykmeldingerSide extends Component {
                     }
                     return (<div>
                         {erPreProd() || erLokal()
-                            ? <Pengestopp brukernavn={brukernavn} sykmeldinger={sykmeldinger} />
+                            ? <Pengestopp sykmeldinger={sykmeldinger} />
                             : <TemporaryPengestopp />}
                         <Speilingvarsel brukernavn={brukernavn} />
                         <div className="speiling">

@@ -29,16 +29,19 @@ import { endreStatus } from '../../actions/flaggperson_actions';
 import { FlaggpersonState } from '../../reducers/flaggperson';
 
 const texts = {
-    tittel: 'Stopp automatisk utbetaling av sykepenger',
+    notStoppedTittel: 'Send beskjed til NAV Arbeid og ytelser om mulig stans av sykepenger',
+    stoppedTittel: 'Beskjeden din er sendt',
+    stoppedInfo: 'Nå har du sendt beskjed til NAV Arbeid og ytelser. Du må også lage et notat i Gosys hvor du begrunner hvorfor du mener sykepengene bør stanses.',
+    seServicerutinen: 'Se servicerutinen hvis du er i tvil.',
     arbeidsgiver: 'Velg arbeidsgiver',
     stansSykepenger: 'Stans sykepenger',
+    send: 'Send',
     avbryt: 'Avbryt',
     submitError: 'Du må velge minst én arbeidsgiver',
     serverError: 'Det er ikke mulig å stoppe automatisk utbetaling av sykepenger akkurat nå. Prøv igjen senere.'
 };
 
 interface IPengestoppModal {
-    brukernavn: String,
     isOpen: boolean,
     arbeidsgivere: Arbeidsgiver[],
 
@@ -59,7 +62,13 @@ const BottomGroup = styled.div`
     margin-top: 1em;
 `;
 
-const PengestoppModal = ({ brukernavn, isOpen, arbeidsgivere, toggle }: IPengestoppModal) => {
+const tittel = (stopped: boolean) => {
+    return stopped
+        ? texts.stoppedTittel
+        : texts.notStoppedTittel;
+}
+
+const PengestoppModal = ({ isOpen, arbeidsgivere, toggle }: IPengestoppModal) => {
     const enhet = useSelector((state: any) => state.enhet);
     const flaggperson: FlaggpersonState = useSelector((state: any) => state.flaggperson);
 
@@ -129,7 +138,7 @@ const PengestoppModal = ({ brukernavn, isOpen, arbeidsgivere, toggle }: IPengest
             closeButton={true}
             onRequestClose={handleCloseModal}
         >
-            <Systemtittel>{texts.tittel}</Systemtittel>
+            <Systemtittel>{tittel(stopped)}</Systemtittel>
 
             {!stopped
                 ? <>
@@ -148,14 +157,16 @@ const PengestoppModal = ({ brukernavn, isOpen, arbeidsgivere, toggle }: IPengest
                         </CheckboxGruppe>
                     </Group>
                     <Knapp type="flat" onClick={handleCloseModal}>{texts.avbryt}</Knapp>
-                    <Knapp type="fare" spinner={flaggperson.endrer} disabled={flaggperson.endrer} onClick={handleStoppAutomatikkButtonPress}>{texts.stansSykepenger}</Knapp>
+                    <Knapp type="hoved" mini spinner={flaggperson.endrer} disabled={flaggperson.endrer} onClick={handleStoppAutomatikkButtonPress}>{texts.send}</Knapp>
 
                 </>
                 : <>
                     <Group>
-                        <AlertStripeInfo>{`Sykepengene til ${brukernavn} er stanset. Du kan lage en oppgave i Gosys nå for stans av sykepenger. Det er også mulig å gjøre dette senere`}</AlertStripeInfo>
+                        <AlertStripeInfo>
+                            <p>{texts.stoppedInfo}</p>
+                            <p>{texts.seServicerutinen}</p>
+                        </AlertStripeInfo>
                     </Group>
-                    <Knapp type="flat" onClick={toggle}>{texts.avbryt}</Knapp>
                 </>
             }
             {serverError && <BottomGroup><Feilmelding>{texts.serverError}</Feilmelding></BottomGroup>}
