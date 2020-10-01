@@ -8,11 +8,11 @@ import { Arbeidsgiver } from '../../types/FlaggPerson';
 
 const texts = {
     tittel: 'Beskjed til NAV Arbeid og ytelser er sendt',
-    stans: 'Stanset: ',
+    sendt: 'Sendt: ',
 };
 
 interface IPengestoppDropdown {
-    dato: Date
+    dato: string
     stoppedArbeidsgivere: Arbeidsgiver[]
 }
 
@@ -23,7 +23,7 @@ const PengestoppDropdown = ({ dato, stoppedArbeidsgivere }: IPengestoppDropdown)
         </AlertStripe>;
     return (
         <Ekspanderbartpanel tittel={warning}>
-            <p>{texts.stans}<time>{restdatoTilLesbarDato(dato)}</time></p>
+            <p>{texts.sendt}<time>{restdatoTilLesbarDato(dato)}</time></p>
             <CheckboxGruppe>
                 {
                     stoppedArbeidsgivere.map((arbeidsgiver: Arbeidsgiver, index: number) => {

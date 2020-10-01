@@ -61,7 +61,7 @@ export const stoppAutomatikk2StatusEndring = (stoppAutomatikk: StoppAutomatikk) 
             sykmeldtFnr: stoppAutomatikk.sykmeldtFnr,
             status: Status.STOPP_AUTOMATIKK,
             virksomhetNr: virksomhet,
-            opprettet: new Date(),
+            opprettet: new Date().toISOString(),
             enhetNr: stoppAutomatikk.enhetNr
         }
     })
