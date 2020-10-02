@@ -13,12 +13,7 @@ import { SYKMELDINGER } from '../enums/menypunkter';
 import Speilingvarsel from '../components/Speilingvarsel';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
 import { harForsoktHentetSykmeldinger } from '../utils/reducerUtils';
-import { TemporaryPengestopp } from '../components/pengestopp/TemporaryPengestopp';
 import Pengestopp from '../components/pengestopp/Pengestopp';
-import {
-    erPreProd,
-    erLokal,
-} from '../utils/miljoUtil';
 
 const texts = {
     introduksjonstekst: 'NAV mottar alle sykmeldinger. Ser du den ikke her? Det betyr at den som har sykmeldt deg ikke sender den digitalt til NAV. Da bruker du papirsykmeldingen i stedet.',
@@ -69,9 +64,7 @@ export class SykmeldingerSide extends Component {
                         return <Feilmelding />;
                     }
                     return (<div>
-                        {erPreProd() || erLokal()
-                            ? <Pengestopp sykmeldinger={sykmeldinger} />
-                            : <TemporaryPengestopp />}
+                        <Pengestopp sykmeldinger={sykmeldinger} />
                         <Speilingvarsel brukernavn={brukernavn} />
                         <div className="speiling">
                             <Brodsmuler brodsmuler={brodsmuler} />
