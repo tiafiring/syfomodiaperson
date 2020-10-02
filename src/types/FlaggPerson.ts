@@ -48,6 +48,6 @@ export interface StatusEndring {
     sykmeldtFnr: SykmeldtFnr,
     status: Status,
     virksomhetNr: VirksomhetNr,
-    opprettet: Date,
+    opprettet: string,
     enhetNr: EnhetNr
 }

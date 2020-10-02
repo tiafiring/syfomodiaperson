@@ -48,13 +48,7 @@ const flaggperson = (state = initialState, action = { type: '', data: [] }) => {
                 henter: false,
                 hentingFeilet: false,
                 hentet: true,
-                data: action.data.map((se: StatusEndring & { opprettet: string }) => (
-                    {
-                        ...se,
-                        opprettet: Date.parse(se.opprettet)
-
-                    }
-                )),
+                data: action.data,
             };
         }
         case HENT_STATUS_FEILET: {

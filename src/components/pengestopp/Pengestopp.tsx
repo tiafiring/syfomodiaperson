@@ -22,8 +22,9 @@ import {
 } from '../../utils/pengestoppUtils';
 
 export const texts = {
-    stansSykepenger: 'Stopp utbetaling',
-    hentingFeiletMessage: 'Vi har problemer med baksystemene. Du kan stoppe utbetalingen, men det vil ikke bli synlig her før vi er tilbake i normal drift',
+    stansSykepenger: 'Stanse sykepenger?',
+    explanation: 'Her sender du beskjed til NAV Arbeid og ytelser om at de må se nærmere på saken. Foreløpig må du også lage notat i Gosys med begrunnelse.',
+    hentingFeiletMessage: 'Vi har problemer med baksystemene. Du kan sende beskjeden, men det vil ikke bli synlig her før vi er tilbake i normal drift',
     sykmeldtNotEligibleError: 'Den sykmeldte behandles ikke i vedtaksløsningen. Du må sende en “Vurder konsekvens for ytelse”-oppgave i Gosys, jf servicerutinene.',
 };
 
@@ -32,7 +33,6 @@ const Wrapper = styled.div`
 `;
 
 interface IPengestoppProps {
-    brukernavn: String,
     sykmeldinger: Sykmelding[],
     flaggperson: FlaggpersonState,
     fnr: string,
@@ -42,7 +42,18 @@ const Alert = styled(AlertStripe)`
   margin-bottom: 1em;
 `
 
-const Pengestopp = ({ brukernavn, sykmeldinger }: IPengestoppProps) => {
+interface KnappWithExplanationProps {
+    handleClick: () => void,
+}
+
+const KnappWithExplanation = ({ handleClick }: KnappWithExplanationProps) => {
+    return (<>
+        <Knapp type="hoved" mini onClick={handleClick}>{texts.stansSykepenger}</Knapp>
+        <p>{texts.explanation}</p>
+    </>)
+}
+
+const Pengestopp = ({ sykmeldinger }: IPengestoppProps) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const flaggperson: FlaggpersonState = useSelector((state: any) => state.flaggperson);
     const [sykmeldtNotEligible, setSykmeldtNotEligible] = useState(false);
@@ -72,12 +83,13 @@ const Pengestopp = ({ brukernavn, sykmeldinger }: IPengestoppProps) => {
         <Wrapper>
             {flaggperson.hentingFeilet && <Alert type="feil">{texts.hentingFeiletMessage}</Alert>}
             {sykmeldtNotEligible && <Alert type="feil">{texts.sykmeldtNotEligibleError}</Alert>}
+
             {pengestopp?.status === Status.STOPP_AUTOMATIKK
                 ? <PengestoppDropdown dato={pengestopp.opprettet} stoppedArbeidsgivere={stoppedArbeidsgivere} />
-                : <Knapp type="fare" onClick={() => {toggleModal(uniqueArbeidsgivereWithSykmeldingLast3Months)}}>{texts.stansSykepenger}</Knapp>
+                : <KnappWithExplanation handleClick={() => {toggleModal(uniqueArbeidsgivereWithSykmeldingLast3Months)}} />
             }
 
-            <PengestoppModal brukernavn={brukernavn} arbeidsgivere={uniqueArbeidsgivereWithSykmeldingLast3Months} isOpen={modalIsOpen} toggle={() => {toggleModal(uniqueArbeidsgivereWithSykmeldingLast3Months)}} />
+            <PengestoppModal arbeidsgivere={uniqueArbeidsgivereWithSykmeldingLast3Months} isOpen={modalIsOpen} toggle={() => {toggleModal(uniqueArbeidsgivereWithSykmeldingLast3Months)}} />
         </Wrapper>
     );
 };

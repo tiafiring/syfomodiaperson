@@ -3,27 +3,27 @@ import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Checkbox, CheckboxGruppe } from 'nav-frontend-skjema';
 import { Element } from 'nav-frontend-typografi';
-import { tilDatoMedUkedagOgManedNavn } from '../../utils/datoUtils';
+import { restdatoTilLesbarDato } from '../../utils/datoUtils';
 import { Arbeidsgiver } from '../../types/FlaggPerson';
 
 const texts = {
-    tittel: 'Automatisk utbetaling av sykepenger er stoppet',
-    stans: 'Stanset: ',
+    tittel: 'Beskjed til NAV Arbeid og ytelser er sendt',
+    sendt: 'Sendt: ',
 };
 
 interface IPengestoppDropdown {
-    dato: Date
+    dato: string
     stoppedArbeidsgivere: Arbeidsgiver[]
 }
 
 const PengestoppDropdown = ({ dato, stoppedArbeidsgivere }: IPengestoppDropdown) => {
     const warning =
-        <AlertStripe type="feil" form="inline">
+        <AlertStripe type="suksess" form="inline">
             <Element>{texts.tittel}</Element>
         </AlertStripe>;
     return (
         <Ekspanderbartpanel tittel={warning}>
-            <p>{texts.stans}<time>{tilDatoMedUkedagOgManedNavn(dato)}</time></p>
+            <p>{texts.sendt}<time>{restdatoTilLesbarDato(dato)}</time></p>
             <CheckboxGruppe>
                 {
                     stoppedArbeidsgivere.map((arbeidsgiver: Arbeidsgiver, index: number) => {
