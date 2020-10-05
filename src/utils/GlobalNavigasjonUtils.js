@@ -35,9 +35,9 @@ const numberOfActiveOppfolgingsplaner = (oppfolgingsplanerReducer) => {
 const numberOfUnprocessedPersonOppgaver = (personOppgaverReducer, type) => {
     return personOppgaverReducer
         && personOppgaverReducer.data
-        && personOppgaverReducer.data.filter((personoppgave) =>{
+        && personOppgaverReducer.data.filter((personoppgave) => {
             return personoppgave.type === type && !personoppgave.behandletTidspunkt;
-        }).length > 0;
+        }).length;
 };
 
 export const numberOfTasks = (menypunkt, motebehovReducer, moterReducer, oppfolgingsplanerReducer, personOppgaverReducer) => {

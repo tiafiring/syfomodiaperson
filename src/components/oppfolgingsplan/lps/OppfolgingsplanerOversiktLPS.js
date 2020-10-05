@@ -55,18 +55,18 @@ const OppfolgingsplanerOversiktLPS = (
         veilederIdent,
     }
 ) => {
-    const pesonOppgave = oppfolgingsplanLPSBistandsbehov.personoppgave;
-    const erPersonOppgaveBehandlet = isPersonOppgaveBehandlet(pesonOppgave);
+    const personOppgave = oppfolgingsplanLPSBistandsbehov.personoppgave;
+    const erPersonOppgaveBehandlet = isPersonOppgaveBehandlet(personOppgave);
     return (
         <LPSPlanPanel>
-            { !erPersonOppgaveBehandlet &&
+            { personOppgave && !erPersonOppgaveBehandlet &&
                 <RedDot />
             }
             <UnderTittelInline className="panel__tittel">{oppfolgingsplanLPSBistandsbehov.virksomhetsnavn}</UnderTittelInline>
             <p>Mottatt: {restdatoTilLesbarDato(oppfolgingsplanLPSBistandsbehov.opprettet)}</p>
-            { erPersonOppgaveBehandlet &&
+            { personOppgave && erPersonOppgaveBehandlet &&
                 <p>
-                    {`Ferdigbehandlet: ${toDatePrettyPrint(pesonOppgave.behandletTidspunkt)} av ${pesonOppgave.behandletVeilederIdent}`}
+                    {`Ferdigbehandlet: ${toDatePrettyPrint(personOppgave.behandletTidspunkt)} av ${personOppgave.behandletVeilederIdent}`}
                 </p>
             }
             <DivMarginBottom>
@@ -75,7 +75,7 @@ const OppfolgingsplanerOversiktLPS = (
             <DivMarginBottom>
                 <ButtonOpenPlan oppfolgingsplanLPS={oppfolgingsplanLPSBistandsbehov} />
             </DivMarginBottom>
-            { !erPersonOppgaveBehandlet &&
+            { personOppgave && !erPersonOppgaveBehandlet &&
                 <BehandleOppfolgingsplanLPS
                     oppfolgingsplanLPS={oppfolgingsplanLPSBistandsbehov}
                     veilederIdent={veilederIdent}

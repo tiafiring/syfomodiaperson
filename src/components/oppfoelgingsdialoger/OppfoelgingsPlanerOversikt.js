@@ -5,7 +5,11 @@ import { Link } from 'react-router';
 import { tilLesbarPeriodeMedArstall } from '@navikt/digisyfo-npm';
 import Alertstripe from 'nav-frontend-alertstriper';
 import Sidetopp from '../Sidetopp';
-import { restdatoTilLesbarDato } from '../../utils/datoUtils';
+import {
+    erIdag,
+    erIkkeIdag,
+    restdatoTilLesbarDato,
+} from '../../utils/datoUtils';
 import { hentVirksomhet } from '../../actions/virksomhet_actions';
 import OppfolgingsplanerOversiktLPS from '../oppfolgingsplan/lps/OppfolgingsplanerOversiktLPS';
 
@@ -44,11 +48,18 @@ const OppfoelgingsPlanerOversikt = (
 ) => {
     const dispatch = useDispatch();
 
-    const oppfolgingsplanerLPSBistandsbehovActive = oppfolgingsplanerLPS.filter((opppfolgingsplanLPS) => {
-        return opppfolgingsplanLPS.personoppgave && !opppfolgingsplanLPS.personoppgave.behandletTidspunkt;
+    const oppfolgingsplanerLPSActive = oppfolgingsplanerLPS.filter((opppfolgingsplanLPS) => {
+        if (opppfolgingsplanLPS.personoppgave) {
+            return !opppfolgingsplanLPS.personoppgave.behandletTidspunkt;
+        }
+        return erIdag(opppfolgingsplanLPS.opprettet);
     });
-    const oppfolgingsplanerLPSBistandsbehovProcessed = oppfolgingsplanerLPS.filter((opppfolgingsplanLPS) => {
-        return opppfolgingsplanLPS.personoppgave && opppfolgingsplanLPS.personoppgave.behandletTidspunkt;
+
+    const oppfolgingsplanerLPSProcessed = oppfolgingsplanerLPS.filter((opppfolgingsplanLPS) => {
+        if (opppfolgingsplanLPS.personoppgave) {
+            return opppfolgingsplanLPS.personoppgave.behandletTidspunkt;
+        }
+        return erIkkeIdag(opppfolgingsplanLPS.opprettet);
     });
 
     useEffect(() => {
@@ -81,12 +92,12 @@ const OppfoelgingsPlanerOversikt = (
             <div className="blokk--l">
                 <h2 className="typo-systemtittel blokk--xs">{texts.titles.relevantOppfolgingsplaner}</h2>
                 {
-                    aktiveDialoger.length === 0 && oppfolgingsplanerLPSBistandsbehovActive.length === 0 && <Alertstripe type="info">
+                    aktiveDialoger.length === 0 && oppfolgingsplanerLPSActive.length === 0 && <Alertstripe type="info">
                         <p>{texts.alertMessages.noRelevantOppfolgingsplaner}</p>
                     </Alertstripe>
                 }
                 {
-                    oppfolgingsplanerLPSBistandsbehovActive.map((planLPS, index) => {
+                    oppfolgingsplanerLPSActive.map((planLPS, index) => {
                         return (
                             <OppfolgingsplanerOversiktLPS
                                 key={index}
@@ -112,7 +123,7 @@ const OppfoelgingsPlanerOversikt = (
 
             <h2 className="typo-systemtittel blokk--xs">{texts.titles.inactiveOppfolgingsplaner}</h2>
             {
-                inaktiveDialoger.length === 0 &&
+                inaktiveDialoger.length === 0 && oppfolgingsplanerLPSActive.length === 0 &&
                 <Alertstripe type="info">
                     <p>{texts.alertMessages.noInactiveOppfolgingsplaner}</p>
                 </Alertstripe>
@@ -129,7 +140,7 @@ const OppfoelgingsPlanerOversikt = (
                 })
             }
             {
-                oppfolgingsplanerLPSBistandsbehovProcessed.map((planLPS, index) => {
+                oppfolgingsplanerLPSProcessed.map((planLPS, index) => {
                     return (
                         <OppfolgingsplanerOversiktLPS
                             key={index}
