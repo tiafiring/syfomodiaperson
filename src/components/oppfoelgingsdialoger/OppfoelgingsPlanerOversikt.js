@@ -48,19 +48,28 @@ const OppfoelgingsPlanerOversikt = (
 ) => {
     const dispatch = useDispatch();
 
-    const oppfolgingsplanerLPSActive = oppfolgingsplanerLPS.filter((opppfolgingsplanLPS) => {
-        if (opppfolgingsplanLPS.personoppgave) {
-            return !opppfolgingsplanLPS.personoppgave.behandletTidspunkt;
-        }
-        return erIdag(opppfolgingsplanLPS.opprettet);
-    });
+    const oppfolgingsplanerLPSUnprocessed = oppfolgingsplanerLPS
+        .filter((oppfolgingsplanLPS) => {
+            if (oppfolgingsplanLPS.personoppgave) {
+                return !oppfolgingsplanLPS.personoppgave.behandletTidspunkt;
+            }
+            return erIdag(oppfolgingsplanLPS.opprettet);
+        })
+        .sort((a, b) => {
+            return new Date(a.opprettet) - new Date(b.opprettet);
+        });
 
-    const oppfolgingsplanerLPSProcessed = oppfolgingsplanerLPS.filter((opppfolgingsplanLPS) => {
-        if (opppfolgingsplanLPS.personoppgave) {
-            return opppfolgingsplanLPS.personoppgave.behandletTidspunkt;
-        }
-        return erIkkeIdag(opppfolgingsplanLPS.opprettet);
-    });
+    const oppfolgingsplanerLPSProcessed = oppfolgingsplanerLPS
+        .filter((oppfolgingsplanLPS) => {
+            if (oppfolgingsplanLPS.personoppgave) {
+                return oppfolgingsplanLPS.personoppgave.behandletTidspunkt;
+            }
+            return erIkkeIdag(oppfolgingsplanLPS.opprettet);
+        })
+        .sort((a, b) => {
+            return new Date(a.opprettet) - new Date(b.opprettet);
+        });
+
 
     useEffect(() => {
         const virksomhetsnummerSet = new Set();
@@ -92,12 +101,12 @@ const OppfoelgingsPlanerOversikt = (
             <div className="blokk--l">
                 <h2 className="typo-systemtittel blokk--xs">{texts.titles.relevantOppfolgingsplaner}</h2>
                 {
-                    aktiveDialoger.length === 0 && oppfolgingsplanerLPSActive.length === 0 && <Alertstripe type="info">
+                    aktiveDialoger.length === 0 && oppfolgingsplanerLPSUnprocessed.length === 0 && <Alertstripe type="info">
                         <p>{texts.alertMessages.noRelevantOppfolgingsplaner}</p>
                     </Alertstripe>
                 }
                 {
-                    oppfolgingsplanerLPSActive.map((planLPS, index) => {
+                    oppfolgingsplanerLPSUnprocessed.map((planLPS, index) => {
                         return (
                             <OppfolgingsplanerOversiktLPS
                                 key={index}
@@ -123,7 +132,7 @@ const OppfoelgingsPlanerOversikt = (
 
             <h2 className="typo-systemtittel blokk--xs">{texts.titles.inactiveOppfolgingsplaner}</h2>
             {
-                inaktiveDialoger.length === 0 && oppfolgingsplanerLPSActive.length === 0 &&
+                inaktiveDialoger.length === 0 && oppfolgingsplanerLPSProcessed.length === 0 &&
                 <Alertstripe type="info">
                     <p>{texts.alertMessages.noInactiveOppfolgingsplaner}</p>
                 </Alertstripe>

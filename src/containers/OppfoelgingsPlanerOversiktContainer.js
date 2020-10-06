@@ -114,12 +114,14 @@ export function mapStateToProps(state, ownProps) {
     const personOppgaveList = state.personoppgaver.data;
 
     const aktiveDialoger = activeOppfolgingsplaner(oppfoelgingsdialoger);
+
     const inaktiveDialoger = [];
     oppfoelgingsdialoger.forEach((dialog) => {
         if (!aktiveDialoger.includes(dialog)) {
             inaktiveDialoger.push(dialog);
         }
     });
+
     return {
         brukernavn: state.navbruker.data.navn,
         fnr: ownProps.params.fnr,

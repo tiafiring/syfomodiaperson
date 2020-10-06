@@ -3,6 +3,7 @@ import GlobalNavigasjon from '../components/GlobalNavigasjon';
 import * as motebehovActions from '../actions/motebehov_actions';
 import * as moterActions from '../actions/moter_actions';
 import * as oppfoelgingsdialogerActions from '../actions/oppfoelgingsdialoger_actions';
+import * as oppfolgingsplanerLPSActions from '../actions/oppfolgingsplanerlps_actions';
 import * as personOppgaverActions from '../actions/personoppgave_actions';
 
 export const mapStateToProps = (state, ownProps) => {
@@ -13,6 +14,7 @@ export const mapStateToProps = (state, ownProps) => {
         moterReducer: state.moter,
         oppfolgingsplanerReducer: state.oppfoelgingsdialoger,
         personOppgaverReducer: state.personoppgaver,
+        oppfolgingsplanerLPSReducer: state.oppfolgingsplanerlps,
     };
 };
 
@@ -23,7 +25,8 @@ const GlobalNavigasjonContainer = connect(
         motebehovActions,
         moterActions,
         oppfoelgingsdialogerActions,
-        personOppgaverActions
+        personOppgaverActions,
+        oppfolgingsplanerLPSActions
     ))(GlobalNavigasjon);
 
 export default GlobalNavigasjonContainer;
