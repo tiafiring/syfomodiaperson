@@ -12,15 +12,6 @@ const texts = {
     buttonOpenPlan: 'Åpne oppfølgingsplanen(pdf)',
 };
 
-const RedDot = styled.span`
-  height: 1em;
-  width: 1em;
-  background-color: #C30000;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 0.5em;
-`;
-
 const UnderTittelInline = styled.h3`
   display: inline-block;
 `;
@@ -59,9 +50,6 @@ const OppfolgingsplanerOversiktLPS = (
     const erPersonOppgaveBehandlet = isPersonOppgaveBehandlet(personOppgave);
     return (
         <LPSPlanPanel>
-            { personOppgave && !erPersonOppgaveBehandlet &&
-                <RedDot />
-            }
             <UnderTittelInline className="panel__tittel">{oppfolgingsplanLPSBistandsbehov.virksomhetsnavn}</UnderTittelInline>
             <p>Mottatt: {restdatoTilLesbarDato(oppfolgingsplanLPSBistandsbehov.opprettet)}</p>
             { personOppgave && erPersonOppgaveBehandlet &&
