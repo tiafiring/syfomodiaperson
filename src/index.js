@@ -22,7 +22,6 @@ import arbeidsgiverEpostinnhold from './reducers/arbeidsgiverEpostinnhold';
 import modiacontext from './reducers/modiacontext';
 import historikk from './reducers/historikk';
 import ledetekster from './reducers/ledetekster';
-import sykepengesoknader from './reducers/sykepengesoknader';
 import oppfoelgingsdialoger from './reducers/oppfoelgingsdialoger';
 import oppfolgingsplanerlps from './reducers/oppfolgingsplanerlps';
 import dokumentinfo from './reducers/dokumentinfo';
@@ -66,7 +65,6 @@ const rootReducer = combineReducers({
     arbeidsgiverEpostinnhold,
     oppfoelgingsdialoger,
     oppfolgingsplanerlps,
-    sykepengesoknader,
     enhet,
     tidslinjer,
     sykmeldinger,

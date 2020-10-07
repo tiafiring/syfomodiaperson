@@ -4,14 +4,10 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { Container, mapStateToProps } from '../../src/containers/SykepengesoknadContainer';
 import soknader from '../../src/reducers/soknader';
-import sykepengesoknader from '../../src/reducers/sykepengesoknader';
 import ledetekster from '../../src/reducers/ledetekster';
 import sykmeldinger from '../../src/reducers/sykmeldinger';
 import { soknaderHentet } from '../../src/actions/soknader_actions';
-import mockSykepengesoknader from '../mockdata/mockSykepengesoknader';
 import mockSoknader from '../mockdata/mockSoknader';
-import { sykepengesoknaderHentet } from '../../src/actions/sykepengesoknader_actions';
-import SykepengesoknadArbeidstaker from '../../src/components/soknad-arbeidstaker/SykepengesoknadArbeidstaker';
 import Feilmelding from '../../src/components/Feilmelding';
 import SykepengesoknadSelvstendig from '../../src/components/soknad-selvstendig/SykepengesoknadSelvstendig';
 import SykepengesoknadUtland from '../../src/components/soknad-utland/SykepengesoknadUtland';
@@ -23,7 +19,6 @@ describe('SykepengesoknadContainer', () => {
     let ownProps;
     let settOwnPropsId;
     let hentSoknader;
-    let hentSykepengesoknader;
     let hentSykmeldinger;
     const ARBEIDSTAKERSOKNAD_ID = 'b9732cc7-6101-446e-a1ef-ec25a425b4fb';
     const NAERINGSDRIVENDESOKNAD_ID = 'faadf7c1-3aac-4758-8673-e9cee1316a3c';
@@ -31,16 +26,13 @@ describe('SykepengesoknadContainer', () => {
 
     beforeEach(() => {
         hentSoknader = sinon.spy();
-        hentSykepengesoknader = sinon.spy();
         hentSykmeldinger = sinon.spy();
         actions = {
             hentSoknader,
-            hentSykepengesoknader,
             hentSykmeldinger,
         };
         state = {
             soknader: soknader(soknader(), soknaderHentet(mockSoknader)),
-            sykepengesoknader: sykepengesoknader(sykepengesoknader(), sykepengesoknaderHentet(mockSykepengesoknader)),
             sykmeldinger: sykmeldinger(sykmeldinger(), sykmeldingerHentet([])),
             ledetekster: ledetekster(),
             tilgang: {
@@ -65,12 +57,6 @@ describe('SykepengesoknadContainer', () => {
     });
 
     describe('Visning av sykepengesøknad for arbeidstakere', () => {
-        it('Skal vise SykepengesoknadArbeidstaker', () => {
-            settOwnPropsId(ARBEIDSTAKERSOKNAD_ID);
-            const component = shallow(<Container {...mapStateToProps(state, ownProps)} actions={actions} />);
-            expect(component.find(SykepengesoknadArbeidstaker).length).to.equal(1);
-        });
-
         it('Skal vise SendtSoknadArbeidstakerNy', () => {
             settOwnPropsId(OPPHOLD_UTLAND_ID);
             const component = shallow(<Container {...mapStateToProps(state, ownProps)} actions={actions} />);
@@ -79,47 +65,12 @@ describe('SykepengesoknadContainer', () => {
     });
 
     describe('Håndtering av feil', () => {
-        it('Skal vise feilmelding hvis søknaden er en arbeidstaker-søknad og henting av arbeidstaker-søknader feiler', () => {
-            settOwnPropsId(ARBEIDSTAKERSOKNAD_ID);
-            state.sykepengesoknader.hentingFeilet = true;
-            state.sykepengesoknader.data = [];
-            const component = shallow(<Container {...mapStateToProps(state, ownProps)} actions={actions} />);
-            expect(component.find(Feilmelding)).to.have.length(1);
-        });
-
-        it('Skal ikke vise feilmelding hvis søknaden er en arbeidstaker-søknad og henting av selvstendig-søknader feiler', () => {
-            settOwnPropsId(ARBEIDSTAKERSOKNAD_ID);
-            state.soknader.hentingFeilet = true;
-            state.soknader.data = [];
-            const component = shallow(<Container {...mapStateToProps(state, ownProps)} actions={actions} />);
-            expect(component.find(SykepengesoknadArbeidstaker).length).to.equal(1);
-            expect(component.find(Feilmelding).length).to.equal(0);
-        });
-
         it('Skal vise feilmelding hvis søknaden er en selvstendig-søknad og henting av selvstendig-søknader feiler', () => {
             settOwnPropsId(NAERINGSDRIVENDESOKNAD_ID);
             state.soknader.hentingFeilet = true;
             state.soknader.data = [];
             const component = shallow(<Container {...mapStateToProps(state, ownProps)} actions={actions} />);
             expect(component.find(Feilmelding)).to.have.length(1);
-        });
-
-        it('Skal ikke vise feilmelding hvis søknaden er en selvstendig-søknad og henting av arbeidstaker-søknader feiler', () => {
-            settOwnPropsId(NAERINGSDRIVENDESOKNAD_ID);
-            state.sykepengesoknader.hentingFeilet = true;
-            state.sykepengesoknader.data = [];
-            const component = shallow(<Container {...mapStateToProps(state, ownProps)} actions={actions} />);
-            expect(component.find(SykepengesoknadSelvstendig).length).to.equal(1);
-            expect(component.find(Feilmelding).length).to.equal(0);
-        });
-
-        it('Skal vise feilmelding hvis veileder ikke har tilgang', () => {
-            settOwnPropsId(NAERINGSDRIVENDESOKNAD_ID);
-            state.tilgang.data = {
-                harTilgang: false,
-            };
-            const component = shallow(<Container {...mapStateToProps(state, ownProps)} actions={actions} />);
-            expect(component.find(Feilmelding).length).to.equal(1);
         });
     });
 });
