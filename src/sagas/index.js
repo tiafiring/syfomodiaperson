@@ -12,7 +12,6 @@ import sykmeldingerSagas from './sykmeldingerSagas';
 import oppfoelgingsdialogerSagas from './oppfoelgingsdialogerSagas';
 import oppfolgingsplanerLPSSagas from './oppfolgingsplanerLPSSagas';
 import modiacontextSagas from './modiacontextSagas';
-import sykepengesoknaderSagas from './sykepengesoknaderSagas';
 import historikkSagas from './historikkSagas';
 import behandlendeEnhetSagas from './behandlendeEnhetSagas';
 import dokumentInfoSagas from './dokumentInfoSagas';
@@ -41,7 +40,6 @@ export default function* rootSaga() {
         sykmeldingerSagas(),
         oppfoelgingsdialogerSagas(),
         oppfolgingsplanerLPSSagas(),
-        sykepengesoknaderSagas(),
         historikkSagas(),
         behandlendeEnhetSagas(),
         dokumentInfoSagas(),

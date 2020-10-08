@@ -7,18 +7,13 @@ import {
     sykmelding as sykmeldingPt,
 } from '@navikt/digisyfo-npm';
 import Side from '../sider/Side';
-import * as sykepengesoknaderActions from '../actions/sykepengesoknader_actions';
 import * as soknaderActions from '../actions/soknader_actions';
 import * as sykmeldingerActions from '../actions/sykmeldinger_actions';
 import Feilmelding from '../components/Feilmelding';
 import AppSpinner from '../components/AppSpinner';
 import { SYKEPENGESOKNADER } from '../enums/menypunkter';
-import {
-    sykepengesoknad as sykepengesoknadPt,
-    soknad as soknadPt,
-} from '../propTypes';
+import { soknad as soknadPt } from '../propTypes';
 import { hentBegrunnelseTekst } from '../utils/tilgangUtils';
-import SykepengesoknadArbeidstaker from '../components/soknad-arbeidstaker/SykepengesoknadArbeidstaker';
 import {
     ARBEIDSTAKERE,
     OPPHOLD_UTLAND,
@@ -40,7 +35,6 @@ import AvbruttSoknadArbeidtakerNy from '../components/soknad-arbeidstaker-ny/Avb
 import SykepengesoknadBehandlingsdager from '../components/soknad-behandlingsdager/SykepengesoknadBehandlingsdager';
 import {
     harForsoktHentetSoknader,
-    harForsoktHentetSykepengesoknader,
     harForsoktHentetSykmeldinger,
 } from '../utils/reducerUtils';
 
@@ -56,7 +50,6 @@ export class Container extends Component {
         } = this.props;
         actions.hentSykmeldinger(fnr);
         actions.hentSoknader(fnr);
-        actions.hentSykepengesoknader(fnr);
     }
 
     render() {
@@ -65,7 +58,6 @@ export class Container extends Component {
             henter,
             hentingFeilet,
             tilgang,
-            sykepengesoknad,
             soknad,
             fnr,
             sykmelding,
@@ -93,17 +85,6 @@ export class Container extends Component {
                         }
                         if (hentingFeilet) {
                             return <Feilmelding />;
-                        }
-                        if (sykepengesoknad) {
-                            return (
-                                <SykepengesoknadArbeidstaker
-                                    fnr={fnr}
-                                    brodsmuler={brodsmuler}
-                                    brukernavn={brukernavn}
-                                    sykmelding={sykmelding}
-                                    sykepengesoknad={sykepengesoknad}
-                                />
-                            );
                         }
                         if (soknad && (
                             soknad.soknadstype === SELVSTENDIGE_OG_FRILANSERE ||
@@ -166,7 +147,6 @@ export class Container extends Component {
 }
 
 Container.propTypes = {
-    sykepengesoknad: sykepengesoknadPt.isRequired,
     fnr: PropTypes.string,
     brukernavn: PropTypes.string,
     actions: PropTypes.object,
@@ -179,7 +159,7 @@ Container.propTypes = {
 };
 
 export function mapDispatchToProps(dispatch) {
-    const actions = Object.assign({}, sykepengesoknaderActions, soknaderActions, sykmeldingerActions);
+    const actions = Object.assign({}, soknaderActions, sykmeldingerActions);
     return {
         actions: bindActionCreators(actions, dispatch),
     };
@@ -187,23 +167,17 @@ export function mapDispatchToProps(dispatch) {
 
 export function mapStateToProps(state, ownProps) {
     const harForsoktHentetAlt = harForsoktHentetSykmeldinger(state.sykmeldinger)
-    && harForsoktHentetSoknader(state.soknader)
-    && harForsoktHentetSykepengesoknader(state.sykepengesoknader);
+    && harForsoktHentetSoknader(state.soknader);
     const henter = !harForsoktHentetAlt
         || state.ledetekster.henter
         || state.tilgang.henter;
     const hentingFeilet = state.ledetekster.hentingFeilet
         || state.tilgang.hentingFeilet;
-    const sykepengesoknad = state.sykepengesoknader.data.find((s) => {
-        return s.id === ownProps.params.sykepengesoknadId;
-    });
     const soknad = state.soknader.data.find((s) => {
         return s.id === ownProps.params.sykepengesoknadId;
     });
     const sykmelding = state.sykmeldinger.data.find((sykmld) => {
-        return sykepengesoknad
-            ? sykmld.id === sykepengesoknad.sykmeldingId
-            : soknad
+        return soknad
                 ? sykmld.id === soknad.sykmeldingId
                 : false;
     });
@@ -215,7 +189,6 @@ export function mapStateToProps(state, ownProps) {
         hentingFeilet,
         ledetekster: state.ledetekster.data,
         tilgang: state.tilgang.data,
-        sykepengesoknad,
         soknad,
         sykmelding,
     };

@@ -5,7 +5,7 @@ import Sidetopp from '../Sidetopp';
 import SoknadTeasere from './SoknaderTeasere';
 import PlanlagteTeasere from './PlanlagteTeasere';
 import { sorterEtterOpprettetDato, sorterEtterPerioder } from '../../utils/sykepengesoknadUtils';
-import { soknad as soknadPt, sykepengesoknad as sykepengesoknadPt } from '../../propTypes';
+import { soknad as soknadPt } from '../../propTypes';
 import { OPPHOLD_UTLAND } from '../../enums/soknadtyper';
 
 const texts = {
@@ -17,9 +17,8 @@ const texts = {
 
 const { SENDT, TIL_SENDING, UTGAATT, NY, UTKAST_TIL_KORRIGERING, FREMTIDIG, AVBRUTT } = sykepengesoknadstatuser;
 
-const Soknader = ({ fnr, sykepengesoknader = [], soknader = [] }) => {
+const Soknader = ({ fnr, soknader = [] }) => {
     const alleSoknader = [
-        ...sykepengesoknader,
         ...soknader,
     ];
 
@@ -83,7 +82,6 @@ const Soknader = ({ fnr, sykepengesoknader = [], soknader = [] }) => {
 };
 
 Soknader.propTypes = {
-    sykepengesoknader: PropTypes.arrayOf(sykepengesoknadPt),
     soknader: PropTypes.arrayOf(soknadPt),
     fnr: PropTypes.string,
 };

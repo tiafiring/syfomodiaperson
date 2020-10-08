@@ -2,11 +2,6 @@ const mockData = require('./mockData');
 const enums = require('./mockDataEnums');
 
 function mockForLokal(server) {
-    server.get('/modiasyforest/api/internad/sykepengesoknader', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[enums.SYKEPENGESOKNADER]));
-    });
-
     server.get('/modiasyforest/api/internad/sykmeldinger', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[enums.SYKMELDINGER]));

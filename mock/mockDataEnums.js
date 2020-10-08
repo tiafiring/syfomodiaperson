@@ -12,7 +12,6 @@ const MOTEBEHOV = 'motebehov';
 const MOTER = 'moter';
 const OPPFOLGINGSTILFELLEPERIODER = 'oppfolgingstilfelleperioder';
 const SOKNADER = 'soknader';
-const SYKEPENGESOKNADER = 'sykepengesoknader';
 const SYKMELDINGER = 'sykmeldinger';
 const TEKSTER = 'tekster';
 const TILGANGTILBRUKER = 'tilgangtilbruker';
@@ -34,7 +33,6 @@ module.exports = {
     MOTER,
     OPPFOLGINGSTILFELLEPERIODER,
     SOKNADER,
-    SYKEPENGESOKNADER,
     SYKMELDINGER,
     TEKSTER,
     TILGANGTILBRUKER,

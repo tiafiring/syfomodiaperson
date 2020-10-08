@@ -41,7 +41,6 @@ export const mapStateToProps = (state, ownProps) => {
     const sykepengesoknadId = ownProps.sykepengesoknadId;
     const fnr = ownProps.fnr;
     const sykepengesoknader = [
-        ...state.sykepengesoknader.data,
         ...state.soknader.data,
     ];
     let sykepengesoknad = sykepengesoknader.filter((s) => {
