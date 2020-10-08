@@ -6,7 +6,10 @@ import {
     mockValidActiveOppfolgingsplan,
     mockValidActiveOppfolgingsplanWithDifferentVirksomhet,
 } from '../mockdata/mockOppfolgingsplaner';
-import { activeOppfolgingsplaner } from '../../src/utils/oppfolgingsplanerUtils';
+import {
+    activeLPSOppfolgingsplaner,
+    activeOppfolgingsplaner
+} from '../../src/utils/oppfolgingsplanerUtils';
 
 describe('oppfolgingsplanerUtils', () => {
     let clock;
@@ -65,7 +68,7 @@ describe('oppfolgingsplanerUtils', () => {
             expect(actualPlaner[1]).to.deep.equal(planer[1]);
         });
 
-        it('Gives the plan shared lates, if more than one from a virksomhet', () => {
+        it('Gives the plan shared latest, if more than one from a virksomhet', () => {
             const planer = [
                 mockAvbruttActiveOppfolgingsplan,
                 mockValidActiveOppfolgingsplan,
@@ -77,6 +80,34 @@ describe('oppfolgingsplanerUtils', () => {
 
             expect(actualPlaner.length).to.be.equal(1);
             expect(actualPlaner[0]).to.deep.equal(expectedPlan);
+        });
+    });
+
+    describe('activeLPSOppfolgingsplaner', () => {
+        it('Gives the plan created last, if more than one from a virksomhet', () => {
+            const planOne = {
+                uuid: '5f1e2629-062b-442d-ae1f-3b08e9574cd2',
+                fnr: '11011011011',
+                virksomhetsnummer: '110110110',
+                opprettet:  new Date(),
+            };
+
+            const planTwo = {
+                uuid: '5f1e2629-062b-442d-ae1f-3b08e9574cd2',
+                fnr: '11011011011',
+                virksomhetsnummer: '110110110',
+                opprettet: new Date - 3600000 * 24,
+            };
+
+            const planer = [
+                planOne,
+                planTwo
+            ];
+
+            const aktiveLPSPlaner = activeLPSOppfolgingsplaner(planer);
+
+            expect(aktiveLPSPlaner.length).to.be.equal(1);
+            expect(aktiveLPSPlaner[0]).to.deep.equal(planOne);
         });
     });
 });

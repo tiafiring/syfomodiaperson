@@ -1,6 +1,8 @@
 import { expect } from 'chai';
 import {
     dagerMellomDatoer,
+    erIdag,
+    erIkkeIdag,
     restdatoTildato,
     restdatoTilLesbarDato,
     tilDatoMedUkedagOgManedNavn,
@@ -60,6 +62,27 @@ describe('datoUtils', () => {
             const restDatoTom = new Date('2019-03-15');
             const antallDager = dagerMellomDatoer(restDatoFom, restDatoTom);
             expect(antallDager).to.equal(4);
+        });
+    });
+    describe('erIdag', () => {
+        it('Skal returnere true om en dato er i dag', () => {
+            const dato = new Date();
+            expect(erIdag(dato)).to.equal(true);
+        });
+        it('Skal returnere false om en dato ikke er i dag', () => {
+            const dato = new Date('2019-01-01');
+            expect(erIdag(dato)).to.equal(false);
+        });
+    });
+
+    describe('erIkkeIdag', () => {
+        it('Skal returnere true om en dato ikke er i dag', () => {
+            const dato = new Date('2019-01-01');
+            expect(erIkkeIdag(dato)).to.equal(true);
+        });
+        it('Skal returnere false om en dato er i dag', () => {
+            const dato = new Date();
+            expect(erIkkeIdag(dato)).to.equal(false);
         });
     });
 });

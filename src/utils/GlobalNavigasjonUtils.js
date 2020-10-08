@@ -1,6 +1,9 @@
 import * as menypunkter from '../enums/menypunkter';
 import { harUbehandletMotebehov } from './motebehovUtils';
-import { activeOppfolgingsplaner } from './oppfolgingsplanerUtils';
+import {
+    activeLPSOppfolgingsplaner,
+    activeOppfolgingsplaner
+} from './oppfolgingsplanerUtils';
 import { PersonOppgaveType } from '../reducers/personoppgaver';
 
 export const isUnfinishedMotebehovTask = (motebehovReducer) => {
@@ -32,20 +35,28 @@ const numberOfActiveOppfolgingsplaner = (oppfolgingsplanerReducer) => {
         && activeOppfolgingsplaner(oppfolgingsplanerReducer.data).length;
 };
 
+const numberOfActiveLPSOppfolgingsplaner = (oppfolgingsplanerLPSReducer) => {
+    return oppfolgingsplanerLPSReducer
+        && oppfolgingsplanerLPSReducer.data
+        && activeLPSOppfolgingsplaner(oppfolgingsplanerLPSReducer.data).length;
+};
+
 const numberOfUnprocessedPersonOppgaver = (personOppgaverReducer, type) => {
     return personOppgaverReducer
         && personOppgaverReducer.data
-        && personOppgaverReducer.data.filter((personoppgave) =>{
+        && personOppgaverReducer.data.filter((personoppgave) => {
             return personoppgave.type === type && !personoppgave.behandletTidspunkt;
-        }).length > 0;
+        }).length;
 };
 
-export const numberOfTasks = (menypunkt, motebehovReducer, moterReducer, oppfolgingsplanerReducer, personOppgaverReducer) => {
+export const numberOfTasks = (menypunkt, motebehovReducer, moterReducer, oppfolgingsplanerReducer, personOppgaverReducer, oppfolgingsplanerLPSReducer) => {
     switch (menypunkt) {
         case menypunkter.MOETEPLANLEGGER:
             return moteplanleggerTasks(motebehovReducer, moterReducer);
         case menypunkter.OPPFOELGINGSPLANER:
-            return numberOfActiveOppfolgingsplaner(oppfolgingsplanerReducer) + numberOfUnprocessedPersonOppgaver(personOppgaverReducer, PersonOppgaveType.OPPFOLGINGSPLANLPS);
+            return numberOfActiveOppfolgingsplaner(oppfolgingsplanerReducer)
+                + numberOfActiveLPSOppfolgingsplaner(oppfolgingsplanerLPSReducer)
+                + numberOfUnprocessedPersonOppgaver(personOppgaverReducer, PersonOppgaveType.OPPFOLGINGSPLANLPS);
         default:
             return 0;
     }

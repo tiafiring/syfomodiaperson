@@ -109,6 +109,18 @@ export const dagerMellomDatoer = (startDato, sluttDato) => {
     return Math.round(Math.abs((sluttDato.getTime() - startDato.getTime()) / (ANTALL_MS_DAG)));
 };
 
+export const erIdag = (dato) => {
+    const idag = new Date();
+    dato = new Date(dato);
+    return dato.getDate() === idag.getDate()
+        && dato.getMonth() === idag.getMonth()
+        && dato.getFullYear() === idag.getFullYear();
+};
+
+export const erIkkeIdag = (dato) => {
+    return !erIdag(dato);
+};
+
 export const toDate = (dato) => {
     if (typeof dato === 'undefined' || dato === null) {
         return null;

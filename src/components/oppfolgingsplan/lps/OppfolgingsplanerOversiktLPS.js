@@ -12,15 +12,6 @@ const texts = {
     buttonOpenPlan: 'Åpne oppfølgingsplanen(pdf)',
 };
 
-const RedDot = styled.span`
-  height: 1em;
-  width: 1em;
-  background-color: #C30000;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 0.5em;
-`;
-
 const UnderTittelInline = styled.h3`
   display: inline-block;
 `;
@@ -55,18 +46,15 @@ const OppfolgingsplanerOversiktLPS = (
         veilederIdent,
     }
 ) => {
-    const pesonOppgave = oppfolgingsplanLPSBistandsbehov.personoppgave;
-    const erPersonOppgaveBehandlet = isPersonOppgaveBehandlet(pesonOppgave);
+    const personOppgave = oppfolgingsplanLPSBistandsbehov.personoppgave;
+    const erPersonOppgaveBehandlet = isPersonOppgaveBehandlet(personOppgave);
     return (
         <LPSPlanPanel>
-            { !erPersonOppgaveBehandlet &&
-                <RedDot />
-            }
             <UnderTittelInline className="panel__tittel">{oppfolgingsplanLPSBistandsbehov.virksomhetsnavn}</UnderTittelInline>
             <p>Mottatt: {restdatoTilLesbarDato(oppfolgingsplanLPSBistandsbehov.opprettet)}</p>
-            { erPersonOppgaveBehandlet &&
+            { personOppgave && erPersonOppgaveBehandlet &&
                 <p>
-                    {`Ferdigbehandlet: ${toDatePrettyPrint(pesonOppgave.behandletTidspunkt)} av ${pesonOppgave.behandletVeilederIdent}`}
+                    {`Ferdigbehandlet: ${toDatePrettyPrint(personOppgave.behandletTidspunkt)} av ${personOppgave.behandletVeilederIdent}`}
                 </p>
             }
             <DivMarginBottom>
@@ -75,7 +63,7 @@ const OppfolgingsplanerOversiktLPS = (
             <DivMarginBottom>
                 <ButtonOpenPlan oppfolgingsplanLPS={oppfolgingsplanLPSBistandsbehov} />
             </DivMarginBottom>
-            { !erPersonOppgaveBehandlet &&
+            { personOppgave && !erPersonOppgaveBehandlet &&
                 <BehandleOppfolgingsplanLPS
                     oppfolgingsplanLPS={oppfolgingsplanLPSBistandsbehov}
                     veilederIdent={veilederIdent}

@@ -101,7 +101,7 @@ class GlobalNavigasjon extends Component {
     }
 
     render() {
-        const { fnr, aktivtMenypunkt, motebehovReducer, moterReducer, oppfolgingsplanerReducer, personOppgaverReducer } = this.props;
+        const { fnr, aktivtMenypunkt, motebehovReducer, moterReducer, oppfolgingsplanerReducer, personOppgaverReducer, oppfolgingsplanerLPSReducer } = this.props;
         this.menypunkter = [historikkMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, oppfoelgingsplanMenypunkt, motemodulMenypunkt];
 
         return (<ul aria-label="Navigasjon" className="navigasjon">
@@ -110,7 +110,7 @@ class GlobalNavigasjon extends Component {
                     const className = cn('navigasjonspanel', {
                         'navigasjonspanel--aktiv': menypunkt === aktivtMenypunkt,
                     });
-                    const tasks = numberOfTasks(menypunkt, motebehovReducer, moterReducer, oppfolgingsplanerReducer, personOppgaverReducer);
+                    const tasks = numberOfTasks(menypunkt, motebehovReducer, moterReducer, oppfolgingsplanerReducer, personOppgaverReducer, oppfolgingsplanerLPSReducer);
                     return (<li key={index} className="navigasjon__element">
                         <a
                             ref={this.getRef(index)}
@@ -149,6 +149,7 @@ GlobalNavigasjon.propTypes = {
     hentMoter: PropTypes.func,
     oppfolgingsplanerReducer: PropTypes.object,
     personOppgaverReducer: PropTypes.object,
+    oppfolgingsplanerLPSReducer: PropTypes.object,
     hentOppfoelgingsdialoger: PropTypes.func,
     hentPersonOppgaver: PropTypes.func,
 };

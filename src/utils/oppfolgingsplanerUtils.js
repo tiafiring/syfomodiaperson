@@ -1,6 +1,14 @@
+import {erIdag} from './datoUtils';
+
 const oppfolgingsplanerValidNow = (oppfolgingsplaner) => {
     return oppfolgingsplaner.filter((plan) => {
         return new Date(plan.godkjentPlan.gyldighetstidspunkt.tom) > new Date() && plan.godkjentPlan.deltMedNAV;
+    });
+};
+
+const oppfolgingsplanerLPSOpprettetIdag = (oppfolgingsplaner) => {
+    return oppfolgingsplaner.filter((plan) => {
+        return erIdag(plan.opprettet) && !plan.personoppgave;
     });
 };
 
@@ -12,7 +20,7 @@ const planerSortedDescendingByDeltMedNAVTidspunkt = (oppfolgingsplaner) => {
 
 const virksomheterWithPlan = (oppfolgingsplaner) => {
     const uniqueVirksomheter = new Set(oppfolgingsplaner.map((plan) => {
-        return plan.virksomhet.virksomhetsnummer;
+        return plan.virksomhet ? plan.virksomhet.virksomhetsnummer : plan.virksomhetsnummer;
     }));
 
     return [...uniqueVirksomheter];
@@ -23,7 +31,7 @@ const firstPlanForEachVirksomhet = (oppfolgingsplaner, virksomheter) => {
 
     virksomheter.forEach((nummer) => {
         const newestPlanForVirksomhetsnummer = oppfolgingsplaner.find((plan) => {
-            return plan.virksomhet.virksomhetsnummer === nummer;
+            return plan.virksomhet ? plan.virksomhet.virksomhetsnummer === nummer : plan.virksomhetsnummer === nummer;
         });
         newestPlanPerVirksomhet.push(newestPlanForVirksomhetsnummer);
     });
@@ -42,4 +50,8 @@ const newestPlanForEachVirksomhet = (oppfolgingsplaner) => {
 export const activeOppfolgingsplaner = (oppfolgingsplaner) => {
     const newestPlans = newestPlanForEachVirksomhet(oppfolgingsplaner);
     return oppfolgingsplanerValidNow(newestPlans);
+};
+
+export const activeLPSOppfolgingsplaner = (oppfolgingsplaner) => {
+    return oppfolgingsplanerLPSOpprettetIdag(oppfolgingsplaner);
 };
