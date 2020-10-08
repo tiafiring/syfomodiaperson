@@ -8,6 +8,7 @@ import Sidetopp from '../Sidetopp';
 import {
     erIdag,
     erIkkeIdag,
+    leggTilDagerPaDato,
     restdatoTilLesbarDato,
 } from '../../utils/datoUtils';
 import { hentVirksomhet } from '../../actions/virksomhet_actions';
@@ -51,6 +52,9 @@ const OppfoelgingsPlanerOversikt = (
     const oppfolgingsplanerLPSUnprocessed = oppfolgingsplanerLPS
         .filter((oppfolgingsplanLPS) => {
             if (oppfolgingsplanLPS.personoppgave) {
+                if (oppfolgingsplanLPS.personoppgave.behandletTidspunkt) {
+                    return Date.now() < leggTilDagerPaDato(oppfolgingsplanLPS.personoppgave.behandletTidspunkt, 1);
+                }
                 return !oppfolgingsplanLPS.personoppgave.behandletTidspunkt;
             }
             return erIdag(oppfolgingsplanLPS.opprettet);

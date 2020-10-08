@@ -40,6 +40,22 @@ ButtonOpenPlan.propTypes = {
     oppfolgingsplanLPS: PropTypes.object,
 };
 
+const getIkonsti = (filnavn) => {
+    return `/sykefravaer/img/svg/${filnavn}`;
+};
+
+const Ikon = ({ ikon }) => {
+    return (
+        <span className="ferdigbehandlet__ikon">
+            <img src={getIkonsti(ikon)} alt="Ferdig behandlet" />
+        </span>
+    );
+};
+
+Ikon.propTypes = {
+    ikon: PropTypes.string.isRequired,
+};
+
 const OppfolgingsplanerOversiktLPS = (
     {
         oppfolgingsplanLPSBistandsbehov,
@@ -52,11 +68,6 @@ const OppfolgingsplanerOversiktLPS = (
         <LPSPlanPanel>
             <UnderTittelInline className="panel__tittel">{oppfolgingsplanLPSBistandsbehov.virksomhetsnavn}</UnderTittelInline>
             <p>Mottatt: {restdatoTilLesbarDato(oppfolgingsplanLPSBistandsbehov.opprettet)}</p>
-            { personOppgave && erPersonOppgaveBehandlet &&
-                <p>
-                    {`Ferdigbehandlet: ${toDatePrettyPrint(personOppgave.behandletTidspunkt)} av ${personOppgave.behandletVeilederIdent}`}
-                </p>
-            }
             <DivMarginBottom>
                 <OppfolgingsplanLPSEtikett />
             </DivMarginBottom>
@@ -68,6 +79,11 @@ const OppfolgingsplanerOversiktLPS = (
                     oppfolgingsplanLPS={oppfolgingsplanLPSBistandsbehov}
                     veilederIdent={veilederIdent}
                 />
+            }
+            { personOppgave && erPersonOppgaveBehandlet &&
+            <p>
+                <Ikon ikon="status--kan.svg" /> {`Ferdigbehandlet: ${toDatePrettyPrint(personOppgave.behandletTidspunkt)} av ${personOppgave.behandletVeilederIdent}`}
+            </p>
             }
         </LPSPlanPanel>
     );
