@@ -138,3 +138,9 @@ export const isDate16DaysAgoOrLater = (date) => {
         ? dagerMellomDatoer(new Date(date), today) <= 16
         : true;
 };
+
+export const leggTilDagerPaDato = (dato, dager) => {
+    const nyDato = new Date(dato);
+    nyDato.setDate(nyDato.getDate() + dager);
+    return new Date(nyDato);
+};
