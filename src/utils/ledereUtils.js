@@ -17,7 +17,7 @@ export const ledereIVirksomheterMedMotebehovsvarFraArbeidstaker = (ledereData, m
     });
 };
 
-export const fjernLedereMedInnsendtMotebehov = (ledereListe, motebehovData) => {
+export const ledereIVirksomheterDerIngenLederHarSvartPaMotebehov = (ledereListe, motebehovData) => {
     return ledereListe.filter((leder) => {
         return motebehovData.findIndex((motebehov) => {
             return motebehov.opprettetAv !== motebehov.aktorId && motebehov.virksomhetsnummer === leder.orgnummer;
@@ -40,6 +40,19 @@ export const ledereMedOppfolgingstilfelleInnenforMotebehovperioden = (ledereData
     });
 };
 
+const isNewerLeader = (ledere, givenLeder) => {
+    return ledere.findIndex((lederCandidate) => {
+        return givenLeder.aktoerId !== lederCandidate.aktoerId
+            && givenLeder.orgnummer === lederCandidate.orgnummer
+            && givenLeder.fomDato < lederCandidate.fomDato;
+    }) > -1;
+};
+
+const newestLederForEachVirksomhet = (ledere) => {
+    return ledere.filter((leder) => {
+        return !isNewerLeader(ledere, leder);
+    });
+};
 
 export const ledereUtenMotebehovsvar = (ledereData, motebehovData, oppfolgingstilfelleperioder) => {
     const arbeidstakerHarSvartPaaMotebehov = motebehovData && harArbeidstakerSvartPaaMotebehov(motebehovData);
@@ -47,7 +60,10 @@ export const ledereUtenMotebehovsvar = (ledereData, motebehovData, oppfolgingsti
     const filtrertLederListe = arbeidstakerHarSvartPaaMotebehov
         ? ledereIVirksomheterMedMotebehovsvarFraArbeidstaker(ledereData, motebehovData)
         : ledereMedOppfolgingstilfelleInnenforMotebehovperioden(ledereData, oppfolgingstilfelleperioder);
-    return fjernLedereMedInnsendtMotebehov(filtrertLederListe, motebehovData);
+
+    const ledereIVirksomhetUtenMotebehovSvarFraLeder = ledereIVirksomheterDerIngenLederHarSvartPaMotebehov(filtrertLederListe, motebehovData);
+
+    return newestLederForEachVirksomhet(ledereIVirksomhetUtenMotebehovSvarFraLeder);
 };
 
 export const lederHasActiveSykmelding = (leder, sykmeldinger) => {
