@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { finnArbeidstakerMotebehovSvar } from '../../utils/motebehovUtils';
 import { tilLesbarDatoMedArUtenManedNavn } from '../../utils/datoUtils';
 
-export const finnRiktigLeder = (virksomhetsnummer, ledere) => {
+export const lederMedGittAktorId = (aktorId, ledere) => {
     return ledere.find((leder) => {
-        return leder.orgnummer === virksomhetsnummer;
+        return leder.aktoerId === aktorId;
     });
 };
 
@@ -132,7 +132,7 @@ export const MotebehovKvitteringInnholdArbeidsgiver = (
 ) => {
     return motebehovListeMedBareArbeidsgiversMotebehov.map((motebehov, index) => {
         const arbeidsgiverOnskerMote = motebehov.motebehovSvar.harMotebehov;
-        const riktigLeder = finnRiktigLeder(motebehov.virksomhetsnummer, ledereData);
+        const riktigLeder = lederMedGittAktorId(motebehov.opprettetAv, ledereData);
         const ikonAltTekst = `Arbeidsgiver ${arbeidsgiverNavnEllerTomStreng(riktigLeder)} ${ikonAlternativTekst(arbeidsgiverOnskerMote)}`;
 
         return (<MotebehovKvitteringInnhold

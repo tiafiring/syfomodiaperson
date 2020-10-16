@@ -4,7 +4,7 @@ import {
     ledereIVirksomheterMedMotebehovsvarFraArbeidstaker,
     ledereMedOppfolgingstilfelleInnenforMotebehovperioden,
     ledereUtenMotebehovsvar,
-    fjernLedereMedInnsendtMotebehov,
+    ledereIVirksomheterDerIngenLederHarSvartPaMotebehov,
     lederHasActiveSykmelding,
     ledereWithActiveLedereFirst,
     virksomheterWithoutLeder,
@@ -55,7 +55,7 @@ describe('ledereUtils', () => {
             expect(filtrertLederListe[1].orgnummer).to.equal('999');
         })
     });
-    describe('fjernLedereMedInnsendtMotebehov', () => {
+    describe('ledereIVirksomheterDerIngenLederHarSvartPaMotebehov', () => {
         it('skal fjerne ledere med innsendt møtebehov fra lederlisten', () => {
             const ledere = [
                 {
@@ -75,10 +75,68 @@ describe('ledereUtils', () => {
                 },
             ];
 
-           const filtrertLederListe = fjernLedereMedInnsendtMotebehov(ledere, motebehovData);
+           const filtrertLederListe = ledereIVirksomheterDerIngenLederHarSvartPaMotebehov(ledere, motebehovData);
 
            expect(filtrertLederListe.length).to.equal(1);
            expect(filtrertLederListe[0].orgnummer).to.equal('321')
+        });
+        it('skal fjerne ledere for virksomheter hvor minst én leder har innsendt møtebehov, fra lederlisten', () => {
+            const ledere = [
+                {
+                    orgnummer: '123',
+                    aktoerId: '1',
+                    fomDato: '2020-01-01',
+                },
+                {
+                    orgnummer: '123',
+                    aktoerId: '2',
+                    fomDato: '2020-09-01',
+                },
+                {
+                    orgnummer: '321',
+                    aktoerId: '3',
+                    fomDato: '2020-01-01',
+                },
+            ];
+            const motebehovData = [
+                {
+                    opprettetAv: '1',
+                    aktorId: '0',
+                    virksomhetsnummer: '123',
+                },
+            ];
+
+           const filtrertLederListe = ledereIVirksomheterDerIngenLederHarSvartPaMotebehov(ledere, motebehovData);
+
+           expect(filtrertLederListe.length).to.equal(1);
+           expect(filtrertLederListe[0].orgnummer).to.equal('321')
+        });
+        it('skal returnere en liste med alle ledere for en virksomhet hvis kun sykmeldt har svart på møtebehov', () => {
+            const ledere = [
+                {
+                    orgnummer: '123',
+                    aktoerId: '1',
+                    fomDato: '2020-01-01',
+                },
+                {
+                    orgnummer: '123',
+                    aktoerId: '2',
+                    fomDato: '2020-09-01',
+                }
+            ];
+            const motebehovData = [
+                {
+                    opprettetAv: '0',
+                    aktorId: '0',
+                    virksomhetsnummer: '123',
+                },
+            ];
+
+           const filtrertLederListe = ledereIVirksomheterDerIngenLederHarSvartPaMotebehov(ledere, motebehovData);
+
+           expect(filtrertLederListe.length).to.equal(2);
+           expect(filtrertLederListe[0].orgnummer).to.equal('123')
+           expect(filtrertLederListe[1].orgnummer).to.equal('123')
         });
     });
     describe('ledereMedOppfolgingstilfelleInnenforMotebehovperioden', () => {
@@ -146,14 +204,17 @@ describe('ledereUtils', () => {
                 {
                     orgnummer: '123',
                     aktoerId: '1',
+                    fomDato: '2020-01-01',
                 },
                 {
                     orgnummer: '321',
                     aktoerId: '2',
+                    fomDato: '2020-01-01',
                 },
                 {
                     orgnummer: '999',
                     aktoerId: '3',
+                    fomDato: '2020-01-01',
                 },
             ];
             let oppfolgingstilfeller = [];
@@ -241,14 +302,17 @@ describe('ledereUtils', () => {
                 {
                     orgnummer: '123',
                     aktoerId: '1',
+                    fomDato: '2020-01-01',
                 },
                 {
                     orgnummer: '321',
                     aktoerId: '2',
+                    fomDato: '2020-01-01',
                 },
                 {
                     orgnummer: '999',
                     aktoerId: '3',
+                    fomDato: '2020-01-01',
                 },
             ];
             const motebehovData = [
@@ -274,6 +338,40 @@ describe('ledereUtils', () => {
             expect(filtrertLederListe.length).to.equal(1);
             expect(filtrertLederListe[0].orgnummer).to.equal('123')
         });
+        it('skal finne nyeste leder hvis flere tilhører en virksomhet hvor kun sykmeldt har svart', () => {
+            const oppfolgingstilfeller = [];
+            const ledere = [
+                {
+                    orgnummer: '123',
+                    aktoerId: '1',
+                    fomDato: '2020-01-01',
+                },
+                {
+                    orgnummer: '123',
+                    aktoerId: '2',
+                    fomDato: '2020-09-30',
+                },
+                {
+                    orgnummer: '999',
+                    aktoerId: '3',
+                    fomDato: '2020-01-01',
+                },
+            ];
+            const motebehovData = [
+                {
+                    opprettetAv: '0',
+                    aktorId: '0',
+                    virksomhetsnummer: '123',
+                }
+            ];
+
+            const filtrertLederListe = ledereUtenMotebehovsvar(ledere, motebehovData, oppfolgingstilfeller);
+
+            expect(filtrertLederListe.length).to.equal(1);
+            expect(filtrertLederListe[0].orgnummer).to.equal('123')
+            expect(filtrertLederListe[0].aktoerId).to.equal('2')
+            expect(filtrertLederListe[0].fomDato).to.equal('2020-09-30')
+        })
     });
 
     describe('lederHasActiveSykmelding', () => {
