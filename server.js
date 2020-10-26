@@ -24,6 +24,10 @@ const modiacontextholderUrl = process.env.NAIS_CONTEXT === 'dev'
     ? 'modiacontextholder.q1'
     : 'modiacontextholder.default';
 
+const spinnsynBackendVeilederUrl = process.env.NAIS_CONTEXT === 'dev'
+    ? 'spinnsyn-backend-veileder-proxy.dev.intern.nav.no'
+    : 'spinnsyn-backend-veileder-proxy.intern.nav.no';
+
 function nocache(req, res, next) {
     res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
     res.header('Expires', '-1');
@@ -140,6 +144,18 @@ server.use('/syfomoteadmin/api', proxy('syfomoteadmin.default', {
         next(err);
     },
 }));
+
+server.use('/spinnsyn-backend/api', proxy(spinnsynBackendVeilederUrl, {
+    https: true,
+    proxyReqPathResolver: function (req) {
+        return `/api${req.url}`
+    },
+    proxyErrorHandler: function (err, res, next) {
+        console.error('Error in proxy for spinnsyn-backend', err);
+        next(err);
+    },
+}));
+
 
 server.use('/syfomotebehov/api', proxy('syfomotebehov.default', {
     https: false,
