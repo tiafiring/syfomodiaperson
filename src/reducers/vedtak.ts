@@ -66,7 +66,6 @@ const vedtak = (state = initialState, action = { type: '', data: [] }) => {
             return {
                 ...state,
                 henter: false,
-                hentingFeilet: false,
                 hentet: true,
                 hentingForsokt: true,
                 data: action.data,
@@ -78,7 +77,6 @@ const vedtak = (state = initialState, action = { type: '', data: [] }) => {
                 henter: false,
                 hentingFeilet: true,
                 hentingForsokt: true,
-                hentet: false,
             };
         }
         default:

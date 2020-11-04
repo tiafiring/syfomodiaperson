@@ -33,7 +33,7 @@ export function* hentVedtak(action: any) {
 
 export const skalHenteVedtak = (state: { vedtak: VedtakState; }) => {
     const reducer = state.vedtak;
-    return !(reducer.henter || reducer.hentet || reducer.hentingFeilet);
+    return !(reducer.henter || reducer.hentingForsokt)
 };
 
 export function* hentVedtakHvisIkkeHentet(action: any) {
