@@ -33,6 +33,7 @@ import veilederinfo from './reducers/veilederinfo';
 import diskresjonskode from './reducers/diskresjonskode';
 import egenansatt from './reducers/egenansatt';
 import oppfolgingstilfelleperioder from './reducers/oppfolgingstilfelleperioder';
+import personadresse from './reducers/personadresse';
 import personoppgaver from './reducers/personoppgaver';
 import flaggperson from './reducers/flaggperson';
 import prediksjon from './reducers/prediksjon';
@@ -43,6 +44,7 @@ import { hentVeilederinfo } from './actions/veilederinfo_actions';
 import { hentBehandlendeEnhet } from './actions/behandlendeEnhet_actions';
 import { hentNavbruker } from './actions/navbruker_actions';
 import { hentLedere } from './actions/ledere_actions';
+import { hentPersonAdresse } from './actions/personInfo_actions';
 import { pushModiaContext, hentAktivBruker, hentAktivEnhet } from './actions/modiacontext_actions';
 import { valgtEnhet } from './actions/enhet_actions';
 import { CONTEXT_EVENT_TYPE } from './konstanter';
@@ -79,6 +81,7 @@ const rootReducer = combineReducers({
     form: formReducer,
     soknader,
     oppfolgingstilfelleperioder,
+    personadresse,
     personoppgaver,
     flaggperson,
     prediksjon,
@@ -116,6 +119,7 @@ if (fnrRegex.test(fnr)) {
     store.dispatch(hentBehandlendeEnhet(fnr));
     store.dispatch(hentNavbruker(fnr));
     store.dispatch(hentLedere(fnr));
+    store.dispatch(hentPersonAdresse(fnr));
     store.dispatch(sjekkTilgang(fnr));
     store.dispatch(hentAktivBruker({
         callback: (aktivBruker) => {

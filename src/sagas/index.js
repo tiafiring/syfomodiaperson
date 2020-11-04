@@ -23,6 +23,7 @@ import ledeteksterSagas from './ledeteksterSagas';
 import tilgangSagas from './tilgangSagas';
 import soknaderSagas from './soknaderSagas';
 import oppfolgingstilfelleperioderSagas from './oppfolgingstilfelleperioderSagas';
+import personInfoSagas from './personInfoSagas';
 import personoppgaveSagas from './personoppgaveSagas';
 import flaggPersonSagas from './flaggPersonSagas';
 import vedtakSagas from './vedtakSagas';
@@ -51,6 +52,7 @@ export default function* rootSaga() {
         tidslinjerSagas(),
         soknaderSagas(),
         oppfolgingstilfelleperioderSagas(),
+        personInfoSagas(),
         personoppgaveSagas(),
         flaggPersonSagas(),
         vedtakSagas(),

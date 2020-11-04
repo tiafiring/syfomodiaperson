@@ -19,6 +19,7 @@ describe('PersonkortVisning', () => {
     let fastleger;
     let komponent;
     let sykmeldinger;
+    let personadresse;
 
     beforeEach(() => {
         ledere = [{ erOppgitt: true }, { erOppgitt: false }];
@@ -61,6 +62,7 @@ describe('PersonkortVisning', () => {
                 fnr: '1234',
             },
         };
+        personadresse = {};
 
         sykmeldinger = mockOldSykmeldinger;
 
@@ -69,6 +71,7 @@ describe('PersonkortVisning', () => {
             ledere={ledere}
             fastleger={fastleger}
             navbruker={navbruker}
+            personadresse={personadresse}
             behandlendeEnhet={behandlendeEnhet}
         />);
     });
@@ -83,6 +86,7 @@ describe('PersonkortVisning', () => {
             ledere={ledere}
             fastleger={fastleger}
             navbruker={navbruker}
+            personadresse={personadresse}
             behandlendeEnhet={behandlendeEnhet}
             sykmeldinger={sykmeldinger}
         />);
@@ -95,6 +99,7 @@ describe('PersonkortVisning', () => {
             ledere={ledere}
             fastleger={fastleger}
             navbruker={navbruker}
+            personadresse={personadresse}
             behandlendeEnhet={behandlendeEnhet}
         />);
         expect(komponent.find(PersonkortLege)).to.have.length(1);
@@ -106,6 +111,7 @@ describe('PersonkortVisning', () => {
             ledere={ledere}
             fastleger={fastleger}
             navbruker={navbruker}
+            personadresse={personadresse}
             behandlendeEnhet={behandlendeEnhet}
         />);
         expect(komponent.find(PersonkortEnhet)).to.have.length(1);
@@ -115,6 +121,7 @@ describe('PersonkortVisning', () => {
         beforeEach(() => {
             komponent = mount(<PersonkortSykmeldt
                 navbruker={navbruker}
+                personadresse={personadresse}
             />);
         });
 
