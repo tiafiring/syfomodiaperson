@@ -133,6 +133,7 @@ Personkort.propTypes = {
     egenansatt: PropTypes.object,
     fastleger: PropTypes.object,
     navbruker: PropTypes.object,
+    personadresse: PropTypes.object,
     ledere: PropTypes.array,
     behandlendeEnhet: PropTypes.object,
     oppfolgingstilfelleperioder: PropTypes.object,

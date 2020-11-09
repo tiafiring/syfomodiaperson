@@ -1,40 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    finnMidlertidigAdresseTekst,
-    finnMidlertidigAdresseTittel,
-    finnPostadresseTittel,
-    formatterNorskAdresse,
-    formatterUstrukturertAdresse,
-} from '../../utils/adresseUtils';
 import PersonkortElement from './PersonkortElement';
 import PersonkortInformasjon from './PersonkortInformasjon';
 import { formaterFnr } from '../../utils/fnrUtils';
+import {
+    formaterBostedsadresse,
+    formaterKontaktadresse,
+    formaterOppholdsadresse,
+} from '../../utils/pdladresseUtils';
 
 const texts = {
     fnr: 'F.nummer',
     phone: 'Telefon',
     email: 'E-post',
-    folkeregistrert: 'Folkeregistrert Adresse',
+    bostedsadresse: 'Bostedsadresse',
+    kontaktadresse: 'Kontaktadresse',
+    oppholdsadresse: 'Oppholdsadresse'
 };
 
-const PersonkortSykmeldt = ({ navbruker }) => {
+const PersonkortSykmeldt = ({ navbruker, personadresse }) => {
     const informasjonNokkelTekster = new Map([
         ['fnr', texts.fnr],
         ['tlf', texts.phone],
         ['epost', texts.email],
-        ['folkeregistrert', texts.folkeregistrert],
-        ['postadresse', finnPostadresseTittel(navbruker)],
-        ['midlertidigAdresse', finnMidlertidigAdresseTittel(navbruker)],
+        ['bostedsadresse', texts.bostedsadresse],
+        ['kontaktadresse', texts.kontaktadresse],
+        ['oppholdsadresse', texts.oppholdsadresse],
     ]);
-    const ER_MIDLERTIDIG_ADRESSE = false;
-    const ER_IKKE_POSTADRESSE = false;
-    const valgteElementerAdresse = (({ folkeregistrert, postadresse, midlertidigAdresse }) => {
-        return { folkeregistrert, postadresse, midlertidigAdresse };
+    const valgteElementerAdresse = (({ bostedsadresse, kontaktadresse, oppholdsadresse }) => {
+        return { bostedsadresse, kontaktadresse, oppholdsadresse };
     })({
-        folkeregistrert: formatterNorskAdresse(navbruker.bostedsadresse, ER_MIDLERTIDIG_ADRESSE),
-        postadresse: formatterUstrukturertAdresse(navbruker.postAdresse, ER_IKKE_POSTADRESSE),
-        midlertidigAdresse: finnMidlertidigAdresseTekst(navbruker),
+        bostedsadresse: formaterBostedsadresse(personadresse.bostedsadresse),
+        kontaktadresse: formaterKontaktadresse(personadresse.kontaktadresse),
+        oppholdsadresse: formaterOppholdsadresse(personadresse.oppholdsadresse),
     });
     const valgteElementerKontaktinfo = (({ tlf, epost, fnr }) => {
         return {
@@ -55,6 +53,7 @@ const PersonkortSykmeldt = ({ navbruker }) => {
 
 PersonkortSykmeldt.propTypes = {
     navbruker: PropTypes.object,
+    personadresse: PropTypes.object,
 };
 
 export default PersonkortSykmeldt;

@@ -32,6 +32,7 @@ export const mapStateToProps = (state) => {
         fastleger: state.fastleger,
         ledere: state.ledere.data,
         navbruker: state.navbruker.data,
+        personadresse: state.personadresse.data,
         oppfolgingstilfelleperioder: state.oppfolgingstilfelleperioder,
         sykmeldinger: state.sykmeldinger.data,
     };

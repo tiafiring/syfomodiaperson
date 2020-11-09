@@ -6,9 +6,8 @@ import VisningLedere from './PersonkortLedere';
 import PersonkortSykmeldt from './PersonkortSykmeldt';
 import VisningEnhet from './PersonkortEnhet';
 
-export const VelgVisning = ({ navbruker, ledere, fastleger, behandlendeEnhet, visning, sykmeldinger }) => {
+export const VelgVisning = ({ navbruker, personadresse, ledere, fastleger, behandlendeEnhet, visning, sykmeldinger }) => {
     const { LEGE, LEDER, ENHET } = PERSONKORTVISNING_TYPE;
-
     switch (visning) {
         case LEGE: {
             return (<VisningLege fastleger={fastleger} />);
@@ -23,7 +22,7 @@ export const VelgVisning = ({ navbruker, ledere, fastleger, behandlendeEnhet, vi
             return (<VisningEnhet behandlendeEnhet={behandlendeEnhet} />);
         }
         default: {
-            return (<PersonkortSykmeldt navbruker={navbruker} />);
+            return (<PersonkortSykmeldt navbruker={navbruker} personadresse={personadresse} />);
         }
     }
 };
@@ -31,6 +30,7 @@ export const VelgVisning = ({ navbruker, ledere, fastleger, behandlendeEnhet, vi
 VelgVisning.propTypes = {
     visning: PropTypes.string,
     navbruker: PropTypes.object,
+    personadresse: PropTypes.object,
     ledere: PropTypes.array,
     fastleger: PropTypes.object,
     behandlendeEnhet: PropTypes.object,
