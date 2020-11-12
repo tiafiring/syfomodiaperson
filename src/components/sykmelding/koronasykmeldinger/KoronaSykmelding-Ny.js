@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     Bjorn,
-    DineKoronaSykmeldingOpplysninger,
     sykmelding as sykmeldingPt,
 } from '@navikt/digisyfo-npm';
 import {
@@ -9,6 +8,7 @@ import {
     Normaltekst,
 } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
+import DineKoronaSykmeldingOpplysninger from '../sykmeldingOpplysninger/DineKoronaSykmeldingOpplysninger';
 
 const texts = {
     pageSubtitle: 'for selvstendig næringsdrivende og frilansere',

@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import {
-    DineSykmeldingOpplysninger,
     keyValue,
     Bjorn,
 } from '@navikt/digisyfo-npm';
 import Alertstripe from 'nav-frontend-alertstriper';
+import DineSykmeldingOpplysninger from './sykmeldingOpplysninger/DineSykmeldingOpplysninger';
 
 const texts = {
     eldreSykmeldinger: 'Du har eldre sykmeldinger som du bør behandle før denne.',

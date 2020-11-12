@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DineSykmeldingOpplysninger } from '@navikt/digisyfo-npm';
 import { AvvistSykmeldingStatuspanel } from './AvvistSykmeldingStatuspanel';
 import { AvvistSykmeldingPanel } from './AvvistSykmeldingPanel';
 import { BekreftAvvistSykmelding } from './BekreftAvvistSykmelding';
+import DineSykmeldingOpplysninger from '../sykmeldingOpplysninger/DineSykmeldingOpplysninger';
 
 const AvvistSykmelding = ({ sykmelding }) => {
     return (<div>
