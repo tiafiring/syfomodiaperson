@@ -1,21 +1,19 @@
-import {
-    HENT_VEDTAK_FEILET,
-    HENT_VEDTAK_HENTER,
-    HENT_VEDTAK_HENTET
-} from '../actions/vedtak_actions';
+import { HENT_VEDTAK_FEILET, HENT_VEDTAK_HENTER, HENT_VEDTAK_HENTET } from '../actions/vedtak_actions';
 
-export interface Vedtak {
+export interface VedtakDTO {
     id: String,
     lest: Boolean,
-    vedtak: {
-        fom: Date,
-        tom: Date,
-        forbrukteSykedager: number,
-        gjenståendeSykedager: number,
-        automatiskBehandling: boolean,
-        utbetalinger: Utbetaling[]
-    },
+    vedtak: Vedtak,
     opprettet: Date
+}
+
+export interface Vedtak {
+    fom: Date,
+    tom: Date,
+    forbrukteSykedager: number,
+    gjenståendeSykedager: number,
+    automatiskBehandling: boolean,
+    utbetalinger: Utbetaling[]
 }
 
 export interface Utbetaling {
@@ -40,7 +38,7 @@ export interface VedtakState {
     hentet: boolean,
     hentingForsokt: boolean,
 
-    data: Vedtak[] | null,
+    data: VedtakDTO[] | null,
 }
 
 export const initialState: VedtakState = {

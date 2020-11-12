@@ -36,6 +36,12 @@ const oppfoelgingsplanMenypunkt = {
     menypunkt: menypunkter.OPPFOELGINGSPLANER,
 };
 
+const vedtakMenypunkt = {
+    navn: 'Vedtak',
+    sti: 'vedtak',
+    menypunkt: menypunkter.VEDTAK,
+};
+
 class GlobalNavigasjon extends Component {
     constructor(props) {
         super(props);
@@ -102,7 +108,7 @@ class GlobalNavigasjon extends Component {
 
     render() {
         const { fnr, aktivtMenypunkt, motebehovReducer, moterReducer, oppfolgingsplanerReducer, personOppgaverReducer, oppfolgingsplanerLPSReducer } = this.props;
-        this.menypunkter = [historikkMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, oppfoelgingsplanMenypunkt, motemodulMenypunkt];
+        this.menypunkter = [historikkMenypunkt, sykmeldingerMenypunkt, sykepengesoknadMenypunkt, oppfoelgingsplanMenypunkt, motemodulMenypunkt, vedtakMenypunkt];
 
         return (<ul aria-label="Navigasjon" className="navigasjon">
             {

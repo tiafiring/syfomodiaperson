@@ -15,6 +15,7 @@ import HistorikkContainer from '../containers/HistorikkContainer';
 import { erGyldigFodselsnummer } from '../utils/frnValideringUtils';
 import MotelandingssideContainer from '../containers/MotelandingssideContainer';
 import MotebehovContainer from '../containers/MotebehovContainer';
+import VedtakContainer from '../containers/VedtakContainer';
 
 const AppRouter = ({ history }) => {
     const fnr = window.location.pathname.split('/')[2];
@@ -38,6 +39,7 @@ const AppRouter = ({ history }) => {
         <Route path="/sykefravaer/:fnr/sykmeldinger/:sykmeldingId" component={DinSykmeldingContainer} />
         <Route path="/sykefravaer/:fnr/oppfoelgingsplaner" component={OppfoelgingsPlanerOversiktContainer} />
         <Route path="/sykefravaer/:fnr/oppfoelgingsplaner/:oppfoelgingsdialogId" component={OppfoelgingsplanContainer} />
+        <Route path="/sykefravaer/:fnr/vedtak" component={VedtakContainer} />
         <Route path="/sykefravaer/:fnr/*" component={SykmeldingerContainer} />
         <Route path="/sykefravaer" component={IngenBrukerContainer} />
     </Router>);
