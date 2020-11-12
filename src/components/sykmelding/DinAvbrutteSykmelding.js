@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
     Utvidbar,
-    DineSykmeldingOpplysninger,
     keyValue,
 } from '@navikt/digisyfo-npm';
+import DineSykmeldingOpplysninger from './sykmeldingOpplysninger/DineSykmeldingOpplysninger';
 import SykmeldingStatuspanel from '../sykmeldingstatuspanel/SykmeldingStatuspanel';
 
 const texts = {

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import {
     keyValue,
     Utvidbar,
@@ -21,10 +20,6 @@ const texts = {
     dinSykmeldingDiagnoseTittel: 'Diagnose\n',
     dinSykmeldingBidiagnoseTittel: 'Bidiagnose\\n',
     yrkesskadeTittel: 'Sykdommen kan skyldes en skade/yrkessykdom\\n',
-    diagnosekodeHjelpetekst: `
-        Diagnosekoden henviser til de internasjonale kodeverkene som klassifiserer sykdom og symptomer.
-        De ulike diagnosekodene brukes for å gi en mest mulig presis diagnose.
-    `,
     diagnoseMeta: 'Diagnosen vises ikke til arbeidsgiveren',
     arbeidsforTittel: 'Pasienten er 100 % arbeidsfør etter perioden\\n',
     avsenderTittel: 'Lege / sykmelder\\n',
@@ -69,7 +64,6 @@ const DineSykmeldingOpplysninger = ({ sykmelding, ledetekster, Overskrift = 'h2'
                                 <h3 className="nokkelopplysning__tittel">
                                     {texts.dinSykmeldingDiagnoseTittel}
                                 </h3>
-                                <Hjelpetekst>{texts.diagnosekodeHjelpetekst}</Hjelpetekst>
                             </div>
                             <p>
                                 <span className="js-hoveddiagnose-kode">{sykmelding.diagnose.hoveddiagnose.diagnosekode}</span>
