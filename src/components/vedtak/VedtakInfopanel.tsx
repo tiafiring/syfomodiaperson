@@ -9,16 +9,17 @@ import styled from 'styled-components';
 import { Row } from 'nav-frontend-grid';
 
 
-interface IVedtakInfopanel {
+interface VedtakInfopanelProps {
     selectedVedtak: VedtakDTO,
 }
 
 const StyledPanel = styled(Panel)`
-    padding: 1.5em
+    padding: 1.5em;
+    margin-bottom: .5em;
 `;
 
-const VedtakInfopanel = (vedtakIProps: IVedtakInfopanel) => {
-    const { selectedVedtak } = vedtakIProps;
+const VedtakInfopanel = (vedtakProps: VedtakInfopanelProps) => {
+    const { selectedVedtak } = vedtakProps;
 
     return (
         <StyledPanel>

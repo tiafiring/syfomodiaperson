@@ -1,4 +1,8 @@
-import { HENT_VEDTAK_FEILET, HENT_VEDTAK_HENTER, HENT_VEDTAK_HENTET } from '../actions/vedtak_actions';
+import {
+    HENT_VEDTAK_FEILET,
+    HENT_VEDTAK_HENTER,
+    HENT_VEDTAK_HENTET
+} from '../actions/vedtak_actions';
 
 export interface VedtakDTO {
     id: String,

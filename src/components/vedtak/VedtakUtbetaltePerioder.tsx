@@ -1,7 +1,15 @@
 import * as React from 'react';
 import { Row } from 'nav-frontend-grid';
-import { Ingress, Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { Utbetaling, Utbetalingslinje, VedtakDTO } from '../../reducers/vedtak';
+import {
+    Ingress,
+    Normaltekst,
+    Undertittel,
+} from 'nav-frontend-typografi';
+import {
+    Utbetaling,
+    Utbetalingslinje,
+    VedtakDTO,
+} from '../../reducers/vedtak';
 import { restdatoTildato } from '../../utils/datoUtils';
 import styled from 'styled-components';
 
@@ -9,7 +17,7 @@ const texts = {
     utbetalt: 'Utbetalte perioder til nå',
 };
 
-interface IVedtakUtbetaltePerioder {
+interface VedtakUtbetaltePerioderProps {
     selectedVedtak: VedtakDTO,
 }
 
@@ -44,7 +52,7 @@ const StyledUndertittel = styled(Undertittel)`
     margin-top: .5em;
 `;
 
-const VedtakUtbetaltePerioder = (utbetaltePerioderProps: IVedtakUtbetaltePerioder) => {
+const VedtakUtbetaltePerioder = (utbetaltePerioderProps: VedtakUtbetaltePerioderProps) => {
     const { selectedVedtak } = utbetaltePerioderProps;
 
     return (

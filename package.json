@@ -114,7 +114,7 @@
     "eslint": "2.5.3",
     "eslint-config-airbnb": "6.2.0",
     "eslint-plugin-react": "4.2.3",
-    "fetch-mock": "5.5.0",
+    "fetch-mock": "9.10.7",
     "html-webpack-plugin": "4.3.0",
     "ignore-styles": "5.0.1",
     "jsdom": "11.1.0",

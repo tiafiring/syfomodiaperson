@@ -145,10 +145,10 @@ server.use('/syfomoteadmin/api', proxy('syfomoteadmin.default', {
     },
 }));
 
-server.use('/spinnsyn-backend/api', proxy(spinnsynBackendVeilederUrl, {
+server.use('/veileder/vedtak', proxy(spinnsynBackendVeilederUrl, {
     https: true,
     proxyReqPathResolver: function (req) {
-        return `/api${req.url}`
+        return `/api/v1/veileder/vedtak?fnr=${req.query.fnr}`;
     },
     proxyErrorHandler: function (err, res, next) {
         console.error('Error in proxy for spinnsyn-backend', err);

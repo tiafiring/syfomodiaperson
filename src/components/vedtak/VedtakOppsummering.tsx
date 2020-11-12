@@ -1,6 +1,12 @@
 import * as React from 'react';
-import { Column, Row } from 'nav-frontend-grid';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import {
+    Column,
+    Row,
+} from 'nav-frontend-grid';
+import {
+    Normaltekst,
+    Undertittel,
+} from 'nav-frontend-typografi';
 import { restdatoTildato } from '../../utils/datoUtils';
 import { VedtakDTO } from '../../reducers/vedtak';
 import styled from 'styled-components';
@@ -14,7 +20,7 @@ const texts = {
     totalSykepengedager: 'Sykepengedager totalt',
 };
 
-interface IVedtakOppsummering {
+interface VedtakOppsummeringProps {
     selectedVedtak: VedtakDTO,
 }
 
@@ -24,7 +30,7 @@ const StyledUndertittel = styled(Undertittel)`
 `;
 
 
-const VedtakOppsummering = (vedtakOppsummering: IVedtakOppsummering) => {
+const VedtakOppsummering = (vedtakOppsummering: VedtakOppsummeringProps) => {
     const { selectedVedtak } = vedtakOppsummering;
     return (
         <>
