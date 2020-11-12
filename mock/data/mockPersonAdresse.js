@@ -15,7 +15,7 @@ function getPersonAdresse() {
                 kommunenummer: '0301',
                 bydelsnummer: null,
                 tilleggsnavn: null,
-                postnummer: '0301'Fs
+                postnummer: '0301'
             },
             matrikkeladresse: null,
             utenlandskAdresse: null,
