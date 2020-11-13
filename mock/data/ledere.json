@@ -11,7 +11,7 @@
     "orgnummer": "110110110",
     "organisasjonsnavn": "PONTYPANDY FIRE SERVICE",
     "aktivTom": null,
-    "arbeidsgiverForskuttererLoenn": null
+    "arbeidsgiverForskuttererLoenn": true
   },
   {
     "navn": "Are Arbeidsgiver",
@@ -22,10 +22,10 @@
     "aktiv": null,
     "erOppgitt": true,
     "fomDato": "2020-02-03T12:00:00+01:00",
-    "orgnummer": "000999000",
-    "organisasjonsnavn": "KONKURS BEDRIFT OG VENNER AS",
+    "orgnummer": "110110110",
+    "organisasjonsnavn": "PONTYPANDY FIRE SERVICE",
     "aktivTom": null,
-    "arbeidsgiverForskuttererLoenn": null
+    "arbeidsgiverForskuttererLoenn": false
   },
   {
     "navn": "Lene Leder",
@@ -39,7 +39,7 @@
     "orgnummer": "555666444",
     "organisasjonsnavn": "BRANN OG BIL AS",
     "aktivTom": null,
-    "arbeidsgiverForskuttererLoenn": null
+    "arbeidsgiverForskuttererLoenn": true
   },
   {
     "navn": "F. Orrige Leder",

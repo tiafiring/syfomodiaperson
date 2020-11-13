@@ -30,7 +30,7 @@ export const mapStateToProps = (state) => {
         diskresjonskode: state.diskresjonskode,
         egenansatt: state.egenansatt,
         fastleger: state.fastleger,
-        ledere: state.ledere.data,
+        ledere: state.ledere.allLedere,
         navbruker: state.navbruker.data,
         personadresse: state.personadresse.data,
         oppfolgingstilfelleperioder: state.oppfolgingstilfelleperioder,

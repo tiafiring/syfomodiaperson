@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { PERSONKORTVISNING_TYPE } from '../../konstanter';
 import VisningLege from './PersonkortLege';
-import VisningLedere from './PersonkortLedere';
+import VisningLedere from './ledere/PersonkortLedere';
 import PersonkortSykmeldt from './PersonkortSykmeldt';
 import VisningEnhet from './PersonkortEnhet';
 

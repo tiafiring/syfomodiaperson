@@ -8,6 +8,7 @@ import {
 const defaultState = {
     data: [],
     formerLedere: [],
+    allLedere: [],
     henter: false,
     hentet: false,
     hentingFeilet: false,
@@ -20,6 +21,7 @@ const ledere = (state = defaultState, action = {}) => {
             return {
                 data: currentLedere(ledereWithTomDate),
                 formerLedere: formerLedere(ledereWithTomDate),
+                allLedere: ledereWithTomDate,
                 henter: false,
                 hentet: true,
                 hentingFeilet: false,
@@ -32,6 +34,7 @@ const ledere = (state = defaultState, action = {}) => {
                 hentingFeilet: false,
                 data: [],
                 formerLedere: [],
+                allLedere: [],
             };
         }
         case actiontype.HENT_LEDERE_FEILET: {
