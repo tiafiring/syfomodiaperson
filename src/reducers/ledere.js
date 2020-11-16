@@ -2,6 +2,7 @@ import * as actiontype from '../actions/actiontyper';
 import {
     currentLedere,
     formerLedere,
+    mapTomDateToEarlierLedere,
 } from '../utils/ledereUtils';
 
 const defaultState = {
@@ -15,9 +16,10 @@ const defaultState = {
 const ledere = (state = defaultState, action = {}) => {
     switch (action.type) {
         case actiontype.LEDERE_HENTET: {
+            const ledereWithTomDate = mapTomDateToEarlierLedere(action.data);
             return {
-                data: currentLedere(action.data),
-                formerLedere: formerLedere(action.data),
+                data: currentLedere(ledereWithTomDate),
+                formerLedere: formerLedere(ledereWithTomDate),
                 henter: false,
                 hentet: true,
                 hentingFeilet: false,

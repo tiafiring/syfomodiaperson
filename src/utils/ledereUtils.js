@@ -134,3 +134,51 @@ export const formerLedere = (ledere) => {
         return leder.aktivTom !== null;
     });
 };
+
+const isLederEarlierThanGivenLeder = (givenLeder, leder) => {
+    return new Date(leder.fomDato) < new Date(givenLeder.fomDato);
+};
+
+const ledereFromGivenLedersVirksomhet = (givenLeder, ledere) => {
+    return ledere.filter((leder) => {
+        return leder.orgnummer === givenLeder.orgnummer;
+    });
+};
+
+const laterLedereThanGivenLeder = (givenLeder, ledere) => {
+    return ledere.filter((leder) => {
+        return isLederEarlierThanGivenLeder(leder, givenLeder);
+    });
+};
+
+const earliestLeder = (ledere) => {
+    let currentEarliestLeder = null;
+    ledere.forEach((possibleEarliestLeder) => {
+        if (currentEarliestLeder === null || isLederEarlierThanGivenLeder(currentEarliestLeder, possibleEarliestLeder)) {
+            currentEarliestLeder = possibleEarliestLeder;
+        }
+    });
+
+    return currentEarliestLeder;
+};
+
+const findNextLeder = (currentLeder, ledere) => {
+    const ledereFromCorrectVirksomhet = ledereFromGivenLedersVirksomhet(currentLeder, ledere);
+    const laterLedere = laterLedereThanGivenLeder(currentLeder, ledereFromCorrectVirksomhet);
+
+    return earliestLeder(laterLedere);
+};
+
+export const mapTomDateToEarlierLedere = (ledere) => {
+    return ledere.map((leder) => {
+        const nextLeder = findNextLeder(leder, ledere);
+
+        if (nextLeder !== null) {
+            return {
+                ...leder,
+                aktivTom: nextLeder.fomDato,
+            };
+        }
+        return leder;
+    });
+};

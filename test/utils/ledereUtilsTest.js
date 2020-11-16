@@ -8,6 +8,7 @@ import {
     lederHasActiveSykmelding,
     ledereWithActiveLedereFirst,
     virksomheterWithoutLeder,
+    mapTomDateToEarlierLedere,
 } from '../../src/utils/ledereUtils';
 import { ANTALL_MS_DAG } from '../../src/utils/datoUtils';
 import {
@@ -506,6 +507,144 @@ describe('ledereUtils', () => {
 
             expect(ledereFromSykmeldinger.length).to.equal(1);
             expect(ledereFromSykmeldinger[0]).to.deep.equal(expectedLeder);
+        });
+    });
+
+    describe('mapTomDateToEarlierLedere', () => {
+        let clock;
+        const today = new Date(Date.now());
+
+        beforeEach(() => {
+            clock = sinon.useFakeTimers(today.getTime());
+        });
+
+        afterEach(() => {
+            clock.restore();
+        });
+
+        it('puts tom date on all ledere in virksomhet, except the latest', () => {
+            const latestFom = '2020-02-01';
+            const earliestFom = '2020-01-01';
+
+            const lederList = [
+                {
+                    id: 0,
+                    fomDato: earliestFom,
+                    aktivTom: null,
+                    orgnummer: '1',
+                },
+                {
+                    id: 1,
+                    fomDato: latestFom,
+                    aktivTom: null,
+                    orgnummer: '1',
+                }
+            ]
+
+            const ledereWithTomDate = mapTomDateToEarlierLedere(lederList);
+
+            const earliestLeder = ledereWithTomDate.find((leder) => { return leder.id === 0 });
+            const latestLeder = ledereWithTomDate.find((leder) => { return leder.id === 1 });
+
+            expect(earliestLeder.aktivTom).to.equal(latestFom);
+            expect(latestLeder.aktivTom).to.be.null;
+        });
+
+        it('aktivTom is null if only one leder in virksomhet', () => {
+            const latestFom = '2020-03-01';
+            const middleFom = '2020-02-01';
+            const earliestFom = '2020-01-01';
+
+            const lederList = [
+                {
+                    id: 0,
+                    fomDato: earliestFom,
+                    aktivTom: null,
+                    orgnummer: '1',
+                },
+                {
+                    id: 1,
+                    fomDato: middleFom,
+                    aktivTom: null,
+                    orgnummer: '2',
+                },
+                {
+                    id: 2,
+                    fomDato: latestFom,
+                    aktivTom: null,
+                    orgnummer: '1',
+                },
+            ]
+
+            const ledereWithTomDate = mapTomDateToEarlierLedere(lederList);
+
+            const middleLeder = ledereWithTomDate.find((leder) => { return leder.orgnummer === '2' });
+
+            expect(middleLeder.aktivTom).to.be.null;
+        });
+
+        it('aktivTom is set correctly if there are three leaders from the same virksomhet', () => {
+            const latestFom = '2020-03-01';
+            const middleFom = '2020-02-01';
+            const earliestFom = '2020-01-01';
+
+            const lederList = [
+                {
+                    id: 0,
+                    fomDato: earliestFom,
+                    aktivTom: null,
+                    orgnummer: '1',
+                },
+                {
+                    id: 1,
+                    fomDato: middleFom,
+                    aktivTom: null,
+                    orgnummer: '1',
+                },
+                {
+                    id: 2,
+                    fomDato: latestFom,
+                    aktivTom: null,
+                    orgnummer: '1',
+                },
+            ]
+
+            const ledereWithTomDate = mapTomDateToEarlierLedere(lederList);
+
+            const earliestLeder = ledereWithTomDate.find((leder) => { return leder.id === 0 });
+            const middleLeder = ledereWithTomDate.find((leder) => { return leder.id === 1 });
+            const latestLeder = ledereWithTomDate.find((leder) => { return leder.id === 2 });
+
+            expect(earliestLeder.aktivTom).to.equal(middleFom);
+            expect(middleLeder.aktivTom).to.equal(latestFom);
+            expect(latestLeder.aktivTom).to.be.null;
+        });
+
+        it('gives two ledere with aktivTom === null if they have the same fomDato, and are the latest ledere', () => {
+            const latestFom = '2020-03-01T12:00:00+01:00';
+
+            const lederList = [
+                {
+                    id: 0,
+                    fomDato: latestFom,
+                    aktivTom: null,
+                    orgnummer: '1',
+                },
+                {
+                    id: 1,
+                    fomDato: latestFom,
+                    aktivTom: null,
+                    orgnummer: '1',
+                },
+            ]
+
+            const ledereWithTomDate = mapTomDateToEarlierLedere(lederList);
+
+            const earliestLeder = ledereWithTomDate.find((leder) => { return leder.id === 0 });
+            const latestLeder = ledereWithTomDate.find((leder) => { return leder.id === 1 });
+
+            expect(earliestLeder.aktivTom).to.be.null;
+            expect(latestLeder.aktivTom).to.be.null;
         });
     });
 });
