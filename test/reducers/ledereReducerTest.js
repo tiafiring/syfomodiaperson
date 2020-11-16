@@ -13,6 +13,7 @@ describe('ledere', () => {
         expect(nextState).to.deep.equal({
             data: [],
             formerLedere: [],
+            allLedere: [],
             henter: false,
             hentet: false,
             hentingFeilet: false,
@@ -50,7 +51,8 @@ describe('ledere', () => {
             formerLedere: [{
                 navn: 'Hans Hansen',
                 aktivTom: "2020-02-20T12:00:00+01:00",
-            }]
+            }],
+            allLedere: [...action.data],
         });
     });
 
@@ -63,6 +65,7 @@ describe('ledere', () => {
         expect(nextState).to.deep.equal({
             data: [],
             formerLedere: [],
+            allLedere: [],
             henter: true,
             hentet: false,
             hentingFeilet: false,

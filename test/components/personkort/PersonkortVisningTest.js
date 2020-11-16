@@ -6,11 +6,15 @@ import PersonkortVisning from '../../../src/components/personkort/PersonkortVisn
 import { PERSONKORTVISNING_TYPE } from '../../../src/konstanter';
 import PersonkortElement from '../../../src/components/personkort/PersonkortElement';
 import PersonkortInformasjon from '../../../src/components/personkort/PersonkortInformasjon';
-import PersonkortLedere from '../../../src/components/personkort/PersonkortLedere';
+import PersonkortLedere from '../../../src/components/personkort/ledere/PersonkortLedere';
+import PersonKortVirksomhetHeader from '../../../src/components/personkort/ledere/PersonKortVirksomhetHeader';
+import PersonKortVirksomhetLedere from '../../../src/components/personkort/ledere/PersonKortVirksomhetLedere';
 import PersonkortSykmeldt from '../../../src/components/personkort/PersonkortSykmeldt';
 import PersonkortEnhet from '../../../src/components/personkort/PersonkortEnhet';
 import PersonkortLege, { TidligereLeger } from '../../../src/components/personkort/PersonkortLege';
-import mockOldSykmeldinger from '../../mockdata/sykmeldinger/mockOldSykmeldinger';
+import mockSykmeldinger from '../../mockdata/sykmeldinger/mockSykmeldinger';
+import { newSMFormat2OldFormat } from '../../../src/utils/sykmeldinger/sykmeldingParser';
+import { leggTilDagerPaDato } from '../../../src/utils/datoUtils';
 
 describe('PersonkortVisning', () => {
     let ledere;
@@ -21,8 +25,38 @@ describe('PersonkortVisning', () => {
     let sykmeldinger;
     let personadresse;
 
+    const today = new Date();
+
+    const sykmeldignOldFormat = newSMFormat2OldFormat(
+        {
+            ...mockSykmeldinger[0],
+            sykmeldingsperioder: [
+                {
+                    fom: '2020-01-22',
+                    tom: leggTilDagerPaDato(today, 1),
+                    gradert: null,
+                    behandlingsdager: null,
+                    innspillTilArbeidsgiver: null,
+                    type: 'AKTIVITET_IKKE_MULIG',
+                    aktivitetIkkeMulig: null,
+                },
+            ],
+        }
+    );
+
     beforeEach(() => {
-        ledere = [{ erOppgitt: true }, { erOppgitt: false }];
+        ledere = [
+            {
+                navn: 'Station Officer Steele',
+                orgnummer: '000999000',
+                erOppgitt: true
+            },
+            {
+                navn: 'Are Arbeidsgiver',
+                orgnummer: '000999001',
+                erOppgitt: false
+            }
+        ];
         behandlendeEnhet = {
             navn: 'NAV Drammen',
             enhetId: '1234',
@@ -63,8 +97,9 @@ describe('PersonkortVisning', () => {
             },
         };
         personadresse = {};
-
-        sykmeldinger = mockOldSykmeldinger;
+        sykmeldinger = [
+            sykmeldignOldFormat,
+        ];
 
         komponent = mount(<PersonkortVisning
             visning={''}
@@ -142,12 +177,12 @@ describe('PersonkortVisning', () => {
             />);
         });
 
-        it('Skal vise antall PersonkortElement lik antall ledere, pluss virksomhet fra sykmelding', () => {
-            expect(komponent.find(PersonkortElement)).to.have.length(2);
+        it('Skal vise antall PersonKortLedereVirksomhet lik antall unike virksomheter med innmeldt leder', () => {
+            expect(komponent.find(PersonKortVirksomhetLedere)).to.have.length(2);
         });
 
-        it('Skal vise antall PersonkortInformasjon for ledere som er oppgitt', () => {
-            expect(komponent.find(PersonkortInformasjon)).to.have.length(1);
+        it('Skal vise antall PersonKortVirksomhetHeader lik antall virksomheter med leder pluss de med aktive sykmeldinger uten leder', () => {
+            expect(komponent.find(PersonKortVirksomhetHeader)).to.have.length(3);
         });
 
         it('Skal vise PersonkortElement med feilmelding, dersom bruker ikke har noen ledere ', () => {
