@@ -33,10 +33,10 @@ export const PersonKortVirksomhetLederIngressRow = () => {
             <Column className="col-sm-3">
                 <EtikettLitenUpper>{texts.name}</EtikettLitenUpper>
             </Column>
-            <Column className="col-sm-3">
+            <Column className="col-sm-4">
                 <EtikettLitenUpper>{texts.email}</EtikettLitenUpper>
             </Column>
-            <Column className="col-sm-2">
+            <Column className="col-sm-1">
                 <EtikettLitenUpper>{texts.phone}</EtikettLitenUpper>
             </Column>
             <Column className="col-sm-2">
@@ -74,12 +74,12 @@ export const PersonKortVirksomhetLederRow = ({ leder, isActive }) => {
                 isActive={isActive}
             />
             <PersonKortVirksomhetLederColumn
-                colSize={3}
+                colSize={4}
                 text={leder.epost}
                 isActive={isActive}
             />
             <PersonKortVirksomhetLederColumn
-                colSize={2}
+                colSize={1}
                 text={leder.tlf}
                 isActive={isActive}
             />
