@@ -44,6 +44,7 @@ const ledere = (state = defaultState, action = {}) => {
                 hentingFeilet: true,
                 data: [],
                 formerLedere: [],
+                allLedere: [],
             };
         }
         default: {
