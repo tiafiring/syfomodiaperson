@@ -44,7 +44,7 @@ const VedtakOppsummering = (vedtakOppsummering: VedtakOppsummeringProps) => {
                     <Row><Normaltekst>{texts.totalSykepengedager}</Normaltekst></Row>
                 </Column>
                 <Column className='col-xs-2'>
-                    <Row><Normaltekst>{restdatoTildato(selectedVedtak.vedtak.tom)}</Normaltekst></Row>
+                    <Row><Normaltekst>MAKSDATO</Normaltekst></Row>
                     <Row><Normaltekst>{restdatoTildato(selectedVedtak.opprettet)}</Normaltekst></Row>
                     <Row><Normaltekst>{selectedVedtak.vedtak.gjenståendeSykedager}</Normaltekst></Row>
                     <Row><Normaltekst>{selectedVedtak.vedtak.forbrukteSykedager}</Normaltekst></Row>
