@@ -84,6 +84,7 @@ describe('ledere', () => {
             hentingFeilet: true,
             data: [],
             formerLedere: [],
+            allLedere: [],
         });
     });
 });
