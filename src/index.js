@@ -1,6 +1,10 @@
-import { render } from 'react-dom';
 import React from 'react';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import ReactDOM from 'react-dom';
+import {
+    applyMiddleware,
+    combineReducers,
+    createStore,
+} from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import { reducer as formReducer } from 'redux-form';
@@ -45,7 +49,11 @@ import { hentBehandlendeEnhet } from './actions/behandlendeEnhet_actions';
 import { hentNavbruker } from './actions/navbruker_actions';
 import { hentLedere } from './actions/ledere_actions';
 import { hentPersonAdresse } from './actions/personInfo_actions';
-import { pushModiaContext, hentAktivBruker, hentAktivEnhet } from './actions/modiacontext_actions';
+import {
+    hentAktivBruker,
+    hentAktivEnhet,
+    pushModiaContext,
+} from './actions/modiacontext_actions';
 import { valgtEnhet } from './actions/enhet_actions';
 import { CONTEXT_EVENT_TYPE } from './konstanter';
 import soknader from './reducers/soknader';
@@ -90,6 +98,7 @@ const rootReducer = combineReducers({
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+
 sagaMiddleware.run(rootSaga);
 
 const fnr = window.location.pathname.split('/')[2];
@@ -151,9 +160,9 @@ if (hasURLParameter('visLedetekster')) {
     window.VIS_LEDETEKSTNOKLER = false;
 }
 
-render(
+ReactDOM.render(
     <Provider store={store}>
-        <AppRouter history={history} />
+        <AppRouter history={history}/>
     </Provider>, document.getElementById('maincontent')
 );
 

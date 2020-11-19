@@ -13,7 +13,7 @@ import { VedtakState } from '../reducers/vedtak';
 export function* hentVedtak(action: any) {
     yield put(actions.hentVedtakHenter());
     try {
-        const path = `/spinnsyn-backend/api/vedtak`;
+        const path = `${process.env.REACT_APP_VEDTAK_ROOT}?fnr=${action.fnr}`;
         console.log(path);
         const data = yield call(get, path);
 

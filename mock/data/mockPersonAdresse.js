@@ -61,6 +61,4 @@ function getPersonAdresse() {
     };
 }
 
-module.exports = {
-    getPersonAdresse,
-};
+module.exports = { getPersonAdresse };

@@ -2,7 +2,7 @@ const mockPersonAdresse = require('./data/mockPersonAdresse');
 
 const NAV_PERSONIDENT_HEADER = 'nav-personident';
 
-const diskresjonskode = "7";
+const diskresjonskode = '7';
 const isEgenAnsatt = true;
 
 function mockForLokal(server) {
