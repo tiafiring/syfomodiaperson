@@ -36,7 +36,6 @@ const VedtakContainer = () => {
 
     useEffect(() => {
         dispatch(hentVedtak(fnr));
-
     });
 
     useEffect(() => {

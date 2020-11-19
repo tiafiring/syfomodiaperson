@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import {
     applyMiddleware,
     combineReducers,
-    createStore
+    createStore,
 } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import { reducer as formReducer } from 'redux-form';
-import { hasURLParameter, tidslinjer } from '@navikt/digisyfo-npm';
+import {
+    hasURLParameter,
+    tidslinjer,
+} from '@navikt/digisyfo-npm';
 import AppRouter from './routers/AppRouter';
 import history from './history';
 import fastleger from './reducers/fastleger';
@@ -49,7 +52,7 @@ import { hentPersonAdresse } from './actions/personInfo_actions';
 import {
     hentAktivBruker,
     hentAktivEnhet,
-    pushModiaContext
+    pushModiaContext,
 } from './actions/modiacontext_actions';
 import { valgtEnhet } from './actions/enhet_actions';
 import { CONTEXT_EVENT_TYPE } from './konstanter';
