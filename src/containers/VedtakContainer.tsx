@@ -22,6 +22,11 @@ import { VedtakDTO } from '../reducers/vedtak';
 import { restdatoTildato } from '../utils/datoUtils';
 import VedtakInfopanel from '../components/vedtak/VedtakInfopanel';
 import styled from 'styled-components';
+import { VEDTAK } from '../enums/menypunkter';
+
+const texts = {
+    pageTitle: 'Vedtak',
+};
 
 const StyledPanel = styled(Panel)`
     margin-bottom: .5em;
@@ -46,7 +51,7 @@ const VedtakContainer = () => {
     }, [vedtak]);
 
     return (
-        <Side>
+        <Side fnr={fnr} tittel={texts.pageTitle} aktivtMenypunkt={VEDTAK}>
             {vedtak && selectedVedtak && <Row>
                 <Column className="col-xs-5">
                     {vedtak.data.map((v: VedtakDTO) => (
