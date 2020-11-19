@@ -79,6 +79,7 @@ describe('ledere', () => {
         const action = { type: HENT_LEDERE_FEILET };
         const nextState = ledere(initialState, action);
         expect(nextState).to.deep.equal({
+            allLedere: [],
             henter: false,
             hentet: false,
             hentingFeilet: true,
