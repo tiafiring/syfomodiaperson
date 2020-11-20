@@ -23,7 +23,7 @@ const texts = {
 
 const StyledPanel = styled(Panel)`
     margin-bottom: .5em;
-`;
+`
 
 const StyledAlertStripe = styled(AlertStripeFeil)`
     margin: 0 .5em .5em .5em;

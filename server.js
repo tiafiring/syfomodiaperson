@@ -18,7 +18,7 @@ const httpRequestDurationMicroseconds = new prometheus.Histogram({
 });
 const server = express();
 
-server.use(express.json())
+server.use(express.json());
 
 const modiacontextholderUrl = process.env.NAIS_CONTEXT === 'dev'
     ? 'modiacontextholder.q1'
@@ -79,15 +79,15 @@ server.use('/fastlegerest/api', proxy('fastlegerest.default', {
     },
 }));
 
-server.use('/ispersonoppgave/api', proxy('ispersonoppgave.default',  {
+server.use('/ispersonoppgave/api', proxy('ispersonoppgave.default', {
     https: false,
-    proxyReqPathResolver: function(req) {
-        return `/api${req.path}`
+    proxyReqPathResolver: function (req) {
+        return `/api${req.path}`;
     },
-    proxyErrorHandler: function(err, res, next) {
-        console.error("Error in proxy for ispersonoppgave", err);
+    proxyErrorHandler: function (err, res, next) {
+        console.error('Error in proxy for ispersonoppgave', err);
         next(err);
-    }
+    },
 }));
 
 server.use('/syfo-tilgangskontroll/api', proxy('syfo-tilgangskontroll.default', {
@@ -145,16 +145,26 @@ server.use('/syfomoteadmin/api', proxy('syfomoteadmin.default', {
     },
 }));
 
-server.use('/veileder/vedtak', proxy(spinnsynBackendVeilederUrl, {
-    https: true,
-    proxyReqPathResolver: function (req) {
-        return `/api/v1/veileder/vedtak?fnr=${req.query.fnr}`;
-    },
-    proxyErrorHandler: function (err, res, next) {
-        console.error('Error in proxy for spinnsyn-backend', err);
-        next(err);
-    },
-}));
+server.use('/veileder/vedtak', cookieParser(), (req, res) => {
+    const token = req.cookies['isso-idtoken'];
+    const fnr = req.query.fnr;
+    const options = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            fnr,
+        },
+    };
+
+    const url = `https://${spinnsynBackendVeilederUrl}/api/v1/veileder/vedtak?fnr=${fnr}`;
+    axios.get(url, options)
+        .then(response => {
+            res.send(response.data);
+        })
+        .catch(err => {
+            console.error('Error in proxy for spinnsyn-backend', err);
+            res.send({ err });
+        });
+});
 
 
 server.use('/syfomotebehov/api', proxy('syfomotebehov.default', {
@@ -262,8 +272,8 @@ server.use('/ispengestopp/api/v1/person/status', cookieParser(), (req, res) => {
 server.use('/ispengestopp/api/v1/person/flagg', cookieParser(), (req, res) => {
         const token = req.cookies['isso-idtoken'];
         const headers = {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
         };
 
         const data = req.body;
