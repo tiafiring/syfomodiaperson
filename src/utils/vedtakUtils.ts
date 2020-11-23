@@ -1,5 +1,5 @@
-import { VedtakDTO } from '../reducers/vedtak';
 import dayjs from 'dayjs'
+import { VedtakDTO } from '../reducers/vedtak';
 
 
 export const erHelg = (dato: Date) => {
