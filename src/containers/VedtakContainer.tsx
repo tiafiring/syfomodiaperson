@@ -22,15 +22,18 @@ const texts = {
 };
 
 const StyledAlertStripe = styled(AlertStripeFeil)`
-  margin: 0 0.5em 0.5em 0.5em;
+  margin: 0 .5em .5em .5em;
 `;
 
 interface StyledPanelProps {
     readonly isActive: boolean
 }
 
+const hvit = '#FFF';
+const lysBla = '#CCE1F3';
+
 const StyledPanel = styled(Panel)<StyledPanelProps>`
-  background: ${props => props.isActive ? '#CCE1F3' : '#FFF'};
+  background: ${props => props.isActive ? lysBla : hvit};
 `;
 
 const StyledButton = styled.button`
@@ -63,11 +66,12 @@ const VedtakContainer = () => {
 
     return (
         <Side fnr={fnr} tittel={texts.pageTitle} aktivtMenypunkt={VEDTAK}>
-            {vedtak && selectedVedtak && (
-                <>
-                    <Row>
-                        <StyledAlertStripe>{texts.comingSoon}</StyledAlertStripe>
-                    </Row>
+
+            <>
+                <Row>
+                    <StyledAlertStripe>{texts.comingSoon}</StyledAlertStripe>
+                </Row>
+                {vedtak && selectedVedtak && (
                     <Row>
                         <Column className="col-xs-5">
                             {vedtak.data.map((v: VedtakDTO) => (
@@ -91,8 +95,9 @@ const VedtakContainer = () => {
                             <VedtakInfopanel selectedVedtak={selectedVedtak}/>
                         </Column>
                     </Row>
-                </>
-            )}
+                )}
+            </>
+
         </Side>
     );
 };
