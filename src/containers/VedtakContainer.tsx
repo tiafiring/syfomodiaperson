@@ -21,12 +21,26 @@ const texts = {
     `,
 };
 
-const StyledPanel = styled(Panel)`
-    margin-bottom: .5em;
-`
-
 const StyledAlertStripe = styled(AlertStripeFeil)`
-    margin: 0 .5em .5em .5em;
+  margin: 0 0.5em 0.5em 0.5em;
+`;
+
+interface StyledPanelProps {
+    readonly isActive: boolean
+}
+
+const StyledPanel = styled(Panel)<StyledPanelProps>`
+    background: ${props => props.isActive ? '#CCE1F3' : '#FFF'};
+`;
+
+const StyledButton = styled.button`
+  margin: 0;
+  margin-bottom: 0.5em;
+  padding: 0;
+  border: 0;
+  background: 0;
+  width: 100%;
+  text-align: left;
 `;
 
 const VedtakContainer = () => {
@@ -49,28 +63,38 @@ const VedtakContainer = () => {
 
     return (
         <Side fnr={fnr} tittel={texts.pageTitle} aktivtMenypunkt={VEDTAK}>
-            {vedtak && selectedVedtak &&
-            <>
-                <Row><StyledAlertStripe>{texts.comingSoon}</StyledAlertStripe></Row>
-                <Row>
-                    <Column className="col-xs-5">
-                        {vedtak.data.map((v: VedtakDTO) => (
-                            <StyledPanel>
-                                <Undertittel>
-                                    {restdatoTildato(v.vedtak.fom)} - {restdatoTildato(v.vedtak.tom)}
-                                </Undertittel>
-                                <Undertekst>
-                                    {`Vedtaksdato: ${restdatoTildato(v.opprettet)} · Restdager: ${v.vedtak.gjenståendeSykedager}`}
-                                </Undertekst>
-                            </StyledPanel>
-                        ))}
-                    </Column>
-                    <Column className="col-xs-7">
-                        {vedtak.data.map((vedtak: VedtakDTO) => <VedtakInfopanel selectedVedtak={vedtak}/>)}
-                    </Column>
-                </Row>
-            </>}
-        </Side>);
+            {vedtak && selectedVedtak && (
+                <>
+                    <Row>
+                        <StyledAlertStripe>{texts.comingSoon}</StyledAlertStripe>
+                    </Row>
+                    <Row>
+                        <Column className="col-xs-5">
+                            {vedtak.data.map((v: VedtakDTO) => (
+                                <StyledButton onClick={() => {
+                                    setSelectedVedtak(v)
+                                }}>
+                                    <StyledPanel isActive={v.id === selectedVedtak.id}>
+                                        <Undertittel>
+                                            {`${restdatoTildato(v.vedtak.fom)} - ${restdatoTildato(v.vedtak.tom)}`}
+                                        </Undertittel>
+                                        <Undertekst>
+                                            {`Vedtaksdato: ${restdatoTildato(
+                                                v.opprettet,
+                                            )} · Restdager: ${v.vedtak.gjenståendeSykedager}`}
+                                        </Undertekst>
+                                    </StyledPanel>
+                                </StyledButton>
+                            ))}
+                        </Column>
+                        <Column className="col-xs-7">
+                            <VedtakInfopanel selectedVedtak={selectedVedtak}/>
+                        </Column>
+                    </Row>
+                </>
+            )}
+        </Side>
+    );
 };
 
 export default VedtakContainer;
