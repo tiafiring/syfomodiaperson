@@ -66,7 +66,6 @@ const VedtakContainer = () => {
 
     return (
         <Side fnr={fnr} tittel={texts.pageTitle} aktivtMenypunkt={VEDTAK}>
-
             <>
                 <Row>
                     <StyledAlertStripe>{texts.comingSoon}</StyledAlertStripe>
