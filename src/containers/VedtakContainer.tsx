@@ -30,7 +30,7 @@ interface StyledPanelProps {
 }
 
 const StyledPanel = styled(Panel)<StyledPanelProps>`
-    background: ${props => props.isActive ? '#CCE1F3' : '#FFF'};
+  background: ${props => props.isActive ? '#CCE1F3' : '#FFF'};
 `;
 
 const StyledButton = styled.button`
@@ -72,7 +72,7 @@ const VedtakContainer = () => {
                         <Column className="col-xs-5">
                             {vedtak.data.map((v: VedtakDTO) => (
                                 <StyledButton onClick={() => {
-                                    setSelectedVedtak(v)
+                                    setSelectedVedtak(v);
                                 }}>
                                     <StyledPanel isActive={v.id === selectedVedtak.id}>
                                         <Undertittel>
