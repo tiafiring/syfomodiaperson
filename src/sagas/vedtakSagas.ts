@@ -14,7 +14,6 @@ export function* hentVedtak(action: any) {
     yield put(actions.hentVedtakHenter());
     try {
         const path = `${process.env.REACT_APP_VEDTAK_ROOT}?fnr=${action.fnr}`;
-        console.log(path);
         const data = yield call(get, path);
 
         if (data && !!data.err) {

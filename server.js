@@ -74,7 +74,7 @@ server.use('/fastlegerest/api', proxy('fastlegerest.default', {
         return `/fastlegerest/api${req.url}`;
     },
     proxyErrorHandler: function (err, res, next) {
-        console.error('Error in proxy for fastlegerest', err);
+        console.error('Error in proxy for fastlegerest', err.message);
         next(err);
     },
 }));
@@ -85,7 +85,7 @@ server.use('/ispersonoppgave/api', proxy('ispersonoppgave.default', {
         return `/api${req.path}`;
     },
     proxyErrorHandler: function (err, res, next) {
-        console.error('Error in proxy for ispersonoppgave', err);
+        console.error('Error in proxy for ispersonoppgave', err.message);
         next(err);
     },
 }));
@@ -96,7 +96,7 @@ server.use('/syfo-tilgangskontroll/api', proxy('syfo-tilgangskontroll.default', 
         return `/syfo-tilgangskontroll/api${req.url}`;
     },
     proxyErrorHandler: function (err, res, next) {
-        console.error('Error in proxy for tilgang', err);
+        console.error('Error in proxy for tilgang', err.message);
         next(err);
     },
 }));
@@ -107,7 +107,7 @@ server.use('/modiacontextholder/api', proxy(modiacontextholderUrl, {
         return `/modiacontextholder/api${req.url}`;
     },
     proxyErrorHandler: function (err, res, next) {
-        console.error('Error in proxy for modiacontextholder', err);
+        console.error('Error in proxy for modiacontextholder', err.message);
         next(err);
     },
 }));
@@ -118,7 +118,7 @@ server.use('/modiasyforest/api', proxy('modiasyforest.default', {
         return `/modiasyforest/api${req.url}`;
     },
     proxyErrorHandler: function (err, res, next) {
-        console.error('Error in proxy for modiasyforest', err);
+        console.error('Error in proxy for modiasyforest', err.message);
         next(err);
     },
 }));
@@ -129,7 +129,7 @@ server.use('/syfooppfolgingsplanservice/api', proxy('syfooppfolgingsplanservice.
         return `/syfooppfolgingsplanservice/api${req.url}`;
     },
     proxyErrorHandler: function (err, res, next) {
-        console.error('Error in proxy for syfooppfolgingsplanservice', err);
+        console.error('Error in proxy for syfooppfolgingsplanservice', err.message);
         next(err);
     },
 }));
@@ -140,7 +140,7 @@ server.use('/syfomoteadmin/api', proxy('syfomoteadmin.default', {
         return `/syfomoteadmin/api${req.url}`;
     },
     proxyErrorHandler: function (err, res, next) {
-        console.error('Error in proxy for syfomoteadmin', err);
+        console.error('Error in proxy for syfomoteadmin', err.message);
         next(err);
     },
 }));
@@ -161,8 +161,8 @@ server.use('/veileder/vedtak', cookieParser(), (req, res) => {
             res.send(response.data);
         })
         .catch(err => {
-            console.error('Error in proxy for spinnsyn-backend', err);
-            res.send({ err });
+            console.error('Error in proxy for spinnsyn-backend', err.message);
+            res.status(err.status).send(err.message);
         });
 });
 
@@ -173,7 +173,7 @@ server.use('/syfomotebehov/api', proxy('syfomotebehov.default', {
         return `/syfomotebehov/api${req.url}`;
     },
     proxyErrorHandler: function (err, res, next) {
-        console.error('Error in proxy for syfomotebehov', err);
+        console.error('Error in proxy for syfomotebehov', err.message);
         next(err);
     },
 }));
@@ -184,7 +184,7 @@ server.use('/syfotekster/api', proxy('syfotekster.default', {
         return `/syfotekster/api${req.path}`;
     },
     proxyErrorHandler: function (err, res, next) {
-        console.error('Error in proxy for tekster', err);
+        console.error('Error in proxy for tekster', err.message);
         next(err);
     },
 }));
@@ -195,7 +195,7 @@ server.use('/syfosoknad/api', proxy('syfosoknad.default', {
         return `/syfosoknad/api${req.url}`;
     },
     proxyErrorHandler: function (err, res, next) {
-        console.error('Error in proxy for syfosoknad', err);
+        console.error('Error in proxy for syfosoknad', err.message);
         next(err);
     },
 }));
@@ -206,7 +206,7 @@ server.use('/syfobehandlendeenhet/api', proxy('syfobehandlendeenhet.default', {
         return `/api${req.url}`;
     },
     proxyErrorHandler: function (err, res, next) {
-        console.error('Error in proxy for syfobehandlendeenhet', err);
+        console.error('Error in proxy for syfobehandlendeenhet', err.message);
         next(err);
     },
 }));
@@ -217,7 +217,7 @@ server.use('/syfoperson/api', proxy('syfoperson.default', {
         return `/syfoperson/api${req.url}`;
     },
     proxyErrorHandler: function (err, res, next) {
-        console.error('Error in proxy for syfoperson', err);
+        console.error('Error in proxy for syfoperson', err.message);
         next(err);
     },
 }));
@@ -238,8 +238,8 @@ server.use('/syfosmregister/api', cookieParser(), (req, res) => {
             res.send(response.data);
         })
         .catch(err => {
-            console.error('Error in proxy for syfosmregister', err);
-            res.send({ err });
+            console.error('Error in proxy for syfosmregister', err.message);
+            res.status(err.status).send(err.message);
         });
 });
 
@@ -262,8 +262,8 @@ server.use('/ispengestopp/api/v1/person/status', cookieParser(), (req, res) => {
                 }
             })
             .catch(err => {
-                console.error('Error in proxy for ispengestopp', err);
-                res.send({ err });
+                console.error('Error in proxy for ispengestopp', err.message);
+                res.status(err.status).send(err.message);
             });
 
     },
@@ -305,8 +305,8 @@ server.use('/isprediksjon/api/v1/prediksjon', cookieParser(), (req, res) => {
                 }
             })
             .catch(err => {
-                console.error('Error in proxy for isprediksjon', err);
-                res.send({ err });
+                console.error('Error in proxy for isprediksjon', err.message);
+                res.status(err.status).send(err.message);
             });
 
     },
