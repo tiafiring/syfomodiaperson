@@ -6,7 +6,7 @@ export const erHelg = (dato: Date) => {
     return dato.getDay() === 6 || dato.getDay() === 0
 }
 
-export const estimertSluttdato = (vedtak?: VedtakDTO) => {
+export const estimertMaksdato = (vedtak: VedtakDTO) => {
     let slutt = dayjs(vedtak!.vedtak.tom)
     let x = 0
     while (x < vedtak!.vedtak.gjenståendeSykedager) {
