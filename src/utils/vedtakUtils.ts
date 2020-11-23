@@ -9,7 +9,7 @@ export const erHelg = (dato: Date) => {
 export const estimertMaksdato = (vedtak: VedtakDTO) => {
     let slutt = dayjs(vedtak!.vedtak.tom)
     let x = 0
-    while (x < vedtak!.vedtak.gjenståendeSykedager) {
+    while (x < vedtak.vedtak.gjenståendeSykedager) {
         slutt = slutt.add(1, 'day')
         while (erHelg(slutt.toDate())) {
             slutt = slutt.add(1, 'day')
