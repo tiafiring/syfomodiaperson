@@ -17,7 +17,7 @@ const texts = {
     pageTitle: 'Vedtak',
     comingSoon: `
        Dette er en tidlig versjon av vedtakshistorikken. 
-       Feil og mangler kan forekomme. Maksdatoen er på vei! Bruk Yammer til å komme med forslag og Porten til å melde feil. 
+       Feil og mangler kan forekomme. Bruk Yammer til å komme med forslag og Porten til å melde feil. 
     `,
 };
 
