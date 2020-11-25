@@ -3,6 +3,7 @@
     "id": "5872b277-2f33-375f-9e57-552b5d1590f5",
     "lest": true,
     "lestDato": "2020-08-17T10:38:29.798Z",
+    "annullert": true,
     "vedtak": {
       "fom": "2020-05-01",
       "tom": "2020-05-31",
@@ -63,6 +64,7 @@
     "id": "5462ed6e-8b5d-3aef-ba11-88b6841f74a0",
     "lest": true,
     "lestDato": "2020-08-17T10:38:29.798Z",
+    "annullert": false,
     "vedtak": {
       "fom": "2020-06-01",
       "tom": "2020-06-30",
@@ -119,6 +121,7 @@
     "id": "d7f011b8-67f6-3800-a86c-07b9800c9cf5",
     "lest": true,
     "lestDato": "2020-08-17T10:38:29.798Z",
+    "annullert": false,
     "vedtak": {
       "fom": "2020-05-01",
       "tom": "2020-07-20",
@@ -179,6 +182,7 @@
     "id": "1397d47d-d441-3088-93c0-a3101e8a66b7",
     "lest": true,
     "lestDato": "2020-08-17T10:38:29.798Z",
+    "annullert": false,
     "vedtak": {
       "fom": "2020-08-01",
       "tom": "2020-08-31",
@@ -231,6 +235,7 @@
     "id": "c4d8c0eb-83fc-3380-9a4e-526ca7ed7f81",
     "lest": true,
     "lestDato": "2020-08-17T10:38:29.798Z",
+    "annullert": false,
     "vedtak": {
       "fom": "2020-08-01",
       "tom": "2020-08-29",
@@ -283,6 +288,7 @@
     "id": "2f4089d1-a451-3530-8767-671ce9801fc0",
     "lest": true,
     "lestDato": "2020-08-17T10:38:29.798Z",
+    "annullert": false,
     "vedtak": {
       "fom": "2020-08-01",
       "tom": "2020-08-26",
@@ -335,6 +341,7 @@
     "id": "4e42bf2d-4063-3d75-a025-e06def2c006b",
     "lest": true,
     "lestDato": "2020-08-17T10:38:29.798Z",
+    "annullert": false,
     "vedtak": {
       "fom": "2020-09-07",
       "tom": "2020-09-30",
@@ -387,6 +394,7 @@
     "id": "d050f3ff-7c6a-3d10-bd9e-339fda7daa1b",
     "lest": true,
     "lestDato": "2020-08-17T10:38:29.798Z",
+    "annullert": false,
     "vedtak": {
       "fom": "2020-09-01",
       "tom": "2020-09-26",
@@ -439,6 +447,7 @@
     "id": "b745ed3f-a8a3-3bc0-837f-561d56d74e4a",
     "lest": true,
     "lestDato": "2020-08-17T10:38:29.798Z",
+    "annullert": false,
     "vedtak": {
       "fom": "2020-09-27",
       "tom": "2020-10-07",
@@ -495,6 +504,7 @@
     "id": "43c141ec-7ead-382c-b18d-c7cfe4f4aca7",
     "lest": true,
     "lestDato": "2020-08-17T10:38:29.798Z",
+    "annullert": false,
     "vedtak": {
       "fom": "2020-08-01",
       "tom": "2020-08-20",
@@ -555,6 +565,7 @@
     "id": "1738b6fa-32e7-3661-a0e5-03cdc77e89c4",
     "lest": true,
     "lestDato": "2020-08-17T10:38:29.798Z",
+    "annullert": false,
     "vedtak": {
       "fom": "2020-09-01",
       "tom": "2020-09-27",
@@ -607,6 +618,7 @@
     "id": "c49244b1-63f4-3f86-b6f9-106bfe33f963",
     "lest": true,
     "lestDato": "2020-08-17T10:38:29.798Z",
+    "annullert": false,
     "vedtak": {
       "fom": "2020-09-02",
       "tom": "2020-09-29",
@@ -659,6 +671,7 @@
     "id": "5937a1cb-f449-33b8-bab7-9cb94b641bd5",
     "lest": true,
     "lestDato": "2020-08-17T10:38:29.798Z",
+    "annullert": false,
     "vedtak": {
       "fom": "2020-10-09",
       "tom": "2020-10-15",
@@ -707,6 +720,7 @@
     "id": "ec0217f9-1c3f-3eb0-8cb3-79f017a711bd",
     "lest": true,
     "lestDato": "2020-08-17T10:38:29.798Z",
+    "annullert": false,
     "vedtak": {
       "fom": "2020-09-05",
       "tom": "2020-09-28",
@@ -759,6 +773,7 @@
     "id": "a15d62e8-e46f-35d2-8f65-e8611380f3bc",
     "lest": true,
     "lestDato": "2020-08-17T10:38:29.798Z",
+    "annullert": false,
     "vedtak": {
       "fom": "2020-09-29",
       "tom": "2020-10-08",
@@ -807,6 +822,7 @@
     "id": "1c78ef6d-1333-3aaf-9495-e77bf2acd4d9",
     "lest": false,
     "lestDato": null,
+    "annullert": false,
     "vedtak": {
       "fom": "2020-09-01",
       "tom": "2020-09-30",
@@ -867,6 +883,7 @@
     "id": "b5eb48c7-9655-346d-9541-0e05542c47f4",
     "lest": false,
     "lestDato": null,
+    "annullert": false,
     "vedtak": {
       "fom": "2020-01-01",
       "tom": "2020-01-31",
@@ -927,6 +944,7 @@
     "id": "1f8fe6e6-d474-3014-89b7-3bee4ee89410",
     "lest": false,
     "lestDato": null,
+    "annullert": false,
     "vedtak": {
       "fom": "2020-10-20",
       "tom": "2020-10-25",
@@ -987,6 +1005,7 @@
     "id": "f00963df-4996-364c-b726-a498f1aa292f",
     "lest": false,
     "lestDato": null,
+    "annullert": false,
     "vedtak": {
       "fom": "2020-07-01",
       "tom": "2020-07-31",
@@ -1047,6 +1066,7 @@
     "id": "03d95c9a-94aa-3d73-bc51-cc0d6ad217c5",
     "lest": false,
     "lestDato": null,
+    "annullert": false,
     "vedtak": {
       "fom": "2020-07-03",
       "tom": "2020-07-31",
@@ -1107,6 +1127,7 @@
     "id": "cb0f8b9b-69a1-32ed-bde5-7d97b6d14f52",
     "lest": false,
     "lestDato": null,
+    "annullert": false,
     "vedtak": {
       "fom": "2020-08-03",
       "tom": "2020-08-22",
@@ -1167,6 +1188,7 @@
     "id": "8da95a54-d4bb-35b3-9c86-2e8c5c34d1f6",
     "lest": false,
     "lestDato": null,
+    "annullert": false,
     "vedtak": {
       "fom": "2020-08-23",
       "tom": "2020-08-27",
@@ -1227,6 +1249,7 @@
     "id": "ae4da162-8f05-34e7-ba30-cf2c13d77f83",
     "lest": false,
     "lestDato": null,
+    "annullert": false,
     "vedtak": {
       "fom": "2020-08-03",
       "tom": "2020-08-21",
@@ -1287,6 +1310,7 @@
     "id": "2489f44c-acbb-3693-bd03-743aa647f5ec",
     "lest": false,
     "lestDato": null,
+    "annullert": false,
     "vedtak": {
       "fom": "2020-10-05",
       "tom": "2020-10-19",
@@ -1338,6 +1362,7 @@
     "id": "2a861dbd-8570-39f8-a413-a34beb927d65",
     "lest": false,
     "lestDato": null,
+    "annullert": false,
     "vedtak": {
       "fom": "2020-09-07",
       "tom": "2020-09-30",
@@ -1398,6 +1423,7 @@
     "id": "a76b2b1c-5c43-302d-8a10-947072478ba0",
     "lest": true,
     "lestDato": "2020-08-17T10:38:29.798Z",
+    "annullert": true,
     "vedtak": {
       "fom": "2020-09-14",
       "tom": "2020-10-02",

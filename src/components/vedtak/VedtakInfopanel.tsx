@@ -1,13 +1,14 @@
 import * as React from 'react';
+import styled from 'styled-components';
+import { Row } from 'nav-frontend-grid';
 import { Innholdstittel } from 'nav-frontend-typografi';
+import Panel from 'nav-frontend-paneler';
 import { restdatoTildato } from '../../utils/datoUtils';
 import { VedtakDTO } from '../../reducers/vedtak';
-import Panel from 'nav-frontend-paneler';
 import VedtakMetaInformasjon from "./VedtakMetaInformasjon";
 import VedtakOppsummering from './VedtakOppsummering';
 import VedtakUtbetaltePerioder from './VedtakUtbetaltePerioder';
-import styled from 'styled-components';
-import { Row } from 'nav-frontend-grid';
+import VedtakAnnullertAlertStripe from './VedtakAnnullertAlertStripe';
 
 
 interface VedtakInfopanelProps {
@@ -17,6 +18,10 @@ interface VedtakInfopanelProps {
 const StyledPanel = styled(Panel)`
     padding: 1.5em;
     margin-bottom: .5em;
+`;
+
+const AlertStripeRow = styled(Row)`
+    margin-top: 2em;
 `;
 
 const VedtakInfopanel = (vedtakProps: VedtakInfopanelProps) => {
@@ -32,6 +37,11 @@ const VedtakInfopanel = (vedtakProps: VedtakInfopanelProps) => {
             <VedtakMetaInformasjon selectedVedtak={selectedVedtak}/>
             <VedtakUtbetaltePerioder selectedVedtak={selectedVedtak}/>
             <VedtakOppsummering selectedVedtak={selectedVedtak}/>
+            {selectedVedtak.annullert &&
+            <AlertStripeRow>
+                <VedtakAnnullertAlertStripe />
+            </AlertStripeRow>
+            }
         </StyledPanel>
     );
 };

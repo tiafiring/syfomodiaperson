@@ -8,6 +8,7 @@ import { hentVedtak } from '../actions/vedtak_actions';
 import Side from '../sider/Side';
 import { VedtakDTO } from '../reducers/vedtak';
 import { restdatoTildato } from '../utils/datoUtils';
+import VedtakAnnullertLabel from "../components/vedtak/VedtakAnnullertLabel";
 import VedtakInfopanel from '../components/vedtak/VedtakInfopanel';
 import styled from 'styled-components';
 import { VEDTAK } from '../enums/menypunkter';
@@ -46,6 +47,17 @@ const StyledButton = styled.button`
   text-align: left;
 `;
 
+const FlexRow = styled.div`
+    display: flex;
+`;
+
+const FlexColInfo = styled.div`
+    flex-grow: 1;
+`;
+const FlexColLabel = styled.div`
+    flex-grow: 0;
+`;
+
 const VedtakContainer = () => {
     const fnr = window.location.pathname.split('/')[2];
 
@@ -78,14 +90,23 @@ const VedtakContainer = () => {
                                     setSelectedVedtak(v);
                                 }}>
                                     <StyledPanel isActive={v.id === selectedVedtak.id}>
-                                        <Undertittel>
-                                            {`${restdatoTildato(v.vedtak.fom)} - ${restdatoTildato(v.vedtak.tom)}`}
-                                        </Undertittel>
-                                        <Undertekst>
-                                            {`Vedtaksdato: ${restdatoTildato(
-                                                v.opprettet,
-                                            )} · Restdager: ${v.vedtak.gjenståendeSykedager}`}
-                                        </Undertekst>
+                                        <FlexRow>
+                                            <FlexColInfo>
+                                                <Undertittel>
+                                                    {`${restdatoTildato(v.vedtak.fom)} - ${restdatoTildato(v.vedtak.tom)}`}
+                                                </Undertittel>
+                                                <Undertekst>
+                                                    {`Vedtaksdato: ${restdatoTildato(
+                                                        v.opprettet,
+                                                    )} · Restdager: ${v.vedtak.gjenståendeSykedager}`}
+                                                </Undertekst>
+                                            </FlexColInfo>
+                                            {v.annullert &&
+                                                <FlexColLabel>
+                                                    <VedtakAnnullertLabel />
+                                                </FlexColLabel>
+                                            }
+                                        </FlexRow>
                                     </StyledPanel>
                                 </StyledButton>
                             ))}

@@ -10,6 +10,7 @@ export interface VedtakDTO {
     lestDato: Date,
     vedtak: Vedtak,
     opprettet: Date
+    annullert: boolean;
 }
 
 export interface Vedtak {
