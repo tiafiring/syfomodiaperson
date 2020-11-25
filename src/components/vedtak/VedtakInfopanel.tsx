@@ -3,6 +3,7 @@ import { Innholdstittel } from 'nav-frontend-typografi';
 import { restdatoTildato } from '../../utils/datoUtils';
 import { VedtakDTO } from '../../reducers/vedtak';
 import Panel from 'nav-frontend-paneler';
+import VedtakMetaInformasjon from "./VedtakMetaInformasjon";
 import VedtakOppsummering from './VedtakOppsummering';
 import VedtakUtbetaltePerioder from './VedtakUtbetaltePerioder';
 import styled from 'styled-components';
@@ -28,6 +29,7 @@ const VedtakInfopanel = (vedtakProps: VedtakInfopanelProps) => {
                     {`${restdatoTildato(selectedVedtak.vedtak.fom)} - ${restdatoTildato(selectedVedtak.vedtak.tom)}`}
                 </Innholdstittel>
             </Row>
+            <VedtakMetaInformasjon selectedVedtak={selectedVedtak}/>
             <VedtakUtbetaltePerioder selectedVedtak={selectedVedtak}/>
             <VedtakOppsummering selectedVedtak={selectedVedtak}/>
         </StyledPanel>

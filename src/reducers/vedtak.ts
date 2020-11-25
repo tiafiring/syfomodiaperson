@@ -7,6 +7,7 @@ import {
 export interface VedtakDTO {
     id: String,
     lest: Boolean,
+    lestDato: Date,
     vedtak: Vedtak,
     opprettet: Date
 }
