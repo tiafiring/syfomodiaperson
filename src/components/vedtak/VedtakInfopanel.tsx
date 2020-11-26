@@ -20,8 +20,8 @@ const StyledPanel = styled(Panel)`
     margin-bottom: .5em;
 `;
 
-const AlertStripeRow = styled(Row)`
-    margin-top: 2em;
+export const VedtakInfopanelRow = styled(Row)`
+    margin-bottom: 1em;
 `;
 
 const VedtakInfopanel = (vedtakProps: VedtakInfopanelProps) => {
@@ -29,18 +29,18 @@ const VedtakInfopanel = (vedtakProps: VedtakInfopanelProps) => {
 
     return (
         <StyledPanel>
-            <Row>
+            <VedtakInfopanelRow>
                 <Innholdstittel>
                     {`${restdatoTildato(selectedVedtak.vedtak.fom)} - ${restdatoTildato(selectedVedtak.vedtak.tom)}`}
                 </Innholdstittel>
-            </Row>
+            </VedtakInfopanelRow>
             <VedtakMetaInformasjon selectedVedtak={selectedVedtak}/>
-            <VedtakUtbetaltePerioder selectedVedtak={selectedVedtak}/>
             <VedtakOppsummering selectedVedtak={selectedVedtak}/>
+            <VedtakUtbetaltePerioder selectedVedtak={selectedVedtak}/>
             {selectedVedtak.annullert &&
-            <AlertStripeRow>
+            <VedtakInfopanelRow>
                 <VedtakAnnullertAlertStripe />
-            </AlertStripeRow>
+            </VedtakInfopanelRow>
             }
         </StyledPanel>
     );

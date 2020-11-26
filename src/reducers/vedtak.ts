@@ -16,6 +16,8 @@ export interface VedtakDTO {
 export interface Vedtak {
     fom: Date,
     tom: Date,
+    månedsinntekt?: number;
+    sykepengegrunnlag?: number;
     forbrukteSykedager: number,
     gjenståendeSykedager: number,
     automatiskBehandling: boolean,

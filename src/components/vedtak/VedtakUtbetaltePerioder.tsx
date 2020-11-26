@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Row } from 'nav-frontend-grid';
 import {
     Ingress,
     Normaltekst,
@@ -12,6 +11,7 @@ import {
 } from '../../reducers/vedtak';
 import { restdatoTildato } from '../../utils/datoUtils';
 import styled from 'styled-components';
+import { VedtakInfopanelRow } from './VedtakInfopanel';
 
 const texts = {
     utbetalt: 'Utbetalte perioder til nå',
@@ -22,7 +22,11 @@ interface VedtakUtbetaltePerioderProps {
 }
 
 const StyledIngress = styled(Ingress)`
-    margin-top: .5em;
+    margin-bottom: .5em;
+`;
+
+const StyledUndertittel = styled(Undertittel)`
+    margin-bottom: .5em;
 `;
 
 const displayUtbetaling = (utbetaling: Utbetaling) => {
@@ -48,18 +52,14 @@ const displayUtbetaling = (utbetaling: Utbetaling) => {
     );
 };
 
-const StyledUndertittel = styled(Undertittel)`
-    margin-top: .5em;
-`;
-
 const VedtakUtbetaltePerioder = (utbetaltePerioderProps: VedtakUtbetaltePerioderProps) => {
     const { selectedVedtak } = utbetaltePerioderProps;
 
     return (
-        <Row>
+        <VedtakInfopanelRow>
             <StyledUndertittel>{texts.utbetalt}</StyledUndertittel>
             {selectedVedtak.vedtak.utbetalinger.map((utbetaling: Utbetaling) => displayUtbetaling(utbetaling))}
-        </Row>
+        </VedtakInfopanelRow>
     );
 };
 
