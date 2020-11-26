@@ -10,6 +10,7 @@ import { VedtakInfopanelRow } from './VedtakInfopanel';
 
 const texts = {
     lestDato: 'Lest',
+    utbetalingsdato: 'Sendt til utbetaling',
 };
 
 interface VedtakMetaInformasjonProps {
@@ -25,11 +26,13 @@ const VedtakMetaInformasjon = (vedtakMetaInformasjonProps: VedtakMetaInformasjon
     return (
         <VedtakInfopanelRow>
             <Column className='col-xs-4'>
+                <Row><Normaltekst>{texts.utbetalingsdato}</Normaltekst></Row>
                 {isVedtakLest(selectedVedtak) &&
                 <Row><Normaltekst>{texts.lestDato}</Normaltekst></Row>
                 }
             </Column>
             <Column className='col-xs-2'>
+                <Row><Normaltekst>{restdatoTildato(selectedVedtak.opprettet)}</Normaltekst></Row>
                 {isVedtakLest(selectedVedtak) &&
                 <Row><Normaltekst>{restdatoTildato(selectedVedtak.lestDato)}</Normaltekst></Row>
                 }
