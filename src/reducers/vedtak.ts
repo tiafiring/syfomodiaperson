@@ -9,8 +9,8 @@ export interface VedtakDTO {
     lest: Boolean,
     lestDato: Date,
     vedtak: Vedtak,
-    opprettet: Date
-    annullert: boolean;
+    opprettet: Date,
+    annullert: boolean
 }
 
 export interface Vedtak {
@@ -21,6 +21,7 @@ export interface Vedtak {
     forbrukteSykedager: number,
     gjenståendeSykedager: number,
     automatiskBehandling: boolean,
+    organisasjonsnummer: string,
     utbetalinger: Utbetaling[]
 }
 
