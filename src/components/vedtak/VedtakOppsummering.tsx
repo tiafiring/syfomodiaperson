@@ -12,12 +12,22 @@ import {
 } from 'nav-frontend-typografi';
 import { restdatoTildato } from '../../utils/datoUtils';
 import { VedtakDTO } from '../../reducers/vedtak';
-import { estimertMaksdato } from '../../utils/vedtakUtils';
+import {
+    estimertMaksdato,
+    refusjonTilUtbetalingsbelopBrutto,
+    refusjonTilUtbetalingsdager,
+    VedtakFagomrade,
+} from '../../utils/vedtakUtils';
 import { ValutaFormat } from '../../utils/valutaUtils';
 import { VedtakInfopanelRow } from './VedtakInfopanel';
 
 const texts = {
     oppsummering: 'Oppsummering',
+    utbetalingsdager: 'Utbetalingsdager',
+    utbetalingsbelopDag: 'Beløp per dag',
+    utbetalingsbelopBrutto: 'Sykepengebeløp brutto',
+    utbetalingsMottaker: 'Refundert til',
+    utbetalingsMottakerArbeidsgiver: 'Arbeidsgiver',
     maksdato: 'Maksdato',
     vedtaksdato: 'Vedtaksdato',
     dagerGjenstar: 'Dager gjenstår',
@@ -35,11 +45,19 @@ interface VedtakOppsummeringProps {
 const VedtakOppsummering = (vedtakOppsummering: VedtakOppsummeringProps) => {
     const { selectedVedtak } = vedtakOppsummering;
 
+    const [ utbetalingsdagerArbeidsgiver, setUtbetalingsdagerArbeidsgiver ] = useState<string>('-')
+    const [ utbetalingsbelopBruttoArbeidsgiver, setUtbetalingbelopBruttoArbeidsgiver ] = useState<string>('-')
+    const [ utbetalingsbelopDagligArbeidsgiver, setUtbetalingbelopDagligArbeidsgiver ] = useState<string>('-')
     const [ sykepengegrunnlag, setSykepengegrunnlag ] = useState<string>('-')
     const [ manedsinntekt, setManedsinntekt ] = useState<string>('-')
     const [ arsinntekt, setArsinntekt ] = useState<string>('-')
 
     useEffect(() => {
+        const utbetalingsdager = refusjonTilUtbetalingsdager(VedtakFagomrade.SPREF, selectedVedtak)
+        setUtbetalingsdagerArbeidsgiver(utbetalingsdager + ' dager')
+        const utbetalingsbelopBrutto = refusjonTilUtbetalingsbelopBrutto(VedtakFagomrade.SPREF, selectedVedtak)
+        setUtbetalingbelopBruttoArbeidsgiver(ValutaFormat.format(utbetalingsbelopBrutto) + ' kr')
+        setUtbetalingbelopDagligArbeidsgiver((utbetalingsbelopBrutto / utbetalingsdager) + ' kr')
         if (selectedVedtak?.vedtak.sykepengegrunnlag) {
             const calculatedSykepengegrunnlag = Math.floor(selectedVedtak?.vedtak.sykepengegrunnlag)
             setSykepengegrunnlag(ValutaFormat.format(calculatedSykepengegrunnlag || 0) + ' kr')
@@ -60,6 +78,20 @@ const VedtakOppsummering = (vedtakOppsummering: VedtakOppsummeringProps) => {
         <>
             <VedtakInfopanelRow>
                 <Undertittel>{texts.oppsummering}</Undertittel>
+            </VedtakInfopanelRow>
+            <VedtakInfopanelRow>
+                <Column className='col-xs-4'>
+                    <Row><Normaltekst>{texts.utbetalingsdager}</Normaltekst></Row>
+                    <Row><Normaltekst>{texts.utbetalingsbelopDag}</Normaltekst></Row>
+                    <Row><Normaltekst>{texts.utbetalingsbelopBrutto}</Normaltekst></Row>
+                    <Row><Normaltekst>{texts.utbetalingsMottaker}</Normaltekst></Row>
+                </Column>
+                <Column className='col-xs-2'>
+                    <Row><Normaltekst>{utbetalingsdagerArbeidsgiver}</Normaltekst></Row>
+                    <Row><Normaltekst>{utbetalingsbelopDagligArbeidsgiver}</Normaltekst></Row>
+                    <Row><Normaltekst>{utbetalingsbelopBruttoArbeidsgiver}</Normaltekst></Row>
+                    <Row><Normaltekst>{texts.utbetalingsMottakerArbeidsgiver}</Normaltekst></Row>
+                </Column>
             </VedtakInfopanelRow>
             <VedtakInfopanelRow>
                 <Column className='col-xs-4'>
