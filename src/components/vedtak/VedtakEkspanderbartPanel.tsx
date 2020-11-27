@@ -33,6 +33,13 @@ const StyledButton = styled.button`
   background: none;
 `;
 
+const StyledEkspanderbartPanel = styled(Ekspanderbartpanel)`
+  border-radius: 0;
+  margin: 0 0 .2em;
+  padding: 0;
+  background: none;
+`;
+
 const FlexRow = styled.div`
     display: flex;
 `;
@@ -69,7 +76,7 @@ const VedtakEkspanderbartPanel = (panelProps: VedtakEkspanderbartPanelProps) => 
     }, [virksomhetState]);
 
     return (
-        <Ekspanderbartpanel tittel={<Normaltekst>{arbeidsgiver}</Normaltekst>}>
+        <StyledEkspanderbartPanel tittel={<Normaltekst>{arbeidsgiver}</Normaltekst>}>
 
             {vedtakPerArbeidsgiver.map((v: VedtakDTO) => {
                 return (
@@ -98,11 +105,8 @@ const VedtakEkspanderbartPanel = (panelProps: VedtakEkspanderbartPanelProps) => 
                     </StyledPanel>
                 );
             })}
-
-        </Ekspanderbartpanel>
-
+        </StyledEkspanderbartPanel>
     );
-
 };
 
 export default VedtakEkspanderbartPanel;
