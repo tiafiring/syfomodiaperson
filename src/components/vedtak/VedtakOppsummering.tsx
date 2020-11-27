@@ -25,6 +25,7 @@ const texts = {
     utbetalingsbelopBrutto: 'Sykepengebeløp brutto',
     utbetalingsMottaker: 'Refundert til',
     utbetalingsMottakerArbeidsgiver: 'Arbeidsgiver',
+    utbetalingsMottakerArbeidstaker: 'Arbeidstaker',
     maksdato: 'Maksdato',
     dagerGjenstar: 'Dager gjenstår',
     dagerBrukt: 'Dager brukt hittil',
@@ -41,19 +42,40 @@ interface VedtakOppsummeringProps {
 const VedtakOppsummering = (vedtakOppsummering: VedtakOppsummeringProps) => {
     const { selectedVedtak } = vedtakOppsummering;
 
+    const [ utbetaltArbeidsgiver, setUtbetaltArbeidsgiver] = useState<boolean>(false)
     const [ utbetalingsdagerArbeidsgiver, setUtbetalingsdagerArbeidsgiver ] = useState<string>('-')
     const [ utbetalingsbelopBruttoArbeidsgiver, setUtbetalingbelopBruttoArbeidsgiver ] = useState<string>('-')
     const [ utbetalingsbelopDagligArbeidsgiver, setUtbetalingbelopDagligArbeidsgiver ] = useState<string>('-')
+
+    const [ utbetaltArbeidstaker, setUtbetaltArbeidstaker ] = useState<boolean>(false)
+    const [ utbetalingsdagerArbeidstaker, setUtbetalingsdagerArbeidstaker ] = useState<string>('-')
+    const [ utbetalingsbelopBruttoArbeidstaker, setUtbetalingbelopBruttoArbeidstaker ] = useState<string>('-')
+    const [ utbetalingsbelopDagligArbeidstaker, setUtbetalingbelopDagligArbeidstaker ] = useState<string>('-')
+
     const [ sykepengegrunnlag, setSykepengegrunnlag ] = useState<string>('-')
     const [ manedsinntekt, setManedsinntekt ] = useState<string>('-')
     const [ arsinntekt, setArsinntekt ] = useState<string>('-')
 
     useEffect(() => {
-        const utbetalingsdager = refusjonTilUtbetalingsdager(VedtakFagomrade.SPREF, selectedVedtak)
-        setUtbetalingsdagerArbeidsgiver(utbetalingsdager + ' dager')
-        const utbetalingsbelopBrutto = refusjonTilUtbetalingsbelopBrutto(VedtakFagomrade.SPREF, selectedVedtak)
-        setUtbetalingbelopBruttoArbeidsgiver(ValutaFormat.format(utbetalingsbelopBrutto) + ' kr')
-        setUtbetalingbelopDagligArbeidsgiver((utbetalingsbelopBrutto / utbetalingsdager) + ' kr')
+        const utbetalingsdagerArbeidsgiver = refusjonTilUtbetalingsdager(VedtakFagomrade.SPREF, selectedVedtak)
+        if (utbetalingsdagerArbeidsgiver > 0) {
+            setUtbetalingsdagerArbeidsgiver(utbetalingsdagerArbeidsgiver + ' dager')
+            const utbetalingsbelopBruttoArbeidsgiver = refusjonTilUtbetalingsbelopBrutto(VedtakFagomrade.SPREF, selectedVedtak)
+            setUtbetalingbelopBruttoArbeidsgiver(ValutaFormat.format(utbetalingsbelopBruttoArbeidsgiver) + ' kr')
+            setUtbetalingbelopDagligArbeidsgiver((utbetalingsbelopBruttoArbeidsgiver ? (utbetalingsbelopBruttoArbeidsgiver / utbetalingsdagerArbeidsgiver) : 0) + ' kr')
+            setUtbetaltArbeidsgiver(true)
+        }
+
+        const utbetalingsdagerArbeidstaker = refusjonTilUtbetalingsdager(VedtakFagomrade.SP, selectedVedtak)
+        if (utbetalingsdagerArbeidstaker > 0) {
+            setUtbetalingsdagerArbeidstaker(utbetalingsdagerArbeidstaker + ' dager')
+            const utbetalingsbelopBruttoArbeidstaker = refusjonTilUtbetalingsbelopBrutto(VedtakFagomrade.SP, selectedVedtak)
+            setUtbetalingbelopBruttoArbeidstaker(ValutaFormat.format(utbetalingsbelopBruttoArbeidstaker) + ' kr')
+            setUtbetalingbelopDagligArbeidstaker((utbetalingsbelopBruttoArbeidstaker / utbetalingsdagerArbeidstaker) + ' kr')
+            setUtbetalingbelopDagligArbeidstaker((utbetalingsbelopBruttoArbeidstaker ? (utbetalingsdagerArbeidstaker / utbetalingsdagerArbeidsgiver) : 0) + ' kr')
+            setUtbetaltArbeidstaker(true)
+        }
+
         if (selectedVedtak?.vedtak.sykepengegrunnlag) {
             const calculatedSykepengegrunnlag = Math.floor(selectedVedtak?.vedtak.sykepengegrunnlag)
             setSykepengegrunnlag(ValutaFormat.format(calculatedSykepengegrunnlag || 0) + ' kr')
@@ -72,6 +94,7 @@ const VedtakOppsummering = (vedtakOppsummering: VedtakOppsummeringProps) => {
 
     return (
         <>
+            { utbetaltArbeidsgiver &&
             <VedtakInfopanelRow>
                 <Column className='col-xs-4'>
                     <Row><Normaltekst>{texts.utbetalingsdager}</Normaltekst></Row>
@@ -86,6 +109,23 @@ const VedtakOppsummering = (vedtakOppsummering: VedtakOppsummeringProps) => {
                     <Row><Normaltekst>{texts.utbetalingsMottakerArbeidsgiver}</Normaltekst></Row>
                 </Column>
             </VedtakInfopanelRow>
+            }
+            {utbetaltArbeidstaker &&
+            <VedtakInfopanelRow>
+                <Column className='col-xs-4'>
+                    <Row><Normaltekst>{texts.utbetalingsdager}</Normaltekst></Row>
+                    <Row><Normaltekst>{texts.utbetalingsbelopDag}</Normaltekst></Row>
+                    <Row><Normaltekst>{texts.utbetalingsbelopBrutto}</Normaltekst></Row>
+                    <Row><Normaltekst>{texts.utbetalingsMottaker}</Normaltekst></Row>
+                </Column>
+                <Column className='col-xs-2'>
+                    <Row><Normaltekst>{utbetalingsdagerArbeidstaker}</Normaltekst></Row>
+                    <Row><Normaltekst>{utbetalingsbelopDagligArbeidstaker}</Normaltekst></Row>
+                    <Row><Normaltekst>{utbetalingsbelopBruttoArbeidstaker}</Normaltekst></Row>
+                    <Row><Normaltekst>{texts.utbetalingsMottakerArbeidstaker}</Normaltekst></Row>
+                </Column>
+            </VedtakInfopanelRow>
+            }
             <VedtakInfopanelRow>
                 <Column className='col-xs-4'>
                     <Row><Normaltekst>{texts.maksdato}</Normaltekst></Row>
