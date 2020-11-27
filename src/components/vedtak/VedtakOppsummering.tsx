@@ -29,7 +29,6 @@ const texts = {
     utbetalingsMottaker: 'Refundert til',
     utbetalingsMottakerArbeidsgiver: 'Arbeidsgiver',
     maksdato: 'Maksdato',
-    vedtaksdato: 'Vedtaksdato',
     dagerGjenstar: 'Dager gjenstår',
     dagerBrukt: 'Dager brukt hittil',
     totalSykepengedager: 'Sykepengedager totalt',
@@ -96,14 +95,12 @@ const VedtakOppsummering = (vedtakOppsummering: VedtakOppsummeringProps) => {
             <VedtakInfopanelRow>
                 <Column className='col-xs-4'>
                     <Row><Normaltekst>{texts.maksdato}</Normaltekst></Row>
-                    <Row><Normaltekst>{texts.vedtaksdato}</Normaltekst></Row>
                     <Row><Normaltekst>{texts.dagerGjenstar}</Normaltekst></Row>
                     <Row><Normaltekst>{texts.dagerBrukt}</Normaltekst></Row>
                     <Row><Normaltekst>{texts.totalSykepengedager}</Normaltekst></Row>
                 </Column>
                 <Column className='col-xs-2'>
                     <Row><Normaltekst>{estimertMaksdato(selectedVedtak)}</Normaltekst></Row>
-                    <Row><Normaltekst>{restdatoTildato(selectedVedtak.opprettet)}</Normaltekst></Row>
                     <Row><Normaltekst>{selectedVedtak.vedtak.gjenståendeSykedager}</Normaltekst></Row>
                     <Row><Normaltekst>{selectedVedtak.vedtak.forbrukteSykedager}</Normaltekst></Row>
                     <Row><Normaltekst>{selectedVedtak.vedtak.forbrukteSykedager + selectedVedtak.vedtak.gjenståendeSykedager}</Normaltekst></Row>

@@ -90,7 +90,7 @@ const VedtakEkspanderbartPanel = (panelProps: VedtakEkspanderbartPanelProps) => 
                                         {`${restdatoTildato(v.vedtak.fom)} - ${restdatoTildato(v.vedtak.tom)}`}
                                     </Undertittel>
                                     <Undertekst>
-                                        {`Vedtaksdato: ${restdatoTildato(
+                                        {`Utbetaling: ${restdatoTildato(
                                             v.opprettet,
                                         )} · Restdager: ${v.vedtak.gjenståendeSykedager}`}
                                     </Undertekst>
