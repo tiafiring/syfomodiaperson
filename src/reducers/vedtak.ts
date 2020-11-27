@@ -27,7 +27,7 @@ export interface Vedtak {
 
 export interface Utbetaling {
     mottaker: string,
-    fagomrade: string,
+    fagområde: string,
     totalbeløp: number,
     utbetalingslinjer: Utbetalingslinje[]
 }
