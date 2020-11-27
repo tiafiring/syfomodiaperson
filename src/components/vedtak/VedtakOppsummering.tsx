@@ -62,7 +62,7 @@ const VedtakOppsummering = (vedtakOppsummering: VedtakOppsummeringProps) => {
             setUtbetalingsdagerArbeidsgiver(utbetalingsdagerArbeidsgiver + ' dager')
             const utbetalingsbelopBruttoArbeidsgiver = refusjonTilUtbetalingsbelopBrutto(VedtakFagomrade.SPREF, selectedVedtak)
             setUtbetalingbelopBruttoArbeidsgiver(ValutaFormat.format(utbetalingsbelopBruttoArbeidsgiver) + ' kr')
-            setUtbetalingbelopDagligArbeidsgiver((utbetalingsbelopBruttoArbeidsgiver ? (utbetalingsbelopBruttoArbeidsgiver / utbetalingsdagerArbeidsgiver) : 0) + ' kr')
+            setUtbetalingbelopDagligArbeidsgiver((utbetalingsbelopBruttoArbeidsgiver > 0 ? ValutaFormat.format(utbetalingsbelopBruttoArbeidsgiver / utbetalingsdagerArbeidsgiver) : 0) + ' kr')
             setUtbetaltArbeidsgiver(true)
         }
 
@@ -72,7 +72,7 @@ const VedtakOppsummering = (vedtakOppsummering: VedtakOppsummeringProps) => {
             const utbetalingsbelopBruttoArbeidstaker = refusjonTilUtbetalingsbelopBrutto(VedtakFagomrade.SP, selectedVedtak)
             setUtbetalingbelopBruttoArbeidstaker(ValutaFormat.format(utbetalingsbelopBruttoArbeidstaker) + ' kr')
             setUtbetalingbelopDagligArbeidstaker((utbetalingsbelopBruttoArbeidstaker / utbetalingsdagerArbeidstaker) + ' kr')
-            setUtbetalingbelopDagligArbeidstaker((utbetalingsbelopBruttoArbeidstaker ? (utbetalingsdagerArbeidstaker / utbetalingsdagerArbeidsgiver) : 0) + ' kr')
+            setUtbetalingbelopDagligArbeidstaker((utbetalingsbelopBruttoArbeidstaker > 0 ? ValutaFormat.format(utbetalingsdagerArbeidstaker / utbetalingsdagerArbeidsgiver) : 0) + ' kr')
             setUtbetaltArbeidstaker(true)
         }
 
