@@ -7,9 +7,7 @@ import { restdatoTildato } from '../../utils/datoUtils';
 import { VedtakDTO } from '../../reducers/vedtak';
 import VedtakMetaInformasjon from "./VedtakMetaInformasjon";
 import VedtakOppsummering from './VedtakOppsummering';
-import VedtakUtbetaltePerioder from './VedtakUtbetaltePerioder';
 import VedtakAnnullertAlertStripe from './VedtakAnnullertAlertStripe';
-
 
 interface VedtakInfopanelProps {
     selectedVedtak: VedtakDTO,
@@ -36,7 +34,6 @@ const VedtakInfopanel = (vedtakProps: VedtakInfopanelProps) => {
             </VedtakInfopanelRow>
             <VedtakMetaInformasjon selectedVedtak={selectedVedtak}/>
             <VedtakOppsummering selectedVedtak={selectedVedtak}/>
-            <VedtakUtbetaltePerioder selectedVedtak={selectedVedtak}/>
             {selectedVedtak.annullert &&
             <VedtakInfopanelRow>
                 <VedtakAnnullertAlertStripe />

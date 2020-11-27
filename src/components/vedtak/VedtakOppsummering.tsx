@@ -8,9 +8,7 @@ import {
 } from 'nav-frontend-grid';
 import {
     Normaltekst,
-    Undertittel,
 } from 'nav-frontend-typografi';
-import { restdatoTildato } from '../../utils/datoUtils';
 import { VedtakDTO } from '../../reducers/vedtak';
 import {
     estimertMaksdato,
@@ -22,7 +20,6 @@ import { ValutaFormat } from '../../utils/valutaUtils';
 import { VedtakInfopanelRow } from './VedtakInfopanel';
 
 const texts = {
-    oppsummering: 'Oppsummering',
     utbetalingsdager: 'Utbetalingsdager',
     utbetalingsbelopDag: 'Beløp per dag',
     utbetalingsbelopBrutto: 'Sykepengebeløp brutto',
@@ -75,9 +72,6 @@ const VedtakOppsummering = (vedtakOppsummering: VedtakOppsummeringProps) => {
 
     return (
         <>
-            <VedtakInfopanelRow>
-                <Undertittel>{texts.oppsummering}</Undertittel>
-            </VedtakInfopanelRow>
             <VedtakInfopanelRow>
                 <Column className='col-xs-4'>
                     <Row><Normaltekst>{texts.utbetalingsdager}</Normaltekst></Row>
