@@ -71,7 +71,9 @@ const VedtakEkspanderbartPanel = (
   const orgnr = vedtakPerArbeidsgiver[0].vedtak.organisasjonsnummer;
 
   useEffect(() => {
-    dispatch(hentVirksomhet(orgnr));
+    if (orgnr) {
+      dispatch(hentVirksomhet(orgnr));
+    }
   }, []);
 
   useEffect(() => {
