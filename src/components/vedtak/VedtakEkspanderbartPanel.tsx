@@ -51,10 +51,9 @@ const FlexColLabel = styled.div`
 `;
 
 interface VedtakEkspanderbartPanelProps {
-  selectedVedtak: VedtakDTO;
+  selectedVedtak?: VedtakDTO;
   setSelectedVedtak: (vedtak: VedtakDTO) => void;
   vedtakPerArbeidsgiver: VedtakDTO[];
-  className?: string;
 }
 
 const VedtakEkspanderbartPanel = (
@@ -86,9 +85,9 @@ const VedtakEkspanderbartPanel = (
     <StyledEkspanderbartPanel
       tittel={<Normaltekst>{arbeidsgiver}</Normaltekst>}
     >
-      {vedtakPerArbeidsgiver.map((v: VedtakDTO) => {
+      {vedtakPerArbeidsgiver.map((v: VedtakDTO, index: number) => {
         return (
-          <StyledPanel isActive={v.id === selectedVedtak.id}>
+          <StyledPanel key={index} isActive={v.id === selectedVedtak?.id}>
             <StyledButton
               onClick={() => {
                 setSelectedVedtak(v);

@@ -10,6 +10,8 @@ import styled from "styled-components";
 import { VEDTAK } from "../enums/menypunkter";
 import { AlertStripeFeil } from "nav-frontend-alertstriper";
 import VedtakEkspanderbartPanel from "../components/vedtak/VedtakEkspanderbartPanel";
+import VedtakUnselected from "../components/vedtak/VedtakUnselected";
+import { groupVedtakByOrgnr } from "../utils/vedtakUtils";
 
 const texts = {
   pageTitle: "Vedtak",
@@ -23,30 +25,6 @@ const StyledAlertStripe = styled(AlertStripeFeil)`
   margin: 0 0.5em 0.5em 0.5em;
 `;
 
-const groupVedtakByOrgnr = (vedtak: VedtakDTO[]): VedtakDTO[][] => {
-  const orgMap = vedtak.reduce(
-    (acc: Map<String, VedtakDTO[]>, currentValue: VedtakDTO) => {
-      const orgnr = currentValue.vedtak.organisasjonsnummer;
-
-      if (!acc.has(orgnr)) {
-        acc.set(orgnr, [currentValue]);
-        return acc;
-      }
-
-      const listOfVedtak = acc.get(orgnr);
-
-      if (listOfVedtak !== undefined) {
-        acc.set(orgnr, [...listOfVedtak, currentValue]);
-      }
-
-      return acc;
-    },
-    new Map<String, VedtakDTO[]>()
-  );
-
-  return [...orgMap.values()];
-};
-
 const VedtakContainer = () => {
   const fnr = window.location.pathname.split("/")[2];
 
@@ -58,25 +36,19 @@ const VedtakContainer = () => {
     dispatch(hentVedtak(fnr));
   }, []);
 
-  useEffect(() => {
-    if (vedtakState && vedtakState.hentet) {
-      vedtakState.data.reverse();
-      setSelectedVedtak(() => vedtakState.data[0]);
-    }
-  }, [vedtakState]);
-
   return (
     <Side fnr={fnr} tittel={texts.pageTitle} aktivtMenypunkt={VEDTAK}>
       <>
         <Row>
           <StyledAlertStripe>{texts.comingSoon}</StyledAlertStripe>
         </Row>
-        {vedtakState && selectedVedtak && (
+        {vedtakState.hentet && (
           <Row>
             <Column className="vedtak col-xs-5">
               {groupVedtakByOrgnr(vedtakState.data).map(
-                (vedtakPerArbeidsgiver: VedtakDTO[]) => (
+                (vedtakPerArbeidsgiver: VedtakDTO[], index: number) => (
                   <VedtakEkspanderbartPanel
+                    key={index}
                     selectedVedtak={selectedVedtak}
                     setSelectedVedtak={(x: VedtakDTO) => {
                       setSelectedVedtak(x);
@@ -86,9 +58,14 @@ const VedtakContainer = () => {
                 )
               )}
             </Column>
-            <Column className="col-xs-7">
-              <VedtakInfopanel selectedVedtak={selectedVedtak} />
-            </Column>
+
+            {selectedVedtak ? (
+              <Column className="col-xs-7">
+                <VedtakInfopanel selectedVedtak={selectedVedtak} />
+              </Column>
+            ) : (
+              <VedtakUnselected />
+            )}
           </Row>
         )}
       </>

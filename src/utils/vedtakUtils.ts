@@ -98,3 +98,27 @@ export const refusjonTilUtbetalingsbelopBrutto = (
     ) || 0
   );
 };
+
+export const groupVedtakByOrgnr = (vedtak: VedtakDTO[]): VedtakDTO[][] => {
+  const orgMap = vedtak.reduce(
+    (acc: Map<String, VedtakDTO[]>, currentValue: VedtakDTO) => {
+      const orgnr = currentValue.vedtak.organisasjonsnummer;
+
+      if (!acc.has(orgnr)) {
+        acc.set(orgnr, [currentValue]);
+        return acc;
+      }
+
+      const listOfVedtak = acc.get(orgnr);
+
+      if (listOfVedtak !== undefined) {
+        acc.set(orgnr, [...listOfVedtak, currentValue]);
+      }
+
+      return acc;
+    },
+    new Map<String, VedtakDTO[]>()
+  );
+
+  return [...orgMap.values()];
+};
