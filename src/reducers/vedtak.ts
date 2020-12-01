@@ -74,7 +74,7 @@ const vedtak = (state = initialState, action = { type: "", data: [] }) => {
         henter: false,
         hentet: true,
         hentingForsokt: true,
-        data: action.data,
+        data: action.data.reverse(),
       };
     }
     case HENT_VEDTAK_FEILET: {
