@@ -87,12 +87,7 @@ const VedtakEkspanderbartPanel = (
     >
       {vedtakPerArbeidsgiver.map((v: VedtakDTO, index: number) => {
         return (
-          <StyledPanel
-            key={index}
-            isActive={
-              selectedVedtak !== undefined && v.id === selectedVedtak.id
-            }
-          >
+          <StyledPanel key={index} isActive={v.id === selectedVedtak?.id}>
             <StyledButton
               onClick={() => {
                 setSelectedVedtak(v);
