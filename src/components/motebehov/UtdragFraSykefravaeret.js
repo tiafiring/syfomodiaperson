@@ -102,6 +102,11 @@ export const UtvidbarTittel = ({ sykmelding }) => {
           tidligsteFom(sykmelding.mulighetForArbeid.perioder),
           senesteTom(sykmelding.mulighetForArbeid.perioder)
         )}: `}</span>
+        {sykmelding.diagnose.hoveddiagnose && (
+          <span className="utvidbarTittel__diagnose">
+            {sykmelding.diagnose.hoveddiagnose.diagnosekode}
+          </span>
+        )}
         <span className="utvidbarTittel__grad">
           {stringMedAlleGraderingerFraSykmeldingPerioder(
             sykmeldingPerioderSortertEtterDato

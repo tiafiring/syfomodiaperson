@@ -15,6 +15,7 @@ import HistorikkContainer from "../containers/HistorikkContainer";
 import { erGyldigFodselsnummer } from "../utils/frnValideringUtils";
 import MotelandingssideContainer from "../containers/MotelandingssideContainer";
 import MotebehovContainer from "../containers/MotebehovContainer";
+import NokkelinformasjonContainer from "../containers/NokkelinformasjonContainer";
 import VedtakContainer from "../containers/VedtakContainer";
 
 const AppRouter = ({ history }) => {
@@ -29,7 +30,11 @@ const AppRouter = ({ history }) => {
 
   return (
     <Router history={history}>
-      <Route path="/sykefravaer/:fnr" component={SykmeldingerContainer} />
+      <Route path="/sykefravaer/:fnr" component={NokkelinformasjonContainer} />
+      <Route
+        path="/sykefravaer/:fnr/nokkelinformasjon"
+        component={NokkelinformasjonContainer}
+      />
       <Route path="/sykefravaer/:fnr/logg" component={HistorikkContainer} />
       <Route
         path="/sykefravaer/:fnr/moteoversikt"
@@ -73,7 +78,10 @@ const AppRouter = ({ history }) => {
         component={OppfoelgingsplanContainer}
       />
       <Route path="/sykefravaer/:fnr/vedtak" component={VedtakContainer} />
-      <Route path="/sykefravaer/:fnr/*" component={SykmeldingerContainer} />
+      <Route
+        path="/sykefravaer/:fnr/*"
+        component={NokkelinformasjonContainer}
+      />
       <Route path="/sykefravaer" component={IngenBrukerContainer} />
     </Router>
   );
