@@ -141,6 +141,14 @@ export const sykmeldingerMedStatusSendt = (sykmeldinger) => {
   });
 };
 
+export const sykmeldingerUtenArbeidsgiver = (sykmeldinger) => {
+  return sykmeldinger.filter((sykmelding) => {
+    return (
+      !sykmelding.orgnummer && sykmelding.status === gamleSMStatuser.BEKREFTET
+    );
+  });
+};
+
 export const sykmeldingerInnenforOppfolgingstilfellet = (
   sykmeldinger,
   oppfolgingstilfelleperioder
@@ -158,6 +166,23 @@ export const sykmeldingerInnenforOppfolgingstilfellet = (
       tilfelleperioderReducer.data[0].fom
         ? new Date(tilfelleperioderReducer.data[0].fom)
         : new Date();
+    tilfelleStart.setHours(0, 0, 0, 0);
+
+    return sykmeldingStart.getTime() - tilfelleStart.getTime() >= 0;
+  });
+};
+
+export const sykmeldingerInnenforOppfolgingstilfellePerson = (
+  sykmeldinger,
+  oppfolgingstilfelleperson
+) => {
+  return sykmeldinger.filter((sykmelding) => {
+    const sykmeldingStart = new Date(sykmelding.startLegemeldtFravaer);
+    sykmeldingStart.setHours(0, 0, 0, 0);
+
+    const tilfelleStart = oppfolgingstilfelleperson.fom
+      ? new Date(oppfolgingstilfelleperson.fom)
+      : new Date();
     tilfelleStart.setHours(0, 0, 0, 0);
 
     return sykmeldingStart.getTime() - tilfelleStart.getTime() >= 0;

@@ -29,6 +29,7 @@ import virksomhet from "./reducers/virksomhet";
 import veilederinfo from "./reducers/veilederinfo";
 import diskresjonskode from "./reducers/diskresjonskode";
 import egenansatt from "./reducers/egenansatt";
+import oppfolgingstilfellerperson from "./reducers/oppfolgingstilfellerperson";
 import oppfolgingstilfelleperioder from "./reducers/oppfolgingstilfelleperioder";
 import personadresse from "./reducers/personadresse";
 import personoppgaver from "./reducers/personoppgaver";
@@ -81,6 +82,7 @@ const rootReducer = combineReducers({
   tilgang,
   form: formReducer,
   soknader,
+  oppfolgingstilfellerperson,
   oppfolgingstilfelleperioder,
   personadresse,
   personoppgaver,

@@ -1071,8 +1071,8 @@
     },
     "sykmeldingsperioder": [
       {
-        "fom": "2020-03-30",
-        "tom": "2020-04-14",
+        "fom": "2020-10-15",
+        "tom": "2020-10-21",
         "gradert": null,
         "behandlingsdager": null,
         "innspillTilArbeidsgiver": null,
@@ -1144,7 +1144,7 @@
       },
       "tlf": "tel:55553336"
     },
-    "syketilfelleStartDato": "2020-03-30",
+    "syketilfelleStartDato": "2020-10-15",
     "navnFastlege": null,
     "egenmeldt": true,
     "papirsykmelding": false,
@@ -1367,6 +1367,142 @@
     "syketilfelleStartDato": "2020-07-22",
     "navnFastlege": "Lego Las Legesen",
     "egenmeldt": false,
+    "harRedusertArbeidsgiverperiode": false
+  },
+  {
+    "id": "8361e922-2c92-4aa8-811d-e53ca958dc6a",
+    "mottattTidspunkt": "2020-10-14T20:00:00Z",
+    "behandlingsutfall": {
+      "status": "MANUAL_PROCESSING",
+      "ruleHits": [
+        {
+          "messageForSender": "Infotrygd returnerte en feil, vi kan ikke automatisk oppdatere Infotrygd",
+          "messageForUser": "Infotrygd returnerte en feil, vi kan ikke automatisk oppdatere Infotrygd",
+          "ruleName": "ERROR_FROM_IT_HOUVED_STATUS_KODEMELDING",
+          "ruleStatus": "MANUAL_PROCESSING"
+        }
+      ]
+    },
+    "legekontorOrgnummer": "223456789",
+    "arbeidsgiver": { "navn": "LOMMEN BARNEHAVE", "stillingsprosent": 100 },
+    "sykmeldingsperioder": [
+      {
+        "fom": "2020-10-15",
+        "tom": "2020-10-21",
+        "gradert": null,
+        "behandlingsdager": null,
+        "innspillTilArbeidsgiver": null,
+        "type": "AKTIVITET_IKKE_MULIG",
+        "aktivitetIkkeMulig": {
+          "medisinskArsak": {
+            "beskrivelse": "andre årsaker til sykefravær",
+            "arsak": ["AKTIVITET_FORHINDRER_BEDRING"]
+          },
+          "arbeidsrelatertArsak": {
+            "beskrivelse": "andre årsaker til sykefravær",
+            "arsak": ["ANNET"]
+          }
+        },
+        "reisetilskudd": false
+      }
+    ],
+    "sykmeldingStatus": {
+      "statusEvent": "BEKREFTET",
+      "timestamp": "2020-10-22T05:58:56.351983Z",
+      "arbeidsgiver": null,
+      "sporsmalOgSvarListe": [
+        {
+          "tekst": "Jeg er sykmeldt fra",
+          "shortName": "ARBEIDSSITUASJON",
+          "svar": { "svarType": "ARBEIDSSITUASJON", "svar": "ARBEIDSLEDIG" }
+        }
+      ]
+    },
+    "medisinskVurdering": {
+      "hovedDiagnose": {
+        "kode": "L87",
+        "system": "ICPC-2",
+        "tekst": "Bursitt/tendinitt/synovitt IKA"
+      },
+      "biDiagnoser": [
+        {
+          "kode": "L87",
+          "system": "ICPC-2",
+          "tekst": "Bursitt/tendinitt/synovitt IKA"
+        }
+      ],
+      "annenFraversArsak": null,
+      "svangerskap": false,
+      "yrkesskade": false,
+      "yrkesskadeDato": "2020-10-15"
+    },
+    "skjermesForPasient": false,
+    "prognose": {
+      "arbeidsforEtterPeriode": true,
+      "hensynArbeidsplassen": "Må ta det pent",
+      "erIArbeid": {
+        "egetArbeidPaSikt": true,
+        "annetArbeidPaSikt": true,
+        "arbeidFOM": "2020-10-15",
+        "vurderingsdato": "2020-10-15"
+      },
+      "erIkkeIArbeid": null
+    },
+    "utdypendeOpplysninger": {
+      "6.2": {
+        "6.2.1": {
+          "sporsmal": "Beskriv kort sykehistorie, symptomer og funn i dagens situasjon.",
+          "svar": "Langvarig korsryggsmerter. Ømhet og smerte",
+          "restriksjoner": ["SKJERMET_FOR_ARBEIDSGIVER"]
+        },
+        "6.2.2": {
+          "sporsmal": "Hvordan påvirker sykdommen arbeidsevnen",
+          "svar": "Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket. Duplikatbuster: e8f9991b-b363-40be-b94c-a5f30682bd2d",
+          "restriksjoner": ["SKJERMET_FOR_ARBEIDSGIVER"]
+        },
+        "6.2.3": {
+          "sporsmal": "Har behandlingen frem til nå bedret arbeidsevnen?",
+          "svar": "Nei",
+          "restriksjoner": ["SKJERMET_FOR_ARBEIDSGIVER"]
+        },
+        "6.2.4": {
+          "sporsmal": "Beskriv Pågående og planlagt henvisning, utredning og/eller behandling",
+          "svar": "Henvist til fysio",
+          "restriksjoner": ["SKJERMET_FOR_ARBEIDSGIVER"]
+        }
+      }
+    },
+    "tiltakArbeidsplassen": null,
+    "tiltakNAV": "Pasienten har plager som er kommet tilbake etter operasjon. Det er nylig tatt MR bildet som viser forandringer i hånd som mulig må opereres. Venter på time. Det er mulig sykemledingen vil vare utover aktuell sm periode. ",
+    "andreTiltak": null,
+    "meldingTilNAV": null,
+    "meldingTilArbeidsgiver": null,
+    "kontaktMedPasient": {
+      "kontaktDato": null,
+      "begrunnelseIkkeKontakt": null
+    },
+    "behandletTidspunkt": "2020-10-14T22:00:00Z",
+    "behandler": {
+      "fornavn": "Frida",
+      "mellomnavn": "Perma",
+      "etternavn": "Frost",
+      "aktoerId": "110110110111",
+      "fnr": "99900011122",
+      "hpr": null,
+      "her": null,
+      "adresse": {
+        "gate": "Kirkegårdsveien 3",
+        "postnummer": 1348,
+        "kommune": "Rykkinn",
+        "postboks": null,
+        "land": "Country"
+      },
+      "tlf": "tel:94431152"
+    },
+    "syketilfelleStartDato": "2020-10-15",
+    "navnFastlege": "Victor Frankenstein",
+    "egenmeldt": false,
+    "papirsykmelding": false,
     "harRedusertArbeidsgiverperiode": false
   }
 ]
