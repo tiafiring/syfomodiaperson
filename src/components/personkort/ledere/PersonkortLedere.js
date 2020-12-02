@@ -4,7 +4,7 @@ import {
   ledereWithActiveLedereFirst,
   virksomheterWithoutLeder,
 } from "../../../utils/ledereUtils";
-import { groupArrayByKey } from "../../../utils/sortUtils";
+import { groupArrayByKey } from "../../../utils/sortUtils.ts";
 import PersonkortFeilmelding from "../PersonkortFeilmelding";
 import PersonKortVirksomhetLedere from "./PersonKortVirksomhetLedere";
 import PersonKortVirksomhetHeader from "./PersonKortVirksomhetHeader";
