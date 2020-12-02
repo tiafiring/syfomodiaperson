@@ -15,28 +15,54 @@ export function* hentOppfolgingstilfelleperioder(action, orgnummer) {
   }
 }
 
-export const hentLedere = (state) => {
-  const erLedereHentet = state.ledere.hentet;
+export const hentLedereVirksomhetsnummerList = (ledere) => {
+  const erLedereHentet = ledere.hentet;
   if (erLedereHentet) {
-    return state.ledere.data;
+    return ledere.data.map((leder) => {
+      return leder.orgnummer;
+    });
   }
   return [];
 };
 
-export const skalHenteOppfolgingstilfelleperioder = (state, leder) => {
-  const reducer = state.oppfolgingstilfelleperioder[leder.orgnummer] || {};
+export const hentSykmeldingerVirksomhetsnummerList = (sykmeldinger) => {
+  const erSykmeldingerHentet = sykmeldinger.hentet;
+  if (erSykmeldingerHentet) {
+    return sykmeldinger.data
+      .filter((sykmelding) => {
+        return sykmelding.mottakendeArbeidsgiver;
+      })
+      .map((sykmelding) => {
+        return sykmelding.mottakendeArbeidsgiver.virksomhetsnummer;
+      });
+  }
+  return [];
+};
+
+export const hentVirksomhetsnummerList = (state) => {
+  const ledereVirksomhetNrList = hentLedereVirksomhetsnummerList(state.ledere);
+  const sykmeldingerVirksomhetsNrList = hentSykmeldingerVirksomhetsnummerList(
+    state.sykmeldinger
+  );
+  return [
+    ...new Set([...sykmeldingerVirksomhetsNrList, ...ledereVirksomhetNrList]),
+  ];
+};
+
+export const skalHenteOppfolgingstilfelleperioder = (state, orgnummer) => {
+  const reducer = state.oppfolgingstilfelleperioder[orgnummer] || {};
   return (!reducer.henter && !reducer.hentingForsokt) || false;
 };
 
 export function* hentOppfolgingstilfelleperioderHvisIkkeHentet(action) {
-  const ledere = yield select(hentLedere);
-  for (let i = 0; i < ledere.length; i++) {
+  const virksomhetsNrList = yield select(hentVirksomhetsnummerList);
+  for (let i = 0; i < virksomhetsNrList.length; i++) {
     const skalHente = yield select(
       skalHenteOppfolgingstilfelleperioder,
-      ledere[i]
+      virksomhetsNrList[i]
     );
     if (skalHente) {
-      yield call(hentOppfolgingstilfelleperioder, action, ledere[i].orgnummer);
+      yield call(hentOppfolgingstilfelleperioder, action, virksomhetsNrList[i]);
     }
   }
 }

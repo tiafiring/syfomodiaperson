@@ -6,6 +6,12 @@ import cn from "classnames";
 import UnfinishedTasks from "./UnfinishedTasks";
 import { numberOfTasks } from "../utils/GlobalNavigasjonUtils";
 
+const nokkelinformasjonMenypunkt = {
+  navn: "Nøkkelinformasjon",
+  sti: "nokkelinformasjon",
+  menypunkt: menypunkter.NOKKELINFORMASJON,
+};
+
 const historikkMenypunkt = {
   navn: "Logg",
   sti: "logg",
@@ -117,6 +123,7 @@ class GlobalNavigasjon extends Component {
       oppfolgingsplanerLPSReducer,
     } = this.props;
     this.menypunkter = [
+      nokkelinformasjonMenypunkt,
       historikkMenypunkt,
       sykmeldingerMenypunkt,
       sykepengesoknadMenypunkt,
