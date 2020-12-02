@@ -6,12 +6,6 @@
   "test": "npm run test",
   "scripts": {
     "test": "mocha -r ./test/babel-register.js -r @babel/polyfill -r jsdom-global/register -r ignore-styles --recursive",
-    "lint": "eslint src/. --ext .js",
-    "lint:fix": "npm-run-all lintJs:fix lintTest:fix",
-    "lintJs": "eslint js/. --ext .js",
-    "lintJs:fix": "eslint js/. --ext .js --fix",
-    "lintTest": "eslint test/. --ext .js",
-    "lintTest:fix": "eslint test/. --ext .js --fix",
     "start": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "sec-audit": "npm audit --audit-level=moderate"
@@ -112,9 +106,6 @@
     "dotenv-webpack": "1.7.0",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.2",
-    "eslint": "2.5.3",
-    "eslint-config-airbnb": "6.2.0",
-    "eslint-plugin-react": "4.2.3",
     "fetch-mock": "9.10.7",
     "html-webpack-plugin": "4.3.0",
     "ignore-styles": "5.0.1",
