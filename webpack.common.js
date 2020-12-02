@@ -14,7 +14,7 @@ module.exports = {
     publicPath: "/static",
   },
   resolve: {
-    extensions: [".tsx", ".js", ".ts", ".json"],
+    extensions: [".tsx", ".jsx", ".js", ".ts", ".json"],
   },
   module: {
     rules: [
