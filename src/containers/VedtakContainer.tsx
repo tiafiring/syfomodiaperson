@@ -9,9 +9,12 @@ import VedtakInfopanel from "../components/vedtak/VedtakInfopanel";
 import styled from "styled-components";
 import { VEDTAK } from "../enums/menypunkter";
 import { AlertStripeFeil } from "nav-frontend-alertstriper";
-import VedtakEkspanderbartPanel from "../components/vedtak/VedtakEkspanderbartPanel";
 import VedtakUnselected from "../components/vedtak/VedtakUnselected";
-import { groupVedtakByOrgnr } from "../utils/vedtakUtils";
+import VedtakEmpty from "../components/vedtak/VedtakEmpty";
+import VedtakColumn from "../components/vedtak/VedtakColumn";
+import VedtakForbidden from "../components/vedtak/VedtakForbidden";
+import { sjekkTilgang } from "../actions/tilgang_actions";
+import AppSpinner from "../components/AppSpinner";
 
 const texts = {
   pageTitle: "Vedtak",
@@ -29,11 +32,14 @@ const VedtakContainer = () => {
   const fnr = window.location.pathname.split("/")[2];
 
   const vedtakState = useSelector((state: any) => state.vedtak);
+  const tilgangState = useSelector((state: any) => state.tilgang);
+
   const [selectedVedtak, setSelectedVedtak] = useState<VedtakDTO>();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(hentVedtak(fnr));
+    dispatch(sjekkTilgang(fnr));
   }, []);
 
   return (
@@ -42,30 +48,29 @@ const VedtakContainer = () => {
         <Row>
           <StyledAlertStripe>{texts.comingSoon}</StyledAlertStripe>
         </Row>
-        {vedtakState.hentet && (
+        {vedtakState.henter && tilgangState.henter && <AppSpinner />}
+        {vedtakState.hentet && tilgangState.hentet && (
           <Row>
-            <Column className="vedtak col-xs-5">
-              {groupVedtakByOrgnr(vedtakState.data).map(
-                (vedtakPerArbeidsgiver: VedtakDTO[], index: number) => (
-                  <VedtakEkspanderbartPanel
-                    key={index}
-                    selectedVedtak={selectedVedtak}
-                    setSelectedVedtak={(x: VedtakDTO) => {
-                      setSelectedVedtak(x);
-                    }}
-                    vedtakPerArbeidsgiver={vedtakPerArbeidsgiver}
-                  />
-                )
-              )}
-            </Column>
+            {vedtakState.data.length > 0 && (
+              <VedtakColumn
+                data={vedtakState.data}
+                selectedVedtak={selectedVedtak}
+                setSelectedVedtak={setSelectedVedtak}
+              />
+            )}
 
-            {selectedVedtak ? (
+            {selectedVedtak && (
               <Column className="col-xs-7">
                 <VedtakInfopanel selectedVedtak={selectedVedtak} />
               </Column>
-            ) : (
+            )}
+
+            {!selectedVedtak && vedtakState.data.length > 0 && (
               <VedtakUnselected />
             )}
+            {!vedtakState.data.length && <VedtakEmpty />}
+
+            {!tilgangState.data.harTilgang && <VedtakForbidden />}
           </Row>
         )}
       </>
