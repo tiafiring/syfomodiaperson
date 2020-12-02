@@ -13,6 +13,8 @@ import VedtakUnselected from "../components/vedtak/VedtakUnselected";
 import VedtakEmpty from "../components/vedtak/VedtakEmpty";
 import VedtakColumn from "../components/vedtak/VedtakColumn";
 import VedtakForbidden from "../components/vedtak/VedtakForbidden";
+import { sjekkTilgang } from "../actions/tilgang_actions";
+import AppSpinner from "../components/AppSpinner";
 
 const texts = {
   pageTitle: "Vedtak",
@@ -30,16 +32,15 @@ const VedtakContainer = () => {
   const fnr = window.location.pathname.split("/")[2];
 
   const vedtakState = useSelector((state: any) => state.vedtak);
+  const tilgangState = useSelector((state: any) => state.tilgang);
+
   const [selectedVedtak, setSelectedVedtak] = useState<VedtakDTO>();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(hentVedtak(fnr));
+    dispatch(sjekkTilgang(fnr));
   }, []);
-
-  useEffect(() => {
-    console.log(vedtakState);
-  });
 
   return (
     <Side fnr={fnr} tittel={texts.pageTitle} aktivtMenypunkt={VEDTAK}>
@@ -47,7 +48,8 @@ const VedtakContainer = () => {
         <Row>
           <StyledAlertStripe>{texts.comingSoon}</StyledAlertStripe>
         </Row>
-        {vedtakState.hentet && (
+        {vedtakState.henter && tilgangState.henter && <AppSpinner />}
+        {vedtakState.hentet && tilgangState.hentet && (
           <Row>
             {vedtakState.data.length > 0 && (
               <VedtakColumn
@@ -62,13 +64,15 @@ const VedtakContainer = () => {
                 <VedtakInfopanel selectedVedtak={selectedVedtak} />
               </Column>
             )}
+
             {!selectedVedtak && vedtakState.data.length > 0 && (
               <VedtakUnselected />
             )}
             {!vedtakState.data.length && <VedtakEmpty />}
+
+            {!tilgangState.data.harTilgang && <VedtakForbidden />}
           </Row>
         )}
-        {vedtakState.hentingFeilet && <VedtakForbidden />}
       </>
     </Side>
   );
