@@ -88,27 +88,30 @@ const MulighetForArbeid = (mulighetForArbeidProps: MulighetForArbeidProps) => {
     mulighetForArbeid.aarsakAktivitetIkkeMulig434;
   const skalVise = erMulighetForArbeidInformasjon(sykmelding);
   return (
-    (skalVise || !!avventendeTekst) && (
-      <div className="sykmeldingMotebehovVisning__avsnitt">
-        {!!avventendeTekst && (
-          <AvventendeSykmelding avventendeTekst={avventendeTekst} />
-        )}
-        {aktivitetIkkeMulig433 && aktivitetIkkeMulig433.length > 0 && (
-          <AktivitetIkkeMulig
-            beskrivelse={aarsakAktivitetIkkeMulig433}
-            ikkeMuligListe={aktivitetIkkeMulig433}
-            tittel={tekster.mulighetForArbeid.medisinskAarsak.tittel}
-          />
-        )}
-        {aktivitetIkkeMulig434 && aktivitetIkkeMulig434.length > 0 && (
-          <AktivitetIkkeMulig
-            beskrivelse={aarsakAktivitetIkkeMulig434}
-            ikkeMuligListe={aktivitetIkkeMulig434}
-            tittel={tekster.mulighetForArbeid.forholdPaaArbeidsplass.tittel}
-          />
-        )}
-      </div>
-    )
+    <>
+      {" "}
+      {(skalVise || !!avventendeTekst) && (
+        <div className="sykmeldingMotebehovVisning__avsnitt">
+          {!!avventendeTekst && (
+            <AvventendeSykmelding avventendeTekst={avventendeTekst} />
+          )}
+          {aktivitetIkkeMulig433 && aktivitetIkkeMulig433.length > 0 && (
+            <AktivitetIkkeMulig
+              beskrivelse={aarsakAktivitetIkkeMulig433}
+              ikkeMuligListe={aktivitetIkkeMulig433}
+              tittel={tekster.mulighetForArbeid.medisinskAarsak.tittel}
+            />
+          )}
+          {aktivitetIkkeMulig434 && aktivitetIkkeMulig434.length > 0 && (
+            <AktivitetIkkeMulig
+              beskrivelse={aarsakAktivitetIkkeMulig434}
+              ikkeMuligListe={aktivitetIkkeMulig434}
+              tittel={tekster.mulighetForArbeid.forholdPaaArbeidsplass.tittel}
+            />
+          )}
+        </div>
+      )}
+    </>
   );
 };
 

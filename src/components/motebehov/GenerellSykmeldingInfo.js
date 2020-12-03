@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Checkbox } from "nav-frontend-skjema";
 import {
   erArbeidsforEtterPerioden,
@@ -53,10 +52,6 @@ export const GenerellSykmeldingInfo = ({ sykmelding }) => {
       ]}
     </div>
   );
-};
-
-GenerellSykmeldingInfo.propTypes = {
-  sykmelding: PropTypes.object,
 };
 
 export default GenerellSykmeldingInfo;

@@ -8,7 +8,7 @@ import {
 } from "@navikt/digisyfo-npm";
 import { Utvidbar } from "@navikt/digisyfo-npm";
 import EtikettBase from "nav-frontend-etiketter";
-import SykmeldingMotebehovVisning from "./SykmeldingMotebehovVisning";
+import SykmeldingMotebehovVisning from "./SykmeldingMotebehovVisning.tsx";
 import {
   erEkstraInformasjonISykmeldingen,
   arbeidsgivernavnEllerArbeidssituasjon,
