@@ -14,7 +14,7 @@ function getDefaultOppfolgingsplaner() {
         opprettetTidspunkt: "2020-01-30T08:49:05.621",
         gyldighetstidspunkt: {
           fom: "2020-01-30",
-          tom: "2020-04-30",
+          tom: "2021-04-30",
           evalueres: "2020-03-31",
         },
         tvungenGodkjenning: false,
