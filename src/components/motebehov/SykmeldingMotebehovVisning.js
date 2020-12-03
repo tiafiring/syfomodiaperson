@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import MeldingTilArbeidsgiver from "./MeldingTilArbeidsgiver";
+import MeldingTilArbeidsgiver from "./MeldingTilArbeidsgiver.tsx";
 import MeldingTilNav from "./MeldingTilNav.tsx";
 import BedreArbeidsevnen from "./BedreArbeidsevnen.tsx";
 import UtdypendeOpplysninger from "./UtdypendeOpplysninger";

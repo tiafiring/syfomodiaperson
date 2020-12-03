@@ -9,7 +9,14 @@ const tekster = {
   },
 };
 
-export const MeldingTilArbeidsgiver = ({ sykmelding }) => {
+interface MeldingTilArbeidsgiverProps {
+  sykmelding: any;
+}
+
+export const MeldingTilArbeidsgiver = (
+  meldingTilArbeidsgiverProps: MeldingTilArbeidsgiverProps
+) => {
+  const sykmelding = meldingTilArbeidsgiverProps.sykmelding;
   const innspillTilArbeidsgiver = sykmelding.innspillTilArbeidsgiver;
   const skalVise = erMeldingTilArbeidsgiverInformasjon(sykmelding);
   return (
