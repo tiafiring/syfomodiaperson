@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import MeldingTilArbeidsgiver from "./MeldingTilArbeidsgiver";
 import MeldingTilNav from "./MeldingTilNav";
-import BedreArbeidsevnen from "./BedreArbeidsevnen";
+import BedreArbeidsevnen from "./BedreArbeidsevnen.tsx";
 import UtdypendeOpplysninger from "./UtdypendeOpplysninger";
 import TilbakeIArbeid from "./TilbakeIArbeid";
 import GenerellSykmeldingInfo from "./GenerellSykmeldingInfo";

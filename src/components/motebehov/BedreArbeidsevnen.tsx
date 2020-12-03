@@ -12,7 +12,14 @@ const tekster = {
   },
 };
 
-export const BedreArbeidsevnen = ({ sykmelding }) => {
+interface BedreArbeidsevnenProps {
+  sykmelding: any;
+}
+
+export const BedreArbeidsevnen = (
+  bedreArbeidsevnenProps: BedreArbeidsevnenProps
+) => {
+  const sykmelding = bedreArbeidsevnenProps.sykmelding;
   const arbeidsevne = sykmelding.arbeidsevne;
   return (
     !!erBedringAvArbeidsevnenInformasjon(sykmelding) && (
