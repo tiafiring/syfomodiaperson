@@ -9,8 +9,7 @@ import UtdragFraSykefravaeret from "../motebehov/UtdragFraSykefravaeret";
 const texts = {
   pageTitle: "Nøkkelinformasjon",
   comingSoon: `
-       Denne siden er under utvikling.
-       Sykmeldingsoversikten viser foreløpig ikke sykmeldinger hvor det ikke er oppgitt arbeidsgiver. 
+       Denne siden er under utvikling. 
     `,
 };
 
@@ -33,6 +32,7 @@ export class Nokkelinformasjon extends Component {
       aktiveDialoger,
       fnr,
       ledetekster,
+      oppfolgingstilfelleUtenArbeidsgiver,
       oppfolgingstilfelleperioder,
       sykmeldinger,
     } = this.props;
@@ -46,6 +46,9 @@ export class Nokkelinformasjon extends Component {
           aktiveDialoger={aktiveDialoger}
           fnr={fnr}
           ledetekster={ledetekster}
+          oppfolgingstilfelleUtenArbeidsgiver={
+            oppfolgingstilfelleUtenArbeidsgiver
+          }
           oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
           sykmeldinger={sykmeldinger}
         />
@@ -59,6 +62,7 @@ Nokkelinformasjon.propTypes = {
   aktiveDialoger: PropTypes.arrayOf(PropTypes.object),
   fnr: PropTypes.string,
   ledetekster: keyValue,
+  oppfolgingstilfelleUtenArbeidsgiver: PropTypes.object,
   oppfolgingstilfelleperioder: PropTypes.object,
   sykmeldinger: PropTypes.arrayOf(sykmeldingPt),
 };

@@ -1,6 +1,15 @@
 const mockData = require("./mockData");
 const enums = require("./mockDataEnums");
 
+const getOppfolgingstilfellerPerson = () => {
+  return [
+    {
+      fom: "2020-10-15",
+      tom: "2020-10-21",
+    },
+  ];
+};
+
 function mockForLokal(server) {
   server.get("/modiasyforest/api/internad/sykmeldinger", (req, res) => {
     res.setHeader("Content-Type", "application/json");
@@ -20,6 +29,14 @@ function mockForLokal(server) {
       res.send(
         JSON.stringify(mockData[enums.OPPFOLGINGSTILFELLEPERIODER][orgnummer])
       );
+    }
+  );
+
+  server.get(
+    "/modiasyforest/api/internad/oppfolgingstilfelleperioder/utenarbeidsgiver",
+    (req, res) => {
+      res.setHeader("Content-Type", "application/json");
+      res.send(getOppfolgingstilfellerPerson());
     }
   );
 

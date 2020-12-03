@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { keyValue, sykmelding as sykmeldingPt } from "@navikt/digisyfo-npm";
 import * as oppfoelgingsdialogerActions from "../actions/oppfoelgingsdialoger_actions";
+import * as oppfolgingstilfellerpersonActions from "../actions/oppfolgingstilfellerperson_actions";
 import * as oppfolgingstilfelleperioderActions from "../actions/oppfolgingstilfelleperioder_actions";
 import * as sykmeldingerActions from "../actions/sykmeldinger_actions";
 import * as ledereActions from "../actions/ledere_actions";
@@ -31,6 +32,11 @@ export class NokkelinformasjonSide extends Component {
     actions.hentSykmeldinger(fnr);
   }
 
+  componentDidUpdate() {
+    const { actions, fnr } = this.props;
+    actions.hentOppfolgingstilfellerPersonUtenArbeidsiver(fnr);
+  }
+
   componentWillReceiveProps(nextProps) {
     const { actions, fnr } = nextProps;
     actions.hentOppfolgingstilfelleperioder(fnr);
@@ -48,6 +54,7 @@ export class NokkelinformasjonSide extends Component {
       hentingFeilet,
       ledetekster,
       tilgang,
+      oppfolgingstilfelleUtenArbeidsgiver,
       oppfolgingstilfelleperioder,
       sykmeldinger,
     } = this.props;
@@ -72,6 +79,9 @@ export class NokkelinformasjonSide extends Component {
               fnr={fnr}
               ledetekster={ledetekster}
               aktiveDialoger={aktiveDialoger}
+              oppfolgingstilfelleUtenArbeidsgiver={
+                oppfolgingstilfelleUtenArbeidsgiver
+              }
               oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
               sykmeldinger={sykmeldinger}
             />
@@ -90,6 +100,7 @@ NokkelinformasjonSide.propTypes = {
   hentingFeilet: PropTypes.bool,
   ledetekster: keyValue,
   tilgang: PropTypes.object,
+  oppfolgingstilfelleUtenArbeidsgiver: PropTypes.object,
   oppfolgingstilfelleperioder: PropTypes.object,
   sykmeldinger: PropTypes.arrayOf(sykmeldingPt),
 };
@@ -98,6 +109,7 @@ export function mapDispatchToProps(dispatch) {
   const actions = Object.assign(
     {},
     oppfoelgingsdialogerActions,
+    oppfolgingstilfellerpersonActions,
     oppfolgingstilfelleperioderActions,
     sykmeldingerActions,
     ledereActions,
@@ -118,6 +130,9 @@ export const mapStateToProps = (state, ownProps) => {
     );
   });
 
+  const oppfolgingstilfelleUtenArbeidsgiver =
+    state.oppfolgingstilfellerperson.data[0] || {};
+
   const harForsoktHentetAlt =
     harForsoktHentetLedetekster(state.ledetekster) &&
     harForsoktHentetOppfoelgingsdialoger(state.oppfoelgingsdialoger) &&
@@ -129,6 +144,7 @@ export const mapStateToProps = (state, ownProps) => {
     ledetekster: state.ledetekster.data,
     tilgang: state.tilgang.data,
     aktiveDialoger,
+    oppfolgingstilfelleUtenArbeidsgiver,
     oppfolgingstilfelleperioder,
     sykmeldinger: state.sykmeldinger.data,
   };
