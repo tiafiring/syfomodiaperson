@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { keyValue, sykmelding as sykmeldingPt } from "@navikt/digisyfo-npm";
+import { sykmelding as sykmeldingPt } from "@navikt/digisyfo-npm";
 import Side from "../sider/Side";
 import Feilmelding from "../components/Feilmelding";
 import AppSpinner from "../components/AppSpinner";
@@ -22,7 +22,6 @@ import {
 } from "../utils/motebehovUtils";
 import {
   harForsoktHentetLedere,
-  harForsoktHentetLedetekster,
   harForsoktHentetMotebehov,
   harForsoktHentetOppfoelgingsdialoger,
 } from "../utils/reducerUtils";
@@ -58,7 +57,6 @@ export class MotebehovSide extends Component {
       hentingFeilet,
       ledereData,
       ledereUtenInnsendtMotebehov,
-      ledetekster,
       motebehovListeUtenFlereSvarFraSammePerson,
       motebehovTilgang,
       sykmeldt,
@@ -99,7 +97,6 @@ export class MotebehovSide extends Component {
               fnr={fnr}
               ledereData={ledereData}
               ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
-              ledetekster={ledetekster}
               motebehovListe={motebehovListeUtenFlereSvarFraSammePerson}
               sykmeldt={sykmeldt}
               motebehovListeMedJaSvarTilOppgavebehandling={
@@ -125,7 +122,6 @@ MotebehovSide.propTypes = {
   hentingFeilet: PropTypes.bool,
   ledereData: PropTypes.arrayOf(PropTypes.object),
   ledereUtenInnsendtMotebehov: PropTypes.arrayOf(PropTypes.object),
-  ledetekster: keyValue,
   motebehovListeUtenFlereSvarFraSammePerson: PropTypes.arrayOf(
     PropTypes.object
   ),
@@ -186,17 +182,14 @@ export const mapStateToProps = (state, ownProps) => {
 
   const harForsoktHentetAlt =
     harForsoktHentetMotebehov(state.motebehov) &&
-    harForsoktHentetLedetekster(state.ledetekster) &&
     harForsoktHentetOppfoelgingsdialoger(state.oppfoelgingsdialoger) &&
     harForsoktHentetLedere(state.ledere);
   return {
     fnr: ownProps.params.fnr,
     henter: !harForsoktHentetAlt,
-    hentingFeilet:
-      state.motebehov.hentingFeilet || state.ledetekster.hentingFeilet,
+    hentingFeilet: state.motebehov.hentingFeilet,
     ledereData,
     ledereUtenInnsendtMotebehov,
-    ledetekster: state.ledetekster.data,
     motebehovListeUtenFlereSvarFraSammePerson,
     motebehovTilgang: state.motebehov.tilgang,
     sykmeldt: state.navbruker.data,

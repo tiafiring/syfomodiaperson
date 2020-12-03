@@ -42,7 +42,7 @@ describe("MotebehovContainer", () => {
       ledereData = [];
     });
 
-    it("Skal vise AppSpinner hvis man henter møtebehov/ledetekster", () => {
+    it("Skal vise AppSpinner hvis man henter møtebehov", () => {
       const component = shallow(
         <MotebehovSide
           tilgang={tilgang}
@@ -133,11 +133,6 @@ describe("MotebehovContainer", () => {
           hentingFeilet: false,
           henter: false,
         },
-        ledetekster: {
-          hentingFeilet: false,
-          henter: false,
-          data: {},
-        },
         veilederinfo: {
           data: {},
         },
@@ -173,7 +168,7 @@ describe("MotebehovContainer", () => {
       expect(props.motebehov).to.be.equal(undefined);
     });
 
-    it("Skal returnere henter når møtebehov og ledetekster ikke har blitt forsøkt hentet", () => {
+    it("Skal returnere henter når møtebehov ikke har blitt forsøkt hentet", () => {
       state.motebehov.data = [
         {
           id: 1,
@@ -181,9 +176,6 @@ describe("MotebehovContainer", () => {
       ];
       state.motebehov.hentet = false;
       state.motebehov.hentingFeilet = false;
-
-      state.ledetekster.hentet = false;
-      state.ledetekster.hentingFeilet = false;
 
       const props = mapStateToProps(state, ownProps);
 
@@ -197,7 +189,6 @@ describe("MotebehovContainer", () => {
         },
       ];
       state.motebehov.hentet = true;
-      state.ledetekster.hentet = true;
       state.oppfoelgingsdialoger.hentet = true;
       state.ledere.hentet = true;
 
