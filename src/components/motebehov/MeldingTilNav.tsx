@@ -13,7 +13,12 @@ const tekster = {
   },
 };
 
-export const MeldingTilNav = ({ sykmelding }) => {
+interface MeldingTilNavProps {
+  sykmelding: any;
+}
+
+export const MeldingTilNav = (meldingTilNavProps: MeldingTilNavProps) => {
+  const sykmelding = meldingTilNavProps.sykmelding;
   const meldingTilNav = sykmelding.meldingTilNav;
   const skalVise = erMeldingTilNavInformasjon(sykmelding);
   return (
