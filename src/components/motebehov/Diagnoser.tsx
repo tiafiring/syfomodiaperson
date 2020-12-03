@@ -1,8 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
 import BoksRad from "./BoksRad";
 
-export const DiagnoseBoks = ({ diagnose, erBiDiagnose = false }) => {
+interface DiagnoseBoksProps {
+  diagnose: any;
+  erBiDiagnose?: boolean;
+}
+
+export const DiagnoseBoks = (diagnoseBoksProps: DiagnoseBoksProps) => {
+  const diagnose = diagnoseBoksProps.diagnose;
+  const erBiDiagnose = diagnoseBoksProps.erBiDiagnose || false;
   const diagnoseTittel = erBiDiagnose ? "Bidiagnose" : "Diagnose";
   const diagnosekodeTittel = "Diagnosekode";
 
@@ -21,12 +27,14 @@ export const DiagnoseBoks = ({ diagnose, erBiDiagnose = false }) => {
   );
 };
 
-DiagnoseBoks.propTypes = {
-  diagnose: PropTypes.object,
-  erBiDiagnose: PropTypes.bool,
-};
+interface DiagnoserProps {
+  biDiagnoser: any[];
+  hovedDiagnose: any;
+}
 
-export const Diagnoser = ({ hovedDiagnose, biDiagnoser }) => {
+const Diagnoser = (diagnoserProps: DiagnoserProps) => {
+  const biDiagnoser = diagnoserProps.biDiagnoser;
+  const hovedDiagnose = diagnoserProps.hovedDiagnose;
   return (
     <div className="sykmeldingMotebehovVisning__diagnoser">
       {hovedDiagnose && <DiagnoseBoks diagnose={hovedDiagnose} />}
@@ -36,11 +44,6 @@ export const Diagnoser = ({ hovedDiagnose, biDiagnoser }) => {
       })}
     </div>
   );
-};
-
-Diagnoser.propTypes = {
-  hovedDiagnose: PropTypes.object,
-  biDiagnoser: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default Diagnoser;

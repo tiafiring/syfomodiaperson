@@ -5,7 +5,7 @@ import {
   erHensynPaaArbeidsplassenInformasjon,
   sykmeldingperioderSortertEldstTilNyest,
 } from "../../utils/sykmeldinger/sykmeldingUtils";
-import Diagnoser from "./Diagnoser";
+import Diagnoser from "./Diagnoser.tsx";
 import Perioder from "./Perioder";
 import EkstraDiagnoseInformasjon from "./EkstraDiagnoseInformasjon";
 
