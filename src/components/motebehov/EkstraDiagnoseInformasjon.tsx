@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Checkbox } from "nav-frontend-skjema";
 import { erEkstraDiagnoseInformasjon } from "../../utils/sykmeldinger/sykmeldingUtils";
 import { tilDatoMedUkedagOgManedNavn } from "../../utils/datoUtils";
@@ -21,7 +20,14 @@ const tekster = {
   },
 };
 
-const AnnenLovfestetFravaersgrunn = ({ diagnose }) => {
+interface AnnenLovfestetFravaersgrunnProps {
+  diagnose: any;
+}
+
+const AnnenLovfestetFravaersgrunn = (
+  annenLovfestetFravaersgrunnProps: AnnenLovfestetFravaersgrunnProps
+) => {
+  const diagnose = annenLovfestetFravaersgrunnProps.diagnose;
   return (
     <div className="annenLovfestetFravaersgrunn">
       <h6 className="sporsmal">
@@ -46,11 +52,12 @@ const AnnenLovfestetFravaersgrunn = ({ diagnose }) => {
   );
 };
 
-AnnenLovfestetFravaersgrunn.propTypes = {
-  diagnose: PropTypes.object,
-};
+interface YrkesskadeProps {
+  diagnose: any;
+}
 
-const Yrkesskade = ({ diagnose }) => {
+const Yrkesskade = (yrkesskadeProps: YrkesskadeProps) => {
+  const diagnose = yrkesskadeProps.diagnose;
   return (
     <div className="yrkesskade">
       <Checkbox
@@ -73,11 +80,14 @@ const Yrkesskade = ({ diagnose }) => {
   );
 };
 
-Yrkesskade.propTypes = {
-  diagnose: PropTypes.object,
-};
+interface EkstraDiagnoseInformasjonProps {
+  sykmelding: any;
+}
 
-export const EkstraDiagnoseInformasjon = ({ sykmelding }) => {
+const EkstraDiagnoseInformasjon = (
+  ekstraDiagnoseInformasjonProps: EkstraDiagnoseInformasjonProps
+) => {
+  const sykmelding = ekstraDiagnoseInformasjonProps.sykmelding;
   const diagnose = sykmelding.diagnose;
   const skalVise = erEkstraDiagnoseInformasjon(sykmelding);
   return (
@@ -105,10 +115,6 @@ export const EkstraDiagnoseInformasjon = ({ sykmelding }) => {
       )}
     </>
   );
-};
-
-EkstraDiagnoseInformasjon.propTypes = {
-  sykmelding: PropTypes.object,
 };
 
 export default EkstraDiagnoseInformasjon;

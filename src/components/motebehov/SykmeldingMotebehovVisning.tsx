@@ -4,7 +4,7 @@ import MeldingTilNav from "./MeldingTilNav";
 import BedreArbeidsevnen from "./BedreArbeidsevnen";
 import UtdypendeOpplysninger from "./UtdypendeOpplysninger";
 import TilbakeIArbeid from "./TilbakeIArbeid";
-import GenerellSykmeldingInfo from "./GenerellSykmeldingInfo.tsx";
+import GenerellSykmeldingInfo from "./GenerellSykmeldingInfo";
 import MulighetForArbeid from "./MulighetForArbeid";
 
 interface SykmeldingMotebehovVisningProps {
