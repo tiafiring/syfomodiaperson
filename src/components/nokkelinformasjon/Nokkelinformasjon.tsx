@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { AlertStripeInfo } from "nav-frontend-alertstriper";
+import { hentVirksomhet } from "../../actions/virksomhet_actions";
 import Sidetopp from "../Sidetopp";
 import UtdragFraSykefravaeret from "../motebehov/UtdragFraSykefravaeret";
 
@@ -29,17 +30,19 @@ const Nokkelinformasjon = (
   meldingTilArbeidsgiverProps: MeldingTilArbeidsgiverProps
 ) => {
   const {
-    actions,
     aktiveDialoger,
     fnr,
     oppfolgingstilfelleUtenArbeidsgiver,
     oppfolgingstilfelleperioder,
     sykmeldinger,
   } = meldingTilArbeidsgiverProps;
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     aktiveDialoger.forEach((dialog: any) => {
       if (!dialog.virksomhet.navn) {
-        actions.hentVirksomhet(dialog.virksomhet.virksomhetsnummer);
+        dispatch(hentVirksomhet(dialog.virksomhet.virksomhetsnummer));
       }
     });
   }, []);
