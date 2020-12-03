@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { AlertStripeInfo } from "nav-frontend-alertstriper";
-import { sykmelding as sykmeldingPt } from "@navikt/digisyfo-npm";
 import Sidetopp from "../Sidetopp";
 import UtdragFraSykefravaeret from "../motebehov/UtdragFraSykefravaeret";
 
@@ -17,16 +16,28 @@ const AlertStripeDevelopment = styled(AlertStripeInfo)`
   margin: 0 0 1em 0;
 `;
 
-const Nokkelinformasjon = ({
-  actions,
-  aktiveDialoger,
-  fnr,
-  oppfolgingstilfelleUtenArbeidsgiver,
-  oppfolgingstilfelleperioder,
-  sykmeldinger,
-}) => {
+interface MeldingTilArbeidsgiverProps {
+  actions: any;
+  aktiveDialoger: any;
+  fnr: string;
+  oppfolgingstilfelleUtenArbeidsgiver: any;
+  oppfolgingstilfelleperioder: any;
+  sykmeldinger: any;
+}
+
+const Nokkelinformasjon = (
+  meldingTilArbeidsgiverProps: MeldingTilArbeidsgiverProps
+) => {
+  const {
+    actions,
+    aktiveDialoger,
+    fnr,
+    oppfolgingstilfelleUtenArbeidsgiver,
+    oppfolgingstilfelleperioder,
+    sykmeldinger,
+  } = meldingTilArbeidsgiverProps;
   useEffect(() => {
-    aktiveDialoger.forEach((dialog) => {
+    aktiveDialoger.forEach((dialog: any) => {
       if (!dialog.virksomhet.navn) {
         actions.hentVirksomhet(dialog.virksomhet.virksomhetsnummer);
       }
@@ -50,15 +61,6 @@ const Nokkelinformasjon = ({
       />
     </div>
   );
-};
-
-Nokkelinformasjon.propTypes = {
-  actions: PropTypes.object,
-  aktiveDialoger: PropTypes.arrayOf(PropTypes.object),
-  fnr: PropTypes.string,
-  oppfolgingstilfelleUtenArbeidsgiver: PropTypes.object,
-  oppfolgingstilfelleperioder: PropTypes.object,
-  sykmeldinger: PropTypes.arrayOf(sykmeldingPt),
 };
 
 export default Nokkelinformasjon;

@@ -18,7 +18,7 @@ import {
 import Side from "../sider/Side";
 import Feilmelding from "../components/Feilmelding";
 import AppSpinner from "../components/AppSpinner";
-import Nokkelinformasjon from "../components/nokkelinformasjon/Nokkelinformasjon";
+import Nokkelinformasjon from "../components/nokkelinformasjon/Nokkelinformasjon.tsx";
 
 const texts = {
   feilmelding: "Du har ikke tilgang til denne tjenesten",
