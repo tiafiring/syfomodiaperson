@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Checkbox } from "nav-frontend-skjema";
 import {
   erMulighetForArbeidInformasjon,
@@ -22,26 +21,37 @@ const tekster = {
   },
 };
 
-const AvventendeSykmelding = ({ avventendeTekst }) => {
+interface AvventendeSykmeldingProps {
+  avventendeTekst: string;
+}
+
+const AvventendeSykmelding = (
+  avventendeSykmeldingProps: AvventendeSykmeldingProps
+) => {
   return (
     <div>
       <h5 className="undertittel">
         {tekster.mulighetForArbeid.avventende.tittel}
       </h5>
-      <p>{avventendeTekst}</p>
+      <p>{avventendeSykmeldingProps.avventendeTekst}</p>
     </div>
   );
 };
 
-AvventendeSykmelding.propTypes = {
-  avventendeTekst: PropTypes.string,
-};
+interface AktivitetIkkeMuligProps {
+  beskrivelse: string;
+  ikkeMuligListe: string[];
+  tittel: string;
+}
 
-const AktivitetIkkeMulig = ({ beskrivelse, ikkeMuligListe, tittel }) => {
+const AktivitetIkkeMulig = (
+  aktivitetIkkeMuligProps: AktivitetIkkeMuligProps
+) => {
+  const { beskrivelse, ikkeMuligListe, tittel } = aktivitetIkkeMuligProps;
   return (
     <div className="MulighetForArbeid">
       <h5 className="undertittel">{tittel}</h5>
-      {ikkeMuligListe.map((ikkeMuligTekst, index) => {
+      {ikkeMuligListe.map((ikkeMuligTekst: string, index: number) => {
         return (
           <Checkbox
             key={index}
@@ -62,13 +72,12 @@ const AktivitetIkkeMulig = ({ beskrivelse, ikkeMuligListe, tittel }) => {
   );
 };
 
-AktivitetIkkeMulig.propTypes = {
-  beskrivelse: PropTypes.string,
-  ikkeMuligListe: PropTypes.arrayOf(PropTypes.string),
-  tittel: PropTypes.string,
-};
+interface MulighetForArbeidProps {
+  sykmelding: any;
+}
 
-export const MulighetForArbeid = ({ sykmelding }) => {
+const MulighetForArbeid = (mulighetForArbeidProps: MulighetForArbeidProps) => {
+  const sykmelding = mulighetForArbeidProps.sykmelding;
   const mulighetForArbeid = sykmelding.mulighetForArbeid;
   const avventendeTekst = finnAvventendeSykmeldingTekst(sykmelding);
   const aktivitetIkkeMulig433 = mulighetForArbeid.aktivitetIkkeMulig433;
@@ -101,10 +110,6 @@ export const MulighetForArbeid = ({ sykmelding }) => {
       </div>
     )
   );
-};
-
-MulighetForArbeid.propTypes = {
-  sykmelding: PropTypes.object,
 };
 
 export default MulighetForArbeid;

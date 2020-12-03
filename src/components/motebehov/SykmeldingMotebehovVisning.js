@@ -6,7 +6,7 @@ import BedreArbeidsevnen from "./BedreArbeidsevnen.tsx";
 import UtdypendeOpplysninger from "./UtdypendeOpplysninger.tsx";
 import TilbakeIArbeid from "./TilbakeIArbeid.tsx";
 import GenerellSykmeldingInfo from "./GenerellSykmeldingInfo";
-import MulighetForArbeid from "./MulighetForArbeid";
+import MulighetForArbeid from "./MulighetForArbeid.tsx";
 
 const SykmeldingMotebehovVisning = ({ sykmelding }) => {
   return (
