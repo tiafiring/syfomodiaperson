@@ -4,7 +4,7 @@ import MeldingTilArbeidsgiver from "./MeldingTilArbeidsgiver.tsx";
 import MeldingTilNav from "./MeldingTilNav.tsx";
 import BedreArbeidsevnen from "./BedreArbeidsevnen.tsx";
 import UtdypendeOpplysninger from "./UtdypendeOpplysninger";
-import TilbakeIArbeid from "./TilbakeIArbeid";
+import TilbakeIArbeid from "./TilbakeIArbeid.tsx";
 import GenerellSykmeldingInfo from "./GenerellSykmeldingInfo";
 import MulighetForArbeid from "./MulighetForArbeid";
 

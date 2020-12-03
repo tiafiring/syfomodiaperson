@@ -4,7 +4,12 @@ import { erFriskmeldingInformasjon } from "../../utils/sykmeldinger/sykmeldingUt
 import TilbakeIArbeidMedArbeidsgiver from "./TilbakeIArbeidMedArbeidsgiver";
 import TilbakeIArbeidUtenArbeidsgiver from "./TilbakeIArbeidUtenArbeidsgiver";
 
-export const TilbakeIArbeid = ({ sykmelding }) => {
+interface TilbakeIArbeidProps {
+  sykmelding: any;
+}
+
+export const TilbakeIArbeid = (tilbakeIArbeidProps: TilbakeIArbeidProps) => {
+  const sykmelding = tilbakeIArbeidProps.sykmelding;
   const friskmelding = sykmelding.friskmelding;
   const skalVise = erFriskmeldingInformasjon(sykmelding);
   return (
