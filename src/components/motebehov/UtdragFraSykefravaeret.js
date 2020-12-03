@@ -209,16 +209,17 @@ export const SykmeldingerUtenArbeidsgiver = ({
       {sykmeldingerSortertPaUtstedelsesdato.length > 0 &&
         sykmeldingerSortertPaUtstedelsesdato.map((sykmelding, index) => {
           return (
-            <div className="utdragFraSykefravaeret__sykmeldingerForVirksomhet">
-              <div key={index}>
-                <Utvidbar
-                  tittel={<UtvidbarTittel sykmelding={sykmelding} />}
-                  visLukkLenke={false}
-                  children={
-                    <SykmeldingMotebehovVisning sykmelding={sykmelding} />
-                  }
-                />
-              </div>
+            <div
+              className="utdragFraSykefravaeret__sykmeldingerForVirksomhet"
+              key={index}
+            >
+              <Utvidbar
+                tittel={<UtvidbarTittel sykmelding={sykmelding} />}
+                visLukkLenke={false}
+                children={
+                  <SykmeldingMotebehovVisning sykmelding={sykmelding} />
+                }
+              />
             </div>
           );
         })}
