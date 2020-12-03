@@ -1,11 +1,11 @@
 import React from "react";
-import MeldingTilArbeidsgiver from "./MeldingTilArbeidsgiver.tsx";
-import MeldingTilNav from "./MeldingTilNav.tsx";
-import BedreArbeidsevnen from "./BedreArbeidsevnen.tsx";
-import UtdypendeOpplysninger from "./UtdypendeOpplysninger.tsx";
-import TilbakeIArbeid from "./TilbakeIArbeid.tsx";
+import MeldingTilArbeidsgiver from "./MeldingTilArbeidsgiver";
+import MeldingTilNav from "./MeldingTilNav";
+import BedreArbeidsevnen from "./BedreArbeidsevnen";
+import UtdypendeOpplysninger from "./UtdypendeOpplysninger";
+import TilbakeIArbeid from "./TilbakeIArbeid";
 import GenerellSykmeldingInfo from "./GenerellSykmeldingInfo.tsx";
-import MulighetForArbeid from "./MulighetForArbeid.tsx";
+import MulighetForArbeid from "./MulighetForArbeid";
 
 interface SykmeldingMotebehovVisningProps {
   sykmelding: any;
