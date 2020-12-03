@@ -81,26 +81,29 @@ export const EkstraDiagnoseInformasjon = ({ sykmelding }) => {
   const diagnose = sykmelding.diagnose;
   const skalVise = erEkstraDiagnoseInformasjon(sykmelding);
   return (
-    skalVise && (
-      <div className="sykmeldingMotebehovVisning__avsnitt">
-        {diagnose.fravaersgrunnLovfestet && (
-          <AnnenLovfestetFravaersgrunn diagnose={diagnose} />
-        )}
+    <>
+      {skalVise && (
+        <div className="sykmeldingMotebehovVisning__avsnitt">
+          {diagnose.fravaersgrunnLovfestet && (
+            <AnnenLovfestetFravaersgrunn diagnose={diagnose} />
+          )}
 
-        {diagnose.svangerskap && (
-          <Checkbox
-            className="sykmeldingMotebehovVisning__checkbox"
-            label={
-              tekster.ekstraDiagnoseInformasjon.svangerskap.svangerskapsrelatert
-            }
-            checked
-            disabled
-          />
-        )}
+          {diagnose.svangerskap && (
+            <Checkbox
+              className="sykmeldingMotebehovVisning__checkbox"
+              label={
+                tekster.ekstraDiagnoseInformasjon.svangerskap
+                  .svangerskapsrelatert
+              }
+              checked
+              disabled
+            />
+          )}
 
-        {diagnose.yrkesskade && <Yrkesskade diagnose={diagnose} />}
-      </div>
-    )
+          {diagnose.yrkesskade && <Yrkesskade diagnose={diagnose} />}
+        </div>
+      )}
+    </>
   );
 };
 

@@ -20,7 +20,14 @@ const tekster = {
   },
 };
 
-export const GenerellSykmeldingInfo = ({ sykmelding }) => {
+interface GenerellSykmeldingInfoProps {
+  sykmelding: any;
+}
+
+export const GenerellSykmeldingInfo = (
+  generellSykmeldingInfoProps: GenerellSykmeldingInfoProps
+) => {
+  const sykmelding = generellSykmeldingInfoProps.sykmelding;
   const hovedDiagnose = sykmelding.diagnose.hoveddiagnose;
   const biDiagnoser = sykmelding.diagnose.bidiagnoser
     ? sykmelding.diagnose.bidiagnoser
