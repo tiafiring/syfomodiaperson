@@ -1,14 +1,10 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { sykmelding as sykmeldingPt } from "@navikt/digisyfo-npm";
-import * as oppfoelgingsdialogerActions from "../actions/oppfoelgingsdialoger_actions";
-import * as oppfolgingstilfellerpersonActions from "../actions/oppfolgingstilfellerperson_actions";
-import * as oppfolgingstilfelleperioderActions from "../actions/oppfolgingstilfelleperioder_actions";
-import * as sykmeldingerActions from "../actions/sykmeldinger_actions";
-import * as ledereActions from "../actions/ledere_actions";
-import * as virksomhetActions from "../actions/virksomhet_actions";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { hentOppfoelgingsdialoger } from "../actions/oppfoelgingsdialoger_actions";
+import { hentOppfolgingstilfellerPersonUtenArbeidsiver } from "../actions/oppfolgingstilfellerperson_actions";
+import { hentOppfolgingstilfelleperioder } from "../actions/oppfolgingstilfelleperioder_actions";
+import { hentSykmeldinger } from "../actions/sykmeldinger_actions";
+import { hentLedere } from "../actions/ledere_actions";
 import { NOKKELINFORMASJON } from "../enums/menypunkter";
 import { hentBegrunnelseTekst } from "../utils/tilgangUtils";
 import {
@@ -24,129 +20,89 @@ const texts = {
   feilmelding: "Du har ikke tilgang til denne tjenesten",
 };
 
-export class NokkelinformasjonSide extends Component {
-  componentDidMount() {
-    const { actions, fnr } = this.props;
-    actions.hentLedere(fnr);
-    actions.hentSykmeldinger(fnr);
-  }
+export const NokkelinformasjonSide = ({}) => {
+  const fnr = window.location.pathname.split("/")[2];
 
-  componentDidUpdate() {
-    const { actions, fnr } = this.props;
-    actions.hentOppfolgingstilfellerPersonUtenArbeidsiver(fnr);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { actions, fnr } = nextProps;
-    actions.hentOppfolgingstilfelleperioder(fnr);
-    if (fnr) {
-      actions.hentOppfoelgingsdialoger(fnr);
-    }
-  }
-
-  render() {
-    const {
-      actions,
-      aktiveDialoger,
-      fnr,
-      henter,
-      hentingFeilet,
-      tilgang,
-      oppfolgingstilfelleUtenArbeidsgiver,
-      oppfolgingstilfelleperioder,
-      sykmeldinger,
-    } = this.props;
-    return (
-      <Side fnr={fnr} tittel="Møtebehov" aktivtMenypunkt={NOKKELINFORMASJON}>
-        {(() => {
-          if (henter) {
-            return <AppSpinner />;
-          } else if (!tilgang.harTilgang) {
-            return (
-              <Feilmelding
-                tittel={texts.feilmelding}
-                melding={hentBegrunnelseTekst(tilgang.begrunnelse)}
-              />
-            );
-          } else if (hentingFeilet) {
-            return <Feilmelding />;
-          }
-          return (
-            <Nokkelinformasjon
-              actions={actions}
-              fnr={fnr}
-              aktiveDialoger={aktiveDialoger}
-              oppfolgingstilfelleUtenArbeidsgiver={
-                oppfolgingstilfelleUtenArbeidsgiver
-              }
-              oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
-              sykmeldinger={sykmeldinger}
-            />
-          );
-        })()}
-      </Side>
-    );
-  }
-}
-
-NokkelinformasjonSide.propTypes = {
-  actions: PropTypes.object,
-  aktiveDialoger: PropTypes.array,
-  fnr: PropTypes.string,
-  henter: PropTypes.bool,
-  hentingFeilet: PropTypes.bool,
-  tilgang: PropTypes.object,
-  oppfolgingstilfelleUtenArbeidsgiver: PropTypes.object,
-  oppfolgingstilfelleperioder: PropTypes.object,
-  sykmeldinger: PropTypes.arrayOf(sykmeldingPt),
-};
-
-export function mapDispatchToProps(dispatch) {
-  const actions = Object.assign(
-    {},
-    oppfoelgingsdialogerActions,
-    oppfolgingstilfellerpersonActions,
-    oppfolgingstilfelleperioderActions,
-    sykmeldingerActions,
-    ledereActions,
-    virksomhetActions
+  const oppfolgingsplanerState = useSelector(
+    (state) => state.oppfoelgingsdialoger
   );
-  return {
-    actions: bindActionCreators(actions, dispatch),
-  };
-}
-
-export const mapStateToProps = (state, ownProps) => {
-  const oppfolgingstilfelleperioder = state.oppfolgingstilfelleperioder;
-
-  const aktiveDialoger = state.oppfoelgingsdialoger.data.filter((dialog) => {
+  const aktiveDialoger = oppfolgingsplanerState.data.filter((dialog) => {
     return (
       dialog.status !== "AVBRUTT" &&
       new Date(dialog.godkjentPlan.gyldighetstidspunkt.tom) > new Date()
     );
   });
 
+  const oppfolgingstilfelleperioder = useSelector(
+    (state) => state.oppfolgingstilfelleperioder
+  );
+
+  const oppfolgingstilfelleUtenArbeidsgiverState = useSelector(
+    (state) => state.oppfolgingstilfellerperson
+  );
   const oppfolgingstilfelleUtenArbeidsgiver =
-    state.oppfolgingstilfellerperson.data[0] || {};
+    oppfolgingstilfelleUtenArbeidsgiverState.data[0] || {};
+
+  const ledereState = useSelector((state) => state.ledere);
+  const sykmeldingerState = useSelector((state) => state.sykmeldinger);
+  const tilgangState = useSelector((state) => state.tilgang);
 
   const harForsoktHentetAlt =
-    harForsoktHentetOppfoelgingsdialoger(state.oppfoelgingsdialoger) &&
-    harForsoktHentetLedere(state.ledere);
-  return {
-    fnr: ownProps.params.fnr,
-    henter: !harForsoktHentetAlt,
-    hentingFeilet: state.sykmeldinger.hentingFeilet,
-    tilgang: state.tilgang.data,
-    aktiveDialoger,
-    oppfolgingstilfelleUtenArbeidsgiver,
-    oppfolgingstilfelleperioder,
-    sykmeldinger: state.sykmeldinger.data,
-  };
+    harForsoktHentetOppfoelgingsdialoger(oppfolgingsplanerState) &&
+    harForsoktHentetLedere(ledereState);
+
+  const henter = !harForsoktHentetAlt;
+  const hentingFeilet = sykmeldingerState.hentingFeilet;
+  const sykmeldinger = sykmeldingerState.data;
+  const tilgang = tilgangState.data;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(hentLedere(fnr));
+    dispatch(hentSykmeldinger(fnr));
+    if (fnr) {
+      dispatch(hentOppfoelgingsdialoger(fnr));
+    }
+  }, []);
+
+  useEffect(() => {
+    dispatch(hentOppfolgingstilfellerPersonUtenArbeidsiver(fnr));
+  }, [sykmeldingerState]);
+
+  useEffect(() => {
+    dispatch(hentOppfolgingstilfelleperioder(fnr));
+  }, [ledereState, sykmeldingerState]);
+
+  return (
+    <Side fnr={fnr} tittel="Møtebehov" aktivtMenypunkt={NOKKELINFORMASJON}>
+      {(() => {
+        if (henter) {
+          return <AppSpinner />;
+        } else if (!tilgang.harTilgang) {
+          return (
+            <Feilmelding
+              tittel={texts.feilmelding}
+              melding={hentBegrunnelseTekst(tilgang.begrunnelse)}
+            />
+          );
+        } else if (hentingFeilet) {
+          return <Feilmelding />;
+        }
+        return (
+          <Nokkelinformasjon
+            fnr={fnr}
+            aktiveDialoger={aktiveDialoger}
+            oppfolgingstilfelleUtenArbeidsgiver={
+              oppfolgingstilfelleUtenArbeidsgiver
+            }
+            oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
+            sykmeldinger={sykmeldinger}
+          />
+        );
+      })()}
+    </Side>
+  );
 };
 
-const NokkelinformasjonContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NokkelinformasjonSide);
-
-export default NokkelinformasjonContainer;
+export default NokkelinformasjonSide;
