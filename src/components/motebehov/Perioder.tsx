@@ -1,9 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { tilLesbarPeriodeMedArUtenManednavn } from "../../utils/datoUtils";
 import BoksRad from "./BoksRad";
 
-const kolonne2Tekst = (periode) => {
+const kolonne2Tekst = (periode: any) => {
   if (!!periode.behandlingsdager) {
     return periode.behandlingsdager === 1
       ? `${periode.behandlingsdager} behandlingsdag`
@@ -20,7 +19,12 @@ const kolonne2Tekst = (periode) => {
   return `${periode.grad}%`;
 };
 
-export const PeriodeBoks = ({ periode }) => {
+interface PeriodeBoksProps {
+  periode: any;
+}
+
+export const PeriodeBoks = (periodeBoksProps: PeriodeBoksProps) => {
+  const periode = periodeBoksProps.periode;
   return (
     <div className="sykmeldingMotebehovVisning__periodeBoks">
       <BoksRad
@@ -35,11 +39,12 @@ export const PeriodeBoks = ({ periode }) => {
   );
 };
 
-PeriodeBoks.propTypes = {
-  periode: PropTypes.object,
-};
+interface PerioderProps {
+  perioder: any[];
+}
 
-export const Perioder = ({ perioder }) => {
+const Perioder = (perioderProps: PerioderProps) => {
+  const perioder = perioderProps.perioder;
   return (
     <div className="sykmeldingMotebehovVisning__perioder">
       <h6 className="sporsmal">Perioder</h6>
@@ -48,10 +53,6 @@ export const Perioder = ({ perioder }) => {
       })}
     </div>
   );
-};
-
-Perioder.propTypes = {
-  perioder: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default Perioder;

@@ -6,7 +6,7 @@ import {
   sykmeldingperioderSortertEldstTilNyest,
 } from "../../utils/sykmeldinger/sykmeldingUtils";
 import Diagnoser from "./Diagnoser.tsx";
-import Perioder from "./Perioder";
+import Perioder from "./Perioder.tsx";
 import EkstraDiagnoseInformasjon from "./EkstraDiagnoseInformasjon";
 
 const tekster = {
