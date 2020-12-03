@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { keyValue, sykmelding as sykmeldingPt } from "@navikt/digisyfo-npm";
+import { sykmelding as sykmeldingPt } from "@navikt/digisyfo-npm";
 import * as oppfoelgingsdialogerActions from "../actions/oppfoelgingsdialoger_actions";
 import * as oppfolgingstilfellerpersonActions from "../actions/oppfolgingstilfellerperson_actions";
 import * as oppfolgingstilfelleperioderActions from "../actions/oppfolgingstilfelleperioder_actions";
@@ -13,7 +13,6 @@ import { NOKKELINFORMASJON } from "../enums/menypunkter";
 import { hentBegrunnelseTekst } from "../utils/tilgangUtils";
 import {
   harForsoktHentetLedere,
-  harForsoktHentetLedetekster,
   harForsoktHentetOppfoelgingsdialoger,
 } from "../utils/reducerUtils";
 import Side from "../sider/Side";
@@ -52,7 +51,6 @@ export class NokkelinformasjonSide extends Component {
       fnr,
       henter,
       hentingFeilet,
-      ledetekster,
       tilgang,
       oppfolgingstilfelleUtenArbeidsgiver,
       oppfolgingstilfelleperioder,
@@ -77,7 +75,6 @@ export class NokkelinformasjonSide extends Component {
             <Nokkelinformasjon
               actions={actions}
               fnr={fnr}
-              ledetekster={ledetekster}
               aktiveDialoger={aktiveDialoger}
               oppfolgingstilfelleUtenArbeidsgiver={
                 oppfolgingstilfelleUtenArbeidsgiver
@@ -98,7 +95,6 @@ NokkelinformasjonSide.propTypes = {
   fnr: PropTypes.string,
   henter: PropTypes.bool,
   hentingFeilet: PropTypes.bool,
-  ledetekster: keyValue,
   tilgang: PropTypes.object,
   oppfolgingstilfelleUtenArbeidsgiver: PropTypes.object,
   oppfolgingstilfelleperioder: PropTypes.object,
@@ -134,14 +130,12 @@ export const mapStateToProps = (state, ownProps) => {
     state.oppfolgingstilfellerperson.data[0] || {};
 
   const harForsoktHentetAlt =
-    harForsoktHentetLedetekster(state.ledetekster) &&
     harForsoktHentetOppfoelgingsdialoger(state.oppfoelgingsdialoger) &&
     harForsoktHentetLedere(state.ledere);
   return {
     fnr: ownProps.params.fnr,
     henter: !harForsoktHentetAlt,
-    hentingFeilet: state.ledetekster.hentingFeilet,
-    ledetekster: state.ledetekster.data,
+    hentingFeilet: state.sykmeldinger.hentingFeilet,
     tilgang: state.tilgang.data,
     aktiveDialoger,
     oppfolgingstilfelleUtenArbeidsgiver,
