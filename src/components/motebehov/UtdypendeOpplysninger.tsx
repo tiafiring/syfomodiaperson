@@ -19,7 +19,14 @@ const tekster = {
   },
 };
 
-export const UtdypendeOpplysninger = ({ sykmelding }) => {
+interface UtdypendeOpplysningerProps {
+  sykmelding: any;
+}
+
+export const UtdypendeOpplysninger = (
+  utdypendeOpplysningerProps: UtdypendeOpplysningerProps
+) => {
+  const sykmelding = utdypendeOpplysningerProps.sykmelding;
   const utdypendeOpplysninger = sykmelding.utdypendeOpplysninger;
   const skalVise = erUtdypendeOpplysningerInformasjon(sykmelding);
   return (

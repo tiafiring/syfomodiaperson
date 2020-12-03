@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import MeldingTilArbeidsgiver from "./MeldingTilArbeidsgiver.tsx";
 import MeldingTilNav from "./MeldingTilNav.tsx";
 import BedreArbeidsevnen from "./BedreArbeidsevnen.tsx";
-import UtdypendeOpplysninger from "./UtdypendeOpplysninger";
+import UtdypendeOpplysninger from "./UtdypendeOpplysninger.tsx";
 import TilbakeIArbeid from "./TilbakeIArbeid.tsx";
 import GenerellSykmeldingInfo from "./GenerellSykmeldingInfo";
 import MulighetForArbeid from "./MulighetForArbeid";
