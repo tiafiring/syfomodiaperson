@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { AlertStripeInfo } from "nav-frontend-alertstriper";
@@ -17,45 +17,42 @@ const AlertStripeDevelopment = styled(AlertStripeInfo)`
   margin: 0 0 1em 0;
 `;
 
-export class Nokkelinformasjon extends Component {
-  componentDidMount() {
-    const { actions, aktiveDialoger } = this.props;
+const Nokkelinformasjon = ({
+  actions,
+  aktiveDialoger,
+  fnr,
+  ledetekster,
+  oppfolgingstilfelleUtenArbeidsgiver,
+  oppfolgingstilfelleperioder,
+  sykmeldinger,
+}) => {
+  useEffect(() => {
     aktiveDialoger.forEach((dialog) => {
       if (!dialog.virksomhet.navn) {
         actions.hentVirksomhet(dialog.virksomhet.virksomhetsnummer);
       }
     });
-  }
+  }, []);
 
-  render() {
-    const {
-      aktiveDialoger,
-      fnr,
-      ledetekster,
-      oppfolgingstilfelleUtenArbeidsgiver,
-      oppfolgingstilfelleperioder,
-      sykmeldinger,
-    } = this.props;
-    return (
-      <div>
-        <Sidetopp tittel={texts.pageTitle} />
+  return (
+    <div>
+      <Sidetopp tittel={texts.pageTitle} />
 
-        <AlertStripeDevelopment>{texts.comingSoon}</AlertStripeDevelopment>
+      <AlertStripeDevelopment>{texts.comingSoon}</AlertStripeDevelopment>
 
-        <UtdragFraSykefravaeret
-          aktiveDialoger={aktiveDialoger}
-          fnr={fnr}
-          ledetekster={ledetekster}
-          oppfolgingstilfelleUtenArbeidsgiver={
-            oppfolgingstilfelleUtenArbeidsgiver
-          }
-          oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
-          sykmeldinger={sykmeldinger}
-        />
-      </div>
-    );
-  }
-}
+      <UtdragFraSykefravaeret
+        aktiveDialoger={aktiveDialoger}
+        fnr={fnr}
+        ledetekster={ledetekster}
+        oppfolgingstilfelleUtenArbeidsgiver={
+          oppfolgingstilfelleUtenArbeidsgiver
+        }
+        oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
+        sykmeldinger={sykmeldinger}
+      />
+    </div>
+  );
+};
 
 Nokkelinformasjon.propTypes = {
   actions: PropTypes.object,
