@@ -15,7 +15,7 @@ import HistorikkContainer from "../containers/HistorikkContainer";
 import { erGyldigFodselsnummer } from "../utils/frnValideringUtils";
 import MotelandingssideContainer from "../containers/MotelandingssideContainer";
 import MotebehovContainer from "../containers/MotebehovContainer";
-import NokkelinformasjonContainer from "../containers/NokkelinformasjonContainer";
+import NokkelinformasjonContainer from "../containers/NokkelinformasjonContainer.tsx";
 import VedtakContainer from "../containers/VedtakContainer";
 
 const AppRouter = ({ history }) => {

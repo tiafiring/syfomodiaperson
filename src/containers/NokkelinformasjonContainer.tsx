@@ -14,7 +14,7 @@ import {
 import Side from "../sider/Side";
 import Feilmelding from "../components/Feilmelding";
 import AppSpinner from "../components/AppSpinner";
-import Nokkelinformasjon from "../components/nokkelinformasjon/Nokkelinformasjon.tsx";
+import Nokkelinformasjon from "../components/nokkelinformasjon/Nokkelinformasjon";
 
 const texts = {
   feilmelding: "Du har ikke tilgang til denne tjenesten",
@@ -24,9 +24,9 @@ export const NokkelinformasjonSide = ({}) => {
   const fnr = window.location.pathname.split("/")[2];
 
   const oppfolgingsplanerState = useSelector(
-    (state) => state.oppfoelgingsdialoger
+    (state: any) => state.oppfoelgingsdialoger
   );
-  const aktiveDialoger = oppfolgingsplanerState.data.filter((dialog) => {
+  const aktiveDialoger = oppfolgingsplanerState.data.filter((dialog: any) => {
     return (
       dialog.status !== "AVBRUTT" &&
       new Date(dialog.godkjentPlan.gyldighetstidspunkt.tom) > new Date()
@@ -34,18 +34,18 @@ export const NokkelinformasjonSide = ({}) => {
   });
 
   const oppfolgingstilfelleperioder = useSelector(
-    (state) => state.oppfolgingstilfelleperioder
+    (state: any) => state.oppfolgingstilfelleperioder
   );
 
   const oppfolgingstilfelleUtenArbeidsgiverState = useSelector(
-    (state) => state.oppfolgingstilfellerperson
+    (state: any) => state.oppfolgingstilfellerperson
   );
   const oppfolgingstilfelleUtenArbeidsgiver =
     oppfolgingstilfelleUtenArbeidsgiverState.data[0] || {};
 
-  const ledereState = useSelector((state) => state.ledere);
-  const sykmeldingerState = useSelector((state) => state.sykmeldinger);
-  const tilgangState = useSelector((state) => state.tilgang);
+  const ledereState = useSelector((state: any) => state.ledere);
+  const sykmeldingerState = useSelector((state: any) => state.sykmeldinger);
+  const tilgangState = useSelector((state: any) => state.tilgang);
 
   const harForsoktHentetAlt =
     harForsoktHentetOppfoelgingsdialoger(oppfolgingsplanerState) &&
