@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Checkbox } from "nav-frontend-skjema";
 import TilbakeIArbeidCheckboxMedSporsmalOgDato from "./TilbakeIArbeidCheckboxMedSporsmalOgDato";
 
@@ -15,7 +14,14 @@ const tekster = {
     "Jeg er usikker på om pasienten kan komme tilbake i arbeid hos egen eller annen arbeidsgiver",
 };
 
-const ReturSammeArbeidsgiver = ({ friskmelding }) => {
+interface ReturSammeArbeidsgiverProps {
+  friskmelding: any;
+}
+
+const ReturSammeArbeidsgiver = (
+  returSammeArbeidsgiverProps: ReturSammeArbeidsgiverProps
+) => {
+  const friskmelding = returSammeArbeidsgiverProps.friskmelding;
   return (
     <div>
       {friskmelding.antarReturSammeArbeidsgiver && (
@@ -37,11 +43,14 @@ const ReturSammeArbeidsgiver = ({ friskmelding }) => {
   );
 };
 
-ReturSammeArbeidsgiver.propTypes = {
-  friskmelding: PropTypes.object,
-};
+interface TilbakeIArbeidMedArbeidsgiverProps {
+  friskmelding: any;
+}
 
-const TilbakeIArbeidMedArbeidsgiver = ({ friskmelding }) => {
+const TilbakeIArbeidMedArbeidsgiver = (
+  tilbakeIArbeidMedArbeidsgiverProps: TilbakeIArbeidMedArbeidsgiverProps
+) => {
+  const friskmelding = tilbakeIArbeidMedArbeidsgiverProps.friskmelding;
   const skalVise =
     friskmelding.antarReturSammeArbeidsgiver ||
     friskmelding.antarReturAnnenArbeidsgiver ||
@@ -65,10 +74,6 @@ const TilbakeIArbeidMedArbeidsgiver = ({ friskmelding }) => {
       </div>
     )
   );
-};
-
-TilbakeIArbeidMedArbeidsgiver.propTypes = {
-  friskmelding: PropTypes.object,
 };
 
 export default TilbakeIArbeidMedArbeidsgiver;
