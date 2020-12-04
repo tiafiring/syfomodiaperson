@@ -199,3 +199,23 @@ export const leggTilDagerPaDato = (dato, dager) => {
   nyDato.setDate(nyDato.getDate() + dager);
   return new Date(nyDato);
 };
+
+export const toDatePrettyPrint = (dato) => {
+  if (typeof dato === "undefined" || dato === null) {
+    return null;
+  }
+
+  const _dato = toDate(dato);
+
+  const days =
+    _dato.getUTCDate() < 10
+      ? `0${_dato.getUTCDate()}`
+      : `${_dato.getUTCDate()}`;
+  const months =
+    _dato.getUTCMonth() + 1 < 10
+      ? `0${_dato.getUTCMonth() + 1}`
+      : `${_dato.getUTCMonth() + 1}`;
+  const years = _dato.getUTCFullYear();
+
+  return `${days}.${months}.${years}`;
+};

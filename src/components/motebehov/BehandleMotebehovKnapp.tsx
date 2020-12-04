@@ -1,25 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Checkbox } from "nav-frontend-skjema";
 import {
   erMotebehovBehandlet,
   harUbehandletMotebehov,
   hentSistBehandletMotebehov,
 } from "../../utils/motebehovUtils";
-import { Checkbox } from "nav-frontend-skjema";
-import { toDatePrettyPrint } from "@navikt/digisyfo-npm";
+import { toDatePrettyPrint } from "../../utils/datoUtils";
 
-export const behandleMotebehov = (
-  actions,
-  fnr,
-  veilederinfo,
-  motebehovListe
+const behandleMotebehov = (
+  actions: any,
+  fnr: string,
+  veilederinfo: any,
+  motebehovListe: any[]
 ) => {
   if (harUbehandletMotebehov(motebehovListe)) {
     actions.behandleMotebehov(fnr, veilederinfo.ident);
   }
 };
 
-const behandleMotebehovKnappLabel = (erBehandlet, sistBehandletMotebehov) => {
+const behandleMotebehovKnappLabel = (
+  erBehandlet: boolean,
+  sistBehandletMotebehov: any
+) => {
   return erBehandlet
     ? `Ferdigbehandlet av ${
         sistBehandletMotebehov.behandletVeilederIdent
@@ -27,12 +30,22 @@ const behandleMotebehovKnappLabel = (erBehandlet, sistBehandletMotebehov) => {
     : "Marker som behandlet";
 };
 
-export const BehandleMotebehovKnapp = ({
-  actions,
-  fnr,
-  motebehovListe,
-  veilederinfo,
-}) => {
+interface BehandleMotebehovKnappProps {
+  actions: any;
+  fnr: string;
+  motebehovListe: any[];
+  veilederinfo: any;
+}
+
+const BehandleMotebehovKnapp = (
+  behandleMotebehovKnappProps: BehandleMotebehovKnappProps
+) => {
+  const {
+    actions,
+    fnr,
+    motebehovListe,
+    veilederinfo,
+  } = behandleMotebehovKnappProps;
   const sistBehandletMotebehov = hentSistBehandletMotebehov(motebehovListe);
   const erBehandlet = erMotebehovBehandlet(motebehovListe);
 
