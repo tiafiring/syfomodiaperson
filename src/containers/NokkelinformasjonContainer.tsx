@@ -20,7 +20,7 @@ const texts = {
   feilmelding: "Du har ikke tilgang til denne tjenesten",
 };
 
-export const NokkelinformasjonSide = ({}) => {
+export const NokkelinformasjonSide = () => {
   const fnr = window.location.pathname.split("/")[2];
 
   const oppfolgingsplanerState = useSelector(
