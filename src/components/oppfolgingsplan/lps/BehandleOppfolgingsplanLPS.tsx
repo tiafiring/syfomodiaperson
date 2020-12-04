@@ -1,13 +1,18 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import Knapp from "nav-frontend-knapper";
 import { behandlePersonOppgave } from "../../../actions/personoppgave_actions";
+import { OppfolgingsplanLPS } from "../../../types/OppfolgingsplanLPS";
 
-export const BehandleOppfolgingsplanLPS = ({
-  oppfolgingsplanLPS,
-  veilederIdent,
-}) => {
+interface BehandleOppfolgingsplanLPSProps {
+  oppfolgingsplanLPS: OppfolgingsplanLPS;
+  veilederIdent: any;
+}
+
+const BehandleOppfolgingsplanLPS = (
+  behandleOppfolgingsplanLPSProps: BehandleOppfolgingsplanLPSProps
+) => {
+  const { oppfolgingsplanLPS, veilederIdent } = behandleOppfolgingsplanLPSProps;
   const dispatch = useDispatch();
   const opLPSPersonOppgave = oppfolgingsplanLPS.personoppgave;
   const [spinner, setSpinner] = useState(false);
@@ -33,11 +38,6 @@ export const BehandleOppfolgingsplanLPS = ({
       Marker som behandlet
     </Knapp>
   );
-};
-
-BehandleOppfolgingsplanLPS.propTypes = {
-  oppfolgingsplanLPS: PropTypes.object,
-  veilederIdent: PropTypes.string,
 };
 
 export default BehandleOppfolgingsplanLPS;
