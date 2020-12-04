@@ -1,5 +1,3 @@
-import { tilLesbarDatoMedArstall } from "@navikt/digisyfo-npm";
-
 const maneder = [
   "januar",
   "februar",
@@ -32,6 +30,25 @@ const pad = (int) => {
     return `0${int}`;
   }
   return int;
+};
+
+export const tilLesbarDatoUtenAarstall = (datoArg) => {
+  if (datoArg) {
+    const dato = new Date(datoArg);
+    const dag = dato.getUTCDate();
+    const manedIndex = dato.getUTCMonth();
+    const maned = maneder[manedIndex];
+    return `${dag}. ${maned}`;
+  }
+  return null;
+};
+
+export const tilLesbarDatoMedArstall = (datoArg) => {
+  return datoArg
+    ? `${tilLesbarDatoUtenAarstall(new Date(datoArg))} ${new Date(
+        datoArg
+      ).getUTCFullYear()}`
+    : null;
 };
 
 export const visDato = (d) => {

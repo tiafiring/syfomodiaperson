@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import TilbakeIArbeidCheckboxMedSporsmalOgDato from "./TilbakeIArbeidCheckboxMedSporsmalOgDato";
 
 const tekster = {
@@ -11,7 +10,7 @@ const tekster = {
   usikkerDatoSporsmal: "Når antar du å kunne gi tilbakemelding på dette?",
 };
 
-const getTilbakeIArbeidCheckbox = (returDato) => {
+const getTilbakeIArbeidCheckbox = (returDato: Date) => {
   return (
     <TilbakeIArbeidCheckboxMedSporsmalOgDato
       checkboxLabel={tekster.retur}
@@ -21,7 +20,7 @@ const getTilbakeIArbeidCheckbox = (returDato) => {
   );
 };
 
-const getUsikkerIArbeidCheckbox = (returDato) => {
+const getUsikkerIArbeidCheckbox = (returDato: Date) => {
   return (
     <TilbakeIArbeidCheckboxMedSporsmalOgDato
       checkboxLabel={tekster.usikkerCheckboxLabel}
@@ -31,7 +30,14 @@ const getUsikkerIArbeidCheckbox = (returDato) => {
   );
 };
 
-const TilbakeIArbeidUtenArbeidsgiver = ({ friskmelding }) => {
+interface TilbakeIArbeidUtenArbeidsgiverProps {
+  friskmelding: any;
+}
+
+const TilbakeIArbeidUtenArbeidsgiver = (
+  tilbakeIArbeidUtenArbeidsgiverProps: TilbakeIArbeidUtenArbeidsgiverProps
+) => {
+  const friskmelding = tilbakeIArbeidUtenArbeidsgiverProps.friskmelding;
   const skalVise =
     friskmelding.utenArbeidsgiverAntarTilbakeIArbeid ||
     friskmelding.utenArbeidsgiverTilbakemelding;
@@ -50,10 +56,6 @@ const TilbakeIArbeidUtenArbeidsgiver = ({ friskmelding }) => {
       </div>
     )
   );
-};
-
-TilbakeIArbeidUtenArbeidsgiver.propTypes = {
-  friskmelding: PropTypes.object,
 };
 
 export default TilbakeIArbeidUtenArbeidsgiver;
