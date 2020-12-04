@@ -18,7 +18,6 @@ const AlertStripeDevelopment = styled(AlertStripeInfo)`
 `;
 
 interface MeldingTilArbeidsgiverProps {
-  actions: any;
   aktiveDialoger: any;
   fnr: string;
   oppfolgingstilfelleUtenArbeidsgiver: any;
