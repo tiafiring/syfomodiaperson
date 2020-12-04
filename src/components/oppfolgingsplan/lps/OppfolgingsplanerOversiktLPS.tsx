@@ -1,10 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import Panel from "nav-frontend-paneler";
-import { toDatePrettyPrint } from "@navikt/digisyfo-npm";
-import { restdatoTilLesbarDato } from "../../../utils/datoUtils";
+import {
+  restdatoTilLesbarDato,
+  toDatePrettyPrint,
+} from "../../../utils/datoUtils";
 import { isPersonOppgaveBehandlet } from "../../../utils/personOppgaveUtils";
+import { OppfolgingsplanLPS } from "../../../types/OppfolgingsplanLPS";
 import BehandleOppfolgingsplanLPS from "./BehandleOppfolgingsplanLPS";
 import OppfolgingsplanLPSEtikett from "./OppfolgingsplanLPSEtikett";
 
@@ -25,41 +27,50 @@ const LPSPlanPanel = styled(Panel)`
   padding: 2em 4em 2em 2em;
 `;
 
-export const ButtonOpenPlan = ({ oppfolgingsplanLPS }) => {
+interface ButtonOpenPlanProps {
+  oppfolgingsplanLPS: OppfolgingsplanLPS;
+}
+
+export const ButtonOpenPlan = (buttonOpenPlanProps: ButtonOpenPlanProps) => {
   return (
     <a
       className="lenke"
-      href={`${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/dokument/lps/${oppfolgingsplanLPS.uuid}`}
+      href={`${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/dokument/lps/${buttonOpenPlanProps.oppfolgingsplanLPS.uuid}`}
       download="oppfølgingsplan"
     >
       {texts.buttonOpenPlan}
     </a>
   );
 };
-ButtonOpenPlan.propTypes = {
-  oppfolgingsplanLPS: PropTypes.object,
-};
 
-const getIkonsti = (filnavn) => {
+const getIkonsti = (filnavn: string) => {
   return `/sykefravaer/img/svg/${filnavn}`;
 };
 
-const Ikon = ({ ikon }) => {
+interface IkonProps {
+  ikon: string;
+}
+
+const Ikon = (ikonProps: IkonProps) => {
   return (
     <span className="ferdigbehandlet__ikon">
-      <img src={getIkonsti(ikon)} alt="Ferdig behandlet" />
+      <img src={getIkonsti(ikonProps.ikon)} alt="Ferdig behandlet" />
     </span>
   );
 };
 
-Ikon.propTypes = {
-  ikon: PropTypes.string.isRequired,
-};
+interface BehandleOppfolgingsplanLPSProps {
+  oppfolgingsplanLPSBistandsbehov: OppfolgingsplanLPS;
+  veilederIdent: string;
+}
 
-const OppfolgingsplanerOversiktLPS = ({
-  oppfolgingsplanLPSBistandsbehov,
-  veilederIdent,
-}) => {
+const OppfolgingsplanerOversiktLPS = (
+  behandleOppfolgingsplanLPSProps: BehandleOppfolgingsplanLPSProps
+) => {
+  const {
+    oppfolgingsplanLPSBistandsbehov,
+    veilederIdent,
+  } = behandleOppfolgingsplanLPSProps;
   const personOppgave = oppfolgingsplanLPSBistandsbehov.personoppgave;
   const erPersonOppgaveBehandlet = isPersonOppgaveBehandlet(personOppgave);
   return (
@@ -93,11 +104,6 @@ const OppfolgingsplanerOversiktLPS = ({
       )}
     </LPSPlanPanel>
   );
-};
-OppfolgingsplanerOversiktLPS.propTypes = {
-  fnr: PropTypes.string,
-  oppfolgingsplanLPSBistandsbehov: PropTypes.object.isRequired,
-  veilederIdent: PropTypes.string,
 };
 
 export default OppfolgingsplanerOversiktLPS;

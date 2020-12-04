@@ -193,7 +193,6 @@ const OppfoelgingsPlanerOversikt = ({
         return (
           <OppfolgingsplanerOversiktLPS
             key={index}
-            fnr={fnr}
             oppfolgingsplanLPSBistandsbehov={planLPS}
             veilederIdent={veilederIdent}
           />
