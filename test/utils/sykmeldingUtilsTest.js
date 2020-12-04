@@ -503,11 +503,25 @@ describe("sykmeldingUtils", () => {
       const sykmeldinger = [
         {
           orgnummer: "123",
-          startLegemeldtFravaer: "2018-12-28",
+          mulighetForArbeid: {
+            perioder: [
+              {
+                fom: "2018-12-28",
+                tom: "2018-12-31",
+              },
+            ],
+          },
         },
         {
           orgnummer: "321",
-          startLegemeldtFravaer: "2017-01-01",
+          mulighetForArbeid: {
+            perioder: [
+              {
+                fom: "2017-01-01",
+                tom: "2017-01-04",
+              },
+            ],
+          },
         },
       ];
 

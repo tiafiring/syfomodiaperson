@@ -149,6 +149,21 @@ export const sykmeldingerUtenArbeidsgiver = (sykmeldinger) => {
   });
 };
 
+export const sykmeldingperioderSortertEldstTilNyest = (perioder) => {
+  return perioder.sort((periode1, periode2) => {
+    return periode1.fom > periode2.fom
+      ? 1
+      : periode1.fom < periode2.fom
+      ? -1
+      : 0;
+  });
+};
+
+export function getSykmeldingStartdato(sykmelding) {
+  const perioder = sykmelding.mulighetForArbeid.perioder;
+  return sykmeldingperioderSortertEldstTilNyest(perioder)[0].fom;
+}
+
 export const sykmeldingerInnenforOppfolgingstilfellet = (
   sykmeldinger,
   oppfolgingstilfelleperioder
@@ -156,7 +171,7 @@ export const sykmeldingerInnenforOppfolgingstilfellet = (
   return sykmeldinger.filter((sykmelding) => {
     const tilfelleperioderReducer =
       oppfolgingstilfelleperioder[sykmelding.orgnummer];
-    const sykmeldingStart = new Date(sykmelding.startLegemeldtFravaer);
+    const sykmeldingStart = new Date(getSykmeldingStartdato(sykmelding));
     sykmeldingStart.setHours(0, 0, 0, 0);
 
     const tilfelleStart =
@@ -177,7 +192,7 @@ export const sykmeldingerInnenforOppfolgingstilfellePerson = (
   oppfolgingstilfelleperson
 ) => {
   return sykmeldinger.filter((sykmelding) => {
-    const sykmeldingStart = new Date(sykmelding.startLegemeldtFravaer);
+    const sykmeldingStart = new Date(getSykmeldingStartdato(sykmelding));
     sykmeldingStart.setHours(0, 0, 0, 0);
 
     const tilfelleStart = oppfolgingstilfelleperson.fom
@@ -214,16 +229,6 @@ export const sykmeldingerGruppertEtterVirksomhet = (sykmeldinger) => {
       return memo2;
     }, {})
   );
-};
-
-export const sykmeldingperioderSortertEldstTilNyest = (perioder) => {
-  return perioder.sort((periode1, periode2) => {
-    return periode1.fom > periode2.fom
-      ? 1
-      : periode1.fom < periode2.fom
-      ? -1
-      : 0;
-  });
 };
 
 const sykmeldingperioderMedGradering = (sykmeldingperioder) => {
