@@ -1,11 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { tilLesbarDatoMedArstall } from "@navikt/digisyfo-npm";
+import { tilLesbarDatoMedArstall } from "../../utils/datoUtils";
 import OppfoelgingsdialogIkon from "../../ikoner/OppfoelgingsdialogIkon";
 import MoteIkon from "../../ikoner/MoteIkon";
 import LederIkon from "../../ikoner/LederIkon";
 
-const hentIkon = (event) => {
+const hentIkon = (event: any) => {
   switch (event.kilde) {
     case "MOTER":
     case "MOTEBEHOV": {
@@ -23,7 +22,12 @@ const hentIkon = (event) => {
   }
 };
 
-const HistorikkEvent = ({ event }) => {
+interface HistorikkEventProps {
+  event: any;
+}
+
+const HistorikkEvent = (historikkEventProps: HistorikkEventProps) => {
+  const event = historikkEventProps.event;
   return (
     <li className="historikkevent">
       <p className="historikkevent__meta">
@@ -35,10 +39,6 @@ const HistorikkEvent = ({ event }) => {
       </div>
     </li>
   );
-};
-
-HistorikkEvent.propTypes = {
-  event: PropTypes.object,
 };
 
 export default HistorikkEvent;

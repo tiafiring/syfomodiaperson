@@ -1,8 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Panel from "nav-frontend-paneler";
 import Alertstripe from "nav-frontend-alertstriper";
-import { tilLesbarPeriodeMedArstall } from "@navikt/digisyfo-npm";
 import HistorikkEvent from "./HistorikkEvent";
 import AppSpinner from "../AppSpinner";
 import IngenHistorikk from "./IngenHistorikk";
@@ -12,6 +10,7 @@ import {
   tilfellerFromTilfelleperioder,
   tilfellerNewestToOldest,
 } from "../../utils/periodeUtils";
+import { tilLesbarPeriodeMedArstall } from "../../utils/datoUtils";
 
 const texts = {
   errorMessage:
@@ -21,10 +20,10 @@ const texts = {
   tilfellerTitle: "Sykefraværstilfeller",
 };
 
-const hentSykeforloepMedEvents = (periodeliste, eventliste) => {
-  return periodeliste.filter((periode) => {
+const hentSykeforloepMedEvents = (periodeliste: any[], eventliste: any[]) => {
+  return periodeliste.filter((periode: any) => {
     return (
-      eventliste.filter((event) => {
+      eventliste.filter((event: any) => {
         return (
           new Date(periode.skyggeFom) < new Date(event.tidspunkt) &&
           new Date(event.tidspunkt) < new Date(periode.tom)
@@ -34,8 +33,8 @@ const hentSykeforloepMedEvents = (periodeliste, eventliste) => {
   });
 };
 
-const createHistorikkEventsFromLedere = (ledere) => {
-  return ledere.map((leder) => {
+const createHistorikkEventsFromLedere = (ledere: any[]) => {
+  return ledere.map((leder: any) => {
     return {
       opprettetAv: leder.organisasjonsnavn,
       tekst: `${leder.organisasjonsnavn} har oppgitt ${leder.navn} som nærmeste leder`,
@@ -53,15 +52,26 @@ const Feilmelding = () => {
   );
 };
 
-const TidligereHendelser = ({ eventsForForsteSykefravaer }) => {
+interface TidligereHendelserProps {
+  eventsForForsteSykefravaer: any[];
+}
+
+const TidligereHendelser = (
+  tidligereHendelserProps: TidligereHendelserProps
+) => {
+  const eventsForForsteSykefravaer =
+    tidligereHendelserProps.eventsForForsteSykefravaer;
   return (
     <React.Fragment>
       {eventsForForsteSykefravaer.length > 0 && (
         <UtvidbarHistorikk tittel={texts.tidligereHendelserUtvidbarTitle}>
           <ol className="historikkeventliste">
             {eventsForForsteSykefravaer
-              .sort((h1, h2) => {
-                return new Date(h2.tidspunkt) - new Date(h1.tidspunkt);
+              .sort((h1: any, h2: any) => {
+                return (
+                  new Date(h2.tidspunkt).getTime() -
+                  new Date(h1.tidspunkt).getTime()
+                );
               })
               .map((event, idx) => {
                 return <HistorikkEvent key={idx} event={event} />;
@@ -73,11 +83,14 @@ const TidligereHendelser = ({ eventsForForsteSykefravaer }) => {
   );
 };
 
-TidligereHendelser.propTypes = {
-  eventsForForsteSykefravaer: PropTypes.arrayOf(PropTypes.object),
-};
+interface HistorikkProps {
+  historikk: any;
+  ledere: any[];
+  oppfolgingstilfelleperioder: any;
+}
 
-const Historikk = ({ historikk, oppfolgingstilfelleperioder, ledere }) => {
+const Historikk = (historikkProps: HistorikkProps) => {
+  const { historikk, ledere, oppfolgingstilfelleperioder } = historikkProps;
   const tilfeller = tilfellerFromTilfelleperioder(oppfolgingstilfelleperioder);
   const lederHistorikk = createHistorikkEventsFromLedere(ledere);
   const historikkEvents = historikk.motebehovHistorikk
@@ -108,11 +121,11 @@ const Historikk = ({ historikk, oppfolgingstilfelleperioder, ledere }) => {
     }
   }
 
-  const eventsEtterSisteSykefravaer = historikkEvents.filter((event) => {
+  const eventsEtterSisteSykefravaer = historikkEvents.filter((event: any) => {
     return new Date(event.tidspunkt) > new Date(tilfellerSortert[0].tom);
   });
 
-  const eventsForForsteSykefravaer = historikkEvents.filter((event) => {
+  const eventsForForsteSykefravaer = historikkEvents.filter((event: any) => {
     return (
       new Date(event.tidspunkt) <
       new Date(tilfellerSortert[tilfellerSortert.length - 1].fom)
@@ -137,10 +150,13 @@ const Historikk = ({ historikk, oppfolgingstilfelleperioder, ledere }) => {
             <h2 className="panel__tittel">{texts.laterEventsTitle}</h2>
             <ol className="historikkeventliste">
               {eventsEtterSisteSykefravaer
-                .sort((h1, h2) => {
-                  return new Date(h2.tidspunkt) - new Date(h1.tidspunkt);
+                .sort((h1: any, h2: any) => {
+                  return (
+                    new Date(h2.tidspunkt).getTime() -
+                    new Date(h1.tidspunkt).getTime()
+                  );
                 })
-                .map((event, index) => {
+                .map((event: any, index: number) => {
                   return <HistorikkEvent event={event} key={index} />;
                 })}
             </ol>
@@ -149,7 +165,7 @@ const Historikk = ({ historikk, oppfolgingstilfelleperioder, ledere }) => {
         {perioderMedEvents.length > 0 && (
           <div className="blokk--l">
             <h2 className="panel__tittel">{texts.tilfellerTitle}</h2>
-            {perioderMedEvents.map((periode, index) => {
+            {perioderMedEvents.map((periode: any, index: number) => {
               return (
                 <UtvidbarHistorikk
                   key={index}
@@ -157,10 +173,13 @@ const Historikk = ({ historikk, oppfolgingstilfelleperioder, ledere }) => {
                 >
                   <ol className="historikkeventliste">
                     {historikkEvents
-                      .sort((h1, h2) => {
-                        return new Date(h2.tidspunkt) - new Date(h1.tidspunkt);
+                      .sort((h1: any, h2: any) => {
+                        return (
+                          new Date(h2.tidspunkt).getTime() -
+                          new Date(h1.tidspunkt).getTime()
+                        );
                       })
-                      .map((event, idx) => {
+                      .map((event: any, idx: number) => {
                         if (
                           new Date(periode.skyggeFom) <
                             new Date(event.tidspunkt) &&
@@ -182,12 +201,6 @@ const Historikk = ({ historikk, oppfolgingstilfelleperioder, ledere }) => {
       </div>
     </div>
   );
-};
-
-Historikk.propTypes = {
-  oppfolgingstilfelleperioder: PropTypes.object,
-  historikk: PropTypes.object,
-  ledere: PropTypes.array,
 };
 
 export default Historikk;

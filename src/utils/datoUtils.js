@@ -23,6 +23,8 @@ const dager = [
   "Søndag",
 ];
 
+const SKILLETEGN_PERIODE = "–";
+
 export const ANTALL_MS_DAG = 1000 * 60 * 60 * 24;
 
 const pad = (int) => {
@@ -32,7 +34,7 @@ const pad = (int) => {
   return int;
 };
 
-export const tilLesbarDatoUtenAarstall = (datoArg) => {
+export const tilLesbarDatoUtenArstall = (datoArg) => {
   if (datoArg) {
     const dato = new Date(datoArg);
     const dag = dato.getUTCDate();
@@ -45,10 +47,28 @@ export const tilLesbarDatoUtenAarstall = (datoArg) => {
 
 export const tilLesbarDatoMedArstall = (datoArg) => {
   return datoArg
-    ? `${tilLesbarDatoUtenAarstall(new Date(datoArg))} ${new Date(
+    ? `${tilLesbarDatoUtenArstall(new Date(datoArg))} ${new Date(
         datoArg
       ).getUTCFullYear()}`
     : null;
+};
+
+export const tilLesbarPeriodeMedArstall = (fomArg, tomArg) => {
+  const fom = new Date(fomArg);
+  const tom = new Date(tomArg);
+  const erSammeAr = fom.getUTCFullYear() === tom.getUTCFullYear();
+  const erSammeManed = fom.getUTCMonth() === tom.getUTCMonth();
+  return erSammeAr && erSammeManed
+    ? `${fom.getUTCDate()}. ${SKILLETEGN_PERIODE} ${tilLesbarDatoMedArstall(
+        tom
+      )}`
+    : erSammeAr
+    ? `${tilLesbarDatoUtenArstall(
+        fom
+      )} ${SKILLETEGN_PERIODE} ${tilLesbarDatoMedArstall(tom)}`
+    : `${tilLesbarDatoMedArstall(
+        fom
+      )} ${SKILLETEGN_PERIODE} ${tilLesbarDatoMedArstall(tom)}`;
 };
 
 export const visDato = (d) => {
