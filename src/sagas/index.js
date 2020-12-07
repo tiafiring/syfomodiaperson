@@ -1,4 +1,3 @@
-import { tidslinjerSagas } from "@navikt/digisyfo-npm";
 import { all } from "redux-saga/effects";
 import ledereSagas from "./ledereSagas";
 import fastlegerSagas from "./fastlegerSagas";
@@ -48,7 +47,6 @@ export default function* rootSaga() {
     diskresjonskodeSagas(),
     egenansattSagas(),
     tilgangSagas(),
-    tidslinjerSagas(),
     soknaderSagas(),
     oppfolgingstilfellePersonSagas(),
     oppfolgingstilfelleperioderSagas(),
