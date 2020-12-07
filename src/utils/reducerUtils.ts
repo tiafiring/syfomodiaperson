@@ -1,4 +1,4 @@
-export const harForsoktHentetMotebehov = (motebehovReducer) => {
+export const harForsoktHentetMotebehov = (motebehovReducer: any) => {
   return (
     motebehovReducer.hentet ||
     motebehovReducer.hentingFeilet ||
@@ -7,12 +7,12 @@ export const harForsoktHentetMotebehov = (motebehovReducer) => {
   );
 };
 
-export const harForsoktHentetLedere = (ledereReducer) => {
+export const harForsoktHentetLedere = (ledereReducer: any) => {
   return ledereReducer.hentet || ledereReducer.hentingFeilet;
 };
 
 export const harForsoktHentetOppfoelgingsdialoger = (
-  oppfoelgingsdialogerReducer
+  oppfoelgingsdialogerReducer: any
 ) => {
   return (
     oppfoelgingsdialogerReducer.hentet ||
@@ -20,10 +20,10 @@ export const harForsoktHentetOppfoelgingsdialoger = (
   );
 };
 
-export const harForsoktHentetSoknader = (soknaderReducer) => {
+export const harForsoktHentetSoknader = (soknaderReducer: any) => {
   return soknaderReducer.hentet || soknaderReducer.hentingFeilet;
 };
 
-export const harForsoktHentetSykmeldinger = (sykmeldingerReducer) => {
+export const harForsoktHentetSykmeldinger = (sykmeldingerReducer: any) => {
   return sykmeldingerReducer.hentet || sykmeldingerReducer.hentingFeilet;
 };
