@@ -5,7 +5,6 @@ import BekreftetMotetidspunkt from "../../../src/mote/components/BekreftetMoteti
 import DatoOgTid from "../../../src/mote/components/DatoOgTid";
 
 describe("BekreftetMotetidspunkt", () => {
-  let ledetekster = {};
   let mote;
   let component;
 
@@ -136,15 +135,7 @@ describe("BekreftetMotetidspunkt", () => {
       ],
     };
 
-    ledetekster = {
-      "mote.bookingstatus.bekreftet.sendt": "Bekreftet møtetidspunkt",
-      "mote.bookingstatus.bekreftet.sendt-dato":
-        "Møtetidspunkt valgt, møteresultat og varsel er sendt til partene %DATO%",
-    };
-
-    component = shallow(
-      <BekreftetMotetidspunkt ledetekster={ledetekster} mote={mote} />
-    );
+    component = shallow(<BekreftetMotetidspunkt mote={mote} />);
   });
 
   it("Skal inneholde det bekreftede tidspunktet", () => {

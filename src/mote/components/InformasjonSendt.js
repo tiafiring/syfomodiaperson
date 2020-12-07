@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Utvidbar, keyValue } from "@navikt/digisyfo-npm";
+import { Utvidbar } from "@navikt/digisyfo-npm";
 import * as moterPropTypes from "../../propTypes";
 import DropdownInnholdsviser from "./DropdownInnholdsviser";
 import * as epostinnholdActions from "../../actions/epostinnhold_actions";
@@ -32,7 +32,7 @@ export const InnholdsviserContainer = connect(
   actions
 )(DropdownInnholdsviser);
 
-const InformasjonSendt = ({ arbeidstaker, mote, ledetekster }) => {
+const InformasjonSendt = ({ arbeidstaker, mote }) => {
   return (
     <div>
       <h2>Informasjon sendt:</h2>
@@ -46,11 +46,7 @@ const InformasjonSendt = ({ arbeidstaker, mote, ledetekster }) => {
           ikonAltTekst="Arbeidstaker"
           variant="lysebla"
         >
-          <InnholdsviserContainer
-            mote={mote}
-            ledetekster={ledetekster}
-            type={BRUKER}
-          />
+          <InnholdsviserContainer mote={mote} type={BRUKER} />
         </Utvidbar>
       )}
       <Utvidbar
@@ -62,11 +58,7 @@ const InformasjonSendt = ({ arbeidstaker, mote, ledetekster }) => {
         ikonAltTekst="Arbeidsgiver"
         variant="lilla"
       >
-        <InnholdsviserContainer
-          mote={mote}
-          ledetekster={ledetekster}
-          type={ARBEIDSGIVER}
-        />
+        <InnholdsviserContainer mote={mote} type={ARBEIDSGIVER} />
       </Utvidbar>
     </div>
   );
@@ -75,7 +67,6 @@ const InformasjonSendt = ({ arbeidstaker, mote, ledetekster }) => {
 InformasjonSendt.propTypes = {
   arbeidstaker: PropTypes.object,
   mote: moterPropTypes.motePt,
-  ledetekster: keyValue,
 };
 
 export default InformasjonSendt;

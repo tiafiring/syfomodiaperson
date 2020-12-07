@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Alertstripe from "nav-frontend-alertstriper";
-import { keyValue } from "@navikt/digisyfo-npm";
 import * as moterPropTypes from "../../propTypes";
 import AppSpinner from "../../components/AppSpinner";
 import { BRUKER } from "../../konstanter";
@@ -94,7 +93,6 @@ DropdownInnholdsviser.propTypes = {
   type: PropTypes.string,
   hentEpostinnhold: PropTypes.func,
   hentArbeidsgiverEpostinnhold: PropTypes.func,
-  ledetekster: keyValue,
   mote: moterPropTypes.motePt,
 };
 

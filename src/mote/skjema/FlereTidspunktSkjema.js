@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { reduxForm } from "redux-form";
 import AlertStripe from "nav-frontend-alertstriper";
 import KnappBase from "nav-frontend-knapper";
-import { keyValue } from "@navikt/digisyfo-npm";
 import Tidspunkter from "./Tidspunkter";
 import { genererDato, erGyldigKlokkeslett, erGyldigDato } from "../utils";
 
@@ -95,7 +94,6 @@ export const FlereTidspunktSkjema = (props) => {
 FlereTidspunktSkjema.propTypes = {
   fnr: PropTypes.string,
   mote: PropTypes.object,
-  ledetekster: keyValue,
   flereAlternativ: PropTypes.func,
   nyeAlternativFeilet: PropTypes.bool,
   senderNyeAlternativ: PropTypes.bool,

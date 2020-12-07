@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
-import { keyValue } from "@navikt/digisyfo-npm";
 import * as moterPropTypes from "../../propTypes";
 import { connect } from "react-redux";
 import AlertStripe from "nav-frontend-alertstriper";
@@ -37,7 +36,6 @@ export const InnholdsviserContainer = connect(
 
 const AvbrytMote = (props) => {
   const {
-    ledetekster,
     mote,
     avbrytFeilet,
     avbryter,
@@ -49,12 +47,8 @@ const AvbrytMote = (props) => {
   return (
     <div className="epostinnhold">
       <h2 className="epostinnhold__tittel">{texts.overskrift}</h2>
-      <Epostmottakere
-        mote={mote}
-        ledetekster={ledetekster}
-        arbeidstaker={arbeidstaker}
-      />
-      <InnholdsviserContainer mote={mote} ledetekster={ledetekster} />
+      <Epostmottakere mote={mote} arbeidstaker={arbeidstaker} />
+      <InnholdsviserContainer mote={mote} />
       <div aria-live="polite" role="alert">
         {avbrytFeilet && (
           <div className="blokk">
@@ -83,7 +77,6 @@ const AvbrytMote = (props) => {
 };
 
 AvbrytMote.propTypes = {
-  ledetekster: keyValue,
   arbeidstaker: PropTypes.object,
   onSubmit: PropTypes.func,
   avbrytHref: PropTypes.string,

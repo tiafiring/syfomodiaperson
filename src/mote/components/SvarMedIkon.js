@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { keyValue } from "@navikt/digisyfo-npm";
 import { motedeltakerPt, motesvarPt } from "../../propTypes";
 import { getSvar } from "../../utils/moteplanleggerUtils";
 import { ARBEIDSGIVER, MULIGE_SVAR } from "../../konstanter";
@@ -89,10 +88,6 @@ export const NavKan = () => {
   );
 };
 
-NavKan.propTypes = {
-  ledetekster: keyValue,
-};
-
 const SvarMedIkon = ({ bruker, svar }) => {
   const deltakertype =
     bruker.type === ARBEIDSGIVER ? "Arbeidsgiver" : "Arbeidstaker";
@@ -111,7 +106,6 @@ const SvarMedIkon = ({ bruker, svar }) => {
 SvarMedIkon.propTypes = {
   bruker: motedeltakerPt,
   svar: motesvarPt,
-  ledetekster: keyValue,
 };
 
 export default SvarMedIkon;

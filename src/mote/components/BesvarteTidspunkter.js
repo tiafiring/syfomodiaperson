@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
-import { keyValue } from "@navikt/digisyfo-npm";
 import {
   BRUKER,
   ARBEIDSGIVER,
@@ -21,7 +20,6 @@ const BesvarteTidspunkter = ({
   mote,
   alternativer,
   deltakertype = BRUKER,
-  ledetekster,
   fnr,
 }) => {
   const arbeidsgiver = mote.deltakere.filter((d) => {
@@ -91,19 +89,15 @@ const BesvarteTidspunkter = ({
                   <SvarMedIkon
                     bruker={_forsteDeltaker}
                     svar={forsteDeltakersSvar}
-                    ledetekster={ledetekster}
                   />
                 )}
                 {andreDeltaker && (
                   <SvarMedIkon
                     bruker={andreDeltaker}
                     svar={andreDeltakersSvar}
-                    ledetekster={ledetekster}
                   />
                 )}
-                {deltakertype !== NAV_VEILEDER && (
-                  <NavKan ledetekster={ledetekster} />
-                )}
+                {deltakertype !== NAV_VEILEDER && <NavKan />}
               </ul>
               {deltakertype === NAV_VEILEDER && (
                 <div className="alternativsvar__bekreft">
@@ -126,7 +120,6 @@ BesvarteTidspunkter.propTypes = {
   mote: motePt,
   alternativer: PropTypes.arrayOf(motealternativPt),
   deltakertype: motedeltakertypePt,
-  ledetekster: keyValue,
   fnr: PropTypes.string,
 };
 

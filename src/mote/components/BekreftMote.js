@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { keyValue } from "@navikt/digisyfo-npm";
 import * as motePropTypes from "../../propTypes";
 import { ARBEIDSGIVER } from "../../konstanter";
 import BekreftMoteSkjema from "./BekreftMoteSkjema";
@@ -42,7 +41,6 @@ class BekreftMote extends Component {
           arbeidstaker={this.props.arbeidstaker}
           onSubmit={this.props.onSubmit}
           mote={this.props.mote}
-          ledetekster={this.props.ledetekster}
           avbrytHref={this.props.avbrytHref}
           bekrefter={this.props.bekrefter}
           hentEpostinnhold={this.props.hentEpostinnhold}
@@ -63,7 +61,6 @@ class BekreftMote extends Component {
 }
 BekreftMote.propTypes = {
   arbeidstaker: PropTypes.object,
-  ledetekster: keyValue,
   onSubmit: PropTypes.func,
   avbrytHref: PropTypes.string,
   mote: motePropTypes.motePt,

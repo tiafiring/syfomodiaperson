@@ -93,13 +93,9 @@ describe("AvbrytMote-", () => {
   let component;
   let mote;
   let navbruker;
-  let ledetekster;
 
   beforeEach(() => {
     mote = getMote();
-    ledetekster = {
-      "mote.avbrytmote.overskrift": "Avbryt møte",
-    };
     navbruker = {
       data: {
         kontaktinfo: {
@@ -110,9 +106,7 @@ describe("AvbrytMote-", () => {
   });
 
   it("Viser tittel", () => {
-    component = shallow(
-      <AvbrytMote navbruker={navbruker} mote={mote} ledetekster={ledetekster} />
-    );
+    component = shallow(<AvbrytMote navbruker={navbruker} mote={mote} />);
     expect(component.text()).to.contain("Avbryt møte");
   });
 
@@ -123,9 +117,7 @@ describe("AvbrytMote-", () => {
   });
 
   it("Viser en InnholdsviserContainer", () => {
-    component = shallow(
-      <AvbrytMote navbruker={navbruker} mote={mote} ledetekster={ledetekster} />
-    );
+    component = shallow(<AvbrytMote navbruker={navbruker} mote={mote} />);
     expect(component.find(InnholdsviserContainer)).to.have.length(1);
   });
 

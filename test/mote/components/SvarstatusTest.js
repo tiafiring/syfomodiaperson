@@ -214,11 +214,6 @@ describe("Svarstatus", () => {
   });
 
   describe("Svarstatus", () => {
-    const ledetekster = {
-      "mote.bookingstatus.tidspunkt-foreslatt-tidligere.tittel":
-        "Tidspunkt foreslått tidligere",
-    };
-
     describe("Hvis møtet har både nye og gamle alternativer", () => {
       it("Skal inneholde to stk BesvarteTidspunkter", () => {
         const component = shallow(<Svarstatus mote={mote} />);
@@ -226,9 +221,7 @@ describe("Svarstatus", () => {
       });
 
       it("Skal inneholde en Utvidbar", () => {
-        const component = shallow(
-          <Svarstatus mote={mote} ledetekster={ledetekster} />
-        );
+        const component = shallow(<Svarstatus mote={mote} />);
         expect(component.find(Utvidbar)).to.have.length(1);
         expect(component.find(Utvidbar).prop("tittel")).to.equal(
           "Tidspunkt foreslått tidligere"
@@ -268,9 +261,7 @@ describe("Svarstatus", () => {
       });
 
       it("Skal ikke inneholde en Utvidbar", () => {
-        const component = shallow(
-          <Svarstatus mote={mote_} ledetekster={ledetekster} />
-        );
+        const component = shallow(<Svarstatus mote={mote_} />);
         expect(component.find(Utvidbar)).to.have.length(0);
       });
     });

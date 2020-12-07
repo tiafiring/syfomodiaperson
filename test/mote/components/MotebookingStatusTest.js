@@ -30,15 +30,6 @@ describe("MotebookingStatus", () => {
   let bekreftetMote;
   let motePassert;
   let bekreftetMotePassert;
-  const ledetekster = {
-    "mote.bookingstatus.passert.tittel": "Forrige møte",
-    "mote.bookingstatus.bekreftet.tittel": "Bekreftet møtetidspunkt",
-    "mote.bookingstatus.bekreftet.sendt-til":
-      "Møtetidspunkt valgt, møteresultat og varsel er sendt til %DELTAKERE%",
-    "mote.bookingstatus.foresporsel.sendt.til":
-      "Møteforespørselen ble sendt til %DELTAKERE%",
-    "mote.bookingstatus.sendt-dato": "Sendt: %DATO%",
-  };
 
   beforeEach(() => {
     process.env = {
@@ -212,11 +203,7 @@ describe("MotebookingStatus", () => {
   describe("StatusVarsel", () => {
     it("Skal vise riktig tekst når møtet er OPPRETTET", () => {
       component = mount(
-        <StatusVarsel
-          arbeidstaker={arbeidstaker}
-          mote={mote}
-          ledetekster={ledetekster}
-        />
+        <StatusVarsel arbeidstaker={arbeidstaker} mote={mote} />
       );
       expect(component.find(AlertStripe)).to.have.lengthOf(2);
       expect(component.find(AlertStripe).first().text()).to.contain(
@@ -229,11 +216,7 @@ describe("MotebookingStatus", () => {
 
     it("Skal vise riktig tekst når møtet er BEKREFTET", () => {
       component = mount(
-        <StatusVarsel
-          arbeidstaker={arbeidstaker}
-          mote={bekreftetMote}
-          ledetekster={ledetekster}
-        />
+        <StatusVarsel arbeidstaker={arbeidstaker} mote={bekreftetMote} />
       );
       expect(component.find(AlertStripe)).to.have.lengthOf(2);
       expect(component.find(AlertStripe).first().text()).to.contain(
@@ -248,11 +231,7 @@ describe("MotebookingStatus", () => {
   describe("Når møtet ikke er bekreftet", () => {
     beforeEach(() => {
       component = shallow(
-        <MotebookingStatus
-          arbeidstaker={arbeidstaker}
-          mote={mote}
-          ledetekster={ledetekster}
-        />
+        <MotebookingStatus arbeidstaker={arbeidstaker} mote={mote} />
       );
     });
 
@@ -286,11 +265,7 @@ describe("MotebookingStatus", () => {
     beforeEach(() => {
       mote = motePassert;
       component = shallow(
-        <MotebookingStatus
-          arbeidstaker={arbeidstaker}
-          mote={mote}
-          ledetekster={ledetekster}
-        />
+        <MotebookingStatus arbeidstaker={arbeidstaker} mote={mote} />
       );
     });
 
@@ -350,7 +325,6 @@ describe("MotebookingStatus", () => {
           arbeidstaker={arbeidstaker}
           fnr="99887766554"
           mote={mote}
-          ledetekster={ledetekster}
         />
       );
     });
@@ -375,9 +349,6 @@ describe("MotebookingStatus", () => {
       expect(component.find(BekreftetMotetidspunkt).prop("mote")).to.deep.equal(
         mote
       );
-      expect(
-        component.find(BekreftetMotetidspunkt).prop("ledetekster")
-      ).to.deep.equal(ledetekster);
     });
 
     it('Skal ikke vise en knapp med teksten "Planlegg nytt møte"', () => {
@@ -397,7 +368,6 @@ describe("MotebookingStatus", () => {
           arbeidstaker={arbeidstaker}
           fnr="99887766554"
           mote={mote}
-          ledetekster={ledetekster}
         />
       );
     });
@@ -435,9 +405,6 @@ describe("MotebookingStatus", () => {
       expect(component.find(BekreftetMotetidspunkt).prop("mote")).to.deep.equal(
         mote
       );
-      expect(
-        component.find(BekreftetMotetidspunkt).prop("ledetekster")
-      ).to.deep.equal(ledetekster);
     });
   });
 
@@ -533,7 +500,6 @@ describe("MotebookingStatus", () => {
           fnr="99887766554"
           mote={mote}
           arbeidstaker={arbeidstaker}
-          ledetekster={ledetekster}
         />
       );
       expect(component.find(KontaktInfoFeilmelding)).to.have.length(1);

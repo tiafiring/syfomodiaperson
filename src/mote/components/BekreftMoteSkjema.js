@@ -4,7 +4,6 @@ import { Link } from "react-router";
 import { connect } from "react-redux";
 import AlertStripe from "nav-frontend-alertstriper";
 import KnappBase from "nav-frontend-knapper";
-import { keyValue } from "@navikt/digisyfo-npm";
 import * as motePropTypes from "../../propTypes";
 import Epostmottakere from "./Epostmottakere";
 import Innholdsviser from "./Innholdsviser";
@@ -28,7 +27,6 @@ export const tekster = {
 const BekreftMoteSkjema = (props) => {
   const {
     mote,
-    ledetekster,
     bekrefter,
     bekreftFeilet,
     onSubmit,
@@ -42,16 +40,8 @@ const BekreftMoteSkjema = (props) => {
       <h2 className="epostinnhold__tittel">
         {tekster.mote.bekreftmote.lightboxOverskrift}
       </h2>
-      <Epostmottakere
-        mote={mote}
-        ledetekster={ledetekster}
-        arbeidstaker={arbeidstaker}
-      />
-      <InnholdsviserContainer
-        mote={mote}
-        hentEpostinnhold={hentEpostinnhold}
-        ledetekster={ledetekster}
-      />
+      <Epostmottakere mote={mote} arbeidstaker={arbeidstaker} />
+      <InnholdsviserContainer mote={mote} hentEpostinnhold={hentEpostinnhold} />
       <div aria-live="polite" role="alert">
         {bekreftFeilet && (
           <div className="blokk">
@@ -79,7 +69,6 @@ const BekreftMoteSkjema = (props) => {
   );
 };
 BekreftMoteSkjema.propTypes = {
-  ledetekster: keyValue,
   arbeidstaker: PropTypes.object,
   onSubmit: PropTypes.func,
   avbrytHref: PropTypes.string,

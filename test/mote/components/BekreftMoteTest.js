@@ -177,14 +177,10 @@ const getMoteMedSvar = (mote) => {
 
 describe("BekreftMoteSkjemaComponent", () => {
   let component;
-  let ledetekster;
   let mote;
 
   beforeEach(() => {
     mote = getMoteMedSvar();
-    ledetekster = {
-      "mote.bekreftmote.lightbox-overskrift": "Bekreft møteforespørsel",
-    };
   });
 
   it("Viser tittel", () => {
@@ -195,20 +191,13 @@ describe("BekreftMoteSkjemaComponent", () => {
   });
 
   it("Viser mottakere det er to mottakere", () => {
-    component = shallow(
-      <BekreftMoteSkjema mote={mote} ledetekster={ledetekster} />
-    );
+    component = shallow(<BekreftMoteSkjema mote={mote} />);
     expect(component.find(Epostmottakere)).to.have.length(1);
     expect(component.find(Epostmottakere).prop("mote")).to.deep.equal(mote);
-    expect(component.find(Epostmottakere).prop("ledetekster")).to.deep.equal(
-      ledetekster
-    );
   });
 
   it("Viser en InnholdsviserContainer", () => {
-    component = shallow(
-      <BekreftMoteSkjema mote={mote} ledetekster={ledetekster} />
-    );
+    component = shallow(<BekreftMoteSkjema mote={mote} />);
     expect(component.find(InnholdsviserContainer)).to.have.length(1);
   });
 });

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { keyValue, Utvidbar } from "@navikt/digisyfo-npm";
+import { Utvidbar } from "@navikt/digisyfo-npm";
 import * as moterPropTypes from "../../propTypes";
 import { NAV_VEILEDER } from "../../konstanter";
 import BesvarteTidspunkter from "./BesvarteTidspunkter";
@@ -70,7 +70,7 @@ export const getGamleAlternativer = (mote) => {
 };
 
 const Svarstatus = (props) => {
-  const { mote, visFlereAlternativ, ledetekster, children, fnr } = props;
+  const { mote, visFlereAlternativ, children, fnr } = props;
   const nyeAlternativer = getNyeAlternativer(mote);
   const gamleAlternativer = getGamleAlternativer(mote);
   return (
@@ -81,7 +81,6 @@ const Svarstatus = (props) => {
           alternativer={nyeAlternativer}
           deltakertype={NAV_VEILEDER}
           fnr={fnr}
-          ledetekster={ledetekster}
         />
         <button className="nyetidspunktknapp" onClick={visFlereAlternativ}>
           {texts.flereTidpunkt}
@@ -100,7 +99,6 @@ const Svarstatus = (props) => {
             alternativer={gamleAlternativer}
             deltakertype={NAV_VEILEDER}
             fnr={fnr}
-            ledetekster={ledetekster}
           />
         </Utvidbar>
       )}
@@ -111,7 +109,6 @@ const Svarstatus = (props) => {
 Svarstatus.propTypes = {
   mote: moterPropTypes.motePt,
   visFlereAlternativ: PropTypes.func,
-  ledetekster: keyValue,
   children: PropTypes.element,
   fnr: PropTypes.string,
 };
