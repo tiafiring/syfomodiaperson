@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Container, Row, Column } from "nav-frontend-grid";
-import PersonkortContainer from "../containers/PersonKortContainer";
 import ContextContainer from "../context/ContextContainer";
+import Personkort from "../components/personkort/Personkort";
 
 const DocumentTitle = require("react-document-title");
 
@@ -19,7 +19,7 @@ const Side = ({ tittel = "", children }) => {
         </Row>
         <Row>
           <Column className="col-xs-12">
-            <PersonkortContainer />
+            <Personkort />
           </Column>
         </Row>
         <Row>

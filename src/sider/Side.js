@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Column, Container, Row } from "nav-frontend-grid";
 import GlobalNavigasjonContainer from "../containers/GlobalNavigasjonContainer";
-import PersonkortContainer from "../containers/PersonKortContainer";
 import ContextContainer from "../context/ContextContainer";
 import styled from "styled-components";
+import Personkort from "../components/personkort/Personkort";
 
 const DocumentTitle = require("react-document-title");
 
@@ -25,7 +25,7 @@ const Side = ({ tittel = "", children, aktivtMenypunkt, fnr }) => {
         </Row>
         <Row>
           <Column className="col-xs-12">
-            <PersonkortContainer />
+            <Personkort />
           </Column>
         </Row>
         <Row>
