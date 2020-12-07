@@ -1,6 +1,6 @@
 import { dagerMellomDatoer } from "./datoUtils";
 
-export const sorterMotebehovDataEtterDato = (a, b) => {
+export const sorterMotebehovDataEtterDato = (a: any, b: any) => {
   return b.opprettetDato === a.opprettetDato
     ? 0
     : b.opprettetDato > a.opprettetDato
@@ -9,7 +9,7 @@ export const sorterMotebehovDataEtterDato = (a, b) => {
 };
 
 export const finnNyesteMotebehovsvarFraHverDeltaker = (
-  sortertMotebehovListe
+  sortertMotebehovListe: any[]
 ) => {
   return sortertMotebehovListe.filter((motebehov1, index) => {
     return (
@@ -20,7 +20,7 @@ export const finnNyesteMotebehovsvarFraHverDeltaker = (
   });
 };
 
-export const finnArbeidstakerMotebehovSvar = (motebehovListe) => {
+export const finnArbeidstakerMotebehovSvar = (motebehovListe: any[]) => {
   return motebehovListe.find((motebehov) => {
     return motebehov.opprettetAv === motebehov.aktorId;
   });
@@ -29,7 +29,7 @@ export const OPPFOLGINGSFORLOP_MOTEBEHOV_START_DAGER = 16 * 7;
 export const OPPFOLGINGSFORLOP_MOTEBEHOV_SLUTT_DAGER = 26 * 7;
 
 export const erOppfoelgingsdatoPassertMed16UkerOgIkke26Uker = (
-  startOppfolgingsdato
+  startOppfolgingsdato: Date
 ) => {
   const oppfoelgingstilfelleStartDato = new Date(startOppfolgingsdato);
   oppfoelgingstilfelleStartDato.setHours(0, 0, 0, 0);
@@ -49,7 +49,9 @@ export const erOppfoelgingsdatoPassertMed16UkerOgIkke26Uker = (
   );
 };
 
-export const erOppfolgingstilfelleSluttDatoPassert = (sluttOppfolgingsdato) => {
+export const erOppfolgingstilfelleSluttDatoPassert = (
+  sluttOppfolgingsdato: Date
+) => {
   const oppfolgingstilfelleSluttDato = new Date(sluttOppfolgingsdato);
   oppfolgingstilfelleSluttDato.setHours(0, 0, 0, 0);
   const dagensDato = new Date();
@@ -58,11 +60,11 @@ export const erOppfolgingstilfelleSluttDatoPassert = (sluttOppfolgingsdato) => {
   return dagensDato > oppfolgingstilfelleSluttDato;
 };
 
-export const harArbeidstakerSvartPaaMotebehov = (motebehovData) => {
+export const harArbeidstakerSvartPaaMotebehov = (motebehovData: any) => {
   return !!finnArbeidstakerMotebehovSvar(motebehovData);
 };
 
-const erAlleMotebehovSvarBehandlet = (motebehovListe) => {
+const erAlleMotebehovSvarBehandlet = (motebehovListe: any[]) => {
   return (
     motebehovListe.filter((motebehov) => {
       return (
@@ -74,23 +76,23 @@ const erAlleMotebehovSvarBehandlet = (motebehovListe) => {
   );
 };
 
-export const erMotebehovBehandlet = (motebehovListe) => {
+export const erMotebehovBehandlet = (motebehovListe: any[]) => {
   return erAlleMotebehovSvarBehandlet(motebehovListe);
 };
 
-export const harUbehandletMotebehov = (motebehovListe) => {
+export const harUbehandletMotebehov = (motebehovListe: any[]) => {
   return !erAlleMotebehovSvarBehandlet(motebehovListe);
 };
 
-export const hentSistBehandletMotebehov = (motebehovListe) => {
+export const hentSistBehandletMotebehov = (motebehovListe: any) => {
   return (
-    [...motebehovListe].sort((mb1, mb2) => {
+    motebehovListe.sort((mb1: any, mb2: any) => {
       return mb2.behandletTidspunkt > mb1.behandletTidspunkt;
     })[0] || {}
   );
 };
 
-export const motebehovlisteMedKunJaSvar = (motebehovliste) => {
+export const motebehovlisteMedKunJaSvar = (motebehovliste: any[]) => {
   return motebehovliste.filter((motebehov) => {
     return motebehov.motebehovSvar && motebehov.motebehovSvar.harMotebehov;
   });
