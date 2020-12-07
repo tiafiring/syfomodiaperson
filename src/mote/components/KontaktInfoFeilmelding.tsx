@@ -1,8 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
 import AlertStripe from "nav-frontend-alertstriper";
 
-const KontaktInfoFeilmelding = ({ melding }) => {
+interface KontaktInfoFeilmeldingProps {
+  melding: any;
+}
+
+const KontaktInfoFeilmelding = (
+  kontaktInfoFeilmeldingProps: KontaktInfoFeilmeldingProps
+) => {
+  const { melding } = kontaktInfoFeilmeldingProps;
   return (
     <div className="panel">
       <AlertStripe type="advarsel">
@@ -10,10 +16,6 @@ const KontaktInfoFeilmelding = ({ melding }) => {
       </AlertStripe>
     </div>
   );
-};
-
-KontaktInfoFeilmelding.propTypes = {
-  melding: PropTypes.object,
 };
 
 export default KontaktInfoFeilmelding;
