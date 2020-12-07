@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { toDatePrettyPrint } from "@navikt/digisyfo-npm";
+import { toDatePrettyPrint } from "../../utils/datoUtils";
 import SykmeldingUtdrag from "../../connected-components/SykmeldingUtdrag";
 import { sykepengesoknad as sykepengesoknadPt } from "../../propTypes";
 import Statuspanel, {

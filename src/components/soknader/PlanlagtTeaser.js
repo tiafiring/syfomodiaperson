@@ -4,7 +4,7 @@ import { Knapp } from "nav-frontend-knapper";
 import {
   tilLesbarDatoMedArstall,
   tilLesbarPeriodeMedArstall,
-} from "@navikt/digisyfo-npm";
+} from "../../utils/datoUtils";
 import {
   soknadEllerSykepengesoknad,
   sykepengesoknad as sykepengesoknadPt,

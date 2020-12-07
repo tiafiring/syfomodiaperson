@@ -5,9 +5,9 @@ import {
   sykmelding as sykmeldingPt,
   SykmeldingNokkelOpplysning,
   SykmeldingPerioder,
-  tilLesbarDatoMedArstall,
   Utvidbar,
 } from "@navikt/digisyfo-npm";
+import { tilLesbarDatoMedArstall } from "../../utils/datoUtils";
 import {
   SykmeldingopplysningForsikring,
   SykmeldingopplysningFravaersperioder,

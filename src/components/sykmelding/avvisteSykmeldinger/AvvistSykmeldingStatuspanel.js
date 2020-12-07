@@ -1,7 +1,6 @@
-/* eslint arrow-body-style: ["error", "as-needed"] */
 import React from "react";
 import PropTypes from "prop-types";
-import { tilLesbarDatoMedArstall } from '../../../utils/datoUtils';
+import { tilLesbarDatoMedArstall } from "../../../utils/datoUtils";
 import { StatusNokkelopplysning, Statusopplysninger } from "../../Statuspanel";
 import { gamleSMStatuser } from "../../../utils/sykmeldinger/sykmeldingstatuser";
 

@@ -4,9 +4,9 @@ import {
   keyValue,
   Utvidbar,
   sykmelding as sykmeldingPt,
-  tidligsteFom,
-  tilLesbarDatoMedArstall,
 } from "@navikt/digisyfo-npm";
+import { tidligsteFom } from "../../../utils/periodeUtils";
+import { tilLesbarDatoMedArstall } from "../../../utils/datoUtils";
 import { getSykmeldingCheckbox } from "../../../utils/sykmeldingUtils";
 import SykmeldingNokkelOpplysning from "./SykmeldingNokkelOpplysning";
 import SykmeldingPerioder from "./SykmeldingPerioder";

@@ -4,8 +4,8 @@ import {
   getSykmeldingCheckbox,
   keyValue,
   sykmelding as sykmeldingPt,
-  tilLesbarDatoMedArstall,
 } from "@navikt/digisyfo-npm";
+import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
 import SykmeldingOpplysning from "./SykmeldingOpplysning";
 
 const Friskmelding = ({ sykmelding, ledetekster }) => {

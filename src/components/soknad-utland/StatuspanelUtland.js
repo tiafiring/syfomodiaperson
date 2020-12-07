@@ -1,9 +1,7 @@
 import React from "react";
-import {
-  tilLesbarDatoMedArstall,
-  sykepengesoknadstatuser,
-} from "@navikt/digisyfo-npm";
+import { sykepengesoknadstatuser } from "@navikt/digisyfo-npm";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
+import { tilLesbarDatoMedArstall } from "../../utils/datoUtils";
 import { soknad as soknadPt } from "../../propTypes";
 import Statuspanel, {
   StatusNokkelopplysning,

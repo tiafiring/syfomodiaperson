@@ -1,6 +1,6 @@
 import React from "react";
-import { toDatePrettyPrint } from "@navikt/digisyfo-npm";
 import { getKey } from "./Oppsummeringsvisning";
+import { toDatePrettyPrint } from "../../utils/datoUtils";
 import OppsummeringSporsmalscontainer from "./OppsummeringSporsmalscontainer";
 import OppsummeringSporsmalstekst from "./OppsummeringSporsmalstekst";
 import { oppsummeringSporsmal } from "../../propTypes";

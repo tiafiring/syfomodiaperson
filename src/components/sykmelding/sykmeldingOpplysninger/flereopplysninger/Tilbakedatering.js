@@ -4,8 +4,8 @@ import {
   getSykmeldingOpplysning,
   keyValue,
   sykmelding as sykmeldingPt,
-  tilLesbarDatoMedArstall,
 } from "@navikt/digisyfo-npm";
+import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
 
 const Tilbakedatering = ({ sykmelding, ledetekster }) => {
   const visSeksjon =

@@ -1,12 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
-import {
-  toDatePrettyPrint,
-  sykepengesoknadstatuser,
-  tilLesbarDatoMedArstall,
-  tilLesbarPeriodeMedArstall,
-} from "@navikt/digisyfo-npm";
+import { sykepengesoknadstatuser } from "@navikt/digisyfo-npm";
 import {
   sykepengesoknad as sykepengesoknadPt,
   soknad as soknadPt,
@@ -24,6 +19,11 @@ import {
   ANNET_ARBEIDSFORHOLD,
 } from "../../enums/soknadtyper";
 import { FREMTIDIG } from "../../enums/soknadstatuser";
+import {
+  tilLesbarDatoMedArstall,
+  tilLesbarPeriodeMedArstall,
+  toDatePrettyPrint,
+} from "../../utils/datoUtils";
 
 const texts = {
   sendt: "Sendt til",

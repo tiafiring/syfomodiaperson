@@ -1,8 +1,6 @@
 import React from "react";
-import {
-  sykmelding as sykmeldingPt,
-  tilLesbarDatoMedArstall,
-} from "@navikt/digisyfo-npm";
+import { sykmelding as sykmeldingPt } from "@navikt/digisyfo-npm";
+import { tilLesbarDatoMedArstall } from "../../utils/datoUtils";
 import { Frilansersporsmal } from "./SykmeldingStatuspanelOpplysning";
 import Statuspanel, {
   StatusNokkelopplysning,

@@ -1,4 +1,4 @@
-import { tilLesbarDatoMedArstall } from '../datoUtils';
+import { tilLesbarDatoMedArstall } from "../datoUtils";
 import { formaterOrgnr } from "../index";
 import { KORRIGERT } from "../../enums/soknadstatuser";
 

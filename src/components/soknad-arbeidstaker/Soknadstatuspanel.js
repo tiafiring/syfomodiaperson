@@ -1,10 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  tilLesbarDatoMedArstall,
-  sykepengesoknadstatuser,
-} from "@navikt/digisyfo-npm";
+import { sykepengesoknadstatuser } from "@navikt/digisyfo-npm";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
+import { tilLesbarDatoMedArstall } from "../../utils/datoUtils";
 import { sykepengesoknad as sykepengesoknadPt } from "../../propTypes";
 import { erSendtTilBeggeMenIkkeSamtidig } from "../../utils/sykepengesoknadUtils";
 import { formaterOrgnr } from "../../utils";

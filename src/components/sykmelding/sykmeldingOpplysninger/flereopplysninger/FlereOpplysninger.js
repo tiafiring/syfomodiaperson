@@ -3,9 +3,9 @@ import {
   keyValue,
   getLedetekst,
   getSykmeldingOpplysning,
-  tilLesbarDatoMedArstall,
   sykmelding as sykmeldingPt,
 } from "@navikt/digisyfo-npm";
+import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
 import MulighetForArbeid from "./MulighetForArbeid";
 import Friskmelding from "./Friskmelding";
 import UtdypendeOpplysninger from "./UtdypendeOpplysninger";

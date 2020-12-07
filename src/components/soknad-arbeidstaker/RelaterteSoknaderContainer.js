@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router";
-import { tilLesbarDatoMedArstall } from '../../utils/datoUtils';
+import { tilLesbarDatoMedArstall } from "../../utils/datoUtils";
 import {
   getTidligsteSendtDato,
   sorterEtterDato,
