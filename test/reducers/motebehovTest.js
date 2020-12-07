@@ -1,9 +1,9 @@
 import { expect } from "chai";
 import deepFreeze from "deep-freeze";
 import sinon from "sinon";
-import motebehov, { sorterEtterDato } from "../../src/reducers/motebehov";
-import * as actions from "../../src/actions/motebehov_actions";
-import * as behandleActions from "../../src/actions/behandlemotebehov_actions";
+import motebehov, { sorterEtterDato } from "../../src/data/motebehov/motebehov";
+import * as actions from "../../src/data/motebehov/motebehov_actions";
+import * as behandleActions from "../../src/data/motebehov/behandlemotebehov_actions";
 
 describe("motebehov", () => {
   let clock;
@@ -64,6 +64,7 @@ describe("motebehov", () => {
         henter: true,
         hentet: false,
         hentingFeilet: false,
+        hentingForsokt: false,
       });
     });
 
@@ -81,6 +82,7 @@ describe("motebehov", () => {
         henter: false,
         hentet: true,
         hentingFeilet: false,
+        hentingForsokt: true,
       });
     });
 
@@ -95,6 +97,7 @@ describe("motebehov", () => {
         henter: false,
         hentet: false,
         hentingFeilet: true,
+        hentingForsokt: true,
       });
     });
 
@@ -128,6 +131,7 @@ describe("motebehov", () => {
         henter: false,
         hentet: true,
         hentingFeilet: false,
+        hentingForsokt: true,
       });
     });
   });

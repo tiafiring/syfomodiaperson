@@ -3,7 +3,7 @@ import ledereSagas from "./ledereSagas";
 import fastlegerSagas from "./fastlegerSagas";
 import navbrukerSagas from "./navbrukerSagas";
 import moterSagas from "./moterSagas";
-import motebehovSagas from "./motebehovSagas";
+import motebehovSagas from "../data/motebehov/motebehovSagas";
 import epostinnholdSagas from "./epostinnholdSagas";
 import sykmeldingerSagas from "./sykmeldingerSagas";
 import oppfoelgingsdialogerSagas from "./oppfoelgingsdialogerSagas";

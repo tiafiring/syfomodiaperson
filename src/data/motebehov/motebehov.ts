@@ -1,12 +1,13 @@
+import { Reducer } from "redux";
 import {
   HENT_MOTEBEHOV_HENTER,
   HENT_MOTEBEHOV_HENTET,
   HENT_MOTEBEHOV_FEILET,
   HENT_MOTEBEHOV_IKKE_TILGANG,
-} from "../actions/motebehov_actions";
-import { BEHANDLE_MOTEBEHOV_BEHANDLET } from "../actions/behandlemotebehov_actions";
+} from "./motebehov_actions";
+import { BEHANDLE_MOTEBEHOV_BEHANDLET } from "./behandlemotebehov_actions";
 
-export const sorterEtterDato = (a, b) => {
+export const sorterEtterDato = (a: Motebehov, b: Motebehov) => {
   return b.opprettetDato === a.opprettetDato
     ? 0
     : b.opprettetDato > a.opprettetDato
@@ -14,15 +15,25 @@ export const sorterEtterDato = (a, b) => {
     : -1;
 };
 
-const defaultState = {
+export interface MotebehovState {
+  henter: boolean;
+  hentet: boolean;
+  hentingFeilet: boolean;
+  hentingForsokt: boolean;
+  data: Motebehov[];
+  tilgang: any;
+}
+
+export const initialState: MotebehovState = {
   data: [],
   henter: false,
   hentet: false,
   hentingFeilet: false,
+  hentingForsokt: false,
   tilgang: {},
 };
 
-export default function motebehov(state = defaultState, action) {
+const motebehov: Reducer<MotebehovState> = (state = initialState, action) => {
   switch (action.type) {
     case HENT_MOTEBEHOV_HENTER: {
       return Object.assign({}, state, {
@@ -30,6 +41,7 @@ export default function motebehov(state = defaultState, action) {
         henter: true,
         hentet: false,
         hentingFeilet: false,
+        hentingForsokt: false,
       });
     }
     case HENT_MOTEBEHOV_HENTET: {
@@ -38,6 +50,7 @@ export default function motebehov(state = defaultState, action) {
         henter: false,
         hentet: true,
         hentingFeilet: false,
+        hentingForsokt: true,
       });
     }
     case HENT_MOTEBEHOV_FEILET: {
@@ -46,6 +59,7 @@ export default function motebehov(state = defaultState, action) {
         henter: false,
         hentet: false,
         hentingFeilet: true,
+        hentingForsokt: true,
       });
     }
     case HENT_MOTEBEHOV_IKKE_TILGANG: {
@@ -54,6 +68,7 @@ export default function motebehov(state = defaultState, action) {
         henter: false,
         hentet: false,
         hentingFeilet: false,
+        hentingForsokt: true,
         tilgang: action.tilgang,
       });
     }
@@ -74,4 +89,6 @@ export default function motebehov(state = defaultState, action) {
       return state;
     }
   }
-}
+};
+
+export default motebehov;

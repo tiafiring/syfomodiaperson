@@ -7,7 +7,7 @@ import {
   hentSistBehandletMotebehov,
 } from "../../utils/motebehovUtils";
 import { toDatePrettyPrint } from "../../utils/datoUtils";
-import { behandleMotebehov } from "../../actions/behandlemotebehov_actions";
+import { behandleMotebehov } from "../../data/motebehov/behandlemotebehov_actions";
 
 const behandleMotebehovKnappLabel = (
   erBehandlet: boolean,

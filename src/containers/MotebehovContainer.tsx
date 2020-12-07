@@ -14,7 +14,7 @@ import {
 } from "../utils/reducerUtils";
 import { ledereUtenMotebehovsvar } from "../utils/ledereUtils";
 import { hentLedere } from "../actions/ledere_actions";
-import { hentMotebehov } from "../actions/motebehov_actions";
+import { hentMotebehov } from "../data/motebehov/motebehov_actions";
 import { hentOppfoelgingsdialoger } from "../actions/oppfoelgingsdialoger_actions";
 import { hentOppfolgingstilfelleperioder } from "../actions/oppfolgingstilfelleperioder_actions";
 import { hentSykmeldinger } from "../actions/sykmeldinger_actions";

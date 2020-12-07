@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import * as actions from "../../src/actions/behandlemotebehov_actions";
+import * as actions from "../../src/data/motebehov/behandlemotebehov_actions";
 
 describe("behandlemotebehov_actions", () => {
   let fnr;

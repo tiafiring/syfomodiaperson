@@ -12,7 +12,7 @@ import ledere from "./reducers/ledere";
 import navbruker from "./reducers/navbruker";
 import sykmeldinger from "./reducers/sykmeldinger";
 import moter from "./reducers/moter";
-import motebehov from "./reducers/motebehov";
+import motebehov from "./data/motebehov/motebehov";
 import motebehovBehandling from "./reducers/motebehovBehandling";
 import epostinnhold from "./reducers/epostinnhold";
 import arbeidsgiverEpostinnhold from "./reducers/arbeidsgiverEpostinnhold";

@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import deepFreeze from "deep-freeze";
 import motebehovBehandling from "../../src/reducers/motebehovBehandling";
-import * as actions from "../../src/actions/behandlemotebehov_actions";
+import * as actions from "../../src/data/motebehov/behandlemotebehov_actions";
 
 describe("motebehovBehandling", () => {
   const initState = deepFreeze({

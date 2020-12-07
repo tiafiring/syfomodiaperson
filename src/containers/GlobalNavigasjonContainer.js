@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import GlobalNavigasjon from "../components/GlobalNavigasjon";
-import * as motebehovActions from "../actions/motebehov_actions";
+import * as motebehovActions from "../data/motebehov/motebehov_actions";
 import * as moterActions from "../actions/moter_actions";
 import * as oppfoelgingsdialogerActions from "../actions/oppfoelgingsdialoger_actions";
 import * as oppfolgingsplanerLPSActions from "../actions/oppfolgingsplanerlps_actions";

@@ -1,11 +1,11 @@
 import { expect } from "chai";
 import { call, put } from "redux-saga/effects";
 import { get } from "../../src/api";
-import { hentMotebehov } from "../../src/sagas/motebehovSagas";
+import { hentMotebehov } from "../../src/data/motebehov/motebehovSagas";
 import {
   HENT_MOTEBEHOV_HENTER,
   HENT_MOTEBEHOV_HENTET,
-} from "../../src/actions/motebehov_actions";
+} from "../../src/data/motebehov/motebehov_actions";
 
 describe("motebehovSagas", () => {
   beforeEach(() => {

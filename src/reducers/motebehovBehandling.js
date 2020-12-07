@@ -1,4 +1,4 @@
-import * as actions from "../actions/behandlemotebehov_actions";
+import * as actions from "../data/motebehov/behandlemotebehov_actions";
 
 const defaultState = {
   behandler: false,

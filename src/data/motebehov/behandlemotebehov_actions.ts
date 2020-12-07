@@ -4,7 +4,7 @@ export const BEHANDLE_MOTEBEHOV_BEHANDLET = "BEHANDLE_MOTEBEHOV_BEHANDLET";
 export const BEHANDLE_MOTEBEHOV_FEILET = "BEHANDLE_MOTEBEHOV_FEILET";
 export const BEHANDLE_MOTEBEHOV_FORBUDT = "BEHANDLE_MOTEBEHOV_FORBUDT";
 
-export function behandleMotebehov(fnr, veilederIdent) {
+export function behandleMotebehov(fnr: string, veilederIdent: string) {
   return {
     type: BEHANDLE_MOTEBEHOV_FORESPURT,
     fnr,
@@ -18,7 +18,7 @@ export function behandleMotebehovBehandler() {
   };
 }
 
-export function behandleMotebehovBehandlet(veilederIdent) {
+export function behandleMotebehovBehandlet(veilederIdent: string) {
   return {
     type: BEHANDLE_MOTEBEHOV_BEHANDLET,
     veilederIdent,

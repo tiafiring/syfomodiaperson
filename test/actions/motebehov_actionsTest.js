@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import * as actions from "../../src/actions/motebehov_actions";
+import * as actions from "../../src/data/motebehov/motebehov_actions";
 
 describe("moter_actions", () => {
   it("Skal ha en hentMoter()-funksjon som returnerer riktig action", () => {
