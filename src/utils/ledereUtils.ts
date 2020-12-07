@@ -7,12 +7,12 @@ import {
 import { activeSykmeldingerSentToArbeidsgiver } from "./sykmeldinger/sykmeldingUtils";
 
 export const ledereIVirksomheterMedMotebehovsvarFraArbeidstaker = (
-  ledereData,
-  motebehovData
+  ledereData: any,
+  motebehovData: any
 ) => {
-  return ledereData.filter((leder) => {
+  return ledereData.filter((leder: any) => {
     return (
-      motebehovData.findIndex((motebehov) => {
+      motebehovData.findIndex((motebehov: any) => {
         return (
           motebehov.opprettetAv === motebehov.aktorId &&
           leder.orgnummer === motebehov.virksomhetsnummer
@@ -23,12 +23,12 @@ export const ledereIVirksomheterMedMotebehovsvarFraArbeidstaker = (
 };
 
 export const ledereIVirksomheterDerIngenLederHarSvartPaMotebehov = (
-  ledereListe,
-  motebehovData
+  ledereListe: any[],
+  motebehovData: any
 ) => {
   return ledereListe.filter((leder) => {
     return (
-      motebehovData.findIndex((motebehov) => {
+      motebehovData.findIndex((motebehov: any) => {
         return (
           motebehov.opprettetAv !== motebehov.aktorId &&
           motebehov.virksomhetsnummer === leder.orgnummer
@@ -39,10 +39,10 @@ export const ledereIVirksomheterDerIngenLederHarSvartPaMotebehov = (
 };
 
 export const ledereMedOppfolgingstilfelleInnenforMotebehovperioden = (
-  ledereData,
-  oppfolgingstilfelleperioder
+  ledereData: any,
+  oppfolgingstilfelleperioder: any
 ) => {
-  return ledereData.filter((leder) => {
+  return ledereData.filter((leder: any) => {
     const startOppfolgingsdato =
       oppfolgingstilfelleperioder[leder.orgnummer] &&
       oppfolgingstilfelleperioder[leder.orgnummer].data
@@ -63,7 +63,7 @@ export const ledereMedOppfolgingstilfelleInnenforMotebehovperioden = (
   });
 };
 
-const isNewerLeader = (ledere, givenLeder) => {
+const isNewerLeader = (ledere: any[], givenLeder: any) => {
   return (
     ledere.findIndex((lederCandidate) => {
       return (
@@ -75,16 +75,16 @@ const isNewerLeader = (ledere, givenLeder) => {
   );
 };
 
-const newestLederForEachVirksomhet = (ledere) => {
+const newestLederForEachVirksomhet = (ledere: any[]) => {
   return ledere.filter((leder) => {
     return !isNewerLeader(ledere, leder);
   });
 };
 
 export const ledereUtenMotebehovsvar = (
-  ledereData,
-  motebehovData,
-  oppfolgingstilfelleperioder
+  ledereData: any,
+  motebehovData: any,
+  oppfolgingstilfelleperioder: any
 ) => {
   const arbeidstakerHarSvartPaaMotebehov =
     motebehovData && harArbeidstakerSvartPaaMotebehov(motebehovData);
@@ -109,13 +109,13 @@ export const ledereUtenMotebehovsvar = (
   );
 };
 
-export const lederHasActiveSykmelding = (leder, sykmeldinger) => {
+export const lederHasActiveSykmelding = (leder: any, sykmeldinger: any[]) => {
   const activeSykmeldingerWithArbeidsgiver = activeSykmeldingerSentToArbeidsgiver(
     sykmeldinger
   );
 
   return (
-    activeSykmeldingerWithArbeidsgiver.findIndex((sykmelding) => {
+    activeSykmeldingerWithArbeidsgiver.findIndex((sykmelding: any) => {
       return (
         sykmelding.mottakendeArbeidsgiver.virksomhetsnummer === leder.orgnummer
       );
@@ -123,8 +123,11 @@ export const lederHasActiveSykmelding = (leder, sykmeldinger) => {
   );
 };
 
-export const ledereWithActiveLedereFirst = (ledereData, sykmeldinger) => {
-  return ledereData.sort((leder1, leder2) => {
+export const ledereWithActiveLedereFirst = (
+  ledereData: any,
+  sykmeldinger: any[]
+) => {
+  return ledereData.sort((leder1: any, leder2: any) => {
     const leder1Active = lederHasActiveSykmelding(leder1, sykmeldinger);
     const leder2Active = lederHasActiveSykmelding(leder2, sykmeldinger);
 
@@ -138,7 +141,10 @@ export const ledereWithActiveLedereFirst = (ledereData, sykmeldinger) => {
   });
 };
 
-const sykmeldingerWithoutMatchingLeder = (ledere, sykmeldinger) => {
+const sykmeldingerWithoutMatchingLeder = (
+  ledere: any[],
+  sykmeldinger: any[]
+) => {
   return sykmeldinger.filter((sykmelding) => {
     return (
       ledere.findIndex((leder) => {
@@ -151,7 +157,7 @@ const sykmeldingerWithoutMatchingLeder = (ledere, sykmeldinger) => {
   });
 };
 
-const sykmelding2Leder = (sykmelding) => {
+const sykmelding2Leder = (sykmelding: any) => {
   return {
     erOppgitt: false,
     orgnummer: sykmelding.mottakendeArbeidsgiver.virksomhetsnummer,
@@ -159,7 +165,7 @@ const sykmelding2Leder = (sykmelding) => {
   };
 };
 
-const removeDuplicatesFromLederList = (ledere) => {
+const removeDuplicatesFromLederList = (ledere: any[]) => {
   return ledere.filter((leder, index) => {
     return (
       ledere.findIndex((leder2) => {
@@ -169,7 +175,10 @@ const removeDuplicatesFromLederList = (ledere) => {
   });
 };
 
-export const virksomheterWithoutLeder = (ledere, sykmeldinger) => {
+export const virksomheterWithoutLeder = (
+  ledere: any[],
+  sykmeldinger: any[]
+) => {
   const activeSykmeldinger = activeSykmeldingerSentToArbeidsgiver(sykmeldinger);
 
   const sykmeldingerWithoutLeder = sykmeldingerWithoutMatchingLeder(
@@ -182,36 +191,36 @@ export const virksomheterWithoutLeder = (ledere, sykmeldinger) => {
   return removeDuplicatesFromLederList(virksomheterAsLedere);
 };
 
-export const currentLedere = (ledere) => {
+export const currentLedere = (ledere: any[]) => {
   return ledere.filter((leder) => {
     return leder.aktivTom === null;
   });
 };
 
-export const formerLedere = (ledere) => {
+export const formerLedere = (ledere: any[]) => {
   return ledere.filter((leder) => {
     return leder.aktivTom !== null;
   });
 };
 
-const isLederEarlierThanGivenLeder = (givenLeder, leder) => {
+const isLederEarlierThanGivenLeder = (givenLeder: any, leder: any) => {
   return new Date(leder.fomDato) < new Date(givenLeder.fomDato);
 };
 
-const ledereFromGivenLedersVirksomhet = (givenLeder, ledere) => {
+const ledereFromGivenLedersVirksomhet = (givenLeder: any, ledere: any[]) => {
   return ledere.filter((leder) => {
     return leder.orgnummer === givenLeder.orgnummer;
   });
 };
 
-const laterLedereThanGivenLeder = (givenLeder, ledere) => {
+const laterLedereThanGivenLeder = (givenLeder: any, ledere: any[]) => {
   return ledere.filter((leder) => {
     return isLederEarlierThanGivenLeder(leder, givenLeder);
   });
 };
 
-const earliestLeder = (ledere) => {
-  let currentEarliestLeder = null;
+const earliestLeder = (ledere: any[]) => {
+  let currentEarliestLeder = null as any;
   ledere.forEach((possibleEarliestLeder) => {
     if (
       currentEarliestLeder === null ||
@@ -224,7 +233,7 @@ const earliestLeder = (ledere) => {
   return currentEarliestLeder;
 };
 
-const findNextLeder = (currentLeder, ledere) => {
+const findNextLeder = (currentLeder: any, ledere: any[]) => {
   const ledereFromCorrectVirksomhet = ledereFromGivenLedersVirksomhet(
     currentLeder,
     ledere
@@ -237,7 +246,7 @@ const findNextLeder = (currentLeder, ledere) => {
   return earliestLeder(laterLedere);
 };
 
-export const mapTomDateToEarlierLedere = (ledere) => {
+export const mapTomDateToEarlierLedere = (ledere: any[]) => {
   return ledere.map((leder) => {
     const nextLeder = findNextLeder(leder, ledere);
 
