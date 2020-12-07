@@ -1,5 +1,4 @@
 import { call, put, fork, takeEvery, select } from "redux-saga/effects";
-import { log } from "@navikt/digisyfo-npm";
 import { get } from "../api";
 import * as actions from "../actions/oppfolgingstilfelleperioder_actions";
 
@@ -10,7 +9,6 @@ export function* hentOppfolgingstilfelleperioder(action, orgnummer) {
     const data = yield call(get, path);
     yield put(actions.hentOppfolgingstilfelleperioderHentet(data, orgnummer));
   } catch (e) {
-    log(e);
     yield put(actions.hentOppfolgingstilfelleperioderFeilet(orgnummer));
   }
 }

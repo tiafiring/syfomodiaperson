@@ -1,5 +1,4 @@
 import { call, fork, put, select, takeEvery } from "redux-saga/effects";
-import { log } from "@navikt/digisyfo-npm";
 import { get } from "../api";
 import * as actiontype from "../actions/actiontyper";
 
@@ -10,7 +9,6 @@ export function* hentLedere(action) {
     const data = yield call(get, path);
     yield put({ type: actiontype.LEDERE_HENTET, data });
   } catch (e) {
-    log(e);
     yield put({ type: actiontype.HENT_LEDERE_FEILET });
   }
 }

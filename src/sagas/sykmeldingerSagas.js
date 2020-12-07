@@ -1,5 +1,4 @@
 import { call, put, fork, select, takeEvery } from "redux-saga/effects";
-import { log } from "@navikt/digisyfo-npm";
 import { get } from "../api";
 import * as actions from "../actions/sykmeldinger_actions";
 
@@ -9,13 +8,11 @@ export function* hentSykmeldinger(action) {
     const path = `${process.env.REACT_APP_SYFOSMREGISTER_ROOT}/v1/internal/sykmeldinger?fnr=${action.fnr}`;
     const data = yield call(get, path);
     if (!!data.err) {
-      log(data.err);
       yield put(actions.hentSykmeldingerFeilet());
     } else {
       yield put(actions.sykmeldingerHentet(data, action.fnr));
     }
   } catch (e) {
-    log(e);
     yield put(actions.hentSykmeldingerFeilet());
   }
 }

@@ -1,5 +1,4 @@
 import { call, fork, put, select, takeEvery } from "redux-saga/effects";
-import { log } from "@navikt/digisyfo-npm";
 import { get } from "../api";
 import * as actions from "../actions/oppfoelgingsdialoger_actions";
 
@@ -10,7 +9,6 @@ export function* hentOppfoelgingsdialoger(action) {
     const data = yield call(get, path);
     yield put(actions.hentOppfolgingsdialogerHentet(data));
   } catch (e) {
-    log(e);
     yield put(actions.hentOppfoelgingsdialogerFeilet());
   }
 }

@@ -1,5 +1,4 @@
 import { all, call, fork, put, select, takeEvery } from "redux-saga/effects";
-import { log } from "@navikt/digisyfo-npm";
 import { get } from "../api";
 import * as actions from "../actions/virksomhet_actions";
 
@@ -11,7 +10,6 @@ export function* hentVirksomhet(action) {
     const data = yield call(get, path);
     yield put(actions.virksomhetHentet(orgnummer, data));
   } catch (e) {
-    log(e);
     yield put(actions.hentVirksomhetFeilet(orgnummer));
   }
 }

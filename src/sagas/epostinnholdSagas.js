@@ -1,5 +1,4 @@
 import { call, put, fork, takeEvery, all } from "redux-saga/effects";
-import { log } from "@navikt/digisyfo-npm";
 import { get } from "../api";
 import * as actions from "../actions/epostinnhold_actions";
 import * as arbeidsgiveractions from "../actions/arbeidsgiverepostinnhold_actions";
@@ -12,7 +11,6 @@ export function* hentBekreftMoteEpostinnhold(action) {
     const data = yield call(get, path);
     yield put(actions.epostInnholdHentet("BEKREFT_TIDSPUNKT", data));
   } catch (e) {
-    log(e);
     yield put(actions.hentEpostinnholdFeilet());
   }
 }
@@ -29,7 +27,6 @@ export function* hentBekreftMoteArbeidsgiverEpostinnhold(action) {
       )
     );
   } catch (e) {
-    log(e);
     yield put(arbeidsgiveractions.hentArbeidsgiverEpostinnholdFeilet());
   }
 }
@@ -41,7 +38,6 @@ export function* hentAvbrytMoteEpostinnhold(action) {
     const data = yield call(get, path);
     yield put(actions.epostInnholdHentet("AVBRYT_TIDSPUNKT", data));
   } catch (e) {
-    log(e);
     yield put(actions.hentEpostinnholdFeilet());
   }
 }

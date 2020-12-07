@@ -1,5 +1,4 @@
 import { all, call, fork, put, select, takeEvery } from "redux-saga/effects";
-import { log } from "@navikt/digisyfo-npm";
 import { get, post } from "../api";
 import * as actions from "../actions/motebehov_actions";
 import * as behandleActions from "../actions/behandlemotebehov_actions";
@@ -16,7 +15,6 @@ export function* hentMotebehov(action) {
       yield put(actions.hentMotebehovIkkeTilgang(e.tilgang));
       return;
     }
-    log(e);
     yield put(actions.hentMotebehovFeilet());
   }
 }
@@ -48,7 +46,6 @@ export function* behandleMotebehov(action) {
       window.location.reload();
       return;
     }
-    log(e);
     yield put(behandleActions.behandleMotebehovFeilet());
   }
 }

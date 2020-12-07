@@ -1,5 +1,4 @@
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
-import { log } from "@navikt/digisyfo-npm";
 import { get } from "../api";
 import {
   HENT_NAVBRUKER_FORESPURT,
@@ -15,7 +14,6 @@ export function* hentNavbruker(action) {
     const data = yield call(get, path);
     yield put({ type: NAVBRUKER_HENTET, data });
   } catch (e) {
-    log(e);
     yield put({ type: HENT_NAVBRUKER_FEILET });
   }
 }

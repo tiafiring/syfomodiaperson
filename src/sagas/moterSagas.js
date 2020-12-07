@@ -1,5 +1,4 @@
 import { all, call, fork, put, select, takeEvery } from "redux-saga/effects";
-import { log } from "@navikt/digisyfo-npm";
 import { post, get } from "../api";
 import history from "../history";
 import * as actions from "../actions/moter_actions";
@@ -14,7 +13,6 @@ export function* opprettMote(action) {
     yield put(actions.hentMoter(action.data.fnr));
     yield put(historikkActions.hentHistorikk(action.data.fnr, "MOTER"));
   } catch (e) {
-    log(e);
     yield put(actions.opprettMoteFeilet());
   }
 }
@@ -30,7 +28,6 @@ export function* hentMoter(action) {
       yield put(actions.hentMoterIkkeTilgang(e.tilgang));
       return;
     }
-    log(e);
     yield put(actions.hentMoterFeilet());
   }
 }
@@ -57,7 +54,6 @@ export function* avbrytMote(action) {
     yield put(historikkActions.hentHistorikk(action.fnr, "MOTER"));
     history.replace(`/sykefravaer/${action.fnr}/mote`);
   } catch (e) {
-    log(e);
     yield put(actions.avbrytMoteFeilet());
   }
 }
@@ -78,7 +74,6 @@ export function* bekreftMote(action) {
     yield put(historikkActions.hentHistorikk(action.fnr, "MOTER"));
     history.replace(`/sykefravaer/${action.fnr}/mote`);
   } catch (e) {
-    log(e);
     yield put(actions.bekreftMoteFeilet());
   }
 }
@@ -94,7 +89,6 @@ export function* opprettFlereAlternativ(action) {
       actions.opprettFlereAlternativBekreftet(action.data, action.moteUuid)
     );
   } catch (e) {
-    log(e);
     yield put(actions.opprettFlereAlternativFeilet());
   }
 }

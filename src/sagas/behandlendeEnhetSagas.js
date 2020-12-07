@@ -1,5 +1,4 @@
 import { call, put, fork, takeEvery } from "redux-saga/effects";
-import { log } from "@navikt/digisyfo-npm";
 import { get } from "../api";
 import * as actions from "../actions/behandlendeEnhet_actions";
 
@@ -10,7 +9,6 @@ export function* hentBehandlendeEnhetSaga(action) {
     const data = yield call(get, path);
     yield put(actions.behandlendeEnhetHentet(data));
   } catch (e) {
-    log(e);
     yield put(actions.hentBehandlendeEnhetFeilet());
   }
 }

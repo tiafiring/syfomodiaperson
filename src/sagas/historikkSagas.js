@@ -1,5 +1,4 @@
 import { call, put, fork, takeEvery } from "redux-saga/effects";
-import { log } from "@navikt/digisyfo-npm";
 import { get } from "../api";
 import * as actions from "../actions/historikk_actions";
 
@@ -10,7 +9,6 @@ export function* hentHistorikkOppfoelgingsdialog(action) {
     const data = yield call(get, path);
     yield put(actions.historikkHentet(data, "OPPFOELGINGSDIALOG"));
   } catch (e) {
-    log(e);
     yield put(actions.hentHistorikkFeilet("OPPFOELGINGSDIALOG"));
   }
 }
@@ -22,7 +20,6 @@ export function* hentHistorikkMoter(action) {
     const data = yield call(get, path);
     yield put(actions.historikkHentet(data, "MOTER"));
   } catch (e) {
-    log(e);
     yield put(actions.hentHistorikkFeilet("MOTER"));
   }
 }
@@ -34,7 +31,6 @@ export function* hentHistorikkMotebehov(action) {
     const data = yield call(get, path);
     yield put(actions.historikkHentet(data, "MOTEBEHOV"));
   } catch (e) {
-    log(e);
     yield put(actions.hentHistorikkFeilet("MOTEBEHOV"));
   }
 }
