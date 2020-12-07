@@ -50,7 +50,6 @@ export class MotebehovSide extends Component {
 
   render() {
     const {
-      actions,
       aktiveDialoger,
       fnr,
       henter,
@@ -93,7 +92,6 @@ export class MotebehovSide extends Component {
           }
           return (
             <Motebehov
-              actions={actions}
               fnr={fnr}
               ledereData={ledereData}
               ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}

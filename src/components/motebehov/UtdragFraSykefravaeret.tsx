@@ -265,7 +265,7 @@ export const Samtalereferat = (samtalereferatProps: SamtalereferatProps) => {
 interface UtdragFraSykefravaeretProps {
   aktiveDialoger: any;
   fnr: string;
-  oppfolgingstilfelleUtenArbeidsgiver: OppfolgingstilfellePerson;
+  oppfolgingstilfelleUtenArbeidsgiver?: OppfolgingstilfellePerson;
   oppfolgingstilfelleperioder: any[];
   sykmeldinger: any[];
 }

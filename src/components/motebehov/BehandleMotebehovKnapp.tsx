@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import { Checkbox } from "nav-frontend-skjema";
 import {
   erMotebehovBehandlet,
@@ -7,17 +7,7 @@ import {
   hentSistBehandletMotebehov,
 } from "../../utils/motebehovUtils";
 import { toDatePrettyPrint } from "../../utils/datoUtils";
-
-const behandleMotebehov = (
-  actions: any,
-  fnr: string,
-  veilederinfo: any,
-  motebehovListe: any[]
-) => {
-  if (harUbehandletMotebehov(motebehovListe)) {
-    actions.behandleMotebehov(fnr, veilederinfo.ident);
-  }
-};
+import { behandleMotebehov } from "../../actions/behandlemotebehov_actions";
 
 const behandleMotebehovKnappLabel = (
   erBehandlet: boolean,
@@ -31,7 +21,6 @@ const behandleMotebehovKnappLabel = (
 };
 
 interface BehandleMotebehovKnappProps {
-  actions: any;
   fnr: string;
   motebehovListe: any[];
   veilederinfo: any;
@@ -40,14 +29,11 @@ interface BehandleMotebehovKnappProps {
 const BehandleMotebehovKnapp = (
   behandleMotebehovKnappProps: BehandleMotebehovKnappProps
 ) => {
-  const {
-    actions,
-    fnr,
-    motebehovListe,
-    veilederinfo,
-  } = behandleMotebehovKnappProps;
+  const { fnr, motebehovListe, veilederinfo } = behandleMotebehovKnappProps;
   const sistBehandletMotebehov = hentSistBehandletMotebehov(motebehovListe);
   const erBehandlet = erMotebehovBehandlet(motebehovListe);
+
+  const dispatch = useDispatch();
 
   return (
     <div className="panel behandleMotebehovKnapp">
@@ -58,7 +44,9 @@ const BehandleMotebehovKnapp = (
             sistBehandletMotebehov
           )}
           onClick={() => {
-            behandleMotebehov(actions, fnr, veilederinfo, motebehovListe);
+            if (harUbehandletMotebehov(motebehovListe)) {
+              dispatch(behandleMotebehov(fnr, veilederinfo.ident));
+            }
           }}
           id="marker__utfoert"
           disabled={erBehandlet}
@@ -67,13 +55,6 @@ const BehandleMotebehovKnapp = (
       </div>
     </div>
   );
-};
-
-BehandleMotebehovKnapp.propTypes = {
-  actions: PropTypes.object,
-  fnr: PropTypes.string,
-  motebehovListe: PropTypes.arrayOf(PropTypes.object),
-  veilederinfo: PropTypes.object,
 };
 
 export default BehandleMotebehovKnapp;
