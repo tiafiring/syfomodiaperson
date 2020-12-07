@@ -1,14 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
-import {
-  senesteTom,
-  tidligsteFom,
-  tilLesbarPeriodeMedArstall,
-  sykmelding as sykmeldingPt,
-} from "@navikt/digisyfo-npm";
 import { Utvidbar } from "@navikt/digisyfo-npm";
 import EtikettBase from "nav-frontend-etiketter";
-import SykmeldingMotebehovVisning from "./SykmeldingMotebehovVisning.tsx";
+import SykmeldingMotebehovVisning from "./SykmeldingMotebehovVisning";
 import {
   erEkstraInformasjonISykmeldingen,
   arbeidsgivernavnEllerArbeidssituasjon,
@@ -23,6 +16,9 @@ import {
 } from "../../utils/sykmeldinger/sykmeldingUtils";
 import Lenke from "nav-frontend-lenker";
 import { finnMiljoStreng } from "../../utils/miljoUtil";
+import { OppfolgingstilfellePerson } from "../../types/OppfolgingstilfellePerson";
+import { tilLesbarPeriodeMedArstall } from "../../utils/datoUtils";
+import { senesteTom, tidligsteFom } from "../../utils/periodeUtils";
 
 const tekster = {
   header: "Utdrag fra sykefraværet",
@@ -49,12 +45,20 @@ export const UtdragFraSykefravaeretHeader = () => {
   );
 };
 
-export const Oppfolgingsplaner = ({ aktiveDialoger, fnr }) => {
+interface OppfolgingsplanerProps {
+  fnr: string;
+  aktiveDialoger: any[];
+}
+
+export const Oppfolgingsplaner = (
+  oppfolgingsplanerProps: OppfolgingsplanerProps
+) => {
+  const { aktiveDialoger, fnr } = oppfolgingsplanerProps;
   return (
     <div className="utdragFraSykefravaeret__oppfolgingsplaner">
       <h3>{tekster.oppfolgingsplaner.header}</h3>
       {aktiveDialoger && aktiveDialoger.length > 0 ? (
-        aktiveDialoger.map((dialog, index) => {
+        aktiveDialoger.map((dialog: any, index: number) => {
           const virksomhetsNavn = dialog.virksomhet.navn;
           return (
             <div
@@ -87,12 +91,12 @@ export const Oppfolgingsplaner = ({ aktiveDialoger, fnr }) => {
   );
 };
 
-Oppfolgingsplaner.propTypes = {
-  aktiveDialoger: PropTypes.arrayOf(PropTypes.object),
-  fnr: PropTypes.string,
-};
+interface UtvidbarTittelProps {
+  sykmelding: any;
+}
 
-export const UtvidbarTittel = ({ sykmelding }) => {
+export const UtvidbarTittel = (utvidbarTittelProps: UtvidbarTittelProps) => {
+  const sykmelding = utvidbarTittelProps.sykmelding;
   const erViktigInformasjon = erEkstraInformasjonISykmeldingen(sykmelding);
   const sykmeldingPerioderSortertEtterDato = sykmeldingperioderSortertEldstTilNyest(
     sykmelding.mulighetForArbeid.perioder
@@ -130,11 +134,14 @@ export const UtvidbarTittel = ({ sykmelding }) => {
   );
 };
 
-UtvidbarTittel.propTypes = {
-  sykmelding: sykmeldingPt,
-};
+interface SykmeldingerForVirksomhetProps {
+  sykmeldinger: any[];
+}
 
-export const SykmeldingerForVirksomhet = ({ sykmeldinger }) => {
+export const SykmeldingerForVirksomhet = (
+  sykmeldingerForVirksomhetProps: SykmeldingerForVirksomhetProps
+) => {
+  const sykmeldinger = sykmeldingerForVirksomhetProps.sykmeldinger;
   return (
     <div className="utdragFraSykefravaeret__sykmeldingerForVirksomhet">
       <h4>
@@ -155,11 +162,14 @@ export const SykmeldingerForVirksomhet = ({ sykmeldinger }) => {
   );
 };
 
-SykmeldingerForVirksomhet.propTypes = {
-  sykmeldinger: PropTypes.arrayOf(sykmeldingPt),
-};
+interface SykmeldingerProps {
+  oppfolgingstilfelleperioder: any[];
+  sykmeldinger: any[];
+}
 
-export const Sykmeldinger = ({ oppfolgingstilfelleperioder, sykmeldinger }) => {
+export const Sykmeldinger = (sykmeldingerProps: SykmeldingerProps) => {
+  const { oppfolgingstilfelleperioder, sykmeldinger } = sykmeldingerProps;
+
   const innsendteSykmeldinger = sykmeldingerMedStatusSendt(sykmeldinger);
   const sykmeldingerIOppfolgingstilfellet = sykmeldingerInnenforOppfolgingstilfellet(
     innsendteSykmeldinger,
@@ -186,15 +196,18 @@ export const Sykmeldinger = ({ oppfolgingstilfelleperioder, sykmeldinger }) => {
   );
 };
 
-Sykmeldinger.propTypes = {
-  oppfolgingstilfelleperioder: PropTypes.object,
-  sykmeldinger: PropTypes.arrayOf(sykmeldingPt),
-};
+interface SykmeldingerUtenArbeidsgiverProps {
+  oppfolgingstilfelleUtenArbeidsgiver: OppfolgingstilfellePerson;
+  sykmeldinger: any[];
+}
 
-export const SykmeldingerUtenArbeidsgiver = ({
-  oppfolgingstilfelleUtenArbeidsgiver,
-  sykmeldinger,
-}) => {
+export const SykmeldingerUtenArbeidsgiver = (
+  sykmeldingerUtenArbeidsgiverProps: SykmeldingerUtenArbeidsgiverProps
+) => {
+  const {
+    oppfolgingstilfelleUtenArbeidsgiver,
+    sykmeldinger,
+  } = sykmeldingerUtenArbeidsgiverProps;
   const innsendteSykmeldinger = sykmeldingerUtenArbeidsgiver(sykmeldinger);
   const sykmeldingerIOppfolgingstilfellet = sykmeldingerInnenforOppfolgingstilfellePerson(
     innsendteSykmeldinger,
@@ -207,32 +220,34 @@ export const SykmeldingerUtenArbeidsgiver = ({
     <div className="utdragFraSykefravaeret__sykmeldinger">
       <h3>{tekster.sykmeldinger.headerUtenArbeidsgiver}</h3>
       {sykmeldingerSortertPaUtstedelsesdato.length > 0 &&
-        sykmeldingerSortertPaUtstedelsesdato.map((sykmelding, index) => {
-          return (
-            <div
-              className="utdragFraSykefravaeret__sykmeldingerForVirksomhet"
-              key={index}
-            >
-              <Utvidbar
-                tittel={<UtvidbarTittel sykmelding={sykmelding} />}
-                visLukkLenke={false}
-                children={
-                  <SykmeldingMotebehovVisning sykmelding={sykmelding} />
-                }
-              />
-            </div>
-          );
-        })}
+        sykmeldingerSortertPaUtstedelsesdato.map(
+          (sykmelding: any, index: number) => {
+            return (
+              <div
+                className="utdragFraSykefravaeret__sykmeldingerForVirksomhet"
+                key={index}
+              >
+                <Utvidbar
+                  tittel={<UtvidbarTittel sykmelding={sykmelding} />}
+                  visLukkLenke={false}
+                  children={
+                    <SykmeldingMotebehovVisning sykmelding={sykmelding} />
+                  }
+                />
+              </div>
+            );
+          }
+        )}
     </div>
   );
 };
 
-Sykmeldinger.propTypes = {
-  oppfolgingstilfelleUtenArbeidsgiver: PropTypes.object,
-  sykmeldinger: PropTypes.arrayOf(sykmeldingPt),
-};
+interface SamtalereferatProps {
+  fnr: string;
+}
 
-export const Samtalereferat = ({ fnr }) => {
+export const Samtalereferat = (samtalereferatProps: SamtalereferatProps) => {
+  const fnr = samtalereferatProps.fnr;
   return (
     <div className="utdragFraSykefravaeret__samtalereferat">
       <h3>{tekster.samtalereferat.header}</h3>
@@ -247,17 +262,24 @@ export const Samtalereferat = ({ fnr }) => {
   );
 };
 
-Samtalereferat.propTypes = {
-  fnr: PropTypes.string,
-};
+interface UtdragFraSykefravaeretProps {
+  aktiveDialoger: any;
+  fnr: string;
+  oppfolgingstilfelleUtenArbeidsgiver: OppfolgingstilfellePerson;
+  oppfolgingstilfelleperioder: any[];
+  sykmeldinger: any[];
+}
 
-const UtdragFraSykefravaeret = ({
-  aktiveDialoger,
-  fnr,
-  oppfolgingstilfelleUtenArbeidsgiver,
-  oppfolgingstilfelleperioder,
-  sykmeldinger,
-}) => {
+const UtdragFraSykefravaeret = (
+  utdragFraSykefravaeretProps: UtdragFraSykefravaeretProps
+) => {
+  const {
+    aktiveDialoger,
+    fnr,
+    oppfolgingstilfelleUtenArbeidsgiver,
+    oppfolgingstilfelleperioder,
+    sykmeldinger,
+  } = utdragFraSykefravaeretProps;
   return (
     <div>
       <UtdragFraSykefravaeretHeader />
@@ -266,14 +288,12 @@ const UtdragFraSykefravaeret = ({
         <Oppfolgingsplaner aktiveDialoger={aktiveDialoger} fnr={fnr} />
 
         <Sykmeldinger
-          fnr={fnr}
           oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
           sykmeldinger={sykmeldinger}
         />
 
         {oppfolgingstilfelleUtenArbeidsgiver && (
           <SykmeldingerUtenArbeidsgiver
-            fnr={fnr}
             oppfolgingstilfelleUtenArbeidsgiver={
               oppfolgingstilfelleUtenArbeidsgiver
             }
@@ -285,14 +305,6 @@ const UtdragFraSykefravaeret = ({
       </div>
     </div>
   );
-};
-
-UtdragFraSykefravaeret.propTypes = {
-  aktiveDialoger: PropTypes.arrayOf(PropTypes.object),
-  fnr: PropTypes.string,
-  oppfolgingstilfelleUtenArbeidsgiver: PropTypes.object,
-  oppfolgingstilfelleperioder: PropTypes.object,
-  sykmeldinger: PropTypes.arrayOf(sykmeldingPt),
 };
 
 export default UtdragFraSykefravaeret;
