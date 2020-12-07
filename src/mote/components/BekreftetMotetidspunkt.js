@@ -24,7 +24,7 @@ const BekreftetMotetidspunkt = (props) => {
     })[0];
   return (
     <div className="gronnRammeTidspunkt">
-      <DatoOgTid tagName="h4" tid={mote.bekreftetAlternativ.tid} />
+      <DatoOgTid tid={mote.bekreftetAlternativ.tid} />
       <SvarMedIkon bruker={arbeidsgiver} svar={arbeidsgiversSvar} />
       {arbeidstaker && arbeidstakerSvar && (
         <SvarMedIkon bruker={arbeidstaker} svar={arbeidstakerSvar} />
