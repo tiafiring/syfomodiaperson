@@ -1,12 +1,17 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Container, Row, Column } from "nav-frontend-grid";
 import ContextContainer from "../context/ContextContainer";
 import Personkort from "../components/personkort/Personkort";
 
 const DocumentTitle = require("react-document-title");
 
-const Side = ({ tittel = "", children }) => {
+interface SideFullbreddeProps {
+  tittel?: string;
+  children?: any;
+}
+
+const Side = (sideFullbreddeProps: SideFullbreddeProps) => {
+  const { tittel = "", children } = sideFullbreddeProps;
   return (
     <DocumentTitle
       title={tittel + (tittel.length > 0 ? " - Sykefravær" : "Sykefravær")}
@@ -28,11 +33,6 @@ const Side = ({ tittel = "", children }) => {
       </Container>
     </DocumentTitle>
   );
-};
-
-Side.propTypes = {
-  children: PropTypes.element,
-  tittel: PropTypes.string,
 };
 
 export default Side;

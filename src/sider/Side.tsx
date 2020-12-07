@@ -1,9 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
+import styled from "styled-components";
 import { Column, Container, Row } from "nav-frontend-grid";
 import GlobalNavigasjonContainer from "../containers/GlobalNavigasjonContainer";
 import ContextContainer from "../context/ContextContainer";
-import styled from "styled-components";
 import Personkort from "../components/personkort/Personkort";
 
 const DocumentTitle = require("react-document-title");
@@ -12,7 +11,15 @@ const StyledContainer = styled(Container)`
   width: 95%;
 `;
 
-const Side = ({ tittel = "", children, aktivtMenypunkt, fnr }) => {
+interface SideProps {
+  tittel?: string;
+  children?: any;
+  aktivtMenypunkt?: string;
+  fnr?: string;
+}
+
+const Side = (sideProps: SideProps) => {
+  const { tittel = "", children, aktivtMenypunkt, fnr } = sideProps;
   return (
     <DocumentTitle
       title={tittel + (tittel.length > 0 ? " - Sykefravær" : "Sykefravær")}
@@ -40,13 +47,6 @@ const Side = ({ tittel = "", children, aktivtMenypunkt, fnr }) => {
       </StyledContainer>
     </DocumentTitle>
   );
-};
-
-Side.propTypes = {
-  children: PropTypes.element,
-  fnr: PropTypes.string,
-  tittel: PropTypes.string,
-  aktivtMenypunkt: PropTypes.string,
 };
 
 export default Side;
