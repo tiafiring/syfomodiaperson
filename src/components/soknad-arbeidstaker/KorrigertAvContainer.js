@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router";
 import AlertStripe from "nav-frontend-alertstriper";
-import { tilLesbarDatoMedArstall } from "@navikt/digisyfo-npm";
+import { tilLesbarDatoMedArstall } from '../../utils/datoUtils';
 import { soknadEllerSykepengesoknad } from "../../propTypes";
 import { getTidligsteSendtDato } from "../../utils/sykepengesoknadUtils";
 

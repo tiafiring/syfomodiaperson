@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { tilLesbarDatoMedArstall } from "@navikt/digisyfo-npm";
 import { Link } from "react-router";
+import { tilLesbarDatoMedArstall } from '../../utils/datoUtils';
 import {
   getTidligsteSendtDato,
   sorterEtterDato,
