@@ -1,4 +1,4 @@
-export const getTidligsteSendtDato = (soknad) => {
+export const getTidligsteSendtDato = (soknad: any) => {
   if (soknad.sendtTilNAVDato && soknad.sendtTilArbeidsgiverDato) {
     return soknad.sendtTilNAVDato > soknad.sendtTilArbeidsgiverDato
       ? soknad.sendtTilArbeidsgiverDato
@@ -7,7 +7,7 @@ export const getTidligsteSendtDato = (soknad) => {
   return soknad.sendtTilNAVDato || soknad.sendtTilArbeidsgiverDato;
 };
 
-export const sorterEtterDato = (soknad1, soknad2) => {
+export const sorterEtterDato = (soknad1: any, soknad2: any) => {
   const dato1 = new Date(getTidligsteSendtDato(soknad1));
   const dato2 = new Date(getTidligsteSendtDato(soknad2));
 
@@ -20,7 +20,7 @@ export const sorterEtterDato = (soknad1, soknad2) => {
   return 0;
 };
 
-export const sorterEtterOpprettetDato = (soknad1, soknad2) => {
+export const sorterEtterOpprettetDato = (soknad1: any, soknad2: any) => {
   if (
     new Date(soknad1.opprettetDato).getTime() >
     new Date(soknad2.opprettetDato).getTime()
@@ -36,7 +36,7 @@ export const sorterEtterOpprettetDato = (soknad1, soknad2) => {
   return 0;
 };
 
-export const sorterEtterPerioder = (soknad1, soknad2) => {
+export const sorterEtterPerioder = (soknad1: any, soknad2: any) => {
   if (new Date(soknad1.tom).getTime() < new Date(soknad2.tom).getTime()) {
     return 1;
   }
@@ -46,7 +46,7 @@ export const sorterEtterPerioder = (soknad1, soknad2) => {
   return 0;
 };
 
-export const erSendtTilBeggeMenIkkeSamtidig = (sykepengesoknad) => {
+export const erSendtTilBeggeMenIkkeSamtidig = (sykepengesoknad: any) => {
   return (
     sykepengesoknad.sendtTilNAVDato &&
     sykepengesoknad.sendtTilArbeidsgiverDato &&
@@ -55,7 +55,7 @@ export const erSendtTilBeggeMenIkkeSamtidig = (sykepengesoknad) => {
   );
 };
 
-export const getSendtTilSuffix = (sykepengesoknad) => {
+export const getSendtTilSuffix = (sykepengesoknad: any) => {
   if (
     sykepengesoknad.sendtTilArbeidsgiverDato &&
     sykepengesoknad.sendtTilNAVDato
