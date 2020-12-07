@@ -4,7 +4,7 @@ import { connect, useDispatch } from "react-redux";
 import SideFullbredde from "../sider/SideFullbredde";
 import * as oppdialogActions from "../actions/oppfoelgingsdialoger_actions";
 import Feilmelding from "../components/Feilmelding";
-import Oppfoelgingsplan from "../components/oppfoelgingsdialoger/Oppfoelgingsplan";
+import Oppfolgingsplan from "../components/oppfoelgingsdialoger/Oppfolgingsplan";
 import AppSpinner from "../components/AppSpinner";
 import { OPPFOELGINGSPLANER } from "../enums/menypunkter";
 import { hentBegrunnelseTekst } from "../utils/tilgangUtils";
@@ -49,7 +49,7 @@ const OppfoelgingsPlanerOversiktSide = ({
           return <Feilmelding />;
         }
         return (
-          <Oppfoelgingsplan oppfoelgingsdialog={oppfoelgingsdialog} fnr={fnr} />
+          <Oppfolgingsplan oppfolgingsplan={oppfoelgingsdialog} fnr={fnr} />
         );
       })()}
     </SideFullbredde>
