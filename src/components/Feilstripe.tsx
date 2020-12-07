@@ -1,12 +1,18 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Alertstripe from "nav-frontend-alertstriper";
 
-const Feilstripe = ({
-  vis,
-  className,
-  tekst = "Beklager, det oppstod en feil! Vennligst prøv igjen senere.",
-}) => {
+interface FeilstripeProps {
+  vis: boolean;
+  className: string;
+  tekst: string;
+}
+
+const Feilstripe = (feilstripeProps: FeilstripeProps) => {
+  const {
+    vis,
+    className,
+    tekst = "Beklager, det oppstod en feil! Vennligst prøv igjen senere.",
+  } = feilstripeProps;
   return (
     <div aria-live="polite" role="alert">
       {vis ? (
@@ -16,12 +22,6 @@ const Feilstripe = ({
       ) : null}
     </div>
   );
-};
-
-Feilstripe.propTypes = {
-  vis: PropTypes.bool,
-  className: PropTypes.string,
-  tekst: PropTypes.string,
 };
 
 export default Feilstripe;
