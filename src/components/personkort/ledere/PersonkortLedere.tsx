@@ -1,10 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {
   ledereWithActiveLedereFirst,
   virksomheterWithoutLeder,
 } from "../../../utils/ledereUtils";
-import { groupArrayByKey } from "../../../utils/sortUtils.ts";
+import { groupArrayByKey } from "../../../utils/sortUtils";
 import PersonkortFeilmelding from "../PersonkortFeilmelding";
 import PersonKortVirksomhetLedere from "./PersonKortVirksomhetLedere";
 import PersonKortVirksomhetHeader from "./PersonKortVirksomhetHeader";
@@ -14,13 +13,19 @@ const texts = {
     "Nærmeste leder mangler. Arbeidsgiveren må melde inn nærmeste leder i Altinn.",
 };
 
-export const sortLeaderListNewestFomDatoFirst = (leaderList) => {
+export const sortLeaderListNewestFomDatoFirst = (leaderList: any[]) => {
   return [...leaderList].sort((l1, l2) => {
-    return new Date(l2.fomDato) - new Date(l1.fomDato);
+    return new Date(l2.fomDato).getTime() - new Date(l1.fomDato).getTime();
   });
 };
 
-const PersonkortLedere = ({ ledere, sykmeldinger }) => {
+interface PersonkortLedereProps {
+  ledere: any[];
+  sykmeldinger: any[];
+}
+
+const PersonkortLedere = (personkortLedereProps: PersonkortLedereProps) => {
+  const { ledere, sykmeldinger } = personkortLedereProps;
   const virksomheterFromSykmeldinger = virksomheterWithoutLeder(
     ledere,
     sykmeldinger
@@ -49,7 +54,7 @@ const PersonkortLedere = ({ ledere, sykmeldinger }) => {
             />
           );
         })}
-        {virksomheterFromSykmeldinger.map((virksomhet, idx) => {
+        {virksomheterFromSykmeldinger.map((virksomhet: any, idx: number) => {
           return (
             <PersonKortVirksomhetHeader
               key={idx}
@@ -61,11 +66,6 @@ const PersonkortLedere = ({ ledere, sykmeldinger }) => {
       </div>
     );
   }
-};
-
-PersonkortLedere.propTypes = {
-  ledere: PropTypes.array,
-  sykmeldinger: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default PersonkortLedere;

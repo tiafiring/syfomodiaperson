@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { restdatoTilLesbarDato } from "../../utils/datoUtils";
 import PersonkortFeilmelding from "./PersonkortFeilmelding";
 import PersonkortElement from "./PersonkortElement";
@@ -13,11 +12,11 @@ const texts = {
     "Det kan hende brukeren ikke har en fastlege. Ta kontakt med brukeren for å få behandlers kontaktopplysninger.",
 };
 
-export const hentTekstFastlegeNavn = (fastlege) => {
+export const hentTekstFastlegeNavn = (fastlege: any) => {
   return fastlege ? `${fastlege.fornavn} ${fastlege.etternavn}` : "";
 };
 
-const tidligereLegerTekst = (fastlege) => {
+const tidligereLegerTekst = (fastlege: any) => {
   return `${restdatoTilLesbarDato(
     fastlege.pasientforhold.fom
   )} - ${restdatoTilLesbarDato(
@@ -25,8 +24,13 @@ const tidligereLegerTekst = (fastlege) => {
   )} ${hentTekstFastlegeNavn(fastlege)}`;
 };
 
-export const TidligereLeger = ({ tidligereFastleger }) => {
-  const fastlegerMedPasientforhold = tidligereFastleger.filter((lege) => {
+interface TidligereLegerProps {
+  tidligereFastleger: any[];
+}
+
+export const TidligereLeger = (tidligereLegerProps: TidligereLegerProps) => {
+  const { tidligereFastleger } = tidligereLegerProps;
+  const fastlegerMedPasientforhold = tidligereFastleger.filter((lege: any) => {
     return lege.pasientforhold;
   });
   return fastlegerMedPasientforhold.length > 0 ? (
@@ -43,11 +47,12 @@ export const TidligereLeger = ({ tidligereFastleger }) => {
   ) : null;
 };
 
-TidligereLeger.propTypes = {
-  tidligereFastleger: PropTypes.array,
-};
+interface PersonkortLegeProps {
+  fastleger: any;
+}
 
-const PersonkortLege = ({ fastleger }) => {
+const PersonkortLege = (personkortLegeProps: PersonkortLegeProps) => {
+  const { fastleger } = personkortLegeProps;
   const informasjonNokkelTekster = new Map([
     ["fom", texts.startDate],
     ["navn", texts.name],
@@ -78,7 +83,7 @@ const PersonkortLege = ({ fastleger }) => {
   return fastleger.ikkeFunnet ? (
     <PersonkortFeilmelding>{texts.error}</PersonkortFeilmelding>
   ) : (
-    [
+    <>
       <PersonkortElement
         tittel={hentTekstFastlegeNavn(aktivFastlege)}
         imgUrl="/sykefravaer/img/svg/medisinskrin.svg"
@@ -87,14 +92,10 @@ const PersonkortLege = ({ fastleger }) => {
           informasjonNokkelTekster={informasjonNokkelTekster}
           informasjon={valgteElementer}
         />
-      </PersonkortElement>,
-      <TidligereLeger tidligereFastleger={fastleger.tidligere} />,
-    ]
+      </PersonkortElement>
+      <TidligereLeger tidligereFastleger={fastleger.tidligere} />
+    </>
   );
-};
-
-PersonkortLege.propTypes = {
-  fastleger: PropTypes.object,
 };
 
 export default PersonkortLege;

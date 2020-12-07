@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import PersonkortElement from "./PersonkortElement";
 import PersonkortInformasjon from "./PersonkortInformasjon";
 import { formaterFnr } from "../../utils/fnrUtils";
@@ -18,7 +17,15 @@ const texts = {
   oppholdsadresse: "Oppholdsadresse",
 };
 
-const PersonkortSykmeldt = ({ navbruker, personadresse }) => {
+interface PersonkortSykmeldtProps {
+  navbruker: any;
+  personadresse: any;
+}
+
+const PersonkortSykmeldt = (
+  personkortSykmeldtProps: PersonkortSykmeldtProps
+) => {
+  const { navbruker, personadresse } = personkortSykmeldtProps;
   const informasjonNokkelTekster = new Map([
     ["fnr", texts.fnr],
     ["tlf", texts.phone],
@@ -63,11 +70,6 @@ const PersonkortSykmeldt = ({ navbruker, personadresse }) => {
       />
     </PersonkortElement>
   );
-};
-
-PersonkortSykmeldt.propTypes = {
-  navbruker: PropTypes.object,
-  personadresse: PropTypes.object,
 };
 
 export default PersonkortSykmeldt;

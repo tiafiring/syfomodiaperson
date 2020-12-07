@@ -1,10 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import EtikettBase from "nav-frontend-etiketter";
 import { formaterOrgnr } from "../../../utils";
 import { lederHasActiveSykmelding } from "../../../utils/ledereUtils";
 import kanskjeBooleanTilJaNeiKanskje from "../kanskjeBooleanTilJaNeiKanskje";
+import { bool } from "prop-types";
 
 const texts = {
   activeSykmelding: "Sykmeldt nå",
@@ -35,21 +35,30 @@ const PersonKortVirksomhetLederHeaderStyled = styled.div`
   margin-bottom: 2em;
 `;
 
-const textVirksomhetsnummer = (orgnummer) => {
+const textVirksomhetsnummer = (orgnummer: string) => {
   return `Org.nr.: ${formaterOrgnr(orgnummer)}`;
 };
 
-const textForskuttering = (arbeidsgiverForskuttererLoenn) => {
+const textForskuttering = (arbeidsgiverForskuttererLoenn?: boolean) => {
   return `Forsk.: ${kanskjeBooleanTilJaNeiKanskje(
     arbeidsgiverForskuttererLoenn
   )}`;
 };
 
-const PersonKortVirksomhetHeader = ({
-  currentLeder,
-  sykmeldinger,
-  children,
-}) => {
+interface PersonKortVirksomhetHeaderProps {
+  children?: any;
+  currentLeder: any;
+  sykmeldinger: any[];
+}
+
+const PersonKortVirksomhetHeader = (
+  personKortVirksomhetHeaderProps: PersonKortVirksomhetHeaderProps
+) => {
+  const {
+    children,
+    currentLeder,
+    sykmeldinger,
+  } = personKortVirksomhetHeaderProps;
   const virksomhetsnummerText = textVirksomhetsnummer(currentLeder.orgnummer);
   const forskutteringText = textForskuttering(
     currentLeder.arbeidsgiverForskuttererLoenn
@@ -80,11 +89,6 @@ const PersonKortVirksomhetHeader = ({
       {children}
     </PersonKortVirksomhetLederHeaderStyled>
   );
-};
-PersonKortVirksomhetHeader.propTypes = {
-  children: PropTypes.node,
-  currentLeder: PropTypes.object,
-  sykmeldinger: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default PersonKortVirksomhetHeader;

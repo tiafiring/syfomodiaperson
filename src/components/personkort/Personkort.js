@@ -53,10 +53,14 @@ class Personkort extends Component {
 
   render() {
     const {
+      behandlendeEnhet,
       diskresjonskode,
       egenansatt,
+      fastleger,
+      ledere,
       navbruker,
       oppfolgingstilfelleperioder,
+      personadresse,
       sykmeldinger,
     } = this.props;
     const visning = this.state.visning;
@@ -137,7 +141,15 @@ class Personkort extends Component {
             </ul>
 
             <div aria-live="polite">
-              <PersonkortVisning {...this.props} visning={visning} />
+              <PersonkortVisning
+                behandlendeEnhet={behandlendeEnhet}
+                fastleger={fastleger}
+                ledere={ledere}
+                navbruker={navbruker}
+                personadresse={personadresse}
+                sykmeldinger={sykmeldinger}
+                visning={visning}
+              />
             </div>
           </div>
         </Utvidbar>

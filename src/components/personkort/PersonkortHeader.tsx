@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import EtikettBase from "nav-frontend-etiketter";
 import {
   formaterFnr,
@@ -15,26 +14,44 @@ const texts = {
   startDate: "Sykmeldt f.o.m.: ",
 };
 
-const HeaderInfoStartDate = ({ startDate }) => {
+interface HeaderInfoStartDateProps {
+  startDate: any;
+}
+
+const HeaderInfoStartDate = (
+  headerInfoStartDateProps: HeaderInfoStartDateProps
+) => {
+  const { startDate } = headerInfoStartDateProps;
   return (
-    !!startDate && (
-      <React.Fragment>
-        <span className="startdate__text">{texts.startDate}</span>
-        <span className="startdate__date">
-          {tilLesbarDatoMedArUtenManedNavn(startDate)}
-        </span>
-      </React.Fragment>
-    )
+    <>
+      {!!startDate && (
+        <React.Fragment>
+          <span className="startdate__text">{texts.startDate}</span>
+          <span className="startdate__date">
+            {tilLesbarDatoMedArUtenManedNavn(startDate)}
+          </span>
+        </React.Fragment>
+      )}
+    </>
   );
 };
 
-const PersonkortHeader = ({
-  diskresjonskode,
-  egenansatt,
-  navbruker,
-  oppfolgingstilfelleperioder,
-  sykmeldinger,
-}) => {
+interface PersonkortHeaderProps {
+  diskresjonskode: any;
+  egenansatt: any;
+  navbruker: any;
+  oppfolgingstilfelleperioder: any;
+  sykmeldinger: any[];
+}
+
+const PersonkortHeader = (personkortHeaderProps: PersonkortHeaderProps) => {
+  const {
+    diskresjonskode,
+    egenansatt,
+    navbruker,
+    oppfolgingstilfelleperioder,
+    sykmeldinger,
+  } = personkortHeaderProps;
   const hasCoronaDiagnose = sykmeldingerHasCoronaDiagnose(sykmeldinger);
   const visEtiketter =
     diskresjonskode.data.diskresjonskode === "6" ||
@@ -79,14 +96,6 @@ const PersonkortHeader = ({
       )}
     </div>
   );
-};
-
-PersonkortHeader.propTypes = {
-  egenansatt: PropTypes.object,
-  diskresjonskode: PropTypes.object,
-  navbruker: PropTypes.object,
-  oppfolgingstilfelleperioder: PropTypes.object,
-  sykmeldinger: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default PersonkortHeader;

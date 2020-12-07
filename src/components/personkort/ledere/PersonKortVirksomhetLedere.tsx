@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Row, Column } from "nav-frontend-grid";
 import { EtikettLiten } from "nav-frontend-typografi";
@@ -43,24 +42,32 @@ export const PersonKortVirksomhetLederIngressRow = () => {
   );
 };
 
-export const PersonKortVirksomhetLederColumn = ({
-  colSize,
-  text,
-  isActive,
-}) => {
+interface PersonKortVirksomhetLederColumnProps {
+  colSize: number;
+  text: string;
+  isActive: boolean;
+}
+
+export const PersonKortVirksomhetLederColumn = (
+  personKortVirksomhetLederColumnProps: PersonKortVirksomhetLederColumnProps
+) => {
+  const { colSize, text, isActive } = personKortVirksomhetLederColumnProps;
   return (
     <Column className={`col-sm-${colSize}`}>
       <p>{isActive ? <b>{text}</b> : text}</p>
     </Column>
   );
 };
-PersonKortVirksomhetLederColumn.propTypes = {
-  colSize: PropTypes.number,
-  text: PropTypes.string,
-  isActive: PropTypes.bool,
-};
 
-export const PersonKortVirksomhetLederRow = ({ leder, isActive }) => {
+interface PersonKortVirksomhetLederRowProps {
+  leder: any;
+  isActive: boolean;
+}
+
+export const PersonKortVirksomhetLederRow = (
+  personKortVirksomhetLederRowProps: PersonKortVirksomhetLederRowProps
+) => {
+  const { leder, isActive } = personKortVirksomhetLederRowProps;
   return (
     <RowFullWidth>
       <PersonKortVirksomhetLederColumn
@@ -95,16 +102,21 @@ export const PersonKortVirksomhetLederRow = ({ leder, isActive }) => {
     </RowFullWidth>
   );
 };
-PersonKortVirksomhetLederRow.propTypes = {
-  leder: PropTypes.object,
-  isActive: PropTypes.bool,
-};
 
-const PersonKortVirksomhetLedere = ({
-  sykmeldinger,
-  virksomhetLederMap,
-  virksomhetsnummer,
-}) => {
+interface PersonKortVirksomhetLedereProps {
+  sykmeldinger: any[];
+  virksomhetLederMap: any;
+  virksomhetsnummer: string;
+}
+
+const PersonKortVirksomhetLedere = (
+  personKortVirksomhetLedereProps: PersonKortVirksomhetLedereProps
+) => {
+  const {
+    sykmeldinger,
+    virksomhetLederMap,
+    virksomhetsnummer,
+  } = personKortVirksomhetLedereProps;
   const currentLeder = virksomhetLederMap[virksomhetsnummer][0];
   return (
     <PersonKortVirksomhetHeader
@@ -112,7 +124,7 @@ const PersonKortVirksomhetLedere = ({
       sykmeldinger={sykmeldinger}
     >
       <PersonKortVirksomhetLederIngressRow />
-      {virksomhetLederMap[virksomhetsnummer].map((leder, idx) => {
+      {virksomhetLederMap[virksomhetsnummer].map((leder: any, idx: number) => {
         return (
           <PersonKortVirksomhetLederRow
             key={idx}
@@ -123,11 +135,6 @@ const PersonKortVirksomhetLedere = ({
       })}
     </PersonKortVirksomhetHeader>
   );
-};
-PersonKortVirksomhetLedere.propTypes = {
-  sykmeldinger: PropTypes.arrayOf(PropTypes.object),
-  virksomhetLederMap: PropTypes.object,
-  virksomhetsnummer: PropTypes.string,
 };
 
 export default PersonKortVirksomhetLedere;

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import PersonkortElement from "./PersonkortElement";
 import PersonkortInformasjon from "./PersonkortInformasjon";
 
@@ -7,7 +6,12 @@ const texts = {
   enhet: "Enhet",
 };
 
-const PersonkortEnhet = ({ behandlendeEnhet }) => {
+interface PersonkortEnhetProps {
+  behandlendeEnhet: any;
+}
+
+const PersonkortEnhet = (personkortEnhetProps: PersonkortEnhetProps) => {
+  const { behandlendeEnhet } = personkortEnhetProps;
   const informasjonNokkelTekster = new Map([["enhetId", texts.enhet]]);
   const valgteElementer = (({ enhetId }) => {
     return { enhetId };
@@ -23,10 +27,6 @@ const PersonkortEnhet = ({ behandlendeEnhet }) => {
       />
     </PersonkortElement>
   );
-};
-
-PersonkortEnhet.propTypes = {
-  behandlendeEnhet: PropTypes.object,
 };
 
 export default PersonkortEnhet;

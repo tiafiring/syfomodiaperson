@@ -1,14 +1,22 @@
 import React from "react";
-import PropTypes from "prop-types";
 import cn from "classnames";
 
-const PersonkortElement = ({
-  tittel,
-  imgUrl,
-  children,
-  antallKolonner = 2,
-  titleMetaChildren,
-}) => {
+interface PersonkortElementProps {
+  tittel: string;
+  imgUrl: string;
+  children?: any;
+  antallKolonner?: number;
+  titleMetaChildren?: number;
+}
+
+const PersonkortElement = (personkortElementProps: PersonkortElementProps) => {
+  const {
+    tittel,
+    imgUrl,
+    children,
+    antallKolonner = 2,
+    titleMetaChildren,
+  } = personkortElementProps;
   const imgAlt = imgUrl && imgUrl.split("/").reverse()[0].split(".")[0];
   const classNameRad = cn("personkortElement__rad", {
     "personkortElement__rad--treKolonner": antallKolonner === 3,
@@ -27,15 +35,6 @@ const PersonkortElement = ({
       <div className={classNameRad}>{children}</div>
     </div>
   );
-};
-
-PersonkortElement.propTypes = {
-  tittel: PropTypes.string,
-  imgUrl: PropTypes.string,
-  antallKolonner: PropTypes.number,
-  children: PropTypes.node,
-  titleLabelText: PropTypes.string,
-  titleMetaChildren: PropTypes.node,
 };
 
 export default PersonkortElement;
