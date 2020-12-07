@@ -1,6 +1,6 @@
 import { dagerMellomDatoer, isDate16DaysAgoOrLater } from "./datoUtils";
 
-export const tidligsteFom = (perioder) => {
+export const tidligsteFom = (perioder: any[]) => {
   return perioder
     .map((p) => {
       return p.fom;
@@ -15,7 +15,7 @@ export const tidligsteFom = (perioder) => {
     })[0];
 };
 
-export const senesteTom = (perioder) => {
+export const senesteTom = (perioder: any[]) => {
   return perioder
     .map((p) => {
       return p.tom;
@@ -30,7 +30,7 @@ export const senesteTom = (perioder) => {
     })[0];
 };
 
-export const periodeOverlapperMedPeriode = (periodeA_, periodeB_) => {
+export const periodeOverlapperMedPeriode = (periodeA_: any, periodeB_: any) => {
   const periodeA = periodeA_;
   const periodeB = periodeB_;
   try {
@@ -51,7 +51,9 @@ export const periodeOverlapperMedPeriode = (periodeA_, periodeB_) => {
   }
 };
 
-export const tilfellerFromTilfelleperioder = (oppfolgingstilfelleperioder) => {
+export const tilfellerFromTilfelleperioder = (
+  oppfolgingstilfelleperioder: any
+) => {
   return Object.keys(oppfolgingstilfelleperioder)
     .map((orgnummer) => {
       const perioder = oppfolgingstilfelleperioder[orgnummer].data;
@@ -65,20 +67,20 @@ export const tilfellerFromTilfelleperioder = (oppfolgingstilfelleperioder) => {
     });
 };
 
-export const tilfellerNewestToOldest = (oppfolgingstilfeller) => {
+export const tilfellerNewestToOldest = (oppfolgingstilfeller: any[]) => {
   return oppfolgingstilfeller.sort((s1, s2) => {
-    return new Date(s2.fom) - new Date(s1.fom);
+    return new Date(s2.fom).getTime() - new Date(s1.fom).getTime();
   });
 };
 
-const latestTilfelle = (oppfolgingstilfeller) => {
+const latestTilfelle = (oppfolgingstilfeller: any) => {
   const sortedTilfeller = tilfellerNewestToOldest(oppfolgingstilfeller);
   return sortedTilfeller[0];
 };
 
 export const candidateTilfelleIsConnectedToTilfelle = (
-  tilfelle,
-  candidateTilfelle
+  tilfelle: any,
+  candidateTilfelle: any
 ) => {
   const tilfelleStartDate = new Date(tilfelle.fom);
   const tilfelleEndDate = new Date(tilfelle.tom);
@@ -86,7 +88,7 @@ export const candidateTilfelleIsConnectedToTilfelle = (
   const candidateEndDate = new Date(candidateTilfelle.tom);
 
   const candidateStartBeforeTilfelleStart =
-    candidateStartDate - tilfelleStartDate < 0;
+    candidateStartDate.getTime() - tilfelleStartDate.getTime() < 0;
 
   if (periodeOverlapperMedPeriode(tilfelle, candidateTilfelle)) {
     return true;
@@ -99,14 +101,17 @@ export const candidateTilfelleIsConnectedToTilfelle = (
   return dagerMellomDatoer(tilfelleEndDate, candidateStartDate) <= 16;
 };
 
-const tilfellerConnectedToGivenTilfelle = (tilfelle, candidateTilfeller) => {
-  return candidateTilfeller.filter((candidateTilfelle) => {
+const tilfellerConnectedToGivenTilfelle = (
+  tilfelle: any,
+  candidateTilfeller: any
+) => {
+  return candidateTilfeller.filter((candidateTilfelle: any) => {
     return candidateTilfelleIsConnectedToTilfelle(tilfelle, candidateTilfelle);
   });
 };
 
 export const startDateFromLatestActiveTilfelle = (
-  oppfolgingstilfelleperioder
+  oppfolgingstilfelleperioder: any
 ) => {
   const tilfeller = tilfellerFromTilfelleperioder(oppfolgingstilfelleperioder);
 
