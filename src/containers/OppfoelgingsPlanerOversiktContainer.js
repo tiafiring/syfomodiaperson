@@ -4,7 +4,7 @@ import { connect, useDispatch } from "react-redux";
 import Side from "../sider/Side";
 import * as oppdialogActions from "../actions/oppfoelgingsdialoger_actions";
 import Feilmelding from "../components/Feilmelding";
-import OppfoelgingsPlanerOversikt from "../components/oppfoelgingsdialoger/OppfoelgingsPlanerOversikt";
+import OppfolgingsplanerOversikt from "../components/oppfoelgingsdialoger/OppfolgingsplanerOversikt";
 import AppSpinner from "../components/AppSpinner";
 import IngenPlaner from "../components/oppfoelgingsdialoger/IngenPlaner.tsx";
 import { OPPFOELGINGSPLANER } from "../enums/menypunkter";
@@ -70,7 +70,7 @@ const OppfoelgingsPlanerOversiktSide = ({
           return <IngenPlaner />;
         }
         return (
-          <OppfoelgingsPlanerOversikt
+          <OppfolgingsplanerOversikt
             aktiveDialoger={aktiveDialoger}
             inaktiveDialoger={inaktiveDialoger}
             oppfolgingsplanerLPS={oppfolgingsplanerLPS}

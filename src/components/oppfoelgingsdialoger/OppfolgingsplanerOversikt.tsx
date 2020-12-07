@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router";
-import { tilLesbarPeriodeMedArstall } from "@navikt/digisyfo-npm";
 import Alertstripe from "nav-frontend-alertstriper";
 import Sidetopp from "../Sidetopp";
 import {
@@ -10,9 +8,11 @@ import {
   erIkkeIdag,
   leggTilDagerPaDato,
   restdatoTilLesbarDato,
+  tilLesbarPeriodeMedArstall,
 } from "../../utils/datoUtils";
 import { hentVirksomhet } from "../../actions/virksomhet_actions";
 import OppfolgingsplanerOversiktLPS from "../oppfolgingsplan/lps/OppfolgingsplanerOversiktLPS";
+import { OppfolgingsplanLPS } from "../../types/OppfolgingsplanLPS";
 
 const texts = {
   titles: {
@@ -29,31 +29,43 @@ const texts = {
   shared: "Delt med NAV",
 };
 
-const durationText = (dialog) => {
+const durationText = (plan: any) => {
   return `${texts.duration} ${tilLesbarPeriodeMedArstall(
-    dialog.godkjentPlan.gyldighetstidspunkt.fom,
-    dialog.godkjentPlan.gyldighetstidspunkt.tom
+    plan.godkjentPlan.gyldighetstidspunkt.fom,
+    plan.godkjentPlan.gyldighetstidspunkt.tom
   )}`;
 };
 
-const deltMedNavText = (dialog) => {
+const deltMedNavText = (plan: any) => {
   const sharedDate =
-    dialog.godkjentPlan &&
-    restdatoTilLesbarDato(dialog.godkjentPlan.deltMedNAVTidspunkt);
+    plan.godkjentPlan &&
+    restdatoTilLesbarDato(plan.godkjentPlan.deltMedNAVTidspunkt);
   return `${texts.shared} ${sharedDate}`;
 };
 
-const OppfoelgingsPlanerOversikt = ({
-  fnr,
-  aktiveDialoger,
-  inaktiveDialoger,
-  oppfolgingsplanerLPS,
-  veilederIdent,
-}) => {
+interface OppfolgingsplanerOversiktProps {
+  aktiveDialoger: any[];
+  inaktiveDialoger: any[];
+  fnr: string;
+  oppfolgingsplanerLPS: OppfolgingsplanLPS[];
+  veilederIdent: string;
+}
+
+const OppfolgingsplanerOversikt = (
+  oppfolgingsplanerOversiktProps: OppfolgingsplanerOversiktProps
+) => {
+  const {
+    fnr,
+    aktiveDialoger,
+    inaktiveDialoger,
+    oppfolgingsplanerLPS,
+    veilederIdent,
+  } = oppfolgingsplanerOversiktProps;
+
   const dispatch = useDispatch();
 
   const oppfolgingsplanerLPSUnprocessed = oppfolgingsplanerLPS
-    .filter((oppfolgingsplanLPS) => {
+    .filter((oppfolgingsplanLPS: OppfolgingsplanLPS) => {
       if (oppfolgingsplanLPS.personoppgave) {
         if (oppfolgingsplanLPS.personoppgave.behandletTidspunkt) {
           return (
@@ -61,7 +73,7 @@ const OppfoelgingsPlanerOversikt = ({
             leggTilDagerPaDato(
               oppfolgingsplanLPS.personoppgave.behandletTidspunkt,
               1
-            )
+            ).getTime()
           );
         }
         return !oppfolgingsplanLPS.personoppgave.behandletTidspunkt;
@@ -69,7 +81,7 @@ const OppfoelgingsPlanerOversikt = ({
       return erIdag(oppfolgingsplanLPS.opprettet);
     })
     .sort((a, b) => {
-      return new Date(a.opprettet) - new Date(b.opprettet);
+      return new Date(a.opprettet).getTime() - new Date(b.opprettet).getTime();
     });
 
   const oppfolgingsplanerLPSProcessed = oppfolgingsplanerLPS
@@ -80,7 +92,7 @@ const OppfoelgingsPlanerOversikt = ({
       return erIkkeIdag(oppfolgingsplanLPS.opprettet);
     })
     .sort((a, b) => {
-      return new Date(a.opprettet) - new Date(b.opprettet);
+      return new Date(a.opprettet).getTime() - new Date(b.opprettet).getTime();
     });
 
   useEffect(() => {
@@ -101,15 +113,15 @@ const OppfoelgingsPlanerOversikt = ({
 
   aktiveDialoger.sort((a, b) => {
     return (
-      new Date(b.godkjentPlan.deltMedNAVTidspunkt) -
-      new Date(a.godkjentPlan.deltMedNAVTidspunkt)
+      new Date(b.godkjentPlan.deltMedNAVTidspunkt).getTime() -
+      new Date(a.godkjentPlan.deltMedNAVTidspunkt).getTime()
     );
   });
 
   inaktiveDialoger.sort((a, b) => {
     return (
-      new Date(b.godkjentPlan.deltMedNAVTidspunkt) -
-      new Date(a.godkjentPlan.deltMedNAVTidspunkt)
+      new Date(b.godkjentPlan.deltMedNAVTidspunkt).getTime() -
+      new Date(a.godkjentPlan.deltMedNAVTidspunkt).getTime()
     );
   });
 
@@ -130,7 +142,6 @@ const OppfoelgingsPlanerOversikt = ({
           return (
             <OppfolgingsplanerOversiktLPS
               key={index}
-              fnr={fnr}
               oppfolgingsplanLPSBistandsbehov={planLPS}
               veilederIdent={veilederIdent}
             />
@@ -202,12 +213,4 @@ const OppfoelgingsPlanerOversikt = ({
   );
 };
 
-OppfoelgingsPlanerOversikt.propTypes = {
-  fnr: PropTypes.string,
-  aktiveDialoger: PropTypes.array.isRequired,
-  inaktiveDialoger: PropTypes.array.isRequired,
-  oppfolgingsplanerLPS: PropTypes.array.isRequired,
-  veilederIdent: PropTypes.string,
-};
-
-export default OppfoelgingsPlanerOversikt;
+export default OppfolgingsplanerOversikt;
