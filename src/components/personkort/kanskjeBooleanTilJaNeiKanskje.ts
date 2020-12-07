@@ -1,4 +1,4 @@
-const kanskjeBooleanTilJaNeiKanskje = (kanskjeBoolean) => {
+const kanskjeBooleanTilJaNeiKanskje = (kanskjeBoolean?: boolean) => {
   if (kanskjeBoolean === null) {
     return "Ikke oppgitt";
   }
