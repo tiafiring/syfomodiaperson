@@ -1,24 +1,24 @@
 import React from "react";
-import PropTypes from "prop-types";
 import * as menypunkter from "../enums/menypunkter";
 
-const opActivePlanerText = (tasks) => {
+const opActivePlanerText = (tasks: number) => {
   const activeText = tasks > 1 ? "aktive" : "aktiv";
 
   return `(${tasks} ${activeText})`;
 };
 
-const UnfinishedTasks = ({ tasks, menypunkt }) => {
+interface UnfinishedTasksProps {
+  tasks: number;
+  menypunkt: string;
+}
+
+const UnfinishedTasks = (unfinishedTasksProps: UnfinishedTasksProps) => {
+  const { tasks, menypunkt } = unfinishedTasksProps;
   return menypunkt === menypunkter.OPPFOELGINGSPLANER ? (
     <p className="antallNytt__oppfolgingsplan">{opActivePlanerText(tasks)}</p>
   ) : (
     <i className="antallNytt">{tasks}</i>
   );
-};
-
-UnfinishedTasks.propTypes = {
-  tasks: PropTypes.number,
-  menypunkt: PropTypes.string,
 };
 
 export default UnfinishedTasks;
