@@ -1,8 +1,21 @@
-import { log } from "@navikt/digisyfo-npm";
 import { Error403 } from "./errors";
 import { erProd } from "../utils/miljoUtil";
 
 export const NAV_PERSONIDENT_HEADER = "nav-personident";
+
+const createLogger = () => {
+  if (
+    window.location.search.indexOf("log=true") > -1 ||
+    process.env.NODE_ENV === "development"
+  ) {
+    // tslint:disable-next-line
+    return console.log;
+  }
+  // tslint:disable-next-line
+  return () => {};
+};
+
+const log = createLogger();
 
 export const hentLoginUrl = () => {
   if (erProd()) {
