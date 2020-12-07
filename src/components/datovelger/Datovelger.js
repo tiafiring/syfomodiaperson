@@ -4,7 +4,7 @@ import { Field, autofill, touch } from "redux-form";
 import { connect } from "react-redux";
 import MaskedInput from "react-maskedinput";
 import { toDatePrettyPrint } from "@navikt/digisyfo-npm";
-import Feilmelding from "./Feilmelding";
+import Feilmelding from "./DatovelgerFeilmelding";
 import DayPickerComponent from "./DayPicker";
 
 import {
