@@ -1,6 +1,6 @@
 import { erIdag } from "./datoUtils";
 
-const oppfolgingsplanerValidNow = (oppfolgingsplaner) => {
+const oppfolgingsplanerValidNow = (oppfolgingsplaner: any[]) => {
   return oppfolgingsplaner.filter((plan) => {
     return (
       new Date(plan.godkjentPlan.gyldighetstidspunkt.tom) > new Date() &&
@@ -9,22 +9,24 @@ const oppfolgingsplanerValidNow = (oppfolgingsplaner) => {
   });
 };
 
-const oppfolgingsplanerLPSOpprettetIdag = (oppfolgingsplaner) => {
+const oppfolgingsplanerLPSOpprettetIdag = (oppfolgingsplaner: any[]) => {
   return oppfolgingsplaner.filter((plan) => {
     return erIdag(plan.opprettet) && !plan.personoppgave;
   });
 };
 
-const planerSortedDescendingByDeltMedNAVTidspunkt = (oppfolgingsplaner) => {
+const planerSortedDescendingByDeltMedNAVTidspunkt = (
+  oppfolgingsplaner: any[]
+) => {
   return oppfolgingsplaner.sort((a, b) => {
     return (
-      new Date(b.godkjentPlan.deltMedNAVTidspunkt) -
-      new Date(a.godkjentPlan.deltMedNAVTidspunkt)
+      new Date(b.godkjentPlan.deltMedNAVTidspunkt).getTime() -
+      new Date(a.godkjentPlan.deltMedNAVTidspunkt).getTime()
     );
   });
 };
 
-const virksomheterWithPlan = (oppfolgingsplaner) => {
+const virksomheterWithPlan = (oppfolgingsplaner: any[]) => {
   const uniqueVirksomheter = new Set(
     oppfolgingsplaner.map((plan) => {
       return plan.virksomhet
@@ -36,8 +38,11 @@ const virksomheterWithPlan = (oppfolgingsplaner) => {
   return [...uniqueVirksomheter];
 };
 
-const firstPlanForEachVirksomhet = (oppfolgingsplaner, virksomheter) => {
-  const newestPlanPerVirksomhet = [];
+const firstPlanForEachVirksomhet = (
+  oppfolgingsplaner: any[],
+  virksomheter: any[]
+) => {
+  const newestPlanPerVirksomhet = [] as any[];
 
   virksomheter.forEach((nummer) => {
     const newestPlanForVirksomhetsnummer = oppfolgingsplaner.find((plan) => {
@@ -51,7 +56,7 @@ const firstPlanForEachVirksomhet = (oppfolgingsplaner, virksomheter) => {
   return newestPlanPerVirksomhet;
 };
 
-const newestPlanForEachVirksomhet = (oppfolgingsplaner) => {
+const newestPlanForEachVirksomhet = (oppfolgingsplaner: any[]) => {
   const sortedPlaner = planerSortedDescendingByDeltMedNAVTidspunkt(
     oppfolgingsplaner
   );
@@ -61,11 +66,11 @@ const newestPlanForEachVirksomhet = (oppfolgingsplaner) => {
   return firstPlanForEachVirksomhet(sortedPlaner, virksomheter);
 };
 
-export const activeOppfolgingsplaner = (oppfolgingsplaner) => {
+export const activeOppfolgingsplaner = (oppfolgingsplaner: any[]) => {
   const newestPlans = newestPlanForEachVirksomhet(oppfolgingsplaner);
   return oppfolgingsplanerValidNow(newestPlans);
 };
 
-export const activeLPSOppfolgingsplaner = (oppfolgingsplaner) => {
+export const activeLPSOppfolgingsplaner = (oppfolgingsplaner: any[]) => {
   return oppfolgingsplanerLPSOpprettetIdag(oppfolgingsplaner);
 };
