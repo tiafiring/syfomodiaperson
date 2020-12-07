@@ -2,10 +2,10 @@ import React from "react";
 import { SykmeldingCheckbox } from "../components/sykmelding/sykmeldingOpplysninger/SykmeldingCheckbox";
 
 export const getSykmeldingCheckbox = (
-  sykmeldingBolk,
-  felt,
-  tekst,
-  className
+  sykmeldingBolk: any,
+  felt: string,
+  tekst: any,
+  className: string
 ) => {
   if (sykmeldingBolk[felt]) {
     return (
