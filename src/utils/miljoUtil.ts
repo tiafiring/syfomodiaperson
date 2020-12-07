@@ -18,7 +18,7 @@ export const finnNaisUrlDefault = () => {
   return erPreProd() ? ".nais.preprod.local" : ".nais.adeo.no";
 };
 
-export const fullNaisUrlDefault = (host, path) => {
+export const fullNaisUrlDefault = (host: string, path: string) => {
   if (erLokal()) {
     return path;
   }
@@ -29,16 +29,9 @@ export const finnNaisUrlQ1 = () => {
   return erPreProd() ? "-q1.nais.preprod.local" : ".nais.adeo.no";
 };
 
-export const fullNaisUrlQ1 = (host, path) => {
+export const fullNaisUrlQ1 = (host: string, path: string) => {
   if (erLokal()) {
     return path;
   }
   return `https://${host}${finnNaisUrlQ1()}${path}`;
-};
-
-export const fullAppAdeoUrl = (path) => {
-  if (erLokal()) {
-    return path;
-  }
-  return `https://app${finnMiljoStreng()}.adeo.no${path}`;
 };
