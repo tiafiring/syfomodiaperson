@@ -1,12 +1,13 @@
 import React from "react";
 import { PERSONKORTVISNING_TYPE } from "../../konstanter";
+import { BehandlendeEnhet } from "../../data/behandlendeenhet/types/BehandlendeEnhet";
 import VisningLege from "./PersonkortLege";
 import VisningLedere from "./ledere/PersonkortLedere";
 import PersonkortSykmeldt from "./PersonkortSykmeldt";
 import VisningEnhet from "./PersonkortEnhet";
 
 interface PersonkortVisningProps {
-  behandlendeEnhet: any;
+  behandlendeEnhet: BehandlendeEnhet;
   fastleger: any;
   ledere: any[];
   navbruker: any;

@@ -1,10 +1,12 @@
+import { BehandlendeEnhet } from "./types/BehandlendeEnhet";
+
 export const HENT_BEHANDLENDE_ENHET_FORESPURT =
   "HENT_BEHANDLENDE_ENHET_FORESPURT";
 export const HENTER_BEHANDLENDE_ENHET = "HENTER_BEHANDLENDE_ENHET";
 export const HENT_BEHANDLENDE_ENHET_FEILET = "HENT_BEHANDLENDE_ENHET_FEILET";
 export const BEHANDLENDE_ENHET_HENTET = "BEHANDLENDE_ENHET_HENTET";
 
-export function hentBehandlendeEnhet(fnr) {
+export function hentBehandlendeEnhet(fnr: string) {
   return {
     type: HENT_BEHANDLENDE_ENHET_FORESPURT,
     fnr,
@@ -17,7 +19,7 @@ export function henterBehandlendeEnhet() {
   };
 }
 
-export function behandlendeEnhetHentet(data) {
+export function behandlendeEnhetHentet(data: BehandlendeEnhet) {
   return {
     type: BEHANDLENDE_ENHET_HENTET,
     data,

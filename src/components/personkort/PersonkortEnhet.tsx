@@ -1,4 +1,5 @@
 import React from "react";
+import { BehandlendeEnhet } from "../../data/behandlendeenhet/types/BehandlendeEnhet";
 import PersonkortElement from "./PersonkortElement";
 import PersonkortInformasjon from "./PersonkortInformasjon";
 
@@ -7,7 +8,7 @@ const texts = {
 };
 
 interface PersonkortEnhetProps {
-  behandlendeEnhet: any;
+  behandlendeEnhet: BehandlendeEnhet;
 }
 
 const PersonkortEnhet = (personkortEnhetProps: PersonkortEnhetProps) => {

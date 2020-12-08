@@ -1,16 +1,27 @@
+import { Reducer } from "redux";
 import {
   HENT_BEHANDLENDE_ENHET_FEILET,
   HENTER_BEHANDLENDE_ENHET,
   BEHANDLENDE_ENHET_HENTET,
 } from "./behandlendeEnhet_actions";
+import { BehandlendeEnhet } from "./types/BehandlendeEnhet";
 
-const initiellState = {
+export interface BehandlendeEnhetState {
+  henter: boolean;
+  hentingFeilet: boolean;
+  data: BehandlendeEnhet | {};
+}
+
+export const initialState: BehandlendeEnhetState = {
   henter: false,
   hentingFeilet: false,
   data: {},
 };
 
-export default function behandlendeEnhet(state = initiellState, action) {
+const behandlendeEnhet: Reducer<BehandlendeEnhetState> = (
+  state = initialState,
+  action
+) => {
   switch (action.type) {
     case HENT_BEHANDLENDE_ENHET_FEILET: {
       return Object.assign({}, state, {
@@ -37,4 +48,6 @@ export default function behandlendeEnhet(state = initiellState, action) {
       return state;
     }
   }
-}
+};
+
+export default behandlendeEnhet;
