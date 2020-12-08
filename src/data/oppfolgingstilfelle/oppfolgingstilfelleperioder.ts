@@ -1,16 +1,30 @@
+import { Reducer } from "redux";
+import { OppfolgingstilfellePersonArbeidsgiver } from "./types/OppfolgingstilfellePersonArbeidsgiver";
 import {
   HENT_OPPFOLGINGSTILFELLEPERIODER_FEILET,
   HENT_OPPFOLGINGSTILFELLEPERIODER_HENTER,
   HENT_OPPFOLGINGSTILFELLEPERIODER_HENTET,
 } from "./oppfolgingstilfelleperioder_actions";
 
-const initiellState = {};
+export interface OppfolgingstilfelleperioderArbeidsgiverState {
+  henter: boolean;
+  hentet: boolean;
+  hentingFeilet: boolean;
+  hentingForsokt: boolean;
+  data: OppfolgingstilfellePersonArbeidsgiver | {};
+}
 
-export default function oppfolgingstilfelleperioder(
-  state = initiellState,
-  action = {}
-) {
-  const arbeidsgiver = {};
+export interface OppfolgingstilfelleperioderMapState {
+  [index: string]: OppfolgingstilfelleperioderArbeidsgiverState;
+}
+
+const initialState = {} as OppfolgingstilfelleperioderMapState;
+
+const oppfolgingstilfelleperioder: Reducer<OppfolgingstilfelleperioderMapState> = (
+  state = initialState,
+  action = { type: "" }
+) => {
+  const arbeidsgiver = {} as OppfolgingstilfelleperioderMapState;
   switch (action.type) {
     case HENT_OPPFOLGINGSTILFELLEPERIODER_FEILET:
       arbeidsgiver[action.orgnummer] = {
@@ -43,4 +57,6 @@ export default function oppfolgingstilfelleperioder(
       return state;
     }
   }
-}
+};
+
+export default oppfolgingstilfelleperioder;

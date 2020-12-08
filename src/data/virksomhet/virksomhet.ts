@@ -18,7 +18,7 @@ export interface VirksomhetMapState {
   [index: string]: VirksomhetState;
 }
 
-const initialState = {} as any;
+const initialState = {} as VirksomhetMapState;
 
 const virksomhet: Reducer<VirksomhetMapState> = (
   state = initialState,
