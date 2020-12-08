@@ -1,17 +1,28 @@
+import { Reducer } from "redux";
 import {
   LEDETEKSTER_HENTET,
   HENTER_LEDETEKSTER,
   HENT_LEDETEKSTER_FEILET,
 } from "./ledetekster_actions";
 
-const initiellState = {
+export interface LedeteksterState {
+  henter: boolean;
+  hentet: boolean;
+  hentingFeilet: boolean;
+  data: any;
+}
+
+export const initialState: LedeteksterState = {
   henter: false,
-  hentingFeilet: false,
   hentet: false,
+  hentingFeilet: false,
   data: {},
 };
 
-export default function ledetekster(state = initiellState, action = {}) {
+const ledetekster: Reducer<LedeteksterState> = (
+  state = initialState,
+  action = {} as any
+) => {
   switch (action.type) {
     case LEDETEKSTER_HENTET:
       return {
@@ -37,4 +48,6 @@ export default function ledetekster(state = initiellState, action = {}) {
     default:
       return state;
   }
-}
+};
+
+export default ledetekster;
