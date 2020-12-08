@@ -4,7 +4,7 @@ import {
   StatusEndring,
   StoppAutomatikk,
   Sykmelding,
-} from "../types/FlaggPerson";
+} from "../data/pengestopp/types/FlaggPerson";
 import { senesteTom } from "./periodeUtils";
 import { gamleSMStatuser } from "./sykmeldinger/sykmeldingstatuser";
 

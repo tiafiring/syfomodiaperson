@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import deepFreeze from "deep-freeze";
-import virksomhet from "../../../src/reducers/virksomhet";
-import * as actions from "../../../src/actions/virksomhet_actions";
+import virksomhet from "../../../src/data/virksomhet/virksomhet";
+import * as actions from "../../../src/data/virksomhet/virksomhet_actions";
 
 describe("virksomhet", () => {
   const initState = deepFreeze({});

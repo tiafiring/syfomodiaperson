@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import * as actions from "../../src/actions/navbruker_actions";
+import * as actions from "../../src/data/navbruker/navbruker_actions";
 import { HENT_NAVBRUKER_FORESPURT } from "../../src/actions/actiontyper";
 
 describe("navbruker_actions", () => {

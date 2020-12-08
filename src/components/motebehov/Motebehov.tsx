@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { erLokal } from "../../utils/miljoUtil";
-import { hentVirksomhet } from "../../actions/virksomhet_actions";
+import { hentVirksomhet } from "../../data/virksomhet/virksomhet_actions";
 import BehandleMotebehovKnapp from "./BehandleMotebehovKnapp";
 import MotebehovKvittering from "./MotebehovKvittering";
 import PrediksjonVisning from "../Prediksjon/PrediksjonVisning";

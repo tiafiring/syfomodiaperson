@@ -4,8 +4,8 @@ import { get } from "../../src/api";
 import {
   HENT_OPPFOLGINGSTILFELLEPERIODER_HENTER,
   HENT_OPPFOLGINGSTILFELLEPERIODER_HENTET,
-} from "../../src/actions/oppfolgingstilfelleperioder_actions";
-import { hentOppfolgingstilfelleperioder } from "../../src/sagas/oppfolgingstilfelleperioderSagas";
+} from "../../src/data/oppfolgingstilfelle/oppfolgingstilfelleperioder_actions";
+import { hentOppfolgingstilfelleperioder } from "../../src/data/oppfolgingstilfelle/oppfolgingstilfelleperioderSagas";
 
 describe("oppfolgingstilfelleSagas", () => {
   const orgnummer = "123456789";

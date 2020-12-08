@@ -2,9 +2,9 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Column, Row } from "nav-frontend-grid";
-import { hentVedtak } from "../actions/vedtak_actions";
+import { hentVedtak } from "../data/vedtak/vedtak_actions";
 import Side from "../sider/Side";
-import { VedtakDTO } from "../reducers/vedtak";
+import { VedtakDTO } from "../data/vedtak/vedtak";
 import VedtakInfopanel from "../components/vedtak/VedtakInfopanel";
 import styled from "styled-components";
 import { VEDTAK } from "../enums/menypunkter";
@@ -13,7 +13,7 @@ import VedtakUnselected from "../components/vedtak/VedtakUnselected";
 import VedtakEmpty from "../components/vedtak/VedtakEmpty";
 import VedtakColumn from "../components/vedtak/VedtakColumn";
 import VedtakForbidden from "../components/vedtak/VedtakForbidden";
-import { sjekkTilgang } from "../actions/tilgang_actions";
+import { sjekkTilgang } from "../data/tilgang/tilgang_actions";
 import AppSpinner from "../components/AppSpinner";
 
 const texts = {

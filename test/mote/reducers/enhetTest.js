@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import deepFreeze from "deep-freeze";
-import enhet from "../../../src/reducers/enhet";
-import * as actions from "../../../src/actions/enhet_actions";
+import enhet from "../../../src/data/valgtenhet/enhet";
+import * as actions from "../../../src/data/valgtenhet/enhet_actions";
 
 describe("enhet", () => {
   it("Har en default state", () => {

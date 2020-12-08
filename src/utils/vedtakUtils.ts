@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { Utbetalingslinje, Vedtak, VedtakDTO } from "../reducers/vedtak";
+import { Utbetalingslinje, Vedtak, VedtakDTO } from "../data/vedtak/vedtak";
 
 interface Dag {
   dato: string;

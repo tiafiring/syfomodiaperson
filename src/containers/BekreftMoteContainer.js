@@ -5,13 +5,13 @@ import * as moterPropTypes from "../propTypes";
 import { keyValue } from "@navikt/digisyfo-npm";
 import Side from "../sider/Side";
 import MotestatusContainer from "./MotestatusContainer";
-import * as moterActions from "../actions/moter_actions";
+import * as moterActions from "../data/mote/moter_actions";
 import Lightbox from "../components/Lightbox";
 import history from "../history";
 import BekreftMote from "../mote/components/BekreftMote";
 import Feilmelding from "../components/Feilmelding";
 import AppSpinner from "../components/AppSpinner";
-import * as epostinnholdActions from "../actions/epostinnhold_actions";
+import * as epostinnholdActions from "../data/mote/epostinnhold_actions";
 import { MOETEPLANLEGGER } from "../enums/menypunkter";
 
 export class BekreftMoteSide extends Component {

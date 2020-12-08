@@ -10,9 +10,9 @@ import {
   restdatoTilLesbarDato,
   tilLesbarPeriodeMedArstall,
 } from "../../utils/datoUtils";
-import { hentVirksomhet } from "../../actions/virksomhet_actions";
+import { hentVirksomhet } from "../../data/virksomhet/virksomhet_actions";
 import OppfolgingsplanerOversiktLPS from "../oppfolgingsplan/lps/OppfolgingsplanerOversiktLPS";
-import { OppfolgingsplanLPS } from "../../types/OppfolgingsplanLPS";
+import { OppfolgingsplanLPS } from "../../data/oppfolgingsplan/types/OppfolgingsplanLPS";
 
 const texts = {
   titles: {

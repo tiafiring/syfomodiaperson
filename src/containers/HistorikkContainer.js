@@ -6,9 +6,9 @@ import Side from "../sider/Side";
 import Historikk from "../components/historikk/Historikk";
 import Feilmelding from "../components/Feilmelding";
 import AppSpinner from "../components/AppSpinner";
-import * as historikkActions from "../actions/historikk_actions";
-import * as oppfolgingstilfelleperioderActions from "../actions/oppfolgingstilfelleperioder_actions";
-import * as ledereActions from "../actions/ledere_actions";
+import * as historikkActions from "../data/historikk/historikk_actions";
+import * as oppfolgingstilfelleperioderActions from "../data/oppfolgingstilfelle/oppfolgingstilfelleperioder_actions";
+import * as ledereActions from "../data/leder/ledere_actions";
 import { HISTORIKK } from "../enums/menypunkter";
 import { hentBegrunnelseTekst } from "../utils/tilgangUtils";
 

@@ -1,6 +1,6 @@
 import chai from "chai";
 import chaiEnzyme from "chai-enzyme";
-import * as actions from "../../src/actions/diskresjonskode_actions";
+import * as actions from "../../src/data/diskresjonskode/diskresjonskode_actions";
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;

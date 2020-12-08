@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import * as actions from "../../../src/actions/enhet_actions";
+import * as actions from "../../../src/data/valgtenhet/enhet_actions";
 
 describe("enhet_actions", () => {
   it("Har en valgtEnhet()-funksjon som returnerer riktig action", () => {

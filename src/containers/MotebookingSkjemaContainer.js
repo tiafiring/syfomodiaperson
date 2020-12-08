@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import * as ledereActions from "../actions/ledere_actions";
-import * as moteActions from "../actions/moter_actions";
-import * as virksomhetActions from "../actions/virksomhet_actions";
+import * as ledereActions from "../data/leder/ledere_actions";
+import * as moteActions from "../data/mote/moter_actions";
+import * as virksomhetActions from "../data/virksomhet/virksomhet_actions";
 import MotebookingSkjema from "../mote/skjema/MotebookingSkjema";
 import AppSpinner from "../components/AppSpinner";
 import Feilmelding from "../components/Feilmelding";

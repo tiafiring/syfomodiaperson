@@ -4,7 +4,7 @@ import {
   activeLPSOppfolgingsplaner,
   activeOppfolgingsplaner,
 } from "./oppfolgingsplanerUtils";
-import { PersonOppgaveType } from "../reducers/personoppgaver";
+import { PersonOppgaveType } from "../data/personoppgave/personoppgaver";
 
 export const isUnfinishedMotebehovTask = (motebehovReducer) => {
   return harUbehandletMotebehov(motebehovReducer.data);

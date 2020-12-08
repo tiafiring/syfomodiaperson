@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Prediksjon } from "../../reducers/prediksjon";
+import { Prediksjon } from "../../data/prediksjon/prediksjon";
 import { tilDatoMedUkedagOgManedNavn } from "../../utils/datoUtils";
 
 interface PrediksjonResultatProps {

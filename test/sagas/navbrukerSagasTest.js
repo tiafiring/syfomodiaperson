@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { put, call } from "redux-saga/effects";
 import { get } from "../../src/api";
-import { hentNavbruker } from "../../src/sagas/navbrukerSagas";
+import { hentNavbruker } from "../../src/data/navbruker/navbrukerSagas";
 import {
   HENTER_NAVBRUKER,
   NAVBRUKER_HENTET,

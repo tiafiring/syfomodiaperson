@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import deepFreeze from "deep-freeze";
-import * as actions from "../../src/actions/fastleger_actions";
-import fastleger from "../../src/reducers/fastleger";
+import * as actions from "../../src/data/fastlege/fastleger_actions";
+import fastleger from "../../src/data/fastlege/fastleger";
 
 describe("fastleger", () => {
   describe("henter", () => {

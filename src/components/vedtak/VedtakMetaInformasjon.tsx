@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Column, Row } from "nav-frontend-grid";
 import { Normaltekst } from "nav-frontend-typografi";
-import { VedtakDTO } from "../../reducers/vedtak";
+import { VedtakDTO } from "../../data/vedtak/vedtak";
 import { restdatoTildato } from "../../utils/datoUtils";
 import { VedtakInfopanelRow } from "./VedtakInfopanel";
 

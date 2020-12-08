@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import { put, call } from "redux-saga/effects";
-import { hentSoknader } from "../../src/sagas/soknaderSagas";
+import { hentSoknader } from "../../src/data/sykepengesoknad/soknaderSagas";
 import { get } from "../../src/api";
-import * as actions from "../../src/actions/soknader_actions";
+import * as actions from "../../src/data/sykepengesoknad/soknader_actions";
 import mockSoknader from "../mockdata/mockSoknader";
 
 describe("soknaderSagas", () => {

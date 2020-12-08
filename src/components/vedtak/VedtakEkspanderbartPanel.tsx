@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Panel from "nav-frontend-paneler";
 import { useDispatch, useSelector } from "react-redux";
-import { hentVirksomhet } from "../../actions/virksomhet_actions";
+import { hentVirksomhet } from "../../data/virksomhet/virksomhet_actions";
 import Ekspanderbartpanel from "nav-frontend-ekspanderbartpanel";
-import { VedtakDTO } from "../../reducers/vedtak";
+import { VedtakDTO } from "../../data/vedtak/vedtak";
 
 interface StyledPanelProps {
   readonly isActive: boolean;

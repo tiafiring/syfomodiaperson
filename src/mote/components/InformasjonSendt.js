@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { Utvidbar } from "@navikt/digisyfo-npm";
 import * as moterPropTypes from "../../propTypes";
 import DropdownInnholdsviser from "./DropdownInnholdsviser";
-import * as epostinnholdActions from "../../actions/epostinnhold_actions";
-import * as arbeidsgiverepostinnholdActions from "../../actions/arbeidsgiverepostinnhold_actions";
+import * as epostinnholdActions from "../../data/mote/epostinnhold_actions";
+import * as arbeidsgiverepostinnholdActions from "../../data/mote/arbeidsgiverepostinnhold_actions";
 import { ARBEIDSGIVER, BRUKER } from "../../konstanter";
 
 export const mapStateToInnholdsviserProps = (state) => {

@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import * as actions from "../../src/actions/oppfolgingstilfelleperioder_actions";
+import * as actions from "../../src/data/oppfolgingstilfelle/oppfolgingstilfelleperioder_actions";
 
 describe("oppfolgingstilfelleperioder_actions", () => {
   let fnr;

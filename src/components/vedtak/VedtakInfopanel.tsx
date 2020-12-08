@@ -4,7 +4,7 @@ import { Row } from "nav-frontend-grid";
 import { Innholdstittel } from "nav-frontend-typografi";
 import Panel from "nav-frontend-paneler";
 import { restdatoTildato } from "../../utils/datoUtils";
-import { VedtakDTO } from "../../reducers/vedtak";
+import { VedtakDTO } from "../../data/vedtak/vedtak";
 import VedtakMetaInformasjon from "./VedtakMetaInformasjon";
 import VedtakOppsummering from "./VedtakOppsummering";
 import VedtakAnnullertAlertStripe from "./VedtakAnnullertAlertStripe";

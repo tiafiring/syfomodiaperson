@@ -8,8 +8,8 @@ import {
   avbrytMote,
   bekreftMote,
   opprettFlereAlternativ,
-} from "../../../src/sagas/moterSagas";
-import * as actions from "../../../src/actions/moter_actions";
+} from "../../../src/data/mote/moterSagas";
+import * as actions from "../../../src/data/mote/moter_actions";
 
 describe("moterSagas", () => {
   beforeEach(() => {

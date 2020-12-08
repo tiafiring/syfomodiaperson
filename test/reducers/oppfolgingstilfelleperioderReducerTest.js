@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import deepFreeze from "deep-freeze";
-import * as actions from "../../src/actions/oppfolgingstilfelleperioder_actions";
-import oppfolgingstilfelleperioder from "../../src/reducers/oppfolgingstilfelleperioder";
+import * as actions from "../../src/data/oppfolgingstilfelle/oppfolgingstilfelleperioder_actions";
+import oppfolgingstilfelleperioder from "../../src/data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
 import { ANTALL_MS_DAG } from "../../src/utils/datoUtils";
 
 describe("oppfolgingstilfelleperioder", () => {

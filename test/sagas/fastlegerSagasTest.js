@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { put, call } from "redux-saga/effects";
 import { get } from "../../src/api";
-import { hentFastleger } from "../../src/sagas/fastlegerSagas";
+import { hentFastleger } from "../../src/data/fastlege/fastlegerSagas";
 import {
   HENTER_FASTLEGER,
   FASTLEGER_HENTET,

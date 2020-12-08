@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { hentPrediksjon } from "../../actions/prediksjon_actions";
+import { hentPrediksjon } from "../../data/prediksjon/prediksjon_actions";
 import Prediksjontittel from "./Prediksjontittel";
 import ViktigeFaktorer from "./ViktigeFaktorer";
 import DetaljertInformasjon from "./DetaljertInformasjon";
-import { PrediksjonState } from "../../reducers/prediksjon";
+import { PrediksjonState } from "../../data/prediksjon/prediksjon";
 import PrediksjonResultat from "./PrediksjonResultat";
 
 interface PrediksjonProps {

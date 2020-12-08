@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Select } from "nav-frontend-skjema";
-import * as actionCreators from "../../actions/sykmeldinger_actions";
+import * as actionCreators from "../../data/sykmelding/sykmeldinger_actions";
 
 const texts = {
   dato: "Dato",

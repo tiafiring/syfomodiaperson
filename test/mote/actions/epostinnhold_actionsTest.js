@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import * as actions from "../../../src/actions/epostinnhold_actions";
+import * as actions from "../../../src/data/mote/epostinnhold_actions";
 
 describe("epostinnhold_actions", () => {
   it("Har en hentBekreftMoteEpostinnhold()-funksjon som returnerer riktig action", () => {

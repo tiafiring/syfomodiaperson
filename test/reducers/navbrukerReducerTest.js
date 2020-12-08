@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import deepFreeze from "deep-freeze";
-import navbruker from "../../src/reducers/navbruker";
+import navbruker from "../../src/data/navbruker/navbruker";
 
 describe("navbruker", () => {
   it("Returnerer { data: {} } ved initializering", () => {

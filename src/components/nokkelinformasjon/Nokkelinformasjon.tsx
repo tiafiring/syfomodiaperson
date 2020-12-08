@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { AlertStripeInfo } from "nav-frontend-alertstriper";
-import { hentVirksomhet } from "../../actions/virksomhet_actions";
+import { hentVirksomhet } from "../../data/virksomhet/virksomhet_actions";
 import Sidetopp from "../Sidetopp";
 import UtdragFraSykefravaeret from "../motebehov/UtdragFraSykefravaeret";
 

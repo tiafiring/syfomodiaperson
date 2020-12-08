@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import * as actions from "../../src/actions/ledere_actions";
+import * as actions from "../../src/data/leder/ledere_actions";
 import { HENT_LEDERE_FORESPURT } from "../../src/actions/actiontyper";
 
 describe("ledere_actions", () => {

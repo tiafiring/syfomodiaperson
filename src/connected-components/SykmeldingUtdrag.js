@@ -5,7 +5,7 @@ import {
   sykmelding as sykmeldingPt,
 } from "@navikt/digisyfo-npm";
 import { connect } from "react-redux";
-import { hentSykmeldinger } from "../actions/sykmeldinger_actions";
+import { hentSykmeldinger } from "../data/sykmelding/sykmeldinger_actions";
 import { soknadEllerSykepengesoknad } from "../propTypes";
 import { ARBEIDSTAKERE } from "../enums/soknadtyper";
 

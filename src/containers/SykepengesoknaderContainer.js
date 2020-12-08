@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Side from "../sider/Side";
-import * as soknaderActions from "../actions/soknader_actions";
+import * as soknaderActions from "../data/sykepengesoknad/soknader_actions";
 import Feilmelding from "../components/Feilmelding";
 import AppSpinner from "../components/AppSpinner";
 import Soknader from "../components/soknader/Soknader";

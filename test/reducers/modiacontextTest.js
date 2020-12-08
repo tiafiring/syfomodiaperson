@@ -1,7 +1,7 @@
 import chai from "chai";
 import chaiEnzyme from "chai-enzyme";
-import modiacontext from "../../src/reducers/modiacontext";
-import * as actions from "../../src/actions/modiacontext_actions";
+import modiacontext from "../../src/data/modiacontext/modiacontext";
+import * as actions from "../../src/data/modiacontext/modiacontext_actions";
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;

@@ -1,11 +1,11 @@
 import { expect } from "chai";
 import { put, call } from "redux-saga/effects";
-import { hentDiskresjonskodeSaga } from "../../src/sagas/diskresjonskodeSagas";
+import { hentDiskresjonskodeSaga } from "../../src/data/diskresjonskode/diskresjonskodeSagas";
 import { get } from "../../src/api";
 import {
   HENTER_DISKRESJONSKODE,
   DISKRESJONSKODE_HENTET,
-} from "../../src/actions/diskresjonskode_actions";
+} from "../../src/data/diskresjonskode/diskresjonskode_actions";
 
 describe("diskresjonskodeSagas", () => {
   beforeEach(() => {

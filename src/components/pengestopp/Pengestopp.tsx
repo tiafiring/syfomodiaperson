@@ -11,8 +11,8 @@ import {
   Status,
   StatusEndring,
   Sykmelding,
-} from "../../types/FlaggPerson";
-import { FlaggpersonState } from "../../reducers/flaggperson";
+} from "../../data/pengestopp/types/FlaggPerson";
+import { FlaggpersonState } from "../../data/pengestopp/flaggperson";
 import {
   allStoppAutomatikkStatusEndringer,
   arbeidsgivereWithStoppAutomatikkStatus,

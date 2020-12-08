@@ -10,9 +10,9 @@ import {
   hentAktivBruker,
   hentAktivEnhet,
   pushModiaContext,
-} from "../actions/modiacontext_actions";
-import { valgtEnhet } from "../actions/enhet_actions";
-import { hentVeilederinfo } from "../actions/veilederinfo_actions";
+} from "../data/modiacontext/modiacontext_actions";
+import { valgtEnhet } from "../data/valgtenhet/enhet_actions";
+import { hentVeilederinfo } from "../data/veilederinfo/veilederinfo_actions";
 import { opprettWebsocketConnection } from "./contextHolder";
 import { config } from "../global";
 import { isNullOrUndefined } from "util";

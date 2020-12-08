@@ -1,7 +1,7 @@
 import deepFreeze from "deep-freeze";
 import { expect } from "chai";
-import soknader from "../../src/reducers/soknader";
-import * as actions from "../../src/actions/soknader_actions";
+import soknader from "../../src/data/sykepengesoknad/soknader";
+import * as actions from "../../src/data/sykepengesoknad/soknader_actions";
 import mockSoknader from "../mockdata/mockSoknader";
 
 describe("soknader", () => {

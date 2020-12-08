@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import * as actions from "../../../src/actions/virksomhet_actions";
+import * as actions from "../../../src/data/virksomhet/virksomhet_actions";
 
 describe("virksomhet_actions", () => {
   let orgnummer;

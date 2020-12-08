@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import { put, call } from "redux-saga/effects";
 import { get } from "../../../src/api";
-import * as actions from "../../../src/actions/virksomhet_actions";
-import { hentVirksomhet } from "../../../src/sagas/virksomhetSagas";
+import * as actions from "../../../src/data/virksomhet/virksomhet_actions";
+import { hentVirksomhet } from "../../../src/data/virksomhet/virksomhetSagas";
 
 describe("virksomhetSagas", () => {
   beforeEach(() => {

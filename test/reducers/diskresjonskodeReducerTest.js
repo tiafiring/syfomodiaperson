@@ -1,12 +1,12 @@
 import deepFreeze from "deep-freeze";
 import { expect } from "chai";
-import * as actions from "../../src/actions/diskresjonskode_actions";
+import * as actions from "../../src/data/diskresjonskode/diskresjonskode_actions";
 import {
   DISKRESJONSKODE_HENTET,
   HENT_DISKRESJONSKODE_FEILET,
   HENTER_DISKRESJONSKODE,
-} from "../../src/actions/diskresjonskode_actions";
-import diskresjonskode from "../../src/reducers/diskresjonskode";
+} from "../../src/data/diskresjonskode/diskresjonskode_actions";
+import diskresjonskode from "../../src/data/diskresjonskode/diskresjonskode";
 
 describe("diskresjonskode", () => {
   describe("henter", () => {

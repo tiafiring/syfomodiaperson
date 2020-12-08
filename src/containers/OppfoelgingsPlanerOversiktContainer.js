@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect, useDispatch } from "react-redux";
 import Side from "../sider/Side";
-import * as oppdialogActions from "../actions/oppfoelgingsdialoger_actions";
+import * as oppdialogActions from "../data/oppfolgingsplan/oppfoelgingsdialoger_actions";
 import Feilmelding from "../components/Feilmelding";
 import OppfolgingsplanerOversikt from "../components/oppfoelgingsdialoger/OppfolgingsplanerOversikt";
 import AppSpinner from "../components/AppSpinner";
@@ -11,8 +11,8 @@ import { OPPFOELGINGSPLANER } from "../enums/menypunkter";
 import { hentBegrunnelseTekst } from "../utils/tilgangUtils";
 import { activeOppfolgingsplaner } from "../utils/oppfolgingsplanerUtils";
 import { harForsoktHentetOppfoelgingsdialoger } from "../utils/reducerUtils";
-import { hentOppfolgingsplanerLPS } from "../actions/oppfolgingsplanerlps_actions";
-import { hentPersonOppgaver } from "../actions/personoppgave_actions";
+import { hentOppfolgingsplanerLPS } from "../data/oppfolgingsplan/oppfolgingsplanerlps_actions";
+import { hentPersonOppgaver } from "../data/personoppgave/personoppgave_actions";
 
 const texts = {
   errorTitle: "Du har ikke tilgang til denne tjenesten",

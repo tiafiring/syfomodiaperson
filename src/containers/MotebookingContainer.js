@@ -6,7 +6,7 @@ import MotebookingSkjemaContainer from "./MotebookingSkjemaContainer";
 import MotestatusContainer from "./MotestatusContainer";
 import Feilmelding from "../components/Feilmelding";
 import AppSpinner from "../components/AppSpinner";
-import * as moterActions from "../actions/moter_actions";
+import * as moterActions from "../data/mote/moter_actions";
 import { MOETEPLANLEGGER } from "../enums/menypunkter";
 import { hentBegrunnelseTekst } from "../utils/tilgangUtils";
 

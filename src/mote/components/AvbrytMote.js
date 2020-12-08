@@ -5,7 +5,7 @@ import * as moterPropTypes from "../../propTypes";
 import { connect } from "react-redux";
 import AlertStripe from "nav-frontend-alertstriper";
 import KnappBase from "nav-frontend-knapper";
-import * as epostinnholdActions from "../../actions/epostinnhold_actions";
+import * as epostinnholdActions from "../../data/mote/epostinnhold_actions";
 import Innholdsviser from "./Innholdsviser";
 import Epostmottakere from "./Epostmottakere";
 

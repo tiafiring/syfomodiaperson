@@ -6,7 +6,7 @@ import {
   FASTLEGER_HENTET,
   HENT_FASTLEGER_FEILET,
 } from "../../src/actions/actiontyper";
-import * as actions from "../../src/actions/fastleger_actions";
+import * as actions from "../../src/data/fastlege/fastleger_actions";
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;

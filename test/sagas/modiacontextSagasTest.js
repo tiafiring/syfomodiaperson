@@ -5,7 +5,7 @@ import {
   aktivEnhetSaga,
   pushModiacontextSaga,
   aktivBrukerSaga,
-} from "../../src/sagas/modiacontextSagas";
+} from "../../src/data/modiacontext/modiacontextSagas";
 import {
   HENTER_AKTIVENHET,
   PUSHER_MODIACONTEXT,

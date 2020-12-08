@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import * as moteActions from "../actions/moter_actions";
+import * as moteActions from "../data/mote/moter_actions";
 import MotebookingStatus from "../mote/components/MotebookingStatus";
 
 export class MotebookingStatusWrapper extends Component {

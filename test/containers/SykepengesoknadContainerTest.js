@@ -6,15 +6,15 @@ import {
   Container,
   mapStateToProps,
 } from "../../src/containers/SykepengesoknadContainer";
-import soknader from "../../src/reducers/soknader";
-import ledetekster from "../../src/reducers/ledetekster";
-import sykmeldinger from "../../src/reducers/sykmeldinger";
-import { soknaderHentet } from "../../src/actions/soknader_actions";
+import soknader from "../../src/data/sykepengesoknad/soknader";
+import ledetekster from "../../src/data/ledetekster/ledetekster";
+import sykmeldinger from "../../src/data/sykmelding/sykmeldinger";
+import { soknaderHentet } from "../../src/data/sykepengesoknad/soknader_actions";
 import mockSoknader from "../mockdata/mockSoknader";
 import Feilmelding from "../../src/components/Feilmelding";
 import SykepengesoknadSelvstendig from "../../src/components/soknad-selvstendig/SykepengesoknadSelvstendig";
 import SykepengesoknadUtland from "../../src/components/soknad-utland/SykepengesoknadUtland";
-import { sykmeldingerHentet } from "../../src/actions/sykmeldinger_actions";
+import { sykmeldingerHentet } from "../../src/data/sykmelding/sykmeldinger_actions";
 
 describe("SykepengesoknadContainer", () => {
   let actions;

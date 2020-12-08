@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { hentOppfoelgingsdialoger } from "../actions/oppfoelgingsdialoger_actions";
-import { hentOppfolgingstilfellerPersonUtenArbeidsiver } from "../actions/oppfolgingstilfellerperson_actions";
-import { hentOppfolgingstilfelleperioder } from "../actions/oppfolgingstilfelleperioder_actions";
-import { hentSykmeldinger } from "../actions/sykmeldinger_actions";
-import { hentLedere } from "../actions/ledere_actions";
+import { hentOppfoelgingsdialoger } from "../data/oppfolgingsplan/oppfoelgingsdialoger_actions";
+import { hentOppfolgingstilfellerPersonUtenArbeidsiver } from "../data/oppfolgingstilfelle/oppfolgingstilfellerperson_actions";
+import { hentOppfolgingstilfelleperioder } from "../data/oppfolgingstilfelle/oppfolgingstilfelleperioder_actions";
+import { hentSykmeldinger } from "../data/sykmelding/sykmeldinger_actions";
+import { hentLedere } from "../data/leder/ledere_actions";
 import { NOKKELINFORMASJON } from "../enums/menypunkter";
 import { hentBegrunnelseTekst } from "../utils/tilgangUtils";
 import {

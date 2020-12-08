@@ -9,7 +9,7 @@ import {
 } from "@navikt/digisyfo-npm";
 import Side from "../sider/Side";
 import SidetoppSpeilet from "../components/SidetoppSpeilet";
-import * as sykmeldingerActions from "../actions/sykmeldinger_actions";
+import * as sykmeldingerActions from "../data/sykmelding/sykmeldinger_actions";
 import SykmeldingSide from "../components/sykmelding/SykmeldingSide";
 import Feilmelding from "../components/Feilmelding";
 import AppSpinner from "../components/AppSpinner";

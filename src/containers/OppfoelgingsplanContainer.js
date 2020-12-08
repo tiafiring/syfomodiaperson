@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect, useDispatch } from "react-redux";
 import SideFullbredde from "../sider/SideFullbredde";
-import * as oppdialogActions from "../actions/oppfoelgingsdialoger_actions";
+import * as oppdialogActions from "../data/oppfolgingsplan/oppfoelgingsdialoger_actions";
 import Feilmelding from "../components/Feilmelding";
 import Oppfolgingsplan from "../components/oppfoelgingsdialoger/Oppfolgingsplan";
 import AppSpinner from "../components/AppSpinner";

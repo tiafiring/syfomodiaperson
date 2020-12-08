@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
 import GlobalNavigasjon from "../components/GlobalNavigasjon";
 import * as motebehovActions from "../data/motebehov/motebehov_actions";
-import * as moterActions from "../actions/moter_actions";
-import * as oppfoelgingsdialogerActions from "../actions/oppfoelgingsdialoger_actions";
-import * as oppfolgingsplanerLPSActions from "../actions/oppfolgingsplanerlps_actions";
-import * as personOppgaverActions from "../actions/personoppgave_actions";
+import * as moterActions from "../data/mote/moter_actions";
+import * as oppfoelgingsdialogerActions from "../data/oppfolgingsplan/oppfoelgingsdialoger_actions";
+import * as oppfolgingsplanerLPSActions from "../data/oppfolgingsplan/oppfolgingsplanerlps_actions";
+import * as personOppgaverActions from "../data/personoppgave/personoppgave_actions";
 
 export const mapStateToProps = (state, ownProps) => {
   return {

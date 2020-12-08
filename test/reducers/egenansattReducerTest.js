@@ -1,12 +1,12 @@
 import { expect } from "chai";
 import deepFreeze from "deep-freeze";
-import * as actions from "../../src/actions/egenansatt_actions";
-import egenansatt from "../../src/reducers/egenansatt";
+import * as actions from "../../src/data/egenansatt/egenansatt_actions";
+import egenansatt from "../../src/data/egenansatt/egenansatt";
 import {
   HENTER_EGENANSATT,
   EGENANSATT_HENTET,
   HENT_EGENANSATT_FEILET,
-} from "../../src/actions/egenansatt_actions";
+} from "../../src/data/egenansatt/egenansatt_actions";
 
 describe("egenansatt", () => {
   describe("henter", () => {

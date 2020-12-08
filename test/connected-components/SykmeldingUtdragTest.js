@@ -7,11 +7,11 @@ import {
   Container,
   mapStateToProps,
 } from "../../src/connected-components/SykmeldingUtdrag";
-import sykmeldinger from "../../src/reducers/sykmeldinger";
+import sykmeldinger from "../../src/data/sykmelding/sykmeldinger";
 import mockSykepengesoknader from "../mockdata/mockSykepengesoknader";
 import mockSykmeldinger from "../mockdata/sykmeldinger/mockSykmeldinger";
-import { sykmeldingerHentet } from "../../src/actions/sykmeldinger_actions";
-import ledetekster from "../../src/reducers/ledetekster";
+import { sykmeldingerHentet } from "../../src/data/sykmelding/sykmeldinger_actions";
+import ledetekster from "../../src/data/ledetekster/ledetekster";
 
 describe("SykmeldingUtdrag", () => {
   let state;

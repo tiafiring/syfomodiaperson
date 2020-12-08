@@ -6,7 +6,7 @@ import {
   toDatePrettyPrint,
 } from "../../../utils/datoUtils";
 import { isPersonOppgaveBehandlet } from "../../../utils/personOppgaveUtils";
-import { OppfolgingsplanLPS } from "../../../types/OppfolgingsplanLPS";
+import { OppfolgingsplanLPS } from "../../../data/oppfolgingsplan/types/OppfolgingsplanLPS";
 import BehandleOppfolgingsplanLPS from "./BehandleOppfolgingsplanLPS";
 import OppfolgingsplanLPSEtikett from "./OppfolgingsplanLPSEtikett";
 

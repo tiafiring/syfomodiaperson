@@ -1,6 +1,6 @@
 import chai from "chai";
 import chaiEnzyme from "chai-enzyme";
-import * as actions from "../../src/actions/modiacontext_actions";
+import * as actions from "../../src/data/modiacontext/modiacontext_actions";
 import {
   HENT_AKTIVENHET_FORESPURT,
   HENTER_AKTIVENHET,

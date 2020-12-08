@@ -1,11 +1,11 @@
 import { expect } from "chai";
 import { put, call } from "redux-saga/effects";
 import { get } from "../../../src/api";
-import * as actions from "../../../src/actions/epostinnhold_actions";
+import * as actions from "../../../src/data/mote/epostinnhold_actions";
 import {
   hentBekreftMoteEpostinnhold,
   hentAvbrytMoteEpostinnhold,
-} from "../../../src/sagas/epostinnholdSagas";
+} from "../../../src/data/mote/epostinnholdSagas";
 
 describe("epostinnholdSagas", () => {
   let action;

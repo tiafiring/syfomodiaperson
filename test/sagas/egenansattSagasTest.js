@@ -1,11 +1,11 @@
 import { expect } from "chai";
 import { put, call } from "redux-saga/effects";
 import { get } from "../../src/api";
-import { hentEgenansattSaga } from "../../src/sagas/egenansattSagas";
+import { hentEgenansattSaga } from "../../src/data/egenansatt/egenansattSagas";
 import {
   HENTER_EGENANSATT,
   EGENANSATT_HENTET,
-} from "../../src/actions/egenansatt_actions";
+} from "../../src/data/egenansatt/egenansatt_actions";
 
 describe("egenansattSagas", () => {
   beforeEach(() => {

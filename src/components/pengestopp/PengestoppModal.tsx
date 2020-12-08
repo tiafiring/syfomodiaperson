@@ -9,11 +9,11 @@ import {
   Arbeidsgiver,
   StoppAutomatikk,
   VirksomhetNr,
-} from "../../types/FlaggPerson";
+} from "../../data/pengestopp/types/FlaggPerson";
 import { AlertStripeInfo } from "nav-frontend-alertstriper";
 import { useSelector, useDispatch } from "react-redux";
-import { endreStatus } from "../../actions/flaggperson_actions";
-import { FlaggpersonState } from "../../reducers/flaggperson";
+import { endreStatus } from "../../data/pengestopp/flaggperson_actions";
+import { FlaggpersonState } from "../../data/pengestopp/flaggperson";
 
 const texts = {
   notStoppedTittel:

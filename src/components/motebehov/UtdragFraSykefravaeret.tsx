@@ -16,7 +16,7 @@ import {
 } from "../../utils/sykmeldinger/sykmeldingUtils";
 import Lenke from "nav-frontend-lenker";
 import { finnMiljoStreng } from "../../utils/miljoUtil";
-import { OppfolgingstilfellePerson } from "../../types/OppfolgingstilfellePerson";
+import { OppfolgingstilfellePerson } from "../../data/oppfolgingstilfelle/types/OppfolgingstilfellePerson";
 import { tilLesbarPeriodeMedArstall } from "../../utils/datoUtils";
 import { senesteTom, tidligsteFom } from "../../utils/periodeUtils";
 

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Side from "../sider/Side";
 import SidetoppSpeilet from "../components/SidetoppSpeilet";
-import * as actionCreators from "../actions/sykmeldinger_actions";
+import * as actionCreators from "../data/sykmelding/sykmeldinger_actions";
 import Feilmelding from "../components/Feilmelding";
 import AppSpinner from "../components/AppSpinner";
 import DineSykmeldinger from "../components/sykmeldinger/DineSykmeldinger";

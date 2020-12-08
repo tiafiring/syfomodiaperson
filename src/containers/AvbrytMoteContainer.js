@@ -8,8 +8,8 @@ import Feilmelding from "../components/Feilmelding";
 import Side from "../sider/Side";
 import AvbrytMote from "../mote/components/AvbrytMote";
 import history from "../history";
-import * as moterActions from "../actions/moter_actions";
-import * as epostinnholdActions from "../actions/epostinnhold_actions";
+import * as moterActions from "../data/mote/moter_actions";
+import * as epostinnholdActions from "../data/mote/epostinnhold_actions";
 
 export class AvbrytMoteSide extends Component {
   constructor(props) {

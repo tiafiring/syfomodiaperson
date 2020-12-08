@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import * as actions from "../../../src/actions/moter_actions";
+import * as actions from "../../../src/data/mote/moter_actions";
 import {
   OPPRETT_MOTE_FORESPURT,
   OPPRETTER_MOTE,

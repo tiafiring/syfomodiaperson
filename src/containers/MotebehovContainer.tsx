@@ -13,11 +13,11 @@ import {
   harForsoktHentetOppfoelgingsdialoger,
 } from "../utils/reducerUtils";
 import { ledereUtenMotebehovsvar } from "../utils/ledereUtils";
-import { hentLedere } from "../actions/ledere_actions";
+import { hentLedere } from "../data/leder/ledere_actions";
 import { hentMotebehov } from "../data/motebehov/motebehov_actions";
-import { hentOppfoelgingsdialoger } from "../actions/oppfoelgingsdialoger_actions";
-import { hentOppfolgingstilfelleperioder } from "../actions/oppfolgingstilfelleperioder_actions";
-import { hentSykmeldinger } from "../actions/sykmeldinger_actions";
+import { hentOppfoelgingsdialoger } from "../data/oppfolgingsplan/oppfoelgingsdialoger_actions";
+import { hentOppfolgingstilfelleperioder } from "../data/oppfolgingstilfelle/oppfolgingstilfelleperioder_actions";
+import { hentSykmeldinger } from "../data/sykmelding/sykmeldinger_actions";
 import Side from "../sider/Side";
 import Feilmelding from "../components/Feilmelding";
 import AppSpinner from "../components/AppSpinner";

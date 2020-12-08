@@ -4,7 +4,7 @@ import AlertStripe from "nav-frontend-alertstriper";
 import { Checkbox, CheckboxGruppe } from "nav-frontend-skjema";
 import { Element } from "nav-frontend-typografi";
 import { restdatoTilLesbarDato } from "../../utils/datoUtils";
-import { Arbeidsgiver } from "../../types/FlaggPerson";
+import { Arbeidsgiver } from "../../data/pengestopp/types/FlaggPerson";
 
 const texts = {
   tittel: "Beskjed til NAV Arbeid og ytelser er sendt",

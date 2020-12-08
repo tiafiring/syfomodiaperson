@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import deepFreeze from "deep-freeze";
 import sinon from "sinon";
-import moter from "../../../src/reducers/moter";
-import * as actions from "../../../src/actions/moter_actions";
+import moter from "../../../src/data/mote/moter";
+import * as actions from "../../../src/data/mote/moter_actions";
 
 export const getMote = (mote) => {
   return Object.assign(

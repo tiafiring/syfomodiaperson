@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import deepFreeze from "deep-freeze";
-import epostinnhold from "../../../src/reducers/epostinnhold";
-import * as actions from "../../../src/actions/epostinnhold_actions";
+import epostinnhold from "../../../src/data/mote/epostinnhold";
+import * as actions from "../../../src/data/mote/epostinnhold_actions";
 
 describe("epostinnhold", () => {
   it("Har en default state", () => {

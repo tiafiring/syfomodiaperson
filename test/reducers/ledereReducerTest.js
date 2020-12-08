@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import deepFreeze from "deep-freeze";
-import ledere from "../../src/reducers/ledere";
+import ledere from "../../src/data/leder/ledere";
 import {
   HENTER_LEDERE,
   LEDERE_HENTET,
