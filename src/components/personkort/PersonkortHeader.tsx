@@ -1,5 +1,6 @@
 import React from "react";
 import EtikettBase from "nav-frontend-etiketter";
+import { DiskresjonskodeState } from "../../data/diskresjonskode/diskresjonskode";
 import {
   formaterFnr,
   hentBrukersAlderFraFnr,
@@ -37,7 +38,7 @@ const HeaderInfoStartDate = (
 };
 
 interface PersonkortHeaderProps {
-  diskresjonskode: any;
+  diskresjonskode: DiskresjonskodeState;
   egenansatt: any;
   navbruker: any;
   oppfolgingstilfelleperioder: any;

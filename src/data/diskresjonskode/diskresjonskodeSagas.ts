@@ -2,7 +2,7 @@ import { call, fork, put, select, takeEvery } from "redux-saga/effects";
 import { get } from "../../api";
 import * as actions from "./diskresjonskode_actions";
 
-export function* hentDiskresjonskodeSaga(action) {
+export function* hentDiskresjonskodeSaga(action: any) {
   yield put(actions.henterDiskresjonskode());
   try {
     const path = `${process.env.REACT_APP_SYFOPERSON_ROOT}/person/diskresjonskode/${action.fnr}`;
@@ -13,12 +13,12 @@ export function* hentDiskresjonskodeSaga(action) {
   }
 }
 
-export const skalHenteDiskresjonskode = (state) => {
+export const skalHenteDiskresjonskode = (state: any) => {
   const reducer = state.diskresjonskode;
   return !(reducer.henter || reducer.hentet || reducer.hentingFeilet);
 };
 
-export function* hentDiskresjonskodeHvisIkkeHentet(action) {
+export function* hentDiskresjonskodeHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHenteDiskresjonskode);
   if (skalHente) {
     yield hentDiskresjonskodeSaga(action);

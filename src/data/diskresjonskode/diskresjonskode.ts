@@ -1,17 +1,34 @@
+import { Reducer } from "redux";
 import {
   HENTER_DISKRESJONSKODE,
   DISKRESJONSKODE_HENTET,
   HENT_DISKRESJONSKODE_FEILET,
 } from "./diskresjonskode_actions";
 
-const initiellState = {
+export interface DiskresjonskodeData {
+  diskresjonskode: string;
+}
+
+export interface DiskresjonskodeState {
+  henter: boolean;
+  hentet: boolean;
+  hentingFeilet: boolean;
+  data: DiskresjonskodeData;
+}
+
+export const initialState: DiskresjonskodeState = {
   henter: false,
   hentet: false,
   hentingFeilet: false,
-  data: {},
+  data: {
+    diskresjonskode: "",
+  },
 };
 
-export default function diskresjonskode(state = initiellState, action) {
+const diskresjonskode: Reducer<DiskresjonskodeState> = (
+  state = initialState,
+  action
+) => {
   switch (action.type) {
     case HENTER_DISKRESJONSKODE: {
       return Object.assign({}, state, {
@@ -40,4 +57,6 @@ export default function diskresjonskode(state = initiellState, action) {
       return state;
     }
   }
-}
+};
+
+export default diskresjonskode;
