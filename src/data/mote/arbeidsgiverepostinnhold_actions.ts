@@ -1,3 +1,5 @@
+import { EpostInnholdDTO } from "./types/EpostInnholdDTO";
+
 export const HENT_BEKREFT_MOTE_ARBEIDSGIVEREPOSTINNHOLD_FORESPURT =
   "HENT_BEKREFT_MOTE_ARBEIDSGIVEREPOSTINNHOLD_FORESPURT";
 export const HENTER_ARBEIDSGIVEREPOSTINNHOLD =
@@ -8,8 +10,8 @@ export const HENT_ARBEIDSGIVEREPOSTINNHOLD_FEILET =
   "HENT_ARBEIDSGIVEREPOSTINNHOLD_FEILET";
 
 export const hentBekreftMoteArbeidsgiverEpostinnhold = (
-  motedeltakerUuid,
-  valgtAlternativId
+  motedeltakerUuid: string,
+  valgtAlternativId: number
 ) => {
   return {
     type: HENT_BEKREFT_MOTE_ARBEIDSGIVEREPOSTINNHOLD_FORESPURT,
@@ -24,7 +26,10 @@ export const henterArbeidstakerEpostInnhold = () => {
   };
 };
 
-export const arbeidsgiverEpostInnholdHentet = (eposttype, data) => {
+export const arbeidsgiverEpostInnholdHentet = (
+  eposttype: string,
+  data: EpostInnholdDTO
+) => {
   return {
     type: ARBEIDSGIVEREPOSTINNHOLD_HENTET,
     eposttype,

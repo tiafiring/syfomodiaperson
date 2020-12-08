@@ -4,7 +4,7 @@ import history from "../../history";
 import * as actions from "./moter_actions";
 import * as historikkActions from "../historikk/historikk_actions";
 
-export function* opprettMote(action) {
+export function* opprettMote(action: any) {
   yield put(actions.oppretterMote());
   try {
     const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/moter`;
@@ -17,7 +17,7 @@ export function* opprettMote(action) {
   }
 }
 
-export function* hentMoter(action) {
+export function* hentMoter(action: any) {
   yield put(actions.henterMoter());
   try {
     const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/moter?fnr=${action.fnr}&henttpsdata=true&limit=1`;
@@ -32,19 +32,19 @@ export function* hentMoter(action) {
   }
 }
 
-export const skalHenteMoter = (state) => {
+export const skalHenteMoter = (state: any) => {
   const reducer = state.moter;
   return !reducer.henter && !reducer.hentingForsokt;
 };
 
-export function* hentMoterHvisIkkeHentet(action) {
+export function* hentMoterHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHenteMoter);
   if (skalHente) {
     yield hentMoter(action);
   }
 }
 
-export function* avbrytMote(action) {
+export function* avbrytMote(action: any) {
   yield put(actions.avbryterMote(action.uuid));
   try {
     const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/moter/${action.uuid}/avbryt?varsle=${action.varsle}`;
@@ -58,7 +58,7 @@ export function* avbrytMote(action) {
   }
 }
 
-export function* bekreftMote(action) {
+export function* bekreftMote(action: any) {
   yield put(actions.bekrefterMote());
   try {
     const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/moter/${action.moteUuid}/bekreft?valgtAlternativId=${action.valgtAlternativId}`;
@@ -78,7 +78,7 @@ export function* bekreftMote(action) {
   }
 }
 
-export function* opprettFlereAlternativ(action) {
+export function* opprettFlereAlternativ(action: any) {
   yield put(actions.oppretterFlereAlternativ());
   try {
     const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/moter/${action.moteUuid}/nyealternativer`;

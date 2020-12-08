@@ -1,3 +1,5 @@
+import { EpostInnholdDTO } from "./types/EpostInnholdDTO";
+
 export const HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT =
   "HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT";
 export const HENTER_EPOSTINNHOLD = "HENTER_EPOSTINNHOLD";
@@ -7,8 +9,8 @@ export const HENT_AVBRYT_MOTE_EPOSTINNHOLD_FORESPURT =
   "HENT_AVBRYT_MOTE_EPOSTINNHOLD_FORESPURT";
 
 export const hentBekreftMoteEpostinnhold = (
-  motedeltakerUuid,
-  valgtAlternativId
+  motedeltakerUuid: string,
+  valgtAlternativId: number
 ) => {
   return {
     type: HENT_BEKREFT_MOTE_EPOSTINNHOLD_FORESPURT,
@@ -17,7 +19,7 @@ export const hentBekreftMoteEpostinnhold = (
   };
 };
 
-export const hentAvbrytMoteEpostinnhold = (motedeltakerUuid) => {
+export const hentAvbrytMoteEpostinnhold = (motedeltakerUuid: string) => {
   return {
     type: HENT_AVBRYT_MOTE_EPOSTINNHOLD_FORESPURT,
     motedeltakerUuid,
@@ -30,7 +32,10 @@ export const henterEpostInnhold = () => {
   };
 };
 
-export const epostInnholdHentet = (eposttype, data) => {
+export const epostInnholdHentet = (
+  eposttype: string,
+  data: EpostInnholdDTO
+) => {
   return {
     type: EPOSTINNHOLD_HENTET,
     eposttype,

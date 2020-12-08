@@ -3,7 +3,7 @@ import { get } from "../../api";
 import * as actions from "./epostinnhold_actions";
 import * as arbeidsgiveractions from "./arbeidsgiverepostinnhold_actions";
 
-export function* hentBekreftMoteEpostinnhold(action) {
+export function* hentBekreftMoteEpostinnhold(action: any) {
   yield put(actions.henterEpostInnhold());
   try {
     const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/epostinnhold/BEKREFTET?motedeltakeruuid=${action.motedeltakerUuid}&valgtAlternativId=${action.valgtAlternativId}`;
@@ -14,7 +14,7 @@ export function* hentBekreftMoteEpostinnhold(action) {
   }
 }
 
-export function* hentBekreftMoteArbeidsgiverEpostinnhold(action) {
+export function* hentBekreftMoteArbeidsgiverEpostinnhold(action: any) {
   yield put(arbeidsgiveractions.henterArbeidstakerEpostInnhold());
   try {
     const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/epostinnhold/BEKREFTET?motedeltakeruuid=${action.motedeltakerUuid}&valgtAlternativId=${action.valgtAlternativId}`;
@@ -30,7 +30,7 @@ export function* hentBekreftMoteArbeidsgiverEpostinnhold(action) {
   }
 }
 
-export function* hentAvbrytMoteEpostinnhold(action) {
+export function* hentAvbrytMoteEpostinnhold(action: any) {
   yield put(actions.henterEpostInnhold());
   try {
     const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/epostinnhold/AVBRUTT?motedeltakeruuid=${action.motedeltakerUuid}`;

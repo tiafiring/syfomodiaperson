@@ -1,13 +1,29 @@
+import { Reducer } from "redux";
+import { MoteAlternativDTO, MoteDTO } from "./types/moteTypes";
 import * as actions from "./moter_actions";
 import { konverterTid } from "../../utils/datoUtils";
 
-const defaultState = {
-  data: [],
+export interface MoterState {
+  henter: boolean;
+  hentingFeilet: boolean;
+  hentingForsokt: boolean;
+  sender: boolean;
+  sendingFeilet: boolean;
+  data: MoteDTO[];
+  nyeAlternativFeilet: boolean;
+  senderNyeAlternativ: boolean;
+  skalViseFlereAlternativ: boolean;
+  antallNyeTidspunkt: number;
+  tilgang: {};
+}
+
+const initialState: MoterState = {
   henter: false,
   hentingFeilet: false,
   hentingForsokt: false,
   sender: false,
   sendingFeilet: false,
+  data: [],
   nyeAlternativFeilet: false,
   senderNyeAlternativ: false,
   skalViseFlereAlternativ: false,
@@ -15,7 +31,10 @@ const defaultState = {
   tilgang: {},
 };
 
-export default function moter(state = defaultState, action) {
+const moter: Reducer<MoterState> = (
+  state = initialState,
+  action = { type: "" }
+) => {
   switch (action.type) {
     case actions.OPPRETTER_MOTE: {
       return {
@@ -214,7 +233,7 @@ export default function moter(state = defaultState, action) {
       };
     }
     case actions.OPPRETT_FLERE_ALTERNATIV_BEKREFTET: {
-      const sorterEtterId = (alternativer) => {
+      const sorterEtterId = (alternativer: MoteAlternativDTO[]) => {
         return [...alternativer].sort((a, b) => {
           if (a.id < b.id) {
             return -1;
@@ -230,14 +249,17 @@ export default function moter(state = defaultState, action) {
           return mote;
         }
         const gamleAlternativer = sorterEtterId(mote.alternativer);
-        const nyeAlternativer = action.data.map((alternativ, index) => {
-          return {
-            ...alternativ,
-            created: new Date(),
-            tid: new Date(alternativ.tid),
-            id: gamleAlternativer[gamleAlternativer.length - 1].id + index + 1,
-          };
-        });
+        const nyeAlternativer = action.data.map(
+          (alternativ: MoteAlternativDTO, index: number) => {
+            return {
+              ...alternativ,
+              created: new Date(),
+              tid: new Date(alternativ.tid),
+              id:
+                gamleAlternativer[gamleAlternativer.length - 1].id + index + 1,
+            };
+          }
+        );
         const alternativer = gamleAlternativer.concat(nyeAlternativer);
         const deltakere = mote.deltakere.map((deltaker) => {
           const svar = sorterEtterId(deltaker.svar.concat(nyeAlternativer));
@@ -266,4 +288,6 @@ export default function moter(state = defaultState, action) {
       return state;
     }
   }
-}
+};
+
+export default moter;

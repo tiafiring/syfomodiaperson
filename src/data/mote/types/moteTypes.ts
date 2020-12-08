@@ -1,4 +1,4 @@
-interface MoteAlternativ {
+export interface MoteAlternativDTO {
   id: number;
   tid: Date;
   created: Date;
@@ -6,7 +6,7 @@ interface MoteAlternativ {
   valgt: boolean;
 }
 
-interface MoteSvar {
+export interface MoteSvarDTO {
   id: number;
   tid: Date;
   created: Date;
@@ -14,22 +14,22 @@ interface MoteSvar {
   valgt: boolean;
 }
 
-interface MoteDeltaker {
+export interface MoteDeltakerDTO {
   navn: string;
   orgnummer: string;
   type: MoteDeltakerType;
-  svar: MoteSvar[];
+  svar: MoteSvarDTO[];
   svartidspunkt: Date;
 }
 
-interface Mote {
+export interface MoteDTO {
   moteUuid: string;
   status: string;
   fnr: string;
   opprettetTidspunkt: Date;
   bekreftetTidspunkt: Date;
-  deltakere: MoteDeltaker[];
-  alternativer: MoteAlternativ[];
+  deltakere: MoteDeltakerDTO[];
+  alternativer: MoteAlternativDTO[];
 }
 
 enum MoteDeltakerType {

@@ -1,3 +1,7 @@
+import { MoteDTO } from "./types/moteTypes";
+import { NyttAlternativDTO } from "./types/NyttAlternativDTO";
+import { NyttMoteDTO } from "./types/NyttMoteDTO";
+
 export const HENT_MOTER_FORESPURT = "HENT_MOTER_FORESPURT";
 export const HENTER_MOTER = "HENTER_MOTER";
 export const MOTER_HENTET = "MOTER_HENTET";
@@ -31,7 +35,7 @@ export const OPPRETT_FLERE_ALTERNATIV_BEKREFTET =
   "OPPRETT_FLERE_ALTERNATIV_BEKREFTET";
 export const VIS_FLERE_ALTERNATIV = "VIS_FLERE_ALTERNATIV";
 
-export function opprettMote(data) {
+export function opprettMote(data: NyttMoteDTO) {
   return {
     type: OPPRETT_MOTE_FORESPURT,
     data,
@@ -44,7 +48,7 @@ export function oppretterMote() {
   };
 }
 
-export function moteOpprettet(data) {
+export function moteOpprettet(data: NyttMoteDTO) {
   return {
     type: MOTE_OPPRETTET,
     fnr: data.fnr,
@@ -58,7 +62,7 @@ export function opprettMoteFeilet() {
   };
 }
 
-export function hentMoter(fnr) {
+export function hentMoter(fnr: string) {
   return {
     type: HENT_MOTER_FORESPURT,
     fnr,
@@ -71,7 +75,7 @@ export function henterMoter() {
   };
 }
 
-export function moterHentet(data) {
+export function moterHentet(data: MoteDTO[]) {
   return {
     type: MOTER_HENTET,
     data,
@@ -84,14 +88,14 @@ export function hentMoterFeilet() {
   };
 }
 
-export function hentMoterIkkeTilgang(tilgang) {
+export function hentMoterIkkeTilgang(tilgang: any) {
   return {
     type: HENT_MOTER_IKKE_TILGANG,
     tilgang,
   };
 }
 
-export function avbrytMote(uuid, fnr) {
+export function avbrytMote(uuid: string, fnr: string) {
   return {
     type: AVBRYT_MOTE_FORESPURT,
     uuid,
@@ -100,7 +104,7 @@ export function avbrytMote(uuid, fnr) {
   };
 }
 
-export function avbrytMoteUtenVarsel(uuid, fnr) {
+export function avbrytMoteUtenVarsel(uuid: string, fnr: string) {
   return {
     type: AVBRYT_MOTE_FORESPURT,
     uuid,
@@ -133,7 +137,10 @@ export function avbrytFlereAlternativ() {
   };
 }
 
-export function opprettFlereAlternativBekreftet(data, moteUuid) {
+export function opprettFlereAlternativBekreftet(
+  data: NyttAlternativDTO,
+  moteUuid: string
+) {
   return {
     type: OPPRETT_FLERE_ALTERNATIV_BEKREFTET,
     data,
@@ -141,7 +148,11 @@ export function opprettFlereAlternativBekreftet(data, moteUuid) {
   };
 }
 
-export function opprettFlereAlternativ(data, moteUuid, fnr) {
+export function opprettFlereAlternativ(
+  data: NyttAlternativDTO,
+  moteUuid: string,
+  fnr: string
+) {
   return {
     type: OPPRETT_FLERE_ALTERNATIV_FORESPURT,
     data,
@@ -162,7 +173,7 @@ export function oppretterFlereAlternativ() {
   };
 }
 
-export function moteAvbrutt(uuid) {
+export function moteAvbrutt(uuid: string) {
   return {
     type: MOTE_AVBRUTT,
     uuid,
@@ -175,14 +186,18 @@ export function avbrytMoteFeilet() {
   };
 }
 
-export function avbryterMote(uuid) {
+export function avbryterMote(uuid: string) {
   return {
     type: AVBRYTER_MOTE,
     uuid,
   };
 }
 
-export function bekreftMote(moteUuid, valgtAlternativId, fnr) {
+export function bekreftMote(
+  moteUuid: string,
+  valgtAlternativId: number,
+  fnr: string
+) {
   return {
     type: BEKREFT_MOTE_FORESPURT,
     moteUuid,
@@ -197,7 +212,11 @@ export function bekrefterMote() {
   };
 }
 
-export function moteBekreftet(moteUuid, valgtAlternativId, bekreftetTidspunkt) {
+export function moteBekreftet(
+  moteUuid: string,
+  valgtAlternativId: number,
+  bekreftetTidspunkt: Date
+) {
   return {
     type: MOTE_BEKREFTET,
     moteUuid,

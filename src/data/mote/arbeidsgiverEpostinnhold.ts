@@ -1,19 +1,27 @@
+import { Reducer } from "redux";
+import { EpostInnholdDTO } from "./types/EpostInnholdDTO";
 import {
   HENTER_ARBEIDSGIVEREPOSTINNHOLD,
   ARBEIDSGIVEREPOSTINNHOLD_HENTET,
   HENT_ARBEIDSGIVEREPOSTINNHOLD_FEILET,
 } from "./arbeidsgiverepostinnhold_actions";
 
-const defaultState = {
-  data: {},
+export interface ArbeidsgiverEpostinnholdState {
+  henter: boolean;
+  hentingFeilet: boolean;
+  data: EpostInnholdDTO | {};
+}
+
+const initialState: ArbeidsgiverEpostinnholdState = {
   henter: false,
   hentingFeilet: false,
+  data: {},
 };
 
-export default function arbeidsgiverEpostinnhold(
-  state = defaultState,
-  action = {}
-) {
+const arbeidsgiverEpostinnhold: Reducer<ArbeidsgiverEpostinnholdState> = (
+  state = initialState,
+  action = { type: "" }
+) => {
   switch (action.type) {
     case HENTER_ARBEIDSGIVEREPOSTINNHOLD: {
       return Object.assign({}, state, {
@@ -40,4 +48,6 @@ export default function arbeidsgiverEpostinnhold(
       return state;
     }
   }
-}
+};
+
+export default arbeidsgiverEpostinnhold;

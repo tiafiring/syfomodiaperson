@@ -1,16 +1,27 @@
+import { Reducer } from "redux";
+import { EpostInnholdDTO } from "./types/EpostInnholdDTO";
 import {
   HENTER_EPOSTINNHOLD,
   EPOSTINNHOLD_HENTET,
   HENT_EPOSTINNHOLD_FEILET,
 } from "./epostinnhold_actions";
 
-const defaultState = {
-  data: {},
+export interface EpostInnholdState {
+  henter: boolean;
+  hentingFeilet: boolean;
+  data: EpostInnholdDTO | {};
+}
+
+const initialState: EpostInnholdState = {
   henter: false,
   hentingFeilet: false,
+  data: {},
 };
 
-export default function epostinnhold(state = defaultState, action = {}) {
+const epostinnhold: Reducer<EpostInnholdState> = (
+  state = initialState,
+  action = { type: "" }
+) => {
   switch (action.type) {
     case HENTER_EPOSTINNHOLD: {
       return Object.assign({}, state, {
@@ -37,4 +48,6 @@ export default function epostinnhold(state = defaultState, action = {}) {
       return state;
     }
   }
-}
+};
+
+export default epostinnhold;
