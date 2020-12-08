@@ -1,13 +1,30 @@
+import { Reducer } from "redux";
+import { DokumentinfoDTO } from "./types/DokumentinfoDTO";
 import {
   HENT_DOKUMENTINFO_FEILET,
   HENTER_DOKUMENTINFO,
   DOKUMENTINFO_HENTET,
 } from "./dokumentinfo_actions";
 
-const initiellState = {};
+export interface VirksomhetState {
+  henter: boolean;
+  hentet: boolean;
+  hentingFeilet: boolean;
+  hentingForsokt: boolean;
+  data: DokumentinfoDTO;
+}
 
-export default function dokumentinfo(state = initiellState, action) {
-  const oppfolgingsplanDokument = {};
+export interface DokumentinfoMapState {
+  [index: string]: VirksomhetState;
+}
+
+const initialState = {} as DokumentinfoMapState;
+
+const dokumentinfo: Reducer<DokumentinfoMapState> = (
+  state = initialState,
+  action = { type: "" }
+) => {
+  const oppfolgingsplanDokument = {} as DokumentinfoMapState;
   switch (action.type) {
     case HENTER_DOKUMENTINFO:
       oppfolgingsplanDokument[action.planId] = {
@@ -40,4 +57,6 @@ export default function dokumentinfo(state = initiellState, action) {
       return state;
     }
   }
-}
+};
+
+export default dokumentinfo;
