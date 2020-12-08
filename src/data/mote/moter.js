@@ -18,32 +18,36 @@ const defaultState = {
 export default function moter(state = defaultState, action) {
   switch (action.type) {
     case actions.OPPRETTER_MOTE: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         henter: false,
         hentingFeilet: false,
         sender: true,
         sendingFeilet: false,
         avbryter: false,
         avbrytFeilet: false,
-      });
+      };
     }
     case actions.MOTE_OPPRETTET: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         sender: false,
-      });
+      };
     }
     case actions.OPPRETT_MOTE_FEILET: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         henter: false,
         hentingFeilet: false,
         sender: false,
         sendingFeilet: true,
         avbryter: false,
         avbrytFeilet: false,
-      });
+      };
     }
     case actions.HENTER_MOTER: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         data: [],
         sender: false,
         henter: true,
@@ -52,10 +56,11 @@ export default function moter(state = defaultState, action) {
         sendingFeilet: false,
         avbryter: false,
         avbrytFeilet: false,
-      });
+      };
     }
     case actions.MOTER_HENTET: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         data: action.data.map(konverterTid),
         sender: false,
         henter: false,
@@ -64,10 +69,11 @@ export default function moter(state = defaultState, action) {
         sendingFeilet: false,
         avbryter: false,
         avbrytFeilet: false,
-      });
+      };
     }
     case actions.HENT_MOTER_FEILET: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         data: [],
         sender: false,
         sendingFeilet: false,
@@ -76,10 +82,11 @@ export default function moter(state = defaultState, action) {
         hentingForsokt: true,
         avbryter: false,
         avbrytFeilet: false,
-      });
+      };
     }
     case actions.HENT_MOTER_IKKE_TILGANG: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         data: [],
         sender: false,
         sendingFeilet: false,
@@ -88,46 +95,47 @@ export default function moter(state = defaultState, action) {
         avbryter: false,
         avbrytFeilet: false,
         tilgang: action.tilgang,
-      });
+      };
     }
     case actions.AVBRYTER_MOTE: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         avbryter: true,
         avbrytFeilet: false,
-      });
+      };
     }
     case actions.AVBRYT_MOTE_FEILET: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         avbrytFeilet: true,
         avbryter: false,
-      });
+      };
     }
     case actions.MOTE_AVBRUTT: {
       const data = state.data.map((mote) => {
         if (mote.moteUuid === action.uuid) {
-          return Object.assign({}, mote, {
+          return {
+            ...mote,
             status: "AVBRUTT",
-          });
+          };
         }
         return mote;
       });
-      return Object.assign(
-        {},
-        state,
-        { data },
-        {
-          avbryter: false,
-          avbrytFeilet: false,
-        }
-      );
+      return {
+        ...state,
+        data,
+        avbryter: false,
+        avbrytFeilet: false,
+      };
     }
     case actions.BEKREFTER_MOTE: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         bekrefter: true,
         bekreftFeilet: false,
         avbryter: false,
         avbrytFeilet: false,
-      });
+      };
     }
     case actions.MOTE_BEKREFTET: {
       const data = state.data.map((mote) => {
@@ -135,70 +143,75 @@ export default function moter(state = defaultState, action) {
           const bekreftetAlternativ = mote.alternativer.filter((alternativ) => {
             return alternativ.id === action.valgtAlternativId;
           })[0];
-          return Object.assign({}, mote, {
+          return {
+            ...mote,
             status: "BEKREFTET",
             bekreftetTidspunkt: new Date(action.bekreftetTidspunkt),
             bekreftetAlternativ,
-          });
+          };
         }
         return mote;
       });
-      return Object.assign(
-        {},
-        state,
-        { data },
-        {
-          bekrefter: false,
-          bekreftFeilet: false,
-          avbryter: false,
-          avbrytFeilet: false,
-        }
-      );
+      return {
+        ...state,
+        data,
+        bekrefter: false,
+        bekreftFeilet: false,
+        avbryter: false,
+        avbrytFeilet: false,
+      };
     }
     case actions.BEKREFT_MOTE_FEILET: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         bekrefter: false,
         bekreftFeilet: true,
-      });
+      };
     }
     case actions.VIS_FLERE_ALTERNATIV: {
       const antallNyeTidspunkt = state.skalViseFlereAlternativ
         ? state.antallNyeTidspunkt + 1
         : 1;
-      return Object.assign({}, state, {
+      return {
+        ...state,
         skalViseFlereAlternativ: true,
         antallNyeTidspunkt,
-      });
+      };
     }
     case actions.FLERE_ALTERNATIV: {
       const antallNyeTidspunkt = state.antallNyeTidspunkt + 1;
-      return Object.assign({}, state, {
+      return {
+        ...state,
         antallNyeTidspunkt,
-      });
+      };
     }
     case actions.FJERN_ALTERNATIV: {
       const antallNyeTidspunkt = state.antallNyeTidspunkt - 1;
-      return Object.assign({}, state, {
+      return {
+        ...state,
         antallNyeTidspunkt,
-      });
+      };
     }
     case actions.AVBRYT_FLERE_ALTERNATIV: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         antallNyeTidspunkt: 0,
         skalViseFlereAlternativ: false,
-      });
+      };
     }
     case actions.OPPRETTER_FLERE_ALTERNATIV: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         senderNyeAlternativ: true,
         nyeAlternativFeilet: false,
-      });
+      };
     }
     case actions.OPPRETT_FLERE_ALTERNATIV_FEILET: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         nyeAlternativFeilet: true,
         senderNyeAlternativ: false,
-      });
+      };
     }
     case actions.OPPRETT_FLERE_ALTERNATIV_BEKREFTET: {
       const sorterEtterId = (alternativer) => {
@@ -218,32 +231,36 @@ export default function moter(state = defaultState, action) {
         }
         const gamleAlternativer = sorterEtterId(mote.alternativer);
         const nyeAlternativer = action.data.map((alternativ, index) => {
-          return Object.assign({}, alternativ, {
+          return {
+            ...alternativ,
             created: new Date(),
             tid: new Date(alternativ.tid),
             id: gamleAlternativer[gamleAlternativer.length - 1].id + index + 1,
-          });
+          };
         });
         const alternativer = gamleAlternativer.concat(nyeAlternativer);
         const deltakere = mote.deltakere.map((deltaker) => {
           const svar = sorterEtterId(deltaker.svar.concat(nyeAlternativer));
-          return Object.assign({}, deltaker, {
+          return {
+            ...deltaker,
             svar,
-          });
+          };
         });
-        return Object.assign({}, mote, {
+        return {
+          ...mote,
           alternativer,
           deltakere,
           trengerBehandling: false,
-        });
+        };
       });
 
-      return Object.assign({}, state, {
+      return {
+        ...state,
         data,
         antallNyeTidspunkt: 0,
         nyeAlternativFeilet: false,
         senderNyeAlternativ: false,
-      });
+      };
     }
     default: {
       return state;

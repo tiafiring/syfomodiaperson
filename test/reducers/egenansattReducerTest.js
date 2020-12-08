@@ -14,7 +14,9 @@ describe("egenansatt", () => {
       henter: false,
       hentet: false,
       hentingFeilet: false,
-      data: {},
+      data: {
+        erEgenAnsatt: false,
+      },
     });
 
     it(`håndterer ${HENTER_EGENANSATT}`, () => {
@@ -24,7 +26,9 @@ describe("egenansatt", () => {
         henter: true,
         hentet: false,
         hentingFeilet: false,
-        data: {},
+        data: {
+          erEgenAnsatt: false,
+        },
       });
     });
 
@@ -49,7 +53,9 @@ describe("egenansatt", () => {
         henter: false,
         hentet: false,
         hentingFeilet: true,
-        data: {},
+        data: {
+          erEgenAnsatt: false,
+        },
       });
     });
   });

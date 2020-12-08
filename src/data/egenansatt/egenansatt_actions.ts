@@ -22,7 +22,7 @@ export function henterEgenansatt() {
   };
 }
 
-export function egenansattHentet(data: string) {
+export function egenansattHentet(data: boolean) {
   return {
     type: EGENANSATT_HENTET,
     data,

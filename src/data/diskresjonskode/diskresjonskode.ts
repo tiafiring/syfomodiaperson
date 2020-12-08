@@ -31,27 +31,27 @@ const diskresjonskode: Reducer<DiskresjonskodeState> = (
 ) => {
   switch (action.type) {
     case HENTER_DISKRESJONSKODE: {
-      return Object.assign({}, state, {
+      return {
+        ...initialState,
         henter: true,
-        hentet: false,
-        hentingFeilet: false,
-        data: {},
-      });
+      };
     }
     case DISKRESJONSKODE_HENTET: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         henter: false,
         hentet: true,
         data: {
           diskresjonskode: action.data.toString(),
         },
-      });
+      };
     }
     case HENT_DISKRESJONSKODE_FEILET: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         henter: false,
         hentingFeilet: true,
-      });
+      };
     }
     default: {
       return state;

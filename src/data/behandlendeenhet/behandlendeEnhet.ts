@@ -24,11 +24,12 @@ const behandlendeEnhet: Reducer<BehandlendeEnhetState> = (
 ) => {
   switch (action.type) {
     case HENT_BEHANDLENDE_ENHET_FEILET: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         data: {},
         henter: false,
         hentingFeilet: true,
-      });
+      };
     }
     case HENTER_BEHANDLENDE_ENHET: {
       return {

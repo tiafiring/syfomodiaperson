@@ -14,7 +14,9 @@ describe("diskresjonskode", () => {
       henter: false,
       hentet: false,
       hentingFeilet: false,
-      data: {},
+      data: {
+        diskresjonskode: "",
+      },
     });
 
     it(`håndterer ${HENTER_DISKRESJONSKODE}`, () => {
@@ -24,7 +26,9 @@ describe("diskresjonskode", () => {
         henter: true,
         hentet: false,
         hentingFeilet: false,
-        data: {},
+        data: {
+          diskresjonskode: "",
+        },
       });
     });
 
@@ -49,7 +53,9 @@ describe("diskresjonskode", () => {
         henter: false,
         hentet: false,
         hentingFeilet: true,
-        data: {},
+        data: {
+          diskresjonskode: "",
+        },
       });
     });
   });

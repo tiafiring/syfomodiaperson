@@ -28,27 +28,27 @@ export const initialState: EgenansattState = {
 const egenansatt: Reducer<EgenansattState> = (state = initialState, action) => {
   switch (action.type) {
     case HENTER_EGENANSATT: {
-      return Object.assign({}, state, {
+      return {
+        ...initialState,
         henter: true,
-        hentet: false,
-        hentingFeilet: false,
-        data: {},
-      });
+      };
     }
     case EGENANSATT_HENTET: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         henter: false,
         hentet: true,
         data: {
           erEgenAnsatt: action.data,
         },
-      });
+      };
     }
     case HENT_EGENANSATT_FEILET: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         henter: false,
         hentingFeilet: true,
-      });
+      };
     }
     default: {
       return state;

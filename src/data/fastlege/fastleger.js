@@ -18,13 +18,14 @@ const initiellState = {
 export default function fastleger(state = initiellState, action) {
   switch (action.type) {
     case HENTER_FASTLEGER: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         henter: true,
         hentet: false,
         hentingFeilet: false,
         ikkeFunnet: false,
         data: [],
-      });
+      };
     }
     case FASTLEGER_HENTET: {
       if (action.data.length > 0) {
@@ -46,25 +47,28 @@ export default function fastleger(state = initiellState, action) {
           tidligere,
         });
       }
-      return Object.assign({}, state, {
+      return {
+        ...state,
         henter: false,
         hentet: true,
         data: [],
         ikkeFunnet: true,
-      });
+      };
     }
     case FASTLEGER_IKKE_FUNNET: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         henter: false,
         ikkeFunnet: true,
-      });
+      };
     }
     case HENT_FASTLEGER_FEILET: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         henter: false,
         hentingFeilet: true,
         data: [],
-      });
+      };
     }
     default: {
       return state;
