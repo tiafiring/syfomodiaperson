@@ -2,7 +2,7 @@ import { all, call, fork, put, select, takeEvery } from "redux-saga/effects";
 import { get } from "../../api";
 import * as actions from "./virksomhet_actions";
 
-export function* hentVirksomhet(action) {
+export function* hentVirksomhet(action: any) {
   const orgnummer = action.orgnummer;
   yield put(actions.henterVirksomhet(orgnummer));
   try {
@@ -14,13 +14,13 @@ export function* hentVirksomhet(action) {
   }
 }
 
-export const skalHenteVirksomhet = (state, action) => {
+export const skalHenteVirksomhet = (state: any, action: any) => {
   const orgnummer = action.orgnummer || {};
   const reducer = state.virksomhet[orgnummer] || {};
   return (!reducer.henter && !reducer.hentingForsokt) || false;
 };
 
-export function* hentVirksomhetHvisIkkeHentet(action) {
+export function* hentVirksomhetHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHenteVirksomhet, action);
   if (skalHente) {
     yield hentVirksomhet(action);

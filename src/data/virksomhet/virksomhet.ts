@@ -1,13 +1,30 @@
+import { Reducer } from "redux";
+import { Virksomhet } from "./types/Virksomhet";
 import {
   HENTER_VIRKSOMHET,
   VIRKSOMHET_HENTET,
   HENT_VIRKSOMHET_FEILET,
 } from "./virksomhet_actions";
 
-const initiellState = {};
+export interface VirksomhetState {
+  henter: boolean;
+  hentet: boolean;
+  hentingFeilet: boolean;
+  hentingForsokt: boolean;
+  data: Virksomhet | {};
+}
 
-export default function virksomhet(state = initiellState, action = {}) {
-  const virksomhetTemp = {};
+export interface VirksomhetMapState {
+  [index: string]: VirksomhetState;
+}
+
+const initialState = {} as any;
+
+const virksomhet: Reducer<VirksomhetMapState> = (
+  state = initialState,
+  action = { type: "" }
+) => {
+  const virksomhetTemp = {} as VirksomhetMapState;
   switch (action.type) {
     case HENTER_VIRKSOMHET: {
       virksomhetTemp[action.orgnummer] = {
@@ -20,7 +37,7 @@ export default function virksomhet(state = initiellState, action = {}) {
       return { ...state, ...virksomhetTemp };
     }
     case VIRKSOMHET_HENTET: {
-      const nyeData = {};
+      const nyeData = {} as VirksomhetMapState;
       nyeData[action.orgnummer] = action.data.navn;
       virksomhetTemp[action.orgnummer] = {
         henter: false,
@@ -48,4 +65,6 @@ export default function virksomhet(state = initiellState, action = {}) {
       return state;
     }
   }
-}
+};
+
+export default virksomhet;
