@@ -1,10 +1,13 @@
+import { VALGT_ENHET } from "./enhet_actions";
+import { Reducer } from "redux";
+
 const defaultState = {
   valgtEnhet: "",
 };
 
-export default function (state = defaultState, action = {}) {
+const enhet: Reducer = (state = defaultState, action = { type: "" }) => {
   switch (action.type) {
-    case "VALGT_ENHET": {
+    case VALGT_ENHET: {
       return Object.assign({}, defaultState, {
         valgtEnhet: action.data,
       });
@@ -13,4 +16,6 @@ export default function (state = defaultState, action = {}) {
       return state;
     }
   }
-}
+};
+
+export default enhet;
