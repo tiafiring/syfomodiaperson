@@ -3,7 +3,7 @@ interface MotebehovSvar {
   forklaring?: string;
 }
 
-interface Motebehov {
+interface MotebehovDTO {
   id: string;
   opprettetDato: Date;
   aktorId: string;

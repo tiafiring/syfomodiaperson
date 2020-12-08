@@ -7,7 +7,7 @@ import {
 } from "./motebehov_actions";
 import { BEHANDLE_MOTEBEHOV_BEHANDLET } from "./behandlemotebehov_actions";
 
-export const sorterEtterDato = (a: Motebehov, b: Motebehov) => {
+export const sorterEtterDato = (a: MotebehovDTO, b: MotebehovDTO) => {
   return b.opprettetDato === a.opprettetDato
     ? 0
     : b.opprettetDato > a.opprettetDato
@@ -20,7 +20,7 @@ export interface MotebehovState {
   hentet: boolean;
   hentingFeilet: boolean;
   hentingForsokt: boolean;
-  data: Motebehov[];
+  data: MotebehovDTO[];
   tilgang: any;
 }
 

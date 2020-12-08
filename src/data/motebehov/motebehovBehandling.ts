@@ -1,13 +1,24 @@
+import { Reducer } from "redux";
 import * as actions from "./behandlemotebehov_actions";
 
-const defaultState = {
+export interface MotebehovBehandlingState {
+  behandler: boolean;
+  behandlet: boolean;
+  behandleFeilet: boolean;
+  behandleForbudt: boolean;
+}
+
+export const initialState: MotebehovBehandlingState = {
   behandler: false,
   behandlet: false,
   behandleFeilet: false,
   behandleForbudt: false,
 };
 
-export default function motebehovBehandling(state = defaultState, action) {
+const motebehovBehandling: Reducer<MotebehovBehandlingState> = (
+  state = initialState,
+  action
+) => {
   switch (action.type) {
     case actions.BEHANDLE_MOTEBEHOV_BEHANDLER: {
       return {
@@ -43,4 +54,6 @@ export default function motebehovBehandling(state = defaultState, action) {
       return state;
     }
   }
-}
+};
+
+export default motebehovBehandling;

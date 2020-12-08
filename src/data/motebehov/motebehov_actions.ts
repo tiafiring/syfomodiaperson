@@ -17,7 +17,7 @@ export function henterMotebehov() {
   };
 }
 
-export function motebehovHentet(data: Motebehov[]) {
+export function motebehovHentet(data: MotebehovDTO[]) {
   return {
     type: HENT_MOTEBEHOV_HENTET,
     data,
