@@ -1,4 +1,9 @@
-import * as actiontyper from "../../actions/actiontyper";
+import {
+  HENTER_FASTLEGER,
+  FASTLEGER_HENTET,
+  FASTLEGER_IKKE_FUNNET,
+  HENT_FASTLEGER_FEILET,
+} from "./fastleger_actions";
 
 const initiellState = {
   henter: false,
@@ -12,7 +17,7 @@ const initiellState = {
 
 export default function fastleger(state = initiellState, action) {
   switch (action.type) {
-    case actiontyper.HENTER_FASTLEGER: {
+    case HENTER_FASTLEGER: {
       return Object.assign({}, state, {
         henter: true,
         hentet: false,
@@ -21,7 +26,7 @@ export default function fastleger(state = initiellState, action) {
         data: [],
       });
     }
-    case actiontyper.FASTLEGER_HENTET: {
+    case FASTLEGER_HENTET: {
       if (action.data.length > 0) {
         const aktiv = action.data.filter((lege) => {
           return (
@@ -48,13 +53,13 @@ export default function fastleger(state = initiellState, action) {
         ikkeFunnet: true,
       });
     }
-    case actiontyper.FASTLEGER_IKKE_FUNNET: {
+    case FASTLEGER_IKKE_FUNNET: {
       return Object.assign({}, state, {
         henter: false,
         ikkeFunnet: true,
       });
     }
-    case actiontyper.HENT_FASTLEGER_FEILET: {
+    case HENT_FASTLEGER_FEILET: {
       return Object.assign({}, state, {
         henter: false,
         hentingFeilet: true,

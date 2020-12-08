@@ -2,7 +2,10 @@ import { expect } from "chai";
 import { put, call } from "redux-saga/effects";
 import { get } from "../../src/api";
 import { hentLedere } from "../../src/data/leder/ledereSagas";
-import { HENTER_LEDERE, LEDERE_HENTET } from "../../src/actions/actiontyper";
+import {
+  HENTER_LEDERE,
+  LEDERE_HENTET,
+} from "../../src/data/leder/ledere_actions";
 
 describe("ledereSagas", () => {
   beforeEach(() => {

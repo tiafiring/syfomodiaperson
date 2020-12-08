@@ -1,4 +1,4 @@
-import * as actions from "../../actions/actiontyper";
+import * as actions from "./moter_actions";
 import { konverterTid } from "../../utils/datoUtils";
 
 const defaultState = {

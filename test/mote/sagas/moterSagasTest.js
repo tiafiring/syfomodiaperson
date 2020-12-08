@@ -28,7 +28,7 @@ describe("moterSagas", () => {
     });
 
     it("Skal dispatche OPPRETTER_MOTE", () => {
-      const nextPut = put({ type: "OPPRETTER_MOTE" });
+      const nextPut = put({ type: actions.OPPRETTER_MOTE });
       expect(generator.next().value).to.deep.equal(nextPut);
     });
 
@@ -47,7 +47,7 @@ describe("moterSagas", () => {
     });
 
     it("Skal dispatche HENTER_MOTER", () => {
-      const nextPut = put({ type: "HENTER_MOTER" });
+      const nextPut = put({ type: actions.HENTER_MOTER });
       expect(generator.next().value).to.deep.equal(nextPut);
     });
 
@@ -61,7 +61,7 @@ describe("moterSagas", () => {
 
     it("Skal dispatche MOTER_HENTET", () => {
       const nextPut = put({
-        type: "MOTER_HENTET",
+        type: actions.MOTER_HENTET,
         data: [{ id: 1 }],
       });
       expect(generator.next([{ id: 1 }]).value).to.deep.equal(nextPut);
@@ -74,7 +74,7 @@ describe("moterSagas", () => {
 
     it("Skal dispatche AVBRYTER_MOTE", () => {
       const nextPut = put({
-        type: "AVBRYTER_MOTE",
+        type: actions.AVBRYTER_MOTE,
         uuid: "min-fine-mote-uuid",
       });
       expect(generator.next().value).to.deep.equal(nextPut);
@@ -90,7 +90,7 @@ describe("moterSagas", () => {
 
     it("Skal dispatche MOTE_AVBRUTT", () => {
       const nextPut = put({
-        type: "MOTE_AVBRUTT",
+        type: actions.MOTE_AVBRUTT,
         uuid: "min-fine-mote-uuid",
       });
       expect(generator.next().value).to.deep.equal(nextPut);
@@ -103,7 +103,7 @@ describe("moterSagas", () => {
 
     it("Skal dispatche AVBRYTER_MOTE", () => {
       const nextPut = put({
-        type: "AVBRYTER_MOTE",
+        type: actions.AVBRYTER_MOTE,
         uuid: "min-fine-mote-uuid",
       });
       expect(generator.next().value).to.deep.equal(nextPut);
@@ -119,7 +119,7 @@ describe("moterSagas", () => {
 
     it("Skal dispatche MOTE_AVBRUTT", () => {
       const nextPut = put({
-        type: "MOTE_AVBRUTT",
+        type: actions.MOTE_AVBRUTT,
         uuid: "min-fine-mote-uuid",
       });
       expect(generator.next().value).to.deep.equal(nextPut);
@@ -168,7 +168,7 @@ describe("moterSagas", () => {
     const generator = bekreftMote(action);
 
     it("Skal dispatche BEKREFTER_MOTE", () => {
-      const nextPut = put({ type: "BEKREFTER_MOTE" });
+      const nextPut = put({ type: actions.BEKREFTER_MOTE });
       expect(generator.next().value).to.deep.equal(nextPut);
     });
 
@@ -184,7 +184,7 @@ describe("moterSagas", () => {
       const date = new Date(2017, 3, 1);
       const clock = sinon.useFakeTimers(date.getTime());
       const nextPut = put({
-        type: "MOTE_BEKREFTET",
+        type: actions.MOTE_BEKREFTET,
         moteUuid: "olsen",
         valgtAlternativId: 998877,
         bekreftetTidspunkt: date,

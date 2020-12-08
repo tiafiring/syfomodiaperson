@@ -94,27 +94,30 @@ export function* opprettFlereAlternativ(action) {
 }
 
 export function* watchOpprettFlereAlternativ() {
-  yield takeEvery("OPPRETT_FLERE_ALTERNATIV_FORESPURT", opprettFlereAlternativ);
+  yield takeEvery(
+    actions.OPPRETT_FLERE_ALTERNATIV_FORESPURT,
+    opprettFlereAlternativ
+  );
 }
 
 function* watchOpprettMote() {
-  yield takeEvery("OPPRETT_MOTE_FORESPURT", opprettMote);
+  yield takeEvery(actions.OPPRETT_MOTE_FORESPURT, opprettMote);
 }
 
 function* watchAvbrytMote() {
-  yield takeEvery("AVBRYT_MOTE_FORESPURT", avbrytMote);
+  yield takeEvery(actions.AVBRYT_MOTE_FORESPURT, avbrytMote);
 }
 
 function* watchBekreftMote() {
-  yield takeEvery("BEKREFT_MOTE_FORESPURT", bekreftMote);
+  yield takeEvery(actions.BEKREFT_MOTE_FORESPURT, bekreftMote);
 }
 
 function* watchHentMoter() {
-  yield takeEvery("HENT_MOTER_FORESPURT", hentMoterHvisIkkeHentet);
+  yield takeEvery(actions.HENT_MOTER_FORESPURT, hentMoterHvisIkkeHentet);
 }
 
 function* watchMoteOpprettet() {
-  yield takeEvery("MOTE_OPPRETTET", hentMoter);
+  yield takeEvery(actions.MOTE_OPPRETTET, hentMoter);
 }
 
 export default function* moterSagas() {

@@ -6,7 +6,7 @@ import {
   HENT_AKTIVBRUKER_FEILET,
   HENTER_AKTIVENHET,
   HENT_AKTIVENHET_FEILET,
-} from "../../actions/actiontyper";
+} from "./modiacontext_actions";
 
 const initiellState = {
   pushet: false,

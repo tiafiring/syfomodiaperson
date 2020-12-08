@@ -1,78 +1,91 @@
-import * as actionstype from "../../actions/actiontyper";
+export const PUSH_MODIACONTEXT_FORESPURT = "PUSH_MODIACONTEXT_FORESPURT";
+export const PUSH_MODIACONTEXT_FEILET = "PUSH_MODIACONTEXT_FEILET";
+export const MODIACONTEXT_PUSHET = "MODIACONTEXT_PUSHET";
+export const PUSHER_MODIACONTEXT = "PUSHER_MODIACONTEXT";
+
+export const HENT_AKTIVBRUKER_FORESPURT = "HENT_AKTIVBRUKER_FORESPURT";
+export const HENTER_AKTIVBRUKER = "HENTER_AKTIVBRUKER";
+export const HENT_AKTIVBRUKER_FEILET = "HENT_AKTIVBRUKER_FEILET";
+export const AKTIVBRUKER_HENTET = "AKTIVBRUKER_HENTET";
+
+export const HENT_AKTIVENHET_FORESPURT = "HENT_AKTIVENHET_FORESPURT";
+export const HENTER_AKTIVENHET = "HENTER_AKTIVENHET";
+export const HENT_AKTIVENHET_FEILET = "HENT_AKTIVENHET_FEILET";
+export const AKTIVENHET_HENTET = "AKTIVENHET_HENTET";
 
 export function hentAktivBruker(data) {
   return {
-    type: actionstype.HENT_AKTIVBRUKER_FORESPURT,
+    type: HENT_AKTIVBRUKER_FORESPURT,
     data,
   };
 }
 
 export function hentAktivBrukerFeilet() {
   return {
-    type: actionstype.HENT_AKTIVBRUKER_FEILET,
+    type: HENT_AKTIVBRUKER_FEILET,
   };
 }
 
 export function henterAktivBruker() {
   return {
-    type: actionstype.HENTER_AKTIVBRUKER,
+    type: HENTER_AKTIVBRUKER,
   };
 }
 
 export function aktivBrukerHentet(data) {
   return {
-    type: actionstype.AKTIVBRUKER_HENTET,
+    type: AKTIVBRUKER_HENTET,
     data,
   };
 }
 
 export function hentAktivEnhet(data) {
   return {
-    type: actionstype.HENT_AKTIVENHET_FORESPURT,
+    type: HENT_AKTIVENHET_FORESPURT,
     data,
   };
 }
 
 export function hentAktivEnhetFeilet() {
   return {
-    type: actionstype.HENT_AKTIVENHET_FEILET,
+    type: HENT_AKTIVENHET_FEILET,
   };
 }
 
 export function henterAktivEnhet() {
   return {
-    type: actionstype.HENTER_AKTIVENHET,
+    type: HENTER_AKTIVENHET,
   };
 }
 
 export function aktivEnhetHentet(data) {
   return {
-    type: actionstype.AKTIVENHET_HENTET,
+    type: AKTIVENHET_HENTET,
     data,
   };
 }
 
 export function pushModiaContextFeilet() {
   return {
-    type: actionstype.PUSH_MODIACONTEXT_FEILET,
+    type: PUSH_MODIACONTEXT_FEILET,
   };
 }
 
 export function pusherModiaContext() {
   return {
-    type: actionstype.PUSHER_MODIACONTEXT,
+    type: PUSHER_MODIACONTEXT,
   };
 }
 
 export function pushModiaContext(data) {
   return {
-    type: actionstype.PUSH_MODIACONTEXT_FORESPURT,
+    type: PUSH_MODIACONTEXT_FORESPURT,
     data,
   };
 }
 
 export function modiaContextPushet() {
   return {
-    type: actionstype.MODIACONTEXT_PUSHET,
+    type: MODIACONTEXT_PUSHET,
   };
 }

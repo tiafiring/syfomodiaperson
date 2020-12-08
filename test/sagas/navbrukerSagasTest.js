@@ -5,7 +5,7 @@ import { hentNavbruker } from "../../src/data/navbruker/navbrukerSagas";
 import {
   HENTER_NAVBRUKER,
   NAVBRUKER_HENTET,
-} from "../../src/actions/actiontyper";
+} from "../../src/data/navbruker/navbruker_actions";
 
 describe("navbrukerSagas", () => {
   beforeEach(() => {

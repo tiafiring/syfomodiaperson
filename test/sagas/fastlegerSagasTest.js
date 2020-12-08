@@ -5,7 +5,7 @@ import { hentFastleger } from "../../src/data/fastlege/fastlegerSagas";
 import {
   HENTER_FASTLEGER,
   FASTLEGER_HENTET,
-} from "../../src/actions/actiontyper";
+} from "../../src/data/fastlege/fastleger_actions";
 
 describe("fastlegerSagas", () => {
   beforeEach(() => {

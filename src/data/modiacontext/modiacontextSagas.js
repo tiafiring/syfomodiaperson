@@ -1,11 +1,6 @@
 import { call, put, fork, takeEvery, all } from "redux-saga/effects";
 import { get, post } from "../../api";
 import * as actions from "./modiacontext_actions";
-import {
-  PUSH_MODIACONTEXT_FORESPURT,
-  HENT_AKTIVBRUKER_FORESPURT,
-  HENT_AKTIVENHET_FORESPURT,
-} from "../../actions/actiontyper";
 
 export function* pushModiacontextSaga(action) {
   yield put(actions.pusherModiaContext());
@@ -44,15 +39,15 @@ export function* aktivEnhetSaga(action) {
 }
 
 function* watchPushModiacontext() {
-  yield takeEvery(PUSH_MODIACONTEXT_FORESPURT, pushModiacontextSaga);
+  yield takeEvery(actions.PUSH_MODIACONTEXT_FORESPURT, pushModiacontextSaga);
 }
 
 function* watchAktivBruker() {
-  yield takeEvery(HENT_AKTIVBRUKER_FORESPURT, aktivBrukerSaga);
+  yield takeEvery(actions.HENT_AKTIVBRUKER_FORESPURT, aktivBrukerSaga);
 }
 
 function* watchAktivEnhet() {
-  yield takeEvery(HENT_AKTIVENHET_FORESPURT, aktivEnhetSaga);
+  yield takeEvery(actions.HENT_AKTIVENHET_FORESPURT, aktivEnhetSaga);
 }
 
 export default function* modiacontextSagas() {

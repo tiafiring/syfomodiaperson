@@ -1,33 +1,37 @@
-import * as actiontyper from "../../actions/actiontyper";
+export const HENT_FASTLEGER_FORESPURT = "HENT_FASTLEGER_FORESPURT";
+export const HENTER_FASTLEGER = "HENTER_FASTLEGER";
+export const HENT_FASTLEGER_FEILET = "HENT_FASTLEGER_FEILET";
+export const FASTLEGER_HENTET = "FASTLEGER_HENTET";
+export const FASTLEGER_IKKE_FUNNET = "FASTLEGER_IKKE_FUNNET";
 
 export function hentFastlegerFeilet() {
   return {
-    type: actiontyper.HENT_FASTLEGER_FEILET,
+    type: HENT_FASTLEGER_FEILET,
   };
 }
 
 export function henterFastleger() {
   return {
-    type: actiontyper.HENTER_FASTLEGER,
+    type: HENTER_FASTLEGER,
   };
 }
 
 export function fastlegerIkkeFunnet() {
   return {
-    type: actiontyper.FASTLEGER_IKKE_FUNNET,
+    type: FASTLEGER_IKKE_FUNNET,
   };
 }
 
 export function fastlegerHentet(data) {
   return {
-    type: actiontyper.FASTLEGER_HENTET,
+    type: FASTLEGER_HENTET,
     data,
   };
 }
 
 export function hentFastleger(fnr) {
   return {
-    type: actiontyper.HENT_FASTLEGER_FORESPURT,
+    type: HENT_FASTLEGER_FORESPURT,
     fnr,
   };
 }

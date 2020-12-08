@@ -1,6 +1,7 @@
 import { expect } from "chai";
 import deepFreeze from "deep-freeze";
 import navbruker from "../../src/data/navbruker/navbruker";
+import * as actions from "../../src/data/navbruker/navbruker_actions";
 
 describe("navbruker", () => {
   it("Returnerer { data: {} } ved initializering", () => {
@@ -13,7 +14,7 @@ describe("navbruker", () => {
   it("Håndterer NAVBRUKER_HENTET når man ikke har data fra før", () => {
     const initialState = deepFreeze({});
     const action = {
-      type: "NAVBRUKER_HENTET",
+      type: actions.NAVBRUKER_HENTET,
       data: {
         navn: "Kurt Nilsen",
       },
@@ -38,7 +39,7 @@ describe("navbruker", () => {
       },
     });
     const action = {
-      type: "NAVBRUKER_HENTET",
+      type: actions.NAVBRUKER_HENTET,
       data: {
         navn: "Kurt Nilsen",
       },
@@ -64,7 +65,7 @@ describe("navbruker", () => {
       },
     });
     const action = {
-      type: "HENT_NAVBRUKER_FORESPURT",
+      type: actions.HENT_NAVBRUKER_FORESPURT,
       fnr: "123456",
     };
     const nextState = navbruker(initialState, action);
@@ -87,7 +88,7 @@ describe("navbruker", () => {
       },
     });
     const action = {
-      type: "HENT_NAVBRUKER_FEILET",
+      type: actions.HENT_NAVBRUKER_FEILET,
     };
     const nextState = navbruker(initialState, action);
     expect(nextState).to.deep.equal({

@@ -1,15 +1,15 @@
 import { call, fork, put, select, takeEvery } from "redux-saga/effects";
 import { get } from "../../api";
-import * as actiontype from "../../actions/actiontyper";
+import * as actions from "./ledere_actions";
 
 export function* hentLedere(action) {
-  yield put({ type: actiontype.HENTER_LEDERE });
+  yield put({ type: actions.HENTER_LEDERE });
   try {
     const path = `${process.env.REACT_APP_REST_ROOT}/internad/allnaermesteledere?fnr=${action.fnr}`;
     const data = yield call(get, path);
-    yield put({ type: actiontype.LEDERE_HENTET, data });
+    yield put({ type: actions.LEDERE_HENTET, data });
   } catch (e) {
-    yield put({ type: actiontype.HENT_LEDERE_FEILET });
+    yield put({ type: actions.HENT_LEDERE_FEILET });
   }
 }
 
@@ -26,7 +26,7 @@ export function* hentLedereHvisIkkeHentet(action) {
 }
 
 function* watchHentLedere() {
-  yield takeEvery(actiontype.HENT_LEDERE_FORESPURT, hentLedereHvisIkkeHentet);
+  yield takeEvery(actions.HENT_LEDERE_FORESPURT, hentLedereHvisIkkeHentet);
 }
 
 export default function* ledereSagas() {

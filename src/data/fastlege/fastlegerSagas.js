@@ -1,7 +1,6 @@
 import { call, fork, put, select, takeEvery } from "redux-saga/effects";
 import { get } from "../../api";
 import * as actions from "./fastleger_actions";
-import * as actiontyper from "../../actions/actiontyper";
 
 export function* hentFastleger(action) {
   yield put(actions.henterFastleger());
@@ -28,7 +27,7 @@ export function* hentFastlegerHvisIkkeHentet(action) {
 
 function* watchHentFastleger() {
   yield takeEvery(
-    actiontyper.HENT_FASTLEGER_FORESPURT,
+    actions.HENT_FASTLEGER_FORESPURT,
     hentFastlegerHvisIkkeHentet
   );
 }

@@ -2,7 +2,7 @@ import {
   HENTER_ARBEIDSGIVEREPOSTINNHOLD,
   ARBEIDSGIVEREPOSTINNHOLD_HENTET,
   HENT_ARBEIDSGIVEREPOSTINNHOLD_FEILET,
-} from "../../actions/actiontyper";
+} from "./arbeidsgiverepostinnhold_actions";
 
 const defaultState = {
   data: {},

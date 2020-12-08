@@ -5,7 +5,7 @@ import {
   HENTER_NAVBRUKER,
   NAVBRUKER_HENTET,
   HENT_NAVBRUKER_FEILET,
-} from "../../actions/actiontyper";
+} from "./navbruker_actions";
 
 export function* hentNavbruker(action) {
   yield put({ type: HENTER_NAVBRUKER });

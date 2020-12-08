@@ -1,17 +1,23 @@
+import {
+  HENT_NAVBRUKER_FORESPURT,
+  NAVBRUKER_HENTET,
+  HENT_NAVBRUKER_FEILET,
+} from "./navbruker_actions";
+
 const defaultState = {
   data: {},
 };
 
 const navbruker = (state = defaultState, action = {}) => {
   switch (action.type) {
-    case "NAVBRUKER_HENTET": {
+    case NAVBRUKER_HENTET: {
       return Object.assign({
         henter: false,
         hentingFeilet: false,
         data: Object.assign({}, state.data, action.data),
       });
     }
-    case "HENT_NAVBRUKER_FORESPURT": {
+    case HENT_NAVBRUKER_FORESPURT: {
       return Object.assign({
         henter: true,
         hentingFeilet: false,
@@ -22,7 +28,7 @@ const navbruker = (state = defaultState, action = {}) => {
         }),
       });
     }
-    case "HENT_NAVBRUKER_FEILET": {
+    case HENT_NAVBRUKER_FEILET: {
       return Object.assign({
         henter: false,
         hentingFeilet: true,

@@ -10,7 +10,7 @@ import {
   HENTER_AKTIVENHET,
   PUSHER_MODIACONTEXT,
   HENTER_AKTIVBRUKER,
-} from "../../src/actions/actiontyper";
+} from "../../src/data/modiacontext/modiacontext_actions";
 
 describe("modiacontextSagas", () => {
   let apiPath;

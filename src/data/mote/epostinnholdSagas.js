@@ -2,7 +2,6 @@ import { call, put, fork, takeEvery, all } from "redux-saga/effects";
 import { get } from "../../api";
 import * as actions from "./epostinnhold_actions";
 import * as arbeidsgiveractions from "./arbeidsgiverepostinnhold_actions";
-import { HENT_BEKREFT_MOTE_ARBEIDSGIVEREPOSTINNHOLD_FORESPURT } from "../../actions/actiontyper";
 
 export function* hentBekreftMoteEpostinnhold(action) {
   yield put(actions.henterEpostInnhold());
@@ -51,7 +50,7 @@ function* watchHentBekreftMoteEpostinnhold() {
 
 function* watchHentBekreftMoteArbeidsgiverEpostinnhold() {
   yield takeEvery(
-    HENT_BEKREFT_MOTE_ARBEIDSGIVEREPOSTINNHOLD_FORESPURT,
+    arbeidsgiveractions.HENT_BEKREFT_MOTE_ARBEIDSGIVEREPOSTINNHOLD_FORESPURT,
     hentBekreftMoteArbeidsgiverEpostinnhold
   );
 }
