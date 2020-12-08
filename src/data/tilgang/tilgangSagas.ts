@@ -2,7 +2,7 @@ import { call, fork, put, takeEvery } from "redux-saga/effects";
 import { get } from "../../api";
 import * as actions from "./tilgang_actions";
 
-export function* sjekkTilgang(action) {
+export function* sjekkTilgang(action: any) {
   yield put(actions.sjekkerTilgang());
   try {
     const path = `${process.env.REACT_APP_TILGANGSKONTROLL_RESTROOT}/tilgang/bruker?fnr=${action.fnr}`;

@@ -22,14 +22,14 @@ export function harTilgang() {
   };
 }
 
-export function harIkkeTilgang(begrunnelse) {
+export function harIkkeTilgang(begrunnelse: string) {
   return {
     type: HAR_IKKE_TILGANG,
     begrunnelse,
   };
 }
 
-export function sjekkTilgang(fnr) {
+export function sjekkTilgang(fnr: string) {
   return {
     type: SJEKK_TILGANG_FORESPURT,
     fnr,

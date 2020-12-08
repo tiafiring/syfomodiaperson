@@ -1,3 +1,4 @@
+import { Reducer } from "redux";
 import {
   SJEKKER_TILGANG,
   HAR_TILGANG,
@@ -5,16 +6,30 @@ import {
   SJEKK_TILGANG_FEILET,
 } from "./tilgang_actions";
 
-const initiellState = {
-  hentet: false,
+export interface Tilgang {
+  harTilgang: boolean;
+}
+
+export interface TilgangState {
+  henter: boolean;
+  hentet: boolean;
+  hentingFeilet: boolean;
+  data: Tilgang;
+}
+
+const initialState: TilgangState = {
   henter: false,
+  hentet: false,
   hentingFeilet: false,
   data: {
     harTilgang: false,
   },
 };
 
-export default function tilgang(state = initiellState, action = {}) {
+const tilgang: Reducer<TilgangState> = (
+  state = initialState,
+  action = { type: "" }
+) => {
   switch (action.type) {
     case SJEKKER_TILGANG: {
       return Object.assign({}, state, {
@@ -53,4 +68,6 @@ export default function tilgang(state = initiellState, action = {}) {
       return state;
     }
   }
-}
+};
+
+export default tilgang;
