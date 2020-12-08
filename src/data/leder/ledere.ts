@@ -1,3 +1,4 @@
+import { Reducer } from "redux";
 import {
   HENTER_LEDERE,
   LEDERE_HENTET,
@@ -9,16 +10,38 @@ import {
   mapTomDateToEarlierLedere,
 } from "../../utils/ledereUtils";
 
-const defaultState = {
-  data: [],
-  formerLedere: [],
-  allLedere: [],
+export interface Leder {
+  aktoerId: string;
+  epost?: string;
+  tlf?: string;
+  navn: string;
+  aktiv: boolean;
+  orgnummer: string;
+  organisasjonsnavn: string;
+  fomDato: Date;
+  aktivTom?: Date;
+  arbeidsgiverForskuttererLoenn?: boolean;
+}
+
+export interface LedereState {
+  henter: boolean;
+  hentet: boolean;
+  hentingFeilet: boolean;
+  data: Leder[];
+  allLedere: Leder[];
+  formerLedere: Leder[];
+}
+
+export const initialState: LedereState = {
   henter: false,
   hentet: false,
   hentingFeilet: false,
+  data: [],
+  allLedere: [],
+  formerLedere: [],
 };
 
-const ledere = (state = defaultState, action = {}) => {
+const ledere: Reducer<LedereState> = (state = initialState, action) => {
   switch (action.type) {
     case LEDERE_HENTET: {
       const ledereWithTomDate = mapTomDateToEarlierLedere(action.data);

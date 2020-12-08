@@ -1,6 +1,7 @@
 import React from "react";
 import Panel from "nav-frontend-paneler";
 import Alertstripe from "nav-frontend-alertstriper";
+import { Leder } from "../../data/leder/ledere";
 import HistorikkEvent from "./HistorikkEvent";
 import AppSpinner from "../AppSpinner";
 import IngenHistorikk from "./IngenHistorikk";
@@ -33,8 +34,8 @@ const hentSykeforloepMedEvents = (periodeliste: any[], eventliste: any[]) => {
   });
 };
 
-const createHistorikkEventsFromLedere = (ledere: any[]) => {
-  return ledere.map((leder: any) => {
+const createHistorikkEventsFromLedere = (ledere: Leder[]) => {
+  return ledere.map((leder) => {
     return {
       opprettetAv: leder.organisasjonsnavn,
       tekst: `${leder.organisasjonsnavn} har oppgitt ${leder.navn} som nærmeste leder`,
@@ -85,7 +86,7 @@ const TidligereHendelser = (
 
 interface HistorikkProps {
   historikk: any;
-  ledere: any[];
+  ledere: Leder[];
   oppfolgingstilfelleperioder: any;
 }
 

@@ -8,18 +8,6 @@ import {
 } from "../../src/data/leder/ledere_actions";
 
 describe("ledere", () => {
-  it("Returnerer { data: [] } ved initializering", () => {
-    const nextState = ledere();
-    expect(nextState).to.deep.equal({
-      data: [],
-      formerLedere: [],
-      allLedere: [],
-      henter: false,
-      hentet: false,
-      hentingFeilet: false,
-    });
-  });
-
   it(`håndterer ${LEDERE_HENTET}`, () => {
     const initialState = deepFreeze({});
     const action = {

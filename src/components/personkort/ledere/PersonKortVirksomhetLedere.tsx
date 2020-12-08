@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Row, Column } from "nav-frontend-grid";
 import { EtikettLiten } from "nav-frontend-typografi";
+import { Leder } from "../../../data/leder/ledere";
 import { restdatoTildato } from "../../../utils/datoUtils";
 import PersonKortVirksomhetHeader from "./PersonKortVirksomhetHeader";
 
@@ -44,7 +45,7 @@ export const PersonKortVirksomhetLederIngressRow = () => {
 
 interface PersonKortVirksomhetLederColumnProps {
   colSize: number;
-  text: string;
+  text?: string;
   isActive: boolean;
 }
 
@@ -60,7 +61,7 @@ export const PersonKortVirksomhetLederColumn = (
 };
 
 interface PersonKortVirksomhetLederRowProps {
-  leder: any;
+  leder: Leder;
   isActive: boolean;
 }
 
@@ -124,15 +125,17 @@ const PersonKortVirksomhetLedere = (
       sykmeldinger={sykmeldinger}
     >
       <PersonKortVirksomhetLederIngressRow />
-      {virksomhetLederMap[virksomhetsnummer].map((leder: any, idx: number) => {
-        return (
-          <PersonKortVirksomhetLederRow
-            key={idx}
-            leder={leder}
-            isActive={idx === 0}
-          />
-        );
-      })}
+      {virksomhetLederMap[virksomhetsnummer].map(
+        (leder: Leder, idx: number) => {
+          return (
+            <PersonKortVirksomhetLederRow
+              key={idx}
+              leder={leder}
+              isActive={idx === 0}
+            />
+          );
+        }
+      )}
     </PersonKortVirksomhetHeader>
   );
 };

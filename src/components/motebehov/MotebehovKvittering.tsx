@@ -1,14 +1,15 @@
 import React from "react";
+import { Leder } from "../../data/leder/ledere";
 import { finnArbeidstakerMotebehovSvar } from "../../utils/motebehovUtils";
 import { tilLesbarDatoMedArUtenManedNavn } from "../../utils/datoUtils";
 
-export const lederMedGittAktorId = (aktorId: string, ledere: any) => {
-  return ledere.find((leder: any) => {
+export const lederMedGittAktorId = (aktorId: string, ledere: Leder[]) => {
+  return ledere.find((leder) => {
     return leder.aktoerId === aktorId;
   });
 };
 
-export const arbeidsgiverNavnEllerTomStreng = (leder: any) => {
+export const arbeidsgiverNavnEllerTomStreng = (leder?: Leder) => {
   return leder && leder.navn ? `${leder.navn}` : "";
 };
 
@@ -65,7 +66,7 @@ export const bareArbeidsgiversMotebehov = (motebehov: any) => {
 };
 
 export const setArbeidsgiverTekst = (
-  leder: any,
+  leder?: Leder,
   arbeidsgiverOnskerMote?: any
 ) => {
   const arbeidsgiverNavn = arbeidsgiverNavnEllerTomStreng(leder);
@@ -145,7 +146,7 @@ export const MotebehovKvitteringInnholdArbeidstaker = (
 
 interface MotebehovKvitteringInnholdArbeidsgiverProps {
   motebehovListeMedBareArbeidsgiversMotebehov: any[];
-  ledereData: any[];
+  ledereData: Leder[];
 }
 
 export const MotebehovKvitteringInnholdArbeidsgiver = (
@@ -195,7 +196,7 @@ export const MotebehovKvitteringInnholdArbeidsgiverUtenMotebehov = (
   } = motebehovKvitteringInnholdArbeidsgiverUtenMotebehovProps;
   return (
     <>
-      {ledereUtenInnsendtMotebehov.map((leder: any, index: number) => {
+      {ledereUtenInnsendtMotebehov.map((leder: Leder, index: number) => {
         const ikonAltTekst = `Arbeidsgiver ${arbeidsgiverNavnEllerTomStreng(
           leder
         )} ${ikonAlternativTekst(undefined)}`;
@@ -212,7 +213,7 @@ export const MotebehovKvitteringInnholdArbeidsgiverUtenMotebehov = (
 };
 
 interface MotebehovKvitteringProps {
-  ledereData: any[];
+  ledereData: Leder[];
   ledereUtenInnsendtMotebehov: any[];
   motebehovListe: any[];
   sykmeldt: any;

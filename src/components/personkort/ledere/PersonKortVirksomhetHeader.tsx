@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import EtikettBase from "nav-frontend-etiketter";
+import { Leder } from "../../../data/leder/ledere";
 import { formaterOrgnr } from "../../../utils";
 import { lederHasActiveSykmelding } from "../../../utils/ledereUtils";
 import kanskjeBooleanTilJaNeiKanskje from "../kanskjeBooleanTilJaNeiKanskje";
-import { bool } from "prop-types";
 
 const texts = {
   activeSykmelding: "Sykmeldt nå",
@@ -47,7 +47,7 @@ const textForskuttering = (arbeidsgiverForskuttererLoenn?: boolean) => {
 
 interface PersonKortVirksomhetHeaderProps {
   children?: any;
-  currentLeder: any;
+  currentLeder: Leder;
   sykmeldinger: any[];
 }
 

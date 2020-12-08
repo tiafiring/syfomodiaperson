@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { Leder } from "../../data/leder/ledere";
 import { erLokal } from "../../utils/miljoUtil";
 import { hentVirksomhet } from "../../data/virksomhet/virksomhet_actions";
 import BehandleMotebehovKnapp from "./BehandleMotebehovKnapp";
@@ -11,7 +12,7 @@ import UtdragFraSykefravaeret from "./UtdragFraSykefravaeret";
 interface MotebehovProps {
   aktiveDialoger: any[];
   fnr: string;
-  ledereData: any[];
+  ledereData: Leder[];
   ledereUtenInnsendtMotebehov: any[];
   motebehovListe: any[];
   sykmeldt: any;

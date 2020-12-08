@@ -2,7 +2,7 @@ import { call, fork, put, select, takeEvery } from "redux-saga/effects";
 import { get } from "../../api";
 import * as actions from "./ledere_actions";
 
-export function* hentLedere(action) {
+export function* hentLedere(action: any) {
   yield put({ type: actions.HENTER_LEDERE });
   try {
     const path = `${process.env.REACT_APP_REST_ROOT}/internad/allnaermesteledere?fnr=${action.fnr}`;
@@ -13,12 +13,12 @@ export function* hentLedere(action) {
   }
 }
 
-export const skalHenteLedere = (state) => {
+export const skalHenteLedere = (state: any) => {
   const reducer = state.ledere;
   return !(reducer.henter || reducer.hentet || reducer.hentingFeilet);
 };
 
-export function* hentLedereHvisIkkeHentet(action) {
+export function* hentLedereHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHenteLedere);
   if (skalHente) {
     yield hentLedere(action);
