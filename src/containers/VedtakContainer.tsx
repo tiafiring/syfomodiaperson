@@ -2,13 +2,13 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Column, Row } from "nav-frontend-grid";
+import { AlertStripeInfo } from "nav-frontend-alertstriper";
 import { hentVedtak } from "../data/vedtak/vedtak_actions";
 import Side from "../sider/Side";
 import { VedtakDTO } from "../data/vedtak/vedtak";
 import VedtakInfopanel from "../components/vedtak/VedtakInfopanel";
 import styled from "styled-components";
 import { VEDTAK } from "../enums/menypunkter";
-import { AlertStripeFeil } from "nav-frontend-alertstriper";
 import VedtakUnselected from "../components/vedtak/VedtakUnselected";
 import VedtakEmpty from "../components/vedtak/VedtakEmpty";
 import VedtakColumn from "../components/vedtak/VedtakColumn";
@@ -24,7 +24,7 @@ const texts = {
     `,
 };
 
-const StyledAlertStripe = styled(AlertStripeFeil)`
+const StyledAlertStripe = styled(AlertStripeInfo)`
   margin: 0 0.5em 0.5em 0.5em;
 `;
 
