@@ -1,39 +1,52 @@
+import { Reducer } from "redux";
+import { Brukerinfo } from "./types/Brukerinfo";
 import {
   HENT_NAVBRUKER_FORESPURT,
   NAVBRUKER_HENTET,
   HENT_NAVBRUKER_FEILET,
 } from "./navbruker_actions";
 
-const defaultState = {
+export interface NavbrukerState {
+  data: Brukerinfo | {};
+}
+
+export const initialState: NavbrukerState = {
   data: {},
 };
 
-const navbruker = (state = defaultState, action = {}) => {
+const navbruker: Reducer<NavbrukerState> = (state = initialState, action) => {
   switch (action.type) {
     case NAVBRUKER_HENTET: {
-      return Object.assign({
+      return {
         henter: false,
         hentingFeilet: false,
-        data: Object.assign({}, state.data, action.data),
-      });
+        data: {
+          ...state.data,
+          ...action.data,
+        },
+      };
     }
     case HENT_NAVBRUKER_FORESPURT: {
-      return Object.assign({
+      return {
         henter: true,
         hentingFeilet: false,
-        data: Object.assign({}, state.data, {
+        data: {
+          ...state.data,
           kontaktinfo: {
             fnr: action.fnr,
           },
-        }),
-      });
+        },
+      };
     }
     case HENT_NAVBRUKER_FEILET: {
-      return Object.assign({
+      return {
         henter: false,
         hentingFeilet: true,
-        data: Object.assign({}, state.data, action.data),
-      });
+        data: {
+          ...state.data,
+          ...action.data,
+        },
+      };
     }
     default: {
       return state;

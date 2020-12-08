@@ -1,5 +1,6 @@
 import React from "react";
 import EtikettBase from "nav-frontend-etiketter";
+import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
 import { DiskresjonskodeState } from "../../data/diskresjonskode/diskresjonskode";
 import { EgenansattState } from "../../data/egenansatt/egenansatt";
 import {
@@ -41,7 +42,7 @@ const HeaderInfoStartDate = (
 interface PersonkortHeaderProps {
   diskresjonskode: DiskresjonskodeState;
   egenansatt: EgenansattState;
-  navbruker: any;
+  navbruker: Brukerinfo;
   oppfolgingstilfelleperioder: any;
   sykmeldinger: any[];
 }

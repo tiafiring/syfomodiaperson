@@ -4,13 +4,6 @@ import navbruker from "../../src/data/navbruker/navbruker";
 import * as actions from "../../src/data/navbruker/navbruker_actions";
 
 describe("navbruker", () => {
-  it("Returnerer { data: {} } ved initializering", () => {
-    const nextState = navbruker();
-    expect(nextState).to.deep.equal({
-      data: {},
-    });
-  });
-
   it("Håndterer NAVBRUKER_HENTET når man ikke har data fra før", () => {
     const initialState = deepFreeze({});
     const action = {

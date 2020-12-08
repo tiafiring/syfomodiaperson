@@ -7,7 +7,7 @@ import {
   HENT_NAVBRUKER_FEILET,
 } from "./navbruker_actions";
 
-export function* hentNavbruker(action) {
+export function* hentNavbruker(action: any) {
   yield put({ type: HENTER_NAVBRUKER });
   try {
     const path = `${process.env.REACT_APP_REST_ROOT}/internad/brukerinfo?fnr=${action.fnr}`;

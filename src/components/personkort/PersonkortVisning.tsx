@@ -1,6 +1,7 @@
 import React from "react";
 import { PERSONKORTVISNING_TYPE } from "../../konstanter";
 import { BehandlendeEnhet } from "../../data/behandlendeenhet/types/BehandlendeEnhet";
+import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
 import { Leder } from "../../data/leder/ledere";
 import VisningLege from "./PersonkortLege";
 import VisningLedere from "./ledere/PersonkortLedere";
@@ -11,7 +12,7 @@ interface PersonkortVisningProps {
   behandlendeEnhet: BehandlendeEnhet;
   fastleger: any;
   ledere: Leder[];
-  navbruker: any;
+  navbruker: Brukerinfo;
   personadresse: any;
   sykmeldinger: any[];
   visning: string;

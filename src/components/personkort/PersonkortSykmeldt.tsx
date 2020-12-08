@@ -1,4 +1,5 @@
 import React from "react";
+import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
 import PersonkortElement from "./PersonkortElement";
 import PersonkortInformasjon from "./PersonkortInformasjon";
 import { formaterFnr } from "../../utils/fnrUtils";
@@ -18,7 +19,7 @@ const texts = {
 };
 
 interface PersonkortSykmeldtProps {
-  navbruker: any;
+  navbruker: Brukerinfo;
   personadresse: any;
 }
 
