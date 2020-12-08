@@ -13,7 +13,7 @@ export const HENTER_AKTIVENHET = "HENTER_AKTIVENHET";
 export const HENT_AKTIVENHET_FEILET = "HENT_AKTIVENHET_FEILET";
 export const AKTIVENHET_HENTET = "AKTIVENHET_HENTET";
 
-export function hentAktivBruker(data) {
+export function hentAktivBruker(data: any) {
   return {
     type: HENT_AKTIVBRUKER_FORESPURT,
     data,
@@ -32,14 +32,14 @@ export function henterAktivBruker() {
   };
 }
 
-export function aktivBrukerHentet(data) {
+export function aktivBrukerHentet(data: any) {
   return {
     type: AKTIVBRUKER_HENTET,
     data,
   };
 }
 
-export function hentAktivEnhet(data) {
+export function hentAktivEnhet(data: any) {
   return {
     type: HENT_AKTIVENHET_FORESPURT,
     data,
@@ -58,7 +58,7 @@ export function henterAktivEnhet() {
   };
 }
 
-export function aktivEnhetHentet(data) {
+export function aktivEnhetHentet(data: any) {
   return {
     type: AKTIVENHET_HENTET,
     data,
@@ -77,7 +77,7 @@ export function pusherModiaContext() {
   };
 }
 
-export function pushModiaContext(data) {
+export function pushModiaContext(data: any) {
   return {
     type: PUSH_MODIACONTEXT_FORESPURT,
     data,

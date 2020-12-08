@@ -2,7 +2,7 @@ import { call, put, fork, takeEvery, all } from "redux-saga/effects";
 import { get, post } from "../../api";
 import * as actions from "./modiacontext_actions";
 
-export function* pushModiacontextSaga(action) {
+export function* pushModiacontextSaga(action: any) {
   yield put(actions.pusherModiaContext());
   try {
     const path = `${process.env.REACT_APP_CONTEXTHOLDER_ROOT}/context`;
@@ -10,13 +10,13 @@ export function* pushModiacontextSaga(action) {
       verdi: action.data.verdi,
       eventType: action.data.eventType,
     });
-    yield put(actions.modiaContextPushet(action.data));
+    yield put(actions.modiaContextPushet());
   } catch (e) {
     yield put(actions.pushModiaContextFeilet());
   }
 }
 
-export function* aktivBrukerSaga(action) {
+export function* aktivBrukerSaga(action: any) {
   yield put(actions.henterAktivBruker());
   try {
     const path = `${process.env.REACT_APP_CONTEXTHOLDER_ROOT}/context/aktivbruker`;
@@ -27,7 +27,7 @@ export function* aktivBrukerSaga(action) {
   }
 }
 
-export function* aktivEnhetSaga(action) {
+export function* aktivEnhetSaga(action: any) {
   yield put(actions.henterAktivEnhet());
   try {
     const path = `${process.env.REACT_APP_CONTEXTHOLDER_ROOT}/context/aktivenhet`;

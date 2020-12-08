@@ -1,3 +1,4 @@
+import { Reducer } from "redux";
 import {
   PUSHER_MODIACONTEXT,
   PUSH_MODIACONTEXT_FEILET,
@@ -8,7 +9,18 @@ import {
   HENT_AKTIVENHET_FEILET,
 } from "./modiacontext_actions";
 
-const initiellState = {
+export interface ModiaContextState {
+  pushet: boolean;
+  pusher: boolean;
+  pushingFeilet: boolean;
+  henterEnhet: boolean;
+  hentingEnhetFeilet: boolean;
+  henterBruker: boolean;
+  hentingBrukerFeilet: boolean;
+  data: any;
+}
+
+export const initialState: ModiaContextState = {
   pushet: false,
   pusher: false,
   pushingFeilet: false,
@@ -19,7 +31,10 @@ const initiellState = {
   data: {},
 };
 
-export default function modiacontext(state = initiellState, action = {}) {
+const modiacontext: Reducer<ModiaContextState> = (
+  state = initialState,
+  action
+) => {
   switch (action.type) {
     case PUSH_MODIACONTEXT_FEILET: {
       return Object.assign({}, state, {
@@ -70,4 +85,6 @@ export default function modiacontext(state = initiellState, action = {}) {
       return state;
     }
   }
-}
+};
+
+export default modiacontext;
