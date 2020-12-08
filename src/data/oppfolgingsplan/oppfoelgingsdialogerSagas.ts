@@ -2,7 +2,7 @@ import { call, fork, put, select, takeEvery } from "redux-saga/effects";
 import { get } from "../../api";
 import * as actions from "./oppfoelgingsdialoger_actions";
 
-export function* hentOppfoelgingsdialoger(action) {
+export function* hentOppfoelgingsdialoger(action: any) {
   yield put(actions.henterOppfoelgingsdialoger());
   try {
     const path = `${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/v1/oppfolgingsplan/${action.fnr}`;
@@ -13,12 +13,12 @@ export function* hentOppfoelgingsdialoger(action) {
   }
 }
 
-export const skalHenteOppfolgingsplaner = (state) => {
+export const skalHenteOppfolgingsplaner = (state: any) => {
   const reducer = state.oppfoelgingsdialoger;
   return !(reducer.henter || reducer.hentet || reducer.hentingFeilet);
 };
 
-export function* hentOppfolgingsplanerHvisIkkeHentet(action) {
+export function* hentOppfolgingsplanerHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHenteOppfolgingsplaner);
   if (skalHente) {
     yield hentOppfoelgingsdialoger(action);

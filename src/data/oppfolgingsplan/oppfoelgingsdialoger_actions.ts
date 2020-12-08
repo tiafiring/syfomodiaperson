@@ -1,3 +1,5 @@
+import { OppfolgingsplanDTO } from "./oppfoelgingsdialoger";
+
 export const HENT_OPPFOELGINGSDIALOGER_FEILET =
   "HENT_OPPFOELGINGSDIALOGER_FEILET";
 export const HENTER_OPPFOELGINGSDIALOGER = "HENTER_OPPFOELGINGSDIALOGER";
@@ -17,14 +19,14 @@ export function henterOppfoelgingsdialoger() {
   };
 }
 
-export function hentOppfolgingsdialogerHentet(data) {
+export function hentOppfolgingsdialogerHentet(data: OppfolgingsplanDTO[]) {
   return {
     type: OPPFOELGINGSDIALOGER_HENTET,
     data,
   };
 }
 
-export function hentOppfoelgingsdialoger(fnr) {
+export function hentOppfoelgingsdialoger(fnr: string) {
   return {
     type: HENT_OPPFOELGINGSDIALOGER_FORESPURT,
     fnr,

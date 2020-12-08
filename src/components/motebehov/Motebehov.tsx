@@ -4,6 +4,7 @@ import { Leder } from "../../data/leder/ledere";
 import { VeilederinfoDTO } from "../../data/veilederinfo/types/VeilederinfoDTO";
 import { erLokal } from "../../utils/miljoUtil";
 import { hentVirksomhet } from "../../data/virksomhet/virksomhet_actions";
+import { OppfolgingsplanDTO } from "../../data/oppfolgingsplan/oppfoelgingsdialoger";
 import BehandleMotebehovKnapp from "./BehandleMotebehovKnapp";
 import MotebehovKvittering from "./MotebehovKvittering";
 import PrediksjonVisning from "../Prediksjon/PrediksjonVisning";
@@ -11,7 +12,7 @@ import Sidetopp from "../Sidetopp";
 import UtdragFraSykefravaeret from "./UtdragFraSykefravaeret";
 
 interface MotebehovProps {
-  aktiveDialoger: any[];
+  aktiveDialoger: OppfolgingsplanDTO[];
   fnr: string;
   ledereData: Leder[];
   ledereUtenInnsendtMotebehov: any[];

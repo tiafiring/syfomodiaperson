@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { OppfolgingsplanerState } from "../data/oppfolgingsplan/oppfoelgingsdialoger";
 import { MOETEPLANLEGGER } from "../enums/menypunkter";
 import { hentBegrunnelseTekst } from "../utils/tilgangUtils";
 import {
@@ -30,10 +31,10 @@ const texts = {
 const MotebehovSide = () => {
   const fnr = window.location.pathname.split("/")[2];
 
-  const oppfolgingsplanerState = useSelector(
+  const oppfolgingsplanerState: OppfolgingsplanerState = useSelector(
     (state: any) => state.oppfoelgingsdialoger
   );
-  const aktiveDialoger = oppfolgingsplanerState.data.filter((dialog: any) => {
+  const aktiveDialoger = oppfolgingsplanerState.data.filter((dialog) => {
     return (
       dialog.status !== "AVBRUTT" &&
       new Date(dialog.godkjentPlan.gyldighetstidspunkt.tom) > new Date()

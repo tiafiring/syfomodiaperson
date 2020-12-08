@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { OppfolgingsplanerState } from "../../data/oppfolgingsplan/oppfoelgingsdialoger";
 import { AlertStripeInfo } from "nav-frontend-alertstriper";
 import { hentVirksomhet } from "../../data/virksomhet/virksomhet_actions";
 import Sidetopp from "../Sidetopp";
@@ -18,7 +19,7 @@ const AlertStripeDevelopment = styled(AlertStripeInfo)`
 `;
 
 interface MeldingTilArbeidsgiverProps {
-  aktiveDialoger: any;
+  aktiveDialoger: OppfolgingsplanerState[];
   fnr: string;
   oppfolgingstilfelleUtenArbeidsgiver: any;
   oppfolgingstilfelleperioder: any;

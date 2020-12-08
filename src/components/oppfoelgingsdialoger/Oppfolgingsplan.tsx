@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import Knapp from "nav-frontend-knapper";
+import { OppfolgingsplanDTO } from "../../data/oppfolgingsplan/oppfoelgingsdialoger";
 import { hentDokumentinfo } from "../../data/oppfolgingsplan/dokumentinfo_actions";
 import Feilmelding from "../Feilmelding";
 import AppSpinner from "../AppSpinner";
@@ -9,7 +10,7 @@ import AppSpinner from "../AppSpinner";
 interface PlanVisningProps {
   dokumentinfo: any;
   fnr: string;
-  oppfolgingsplan: any;
+  oppfolgingsplan: OppfolgingsplanDTO;
 }
 
 const PlanVisning = (planVisningProps: PlanVisningProps) => {
@@ -73,7 +74,7 @@ const PlanVisning = (planVisningProps: PlanVisningProps) => {
 
 interface OppfolgingsplanProps {
   fnr: string;
-  oppfolgingsplan: any;
+  oppfolgingsplan: OppfolgingsplanDTO;
 }
 
 const Oppfolgingsplan = (oppfolgingsplanWrapperProps: OppfolgingsplanProps) => {

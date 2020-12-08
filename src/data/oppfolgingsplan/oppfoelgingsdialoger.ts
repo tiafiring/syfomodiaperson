@@ -1,3 +1,4 @@
+import { Reducer } from "redux";
 import {
   HENTER_OPPFOELGINGSDIALOGER,
   OPPFOELGINGSDIALOGER_HENTET,
@@ -5,14 +6,53 @@ import {
 } from "./oppfoelgingsdialoger_actions";
 import { VIRKSOMHET_HENTET } from "../virksomhet/virksomhet_actions";
 
-const initiellState = {
+export interface GodkjentPlanGyldighetTidspunktDTO {
+  fom: Date;
+  tom: Date;
+  evalueres: Date;
+}
+
+export interface OPVirksomhetDTO {
+  navn: string;
+  virksomhetsnummer: string;
+}
+
+export interface GodkjentPlanDTO {
+  opprettetTidspunkt: Date;
+  gyldighetstidspunkt: GodkjentPlanGyldighetTidspunktDTO;
+  tvungenGodkjenning: boolean;
+  deltMedNAVTidspunkt: Date;
+  dokumentUuid: string;
+}
+
+export interface OppfolgingsplanDTO {
+  id: number;
+  uuid: string;
+  sistEndretAvAktoerId: string;
+  sistEndretDato: Date;
+  status: string;
+  godkjentPlan: GodkjentPlanDTO;
+  virksomhet: OPVirksomhetDTO;
+}
+
+export interface OppfolgingsplanerState {
+  henter: boolean;
+  hentet: boolean;
+  hentingFeilet: boolean;
+  data: OppfolgingsplanDTO[];
+}
+
+const initialState: OppfolgingsplanerState = {
   henter: false,
   hentet: false,
   hentingFeilet: false,
   data: [],
 };
 
-export default function oppfoelgingsdialoger(state = initiellState, action) {
+const oppfoelgingsdialoger: Reducer<OppfolgingsplanerState> = (
+  state = initialState,
+  action = { type: "" }
+) => {
   switch (action.type) {
     case HENT_OPPFOELGINGSDIALOGER_FEILET: {
       return Object.assign({}, state, {
@@ -57,4 +97,6 @@ export default function oppfoelgingsdialoger(state = initiellState, action) {
       return state;
     }
   }
-}
+};
+
+export default oppfoelgingsdialoger;

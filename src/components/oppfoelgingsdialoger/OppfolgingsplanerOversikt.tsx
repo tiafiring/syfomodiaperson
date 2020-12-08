@@ -13,6 +13,7 @@ import {
 import { hentVirksomhet } from "../../data/virksomhet/virksomhet_actions";
 import OppfolgingsplanerOversiktLPS from "../oppfolgingsplan/lps/OppfolgingsplanerOversiktLPS";
 import { OppfolgingsplanLPS } from "../../data/oppfolgingsplan/types/OppfolgingsplanLPS";
+import { OppfolgingsplanDTO } from "../../data/oppfolgingsplan/oppfoelgingsdialoger";
 
 const texts = {
   titles: {
@@ -44,8 +45,8 @@ const deltMedNavText = (plan: any) => {
 };
 
 interface OppfolgingsplanerOversiktProps {
-  aktiveDialoger: any[];
-  inaktiveDialoger: any[];
+  aktiveDialoger: OppfolgingsplanDTO[];
+  inaktiveDialoger: OppfolgingsplanDTO[];
   fnr: string;
   oppfolgingsplanerLPS: OppfolgingsplanLPS[];
   veilederIdent: string;
@@ -106,7 +107,7 @@ const OppfolgingsplanerOversikt = (
     oppfolgingsplanerLPS.forEach((planLPS) => {
       virksomhetsnummerSet.add(planLPS.virksomhetsnummer);
     });
-    virksomhetsnummerSet.forEach((virksomhetsnummer) => {
+    virksomhetsnummerSet.forEach((virksomhetsnummer: string) => {
       dispatch(hentVirksomhet(virksomhetsnummer));
     });
   }, []);

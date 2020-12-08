@@ -1,6 +1,7 @@
 import React from "react";
 import { Utvidbar } from "@navikt/digisyfo-npm";
 import EtikettBase from "nav-frontend-etiketter";
+import { OppfolgingsplanDTO } from "../../data/oppfolgingsplan/oppfoelgingsdialoger";
 import SykmeldingMotebehovVisning from "./SykmeldingMotebehovVisning";
 import {
   erEkstraInformasjonISykmeldingen,
@@ -47,7 +48,7 @@ export const UtdragFraSykefravaeretHeader = () => {
 
 interface OppfolgingsplanerProps {
   fnr: string;
-  aktiveDialoger: any[];
+  aktiveDialoger: OppfolgingsplanDTO[];
 }
 
 export const Oppfolgingsplaner = (
@@ -263,7 +264,7 @@ export const Samtalereferat = (samtalereferatProps: SamtalereferatProps) => {
 };
 
 interface UtdragFraSykefravaeretProps {
-  aktiveDialoger: any;
+  aktiveDialoger: OppfolgingsplanDTO[];
   fnr: string;
   oppfolgingstilfelleUtenArbeidsgiver?: OppfolgingstilfellePerson;
   oppfolgingstilfelleperioder: any[];
