@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Checkbox } from "nav-frontend-skjema";
+import { VeilederinfoDTO } from "../../data/veilederinfo/types/VeilederinfoDTO";
 import {
   erMotebehovBehandlet,
   harUbehandletMotebehov,
@@ -23,7 +24,7 @@ const behandleMotebehovKnappLabel = (
 interface BehandleMotebehovKnappProps {
   fnr: string;
   motebehovListe: any[];
-  veilederinfo: any;
+  veilederinfo: VeilederinfoDTO;
 }
 
 const BehandleMotebehovKnapp = (

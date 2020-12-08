@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Leder } from "../../data/leder/ledere";
+import { VeilederinfoDTO } from "../../data/veilederinfo/types/VeilederinfoDTO";
 import { erLokal } from "../../utils/miljoUtil";
 import { hentVirksomhet } from "../../data/virksomhet/virksomhet_actions";
 import BehandleMotebehovKnapp from "./BehandleMotebehovKnapp";
@@ -17,7 +18,7 @@ interface MotebehovProps {
   motebehovListe: any[];
   sykmeldt: any;
   motebehovListeMedJaSvarTilOppgavebehandling: any[];
-  veilederinfo: any;
+  veilederinfo: VeilederinfoDTO;
   oppfolgingstilfelleperioder: any[];
   sykmeldinger: any[];
 }

@@ -1,17 +1,29 @@
+import { Reducer } from "redux";
+import { VeilederinfoDTO } from "./types/VeilederinfoDTO";
 import {
   HENTER_VEILEDERINFO,
   VEILEDERINFO_HENTET,
   HENT_VEILEDERINFO_FEILET,
 } from "./veilederinfo_actions";
 
-const initiellState = {
+export interface VeilederinfoState {
+  hentet: boolean;
+  henter: boolean;
+  hentingFeilet: boolean;
+  data: VeilederinfoDTO | {};
+}
+
+export const initialState: VeilederinfoState = {
   hentet: false,
   henter: false,
   hentingFeilet: false,
   data: {},
 };
 
-export default function veilederinfo(state = initiellState, action = {}) {
+const veilederinfo: Reducer<VeilederinfoState> = (
+  state = initialState,
+  action = { type: "" }
+) => {
   switch (action.type) {
     case HENTER_VEILEDERINFO: {
       return Object.assign({}, state, {
@@ -37,4 +49,6 @@ export default function veilederinfo(state = initiellState, action = {}) {
       return state;
     }
   }
-}
+};
+
+export default veilederinfo;

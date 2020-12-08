@@ -1,3 +1,5 @@
+import { VeilederinfoDTO } from "./types/VeilederinfoDTO";
+
 export const HENT_VEILEDERINFO_FORESPURT = "HENT_VEILEDERINFO_FORESPURT";
 export const HENTER_VEILEDERINFO = "HENTER_VEILEDERINFO";
 export const HENT_VEILEDERINFO_FEILET = "HENT_VEILEDERINFO_FEILET";
@@ -15,7 +17,7 @@ export function henterVeilederinfo() {
   };
 }
 
-export function veilederinfoHentet(data) {
+export function veilederinfoHentet(data: VeilederinfoDTO) {
   return {
     type: VEILEDERINFO_HENTET,
     data,
