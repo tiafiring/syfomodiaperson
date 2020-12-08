@@ -1,3 +1,5 @@
+import { Fastlege } from "./types/Fastlege";
+
 export const HENT_FASTLEGER_FORESPURT = "HENT_FASTLEGER_FORESPURT";
 export const HENTER_FASTLEGER = "HENTER_FASTLEGER";
 export const HENT_FASTLEGER_FEILET = "HENT_FASTLEGER_FEILET";
@@ -22,14 +24,14 @@ export function fastlegerIkkeFunnet() {
   };
 }
 
-export function fastlegerHentet(data) {
+export function fastlegerHentet(data: Fastlege) {
   return {
     type: FASTLEGER_HENTET,
     data,
   };
 }
 
-export function hentFastleger(fnr) {
+export function hentFastleger(fnr: string) {
   return {
     type: HENT_FASTLEGER_FORESPURT,
     fnr,

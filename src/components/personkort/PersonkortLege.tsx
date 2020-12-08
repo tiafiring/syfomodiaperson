@@ -3,6 +3,8 @@ import { restdatoTilLesbarDato } from "../../utils/datoUtils";
 import PersonkortFeilmelding from "./PersonkortFeilmelding";
 import PersonkortElement from "./PersonkortElement";
 import PersonkortInformasjon from "./PersonkortInformasjon";
+import { FastlegerState } from "../../data/fastlege/fastleger";
+import { Fastlege } from "../../data/fastlege/types/Fastlege";
 
 const texts = {
   startDate: "Brukers fastlege siden",
@@ -12,11 +14,11 @@ const texts = {
     "Det kan hende brukeren ikke har en fastlege. Ta kontakt med brukeren for å få behandlers kontaktopplysninger.",
 };
 
-export const hentTekstFastlegeNavn = (fastlege: any) => {
+export const hentTekstFastlegeNavn = (fastlege?: Fastlege) => {
   return fastlege ? `${fastlege.fornavn} ${fastlege.etternavn}` : "";
 };
 
-const tidligereLegerTekst = (fastlege: any) => {
+const tidligereLegerTekst = (fastlege: Fastlege) => {
   return `${restdatoTilLesbarDato(
     fastlege.pasientforhold.fom
   )} - ${restdatoTilLesbarDato(
@@ -25,12 +27,12 @@ const tidligereLegerTekst = (fastlege: any) => {
 };
 
 interface TidligereLegerProps {
-  tidligereFastleger: any[];
+  tidligereFastleger: Fastlege[];
 }
 
 export const TidligereLeger = (tidligereLegerProps: TidligereLegerProps) => {
   const { tidligereFastleger } = tidligereLegerProps;
-  const fastlegerMedPasientforhold = tidligereFastleger.filter((lege: any) => {
+  const fastlegerMedPasientforhold = tidligereFastleger.filter((lege) => {
     return lege.pasientforhold;
   });
   return fastlegerMedPasientforhold.length > 0 ? (
@@ -48,7 +50,7 @@ export const TidligereLeger = (tidligereLegerProps: TidligereLegerProps) => {
 };
 
 interface PersonkortLegeProps {
-  fastleger: any;
+  fastleger: FastlegerState;
 }
 
 const PersonkortLege = (personkortLegeProps: PersonkortLegeProps) => {
@@ -60,12 +62,12 @@ const PersonkortLege = (personkortLegeProps: PersonkortLegeProps) => {
   ]);
   const aktivFastlege = fastleger.aktiv;
   const valgteElementerKontor =
-    aktivFastlege.fastlegekontor &&
+    aktivFastlege?.fastlegekontor &&
     (({ navn, telefon }) => {
       return { navn, telefon };
     })(aktivFastlege.fastlegekontor);
   const valgteElementerPasientforhold =
-    aktivFastlege.pasientforhold &&
+    aktivFastlege?.pasientforhold &&
     (({ fom }) => {
       return { fom };
     })(

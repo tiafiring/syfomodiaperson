@@ -1,3 +1,5 @@
+import { Reducer } from "redux";
+import { Fastlege } from "./types/Fastlege";
 import {
   HENTER_FASTLEGER,
   FASTLEGER_HENTET,
@@ -5,17 +7,27 @@ import {
   HENT_FASTLEGER_FEILET,
 } from "./fastleger_actions";
 
-const initiellState = {
+export interface FastlegerState {
+  henter: boolean;
+  hentet: boolean;
+  ikkeFunnet: boolean;
+  hentingFeilet: boolean;
+  data: Fastlege[];
+  aktiv?: Fastlege;
+  tidligere: Fastlege[];
+}
+
+export const initialState: FastlegerState = {
   henter: false,
   hentet: false,
   ikkeFunnet: false,
   hentingFeilet: false,
   data: [],
-  aktiv: {},
+  aktiv: undefined,
   tidligere: [],
 };
 
-export default function fastleger(state = initiellState, action) {
+const fastleger: Reducer<FastlegerState> = (state = initialState, action) => {
   switch (action.type) {
     case HENTER_FASTLEGER: {
       return {
@@ -29,14 +41,14 @@ export default function fastleger(state = initiellState, action) {
     }
     case FASTLEGER_HENTET: {
       if (action.data.length > 0) {
-        const aktiv = action.data.filter((lege) => {
+        const aktiv = action.data.filter((lege: Fastlege) => {
           return (
             new Date(lege.pasientforhold.fom) < new Date() &&
             new Date(lege.pasientforhold.tom) > new Date()
           );
         })[0];
 
-        const tidligere = action.data.filter((lege) => {
+        const tidligere = action.data.filter((lege: Fastlege) => {
           return new Date(lege.pasientforhold.tom) < new Date();
         });
         return Object.assign({}, state, {
@@ -74,4 +86,6 @@ export default function fastleger(state = initiellState, action) {
       return state;
     }
   }
-}
+};
+
+export default fastleger;

@@ -2,6 +2,7 @@ import React from "react";
 import { PERSONKORTVISNING_TYPE } from "../../konstanter";
 import { BehandlendeEnhet } from "../../data/behandlendeenhet/types/BehandlendeEnhet";
 import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
+import { FastlegerState } from "../../data/fastlege/fastleger";
 import { Leder } from "../../data/leder/ledere";
 import VisningLege from "./PersonkortLege";
 import VisningLedere from "./ledere/PersonkortLedere";
@@ -10,7 +11,7 @@ import VisningEnhet from "./PersonkortEnhet";
 
 interface PersonkortVisningProps {
   behandlendeEnhet: BehandlendeEnhet;
-  fastleger: any;
+  fastleger: FastlegerState;
   ledere: Leder[];
   navbruker: Brukerinfo;
   personadresse: any;
