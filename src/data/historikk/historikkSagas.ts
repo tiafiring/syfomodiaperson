@@ -2,7 +2,7 @@ import { call, put, fork, takeEvery } from "redux-saga/effects";
 import { get } from "../../api";
 import * as actions from "./historikk_actions";
 
-export function* hentHistorikkOppfoelgingsdialog(action) {
+export function* hentHistorikkOppfoelgingsdialog(action: any) {
   yield put(actions.henterHistorikk("OPPFOELGINGSDIALOG"));
   try {
     const path = `${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/v1/oppfolgingsplan/${action.fnr}/historikk`;
@@ -13,7 +13,7 @@ export function* hentHistorikkOppfoelgingsdialog(action) {
   }
 }
 
-export function* hentHistorikkMoter(action) {
+export function* hentHistorikkMoter(action: any) {
   yield put(actions.henterHistorikk("MOTER"));
   try {
     const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/historikk?fnr=${action.fnr}`;
@@ -24,7 +24,7 @@ export function* hentHistorikkMoter(action) {
   }
 }
 
-export function* hentHistorikkMotebehov(action) {
+export function* hentHistorikkMotebehov(action: any) {
   yield put(actions.henterHistorikk("MOTEBEHOV"));
   try {
     const path = `${process.env.REACT_APP_SYFOMOTEBEHOV_ROOT}/internad/veileder/historikk?fnr=${action.fnr}`;
