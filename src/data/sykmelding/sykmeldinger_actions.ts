@@ -1,3 +1,5 @@
+import { SykmeldingNewFormatDTO } from "./types/SykmeldingNewFormatDTO";
+
 export const HENT_SYKMELDINGER_FEILET = "HENT_SYKMELDINGER_FEILET";
 export const HENTER_SYKMELDINGER = "HENTER_SYKMELDINGER";
 export const SYKMELDINGER_SORTERT = "SYKMELDINGER_SORTERT";
@@ -16,7 +18,7 @@ export function henterSykmeldinger() {
   };
 }
 
-export function sorterSykmeldinger(kriterium, status) {
+export function sorterSykmeldinger(kriterium: string, status: string) {
   return {
     type: SYKMELDINGER_SORTERT,
     kriterium,
@@ -24,14 +26,17 @@ export function sorterSykmeldinger(kriterium, status) {
   };
 }
 
-export function hentSykmeldinger(fnr) {
+export function hentSykmeldinger(fnr: string) {
   return {
     type: HENT_SYKMELDINGER_FORESPURT,
     fnr,
   };
 }
 
-export function sykmeldingerHentet(data, fnr) {
+export function sykmeldingerHentet(
+  data: SykmeldingNewFormatDTO[],
+  fnr: string
+) {
   return {
     type: SYKMELDINGER_HENTET,
     data,

@@ -1,3 +1,5 @@
+import { Reducer } from "redux";
+import { SykmeldingOldFormat } from "./types/SykmeldingOldFormat";
 import {
   newSMFormat2OldFormat,
   oldFormatSMForAG,
@@ -8,8 +10,17 @@ import {
   SYKMELDINGER_HENTET,
   SYKMELDINGER_SORTERT,
 } from "./sykmeldinger_actions";
+import { SykmeldingNewFormatDTO } from "./types/SykmeldingNewFormatDTO";
 
-const initiellState = {
+export interface SykmeldingerState {
+  henter: boolean;
+  hentingFeilet: boolean;
+  hentet: boolean;
+  data: SykmeldingOldFormat[];
+  arbeidsgiverssykmeldinger: SykmeldingOldFormat[];
+}
+
+const initialState: SykmeldingerState = {
   henter: false,
   hentingFeilet: false,
   hentet: false,
@@ -17,7 +28,10 @@ const initiellState = {
   arbeidsgiverssykmeldinger: [],
 };
 
-export default function sykmeldinger(state = initiellState, action = {}) {
+const sykmeldinger: Reducer<SykmeldingerState> = (
+  state = initialState,
+  action = { type: "" }
+) => {
   switch (action.type) {
     case HENT_SYKMELDINGER_FEILET: {
       return Object.assign({}, state, {
@@ -42,21 +56,19 @@ export default function sykmeldinger(state = initiellState, action = {}) {
         henter: false,
         hentingFeilet: false,
         hentet: true,
-        data: action.data.map((sykmelding) => {
+        data: action.data.map((sykmelding: SykmeldingNewFormatDTO) => {
           return newSMFormat2OldFormat(sykmelding, action.fnr);
         }),
-        arbeidsgiverssykmeldinger: action.data.map((sykmelding) => {
-          return oldFormatSMForAG(sykmelding, action.fnr);
-        }),
+        arbeidsgiverssykmeldinger: action.data.map(
+          (sykmelding: SykmeldingNewFormatDTO) => {
+            return oldFormatSMForAG(sykmelding, action.fnr);
+          }
+        ),
       };
     }
     case SYKMELDINGER_SORTERT: {
-      let sortering = {};
+      let sortering = {} as any;
       sortering[action.status] = action.kriterium;
-      sortering = {
-        ...state.sortering,
-        ...sortering,
-      };
       return {
         ...state,
         sortering,
@@ -66,4 +78,6 @@ export default function sykmeldinger(state = initiellState, action = {}) {
       return state;
     }
   }
-}
+};
+
+export default sykmeldinger;
