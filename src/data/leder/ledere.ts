@@ -4,11 +4,7 @@ import {
   LEDERE_HENTET,
   HENT_LEDERE_FEILET,
 } from "./ledere_actions";
-import {
-  currentLedere,
-  formerLedere,
-  mapTomDateToEarlierLedere,
-} from "../../utils/ledereUtils";
+import { currentLedere, formerLedere } from "../../utils/ledereUtils";
 
 export interface Leder {
   aktoerId: string;
@@ -44,11 +40,10 @@ export const initialState: LedereState = {
 const ledere: Reducer<LedereState> = (state = initialState, action) => {
   switch (action.type) {
     case LEDERE_HENTET: {
-      const ledereWithTomDate = mapTomDateToEarlierLedere(action.data);
       return {
-        data: currentLedere(ledereWithTomDate),
-        formerLedere: formerLedere(ledereWithTomDate),
-        allLedere: ledereWithTomDate,
+        data: currentLedere(action.data),
+        formerLedere: formerLedere(action.data),
+        allLedere: action.data,
         henter: false,
         hentet: true,
         hentingFeilet: false,

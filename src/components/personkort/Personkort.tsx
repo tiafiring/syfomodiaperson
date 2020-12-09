@@ -46,7 +46,7 @@ const Personkort = () => {
   const dispatch = useDispatch();
 
   const ledereState = useSelector((state: any) => state.ledere);
-  const ledere = ledereState.data;
+  const ledere = ledereState.allLedere;
   const navbrukerState = useSelector((state: any) => state.navbruker);
   const navbruker = navbrukerState.data;
 
