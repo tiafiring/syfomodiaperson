@@ -667,13 +667,13 @@
     "id": "444148ba-4c3c-4b3f-b7a3-385b7e7c927d",
     "mottattTidspunkt": "2020-08-10T23:00:00Z",
     "behandlingsutfall": {
-      "status": "INVALID",
+      "status": "MANUAL_PROCESSING",
       "ruleHits": [
         {
-          "messageForSender": "Sykmeldingen kan ikke rettes, det må skrives en ny. Pasienten har fått beskjed om å vente på ny sykmelding fra deg. Grunnet følgende:Kodeverk for hoveddiagnose er feil eller mangler.",
-          "messageForUser": "Den må ha riktig kode for hoveddiagnose.",
-          "ruleName": "UGYLDIG_KODEVERK_FOR_HOVEDDIAGNOSE",
-          "ruleStatus": "INVALID"
+          "messageForSender": "Behandlers TSS-ident er ikke funnet automatisk av systemet",
+          "messageForUser": "Behandlers TSS-ident er ikke funnet automatisk av systemet",
+          "ruleName": "TSS_IDENT_MANGLER",
+          "ruleStatus": "MANUAL_PROCESSING"
         }
       ]
     },

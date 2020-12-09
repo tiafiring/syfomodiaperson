@@ -6,7 +6,7 @@ export enum ArbeidssituasjonType {
   ANNET = "ANNET",
 }
 
-export enum SykmeldingStatuser {
+export enum SykmeldingStatus {
   NY = "NY",
   SENDT = "SENDT",
   UTGAATT = "UTGAATT",
@@ -57,7 +57,7 @@ export interface SykmeldingOldFormat {
   startLegemeldtFravaer: string | null;
   skalViseSkravertFelt: boolean;
   identdato: string;
-  status: SykmeldingStatuser;
+  status: SykmeldingStatus;
   naermesteLederStatus: string | null;
   erEgenmeldt?: boolean | null;
   erPapirsykmelding?: boolean | null;

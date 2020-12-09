@@ -1,12 +1,15 @@
 import React from "react";
-import { sykmelding as sykmeldingPt } from "@navikt/digisyfo-npm";
+import {
+  SykmeldingOldFormat,
+  SykmeldingStatus,
+} from "../../data/sykmelding/types/SykmeldingOldFormat";
 import { tilLesbarDatoMedArstall } from "../../utils/datoUtils";
 import { Frilansersporsmal } from "./SykmeldingStatuspanelOpplysning";
 import Statuspanel, {
   StatusNokkelopplysning,
   Statusopplysninger,
 } from "../Statuspanel";
-import AngreBekreftSykmelding from "../../connected-components/AngreBekreftSykmelding";
+import AngreBekreftSykmelding from "../sykmeldinger/AngreBekreftSykmelding";
 import { tilStorForbokstav } from "../../utils";
 
 const texts = {
@@ -32,7 +35,7 @@ const texts = {
   },
 };
 
-const textArbeidssituasjon = (arbeidssituasjon) => {
+const textArbeidssituasjon = (arbeidssituasjon: string) => {
   switch (arbeidssituasjon) {
     case "frilanser":
       return texts.status.frilanser[0];
@@ -61,7 +64,7 @@ const textArbeidssituasjon = (arbeidssituasjon) => {
   }
 };
 
-const textStatus = (status) => {
+const textStatus = (status: SykmeldingStatus) => {
   switch (status) {
     case "AVBRUTT":
       return texts.avbrutt;
@@ -76,7 +79,14 @@ const textStatus = (status) => {
   }
 };
 
-const BekreftetSykmeldingStatuspanel = ({ sykmelding }) => {
+interface BekreftetSykmeldingStatuspanelProps {
+  sykmelding: SykmeldingOldFormat;
+}
+
+const BekreftetSykmeldingStatuspanel = (
+  bekreftetSykmeldingStatuspanelProps: BekreftetSykmeldingStatuspanelProps
+) => {
+  const { sykmelding } = bekreftetSykmeldingStatuspanelProps;
   return (
     <Statuspanel>
       <Statusopplysninger>
@@ -90,7 +100,7 @@ const BekreftetSykmeldingStatuspanel = ({ sykmelding }) => {
           <p className="js-arbeidssituasjon">
             {tilStorForbokstav(
               textArbeidssituasjon(
-                `${sykmelding.valgtArbeidssituasjon.toLowerCase()}.2`
+                `${sykmelding.valgtArbeidssituasjon?.toLowerCase()}.2`
               )
             )}
           </p>
@@ -100,10 +110,6 @@ const BekreftetSykmeldingStatuspanel = ({ sykmelding }) => {
       <AngreBekreftSykmelding sykmelding={sykmelding} />
     </Statuspanel>
   );
-};
-
-BekreftetSykmeldingStatuspanel.propTypes = {
-  sykmelding: sykmeldingPt,
 };
 
 export default BekreftetSykmeldingStatuspanel;
