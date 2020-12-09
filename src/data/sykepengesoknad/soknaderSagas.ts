@@ -2,7 +2,7 @@ import { call, fork, put, select, takeEvery } from "redux-saga/effects";
 import { get } from "../../api";
 import * as actions from "./soknader_actions";
 
-export function* hentSoknader(action) {
+export function* hentSoknader(action: any) {
   const fnr = action.fnr ? action.fnr : "";
   yield put(actions.henterSoknader());
   try {
@@ -14,12 +14,12 @@ export function* hentSoknader(action) {
   }
 }
 
-export const skalHenteSoknader = (state) => {
+export const skalHenteSoknader = (state: any) => {
   const reducer = state.soknader;
   return !(reducer.henter || reducer.hentet || reducer.hentingFeilet);
 };
 
-export function* hentSoknaderHvisIkkeHentet(action) {
+export function* hentSoknaderHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHenteSoknader);
   if (skalHente) {
     yield hentSoknader(action);

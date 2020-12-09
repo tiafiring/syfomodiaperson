@@ -1,10 +1,10 @@
 export enum VisningskriterieDTO {
-  NEI = NEI,
+  NEI = "NEI",
   JA = "JA",
   CHECKED = "CHECKED",
 }
 
-export enum SvarTypeTO {
+export enum SvarTypeDTO {
   JA_NEI = "JA_NEI",
   DATO = "DATO",
   TIMER = "TIMER",
@@ -37,10 +37,10 @@ export interface SporsmalDTO {
   tag: string;
   sporsmalstekst?: string;
   undertekst?: string;
-  svartype?: SvarTypeTO;
-  min?: string;
-  max?: String;
-  pavirkerAndreSporsmal: Boolean;
+  svartype?: SvarTypeDTO;
+  min: string;
+  max: string;
+  pavirkerAndreSporsmal: boolean;
   kriterieForVisningAvUndersporsmal?: VisningskriterieDTO;
   svar: SvarDTO[];
   undersporsmal: SporsmalDTO[];
@@ -71,9 +71,9 @@ export interface SykepengesoknadDTO {
   sykmeldingId?: string;
   soknadstype: SoknadstypeDTO;
   status: SoknadstatusDTO;
-  fom?: Date;
-  tom?: Date;
-  opprettetDato?: Date;
+  fom: Date;
+  tom: Date;
+  opprettetDato: Date;
   innsendtDato?: Date;
   sendtTilNAVDato?: Date;
   sendtTilArbeidsgiverDato?: Date;

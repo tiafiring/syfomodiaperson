@@ -1,29 +1,27 @@
+import { Reducer } from "redux";
+import {
+  SporsmalDTO,
+  SvarTypeDTO,
+  SykepengesoknadDTO,
+} from "./types/SykepengesoknadDTO";
 import {
   HENT_SOKNADER_FEILET,
   HENTER_SOKNADER,
   SOKNADER_HENTET,
 } from "./soknader_actions";
-import { TIMER, DATO, PERIODER, PROSENT, TALL } from "../../enums/svartyper";
 
-const initiellState = {
-  data: [],
-  henter: false,
-  hentingFeilet: false,
-  hentet: false,
-};
-
-const getMinMax = (sporsmal) => {
+const getMinMax = (sporsmal: SporsmalDTO) => {
   switch (sporsmal.svartype) {
-    case PERIODER:
-    case DATO: {
+    case SvarTypeDTO.PERIODER:
+    case SvarTypeDTO.DATO: {
       return {
         min: sporsmal.min ? new Date(sporsmal.min) : sporsmal.min,
         max: sporsmal.max ? new Date(sporsmal.max) : sporsmal.max,
       };
     }
-    case TALL:
-    case TIMER:
-    case PROSENT: {
+    case SvarTypeDTO.TALL:
+    case SvarTypeDTO.TIMER:
+    case SvarTypeDTO.PROSENT: {
       return {
         min: parseInt(sporsmal.min, 10),
         max: parseInt(sporsmal.max, 10),
@@ -35,7 +33,7 @@ const getMinMax = (sporsmal) => {
   }
 };
 
-const parseSporsmal = (sporsmal) => {
+const parseSporsmal = (sporsmal: SporsmalDTO): any => {
   const minMax = getMinMax(sporsmal);
   return {
     ...sporsmal,
@@ -44,7 +42,7 @@ const parseSporsmal = (sporsmal) => {
   };
 };
 
-export const parseSoknad = (soknad) => {
+export const parseSoknad = (soknad: SykepengesoknadDTO) => {
   return {
     ...soknad,
     fom: new Date(soknad.fom),
@@ -61,7 +59,24 @@ export const parseSoknad = (soknad) => {
   };
 };
 
-export default (state = initiellState, action = {}) => {
+export interface SykepengesoknaderState {
+  henter: boolean;
+  hentet: boolean;
+  hentingFeilet: boolean;
+  data: SykepengesoknadDTO[];
+}
+
+export const initialState: SykepengesoknaderState = {
+  henter: false,
+  hentet: false,
+  hentingFeilet: false,
+  data: [],
+};
+
+const soknader: Reducer<SykepengesoknaderState> = (
+  state = initialState,
+  action = { type: "" }
+) => {
   switch (action.type) {
     case SOKNADER_HENTET: {
       return {
@@ -92,3 +107,5 @@ export default (state = initiellState, action = {}) => {
     }
   }
 };
+
+export default soknader;

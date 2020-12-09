@@ -1,9 +1,11 @@
+import { SykepengesoknadDTO } from "./types/SykepengesoknadDTO";
+
 export const SOKNADER_HENTET = "SOKNADER_HENTET";
 export const HENTER_SOKNADER = "HENTER_SOKNADER";
 export const HENT_SOKNADER_FEILET = "HENT_SOKNADER_FEILET";
 export const HENT_SOKNADER_FORESPURT = "HENT_SOKNADER_FORESPURT";
 
-export const soknaderHentet = (soknader) => {
+export const soknaderHentet = (soknader: SykepengesoknadDTO[]) => {
   return {
     type: SOKNADER_HENTET,
     soknader,
@@ -22,7 +24,7 @@ export const hentSoknaderFeilet = () => {
   };
 };
 
-export const hentSoknader = (fnr) => {
+export const hentSoknader = (fnr: string) => {
   return {
     type: HENT_SOKNADER_FORESPURT,
     fnr,
