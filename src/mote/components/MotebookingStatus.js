@@ -109,14 +109,14 @@ export const StatusVarsel = ({ mote, arbeidstaker }) => {
       <AlertStripe type="info">
         <div>
           <p className="typo-element">{kvitteringTekst.overskrift}</p>
-          <p className="sist">
+          <div className="sist">
             {
               <ul>
                 <li>{kvitteringTekst.forUke16}</li>
                 <li>{kvitteringTekst.etterUke16}</li>
               </ul>
             }
-          </p>
+          </div>
         </div>
       </AlertStripe>
     </div>
