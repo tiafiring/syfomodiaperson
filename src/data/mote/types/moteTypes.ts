@@ -1,3 +1,10 @@
+export interface TidOgStedDTO {
+  tid: Date;
+  created: Date;
+  sted: string;
+  valgt: boolean;
+}
+
 export interface MoteAlternativDTO {
   id: number;
   tid: Date;
@@ -24,12 +31,19 @@ export interface MoteDeltakerDTO {
 
 export interface MoteDTO {
   moteUuid: string;
+  opprettetAv: string;
+  aktorId: string;
   status: string;
-  fnr: string;
+  fnr?: string;
   opprettetTidspunkt: Date;
-  bekreftetTidspunkt: Date;
+  bekreftetTidspunkt?: Date;
+  navEnhet: string;
+  eier: string;
   deltakere: MoteDeltakerDTO[];
+  bekreftetAlternativ?: TidOgStedDTO;
   alternativer: MoteAlternativDTO[];
+  sistEndret: Date;
+  trengerBehandling: boolean;
 }
 
 enum MoteDeltakerType {

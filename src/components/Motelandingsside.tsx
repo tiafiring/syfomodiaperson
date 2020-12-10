@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router";
+import { MoteDTO } from "../data/mote/types/moteTypes";
 import { tilDatoMedUkedagOgManedNavn } from "../utils/datoUtils";
 import Sidetopp from "./Sidetopp";
 import MotelandingssidePrikk from "./MotelandingssidePrikk";
@@ -25,7 +25,7 @@ const texts = {
   },
 };
 
-const setTittel = (mote) => {
+const setTittel = (mote: MoteDTO) => {
   if (mote) {
     if (mote.status === "BEKREFTET") {
       return texts.moteElement.titles.confirmed;
@@ -35,7 +35,7 @@ const setTittel = (mote) => {
   return texts.moteElement.titles.requestMeeting;
 };
 
-const setUndertittel = (mote) => {
+const setUndertittel = (mote: MoteDTO) => {
   if (mote) {
     if (mote.status === "BEKREFTET" && mote.bekreftetAlternativ) {
       return `${
@@ -50,7 +50,16 @@ const setUndertittel = (mote) => {
   return texts.moteElement.subtitles.noMeetings;
 };
 
-export const MotelandingssideMoteElement = ({ fnr, mote, skalVisePrikk }) => {
+interface MotelandingssideMoteElementProps {
+  fnr: string;
+  mote: MoteDTO;
+  skalVisePrikk: boolean;
+}
+
+export const MotelandingssideMoteElement = (
+  motelandingssideMoteElementProps: MotelandingssideMoteElementProps
+) => {
+  const { fnr, mote, skalVisePrikk } = motelandingssideMoteElementProps;
   const undertittel = setUndertittel(mote);
   const tittel = setTittel(mote);
   return (
@@ -80,13 +89,15 @@ export const MotelandingssideMoteElement = ({ fnr, mote, skalVisePrikk }) => {
   );
 };
 
-MotelandingssideMoteElement.propTypes = {
-  fnr: PropTypes.string,
-  mote: PropTypes.object,
-  skalVisePrikk: PropTypes.bool,
-};
+interface MotelandingssideMotebehovElementProps {
+  fnr: string;
+  skalVisePrikk: boolean;
+}
 
-export const MotelandingssideMotebehovElement = ({ fnr, skalVisePrikk }) => {
+export const MotelandingssideMotebehovElement = (
+  motelandingssideMotebehovElementProps: MotelandingssideMotebehovElementProps
+) => {
+  const { fnr, skalVisePrikk } = motelandingssideMotebehovElementProps;
   return (
     <li className="motelandingssidepanel">
       <Link
@@ -114,17 +125,22 @@ export const MotelandingssideMotebehovElement = ({ fnr, skalVisePrikk }) => {
   );
 };
 
-MotelandingssideMotebehovElement.propTypes = {
-  fnr: PropTypes.string,
-  skalVisePrikk: PropTypes.bool,
-};
+interface MotelandingssideProps {
+  fnr: string;
+  mote: MoteDTO;
+  skalViseMotebehovPrikk: boolean;
+  skalViseMotePrikk: boolean;
+}
 
-export const Motelandingsside = ({
-  fnr,
-  mote,
-  skalViseMotebehovPrikk,
-  skalViseMotePrikk,
-}) => {
+export const Motelandingsside = (
+  motelandingssideProps: MotelandingssideProps
+) => {
+  const {
+    fnr,
+    mote,
+    skalViseMotebehovPrikk,
+    skalViseMotePrikk,
+  } = motelandingssideProps;
   return (
     <div>
       <Sidetopp tittel={texts.pageHeader} />
@@ -141,13 +157,6 @@ export const Motelandingsside = ({
       </ul>
     </div>
   );
-};
-
-Motelandingsside.propTypes = {
-  fnr: PropTypes.string,
-  mote: PropTypes.object,
-  skalViseMotebehovPrikk: PropTypes.bool,
-  skalViseMotePrikk: PropTypes.bool,
 };
 
 export default Motelandingsside;
