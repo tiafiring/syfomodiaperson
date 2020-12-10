@@ -7,17 +7,22 @@ import {
 } from "../data/pengestopp/types/FlaggPerson";
 import { senesteTom } from "./periodeUtils";
 import { gamleSMStatuser } from "./sykmeldinger/sykmeldingstatuser";
+import { SykmeldingOldFormat } from "../data/sykmelding/types/SykmeldingOldFormat";
 
-export const sykmeldingerToArbeidsgiver = (sykmeldinger: Sykmelding[]) => {
+export const sykmeldingerToArbeidsgiver = (
+  sykmeldinger: SykmeldingOldFormat[]
+) => {
   return sykmeldinger.map((sykmelding) => {
     return {
-      navn: sykmelding.arbeidsgiver,
+      navn: sykmelding.mottakendeArbeidsgiver?.navn,
       orgnummer: sykmelding.orgnummer,
     };
-  });
+  }) as Arbeidsgiver[];
 };
 
-export const uniqueArbeidsgivere = (arbeidsgivere: Arbeidsgiver[]) => {
+export const uniqueArbeidsgivere = (
+  arbeidsgivere: Arbeidsgiver[]
+): Arbeidsgiver[] => {
   return arbeidsgivere.filter((arbeidsgiver, index, self) => {
     return (
       self.findIndex((arbeidsgiver2) => {
@@ -47,7 +52,7 @@ export const arbeidsgivereWithStoppAutomatikkStatus = (
 };
 
 export const aktiveSykmeldingerFraSiste3Maneder = (
-  sykmeldinger: Sykmelding[]
+  sykmeldinger: SykmeldingOldFormat[]
 ) => {
   const threeMonthsAgo = new Date(Date.now() - 1000 * 60 * 60 * 24 * 90);
   return sykmeldinger.filter((sykmelding) => {
@@ -59,7 +64,7 @@ export const aktiveSykmeldingerFraSiste3Maneder = (
 };
 
 export const unikeArbeidsgivereMedSykmeldingSiste3Maneder = (
-  sykmeldinger: Sykmelding[]
+  sykmeldinger: SykmeldingOldFormat[]
 ) => {
   const sykmeldingerSiste3Maneder = aktiveSykmeldingerFraSiste3Maneder(
     sykmeldinger
