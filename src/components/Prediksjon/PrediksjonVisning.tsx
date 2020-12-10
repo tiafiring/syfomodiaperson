@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { hentPrediksjon } from "../../data/prediksjon/prediksjon_actions";
@@ -18,7 +18,10 @@ const PrediksjonPanel = styled.div`
 
 const PrediksjonVisning = ({ fnr }: PrediksjonProps) => {
   const dispatch = useDispatch();
-  dispatch(hentPrediksjon(fnr));
+
+  useEffect(() => {
+    dispatch(hentPrediksjon(fnr));
+  }, []);
   const prediksjonReducer: PrediksjonState = useSelector(
     (state: any) => state.prediksjon
   );
