@@ -1,11 +1,17 @@
 import React from "react";
-import * as moterPropTypes from "../../propTypes";
+import { MoteDTO } from "../../data/mote/types/moteTypes";
 import { ARBEIDSGIVER, BRUKER } from "../../konstanter";
 import DatoOgTid from "./DatoOgTid";
 import SvarMedIkon from "./SvarMedIkon";
 
-const BekreftetMotetidspunkt = (props) => {
-  const mote = props.mote;
+interface BekreftetMotetidspunktProps {
+  mote: MoteDTO;
+}
+
+const BekreftetMotetidspunkt = (
+  bekreftetMotetidspunktProps: BekreftetMotetidspunktProps
+) => {
+  const { mote } = bekreftetMotetidspunktProps;
   const arbeidsgiver = mote.deltakere.filter((d) => {
     return d.type === ARBEIDSGIVER;
   })[0];
@@ -15,26 +21,24 @@ const BekreftetMotetidspunkt = (props) => {
   const arbeidstakerSvar =
     arbeidstaker &&
     arbeidstaker.svar.filter((s) => {
-      return s.id === mote.bekreftetAlternativ.id;
+      return s.id === mote.bekreftetAlternativ?.id;
     })[0];
   const arbeidsgiversSvar =
     arbeidsgiver &&
     arbeidsgiver.svar.filter((s) => {
-      return s.id === mote.bekreftetAlternativ.id;
+      return s.id === mote.bekreftetAlternativ?.id;
     })[0];
   return (
     <div className="gronnRammeTidspunkt">
-      <DatoOgTid tid={mote.bekreftetAlternativ.tid} />
+      {mote.bekreftetAlternativ && (
+        <DatoOgTid tid={mote.bekreftetAlternativ?.tid} />
+      )}
       <SvarMedIkon bruker={arbeidsgiver} svar={arbeidsgiversSvar} />
       {arbeidstaker && arbeidstakerSvar && (
         <SvarMedIkon bruker={arbeidstaker} svar={arbeidstakerSvar} />
       )}
     </div>
   );
-};
-
-BekreftetMotetidspunkt.propTypes = {
-  mote: moterPropTypes.motePt,
 };
 
 export default BekreftetMotetidspunkt;

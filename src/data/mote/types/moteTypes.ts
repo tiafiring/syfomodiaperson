@@ -1,4 +1,5 @@
 export interface TidOgStedDTO {
+  id: number;
   tid: Date;
   created: Date;
   sted: string;
