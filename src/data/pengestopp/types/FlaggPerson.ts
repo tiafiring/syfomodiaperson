@@ -35,8 +35,21 @@ export interface EnhetNr {
   value: string;
 }
 
+export enum SykepengestoppArsakType {
+  BESTRIDELSE_SYKMELDING,
+  MEDISINSK_VILKAR,
+  AKTIVITETSKRAV,
+  TILBAKEDATERT_SYKMELDING,
+  MANGLENDE_MEDVIRKING,
+}
+
+export interface SykepengestoppArsak {
+  type: SykepengestoppArsakType;
+}
+
 export interface StoppAutomatikk {
   sykmeldtFnr: SykmeldtFnr;
+  arsakList: SykepengestoppArsakType[];
   virksomhetNr: VirksomhetNr[];
   enhetNr: EnhetNr;
 }
@@ -49,6 +62,7 @@ export enum Status {
 export interface StatusEndring {
   veilederIdent: VeilederIdent;
   sykmeldtFnr: SykmeldtFnr;
+  arsakList: SykepengestoppArsak[];
   status: Status;
   virksomhetNr: VirksomhetNr;
   opprettet: string;
