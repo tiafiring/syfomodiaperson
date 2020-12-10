@@ -146,6 +146,7 @@ const MotebookingStatus = (props) => {
     avbrytMoteUtenVarsel,
     skalViseFlereAlternativ,
     arbeidstaker,
+    visFlereAlternativ,
   } = props;
   const { alternativer, status } = mote;
   const krrMeldingPanel = !arbeidstaker.kontaktinfo.skalHaVarsel ? (
@@ -186,7 +187,13 @@ const MotebookingStatus = (props) => {
       <div className="panel">
         {status === BEKREFTET && <BekreftetMotetidspunkt {...props} />}
         {status !== BEKREFTET && !motePassert && (
-          <Svarstatus {...props}>{flereTidspunktBoks}</Svarstatus>
+          <Svarstatus
+            fnr={fnr}
+            mote={mote}
+            visFlereAlternativ={visFlereAlternativ}
+          >
+            {flereTidspunktBoks}
+          </Svarstatus>
         )}
         {status !== BEKREFTET && motePassert && <PassertVarsel />}
         <div className="motested">

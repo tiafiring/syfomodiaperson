@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Utvidbar } from "@navikt/digisyfo-npm";
 import * as moterPropTypes from "../../propTypes";
+import { MoteAlternativDTO, MoteDTO } from "../../data/mote/types/moteTypes";
 import { NAV_VEILEDER } from "../../konstanter";
 import BesvarteTidspunkter from "./BesvarteTidspunkter";
 
@@ -10,7 +11,7 @@ const texts = {
   foreslattTidligere: "Tidspunkt foreslått tidligere",
 };
 
-export const erSamtidig = (createdA, createdB, offset = 1000) => {
+export const erSamtidig = (createdA: Date, createdB: Date, offset = 1000) => {
   const a = createdA.getTime();
   const b = createdB.getTime();
   const startA = a - offset;
@@ -18,7 +19,7 @@ export const erSamtidig = (createdA, createdB, offset = 1000) => {
   return startA < b && endA > b;
 };
 
-const sorterAlternativer = (alternativer) => {
+const sorterAlternativer = (alternativer: MoteAlternativDTO[]) => {
   return alternativer.sort((a, b) => {
     if (a.created.getTime() > b.created.getTime()) {
       return -1;
@@ -29,7 +30,7 @@ const sorterAlternativer = (alternativer) => {
   });
 };
 
-export const getNyeAlternativer = (mote) => {
+export const getNyeAlternativer = (mote: MoteDTO) => {
   if (!mote.alternativer) {
     return [];
   }
@@ -49,7 +50,7 @@ export const getNyeAlternativer = (mote) => {
     });
 };
 
-export const getGamleAlternativer = (mote) => {
+export const getGamleAlternativer = (mote: MoteDTO) => {
   if (!mote.alternativer) {
     return [];
   }
@@ -69,8 +70,15 @@ export const getGamleAlternativer = (mote) => {
     });
 };
 
-const Svarstatus = (props) => {
-  const { mote, visFlereAlternativ, children, fnr } = props;
+interface SvarstatusProps {
+  fnr: string;
+  mote: MoteDTO;
+  visFlereAlternativ: any;
+  children: any;
+}
+
+const Svarstatus = (svarstatusProps: SvarstatusProps) => {
+  const { mote, visFlereAlternativ, children, fnr } = svarstatusProps;
   const nyeAlternativer = getNyeAlternativer(mote);
   const gamleAlternativer = getGamleAlternativer(mote);
   return (
@@ -104,13 +112,6 @@ const Svarstatus = (props) => {
       )}
     </div>
   );
-};
-
-Svarstatus.propTypes = {
-  mote: moterPropTypes.motePt,
-  visFlereAlternativ: PropTypes.func,
-  children: PropTypes.element,
-  fnr: PropTypes.string,
 };
 
 export default Svarstatus;
