@@ -6,7 +6,7 @@ import { MOETEPLANLEGGER } from "../enums/menypunkter";
 import * as moterActions from "../data/mote/moter_actions";
 import AppSpinner from "../components/AppSpinner";
 import Feilmelding from "../components/Feilmelding";
-import Motelandingsside from "../components/Motelandingsside";
+import Motelandingsside from "../mote/components/Motelandingsside";
 import { hentBegrunnelseTekst } from "../utils/tilgangUtils";
 import {
   isUnfinishedMotebehovTask,

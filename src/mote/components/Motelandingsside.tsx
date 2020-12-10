@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router";
-import { MoteDTO } from "../data/mote/types/moteTypes";
-import { tilDatoMedUkedagOgManedNavn } from "../utils/datoUtils";
-import Sidetopp from "./Sidetopp";
+import { MoteDTO } from "../../data/mote/types/moteTypes";
+import { tilDatoMedUkedagOgManedNavn } from "../../utils/datoUtils";
+import Sidetopp from "../../components/Sidetopp";
 import MotelandingssidePrikk from "./MotelandingssidePrikk";
 
 const texts = {
