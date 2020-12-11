@@ -28,6 +28,7 @@ const ListWrapper = styled.div`
 `;
 
 const PilIkon = styled.img`
+  align-self: center;
   margin-left: 0.5em;
 `;
 
@@ -43,9 +44,9 @@ const FaktorerBox = ({ faktorer, ned }: FaktorerBoxProps) => {
           src={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/arrow-with-line__${arrowDirection}--blue.svg`}
         />
         <List>
-          <li>{faktorer[0]}</li>
-          <li>{faktorer[1]}</li>
-          <li>{faktorer[2]}</li>
+          {faktorer.map((faktor, index) => {
+            return <li key={index}>{faktorer[index]}</li>;
+          })}
         </List>
       </ListWrapper>
     </div>
