@@ -40,6 +40,6 @@ function* watchHentPrediksjon() {
   );
 }
 
-export default function* flaggPersonSagas() {
+export default function* prediksjonSagas() {
   yield all([fork(watchHentPrediksjon)]);
 }

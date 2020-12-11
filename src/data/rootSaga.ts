@@ -23,6 +23,7 @@ import oppfolgingstilfellePersonSagas from "./oppfolgingstilfelle/oppfolgingstil
 import oppfolgingstilfelleperioderSagas from "./oppfolgingstilfelle/oppfolgingstilfelleperioderSagas";
 import personInfoSagas from "./personinfo/personInfoSagas";
 import personoppgaveSagas from "./personoppgave/personoppgaveSagas";
+import prediksjonSagas from "./prediksjon/prediksjonSagas";
 import flaggPersonSagas from "./pengestopp/flaggPersonSagas";
 import vedtakSagas from "./vedtak/vedtakSagas";
 
@@ -52,6 +53,7 @@ export default function* rootSaga() {
     oppfolgingstilfelleperioderSagas(),
     personInfoSagas(),
     personoppgaveSagas(),
+    prediksjonSagas(),
     flaggPersonSagas(),
     vedtakSagas(),
   ]);
