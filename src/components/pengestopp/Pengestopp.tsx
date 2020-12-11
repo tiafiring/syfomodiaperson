@@ -6,11 +6,11 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import PengestoppModal from "./PengestoppModal";
 import PengestoppDropdown from "./PengestoppDropdown";
+import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
 import {
   Arbeidsgiver,
   Status,
   StatusEndring,
-  Sykmelding,
 } from "../../data/pengestopp/types/FlaggPerson";
 import { FlaggpersonState } from "../../data/pengestopp/flaggperson";
 import {
@@ -36,7 +36,7 @@ const Wrapper = styled.div`
 `;
 
 interface IPengestoppProps {
-  sykmeldinger: Sykmelding[];
+  sykmeldinger: SykmeldingOldFormat[];
   flaggperson: FlaggpersonState;
   fnr: string;
 }
