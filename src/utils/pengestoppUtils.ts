@@ -3,11 +3,13 @@ import {
   Status,
   StatusEndring,
   StoppAutomatikk,
-  Sykmelding,
 } from "../data/pengestopp/types/FlaggPerson";
 import { senesteTom } from "./periodeUtils";
 import { gamleSMStatuser } from "./sykmeldinger/sykmeldingstatuser";
 import { SykmeldingOldFormat } from "../data/sykmelding/types/SykmeldingOldFormat";
+import { erLokal } from "./miljoUtil";
+
+export const toggleArsaksVelger = erLokal();
 
 export const sykmeldingerToArbeidsgiver = (
   sykmeldinger: SykmeldingOldFormat[]
@@ -42,8 +44,11 @@ export const allStoppAutomatikkStatusEndringer = (
 
 export const arbeidsgivereWithStoppAutomatikkStatus = (
   arbeidsgivere: Arbeidsgiver[],
-  statusEndringerWithStoppAutomatikk: Array<StatusEndring>
+  statusEndringList: StatusEndring[]
 ) => {
+  const statusEndringerWithStoppAutomatikk = allStoppAutomatikkStatusEndringer(
+    statusEndringList
+  );
   return arbeidsgivere.filter((arbeidsgiver) => {
     return statusEndringerWithStoppAutomatikk.find((statusEndring) => {
       return statusEndring.virksomhetNr.value === arbeidsgiver.orgnummer;
@@ -85,6 +90,7 @@ export const stoppAutomatikk2StatusEndring = (
       veilederIdent: { value: "" },
       sykmeldtFnr: stoppAutomatikk.sykmeldtFnr,
       status: Status.STOPP_AUTOMATIKK,
+      arsakList: stoppAutomatikk.arsakList,
       virksomhetNr: virksomhet,
       opprettet: new Date().toISOString(),
       enhetNr: stoppAutomatikk.enhetNr,

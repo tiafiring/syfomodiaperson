@@ -13,13 +13,7 @@ import {
   StatusEndring,
 } from "../../data/pengestopp/types/FlaggPerson";
 import { FlaggpersonState } from "../../data/pengestopp/flaggperson";
-import {
-  allStoppAutomatikkStatusEndringer,
-  arbeidsgivereWithStoppAutomatikkStatus,
-  sykmeldingerToArbeidsgiver,
-  unikeArbeidsgivereMedSykmeldingSiste3Maneder,
-  uniqueArbeidsgivere,
-} from "../../utils/pengestoppUtils";
+import { unikeArbeidsgivereMedSykmeldingSiste3Maneder } from "../../utils/pengestoppUtils";
 
 export const texts = {
   stansSykepenger: "Stanse sykepenger?",
@@ -76,27 +70,15 @@ const Pengestopp = ({ sykmeldinger }: IPengestoppProps) => {
     }
   };
 
-  const data: StatusEndring[] = flaggperson.data;
+  const statusEndringList: StatusEndring[] = flaggperson.data;
 
-  const pengestopp: StatusEndring | undefined = data.find(
+  const pengestopp: StatusEndring | undefined = statusEndringList.find(
     (statusEndring: StatusEndring) =>
       statusEndring.status === Status.STOPP_AUTOMATIKK
   );
 
-  const statusEndringerWithStoppedAutomatikk = allStoppAutomatikkStatusEndringer(
-    data
-  );
   const uniqueArbeidsgivereWithSykmeldingLast3Months = unikeArbeidsgivereMedSykmeldingSiste3Maneder(
     sykmeldinger
-  );
-
-  const allArbeidsgivere = uniqueArbeidsgivere(
-    sykmeldingerToArbeidsgiver(sykmeldinger)
-  );
-
-  const stoppedArbeidsgivere = arbeidsgivereWithStoppAutomatikkStatus(
-    allArbeidsgivere,
-    statusEndringerWithStoppedAutomatikk
   );
 
   return (
@@ -110,8 +92,8 @@ const Pengestopp = ({ sykmeldinger }: IPengestoppProps) => {
 
       {pengestopp?.status === Status.STOPP_AUTOMATIKK ? (
         <PengestoppDropdown
-          dato={pengestopp.opprettet}
-          stoppedArbeidsgivere={stoppedArbeidsgivere}
+          statusEndringList={statusEndringList}
+          sykmeldinger={sykmeldinger}
         />
       ) : (
         <KnappWithExplanation

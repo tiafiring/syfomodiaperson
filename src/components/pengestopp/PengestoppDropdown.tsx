@@ -4,32 +4,55 @@ import AlertStripe from "nav-frontend-alertstriper";
 import { Checkbox, CheckboxGruppe } from "nav-frontend-skjema";
 import { Element } from "nav-frontend-typografi";
 import { restdatoTilLesbarDato } from "../../utils/datoUtils";
-import { Arbeidsgiver } from "../../data/pengestopp/types/FlaggPerson";
+import {
+  Arbeidsgiver,
+  StatusEndring,
+  Sykmelding,
+} from "../../data/pengestopp/types/FlaggPerson";
+import {
+  arbeidsgivereWithStoppAutomatikkStatus,
+  sykmeldingerToArbeidsgiver,
+  uniqueArbeidsgivere,
+} from "../../utils/pengestoppUtils";
+import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
 
 const texts = {
   tittel: "Beskjed til NAV Arbeid og ytelser er sendt",
+  arsak: {
+    title: "Årsak",
+  },
   sendt: "Sendt: ",
 };
 
 interface IPengestoppDropdown {
-  dato: string;
-  stoppedArbeidsgivere: Arbeidsgiver[];
+  statusEndringList: StatusEndring[];
+  sykmeldinger: SykmeldingOldFormat[];
 }
 
 const PengestoppDropdown = ({
-  dato,
-  stoppedArbeidsgivere,
+  statusEndringList,
+  sykmeldinger,
 }: IPengestoppDropdown) => {
+  const allArbeidsgivere = uniqueArbeidsgivere(
+    sykmeldingerToArbeidsgiver(sykmeldinger)
+  );
+
+  const stoppedArbeidsgivere = arbeidsgivereWithStoppAutomatikkStatus(
+    allArbeidsgivere,
+    statusEndringList
+  );
+
   const warning = (
     <AlertStripe type="suksess" form="inline">
       <Element>{texts.tittel}</Element>
     </AlertStripe>
   );
+  const statusEndring = statusEndringList[0];
   return (
     <Ekspanderbartpanel tittel={warning}>
       <p>
         {texts.sendt}
-        <time>{restdatoTilLesbarDato(dato)}</time>
+        <time>{restdatoTilLesbarDato(statusEndring.opprettet)}</time>
       </p>
       <CheckboxGruppe>
         {stoppedArbeidsgivere.map(
@@ -45,6 +68,13 @@ const PengestoppDropdown = ({
           }
         )}
       </CheckboxGruppe>
+      {statusEndring.arsakList?.length > 0 && (
+        <CheckboxGruppe legend={texts.arsak.title}>
+          {statusEndring.arsakList.map((arsak, index: number) => {
+            return <Checkbox key={index} label={arsak.type} checked disabled />;
+          })}
+        </CheckboxGruppe>
+      )}
     </Ekspanderbartpanel>
   );
 };

@@ -8,12 +8,15 @@ import styled from "styled-components";
 import {
   Arbeidsgiver,
   StoppAutomatikk,
+  SykepengestoppArsak,
+  SykepengestoppArsakType,
   VirksomhetNr,
 } from "../../data/pengestopp/types/FlaggPerson";
 import { AlertStripeInfo } from "nav-frontend-alertstriper";
 import { useSelector, useDispatch } from "react-redux";
 import { endreStatus } from "../../data/pengestopp/flaggperson_actions";
 import { FlaggpersonState } from "../../data/pengestopp/flaggperson";
+import { toggleArsaksVelger } from "../../utils/pengestoppUtils";
 
 const texts = {
   notStoppedTittel:
@@ -29,6 +32,10 @@ const texts = {
   submitError: "Du må velge minst én arbeidsgiver",
   serverError:
     "Det er ikke mulig å stoppe automatisk utbetaling av sykepenger akkurat nå. Prøv igjen senere.",
+  arsak: {
+    title: "Du må velge minst en årsak",
+    submitError: "Du må velge minst en årsak",
+  },
 };
 
 interface IPengestoppModal {
@@ -37,6 +44,34 @@ interface IPengestoppModal {
 
   toggle(): void;
 }
+
+interface SykepengestoppArsakTekst {
+  id: SykepengestoppArsakType;
+  text: string;
+}
+
+const arsaker: SykepengestoppArsakTekst[] = [
+  {
+    id: SykepengestoppArsakType.BESTRIDELSE_SYKMELDING,
+    text: "Bestridelse av sykmelding, §8-4 første ledd ",
+  },
+  {
+    id: SykepengestoppArsakType.MEDISINSK_VILKAR,
+    text: "Medisinsk vilkår, §8-4 første ledd ",
+  },
+  {
+    id: SykepengestoppArsakType.AKTIVITETSKRAV,
+    text: "Aktivitetskravet, §8-4 andre ledd ",
+  },
+  {
+    id: SykepengestoppArsakType.TILBAKEDATERT_SYKMELDING,
+    text: "Tilbakedatert sykmelding, §8-7",
+  },
+  {
+    id: SykepengestoppArsakType.MANGLENDE_MEDVIRKING,
+    text: "Manglende medvirkning, §8-8",
+  },
+];
 
 const Modal = styled(ModalWrapper)`
   padding: 2em 2.5em;
@@ -70,12 +105,17 @@ const PengestoppModal = ({
 
   const [stopped, setStopped] = useState(false);
   const [selected, setSelected] = useState<VirksomhetNr[]>([]);
+  const [selectedArsakList, setSelectedArsakList] = useState<
+    SykepengestoppArsak[]
+  >([]);
   const [submitError, setSubmitError] = useState<boolean>(false);
+  const [submitErrorArsak, setSubmitErrorArsak] = useState<boolean>(false);
   const [serverError, setServerError] = useState<boolean>(false);
 
   const fnr = window.location.pathname.split("/")[2];
   const [stoppAutomatikk, setStoppAutomatikk] = useState<StoppAutomatikk>({
     sykmeldtFnr: { value: fnr },
+    arsakList: [],
     virksomhetNr: [],
     enhetNr: { value: enhet.valgtEnhet },
   });
@@ -83,6 +123,10 @@ const PengestoppModal = ({
   useEffect(() => {
     setStoppAutomatikk({ ...stoppAutomatikk, virksomhetNr: selected });
   }, [selected]);
+
+  useEffect(() => {
+    setStoppAutomatikk({ ...stoppAutomatikk, arsakList: selectedArsakList });
+  }, [selectedArsakList]);
 
   useEffect(() => {
     if (
@@ -103,6 +147,8 @@ const PengestoppModal = ({
   const handleStoppAutomatikkButtonPress = () => {
     if (stoppAutomatikk.virksomhetNr.length <= 0) {
       setSubmitError(true);
+    } else if (toggleArsaksVelger && stoppAutomatikk.arsakList.length <= 0) {
+      setSubmitErrorArsak(true);
     } else {
       dispatch(endreStatus(stoppAutomatikk));
     }
@@ -122,6 +168,25 @@ const PengestoppModal = ({
         return virksomhetNr.value !== orgnr.value;
       });
       setSelected(filtered);
+    }
+  };
+
+  const handleChangeArsak = (event: SyntheticEvent<HTMLInputElement>) => {
+    const newArsakType: SykepengestoppArsakType =
+      SykepengestoppArsakType[(event.target as HTMLInputElement).name];
+    const newArsak = { type: newArsakType };
+    const { checked } = event.target as HTMLInputElement;
+
+    if (checked) {
+      setSubmitErrorArsak(false);
+      setSelectedArsakList([...selectedArsakList, newArsak]);
+    } else {
+      const filtered = selectedArsakList.filter(
+        (arsak: SykepengestoppArsak) => {
+          return newArsak.type !== arsak.type;
+        }
+      );
+      setSelectedArsakList(filtered);
     }
   };
 
@@ -162,6 +227,25 @@ const PengestoppModal = ({
               )}
             </CheckboxGruppe>
           </Group>
+          {toggleArsaksVelger && (
+            <Group>
+              <CheckboxGruppe
+                legend={texts.arsak.title}
+                feil={submitErrorArsak && texts.arsak.submitError}
+              >
+                {arsaker.map((arsak, index: number) => {
+                  return (
+                    <Checkbox
+                      key={index}
+                      label={arsak.text}
+                      onChange={handleChangeArsak}
+                      name={arsak.id.toString()}
+                    />
+                  );
+                })}
+              </CheckboxGruppe>
+            </Group>
+          )}
           <Knapp type="flat" onClick={handleCloseModal}>
             {texts.avbryt}
           </Knapp>
