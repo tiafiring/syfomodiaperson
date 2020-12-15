@@ -15,6 +15,7 @@ import {
   uniqueArbeidsgivere,
 } from "../../utils/pengestoppUtils";
 import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
+import { sykepengestoppArsakTekstListe } from "./PengestoppModal";
 
 const texts = {
   tittel: "Beskjed til NAV Arbeid og ytelser er sendt",
@@ -71,7 +72,14 @@ const PengestoppDropdown = ({
       {statusEndring.arsakList?.length > 0 && (
         <CheckboxGruppe legend={texts.arsak.title}>
           {statusEndring.arsakList.map((arsak, index: number) => {
-            return <Checkbox key={index} label={arsak.type} checked disabled />;
+            const checkboxLabel = sykepengestoppArsakTekstListe.find(
+              (arsakTekst) => {
+                return arsakTekst.type === arsak.type;
+              }
+            )?.text;
+            return (
+              <Checkbox key={index} label={checkboxLabel} checked disabled />
+            );
           })}
         </CheckboxGruppe>
       )}

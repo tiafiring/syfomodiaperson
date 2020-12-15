@@ -46,29 +46,29 @@ interface IPengestoppModal {
 }
 
 interface SykepengestoppArsakTekst {
-  id: SykepengestoppArsakType;
+  type: SykepengestoppArsakType;
   text: string;
 }
 
-const arsaker: SykepengestoppArsakTekst[] = [
+export const sykepengestoppArsakTekstListe: SykepengestoppArsakTekst[] = [
   {
-    id: SykepengestoppArsakType.BESTRIDELSE_SYKMELDING,
+    type: SykepengestoppArsakType.BESTRIDELSE_SYKMELDING.toString(),
     text: "Bestridelse av sykmelding, §8-4 første ledd ",
   },
   {
-    id: SykepengestoppArsakType.MEDISINSK_VILKAR,
+    type: SykepengestoppArsakType.MEDISINSK_VILKAR,
     text: "Medisinsk vilkår, §8-4 første ledd ",
   },
   {
-    id: SykepengestoppArsakType.AKTIVITETSKRAV,
+    type: SykepengestoppArsakType.AKTIVITETSKRAV,
     text: "Aktivitetskravet, §8-4 andre ledd ",
   },
   {
-    id: SykepengestoppArsakType.TILBAKEDATERT_SYKMELDING,
+    type: SykepengestoppArsakType.TILBAKEDATERT_SYKMELDING,
     text: "Tilbakedatert sykmelding, §8-7",
   },
   {
-    id: SykepengestoppArsakType.MANGLENDE_MEDVIRKING,
+    type: SykepengestoppArsakType.MANGLENDE_MEDVIRKING,
     text: "Manglende medvirkning, §8-8",
   },
 ];
@@ -233,13 +233,13 @@ const PengestoppModal = ({
                 legend={texts.arsak.title}
                 feil={submitErrorArsak && texts.arsak.submitError}
               >
-                {arsaker.map((arsak, index: number) => {
+                {sykepengestoppArsakTekstListe.map((arsak, index: number) => {
                   return (
                     <Checkbox
                       key={index}
                       label={arsak.text}
                       onChange={handleChangeArsak}
-                      name={arsak.id.toString()}
+                      name={arsak.type}
                     />
                   );
                 })}
