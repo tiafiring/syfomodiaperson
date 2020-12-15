@@ -49,7 +49,7 @@ export interface SykepengestoppArsak {
 
 export interface StoppAutomatikk {
   sykmeldtFnr: SykmeldtFnr;
-  arsakList: SykepengestoppArsakType[];
+  arsakList: SykepengestoppArsak[];
   virksomhetNr: VirksomhetNr[];
   enhetNr: EnhetNr;
 }
