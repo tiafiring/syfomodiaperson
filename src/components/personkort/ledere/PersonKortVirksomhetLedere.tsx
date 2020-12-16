@@ -5,6 +5,7 @@ import { EtikettLiten } from "nav-frontend-typografi";
 import { Leder } from "../../../data/leder/ledere";
 import { restdatoTildato } from "../../../utils/datoUtils";
 import PersonKortVirksomhetHeader from "./PersonKortVirksomhetHeader";
+import EpostButton from "../EpostButton";
 
 const texts = {
   name: "Navn",
@@ -76,11 +77,7 @@ export const PersonKortVirksomhetLederRow = (
         text={leder.navn}
         isActive={isActive}
       />
-      <PersonKortVirksomhetLederColumn
-        colSize={4}
-        text={leder.epost}
-        isActive={isActive}
-      />
+      <EpostButton epost={leder.epost} />
       <PersonKortVirksomhetLederColumn
         colSize={1}
         text={leder.tlf}
