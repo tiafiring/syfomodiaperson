@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import { shallow } from "enzyme";
 import React from "react";
-import Tidspunkter from "../../../src/mote/skjema/Tidspunkter";
-import Tidspunkt from "../../../src/mote/skjema/Tidspunkt";
+import Tidspunkter from "../../../src/components/mote/skjema/Tidspunkter";
+import Tidspunkt from "../../../src/components/mote/skjema/Tidspunkt";
 import Datovelger from "../../../src/components/datovelger/Datovelger";
 
 describe("Tidspunkter", () => {

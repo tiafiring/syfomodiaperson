@@ -7,8 +7,8 @@ import {
   FlereTidspunktSkjema,
   getData,
   dekorerMedSted,
-} from "../../../src/mote/skjema/FlereTidspunktSkjema";
-import Tidspunkter from "../../../src/mote/skjema/Tidspunkter";
+} from "../../../src/components/mote/skjema/FlereTidspunktSkjema";
+import Tidspunkter from "../../../src/components/mote/skjema/Tidspunkter";
 
 describe("FlereTidspunktSkjemaTest", () => {
   describe("FlereTidspunktSkjema", () => {

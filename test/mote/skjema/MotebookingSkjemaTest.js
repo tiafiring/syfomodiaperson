@@ -3,14 +3,14 @@ import sinon from "sinon";
 import { expect } from "chai";
 import { shallow } from "enzyme";
 import AlertStripe from "nav-frontend-alertstriper";
-import { genererDato } from "../../../src/mote/utils";
-import KontaktInfoFeilmelding from "../../../src/mote/components/KontaktInfoFeilmelding";
+import { genererDato } from "../../../src/components/mote/utils";
+import KontaktInfoFeilmelding from "../../../src/components/mote/components/KontaktInfoFeilmelding";
 import {
   MotebookingSkjema,
   validate,
   getData,
-} from "../../../src/mote/skjema/MotebookingSkjema";
-import Tidspunkter from "../../../src/mote/skjema/Tidspunkter";
+} from "../../../src/components/mote/skjema/MotebookingSkjema";
+import Tidspunkter from "../../../src/components/mote/skjema/Tidspunkter";
 
 describe("MotebookingSkjemaTest", () => {
   let arbeidstaker;

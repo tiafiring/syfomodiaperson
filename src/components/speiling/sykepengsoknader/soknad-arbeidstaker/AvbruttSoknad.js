@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { toDatePrettyPrint } from "../../../../utils/datoUtils";
-import SykmeldingUtdrag from "../../../../connected-components/SykmeldingUtdrag";
+import SykmeldingUtdrag from "../SykmeldingUtdrag";
 import { sykepengesoknad as sykepengesoknadPt } from "../../../../propTypes";
 import Statuspanel, {
   StatusNokkelopplysning,
   Statusopplysninger,
-} from "../../../Statuspanel";
+} from "../../Statuspanel";
 import VerktoylinjeGjenapne from "../soknad-felles/VerktoylinjeGjenapneSoknad";
 
 const texts = {

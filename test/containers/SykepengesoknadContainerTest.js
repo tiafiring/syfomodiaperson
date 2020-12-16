@@ -5,7 +5,7 @@ import sinon from "sinon";
 import {
   Container,
   mapStateToProps,
-} from "../../src/containers/SykepengesoknadContainer";
+} from "../../src/components/speiling/sykepengsoknader/container/SykepengesoknadContainer";
 import soknader from "../../src/data/sykepengesoknad/soknader";
 import ledetekster from "../../src/data/ledetekster/ledetekster";
 import sykmeldinger from "../../src/data/sykmelding/sykmeldinger";

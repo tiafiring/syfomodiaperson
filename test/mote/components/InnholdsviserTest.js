@@ -5,7 +5,7 @@ import sinon from "sinon";
 import { Radio } from "nav-frontend-skjema";
 import Innholdsviser, {
   Innholdsvelger,
-} from "../../../src/mote/components/Innholdsviser";
+} from "../../../src/components/mote/components/Innholdsviser";
 import AppSpinner from "../../../src/components/AppSpinner";
 import { ARBEIDSGIVER, BRUKER } from "../../../src/konstanter";
 

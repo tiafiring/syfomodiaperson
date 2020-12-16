@@ -6,12 +6,12 @@ import KnappBase from "nav-frontend-knapper";
 import BekreftMoteSkjema, {
   InnholdsviserContainer,
   tekster as bekreftMoteTeskter,
-} from "../../../src/mote/components/BekreftMoteSkjema";
+} from "../../../src/components/mote/components/BekreftMoteSkjema";
 import BekreftMoteUtenSvarSkjema, {
   tekster as bekreftMoteUtenSvarTekster,
-} from "../../../src/mote/components/BekreftMoteUtenSvarSkjema";
+} from "../../../src/components/mote/components/BekreftMoteUtenSvarSkjema";
 import { ARBEIDSGIVER, BRUKER } from "../../../src/konstanter";
-import Epostmottakere from "../../../src/mote/components/Epostmottakere";
+import Epostmottakere from "../../../src/components/mote/components/Epostmottakere";
 
 const getMoteUtenSvar = (mote) => {
   return Object.assign(

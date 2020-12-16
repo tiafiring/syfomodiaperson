@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { mapStateToProps } from "../../../src/containers/MotestatusContainer";
+import { mapStateToProps } from "../../../src/components/mote/container/MotestatusContainer";
 
 describe("MotestatusContainerTest", () => {
   describe("mapStateToProps", () => {

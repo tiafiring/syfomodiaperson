@@ -3,11 +3,11 @@ import { sykepengesoknadstatuser } from "@navikt/digisyfo-npm";
 import Statuspanel, {
   StatusNokkelopplysning,
   Statusopplysninger,
-} from "../../../Statuspanel";
+} from "../../Statuspanel";
 import hentStatustekst from "../../../../utils/soknad-felles/hentSoknadStatustekst";
 import hentSykepengetekst from "../../../../utils/soknad-felles/hentSykepengetekst";
 import { soknad as soknadPt } from "../../../../propTypes";
-import { VerktoyKnapp, Verktoylinje } from "../../../Verktoylinje";
+import { VerktoyKnapp, Verktoylinje } from "../../Verktoylinje";
 
 const texts = {
   status: "Status",

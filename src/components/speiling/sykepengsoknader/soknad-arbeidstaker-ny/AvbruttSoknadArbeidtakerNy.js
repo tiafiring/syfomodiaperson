@@ -6,9 +6,9 @@ import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
 import Statuspanel, {
   StatusNokkelopplysning,
   Statusopplysninger,
-} from "../../../Statuspanel";
+} from "../../Statuspanel";
 import SoknadSpeiling from "../soknad-felles/SoknadSpeiling";
-import SykmeldingUtdrag from "../../../../connected-components/SykmeldingUtdrag";
+import SykmeldingUtdrag from "../SykmeldingUtdrag";
 import VerktoylinjeGjenapne from "../soknad-felles/VerktoylinjeGjenapneSoknad";
 
 const texts = {

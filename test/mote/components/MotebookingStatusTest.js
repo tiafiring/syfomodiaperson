@@ -7,16 +7,16 @@ import MotebookingStatus, {
   PassertVarsel,
   StatusVarsel,
   kvitteringTekst,
-} from "../../../src/mote/components/MotebookingStatus";
-import Svarstatus from "../../../src/mote/components/Svarstatus";
-import BekreftetMotetidspunkt from "../../../src/mote/components/BekreftetMotetidspunkt";
-import KontaktInfoFeilmelding from "../../../src/mote/components/KontaktInfoFeilmelding";
-import FlereTidspunktSkjema from "../../../src/mote/skjema/FlereTidspunktSkjema";
+} from "../../../src/components/mote/components/MotebookingStatus";
+import Svarstatus from "../../../src/components/mote/components/Svarstatus";
+import BekreftetMotetidspunkt from "../../../src/components/mote/components/BekreftetMotetidspunkt";
+import KontaktInfoFeilmelding from "../../../src/components/mote/components/KontaktInfoFeilmelding";
+import FlereTidspunktSkjema from "../../../src/components/mote/skjema/FlereTidspunktSkjema";
 import Sidetopp from "../../../src/components/Sidetopp";
 import {
   leggTilDagerPaaDato,
   trekkDagerFraDato,
-} from "../../../src/mote/utils";
+} from "../../../src/components/mote/utils";
 
 describe("MotebookingStatus", () => {
   let arbeidstaker = {

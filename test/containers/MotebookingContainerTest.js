@@ -4,11 +4,11 @@ import sinon from "sinon";
 import { shallow } from "enzyme";
 import AppSpinner from "../../src/components/AppSpinner";
 import Feilmelding from "../../src/components/Feilmelding";
-import MotestatusContainer from "../../src/containers/MotestatusContainer";
+import MotestatusContainer from "../../src/components/mote/container/MotestatusContainer";
 import {
   mapStateToProps,
   MotebookingSide,
-} from "../../src/containers/MotebookingContainer";
+} from "../../src/components/mote/container/MotebookingContainer";
 
 describe("MotebookingContainer", () => {
   describe("MotebookingSide", () => {

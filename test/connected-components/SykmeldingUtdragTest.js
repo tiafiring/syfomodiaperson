@@ -6,7 +6,7 @@ import { SykmeldingUtdrag } from "@navikt/digisyfo-npm";
 import {
   Container,
   mapStateToProps,
-} from "../../src/connected-components/SykmeldingUtdrag";
+} from "../../src/components/speiling/sykepengsoknader/SykmeldingUtdrag";
 import sykmeldinger from "../../src/data/sykmelding/sykmeldinger";
 import mockSykepengesoknader from "../mockdata/mockSykepengesoknader";
 import mockSykmeldinger from "../mockdata/sykmeldinger/mockSykmeldinger";

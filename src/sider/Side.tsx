@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Column, Container, Row } from "nav-frontend-grid";
-import GlobalNavigasjonContainer from "../containers/GlobalNavigasjonContainer";
+import GlobalNavigasjonContainer from "../components/globalnavigasjon/GlobalNavigasjonContainer";
 import ContextContainer from "../context/ContextContainer";
 import Personkort from "../components/personkort/Personkort";
 

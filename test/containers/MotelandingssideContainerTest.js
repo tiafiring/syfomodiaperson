@@ -7,7 +7,7 @@ import Feilmelding from "../../src/components/Feilmelding";
 import {
   mapStateToProps,
   MotelandingssideSide,
-} from "../../src/containers/MotelandingssideContainer";
+} from "../../src/components/mote/container/MotelandingssideContainer";
 
 describe("MotelandingssideContainer", () => {
   describe("MotelandingssideSide", () => {

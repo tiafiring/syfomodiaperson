@@ -4,7 +4,7 @@ import { tilLesbarDatoMedArstall } from "../../../../../utils/datoUtils";
 import {
   StatusNokkelopplysning,
   Statusopplysninger,
-} from "../../../../Statuspanel";
+} from "../../../Statuspanel";
 import { gamleSMStatuser } from "../../../../../utils/sykmeldinger/sykmeldingstatuser";
 
 export const AvvistSykmeldingStatuspanel = ({ sykmelding }) =>

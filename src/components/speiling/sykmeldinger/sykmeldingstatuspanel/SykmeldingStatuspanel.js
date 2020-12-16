@@ -8,7 +8,7 @@ import {
 } from "./SykmeldingStatuspanelOpplysning";
 import { sykmelding as sykmeldingPt } from "../../../../propTypes";
 import GjenapneSykmelding from "./GjenapneSykmelding";
-import Statuspanel, { Statusopplysninger } from "../../../Statuspanel";
+import Statuspanel, { Statusopplysninger } from "../../Statuspanel";
 
 export const Nokkelopplysninger = ({ sykmelding }) => {
   switch (sykmelding.status) {

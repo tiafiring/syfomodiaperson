@@ -5,10 +5,10 @@ import sinon from "sinon";
 import {
   AvbrytMoteSide,
   mapStateToProps,
-} from "../../src/containers/AvbrytMoteContainer";
+} from "../../src/components/mote/container/AvbrytMoteContainer";
 import AppSpinner from "../../src/components/AppSpinner";
 import Lightbox from "../../src/components/Lightbox";
-import AvbrytMote from "../../src/mote/components/AvbrytMote";
+import AvbrytMote from "../../src/components/mote/components/AvbrytMote";
 
 describe("AvbrytMoteContainer", () => {
   describe("AvbrytMoteSide", () => {

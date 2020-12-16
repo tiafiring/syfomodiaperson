@@ -5,7 +5,7 @@ import {
   getDatoFraZulu,
   genererDato,
   erAlleAlternativerPassert,
-} from "../../../src/mote/utils";
+} from "../../../src/components/mote/utils";
 
 describe("utils", () => {
   let clock;

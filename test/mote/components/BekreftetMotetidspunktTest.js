@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import { shallow } from "enzyme";
 import React from "react";
-import BekreftetMotetidspunkt from "../../../src/mote/components/BekreftetMotetidspunkt";
-import DatoOgTid from "../../../src/mote/components/DatoOgTid";
+import BekreftetMotetidspunkt from "../../../src/components/mote/components/BekreftetMotetidspunkt";
+import DatoOgTid from "../../../src/components/mote/components/DatoOgTid";
 
 describe("BekreftetMotetidspunkt", () => {
   let mote;

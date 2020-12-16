@@ -4,8 +4,8 @@ import React from "react";
 import AvbrytMote, {
   InnholdsviserContainer,
   mapStateToInnholdsviserProps,
-} from "../../../src/mote/components/AvbrytMote";
-import Epostmottakere from "../../../src/mote/components/Epostmottakere";
+} from "../../../src/components/mote/components/AvbrytMote";
+import Epostmottakere from "../../../src/components/mote/components/Epostmottakere";
 import { ARBEIDSGIVER, BRUKER } from "../../../src/konstanter";
 
 const getMote = (mote) => {

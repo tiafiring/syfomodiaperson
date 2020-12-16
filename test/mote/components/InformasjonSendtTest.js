@@ -5,7 +5,7 @@ import { Utvidbar } from "@navikt/digisyfo-npm";
 import { ARBEIDSGIVER, BRUKER } from "../../../src/konstanter";
 import InformasjonSendt, {
   InnholdsviserContainer,
-} from "../../../src/mote/components/InformasjonSendt";
+} from "../../../src/components/mote/components/InformasjonSendt";
 
 const getMote = (mote) => {
   return Object.assign(

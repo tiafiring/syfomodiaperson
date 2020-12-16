@@ -9,7 +9,7 @@ import {
   tilLesbarDatoMedArstall,
   tilLesbarPeriodeMedArstall,
 } from "../../../../utils/datoUtils";
-import { StatusNokkelopplysning } from "../../../Statuspanel";
+import { StatusNokkelopplysning } from "../../Statuspanel";
 import { sykmelding as sykmeldingPt } from "../../../../propTypes";
 import { Vis } from "../../../../utils";
 

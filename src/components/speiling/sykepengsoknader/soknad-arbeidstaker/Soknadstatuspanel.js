@@ -9,7 +9,7 @@ import { formaterOrgnr } from "../../../../utils";
 import Statuspanel, {
   StatusNokkelopplysning,
   Statusopplysninger,
-} from "../../../Statuspanel";
+} from "../../Statuspanel";
 
 const { SENDT, TIL_SENDING, KORRIGERT } = sykepengesoknadstatuser;
 

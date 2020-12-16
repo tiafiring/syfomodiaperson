@@ -6,7 +6,7 @@ import { soknad as soknadPt } from "../../../../propTypes";
 import Statuspanel, {
   StatusNokkelopplysning,
   Statusopplysninger,
-} from "../../../Statuspanel";
+} from "../../Statuspanel";
 
 const texts = {
   sendt: "Sendt til NAV",

@@ -1,5 +1,5 @@
 import React from "react";
-import { VerktoyKnapp, Verktoylinje } from "../../../Verktoylinje";
+import { VerktoyKnapp, Verktoylinje } from "../../Verktoylinje";
 import { soknad as soknadPt } from "../../../../propTypes";
 
 const texts = {

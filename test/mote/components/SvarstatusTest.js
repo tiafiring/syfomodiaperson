@@ -6,8 +6,8 @@ import Svarstatus, {
   erSamtidig,
   getGamleAlternativer,
   getNyeAlternativer,
-} from "../../../src/mote/components/Svarstatus";
-import BesvarteTidspunkter from "../../../src/mote/components/BesvarteTidspunkter";
+} from "../../../src/components/mote/components/Svarstatus";
+import BesvarteTidspunkter from "../../../src/components/mote/components/BesvarteTidspunkter";
 import { konverterTid } from "../../../src/utils/datoUtils";
 
 describe("Svarstatus", () => {

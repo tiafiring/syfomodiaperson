@@ -2,7 +2,7 @@ import React from "react";
 import Statuspanel, {
   StatusNokkelopplysning,
   Statusopplysninger,
-} from "../../../Statuspanel";
+} from "../../Statuspanel";
 import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
 import { soknad as soknadPt } from "../../../../propTypes";
 import VerktoylinjeGjenapneSoknad from "../soknad-felles/VerktoylinjeGjenapneSoknad";

@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { shallow } from "enzyme";
 import React from "react";
 import sinon from "sinon";
-import DropdownInnholdsviser from "../../../src/mote/components/DropdownInnholdsviser";
+import DropdownInnholdsviser from "../../../src/components/mote/components/DropdownInnholdsviser";
 import AppSpinner from "../../../src/components/AppSpinner";
 
 const getMote = (mote) => {
