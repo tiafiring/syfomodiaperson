@@ -143,4 +143,5 @@ export interface SykmeldingOldFormat {
     sykmelder: string | null;
     sykmelderTlf: string | null;
   };
+  egenmeldt?: boolean;
 }
