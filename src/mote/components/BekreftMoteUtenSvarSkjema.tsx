@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router";
 import AlertStripe from "nav-frontend-alertstriper";
 import KnappBase from "nav-frontend-knapper";
@@ -17,8 +16,22 @@ export const tekster = {
   },
 };
 
-const BekreftMoteUtenSvarSkjema = (props) => {
-  const { bekrefter, bekreftFeilet, avbrytHref, bekreftMoteUtenSvar } = props;
+interface BekreftMoteUtenSvarSkjemaProps {
+  avbrytHref: string;
+  bekrefter: boolean;
+  bekreftFeilet: boolean;
+  bekreftMoteUtenSvar: any;
+}
+
+const BekreftMoteUtenSvarSkjema = (
+  bekreftMoteUtenSvarSkjemaProps: BekreftMoteUtenSvarSkjemaProps
+) => {
+  const {
+    bekrefter,
+    bekreftFeilet,
+    avbrytHref,
+    bekreftMoteUtenSvar,
+  } = bekreftMoteUtenSvarSkjemaProps;
 
   return (
     <div className="bekreftutensvarinnhold">
@@ -49,13 +62,6 @@ const BekreftMoteUtenSvarSkjema = (props) => {
       </div>
     </div>
   );
-};
-
-BekreftMoteUtenSvarSkjema.propTypes = {
-  avbrytHref: PropTypes.string,
-  bekrefter: PropTypes.bool,
-  bekreftFeilet: PropTypes.bool,
-  bekreftMoteUtenSvar: PropTypes.func,
 };
 
 export default BekreftMoteUtenSvarSkjema;
