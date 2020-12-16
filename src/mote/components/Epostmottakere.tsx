@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
-import * as moterPropTypes from "../../propTypes";
+import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
+import { MoteDTO } from "../../data/mote/types/moteTypes";
 import { BRUKER, ARBEIDSGIVER } from "../../konstanter";
 
 const texts = {
@@ -8,7 +8,13 @@ const texts = {
   arbeidstaker: "Sendes til arbeidstaker",
 };
 
-const Epostmottakere = ({ mote, arbeidstaker }) => {
+interface EpostmottakereProps {
+  arbeidstaker: Brukerinfo;
+  mote: MoteDTO;
+}
+
+const Epostmottakere = (epostmottakereProps: EpostmottakereProps) => {
+  const { arbeidstaker, mote } = epostmottakereProps;
   const sykmeldt = mote.deltakere.filter((d) => {
     return d.type === BRUKER;
   })[0];
@@ -30,11 +36,6 @@ const Epostmottakere = ({ mote, arbeidstaker }) => {
       )}
     </div>
   );
-};
-
-Epostmottakere.propTypes = {
-  arbeidstaker: PropTypes.object,
-  mote: moterPropTypes.motePt,
 };
 
 export default Epostmottakere;
