@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router";
 import {
   BRUKER,
@@ -7,7 +6,8 @@ import {
   NAV_VEILEDER,
   MULIGE_SVAR,
 } from "../../konstanter";
-import { motePt, motealternativPt, motedeltakertypePt } from "../../propTypes";
+import { MoteAlternativDTO, MoteDTO } from "../../data/mote/types/moteTypes";
+import { MotedeltakerType } from "../../data/mote/types/MotedeltakerType";
 import { getSvar } from "../../utils/moteplanleggerUtils";
 import SvarMedIkon, { NavKan } from "./SvarMedIkon";
 import DatoOgTid from "./DatoOgTid";
@@ -16,12 +16,22 @@ const texts = {
   bekreft: "Bekreft tidspunkt",
 };
 
-const BesvarteTidspunkter = ({
-  mote,
-  alternativer,
-  deltakertype = BRUKER,
-  fnr,
-}) => {
+interface BesvarteTidspunkterProps {
+  alternativer: MoteAlternativDTO[];
+  deltakertype: MotedeltakerType;
+  fnr: string;
+  mote: MoteDTO;
+}
+
+const BesvarteTidspunkter = (
+  besvarteTidspunkterProps: BesvarteTidspunkterProps
+) => {
+  const {
+    alternativer,
+    deltakertype = BRUKER,
+    fnr,
+    mote,
+  } = besvarteTidspunkterProps;
   const arbeidsgiver = mote.deltakere.filter((d) => {
     return d.type === ARBEIDSGIVER;
   })[0];
@@ -114,13 +124,6 @@ const BesvarteTidspunkter = ({
         })}
     </ol>
   );
-};
-
-BesvarteTidspunkter.propTypes = {
-  mote: motePt,
-  alternativer: PropTypes.arrayOf(motealternativPt),
-  deltakertype: motedeltakertypePt,
-  fnr: PropTypes.string,
 };
 
 export default BesvarteTidspunkter;
