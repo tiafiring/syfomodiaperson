@@ -1,18 +1,29 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { keyValue } from "@navikt/digisyfo-npm";
+import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
 import SykmeldingTeaser from "./SykmeldingTeaser";
 
-const SykmeldingTeasere = ({
-  sykmeldinger,
-  ledetekster,
-  fnr,
-  className,
-  tittel = "",
-  ingenSykmeldingerMelding,
-  id,
-  children,
-}) => {
+interface SykmeldingTeasereProps {
+  sykmeldinger: SykmeldingOldFormat[];
+  ledetekster: any;
+  fnr: string;
+  className: string;
+  tittel: string;
+  ingenSykmeldingerMelding: string;
+  id: string;
+  children?: any;
+}
+
+const SykmeldingTeasere = (sykmeldingTeasereProps: SykmeldingTeasereProps) => {
+  const {
+    sykmeldinger,
+    ledetekster,
+    fnr,
+    className,
+    tittel = "",
+    ingenSykmeldingerMelding,
+    id,
+    children,
+  } = sykmeldingTeasereProps;
   return (
     <div className="blokk--l">
       <header className="inngangspanelerHeader">
@@ -37,17 +48,6 @@ const SykmeldingTeasere = ({
       </div>
     </div>
   );
-};
-
-SykmeldingTeasere.propTypes = {
-  sykmeldinger: PropTypes.array,
-  ledetekster: keyValue,
-  className: PropTypes.string,
-  tittel: PropTypes.string,
-  fnr: PropTypes.string,
-  ingenSykmeldingerMelding: PropTypes.string,
-  id: PropTypes.string,
-  children: PropTypes.element,
 };
 
 export default SykmeldingTeasere;
