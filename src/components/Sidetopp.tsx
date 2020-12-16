@@ -1,7 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-const Sidetopp = ({ tittel, htmlTekst }) => {
+interface SidetoppProps {
+  tittel: string;
+  htmlTekst?: any;
+}
+
+const Sidetopp = (sidetoppProps: SidetoppProps) => {
+  const { tittel, htmlTekst } = sidetoppProps;
   return (
     <header className="sidetopp js-sidetopp">
       <h1 className="sidetopp__tittel">{tittel}</h1>
@@ -12,11 +17,6 @@ const Sidetopp = ({ tittel, htmlTekst }) => {
       )}
     </header>
   );
-};
-
-Sidetopp.propTypes = {
-  tittel: PropTypes.string,
-  htmlTekst: PropTypes.object,
 };
 
 export default Sidetopp;

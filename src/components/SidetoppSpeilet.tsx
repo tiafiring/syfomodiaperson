@@ -1,7 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-const SidetoppSpeilet = ({ tittel, htmlTekst }) => {
+interface SidetoppSpeiletProps {
+  tittel: string;
+  htmlTekst?: any;
+}
+
+const SidetoppSpeilet = (sidetoppSpeiletProps: SidetoppSpeiletProps) => {
+  const { tittel, htmlTekst } = sidetoppSpeiletProps;
   return (
     <header className="sidetoppSpeilet">
       <h1 className="sidetoppSpeilet__tittel">{tittel}</h1>
@@ -12,11 +17,6 @@ const SidetoppSpeilet = ({ tittel, htmlTekst }) => {
       )}
     </header>
   );
-};
-
-SidetoppSpeilet.propTypes = {
-  tittel: PropTypes.string.isRequired,
-  htmlTekst: PropTypes.object,
 };
 
 export default SidetoppSpeilet;
