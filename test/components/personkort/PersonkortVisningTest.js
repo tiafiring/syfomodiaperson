@@ -115,21 +115,6 @@ describe("PersonkortVisning", () => {
     expect(komponent.find(PersonkortSykmeldt)).to.have.length(1);
   });
 
-  it("Skal vise PersonkortLedere, dersom visning for leder er valgt", () => {
-    komponent = mount(
-      <PersonkortVisning
-        visning={PERSONKORTVISNING_TYPE.LEDER}
-        ledere={ledere}
-        fastleger={fastleger}
-        navbruker={navbruker}
-        personadresse={personadresse}
-        behandlendeEnhet={behandlendeEnhet}
-        sykmeldinger={sykmeldinger}
-      />
-    );
-    expect(komponent.find(PersonkortLedere)).to.have.length(1);
-  });
-
   it("Skal vise VisningLege, dersom visning for lege er valgt", () => {
     komponent = mount(
       <PersonkortVisning
