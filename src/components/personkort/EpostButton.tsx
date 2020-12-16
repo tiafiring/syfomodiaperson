@@ -45,7 +45,7 @@ const EpostButton = ({ epost }: EpostButtonProps) => {
   };
 
   return (
-    <Column className="col-sm-4">
+    <Column className="col-sm-2">
       <StyledButton ref={buttonRef} onClick={togglePopover} value={epost}>
         <img alt="epost" src="/sykefravaer/img/svg/epost.svg" />
       </StyledButton>

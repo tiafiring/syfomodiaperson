@@ -28,13 +28,13 @@ const EtikettLitenUpper = styled(EtikettLiten)`
 export const PersonKortVirksomhetLederIngressRow = () => {
   return (
     <RowFullWidth>
-      <Column className="col-sm-3">
+      <Column className="col-sm-4">
         <EtikettLitenUpper>{texts.name}</EtikettLitenUpper>
       </Column>
-      <Column className="col-sm-4">
+      <Column className="col-sm-2">
         <EtikettLitenUpper>{texts.email}</EtikettLitenUpper>
       </Column>
-      <Column className="col-sm-1">
+      <Column className="col-sm-2">
         <EtikettLitenUpper>{texts.phone}</EtikettLitenUpper>
       </Column>
       <Column className="col-sm-2">
@@ -73,13 +73,13 @@ export const PersonKortVirksomhetLederRow = (
   return (
     <RowFullWidth>
       <PersonKortVirksomhetLederColumn
-        colSize={3}
+        colSize={4}
         text={leder.navn}
         isActive={isActive}
       />
       <EpostButton epost={leder.epost} />
       <PersonKortVirksomhetLederColumn
-        colSize={1}
+        colSize={2}
         text={leder.tlf}
         isActive={isActive}
       />
