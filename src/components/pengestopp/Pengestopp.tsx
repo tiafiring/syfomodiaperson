@@ -31,8 +31,6 @@ const Wrapper = styled.div`
 
 interface IPengestoppProps {
   sykmeldinger: SykmeldingOldFormat[];
-  flaggperson: FlaggpersonState;
-  fnr: string;
 }
 
 const Alert = styled(AlertStripe)`

@@ -23,8 +23,8 @@ const texts = {
   feilmelding: "Du har ikke tilgang til denne tjenesten",
 };
 
-const pageTitle = (dinSykmelding: SykmeldingOldFormat) => {
-  return dinSykmelding.egenmeldt
+const pageTitle = (dinSykmelding?: SykmeldingOldFormat) => {
+  return dinSykmelding?.egenmeldt
     ? texts.pageTitleEgenmelding
     : texts.pageTitleSykmelding;
 };
@@ -41,8 +41,6 @@ export function getSykmelding(
 const DinSykmeldingSide = () => {
   const fnr = window.location.pathname.split("/")[2];
   const sykmeldingId = window.location.pathname.split("/")[4];
-  console.log("fnr", fnr);
-  console.log("sykmeldingId", sykmeldingId);
 
   const ledeteksterState = useSelector((state: any) => state.ledetekster);
   const navbrukerState = useSelector((state: any) => state.navbruker);
@@ -54,7 +52,7 @@ const DinSykmeldingSide = () => {
   const hentingFeilet =
     sykmeldingerState.hentingFeilet || tilgangState.hentingFeilet;
   const dinSykmelding = getSykmelding(sykmeldingerState.data, sykmeldingId);
-  let arbeidsgiversSykmelding = {};
+  let arbeidsgiversSykmelding = {} as SykmeldingOldFormat | undefined;
 
   if (
     dinSykmelding &&
