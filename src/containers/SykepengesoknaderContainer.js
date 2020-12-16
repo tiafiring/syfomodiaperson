@@ -6,7 +6,7 @@ import Side from "../sider/Side";
 import * as soknaderActions from "../data/sykepengesoknad/soknader_actions";
 import Feilmelding from "../components/Feilmelding";
 import AppSpinner from "../components/AppSpinner";
-import Soknader from "../components/soknader/Soknader";
+import Soknader from "../components/speiling/sykepengsoknader/soknader/Soknader";
 import Brodsmuler from "../components/speiling/Brodsmuler";
 import { SYKEPENGESOKNADER } from "../enums/menypunkter";
 import { soknad as soknadPt } from "../propTypes";

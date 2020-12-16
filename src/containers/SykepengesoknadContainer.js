@@ -19,13 +19,13 @@ import {
   BEHANDLINGSDAGER,
   ANNET_ARBEIDSFORHOLD,
 } from "../enums/soknadtyper";
-import SykepengesoknadSelvstendig from "../components/soknad-selvstendig/SykepengesoknadSelvstendig";
-import SykepengesoknadUtland from "../components/soknad-utland/SykepengesoknadUtland";
-import SendtSoknadArbeidstakerNy from "../components/soknad-arbeidstaker-ny/SendtSoknadArbeidstakerNy";
+import SykepengesoknadSelvstendig from "../components/speiling/sykepengsoknader/soknad-selvstendig/SykepengesoknadSelvstendig";
+import SykepengesoknadUtland from "../components/speiling/sykepengsoknader/soknad-utland/SykepengesoknadUtland";
+import SendtSoknadArbeidstakerNy from "../components/speiling/sykepengsoknader/soknad-arbeidstaker-ny/SendtSoknadArbeidstakerNy";
 import { AVBRUTT, KORRIGERT, SENDT } from "../enums/soknadstatuser";
-import IkkeInnsendtSoknad from "../components/soknad-felles/IkkeInnsendtSoknad";
-import AvbruttSoknadArbeidtakerNy from "../components/soknad-arbeidstaker-ny/AvbruttSoknadArbeidtakerNy";
-import SykepengesoknadBehandlingsdager from "../components/soknad-behandlingsdager/SykepengesoknadBehandlingsdager";
+import IkkeInnsendtSoknad from "../components/speiling/sykepengsoknader/soknad-felles/IkkeInnsendtSoknad";
+import AvbruttSoknadArbeidtakerNy from "../components/speiling/sykepengsoknader/soknad-arbeidstaker-ny/AvbruttSoknadArbeidtakerNy";
+import SykepengesoknadBehandlingsdager from "../components/speiling/sykepengsoknader/soknad-behandlingsdager/SykepengesoknadBehandlingsdager";
 import {
   harForsoktHentetSoknader,
   harForsoktHentetSykmeldinger,

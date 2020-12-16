@@ -7,7 +7,7 @@ import {
 } from "../data/sykmelding/types/SykmeldingOldFormat";
 import Side from "../sider/Side";
 import SidetoppSpeilet from "../components/SidetoppSpeilet";
-import SykmeldingSide from "../components/sykmelding/SykmeldingSide";
+import SykmeldingSide from "../components/speiling/sykmeldinger/sykmelding/SykmeldingSide";
 import Feilmelding from "../components/Feilmelding";
 import AppSpinner from "../components/AppSpinner";
 import Brodsmuler from "../components/speiling/Brodsmuler";

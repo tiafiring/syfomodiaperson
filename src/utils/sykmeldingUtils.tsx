@@ -1,5 +1,5 @@
 import React from "react";
-import { SykmeldingCheckbox } from "../components/sykmelding/sykmeldingOpplysninger/SykmeldingCheckbox";
+import { SykmeldingCheckbox } from "../components/speiling/sykmeldinger/sykmelding/sykmeldingOpplysninger/SykmeldingCheckbox";
 
 export const getSykmeldingCheckbox = (
   sykmeldingBolk: any,

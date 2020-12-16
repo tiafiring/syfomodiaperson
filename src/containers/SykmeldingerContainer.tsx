@@ -5,7 +5,7 @@ import { hentSykmeldinger } from "../data/sykmelding/sykmeldinger_actions";
 import SidetoppSpeilet from "../components/SidetoppSpeilet";
 import Feilmelding from "../components/Feilmelding";
 import AppSpinner from "../components/AppSpinner";
-import DineSykmeldinger from "../components/sykmeldinger/DineSykmeldinger";
+import DineSykmeldinger from "../components/speiling/sykmeldinger/sykmeldinger/DineSykmeldinger";
 import Brodsmuler from "../components/speiling/Brodsmuler";
 import { SYKMELDINGER } from "../enums/menypunkter";
 import Speilingvarsel from "../components/speiling/Speilingvarsel";

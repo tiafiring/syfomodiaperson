@@ -12,8 +12,8 @@ import sykmeldinger from "../../src/data/sykmelding/sykmeldinger";
 import { soknaderHentet } from "../../src/data/sykepengesoknad/soknader_actions";
 import mockSoknader from "../mockdata/mockSoknader";
 import Feilmelding from "../../src/components/Feilmelding";
-import SykepengesoknadSelvstendig from "../../src/components/soknad-selvstendig/SykepengesoknadSelvstendig";
-import SykepengesoknadUtland from "../../src/components/soknad-utland/SykepengesoknadUtland";
+import SykepengesoknadSelvstendig from "../../src/components/speiling/sykepengsoknader/soknad-selvstendig/SykepengesoknadSelvstendig";
+import SykepengesoknadUtland from "../../src/components/speiling/sykepengsoknader/soknad-utland/SykepengesoknadUtland";
 import { sykmeldingerHentet } from "../../src/data/sykmelding/sykmeldinger_actions";
 
 describe("SykepengesoknadContainer", () => {
