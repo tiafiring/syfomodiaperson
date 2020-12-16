@@ -8,7 +8,6 @@ import PersonkortElement from "../../../src/components/personkort/PersonkortElem
 import PersonkortInformasjon from "../../../src/components/personkort/PersonkortInformasjon";
 import PersonkortLedere from "../../../src/components/personkort/ledere/PersonkortLedere";
 import PersonKortVirksomhetHeader from "../../../src/components/personkort/ledere/PersonKortVirksomhetHeader";
-import PersonKortVirksomhetLedere from "../../../src/components/personkort/ledere/PersonKortVirksomhetLedere";
 import PersonkortSykmeldt from "../../../src/components/personkort/PersonkortSykmeldt";
 import PersonkortEnhet from "../../../src/components/personkort/PersonkortEnhet";
 import PersonkortLege, {
@@ -159,29 +158,6 @@ describe("PersonkortVisning", () => {
 
     it("Skal vise PersonkortInformasjon", () => {
       expect(komponent.find(PersonkortInformasjon)).to.have.length(1);
-    });
-  });
-
-  describe("PersonkortLedere", () => {
-    beforeEach(() => {
-      komponent = mount(
-        <PersonkortLedere ledere={ledere} sykmeldinger={sykmeldinger} />
-      );
-    });
-
-    it("Skal vise antall PersonKortLedereVirksomhet lik antall unike virksomheter med innmeldt leder", () => {
-      expect(komponent.find(PersonKortVirksomhetLedere)).to.have.length(2);
-    });
-
-    it("Skal vise antall PersonKortVirksomhetHeader lik antall virksomheter med leder pluss de med aktive sykmeldinger uten leder", () => {
-      expect(komponent.find(PersonKortVirksomhetHeader)).to.have.length(3);
-    });
-
-    it("Skal vise PersonkortElement med feilmelding, dersom bruker ikke har noen ledere ", () => {
-      komponent = mount(
-        <PersonkortLedere ledere={[]} sykmeldinger={sykmeldinger} />
-      );
-      expect(komponent.find(Alertstripe)).to.have.length(1);
     });
   });
 
