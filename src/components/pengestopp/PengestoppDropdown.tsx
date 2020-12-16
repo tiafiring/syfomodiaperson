@@ -7,7 +7,6 @@ import { restdatoTilLesbarDato } from "../../utils/datoUtils";
 import {
   Arbeidsgiver,
   StatusEndring,
-  Sykmelding,
 } from "../../data/pengestopp/types/FlaggPerson";
 import {
   arbeidsgivereWithStoppAutomatikkStatus,
