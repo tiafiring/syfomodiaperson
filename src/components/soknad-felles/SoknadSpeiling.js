@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Speilingvarsel from "../Speilingvarsel";
+import Speilingvarsel from "../speiling/Speilingvarsel";
 import Brodsmuler from "../speiling/Brodsmuler";
 import SidetoppSpeilet from "../SidetoppSpeilet";
 import TilbakeTilSoknader from "./TilbakeTilSoknader";

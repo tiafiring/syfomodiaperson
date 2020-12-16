@@ -10,7 +10,7 @@ import Soknader from "../components/soknader/Soknader";
 import Brodsmuler from "../components/speiling/Brodsmuler";
 import { SYKEPENGESOKNADER } from "../enums/menypunkter";
 import { soknad as soknadPt } from "../propTypes";
-import Speilingvarsel from "../components/Speilingvarsel";
+import Speilingvarsel from "../components/speiling/Speilingvarsel";
 import { hentBegrunnelseTekst } from "../utils/tilgangUtils";
 import Feilstripe from "../components/Feilstripe";
 import { harForsoktHentetSoknader } from "../utils/reducerUtils";

@@ -14,7 +14,7 @@ import SykmeldingSide from "../components/sykmelding/SykmeldingSide";
 import Feilmelding from "../components/Feilmelding";
 import AppSpinner from "../components/AppSpinner";
 import Brodsmuler from "../components/speiling/Brodsmuler";
-import Speilingvarsel from "../components/Speilingvarsel";
+import Speilingvarsel from "../components/speiling/Speilingvarsel";
 import { SYKMELDINGER } from "../enums/menypunkter";
 import { hentBegrunnelseTekst } from "../utils/tilgangUtils";
 import { ARBEIDSTAKER } from "../enums/arbeidssituasjoner";

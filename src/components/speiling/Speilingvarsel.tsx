@@ -1,8 +1,12 @@
 import React from "react";
 import Panel from "nav-frontend-paneler";
-import PropTypes from "prop-types";
 
-const Speilingvarsel = ({ brukernavn }) => {
+interface SpeilingvarselProps {
+  brukernavn: string;
+}
+
+const Speilingvarsel = (speilingvarselProps: SpeilingvarselProps) => {
+  const { brukernavn } = speilingvarselProps;
   return (
     <Panel className="panel panel--komprimert blokk--s">
       <p>
@@ -10,10 +14,6 @@ const Speilingvarsel = ({ brukernavn }) => {
       </p>
     </Panel>
   );
-};
-
-Speilingvarsel.propTypes = {
-  brukernavn: PropTypes.string,
 };
 
 export default Speilingvarsel;

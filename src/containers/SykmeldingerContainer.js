@@ -10,7 +10,7 @@ import AppSpinner from "../components/AppSpinner";
 import DineSykmeldinger from "../components/sykmeldinger/DineSykmeldinger";
 import Brodsmuler from "../components/speiling/Brodsmuler";
 import { SYKMELDINGER } from "../enums/menypunkter";
-import Speilingvarsel from "../components/Speilingvarsel";
+import Speilingvarsel from "../components/speiling/Speilingvarsel";
 import { hentBegrunnelseTekst } from "../utils/tilgangUtils";
 import { harForsoktHentetSykmeldinger } from "../utils/reducerUtils";
 import Pengestopp from "../components/pengestopp/Pengestopp";
