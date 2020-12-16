@@ -13,7 +13,7 @@ import * as sykmeldingerActions from "../data/sykmelding/sykmeldinger_actions";
 import SykmeldingSide from "../components/sykmelding/SykmeldingSide";
 import Feilmelding from "../components/Feilmelding";
 import AppSpinner from "../components/AppSpinner";
-import Brodsmuler from "../components/Brodsmuler";
+import Brodsmuler from "../components/speiling/Brodsmuler";
 import Speilingvarsel from "../components/Speilingvarsel";
 import { SYKMELDINGER } from "../enums/menypunkter";
 import { hentBegrunnelseTekst } from "../utils/tilgangUtils";

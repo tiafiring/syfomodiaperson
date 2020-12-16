@@ -8,7 +8,7 @@ import * as actionCreators from "../data/sykmelding/sykmeldinger_actions";
 import Feilmelding from "../components/Feilmelding";
 import AppSpinner from "../components/AppSpinner";
 import DineSykmeldinger from "../components/sykmeldinger/DineSykmeldinger";
-import Brodsmuler from "../components/Brodsmuler";
+import Brodsmuler from "../components/speiling/Brodsmuler";
 import { SYKMELDINGER } from "../enums/menypunkter";
 import Speilingvarsel from "../components/Speilingvarsel";
 import { hentBegrunnelseTekst } from "../utils/tilgangUtils";
