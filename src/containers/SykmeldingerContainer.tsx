@@ -86,6 +86,7 @@ const SykmeldingerSide = () => {
                 htmlTekst={htmlIntro}
               />
               <DineSykmeldinger
+                ledetekster={ledetekster}
                 fnr={fnr}
                 sykmeldinger={sykmeldinger}
                 sortering={sortering}
