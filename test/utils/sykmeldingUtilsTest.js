@@ -8,7 +8,6 @@ import {
   erMeldingTilArbeidsgiverInformasjon,
   erMeldingTilNavInformasjon,
   erMulighetForArbeidInformasjon,
-  erUtdypendeOpplysningerInformasjon,
   arbeidsgivernavnEllerArbeidssituasjon,
   sykmeldingerMedStatusSendt,
   sykmeldingerInnenforOppfolgingstilfellet,
@@ -291,44 +290,6 @@ describe("sykmeldingUtils", () => {
       };
 
       const erIkkeEkstraInfo = erHensynPaaArbeidsplassenInformasjon(sykmelding);
-
-      expect(erIkkeEkstraInfo).to.equal(false);
-    });
-  });
-
-  describe("erUtdypendeOpplysningerInformasjon", () => {
-    it("skal returnere true dersom sykmeldingen inneholder utdypende opplysninger", () => {
-      const sykmelding = {
-        utdypendeOpplysninger: {
-          henvisningUtredningBehandling: "Henvist til fysio",
-          paavirkningArbeidsevne:
-            "Kan ikke utføre arbeidsoppgaver 100% som kreves fra yrket",
-          resultatAvBehandling: "Nei",
-          sykehistorie: "Langvarig korsryggsmerter. Ømhet og smerte",
-          sykehistoriePunkt63:
-            "Pkt. 6.3.1: Langvarig korsryggsmerter. Ømhet og smerte",
-          henvisningUtredningBehandlingPunkt63:
-            "Pkt. 6.3.2: Henvist til fysio, dette påvirker arbeidsevnen",
-        },
-      };
-
-      const erEkstraInfo = erUtdypendeOpplysningerInformasjon(sykmelding);
-
-      expect(erEkstraInfo).to.equal(true);
-    });
-    it("skal returnere false dersom sykmeldingen ikke inneholder utdypende opplysninger", () => {
-      const sykmelding = {
-        utdypendeOpplysninger: {
-          henvisningUtredningBehandling: null,
-          paavirkningArbeidsevne: null,
-          resultatAvBehandling: null,
-          sykehistorie: null,
-          sykehistoriePunkt63: null,
-          henvisningUtredningBehandlingPunkt63: null,
-        },
-      };
-
-      const erIkkeEkstraInfo = erUtdypendeOpplysningerInformasjon(sykmelding);
 
       expect(erIkkeEkstraInfo).to.equal(false);
     });

@@ -45,6 +45,15 @@ export interface BehandlingsutfallDTO {
   status: BehandlingsutfallStatusDTO;
 }
 
+// ------ UTDYPENDE_OPPLYSNINGER
+type Restriksjoner = "SKJERMET_FOR_ARBEIDSGIVER" | "SKJERMET_FOR_NAV";
+
+export interface UtdypendeOpplysning {
+  sporsmal: string;
+  svar: string;
+  restriksjoner: Restriksjoner[];
+}
+
 export interface SykmeldingNewFormatDTO {
   id: string;
   mottattTidspunkt: Date;
@@ -55,4 +64,5 @@ export interface SykmeldingNewFormatDTO {
   arbeidsgiver?: ArbeidsgiverDTO;
   sykmeldingsperioder: SykmeldingsperiodeDTO[];
   sykmeldingStatus: SykmeldingStatusDTO;
+  utdypendeOpplysninger: Map<string, Map<string, UtdypendeOpplysning>>;
 }

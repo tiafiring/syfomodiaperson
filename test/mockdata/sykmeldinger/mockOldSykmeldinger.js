@@ -91,15 +91,7 @@ const mockOldSykmeldinger = [
       dokumenterbarPasientkontakt: null,
       tilbakedatertBegrunnelse: null,
     },
-    utdypendeOpplysninger: {
-      grupper: [],
-      henvisningUtredningBehandling: undefined,
-      paavirkningArbeidsevne: undefined,
-      resultatAvBehandling: undefined,
-      sykehistorie: undefined,
-      sykehistoriePunkt63: undefined,
-      henvisningUtredningBehandlingPunkt63: undefined,
-    },
+    utdypendeOpplysninger: {},
     valgtArbeidssituasjon: null,
     behandlingsutfall: {
       status: "OK",

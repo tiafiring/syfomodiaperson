@@ -1,3 +1,5 @@
+import { UtdypendeOpplysning } from "./SykmeldingNewFormatDTO";
+
 export enum ArbeidssituasjonType {
   NAERINGSDRIVENDE = "NAERINGSDRIVENDE",
   FRILANSER = "FRILANSER",
@@ -111,19 +113,7 @@ export interface SykmeldingOldFormat {
     utenArbeidsgiverAntarTilbakeIArbeidDato: string | null;
     utenArbeidsgiverTilbakemelding: string | null;
   };
-  utdypendeOpplysninger: {
-    sykehistorie?: string | null;
-    paavirkningArbeidsevne?: string | null;
-    resultatAvBehandling?: string | null;
-    henvisningUtredningBehandling?: string | null;
-    grupper: {
-      id: string;
-      sporsmal: {
-        id: string;
-        svar: string;
-      }[];
-    }[];
-  };
+  utdypendeOpplysninger: Map<string, Map<string, UtdypendeOpplysning>>;
   arbeidsevne: {
     tilretteleggingArbeidsplass: string | null;
     tiltakNAV: string | null;

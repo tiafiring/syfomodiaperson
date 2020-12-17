@@ -684,37 +684,8 @@ describe("sykmeldingParser", () => {
     it("Returns correct utdypendeOpplysninger with utdypende opplysninger pkt. 6.2", () => {
       const sykmeldingWithUtdypendeOpplysningerPkt62 = mockSykmeldingerWithUtdypendeOpplysningerPkt62;
 
-      const expectedUtdypendeOpplysninger = {
-        grupper: [
-          {
-            id: "6.2",
-            sporsmal: [
-              {
-                id: "6.2.1",
-                svar: "Pkt. 6.2.1",
-              },
-              {
-                id: "6.2.2",
-                svar: "Pkt. 6.2.2",
-              },
-              {
-                id: "6.2.3",
-                svar: "Pkt. 6.2.3",
-              },
-              {
-                id: "6.2.4",
-                svar: "Pkt. 6.2.4",
-              },
-            ],
-          },
-        ],
-        henvisningUtredningBehandling: "Pkt. 6.2.4",
-        paavirkningArbeidsevne: "Pkt. 6.2.2",
-        resultatAvBehandling: "Pkt. 6.2.3",
-        sykehistorie: "Pkt. 6.2.1",
-        sykehistoriePunkt63: undefined,
-        henvisningUtredningBehandlingPunkt63: undefined,
-      };
+      const expectedUtdypendeOpplysninger =
+        mockSykmeldingerWithUtdypendeOpplysningerPkt62.utdypendeOpplysninger;
 
       const outputSM = newSMFormat2OldFormat(
         sykmeldingWithUtdypendeOpplysningerPkt62,
@@ -729,29 +700,8 @@ describe("sykmeldingParser", () => {
     it("Returns correct utdypendeOpplysninger with utdypende opplysninger pkt. 6.3", () => {
       const sykmeldingWithUtdypendeOpplysningerPkt63 = mockSykmeldingerWithUtdypendeOpplysningerPkt63;
 
-      const expectedUtdypendeOpplysninger = {
-        grupper: [
-          {
-            id: "6.3",
-            sporsmal: [
-              {
-                id: "6.3.1",
-                svar: "Pkt. 6.3.1",
-              },
-              {
-                id: "6.3.2",
-                svar: "Pkt. 6.3.2",
-              },
-            ],
-          },
-        ],
-        henvisningUtredningBehandling: undefined,
-        paavirkningArbeidsevne: undefined,
-        resultatAvBehandling: undefined,
-        sykehistorie: undefined,
-        sykehistoriePunkt63: "Pkt. 6.3.1",
-        henvisningUtredningBehandlingPunkt63: "Pkt. 6.3.2",
-      };
+      const expectedUtdypendeOpplysninger =
+        sykmeldingWithUtdypendeOpplysningerPkt63.utdypendeOpplysninger;
 
       const outputSM = newSMFormat2OldFormat(
         sykmeldingWithUtdypendeOpplysningerPkt63,
@@ -766,15 +716,7 @@ describe("sykmeldingParser", () => {
     it("Returns correct utdypendeOpplysninger without utdypende opplysninger", () => {
       const mockSM = mockSykmeldinger[0];
 
-      const expectedUtdypendeOpplysninger = {
-        grupper: [],
-        henvisningUtredningBehandling: undefined,
-        paavirkningArbeidsevne: undefined,
-        resultatAvBehandling: undefined,
-        sykehistorie: undefined,
-        sykehistoriePunkt63: undefined,
-        henvisningUtredningBehandlingPunkt63: undefined,
-      };
+      const expectedUtdypendeOpplysninger = mockSM.utdypendeOpplysninger;
 
       const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
 
@@ -786,37 +728,8 @@ describe("sykmeldingParser", () => {
     it("Returns correct utdypendeOpplysninger with only some fields", () => {
       const sykmeldingWithUtdypendeOpplysningerPkt62 = mockSykmeldingerWithUtdypendeOpplysningerPkt62SomeFieldsOmitted;
 
-      const expectedUtdypendeOpplysninger = {
-        grupper: [
-          {
-            id: "6.2",
-            sporsmal: [
-              {
-                id: "6.2.1",
-                svar: "Pkt. 6.2.1",
-              },
-              {
-                id: "6.2.2",
-                svar: "Pkt. 6.2.2",
-              },
-              {
-                id: "6.2.3",
-                svar: undefined,
-              },
-              {
-                id: "6.2.4",
-                svar: undefined,
-              },
-            ],
-          },
-        ],
-        henvisningUtredningBehandling: undefined,
-        paavirkningArbeidsevne: "Pkt. 6.2.2",
-        resultatAvBehandling: undefined,
-        sykehistorie: "Pkt. 6.2.1",
-        sykehistoriePunkt63: undefined,
-        henvisningUtredningBehandlingPunkt63: undefined,
-      };
+      const expectedUtdypendeOpplysninger =
+        mockSykmeldingerWithUtdypendeOpplysningerPkt62SomeFieldsOmitted.utdypendeOpplysninger;
 
       const outputSM = newSMFormat2OldFormat(
         sykmeldingWithUtdypendeOpplysningerPkt62,
@@ -1083,15 +996,7 @@ describe("oldFormatSMForAG", () => {
   it("Returns correct AG version with utdypendeOpplysninger removed when pkt 6.2", () => {
     const sykmeldingerWithUtdypendeOpplysningerPkt62 = mockSykmeldingerWithUtdypendeOpplysningerPkt62;
 
-    const expectedUtdypendeOpplysninger = {
-      grupper: [],
-      henvisningUtredningBehandling: undefined,
-      paavirkningArbeidsevne: undefined,
-      resultatAvBehandling: undefined,
-      sykehistorie: undefined,
-      sykehistoriePunkt63: undefined,
-      henvisningUtredningBehandlingPunkt63: undefined,
-    };
+    const expectedUtdypendeOpplysninger = {};
 
     const outputSM = oldFormatSMForAG(
       sykmeldingerWithUtdypendeOpplysningerPkt62,
@@ -1106,15 +1011,7 @@ describe("oldFormatSMForAG", () => {
   it("Returns correct AG version with utdypendeOpplysninger removed when pkt 6.3", () => {
     const sykmeldingerWithUtdypendeOpplysningerPkt63 = mockSykmeldingerWithUtdypendeOpplysningerPkt63;
 
-    const expectedUtdypendeOpplysninger = {
-      grupper: [],
-      henvisningUtredningBehandling: undefined,
-      paavirkningArbeidsevne: undefined,
-      resultatAvBehandling: undefined,
-      sykehistorie: undefined,
-      sykehistoriePunkt63: undefined,
-      henvisningUtredningBehandlingPunkt63: undefined,
-    };
+    const expectedUtdypendeOpplysninger = {};
 
     const outputSM = oldFormatSMForAG(
       sykmeldingerWithUtdypendeOpplysningerPkt63,

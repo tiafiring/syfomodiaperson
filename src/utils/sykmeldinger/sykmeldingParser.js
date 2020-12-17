@@ -252,163 +252,6 @@ const mapTilbakedatering = (sykmelding) => {
   };
 };
 
-const mapUtdypendeOpplysninger62 = (utdypendeOpplysninger) => {
-  const utdypendeOpplysninger62 =
-    utdypendeOpplysninger && utdypendeOpplysninger["6.2"];
-  return (
-    utdypendeOpplysninger62 && {
-      id: "6.2",
-      sporsmal: [
-        {
-          id: "6.2.1",
-          svar:
-            utdypendeOpplysninger62["6.2.1"] &&
-            utdypendeOpplysninger62["6.2.1"].svar,
-        },
-        {
-          id: "6.2.2",
-          svar:
-            utdypendeOpplysninger62["6.2.2"] &&
-            utdypendeOpplysninger62["6.2.2"].svar,
-        },
-        {
-          id: "6.2.3",
-          svar:
-            utdypendeOpplysninger62["6.2.3"] &&
-            utdypendeOpplysninger62["6.2.3"].svar,
-        },
-        {
-          id: "6.2.4",
-          svar:
-            utdypendeOpplysninger62["6.2.4"] &&
-            utdypendeOpplysninger62["6.2.4"].svar,
-        },
-      ],
-    }
-  );
-};
-
-const mapUtdypendeOpplysninger63 = (utdypendeOpplysninger) => {
-  const utdypendeOpplysninger63 =
-    utdypendeOpplysninger && utdypendeOpplysninger["6.3"];
-  return (
-    utdypendeOpplysninger63 && {
-      id: "6.3",
-      sporsmal: [
-        {
-          id: "6.3.1",
-          svar:
-            utdypendeOpplysninger63["6.3.1"] &&
-            utdypendeOpplysninger63["6.3.1"].svar,
-        },
-        {
-          id: "6.3.2",
-          svar:
-            utdypendeOpplysninger63["6.3.2"] &&
-            utdypendeOpplysninger63["6.3.2"].svar,
-        },
-      ],
-    }
-  );
-};
-
-const mapHenvisningUtredningBehandling = (utdypendeOpplysninger62) => {
-  const henvisningUtredningOgBehandling =
-    utdypendeOpplysninger62 &&
-    utdypendeOpplysninger62.sporsmal.find((spm) => {
-      return spm.id === "6.2.4";
-    });
-
-  return (
-    henvisningUtredningOgBehandling && henvisningUtredningOgBehandling.svar
-  );
-};
-
-const mapPaavirkningArbeidsevne = (utdypendeOpplysninger62) => {
-  const paavirkingArbeidsevne =
-    utdypendeOpplysninger62 &&
-    utdypendeOpplysninger62.sporsmal.find((spm) => {
-      return spm.id === "6.2.2";
-    });
-
-  return paavirkingArbeidsevne && paavirkingArbeidsevne.svar;
-};
-
-const mapResultatAvBehandling = (utdypendeOpplysninger62) => {
-  const resultatAvBehandling =
-    utdypendeOpplysninger62 &&
-    utdypendeOpplysninger62.sporsmal.find((spm) => {
-      return spm.id === "6.2.3";
-    });
-
-  return resultatAvBehandling && resultatAvBehandling.svar;
-};
-
-const mapSykehistorie = (utdypendeOpplysninger62) => {
-  const sykehistorie =
-    utdypendeOpplysninger62 &&
-    utdypendeOpplysninger62.sporsmal.find((spm) => {
-      return spm.id === "6.2.1";
-    });
-
-  return sykehistorie && sykehistorie.svar;
-};
-
-const mapSykehistoriePunkt63 = (utdypendeOpplysninger63) => {
-  const sykehistoriePunkt63 =
-    utdypendeOpplysninger63 &&
-    utdypendeOpplysninger63.sporsmal.find((spm) => {
-      return spm.id === "6.3.1";
-    });
-
-  return sykehistoriePunkt63 && sykehistoriePunkt63.svar;
-};
-
-const mapHenvisningUtredningBehandlingPunkt63 = (utdypendeOpplysninger63) => {
-  const henvisningUtredningBehandlingPunkt63 =
-    utdypendeOpplysninger63 &&
-    utdypendeOpplysninger63.sporsmal.find((spm) => {
-      return spm.id === "6.3.2";
-    });
-
-  return (
-    henvisningUtredningBehandlingPunkt63 &&
-    henvisningUtredningBehandlingPunkt63.svar
-  );
-};
-
-const mapUtdypendeOpplysninger = (sykmelding) => {
-  const utDypendeOpplysninger = sykmelding.utdypendeOpplysninger;
-  const utdypendeOpplysninger62 = mapUtdypendeOpplysninger62(
-    utDypendeOpplysninger
-  );
-  const utdypendeOpplysninger63 = mapUtdypendeOpplysninger63(
-    utDypendeOpplysninger
-  );
-
-  let grupper = [];
-  if (utdypendeOpplysninger62) {
-    grupper = [utdypendeOpplysninger62];
-  }
-  if (utdypendeOpplysninger63) {
-    grupper = [...grupper, utdypendeOpplysninger63];
-  }
-
-  return {
-    grupper,
-    henvisningUtredningBehandling: mapHenvisningUtredningBehandling(
-      utdypendeOpplysninger62
-    ),
-    paavirkningArbeidsevne: mapPaavirkningArbeidsevne(utdypendeOpplysninger62),
-    resultatAvBehandling: mapResultatAvBehandling(utdypendeOpplysninger62),
-    sykehistorie: mapSykehistorie(utdypendeOpplysninger62),
-    sykehistoriePunkt63: mapSykehistoriePunkt63(utdypendeOpplysninger63),
-    henvisningUtredningBehandlingPunkt63: mapHenvisningUtredningBehandlingPunkt63(
-      utdypendeOpplysninger63
-    ),
-  };
-};
-
 const sporsmalOfType = (sporsmalOgSvarListe, type) => {
   return (
     sporsmalOgSvarListe &&
@@ -513,7 +356,7 @@ export const newSMFormat2OldFormat = (sykmelding, fnr) => {
     stillingsprosent:
       sykmelding.arbeidsgiver && sykmelding.arbeidsgiver.stillingsprosent,
     tilbakedatering: mapTilbakedatering(sykmelding),
-    utdypendeOpplysninger: mapUtdypendeOpplysninger(sykmelding),
+    utdypendeOpplysninger: sykmelding.utdypendeOpplysninger,
     valgtArbeidssituasjon: mapValgtArbeidssituasjon(sykmelding),
     behandlingsutfall: sykmelding.behandlingsutfall,
     egenmeldt: sykmelding.egenmeldt,
@@ -575,14 +418,6 @@ export const oldFormatSMForAG = (sykmelding, fnr) => {
         oldFormatSM.tilbakedatering.dokumenterbarPasientkontakt,
       tilbakedatertBegrunnelse: null,
     },
-    utdypendeOpplysninger: {
-      grupper: [],
-      henvisningUtredningBehandling: undefined,
-      paavirkningArbeidsevne: undefined,
-      resultatAvBehandling: undefined,
-      sykehistorie: undefined,
-      sykehistoriePunkt63: undefined,
-      henvisningUtredningBehandlingPunkt63: undefined,
-    },
+    utdypendeOpplysninger: {},
   };
 };

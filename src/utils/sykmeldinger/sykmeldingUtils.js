@@ -68,18 +68,6 @@ export const erHensynPaaArbeidsplassenInformasjon = (sykmelding) => {
   return !!erEkstraInformasjon;
 };
 
-export const erUtdypendeOpplysningerInformasjon = (sykmelding) => {
-  const erEkstraInformasjon =
-    sykmelding.utdypendeOpplysninger &&
-    (sykmelding.utdypendeOpplysninger.sykehistorie ||
-      sykmelding.utdypendeOpplysninger.paavirkningArbeidsevne ||
-      sykmelding.utdypendeOpplysninger.resultatAvBehandling ||
-      sykmelding.utdypendeOpplysninger.henvisningUtredningBehandling ||
-      sykmelding.utdypendeOpplysninger.sykehistoriePunkt63 ||
-      sykmelding.utdypendeOpplysninger.henvisningUtredningBehandlingPunkt63);
-  return !!erEkstraInformasjon;
-};
-
 export const erBedringAvArbeidsevnenInformasjon = (sykmelding) => {
   const erEkstraInformasjon =
     sykmelding.arbeidsevne &&
@@ -107,7 +95,7 @@ export const erEkstraInformasjonISykmeldingen = (sykmelding) => {
     erFriskmeldingInformasjon(sykmelding) ||
     erArbeidsforEtterPerioden(sykmelding) ||
     erHensynPaaArbeidsplassenInformasjon(sykmelding) ||
-    erUtdypendeOpplysningerInformasjon(sykmelding) ||
+    sykmelding.utdypendeOpplysninger ||
     erBedringAvArbeidsevnenInformasjon(sykmelding) ||
     erMeldingTilNavInformasjon(sykmelding) ||
     erMeldingTilArbeidsgiverInformasjon(sykmelding) ||

@@ -1,85 +1,43 @@
 import React from "react";
 import {
   getLedetekst,
-  getSykmeldingOpplysning,
   keyValue,
   sykmelding as sykmeldingPt,
 } from "@navikt/digisyfo-npm";
 import SykmeldingOpplysning from "./SykmeldingOpplysning";
 
+const OpplysningsGruppe = ({ opplysningGruppe }) => {
+  const sporsmal = Object.entries(opplysningGruppe).map(
+    ([key, sporsmalSvar]) => (
+      <SykmeldingOpplysning key={key} tittel={sporsmalSvar.sporsmal}>
+        <p className="opplysning__verdi">{sporsmalSvar.svar}</p>
+      </SykmeldingOpplysning>
+    )
+  );
+  return <>{sporsmal}</>;
+};
+
 const UtdypendeOpplysninger = ({ sykmelding, ledetekster }) => {
-  const visSeksjon =
-    sykmelding.utdypendeOpplysninger.sykehistorie ||
-    sykmelding.utdypendeOpplysninger.paavirkningArbeidsevne ||
-    sykmelding.utdypendeOpplysninger.resultatAvBehandling ||
-    sykmelding.utdypendeOpplysninger.henvisningUtredningBehandling;
-
-  if (
-    sykmelding.utdypendeOpplysninger.grupper &&
-    sykmelding.utdypendeOpplysninger.grupper.length > 0
-  ) {
-    return (
-      <div className="sykmeldingSeksjon">
-        <h4 className="sykmeldingSeksjon__tittel">
-          {getLedetekst("din-sykmelding.utdypende.tittel", ledetekster)}
-        </h4>
-
-        {sykmelding.utdypendeOpplysninger.grupper.map((gruppe) => {
-          return gruppe.sporsmal.map((sporsmal) => {
-            return (
-              <SykmeldingOpplysning
-                key={`${sykmelding.id}-${sporsmal.id}`}
-                tittel={getLedetekst(
-                  `din-sykmelding.utdypende.${sporsmal.id}.tittel`,
-                  ledetekster
-                )}
-              >
-                <p className="opplysning__verdi">{sporsmal.svar}</p>
-              </SykmeldingOpplysning>
-            );
-          });
-        })}
-      </div>
-    );
-  }
-  if (!visSeksjon) {
-    return <span />;
-  }
+  const utdypendeOpplysninger = sykmelding.utdypendeOpplysninger;
   return (
-    <div className="sykmeldingSeksjon">
-      <h4 className="sykmeldingSeksjon__tittel">
-        {getLedetekst("din-sykmelding.utdypende.tittel", ledetekster)}
-      </h4>
-      {getSykmeldingOpplysning(
-        sykmelding.utdypendeOpplysninger,
-        "sykehistorie",
-        getLedetekst(
-          "din-sykmelding.utdypende.sykehistorie.tittel",
-          ledetekster
-        )
+    <>
+      {utdypendeOpplysninger && (
+        <div className="sykmeldingSeksjon">
+          <h4 className="sykmeldingSeksjon__tittel">
+            {getLedetekst("din-sykmelding.utdypende.tittel", ledetekster)}
+          </h4>
+
+          {Object.entries(utdypendeOpplysninger).map(
+            ([key, opplysningGruppe]) => (
+              <OpplysningsGruppe
+                key={key}
+                opplysningGruppe={opplysningGruppe}
+              />
+            )
+          )}
+        </div>
       )}
-      {getSykmeldingOpplysning(
-        sykmelding.utdypendeOpplysninger,
-        "paavirkningArbeidsevne",
-        getLedetekst(
-          "din-sykmelding.utdypende.paavirkning.arbeidsevne.tittel",
-          ledetekster
-        )
-      )}
-      {getSykmeldingOpplysning(
-        sykmelding.utdypendeOpplysninger,
-        "resultatAvBehandling",
-        getLedetekst(
-          "din-sykmelding.utdypende.behandlingsresultat.tittel",
-          ledetekster
-        )
-      )}
-      {getSykmeldingOpplysning(
-        sykmelding.utdypendeOpplysninger,
-        "henvisningUtredningBehandling",
-        getLedetekst("din-sykmelding.utdypende.henvisning.tittel", ledetekster)
-      )}
-    </div>
+    </>
   );
 };
 
