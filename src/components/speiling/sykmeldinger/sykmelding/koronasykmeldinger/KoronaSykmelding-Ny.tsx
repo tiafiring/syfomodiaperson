@@ -1,8 +1,9 @@
 import React from "react";
-import { Bjorn, sykmelding as sykmeldingPt } from "@navikt/digisyfo-npm";
+import { Bjorn } from "@navikt/digisyfo-npm";
 import { Undertittel, Normaltekst } from "nav-frontend-typografi";
 import { Knapp } from "nav-frontend-knapper";
 import DineKoronaSykmeldingOpplysninger from "../sykmeldingOpplysninger/DineKoronaSykmeldingOpplysninger";
+import { SykmeldingOldFormat } from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
 
 const texts = {
   pageSubtitle: "for selvstendig næringsdrivende og frilansere",
@@ -13,7 +14,14 @@ const texts = {
   button: "Gå til utfyllingen",
 };
 
-const KoronaSykmeldingNy = ({ sykmelding }) => {
+interface KoronaSykmeldingAvbruttProps {
+  sykmelding: SykmeldingOldFormat;
+}
+
+const KoronaSykmeldingNy = (
+  koronaSykmeldingAvbruttProps: KoronaSykmeldingAvbruttProps
+) => {
+  const { sykmelding } = koronaSykmeldingAvbruttProps;
   return (
     <div>
       <Undertittel style={{ marginBottom: "2.5rem", textAlign: "center" }}>
@@ -48,10 +56,6 @@ const KoronaSykmeldingNy = ({ sykmelding }) => {
       </article>
     </div>
   );
-};
-
-KoronaSykmeldingNy.propTypes = {
-  sykmelding: sykmeldingPt,
 };
 
 export default KoronaSykmeldingNy;

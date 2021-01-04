@@ -1,6 +1,7 @@
 import React from "react";
-import { Utvidbar, sykmelding as sykmeldingPt } from "@navikt/digisyfo-npm";
+import { Utvidbar } from "@navikt/digisyfo-npm";
 import { Undertittel } from "nav-frontend-typografi";
+import { SykmeldingOldFormat } from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
 import SykmeldingStatuspanel from "../../sykmeldingstatuspanel/SykmeldingStatuspanel";
 import DineKoronaSykmeldingOpplysninger from "../sykmeldingOpplysninger/DineKoronaSykmeldingOpplysninger";
 
@@ -9,7 +10,14 @@ const texts = {
   expandableTitle: "Dine opplysninger",
 };
 
-const KoronaSykmeldingAvbrutt = ({ sykmelding }) => {
+interface KoronaSykmeldingAvbruttProps {
+  sykmelding: SykmeldingOldFormat;
+}
+
+const KoronaSykmeldingAvbrutt = (
+  koronaSykmeldingAvbruttProps: KoronaSykmeldingAvbruttProps
+) => {
+  const { sykmelding } = koronaSykmeldingAvbruttProps;
   return (
     <div>
       <Undertittel style={{ marginBottom: "2.5rem", textAlign: "center" }}>
@@ -30,10 +38,6 @@ const KoronaSykmeldingAvbrutt = ({ sykmelding }) => {
       </Utvidbar>
     </div>
   );
-};
-
-KoronaSykmeldingAvbrutt.propTypes = {
-  sykmelding: sykmeldingPt,
 };
 
 export default KoronaSykmeldingAvbrutt;
