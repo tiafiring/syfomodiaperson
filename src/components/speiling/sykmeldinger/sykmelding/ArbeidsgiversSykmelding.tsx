@@ -5,7 +5,6 @@ import ArbeidsgiversSykmeldingOpplysninger from "./ArbeidsgiversSykmeldingOpplys
 
 interface ArbeidsgiversSykmeldingProps {
   sykmelding: SykmeldingOldFormat;
-  ledetekster: any;
   Overskrift?: string;
   erApen?: boolean;
 }

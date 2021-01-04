@@ -70,9 +70,7 @@ export const mapStateToProps = (state, ownProps) => {
     mote: aktivtMote,
     avbrytFeilet: state.moter.avbrytFeilet,
     avbryter: state.moter.avbryter,
-    henter:
-      state.moter.henter || state.navbruker.henter || state.ledetekster.henter,
-    ledetekster: state.ledetekster.data,
+    henter: state.moter.henter || state.navbruker.henter,
     arbeidstaker: state.navbruker.data,
     antallNyeTidspunkt: state.moter.antallNyeTidspunkt,
     nyeAlternativFeilet: state.moter.nyeAlternativFeilet,

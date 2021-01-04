@@ -4,7 +4,6 @@ import SykmeldingTeaser from "./SykmeldingTeaser";
 
 interface SykmeldingTeasereProps {
   sykmeldinger: SykmeldingOldFormat[];
-  ledetekster: any;
   fnr: string;
   className: string;
   tittel: string;
@@ -16,7 +15,6 @@ interface SykmeldingTeasereProps {
 const SykmeldingTeasere = (sykmeldingTeasereProps: SykmeldingTeasereProps) => {
   const {
     sykmeldinger,
-    ledetekster,
     fnr,
     className,
     tittel = "",
@@ -34,12 +32,7 @@ const SykmeldingTeasere = (sykmeldingTeasereProps: SykmeldingTeasereProps) => {
         {sykmeldinger.length ? (
           sykmeldinger.map((sykmelding, idx) => {
             return (
-              <SykmeldingTeaser
-                key={idx}
-                fnr={fnr}
-                sykmelding={sykmelding}
-                ledetekster={ledetekster}
-              />
+              <SykmeldingTeaser key={idx} fnr={fnr} sykmelding={sykmelding} />
             );
           })
         ) : (

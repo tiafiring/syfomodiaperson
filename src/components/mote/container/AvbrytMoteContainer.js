@@ -31,7 +31,6 @@ export class AvbrytMoteSide extends Component {
 
   render() {
     const {
-      ledetekster,
       avbryter,
       avbrytFeilet,
       hentingFeiletBool,
@@ -59,7 +58,6 @@ export class AvbrytMoteSide extends Component {
                   return (
                     <AvbrytMote
                       arbeidstaker={arbeidstaker}
-                      ledetekster={ledetekster}
                       avbrytFeilet={avbrytFeilet}
                       avbryter={avbryter}
                       mote={mote}
@@ -87,7 +85,6 @@ AvbrytMoteSide.propTypes = {
   hentingFeiletBool: PropTypes.bool,
   mote: PropTypes.object,
   arbeidstaker: PropTypes.object,
-  ledetekster: keyValue,
   hentMoter: PropTypes.func,
   avbrytMote: PropTypes.func,
   avbrytFeilet: PropTypes.bool,
@@ -102,14 +99,10 @@ export function mapStateToProps(state, ownProps) {
     mote,
     arbeidstaker: state.navbruker.data,
     hentingFeiletBool:
-      state.moter.hentingFeilet ||
-      state.ledetekster.hentingFeilet ||
-      state.navbruker.hentingFeilet,
+      state.moter.hentingFeilet || state.navbruker.hentingFeilet,
     avbryter: state.moter.avbryter,
-    ledetekster: state.ledetekster.data,
     avbrytFeilet: state.moter.avbrytFeilet,
-    henter:
-      state.moter.henter || state.ledetekster.henter || state.navbruker.henter,
+    henter: state.moter.henter || state.navbruker.henter,
   };
 }
 

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as moterPropTypes from "../../../propTypes";
-import { keyValue } from "@navikt/digisyfo-npm";
 import Side from "../../../sider/Side";
 import MotestatusContainer from "./MotestatusContainer";
 import * as moterActions from "../../../data/mote/moter_actions";
@@ -50,7 +49,6 @@ export class BekreftMoteSide extends Component {
       henterMoterBool,
       fnr,
       mote,
-      ledetekster,
       bekrefter,
       bekreftFeilet,
       hentBekreftMoteEpostinnhold,
@@ -81,7 +79,6 @@ export class BekreftMoteSide extends Component {
                           mote={mote}
                           arbeidstaker={arbeidstaker}
                           alternativ={alternativ}
-                          ledetekster={ledetekster}
                           avbrytHref={`/sykefravaer/${fnr}/mote`}
                           bekrefter={bekrefter}
                           hentEpostinnhold={(moteUuid) => {
@@ -115,7 +112,6 @@ BekreftMoteSide.propTypes = {
   arbeidstaker: PropTypes.object,
   alternativ: PropTypes.object,
   henterMoterBool: PropTypes.bool,
-  ledetekster: keyValue,
   fnr: PropTypes.string,
   mote: moterPropTypes.motePt,
   hentMoter: PropTypes.func,
@@ -151,9 +147,7 @@ export const mapStateToProps = (state, ownProps) => {
     fnr: ownProps.params.fnr,
     bekrefter: state.moter.bekrefter,
     bekreftFeilet: state.moter.bekreftFeilet,
-    henterMoterBool:
-      state.moter.henter || state.ledetekster.henter || state.navbruker.henter,
-    ledetekster: state.ledetekster.data,
+    henterMoterBool: state.moter.henter || state.navbruker.henter,
     arbeidstaker: state.navbruker.data,
     alternativ,
     mote,

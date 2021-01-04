@@ -15,18 +15,12 @@ const texts = {
 
 interface DineSykmeldingerProps {
   fnr: string;
-  ledetekster: any;
   sortering: any;
   sykmeldinger: SykmeldingOldFormat[];
 }
 
 const DineSykmeldinger = (dineSykmeldingerProps: DineSykmeldingerProps) => {
-  const {
-    sykmeldinger = [],
-    ledetekster = {},
-    sortering,
-    fnr,
-  } = dineSykmeldingerProps;
+  const { sykmeldinger = [], sortering, fnr } = dineSykmeldingerProps;
   const nyeSykmeldinger = sykmeldinger.filter((sykmld) => {
     return sykmld.status === SykmeldingStatus.NY;
   });
@@ -42,7 +36,6 @@ const DineSykmeldinger = (dineSykmeldingerProps: DineSykmeldingerProps) => {
         tittel={texts.nyeSykmeldinger}
         ingenSykmeldingerMelding={texts.ingenNyeSykmeldinger}
         className="js-nye-sykmeldinger"
-        ledetekster={ledetekster}
         fnr={fnr}
         id="sykmelding-liste-nye"
       />
@@ -55,7 +48,6 @@ const DineSykmeldinger = (dineSykmeldingerProps: DineSykmeldingerProps) => {
           tittel={texts.ingenSykmeldinger}
           ingenSykmeldingerMelding={texts.ingenSykmeldinger}
           className="js-tidligere-sykmeldinger"
-          ledetekster={ledetekster}
           fnr={fnr}
           id="sykmelding-liste-tidligere"
         >

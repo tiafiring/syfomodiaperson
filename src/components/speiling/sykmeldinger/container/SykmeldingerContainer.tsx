@@ -22,24 +22,19 @@ const texts = {
 const SykmeldingerSide = () => {
   const fnr = window.location.pathname.split("/")[2];
 
-  const ledeteksterState = useSelector((state: any) => state.ledetekster);
   const navbrukerState = useSelector((state: any) => state.navbruker);
   const sykmeldingerState = useSelector((state: any) => state.sykmeldinger);
   const tilgangState = useSelector((state: any) => state.tilgang);
 
   const brukernavn = navbrukerState.data.navn;
-  const ledetekster = ledeteksterState.data;
   const sykmeldinger = sykmeldingerState.data;
   const sortering = sykmeldingerState.sortering;
   const tilgang = tilgangState.data;
 
   const harForsoektHentetAlt = harForsoktHentetSykmeldinger(sykmeldingerState);
-  const henter =
-    !harForsoektHentetAlt || ledeteksterState.henter || tilgangState.henter;
+  const henter = !harForsoektHentetAlt || tilgangState.henter;
   const hentingFeilet =
-    sykmeldingerState.hentingFeilet ||
-    ledeteksterState.hentingFeilet ||
-    tilgangState.hentingFeilet;
+    sykmeldingerState.hentingFeilet || tilgangState.hentingFeilet;
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -86,7 +81,6 @@ const SykmeldingerSide = () => {
                 htmlTekst={htmlIntro}
               />
               <DineSykmeldinger
-                ledetekster={ledetekster}
                 fnr={fnr}
                 sykmeldinger={sykmeldinger}
                 sortering={sortering}

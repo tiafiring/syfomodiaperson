@@ -127,7 +127,6 @@ describe("BekreftMoteContainer", () => {
         },
       };
       state = {
-        ledetekster: { henter: false, data: {} },
         epostinnhold: { henter: false, data: {} },
         moter: {
           data: [

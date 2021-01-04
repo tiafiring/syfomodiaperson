@@ -204,11 +204,6 @@ describe("AvbrytMoteContainer", () => {
           henter: false,
           hentingFeilet: false,
         },
-        ledetekster: {
-          henter: false,
-          hentingFeilet: false,
-          data: {},
-        },
       };
     });
 

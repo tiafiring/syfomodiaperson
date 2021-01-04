@@ -12,7 +12,6 @@ describe("MotestatusContainerTest", () => {
         fnr: "123456",
       };
       state = {
-        ledetekster: { henter: false, data: {} },
         moter: {
           data: [
             {

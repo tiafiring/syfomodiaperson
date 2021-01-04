@@ -84,11 +84,6 @@ describe("MotelandingssideContainer", () => {
           hentingFeilet: false,
           henter: false,
         },
-        ledetekster: {
-          hentingFeilet: false,
-          henter: false,
-          data: {},
-        },
       };
       ownProps = {
         params: {

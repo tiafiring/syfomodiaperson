@@ -11,10 +11,6 @@ describe("MotebookingSkjemaContainer", () => {
         fnr: "fnr",
       };
       state = {
-        ledetekster: {
-          henter: false,
-          data: {},
-        },
         ledere: {
           data: [
             {
