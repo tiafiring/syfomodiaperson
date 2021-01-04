@@ -15,8 +15,8 @@ const texts = {
 interface DinSykmeldingProps {
   sykmelding: SykmeldingOldFormat;
   ledetekster: any;
-  visEldreSykmeldingVarsel: boolean;
-  eldsteSykmeldingId: string;
+  visEldreSykmeldingVarsel?: boolean;
+  eldsteSykmeldingId?: string;
 }
 
 const DinSykmelding = (dinSykmeldingProps: DinSykmeldingProps) => {

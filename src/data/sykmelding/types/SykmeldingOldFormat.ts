@@ -1,4 +1,7 @@
-import { UtdypendeOpplysning } from "./SykmeldingNewFormatDTO";
+import {
+  BehandlingsutfallDTO,
+  UtdypendeOpplysning,
+} from "./SykmeldingNewFormatDTO";
 
 export enum ArbeidssituasjonType {
   NAERINGSDRIVENDE = "NAERINGSDRIVENDE",
@@ -65,6 +68,7 @@ export interface SykmeldingOldFormat {
   erPapirsykmelding?: boolean | null;
   innsendtArbeidsgivernavn: string | null;
   valgtArbeidssituasjon: ArbeidssituasjonType | null;
+  behandlingsutfall: BehandlingsutfallDTO;
   mottakendeArbeidsgiver?: {
     navn: string;
     virksomhetsnummer: string;

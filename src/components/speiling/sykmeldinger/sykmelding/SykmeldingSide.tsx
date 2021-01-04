@@ -1,6 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { keyValue, sykmeldingstatuser } from "@navikt/digisyfo-npm";
+import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
+import {
+  behandlingsutfallStatuser,
+  gamleSMStatuser,
+} from "../../../../utils/sykmeldinger/sykmeldingstatuser";
 import DinSykmelding from "./DinSykmelding";
 import DinSendteSykmelding from "./DinSendteSykmelding";
 import DinBekreftedeSykmelding from "./DinBekreftedeSykmelding";
@@ -8,18 +11,25 @@ import DinAvbrutteSykmelding from "./DinAvbrutteSykmelding";
 import DinUtgaatteSykmelding from "./DinUtgaatteSykmelding";
 import LenkeTilDineSykmeldinger from "./LenkeTilDineSykmeldinger";
 import Feilmelding from "../../../Feilmelding";
-import { behandlingsutfallStatuser } from "../../../../utils/sykmeldinger/sykmeldingstatuser";
 import AvvistSykmelding from "./avvisteSykmeldinger/AvvistSykmelding";
 import KoronaSykmeldingBekreftet from "./koronasykmeldinger/KoronaSykmelding-Bekreftet";
 import KoronaSykmeldingNy from "./koronasykmeldinger/KoronaSykmelding-Ny";
 import KoronaSykmeldingAvbrutt from "./koronasykmeldinger/KoronaSykmelding-Avbrutt";
 
-const SykmeldingSide = ({
-  dinSykmelding,
-  arbeidsgiversSykmelding,
-  ledetekster,
-  fnr,
-}) => {
+interface SykmeldingSideProps {
+  dinSykmelding: SykmeldingOldFormat;
+  arbeidsgiversSykmelding: SykmeldingOldFormat;
+  ledetekster: any;
+  fnr: string;
+}
+
+const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
+  const {
+    dinSykmelding,
+    arbeidsgiversSykmelding,
+    ledetekster,
+    fnr,
+  } = sykmeldingSideProps;
   return (() => {
     if (
       dinSykmelding.behandlingsutfall.status ===
@@ -27,17 +37,14 @@ const SykmeldingSide = ({
     ) {
       return (
         <div>
-          <AvvistSykmelding
-            sykmelding={dinSykmelding}
-            ledetekster={ledetekster}
-          />
-          <LenkeTilDineSykmeldinger ledetekster={ledetekster} fnr={fnr} />
+          <AvvistSykmelding sykmelding={dinSykmelding} />
+          <LenkeTilDineSykmeldinger fnr={fnr} />
         </div>
       );
     }
     if (dinSykmelding.egenmeldt) {
       switch (dinSykmelding.status) {
-        case sykmeldingstatuser.BEKREFTET: {
+        case gamleSMStatuser.BEKREFTET: {
           return (
             <div>
               <KoronaSykmeldingBekreftet dinSykmelding={dinSykmelding} />
@@ -45,10 +52,10 @@ const SykmeldingSide = ({
             </div>
           );
         }
-        case sykmeldingstatuser.NY: {
+        case gamleSMStatuser.NY: {
           return <KoronaSykmeldingNy sykmelding={dinSykmelding} />;
         }
-        case sykmeldingstatuser.AVBRUTT: {
+        case gamleSMStatuser.AVBRUTT: {
           return (
             <div>
               <KoronaSykmeldingAvbrutt sykmelding={dinSykmelding} />
@@ -61,7 +68,7 @@ const SykmeldingSide = ({
         }
       }
     } else if (
-      dinSykmelding.status === sykmeldingstatuser.SENDT &&
+      dinSykmelding.status === gamleSMStatuser.SENDT &&
       arbeidsgiversSykmelding
     ) {
       return (
@@ -71,10 +78,10 @@ const SykmeldingSide = ({
             arbeidsgiversSykmelding={arbeidsgiversSykmelding}
             ledetekster={ledetekster}
           />
-          <LenkeTilDineSykmeldinger ledetekster={ledetekster} fnr={fnr} />
+          <LenkeTilDineSykmeldinger fnr={fnr} />
         </div>
       );
-    } else if (dinSykmelding.status === sykmeldingstatuser.BEKREFTET) {
+    } else if (dinSykmelding.status === gamleSMStatuser.BEKREFTET) {
       return (
         <div>
           <DinBekreftedeSykmelding
@@ -82,46 +89,39 @@ const SykmeldingSide = ({
             arbeidsgiversSykmelding={arbeidsgiversSykmelding}
             ledetekster={ledetekster}
           />
-          <LenkeTilDineSykmeldinger ledetekster={ledetekster} fnr={fnr} />
+          <LenkeTilDineSykmeldinger fnr={fnr} />
         </div>
       );
-    } else if (dinSykmelding.status === sykmeldingstatuser.UTGAATT) {
+    } else if (dinSykmelding.status === gamleSMStatuser.UTGAATT) {
       return (
         <div>
           <DinUtgaatteSykmelding
             sykmelding={dinSykmelding}
             ledetekster={ledetekster}
           />
-          <LenkeTilDineSykmeldinger ledetekster={ledetekster} fnr={fnr} />
+          <LenkeTilDineSykmeldinger fnr={fnr} />
         </div>
       );
-    } else if (dinSykmelding.status === sykmeldingstatuser.NY) {
+    } else if (dinSykmelding.status === gamleSMStatuser.NY) {
       return (
         <div>
           <DinSykmelding sykmelding={dinSykmelding} ledetekster={ledetekster} />
-          <LenkeTilDineSykmeldinger ledetekster={ledetekster} fnr={fnr} />
+          <LenkeTilDineSykmeldinger fnr={fnr} />
         </div>
       );
-    } else if (dinSykmelding.status === sykmeldingstatuser.AVBRUTT) {
+    } else if (dinSykmelding.status === gamleSMStatuser.AVBRUTT) {
       return (
         <div>
           <DinAvbrutteSykmelding
             sykmelding={dinSykmelding}
             ledetekster={ledetekster}
           />
-          <LenkeTilDineSykmeldinger ledetekster={ledetekster} fnr={fnr} />
+          <LenkeTilDineSykmeldinger fnr={fnr} />
         </div>
       );
     }
     return <Feilmelding tittel="Sykmeldingen har ukjent status" />;
   })();
-};
-
-SykmeldingSide.propTypes = {
-  ledetekster: keyValue,
-  dinSykmelding: PropTypes.object,
-  arbeidsgiversSykmelding: PropTypes.object,
-  fnr: PropTypes.string,
 };
 
 export default SykmeldingSide;
