@@ -38,7 +38,7 @@ const FlereOpplysninger = ({ sykmelding, ledetekster }) => {
         )}
       </div>
       <MulighetForArbeid sykmelding={sykmelding} />
-      <Friskmelding sykmelding={sykmelding} ledetekster={ledetekster} />
+      <Friskmelding sykmelding={sykmelding} />
       <UtdypendeOpplysninger sykmelding={sykmelding} />
       <BedreArbeidsevne sykmelding={sykmelding} />
       <MeldingTilNAV sykmelding={sykmelding} />
