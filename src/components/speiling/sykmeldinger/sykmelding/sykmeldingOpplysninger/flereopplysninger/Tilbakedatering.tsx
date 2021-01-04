@@ -1,13 +1,21 @@
 import React from "react";
-import {
-  getLedetekst,
-  getSykmeldingOpplysning,
-  keyValue,
-  sykmelding as sykmeldingPt,
-} from "@navikt/digisyfo-npm";
+import { SykmeldingOldFormat } from "../../../../../../data/sykmelding/types/SykmeldingOldFormat";
 import { tilLesbarDatoMedArstall } from "../../../../../../utils/datoUtils";
+import { getSykmeldingOpplysning } from "../../../../../../utils/sykmeldingUtils";
 
-const Tilbakedatering = ({ sykmelding, ledetekster }) => {
+const texts = {
+  begrunnelse: "Pasienten har ikke kunne ivareta egne interesser. Begrunn",
+  dokumenterbarPasientkontakt:
+    "Oppgi dato for dokumenterbar kontakt med pasienten",
+  title: "Tilbakedatering",
+};
+
+interface TilbakedateringProps {
+  sykmelding: SykmeldingOldFormat;
+}
+
+const Tilbakedatering = (tilbakedateringProps: TilbakedateringProps) => {
+  const { sykmelding } = tilbakedateringProps;
   const visSeksjon =
     sykmelding.tilbakedatering.dokumenterbarPasientkontakt ||
     sykmelding.tilbakedatering.tilbakedatertBegrunnelse;
@@ -16,16 +24,11 @@ const Tilbakedatering = ({ sykmelding, ledetekster }) => {
   }
   return (
     <div className="sykmeldingSeksjon">
-      <h4 className="sykmeldingSeksjon__tittel">
-        {getLedetekst("din-sykmelding.tilbakedatering.tittel", ledetekster)}
-      </h4>
+      <h4 className="sykmeldingSeksjon__tittel">{texts.title}</h4>
       {getSykmeldingOpplysning(
         sykmelding.tilbakedatering,
         "dokumenterbarPasientkontakt",
-        getLedetekst(
-          "din-sykmelding.tilbakedatering.kontakt.dato",
-          ledetekster
-        ),
+        texts.dokumenterbarPasientkontakt,
         tilLesbarDatoMedArstall(
           sykmelding.tilbakedatering.dokumenterbarPasientkontakt
         )
@@ -33,15 +36,10 @@ const Tilbakedatering = ({ sykmelding, ledetekster }) => {
       {getSykmeldingOpplysning(
         sykmelding.tilbakedatering,
         "tilbakedatertBegrunnelse",
-        getLedetekst("din-sykmelding.tilbakedatering.begrunnelse", ledetekster)
+        texts.begrunnelse
       )}
     </div>
   );
-};
-
-Tilbakedatering.propTypes = {
-  sykmelding: sykmeldingPt,
-  ledetekster: keyValue,
 };
 
 export default Tilbakedatering;
