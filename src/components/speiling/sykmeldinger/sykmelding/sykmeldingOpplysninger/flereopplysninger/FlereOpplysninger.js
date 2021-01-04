@@ -39,10 +39,7 @@ const FlereOpplysninger = ({ sykmelding, ledetekster }) => {
       </div>
       <MulighetForArbeid sykmelding={sykmelding} ledetekster={ledetekster} />
       <Friskmelding sykmelding={sykmelding} ledetekster={ledetekster} />
-      <UtdypendeOpplysninger
-        sykmelding={sykmelding}
-        ledetekster={ledetekster}
-      />
+      <UtdypendeOpplysninger sykmelding={sykmelding} />
       <BedreArbeidsevne sykmelding={sykmelding} ledetekster={ledetekster} />
       <MeldingTilNAV sykmelding={sykmelding} ledetekster={ledetekster} />
       <MeldingTilArbeidsgiver

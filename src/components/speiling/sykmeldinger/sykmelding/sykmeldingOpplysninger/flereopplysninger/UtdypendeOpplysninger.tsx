@@ -1,12 +1,18 @@
 import React from "react";
-import {
-  getLedetekst,
-  keyValue,
-  sykmelding as sykmeldingPt,
-} from "@navikt/digisyfo-npm";
+import { SykmeldingOldFormat } from "../../../../../../data/sykmelding/types/SykmeldingOldFormat";
+import { UtdypendeOpplysning } from "../../../../../../data/sykmelding/types/SykmeldingNewFormatDTO";
 import SykmeldingOpplysning from "./SykmeldingOpplysning";
 
-const OpplysningsGruppe = ({ opplysningGruppe }) => {
+const texts = {
+  title: "Utdypende opplysninger",
+};
+
+interface OpplysningsGruppeProps {
+  opplysningGruppe: UtdypendeOpplysning;
+}
+
+const OpplysningsGruppe = (opplysningsGruppeProps: OpplysningsGruppeProps) => {
+  const { opplysningGruppe } = opplysningsGruppeProps;
   const sporsmal = Object.entries(opplysningGruppe).map(
     ([key, sporsmalSvar]) => (
       <SykmeldingOpplysning key={key} tittel={sporsmalSvar.sporsmal}>
@@ -17,15 +23,20 @@ const OpplysningsGruppe = ({ opplysningGruppe }) => {
   return <>{sporsmal}</>;
 };
 
-const UtdypendeOpplysninger = ({ sykmelding, ledetekster }) => {
+interface UtdypendeOpplysningerProps {
+  sykmelding: SykmeldingOldFormat;
+}
+
+const UtdypendeOpplysninger = (
+  utdypendeOpplysningerProps: UtdypendeOpplysningerProps
+) => {
+  const { sykmelding } = utdypendeOpplysningerProps;
   const utdypendeOpplysninger = sykmelding.utdypendeOpplysninger;
   return (
     <>
       {utdypendeOpplysninger && (
         <div className="sykmeldingSeksjon">
-          <h4 className="sykmeldingSeksjon__tittel">
-            {getLedetekst("din-sykmelding.utdypende.tittel", ledetekster)}
-          </h4>
+          <h4 className="sykmeldingSeksjon__tittel">{texts.title}</h4>
 
           {Object.entries(utdypendeOpplysninger).map(
             ([key, opplysningGruppe]) => (
@@ -39,11 +50,6 @@ const UtdypendeOpplysninger = ({ sykmelding, ledetekster }) => {
       )}
     </>
   );
-};
-
-UtdypendeOpplysninger.propTypes = {
-  sykmelding: sykmeldingPt,
-  ledetekster: keyValue,
 };
 
 export default UtdypendeOpplysninger;
