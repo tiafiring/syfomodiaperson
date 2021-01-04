@@ -1,14 +1,22 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Utvidbar, keyValue } from "@navikt/digisyfo-npm";
+import { Utvidbar } from "@navikt/digisyfo-npm";
 import DineSykmeldingOpplysninger from "./sykmeldingOpplysninger/DineSykmeldingOpplysninger";
 import SykmeldingStatuspanel from "../sykmeldingstatuspanel/SykmeldingStatuspanel";
+import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 
 const texts = {
   dineOpplysninger: "Dine opplysninger",
 };
 
-const DinAvbrutteSykmelding = ({ sykmelding, ledetekster }) => {
+interface DinAvbrutteSykmeldingProps {
+  sykmelding: SykmeldingOldFormat;
+  ledetekster: any;
+}
+
+const DinAvbrutteSykmelding = (
+  dinAvbrutteSykmeldingProps: DinAvbrutteSykmeldingProps
+) => {
+  const { sykmelding, ledetekster } = dinAvbrutteSykmeldingProps;
   return (
     <div>
       <SykmeldingStatuspanel sykmelding={sykmelding} />
@@ -29,11 +37,6 @@ const DinAvbrutteSykmelding = ({ sykmelding, ledetekster }) => {
       </Utvidbar>
     </div>
   );
-};
-
-DinAvbrutteSykmelding.propTypes = {
-  ledetekster: keyValue,
-  sykmelding: PropTypes.object,
 };
 
 export default DinAvbrutteSykmelding;
