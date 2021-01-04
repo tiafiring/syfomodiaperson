@@ -1,10 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
-import {
-  keyValue,
-  Utvidbar,
-  sykmelding as sykmeldingPt,
-} from "@navikt/digisyfo-npm";
+import { Utvidbar } from "@navikt/digisyfo-npm";
+import { SykmeldingOldFormat } from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
 import { tidligsteFom } from "../../../../../utils/periodeUtils";
 import { tilLesbarDatoMedArstall } from "../../../../../utils/datoUtils";
 import { getSykmeldingCheckbox } from "../../../../../utils/sykmeldingUtils";
@@ -27,15 +23,24 @@ const texts = {
   svangerskapTittel: "Sykdommen er svangerskapsrelatert\\n\\n",
 };
 
-const getStillingsprosentText = (stillingsprosent) => {
+const getStillingsprosentText = (stillingsprosent?: number) => {
   return `${stillingsprosent} % stilling`;
 };
 
-const DineSykmeldingOpplysninger = ({
-  sykmelding,
-  ledetekster,
-  Overskrift = "h2",
-}) => {
+interface DineSykmeldingOpplysningerProps {
+  sykmelding: SykmeldingOldFormat;
+  ledetekster: any;
+  Overskrift?: any;
+}
+
+const DineSykmeldingOpplysninger = (
+  dineSykmeldingOpplysningerProps: DineSykmeldingOpplysningerProps
+) => {
+  const {
+    sykmelding,
+    ledetekster,
+    Overskrift = "h2",
+  } = dineSykmeldingOpplysningerProps;
   return (
     <div className="dine-opplysninger">
       <Overskrift className="js-din-sykmelding-tittel typo-innholdstittel blokk-l">
@@ -46,10 +51,7 @@ const DineSykmeldingOpplysninger = ({
           : texts.dinSykmeldingTittel}
       </Overskrift>
       <div className="blokk-l side-innhold">
-        <SykmeldingPerioder
-          perioder={sykmelding.mulighetForArbeid.perioder}
-          ledetekster={ledetekster}
-        />
+        <SykmeldingPerioder perioder={sykmelding.mulighetForArbeid.perioder} />
         {sykmelding.diagnose.hoveddiagnose ? (
           <div className="hoveddiagnose">
             <div className="rad-container">
@@ -209,12 +211,6 @@ const DineSykmeldingOpplysninger = ({
       </Utvidbar>
     </div>
   );
-};
-
-DineSykmeldingOpplysninger.propTypes = {
-  sykmelding: sykmeldingPt,
-  ledetekster: keyValue,
-  Overskrift: PropTypes.string,
 };
 
 export default DineSykmeldingOpplysninger;

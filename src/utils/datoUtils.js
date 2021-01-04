@@ -256,3 +256,10 @@ export const toDatePrettyPrint = (dato) => {
 
   return `${days}.${months}.${years}`;
 };
+
+export function getDuration(from, to) {
+  return (
+    Math.round(Math.floor(toDate(to) - toDate(from)) / (1000 * 60 * 60 * 24)) +
+    1
+  );
+}

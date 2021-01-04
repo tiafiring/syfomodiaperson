@@ -42,7 +42,7 @@ export interface SykmeldingDiagnose {
   diagnosetekst?: string | null;
 }
 
-export interface SykmeldingPeriode {
+export interface SykmeldingPeriodeDTO {
   fom: string;
   tom: string;
   grad: number | null;
@@ -101,7 +101,7 @@ export interface SykmeldingOldFormat {
     yrkesskadeDato: string | null;
   };
   mulighetForArbeid: {
-    perioder: SykmeldingPeriode[];
+    perioder: SykmeldingPeriodeDTO[];
     aktivitetIkkeMulig433: string[] | null;
     aktivitetIkkeMulig434: string[] | null;
     aarsakAktivitetIkkeMulig433: string | null;

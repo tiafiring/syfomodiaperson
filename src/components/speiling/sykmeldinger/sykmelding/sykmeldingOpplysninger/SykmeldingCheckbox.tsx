@@ -1,7 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const SykmeldingCheckbox = ({ tekst, jsClassName, className = "" }) => {
+interface SykmeldingCheckboxProps {
+  tekst: string;
+  jsClassName?: string;
+  className?: string;
+}
+
+export const SykmeldingCheckbox = (
+  sykmeldingCheckboxProps: SykmeldingCheckboxProps
+) => {
+  const { tekst, jsClassName, className = "" } = sykmeldingCheckboxProps;
   return (
     <p className={`checkboxOpplysning ${className} js-${jsClassName}`}>
       <img
@@ -17,13 +26,15 @@ export const SykmeldingCheckbox = ({ tekst, jsClassName, className = "" }) => {
   );
 };
 
-SykmeldingCheckbox.propTypes = {
-  tekst: PropTypes.string,
-  jsClassName: PropTypes.string,
-  className: PropTypes.string,
-};
+interface SykmeldingCheckboxSelvstendigProps {
+  tekst: string;
+  jsClassName: string;
+}
 
-export const SykmeldingCheckboxSelvstendig = ({ tekst, jsClassName }) => {
+export const SykmeldingCheckboxSelvstendig = (
+  sykmeldingCheckboxSelvstendigProps: SykmeldingCheckboxSelvstendigProps
+) => {
+  const { tekst, jsClassName } = sykmeldingCheckboxSelvstendigProps;
   return (
     <SykmeldingCheckbox
       tekst={tekst}
@@ -31,9 +42,4 @@ export const SykmeldingCheckboxSelvstendig = ({ tekst, jsClassName }) => {
       className="typo-element blokk-m"
     />
   );
-};
-
-SykmeldingCheckboxSelvstendig.propTypes = {
-  tekst: PropTypes.string,
-  jsClassName: PropTypes.string,
 };

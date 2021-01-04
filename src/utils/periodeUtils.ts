@@ -1,4 +1,14 @@
-import { dagerMellomDatoer, isDate16DaysAgoOrLater } from "./datoUtils";
+import { dagerMellomDatoer, isDate16DaysAgoOrLater, toDate } from "./datoUtils";
+import { SykmeldingPeriodeDTO } from "../data/sykmelding/types/SykmeldingOldFormat";
+
+export function sorterPerioderEldsteForst(perioder: SykmeldingPeriodeDTO[]) {
+  return perioder.sort((a, b) => {
+    if (toDate(a.fom).getTime() !== toDate(b.fom).getTime()) {
+      return toDate(a.fom).getTime() - toDate(b.fom).getTime();
+    }
+    return toDate(a.tom).getTime() - toDate(b.tom).getTime();
+  });
+}
 
 export const tidligsteFom = (perioder: any[]) => {
   return perioder

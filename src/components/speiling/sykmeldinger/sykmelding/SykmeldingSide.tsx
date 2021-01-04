@@ -53,7 +53,12 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
           );
         }
         case gamleSMStatuser.NY: {
-          return <KoronaSykmeldingNy sykmelding={dinSykmelding} />;
+          return (
+            <>
+              <KoronaSykmeldingNy sykmelding={dinSykmelding} />
+              <LenkeTilDineSykmeldinger fnr={fnr} />
+            </>
+          );
         }
         case gamleSMStatuser.AVBRUTT: {
           return (

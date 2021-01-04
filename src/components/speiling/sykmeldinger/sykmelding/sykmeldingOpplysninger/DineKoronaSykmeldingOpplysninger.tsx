@@ -1,37 +1,33 @@
 import React from "react";
-import PropTypes from "prop-types";
-import {
-  getLedetekst,
-  keyValue,
-  sykmelding as sykmeldingPt,
-} from "@navikt/digisyfo-npm";
+import { SykmeldingOldFormat } from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
 import SykmeldingNokkelOpplysning from "./SykmeldingNokkelOpplysning";
 import SykmeldingPerioder from "./SykmeldingPerioder";
 
-const DineKoronaSykmeldingOpplysninger = ({
-  sykmelding,
-  ledetekster,
-  Overskrift = "h2",
-}) => {
+const texts = {
+  diagnose: "Diagnose",
+  diagnosekode: "Diagnosekode",
+};
+
+interface DineKoronaSykmeldingOpplysningerProps {
+  sykmelding: SykmeldingOldFormat;
+}
+const DineKoronaSykmeldingOpplysninger = (
+  dineKoronaSykmeldingOpplysningerProps: DineKoronaSykmeldingOpplysningerProps
+) => {
+  const { sykmelding } = dineKoronaSykmeldingOpplysningerProps;
   return (
     <div className="dine-opplysninger">
-      <Overskrift className="js-din-sykmelding-tittel typo-innholdstittel blokk-l">
+      <h2 className="js-din-sykmelding-tittel typo-innholdstittel blokk-l">
         Dine opplysninger
-      </Overskrift>
+      </h2>
       <div className="blokk-l side-innhold fjern-margin-bottom">
-        <SykmeldingPerioder
-          perioder={sykmelding.mulighetForArbeid.perioder}
-          ledetekster={ledetekster}
-        />
+        <SykmeldingPerioder perioder={sykmelding.mulighetForArbeid.perioder} />
         {sykmelding.diagnose.hoveddiagnose ? (
           <div className="hoveddiagnose">
             <div className="rad-container">
               <SykmeldingNokkelOpplysning
                 className="nokkelopplysning--hoveddiagnose"
-                tittel={getLedetekst(
-                  "din-sykmelding.diagnose.tittel",
-                  ledetekster
-                )}
+                tittel={texts.diagnose}
               >
                 <div>
                   <p className="js-hoveddiagnose">
@@ -42,10 +38,7 @@ const DineKoronaSykmeldingOpplysninger = ({
               <div className="nokkelopplysning nokkelopplysning--hoveddiagnose js-hoveddiagnose-kode-container">
                 <div className="medHjelpetekst">
                   <h3 className="nokkelopplysning__tittel">
-                    {getLedetekst(
-                      "din-sykmelding.diagnosekode.tittel",
-                      ledetekster
-                    )}
+                    {texts.diagnosekode}
                   </h3>
                 </div>
                 <p>
@@ -66,9 +59,4 @@ const DineKoronaSykmeldingOpplysninger = ({
   );
 };
 
-DineKoronaSykmeldingOpplysninger.propTypes = {
-  sykmelding: sykmeldingPt,
-  ledetekster: keyValue,
-  Overskrift: PropTypes.string,
-};
 export default DineKoronaSykmeldingOpplysninger;
