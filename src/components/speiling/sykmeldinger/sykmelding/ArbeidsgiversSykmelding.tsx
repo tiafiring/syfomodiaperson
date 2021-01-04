@@ -1,17 +1,26 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {
   ArbeidsgiversSykmeldingOpplysninger,
   Utvidbar,
-  keyValue,
 } from "@navikt/digisyfo-npm";
+import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 
-const ArbeidsgiversSykmelding = ({
-  sykmelding,
-  ledetekster,
-  Overskrift = "h2",
-  erApen = false,
-}) => {
+interface ArbeidsgiversSykmeldingProps {
+  sykmelding: SykmeldingOldFormat;
+  ledetekster: any;
+  Overskrift?: string;
+  erApen: boolean;
+}
+
+const ArbeidsgiversSykmelding = (
+  arbeidsgiversSykmeldingProps: ArbeidsgiversSykmeldingProps
+) => {
+  const {
+    sykmelding,
+    ledetekster,
+    Overskrift = "h2",
+    erApen = false,
+  } = arbeidsgiversSykmeldingProps;
   return (
     <Utvidbar
       tittel="Dette får arbeidsgiveren din se"
@@ -28,13 +37,6 @@ const ArbeidsgiversSykmelding = ({
       />
     </Utvidbar>
   );
-};
-
-ArbeidsgiversSykmelding.propTypes = {
-  sykmelding: PropTypes.object,
-  ledetekster: keyValue,
-  Overskrift: PropTypes.string,
-  erApen: PropTypes.bool,
 };
 
 export default ArbeidsgiversSykmelding;
