@@ -109,7 +109,7 @@
     "fetch-mock": "9.10.7",
     "html-webpack-plugin": "4.3.0",
     "ignore-styles": "5.0.1",
-    "jsdom": "11.1.0",
+    "jsdom": "13.1.0",
     "jsdom-global": "3.0.2",
     "less": "3.8.1",
     "less-loader": "6.1.1",
