@@ -1,9 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router";
-import { keyValue, Bjorn } from "@navikt/digisyfo-npm";
 import Alertstripe from "nav-frontend-alertstriper";
+import { Bjorn } from "@navikt/digisyfo-npm";
 import DineSykmeldingOpplysninger from "./sykmeldingOpplysninger/DineSykmeldingOpplysninger";
+import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 
 const texts = {
   eldreSykmeldinger: "Du har eldre sykmeldinger som du bør behandle før denne.",
@@ -12,12 +12,20 @@ const texts = {
     "Hei, her sjekker du opplysningene fra den som sykmeldte deg. Stemmer det med det dere ble enige om? Du velger selv om du vil bruke sykmeldingen.",
 };
 
-const DinSykmelding = ({
-  sykmelding,
-  ledetekster,
-  visEldreSykmeldingVarsel,
-  eldsteSykmeldingId,
-}) => {
+interface DinSykmeldingProps {
+  sykmelding: SykmeldingOldFormat;
+  ledetekster: any;
+  visEldreSykmeldingVarsel: boolean;
+  eldsteSykmeldingId: string;
+}
+
+const DinSykmelding = (dinSykmeldingProps: DinSykmeldingProps) => {
+  const {
+    sykmelding,
+    ledetekster,
+    visEldreSykmeldingVarsel,
+    eldsteSykmeldingId,
+  } = dinSykmeldingProps;
   return (
     <div>
       <Bjorn className="blokk" hvit stor rootUrl="/sykefravaer">
@@ -60,13 +68,6 @@ const DinSykmelding = ({
       </div>
     </div>
   );
-};
-
-DinSykmelding.propTypes = {
-  sykmelding: PropTypes.object,
-  ledetekster: keyValue,
-  visEldreSykmeldingVarsel: PropTypes.bool,
-  eldsteSykmeldingId: PropTypes.string,
 };
 
 export default DinSykmelding;
