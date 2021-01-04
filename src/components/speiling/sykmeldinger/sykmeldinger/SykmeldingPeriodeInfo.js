@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { getDuration, toDate } from "@navikt/digisyfo-npm";
+import { getDuration, toDate } from "../../../../utils/datoUtils";
 
 const textBehandlingsdagEnDag = (behandlingsdager, dager) => {
   return `${behandlingsdager} behandlingsdag i løpet av ${dager} dag\n`;
