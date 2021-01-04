@@ -11,18 +11,13 @@ const texts = {
 
 interface DinSendteSykmeldingProps {
   dinSykmelding: SykmeldingOldFormat;
-  ledetekster: any;
   arbeidsgiversSykmelding: SykmeldingOldFormat;
 }
 
 const DinSendteSykmelding = (
   dinSendteSykmeldingProps: DinSendteSykmeldingProps
 ) => {
-  const {
-    dinSykmelding,
-    ledetekster,
-    arbeidsgiversSykmelding,
-  } = dinSendteSykmeldingProps;
+  const { dinSykmelding, arbeidsgiversSykmelding } = dinSendteSykmeldingProps;
   return (
     <div>
       <SykmeldingStatuspanel sykmelding={dinSykmelding} />
@@ -39,10 +34,7 @@ const DinSendteSykmelding = (
         <DineSykmeldingOpplysninger sykmelding={dinSykmelding} />
       </Utvidbar>
       <div className="blokk--l">
-        <ArbeidsgiversSykmelding
-          sykmelding={arbeidsgiversSykmelding}
-          ledetekster={ledetekster}
-        />
+        <ArbeidsgiversSykmelding sykmelding={arbeidsgiversSykmelding} />
       </div>
     </div>
   );

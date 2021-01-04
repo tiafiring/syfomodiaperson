@@ -42,13 +42,12 @@ const DinSykmeldingSide = () => {
   const fnr = window.location.pathname.split("/")[2];
   const sykmeldingId = window.location.pathname.split("/")[4];
 
-  const ledeteksterState = useSelector((state: any) => state.ledetekster);
   const navbrukerState = useSelector((state: any) => state.navbruker);
   const sykmeldingerState = useSelector((state: any) => state.sykmeldinger);
   const tilgangState = useSelector((state: any) => state.tilgang);
 
   const harForsoktHentetAlt = harForsoktHentetSykmeldinger(sykmeldingerState);
-  const henter = !harForsoktHentetAlt || ledeteksterState.henter;
+  const henter = !harForsoktHentetAlt;
   const hentingFeilet =
     sykmeldingerState.hentingFeilet || tilgangState.hentingFeilet;
   const dinSykmelding = getSykmelding(sykmeldingerState.data, sykmeldingId);
@@ -68,7 +67,6 @@ const DinSykmeldingSide = () => {
 
   const brukernavn = navbrukerState.data.navn;
   const tilgang = tilgangState.data;
-  const ledetekster = ledeteksterState.data;
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -113,7 +111,6 @@ const DinSykmeldingSide = () => {
               <SidetoppSpeilet tittel={pageTitle(dinSykmelding)} />
               <SykmeldingSide
                 dinSykmelding={dinSykmelding}
-                ledetekster={ledetekster}
                 arbeidsgiversSykmelding={arbeidsgiversSykmelding}
                 fnr={fnr}
               />

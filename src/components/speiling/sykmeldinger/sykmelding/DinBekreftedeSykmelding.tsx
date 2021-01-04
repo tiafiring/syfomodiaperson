@@ -12,7 +12,6 @@ const texts = {
 interface DinBekreftedeSykmeldingProps {
   dinSykmelding: SykmeldingOldFormat;
   arbeidsgiversSykmelding: SykmeldingOldFormat;
-  ledetekster: any;
 }
 
 const DinBekreftedeSykmelding = (
@@ -21,7 +20,6 @@ const DinBekreftedeSykmelding = (
   const {
     dinSykmelding,
     arbeidsgiversSykmelding,
-    ledetekster,
   } = dinBekreftedeSykmeldingProps;
   return (
     <div>
@@ -40,10 +38,7 @@ const DinBekreftedeSykmelding = (
       </Utvidbar>
       {dinSykmelding.valgtArbeidssituasjon === "ARBEIDSTAKER" && (
         <div className="blokk">
-          <ArbeidsgiversSykmelding
-            sykmelding={arbeidsgiversSykmelding}
-            ledetekster={ledetekster}
-          />
+          <ArbeidsgiversSykmelding sykmelding={arbeidsgiversSykmelding} />
         </div>
       )}
     </div>

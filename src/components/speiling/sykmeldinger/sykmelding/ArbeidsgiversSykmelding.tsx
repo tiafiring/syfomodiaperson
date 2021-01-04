@@ -1,9 +1,7 @@
 import React from "react";
-import {
-  ArbeidsgiversSykmeldingOpplysninger,
-  Utvidbar,
-} from "@navikt/digisyfo-npm";
+import { Utvidbar } from "@navikt/digisyfo-npm";
 import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
+import ArbeidsgiversSykmeldingOpplysninger from "./ArbeidsgiversSykmeldingOpplysninger";
 
 interface ArbeidsgiversSykmeldingProps {
   sykmelding: SykmeldingOldFormat;
@@ -17,7 +15,6 @@ const ArbeidsgiversSykmelding = (
 ) => {
   const {
     sykmelding,
-    ledetekster,
     Overskrift = "h2",
     erApen = false,
   } = arbeidsgiversSykmeldingProps;
@@ -31,10 +28,7 @@ const ArbeidsgiversSykmelding = (
       variant="lilla"
       Overskrift={Overskrift}
     >
-      <ArbeidsgiversSykmeldingOpplysninger
-        sykmelding={sykmelding}
-        ledetekster={ledetekster}
-      />
+      <ArbeidsgiversSykmeldingOpplysninger sykmelding={sykmelding} />
     </Utvidbar>
   );
 };

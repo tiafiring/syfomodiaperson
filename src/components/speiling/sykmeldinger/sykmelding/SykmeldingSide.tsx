@@ -19,17 +19,11 @@ import KoronaSykmeldingAvbrutt from "./koronasykmeldinger/KoronaSykmelding-Avbru
 interface SykmeldingSideProps {
   dinSykmelding: SykmeldingOldFormat;
   arbeidsgiversSykmelding: SykmeldingOldFormat;
-  ledetekster: any;
   fnr: string;
 }
 
 const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
-  const {
-    dinSykmelding,
-    arbeidsgiversSykmelding,
-    ledetekster,
-    fnr,
-  } = sykmeldingSideProps;
+  const { dinSykmelding, arbeidsgiversSykmelding, fnr } = sykmeldingSideProps;
   return (() => {
     if (
       dinSykmelding.behandlingsutfall.status ===
@@ -81,7 +75,6 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
           <DinSendteSykmelding
             dinSykmelding={dinSykmelding}
             arbeidsgiversSykmelding={arbeidsgiversSykmelding}
-            ledetekster={ledetekster}
           />
           <LenkeTilDineSykmeldinger fnr={fnr} />
         </div>
@@ -92,7 +85,6 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
           <DinBekreftedeSykmelding
             dinSykmelding={dinSykmelding}
             arbeidsgiversSykmelding={arbeidsgiversSykmelding}
-            ledetekster={ledetekster}
           />
           <LenkeTilDineSykmeldinger fnr={fnr} />
         </div>
