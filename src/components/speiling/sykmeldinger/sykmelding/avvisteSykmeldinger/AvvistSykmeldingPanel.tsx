@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Veilederpanel from "nav-frontend-veilederpanel";
+import { SykmeldingOldFormat } from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
 import * as avvisningsregelnavn from "../../../../../utils/sykmeldinger/avvisningsregelnavn";
 import VeiledermannIkon from "../../../../../ikoner/VeiledermannIkon";
 
@@ -11,25 +11,25 @@ const REGELNAVN_INGEN_RETT_TIL_A_SYKMELDE = [
   avvisningsregelnavn.BEHANDLER_SUSPENDERT,
 ];
 
-const avvistSykmeldingFilter = (sykmelding) => {
+const avvistSykmeldingFilter = (sykmelding: SykmeldingOldFormat) => {
   return sykmelding.behandlingsutfall.ruleHits.filter((rule) => {
     return rule.ruleStatus === null || rule.ruleStatus === "INVALID";
   });
 };
 
-const hentRegelnavnListe = (sykmelding) => {
+const hentRegelnavnListe = (sykmelding: SykmeldingOldFormat) => {
   return sykmelding.behandlingsutfall.ruleHits.map((ruleHit) => {
     return ruleHit.ruleName;
   });
 };
 
-const hentHarIkkeRettTilASykmelde = (sykmelding) => {
+const hentHarIkkeRettTilASykmelde = (sykmelding: SykmeldingOldFormat) => {
   return hentRegelnavnListe(sykmelding).reduce((acc, regelnavn) => {
     return acc || REGELNAVN_INGEN_RETT_TIL_A_SYKMELDE.includes(regelnavn);
   }, false);
 };
 
-export const hentHandlingsstreng = (sykmelding) => {
+export const hentHandlingsstreng = (sykmelding: SykmeldingOldFormat) => {
   const regelnavnliste = hentRegelnavnListe(sykmelding);
 
   const brukerErOver70 = regelnavnliste.find((regelnavn) => {
@@ -55,7 +55,7 @@ export const hentHandlingsstreng = (sykmelding) => {
   return `Når du har fått ny sykmelding fra ${sykmelding.bekreftelse.sykmelder}, får du en ny beskjed fra oss om å logge deg inn på nav.no slik at du kan sende inn sykmeldingen.\nGår det mange dager, bør du kontakte ${sykmelding.bekreftelse.sykmelder} som skal skrive den nye sykmeldingen.`;
 };
 
-const hentIntrotekst = (sykmelding) => {
+const hentIntrotekst = (sykmelding: SykmeldingOldFormat) => {
   const intro = "Du trenger en ny sykmelding fordi";
   const standardtekst = `${intro} det er gjort en feil i utfyllingen. Vi har gitt beskjed til ${sykmelding.bekreftelse.sykmelder} om hva som er feil, og at du må få en ny sykmelding.`;
   const overSyttitekst = `${intro} du er over 70 år. `;
@@ -76,7 +76,12 @@ const hentIntrotekst = (sykmelding) => {
   return standardtekst;
 };
 
-const BegrunnelseTekst = ({ sykmelding }) => {
+interface BegrunnelseTekstProps {
+  sykmelding: SykmeldingOldFormat;
+}
+
+const BegrunnelseTekst = (begrunnelseTekstProps: BegrunnelseTekstProps) => {
+  const { sykmelding } = begrunnelseTekstProps;
   const overskrift = "Grunnen til at sykmeldingen er avvist:";
   return (
     <React.Fragment>
@@ -96,11 +101,12 @@ const BegrunnelseTekst = ({ sykmelding }) => {
   );
 };
 
-BegrunnelseTekst.propTypes = {
-  sykmelding: PropTypes.object,
-};
+interface BegrunnelseProps {
+  sykmelding: SykmeldingOldFormat;
+}
 
-const Begrunnelse = ({ sykmelding }) => {
+const Begrunnelse = (begrunnelseProps: BegrunnelseProps) => {
+  const { sykmelding } = begrunnelseProps;
   const reglerUtenBegrunnelse = [
     avvisningsregelnavn.PASIENT_ELDRE_ENN_70,
     avvisningsregelnavn.UGYLDIG_REGELSETTVERSJON,
@@ -120,11 +126,14 @@ const Begrunnelse = ({ sykmelding }) => {
   return visBegrunnelse ? <BegrunnelseTekst sykmelding={sykmelding} /> : null;
 };
 
-Begrunnelse.propTypes = {
-  sykmelding: PropTypes.object,
-};
+interface AvvistSykmeldingPanelProps {
+  sykmelding: SykmeldingOldFormat;
+}
 
-export const AvvistSykmeldingPanel = ({ sykmelding }) => {
+export const AvvistSykmeldingPanel = (
+  avvistSykmeldingPanelProps: AvvistSykmeldingPanelProps
+) => {
+  const { sykmelding } = avvistSykmeldingPanelProps;
   const handlingstreng = hentHandlingsstreng(sykmelding);
   const introtekststreng = hentIntrotekst(sykmelding);
   return (
@@ -132,7 +141,6 @@ export const AvvistSykmeldingPanel = ({ sykmelding }) => {
       <Veilederpanel
         fargetema="feilmelding"
         type="plakat"
-        center
         kompakt
         svg={<VeiledermannIkon />}
         veilederProps={{ center: true, storrelse: "S" }}
@@ -147,8 +155,4 @@ export const AvvistSykmeldingPanel = ({ sykmelding }) => {
       </Veilederpanel>
     </div>
   );
-};
-
-AvvistSykmeldingPanel.propTypes = {
-  sykmelding: PropTypes.object,
 };

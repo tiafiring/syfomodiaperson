@@ -1,11 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { AvvistSykmeldingStatuspanel } from "./AvvistSykmeldingStatuspanel";
+import { SykmeldingOldFormat } from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
+import AvvistSykmeldingStatuspanel from "./AvvistSykmeldingStatuspanel";
 import { AvvistSykmeldingPanel } from "./AvvistSykmeldingPanel";
-import { BekreftAvvistSykmelding } from "./BekreftAvvistSykmelding";
+import BekreftAvvistSykmelding from "./BekreftAvvistSykmelding";
 import DineSykmeldingOpplysninger from "../sykmeldingOpplysninger/DineSykmeldingOpplysninger";
 
-const AvvistSykmelding = ({ sykmelding }) => {
+interface AvvistSykmeldingProps {
+  sykmelding: SykmeldingOldFormat;
+}
+
+const AvvistSykmelding = (avvistSykmeldingProps: AvvistSykmeldingProps) => {
+  const { sykmelding } = avvistSykmeldingProps;
   return (
     <div>
       <AvvistSykmeldingStatuspanel sykmelding={sykmelding} />
@@ -16,10 +21,6 @@ const AvvistSykmelding = ({ sykmelding }) => {
       <BekreftAvvistSykmelding sykmelding={sykmelding} />
     </div>
   );
-};
-
-AvvistSykmelding.propTypes = {
-  sykmelding: PropTypes.object,
 };
 
 export default AvvistSykmelding;

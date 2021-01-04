@@ -48,7 +48,7 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
           return (
             <div>
               <KoronaSykmeldingBekreftet dinSykmelding={dinSykmelding} />
-              <LenkeTilDineSykmeldinger />
+              <LenkeTilDineSykmeldinger fnr={fnr} />
             </div>
           );
         }
@@ -59,7 +59,7 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
           return (
             <div>
               <KoronaSykmeldingAvbrutt sykmelding={dinSykmelding} />
-              <LenkeTilDineSykmeldinger />
+              <LenkeTilDineSykmeldinger fnr={fnr} />
             </div>
           );
         }

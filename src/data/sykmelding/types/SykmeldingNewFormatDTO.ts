@@ -34,9 +34,9 @@ export enum BehandlingsutfallStatusDTO {
 }
 
 export interface RegelinfoDTO {
-  messageForSender: String;
-  messageForUser: String;
-  ruleName: String;
+  messageForSender: string;
+  messageForUser: string;
+  ruleName: string;
   ruleStatus: BehandlingsutfallStatusDTO;
 }
 

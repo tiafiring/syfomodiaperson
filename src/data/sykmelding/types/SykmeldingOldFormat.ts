@@ -59,6 +59,7 @@ export interface Datospenn {
 
 export interface SykmeldingOldFormat {
   id: string;
+  mottattTidspunkt: Date;
   startLegemeldtFravaer: string | null;
   skalViseSkravertFelt: boolean;
   identdato: string;
