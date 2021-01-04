@@ -40,17 +40,14 @@ const FlereOpplysninger = ({ sykmelding, ledetekster }) => {
       <MulighetForArbeid sykmelding={sykmelding} ledetekster={ledetekster} />
       <Friskmelding sykmelding={sykmelding} ledetekster={ledetekster} />
       <UtdypendeOpplysninger sykmelding={sykmelding} />
-      <BedreArbeidsevne sykmelding={sykmelding} ledetekster={ledetekster} />
+      <BedreArbeidsevne sykmelding={sykmelding} />
       <MeldingTilNAV sykmelding={sykmelding} ledetekster={ledetekster} />
       <MeldingTilArbeidsgiver
         sykmelding={sykmelding}
         ledetekster={ledetekster}
       />
-      <Tilbakedatering sykmelding={sykmelding} ledetekster={ledetekster} />
-      <AndreSykmeldingOpplysninger
-        sykmelding={sykmelding}
-        ledetekster={ledetekster}
-      />
+      <Tilbakedatering sykmelding={sykmelding} />
+      <AndreSykmeldingOpplysninger sykmelding={sykmelding} />
     </div>
   );
 };
