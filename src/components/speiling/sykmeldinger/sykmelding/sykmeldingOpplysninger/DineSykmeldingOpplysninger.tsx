@@ -12,15 +12,15 @@ import FlereOpplysninger from "./flereopplysninger/FlereOpplysninger";
 const texts = {
   dinSykmeldingTittel: "Sykmelding\n",
   dinSykmeldingDiagnoseTittel: "Diagnose\n",
-  dinSykmeldingBidiagnoseTittel: "Bidiagnose\\n",
-  yrkesskadeTittel: "Sykdommen kan skyldes en skade/yrkessykdom\\n",
+  dinSykmeldingBidiagnoseTittel: "Bidiagnose\n",
+  yrkesskadeTittel: "Sykdommen kan skyldes en skade/yrkessykdom\n",
   diagnoseMeta: "Diagnosen vises ikke til arbeidsgiveren",
-  arbeidsforTittel: "Pasienten er 100 % arbeidsfør etter perioden\\n",
-  avsenderTittel: "Lege / sykmelder\\n",
+  arbeidsforTittel: "Pasienten er 100 % arbeidsfør etter perioden\n",
+  avsenderTittel: "Lege / sykmelder\n",
   flereOpplysningerTittel: "Flere opplysninger fra den som har sykmeldt deg",
   arbeidsgiverTittel: "Arbeidsgiver som legen har skrevet inn",
-  hensynTittel: "Beskriv eventuelle hensyn som må tas på arbeidsplassen\\n",
-  svangerskapTittel: "Sykdommen er svangerskapsrelatert\\n\\n",
+  hensynTittel: "Beskriv eventuelle hensyn som må tas på arbeidsplassen\n",
+  svangerskapTittel: "Sykdommen er svangerskapsrelatert\n\n",
 };
 
 const getStillingsprosentText = (stillingsprosent?: number) => {
@@ -182,7 +182,7 @@ const DineSykmeldingOpplysninger = (
                 tidligsteFom(sykmelding.mulighetForArbeid.perioder) >=
                   new Date("2018-04-26") ? (
                   <p className="js-stillingsprosent">
-                    {getStillingsprosentText(sykmelding.stillingsprosent)}`
+                    {getStillingsprosentText(sykmelding.stillingsprosent)}
                   </p>
                 ) : null
               }
