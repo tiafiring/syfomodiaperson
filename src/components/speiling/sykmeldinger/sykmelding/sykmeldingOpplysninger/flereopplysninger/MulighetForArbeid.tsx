@@ -1,27 +1,43 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { SykmeldingOldFormat } from "../../../../../../data/sykmelding/types/SykmeldingOldFormat";
 import {
-  getLedetekst,
   getSykmeldingCheckbox,
   getSykmeldingOpplysning,
-  keyValue,
-  senesteTom,
-  sykmelding as sykmeldingPt,
-} from "@navikt/digisyfo-npm";
+} from "../../../../../../utils/sykmeldingUtils";
+import { senesteTom } from "../../../../../../utils/periodeUtils";
 import SykmeldingOpplysning from "./SykmeldingOpplysning";
 import { SykmeldingCheckbox } from "../SykmeldingCheckbox";
 
-const fjernAnnet = (array) => {
+const texts = {
+  mulighetForArbeid: "Mulighet for arbeid",
+  medisinskAarsak:
+    "Det er medisinske årsaker som hindrer arbeidsrelatert aktivitet",
+  arsak: "Angi hva som er årsaken",
+  arbeidsplassForhold:
+    "Forhold på arbeidsplassen vanskeliggjør arbeidsrelatert aktivitet",
+  erIkkeIArbeid: "Pasienten kan ikke være i arbeid (100&nbsp;% sykmeldt)",
+  aktivitetskravBegrunnelse:
+    "Begrunnelse til NAVs vurdering av aktivitetskravet",
+  medisinskAarsakBeskriv: "Beskriv nærmere",
+};
+
+const fjernAnnet = (array: string[]): string[] => {
   if (array.length === 1 && array.indexOf("Annet") > -1) {
     return [];
   }
   return array;
 };
 
-const Aarsaker = ({ aarsaker, containerClassName }) => {
+interface AarsakerProps {
+  aarsaker: string[];
+  containerClassName: string;
+}
+
+const Aarsaker = (aarsakerProps: AarsakerProps) => {
+  const { aarsaker, containerClassName } = aarsakerProps;
   return (
     <div className={containerClassName}>
-      {fjernAnnet(aarsaker).map((aarsak, key) => {
+      {fjernAnnet(aarsaker).map((aarsak: string, key: number) => {
         return (
           <SykmeldingCheckbox
             tekst={aarsak}
@@ -34,12 +50,12 @@ const Aarsaker = ({ aarsaker, containerClassName }) => {
   );
 };
 
-Aarsaker.propTypes = {
-  aarsaker: PropTypes.arrayOf(PropTypes.string),
-  containerClassName: PropTypes.string,
-};
+interface MulighetForArbeidProps {
+  sykmelding: SykmeldingOldFormat;
+}
 
-const MulighetForArbeid = ({ sykmelding, ledetekster }) => {
+const MulighetForArbeid = (mulighetForArbeidProps: MulighetForArbeidProps) => {
+  const { sykmelding } = mulighetForArbeidProps;
   const visSeksjon =
     (sykmelding.mulighetForArbeid.aktivitetIkkeMulig433 &&
       sykmelding.mulighetForArbeid.aktivitetIkkeMulig433.length) ||
@@ -52,25 +68,15 @@ const MulighetForArbeid = ({ sykmelding, ledetekster }) => {
   }
   return (
     <div className="sykmeldingSeksjon">
-      <h4 className="sykmeldingSeksjon__tittel">
-        {getLedetekst("din-sykmelding.mulighet.for.arbeid.tittel", ledetekster)}
-      </h4>
-      {(sykmelding.mulighetForArbeid.aktivitetIkkeMulig433 &&
-        sykmelding.mulighetForArbeid.aktivitetIkkeMulig433.length) > 0 ? (
-        <SykmeldingOpplysning
-          tittel={getLedetekst(
-            "din-sykmelding.mulighet.for.arbeid.pasient.ikke.i.arbeid.tittel",
-            ledetekster
-          )}
-        >
+      <h4 className="sykmeldingSeksjon__tittel">{texts.mulighetForArbeid}</h4>
+      {sykmelding.mulighetForArbeid.aktivitetIkkeMulig433 &&
+      sykmelding.mulighetForArbeid.aktivitetIkkeMulig433.length > 0 ? (
+        <SykmeldingOpplysning tittel={texts.erIkkeIArbeid}>
           <div>
             {getSykmeldingCheckbox(
               sykmelding.mulighetForArbeid,
               "aktivitetIkkeMulig433",
-              getLedetekst(
-                "din-sykmelding.mulighet.for.arbeid.medisinsk.tittel",
-                ledetekster
-              )
+              texts.medisinskAarsak
             )}
             <Aarsaker
               aarsaker={sykmelding.mulighetForArbeid.aktivitetIkkeMulig433}
@@ -80,8 +86,7 @@ const MulighetForArbeid = ({ sykmelding, ledetekster }) => {
         </SykmeldingOpplysning>
       ) : null}
       {(() => {
-        let nokkel =
-          "din-sykmelding.mulighet.for.arbeid.medisinsk.beskriv.tittel.standard";
+        let text = texts.medisinskAarsakBeskriv;
         if (sykmelding.startLegemeldtFravaer) {
           const tom = senesteTom(sykmelding.mulighetForArbeid.perioder);
           const ETT_DOGN = 1000 * 60 * 60 * 24;
@@ -92,32 +97,23 @@ const MulighetForArbeid = ({ sykmelding, ledetekster }) => {
               ETT_DOGN +
             1;
           if (antallDager >= SJU_UKER && antallDager < SYTTEN_UKER) {
-            nokkel =
-              "din-sykmelding.mulighet.for.arbeid.medisinsk.beskriv.tittel.7-uker";
+            text = texts.aktivitetskravBegrunnelse;
           }
         }
         return getSykmeldingOpplysning(
           sykmelding.mulighetForArbeid,
           "aarsakAktivitetIkkeMulig433",
-          getLedetekst(nokkel, ledetekster)
+          text
         );
       })()}
       {sykmelding.mulighetForArbeid.aktivitetIkkeMulig434 &&
       sykmelding.mulighetForArbeid.aktivitetIkkeMulig434.length > 0 ? (
-        <SykmeldingOpplysning
-          tittel={getLedetekst(
-            "din-sykmelding.mulighet.for.arbeid.pasient.ikke.i.arbeid.tittel",
-            ledetekster
-          )}
-        >
+        <SykmeldingOpplysning tittel={texts.erIkkeIArbeid}>
           <div>
             {getSykmeldingCheckbox(
               sykmelding.mulighetForArbeid,
               "aktivitetIkkeMulig434",
-              getLedetekst(
-                "din-sykmelding.mulighet.for.arbeid.forhold.arbeidsplassen.tittel",
-                ledetekster
-              )
+              texts.arbeidsplassForhold
             )}
             <Aarsaker
               aarsaker={sykmelding.mulighetForArbeid.aktivitetIkkeMulig434}
@@ -129,18 +125,10 @@ const MulighetForArbeid = ({ sykmelding, ledetekster }) => {
       {getSykmeldingOpplysning(
         sykmelding.mulighetForArbeid,
         "aarsakAktivitetIkkeMulig434",
-        getLedetekst(
-          "din-sykmelding.mulighet.for.arbeid.forhold.arbeidsplassen.beskriv.tittel",
-          ledetekster
-        )
+        texts.arsak
       )}
     </div>
   );
-};
-
-MulighetForArbeid.propTypes = {
-  sykmelding: sykmeldingPt,
-  ledetekster: keyValue,
 };
 
 export default MulighetForArbeid;

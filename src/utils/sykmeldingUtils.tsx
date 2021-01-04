@@ -6,7 +6,7 @@ export const getSykmeldingCheckbox = (
   sykmeldingBolk: any,
   felt: string,
   tekst: any,
-  className: string
+  className?: string
 ) => {
   if (sykmeldingBolk[felt]) {
     return (
