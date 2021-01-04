@@ -9,7 +9,7 @@ interface ArbeidsgiversSykmeldingProps {
   sykmelding: SykmeldingOldFormat;
   ledetekster: any;
   Overskrift?: string;
-  erApen: boolean;
+  erApen?: boolean;
 }
 
 const ArbeidsgiversSykmelding = (
