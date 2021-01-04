@@ -9,7 +9,7 @@ import {
 const ArbeidsgiversSykmelding = ({
   sykmelding,
   ledetekster,
-  Overskrift = "H2",
+  Overskrift = "h2",
   erApen = false,
 }) => {
   return (

@@ -34,7 +34,7 @@ const DinSendteSykmelding = (
         ikonHover="svg/person_hover.svg"
         ikonAltTekst="Du"
         variant="lysebla"
-        Overskrift="H2"
+        Overskrift="h2"
       >
         <DineSykmeldingOpplysninger
           sykmelding={dinSykmelding}
