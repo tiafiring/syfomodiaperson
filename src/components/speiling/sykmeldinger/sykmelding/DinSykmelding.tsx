@@ -14,7 +14,6 @@ const texts = {
 
 interface DinSykmeldingProps {
   sykmelding: SykmeldingOldFormat;
-  ledetekster: any;
   visEldreSykmeldingVarsel?: boolean;
   eldsteSykmeldingId?: string;
 }
@@ -22,7 +21,6 @@ interface DinSykmeldingProps {
 const DinSykmelding = (dinSykmeldingProps: DinSykmeldingProps) => {
   const {
     sykmelding,
-    ledetekster,
     visEldreSykmeldingVarsel,
     eldsteSykmeldingId,
   } = dinSykmeldingProps;
@@ -61,10 +59,7 @@ const DinSykmelding = (dinSykmeldingProps: DinSykmeldingProps) => {
         />
       </header>
       <div className="panel blokk">
-        <DineSykmeldingOpplysninger
-          sykmelding={sykmelding}
-          ledetekster={ledetekster}
-        />
+        <DineSykmeldingOpplysninger sykmelding={sykmelding} />
       </div>
     </div>
   );

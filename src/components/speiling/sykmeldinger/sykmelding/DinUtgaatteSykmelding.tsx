@@ -10,13 +10,12 @@ const texts = {
 
 interface DinUtgaatteSykmeldingProps {
   sykmelding: SykmeldingOldFormat;
-  ledetekster: any;
 }
 
 const DinUtgatteSykmelding = (
   dinUtgaatteSykmeldingProps: DinUtgaatteSykmeldingProps
 ) => {
-  const { sykmelding, ledetekster } = dinUtgaatteSykmeldingProps;
+  const { sykmelding } = dinUtgaatteSykmeldingProps;
   return (
     <div>
       <SykmeldingStatuspanel sykmelding={sykmelding} />
@@ -29,10 +28,7 @@ const DinUtgatteSykmelding = (
         ikonAltTekst="Lege"
         variant="lysebla"
       >
-        <DineSykmeldingOpplysninger
-          sykmelding={sykmelding}
-          ledetekster={ledetekster}
-        />
+        <DineSykmeldingOpplysninger sykmelding={sykmelding} />
       </Utvidbar>
     </div>
   );

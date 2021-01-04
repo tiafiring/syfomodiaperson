@@ -36,10 +36,7 @@ const DinBekreftedeSykmelding = (
         variant="lysebla"
         Overskrift="h2"
       >
-        <DineSykmeldingOpplysninger
-          sykmelding={dinSykmelding}
-          ledetekster={ledetekster}
-        />
+        <DineSykmeldingOpplysninger sykmelding={dinSykmelding} />
       </Utvidbar>
       {dinSykmelding.valgtArbeidssituasjon === "ARBEIDSTAKER" && (
         <div className="blokk">

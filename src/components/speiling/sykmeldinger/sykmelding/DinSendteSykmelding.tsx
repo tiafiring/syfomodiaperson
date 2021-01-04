@@ -36,10 +36,7 @@ const DinSendteSykmelding = (
         variant="lysebla"
         Overskrift="h2"
       >
-        <DineSykmeldingOpplysninger
-          sykmelding={dinSykmelding}
-          ledetekster={ledetekster}
-        />
+        <DineSykmeldingOpplysninger sykmelding={dinSykmelding} />
       </Utvidbar>
       <div className="blokk--l">
         <ArbeidsgiversSykmelding

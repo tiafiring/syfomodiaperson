@@ -10,13 +10,12 @@ const texts = {
 
 interface DinAvbrutteSykmeldingProps {
   sykmelding: SykmeldingOldFormat;
-  ledetekster: any;
 }
 
 const DinAvbrutteSykmelding = (
   dinAvbrutteSykmeldingProps: DinAvbrutteSykmeldingProps
 ) => {
-  const { sykmelding, ledetekster } = dinAvbrutteSykmeldingProps;
+  const { sykmelding } = dinAvbrutteSykmeldingProps;
   return (
     <div>
       <SykmeldingStatuspanel sykmelding={sykmelding} />
@@ -30,10 +29,7 @@ const DinAvbrutteSykmelding = (
         variant="lysebla"
         Overskrift="H2"
       >
-        <DineSykmeldingOpplysninger
-          sykmelding={sykmelding}
-          ledetekster={ledetekster}
-        />
+        <DineSykmeldingOpplysninger sykmelding={sykmelding} />
       </Utvidbar>
     </div>
   );

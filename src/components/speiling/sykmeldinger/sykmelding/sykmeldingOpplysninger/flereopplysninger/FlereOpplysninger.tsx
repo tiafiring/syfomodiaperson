@@ -1,11 +1,7 @@
 import React from "react";
-import {
-  keyValue,
-  getLedetekst,
-  getSykmeldingOpplysning,
-  sykmelding as sykmeldingPt,
-} from "@navikt/digisyfo-npm";
+import { SykmeldingOldFormat } from "../../../../../../data/sykmelding/types/SykmeldingOldFormat";
 import { tilLesbarDatoMedArstall } from "../../../../../../utils/datoUtils";
+import { getSykmeldingOpplysning } from "../../../../../../utils/sykmeldingUtils";
 import MulighetForArbeid from "./MulighetForArbeid";
 import Friskmelding from "./Friskmelding";
 import UtdypendeOpplysninger from "./UtdypendeOpplysninger";
@@ -15,24 +11,31 @@ import Tilbakedatering from "./Tilbakedatering";
 import MeldingTilArbeidsgiver from "./MeldingTilArbeidsgiver";
 import AndreSykmeldingOpplysninger from "./AndreSykmeldingOpplysninger";
 
-const FlereOpplysninger = ({ sykmelding, ledetekster }) => {
+const texts = {
+  utstedelsesdato: "Dato sykmeldingen ble skrevet",
+  startLegemeldtFravaer: "Når startet det legemeldte fraværet?",
+};
+
+interface FlereOpplysningerProps {
+  sykmelding: SykmeldingOldFormat;
+}
+
+const FlereOpplysninger = (flereOpplysningerProps: FlereOpplysningerProps) => {
+  const { sykmelding } = flereOpplysningerProps;
   return (
     <div>
       <div className="sykmeldingSeksjon">
         {getSykmeldingOpplysning(
           sykmelding.bekreftelse,
           "utstedelsesdato",
-          getLedetekst("din-sykmelding.annet.utstedelsesdato", ledetekster),
+          texts.utstedelsesdato,
           tilLesbarDatoMedArstall(sykmelding.bekreftelse.utstedelsesdato),
           "h4"
         )}
         {getSykmeldingOpplysning(
           sykmelding,
           "startLegemeldtFravaer",
-          getLedetekst(
-            "din-sykmelding.mulighet.for.arbeid.start.legemeldt.fravaer.tittel",
-            ledetekster
-          ),
+          texts.startLegemeldtFravaer,
           tilLesbarDatoMedArstall(sykmelding.startLegemeldtFravaer),
           "h4"
         )}
@@ -47,11 +50,6 @@ const FlereOpplysninger = ({ sykmelding, ledetekster }) => {
       <AndreSykmeldingOpplysninger sykmelding={sykmelding} />
     </div>
   );
-};
-
-FlereOpplysninger.propTypes = {
-  sykmelding: sykmeldingPt,
-  ledetekster: keyValue,
 };
 
 export default FlereOpplysninger;

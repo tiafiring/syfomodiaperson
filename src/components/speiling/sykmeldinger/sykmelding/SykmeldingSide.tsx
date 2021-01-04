@@ -100,27 +100,21 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
     } else if (dinSykmelding.status === gamleSMStatuser.UTGAATT) {
       return (
         <div>
-          <DinUtgaatteSykmelding
-            sykmelding={dinSykmelding}
-            ledetekster={ledetekster}
-          />
+          <DinUtgaatteSykmelding sykmelding={dinSykmelding} />
           <LenkeTilDineSykmeldinger fnr={fnr} />
         </div>
       );
     } else if (dinSykmelding.status === gamleSMStatuser.NY) {
       return (
         <div>
-          <DinSykmelding sykmelding={dinSykmelding} ledetekster={ledetekster} />
+          <DinSykmelding sykmelding={dinSykmelding} />
           <LenkeTilDineSykmeldinger fnr={fnr} />
         </div>
       );
     } else if (dinSykmelding.status === gamleSMStatuser.AVBRUTT) {
       return (
         <div>
-          <DinAvbrutteSykmelding
-            sykmelding={dinSykmelding}
-            ledetekster={ledetekster}
-          />
+          <DinAvbrutteSykmelding sykmelding={dinSykmelding} />
           <LenkeTilDineSykmeldinger fnr={fnr} />
         </div>
       );

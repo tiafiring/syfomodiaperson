@@ -29,18 +29,13 @@ const getStillingsprosentText = (stillingsprosent?: number) => {
 
 interface DineSykmeldingOpplysningerProps {
   sykmelding: SykmeldingOldFormat;
-  ledetekster: any;
   Overskrift?: any;
 }
 
 const DineSykmeldingOpplysninger = (
   dineSykmeldingOpplysningerProps: DineSykmeldingOpplysningerProps
 ) => {
-  const {
-    sykmelding,
-    ledetekster,
-    Overskrift = "h2",
-  } = dineSykmeldingOpplysningerProps;
+  const { sykmelding, Overskrift = "h2" } = dineSykmeldingOpplysningerProps;
   return (
     <div className="dine-opplysninger">
       <Overskrift className="js-din-sykmelding-tittel typo-innholdstittel blokk-l">
@@ -203,10 +198,7 @@ const DineSykmeldingOpplysninger = (
         className="blokk-s"
       >
         <div className="sykmeldingSeksjoner">
-          <FlereOpplysninger
-            sykmelding={sykmelding}
-            ledetekster={ledetekster}
-          />
+          <FlereOpplysninger sykmelding={sykmelding} />
         </div>
       </Utvidbar>
     </div>
