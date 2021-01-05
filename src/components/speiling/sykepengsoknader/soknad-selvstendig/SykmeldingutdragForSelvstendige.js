@@ -1,17 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  Bjorn,
-  sykmelding as sykmeldingPt,
-  SykmeldingNokkelOpplysning,
-  SykmeldingPerioder,
-} from "@navikt/digisyfo-npm";
+import { Bjorn, sykmelding as sykmeldingPt } from "@navikt/digisyfo-npm";
 import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
 import {
   SykmeldingopplysningForsikring,
   SykmeldingopplysningFravaersperioder,
 } from "../../sykmeldinger/sykmeldingstatuspanel/SykmeldingStatuspanelOpplysning";
 import Utvidbar from "../../../Utvidbar";
+import SykmeldingPerioder from "../../sykmeldinger/sykmelding/sykmeldingOpplysninger/SykmeldingPerioder";
+import SykmeldingNokkelOpplysning from "../../sykmeldinger/sykmelding/sykmeldingOpplysninger/SykmeldingNokkelOpplysning";
 
 const texts = {
   datoSykmelding: "Dato sykmeldingen ble skrevet",
