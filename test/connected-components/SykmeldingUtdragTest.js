@@ -2,16 +2,16 @@ import React from "react";
 import { expect } from "chai";
 import { shallow } from "enzyme";
 import sinon from "sinon";
-import { SykmeldingUtdrag } from "@navikt/digisyfo-npm";
 import {
   Container,
   mapStateToProps,
-} from "../../src/components/speiling/sykepengsoknader/SykmeldingUtdrag";
+} from "../../src/components/speiling/sykepengsoknader/SykmeldingUtdragContainer";
 import sykmeldinger from "../../src/data/sykmelding/sykmeldinger";
 import mockSykepengesoknader from "../mockdata/mockSykepengesoknader";
 import mockSykmeldinger from "../mockdata/sykmeldinger/mockSykmeldinger";
 import { sykmeldingerHentet } from "../../src/data/sykmelding/sykmeldinger_actions";
 import ledetekster from "../../src/data/ledetekster/ledetekster";
+import SykmeldingUtdrag from "../../src/components/speiling/sykepengsoknader/soknad-felles/SykmeldingUtdrag";
 
 describe("SykmeldingUtdrag", () => {
   let state;

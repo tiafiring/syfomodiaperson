@@ -8,7 +8,7 @@ import Statuspanel, {
   Statusopplysninger,
 } from "../../Statuspanel";
 import SoknadSpeiling from "../soknad-felles/SoknadSpeiling";
-import SykmeldingUtdrag from "../SykmeldingUtdrag";
+import SykmeldingUtdrag from "../SykmeldingUtdragContainer";
 import VerktoylinjeGjenapne from "../soknad-felles/VerktoylinjeGjenapneSoknad";
 
 const texts = {

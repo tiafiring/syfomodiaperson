@@ -12,7 +12,7 @@ import RelaterteSoknaderContainer from "./RelaterteSoknaderContainer";
 import KorrigertAvContainer from "./KorrigertAvContainer";
 import AvbruttSoknad from "./AvbruttSoknad";
 import UtgaattSoknad from "./UtgaattSoknad";
-import SykmeldingUtdrag from "../SykmeldingUtdrag";
+import SykmeldingUtdrag from "../SykmeldingUtdragContainer";
 import EndreSendKnapperad from "./EndreSendKnapperad";
 
 const {

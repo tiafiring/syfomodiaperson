@@ -81,4 +81,5 @@ export interface SykepengesoknadDTO {
   korrigerer?: string;
   korrigertAv?: string;
   arbeidsgiver?: ArbeidsgiverDTO;
+  _erOppdelt?: boolean;
 }

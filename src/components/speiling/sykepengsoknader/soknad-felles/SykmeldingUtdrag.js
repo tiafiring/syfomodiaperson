@@ -1,12 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  Utvidbar,
-  SykmeldingPerioder,
-  SykmeldingNokkelOpplysning,
-  toDatePrettyPrint,
-} from "@navikt/digisyfo-npm";
+import { Utvidbar } from "@navikt/digisyfo-npm";
 import { sykepengesoknad as sykepengesoknadPt } from "../../../../propTypes";
+import SykmeldingPerioder from "../../sykmeldinger/sykmelding/sykmeldingOpplysninger/SykmeldingPerioder";
+import SykmeldingNokkelOpplysning from "../../sykmeldinger/sykmelding/sykmeldingOpplysninger/SykmeldingNokkelOpplysning";
+import { toDatePrettyPrint } from "../../../../utils/datoUtils";
 
 const texts = {
   tittel: "Opplysninger fra sykmeldingen",

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { toDatePrettyPrint } from "../../../../utils/datoUtils";
-import SykmeldingUtdrag from "../SykmeldingUtdrag";
+import SykmeldingUtdrag from "../SykmeldingUtdragContainer";
 import { sykepengesoknad as sykepengesoknadPt } from "../../../../propTypes";
 import Statuspanel, {
   StatusNokkelopplysning,

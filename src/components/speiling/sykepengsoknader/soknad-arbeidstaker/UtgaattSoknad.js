@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Alertstripe from "nav-frontend-alertstriper";
-import SykmeldingUtdrag from "../SykmeldingUtdrag";
+import SykmeldingUtdrag from "../SykmeldingUtdragContainer";
 import { sykepengesoknad as sykepengesoknadPt } from "../../../../propTypes";
 
 const texts = {

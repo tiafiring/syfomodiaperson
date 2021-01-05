@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Oppsummeringsvisning from "../soknad-felles-oppsummering/Oppsummeringsvisning";
 import { brodsmule, soknad as soknadPt } from "../../../../propTypes";
 import SoknadSpeiling from "../soknad-felles/SoknadSpeiling";
-import SykmeldingUtdrag from "../SykmeldingUtdrag";
+import SykmeldingUtdrag from "../SykmeldingUtdragContainer";
 import SykepengesoknadStatuspanel from "./SykepengesoknadStatuspanel";
 import { VAER_KLAR_OVER_AT } from "../../../../enums/tagtyper";
 import { KORRIGERT } from "../../../../enums/soknadstatuser";
