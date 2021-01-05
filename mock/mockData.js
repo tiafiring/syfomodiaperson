@@ -25,7 +25,6 @@ lastFilTilMinne(enums.MOTER);
 lastFilTilMinne(enums.OPPFOLGINGSTILFELLEPERIODER);
 lastFilTilMinne(enums.SOKNADER);
 lastFilTilMinne(enums.SYKMELDINGER);
-lastFilTilMinne(enums.TEKSTER);
 lastFilTilMinne(enums.TILGANGTILBRUKER);
 lastFilTilMinne(enums.VEILEDERINFO);
 lastFilTilMinne(enums.PREDIKSJON);

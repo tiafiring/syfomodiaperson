@@ -13,7 +13,6 @@ const MOTER = "moter";
 const OPPFOLGINGSTILFELLEPERIODER = "oppfolgingstilfelleperioder";
 const SOKNADER = "soknader";
 const SYKMELDINGER = "sykmeldinger";
-const TEKSTER = "tekster";
 const TILGANGTILBRUKER = "tilgangtilbruker";
 const VEILEDERINFO = "veilederinfo";
 const PREDIKSJON = "prediksjon";
@@ -35,7 +34,6 @@ module.exports = {
   OPPFOLGINGSTILFELLEPERIODER,
   SOKNADER,
   SYKMELDINGER,
-  TEKSTER,
   TILGANGTILBRUKER,
   VEILEDERINFO,
   PREDIKSJON,

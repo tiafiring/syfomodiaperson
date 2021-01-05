@@ -18,7 +18,6 @@ import epostinnhold from "./data/mote/epostinnhold";
 import arbeidsgiverEpostinnhold from "./data/mote/arbeidsgiverEpostinnhold";
 import modiacontext from "./data/modiacontext/modiacontext";
 import historikk from "./data/historikk/historikk";
-import ledetekster from "./data/ledetekster/ledetekster";
 import oppfoelgingsdialoger from "./data/oppfolgingsplan/oppfoelgingsdialoger";
 import oppfolgingsplanerlps from "./data/oppfolgingsplan/oppfolgingsplanerlps";
 import dokumentinfo from "./data/oppfolgingsplan/dokumentinfo";
@@ -36,7 +35,6 @@ import personoppgaver from "./data/personoppgave/personoppgaver";
 import flaggperson from "./data/pengestopp/flaggperson";
 import prediksjon from "./data/prediksjon/prediksjon";
 import rootSaga from "./data/rootSaga";
-import { hentLedetekster } from "./data/ledetekster/ledetekster_actions";
 import { sjekkTilgang } from "./data/tilgang/tilgang_actions";
 import { hentVeilederinfo } from "./data/veilederinfo/veilederinfo_actions";
 import { hentBehandlendeEnhet } from "./data/behandlendeenhet/behandlendeEnhet_actions";
@@ -77,7 +75,6 @@ const rootReducer = combineReducers({
   dokumentinfo,
   egenansatt,
   veilederinfo,
-  ledetekster,
   tilgang,
   form: formReducer,
   soknader,
@@ -153,14 +150,6 @@ store.dispatch(
     },
   })
 );
-
-store.dispatch(hentLedetekster());
-
-if (hasURLParameter("visLedetekster")) {
-  window.VIS_LEDETEKSTNOKLER = true;
-} else {
-  window.VIS_LEDETEKSTNOKLER = false;
-}
 
 ReactDOM.render(
   <Provider store={store}>

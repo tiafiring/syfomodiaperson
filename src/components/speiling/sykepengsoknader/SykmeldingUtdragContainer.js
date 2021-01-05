@@ -47,7 +47,6 @@ export const mapStateToProps = (state, ownProps) => {
   });
 
   return {
-    ledetekster: state.ledetekster.data,
     skalHenteSykmeldinger,
     sykmelding,
   };

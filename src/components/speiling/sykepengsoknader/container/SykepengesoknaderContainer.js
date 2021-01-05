@@ -104,10 +104,8 @@ export function mapDispatchToProps(dispatch) {
 
 export function mapStateToProps(state, ownProps) {
   const harForsoktHentetAlt = harForsoktHentetSoknader(state.soknader);
-  const henter =
-    !harForsoktHentetAlt || state.ledetekster.henter || state.tilgang.henter;
-  const hentingFeilet =
-    state.ledetekster.hentingFeilet || state.tilgang.hentingFeilet;
+  const henter = !harForsoktHentetAlt || state.tilgang.henter;
+  const hentingFeilet = state.tilgang.hentingFeilet;
   const hentingFeiletSoknader = state.soknader.hentingFeilet;
 
   return {
@@ -116,7 +114,6 @@ export function mapStateToProps(state, ownProps) {
     henter,
     hentingFeilet: hentingFeilet || hentingFeiletSoknader,
     hentingFeiletSoknader,
-    ledetekster: state.ledetekster.data,
     soknader: state.soknader.data,
     tilgang: state.tilgang.data,
   };

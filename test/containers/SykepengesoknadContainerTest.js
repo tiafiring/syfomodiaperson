@@ -7,12 +7,10 @@ import {
   mapStateToProps,
 } from "../../src/components/speiling/sykepengsoknader/container/SykepengesoknadContainer";
 import soknader from "../../src/data/sykepengesoknad/soknader";
-import ledetekster from "../../src/data/ledetekster/ledetekster";
 import sykmeldinger from "../../src/data/sykmelding/sykmeldinger";
 import { soknaderHentet } from "../../src/data/sykepengesoknad/soknader_actions";
 import mockSoknader from "../mockdata/mockSoknader";
 import Feilmelding from "../../src/components/Feilmelding";
-import SykepengesoknadSelvstendig from "../../src/components/speiling/sykepengsoknader/soknad-selvstendig/SykepengesoknadSelvstendig";
 import SykepengesoknadUtland from "../../src/components/speiling/sykepengsoknader/soknad-utland/SykepengesoknadUtland";
 import { sykmeldingerHentet } from "../../src/data/sykmelding/sykmeldinger_actions";
 
@@ -37,7 +35,6 @@ describe("SykepengesoknadContainer", () => {
     state = {
       soknader: soknader(soknader(), soknaderHentet(mockSoknader)),
       sykmeldinger: sykmeldinger(sykmeldinger(), sykmeldingerHentet([])),
-      ledetekster: ledetekster(),
       tilgang: {
         data: {
           harTilgang: true,

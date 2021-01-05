@@ -151,7 +151,6 @@ Container.propTypes = {
   henter: PropTypes.bool,
   hentingFeilet: PropTypes.bool,
   tilgang: PropTypes.object,
-  ledetekster: keyValue,
   soknad: soknadPt,
   sykmelding: sykmeldingPt,
 };
@@ -167,10 +166,8 @@ export function mapStateToProps(state, ownProps) {
   const harForsoktHentetAlt =
     harForsoktHentetSykmeldinger(state.sykmeldinger) &&
     harForsoktHentetSoknader(state.soknader);
-  const henter =
-    !harForsoktHentetAlt || state.ledetekster.henter || state.tilgang.henter;
-  const hentingFeilet =
-    state.ledetekster.hentingFeilet || state.tilgang.hentingFeilet;
+  const henter = !harForsoktHentetAlt || state.tilgang.henter;
+  const hentingFeilet = state.tilgang.hentingFeilet;
   const soknad = state.soknader.data.find((s) => {
     return s.id === ownProps.params.sykepengesoknadId;
   });
@@ -183,7 +180,6 @@ export function mapStateToProps(state, ownProps) {
     fnr: ownProps.params.fnr,
     henter,
     hentingFeilet,
-    ledetekster: state.ledetekster.data,
     tilgang: state.tilgang.data,
     soknad,
     sykmelding,

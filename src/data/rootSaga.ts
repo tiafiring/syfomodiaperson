@@ -16,7 +16,6 @@ import virksomhetSagas from "./virksomhet/virksomhetSagas";
 import veilederinfoSagas from "./veilederinfo/veilederinfoSagas";
 import diskresjonskodeSagas from "./diskresjonskode/diskresjonskodeSagas";
 import egenansattSagas from "./egenansatt/egenansattSagas";
-import ledeteksterSagas from "./ledetekster/ledeteksterSagas";
 import tilgangSagas from "./tilgang/tilgangSagas";
 import soknaderSagas from "./sykepengesoknad/soknaderSagas";
 import oppfolgingstilfellePersonSagas from "./oppfolgingstilfelle/oppfolgingstilfellePersonSagas";
@@ -34,7 +33,6 @@ export default function* rootSaga() {
     navbrukerSagas(),
     moterSagas(),
     motebehovSagas(),
-    ledeteksterSagas(),
     epostinnholdSagas(),
     virksomhetSagas(),
     modiacontextSagas(),

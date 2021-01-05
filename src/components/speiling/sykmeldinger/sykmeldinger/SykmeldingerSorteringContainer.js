@@ -36,11 +36,8 @@ DropdownContainer.propTypes = {
   status: PropTypes.string,
 };
 
-function mapStateToProps(state) {
-  const ledetekster = state.ledetekster.data;
-
+function mapStateToProps() {
   return {
-    ledetekster,
     alternativer: [
       {
         tekst: texts.dato,

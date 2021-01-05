@@ -200,20 +200,6 @@ server.use(
 );
 
 server.use(
-  "/syfotekster/api",
-  proxy("syfotekster.default", {
-    https: false,
-    proxyReqPathResolver: function (req) {
-      return `/syfotekster/api${req.path}`;
-    },
-    proxyErrorHandler: function (err, res, next) {
-      console.error("Error in proxy for tekster", err.message);
-      next(err);
-    },
-  })
-);
-
-server.use(
   "/syfosoknad/api",
   proxy("syfosoknad.default", {
     https: false,
