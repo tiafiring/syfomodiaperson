@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { keyValue } from "@navikt/digisyfo-npm";
 import AppSpinner from "../../AppSpinner";
 import Lightbox from "../../Lightbox";
 import Feilmelding from "../../Feilmelding";

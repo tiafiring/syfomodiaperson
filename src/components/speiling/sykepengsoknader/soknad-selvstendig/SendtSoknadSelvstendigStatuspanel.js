@@ -1,5 +1,4 @@
 import React from "react";
-import { SykmeldingNokkelOpplysning } from "@navikt/digisyfo-npm";
 import Statuspanel, {
   Statusopplysninger,
   StatusNokkelopplysning,
@@ -7,6 +6,7 @@ import Statuspanel, {
 import { soknad as soknadPt } from "../../../../propTypes";
 import { VerktoyKnapp, Verktoylinje } from "../../Verktoylinje";
 import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
+import SykmeldingNokkelOpplysning from "../../sykmeldinger/sykmelding/sykmeldingOpplysninger/SykmeldingNokkelOpplysning";
 
 const texts = {
   status: "Status",

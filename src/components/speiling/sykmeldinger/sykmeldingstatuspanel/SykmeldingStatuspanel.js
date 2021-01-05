@@ -1,11 +1,11 @@
 import React from "react";
-import { sykmeldingstatuser } from "@navikt/digisyfo-npm";
 import {
   Sykmeldingstatus,
   SendtDato,
   Arbeidsgiver,
   Orgnummer,
 } from "./SykmeldingStatuspanelOpplysning";
+import { gamleSMStatuser as sykmeldingstatuser } from "../../../../utils/sykmeldinger/sykmeldingstatuser";
 import { sykmelding as sykmeldingPt } from "../../../../propTypes";
 import GjenapneSykmelding from "./GjenapneSykmelding";
 import Statuspanel, { Statusopplysninger } from "../../Statuspanel";
