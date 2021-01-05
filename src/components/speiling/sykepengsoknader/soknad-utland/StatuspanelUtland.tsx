@@ -1,8 +1,10 @@
 import React from "react";
-import { sykepengesoknadstatuser } from "@navikt/digisyfo-npm";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
+import {
+  SoknadstatusDTO,
+  SykepengesoknadDTO,
+} from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
 import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
-import { soknad as soknadPt } from "../../../../propTypes";
 import Statuspanel, {
   StatusNokkelopplysning,
   Statusopplysninger,
@@ -17,9 +19,9 @@ const texts = {
   status: "Status",
 };
 
-const { SENDT, TIL_SENDING } = sykepengesoknadstatuser;
+const { SENDT, TIL_SENDING } = SoknadstatusDTO;
 
-const getStatusTekst = (soknad) => {
+const getStatusTekst = (soknad: SykepengesoknadDTO) => {
   switch (soknad.status) {
     case SENDT: {
       return texts.sendt;
@@ -37,7 +39,12 @@ export const tilSendingHjelpetekst = () => {
   return <Hjelpetekst>{texts.hjelpetekst}</Hjelpetekst>;
 };
 
-const SendtDato = ({ soknad }) => {
+interface SendtDatoProps {
+  soknad: SykepengesoknadDTO;
+}
+
+const SendtDato = (sendtDatoProps: SendtDatoProps) => {
+  const { soknad } = sendtDatoProps;
   return (
     <StatusNokkelopplysning tittel={texts.dato}>
       <p>{tilLesbarDatoMedArstall(soknad.innsendtDato)}</p>
@@ -45,11 +52,12 @@ const SendtDato = ({ soknad }) => {
   );
 };
 
-SendtDato.propTypes = {
-  soknad: soknadPt,
-};
+interface StatuspanelUtlandProps {
+  soknad: SykepengesoknadDTO;
+}
 
-const StatuspanelUtland = ({ soknad }) => {
+const StatuspanelUtland = (statuspanelUtlandProps: StatuspanelUtlandProps) => {
+  const { soknad } = statuspanelUtlandProps;
   const tekst = getStatusTekst(soknad);
   return (
     <Statuspanel>
@@ -68,10 +76,6 @@ const StatuspanelUtland = ({ soknad }) => {
       </Statusopplysninger>
     </Statuspanel>
   );
-};
-
-StatuspanelUtland.propTypes = {
-  soknad: soknadPt,
 };
 
 export default StatuspanelUtland;
