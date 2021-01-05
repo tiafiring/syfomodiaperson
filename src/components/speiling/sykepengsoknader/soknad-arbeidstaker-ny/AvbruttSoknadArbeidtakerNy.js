@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {
   brodsmule,
-  soknadPt,
+  soknad as soknadPt,
   sykmelding as sykmeldingPt,
 } from "../../../../propTypes";
 import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
