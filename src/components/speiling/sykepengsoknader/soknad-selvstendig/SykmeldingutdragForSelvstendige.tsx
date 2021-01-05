@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Bjorn, sykmelding as sykmeldingPt } from "@navikt/digisyfo-npm";
+import { Bjorn } from "@navikt/digisyfo-npm";
+import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
 import {
   SykmeldingopplysningForsikring,
@@ -30,7 +30,7 @@ const texts = {
   },
 };
 
-const textArbeidssituasjon = (arbeidssituasjon) => {
+const textArbeidssituasjon = (arbeidssituasjon: string) => {
   switch (arbeidssituasjon) {
     case "frilanser":
       return texts.status.frilanser[0];
@@ -59,7 +59,20 @@ const textArbeidssituasjon = (arbeidssituasjon) => {
   }
 };
 
-const SykmeldingUtdragForSelvstendige = ({ erApen, sykmelding, erOppdelt }) => {
+interface SykmeldingUtdragForSelvstendigeProps {
+  erApen: boolean;
+  sykmelding: SykmeldingOldFormat;
+  erOppdelt?: boolean;
+}
+
+const SykmeldingUtdragForSelvstendige = (
+  sykmeldingUtdragForSelvstendigeProps: SykmeldingUtdragForSelvstendigeProps
+) => {
+  const {
+    erApen,
+    sykmelding,
+    erOppdelt,
+  } = sykmeldingUtdragForSelvstendigeProps;
   return (
     <Utvidbar
       className="blokk js-sykmelding-utdrag"
@@ -89,7 +102,7 @@ const SykmeldingUtdragForSelvstendige = ({ erApen, sykmelding, erOppdelt }) => {
         <SykmeldingNokkelOpplysning tittel={texts.passer}>
           <p className="js-arbeidssituasjon">
             {textArbeidssituasjon(
-              sykmelding.valgtArbeidssituasjon.toLowerCase()
+              sykmelding.valgtArbeidssituasjon?.toLowerCase()
             )}
           </p>
         </SykmeldingNokkelOpplysning>
@@ -98,12 +111,6 @@ const SykmeldingUtdragForSelvstendige = ({ erApen, sykmelding, erOppdelt }) => {
       </div>
     </Utvidbar>
   );
-};
-
-SykmeldingUtdragForSelvstendige.propTypes = {
-  erApen: PropTypes.bool,
-  erOppdelt: PropTypes.bool,
-  sykmelding: sykmeldingPt,
 };
 
 export default SykmeldingUtdragForSelvstendige;
