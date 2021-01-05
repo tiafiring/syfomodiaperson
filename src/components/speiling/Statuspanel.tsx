@@ -1,13 +1,17 @@
 import React from "react";
-import PropTypes from "prop-types";
 import cn from "classnames";
 import SykmeldingNokkelOpplysning from "./sykmeldinger/sykmelding/sykmeldingOpplysninger/SykmeldingNokkelOpplysning";
 
-export const StatusNokkelopplysning = ({
-  children,
-  Overskrift = "h2",
-  tittel,
-}) => {
+interface StatusNokkelopplysningProps {
+  children?: any;
+  Overskrift?: any;
+  tittel: string;
+}
+
+export const StatusNokkelopplysning = (
+  statusNokkelopplysningProps: StatusNokkelopplysningProps
+) => {
+  const { children, Overskrift = "h2", tittel } = statusNokkelopplysningProps;
   return (
     <SykmeldingNokkelOpplysning
       className="nokkelopplysning--statusopplysning"
@@ -19,31 +23,29 @@ export const StatusNokkelopplysning = ({
   );
 };
 
-StatusNokkelopplysning.propTypes = {
-  children: PropTypes.node,
-  Overskrift: PropTypes.string,
-  tittel: PropTypes.string,
-};
+interface StatusopplysningerProps {
+  children?: any;
+}
 
-export const Statusopplysninger = ({ children }) => {
+export const Statusopplysninger = (
+  statusopplysningerProps: StatusopplysningerProps
+) => {
+  const { children } = statusopplysningerProps;
   return <div className="statusopplysninger">{children}</div>;
 };
 
-Statusopplysninger.propTypes = {
-  children: PropTypes.node,
-};
+interface StatuspanelProps {
+  children?: any;
+  enKolonne: boolean;
+}
 
-const Statuspanel = ({ children, enKolonne = false }) => {
+const Statuspanel = (statuspanelProps: StatuspanelProps) => {
+  const { children, enKolonne = false } = statuspanelProps;
   const classNames = cn("panel panel--komprimert blokk statuspanel", {
     "statuspanel--toKol": !enKolonne,
     "statuspanel--enKol": enKolonne,
   });
   return <div className={classNames}>{children}</div>;
-};
-
-Statuspanel.propTypes = {
-  children: PropTypes.node,
-  enKolonne: PropTypes.bool,
 };
 
 export default Statuspanel;
