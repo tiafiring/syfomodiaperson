@@ -1,5 +1,4 @@
 import React from "react";
-import { Bjorn } from "@navikt/digisyfo-npm";
 import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
 import {
@@ -30,7 +29,7 @@ const texts = {
   },
 };
 
-const textArbeidssituasjon = (arbeidssituasjon: string) => {
+const textArbeidssituasjon = (arbeidssituasjon?: string) => {
   switch (arbeidssituasjon) {
     case "frilanser":
       return texts.status.frilanser[0];
@@ -62,17 +61,12 @@ const textArbeidssituasjon = (arbeidssituasjon: string) => {
 interface SykmeldingUtdragForSelvstendigeProps {
   erApen: boolean;
   sykmelding: SykmeldingOldFormat;
-  erOppdelt?: boolean;
 }
 
 const SykmeldingUtdragForSelvstendige = (
   sykmeldingUtdragForSelvstendigeProps: SykmeldingUtdragForSelvstendigeProps
 ) => {
-  const {
-    erApen,
-    sykmelding,
-    erOppdelt,
-  } = sykmeldingUtdragForSelvstendigeProps;
+  const { erApen, sykmelding } = sykmeldingUtdragForSelvstendigeProps;
   return (
     <Utvidbar
       className="blokk js-sykmelding-utdrag"
@@ -87,13 +81,6 @@ const SykmeldingUtdragForSelvstendige = (
     >
       <div>
         <SykmeldingPerioder perioder={sykmelding.mulighetForArbeid.perioder} />
-        {erOppdelt && (
-          <Bjorn
-            rootUrl="/sykefravaer"
-            className="blokk"
-            nokkel="sykepengesoknad.sykmelding-utdrag.oppdelt.bjorn"
-          />
-        )}
         <SykmeldingNokkelOpplysning tittel={texts.datoSykmelding}>
           <p className="js-utstedelsesdato">
             {tilLesbarDatoMedArstall(sykmelding.bekreftelse.utstedelsesdato)}

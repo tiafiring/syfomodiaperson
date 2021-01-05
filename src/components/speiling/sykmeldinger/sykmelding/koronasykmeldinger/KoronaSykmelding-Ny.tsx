@@ -1,9 +1,9 @@
 import React from "react";
-import { Bjorn } from "@navikt/digisyfo-npm";
 import { Undertittel, Normaltekst } from "nav-frontend-typografi";
 import { Knapp } from "nav-frontend-knapper";
-import DineKoronaSykmeldingOpplysninger from "../sykmeldingOpplysninger/DineKoronaSykmeldingOpplysninger";
 import { SykmeldingOldFormat } from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
+import DineKoronaSykmeldingOpplysninger from "../sykmeldingOpplysninger/DineKoronaSykmeldingOpplysninger";
+import Hjelpeboble from "../../../../bjorn/Hjelpeboble";
 
 const texts = {
   pageSubtitle: "for selvstendig næringsdrivende og frilansere",
@@ -27,7 +27,7 @@ const KoronaSykmeldingNy = (
       <Undertittel style={{ marginBottom: "2.5rem", textAlign: "center" }}>
         {texts.pageSubtitle}
       </Undertittel>
-      <Bjorn className="blokk" hvit stor>
+      <Hjelpeboble className="blokk" hvit stor>
         <Normaltekst style={{ marginBottom: "1rem" }}>
           {texts.infotext1}
         </Normaltekst>
@@ -37,7 +37,7 @@ const KoronaSykmeldingNy = (
             {texts.button}
           </Knapp>
         </div>
-      </Bjorn>
+      </Hjelpeboble>
       <article>
         <header className="panelHeader panelHeader--lysebla">
           <img

@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router";
 import Alertstripe from "nav-frontend-alertstriper";
-import { Bjorn } from "@navikt/digisyfo-npm";
-import DineSykmeldingOpplysninger from "./sykmeldingOpplysninger/DineSykmeldingOpplysninger";
 import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
+import DineSykmeldingOpplysninger from "./sykmeldingOpplysninger/DineSykmeldingOpplysninger";
+import Hjelpeboble from "../../../bjorn/Hjelpeboble";
 
 const texts = {
   eldreSykmeldinger: "Du har eldre sykmeldinger som du bør behandle før denne.",
@@ -26,7 +26,7 @@ const DinSykmelding = (dinSykmeldingProps: DinSykmeldingProps) => {
   } = dinSykmeldingProps;
   return (
     <div>
-      <Bjorn className="blokk" hvit stor rootUrl="/sykefravaer">
+      <Hjelpeboble className="blokk" hvit stor>
         <div>
           <p>{texts.bjorn}</p>
           <p className="introtekst__knapperad">
@@ -35,7 +35,7 @@ const DinSykmelding = (dinSykmeldingProps: DinSykmeldingProps) => {
             </button>
           </p>
         </div>
-      </Bjorn>
+      </Hjelpeboble>
       {visEldreSykmeldingVarsel && (
         <Alertstripe type="info">
           <p className="sist side-innhold">
