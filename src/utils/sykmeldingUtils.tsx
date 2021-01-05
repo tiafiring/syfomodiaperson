@@ -1,4 +1,6 @@
 import React from "react";
+import { SykmeldingOldFormat } from "../data/sykmelding/types/SykmeldingOldFormat";
+import { sorterPerioderEldsteFoerst } from "./sorterSykmeldingerUtils";
 import { SykmeldingCheckbox } from "../components/speiling/sykmeldinger/sykmelding/sykmeldingOpplysninger/SykmeldingCheckbox";
 import SykmeldingOpplysning from "../components/speiling/sykmeldinger/sykmelding/sykmeldingOpplysninger/flereopplysninger/SykmeldingOpplysning";
 
@@ -38,3 +40,12 @@ export const getSykmeldingOpplysning = (
   }
   return null;
 };
+
+export const hentPerioderForSykmelding = (sykmelding: SykmeldingOldFormat) => {
+  return sykmelding.mulighetForArbeid.perioder;
+};
+
+export function getSykmeldingStartdato(sykmelding: SykmeldingOldFormat) {
+  const perioder = hentPerioderForSykmelding(sykmelding);
+  return sorterPerioderEldsteFoerst(perioder)[0].fom;
+}

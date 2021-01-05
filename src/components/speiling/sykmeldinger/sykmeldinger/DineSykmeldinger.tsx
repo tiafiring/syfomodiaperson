@@ -1,9 +1,9 @@
 import React from "react";
-import { sorterSykmeldinger } from "@navikt/digisyfo-npm";
 import {
   SykmeldingOldFormat,
   SykmeldingStatus,
 } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
+import { sorterSykmeldinger } from "../../../../utils/sorterSykmeldingerUtils";
 import SykmeldingTeasere from "./SykmeldingTeasere";
 import SykmeldingerSorteringContainer from "./SykmeldingerSorteringContainer";
 
