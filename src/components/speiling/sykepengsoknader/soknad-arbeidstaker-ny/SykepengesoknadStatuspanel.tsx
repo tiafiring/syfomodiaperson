@@ -1,5 +1,4 @@
 import React from "react";
-import { sykepengesoknadstatuser } from "@navikt/digisyfo-npm";
 import Statuspanel, {
   StatusNokkelopplysning,
   Statusopplysninger,
@@ -8,13 +7,24 @@ import hentStatustekst from "../../../../utils/soknad-felles/hentSoknadStatustek
 import hentSykepengetekst from "../../../../utils/soknad-felles/hentSykepengetekst";
 import { soknad as soknadPt } from "../../../../propTypes";
 import { VerktoyKnapp, Verktoylinje } from "../../Verktoylinje";
+import {
+  SoknadstatusDTO,
+  SykepengesoknadDTO,
+} from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const texts = {
   status: "Status",
   tittel: "Utbetaling av sykepenger",
 };
 
-const StatusOgSykepengeopplysninger = ({ soknad }) => {
+interface StatusOgSykepengeopplysningerProps {
+  soknad: SykepengesoknadDTO;
+}
+
+const StatusOgSykepengeopplysninger = (
+  statusOgSykepengeopplysningerProps: StatusOgSykepengeopplysningerProps
+) => {
+  const { soknad } = statusOgSykepengeopplysningerProps;
   return (
     <Statusopplysninger>
       <StatusNokkelopplysning tittel={texts.status}>
@@ -27,16 +37,19 @@ const StatusOgSykepengeopplysninger = ({ soknad }) => {
   );
 };
 
-StatusOgSykepengeopplysninger.propTypes = {
-  soknad: soknadPt,
-};
+interface SykepengesoknadStatuspanelProps {
+  soknad: SykepengesoknadDTO;
+}
 
-const SykepengesoknadStatuspanel = ({ soknad }) => {
+const SykepengesoknadStatuspanel = (
+  sykepengesoknadStatuspanelProps: SykepengesoknadStatuspanelProps
+) => {
+  const { soknad } = sykepengesoknadStatuspanelProps;
   const ETT_AAR_SIDEN = new Date();
-  ETT_AAR_SIDEN.setYear(ETT_AAR_SIDEN.getFullYear() - 1);
+  ETT_AAR_SIDEN.setFullYear(ETT_AAR_SIDEN.getFullYear() - 1);
   const visEndreknapp =
     soknad.opprettetDato >= ETT_AAR_SIDEN &&
-    soknad.status === sykepengesoknadstatuser.SENDT;
+    soknad.status === SoknadstatusDTO.SENDT;
 
   return (
     <Statuspanel enKolonne>
