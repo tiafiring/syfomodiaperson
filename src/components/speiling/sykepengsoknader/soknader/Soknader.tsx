@@ -1,6 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { sykepengesoknadstatuser } from "@navikt/digisyfo-npm";
 import Sidetopp from "../../../Sidetopp";
 import SoknadTeasere from "./SoknaderTeasere";
 import PlanlagteTeasere from "./PlanlagteTeasere";
@@ -8,8 +6,11 @@ import {
   sorterEtterOpprettetDato,
   sorterEtterPerioder,
 } from "../../../../utils/sykepengesoknadUtils";
-import { soknad as soknadPt } from "../../../../propTypes";
 import { OPPHOLD_UTLAND } from "../../../../enums/soknadtyper";
+import {
+  SoknadstatusDTO,
+  SykepengesoknadDTO,
+} from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const texts = {
   sidetittel: "Søknad om sykepenger",
@@ -27,9 +28,15 @@ const {
   UTKAST_TIL_KORRIGERING,
   FREMTIDIG,
   AVBRUTT,
-} = sykepengesoknadstatuser;
+} = SoknadstatusDTO;
 
-const Soknader = ({ fnr, soknader = [] }) => {
+interface SoknaderProps {
+  fnr: string;
+  soknader: SykepengesoknadDTO[];
+}
+
+const Soknader = (soknaderProps: SoknaderProps) => {
+  const { fnr, soknader = [] } = soknaderProps;
   const alleSoknader = [...soknader];
 
   const nyeSoknader = alleSoknader
@@ -91,11 +98,6 @@ const Soknader = ({ fnr, soknader = [] }) => {
       )}
     </React.Fragment>
   );
-};
-
-Soknader.propTypes = {
-  soknader: PropTypes.arrayOf(soknadPt),
-  fnr: PropTypes.string,
 };
 
 export default Soknader;
