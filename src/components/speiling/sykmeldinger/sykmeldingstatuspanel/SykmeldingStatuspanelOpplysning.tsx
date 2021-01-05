@@ -1,14 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
-import { SykmeldingStatus } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
+import {
+  SykmeldingOldFormat,
+  SykmeldingStatus,
+} from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 import {
   tilLesbarDatoMedArstall,
   tilLesbarPeriodeMedArstall,
 } from "../../../../utils/datoUtils";
-import { StatusNokkelopplysning } from "../../Statuspanel";
-import { sykmelding as sykmeldingPt } from "../../../../propTypes";
 import { Vis } from "../../../../utils";
+import { StatusNokkelopplysning } from "../../Statuspanel";
+import SykmeldingNokkelOpplysning from "../sykmelding/sykmeldingOpplysninger/SykmeldingNokkelOpplysning";
 
 const texts = {
   hjelpetekst:
@@ -36,7 +38,7 @@ const texts = {
 
 const { BEKREFTET, AVBRUTT, TIL_SENDING, SENDT } = SykmeldingStatus;
 
-const textStatus = (status) => {
+const textStatus = (status: SykmeldingStatus) => {
   switch (status) {
     case BEKREFTET:
       return texts.status.bekreftet;
@@ -55,7 +57,14 @@ const tilSendingHjelpetekst = () => {
   return <Hjelpetekst>{texts.hjelpetekst}</Hjelpetekst>;
 };
 
-export const Sykmeldingstatus = ({ sykmelding }) => {
+interface SykmeldingstatusProps {
+  sykmelding: SykmeldingOldFormat;
+}
+
+export const Sykmeldingstatus = (
+  sykmeldingstatusProps: SykmeldingstatusProps
+) => {
+  const { sykmelding } = sykmeldingstatusProps;
   return (
     <StatusNokkelopplysning tittel={texts.status.tittel}>
       {sykmelding.status === TIL_SENDING ? (
@@ -70,11 +79,12 @@ export const Sykmeldingstatus = ({ sykmelding }) => {
   );
 };
 
-Sykmeldingstatus.propTypes = {
-  sykmelding: sykmeldingPt,
-};
+interface SendtDatoProps {
+  sykmelding: SykmeldingOldFormat;
+}
 
-export const SendtDato = ({ sykmelding }) => {
+export const SendtDato = (sendtDatoProps: SendtDatoProps) => {
+  const { sykmelding } = sendtDatoProps;
   const tittel =
     sykmelding.status === BEKREFTET
       ? texts.dato.bekreftet
@@ -88,11 +98,12 @@ export const SendtDato = ({ sykmelding }) => {
   );
 };
 
-SendtDato.propTypes = {
-  sykmelding: sykmeldingPt,
-};
+interface ArbeidsgiverProps {
+  sykmelding: SykmeldingOldFormat;
+}
 
-export const Arbeidsgiver = ({ sykmelding }) => {
+export const Arbeidsgiver = (arbeidsgiverProps: ArbeidsgiverProps) => {
+  const { sykmelding } = arbeidsgiverProps;
   return (
     <StatusNokkelopplysning tittel={texts.arbeidsgiver}>
       <p className="js-arbeidsgiver">{sykmelding.innsendtArbeidsgivernavn}</p>
@@ -100,11 +111,12 @@ export const Arbeidsgiver = ({ sykmelding }) => {
   );
 };
 
-Arbeidsgiver.propTypes = {
-  sykmelding: sykmeldingPt,
-};
+interface OrgnummerProps {
+  sykmelding: SykmeldingOldFormat;
+}
 
-export const Orgnummer = ({ sykmelding }) => {
+export const Orgnummer = (orgnummerProps: OrgnummerProps) => {
+  const { sykmelding } = orgnummerProps;
   const orgnummer = sykmelding.orgnummer
     ? sykmelding.orgnummer.replace(/(...)(...)(...)/g, "$1 $2 $3")
     : null;
@@ -115,26 +127,26 @@ export const Orgnummer = ({ sykmelding }) => {
   );
 };
 
-Orgnummer.propTypes = {
-  sykmelding: sykmeldingPt,
-};
+interface SykmeldingopplysningFravaersperioderProps {
+  sykmelding: SykmeldingOldFormat;
+  className?: string;
+}
 
-export const SykmeldingopplysningFravaersperioder = ({
-  sykmelding,
-  className,
-}) => {
+export const SykmeldingopplysningFravaersperioder = (
+  sykmeldingopplysningFravaersperioderProps: SykmeldingopplysningFravaersperioderProps
+) => {
+  const { sykmelding, className } = sykmeldingopplysningFravaersperioderProps;
   return sykmelding.sporsmal.harAnnetFravaer !== null ? (
     <SykmeldingNokkelOpplysning
       className={className}
       tittel={texts.egenmeldingPapir}
     >
-      {sykmelding.sporsmal.fravaersperioder.length > 0 ? (
+      {sykmelding.sporsmal.fravaersperioder &&
+      sykmelding.sporsmal.fravaersperioder.length > 0 ? (
         <ul className="nokkelopplysning__liste">
-          {sykmelding.sporsmal.fravaersperioder.map((p) => {
+          {sykmelding.sporsmal.fravaersperioder?.map((p, index) => {
             return (
-              <li key={tilLesbarDatoMedArstall(p.fom)}>
-                {tilLesbarPeriodeMedArstall(p.fom, p.tom)}
-              </li>
+              <li key={index}>{tilLesbarPeriodeMedArstall(p.fom, p.tom)}</li>
             );
           })}
         </ul>
@@ -145,12 +157,15 @@ export const SykmeldingopplysningFravaersperioder = ({
   ) : null;
 };
 
-SykmeldingopplysningFravaersperioder.propTypes = {
-  sykmelding: sykmeldingPt,
-  className: PropTypes.string,
-};
+interface SykmeldingopplysningForsikringProps {
+  sykmelding: SykmeldingOldFormat;
+  className?: string;
+}
 
-export const SykmeldingopplysningForsikring = ({ sykmelding, className }) => {
+export const SykmeldingopplysningForsikring = (
+  sykmeldingopplysningForsikringProps: SykmeldingopplysningForsikringProps
+) => {
+  const { sykmelding, className } = sykmeldingopplysningForsikringProps;
   const text = sykmelding.sporsmal.harForsikring ? texts.ja : texts.nei;
   return sykmelding.sporsmal.harForsikring !== null ? (
     <SykmeldingNokkelOpplysning className={className} tittel={texts.forsikring}>
@@ -159,12 +174,14 @@ export const SykmeldingopplysningForsikring = ({ sykmelding, className }) => {
   ) : null;
 };
 
-SykmeldingopplysningForsikring.propTypes = {
-  sykmelding: sykmeldingPt,
-  className: PropTypes.string,
-};
+interface FrilansersporsmalProps {
+  sykmelding: SykmeldingOldFormat;
+}
 
-export const Frilansersporsmal = ({ sykmelding }) => {
+export const Frilansersporsmal = (
+  frilansersporsmalProps: FrilansersporsmalProps
+) => {
+  const { sykmelding } = frilansersporsmalProps;
   return (
     <Vis
       hvis={
@@ -188,8 +205,4 @@ export const Frilansersporsmal = ({ sykmelding }) => {
       }}
     />
   );
-};
-
-Frilansersporsmal.propTypes = {
-  sykmelding: sykmeldingPt,
 };

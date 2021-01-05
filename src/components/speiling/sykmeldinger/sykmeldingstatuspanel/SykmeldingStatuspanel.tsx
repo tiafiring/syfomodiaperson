@@ -6,7 +6,6 @@ import {
   Orgnummer,
 } from "./SykmeldingStatuspanelOpplysning";
 import { gamleSMStatuser as sykmeldingstatuser } from "../../../../utils/sykmeldinger/sykmeldingstatuser";
-import { sykmelding as sykmeldingPt } from "../../../../propTypes";
 import GjenapneSykmelding from "./GjenapneSykmelding";
 import Statuspanel, { Statusopplysninger } from "../../Statuspanel";
 import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
@@ -50,10 +49,6 @@ export const Nokkelopplysninger = (
       return null;
     }
   }
-};
-
-Nokkelopplysninger.propTypes = {
-  sykmelding: sykmeldingPt,
 };
 
 interface SykmeldingStatuspanelProps {

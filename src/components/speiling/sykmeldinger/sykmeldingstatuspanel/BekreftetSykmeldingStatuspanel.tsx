@@ -10,7 +10,7 @@ import Statuspanel, {
   Statusopplysninger,
 } from "../../Statuspanel";
 import AngreBekreftSykmelding from "../sykmeldinger/AngreBekreftSykmelding";
-import { tilStorForbokstav } from "../../../../utils/index";
+import { tilStorForbokstav } from "../../../../utils";
 
 const texts = {
   tittel: "Jeg er sykmeldt fra",
