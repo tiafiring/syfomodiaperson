@@ -12,8 +12,8 @@ const texts = {
   utdrag: "Dato sykmeldingen ble skrevet",
 };
 
-const SykmeldingUtdrag = ({ erApen, sykepengesoknad }) => {
-  const perioder = sykepengesoknad.aktiviteter.map((aktivitet) => {
+const SykmeldingUtdrag = ({ erApen, soknad }) => {
+  const perioder = soknad.aktiviteter.map((aktivitet) => {
     return {
       fom: aktivitet.periode.fom,
       tom: aktivitet.periode.tom,
@@ -36,13 +36,11 @@ const SykmeldingUtdrag = ({ erApen, sykepengesoknad }) => {
         <div>
           <SykmeldingPerioder perioder={perioder} />
           <SykmeldingNokkelOpplysning tittel={texts.arbeidsgiver}>
-            <p className="js-arbeidsgiver">
-              {sykepengesoknad.arbeidsgiver.navn}
-            </p>
+            <p className="js-arbeidsgiver">{soknad.arbeidsgiver.navn}</p>
           </SykmeldingNokkelOpplysning>
           <SykmeldingNokkelOpplysning tittel={texts.utdrag}>
             <p className="js-utstedelsesdato">
-              {toDatePrettyPrint(sykepengesoknad.sykmeldingSkrevetDato)}
+              {toDatePrettyPrint(soknad.sykmeldingSkrevetDato)}
             </p>
           </SykmeldingNokkelOpplysning>
         </div>
@@ -53,7 +51,7 @@ const SykmeldingUtdrag = ({ erApen, sykepengesoknad }) => {
 
 SykmeldingUtdrag.propTypes = {
   erApen: PropTypes.bool,
-  sykepengesoknad: sykepengesoknadPt,
+  soknad: sykepengesoknadPt,
 };
 
 export default SykmeldingUtdrag;
