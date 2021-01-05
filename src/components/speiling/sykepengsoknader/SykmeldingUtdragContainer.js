@@ -21,7 +21,9 @@ export class Container extends Component {
       soknad &&
       (!soknad.soknadstype || soknad.soknadstype === ARBEIDSTAKERE)
     ) {
-      return <SykmeldingUtdrag rootUrl={"/sykefravaer"} {...this.props} />;
+      return (
+        <SykmeldingUtdrag rootUrl={"/sykefravaer"} sykmelding={sykmelding} />
+      );
     }
     return null;
   }

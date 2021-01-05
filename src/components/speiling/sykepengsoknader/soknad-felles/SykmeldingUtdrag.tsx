@@ -1,10 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Utvidbar } from "@navikt/digisyfo-npm";
-import { sykepengesoknad as sykepengesoknadPt } from "../../../../propTypes";
+import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
+import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
 import SykmeldingPerioder from "../../sykmeldinger/sykmelding/sykmeldingOpplysninger/SykmeldingPerioder";
 import SykmeldingNokkelOpplysning from "../../sykmeldinger/sykmelding/sykmeldingOpplysninger/SykmeldingNokkelOpplysning";
-import { toDatePrettyPrint } from "../../../../utils/datoUtils";
 
 const texts = {
   tittel: "Opplysninger fra sykmeldingen",
@@ -12,15 +11,13 @@ const texts = {
   utdrag: "Dato sykmeldingen ble skrevet",
 };
 
-const SykmeldingUtdrag = ({ erApen, soknad }) => {
-  const perioder = soknad.aktiviteter.map((aktivitet) => {
-    return {
-      fom: aktivitet.periode.fom,
-      tom: aktivitet.periode.tom,
-      grad: aktivitet.grad,
-    };
-  });
+interface SykmeldingUtdragProps {
+  erApen?: boolean;
+  sykmelding: SykmeldingOldFormat;
+}
 
+const SykmeldingUtdrag = (sykmeldingUtdragProps: SykmeldingUtdragProps) => {
+  const { erApen, sykmelding } = sykmeldingUtdragProps;
   return (
     <div className="blokk">
       <Utvidbar
@@ -34,24 +31,23 @@ const SykmeldingUtdrag = ({ erApen, soknad }) => {
         ikonAltTekst="Plaster-ikon"
       >
         <div>
-          <SykmeldingPerioder perioder={perioder} />
+          <SykmeldingPerioder
+            perioder={sykmelding.mulighetForArbeid.perioder}
+          />
           <SykmeldingNokkelOpplysning tittel={texts.arbeidsgiver}>
-            <p className="js-arbeidsgiver">{soknad.arbeidsgiver.navn}</p>
+            <p className="js-arbeidsgiver">
+              {sykmelding.mottakendeArbeidsgiver?.navn}
+            </p>
           </SykmeldingNokkelOpplysning>
           <SykmeldingNokkelOpplysning tittel={texts.utdrag}>
             <p className="js-utstedelsesdato">
-              {toDatePrettyPrint(soknad.sykmeldingSkrevetDato)}
+              {tilLesbarDatoMedArstall(sykmelding.bekreftelse.utstedelsesdato)}
             </p>
           </SykmeldingNokkelOpplysning>
         </div>
       </Utvidbar>
     </div>
   );
-};
-
-SykmeldingUtdrag.propTypes = {
-  erApen: PropTypes.bool,
-  soknad: sykepengesoknadPt,
 };
 
 export default SykmeldingUtdrag;
