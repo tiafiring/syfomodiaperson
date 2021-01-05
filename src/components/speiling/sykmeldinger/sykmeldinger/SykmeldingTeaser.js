@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
-import {
-  tidligsteFom,
-  senesteTom,
-  tilLesbarPeriodeMedArstall,
-} from "@navikt/digisyfo-npm";
 import EtikettBase from "nav-frontend-etiketter";
 import SykmeldingPeriodeInfo from "./SykmeldingPeriodeInfo";
 import {
@@ -16,6 +11,8 @@ import {
   behandlingsutfallStatuser,
   gamleSMStatuser,
 } from "../../../../utils/sykmeldinger/sykmeldingstatuser";
+import { tilLesbarPeriodeMedArstall } from "../../../../utils/datoUtils";
+import { senesteTom, tidligsteFom } from "../../../../utils/periodeUtils";
 
 const texts = {
   teaserTekst: "Sykmelding\n",
