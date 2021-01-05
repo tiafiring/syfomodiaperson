@@ -1,7 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { sykmelding as sykmeldingPt } from "@navikt/digisyfo-npm";
-import { brodsmule, soknadPt } from "../../../../propTypes";
+import {
+  brodsmule,
+  soknadPt,
+  sykmelding as sykmeldingPt,
+} from "../../../../propTypes";
 import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
 import Statuspanel, {
   StatusNokkelopplysning,

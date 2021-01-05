@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { sykmelding as sykmeldingPt } from "@navikt/digisyfo-npm";
 import { connect } from "react-redux";
 import { hentSykmeldinger } from "../../../data/sykmelding/sykmeldinger_actions";
-import { soknadEllerSykepengesoknad } from "../../../propTypes";
+import {
+  soknadEllerSykepengesoknad,
+  sykmelding as sykmeldingPt,
+} from "../../../propTypes";
 import { ARBEIDSTAKERE } from "../../../enums/soknadtyper";
 import SykmeldingUtdrag from "./soknad-felles/SykmeldingUtdrag";
 

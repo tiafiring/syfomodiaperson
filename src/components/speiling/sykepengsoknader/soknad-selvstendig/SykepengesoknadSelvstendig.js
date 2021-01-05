@@ -1,11 +1,11 @@
 import React from "react";
-import { sykmelding as sykmeldingPt } from "@navikt/digisyfo-npm";
 import PropTypes from "prop-types";
 import Oppsummeringsvisning from "../soknad-felles-oppsummering/Oppsummeringsvisning";
 import { soknad as soknadPt } from "../../../../propTypes";
 import { VAER_KLAR_OVER_AT } from "../../../../enums/tagtyper";
-import SoknadSpeiling from "../soknad-felles/SoknadSpeiling";
 import { AVBRUTT, FREMTIDIG, NY } from "../../../../enums/soknadstatuser";
+import { sykmelding as sykmeldingPt } from "../../../../propTypes";
+import SoknadSpeiling from "../soknad-felles/SoknadSpeiling";
 import IkkeInnsendtSoknad from "../soknad-felles/IkkeInnsendtSoknad";
 import SendtSoknadSelvstendigStatuspanel from "./SendtSoknadSelvstendigStatuspanel";
 import AvbruttSoknadSelvstendigStatuspanel from "./AvbruttSoknadSelvstendigStatuspanel";

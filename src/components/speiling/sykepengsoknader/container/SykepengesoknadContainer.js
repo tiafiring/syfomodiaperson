@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { sykmelding as sykmeldingPt } from "@navikt/digisyfo-npm";
 import Side from "../../../../sider/Side";
 import * as soknaderActions from "../../../../data/sykepengesoknad/soknader_actions";
 import * as sykmeldingerActions from "../../../../data/sykmelding/sykmeldinger_actions";
 import Feilmelding from "../../../Feilmelding";
 import AppSpinner from "../../../AppSpinner";
 import { SYKEPENGESOKNADER } from "../../../../enums/menypunkter";
-import { soknad as soknadPt } from "../../../../propTypes";
+import {
+  soknad as soknadPt,
+  sykmelding as sykmeldingPt,
+} from "../../../../propTypes";
 import { hentBegrunnelseTekst } from "../../../../utils/tilgangUtils";
 import {
   ARBEIDSTAKERE,

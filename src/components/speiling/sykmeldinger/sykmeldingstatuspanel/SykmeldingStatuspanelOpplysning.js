@@ -1,10 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  SykmeldingNokkelOpplysning,
-  sykmeldingstatuser,
-} from "@navikt/digisyfo-npm";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
+import { SykmeldingStatus } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 import {
   tilLesbarDatoMedArstall,
   tilLesbarPeriodeMedArstall,
@@ -37,7 +34,7 @@ const texts = {
   nei: "Har ikke forsikring som gjelder de første 16 dagene av sykefraværet",
 };
 
-const { BEKREFTET, AVBRUTT, TIL_SENDING, SENDT } = sykmeldingstatuser;
+const { BEKREFTET, AVBRUTT, TIL_SENDING, SENDT } = SykmeldingStatus;
 
 const textStatus = (status) => {
   switch (status) {
