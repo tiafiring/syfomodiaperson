@@ -1,5 +1,4 @@
 import React from "react";
-import { Utvidbar } from "@navikt/digisyfo-npm";
 import { SykmeldingOldFormat } from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
 import { tidligsteFom } from "../../../../../utils/periodeUtils";
 import { tilLesbarDatoMedArstall } from "../../../../../utils/datoUtils";
@@ -8,6 +7,7 @@ import SykmeldingNokkelOpplysning from "./SykmeldingNokkelOpplysning";
 import SykmeldingPerioder from "./SykmeldingPerioder";
 import { SykmeldingCheckbox } from "./SykmeldingCheckbox";
 import FlereOpplysninger from "./flereopplysninger/FlereOpplysninger";
+import Utvidbar from "../../../../Utvidbar";
 
 const texts = {
   dinSykmeldingTittel: "Sykmelding\n",

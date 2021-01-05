@@ -1,9 +1,9 @@
 import React from "react";
-import { Utvidbar } from "@navikt/digisyfo-npm";
 import { Undertittel } from "nav-frontend-typografi";
 import { SykmeldingOldFormat } from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
 import SykmeldingStatuspanel from "../../sykmeldingstatuspanel/SykmeldingStatuspanel";
 import DineKoronaSykmeldingOpplysninger from "../sykmeldingOpplysninger/DineKoronaSykmeldingOpplysninger";
+import Utvidbar from "../../../../Utvidbar";
 
 const texts = {
   pageSubtitle: "for selvstendig næringsdrivende og frilansere",

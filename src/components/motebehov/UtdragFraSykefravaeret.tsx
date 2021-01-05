@@ -1,6 +1,6 @@
 import React from "react";
-import { Utvidbar } from "@navikt/digisyfo-npm";
 import EtikettBase from "nav-frontend-etiketter";
+import Lenke from "nav-frontend-lenker";
 import { OppfolgingsplanDTO } from "../../data/oppfolgingsplan/oppfoelgingsdialoger";
 import SykmeldingMotebehovVisning from "./SykmeldingMotebehovVisning";
 import {
@@ -15,11 +15,11 @@ import {
   stringMedAlleGraderingerFraSykmeldingPerioder,
   sykmeldingerInnenforOppfolgingstilfellePerson,
 } from "../../utils/sykmeldinger/sykmeldingUtils";
-import Lenke from "nav-frontend-lenker";
 import { finnMiljoStreng } from "../../utils/miljoUtil";
 import { OppfolgingstilfellePerson } from "../../data/oppfolgingstilfelle/types/OppfolgingstilfellePerson";
 import { tilLesbarPeriodeMedArstall } from "../../utils/datoUtils";
 import { senesteTom, tidligsteFom } from "../../utils/periodeUtils";
+import Utvidbar from "../Utvidbar";
 
 const tekster = {
   header: "Utdrag fra sykefraværet",

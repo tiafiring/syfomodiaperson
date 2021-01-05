@@ -1,5 +1,5 @@
 import React from "react";
-import { sykmelding as sykmeldingPt, Utvidbar } from "@navikt/digisyfo-npm";
+import { sykmelding as sykmeldingPt } from "@navikt/digisyfo-npm";
 import PropTypes from "prop-types";
 import Oppsummeringsvisning from "../soknad-felles-oppsummering/Oppsummeringsvisning";
 import { soknad as soknadPt } from "../../../../propTypes";
@@ -10,6 +10,7 @@ import IkkeInnsendtSoknad from "../soknad-felles/IkkeInnsendtSoknad";
 import SendtSoknadSelvstendigStatuspanel from "./SendtSoknadSelvstendigStatuspanel";
 import AvbruttSoknadSelvstendigStatuspanel from "./AvbruttSoknadSelvstendigStatuspanel";
 import SykmeldingUtdragForSelvstendige from "./SykmeldingutdragForSelvstendige";
+import Utvidbar from "../../../Utvidbar";
 
 const texts = {
   oppsummering: "Oppsummering",

@@ -5,13 +5,13 @@ import {
   sykmelding as sykmeldingPt,
   SykmeldingNokkelOpplysning,
   SykmeldingPerioder,
-  Utvidbar,
 } from "@navikt/digisyfo-npm";
 import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
 import {
   SykmeldingopplysningForsikring,
   SykmeldingopplysningFravaersperioder,
 } from "../../sykmeldinger/sykmeldingstatuspanel/SykmeldingStatuspanelOpplysning";
+import Utvidbar from "../../../Utvidbar";
 
 const texts = {
   datoSykmelding: "Dato sykmeldingen ble skrevet",

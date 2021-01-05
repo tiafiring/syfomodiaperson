@@ -1,9 +1,9 @@
 import React from "react";
-import { Utvidbar } from "@navikt/digisyfo-npm";
 import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 import ArbeidsgiversSykmelding from "./ArbeidsgiversSykmelding";
 import DineSykmeldingOpplysninger from "./sykmeldingOpplysninger/DineSykmeldingOpplysninger";
 import SykmeldingStatuspanel from "../sykmeldingstatuspanel/SykmeldingStatuspanel";
+import Utvidbar from "../../../Utvidbar";
 
 const texts = {
   tittel: "Dine opplysinger",

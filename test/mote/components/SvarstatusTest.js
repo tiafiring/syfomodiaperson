@@ -1,7 +1,6 @@
 import React from "react";
 import { expect } from "chai";
 import { shallow } from "enzyme";
-import { Utvidbar } from "@navikt/digisyfo-npm";
 import Svarstatus, {
   erSamtidig,
   getGamleAlternativer,
@@ -9,6 +8,7 @@ import Svarstatus, {
 } from "../../../src/components/mote/components/Svarstatus";
 import BesvarteTidspunkter from "../../../src/components/mote/components/BesvarteTidspunkter";
 import { konverterTid } from "../../../src/utils/datoUtils";
+import Utvidbar from "../../../src/components/Utvidbar";
 
 describe("Svarstatus", () => {
   let mote;

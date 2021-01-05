@@ -1,5 +1,4 @@
 import React from "react";
-import { Utvidbar } from "@navikt/digisyfo-npm";
 import PropTypes from "prop-types";
 import Oppsummeringsvisning from "../soknad-felles-oppsummering/Oppsummeringsvisning";
 import { brodsmule, soknad as soknadPt } from "../../../../propTypes";
@@ -10,6 +9,7 @@ import { VAER_KLAR_OVER_AT } from "../../../../enums/tagtyper";
 import { KORRIGERT } from "../../../../enums/soknadstatuser";
 import KorrigertAvContainer from "../soknad-arbeidstaker/KorrigertAvContainer";
 import RelaterteSoknaderContainer from "../soknad-arbeidstaker/RelaterteSoknaderContainer";
+import Utvidbar from "../../../Utvidbar";
 
 const texts = {
   tittel: "Oppsummering",

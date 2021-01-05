@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Utvidbar } from "@navikt/digisyfo-npm";
 import { PERSONKORTVISNING_TYPE } from "../../konstanter";
 import { hentDiskresjonskode } from "../../data/diskresjonskode/diskresjonskode_actions";
 import { hentEgenansatt } from "../../data/egenansatt/egenansatt_actions";
@@ -11,6 +10,7 @@ import { hentSykmeldinger } from "../../data/sykmelding/sykmeldinger_actions";
 import OversiktLink from "./OversiktLink";
 import PersonkortHeader from "./PersonkortHeader";
 import PersonkortVisning from "./PersonkortVisning";
+import Utvidbar from "../Utvidbar";
 
 const texts = {
   buttons: {

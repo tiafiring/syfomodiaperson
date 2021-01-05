@@ -1,11 +1,11 @@
 import { expect } from "chai";
 import { shallow } from "enzyme";
 import React from "react";
-import { Utvidbar } from "@navikt/digisyfo-npm";
 import { ARBEIDSGIVER, BRUKER } from "../../../src/konstanter";
 import InformasjonSendt, {
   InnholdsviserContainer,
 } from "../../../src/components/mote/components/InformasjonSendt";
+import Utvidbar from "../../../src/components/Utvidbar";
 
 const getMote = (mote) => {
   return Object.assign(

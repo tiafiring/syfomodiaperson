@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
-  Utvidbar,
   SoknadOppsummering,
   BekreftetKorrektInformasjon,
   sykepengesoknadstatuser,
@@ -14,6 +13,7 @@ import AvbruttSoknad from "./AvbruttSoknad";
 import UtgaattSoknad from "./UtgaattSoknad";
 import SykmeldingUtdrag from "../SykmeldingUtdragContainer";
 import EndreSendKnapperad from "./EndreSendKnapperad";
+import Utvidbar from "../../../Utvidbar";
 
 const {
   KORRIGERT,

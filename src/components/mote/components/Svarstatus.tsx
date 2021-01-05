@@ -1,10 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Utvidbar } from "@navikt/digisyfo-npm";
-import * as moterPropTypes from "../../../propTypes/index";
+import { MotedeltakerType } from "../../../data/mote/types/MotedeltakerType";
 import { MoteAlternativDTO, MoteDTO } from "../../../data/mote/types/moteTypes";
-import { NAV_VEILEDER } from "../../../konstanter";
 import BesvarteTidspunkter from "./BesvarteTidspunkter";
+import Utvidbar from "../../Utvidbar";
 
 const texts = {
   flereTidpunkt: "+ Legg til tidspunkt",
@@ -87,7 +85,7 @@ const Svarstatus = (svarstatusProps: SvarstatusProps) => {
         <BesvarteTidspunkter
           mote={mote}
           alternativer={nyeAlternativer}
-          deltakertype={NAV_VEILEDER}
+          deltakertype={MotedeltakerType.NAV_VEILEDER}
           fnr={fnr}
         />
         <button className="nyetidspunktknapp" onClick={visFlereAlternativ}>
@@ -105,7 +103,7 @@ const Svarstatus = (svarstatusProps: SvarstatusProps) => {
           <BesvarteTidspunkter
             mote={mote}
             alternativer={gamleAlternativer}
-            deltakertype={NAV_VEILEDER}
+            deltakertype={MotedeltakerType.NAV_VEILEDER}
             fnr={fnr}
           />
         </Utvidbar>
