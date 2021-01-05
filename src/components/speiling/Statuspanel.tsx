@@ -36,7 +36,7 @@ export const Statusopplysninger = (
 
 interface StatuspanelProps {
   children?: any;
-  enKolonne: boolean;
+  enKolonne?: boolean;
 }
 
 const Statuspanel = (statuspanelProps: StatuspanelProps) => {

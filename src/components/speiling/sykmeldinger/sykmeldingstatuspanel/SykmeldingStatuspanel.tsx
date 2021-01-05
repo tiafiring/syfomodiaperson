@@ -9,8 +9,16 @@ import { gamleSMStatuser as sykmeldingstatuser } from "../../../../utils/sykmeld
 import { sykmelding as sykmeldingPt } from "../../../../propTypes";
 import GjenapneSykmelding from "./GjenapneSykmelding";
 import Statuspanel, { Statusopplysninger } from "../../Statuspanel";
+import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 
-export const Nokkelopplysninger = ({ sykmelding }) => {
+interface NokkelopplysningerProps {
+  sykmelding: SykmeldingOldFormat;
+}
+
+export const Nokkelopplysninger = (
+  nokkelopplysningerProps: NokkelopplysningerProps
+) => {
+  const { sykmelding } = nokkelopplysningerProps;
   switch (sykmelding.status) {
     case sykmeldingstatuser.SENDT:
     case sykmeldingstatuser.TIL_SENDING: {
@@ -48,7 +56,14 @@ Nokkelopplysninger.propTypes = {
   sykmelding: sykmeldingPt,
 };
 
-const SykmeldingStatuspanel = ({ sykmelding }) => {
+interface SykmeldingStatuspanelProps {
+  sykmelding: SykmeldingOldFormat;
+}
+
+const SykmeldingStatuspanel = (
+  sykmeldingStatuspanelProps: SykmeldingStatuspanelProps
+) => {
+  const { sykmelding } = sykmeldingStatuspanelProps;
   return (
     <Statuspanel>
       <Nokkelopplysninger sykmelding={sykmelding} />
@@ -56,10 +71,6 @@ const SykmeldingStatuspanel = ({ sykmelding }) => {
         !sykmelding.egenmeldt && <GjenapneSykmelding />}
     </Statuspanel>
   );
-};
-
-SykmeldingStatuspanel.propTypes = {
-  sykmelding: sykmeldingPt,
 };
 
 export default SykmeldingStatuspanel;
