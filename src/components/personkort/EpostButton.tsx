@@ -3,8 +3,8 @@ import { Column } from "nav-frontend-grid";
 import Popover from "nav-frontend-popover";
 import styled from "styled-components";
 
-const texts = {
-  kopiert: "Epost er kopiert!",
+const textEpostCopied = (epost?: string) => {
+  return `${epost} er kopiert!`;
 };
 
 const StyledButton = styled.button`
@@ -53,7 +53,7 @@ const EpostButton = ({ epost }: EpostButtonProps) => {
         ankerEl={popoverAnker}
         onRequestClose={() => setPopoverAnker(undefined)}
       >
-        <StyledP>{texts.kopiert}</StyledP>
+        <StyledP>{textEpostCopied(epost)}</StyledP>
       </Popover>
     </Column>
   );
