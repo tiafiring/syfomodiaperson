@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
-import { sykepengesoknadstatuser } from "@navikt/digisyfo-npm";
+import * as sykepengesoknadstatuser from "../../../../enums/soknadstatuser";
 import {
   sykepengesoknad as sykepengesoknadPt,
   soknad as soknadPt,
