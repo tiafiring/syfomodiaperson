@@ -9,7 +9,6 @@ export interface Prediksjon {
   langt: boolean;
   lengreVarighetGrunner: string[];
   prediksjonsDato: string;
-  treffsikkerhetProsent: number;
 }
 
 export interface PrediksjonState {

@@ -9,7 +9,6 @@ interface PrediksjonResultatProps {
 
 interface ResultTextProps {
   langt: boolean;
-  certainty: number;
 }
 
 interface CalculationTextProps {
@@ -24,14 +23,9 @@ const TextWithBottomMargin = styled.p`
   margin-bottom: 0.5em;
 `;
 
-const ResultText = ({ langt, certainty }: ResultTextProps) => {
+const ResultText = ({ langt }: ResultTextProps) => {
   const yesOrNo = langt ? "Ja" : "Nei";
-
-  return (
-    <TextWithBottomMargin>
-      {`${yesOrNo}, med `} <b>{`${certainty}%`}</b> {" sannsynlighet"}
-    </TextWithBottomMargin>
-  );
+  return <TextWithBottomMargin>{yesOrNo}</TextWithBottomMargin>;
 };
 
 const CalculationText = ({ prediksjonsDato }: CalculationTextProps) => {
@@ -45,10 +39,7 @@ const CalculationText = ({ prediksjonsDato }: CalculationTextProps) => {
 const PrediksjonResultat = ({ prediksjon }: PrediksjonResultatProps) => {
   return (
     <ResultatWrapper>
-      <ResultText
-        langt={prediksjon.langt}
-        certainty={prediksjon.treffsikkerhetProsent}
-      />
+      <ResultText langt={prediksjon.langt} />
       <CalculationText prediksjonsDato={prediksjon.prediksjonsDato} />
     </ResultatWrapper>
   );
