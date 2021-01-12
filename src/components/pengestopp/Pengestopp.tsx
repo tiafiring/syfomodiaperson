@@ -5,7 +5,7 @@ import AlertStripe from "nav-frontend-alertstriper";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import PengestoppModal from "./PengestoppModal";
-import PengestoppDropdown from "./PengestoppDropdown";
+import PengestoppHistorikk from "./PengestoppHistorikk";
 import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
 import {
   Arbeidsgiver,
@@ -14,6 +14,7 @@ import {
 } from "../../data/pengestopp/types/FlaggPerson";
 import { FlaggpersonState } from "../../data/pengestopp/flaggperson";
 import { unikeArbeidsgivereMedSykmeldingSiste3Maneder } from "../../utils/pengestoppUtils";
+import Panel from "nav-frontend-paneler";
 
 export const texts = {
   stansSykepenger: "Stanse sykepenger?",
@@ -23,10 +24,13 @@ export const texts = {
     "Vi har problemer med baksystemene. Du kan sende beskjeden, men det vil ikke bli synlig her før vi er tilbake i normal drift",
   sykmeldtNotEligibleError:
     "Den sykmeldte behandles ikke i vedtaksløsningen. Du må sende en “Vurder konsekvens for ytelse”-oppgave i Gosys, jf servicerutinene.",
+  gosys: "Se Gosys for detaljer",
+  beskjeder: "Tidligere sendte beskjeder om stans av sykepenger",
 };
 
-const Wrapper = styled.div`
-  margin: 1rem 0;
+const Wrapper = styled(Panel)`
+  margin: 1em 0;
+  padding: 1em;
 `;
 
 interface IPengestoppProps {
@@ -42,12 +46,14 @@ interface KnappWithExplanationProps {
 }
 
 const KnappWithExplanation = ({ handleClick }: KnappWithExplanationProps) => {
+  const StyledP = styled.p`
+    padding: 1em 0;
+  `;
+
   return (
     <>
-      <Knapp type="hoved" mini onClick={handleClick}>
-        {texts.stansSykepenger}
-      </Knapp>
-      <p>{texts.explanation}</p>
+      <Knapp onClick={handleClick}>{texts.stansSykepenger}</Knapp>
+      <StyledP>{texts.explanation}</StyledP>
     </>
   );
 };
@@ -88,19 +94,20 @@ const Pengestopp = ({ sykmeldinger }: IPengestoppProps) => {
         <Alert type="feil">{texts.sykmeldtNotEligibleError}</Alert>
       )}
 
-      {pengestopp?.status === Status.STOPP_AUTOMATIKK ? (
-        <PengestoppDropdown
+      <KnappWithExplanation
+        handleClick={() => {
+          toggleModal(uniqueArbeidsgivereWithSykmeldingLast3Months);
+        }}
+      />
+
+      {pengestopp?.status === Status.STOPP_AUTOMATIKK && (
+        <PengestoppHistorikk
           statusEndringList={statusEndringList}
           sykmeldinger={sykmeldinger}
         />
-      ) : (
-        <KnappWithExplanation
-          handleClick={() => {
-            toggleModal(uniqueArbeidsgivereWithSykmeldingLast3Months);
-          }}
-        />
       )}
 
+      <p>{texts.gosys}</p>
       <PengestoppModal
         arbeidsgivere={uniqueArbeidsgivereWithSykmeldingLast3Months}
         isOpen={modalIsOpen}
