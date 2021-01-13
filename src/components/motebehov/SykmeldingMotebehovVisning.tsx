@@ -20,9 +20,7 @@ const SykmeldingMotebehovVisning = (
       <GenerellSykmeldingInfo sykmelding={sykmelding} />
       <MulighetForArbeid sykmelding={sykmelding} />
       <TilbakeIArbeid sykmelding={sykmelding} />
-      <UtdypendeOpplysninger
-        utdypendeOpplysninger={sykmelding.utdypendeOpplysninger}
-      />
+      <UtdypendeOpplysninger sykmelding={sykmelding} />
       <BedreArbeidsevnen sykmelding={sykmelding} />
       <MeldingTilNav sykmelding={sykmelding} />
       <MeldingTilArbeidsgiver sykmelding={sykmelding} />

@@ -88,6 +88,13 @@ export const erMeldingTilArbeidsgiverInformasjon = (sykmelding) => {
   return !!erEkstraInformasjon;
 };
 
+export const erUtdypendeOpplysninger = (sykmelding) => {
+  const utdypendeOpplysninger = sykmelding.utdypendeOpplysninger;
+  const erEkstraInformasjon =
+    utdypendeOpplysninger && Object.keys(utdypendeOpplysninger).length > 0;
+  return !!erEkstraInformasjon;
+};
+
 export const erEkstraInformasjonISykmeldingen = (sykmelding) => {
   return (
     erEkstraDiagnoseInformasjon(sykmelding) ||
@@ -95,7 +102,7 @@ export const erEkstraInformasjonISykmeldingen = (sykmelding) => {
     erFriskmeldingInformasjon(sykmelding) ||
     erArbeidsforEtterPerioden(sykmelding) ||
     erHensynPaaArbeidsplassenInformasjon(sykmelding) ||
-    sykmelding.utdypendeOpplysninger ||
+    erUtdypendeOpplysninger(sykmelding) ||
     erBedringAvArbeidsevnenInformasjon(sykmelding) ||
     erMeldingTilNavInformasjon(sykmelding) ||
     erMeldingTilArbeidsgiverInformasjon(sykmelding) ||

@@ -1,5 +1,7 @@
 import React from "react";
 import { UtdypendeOpplysning } from "../../data/sykmelding/types/SykmeldingNewFormatDTO";
+import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
+import { erUtdypendeOpplysninger } from "../../utils/sykmeldinger/sykmeldingUtils";
 
 const tekster = {
   UtdypendeOpplysninger: {
@@ -24,24 +26,23 @@ const OpplysningsGruppe = ({ opplysningGruppe }: OpplysningsGruppeProps) => {
 };
 
 interface UtdypendeOpplysningerProps {
-  utdypendeOpplysninger: Map<string, Map<string, UtdypendeOpplysning>>;
+  sykmelding: SykmeldingOldFormat;
 }
 
 export const UtdypendeOpplysninger = (
   utdypendeOpplysningerProps: UtdypendeOpplysningerProps
 ) => {
-  const utdypendeOpplysninger =
-    utdypendeOpplysningerProps.utdypendeOpplysninger;
-
+  const sykmelding = utdypendeOpplysningerProps.sykmelding;
+  const skalVise = sykmelding && erUtdypendeOpplysninger(sykmelding);
   return (
     <>
-      {utdypendeOpplysninger && (
+      {skalVise && (
         <div className="sykmeldingMotebehovVisning__avsnitt">
           <h5 className="undertittel">
             {tekster.UtdypendeOpplysninger.header}
           </h5>
 
-          {Object.entries(utdypendeOpplysninger).map(
+          {Object.entries(sykmelding.utdypendeOpplysninger).map(
             ([key, opplysningGruppe]) => (
               <OpplysningsGruppe
                 key={key}
