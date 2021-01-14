@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import EtikettBase from "nav-frontend-etiketter";
 import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
 import { DiskresjonskodeState } from "../../data/diskresjonskode/diskresjonskode";
@@ -12,8 +13,10 @@ import { KJOENN } from "../../konstanter";
 import { sykmeldingerHasCoronaDiagnose } from "../../utils/sykmeldinger/sykmeldingUtils";
 import { startDateFromLatestActiveTilfelle } from "../../utils/periodeUtils";
 import { tilLesbarDatoMedArUtenManedNavn } from "../../utils/datoUtils";
+import CopyButton from "../kopierknapp/CopyButton";
 
 const texts = {
+  copied: "Kopiert!",
   startDate: "Sykmeldt f.o.m.: ",
 };
 
@@ -38,6 +41,15 @@ const HeaderInfoStartDate = (
     </>
   );
 };
+
+const StyledFnr = styled.div`
+  display: flex;
+  img {
+    padding-left: 0.5em;
+    width: auto;
+    height: 1.2em;
+  }
+`;
 
 interface PersonkortHeaderProps {
   diskresjonskode: DiskresjonskodeState;
@@ -77,7 +89,13 @@ const PersonkortHeader = (personkortHeaderProps: PersonkortHeaderProps) => {
           <h3>{`${
             navbruker.navn ? navbruker.navn : ""
           } (${hentBrukersAlderFraFnr(navbruker.kontaktinfo.fnr)} år)`}</h3>
-          <p>{formaterFnr(navbruker.kontaktinfo.fnr)}</p>
+          <StyledFnr>
+            {formaterFnr(navbruker.kontaktinfo.fnr)}
+            <CopyButton
+              message={texts.copied}
+              value={navbruker.kontaktinfo.fnr}
+            />
+          </StyledFnr>
           <HeaderInfoStartDate startDate={startDate} />
         </div>
       </div>
