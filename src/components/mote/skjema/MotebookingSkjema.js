@@ -6,30 +6,14 @@ import { Hovedknapp } from "nav-frontend-knapper";
 import VelgLeder from "./VelgLeder";
 import Tidspunkter from "./Tidspunkter";
 import TextField from "../TextField";
-import KontaktInfoFeilmelding from "../components/KontaktInfoFeilmelding";
+import KontaktInfoAdvarsel from "../components/KontaktInfoAdvarsel";
 import Sidetopp from "../../Sidetopp";
 import { genererDato, erGyldigKlokkeslett, erGyldigDato } from "../utils";
-import { getLedetekstFraFeilAarsak } from "../components/MotebookingStatus";
 
 export const MAX_LENGTH_STED = 200;
 
 const texts = {
   pageHeader: "Møteforespørsel",
-  kontaktinfoErrorMessage: {
-    reservert:
-      "<p>Den sykmeldte har reservert seg mot elektronisk kommunikasjon med det offentlige." +
-      "Du kan fortsatt sende møteforespørsel til arbeidsgiveren digitalt, men den sykmeldte må kontaktes på annen måte.</p>",
-    ingenKontaktinfo:
-      "<div><p>Den sykmeldte er ikke registrert i Kontakt- og reservasjonsregisteret (KRR)." +
-      "Du kan fortsatt sende møteforespørsel til arbeidsgiveren digitalt, men den sykmeldte må kontaktes på annen måte</p>" +
-      '<p>Den sykmeldte kan registrere kontaktinformasjonen sin her: <a target="_blank" href="http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din">http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din</a></p></div>',
-    utgatt:
-      "<div><p>Den sykmeldtes kontaktinformasjon i Kontakt- og reservasjonsregisteret (KRR) er for gammel og kan ikke brukes." +
-      "Du kan fortsatt sende møteforespørsel til arbeidsgiveren digitalt, men den sykmeldte må kontaktes på annen måte.</p>" +
-      '    <p>Den sykmeldte kan oppdatere kontaktinformasjonen sin her: <a target="_blank" href="http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din">http://eid.difi.no/nb/oppdater-kontaktinformasjonen-din</a></p></div>',
-    generell:
-      "<div><p>Vi klarte ikke å finne kontaktinformasjon om den sykmeldte og kan derfor ikke sende varsler til personen.</p></div>",
-  },
   captions: {
     employerInfo: "1. Fyll inn arbeidsgiverens opplysninger",
     timeAndPlace: "2. Velg dato, tid og sted",
@@ -95,18 +79,10 @@ export class MotebookingSkjema extends Component {
       data.orgnummer = this.state.valgtArbeidsgiver;
       opprettMote(data);
     };
-    const feilAarsak =
-      arbeidstaker && arbeidstaker.kontaktinfo
-        ? arbeidstaker.kontaktinfo.feilAarsak
-        : undefined;
 
     return (
       <div>
-        {!arbeidstaker.kontaktinfo.skalHaVarsel && (
-          <KontaktInfoFeilmelding
-            melding={getLedetekstFraFeilAarsak(feilAarsak)}
-          />
-        )}
+        {!arbeidstaker.kontaktinfo.skalHaVarsel && <KontaktInfoAdvarsel />}
         <Sidetopp tittel={texts.pageHeader} />
         <form className="panel" onSubmit={handleSubmit(submit)}>
           <div className="skjema-fieldset js-arbeidsgiver blokk--l">

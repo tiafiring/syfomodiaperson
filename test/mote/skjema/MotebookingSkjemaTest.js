@@ -4,7 +4,7 @@ import { expect } from "chai";
 import { shallow } from "enzyme";
 import AlertStripe from "nav-frontend-alertstriper";
 import { genererDato } from "../../../src/components/mote/utils";
-import KontaktInfoFeilmelding from "../../../src/components/mote/components/KontaktInfoFeilmelding";
+import KontaktInfoAdvarsel from "../../../src/components/mote/components/KontaktInfoAdvarsel";
 import {
   MotebookingSkjema,
   validate,
@@ -109,7 +109,7 @@ describe("MotebookingSkjemaTest", () => {
               valgtEnhet="0021"
             />
           );
-          expect(compo.find(KontaktInfoFeilmelding)).to.have.length(0);
+          expect(compo.find(KontaktInfoAdvarsel)).to.have.length(0);
         });
       });
     });

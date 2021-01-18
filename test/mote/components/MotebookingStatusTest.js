@@ -10,7 +10,7 @@ import MotebookingStatus, {
 } from "../../../src/components/mote/components/MotebookingStatus";
 import Svarstatus from "../../../src/components/mote/components/Svarstatus";
 import BekreftetMotetidspunkt from "../../../src/components/mote/components/BekreftetMotetidspunkt";
-import KontaktInfoFeilmelding from "../../../src/components/mote/components/KontaktInfoFeilmelding";
+import KontaktInfoAdvarsel from "../../../src/components/mote/components/KontaktInfoAdvarsel";
 import FlereTidspunktSkjema from "../../../src/components/mote/skjema/FlereTidspunktSkjema";
 import Sidetopp from "../../../src/components/Sidetopp";
 import {
@@ -502,7 +502,7 @@ describe("MotebookingStatus", () => {
           arbeidstaker={arbeidstaker}
         />
       );
-      expect(component.find(KontaktInfoFeilmelding)).to.have.length(1);
+      expect(component.find(KontaktInfoAdvarsel)).to.have.length(1);
     });
   });
 });

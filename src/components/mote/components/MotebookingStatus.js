@@ -5,7 +5,7 @@ import AlertStripe from "nav-frontend-alertstriper";
 import * as moterPropTypes from "../../../propTypes";
 import { getDatoFraZulu, erMotePassert } from "../utils";
 import Sidetopp from "../../Sidetopp";
-import KontaktInfoFeilmelding from "./KontaktInfoFeilmelding";
+import KontaktInfoAdvarsel from "./KontaktInfoAdvarsel";
 import BekreftetMotetidspunkt from "./BekreftetMotetidspunkt";
 import InformasjonSendt from "./InformasjonSendt";
 import FlereTidspunktSkjema from "../skjema/FlereTidspunktSkjema";
@@ -55,13 +55,6 @@ export const kvitteringTekst = {
 
 MotetidspunktValgt.propTypes = {
   bekreftetTidspunkt: PropTypes.string,
-};
-
-export const getLedetekstFraFeilAarsak = () => {
-  return {
-    __html:
-      "<div>\n<p>Vi klarte ikke å finne kontaktinformasjon om den sykmeldte og kan derfor ikke sende varsler til personen.</p>\n</div>",
-  };
 };
 
 const getSendtTilTekst = (mote, arbeidstaker) => {
@@ -150,7 +143,7 @@ const MotebookingStatus = (props) => {
   } = props;
   const { alternativer, status } = mote;
   const krrMeldingPanel = !arbeidstaker.kontaktinfo.skalHaVarsel ? (
-    <KontaktInfoFeilmelding melding={getLedetekstFraFeilAarsak()} />
+    <KontaktInfoAdvarsel />
   ) : null;
   const motePassert = erMotePassert(mote);
   const flereTidspunktBoks = skalViseFlereAlternativ ? (
