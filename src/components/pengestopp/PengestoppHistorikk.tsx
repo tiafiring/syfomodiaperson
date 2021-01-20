@@ -1,26 +1,22 @@
 import * as React from "react";
 import { Element, Undertittel } from "nav-frontend-typografi";
+import { StatusEndring } from "../../data/pengestopp/types/FlaggPerson";
 import {
-  Arbeidsgiver,
-  StatusEndring,
-} from "../../data/pengestopp/types/FlaggPerson";
-import {
+  displayArbeidsgiverNavn,
+  displayArsakText,
   sykmeldingerToArbeidsgiver,
   uniqueArbeidsgivere,
 } from "../../utils/pengestoppUtils";
 import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
-import { sykepengestoppArsakTekstListe } from "./PengestoppModal";
 import Panel from "nav-frontend-paneler";
 import styled from "styled-components";
 import { texts } from "./Pengestopp";
+import { navLysBla, navLysBlaDarken } from "../../colors";
 
 interface IPengestoppDropdown {
   statusEndringList: StatusEndring[];
   sykmeldinger: SykmeldingOldFormat[];
 }
-
-const navLysBla = "#e0f5fb";
-const navLysBlaDarken = "#5690a2";
 
 const StyledBorderedPanel = styled(Panel)`
   background: ${navLysBla};
@@ -45,22 +41,11 @@ const PengestoppHistorikk = ({
           <StyledBorderedPanel key={index} border>
             <Element>{`${opprettet.getDay()}.${opprettet.getDate()}.${opprettet.getFullYear()} · Gjelder for:
             
-            ${
-              allArbeidsgivere.find(
-                (ag: Arbeidsgiver) =>
-                  ag.orgnummer === statusEndring.virksomhetNr.value
-              )?.navn
-            }
+            ${displayArbeidsgiverNavn(allArbeidsgivere, statusEndring)}
            `}</Element>
             <p>
               {statusEndring.arsakList?.length > 0 &&
-                `Årsak: ${statusEndring?.arsakList
-                  .map((arsak, index: number) => {
-                    return sykepengestoppArsakTekstListe.find((arsakTekst) => {
-                      return arsakTekst.type === arsak.type;
-                    })?.text;
-                  })
-                  .join(", ")}.`}
+                displayArsakText(statusEndring.arsakList)}
             </p>
           </StyledBorderedPanel>
         );
