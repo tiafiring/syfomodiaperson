@@ -39,7 +39,7 @@ const PengestoppHistorikk = ({
         const opprettet = new Date(statusEndring.opprettet);
         return (
           <StyledBorderedPanel key={index} border>
-            <Element>{`${opprettet.getDay()}.${opprettet.getDate()}.${opprettet.getFullYear()} · Gjelder for:
+            <Element>{`${opprettet.getDate()}.${opprettet.getMonth()}.${opprettet.getFullYear()} · Gjelder for:
             
             ${displayArbeidsgiverNavn(allArbeidsgivere, statusEndring)}
            `}</Element>
