@@ -3,11 +3,13 @@ import {
   Status,
   StatusEndring,
   StoppAutomatikk,
+  SykepengestoppArsak,
 } from "../data/pengestopp/types/FlaggPerson";
 import { senesteTom } from "./periodeUtils";
 import { gamleSMStatuser } from "./sykmeldinger/sykmeldingstatuser";
 import { SykmeldingOldFormat } from "../data/sykmelding/types/SykmeldingOldFormat";
 import { erLokal, erPreProd } from "./miljoUtil";
+import { sykepengestoppArsakTekstListe } from "../components/pengestopp/PengestoppModal";
 
 export const toggleArsaksVelger = erLokal() || erPreProd();
 
@@ -96,4 +98,23 @@ export const stoppAutomatikk2StatusEndring = (
       enhetNr: stoppAutomatikk.enhetNr,
     };
   });
+};
+
+export const displayArsakText = (arsakList: SykepengestoppArsak[]) => {
+  return `Årsak: ${arsakList
+    .map((arsak, index: number) => {
+      return sykepengestoppArsakTekstListe.find((arsakTekst) => {
+        return arsakTekst.type === arsak.type;
+      })?.text;
+    })
+    .join(", ")}.`;
+};
+
+export const displayArbeidsgiverNavn = (
+  allArbeidsgivere: Arbeidsgiver[],
+  statusEndring: StatusEndring
+) => {
+  return allArbeidsgivere.find(
+    (ag: Arbeidsgiver) => ag.orgnummer === statusEndring.virksomhetNr.value
+  )?.navn;
 };

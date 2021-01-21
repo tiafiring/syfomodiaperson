@@ -52,24 +52,24 @@ interface SykepengestoppArsakTekst {
 
 export const sykepengestoppArsakTekstListe: SykepengestoppArsakTekst[] = [
   {
-    type: SykepengestoppArsakType.BESTRIDELSE_SYKMELDING.toString(),
-    text: "Bestridelse av sykmelding, §8-4 første ledd ",
+    type: SykepengestoppArsakType.BESTRIDELSE_SYKMELDING,
+    text: "Bestridelse av sykmelding (§ 8-4 første ledd)",
   },
   {
     type: SykepengestoppArsakType.MEDISINSK_VILKAR,
-    text: "Medisinsk vilkår, §8-4 første ledd ",
+    text: "Medisinsk vilkår (§ 8-4 første ledd)",
   },
   {
     type: SykepengestoppArsakType.AKTIVITETSKRAV,
-    text: "Aktivitetskravet, §8-4 andre ledd ",
+    text: "Aktivitetskravet (§ 8-4 andre ledd)",
   },
   {
     type: SykepengestoppArsakType.TILBAKEDATERT_SYKMELDING,
-    text: "Tilbakedatert sykmelding, §8-7",
+    text: "Tilbakedatert sykmelding (§ 8-7)",
   },
   {
     type: SykepengestoppArsakType.MANGLENDE_MEDVIRKING,
-    text: "Manglende medvirkning, §8-8",
+    text: "Manglende medvirkning (§ 8-8)",
   },
 ];
 
@@ -202,7 +202,10 @@ const PengestoppModal = ({
       contentLabel={texts.stansSykepenger}
       isOpen={isOpen}
       closeButton={true}
-      onRequestClose={handleCloseModal}
+      onRequestClose={() => {
+        handleCloseModal();
+        setStopped(false);
+      }}
     >
       <Systemtittel>{tittel(stopped)}</Systemtittel>
 
