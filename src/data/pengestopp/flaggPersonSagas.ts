@@ -59,7 +59,10 @@ export function* endreStatus(action: any) {
     yield put(actions.statusEndret());
     yield put(
       actions.statusHentet(
-        stoppAutomatikk2StatusEndring(action.stoppAutomatikk),
+        [
+          ...stoppAutomatikk2StatusEndring(action.stoppAutomatikk),
+          ...(yield select((state) => state.flaggperson.data)),
+        ],
         action.fnr
       )
     );
