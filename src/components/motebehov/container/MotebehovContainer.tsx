@@ -5,8 +5,8 @@ import { MOETEPLANLEGGER } from "../../../enums/menypunkter";
 import { hentBegrunnelseTekst } from "../../../utils/tilgangUtils";
 import {
   sorterMotebehovDataEtterDato,
-  finnNyesteMotebehovsvarFraHverDeltaker,
   motebehovlisteMedKunJaSvar,
+  motebehovFromLatestActiveTilfelle,
 } from "../../../utils/motebehovUtils";
 import {
   harForsoktHentetLedere,
@@ -53,9 +53,6 @@ const MotebehovSide = () => {
   const sortertMotebehovListe = motebehovData.sort(
     sorterMotebehovDataEtterDato
   );
-  const motebehovListeUtenFlereSvarFraSammePerson = finnNyesteMotebehovsvarFraHverDeltaker(
-    sortertMotebehovListe
-  );
 
   const motebehovListeMedJaSvarTilOppgavebehandling = motebehovlisteMedKunJaSvar(
     motebehovData
@@ -73,6 +70,12 @@ const MotebehovSide = () => {
   const oppfolgingstilfelleperioder = useSelector(
     (state: any) => state.oppfolgingstilfelleperioder
   );
+
+  const activeMotebehovSvar = motebehovFromLatestActiveTilfelle(
+    sortertMotebehovListe,
+    oppfolgingstilfelleperioder
+  );
+
   const ledereUtenInnsendtMotebehov = ledereUtenMotebehovsvar(
     ledereData,
     motebehovData,
@@ -132,7 +135,7 @@ const MotebehovSide = () => {
             fnr={fnr}
             ledereData={ledereData}
             ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
-            motebehovListe={motebehovListeUtenFlereSvarFraSammePerson}
+            motebehovListe={activeMotebehovSvar}
             sykmeldt={sykmeldt}
             motebehovListeMedJaSvarTilOppgavebehandling={
               motebehovListeMedJaSvarTilOppgavebehandling

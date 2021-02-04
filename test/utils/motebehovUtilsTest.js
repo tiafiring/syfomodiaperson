@@ -1,4 +1,5 @@
 import { expect } from "chai";
+import sinon from "sinon";
 import {
   erMotebehovBehandlet,
   erOppfoelgingsdatoPassertMed16UkerOgIkke26Uker,
@@ -6,6 +7,7 @@ import {
   finnArbeidstakerMotebehovSvar,
   finnNyesteMotebehovsvarFraHverDeltaker,
   harArbeidstakerSvartPaaMotebehov,
+  motebehovFromLatestActiveTilfelle,
 } from "../../src/utils/motebehovUtils";
 import { ANTALL_MS_DAG } from "../../src/utils/datoUtils";
 
@@ -272,6 +274,202 @@ describe("motebehovUtils", () => {
         const exp = erMotebehovBehandlet([]);
         expect(exp).to.equal(true);
       });
+    });
+  });
+
+  describe("motebehovFromLatestActiveTilfelle", () => {
+    let clock;
+    const today = new Date(Date.now());
+
+    beforeEach(() => {
+      clock = sinon.useFakeTimers(today.getTime());
+    });
+
+    afterEach(() => {
+      clock.restore();
+    });
+
+    const oneDayInMillis = 1000 * 60 * 60 * 24;
+    const seventeenDaysAgo = new Date(Date.now() - oneDayInMillis * 17);
+    const tenDaysAgo = new Date(Date.now() - oneDayInMillis * 10);
+    const fiveDaysAgo = new Date(Date.now() - oneDayInMillis * 5);
+    const now = new Date(Date.now());
+    const fiveDaysFromNow = new Date(Date.now() + oneDayInMillis * 5);
+    const tenDaysFromNow = new Date(Date.now() + oneDayInMillis * 10);
+
+    it("Get one motebehovsvar when inside active tilfelle", () => {
+      const motebehovData = [
+        {
+          aktorId: "1",
+          opprettetDato: now,
+        },
+      ];
+
+      const activeTilfelle = {
+        123456789: {
+          data: [
+            {
+              fom: fiveDaysAgo,
+              tom: fiveDaysFromNow,
+            },
+          ],
+        },
+      };
+
+      const activeMotebehovSvar = motebehovFromLatestActiveTilfelle(
+        motebehovData,
+        activeTilfelle
+      );
+
+      expect(activeMotebehovSvar.length).to.equal(1);
+      expect(activeMotebehovSvar[0].aktorId).to.equal("1");
+    });
+
+    it("Get zero motebehovsvar when all was sent before active tilfelle", () => {
+      const motebehovData = [
+        {
+          aktorId: "1",
+          opprettetDato: tenDaysAgo,
+        },
+      ];
+
+      const activeTilfelle = {
+        123456789: {
+          data: [
+            {
+              fom: fiveDaysAgo,
+              tom: fiveDaysFromNow,
+            },
+          ],
+        },
+      };
+
+      const activeMotebehovSvar = motebehovFromLatestActiveTilfelle(
+        motebehovData,
+        activeTilfelle
+      );
+
+      expect(activeMotebehovSvar.length).to.equal(0);
+    });
+
+    it("Get zero motebehovsvar when no active tilfelle, even if motebehov was sent in the last tilfelle", () => {
+      const motebehovData = [
+        {
+          aktorId: "1",
+          opprettetDato: seventeenDaysAgo,
+        },
+      ];
+
+      const activeTilfelle = {
+        123456789: {
+          data: [
+            {
+              fom: seventeenDaysAgo,
+              tom: seventeenDaysAgo,
+            },
+          ],
+        },
+      };
+
+      const activeMotebehovSvar = motebehovFromLatestActiveTilfelle(
+        motebehovData,
+        activeTilfelle
+      );
+
+      expect(activeMotebehovSvar.length).to.equal(0);
+    });
+
+    it("Get applicable motebehovsvar if tilfelle ended less than 16 days ago", () => {
+      const motebehovData = [
+        {
+          aktorId: "1",
+          opprettetDato: fiveDaysAgo,
+        },
+      ];
+
+      const activeTilfelle = {
+        123456789: {
+          data: [
+            {
+              fom: tenDaysAgo,
+              tom: fiveDaysAgo,
+            },
+          ],
+        },
+      };
+
+      const activeMotebehovSvar = motebehovFromLatestActiveTilfelle(
+        motebehovData,
+        activeTilfelle
+      );
+
+      expect(activeMotebehovSvar.length).to.equal(1);
+      expect(activeMotebehovSvar[0].aktorId).to.equal("1");
+    });
+
+    it("Get two motebehovsvar if both were sent within active tilfelle", () => {
+      const motebehovData = [
+        {
+          aktorId: "1",
+          opprettetDato: fiveDaysAgo,
+        },
+        {
+          aktorId: "2",
+          opprettetDato: tenDaysAgo,
+        },
+      ];
+
+      const activeTilfelle = {
+        123456789: {
+          data: [
+            {
+              fom: tenDaysAgo,
+              tom: tenDaysFromNow,
+            },
+          ],
+        },
+      };
+
+      const activeMotebehovSvar = motebehovFromLatestActiveTilfelle(
+        motebehovData,
+        activeTilfelle
+      );
+
+      expect(activeMotebehovSvar.length).to.equal(2);
+    });
+
+    it("Get motebehovsvar from AG if sent within active tilfelle, even if tilfelle is from different virksomhet", () => {
+      const differentVirksomhet = "differentVirksomhet";
+      const motebehovData = [
+        {
+          aktorId: "1",
+          opprettetDato: fiveDaysAgo,
+          opprettetAv: "leder",
+          virksomhetsnummer: differentVirksomhet,
+        },
+      ];
+
+      const activeTilfelle = {
+        123456789: {
+          data: [
+            {
+              fom: tenDaysAgo,
+              tom: tenDaysFromNow,
+            },
+          ],
+        },
+      };
+
+      const activeMotebehovSvar = motebehovFromLatestActiveTilfelle(
+        motebehovData,
+        activeTilfelle
+      );
+
+      expect(activeMotebehovSvar.length).to.equal(1);
+      expect(activeMotebehovSvar[0].aktorId).to.equal("1");
+      expect(activeMotebehovSvar[0].virksomhetsnummer).to.equal(
+        differentVirksomhet
+      );
     });
   });
 });
