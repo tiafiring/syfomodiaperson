@@ -1,4 +1,5 @@
 import { dagerMellomDatoer } from "./datoUtils";
+import { startDateFromLatestActiveTilfelle } from "./periodeUtils";
 
 export const sorterMotebehovDataEtterDato = (a: any, b: any) => {
   return b.opprettetDato === a.opprettetDato
@@ -95,5 +96,22 @@ export const hentSistBehandletMotebehov = (motebehovListe: any) => {
 export const motebehovlisteMedKunJaSvar = (motebehovliste: any[]) => {
   return motebehovliste.filter((motebehov) => {
     return motebehov.motebehovSvar && motebehov.motebehovSvar.harMotebehov;
+  });
+};
+
+export const motebehovFromLatestActiveTilfelle = (
+  sortertMotebehovListe: any[],
+  oppfolgingstilfelleperioder: any
+) => {
+  const startDateNewestActiveTilfelle = startDateFromLatestActiveTilfelle(
+    oppfolgingstilfelleperioder
+  );
+
+  if (startDateNewestActiveTilfelle === null) {
+    return [];
+  }
+
+  return sortertMotebehovListe.filter((svar) => {
+    return svar.opprettetDato >= startDateNewestActiveTilfelle;
   });
 };
