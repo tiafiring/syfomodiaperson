@@ -294,7 +294,7 @@ describe("motebehovUtils", () => {
     const tenDaysAgo = new Date(Date.now() - oneDayInMillis * 10);
     const fiveDaysAgo = new Date(Date.now() - oneDayInMillis * 5);
     const now = new Date(Date.now());
-    const fiveDayFromNow = new Date(Date.now() + oneDayInMillis * 5);
+    const fiveDaysFromNow = new Date(Date.now() + oneDayInMillis * 5);
     const tenDaysFromNow = new Date(Date.now() + oneDayInMillis * 10);
 
     it("Get one motebehovsvar when inside active tilfelle", () => {
@@ -310,7 +310,7 @@ describe("motebehovUtils", () => {
           data: [
             {
               fom: fiveDaysAgo,
-              tom: fiveDayFromNow,
+              tom: fiveDaysFromNow,
             },
           ],
         },
@@ -338,7 +338,7 @@ describe("motebehovUtils", () => {
           data: [
             {
               fom: fiveDaysAgo,
-              tom: fiveDayFromNow,
+              tom: fiveDaysFromNow,
             },
           ],
         },
