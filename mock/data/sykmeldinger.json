@@ -110,9 +110,9 @@
     },
     "medisinskVurdering": {
       "hovedDiagnose": {
-        "kode": "U071",
+        "kode": "R28",
         "system": "ICD-10",
-        "tekst": "TENDINITT INA"
+        "tekst": "Funksjonshemning på grunn av hypoksi/hyperkapné/redusert lungefunksjon/åndedrettssykdom/sykdom i nese, strupe, hode, hals"
       },
       "biDiagnoser": [
         {
@@ -304,9 +304,9 @@
     },
     "medisinskVurdering": {
       "hovedDiagnose": {
-        "kode": "U071",
+        "kode": "R28",
         "system": "ICD-10",
-        "tekst": "TENDINITT INA"
+        "tekst": "Funksjonshemning på grunn av hypoksi/hyperkapné/redusert lungefunksjon/åndedrettssykdom/sykdom i nese, strupe, hode, hals"
       },
       "biDiagnoser": [
         {
@@ -472,9 +472,9 @@
       },
       "biDiagnoser": [
         {
-          "kode": "U071",
+          "kode": "R28",
           "system": "ICD-10",
-          "tekst": "GANGLION SENE"
+          "tekst": "Funksjonshemning på grunn av hypoksi/hyperkapné/redusert lungefunksjon/åndedrettssykdom/sykdom i nese, strupe, hode, hals"
         }
       ]
     },
@@ -876,9 +876,9 @@
     },
     "medisinskVurdering": {
       "hovedDiagnose": {
-        "kode": "U071",
+        "kode": "R28",
         "system": "ICD-10",
-        "tekst": "TENDINITT INA"
+        "tekst": "Funksjonshemning på grunn av hypoksi/hyperkapné/redusert lungefunksjon/åndedrettssykdom/sykdom i nese, strupe, hode, hals"
       },
       "biDiagnoser": [
         {

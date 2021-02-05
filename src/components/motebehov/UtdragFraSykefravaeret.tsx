@@ -110,16 +110,16 @@ export const UtvidbarTittel = (utvidbarTittelProps: UtvidbarTittelProps) => {
           tidligsteFom(sykmelding.mulighetForArbeid.perioder),
           senesteTom(sykmelding.mulighetForArbeid.perioder)
         )}: `}</span>
-        {sykmelding.diagnose.hoveddiagnose && (
-          <span className="utvidbarTittel__diagnose">
-            {`${sykmelding.diagnose.hoveddiagnose.diagnosekode} - ${sykmelding.diagnose.hoveddiagnose.diagnose}`}
-          </span>
-        )}
         <span className="utvidbarTittel__grad">
           {stringMedAlleGraderingerFraSykmeldingPerioder(
             sykmeldingPerioderSortertEtterDato
           )}
         </span>
+        {sykmelding.diagnose.hoveddiagnose && (
+          <span className="utvidbarTittel__diagnose">
+            {`${sykmelding.diagnose.hoveddiagnose.diagnosekode} (${sykmelding.diagnose.hoveddiagnose.diagnose})`}
+          </span>
+        )}
         {showPapirLabel && (
           <EtikettBase className="utvidbarTittel__etikett" type="info">
             {tekster.sykmeldinger.papirLabelText}
