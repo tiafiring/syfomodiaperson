@@ -6,7 +6,7 @@ const enums = require("./mockDataEnums");
 const mockOppfolgingsplan = require("./oppfolgingsplan/mockOppfolgingsplan");
 const mockOppfolgingsplanLPS = require("./oppfolgingsplan/mockOppfolgingsplanLPS");
 
-const NAV_PERSONIDENT_HEADER = "Nav-Personident";
+const NAV_PERSONIDENT_HEADER = "nav-personident";
 
 const dokumentinfo = { antallSider: 4 };
 

@@ -1,7 +1,7 @@
 import { Error403 } from "./errors";
 import { erProd } from "../utils/miljoUtil";
 
-export const NAV_PERSONIDENT_HEADER = "Nav-Personident";
+export const NAV_PERSONIDENT_HEADER = "nav-personident";
 
 const createLogger = () => {
   if (

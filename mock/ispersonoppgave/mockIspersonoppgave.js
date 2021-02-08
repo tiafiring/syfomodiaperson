@@ -1,4 +1,4 @@
-const NAV_PERSONIDENT_HEADER = "Nav-Personident";
+const NAV_PERSONIDENT_HEADER = "nav-personident";
 
 const dateUtil = require("../util/dateUtil");
 
