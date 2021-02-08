@@ -13,7 +13,6 @@ import AndreSykmeldingOpplysninger from "./AndreSykmeldingOpplysninger";
 
 const texts = {
   utstedelsesdato: "Dato sykmeldingen ble skrevet",
-  startLegemeldtFravaer: "Når startet det legemeldte fraværet?",
 };
 
 interface FlereOpplysningerProps {
@@ -30,13 +29,6 @@ const FlereOpplysninger = (flereOpplysningerProps: FlereOpplysningerProps) => {
           "utstedelsesdato",
           texts.utstedelsesdato,
           tilLesbarDatoMedArstall(sykmelding.bekreftelse.utstedelsesdato),
-          "h4"
-        )}
-        {getSykmeldingOpplysning(
-          sykmelding,
-          "startLegemeldtFravaer",
-          texts.startLegemeldtFravaer,
-          tilLesbarDatoMedArstall(sykmelding.startLegemeldtFravaer),
           "h4"
         )}
       </div>

@@ -16,8 +16,6 @@ const texts = {
   arbeidsplassForhold:
     "Forhold på arbeidsplassen vanskeliggjør arbeidsrelatert aktivitet",
   erIkkeIArbeid: "Pasienten kan ikke være i arbeid (100&nbsp;% sykmeldt)",
-  aktivitetskravBegrunnelse:
-    "Begrunnelse til NAVs vurdering av aktivitetskravet",
   medisinskAarsakBeskriv: "Beskriv nærmere",
 };
 
@@ -86,24 +84,10 @@ const MulighetForArbeid = (mulighetForArbeidProps: MulighetForArbeidProps) => {
         </SykmeldingOpplysning>
       ) : null}
       {(() => {
-        let text = texts.medisinskAarsakBeskriv;
-        if (sykmelding.startLegemeldtFravaer) {
-          const tom = senesteTom(sykmelding.mulighetForArbeid.perioder);
-          const ETT_DOGN = 1000 * 60 * 60 * 24;
-          const SJU_UKER = 7 * 7;
-          const SYTTEN_UKER = 7 * 17;
-          const antallDager =
-            (tom.getTime() - sykmelding.startLegemeldtFravaer.getTime()) /
-              ETT_DOGN +
-            1;
-          if (antallDager >= SJU_UKER && antallDager < SYTTEN_UKER) {
-            text = texts.aktivitetskravBegrunnelse;
-          }
-        }
         return getSykmeldingOpplysning(
           sykmelding.mulighetForArbeid,
           "aarsakAktivitetIkkeMulig433",
-          text
+          texts.medisinskAarsakBeskriv
         );
       })()}
       {sykmelding.mulighetForArbeid.aktivitetIkkeMulig434 &&
