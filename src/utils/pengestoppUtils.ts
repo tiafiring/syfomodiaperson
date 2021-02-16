@@ -8,10 +8,7 @@ import {
 import { senesteTom } from "./periodeUtils";
 import { gamleSMStatuser } from "./sykmeldinger/sykmeldingstatuser";
 import { SykmeldingOldFormat } from "../data/sykmelding/types/SykmeldingOldFormat";
-import { erLokal, erPreProd } from "./miljoUtil";
 import { sykepengestoppArsakTekstListe } from "../components/pengestopp/PengestoppModal";
-
-export const toggleArsaksVelger = erLokal() || erPreProd();
 
 export const sykmeldingerToArbeidsgiver = (
   sykmeldinger: SykmeldingOldFormat[]

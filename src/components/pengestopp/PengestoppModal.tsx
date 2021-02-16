@@ -16,7 +16,6 @@ import { AlertStripeInfo } from "nav-frontend-alertstriper";
 import { useSelector, useDispatch } from "react-redux";
 import { endreStatus } from "../../data/pengestopp/flaggperson_actions";
 import { FlaggpersonState } from "../../data/pengestopp/flaggperson";
-import { toggleArsaksVelger } from "../../utils/pengestoppUtils";
 
 const texts = {
   notStoppedTittel:
@@ -147,7 +146,7 @@ const PengestoppModal = ({
   const handleStoppAutomatikkButtonPress = () => {
     if (stoppAutomatikk.virksomhetNr.length <= 0) {
       setSubmitError(true);
-    } else if (toggleArsaksVelger && stoppAutomatikk.arsakList.length <= 0) {
+    } else if (stoppAutomatikk.arsakList.length <= 0) {
       setSubmitErrorArsak(true);
     } else {
       dispatch(endreStatus(stoppAutomatikk));
@@ -230,25 +229,23 @@ const PengestoppModal = ({
               )}
             </CheckboxGruppe>
           </Group>
-          {toggleArsaksVelger && (
-            <Group>
-              <CheckboxGruppe
-                legend={texts.arsak.title}
-                feil={submitErrorArsak && texts.arsak.submitError}
-              >
-                {sykepengestoppArsakTekstListe.map((arsak, index: number) => {
-                  return (
-                    <Checkbox
-                      key={index}
-                      label={arsak.text}
-                      onChange={handleChangeArsak}
-                      name={arsak.type}
-                    />
-                  );
-                })}
-              </CheckboxGruppe>
-            </Group>
-          )}
+          <Group>
+            <CheckboxGruppe
+              legend={texts.arsak.title}
+              feil={submitErrorArsak && texts.arsak.submitError}
+            >
+              {sykepengestoppArsakTekstListe.map((arsak, index: number) => {
+                return (
+                  <Checkbox
+                    key={index}
+                    label={arsak.text}
+                    onChange={handleChangeArsak}
+                    name={arsak.type}
+                  />
+                );
+              })}
+            </CheckboxGruppe>
+          </Group>
           <Knapp type="flat" onClick={handleCloseModal}>
             {texts.avbryt}
           </Knapp>
