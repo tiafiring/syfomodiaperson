@@ -4,38 +4,39 @@ import Lenke from "nav-frontend-lenker";
 import { OppfolgingsplanDTO } from "../../data/oppfolgingsplan/oppfoelgingsdialoger";
 import SykmeldingMotebehovVisning from "./SykmeldingMotebehovVisning";
 import {
-  erEkstraInformasjonISykmeldingen,
   arbeidsgivernavnEllerArbeidssituasjon,
-  sykmeldingerUtenArbeidsgiver,
-  sykmeldingerMedStatusSendt,
-  sykmeldingerInnenforOppfolgingstilfellet,
-  sykmeldingerSortertNyestTilEldst,
-  sykmeldingerGruppertEtterVirksomhet,
-  sykmeldingperioderSortertEldstTilNyest,
+  erEkstraInformasjonISykmeldingen,
   stringMedAlleGraderingerFraSykmeldingPerioder,
+  sykmeldingerGruppertEtterVirksomhet,
   sykmeldingerInnenforOppfolgingstilfellePerson,
+  sykmeldingerInnenforOppfolgingstilfellet,
+  sykmeldingerMedStatusSendt,
+  sykmeldingerSortertNyestTilEldst,
+  sykmeldingerUtenArbeidsgiver,
+  sykmeldingperioderSortertEldstTilNyest
 } from "../../utils/sykmeldinger/sykmeldingUtils";
 import { finnMiljoStreng } from "../../utils/miljoUtil";
 import { OppfolgingstilfellePerson } from "../../data/oppfolgingstilfelle/types/OppfolgingstilfellePerson";
 import { tilLesbarPeriodeMedArstall } from "../../utils/datoUtils";
 import { senesteTom, tidligsteFom } from "../../utils/periodeUtils";
 import Utvidbar from "../Utvidbar";
+import styled from "styled-components";
 
 const tekster = {
   header: "Utdrag fra sykefraværet",
   oppfolgingsplaner: {
     header: "Oppfølgingsplan",
-    ingenPlanerDelt: "Ingen planer er delt med NAV",
+    ingenPlanerDelt: "Ingen planer er delt med NAV"
   },
   sykmeldinger: {
     header: "Sykmeldinger",
     headerUtenArbeidsgiver: "Sykmeldinger uten arbeidsgiver",
-    papirLabelText: "Papir",
+    papirLabelText: "Papir"
   },
   samtalereferat: {
     header: "Samtalereferat",
-    lenkeTekst: "Samtalereferat",
-  },
+    lenkeTekst: "Samtalereferat"
+  }
 };
 
 export const UtdragFraSykefravaeretHeader = () => {
@@ -96,6 +97,12 @@ interface UtvidbarTittelProps {
   sykmelding: any;
 }
 
+const UtdragColumn = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+`;
+
 export const UtvidbarTittel = (utvidbarTittelProps: UtvidbarTittelProps) => {
   const sykmelding = utvidbarTittelProps.sykmelding;
   const erViktigInformasjon = erEkstraInformasjonISykmeldingen(sykmelding);
@@ -104,8 +111,8 @@ export const UtvidbarTittel = (utvidbarTittelProps: UtvidbarTittelProps) => {
   );
   const showPapirLabel = sykmelding.papirsykmelding;
   return (
-    <div className="utdragFraSykefravaeret__utvidbarTittel">
-      <div>
+    <UtdragColumn className="utdragFraSykefravaeret__utvidbarTittel">
+      <UtdragColumn>
         <span className="utvidbarTittel__periode">{`${tilLesbarPeriodeMedArstall(
           tidligsteFom(sykmelding.mulighetForArbeid.perioder),
           senesteTom(sykmelding.mulighetForArbeid.perioder)
@@ -115,6 +122,7 @@ export const UtvidbarTittel = (utvidbarTittelProps: UtvidbarTittelProps) => {
             sykmeldingPerioderSortertEtterDato
           )}
         </span>
+
         {sykmelding.diagnose.hoveddiagnose && (
           <span className="utvidbarTittel__diagnose">
             {`${sykmelding.diagnose.hoveddiagnose.diagnosekode} (${sykmelding.diagnose.hoveddiagnose.diagnose})`}
@@ -125,7 +133,7 @@ export const UtvidbarTittel = (utvidbarTittelProps: UtvidbarTittelProps) => {
             {tekster.sykmeldinger.papirLabelText}
           </EtikettBase>
         )}
-      </div>
+      </UtdragColumn>
       {erViktigInformasjon && (
         <div className="utvidbarTittel__erViktig">
           <img alt="Mer" src={"/sykefravaer/img/svg/merInformasjon.svg"} />
@@ -207,7 +215,7 @@ export const SykmeldingerUtenArbeidsgiver = (
 ) => {
   const {
     oppfolgingstilfelleUtenArbeidsgiver,
-    sykmeldinger,
+    sykmeldinger
   } = sykmeldingerUtenArbeidsgiverProps;
   const innsendteSykmeldinger = sykmeldingerUtenArbeidsgiver(sykmeldinger);
   const sykmeldingerIOppfolgingstilfellet = sykmeldingerInnenforOppfolgingstilfellePerson(
@@ -221,24 +229,24 @@ export const SykmeldingerUtenArbeidsgiver = (
     <div className="utdragFraSykefravaeret__sykmeldinger">
       <h3>{tekster.sykmeldinger.headerUtenArbeidsgiver}</h3>
       {sykmeldingerSortertPaUtstedelsesdato.length > 0 &&
-        sykmeldingerSortertPaUtstedelsesdato.map(
-          (sykmelding: any, index: number) => {
-            return (
-              <div
-                className="utdragFraSykefravaeret__sykmeldingerForVirksomhet"
-                key={index}
-              >
-                <Utvidbar
-                  tittel={<UtvidbarTittel sykmelding={sykmelding} />}
-                  visLukkLenke={false}
-                  children={
-                    <SykmeldingMotebehovVisning sykmelding={sykmelding} />
-                  }
-                />
-              </div>
-            );
-          }
-        )}
+      sykmeldingerSortertPaUtstedelsesdato.map(
+        (sykmelding: any, index: number) => {
+          return (
+            <div
+              className="utdragFraSykefravaeret__sykmeldingerForVirksomhet"
+              key={index}
+            >
+              <Utvidbar
+                tittel={<UtvidbarTittel sykmelding={sykmelding} />}
+                visLukkLenke={false}
+                children={
+                  <SykmeldingMotebehovVisning sykmelding={sykmelding} />
+                }
+              />
+            </div>
+          );
+        }
+      )}
     </div>
   );
 };
@@ -279,7 +287,7 @@ const UtdragFraSykefravaeret = (
     fnr,
     oppfolgingstilfelleUtenArbeidsgiver,
     oppfolgingstilfelleperioder,
-    sykmeldinger,
+    sykmeldinger
   } = utdragFraSykefravaeretProps;
   return (
     <div>
