@@ -9,11 +9,13 @@ const texts = {
 const StyledColumn = styled(Column)`
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
 `;
 
 const StyledIcon = styled.img`
   margin-top: 2.5em;
+  width: 2em;
 `;
 
 const grey = "#78706A";
