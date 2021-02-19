@@ -4,22 +4,23 @@ import Lenke from "nav-frontend-lenker";
 import { OppfolgingsplanDTO } from "../../data/oppfolgingsplan/oppfoelgingsdialoger";
 import SykmeldingMotebehovVisning from "./SykmeldingMotebehovVisning";
 import {
-  erEkstraInformasjonISykmeldingen,
   arbeidsgivernavnEllerArbeidssituasjon,
-  sykmeldingerUtenArbeidsgiver,
-  sykmeldingerMedStatusSendt,
-  sykmeldingerInnenforOppfolgingstilfellet,
-  sykmeldingerSortertNyestTilEldst,
-  sykmeldingerGruppertEtterVirksomhet,
-  sykmeldingperioderSortertEldstTilNyest,
+  erEkstraInformasjonISykmeldingen,
   stringMedAlleGraderingerFraSykmeldingPerioder,
+  sykmeldingerGruppertEtterVirksomhet,
   sykmeldingerInnenforOppfolgingstilfellePerson,
+  sykmeldingerInnenforOppfolgingstilfellet,
+  sykmeldingerMedStatusSendt,
+  sykmeldingerSortertNyestTilEldst,
+  sykmeldingerUtenArbeidsgiver,
+  sykmeldingperioderSortertEldstTilNyest,
 } from "../../utils/sykmeldinger/sykmeldingUtils";
 import { finnMiljoStreng } from "../../utils/miljoUtil";
 import { OppfolgingstilfellePerson } from "../../data/oppfolgingstilfelle/types/OppfolgingstilfellePerson";
 import { tilLesbarPeriodeMedArstall } from "../../utils/datoUtils";
 import { senesteTom, tidligsteFom } from "../../utils/periodeUtils";
 import Utvidbar from "../Utvidbar";
+import styled from "styled-components";
 
 const tekster = {
   header: "Utdrag fra sykefraværet",
@@ -96,6 +97,12 @@ interface UtvidbarTittelProps {
   sykmelding: any;
 }
 
+const UtdragColumn = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+`;
+
 export const UtvidbarTittel = (utvidbarTittelProps: UtvidbarTittelProps) => {
   const sykmelding = utvidbarTittelProps.sykmelding;
   const erViktigInformasjon = erEkstraInformasjonISykmeldingen(sykmelding);
@@ -105,27 +112,28 @@ export const UtvidbarTittel = (utvidbarTittelProps: UtvidbarTittelProps) => {
   const showPapirLabel = sykmelding.papirsykmelding;
   return (
     <div className="utdragFraSykefravaeret__utvidbarTittel">
-      <div>
+      <UtdragColumn>
         <span className="utvidbarTittel__periode">{`${tilLesbarPeriodeMedArstall(
           tidligsteFom(sykmelding.mulighetForArbeid.perioder),
           senesteTom(sykmelding.mulighetForArbeid.perioder)
         )}: `}</span>
-        {sykmelding.diagnose.hoveddiagnose && (
-          <span className="utvidbarTittel__diagnose">
-            {sykmelding.diagnose.hoveddiagnose.diagnosekode}
-          </span>
-        )}
         <span className="utvidbarTittel__grad">
           {stringMedAlleGraderingerFraSykmeldingPerioder(
             sykmeldingPerioderSortertEtterDato
           )}
         </span>
+
+        {sykmelding.diagnose.hoveddiagnose && (
+          <span className="utvidbarTittel__diagnose">
+            {`${sykmelding.diagnose.hoveddiagnose.diagnosekode} (${sykmelding.diagnose.hoveddiagnose.diagnose})`}
+          </span>
+        )}
         {showPapirLabel && (
           <EtikettBase className="utvidbarTittel__etikett" type="info">
             {tekster.sykmeldinger.papirLabelText}
           </EtikettBase>
         )}
-      </div>
+      </UtdragColumn>
       {erViktigInformasjon && (
         <div className="utvidbarTittel__erViktig">
           <img alt="Mer" src={"/sykefravaer/img/svg/merInformasjon.svg"} />

@@ -2,6 +2,7 @@
   padding-top: 0.5em;
   margin-bottom: 1em;
   padding-bottom: 0.5em;
+
   label {
     margin-left: 0.75em;
     display: block;
@@ -12,6 +13,7 @@
 
 .utdragFraSykefravaeret__header {
   background-color: #e9e7e7;
+
   h2 {
     font-size: 14px;
     font-weight: normal;
@@ -21,9 +23,25 @@
   }
 }
 
+.utvidbar__tittel {
+  width: 100%;
+  display: flex;
+}
+
 .utdragFraSykefravaeret__utvidbarTittel {
+  width: 100%;
+
   .utvidbarTittel__periode {
     font-weight: bold;
+    padding: 0 0.1em;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .utvidbarTittel__grad {
+    padding: 0 0.1em;
+    margin: 0;
+    white-space: nowrap;
   }
 
   .utvidbarTittel__erViktig {
@@ -32,7 +50,12 @@
   }
 
   .utvidbarTittel__diagnose {
-    margin: 0 0.2em;
+    color: @navGra60;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    padding-left: 1em;
   }
 
   .utvidbarTittel__etikett {
@@ -43,6 +66,7 @@
 
 .utdragFraSykefravaeret__oppfolgingsplaner {
   margin-bottom: 2.5em;
+
   h3 {
     margin-bottom: 0;
   }
@@ -51,6 +75,7 @@
 .utdragFraSykefravaeret__oppfolgingsplan {
   margin-top: 0.5em;
   margin-bottom: 1em;
+
   .gyldighetsperiode {
     margin-left: 2em;
   }
@@ -62,6 +87,7 @@
 
 .utdragFraSykefravaeret__samtalereferat {
   margin-bottom: 4em;
+
   h3 {
     margin-bottom: 0;
   }
@@ -75,10 +101,12 @@
   .utvidbar__innhold {
     padding: 1em;
   }
+
   h4 {
     margin-bottom: -0.1em;
     text-transform: capitalize;
   }
+
   .utvidbar {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
