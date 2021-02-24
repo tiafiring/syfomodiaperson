@@ -38,8 +38,8 @@ function hentKontrollSiffer(fodselsnummer: any, kontrollrekke: any) {
   return kontrollSiffer !== 0 ? 11 - kontrollSiffer : 0;
 }
 
-export function erGyldigFodselsnummer(fodselsnummer: string) {
-  if (!fodselsnummer.match(new RegExp("[0-9]{11}"))) {
+export function erGyldigFodselsnummer(fodselsnummer?: string) {
+  if (!fodselsnummer || !fodselsnummer.match(new RegExp("[0-9]{11}"))) {
     return false;
   }
   if (!erGyldigFodselsdato(fodselsnummer.substring(0, 6))) {

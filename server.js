@@ -44,10 +44,19 @@ server.use("/sykefravaer/img", express.static(path.resolve(__dirname, "img")));
 
 server.use("/static", express.static(DIST_DIR));
 
-server.get("/sykefravaer/*", nocache, (req, res) => {
-  res.sendFile(HTML_FILE);
-  httpRequestDurationMicroseconds.labels(req.route.path).observe(10);
-});
+server.get(
+  [
+    "/",
+    "/sykefravaer",
+    "/sykefravaer/*",
+    /^\/sykefravaer\/(?!(resources|img)).*$/,
+  ],
+  nocache,
+  (req, res) => {
+    res.sendFile(HTML_FILE);
+    httpRequestDurationMicroseconds.labels(req.route.path).observe(10);
+  }
+);
 
 server.get("/actuator/metrics", (req, res) => {
   res.set("Content-Type", prometheus.register.contentType);
