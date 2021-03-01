@@ -65,16 +65,18 @@ export const harArbeidstakerSvartPaaMotebehov = (motebehovData: any) => {
   return !!finnArbeidstakerMotebehovSvar(motebehovData);
 };
 
+export const motebehovUbehandlet = (motebehovListe: any[]) => {
+  return motebehovListe.filter((motebehov) => {
+    return (
+      motebehov.motebehovSvar &&
+      motebehov.motebehovSvar.harMotebehov &&
+      !motebehov.behandletTidspunkt
+    );
+  });
+};
+
 const erAlleMotebehovSvarBehandlet = (motebehovListe: any[]) => {
-  return (
-    motebehovListe.filter((motebehov) => {
-      return (
-        motebehov.motebehovSvar &&
-        motebehov.motebehovSvar.harMotebehov &&
-        !motebehov.behandletTidspunkt
-      );
-    }).length === 0
-  );
+  return motebehovUbehandlet(motebehovListe).length === 0;
 };
 
 export const erMotebehovBehandlet = (motebehovListe: any[]) => {
@@ -108,10 +110,17 @@ export const motebehovFromLatestActiveTilfelle = (
   );
 
   if (startDateNewestActiveTilfelle === null) {
-    return [];
+    return motebehovUbehandlet(sortertMotebehovListe);
   }
 
-  return sortertMotebehovListe.filter((svar) => {
-    return svar.opprettetDato >= startDateNewestActiveTilfelle;
-  });
+  const motebehovFromLatestActiveTilfelle = sortertMotebehovListe.filter(
+    (svar) => {
+      return svar.opprettetDato >= startDateNewestActiveTilfelle;
+    }
+  );
+  if (motebehovFromLatestActiveTilfelle.length > 0) {
+    return motebehovFromLatestActiveTilfelle;
+  } else {
+    return motebehovUbehandlet(sortertMotebehovListe);
+  }
 };
