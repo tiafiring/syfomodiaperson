@@ -379,6 +379,38 @@ describe("motebehovUtils", () => {
       expect(activeMotebehovSvar.length).to.equal(0);
     });
 
+    it("Get motebehovsvar when no active tilfelle,  if motebehov was sent in the last tilfelle and is Ubehandlet", () => {
+      const motebehovData = [
+        {
+          aktorId: "1",
+          opprettetDato: seventeenDaysAgo,
+          motebehovSvar: {
+            harMotebehov: true,
+          },
+          behandletTidspunkt: null,
+          behandletVeilederIdent: null,
+        },
+      ];
+
+      const activeTilfelle = {
+        123456789: {
+          data: [
+            {
+              fom: seventeenDaysAgo,
+              tom: seventeenDaysAgo,
+            },
+          ],
+        },
+      };
+
+      const activeMotebehovSvar = motebehovFromLatestActiveTilfelle(
+        motebehovData,
+        activeTilfelle
+      );
+
+      expect(activeMotebehovSvar.length).to.equal(1);
+    });
+
     it("Get applicable motebehovsvar if tilfelle ended less than 16 days ago", () => {
       const motebehovData = [
         {
