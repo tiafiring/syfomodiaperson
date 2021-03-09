@@ -210,7 +210,7 @@ server.use(
 
 server.use(
   "/syfosoknad/api",
-  proxy("syfosoknad.default", {
+  proxy("syfosoknad.flex", {
     https: false,
     proxyReqPathResolver: function (req) {
       return `/syfosoknad/api${req.url}`;
