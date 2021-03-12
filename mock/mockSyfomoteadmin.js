@@ -49,6 +49,11 @@ function mockMoteDeltakere(alternativer, orgnummer) {
 }
 
 function mockForLokal(server) {
+  server.get("/syfomoteadmin/api/internad/veilederinfo/enheter", (req, res) => {
+    res.setHeader("Content-Type", "application/json");
+    res.send(JSON.stringify(mockData[enums.ENHETER]));
+  });
+
   server.get("/syfomoteadmin/api/internad/enheter", (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.send(JSON.stringify(mockData[enums.ENHETER]));
