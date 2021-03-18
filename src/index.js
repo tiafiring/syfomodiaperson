@@ -40,17 +40,9 @@ import { hentBehandlendeEnhet } from "./data/behandlendeenhet/behandlendeEnhet_a
 import { hentNavbruker } from "./data/navbruker/navbruker_actions";
 import { hentLedere } from "./data/leder/ledere_actions";
 import { hentPersonAdresse } from "./data/personinfo/personInfo_actions";
-import {
-  hentAktivBruker,
-  hentAktivEnhet,
-  pushModiaContext,
-} from "./data/modiacontext/modiacontext_actions";
-import { valgtEnhet } from "./data/valgtenhet/enhet_actions";
-import { CONTEXT_EVENT_TYPE } from "./konstanter";
 import soknader from "./data/sykepengesoknad/soknader";
-import { config, setContextHolderEventHandlers } from "./global";
-import "./styles/styles.less";
 import vedtak from "./data/vedtak/vedtak";
+import "./styles/styles.less";
 
 const rootReducer = combineReducers({
   history,
@@ -93,27 +85,6 @@ sagaMiddleware.run(rootSaga);
 
 const fnr = window.location.pathname.split("/")[2];
 
-const nyPersonHandler = (nyttFnr) => {
-  if (nyttFnr !== config.config.fnr) {
-    window.location = `/sykefravaer/${nyttFnr}`;
-  }
-};
-
-const nyEnhetHandler = (enhetNr) => {
-  if (config.config.initiellEnhet !== enhetNr) {
-    store.dispatch(valgtEnhet(enhetNr));
-    store.dispatch(
-      pushModiaContext({
-        verdi: enhetNr,
-        eventType: CONTEXT_EVENT_TYPE.NY_AKTIV_ENHET,
-      })
-    );
-    config.config.initiellEnhet = enhetNr;
-  }
-};
-
-setContextHolderEventHandlers(nyPersonHandler, nyEnhetHandler);
-
 const fnrRegex = new RegExp("^[0-9]{11}$");
 if (fnrRegex.test(fnr)) {
   store.dispatch(hentVeilederinfo());
@@ -122,33 +93,7 @@ if (fnrRegex.test(fnr)) {
   store.dispatch(hentLedere(fnr));
   store.dispatch(hentPersonAdresse(fnr));
   store.dispatch(sjekkTilgang(fnr));
-  store.dispatch(
-    hentAktivBruker({
-      callback: (aktivBruker) => {
-        if (aktivBruker !== fnr) {
-          store.dispatch(
-            pushModiaContext({
-              verdi: fnr,
-              eventType: CONTEXT_EVENT_TYPE.NY_AKTIV_BRUKER,
-            })
-          );
-        }
-      },
-    })
-  );
 }
-
-store.dispatch(
-  hentAktivEnhet({
-    callback: (aktivEnhet) => {
-      if (aktivEnhet && config.config.initiellEnhet !== aktivEnhet) {
-        store.dispatch(valgtEnhet(aktivEnhet));
-        config.config.initiellEnhet = aktivEnhet;
-        window.renderDecoratorHead(config);
-      }
-    },
-  })
-);
 
 ReactDOM.render(
   <Provider store={store}>
@@ -157,13 +102,4 @@ ReactDOM.render(
   document.getElementById("maincontent")
 );
 
-document.addEventListener("DOMContentLoaded", () => {
-  // eslint-disable-next-line no-unused-expressions
-  window.renderDecoratorHead && window.renderDecoratorHead(config);
-});
-
-if (window.location.hostname.indexOf("localhost") !== -1) {
-  store.dispatch(valgtEnhet("0219"));
-}
-
-export { store, history, config };
+export { store, history };

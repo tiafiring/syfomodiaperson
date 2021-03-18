@@ -3,7 +3,7 @@ function getDefaultOppfolgingsplaner() {
     {
       id: 2956,
       uuid: "5f1e2629-062b-442d-ae1f-3b08e9574cd1",
-      sistEndretAvAktoerId: "1101101101102",
+      sistEndretAvAktoerId: "1902690001002",
       sistEndretDato: "2020-01-30T08:49:05.621",
       status: "AKTIV",
       virksomhet: {
@@ -31,7 +31,7 @@ function getDefaultOppfolgingsplaner() {
     {
       id: 2957,
       uuid: "2f1e2629-062b-442d-ae1f-3b08e9574cd1",
-      sistEndretAvAktoerId: "1101101101102",
+      sistEndretAvAktoerId: "1902690001002",
       sistEndretDato: "2020-01-30T08:49:05.621",
       status: "AKTIV",
       virksomhet: {
@@ -59,7 +59,7 @@ function getDefaultOppfolgingsplaner() {
     {
       id: 2963,
       uuid: "7ad362e9-c5a7-42c0-b2d0-2a053518272b",
-      sistEndretAvAktoerId: "1101101101102",
+      sistEndretAvAktoerId: "1902690001002",
       sistEndretDato: "2019-02-20T11:41:18.336",
       status: "AVBRUTT",
       virksomhet: {

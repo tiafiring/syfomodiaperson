@@ -4,7 +4,7 @@ const getDefaultOppfolgingsplanLPS = () => {
   const today = new Date();
   return {
     uuid: "5f1e2629-062b-442d-ae1f-3b08e9574cd2",
-    fnr: "11011011011",
+    fnr: "19026900010",
     virksomhetsnummer: "110110110",
     opprettet: dateUtil.leggTilDagerPaDato(today, -1).toJSON(),
     sistEndret: dateUtil.leggTilDagerPaDato(today, -1).toJSON(),

@@ -11,7 +11,6 @@ const lastFilTilMinne = (filnavn) => {
   });
 };
 
-lastFilTilMinne(enums.AKTIVBRUKER);
 lastFilTilMinne(enums.BEHANDLENDEENHET);
 lastFilTilMinne(enums.BRUKERINFO);
 lastFilTilMinne(enums.ENHETER);

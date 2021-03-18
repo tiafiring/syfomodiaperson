@@ -28,7 +28,7 @@ function mockMoteDeltakere(alternativer, orgnummer) {
     {
       deltakerUuid: "66f1d827-94db-43d4-b6de-2f7902e76bf8",
       navn: "Samuel Jones",
-      fnr: "11011011011",
+      fnr: "19026900010",
       orgnummer: orgnummer,
       epost: "samuel@pontypandyfire.gov.uk",
       type: "Bruker",

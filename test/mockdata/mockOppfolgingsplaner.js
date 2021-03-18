@@ -9,7 +9,7 @@ const TWO_DAYS_AGO = new Date(Date.now() - DAY_IN_MILLISECONDS * 2);
 export const mockValidActiveOppfolgingsplan = {
   id: 1,
   uuid: "111e2629-062b-442d-ae1f-3b08e9574cd1",
-  sistEndretAvAktoerId: "1101101101102",
+  sistEndretAvAktoerId: "1902690001002",
   sistEndretDato: "2020-01-30T08:49:05.621",
   status: "AKTIV",
   virksomhet: {
@@ -38,7 +38,7 @@ export const mockValidActiveOppfolgingsplan = {
 export const mockAvbruttActiveOppfolgingsplan = {
   id: 2,
   uuid: "222e2629-062b-442d-ae1f-3b08e9574cd1",
-  sistEndretAvAktoerId: "1101101101102",
+  sistEndretAvAktoerId: "1902690001002",
   sistEndretDato: "2020-01-30T08:49:05.621",
   status: "AVBRUTT",
   virksomhet: {
@@ -67,7 +67,7 @@ export const mockAvbruttActiveOppfolgingsplan = {
 export const mockAvbruttInactiveOppfolgingsplan = {
   id: 3,
   uuid: "333e2629-062b-442d-ae1f-3b08e9574cd1",
-  sistEndretAvAktoerId: "1101101101102",
+  sistEndretAvAktoerId: "1902690001002",
   sistEndretDato: "2020-01-30T08:49:05.621",
   status: "AVBRUTT",
   virksomhet: {
