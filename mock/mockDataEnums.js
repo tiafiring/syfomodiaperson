@@ -1,5 +1,3 @@
-const AKTIVBRUKER = "aktivbruker";
-const AKTIVENHET = "aktivenhet";
 const BEHANDLENDEENHET = "behandlendeenhet";
 const BRUKERINFO = "brukerinfo";
 const ENHETER = "enheter";
@@ -19,8 +17,6 @@ const PREDIKSJON = "prediksjon";
 const VEDTAK = "vedtak";
 
 module.exports = {
-  AKTIVBRUKER,
-  AKTIVENHET,
   BEHANDLENDEENHET,
   BRUKERINFO,
   ENHETER,

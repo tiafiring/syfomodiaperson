@@ -11,7 +11,7 @@ const TWO_DAYS_AGO = new Date(Date.now() - DAY_IN_MILLISECONDS * 2);
 export const mockLederWithActiveSykmelding = {
   navn: "Walter Sergei Skinner",
   id: 0,
-  aktoerId: "1101101101102",
+  aktoerId: "1902690001002",
   tlf: "112",
   epost: "skinner@fbi.no",
   aktiv: null,
@@ -26,7 +26,7 @@ export const mockLederWithActiveSykmelding = {
 export const mockLederWithoutActiveSykmelding = {
   navn: "Carl Gerhard Busch",
   id: 1,
-  aktoerId: "1101101101103",
+  aktoerId: "1902690001003",
   tlf: "xxx",
   epost: "spender@syndicate.no",
   aktiv: null,

@@ -10,7 +10,7 @@ function createStatusList(stoppAutomatikk) {
         value: "A111111",
       },
       sykmeldtFnr: {
-        value: "11011011011",
+        value: "19026900010",
       },
       status: Status.STOPP_AUTOMATIKK,
       virksomhetNr: {

@@ -2,7 +2,7 @@
   {
     "navn": "Station Officer Steele",
     "id": 0,
-    "aktoerId": "1101101101102",
+    "aktoerId": "1902690001002",
     "tlf": "110",
     "epost": "steele@pontypandyfire.gov.uk",
     "aktiv": null,
@@ -16,7 +16,7 @@
   {
     "navn": "Are Arbeidsgiver",
     "id": 1,
-    "aktoerId": "1101101101108",
+    "aktoerId": "1902690001008",
     "tlf": "12345678",
     "epost": "test2@test.no",
     "aktiv": null,
@@ -30,7 +30,7 @@
   {
     "navn": "Tatten Tattover",
     "id": 2,
-    "aktoerId": "1101101101109",
+    "aktoerId": "1902690001009",
     "tlf": "12345666",
     "epost": "test3@test.no",
     "aktiv": null,
