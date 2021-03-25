@@ -3,7 +3,7 @@ const requestUtil = require("../util/requestUtil");
 const mockData = require("../mockData");
 const enums = require("../mockDataEnums");
 
-const mockIspengestopp = (server) => {
+const mockIsprediksjon = (server) => {
   server.get("/isprediksjon/api/v1/prediksjon", (req, res) => {
     if (
       req.headers[requestUtil.NAV_PERSONIDENT_HEADER] &&
@@ -17,4 +17,4 @@ const mockIspengestopp = (server) => {
   });
 };
 
-module.exports = mockIspengestopp;
+module.exports = mockIsprediksjon;
