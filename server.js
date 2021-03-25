@@ -190,7 +190,7 @@ server.use("/veileder/vedtak", cookieParser(), (req, res) => {
     })
     .catch((err) => {
       console.error("Error in proxy for spinnsyn-backend", err.message);
-      res.status(err.status).send(err.message);
+      res.sendStatus(err.response.status);
     });
 });
 
@@ -268,7 +268,7 @@ server.use("/syfosmregister/api", cookieParser(), (req, res) => {
     })
     .catch((err) => {
       console.error("Error in proxy for syfosmregister", err.message);
-      res.status(err.status).send(err.message);
+      res.sendStatus(err.response.status);
     });
 });
 
@@ -293,14 +293,13 @@ server.use("/ispengestopp/api/v1/person/status", cookieParser(), (req, res) => {
     })
     .catch((err) => {
       console.error("Error in proxy for ispengestopp", err.message);
-      res.status(err.status).send(err.message);
+      res.sendStatus(err.response.status);
     });
 });
 
 server.use("/ispengestopp/api/v1/person/flagg", cookieParser(), (req, res) => {
   const token = req.cookies["isso-idtoken"];
   const headers = {
-    "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
   };
 
@@ -312,7 +311,8 @@ server.use("/ispengestopp/api/v1/person/flagg", cookieParser(), (req, res) => {
       res.sendStatus(response.status);
     })
     .catch((err) => {
-      res.status(err.status).send(err.message);
+      console.log(err.message);
+      res.sendStatus(err.response.status);
     });
 });
 
@@ -336,7 +336,7 @@ server.use("/isprediksjon/api/v1/prediksjon", cookieParser(), (req, res) => {
     })
     .catch((err) => {
       console.error("Error in proxy for isprediksjon", err.message);
-      res.status(err.status).send(err.message);
+      res.sendStatus(err.response.status);
     });
 });
 
