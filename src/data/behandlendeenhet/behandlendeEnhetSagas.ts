@@ -5,8 +5,8 @@ import * as actions from "./behandlendeEnhet_actions";
 export function* hentBehandlendeEnhetSaga(action: any) {
   yield put(actions.henterBehandlendeEnhet());
   try {
-    const path = `${process.env.REACT_APP_SYFOBEHANDLENDEENHETREST_ROOT}/internad/${action.fnr}`;
-    const data = yield call(get, path);
+    const path = `${process.env.REACT_APP_SYFOBEHANDLENDEENHETREST_ROOT}/internad/personident`;
+    const data = yield call(get, path, action.fnr);
     yield put(actions.behandlendeEnhetHentet(data));
   } catch (e) {
     yield put(actions.hentBehandlendeEnhetFeilet());

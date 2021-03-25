@@ -1,15 +1,22 @@
-const mockData = require("./mockData");
-const enums = require("./mockDataEnums");
+const requestUtil = require("./util/requestUtil");
 
-function mockForLokal(server) {
+const behandlendeEnhet = {
+  enhetId: "0315",
+  navn: "NAV Grünerløkka",
+};
+
+const mockSyfobehandlendeenhet = (server) => {
   server.get("/syfobehandlendeenhet/api/internad/:fnr", (req, res) => {
-    res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(mockData[enums.BEHANDLENDEENHET]));
+    if (
+      req.headers[requestUtil.NAV_PERSONIDENT_HEADER] &&
+      req.headers[requestUtil.NAV_PERSONIDENT_HEADER].length === 11
+    ) {
+      res.setHeader("Content-Type", "application/json");
+      res.send(JSON.stringify(behandlendeEnhet));
+    } else {
+      res.status(400).send("Did not find PersonIdent in headers");
+    }
   });
-}
-
-function mockSyfobehandlendeenhet(server) {
-  mockForLokal(server);
-}
+};
 
 module.exports = mockSyfobehandlendeenhet;
