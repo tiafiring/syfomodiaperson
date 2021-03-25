@@ -1,12 +1,12 @@
 const path = require("path");
 
-const mockData = require("./mockData");
-const enums = require("./mockDataEnums");
+const mockData = require("../mockData");
+const enums = require("../mockDataEnums");
 
-const requestUtil = require("./util/requestUtil");
+const requestUtil = require("../util/requestUtil");
 
-const mockOppfolgingsplan = require("./oppfolgingsplan/mockOppfolgingsplan");
-const mockOppfolgingsplanLPS = require("./oppfolgingsplan/mockOppfolgingsplanLPS");
+const mockOppfolgingsplan = require("./mockOppfolgingsplan");
+const mockOppfolgingsplanLPS = require("./mockOppfolgingsplanLPS");
 
 const NAV_PERSONIDENT_HEADER = "nav-personident";
 

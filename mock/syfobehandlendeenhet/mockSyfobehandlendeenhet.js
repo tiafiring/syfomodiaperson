@@ -1,4 +1,4 @@
-const requestUtil = require("./util/requestUtil");
+const requestUtil = require("../util/requestUtil");
 
 const behandlendeEnhet = {
   enhetId: "0315",

@@ -1,6 +1,5 @@
 const BRUKERINFO = "brukerinfo";
 const ENHETER = "enheter";
-const FASTLEGER = "fastleger";
 const HISTORIKKMOTEBEHOV = "historikkmotebehov";
 const HISTORIKKMOTER = "historikkmoter";
 const HISTORIKKOPPFOLGINGSPLAN = "historikkoppfolgingsplan";
@@ -18,7 +17,6 @@ const VEDTAK = "vedtak";
 module.exports = {
   BRUKERINFO,
   ENHETER,
-  FASTLEGER,
   HISTORIKKMOTEBEHOV,
   HISTORIKKMOTER,
   HISTORIKKOPPFOLGINGSPLAN,

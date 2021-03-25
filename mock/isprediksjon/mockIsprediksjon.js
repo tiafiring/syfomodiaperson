@@ -1,5 +1,5 @@
-const mockData = require("./mockData");
-const enums = require("./mockDataEnums");
+const mockData = require("../mockData");
+const enums = require("../mockDataEnums");
 
 const mockIspengestopp = (server) => {
   server.get("/isprediksjon/api/v1/prediksjon", (req, res) => {

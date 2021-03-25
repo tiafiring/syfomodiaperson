@@ -1,6 +1,6 @@
-const mockData = require("./mockData");
-const enums = require("./mockDataEnums");
-const mockVirksomhet = require("./data/mockVirksomhet");
+const mockData = require("../mockData");
+const enums = require("../mockDataEnums");
+const mockVirksomhet = require("../data/mockVirksomhet");
 
 const mockOpprettetIdResultat = () => {
   mockOpprettetIdResultat.rollingCounter += 1;

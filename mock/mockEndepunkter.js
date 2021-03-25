@@ -1,21 +1,21 @@
 const express = require("express");
-const mockFastlegerest = require("./mockFastlegerest");
+const mockFastlegerest = require("./fastlegerest/mockFastlegerest");
 const mockIspersonoppgave = require("./ispersonoppgave/mockIspersonoppgave");
-const mockModiacontextholder = require("./mockModiacontextholder");
-const mockModiasyforest = require("./mockModiasyforest");
-const mockSyfomoteadmin = require("./mockSyfomoteadmin");
-const mockSyfomotebehov = require("./mockSyfomotebehov");
-const mockSyfooppfolgingsplanservice = require("./mockSyfooppfolgingsplanservice");
-const mockSyfosoknad = require("./mockSyfosoknad");
-const mockSyfotilgangskoontroll = require("./mockSyfotilgangskontroll");
-const mockSyfobehandlendeenhet = require("./mockSyfobehandlendeenhet");
-const mockSyfoperson = require("./mockSyfoperson");
-const mockSyfosmregiser = require("./mockSyfosmregister");
-const mockIspengestopp = require("./mockIspengestopp");
-const mockIsprediksjon = require("./mockIsprediksjon");
-const mockVedtak = require("./mockVedtak");
+const mockModiacontextholder = require("./modiacontextholder/mockModiacontextholder");
+const mockModiasyforest = require("./modiasyforest/mockModiasyforest");
+const mockSyfomoteadmin = require("./syfomoteadmin/mockSyfomoteadmin");
+const mockSyfomotebehov = require("./syfomotebehov/mockSyfomotebehov");
+const mockSyfooppfolgingsplanservice = require("./syfooppfolgingsplanservice/mockSyfooppfolgingsplanservice");
+const mockSyfosoknad = require("./syfosoknad/mockSyfosoknad");
+const mockSyfotilgangskoontroll = require("./syfotilgangskontroll/mockSyfotilgangskontroll");
+const mockSyfobehandlendeenhet = require("./syfobehandlendeenhet/mockSyfobehandlendeenhet");
+const mockSyfoperson = require("./syfoperson/mockSyfoperson");
+const mockSyfosmregiser = require("./syfosmregister/mockSyfosmregister");
+const mockIspengestopp = require("./ispengestopp/mockIspengestopp");
+const mockIsprediksjon = require("./isprediksjon/mockIsprediksjon");
+const mockVedtak = require("./spinnsyn/mockVedtak");
 
-function mockEndepunkter(server, erLokal) {
+const mockEndepunkter = (server, erLokal) => {
   server.use(express.json());
   server.use(express.urlencoded());
 
@@ -38,6 +38,6 @@ function mockEndepunkter(server, erLokal) {
   ].forEach((func) => {
     func(server, erLokal);
   });
-}
+};
 
 module.exports = mockEndepunkter;

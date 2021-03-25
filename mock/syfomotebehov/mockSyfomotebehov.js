@@ -1,5 +1,5 @@
-const mockData = require("./mockData");
-const enums = require("./mockDataEnums");
+const mockData = require("../mockData");
+const enums = require("../mockDataEnums");
 
 const mockSyfomotebehov = (server) => {
   server.get("/syfomotebehov/api/internad/veileder/motebehov", (req, res) => {

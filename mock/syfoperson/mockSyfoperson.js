@@ -1,5 +1,5 @@
-const requestUtil = require("./util/requestUtil");
-const mockPersonAdresse = require("./data/mockPersonAdresse");
+const requestUtil = require("../util/requestUtil");
+const mockPersonAdresse = require("../data/mockPersonAdresse");
 
 const diskresjonskode = "7";
 const isEgenAnsatt = true;

@@ -1,4 +1,4 @@
-function getDefaultOppfolgingsplaner() {
+const getDefaultOppfolgingsplaner = () => {
   return [
     {
       id: 2956,
@@ -113,7 +113,7 @@ function getDefaultOppfolgingsplaner() {
       arbeidstaker: null,
     },
   ];
-}
+};
 
 module.exports = {
   getDefaultOppfolgingsplaner,

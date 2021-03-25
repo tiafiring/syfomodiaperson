@@ -1,5 +1,5 @@
-const mockData = require("./mockData");
-const enums = require("./mockDataEnums");
+const mockData = require("../mockData");
+const enums = require("../mockDataEnums");
 
 const mockVedtak = (server) => {
   server.get("/veileder/vedtak", (req, res) => {

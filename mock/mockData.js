@@ -13,7 +13,6 @@ const lastFilTilMinne = (filnavn) => {
 
 lastFilTilMinne(enums.BRUKERINFO);
 lastFilTilMinne(enums.ENHETER);
-lastFilTilMinne(enums.FASTLEGER);
 lastFilTilMinne(enums.HISTORIKKMOTEBEHOV);
 lastFilTilMinne(enums.HISTORIKKMOTER);
 lastFilTilMinne(enums.HISTORIKKOPPFOLGINGSPLAN);
