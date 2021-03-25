@@ -2,12 +2,12 @@ const mockData = require("./mockData");
 const enums = require("./mockDataEnums");
 const mockVirksomhet = require("./data/mockVirksomhet");
 
-function mockOpprettetIdResultat() {
+const mockOpprettetIdResultat = () => {
   mockOpprettetIdResultat.rollingCounter += 1;
-}
+};
 mockOpprettetIdResultat.rollingCounter = 100;
 
-function mockMoteAlternativer(alternativer) {
+const mockMoteAlternativer = (alternativer) => {
   return alternativer.map((alternativ) => {
     return {
       id: (mockOpprettetIdResultat.rollingCounter += 1),
@@ -17,9 +17,9 @@ function mockMoteAlternativer(alternativer) {
       valgt: false,
     };
   });
-}
+};
 
-function mockMoteDeltakere(alternativer, orgnummer) {
+const mockMoteDeltakere = (alternativer, orgnummer) => {
   const leder = mockData.ledere.find((leder) => {
     return leder.orgnummer === orgnummer;
   });
@@ -46,9 +46,9 @@ function mockMoteDeltakere(alternativer, orgnummer) {
       svar: alternativer,
     },
   ];
-}
+};
 
-function mockForLokal(server) {
+const mockForLokal = (server) => {
   server.get("/syfomoteadmin/api/internad/veilederinfo/enheter", (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.send(JSON.stringify(mockData[enums.ENHETER]));
@@ -86,9 +86,9 @@ function mockForLokal(server) {
       res.send(mockVirksomhet.getVirksomhet());
     }
   );
-}
+};
 
-function mockEndepunkterSomEndrerState(server) {
+const mockEndepunkterSomEndrerState = (server) => {
   server.post("/syfomoteadmin/api/internad/moter/:uuid/avbryt", (req, res) => {
     const { uuid } = req.params;
     const oppdaterteMoter = mockData.moter.map((mote) => {
@@ -174,13 +174,11 @@ function mockEndepunkterSomEndrerState(server) {
     res.setHeader("Content-Type", "application/json");
     res.send(JSON.stringify({}));
   });
-}
+};
 
-function mockSyfomoteadmin(server, erLokal) {
+const mockSyfomoteadmin = (server) => {
   mockForLokal(server);
-  if (erLokal) {
-    mockEndepunkterSomEndrerState(server);
-  }
+  mockEndepunkterSomEndrerState(server);
 }
 
 module.exports = mockSyfomoteadmin;

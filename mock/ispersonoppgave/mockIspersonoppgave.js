@@ -28,10 +28,10 @@ const getPersonOppgaveBehandlet = () => {
   };
 };
 
-function getPersonOppgaver() {
+const getPersonOppgaver = () => {
   return [getDefaultPersonOppgaveUbehandlet(), getPersonOppgaveBehandlet()];
-}
-function mockForLokal(server) {
+};
+const mockIspersonoppgave = (server) => {
   server.get(
     "/ispersonoppgave/api/v1/personoppgave/personident",
     (req, res) => {
@@ -53,10 +53,6 @@ function mockForLokal(server) {
       res.sendStatus(200);
     }
   );
-}
-
-function mockIspersonoppgave(server) {
-  mockForLokal(server);
-}
+};
 
 module.exports = mockIspersonoppgave;

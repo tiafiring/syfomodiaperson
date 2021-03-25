@@ -3,7 +3,7 @@ const Status = {
   STOPP_AUTOMATIKK: "STOPP_AUTOMATIKK",
 };
 
-function createStatusList(stoppAutomatikk) {
+const createStatusList = (stoppAutomatikk) => {
   return stoppAutomatikk.virksomhetNr.map((virksomhet) => {
     return {
       veilederIdent: {
@@ -22,9 +22,9 @@ function createStatusList(stoppAutomatikk) {
       },
     };
   });
-}
+};
 
-function mockForLokal(server) {
+const mockIspengestopp = (server) => {
   let STATUSLIST = undefined;
 
   server.get("/ispengestopp/api/v1/person/status", (req, res) => {
@@ -48,10 +48,6 @@ function mockForLokal(server) {
     res.sendStatus(201);
     console.log("StoppAutomatikk: 201 CREATED");
   });
-}
-
-function mockIspengestopp(server) {
-  mockForLokal(server);
-}
+};
 
 module.exports = mockIspengestopp;

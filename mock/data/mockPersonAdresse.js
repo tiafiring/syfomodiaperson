@@ -1,4 +1,4 @@
-function getPersonAdresse() {
+const getPersonAdresse = () => {
   return {
     navn: "Samuel Jones",
     bostedsadresse: {
@@ -59,6 +59,6 @@ function getPersonAdresse() {
       oppholdAnnetSted: null,
     },
   };
-}
+};
 
 module.exports = { getPersonAdresse };

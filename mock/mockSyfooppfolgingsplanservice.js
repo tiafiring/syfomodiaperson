@@ -10,7 +10,7 @@ const NAV_PERSONIDENT_HEADER = "nav-personident";
 
 const dokumentinfo = { antallSider: 4 };
 
-function mockForLokal(server) {
+const mockSyfooppfolgingsplanservice = (server) => {
   server.get(
     "/syfooppfolgingsplanservice/api/internad/v1/oppfolgingsplan/:fnr",
     (req, res) => {
@@ -66,10 +66,6 @@ function mockForLokal(server) {
       });
     }
   );
-}
-
-function mockSyfooppfolgingsplanservice(server) {
-  mockForLokal(server);
-}
+};
 
 module.exports = mockSyfooppfolgingsplanservice;

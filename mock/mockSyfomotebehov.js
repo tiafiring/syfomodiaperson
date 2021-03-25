@@ -1,7 +1,7 @@
 const mockData = require("./mockData");
 const enums = require("./mockDataEnums");
 
-function mockForLokal(server) {
+const mockSyfomotebehov = (server) => {
   server.get("/syfomotebehov/api/internad/veileder/motebehov", (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.send(JSON.stringify(mockData[enums.MOTEBEHOV]));
@@ -18,9 +18,7 @@ function mockForLokal(server) {
     res.setHeader("Content-Type", "application/json");
     res.send(JSON.stringify(mockData[enums.HISTORIKKMOTEBEHOV]));
   });
-}
 
-function mockEndepunkterSomEndrerState(server) {
   server.post(
     "/syfomotebehov/api/internad/veileder/motebehov/:fnr/behandle",
     (req, res) => {
@@ -34,13 +32,6 @@ function mockEndepunkterSomEndrerState(server) {
       res.sendStatus(200);
     }
   );
-}
-
-function mockSyfomotebehov(server, erLokal) {
-  if (erLokal) {
-    mockEndepunkterSomEndrerState(server);
-  }
-  mockForLokal(server);
-}
+};
 
 module.exports = mockSyfomotebehov;

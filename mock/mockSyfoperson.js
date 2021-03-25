@@ -5,7 +5,7 @@ const NAV_PERSONIDENT_HEADER = "nav-personident";
 const diskresjonskode = "7";
 const isEgenAnsatt = true;
 
-function mockForLokal(server) {
+const mockSyfoperson = (server) => {
   server.get("/syfoperson/api/person/diskresjonskode", (req, res) => {
     if (
       req.headers[NAV_PERSONIDENT_HEADER] &&
@@ -41,10 +41,6 @@ function mockForLokal(server) {
       res.status(400).send("Did not find PersonIdent in headers");
     }
   });
-}
-
-function mockSyfoperson(server) {
-  mockForLokal(server);
-}
+};
 
 module.exports = mockSyfoperson;

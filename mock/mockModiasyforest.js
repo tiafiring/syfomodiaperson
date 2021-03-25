@@ -10,7 +10,7 @@ const getOppfolgingstilfellerPerson = () => {
   ];
 };
 
-function mockForLokal(server) {
+const mockModiasyforest = (server) => {
   server.get("/modiasyforest/api/internad/sykmeldinger", (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.send(JSON.stringify(mockData[enums.SYKMELDINGER]));
@@ -44,10 +44,6 @@ function mockForLokal(server) {
     res.setHeader("Content-Type", "application/json");
     res.send(JSON.stringify(mockData[enums.BRUKERINFO]));
   });
-}
-
-function mockModiasyforest(server) {
-  mockForLokal(server);
-}
+};
 
 module.exports = mockModiasyforest;

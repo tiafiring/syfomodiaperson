@@ -11,7 +11,7 @@ const getDefaultOppfolgingsplanLPS = () => {
   };
 };
 
-function getOppfolgingsplanerLPS() {
+const getOppfolgingsplanerLPS = () => {
   const today = new Date();
   return [
     getDefaultOppfolgingsplanLPS(),
@@ -21,7 +21,7 @@ function getOppfolgingsplanerLPS() {
       opprettet: dateUtil.leggTilDagerPaDato(today, -10).toJSON(),
     },
   ];
-}
+};
 
 module.exports = {
   getOppfolgingsplanerLPS,
