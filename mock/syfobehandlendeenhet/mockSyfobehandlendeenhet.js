@@ -6,7 +6,7 @@ const behandlendeEnhet = {
 };
 
 const mockSyfobehandlendeenhet = (server) => {
-  server.get("/syfobehandlendeenhet/api/internad/:fnr", (req, res) => {
+  server.get("/syfobehandlendeenhet/api/internad/personident", (req, res) => {
     if (
       req.headers[requestUtil.NAV_PERSONIDENT_HEADER] &&
       req.headers[requestUtil.NAV_PERSONIDENT_HEADER].length === 11
