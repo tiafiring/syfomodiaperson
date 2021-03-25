@@ -38,13 +38,19 @@ export const lagreRedirectUrlILocalStorage = (href) => {
   localStorage.setItem("redirecturl", href);
 };
 
-export function get(url, personIdent = "") {
+export function get(url, personIdent) {
+  let headers = {
+    [NAV_CONSUMER_ID_HEADER]: NAV_CONSUMER_ID,
+  };
+  if (personIdent) {
+    headers = {
+      ...headers,
+      [NAV_PERSONIDENT_HEADER]: personIdent,
+    };
+  }
   return fetch(url, {
     credentials: "include",
-    headers: {
-      [NAV_CONSUMER_ID_HEADER]: NAV_CONSUMER_ID,
-      [NAV_PERSONIDENT_HEADER]: personIdent,
-    },
+    headers,
   })
     .then((res) => {
       if (res.status === 401) {
@@ -85,6 +91,7 @@ export function post(url, body) {
     body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/json",
+      [NAV_CONSUMER_ID_HEADER]: NAV_CONSUMER_ID,
     },
   })
     .then((res) => {
