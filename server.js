@@ -318,11 +318,10 @@ server.use("/ispengestopp/api/v1/person/flagg", cookieParser(), (req, res) => {
 
 server.use("/isprediksjon/api/v1/prediksjon", cookieParser(), (req, res) => {
   const token = req.cookies["isso-idtoken"];
-  const fnr = req.query.fnr;
   const options = {
     headers: {
+      ...req.headers,
       Authorization: `Bearer ${token}`,
-      fnr,
     },
   };
 
