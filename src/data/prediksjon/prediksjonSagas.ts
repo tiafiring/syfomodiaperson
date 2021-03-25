@@ -6,8 +6,10 @@ import { PrediksjonState } from "./prediksjon";
 export function* hentPrediksjon(action: any) {
   yield put(actions.hentPrediksjonHenter());
   try {
-    const path = `${process.env.REACT_APP_ISPREDIKSJON_ROOT}/v1/prediksjon?fnr=${action.fnr}`;
-    const data = yield call(get, path);
+    const path = `${process.env.REACT_APP_ISPREDIKSJON_ROOT}/v1/prediksjon`;
+    const data = yield call(get, path, action.fnr);
+
+    console.log("data", data);
 
     if (data && !!data.err) {
       yield put(actions.hentPrediksjonFeilet());
