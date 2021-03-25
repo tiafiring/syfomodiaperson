@@ -179,6 +179,6 @@ const mockEndepunkterSomEndrerState = (server) => {
 const mockSyfomoteadmin = (server) => {
   mockForLokal(server);
   mockEndepunkterSomEndrerState(server);
-}
+};
 
 module.exports = mockSyfomoteadmin;
