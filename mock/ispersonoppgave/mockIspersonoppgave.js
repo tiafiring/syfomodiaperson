@@ -1,4 +1,4 @@
-const NAV_PERSONIDENT_HEADER = "nav-personident";
+const requestUtil = require("../util/requestUtil");
 
 const dateUtil = require("../util/dateUtil");
 
@@ -36,8 +36,8 @@ const mockIspersonoppgave = (server) => {
     "/ispersonoppgave/api/v1/personoppgave/personident",
     (req, res) => {
       if (
-        req.headers[NAV_PERSONIDENT_HEADER] &&
-        req.headers[NAV_PERSONIDENT_HEADER].length === 11
+        req.headers[requestUtil.NAV_PERSONIDENT_HEADER] &&
+        req.headers[requestUtil.NAV_PERSONIDENT_HEADER].length === 11
       ) {
         res.setHeader("Content-Type", "application/json");
         res.send(JSON.stringify(getPersonOppgaver()));

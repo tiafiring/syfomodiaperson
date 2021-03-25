@@ -3,6 +3,8 @@ const path = require("path");
 const mockData = require("./mockData");
 const enums = require("./mockDataEnums");
 
+const requestUtil = require("./util/requestUtil");
+
 const mockOppfolgingsplan = require("./oppfolgingsplan/mockOppfolgingsplan");
 const mockOppfolgingsplanLPS = require("./oppfolgingsplan/mockOppfolgingsplanLPS");
 
@@ -39,8 +41,8 @@ const mockSyfooppfolgingsplanservice = (server) => {
     "/syfooppfolgingsplanservice/api/internad/oppfolgingsplan/lps",
     (req, res) => {
       if (
-        req.headers[NAV_PERSONIDENT_HEADER] &&
-        req.headers[NAV_PERSONIDENT_HEADER].length === 11
+        req.headers[requestUtil.NAV_PERSONIDENT_HEADER] &&
+        req.headers[requestUtil.NAV_PERSONIDENT_HEADER].length === 11
       ) {
         res.setHeader("Content-Type", "application/json");
         res.send(
