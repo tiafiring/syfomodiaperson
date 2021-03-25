@@ -28,7 +28,8 @@ describe("egenansattSagas", () => {
   it("Skal dernest kalle resttjenesten", () => {
     const nextCall = call(
       get,
-      `${process.env.REACT_APP_SYFOPERSON_ROOT}/person/egenansatt/1`
+      `${process.env.REACT_APP_SYFOPERSON_ROOT}/person/egenansatt`,
+      "1"
     );
     expect(generator.next().value).to.deep.equal(nextCall);
   });

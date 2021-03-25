@@ -1,6 +1,8 @@
 import { Error403 } from "./errors";
 import { erProd } from "../utils/miljoUtil";
 
+export const NAV_CONSUMER_ID_HEADER = "nav-consumer-id";
+export const NAV_CONSUMER_ID = "syfomodiaperson";
 export const NAV_PERSONIDENT_HEADER = "nav-personident";
 
 const createLogger = () => {
@@ -40,6 +42,7 @@ export function get(url, personIdent = "") {
   return fetch(url, {
     credentials: "include",
     headers: {
+      [NAV_CONSUMER_ID_HEADER]: NAV_CONSUMER_ID,
       [NAV_PERSONIDENT_HEADER]: personIdent,
     },
   })
