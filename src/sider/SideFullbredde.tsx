@@ -2,8 +2,7 @@ import React from "react";
 import { Container, Row, Column } from "nav-frontend-grid";
 import Personkort from "../components/personkort/Personkort";
 import Decorator from "../decorator/Decorator";
-
-const DocumentTitle = require("react-document-title");
+import DocumentTitle from "react-document-title";
 
 interface SideFullbreddeProps {
   tittel?: string;

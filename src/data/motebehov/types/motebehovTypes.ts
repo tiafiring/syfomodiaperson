@@ -1,9 +1,9 @@
-interface MotebehovSvar {
+export interface MotebehovSvar {
   harMotebehov: boolean;
   forklaring?: string;
 }
 
-interface MotebehovDTO {
+export interface MotebehovDTO {
   id: string;
   opprettetDato: Date;
   aktorId: string;
@@ -13,6 +13,6 @@ interface MotebehovDTO {
   motebehovSvar?: MotebehovSvar;
   tildeltEnhet?: string;
   behandletTidspunkt?: Date;
-  behandletVeilederIdent?: String;
-  skjemaType?: String;
+  behandletVeilederIdent?: string;
+  skjemaType?: string;
 }

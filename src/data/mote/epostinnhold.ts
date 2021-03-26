@@ -9,7 +9,7 @@ import {
 export interface EpostInnholdState {
   henter: boolean;
   hentingFeilet: boolean;
-  data: EpostInnholdDTO | {};
+  data: EpostInnholdDTO | Record<string, unknown>;
 }
 
 const initialState: EpostInnholdState = {

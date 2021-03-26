@@ -99,7 +99,7 @@ export const stoppAutomatikk2StatusEndring = (
 
 export const displayArsakText = (arsakList: SykepengestoppArsak[]) => {
   return `Årsak: ${arsakList
-    .map((arsak, index: number) => {
+    .map((arsak) => {
       return sykepengestoppArsakTekstListe.find((arsakTekst) => {
         return arsakTekst.type === arsak.type;
       })?.text;

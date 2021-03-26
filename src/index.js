@@ -1,38 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { applyMiddleware, combineReducers, createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
 import { Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
-import { reducer as formReducer } from "redux-form";
 import AppRouter from "./routers/AppRouter";
-import history from "./history";
-import fastleger from "./data/fastlege/fastleger";
-import ledere from "./data/leder/ledere";
-import navbruker from "./data/navbruker/navbruker";
-import sykmeldinger from "./data/sykmelding/sykmeldinger";
-import moter from "./data/mote/moter";
-import motebehov from "./data/motebehov/motebehov";
-import motebehovBehandling from "./data/motebehov/motebehovBehandling";
-import epostinnhold from "./data/mote/epostinnhold";
-import arbeidsgiverEpostinnhold from "./data/mote/arbeidsgiverEpostinnhold";
-import modiacontext from "./data/modiacontext/modiacontext";
-import historikk from "./data/historikk/historikk";
-import oppfoelgingsdialoger from "./data/oppfolgingsplan/oppfoelgingsdialoger";
-import oppfolgingsplanerlps from "./data/oppfolgingsplan/oppfolgingsplanerlps";
-import dokumentinfo from "./data/oppfolgingsplan/dokumentinfo";
-import behandlendeEnhet from "./data/behandlendeenhet/behandlendeEnhet";
-import enhet from "./data/valgtenhet/enhet";
-import tilgang from "./data/tilgang/tilgang";
-import virksomhet from "./data/virksomhet/virksomhet";
-import veilederinfo from "./data/veilederinfo/veilederinfo";
-import diskresjonskode from "./data/diskresjonskode/diskresjonskode";
-import egenansatt from "./data/egenansatt/egenansatt";
-import oppfolgingstilfellerperson from "./data/oppfolgingstilfelle/oppfolgingstilfellerperson";
-import oppfolgingstilfelleperioder from "./data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
-import personadresse from "./data/personinfo/personadresse";
-import personoppgaver from "./data/personoppgave/personoppgaver";
-import flaggperson from "./data/pengestopp/flaggperson";
-import prediksjon from "./data/prediksjon/prediksjon";
 import rootSaga from "./data/rootSaga";
 import { sjekkTilgang } from "./data/tilgang/tilgang_actions";
 import { hentVeilederinfo } from "./data/veilederinfo/veilederinfo_actions";
@@ -40,43 +11,9 @@ import { hentBehandlendeEnhet } from "./data/behandlendeenhet/behandlendeEnhet_a
 import { hentNavbruker } from "./data/navbruker/navbruker_actions";
 import { hentLedere } from "./data/leder/ledere_actions";
 import { hentPersonAdresse } from "./data/personinfo/personInfo_actions";
-import soknader from "./data/sykepengesoknad/soknader";
-import vedtak from "./data/vedtak/vedtak";
+import history from "./history";
 import "./styles/styles.less";
-
-const rootReducer = combineReducers({
-  history,
-  fastleger,
-  ledere,
-  navbruker,
-  modiacontext,
-  historikk,
-  moter,
-  motebehov,
-  motebehovBehandling,
-  virksomhet,
-  epostinnhold,
-  arbeidsgiverEpostinnhold,
-  oppfoelgingsdialoger,
-  oppfolgingsplanerlps,
-  enhet,
-  sykmeldinger,
-  behandlendeEnhet,
-  diskresjonskode,
-  dokumentinfo,
-  egenansatt,
-  veilederinfo,
-  tilgang,
-  form: formReducer,
-  soknader,
-  oppfolgingstilfellerperson,
-  oppfolgingstilfelleperioder,
-  personadresse,
-  personoppgaver,
-  flaggperson,
-  prediksjon,
-  vedtak,
-});
+import { rootReducer } from "./data/rootState";
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));

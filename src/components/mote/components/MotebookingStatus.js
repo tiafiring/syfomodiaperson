@@ -215,6 +215,7 @@ MotebookingStatus.propTypes = {
   opprettFlereAlternativ: PropTypes.func,
   avbrytFlereAlternativ: PropTypes.func,
   skalViseFlereAlternativ: PropTypes.bool,
+  visFlereAlternativ: PropTypes.func,
 };
 
 export default MotebookingStatus;

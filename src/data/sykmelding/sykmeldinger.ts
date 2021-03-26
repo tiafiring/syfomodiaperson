@@ -67,7 +67,7 @@ const sykmeldinger: Reducer<SykmeldingerState> = (
       };
     }
     case SYKMELDINGER_SORTERT: {
-      let sortering = {} as any;
+      const sortering = {} as any;
       sortering[action.status] = action.kriterium;
       return {
         ...state,

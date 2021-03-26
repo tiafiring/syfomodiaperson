@@ -7,6 +7,7 @@ import {
   STATUS_HENTET,
 } from "./flaggperson_actions";
 import { StatusEndring } from "./types/FlaggPerson";
+import { Reducer } from "redux";
 
 export interface FlaggpersonState {
   henter: boolean;
@@ -32,7 +33,10 @@ export const initialState: FlaggpersonState = {
   data: [],
 };
 
-const flaggperson = (state = initialState, action = { type: "", data: [] }) => {
+const flaggperson: Reducer<FlaggpersonState> = (
+  state = initialState,
+  action
+) => {
   switch (action.type) {
     case HENTER_STATUS: {
       return {

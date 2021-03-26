@@ -4,7 +4,6 @@ import {
   getSykmeldingCheckbox,
   getSykmeldingOpplysning,
 } from "../../../../../../utils/sykmeldingUtils";
-import { senesteTom } from "../../../../../../utils/periodeUtils";
 import SykmeldingOpplysning from "./SykmeldingOpplysning";
 import { SykmeldingCheckbox } from "../SykmeldingCheckbox";
 

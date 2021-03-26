@@ -9,7 +9,7 @@ import { BehandlendeEnhet } from "./types/BehandlendeEnhet";
 export interface BehandlendeEnhetState {
   henter: boolean;
   hentingFeilet: boolean;
-  data: BehandlendeEnhet | {};
+  data: BehandlendeEnhet | Record<string, any>;
 }
 
 export const initialState: BehandlendeEnhetState = {

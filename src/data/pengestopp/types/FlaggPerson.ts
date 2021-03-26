@@ -16,7 +16,7 @@ export interface Sykmelding {
   mulighetForArbeid: {
     perioder: Periode[];
   };
-  status: String;
+  status: string;
 }
 
 export interface SykmeldtFnr {

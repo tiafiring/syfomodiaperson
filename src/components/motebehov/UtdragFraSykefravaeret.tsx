@@ -162,8 +162,9 @@ export const SykmeldingerForVirksomhet = (
             <Utvidbar
               tittel={<UtvidbarTittel sykmelding={sykmelding} />}
               visLukkLenke={false}
-              children={<SykmeldingMotebehovVisning sykmelding={sykmelding} />}
-            />
+            >
+              <SykmeldingMotebehovVisning sykmelding={sykmelding} />
+            </Utvidbar>
           </div>
         );
       })}
@@ -239,10 +240,9 @@ export const SykmeldingerUtenArbeidsgiver = (
                 <Utvidbar
                   tittel={<UtvidbarTittel sykmelding={sykmelding} />}
                   visLukkLenke={false}
-                  children={
-                    <SykmeldingMotebehovVisning sykmelding={sykmelding} />
-                  }
-                />
+                >
+                  <SykmeldingMotebehovVisning sykmelding={sykmelding} />
+                </Utvidbar>
               </div>
             );
           }
