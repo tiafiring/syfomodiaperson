@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { Utbetalingslinje, Vedtak, VedtakDTO } from "../data/vedtak/vedtak";
+import { Utbetalingslinje, VedtakDTO } from "../data/vedtak/vedtak";
 
 interface Dag {
   dato: string;
@@ -16,7 +16,7 @@ export const erHelg = (dato: Date) => {
 };
 
 export const estimertMaksdato = (vedtak: VedtakDTO) => {
-  let slutt = dayjs(vedtak!.vedtak.tom);
+  let slutt = dayjs(vedtak.vedtak.tom);
   let x = 0;
   while (x < vedtak.vedtak.gjenståendeSykedager) {
     slutt = slutt.add(1, "day");
@@ -101,7 +101,7 @@ export const refusjonTilUtbetalingsbelopBrutto = (
 
 export const groupVedtakByOrgnr = (vedtak: VedtakDTO[]): VedtakDTO[][] => {
   const orgMap = vedtak.reduce(
-    (acc: Map<String, VedtakDTO[]>, currentValue: VedtakDTO) => {
+    (acc: Map<string, VedtakDTO[]>, currentValue: VedtakDTO) => {
       const orgnr = currentValue.vedtak.organisasjonsnummer;
 
       if (!acc.has(orgnr)) {
@@ -117,7 +117,7 @@ export const groupVedtakByOrgnr = (vedtak: VedtakDTO[]): VedtakDTO[][] => {
 
       return acc;
     },
-    new Map<String, VedtakDTO[]>()
+    new Map<string, VedtakDTO[]>()
   );
 
   return [...orgMap.values()];

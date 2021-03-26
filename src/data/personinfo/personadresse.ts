@@ -11,7 +11,7 @@ export interface PersonAdresseState {
   hentet: boolean;
   hentingFeilet: boolean;
   hentingForsokt: boolean;
-  data: PersonAdresse | {};
+  data: PersonAdresse | Record<string, unknown>;
 }
 
 export const initialState: PersonAdresseState = {

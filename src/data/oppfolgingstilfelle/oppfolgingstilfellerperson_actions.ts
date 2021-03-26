@@ -9,7 +9,7 @@ export const HENT_OPPFOLGINGSTILFELLER_PERSON_HENTET =
 export const HENT_OPPFOLGINGSTILFELLER_PERSON_FEILET =
   "HENT_OPPFOLGINGSTILFELLER_PERSON_FEILET";
 
-export function hentOppfolgingstilfellerPersonUtenArbeidsiver(fnr: String) {
+export function hentOppfolgingstilfellerPersonUtenArbeidsiver(fnr: string) {
   return {
     type: HENT_OPPFOLGINGSTILFELLER_PERSON_FORESPURT,
     fnr,

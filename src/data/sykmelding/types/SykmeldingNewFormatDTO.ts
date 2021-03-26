@@ -1,5 +1,3 @@
-export interface SykmeldingStatusDTO {}
-
 export enum PeriodetypeDTO {
   AKTIVITET_IKKE_MULIG = "AKTIVITET_IKKE_MULIG",
   AVVENTENDE = "AVVENTENDE",
@@ -10,7 +8,7 @@ export enum PeriodetypeDTO {
 
 export interface GradertDTO {
   grad: number;
-  reisetilskudd: Boolean;
+  reisetilskudd: boolean;
 }
 
 export interface SykmeldingsperiodeDTO {
@@ -63,6 +61,6 @@ export interface SykmeldingNewFormatDTO {
   legeNavn?: string;
   arbeidsgiver?: ArbeidsgiverDTO;
   sykmeldingsperioder: SykmeldingsperiodeDTO[];
-  sykmeldingStatus: SykmeldingStatusDTO;
+  sykmeldingStatus: Record<string, unknown>;
   utdypendeOpplysninger: Map<string, Map<string, UtdypendeOpplysning>>;
 }

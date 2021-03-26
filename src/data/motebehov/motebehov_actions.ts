@@ -1,3 +1,5 @@
+import { MotebehovDTO } from "./types/motebehovTypes";
+
 export const HENT_MOTEBEHOV_FORESPURT = "HENT_MOTEBEHOV_FORESPURT";
 export const HENT_MOTEBEHOV_HENTER = "HENT_MOTEBEHOV_HENTER";
 export const HENT_MOTEBEHOV_HENTET = "HENT_MOTEBEHOV_HENTETq";

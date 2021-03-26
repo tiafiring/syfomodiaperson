@@ -1,11 +1,18 @@
 import { VALGT_ENHET } from "./enhet_actions";
 import { Reducer } from "redux";
 
-const defaultState = {
+export interface EnhetState {
+  valgtEnhet: string;
+}
+
+const defaultState: EnhetState = {
   valgtEnhet: "",
 };
 
-const enhet: Reducer = (state = defaultState, action = { type: "" }) => {
+const enhet: Reducer<EnhetState> = (
+  state = defaultState,
+  action = { type: "" }
+) => {
   switch (action.type) {
     case VALGT_ENHET: {
       return Object.assign({}, defaultState, {

@@ -1,5 +1,5 @@
 import { all, call, fork, put, select, takeEvery } from "redux-saga/effects";
-import { get } from "../../api/index";
+import { get } from "../../api";
 import * as actions from "./vedtak_actions";
 import { VedtakState } from "./vedtak";
 

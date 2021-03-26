@@ -3,6 +3,7 @@ import {
   HENT_PREDIKSJON_HENTER,
   HENT_PREDIKSJON_HENTET,
 } from "./prediksjon_actions";
+import { Reducer } from "redux";
 
 export interface Prediksjon {
   kortereVarighetGrunner: string[];
@@ -26,8 +27,7 @@ export const initialState: PrediksjonState = {
 
   data: null,
 };
-
-const prediksjon = (state = initialState, action = { type: "", data: {} }) => {
+const prediksjon: Reducer<PrediksjonState> = (state = initialState, action) => {
   switch (action.type) {
     case HENT_PREDIKSJON_HENTER: {
       return {

@@ -14,7 +14,7 @@ export interface MoterState {
   senderNyeAlternativ: boolean;
   skalViseFlereAlternativ: boolean;
   antallNyeTidspunkt: number;
-  tilgang: {};
+  tilgang: Record<string, unknown>;
 }
 
 const initialState: MoterState = {

@@ -7,7 +7,7 @@ import {
 } from "./navbruker_actions";
 
 export interface NavbrukerState {
-  data: Brukerinfo | {};
+  data: Brukerinfo | Record<string, unknown>;
 }
 
 export const initialState: NavbrukerState = {

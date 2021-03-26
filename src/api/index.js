@@ -10,10 +10,8 @@ const createLogger = () => {
     window.location.search.indexOf("log=true") > -1 ||
     process.env.NODE_ENV === "development"
   ) {
-    // tslint:disable-next-line
     return console.log;
   }
-  // tslint:disable-next-line
   return () => {};
 };
 

@@ -11,7 +11,7 @@ export interface VirksomhetState {
   hentet: boolean;
   hentingFeilet: boolean;
   hentingForsokt: boolean;
-  data: DokumentinfoDTO | {};
+  data: DokumentinfoDTO | Record<string, unknown>;
 }
 
 export interface DokumentinfoMapState {

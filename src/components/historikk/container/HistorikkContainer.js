@@ -36,7 +36,7 @@ export class HistorikkSide extends Component {
     props.actions.hentLedere(this.props.fnr);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { actions, fnr, ledere } = nextProps;
     if (ledere && ledere.length > 0) {
       actions.hentOppfolgingstilfelleperioder(fnr);

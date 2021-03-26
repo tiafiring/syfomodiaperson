@@ -3,10 +3,11 @@ import {
   HENT_VEDTAK_HENTER,
   HENT_VEDTAK_HENTET,
 } from "./vedtak_actions";
+import { Reducer } from "redux";
 
 export interface VedtakDTO {
-  id: String;
-  lest: Boolean;
+  id: string;
+  lest: boolean;
   lestDato: Date;
   vedtak: Vedtak;
   opprettet: Date;
@@ -58,7 +59,7 @@ export const initialState: VedtakState = {
   data: null,
 };
 
-const vedtak = (state = initialState, action = { type: "", data: [] }) => {
+const vedtak: Reducer<VedtakState> = (state = initialState, action) => {
   switch (action.type) {
     case HENT_VEDTAK_HENTER: {
       return {

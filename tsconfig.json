@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es6",
-    "lib": ["es6", "dom"],
+    "target": "ES2019",
+    "lib": ["es2019", "dom"],
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react",
@@ -11,7 +11,8 @@
     "outDir": "/",
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noImplicitAny": true,
+    //Todo: Endre til true og legg inn returntyper i sagas
+    "noImplicitAny": false,
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true
   },

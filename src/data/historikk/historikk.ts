@@ -30,7 +30,7 @@ export const initialState: HistorikkState = {
 const historikk: Reducer<HistorikkState> = (state = initialState, action) => {
   switch (action.type) {
     case "HISTORIKK_HENTET_MOTER": {
-      const nyHistorikk = action.data.map((event: Historikk) => {
+      const nyHistorikk = action.data.map(() => {
         return Object.assign({}, historikk, {
           kilde: "MOTER",
         });

@@ -11,7 +11,7 @@ export interface VirksomhetState {
   hentet: boolean;
   hentingFeilet: boolean;
   hentingForsokt: boolean;
-  data: Virksomhet | {};
+  data: Virksomhet | Record<string, unknown>;
 }
 
 export interface VirksomhetMapState {

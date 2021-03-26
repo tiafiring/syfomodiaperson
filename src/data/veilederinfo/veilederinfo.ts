@@ -10,7 +10,7 @@ export interface VeilederinfoState {
   hentet: boolean;
   henter: boolean;
   hentingFeilet: boolean;
-  data: VeilederinfoDTO | {};
+  data: VeilederinfoDTO | Record<string, unknown>;
 }
 
 export const initialState: VeilederinfoState = {

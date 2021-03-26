@@ -4,8 +4,7 @@ import { Column, Container, Row } from "nav-frontend-grid";
 import GlobalNavigasjonContainer from "../components/globalnavigasjon/GlobalNavigasjonContainer";
 import Personkort from "../components/personkort/Personkort";
 import Decorator from "../decorator/Decorator";
-
-const DocumentTitle = require("react-document-title");
+import DocumentTitle from "react-document-title";
 
 const StyledContainer = styled(Container)`
   width: 95%;

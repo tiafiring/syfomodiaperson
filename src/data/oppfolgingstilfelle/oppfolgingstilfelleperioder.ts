@@ -11,7 +11,7 @@ export interface OppfolgingstilfelleperioderArbeidsgiverState {
   hentet: boolean;
   hentingFeilet: boolean;
   hentingForsokt: boolean;
-  data: OppfolgingstilfellePersonArbeidsgiver | {};
+  data: OppfolgingstilfellePersonArbeidsgiver | Record<string, any>;
 }
 
 export interface OppfolgingstilfelleperioderMapState {
