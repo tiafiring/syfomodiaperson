@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import AlertStripe from "nav-frontend-alertstriper";
 import * as moterPropTypes from "../../../propTypes";
 import { getDatoFraZulu, erMotePassert } from "../utils";

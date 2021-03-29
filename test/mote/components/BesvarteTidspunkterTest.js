@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import { BrowserRouter, Link } from "react-router-dom";
 import chai from "chai";
 import chaiEnzyme from "chai-enzyme";
 import { mount } from "enzyme";
@@ -82,12 +82,14 @@ describe("BesvarteTidspunkter", () => {
   describe('Når deltakertype === "NAV_VEILEDER" når moteBesvartTrueAvArbeidsgiver', () => {
     beforeEach(() => {
       component = mount(
-        <BesvarteTidspunkter
-          mote={moteBesvartTrueAvArbeidsgiver}
-          alternativer={moteBesvartTrueAvArbeidsgiver.alternativer}
-          deltakertype={NAV_VEILEDER}
-          fnr="123"
-        />
+        <BrowserRouter>
+          <BesvarteTidspunkter
+            mote={moteBesvartTrueAvArbeidsgiver}
+            alternativer={moteBesvartTrueAvArbeidsgiver.alternativer}
+            deltakertype={NAV_VEILEDER}
+            fnr="123"
+          />
+        </BrowserRouter>
       );
     });
 
@@ -110,12 +112,14 @@ describe("BesvarteTidspunkter", () => {
   describe('Når deltakertype === "NAV_VEILEDER" når moteIkkeBesvart', () => {
     beforeEach(() => {
       component = mount(
-        <BesvarteTidspunkter
-          mote={moteIkkeBesvart}
-          alternativer={moteIkkeBesvart.alternativer}
-          deltakertype={NAV_VEILEDER}
-          fnr="123"
-        />
+        <BrowserRouter>
+          <BesvarteTidspunkter
+            mote={moteIkkeBesvart}
+            alternativer={moteIkkeBesvart.alternativer}
+            deltakertype={NAV_VEILEDER}
+            fnr="123"
+          />
+        </BrowserRouter>
       );
     });
 

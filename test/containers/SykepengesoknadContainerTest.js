@@ -47,12 +47,14 @@ describe("SykepengesoknadContainer", () => {
       },
     };
     ownProps = {
-      params: {
-        sykepengesoknadId: "1",
+      match: {
+        params: {
+          sykepengesoknadId: "1",
+        },
       },
     };
     settOwnPropsId = (soknadId) => {
-      ownProps.params.sykepengesoknadId = soknadId;
+      ownProps.match.params.sykepengesoknadId = soknadId;
     };
   });
 

@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import {
-  BRUKER,
   ARBEIDSGIVER,
-  NAV_VEILEDER,
+  BRUKER,
   MULIGE_SVAR,
+  NAV_VEILEDER,
 } from "../../../konstanter";
 import { MoteAlternativDTO, MoteDTO } from "../../../data/mote/types/moteTypes";
 import { MotedeltakerType } from "../../../data/mote/types/MotedeltakerType";

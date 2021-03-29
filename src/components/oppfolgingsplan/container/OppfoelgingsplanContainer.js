@@ -65,7 +65,7 @@ OppfoelgingsPlanerOversiktSide.propTypes = {
 };
 
 export function mapStateToProps(state, ownProps) {
-  const id = parseInt(ownProps.params.oppfoelgingsdialogId, 10);
+  const id = parseInt(ownProps.match.params.oppfoelgingsdialogId, 10);
   const harForsoktHentetAlt = harForsoktHentetOppfoelgingsdialoger(
     state.oppfoelgingsdialoger
   );
@@ -82,7 +82,7 @@ export function mapStateToProps(state, ownProps) {
   return {
     brukernavn: state.navbruker.data.navn,
     oppfoelgingsdialog,
-    fnr: ownProps.params.fnr,
+    fnr: ownProps.match.params.fnr,
     henter,
     hentingFeilet,
     tilgang: state.tilgang.data,

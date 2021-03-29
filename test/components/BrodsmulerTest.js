@@ -3,6 +3,7 @@ import React from "react";
 import { mount, shallow } from "enzyme";
 import chaiEnzyme from "chai-enzyme";
 import Brodsmuler from "../../src/components/speiling/Brodsmuler";
+import { BrowserRouter } from "react-router-dom";
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -41,7 +42,11 @@ describe("Brodsmuler", () => {
         erKlikkbar: false,
       },
     ];
-    component = mount(<Brodsmuler brodsmuler={brodsmuler} />);
+    component = mount(
+      <BrowserRouter>
+        <Brodsmuler brodsmuler={brodsmuler} />
+      </BrowserRouter>
+    );
     expect(component.find("a").length).to.equal(1);
   });
 
@@ -61,7 +66,11 @@ describe("Brodsmuler", () => {
         tittel: "Brødsmule 4",
       },
     ];
-    component = mount(<Brodsmuler brodsmuler={brodsmuler} />);
+    component = mount(
+      <BrowserRouter>
+        <Brodsmuler brodsmuler={brodsmuler} />
+      </BrowserRouter>
+    );
     expect(component.find("a").length).to.equal(2);
   });
 
@@ -93,7 +102,11 @@ describe("Brodsmuler", () => {
           erKlikkbar: false,
         },
       ];
-      component = mount(<Brodsmuler brodsmuler={brodsmuler} />);
+      component = mount(
+        <BrowserRouter>
+          <Brodsmuler brodsmuler={brodsmuler} />
+        </BrowserRouter>
+      );
     });
 
     it("Skal vise en lenke med teksten ...", () => {

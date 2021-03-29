@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { browserHistory } from "react-router";
 import * as menypunkter from "../../enums/menypunkter";
 import cn from "classnames";
 import UnfinishedTasks from "./UnfinishedTasks";
 import { numberOfTasks } from "../../utils/GlobalNavigasjonUtils";
+import { withRouter } from "react-router-dom";
 
 const nokkelinformasjonMenypunkt = {
   navn: "Nøkkelinformasjon",
@@ -121,6 +121,7 @@ class GlobalNavigasjon extends Component {
       oppfolgingsplanerReducer,
       personOppgaverReducer,
       oppfolgingsplanerLPSReducer,
+      history,
     } = this.props;
     this.menypunkter = [
       nokkelinformasjonMenypunkt,
@@ -162,7 +163,7 @@ class GlobalNavigasjon extends Component {
                   e.preventDefault();
                   // Dette gjøres slik for å slippe å laste siden på nytt.
                   // <Link /> fra react-router kan ikke brukes da den ikke støtter ref-attributtet.
-                  browserHistory.push(`/sykefravaer/${fnr}/${sti}`);
+                  history.push(`/sykefravaer/${fnr}/${sti}`);
                 }}
               >
                 <span
@@ -193,6 +194,7 @@ GlobalNavigasjon.propTypes = {
   oppfolgingsplanerLPSReducer: PropTypes.object,
   hentOppfoelgingsdialoger: PropTypes.func,
   hentPersonOppgaver: PropTypes.func,
+  history: PropTypes.object,
 };
 
-export default GlobalNavigasjon;
+export default withRouter(GlobalNavigasjon);

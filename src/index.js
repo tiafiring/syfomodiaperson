@@ -11,7 +11,6 @@ import { hentBehandlendeEnhet } from "./data/behandlendeenhet/behandlendeEnhet_a
 import { hentNavbruker } from "./data/navbruker/navbruker_actions";
 import { hentLedere } from "./data/leder/ledere_actions";
 import { hentPersonAdresse } from "./data/personinfo/personInfo_actions";
-import history from "./history";
 import "./styles/styles.less";
 import { rootReducer } from "./data/rootState";
 
@@ -34,9 +33,9 @@ if (fnrRegex.test(fnr)) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <AppRouter history={history} />
+    <AppRouter />
   </Provider>,
   document.getElementById("maincontent")
 );
 
-export { store, history };
+export { store };

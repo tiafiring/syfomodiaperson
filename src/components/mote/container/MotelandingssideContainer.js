@@ -89,7 +89,7 @@ export const mapStateToProps = (state, ownProps) => {
   const skalViseMotePrikk = isUnfinishedMoterTask(state.moter);
 
   return {
-    fnr: ownProps.params.fnr,
+    fnr: ownProps.match.params.fnr,
     henter: state.tilgang.henter || state.moter.henter,
     hentingFeilet: state.tilgang.hentingFeilet,
     mote: aktivtMote,

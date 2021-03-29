@@ -86,8 +86,10 @@ describe("MotelandingssideContainer", () => {
         },
       };
       ownProps = {
-        params: {
-          fnr: "887766",
+        match: {
+          params: {
+            fnr: "887766",
+          },
         },
       };
     });

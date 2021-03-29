@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import Alertstripe from "nav-frontend-alertstriper";
 import Sidetopp from "../../Sidetopp";
 import {
