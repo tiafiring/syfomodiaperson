@@ -1,5 +1,5 @@
 import { all, call, fork, put, select, takeEvery } from "redux-saga/effects";
-import { get, post } from "../../api/index";
+import { get, post } from "../../api";
 import * as actions from "./personoppgave_actions";
 
 export function* hentPersonOppgaver(action: any) {
