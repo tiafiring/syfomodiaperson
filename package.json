@@ -10,7 +10,8 @@
     "build": "webpack --config webpack.prod.js",
     "sec-audit": "npm audit --audit-level=moderate",
     "lint": "eslint src  --ext .ts  --ext .tsx  --ext .js  --ext .jsx",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "prepare": "husky install"
   },
   "author": "Team DigiSyfo <digisyfo@nav.no>",
   "license": "ISC",
@@ -122,6 +123,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "fetch-mock": "9.10.7",
     "html-webpack-plugin": "4.3.0",
+    "husky": "6.0.0",
     "ignore-styles": "5.0.1",
     "jsdom": "13.1.0",
     "jsdom-global": "3.0.2",

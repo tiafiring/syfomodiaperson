@@ -5,19 +5,16 @@ export const NAV_CONSUMER_ID_HEADER = "nav-consumer-id";
 export const NAV_CONSUMER_ID = "syfomodiaperson";
 export const NAV_PERSONIDENT_HEADER = "nav-personident";
 
-const createLogger = () => {
+const log = (...data: unknown[]): void => {
   if (
     window.location.search.indexOf("log=true") > -1 ||
     process.env.NODE_ENV === "development"
   ) {
-    return console.log;
+    console.log(data);
   }
-  return () => {};
 };
 
-const log = createLogger();
-
-export const hentLoginUrl = () => {
+export const hentLoginUrl = (): string => {
   if (erProd()) {
     return "https://loginservice.nais.adeo.no/login";
   }
@@ -25,7 +22,7 @@ export const hentLoginUrl = () => {
   return "https://loginservice.nais.preprod.local/login";
 };
 
-export const hentRedirectBaseUrl = () => {
+export const hentRedirectBaseUrl = (): string => {
   if (erProd()) {
     return "https://syfomodiaperson.nais.adeo.no/sykefravaer/";
   }
@@ -36,16 +33,13 @@ export const lagreRedirectUrlILocalStorage = (href) => {
   localStorage.setItem("redirecturl", href);
 };
 
-export function get(url, personIdent) {
-  let headers = {
+export function get(url, personIdent): Promise<any> {
+  const headers = {
     [NAV_CONSUMER_ID_HEADER]: NAV_CONSUMER_ID,
   };
-  if (personIdent) {
-    headers = {
-      ...headers,
-      [NAV_PERSONIDENT_HEADER]: personIdent,
-    };
-  }
+
+  if (personIdent) headers[NAV_PERSONIDENT_HEADER] = personIdent;
+
   return fetch(url, {
     credentials: "include",
     headers,
@@ -82,7 +76,7 @@ export function get(url, personIdent) {
     });
 }
 
-export function post(url, body) {
+export function post(url: string, body: Record<string, any>): Promise<any> {
   return fetch(url, {
     credentials: "include",
     method: "POST",
@@ -111,19 +105,6 @@ export function post(url, body) {
         }
         return res;
       }
-    })
-    .catch((err) => {
-      log(err);
-      throw err;
-    });
-}
-
-export function getWithoutThrows(url) {
-  return fetch(url, {
-    credentials: "include",
-  })
-    .then((res) => {
-      return res.json();
     })
     .catch((err) => {
       log(err);
