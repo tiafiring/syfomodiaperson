@@ -196,8 +196,6 @@ const PengestoppModal = ({
 
   return (
     <Modal
-      // @ts-ignore
-      ariaHideApp={false}
       contentLabel={texts.stansSykepenger}
       isOpen={isOpen}
       closeButton={true}

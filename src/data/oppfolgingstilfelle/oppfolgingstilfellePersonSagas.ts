@@ -1,5 +1,5 @@
 import { call, put, fork, takeEvery, select } from "redux-saga/effects";
-import { get } from "../../api/index";
+import { get } from "../../api";
 import * as actions from "./oppfolgingstilfellerperson_actions";
 
 export function* hentOppfolgingstilfellePersonUtenArbeidsgiver(action: any) {
