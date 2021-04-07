@@ -121,7 +121,7 @@ export const mapStateToProps = (state, ownProps) => {
   const allLedere = [...currentLedere, ...formerLedere];
 
   return {
-    fnr: ownProps.params.fnr,
+    fnr: ownProps.match.params.fnr,
     oppfolgingstilfelleperioder,
     historikk: state.historikk,
     henter,

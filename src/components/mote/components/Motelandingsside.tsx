@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { MoteDTO } from "../../../data/mote/types/moteTypes";
 import { tilDatoMedUkedagOgManedNavn } from "../../../utils/datoUtils";
 import Sidetopp from "../../Sidetopp";

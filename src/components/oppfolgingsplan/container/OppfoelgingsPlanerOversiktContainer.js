@@ -123,7 +123,7 @@ export function mapStateToProps(state, ownProps) {
 
   return {
     brukernavn: state.navbruker.data.navn,
-    fnr: ownProps.params.fnr,
+    fnr: ownProps.match.params.fnr,
     henter,
     hentingFeilet,
     inaktiveDialoger,

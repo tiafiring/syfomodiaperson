@@ -6,12 +6,12 @@ import Side from "../../../sider/Side";
 import MotestatusContainer from "./MotestatusContainer";
 import * as moterActions from "../../../data/mote/moter_actions";
 import Lightbox from "../../Lightbox";
-import history from "../../../history";
 import BekreftMote from "../components/BekreftMote";
 import Feilmelding from "../../Feilmelding";
 import AppSpinner from "../../AppSpinner";
 import * as epostinnholdActions from "../../../data/mote/epostinnhold_actions";
 import { MOETEPLANLEGGER } from "../../../enums/menypunkter";
+import { withRouter } from "react-router-dom";
 
 export class BekreftMoteSide extends Component {
   constructor(props) {
@@ -53,6 +53,7 @@ export class BekreftMoteSide extends Component {
       bekreftFeilet,
       hentBekreftMoteEpostinnhold,
       arbeidstaker,
+      history,
     } = this.props;
     return (
       <Side fnr={fnr} tittel="Bekreft møte" aktivtMenypunkt={MOETEPLANLEGGER}>
@@ -117,6 +118,7 @@ BekreftMoteSide.propTypes = {
   hentMoter: PropTypes.func,
   hentBekreftMoteEpostinnhold: PropTypes.func,
   bekreftMote: PropTypes.func,
+  history: PropTypes.object,
 };
 
 export const getMoteFraAlternativId = (moter, alternativId) => {
@@ -135,7 +137,7 @@ export const getMoteFraAlternativId = (moter, alternativId) => {
 };
 
 export const mapStateToProps = (state, ownProps) => {
-  const alternativId = ownProps.params.alternativId;
+  const alternativId = ownProps.match.params.alternativId;
   const mote = getMoteFraAlternativId(state.moter.data, alternativId);
   const alternativ = mote
     ? mote.alternativer.filter((alt) => {
@@ -144,7 +146,7 @@ export const mapStateToProps = (state, ownProps) => {
       })[0]
     : null;
   return {
-    fnr: ownProps.params.fnr,
+    fnr: ownProps.match.params.fnr,
     bekrefter: state.moter.bekrefter,
     bekreftFeilet: state.moter.bekreftFeilet,
     henterMoterBool: state.moter.henter || state.navbruker.henter,
@@ -159,4 +161,4 @@ const BekreftMoteContainer = connect(
   Object.assign({}, moterActions, epostinnholdActions)
 )(BekreftMoteSide);
 
-export default BekreftMoteContainer;
+export default withRouter(BekreftMoteContainer);

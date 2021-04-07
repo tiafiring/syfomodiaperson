@@ -92,7 +92,7 @@ export const mapStateToProps = (state, ownProps) => {
 
   const harForsoktHentetAlt = state.moter.hentingForsokt;
   return {
-    fnr: ownProps.params.fnr,
+    fnr: ownProps.match.params.fnr,
     mote: aktivtMote,
     henter: !harForsoktHentetAlt || state.ledere.henter || state.tilgang.henter,
     sender: state.moter.sender,

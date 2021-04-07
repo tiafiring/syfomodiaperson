@@ -1,6 +1,5 @@
 import { all, call, fork, put, select, takeEvery } from "redux-saga/effects";
 import { post, get } from "../../api";
-import history from "../../history";
 import * as actions from "./moter_actions";
 import * as historikkActions from "../historikk/historikk_actions";
 
@@ -52,7 +51,7 @@ export function* avbrytMote(action: any) {
 
     yield put(actions.moteAvbrutt(action.uuid));
     yield put(historikkActions.hentHistorikk(action.fnr, "MOTER"));
-    history.replace(`/sykefravaer/${action.fnr}/mote`);
+    window.location.href = `/sykefravaer/${action.fnr}/moteoversikt`;
   } catch (e) {
     yield put(actions.avbrytMoteFeilet());
   }
@@ -72,7 +71,6 @@ export function* bekreftMote(action: any) {
       )
     );
     yield put(historikkActions.hentHistorikk(action.fnr, "MOTER"));
-    history.replace(`/sykefravaer/${action.fnr}/mote`);
   } catch (e) {
     yield put(actions.bekreftMoteFeilet());
   }

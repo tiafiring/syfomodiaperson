@@ -171,7 +171,7 @@ export function mapStateToProps(state, ownProps) {
   const henter = !harForsoktHentetAlt || state.tilgang.henter;
   const hentingFeilet = state.tilgang.hentingFeilet;
   const soknad = state.soknader.data.find((s) => {
-    return s.id === ownProps.params.sykepengesoknadId;
+    return s.id === ownProps.match.params.sykepengesoknadId;
   });
   const sykmelding = state.sykmeldinger.data.find((sykmld) => {
     return soknad ? sykmld.id === soknad.sykmeldingId : false;
@@ -179,7 +179,7 @@ export function mapStateToProps(state, ownProps) {
 
   return {
     brukernavn: state.navbruker.data.navn,
-    fnr: ownProps.params.fnr,
+    fnr: ownProps.match.params.fnr,
     henter,
     hentingFeilet,
     tilgang: state.tilgang.data,

@@ -1,6 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Router, Route } from "react-router";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import IngenBrukerContainer from "../containers/IngenBrukerContainer";
 import MotebookingContainer from "../components/mote/container/MotebookingContainer";
 import AvbrytMoteContainer from "../components/mote/container/AvbrytMoteContainer";
@@ -18,77 +17,92 @@ import MotebehovContainer from "../components/motebehov/container/MotebehovConta
 import NokkelinformasjonContainer from "../components/nokkelinformasjon/container/NokkelinformasjonContainer";
 import VedtakContainer from "../components/vedtak/container/VedtakContainer";
 
-const AppRouter = ({ history }) => {
+const AppRouter = () => {
   const fnr = window.location.pathname.split("/")[2];
   if (!erGyldigFodselsnummer(fnr)) {
     return (
-      <Router history={history}>
+      <Router>
         <Route path="*" component={IngenBrukerContainer} />
       </Router>
     );
   }
 
   return (
-    <Router history={history}>
-      <Route path="/sykefravaer/:fnr" component={NokkelinformasjonContainer} />
+    <Router>
+      <Route
+        path="/sykefravaer/:fnr"
+        exact
+        component={NokkelinformasjonContainer}
+      />
       <Route
         path="/sykefravaer/:fnr/nokkelinformasjon"
+        exact
         component={NokkelinformasjonContainer}
       />
       <Route path="/sykefravaer/:fnr/logg" component={HistorikkContainer} />
       <Route
         path="/sykefravaer/:fnr/moteoversikt"
+        exact
         component={MotelandingssideContainer}
       />
-      <Route path="/sykefravaer/:fnr/mote" component={MotebookingContainer} />
+      <Route
+        path="/sykefravaer/:fnr/mote"
+        exact
+        component={MotebookingContainer}
+      />
       <Route
         path="/sykefravaer/:fnr/motebehov"
+        exact
         component={MotebehovContainer}
       />
       <Route
         path="/sykefravaer/:fnr/mote/:moteUuid/avbryt"
+        exact
         component={AvbrytMoteContainer}
       />
       <Route
         path="/sykefravaer/:fnr/mote/bekreft/:alternativId"
+        exact
         component={BekreftMoteContainer}
       />
       <Route
         path="/sykefravaer/:fnr/sykmeldinger"
+        exact
         component={SykmeldingerContainer}
       />
       <Route
         path="/sykefravaer/:fnr/sykepengesoknader"
+        exact
         component={SykepengesoknaderContainer}
       />
       <Route
         path="/sykefravaer/:fnr/sykepengesoknader/:sykepengesoknadId"
+        exact
         component={SykepengesoknadContainer}
       />
       <Route
         path="/sykefravaer/:fnr/sykmeldinger/:sykmeldingId"
+        exact
         component={DinSykmeldingContainer}
       />
       <Route
         path="/sykefravaer/:fnr/oppfoelgingsplaner"
+        exact
         component={OppfoelgingsPlanerOversiktContainer}
       />
       <Route
         path="/sykefravaer/:fnr/oppfoelgingsplaner/:oppfoelgingsdialogId"
+        exact
         component={OppfoelgingsplanContainer}
       />
-      <Route path="/sykefravaer/:fnr/vedtak" component={VedtakContainer} />
       <Route
-        path="/sykefravaer/:fnr/*"
-        component={NokkelinformasjonContainer}
+        path="/sykefravaer/:fnr/vedtak"
+        exact
+        component={VedtakContainer}
       />
-      <Route path="/sykefravaer" component={IngenBrukerContainer} />
+      <Route path="/sykefravaer" exact component={IngenBrukerContainer} />
     </Router>
   );
-};
-
-AppRouter.propTypes = {
-  history: PropTypes.object.isRequired,
 };
 
 export default AppRouter;

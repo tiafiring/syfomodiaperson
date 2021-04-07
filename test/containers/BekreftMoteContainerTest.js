@@ -121,9 +121,11 @@ describe("BekreftMoteContainer", () => {
 
     beforeEach(() => {
       ownProps = {
-        params: {
-          alternativId: "328",
-          fnr: "123",
+        match: {
+          params: {
+            alternativId: "328",
+            fnr: "123",
+          },
         },
       };
       state = {

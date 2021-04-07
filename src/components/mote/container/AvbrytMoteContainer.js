@@ -6,9 +6,9 @@ import Lightbox from "../../Lightbox";
 import Feilmelding from "../../Feilmelding";
 import Side from "../../../sider/Side";
 import AvbrytMote from "../components/AvbrytMote";
-import history from "../../../history";
 import * as moterActions from "../../../data/mote/moter_actions";
 import * as epostinnholdActions from "../../../data/mote/epostinnhold_actions";
+import { withRouter } from "react-router-dom";
 
 export class AvbrytMoteSide extends Component {
   constructor(props) {
@@ -37,6 +37,7 @@ export class AvbrytMoteSide extends Component {
       mote,
       henter,
       arbeidstaker,
+      history,
     } = this.props;
     return (
       <Side fnr={fnr} tittel="Avbryt møteforespørsel">
@@ -87,14 +88,15 @@ AvbrytMoteSide.propTypes = {
   hentMoter: PropTypes.func,
   avbrytMote: PropTypes.func,
   avbrytFeilet: PropTypes.bool,
+  history: PropTypes.object,
 };
 
 export function mapStateToProps(state, ownProps) {
   const mote = state.moter.data.filter((m) => {
-    return m.moteUuid === ownProps.params.moteUuid;
+    return m.moteUuid === ownProps.match.params.moteUuid;
   })[0];
   return {
-    fnr: ownProps.params.fnr,
+    fnr: ownProps.match.params.fnr,
     mote,
     arbeidstaker: state.navbruker.data,
     hentingFeiletBool:
@@ -110,4 +112,4 @@ const AvbrytMoteContainer = connect(
   Object.assign({}, moterActions, epostinnholdActions)
 )(AvbrytMoteSide);
 
-export default AvbrytMoteContainer;
+export default withRouter(AvbrytMoteContainer);
