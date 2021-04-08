@@ -13,7 +13,6 @@ import DinSykmeldingContainer from "../components/speiling/sykmeldinger/containe
 import HistorikkContainer from "../components/historikk/container/HistorikkContainer";
 import { erGyldigFodselsnummer } from "../utils/frnValideringUtils";
 import MotelandingssideContainer from "../components/mote/container/MotelandingssideContainer";
-import MotebehovContainer from "../components/motebehov/container/MotebehovContainer";
 import NokkelinformasjonContainer from "../components/nokkelinformasjon/container/NokkelinformasjonContainer";
 import VedtakContainer from "../components/vedtak/container/VedtakContainer";
 
@@ -49,11 +48,6 @@ const AppRouter = () => {
         path="/sykefravaer/:fnr/mote"
         exact
         component={MotebookingContainer}
-      />
-      <Route
-        path="/sykefravaer/:fnr/motebehov"
-        exact
-        component={MotebehovContainer}
       />
       <Route
         path="/sykefravaer/:fnr/mote/:moteUuid/avbryt"

@@ -4,6 +4,7 @@ import { MoteDTO } from "../../../data/mote/types/moteTypes";
 import { tilDatoMedUkedagOgManedNavn } from "../../../utils/datoUtils";
 import Sidetopp from "../../Sidetopp";
 import MotelandingssidePrikk from "./MotelandingssidePrikk";
+import MotebehovSide from "../../motebehov/MotebehovSide";
 
 const texts = {
   pageHeader: "Dialogmøter",
@@ -18,10 +19,6 @@ const texts = {
       requestSent: "Møteforespørsel sendt",
       noMeetings: "Ingen møter planlagt",
     },
-  },
-  motebehovElement: {
-    title: "BEHOV FOR DIALOGMØTE",
-    subtitle: "Avklaring om møtebehov",
   },
 };
 
@@ -63,99 +60,50 @@ export const MotelandingssideMoteElement = (
   const undertittel = setUndertittel(mote);
   const tittel = setTittel(mote);
   return (
-    <li className="motelandingssidepanel">
-      <Link
-        className="motelandingssidepanel__innhold"
-        to={`/sykefravaer/${fnr}/mote`}
-      >
-        <img
-          className="motelandingssidepanel__ikon"
-          src="/sykefravaer/img/svg/moteikon_blaabg.svg"
-          alt="moteikon"
-        />
-        <div className="motelandingssidepanel__tekst">
-          <header className="motelandingssidepanel__tekst--tittel">
-            <h3 className="js-title" id="soknad-header-mote">
-              {tittel}
-            </h3>
-          </header>
-          <p className="inngangspanel__tekst--undertittel js-tekst">
-            {undertittel}
-          </p>
-        </div>
-        {skalVisePrikk && <MotelandingssidePrikk />}
-      </Link>
-    </li>
-  );
-};
-
-interface MotelandingssideMotebehovElementProps {
-  fnr: string;
-  skalVisePrikk: boolean;
-}
-
-export const MotelandingssideMotebehovElement = (
-  motelandingssideMotebehovElementProps: MotelandingssideMotebehovElementProps
-) => {
-  const { fnr, skalVisePrikk } = motelandingssideMotebehovElementProps;
-  return (
-    <li className="motelandingssidepanel">
-      <Link
-        className="motelandingssidepanel__innhold"
-        to={`/sykefravaer/${fnr}/motebehov`}
-      >
-        <img
-          className="motelandingssidepanel__ikon"
-          src="/sykefravaer/img/svg/moteikon_blaabg.svg"
-          alt="moteikon"
-        />
-        <div className="motelandingssidepanel__tekst">
-          <header className="motelandingssidepanel__tekst--tittel">
-            <h3 className="js-title" id="soknad-header-mote">
-              {texts.motebehovElement.title}
-            </h3>
-          </header>
-          <p className="inngangspanel__tekst--undertittel js-tekst">
-            {texts.motebehovElement.subtitle}
-          </p>
-        </div>
-        {skalVisePrikk && <MotelandingssidePrikk />}
-      </Link>
-    </li>
+    <Link
+      className="motelandingssidepanel__innhold"
+      to={`/sykefravaer/${fnr}/mote`}
+    >
+      <img
+        className="motelandingssidepanel__ikon"
+        src="/sykefravaer/img/svg/moteikon_blaabg.svg"
+        alt="moteikon"
+      />
+      <div className="motelandingssidepanel__tekst">
+        <header className="motelandingssidepanel__tekst--tittel">
+          <h3 className="js-title" id="soknad-header-mote">
+            {tittel}
+          </h3>
+        </header>
+        <p className="inngangspanel__tekst--undertittel js-tekst">
+          {undertittel}
+        </p>
+      </div>
+      {skalVisePrikk && <MotelandingssidePrikk />}
+    </Link>
   );
 };
 
 interface MotelandingssideProps {
   fnr: string;
   mote: MoteDTO;
-  skalViseMotebehovPrikk: boolean;
   skalViseMotePrikk: boolean;
 }
 
 export const Motelandingsside = (
   motelandingssideProps: MotelandingssideProps
 ) => {
-  const {
-    fnr,
-    mote,
-    skalViseMotebehovPrikk,
-    skalViseMotePrikk,
-  } = motelandingssideProps;
+  const { fnr, mote, skalViseMotePrikk } = motelandingssideProps;
   return (
-    <div>
+    <>
       <Sidetopp tittel={texts.pageHeader} />
-      <ul>
-        <MotelandingssideMoteElement
-          fnr={fnr}
-          mote={mote}
-          skalVisePrikk={skalViseMotePrikk}
-        />
-        <MotelandingssideMotebehovElement
-          fnr={fnr}
-          skalVisePrikk={skalViseMotebehovPrikk}
-        />
-      </ul>
-    </div>
+      <MotelandingssideMoteElement
+        fnr={fnr}
+        mote={mote}
+        skalVisePrikk={skalViseMotePrikk}
+      />
+      <MotebehovSide fnr={fnr} />
+    </>
   );
 };
 

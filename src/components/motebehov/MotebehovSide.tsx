@@ -1,36 +1,36 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { OppfolgingsplanerState } from "../../../data/oppfolgingsplan/oppfoelgingsdialoger";
-import { MOETEPLANLEGGER } from "../../../enums/menypunkter";
-import { hentBegrunnelseTekst } from "../../../utils/tilgangUtils";
+import { OppfolgingsplanerState } from "../../data/oppfolgingsplan/oppfoelgingsdialoger";
+import { hentBegrunnelseTekst } from "../../utils/tilgangUtils";
 import {
   sorterMotebehovDataEtterDato,
   motebehovlisteMedKunJaSvar,
   motebehovFromLatestActiveTilfelle,
-} from "../../../utils/motebehovUtils";
+} from "../../utils/motebehovUtils";
 import {
   harForsoktHentetLedere,
   harForsoktHentetMotebehov,
   harForsoktHentetOppfoelgingsdialoger,
-} from "../../../utils/reducerUtils";
-import { ledereUtenMotebehovsvar } from "../../../utils/ledereUtils";
-import { hentLedere } from "../../../data/leder/ledere_actions";
-import { hentMotebehov } from "../../../data/motebehov/motebehov_actions";
-import { hentOppfoelgingsdialoger } from "../../../data/oppfolgingsplan/oppfoelgingsdialoger_actions";
-import { hentOppfolgingstilfelleperioder } from "../../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder_actions";
-import { hentSykmeldinger } from "../../../data/sykmelding/sykmeldinger_actions";
-import Side from "../../../sider/Side";
-import Feilmelding from "../../Feilmelding";
-import AppSpinner from "../../AppSpinner";
-import Motebehov from "../Motebehov";
+} from "../../utils/reducerUtils";
+import { ledereUtenMotebehovsvar } from "../../utils/ledereUtils";
+import { hentLedere } from "../../data/leder/ledere_actions";
+import { hentMotebehov } from "../../data/motebehov/motebehov_actions";
+import { hentOppfoelgingsdialoger } from "../../data/oppfolgingsplan/oppfoelgingsdialoger_actions";
+import { hentOppfolgingstilfelleperioder } from "../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder_actions";
+import { hentSykmeldinger } from "../../data/sykmelding/sykmeldinger_actions";
+import Feilmelding from "../Feilmelding";
+import AppSpinner from "../AppSpinner";
+import Motebehov from "./Motebehov";
 
 const texts = {
   feilmelding: "Du har ikke tilgang til denne tjenesten",
 };
 
-const MotebehovSide = () => {
-  const fnr = window.location.pathname.split("/")[2];
+interface MotebehovSideProps {
+  fnr: string;
+}
 
+const MotebehovSide = ({ fnr }: MotebehovSideProps) => {
   const oppfolgingsplanerState: OppfolgingsplanerState = useSelector(
     (state: any) => state.oppfoelgingsdialoger
   );
@@ -105,49 +105,43 @@ const MotebehovSide = () => {
   const henter = !harForsoktHentetAlt;
   const hentingFeilet = motebehovState.hentingFeilet;
 
+  if (henter) {
+    return <AppSpinner />;
+  }
+  if (!tilgang.harTilgang) {
+    return (
+      <Feilmelding
+        tittel={texts.feilmelding}
+        melding={hentBegrunnelseTekst(tilgang.begrunnelse)}
+      />
+    );
+  }
+  if (motebehovTilgang.harTilgang === false) {
+    return (
+      <Feilmelding
+        tittel={texts.feilmelding}
+        melding={hentBegrunnelseTekst(motebehovTilgang.begrunnelse)}
+      />
+    );
+  }
+  if (hentingFeilet) {
+    return <Feilmelding />;
+  }
   return (
-    <Side fnr={fnr} tittel="Møtebehov" aktivtMenypunkt={MOETEPLANLEGGER}>
-      {(() => {
-        if (henter) {
-          return <AppSpinner />;
-        }
-        if (!tilgang.harTilgang) {
-          return (
-            <Feilmelding
-              tittel={texts.feilmelding}
-              melding={hentBegrunnelseTekst(tilgang.begrunnelse)}
-            />
-          );
-        }
-        if (motebehovTilgang.harTilgang === false) {
-          return (
-            <Feilmelding
-              tittel={texts.feilmelding}
-              melding={hentBegrunnelseTekst(motebehovTilgang.begrunnelse)}
-            />
-          );
-        }
-        if (hentingFeilet) {
-          return <Feilmelding />;
-        }
-        return (
-          <Motebehov
-            fnr={fnr}
-            ledereData={ledereData}
-            ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
-            motebehovListe={activeMotebehovSvar}
-            sykmeldt={sykmeldt}
-            motebehovListeMedJaSvarTilOppgavebehandling={
-              motebehovListeMedJaSvarTilOppgavebehandling
-            }
-            veilederinfo={veilederinfo}
-            aktiveDialoger={aktiveDialoger}
-            oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
-            sykmeldinger={sykmeldinger}
-          />
-        );
-      })()}
-    </Side>
+    <Motebehov
+      fnr={fnr}
+      ledereData={ledereData}
+      ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
+      motebehovListe={activeMotebehovSvar}
+      sykmeldt={sykmeldt}
+      motebehovListeMedJaSvarTilOppgavebehandling={
+        motebehovListeMedJaSvarTilOppgavebehandling
+      }
+      veilederinfo={veilederinfo}
+      aktiveDialoger={aktiveDialoger}
+      oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
+      sykmeldinger={sykmeldinger}
+    />
   );
 };
 
