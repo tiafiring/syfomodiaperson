@@ -8,8 +8,13 @@ import { OppfolgingsplanDTO } from "../../data/oppfolgingsplan/oppfoelgingsdialo
 import BehandleMotebehovKnapp from "./BehandleMotebehovKnapp";
 import MotebehovKvittering from "./MotebehovKvittering";
 import PrediksjonVisning from "../Prediksjon/PrediksjonVisning";
-import Sidetopp from "../Sidetopp";
 import UtdragFraSykefravaeret from "./UtdragFraSykefravaeret";
+import Panel from "nav-frontend-paneler";
+import { Systemtittel } from "nav-frontend-typografi";
+
+const texts = {
+  title: "Innmeldt behov for dialogmøte",
+};
 
 interface MotebehovProps {
   aktiveDialoger: OppfolgingsplanDTO[];
@@ -49,21 +54,23 @@ const Motebehov = (motebehovProps: MotebehovProps) => {
   }, []);
 
   return (
-    <div className="motebehovSide">
-      <Sidetopp tittel={"Behov for dialogmøte"} />
-      {motebehovListeMedJaSvarTilOppgavebehandling.length > 0 && (
-        <BehandleMotebehovKnapp
-          fnr={fnr}
-          motebehovListe={motebehovListeMedJaSvarTilOppgavebehandling}
-          veilederinfo={veilederinfo}
+    <>
+      <Panel className="blokk">
+        <Systemtittel>{texts.title}</Systemtittel>
+        <MotebehovKvittering
+          ledereData={ledereData}
+          ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
+          motebehovListe={motebehovListe}
+          sykmeldt={sykmeldt}
         />
-      )}
-      <MotebehovKvittering
-        ledereData={ledereData}
-        ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
-        motebehovListe={motebehovListe}
-        sykmeldt={sykmeldt}
-      />
+        {motebehovListeMedJaSvarTilOppgavebehandling.length > 0 && (
+          <BehandleMotebehovKnapp
+            fnr={fnr}
+            motebehovListe={motebehovListeMedJaSvarTilOppgavebehandling}
+            veilederinfo={veilederinfo}
+          />
+        )}
+      </Panel>
 
       {erLokal() && <PrediksjonVisning fnr={fnr} />}
 
@@ -73,14 +80,7 @@ const Motebehov = (motebehovProps: MotebehovProps) => {
         oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
         sykmeldinger={sykmeldinger}
       />
-      {motebehovListeMedJaSvarTilOppgavebehandling.length > 0 && (
-        <BehandleMotebehovKnapp
-          fnr={fnr}
-          motebehovListe={motebehovListeMedJaSvarTilOppgavebehandling}
-          veilederinfo={veilederinfo}
-        />
-      )}
-    </div>
+    </>
   );
 };
 

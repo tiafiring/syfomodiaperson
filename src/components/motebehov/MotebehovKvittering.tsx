@@ -229,7 +229,7 @@ const MotebehovKvittering = (
     sykmeldt,
   } = motebehovKvitteringProps;
   return (
-    <div className="panel motebehovKvitteringInnhold">
+    <div className="motebehovKvitteringInnhold">
       <MotebehovKvitteringInnholdArbeidstaker
         arbeidstakersMotebehov={finnArbeidstakerMotebehovSvar(motebehovListe)}
         sykmeldt={sykmeldt}
