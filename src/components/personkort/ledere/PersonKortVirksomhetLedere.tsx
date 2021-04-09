@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Row, Column } from "nav-frontend-grid";
-import { EtikettLiten } from "nav-frontend-typografi";
+import { Undertekst } from "nav-frontend-typografi";
 import { Leder } from "../../../data/leder/ledere";
 import { restdatoTildato } from "../../../utils/datoUtils";
 import PersonKortVirksomhetHeader from "./PersonKortVirksomhetHeader";
@@ -21,7 +21,7 @@ const RowFullWidth = styled(Row)`
   margin-bottom: 0.5em;
 `;
 
-const EtikettLitenUpper = styled(EtikettLiten)`
+const UndertekstUppercase = styled(Undertekst)`
   text-transform: uppercase;
 `;
 
@@ -29,16 +29,16 @@ export const PersonKortVirksomhetLederIngressRow = () => {
   return (
     <RowFullWidth>
       <Column className="col-sm-4">
-        <EtikettLitenUpper>{texts.name}</EtikettLitenUpper>
+        <UndertekstUppercase>{texts.name}</UndertekstUppercase>
       </Column>
       <Column className="col-sm-2">
-        <EtikettLitenUpper>{texts.email}</EtikettLitenUpper>
+        <UndertekstUppercase>{texts.email}</UndertekstUppercase>
       </Column>
       <Column className="col-sm-2">
-        <EtikettLitenUpper>{texts.phone}</EtikettLitenUpper>
+        <UndertekstUppercase>{texts.phone}</UndertekstUppercase>
       </Column>
       <Column className="col-sm-2">
-        <EtikettLitenUpper>{texts.startDate}</EtikettLitenUpper>
+        <UndertekstUppercase>{texts.startDate}</UndertekstUppercase>
       </Column>
     </RowFullWidth>
   );

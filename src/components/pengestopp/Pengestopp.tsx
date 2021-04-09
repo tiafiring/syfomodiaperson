@@ -45,11 +45,11 @@ interface KnappWithExplanationProps {
   handleClick: () => void;
 }
 
-const KnappWithExplanation = ({ handleClick }: KnappWithExplanationProps) => {
-  const StyledP = styled.p`
-    padding: 1em 0;
-  `;
+const StyledP = styled.p`
+  padding: 1em 0;
+`;
 
+const KnappWithExplanation = ({ handleClick }: KnappWithExplanationProps) => {
   return (
     <>
       <Knapp onClick={handleClick}>{texts.stansSykepenger}</Knapp>
@@ -93,7 +93,6 @@ const Pengestopp = ({ sykmeldinger }: IPengestoppProps) => {
       {sykmeldtNotEligible && (
         <Alert type="feil">{texts.sykmeldtNotEligibleError}</Alert>
       )}
-
       <KnappWithExplanation
         handleClick={() => {
           toggleModal(uniqueArbeidsgivereWithSykmeldingLast3Months);
@@ -106,7 +105,6 @@ const Pengestopp = ({ sykmeldinger }: IPengestoppProps) => {
           sykmeldinger={sykmeldinger}
         />
       )}
-
       <p>{texts.gosys}</p>
       <PengestoppModal
         arbeidsgivere={uniqueArbeidsgivereWithSykmeldingLast3Months}
