@@ -1,182 +1,191 @@
 import React from "react";
 import { expect } from "chai";
-import { shallow } from "enzyme";
-import sinon from "sinon";
+import { mount } from "enzyme";
 import AppSpinner from "../../src/components/AppSpinner";
 import Feilmelding from "../../src/components/Feilmelding";
-import {
-  mapStateToProps,
-  MotelandingssideSide,
-} from "../../src/components/mote/container/MotelandingssideContainer";
+import configureStore from "redux-mock-store";
+import { Provider } from "react-redux";
+import Motelandingsside from "../../src/components/mote/components/Motelandingsside";
+import { MemoryRouter } from "react-router-dom";
+import { createStore } from "redux";
+import { rootReducer } from "../../src/data/rootState";
+
+const realState = createStore(rootReducer).getState();
 
 describe("MotelandingssideContainer", () => {
   describe("MotelandingssideSide", () => {
-    let hentMoter;
-    let tilgang;
     let component;
+    let store;
+    let mockState;
 
     beforeEach(() => {
-      hentMoter = sinon.spy();
-      tilgang = {
-        harTilgang: true,
+      store = configureStore([]);
+      mockState = {
+        tilgang: {
+          data: {
+            harTilgang: true,
+          },
+        },
+        navbruker: {
+          data: {
+            kontaktinfo: {
+              fnr: "19026900010",
+            },
+          },
+        },
+        moter: {
+          data: [],
+        },
       };
     });
 
-    it("Skal vise AppSpinner", () => {
-      component = shallow(
-        <MotelandingssideSide tilgang={tilgang} hentMoter={hentMoter} henter />
+    it("Skal vise AppSpinner når henter tilgang", () => {
+      mockState.tilgang = {
+        henter: true,
+      };
+      component = mount(
+        <Provider store={store({ ...realState, ...mockState })}>
+          <Motelandingsside fnr="19026900010" />
+        </Provider>
+      );
+
+      expect(component.find(AppSpinner)).to.have.length(1);
+    });
+
+    it("Skal vise AppSpinner når henter møter", () => {
+      mockState.moter = {
+        henter: true,
+        data: [],
+      };
+      component = mount(
+        <Provider store={store({ ...realState, ...mockState })}>
+          <Motelandingsside fnr="19026900010" />
+        </Provider>
       );
 
       expect(component.find(AppSpinner)).to.have.length(1);
     });
 
     it("Skal hente møter ved init", () => {
-      component = shallow(
-        <MotelandingssideSide
-          tilgang={tilgang}
-          fnr="123"
-          hentMoter={hentMoter}
-          mote={{}}
-        />
+      mockState.tilgang = {
+        data: {
+          harTilgang: false,
+        },
+      };
+      const mockStore = store({ ...realState, ...mockState });
+      component = mount(
+        <Provider store={mockStore}>
+          <Motelandingsside fnr="19026900010" />
+        </Provider>
       );
-      expect(hentMoter.calledOnce).to.be.equal(true);
-      expect(hentMoter.calledWith("123")).to.be.equal(true);
+
+      const expectedActions = [
+        { type: "HENT_MOTER_FORESPURT", fnr: "19026900010" },
+      ];
+      expect(mockStore.getActions()).to.deep.equal(expectedActions);
     });
 
-    it("Skal vise feilmelding hvis hentingFeilet", () => {
-      component = shallow(
-        <MotelandingssideSide
-          tilgang={tilgang}
-          hentMoter={hentMoter}
-          mote={{}}
-          hentingFeilet
-        />
+    it("Skal vise feilmelding hvis ikke tilgang", () => {
+      mockState.tilgang = {
+        data: {
+          harTilgang: false,
+        },
+      };
+      component = mount(
+        <Provider store={store({ ...realState, ...mockState })}>
+          <Motelandingsside fnr="19026900010" />
+        </Provider>
       );
 
       expect(component.find(Feilmelding)).to.have.length(1);
     });
-  });
 
-  describe("mapStateToProps", () => {
-    let state;
-    let ownProps;
-
-    beforeEach(() => {
-      state = {
-        navbruker: {
-          data: {
-            fnr: "887766",
-          },
-        },
-        moter: {
-          data: [],
-        },
-        motebehov: {
-          data: [],
-        },
-        virksomhet: {
-          navn: "BEKK",
-        },
-        tilgang: {
-          data: {
-            harTilgang: true,
-          },
-          hentingFeilet: false,
-          henter: false,
+    it("Skal vise feilmelding hvis hentingFeilet", () => {
+      mockState.tilgang = {
+        hentingFeilet: true,
+        data: {
+          harTilgang: true,
         },
       };
-      ownProps = {
-        match: {
-          params: {
-            fnr: "887766",
+      component = mount(
+        <Provider store={store({ ...realState, ...mockState })}>
+          <Motelandingsside fnr="19026900010" />
+        </Provider>
+      );
+
+      expect(component.find(Feilmelding)).to.have.length(1);
+    });
+
+    it("Skal vise Se møtestatus når møte opprettet", () => {
+      mockState.moter = {
+        data: [
+          {
+            id: 1,
+            status: "OPPRETTET",
           },
-        },
+        ],
       };
+      component = mount(
+        <Provider store={store({ ...realState, ...mockState })}>
+          <MemoryRouter>
+            <Motelandingsside fnr="887766" />
+          </MemoryRouter>
+        </Provider>
+      );
+
+      expect(component.find("h3").text()).to.equal("Se møtestatus");
     });
 
-    it("Skal returnere fnr", () => {
-      const props = mapStateToProps(state, ownProps);
+    it("Skal vise Bekreftet møte når møte bekreftet", () => {
+      mockState.moter = {
+        data: [
+          {
+            id: 1,
+            status: "BEKREFTET",
+          },
+        ],
+      };
+      component = mount(
+        <Provider store={store({ ...realState, ...mockState })}>
+          <MemoryRouter>
+            <Motelandingsside fnr="887766" />
+          </MemoryRouter>
+        </Provider>
+      );
 
-      expect(props.fnr).to.equal("887766");
+      expect(component.find("h3").text()).to.equal("Bekreftet møte");
     });
 
-    it("Skal returnere opprettet møte", () => {
-      state.moter.data = [
-        {
-          id: 1,
-          status: "OPPRETTET",
-        },
-      ];
+    it("Skal vise Forespør møte når møte avbrutt", () => {
+      mockState.moter = {
+        data: [
+          {
+            id: 1,
+            status: "AVBRUTT",
+          },
+        ],
+      };
+      component = mount(
+        <Provider store={store({ ...realState, ...mockState })}>
+          <MemoryRouter>
+            <Motelandingsside fnr="887766" />
+          </MemoryRouter>
+        </Provider>
+      );
 
-      const props = mapStateToProps(state, ownProps);
-
-      expect(props.mote).to.deep.equal({
-        id: 1,
-        status: "OPPRETTET",
-      });
+      expect(component.find("h3").text()).to.equal("Forespør møte");
     });
 
-    it("Skal returnere BEKREFTET møte", () => {
-      state.moter.data = [
-        {
-          id: 1,
-          status: "BEKREFTET",
-        },
-      ];
+    it("Skal vise Forespør møte når det ikke finnes møter", () => {
+      component = mount(
+        <Provider store={store({ ...realState, ...mockState })}>
+          <MemoryRouter>
+            <Motelandingsside fnr="887766" />
+          </MemoryRouter>
+        </Provider>
+      );
 
-      const props = mapStateToProps(state, ownProps);
-
-      expect(props.mote).to.deep.equal({
-        id: 1,
-        status: "BEKREFTET",
-      });
-    });
-
-    it("Skal ikke returnere avbrutt mote", () => {
-      state.moter.data = [
-        {
-          id: 1,
-          status: "AVBRUTT",
-        },
-      ];
-
-      const props = mapStateToProps(state, ownProps);
-
-      expect(props.mote).to.be.equal(undefined);
-    });
-
-    it("Skal returnere mote === undefined dersom det ikke finnes møter", () => {
-      state.moter.data = [];
-
-      const props = mapStateToProps(state, ownProps);
-
-      expect(props.mote).to.be.equal(undefined);
-    });
-
-    it("Skal returnere henter når det hentes møter", () => {
-      state.moter.data = [
-        {
-          id: 1,
-        },
-      ];
-      state.moter.henter = true;
-
-      const props = mapStateToProps(state, ownProps);
-
-      expect(props.henter).to.be.equal(true);
-    });
-
-    it("Skal returnere henter når det ikke hentes møter", () => {
-      state.moter.data = [
-        {
-          id: 1,
-        },
-      ];
-      state.moter.henter = false;
-
-      const props = mapStateToProps(state, ownProps);
-
-      expect(props.henter).to.be.equal(false);
+      expect(component.find("h3").text()).to.equal("Forespør møte");
     });
   });
 });
