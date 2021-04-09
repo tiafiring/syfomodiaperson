@@ -66,7 +66,7 @@ const VedtakEkspanderbartPanel = (
   } = panelProps;
   const dispatch = useDispatch();
   const virksomhetState = useSelector((state: any) => state.virksomhet);
-  const [arbeidsgiver, setArbeidsgiver] = useState<string>();
+  const [arbeidsgiver, setArbeidsgiver] = useState<string>("");
   const orgnr = vedtakPerArbeidsgiver[0].vedtak.organisasjonsnummer;
 
   useEffect(() => {

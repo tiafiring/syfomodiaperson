@@ -1,23 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { applyMiddleware, createStore } from "redux";
 import { Provider } from "react-redux";
-import createSagaMiddleware from "redux-saga";
 import AppRouter from "./routers/AppRouter";
-import rootSaga from "./data/rootSaga";
 import { sjekkTilgang } from "./data/tilgang/tilgang_actions";
 import { hentVeilederinfo } from "./data/veilederinfo/veilederinfo_actions";
 import { hentBehandlendeEnhet } from "./data/behandlendeenhet/behandlendeEnhet_actions";
 import { hentNavbruker } from "./data/navbruker/navbruker_actions";
 import { hentLedere } from "./data/leder/ledere_actions";
 import { hentPersonAdresse } from "./data/personinfo/personInfo_actions";
+import { setupStore } from "./data/store";
 import "./styles/styles.less";
-import { rootReducer } from "./data/rootState";
 
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-
-sagaMiddleware.run(rootSaga);
+const store = setupStore();
 
 const fnr = window.location.pathname.split("/")[2];
 
