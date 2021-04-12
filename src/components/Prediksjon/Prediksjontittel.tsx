@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
 
 const texts = {
-  title: "Vil den sykmeldte fortsatt være sykmeldt etter uke 26?",
+  title: "Vil den sykmeldte fortsatt være sykmeldt etter uke 28?",
   info: {
     title: "Om beregningen",
     subtitle:
