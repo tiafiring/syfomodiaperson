@@ -5,6 +5,10 @@ import PersonkortElement from "./PersonkortElement";
 import PersonkortInformasjon from "./PersonkortInformasjon";
 import { FastlegerState } from "../../data/fastlege/fastleger";
 import { Fastlege } from "../../data/fastlege/types/Fastlege";
+import {
+  MedisinboksImage,
+  MedisinskrinImage,
+} from "../../../img/ImageComponents";
 
 const texts = {
   startDate: "Brukers fastlege siden",
@@ -38,7 +42,8 @@ export const TidligereLeger = (tidligereLegerProps: TidligereLegerProps) => {
   return fastlegerMedPasientforhold.length > 0 ? (
     <PersonkortElement
       tittel="Tidligere fastleger"
-      imgUrl="/sykefravaer/img/svg/medisinboks.svg"
+      imgUrl={MedisinboksImage}
+      imgAlt="Medisinboks"
     >
       <ul>
         {fastlegerMedPasientforhold.map((lege, idx) => {
@@ -88,7 +93,8 @@ const PersonkortLege = (personkortLegeProps: PersonkortLegeProps) => {
     <>
       <PersonkortElement
         tittel={hentTekstFastlegeNavn(aktivFastlege)}
-        imgUrl="/sykefravaer/img/svg/medisinskrin.svg"
+        imgUrl={MedisinskrinImage}
+        imgAlt="Medisinskrin"
       >
         <PersonkortInformasjon
           informasjonNokkelTekster={informasjonNokkelTekster}

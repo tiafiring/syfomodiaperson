@@ -3,6 +3,10 @@ import { MotedeltakerType } from "../../../data/mote/types/MotedeltakerType";
 import { MoteAlternativDTO, MoteDTO } from "../../../data/mote/types/moteTypes";
 import BesvarteTidspunkter from "./BesvarteTidspunkter";
 import Utvidbar from "../../Utvidbar";
+import {
+  BlaaKalenderImage,
+  SortKalenderImage,
+} from "../../../../img/ImageComponents";
 
 const texts = {
   flereTidpunkt: "+ Legg til tidspunkt",
@@ -95,8 +99,8 @@ const Svarstatus = (svarstatusProps: SvarstatusProps) => {
       </div>
       {gamleAlternativer.length > 0 && (
         <Utvidbar
-          ikon="svg/kalender--sort.svg"
-          ikonHover="svg/kalender--blaa.svg"
+          ikon={SortKalenderImage}
+          ikonHover={BlaaKalenderImage}
           className="blokk"
           tittel={texts.foreslattTidligere}
         >

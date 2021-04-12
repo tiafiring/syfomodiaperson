@@ -3,6 +3,10 @@ import SykmeldingStatuspanel from "../sykmeldingstatuspanel/SykmeldingStatuspane
 import DineSykmeldingOpplysninger from "./sykmeldingOpplysninger/DineSykmeldingOpplysninger";
 import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 import Utvidbar from "../../../Utvidbar";
+import {
+  DoctorHoverImage,
+  DoctorImage,
+} from "../../../../../img/ImageComponents";
 
 const texts = {
   tittel: "Dine opplysninger",
@@ -23,8 +27,8 @@ const DinUtgatteSykmelding = (
         className="blokk"
         erApen
         tittel={texts.tittel}
-        ikon="svg/doctor-2.svg"
-        ikonHover="svg/doctor-2_hover.svg"
+        ikon={DoctorImage}
+        ikonHover={DoctorHoverImage}
         ikonAltTekst="Lege"
         variant="lysebla"
       >

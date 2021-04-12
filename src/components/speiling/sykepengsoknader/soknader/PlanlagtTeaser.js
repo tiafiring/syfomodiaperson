@@ -10,6 +10,7 @@ import {
   sykepengesoknad as sykepengesoknadPt,
 } from "../../../../propTypes";
 import Lightbox from "../../../Lightbox";
+import { SoknaderImage } from "../../../../../img/ImageComponents";
 
 const texts = {
   dato: {
@@ -91,11 +92,7 @@ class FremtidigSoknadTeaser extends Component {
           }}
         >
           <span className="inngangspanel__ikon">
-            <img
-              alt=""
-              className="js-ikon"
-              src="/sykefravaer/img/svg/soknader.svg"
-            />
+            <img alt="" className="js-ikon" src={SoknaderImage} />
           </span>
           <div className="inngangspanel__innhold">
             <header className="inngangspanel__header">

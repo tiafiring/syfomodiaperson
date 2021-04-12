@@ -5,6 +5,7 @@ import { Leder } from "../../../data/leder/ledere";
 import { formaterOrgnr } from "../../../utils";
 import { lederHasActiveSykmelding } from "../../../utils/ledereUtils";
 import kanskjeBooleanTilJaNeiKanskje from "../kanskjeBooleanTilJaNeiKanskje";
+import { FabrikkImage } from "../../../../img/ImageComponents";
 
 const texts = {
   activeSykmelding: "Sykmeldt nå",
@@ -69,7 +70,7 @@ const PersonKortVirksomhetHeader = (
   return (
     <PersonKortVirksomhetLederHeaderStyled>
       <HeaderStyled className="personkortElement__tittel">
-        <img src="/sykefravaer/img/svg/fabrikk.svg" alt="Fabrikk" />
+        <img src={FabrikkImage} alt="Fabrikk" />
         <GridRow>
           <FlexColumn>{currentLeder.organisasjonsnavn}</FlexColumn>
           <FlexColumn>{virksomhetsnummerText}</FlexColumn>

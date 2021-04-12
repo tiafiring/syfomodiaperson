@@ -4,6 +4,10 @@ import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
 import SykmeldingPerioder from "../../sykmeldinger/sykmelding/sykmeldingOpplysninger/SykmeldingPerioder";
 import SykmeldingNokkelOpplysning from "../../sykmeldinger/sykmelding/sykmeldingOpplysninger/SykmeldingNokkelOpplysning";
 import Utvidbar from "../../../Utvidbar";
+import {
+  PlasterHoverImage,
+  PlasterImage,
+} from "../../../../../img/ImageComponents";
 
 const texts = {
   tittel: "Opplysninger fra sykmeldingen",
@@ -26,8 +30,8 @@ const SykmeldingUtdrag = (sykmeldingUtdragProps: SykmeldingUtdragProps) => {
         visLukklenke={!erApen}
         tittel={texts.tittel}
         variant="lysebla"
-        ikon="svg/plaster.svg"
-        ikonHover="svg/plaster--hover.svg"
+        ikon={PlasterImage}
+        ikonHover={PlasterHoverImage}
         ikonAltTekst="Plaster-ikon"
       >
         <div>

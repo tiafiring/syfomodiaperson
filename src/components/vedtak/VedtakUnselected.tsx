@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Column } from "nav-frontend-grid";
+import { DocumentImage } from "../../../img/ImageComponents";
 
 const texts = {
   noSelectedVedtak: "Ingen vedtak er valgt",
@@ -29,7 +30,7 @@ const StyledCenteredText = styled.h4`
 const VedtakUnselected = () => {
   return (
     <StyledColumn className="col-xs-7">
-      <StyledIcon src="/sykefravaer/img/svg/dokument.svg" alt="dokumentIkon" />
+      <StyledIcon src={DocumentImage} alt="dokumentIkon" />
       <StyledCenteredText>{texts.noSelectedVedtak}</StyledCenteredText>
     </StyledColumn>
   );

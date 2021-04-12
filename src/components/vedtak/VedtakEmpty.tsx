@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Column } from "nav-frontend-grid";
 import styled from "styled-components";
+import { MappeAdvarselImage } from "../../../img/ImageComponents";
 
 const texts = {
   empty: "Denne personen har ingen vedtak",
@@ -27,10 +28,7 @@ const StyledCenteredText = styled.h4`
 const VedtakEmpty = () => {
   return (
     <StyledColumn className="col-xs-12">
-      <StyledIcon
-        src="/sykefravaer/img/svg/mappe-advarsel.svg"
-        alt="mappeAdvarselIkon"
-      />
+      <StyledIcon src={MappeAdvarselImage} alt="mappeAdvarselIkon" />
       <StyledCenteredText>{texts.empty}</StyledCenteredText>
     </StyledColumn>
   );

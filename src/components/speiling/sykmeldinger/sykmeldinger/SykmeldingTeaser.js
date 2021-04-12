@@ -13,6 +13,11 @@ import {
 } from "../../../../utils/sykmeldinger/sykmeldingstatuser";
 import { tilLesbarPeriodeMedArstall } from "../../../../utils/datoUtils";
 import { senesteTom, tidligsteFom } from "../../../../utils/periodeUtils";
+import {
+  ReportProblemTriangleImage,
+  SykmeldingerHoverBlaaImage,
+  SykmeldingerImage,
+} from "../../../../../img/ImageComponents";
 
 const texts = {
   teaserTekst: "Sykmelding\n",
@@ -74,14 +79,14 @@ PeriodeListe.propTypes = {
 
 const setStateIkon = (behandlingsutfallStatus) => {
   return behandlingsutfallStatus === behandlingsutfallStatuser.INVALID
-    ? "report_problem_triangle.svg"
-    : "sykmeldinger.svg";
+    ? ReportProblemTriangleImage
+    : SykmeldingerImage;
 };
 
 const setStateIkonHover = (behandlingsutfallStatus) => {
   return behandlingsutfallStatus === behandlingsutfallStatuser.INVALID
-    ? "report_problem_triangle.svg"
-    : "sykmeldinger_hover-blue.svg";
+    ? ReportProblemTriangleImage
+    : SykmeldingerHoverBlaaImage;
 };
 
 class SykmeldingTeaser extends Component {
@@ -128,7 +133,7 @@ class SykmeldingTeaser extends Component {
           }}
         >
           <span className="inngangspanel__ikon">
-            <img alt="" src={`/sykefravaer/img/svg/${this.state.ikon}`} />
+            <img alt="" src={this.state.ikon} />
           </span>
           <div className="inngangspanel__innhold">
             <header className="inngangspanel__header">

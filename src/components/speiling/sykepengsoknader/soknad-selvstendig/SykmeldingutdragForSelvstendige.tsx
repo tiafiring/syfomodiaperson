@@ -8,6 +8,10 @@ import {
 import Utvidbar from "../../../Utvidbar";
 import SykmeldingPerioder from "../../sykmeldinger/sykmelding/sykmeldingOpplysninger/SykmeldingPerioder";
 import SykmeldingNokkelOpplysning from "../../sykmeldinger/sykmelding/sykmeldingOpplysninger/SykmeldingNokkelOpplysning";
+import {
+  PlasterHoverImage,
+  PlasterImage,
+} from "../../../../../img/ImageComponents";
 
 const texts = {
   datoSykmelding: "Dato sykmeldingen ble skrevet",
@@ -75,8 +79,8 @@ const SykmeldingUtdragForSelvstendige = (
       visLukklenke={!erApen}
       tittel={texts.opplysninger}
       variant="lilla"
-      ikon="svg/plaster.svg"
-      ikonHover="svg/plaster_hover.svg"
+      ikon={PlasterImage}
+      ikonHover={PlasterHoverImage}
       ikonAltTekst="Plaster-ikon"
     >
       <div>

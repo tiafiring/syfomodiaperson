@@ -4,6 +4,7 @@ import { Knapp } from "nav-frontend-knapper";
 import { SykmeldingOldFormat } from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
 import DineKoronaSykmeldingOpplysninger from "../sykmeldingOpplysninger/DineKoronaSykmeldingOpplysninger";
 import Hjelpeboble from "../../../../bjorn/Hjelpeboble";
+import { PersonImage } from "../../../../../../img/ImageComponents";
 
 const texts = {
   pageSubtitle: "for selvstendig næringsdrivende og frilansere",
@@ -28,23 +29,21 @@ const KoronaSykmeldingNy = (
         {texts.pageSubtitle}
       </Undertittel>
       <Hjelpeboble className="blokk" hvit stor>
-        <Normaltekst style={{ marginBottom: "1rem" }}>
-          {texts.infotext1}
-        </Normaltekst>
-        <Normaltekst>{texts.infoText2}</Normaltekst>
-        <div className="skjul-pa-desktop">
-          <Knapp mini disabled style={{ marginTop: "2rem" }}>
-            {texts.button}
-          </Knapp>
-        </div>
+        <>
+          <Normaltekst style={{ marginBottom: "1rem" }}>
+            {texts.infotext1}
+          </Normaltekst>
+          <Normaltekst>{texts.infoText2}</Normaltekst>
+          <div className="skjul-pa-desktop">
+            <Knapp mini disabled style={{ marginTop: "2rem" }}>
+              {texts.button}
+            </Knapp>
+          </div>
+        </>
       </Hjelpeboble>
       <article>
         <header className="panelHeader panelHeader--lysebla">
-          <img
-            className="panelHeader__ikon"
-            src="/sykefravaer/img/svg/person.svg"
-            alt="Du"
-          />
+          <img className="panelHeader__ikon" src={PersonImage} alt="Du" />
           <h2 className="panelHeader__tittel">
             {sykmelding.pasient.fornavn} {sykmelding.pasient.mellomnavn}{" "}
             {sykmelding.pasient.etternavn}

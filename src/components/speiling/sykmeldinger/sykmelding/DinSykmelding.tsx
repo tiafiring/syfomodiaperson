@@ -4,6 +4,10 @@ import Alertstripe from "nav-frontend-alertstriper";
 import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 import DineSykmeldingOpplysninger from "./sykmeldingOpplysninger/DineSykmeldingOpplysninger";
 import Hjelpeboble from "../../../bjorn/Hjelpeboble";
+import {
+  PersonHighContrastImage,
+  PersonImage,
+} from "../../../../../img/ImageComponents";
 
 const texts = {
   eldreSykmeldinger: "Du har eldre sykmeldinger som du bør behandle før denne.",
@@ -47,14 +51,10 @@ const DinSykmelding = (dinSykmeldingProps: DinSykmeldingProps) => {
         </Alertstripe>
       )}
       <header className="panelHeader panelHeader--lysebla">
-        <img
-          className="panelHeader__ikon"
-          src="/sykefravaer/img/svg/person.svg"
-          alt="Du"
-        />
+        <img className="panelHeader__ikon" src={PersonImage} alt="Du" />
         <img
           className="panelHeader__ikon panelHeader__ikon--hoykontrast"
-          src="/sykefravaer/img/svg/person-highcontrast.svg"
+          src={PersonHighContrastImage}
           alt="Du"
         />
       </header>

@@ -9,6 +9,7 @@ import { isPersonOppgaveBehandlet } from "../../../utils/personOppgaveUtils";
 import { OppfolgingsplanLPS } from "../../../data/oppfolgingsplan/types/OppfolgingsplanLPS";
 import BehandleOppfolgingsplanLPS from "./BehandleOppfolgingsplanLPS";
 import OppfolgingsplanLPSEtikett from "./OppfolgingsplanLPSEtikett";
+import { StatusKanImage } from "../../../../img/ImageComponents";
 
 const texts = {
   buttonOpenPlan: "Åpne oppfølgingsplanen(pdf)",
@@ -40,22 +41,6 @@ export const ButtonOpenPlan = (buttonOpenPlanProps: ButtonOpenPlanProps) => {
     >
       {texts.buttonOpenPlan}
     </a>
-  );
-};
-
-const getIkonsti = (filnavn: string) => {
-  return `/sykefravaer/img/svg/${filnavn}`;
-};
-
-interface IkonProps {
-  ikon: string;
-}
-
-const Ikon = (ikonProps: IkonProps) => {
-  return (
-    <span className="ferdigbehandlet__ikon">
-      <img src={getIkonsti(ikonProps.ikon)} alt="Ferdig behandlet" />
-    </span>
   );
 };
 
@@ -96,7 +81,9 @@ const OppfolgingsplanerOversiktLPS = (
       )}
       {personOppgave && erPersonOppgaveBehandlet && (
         <p>
-          <Ikon ikon="status--kan.svg" />{" "}
+          <span className="ferdigbehandlet__ikon">
+            <img src={StatusKanImage} alt="Ferdig behandlet" />
+          </span>{" "}
           {`Ferdigbehandlet: ${toDatePrettyPrint(
             personOppgave.behandletTidspunkt
           )} av ${personOppgave.behandletVeilederIdent}`}

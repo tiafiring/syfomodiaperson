@@ -24,6 +24,12 @@ import {
   tilLesbarPeriodeMedArstall,
   toDatePrettyPrint,
 } from "../../../../utils/datoUtils";
+import {
+  GlobeHoverImage,
+  GlobeImage,
+  SoknaderHoverImage,
+  SoknaderImage,
+} from "../../../../../img/ImageComponents";
 
 const texts = {
   sendt: "Sendt til",
@@ -81,33 +87,17 @@ SendtUlikt.propTypes = {
 
 const visIkon = (soknadstype) => {
   return soknadstype === OPPHOLD_UTLAND ? (
-    <img
-      alt=""
-      className="js-ikon"
-      src={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/globe.svg`}
-    />
+    <img alt="" className="js-ikon" src={GlobeImage} />
   ) : (
-    <img
-      alt=""
-      className="js-ikon"
-      src={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/soknader.svg`}
-    />
+    <img alt="" className="js-ikon" src={SoknaderImage} />
   );
 };
 
 const visIkonHover = (soknadstype) => {
   return soknadstype === OPPHOLD_UTLAND ? (
-    <img
-      alt=""
-      className="js-ikon"
-      src={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/globe-hover.svg`}
-    />
+    <img alt="" className="js-ikon" src={GlobeHoverImage} />
   ) : (
-    <img
-      alt=""
-      className="js-ikon"
-      src={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/soknader_hover-blue.svg`}
-    />
+    <img alt="" className="js-ikon" src={SoknaderHoverImage} />
   );
 };
 

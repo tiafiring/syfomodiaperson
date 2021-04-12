@@ -1,4 +1,5 @@
 import React from "react";
+import { CheckboxPng } from "../../../../../../img/ImageComponents";
 
 interface SykmeldingCheckboxProps {
   tekst: string;
@@ -12,11 +13,7 @@ export const SykmeldingCheckbox = (
   const { tekst, jsClassName, className = "" } = sykmeldingCheckboxProps;
   return (
     <p className={`checkboxOpplysning ${className} js-${jsClassName}`}>
-      <img
-        src={`${process.env.REACT_APP_CONTEXT_ROOT}/img/png/check-box-1.png`}
-        className="ikon"
-        alt="Huket av"
-      />
+      <img src={CheckboxPng} className="ikon" alt="Huket av" />
       <span
         className="checkboxOpplysning__label"
         dangerouslySetInnerHTML={{ __html: tekst }}

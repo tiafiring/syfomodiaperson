@@ -4,6 +4,10 @@ import ArbeidsgiversSykmelding from "./ArbeidsgiversSykmelding";
 import BekreftetSykmeldingStatuspanel from "../sykmeldingstatuspanel/BekreftetSykmeldingStatuspanel";
 import DineSykmeldingOpplysninger from "./sykmeldingOpplysninger/DineSykmeldingOpplysninger";
 import Utvidbar from "../../../Utvidbar";
+import {
+  PersonHoverImage,
+  PersonImage,
+} from "../../../../../img/ImageComponents";
 
 const texts = {
   tittel: "Dine opplysinger",
@@ -28,8 +32,8 @@ const DinBekreftedeSykmelding = (
         className="blokk"
         erApen
         tittel={texts.tittel}
-        ikon="svg/person.svg"
-        ikonHover="svg/person_hover.svg"
+        ikon={PersonImage}
+        ikonHover={PersonHoverImage}
         ikonAltTekst="Du"
         variant="lysebla"
         Overskrift="h2"

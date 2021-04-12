@@ -12,6 +12,7 @@ import AppSpinner from "../../AppSpinner";
 import Feilmelding from "../../Feilmelding";
 import { hentBegrunnelseTekst } from "../../../utils/tilgangUtils";
 import { useAppSelector } from "../../../hooks/hooks";
+import { MoteIkonBlaaImage } from "../../../../img/ImageComponents";
 
 const texts = {
   pageHeader: "Dialogmøter",
@@ -74,7 +75,7 @@ export const MotelandingssideMoteElement = (
     >
       <img
         className="motelandingssidepanel__ikon"
-        src="/sykefravaer/img/svg/moteikon_blaabg.svg"
+        src={MoteIkonBlaaImage}
         alt="moteikon"
       />
       <div className="motelandingssidepanel__tekst">
