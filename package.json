@@ -133,6 +133,7 @@
     "mocha": "8.1.1",
     "postcss-loader": "3.0.0",
     "prettier": "2.2.1",
+    "redux-mock-store": "1.5.4",
     "sinon": "1.17.3",
     "style-loader": "1.2.1",
     "typescript": "4.2.3",

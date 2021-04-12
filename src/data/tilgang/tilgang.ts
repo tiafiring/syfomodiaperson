@@ -8,6 +8,7 @@ import {
 
 export interface Tilgang {
   harTilgang: boolean;
+  begrunnelse?: string;
 }
 
 export interface TilgangState {
