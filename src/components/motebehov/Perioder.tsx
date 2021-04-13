@@ -1,8 +1,9 @@
 import React from "react";
 import { tilLesbarPeriodeMedArUtenManednavn } from "../../utils/datoUtils";
 import BoksRad from "./BoksRad";
+import { SykmeldingPeriodeDTO } from "../../data/sykmelding/types/SykmeldingOldFormat";
 
-const kolonne2Tekst = (periode: any) => {
+const kolonne2Tekst = (periode: SykmeldingPeriodeDTO) => {
   if (!!periode.behandlingsdager) {
     return periode.behandlingsdager === 1
       ? `${periode.behandlingsdager} behandlingsdag`
@@ -20,39 +21,33 @@ const kolonne2Tekst = (periode: any) => {
 };
 
 interface PeriodeBoksProps {
-  periode: any;
+  periode: SykmeldingPeriodeDTO;
 }
 
-export const PeriodeBoks = (periodeBoksProps: PeriodeBoksProps) => {
-  const periode = periodeBoksProps.periode;
-  return (
-    <div className="sykmeldingMotebehovVisning__periodeBoks">
-      <BoksRad
-        kolonne1Tekst={`${tilLesbarPeriodeMedArUtenManednavn(
-          periode.fom,
-          periode.tom
-        )}`}
-        kolonne2Tekst={kolonne2Tekst(periode)}
-        erTittel
-      />
-    </div>
-  );
-};
+export const PeriodeBoks = ({ periode }: PeriodeBoksProps) => (
+  <div className="sykmeldingMotebehovVisning__periodeBoks">
+    <BoksRad
+      kolonne1Tekst={`${tilLesbarPeriodeMedArUtenManednavn(
+        periode.fom,
+        periode.tom
+      )}`}
+      kolonne2Tekst={kolonne2Tekst(periode)}
+      erTittel
+    />
+  </div>
+);
 
 interface PerioderProps {
-  perioder: any[];
+  perioder: SykmeldingPeriodeDTO[];
 }
 
-const Perioder = (perioderProps: PerioderProps) => {
-  const perioder = perioderProps.perioder;
-  return (
-    <div className="sykmeldingMotebehovVisning__perioder">
-      <h6 className="sporsmal">Perioder</h6>
-      {perioder.map((periode, index) => {
-        return <PeriodeBoks key={index} periode={periode} />;
-      })}
-    </div>
-  );
-};
+const Perioder = ({ perioder }: PerioderProps) => (
+  <div className="sykmeldingMotebehovVisning__perioder">
+    <h6 className="sporsmal">Perioder</h6>
+    {perioder.map((periode, index) => {
+      return <PeriodeBoks key={index} periode={periode} />;
+    })}
+  </div>
+);
 
 export default Perioder;

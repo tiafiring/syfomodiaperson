@@ -1,21 +1,31 @@
 import { gamleSMStatuser } from "./sykmeldingstatuser";
 import {
   ARBEIDSLEDIG,
-  NAERINGSDRIVENDE,
   FRILANSER,
+  NAERINGSDRIVENDE,
 } from "../../enums/arbeidssituasjoner";
 import { senesteTom, tidligsteFom } from "../periodeUtils";
+import {
+  SykmeldingOldFormat,
+  SykmeldingPeriodeDTO,
+} from "../../data/sykmelding/types/SykmeldingOldFormat";
+import { OppfolgingstilfellePerson } from "../../data/oppfolgingstilfelle/types/OppfolgingstilfellePerson";
+import { OppfolgingstilfelleperioderMapState } from "../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
 
-export const finnAvventendeSykmeldingTekst = (sykmelding) => {
+export const finnAvventendeSykmeldingTekst = (
+  sykmelding: SykmeldingOldFormat
+) => {
   const avventendePeriode =
     sykmelding.mulighetForArbeid.perioder &&
     sykmelding.mulighetForArbeid.perioder.find((periode) => {
       return !!periode.avventende;
     });
-  return avventendePeriode && avventendePeriode.avventende;
+  return avventendePeriode?.avventende;
 };
 
-export const erBehandlingsdagerEllerReisetilskudd = (sykmelding) => {
+export const erBehandlingsdagerEllerReisetilskudd = (
+  sykmelding: SykmeldingOldFormat
+) => {
   const erEkstraInformasjon =
     sykmelding.mulighetForArbeid.perioder &&
     sykmelding.mulighetForArbeid.perioder.find((periode) => {
@@ -24,7 +34,9 @@ export const erBehandlingsdagerEllerReisetilskudd = (sykmelding) => {
   return !!erEkstraInformasjon;
 };
 
-export const erEkstraDiagnoseInformasjon = (sykmelding) => {
+export const erEkstraDiagnoseInformasjon = (
+  sykmelding: SykmeldingOldFormat
+) => {
   const erEkstraInformasjon =
     sykmelding.diagnose &&
     (sykmelding.diagnose.fravaersgrunnLovfestet ||
@@ -33,7 +45,9 @@ export const erEkstraDiagnoseInformasjon = (sykmelding) => {
   return !!erEkstraInformasjon;
 };
 
-export const erMulighetForArbeidInformasjon = (sykmelding) => {
+export const erMulighetForArbeidInformasjon = (
+  sykmelding: SykmeldingOldFormat
+) => {
   const erEkstraInformasjon =
     sykmelding.mulighetForArbeid &&
     ((sykmelding.mulighetForArbeid.aktivitetIkkeMulig433 &&
@@ -45,7 +59,7 @@ export const erMulighetForArbeidInformasjon = (sykmelding) => {
   return !!erEkstraInformasjon;
 };
 
-export const erFriskmeldingInformasjon = (sykmelding) => {
+export const erFriskmeldingInformasjon = (sykmelding: SykmeldingOldFormat) => {
   const erEkstraInformasjon =
     sykmelding.friskmelding &&
     (sykmelding.friskmelding.antarReturSammeArbeidsgiver ||
@@ -56,19 +70,23 @@ export const erFriskmeldingInformasjon = (sykmelding) => {
   return !!erEkstraInformasjon;
 };
 
-export const erArbeidsforEtterPerioden = (sykmelding) => {
+export const erArbeidsforEtterPerioden = (sykmelding: SykmeldingOldFormat) => {
   const erEkstraInformasjon =
     sykmelding.friskmelding && sykmelding.friskmelding.arbeidsfoerEtterPerioden;
   return !!erEkstraInformasjon;
 };
 
-export const erHensynPaaArbeidsplassenInformasjon = (sykmelding) => {
+export const erHensynPaaArbeidsplassenInformasjon = (
+  sykmelding: SykmeldingOldFormat
+) => {
   const erEkstraInformasjon =
     sykmelding.friskmelding && sykmelding.friskmelding.hensynPaaArbeidsplassen;
   return !!erEkstraInformasjon;
 };
 
-export const erBedringAvArbeidsevnenInformasjon = (sykmelding) => {
+export const erBedringAvArbeidsevnenInformasjon = (
+  sykmelding: SykmeldingOldFormat
+) => {
   const erEkstraInformasjon =
     sykmelding.arbeidsevne &&
     (sykmelding.arbeidsevne.tilretteleggingArbeidsplass ||
@@ -77,25 +95,24 @@ export const erBedringAvArbeidsevnenInformasjon = (sykmelding) => {
   return !!erEkstraInformasjon;
 };
 
-export const erMeldingTilNavInformasjon = (sykmelding) => {
-  const erEkstraInformasjon =
-    sykmelding.meldingTilNav && sykmelding.meldingTilNav.navBoerTaTakISaken;
-  return !!erEkstraInformasjon;
+export const erMeldingTilNavInformasjon = (sykmelding: SykmeldingOldFormat) => {
+  return sykmelding.meldingTilNav.navBoerTaTakISaken;
 };
 
-export const erMeldingTilArbeidsgiverInformasjon = (sykmelding) => {
-  const erEkstraInformasjon = sykmelding.innspillTilArbeidsgiver;
-  return !!erEkstraInformasjon;
+export const erMeldingTilArbeidsgiverInformasjon = (
+  sykmelding: SykmeldingOldFormat
+) => {
+  return sykmelding.innspillTilArbeidsgiver !== null;
 };
 
-export const erUtdypendeOpplysninger = (sykmelding) => {
+export const erUtdypendeOpplysninger = (sykmelding: SykmeldingOldFormat) => {
   const utdypendeOpplysninger = sykmelding.utdypendeOpplysninger;
-  const erEkstraInformasjon =
-    utdypendeOpplysninger && Object.keys(utdypendeOpplysninger).length > 0;
-  return !!erEkstraInformasjon;
+  return utdypendeOpplysninger && Object.keys(utdypendeOpplysninger).length > 0;
 };
 
-export const erEkstraInformasjonISykmeldingen = (sykmelding) => {
+export const erEkstraInformasjonISykmeldingen = (
+  sykmelding: SykmeldingOldFormat
+) => {
   return (
     erEkstraDiagnoseInformasjon(sykmelding) ||
     erMulighetForArbeidInformasjon(sykmelding) ||
@@ -110,7 +127,9 @@ export const erEkstraInformasjonISykmeldingen = (sykmelding) => {
   );
 };
 
-export const arbeidsgivernavnEllerArbeidssituasjon = (sykmelding) => {
+export const arbeidsgivernavnEllerArbeidssituasjon = (
+  sykmelding: SykmeldingOldFormat
+) => {
   if (
     sykmelding.innsendtArbeidsgivernavn &&
     sykmelding.innsendtArbeidsgivernavn.length > 0
@@ -130,21 +149,26 @@ export const arbeidsgivernavnEllerArbeidssituasjon = (sykmelding) => {
   }
 };
 
-export const sykmeldingerMedStatusSendt = (sykmeldinger) => {
+export const sykmeldingerMedStatusSendt = (
+  sykmeldinger: SykmeldingOldFormat[]
+) => {
   return sykmeldinger.filter((sykmelding) => {
     return sykmelding.status === gamleSMStatuser.SENDT;
   });
 };
 
-export const sykmeldingerUtenArbeidsgiver = (sykmeldinger) => {
-  return sykmeldinger.filter((sykmelding) => {
-    return (
+export const sykmeldingerUtenArbeidsgiver = (
+  sykmeldinger: SykmeldingOldFormat[]
+) => {
+  return sykmeldinger.filter(
+    (sykmelding) =>
       !sykmelding.orgnummer && sykmelding.status === gamleSMStatuser.BEKREFTET
-    );
-  });
+  );
 };
 
-export const sykmeldingperioderSortertEldstTilNyest = (perioder) => {
+export const sykmeldingperioderSortertEldstTilNyest = (
+  perioder: SykmeldingPeriodeDTO[]
+) => {
   return perioder.sort((periode1, periode2) => {
     return periode1.fom > periode2.fom
       ? 1
@@ -154,18 +178,18 @@ export const sykmeldingperioderSortertEldstTilNyest = (perioder) => {
   });
 };
 
-export function getSykmeldingStartdato(sykmelding) {
+export function getSykmeldingStartdato(sykmelding: SykmeldingOldFormat) {
   const perioder = sykmelding.mulighetForArbeid.perioder;
   return sykmeldingperioderSortertEldstTilNyest(perioder)[0].fom;
 }
 
 export const sykmeldingerInnenforOppfolgingstilfellet = (
-  sykmeldinger,
-  oppfolgingstilfelleperioder
+  sykmeldinger: SykmeldingOldFormat[],
+  oppfolgingstilfelleperioder: OppfolgingstilfelleperioderMapState
 ) => {
   return sykmeldinger.filter((sykmelding) => {
     const tilfelleperioderReducer =
-      oppfolgingstilfelleperioder[sykmelding.orgnummer];
+      sykmelding.orgnummer && oppfolgingstilfelleperioder[sykmelding.orgnummer];
     const sykmeldingStart = new Date(getSykmeldingStartdato(sykmelding));
     sykmeldingStart.setHours(0, 0, 0, 0);
 
@@ -183,8 +207,8 @@ export const sykmeldingerInnenforOppfolgingstilfellet = (
 };
 
 export const sykmeldingerInnenforOppfolgingstilfellePerson = (
-  sykmeldinger,
-  oppfolgingstilfelleperson
+  sykmeldinger: SykmeldingOldFormat[],
+  oppfolgingstilfelleperson: OppfolgingstilfellePerson
 ) => {
   return sykmeldinger.filter((sykmelding) => {
     const sykmeldingStart = new Date(getSykmeldingStartdato(sykmelding));
@@ -199,16 +223,27 @@ export const sykmeldingerInnenforOppfolgingstilfellePerson = (
   });
 };
 
-export const sykmeldingerSortertNyestTilEldst = (sykmeldinger) => {
+export const sykmeldingerSortertNyestTilEldst = (
+  sykmeldinger: SykmeldingOldFormat[]
+) => {
   return sykmeldinger.sort((sykmelding1, sykmelding2) => {
-    const dato1 = new Date(sykmelding1.bekreftelse.utstedelsesdato);
-    const dato2 = new Date(sykmelding2.bekreftelse.utstedelsesdato);
+    if (
+      sykmelding1.bekreftelse.utstedelsesdato &&
+      sykmelding2.bekreftelse.utstedelsesdato
+    ) {
+      const dato1 = new Date(sykmelding1.bekreftelse.utstedelsesdato);
+      const dato2 = new Date(sykmelding2.bekreftelse.utstedelsesdato);
 
-    return dato1 > dato2 ? -1 : 1;
+      return dato1 > dato2 ? -1 : 1;
+    }
+
+    return 0;
   });
 };
 
-export const sykmeldingerGruppertEtterVirksomhet = (sykmeldinger) => {
+export const sykmeldingerGruppertEtterVirksomhet = (
+  sykmeldinger: SykmeldingOldFormat[]
+) => {
   return (
     sykmeldinger &&
     sykmeldinger.length > 0 &&
@@ -217,10 +252,12 @@ export const sykmeldingerGruppertEtterVirksomhet = (sykmeldinger) => {
         sykmelding.mottakendeArbeidsgiver &&
         sykmelding.mottakendeArbeidsgiver.virksomhetsnummer;
       const memo2 = { ...memo };
-      if (!memo2[virksomhetsnummer]) {
-        memo2[virksomhetsnummer] = [];
+      if (virksomhetsnummer) {
+        if (!memo2[virksomhetsnummer]) {
+          memo2[virksomhetsnummer] = [];
+        }
+        memo2[virksomhetsnummer] = [...memo2[virksomhetsnummer], sykmelding];
       }
-      memo2[virksomhetsnummer] = [...memo2[virksomhetsnummer], sykmelding];
       return memo2;
     }, {})
   );
@@ -247,14 +284,14 @@ export const stringMedAlleGraderingerFraSykmeldingPerioder = (
   return stringMedAlleGraderinger ? `${stringMedAlleGraderinger}%` : "";
 };
 
-const isSykmeldingSendtOrBekreftet = (sykmelding) => {
+const isSykmeldingSendtOrBekreftet = (sykmelding: SykmeldingOldFormat) => {
   return (
     sykmelding.status === gamleSMStatuser.SENDT ||
     sykmelding.status === gamleSMStatuser.BEKREFTET
   );
 };
 
-const isSykmeldingActiveToday = (sykmelding) => {
+const isSykmeldingActiveToday = (sykmelding: SykmeldingOldFormat) => {
   const today = new Date();
   return (
     tidligsteFom(sykmelding.mulighetForArbeid.perioder) <= today &&
@@ -262,16 +299,17 @@ const isSykmeldingActiveToday = (sykmelding) => {
   );
 };
 
-const activeSykmeldinger = (sykmeldinger) => {
-  return sykmeldinger.filter((sykmelding) => {
-    return (
+const activeSykmeldinger = (sykmeldinger: SykmeldingOldFormat[]) => {
+  return sykmeldinger.filter(
+    (sykmelding) =>
       isSykmeldingSendtOrBekreftet(sykmelding) &&
       isSykmeldingActiveToday(sykmelding)
-    );
-  });
+  );
 };
 
-export const sykmeldingerHasCoronaDiagnose = (sykmeldinger) => {
+export const sykmeldingerHasCoronaDiagnose = (
+  sykmeldinger: SykmeldingOldFormat[]
+) => {
   const sykmeldingerActiveNow = activeSykmeldinger(sykmeldinger);
   return (
     sykmeldingerActiveNow.length > 0 &&
@@ -281,7 +319,9 @@ export const sykmeldingerHasCoronaDiagnose = (sykmeldinger) => {
   );
 };
 
-export const activeSykmeldingerSentToArbeidsgiver = (sykmeldinger) => {
+export const activeSykmeldingerSentToArbeidsgiver = (
+  sykmeldinger: SykmeldingOldFormat[]
+) => {
   return sykmeldinger.filter((sykmelding) => {
     return (
       sykmelding.status === gamleSMStatuser.SENDT &&

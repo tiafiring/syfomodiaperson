@@ -21,6 +21,8 @@ import { tilLesbarPeriodeMedArstall } from "../../utils/datoUtils";
 import { senesteTom, tidligsteFom } from "../../utils/periodeUtils";
 import Utvidbar from "../Utvidbar";
 import styled from "styled-components";
+import { OppfolgingstilfelleperioderMapState } from "../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
+import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
 
 const tekster = {
   header: "Utdrag fra sykefraværet",
@@ -52,49 +54,44 @@ interface OppfolgingsplanerProps {
   aktiveDialoger: OppfolgingsplanDTO[];
 }
 
-export const Oppfolgingsplaner = (
-  oppfolgingsplanerProps: OppfolgingsplanerProps
-) => {
-  const { aktiveDialoger, fnr } = oppfolgingsplanerProps;
-  return (
-    <div className="utdragFraSykefravaeret__oppfolgingsplaner">
-      <h3>{tekster.oppfolgingsplaner.header}</h3>
-      {aktiveDialoger && aktiveDialoger.length > 0 ? (
-        aktiveDialoger.map((dialog: any, index: number) => {
-          const virksomhetsNavn = dialog.virksomhet.navn;
-          return (
-            <div
-              key={index}
-              className="utdragFraSykefravaeret__oppfolgingsplan"
-            >
-              <span>
-                <Lenke
-                  className="lenke"
-                  href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}
-                >
-                  {virksomhetsNavn && virksomhetsNavn.length > 0
-                    ? virksomhetsNavn.toLowerCase()
-                    : dialog.virksomhet.virksomhetsnummer}
-                </Lenke>
-              </span>
-              <span className="gyldighetsperiode">
-                {tilLesbarPeriodeMedArstall(
-                  dialog.godkjentPlan.gyldighetstidspunkt.fom,
-                  dialog.godkjentPlan.gyldighetstidspunkt.tom
-                )}
-              </span>
-            </div>
-          );
-        })
-      ) : (
-        <p>{tekster.oppfolgingsplaner.ingenPlanerDelt}</p>
-      )}
-    </div>
-  );
-};
+export const Oppfolgingsplaner = ({
+  aktiveDialoger,
+  fnr,
+}: OppfolgingsplanerProps) => (
+  <div className="utdragFraSykefravaeret__oppfolgingsplaner">
+    <h3>{tekster.oppfolgingsplaner.header}</h3>
+    {aktiveDialoger?.length > 0 ? (
+      aktiveDialoger.map((dialog, index) => {
+        const virksomhetsNavn = dialog.virksomhet.navn;
+        return (
+          <div key={index} className="utdragFraSykefravaeret__oppfolgingsplan">
+            <span>
+              <Lenke
+                className="lenke"
+                href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}
+              >
+                {virksomhetsNavn && virksomhetsNavn.length > 0
+                  ? virksomhetsNavn.toLowerCase()
+                  : dialog.virksomhet.virksomhetsnummer}
+              </Lenke>
+            </span>
+            <span className="gyldighetsperiode">
+              {tilLesbarPeriodeMedArstall(
+                dialog.godkjentPlan.gyldighetstidspunkt.fom,
+                dialog.godkjentPlan.gyldighetstidspunkt.tom
+              )}
+            </span>
+          </div>
+        );
+      })
+    ) : (
+      <p>{tekster.oppfolgingsplaner.ingenPlanerDelt}</p>
+    )}
+  </div>
+);
 
 interface UtvidbarTittelProps {
-  sykmelding: any;
+  sykmelding: SykmeldingOldFormat;
 }
 
 const UtdragColumn = styled.div`
@@ -103,13 +100,11 @@ const UtdragColumn = styled.div`
   justify-content: flex-start;
 `;
 
-export const UtvidbarTittel = (utvidbarTittelProps: UtvidbarTittelProps) => {
-  const sykmelding = utvidbarTittelProps.sykmelding;
+export const UtvidbarTittel = ({ sykmelding }: UtvidbarTittelProps) => {
   const erViktigInformasjon = erEkstraInformasjonISykmeldingen(sykmelding);
   const sykmeldingPerioderSortertEtterDato = sykmeldingperioderSortertEldstTilNyest(
     sykmelding.mulighetForArbeid.perioder
   );
-  const showPapirLabel = sykmelding.papirsykmelding;
   return (
     <div className="utdragFraSykefravaeret__utvidbarTittel">
       <UtdragColumn>
@@ -128,7 +123,7 @@ export const UtvidbarTittel = (utvidbarTittelProps: UtvidbarTittelProps) => {
             {`${sykmelding.diagnose.hoveddiagnose.diagnosekode} (${sykmelding.diagnose.hoveddiagnose.diagnose})`}
           </span>
         )}
-        {showPapirLabel && (
+        {sykmelding.erPapirsykmelding && (
           <EtikettBase className="utvidbarTittel__etikett" type="info">
             {tekster.sykmeldinger.papirLabelText}
           </EtikettBase>
@@ -144,13 +139,12 @@ export const UtvidbarTittel = (utvidbarTittelProps: UtvidbarTittelProps) => {
 };
 
 interface SykmeldingerForVirksomhetProps {
-  sykmeldinger: any[];
+  sykmeldinger: SykmeldingOldFormat[];
 }
 
-export const SykmeldingerForVirksomhet = (
-  sykmeldingerForVirksomhetProps: SykmeldingerForVirksomhetProps
-) => {
-  const sykmeldinger = sykmeldingerForVirksomhetProps.sykmeldinger;
+export const SykmeldingerForVirksomhet = ({
+  sykmeldinger,
+}: SykmeldingerForVirksomhetProps) => {
   return (
     <div className="utdragFraSykefravaeret__sykmeldingerForVirksomhet">
       <h4>
@@ -173,13 +167,14 @@ export const SykmeldingerForVirksomhet = (
 };
 
 interface SykmeldingerProps {
-  oppfolgingstilfelleperioder: any[];
-  sykmeldinger: any[];
+  oppfolgingstilfelleperioder: OppfolgingstilfelleperioderMapState;
+  sykmeldinger: SykmeldingOldFormat[];
 }
 
-export const Sykmeldinger = (sykmeldingerProps: SykmeldingerProps) => {
-  const { oppfolgingstilfelleperioder, sykmeldinger } = sykmeldingerProps;
-
+export const Sykmeldinger = ({
+  sykmeldinger,
+  oppfolgingstilfelleperioder,
+}: SykmeldingerProps) => {
   const innsendteSykmeldinger = sykmeldingerMedStatusSendt(sykmeldinger);
   const sykmeldingerIOppfolgingstilfellet = sykmeldingerInnenforOppfolgingstilfellet(
     innsendteSykmeldinger,
@@ -194,30 +189,25 @@ export const Sykmeldinger = (sykmeldingerProps: SykmeldingerProps) => {
   return (
     <div className="utdragFraSykefravaeret__sykmeldinger">
       <h3>{tekster.sykmeldinger.header}</h3>
-      {Object.keys(sykmeldingerSortertPaaVirksomhet).map((key, index) => {
-        return (
-          <SykmeldingerForVirksomhet
-            key={index}
-            sykmeldinger={sykmeldingerSortertPaaVirksomhet[key]}
-          />
-        );
-      })}
+      {Object.keys(sykmeldingerSortertPaaVirksomhet).map((key, index) => (
+        <SykmeldingerForVirksomhet
+          key={index}
+          sykmeldinger={sykmeldingerSortertPaaVirksomhet[key]}
+        />
+      ))}
     </div>
   );
 };
 
 interface SykmeldingerUtenArbeidsgiverProps {
   oppfolgingstilfelleUtenArbeidsgiver: OppfolgingstilfellePerson;
-  sykmeldinger: any[];
+  sykmeldinger: SykmeldingOldFormat[];
 }
 
-export const SykmeldingerUtenArbeidsgiver = (
-  sykmeldingerUtenArbeidsgiverProps: SykmeldingerUtenArbeidsgiverProps
-) => {
-  const {
-    oppfolgingstilfelleUtenArbeidsgiver,
-    sykmeldinger,
-  } = sykmeldingerUtenArbeidsgiverProps;
+export const SykmeldingerUtenArbeidsgiver = ({
+  oppfolgingstilfelleUtenArbeidsgiver,
+  sykmeldinger,
+}: SykmeldingerUtenArbeidsgiverProps) => {
   const innsendteSykmeldinger = sykmeldingerUtenArbeidsgiver(sykmeldinger);
   const sykmeldingerIOppfolgingstilfellet = sykmeldingerInnenforOppfolgingstilfellePerson(
     innsendteSykmeldinger,
@@ -230,23 +220,21 @@ export const SykmeldingerUtenArbeidsgiver = (
     <div className="utdragFraSykefravaeret__sykmeldinger">
       <h3>{tekster.sykmeldinger.headerUtenArbeidsgiver}</h3>
       {sykmeldingerSortertPaUtstedelsesdato.length > 0 &&
-        sykmeldingerSortertPaUtstedelsesdato.map(
-          (sykmelding: any, index: number) => {
-            return (
-              <div
-                className="utdragFraSykefravaeret__sykmeldingerForVirksomhet"
-                key={index}
+        sykmeldingerSortertPaUtstedelsesdato.map((sykmelding, index) => {
+          return (
+            <div
+              className="utdragFraSykefravaeret__sykmeldingerForVirksomhet"
+              key={index}
+            >
+              <Utvidbar
+                tittel={<UtvidbarTittel sykmelding={sykmelding} />}
+                visLukkLenke={false}
               >
-                <Utvidbar
-                  tittel={<UtvidbarTittel sykmelding={sykmelding} />}
-                  visLukkLenke={false}
-                >
-                  <SykmeldingMotebehovVisning sykmelding={sykmelding} />
-                </Utvidbar>
-              </div>
-            );
-          }
-        )}
+                <SykmeldingMotebehovVisning sykmelding={sykmelding} />
+              </Utvidbar>
+            </div>
+          );
+        })}
     </div>
   );
 };
@@ -255,65 +243,57 @@ interface SamtalereferatProps {
   fnr: string;
 }
 
-export const Samtalereferat = (samtalereferatProps: SamtalereferatProps) => {
-  const fnr = samtalereferatProps.fnr;
-  return (
-    <div className="utdragFraSykefravaeret__samtalereferat">
-      <h3>{tekster.samtalereferat.header}</h3>
-      <Lenke
-        className="lenke"
-        href={`https://modapp${finnMiljoStreng()}.adeo.no/modiabrukerdialog/person/${fnr}#!meldinger`}
-        target="_blank"
-      >
-        {tekster.samtalereferat.lenkeTekst}
-      </Lenke>
-    </div>
-  );
-};
+export const Samtalereferat = ({ fnr }: SamtalereferatProps) => (
+  <div className="utdragFraSykefravaeret__samtalereferat">
+    <h3>{tekster.samtalereferat.header}</h3>
+    <Lenke
+      className="lenke"
+      href={`https://modapp${finnMiljoStreng()}.adeo.no/modiabrukerdialog/person/${fnr}#!meldinger`}
+      target="_blank"
+    >
+      {tekster.samtalereferat.lenkeTekst}
+    </Lenke>
+  </div>
+);
 
 interface UtdragFraSykefravaeretProps {
   aktiveDialoger: OppfolgingsplanDTO[];
   fnr: string;
   oppfolgingstilfelleUtenArbeidsgiver?: OppfolgingstilfellePerson;
-  oppfolgingstilfelleperioder: any[];
-  sykmeldinger: any[];
+  oppfolgingstilfelleperioder: OppfolgingstilfelleperioderMapState;
+  sykmeldinger: SykmeldingOldFormat[];
 }
 
-const UtdragFraSykefravaeret = (
-  utdragFraSykefravaeretProps: UtdragFraSykefravaeretProps
-) => {
-  const {
-    aktiveDialoger,
-    fnr,
-    oppfolgingstilfelleUtenArbeidsgiver,
-    oppfolgingstilfelleperioder,
-    sykmeldinger,
-  } = utdragFraSykefravaeretProps;
-  return (
-    <div>
-      <UtdragFraSykefravaeretHeader />
+const UtdragFraSykefravaeret = ({
+  aktiveDialoger,
+  fnr,
+  oppfolgingstilfelleUtenArbeidsgiver,
+  oppfolgingstilfelleperioder,
+  sykmeldinger,
+}: UtdragFraSykefravaeretProps) => (
+  <div>
+    <UtdragFraSykefravaeretHeader />
 
-      <div className="panel utdragFraSykefravaeret">
-        <Oppfolgingsplaner aktiveDialoger={aktiveDialoger} fnr={fnr} />
+    <div className="panel utdragFraSykefravaeret">
+      <Oppfolgingsplaner aktiveDialoger={aktiveDialoger} fnr={fnr} />
 
-        <Sykmeldinger
-          oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
+      <Sykmeldinger
+        oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
+        sykmeldinger={sykmeldinger}
+      />
+
+      {oppfolgingstilfelleUtenArbeidsgiver && (
+        <SykmeldingerUtenArbeidsgiver
+          oppfolgingstilfelleUtenArbeidsgiver={
+            oppfolgingstilfelleUtenArbeidsgiver
+          }
           sykmeldinger={sykmeldinger}
         />
+      )}
 
-        {oppfolgingstilfelleUtenArbeidsgiver && (
-          <SykmeldingerUtenArbeidsgiver
-            oppfolgingstilfelleUtenArbeidsgiver={
-              oppfolgingstilfelleUtenArbeidsgiver
-            }
-            sykmeldinger={sykmeldinger}
-          />
-        )}
-
-        <Samtalereferat fnr={fnr} />
-      </div>
+      <Samtalereferat fnr={fnr} />
     </div>
-  );
-};
+  </div>
+);
 
 export default UtdragFraSykefravaeret;

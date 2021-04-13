@@ -1,14 +1,13 @@
 import React from "react";
 import BoksRad from "./BoksRad";
+import { SykmeldingDiagnose } from "../../data/sykmelding/types/SykmeldingOldFormat";
 
 interface DiagnoseBoksProps {
-  diagnose: any;
+  diagnose: SykmeldingDiagnose;
   erBiDiagnose?: boolean;
 }
 
-export const DiagnoseBoks = (diagnoseBoksProps: DiagnoseBoksProps) => {
-  const diagnose = diagnoseBoksProps.diagnose;
-  const erBiDiagnose = diagnoseBoksProps.erBiDiagnose || false;
+export const DiagnoseBoks = ({ diagnose, erBiDiagnose }: DiagnoseBoksProps) => {
   const diagnoseTittel = erBiDiagnose ? "Bidiagnose" : "Diagnose";
   const diagnosekodeTittel = "Diagnosekode";
 
@@ -28,8 +27,8 @@ export const DiagnoseBoks = (diagnoseBoksProps: DiagnoseBoksProps) => {
 };
 
 interface DiagnoserProps {
-  biDiagnoser: any[];
-  hovedDiagnose: any;
+  biDiagnoser: SykmeldingDiagnose[];
+  hovedDiagnose: SykmeldingDiagnose;
 }
 
 const Diagnoser = (diagnoserProps: DiagnoserProps) => {

@@ -7,14 +7,10 @@ import {
 } from "./navbruker_actions";
 
 export interface NavbrukerState {
-  data: Brukerinfo | Record<string, unknown>;
+  data?: Brukerinfo;
 }
 
-export const initialState: NavbrukerState = {
-  data: {},
-};
-
-const navbruker: Reducer<NavbrukerState> = (state = initialState, action) => {
+const navbruker: Reducer<NavbrukerState> = (state = {}, action) => {
   switch (action.type) {
     case NAVBRUKER_HENTET: {
       return {

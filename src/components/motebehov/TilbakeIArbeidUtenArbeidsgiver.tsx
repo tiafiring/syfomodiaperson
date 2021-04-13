@@ -1,5 +1,6 @@
 import React from "react";
 import TilbakeIArbeidCheckboxMedSporsmalOgDato from "./TilbakeIArbeidCheckboxMedSporsmalOgDato";
+import { FriskmeldingDTO } from "../../data/sykmelding/types/SykmeldingOldFormat";
 
 const tekster = {
   header: "8 uker: Pasient uten arbeidsgiver, utdypende opplysninger",
@@ -10,7 +11,7 @@ const tekster = {
   usikkerDatoSporsmal: "Når antar du å kunne gi tilbakemelding på dette?",
 };
 
-const getTilbakeIArbeidCheckbox = (returDato: Date) => {
+const getTilbakeIArbeidCheckbox = (returDato?: string) => {
   return (
     <TilbakeIArbeidCheckboxMedSporsmalOgDato
       checkboxLabel={tekster.retur}
@@ -20,7 +21,7 @@ const getTilbakeIArbeidCheckbox = (returDato: Date) => {
   );
 };
 
-const getUsikkerIArbeidCheckbox = (returDato: Date) => {
+const getUsikkerIArbeidCheckbox = (returDato?: string) => {
   return (
     <TilbakeIArbeidCheckboxMedSporsmalOgDato
       checkboxLabel={tekster.usikkerCheckboxLabel}
@@ -31,13 +32,12 @@ const getUsikkerIArbeidCheckbox = (returDato: Date) => {
 };
 
 interface TilbakeIArbeidUtenArbeidsgiverProps {
-  friskmelding: any;
+  friskmelding: FriskmeldingDTO;
 }
 
-const TilbakeIArbeidUtenArbeidsgiver = (
-  tilbakeIArbeidUtenArbeidsgiverProps: TilbakeIArbeidUtenArbeidsgiverProps
-) => {
-  const friskmelding = tilbakeIArbeidUtenArbeidsgiverProps.friskmelding;
+const TilbakeIArbeidUtenArbeidsgiver = ({
+  friskmelding,
+}: TilbakeIArbeidUtenArbeidsgiverProps) => {
   const skalVise =
     friskmelding.utenArbeidsgiverAntarTilbakeIArbeid ||
     friskmelding.utenArbeidsgiverTilbakemelding;
@@ -48,13 +48,16 @@ const TilbakeIArbeidUtenArbeidsgiver = (
   const usikkerIArbeidCheckbox = getUsikkerIArbeidCheckbox(
     friskmelding.utenArbeidsgiverTilbakemelding
   );
+
+  if (!skalVise) {
+    return null;
+  }
+
   return (
-    skalVise && (
-      <div className="sykmeldingMotebehovVisning__tilbakeIArbeid--utenArbeidsgiver">
-        <h5 className="undertittel">{tekster.header}</h5>
-        {antarTilbakeIArbeid ? tilbakeIArbeidCheckbox : usikkerIArbeidCheckbox}
-      </div>
-    )
+    <div className="sykmeldingMotebehovVisning__tilbakeIArbeid--utenArbeidsgiver">
+      <h5 className="undertittel">{tekster.header}</h5>
+      {antarTilbakeIArbeid ? tilbakeIArbeidCheckbox : usikkerIArbeidCheckbox}
+    </div>
   );
 };
 

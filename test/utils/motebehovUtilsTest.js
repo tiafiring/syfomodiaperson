@@ -7,6 +7,7 @@ import {
   finnArbeidstakerMotebehovSvar,
   finnNyesteMotebehovsvarFraHverDeltaker,
   harArbeidstakerSvartPaaMotebehov,
+  hentSistBehandletMotebehov,
   motebehovFromLatestActiveTilfelle,
 } from "../../src/utils/motebehovUtils";
 import { ANTALL_MS_DAG } from "../../src/utils/datoUtils";
@@ -173,7 +174,6 @@ describe("motebehovUtils", () => {
       expect(harArbeidstakerSvart).to.equal(true);
     });
     it("Skal gi false hvis arbeidstaker ikke har sendt inn møtebehovsvar", () => {
-      const arbeidstakerAktorId = "1";
       const leder1AktorId = "9";
       const leder3AktorId = "7";
 
@@ -274,6 +274,34 @@ describe("motebehovUtils", () => {
         const exp = erMotebehovBehandlet([]);
         expect(exp).to.equal(true);
       });
+    });
+  });
+
+  describe("hentSistBehandletMotebehov", () => {
+    it("Returnerer ingenting om det er ingen motebehov", () => {
+      expect(hentSistBehandletMotebehov([])).to.be.undefined;
+    });
+    it("Returnerer første motebehov i lista når ingen er behandlet", () => {
+      const motebehovUbehandlet1 = {
+        behandletTidspunkt: null,
+      };
+      const motebehovUbehandlet2 = {
+        behandletTidspunkt: null,
+      };
+      expect(
+        hentSistBehandletMotebehov([motebehovUbehandlet1, motebehovUbehandlet2])
+      ).to.be.deep.equal(motebehovUbehandlet1);
+    });
+    it("Returnerer motebehov med siste behandlet tidspunkt", () => {
+      const motebehovBehandlet1 = {
+        behandletTidspunkt: "2021-04-03T15:18:24.000Z",
+      };
+      const motebehovBehandlet2 = {
+        behandletTidspunkt: "2021-04-08T15:18:24.000Z",
+      };
+      expect(
+        hentSistBehandletMotebehov([motebehovBehandlet1, motebehovBehandlet2])
+      ).to.be.deep.equal(motebehovBehandlet2);
     });
   });
 

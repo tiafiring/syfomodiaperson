@@ -9,28 +9,30 @@ import {
 } from "../../utils/motebehovUtils";
 import { toDatePrettyPrint } from "../../utils/datoUtils";
 import { behandleMotebehov } from "../../data/motebehov/behandlemotebehov_actions";
+import { MotebehovDTO } from "../../data/motebehov/types/motebehovTypes";
 
 const behandleMotebehovKnappLabel = (
   erBehandlet: boolean,
-  sistBehandletMotebehov: any
+  sistBehandletMotebehov?: MotebehovDTO
 ) => {
   return erBehandlet
     ? `Ferdigbehandlet av ${
-        sistBehandletMotebehov.behandletVeilederIdent
-      } ${toDatePrettyPrint(sistBehandletMotebehov.behandletTidspunkt)}`
+        sistBehandletMotebehov?.behandletVeilederIdent
+      } ${toDatePrettyPrint(sistBehandletMotebehov?.behandletTidspunkt)}`
     : "Marker som behandlet";
 };
 
 interface BehandleMotebehovKnappProps {
   fnr: string;
-  motebehovListe: any[];
+  motebehovListe: MotebehovDTO[];
   veilederinfo: VeilederinfoDTO;
 }
 
-const BehandleMotebehovKnapp = (
-  behandleMotebehovKnappProps: BehandleMotebehovKnappProps
-) => {
-  const { fnr, motebehovListe, veilederinfo } = behandleMotebehovKnappProps;
+const BehandleMotebehovKnapp = ({
+  fnr,
+  motebehovListe,
+  veilederinfo,
+}: BehandleMotebehovKnappProps) => {
   const sistBehandletMotebehov = hentSistBehandletMotebehov(motebehovListe);
   const erBehandlet = erMotebehovBehandlet(motebehovListe);
 

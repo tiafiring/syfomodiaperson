@@ -1,7 +1,12 @@
 import { dagerMellomDatoer } from "./datoUtils";
 import { startDateFromLatestActiveTilfelle } from "./periodeUtils";
+import { MotebehovDTO } from "../data/motebehov/types/motebehovTypes";
+import { OppfolgingstilfelleperioderMapState } from "../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
 
-export const sorterMotebehovDataEtterDato = (a: any, b: any) => {
+export const sorterMotebehovDataEtterDato = (
+  a: MotebehovDTO,
+  b: MotebehovDTO
+) => {
   return b.opprettetDato === a.opprettetDato
     ? 0
     : b.opprettetDato > a.opprettetDato
@@ -10,7 +15,7 @@ export const sorterMotebehovDataEtterDato = (a: any, b: any) => {
 };
 
 export const finnNyesteMotebehovsvarFraHverDeltaker = (
-  sortertMotebehovListe: any[]
+  sortertMotebehovListe: MotebehovDTO[]
 ) => {
   return sortertMotebehovListe.filter((motebehov1, index) => {
     return (
@@ -21,7 +26,9 @@ export const finnNyesteMotebehovsvarFraHverDeltaker = (
   });
 };
 
-export const finnArbeidstakerMotebehovSvar = (motebehovListe: any[]) => {
+export const finnArbeidstakerMotebehovSvar = (
+  motebehovListe: MotebehovDTO[]
+) => {
   return motebehovListe.find((motebehov) => {
     return motebehov.opprettetAv === motebehov.aktorId;
   });
@@ -65,7 +72,7 @@ export const harArbeidstakerSvartPaaMotebehov = (motebehovData: any) => {
   return !!finnArbeidstakerMotebehovSvar(motebehovData);
 };
 
-export const motebehovUbehandlet = (motebehovListe: any[]) => {
+export const motebehovUbehandlet = (motebehovListe: MotebehovDTO[]) => {
   return motebehovListe.filter((motebehov) => {
     return (
       motebehov.motebehovSvar &&
@@ -75,35 +82,40 @@ export const motebehovUbehandlet = (motebehovListe: any[]) => {
   });
 };
 
-const erAlleMotebehovSvarBehandlet = (motebehovListe: any[]) => {
+const erAlleMotebehovSvarBehandlet = (motebehovListe: MotebehovDTO[]) => {
   return motebehovUbehandlet(motebehovListe).length === 0;
 };
 
-export const erMotebehovBehandlet = (motebehovListe: any[]) => {
+export const erMotebehovBehandlet = (motebehovListe: MotebehovDTO[]) => {
   return erAlleMotebehovSvarBehandlet(motebehovListe);
 };
 
-export const harUbehandletMotebehov = (motebehovListe: any[]) => {
+export const harUbehandletMotebehov = (motebehovListe: MotebehovDTO[]) => {
   return !erAlleMotebehovSvarBehandlet(motebehovListe);
 };
 
-export const hentSistBehandletMotebehov = (motebehovListe: any) => {
-  return (
-    motebehovListe.sort((mb1: any, mb2: any) => {
-      return mb2.behandletTidspunkt > mb1.behandletTidspunkt;
-    })[0] || {}
-  );
-};
+export const hentSistBehandletMotebehov = (
+  motebehovListe: MotebehovDTO[]
+): MotebehovDTO | undefined =>
+  [...motebehovListe].sort((mb1: MotebehovDTO, mb2: MotebehovDTO) => {
+    if (mb2.behandletTidspunkt === mb1.behandletTidspunkt) {
+      return 0;
+    }
+    if ((mb2.behandletTidspunkt ?? "") > (mb1.behandletTidspunkt ?? "")) {
+      return 1;
+    }
+    return -1;
+  })[0];
 
-export const motebehovlisteMedKunJaSvar = (motebehovliste: any[]) => {
+export const motebehovlisteMedKunJaSvar = (motebehovliste: MotebehovDTO[]) => {
   return motebehovliste.filter((motebehov) => {
     return motebehov.motebehovSvar && motebehov.motebehovSvar.harMotebehov;
   });
 };
 
 export const motebehovFromLatestActiveTilfelle = (
-  sortertMotebehovListe: any[],
-  oppfolgingstilfelleperioder: any
+  sortertMotebehovListe: MotebehovDTO[],
+  oppfolgingstilfelleperioder: OppfolgingstilfelleperioderMapState
 ) => {
   const startDateNewestActiveTilfelle = startDateFromLatestActiveTilfelle(
     oppfolgingstilfelleperioder

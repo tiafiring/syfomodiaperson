@@ -1,5 +1,6 @@
 import React from "react";
 import { erBedringAvArbeidsevnenInformasjon } from "../../utils/sykmeldinger/sykmeldingUtils";
+import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
 
 const tekster = {
   bedreArbeidsevnen: {
@@ -12,17 +13,14 @@ const tekster = {
 };
 
 interface BedreArbeidsevnenProps {
-  sykmelding: any;
+  sykmelding: SykmeldingOldFormat;
 }
 
-export const BedreArbeidsevnen = (
-  bedreArbeidsevnenProps: BedreArbeidsevnenProps
-) => {
-  const sykmelding = bedreArbeidsevnenProps.sykmelding;
+export const BedreArbeidsevnen = ({ sykmelding }: BedreArbeidsevnenProps) => {
   const arbeidsevne = sykmelding.arbeidsevne;
   return (
     <>
-      {!!erBedringAvArbeidsevnenInformasjon(sykmelding) && (
+      {erBedringAvArbeidsevnenInformasjon(sykmelding) && (
         <div className="sykmeldingMotebehovVisning__avsnitt">
           <h5 className="undertittel">{tekster.bedreArbeidsevnen.header}</h5>
 

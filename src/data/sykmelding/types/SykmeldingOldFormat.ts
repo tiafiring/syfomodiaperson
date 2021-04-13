@@ -48,13 +48,25 @@ export interface SykmeldingPeriodeDTO {
   grad: number | null;
   behandlingsdager: number | null;
   reisetilskudd: boolean | null;
-  avventende?: string | null;
+  avventende?: string;
   redusertVenteperiode?: boolean | null;
 }
 
 export interface Datospenn {
   fom: string | null;
   tom: string | null;
+}
+
+export interface FriskmeldingDTO {
+  arbeidsfoerEtterPerioden?: boolean;
+  hensynPaaArbeidsplassen: string | null;
+  antarReturSammeArbeidsgiver: boolean;
+  antattDatoReturSammeArbeidsgiver?: string;
+  antarReturAnnenArbeidsgiver: boolean;
+  tilbakemeldingReturArbeid?: string;
+  utenArbeidsgiverAntarTilbakeIArbeid: boolean;
+  utenArbeidsgiverAntarTilbakeIArbeidDato?: string;
+  utenArbeidsgiverTilbakemelding?: string;
 }
 
 export interface SykmeldingOldFormat {
@@ -94,30 +106,20 @@ export interface SykmeldingOldFormat {
   diagnose: {
     hoveddiagnose: SykmeldingDiagnose;
     bidiagnoser: SykmeldingDiagnose[] | null;
-    fravaersgrunnLovfestet: string | null;
-    fravaerBeskrivelse: string | null;
+    fravaersgrunnLovfestet?: string;
+    fravaerBeskrivelse?: string;
     svangerskap: boolean | null;
     yrkesskade: boolean | null;
-    yrkesskadeDato: string | null;
+    yrkesskadeDato?: string;
   };
   mulighetForArbeid: {
     perioder: SykmeldingPeriodeDTO[];
     aktivitetIkkeMulig433: string[] | null;
     aktivitetIkkeMulig434: string[] | null;
-    aarsakAktivitetIkkeMulig433: string | null;
-    aarsakAktivitetIkkeMulig434: string | null;
+    aarsakAktivitetIkkeMulig433?: string;
+    aarsakAktivitetIkkeMulig434?: string;
   };
-  friskmelding: {
-    arbeidsfoerEtterPerioden: boolean | null;
-    hensynPaaArbeidsplassen: string | null;
-    antarReturSammeArbeidsgiver: boolean;
-    antattDatoReturSammeArbeidsgiver: string | null;
-    antarReturAnnenArbeidsgiver: boolean;
-    tilbakemeldingReturArbeid: string | null;
-    utenArbeidsgiverAntarTilbakeIArbeid: boolean;
-    utenArbeidsgiverAntarTilbakeIArbeidDato: string | null;
-    utenArbeidsgiverTilbakemelding: string | null;
-  };
+  friskmelding: FriskmeldingDTO;
   utdypendeOpplysninger: Map<string, Map<string, UtdypendeOpplysning>>;
   arbeidsevne: {
     tilretteleggingArbeidsplass: string | null;
@@ -139,4 +141,5 @@ export interface SykmeldingOldFormat {
     sykmelderTlf: string | null;
   };
   egenmeldt?: boolean;
+  harRedusertArbeidsgiverperiode: boolean | null;
 }

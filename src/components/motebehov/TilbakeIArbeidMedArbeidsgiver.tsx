@@ -1,6 +1,7 @@
 import React from "react";
 import { Checkbox } from "nav-frontend-skjema";
 import TilbakeIArbeidCheckboxMedSporsmalOgDato from "./TilbakeIArbeidCheckboxMedSporsmalOgDato";
+import { FriskmeldingDTO } from "../../data/sykmelding/types/SykmeldingOldFormat";
 
 const tekster = {
   header: "8 uker: Pasient med arbeidsgiver, utdypende opplysninger",
@@ -15,13 +16,12 @@ const tekster = {
 };
 
 interface ReturSammeArbeidsgiverProps {
-  friskmelding: any;
+  friskmelding: FriskmeldingDTO;
 }
 
-const ReturSammeArbeidsgiver = (
-  returSammeArbeidsgiverProps: ReturSammeArbeidsgiverProps
-) => {
-  const friskmelding = returSammeArbeidsgiverProps.friskmelding;
+const ReturSammeArbeidsgiver = ({
+  friskmelding,
+}: ReturSammeArbeidsgiverProps) => {
   return (
     <div>
       {friskmelding.antarReturSammeArbeidsgiver && (
@@ -44,13 +44,12 @@ const ReturSammeArbeidsgiver = (
 };
 
 interface TilbakeIArbeidMedArbeidsgiverProps {
-  friskmelding: any;
+  friskmelding: FriskmeldingDTO;
 }
 
-const TilbakeIArbeidMedArbeidsgiver = (
-  tilbakeIArbeidMedArbeidsgiverProps: TilbakeIArbeidMedArbeidsgiverProps
-) => {
-  const friskmelding = tilbakeIArbeidMedArbeidsgiverProps.friskmelding;
+const TilbakeIArbeidMedArbeidsgiver = ({
+  friskmelding,
+}: TilbakeIArbeidMedArbeidsgiverProps) => {
   const skalVise =
     friskmelding.antarReturSammeArbeidsgiver ||
     friskmelding.antarReturAnnenArbeidsgiver ||
@@ -58,21 +57,24 @@ const TilbakeIArbeidMedArbeidsgiver = (
   const antarRetur =
     friskmelding.antarReturSammeArbeidsgiver ||
     friskmelding.antarReturAnnenArbeidsgiver;
+
+  if (!skalVise) {
+    return null;
+  }
+
   return (
-    skalVise && (
-      <div className="sykmeldingMotebehovVisning__tilbakeIArbeid--medArbeidsgiver">
-        <h5 className="undertittel">{tekster.header}</h5>
-        {antarRetur ? (
-          <ReturSammeArbeidsgiver friskmelding={friskmelding} />
-        ) : (
-          <TilbakeIArbeidCheckboxMedSporsmalOgDato
-            checkboxLabel={tekster.usikkerCheckboxLabel}
-            sporsmal={tekster.usikkerDatoSporsmal}
-            returDato={friskmelding.tilbakemeldingReturArbeid}
-          />
-        )}
-      </div>
-    )
+    <div className="sykmeldingMotebehovVisning__tilbakeIArbeid--medArbeidsgiver">
+      <h5 className="undertittel">{tekster.header}</h5>
+      {antarRetur ? (
+        <ReturSammeArbeidsgiver friskmelding={friskmelding} />
+      ) : (
+        <TilbakeIArbeidCheckboxMedSporsmalOgDato
+          checkboxLabel={tekster.usikkerCheckboxLabel}
+          sporsmal={tekster.usikkerDatoSporsmal}
+          returDato={friskmelding.tilbakemeldingReturArbeid}
+        />
+      )}
+    </div>
   );
 };
 

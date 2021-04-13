@@ -10,14 +10,13 @@ export interface VeilederinfoState {
   hentet: boolean;
   henter: boolean;
   hentingFeilet: boolean;
-  data: VeilederinfoDTO | Record<string, unknown>;
+  data?: VeilederinfoDTO;
 }
 
 export const initialState: VeilederinfoState = {
   hentet: false,
   henter: false,
   hentingFeilet: false,
-  data: {},
 };
 
 const veilederinfo: Reducer<VeilederinfoState> = (

@@ -11,6 +11,10 @@ import PrediksjonVisning from "../Prediksjon/PrediksjonVisning";
 import UtdragFraSykefravaeret from "./UtdragFraSykefravaeret";
 import Panel from "nav-frontend-paneler";
 import { Systemtittel } from "nav-frontend-typografi";
+import { OppfolgingstilfelleperioderMapState } from "../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
+import { MotebehovDTO } from "../../data/motebehov/types/motebehovTypes";
+import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
+import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
 
 const texts = {
   title: "Innmeldt behov for dialogmøte",
@@ -20,29 +24,27 @@ interface MotebehovProps {
   aktiveDialoger: OppfolgingsplanDTO[];
   fnr: string;
   ledereData: Leder[];
-  ledereUtenInnsendtMotebehov: any[];
-  motebehovListe: any[];
-  sykmeldt: any;
-  motebehovListeMedJaSvarTilOppgavebehandling: any[];
+  ledereUtenInnsendtMotebehov: Leder[];
+  motebehovListe: MotebehovDTO[];
+  sykmeldt: Brukerinfo;
+  motebehovListeMedJaSvarTilOppgavebehandling: MotebehovDTO[];
   veilederinfo: VeilederinfoDTO;
-  oppfolgingstilfelleperioder: any[];
-  sykmeldinger: any[];
+  oppfolgingstilfelleperioder: OppfolgingstilfelleperioderMapState;
+  sykmeldinger: SykmeldingOldFormat[];
 }
 
-const Motebehov = (motebehovProps: MotebehovProps) => {
-  const {
-    aktiveDialoger,
-    fnr,
-    ledereData,
-    ledereUtenInnsendtMotebehov,
-    motebehovListe,
-    sykmeldt,
-    motebehovListeMedJaSvarTilOppgavebehandling,
-    veilederinfo,
-    oppfolgingstilfelleperioder,
-    sykmeldinger,
-  } = motebehovProps;
-
+const Motebehov = ({
+  aktiveDialoger,
+  fnr,
+  ledereData,
+  ledereUtenInnsendtMotebehov,
+  motebehovListe,
+  sykmeldt,
+  motebehovListeMedJaSvarTilOppgavebehandling,
+  veilederinfo,
+  oppfolgingstilfelleperioder,
+  sykmeldinger,
+}: MotebehovProps) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
