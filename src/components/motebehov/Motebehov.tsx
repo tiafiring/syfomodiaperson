@@ -26,9 +26,9 @@ interface MotebehovProps {
   ledereData: Leder[];
   ledereUtenInnsendtMotebehov: Leder[];
   motebehovListe: MotebehovDTO[];
-  sykmeldt: Brukerinfo;
+  sykmeldt?: Brukerinfo;
   motebehovListeMedJaSvarTilOppgavebehandling: MotebehovDTO[];
-  veilederinfo: VeilederinfoDTO;
+  veilederinfo?: VeilederinfoDTO;
   oppfolgingstilfelleperioder: OppfolgingstilfelleperioderMapState;
   sykmeldinger: SykmeldingOldFormat[];
 }
@@ -65,13 +65,14 @@ const Motebehov = ({
           motebehovListe={motebehovListe}
           sykmeldt={sykmeldt}
         />
-        {motebehovListeMedJaSvarTilOppgavebehandling.length > 0 && (
-          <BehandleMotebehovKnapp
-            fnr={fnr}
-            motebehovListe={motebehovListeMedJaSvarTilOppgavebehandling}
-            veilederinfo={veilederinfo}
-          />
-        )}
+        {veilederinfo &&
+          motebehovListeMedJaSvarTilOppgavebehandling.length > 0 && (
+            <BehandleMotebehovKnapp
+              fnr={fnr}
+              motebehovListe={motebehovListeMedJaSvarTilOppgavebehandling}
+              veilederinfo={veilederinfo}
+            />
+          )}
       </Panel>
 
       {erLokal() && <PrediksjonVisning fnr={fnr} />}

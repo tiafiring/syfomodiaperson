@@ -113,7 +113,7 @@ export const MotebehovKvitteringInnhold = ({
 
 interface MotebehovKvitteringInnholdArbeidstakerProps {
   arbeidstakersMotebehov?: MotebehovDTO;
-  sykmeldt: Brukerinfo;
+  sykmeldt?: Brukerinfo;
 }
 
 export const MotebehovKvitteringInnholdArbeidstaker = ({
@@ -123,7 +123,7 @@ export const MotebehovKvitteringInnholdArbeidstaker = ({
   const arbeidstakerOnskerMote =
     arbeidstakersMotebehov?.motebehovSvar?.harMotebehov;
   const arbeidstakerTekst = `<b>Den sykmeldte: </b> ${
-    sykmeldt.navn
+    sykmeldt?.navn
   } ${setSvarTekst(arbeidstakerOnskerMote)}`;
   const ikonAltTekst = `Sykmeldt ${ikonAlternativTekst(
     arbeidstakerOnskerMote
@@ -199,7 +199,7 @@ interface MotebehovKvitteringProps {
   ledereData: Leder[];
   ledereUtenInnsendtMotebehov: Leder[];
   motebehovListe: MotebehovDTO[];
-  sykmeldt: Brukerinfo;
+  sykmeldt?: Brukerinfo;
 }
 
 const MotebehovKvittering = ({

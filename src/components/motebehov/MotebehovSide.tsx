@@ -123,23 +123,20 @@ const MotebehovSide = ({ fnr }: MotebehovSideProps) => {
     return <Feilmelding />;
   }
   return (
-    sykmeldt &&
-    veilederinfo && (
-      <Motebehov
-        fnr={fnr}
-        ledereData={ledereData}
-        ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
-        motebehovListe={activeMotebehovSvar}
-        sykmeldt={sykmeldt}
-        motebehovListeMedJaSvarTilOppgavebehandling={
-          motebehovListeMedJaSvarTilOppgavebehandling
-        }
-        veilederinfo={veilederinfo}
-        aktiveDialoger={aktiveDialoger}
-        oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
-        sykmeldinger={sykmeldinger}
-      />
-    )
+    <Motebehov
+      fnr={fnr}
+      ledereData={ledereData}
+      ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
+      motebehovListe={activeMotebehovSvar}
+      sykmeldt={sykmeldt}
+      motebehovListeMedJaSvarTilOppgavebehandling={
+        motebehovListeMedJaSvarTilOppgavebehandling
+      }
+      veilederinfo={veilederinfo}
+      aktiveDialoger={aktiveDialoger}
+      oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
+      sykmeldinger={sykmeldinger}
+    />
   );
 };
 
