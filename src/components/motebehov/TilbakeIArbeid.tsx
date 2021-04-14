@@ -2,13 +2,13 @@ import React from "react";
 import { erFriskmeldingInformasjon } from "../../utils/sykmeldinger/sykmeldingUtils";
 import TilbakeIArbeidMedArbeidsgiver from "./TilbakeIArbeidMedArbeidsgiver";
 import TilbakeIArbeidUtenArbeidsgiver from "./TilbakeIArbeidUtenArbeidsgiver";
+import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
 
 interface TilbakeIArbeidProps {
-  sykmelding: any;
+  sykmelding: SykmeldingOldFormat;
 }
 
-export const TilbakeIArbeid = (tilbakeIArbeidProps: TilbakeIArbeidProps) => {
-  const sykmelding = tilbakeIArbeidProps.sykmelding;
+export const TilbakeIArbeid = ({ sykmelding }: TilbakeIArbeidProps) => {
   const friskmelding = sykmelding.friskmelding;
   const skalVise = erFriskmeldingInformasjon(sykmelding);
   return (

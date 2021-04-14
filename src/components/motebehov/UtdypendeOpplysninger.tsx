@@ -29,10 +29,9 @@ interface UtdypendeOpplysningerProps {
   sykmelding: SykmeldingOldFormat;
 }
 
-export const UtdypendeOpplysninger = (
-  utdypendeOpplysningerProps: UtdypendeOpplysningerProps
-) => {
-  const sykmelding = utdypendeOpplysningerProps.sykmelding;
+export const UtdypendeOpplysninger = ({
+  sykmelding,
+}: UtdypendeOpplysningerProps) => {
   const skalVise = sykmelding && erUtdypendeOpplysninger(sykmelding);
   return (
     <>

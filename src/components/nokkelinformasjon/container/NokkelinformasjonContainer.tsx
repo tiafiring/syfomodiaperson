@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { OppfolgingsplanerState } from "../../../data/oppfolgingsplan/oppfoelgingsdialoger";
 import { hentOppfoelgingsdialoger } from "../../../data/oppfolgingsplan/oppfoelgingsdialoger_actions";
 import { hentOppfolgingstilfellerPersonUtenArbeidsiver } from "../../../data/oppfolgingstilfelle/oppfolgingstilfellerperson_actions";
 import { hentOppfolgingstilfelleperioder } from "../../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder_actions";
@@ -8,14 +7,12 @@ import { hentSykmeldinger } from "../../../data/sykmelding/sykmeldinger_actions"
 import { hentLedere } from "../../../data/leder/ledere_actions";
 import { NOKKELINFORMASJON } from "../../../enums/menypunkter";
 import { hentBegrunnelseTekst } from "../../../utils/tilgangUtils";
-import {
-  harForsoktHentetLedere,
-  harForsoktHentetOppfoelgingsdialoger,
-} from "../../../utils/reducerUtils";
+import { harForsoktHentetLedere } from "../../../utils/reducerUtils";
 import Side from "../../../sider/Side";
 import Feilmelding from "../../Feilmelding";
 import AppSpinner from "../../AppSpinner";
 import Nokkelinformasjon from "../Nokkelinformasjon";
+import { useOppfoelgingsDialoger } from "../../../hooks/useOppfoelgingsDialoger";
 
 const texts = {
   feilmelding: "Du har ikke tilgang til denne tjenesten",
@@ -24,15 +21,10 @@ const texts = {
 export const NokkelinformasjonSide = () => {
   const fnr = window.location.pathname.split("/")[2];
 
-  const oppfolgingsplanerState: OppfolgingsplanerState = useSelector(
-    (state: any) => state.oppfoelgingsdialoger
-  );
-  const aktiveDialoger = oppfolgingsplanerState.data.filter((dialog) => {
-    return (
-      dialog.status !== "AVBRUTT" &&
-      new Date(dialog.godkjentPlan.gyldighetstidspunkt.tom) > new Date()
-    );
-  });
+  const {
+    aktiveDialoger,
+    harForsoktHentetOppfoelgingsdialoger,
+  } = useOppfoelgingsDialoger();
 
   const oppfolgingstilfelleperioder = useSelector(
     (state: any) => state.oppfolgingstilfelleperioder
@@ -49,8 +41,7 @@ export const NokkelinformasjonSide = () => {
   const tilgangState = useSelector((state: any) => state.tilgang);
 
   const harForsoktHentetAlt =
-    harForsoktHentetOppfoelgingsdialoger(oppfolgingsplanerState) &&
-    harForsoktHentetLedere(ledereState);
+    harForsoktHentetOppfoelgingsdialoger && harForsoktHentetLedere(ledereState);
 
   const henter = !harForsoktHentetAlt;
   const hentingFeilet = sykmeldingerState.hentingFeilet;

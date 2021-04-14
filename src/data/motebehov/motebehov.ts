@@ -6,6 +6,8 @@ import {
   HENT_MOTEBEHOV_IKKE_TILGANG,
 } from "./motebehov_actions";
 import { BEHANDLE_MOTEBEHOV_BEHANDLET } from "./behandlemotebehov_actions";
+import { MotebehovDTO } from "./types/motebehovTypes";
+import { Tilgang } from "../tilgang/tilgang";
 
 export const sorterEtterDato = (a: MotebehovDTO, b: MotebehovDTO) => {
   return b.opprettetDato === a.opprettetDato
@@ -21,7 +23,7 @@ export interface MotebehovState {
   hentingFeilet: boolean;
   hentingForsokt: boolean;
   data: MotebehovDTO[];
-  tilgang: any;
+  tilgang?: Tilgang;
 }
 
 export const initialState: MotebehovState = {
@@ -30,7 +32,6 @@ export const initialState: MotebehovState = {
   hentet: false,
   hentingFeilet: false,
   hentingForsokt: false,
-  tilgang: {},
 };
 
 const motebehov: Reducer<MotebehovState> = (state = initialState, action) => {

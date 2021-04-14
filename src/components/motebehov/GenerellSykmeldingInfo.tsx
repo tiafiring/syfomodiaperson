@@ -8,6 +8,7 @@ import {
 import Diagnoser from "./Diagnoser";
 import Perioder from "./Perioder";
 import EkstraDiagnoseInformasjon from "./EkstraDiagnoseInformasjon";
+import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
 
 const tekster = {
   generellSykmeldingInfo: {
@@ -21,13 +22,12 @@ const tekster = {
 };
 
 interface GenerellSykmeldingInfoProps {
-  sykmelding: any;
+  sykmelding: SykmeldingOldFormat;
 }
 
-export const GenerellSykmeldingInfo = (
-  generellSykmeldingInfoProps: GenerellSykmeldingInfoProps
-) => {
-  const sykmelding = generellSykmeldingInfoProps.sykmelding;
+export const GenerellSykmeldingInfo = ({
+  sykmelding,
+}: GenerellSykmeldingInfoProps) => {
   const hovedDiagnose = sykmelding.diagnose.hoveddiagnose;
   const biDiagnoser = sykmelding.diagnose.bidiagnoser
     ? sykmelding.diagnose.bidiagnoser

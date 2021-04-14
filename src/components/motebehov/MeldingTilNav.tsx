@@ -1,6 +1,7 @@
 import React from "react";
 import { Checkbox } from "nav-frontend-skjema";
 import { erMeldingTilNavInformasjon } from "../../utils/sykmeldinger/sykmeldingUtils";
+import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
 
 const tekster = {
   meldingTilNav: {
@@ -13,11 +14,10 @@ const tekster = {
 };
 
 interface MeldingTilNavProps {
-  sykmelding: any;
+  sykmelding: SykmeldingOldFormat;
 }
 
-const MeldingTilNav = (meldingTilNavProps: MeldingTilNavProps) => {
-  const sykmelding = meldingTilNavProps.sykmelding;
+const MeldingTilNav = ({ sykmelding }: MeldingTilNavProps) => {
   const meldingTilNav = sykmelding.meldingTilNav;
   const skalVise = erMeldingTilNavInformasjon(sykmelding);
   return (

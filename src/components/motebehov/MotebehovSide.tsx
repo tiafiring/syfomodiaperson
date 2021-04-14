@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { OppfolgingsplanerState } from "../../data/oppfolgingsplan/oppfoelgingsdialoger";
+import { useDispatch } from "react-redux";
 import { hentBegrunnelseTekst } from "../../utils/tilgangUtils";
 import {
   sorterMotebehovDataEtterDato,
@@ -10,7 +9,6 @@ import {
 import {
   harForsoktHentetLedere,
   harForsoktHentetMotebehov,
-  harForsoktHentetOppfoelgingsdialoger,
 } from "../../utils/reducerUtils";
 import { ledereUtenMotebehovsvar } from "../../utils/ledereUtils";
 import { hentLedere } from "../../data/leder/ledere_actions";
@@ -21,6 +19,8 @@ import { hentSykmeldinger } from "../../data/sykmelding/sykmeldinger_actions";
 import Feilmelding from "../Feilmelding";
 import AppSpinner from "../AppSpinner";
 import Motebehov from "./Motebehov";
+import { useOppfoelgingsDialoger } from "../../hooks/useOppfoelgingsDialoger";
+import { useAppSelector } from "../../hooks/hooks";
 
 const texts = {
   feilmelding: "Du har ikke tilgang til denne tjenesten",
@@ -31,23 +31,18 @@ interface MotebehovSideProps {
 }
 
 const MotebehovSide = ({ fnr }: MotebehovSideProps) => {
-  const oppfolgingsplanerState: OppfolgingsplanerState = useSelector(
-    (state: any) => state.oppfoelgingsdialoger
-  );
-  const aktiveDialoger = oppfolgingsplanerState.data.filter((dialog) => {
-    return (
-      dialog.status !== "AVBRUTT" &&
-      new Date(dialog.godkjentPlan.gyldighetstidspunkt.tom) > new Date()
-    );
-  });
+  const {
+    aktiveDialoger,
+    harForsoktHentetOppfoelgingsdialoger,
+  } = useOppfoelgingsDialoger();
 
-  const ledereState = useSelector((state: any) => state.ledere);
+  const ledereState = useAppSelector((state) => state.ledere);
   const ledereData = ledereState.data;
 
-  const sykmeldingerState = useSelector((state: any) => state.sykmeldinger);
+  const sykmeldingerState = useAppSelector((state) => state.sykmeldinger);
   const sykmeldinger = sykmeldingerState.data;
 
-  const motebehovState = useSelector((state: any) => state.motebehov);
+  const motebehovState = useAppSelector((state) => state.motebehov);
   const motebehovTilgang = motebehovState.tilgang;
   const motebehovData = motebehovState.data;
   const sortertMotebehovListe = motebehovData.sort(
@@ -58,17 +53,17 @@ const MotebehovSide = ({ fnr }: MotebehovSideProps) => {
     motebehovData
   );
 
-  const navbrukerState = useSelector((state: any) => state.navbruker);
+  const navbrukerState = useAppSelector((state) => state.navbruker);
   const sykmeldt = navbrukerState.data;
 
-  const tilgangState = useSelector((state: any) => state.tilgang);
+  const tilgangState = useAppSelector((state) => state.tilgang);
   const tilgang = tilgangState.data;
 
-  const veilederinfoState = useSelector((state: any) => state.veilederinfo);
+  const veilederinfoState = useAppSelector((state) => state.veilederinfo);
   const veilederinfo = veilederinfoState.data;
 
-  const oppfolgingstilfelleperioder = useSelector(
-    (state: any) => state.oppfolgingstilfelleperioder
+  const oppfolgingstilfelleperioder = useAppSelector(
+    (state) => state.oppfolgingstilfelleperioder
   );
 
   const activeMotebehovSvar = motebehovFromLatestActiveTilfelle(
@@ -99,7 +94,7 @@ const MotebehovSide = ({ fnr }: MotebehovSideProps) => {
 
   const harForsoktHentetAlt =
     harForsoktHentetMotebehov(motebehovState) &&
-    harForsoktHentetOppfoelgingsdialoger(oppfolgingsplanerState) &&
+    harForsoktHentetOppfoelgingsdialoger &&
     harForsoktHentetLedere(ledereState);
 
   const henter = !harForsoktHentetAlt;
@@ -116,7 +111,7 @@ const MotebehovSide = ({ fnr }: MotebehovSideProps) => {
       />
     );
   }
-  if (motebehovTilgang.harTilgang === false) {
+  if (motebehovTilgang?.harTilgang === false) {
     return (
       <Feilmelding
         tittel={texts.feilmelding}

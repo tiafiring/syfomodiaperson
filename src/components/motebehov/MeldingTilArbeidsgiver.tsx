@@ -1,5 +1,6 @@
 import React from "react";
 import { erMeldingTilArbeidsgiverInformasjon } from "../../utils/sykmeldinger/sykmeldingUtils";
+import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
 
 const tekster = {
   meldingTilArbeidsgiver: {
@@ -9,13 +10,12 @@ const tekster = {
 };
 
 interface MeldingTilArbeidsgiverProps {
-  sykmelding: any;
+  sykmelding: SykmeldingOldFormat;
 }
 
-export const MeldingTilArbeidsgiver = (
-  meldingTilArbeidsgiverProps: MeldingTilArbeidsgiverProps
-) => {
-  const sykmelding = meldingTilArbeidsgiverProps.sykmelding;
+export const MeldingTilArbeidsgiver = ({
+  sykmelding,
+}: MeldingTilArbeidsgiverProps) => {
   const innspillTilArbeidsgiver = sykmelding.innspillTilArbeidsgiver;
   const skalVise = erMeldingTilArbeidsgiverInformasjon(sykmelding);
   return (

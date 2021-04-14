@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { hentPrediksjon } from "../../data/prediksjon/prediksjon_actions";
 import Prediksjontittel from "./Prediksjontittel";
 import ViktigeFaktorer from "./ViktigeFaktorer";
 import DetaljertInformasjon from "./DetaljertInformasjon";
-import { PrediksjonState } from "../../data/prediksjon/prediksjon";
 import PrediksjonResultat from "./PrediksjonResultat";
+import { useAppSelector } from "../../hooks/hooks";
 
 interface PrediksjonProps {
   fnr: string;
@@ -22,9 +22,7 @@ const PrediksjonVisning = ({ fnr }: PrediksjonProps) => {
   useEffect(() => {
     dispatch(hentPrediksjon(fnr));
   }, []);
-  const prediksjonReducer: PrediksjonState = useSelector(
-    (state: any) => state.prediksjon
-  );
+  const prediksjonReducer = useAppSelector((state) => state.prediksjon);
   const data = prediksjonReducer && prediksjonReducer.data;
 
   return (

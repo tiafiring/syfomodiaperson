@@ -4,6 +4,7 @@ import {
   erMulighetForArbeidInformasjon,
   finnAvventendeSykmeldingTekst,
 } from "../../utils/sykmeldinger/sykmeldingUtils";
+import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
 
 const tekster = {
   mulighetForArbeid: {
@@ -25,59 +26,55 @@ interface AvventendeSykmeldingProps {
   avventendeTekst: string;
 }
 
-const AvventendeSykmelding = (
-  avventendeSykmeldingProps: AvventendeSykmeldingProps
-) => {
-  return (
-    <div>
-      <h5 className="undertittel">
-        {tekster.mulighetForArbeid.avventende.tittel}
-      </h5>
-      <p>{avventendeSykmeldingProps.avventendeTekst}</p>
-    </div>
-  );
-};
+const AvventendeSykmelding = ({
+  avventendeTekst,
+}: AvventendeSykmeldingProps) => (
+  <div>
+    <h5 className="undertittel">
+      {tekster.mulighetForArbeid.avventende.tittel}
+    </h5>
+    <p>{avventendeTekst}</p>
+  </div>
+);
 
 interface AktivitetIkkeMuligProps {
-  beskrivelse: string;
+  beskrivelse?: string;
   ikkeMuligListe: string[];
   tittel: string;
 }
 
-const AktivitetIkkeMulig = (
-  aktivitetIkkeMuligProps: AktivitetIkkeMuligProps
-) => {
-  const { beskrivelse, ikkeMuligListe, tittel } = aktivitetIkkeMuligProps;
-  return (
-    <div className="MulighetForArbeid">
-      <h5 className="undertittel">{tittel}</h5>
-      {ikkeMuligListe.map((ikkeMuligTekst: string, index: number) => {
-        return (
-          <Checkbox
-            key={index}
-            className="sykmeldingMotebehovVisning__checkbox"
-            label={ikkeMuligTekst}
-            checked
-            disabled
-          />
-        );
-      })}
-      {beskrivelse && [
-        <h6 key={0} className="sporsmal">
-          {tekster.mulighetForArbeid.beskrivelse}
-        </h6>,
-        <p key={1}>{beskrivelse}</p>,
-      ]}
-    </div>
-  );
-};
+const AktivitetIkkeMulig = ({
+  beskrivelse,
+  ikkeMuligListe,
+  tittel,
+}: AktivitetIkkeMuligProps) => (
+  <div className="MulighetForArbeid">
+    <h5 className="undertittel">{tittel}</h5>
+    {ikkeMuligListe.map((ikkeMuligTekst: string, index: number) => {
+      return (
+        <Checkbox
+          key={index}
+          className="sykmeldingMotebehovVisning__checkbox"
+          label={ikkeMuligTekst}
+          checked
+          disabled
+        />
+      );
+    })}
+    {beskrivelse && [
+      <h6 key={0} className="sporsmal">
+        {tekster.mulighetForArbeid.beskrivelse}
+      </h6>,
+      <p key={1}>{beskrivelse}</p>,
+    ]}
+  </div>
+);
 
 interface MulighetForArbeidProps {
-  sykmelding: any;
+  sykmelding: SykmeldingOldFormat;
 }
 
-const MulighetForArbeid = (mulighetForArbeidProps: MulighetForArbeidProps) => {
-  const sykmelding = mulighetForArbeidProps.sykmelding;
+const MulighetForArbeid = ({ sykmelding }: MulighetForArbeidProps) => {
   const mulighetForArbeid = sykmelding.mulighetForArbeid;
   const avventendeTekst = finnAvventendeSykmeldingTekst(sykmelding);
   const aktivitetIkkeMulig433 = mulighetForArbeid.aktivitetIkkeMulig433;
