@@ -1,6 +1,6 @@
 import React from "react";
 import { SykmeldingOldFormat } from "../../../../../../data/sykmelding/types/SykmeldingOldFormat";
-import { getSykmeldingOpplysning } from "../../../../../../utils/sykmeldingUtils";
+import { SykmeldingOpplysningForFelt } from "./SykmeldingOpplysningForFelt";
 
 const texts = {
   arbeidsevne: "Hva skal til for å bedre arbeidsevnen?",
@@ -25,21 +25,21 @@ const BedreArbeidsevne = (bedreArbeidsevneProps: BedreArbeidsevneProps) => {
   return (
     <div className="sykmeldingSeksjon">
       <h4 className="sykmeldingSeksjon__tittel">{texts.arbeidsevne}</h4>
-      {getSykmeldingOpplysning(
-        sykmelding.arbeidsevne,
-        "tilretteleggingArbeidsplass",
-        texts.tilrettelegging
-      )}
-      {getSykmeldingOpplysning(
-        sykmelding.arbeidsevne,
-        "tiltakNAV",
-        texts.tiltakNAV
-      )}
-      {getSykmeldingOpplysning(
-        sykmelding.arbeidsevne,
-        "tiltakAndre",
-        texts.tiltakAndre
-      )}
+      <SykmeldingOpplysningForFelt
+        sykmeldingBolk={sykmelding.arbeidsevne}
+        felt={"tilretteleggingArbeidsplass"}
+        tittel={texts.tilrettelegging}
+      />
+      <SykmeldingOpplysningForFelt
+        sykmeldingBolk={sykmelding.arbeidsevne}
+        felt={"tiltakNAV"}
+        tittel={texts.tiltakNAV}
+      />
+      <SykmeldingOpplysningForFelt
+        sykmeldingBolk={sykmelding.arbeidsevne}
+        felt={"tiltakAndre"}
+        tittel={texts.tiltakAndre}
+      />
     </div>
   );
 };

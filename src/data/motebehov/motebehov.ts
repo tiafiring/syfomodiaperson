@@ -4,12 +4,16 @@ import {
   HENT_MOTEBEHOV_HENTET,
   HENT_MOTEBEHOV_FEILET,
   HENT_MOTEBEHOV_IKKE_TILGANG,
+  MotebehovActions,
 } from "./motebehov_actions";
-import { BEHANDLE_MOTEBEHOV_BEHANDLET } from "./behandlemotebehov_actions";
+import {
+  BEHANDLE_MOTEBEHOV_BEHANDLET,
+  BehandleMotebehovBehandletAction,
+} from "./behandlemotebehov_actions";
 import { MotebehovDTO } from "./types/motebehovTypes";
 import { Tilgang } from "../tilgang/tilgang";
 
-export const sorterEtterDato = (a: MotebehovDTO, b: MotebehovDTO) => {
+export const sorterEtterDato = (a: MotebehovDTO, b: MotebehovDTO): number => {
   return b.opprettetDato === a.opprettetDato
     ? 0
     : b.opprettetDato > a.opprettetDato
@@ -34,7 +38,12 @@ export const initialState: MotebehovState = {
   hentingForsokt: false,
 };
 
-const motebehov: Reducer<MotebehovState> = (state = initialState, action) => {
+type MoteBehovAction = MotebehovActions | BehandleMotebehovBehandletAction;
+
+const motebehov: Reducer<MotebehovState, MoteBehovAction> = (
+  state = initialState,
+  action
+) => {
   switch (action.type) {
     case HENT_MOTEBEHOV_HENTER: {
       return Object.assign({}, state, {

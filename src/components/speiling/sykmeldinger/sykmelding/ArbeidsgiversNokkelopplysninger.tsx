@@ -1,9 +1,9 @@
 import React from "react";
 import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 import { tidligsteFom } from "../../../../utils/periodeUtils";
-import { getSykmeldingCheckbox } from "../../../../utils/sykmeldingUtils";
 import SykmeldingNokkelOpplysning from "./sykmeldingOpplysninger/SykmeldingNokkelOpplysning";
 import SykmeldingPerioder from "./sykmeldingOpplysninger/SykmeldingPerioder";
+import { SykmeldingCheckboxForFelt } from "./sykmeldingOpplysninger/SykmeldingCheckboxForFelt";
 
 const texts = {
   arbeidsgiver: "Arbeidsgiver som legen har skrevet inn",
@@ -38,12 +38,12 @@ const ArbeidsgiversNokkelopplysninger = (
           />
         </SykmeldingNokkelOpplysning>
       )}
-      {getSykmeldingCheckbox(
-        sykmelding.friskmelding,
-        "arbeidsfoerEtterPerioden",
-        texts.arbeidsfor,
-        "blokk"
-      )}
+      <SykmeldingCheckboxForFelt
+        sykmeldingBolk={sykmelding.friskmelding}
+        felt="arbeidsfoerEtterPerioden"
+        tekst={texts.arbeidsfor}
+        className="blokk"
+      />
       {!sykmelding.friskmelding.hensynPaaArbeidsplassen ? null : (
         <SykmeldingNokkelOpplysning tittel={texts.hensynTittel} Overskrift="h4">
           <p className="js-hensynPaaArbeidsplassen">

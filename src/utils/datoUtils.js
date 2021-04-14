@@ -50,7 +50,7 @@ export const tilLesbarDatoMedArstall = (datoArg) => {
     ? `${tilLesbarDatoUtenArstall(new Date(datoArg))} ${new Date(
         datoArg
       ).getUTCFullYear()}`
-    : null;
+    : undefined;
 };
 
 export const tilLesbarPeriodeMedArstall = (fomArg, tomArg) => {

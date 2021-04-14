@@ -1,7 +1,6 @@
 import React from "react";
 import { SykmeldingOldFormat } from "../../../../../../data/sykmelding/types/SykmeldingOldFormat";
 import { tilLesbarDatoMedArstall } from "../../../../../../utils/datoUtils";
-import { getSykmeldingOpplysning } from "../../../../../../utils/sykmeldingUtils";
 import MulighetForArbeid from "./MulighetForArbeid";
 import Friskmelding from "./Friskmelding";
 import UtdypendeOpplysninger from "./UtdypendeOpplysninger";
@@ -10,6 +9,7 @@ import MeldingTilNAV from "./MeldingTilNAV";
 import Tilbakedatering from "./Tilbakedatering";
 import MeldingTilArbeidsgiver from "./MeldingTilArbeidsgiver";
 import AndreSykmeldingOpplysninger from "./AndreSykmeldingOpplysninger";
+import { SykmeldingOpplysningForFelt } from "./SykmeldingOpplysningForFelt";
 
 const texts = {
   utstedelsesdato: "Dato sykmeldingen ble skrevet",
@@ -24,13 +24,15 @@ const FlereOpplysninger = (flereOpplysningerProps: FlereOpplysningerProps) => {
   return (
     <div>
       <div className="sykmeldingSeksjon">
-        {getSykmeldingOpplysning(
-          sykmelding.bekreftelse,
-          "utstedelsesdato",
-          texts.utstedelsesdato,
-          tilLesbarDatoMedArstall(sykmelding.bekreftelse.utstedelsesdato),
-          "h4"
-        )}
+        <SykmeldingOpplysningForFelt
+          sykmeldingBolk={sykmelding.bekreftelse}
+          felt={"utstedelsesdato"}
+          tittel={texts.utstedelsesdato}
+          opplysning={tilLesbarDatoMedArstall(
+            sykmelding.bekreftelse.utstedelsesdato
+          )}
+          Overskrift={"h4"}
+        />
       </div>
       <MulighetForArbeid sykmelding={sykmelding} />
       <Friskmelding sykmelding={sykmelding} />

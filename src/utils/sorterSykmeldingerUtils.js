@@ -1,25 +1,16 @@
 import { toDate } from "./datoUtils";
 import {
   getSykmeldingStartdato,
-  hentPerioderForSykmelding,
-} from "./sykmeldingUtils";
-
-export function sorterPerioderEldsteFoerst(perioder) {
-  return perioder.sort((a, b) => {
-    if (toDate(a.fom).getTime() !== toDate(b.fom).getTime()) {
-      return toDate(a.fom) - toDate(b.fom);
-    }
-    return toDate(a.tom) - toDate(b.tom);
-  });
-}
+  sykmeldingperioderSortertEldstTilNyest,
+} from "./sykmeldinger/sykmeldingUtils";
 
 const hentArbeidsgivernavn = (sykmelding) => {
   return sykmelding.mottakendeArbeidsgiver
     ? sykmelding.mottakendeArbeidsgiver.navn
     : sykmelding.arbeidsgiver
     ? sykmelding.arbeidsgiver
-    : sykmelding.arbeidsgiverNavn
-    ? sykmelding.arbeidsgiverNavn
+    : sykmelding.innsendtArbeidsgivernavn
+    ? sykmelding.innsendtArbeidsgivernavn
     : "";
 };
 
@@ -31,41 +22,42 @@ export const sorterSykmeldinger = (sykmeldinger = [], kriterium = "fom") => {
             ...sykmelding,
             mulighetForArbeid: {
               ...sykmelding.mulighetForArbeid,
-              perioder: sorterPerioderEldsteFoerst(
+              perioder: sykmeldingperioderSortertEldstTilNyest(
                 sykmelding.mulighetForArbeid.perioder
               ),
             },
           }
         : {
             ...sykmelding,
-            sykmeldingsperioder: sorterPerioderEldsteFoerst(
+            sykmeldingsperioder: sykmeldingperioderSortertEldstTilNyest(
               sykmelding.sykmeldingsperioder
             ),
           };
     })
-    .sort((a, b) => {
+    .sort((sykmeldingA, sykmeldingB) => {
       if (
         kriterium === "fom" ||
-        hentArbeidsgivernavn(a).trim().toUpperCase() ===
-          hentArbeidsgivernavn(b).toUpperCase()
+        hentArbeidsgivernavn(sykmeldingA).trim().toUpperCase() ===
+          hentArbeidsgivernavn(sykmeldingB).toUpperCase()
       ) {
         if (
-          toDate(getSykmeldingStartdato(a)).getTime() !==
-          toDate(getSykmeldingStartdato(b)).getTime()
+          toDate(getSykmeldingStartdato(sykmeldingA)).getTime() !==
+          toDate(getSykmeldingStartdato(sykmeldingB)).getTime()
         ) {
           // Hvis a og b har ulik startdato, sorterer vi etter startdato
           return (
-            toDate(getSykmeldingStartdato(b)) -
-            toDate(getSykmeldingStartdato(a))
+            toDate(getSykmeldingStartdato(sykmeldingB)) -
+            toDate(getSykmeldingStartdato(sykmeldingA))
           );
         }
-        const perioderA = hentPerioderForSykmelding(a);
-        const perioderB = hentPerioderForSykmelding(b);
+        const perioderA = sykmeldingA.mulighetForArbeid.perioder;
+        const perioderB = sykmeldingB.mulighetForArbeid.perioder;
         const sistePeriodeB = perioderB[perioderB.length - 1];
         const sistePeriodeA = perioderA[perioderA.length - 1];
         return toDate(sistePeriodeB.tom) - toDate(sistePeriodeA.tom);
       }
-      return Object.byString(a, kriterium) < Object.byString(b, kriterium)
+      return Object.byString(sykmeldingA, kriterium) <
+        Object.byString(sykmeldingB, kriterium)
         ? -1
         : 1;
     });

@@ -4,35 +4,60 @@ export const BEHANDLE_MOTEBEHOV_BEHANDLET = "BEHANDLE_MOTEBEHOV_BEHANDLET";
 export const BEHANDLE_MOTEBEHOV_FEILET = "BEHANDLE_MOTEBEHOV_FEILET";
 export const BEHANDLE_MOTEBEHOV_FORBUDT = "BEHANDLE_MOTEBEHOV_FORBUDT";
 
-export function behandleMotebehov(fnr: string, veilederIdent: string) {
-  return {
-    type: BEHANDLE_MOTEBEHOV_FORESPURT,
-    fnr,
-    veilederIdent,
-  };
+export interface BehandleMotebehovAction {
+  type: typeof BEHANDLE_MOTEBEHOV_FORESPURT;
+  fnr: string;
+  veilederIdent: string;
 }
 
-export function behandleMotebehovBehandler() {
-  return {
-    type: BEHANDLE_MOTEBEHOV_BEHANDLER,
-  };
+export interface BehandleMotebehovBehandlerAction {
+  type: typeof BEHANDLE_MOTEBEHOV_BEHANDLER;
 }
 
-export function behandleMotebehovBehandlet(veilederIdent: string) {
-  return {
-    type: BEHANDLE_MOTEBEHOV_BEHANDLET,
-    veilederIdent,
-  };
+export interface BehandleMotebehovBehandletAction {
+  type: typeof BEHANDLE_MOTEBEHOV_BEHANDLET;
+  veilederIdent: string;
 }
 
-export function behandleMotebehovFeilet() {
-  return {
-    type: BEHANDLE_MOTEBEHOV_FEILET,
-  };
+export interface BehandleMotebehovFeiletAction {
+  type: typeof BEHANDLE_MOTEBEHOV_FEILET;
 }
 
-export function behandleMotebehovForbudt() {
-  return {
-    type: BEHANDLE_MOTEBEHOV_FORBUDT,
-  };
+export interface BehandleMotebehovForbudtAction {
+  type: typeof BEHANDLE_MOTEBEHOV_FORBUDT;
 }
+
+export type BehandleMotebehovActions =
+  | BehandleMotebehovAction
+  | BehandleMotebehovBehandlerAction
+  | BehandleMotebehovBehandletAction
+  | BehandleMotebehovFeiletAction
+  | BehandleMotebehovForbudtAction;
+
+export const behandleMotebehov = (
+  fnr: string,
+  veilederIdent: string
+): BehandleMotebehovAction => ({
+  type: BEHANDLE_MOTEBEHOV_FORESPURT,
+  fnr,
+  veilederIdent,
+});
+
+export const behandleMotebehovBehandler = (): BehandleMotebehovBehandlerAction => ({
+  type: BEHANDLE_MOTEBEHOV_BEHANDLER,
+});
+
+export const behandleMotebehovBehandlet = (
+  veilederIdent: string
+): BehandleMotebehovBehandletAction => ({
+  type: BEHANDLE_MOTEBEHOV_BEHANDLET,
+  veilederIdent,
+});
+
+export const behandleMotebehovFeilet = (): BehandleMotebehovFeiletAction => ({
+  type: BEHANDLE_MOTEBEHOV_FEILET,
+});
+
+export const behandleMotebehovForbudt = (): BehandleMotebehovForbudtAction => ({
+  type: BEHANDLE_MOTEBEHOV_FORBUDT,
+});

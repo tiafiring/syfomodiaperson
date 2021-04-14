@@ -1,6 +1,6 @@
 import React from "react";
 import { SykmeldingOldFormat } from "../../../../../../data/sykmelding/types/SykmeldingOldFormat";
-import { getSykmeldingOpplysning } from "../../../../../../utils/sykmeldingUtils";
+import { SykmeldingOpplysningForFelt } from "./SykmeldingOpplysningForFelt";
 
 const texts = {
   phone: "Telefon til lege/sykmelder",
@@ -23,11 +23,11 @@ const AndreSykmeldingOpplysninger = (
   return (
     <div className="sykmeldingSeksjon">
       <h4 className="sykmeldingSeksjon__tittel">Annet</h4>
-      {getSykmeldingOpplysning(
-        sykmelding.bekreftelse,
-        "sykmelderTlf",
-        texts.phone
-      )}
+      <SykmeldingOpplysningForFelt
+        sykmeldingBolk={sykmelding.bekreftelse}
+        felt={"sykmelderTlf"}
+        tittel={texts.phone}
+      />
     </div>
   );
 };

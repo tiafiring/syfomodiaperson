@@ -6,7 +6,7 @@ import { OppfolgingstilfelleperioderMapState } from "../data/oppfolgingstilfelle
 export const sorterMotebehovDataEtterDato = (
   a: MotebehovDTO,
   b: MotebehovDTO
-) => {
+): number => {
   return b.opprettetDato === a.opprettetDato
     ? 0
     : b.opprettetDato > a.opprettetDato
@@ -16,7 +16,7 @@ export const sorterMotebehovDataEtterDato = (
 
 export const finnNyesteMotebehovsvarFraHverDeltaker = (
   sortertMotebehovListe: MotebehovDTO[]
-) => {
+): MotebehovDTO[] => {
   return sortertMotebehovListe.filter((motebehov1, index) => {
     return (
       sortertMotebehovListe.findIndex((motebehov2) => {
@@ -28,17 +28,18 @@ export const finnNyesteMotebehovsvarFraHverDeltaker = (
 
 export const finnArbeidstakerMotebehovSvar = (
   motebehovListe: MotebehovDTO[]
-) => {
-  return motebehovListe.find((motebehov) => {
-    return motebehov.opprettetAv === motebehov.aktorId;
-  });
+): MotebehovDTO | undefined => {
+  return motebehovListe.find(
+    (motebehov) => motebehov.opprettetAv === motebehov.aktorId
+  );
 };
+
 export const OPPFOLGINGSFORLOP_MOTEBEHOV_START_DAGER = 16 * 7;
 export const OPPFOLGINGSFORLOP_MOTEBEHOV_SLUTT_DAGER = 26 * 7;
 
 export const erOppfoelgingsdatoPassertMed16UkerOgIkke26Uker = (
-  startOppfolgingsdato: Date
-) => {
+  startOppfolgingsdato: Date | string
+): boolean => {
   const oppfoelgingstilfelleStartDato = new Date(startOppfolgingsdato);
   oppfoelgingstilfelleStartDato.setHours(0, 0, 0, 0);
   const dagensDato = new Date();
@@ -58,8 +59,8 @@ export const erOppfoelgingsdatoPassertMed16UkerOgIkke26Uker = (
 };
 
 export const erOppfolgingstilfelleSluttDatoPassert = (
-  sluttOppfolgingsdato: Date
-) => {
+  sluttOppfolgingsdato: Date | string
+): boolean => {
   const oppfolgingstilfelleSluttDato = new Date(sluttOppfolgingsdato);
   oppfolgingstilfelleSluttDato.setHours(0, 0, 0, 0);
   const dagensDato = new Date();
@@ -68,29 +69,38 @@ export const erOppfolgingstilfelleSluttDatoPassert = (
   return dagensDato > oppfolgingstilfelleSluttDato;
 };
 
-export const harArbeidstakerSvartPaaMotebehov = (motebehovData: any) => {
+export const harArbeidstakerSvartPaaMotebehov = (
+  motebehovData: MotebehovDTO[]
+): boolean => {
   return !!finnArbeidstakerMotebehovSvar(motebehovData);
 };
 
-export const motebehovUbehandlet = (motebehovListe: MotebehovDTO[]) => {
-  return motebehovListe.filter((motebehov) => {
-    return (
+export const motebehovUbehandlet = (
+  motebehovListe: MotebehovDTO[]
+): MotebehovDTO[] => {
+  return motebehovListe.filter(
+    (motebehov) =>
       motebehov.motebehovSvar &&
       motebehov.motebehovSvar.harMotebehov &&
       !motebehov.behandletTidspunkt
-    );
-  });
+  );
 };
 
-const erAlleMotebehovSvarBehandlet = (motebehovListe: MotebehovDTO[]) => {
+const erAlleMotebehovSvarBehandlet = (
+  motebehovListe: MotebehovDTO[]
+): boolean => {
   return motebehovUbehandlet(motebehovListe).length === 0;
 };
 
-export const erMotebehovBehandlet = (motebehovListe: MotebehovDTO[]) => {
+export const erMotebehovBehandlet = (
+  motebehovListe: MotebehovDTO[]
+): boolean => {
   return erAlleMotebehovSvarBehandlet(motebehovListe);
 };
 
-export const harUbehandletMotebehov = (motebehovListe: MotebehovDTO[]) => {
+export const harUbehandletMotebehov = (
+  motebehovListe: MotebehovDTO[]
+): boolean => {
   return !erAlleMotebehovSvarBehandlet(motebehovListe);
 };
 
@@ -107,16 +117,19 @@ export const hentSistBehandletMotebehov = (
     return -1;
   })[0];
 
-export const motebehovlisteMedKunJaSvar = (motebehovliste: MotebehovDTO[]) => {
-  return motebehovliste.filter((motebehov) => {
-    return motebehov.motebehovSvar && motebehov.motebehovSvar.harMotebehov;
-  });
+export const motebehovlisteMedKunJaSvar = (
+  motebehovliste: MotebehovDTO[]
+): MotebehovDTO[] => {
+  return motebehovliste.filter(
+    (motebehov) =>
+      motebehov.motebehovSvar && motebehov.motebehovSvar.harMotebehov
+  );
 };
 
 export const motebehovFromLatestActiveTilfelle = (
   sortertMotebehovListe: MotebehovDTO[],
   oppfolgingstilfelleperioder: OppfolgingstilfelleperioderMapState
-) => {
+): MotebehovDTO[] => {
   const startDateNewestActiveTilfelle = startDateFromLatestActiveTilfelle(
     oppfolgingstilfelleperioder
   );
