@@ -30,6 +30,11 @@ const spinnsynBackendVeilederUrl =
     ? "spinnsyn-backend-veileder-proxy.dev.intern.nav.no"
     : "spinnsyn-backend-veileder-proxy.intern.nav.no";
 
+const syfopersonHost =
+  process.env.NAIS_CONTEXT === "dev"
+    ? "https://syfoperson.dev.intern.nav.no"
+    : "https://syfoperson.intern.nav.no";
+
 function nocache(req, res, next) {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
   res.header("Expires", "-1");
@@ -238,8 +243,7 @@ server.use(
 
 server.use(
   "/syfoperson/api",
-  proxy("syfoperson.default", {
-    https: false,
+  proxy(syfopersonHost, {
     proxyReqPathResolver: function (req) {
       return `/syfoperson/api${req.url}`;
     },
