@@ -11,11 +11,10 @@ export enum VedtakFagomrade {
   SP = "SP",
 }
 
-export const erHelg = (dato: Date) => {
-  return dato.getDay() === 6 || dato.getDay() === 0;
-};
+export const erHelg = (dato: Date): boolean =>
+  dato.getDay() === 6 || dato.getDay() === 0;
 
-export const estimertMaksdato = (vedtak: VedtakDTO) => {
+export const estimertMaksdato = (vedtak: VedtakDTO): string => {
   let slutt = dayjs(vedtak.vedtak.tom);
   let x = 0;
   while (x < vedtak.vedtak.gjenståendeSykedager) {
@@ -28,7 +27,9 @@ export const estimertMaksdato = (vedtak: VedtakDTO) => {
   return slutt.format("DD.MM.YYYY");
 };
 
-const utbetalingslinjerTilDager = (utbetalingslinjer: Utbetalingslinje[]) => {
+const utbetalingslinjerTilDager = (
+  utbetalingslinjer: Utbetalingslinje[]
+): Dag[] => {
   const dager: Dag[] = [];
 
   utbetalingslinjer.forEach((linje) => {
@@ -52,13 +53,12 @@ const utbetalingslinjerTilDager = (utbetalingslinjer: Utbetalingslinje[]) => {
 const refusjonUtbetalingsLinjer = (
   vedtak: VedtakDTO,
   fagomrade: VedtakFagomrade
-) => {
-  return vedtak.vedtak.utbetalinger
+): Utbetalingslinje[] =>
+  vedtak.vedtak.utbetalinger
     .filter((v) => v.fagområde === fagomrade)
     .flatMap((v) => v.utbetalingslinjer);
-};
 
-const dagerInnenforPeriode = (dager: Dag[], vedtak: VedtakDTO) => {
+const dagerInnenforPeriode = (dager: Dag[], vedtak: VedtakDTO): Dag[] => {
   const min = dayjs(vedtak.vedtak.fom).toDate();
   const max = dayjs(vedtak.vedtak.tom).toDate();
   return dager.filter((dag) => {
@@ -70,7 +70,7 @@ const dagerInnenforPeriode = (dager: Dag[], vedtak: VedtakDTO) => {
 export const refusjonsdagerInnenforVedtakPeriode = (
   vedtak: VedtakDTO,
   vedtakFagomrade: VedtakFagomrade
-) => {
+): Dag[] => {
   const refusjoner = refusjonUtbetalingsLinjer(vedtak, vedtakFagomrade);
   const refusjonsdager = utbetalingslinjerTilDager(refusjoner);
   return dagerInnenforPeriode(refusjonsdager, vedtak);
@@ -79,16 +79,15 @@ export const refusjonsdagerInnenforVedtakPeriode = (
 export const refusjonTilUtbetalingsdager = (
   vedtakFagomrade: VedtakFagomrade,
   vedtak?: VedtakDTO
-) => {
-  if (!vedtak) return 0;
-
-  return refusjonsdagerInnenforVedtakPeriode(vedtak, vedtakFagomrade).length;
-};
+): number =>
+  vedtak
+    ? refusjonsdagerInnenforVedtakPeriode(vedtak, vedtakFagomrade).length
+    : 0;
 
 export const refusjonTilUtbetalingsbelopBrutto = (
   vedtakFagomrade: VedtakFagomrade,
   vedtak?: VedtakDTO
-) => {
+): number => {
   if (!vedtak) return 0;
 
   return (

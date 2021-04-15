@@ -1,7 +1,7 @@
 import React from "react";
 import { SykmeldingOldFormat } from "../../../../../../data/sykmelding/types/SykmeldingOldFormat";
 import { tilLesbarDatoMedArstall } from "../../../../../../utils/datoUtils";
-import { getSykmeldingOpplysning } from "../../../../../../utils/sykmeldingUtils";
+import { SykmeldingOpplysningForFelt } from "./SykmeldingOpplysningForFelt";
 
 const texts = {
   begrunnelse: "Pasienten har ikke kunne ivareta egne interesser. Begrunn",
@@ -25,19 +25,19 @@ const Tilbakedatering = (tilbakedateringProps: TilbakedateringProps) => {
   return (
     <div className="sykmeldingSeksjon">
       <h4 className="sykmeldingSeksjon__tittel">{texts.title}</h4>
-      {getSykmeldingOpplysning(
-        sykmelding.tilbakedatering,
-        "dokumenterbarPasientkontakt",
-        texts.dokumenterbarPasientkontakt,
-        tilLesbarDatoMedArstall(
+      <SykmeldingOpplysningForFelt
+        sykmeldingBolk={sykmelding.tilbakedatering}
+        felt="dokumenterbarPasientkontakt"
+        tittel={texts.dokumenterbarPasientkontakt}
+        opplysning={tilLesbarDatoMedArstall(
           sykmelding.tilbakedatering.dokumenterbarPasientkontakt
-        )
-      )}
-      {getSykmeldingOpplysning(
-        sykmelding.tilbakedatering,
-        "tilbakedatertBegrunnelse",
-        texts.begrunnelse
-      )}
+        )}
+      />
+      <SykmeldingOpplysningForFelt
+        sykmeldingBolk={sykmelding.tilbakedatering}
+        felt="tilbakedatertBegrunnelse"
+        tittel={texts.begrunnelse}
+      />
     </div>
   );
 };

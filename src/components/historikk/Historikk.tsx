@@ -8,6 +8,7 @@ import IngenHistorikk from "./IngenHistorikk";
 import UtvidbarHistorikk from "./UtvidbarHistorikk";
 import Sidetopp from "../Sidetopp";
 import {
+  TilfellePeriode,
   tilfellerFromTilfelleperioder,
   tilfellerNewestToOldest,
 } from "../../utils/periodeUtils";
@@ -90,6 +91,28 @@ interface HistorikkProps {
   oppfolgingstilfelleperioder: any;
 }
 
+type TilfellePerioderMedSkyggeFom = TilfellePeriode & { skyggeFom?: Date };
+
+// Dette er en hack for at alle historikkEvents skal få en plassering i et sykefraværstilfellet, selv om de skjer "utenfor".
+const tilfellerSortertMedSkyggeFom = (
+  tilfeller: TilfellePeriode[]
+): TilfellePerioderMedSkyggeFom[] => {
+  const tilfellerSortert: TilfellePerioderMedSkyggeFom[] = tilfellerNewestToOldest(
+    tilfeller
+  );
+  for (let i = 0; i < tilfellerSortert.length; i += 1) {
+    if (i === tilfellerSortert.length - 1) {
+      tilfellerSortert[i].skyggeFom = new Date(tilfellerSortert[i].fom);
+    } else {
+      tilfellerSortert[i].skyggeFom?.setDate(
+        new Date(tilfellerSortert[i + 1].tom).getDate() + 1
+      );
+    }
+  }
+
+  return tilfellerSortert;
+};
+
 const Historikk = (historikkProps: HistorikkProps) => {
   const { historikk, ledere, oppfolgingstilfelleperioder } = historikkProps;
   const tilfeller = tilfellerFromTilfelleperioder(oppfolgingstilfelleperioder);
@@ -109,18 +132,7 @@ const Historikk = (historikkProps: HistorikkProps) => {
     return <IngenHistorikk />;
   }
 
-  const tilfellerSortert = tilfellerNewestToOldest(tilfeller);
-  // Dette er en hack for at alle historikkEvents skal få en plassering i et sykefraværstilfellet, selv om de skjer "utenfor".
-  for (let i = 0; i < tilfellerSortert.length; i += 1) {
-    if (i === tilfellerSortert.length - 1) {
-      tilfellerSortert[i].skyggeFom = new Date(tilfellerSortert[i].fom);
-    } else {
-      tilfellerSortert[i].skyggeFom = new Date(tilfellerSortert[i + 1].tom);
-      tilfellerSortert[i].skyggeFom.setDate(
-        tilfellerSortert[i].skyggeFom.getDate() + 1
-      );
-    }
-  }
+  const tilfellerSortert = tilfellerSortertMedSkyggeFom(tilfeller);
 
   const eventsEtterSisteSykefravaer = historikkEvents.filter((event: any) => {
     return new Date(event.tidspunkt) > new Date(tilfellerSortert[0].tom);

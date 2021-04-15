@@ -1,16 +1,21 @@
 import { dagerMellomDatoer, isDate16DaysAgoOrLater, toDate } from "./datoUtils";
 import { SykmeldingPeriodeDTO } from "../data/sykmelding/types/SykmeldingOldFormat";
+import { OppfolgingstilfelleperioderMapState } from "../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
 
-export function sorterPerioderEldsteForst(perioder: SykmeldingPeriodeDTO[]) {
+export type TilfellePeriode = { fom: string | Date; tom: string | Date };
+
+export function sorterPerioderEldsteForst(
+  perioder: SykmeldingPeriodeDTO[]
+): SykmeldingPeriodeDTO[] {
   return perioder.sort((a, b) => {
-    if (toDate(a.fom).getTime() !== toDate(b.fom).getTime()) {
-      return toDate(a.fom).getTime() - toDate(b.fom).getTime();
+    if (toDate(a.fom)?.getTime() !== toDate(b.fom)?.getTime()) {
+      return (toDate(a.fom)?.getTime() ?? 0) - (toDate(b.fom)?.getTime() ?? 0);
     }
-    return toDate(a.tom).getTime() - toDate(b.tom).getTime();
+    return (toDate(a.tom)?.getTime() ?? 0) - (toDate(b.tom)?.getTime() ?? 0);
   });
 }
 
-export const tidligsteFom = (perioder: any[]) => {
+export const tidligsteFom = (perioder: TilfellePeriode[]): string | Date => {
   return perioder
     .map((p) => {
       return p.fom;
@@ -25,7 +30,7 @@ export const tidligsteFom = (perioder: any[]) => {
     })[0];
 };
 
-export const senesteTom = (perioder: any[]) => {
+export const senesteTom = (perioder: TilfellePeriode[]): string | Date => {
   return perioder
     .map((p) => {
       return p.tom;
@@ -40,7 +45,10 @@ export const senesteTom = (perioder: any[]) => {
     })[0];
 };
 
-export const periodeOverlapperMedPeriode = (periodeA_: any, periodeB_: any) => {
+export const periodeOverlapperMedPeriode = (
+  periodeA_: TilfellePeriode,
+  periodeB_: TilfellePeriode
+): boolean => {
   const periodeA = periodeA_;
   const periodeB = periodeB_;
   try {
@@ -62,8 +70,8 @@ export const periodeOverlapperMedPeriode = (periodeA_: any, periodeB_: any) => {
 };
 
 export const tilfellerFromTilfelleperioder = (
-  oppfolgingstilfelleperioder: any
-) => {
+  oppfolgingstilfelleperioder: OppfolgingstilfelleperioderMapState
+): TilfellePeriode[] => {
   return Object.keys(oppfolgingstilfelleperioder)
     .map((orgnummer) => {
       const perioder = oppfolgingstilfelleperioder[orgnummer].data;
@@ -77,21 +85,25 @@ export const tilfellerFromTilfelleperioder = (
     });
 };
 
-export const tilfellerNewestToOldest = (oppfolgingstilfeller: any[]) => {
+export const tilfellerNewestToOldest = (
+  oppfolgingstilfeller: TilfellePeriode[]
+): TilfellePeriode[] => {
   return oppfolgingstilfeller.sort((s1, s2) => {
     return new Date(s2.fom).getTime() - new Date(s1.fom).getTime();
   });
 };
 
-const latestTilfelle = (oppfolgingstilfeller: any) => {
+const latestTilfelle = (
+  oppfolgingstilfeller: TilfellePeriode[]
+): TilfellePeriode => {
   const sortedTilfeller = tilfellerNewestToOldest(oppfolgingstilfeller);
   return sortedTilfeller[0];
 };
 
 export const candidateTilfelleIsConnectedToTilfelle = (
-  tilfelle: any,
-  candidateTilfelle: any
-) => {
+  tilfelle: TilfellePeriode,
+  candidateTilfelle: TilfellePeriode
+): boolean => {
   const tilfelleStartDate = new Date(tilfelle.fom);
   const tilfelleEndDate = new Date(tilfelle.tom);
   const candidateStartDate = new Date(candidateTilfelle.fom);
@@ -112,17 +124,17 @@ export const candidateTilfelleIsConnectedToTilfelle = (
 };
 
 const tilfellerConnectedToGivenTilfelle = (
-  tilfelle: any,
-  candidateTilfeller: any
-) => {
-  return candidateTilfeller.filter((candidateTilfelle: any) => {
-    return candidateTilfelleIsConnectedToTilfelle(tilfelle, candidateTilfelle);
-  });
+  tilfelle: TilfellePeriode,
+  candidateTilfeller: TilfellePeriode[]
+): TilfellePeriode[] => {
+  return candidateTilfeller.filter((candidateTilfelle) =>
+    candidateTilfelleIsConnectedToTilfelle(tilfelle, candidateTilfelle)
+  );
 };
 
 export const startDateFromLatestActiveTilfelle = (
-  oppfolgingstilfelleperioder: any
-) => {
+  oppfolgingstilfelleperioder: OppfolgingstilfelleperioderMapState
+): string | Date | null => {
   const tilfeller = tilfellerFromTilfelleperioder(oppfolgingstilfelleperioder);
 
   if (tilfeller.length === 1) {

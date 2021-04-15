@@ -2,8 +2,11 @@ import { all, call, fork, put, select, takeEvery } from "redux-saga/effects";
 import { get, post } from "../../api";
 import * as actions from "./motebehov_actions";
 import * as behandleActions from "./behandlemotebehov_actions";
+import { HentMotebehovAction } from "./motebehov_actions";
+import { BehandleMotebehovAction } from "./behandlemotebehov_actions";
+import { RootState } from "../rootState";
 
-export function* hentMotebehov(action: any) {
+export function* hentMotebehov(action: HentMotebehovAction) {
   const fnr = action.fnr ? action.fnr : "";
   yield put(actions.henterMotebehov());
   try {
@@ -19,19 +22,19 @@ export function* hentMotebehov(action: any) {
   }
 }
 
-export const skalHenteMotebehov = (state: any) => {
+export const skalHenteMotebehov = (state: RootState) => {
   const reducer = state.motebehov;
   return !(reducer.henter || reducer.hentet || reducer.hentingFeilet);
 };
 
-export function* hentMotebehovHvisIkkeHentet(action: any) {
+export function* hentMotebehovHvisIkkeHentet(action: HentMotebehovAction) {
   const skalHente = yield select(skalHenteMotebehov);
   if (skalHente) {
     yield hentMotebehov(action);
   }
 }
 
-export function* behandleMotebehov(action: any) {
+export function* behandleMotebehov(action: BehandleMotebehovAction) {
   const fnr = action.fnr;
   yield put(behandleActions.behandleMotebehovBehandler());
   try {

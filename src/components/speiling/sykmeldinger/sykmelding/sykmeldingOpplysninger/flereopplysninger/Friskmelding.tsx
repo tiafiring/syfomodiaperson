@@ -1,8 +1,8 @@
 import React from "react";
 import { SykmeldingOldFormat } from "../../../../../../data/sykmelding/types/SykmeldingOldFormat";
 import { tilLesbarDatoMedArstall } from "../../../../../../utils/datoUtils";
-import { getSykmeldingCheckbox } from "../../../../../../utils/sykmeldingUtils";
 import SykmeldingOpplysning from "./SykmeldingOpplysning";
+import { SykmeldingCheckboxForFelt } from "../SykmeldingCheckboxForFelt";
 
 const texts = {
   title: "Friskmelding/prognose",
@@ -45,12 +45,12 @@ const Friskmelding = (friskmeldingProps: FriskmeldingProps) => {
   return (
     <div className="sykmeldingSeksjon">
       <h4 className="sykmeldingSeksjon__tittel">{texts.title}</h4>
-      {getSykmeldingCheckbox(
-        sykmelding.friskmelding,
-        "antarReturSammeArbeidsgiver",
-        texts.returArbeidsgiver,
-        "typo-element blokk-s"
-      )}
+      <SykmeldingCheckboxForFelt
+        sykmeldingBolk={sykmelding.friskmelding}
+        felt="antarReturSammeArbeidsgiver"
+        tekst={texts.returArbeidsgiver}
+        className="typo-element blokk-s"
+      />
       {!sykmelding.friskmelding.antattDatoReturSammeArbeidsgiver ? null : (
         <SykmeldingOpplysning
           Overskrift="h5"
@@ -64,18 +64,18 @@ const Friskmelding = (friskmeldingProps: FriskmeldingProps) => {
           </p>
         </SykmeldingOpplysning>
       )}
-      {getSykmeldingCheckbox(
-        sykmelding.friskmelding,
-        "antarReturAnnenArbeidsgiver",
-        texts.returArbeidsgiverAnnen,
-        "typo-element blokk-s"
-      )}
-      {getSykmeldingCheckbox(
-        sykmelding.friskmelding,
-        "tilbakemeldingReturArbeid",
-        texts.returUsikker,
-        "typo-element blokk-s"
-      )}
+      <SykmeldingCheckboxForFelt
+        sykmeldingBolk={sykmelding.friskmelding}
+        felt="antarReturAnnenArbeidsgiver"
+        tekst={texts.returArbeidsgiverAnnen}
+        className="typo-element blokk-s"
+      />
+      <SykmeldingCheckboxForFelt
+        sykmeldingBolk={sykmelding.friskmelding}
+        felt="tilbakemeldingReturArbeid"
+        tekst={texts.returUsikker}
+        className="typo-element blokk-s"
+      />
       {!sykmelding.friskmelding.tilbakemeldingReturArbeid ? null : (
         <SykmeldingOpplysning
           className="subopplysning"
@@ -88,12 +88,12 @@ const Friskmelding = (friskmeldingProps: FriskmeldingProps) => {
           </p>
         </SykmeldingOpplysning>
       )}
-      {getSykmeldingCheckbox(
-        sykmelding.friskmelding,
-        "utenArbeidsgiverAntarTilbakeIArbeid",
-        texts.returUtenArbeidsgiver,
-        "typo-element blokk-s"
-      )}
+      <SykmeldingCheckboxForFelt
+        sykmeldingBolk={sykmelding.friskmelding}
+        felt="utenArbeidsgiverAntarTilbakeIArbeid"
+        tekst={texts.returUtenArbeidsgiver}
+        className="typo-element blokk-s"
+      />
       {!(
         sykmelding.friskmelding.utenArbeidsgiverAntarTilbakeIArbeid &&
         sykmelding.friskmelding.utenArbeidsgiverAntarTilbakeIArbeidDato
@@ -109,12 +109,12 @@ const Friskmelding = (friskmeldingProps: FriskmeldingProps) => {
           </p>
         </SykmeldingOpplysning>
       )}
-      {getSykmeldingCheckbox(
-        sykmelding.friskmelding,
-        "utenArbeidsgiverTilbakemelding",
-        texts.returUtenArbeidsgiverUsikker,
-        "typo-element blokk-s"
-      )}
+      <SykmeldingCheckboxForFelt
+        sykmeldingBolk={sykmelding.friskmelding}
+        felt="utenArbeidsgiverTilbakemelding"
+        tekst={texts.returUtenArbeidsgiverUsikker}
+        className="typo-element blokk-s"
+      />
       {!sykmelding.friskmelding.utenArbeidsgiverTilbakemelding ? null : (
         <SykmeldingOpplysning
           className="subopplysning"

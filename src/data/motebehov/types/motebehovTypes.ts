@@ -12,7 +12,7 @@ export interface MotebehovDTO {
   virksomhetsnummer: string;
   motebehovSvar?: MotebehovSvar;
   tildeltEnhet?: string;
-  behandletTidspunkt?: string;
+  behandletTidspunkt?: string | Date;
   behandletVeilederIdent?: string;
   skjemaType?: string;
 }

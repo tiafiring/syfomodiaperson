@@ -6,43 +6,41 @@ import {
   harArbeidstakerSvartPaaMotebehov,
 } from "./motebehovUtils";
 import { activeSykmeldingerSentToArbeidsgiver } from "./sykmeldinger/sykmeldingUtils";
+import { OppfolgingstilfelleperioderMapState } from "../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
+import { MotebehovDTO } from "../data/motebehov/types/motebehovTypes";
+import { SykmeldingOldFormat } from "../data/sykmelding/types/SykmeldingOldFormat";
 
 export const ledereIVirksomheterMedMotebehovsvarFraArbeidstaker = (
   ledereData: Leder[],
-  motebehovData: any
-) => {
-  return ledereData.filter((leder: Leder) => {
-    return (
-      motebehovData.findIndex((motebehov: any) => {
-        return (
-          motebehov.opprettetAv === motebehov.aktorId &&
-          leder.orgnummer === motebehov.virksomhetsnummer
-        );
-      }) >= 0
-    );
-  });
+  motebehovData: MotebehovDTO[]
+): Leder[] => {
+  return ledereData.filter((leder: Leder) =>
+    motebehovData.some(
+      (motebehov) =>
+        motebehov.opprettetAv === motebehov.aktorId &&
+        leder.orgnummer === motebehov.virksomhetsnummer
+    )
+  );
 };
 
 export const ledereIVirksomheterDerIngenLederHarSvartPaMotebehov = (
   ledereListe: Leder[],
-  motebehovData: any
-) => {
-  return ledereListe.filter((leder) => {
-    return (
-      motebehovData.findIndex((motebehov: any) => {
-        return (
+  motebehovData: MotebehovDTO[]
+): Leder[] => {
+  return ledereListe.filter(
+    (leder) =>
+      !motebehovData.some(
+        (motebehov) =>
           motebehov.opprettetAv !== motebehov.aktorId &&
           motebehov.virksomhetsnummer === leder.orgnummer
-        );
-      }) < 0
-    );
-  });
+      )
+  );
 };
 
 export const ledereMedOppfolgingstilfelleInnenforMotebehovperioden = (
   ledereData: Leder[],
-  oppfolgingstilfelleperioder: any
-) => {
+  oppfolgingstilfelleperioder: OppfolgingstilfelleperioderMapState
+): Leder[] => {
   return ledereData.filter((leder) => {
     const startOppfolgingsdato =
       oppfolgingstilfelleperioder[leder.orgnummer] &&
@@ -64,19 +62,16 @@ export const ledereMedOppfolgingstilfelleInnenforMotebehovperioden = (
   });
 };
 
-const isNewerLeader = (ledere: Leder[], givenLeder: Leder) => {
-  return (
-    ledere.findIndex((lederCandidate) => {
-      return (
-        givenLeder.aktoerId !== lederCandidate.aktoerId &&
-        givenLeder.orgnummer === lederCandidate.orgnummer &&
-        givenLeder.fomDato < lederCandidate.fomDato
-      );
-    }) > -1
+const isNewerLeader = (ledere: Leder[], givenLeder: Leder): boolean => {
+  return ledere.some(
+    (lederCandidate) =>
+      givenLeder.aktoerId !== lederCandidate.aktoerId &&
+      givenLeder.orgnummer === lederCandidate.orgnummer &&
+      givenLeder.fomDato < lederCandidate.fomDato
   );
 };
 
-const newestLederForEachVirksomhet = (ledere: Leder[]) => {
+const newestLederForEachVirksomhet = (ledere: Leder[]): Leder[] => {
   return ledere.filter((leder) => {
     return !isNewerLeader(ledere, leder);
   });
@@ -84,9 +79,9 @@ const newestLederForEachVirksomhet = (ledere: Leder[]) => {
 
 export const ledereUtenMotebehovsvar = (
   ledereData: Leder[],
-  motebehovData: any,
-  oppfolgingstilfelleperioder: any
-) => {
+  motebehovData: MotebehovDTO[],
+  oppfolgingstilfelleperioder: OppfolgingstilfelleperioderMapState
+): Leder[] => {
   const arbeidstakerHarSvartPaaMotebehov =
     motebehovData && harArbeidstakerSvartPaaMotebehov(motebehovData);
 
@@ -110,24 +105,24 @@ export const ledereUtenMotebehovsvar = (
   );
 };
 
-export const lederHasActiveSykmelding = (leder: Leder, sykmeldinger: any[]) => {
+export const lederHasActiveSykmelding = (
+  leder: Leder,
+  sykmeldinger: SykmeldingOldFormat[]
+): boolean => {
   const activeSykmeldingerWithArbeidsgiver = activeSykmeldingerSentToArbeidsgiver(
     sykmeldinger
   );
 
-  return (
-    activeSykmeldingerWithArbeidsgiver.findIndex((sykmelding: any) => {
-      return (
-        sykmelding.mottakendeArbeidsgiver.virksomhetsnummer === leder.orgnummer
-      );
-    }) > -1
+  return activeSykmeldingerWithArbeidsgiver.some(
+    (sykmelding) =>
+      sykmelding.mottakendeArbeidsgiver?.virksomhetsnummer === leder.orgnummer
   );
 };
 
 export const ledereWithActiveLedereFirst = (
   ledereData: Leder[],
-  sykmeldinger: any[]
-) => {
+  sykmeldinger: SykmeldingOldFormat[]
+): Leder[] => {
   return ledereData.sort((leder1, leder2) => {
     const leder1Active = lederHasActiveSykmelding(leder1, sykmeldinger);
     const leder2Active = lederHasActiveSykmelding(leder2, sykmeldinger);
@@ -144,35 +139,35 @@ export const ledereWithActiveLedereFirst = (
 
 const sykmeldingerWithoutMatchingLeder = (
   ledere: Leder[],
-  sykmeldinger: any[]
-) => {
-  return sykmeldinger.filter((sykmelding) => {
-    return (
-      ledere.findIndex((leder) => {
-        return (
+  sykmeldinger: SykmeldingOldFormat[]
+): SykmeldingOldFormat[] => {
+  return sykmeldinger.filter(
+    (sykmelding) =>
+      !ledere.some(
+        (leder) =>
           leder.orgnummer ===
-          sykmelding.mottakendeArbeidsgiver.virksomhetsnummer
-        );
-      }) === -1
-    );
-  });
+          sykmelding.mottakendeArbeidsgiver?.virksomhetsnummer
+      )
+  );
 };
 
 interface SykmeldingLeder {
   erOppgitt: boolean;
-  orgnummer: string;
-  organisasjonsnavn: string;
+  orgnummer?: string;
+  organisasjonsnavn?: string;
 }
 
-const sykmelding2Leder = (sykmelding: any) => {
+const sykmelding2Leder = (sykmelding: SykmeldingOldFormat): SykmeldingLeder => {
   return {
     erOppgitt: false,
-    orgnummer: sykmelding.mottakendeArbeidsgiver.virksomhetsnummer,
-    organisasjonsnavn: sykmelding.mottakendeArbeidsgiver.navn,
+    orgnummer: sykmelding.mottakendeArbeidsgiver?.virksomhetsnummer,
+    organisasjonsnavn: sykmelding.mottakendeArbeidsgiver?.navn,
   };
 };
 
-const removeDuplicatesFromLederList = (ledere: SykmeldingLeder[]) => {
+const removeDuplicatesFromLederList = (
+  ledere: SykmeldingLeder[]
+): SykmeldingLeder[] => {
   return ledere.filter((leder, index) => {
     return (
       ledere.findIndex((leder2) => {
@@ -184,8 +179,8 @@ const removeDuplicatesFromLederList = (ledere: SykmeldingLeder[]) => {
 
 export const virksomheterWithoutLeder = (
   ledere: Leder[],
-  sykmeldinger: any[]
-) => {
+  sykmeldinger: SykmeldingOldFormat[]
+): SykmeldingLeder[] => {
   const activeSykmeldinger = activeSykmeldingerSentToArbeidsgiver(sykmeldinger);
 
   const sykmeldingerWithoutLeder = sykmeldingerWithoutMatchingLeder(
@@ -198,14 +193,10 @@ export const virksomheterWithoutLeder = (
   return removeDuplicatesFromLederList(virksomheterAsLedere);
 };
 
-export const currentLedere = (ledere: Leder[]) => {
-  return ledere.filter((leder) => {
-    return leder.aktivTom === null;
-  });
+export const currentLedere = (ledere: Leder[]): Leder[] => {
+  return ledere.filter((leder) => leder.aktivTom === null);
 };
 
-export const formerLedere = (ledere: Leder[]) => {
-  return ledere.filter((leder) => {
-    return leder.aktivTom !== null;
-  });
+export const formerLedere = (ledere: Leder[]): Leder[] => {
+  return ledere.filter((leder) => leder.aktivTom !== null);
 };

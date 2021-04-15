@@ -2,12 +2,12 @@ import React from "react";
 import { SykmeldingOldFormat } from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
 import { tidligsteFom } from "../../../../../utils/periodeUtils";
 import { tilLesbarDatoMedArstall } from "../../../../../utils/datoUtils";
-import { getSykmeldingCheckbox } from "../../../../../utils/sykmeldingUtils";
 import SykmeldingNokkelOpplysning from "./SykmeldingNokkelOpplysning";
 import SykmeldingPerioder from "./SykmeldingPerioder";
 import { SykmeldingCheckbox } from "./SykmeldingCheckbox";
 import FlereOpplysninger from "./flereopplysninger/FlereOpplysninger";
 import Utvidbar from "../../../../Utvidbar";
+import { SykmeldingCheckboxForFelt } from "./SykmeldingCheckboxForFelt";
 
 const texts = {
   dinSykmeldingTittel: "Sykmelding\n",
@@ -132,12 +132,12 @@ const DineSykmeldingOpplysninger = (
             </p>
           </SykmeldingNokkelOpplysning>
         ) : null}
-        {getSykmeldingCheckbox(
-          sykmelding.diagnose,
-          "svangerskap",
-          texts.svangerskapTittel,
-          "blokk"
-        )}
+        <SykmeldingCheckboxForFelt
+          sykmeldingBolk={sykmelding.diagnose}
+          felt="svangerskap"
+          tekst={texts.svangerskapTittel}
+          className="blokk"
+        />
         {!sykmelding.diagnose.yrkesskadeDato ? null : (
           <SykmeldingCheckbox
             tekst={texts.yrkesskadeTittel}
@@ -154,12 +154,12 @@ const DineSykmeldingOpplysninger = (
             </p>
           </SykmeldingNokkelOpplysning>
         )}
-        {getSykmeldingCheckbox(
-          sykmelding.friskmelding,
-          "arbeidsfoerEtterPerioden",
-          texts.arbeidsforTittel,
-          "blokk"
-        )}
+        <SykmeldingCheckboxForFelt
+          sykmeldingBolk={sykmelding.friskmelding}
+          felt="arbeidsfoerEtterPerioden"
+          tekst={texts.arbeidsforTittel}
+          className="blokk"
+        />
         {!sykmelding.friskmelding.hensynPaaArbeidsplassen ? null : (
           <SykmeldingNokkelOpplysning tittel={texts.hensynTittel}>
             <p className="js-hensynPaaArbeidsplassen">

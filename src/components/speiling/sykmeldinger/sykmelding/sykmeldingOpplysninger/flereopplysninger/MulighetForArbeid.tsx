@@ -1,11 +1,9 @@
 import React from "react";
 import { SykmeldingOldFormat } from "../../../../../../data/sykmelding/types/SykmeldingOldFormat";
-import {
-  getSykmeldingCheckbox,
-  getSykmeldingOpplysning,
-} from "../../../../../../utils/sykmeldingUtils";
 import SykmeldingOpplysning from "./SykmeldingOpplysning";
 import { SykmeldingCheckbox } from "../SykmeldingCheckbox";
+import { SykmeldingOpplysningForFelt } from "./SykmeldingOpplysningForFelt";
+import { SykmeldingCheckboxForFelt } from "../SykmeldingCheckboxForFelt";
 
 const texts = {
   mulighetForArbeid: "Mulighet for arbeid",
@@ -70,11 +68,11 @@ const MulighetForArbeid = (mulighetForArbeidProps: MulighetForArbeidProps) => {
       sykmelding.mulighetForArbeid.aktivitetIkkeMulig433.length > 0 ? (
         <SykmeldingOpplysning tittel={texts.erIkkeIArbeid}>
           <div>
-            {getSykmeldingCheckbox(
-              sykmelding.mulighetForArbeid,
-              "aktivitetIkkeMulig433",
-              texts.medisinskAarsak
-            )}
+            <SykmeldingCheckboxForFelt
+              sykmeldingBolk={sykmelding.mulighetForArbeid}
+              felt="aktivitetIkkeMulig433"
+              tekst={texts.medisinskAarsak}
+            />
             <Aarsaker
               aarsaker={sykmelding.mulighetForArbeid.aktivitetIkkeMulig433}
               containerClassName="js-aktivitetIkkeMulig433hvisJa"
@@ -82,22 +80,22 @@ const MulighetForArbeid = (mulighetForArbeidProps: MulighetForArbeidProps) => {
           </div>
         </SykmeldingOpplysning>
       ) : null}
-      {(() => {
-        return getSykmeldingOpplysning(
-          sykmelding.mulighetForArbeid,
-          "aarsakAktivitetIkkeMulig433",
-          texts.medisinskAarsakBeskriv
-        );
-      })()}
+      {(() => (
+        <SykmeldingOpplysningForFelt
+          sykmeldingBolk={sykmelding.mulighetForArbeid}
+          felt={"aarsakAktivitetIkkeMulig433"}
+          tittel={texts.medisinskAarsakBeskriv}
+        />
+      ))()}
       {sykmelding.mulighetForArbeid.aktivitetIkkeMulig434 &&
       sykmelding.mulighetForArbeid.aktivitetIkkeMulig434.length > 0 ? (
         <SykmeldingOpplysning tittel={texts.erIkkeIArbeid}>
           <div>
-            {getSykmeldingCheckbox(
-              sykmelding.mulighetForArbeid,
-              "aktivitetIkkeMulig434",
-              texts.arbeidsplassForhold
-            )}
+            <SykmeldingCheckboxForFelt
+              sykmeldingBolk={sykmelding.mulighetForArbeid}
+              felt="aktivitetIkkeMulig434"
+              tekst={texts.arbeidsplassForhold}
+            />
             <Aarsaker
               aarsaker={sykmelding.mulighetForArbeid.aktivitetIkkeMulig434}
               containerClassName="js-aktivitetIkkeMulig434hvisJa"
@@ -105,13 +103,12 @@ const MulighetForArbeid = (mulighetForArbeidProps: MulighetForArbeidProps) => {
           </div>
         </SykmeldingOpplysning>
       ) : null}
-      {getSykmeldingOpplysning(
-        sykmelding.mulighetForArbeid,
-        "aarsakAktivitetIkkeMulig434",
-        texts.arsak
-      )}
+      <SykmeldingOpplysningForFelt
+        sykmeldingBolk={sykmelding.mulighetForArbeid}
+        felt="aarsakAktivitetIkkeMulig434"
+        tittel={texts.arsak}
+      />
     </div>
   );
 };
-
 export default MulighetForArbeid;
