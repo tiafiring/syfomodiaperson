@@ -1,28 +1,27 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import OppsummeringSporsmalscontainer from "./OppsummeringSporsmalscontainer";
 import OppsummeringSporsmalstekst from "./OppsummeringSporsmalstekst";
 import OppsummeringAvkrysset from "./OppsummeringAvkrysset";
 import OppsummeringUndersporsmalsliste from "./OppsummeringUndersporsmalsliste";
-import { oppsummeringSporsmal } from "../../../../propTypes";
+import { OppsummeringSporsmalProps } from "./OppsummeringSporsmal";
+import {
+  SvarDTO,
+  VisningskriterieDTO,
+} from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const texts = {
   ja: "Ja",
   nei: "Nei",
 };
 
-const getLedetekstFraSvar = (svar) => {
+const getLedetekstFraSvar = (svar: string) => {
   return svar.toLowerCase() === "ja" ? texts.ja : texts.nei;
 };
 
-const erUndersporsmalStilt = (svar, kriterieForVisningAvUndersporsmal) => {
-  return (
-    svar
-      .map((s) => {
-        return s.verdi;
-      })
-      .indexOf(kriterieForVisningAvUndersporsmal) > -1
-  );
-};
+const erUndersporsmalStilt = (
+  svar: SvarDTO[],
+  kriterieForVisningAvUndersporsmal?: VisningskriterieDTO
+) => svar.some((s) => s.verdi === kriterieForVisningAvUndersporsmal);
 
 const OppsummeringJaEllerNei = ({
   svar,
@@ -31,17 +30,18 @@ const OppsummeringJaEllerNei = ({
   overskriftsnivaa = 3,
   kriterieForVisningAvUndersporsmal,
   undersporsmal,
-}) => {
+}: OppsummeringSporsmalProps): ReactElement | null => {
   if (svar[0] === undefined) {
-    return "";
+    return null;
   }
-  const svartekst = getLedetekstFraSvar(svar[0].verdi);
   return (
     <OppsummeringSporsmalscontainer tag={tag}>
       <OppsummeringSporsmalstekst overskriftsnivaa={overskriftsnivaa}>
         {sporsmalstekst}
       </OppsummeringSporsmalstekst>
-      <OppsummeringAvkrysset tekst={svartekst} />
+      <OppsummeringAvkrysset
+        tekst={getLedetekstFraSvar(svar[0].verdi as string)}
+      />
       {erUndersporsmalStilt(svar, kriterieForVisningAvUndersporsmal) && (
         <OppsummeringUndersporsmalsliste
           sporsmalsliste={undersporsmal}
@@ -51,7 +51,5 @@ const OppsummeringJaEllerNei = ({
     </OppsummeringSporsmalscontainer>
   );
 };
-
-OppsummeringJaEllerNei.propTypes = oppsummeringSporsmal;
 
 export default OppsummeringJaEllerNei;

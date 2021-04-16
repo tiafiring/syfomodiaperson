@@ -1,9 +1,9 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { toDatePrettyPrint } from "../../../../utils/datoUtils";
 import OppsummeringSporsmalscontainer from "./OppsummeringSporsmalscontainer";
 import OppsummeringSporsmalstekst from "./OppsummeringSporsmalstekst";
 import OppsummeringAvkrysset from "./OppsummeringAvkrysset";
-import { oppsummeringSporsmal } from "../../../../propTypes";
+import { OppsummeringSporsmalProps } from "./OppsummeringSporsmal";
 
 const OppsummeringGruppeRadioUkekalender = ({
   tag,
@@ -11,7 +11,7 @@ const OppsummeringGruppeRadioUkekalender = ({
   sporsmalstekst,
   overskriftsnivaa,
   id,
-}) => {
+}: OppsummeringSporsmalProps): ReactElement => {
   const oppsummertSvar =
     svar[0] && svar[0].verdi !== "Ikke til behandling"
       ? toDatePrettyPrint(svar[0].verdi)
@@ -25,7 +25,5 @@ const OppsummeringGruppeRadioUkekalender = ({
     </OppsummeringSporsmalscontainer>
   );
 };
-
-OppsummeringGruppeRadioUkekalender.propTypes = oppsummeringSporsmal;
 
 export default OppsummeringGruppeRadioUkekalender;
