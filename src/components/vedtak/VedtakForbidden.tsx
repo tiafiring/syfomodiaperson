@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Column } from "nav-frontend-grid";
 import styled from "styled-components";
+import { MappeFeilImage } from "../../../img/ImageComponents";
 
 const texts = {
   empty: "Du har ikke tilgang til denne personens vedtak",
@@ -27,10 +28,7 @@ const StyledCenteredText = styled.h4`
 const VedtakForbidden = () => {
   return (
     <StyledColumn className="col-xs-12">
-      <StyledIcon
-        src="/sykefravaer/img/svg/mappe-feil.svg"
-        alt="mappeFeilIkon"
-      />
+      <StyledIcon src={MappeFeilImage} alt="mappeFeilIkon" />
       <StyledCenteredText>{texts.empty}</StyledCenteredText>
     </StyledColumn>
   );

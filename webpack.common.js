@@ -2,7 +2,6 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
-const autoprefixer = require("autoprefixer");
 
 module.exports = {
   entry: {
@@ -16,6 +15,17 @@ module.exports = {
   resolve: {
     extensions: [".tsx", ".jsx", ".js", ".ts", ".json"],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "public/index.html",
+      filename: "index.html",
+    }),
+    new CleanWebpackPlugin(),
+    new Dotenv({
+      path: "./.env",
+      safe: false,
+    }),
+  ],
   module: {
     rules: [
       {
@@ -35,8 +45,8 @@ module.exports = {
           {
             loader: "postcss-loader",
             options: {
-              plugins: () => {
-                return [autoprefixer];
+              postcssOptions: {
+                plugins: [["postcss-preset-env"]],
               },
             },
           },
@@ -47,23 +57,8 @@ module.exports = {
       },
       {
         test: /\.((woff2?|svg)(\?v=[0-9]\.[0-9]\.[0-9]))|(woff2?|svg|jpe?g|png|gif|ico)$/,
-        use: [
-          {
-            loader: "url-loader",
-          },
-        ],
+        type: "asset/inline",
       },
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: "public/index.html",
-      filename: "index.html",
-    }),
-    new CleanWebpackPlugin(),
-    new Dotenv({
-      path: "./.env",
-      safe: false,
-    }),
-  ],
 };

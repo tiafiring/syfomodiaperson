@@ -8,6 +8,7 @@ import {
   formaterKontaktadresse,
   formaterOppholdsadresse,
 } from "../../utils/pdladresseUtils";
+import { PersonImage } from "../../../img/ImageComponents";
 
 const texts = {
   fnr: "F.nummer",
@@ -62,7 +63,8 @@ const PersonkortSykmeldt = (
   return (
     <PersonkortElement
       tittel="Kontaktinformasjon"
-      imgUrl="/sykefravaer/img/svg/person.svg"
+      imgUrl={PersonImage}
+      imgAlt="Bilde av person"
       antallKolonner={3}
     >
       <PersonkortInformasjon

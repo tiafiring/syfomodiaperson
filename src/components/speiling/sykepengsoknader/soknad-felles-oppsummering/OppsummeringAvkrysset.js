@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { CheckboxPng } from "../../../../../img/ImageComponents";
 
 const OppsummeringAvkrysset = ({ tekst, id }) => {
   return (
     <div className="oppsummering__avkrysset" id={id}>
-      <img src="/sykefravaer/img/png/check-box-1.png" alt="Avkrysset" />
+      <img src={CheckboxPng} alt="Avkrysset" />
       <span>{tekst}</span>
     </div>
   );

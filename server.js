@@ -45,17 +45,10 @@ function nocache(req, res, next) {
 const DIST_DIR = path.join(__dirname, "dist");
 const HTML_FILE = path.join(DIST_DIR, "index.html");
 
-server.use("/sykefravaer/img", express.static(path.resolve(__dirname, "img")));
-
 server.use("/static", express.static(DIST_DIR));
 
 server.get(
-  [
-    "/",
-    "/sykefravaer",
-    "/sykefravaer/*",
-    /^\/sykefravaer\/(?!(resources|img)).*$/,
-  ],
+  ["/", "/sykefravaer", "/sykefravaer/*", /^\/sykefravaer\/(?!(resources)).*$/],
   nocache,
   (req, res) => {
     res.sendFile(HTML_FILE);

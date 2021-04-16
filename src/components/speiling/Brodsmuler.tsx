@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { PersonImage } from "../../../img/ImageComponents";
 
 interface BrodsmuleProps {
   sti: string;
@@ -91,11 +92,7 @@ const Brodsmuler = (brodsmulerProps: BrodsmulerProps) => {
       className="brodsmuler side-innhold"
       aria-label="Du er her: "
     >
-      <img
-        src="/sykefravaer/img/svg/person.svg"
-        alt="Du"
-        className="brodsmuler__ikon"
-      />
+      <img src={PersonImage} alt="Du" className="brodsmuler__ikon" />
       <span className="js-smule brodsmule">Ditt NAV</span>
       {brodsmuler.length && <span className="brodsmule__skille"> / </span>}
       {shouldVisCollapsed && (

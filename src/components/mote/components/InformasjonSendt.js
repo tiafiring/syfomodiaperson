@@ -7,6 +7,12 @@ import * as epostinnholdActions from "../../../data/mote/epostinnhold_actions";
 import * as arbeidsgiverepostinnholdActions from "../../../data/mote/arbeidsgiverepostinnhold_actions";
 import { ARBEIDSGIVER, BRUKER } from "../../../konstanter";
 import Utvidbar from "../../Utvidbar";
+import {
+  ArbeidsgiverHoverImage,
+  ArbeidsgiverImage,
+  PersonHoverImage,
+  PersonImage,
+} from "../../../../img/ImageComponents";
 
 export const mapStateToInnholdsviserProps = (state) => {
   return {
@@ -41,8 +47,8 @@ const InformasjonSendt = ({ arbeidstaker, mote }) => {
           className="blokk"
           erApen={false}
           tittel="Arbeidstaker"
-          ikon="svg/person.svg"
-          ikonHover="svg/person_hover.svg"
+          ikon={PersonImage}
+          ikonHover={PersonHoverImage}
           ikonAltTekst="Arbeidstaker"
           variant="lysebla"
         >
@@ -53,8 +59,8 @@ const InformasjonSendt = ({ arbeidstaker, mote }) => {
         className="blokk"
         erApen={false}
         tittel="Arbeidsgiver"
-        ikon="svg/arbeidsgiver.svg"
-        ikonHover="svg/arbeidsgiver_hover.svg"
+        ikon={ArbeidsgiverImage}
+        ikonHover={ArbeidsgiverHoverImage}
         ikonAltTekst="Arbeidsgiver"
         variant="lilla"
       >

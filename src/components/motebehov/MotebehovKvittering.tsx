@@ -4,6 +4,11 @@ import { finnArbeidstakerMotebehovSvar } from "../../utils/motebehovUtils";
 import { tilLesbarDatoMedArUtenManedNavn } from "../../utils/datoUtils";
 import { MotebehovDTO } from "../../data/motebehov/types/motebehovTypes";
 import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
+import {
+  MotebehovIkkeSvartImage,
+  MotebehovKanIkkeImage,
+  MotebehovKanImage,
+} from "../../../img/ImageComponents";
 
 export const lederMedGittAktorId = (aktorId: string, ledere: Leder[]) => {
   return ledere.find((leder) => {
@@ -15,16 +20,16 @@ export const arbeidsgiverNavnEllerTomStreng = (leder?: Leder) => {
   return leder && leder.navn ? `${leder.navn}` : "";
 };
 
-export const setSvarIkon = (deltakerOnskerMote?: boolean) => {
+export const setSvarIkon = (deltakerOnskerMote?: boolean): string => {
   switch (deltakerOnskerMote) {
     case true: {
-      return "/sykefravaer/img/svg/motebehov--kan.svg";
+      return MotebehovKanImage;
     }
     case false: {
-      return "/sykefravaer/img/svg/motebehov--kanikke.svg";
+      return MotebehovKanIkkeImage;
     }
     default: {
-      return "/sykefravaer/img/svg/motebehov--ikkesvart.svg";
+      return MotebehovIkkeSvartImage;
     }
   }
 };

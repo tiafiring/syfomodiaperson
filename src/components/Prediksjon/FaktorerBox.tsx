@@ -1,5 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
+import {
+  ArrowWithLineDownBlueImage,
+  ArrowWithLineUpBlueImage,
+} from "../../../img/ImageComponents";
 
 interface FaktorerBoxProps {
   faktorer: string[];
@@ -33,15 +37,13 @@ const PilIkon = styled.img`
 `;
 
 const FaktorerBox = ({ faktorer, ned }: FaktorerBoxProps) => {
-  const arrowDirection = ned ? "down" : "up";
-
   return (
     <div>
       <FaktorTittel>{ned ? texts.ned : texts.opp}</FaktorTittel>
       <ListWrapper>
         <PilIkon
           alt="pil-ned"
-          src={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/arrow-with-line__${arrowDirection}--blue.svg`}
+          src={ned ? ArrowWithLineDownBlueImage : ArrowWithLineUpBlueImage}
         />
         <List>
           {faktorer.map((faktor, index) => {

@@ -161,7 +161,7 @@ class Utvidbar extends Component {
             {this.state.ikon && (
               <img
                 aria-hidden="true"
-                src={`${process.env.REACT_APP_CONTEXT_ROOT}/img/${this.state.ikon}`}
+                src={this.state.ikon}
                 alt={this.props.ikonAltTekst}
                 className="utvidbar__ikon"
               />

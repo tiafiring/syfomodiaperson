@@ -14,6 +14,7 @@ import { sykmeldingerHasCoronaDiagnose } from "../../utils/sykmeldinger/sykmeldi
 import { startDateFromLatestActiveTilfelle } from "../../utils/periodeUtils";
 import { tilLesbarDatoMedArUtenManedNavn } from "../../utils/datoUtils";
 import CopyButton from "../kopierknapp/CopyButton";
+import { KvinneImage, MannImage } from "../../../img/ImageComponents";
 
 const texts = {
   copied: "Kopiert!",
@@ -73,10 +74,6 @@ const PersonkortHeader = (personkortHeaderProps: PersonkortHeaderProps) => {
     diskresjonskode.data.diskresjonskode === "7" ||
     egenansatt.data.erEgenAnsatt ||
     hasCoronaDiagnose;
-  const tittelImg =
-    hentBrukersKjoennFraFnr(navbruker.kontaktinfo.fnr) === KJOENN.KVINNE
-      ? "/sykefravaer/img/svg/kvinne.svg"
-      : "/sykefravaer/img/svg/mann.svg";
 
   const startDate =
     oppfolgingstilfelleperioder &&
@@ -84,7 +81,14 @@ const PersonkortHeader = (personkortHeaderProps: PersonkortHeaderProps) => {
   return (
     <div className="personkortHeader">
       <div className="personkortHeader__info">
-        <img src={tittelImg} alt="person" />
+        <img
+          src={
+            hentBrukersKjoennFraFnr(navbruker.kontaktinfo.fnr) === KJOENN.KVINNE
+              ? KvinneImage
+              : MannImage
+          }
+          alt="person"
+        />
         <div>
           <h3>{`${
             navbruker.navn ? navbruker.navn : ""

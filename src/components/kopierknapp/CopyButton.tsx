@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import Popover from "nav-frontend-popover";
+import { CopyImage } from "../../../img/ImageComponents";
 
 interface CopyButtonProps {
   message: string;
@@ -52,7 +53,7 @@ const CopyButton = ({ message, value }: CopyButtonProps) => {
           togglePopover();
         }}
       >
-        <img alt="kopier" src="/sykefravaer/img/svg/copy-1.svg" />
+        <img alt="kopier" src={CopyImage} />
       </StyledButton>
       <Popover
         ankerEl={popoverAnker}

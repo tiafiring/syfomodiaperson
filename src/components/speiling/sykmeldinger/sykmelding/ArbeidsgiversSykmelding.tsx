@@ -2,6 +2,10 @@ import React from "react";
 import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 import ArbeidsgiversSykmeldingOpplysninger from "./ArbeidsgiversSykmeldingOpplysninger";
 import Utvidbar from "../../../Utvidbar";
+import {
+  DoctorHoverImage,
+  DoctorImage,
+} from "../../../../../img/ImageComponents";
 
 interface ArbeidsgiversSykmeldingProps {
   sykmelding: SykmeldingOldFormat;
@@ -20,8 +24,8 @@ const ArbeidsgiversSykmelding = (
   return (
     <Utvidbar
       tittel="Dette får arbeidsgiveren din se"
-      ikon="svg/doctor-2.svg"
-      ikonHover="svg/doctor-2_hover.svg"
+      ikon={DoctorImage}
+      ikonHover={DoctorHoverImage}
       ikonAltTekst="Lege"
       erApen={erApen}
       variant="lilla"

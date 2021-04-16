@@ -3,6 +3,11 @@ import PropTypes from "prop-types";
 import { motedeltakerPt, motesvarPt } from "../../../propTypes";
 import { getSvar } from "../../../utils/moteplanleggerUtils";
 import { ARBEIDSGIVER, MULIGE_SVAR } from "../../../konstanter";
+import {
+  StatusIkkeSvarImage,
+  StatusKanIkkeImage,
+  StatusKanImage,
+} from "../../../../img/ImageComponents";
 
 const texts = {
   kanMote: "kan møte på dette tidspunktet",
@@ -14,14 +19,10 @@ const textWithName = (text, name) => {
   return `${name} ${text}`;
 };
 
-const getIkonsti = (filnavn) => {
-  return `/sykefravaer/img/svg/${filnavn}`;
-};
-
 const Ikon = ({ ikon }) => {
   return (
     <div className="alternativsvar__ikon">
-      <img src={getIkonsti(ikon)} className="js-ikon-passer" alt="" />
+      <img src={ikon} className="js-ikon-passer" alt="" />
     </div>
   );
 };
@@ -45,17 +46,17 @@ const getSvartekst = (bruker, svar) => {
   }
 };
 
-const getIkonFilnavn = (bruker, svar) => {
+const getIkon = (bruker, svar) => {
   const svarstr = getSvar(svar, bruker.svartidspunkt);
   switch (svarstr) {
     case MULIGE_SVAR.PASSER: {
-      return "status--kan.svg";
+      return StatusKanImage;
     }
     case MULIGE_SVAR.PASSER_IKKE: {
-      return "status--kanikke.svg";
+      return StatusKanIkkeImage;
     }
     default: {
-      return "status--ikkesvar.svg";
+      return StatusIkkeSvarImage;
     }
   }
 };
@@ -79,7 +80,7 @@ Svartekst.propTypes = {
 export const NavKan = () => {
   return (
     <li className="alternativsvar__svar js-navssvar">
-      <Ikon ikon="status--kan.svg" />
+      <Ikon ikon={StatusKanImage} />
       <Svartekst
         deltakertype="NAV"
         tekst={textWithName(texts.kanMote, "Veilederen")}
@@ -93,7 +94,7 @@ const SvarMedIkon = ({ bruker, svar }) => {
     bruker.type === ARBEIDSGIVER ? "Arbeidsgiver" : "Arbeidstaker";
   return (
     <li className="alternativsvar__svar js-annenssvar">
-      <Ikon ikon={getIkonFilnavn(bruker, svar)} />
+      <Ikon ikon={getIkon(bruker, svar)} />
       <Svartekst
         deltakertype={`${deltakertype}en`}
         navn={bruker.navn}

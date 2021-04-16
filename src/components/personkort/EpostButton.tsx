@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Column } from "nav-frontend-grid";
 import Popover from "nav-frontend-popover";
 import styled from "styled-components";
+import { EpostImage } from "../../../img/ImageComponents";
 
 const textEpostCopied = (epost?: string) => {
   return `${epost} er kopiert!`;
@@ -47,7 +48,7 @@ const EpostButton = ({ epost }: EpostButtonProps) => {
   return (
     <Column className="col-sm-2">
       <StyledButton ref={buttonRef} onClick={togglePopover} value={epost}>
-        <img alt="epost" src="/sykefravaer/img/svg/epost.svg" />
+        <img alt="epost" src={EpostImage} />
       </StyledButton>
       <Popover
         ankerEl={popoverAnker}

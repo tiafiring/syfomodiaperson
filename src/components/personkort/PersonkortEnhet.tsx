@@ -2,6 +2,7 @@ import React from "react";
 import { BehandlendeEnhet } from "../../data/behandlendeenhet/types/BehandlendeEnhet";
 import PersonkortElement from "./PersonkortElement";
 import PersonkortInformasjon from "./PersonkortInformasjon";
+import { KontorByggImage } from "../../../img/ImageComponents";
 
 const texts = {
   enhet: "Enhet",
@@ -20,7 +21,8 @@ const PersonkortEnhet = (personkortEnhetProps: PersonkortEnhetProps) => {
   return (
     <PersonkortElement
       tittel={behandlendeEnhet.navn}
-      imgUrl="/sykefravaer/img/svg/kontorbygg.svg"
+      imgUrl={KontorByggImage}
+      imgAlt="Kontorbygg"
     >
       <PersonkortInformasjon
         informasjonNokkelTekster={informasjonNokkelTekster}

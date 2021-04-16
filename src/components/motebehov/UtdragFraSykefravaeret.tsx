@@ -23,6 +23,7 @@ import Utvidbar from "../Utvidbar";
 import styled from "styled-components";
 import { OppfolgingstilfelleperioderMapState } from "../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
 import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
+import { MerInformasjonImage } from "../../../img/ImageComponents";
 
 const tekster = {
   header: "Utdrag fra sykefraværet",
@@ -131,7 +132,7 @@ export const UtvidbarTittel = ({ sykmelding }: UtvidbarTittelProps) => {
       </UtdragColumn>
       {erViktigInformasjon && (
         <div className="utvidbarTittel__erViktig">
-          <img alt="Mer" src={"/sykefravaer/img/svg/merInformasjon.svg"} />
+          <img alt="Mer" src={MerInformasjonImage} />
         </div>
       )}
     </div>

@@ -8,6 +8,10 @@ import { SykmeldingCheckbox } from "./SykmeldingCheckbox";
 import FlereOpplysninger from "./flereopplysninger/FlereOpplysninger";
 import Utvidbar from "../../../../Utvidbar";
 import { SykmeldingCheckboxForFelt } from "./SykmeldingCheckboxForFelt";
+import {
+  DoctorHoverImage,
+  DoctorImage,
+} from "../../../../../../img/ImageComponents";
 
 const texts = {
   dinSykmeldingTittel: "Sykmelding\n",
@@ -192,8 +196,8 @@ const DineSykmeldingOpplysninger = (
       </div>
       <Utvidbar
         tittel={texts.flereOpplysningerTittel}
-        ikon="svg/doctor-2.svg"
-        ikonHover="svg/doctor-2_hover.svg"
+        ikon={DoctorImage}
+        ikonHover={DoctorHoverImage}
         ikonAltTekst="Lege"
         className="blokk-s"
       >

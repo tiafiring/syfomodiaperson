@@ -3,6 +3,10 @@ import DineSykmeldingOpplysninger from "./sykmeldingOpplysninger/DineSykmeldingO
 import SykmeldingStatuspanel from "../sykmeldingstatuspanel/SykmeldingStatuspanel";
 import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 import Utvidbar from "../../../Utvidbar";
+import {
+  PersonHoverImage,
+  PersonImage,
+} from "../../../../../img/ImageComponents";
 
 const texts = {
   dineOpplysninger: "Dine opplysninger",
@@ -23,8 +27,8 @@ const DinAvbrutteSykmelding = (
         className="blokk"
         erApen
         tittel={texts.dineOpplysninger}
-        ikon="svg/person.svg"
-        ikonHover="svg/person_hover.svg"
+        ikon={PersonImage}
+        ikonHover={PersonHoverImage}
         ikonAltTekst="Du"
         variant="lysebla"
         Overskrift="H2"

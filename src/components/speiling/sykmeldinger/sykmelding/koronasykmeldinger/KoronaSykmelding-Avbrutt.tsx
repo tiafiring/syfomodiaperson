@@ -4,6 +4,10 @@ import { SykmeldingOldFormat } from "../../../../../data/sykmelding/types/Sykmel
 import SykmeldingStatuspanel from "../../sykmeldingstatuspanel/SykmeldingStatuspanel";
 import DineKoronaSykmeldingOpplysninger from "../sykmeldingOpplysninger/DineKoronaSykmeldingOpplysninger";
 import Utvidbar from "../../../../Utvidbar";
+import {
+  PersonHoverImage,
+  PersonImage,
+} from "../../../../../../img/ImageComponents";
 
 const texts = {
   pageSubtitle: "for selvstendig næringsdrivende og frilansere",
@@ -27,8 +31,8 @@ const KoronaSykmeldingAvbrutt = (
       <Utvidbar
         erApen
         tittel={texts.expandableTitle}
-        ikon="svg/person.svg"
-        ikonHover="svg/person_hover.svg"
+        ikon={PersonImage}
+        ikonHover={PersonHoverImage}
         ikonAltTekst="Du"
         className="blokk"
         variant="lysebla"

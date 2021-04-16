@@ -1,4 +1,4 @@
-const merge = require("webpack-merge");
+const { merge } = require("webpack-merge");
 const common = require("./webpack.common.js");
 const path = require("path");
 const mockEndepunkter = require("./mock/mockEndepunkter");
@@ -7,9 +7,6 @@ const express = require("express");
 module.exports = merge(common, {
   mode: "development",
   devtool: "eval-source-map",
-  output: {
-    publicPath: "/static",
-  },
   devServer: {
     contentBase: path.join(__dirname, "dist"),
     port: 8080,
@@ -19,10 +16,6 @@ module.exports = merge(common, {
     },
     after: (app, server, compiler) => {
       mockEndepunkter(app, true);
-      app.use(
-        "/sykefravaer/img",
-        express.static(path.resolve(__dirname, "img"))
-      );
       app.use("/static", express.static(path.resolve(__dirname, "dist")));
 
       app.use("*", (req, res) => {
