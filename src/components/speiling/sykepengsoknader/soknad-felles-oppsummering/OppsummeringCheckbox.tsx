@@ -1,16 +1,16 @@
-import React from "react";
-import { CHECKED } from "../../../../enums/svarEnums";
+import React, { ReactElement } from "react";
 import OppsummeringAvkrysset from "./OppsummeringAvkrysset";
 import OppsummeringUndersporsmalsliste from "./OppsummeringUndersporsmalsliste";
-import { oppsummeringSporsmal } from "../../../../propTypes";
+import { OppsummeringSporsmalProps } from "./OppsummeringSporsmal";
+import { VisningskriterieDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const OppsummeringCheckbox = ({
-  undersporsmal,
   svar,
   sporsmalstekst,
+  undersporsmal,
   overskriftsnivaa = 3,
-}) => {
-  return svar[0] && svar[0].verdi === CHECKED ? (
+}: OppsummeringSporsmalProps): ReactElement | null =>
+  svar[0] && svar[0].verdi === VisningskriterieDTO.CHECKED ? (
     <div>
       <OppsummeringAvkrysset tekst={sporsmalstekst} />
       <OppsummeringUndersporsmalsliste
@@ -19,8 +19,5 @@ const OppsummeringCheckbox = ({
       />
     </div>
   ) : null;
-};
-
-OppsummeringCheckbox.propTypes = oppsummeringSporsmal;
 
 export default OppsummeringCheckbox;

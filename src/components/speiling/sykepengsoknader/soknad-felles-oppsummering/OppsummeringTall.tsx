@@ -1,9 +1,9 @@
-import React from "react";
-import { TIMER } from "../../../../enums/svartyper";
+import React, { ReactElement } from "react";
 import OppsummeringSporsmalscontainer from "./OppsummeringSporsmalscontainer";
 import OppsummeringSporsmalstekst from "./OppsummeringSporsmalstekst";
-import { oppsummeringSporsmal } from "../../../../propTypes";
 import { getKey } from "./Oppsummeringsvisning";
+import { OppsummeringSporsmalProps } from "./OppsummeringSporsmal";
+import { SvarTypeDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const texts = {
   timerTot: "timer totalt",
@@ -17,8 +17,8 @@ const OppsummeringTall = ({
   overskriftsnivaa,
   svartype,
   undertekst,
-}) => {
-  const text = svartype === TIMER ? texts.timerTot : texts.prosent;
+}: OppsummeringSporsmalProps): ReactElement => {
+  const text = svartype === SvarTypeDTO.TIMER ? texts.timerTot : texts.prosent;
   const label = undertekst || text;
   return (
     <OppsummeringSporsmalscontainer tag={tag}>
@@ -26,18 +26,14 @@ const OppsummeringTall = ({
         {sporsmalstekst}
       </OppsummeringSporsmalstekst>
       <div className="oppsummering__tekstsvar">
-        {svar.map((svarverdi, index) => {
-          return (
-            <p className="oppsummering__tekst" key={getKey(tag, index)}>
-              {svarverdi.verdi} {label}
-            </p>
-          );
-        })}
+        {svar.map((svarverdi, index) => (
+          <p className="oppsummering__tekst" key={getKey(tag, index)}>
+            {svarverdi.verdi} {label}
+          </p>
+        ))}
       </div>
     </OppsummeringSporsmalscontainer>
   );
 };
-
-OppsummeringTall.propTypes = oppsummeringSporsmal;
 
 export default OppsummeringTall;

@@ -239,7 +239,7 @@ export const leggTilDagerPaDato = (dato, dager) => {
 
 export const toDatePrettyPrint = (dato) => {
   if (typeof dato === "undefined" || dato === null) {
-    return null;
+    return undefined;
   }
 
   const _dato = toDate(dato);
