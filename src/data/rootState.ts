@@ -48,7 +48,6 @@ import personoppgaver, {
 import flaggperson, { FlaggpersonState } from "./pengestopp/flaggperson";
 import prediksjon, { PrediksjonState } from "./prediksjon/prediksjon";
 import vedtak, { VedtakState } from "./vedtak/vedtak";
-import { reducer as formReducer } from "redux-form";
 
 export interface RootState {
   fastleger: FastlegerState;
@@ -80,7 +79,6 @@ export interface RootState {
   flaggperson: FlaggpersonState;
   prediksjon: PrediksjonState;
   vedtak: VedtakState;
-  form: formReducer;
 }
 
 export const rootReducer = combineReducers<RootState>({
@@ -113,5 +111,4 @@ export const rootReducer = combineReducers<RootState>({
   flaggperson,
   prediksjon,
   vedtak,
-  form: formReducer,
 });

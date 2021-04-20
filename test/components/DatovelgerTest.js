@@ -3,7 +3,7 @@ import React from "react";
 import { mount, shallow } from "enzyme";
 import chaiEnzyme from "chai-enzyme";
 import sinon from "sinon";
-import { Field } from "redux-form";
+import { Field } from "react-final-form";
 import Datovelger, {
   DatoField,
   MONTHS,
@@ -35,14 +35,11 @@ describe("Datovelger", () => {
 
   describe("Datovelger", () => {
     beforeEach(() => {
-      component = shallow(
-        <Datovelger name="halla" prop="minprop" skjemanavn="OLSEN" />
-      );
+      component = shallow(<Datovelger name="halla" prop="minprop" />);
     });
 
     it("Skal inneholde et Field", () => {
       expect(component.find(Field)).to.have.length(1);
-      expect(component.find(Field).prop("skjemanavn")).to.deep.equal("OLSEN");
     });
 
     it("Skal sende en validate-funksjon videre til Field", () => {

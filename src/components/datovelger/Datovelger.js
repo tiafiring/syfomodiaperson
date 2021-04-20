@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Field, autofill, touch } from "redux-form";
-import { connect } from "react-redux";
+import { Field } from "react-final-form";
 import MaskedInput from "react-maskedinput";
 import Feilmelding from "./DatovelgerFeilmelding";
 import DayPickerComponent from "./DayPicker";
@@ -100,10 +99,9 @@ export class DatoField extends Component {
               tidligsteFom={tidligsteFom}
               senesteTom={senesteTom}
               onDayClick={(event, jsDato) => {
-                const { dispatch, skjemanavn } = this.props;
                 const s = toDatePrettyPrint(new Date(jsDato));
-                dispatch(autofill(skjemanavn, this.props.input.name, s));
-                dispatch(touch(skjemanavn, this.props.input.name));
+                this.props.input.onChange(s);
+                this.props.input.onBlur();
                 this.lukk();
               }}
               onKeyUp={(e) => {
@@ -125,13 +123,9 @@ DatoField.propTypes = {
   meta: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
   input: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  skjemanavn: PropTypes.string.isRequired,
   tidligsteFom: PropTypes.instanceOf(Date),
   senesteTom: PropTypes.instanceOf(Date),
 };
-
-const ConnectedDatoField = connect()(DatoField);
 
 export const validerPeriode = (input, alternativer) => {
   const { fra, til } = alternativer;
@@ -169,14 +163,8 @@ export const validerDatoField = (value) => {
   return undefined;
 };
 
-const Datovelger = (props) => {
-  return (
-    <Field
-      component={ConnectedDatoField}
-      validate={validerDatoField}
-      {...props}
-    />
-  );
-};
+const Datovelger = (props) => (
+  <Field component={DatoField} validate={validerDatoField} {...props} />
+);
 
 export default Datovelger;
