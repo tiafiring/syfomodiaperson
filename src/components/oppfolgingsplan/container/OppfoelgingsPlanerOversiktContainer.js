@@ -131,7 +131,7 @@ export function mapStateToProps(state, ownProps) {
     oppfolgingsplanerLPS,
     personOppgaveList,
     tilgang: state.tilgang.data,
-    veilederIdent: state.veilederinfo.data.ident,
+    veilederIdent: state.veilederinfo.data && state.veilederinfo.data.ident,
   };
 }
 
