@@ -99,8 +99,8 @@ export class DatoField extends Component {
               tidligsteFom={tidligsteFom}
               senesteTom={senesteTom}
               onDayClick={(event, jsDato) => {
-                const s = toDatePrettyPrint(new Date(jsDato));
-                this.props.input.onChange(s);
+                const dateString = toDatePrettyPrint(new Date(jsDato));
+                this.props.input.onChange(dateString);
                 this.props.input.onBlur();
                 this.lukk();
               }}
