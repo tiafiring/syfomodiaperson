@@ -1,7 +1,6 @@
 import React from "react";
-import sinon from "sinon";
 import { expect } from "chai";
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import AlertStripe from "nav-frontend-alertstriper";
 import { genererDato } from "../../../src/components/mote/utils";
 import KontaktInfoAdvarsel from "../../../src/components/mote/components/KontaktInfoAdvarsel";
@@ -11,53 +10,46 @@ import {
   getData,
 } from "../../../src/components/mote/skjema/MotebookingSkjema";
 import Tidspunkter from "../../../src/components/mote/skjema/Tidspunkter";
+import { Field } from "react-final-form";
 
 describe("MotebookingSkjemaTest", () => {
   let arbeidstaker;
 
   describe("MotebookingSkjema", () => {
-    let handleSubmit;
-
     beforeEach(() => {
       arbeidstaker = {
         kontaktinfo: {
           skalHaVarsel: true,
         },
       };
-      handleSubmit = sinon.spy();
     });
 
     it("Skal inneholde tidspunkter", () => {
-      const compo = shallow(
+      const compo = mount(
         <MotebookingSkjema
           ledere={[]}
-          handleSubmit={handleSubmit}
           valgtEnhet="0021"
           arbeidstaker={arbeidstaker}
         />
       );
-      expect(
-        compo.contains(<Tidspunkter skjemanavn="opprettMote" />)
-      ).to.be.equal(true);
+      expect(compo.contains(<Tidspunkter />)).to.be.equal(true);
     });
 
     it("Skal inneholde felt med mulighet for å skrive inn sted", () => {
-      const compo = shallow(
+      const compo = mount(
         <MotebookingSkjema
           ledere={[]}
-          handleSubmit={handleSubmit}
           valgtEnhet="0021"
           arbeidstaker={arbeidstaker}
         />
       );
-      expect(compo.find("#sted").prop("name")).to.equal("sted");
+      expect(compo.find(Field).last().prop("name")).to.equal("sted");
     });
 
     it("Skal ikke vise feilmelding hvis sendingFeilet !== true", () => {
-      const compo = shallow(
+      const compo = mount(
         <MotebookingSkjema
           ledere={[]}
-          handleSubmit={handleSubmit}
           valgtEnhet="0021"
           arbeidstaker={arbeidstaker}
         />
@@ -66,10 +58,9 @@ describe("MotebookingSkjemaTest", () => {
     });
 
     it("Skal vise feilmelding hvis sendingFeilet", () => {
-      const compo = shallow(
+      const compo = mount(
         <MotebookingSkjema
           ledere={[]}
-          handleSubmit={handleSubmit}
           valgtEnhet="0021"
           arbeidstaker={arbeidstaker}
           sendingFeilet
@@ -105,7 +96,6 @@ describe("MotebookingSkjemaTest", () => {
             <MotebookingSkjema
               arbeidstaker={arbeidstaker}
               ledere={ledere}
-              handleSubmit={handleSubmit}
               valgtEnhet="0021"
             />
           );

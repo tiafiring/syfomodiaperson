@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Field, reduxForm } from "redux-form";
+import { Form, Field } from "react-final-form";
 import AlertStripe from "nav-frontend-alertstriper";
 import { Hovedknapp } from "nav-frontend-knapper";
 import VelgLeder from "./VelgLeder";
@@ -36,8 +36,6 @@ const texts = {
   send: "Send",
 };
 
-export const OPPRETT_MOTE_SKJEMANAVN = "opprettMote";
-
 export function getData(values) {
   const alternativer = values.tidspunkter.map((tidspunkt) => {
     return {
@@ -60,7 +58,6 @@ export class MotebookingSkjema extends Component {
 
   render() {
     const {
-      handleSubmit,
       arbeidstaker,
       opprettMote,
       fnr,
@@ -84,71 +81,75 @@ export class MotebookingSkjema extends Component {
       <div>
         {!arbeidstaker.kontaktinfo.skalHaVarsel && <KontaktInfoAdvarsel />}
         <Sidetopp tittel={texts.pageHeader} />
-        <form className="panel" onSubmit={handleSubmit(submit)}>
-          <div className="skjema-fieldset js-arbeidsgiver blokk--l">
-            <legend>{texts.captions.employerInfo}</legend>
-            <VelgLeder
-              ledere={ledere}
-              valgtArbeidsgiver={this.state.valgtArbeidsgiver}
-              velgArbeidsgiver={(orgnummer) => {
-                this.setState({
-                  valgtArbeidsgiver: orgnummer,
-                });
-              }}
-            />
-          </div>
-          <fieldset className="skjema-fieldset blokk">
-            <legend>{texts.captions.timeAndPlace}</legend>
-            <Tidspunkter
-              antallNyeTidspunkt={antallNyeTidspunkt}
-              skjemanavn={OPPRETT_MOTE_SKJEMANAVN}
-            />
-            <div className="blokk--l">
-              <button
-                type="button"
-                className="lenke"
-                onClick={flereAlternativ}
-                style={{ marginRight: "1em" }}
-              >
-                {texts.flereTidspunkt.add}
-              </button>
-              {antallNyeTidspunkt > 1 && (
-                <button
-                  type="button"
-                  className="lenke"
-                  onClick={fjernAlternativ}
+        <Form
+          onSubmit={(values) => submit(values)}
+          validate={(values) => validate(values, this.props)}
+        >
+          {({ handleSubmit }) => (
+            <form className="panel" onSubmit={handleSubmit}>
+              <div className="skjema-fieldset js-arbeidsgiver blokk--l">
+                <legend>{texts.captions.employerInfo}</legend>
+                <VelgLeder
+                  ledere={ledere}
+                  valgtArbeidsgiver={this.state.valgtArbeidsgiver}
+                  velgArbeidsgiver={(orgnummer) => {
+                    this.setState({
+                      valgtArbeidsgiver: orgnummer,
+                    });
+                  }}
+                />
+              </div>
+              <fieldset className="skjema-fieldset blokk">
+                <legend>{texts.captions.timeAndPlace}</legend>
+                <Tidspunkter antallNyeTidspunkt={antallNyeTidspunkt} />
+                <div className="blokk--l">
+                  <button
+                    type="button"
+                    className="lenke"
+                    onClick={flereAlternativ}
+                    style={{ marginRight: "1em" }}
+                  >
+                    {texts.flereTidspunkt.add}
+                  </button>
+                  {antallNyeTidspunkt > 1 && (
+                    <button
+                      type="button"
+                      className="lenke"
+                      onClick={fjernAlternativ}
+                    >
+                      {texts.flereTidspunkt.remove}
+                    </button>
+                  )}
+                </div>
+                <Field
+                  label="Sted"
+                  id="sted"
+                  component={TextField}
+                  name="sted"
+                  maxLength={MAX_LENGTH_STED}
+                  placeholder={texts.stedPlaceholder}
+                />
+              </fieldset>
+
+              <div aria-live="polite" role="alert">
+                {sendingFeilet && (
+                  <AlertStripe type="info">
+                    <p className="sist">{texts.sendingFeilerErrorMessage}</p>
+                  </AlertStripe>
+                )}
+              </div>
+
+              <div className="knapperad blokk">
+                <Hovedknapp
+                  spinner={sender}
+                  disabled={sender || this.state.valgtArbeidsgiver === "VELG"}
                 >
-                  {texts.flereTidspunkt.remove}
-                </button>
-              )}
-            </div>
-            <Field
-              label="Sted"
-              id="sted"
-              component={TextField}
-              name="sted"
-              maxLength={MAX_LENGTH_STED}
-              placeholder={texts.stedPlaceholder}
-            />
-          </fieldset>
-
-          <div aria-live="polite" role="alert">
-            {sendingFeilet && (
-              <AlertStripe type="info">
-                <p className="sist">{texts.sendingFeilerErrorMessage}</p>
-              </AlertStripe>
-            )}
-          </div>
-
-          <div className="knapperad blokk">
-            <Hovedknapp
-              spinner={sender}
-              disabled={sender || this.state.valgtArbeidsgiver === "VELG"}
-            >
-              {texts.send}
-            </Hovedknapp>
-          </div>
-        </form>
+                  {texts.send}
+                </Hovedknapp>
+              </div>
+            </form>
+          )}
+        </Form>
       </div>
     );
   }
@@ -157,7 +158,6 @@ export class MotebookingSkjema extends Component {
 MotebookingSkjema.propTypes = {
   fnr: PropTypes.string,
   valgtEnhet: PropTypes.string,
-  handleSubmit: PropTypes.func,
   opprettMote: PropTypes.func,
   sender: PropTypes.bool,
   sendingFeilet: PropTypes.bool,
@@ -213,9 +213,4 @@ export function validate(values, props) {
   return feilmeldinger;
 }
 
-const ReduxSkjema = reduxForm({
-  form: OPPRETT_MOTE_SKJEMANAVN,
-  validate,
-})(MotebookingSkjema);
-
-export default ReduxSkjema;
+export default MotebookingSkjema;

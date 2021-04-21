@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { reduxForm } from "redux-form";
+import { Form } from "react-final-form";
 import AlertStripe from "nav-frontend-alertstriper";
 import KnappBase from "nav-frontend-knapper";
 import Tidspunkter from "./Tidspunkter";
@@ -11,8 +11,6 @@ const texts = {
   send: "Send",
   avbryt: "Avbryt",
 };
-
-const FLERE_TIDSPUNKTER_SKJEMANAVN = "flereAlternativ";
 
 export const getData = (values) => {
   return values.tidspunkter.map((tidspunkt) => {
@@ -49,7 +47,6 @@ export const FlereTidspunktSkjema = (props) => {
     flereAlternativ,
     avbrytFlereAlternativ,
     antallNyeTidspunkt,
-    handleSubmit,
   } = props;
   const submit = (values) => {
     const data = dekorerMedSted(getData(values), mote.alternativer[0].sted);
@@ -58,35 +55,39 @@ export const FlereTidspunktSkjema = (props) => {
 
   return (
     <div className="fleretidspunkt">
-      <form onSubmit={handleSubmit(submit)}>
-        <Tidspunkter
-          antallNyeTidspunkt={antallNyeTidspunkt}
-          skjemanavn={FLERE_TIDSPUNKTER_SKJEMANAVN}
-        />
-        <div className="blokk--l">
-          <button type="button" className="lenke" onClick={flereAlternativ}>
-            {texts.leggTil}
-          </button>
-        </div>
-        {nyeAlternativFeilet && <Feilmelding />}
-        <KnappBase
-          type="hoved"
-          className="knapp--enten"
-          spinner={senderNyeAlternativ}
-          disabled={senderNyeAlternativ}
-        >
-          {texts.send}
-        </KnappBase>
-        <button
-          type="button"
-          className="lenke"
-          onClick={() => {
-            avbrytFlereAlternativ();
-          }}
-        >
-          {texts.avbryt}
-        </button>
-      </form>
+      <Form
+        onSubmit={(values) => submit(values)}
+        validate={(values) => validate(values, props)}
+      >
+        {({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Tidspunkter antallNyeTidspunkt={antallNyeTidspunkt} />
+            <div className="blokk--l">
+              <button type="button" className="lenke" onClick={flereAlternativ}>
+                {texts.leggTil}
+              </button>
+            </div>
+            {nyeAlternativFeilet && <Feilmelding />}
+            <KnappBase
+              type="hoved"
+              className="knapp--enten"
+              spinner={senderNyeAlternativ}
+              disabled={senderNyeAlternativ}
+            >
+              {texts.send}
+            </KnappBase>
+            <button
+              type="button"
+              className="lenke"
+              onClick={() => {
+                avbrytFlereAlternativ();
+              }}
+            >
+              {texts.avbryt}
+            </button>
+          </form>
+        )}
+      </Form>
     </div>
   );
 };
@@ -98,7 +99,6 @@ FlereTidspunktSkjema.propTypes = {
   nyeAlternativFeilet: PropTypes.bool,
   senderNyeAlternativ: PropTypes.bool,
   opprettFlereAlternativ: PropTypes.func,
-  handleSubmit: PropTypes.func,
   avbrytFlereAlternativ: PropTypes.func,
   antallNyeTidspunkt: PropTypes.number,
 };
@@ -141,9 +141,4 @@ export function validate(values, props) {
   return feilmeldinger;
 }
 
-const ReduxSkjema = reduxForm({
-  form: FLERE_TIDSPUNKTER_SKJEMANAVN,
-  validate,
-})(FlereTidspunktSkjema);
-
-export default ReduxSkjema;
+export default FlereTidspunktSkjema;

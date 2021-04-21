@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Field } from "redux-form";
+import { Field } from "react-final-form";
 import { Row, Column } from "nav-frontend-grid";
 import Datovelger from "../../datovelger/Datovelger";
 import KlokkeslettField from "../../KlokkeslettField";
@@ -14,7 +14,7 @@ const texts = {
   timePlaceholder: "F.eks: 09.30",
 };
 
-const Tidspunkt = ({ tidspunkt, skjemanavn }) => {
+const Tidspunkt = ({ tidspunkt }) => {
   const datoName = `tidspunkter[${tidspunkt}].dato`;
   const klokkeslettName = `tidspunkter[${tidspunkt}].klokkeslett`;
 
@@ -34,7 +34,6 @@ const Tidspunkt = ({ tidspunkt, skjemanavn }) => {
               id={`dato-${tidspunkt}`}
               name={datoName}
               placeholder={texts.datePlaceholder}
-              skjemanavn={skjemanavn}
             />
           </Column>
           <Column className="col-xs-12 col-sm-6">
@@ -45,9 +44,7 @@ const Tidspunkt = ({ tidspunkt, skjemanavn }) => {
               {texts.timeLabel}
             </label>
             <Field
-              parse={(e) => {
-                return formaterTid(e);
-              }}
+              parse={(e) => formaterTid(e)}
               id={`klokkeslett-${tidspunkt}`}
               component={KlokkeslettField}
               name={klokkeslettName}
@@ -63,7 +60,6 @@ const Tidspunkt = ({ tidspunkt, skjemanavn }) => {
 
 Tidspunkt.propTypes = {
   tidspunkt: PropTypes.number,
-  skjemanavn: PropTypes.string.isRequired,
 };
 
 export default Tidspunkt;
