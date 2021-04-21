@@ -83,3 +83,19 @@ export const oppfolgingstilfelleperioderMoreThanOneTilfelleInactive = {
     data: [olderConnectedPeriode],
   },
 };
+
+export const customOppfolgingstilfelleperioder = (fom, tom) => {
+  return {
+    110110110: {
+      data: [
+        {
+          orgnummer: "110110110",
+          fom: fom,
+          tom: tom,
+          grad: 100,
+          aktivitet: "aktivitet",
+        },
+      ],
+    },
+  };
+};

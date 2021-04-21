@@ -5,7 +5,7 @@ import { OppfolgingsplanDTO } from "../../data/oppfolgingsplan/oppfoelgingsdialo
 import { AlertStripeInfo } from "nav-frontend-alertstriper";
 import { hentVirksomhet } from "../../data/virksomhet/virksomhet_actions";
 import Sidetopp from "../Sidetopp";
-import UtdragFraSykefravaeret from "../motebehov/UtdragFraSykefravaeret";
+import UtdragFraSykefravaeret from "../utdragFraSykefravaeret/UtdragFraSykefravaeret";
 
 const texts = {
   pageTitle: "Nøkkelinformasjon",

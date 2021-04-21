@@ -2,7 +2,7 @@ import React from "react";
 import EtikettBase from "nav-frontend-etiketter";
 import Lenke from "nav-frontend-lenker";
 import { OppfolgingsplanDTO } from "../../data/oppfolgingsplan/oppfoelgingsdialoger";
-import SykmeldingMotebehovVisning from "./SykmeldingMotebehovVisning";
+import SykmeldingMotebehovVisning from "../motebehov/SykmeldingMotebehovVisning";
 import {
   arbeidsgivernavnEllerArbeidssituasjon,
   erEkstraInformasjonISykmeldingen,
@@ -24,13 +24,10 @@ import styled from "styled-components";
 import { OppfolgingstilfelleperioderMapState } from "../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
 import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
 import { MerInformasjonImage } from "../../../img/ImageComponents";
+import { UtdragOppfolgingsplaner } from "./UtdragOppfolgingsplaner";
 
 const tekster = {
   header: "Utdrag fra sykefraværet",
-  oppfolgingsplaner: {
-    header: "Oppfølgingsplan",
-    ingenPlanerDelt: "Ingen planer er delt med NAV",
-  },
   sykmeldinger: {
     header: "Sykmeldinger",
     headerUtenArbeidsgiver: "Sykmeldinger uten arbeidsgiver",
@@ -49,47 +46,6 @@ export const UtdragFraSykefravaeretHeader = () => {
     </div>
   );
 };
-
-interface OppfolgingsplanerProps {
-  fnr: string;
-  aktiveDialoger: OppfolgingsplanDTO[];
-}
-
-export const Oppfolgingsplaner = ({
-  aktiveDialoger,
-  fnr,
-}: OppfolgingsplanerProps) => (
-  <div className="utdragFraSykefravaeret__oppfolgingsplaner">
-    <h3>{tekster.oppfolgingsplaner.header}</h3>
-    {aktiveDialoger?.length > 0 ? (
-      aktiveDialoger.map((dialog, index) => {
-        const virksomhetsNavn = dialog.virksomhet.navn;
-        return (
-          <div key={index} className="utdragFraSykefravaeret__oppfolgingsplan">
-            <span>
-              <Lenke
-                className="lenke"
-                href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}
-              >
-                {virksomhetsNavn && virksomhetsNavn.length > 0
-                  ? virksomhetsNavn.toLowerCase()
-                  : dialog.virksomhet.virksomhetsnummer}
-              </Lenke>
-            </span>
-            <span className="gyldighetsperiode">
-              {tilLesbarPeriodeMedArstall(
-                dialog.godkjentPlan.gyldighetstidspunkt.fom,
-                dialog.godkjentPlan.gyldighetstidspunkt.tom
-              )}
-            </span>
-          </div>
-        );
-      })
-    ) : (
-      <p>{tekster.oppfolgingsplaner.ingenPlanerDelt}</p>
-    )}
-  </div>
-);
 
 interface UtvidbarTittelProps {
   sykmelding: SykmeldingOldFormat;
@@ -276,7 +232,7 @@ const UtdragFraSykefravaeret = ({
     <UtdragFraSykefravaeretHeader />
 
     <div className="panel utdragFraSykefravaeret">
-      <Oppfolgingsplaner aktiveDialoger={aktiveDialoger} fnr={fnr} />
+      <UtdragOppfolgingsplaner aktiveDialoger={aktiveDialoger} fnr={fnr} />
 
       <Sykmeldinger
         oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
