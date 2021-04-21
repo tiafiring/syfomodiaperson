@@ -9,8 +9,6 @@ export function* hentPrediksjon(action: any) {
     const path = `${process.env.REACT_APP_ISPREDIKSJON_ROOT}/v1/prediksjon`;
     const data = yield call(get, path, action.fnr);
 
-    console.log("data", data);
-
     if (data && !!data.err) {
       yield put(actions.hentPrediksjonFeilet());
     } else {
