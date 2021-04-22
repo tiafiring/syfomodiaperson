@@ -4,7 +4,8 @@ import { Form } from "react-final-form";
 import AlertStripe from "nav-frontend-alertstriper";
 import KnappBase from "nav-frontend-knapper";
 import Tidspunkter from "./Tidspunkter";
-import { genererDato, erGyldigKlokkeslett, erGyldigDato } from "../utils";
+import { erGyldigKlokkeslett, genererDato } from "../utils";
+import { isISODateString } from "nav-datovelger";
 
 const texts = {
   leggTil: "Flere alternativer",
@@ -130,7 +131,7 @@ export function validate(values, props) {
         }
         if (!tidspunktValue || !tidspunktValue.dato) {
           feil.dato = "Vennligst angi dato";
-        } else if (!erGyldigDato(tidspunktValue.dato)) {
+        } else if (!isISODateString(tidspunktValue.dato)) {
           feil.dato = "Vennligst angi riktig datoformat; dd.mm.åååå";
         }
         return feil;

@@ -154,7 +154,7 @@ describe("MotebookingSkjemaTest", () => {
           klokkeslett: "12.15",
         },
         {
-          dato: "22.01.2016",
+          dato: "2016-01-22",
           klokkeslett: "10.00",
         },
       ];
@@ -197,7 +197,7 @@ describe("MotebookingSkjemaTest", () => {
     it("Skal validere tidspunkter dersom andre felt mangler dato", () => {
       values.tidspunkter = [
         {
-          dato: "22.02.2016",
+          dato: "2016-02-22",
           klokkeslett: "12.15",
         },
         {
@@ -216,11 +216,11 @@ describe("MotebookingSkjemaTest", () => {
     it("Skal validere tidspunkter dersom andre felt mangler klokkeslett", () => {
       values.tidspunkter = [
         {
-          dato: "12.12.2016",
+          dato: "2016-12-12",
           klokkeslett: "10.00",
         },
         {
-          dato: "22.01.2016",
+          dato: "2016-01-22",
         },
       ];
       const res = validate(values, props);
@@ -259,19 +259,19 @@ describe("MotebookingSkjemaTest", () => {
   describe("genererDato", () => {
     it("Skal returnere dato på riktig format når dato er dd.mm.åååå", () => {
       const klokkeslett = "12.15";
-      const dato = "15.06.2017";
+      const dato = "2017-06-15";
       expect(genererDato(dato, klokkeslett)).to.equal("2017-06-15T12:15:00");
     });
 
     it("Skal returnere dato på riktig format når dato er dd.mm.åå", () => {
       const klokkeslett = "12.15";
-      const dato = "15.06.17";
+      const dato = "17-06-15";
       expect(genererDato(dato, klokkeslett)).to.equal("2017-06-15T12:15:00");
     });
 
     it("Skal returnere dato på riktig format", () => {
       const klokkeslett = "1.15";
-      const dato = "15.06.2017";
+      const dato = "2017-06-15";
       expect(genererDato(dato, klokkeslett)).to.equal("2017-06-15T01:15:00");
     });
   });
@@ -281,11 +281,11 @@ describe("MotebookingSkjemaTest", () => {
       const values = {
         tidspunkter: [
           {
-            dato: "12.08.2016",
+            dato: "2016-08-12",
             klokkeslett: "15.00",
           },
           {
-            dato: "13.08.2016",
+            dato: "2016-08-13",
             klokkeslett: "12.00",
           },
         ],

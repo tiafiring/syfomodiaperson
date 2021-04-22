@@ -3,7 +3,7 @@ import { shallow } from "enzyme";
 import React from "react";
 import Tidspunkter from "../../../src/components/mote/skjema/Tidspunkter";
 import Tidspunkt from "../../../src/components/mote/skjema/Tidspunkt";
-import Datovelger from "../../../src/components/datovelger/Datovelger";
+import Datovelger from "../../../src/components/Datovelger";
 
 describe("Tidspunkter", () => {
   let component;

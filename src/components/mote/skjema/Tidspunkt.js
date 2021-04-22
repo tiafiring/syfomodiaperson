@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Field } from "react-final-form";
 import { Row, Column } from "nav-frontend-grid";
-import Datovelger from "../../datovelger/Datovelger";
+import Datovelger from "../../Datovelger";
 import KlokkeslettField from "../../KlokkeslettField";
 import { formaterTid } from "../../../utils";
 
