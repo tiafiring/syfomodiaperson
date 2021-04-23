@@ -23,7 +23,7 @@
     "@types/react": "16.14.2",
     "@types/react-dom": "16.9.4",
     "@types/react-redux": "7.1.9",
-    "@types/styled-components": "5.1.2",
+    "@types/styled-components": "5.1.9",
     "axios": "0.21.1",
     "classnames": "2.2.6",
     "cookie-parser": "1.4.4",
@@ -93,7 +93,7 @@
     "redux-saga": "1.1.3",
     "scroll-behavior": "0.3.2",
     "simple-ajax": "2.6.0",
-    "styled-components": "5.2.1"
+    "styled-components": "5.2.3"
   },
   "devDependencies": {
     "@babel/cli": "7.10.1",
