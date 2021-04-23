@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
 import Lenke from "nav-frontend-lenker";
 import { OppfolgingsplanDTO } from "../../data/oppfolgingsplan/oppfoelgingsdialoger";
 import { hentOppfolgingsplanerLPS } from "../../data/oppfolgingsplan/oppfolgingsplanerlps_actions";
@@ -14,6 +15,7 @@ import {
 import { OppfolgingsplanLPS } from "../../data/oppfolgingsplan/types/OppfolgingsplanLPS";
 import { hentPersonOppgaver } from "../../data/personoppgave/personoppgave_actions";
 import { PersonOppgave } from "../../data/personoppgave/types/PersonOppgave";
+import { hentVirksomhet } from "../../data/virksomhet/virksomhet_actions";
 
 const texts = {
   header: "Oppfølgingsplan",
@@ -25,13 +27,26 @@ interface AktiveDialogerProps {
   aktiveDialoger: OppfolgingsplanDTO[];
 }
 
+const AktivDialog = styled.div`
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+
+  a {
+    text-transform: capitalize;
+  }
+`;
+
+const Gyldighetsperiode = styled.span`
+  margin-left: 2em;
+`;
+
 const AktiveDialoger = ({ fnr, aktiveDialoger }: AktiveDialogerProps) => {
   return (
-    <div>
+    <>
       {aktiveDialoger.map((dialog, index) => {
         const virksomhetsNavn = dialog.virksomhet.navn;
         return (
-          <div key={index} className="utdragFraSykefravaeret__oppfolgingsplan">
+          <AktivDialog key={index}>
             <span>
               <Lenke
                 className="lenke"
@@ -42,16 +57,16 @@ const AktiveDialoger = ({ fnr, aktiveDialoger }: AktiveDialogerProps) => {
                   : dialog.virksomhet.virksomhetsnummer}
               </Lenke>
             </span>
-            <span className="gyldighetsperiode">
+            <Gyldighetsperiode>
               {tilLesbarPeriodeMedArstall(
                 dialog.godkjentPlan.gyldighetstidspunkt.fom,
                 dialog.godkjentPlan.gyldighetstidspunkt.tom
               )}
-            </span>
-          </div>
+            </Gyldighetsperiode>
+          </AktivDialog>
         );
       })}
-    </div>
+    </>
   );
 };
 
@@ -61,12 +76,10 @@ interface LpsPlanerProps {
 
 const LpsPlaner = ({ lpsPlaner }: LpsPlanerProps) => {
   return (
-    <div>
+    <>
       {lpsPlaner.map((plan, index) => {
         const lesbarDato = tilLesbarDatoMedArstall(plan.opprettet);
-        const virksomhet = plan.virksomhetsnavn
-          ? plan.virksomhetsnavn
-          : plan.virksomhetsnummer;
+        const virksomhet = plan.virksomhetsnavn || plan.virksomhetsnummer;
         return (
           <div key={index}>
             <a
@@ -80,7 +93,7 @@ const LpsPlaner = ({ lpsPlaner }: LpsPlanerProps) => {
           </div>
         );
       })}
-    </div>
+    </>
   );
 };
 
@@ -108,6 +121,14 @@ interface UtdragOppfolgingsplanerProps {
   aktiveDialoger: OppfolgingsplanDTO[];
 }
 
+const UtdragOppfolgingsplanerWrapper = styled.div`
+  margin-bottom: 2.5em;
+
+  h3 {
+    margin-bottom: 0;
+  }
+`;
+
 export const UtdragOppfolgingsplaner = ({
   aktiveDialoger,
   fnr,
@@ -120,7 +141,7 @@ export const UtdragOppfolgingsplaner = ({
 
   useEffect(() => {
     dispatch(hentPersonOppgaver(fnr));
-  }, []);
+  }, [fnr]);
 
   useEffect(() => {
     dispatch(hentOppfolgingsplanerLPS(fnr));
@@ -139,11 +160,21 @@ export const UtdragOppfolgingsplaner = ({
     oppfolgingstilfelleperioderMapState
   );
 
+  useEffect(() => {
+    activeLpsPlaner.forEach((plan: OppfolgingsplanLPS) => {
+      dispatch(hentVirksomhet(plan.virksomhetsnummer));
+    });
+
+    aktiveDialoger.forEach((plan: OppfolgingsplanDTO) => {
+      dispatch(hentVirksomhet(plan.virksomhet.virksomhetsnummer));
+    });
+  }, [activeLpsPlaner, aktiveDialoger]);
+
   const anyActivePlaner =
     aktiveDialoger?.length > 0 || activeLpsPlaner.length > 0;
 
   return (
-    <div className="utdragFraSykefravaeret__oppfolgingsplaner">
+    <UtdragOppfolgingsplanerWrapper>
       <h3>{texts.header}</h3>
       {anyActivePlaner ? (
         <Oppfolgingsplaner
@@ -154,6 +185,6 @@ export const UtdragOppfolgingsplaner = ({
       ) : (
         <p>{texts.ingenPlanerDelt}</p>
       )}
-    </div>
+    </UtdragOppfolgingsplanerWrapper>
   );
 };
