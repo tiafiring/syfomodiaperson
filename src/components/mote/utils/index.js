@@ -12,14 +12,13 @@ export const getDatoFraZulu = (zulutid) => {
 export function genererDato(dato, klokkeslett) {
   const s = new Date();
   s.setDate(1);
-
-  const datoArr = dato.split(".");
+  const datoArr = dato.split("-");
   const klokkeslettArr = klokkeslett.split(".");
-  const aar = datoArr[2];
+  const aar = datoArr[0];
   const aarPadded = aar.length === 2 ? `20${aar}` : aar;
   s.setYear(aarPadded);
   s.setMonth(parseInt(datoArr[1], 10) - 1);
-  s.setDate(datoArr[0]);
+  s.setDate(datoArr[2]);
   s.setUTCHours(klokkeslettArr[0]);
   s.setMinutes(klokkeslettArr[1]);
   s.setSeconds("00");
@@ -29,12 +28,6 @@ export function genererDato(dato, klokkeslett) {
 export function erGyldigKlokkeslett(klokkeslett) {
   const re = /^([0-9]|0[0-9]|1[0-9]|2[0-3])\.[0-5][0-9]$/;
   return re.test(klokkeslett);
-}
-
-export function erGyldigDato(dato) {
-  // eslint-disable-next-line max-len
-  const re = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
-  return re.test(dato);
 }
 
 export const erAlleAlternativerPassert = (alternativer) => {

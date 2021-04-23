@@ -32,11 +32,11 @@ describe("FlereTidspunktSkjemaTest", () => {
       values = {
         tidspunkter: [
           {
-            dato: "20.02.2012",
+            dato: "2012-02-20",
             klokkeslett: "10.20",
           },
           {
-            dato: "20.02.2013",
+            dato: "2013-02-20",
             klokkeslett: "10.30",
           },
         ],
@@ -108,7 +108,7 @@ describe("FlereTidspunktSkjemaTest", () => {
       values = {
         tidspunkter: [
           {
-            dato: "27.02.17",
+            dato: "27-02-17",
             klokkeslett: "09.00",
           },
           {
@@ -128,7 +128,7 @@ describe("FlereTidspunktSkjemaTest", () => {
       values = {
         tidspunkter: [
           {
-            dato: "27.13.17",
+            dato: "27-13-17",
             klokkeslett: "25.00",
           },
         ],

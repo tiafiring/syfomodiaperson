@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Form, Field } from "react-final-form";
+import { Field, Form } from "react-final-form";
 import AlertStripe from "nav-frontend-alertstriper";
 import { Hovedknapp } from "nav-frontend-knapper";
 import VelgLeder from "./VelgLeder";
@@ -8,7 +8,8 @@ import Tidspunkter from "./Tidspunkter";
 import TextField from "../TextField";
 import KontaktInfoAdvarsel from "../components/KontaktInfoAdvarsel";
 import Sidetopp from "../../Sidetopp";
-import { genererDato, erGyldigKlokkeslett, erGyldigDato } from "../utils";
+import { erGyldigKlokkeslett, genererDato } from "../utils";
+import { isISODateString } from "nav-datovelger";
 
 export const MAX_LENGTH_STED = 200;
 
@@ -195,7 +196,7 @@ export function validate(values, props) {
         }
         if (!tidspunktValue || !tidspunktValue.dato) {
           feil.dato = texts.validationErrorMessage.dateMissing;
-        } else if (!erGyldigDato(tidspunktValue.dato)) {
+        } else if (!isISODateString(tidspunktValue.dato)) {
           feil.dato = texts.validationErrorMessage.dateWrongFormat;
         }
         return feil;
