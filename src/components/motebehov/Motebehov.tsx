@@ -8,7 +8,7 @@ import { OppfolgingsplanDTO } from "../../data/oppfolgingsplan/oppfoelgingsdialo
 import BehandleMotebehovKnapp from "./BehandleMotebehovKnapp";
 import MotebehovKvittering from "./MotebehovKvittering";
 import PrediksjonVisning from "../Prediksjon/PrediksjonVisning";
-import UtdragFraSykefravaeret from "./UtdragFraSykefravaeret";
+import UtdragFraSykefravaeret from "../utdragFraSykefravaeret/UtdragFraSykefravaeret";
 import Panel from "nav-frontend-paneler";
 import { Systemtittel } from "nav-frontend-typografi";
 import { OppfolgingstilfelleperioderMapState } from "../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
