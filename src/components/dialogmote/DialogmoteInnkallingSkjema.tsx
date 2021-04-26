@@ -13,6 +13,7 @@ import {
   validerTidspunkt,
 } from "../../utils/valideringUtils";
 import DialogmoteInnkallingSkjemaRow from "./DialogmoteInnkallingSkjemaRow";
+import styled from "styled-components";
 
 interface DialogmoteInnkallingSkjemaProps {
   ledere: Leder[];
@@ -60,6 +61,17 @@ const submit = (values: DialogmoteInnkallingSkjemaValues) => {
   console.log("submitting values: ", values);
 };
 
+const SendButtonColumn = styled(Column)`
+  float: left;
+  padding-left: 0.5rem;
+  margin-right: 0.5rem;
+`;
+
+const CancelButtonColumn = styled(Column)`
+  float: left;
+  padding-left: 0.5rem;
+`;
+
 const DialogmoteInnkallingSkjema = ({
   ledere,
 }: DialogmoteInnkallingSkjemaProps): ReactElement => {
@@ -74,12 +86,12 @@ const DialogmoteInnkallingSkjema = ({
             <DialogmoteInnkallingTidOgSted />
             <DialogmoteInnkallingTekster />
             <DialogmoteInnkallingSkjemaRow>
-              <Column className="col-xs-3">
+              <SendButtonColumn>
                 <Hovedknapp htmlType="submit">{texts.send}</Hovedknapp>
-              </Column>
-              <Column className="col-xs-2">
+              </SendButtonColumn>
+              <CancelButtonColumn>
                 <Flatknapp htmlType="button">{texts.cancel}</Flatknapp>
-              </Column>
+              </CancelButtonColumn>
             </DialogmoteInnkallingSkjemaRow>
           </form>
         )}

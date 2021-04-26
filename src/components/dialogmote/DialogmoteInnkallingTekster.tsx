@@ -7,7 +7,6 @@ import DialogmoteInnkallingSkjemaTittel from "./DialogmoteInnkallingSkjemaTittel
 import DialogmoteInnkallingSkjemaSeksjon from "./DialogmoteInnkallingSkjemaSeksjon";
 import styled from "styled-components";
 import AlertStripe from "nav-frontend-alertstriper";
-import DialogmoteInnkallingSkjemaRow from "./DialogmoteInnkallingSkjemaRow";
 
 const texts = {
   title: "Tekster til innkallingen",
@@ -24,16 +23,23 @@ interface FritekstBoksProps {
 
 const TeksterAlert = styled(AlertStripe)`
   margin-bottom: 2.5rem;
+  .alertstripe__tekst {
+    max-width: 100%;
+  }
 `;
 
-const TeksterRow = styled(Row)`
-  margin-bottom: 2.5rem;
+const FritekstBoksRow = styled(Row)`
+  margin-bottom: 4rem;
+`;
+
+const TextAreaRow = styled(Row)`
+  margin-bottom: 1rem;
 `;
 
 const FritekstBoks = ({ fieldName, label }: FritekstBoksProps) => (
-  <TeksterRow>
+  <FritekstBoksRow>
     <Column className="col-xs-12">
-      <DialogmoteInnkallingSkjemaRow>
+      <TextAreaRow>
         <Column className="col-xs-12">
           <Field<string> name={fieldName}>
             {({ input }) => (
@@ -41,10 +47,10 @@ const FritekstBoks = ({ fieldName, label }: FritekstBoksProps) => (
             )}
           </Field>
         </Column>
-      </DialogmoteInnkallingSkjemaRow>
+      </TextAreaRow>
       <Knapp htmlType="button">{texts.preview}</Knapp>
     </Column>
-  </TeksterRow>
+  </FritekstBoksRow>
 );
 
 const DialogmoteInnkallingTekster = (): ReactElement => (

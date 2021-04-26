@@ -18,6 +18,9 @@ const texts = {
 
 const DialmogteInnkallingWarningAlert = styled(AlertStripe)`
   margin-bottom: 2.5rem;
+  .alertstripe__tekst {
+    max-width: 100%;
+  }
 `;
 
 const DialogmoteInnkallingContainer = (): ReactElement => {

@@ -8,6 +8,7 @@ import Datovelger from "../Datovelger";
 import DialogmoteInnkallingSkjemaRow from "./DialogmoteInnkallingSkjemaRow";
 import DialogmoteInnkallingSkjemaTittel from "./DialogmoteInnkallingSkjemaTittel";
 import DialogmoteInnkallingSkjemaSeksjon from "./DialogmoteInnkallingSkjemaSeksjon";
+import styled from "styled-components";
 
 const texts = {
   title: "Tid og sted",
@@ -21,21 +22,32 @@ const texts = {
   videoPlaceholder: "https://",
 };
 
+const DatoColumn = styled(Column)`
+  float: left;
+  padding-left: 0.5rem;
+  margin-right: 0.5rem;
+`;
+
+const TidColumn = styled(Column)`
+  float: left;
+  padding-left: 0.5rem;
+`;
+
 const DialogmoteInnkallingTidOgSted = (): ReactElement => (
   <DialogmoteInnkallingSkjemaSeksjon>
     <DialogmoteInnkallingSkjemaTittel>
       {texts.title}
     </DialogmoteInnkallingSkjemaTittel>
     <DialogmoteInnkallingSkjemaRow>
-      <Column className="col-xs-2">
+      <DatoColumn>
         <Label htmlFor="tidspunkt.dato">{texts.datoLabel}</Label>
         <Datovelger
           id="tidspunkt.dato"
           name="tidspunkt.dato"
           placeholder={texts.datoPlaceholder}
         />
-      </Column>
-      <Column className="col-xs-2">
+      </DatoColumn>
+      <TidColumn>
         <Label htmlFor="tidspunkt.klokkeslett">{texts.tidLabel}</Label>
         <Field<string>
           parse={(e) => formaterTid(e)}
@@ -44,7 +56,7 @@ const DialogmoteInnkallingTidOgSted = (): ReactElement => (
           className="input--s"
           placeholder={texts.tidPlaceholder}
         />
-      </Column>
+      </TidColumn>
     </DialogmoteInnkallingSkjemaRow>
     <DialogmoteInnkallingSkjemaRow>
       <Column className="col-xs-12">
