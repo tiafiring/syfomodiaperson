@@ -8,8 +8,8 @@ import Tidspunkter from "./Tidspunkter";
 import TextField from "../TextField";
 import KontaktInfoAdvarsel from "../components/KontaktInfoAdvarsel";
 import Sidetopp from "../../Sidetopp";
-import { erGyldigKlokkeslett, genererDato } from "../utils";
-import { isISODateString } from "nav-datovelger";
+import { genererDato } from "../utils";
+import { validerSted, validerTidspunkt } from "../../../utils/valideringUtils";
 
 export const MAX_LENGTH_STED = 200;
 
@@ -26,14 +26,6 @@ const texts = {
   stedPlaceholder: "Skriv møtested eller om det er et videomøte",
   sendingFeilerErrorMessage:
     "Beklager, det oppstod en feil. Prøv igjen litt senere.",
-  validationErrorMessage: {
-    dateMissing: "Vennligst angi dato",
-    dateWrongFormat: "Vennligst angi riktig datoformat; dd.mm.åååå",
-    timeMissing: "Vennligst angi klokkeslett",
-    timeWrongFormat: "Vennligst angi riktig format; f.eks. 13.00",
-    placeMissing: "Vennligst angi møtested",
-    placeTooLong: `Maks ${MAX_LENGTH_STED} tegn tillatt`,
-  },
   send: "Send",
 };
 
@@ -177,39 +169,20 @@ export function validate(values, props) {
   }
 
   if (!values.tidspunkter || !values.tidspunkter.length) {
-    tidspunkterFeilmeldinger = tidspunkterFeilmeldinger.map(() => {
-      return {
-        dato: texts.validationErrorMessage.dateMissing,
-        klokkeslett: texts.validationErrorMessage.timeMissing,
-      };
-    });
+    tidspunkterFeilmeldinger = tidspunkterFeilmeldinger.map(() =>
+      validerTidspunkt({})
+    );
     feilmeldinger.tidspunkter = tidspunkterFeilmeldinger;
   } else {
     tidspunkterFeilmeldinger = tidspunkterFeilmeldinger.map(
       (tidspunkt, index) => {
         const tidspunktValue = values.tidspunkter[index];
-        const feil = {};
-        if (!tidspunktValue || !tidspunktValue.klokkeslett) {
-          feil.klokkeslett = texts.validationErrorMessage.timeMissing;
-        } else if (!erGyldigKlokkeslett(tidspunktValue.klokkeslett)) {
-          feil.klokkeslett = texts.validationErrorMessage.timeWrongFormat;
-        }
-        if (!tidspunktValue || !tidspunktValue.dato) {
-          feil.dato = texts.validationErrorMessage.dateMissing;
-        } else if (!isISODateString(tidspunktValue.dato)) {
-          feil.dato = texts.validationErrorMessage.dateWrongFormat;
-        }
-        return feil;
+        return validerTidspunkt(tidspunktValue);
       }
     );
     feilmeldinger.tidspunkter = tidspunkterFeilmeldinger;
   }
-
-  if (!values.sted || values.sted.trim() === "") {
-    feilmeldinger.sted = texts.validationErrorMessage.placeMissing;
-  } else if (values.sted.length > MAX_LENGTH_STED) {
-    feilmeldinger.sted = texts.validationErrorMessage.placeTooLong;
-  }
+  feilmeldinger.sted = validerSted(values.sted, MAX_LENGTH_STED);
 
   return feilmeldinger;
 }

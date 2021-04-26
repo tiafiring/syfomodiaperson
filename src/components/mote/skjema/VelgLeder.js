@@ -37,10 +37,12 @@ const VelgLeder = ({ ledere, valgtArbeidsgiver, velgArbeidsgiver }) => {
     })[0] || null;
   return (
     <div>
-      <ArbeidsgiverDropdown
-        velgArbeidsgiver={velgArbeidsgiver}
-        ledere={ledere}
-      />
+      <div className="blokk">
+        <ArbeidsgiverDropdown
+          velgArbeidsgiver={velgArbeidsgiver}
+          ledere={ledere}
+        />
+      </div>
       {valgtArbeidsgiver !== "VELG" && (
         <ValgtLeder valgtArbeidsgiver={valgtLeder} />
       )}

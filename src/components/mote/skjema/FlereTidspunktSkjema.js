@@ -4,8 +4,8 @@ import { Form } from "react-final-form";
 import AlertStripe from "nav-frontend-alertstriper";
 import KnappBase from "nav-frontend-knapper";
 import Tidspunkter from "./Tidspunkter";
-import { erGyldigKlokkeslett, genererDato } from "../utils";
-import { isISODateString } from "nav-datovelger";
+import { genererDato } from "../utils";
+import { validerTidspunkt } from "../../../utils/valideringUtils";
 
 const texts = {
   leggTil: "Flere alternativer",
@@ -112,29 +112,15 @@ export function validate(values, props) {
   }
 
   if (!values.tidspunkter || !values.tidspunkter.length) {
-    tidspunkterFeilmeldinger = tidspunkterFeilmeldinger.map(() => {
-      return {
-        dato: "Vennligst angi dato",
-        klokkeslett: "Vennligst angi klokkeslett",
-      };
-    });
+    tidspunkterFeilmeldinger = tidspunkterFeilmeldinger.map(() =>
+      validerTidspunkt({})
+    );
     feilmeldinger.tidspunkter = tidspunkterFeilmeldinger;
   } else {
     tidspunkterFeilmeldinger = tidspunkterFeilmeldinger.map(
       (tidspunkt, index) => {
         const tidspunktValue = values.tidspunkter[index];
-        const feil = {};
-        if (!tidspunktValue || !tidspunktValue.klokkeslett) {
-          feil.klokkeslett = "Vennligst angi klokkeslett";
-        } else if (!erGyldigKlokkeslett(tidspunktValue.klokkeslett)) {
-          feil.klokkeslett = "Vennligst angi riktig format; f.eks. 13.00";
-        }
-        if (!tidspunktValue || !tidspunktValue.dato) {
-          feil.dato = "Vennligst angi dato";
-        } else if (!isISODateString(tidspunktValue.dato)) {
-          feil.dato = "Vennligst angi riktig datoformat; dd.mm.åååå";
-        }
-        return feil;
+        return validerTidspunkt(tidspunktValue);
       }
     );
     feilmeldinger.tidspunkter = tidspunkterFeilmeldinger;
