@@ -5,7 +5,7 @@ import React, { ReactElement } from "react";
 import Sidetopp from "../Sidetopp";
 import DialogmoteInnkallingSkjema from "./DialogmoteInnkallingSkjema";
 import { useAppSelector } from "../../hooks/hooks";
-import LasterSide from "../LasterSide";
+import SideLaster from "../SideLaster";
 import styled from "styled-components";
 import AlertStripe from "nav-frontend-alertstriper";
 
@@ -38,19 +38,17 @@ const DialogmoteInnkallingContainer = (): ReactElement => {
 
   return (
     <Side fnr={fnr} tittel={texts.pageTitle} aktivtMenypunkt={MOETEPLANLEGGER}>
-      <LasterSide
+      <SideLaster
         henter={henter}
         hentingFeilet={hentingFeilet}
         tilgang={tilgang}
       >
-        <>
-          <Sidetopp tittel={texts.pageHeader} />
-          <DialmogteInnkallingWarningAlert type="advarsel">
-            {texts.alert}
-          </DialmogteInnkallingWarningAlert>
-          <DialogmoteInnkallingSkjema ledere={ledere} />
-        </>
-      </LasterSide>
+        <Sidetopp tittel={texts.pageHeader} />
+        <DialmogteInnkallingWarningAlert type="advarsel">
+          {texts.alert}
+        </DialmogteInnkallingWarningAlert>
+        <DialogmoteInnkallingSkjema ledere={ledere} />
+      </SideLaster>
     </Side>
   );
 };

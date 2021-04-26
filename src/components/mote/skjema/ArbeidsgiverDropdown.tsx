@@ -1,6 +1,7 @@
 import React from "react";
 import { Select } from "nav-frontend-skjema";
 import { Leder } from "../../../data/leder/ledere";
+import { ledereSortertPaaNavnOgOrganisasjonsnavn } from "../../../utils/ledereUtils";
 
 const texts = {
   chooseArbeidsgiver: "Velg arbeidsgiver",
@@ -25,28 +26,11 @@ const ArbeidsgiverDropdown = ({
     }}
   >
     <option value="VELG">{texts.chooseArbeidsgiver}</option>
-    {ledere
-      .sort((a, b) => {
-        if (a.navn > b.navn) {
-          return 1;
-        } else if (b.navn > a.navn) {
-          return -1;
-        }
-        return 0;
-      })
-      .sort((a, b) => {
-        if (a.organisasjonsnavn > b.organisasjonsnavn) {
-          return 1;
-        } else if (b.organisasjonsnavn > a.organisasjonsnavn) {
-          return -1;
-        }
-        return 0;
-      })
-      .map((leder, idx) => (
-        <option value={leder.orgnummer} key={idx}>
-          {leder.organisasjonsnavn}
-        </option>
-      ))}
+    {ledereSortertPaaNavnOgOrganisasjonsnavn(ledere).map((leder, idx) => (
+      <option value={leder.orgnummer} key={idx}>
+        {leder.organisasjonsnavn}
+      </option>
+    ))}
   </Select>
 );
 

@@ -4,23 +4,23 @@ import AppSpinner from "./AppSpinner";
 import Feilmelding from "./Feilmelding";
 import { hentBegrunnelseTekst } from "../utils/tilgangUtils";
 
-interface LasterSideProps {
+interface SideLasterProps {
   henter: boolean;
   hentingFeilet: boolean;
   tilgang: Tilgang;
-  children: ReactElement;
+  children: ReactElement[] | ReactElement;
 }
 
 const texts = {
   errorTitle: "Du har ikke tilgang til denne tjenesten",
 };
 
-const LasterSide = ({
+const SideLaster = ({
   henter,
   hentingFeilet,
   tilgang,
   children,
-}: LasterSideProps) => {
+}: SideLasterProps): ReactElement => {
   if (henter) {
     return <AppSpinner />;
   }
@@ -35,7 +35,7 @@ const LasterSide = ({
       />
     );
   }
-  return children;
+  return <>{children}</>;
 };
 
-export default LasterSide;
+export default SideLaster;

@@ -8,6 +8,7 @@ import {
   lederHasActiveSykmelding,
   ledereWithActiveLedereFirst,
   virksomheterWithoutLeder,
+  ledereSortertPaaNavnOgOrganisasjonsnavn,
 } from "../../src/utils/ledereUtils";
 import { ANTALL_MS_DAG } from "../../src/utils/datoUtils";
 import {
@@ -558,6 +559,29 @@ describe("ledereUtils", () => {
 
       expect(ledereFromSykmeldinger.length).to.equal(1);
       expect(ledereFromSykmeldinger[0]).to.deep.equal(expectedLeder);
+    });
+  });
+
+  describe("ledereSortertPaaNavnOgOrganisasjonsnavn", () => {
+    it("sorterer ledere etter organisasjonsnavn og deretter navn", () => {
+      const leder1 = {
+        navn: "Per",
+        organisasjonsnavn: "The Syndicate",
+      };
+      const leder2 = {
+        navn: "Carl",
+        organisasjonsnavn: "The Syndicate",
+      };
+      const leder3 = {
+        navn: "John",
+        organisasjonsnavn: "FBI",
+      };
+      const ledere = [leder1, leder2, leder3];
+      const ledereSortert = ledereSortertPaaNavnOgOrganisasjonsnavn(ledere);
+      expect(ledereSortert.length).to.equal(3);
+      expect(ledereSortert[0]).to.deep.equal(leder3);
+      expect(ledereSortert[1]).to.deep.equal(leder2);
+      expect(ledereSortert[2]).to.deep.equal(leder1);
     });
   });
 });
