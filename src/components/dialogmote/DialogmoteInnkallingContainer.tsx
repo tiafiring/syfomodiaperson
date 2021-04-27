@@ -16,7 +16,7 @@ const texts = {
     "I denne nye løsningen sender du innkalling, avlysning, endring av tidspunkt og referat. I Arena trenger du bare endre status til ferdig behandlet.",
 };
 
-const DialmogteInnkallingWarningAlert = styled(AlertStripe)`
+const DialogmoteInnkallingWarningAlert = styled(AlertStripe)`
   margin-bottom: 2.5rem;
   .alertstripe__tekst {
     max-width: 100%;
@@ -47,9 +47,9 @@ const DialogmoteInnkallingContainer = (): ReactElement => {
         tilgang={tilgang}
       >
         <Sidetopp tittel={texts.pageHeader} />
-        <DialmogteInnkallingWarningAlert type="advarsel">
+        <DialogmoteInnkallingWarningAlert type="advarsel">
           {texts.alert}
-        </DialmogteInnkallingWarningAlert>
+        </DialogmoteInnkallingWarningAlert>
         <DialogmoteInnkallingSkjema ledere={ledere} />
       </SideLaster>
     </Side>

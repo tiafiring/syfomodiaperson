@@ -14,27 +14,18 @@
   @totalIconWidth: calc(@iconWidth + @iconMarginRight);
 
   margin-bottom: 1em;
-  margin-top: 1em;
   display: flex;
   flex-direction: column;
 
   div:first-child {
     display: flex;
     flex-grow: 0;
-    margin-right: 1em;
-    font-style: italic;
-
-    @media all and (max-width: @screen-xs-max) {
-      justify-content: center;
-    }
   }
   img {
     width: @iconWidth;
     height: auto;
-    margin-right: @iconMarginRight;
   }
   div:last-child {
-    margin-left: @totalIconWidth;
     flex-grow: 1;
   }
 }

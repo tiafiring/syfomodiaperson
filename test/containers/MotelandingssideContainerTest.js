@@ -36,7 +36,60 @@ describe("MotelandingssideContainer", () => {
         moter: {
           data: [],
         },
+        motebehov: {
+          hentet: true,
+          data: [
+            {
+              UUID: "33333333-c987-4b57-a401-a3915ec11411",
+              id: "33333333-ee10-44b6-bddf-54d049ef25f2",
+              opprettetDato: "2019-01-08T13:53:57.047+01:00",
+              aktorId: "1",
+              opprettetAv: "1",
+              virksomhetsnummer: "000999000",
+              tildeltEnhet: "0330",
+              behandletTidspunkt: "2019-01-10T13:53:57.047+01:00",
+              behandletVeilederIdent: "Z990000",
+            },
+          ],
+        },
+        oppfoelgingsdialoger: {
+          hentet: true,
+        },
+        ledere: {
+          hentet: true,
+          data: [
+            {
+              navn: "Tatten Tattover",
+              id: 2,
+              aktoerId: "1902690001009",
+              tlf: "12345666",
+              epost: "test3@test.no",
+              aktiv: null,
+              erOppgitt: true,
+              fomDato: "2020-10-03",
+              orgnummer: "110110110",
+              organisasjonsnavn: "PONTYPANDY FIRE SERVICE",
+              aktivTom: null,
+              arbeidsgiverForskuttererLoenn: false,
+            },
+          ],
+        },
       };
+    });
+
+    it("Skal vise AppSpinner når henter data", () => {
+      mockState.motebehov = {
+        henter: true,
+        hentet: false,
+        data: [],
+      };
+      component = mount(
+        <Provider store={store({ ...realState, ...mockState })}>
+          <Motelandingsside fnr="19026900010" />
+        </Provider>
+      );
+
+      expect(component.find(AppSpinner)).to.have.length(1);
     });
 
     it("Skal vise AppSpinner når henter tilgang", () => {
@@ -52,21 +105,7 @@ describe("MotelandingssideContainer", () => {
       expect(component.find(AppSpinner)).to.have.length(1);
     });
 
-    it("Skal vise AppSpinner når henter møter", () => {
-      mockState.moter = {
-        henter: true,
-        data: [],
-      };
-      component = mount(
-        <Provider store={store({ ...realState, ...mockState })}>
-          <Motelandingsside fnr="19026900010" />
-        </Provider>
-      );
-
-      expect(component.find(AppSpinner)).to.have.length(1);
-    });
-
-    it("Skal hente møter ved init", () => {
+    it("Skal kjøre actions ved init", () => {
       mockState.tilgang = {
         data: {
           harTilgang: false,
@@ -80,7 +119,15 @@ describe("MotelandingssideContainer", () => {
       );
 
       const expectedActions = [
+        { type: "HENT_LEDERE_FORESPURT", fnr: "19026900010" },
         { type: "HENT_MOTER_FORESPURT", fnr: "19026900010" },
+        { type: "HENT_MOTEBEHOV_FORESPURT", fnr: "19026900010" },
+        { type: "HENT_SYKMELDINGER_FORESPURT", fnr: "19026900010" },
+        { type: "HENT_OPPFOELGINGSDIALOGER_FORESPURT", fnr: "19026900010" },
+        {
+          type: "HENT_OPPFOLGINGSTILFELLEPERIODER_FORESPURT",
+          fnr: "19026900010",
+        },
       ];
       expect(mockStore.getActions()).to.deep.equal(expectedActions);
     });
@@ -122,6 +169,10 @@ describe("MotelandingssideContainer", () => {
           {
             id: 1,
             status: "OPPRETTET",
+            bekreftetAlternativ: {
+              tid: "2019-11-08T00:00:00.000Z",
+            },
+            opprettetTidspunkt: "2019-11-08T00:00:00.000Z",
           },
         ],
       };
@@ -133,7 +184,7 @@ describe("MotelandingssideContainer", () => {
         </Provider>
       );
 
-      expect(component.find("h3").text()).to.equal("Se møtestatus");
+      expect(component.find("h2").contains("Se møtestatus"));
     });
 
     it("Skal vise Bekreftet møte når møte bekreftet", () => {
@@ -142,6 +193,7 @@ describe("MotelandingssideContainer", () => {
           {
             id: 1,
             status: "BEKREFTET",
+            opprettetTidspunkt: "2019-11-08T00:00:00.000Z",
           },
         ],
       };
@@ -153,7 +205,7 @@ describe("MotelandingssideContainer", () => {
         </Provider>
       );
 
-      expect(component.find("h3").text()).to.equal("Bekreftet møte");
+      expect(component.find("h2").contains("Bekreftet møte"));
     });
 
     it("Skal vise Forespør møte når møte avbrutt", () => {
@@ -173,7 +225,7 @@ describe("MotelandingssideContainer", () => {
         </Provider>
       );
 
-      expect(component.find("h3").text()).to.equal("Forespør møte");
+      expect(component.find("h2").contains("Forespør møte"));
     });
 
     it("Skal vise Forespør møte når det ikke finnes møter", () => {
@@ -185,7 +237,7 @@ describe("MotelandingssideContainer", () => {
         </Provider>
       );
 
-      expect(component.find("h3").text()).to.equal("Forespør møte");
+      expect(component.find("h2").contains("Forespør møte"));
     });
   });
 });

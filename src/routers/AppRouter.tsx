@@ -16,7 +16,7 @@ import MotelandingssideContainer from "../components/mote/container/Motelandings
 import NokkelinformasjonContainer from "../components/nokkelinformasjon/container/NokkelinformasjonContainer";
 import VedtakContainer from "../components/vedtak/container/VedtakContainer";
 import DialogmoteInnkallingContainer from "../components/dialogmote/DialogmoteInnkallingContainer";
-import { erLokal, erPreProd } from "../utils/miljoUtil";
+import { erLokalEllerPreprod } from "../utils/miljoUtil";
 
 const AppRouter = () => {
   const fnr = window.location.pathname.split("/")[2];
@@ -27,7 +27,6 @@ const AppRouter = () => {
       </Router>
     );
   }
-  const visInnkallingDialogmote = erPreProd() || erLokal();
 
   return (
     <Router>
@@ -52,7 +51,7 @@ const AppRouter = () => {
         exact
         component={MotebookingContainer}
       />
-      {visInnkallingDialogmote && (
+      {erLokalEllerPreprod && (
         <Route
           path="/sykefravaer/:fnr/dialogmote"
           exact

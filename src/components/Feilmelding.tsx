@@ -12,7 +12,7 @@ const Feilmelding = (feilmeldingProps: FeilmeldingProps) => {
     melding = { __html: "<p>Vennligst prøv igjen litt senere.</p>" },
   } = feilmeldingProps;
   return (
-    <Panel className="panel--melding">
+    <Panel id="feilmelding" className="panel--melding">
       <h3 className="hode hode--feil">{tittel}</h3>
       <div dangerouslySetInnerHTML={melding} />
     </Panel>

@@ -6,6 +6,7 @@ import {
   erMotebehovBehandlet,
   harUbehandletMotebehov,
   hentSistBehandletMotebehov,
+  motebehovlisteMedKunJaSvar,
 } from "../../utils/motebehovUtils";
 import { toDatePrettyPrint } from "../../utils/datoUtils";
 import { behandleMotebehov } from "../../data/motebehov/behandlemotebehov_actions";
@@ -19,26 +20,27 @@ const behandleMotebehovKnappLabel = (
     ? `Ferdigbehandlet av ${
         sistBehandletMotebehov?.behandletVeilederIdent
       } ${toDatePrettyPrint(sistBehandletMotebehov?.behandletTidspunkt)}`
-    : "Marker som behandlet";
+    : "Jeg har vurdert behovet. Oppgaven kan fjernes fra oversikten.";
 };
 
 interface BehandleMotebehovKnappProps {
   fnr: string;
-  motebehovListe: MotebehovDTO[];
-  veilederinfo: VeilederinfoDTO;
+  motebehovData: MotebehovDTO[];
+  veilederinfo?: VeilederinfoDTO;
 }
 
 const BehandleMotebehovKnapp = ({
   fnr,
-  motebehovListe,
+  motebehovData,
   veilederinfo,
 }: BehandleMotebehovKnappProps) => {
+  const motebehovListe = motebehovlisteMedKunJaSvar(motebehovData);
   const sistBehandletMotebehov = hentSistBehandletMotebehov(motebehovListe);
   const erBehandlet = erMotebehovBehandlet(motebehovListe);
 
   const dispatch = useDispatch();
 
-  return (
+  return veilederinfo && motebehovListe.length > 0 ? (
     <div className="panel behandleMotebehovKnapp">
       <div className="skjema__input">
         <Checkbox
@@ -53,10 +55,12 @@ const BehandleMotebehovKnapp = ({
           }}
           id="marker__utfoert"
           disabled={erBehandlet}
-          checked={erBehandlet}
+          defaultChecked={erBehandlet}
         />
       </div>
     </div>
+  ) : (
+    <></>
   );
 };
 

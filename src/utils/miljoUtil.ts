@@ -10,7 +10,7 @@ export const finnMiljoStreng = () => {
   return erPreProd() ? "-q1" : "";
 };
 
-export const erLokal = () => {
+export const erLokal = (): boolean => {
   return window.location.host.indexOf("localhost") > -1;
 };
 
@@ -24,3 +24,5 @@ export const fullNaisUrlDefault = (host: string, path: string) => {
   }
   return `https://${host}${finnNaisUrlDefault()}${path}`;
 };
+
+export const erLokalEllerPreprod = erPreProd() || erLokal();
