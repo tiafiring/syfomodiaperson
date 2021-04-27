@@ -15,6 +15,8 @@ import { erGyldigFodselsnummer } from "../utils/frnValideringUtils";
 import MotelandingssideContainer from "../components/mote/container/MotelandingssideContainer";
 import NokkelinformasjonContainer from "../components/nokkelinformasjon/container/NokkelinformasjonContainer";
 import VedtakContainer from "../components/vedtak/container/VedtakContainer";
+import DialogmoteInnkallingContainer from "../components/dialogmote/DialogmoteInnkallingContainer";
+import { erLokal, erPreProd } from "../utils/miljoUtil";
 
 const AppRouter = () => {
   const fnr = window.location.pathname.split("/")[2];
@@ -25,6 +27,7 @@ const AppRouter = () => {
       </Router>
     );
   }
+  const visInnkallingDialogmote = erPreProd() || erLokal();
 
   return (
     <Router>
@@ -49,6 +52,13 @@ const AppRouter = () => {
         exact
         component={MotebookingContainer}
       />
+      {visInnkallingDialogmote && (
+        <Route
+          path="/sykefravaer/:fnr/dialogmote"
+          exact
+          component={DialogmoteInnkallingContainer}
+        />
+      )}
       <Route
         path="/sykefravaer/:fnr/mote/:moteUuid/avbryt"
         exact
