@@ -7,17 +7,26 @@ import { DialogmotePanel } from "../DialogmotePanel";
 import { tilDatoMedUkedagOgManedNavn } from "../../../../utils/datoUtils";
 import { useAktivtMote } from "../../../../data/mote/moter_hooks";
 
+const texts = {
+  bekreftetMote: "Bekreftet møte",
+  seMotestatus: "Se møtestatus",
+  planleggNyttMote: "Planlegg nytt dialogmøte",
+  ingenMoterPlanlagt: "Ingen møter planlagt",
+  dialogMote: "Dialogmøte",
+  moteforesporselSendt: "Møteforespørsel sendt",
+};
+
 interface Props {
   fnr: string;
 }
 
 const resolveUndertittelForMoteStatus = (mote: MoteDTO) => {
   if (mote.status === "BEKREFTET" && mote.bekreftetAlternativ) {
-    return `${"Dialogmøte"} ${tilDatoMedUkedagOgManedNavn(
+    return `${texts.dialogMote} ${tilDatoMedUkedagOgManedNavn(
       mote.bekreftetAlternativ.tid
     )}`;
   } else {
-    return `${"Møteforespørsel sendt"} ${tilDatoMedUkedagOgManedNavn(
+    return `${texts.moteforesporselSendt} ${tilDatoMedUkedagOgManedNavn(
       mote.opprettetTidspunkt
     )}`;
   }
@@ -30,7 +39,9 @@ export const InnkallingDialogmotePanel = ({ fnr }: Props): ReactElement => {
     <DialogmotePanel
       ikon={MoteIkonBlaaImage}
       overskrift={
-        aktivtMote.status === "BEKREFTET" ? "Bekreftet møte" : "Se møtestatus"
+        aktivtMote.status === "BEKREFTET"
+          ? texts.bekreftetMote
+          : texts.seMotestatus
       }
       underoverskrift={resolveUndertittelForMoteStatus(aktivtMote)}
     >
@@ -39,8 +50,8 @@ export const InnkallingDialogmotePanel = ({ fnr }: Props): ReactElement => {
   ) : (
     <DialogmotePanel
       ikon={MoteIkonBlaaImage}
-      overskrift="Planlegg nytt dialogmøte"
-      underoverskrift="Ingen møter planlagt"
+      overskrift={texts.planleggNyttMote}
+      underoverskrift={texts.ingenMoterPlanlagt}
     >
       <NyttDialogMote />
     </DialogmotePanel>

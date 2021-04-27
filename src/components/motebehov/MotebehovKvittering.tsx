@@ -118,6 +118,22 @@ export const MotebehovKvitteringInnhold = ({
   );
 };
 
+function composeArbeidstakerText(
+  navn?: string,
+  harMotebehov?: boolean,
+  dato?: Date
+) {
+  const denSykmeldte = "<b>Den sykmeldte: </b>";
+  const svarResultat = setSvarTekst(harMotebehov);
+  const opprettetDato = dato
+    ? " - " + tilLesbarDatoMedArUtenManedNavn(dato)
+    : undefined;
+
+  return [denSykmeldte, navn, svarResultat, opprettetDato]
+    .filter(Boolean)
+    .join(" ");
+}
+
 interface MotebehovKvitteringInnholdArbeidstakerProps {
   arbeidstakersMotebehov?: MotebehovDTO;
   sykmeldt?: Brukerinfo;
@@ -130,22 +146,11 @@ export const MotebehovKvitteringInnholdArbeidstaker = ({
   const arbeidstakerOnskerMote =
     arbeidstakersMotebehov?.motebehovSvar?.harMotebehov;
 
-  const denSykmeldte = "<b>Den sykmeldte: </b>";
-  const sykmeldtNavn = sykmeldt?.navn;
-  const svarResultat = setSvarTekst(arbeidstakerOnskerMote);
-  const opprettetDato = arbeidstakersMotebehov?.opprettetDato
-    ? " - " +
-      tilLesbarDatoMedArUtenManedNavn(arbeidstakersMotebehov?.opprettetDato)
-    : undefined;
-
-  const arbeidstakerTekst = [
-    denSykmeldte,
-    sykmeldtNavn,
-    svarResultat,
-    opprettetDato,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const arbeidstakerTekst = composeArbeidstakerText(
+    sykmeldt?.navn,
+    arbeidstakerOnskerMote,
+    arbeidstakersMotebehov?.opprettetDato
+  );
 
   const ikonAltTekst = `Sykmeldt ${ikonAlternativTekst(
     arbeidstakerOnskerMote

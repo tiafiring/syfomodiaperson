@@ -29,6 +29,11 @@ interface Props {
   fnr: string;
 }
 
+const texts = {
+  dialogmoter: "Dialogmøter",
+  onskerOmDialogmote: "Ønsker om dialogmøte",
+};
+
 export const Motelandingsside = ({ fnr }: Props) => {
   const dispatch = useDispatch();
 
@@ -87,9 +92,12 @@ export const Motelandingsside = ({ fnr }: Props) => {
       hentingFeilet={motebehov.hentingFeilet || tilgang.hentingFeilet}
       tilgang={findRelevantTilgang()}
     >
-      <Sidetopp tittel="Dialogmøter" />
+      <Sidetopp tittel={texts.dialogmoter} />
 
-      <DialogmotePanel ikon={UtropstegnImage} overskrift="Ønsker om dialogmøte">
+      <DialogmotePanel
+        ikon={UtropstegnImage}
+        overskrift={texts.onskerOmDialogmote}
+      >
         <MotebehovKvittering
           motebehovData={motebehov.data}
           ledereData={ledere.data}
