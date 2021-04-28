@@ -16,7 +16,7 @@ interface PlanVisningProps {
 
 const PlanVisning = (planVisningProps: PlanVisningProps) => {
   const { dokumentinfo, fnr, oppfolgingsplan } = planVisningProps;
-  const bildeUrler = [];
+  const bildeUrler: string[] = [];
   for (let i = 1; i <= dokumentinfo.antallSider; i += 1) {
     bildeUrler.push(
       `${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/dokument/${oppfolgingsplan.id}/side/${i}`

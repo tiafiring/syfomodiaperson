@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import Side from "../../sider/Side";
 import { MOETEPLANLEGGER } from "../../enums/menypunkter";
 import React, { ReactElement } from "react";
@@ -8,6 +7,7 @@ import { useAppSelector } from "../../hooks/hooks";
 import SideLaster from "../SideLaster";
 import styled from "styled-components";
 import AlertStripe from "nav-frontend-alertstriper";
+import { useFnrParam } from "../../hooks/useFnrParam";
 
 const texts = {
   pageTitle: "Innkalling til dialogmøte",
@@ -24,7 +24,7 @@ const DialogmoteInnkallingWarningAlert = styled(AlertStripe)`
 `;
 
 const DialogmoteInnkallingContainer = (): ReactElement => {
-  const { fnr } = useParams();
+  const fnr = useFnrParam();
   const {
     data: ledere,
     henter: henterLedere,

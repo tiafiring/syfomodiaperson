@@ -76,6 +76,7 @@ export interface SykepengesoknadDTO {
   fom: Date;
   tom: Date;
   opprettetDato: Date;
+  avbruttDato?: Date;
   innsendtDato?: Date;
   sendtTilNAVDato?: Date;
   sendtTilArbeidsgiverDato?: Date;

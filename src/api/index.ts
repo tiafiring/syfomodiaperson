@@ -33,12 +33,14 @@ export const lagreRedirectUrlILocalStorage = (href) => {
   localStorage.setItem("redirecturl", href);
 };
 
-export function get(url, personIdent): Promise<any> {
+export function get(url: string, personIdent?: string): Promise<any> {
   const headers = {
     [NAV_CONSUMER_ID_HEADER]: NAV_CONSUMER_ID,
   };
 
-  if (personIdent) headers[NAV_PERSONIDENT_HEADER] = personIdent;
+  if (personIdent) {
+    headers[NAV_PERSONIDENT_HEADER] = personIdent;
+  }
 
   return fetch(url, {
     credentials: "include",
@@ -76,7 +78,7 @@ export function get(url, personIdent): Promise<any> {
     });
 }
 
-export function post(url: string, body: Record<string, any>): Promise<any> {
+export function post(url: string, body?: Record<string, any>): Promise<any> {
   return fetch(url, {
     credentials: "include",
     method: "POST",

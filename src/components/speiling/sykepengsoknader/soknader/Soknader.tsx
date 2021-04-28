@@ -81,7 +81,6 @@ const Soknader = (soknaderProps: SoknaderProps) => {
       {kommendeSoknader.length > 0 && (
         <PlanlagteTeasere
           sykepengesoknader={kommendeSoknader}
-          fnr={fnr}
           tittel="Planlagte søknader"
         />
       )}
