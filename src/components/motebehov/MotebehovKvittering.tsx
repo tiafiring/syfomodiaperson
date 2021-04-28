@@ -1,6 +1,10 @@
 import React from "react";
 import { Leder } from "../../data/leder/ledere";
-import { finnArbeidstakerMotebehovSvar } from "../../utils/motebehovUtils";
+import {
+  finnArbeidstakerMotebehovSvar,
+  motebehovFromLatestActiveTilfelle,
+  sorterMotebehovDataEtterDato,
+} from "../../utils/motebehovUtils";
 import { tilLesbarDatoMedArUtenManedNavn } from "../../utils/datoUtils";
 import { MotebehovDTO } from "../../data/motebehov/types/motebehovTypes";
 import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
@@ -9,6 +13,9 @@ import {
   MotebehovKanIkkeImage,
   MotebehovKanImage,
 } from "../../../img/ImageComponents";
+import { OppfolgingstilfelleperioderMapState } from "../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
+import { ledereUtenMotebehovsvar } from "../../utils/ledereUtils";
+import styled from "styled-components";
 
 export const lederMedGittAktorId = (aktorId: string, ledere: Leder[]) => {
   return ledere.find((leder) => {
@@ -48,12 +55,6 @@ export const setSvarTekst = (deltakerOnskerMote?: boolean) => {
   }
 };
 
-const svarTidspunkt = (motebehov?: MotebehovDTO) => {
-  return motebehov?.opprettetDato
-    ? tilLesbarDatoMedArUtenManedNavn(motebehov.opprettetDato)
-    : "Ikke svart";
-};
-
 const ikonAlternativTekst = (deltakerOnskerMote?: boolean) => {
   switch (deltakerOnskerMote) {
     case true: {
@@ -77,9 +78,8 @@ export const setArbeidsgiverTekst = (
   arbeidsgiverOnskerMote?: boolean
 ) => {
   const arbeidsgiverNavn = arbeidsgiverNavnEllerTomStreng(leder);
-  const arbeidsgiverBedrift =
-    leder && leder.organisasjonsnavn ? `${leder.organisasjonsnavn},` : "";
-  return `<b>Arbeidsgiveren: </b> ${arbeidsgiverNavn} ${arbeidsgiverBedrift} ${setSvarTekst(
+
+  return `<b>Nærmeste leder: </b> ${arbeidsgiverNavn},  ${setSvarTekst(
     arbeidsgiverOnskerMote
   )}`;
 };
@@ -91,6 +91,10 @@ interface MotebehovKvitteringInnholdProps {
   tekst: string;
 }
 
+const Icon = styled.img`
+  margin-right: 1em;
+`;
+
 export const MotebehovKvitteringInnhold = ({
   deltakerOnskerMote,
   ikonAltTekst,
@@ -101,20 +105,34 @@ export const MotebehovKvitteringInnhold = ({
   return (
     <div className="motebehovKvitteringBoksInnhold">
       <div>
-        <img
+        <Icon
           className="svarstatus__ikon"
           src={setSvarIkon(deltakerOnskerMote)}
           alt={ikonAltTekst}
         />
-        <span>{svarTidspunkt(motebehov)}</span>
-      </div>
-      <div>
         <span dangerouslySetInnerHTML={{ __html: tekst }} />
-        {skalViseForklaring && <p>{motebehov?.motebehovSvar?.forklaring}</p>}
       </div>
+
+      {skalViseForklaring && <p>{motebehov?.motebehovSvar?.forklaring}</p>}
     </div>
   );
 };
+
+function composeArbeidstakerText(
+  navn?: string,
+  harMotebehov?: boolean,
+  dato?: Date
+) {
+  const denSykmeldte = "<b>Den sykmeldte: </b>";
+  const svarResultat = setSvarTekst(harMotebehov);
+  const opprettetDato = dato
+    ? " - " + tilLesbarDatoMedArUtenManedNavn(dato)
+    : undefined;
+
+  return [denSykmeldte, navn, svarResultat, opprettetDato]
+    .filter(Boolean)
+    .join(" ");
+}
 
 interface MotebehovKvitteringInnholdArbeidstakerProps {
   arbeidstakersMotebehov?: MotebehovDTO;
@@ -127,9 +145,13 @@ export const MotebehovKvitteringInnholdArbeidstaker = ({
 }: MotebehovKvitteringInnholdArbeidstakerProps) => {
   const arbeidstakerOnskerMote =
     arbeidstakersMotebehov?.motebehovSvar?.harMotebehov;
-  const arbeidstakerTekst = `<b>Den sykmeldte: </b> ${
-    sykmeldt?.navn
-  } ${setSvarTekst(arbeidstakerOnskerMote)}`;
+
+  const arbeidstakerTekst = composeArbeidstakerText(
+    sykmeldt?.navn,
+    arbeidstakerOnskerMote,
+    arbeidstakersMotebehov?.opprettetDato
+  );
+
   const ikonAltTekst = `Sykmeldt ${ikonAlternativTekst(
     arbeidstakerOnskerMote
   )}`;
@@ -201,33 +223,48 @@ export const MotebehovKvitteringInnholdArbeidsgiverUtenMotebehov = ({
 );
 
 interface MotebehovKvitteringProps {
+  motebehovData: MotebehovDTO[];
   ledereData: Leder[];
-  ledereUtenInnsendtMotebehov: Leder[];
-  motebehovListe: MotebehovDTO[];
+  oppfolgingstilfelleperioder: OppfolgingstilfelleperioderMapState;
   sykmeldt?: Brukerinfo;
 }
 
 const MotebehovKvittering = ({
+  motebehovData,
   ledereData,
-  ledereUtenInnsendtMotebehov,
-  motebehovListe,
+  oppfolgingstilfelleperioder,
   sykmeldt,
-}: MotebehovKvitteringProps) => (
-  <div className="motebehovKvitteringInnhold">
-    <MotebehovKvitteringInnholdArbeidstaker
-      arbeidstakersMotebehov={finnArbeidstakerMotebehovSvar(motebehovListe)}
-      sykmeldt={sykmeldt}
-    />
-    <MotebehovKvitteringInnholdArbeidsgiver
-      motebehovListeMedBareArbeidsgiversMotebehov={motebehovListe.filter(
-        bareArbeidsgiversMotebehov
-      )}
-      ledereData={ledereData}
-    />
-    <MotebehovKvitteringInnholdArbeidsgiverUtenMotebehov
-      ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
-    />
-  </div>
-);
+}: MotebehovKvitteringProps) => {
+  const aktiveMotebehovSvar = motebehovFromLatestActiveTilfelle(
+    motebehovData?.sort(sorterMotebehovDataEtterDato),
+    oppfolgingstilfelleperioder
+  );
+
+  const ledereUtenInnsendtMotebehov = ledereUtenMotebehovsvar(
+    ledereData,
+    motebehovData,
+    oppfolgingstilfelleperioder
+  );
+
+  return (
+    <div className="motebehovKvitteringInnhold">
+      <MotebehovKvitteringInnholdArbeidstaker
+        arbeidstakersMotebehov={finnArbeidstakerMotebehovSvar(
+          aktiveMotebehovSvar
+        )}
+        sykmeldt={sykmeldt}
+      />
+      <MotebehovKvitteringInnholdArbeidsgiver
+        motebehovListeMedBareArbeidsgiversMotebehov={aktiveMotebehovSvar.filter(
+          bareArbeidsgiversMotebehov
+        )}
+        ledereData={ledereData}
+      />
+      <MotebehovKvitteringInnholdArbeidsgiverUtenMotebehov
+        ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}
+      />
+    </div>
+  );
+};
 
 export default MotebehovKvittering;

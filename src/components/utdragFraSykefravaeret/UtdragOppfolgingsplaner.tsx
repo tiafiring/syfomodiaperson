@@ -165,7 +165,7 @@ export const UtdragOppfolgingsplaner = ({
       dispatch(hentVirksomhet(plan.virksomhetsnummer));
     });
 
-    aktiveDialoger.forEach((plan: OppfolgingsplanDTO) => {
+    aktiveDialoger?.forEach((plan: OppfolgingsplanDTO) => {
       dispatch(hentVirksomhet(plan.virksomhet.virksomhetsnummer));
     });
   }, [activeLpsPlaner, aktiveDialoger]);

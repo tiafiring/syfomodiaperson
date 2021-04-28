@@ -1,4 +1,5 @@
 //SVG
+import ArbeiderKvinneImage from "./svg/arbeiderkvinne.svg";
 import ArbeidsgiverImage from "./svg/arbeidsgiver.svg";
 import ArbeidsgiverHoverImage from "./svg/arbeidsgiver_hover.svg";
 import ArrowDownImage from "./svg/arrow-down.svg";
@@ -52,6 +53,7 @@ import StatusKanImage from "./svg/status--kan.svg";
 import StatusKanIkkeImage from "./svg/status--kanikke.svg";
 import SykmeldingerImage from "./svg/sykmeldinger.svg";
 import SykmeldingerHoverBlaaImage from "./svg/sykmeldinger_hover-blue.svg";
+import UtropstegnImage from "./svg/utropstegn.svg";
 
 //PNG
 import CheckboxPng from "./png/check-box-1.png";
@@ -60,6 +62,7 @@ import KalenderHoverPng from "./png/kalender--hover.png";
 import PilForrigeBlaaPng from "./png/pilForrige--blaa.png";
 
 export {
+  ArbeiderKvinneImage,
   ArbeidsgiverImage,
   ArbeidsgiverHoverImage,
   ArrowDownImage,
@@ -117,4 +120,5 @@ export {
   KalenderPng,
   KalenderHoverPng,
   PilForrigeBlaaPng,
+  UtropstegnImage,
 };
