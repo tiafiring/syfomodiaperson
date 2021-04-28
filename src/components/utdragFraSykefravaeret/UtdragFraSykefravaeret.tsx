@@ -23,8 +23,12 @@ import Utvidbar from "../Utvidbar";
 import styled from "styled-components";
 import { OppfolgingstilfelleperioderMapState } from "../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
 import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
-import { MerInformasjonImage } from "../../../img/ImageComponents";
+import {
+  GultDokumentImage,
+  MerInformasjonImage,
+} from "../../../img/ImageComponents";
 import { UtdragOppfolgingsplaner } from "./UtdragOppfolgingsplaner";
+import { DialogmotePanel } from "../mote/components/DialogmotePanel";
 
 const tekster = {
   header: "Utdrag fra sykefraværet",
@@ -37,14 +41,6 @@ const tekster = {
     header: "Samtalereferat",
     lenkeTekst: "Samtalereferat",
   },
-};
-
-export const UtdragFraSykefravaeretHeader = () => {
-  return (
-    <div className="utdragFraSykefravaeret__header">
-      <h2>{tekster.header}</h2>
-    </div>
-  );
 };
 
 interface UtvidbarTittelProps {
@@ -228,10 +224,8 @@ const UtdragFraSykefravaeret = ({
   oppfolgingstilfelleperioder,
   sykmeldinger,
 }: UtdragFraSykefravaeretProps) => (
-  <div>
-    <UtdragFraSykefravaeretHeader />
-
-    <div className="panel utdragFraSykefravaeret">
+  <DialogmotePanel ikon={GultDokumentImage} overskrift={tekster.header}>
+    <div className="utdragFraSykefravaeret">
       <UtdragOppfolgingsplaner aktiveDialoger={aktiveDialoger} fnr={fnr} />
 
       <Sykmeldinger
@@ -250,7 +244,7 @@ const UtdragFraSykefravaeret = ({
 
       <Samtalereferat fnr={fnr} />
     </div>
-  </div>
+  </DialogmotePanel>
 );
 
 export default UtdragFraSykefravaeret;

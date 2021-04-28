@@ -1,20 +1,21 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
 import { hentPrediksjon } from "../../data/prediksjon/prediksjon_actions";
-import Prediksjontittel from "./Prediksjontittel";
+import PrediksjonHjelpetekst from "./PrediksjonHjelpetekst";
 import ViktigeFaktorer from "./ViktigeFaktorer";
 import DetaljertInformasjon from "./DetaljertInformasjon";
 import PrediksjonResultat from "./PrediksjonResultat";
 import { useAppSelector } from "../../hooks/hooks";
+import { DialogmotePanel } from "../mote/components/DialogmotePanel";
+import { UtropstegnImage } from "../../../img/ImageComponents";
 
 interface PrediksjonProps {
   fnr: string;
 }
 
-const PrediksjonPanel = styled.div`
-  margin-bottom: 1em;
-`;
+const texts = {
+  title: "Vil den sykmeldte fortsatt være sykmeldt etter uke 28?",
+};
 
 const PrediksjonVisning = ({ fnr }: PrediksjonProps) => {
   const dispatch = useDispatch();
@@ -22,21 +23,22 @@ const PrediksjonVisning = ({ fnr }: PrediksjonProps) => {
   useEffect(() => {
     dispatch(hentPrediksjon(fnr));
   }, []);
-  const prediksjonReducer = useAppSelector((state) => state.prediksjon);
-  const data = prediksjonReducer && prediksjonReducer.data;
-
+  const prediksjonData = useAppSelector((state) => state.prediksjon?.data);
   return (
     <>
-      {!!data && (
-        <PrediksjonPanel className="panel">
-          <Prediksjontittel />
-          <PrediksjonResultat prediksjon={data} />
-          <ViktigeFaktorer prediksjon={data} />
+      {!!prediksjonData && (
+        <DialogmotePanel
+          ikon={UtropstegnImage}
+          overskrift={texts.title}
+          topRightElement={<PrediksjonHjelpetekst />}
+        >
+          <PrediksjonResultat prediksjon={prediksjonData} />
+          <ViktigeFaktorer prediksjon={prediksjonData} />
           <DetaljertInformasjon
-            kortereFaktorer={data.kortereVarighetGrunner}
-            lengreFaktorer={data.lengreVarighetGrunner}
+            kortereFaktorer={prediksjonData.kortereVarighetGrunner}
+            lengreFaktorer={prediksjonData.lengreVarighetGrunner}
           />
-        </PrediksjonPanel>
+        </DialogmotePanel>
       )}
     </>
   );

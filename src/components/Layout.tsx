@@ -26,3 +26,11 @@ export const FlexRow = styled.div<RowProps>`
   padding-top: ${(props) => (props.topPadding ? "2em" : "0")};
   padding-bottom: ${(props) => (props.bottomPadding ? "2em" : "0")};
 `;
+
+export const H2NoMargins = styled.h2`
+  margin: 0;
+`;
+
+export const H3NoMargins = styled.h3`
+  margin: 0;
+`;

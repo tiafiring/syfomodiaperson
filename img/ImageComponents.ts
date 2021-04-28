@@ -20,6 +20,7 @@ import EpostImage from "./svg/epost.svg";
 import FabrikkImage from "./svg/fabrikk.svg";
 import GlobeImage from "./svg/globe.svg";
 import GlobeHoverImage from "./svg/globe-hover.svg";
+import GultDokumentImage from "./svg/gultdokument.svg";
 import InfoSymbolImage from "./svg/info_symbol.svg";
 import InformasjonImage from "./svg/informasjon.svg";
 import BlaaKalenderImage from "./svg/kalender--blaa.svg";
@@ -83,6 +84,7 @@ export {
   FabrikkImage,
   GlobeImage,
   GlobeHoverImage,
+  GultDokumentImage,
   InfoSymbolImage,
   InformasjonImage,
   BlaaKalenderImage,
