@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ReactElement, useState } from "react";
 import { Knapp } from "nav-frontend-knapper";
 import {
   tilLesbarDatoMedArstall,
@@ -71,7 +71,9 @@ interface FremtidigSoknadTeaserProps {
   soknad: SykepengesoknadDTO;
 }
 
-const FremtidigSoknadTeaser = ({ soknad }: FremtidigSoknadTeaserProps) => {
+const FremtidigSoknadTeaser = ({
+  soknad,
+}: FremtidigSoknadTeaserProps): ReactElement => {
   const [vis, setVis] = useState(false);
 
   return (

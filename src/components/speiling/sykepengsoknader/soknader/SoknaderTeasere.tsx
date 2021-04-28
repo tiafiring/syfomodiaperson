@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import SoknadTeaser from "./SoknadTeaser";
 import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
 
@@ -18,23 +18,21 @@ const SoknaderTeasere = ({
   tittel = "",
   tomListeTekst,
   id,
-}: SoknaderTeasereProps) => {
-  return (
-    <div className="blokk--l">
-      <header className="inngangspanelerHeader">
-        <h2 className="inngangspanelerHeader__tittel">{tittel}</h2>
-      </header>
-      <div id={id} className={className || "js-content"}>
-        {sykepengesoknader.length > 0 ? (
-          sykepengesoknader.map((soknad, idx) => (
-            <SoknadTeaser key={idx} soknad={soknad} fnr={fnr} />
-          ))
-        ) : (
-          <p className="panel typo-infotekst">{tomListeTekst}</p>
-        )}
-      </div>
+}: SoknaderTeasereProps): ReactElement => (
+  <div className="blokk--l">
+    <header className="inngangspanelerHeader">
+      <h2 className="inngangspanelerHeader__tittel">{tittel}</h2>
+    </header>
+    <div id={id} className={className || "js-content"}>
+      {sykepengesoknader.length > 0 ? (
+        sykepengesoknader.map((soknad, idx) => (
+          <SoknadTeaser key={idx} soknad={soknad} fnr={fnr} />
+        ))
+      ) : (
+        <p className="panel typo-infotekst">{tomListeTekst}</p>
+      )}
     </div>
-  );
-};
+  </div>
+);
 
 export default SoknaderTeasere;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import PlanlagtTeaser from "./PlanlagtTeaser";
 import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
 
@@ -10,7 +10,7 @@ interface PlanlagteTeasereProps {
 const PlanlagteTeasere = ({
   sykepengesoknader,
   tittel = "",
-}: PlanlagteTeasereProps) => {
+}: PlanlagteTeasereProps): ReactElement => {
   return (
     <div className="blokk--l">
       <header className="inngangspanelerHeader">

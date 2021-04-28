@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import {
   erSendtTilBeggeMenIkkeSamtidig,
@@ -54,7 +54,7 @@ interface TeaserComponentProps {
   soknad: SykepengesoknadDTO;
 }
 
-export const SendtUlikt = ({ soknad }: TeaserComponentProps) => {
+const SendtUlikt = ({ soknad }: TeaserComponentProps) => {
   return (
     <span>
       {textSendtTilArbeidsgiver(
@@ -192,7 +192,7 @@ const beregnUndertekst = (soknad: SykepengesoknadDTO) => {
   }
 };
 
-export const TeaserStatus = ({ soknad }: TeaserComponentProps) => (
+const TeaserStatus = ({ soknad }: TeaserComponentProps) => (
   <p className="inngangspanel__status js-status">
     {textSoknadTeaserStatus(
       `soknad.teaser.status.${soknad.status}`,
@@ -203,7 +203,7 @@ export const TeaserStatus = ({ soknad }: TeaserComponentProps) => (
   </p>
 );
 
-export const TeaserTittel = ({ soknad }: TeaserComponentProps) => (
+const TeaserTittel = ({ soknad }: TeaserComponentProps) => (
   <h3 className="js-title" id={`soknad-header-${soknad.id}`}>
     <small className="inngangspanel__meta js-meta">
       {textDato(tilLesbarDatoMedArstall(soknad.opprettetDato))}
@@ -216,7 +216,7 @@ export const TeaserTittel = ({ soknad }: TeaserComponentProps) => (
   </h3>
 );
 
-export const TeaserPeriode = ({ soknad }: TeaserComponentProps) => (
+const TeaserPeriode = ({ soknad }: TeaserComponentProps) => (
   <p className="inngangspanel__tekst js-tekst">
     {textTeaserTekst(tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom))}
   </p>
@@ -226,7 +226,10 @@ interface SykepengesoknadTeaserProps extends TeaserComponentProps {
   fnr: string;
 }
 
-const SykepengesoknadTeaser = ({ soknad, fnr }: SykepengesoknadTeaserProps) => {
+const SykepengesoknadTeaser = ({
+  soknad,
+  fnr,
+}: SykepengesoknadTeaserProps): ReactElement => {
   const status = soknad.status ? soknad.status.toLowerCase() : "";
   const visStatus =
     [
