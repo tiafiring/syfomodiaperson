@@ -16,6 +16,7 @@ import { OppfolgingsplanLPS } from "../../data/oppfolgingsplan/types/Oppfolgings
 import { hentPersonOppgaver } from "../../data/personoppgave/personoppgave_actions";
 import { PersonOppgave } from "../../data/personoppgave/types/PersonOppgave";
 import { hentVirksomhet } from "../../data/virksomhet/virksomhet_actions";
+import { H3NoMargins } from "../Layout";
 
 const texts = {
   header: "Oppfølgingsplan",
@@ -175,7 +176,7 @@ export const UtdragOppfolgingsplaner = ({
 
   return (
     <UtdragOppfolgingsplanerWrapper>
-      <h3>{texts.header}</h3>
+      <H3NoMargins>{texts.header}</H3NoMargins>
       {anyActivePlaner ? (
         <Oppfolgingsplaner
           fnr={fnr}

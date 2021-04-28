@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import styled from "styled-components";
 import Panel from "nav-frontend-paneler";
-import { FlexColumn, FlexRow } from "../../Layout";
+import { FlexRow, H2NoMargins } from "../../Layout";
 
 interface Props {
   ikon: string;
@@ -15,6 +15,7 @@ const StyledPanel = styled(Panel)`
   display: flex;
   flex-direction: column;
   margin-bottom: 2em;
+  padding: 2em;
 `;
 
 const Icon = styled.img`
@@ -22,8 +23,8 @@ const Icon = styled.img`
   width: 3em;
 `;
 
-const H2NoMargins = styled.h2`
-  margin: 0;
+const DivRightAligned = styled.div`
+  margin-left: auto;
 `;
 
 export const DialogmotePanel = ({
@@ -36,16 +37,14 @@ export const DialogmotePanel = ({
   return (
     <StyledPanel>
       <FlexRow bottomPadding>
-        <FlexColumn>
-          <FlexRow>
-            <Icon src={ikon} alt="moteikon" />
-            <div>
-              <H2NoMargins>{overskrift}</H2NoMargins>
-              <p>{underoverskrift}</p>
-            </div>
-          </FlexRow>
-        </FlexColumn>
-        {topRightElement && <FlexColumn>{topRightElement}</FlexColumn>}
+        <Icon src={ikon} alt="moteikon" />
+        <div>
+          <H2NoMargins>{overskrift}</H2NoMargins>
+          <p>{underoverskrift}</p>
+        </div>
+        {topRightElement && (
+          <DivRightAligned>{topRightElement}</DivRightAligned>
+        )}
       </FlexRow>
 
       <>{children}</>
