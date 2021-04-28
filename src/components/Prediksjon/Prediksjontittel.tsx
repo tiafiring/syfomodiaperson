@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
+import { PopoverOrientering } from "nav-frontend-popover";
 
 const texts = {
   title: "Vil den sykmeldte fortsatt være sykmeldt etter uke 28?",
@@ -48,7 +49,7 @@ const Prediksjontittel = () => {
   return (
     <TittelWrapper>
       <PrediksjontittelHeader>{texts.title}</PrediksjontittelHeader>
-      <Hjelpetekst type="under" id="1">
+      <Hjelpetekst type={PopoverOrientering.Under} id="1">
         <InfoText />
       </Hjelpetekst>
     </TittelWrapper>

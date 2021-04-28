@@ -4,10 +4,10 @@ import ModalWrapper from "nav-frontend-modal";
 import React, { ReactElement, useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router";
-import { useParams } from "react-router-dom";
 import Veileder from "nav-frontend-veileder";
 import { FlexColumn, FlexRow, ModalContentContainer } from "../../../Layout";
 import { erLokalEllerPreprod } from "../../../../utils/miljoUtil";
+import { useFnrParam } from "../../../../hooks/useFnrParam";
 
 const ModalText = styled.div`
   max-width: 40ch;
@@ -30,7 +30,7 @@ export const NyttDialogMote = (): ReactElement => {
   const [behandlerModalIsOpen, setBehandlerModalIsOpen] = useState(false);
   const [nyLosningModalIsOpen, setNyLosningModalIsOpen] = useState(false);
   const history = useHistory();
-  const { fnr } = useParams();
+  const fnr = useFnrParam();
 
   const Moteplanleggeren = (
     <FlexRow>

@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -16,6 +17,11 @@ module.exports = {
     extensions: [".tsx", ".jsx", ".js", ".ts", ".json"],
   },
   plugins: [
+    new ForkTsCheckerWebpackPlugin({
+      eslint: {
+        files: "./src/**/*.{ts,tsx,js,jsx}",
+      },
+    }),
     new HtmlWebpackPlugin({
       template: "public/index.html",
       filename: "index.html",

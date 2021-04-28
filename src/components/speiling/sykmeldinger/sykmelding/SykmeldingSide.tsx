@@ -17,14 +17,17 @@ import KoronaSykmeldingNy from "./koronasykmeldinger/KoronaSykmelding-Ny";
 import KoronaSykmeldingAvbrutt from "./koronasykmeldinger/KoronaSykmelding-Avbrutt";
 
 interface SykmeldingSideProps {
-  dinSykmelding: SykmeldingOldFormat;
-  arbeidsgiversSykmelding: SykmeldingOldFormat;
+  dinSykmelding?: SykmeldingOldFormat;
+  arbeidsgiversSykmelding?: SykmeldingOldFormat;
   fnr: string;
 }
 
 const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
   const { dinSykmelding, arbeidsgiversSykmelding, fnr } = sykmeldingSideProps;
   return (() => {
+    if (!dinSykmelding) {
+      return <Feilmelding tittel="Fant ikke sykmelding" />;
+    }
     if (
       dinSykmelding.behandlingsutfall.status ===
       behandlingsutfallStatuser.INVALID
@@ -79,7 +82,10 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
           <LenkeTilDineSykmeldinger fnr={fnr} />
         </div>
       );
-    } else if (dinSykmelding.status === gamleSMStatuser.BEKREFTET) {
+    } else if (
+      arbeidsgiversSykmelding &&
+      dinSykmelding.status === gamleSMStatuser.BEKREFTET
+    ) {
       return (
         <div>
           <DinBekreftedeSykmelding

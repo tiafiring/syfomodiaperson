@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import Sidetopp from "../../../Sidetopp";
 import SoknadTeasere from "./SoknaderTeasere";
 import PlanlagteTeasere from "./PlanlagteTeasere";
@@ -35,7 +35,7 @@ interface SoknaderProps {
   soknader: SykepengesoknadDTO[];
 }
 
-const Soknader = (soknaderProps: SoknaderProps) => {
+const Soknader = (soknaderProps: SoknaderProps): ReactElement => {
   const { fnr, soknader = [] } = soknaderProps;
   const alleSoknader = [...soknader];
 
@@ -81,7 +81,6 @@ const Soknader = (soknaderProps: SoknaderProps) => {
       {kommendeSoknader.length > 0 && (
         <PlanlagteTeasere
           sykepengesoknader={kommendeSoknader}
-          fnr={fnr}
           tittel="Planlagte søknader"
         />
       )}
