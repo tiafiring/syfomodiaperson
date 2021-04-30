@@ -78,15 +78,24 @@ export function get(url: string, personIdent?: string): Promise<any> {
     });
 }
 
-export function post(url: string, body?: Record<string, any>): Promise<any> {
+export function post(
+  url: string,
+  body?: Record<string, any>,
+  personIdent?: string
+): Promise<any> {
+  const headers = {
+    "Content-Type": "application/json",
+    [NAV_CONSUMER_ID_HEADER]: NAV_CONSUMER_ID,
+  };
+  if (personIdent) {
+    headers[NAV_PERSONIDENT_HEADER] = personIdent;
+  }
+
   return fetch(url, {
     credentials: "include",
     method: "POST",
     body: JSON.stringify(body),
-    headers: {
-      "Content-Type": "application/json",
-      [NAV_CONSUMER_ID_HEADER]: NAV_CONSUMER_ID,
-    },
+    headers,
   })
     .then((res) => {
       if (res.status === 401) {

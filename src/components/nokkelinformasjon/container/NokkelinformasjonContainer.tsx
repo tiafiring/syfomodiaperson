@@ -13,6 +13,7 @@ import Feilmelding from "../../Feilmelding";
 import AppSpinner from "../../AppSpinner";
 import Nokkelinformasjon from "../Nokkelinformasjon";
 import { useOppfoelgingsDialoger } from "../../../hooks/useOppfoelgingsDialoger";
+import { useTilgang } from "../../../hooks/useTilgang";
 
 const texts = {
   feilmelding: "Du har ikke tilgang til denne tjenesten",
@@ -38,7 +39,7 @@ export const NokkelinformasjonSide = () => {
 
   const ledereState = useSelector((state: any) => state.ledere);
   const sykmeldingerState = useSelector((state: any) => state.sykmeldinger);
-  const tilgangState = useSelector((state: any) => state.tilgang);
+  const { tilgang } = useTilgang();
 
   const harForsoktHentetAlt =
     harForsoktHentetOppfoelgingsdialoger && harForsoktHentetLedere(ledereState);
@@ -46,7 +47,6 @@ export const NokkelinformasjonSide = () => {
   const henter = !harForsoktHentetAlt;
   const hentingFeilet = sykmeldingerState.hentingFeilet;
   const sykmeldinger = sykmeldingerState.data;
-  const tilgang = tilgangState.data;
 
   const dispatch = useDispatch();
 

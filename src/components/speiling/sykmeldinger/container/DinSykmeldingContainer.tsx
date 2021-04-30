@@ -16,6 +16,7 @@ import { SYKMELDINGER } from "../../../../enums/menypunkter";
 import { ARBEIDSTAKER } from "../../../../enums/arbeidssituasjoner";
 import { hentBegrunnelseTekst } from "../../../../utils/tilgangUtils";
 import { harForsoktHentetSykmeldinger } from "../../../../utils/reducerUtils";
+import { useTilgang } from "../../../../hooks/useTilgang";
 
 const texts = {
   pageTitleSykmelding: "Sykmelding",
@@ -44,12 +45,11 @@ const DinSykmeldingSide = () => {
 
   const navbrukerState = useSelector((state: any) => state.navbruker);
   const sykmeldingerState = useSelector((state: any) => state.sykmeldinger);
-  const tilgangState = useSelector((state: any) => state.tilgang);
+  const { tilgang, hentingTilgangFeilet } = useTilgang();
 
   const harForsoktHentetAlt = harForsoktHentetSykmeldinger(sykmeldingerState);
   const henter = !harForsoktHentetAlt;
-  const hentingFeilet =
-    sykmeldingerState.hentingFeilet || tilgangState.hentingFeilet;
+  const hentingFeilet = sykmeldingerState.hentingFeilet || hentingTilgangFeilet;
   const dinSykmelding = getSykmelding(sykmeldingerState.data, sykmeldingId);
   let arbeidsgiversSykmelding = {} as SykmeldingOldFormat | undefined;
 
@@ -66,7 +66,6 @@ const DinSykmeldingSide = () => {
   }
 
   const brukernavn = navbrukerState.data.navn;
-  const tilgang = tilgangState.data;
 
   const dispatch = useDispatch();
   useEffect(() => {

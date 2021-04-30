@@ -25,6 +25,7 @@ import personoppgaveSagas from "./personoppgave/personoppgaveSagas";
 import prediksjonSagas from "./prediksjon/prediksjonSagas";
 import flaggPersonSagas from "./pengestopp/flaggPersonSagas";
 import vedtakSagas from "./vedtak/vedtakSagas";
+import dialogmoteSagas from "./dialogmote/dialogmoteSagas";
 
 export default function* rootSaga() {
   yield all([
@@ -54,5 +55,6 @@ export default function* rootSaga() {
     prediksjonSagas(),
     flaggPersonSagas(),
     vedtakSagas(),
+    dialogmoteSagas(),
   ]);
 }

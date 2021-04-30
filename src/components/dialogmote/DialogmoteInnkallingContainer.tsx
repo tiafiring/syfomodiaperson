@@ -3,10 +3,11 @@ import { MOETEPLANLEGGER } from "../../enums/menypunkter";
 import React, { ReactElement } from "react";
 import Sidetopp from "../Sidetopp";
 import DialogmoteInnkallingSkjema from "./DialogmoteInnkallingSkjema";
-import { useAppSelector } from "../../hooks/hooks";
 import SideLaster from "../SideLaster";
 import styled from "styled-components";
 import AlertStripe from "nav-frontend-alertstriper";
+import { useLedere } from "../../hooks/useLedere";
+import { useTilgang } from "../../hooks/useTilgang";
 import { useFnrParam } from "../../hooks/useFnrParam";
 
 const texts = {
@@ -25,16 +26,8 @@ const DialogmoteInnkallingWarningAlert = styled(AlertStripe)`
 
 const DialogmoteInnkallingContainer = (): ReactElement => {
   const fnr = useFnrParam();
-  const {
-    data: ledere,
-    henter: henterLedere,
-    hentingFeilet: hentingLedereFeilet,
-  } = useAppSelector((state) => state.ledere);
-  const {
-    henter: henterTilgang,
-    hentingFeilet: hentingTilgangFeilet,
-    data: tilgang,
-  } = useAppSelector((state) => state.tilgang);
+  const { henterLedere, hentingLedereFeilet } = useLedere();
+  const { henterTilgang, hentingTilgangFeilet, tilgang } = useTilgang();
 
   const henter = henterTilgang || henterLedere;
   const hentingFeilet = hentingTilgangFeilet || hentingLedereFeilet;
@@ -50,7 +43,7 @@ const DialogmoteInnkallingContainer = (): ReactElement => {
         <DialogmoteInnkallingWarningAlert type="advarsel">
           {texts.alert}
         </DialogmoteInnkallingWarningAlert>
-        <DialogmoteInnkallingSkjema ledere={ledere} />
+        <DialogmoteInnkallingSkjema />
       </SideLaster>
     </Side>
   );

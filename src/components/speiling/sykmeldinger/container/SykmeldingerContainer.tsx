@@ -12,6 +12,7 @@ import Speilingvarsel from "../../Speilingvarsel";
 import { hentBegrunnelseTekst } from "../../../../utils/tilgangUtils";
 import { harForsoktHentetSykmeldinger } from "../../../../utils/reducerUtils";
 import Pengestopp from "../../../pengestopp/Pengestopp";
+import { useTilgang } from "../../../../hooks/useTilgang";
 
 const texts = {
   introduksjonstekst:
@@ -24,17 +25,15 @@ const SykmeldingerSide = () => {
 
   const navbrukerState = useSelector((state: any) => state.navbruker);
   const sykmeldingerState = useSelector((state: any) => state.sykmeldinger);
-  const tilgangState = useSelector((state: any) => state.tilgang);
+  const { tilgang, hentingTilgangFeilet, henterTilgang } = useTilgang();
 
   const brukernavn = navbrukerState.data.navn;
   const sykmeldinger = sykmeldingerState.data;
   const sortering = sykmeldingerState.sortering;
-  const tilgang = tilgangState.data;
 
   const harForsoektHentetAlt = harForsoktHentetSykmeldinger(sykmeldingerState);
-  const henter = !harForsoektHentetAlt || tilgangState.henter;
-  const hentingFeilet =
-    sykmeldingerState.hentingFeilet || tilgangState.hentingFeilet;
+  const henter = !harForsoektHentetAlt || henterTilgang;
+  const hentingFeilet = sykmeldingerState.hentingFeilet || hentingTilgangFeilet;
 
   const dispatch = useDispatch();
   useEffect(() => {

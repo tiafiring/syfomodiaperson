@@ -16,6 +16,7 @@ import { AlertStripeInfo } from "nav-frontend-alertstriper";
 import { useSelector, useDispatch } from "react-redux";
 import { endreStatus } from "../../data/pengestopp/flaggperson_actions";
 import { FlaggpersonState } from "../../data/pengestopp/flaggperson";
+import { useNavEnhet } from "../../hooks/useNavEnhet";
 
 const texts = {
   notStoppedTittel:
@@ -95,7 +96,7 @@ const PengestoppModal = ({
   arbeidsgivere,
   toggle,
 }: IPengestoppModal) => {
-  const enhet = useSelector((state: any) => state.enhet);
+  const navEnhet = useNavEnhet();
   const flaggperson: FlaggpersonState = useSelector(
     (state: any) => state.flaggperson
   );
@@ -116,7 +117,7 @@ const PengestoppModal = ({
     sykmeldtFnr: { value: fnr },
     arsakList: [],
     virksomhetNr: [],
-    enhetNr: { value: enhet.valgtEnhet },
+    enhetNr: { value: navEnhet },
   });
 
   useEffect(() => {

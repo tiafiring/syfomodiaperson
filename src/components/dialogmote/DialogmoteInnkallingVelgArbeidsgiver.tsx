@@ -1,16 +1,12 @@
 import React, { ReactElement } from "react";
 import { Input, SkjemaelementFeilmelding } from "nav-frontend-skjema";
 import { Column, Row } from "nav-frontend-grid";
-import { Leder } from "../../data/leder/ledere";
 import { Field } from "react-final-form";
 import ArbeidsgiverDropdown from "../mote/skjema/ArbeidsgiverDropdown";
 import styled from "styled-components";
 import DialogmoteInnkallingSkjemaTittel from "./DialogmoteInnkallingSkjemaTittel";
 import DialogmoteInnkallingSkjemaSeksjon from "./DialogmoteInnkallingSkjemaSeksjon";
-
-interface DialogmoteInnkallingVelgArbeidsgiverProps {
-  ledere: Leder[];
-}
+import { useLedere } from "../../hooks/useLedere";
 
 const texts = {
   title: "Arbeidsgiver",
@@ -34,38 +30,42 @@ const LederFelt = ({ label, value }: LederFeltProps) => (
   </Column>
 );
 
-const DialogmoteInnkallingVelgArbeidsgiver = ({
-  ledere,
-}: DialogmoteInnkallingVelgArbeidsgiverProps): ReactElement => (
-  <DialogmoteInnkallingSkjemaSeksjon>
-    <DialogmoteInnkallingSkjemaTittel>
-      {texts.title}
-    </DialogmoteInnkallingSkjemaTittel>
-    <Field<string> name="arbeidsgiver">
-      {({ input, meta }) => {
-        const valgtLeder = ledere.find((l) => l.orgnummer === input.value);
-        return (
-          <>
-            <ArbeidsgiverDropdownWrapper>
-              <ArbeidsgiverDropdown
-                velgArbeidsgiver={input.onChange}
-                ledere={ledere}
-                label={texts.selectLabel}
-              />
-              <SkjemaelementFeilmelding>
-                {meta.touched && meta.error}
-              </SkjemaelementFeilmelding>
-            </ArbeidsgiverDropdownWrapper>
-            {valgtLeder && (
-              <Row>
-                <LederFelt label={texts.navnLabel} value={valgtLeder.navn} />
-                <LederFelt label={texts.epostLabel} value={valgtLeder.epost} />
-              </Row>
-            )}
-          </>
-        );
-      }}
-    </Field>
-  </DialogmoteInnkallingSkjemaSeksjon>
-);
+const DialogmoteInnkallingVelgArbeidsgiver = (): ReactElement => {
+  const { ledere } = useLedere();
+  return (
+    <DialogmoteInnkallingSkjemaSeksjon>
+      <DialogmoteInnkallingSkjemaTittel>
+        {texts.title}
+      </DialogmoteInnkallingSkjemaTittel>
+      <Field<string> name="arbeidsgiver">
+        {({ input, meta }) => {
+          const valgtLeder = ledere.find((l) => l.orgnummer === input.value);
+          return (
+            <>
+              <ArbeidsgiverDropdownWrapper>
+                <ArbeidsgiverDropdown
+                  velgArbeidsgiver={input.onChange}
+                  ledere={ledere}
+                  label={texts.selectLabel}
+                />
+                <SkjemaelementFeilmelding>
+                  {meta.touched && meta.error}
+                </SkjemaelementFeilmelding>
+              </ArbeidsgiverDropdownWrapper>
+              {valgtLeder && (
+                <Row>
+                  <LederFelt label={texts.navnLabel} value={valgtLeder.navn} />
+                  <LederFelt
+                    label={texts.epostLabel}
+                    value={valgtLeder.epost}
+                  />
+                </Row>
+              )}
+            </>
+          );
+        }}
+      </Field>
+    </DialogmoteInnkallingSkjemaSeksjon>
+  );
+};
 export default DialogmoteInnkallingVelgArbeidsgiver;
