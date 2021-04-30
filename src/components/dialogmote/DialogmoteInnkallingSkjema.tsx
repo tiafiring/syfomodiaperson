@@ -6,18 +6,22 @@ import DialogmoteInnkallingTekster from "./DialogmoteInnkallingTekster";
 import { Column } from "nav-frontend-grid";
 import { Flatknapp, Hovedknapp } from "nav-frontend-knapper";
 import { Form } from "react-final-form";
-import { Leder } from "../../data/leder/ledere";
 import {
   validerArbeidsgiver,
   validerSted,
   validerTidspunkt,
 } from "../../utils/valideringUtils";
 import DialogmoteInnkallingSkjemaRow from "./DialogmoteInnkallingSkjemaRow";
+import { opprettInnkalling } from "../../data/dialogmote/dialogmote_actions";
+import { useDispatch } from "react-redux";
+import { DialogmoteInnkallingDTO } from "../../data/dialogmote/dialogmoteTypes";
+import { genererDato } from "../mote/utils";
+import { Link, Redirect } from "react-router-dom";
 import styled from "styled-components";
-
-interface DialogmoteInnkallingSkjemaProps {
-  ledere: Leder[];
-}
+import { useNavEnhet } from "../../hooks/useNavEnhet";
+import { AlertStripeFeil } from "nav-frontend-alertstriper";
+import { useAppSelector } from "../../hooks/hooks";
+import { useFnrParam } from "../../hooks/useFnrParam";
 
 interface DialogmoteInnkallingSkjemaValues {
   arbeidsgiver: string;
@@ -43,6 +47,7 @@ interface DialogmoteInnkallingSkjemaFeil {
 const texts = {
   send: "Send innkallingene",
   cancel: "Avbryt",
+  errorMsg: "Beklager, det oppstod en feil. Prøv igjen litt senere.",
 };
 
 const validate = (
@@ -56,10 +61,26 @@ const validate = (
   return feilmeldinger;
 };
 
-const submit = (values: DialogmoteInnkallingSkjemaValues) => {
-  // TODO: Implement
-  console.log("submitting values: ", values);
-};
+const toInnkalling = (
+  values: DialogmoteInnkallingSkjemaValues,
+  fnr: string,
+  navEnhet: string
+): DialogmoteInnkallingDTO => ({
+  tildeltEnhet: navEnhet,
+  arbeidsgiver: {
+    virksomhetsnummer: values.arbeidsgiver,
+    fritekstInnkalling: values.fritekstArbeidsgiver,
+  },
+  arbeidstaker: {
+    personIdent: fnr,
+    fritekstInnkalling: values.fritekstSykmeldt,
+  },
+  tidSted: {
+    sted: values.sted,
+    videoLink: values.videoLink,
+    tid: genererDato(values.tidspunkt.dato, values.tidspunkt.klokkeslett),
+  },
+});
 
 const SendButtonColumn = styled(Column)`
   float: left;
@@ -72,25 +93,55 @@ const CancelButtonColumn = styled(Column)`
   padding-left: 0.5rem;
 `;
 
-const DialogmoteInnkallingSkjema = ({
-  ledere,
-}: DialogmoteInnkallingSkjemaProps): ReactElement => {
+const DialogmoteInnkallingSkjema = (): ReactElement => {
   const initialValues: Partial<DialogmoteInnkallingSkjemaValues> = {};
+  const dispatch = useDispatch();
+  const fnr = useFnrParam();
+  const navEnhet = useNavEnhet();
+  const {
+    senderInnkalling,
+    senderInnkallingFeilet,
+    innkallingSendt,
+  } = useAppSelector((state) => state.dialogmote);
+
+  const submit = (values: DialogmoteInnkallingSkjemaValues) => {
+    const dialogmoteInnkalling = toInnkalling(values, fnr, navEnhet);
+    dispatch(opprettInnkalling(fnr, dialogmoteInnkalling));
+  };
+
+  if (innkallingSendt) {
+    return <Redirect to={`/sykefravaer/${fnr}/moteoversikt`} />;
+  }
 
   return (
     <Panel>
       <Form initialValues={initialValues} onSubmit={submit} validate={validate}>
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <DialogmoteInnkallingVelgArbeidsgiver ledere={ledere} />
+            <DialogmoteInnkallingVelgArbeidsgiver />
             <DialogmoteInnkallingTidOgSted />
             <DialogmoteInnkallingTekster />
+            {senderInnkallingFeilet && (
+              <DialogmoteInnkallingSkjemaRow>
+                <Column className="col-xs-12">
+                  <AlertStripeFeil>{texts.errorMsg}</AlertStripeFeil>
+                </Column>
+              </DialogmoteInnkallingSkjemaRow>
+            )}
             <DialogmoteInnkallingSkjemaRow>
               <SendButtonColumn>
-                <Hovedknapp htmlType="submit">{texts.send}</Hovedknapp>
+                <Hovedknapp
+                  spinner={senderInnkalling}
+                  autoDisableVedSpinner
+                  htmlType="submit"
+                >
+                  {texts.send}
+                </Hovedknapp>
               </SendButtonColumn>
               <CancelButtonColumn>
-                <Flatknapp htmlType="button">{texts.cancel}</Flatknapp>
+                <Link to={`/sykefravaer/${fnr}/moteoversikt`}>
+                  <Flatknapp htmlType="button">{texts.cancel}</Flatknapp>
+                </Link>
               </CancelButtonColumn>
             </DialogmoteInnkallingSkjemaRow>
           </form>

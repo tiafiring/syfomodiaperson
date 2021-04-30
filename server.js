@@ -35,6 +35,11 @@ const syfopersonHost =
     ? "https://syfoperson.dev.intern.nav.no"
     : "https://syfoperson.intern.nav.no";
 
+const isdialogmoteUrl =
+  process.env.NAIS_CONTEXT === "dev"
+    ? "isdialogmote.dev.intern.nav.no"
+    : "isdialogmote.intern.nav.no";
+
 function nocache(req, res, next) {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
   res.header("Expires", "-1");
@@ -336,6 +341,28 @@ server.use("/isprediksjon/api/v1/prediksjon", cookieParser(), (req, res) => {
       res.sendStatus(err.response.status);
     });
 });
+
+server.use(
+  "/isdialogmote/api/v1/dialogmote/personident",
+  cookieParser(),
+  (req, res) => {
+    const token = req.cookies["isso-idtoken"];
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    const url = `https://${isdialogmoteUrl}/api/v1/dialogmote/personident`;
+    axios
+      .post(url, req.body, { headers })
+      .then((response) => {
+        res.sendStatus(response.status);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        res.sendStatus(err.response.status);
+      });
+  }
+);
 
 const port = 8080;
 

@@ -48,6 +48,7 @@ import personoppgaver, {
 import flaggperson, { FlaggpersonState } from "./pengestopp/flaggperson";
 import prediksjon, { PrediksjonState } from "./prediksjon/prediksjon";
 import vedtak, { VedtakState } from "./vedtak/vedtak";
+import dialogmote, { DialogmoteState } from "./dialogmote/dialogmote";
 
 export interface RootState {
   fastleger: FastlegerState;
@@ -79,6 +80,7 @@ export interface RootState {
   flaggperson: FlaggpersonState;
   prediksjon: PrediksjonState;
   vedtak: VedtakState;
+  dialogmote: DialogmoteState;
 }
 
 export const rootReducer = combineReducers<RootState>({
@@ -111,4 +113,5 @@ export const rootReducer = combineReducers<RootState>({
   flaggperson,
   prediksjon,
   vedtak,
+  dialogmote,
 });

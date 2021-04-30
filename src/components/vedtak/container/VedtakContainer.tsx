@@ -15,6 +15,7 @@ import VedtakColumn from "../VedtakColumn";
 import VedtakForbidden from "../VedtakForbidden";
 import { sjekkTilgang } from "../../../data/tilgang/tilgang_actions";
 import AppSpinner from "../../AppSpinner";
+import { useTilgang } from "../../../hooks/useTilgang";
 
 const texts = {
   pageTitle: "Vedtak",
@@ -32,7 +33,7 @@ const VedtakContainer = () => {
   const fnr = window.location.pathname.split("/")[2];
 
   const vedtakState = useSelector((state: any) => state.vedtak);
-  const tilgangState = useSelector((state: any) => state.tilgang);
+  const { tilgang, hentetTilgang, henterTilgang } = useTilgang();
 
   const [selectedVedtak, setSelectedVedtak] = useState<VedtakDTO>();
   const dispatch = useDispatch();
@@ -48,8 +49,8 @@ const VedtakContainer = () => {
         <Row>
           <StyledAlertStripe>{texts.comingSoon}</StyledAlertStripe>
         </Row>
-        {vedtakState.henter && tilgangState.henter && <AppSpinner />}
-        {vedtakState.hentet && tilgangState.hentet && (
+        {vedtakState.henter && henterTilgang && <AppSpinner />}
+        {vedtakState.hentet && hentetTilgang && (
           <Row>
             {vedtakState.data.length > 0 && (
               <VedtakColumn
@@ -70,7 +71,7 @@ const VedtakContainer = () => {
             )}
             {!vedtakState.data.length && <VedtakEmpty />}
 
-            {!tilgangState.data.harTilgang && <VedtakForbidden />}
+            {!tilgang.harTilgang && <VedtakForbidden />}
           </Row>
         )}
       </>
