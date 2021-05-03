@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export enum JustifyContentType {
+  CENTER = "center",
+  FLEX_END = "flex-end",
+  FLEX_START = "flex-start",
+}
+
 export const ModalContentContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -7,10 +13,16 @@ export const ModalContentContainer = styled.div`
   padding: 2em;
 `;
 
-export const FlexColumn = styled.div`
+interface FlexColumnProps {
+  justifyContent?: JustifyContentType;
+}
+
+export const FlexColumn = styled.div<FlexColumnProps>`
   display: flex;
   flex-direction: column;
   flex: 1;
+  justify-content: ${(props) =>
+    props.justifyContent || JustifyContentType.FLEX_START};
 `;
 
 interface RowProps {
