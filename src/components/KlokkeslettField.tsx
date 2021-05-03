@@ -1,39 +1,27 @@
 import React from "react";
-import MaskedInput from "react-maskedinput";
-import { SkjemaelementFeilmelding } from "nav-frontend-skjema";
-import { FieldInputProps, FieldMetaState } from "react-final-form";
+import { Input } from "nav-frontend-skjema";
+import { Field } from "react-final-form";
 
 interface KlokkeslettFieldProps {
-  meta: FieldMetaState<string>;
-  id: string;
-  input: FieldInputProps<string, HTMLInputElement>;
-  type?: string;
-  className?: string;
-  placeholder?: string;
+  name: string;
+  label: string;
+  id?: string;
 }
 
-const KlokkeslettField = ({
-  meta: { touched, error },
-  input,
-  id,
-  type = "text",
-  className,
-  placeholder,
-}: KlokkeslettFieldProps) => (
-  <>
-    <MaskedInput
-      className={`skjemaelement__input ${className}${
-        touched && error ? " skjemaelement__input--harFeil" : ""
-      }`}
-      mask="11.11"
-      autoComplete="off"
-      placeholder={placeholder}
-      type={type}
-      id={id}
-      {...input}
-    />
-    <SkjemaelementFeilmelding>{touched && error}</SkjemaelementFeilmelding>
-  </>
+const KlokkeslettField = ({ name, label, id }: KlokkeslettFieldProps) => (
+  <Field<string> name={name}>
+    {({ input, meta }) => (
+      <Input
+        {...input}
+        id={id}
+        bredde="S"
+        autoComplete="off"
+        type="time"
+        label={label}
+        feil={meta.touched && meta.error}
+      />
+    )}
+  </Field>
 );
 
 export default KlokkeslettField;

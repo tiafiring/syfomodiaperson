@@ -13,7 +13,7 @@ export function genererDato(dato, klokkeslett) {
   const s = new Date();
   s.setDate(1);
   const datoArr = dato.split("-");
-  const klokkeslettArr = klokkeslett.split(".");
+  const klokkeslettArr = klokkeslett.split(":");
   const aar = datoArr[0];
   const aarPadded = aar.length === 2 ? `20${aar}` : aar;
   s.setYear(aarPadded);
@@ -23,11 +23,6 @@ export function genererDato(dato, klokkeslett) {
   s.setMinutes(klokkeslettArr[1]);
   s.setSeconds("00");
   return s.toJSON().slice(0, -5);
-}
-
-export function erGyldigKlokkeslett(klokkeslett) {
-  const re = /^([0-9]|0[0-9]|1[0-9]|2[0-3])\.[0-5][0-9]$/;
-  return re.test(klokkeslett);
 }
 
 export const erAlleAlternativerPassert = (alternativer) => {

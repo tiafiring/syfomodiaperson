@@ -59,9 +59,12 @@ const DialogmoteInnkallingTekster = (): ReactElement => (
       {texts.title}
     </DialogmoteInnkallingSkjemaTittel>
     <TeksterAlert type="info">{texts.alert}</TeksterAlert>
-    <FritekstBoks fieldName={"fritekstSykmeldt"} label={texts.sykmeldtLabel} />
     <FritekstBoks
-      fieldName={"fritekstArbeidsgiver"}
+      fieldName="fritekstArbeidstaker"
+      label={texts.sykmeldtLabel}
+    />
+    <FritekstBoks
+      fieldName="fritekstArbeidsgiver"
       label={texts.arbeidsgiverLabel}
     />
   </DialogmoteInnkallingSkjemaSeksjon>

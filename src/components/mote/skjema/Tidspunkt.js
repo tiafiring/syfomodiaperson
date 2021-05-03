@@ -1,17 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Field } from "react-final-form";
 import { Row, Column } from "nav-frontend-grid";
 import Datovelger from "../../Datovelger";
 import KlokkeslettField from "../../KlokkeslettField";
-import { formaterTid } from "../../../utils";
 
 const texts = {
   header: "Nytt tidspunkt",
   dateLabel: "Dato",
   datePlaceholder: "dd.mm.åååå",
   timeLabel: "Klokkeslett",
-  timePlaceholder: "F.eks: 09.30",
 };
 
 const Tidspunkt = ({ tidspunkt }) => {
@@ -37,19 +34,10 @@ const Tidspunkt = ({ tidspunkt }) => {
             />
           </Column>
           <Column className="col-xs-12 col-sm-6">
-            <label
-              className="skjemaelement__label"
-              htmlFor={`klokkeslett-${tidspunkt}`}
-            >
-              {texts.timeLabel}
-            </label>
-            <Field
-              parse={(e) => formaterTid(e)}
-              id={`klokkeslett-${tidspunkt}`}
-              component={KlokkeslettField}
+            <KlokkeslettField
               name={klokkeslettName}
-              className="input--s"
-              placeholder={texts.timePlaceholder}
+              label={texts.timeLabel}
+              id={`klokkeslett-${tidspunkt}`}
             />
           </Column>
         </Row>
