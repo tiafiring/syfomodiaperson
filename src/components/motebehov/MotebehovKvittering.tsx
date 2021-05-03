@@ -73,15 +73,20 @@ export const bareArbeidsgiversMotebehov = (motebehov: MotebehovDTO) => {
   return motebehov.opprettetAv !== motebehov.aktorId;
 };
 
-export const setArbeidsgiverTekst = (
-  leder?: Leder,
-  arbeidsgiverOnskerMote?: boolean
+const composePersonSvarText = (
+  personIngress: string,
+  personNavn?: string,
+  harMotebehov?: boolean,
+  svarOpprettetDato?: Date
 ) => {
-  const arbeidsgiverNavn = arbeidsgiverNavnEllerTomStreng(leder);
+  const svarResultat = setSvarTekst(harMotebehov);
+  const opprettetDato = svarOpprettetDato
+    ? " - " + tilLesbarDatoMedArUtenManedNavn(svarOpprettetDato)
+    : undefined;
 
-  return `<b>Nærmeste leder: </b> ${arbeidsgiverNavn},  ${setSvarTekst(
-    arbeidsgiverOnskerMote
-  )}`;
+  return [personIngress, personNavn, svarResultat, opprettetDato]
+    .filter(Boolean)
+    .join(" ");
 };
 
 interface MotebehovKvitteringInnholdProps {
@@ -110,29 +115,14 @@ export const MotebehovKvitteringInnhold = ({
           src={setSvarIkon(deltakerOnskerMote)}
           alt={ikonAltTekst}
         />
-        <span dangerouslySetInnerHTML={{ __html: tekst }} />
       </div>
-
-      {skalViseForklaring && <p>{motebehov?.motebehovSvar?.forklaring}</p>}
+      <div>
+        <span dangerouslySetInnerHTML={{ __html: tekst }} />
+        {skalViseForklaring && <p>{motebehov?.motebehovSvar?.forklaring}</p>}
+      </div>
     </div>
   );
 };
-
-function composeArbeidstakerText(
-  navn?: string,
-  harMotebehov?: boolean,
-  dato?: Date
-) {
-  const denSykmeldte = "<b>Den sykmeldte: </b>";
-  const svarResultat = setSvarTekst(harMotebehov);
-  const opprettetDato = dato
-    ? " - " + tilLesbarDatoMedArUtenManedNavn(dato)
-    : undefined;
-
-  return [denSykmeldte, navn, svarResultat, opprettetDato]
-    .filter(Boolean)
-    .join(" ");
-}
 
 interface MotebehovKvitteringInnholdArbeidstakerProps {
   arbeidstakersMotebehov?: MotebehovDTO;
@@ -146,7 +136,8 @@ export const MotebehovKvitteringInnholdArbeidstaker = ({
   const arbeidstakerOnskerMote =
     arbeidstakersMotebehov?.motebehovSvar?.harMotebehov;
 
-  const arbeidstakerTekst = composeArbeidstakerText(
+  const arbeidstakerTekst = composePersonSvarText(
+    "<b>Den sykmeldte: </b>",
     sykmeldt?.navn,
     arbeidstakerOnskerMote,
     arbeidstakersMotebehov?.opprettetDato
@@ -171,6 +162,19 @@ interface MotebehovKvitteringInnholdArbeidsgiverProps {
   ledereData: Leder[];
 }
 
+export const composeArbeidsgiverSvarText = (
+  leder?: Leder,
+  harMotebehov?: boolean,
+  svarOpprettetDato?: Date
+) => {
+  return composePersonSvarText(
+    "<b>Nærmeste leder: </b>",
+    arbeidsgiverNavnEllerTomStreng(leder),
+    harMotebehov,
+    svarOpprettetDato
+  );
+};
+
 export const MotebehovKvitteringInnholdArbeidsgiver = ({
   motebehovListeMedBareArbeidsgiversMotebehov,
   ledereData,
@@ -192,7 +196,11 @@ export const MotebehovKvitteringInnholdArbeidsgiver = ({
           deltakerOnskerMote={arbeidsgiverOnskerMote}
           ikonAltTekst={ikonAltTekst}
           motebehov={motebehov}
-          tekst={setArbeidsgiverTekst(riktigLeder, arbeidsgiverOnskerMote)}
+          tekst={composeArbeidsgiverSvarText(
+            riktigLeder,
+            arbeidsgiverOnskerMote,
+            motebehov.opprettetDato
+          )}
         />
       );
     })}
@@ -215,7 +223,7 @@ export const MotebehovKvitteringInnholdArbeidsgiverUtenMotebehov = ({
         <MotebehovKvitteringInnhold
           key={index}
           ikonAltTekst={ikonAltTekst}
-          tekst={setArbeidsgiverTekst(leder)}
+          tekst={composeArbeidsgiverSvarText(leder)}
         />
       );
     })}
