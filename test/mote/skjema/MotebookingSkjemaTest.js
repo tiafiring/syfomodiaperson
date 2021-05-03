@@ -151,11 +151,11 @@ describe("MotebookingSkjemaTest", () => {
     it("Skal validere tidspunkter dersom første felt mangler dato", () => {
       values.tidspunkter = [
         {
-          klokkeslett: "12.15",
+          klokkeslett: "12:15",
         },
         {
           dato: "2016-01-22",
-          klokkeslett: "10.00",
+          klokkeslett: "10:00",
         },
       ];
       const res = validate(values, props);
@@ -180,28 +180,14 @@ describe("MotebookingSkjemaTest", () => {
       );
     });
 
-    it("Skal validere tidspunkter dersom klokkeslett er på feil format", () => {
-      values.tidspunkter = [
-        {
-          dato: "12.12.2016",
-          klokkeslett: "A1.11",
-        },
-        {},
-      ];
-      const res = validate(values, props);
-      expect(res.tidspunkter[0].klokkeslett).to.equal(
-        "Vennligst angi riktig format; f.eks. 13.00"
-      );
-    });
-
     it("Skal validere tidspunkter dersom andre felt mangler dato", () => {
       values.tidspunkter = [
         {
           dato: "2016-02-22",
-          klokkeslett: "12.15",
+          klokkeslett: "12:15",
         },
         {
-          klokkeslett: "10.00",
+          klokkeslett: "10:00",
         },
       ];
       const res = validate(values, props);
@@ -217,7 +203,7 @@ describe("MotebookingSkjemaTest", () => {
       values.tidspunkter = [
         {
           dato: "2016-12-12",
-          klokkeslett: "10.00",
+          klokkeslett: "10:00",
         },
         {
           dato: "2016-01-22",
@@ -258,19 +244,19 @@ describe("MotebookingSkjemaTest", () => {
 
   describe("genererDato", () => {
     it("Skal returnere dato på riktig format når dato er dd.mm.åååå", () => {
-      const klokkeslett = "12.15";
+      const klokkeslett = "12:15";
       const dato = "2017-06-15";
       expect(genererDato(dato, klokkeslett)).to.equal("2017-06-15T12:15:00");
     });
 
     it("Skal returnere dato på riktig format når dato er dd.mm.åå", () => {
-      const klokkeslett = "12.15";
+      const klokkeslett = "12:15";
       const dato = "17-06-15";
       expect(genererDato(dato, klokkeslett)).to.equal("2017-06-15T12:15:00");
     });
 
     it("Skal returnere dato på riktig format", () => {
-      const klokkeslett = "1.15";
+      const klokkeslett = "1:15";
       const dato = "2017-06-15";
       expect(genererDato(dato, klokkeslett)).to.equal("2017-06-15T01:15:00");
     });
@@ -282,11 +268,11 @@ describe("MotebookingSkjemaTest", () => {
         tidspunkter: [
           {
             dato: "2016-08-12",
-            klokkeslett: "15.00",
+            klokkeslett: "15:00",
           },
           {
             dato: "2016-08-13",
-            klokkeslett: "12.00",
+            klokkeslett: "12:00",
           },
         ],
         sted: "Oslo",

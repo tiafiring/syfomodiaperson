@@ -32,7 +32,7 @@ interface DialogmoteInnkallingSkjemaValues {
   sted: string;
   videoLink?: string;
   fritekstArbeidsgiver?: string;
-  fritekstSykmeldt?: string;
+  fritekstArbeidstaker?: string;
 }
 
 interface DialogmoteInnkallingSkjemaFeil {
@@ -47,7 +47,8 @@ interface DialogmoteInnkallingSkjemaFeil {
 const texts = {
   send: "Send innkallingene",
   cancel: "Avbryt",
-  errorMsg: "Beklager, det oppstod en feil. Prøv igjen litt senere.",
+  errorMsg:
+    "Innkallingene kunne ikke sendes på grunn av en midlertidig teknisk feil. Prøv igjen.",
 };
 
 const validate = (
@@ -73,7 +74,7 @@ const toInnkalling = (
   },
   arbeidstaker: {
     personIdent: fnr,
-    fritekstInnkalling: values.fritekstSykmeldt,
+    fritekstInnkalling: values.fritekstArbeidstaker,
   },
   tidSted: {
     sted: values.sted,

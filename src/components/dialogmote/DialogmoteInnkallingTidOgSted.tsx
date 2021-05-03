@@ -1,7 +1,6 @@
 import React, { ReactElement } from "react";
 import { Input, Label } from "nav-frontend-skjema";
 import { Field } from "react-final-form";
-import { formaterTid } from "../../utils";
 import KlokkeslettField from "../KlokkeslettField";
 import { Column } from "nav-frontend-grid";
 import Datovelger from "../Datovelger";
@@ -17,7 +16,6 @@ const texts = {
   datoLabel: "Dato",
   datoPlaceholder: "dd.mm.åååå",
   tidLabel: "Klokkeslett",
-  tidPlaceholder: "F.eks: 09.30",
   videoLabel: "Lenke til videomøte (valgfritt)",
   videoPlaceholder: "https://",
 };
@@ -48,14 +46,7 @@ const DialogmoteInnkallingTidOgSted = (): ReactElement => (
         />
       </DatoColumn>
       <TidColumn>
-        <Label htmlFor="tidspunkt.klokkeslett">{texts.tidLabel}</Label>
-        <Field<string>
-          parse={(e) => formaterTid(e)}
-          component={KlokkeslettField}
-          name="tidspunkt.klokkeslett"
-          className="input--s"
-          placeholder={texts.tidPlaceholder}
-        />
+        <KlokkeslettField name="tidspunkt.klokkeslett" label={texts.tidLabel} />
       </TidColumn>
     </DialogmoteInnkallingSkjemaRow>
     <DialogmoteInnkallingSkjemaRow>

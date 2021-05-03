@@ -33,11 +33,11 @@ describe("FlereTidspunktSkjemaTest", () => {
         tidspunkter: [
           {
             dato: "2012-02-20",
-            klokkeslett: "10.20",
+            klokkeslett: "10:20",
           },
           {
             dato: "2013-02-20",
-            klokkeslett: "10.30",
+            klokkeslett: "10:30",
           },
         ],
       };
@@ -87,7 +87,7 @@ describe("FlereTidspunktSkjemaTest", () => {
           },
           {
             dato: "27.02.17",
-            klokkeslett: "09.00",
+            klokkeslett: "09:00",
           },
         ],
       };
@@ -136,9 +136,6 @@ describe("FlereTidspunktSkjemaTest", () => {
       const res = validate(values, props);
       expect(res.tidspunkter[0].dato).to.equal(
         "Vennligst angi riktig datoformat; dd.mm.åååå"
-      );
-      expect(res.tidspunkter[0].klokkeslett).to.equal(
-        "Vennligst angi riktig format; f.eks. 13.00"
       );
     });
   });
