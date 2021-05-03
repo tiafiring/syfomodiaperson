@@ -1,10 +1,17 @@
 const mockData = require("../mockData");
 const enums = require("../mockDataEnums");
+const mockMotebehov = require("../data/mockMotebehov");
 
 const mockSyfomotebehov = (server) => {
   server.get("/syfomotebehov/api/internad/veileder/motebehov", (req, res) => {
     res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(mockData[enums.MOTEBEHOV]));
+    res.send(
+      JSON.stringify([
+        mockMotebehov.getMotebehovArbeidstakerUbehandlet(),
+        mockMotebehov.getMotebehovArbeidstakerBehandlet(),
+        mockMotebehov.getMotebehovArbeidsgiver(),
+      ])
+    );
   });
 
   server.post(

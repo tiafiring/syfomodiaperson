@@ -4,7 +4,6 @@ const HISTORIKKMOTEBEHOV = "historikkmotebehov";
 const HISTORIKKMOTER = "historikkmoter";
 const HISTORIKKOPPFOLGINGSPLAN = "historikkoppfolgingsplan";
 const LEDERE = "ledere";
-const MOTEBEHOV = "motebehov";
 const MOTER = "moter";
 const OPPFOLGINGSTILFELLEPERIODER = "oppfolgingstilfelleperioder";
 const SOKNADER = "soknader";
@@ -21,7 +20,6 @@ module.exports = {
   HISTORIKKMOTER,
   HISTORIKKOPPFOLGINGSPLAN,
   LEDERE,
-  MOTEBEHOV,
   MOTER,
   OPPFOLGINGSTILFELLEPERIODER,
   SOKNADER,

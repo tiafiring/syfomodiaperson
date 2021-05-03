@@ -17,7 +17,6 @@ lastFilTilMinne(enums.HISTORIKKMOTEBEHOV);
 lastFilTilMinne(enums.HISTORIKKMOTER);
 lastFilTilMinne(enums.HISTORIKKOPPFOLGINGSPLAN);
 lastFilTilMinne(enums.LEDERE);
-lastFilTilMinne(enums.MOTEBEHOV);
 lastFilTilMinne(enums.MOTER);
 lastFilTilMinne(enums.OPPFOLGINGSTILFELLEPERIODER);
 lastFilTilMinne(enums.SOKNADER);
