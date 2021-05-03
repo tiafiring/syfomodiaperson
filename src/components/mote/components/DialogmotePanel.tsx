@@ -1,7 +1,12 @@
 import React, { ReactElement } from "react";
 import styled from "styled-components";
 import Panel from "nav-frontend-paneler";
-import { FlexRow, H2NoMargins } from "../../Layout";
+import {
+  FlexColumn,
+  FlexRow,
+  H2NoMargins,
+  JustifyContentType,
+} from "../../Layout";
 
 interface Props {
   ikon: string;
@@ -38,10 +43,10 @@ export const DialogmotePanel = ({
     <StyledPanel>
       <FlexRow bottomPadding>
         <Icon src={ikon} alt="moteikon" />
-        <div>
+        <FlexColumn justifyContent={JustifyContentType.CENTER}>
           <H2NoMargins>{overskrift}</H2NoMargins>
           <p>{underoverskrift}</p>
-        </div>
+        </FlexColumn>
         {topRightElement && (
           <DivRightAligned>{topRightElement}</DivRightAligned>
         )}
