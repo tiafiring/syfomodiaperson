@@ -5,7 +5,10 @@ import { NyttDialogMote } from "./NyttDialogMote";
 import { MoteIkonBlaaImage } from "../../../../../img/ImageComponents";
 import { DialogmotePanel } from "../DialogmotePanel";
 import { tilDatoMedUkedagOgManedNavn } from "../../../../utils/datoUtils";
-import { useAktivtMote } from "../../../../data/mote/moter_hooks";
+import { useAktivtMoteplanleggerMote } from "../../../../data/mote/moter_hooks";
+import { Moteplanleggeren } from "./Moteplanleggeren";
+import { erLokalEllerPreprod } from "../../../../utils/miljoUtil";
+import { DialogmoteMoteStatusPanel } from "./DialogmoteMoteStatusPanel";
 
 const texts = {
   bekreftetMote: "Bekreftet møte",
@@ -15,10 +18,6 @@ const texts = {
   dialogMote: "Dialogmøte",
   moteforesporselSendt: "Møteforespørsel sendt",
 };
-
-interface Props {
-  fnr: string;
-}
 
 const resolveUndertittelForMoteStatus = (mote: MoteDTO) => {
   if (mote.status === "BEKREFTET" && mote.bekreftetAlternativ) {
@@ -32,28 +31,41 @@ const resolveUndertittelForMoteStatus = (mote: MoteDTO) => {
   }
 };
 
-export const InnkallingDialogmotePanel = ({ fnr }: Props): ReactElement => {
-  const aktivtMote = useAktivtMote();
+export const InnkallingDialogmotePanel = (): ReactElement => {
+  //Todo: Fiks noe greier når datastruktur kommer på plass
+  const eksisterendeMoteplanleggerMote = useAktivtMoteplanleggerMote();
+  const eksisterendeDialogmoteInnkallingMote = undefined;
 
-  return aktivtMote ? (
-    <DialogmotePanel
-      ikon={MoteIkonBlaaImage}
-      overskrift={
-        aktivtMote.status === "BEKREFTET"
-          ? texts.bekreftetMote
-          : texts.seMotestatus
-      }
-      underoverskrift={resolveUndertittelForMoteStatus(aktivtMote)}
-    >
-      <SeMoteStatus fnr={fnr} />
-    </DialogmotePanel>
-  ) : (
-    <DialogmotePanel
-      ikon={MoteIkonBlaaImage}
-      overskrift={texts.planleggNyttMote}
-      underoverskrift={texts.ingenMoterPlanlagt}
-    >
-      <NyttDialogMote />
-    </DialogmotePanel>
-  );
+  //Fjernes når vi går i prod med ferdig løsning
+  if (!erLokalEllerPreprod) {
+    return <Moteplanleggeren />;
+  } else if (eksisterendeDialogmoteInnkallingMote) {
+    return <DialogmoteMoteStatusPanel />;
+  } else if (eksisterendeMoteplanleggerMote) {
+    return (
+      <DialogmotePanel
+        icon={MoteIkonBlaaImage}
+        header={
+          eksisterendeMoteplanleggerMote.status === "BEKREFTET"
+            ? texts.bekreftetMote
+            : texts.seMotestatus
+        }
+        subtitle={resolveUndertittelForMoteStatus(
+          eksisterendeMoteplanleggerMote
+        )}
+      >
+        <SeMoteStatus />
+      </DialogmotePanel>
+    );
+  } else {
+    return (
+      <DialogmotePanel
+        icon={MoteIkonBlaaImage}
+        header={texts.planleggNyttMote}
+        subtitle={texts.ingenMoterPlanlagt}
+      >
+        <NyttDialogMote />
+      </DialogmotePanel>
+    );
+  }
 };

@@ -6,12 +6,13 @@ import {
   FlexRow,
   H2NoMargins,
   JustifyContentType,
+  PaddingSize,
 } from "../../Layout";
 
 interface Props {
-  ikon: string;
-  overskrift: string;
-  underoverskrift?: string;
+  icon: string;
+  header: string;
+  subtitle?: string;
   topRightElement?: ReactElement;
   children: ReactElement[] | ReactElement;
 }
@@ -33,19 +34,19 @@ const DivRightAligned = styled.div`
 `;
 
 export const DialogmotePanel = ({
-  ikon,
-  overskrift,
-  underoverskrift,
+  icon,
+  header,
+  subtitle,
   topRightElement,
   children,
 }: Props): ReactElement => {
   return (
     <StyledPanel>
-      <FlexRow bottomPadding>
-        <Icon src={ikon} alt="moteikon" />
+      <FlexRow bottomPadding={PaddingSize.MD}>
+        <Icon src={icon} alt="moteikon" />
         <FlexColumn justifyContent={JustifyContentType.CENTER}>
-          <H2NoMargins>{overskrift}</H2NoMargins>
-          <p>{underoverskrift}</p>
+          <H2NoMargins>{header}</H2NoMargins>
+          <p>{subtitle}</p>
         </FlexColumn>
         {topRightElement && (
           <DivRightAligned>{topRightElement}</DivRightAligned>

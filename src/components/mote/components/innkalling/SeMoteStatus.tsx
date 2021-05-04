@@ -2,13 +2,15 @@ import React from "react";
 import { Knapp } from "nav-frontend-knapper";
 import { useHistory } from "react-router";
 import { FlexRow } from "../../../Layout";
+import { useFnrParam } from "../../../../hooks/useFnrParam";
 
-interface Props {
-  fnr: string;
-}
+const texts = {
+  gaTilMotestatus: "Gå til møtestatus",
+};
 
-export const SeMoteStatus = ({ fnr }: Props) => {
+export const SeMoteStatus = () => {
   const history = useHistory();
+  const fnr = useFnrParam();
 
   return (
     <FlexRow>
@@ -17,7 +19,7 @@ export const SeMoteStatus = ({ fnr }: Props) => {
           history.push(`/sykefravaer/${fnr}/mote`);
         }}
       >
-        Gå til møtestatus
+        {texts.gaTilMotestatus}
       </Knapp>
     </FlexRow>
   );

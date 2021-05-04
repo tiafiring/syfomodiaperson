@@ -28,8 +28,8 @@ const PrediksjonVisning = ({ fnr }: PrediksjonProps) => {
     <>
       {!!prediksjonData && (
         <DialogmotePanel
-          ikon={UtropstegnImage}
-          overskrift={texts.title}
+          icon={UtropstegnImage}
+          header={texts.title}
           topRightElement={<PrediksjonHjelpetekst />}
         >
           <PrediksjonResultat prediksjon={prediksjonData} />

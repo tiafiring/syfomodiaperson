@@ -20,14 +20,19 @@ interface FlexColumnProps {
 export const FlexColumn = styled.div<FlexColumnProps>`
   display: flex;
   flex-direction: column;
-  flex: 1;
   justify-content: ${(props) =>
     props.justifyContent || JustifyContentType.FLEX_START};
 `;
 
+export enum PaddingSize {
+  SM = "1em",
+  MD = "2em",
+  LG = "3em",
+}
+
 interface RowProps {
-  topPadding?: boolean;
-  bottomPadding?: boolean;
+  topPadding?: PaddingSize;
+  bottomPadding?: PaddingSize;
 }
 
 export const FlexRow = styled.div<RowProps>`
@@ -35,8 +40,8 @@ export const FlexRow = styled.div<RowProps>`
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  padding-top: ${(props) => (props.topPadding ? "2em" : "0")};
-  padding-bottom: ${(props) => (props.bottomPadding ? "2em" : "0")};
+  padding-top: ${(props) => props.topPadding || 0};
+  padding-bottom: ${(props) => props.bottomPadding || 0};
 `;
 
 export const H2NoMargins = styled.h2`

@@ -3,14 +3,10 @@ import Sidetopp from "../../Sidetopp";
 import { useDispatch } from "react-redux";
 import { hentMoter } from "../../../data/mote/moter_actions";
 import { useAppSelector } from "../../../hooks/hooks";
-import { DialogmotePanel } from "./DialogmotePanel";
-import { UtropstegnImage } from "../../../../img/ImageComponents";
-import MotebehovKvittering from "../../motebehov/MotebehovKvittering";
-import BehandleMotebehovKnapp from "../../motebehov/BehandleMotebehovKnapp";
-import UtdragFraSykefravaeret from "../../utdragFraSykefravaeret/UtdragFraSykefravaeret";
+import UtdragFraSykefravaeretPanel from "../../utdragFraSykefravaeret/UtdragFraSykefravaeret";
 import { InnkallingDialogmotePanel } from "./innkalling/InnkallingDialogmotePanel";
 import { erLokal } from "../../../utils/miljoUtil";
-import PrediksjonVisning from "../../Prediksjon/PrediksjonVisning";
+import PrediksjonVisningPanel from "../../Prediksjon/PrediksjonVisning";
 import SideLaster from "../../SideLaster";
 import { hentLedere } from "../../../data/leder/ledere_actions";
 import { hentMotebehov } from "../../../data/motebehov/motebehov_actions";
@@ -24,6 +20,7 @@ import {
 } from "../../../utils/reducerUtils";
 import { useOppfoelgingsDialoger } from "../../../hooks/useOppfoelgingsDialoger";
 import { Tilgang } from "../../../data/tilgang/tilgang";
+import { DialogmoteOnskePanel } from "../../motebehov/DialogmoteOnskePanel";
 
 interface Props {
   fnr: string;
@@ -31,7 +28,6 @@ interface Props {
 
 const texts = {
   dialogmoter: "Dialogmøter",
-  onskerOmDialogmote: "Ønsker om dialogmøte",
 };
 
 export const Motelandingsside = ({ fnr }: Props) => {
@@ -94,29 +90,19 @@ export const Motelandingsside = ({ fnr }: Props) => {
     >
       <Sidetopp tittel={texts.dialogmoter} />
 
-      <DialogmotePanel
-        ikon={UtropstegnImage}
-        overskrift={texts.onskerOmDialogmote}
-      >
-        <MotebehovKvittering
-          motebehovData={motebehov.data}
-          ledereData={ledere.data}
-          oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
-          sykmeldt={navbruker.data}
-        />
+      <DialogmoteOnskePanel
+        motebehovData={motebehov.data}
+        ledereData={ledere.data}
+        oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
+        sykmeldt={navbruker.data}
+        veilederinfo={veilederinfo.data}
+      />
 
-        <BehandleMotebehovKnapp
-          fnr={fnr}
-          motebehovData={motebehov.data}
-          veilederinfo={veilederinfo.data}
-        />
-      </DialogmotePanel>
+      <InnkallingDialogmotePanel />
 
-      <InnkallingDialogmotePanel fnr={fnr} />
+      {erLokal() ? <PrediksjonVisningPanel fnr={fnr} /> : <></>}
 
-      {erLokal() ? <PrediksjonVisning fnr={fnr} /> : <></>}
-
-      <UtdragFraSykefravaeret
+      <UtdragFraSykefravaeretPanel
         aktiveDialoger={aktiveDialoger}
         fnr={fnr}
         oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
