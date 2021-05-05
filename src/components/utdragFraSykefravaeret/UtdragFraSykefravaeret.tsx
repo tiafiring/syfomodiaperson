@@ -224,7 +224,7 @@ const UtdragFraSykefravaeret = ({
   oppfolgingstilfelleperioder,
   sykmeldinger,
 }: UtdragFraSykefravaeretProps) => (
-  <DialogmotePanel ikon={GultDokumentImage} overskrift={tekster.header}>
+  <DialogmotePanel icon={GultDokumentImage} header={tekster.header}>
     <div className="utdragFraSykefravaeret">
       <UtdragOppfolgingsplaner aktiveDialoger={aktiveDialoger} fnr={fnr} />
 

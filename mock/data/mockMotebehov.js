@@ -47,7 +47,7 @@ const getMotebehovArbeidsgiver = () => {
     id: "22222222-9e9b-40b0-bd1c-d1c39dc5f481",
     opprettetDato: "2021-12-08T13:53:57.047+01:00",
     aktorId: "1",
-    opprettetAv: "2",
+    opprettetAv: "1902690001009",
     virksomhetsnummer: "110110110",
     motebehovSvar: {
       harMotebehov: false,

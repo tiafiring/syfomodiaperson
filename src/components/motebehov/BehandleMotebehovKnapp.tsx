@@ -11,6 +11,7 @@ import {
 import { toDatePrettyPrint } from "../../utils/datoUtils";
 import { behandleMotebehov } from "../../data/motebehov/behandlemotebehov_actions";
 import { MotebehovDTO } from "../../data/motebehov/types/motebehovTypes";
+import { useFnrParam } from "../../hooks/useFnrParam";
 
 const behandleMotebehovKnappLabel = (
   erBehandlet: boolean,
@@ -24,19 +25,18 @@ const behandleMotebehovKnappLabel = (
 };
 
 interface BehandleMotebehovKnappProps {
-  fnr: string;
   motebehovData: MotebehovDTO[];
   veilederinfo?: VeilederinfoDTO;
 }
 
 const BehandleMotebehovKnapp = ({
-  fnr,
   motebehovData,
   veilederinfo,
 }: BehandleMotebehovKnappProps) => {
   const motebehovListe = motebehovlisteMedKunJaSvar(motebehovData);
   const sistBehandletMotebehov = hentSistBehandletMotebehov(motebehovListe);
   const erBehandlet = erMotebehovBehandlet(motebehovListe);
+  const fnr = useFnrParam();
 
   const dispatch = useDispatch();
 

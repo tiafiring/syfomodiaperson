@@ -6,7 +6,6 @@ import styled from "styled-components";
 import { useHistory } from "react-router";
 import Veileder from "nav-frontend-veileder";
 import { FlexColumn, FlexRow, ModalContentContainer } from "../../../Layout";
-import { erLokalEllerPreprod } from "../../../../utils/miljoUtil";
 import { useFnrParam } from "../../../../hooks/useFnrParam";
 
 const ModalText = styled.div`
@@ -32,19 +31,7 @@ export const NyttDialogMote = (): ReactElement => {
   const history = useHistory();
   const fnr = useFnrParam();
 
-  const Moteplanleggeren = (
-    <FlexRow>
-      <Knapp
-        onClick={() => {
-          history.push(`/sykefravaer/${fnr}/mote`);
-        }}
-      >
-        {texts.nyttMote}
-      </Knapp>
-    </FlexRow>
-  );
-
-  const DialogmoteInnkalling = (
+  return (
     <>
       <FlexRow>
         <Knapp onClick={() => setBehandlerModalIsOpen(true)}>
@@ -147,6 +134,4 @@ export const NyttDialogMote = (): ReactElement => {
       </ModalWrapper>
     </>
   );
-
-  return erLokalEllerPreprod ? DialogmoteInnkalling : Moteplanleggeren;
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Leder } from "../../data/leder/ledere";
 import {
   finnArbeidstakerMotebehovSvar,
@@ -14,8 +14,9 @@ import {
   MotebehovKanImage,
 } from "../../../img/ImageComponents";
 import { OppfolgingstilfelleperioderMapState } from "../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
+import { InfoRow } from "../InfoRow";
+import { PaddingSize } from "../Layout";
 import { ledereUtenMotebehovsvar } from "../../utils/ledereUtils";
-import styled from "styled-components";
 
 export const lederMedGittAktorId = (aktorId: string, ledere: Leder[]) => {
   return ledere.find((leder) => {
@@ -84,43 +85,36 @@ const composePersonSvarText = (
     ? " - " + tilLesbarDatoMedArUtenManedNavn(svarOpprettetDato)
     : undefined;
 
-  return [personIngress, personNavn, svarResultat, opprettetDato]
-    .filter(Boolean)
-    .join(" ");
+  return (
+    <span>
+      <b>{personIngress}</b> {personNavn}, {svarResultat} {opprettetDato}
+    </span>
+  );
 };
 
 interface MotebehovKvitteringInnholdProps {
   deltakerOnskerMote?: boolean;
   ikonAltTekst: string;
   motebehov?: MotebehovDTO;
-  tekst: string;
+  tekst: ReactElement;
+  topPadding?: PaddingSize;
 }
-
-const Icon = styled.img`
-  margin-right: 1em;
-`;
 
 export const MotebehovKvitteringInnhold = ({
   deltakerOnskerMote,
   ikonAltTekst,
   motebehov,
   tekst,
+  topPadding,
 }: MotebehovKvitteringInnholdProps) => {
-  const skalViseForklaring = motebehov?.motebehovSvar?.forklaring;
   return (
-    <div className="motebehovKvitteringBoksInnhold">
-      <div>
-        <Icon
-          className="svarstatus__ikon"
-          src={setSvarIkon(deltakerOnskerMote)}
-          alt={ikonAltTekst}
-        />
-      </div>
-      <div>
-        <span dangerouslySetInnerHTML={{ __html: tekst }} />
-        {skalViseForklaring && <p>{motebehov?.motebehovSvar?.forklaring}</p>}
-      </div>
-    </div>
+    <InfoRow
+      icon={setSvarIkon(deltakerOnskerMote)}
+      iconAltText={ikonAltTekst}
+      title={tekst}
+      subtitle={motebehov?.motebehovSvar?.forklaring}
+      topPadding={topPadding}
+    />
   );
 };
 
@@ -137,7 +131,7 @@ export const MotebehovKvitteringInnholdArbeidstaker = ({
     arbeidstakersMotebehov?.motebehovSvar?.harMotebehov;
 
   const arbeidstakerTekst = composePersonSvarText(
-    "<b>Den sykmeldte: </b>",
+    "Den sykmeldte: ",
     sykmeldt?.navn,
     arbeidstakerOnskerMote,
     arbeidstakersMotebehov?.opprettetDato
@@ -168,7 +162,7 @@ export const composeArbeidsgiverSvarText = (
   svarOpprettetDato?: Date
 ) => {
   return composePersonSvarText(
-    "<b>Nærmeste leder: </b>",
+    "Nærmeste leder: ",
     arbeidsgiverNavnEllerTomStreng(leder),
     harMotebehov,
     svarOpprettetDato
@@ -201,6 +195,7 @@ export const MotebehovKvitteringInnholdArbeidsgiver = ({
             arbeidsgiverOnskerMote,
             motebehov.opprettetDato
           )}
+          topPadding={PaddingSize.SM}
         />
       );
     })}
@@ -224,6 +219,7 @@ export const MotebehovKvitteringInnholdArbeidsgiverUtenMotebehov = ({
           key={index}
           ikonAltTekst={ikonAltTekst}
           tekst={composeArbeidsgiverSvarText(leder)}
+          topPadding={PaddingSize.SM}
         />
       );
     })}
@@ -255,7 +251,7 @@ const MotebehovKvittering = ({
   );
 
   return (
-    <div className="motebehovKvitteringInnhold">
+    <div>
       <MotebehovKvitteringInnholdArbeidstaker
         arbeidstakersMotebehov={finnArbeidstakerMotebehovSvar(
           aktiveMotebehovSvar
