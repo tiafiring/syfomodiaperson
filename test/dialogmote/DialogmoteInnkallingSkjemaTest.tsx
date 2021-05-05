@@ -121,10 +121,12 @@ describe("DialogmoteInnkallingSkjema", () => {
         arbeidsgiver: {
           virksomhetsnummer: arbeigsgiverOrgnr,
           fritekstInnkalling: fritekstTilArbeidsgiver,
+          innkalling: [],
         },
         arbeidstaker: {
           personIdent: arbeidstakerFnr,
           fritekstInnkalling: fritekstTilArbeidstaker,
+          innkalling: [],
         },
         tidSted: {
           sted: moteSted,

@@ -71,10 +71,12 @@ const toInnkalling = (
   arbeidsgiver: {
     virksomhetsnummer: values.arbeidsgiver,
     fritekstInnkalling: values.fritekstArbeidsgiver,
+    innkalling: [], // TODO: Implementeres ifm forhåndsvisning av innkalling
   },
   arbeidstaker: {
     personIdent: fnr,
     fritekstInnkalling: values.fritekstArbeidstaker,
+    innkalling: [], // TODO: Implementeres ifm forhåndsvisning av innkalling
   },
   tidSted: {
     sted: values.sted,
