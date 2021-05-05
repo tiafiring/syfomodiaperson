@@ -1,5 +1,4 @@
 const mockData = require("../mockData");
-const enums = require("../mockDataEnums");
 const mockVirksomhet = require("../data/mockVirksomhet");
 
 const mockOpprettetIdResultat = () => {
@@ -51,27 +50,27 @@ const mockMoteDeltakere = (alternativer, orgnummer) => {
 const mockForLokal = (server) => {
   server.get("/syfomoteadmin/api/internad/veilederinfo/enheter", (req, res) => {
     res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(mockData[enums.ENHETER]));
+    res.send(JSON.stringify(mockData.getEnheter()));
   });
 
   server.get("/syfomoteadmin/api/internad/enheter", (req, res) => {
     res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(mockData[enums.ENHETER]));
+    res.send(JSON.stringify(mockData.getEnheter()));
   });
 
   server.get("/syfomoteadmin/api/internad/moter", (req, res) => {
     res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(mockData[enums.MOTER]));
+    res.send(JSON.stringify(mockData.getMoter()));
   });
 
   server.get("/syfomoteadmin/api/internad/historikk", (req, res) => {
     res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(mockData[enums.HISTORIKKMOTER]));
+    res.send(JSON.stringify(mockData.getHistorikkMoter()));
   });
 
   server.get("/syfomoteadmin/api/internad/veilederinfo", (req, res) => {
     res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(mockData[enums.VEILEDERINFO]));
+    res.send(JSON.stringify(mockData.getVeildederInfo()));
   });
 
   server.get("/syfomoteadmin/api/internad/virksomhet/110110110", (req, res) => {

@@ -1,29 +1,31 @@
-const path = require("path");
-const fs = require("fs");
-const enums = require("./mockDataEnums");
+const getBrukerinfo = require("./data/brukerinfo");
+const getEnheter = require("./data/enheter");
+const getHistorikkMotebehov = require("./data/historikkmotebehov");
+const getHistorikkMoter = require("./data/historikkmoter");
+const getHistorikkOppfolgingsplan = require("./data/historikkoppfolgingsplan");
+const getLedere = require("./data/ledere");
+const getMoter = require("./data/moter");
+const getOppfolgingstilfelleperioder = require("./data/oppfolgingstilfelleperioder");
+const getSoknader = require("./data/soknader");
+const getSykmeldinger = require("./data/sykmeldinger");
+const getTilgangTilBruker = require("./data/tilgangtilbruker");
+const getVeildederInfo = require("./data/veilederinfo");
+const getPrediksjon = require("./data/prediksjon");
+const getVedtak = require("./data/vedtak");
 
-const mockData = {};
-
-const lastFilTilMinne = (filnavn) => {
-  fs.readFile(path.join(__dirname, `/data/${filnavn}.json`), (err, data) => {
-    if (err) throw err;
-    mockData[filnavn] = JSON.parse(data.toString());
-  });
+module.exports = {
+  getBrukerinfo,
+  getEnheter,
+  getHistorikkMotebehov,
+  getHistorikkMoter,
+  getHistorikkOppfolgingsplan,
+  getLedere,
+  getMoter,
+  getOppfolgingstilfelleperioder,
+  getSoknader,
+  getSykmeldinger,
+  getTilgangTilBruker,
+  getVeildederInfo,
+  getPrediksjon,
+  getVedtak,
 };
-
-lastFilTilMinne(enums.BRUKERINFO);
-lastFilTilMinne(enums.ENHETER);
-lastFilTilMinne(enums.HISTORIKKMOTEBEHOV);
-lastFilTilMinne(enums.HISTORIKKMOTER);
-lastFilTilMinne(enums.HISTORIKKOPPFOLGINGSPLAN);
-lastFilTilMinne(enums.LEDERE);
-lastFilTilMinne(enums.MOTER);
-lastFilTilMinne(enums.OPPFOLGINGSTILFELLEPERIODER);
-lastFilTilMinne(enums.SOKNADER);
-lastFilTilMinne(enums.SYKMELDINGER);
-lastFilTilMinne(enums.TILGANGTILBRUKER);
-lastFilTilMinne(enums.VEILEDERINFO);
-lastFilTilMinne(enums.PREDIKSJON);
-lastFilTilMinne(enums.VEDTAK);
-
-module.exports = mockData;
