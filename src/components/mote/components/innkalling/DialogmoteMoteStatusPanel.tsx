@@ -10,11 +10,15 @@ import Alertstripe from "nav-frontend-alertstriper";
 import { Hovedknapp, Knapp } from "nav-frontend-knapper";
 import { FlexColumn, FlexRow, PaddingSize } from "../../../Layout";
 import { InfoRow } from "../../../InfoRow";
+import { DialogmoteDTO } from "../../../../data/dialogmote/dialogmoteTypes";
+import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
+import { Brukerinfo } from "../../../../data/navbruker/types/Brukerinfo";
+import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../../../utils/datoUtils";
 
 const texts = {
   header: "Innkallingen er sendt",
   infoMessage:
-    "Du har brukt den nye løsningen i Modia. Her kan du også avlyse, endre tidspunktet og skrive referat.",
+    "Du har brukt den nye løsningen i Modia. Her kan du også avlyse, endre tidspunktet, og skrive referat.",
   endreMote: "Endre møtet",
   avlysMote: "Avlys møtet",
   skrivReferat: "Skriv referat",
@@ -22,8 +26,16 @@ const texts = {
   denSykmeldte: "Den sykmeldte:",
 };
 
-const subtitle = () => {
-  return "Møtetidspunkt: Mandag 30. april 2021 kl 09.00 - Videomøte"; //TODO
+const subtitle = (dialogmote: DialogmoteDTO) => {
+  const latestTidSted = dialogmote.tidStedList
+    ? dialogmote.tidStedList[0]
+    : undefined;
+  const meetTimeText = tilDatoMedUkedagOgManedNavnOgKlokkeslett(
+    latestTidSted?.tid
+  );
+  const videoText = latestTidSted?.videoLink ? " - Videomøte" : undefined;
+
+  return `Møtetidspunkt: ${meetTimeText}${videoText}`;
 };
 
 const getIcon = (vilMote?: boolean): string => {
@@ -40,44 +52,55 @@ const getIcon = (vilMote?: boolean): string => {
   }
 };
 
-const ParticipantInfo = (): ReactElement => {
-  const detailTextArbeidstaker = "Jeg er til behandling den dagen";
-  const detailTextArbeidsgiver = "Pina d grett";
+interface ParticipantProps {
+  dialogmote: DialogmoteDTO;
+  bruker: Brukerinfo;
+}
 
+const ParticipantInfo = ({
+  dialogmote,
+  bruker,
+}: ParticipantProps): ReactElement => {
   return (
     <FlexColumn>
       <InfoRow
         icon={getIcon(true)}
         title={
           <span>
-            <b>{texts.naermesteLeder}</b> Grønn Bamse, vil møte opp
+            <b>{texts.naermesteLeder}</b> {dialogmote.arbeidsgiver.lederNavn},
+            avklar hva som skal vises her
           </span>
         }
-        subtitle={detailTextArbeidsgiver}
       />
       <InfoRow
         icon={getIcon(false)}
         title={
           <span>
-            <b>{texts.denSykmeldte}</b> Artig Trane, ønsker endret dato
+            <b>{texts.denSykmeldte}</b> {bruker.navn}, avklar hva som skal vises
+            her
           </span>
         }
-        subtitle={detailTextArbeidstaker}
         topPadding={PaddingSize.SM}
       />
     </FlexColumn>
   );
 };
 
-export const DialogmoteMoteStatusPanel = () => {
+interface Props {
+  dialogmote: DialogmoteDTO;
+}
+
+export const DialogmoteMoteStatusPanel = ({ dialogmote }: Props) => {
+  const bruker = useNavBrukerData();
+
   return (
     <DialogmotePanel
       icon={MoteIkonBlaaImage}
       header={texts.header}
-      subtitle={subtitle()}
+      subtitle={subtitle(dialogmote)}
     >
       <FlexRow>
-        <ParticipantInfo />
+        <ParticipantInfo dialogmote={dialogmote} bruker={bruker} />
       </FlexRow>
 
       <FlexRow topPadding={PaddingSize.MD}>

@@ -139,6 +139,7 @@ server.use(
     proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
       const token = srcReq.cookies["isso-idtoken"];
       proxyReqOpts.headers["Authorization"] = `Bearer ${token}`;
+      proxyReqOpts.headers["Content-Type"] = "application/json";
       return proxyReqOpts;
     },
     proxyReqPathResolver: function (req) {

@@ -1,22 +1,23 @@
 import { Reducer } from "redux";
-import {
-  DialogmoteActions,
-  INNKALLING_OPPRETTET,
-  OPPRETT_INNKALLING_FEILET,
-  OPPRETT_INNKALLING_FULLFORT,
-  OPPRETTER_INNKALLING,
-} from "./dialogmote_actions";
+import { DialogmoteActions, DialogmoteActionTypes } from "./dialogmote_actions";
+import { DialogmoteDTO } from "./dialogmoteTypes";
 
 export interface DialogmoteState {
   senderInnkalling: boolean;
   senderInnkallingFeilet: boolean;
   innkallingSendt: boolean;
+  henterMote: boolean;
+  henterMoteFeilet: boolean;
+  dialogmoter: DialogmoteDTO[];
 }
 
 export const initialState: DialogmoteState = {
   senderInnkalling: false,
   senderInnkallingFeilet: false,
   innkallingSendt: false,
+  henterMote: false,
+  henterMoteFeilet: false,
+  dialogmoter: [],
 };
 
 const dialogmote: Reducer<DialogmoteState, DialogmoteActions> = (
@@ -24,31 +25,54 @@ const dialogmote: Reducer<DialogmoteState, DialogmoteActions> = (
   action
 ) => {
   switch (action.type) {
-    case OPPRETTER_INNKALLING: {
+    case DialogmoteActionTypes.OPPRETTER_INNKALLING: {
       return {
         ...state,
         senderInnkalling: true,
       };
     }
-    case INNKALLING_OPPRETTET: {
+    case DialogmoteActionTypes.INNKALLING_OPPRETTET: {
       return {
         ...state,
         senderInnkalling: false,
         innkallingSendt: true,
       };
     }
-    case OPPRETT_INNKALLING_FULLFORT: {
+    case DialogmoteActionTypes.OPPRETT_INNKALLING_FULLFORT: {
       return {
         ...state,
         innkallingSendt: false,
       };
     }
-    case OPPRETT_INNKALLING_FEILET: {
+    case DialogmoteActionTypes.OPPRETT_INNKALLING_FEILET: {
       return {
         ...state,
         senderInnkalling: false,
         innkallingSendt: false,
         senderInnkallingFeilet: true,
+      };
+    }
+    case DialogmoteActionTypes.FETCH_DIALOGMOTE: {
+      return {
+        ...state,
+        henterMote: true,
+        henterMoteFeilet: false,
+      };
+    }
+    case DialogmoteActionTypes.FETCH_DIALOGMOTE_SUCCESS: {
+      return {
+        ...state,
+        henterMote: false,
+        henterMoteFeilet: false,
+        dialogmoter: action.dialogmoteDtoList,
+      };
+    }
+    case DialogmoteActionTypes.FETCH_DIALOGMOTE_FAILED: {
+      return {
+        ...state,
+        henterMote: false,
+        henterMoteFeilet: true,
+        dialogmoter: initialState.dialogmoter,
       };
     }
     default: {

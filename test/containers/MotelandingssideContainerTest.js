@@ -121,6 +121,7 @@ describe("MotelandingssideContainer", () => {
       const expectedActions = [
         { type: "HENT_LEDERE_FORESPURT", fnr: "19026900010" },
         { type: "HENT_MOTER_FORESPURT", fnr: "19026900010" },
+        { type: "FETCH_DIALOGMOTE", fnr: "19026900010" },
         { type: "HENT_MOTEBEHOV_FORESPURT", fnr: "19026900010" },
         { type: "HENT_SYKMELDINGER_FORESPURT", fnr: "19026900010" },
         { type: "HENT_OPPFOELGINGSDIALOGER_FORESPURT", fnr: "19026900010" },

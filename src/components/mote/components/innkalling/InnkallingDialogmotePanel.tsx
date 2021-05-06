@@ -9,6 +9,7 @@ import { useAktivtMoteplanleggerMote } from "../../../../data/mote/moter_hooks";
 import { Moteplanleggeren } from "./Moteplanleggeren";
 import { erLokalEllerPreprod } from "../../../../utils/miljoUtil";
 import { DialogmoteMoteStatusPanel } from "./DialogmoteMoteStatusPanel";
+import { useAktivtDialogmote } from "../../../../data/dialogmote/dialogmote_hooks";
 
 const texts = {
   bekreftetMote: "Bekreftet møte",
@@ -32,27 +33,24 @@ const resolveUndertittelForMoteStatus = (mote: MoteDTO) => {
 };
 
 export const InnkallingDialogmotePanel = (): ReactElement => {
-  //Todo: Fiks noe greier når datastruktur kommer på plass
-  const eksisterendeMoteplanleggerMote = useAktivtMoteplanleggerMote();
-  const eksisterendeDialogmoteInnkallingMote = undefined;
+  const aktivtMoteplanleggerMote = useAktivtMoteplanleggerMote();
+  const aktivtDialogmote = useAktivtDialogmote();
 
   //Fjernes når vi går i prod med ferdig løsning
   if (!erLokalEllerPreprod) {
     return <Moteplanleggeren />;
-  } else if (eksisterendeDialogmoteInnkallingMote) {
-    return <DialogmoteMoteStatusPanel />;
-  } else if (eksisterendeMoteplanleggerMote) {
+  } else if (aktivtDialogmote) {
+    return <DialogmoteMoteStatusPanel dialogmote={aktivtDialogmote} />;
+  } else if (aktivtMoteplanleggerMote) {
     return (
       <DialogmotePanel
         icon={MoteIkonBlaaImage}
         header={
-          eksisterendeMoteplanleggerMote.status === "BEKREFTET"
+          aktivtMoteplanleggerMote.status === "BEKREFTET"
             ? texts.bekreftetMote
             : texts.seMotestatus
         }
-        subtitle={resolveUndertittelForMoteStatus(
-          eksisterendeMoteplanleggerMote
-        )}
+        subtitle={resolveUndertittelForMoteStatus(aktivtMoteplanleggerMote)}
       >
         <SeMoteStatus />
       </DialogmotePanel>

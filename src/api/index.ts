@@ -35,6 +35,7 @@ export const lagreRedirectUrlILocalStorage = (href) => {
 
 export function get(url: string, personIdent?: string): Promise<any> {
   const headers = {
+    "Content-Type": "application/json",
     [NAV_CONSUMER_ID_HEADER]: NAV_CONSUMER_ID,
   };
 

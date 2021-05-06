@@ -5,6 +5,7 @@ const getHistorikkMoter = require("./data/historikkmoter");
 const getHistorikkOppfolgingsplan = require("./data/historikkoppfolgingsplan");
 const getLedere = require("./data/ledere");
 const getMoter = require("./data/moter");
+const getDialogmoter = require("./data/dialogmoter");
 const getOppfolgingstilfelleperioder = require("./data/oppfolgingstilfelleperioder");
 const getSoknader = require("./data/soknader");
 const getSykmeldinger = require("./data/sykmeldinger");
@@ -21,6 +22,7 @@ module.exports = {
   getHistorikkOppfolgingsplan,
   getLedere,
   getMoter,
+  getDialogmoter,
   getOppfolgingstilfelleperioder,
   getSoknader,
   getSykmeldinger,

@@ -7,6 +7,7 @@ import {
   restdatoTildato,
   restdatoTilLesbarDato,
   tilDatoMedUkedagOgManedNavn,
+  tilDatoMedUkedagOgManedNavnOgKlokkeslett,
   tilLesbarDatoMedArUtenManedNavn,
   tilLesbarPeriodeMedArUtenManednavn,
   visKlokkeslett,
@@ -40,6 +41,14 @@ describe("datoUtils", () => {
       const restDato = "2019-03-11";
       const dato = tilDatoMedUkedagOgManedNavn(restDato);
       expect(dato).to.equal("Mandag 11. mars 2019");
+    });
+  });
+  describe("tilDatoMedUkedagOgManedNavnOgKlokkeslett", () => {
+    it("Skal gi en string med dato, ukedag, månednavn, år og klokkeslett", () => {
+      const dato = tilDatoMedUkedagOgManedNavnOgKlokkeslett(
+        "2021-06-04T09:34:55.422796"
+      );
+      expect(dato).to.equal("Fredag 4. juni 2021 kl. 09.34");
     });
   });
   describe("tilLesbarDatoMedArUtenManedNavn", () => {
