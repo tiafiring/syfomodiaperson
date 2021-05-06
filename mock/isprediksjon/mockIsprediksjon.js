@@ -1,7 +1,6 @@
 const requestUtil = require("../util/requestUtil");
 
 const mockData = require("../mockData");
-const enums = require("../mockDataEnums");
 
 const mockIsprediksjon = (server) => {
   server.get("/isprediksjon/api/v1/prediksjon", (req, res) => {
@@ -10,7 +9,7 @@ const mockIsprediksjon = (server) => {
       req.headers[requestUtil.NAV_PERSONIDENT_HEADER].length === 11
     ) {
       res.setHeader("Content-Type", "application/json");
-      res.send(mockData[enums.PREDIKSJON]);
+      res.send(JSON.stringify(mockData.getPrediksjon()));
     } else {
       res.status(400).send("Did not find PersonIdent in headers");
     }

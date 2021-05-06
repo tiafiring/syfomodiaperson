@@ -1,5 +1,4 @@
 const mockData = require("../mockData");
-const enums = require("../mockDataEnums");
 
 const getOppfolgingstilfellerPerson = () => {
   return [
@@ -13,12 +12,12 @@ const getOppfolgingstilfellerPerson = () => {
 const mockModiasyforest = (server) => {
   server.get("/modiasyforest/api/internad/sykmeldinger", (req, res) => {
     res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(mockData[enums.SYKMELDINGER]));
+    res.send(JSON.stringify(mockData.getSykmeldinger()));
   });
 
   server.get("/modiasyforest/api/internad/allnaermesteledere", (req, res) => {
     res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(mockData[enums.LEDERE]));
+    res.send(JSON.stringify(mockData.getLedere()));
   });
 
   server.get(
@@ -27,7 +26,7 @@ const mockModiasyforest = (server) => {
       const { orgnummer } = req.query;
       res.setHeader("Content-Type", "application/json");
       res.send(
-        JSON.stringify(mockData[enums.OPPFOLGINGSTILFELLEPERIODER][orgnummer])
+        JSON.stringify(mockData.getOppfolgingstilfelleperioder()[orgnummer])
       );
     }
   );
@@ -42,7 +41,7 @@ const mockModiasyforest = (server) => {
 
   server.get("/modiasyforest/api/internad/brukerinfo", (req, res) => {
     res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(mockData[enums.BRUKERINFO]));
+    res.send(JSON.stringify(mockData.getBrukerinfo()));
   });
 };
 

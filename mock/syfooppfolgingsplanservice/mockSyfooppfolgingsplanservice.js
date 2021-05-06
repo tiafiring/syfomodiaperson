@@ -1,14 +1,11 @@
 const path = require("path");
 
 const mockData = require("../mockData");
-const enums = require("../mockDataEnums");
 
 const requestUtil = require("../util/requestUtil");
 
 const mockOppfolgingsplan = require("./mockOppfolgingsplan");
 const mockOppfolgingsplanLPS = require("./mockOppfolgingsplanLPS");
-
-const NAV_PERSONIDENT_HEADER = "nav-personident";
 
 const dokumentinfo = { antallSider: 4 };
 
@@ -25,7 +22,7 @@ const mockSyfooppfolgingsplanservice = (server) => {
     "/syfooppfolgingsplanservice/api/internad/v1/oppfolgingsplan/:fnr/historikk",
     (req, res) => {
       res.setHeader("Content-Type", "application/json");
-      res.send(JSON.stringify(mockData[enums.HISTORIKKOPPFOLGINGSPLAN]));
+      res.send(JSON.stringify(mockData.getHistorikkOppfolgingsplan()));
     }
   );
 
