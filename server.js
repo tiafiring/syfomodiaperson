@@ -25,10 +25,10 @@ const modiacontextholderUrl =
     ? "modiacontextholder.q0"
     : "modiacontextholder.default";
 
-const spinnsynBackendVeilederUrl =
+const flexInternGatewayUrl =
   process.env.NAIS_CONTEXT === "dev"
-    ? "spinnsyn-backend-veileder-proxy.dev.intern.nav.no"
-    : "spinnsyn-backend-veileder-proxy.intern.nav.no";
+    ? "flex-intern-gateway.dev.intern.nav.no"
+    : "flex-intern-gateway.intern.nav.no";
 
 const syfopersonHost =
   process.env.NAIS_CONTEXT === "dev"
@@ -185,7 +185,7 @@ server.use("/veileder/vedtak", cookieParser(), (req, res) => {
     },
   };
 
-  const url = `https://${spinnsynBackendVeilederUrl}/api/v1/veileder/vedtak?fnr=${fnr}`;
+  const url = `https://${flexInternGatewayUrl}/spinnsyn-backend/api/v1/veileder/vedtak?fnr=${fnr}`;
   axios
     .get(url, options)
     .then((response) => {
