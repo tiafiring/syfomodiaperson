@@ -67,7 +67,7 @@ const isNewerLeader = (ledere: Leder[], givenLeder: Leder): boolean => {
     (lederCandidate) =>
       givenLeder.aktoerId !== lederCandidate.aktoerId &&
       givenLeder.orgnummer === lederCandidate.orgnummer &&
-      givenLeder.fomDato < lederCandidate.fomDato
+      new Date(givenLeder.fomDato) < new Date(lederCandidate.fomDato)
   );
 };
 
