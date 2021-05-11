@@ -1,18 +1,18 @@
 import React, { ReactElement } from "react";
-import { Textarea } from "nav-frontend-skjema";
 import { Knapp } from "nav-frontend-knapper";
 import { Field } from "react-final-form";
-import { Column, Row } from "nav-frontend-grid";
-import DialogmoteInnkallingSkjemaTittel from "./DialogmoteInnkallingSkjemaTittel";
 import DialogmoteInnkallingSkjemaSeksjon from "./DialogmoteInnkallingSkjemaSeksjon";
 import styled from "styled-components";
 import AlertStripe from "nav-frontend-alertstriper";
+import { FlexColumn, FlexRow, PaddingSize } from "../Layout";
+import FritekstStor from "../FritekstStor";
+import { Innholdstittel } from "nav-frontend-typografi";
 
 const texts = {
-  title: "Tekster til innkallingen",
+  title: "Tekster i innkallingen",
   alert: "Hvis du vil føye til noe i standardtekstene, kan du skrive det her.",
-  sykmeldtLabel: "Fritekst til den sykmeldte kan skrives her (valgfri)",
-  arbeidsgiverLabel: "Fritekst til nærmeste leder kan skrives her (valgfri)",
+  arbeidstakerLabel: "Fritekst til arbeidstakeren (valgfri)",
+  arbeidsgiverLabel: "Fritekst til nærmeste leder (valgfri)",
   preview: "Forhåndsvisning",
 };
 
@@ -22,48 +22,46 @@ interface FritekstBoksProps {
 }
 
 const TeksterAlert = styled(AlertStripe)`
-  margin-bottom: 2.5rem;
+  margin-bottom: 4em;
   .alertstripe__tekst {
     max-width: 100%;
   }
 `;
 
-const FritekstBoksRow = styled(Row)`
-  margin-bottom: 4rem;
+const FritekstWrapper = styled.div`
+  margin-bottom: 4em;
 `;
 
-const TextAreaRow = styled(Row)`
-  margin-bottom: 1rem;
+const TeksterTittel = styled(Innholdstittel)`
+  margin-bottom: 0.5em;
 `;
 
-const FritekstBoks = ({ fieldName, label }: FritekstBoksProps) => (
-  <FritekstBoksRow>
-    <Column className="col-xs-12">
-      <TextAreaRow>
-        <Column className="col-xs-12">
-          <Field<string> name={fieldName}>
-            {({ input }) => (
-              <Textarea maxLength={1000} label={label} {...input} />
-            )}
-          </Field>
-        </Column>
-      </TextAreaRow>
+const FritekstSeksjon = ({ fieldName, label }: FritekstBoksProps) => (
+  <FritekstWrapper>
+    <FlexRow bottomPadding={PaddingSize.SM}>
+      <FlexColumn flex={1}>
+        <Field<string> name={fieldName}>
+          {({ input }) => (
+            <FritekstStor maxLength={1000} label={label} {...input} />
+          )}
+        </Field>
+      </FlexColumn>
+    </FlexRow>
+    <FlexRow>
       <Knapp htmlType="button">{texts.preview}</Knapp>
-    </Column>
-  </FritekstBoksRow>
+    </FlexRow>
+  </FritekstWrapper>
 );
 
 const DialogmoteInnkallingTekster = (): ReactElement => (
   <DialogmoteInnkallingSkjemaSeksjon>
-    <DialogmoteInnkallingSkjemaTittel>
-      {texts.title}
-    </DialogmoteInnkallingSkjemaTittel>
+    <TeksterTittel>{texts.title}</TeksterTittel>
     <TeksterAlert type="info">{texts.alert}</TeksterAlert>
-    <FritekstBoks
+    <FritekstSeksjon
       fieldName="fritekstArbeidstaker"
-      label={texts.sykmeldtLabel}
+      label={texts.arbeidstakerLabel}
     />
-    <FritekstBoks
+    <FritekstSeksjon
       fieldName="fritekstArbeidsgiver"
       label={texts.arbeidsgiverLabel}
     />

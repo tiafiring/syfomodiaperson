@@ -18,7 +18,7 @@ const texts = {
 };
 
 const DialogmoteInnkallingWarningAlert = styled(AlertStripe)`
-  margin-bottom: 2.5rem;
+  margin-bottom: 2.5em;
   .alertstripe__tekst {
     max-width: 100%;
   }

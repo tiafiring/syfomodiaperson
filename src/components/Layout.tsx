@@ -15,6 +15,7 @@ export const ModalContentContainer = styled.div`
 
 interface FlexColumnProps {
   justifyContent?: JustifyContentType;
+  flex?: number;
 }
 
 export const FlexColumn = styled.div<FlexColumnProps>`
@@ -22,6 +23,10 @@ export const FlexColumn = styled.div<FlexColumnProps>`
   flex-direction: column;
   justify-content: ${(props) =>
     props.justifyContent || JustifyContentType.FLEX_START};
+  ${(props) =>
+    props.flex && {
+      flex: props.flex,
+    }};
 `;
 
 export enum PaddingSize {
