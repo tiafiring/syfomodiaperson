@@ -1,16 +1,27 @@
 import { Reducer } from "redux";
 import { Brukerinfo } from "./types/Brukerinfo";
 import {
+  HENT_NAVBRUKER_FEILET,
   HENT_NAVBRUKER_FORESPURT,
   NAVBRUKER_HENTET,
-  HENT_NAVBRUKER_FEILET,
 } from "./navbruker_actions";
 
 export interface NavbrukerState {
-  data?: Brukerinfo;
+  data: Brukerinfo;
 }
 
-const navbruker: Reducer<NavbrukerState> = (state = {}, action) => {
+const initialState = {
+  data: {
+    navn: "",
+    kontaktinfo: {
+      fnr: "",
+      skalHaVarsel: false,
+    },
+    arbeidssituasjon: "",
+  },
+};
+
+const navbruker: Reducer<NavbrukerState> = (state = initialState, action) => {
   switch (action.type) {
     case NAVBRUKER_HENTET: {
       return {

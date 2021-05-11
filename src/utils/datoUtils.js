@@ -171,6 +171,13 @@ export const tilDatoMedUkedagOgManedNavn = (dato) => {
   return `${ukeDag} ${dag}. ${maaned} ${aar}`;
 };
 
+export const tilDatoMedUkedagOgManedNavnOgKlokkeslett = (dato) => {
+  const newDate = new Date(dato);
+  const date = tilDatoMedUkedagOgManedNavn(newDate);
+  const time = visKlokkeslett(newDate);
+  return `${date} kl. ${time}`;
+};
+
 const dayOrMonthWithTwoDigits = (arg) => {
   return arg > 9 ? `${arg}` : `0${arg}`;
 };

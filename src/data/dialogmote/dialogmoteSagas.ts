@@ -1,13 +1,17 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import {
+  DialogmoteActionTypes,
+  FetchDialogmoteAction,
+  fetchDialogmoteFailed,
+  fetchDialogmoteSuccess,
   innkallingOpprettet,
-  OPPRETT_INNKALLING_FORESPURT,
   oppretterInnkalling,
   OpprettInnkallingAction,
   opprettInnkallingFeilet,
   opprettInnkallingFullfort,
 } from "./dialogmote_actions";
-import { post } from "../../api";
+import { get, post } from "../../api";
+import { DialogmoteDTO } from "./dialogmoteTypes";
 
 function* opprettInnkalling(action: OpprettInnkallingAction) {
   yield put(oppretterInnkalling());
@@ -21,6 +25,21 @@ function* opprettInnkalling(action: OpprettInnkallingAction) {
   }
 }
 
+function* fetchDialogmoteSaga(action: FetchDialogmoteAction) {
+  try {
+    const path = `${process.env.REACT_APP_ISDIALOGMOTE_ROOT}/get/v1/dialogmote/personident`;
+    const dialogmoter: DialogmoteDTO[] = yield call(get, path, action.fnr);
+    yield put(fetchDialogmoteSuccess(dialogmoter));
+  } catch (e) {
+    console.log(e);
+    yield put(fetchDialogmoteFailed());
+  }
+}
+
 export default function* dialogmoteSagas() {
-  yield takeEvery(OPPRETT_INNKALLING_FORESPURT, opprettInnkalling);
+  yield takeEvery(
+    DialogmoteActionTypes.OPPRETT_INNKALLING_FORESPURT,
+    opprettInnkalling
+  );
+  yield takeEvery(DialogmoteActionTypes.FETCH_DIALOGMOTE, fetchDialogmoteSaga);
 }

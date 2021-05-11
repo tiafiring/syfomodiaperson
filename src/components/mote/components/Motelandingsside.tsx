@@ -21,6 +21,7 @@ import {
 import { useOppfoelgingsDialoger } from "../../../hooks/useOppfoelgingsDialoger";
 import { Tilgang } from "../../../data/tilgang/tilgang";
 import { DialogmoteOnskePanel } from "../../motebehov/DialogmoteOnskePanel";
+import { fetchDialogmote } from "../../../data/dialogmote/dialogmote_actions";
 
 interface Props {
   fnr: string;
@@ -43,6 +44,7 @@ export const Motelandingsside = ({ fnr }: Props) => {
     sykmeldinger,
     moter,
     motebehov,
+    dialogmote,
     navbruker,
     veilederinfo,
     tilgang,
@@ -52,6 +54,7 @@ export const Motelandingsside = ({ fnr }: Props) => {
   useEffect(() => {
     dispatch(hentLedere(fnr));
     dispatch(hentMoter(fnr));
+    dispatch(fetchDialogmote(fnr));
     dispatch(hentMotebehov(fnr));
     dispatch(hentSykmeldinger(fnr));
     dispatch(hentOppfoelgingsdialoger(fnr));
@@ -80,12 +83,17 @@ export const Motelandingsside = ({ fnr }: Props) => {
     harForsoktHentetOppfoelgingsdialoger &&
     harForsoktHentetLedere(ledere) &&
     !moter.henter &&
+    !dialogmote.henterMote &&
     !tilgang.henter;
 
   return (
     <SideLaster
       henter={!harForsoktHentetAlt}
-      hentingFeilet={motebehov.hentingFeilet || tilgang.hentingFeilet}
+      hentingFeilet={
+        motebehov.hentingFeilet ||
+        dialogmote.henterMoteFeilet ||
+        tilgang.hentingFeilet
+      }
       tilgang={findRelevantTilgang()}
     >
       <Sidetopp tittel={texts.dialogmoter} />
