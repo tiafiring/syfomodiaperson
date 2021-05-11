@@ -24,6 +24,10 @@ export const FlexColumn = styled.div<FlexColumnProps>`
     props.justifyContent || JustifyContentType.FLEX_START};
 `;
 
+export const Flex1Column = styled(FlexColumn)`
+  flex: 1;
+`;
+
 export enum PaddingSize {
   SM = "1em",
   MD = "2em",

@@ -1,12 +1,12 @@
 import React, { ReactElement } from "react";
 import { Input, SkjemaelementFeilmelding } from "nav-frontend-skjema";
-import { Column, Row } from "nav-frontend-grid";
 import { Field } from "react-final-form";
 import ArbeidsgiverDropdown from "../mote/skjema/ArbeidsgiverDropdown";
 import styled from "styled-components";
-import DialogmoteInnkallingSkjemaTittel from "./DialogmoteInnkallingSkjemaTittel";
 import DialogmoteInnkallingSkjemaSeksjon from "./DialogmoteInnkallingSkjemaSeksjon";
 import { useLedere } from "../../hooks/useLedere";
+import { Flex1Column, FlexColumn, FlexRow, PaddingSize } from "../Layout";
+import { Innholdstittel } from "nav-frontend-typografi";
 
 const texts = {
   title: "Arbeidsgiver",
@@ -15,51 +15,52 @@ const texts = {
   epostLabel: "Epost",
 };
 
-interface LederFeltProps {
-  label: string;
-  value?: string;
-}
-
-const ArbeidsgiverDropdownWrapper = styled.div`
-  margin-bottom: 1.25rem;
+const LederNavnColumn = styled(FlexColumn)`
+  flex: 0.2;
+  margin-right: 1em;
 `;
 
-const LederFelt = ({ label, value }: LederFeltProps) => (
-  <Column className="col-xs-6 col-sm-3">
-    <Input bredde="L" label={label} disabled value={value} />
-  </Column>
-);
+const ArbeidsgiverTittel = styled(Innholdstittel)`
+  margin-bottom: 1em;
+`;
 
 const DialogmoteInnkallingVelgArbeidsgiver = (): ReactElement => {
   const { ledere } = useLedere();
   return (
     <DialogmoteInnkallingSkjemaSeksjon>
-      <DialogmoteInnkallingSkjemaTittel>
-        {texts.title}
-      </DialogmoteInnkallingSkjemaTittel>
+      <ArbeidsgiverTittel>{texts.title}</ArbeidsgiverTittel>
       <Field<string> name="arbeidsgiver">
         {({ input, meta }) => {
           const valgtLeder = ledere.find((l) => l.orgnummer === input.value);
           return (
             <>
-              <ArbeidsgiverDropdownWrapper>
-                <ArbeidsgiverDropdown
-                  velgArbeidsgiver={input.onChange}
-                  ledere={ledere}
-                  label={texts.selectLabel}
-                />
-                <SkjemaelementFeilmelding>
-                  {meta.touched && meta.error}
-                </SkjemaelementFeilmelding>
-              </ArbeidsgiverDropdownWrapper>
+              <ArbeidsgiverDropdown
+                velgArbeidsgiver={input.onChange}
+                ledere={ledere}
+                label={texts.selectLabel}
+              />
+              <SkjemaelementFeilmelding>
+                {meta.touched && meta.error}
+              </SkjemaelementFeilmelding>
               {valgtLeder && (
-                <Row>
-                  <LederFelt label={texts.navnLabel} value={valgtLeder.navn} />
-                  <LederFelt
-                    label={texts.epostLabel}
-                    value={valgtLeder.epost}
-                  />
-                </Row>
+                <FlexRow topPadding={PaddingSize.MD}>
+                  <LederNavnColumn>
+                    <Input
+                      bredde="L"
+                      label={texts.navnLabel}
+                      disabled
+                      value={valgtLeder.navn}
+                    />
+                  </LederNavnColumn>
+                  <Flex1Column>
+                    <Input
+                      bredde="L"
+                      label={texts.epostLabel}
+                      disabled
+                      value={valgtLeder.epost}
+                    />
+                  </Flex1Column>
+                </FlexRow>
               )}
             </>
           );

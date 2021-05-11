@@ -3,7 +3,6 @@ import Panel from "nav-frontend-paneler";
 import DialogmoteInnkallingVelgArbeidsgiver from "./DialogmoteInnkallingVelgArbeidsgiver";
 import DialogmoteInnkallingTidOgSted from "./DialogmoteInnkallingTidOgSted";
 import DialogmoteInnkallingTekster from "./DialogmoteInnkallingTekster";
-import { Column } from "nav-frontend-grid";
 import { Flatknapp, Hovedknapp } from "nav-frontend-knapper";
 import { Form } from "react-final-form";
 import {
@@ -11,17 +10,16 @@ import {
   validerSted,
   validerTidspunkt,
 } from "../../utils/valideringUtils";
-import DialogmoteInnkallingSkjemaRow from "./DialogmoteInnkallingSkjemaRow";
 import { opprettInnkalling } from "../../data/dialogmote/dialogmote_actions";
 import { useDispatch } from "react-redux";
 import { DialogmoteInnkallingDTO } from "../../data/dialogmote/dialogmoteTypes";
 import { genererDato } from "../mote/utils";
 import { Link, Redirect } from "react-router-dom";
-import styled from "styled-components";
 import { useNavEnhet } from "../../hooks/useNavEnhet";
 import { AlertStripeFeil } from "nav-frontend-alertstriper";
 import { useAppSelector } from "../../hooks/hooks";
 import { useFnrParam } from "../../hooks/useFnrParam";
+import { FlexRow, PaddingSize } from "../Layout";
 
 interface DialogmoteInnkallingSkjemaValues {
   arbeidsgiver: string;
@@ -85,17 +83,6 @@ const toInnkalling = (
   },
 });
 
-const SendButtonColumn = styled(Column)`
-  float: left;
-  padding-left: 0.5rem;
-  margin-right: 0.5rem;
-`;
-
-const CancelButtonColumn = styled(Column)`
-  float: left;
-  padding-left: 0.5rem;
-`;
-
 const DialogmoteInnkallingSkjema = (): ReactElement => {
   const initialValues: Partial<DialogmoteInnkallingSkjemaValues> = {};
   const dispatch = useDispatch();
@@ -125,28 +112,22 @@ const DialogmoteInnkallingSkjema = (): ReactElement => {
             <DialogmoteInnkallingTidOgSted />
             <DialogmoteInnkallingTekster />
             {senderInnkallingFeilet && (
-              <DialogmoteInnkallingSkjemaRow>
-                <Column className="col-xs-12">
-                  <AlertStripeFeil>{texts.errorMsg}</AlertStripeFeil>
-                </Column>
-              </DialogmoteInnkallingSkjemaRow>
+              <FlexRow bottomPadding={PaddingSize.MD}>
+                <AlertStripeFeil>{texts.errorMsg}</AlertStripeFeil>
+              </FlexRow>
             )}
-            <DialogmoteInnkallingSkjemaRow>
-              <SendButtonColumn>
-                <Hovedknapp
-                  spinner={senderInnkalling}
-                  autoDisableVedSpinner
-                  htmlType="submit"
-                >
-                  {texts.send}
-                </Hovedknapp>
-              </SendButtonColumn>
-              <CancelButtonColumn>
-                <Link to={`/sykefravaer/${fnr}/moteoversikt`}>
-                  <Flatknapp htmlType="button">{texts.cancel}</Flatknapp>
-                </Link>
-              </CancelButtonColumn>
-            </DialogmoteInnkallingSkjemaRow>
+            <FlexRow>
+              <Hovedknapp
+                spinner={senderInnkalling}
+                autoDisableVedSpinner
+                htmlType="submit"
+              >
+                {texts.send}
+              </Hovedknapp>
+              <Link to={`/sykefravaer/${fnr}/moteoversikt`}>
+                <Flatknapp htmlType="button">{texts.cancel}</Flatknapp>
+              </Link>
+            </FlexRow>
           </form>
         )}
       </Form>
