@@ -35,10 +35,10 @@ const syfopersonHost =
     ? "https://syfoperson.dev.intern.nav.no"
     : "https://syfoperson.intern.nav.no";
 
-const isdialogmoteUrl =
+const isdialogmoteHost =
   process.env.NAIS_CONTEXT === "dev"
-    ? "https://isdialogmote.dev.intern.nav.no"
-    : "https://isdialogmote.intern.nav.no";
+    ? "isdialogmote.dev.intern.nav.no"
+    : "isdialogmote.intern.nav.no";
 
 function nocache(req, res, next) {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
@@ -131,19 +131,42 @@ server.use(
 );
 
 server.use(
-  "/isdialogmote/api",
+  "/isdialogmote/api/get",
   cookieParser(),
-  proxy(isdialogmoteUrl, {
+  proxy(isdialogmoteHost, {
+    https: true,
+    parseReqBody: false,
     proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
       const token = srcReq.cookies["isso-idtoken"];
       proxyReqOpts.headers["Authorization"] = `Bearer ${token}`;
       return proxyReqOpts;
     },
     proxyReqPathResolver: function (req) {
-      return `${isdialogmoteUrl}/api${req.url}`;
+      return `/api${req.url}`;
     },
     proxyErrorHandler: function (err, res, next) {
-      console.error("Error in proxy for isdialogmote", err.message);
+      console.log("Error in proxy for isdialogmote", err.message);
+      next(err);
+    },
+  })
+);
+
+server.use(
+  "/isdialogmote/api/post",
+  cookieParser(),
+  proxy(isdialogmoteHost, {
+    https: true,
+    parseReqBody: true,
+    proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
+      const token = srcReq.cookies["isso-idtoken"];
+      proxyReqOpts.headers["Authorization"] = `Bearer ${token}`;
+      return proxyReqOpts;
+    },
+    proxyReqPathResolver: function (req) {
+      return `/api${req.url}`;
+    },
+    proxyErrorHandler: function (err, res, next) {
+      console.log("Error in proxy for isdialogmote", err.message);
       next(err);
     },
   })

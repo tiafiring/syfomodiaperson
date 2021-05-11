@@ -12,7 +12,7 @@ import { post } from "../../api";
 function* opprettInnkalling(action: OpprettInnkallingAction) {
   yield put(oppretterInnkalling());
   try {
-    const path = `${process.env.REACT_APP_ISDIALOGMOTE_ROOT}/v1/dialogmote/personident`;
+    const path = `${process.env.REACT_APP_ISDIALOGMOTE_ROOT}/post/v1/dialogmote/personident`;
     yield call(post, path, action.data, action.fnr);
     yield put(innkallingOpprettet(action.data));
     yield put(opprettInnkallingFullfort());
