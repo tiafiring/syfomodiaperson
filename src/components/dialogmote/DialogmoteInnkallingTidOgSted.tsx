@@ -5,7 +5,7 @@ import KlokkeslettField from "../KlokkeslettField";
 import Datovelger from "../Datovelger";
 import DialogmoteInnkallingSkjemaSeksjon from "./DialogmoteInnkallingSkjemaSeksjon";
 import styled from "styled-components";
-import { Flex1Column, FlexColumn, FlexRow, PaddingSize } from "../Layout";
+import { FlexColumn, FlexRow, PaddingSize } from "../Layout";
 import { Innholdstittel } from "nav-frontend-typografi";
 
 const texts = {
@@ -39,12 +39,12 @@ const DialogmoteInnkallingTidOgSted = (): ReactElement => (
           placeholder={texts.datoPlaceholder}
         />
       </DatoColumn>
-      <Flex1Column>
+      <FlexColumn flex={1}>
         <KlokkeslettField name="tidspunkt.klokkeslett" label={texts.tidLabel} />
-      </Flex1Column>
+      </FlexColumn>
     </FlexRow>
     <FlexRow bottomPadding={PaddingSize.MD}>
-      <Flex1Column>
+      <FlexColumn flex={1}>
         <Field<string> name="sted">
           {({ input, meta }) => (
             <Input
@@ -55,10 +55,10 @@ const DialogmoteInnkallingTidOgSted = (): ReactElement => (
             />
           )}
         </Field>
-      </Flex1Column>
+      </FlexColumn>
     </FlexRow>
     <FlexRow>
-      <Flex1Column>
+      <FlexColumn flex={1}>
         <Field<string> name="videoLink">
           {({ input }) => (
             <Input
@@ -68,7 +68,7 @@ const DialogmoteInnkallingTidOgSted = (): ReactElement => (
             />
           )}
         </Field>
-      </Flex1Column>
+      </FlexColumn>
     </FlexRow>
   </DialogmoteInnkallingSkjemaSeksjon>
 );

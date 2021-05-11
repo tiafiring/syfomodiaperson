@@ -5,7 +5,7 @@ import ArbeidsgiverDropdown from "../mote/skjema/ArbeidsgiverDropdown";
 import styled from "styled-components";
 import DialogmoteInnkallingSkjemaSeksjon from "./DialogmoteInnkallingSkjemaSeksjon";
 import { useLedere } from "../../hooks/useLedere";
-import { Flex1Column, FlexColumn, FlexRow, PaddingSize } from "../Layout";
+import { FlexColumn, FlexRow, PaddingSize } from "../Layout";
 import { Innholdstittel } from "nav-frontend-typografi";
 
 const texts = {
@@ -16,7 +16,6 @@ const texts = {
 };
 
 const LederNavnColumn = styled(FlexColumn)`
-  flex: 0.2;
   margin-right: 1em;
 `;
 
@@ -44,7 +43,7 @@ const DialogmoteInnkallingVelgArbeidsgiver = (): ReactElement => {
               </SkjemaelementFeilmelding>
               {valgtLeder && (
                 <FlexRow topPadding={PaddingSize.MD}>
-                  <LederNavnColumn>
+                  <LederNavnColumn flex={0.2}>
                     <Input
                       bredde="L"
                       label={texts.navnLabel}
@@ -52,14 +51,14 @@ const DialogmoteInnkallingVelgArbeidsgiver = (): ReactElement => {
                       value={valgtLeder.navn}
                     />
                   </LederNavnColumn>
-                  <Flex1Column>
+                  <FlexColumn flex={1}>
                     <Input
                       bredde="L"
                       label={texts.epostLabel}
                       disabled
                       value={valgtLeder.epost}
                     />
-                  </Flex1Column>
+                  </FlexColumn>
                 </FlexRow>
               )}
             </>

@@ -4,7 +4,7 @@ import { Field } from "react-final-form";
 import DialogmoteInnkallingSkjemaSeksjon from "./DialogmoteInnkallingSkjemaSeksjon";
 import styled from "styled-components";
 import AlertStripe from "nav-frontend-alertstriper";
-import { Flex1Column, FlexRow, PaddingSize } from "../Layout";
+import { FlexColumn, FlexRow, PaddingSize } from "../Layout";
 import FritekstStor from "../FritekstStor";
 import { Innholdstittel } from "nav-frontend-typografi";
 
@@ -39,13 +39,13 @@ const TeksterTittel = styled(Innholdstittel)`
 const FritekstSeksjon = ({ fieldName, label }: FritekstBoksProps) => (
   <FritekstWrapper>
     <FlexRow bottomPadding={PaddingSize.SM}>
-      <Flex1Column>
+      <FlexColumn flex={1}>
         <Field<string> name={fieldName}>
           {({ input }) => (
             <FritekstStor maxLength={1000} label={label} {...input} />
           )}
         </Field>
-      </Flex1Column>
+      </FlexColumn>
     </FlexRow>
     <FlexRow>
       <Knapp htmlType="button">{texts.preview}</Knapp>
