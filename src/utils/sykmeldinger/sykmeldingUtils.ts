@@ -108,7 +108,7 @@ export const erMeldingTilNavInformasjon = (
 export const erMeldingTilArbeidsgiverInformasjon = (
   sykmelding: SykmeldingOldFormat
 ): boolean => {
-  return sykmelding.innspillTilArbeidsgiver !== null;
+  return !!sykmelding.innspillTilArbeidsgiver;
 };
 
 export const erUtdypendeOpplysninger = (

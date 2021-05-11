@@ -368,6 +368,13 @@ describe("sykmeldingUtils", () => {
 
       expect(erIkkeEkstraInfo).to.equal(false);
     });
+    it("skal returnere false dersom sykmeldingen ikke inneholder innspillTilArbeidsgiver-felt, er undefined", () => {
+      const sykmelding = {};
+
+      const erIkkeEkstraInfo = erMeldingTilArbeidsgiverInformasjon(sykmelding);
+
+      expect(erIkkeEkstraInfo).to.equal(false);
+    });
   });
 
   describe("arbeidsgivernavnEllerArbeidssituasjon", () => {
