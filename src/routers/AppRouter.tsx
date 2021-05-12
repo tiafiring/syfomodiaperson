@@ -17,6 +17,7 @@ import NokkelinformasjonContainer from "../components/nokkelinformasjon/containe
 import VedtakContainer from "../components/vedtak/container/VedtakContainer";
 import DialogmoteInnkallingContainer from "../components/dialogmote/DialogmoteInnkallingContainer";
 import { erLokalEllerPreprod } from "../utils/miljoUtil";
+import AvlysDialogmoteContainer from "../components/dialogmote/avlys/AvlysDialogmoteContainer";
 
 const AppRouter = () => {
   const fnr = window.location.pathname.split("/")[2];
@@ -56,6 +57,13 @@ const AppRouter = () => {
           path="/sykefravaer/:fnr/dialogmote"
           exact
           component={DialogmoteInnkallingContainer}
+        />
+      )}
+      {erLokalEllerPreprod && (
+        <Route
+          path="/sykefravaer/:fnr/dialogmote/:dialogmoteUuid/avlys"
+          exact
+          component={AvlysDialogmoteContainer}
         />
       )}
       <Route

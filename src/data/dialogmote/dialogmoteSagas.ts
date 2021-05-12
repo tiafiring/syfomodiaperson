@@ -1,10 +1,15 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import {
+  avlyserMote,
+  AvlysMoteAction,
+  avlysMoteFeilet,
+  avlysMoteFullfort,
   DialogmoteActionTypes,
   FetchDialogmoteAction,
   fetchDialogmoteFailed,
   fetchDialogmoteSuccess,
   innkallingOpprettet,
+  moteAvlyst,
   oppretterInnkalling,
   OpprettInnkallingAction,
   opprettInnkallingFeilet,
@@ -36,10 +41,23 @@ function* fetchDialogmoteSaga(action: FetchDialogmoteAction) {
   }
 }
 
+function* avlysDialogmote(action: AvlysMoteAction) {
+  yield put(avlyserMote());
+  try {
+    const path = `${process.env.REACT_APP_ISDIALOGMOTE_ROOT}/post/v1/dialogmote/${action.moteUuid}/avlys`;
+    yield call(post, path, action.data);
+    yield put(moteAvlyst());
+    yield put(avlysMoteFullfort());
+  } catch (e) {
+    yield put(avlysMoteFeilet());
+  }
+}
+
 export default function* dialogmoteSagas() {
   yield takeEvery(
     DialogmoteActionTypes.OPPRETT_INNKALLING_FORESPURT,
     opprettInnkalling
   );
   yield takeEvery(DialogmoteActionTypes.FETCH_DIALOGMOTE, fetchDialogmoteSaga);
+  yield takeEvery(DialogmoteActionTypes.AVLYS_MOTE_FORESPURT, avlysDialogmote);
 }

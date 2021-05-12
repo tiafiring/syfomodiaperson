@@ -45,7 +45,18 @@ export interface DialogmoteInnkallingDTO {
   };
 }
 
+export interface AvlysDialogmoteDTO {
+  arbeidstaker: AvlysningDto;
+  arbeidsgiver: AvlysningDto;
+}
+
+interface AvlysningDto {
+  begrunnelse: string;
+  avlysning: unknown[]; // TODO: Definer riktig type ifm forhåndsvisning av avlysning
+}
+
 export interface DialogmoteDTO {
+  readonly uuid: string;
   readonly createdAt: string;
   readonly updatedAt: string;
   readonly planlagtMoteBekreftetTidspunkt?: string;

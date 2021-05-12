@@ -16,7 +16,7 @@ const texts = {
   preview: "Forhåndsvisning",
 };
 
-interface FritekstBoksProps {
+interface FritekstSeksjonProps {
   fieldName: string;
   label: string;
 }
@@ -36,7 +36,7 @@ const TeksterTittel = styled(Innholdstittel)`
   margin-bottom: 0.5em;
 `;
 
-const FritekstSeksjon = ({ fieldName, label }: FritekstBoksProps) => (
+const FritekstSeksjon = ({ fieldName, label }: FritekstSeksjonProps) => (
   <FritekstWrapper>
     <FlexRow bottomPadding={PaddingSize.SM}>
       <FlexColumn flex={1}>
