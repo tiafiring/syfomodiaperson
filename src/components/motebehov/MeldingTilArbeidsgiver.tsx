@@ -16,7 +16,6 @@ interface MeldingTilArbeidsgiverProps {
 export const MeldingTilArbeidsgiver = ({
   sykmelding,
 }: MeldingTilArbeidsgiverProps) => {
-  const innspillTilArbeidsgiver = sykmelding.innspillTilArbeidsgiver;
   const skalVise = erMeldingTilArbeidsgiverInformasjon(sykmelding);
   return (
     <>
@@ -25,14 +24,10 @@ export const MeldingTilArbeidsgiver = ({
           <h5 className="undertittel">
             {tekster.meldingTilArbeidsgiver.header}
           </h5>
-          {innspillTilArbeidsgiver && (
-            <div>
-              <h6 className="sporsmal">
-                {tekster.meldingTilArbeidsgiver.innspillTittel}
-              </h6>
-              <p>{innspillTilArbeidsgiver}</p>
-            </div>
-          )}
+          <h6 className="sporsmal">
+            {tekster.meldingTilArbeidsgiver.innspillTittel}
+          </h6>
+          <p>{sykmelding.innspillTilArbeidsgiver}</p>
         </div>
       )}
     </>
