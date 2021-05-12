@@ -19,7 +19,7 @@ const mockMoteAlternativer = (alternativer) => {
 };
 
 const mockMoteDeltakere = (alternativer, orgnummer) => {
-  const leder = mockData.ledere.find((leder) => {
+  const leder = mockData.getLedere().find((leder) => {
     return leder.orgnummer === orgnummer;
   });
 
@@ -60,7 +60,7 @@ const mockForLokal = (server) => {
 
   server.get("/syfomoteadmin/api/internad/moter", (req, res) => {
     res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(mockData.getMoter()));
+    res.send(JSON.stringify(mockData.moter));
   });
 
   server.get("/syfomoteadmin/api/internad/historikk", (req, res) => {
