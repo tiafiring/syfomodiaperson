@@ -15,13 +15,13 @@ const getPrediksjon = require("./data/prediksjon");
 const getVedtak = require("./data/vedtak");
 
 module.exports = {
+  moter: getMoter(),
   getBrukerinfo,
   getEnheter,
   getHistorikkMotebehov,
   getHistorikkMoter,
   getHistorikkOppfolgingsplan,
   getLedere,
-  getMoter,
   getDialogmoter,
   getOppfolgingstilfelleperioder,
   getSoknader,
