@@ -34,7 +34,7 @@ const AvlysDialogmoteBegrunnelse = ({
       </FlexColumn>
     </FlexRow>
     <FlexRow>
-      <Knapp>{texts.preview}</Knapp>
+      <Knapp htmlType="button">{texts.preview}</Knapp>
     </FlexRow>
   </AvlysDialogmoteSkjemaSeksjon>
 );
