@@ -27,13 +27,8 @@ const texts = {
 };
 
 const subtitle = (dialogmote: DialogmoteDTO) => {
-  const latestTidSted = dialogmote.tidStedList
-    ? dialogmote.tidStedList[0]
-    : undefined;
-  const meetTimeText = tilDatoMedUkedagOgManedNavnOgKlokkeslett(
-    latestTidSted?.tid
-  );
-  const videoText = latestTidSted?.videoLink ? " - Videomøte" : undefined;
+  const meetTimeText = tilDatoMedUkedagOgManedNavnOgKlokkeslett(dialogmote.tid);
+  const videoText = dialogmote.videoLink ? " - Videomøte" : undefined;
 
   return `Møtetidspunkt: ${meetTimeText}${videoText}`;
 };

@@ -26,12 +26,6 @@ interface DialogmotedeltakerArbeidsgiverDTO {
   readonly type: string;
 }
 
-interface DialogmoteTidStedDTO {
-  readonly sted: string;
-  readonly tid: string;
-  readonly videoLink?: string;
-}
-
 export interface DialogmoteInnkallingDTO {
   tildeltEnhet: string;
   arbeidstaker: {
@@ -61,5 +55,7 @@ export interface DialogmoteDTO {
   readonly tildeltEnhet: string;
   readonly arbeidstaker: DialogmotedeltakerArbeidstakerDTO;
   readonly arbeidsgiver: DialogmotedeltakerArbeidsgiverDTO;
-  readonly tidStedList: DialogmoteTidStedDTO[];
+  readonly sted: string;
+  readonly tid: string;
+  readonly videoLink?: string;
 }
