@@ -4,24 +4,24 @@ import { DialogmoteDTO } from "./dialogmoteTypes";
 
 export interface DialogmoteState {
   senderInnkalling: boolean;
-  senderInnkallingFeilet: boolean;
-  innkallingSendt: boolean;
+  sendInnkallingFeilet: boolean;
+  sendInnkallingFullfort: boolean;
   henterMote: boolean;
   henterMoteFeilet: boolean;
   moterHentet: boolean;
   dialogmoter: DialogmoteDTO[];
   avlyserMote: boolean;
   avlysMoteFeilet: boolean;
-  moteAvlyst: boolean;
+  avlysMoteFullfort: boolean;
 }
 
 export const initialState: DialogmoteState = {
   senderInnkalling: false,
-  senderInnkallingFeilet: false,
-  innkallingSendt: false,
+  sendInnkallingFeilet: false,
+  sendInnkallingFullfort: false,
   avlysMoteFeilet: false,
   avlyserMote: false,
-  moteAvlyst: false,
+  avlysMoteFullfort: false,
   henterMote: false,
   henterMoteFeilet: false,
   moterHentet: false,
@@ -39,25 +39,19 @@ const dialogmote: Reducer<DialogmoteState, DialogmoteActions> = (
         senderInnkalling: true,
       };
     }
-    case DialogmoteActionTypes.INNKALLING_OPPRETTET: {
-      return {
-        ...state,
-        senderInnkalling: false,
-        innkallingSendt: true,
-      };
-    }
     case DialogmoteActionTypes.OPPRETT_INNKALLING_FULLFORT: {
       return {
         ...state,
-        innkallingSendt: false,
+        senderInnkalling: false,
+        sendInnkallingFullfort: true,
       };
     }
     case DialogmoteActionTypes.OPPRETT_INNKALLING_FEILET: {
       return {
         ...state,
         senderInnkalling: false,
-        innkallingSendt: false,
-        senderInnkallingFeilet: true,
+        sendInnkallingFullfort: false,
+        sendInnkallingFeilet: true,
       };
     }
     case DialogmoteActionTypes.AVLYSER_MOTE: {
@@ -66,24 +60,18 @@ const dialogmote: Reducer<DialogmoteState, DialogmoteActions> = (
         avlyserMote: true,
       };
     }
-    case DialogmoteActionTypes.MOTE_AVLYST: {
-      return {
-        ...state,
-        avlyserMote: false,
-        moteAvlyst: true,
-      };
-    }
     case DialogmoteActionTypes.AVLYS_MOTE_FULLFORT: {
       return {
         ...state,
-        moteAvlyst: false,
+        avlyserMote: false,
+        avlysMoteFullfort: true,
       };
     }
     case DialogmoteActionTypes.AVLYS_MOTE_FEILET: {
       return {
         ...state,
         avlyserMote: false,
-        moteAvlyst: false,
+        avlysMoteFullfort: false,
         avlysMoteFeilet: true,
       };
     }

@@ -9,6 +9,11 @@ const mockIsdialogmote = (server) => {
         req.headers[requestUtil.NAV_PERSONIDENT_HEADER] &&
         req.headers[requestUtil.NAV_PERSONIDENT_HEADER].length === 11
       ) {
+        mockData.dialogmoter[0] = {
+          ...mockData.dialogmoter[0],
+          ...req.body,
+          status: "INNKALT",
+        };
         res.sendStatus(200);
       } else {
         res.status(400).send("Did not find PersonIdent in headers");

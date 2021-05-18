@@ -8,8 +8,6 @@ import {
   FetchDialogmoteAction,
   fetchDialogmoteFailed,
   fetchDialogmoteSuccess,
-  innkallingOpprettet,
-  moteAvlyst,
   oppretterInnkalling,
   OpprettInnkallingAction,
   opprettInnkallingFeilet,
@@ -23,8 +21,8 @@ function* opprettInnkalling(action: OpprettInnkallingAction) {
   try {
     const path = `${process.env.REACT_APP_ISDIALOGMOTE_ROOT}/post/v1/dialogmote/personident`;
     yield call(post, path, action.data, action.fnr);
-    yield put(innkallingOpprettet(action.data));
     yield put(opprettInnkallingFullfort());
+    window.location.href = `/sykefravaer/${action.fnr}/moteoversikt`;
   } catch (e) {
     yield put(opprettInnkallingFeilet());
   }
@@ -46,8 +44,8 @@ function* avlysDialogmote(action: AvlysMoteAction) {
   try {
     const path = `${process.env.REACT_APP_ISDIALOGMOTE_ROOT}/post/v1/dialogmote/${action.moteUuid}/avlys`;
     yield call(post, path, action.data);
-    yield put(moteAvlyst());
     yield put(avlysMoteFullfort());
+    window.location.href = `/sykefravaer/${action.fnr}/moteoversikt`;
   } catch (e) {
     yield put(avlysMoteFeilet());
   }

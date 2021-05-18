@@ -105,6 +105,7 @@ describe("AvlysDialogmoteSkjemaTest", () => {
 
     expect(mockStore.getActions()[0]).to.deep.equal({
       type: "AVLYS_MOTE_FORESPURT",
+      fnr: "05087321470",
       moteUuid: moteUuid,
       data: {
         arbeidsgiver: {

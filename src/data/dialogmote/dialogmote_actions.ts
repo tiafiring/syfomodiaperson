@@ -7,7 +7,6 @@ import {
 export enum DialogmoteActionTypes {
   OPPRETT_INNKALLING_FORESPURT = "OPPRETT_INNKALLING_FORESPURT",
   OPPRETTER_INNKALLING = "OPPRETTER_INNKALLING",
-  INNKALLING_OPPRETTET = "INNKALLING_OPPRETTET",
   OPPRETT_INNKALLING_FEILET = "OPPRETT_INNKALLING_FEILET",
   OPPRETT_INNKALLING_FULLFORT = "OPPRETT_INNKALLING_FULLFORT",
   FETCH_DIALOGMOTE = "FETCH_DIALOGMOTE",
@@ -15,7 +14,6 @@ export enum DialogmoteActionTypes {
   FETCH_DIALOGMOTE_SUCCESS = "FETCH_DIALOGMOTE_SUCCESS",
   AVLYS_MOTE_FORESPURT = "AVLYS_MOTE_FORESPURT",
   AVLYSER_MOTE = "AVLYSER_MOTE",
-  MOTE_AVLYST = "MOTE_AVLYST",
   AVLYS_MOTE_FEILET = "AVLYS_MOTE_FEILET",
   AVLYS_MOTE_FULLFORT = "AVLYS_MOTE_FULLFORT",
 }
@@ -28,11 +26,6 @@ export interface OpprettInnkallingAction {
 
 export interface OppretterInnkallingAction {
   type: DialogmoteActionTypes.OPPRETTER_INNKALLING;
-}
-
-export interface InnkallingOpprettetAction {
-  type: DialogmoteActionTypes.INNKALLING_OPPRETTET;
-  data: DialogmoteInnkallingDTO;
 }
 
 export interface OpprettInnkallingFeiletAction {
@@ -59,16 +52,13 @@ export interface FetchDialogmoteSuccessAction {
 
 export interface AvlysMoteAction {
   type: DialogmoteActionTypes.AVLYS_MOTE_FORESPURT;
+  fnr: string;
   moteUuid: string;
   data: AvlysDialogmoteDTO;
 }
 
 export interface AvlyserMoteAction {
   type: DialogmoteActionTypes.AVLYSER_MOTE;
-}
-
-export interface MoteAvlystAction {
-  type: DialogmoteActionTypes.MOTE_AVLYST;
 }
 
 export interface AvlysMoteFeiletAction {
@@ -82,7 +72,6 @@ export interface AvlysMoteFullfortAction {
 export type DialogmoteActions =
   | OpprettInnkallingAction
   | OppretterInnkallingAction
-  | InnkallingOpprettetAction
   | OpprettInnkallingFeiletAction
   | OpprettInnkallingFullfortAction
   | FetchDialogmoteAction
@@ -90,7 +79,6 @@ export type DialogmoteActions =
   | FetchDialogmoteSuccessAction
   | AvlysMoteAction
   | AvlyserMoteAction
-  | MoteAvlystAction
   | AvlysMoteFeiletAction
   | AvlysMoteFullfortAction;
 
@@ -105,13 +93,6 @@ export const opprettInnkalling = (
 
 export const oppretterInnkalling = (): OppretterInnkallingAction => ({
   type: DialogmoteActionTypes.OPPRETTER_INNKALLING,
-});
-
-export const innkallingOpprettet = (
-  data: DialogmoteInnkallingDTO
-): InnkallingOpprettetAction => ({
-  type: DialogmoteActionTypes.INNKALLING_OPPRETTET,
-  data,
 });
 
 export const opprettInnkallingFeilet = (): OpprettInnkallingFeiletAction => ({
@@ -138,19 +119,17 @@ export const fetchDialogmoteSuccess = (
 
 export const avlysMote = (
   moteUuid: string,
+  fnr: string,
   data: AvlysDialogmoteDTO
 ): AvlysMoteAction => ({
   type: DialogmoteActionTypes.AVLYS_MOTE_FORESPURT,
+  fnr,
   moteUuid,
   data,
 });
 
 export const avlyserMote = (): AvlyserMoteAction => ({
   type: DialogmoteActionTypes.AVLYSER_MOTE,
-});
-
-export const moteAvlyst = (): MoteAvlystAction => ({
-  type: DialogmoteActionTypes.MOTE_AVLYST,
 });
 
 export const avlysMoteFeilet = (): AvlysMoteFeiletAction => ({

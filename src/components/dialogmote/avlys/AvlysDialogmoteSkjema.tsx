@@ -2,7 +2,7 @@ import Panel from "nav-frontend-paneler";
 import React, { ReactElement } from "react";
 import styled from "styled-components";
 import { Flatknapp, Hovedknapp } from "nav-frontend-knapper";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useFnrParam } from "../../../hooks/useFnrParam";
 import { FlexRow, PaddingSize } from "../../Layout";
 import { useDispatch } from "react-redux";
@@ -64,13 +64,13 @@ const AvlysDialogmoteSkjema = ({
 }: AvlysDialogmoteSkjemaProps): ReactElement => {
   const dispatch = useDispatch();
   const fnr = useFnrParam();
-  const { avlyserMote, avlysMoteFeilet, moteAvlyst } = useAppSelector(
+  const { avlyserMote, avlysMoteFeilet } = useAppSelector(
     (state) => state.dialogmote
   );
 
   const submit = (values: AvlysDialogmoteSkjemaValues) => {
     dispatch(
-      avlysMote(dialogmote.uuid, {
+      avlysMote(dialogmote.uuid, fnr, {
         arbeidstaker: {
           begrunnelse: values.begrunnelseArbeidstaker,
           avlysning: [],
@@ -82,10 +82,6 @@ const AvlysDialogmoteSkjema = ({
       })
     );
   };
-
-  if (moteAvlyst) {
-    return <Redirect to={`/sykefravaer/${fnr}/moteoversikt`} />;
-  }
 
   return (
     <AvlysPanel>
