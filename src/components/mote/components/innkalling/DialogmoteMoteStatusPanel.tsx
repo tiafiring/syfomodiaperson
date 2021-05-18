@@ -14,10 +14,12 @@ import { DialogmoteDTO } from "../../../../data/dialogmote/dialogmoteTypes";
 import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
 import { Brukerinfo } from "../../../../data/navbruker/types/Brukerinfo";
 import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../../../utils/datoUtils";
+import { useTrackButtonClick } from "../../../../data/logging/loggingHooks";
 import { useFnrParam } from "../../../../hooks/useFnrParam";
 import { Link } from "react-router-dom";
 
 const texts = {
+  innkallingSendtTrackingContext: "Møtelandingsside: Sendt innkalling",
   header: "Innkallingen er sendt",
   infoMessage:
     "Du har brukt den nye løsningen i Modia. Her kan du også avlyse, endre tidspunktet, og skrive referat.",
@@ -90,6 +92,7 @@ interface Props {
 export const DialogmoteMoteStatusPanel = ({ dialogmote }: Props) => {
   const bruker = useNavBrukerData();
   const fnr = useFnrParam();
+  const trackButtonClick = useTrackButtonClick();
 
   return (
     <DialogmotePanel
@@ -106,11 +109,38 @@ export const DialogmoteMoteStatusPanel = ({ dialogmote }: Props) => {
       </FlexRow>
 
       <FlexRow topPadding={PaddingSize.MD}>
-        <Knapp>{texts.endreMote}</Knapp>
+        <Knapp
+          onClick={() =>
+            trackButtonClick(
+              texts.endreMote,
+              texts.innkallingSendtTrackingContext
+            )
+          }
+        >
+          {texts.endreMote}
+        </Knapp>
         <Link to={`/sykefravaer/${fnr}/dialogmote/${dialogmote.uuid}/avlys`}>
-          <Knapp>{texts.avlysMote}</Knapp>
+          <Knapp
+            onClick={() =>
+              trackButtonClick(
+                texts.avlysMote,
+                texts.innkallingSendtTrackingContext
+              )
+            }
+          >
+            {texts.avlysMote}
+          </Knapp>
         </Link>
-        <Hovedknapp>{texts.skrivReferat}</Hovedknapp>
+        <Hovedknapp
+          onClick={() =>
+            trackButtonClick(
+              texts.skrivReferat,
+              texts.innkallingSendtTrackingContext
+            )
+          }
+        >
+          {texts.skrivReferat}
+        </Hovedknapp>
       </FlexRow>
     </DialogmotePanel>
   );
