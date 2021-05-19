@@ -13,23 +13,17 @@ interface DialogmoteInfoProps {
   dialogmote: DialogmoteDTO;
 }
 
-const DialogmoteInfo = ({ dialogmote }: DialogmoteInfoProps): ReactElement => {
-  const dialogmoteTid = dialogmote.tidStedList[0]?.tid;
-
-  return (
-    <AvlysDialogmoteSkjemaSeksjon>
-      <FlexRow>
-        <FlexColumn>
-          <Element>{texts.gjelderTitle}</Element>
-          {dialogmoteTid && (
-            <Normaltekst>
-              {tilDatoMedUkedagOgManedNavnOgKlokkeslett(dialogmoteTid)}
-            </Normaltekst>
-          )}
-        </FlexColumn>
-      </FlexRow>
-    </AvlysDialogmoteSkjemaSeksjon>
-  );
-};
+const DialogmoteInfo = ({ dialogmote }: DialogmoteInfoProps): ReactElement => (
+  <AvlysDialogmoteSkjemaSeksjon>
+    <FlexRow>
+      <FlexColumn>
+        <Element>{texts.gjelderTitle}</Element>
+        <Normaltekst>
+          {tilDatoMedUkedagOgManedNavnOgKlokkeslett(dialogmote.tid)}
+        </Normaltekst>
+      </FlexColumn>
+    </FlexRow>
+  </AvlysDialogmoteSkjemaSeksjon>
+);
 
 export default DialogmoteInfo;

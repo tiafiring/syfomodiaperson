@@ -32,12 +32,8 @@ const mote: DialogmoteDTO = {
   tildeltVeilederIdent: "",
   updatedAt: "",
   uuid: moteUuid,
-  tidStedList: [
-    {
-      tid: "2021-05-10T09:00:00.000",
-      sted: "Videomøte",
-    },
-  ],
+  tid: "2021-05-10T09:00:00.000",
+  sted: "Videomøte",
 };
 
 describe("AvlysDialogmoteSkjemaTest", () => {
