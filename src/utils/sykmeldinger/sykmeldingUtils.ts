@@ -341,3 +341,26 @@ export const activeSykmeldingerSentToArbeidsgiver = (
     );
   });
 };
+
+const sykmeldingerForVirksomhet = (
+  sykmeldinger: SykmeldingOldFormat[],
+  virksomhetsnummer: string
+): SykmeldingOldFormat[] => {
+  return sykmeldinger.filter((sykmelding) => {
+    return (
+      sykmelding.mottakendeArbeidsgiver &&
+      sykmelding.mottakendeArbeidsgiver.virksomhetsnummer === virksomhetsnummer
+    );
+  });
+};
+
+export const latestSykmeldingForVirksomhet = (
+  sykmeldinger: SykmeldingOldFormat[],
+  virksomhetsnummer: string
+): SykmeldingOldFormat => {
+  const virksomhetSykmeldinger = sykmeldingerForVirksomhet(
+    sykmeldinger,
+    virksomhetsnummer
+  );
+  return sykmeldingerSortertNyestTilEldst(virksomhetSykmeldinger)[0];
+};
