@@ -46,15 +46,15 @@ export const validerTidspunkt = (tidspunkt?: Tidspunkt): TidspunktFeil => {
     feil.klokkeslett = texts.timeMissing;
     feil.dato = texts.dateMissing;
   } else {
-    const klokkeslettValue = tidspunkt.klokkeslett;
-    if (!klokkeslettValue) {
-      feil.klokkeslett = texts.timeMissing;
-    }
     const datoValue = tidspunkt.dato;
     if (!datoValue) {
       feil.dato = texts.dateMissing;
     } else if (!isISODateString(datoValue)) {
       feil.dato = texts.dateWrongFormat;
+    }
+    const klokkeslettValue = tidspunkt.klokkeslett;
+    if (!klokkeslettValue) {
+      feil.klokkeslett = texts.timeMissing;
     }
   }
 

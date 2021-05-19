@@ -12,14 +12,17 @@ interface ArbeidsgiverDropdownProps {
 
   ledere: Leder[];
   label?: string;
+  id?: string;
 }
 
 const ArbeidsgiverDropdown = ({
   velgArbeidsgiver,
   ledere,
   label,
+  id,
 }: ArbeidsgiverDropdownProps) => (
   <Select
+    id={id}
     label={label}
     onChange={(e) => {
       velgArbeidsgiver(e.target.value);

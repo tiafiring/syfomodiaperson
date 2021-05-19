@@ -12,6 +12,9 @@ import {
   toDatePrettyPrint,
 } from "../../src/utils/datoUtils";
 import { InputDateStringToISODateString } from "nav-datovelger/lib/utils/dateFormatUtils";
+import { Feilmelding } from "nav-frontend-typografi";
+import { Feiloppsummering } from "nav-frontend-skjema";
+import { Hovedknapp } from "nav-frontend-knapper";
 
 const realState = createStore(rootReducer).getState();
 
@@ -65,10 +68,126 @@ describe("DialogmoteInnkallingSkjema", () => {
 
     wrapper.find("form").simulate("submit");
 
-    expect(wrapper.text()).to.contain("Vennligst velg arbeidsgiver");
-    expect(wrapper.text()).to.contain("Vennligst angi dato");
-    expect(wrapper.text()).to.contain("Vennligst angi klokkeslett");
-    expect(wrapper.text()).to.contain("Vennligst angi møtested");
+    // Feilmeldinger i skjema
+    const feilmeldinger = wrapper.find(Feilmelding);
+    expect(
+      feilmeldinger.someWhere(
+        (feil) => feil.text() === "Vennligst velg arbeidsgiver"
+      )
+    ).to.be.true;
+    expect(
+      feilmeldinger.someWhere((feil) => feil.text() === "Vennligst angi dato")
+    ).to.be.true;
+    expect(
+      feilmeldinger.someWhere(
+        (feil) => feil.text() === "Vennligst angi klokkeslett"
+      )
+    ).to.be.true;
+    expect(
+      feilmeldinger.someWhere(
+        (feil) => feil.text() === "Vennligst angi møtested"
+      )
+    ).to.be.true;
+
+    // Feilmeldinger i oppsummering
+    const feiloppsummering = wrapper.find(Feiloppsummering);
+    expect(feiloppsummering.text()).to.contain(
+      "For å gå videre må du rette opp følgende:"
+    );
+    expect(feiloppsummering.text()).to.contain("Vennligst velg arbeidsgiver");
+    expect(feiloppsummering.text()).to.contain("Vennligst angi dato");
+    expect(feiloppsummering.text()).to.contain("Vennligst angi klokkeslett");
+    expect(feiloppsummering.text()).to.contain("Vennligst angi møtested");
+  });
+
+  it("valideringsmeldinger forsvinner ved utbedring", () => {
+    const wrapper = mount(
+      <MemoryRouter
+        initialEntries={[`/sykefravaer/${arbeidstakerFnr}/dialogmote`]}
+      >
+        <Route path="/sykefravaer/:fnr/dialogmote">
+          <Provider store={store({ ...realState, ...mockState })}>
+            <DialogmoteInnkallingSkjema />
+          </Provider>
+        </Route>
+      </MemoryRouter>
+    );
+
+    wrapper.find("form").simulate("submit");
+
+    // Feilmeldinger i skjema
+    const feilmeldinger = wrapper.find(Feilmelding);
+    expect(
+      feilmeldinger.someWhere(
+        (feil) => feil.text() === "Vennligst velg arbeidsgiver"
+      )
+    ).to.be.true;
+    expect(
+      feilmeldinger.someWhere((feil) => feil.text() === "Vennligst angi dato")
+    ).to.be.true;
+    expect(
+      feilmeldinger.someWhere(
+        (feil) => feil.text() === "Vennligst angi klokkeslett"
+      )
+    ).to.be.true;
+    expect(
+      feilmeldinger.someWhere(
+        (feil) => feil.text() === "Vennligst angi møtested"
+      )
+    ).to.be.true;
+
+    // Feilmeldinger i oppsummering
+    const feiloppsummering = wrapper.find(Feiloppsummering);
+    expect(feiloppsummering.text()).to.contain(
+      "For å gå videre må du rette opp følgende:"
+    );
+    expect(feiloppsummering.text()).to.contain("Vennligst velg arbeidsgiver");
+    expect(feiloppsummering.text()).to.contain("Vennligst angi dato");
+    expect(feiloppsummering.text()).to.contain("Vennligst angi klokkeslett");
+    expect(feiloppsummering.text()).to.contain("Vennligst angi møtested");
+
+    // Fyll inn felter i skjema
+    const arbeidsgiverDropdown = wrapper.find("select");
+    changeFieldValue(arbeidsgiverDropdown, arbeigsgiverOrgnr);
+    const datoVelger = wrapper.find("ForwardRef(DateInput)");
+    changeFieldValue(datoVelger, moteDato);
+    datoVelger.simulate("blur");
+
+    const inputs = wrapper.find("input");
+    const stedInput = inputs.findWhere((w) => w.prop("name") === "sted");
+    const videoLinkInput = inputs.findWhere(
+      (w) => w.prop("name") === "videoLink"
+    );
+    const klokkeslettInput = inputs.findWhere(
+      (w) => w.prop("name") === "klokkeslett"
+    );
+    changeFieldValue(stedInput, moteSted);
+    changeFieldValue(videoLinkInput, moteVideoLink);
+    changeFieldValue(klokkeslettInput, moteKlokkeslett);
+
+    const textAreas = wrapper.find("textarea");
+    const fritekstArbeidsgiverTextArea = textAreas.findWhere(
+      (w) => w.prop("name") === "fritekstArbeidsgiver"
+    );
+    const fritekstArbeidstakerTextArea = textAreas.findWhere(
+      (w) => w.prop("name") === "fritekstArbeidstaker"
+    );
+    changeFieldValue(fritekstArbeidsgiverTextArea, fritekstTilArbeidsgiver);
+    changeFieldValue(fritekstArbeidstakerTextArea, fritekstTilArbeidstaker);
+
+    // Feilmeldinger og feiloppsummering forsvinner
+    expect(wrapper.find(Feiloppsummering)).to.have.length(0);
+    expect(wrapper.find(Feilmelding)).to.have.length(0);
+
+    // Tøm felt for sted
+    changeFieldValue(stedInput, "");
+
+    // Feilmelding vises, feiloppsummering vises ved neste submit
+    expect(wrapper.find(Feiloppsummering)).to.have.length(0);
+    expect(wrapper.find(Feilmelding)).to.have.length(1);
+
+    wrapper.find(Hovedknapp).simulate("click");
+    expect(wrapper.find(Feiloppsummering)).to.have.length(1);
   });
 
   it("oppretter innkalling med verdier fra skjema", () => {
@@ -95,7 +214,7 @@ describe("DialogmoteInnkallingSkjema", () => {
       (w) => w.prop("name") === "videoLink"
     );
     const klokkeslettInput = inputs.findWhere(
-      (w) => w.prop("name") === "tidspunkt.klokkeslett"
+      (w) => w.prop("name") === "klokkeslett"
     );
     changeFieldValue(stedInput, moteSted);
     changeFieldValue(videoLinkInput, moteVideoLink);
