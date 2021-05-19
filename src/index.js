@@ -10,10 +10,13 @@ import { hentLedere } from "./data/leder/ledere_actions";
 import { hentPersonAdresse } from "./data/personinfo/personInfo_actions";
 import { setupStore } from "./data/store";
 import "./styles/styles.less";
+import { initAmplitude } from "./amplitude/amplitude";
 
 const store = setupStore();
 
 const fnr = window.location.pathname.split("/")[2];
+
+initAmplitude();
 
 const fnrRegex = new RegExp("^[0-9]{11}$");
 if (fnrRegex.test(fnr)) {
