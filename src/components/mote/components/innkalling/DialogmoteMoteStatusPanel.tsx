@@ -14,6 +14,8 @@ import { DialogmoteDTO } from "../../../../data/dialogmote/dialogmoteTypes";
 import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
 import { Brukerinfo } from "../../../../data/navbruker/types/Brukerinfo";
 import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../../../utils/datoUtils";
+import { useFnrParam } from "../../../../hooks/useFnrParam";
+import { Link } from "react-router-dom";
 
 const texts = {
   header: "Innkallingen er sendt",
@@ -87,6 +89,7 @@ interface Props {
 
 export const DialogmoteMoteStatusPanel = ({ dialogmote }: Props) => {
   const bruker = useNavBrukerData();
+  const fnr = useFnrParam();
 
   return (
     <DialogmotePanel
@@ -104,7 +107,9 @@ export const DialogmoteMoteStatusPanel = ({ dialogmote }: Props) => {
 
       <FlexRow topPadding={PaddingSize.MD}>
         <Knapp>{texts.endreMote}</Knapp>
-        <Knapp>{texts.avlysMote}</Knapp>
+        <Link to={`/sykefravaer/${fnr}/dialogmote/${dialogmote.uuid}/avlys`}>
+          <Knapp>{texts.avlysMote}</Knapp>
+        </Link>
         <Hovedknapp>{texts.skrivReferat}</Hovedknapp>
       </FlexRow>
     </DialogmotePanel>

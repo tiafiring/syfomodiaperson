@@ -14,7 +14,7 @@ import { opprettInnkalling } from "../../data/dialogmote/dialogmote_actions";
 import { useDispatch } from "react-redux";
 import { DialogmoteInnkallingDTO } from "../../data/dialogmote/dialogmoteTypes";
 import { genererDato } from "../mote/utils";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useNavEnhet } from "../../hooks/useNavEnhet";
 import { AlertStripeFeil } from "nav-frontend-alertstriper";
 import { useAppSelector } from "../../hooks/hooks";
@@ -88,20 +88,14 @@ const DialogmoteInnkallingSkjema = (): ReactElement => {
   const dispatch = useDispatch();
   const fnr = useFnrParam();
   const navEnhet = useNavEnhet();
-  const {
-    senderInnkalling,
-    senderInnkallingFeilet,
-    innkallingSendt,
-  } = useAppSelector((state) => state.dialogmote);
+  const { senderInnkalling, sendInnkallingFeilet } = useAppSelector(
+    (state) => state.dialogmote
+  );
 
   const submit = (values: DialogmoteInnkallingSkjemaValues) => {
     const dialogmoteInnkalling = toInnkalling(values, fnr, navEnhet);
     dispatch(opprettInnkalling(fnr, dialogmoteInnkalling));
   };
-
-  if (innkallingSendt) {
-    return <Redirect to={`/sykefravaer/${fnr}/moteoversikt`} />;
-  }
 
   return (
     <Panel>
@@ -111,7 +105,7 @@ const DialogmoteInnkallingSkjema = (): ReactElement => {
             <DialogmoteInnkallingVelgArbeidsgiver />
             <DialogmoteInnkallingTidOgSted />
             <DialogmoteInnkallingTekster />
-            {senderInnkallingFeilet && (
+            {sendInnkallingFeilet && (
               <FlexRow bottomPadding={PaddingSize.MD}>
                 <AlertStripeFeil>{texts.errorMsg}</AlertStripeFeil>
               </FlexRow>

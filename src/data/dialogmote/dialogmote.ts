@@ -4,19 +4,27 @@ import { DialogmoteDTO } from "./dialogmoteTypes";
 
 export interface DialogmoteState {
   senderInnkalling: boolean;
-  senderInnkallingFeilet: boolean;
-  innkallingSendt: boolean;
+  sendInnkallingFeilet: boolean;
+  sendInnkallingFullfort: boolean;
   henterMote: boolean;
   henterMoteFeilet: boolean;
+  moterHentet: boolean;
   dialogmoter: DialogmoteDTO[];
+  avlyserMote: boolean;
+  avlysMoteFeilet: boolean;
+  avlysMoteFullfort: boolean;
 }
 
 export const initialState: DialogmoteState = {
   senderInnkalling: false,
-  senderInnkallingFeilet: false,
-  innkallingSendt: false,
+  sendInnkallingFeilet: false,
+  sendInnkallingFullfort: false,
+  avlysMoteFeilet: false,
+  avlyserMote: false,
+  avlysMoteFullfort: false,
   henterMote: false,
   henterMoteFeilet: false,
+  moterHentet: false,
   dialogmoter: [],
 };
 
@@ -31,25 +39,40 @@ const dialogmote: Reducer<DialogmoteState, DialogmoteActions> = (
         senderInnkalling: true,
       };
     }
-    case DialogmoteActionTypes.INNKALLING_OPPRETTET: {
-      return {
-        ...state,
-        senderInnkalling: false,
-        innkallingSendt: true,
-      };
-    }
     case DialogmoteActionTypes.OPPRETT_INNKALLING_FULLFORT: {
       return {
         ...state,
-        innkallingSendt: false,
+        senderInnkalling: false,
+        sendInnkallingFullfort: true,
       };
     }
     case DialogmoteActionTypes.OPPRETT_INNKALLING_FEILET: {
       return {
         ...state,
         senderInnkalling: false,
-        innkallingSendt: false,
-        senderInnkallingFeilet: true,
+        sendInnkallingFullfort: false,
+        sendInnkallingFeilet: true,
+      };
+    }
+    case DialogmoteActionTypes.AVLYSER_MOTE: {
+      return {
+        ...state,
+        avlyserMote: true,
+      };
+    }
+    case DialogmoteActionTypes.AVLYS_MOTE_FULLFORT: {
+      return {
+        ...state,
+        avlyserMote: false,
+        avlysMoteFullfort: true,
+      };
+    }
+    case DialogmoteActionTypes.AVLYS_MOTE_FEILET: {
+      return {
+        ...state,
+        avlyserMote: false,
+        avlysMoteFullfort: false,
+        avlysMoteFeilet: true,
       };
     }
     case DialogmoteActionTypes.FETCH_DIALOGMOTE: {
@@ -65,6 +88,7 @@ const dialogmote: Reducer<DialogmoteState, DialogmoteActions> = (
         henterMote: false,
         henterMoteFeilet: false,
         dialogmoter: action.dialogmoteDtoList,
+        moterHentet: true,
       };
     }
     case DialogmoteActionTypes.FETCH_DIALOGMOTE_FAILED: {

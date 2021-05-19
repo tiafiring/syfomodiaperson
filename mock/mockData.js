@@ -22,7 +22,7 @@ module.exports = {
   getHistorikkMoter,
   getHistorikkOppfolgingsplan,
   getLedere,
-  getDialogmoter,
+  dialogmoter: getDialogmoter(),
   getOppfolgingstilfelleperioder,
   getSoknader,
   getSykmeldinger,
