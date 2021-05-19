@@ -23,15 +23,10 @@ module.exports = getDialogmoter = () => {
         lederEpost: null,
         type: "ARBEIDSGIVER",
       },
-      tidStedList: [
-        {
-          uuid: "e88a0f9c-89ab-4fae-9713-78cd598a2079",
-          sted:
-            "This is a very lang text that has a lot of characters and describes where the meeting will take place.",
-          tid: "2021-06-04T09:34:55.422796",
-          videoLink: "https://meet.google.com/xyz",
-        },
-      ],
+      sted:
+        "This is a very lang text that has a lot of characters and describes where the meeting will take place.",
+      tid: "2021-06-04T09:34:55.422796",
+      videoLink: "https://meet.google.com/xyz",
     },
   ];
 };
