@@ -29,7 +29,7 @@ export const SkjemaFeiloppsummering = ({
     if (current !== null) {
       current.focus();
     }
-  }, []);
+  }, [feiloppsummeringRef]);
 
   return errors && Object.values(errors).length > 0 ? (
     <FlexRow bottomPadding={PaddingSize.MD}>
