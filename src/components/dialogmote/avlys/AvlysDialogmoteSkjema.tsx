@@ -16,6 +16,7 @@ import AvlysDialogmoteBegrunnelse from "./AvlysDialogmoteBegrunnelse";
 import { SkjemaFeiloppsummering } from "../../SkjemaFeiloppsummering";
 import { useFeilUtbedret } from "../../../hooks/useFeilUtbedret";
 import { validerBegrunnelser } from "../../../utils/valideringUtils";
+import { useTrackButtonClick } from "../../../data/logging/loggingHooks";
 
 const texts = {
   begrunnelseArbeidstakerLabel: "Begrunnelse til arbeidstakeren",
@@ -28,6 +29,7 @@ const texts = {
 
 interface AvlysDialogmoteSkjemaProps {
   dialogmote: DialogmoteDTO;
+  pageTitle: string;
 }
 
 interface AvlysDialogmoteSkjemaValues {
@@ -45,9 +47,11 @@ const SendButton = styled(Hovedknapp)`
 
 const AvlysDialogmoteSkjema = ({
   dialogmote,
+  pageTitle,
 }: AvlysDialogmoteSkjemaProps): ReactElement => {
   const dispatch = useDispatch();
   const fnr = useFnrParam();
+  const trackButtonClick = useTrackButtonClick();
   const { avlyserMote, avlysMoteFeilet } = useAppSelector(
     (state) => state.dialogmote
   );
@@ -107,7 +111,10 @@ const AvlysDialogmoteSkjema = ({
             )}
             <FlexRow>
               <SendButton
-                onClick={resetFeilUtbedret}
+                onClick={() => {
+                  trackButtonClick(texts.send, pageTitle);
+                  resetFeilUtbedret();
+                }}
                 htmlType="submit"
                 spinner={avlyserMote}
                 autoDisableVedSpinner
@@ -115,7 +122,12 @@ const AvlysDialogmoteSkjema = ({
                 {texts.send}
               </SendButton>
               <Link to={`/sykefravaer/${fnr}/moteoversikt`}>
-                <Flatknapp htmlType="button">{texts.avbryt}</Flatknapp>
+                <Flatknapp
+                  htmlType="button"
+                  onClick={() => trackButtonClick(texts.avbryt, pageTitle)}
+                >
+                  {texts.avbryt}
+                </Flatknapp>
               </Link>
             </FlexRow>
           </form>
