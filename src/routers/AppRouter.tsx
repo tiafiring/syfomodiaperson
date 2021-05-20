@@ -15,7 +15,7 @@ import { erGyldigFodselsnummer } from "../utils/frnValideringUtils";
 import MotelandingssideContainer from "../components/mote/container/MotelandingssideContainer";
 import NokkelinformasjonContainer from "../components/nokkelinformasjon/container/NokkelinformasjonContainer";
 import VedtakContainer from "../components/vedtak/container/VedtakContainer";
-import DialogmoteInnkallingContainer from "../components/dialogmote/DialogmoteInnkallingContainer";
+import DialogmoteInnkallingContainer from "../components/dialogmote/innkalling/DialogmoteInnkallingContainer";
 import { erLokalEllerPreprod } from "../utils/miljoUtil";
 import AvlysDialogmoteContainer from "../components/dialogmote/avlys/AvlysDialogmoteContainer";
 

@@ -6,7 +6,7 @@ import { createStore } from "redux";
 import { rootReducer } from "../../src/data/rootState";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
-import DialogmoteInnkallingSkjema from "../../src/components/dialogmote/DialogmoteInnkallingSkjema";
+import DialogmoteInnkallingSkjema from "../../src/components/dialogmote/innkalling/DialogmoteInnkallingSkjema";
 import {
   leggTilDagerPaDato,
   toDatePrettyPrint,
