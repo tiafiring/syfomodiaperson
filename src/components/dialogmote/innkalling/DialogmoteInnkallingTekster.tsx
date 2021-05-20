@@ -4,8 +4,8 @@ import { Field } from "react-final-form";
 import DialogmoteInnkallingSkjemaSeksjon from "./DialogmoteInnkallingSkjemaSeksjon";
 import styled from "styled-components";
 import AlertStripe from "nav-frontend-alertstriper";
-import { FlexColumn, FlexRow, PaddingSize } from "../Layout";
-import FritekstStor from "../FritekstStor";
+import { FlexColumn, FlexRow, PaddingSize } from "../../Layout";
+import FritekstStor from "../../FritekstStor";
 import { Innholdstittel } from "nav-frontend-typografi";
 
 const texts = {

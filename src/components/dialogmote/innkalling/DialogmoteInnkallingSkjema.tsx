@@ -9,19 +9,19 @@ import {
   validerArbeidsgiver,
   validerSted,
   validerTidspunkt,
-} from "../../utils/valideringUtils";
-import { opprettInnkalling } from "../../data/dialogmote/dialogmote_actions";
+} from "../../../utils/valideringUtils";
+import { opprettInnkalling } from "../../../data/dialogmote/dialogmote_actions";
 import { useDispatch } from "react-redux";
-import { DialogmoteInnkallingDTO } from "../../data/dialogmote/dialogmoteTypes";
-import { genererDato } from "../mote/utils";
+import { DialogmoteInnkallingDTO } from "../../../data/dialogmote/dialogmoteTypes";
+import { genererDato } from "../../mote/utils";
 import { Link } from "react-router-dom";
-import { useNavEnhet } from "../../hooks/useNavEnhet";
+import { useNavEnhet } from "../../../hooks/useNavEnhet";
 import { AlertStripeFeil } from "nav-frontend-alertstriper";
-import { useAppSelector } from "../../hooks/hooks";
-import { useFnrParam } from "../../hooks/useFnrParam";
-import { FlexRow, PaddingSize } from "../Layout";
-import { SkjemaFeiloppsummering } from "../SkjemaFeiloppsummering";
-import { useFeilUtbedret } from "../../hooks/useFeilUtbedret";
+import { useAppSelector } from "../../../hooks/hooks";
+import { useFnrParam } from "../../../hooks/useFnrParam";
+import { FlexRow, PaddingSize } from "../../Layout";
+import { SkjemaFeiloppsummering } from "../../SkjemaFeiloppsummering";
+import { useFeilUtbedret } from "../../../hooks/useFeilUtbedret";
 
 interface DialogmoteInnkallingSkjemaValues {
   arbeidsgiver: string;
