@@ -15,6 +15,7 @@ import { DialogmoteDTO } from "../../../data/dialogmote/dialogmoteTypes";
 import AvlysDialogmoteBegrunnelse from "./AvlysDialogmoteBegrunnelse";
 import { SkjemaFeiloppsummering } from "../../SkjemaFeiloppsummering";
 import { useFeilUtbedret } from "../../../hooks/useFeilUtbedret";
+import { validerBegrunnelser } from "../../../utils/valideringUtils";
 
 const texts = {
   begrunnelseArbeidstakerLabel: "Begrunnelse til arbeidstakeren",
@@ -23,10 +24,6 @@ const texts = {
   avbryt: "Avbryt",
   errorMsg:
     "Møtet kunne ikke avlyses på grunn av en midlertidig teknisk feil. Prøv igjen.",
-  begrunnelseArbeidstakerMissing:
-    "Vennligst angi begrunnelse til arbeidstakeren",
-  begrunnelseArbeidsgiverMissing:
-    "Vennligst angi begrunnelse til nærmeste leder",
 };
 
 interface AvlysDialogmoteSkjemaProps {
@@ -63,15 +60,9 @@ const AvlysDialogmoteSkjema = ({
   const validate = (
     values: Partial<AvlysDialogmoteSkjemaValues>
   ): Partial<AvlysDialogmoteSkjemaValues> => {
-    const { begrunnelseArbeidstaker, begrunnelseArbeidsgiver } = values;
-    const feil: Partial<AvlysDialogmoteSkjemaValues> = {};
-    if (!begrunnelseArbeidstaker || begrunnelseArbeidstaker.trim() === "") {
-      feil.begrunnelseArbeidstaker = texts.begrunnelseArbeidstakerMissing;
-    }
-    if (!begrunnelseArbeidsgiver || begrunnelseArbeidsgiver.trim() === "") {
-      feil.begrunnelseArbeidsgiver = texts.begrunnelseArbeidsgiverMissing;
-    }
-
+    const feil = validerBegrunnelser({
+      ...values,
+    });
     updateFeilUtbedret(feil);
 
     return feil;

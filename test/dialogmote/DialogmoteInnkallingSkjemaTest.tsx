@@ -15,6 +15,8 @@ import { InputDateStringToISODateString } from "nav-datovelger/lib/utils/dateFor
 import { Feilmelding } from "nav-frontend-typografi";
 import { Feiloppsummering } from "nav-frontend-skjema";
 import { Hovedknapp } from "nav-frontend-knapper";
+import { texts as skjemaFeilOppsummeringTexts } from "../../src/components/SkjemaFeiloppsummering";
+import { texts as valideringsTexts } from "../../src/utils/valideringUtils";
 
 const realState = createStore(rootReducer).getState();
 
@@ -72,32 +74,34 @@ describe("DialogmoteInnkallingSkjema", () => {
     const feilmeldinger = wrapper.find(Feilmelding);
     expect(
       feilmeldinger.someWhere(
-        (feil) => feil.text() === "Vennligst velg arbeidsgiver"
-      )
-    ).to.be.true;
-    expect(
-      feilmeldinger.someWhere((feil) => feil.text() === "Vennligst angi dato")
-    ).to.be.true;
-    expect(
-      feilmeldinger.someWhere(
-        (feil) => feil.text() === "Vennligst angi klokkeslett"
+        (feil) => feil.text() === valideringsTexts.orgMissing
       )
     ).to.be.true;
     expect(
       feilmeldinger.someWhere(
-        (feil) => feil.text() === "Vennligst angi møtested"
+        (feil) => feil.text() === valideringsTexts.dateMissing
+      )
+    ).to.be.true;
+    expect(
+      feilmeldinger.someWhere(
+        (feil) => feil.text() === valideringsTexts.timeMissing
+      )
+    ).to.be.true;
+    expect(
+      feilmeldinger.someWhere(
+        (feil) => feil.text() === valideringsTexts.placeMissing
       )
     ).to.be.true;
 
     // Feilmeldinger i oppsummering
     const feiloppsummering = wrapper.find(Feiloppsummering);
     expect(feiloppsummering.text()).to.contain(
-      "For å gå videre må du rette opp følgende:"
+      skjemaFeilOppsummeringTexts.title
     );
-    expect(feiloppsummering.text()).to.contain("Vennligst velg arbeidsgiver");
-    expect(feiloppsummering.text()).to.contain("Vennligst angi dato");
-    expect(feiloppsummering.text()).to.contain("Vennligst angi klokkeslett");
-    expect(feiloppsummering.text()).to.contain("Vennligst angi møtested");
+    expect(feiloppsummering.text()).to.contain(valideringsTexts.orgMissing);
+    expect(feiloppsummering.text()).to.contain(valideringsTexts.dateMissing);
+    expect(feiloppsummering.text()).to.contain(valideringsTexts.timeMissing);
+    expect(feiloppsummering.text()).to.contain(valideringsTexts.placeMissing);
   });
 
   it("valideringsmeldinger forsvinner ved utbedring", () => {
@@ -119,32 +123,34 @@ describe("DialogmoteInnkallingSkjema", () => {
     const feilmeldinger = wrapper.find(Feilmelding);
     expect(
       feilmeldinger.someWhere(
-        (feil) => feil.text() === "Vennligst velg arbeidsgiver"
-      )
-    ).to.be.true;
-    expect(
-      feilmeldinger.someWhere((feil) => feil.text() === "Vennligst angi dato")
-    ).to.be.true;
-    expect(
-      feilmeldinger.someWhere(
-        (feil) => feil.text() === "Vennligst angi klokkeslett"
+        (feil) => feil.text() === valideringsTexts.orgMissing
       )
     ).to.be.true;
     expect(
       feilmeldinger.someWhere(
-        (feil) => feil.text() === "Vennligst angi møtested"
+        (feil) => feil.text() === valideringsTexts.dateMissing
+      )
+    ).to.be.true;
+    expect(
+      feilmeldinger.someWhere(
+        (feil) => feil.text() === valideringsTexts.timeMissing
+      )
+    ).to.be.true;
+    expect(
+      feilmeldinger.someWhere(
+        (feil) => feil.text() === valideringsTexts.placeMissing
       )
     ).to.be.true;
 
     // Feilmeldinger i oppsummering
     const feiloppsummering = wrapper.find(Feiloppsummering);
     expect(feiloppsummering.text()).to.contain(
-      "For å gå videre må du rette opp følgende:"
+      skjemaFeilOppsummeringTexts.title
     );
-    expect(feiloppsummering.text()).to.contain("Vennligst velg arbeidsgiver");
-    expect(feiloppsummering.text()).to.contain("Vennligst angi dato");
-    expect(feiloppsummering.text()).to.contain("Vennligst angi klokkeslett");
-    expect(feiloppsummering.text()).to.contain("Vennligst angi møtested");
+    expect(feiloppsummering.text()).to.contain(valideringsTexts.orgMissing);
+    expect(feiloppsummering.text()).to.contain(valideringsTexts.dateMissing);
+    expect(feiloppsummering.text()).to.contain(valideringsTexts.timeMissing);
+    expect(feiloppsummering.text()).to.contain(valideringsTexts.placeMissing);
 
     // Fyll inn felter i skjema
     const arbeidsgiverDropdown = wrapper.find("select");

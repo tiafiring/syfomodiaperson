@@ -1,8 +1,7 @@
-import { mount } from "enzyme";
+import { mount, ReactWrapper } from "enzyme";
 import React from "react";
 import { MemoryRouter, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import AvlysDialogmoteSkjema from "../../src/components/dialogmote/avlys/AvlysDialogmoteSkjema";
 import configureStore from "redux-mock-store";
 import { createStore } from "redux";
 import { rootReducer } from "../../src/data/rootState";
@@ -14,6 +13,9 @@ import {
 import { Feilmelding } from "nav-frontend-typografi";
 import { Feiloppsummering } from "nav-frontend-skjema";
 import { Hovedknapp } from "nav-frontend-knapper";
+import AvlysDialogmoteSkjema from "../../src/components/dialogmote/avlys/AvlysDialogmoteSkjema";
+import { texts as skjemaFeilOppsummeringTexts } from "../../src/components/SkjemaFeiloppsummering";
+import { texts as valideringsTexts } from "../../src/utils/valideringUtils";
 
 const realState = createStore(rootReducer).getState();
 const store = configureStore([]);
@@ -38,6 +40,8 @@ const mote: DialogmoteDTO = {
   tid: "2021-05-10T09:00:00.000",
   sted: "Videomøte",
 };
+const tekstTilArbeidstaker = "Noe tekst til arbeidstaker";
+const tekstTilArbeidsgiver = "Noe tekst til arbeidsgiver";
 
 describe("AvlysDialogmoteSkjemaTest", () => {
   it("viser møtetidspunkt", () => {
@@ -76,26 +80,26 @@ describe("AvlysDialogmoteSkjemaTest", () => {
     expect(
       feilmeldinger.someWhere(
         (feil) =>
-          feil.text() === "Vennligst angi begrunnelse til arbeidstakeren"
+          feil.text() === valideringsTexts.begrunnelseArbeidstakerMissing
       )
     ).to.be.true;
     expect(
       feilmeldinger.someWhere(
         (feil) =>
-          feil.text() === "Vennligst angi begrunnelse til nærmeste leder"
+          feil.text() === valideringsTexts.begrunnelseArbeidsgiverMissing
       )
     ).to.be.true;
 
     // Feilmeldinger i oppsummering
     const feiloppsummering = wrapper.find(Feiloppsummering);
     expect(feiloppsummering.text()).to.contain(
-      "For å gå videre må du rette opp følgende:"
+      skjemaFeilOppsummeringTexts.title
     );
     expect(feiloppsummering.text()).to.contain(
-      "Vennligst angi begrunnelse til arbeidstakeren"
+      valideringsTexts.begrunnelseArbeidstakerMissing
     );
     expect(feiloppsummering.text()).to.contain(
-      "Vennligst angi begrunnelse til nærmeste leder"
+      valideringsTexts.begrunnelseArbeidsgiverMissing
     );
   });
   it("valideringsmeldinger forsvinner ved utbedring", () => {
@@ -118,48 +122,47 @@ describe("AvlysDialogmoteSkjemaTest", () => {
     expect(
       feilmeldinger.someWhere(
         (feil) =>
-          feil.text() === "Vennligst angi begrunnelse til arbeidstakeren"
+          feil.text() === valideringsTexts.begrunnelseArbeidstakerMissing
       )
     ).to.be.true;
     expect(
       feilmeldinger.someWhere(
         (feil) =>
-          feil.text() === "Vennligst angi begrunnelse til nærmeste leder"
+          feil.text() === valideringsTexts.begrunnelseArbeidsgiverMissing
       )
     ).to.be.true;
 
     // Feilmeldinger i oppsummering
     const feiloppsummering = wrapper.find(Feiloppsummering);
     expect(feiloppsummering.text()).to.contain(
-      "For å gå videre må du rette opp følgende:"
+      skjemaFeilOppsummeringTexts.title
     );
     expect(feiloppsummering.text()).to.contain(
-      "Vennligst angi begrunnelse til arbeidstakeren"
+      valideringsTexts.begrunnelseArbeidstakerMissing
     );
     expect(feiloppsummering.text()).to.contain(
-      "Vennligst angi begrunnelse til nærmeste leder"
+      valideringsTexts.begrunnelseArbeidsgiverMissing
     );
 
     // Angi begrunnelser
-    const textAreas = wrapper.find("textarea");
-    textAreas
-      .findWhere((w) => w.prop("name") === "begrunnelseArbeidsgiver")
-      .simulate("change", { target: { value: "Noe tekst til arbeidsgiver" } });
-    textAreas
-      .findWhere((w) => w.prop("name") === "begrunnelseArbeidstaker")
-      .simulate("change", { target: { value: "Noe tekst til arbeidstaker" } });
+    changeTextAreaValue(
+      wrapper,
+      "begrunnelseArbeidsgiver",
+      tekstTilArbeidsgiver
+    );
+    changeTextAreaValue(
+      wrapper,
+      "begrunnelseArbeidstaker",
+      tekstTilArbeidstaker
+    );
 
     // Feilmeldinger og feiloppsummering forsvinner
     expect(wrapper.find(Feiloppsummering)).to.have.length(0);
     expect(wrapper.find(Feilmelding)).to.have.length(0);
 
     // Fjern begrunnelser
-    textAreas
-      .findWhere((w) => w.prop("name") === "begrunnelseArbeidsgiver")
-      .simulate("change", { target: { value: "" } });
-    textAreas
-      .findWhere((w) => w.prop("name") === "begrunnelseArbeidstaker")
-      .simulate("change", { target: { value: "" } });
+    changeTextAreaValue(wrapper, "begrunnelseArbeidsgiver", "");
+    changeTextAreaValue(wrapper, "begrunnelseArbeidstaker", "");
 
     // Feilmeldinger vises, feiloppsummering vises ved neste submit
     expect(wrapper.find(Feiloppsummering)).to.have.length(0);
@@ -182,13 +185,16 @@ describe("AvlysDialogmoteSkjemaTest", () => {
       </MemoryRouter>
     );
 
-    const textAreas = wrapper.find("textarea");
-    textAreas
-      .findWhere((w) => w.prop("name") === "begrunnelseArbeidsgiver")
-      .simulate("change", { target: { value: "Noe tekst til arbeidsgiver" } });
-    textAreas
-      .findWhere((w) => w.prop("name") === "begrunnelseArbeidstaker")
-      .simulate("change", { target: { value: "Noe tekst til arbeidstaker" } });
+    changeTextAreaValue(
+      wrapper,
+      "begrunnelseArbeidsgiver",
+      tekstTilArbeidsgiver
+    );
+    changeTextAreaValue(
+      wrapper,
+      "begrunnelseArbeidstaker",
+      tekstTilArbeidstaker
+    );
 
     wrapper.find("form").simulate("submit");
 
@@ -199,13 +205,24 @@ describe("AvlysDialogmoteSkjemaTest", () => {
       data: {
         arbeidsgiver: {
           avlysning: [],
-          begrunnelse: "Noe tekst til arbeidsgiver",
+          begrunnelse: tekstTilArbeidsgiver,
         },
         arbeidstaker: {
           avlysning: [],
-          begrunnelse: "Noe tekst til arbeidstaker",
+          begrunnelse: tekstTilArbeidstaker,
         },
       },
     });
   });
 });
+
+const changeTextAreaValue = (
+  wrapper: ReactWrapper<any, any>,
+  textAreaName: string,
+  value: string
+) => {
+  const textAreas = wrapper.find("textarea");
+  textAreas
+    .findWhere((w) => w.prop("name") === textAreaName)
+    .simulate("change", { target: { value: value } });
+};

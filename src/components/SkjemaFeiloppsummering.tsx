@@ -1,16 +1,17 @@
 import { Feiloppsummering, FeiloppsummeringFeil } from "nav-frontend-skjema";
 import React, { ReactElement, useEffect, useRef } from "react";
 import { FlexColumn, FlexRow, PaddingSize } from "./Layout";
+import { harFeilmeldinger } from "../utils/feilmeldingerUtils";
 
 interface SkjemaFeil {
-  [key: string]: string;
+  [key: string]: string | undefined;
 }
 
 interface SkjemaFeiloppsummeringProps {
   errors?: SkjemaFeil;
 }
 
-const texts = {
+export const texts = {
   title: "For å gå videre må du rette opp følgende:",
 };
 
@@ -31,7 +32,7 @@ export const SkjemaFeiloppsummering = ({
     }
   }, [feiloppsummeringRef]);
 
-  return errors && Object.values(errors).length > 0 ? (
+  return errors && harFeilmeldinger(errors) ? (
     <FlexRow bottomPadding={PaddingSize.MD}>
       <FlexColumn flex={1}>
         <Feiloppsummering
