@@ -39,15 +39,16 @@ const Datovelger = ({ id, name, placeholder }: DatovelgerProps) => {
       {({ input, meta }) => (
         <>
           <Datepicker
+            inputId={id}
             limitations={{ minDate: dayjs(today).format("YYYY-MM-DD") }}
             {...input}
             inputProps={{
               placeholder,
-              "aria-invalid": meta.touched && meta.error !== undefined,
+              "aria-invalid": meta.submitFailed && meta.error !== undefined,
             }}
           />
           <SkjemaelementFeilmelding>
-            {meta.touched && meta.error}
+            {meta.submitFailed && meta.error}
           </SkjemaelementFeilmelding>
         </>
       )}

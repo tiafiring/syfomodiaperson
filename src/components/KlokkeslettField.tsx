@@ -18,7 +18,7 @@ const KlokkeslettField = ({ name, label, id }: KlokkeslettFieldProps) => (
         autoComplete="off"
         type="time"
         label={label}
-        feil={meta.touched && meta.error}
+        feil={meta.submitFailed && meta.error}
       />
     )}
   </Field>

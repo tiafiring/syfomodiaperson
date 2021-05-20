@@ -25,21 +25,23 @@ const ArbeidsgiverTittel = styled(Innholdstittel)`
 
 const DialogmoteInnkallingVelgArbeidsgiver = (): ReactElement => {
   const { ledere } = useLedere();
+  const field = "arbeidsgiver";
   return (
     <DialogmoteInnkallingSkjemaSeksjon>
       <ArbeidsgiverTittel>{texts.title}</ArbeidsgiverTittel>
-      <Field<string> name="arbeidsgiver">
+      <Field<string> name={field}>
         {({ input, meta }) => {
           const valgtLeder = ledere.find((l) => l.orgnummer === input.value);
           return (
             <>
               <ArbeidsgiverDropdown
+                id={field}
                 velgArbeidsgiver={input.onChange}
                 ledere={ledere}
                 label={texts.selectLabel}
               />
               <SkjemaelementFeilmelding>
-                {meta.touched && meta.error}
+                {meta.submitFailed && meta.error}
               </SkjemaelementFeilmelding>
               {valgtLeder && (
                 <FlexRow topPadding={PaddingSize.MD}>

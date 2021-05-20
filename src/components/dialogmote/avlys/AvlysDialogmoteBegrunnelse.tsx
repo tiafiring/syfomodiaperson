@@ -26,7 +26,8 @@ const AvlysDialogmoteBegrunnelse = ({
             <FritekstStor
               label={label}
               maxLength={1000}
-              feil={meta.touched && meta.error}
+              feil={meta.submitFailed && meta.error}
+              id={fieldName}
               {...input}
             />
           )}

@@ -13,6 +13,9 @@ import { Form } from "react-final-form";
 import DialogmoteInfo from "./DialogmoteInfo";
 import { DialogmoteDTO } from "../../../data/dialogmote/dialogmoteTypes";
 import AvlysDialogmoteBegrunnelse from "./AvlysDialogmoteBegrunnelse";
+import { SkjemaFeiloppsummering } from "../../SkjemaFeiloppsummering";
+import { useFeilUtbedret } from "../../../hooks/useFeilUtbedret";
+import { validerBegrunnelser } from "../../../utils/valideringUtils";
 
 const texts = {
   begrunnelseArbeidstakerLabel: "Begrunnelse til arbeidstakeren",
@@ -21,10 +24,6 @@ const texts = {
   avbryt: "Avbryt",
   errorMsg:
     "Møtet kunne ikke avlyses på grunn av en midlertidig teknisk feil. Prøv igjen.",
-  begrunnelseArbeidstakerMissing:
-    "Vennligst angi begrunnelse til arbeidstakeren",
-  begrunnelseArbeidsgiverMissing:
-    "Vennligst angi begrunnelse til nærmeste leder",
 };
 
 interface AvlysDialogmoteSkjemaProps {
@@ -44,21 +43,6 @@ const SendButton = styled(Hovedknapp)`
   margin-right: 0.5rem;
 `;
 
-const validate = (
-  values: Partial<AvlysDialogmoteSkjemaValues>
-): Partial<AvlysDialogmoteSkjemaValues> => {
-  const { begrunnelseArbeidstaker, begrunnelseArbeidsgiver } = values;
-  const feil: Partial<AvlysDialogmoteSkjemaValues> = {};
-  if (!begrunnelseArbeidstaker || begrunnelseArbeidstaker.trim() === "") {
-    feil.begrunnelseArbeidstaker = texts.begrunnelseArbeidstakerMissing;
-  }
-  if (!begrunnelseArbeidsgiver || begrunnelseArbeidsgiver.trim() === "") {
-    feil.begrunnelseArbeidsgiver = texts.begrunnelseArbeidsgiverMissing;
-  }
-
-  return feil;
-};
-
 const AvlysDialogmoteSkjema = ({
   dialogmote,
 }: AvlysDialogmoteSkjemaProps): ReactElement => {
@@ -67,6 +51,22 @@ const AvlysDialogmoteSkjema = ({
   const { avlyserMote, avlysMoteFeilet } = useAppSelector(
     (state) => state.dialogmote
   );
+  const {
+    feilUtbedret,
+    resetFeilUtbedret,
+    updateFeilUtbedret,
+  } = useFeilUtbedret();
+
+  const validate = (
+    values: Partial<AvlysDialogmoteSkjemaValues>
+  ): Partial<AvlysDialogmoteSkjemaValues> => {
+    const feil = validerBegrunnelser({
+      ...values,
+    });
+    updateFeilUtbedret(feil);
+
+    return feil;
+  };
 
   const submit = (values: AvlysDialogmoteSkjemaValues) => {
     dispatch(
@@ -86,7 +86,7 @@ const AvlysDialogmoteSkjema = ({
   return (
     <AvlysPanel>
       <Form initialValues={{}} onSubmit={submit} validate={validate}>
-        {({ handleSubmit }) => (
+        {({ handleSubmit, submitFailed, errors }) => (
           <form onSubmit={handleSubmit}>
             <DialogmoteInfo dialogmote={dialogmote} />
             <AvlysDialogmoteBegrunnelse
@@ -102,8 +102,12 @@ const AvlysDialogmoteSkjema = ({
                 <AlertStripeFeil>{texts.errorMsg}</AlertStripeFeil>
               </FlexRow>
             )}
+            {submitFailed && !feilUtbedret && (
+              <SkjemaFeiloppsummering errors={errors} />
+            )}
             <FlexRow>
               <SendButton
+                onClick={resetFeilUtbedret}
                 htmlType="submit"
                 spinner={avlyserMote}
                 autoDisableVedSpinner

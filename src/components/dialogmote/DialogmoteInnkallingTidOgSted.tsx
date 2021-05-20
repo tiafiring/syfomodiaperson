@@ -27,50 +27,60 @@ const TidOgStedTittel = styled(Innholdstittel)`
   margin-bottom: 1em;
 `;
 
-const DialogmoteInnkallingTidOgSted = (): ReactElement => (
-  <DialogmoteInnkallingSkjemaSeksjon>
-    <TidOgStedTittel>{texts.title}</TidOgStedTittel>
-    <FlexRow bottomPadding={PaddingSize.MD}>
-      <DatoColumn>
-        <Label htmlFor="tidspunkt.dato">{texts.datoLabel}</Label>
-        <Datovelger
-          id="tidspunkt.dato"
-          name="tidspunkt.dato"
-          placeholder={texts.datoPlaceholder}
-        />
-      </DatoColumn>
-      <FlexColumn flex={1}>
-        <KlokkeslettField name="tidspunkt.klokkeslett" label={texts.tidLabel} />
-      </FlexColumn>
-    </FlexRow>
-    <FlexRow bottomPadding={PaddingSize.MD}>
-      <FlexColumn flex={1}>
-        <Field<string> name="sted">
-          {({ input, meta }) => (
-            <Input
-              {...input}
-              placeholder={texts.stedPlaceholder}
-              label={texts.stedLabel}
-              feil={meta.touched && meta.error}
-            />
-          )}
-        </Field>
-      </FlexColumn>
-    </FlexRow>
-    <FlexRow>
-      <FlexColumn flex={1}>
-        <Field<string> name="videoLink">
-          {({ input }) => (
-            <Input
-              {...input}
-              label={texts.videoLabel}
-              placeholder={texts.videoPlaceholder}
-            />
-          )}
-        </Field>
-      </FlexColumn>
-    </FlexRow>
-  </DialogmoteInnkallingSkjemaSeksjon>
-);
+const DialogmoteInnkallingTidOgSted = (): ReactElement => {
+  const datoField = "dato";
+  const klokkeslettField = "klokkeslett";
+  const stedField = "sted";
+  return (
+    <DialogmoteInnkallingSkjemaSeksjon>
+      <TidOgStedTittel>{texts.title}</TidOgStedTittel>
+      <FlexRow bottomPadding={PaddingSize.MD}>
+        <DatoColumn>
+          <Label htmlFor={datoField}>{texts.datoLabel}</Label>
+          <Datovelger
+            id={datoField}
+            name={datoField}
+            placeholder={texts.datoPlaceholder}
+          />
+        </DatoColumn>
+        <FlexColumn flex={1}>
+          <KlokkeslettField
+            id={klokkeslettField}
+            name={klokkeslettField}
+            label={texts.tidLabel}
+          />
+        </FlexColumn>
+      </FlexRow>
+      <FlexRow bottomPadding={PaddingSize.MD}>
+        <FlexColumn flex={1}>
+          <Field<string> name={stedField}>
+            {({ input, meta }) => (
+              <Input
+                {...input}
+                id={stedField}
+                placeholder={texts.stedPlaceholder}
+                label={texts.stedLabel}
+                feil={meta.submitFailed && meta.error}
+              />
+            )}
+          </Field>
+        </FlexColumn>
+      </FlexRow>
+      <FlexRow>
+        <FlexColumn flex={1}>
+          <Field<string> name="videoLink">
+            {({ input }) => (
+              <Input
+                {...input}
+                label={texts.videoLabel}
+                placeholder={texts.videoPlaceholder}
+              />
+            )}
+          </Field>
+        </FlexColumn>
+      </FlexRow>
+    </DialogmoteInnkallingSkjemaSeksjon>
+  );
+};
 
 export default DialogmoteInnkallingTidOgSted;

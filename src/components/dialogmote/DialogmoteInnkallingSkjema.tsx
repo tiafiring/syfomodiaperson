@@ -20,44 +20,31 @@ import { AlertStripeFeil } from "nav-frontend-alertstriper";
 import { useAppSelector } from "../../hooks/hooks";
 import { useFnrParam } from "../../hooks/useFnrParam";
 import { FlexRow, PaddingSize } from "../Layout";
+import { SkjemaFeiloppsummering } from "../SkjemaFeiloppsummering";
+import { useFeilUtbedret } from "../../hooks/useFeilUtbedret";
 
 interface DialogmoteInnkallingSkjemaValues {
   arbeidsgiver: string;
-  tidspunkt: {
-    klokkeslett: string;
-    dato: string;
-  };
+  klokkeslett: string;
+  dato: string;
   sted: string;
   videoLink?: string;
   fritekstArbeidsgiver?: string;
   fritekstArbeidstaker?: string;
 }
 
-interface DialogmoteInnkallingSkjemaFeil {
-  arbeidsgiver?: string;
-  sted?: string;
-  tidspunkt: {
-    klokkeslett?: string;
-    dato?: string;
-  };
-}
+type DialogmoteInnkallingSkjemaFeil = Partial<
+  Pick<
+    DialogmoteInnkallingSkjemaValues,
+    "arbeidsgiver" | "sted" | "klokkeslett" | "dato"
+  >
+>;
 
 const texts = {
   send: "Send innkallingene",
   cancel: "Avbryt",
   errorMsg:
     "Innkallingene kunne ikke sendes på grunn av en midlertidig teknisk feil. Prøv igjen.",
-};
-
-const validate = (
-  values: Partial<DialogmoteInnkallingSkjemaValues>
-): DialogmoteInnkallingSkjemaFeil => {
-  const feilmeldinger: DialogmoteInnkallingSkjemaFeil = { tidspunkt: {} };
-  feilmeldinger.sted = validerSted(values.sted);
-  feilmeldinger.tidspunkt = validerTidspunkt(values.tidspunkt);
-  feilmeldinger.arbeidsgiver = validerArbeidsgiver(values.arbeidsgiver);
-
-  return feilmeldinger;
 };
 
 const toInnkalling = (
@@ -79,7 +66,7 @@ const toInnkalling = (
   tidSted: {
     sted: values.sted,
     videoLink: values.videoLink,
-    tid: genererDato(values.tidspunkt.dato, values.tidspunkt.klokkeslett),
+    tid: genererDato(values.dato, values.klokkeslett),
   },
 });
 
@@ -91,6 +78,27 @@ const DialogmoteInnkallingSkjema = (): ReactElement => {
   const { senderInnkalling, sendInnkallingFeilet } = useAppSelector(
     (state) => state.dialogmote
   );
+  const {
+    feilUtbedret,
+    resetFeilUtbedret,
+    updateFeilUtbedret,
+  } = useFeilUtbedret();
+
+  const validate = (
+    values: Partial<DialogmoteInnkallingSkjemaValues>
+  ): DialogmoteInnkallingSkjemaFeil => {
+    const feilmeldinger: DialogmoteInnkallingSkjemaFeil = {
+      arbeidsgiver: validerArbeidsgiver(values.arbeidsgiver),
+      ...validerTidspunkt({
+        dato: values.dato,
+        klokkeslett: values.klokkeslett,
+      }),
+      sted: validerSted(values.sted),
+    };
+    updateFeilUtbedret(feilmeldinger);
+
+    return feilmeldinger;
+  };
 
   const submit = (values: DialogmoteInnkallingSkjemaValues) => {
     const dialogmoteInnkalling = toInnkalling(values, fnr, navEnhet);
@@ -100,7 +108,7 @@ const DialogmoteInnkallingSkjema = (): ReactElement => {
   return (
     <Panel>
       <Form initialValues={initialValues} onSubmit={submit} validate={validate}>
-        {({ handleSubmit }) => (
+        {({ handleSubmit, submitFailed, errors }) => (
           <form onSubmit={handleSubmit}>
             <DialogmoteInnkallingVelgArbeidsgiver />
             <DialogmoteInnkallingTidOgSted />
@@ -110,8 +118,12 @@ const DialogmoteInnkallingSkjema = (): ReactElement => {
                 <AlertStripeFeil>{texts.errorMsg}</AlertStripeFeil>
               </FlexRow>
             )}
+            {submitFailed && !feilUtbedret && (
+              <SkjemaFeiloppsummering errors={errors} />
+            )}
             <FlexRow>
               <Hovedknapp
+                onClick={resetFeilUtbedret}
                 spinner={senderInnkalling}
                 autoDisableVedSpinner
                 htmlType="submit"
