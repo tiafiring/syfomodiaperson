@@ -8,7 +8,6 @@ import Sidetopp from "../Sidetopp";
 import UtdragFraSykefravaeret from "../utdragFraSykefravaeret/UtdragFraSykefravaeret";
 
 const texts = {
-  pageTitle: "Nøkkelinformasjon",
   comingSoon: `
        Denne siden er under utvikling. 
     `,
@@ -24,6 +23,7 @@ interface MeldingTilArbeidsgiverProps {
   oppfolgingstilfelleUtenArbeidsgiver: any;
   oppfolgingstilfelleperioder: any;
   sykmeldinger: any;
+  pageTitle: string;
 }
 
 const Nokkelinformasjon = (
@@ -35,6 +35,7 @@ const Nokkelinformasjon = (
     oppfolgingstilfelleUtenArbeidsgiver,
     oppfolgingstilfelleperioder,
     sykmeldinger,
+    pageTitle,
   } = meldingTilArbeidsgiverProps;
 
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ const Nokkelinformasjon = (
 
   return (
     <div>
-      <Sidetopp tittel={texts.pageTitle} />
+      <Sidetopp tittel={pageTitle} />
 
       <AlertStripeDevelopment>{texts.comingSoon}</AlertStripeDevelopment>
 

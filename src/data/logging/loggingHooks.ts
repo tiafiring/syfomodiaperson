@@ -5,6 +5,7 @@ import { trackEvent } from "../../amplitude/amplitude";
 
 export const texts = {
   buttonClick: "Klikker på knapp",
+  navigateTo: "Navigerer til",
 };
 
 export interface loggingMetadata {
@@ -46,5 +47,15 @@ export const useTrackButtonClick = () => {
 
   return function (buttonName: string, kontekst: string) {
     trackEvent(`${texts.buttonClick} '${buttonName}'`, { kontekst: kontekst });
+  };
+};
+
+export const useTrackNavigation = () => {
+  const trackEvent = useTrackEvent();
+
+  return function (pageName: string, aktivtMenyPunkt: string) {
+    trackEvent(`${texts.navigateTo} '${pageName}'`, {
+      aktivtMenyPunkt: aktivtMenyPunkt,
+    });
   };
 };

@@ -16,6 +16,7 @@ import { useOppfoelgingsDialoger } from "../../../hooks/useOppfoelgingsDialoger"
 import { useTilgang } from "../../../hooks/useTilgang";
 
 const texts = {
+  pageTitle: "Nøkkelinformasjon",
   feilmelding: "Du har ikke tilgang til denne tjenesten",
 };
 
@@ -67,7 +68,11 @@ export const NokkelinformasjonSide = () => {
   }, [ledereState, sykmeldingerState]);
 
   return (
-    <Side fnr={fnr} tittel="Møtebehov" aktivtMenypunkt={NOKKELINFORMASJON}>
+    <Side
+      fnr={fnr}
+      tittel={texts.pageTitle}
+      aktivtMenypunkt={NOKKELINFORMASJON}
+    >
       {(() => {
         if (henter) {
           return <AppSpinner />;
@@ -90,6 +95,7 @@ export const NokkelinformasjonSide = () => {
             }
             oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
             sykmeldinger={sykmeldinger}
+            pageTitle={texts.pageTitle}
           />
         );
       })()}
