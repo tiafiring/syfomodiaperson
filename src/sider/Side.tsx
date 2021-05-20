@@ -1,24 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Column, Container, Row } from "nav-frontend-grid";
 import GlobalNavigasjonContainer from "../components/globalnavigasjon/GlobalNavigasjonContainer";
 import Personkort from "../components/personkort/Personkort";
 import Decorator from "../decorator/Decorator";
 import DocumentTitle from "react-document-title";
+import { useTrackNavigation } from "../data/logging/loggingHooks";
 
 const StyledContainer = styled(Container)`
   width: 95%;
 `;
 
 interface SideProps {
-  tittel?: string;
+  tittel: string;
   children?: any;
-  aktivtMenypunkt?: string;
+  aktivtMenypunkt: string;
   fnr?: string;
 }
 
 const Side = (sideProps: SideProps) => {
-  const { tittel = "", children, aktivtMenypunkt, fnr } = sideProps;
+  const { tittel, children, aktivtMenypunkt, fnr } = sideProps;
+  const trackNavigation = useTrackNavigation();
+
+  useEffect(() => {
+    trackNavigation(tittel, aktivtMenypunkt);
+  }, []);
+
   return (
     <>
       <Decorator />

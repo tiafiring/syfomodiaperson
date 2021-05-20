@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Column } from "nav-frontend-grid";
 import Personkort from "../components/personkort/Personkort";
 import Decorator from "../decorator/Decorator";
 import DocumentTitle from "react-document-title";
+import { useTrackNavigation } from "../data/logging/loggingHooks";
 
 interface SideFullbreddeProps {
-  tittel?: string;
+  tittel: string;
+  aktivtMenypunkt: string;
   children?: any;
 }
 
 const Side = (sideFullbreddeProps: SideFullbreddeProps) => {
-  const { tittel = "", children } = sideFullbreddeProps;
+  const { tittel, aktivtMenypunkt, children } = sideFullbreddeProps;
+  const trackNavigation = useTrackNavigation();
+
+  useEffect(() => {
+    trackNavigation(tittel, aktivtMenypunkt);
+  }, []);
+
   return (
     <>
       <Decorator />

@@ -85,7 +85,11 @@ const DinSykmeldingSide = () => {
   ];
 
   return (
-    <Side fnr={fnr} tittel="Sykmeldinger" aktivtMenypunkt={SYKMELDINGER}>
+    <Side
+      fnr={fnr}
+      tittel={texts.pageTitleSykmelding}
+      aktivtMenypunkt={SYKMELDINGER}
+    >
       {(() => {
         if (henter) {
           return <AppSpinner />;
