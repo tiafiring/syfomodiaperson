@@ -50,7 +50,6 @@ const AvbruttSoknadArbeidstaker = ({ brukernavn, brodsmuler, soknad, fnr }) => {
         tittel="Søknad om sykepenger"
         brukernavn={brukernavn}
         brodsmuler={brodsmuler}
-        fnr={fnr}
       >
         <AvbruttSoknadArbeidstakerStatuspanel soknad={soknad} />
         <SykmeldingUtdrag soknad={soknad} fnr={fnr} />

@@ -20,4 +20,4 @@ Du må ha Node installert.
 - Kjør tester med `npm test` eller `npm test:watch`
 - Lint JS-kode med `npm run lint` eller `npm run lint:fix`
 
-Appen nås på [http://localhost:8080/sykefravaer/:fnr](http://localhost:8080/sykefravaer/:fnr) hvor 'fnr' må ha et gyldig format.
+Appen nås på [http://localhost:8080/sykefravaer](http://localhost:8080/sykefravaer)

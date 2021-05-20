@@ -36,7 +36,7 @@ interface SoknaderProps {
 }
 
 const Soknader = (soknaderProps: SoknaderProps): ReactElement => {
-  const { fnr, soknader = [] } = soknaderProps;
+  const { soknader = [] } = soknaderProps;
   const alleSoknader = [...soknader];
 
   const nyeSoknader = alleSoknader
@@ -71,7 +71,6 @@ const Soknader = (soknaderProps: SoknaderProps): ReactElement => {
       <Sidetopp tittel={texts.sidetittel} />
       <SoknadTeasere
         sykepengesoknader={nyeSoknader}
-        fnr={fnr}
         tittel={texts.nyeSoknader}
         tomListeTekst={texts.ingenSoknader}
         className="js-til-behandling"
@@ -88,7 +87,6 @@ const Soknader = (soknaderProps: SoknaderProps): ReactElement => {
       {sendteSoknader.length > 0 && (
         <SoknadTeasere
           sykepengesoknader={sendteSoknader}
-          fnr={fnr}
           tittel={texts.tidligereSoknader}
           tomListeTekst={texts.tidligereSoknader}
           className="js-sendt"

@@ -33,7 +33,6 @@ const SendtSoknadArbeidstakerNy = ({ brukernavn, brodsmuler, soknad, fnr }) => {
       tittel="Søknad om sykepenger"
       brukernavn={brukernavn}
       brodsmuler={brodsmuler}
-      fnr={fnr}
     >
       {soknad.status === KORRIGERT && (
         <KorrigertAvContainer sykepengesoknad={soknad} fnr={fnr} />

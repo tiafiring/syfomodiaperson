@@ -108,7 +108,7 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-export const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state) => {
   const oppfolgingstilfelleperioder = state.oppfolgingstilfelleperioder;
   const henterTilfeller =
     Object.keys(oppfolgingstilfelleperioder).findIndex((orgnummer) => {
@@ -120,8 +120,10 @@ export const mapStateToProps = (state, ownProps) => {
   const formerLedere = state.ledere.formerLedere;
   const allLedere = [...currentLedere, ...formerLedere];
 
+  const fnr = state.valgtbruker.personident;
+
   return {
-    fnr: ownProps.match.params.fnr,
+    fnr,
     oppfolgingstilfelleperioder,
     historikk: state.historikk,
     henter,

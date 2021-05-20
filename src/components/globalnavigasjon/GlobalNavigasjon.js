@@ -114,7 +114,6 @@ class GlobalNavigasjon extends Component {
 
   render() {
     const {
-      fnr,
       aktivtMenypunkt,
       motebehovReducer,
       moterReducer,
@@ -152,7 +151,7 @@ class GlobalNavigasjon extends Component {
               <a
                 ref={this.getRef(index)}
                 className={className}
-                href={`/sykefravaer/${fnr}/${sti}`}
+                href={`/sykefravaer/${sti}`}
                 onFocus={() => {
                   this.setFocusIndex(index);
                 }}
@@ -163,7 +162,7 @@ class GlobalNavigasjon extends Component {
                   e.preventDefault();
                   // Dette gjøres slik for å slippe å laste siden på nytt.
                   // <Link /> fra react-router kan ikke brukes da den ikke støtter ref-attributtet.
-                  history.push(`/sykefravaer/${fnr}/${sti}`);
+                  history.push(`/sykefravaer/${sti}`);
                 }}
               >
                 <span

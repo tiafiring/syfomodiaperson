@@ -17,11 +17,11 @@ const texts = {
 };
 
 const SykepengesoknadSelvstendig = (props) => {
-  const { soknad, fnr } = props;
+  const { soknad } = props;
   switch (soknad.status) {
     case NY:
     case FREMTIDIG: {
-      return <IkkeInnsendtSoknad fnr={fnr} />;
+      return <IkkeInnsendtSoknad />;
     }
     case AVBRUTT: {
       return (

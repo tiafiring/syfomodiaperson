@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { useHistory } from "react-router";
 import Veileder from "nav-frontend-veileder";
 import { FlexColumn, FlexRow, ModalContentContainer } from "../../../Layout";
-import { useFnrParam } from "../../../../hooks/useFnrParam";
 import { TrackedKnapp } from "../../../buttons/TrackedKnapp";
 import { TrackedFlatknapp } from "../../../buttons/TrackedFlatknapp";
 
@@ -35,7 +34,6 @@ export const NyttDialogMote = (): ReactElement => {
   const [behandlerModalIsOpen, setBehandlerModalIsOpen] = useState(false);
   const [nyLosningModalIsOpen, setNyLosningModalIsOpen] = useState(false);
   const history = useHistory();
-  const fnr = useFnrParam();
 
   return (
     <>
@@ -68,7 +66,7 @@ export const NyttDialogMote = (): ReactElement => {
                 context={texts.behandlerVaereMedTrackingContext}
                 onClick={() => {
                   setBehandlerModalIsOpen(false);
-                  history.push(`/sykefravaer/${fnr}/mote`);
+                  history.push(`/sykefravaer/mote`);
                 }}
               >
                 {texts.ja}
@@ -127,7 +125,7 @@ export const NyttDialogMote = (): ReactElement => {
                 context={texts.modalOnskerDuProveTrackingContext}
                 onClick={() => {
                   setNyLosningModalIsOpen(false);
-                  history.push(`/sykefravaer/${fnr}/dialogmote`);
+                  history.push(`/sykefravaer/dialogmote`);
                 }}
               >
                 {texts.ja}
@@ -138,7 +136,7 @@ export const NyttDialogMote = (): ReactElement => {
                 context={texts.modalOnskerDuProveTrackingContext}
                 onClick={() => {
                   setNyLosningModalIsOpen(false);
-                  history.push(`/sykefravaer/${fnr}/mote`);
+                  history.push(`/sykefravaer/mote`);
                 }}
               >
                 {texts.nei}

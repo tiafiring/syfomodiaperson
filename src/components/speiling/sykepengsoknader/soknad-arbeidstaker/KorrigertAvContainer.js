@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import AlertStripe from "nav-frontend-alertstriper";
@@ -16,7 +15,7 @@ const textKorrigert = (dato) => {
   return `${texts.korrigert} ${dato}.`;
 };
 
-export const KorrigertAv = ({ korrigertAvSoknad, fnr }) => {
+export const KorrigertAv = ({ korrigertAvSoknad }) => {
   return (
     <AlertStripe type="info" className="blokk">
       <p className="sist">
@@ -27,7 +26,7 @@ export const KorrigertAv = ({ korrigertAvSoknad, fnr }) => {
       <p className="sist">
         <Link
           className="lenke"
-          to={`/sykefravaer/${fnr}/sykepengesoknader/${korrigertAvSoknad.id}`}
+          to={`/sykefravaer/sykepengesoknader/${korrigertAvSoknad.id}`}
         >
           {texts.lenketekst}
         </Link>
@@ -38,7 +37,6 @@ export const KorrigertAv = ({ korrigertAvSoknad, fnr }) => {
 
 KorrigertAv.propTypes = {
   korrigertAvSoknad: soknadEllerSykepengesoknad,
-  fnr: PropTypes.string,
 };
 
 export const mapStateToProps = (state, ownProps) => {

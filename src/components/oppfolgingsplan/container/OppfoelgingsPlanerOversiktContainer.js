@@ -95,7 +95,7 @@ OppfoelgingsPlanerOversiktSide.propTypes = {
   veilederIdent: PropTypes.string,
 };
 
-export function mapStateToProps(state, ownProps) {
+export function mapStateToProps(state) {
   const harForsoktHentetAlt =
     harForsoktHentetOppfoelgingsdialoger(state.oppfoelgingsdialoger) &&
     state.oppfolgingsplanerlps.hentingForsokt &&
@@ -123,7 +123,7 @@ export function mapStateToProps(state, ownProps) {
 
   return {
     brukernavn: state.navbruker.data.navn,
-    fnr: ownProps.match.params.fnr,
+    fnr: state.valgtbruker.personident,
     henter,
     hentingFeilet,
     inaktiveDialoger,

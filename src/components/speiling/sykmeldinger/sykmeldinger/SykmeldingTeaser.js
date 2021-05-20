@@ -124,7 +124,7 @@ class SykmeldingTeaser extends Component {
       >
         <Link
           className="inngangspanel inngangspanel--sykmelding"
-          to={`/sykefravaer/${this.props.fnr}/sykmeldinger/${this.props.sykmelding.id}`}
+          to={`/sykefravaer/sykmeldinger/${this.props.sykmelding.id}`}
           onMouseEnter={() => {
             this.onMouseEnter(behandlingsutfallStatus);
           }}

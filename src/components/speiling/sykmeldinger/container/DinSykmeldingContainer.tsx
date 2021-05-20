@@ -17,6 +17,7 @@ import { ARBEIDSTAKER } from "../../../../enums/arbeidssituasjoner";
 import { hentBegrunnelseTekst } from "../../../../utils/tilgangUtils";
 import { harForsoktHentetSykmeldinger } from "../../../../utils/reducerUtils";
 import { useTilgang } from "../../../../hooks/useTilgang";
+import { useValgtPersonident } from "../../../../hooks/useValgtBruker";
 
 const texts = {
   pageTitleSykmelding: "Sykmelding",
@@ -40,8 +41,8 @@ export function getSykmelding(
 }
 
 const DinSykmeldingSide = () => {
-  const fnr = window.location.pathname.split("/")[2];
-  const sykmeldingId = window.location.pathname.split("/")[4];
+  const fnr = useValgtPersonident();
+  const sykmeldingId = window.location.pathname.split("/")[3];
 
   const navbrukerState = useSelector((state: any) => state.navbruker);
   const sykmeldingerState = useSelector((state: any) => state.sykmeldinger);
@@ -115,7 +116,6 @@ const DinSykmeldingSide = () => {
               <SykmeldingSide
                 dinSykmelding={dinSykmelding}
                 arbeidsgiversSykmelding={arbeidsgiversSykmelding}
-                fnr={fnr}
               />
             </div>
           </div>

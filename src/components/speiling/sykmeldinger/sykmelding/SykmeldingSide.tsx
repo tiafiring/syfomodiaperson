@@ -19,11 +19,10 @@ import KoronaSykmeldingAvbrutt from "./koronasykmeldinger/KoronaSykmelding-Avbru
 interface SykmeldingSideProps {
   dinSykmelding?: SykmeldingOldFormat;
   arbeidsgiversSykmelding?: SykmeldingOldFormat;
-  fnr: string;
 }
 
 const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
-  const { dinSykmelding, arbeidsgiversSykmelding, fnr } = sykmeldingSideProps;
+  const { dinSykmelding, arbeidsgiversSykmelding } = sykmeldingSideProps;
   return (() => {
     if (!dinSykmelding) {
       return <Feilmelding tittel="Fant ikke sykmelding" />;
@@ -35,7 +34,7 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
       return (
         <div>
           <AvvistSykmelding sykmelding={dinSykmelding} />
-          <LenkeTilDineSykmeldinger fnr={fnr} />
+          <LenkeTilDineSykmeldinger />
         </div>
       );
     }
@@ -45,7 +44,7 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
           return (
             <div>
               <KoronaSykmeldingBekreftet dinSykmelding={dinSykmelding} />
-              <LenkeTilDineSykmeldinger fnr={fnr} />
+              <LenkeTilDineSykmeldinger />
             </div>
           );
         }
@@ -53,7 +52,7 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
           return (
             <>
               <KoronaSykmeldingNy sykmelding={dinSykmelding} />
-              <LenkeTilDineSykmeldinger fnr={fnr} />
+              <LenkeTilDineSykmeldinger />
             </>
           );
         }
@@ -61,7 +60,7 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
           return (
             <div>
               <KoronaSykmeldingAvbrutt sykmelding={dinSykmelding} />
-              <LenkeTilDineSykmeldinger fnr={fnr} />
+              <LenkeTilDineSykmeldinger />
             </div>
           );
         }
@@ -79,7 +78,7 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
             dinSykmelding={dinSykmelding}
             arbeidsgiversSykmelding={arbeidsgiversSykmelding}
           />
-          <LenkeTilDineSykmeldinger fnr={fnr} />
+          <LenkeTilDineSykmeldinger />
         </div>
       );
     } else if (
@@ -92,28 +91,28 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
             dinSykmelding={dinSykmelding}
             arbeidsgiversSykmelding={arbeidsgiversSykmelding}
           />
-          <LenkeTilDineSykmeldinger fnr={fnr} />
+          <LenkeTilDineSykmeldinger />
         </div>
       );
     } else if (dinSykmelding.status === gamleSMStatuser.UTGAATT) {
       return (
         <div>
           <DinUtgaatteSykmelding sykmelding={dinSykmelding} />
-          <LenkeTilDineSykmeldinger fnr={fnr} />
+          <LenkeTilDineSykmeldinger />
         </div>
       );
     } else if (dinSykmelding.status === gamleSMStatuser.NY) {
       return (
         <div>
           <DinSykmelding sykmelding={dinSykmelding} />
-          <LenkeTilDineSykmeldinger fnr={fnr} />
+          <LenkeTilDineSykmeldinger />
         </div>
       );
     } else if (dinSykmelding.status === gamleSMStatuser.AVBRUTT) {
       return (
         <div>
           <DinAvbrutteSykmelding sykmelding={dinSykmelding} />
-          <LenkeTilDineSykmeldinger fnr={fnr} />
+          <LenkeTilDineSykmeldinger />
         </div>
       );
     }

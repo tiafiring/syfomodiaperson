@@ -92,7 +92,6 @@ export class Container extends Component {
           ) {
             return (
               <SykepengesoknadSelvstendig
-                fnr={fnr}
                 brodsmuler={brodsmuler}
                 brukernavn={brukernavn}
                 sykmelding={sykmelding}
@@ -103,7 +102,6 @@ export class Container extends Component {
           if (soknad && soknad.soknadstype === OPPHOLD_UTLAND) {
             return (
               <SykepengesoknadUtland
-                fnr={fnr}
                 brodsmuler={brodsmuler}
                 brukernavn={brukernavn}
                 soknad={soknad}
@@ -126,7 +124,7 @@ export class Container extends Component {
                 soknad={soknad}
               />
             ) : (
-              <IkkeInnsendtSoknad fnr={fnr} />
+              <IkkeInnsendtSoknad />
             );
           }
           if (soknad && soknad.soknadstype === BEHANDLINGSDAGER) {
@@ -179,7 +177,7 @@ export function mapStateToProps(state, ownProps) {
 
   return {
     brukernavn: state.navbruker.data.navn,
-    fnr: ownProps.match.params.fnr,
+    fnr: state.valgtbruker.personident,
     henter,
     hentingFeilet,
     tilgang: state.tilgang.data,

@@ -48,9 +48,7 @@ const OppfoelgingsPlanerOversiktSide = ({
         if (hentingFeilet) {
           return <Feilmelding />;
         }
-        return (
-          <Oppfolgingsplan oppfolgingsplan={oppfoelgingsdialog} fnr={fnr} />
-        );
+        return <Oppfolgingsplan oppfolgingsplan={oppfoelgingsdialog} />;
       })()}
     </SideFullbredde>
   );
@@ -82,7 +80,7 @@ export function mapStateToProps(state, ownProps) {
   return {
     brukernavn: state.navbruker.data.navn,
     oppfoelgingsdialog,
-    fnr: ownProps.match.params.fnr,
+    fnr: state.valgtbruker.personident,
     henter,
     hentingFeilet,
     tilgang: state.tilgang.data,

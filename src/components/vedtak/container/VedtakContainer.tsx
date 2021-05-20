@@ -19,6 +19,7 @@ import {
   MappeAdvarselImage,
   MappeFeilImage,
 } from "../../../../img/ImageComponents";
+import { useValgtPersonident } from "../../../hooks/useValgtBruker";
 
 const texts = {
   pageTitle: "Vedtak",
@@ -35,7 +36,7 @@ const StyledAlertStripe = styled(AlertStripeInfo)`
 `;
 
 const VedtakContainer = () => {
-  const fnr = window.location.pathname.split("/")[2];
+  const fnr = useValgtPersonident();
 
   const vedtakState = useSelector((state: any) => state.vedtak);
   const { tilgang, hentetTilgang, henterTilgang } = useTilgang();

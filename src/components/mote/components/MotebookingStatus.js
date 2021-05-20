@@ -166,7 +166,7 @@ const MotebookingStatus = (props) => {
     <Link
       role="button"
       className="knapp knapp--enten js-avbryt"
-      to={`/sykefravaer/${fnr}/mote/${mote.moteUuid}/avbryt`}
+      to={`/sykefravaer/mote/${mote.moteUuid}/avbryt`}
     >
       {texts.avbrytMote}
     </Link>
@@ -180,11 +180,7 @@ const MotebookingStatus = (props) => {
       <div className="panel">
         {status === BEKREFTET && <BekreftetMotetidspunkt {...props} />}
         {status !== BEKREFTET && !motePassert && (
-          <Svarstatus
-            fnr={fnr}
-            mote={mote}
-            visFlereAlternativ={visFlereAlternativ}
-          >
+          <Svarstatus mote={mote} visFlereAlternativ={visFlereAlternativ}>
             {flereTidspunktBoks}
           </Svarstatus>
         )}

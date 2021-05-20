@@ -73,14 +73,13 @@ export const getGamleAlternativer = (mote: MoteDTO) => {
 };
 
 interface SvarstatusProps {
-  fnr: string;
   mote: MoteDTO;
   visFlereAlternativ: any;
   children: any;
 }
 
 const Svarstatus = (svarstatusProps: SvarstatusProps) => {
-  const { mote, visFlereAlternativ, children, fnr } = svarstatusProps;
+  const { mote, visFlereAlternativ, children } = svarstatusProps;
   const nyeAlternativer = getNyeAlternativer(mote);
   const gamleAlternativer = getGamleAlternativer(mote);
   return (
@@ -90,7 +89,6 @@ const Svarstatus = (svarstatusProps: SvarstatusProps) => {
           mote={mote}
           alternativer={nyeAlternativer}
           deltakertype={MotedeltakerType.NAV_VEILEDER}
-          fnr={fnr}
         />
         <button className="nyetidspunktknapp" onClick={visFlereAlternativ}>
           {texts.flereTidpunkt}
@@ -108,7 +106,6 @@ const Svarstatus = (svarstatusProps: SvarstatusProps) => {
             mote={mote}
             alternativer={gamleAlternativer}
             deltakertype={MotedeltakerType.NAV_VEILEDER}
-            fnr={fnr}
           />
         </Utvidbar>
       )}

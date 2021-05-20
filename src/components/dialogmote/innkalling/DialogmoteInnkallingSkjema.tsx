@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import { useNavEnhet } from "../../../hooks/useNavEnhet";
 import { AlertStripeFeil } from "nav-frontend-alertstriper";
 import { useAppSelector } from "../../../hooks/hooks";
-import { useFnrParam } from "../../../hooks/useFnrParam";
+import { useValgtPersonident } from "../../../hooks/useValgtBruker";
 import { FlexRow, PaddingSize } from "../../Layout";
 import { SkjemaFeiloppsummering } from "../../SkjemaFeiloppsummering";
 import { useFeilUtbedret } from "../../../hooks/useFeilUtbedret";
@@ -85,7 +85,7 @@ const DialogmoteInnkallingSkjema = ({
 }: DialogmoteInnkallingSkjemaProps): ReactElement => {
   const initialValues: Partial<DialogmoteInnkallingSkjemaValues> = {};
   const dispatch = useDispatch();
-  const fnr = useFnrParam();
+  const fnr = useValgtPersonident();
   const navEnhet = useNavEnhet();
   const { senderInnkalling, sendInnkallingFeilet } = useAppSelector(
     (state) => state.dialogmote
@@ -149,7 +149,7 @@ const DialogmoteInnkallingSkjema = ({
               >
                 {texts.send}
               </TrackedHovedknapp>
-              <Link to={`/sykefravaer/${fnr}/moteoversikt`}>
+              <Link to={`/sykefravaer/moteoversikt`}>
                 <TrackedFlatknapp context={pageTitle} htmlType="button">
                   {texts.cancel}
                 </TrackedFlatknapp>

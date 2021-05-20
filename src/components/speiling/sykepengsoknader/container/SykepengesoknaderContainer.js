@@ -75,7 +75,7 @@ export class SykepengesoknaderSide extends Component {
               <Speilingvarsel brukernavn={brukernavn} />
               <div className="speiling">
                 <Brodsmuler brodsmuler={brodsmuler} />
-                <Soknader soknader={soknader} fnr={fnr} />
+                <Soknader soknader={soknader} />
               </div>
             </div>
           );
@@ -102,15 +102,17 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-export function mapStateToProps(state, ownProps) {
+export function mapStateToProps(state) {
   const harForsoktHentetAlt = harForsoktHentetSoknader(state.soknader);
   const henter = !harForsoktHentetAlt || state.tilgang.henter;
   const hentingFeilet = state.tilgang.hentingFeilet;
   const hentingFeiletSoknader = state.soknader.hentingFeilet;
 
+  const fnr = state.valgtbruker.personident;
+
   return {
     brukernavn: state.navbruker.data.navn,
-    fnr: ownProps.match.params.fnr,
+    fnr,
     henter,
     hentingFeilet: hentingFeilet || hentingFeiletSoknader,
     hentingFeiletSoknader,

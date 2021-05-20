@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import IngenBrukerContainer from "../containers/IngenBrukerContainer";
 import MotebookingContainer from "../components/mote/container/MotebookingContainer";
@@ -18,102 +18,145 @@ import VedtakContainer from "../components/vedtak/container/VedtakContainer";
 import DialogmoteInnkallingContainer from "../components/dialogmote/innkalling/DialogmoteInnkallingContainer";
 import { erLokalEllerPreprod } from "../utils/miljoUtil";
 import AvlysDialogmoteContainer from "../components/dialogmote/avlys/AvlysDialogmoteContainer";
+import { useValgtPersonident } from "../hooks/useValgtBruker";
+import { useDispatch } from "react-redux";
+import {
+  hentAktivBruker,
+  pushModiaContext,
+} from "../data/modiacontext/modiacontext_actions";
+import { EventType } from "../data/modiacontext/modiacontextTypes";
+import AppSpinner from "../components/AppSpinner";
+import { useAppSelector } from "../hooks/hooks";
 
-const AppRouter = () => {
-  const fnr = window.location.pathname.split("/")[2];
-  if (!erGyldigFodselsnummer(fnr)) {
-    return (
-      <Router>
-        <Route path="*" component={IngenBrukerContainer} />
-      </Router>
-    );
-  }
+const getFnrFromParams = (): string => {
+  return window.location.pathname.split("/")[2];
+};
 
+const setAktivBrukerFromParams = (brukerIdent: string) => {
+  const dispatch = useDispatch();
+  dispatch(
+    pushModiaContext({
+      verdi: brukerIdent,
+      eventType: EventType.NY_AKTIV_BRUKER,
+    })
+  );
+};
+
+const AktivBrukerRouter = (): ReactElement => {
   return (
     <Router>
+      <Route path="/sykefravaer" exact component={NokkelinformasjonContainer} />
       <Route
-        path="/sykefravaer/:fnr"
+        path="/sykefravaer/nokkelinformasjon"
         exact
         component={NokkelinformasjonContainer}
       />
+      <Route path="/sykefravaer/logg" component={HistorikkContainer} />
       <Route
-        path="/sykefravaer/:fnr/nokkelinformasjon"
-        exact
-        component={NokkelinformasjonContainer}
-      />
-      <Route path="/sykefravaer/:fnr/logg" component={HistorikkContainer} />
-      <Route
-        path="/sykefravaer/:fnr/moteoversikt"
+        path="/sykefravaer/moteoversikt"
         exact
         component={MotelandingssideContainer}
       />
-      <Route
-        path="/sykefravaer/:fnr/mote"
-        exact
-        component={MotebookingContainer}
-      />
+      <Route path="/sykefravaer/mote" exact component={MotebookingContainer} />
       {erLokalEllerPreprod && (
         <Route
-          path="/sykefravaer/:fnr/dialogmote"
+          path="/sykefravaer/dialogmote"
           exact
           component={DialogmoteInnkallingContainer}
         />
       )}
       {erLokalEllerPreprod && (
         <Route
-          path="/sykefravaer/:fnr/dialogmote/:dialogmoteUuid/avlys"
+          path="/sykefravaer/dialogmote/:dialogmoteUuid/avlys"
           exact
           component={AvlysDialogmoteContainer}
         />
       )}
       <Route
-        path="/sykefravaer/:fnr/mote/:moteUuid/avbryt"
+        path="/sykefravaer/mote/:moteUuid/avbryt"
         exact
         component={AvbrytMoteContainer}
       />
       <Route
-        path="/sykefravaer/:fnr/mote/bekreft/:alternativId"
+        path="/sykefravaer/mote/bekreft/:alternativId"
         exact
         component={BekreftMoteContainer}
       />
       <Route
-        path="/sykefravaer/:fnr/sykmeldinger"
+        path="/sykefravaer/sykmeldinger"
         exact
         component={SykmeldingerContainer}
       />
       <Route
-        path="/sykefravaer/:fnr/sykepengesoknader"
+        path="/sykefravaer/sykepengesoknader"
         exact
         component={SykepengesoknaderContainer}
       />
       <Route
-        path="/sykefravaer/:fnr/sykepengesoknader/:sykepengesoknadId"
+        path="/sykefravaer/sykepengesoknader/:sykepengesoknadId"
         exact
         component={SykepengesoknadContainer}
       />
       <Route
-        path="/sykefravaer/:fnr/sykmeldinger/:sykmeldingId"
+        path="/sykefravaer/sykmeldinger/:sykmeldingId"
         exact
         component={DinSykmeldingContainer}
       />
       <Route
-        path="/sykefravaer/:fnr/oppfoelgingsplaner"
+        path="/sykefravaer/oppfoelgingsplaner"
         exact
         component={OppfoelgingsPlanerOversiktContainer}
       />
       <Route
-        path="/sykefravaer/:fnr/oppfoelgingsplaner/:oppfoelgingsdialogId"
+        path="/sykefravaer/oppfoelgingsplaner/:oppfoelgingsdialogId"
         exact
         component={OppfoelgingsplanContainer}
       />
-      <Route
-        path="/sykefravaer/:fnr/vedtak"
-        exact
-        component={VedtakContainer}
-      />
-      <Route path="/sykefravaer" exact component={IngenBrukerContainer} />
+      <Route path="/sykefravaer/vedtak" exact component={VedtakContainer} />
     </Router>
   );
+};
+
+const IngenAktivBrukerRouter = (): ReactElement => {
+  return (
+    <Router>
+      <Route path="*" component={IngenBrukerContainer} />
+    </Router>
+  );
+};
+
+const AktivBrukerHentet = (): ReactElement => {
+  const fnr = useValgtPersonident();
+  if (!erGyldigFodselsnummer(fnr)) {
+    return <IngenAktivBrukerRouter />;
+  }
+  return <AktivBrukerRouter />;
+};
+
+const AktivBrukerLoader = () => {
+  const modiacontextState = useAppSelector((state) => state.modiacontext);
+  const harForsoktHentetAktivBruker = modiacontextState.hentingBrukerForsokt;
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!modiacontextState.henterBruker && !harForsoktHentetAktivBruker) {
+      dispatch(hentAktivBruker());
+    }
+  }, []);
+
+  if (!harForsoktHentetAktivBruker) {
+    return <AppSpinner />;
+  }
+  return <AktivBrukerHentet />;
+};
+
+const AppRouter = () => {
+  const fnrFromParam = getFnrFromParams();
+
+  if (erGyldigFodselsnummer(fnrFromParam)) {
+    setAktivBrukerFromParams(fnrFromParam);
+  }
+  return AktivBrukerLoader();
 };
 
 export default AppRouter;

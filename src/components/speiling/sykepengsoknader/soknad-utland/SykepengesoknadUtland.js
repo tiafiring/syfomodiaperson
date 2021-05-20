@@ -22,13 +22,12 @@ OppsummeringPanel.propTypes = {
   soknad: soknadPt,
 };
 
-const SykepengesoknadUtland = ({ brukernavn, brodsmuler, soknad, fnr }) => {
+const SykepengesoknadUtland = ({ brukernavn, brodsmuler, soknad }) => {
   return (
     <SoknadSpeiling
       tittel="Søknad om sykepenger under opphold utenfor Norge"
       brukernavn={brukernavn}
       brodsmuler={brodsmuler}
-      fnr={fnr}
     >
       <StatuspanelUtland soknad={soknad} />
       <OppsummeringPanel soknad={soknad} />
@@ -40,7 +39,6 @@ SykepengesoknadUtland.propTypes = {
   brukernavn: PropTypes.string,
   brodsmuler: PropTypes.arrayOf(brodsmule),
   soknad: soknadPt,
-  fnr: PropTypes.string,
 };
 
 export default SykepengesoknadUtland;

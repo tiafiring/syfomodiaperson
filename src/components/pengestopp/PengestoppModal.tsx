@@ -17,6 +17,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { endreStatus } from "../../data/pengestopp/flaggperson_actions";
 import { FlaggpersonState } from "../../data/pengestopp/flaggperson";
 import { useNavEnhet } from "../../hooks/useNavEnhet";
+import { useValgtPersonident } from "../../hooks/useValgtBruker";
 
 const texts = {
   notStoppedTittel:
@@ -112,7 +113,7 @@ const PengestoppModal = ({
   const [submitErrorArsak, setSubmitErrorArsak] = useState<boolean>(false);
   const [serverError, setServerError] = useState<boolean>(false);
 
-  const fnr = window.location.pathname.split("/")[2];
+  const fnr = useValgtPersonident();
   const [stoppAutomatikk, setStoppAutomatikk] = useState<StoppAutomatikk>({
     sykmeldtFnr: { value: fnr },
     arsakList: [],

@@ -14,6 +14,7 @@ import AppSpinner from "../../AppSpinner";
 import Nokkelinformasjon from "../Nokkelinformasjon";
 import { useOppfoelgingsDialoger } from "../../../hooks/useOppfoelgingsDialoger";
 import { useTilgang } from "../../../hooks/useTilgang";
+import { useValgtPersonident } from "../../../hooks/useValgtBruker";
 
 const texts = {
   pageTitle: "Nøkkelinformasjon",
@@ -21,7 +22,7 @@ const texts = {
 };
 
 export const NokkelinformasjonSide = () => {
-  const fnr = window.location.pathname.split("/")[2];
+  const fnr = useValgtPersonident();
 
   const {
     aktiveDialoger,

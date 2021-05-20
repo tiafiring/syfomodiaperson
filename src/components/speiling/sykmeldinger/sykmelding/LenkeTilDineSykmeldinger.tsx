@@ -5,19 +5,9 @@ const texts = {
   tilbake: "Gå til dine sykmeldinger\n",
 };
 
-interface LenkeTilDineSykmeldingerProps {
-  fnr: string;
-}
-
-const LenkeTilDineSykmeldinger = (
-  lenkeTilDineSykmeldingerProps: LenkeTilDineSykmeldingerProps
-) => {
-  const { fnr } = lenkeTilDineSykmeldingerProps;
+const LenkeTilDineSykmeldinger = () => {
   return (
-    <Tilbakelenke
-      to={`/sykefravaer/${fnr}/sykmeldinger`}
-      tekst={texts.tilbake}
-    />
+    <Tilbakelenke to={`/sykefravaer/sykmeldinger`} tekst={texts.tilbake} />
   );
 };
 

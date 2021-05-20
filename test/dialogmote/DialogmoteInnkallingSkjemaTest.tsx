@@ -69,6 +69,9 @@ const mockState = {
   enhet: {
     valgtEnhet: navEnhet,
   },
+  valgtbruker: {
+    personident: arbeidstakerFnr,
+  },
   ledere: {
     data: [
       {
@@ -89,10 +92,8 @@ const mockState = {
 describe("DialogmoteInnkallingSkjema", () => {
   it("validerer arbeidsgiver, dato, tid og sted", () => {
     const wrapper = mount(
-      <MemoryRouter
-        initialEntries={[`/sykefravaer/${arbeidstakerFnr}/dialogmote`]}
-      >
-        <Route path="/sykefravaer/:fnr/dialogmote">
+      <MemoryRouter initialEntries={[`/sykefravaer/dialogmote`]}>
+        <Route path="/sykefravaer/dialogmote">
           <Provider store={store({ ...realState, ...mockState })}>
             <DialogmoteInnkallingSkjema pageTitle="Test" />
           </Provider>
@@ -138,10 +139,8 @@ describe("DialogmoteInnkallingSkjema", () => {
 
   it("valideringsmeldinger forsvinner ved utbedring", () => {
     const wrapper = mount(
-      <MemoryRouter
-        initialEntries={[`/sykefravaer/${arbeidstakerFnr}/dialogmote`]}
-      >
-        <Route path="/sykefravaer/:fnr/dialogmote">
+      <MemoryRouter initialEntries={[`/sykefravaer/dialogmote`]}>
+        <Route path="/sykefravaer/dialogmote">
           <Provider store={store({ ...realState, ...mockState })}>
             <DialogmoteInnkallingSkjema pageTitle="Test" />
           </Provider>
@@ -231,8 +230,8 @@ describe("DialogmoteInnkallingSkjema", () => {
   it("oppretter innkalling med verdier fra skjema", () => {
     const mockStore = store({ ...realState, ...mockState });
     const wrapper = mount(
-      <MemoryRouter initialEntries={["/sykefravaer/05087321470/dialogmote"]}>
-        <Route path="/sykefravaer/:fnr/dialogmote">
+      <MemoryRouter initialEntries={["/sykefravaer/dialogmote"]}>
+        <Route path="/sykefravaer/dialogmote">
           <Provider store={mockStore}>
             <DialogmoteInnkallingSkjema pageTitle="Test" />
           </Provider>
@@ -299,8 +298,8 @@ describe("DialogmoteInnkallingSkjema", () => {
   it("forhåndsviser innkalling til arbeidstaker og arbeidsgiver", () => {
     const mockStore = store({ ...realState, ...mockState });
     const wrapper = mount(
-      <MemoryRouter initialEntries={["/sykefravaer/05087321470/dialogmote"]}>
-        <Route path="/sykefravaer/:fnr/dialogmote">
+      <MemoryRouter initialEntries={["/sykefravaer/dialogmote"]}>
+        <Route path="/sykefravaer/dialogmote">
           <Provider store={mockStore}>
             <DialogmoteInnkallingSkjema pageTitle="Test" />
           </Provider>

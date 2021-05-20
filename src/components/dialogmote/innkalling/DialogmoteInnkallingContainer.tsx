@@ -8,7 +8,7 @@ import styled from "styled-components";
 import AlertStripe from "nav-frontend-alertstriper";
 import { useLedere } from "../../../hooks/useLedere";
 import { useTilgang } from "../../../hooks/useTilgang";
-import { useFnrParam } from "../../../hooks/useFnrParam";
+import { useValgtPersonident } from "../../../hooks/useValgtBruker";
 
 const texts = {
   pageTitle: "Innkalling til dialogmøte",
@@ -25,7 +25,7 @@ const DialogmoteInnkallingWarningAlert = styled(AlertStripe)`
 `;
 
 const DialogmoteInnkallingContainer = (): ReactElement => {
-  const fnr = useFnrParam();
+  const fnr = useValgtPersonident();
   const { henterLedere, hentingLedereFeilet } = useLedere();
   const { henterTilgang, hentingTilgangFeilet, tilgang } = useTilgang();
 

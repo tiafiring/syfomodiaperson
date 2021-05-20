@@ -2,7 +2,7 @@ import Panel from "nav-frontend-paneler";
 import React, { ReactElement } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useFnrParam } from "../../../hooks/useFnrParam";
+import { useValgtPersonident } from "../../../hooks/useValgtBruker";
 import { FlexRow, PaddingSize } from "../../Layout";
 import { useDispatch } from "react-redux";
 import { avlysMote } from "../../../data/dialogmote/dialogmote_actions";
@@ -50,7 +50,7 @@ const AvlysDialogmoteSkjema = ({
   pageTitle,
 }: AvlysDialogmoteSkjemaProps): ReactElement => {
   const dispatch = useDispatch();
-  const fnr = useFnrParam();
+  const fnr = useValgtPersonident();
   const { avlyserMote, avlysMoteFeilet } = useAppSelector(
     (state) => state.dialogmote
   );
@@ -118,7 +118,7 @@ const AvlysDialogmoteSkjema = ({
               >
                 {texts.send}
               </SendButton>
-              <Link to={`/sykefravaer/${fnr}/moteoversikt`}>
+              <Link to={`/sykefravaer/moteoversikt`}>
                 <TrackedFlatknapp context={pageTitle} htmlType="button">
                   {texts.avbryt}
                 </TrackedFlatknapp>

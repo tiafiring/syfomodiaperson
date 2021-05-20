@@ -11,7 +11,7 @@ import {
 import { toDatePrettyPrint } from "../../utils/datoUtils";
 import { behandleMotebehov } from "../../data/motebehov/behandlemotebehov_actions";
 import { MotebehovDTO } from "../../data/motebehov/types/motebehovTypes";
-import { useFnrParam } from "../../hooks/useFnrParam";
+import { useValgtPersonident } from "../../hooks/useValgtBruker";
 import { useTrackButtonClick } from "../../data/logging/loggingHooks";
 
 const texts = {
@@ -43,7 +43,7 @@ const BehandleMotebehovKnapp = ({
   const motebehovListe = motebehovlisteMedKunJaSvar(motebehovData);
   const sistBehandletMotebehov = hentSistBehandletMotebehov(motebehovListe);
   const erBehandlet = erMotebehovBehandlet(motebehovListe);
-  const fnr = useFnrParam();
+  const fnr = useValgtPersonident();
   const trackButtonClick = useTrackButtonClick();
 
   const dispatch = useDispatch();

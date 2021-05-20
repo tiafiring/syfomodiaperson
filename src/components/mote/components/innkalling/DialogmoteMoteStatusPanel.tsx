@@ -17,7 +17,6 @@ import {
 import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
 import { Brukerinfo } from "../../../../data/navbruker/types/Brukerinfo";
 import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../../../utils/datoUtils";
-import { useFnrParam } from "../../../../hooks/useFnrParam";
 import { Link } from "react-router-dom";
 import { TrackedKnapp } from "../../../buttons/TrackedKnapp";
 import { TrackedHovedknapp } from "../../../buttons/TrackedHovedknapp";
@@ -109,7 +108,6 @@ interface Props {
 
 export const DialogmoteMoteStatusPanel = ({ dialogmote }: Props) => {
   const bruker = useNavBrukerData();
-  const fnr = useFnrParam();
 
   return (
     <DialogmotePanel
@@ -129,7 +127,7 @@ export const DialogmoteMoteStatusPanel = ({ dialogmote }: Props) => {
         <TrackedKnapp context={texts.innkallingSendtTrackingContext}>
           {texts.endreMote}
         </TrackedKnapp>
-        <Link to={`/sykefravaer/${fnr}/dialogmote/${dialogmote.uuid}/avlys`}>
+        <Link to={`/sykefravaer/dialogmote/${dialogmote.uuid}/avlys`}>
           <TrackedKnapp context={texts.innkallingSendtTrackingContext}>
             {texts.avlysMote}
           </TrackedKnapp>

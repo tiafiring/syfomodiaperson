@@ -24,7 +24,6 @@ const texts = {
 };
 
 interface AktiveDialogerProps {
-  fnr: string;
   aktiveDialoger: OppfolgingsplanDTO[];
 }
 
@@ -41,7 +40,7 @@ const Gyldighetsperiode = styled.span`
   margin-left: 2em;
 `;
 
-const AktiveDialoger = ({ fnr, aktiveDialoger }: AktiveDialogerProps) => {
+const AktiveDialoger = ({ aktiveDialoger }: AktiveDialogerProps) => {
   return (
     <>
       {aktiveDialoger.map((dialog, index) => {
@@ -51,7 +50,7 @@ const AktiveDialoger = ({ fnr, aktiveDialoger }: AktiveDialogerProps) => {
             <span>
               <Lenke
                 className="lenke"
-                href={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}
+                href={`/sykefravaer/oppfoelgingsplaner/${dialog.id}`}
               >
                 {virksomhetsNavn && virksomhetsNavn.length > 0
                   ? virksomhetsNavn.toLowerCase()
@@ -99,19 +98,17 @@ const LpsPlaner = ({ lpsPlaner }: LpsPlanerProps) => {
 };
 
 interface OppfolgingsplanerProps {
-  fnr: string;
   aktiveDialoger: OppfolgingsplanDTO[];
   lpsPlaner: OppfolgingsplanLPS[];
 }
 
 const Oppfolgingsplaner = ({
-  fnr,
   aktiveDialoger,
   lpsPlaner,
 }: OppfolgingsplanerProps) => {
   return (
     <div>
-      <AktiveDialoger fnr={fnr} aktiveDialoger={aktiveDialoger} />
+      <AktiveDialoger aktiveDialoger={aktiveDialoger} />
       <LpsPlaner lpsPlaner={lpsPlaner} />
     </div>
   );
@@ -179,7 +176,6 @@ export const UtdragOppfolgingsplaner = ({
       <H3NoMargins>{texts.header}</H3NoMargins>
       {anyActivePlaner ? (
         <Oppfolgingsplaner
-          fnr={fnr}
           aktiveDialoger={aktiveDialoger}
           lpsPlaner={activeLpsPlaner}
         />

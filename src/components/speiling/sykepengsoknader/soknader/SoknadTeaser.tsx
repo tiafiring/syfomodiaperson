@@ -222,14 +222,9 @@ const TeaserPeriode = ({ soknad }: TeaserComponentProps) => (
   </p>
 );
 
-interface SykepengesoknadTeaserProps extends TeaserComponentProps {
-  fnr: string;
-}
-
 const SykepengesoknadTeaser = ({
   soknad,
-  fnr,
-}: SykepengesoknadTeaserProps): ReactElement => {
+}: TeaserComponentProps): ReactElement => {
   const status = soknad.status ? soknad.status.toLowerCase() : "";
   const visStatus =
     [
@@ -242,7 +237,7 @@ const SykepengesoknadTeaser = ({
     <article aria-labelledby={`soknader-header-${soknad.id}`}>
       <Link
         className={`inngangspanel js-panel js-soknad-${status}`}
-        to={`/sykefravaer/${fnr}/sykepengesoknader/${soknad.id}`}
+        to={`/sykefravaer/sykepengesoknader/${soknad.id}`}
       >
         <span className="inngangspanel__ikon inngangspanel__ikon--normal">
           {visIkon(soknad.soknadstype)}

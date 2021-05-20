@@ -7,7 +7,6 @@ import TilbakeTilSoknader from "./TilbakeTilSoknader";
 import { brodsmule } from "../../../../propTypes";
 
 const SoknadSpeiling = ({
-  fnr,
   brukernavn,
   children,
   brodsmuler,
@@ -20,14 +19,13 @@ const SoknadSpeiling = ({
         <Brodsmuler brodsmuler={brodsmuler} />
         <SidetoppSpeilet tittel={tittel} />
         <div className="blokk">{children}</div>
-        <TilbakeTilSoknader fnr={fnr} />
+        <TilbakeTilSoknader />
       </div>
     </div>
   );
 };
 
 SoknadSpeiling.propTypes = {
-  fnr: PropTypes.string,
   brukernavn: PropTypes.string,
   children: PropTypes.node,
   brodsmuler: PropTypes.arrayOf(brodsmule),
