@@ -1,14 +1,14 @@
-import Side from "../../sider/Side";
-import { MOETEPLANLEGGER } from "../../enums/menypunkter";
+import Side from "../../../sider/Side";
+import { MOETEPLANLEGGER } from "../../../enums/menypunkter";
 import React, { ReactElement } from "react";
-import Sidetopp from "../Sidetopp";
+import Sidetopp from "../../Sidetopp";
 import DialogmoteInnkallingSkjema from "./DialogmoteInnkallingSkjema";
-import SideLaster from "../SideLaster";
+import SideLaster from "../../SideLaster";
 import styled from "styled-components";
 import AlertStripe from "nav-frontend-alertstriper";
-import { useLedere } from "../../hooks/useLedere";
-import { useTilgang } from "../../hooks/useTilgang";
-import { useFnrParam } from "../../hooks/useFnrParam";
+import { useLedere } from "../../../hooks/useLedere";
+import { useTilgang } from "../../../hooks/useTilgang";
+import { useFnrParam } from "../../../hooks/useFnrParam";
 
 const texts = {
   pageTitle: "Innkalling til dialogmøte",
