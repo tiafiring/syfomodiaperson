@@ -10,15 +10,20 @@ import VedtakInfopanel from "../VedtakInfopanel";
 import styled from "styled-components";
 import { VEDTAK } from "../../../enums/menypunkter";
 import VedtakUnselected from "../VedtakUnselected";
-import VedtakEmpty from "../VedtakEmpty";
 import VedtakColumn from "../VedtakColumn";
-import VedtakForbidden from "../VedtakForbidden";
+import VedtakInfoBox from "../VedtakInfoBox";
 import { sjekkTilgang } from "../../../data/tilgang/tilgang_actions";
 import AppSpinner from "../../AppSpinner";
 import { useTilgang } from "../../../hooks/useTilgang";
+import {
+  MappeAdvarselImage,
+  MappeFeilImage,
+} from "../../../../img/ImageComponents";
 
 const texts = {
   pageTitle: "Vedtak",
+  noAccess: "Du har ikke tilgang til denne personens vedtak",
+  noVedtak: "Denne personen har ingen vedtak",
   comingSoon: `
        Dette er en tidlig versjon av vedtakshistorikken. 
        Feil og mangler kan forekomme. Bruk Yammer til å komme med forslag og Porten til å melde feil. 
@@ -69,9 +74,13 @@ const VedtakContainer = () => {
             {!selectedVedtak && vedtakState.data.length > 0 && (
               <VedtakUnselected />
             )}
-            {!vedtakState.data.length && <VedtakEmpty />}
+            {!vedtakState.data.length && (
+              <VedtakInfoBox title={texts.noVedtak} icon={MappeAdvarselImage} />
+            )}
 
-            {!tilgang.harTilgang && <VedtakForbidden />}
+            {!tilgang.harTilgang && (
+              <VedtakInfoBox title={texts.noAccess} icon={MappeFeilImage} />
+            )}
           </Row>
         )}
       </>

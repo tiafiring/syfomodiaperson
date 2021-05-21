@@ -1,11 +1,6 @@
 import * as React from "react";
 import { Column } from "nav-frontend-grid";
 import styled from "styled-components";
-import { MappeFeilImage } from "../../../img/ImageComponents";
-
-const texts = {
-  empty: "Du har ikke tilgang til denne personens vedtak",
-};
 
 const StyledColumn = styled(Column)`
   display: flex;
@@ -14,24 +9,31 @@ const StyledColumn = styled(Column)`
 `;
 
 const StyledIcon = styled.img`
+  width: 5em;
   margin-top: 5em;
+  align-self: center;
 `;
 
 const grey = "#78706A";
 
-const StyledCenteredText = styled.h4`
+const StyledCenteredText = styled.h3`
   text-align: center;
   font-weight: normal;
   color: ${grey};
 `;
 
-const VedtakForbidden = () => {
+interface Props {
+  title: string;
+  icon: string;
+}
+
+const VedtakInfoBox = ({ title, icon }: Props) => {
   return (
     <StyledColumn className="col-xs-12">
-      <StyledIcon src={MappeFeilImage} alt="mappeFeilIkon" />
-      <StyledCenteredText>{texts.empty}</StyledCenteredText>
+      <StyledIcon src={icon} alt="Informasjon om vedtak" />
+      <StyledCenteredText>{title}</StyledCenteredText>
     </StyledColumn>
   );
 };
 
-export default VedtakForbidden;
+export default VedtakInfoBox;
