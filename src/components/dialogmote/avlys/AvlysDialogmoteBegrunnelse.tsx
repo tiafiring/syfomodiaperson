@@ -1,10 +1,9 @@
 import { FlexColumn, FlexRow, PaddingSize } from "../../Layout";
 import { Field } from "react-final-form";
 import FritekstStor from "../../FritekstStor";
-import { Knapp } from "nav-frontend-knapper";
 import React, { ReactElement } from "react";
 import AvlysDialogmoteSkjemaSeksjon from "./AvlysDialogmoteSkjemaSeksjon";
-import { useTrackButtonClick } from "../../../data/logging/loggingHooks";
+import { TrackedKnapp } from "../../buttons/TrackedKnapp";
 
 const texts = {
   preview: "Forhåndsvisning",
@@ -19,8 +18,6 @@ const AvlysDialogmoteBegrunnelse = ({
   fieldName,
   label,
 }: AvlysDialogmoteBegrunnelseProps): ReactElement => {
-  const trackButtonClick = useTrackButtonClick();
-
   return (
     <AvlysDialogmoteSkjemaSeksjon>
       <FlexRow bottomPadding={PaddingSize.SM}>
@@ -39,12 +36,9 @@ const AvlysDialogmoteBegrunnelse = ({
         </FlexColumn>
       </FlexRow>
       <FlexRow>
-        <Knapp
-          htmlType="button"
-          onClick={() => trackButtonClick(texts.preview, label)}
-        >
+        <TrackedKnapp htmlType="button" context={label}>
           {texts.preview}
-        </Knapp>
+        </TrackedKnapp>
       </FlexRow>
     </AvlysDialogmoteSkjemaSeksjon>
   );

@@ -7,16 +7,16 @@ import {
 import { DialogmotePanel } from "../DialogmotePanel";
 import React, { ReactElement } from "react";
 import Alertstripe from "nav-frontend-alertstriper";
-import { Hovedknapp, Knapp } from "nav-frontend-knapper";
 import { FlexColumn, FlexRow, PaddingSize } from "../../../Layout";
 import { InfoRow } from "../../../InfoRow";
 import { DialogmoteDTO } from "../../../../data/dialogmote/dialogmoteTypes";
 import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
 import { Brukerinfo } from "../../../../data/navbruker/types/Brukerinfo";
 import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../../../utils/datoUtils";
-import { useTrackButtonClick } from "../../../../data/logging/loggingHooks";
 import { useFnrParam } from "../../../../hooks/useFnrParam";
 import { Link } from "react-router-dom";
+import { TrackedKnapp } from "../../../buttons/TrackedKnapp";
+import { TrackedHovedknapp } from "../../../buttons/TrackedHovedknapp";
 
 const texts = {
   innkallingSendtTrackingContext: "Møtelandingsside: Sendt innkalling",
@@ -92,7 +92,6 @@ interface Props {
 export const DialogmoteMoteStatusPanel = ({ dialogmote }: Props) => {
   const bruker = useNavBrukerData();
   const fnr = useFnrParam();
-  const trackButtonClick = useTrackButtonClick();
 
   return (
     <DialogmotePanel
@@ -109,38 +108,17 @@ export const DialogmoteMoteStatusPanel = ({ dialogmote }: Props) => {
       </FlexRow>
 
       <FlexRow topPadding={PaddingSize.MD}>
-        <Knapp
-          onClick={() =>
-            trackButtonClick(
-              texts.endreMote,
-              texts.innkallingSendtTrackingContext
-            )
-          }
-        >
+        <TrackedKnapp context={texts.innkallingSendtTrackingContext}>
           {texts.endreMote}
-        </Knapp>
+        </TrackedKnapp>
         <Link to={`/sykefravaer/${fnr}/dialogmote/${dialogmote.uuid}/avlys`}>
-          <Knapp
-            onClick={() =>
-              trackButtonClick(
-                texts.avlysMote,
-                texts.innkallingSendtTrackingContext
-              )
-            }
-          >
+          <TrackedKnapp context={texts.innkallingSendtTrackingContext}>
             {texts.avlysMote}
-          </Knapp>
+          </TrackedKnapp>
         </Link>
-        <Hovedknapp
-          onClick={() =>
-            trackButtonClick(
-              texts.skrivReferat,
-              texts.innkallingSendtTrackingContext
-            )
-          }
-        >
+        <TrackedHovedknapp context={texts.innkallingSendtTrackingContext}>
           {texts.skrivReferat}
-        </Hovedknapp>
+        </TrackedHovedknapp>
       </FlexRow>
     </DialogmotePanel>
   );
