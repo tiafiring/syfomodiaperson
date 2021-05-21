@@ -42,6 +42,7 @@ export const DialogmoteOnskePanel = ({
         <BehandleMotebehovKnapp
           motebehovData={motebehovData}
           veilederinfo={veilederinfo}
+          pageTitle={texts.onskerOmDialogmote}
         />
       </FlexRow>
     </DialogmotePanel>

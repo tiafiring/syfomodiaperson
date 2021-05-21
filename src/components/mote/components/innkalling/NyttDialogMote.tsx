@@ -1,5 +1,4 @@
 import { ArbeiderKvinneImage } from "../../../../../img/ImageComponents";
-import { Flatknapp, Knapp } from "nav-frontend-knapper";
 import ModalWrapper from "nav-frontend-modal";
 import React, { ReactElement, useState } from "react";
 import styled from "styled-components";
@@ -7,7 +6,8 @@ import { useHistory } from "react-router";
 import Veileder from "nav-frontend-veileder";
 import { FlexColumn, FlexRow, ModalContentContainer } from "../../../Layout";
 import { useFnrParam } from "../../../../hooks/useFnrParam";
-import { useTrackButtonClick } from "../../../../data/logging/loggingHooks";
+import { TrackedKnapp } from "../../../buttons/TrackedKnapp";
+import { TrackedFlatknapp } from "../../../buttons/TrackedFlatknapp";
 
 const ModalText = styled.div`
   max-width: 40ch;
@@ -36,19 +36,18 @@ export const NyttDialogMote = (): ReactElement => {
   const [nyLosningModalIsOpen, setNyLosningModalIsOpen] = useState(false);
   const history = useHistory();
   const fnr = useFnrParam();
-  const trackButtonClick = useTrackButtonClick();
 
   return (
     <>
       <FlexRow>
-        <Knapp
+        <TrackedKnapp
+          context={texts.nyttMoteTrackingContext}
           onClick={() => {
-            trackButtonClick(texts.nyttMote, texts.nyttMoteTrackingContext);
             setBehandlerModalIsOpen(true);
           }}
         >
           {texts.nyttMote}
-        </Knapp>
+        </TrackedKnapp>
       </FlexRow>
 
       <ModalWrapper
@@ -65,45 +64,36 @@ export const NyttDialogMote = (): ReactElement => {
 
           <FlexRow>
             <FlexColumn>
-              <Knapp
+              <TrackedKnapp
+                context={texts.behandlerVaereMedTrackingContext}
                 onClick={() => {
-                  trackButtonClick(
-                    texts.ja,
-                    texts.behandlerVaereMedTrackingContext
-                  );
                   setBehandlerModalIsOpen(false);
                   history.push(`/sykefravaer/${fnr}/mote`);
                 }}
               >
                 {texts.ja}
-              </Knapp>
+              </TrackedKnapp>
             </FlexColumn>
             <FlexColumn>
-              <Knapp
+              <TrackedKnapp
+                context={texts.behandlerVaereMedTrackingContext}
                 onClick={() => {
-                  trackButtonClick(
-                    texts.nei,
-                    texts.behandlerVaereMedTrackingContext
-                  );
                   setBehandlerModalIsOpen(false);
                   setNyLosningModalIsOpen(true);
                 }}
               >
                 {texts.nei}
-              </Knapp>
+              </TrackedKnapp>
             </FlexColumn>
             <FlexColumn>
-              <Flatknapp
+              <TrackedFlatknapp
+                context={texts.behandlerVaereMedTrackingContext}
                 onClick={() => {
-                  trackButtonClick(
-                    texts.avbryt,
-                    texts.behandlerVaereMedTrackingContext
-                  );
                   setBehandlerModalIsOpen(false);
                 }}
               >
                 {texts.avbryt}
-              </Flatknapp>
+              </TrackedFlatknapp>
             </FlexColumn>
           </FlexRow>
         </ModalContentContainer>
@@ -133,45 +123,36 @@ export const NyttDialogMote = (): ReactElement => {
 
           <FlexRow>
             <FlexColumn>
-              <Knapp
+              <TrackedKnapp
+                context={texts.modalOnskerDuProveTrackingContext}
                 onClick={() => {
-                  trackButtonClick(
-                    texts.ja,
-                    texts.modalOnskerDuProveTrackingContext
-                  );
                   setNyLosningModalIsOpen(false);
                   history.push(`/sykefravaer/${fnr}/dialogmote`);
                 }}
               >
                 {texts.ja}
-              </Knapp>
+              </TrackedKnapp>
             </FlexColumn>
             <FlexColumn>
-              <Knapp
+              <TrackedKnapp
+                context={texts.modalOnskerDuProveTrackingContext}
                 onClick={() => {
-                  trackButtonClick(
-                    texts.nei,
-                    texts.modalOnskerDuProveTrackingContext
-                  );
                   setNyLosningModalIsOpen(false);
                   history.push(`/sykefravaer/${fnr}/mote`);
                 }}
               >
                 {texts.nei}
-              </Knapp>
+              </TrackedKnapp>
             </FlexColumn>
             <FlexColumn>
-              <Flatknapp
+              <TrackedFlatknapp
+                context={texts.modalOnskerDuProveTrackingContext}
                 onClick={() => {
-                  trackButtonClick(
-                    texts.avbryt,
-                    texts.modalOnskerDuProveTrackingContext
-                  );
                   setNyLosningModalIsOpen(false);
                 }}
               >
                 {texts.avbryt}
-              </Flatknapp>
+              </TrackedFlatknapp>
             </FlexColumn>
           </FlexRow>
         </ModalContentContainer>

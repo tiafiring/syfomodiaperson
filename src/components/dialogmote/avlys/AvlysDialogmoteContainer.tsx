@@ -52,7 +52,10 @@ const AvlysDialogmoteContainer = (): ReactElement => {
       >
         <Sidetopp tittel={texts.pageHeader} />
         {dialogmote ? (
-          <AvlysDialogmoteSkjema dialogmote={dialogmote} />
+          <AvlysDialogmoteSkjema
+            dialogmote={dialogmote}
+            pageTitle={texts.pageTitle}
+          />
         ) : (
           <Feilmelding tittel={texts.moteNotFound} />
         )}

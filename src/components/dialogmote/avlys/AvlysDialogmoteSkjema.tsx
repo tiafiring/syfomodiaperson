@@ -1,7 +1,6 @@
 import Panel from "nav-frontend-paneler";
 import React, { ReactElement } from "react";
 import styled from "styled-components";
-import { Flatknapp, Hovedknapp } from "nav-frontend-knapper";
 import { Link } from "react-router-dom";
 import { useFnrParam } from "../../../hooks/useFnrParam";
 import { FlexRow, PaddingSize } from "../../Layout";
@@ -16,6 +15,8 @@ import AvlysDialogmoteBegrunnelse from "./AvlysDialogmoteBegrunnelse";
 import { SkjemaFeiloppsummering } from "../../SkjemaFeiloppsummering";
 import { useFeilUtbedret } from "../../../hooks/useFeilUtbedret";
 import { validerBegrunnelser } from "../../../utils/valideringUtils";
+import { TrackedHovedknapp } from "../../buttons/TrackedHovedknapp";
+import { TrackedFlatknapp } from "../../buttons/TrackedFlatknapp";
 
 const texts = {
   begrunnelseArbeidstakerLabel: "Begrunnelse til arbeidstakeren",
@@ -28,6 +29,7 @@ const texts = {
 
 interface AvlysDialogmoteSkjemaProps {
   dialogmote: DialogmoteDTO;
+  pageTitle: string;
 }
 
 interface AvlysDialogmoteSkjemaValues {
@@ -39,12 +41,13 @@ const AvlysPanel = styled(Panel)`
   padding: 1.75rem;
 `;
 
-const SendButton = styled(Hovedknapp)`
+const SendButton = styled(TrackedHovedknapp)`
   margin-right: 0.5rem;
 `;
 
 const AvlysDialogmoteSkjema = ({
   dialogmote,
+  pageTitle,
 }: AvlysDialogmoteSkjemaProps): ReactElement => {
   const dispatch = useDispatch();
   const fnr = useFnrParam();
@@ -107,6 +110,7 @@ const AvlysDialogmoteSkjema = ({
             )}
             <FlexRow>
               <SendButton
+                context={pageTitle}
                 onClick={resetFeilUtbedret}
                 htmlType="submit"
                 spinner={avlyserMote}
@@ -115,7 +119,9 @@ const AvlysDialogmoteSkjema = ({
                 {texts.send}
               </SendButton>
               <Link to={`/sykefravaer/${fnr}/moteoversikt`}>
-                <Flatknapp htmlType="button">{texts.avbryt}</Flatknapp>
+                <TrackedFlatknapp context={pageTitle} htmlType="button">
+                  {texts.avbryt}
+                </TrackedFlatknapp>
               </Link>
             </FlexRow>
           </form>

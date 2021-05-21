@@ -51,7 +51,7 @@ describe("AvlysDialogmoteSkjemaTest", () => {
       >
         <Route path="/sykefravaer/:fnr/dialogmote/:dialogmoteUuid/avlys">
           <Provider store={store({ ...realState })}>
-            <AvlysDialogmoteSkjema dialogmote={mote} />
+            <AvlysDialogmoteSkjema dialogmote={mote} pageTitle="test" />
           </Provider>
         </Route>
       </MemoryRouter>
@@ -67,7 +67,7 @@ describe("AvlysDialogmoteSkjemaTest", () => {
       >
         <Route path="/sykefravaer/:fnr/dialogmote/:dialogmoteUuid/avlys">
           <Provider store={store({ ...realState })}>
-            <AvlysDialogmoteSkjema dialogmote={mote} />
+            <AvlysDialogmoteSkjema dialogmote={mote} pageTitle="test" />
           </Provider>
         </Route>
       </MemoryRouter>
@@ -109,7 +109,7 @@ describe("AvlysDialogmoteSkjemaTest", () => {
       >
         <Route path="/sykefravaer/:fnr/dialogmote/:dialogmoteUuid/avlys">
           <Provider store={store({ ...realState })}>
-            <AvlysDialogmoteSkjema dialogmote={mote} />
+            <AvlysDialogmoteSkjema dialogmote={mote} pageTitle="test" />
           </Provider>
         </Route>
       </MemoryRouter>
@@ -179,7 +179,7 @@ describe("AvlysDialogmoteSkjemaTest", () => {
       >
         <Route path="/sykefravaer/:fnr/dialogmote/:dialogmoteUuid/avlys">
           <Provider store={mockStore}>
-            <AvlysDialogmoteSkjema dialogmote={mote} />
+            <AvlysDialogmoteSkjema dialogmote={mote} pageTitle="test" />
           </Provider>
         </Route>
       </MemoryRouter>
