@@ -3,7 +3,6 @@ import Panel from "nav-frontend-paneler";
 import DialogmoteInnkallingVelgArbeidsgiver from "./DialogmoteInnkallingVelgArbeidsgiver";
 import DialogmoteInnkallingTidOgSted from "./DialogmoteInnkallingTidOgSted";
 import DialogmoteInnkallingTekster from "./DialogmoteInnkallingTekster";
-import { Flatknapp, Hovedknapp } from "nav-frontend-knapper";
 import { Form } from "react-final-form";
 import {
   validerArbeidsgiver,
@@ -22,6 +21,8 @@ import { useFnrParam } from "../../../hooks/useFnrParam";
 import { FlexRow, PaddingSize } from "../../Layout";
 import { SkjemaFeiloppsummering } from "../../SkjemaFeiloppsummering";
 import { useFeilUtbedret } from "../../../hooks/useFeilUtbedret";
+import { TrackedFlatknapp } from "../../buttons/TrackedFlatknapp";
+import { TrackedHovedknapp } from "../../buttons/TrackedHovedknapp";
 
 interface DialogmoteInnkallingSkjemaValues {
   arbeidsgiver: string;
@@ -31,6 +32,10 @@ interface DialogmoteInnkallingSkjemaValues {
   videoLink?: string;
   fritekstArbeidsgiver?: string;
   fritekstArbeidstaker?: string;
+}
+
+interface DialogmoteInnkallingSkjemaProps {
+  pageTitle: string;
 }
 
 type DialogmoteInnkallingSkjemaFeil = Partial<
@@ -70,7 +75,9 @@ const toInnkalling = (
   },
 });
 
-const DialogmoteInnkallingSkjema = (): ReactElement => {
+const DialogmoteInnkallingSkjema = ({
+  pageTitle,
+}: DialogmoteInnkallingSkjemaProps): ReactElement => {
   const initialValues: Partial<DialogmoteInnkallingSkjemaValues> = {};
   const dispatch = useDispatch();
   const fnr = useFnrParam();
@@ -122,16 +129,19 @@ const DialogmoteInnkallingSkjema = (): ReactElement => {
               <SkjemaFeiloppsummering errors={errors} />
             )}
             <FlexRow>
-              <Hovedknapp
+              <TrackedHovedknapp
+                context={pageTitle}
                 onClick={resetFeilUtbedret}
                 spinner={senderInnkalling}
                 autoDisableVedSpinner
                 htmlType="submit"
               >
                 {texts.send}
-              </Hovedknapp>
+              </TrackedHovedknapp>
               <Link to={`/sykefravaer/${fnr}/moteoversikt`}>
-                <Flatknapp htmlType="button">{texts.cancel}</Flatknapp>
+                <TrackedFlatknapp context={pageTitle} htmlType="button">
+                  {texts.cancel}
+                </TrackedFlatknapp>
               </Link>
             </FlexRow>
           </form>

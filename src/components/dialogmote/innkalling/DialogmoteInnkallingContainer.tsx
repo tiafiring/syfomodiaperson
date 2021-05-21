@@ -43,7 +43,7 @@ const DialogmoteInnkallingContainer = (): ReactElement => {
         <DialogmoteInnkallingWarningAlert type="advarsel">
           {texts.alert}
         </DialogmoteInnkallingWarningAlert>
-        <DialogmoteInnkallingSkjema />
+        <DialogmoteInnkallingSkjema pageTitle={texts.pageTitle} />
       </SideLaster>
     </Side>
   );
