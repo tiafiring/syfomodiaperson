@@ -46,9 +46,10 @@ const DocumentComponentText = ({ type, texts }: DocumentComponentTextProps) => {
   }
   //  TODO: Implement DocumentComponentType.HEADER for referat
   if (type === DocumentComponentType.LINK) {
+    const link = texts[0];
     return (
-      <Lenke target="_blank" rel="noopener noreferrer" href={texts[0]}>
-        {texts}
+      <Lenke target="_blank" rel="noopener noreferrer" href={link}>
+        {link}
       </Lenke>
     );
   } else {
