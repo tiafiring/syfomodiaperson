@@ -5,7 +5,7 @@ import GlobalNavigasjonContainer from "../components/globalnavigasjon/GlobalNavi
 import Personkort from "../components/personkort/Personkort";
 import Decorator from "../decorator/Decorator";
 import DocumentTitle from "react-document-title";
-import { useTrackNavigation } from "../data/logging/loggingHooks";
+import { useTrackPageLoad } from "../data/logging/loggingHooks";
 
 const StyledContainer = styled(Container)`
   width: 95%;
@@ -20,10 +20,10 @@ interface SideProps {
 
 const Side = (sideProps: SideProps) => {
   const { tittel, children, aktivtMenypunkt, fnr } = sideProps;
-  const trackNavigation = useTrackNavigation();
+  const trackPageLoad = useTrackPageLoad();
 
   useEffect(() => {
-    trackNavigation(tittel, aktivtMenypunkt);
+    trackPageLoad(tittel, aktivtMenypunkt);
   }, []);
 
   return (
