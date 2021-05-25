@@ -1,0 +1,130 @@
+import ModalWrapper from "nav-frontend-modal";
+import {
+  FlexRow,
+  JustifyContentType,
+  ModalContentContainer,
+  PaddingSize,
+} from "../Layout";
+import {
+  Element,
+  Innholdstittel,
+  Normaltekst,
+  Sidetittel,
+} from "nav-frontend-typografi";
+import { Hovedknapp } from "nav-frontend-knapper";
+import React, { ReactElement } from "react";
+import {
+  DocumentComponentDto,
+  DocumentComponentType,
+} from "../../data/dialogmote/dialogmoteTypes";
+import styled from "styled-components";
+import Lenke from "nav-frontend-lenker";
+
+const texts = {
+  close: "Lukk",
+};
+
+const Paragraph = styled.div`
+  margin-bottom: 1em;
+`;
+
+const TitledParagraph = styled.div`
+  margin-bottom: 2em;
+`;
+
+const ForhandsvisningModal = styled(ModalWrapper)`
+  max-width: 50em;
+`;
+
+type DocumentComponentTextProps = Required<
+  Pick<DocumentComponentDto, "type" | "texts">
+>;
+
+const DocumentComponentText = ({ type, texts }: DocumentComponentTextProps) => {
+  if (texts.length === 0) {
+    return null;
+  }
+  //  TODO: Implement DocumentComponentType.HEADER for referat
+  if (type === DocumentComponentType.LINK) {
+    return (
+      <Lenke target="_blank" rel="noopener noreferrer" href={texts[0]}>
+        {texts}
+      </Lenke>
+    );
+  } else {
+    return (
+      <>
+        {texts.map((text, index) => (
+          <Normaltekst key={index}>
+            {text}
+            <br />
+          </Normaltekst>
+        ))}
+      </>
+    );
+  }
+};
+
+interface DocumentComponentVisningProps {
+  documentComponent: DocumentComponentDto;
+}
+
+const DocumentComponentVisning = ({
+  documentComponent: { type, title, texts },
+}: DocumentComponentVisningProps) => {
+  return title ? (
+    <TitledParagraph>
+      <Element>{title}</Element>
+      <DocumentComponentText type={type} texts={texts} />
+    </TitledParagraph>
+  ) : (
+    <Paragraph>
+      <DocumentComponentText type={type} texts={texts} />
+    </Paragraph>
+  );
+};
+
+interface ForhandsvisningProps {
+  title: string;
+  subtitle: string;
+  contentLabel: string;
+  isOpen: boolean;
+  handleClose: () => void;
+  documentComponents: () => DocumentComponentDto[];
+}
+
+export const Forhandsvisning = ({
+  isOpen,
+  handleClose,
+  title,
+  subtitle,
+  contentLabel,
+  documentComponents,
+}: ForhandsvisningProps): ReactElement => {
+  return (
+    <ForhandsvisningModal
+      isOpen={isOpen}
+      onRequestClose={handleClose}
+      closeButton={true}
+      contentLabel={contentLabel}
+      ariaHideApp={false}
+    >
+      <ModalContentContainer>
+        <FlexRow
+          topPadding={PaddingSize.SM}
+          bottomPadding={PaddingSize.MD}
+          justifyContent={JustifyContentType.CENTER}
+        >
+          <Sidetittel>{title}</Sidetittel>
+          <Innholdstittel>{subtitle}</Innholdstittel>
+        </FlexRow>
+        {documentComponents().map((component, index) => (
+          <DocumentComponentVisning key={index} documentComponent={component} />
+        ))}
+        <FlexRow topPadding={PaddingSize.MD}>
+          <Hovedknapp onClick={handleClose}>{texts.close}</Hovedknapp>
+        </FlexRow>
+      </ModalContentContainer>
+    </ForhandsvisningModal>
+  );
+};

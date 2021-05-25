@@ -9,13 +9,13 @@ import { BehandlendeEnhet } from "./types/BehandlendeEnhet";
 export interface BehandlendeEnhetState {
   henter: boolean;
   hentingFeilet: boolean;
-  data: BehandlendeEnhet | Record<string, any>;
+  data: BehandlendeEnhet;
 }
 
 export const initialState: BehandlendeEnhetState = {
   henter: false,
   hentingFeilet: false,
-  data: {},
+  data: { navn: "", enhetId: "" },
 };
 
 const behandlendeEnhet: Reducer<BehandlendeEnhetState> = (
@@ -26,14 +26,13 @@ const behandlendeEnhet: Reducer<BehandlendeEnhetState> = (
     case HENT_BEHANDLENDE_ENHET_FEILET: {
       return {
         ...state,
-        data: {},
         henter: false,
         hentingFeilet: true,
       };
     }
     case HENTER_BEHANDLENDE_ENHET: {
       return {
-        data: {},
+        ...state,
         henter: true,
         hentingFeilet: false,
       };
