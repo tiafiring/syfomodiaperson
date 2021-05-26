@@ -109,22 +109,25 @@ const arbeidstakerOutro = (
   behandlendeEnhet: BehandlendeEnhet,
   veilederinfo?: VeilederinfoDTO
 ): DocumentComponentDto[] => {
-  return [
+  const outro = [
     paragraph(innkallingTexts.arbeidstaker.outro1),
     paragraphWithTitle(
       innkallingTexts.foerMoteTitle,
       innkallingTexts.foerMoteText
     ),
     paragraph(innkallingTexts.hilsenText, behandlendeEnhet.navn),
-    paragraph(veilederinfo?.navn ?? ""),
   ];
+  if (veilederinfo) {
+    outro.push(paragraph(veilederinfo.navn));
+  }
+  return outro;
 };
 
 const arbeidsgiverOutro = (
   behandlendeEnhet: BehandlendeEnhet,
   veilederinfo?: VeilederinfoDTO
 ): DocumentComponentDto[] => {
-  return [
+  const outro = [
     paragraph(innkallingTexts.arbeidsgiver.outro1),
     paragraph(innkallingTexts.arbeidsgiver.outro2),
     paragraph(innkallingTexts.arbeidsgiver.outro3),
@@ -133,12 +136,17 @@ const arbeidsgiverOutro = (
       innkallingTexts.foerMoteText
     ),
     paragraph(innkallingTexts.hilsenText, behandlendeEnhet.navn),
-    paragraph(
-      veilederinfo?.navn ?? "",
-      veilederinfo?.epost ?? "",
-      veilederinfo?.telefonnummer ?? ""
-    ),
   ];
+  if (veilederinfo) {
+    outro.push(
+      paragraph(
+        veilederinfo.navn,
+        veilederinfo.epost,
+        veilederinfo.telefonnummer ?? ""
+      )
+    );
+  }
+  return outro;
 };
 
 const link = (title: string, text: string): DocumentComponentDto => ({
