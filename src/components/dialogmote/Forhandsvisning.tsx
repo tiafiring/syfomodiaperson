@@ -45,24 +45,30 @@ const DocumentComponentText = ({ type, texts }: DocumentComponentTextProps) => {
     return null;
   }
   //  TODO: Implement DocumentComponentType.HEADER for referat
-  if (type === DocumentComponentType.LINK) {
-    const link = texts[0];
-    return (
-      <Lenke target="_blank" rel="noopener noreferrer" href={link}>
-        {link}
-      </Lenke>
-    );
-  } else {
-    return (
-      <>
-        {texts.map((text, index) => (
-          <Normaltekst key={index}>
-            {text}
-            <br />
-          </Normaltekst>
-        ))}
-      </>
-    );
+  switch (type) {
+    case DocumentComponentType.LINK: {
+      const link = texts[0];
+      return (
+        <Lenke target="_blank" rel="noopener noreferrer" href={link}>
+          {link}
+        </Lenke>
+      );
+    }
+    case DocumentComponentType.PARAGRAPH: {
+      return (
+        <>
+          {texts.map((text, index) => (
+            <Normaltekst key={index}>
+              {text}
+              <br />
+            </Normaltekst>
+          ))}
+        </>
+      );
+    }
+    default: {
+      return null;
+    }
   }
 };
 
