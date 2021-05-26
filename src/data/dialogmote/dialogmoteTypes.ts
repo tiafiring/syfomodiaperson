@@ -6,6 +6,18 @@ interface DialogmotedeltakerArbeidstakerVarselDTO {
   readonly fritekst: string;
 }
 
+export enum DocumentComponentType {
+  HEADER = "HEADER",
+  PARAGRAPH = "PARAGRAPH",
+  LINK = "LINK",
+}
+
+export interface DocumentComponentDto {
+  readonly type: DocumentComponentType;
+  readonly title?: string;
+  readonly texts: string[];
+}
+
 export enum DialogmoteStatus {
   INNKALT = "INNKALT",
   AVLYST = "AVLYST",
@@ -31,12 +43,12 @@ export interface DialogmoteInnkallingDTO {
   arbeidstaker: {
     personIdent: string;
     fritekstInnkalling?: string;
-    innkalling: unknown[]; // TODO: Definer riktig type ifm forhåndsvisning av innkalling
+    innkalling: DocumentComponentDto[];
   };
   arbeidsgiver: {
     virksomhetsnummer: string;
     fritekstInnkalling?: string;
-    innkalling: unknown[]; // TODO: Definer riktig type ifm forhåndsvisning av innkalling
+    innkalling: DocumentComponentDto[];
   };
   tidSted: {
     sted: string;
@@ -52,7 +64,7 @@ export interface AvlysDialogmoteDTO {
 
 interface AvlysningDto {
   begrunnelse: string;
-  avlysning: unknown[]; // TODO: Definer riktig type ifm forhåndsvisning av avlysning
+  avlysning: DocumentComponentDto[];
 }
 
 export interface DialogmoteDTO {

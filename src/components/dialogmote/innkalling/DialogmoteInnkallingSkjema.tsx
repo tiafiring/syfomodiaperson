@@ -23,8 +23,12 @@ import { SkjemaFeiloppsummering } from "../../SkjemaFeiloppsummering";
 import { useFeilUtbedret } from "../../../hooks/useFeilUtbedret";
 import { TrackedFlatknapp } from "../../buttons/TrackedFlatknapp";
 import { TrackedHovedknapp } from "../../buttons/TrackedHovedknapp";
+import {
+  ForhandsvisInnkallingGenerator,
+  useForhandsvisInnkalling,
+} from "../../../hooks/useForhandsvisInnkalling";
 
-interface DialogmoteInnkallingSkjemaValues {
+export interface DialogmoteInnkallingSkjemaValues {
   arbeidsgiver: string;
   klokkeslett: string;
   dato: string;
@@ -55,18 +59,19 @@ const texts = {
 const toInnkalling = (
   values: DialogmoteInnkallingSkjemaValues,
   fnr: string,
-  navEnhet: string
+  navEnhet: string,
+  innkallingDocumentGenerator: ForhandsvisInnkallingGenerator
 ): DialogmoteInnkallingDTO => ({
   tildeltEnhet: navEnhet,
   arbeidsgiver: {
     virksomhetsnummer: values.arbeidsgiver,
     fritekstInnkalling: values.fritekstArbeidsgiver,
-    innkalling: [], // TODO: Implementeres ifm forhåndsvisning av innkalling
+    innkalling: innkallingDocumentGenerator.arbeidsgiverInnkalling(values),
   },
   arbeidstaker: {
     personIdent: fnr,
     fritekstInnkalling: values.fritekstArbeidstaker,
-    innkalling: [], // TODO: Implementeres ifm forhåndsvisning av innkalling
+    innkalling: innkallingDocumentGenerator.arbeidstakerInnkalling(values),
   },
   tidSted: {
     sted: values.sted,
@@ -90,6 +95,7 @@ const DialogmoteInnkallingSkjema = ({
     resetFeilUtbedret,
     updateFeilUtbedret,
   } = useFeilUtbedret();
+  const innkallingDocumentGenerator = useForhandsvisInnkalling();
 
   const validate = (
     values: Partial<DialogmoteInnkallingSkjemaValues>
@@ -108,7 +114,12 @@ const DialogmoteInnkallingSkjema = ({
   };
 
   const submit = (values: DialogmoteInnkallingSkjemaValues) => {
-    const dialogmoteInnkalling = toInnkalling(values, fnr, navEnhet);
+    const dialogmoteInnkalling = toInnkalling(
+      values,
+      fnr,
+      navEnhet,
+      innkallingDocumentGenerator
+    );
     dispatch(opprettInnkalling(fnr, dialogmoteInnkalling));
   };
 

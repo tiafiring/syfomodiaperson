@@ -9,31 +9,59 @@ import configureStore from "redux-mock-store";
 import DialogmoteInnkallingSkjema from "../../src/components/dialogmote/innkalling/DialogmoteInnkallingSkjema";
 import {
   leggTilDagerPaDato,
+  tilDatoMedUkedagOgManedNavnOgKlokkeslett,
   toDatePrettyPrint,
 } from "../../src/utils/datoUtils";
 import { InputDateStringToISODateString } from "nav-datovelger/lib/utils/dateFormatUtils";
 import { Feilmelding } from "nav-frontend-typografi";
 import { Feiloppsummering } from "nav-frontend-skjema";
-import { Hovedknapp } from "nav-frontend-knapper";
+import { Hovedknapp, Knapp } from "nav-frontend-knapper";
 import { texts as skjemaFeilOppsummeringTexts } from "../../src/components/SkjemaFeiloppsummering";
 import { texts as valideringsTexts } from "../../src/utils/valideringUtils";
+import { genererDato } from "../../src/components/mote/utils";
+import { innkallingTexts } from "../../src/data/dialogmote/dialogmoteTexts";
+import { Forhandsvisning } from "../../src/components/dialogmote/Forhandsvisning";
+import { texts as innkallingArbeidsgiverTexts } from "../../src/components/dialogmote/innkalling/InnkallingArbeidsgiverForhandsvisning";
+import { texts as innkallingArbeidstakerTexts } from "../../src/components/dialogmote/innkalling/InnkallingArbeidstakerForhandsvisning";
+import Lukknapp from "nav-frontend-lukknapp";
 
 const realState = createStore(rootReducer).getState();
 
 const arbeigsgiverOrgnr = "110110110";
 const moteSted = "Møtested";
 const moteDato = toDatePrettyPrint(leggTilDagerPaDato(new Date(), 1)) as string;
+const moteDatoAsISODateString = InputDateStringToISODateString(moteDato);
 const moteKlokkeslett = "08:00";
-const moteDatoTid = `${InputDateStringToISODateString(
-  moteDato
-)}T${moteKlokkeslett}:00`;
+const moteDatoTid = `${moteDatoAsISODateString}T${moteKlokkeslett}:00`;
 const moteVideoLink = "https://www.link.no";
 const fritekstTilArbeidstaker = "Noe fritekst til arbeidstaker";
 const fritekstTilArbeidsgiver = "Noe fritekst til arbeidsgiver";
 const arbeidstakerFnr = "05087321470";
-const navEnhet = "1000";
+const arbeidstakerNavn = "Arne Arbeistaker";
+const navEnhet = "0315";
+const navEnhetNavn = "NAV Grünerløkka";
+const veilederNavn = "Vetle Veileder";
 const store = configureStore([]);
 const mockState = {
+  behandlendeEnhet: {
+    data: {
+      enhetId: navEnhet,
+      navn: navEnhetNavn,
+    },
+  },
+  veilederinfo: {
+    data: {
+      navn: veilederNavn,
+    },
+  },
+  navbruker: {
+    data: {
+      navn: arbeidstakerNavn,
+      kontaktinfo: {
+        fnr: arbeidstakerFnr,
+      },
+    },
+  },
   enhet: {
     valgtEnhet: navEnhet,
   },
@@ -246,12 +274,12 @@ describe("DialogmoteInnkallingSkjema", () => {
         arbeidsgiver: {
           virksomhetsnummer: arbeigsgiverOrgnr,
           fritekstInnkalling: fritekstTilArbeidsgiver,
-          innkalling: [],
+          innkalling: expectedArbeidsgiverInnkalling,
         },
         arbeidstaker: {
           personIdent: arbeidstakerFnr,
           fritekstInnkalling: fritekstTilArbeidstaker,
-          innkalling: [],
+          innkalling: expectedArbeidstakerInnkalling,
         },
         tidSted: {
           sted: moteSted,
@@ -263,6 +291,101 @@ describe("DialogmoteInnkallingSkjema", () => {
 
     expect(mockStore.getActions()[0]).to.deep.equal(expectedAction);
   });
+
+  it("forhåndsviser innkalling til arbeidstaker og arbeidsgiver", () => {
+    const mockStore = store({ ...realState, ...mockState });
+    const wrapper = mount(
+      <MemoryRouter initialEntries={["/sykefravaer/05087321470/dialogmote"]}>
+        <Route path="/sykefravaer/:fnr/dialogmote">
+          <Provider store={mockStore}>
+            <DialogmoteInnkallingSkjema pageTitle="Test" />
+          </Provider>
+        </Route>
+      </MemoryRouter>
+    );
+
+    const arbeidsgiverDropdown = wrapper.find("select");
+    changeFieldValue(arbeidsgiverDropdown, arbeigsgiverOrgnr);
+    const datoVelger = wrapper.find("ForwardRef(DateInput)");
+    changeFieldValue(datoVelger, moteDato);
+    datoVelger.simulate("blur");
+
+    const inputs = wrapper.find("input");
+    const stedInput = inputs.findWhere((w) => w.prop("name") === "sted");
+    const videoLinkInput = inputs.findWhere(
+      (w) => w.prop("name") === "videoLink"
+    );
+    const klokkeslettInput = inputs.findWhere(
+      (w) => w.prop("name") === "klokkeslett"
+    );
+    changeFieldValue(stedInput, moteSted);
+    changeFieldValue(videoLinkInput, moteVideoLink);
+    changeFieldValue(klokkeslettInput, moteKlokkeslett);
+
+    const textAreas = wrapper.find("textarea");
+    const fritekstArbeidsgiverTextArea = textAreas.findWhere(
+      (w) => w.prop("name") === "fritekstArbeidsgiver"
+    );
+    const fritekstArbeidstakerTextArea = textAreas.findWhere(
+      (w) => w.prop("name") === "fritekstArbeidstaker"
+    );
+    changeFieldValue(fritekstArbeidsgiverTextArea, fritekstTilArbeidsgiver);
+    changeFieldValue(fritekstArbeidstakerTextArea, fritekstTilArbeidstaker);
+
+    const getForhandsvisningsModaler = () => wrapper.find(Forhandsvisning);
+    let forhandsvisninger = getForhandsvisningsModaler();
+    expect(forhandsvisninger.at(0).props().documentComponents()).to.deep.equal(
+      expectedArbeidstakerInnkalling
+    );
+    expect(forhandsvisninger.at(1).props().documentComponents()).to.deep.equal(
+      expectedArbeidsgiverInnkalling
+    );
+
+    const previewButtons = wrapper.find(Knapp);
+
+    // Forhåndsvis innkalling til arbeidstaker og sjekk at modal vises med riktig tittel
+    previewButtons.at(0).simulate("click");
+    forhandsvisninger = getForhandsvisningsModaler();
+    let forhandsvisningInnkallingArbeidstaker = forhandsvisninger.at(0);
+    let forhandsvisningInnkallingArbeidsgiver = forhandsvisninger.at(1);
+    expect(forhandsvisningInnkallingArbeidstaker.prop("isOpen")).to.be.true;
+    expect(forhandsvisningInnkallingArbeidsgiver.prop("isOpen")).to.be.false;
+    expect(forhandsvisningInnkallingArbeidstaker.text()).to.contain(
+      innkallingArbeidstakerTexts.title
+    );
+    expect(forhandsvisningInnkallingArbeidstaker.text()).to.contain(
+      innkallingArbeidstakerTexts.subtitle
+    );
+    expect(forhandsvisningInnkallingArbeidsgiver.text()).not.to.contain(
+      innkallingArbeidsgiverTexts.title
+    );
+    expect(forhandsvisningInnkallingArbeidsgiver.text()).not.to.contain(
+      innkallingArbeidsgiverTexts.subtitle
+    );
+
+    // Lukk forhåndsvis innkalling til arbeidstaker
+    forhandsvisningInnkallingArbeidstaker.find(Lukknapp).simulate("click");
+
+    // Forhåndsvis innkalling til arbeidsgiver og sjekk at modal vises med riktig tittel
+    previewButtons.at(1).simulate("click");
+    forhandsvisninger = getForhandsvisningsModaler();
+    forhandsvisningInnkallingArbeidstaker = forhandsvisninger.at(0);
+    forhandsvisningInnkallingArbeidsgiver = forhandsvisninger.at(1);
+    expect(forhandsvisningInnkallingArbeidstaker.prop("isOpen")).to.be.false;
+    expect(forhandsvisningInnkallingArbeidsgiver.prop("isOpen")).to.be.true;
+    expect(forhandsvisningInnkallingArbeidstaker.text()).not.to.contain(
+      innkallingArbeidstakerTexts.title
+    );
+    expect(forhandsvisningInnkallingArbeidstaker.text()).not.to.contain(
+      innkallingArbeidstakerTexts.subtitle
+    );
+    expect(forhandsvisningInnkallingArbeidsgiver.text()).to.contain(
+      innkallingArbeidsgiverTexts.title
+    );
+    expect(forhandsvisningInnkallingArbeidsgiver.text()).to.contain(
+      innkallingArbeidsgiverTexts.subtitle
+    );
+  });
 });
 
 const changeFieldValue = (field: ReactWrapper<any, any>, newValue: string) => {
@@ -272,3 +395,120 @@ const changeFieldValue = (field: ReactWrapper<any, any>, newValue: string) => {
     },
   });
 };
+
+const expectedArbeidsgiverInnkalling = [
+  {
+    texts: [
+      tilDatoMedUkedagOgManedNavnOgKlokkeslett(
+        genererDato(moteDatoAsISODateString, moteKlokkeslett)
+      ),
+    ],
+    title: innkallingTexts.moteTidTitle,
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [moteSted],
+    title: innkallingTexts.moteStedTitle,
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [moteVideoLink],
+    title: innkallingTexts.videoLinkTitle,
+    type: "LINK",
+  },
+  {
+    texts: [`Gjelder ${arbeidstakerNavn}, f.nr. ${arbeidstakerFnr}`],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [innkallingTexts.arbeidsgiver.intro1],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [innkallingTexts.arbeidsgiver.intro2],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [fritekstTilArbeidsgiver],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [innkallingTexts.arbeidsgiver.outro1],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [innkallingTexts.arbeidsgiver.outro2],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [innkallingTexts.arbeidsgiver.outro3],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [innkallingTexts.foerMoteText],
+    title: innkallingTexts.foerMoteTitle,
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [innkallingTexts.hilsenText, navEnhetNavn],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [veilederNavn, "-Epost mangler-", "-Telefon mangler-"],
+    type: "PARAGRAPH",
+  },
+];
+const expectedArbeidstakerInnkalling = [
+  {
+    texts: [
+      tilDatoMedUkedagOgManedNavnOgKlokkeslett(
+        genererDato(moteDatoAsISODateString, moteKlokkeslett)
+      ),
+    ],
+    title: innkallingTexts.moteTidTitle,
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [moteSted],
+    title: innkallingTexts.moteStedTitle,
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [moteVideoLink],
+    title: innkallingTexts.videoLinkTitle,
+    type: "LINK",
+  },
+  {
+    texts: [`Hei ${arbeidstakerNavn}`],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [innkallingTexts.arbeidstaker.intro1],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [innkallingTexts.arbeidstaker.intro2],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [fritekstTilArbeidstaker],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [innkallingTexts.arbeidstaker.outro1],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [innkallingTexts.foerMoteText],
+    title: innkallingTexts.foerMoteTitle,
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [innkallingTexts.hilsenText, navEnhetNavn],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [veilederNavn],
+    type: "PARAGRAPH",
+  },
+];

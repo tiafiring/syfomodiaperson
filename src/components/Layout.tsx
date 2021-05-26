@@ -38,6 +38,7 @@ export enum PaddingSize {
 interface RowProps {
   topPadding?: PaddingSize;
   bottomPadding?: PaddingSize;
+  justifyContent?: JustifyContentType;
 }
 
 export const FlexRow = styled.div<RowProps>`
@@ -47,6 +48,8 @@ export const FlexRow = styled.div<RowProps>`
   width: 100%;
   padding-top: ${(props) => props.topPadding || 0};
   padding-bottom: ${(props) => props.bottomPadding || 0};
+  justify-content: ${(props) =>
+    props.justifyContent || JustifyContentType.FLEX_START};
 `;
 
 export const H2NoMargins = styled.h2`
