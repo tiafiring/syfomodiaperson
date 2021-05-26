@@ -4,8 +4,8 @@ import { RootState } from "../rootState";
 import { trackEvent } from "../../amplitude/amplitude";
 
 export const texts = {
-  buttonClick: "Klikker på knapp",
-  navigateTo: "Navigerer til",
+  buttonClick: "Klikker på:",
+  pageLoad: "Laster side:",
 };
 
 export interface loggingMetadata {
@@ -46,15 +46,15 @@ export const useTrackButtonClick = () => {
   const trackEvent = useTrackEvent();
 
   return function (buttonName: string, kontekst: string) {
-    trackEvent(`${texts.buttonClick} '${buttonName}'`, { kontekst: kontekst });
+    trackEvent(`${texts.buttonClick} ${buttonName}`, { kontekst: kontekst });
   };
 };
 
-export const useTrackNavigation = () => {
+export const useTrackPageLoad = () => {
   const trackEvent = useTrackEvent();
 
   return function (pageName: string, aktivtMenyPunkt: string) {
-    trackEvent(`${texts.navigateTo} '${pageName}'`, {
+    trackEvent(`${texts.pageLoad} ${pageName}`, {
       aktivtMenyPunkt: aktivtMenyPunkt,
     });
   };
