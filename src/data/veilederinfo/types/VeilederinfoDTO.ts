@@ -1,4 +1,8 @@
 export interface VeilederinfoDTO {
-  navn: string;
   ident: string;
+  navn: string;
+  fornavn: string;
+  etternavn: string;
+  epost: string;
+  telefonnummer?: string;
 }

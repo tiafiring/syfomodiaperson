@@ -135,8 +135,8 @@ const arbeidsgiverOutro = (
     paragraph(innkallingTexts.hilsenText, behandlendeEnhet.navn),
     paragraph(
       veilederinfo?.navn ?? "",
-      "-Epost mangler-", // TODO: Hent epost for veileder
-      "-Telefon mangler-" // TODO: Hent tlf for veileder)
+      veilederinfo?.epost ?? "",
+      veilederinfo?.telefonnummer ?? ""
     ),
   ];
 };

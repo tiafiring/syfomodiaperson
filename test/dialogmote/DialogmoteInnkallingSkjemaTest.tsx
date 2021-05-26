@@ -41,6 +41,8 @@ const arbeidstakerNavn = "Arne Arbeistaker";
 const navEnhet = "0315";
 const navEnhetNavn = "NAV Grünerløkka";
 const veilederNavn = "Vetle Veileder";
+const veilederEpost = "vetle.veileder@nav.no";
+const veilederTlf = "12345678";
 const store = configureStore([]);
 const mockState = {
   behandlendeEnhet: {
@@ -52,6 +54,8 @@ const mockState = {
   veilederinfo: {
     data: {
       navn: veilederNavn,
+      epost: veilederEpost,
+      telefonnummer: veilederTlf,
     },
   },
   navbruker: {
@@ -454,7 +458,7 @@ const expectedArbeidsgiverInnkalling = [
     type: "PARAGRAPH",
   },
   {
-    texts: [veilederNavn, "-Epost mangler-", "-Telefon mangler-"],
+    texts: [veilederNavn, veilederEpost, veilederTlf],
     type: "PARAGRAPH",
   },
 ];

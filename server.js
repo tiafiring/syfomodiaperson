@@ -40,6 +40,11 @@ const isdialogmoteHost =
     ? "isdialogmote.dev.intern.nav.no"
     : "isdialogmote.intern.nav.no";
 
+const syfoveilederHost =
+  process.env.NAIS_CONTEXT === "dev"
+    ? "https://syfoveileder.dev.intern.nav.no"
+    : "https://syfoveileder.intern.nav.no";
+
 function nocache(req, res, next) {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
   res.header("Expires", "-1");
@@ -384,6 +389,19 @@ server.use("/isprediksjon/api/v1/prediksjon", cookieParser(), (req, res) => {
       res.sendStatus(err.response.status);
     });
 });
+
+server.use(
+  "/syfoveileder/api",
+  proxy(syfoveilederHost, {
+    proxyReqPathResolver: function (req) {
+      return `/syfoveileder/api/v1/${req.url}`;
+    },
+    proxyErrorHandler: function (err, res, next) {
+      console.error("Error in proxy for syfoveileder", err);
+      next(err);
+    },
+  })
+);
 
 const port = 8080;
 
