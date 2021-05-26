@@ -1,9 +1,25 @@
-interface DialogmotedeltakerArbeidstakerVarselDTO {
+export enum MotedeltakerVarselType {
+  AVLYST = "AVLYST",
+  INNKALT = "INNKALT",
+  NYTT_TID_STED = "NYTT_TID_STED",
+}
+
+export interface DialogmotedeltakerArbeidstakerVarselDTO {
   readonly createdAt: string;
-  readonly varselType: string;
+  readonly varselType: MotedeltakerVarselType;
   readonly digitalt: boolean;
   readonly lestDato?: string;
   readonly fritekst: string;
+  readonly document: DocumentComponentDto[];
+}
+
+export interface DialogmotedeltakerArbeidsgiverVarselDTO {
+  readonly createdAt: string;
+  readonly varselType: MotedeltakerVarselType;
+  readonly status: string;
+  readonly lestDato?: string;
+  readonly fritekst: string;
+  readonly document: DocumentComponentDto[];
 }
 
 export enum DocumentComponentType {
@@ -25,17 +41,18 @@ export enum DialogmoteStatus {
   NYTT_TID_STED = "NYTT_TID_STED",
 }
 
-interface DialogmotedeltakerArbeidstakerDTO {
+export interface DialogmotedeltakerArbeidstakerDTO {
   readonly personIdent: string;
   readonly type: string;
   readonly varselList: DialogmotedeltakerArbeidstakerVarselDTO[];
 }
 
-interface DialogmotedeltakerArbeidsgiverDTO {
+export interface DialogmotedeltakerArbeidsgiverDTO {
   readonly virksomhetsnummer: string;
   readonly lederNavn?: string;
   readonly lederEpost?: string;
   readonly type: string;
+  readonly varselList: DialogmotedeltakerArbeidsgiverVarselDTO[];
 }
 
 export interface DialogmoteInnkallingDTO {
