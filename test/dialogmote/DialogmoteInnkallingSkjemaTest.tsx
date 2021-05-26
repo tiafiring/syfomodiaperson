@@ -298,7 +298,7 @@ describe("DialogmoteInnkallingSkjema", () => {
       <MemoryRouter initialEntries={["/sykefravaer/05087321470/dialogmote"]}>
         <Route path="/sykefravaer/:fnr/dialogmote">
           <Provider store={mockStore}>
-            <DialogmoteInnkallingSkjema />
+            <DialogmoteInnkallingSkjema pageTitle="Test" />
           </Provider>
         </Route>
       </MemoryRouter>
