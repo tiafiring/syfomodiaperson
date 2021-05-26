@@ -18,7 +18,7 @@ export const innkallingTexts = {
     intro1:
       "Velkommen til dialogmøte i regi av NAV. NAV har ansvar for å innkalle til dialogmøte senest når en sykmelding har vart i seks måneder, eventuelt på et annet tidspunkt hvis noen av partene ser behov for det.",
     intro2:
-      "Før møtet er det viktig at dere fyller ut oppfølgingsplanen sammen, den er et godt utgangspunkt for å snakke om hva som fungerer, hva som har blitt forsøkt, og hvilke muligheter som finnes framover.",
+      "I møtet vil vi høre både hva du og arbeidsgiveren sier om arbeidssituasjonen og mulighetene for å jobbe.",
     outro1:
       "Vi gjør oppmerksom på at det er obligatorisk å delta i dialogmøter med NAV og å sende inn oppfølgingsplan på forhånd. Oppdatert oppfølgingsplan skal sendes til NAV senest 1 uke før møtet avholdes.",
     outro2:
