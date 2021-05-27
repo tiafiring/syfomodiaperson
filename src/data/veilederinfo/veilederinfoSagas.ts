@@ -5,7 +5,7 @@ import * as actions from "./veilederinfo_actions";
 export function* hentVeilederinfoSaga() {
   yield put(actions.henterVeilederinfo());
   try {
-    const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/veilederinfo`;
+    const path = `${process.env.REACT_APP_SYFOVEILEDER_ROOT}/veileder/self`;
     const data = yield call(get, path);
     yield put(actions.veilederinfoHentet(data));
   } catch (e) {

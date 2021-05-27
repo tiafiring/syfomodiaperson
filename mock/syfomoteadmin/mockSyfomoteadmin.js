@@ -68,11 +68,6 @@ const mockForLokal = (server) => {
     res.send(JSON.stringify(mockData.getHistorikkMoter()));
   });
 
-  server.get("/syfomoteadmin/api/internad/veilederinfo", (req, res) => {
-    res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(mockData.getVeildederInfo()));
-  });
-
   server.get("/syfomoteadmin/api/internad/virksomhet/110110110", (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.send(mockVirksomhet.getVirksomhet("Fire Station"));

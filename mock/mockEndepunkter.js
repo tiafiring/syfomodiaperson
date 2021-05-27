@@ -15,6 +15,7 @@ const mockIspengestopp = require("./ispengestopp/mockIspengestopp");
 const mockIsprediksjon = require("./isprediksjon/mockIsprediksjon");
 const mockVedtak = require("./spinnsyn/mockVedtak");
 const mockIsdialogmote = require("./isdialogmote/mockIsdialogmote");
+const mockSyfoveileder = require("./syfoveileder/mockSyfoveileder");
 
 const mockEndepunkter = (server, erLokal) => {
   server.use(express.json());
@@ -37,6 +38,7 @@ const mockEndepunkter = (server, erLokal) => {
     mockIsprediksjon,
     mockVedtak,
     mockIsdialogmote,
+    mockSyfoveileder,
   ].forEach((func) => {
     func(server, erLokal);
   });

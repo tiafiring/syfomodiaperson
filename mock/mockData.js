@@ -10,9 +10,9 @@ const getOppfolgingstilfelleperioder = require("./data/oppfolgingstilfelleperiod
 const getSoknader = require("./data/soknader");
 const getSykmeldinger = require("./data/sykmeldinger");
 const getTilgangTilBruker = require("./data/tilgangtilbruker");
-const getVeildederInfo = require("./data/veilederinfo");
 const getPrediksjon = require("./data/prediksjon");
 const getVedtak = require("./data/vedtak");
+const getVeileder = require("./data/veileder");
 
 module.exports = {
   moter: getMoter(),
@@ -27,7 +27,7 @@ module.exports = {
   getSoknader,
   getSykmeldinger,
   getTilgangTilBruker,
-  getVeildederInfo,
   getPrediksjon,
   getVedtak,
+  getVeileder,
 };
