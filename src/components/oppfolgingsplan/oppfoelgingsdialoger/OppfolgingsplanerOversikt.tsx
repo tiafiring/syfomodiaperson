@@ -56,7 +56,6 @@ const OppfolgingsplanerOversikt = (
   oppfolgingsplanerOversiktProps: OppfolgingsplanerOversiktProps
 ) => {
   const {
-    fnr,
     aktiveDialoger,
     inaktiveDialoger,
     oppfolgingsplanerLPS,
@@ -153,7 +152,7 @@ const OppfolgingsplanerOversikt = (
             <Link
               key={index}
               className="navigasjonspanel navigasjonspanel--stor"
-              to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}
+              to={`/sykefravaer/oppfoelgingsplaner/${dialog.id}`}
             >
               <div className="navigasjonselement">
                 <h3 className="panel__tittel navigasjonselement__tittel">
@@ -185,7 +184,7 @@ const OppfolgingsplanerOversikt = (
           <Link
             key={index}
             className="navigasjonspanel navigasjonspanel--stor"
-            to={`/sykefravaer/${fnr}/oppfoelgingsplaner/${dialog.id}`}
+            to={`/sykefravaer/oppfoelgingsplaner/${dialog.id}`}
           >
             <div className="navigasjonselement">
               <h3 className="panel__tittel navigasjonselement__tittel">

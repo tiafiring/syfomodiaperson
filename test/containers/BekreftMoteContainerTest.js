@@ -124,11 +124,13 @@ describe("BekreftMoteContainer", () => {
         match: {
           params: {
             alternativId: "328",
-            fnr: "123",
           },
         },
       };
       state = {
+        valgtbruker: {
+          personident: "123",
+        },
         epostinnhold: { henter: false, data: {} },
         moter: {
           data: [

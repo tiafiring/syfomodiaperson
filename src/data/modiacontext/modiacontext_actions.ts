@@ -1,3 +1,5 @@
+import { RSContext, RSNyContext } from "./modiacontextTypes";
+
 export const PUSH_MODIACONTEXT_FORESPURT = "PUSH_MODIACONTEXT_FORESPURT";
 export const PUSH_MODIACONTEXT_FEILET = "PUSH_MODIACONTEXT_FEILET";
 export const MODIACONTEXT_PUSHET = "MODIACONTEXT_PUSHET";
@@ -13,10 +15,19 @@ export const HENTER_AKTIVENHET = "HENTER_AKTIVENHET";
 export const HENT_AKTIVENHET_FEILET = "HENT_AKTIVENHET_FEILET";
 export const AKTIVENHET_HENTET = "AKTIVENHET_HENTET";
 
-export function hentAktivBruker(data: any) {
+export interface AktivBrukerHentetAction {
+  type: typeof AKTIVBRUKER_HENTET;
+  data: RSContext;
+}
+
+export interface PushModiaContextAction {
+  type: typeof PUSH_MODIACONTEXT_FORESPURT;
+  data: RSNyContext;
+}
+
+export function hentAktivBruker() {
   return {
     type: HENT_AKTIVBRUKER_FORESPURT,
-    data,
   };
 }
 
@@ -32,7 +43,7 @@ export function henterAktivBruker() {
   };
 }
 
-export function aktivBrukerHentet(data: any) {
+export function aktivBrukerHentet(data: RSContext): AktivBrukerHentetAction {
   return {
     type: AKTIVBRUKER_HENTET,
     data,
@@ -77,7 +88,7 @@ export function pusherModiaContext() {
   };
 }
 
-export function pushModiaContext(data: any) {
+export function pushModiaContext(data: RSNyContext): PushModiaContextAction {
   return {
     type: PUSH_MODIACONTEXT_FORESPURT,
     data,

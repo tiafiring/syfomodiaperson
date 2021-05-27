@@ -19,7 +19,6 @@ const texts = {
 interface BesvarteTidspunkterProps {
   alternativer: MoteAlternativDTO[];
   deltakertype: MotedeltakerType;
-  fnr: string;
   mote: MoteDTO;
 }
 
@@ -29,7 +28,6 @@ const BesvarteTidspunkter = (
   const {
     alternativer,
     deltakertype = BRUKER,
-    fnr,
     mote,
   } = besvarteTidspunkterProps;
   const arbeidsgiver = mote.deltakere.filter((d) => {
@@ -112,7 +110,7 @@ const BesvarteTidspunkter = (
               {deltakertype === NAV_VEILEDER && (
                 <div className="alternativsvar__bekreft">
                   <Link
-                    to={`/sykefravaer/${fnr}/mote/bekreft/${field.id}`}
+                    to={`/sykefravaer/mote/bekreft/${field.id}`}
                     className="knapp knapp--hoved knapp--mini js-bekreft-tidspunkt"
                   >
                     {texts.bekreft}

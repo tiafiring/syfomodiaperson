@@ -22,7 +22,7 @@ function* opprettInnkalling(action: OpprettInnkallingAction) {
     const path = `${process.env.REACT_APP_ISDIALOGMOTE_ROOT}/post/v1/dialogmote/personident`;
     yield call(post, path, action.data, action.fnr);
     yield put(opprettInnkallingFullfort());
-    window.location.href = `/sykefravaer/${action.fnr}/moteoversikt`;
+    window.location.href = `/sykefravaer/moteoversikt`;
   } catch (e) {
     yield put(opprettInnkallingFeilet());
   }
@@ -45,7 +45,7 @@ function* avlysDialogmote(action: AvlysMoteAction) {
     const path = `${process.env.REACT_APP_ISDIALOGMOTE_ROOT}/post/v1/dialogmote/${action.moteUuid}/avlys`;
     yield call(post, path, action.data);
     yield put(avlysMoteFullfort());
-    window.location.href = `/sykefravaer/${action.fnr}/moteoversikt`;
+    window.location.href = `/sykefravaer/moteoversikt`;
   } catch (e) {
     yield put(avlysMoteFeilet());
   }

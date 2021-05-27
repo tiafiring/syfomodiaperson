@@ -33,6 +33,7 @@ describe("modiacontext", () => {
     expect(state).to.deep.equal({
       henterBruker: true,
       hentingBrukerFeilet: false,
+      hentingBrukerForsokt: false,
       data: {},
     });
   });
@@ -43,6 +44,7 @@ describe("modiacontext", () => {
     expect(state).to.deep.equal({
       henterBruker: false,
       hentingBrukerFeilet: true,
+      hentingBrukerForsokt: true,
       data: {},
     });
   });

@@ -1,9 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Panel from "nav-frontend-paneler";
 import TilbakeTilSoknader from "./TilbakeTilSoknader";
 
-const IkkeInnsendtSoknad = ({ fnr }) => {
+const IkkeInnsendtSoknad = () => {
   return (
     <div>
       <Panel className="panel--melding blokk">
@@ -15,13 +14,9 @@ const IkkeInnsendtSoknad = ({ fnr }) => {
           og/eller NAV vil du kunne se statusen på søknaden her.
         </p>
       </Panel>
-      <TilbakeTilSoknader fnr={fnr} />
+      <TilbakeTilSoknader />
     </div>
   );
-};
-
-IkkeInnsendtSoknad.propTypes = {
-  fnr: PropTypes.string,
 };
 
 export default IkkeInnsendtSoknad;

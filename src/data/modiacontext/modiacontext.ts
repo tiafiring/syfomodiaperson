@@ -7,7 +7,9 @@ import {
   HENT_AKTIVBRUKER_FEILET,
   HENTER_AKTIVENHET,
   HENT_AKTIVENHET_FEILET,
+  AKTIVBRUKER_HENTET,
 } from "./modiacontext_actions";
+import { RSContext } from "./modiacontextTypes";
 
 export interface ModiaContextState {
   pushet: boolean;
@@ -17,7 +19,8 @@ export interface ModiaContextState {
   hentingEnhetFeilet: boolean;
   henterBruker: boolean;
   hentingBrukerFeilet: boolean;
-  data: any;
+  hentingBrukerForsokt: boolean;
+  data: RSContext | Record<string, unknown>;
 }
 
 export const initialState: ModiaContextState = {
@@ -28,6 +31,7 @@ export const initialState: ModiaContextState = {
   hentingEnhetFeilet: false,
   henterBruker: false,
   hentingBrukerFeilet: false,
+  hentingBrukerForsokt: false,
   data: {},
 };
 
@@ -57,16 +61,24 @@ const modiacontext: Reducer<ModiaContextState> = (
         pushingFeilet: false,
       });
     }
+    case AKTIVBRUKER_HENTET: {
+      return Object.assign({}, state, {
+        henterBruker: false,
+        hentingBrukerForsokt: true,
+      });
+    }
     case HENT_AKTIVBRUKER_FEILET: {
       return Object.assign({}, state, {
         henterBruker: false,
         hentingBrukerFeilet: true,
+        hentingBrukerForsokt: true,
       });
     }
     case HENTER_AKTIVBRUKER: {
       return Object.assign({}, state, {
         henterBruker: true,
         hentingBrukerFeilet: false,
+        hentingBrukerForsokt: false,
       });
     }
     case HENT_AKTIVENHET_FEILET: {

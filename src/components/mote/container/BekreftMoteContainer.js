@@ -68,7 +68,7 @@ export class BekreftMoteSide extends Component {
                   <Lightbox
                     scrollOverflowY={this.state.scrollOverflowY}
                     onClose={() => {
-                      history.replace(`/sykefravaer/${fnr}/mote`);
+                      history.replace(`/sykefravaer/mote`);
                     }}
                   >
                     {(() => {
@@ -80,7 +80,7 @@ export class BekreftMoteSide extends Component {
                           mote={mote}
                           arbeidstaker={arbeidstaker}
                           alternativ={alternativ}
-                          avbrytHref={`/sykefravaer/${fnr}/mote`}
+                          avbrytHref={`/sykefravaer/mote`}
                           bekrefter={bekrefter}
                           hentEpostinnhold={(moteUuid) => {
                             hentBekreftMoteEpostinnhold(
@@ -146,7 +146,7 @@ export const mapStateToProps = (state, ownProps) => {
       })[0]
     : null;
   return {
-    fnr: ownProps.match.params.fnr,
+    fnr: state.valgtbruker.personident,
     bekrefter: state.moter.bekrefter,
     bekreftFeilet: state.moter.bekreftFeilet,
     henterMoterBool: state.moter.henter || state.navbruker.henter,

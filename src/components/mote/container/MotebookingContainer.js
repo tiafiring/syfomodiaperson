@@ -85,14 +85,14 @@ MotebookingSide.propTypes = {
   moterTilgang: PropTypes.object,
 };
 
-export const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state) => {
   const aktivtMote = state.moter.data.filter((mote) => {
     return mote.status !== "AVBRUTT";
   })[0];
 
   const harForsoktHentetAlt = state.moter.hentingForsokt;
   return {
-    fnr: ownProps.match.params.fnr,
+    fnr: state.valgtbruker.personident,
     mote: aktivtMote,
     henter: !harForsoktHentetAlt || state.ledere.henter || state.tilgang.henter,
     sender: state.moter.sender,

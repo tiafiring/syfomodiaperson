@@ -103,7 +103,6 @@ describe("MotebookingContainer", () => {
 
   describe("mapStateToProps", () => {
     let state;
-    let ownProps;
 
     beforeEach(() => {
       state = {
@@ -130,18 +129,14 @@ describe("MotebookingContainer", () => {
           hentingFeilet: false,
           henter: false,
         },
-      };
-      ownProps = {
-        match: {
-          params: {
-            fnr: "887766",
-          },
+        valgtbruker: {
+          personident: "887766",
         },
       };
     });
 
     it("Skal returnere fnr", () => {
-      const props = mapStateToProps(state, ownProps);
+      const props = mapStateToProps(state);
       expect(props.fnr).to.equal("887766");
     });
 
@@ -152,7 +147,7 @@ describe("MotebookingContainer", () => {
           status: "OPPRETTET",
         },
       ];
-      const props = mapStateToProps(state, ownProps);
+      const props = mapStateToProps(state);
       expect(props.mote).to.deep.equal({
         id: 1,
         status: "OPPRETTET",
@@ -166,7 +161,7 @@ describe("MotebookingContainer", () => {
           status: "BEKREFTET",
         },
       ];
-      const props = mapStateToProps(state, ownProps);
+      const props = mapStateToProps(state);
       expect(props.mote).to.deep.equal({
         id: 1,
         status: "BEKREFTET",
@@ -180,13 +175,13 @@ describe("MotebookingContainer", () => {
           status: "AVBRUTT",
         },
       ];
-      const props = mapStateToProps(state, ownProps);
+      const props = mapStateToProps(state);
       expect(props.mote).to.be.equal(undefined);
     });
 
     it("Skal returnere mote === undefined dersom det ikke finnes møter", () => {
       state.moter.data = [];
-      const props = mapStateToProps(state, ownProps);
+      const props = mapStateToProps(state);
       expect(props.mote).to.be.equal(undefined);
     });
 
@@ -197,7 +192,7 @@ describe("MotebookingContainer", () => {
         },
       ];
       state.moter.henter = true;
-      const props = mapStateToProps(state, ownProps);
+      const props = mapStateToProps(state);
       expect(props.henter).to.be.equal(true);
     });
 
@@ -209,7 +204,7 @@ describe("MotebookingContainer", () => {
       ];
       state.moter.hentingForsokt = true;
       state.ledere.henter = false;
-      const props = mapStateToProps(state, ownProps);
+      const props = mapStateToProps(state);
       expect(props.henter).to.be.equal(false);
     });
 
@@ -221,7 +216,7 @@ describe("MotebookingContainer", () => {
       ];
       state.moter.hentingForsokt = false;
       state.ledere.henter = false;
-      const props = mapStateToProps(state, ownProps);
+      const props = mapStateToProps(state);
       expect(props.henter).to.be.equal(true);
     });
 
@@ -232,7 +227,7 @@ describe("MotebookingContainer", () => {
         },
       ];
       state.moter.sender = true;
-      const props = mapStateToProps(state, ownProps);
+      const props = mapStateToProps(state);
       expect(props.sender).to.be.equal(true);
     });
 
@@ -243,7 +238,7 @@ describe("MotebookingContainer", () => {
         },
       ];
       state.moter.sender = false;
-      const props = mapStateToProps(state, ownProps);
+      const props = mapStateToProps(state);
       expect(props.sender).to.be.equal(false);
     });
 
@@ -254,7 +249,7 @@ describe("MotebookingContainer", () => {
         },
       ];
       state.moter.hentingFeilet = true;
-      const props = mapStateToProps(state, ownProps);
+      const props = mapStateToProps(state);
       expect(props.hentingFeilet).to.be.equal(true);
     });
 
@@ -265,7 +260,7 @@ describe("MotebookingContainer", () => {
         },
       ];
       state.moter.hentingFeilet = false;
-      const props = mapStateToProps(state, ownProps);
+      const props = mapStateToProps(state);
       expect(props.hentingFeilet).to.be.equal(false);
     });
 
@@ -276,7 +271,7 @@ describe("MotebookingContainer", () => {
         },
       ];
       state.moter.sendingFeilet = true;
-      const props = mapStateToProps(state, ownProps);
+      const props = mapStateToProps(state);
       expect(props.sendingFeilet).to.be.equal(true);
     });
 
@@ -287,7 +282,7 @@ describe("MotebookingContainer", () => {
         },
       ];
       state.moter.sendingFeilet = false;
-      const props = mapStateToProps(state, ownProps);
+      const props = mapStateToProps(state);
       expect(props.sendingFeilet).to.be.equal(false);
     });
   });

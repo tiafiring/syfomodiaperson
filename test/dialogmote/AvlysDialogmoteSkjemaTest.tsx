@@ -19,6 +19,12 @@ import { texts as valideringsTexts } from "../../src/utils/valideringUtils";
 
 const realState = createStore(rootReducer).getState();
 const store = configureStore([]);
+const arbeidstakerPersonIdent = "05087321470";
+const mockState = {
+  valgtbruker: {
+    personident: arbeidstakerPersonIdent,
+  },
+};
 const moteUuid = "123abc";
 const mote: DialogmoteDTO = {
   arbeidsgiver: {
@@ -27,7 +33,7 @@ const mote: DialogmoteDTO = {
     varselList: [],
   },
   arbeidstaker: {
-    personIdent: "05087321470",
+    personIdent: arbeidstakerPersonIdent,
     type: "ARBEIDSTAKER",
     varselList: [],
   },
@@ -47,11 +53,9 @@ const tekstTilArbeidsgiver = "Noe tekst til arbeidsgiver";
 describe("AvlysDialogmoteSkjemaTest", () => {
   it("viser møtetidspunkt", () => {
     const wrapper = mount(
-      <MemoryRouter
-        initialEntries={["/sykefravaer/05087321470/dialogmote/123abc/avlys"]}
-      >
-        <Route path="/sykefravaer/:fnr/dialogmote/:dialogmoteUuid/avlys">
-          <Provider store={store({ ...realState })}>
+      <MemoryRouter initialEntries={["/sykefravaer/dialogmote/123abc/avlys"]}>
+        <Route path="/sykefravaer/dialogmote/:dialogmoteUuid/avlys">
+          <Provider store={store({ ...realState, ...mockState })}>
             <AvlysDialogmoteSkjema dialogmote={mote} pageTitle="test" />
           </Provider>
         </Route>
@@ -63,11 +67,9 @@ describe("AvlysDialogmoteSkjemaTest", () => {
   });
   it("validerer begrunnelser", () => {
     const wrapper = mount(
-      <MemoryRouter
-        initialEntries={["/sykefravaer/05087321470/dialogmote/123abc/avlys"]}
-      >
-        <Route path="/sykefravaer/:fnr/dialogmote/:dialogmoteUuid/avlys">
-          <Provider store={store({ ...realState })}>
+      <MemoryRouter initialEntries={["/sykefravaer/dialogmote/123abc/avlys"]}>
+        <Route path="/sykefravaer/dialogmote/:dialogmoteUuid/avlys">
+          <Provider store={store({ ...realState, ...mockState })}>
             <AvlysDialogmoteSkjema dialogmote={mote} pageTitle="test" />
           </Provider>
         </Route>
@@ -105,11 +107,9 @@ describe("AvlysDialogmoteSkjemaTest", () => {
   });
   it("valideringsmeldinger forsvinner ved utbedring", () => {
     const wrapper = mount(
-      <MemoryRouter
-        initialEntries={["/sykefravaer/05087321470/dialogmote/123abc/avlys"]}
-      >
-        <Route path="/sykefravaer/:fnr/dialogmote/:dialogmoteUuid/avlys">
-          <Provider store={store({ ...realState })}>
+      <MemoryRouter initialEntries={["/sykefravaer/dialogmote/123abc/avlys"]}>
+        <Route path="/sykefravaer/dialogmote/:dialogmoteUuid/avlys">
+          <Provider store={store({ ...realState, ...mockState })}>
             <AvlysDialogmoteSkjema dialogmote={mote} pageTitle="test" />
           </Provider>
         </Route>
@@ -173,12 +173,10 @@ describe("AvlysDialogmoteSkjemaTest", () => {
     expect(wrapper.find(Feiloppsummering)).to.have.length(1);
   });
   it("avlyser møte ved submit av skjema", () => {
-    const mockStore = store({ ...realState });
+    const mockStore = store({ ...realState, ...mockState });
     const wrapper = mount(
-      <MemoryRouter
-        initialEntries={["/sykefravaer/05087321470/dialogmote/123abc/avlys"]}
-      >
-        <Route path="/sykefravaer/:fnr/dialogmote/:dialogmoteUuid/avlys">
+      <MemoryRouter initialEntries={["/sykefravaer/dialogmote/123abc/avlys"]}>
+        <Route path="/sykefravaer/dialogmote/:dialogmoteUuid/avlys">
           <Provider store={mockStore}>
             <AvlysDialogmoteSkjema dialogmote={mote} pageTitle="test" />
           </Provider>
@@ -201,7 +199,7 @@ describe("AvlysDialogmoteSkjemaTest", () => {
 
     expect(mockStore.getActions()[0]).to.deep.equal({
       type: "AVLYS_MOTE_FORESPURT",
-      fnr: "05087321470",
+      fnr: arbeidstakerPersonIdent,
       moteUuid: moteUuid,
       data: {
         arbeidsgiver: {

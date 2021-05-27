@@ -1,7 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router";
 import { FlexRow } from "../../../Layout";
-import { useFnrParam } from "../../../../hooks/useFnrParam";
 import { TrackedKnapp } from "../../../buttons/TrackedKnapp";
 
 const texts = {
@@ -11,14 +10,13 @@ const texts = {
 
 export const SeMoteStatus = () => {
   const history = useHistory();
-  const fnr = useFnrParam();
 
   return (
     <FlexRow>
       <TrackedKnapp
         context={texts.moteStatusTrackingContext}
         onClick={() => {
-          history.push(`/sykefravaer/${fnr}/mote`);
+          history.push(`/sykefravaer/mote`);
         }}
       >
         {texts.gaTilMotestatus}

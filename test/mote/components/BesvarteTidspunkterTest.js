@@ -87,7 +87,6 @@ describe("BesvarteTidspunkter", () => {
             mote={moteBesvartTrueAvArbeidsgiver}
             alternativer={moteBesvartTrueAvArbeidsgiver.alternativer}
             deltakertype={NAV_VEILEDER}
-            fnr="123"
           />
         </BrowserRouter>
       );
@@ -100,7 +99,7 @@ describe("BesvarteTidspunkter", () => {
 
     it("Lenken skal ha riktig to-parameter", () => {
       component.find(Link).forEach((l) => {
-        expect(l.prop("to")).to.contain("/sykefravaer/123/mote/bekreft/");
+        expect(l.prop("to")).to.contain("/sykefravaer/mote/bekreft/");
       });
     });
 
@@ -117,7 +116,6 @@ describe("BesvarteTidspunkter", () => {
             mote={moteIkkeBesvart}
             alternativer={moteIkkeBesvart.alternativer}
             deltakertype={NAV_VEILEDER}
-            fnr="123"
           />
         </BrowserRouter>
       );
@@ -130,7 +128,7 @@ describe("BesvarteTidspunkter", () => {
 
     it("Lenken skal ha riktig to-parameter", () => {
       component.find(Link).forEach((l) => {
-        expect(l.prop("to")).to.contain("/sykefravaer/123/mote/bekreft/");
+        expect(l.prop("to")).to.contain("/sykefravaer/mote/bekreft/");
       });
     });
   });
@@ -147,7 +145,6 @@ describe("BesvarteTidspunkter", () => {
           mote={mote}
           alternativer={moteBesvartTrueAvArbeidsgiver.alternativer}
           deltakertype={NAV_VEILEDER}
-          fnr="123"
         />
       );
     });
@@ -165,7 +162,6 @@ describe("BesvarteTidspunkter", () => {
           mote={mote}
           alternativer={moteBesvartTrueAvArbeidsgiver.alternativer}
           deltakertype={NAV_VEILEDER}
-          fnr="123"
         />
       );
     });

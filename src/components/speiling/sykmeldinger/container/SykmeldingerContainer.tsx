@@ -13,6 +13,7 @@ import { hentBegrunnelseTekst } from "../../../../utils/tilgangUtils";
 import { harForsoktHentetSykmeldinger } from "../../../../utils/reducerUtils";
 import Pengestopp from "../../../pengestopp/Pengestopp";
 import { useTilgang } from "../../../../hooks/useTilgang";
+import { useValgtPersonident } from "../../../../hooks/useValgtBruker";
 
 const texts = {
   introduksjonstekst:
@@ -21,7 +22,7 @@ const texts = {
 };
 
 const SykmeldingerSide = () => {
-  const fnr = window.location.pathname.split("/")[2];
+  const fnr = useValgtPersonident();
 
   const navbrukerState = useSelector((state: any) => state.navbruker);
   const sykmeldingerState = useSelector((state: any) => state.sykmeldinger);

@@ -5,7 +5,6 @@ import { MoteIkonBlaaImage } from "../../../../../img/ImageComponents";
 import { DialogmotePanel } from "../DialogmotePanel";
 import { tilDatoMedUkedagOgManedNavn } from "../../../../utils/datoUtils";
 import { useAktivtMoteplanleggerMote } from "../../../../data/mote/moter_hooks";
-import { useFnrParam } from "../../../../hooks/useFnrParam";
 import { Knapp } from "nav-frontend-knapper";
 import { FlexRow } from "../../../Layout";
 import { useHistory } from "react-router";
@@ -35,7 +34,6 @@ const resolveUndertittelForMoteStatus = (mote: MoteDTO) => {
 export const Moteplanleggeren = (): ReactElement => {
   const aktivtMote = useAktivtMoteplanleggerMote();
   const history = useHistory();
-  const fnr = useFnrParam();
 
   return aktivtMote ? (
     <DialogmotePanel
@@ -58,7 +56,7 @@ export const Moteplanleggeren = (): ReactElement => {
       <FlexRow>
         <Knapp
           onClick={() => {
-            history.push(`/sykefravaer/${fnr}/mote`);
+            history.push(`/sykefravaer/mote`);
           }}
         >
           {texts.nyttMote}

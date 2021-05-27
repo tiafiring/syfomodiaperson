@@ -51,7 +51,7 @@ export class AvbrytMoteSide extends Component {
             return (
               <Lightbox
                 onClose={() => {
-                  history.replace(`/sykefravaer/${fnr}/mote`);
+                  history.replace(`/sykefravaer/mote`);
                 }}
               >
                 {(() => {
@@ -64,7 +64,7 @@ export class AvbrytMoteSide extends Component {
                       onSubmit={() => {
                         this.avbrytMote();
                       }}
-                      avbrytHref={`/sykefravaer/${fnr}/mote`}
+                      avbrytHref={`/sykefravaer/mote`}
                     />
                   );
                 })()}
@@ -96,7 +96,7 @@ export function mapStateToProps(state, ownProps) {
     return m.moteUuid === ownProps.match.params.moteUuid;
   })[0];
   return {
-    fnr: ownProps.match.params.fnr,
+    fnr: state.valgtbruker.personident,
     mote,
     arbeidstaker: state.navbruker.data,
     hentingFeiletBool:

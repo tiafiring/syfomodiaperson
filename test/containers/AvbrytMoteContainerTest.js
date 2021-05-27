@@ -142,11 +142,13 @@ describe("AvbrytMoteContainer", () => {
         match: {
           params: {
             moteUuid: "2fedc0da-efec-4b6e-8597-a021628058ae",
-            fnr: "123",
           },
         },
       };
       state = {
+        valgtbruker: {
+          personident: "123",
+        },
         epostinnhold: {
           hentingFeilet: false,
         },

@@ -35,16 +35,9 @@ describe("modiacontext_actions", () => {
   });
 
   it("har en hentAktivBruker-funksjon som returnerer riktig action", () => {
-    const action = actions.hentAktivBruker({
-      verdi: "fnr",
-      eventType: "NY_AKTIV_BRUKER",
-    });
+    const action = actions.hentAktivBruker();
     expect(action).to.deep.equal({
       type: actions.HENT_AKTIVBRUKER_FORESPURT,
-      data: {
-        verdi: "fnr",
-        eventType: "NY_AKTIV_BRUKER",
-      },
     });
   });
 

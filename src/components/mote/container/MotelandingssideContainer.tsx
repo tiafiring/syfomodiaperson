@@ -2,14 +2,14 @@ import React from "react";
 import Side from "../../../sider/Side";
 import { MOETEPLANLEGGER } from "../../../enums/menypunkter";
 import Motelandingsside from "../components/Motelandingsside";
-import { useFnrParam } from "../../../hooks/useFnrParam";
+import { useValgtPersonident } from "../../../hooks/useValgtBruker";
 
 const texts = {
   pageTitle: "Møtelandingsside",
 };
 
 const MotelandingssideContainer = () => {
-  const fnr = useFnrParam();
+  const fnr = useValgtPersonident();
 
   return (
     <Side fnr={fnr} tittel={texts.pageTitle} aktivtMenypunkt={MOETEPLANLEGGER}>

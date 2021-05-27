@@ -21,6 +21,7 @@ import oppfolgingsplanerlps, {
   OppfolgingsplanerlpsState,
 } from "./oppfolgingsplan/oppfolgingsplanerlps";
 import enhet, { EnhetState } from "./valgtenhet/enhet";
+import valgtbruker, { ValgtBrukerState } from "./valgtbruker/valgtbruker";
 import sykmeldinger, { SykmeldingerState } from "./sykmelding/sykmeldinger";
 import behandlendeEnhet, {
   BehandlendeEnhetState,
@@ -65,6 +66,7 @@ export interface RootState {
   oppfoelgingsdialoger: OppfolgingsplanerState;
   oppfolgingsplanerlps: OppfolgingsplanerlpsState;
   enhet: EnhetState;
+  valgtbruker: ValgtBrukerState;
   sykmeldinger: SykmeldingerState;
   behandlendeEnhet: BehandlendeEnhetState;
   diskresjonskode: DiskresjonskodeState;
@@ -98,6 +100,7 @@ export const rootReducer = combineReducers<RootState>({
   oppfoelgingsdialoger,
   oppfolgingsplanerlps,
   enhet,
+  valgtbruker,
   sykmeldinger,
   behandlendeEnhet,
   diskresjonskode,

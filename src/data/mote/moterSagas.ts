@@ -51,7 +51,7 @@ export function* avbrytMote(action: any) {
 
     yield put(actions.moteAvbrutt(action.uuid));
     yield put(historikkActions.hentHistorikk(action.fnr, "MOTER"));
-    window.location.href = `/sykefravaer/${action.fnr}/moteoversikt`;
+    window.location.href = `/sykefravaer/moteoversikt`;
   } catch (e) {
     yield put(actions.avbrytMoteFeilet());
   }

@@ -2,7 +2,11 @@ import { call, put, fork, takeEvery, all } from "redux-saga/effects";
 import { get, post } from "../../api";
 import * as actions from "./modiacontext_actions";
 
-export function* pushModiacontextSaga(action: any) {
+const redirectWithoutFnrInUrl = (fnr: string) => {
+  window.location.href = window.location.pathname.replace(`/${fnr}`, "");
+};
+
+export function* pushModiacontextSaga(action: actions.PushModiaContextAction) {
   yield put(actions.pusherModiaContext());
   try {
     const path = `${process.env.REACT_APP_CONTEXTHOLDER_ROOT}/context`;
@@ -10,18 +14,18 @@ export function* pushModiacontextSaga(action: any) {
       verdi: action.data.verdi,
       eventType: action.data.eventType,
     });
-    yield put(actions.modiaContextPushet());
+    redirectWithoutFnrInUrl(action.data.verdi);
   } catch (e) {
     yield put(actions.pushModiaContextFeilet());
   }
 }
 
-export function* aktivBrukerSaga(action: any) {
+export function* aktivBrukerSaga() {
   yield put(actions.henterAktivBruker());
   try {
     const path = `${process.env.REACT_APP_CONTEXTHOLDER_ROOT}/context/aktivbruker`;
     const data = yield call(get, path);
-    action.data.callback(data.aktivBruker);
+    yield put(actions.aktivBrukerHentet(data));
   } catch (e) {
     yield put(actions.hentAktivBrukerFeilet());
   }

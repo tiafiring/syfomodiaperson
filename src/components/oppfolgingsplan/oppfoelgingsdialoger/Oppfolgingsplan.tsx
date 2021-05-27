@@ -10,12 +10,11 @@ import AppSpinner from "../../AppSpinner";
 
 interface PlanVisningProps {
   dokumentinfo: DokumentinfoDTO;
-  fnr: string;
   oppfolgingsplan: OppfolgingsplanDTO;
 }
 
 const PlanVisning = (planVisningProps: PlanVisningProps) => {
-  const { dokumentinfo, fnr, oppfolgingsplan } = planVisningProps;
+  const { dokumentinfo, oppfolgingsplan } = planVisningProps;
   const bildeUrler: string[] = [];
   for (let i = 1; i <= dokumentinfo.antallSider; i += 1) {
     bildeUrler.push(
@@ -26,10 +25,7 @@ const PlanVisning = (planVisningProps: PlanVisningProps) => {
   const TilbakeTilOppfolgingsplaner = () => {
     return (
       <div className="blokk">
-        <Link
-          to={`/sykefravaer/${fnr}/oppfoelgingsplaner`}
-          className="tilbakelenke"
-        >
+        <Link to={`/sykefravaer/oppfoelgingsplaner`} className="tilbakelenke">
           Til oppfølgingsplaner
         </Link>
       </div>
@@ -74,12 +70,11 @@ const PlanVisning = (planVisningProps: PlanVisningProps) => {
 };
 
 interface OppfolgingsplanProps {
-  fnr: string;
   oppfolgingsplan: OppfolgingsplanDTO;
 }
 
 const Oppfolgingsplan = (oppfolgingsplanWrapperProps: OppfolgingsplanProps) => {
-  const { fnr, oppfolgingsplan } = oppfolgingsplanWrapperProps;
+  const { oppfolgingsplan } = oppfolgingsplanWrapperProps;
 
   const dispatch = useDispatch();
 
@@ -109,7 +104,6 @@ const Oppfolgingsplan = (oppfolgingsplanWrapperProps: OppfolgingsplanProps) => {
       <PlanVisning
         oppfolgingsplan={oppfolgingsplan}
         dokumentinfo={dokumentinfo}
-        fnr={fnr}
       />
     );
   })();

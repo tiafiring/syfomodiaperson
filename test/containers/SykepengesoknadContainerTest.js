@@ -45,6 +45,9 @@ describe("SykepengesoknadContainer", () => {
           navn: "Ola Nordmann",
         },
       },
+      valgtbruker: {
+        personident: "887766",
+      },
     };
     ownProps = {
       match: {

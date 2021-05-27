@@ -14,7 +14,7 @@ const texts = {
   sendt: "Sendt",
 };
 
-const RelaterteSoknader = ({ relaterteSoknader, fnr }) => {
+const RelaterteSoknader = ({ relaterteSoknader }) => {
   if (relaterteSoknader.length === 0) {
     return null;
   }
@@ -25,7 +25,7 @@ const RelaterteSoknader = ({ relaterteSoknader, fnr }) => {
         {relaterteSoknader.sort(sorterEtterDato).map((s, index) => {
           return (
             <li key={index}>
-              <Link to={`/sykefravaer/${fnr}/sykepengesoknader/${s.id}`}>
+              <Link to={`/sykefravaer/sykepengesoknader/${s.id}`}>
                 {texts.sendt}{" "}
                 {tilLesbarDatoMedArstall(getTidligsteSendtDato(s))}
               </Link>
