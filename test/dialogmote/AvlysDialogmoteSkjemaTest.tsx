@@ -24,11 +24,12 @@ const mote: DialogmoteDTO = {
   arbeidsgiver: {
     virksomhetsnummer: "912345678",
     type: "ARBEIDSGIVER",
+    varselList: [],
   },
   arbeidstaker: {
     personIdent: "05087321470",
-    varselList: [],
     type: "ARBEIDSTAKER",
+    varselList: [],
   },
   createdAt: "",
   opprettetAv: "",

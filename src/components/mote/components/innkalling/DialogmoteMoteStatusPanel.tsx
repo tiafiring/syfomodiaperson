@@ -1,6 +1,5 @@
 import {
   MotebehovIkkeSvartImage,
-  MotebehovKanIkkeImage,
   MotebehovKanImage,
   MoteIkonBlaaImage,
 } from "../../../../../img/ImageComponents";
@@ -9,7 +8,12 @@ import React, { ReactElement } from "react";
 import Alertstripe from "nav-frontend-alertstriper";
 import { FlexColumn, FlexRow, PaddingSize } from "../../../Layout";
 import { InfoRow } from "../../../InfoRow";
-import { DialogmoteDTO } from "../../../../data/dialogmote/dialogmoteTypes";
+import {
+  DialogmotedeltakerArbeidsgiverVarselDTO,
+  DialogmotedeltakerArbeidstakerVarselDTO,
+  DialogmoteDTO,
+  MotedeltakerVarselType,
+} from "../../../../data/dialogmote/dialogmoteTypes";
 import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
 import { Brukerinfo } from "../../../../data/navbruker/types/Brukerinfo";
 import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../../../utils/datoUtils";
@@ -28,28 +32,35 @@ const texts = {
   skrivReferat: "Skriv referat",
   naermesteLeder: "Nærmeste leder:",
   denSykmeldte: "Den sykmeldte:",
+  harLestInnkalling: " har lest innkallingen",
+  harIkkeLestInnkalling: " har ikke lest innkallingen",
 };
 
 const subtitle = (dialogmote: DialogmoteDTO) => {
   const meetTimeText = tilDatoMedUkedagOgManedNavnOgKlokkeslett(dialogmote.tid);
-  const videoText = dialogmote.videoLink ? " - Videomøte" : undefined;
+  const videoText = dialogmote.videoLink ? " - Videomøte" : "";
 
   return `Møtetidspunkt: ${meetTimeText}${videoText}`;
 };
 
-const getIcon = (vilMote?: boolean): string => {
-  switch (vilMote) {
-    case true: {
-      return MotebehovKanImage;
-    }
-    case false: {
-      return MotebehovKanIkkeImage;
-    }
-    default: {
-      return MotebehovIkkeSvartImage;
-    }
-  }
+const getHarLestIcon = (harLest: boolean): string => {
+  return harLest ? MotebehovKanImage : MotebehovIkkeSvartImage;
 };
+
+const getHarLestText = (harLest: boolean): string => {
+  return harLest ? texts.harLestInnkalling : texts.harIkkeLestInnkalling;
+};
+
+function isLestInnkalling(
+  varselList:
+    | DialogmotedeltakerArbeidstakerVarselDTO[]
+    | DialogmotedeltakerArbeidsgiverVarselDTO[]
+): boolean {
+  return varselList.some(
+    (varsel) =>
+      varsel.varselType === MotedeltakerVarselType.INNKALT && !!varsel.lestDato
+  );
+}
 
 interface ParticipantProps {
   dialogmote: DialogmoteDTO;
@@ -60,23 +71,30 @@ const ParticipantInfo = ({
   dialogmote,
   bruker,
 }: ParticipantProps): ReactElement => {
+  const arbeidstakerHarLestInnkallingen = isLestInnkalling(
+    dialogmote.arbeidstaker.varselList
+  );
+  const arbeidsgiverHarLestInnkallingen = isLestInnkalling(
+    dialogmote.arbeidsgiver.varselList
+  );
+
   return (
     <FlexColumn>
       <InfoRow
-        icon={getIcon(true)}
+        icon={getHarLestIcon(arbeidsgiverHarLestInnkallingen)}
         title={
           <span>
             <b>{texts.naermesteLeder}</b> {dialogmote.arbeidsgiver.lederNavn},
-            avklar hva som skal vises her
+            {getHarLestText(arbeidsgiverHarLestInnkallingen)}
           </span>
         }
       />
       <InfoRow
-        icon={getIcon(false)}
+        icon={getHarLestIcon(arbeidstakerHarLestInnkallingen)}
         title={
           <span>
-            <b>{texts.denSykmeldte}</b> {bruker.navn}, avklar hva som skal vises
-            her
+            <b>{texts.denSykmeldte}</b> {bruker.navn},
+            {getHarLestText(arbeidstakerHarLestInnkallingen)}
           </span>
         }
         topPadding={PaddingSize.SM}
