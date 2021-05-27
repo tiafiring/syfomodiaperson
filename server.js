@@ -45,6 +45,11 @@ const syfoveilederHost =
     ? "https://syfoveileder.dev.intern.nav.no"
     : "https://syfoveileder.intern.nav.no";
 
+const syfooppfolgingsplanserviceHost =
+  process.env.NAIS_CONTEXT === "dev"
+    ? "https://syfooppfolgingsplanservice.dev.intern.nav.no"
+    : "https://syfooppfolgingsplanservice.intern.nav.no";
+
 function nocache(req, res, next) {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
   res.header("Expires", "-1");
@@ -194,8 +199,7 @@ server.use(
 
 server.use(
   "/syfooppfolgingsplanservice/api",
-  proxy("syfooppfolgingsplanservice.default", {
-    https: false,
+  proxy(syfooppfolgingsplanserviceHost, {
     proxyReqPathResolver: function (req) {
       return `/syfooppfolgingsplanservice/api${req.url}`;
     },
