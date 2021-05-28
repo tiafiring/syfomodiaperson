@@ -18,6 +18,7 @@ import DoctorHoverImage from "./svg/doctor-2_hover.svg";
 import DocumentImage from "./svg/dokument.svg";
 import EpostImage from "./svg/epost.svg";
 import FabrikkImage from "./svg/fabrikk.svg";
+import FortidenImage from "./svg/fortiden.svg";
 import GlobeImage from "./svg/globe.svg";
 import GlobeHoverImage from "./svg/globe-hover.svg";
 import GultDokumentImage from "./svg/gultdokument.svg";
@@ -82,6 +83,7 @@ export {
   DocumentImage,
   EpostImage,
   FabrikkImage,
+  FortidenImage,
   GlobeImage,
   GlobeHoverImage,
   GultDokumentImage,
