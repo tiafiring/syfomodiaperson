@@ -5,7 +5,7 @@ import { trackEvent } from "../../amplitude/amplitude";
 
 export const texts = {
   buttonClick: "Klikker på:",
-  pageLoad: "Laster side:",
+  pageLoad: "Laster side",
 };
 
 export interface loggingMetadata {
@@ -54,8 +54,9 @@ export const useTrackPageLoad = () => {
   const trackEvent = useTrackEvent();
 
   return function (pageName: string, aktivtMenyPunkt: string) {
-    trackEvent(`${texts.pageLoad} ${pageName}`, {
+    trackEvent(`${texts.pageLoad}`, {
       aktivtMenyPunkt: aktivtMenyPunkt,
+      pageName: pageName,
     });
   };
 };
