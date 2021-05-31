@@ -1,17 +1,19 @@
-import { DialogmoteInnkallingSkjemaValues } from "../components/dialogmote/innkalling/DialogmoteInnkallingSkjema";
+import { DialogmoteInnkallingSkjemaValues } from "../../components/dialogmote/innkalling/DialogmoteInnkallingSkjema";
+import { DocumentComponentDto } from "../../data/dialogmote/dialogmoteTypes";
+import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../utils/datoUtils";
+import { genererDato } from "../../components/mote/utils";
+import { useBehandlendeEnhet } from "../../data/behandlendeenhet/behandlendeEnhet_hooks";
+import { useVeilederinfo } from "../useVeilederinfo";
+import { useNavBrukerData } from "../../data/navbruker/navbruker_hooks";
+import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
+import { BehandlendeEnhet } from "../../data/behandlendeenhet/types/BehandlendeEnhet";
+import { VeilederinfoDTO } from "../../data/veilederinfo/types/VeilederinfoDTO";
+import { innkallingTexts } from "../../data/dialogmote/dialogmoteTexts";
 import {
-  DocumentComponentDto,
-  DocumentComponentType,
-} from "../data/dialogmote/dialogmoteTypes";
-import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../utils/datoUtils";
-import { genererDato } from "../components/mote/utils";
-import { useBehandlendeEnhet } from "../data/behandlendeenhet/behandlendeEnhet_hooks";
-import { useVeilederinfo } from "./useVeilederinfo";
-import { useNavBrukerData } from "../data/navbruker/navbruker_hooks";
-import { Brukerinfo } from "../data/navbruker/types/Brukerinfo";
-import { BehandlendeEnhet } from "../data/behandlendeenhet/types/BehandlendeEnhet";
-import { VeilederinfoDTO } from "../data/veilederinfo/types/VeilederinfoDTO";
-import { innkallingTexts } from "../data/dialogmote/dialogmoteTexts";
+  createLink,
+  createParagraph,
+  createParagraphWithTitle,
+} from "../../utils/documentComponentUtils";
 
 export interface ForhandsvisInnkallingGenerator {
   arbeidstakerInnkalling(
@@ -36,7 +38,7 @@ export const useForhandsvisInnkalling = (): ForhandsvisInnkallingGenerator => {
       ...arbeidstakerIntro(navBruker),
     ];
     if (values.fritekstArbeidstaker) {
-      documentComponents.push(paragraph(values.fritekstArbeidstaker));
+      documentComponents.push(createParagraph(values.fritekstArbeidstaker));
     }
     documentComponents.push(
       ...arbeidstakerOutro(behandlendeEnhet, veilederinfo)
@@ -53,7 +55,7 @@ export const useForhandsvisInnkalling = (): ForhandsvisInnkallingGenerator => {
       ...arbeidsgiverIntro(navBruker),
     ];
     if (values.fritekstArbeidsgiver) {
-      documentComponents.push(paragraph(values.fritekstArbeidsgiver));
+      documentComponents.push(createParagraph(values.fritekstArbeidsgiver));
     }
     documentComponents.push(
       ...arbeidsgiverOutro(behandlendeEnhet, veilederinfo)
@@ -73,7 +75,7 @@ const fellesInfo = (
 ): DocumentComponentDto[] => {
   const { dato, klokkeslett, sted, videoLink } = values;
   const components = [
-    paragraphWithTitle(
+    createParagraphWithTitle(
       innkallingTexts.moteTidTitle,
       dato && klokkeslett
         ? tilDatoMedUkedagOgManedNavnOgKlokkeslett(
@@ -81,27 +83,29 @@ const fellesInfo = (
           )
         : ""
     ),
-    paragraphWithTitle(innkallingTexts.moteStedTitle, sted || ""),
+    createParagraphWithTitle(innkallingTexts.moteStedTitle, sted || ""),
   ];
   if (videoLink) {
-    components.push(link(innkallingTexts.videoLinkTitle, videoLink));
+    components.push(createLink(innkallingTexts.videoLinkTitle, videoLink));
   }
   return components;
 };
 
 const arbeidstakerIntro = (navBruker: Brukerinfo): DocumentComponentDto[] => {
   return [
-    paragraph(`Hei ${navBruker.navn}`),
-    paragraph(innkallingTexts.arbeidstaker.intro1),
-    paragraph(innkallingTexts.arbeidstaker.intro2),
+    createParagraph(`Hei ${navBruker.navn}`),
+    createParagraph(innkallingTexts.arbeidstaker.intro1),
+    createParagraph(innkallingTexts.arbeidstaker.intro2),
   ];
 };
 
 const arbeidsgiverIntro = (navBruker: Brukerinfo): DocumentComponentDto[] => {
   return [
-    paragraph(`Gjelder ${navBruker.navn}, f.nr. ${navBruker.kontaktinfo.fnr}`),
-    paragraph(innkallingTexts.arbeidsgiver.intro1),
-    paragraph(innkallingTexts.arbeidsgiver.intro2),
+    createParagraph(
+      `Gjelder ${navBruker.navn}, f.nr. ${navBruker.kontaktinfo.fnr}`
+    ),
+    createParagraph(innkallingTexts.arbeidsgiver.intro1),
+    createParagraph(innkallingTexts.arbeidsgiver.intro2),
   ];
 };
 
@@ -110,15 +114,15 @@ const arbeidstakerOutro = (
   veilederinfo?: VeilederinfoDTO
 ): DocumentComponentDto[] => {
   const outro = [
-    paragraph(innkallingTexts.arbeidstaker.outro1),
-    paragraphWithTitle(
+    createParagraph(innkallingTexts.arbeidstaker.outro1),
+    createParagraphWithTitle(
       innkallingTexts.foerMoteTitle,
       innkallingTexts.foerMoteText
     ),
-    paragraph(innkallingTexts.hilsenText, behandlendeEnhet.navn),
+    createParagraph(innkallingTexts.hilsenText, behandlendeEnhet.navn),
   ];
   if (veilederinfo) {
-    outro.push(paragraph(veilederinfo.navn));
+    outro.push(createParagraph(veilederinfo.navn));
   }
   return outro;
 };
@@ -128,18 +132,18 @@ const arbeidsgiverOutro = (
   veilederinfo?: VeilederinfoDTO
 ): DocumentComponentDto[] => {
   const outro = [
-    paragraph(innkallingTexts.arbeidsgiver.outro1),
-    paragraph(innkallingTexts.arbeidsgiver.outro2),
-    paragraph(innkallingTexts.arbeidsgiver.outro3),
-    paragraphWithTitle(
+    createParagraph(innkallingTexts.arbeidsgiver.outro1),
+    createParagraph(innkallingTexts.arbeidsgiver.outro2),
+    createParagraph(innkallingTexts.arbeidsgiver.outro3),
+    createParagraphWithTitle(
       innkallingTexts.foerMoteTitle,
       innkallingTexts.foerMoteText
     ),
-    paragraph(innkallingTexts.hilsenText, behandlendeEnhet.navn),
+    createParagraph(innkallingTexts.hilsenText, behandlendeEnhet.navn),
   ];
   if (veilederinfo) {
     outro.push(
-      paragraph(
+      createParagraph(
         veilederinfo.navn,
         veilederinfo.epost,
         veilederinfo.telefonnummer ?? ""
@@ -148,21 +152,3 @@ const arbeidsgiverOutro = (
   }
   return outro;
 };
-
-const link = (title: string, text: string): DocumentComponentDto => ({
-  type: DocumentComponentType.LINK,
-  title,
-  texts: [text],
-});
-const paragraphWithTitle = (
-  title: string,
-  ...texts: string[]
-): DocumentComponentDto => ({
-  type: DocumentComponentType.PARAGRAPH,
-  title,
-  texts,
-});
-const paragraph = (...texts: string[]): DocumentComponentDto => ({
-  type: DocumentComponentType.PARAGRAPH,
-  texts,
-});

@@ -12,19 +12,26 @@ import {
 } from "../../src/data/dialogmote/dialogmoteTypes";
 import { Feilmelding } from "nav-frontend-typografi";
 import { Feiloppsummering } from "nav-frontend-skjema";
-import { Hovedknapp } from "nav-frontend-knapper";
-import AvlysDialogmoteSkjema from "../../src/components/dialogmote/avlys/AvlysDialogmoteSkjema";
+import { Hovedknapp, Knapp } from "nav-frontend-knapper";
+import AvlysDialogmoteSkjema, {
+  texts as avlysningSkjemaTexts,
+} from "../../src/components/dialogmote/avlys/AvlysDialogmoteSkjema";
 import { texts as skjemaFeilOppsummeringTexts } from "../../src/components/SkjemaFeiloppsummering";
 import { texts as valideringsTexts } from "../../src/utils/valideringUtils";
+import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../src/utils/datoUtils";
+import { avlysningTexts } from "../../src/data/dialogmote/dialogmoteTexts";
+import { Forhandsvisning } from "../../src/components/dialogmote/Forhandsvisning";
+import Lukknapp from "nav-frontend-lukknapp";
 
 const realState = createStore(rootReducer).getState();
 const store = configureStore([]);
 const arbeidstakerPersonIdent = "05087321470";
-const mockState = {
-  valgtbruker: {
-    personident: arbeidstakerPersonIdent,
-  },
-};
+const arbeidstakerNavn = "Arne Arbeidstaker";
+const navEnhet = "0315";
+const navEnhetNavn = "NAV Grünerløkka";
+const veilederNavn = "Vetle Veileder";
+const veilederEpost = "vetle.veileder@nav.no";
+const veilederTlf = "12345678";
 const moteUuid = "123abc";
 const mote: DialogmoteDTO = {
   arbeidsgiver: {
@@ -46,6 +53,33 @@ const mote: DialogmoteDTO = {
   uuid: moteUuid,
   tid: "2021-05-10T09:00:00.000",
   sted: "Videomøte",
+};
+
+const mockState = {
+  behandlendeEnhet: {
+    data: {
+      enhetId: navEnhet,
+      navn: navEnhetNavn,
+    },
+  },
+  veilederinfo: {
+    data: {
+      navn: veilederNavn,
+      epost: veilederEpost,
+      telefonnummer: veilederTlf,
+    },
+  },
+  navbruker: {
+    data: {
+      navn: arbeidstakerNavn,
+      kontaktinfo: {
+        fnr: arbeidstakerPersonIdent,
+      },
+    },
+  },
+  valgtbruker: {
+    personident: arbeidstakerPersonIdent,
+  },
 };
 const tekstTilArbeidstaker = "Noe tekst til arbeidstaker";
 const tekstTilArbeidsgiver = "Noe tekst til arbeidsgiver";
@@ -203,17 +237,139 @@ describe("AvlysDialogmoteSkjemaTest", () => {
       moteUuid: moteUuid,
       data: {
         arbeidsgiver: {
-          avlysning: [],
+          avlysning: expectedAvlysningArbeidsgiver,
           begrunnelse: tekstTilArbeidsgiver,
         },
         arbeidstaker: {
-          avlysning: [],
+          avlysning: expectedAvlysningArbeidstaker,
           begrunnelse: tekstTilArbeidstaker,
         },
       },
     });
   });
+
+  it("forhåndsviser avlysning til arbeidstaker og arbeidsgiver", () => {
+    const mockStore = store({ ...realState, ...mockState });
+    const wrapper = mount(
+      <MemoryRouter initialEntries={["/sykefravaer/dialogmote/123abc/avlys"]}>
+        <Route path="/sykefravaer/dialogmote/:dialogmoteUuid/avlys">
+          <Provider store={mockStore}>
+            <AvlysDialogmoteSkjema dialogmote={mote} pageTitle="test" />
+          </Provider>
+        </Route>
+      </MemoryRouter>
+    );
+
+    changeTextAreaValue(
+      wrapper,
+      "begrunnelseArbeidsgiver",
+      tekstTilArbeidsgiver
+    );
+    changeTextAreaValue(
+      wrapper,
+      "begrunnelseArbeidstaker",
+      tekstTilArbeidstaker
+    );
+
+    let forhandsvisningModaler = wrapper.find(Forhandsvisning);
+    expect(
+      forhandsvisningModaler.at(0).props().documentComponents()
+    ).to.deep.equal(expectedAvlysningArbeidstaker);
+    expect(
+      forhandsvisningModaler.at(1).props().documentComponents()
+    ).to.deep.equal(expectedAvlysningArbeidsgiver);
+
+    const previewButtons = wrapper.find(Knapp);
+
+    // Forhåndsvis avlysning til arbeidstaker og sjekk at modal vises med riktig tittel
+    previewButtons.at(0).simulate("click");
+    forhandsvisningModaler = wrapper.find(Forhandsvisning);
+    let forhandsvisningAvlysningArbeidstaker = forhandsvisningModaler.at(0);
+    let forhandsvisningAvlysningArbeidsgiver = forhandsvisningModaler.at(1);
+    expect(forhandsvisningAvlysningArbeidstaker.prop("isOpen")).to.be.true;
+    expect(forhandsvisningAvlysningArbeidsgiver.prop("isOpen")).to.be.false;
+    expect(forhandsvisningAvlysningArbeidstaker.text()).to.contain(
+      avlysningSkjemaTexts.forhandsvisningTitle
+    );
+    expect(forhandsvisningAvlysningArbeidstaker.text()).to.contain(
+      avlysningSkjemaTexts.forhandsvisningArbeidstakerSubtitle
+    );
+    expect(forhandsvisningAvlysningArbeidsgiver.text()).not.to.contain(
+      avlysningSkjemaTexts.forhandsvisningTitle
+    );
+    expect(forhandsvisningAvlysningArbeidsgiver.text()).not.to.contain(
+      avlysningSkjemaTexts.forhandsvisningArbeidsgiverSubtitle
+    );
+
+    // Lukk forhåndsvis avlysning til arbeidstaker
+    forhandsvisningAvlysningArbeidstaker.find(Lukknapp).simulate("click");
+
+    // Forhåndsvis avlysning til arbeidsgiver og sjekk at modal vises med riktig tittel
+    previewButtons.at(1).simulate("click");
+    forhandsvisningModaler = wrapper.find(Forhandsvisning);
+    forhandsvisningAvlysningArbeidstaker = forhandsvisningModaler.at(0);
+    forhandsvisningAvlysningArbeidsgiver = forhandsvisningModaler.at(1);
+    expect(forhandsvisningAvlysningArbeidstaker.prop("isOpen")).to.be.false;
+    expect(forhandsvisningAvlysningArbeidsgiver.prop("isOpen")).to.be.true;
+    expect(forhandsvisningAvlysningArbeidstaker.text()).not.to.contain(
+      avlysningSkjemaTexts.forhandsvisningTitle
+    );
+    expect(forhandsvisningAvlysningArbeidstaker.text()).not.to.contain(
+      avlysningSkjemaTexts.forhandsvisningArbeidstakerSubtitle
+    );
+    expect(forhandsvisningAvlysningArbeidsgiver.text()).to.contain(
+      avlysningSkjemaTexts.forhandsvisningTitle
+    );
+    expect(forhandsvisningAvlysningArbeidsgiver.text()).to.contain(
+      avlysningSkjemaTexts.forhandsvisningArbeidsgiverSubtitle
+    );
+  });
 });
+
+const expectedAvlysningArbeidsgiver = [
+  {
+    texts: [`Gjelder ${arbeidstakerNavn}, f.nr. ${arbeidstakerPersonIdent}.`],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [
+      `${avlysningTexts.intro1} ${tilDatoMedUkedagOgManedNavnOgKlokkeslett(
+        mote.tid
+      )}. ${avlysningTexts.intro2}`,
+    ],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [tekstTilArbeidsgiver],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [avlysningTexts.hilsenText, navEnhetNavn, veilederNavn],
+    type: "PARAGRAPH",
+  },
+];
+const expectedAvlysningArbeidstaker = [
+  {
+    texts: [`Gjelder ${arbeidstakerNavn}, f.nr. ${arbeidstakerPersonIdent}.`],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [
+      `${avlysningTexts.intro1} ${tilDatoMedUkedagOgManedNavnOgKlokkeslett(
+        mote.tid
+      )}. ${avlysningTexts.intro2}`,
+    ],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [tekstTilArbeidstaker],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [avlysningTexts.hilsenText, navEnhetNavn, veilederNavn],
+    type: "PARAGRAPH",
+  },
+];
 
 const changeTextAreaValue = (
   wrapper: ReactWrapper<any, any>,

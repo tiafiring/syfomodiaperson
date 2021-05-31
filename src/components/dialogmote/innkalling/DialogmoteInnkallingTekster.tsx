@@ -8,15 +8,22 @@ import { FlexColumn, FlexRow, PaddingSize } from "../../Layout";
 import FritekstStor from "../../FritekstStor";
 import { Innholdstittel } from "nav-frontend-typografi";
 import { DialogmoteInnkallingSkjemaValues } from "./DialogmoteInnkallingSkjema";
-import InnkallingArbeidstakerForhandsvisning from "./InnkallingArbeidstakerForhandsvisning";
-import InnkallingArbeidsgiverForhandsvisning from "./InnkallingArbeidsgiverForhandsvisning";
+import { useForhandsvisInnkalling } from "../../../hooks/dialogmote/useForhandsvisInnkalling";
+import { Forhandsvisning } from "../Forhandsvisning";
 
-const texts = {
+export const texts = {
   title: "Tekster i innkallingen",
   alert: "Hvis du vil føye til noe i standardtekstene, kan du skrive det her.",
   arbeidstakerLabel: "Fritekst til arbeidstakeren (valgfri)",
   arbeidsgiverLabel: "Fritekst til nærmeste leder (valgfri)",
-  preview: "Forhåndsvisning",
+  forhandsvisning: "Forhåndsvisning",
+  forhandsvisningTitle: "Innkalling til dialogmøte",
+  forhandsvisningArbeidstakerSubtitle: "(brev til arbeidstakeren)",
+  forhandsvisningArbeidstakerContentLabel:
+    "Forhåndsvis innkalling til dialogmøte arbeidstaker",
+  forhandsvisningArbeidsgiverSubtitle: "(brev til nærmeste leder)",
+  forhandsvisningArbeidsgiverContentLabel:
+    "Forhåndsvis innkalling til dialogmøte arbeidsgiver",
 };
 
 interface FritekstSeksjonProps {
@@ -57,7 +64,7 @@ const FritekstSeksjon = ({
     </FlexRow>
     <FlexRow>
       <Knapp htmlType="button" onClick={handlePreviewClick}>
-        {texts.preview}
+        {texts.forhandsvisning}
       </Knapp>
     </FlexRow>
   </FritekstWrapper>
@@ -73,6 +80,10 @@ const DialogmoteInnkallingTekster = (): ReactElement => {
     visInnkallingArbeidsgiverPreview,
     setVisInnkallingArbeidsgiverPreview,
   ] = useState(false);
+  const {
+    arbeidstakerInnkalling,
+    arbeidsgiverInnkalling,
+  } = useForhandsvisInnkalling();
   return (
     <DialogmoteInnkallingSkjemaSeksjon>
       <TeksterTittel>{texts.title}</TeksterTittel>
@@ -82,20 +93,26 @@ const DialogmoteInnkallingTekster = (): ReactElement => {
         label={texts.arbeidstakerLabel}
         handlePreviewClick={() => setVisInnkallingArbeidstakerPreview(true)}
       />
-      <InnkallingArbeidstakerForhandsvisning
+      <Forhandsvisning
+        title={texts.forhandsvisningTitle}
+        subtitle={texts.forhandsvisningArbeidstakerSubtitle}
+        contentLabel={texts.forhandsvisningArbeidstakerContentLabel}
         isOpen={visInnkallingArbeidstakerPreview}
         handleClose={() => setVisInnkallingArbeidstakerPreview(false)}
-        innkallingSkjemaValues={values}
+        documentComponents={() => arbeidstakerInnkalling(values)}
       />
       <FritekstSeksjon
         fieldName="fritekstArbeidsgiver"
         label={texts.arbeidsgiverLabel}
         handlePreviewClick={() => setVisInnkallingArbeidsgiverPreview(true)}
       />
-      <InnkallingArbeidsgiverForhandsvisning
+      <Forhandsvisning
+        title={texts.forhandsvisningTitle}
+        subtitle={texts.forhandsvisningArbeidsgiverSubtitle}
+        contentLabel={texts.forhandsvisningArbeidsgiverContentLabel}
         isOpen={visInnkallingArbeidsgiverPreview}
         handleClose={() => setVisInnkallingArbeidsgiverPreview(false)}
-        innkallingSkjemaValues={values}
+        documentComponents={() => arbeidsgiverInnkalling(values)}
       />
     </DialogmoteInnkallingSkjemaSeksjon>
   );

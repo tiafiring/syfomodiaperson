@@ -26,7 +26,7 @@ import { TrackedHovedknapp } from "../../buttons/TrackedHovedknapp";
 import {
   ForhandsvisInnkallingGenerator,
   useForhandsvisInnkalling,
-} from "../../../hooks/useForhandsvisInnkalling";
+} from "../../../hooks/dialogmote/useForhandsvisInnkalling";
 
 export interface DialogmoteInnkallingSkjemaValues {
   arbeidsgiver: string;

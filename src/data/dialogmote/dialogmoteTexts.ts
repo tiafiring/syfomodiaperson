@@ -27,3 +27,9 @@ export const innkallingTexts = {
       "NAV kan be fastlegen eller annet helsepersonell om å delta i møtet. Til dette møtet har vi ikke sett behov for det.",
   },
 };
+
+export const avlysningTexts = {
+  intro1: "NAV har tidligere innkalt til dialogmøtet som skulle vært avholdt",
+  intro2: "Dette møtet er avlyst.",
+  hilsenText: "Vennlig hilsen",
+};
