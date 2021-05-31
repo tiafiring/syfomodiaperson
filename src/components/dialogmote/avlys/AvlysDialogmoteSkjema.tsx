@@ -1,5 +1,5 @@
 import Panel from "nav-frontend-paneler";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useValgtPersonident } from "../../../hooks/useValgtBruker";
@@ -7,7 +7,10 @@ import { FlexRow, PaddingSize } from "../../Layout";
 import { useDispatch } from "react-redux";
 import { avlysMote } from "../../../data/dialogmote/dialogmote_actions";
 import { useAppSelector } from "../../../hooks/hooks";
-import { AlertStripeFeil } from "nav-frontend-alertstriper";
+import {
+  AlertStripeAdvarsel,
+  AlertStripeFeil,
+} from "nav-frontend-alertstriper";
 import { Form } from "react-final-form";
 import DialogmoteInfo from "./DialogmoteInfo";
 import { DialogmoteDTO } from "../../../data/dialogmote/dialogmoteTypes";
@@ -17,14 +20,25 @@ import { useFeilUtbedret } from "../../../hooks/useFeilUtbedret";
 import { validerBegrunnelser } from "../../../utils/valideringUtils";
 import { TrackedHovedknapp } from "../../buttons/TrackedHovedknapp";
 import { TrackedFlatknapp } from "../../buttons/TrackedFlatknapp";
+import { useForhandsvisAvlysning } from "../../../hooks/dialogmote/useForhandsvisAvlysning";
+import { Forhandsvisning } from "../Forhandsvisning";
 
-const texts = {
+export const texts = {
   begrunnelseArbeidstakerLabel: "Begrunnelse til arbeidstakeren",
   begrunnelseArbeidsgiverLabel: "Begrunnelse til nærmeste leder",
   send: "Send avlysning",
   avbryt: "Avbryt",
   errorMsg:
     "Møtet kunne ikke avlyses på grunn av en midlertidig teknisk feil. Prøv igjen.",
+  alert:
+    "Hvis årsaken til avlysning er at arbeidstakeren ikke møtte opp, bør du vurdere om sykepengene skal stanses.",
+  forhandsvisningTitle: "Avlysning av dialogmøte",
+  forhandsvisningArbeidstakerSubtitle: "(brev til arbeidstakeren)",
+  forhandsvisningArbeidsgiverSubtitle: "(brev til nærmeste leder)",
+  forhandsvisningArbeidstakerContentlabel:
+    "Forhåndsvis avlysning av dialogmøte arbeidstaker",
+  forhandsvisningArbeidsgiverContentlabel:
+    "Forhåndsvis avlysning av dialogmøte arbeidsgiver",
 };
 
 interface AvlysDialogmoteSkjemaProps {
@@ -32,7 +46,7 @@ interface AvlysDialogmoteSkjemaProps {
   pageTitle: string;
 }
 
-interface AvlysDialogmoteSkjemaValues {
+export interface AvlysDialogmoteSkjemaValues {
   begrunnelseArbeidstaker: string;
   begrunnelseArbeidsgiver: string;
 }
@@ -43,6 +57,13 @@ const AvlysPanel = styled(Panel)`
 
 const SendButton = styled(TrackedHovedknapp)`
   margin-right: 0.5rem;
+`;
+
+const AvlysningAlertStripe = styled(AlertStripeAdvarsel)`
+  margin-bottom: 4em;
+  .alertstripe__tekst {
+    max-width: 100%;
+  }
 `;
 
 const AvlysDialogmoteSkjema = ({
@@ -59,6 +80,18 @@ const AvlysDialogmoteSkjema = ({
     resetFeilUtbedret,
     updateFeilUtbedret,
   } = useFeilUtbedret();
+  const [
+    displayAvlysningArbeidstakerPreview,
+    setDisplayAvlysningArbeidstakerPreview,
+  ] = useState(false);
+  const [
+    displayAvlysningArbeidsgiverPreview,
+    setDisplayAvlysningArbeidsgiverPreview,
+  ] = useState(false);
+  const {
+    avlysningArbeidstaker,
+    avlysningArbeidsgiver,
+  } = useForhandsvisAvlysning(dialogmote);
 
   const validate = (
     values: Partial<AvlysDialogmoteSkjemaValues>
@@ -76,11 +109,11 @@ const AvlysDialogmoteSkjema = ({
       avlysMote(dialogmote.uuid, fnr, {
         arbeidstaker: {
           begrunnelse: values.begrunnelseArbeidstaker,
-          avlysning: [],
+          avlysning: avlysningArbeidstaker(values),
         },
         arbeidsgiver: {
           begrunnelse: values.begrunnelseArbeidsgiver,
-          avlysning: [],
+          avlysning: avlysningArbeidsgiver(values),
         },
       })
     );
@@ -89,22 +122,45 @@ const AvlysDialogmoteSkjema = ({
   return (
     <AvlysPanel>
       <Form initialValues={{}} onSubmit={submit} validate={validate}>
-        {({ handleSubmit, submitFailed, errors }) => (
+        {({ handleSubmit, submitFailed, errors, values }) => (
           <form onSubmit={handleSubmit}>
             <DialogmoteInfo dialogmote={dialogmote} />
             <AvlysDialogmoteBegrunnelse
               fieldName="begrunnelseArbeidstaker"
               label={texts.begrunnelseArbeidstakerLabel}
+              handlePreviewClick={() =>
+                setDisplayAvlysningArbeidstakerPreview(true)
+              }
+            />
+            <Forhandsvisning
+              title={texts.forhandsvisningTitle}
+              subtitle={texts.forhandsvisningArbeidstakerSubtitle}
+              contentLabel={texts.forhandsvisningArbeidstakerContentlabel}
+              isOpen={displayAvlysningArbeidstakerPreview}
+              handleClose={() => setDisplayAvlysningArbeidstakerPreview(false)}
+              documentComponents={() => avlysningArbeidstaker(values)}
             />
             <AvlysDialogmoteBegrunnelse
               fieldName="begrunnelseArbeidsgiver"
               label={texts.begrunnelseArbeidsgiverLabel}
+              handlePreviewClick={() =>
+                setDisplayAvlysningArbeidsgiverPreview(true)
+              }
+            />
+            <Forhandsvisning
+              title={texts.forhandsvisningTitle}
+              subtitle={texts.forhandsvisningArbeidsgiverSubtitle}
+              contentLabel={texts.forhandsvisningArbeidsgiverContentlabel}
+              isOpen={displayAvlysningArbeidsgiverPreview}
+              handleClose={() => setDisplayAvlysningArbeidsgiverPreview(false)}
+              documentComponents={() => avlysningArbeidsgiver(values)}
             />
             {avlysMoteFeilet && (
               <FlexRow bottomPadding={PaddingSize.MD}>
                 <AlertStripeFeil>{texts.errorMsg}</AlertStripeFeil>
               </FlexRow>
             )}
+            <AvlysningAlertStripe>{texts.alert}</AvlysningAlertStripe>
             {submitFailed && !feilUtbedret && (
               <SkjemaFeiloppsummering errors={errors} />
             )}

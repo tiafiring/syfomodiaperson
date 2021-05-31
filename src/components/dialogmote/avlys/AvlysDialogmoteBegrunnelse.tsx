@@ -12,11 +12,13 @@ const texts = {
 interface AvlysDialogmoteBegrunnelseProps {
   fieldName: string;
   label: string;
+  handlePreviewClick: () => void;
 }
 
 const AvlysDialogmoteBegrunnelse = ({
   fieldName,
   label,
+  handlePreviewClick,
 }: AvlysDialogmoteBegrunnelseProps): ReactElement => {
   return (
     <AvlysDialogmoteSkjemaSeksjon>
@@ -36,7 +38,11 @@ const AvlysDialogmoteBegrunnelse = ({
         </FlexColumn>
       </FlexRow>
       <FlexRow>
-        <TrackedKnapp htmlType="button" context={label}>
+        <TrackedKnapp
+          htmlType="button"
+          context={label}
+          onClick={handlePreviewClick}
+        >
           {texts.preview}
         </TrackedKnapp>
       </FlexRow>

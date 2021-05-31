@@ -21,8 +21,7 @@ import { texts as valideringsTexts } from "../../src/utils/valideringUtils";
 import { genererDato } from "../../src/components/mote/utils";
 import { innkallingTexts } from "../../src/data/dialogmote/dialogmoteTexts";
 import { Forhandsvisning } from "../../src/components/dialogmote/Forhandsvisning";
-import { texts as innkallingArbeidsgiverTexts } from "../../src/components/dialogmote/innkalling/InnkallingArbeidsgiverForhandsvisning";
-import { texts as innkallingArbeidstakerTexts } from "../../src/components/dialogmote/innkalling/InnkallingArbeidstakerForhandsvisning";
+import { texts as innkallingSkjemaTexts } from "../../src/components/dialogmote/innkalling/DialogmoteInnkallingTekster";
 import Lukknapp from "nav-frontend-lukknapp";
 
 const realState = createStore(rootReducer).getState();
@@ -354,16 +353,16 @@ describe("DialogmoteInnkallingSkjema", () => {
     expect(forhandsvisningInnkallingArbeidstaker.prop("isOpen")).to.be.true;
     expect(forhandsvisningInnkallingArbeidsgiver.prop("isOpen")).to.be.false;
     expect(forhandsvisningInnkallingArbeidstaker.text()).to.contain(
-      innkallingArbeidstakerTexts.title
+      innkallingSkjemaTexts.forhandsvisningTitle
     );
     expect(forhandsvisningInnkallingArbeidstaker.text()).to.contain(
-      innkallingArbeidstakerTexts.subtitle
+      innkallingSkjemaTexts.forhandsvisningArbeidstakerSubtitle
     );
     expect(forhandsvisningInnkallingArbeidsgiver.text()).not.to.contain(
-      innkallingArbeidsgiverTexts.title
+      innkallingSkjemaTexts.forhandsvisningTitle
     );
     expect(forhandsvisningInnkallingArbeidsgiver.text()).not.to.contain(
-      innkallingArbeidsgiverTexts.subtitle
+      innkallingSkjemaTexts.forhandsvisningArbeidsgiverSubtitle
     );
 
     // Lukk forhåndsvis innkalling til arbeidstaker
@@ -377,16 +376,16 @@ describe("DialogmoteInnkallingSkjema", () => {
     expect(forhandsvisningInnkallingArbeidstaker.prop("isOpen")).to.be.false;
     expect(forhandsvisningInnkallingArbeidsgiver.prop("isOpen")).to.be.true;
     expect(forhandsvisningInnkallingArbeidstaker.text()).not.to.contain(
-      innkallingArbeidstakerTexts.title
+      innkallingSkjemaTexts.forhandsvisningTitle
     );
     expect(forhandsvisningInnkallingArbeidstaker.text()).not.to.contain(
-      innkallingArbeidstakerTexts.subtitle
+      innkallingSkjemaTexts.forhandsvisningArbeidstakerSubtitle
     );
     expect(forhandsvisningInnkallingArbeidsgiver.text()).to.contain(
-      innkallingArbeidsgiverTexts.title
+      innkallingSkjemaTexts.forhandsvisningTitle
     );
     expect(forhandsvisningInnkallingArbeidsgiver.text()).to.contain(
-      innkallingArbeidsgiverTexts.subtitle
+      innkallingSkjemaTexts.forhandsvisningArbeidsgiverSubtitle
     );
   });
 });
