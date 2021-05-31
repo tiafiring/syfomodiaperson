@@ -81,12 +81,12 @@ const AvlysDialogmoteSkjema = ({
     updateFeilUtbedret,
   } = useFeilUtbedret();
   const [
-    visAvlysningArbeidstakerPreview,
-    setVisAvlysningArbeidstakerPreview,
+    displayAvlysningArbeidstakerPreview,
+    setDisplayAvlysningArbeidstakerPreview,
   ] = useState(false);
   const [
-    visAvlysningArbeidsgiverPreview,
-    setVisAvlysningArbeidsgiverPreview,
+    displayAvlysningArbeidsgiverPreview,
+    setDisplayAvlysningArbeidsgiverPreview,
   ] = useState(false);
   const {
     avlysningArbeidstaker,
@@ -129,30 +129,30 @@ const AvlysDialogmoteSkjema = ({
               fieldName="begrunnelseArbeidstaker"
               label={texts.begrunnelseArbeidstakerLabel}
               handlePreviewClick={() =>
-                setVisAvlysningArbeidstakerPreview(true)
+                setDisplayAvlysningArbeidstakerPreview(true)
               }
             />
             <Forhandsvisning
               title={texts.forhandsvisningTitle}
               subtitle={texts.forhandsvisningArbeidstakerSubtitle}
               contentLabel={texts.forhandsvisningArbeidstakerContentlabel}
-              isOpen={visAvlysningArbeidstakerPreview}
-              handleClose={() => setVisAvlysningArbeidstakerPreview(false)}
+              isOpen={displayAvlysningArbeidstakerPreview}
+              handleClose={() => setDisplayAvlysningArbeidstakerPreview(false)}
               documentComponents={() => avlysningArbeidstaker(values)}
             />
             <AvlysDialogmoteBegrunnelse
               fieldName="begrunnelseArbeidsgiver"
               label={texts.begrunnelseArbeidsgiverLabel}
               handlePreviewClick={() =>
-                setVisAvlysningArbeidsgiverPreview(true)
+                setDisplayAvlysningArbeidsgiverPreview(true)
               }
             />
             <Forhandsvisning
               title={texts.forhandsvisningTitle}
               subtitle={texts.forhandsvisningArbeidsgiverSubtitle}
               contentLabel={texts.forhandsvisningArbeidsgiverContentlabel}
-              isOpen={visAvlysningArbeidsgiverPreview}
-              handleClose={() => setVisAvlysningArbeidsgiverPreview(false)}
+              isOpen={displayAvlysningArbeidsgiverPreview}
+              handleClose={() => setDisplayAvlysningArbeidsgiverPreview(false)}
               documentComponents={() => avlysningArbeidsgiver(values)}
             />
             {avlysMoteFeilet && (

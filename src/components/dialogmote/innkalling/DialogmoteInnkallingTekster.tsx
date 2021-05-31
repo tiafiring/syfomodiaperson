@@ -73,12 +73,12 @@ const FritekstSeksjon = ({
 const DialogmoteInnkallingTekster = (): ReactElement => {
   const { values } = useFormState<DialogmoteInnkallingSkjemaValues>();
   const [
-    visInnkallingArbeidstakerPreview,
-    setVisInnkallingArbeidstakerPreview,
+    displayInnkallingArbeidstakerPreview,
+    setDisplayInnkallingArbeidstakerPreview,
   ] = useState(false);
   const [
-    visInnkallingArbeidsgiverPreview,
-    setVisInnkallingArbeidsgiverPreview,
+    displayInnkallingArbeidsgiverPreview,
+    setDisplayInnkallingArbeidsgiverPreview,
   ] = useState(false);
   const {
     arbeidstakerInnkalling,
@@ -91,27 +91,27 @@ const DialogmoteInnkallingTekster = (): ReactElement => {
       <FritekstSeksjon
         fieldName="fritekstArbeidstaker"
         label={texts.arbeidstakerLabel}
-        handlePreviewClick={() => setVisInnkallingArbeidstakerPreview(true)}
+        handlePreviewClick={() => setDisplayInnkallingArbeidstakerPreview(true)}
       />
       <Forhandsvisning
         title={texts.forhandsvisningTitle}
         subtitle={texts.forhandsvisningArbeidstakerSubtitle}
         contentLabel={texts.forhandsvisningArbeidstakerContentLabel}
-        isOpen={visInnkallingArbeidstakerPreview}
-        handleClose={() => setVisInnkallingArbeidstakerPreview(false)}
+        isOpen={displayInnkallingArbeidstakerPreview}
+        handleClose={() => setDisplayInnkallingArbeidstakerPreview(false)}
         documentComponents={() => arbeidstakerInnkalling(values)}
       />
       <FritekstSeksjon
         fieldName="fritekstArbeidsgiver"
         label={texts.arbeidsgiverLabel}
-        handlePreviewClick={() => setVisInnkallingArbeidsgiverPreview(true)}
+        handlePreviewClick={() => setDisplayInnkallingArbeidsgiverPreview(true)}
       />
       <Forhandsvisning
         title={texts.forhandsvisningTitle}
         subtitle={texts.forhandsvisningArbeidsgiverSubtitle}
         contentLabel={texts.forhandsvisningArbeidsgiverContentLabel}
-        isOpen={visInnkallingArbeidsgiverPreview}
-        handleClose={() => setVisInnkallingArbeidsgiverPreview(false)}
+        isOpen={displayInnkallingArbeidsgiverPreview}
+        handleClose={() => setDisplayInnkallingArbeidsgiverPreview(false)}
         documentComponents={() => arbeidsgiverInnkalling(values)}
       />
     </DialogmoteInnkallingSkjemaSeksjon>
