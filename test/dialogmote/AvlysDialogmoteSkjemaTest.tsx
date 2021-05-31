@@ -19,7 +19,10 @@ import AvlysDialogmoteSkjema, {
 import { texts as skjemaFeilOppsummeringTexts } from "../../src/components/SkjemaFeiloppsummering";
 import { texts as valideringsTexts } from "../../src/utils/valideringUtils";
 import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../src/utils/datoUtils";
-import { avlysningTexts } from "../../src/data/dialogmote/dialogmoteTexts";
+import {
+  avlysningTexts,
+  commonTexts,
+} from "../../src/data/dialogmote/dialogmoteTexts";
 import { Forhandsvisning } from "../../src/components/dialogmote/Forhandsvisning";
 import Lukknapp from "nav-frontend-lukknapp";
 
@@ -344,7 +347,11 @@ const expectedAvlysningArbeidsgiver = [
     type: "PARAGRAPH",
   },
   {
-    texts: [avlysningTexts.hilsenText, navEnhetNavn, veilederNavn],
+    texts: [commonTexts.hilsen, navEnhetNavn],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [veilederNavn],
     type: "PARAGRAPH",
   },
 ];
@@ -366,7 +373,11 @@ const expectedAvlysningArbeidstaker = [
     type: "PARAGRAPH",
   },
   {
-    texts: [avlysningTexts.hilsenText, navEnhetNavn, veilederNavn],
+    texts: [commonTexts.hilsen, navEnhetNavn],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [veilederNavn],
     type: "PARAGRAPH",
   },
 ];

@@ -5,7 +5,6 @@ export const innkallingTexts = {
   foerMoteTitle: "Før møtet",
   foerMoteText:
     "Det er viktig at dere fyller ut oppfølgingsplanen sammen og deler den med NAV. Den gir oss et godt utgangspunkt for å snakke om hva som fungerer, hva som har blitt forsøkt, og hvilke muligheter som finnes framover.",
-  hilsenText: "Med hilsen",
   arbeidstaker: {
     intro1:
       "Velkommen til dialogmøte mellom deg, arbeidsgiveren din og en veileder fra NAV. I møtet skal vi snakke om situasjonen din og bli enige om en plan som kan hjelpe deg videre.",
@@ -31,5 +30,8 @@ export const innkallingTexts = {
 export const avlysningTexts = {
   intro1: "NAV har tidligere innkalt til dialogmøtet som skulle vært avholdt",
   intro2: "Dette møtet er avlyst.",
-  hilsenText: "Vennlig hilsen",
+};
+
+export const commonTexts = {
+  hilsen: "Vennlig hilsen",
 };

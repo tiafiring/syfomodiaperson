@@ -19,7 +19,10 @@ import { Hovedknapp, Knapp } from "nav-frontend-knapper";
 import { texts as skjemaFeilOppsummeringTexts } from "../../src/components/SkjemaFeiloppsummering";
 import { texts as valideringsTexts } from "../../src/utils/valideringUtils";
 import { genererDato } from "../../src/components/mote/utils";
-import { innkallingTexts } from "../../src/data/dialogmote/dialogmoteTexts";
+import {
+  innkallingTexts,
+  commonTexts,
+} from "../../src/data/dialogmote/dialogmoteTexts";
 import { Forhandsvisning } from "../../src/components/dialogmote/Forhandsvisning";
 import { texts as innkallingSkjemaTexts } from "../../src/components/dialogmote/innkalling/DialogmoteInnkallingTekster";
 import Lukknapp from "nav-frontend-lukknapp";
@@ -452,7 +455,7 @@ const expectedArbeidsgiverInnkalling = [
     type: "PARAGRAPH",
   },
   {
-    texts: [innkallingTexts.hilsenText, navEnhetNavn],
+    texts: [commonTexts.hilsen, navEnhetNavn],
     type: "PARAGRAPH",
   },
   {
@@ -506,7 +509,7 @@ const expectedArbeidstakerInnkalling = [
     type: "PARAGRAPH",
   },
   {
-    texts: [innkallingTexts.hilsenText, navEnhetNavn],
+    texts: [commonTexts.hilsen, navEnhetNavn],
     type: "PARAGRAPH",
   },
   {
