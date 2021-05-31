@@ -22,6 +22,7 @@ import { useOppfoelgingsDialoger } from "../../../hooks/useOppfoelgingsDialoger"
 import { Tilgang } from "../../../data/tilgang/tilgang";
 import { DialogmoteOnskePanel } from "../../motebehov/DialogmoteOnskePanel";
 import { fetchDialogmote } from "../../../data/dialogmote/dialogmote_actions";
+import { MotehistorikkPanel } from "../../dialogmote/motehistorikk/MotehistorikkPanel";
 
 interface Props {
   fnr: string;
@@ -116,6 +117,8 @@ export const Motelandingsside = ({ fnr }: Props) => {
         oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
         sykmeldinger={sykmeldinger.data}
       />
+
+      <MotehistorikkPanel />
     </SideLaster>
   );
 };
