@@ -4,6 +4,11 @@
   "description": "Digitalisering av sykefraværsoppfølging",
   "main": "index.js",
   "test": "npm run test",
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ]
+  },
   "scripts": {
     "test": "mocha -r ./test/babel-register.js -r @babel/polyfill -r jsdom-global/register -r ignore-styles --recursive --extension ts,js,jsx,tsx",
     "start": "webpack serve --config webpack.dev.js",
@@ -142,6 +147,7 @@
     "jsdom-global": "3.0.2",
     "less": "3.8.1",
     "less-loader": "8.1.0",
+    "lint-staged": "11.0.0",
     "mini-css-extract-plugin": "1.4.1",
     "mocha": "8.1.1",
     "postcss-loader": "5.2.0",

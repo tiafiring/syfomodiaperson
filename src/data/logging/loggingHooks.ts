@@ -56,7 +56,7 @@ export const useTrackPageLoad = () => {
   return function (pageName: string, aktivtMenyPunkt: string) {
     trackEvent(`${texts.pageLoad}`, {
       aktivtMenyPunkt: aktivtMenyPunkt,
-      pageName: pageName
+      pageName: pageName,
     });
   };
 };
