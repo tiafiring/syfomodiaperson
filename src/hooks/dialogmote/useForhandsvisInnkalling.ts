@@ -2,18 +2,15 @@ import { DialogmoteInnkallingSkjemaValues } from "../../components/dialogmote/in
 import { DocumentComponentDto } from "../../data/dialogmote/dialogmoteTypes";
 import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../utils/datoUtils";
 import { genererDato } from "../../components/mote/utils";
-import { useBehandlendeEnhet } from "../../data/behandlendeenhet/behandlendeEnhet_hooks";
-import { useVeilederinfo } from "../useVeilederinfo";
 import { useNavBrukerData } from "../../data/navbruker/navbruker_hooks";
 import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
-import { BehandlendeEnhet } from "../../data/behandlendeenhet/types/BehandlendeEnhet";
-import { VeilederinfoDTO } from "../../data/veilederinfo/types/VeilederinfoDTO";
 import { innkallingTexts } from "../../data/dialogmote/dialogmoteTexts";
 import {
   createLink,
   createParagraph,
   createParagraphWithTitle,
 } from "../../utils/documentComponentUtils";
+import { useForhandsvisningHilsen } from "./useForhandsvisningHilsen";
 
 export interface ForhandsvisInnkallingGenerator {
   arbeidstakerInnkalling(
@@ -26,9 +23,8 @@ export interface ForhandsvisInnkallingGenerator {
 }
 
 export const useForhandsvisInnkalling = (): ForhandsvisInnkallingGenerator => {
-  const behandlendeEnhet = useBehandlendeEnhet();
-  const { veilederinfo } = useVeilederinfo();
   const navBruker = useNavBrukerData();
+  const { hilsen, hilsenMedKontaktinfo } = useForhandsvisningHilsen();
 
   const arbeidstakerInnkalling = (
     values: Partial<DialogmoteInnkallingSkjemaValues>
@@ -40,9 +36,7 @@ export const useForhandsvisInnkalling = (): ForhandsvisInnkallingGenerator => {
     if (values.fritekstArbeidstaker) {
       documentComponents.push(createParagraph(values.fritekstArbeidstaker));
     }
-    documentComponents.push(
-      ...arbeidstakerOutro(behandlendeEnhet, veilederinfo)
-    );
+    documentComponents.push(...arbeidstakerOutro(), ...hilsen);
 
     return documentComponents;
   };
@@ -57,9 +51,7 @@ export const useForhandsvisInnkalling = (): ForhandsvisInnkallingGenerator => {
     if (values.fritekstArbeidsgiver) {
       documentComponents.push(createParagraph(values.fritekstArbeidsgiver));
     }
-    documentComponents.push(
-      ...arbeidsgiverOutro(behandlendeEnhet, veilederinfo)
-    );
+    documentComponents.push(...arbeidsgiverOutro(), ...hilsenMedKontaktinfo);
 
     return documentComponents;
   };
@@ -109,29 +101,18 @@ const arbeidsgiverIntro = (navBruker: Brukerinfo): DocumentComponentDto[] => {
   ];
 };
 
-const arbeidstakerOutro = (
-  behandlendeEnhet: BehandlendeEnhet,
-  veilederinfo?: VeilederinfoDTO
-): DocumentComponentDto[] => {
-  const outro = [
+const arbeidstakerOutro = (): DocumentComponentDto[] => {
+  return [
     createParagraph(innkallingTexts.arbeidstaker.outro1),
     createParagraphWithTitle(
       innkallingTexts.foerMoteTitle,
       innkallingTexts.foerMoteText
     ),
-    createParagraph(innkallingTexts.hilsenText, behandlendeEnhet.navn),
   ];
-  if (veilederinfo) {
-    outro.push(createParagraph(veilederinfo.navn));
-  }
-  return outro;
 };
 
-const arbeidsgiverOutro = (
-  behandlendeEnhet: BehandlendeEnhet,
-  veilederinfo?: VeilederinfoDTO
-): DocumentComponentDto[] => {
-  const outro = [
+const arbeidsgiverOutro = (): DocumentComponentDto[] => {
+  return [
     createParagraph(innkallingTexts.arbeidsgiver.outro1),
     createParagraph(innkallingTexts.arbeidsgiver.outro2),
     createParagraph(innkallingTexts.arbeidsgiver.outro3),
@@ -139,16 +120,5 @@ const arbeidsgiverOutro = (
       innkallingTexts.foerMoteTitle,
       innkallingTexts.foerMoteText
     ),
-    createParagraph(innkallingTexts.hilsenText, behandlendeEnhet.navn),
   ];
-  if (veilederinfo) {
-    outro.push(
-      createParagraph(
-        veilederinfo.navn,
-        veilederinfo.epost,
-        veilederinfo.telefonnummer ?? ""
-      )
-    );
-  }
-  return outro;
 };

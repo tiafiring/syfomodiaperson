@@ -2,13 +2,12 @@ import {
   DialogmoteDTO,
   DocumentComponentDto,
 } from "../../data/dialogmote/dialogmoteTypes";
-import { useBehandlendeEnhet } from "../../data/behandlendeenhet/behandlendeEnhet_hooks";
-import { useVeilederinfo } from "../useVeilederinfo";
 import { useNavBrukerData } from "../../data/navbruker/navbruker_hooks";
 import { AvlysDialogmoteSkjemaValues } from "../../components/dialogmote/avlys/AvlysDialogmoteSkjema";
 import { avlysningTexts } from "../../data/dialogmote/dialogmoteTexts";
 import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../utils/datoUtils";
 import { createParagraph } from "../../utils/documentComponentUtils";
+import { useForhandsvisningHilsen } from "./useForhandsvisningHilsen";
 
 export interface ForhandsvisAvlysningGenerator {
   avlysningArbeidstaker(
@@ -23,8 +22,7 @@ export interface ForhandsvisAvlysningGenerator {
 export const useForhandsvisAvlysning = (
   dialogmote: DialogmoteDTO
 ): ForhandsvisAvlysningGenerator => {
-  const behandlendeEnhet = useBehandlendeEnhet();
-  const { veilederinfo } = useVeilederinfo();
+  const { hilsen } = useForhandsvisningHilsen();
   const navBruker = useNavBrukerData();
   const gjelderText = createParagraph(
     `Gjelder ${navBruker.navn}, f.nr. ${navBruker.kontaktinfo.fnr}.`
@@ -34,11 +32,6 @@ export const useForhandsvisAvlysning = (
       dialogmote.tid
     )}. ${avlysningTexts.intro2}`
   );
-  const hilsenText = createParagraph(
-    avlysningTexts.hilsenText,
-    behandlendeEnhet.navn,
-    veilederinfo?.navn ?? ""
-  );
 
   const avlysningArbeidstaker = (
     values: Partial<AvlysDialogmoteSkjemaValues>
@@ -47,7 +40,7 @@ export const useForhandsvisAvlysning = (
     if (values.begrunnelseArbeidstaker) {
       documentComponents.push(createParagraph(values.begrunnelseArbeidstaker));
     }
-    documentComponents.push(hilsenText);
+    documentComponents.push(...hilsen);
     return documentComponents;
   };
 
@@ -58,7 +51,7 @@ export const useForhandsvisAvlysning = (
     if (values.begrunnelseArbeidsgiver) {
       documentComponents.push(createParagraph(values.begrunnelseArbeidsgiver));
     }
-    documentComponents.push(hilsenText);
+    documentComponents.push(...hilsen);
     return documentComponents;
   };
 
