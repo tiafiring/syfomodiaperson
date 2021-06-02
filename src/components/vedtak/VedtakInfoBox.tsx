@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Column } from "nav-frontend-grid";
 import styled from "styled-components";
+import navFarger from "nav-frontend-core";
 
 const StyledColumn = styled(Column)`
   display: flex;
@@ -14,12 +15,10 @@ const StyledIcon = styled.img`
   align-self: center;
 `;
 
-const grey = "#78706A";
-
 const StyledCenteredText = styled.h3`
   text-align: center;
   font-weight: normal;
-  color: ${grey};
+  color: ${navFarger.navGra60};
 `;
 
 interface Props {
