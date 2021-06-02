@@ -11,6 +11,7 @@ import OversiktLink from "./OversiktLink";
 import PersonkortHeader from "./PersonkortHeader";
 import PersonkortVisning from "./PersonkortVisning";
 import Utvidbar from "../Utvidbar";
+import { useNavBrukerData } from "../../data/navbruker/navbruker_hooks";
 
 const texts = {
   buttons: {
@@ -47,11 +48,11 @@ const Personkort = () => {
 
   const ledereState = useSelector((state: any) => state.ledere);
   const ledere = ledereState.allLedere;
-  const navbrukerState = useSelector((state: any) => state.navbruker);
-  const navbruker = navbrukerState.data;
+
+  const navbruker = useNavBrukerData();
+  const brukerFnr = navbruker.kontaktinfo && navbruker.kontaktinfo.fnr;
 
   useEffect(() => {
-    const brukerFnr = navbruker.kontaktinfo && navbruker.kontaktinfo.fnr;
     if (brukerFnr) {
       dispatch(hentDiskresjonskode(brukerFnr));
       dispatch(hentEgenansatt(brukerFnr));
@@ -59,11 +60,9 @@ const Personkort = () => {
       dispatch(hentLedere(brukerFnr));
       dispatch(hentSykmeldinger(brukerFnr));
     }
-  }, []);
+  }, [brukerFnr]);
 
   useEffect(() => {
-    const brukerFnr = navbruker.kontaktinfo && navbruker.kontaktinfo.fnr;
-
     dispatch(hentOppfolgingstilfelleperioder(brukerFnr));
   }, [ledere]);
 
