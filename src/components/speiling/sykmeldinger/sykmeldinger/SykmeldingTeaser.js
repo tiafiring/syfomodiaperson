@@ -131,6 +131,7 @@ class SykmeldingTeaser extends Component {
           onMouseLeave={() => {
             this.onMouseLeave(behandlingsutfallStatus);
           }}
+          onClick={this.props.trackOnClick}
         >
           <span className="inngangspanel__ikon">
             <img alt="" src={this.state.ikon} />
@@ -188,6 +189,7 @@ class SykmeldingTeaser extends Component {
 SykmeldingTeaser.propTypes = {
   sykmelding: sykmeldingPt,
   fnr: PropTypes.string,
+  trackOnClick: PropTypes.func,
 };
 
 export default SykmeldingTeaser;

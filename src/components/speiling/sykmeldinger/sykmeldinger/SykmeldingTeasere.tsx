@@ -10,6 +10,7 @@ interface SykmeldingTeasereProps {
   ingenSykmeldingerMelding: string;
   id: string;
   children?: any;
+  trackOnClick: () => void;
 }
 
 const SykmeldingTeasere = (sykmeldingTeasereProps: SykmeldingTeasereProps) => {
@@ -21,6 +22,7 @@ const SykmeldingTeasere = (sykmeldingTeasereProps: SykmeldingTeasereProps) => {
     ingenSykmeldingerMelding,
     id,
     children,
+    trackOnClick,
   } = sykmeldingTeasereProps;
   return (
     <div className="blokk--l">
@@ -32,7 +34,12 @@ const SykmeldingTeasere = (sykmeldingTeasereProps: SykmeldingTeasereProps) => {
         {sykmeldinger.length ? (
           sykmeldinger.map((sykmelding, idx) => {
             return (
-              <SykmeldingTeaser key={idx} fnr={fnr} sykmelding={sykmelding} />
+              <SykmeldingTeaser
+                key={idx}
+                fnr={fnr}
+                sykmelding={sykmelding}
+                trackOnClick={trackOnClick}
+              />
             );
           })
         ) : (
