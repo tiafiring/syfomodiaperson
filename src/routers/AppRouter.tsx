@@ -27,6 +27,7 @@ import {
 import { EventType } from "../data/modiacontext/modiacontextTypes";
 import AppSpinner from "../components/AppSpinner";
 import { useAppSelector } from "../hooks/hooks";
+import DialogmoteReferatContainer from "../components/dialogmote/referat/DialogmoteReferatContainer";
 
 const getFnrFromParams = (): string => {
   return window.location.pathname.split("/")[2];
@@ -70,6 +71,13 @@ const AktivBrukerRouter = (): ReactElement => {
           path="/sykefravaer/dialogmote/:dialogmoteUuid/avlys"
           exact
           component={AvlysDialogmoteContainer}
+        />
+      )}
+      {erLokalEllerPreprod && (
+        <Route
+          path="/sykefravaer/dialogmote/:dialogmoteUuid/referat"
+          exact
+          component={DialogmoteReferatContainer}
         />
       )}
       <Route

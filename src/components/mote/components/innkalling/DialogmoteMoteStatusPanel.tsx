@@ -132,9 +132,11 @@ export const DialogmoteMoteStatusPanel = ({ dialogmote }: Props) => {
             {texts.avlysMote}
           </TrackedKnapp>
         </Link>
-        <TrackedHovedknapp context={texts.innkallingSendtTrackingContext}>
-          {texts.skrivReferat}
-        </TrackedHovedknapp>
+        <Link to={`/sykefravaer/dialogmote/${dialogmote.uuid}/referat`}>
+          <TrackedHovedknapp context={texts.innkallingSendtTrackingContext}>
+            {texts.skrivReferat}
+          </TrackedHovedknapp>
+        </Link>
       </FlexRow>
     </DialogmotePanel>
   );
