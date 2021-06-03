@@ -58,7 +58,7 @@ const mockState = {
   },
 };
 
-describe("ReferatSkjemaTest", () => {
+describe("ReferatTest", () => {
   it("viser arbeidstaker, dato og sted i tittel", () => {
     const wrapper = mount(
       <MemoryRouter
@@ -76,7 +76,7 @@ describe("ReferatSkjemaTest", () => {
       `${arbeidstakerNavn}, 10. mai 2021, Videomøte`
     );
   });
-  it("viser alle deltakere forhåndsvalgt uten mulighet til å fjerne arbeidstaker", () => {
+  it("viser alle deltakere forhåndsvalgt og mulig å velge bort", () => {
     const wrapper = mount(
       <MemoryRouter
         initialEntries={[`/sykefravaer/dialogmote/${moteUuid}/referat`]}
@@ -98,8 +98,8 @@ describe("ReferatSkjemaTest", () => {
     expect(arbeidsgiverCheckbox.props().checked).to.be.true;
     expect(veilederCheckbox.props().checked).to.be.true;
 
-    expect(arbeidstakerCheckbox.props().disabled).to.be.true;
-    expect(arbeidsgiverCheckbox.props().disabled).to.be.false;
-    expect(veilederCheckbox.props().disabled).to.be.false;
+    expect(arbeidstakerCheckbox.props().disabled).to.be.undefined;
+    expect(arbeidsgiverCheckbox.props().disabled).to.be.undefined;
+    expect(veilederCheckbox.props().disabled).to.be.undefined;
   });
 });
