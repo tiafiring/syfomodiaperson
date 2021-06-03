@@ -9,16 +9,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { hentVirksomhet } from "../../data/virksomhet/virksomhet_actions";
 import Ekspanderbartpanel from "nav-frontend-ekspanderbartpanel";
 import { VedtakDTO } from "../../data/vedtak/vedtak";
+import navFarger from "nav-frontend-core";
 
 interface StyledPanelProps {
   readonly isActive: boolean;
 }
 
-const hvit = "#FFF";
-const lysBla = "#CCE1F3";
-
 const StyledPanel = styled(Panel)<StyledPanelProps>`
-  background: ${(props) => (props.isActive ? lysBla : hvit)};
+  background: ${(props) =>
+    props.isActive ? navFarger.navBlaLighten80 : navFarger.white};
 `;
 
 const StyledButton = styled.button`
