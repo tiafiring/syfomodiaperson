@@ -3,7 +3,10 @@ import { Container, Row, Column } from "nav-frontend-grid";
 import Personkort from "../components/personkort/Personkort";
 import Decorator from "../decorator/Decorator";
 import DocumentTitle from "react-document-title";
-import { useTrackPageLoad } from "../data/logging/loggingHooks";
+import {
+  hasLoadedMetaData,
+  useTrackPageLoad,
+} from "../data/logging/loggingHooks";
 
 interface SideFullbreddeProps {
   tittel: string;
@@ -13,11 +16,14 @@ interface SideFullbreddeProps {
 
 const Side = (sideFullbreddeProps: SideFullbreddeProps) => {
   const { tittel, aktivtMenypunkt, children } = sideFullbreddeProps;
+  const metaDataLoaded = hasLoadedMetaData();
   const trackPageLoad = useTrackPageLoad();
 
   useEffect(() => {
-    trackPageLoad(tittel, aktivtMenypunkt);
-  }, []);
+    if (metaDataLoaded) {
+      trackPageLoad(tittel, aktivtMenypunkt);
+    }
+  }, [metaDataLoaded]);
 
   return (
     <>

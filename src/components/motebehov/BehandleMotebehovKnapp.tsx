@@ -12,7 +12,7 @@ import { toDatePrettyPrint } from "../../utils/datoUtils";
 import { behandleMotebehov } from "../../data/motebehov/behandlemotebehov_actions";
 import { MotebehovDTO } from "../../data/motebehov/types/motebehovTypes";
 import { useValgtPersonident } from "../../hooks/useValgtBruker";
-import { useTrackButtonClick } from "../../data/logging/loggingHooks";
+import { useTrackOnClick } from "../../data/logging/loggingHooks";
 
 const texts = {
   fjernOppgave: "Jeg har vurdert behovet. Oppgaven kan fjernes fra oversikten.",
@@ -32,19 +32,17 @@ const behandleMotebehovKnappLabel = (
 interface BehandleMotebehovKnappProps {
   motebehovData: MotebehovDTO[];
   veilederinfo?: VeilederinfoDTO;
-  pageTitle: string;
 }
 
 const BehandleMotebehovKnapp = ({
   motebehovData,
   veilederinfo,
-  pageTitle,
 }: BehandleMotebehovKnappProps) => {
   const motebehovListe = motebehovlisteMedKunJaSvar(motebehovData);
   const sistBehandletMotebehov = hentSistBehandletMotebehov(motebehovListe);
   const erBehandlet = erMotebehovBehandlet(motebehovListe);
   const fnr = useValgtPersonident();
-  const trackButtonClick = useTrackButtonClick();
+  const trackOnClick = useTrackOnClick();
 
   const dispatch = useDispatch();
 
@@ -57,7 +55,7 @@ const BehandleMotebehovKnapp = ({
             sistBehandletMotebehov
           )}
           onClick={() => {
-            trackButtonClick(texts.fjernOppgave, pageTitle);
+            trackOnClick(texts.fjernOppgave);
             if (harUbehandletMotebehov(motebehovListe)) {
               dispatch(behandleMotebehov(fnr, veilederinfo.ident));
             }

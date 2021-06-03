@@ -80,6 +80,8 @@ class Utvidbar extends Component {
   }
 
   apne() {
+    this.props.onExpand && this.props.onExpand();
+
     this.setState({
       hoyde: "0",
       hindreToggle: true,
@@ -236,6 +238,7 @@ Utvidbar.propTypes = {
   variant: PropTypes.string,
   visLukklenke: PropTypes.bool.isRequired,
   onClick: PropTypes.func,
+  onExpand: PropTypes.func,
 };
 
 Utvidbar.defaultProps = {

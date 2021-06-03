@@ -6,11 +6,13 @@ import {
 import { sorterSykmeldinger } from "../../../../utils/sorterSykmeldingerUtils";
 import SykmeldingTeasere from "./SykmeldingTeasere";
 import SykmeldingerSorteringContainer from "./SykmeldingerSorteringContainer";
+import { useTrackOnClick } from "../../../../data/logging/loggingHooks";
 
 const texts = {
   ingenSykmeldinger: "Tidligere sykmeldinger",
   ingenNyeSykmeldinger: "Du har ingen nye sykmeldinger",
   nyeSykmeldinger: "Nye sykmeldinger",
+  apneSykmelding: "Åpne sykmelding",
 };
 
 interface DineSykmeldingerProps {
@@ -29,6 +31,8 @@ const DineSykmeldinger = (dineSykmeldingerProps: DineSykmeldingerProps) => {
   });
   const tidligereSortering =
     sortering && sortering.tidligere ? sortering.tidligere : undefined;
+  const trackOnClick = useTrackOnClick();
+
   return (
     <div>
       <SykmeldingTeasere
@@ -38,6 +42,7 @@ const DineSykmeldinger = (dineSykmeldingerProps: DineSykmeldingerProps) => {
         className="js-nye-sykmeldinger"
         fnr={fnr}
         id="sykmelding-liste-nye"
+        trackOnClick={() => trackOnClick(texts.apneSykmelding)}
       />
       {tidligereSykmeldinger.length > 0 && (
         <SykmeldingTeasere
@@ -50,6 +55,7 @@ const DineSykmeldinger = (dineSykmeldingerProps: DineSykmeldingerProps) => {
           className="js-tidligere-sykmeldinger"
           fnr={fnr}
           id="sykmelding-liste-tidligere"
+          trackOnClick={() => trackOnClick(texts.apneSykmelding)}
         >
           <SykmeldingerSorteringContainer status="tidligere" />
         </SykmeldingTeasere>

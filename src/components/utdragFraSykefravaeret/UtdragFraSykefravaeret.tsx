@@ -29,6 +29,7 @@ import {
 } from "../../../img/ImageComponents";
 import { UtdragOppfolgingsplaner } from "./UtdragOppfolgingsplaner";
 import { DialogmotePanel } from "../mote/components/DialogmotePanel";
+import { useTrackOnClick } from "../../data/logging/loggingHooks";
 
 const tekster = {
   header: "Utdrag fra sykefraværet",
@@ -41,6 +42,7 @@ const tekster = {
     header: "Samtalereferat",
     lenkeTekst: "Samtalereferat",
   },
+  apneSykmelding: "Åpne sykmelding",
 };
 
 interface UtvidbarTittelProps {
@@ -93,10 +95,12 @@ export const UtvidbarTittel = ({ sykmelding }: UtvidbarTittelProps) => {
 
 interface SykmeldingerForVirksomhetProps {
   sykmeldinger: SykmeldingOldFormat[];
+  trackOnClick: () => void;
 }
 
 export const SykmeldingerForVirksomhet = ({
   sykmeldinger,
+  trackOnClick,
 }: SykmeldingerForVirksomhetProps) => {
   return (
     <div className="utdragFraSykefravaeret__sykmeldingerForVirksomhet">
@@ -109,6 +113,7 @@ export const SykmeldingerForVirksomhet = ({
             <Utvidbar
               tittel={<UtvidbarTittel sykmelding={sykmelding} />}
               visLukkLenke={false}
+              onExpand={trackOnClick}
             >
               <SykmeldingMotebehovVisning sykmelding={sykmelding} />
             </Utvidbar>
@@ -122,11 +127,13 @@ export const SykmeldingerForVirksomhet = ({
 interface SykmeldingerProps {
   oppfolgingstilfelleperioder: OppfolgingstilfelleperioderMapState;
   sykmeldinger: SykmeldingOldFormat[];
+  trackOnClick: () => void;
 }
 
 export const Sykmeldinger = ({
   sykmeldinger,
   oppfolgingstilfelleperioder,
+  trackOnClick,
 }: SykmeldingerProps) => {
   const innsendteSykmeldinger = sykmeldingerMedStatusSendt(sykmeldinger);
   const sykmeldingerIOppfolgingstilfellet = sykmeldingerInnenforOppfolgingstilfellet(
@@ -146,6 +153,7 @@ export const Sykmeldinger = ({
         <SykmeldingerForVirksomhet
           key={index}
           sykmeldinger={sykmeldingerSortertPaaVirksomhet[key]}
+          trackOnClick={trackOnClick}
         />
       ))}
     </div>
@@ -155,11 +163,13 @@ export const Sykmeldinger = ({
 interface SykmeldingerUtenArbeidsgiverProps {
   oppfolgingstilfelleUtenArbeidsgiver: OppfolgingstilfellePerson;
   sykmeldinger: SykmeldingOldFormat[];
+  trackOnClick: () => void;
 }
 
 export const SykmeldingerUtenArbeidsgiver = ({
   oppfolgingstilfelleUtenArbeidsgiver,
   sykmeldinger,
+  trackOnClick,
 }: SykmeldingerUtenArbeidsgiverProps) => {
   const innsendteSykmeldinger = sykmeldingerUtenArbeidsgiver(sykmeldinger);
   const sykmeldingerIOppfolgingstilfellet = sykmeldingerInnenforOppfolgingstilfellePerson(
@@ -182,6 +192,7 @@ export const SykmeldingerUtenArbeidsgiver = ({
               <Utvidbar
                 tittel={<UtvidbarTittel sykmelding={sykmelding} />}
                 visLukkLenke={false}
+                onExpand={trackOnClick}
               >
                 <SykmeldingMotebehovVisning sykmelding={sykmelding} />
               </Utvidbar>
@@ -194,13 +205,15 @@ export const SykmeldingerUtenArbeidsgiver = ({
 
 interface SamtalereferatProps {
   fnr: string;
+  trackOnClick: () => void;
 }
 
-export const Samtalereferat = ({ fnr }: SamtalereferatProps) => (
+export const Samtalereferat = ({ fnr, trackOnClick }: SamtalereferatProps) => (
   <div className="utdragFraSykefravaeret__samtalereferat">
     <h3>{tekster.samtalereferat.header}</h3>
     <Lenke
       className="lenke"
+      onClick={trackOnClick}
       href={`https://modapp${finnMiljoStreng()}.adeo.no/modiabrukerdialog/person/${fnr}#!meldinger`}
       target="_blank"
     >
@@ -223,28 +236,37 @@ const UtdragFraSykefravaeret = ({
   oppfolgingstilfelleUtenArbeidsgiver,
   oppfolgingstilfelleperioder,
   sykmeldinger,
-}: UtdragFraSykefravaeretProps) => (
-  <DialogmotePanel icon={GultDokumentImage} header={tekster.header}>
-    <div className="utdragFraSykefravaeret">
-      <UtdragOppfolgingsplaner aktiveDialoger={aktiveDialoger} fnr={fnr} />
+}: UtdragFraSykefravaeretProps) => {
+  const trackOnClick = useTrackOnClick();
 
-      <Sykmeldinger
-        oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
-        sykmeldinger={sykmeldinger}
-      />
+  return (
+    <DialogmotePanel icon={GultDokumentImage} header={tekster.header}>
+      <div className="utdragFraSykefravaeret">
+        <UtdragOppfolgingsplaner aktiveDialoger={aktiveDialoger} fnr={fnr} />
 
-      {oppfolgingstilfelleUtenArbeidsgiver && (
-        <SykmeldingerUtenArbeidsgiver
-          oppfolgingstilfelleUtenArbeidsgiver={
-            oppfolgingstilfelleUtenArbeidsgiver
-          }
+        <Sykmeldinger
+          oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
           sykmeldinger={sykmeldinger}
+          trackOnClick={() => trackOnClick(tekster.apneSykmelding)}
         />
-      )}
 
-      <Samtalereferat fnr={fnr} />
-    </div>
-  </DialogmotePanel>
-);
+        {oppfolgingstilfelleUtenArbeidsgiver && (
+          <SykmeldingerUtenArbeidsgiver
+            oppfolgingstilfelleUtenArbeidsgiver={
+              oppfolgingstilfelleUtenArbeidsgiver
+            }
+            sykmeldinger={sykmeldinger}
+            trackOnClick={() => trackOnClick(tekster.apneSykmelding)}
+          />
+        )}
+
+        <Samtalereferat
+          fnr={fnr}
+          trackOnClick={() => trackOnClick(tekster.samtalereferat.header)}
+        />
+      </div>
+    </DialogmotePanel>
+  );
+};
 
 export default UtdragFraSykefravaeret;

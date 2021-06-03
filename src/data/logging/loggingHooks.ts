@@ -4,7 +4,7 @@ import { RootState } from "../rootState";
 import { trackEvent } from "../../amplitude/amplitude";
 
 export const texts = {
-  buttonClick: "Klikker på:",
+  click: "Klikker på:",
   pageLoad: "Laster side",
 };
 
@@ -15,6 +15,16 @@ export interface loggingMetadata {
   behandlendeEnhetId: string;
   behandlendeEnhetNavn: string;
 }
+
+export const hasLoadedMetaData = (): boolean => {
+  const harHentetBehandlendeEnhet = useSelector(
+    (state: RootState) => !!state.behandlendeEnhet.data.enhetId
+  );
+  const harHentetValgtEnhet = useSelector(
+    (state: RootState) => !!state.enhet.valgtEnhet
+  );
+  return harHentetBehandlendeEnhet && harHentetValgtEnhet;
+};
 
 export const useLoggingMetaData = (): loggingMetadata => {
   const valgEnhetId = useSelector((state: RootState) => state.enhet.valgtEnhet);
@@ -42,11 +52,15 @@ export const useTrackEvent = () => {
   );
 };
 
-export const useTrackButtonClick = () => {
+export const useTrackOnClick = () => {
   const trackEvent = useTrackEvent();
 
-  return function (buttonName: string, kontekst: string) {
-    trackEvent(`${texts.buttonClick} ${buttonName}`, { kontekst: kontekst });
+  return function (elementName: string, kontekst?: string) {
+    const context = kontekst && { kontekst: kontekst };
+    trackEvent(`${texts.click} ${elementName}`, {
+      pageName: document.title,
+      ...context,
+    });
   };
 };
 
