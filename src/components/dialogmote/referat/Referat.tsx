@@ -1,34 +1,39 @@
-import React from "react";
-import { Field, Form } from "react-final-form";
+import React, { ReactElement } from "react";
+import { Form } from "react-final-form";
 import Panel from "nav-frontend-paneler";
-import AlertStripe from "nav-frontend-alertstriper";
-import styled from "styled-components";
-import { tilDatoMedUkedagOgManedNavn } from "../../../utils/datoUtils";
-import TextField from "../../mote/TextField";
-import Stillingsprosent from "./Stillingsprosent";
-import Deltakere from "./Deltakere";
-import Buttonrow from "./Buttonrow";
+import { tilDatoMedManedNavn } from "../../../utils/datoUtils";
+import Deltakere, { Deltaker } from "./Deltakere";
 import { useNavBrukerData } from "../../../data/navbruker/navbruker_hooks";
 import { DialogmoteDTO } from "../../../data/dialogmote/dialogmoteTypes";
+import { AlertstripeFullbredde } from "../../AlertstripeFullbredde";
+import ReferatButtons from "./ReferatButtons";
+import { Innholdstittel } from "nav-frontend-typografi";
+import styled from "styled-components";
+import { Situasjon } from "./Situasjon";
+import { Konklusjon } from "./Konklusjon";
+import { ArbeidstakersOppgave } from "./ArbeidstakersOppgave";
+import { ArbeidsgiversOppgave } from "./ArbeidsgiversOppgave";
+import { VeiledersOppgave } from "./VeiledersOppgave";
+import { StandardTekster } from "./StandardTekster";
 
 const texts = {
-  header: "Dialogmøte holdt ",
   digitalReferat:
-    "Referatet formidles her på nav.no. Det er bare de arbeidstakerne som har reservert seg mot digital kommunikasjon, som vil få referatet i psoten.",
+    "Referatet formidles her på nav.no. Det er bare de arbeidstakerne som har reservert seg mot digital kommunikasjon, som vil få referatet i posten.",
   personvern:
     "Du må aldri skrive sensitive opplysninger om helse, diagnose, behandling, og prognose. Dette gjelder også hvis arbeidstakeren er åpen om helsen og snakket om den i møtet.",
-  label: "Referat",
 };
 
 interface ReferatSkjemaValues {
+  deltakere: Deltaker[];
+  situasjon: string;
   konklusjon: string;
+  arbeidstakersOppgave: string;
+  arbeidsgiversOppgave: string;
+  veiledersOppgave?: string;
+  standardtekster: string[];
 }
 
-interface ReferatSkjemaFeil {
-  konklusjon?: string;
-}
-
-const fakeKnapperadFunctions = {
+const fakeButtonActions = {
   sendMethod: () => {
     console.log("SEND!");
   },
@@ -40,8 +45,14 @@ const fakeKnapperadFunctions = {
   },
 };
 
-const validate = (values: Partial<ReferatSkjemaValues>): ReferatSkjemaFeil => {
-  const feilmeldinger: ReferatSkjemaFeil = {};
+const ReferatTittel = styled(Innholdstittel)`
+  margin-bottom: 2em;
+`;
+
+const validate = (
+  values: Partial<ReferatSkjemaValues>
+): Partial<ReferatSkjemaValues> => {
+  const feilmeldinger: Partial<ReferatSkjemaValues> = {};
   const forMangeTegn = values.konklusjon && values.konklusjon.length > 2000;
 
   feilmeldinger.konklusjon = forMangeTegn
@@ -55,44 +66,43 @@ const submit = (values: ReferatSkjemaValues) => {
   console.log("Submit referat with values: ", values);
 };
 
-const ReferatWarningAlert = styled(AlertStripe)`
-  margin-bottom: 2em;
+const ReferatWarningAlert = styled(AlertstripeFullbredde)`
+  margin-bottom: 4em;
 `;
 
 interface ReferatProps {
   dialogmote: DialogmoteDTO;
 }
 
-const Referat = ({ dialogmote }: ReferatProps) => {
+const Referat = ({ dialogmote }: ReferatProps): ReactElement => {
   const navbruker = useNavBrukerData();
-  const dateAndTimeForMeeting = tilDatoMedUkedagOgManedNavn(dialogmote.tid);
+  const dateAndTimeForMeeting = tilDatoMedManedNavn(dialogmote.tid);
 
   const header = `${navbruker?.navn}, ${dateAndTimeForMeeting}, ${dialogmote.sted}`;
+  const initialValues: Partial<ReferatSkjemaValues> = {
+    deltakere: ["arbeidstaker", "arbeidsgiver", "veileder"],
+  };
 
   return (
     <Panel>
-      <h2>{header}</h2>
-      <ReferatWarningAlert type="advarsel">
-        {texts.digitalReferat}
-      </ReferatWarningAlert>
-      <Deltakere arbeidsgiverNavn={dialogmote?.arbeidsgiver.lederNavn} />
-      <Stillingsprosent
-        virksomhetsnummer={dialogmote?.arbeidsgiver.virksomhetsnummer}
-      />
-      <ReferatWarningAlert type="advarsel">
-        {texts.personvern}
-      </ReferatWarningAlert>
-      <Form onSubmit={submit} validate={validate}>
+      <Form onSubmit={submit} validate={validate} initialValues={initialValues}>
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <Field
-              label={texts.label}
-              id="referat"
-              component={TextField}
-              name="referat"
-              maxLength={2000}
-            />
-            <Buttonrow {...fakeKnapperadFunctions} />
+            <ReferatTittel>{header}</ReferatTittel>
+            <ReferatWarningAlert type="advarsel">
+              {texts.digitalReferat}
+            </ReferatWarningAlert>
+            <Deltakere arbeidsgiverNavn={dialogmote.arbeidsgiver.lederNavn} />
+            <ReferatWarningAlert type="advarsel">
+              {texts.personvern}
+            </ReferatWarningAlert>
+            <Situasjon />
+            <Konklusjon />
+            <ArbeidstakersOppgave />
+            <ArbeidsgiversOppgave />
+            <VeiledersOppgave />
+            <StandardTekster />
+            <ReferatButtons {...fakeButtonActions} />
           </form>
         )}
       </Form>

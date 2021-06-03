@@ -1,43 +1,67 @@
-import React from "react";
-import styled from "styled-components";
-import { Checkbox } from "nav-frontend-skjema";
+import React, { ReactElement } from "react";
 import { useVeilederinfo } from "../../../hooks/useVeilederinfo";
 import { useNavBrukerData } from "../../../data/navbruker/navbruker_hooks";
+import { Element } from "nav-frontend-typografi";
+import { Field } from "react-final-form";
+import { ReferatCheckbox } from "./ReferatCheckbox";
+import styled from "styled-components";
 
 const texts = {
-  deltakereTitle: "Deltakere i møtet",
+  title: "Deltakere i møtet",
 };
+
+export type Deltaker = "arbeidstaker" | "arbeidsgiver" | "veileder";
 
 interface DeltakereProps {
   arbeidsgiverNavn?: string;
 }
 
+interface DeltakerFieldProps {
+  deltaker: Deltaker;
+  label: string;
+  disabled?: boolean;
+}
+
+const DeltakerField = ({
+  deltaker,
+  label,
+  disabled = false,
+}: DeltakerFieldProps) => (
+  <Field<Deltaker> name="deltakere" type="checkbox" value={deltaker}>
+    {({ input }) => (
+      <ReferatCheckbox {...input} label={label} disabled={disabled} />
+    )}
+  </Field>
+);
+
 const DeltakereBoks = styled.div`
-  margin-bottom: 2em;
-
-  > * {
-    margin-bottom: 0.5em;
-  }
+  margin-bottom: 4em;
 `;
 
-const BoldText = styled.p`
-  font-weight: bold;
+const Header = styled(Element)`
+  margin-bottom: 1em;
 `;
 
-const Deltakere = ({ arbeidsgiverNavn }: DeltakereProps) => {
+const Deltakere = ({ arbeidsgiverNavn }: DeltakereProps): ReactElement => {
   const navbruker = useNavBrukerData();
   const { veilederinfo } = useVeilederinfo();
 
   return (
     <DeltakereBoks>
-      <BoldText>{texts.deltakereTitle}</BoldText>
-      <Checkbox label={`Arbeidstager: ${navbruker?.navn}`} checked readOnly />
-      <Checkbox
-        label={`Nærmeste leder: ${arbeidsgiverNavn || ""}`}
-        checked
-        readOnly
+      <Header>{texts.title}</Header>
+      <DeltakerField
+        disabled
+        deltaker="arbeidstaker"
+        label={`Arbeidstaker: ${navbruker?.navn}`}
       />
-      <Checkbox label={`Fra NAV: ${veilederinfo?.navn}`} checked readOnly />
+      <DeltakerField
+        deltaker="arbeidsgiver"
+        label={`Nærmeste leder: ${arbeidsgiverNavn || ""}`}
+      />
+      <DeltakerField
+        deltaker="veileder"
+        label={`Fra NAV: ${veilederinfo?.navn}`}
+      />
     </DeltakereBoks>
   );
 };

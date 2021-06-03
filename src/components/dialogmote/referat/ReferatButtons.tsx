@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React, { ReactElement } from "react";
 import { Flatknapp, Hovedknapp, Knapp } from "nav-frontend-knapper";
 import { FlexRow, PaddingSize } from "../../Layout";
+import styled from "styled-components";
 
 const texts = {
   send: "Lagre og send",
@@ -19,24 +19,26 @@ const HovedKnappRightMargin = styled(Hovedknapp)`
   margin-right: 2em;
 `;
 
-const Buttonrow = ({
+const ReferatButtons = ({
   sendMethod,
   previewMethod,
   abortMethod,
-}: KnapperadProps) => {
-  return (
-    <FlexRow topPadding={PaddingSize.MD}>
-      <HovedKnappRightMargin htmlType="submit" onClick={sendMethod}>
-        {texts.send}
-      </HovedKnappRightMargin>
+}: KnapperadProps): ReactElement => (
+  <>
+    <FlexRow topPadding={PaddingSize.LG}>
       <Knapp htmlType="button" onClick={previewMethod}>
         {texts.preview}
       </Knapp>
+    </FlexRow>
+    <FlexRow topPadding={PaddingSize.LG}>
+      <HovedKnappRightMargin htmlType="submit" onClick={sendMethod}>
+        {texts.send}
+      </HovedKnappRightMargin>
       <Flatknapp htmlType="button" onClick={abortMethod}>
         {texts.abort}
       </Flatknapp>
     </FlexRow>
-  );
-};
+  </>
+);
 
-export default Buttonrow;
+export default ReferatButtons;
