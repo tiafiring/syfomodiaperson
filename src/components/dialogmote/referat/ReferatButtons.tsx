@@ -1,7 +1,8 @@
 import React, { ReactElement } from "react";
-import { Flatknapp, Hovedknapp, Knapp } from "nav-frontend-knapper";
+import { Flatknapp, Knapp } from "nav-frontend-knapper";
 import { FlexRow, PaddingSize } from "../../Layout";
 import styled from "styled-components";
+import { TrackedHovedknapp } from "../../buttons/TrackedHovedknapp";
 
 const texts = {
   send: "Lagre og send",
@@ -9,13 +10,14 @@ const texts = {
   abort: "Avbryt",
 };
 
-interface KnapperadProps {
+interface ReferatButtonsProps {
   sendMethod: () => void;
   previewMethod: () => void;
   abortMethod: () => void;
+  pageTitle: string;
 }
 
-const HovedKnappRightMargin = styled(Hovedknapp)`
+const HovedKnappRightMargin = styled(TrackedHovedknapp)`
   margin-right: 2em;
 `;
 
@@ -23,7 +25,8 @@ const ReferatButtons = ({
   sendMethod,
   previewMethod,
   abortMethod,
-}: KnapperadProps): ReactElement => (
+  pageTitle,
+}: ReferatButtonsProps): ReactElement => (
   <>
     <FlexRow topPadding={PaddingSize.LG}>
       <Knapp htmlType="button" onClick={previewMethod}>
@@ -31,7 +34,11 @@ const ReferatButtons = ({
       </Knapp>
     </FlexRow>
     <FlexRow topPadding={PaddingSize.LG}>
-      <HovedKnappRightMargin htmlType="submit" onClick={sendMethod}>
+      <HovedKnappRightMargin
+        context={pageTitle}
+        htmlType="submit"
+        onClick={sendMethod}
+      >
         {texts.send}
       </HovedKnappRightMargin>
       <Flatknapp htmlType="button" onClick={abortMethod}>
