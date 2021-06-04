@@ -1,0 +1,35 @@
+import { moterMock } from "./data/moterMock";
+import { motebehovMock } from "./data/motebehovMock";
+import { brukerinfoMock } from "./data/brukerinfoMock";
+import { enheterMock } from "./data/enheterMock";
+import { historikkmotebehovMock } from "./data/historikkmotebehovMock";
+import { historikkmoterMock } from "./data/historikkmoterMock";
+import { historikkoppfolgingsplanMock } from "./data/historikkoppfolgingsplanMock";
+import { ledereMock } from "./data/ledereMock";
+import { dialogmoterMock } from "./data/dialogmoterMock";
+import { oppfolgingstilfelleperioderMock } from "./data/oppfolgingstilfelleperioderMock";
+import { soknaderMock } from "./data/soknaderMock";
+import { sykmeldingerMock } from "./data/sykmeldingerMock";
+import { tilgangBrukerMock } from "./data/tilgangtilbrukerMock";
+import { prediksjonMock } from "./data/prediksjonMock";
+import { vedtakMock } from "./data/vedtakMock";
+import { virksomhetMock } from "./data/virksomhetMock";
+
+export const mockData = {
+  moterMock,
+  motebehovMock,
+  brukerinfoMock,
+  enheterMock,
+  historikkmotebehovMock,
+  historikkmoterMock,
+  historikkoppfolgingsplanMock,
+  ledereMock,
+  dialogmoterMock,
+  oppfolgingstilfelleperioderMock,
+  soknaderMock,
+  sykmeldingerMock,
+  tilgangBrukerMock,
+  prediksjonMock,
+  vedtakMock,
+  virksomhetMock: virksomhetMock(),
+};
