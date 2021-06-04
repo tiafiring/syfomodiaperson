@@ -72,9 +72,10 @@ const ReferatWarningAlert = styled(AlertstripeFullbredde)`
 
 interface ReferatProps {
   dialogmote: DialogmoteDTO;
+  pageTitle: string;
 }
 
-const Referat = ({ dialogmote }: ReferatProps): ReactElement => {
+const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
   const navbruker = useNavBrukerData();
   const dateAndTimeForMeeting = tilDatoMedManedNavn(dialogmote.tid);
 
@@ -102,7 +103,7 @@ const Referat = ({ dialogmote }: ReferatProps): ReactElement => {
             <ArbeidsgiversOppgave />
             <VeiledersOppgave />
             <StandardTekster />
-            <ReferatButtons {...fakeButtonActions} />
+            <ReferatButtons pageTitle={pageTitle} {...fakeButtonActions} />
           </form>
         )}
       </Form>

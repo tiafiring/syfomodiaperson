@@ -10,7 +10,9 @@ const texts = {
 
 const DialogmoteReferatContainer = (): ReactElement => (
   <DialogmoteSideContainer title={texts.pageTitle} header={texts.pageHeader}>
-    {(dialogmote) => <Referat dialogmote={dialogmote} />}
+    {(dialogmote) => (
+      <Referat dialogmote={dialogmote} pageTitle={texts.pageTitle} />
+    )}
   </DialogmoteSideContainer>
 );
 
