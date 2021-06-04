@@ -162,13 +162,28 @@ export const capitalizeFoersteBokstav = (ord) => {
   return ord.charAt(0).toUpperCase() + ord.slice(1);
 };
 
+export const tilDatoMedManedNavn = (dato) => {
+  const { dag, maaned, aar } = getDatoKomponenter(dato);
+  return `${dag}. ${maaned} ${aar}`;
+};
+
 export const tilDatoMedUkedagOgManedNavn = (dato) => {
+  const { ukeDag, dag, maaned, aar } = getDatoKomponenter(dato);
+  return `${ukeDag} ${dag}. ${maaned} ${aar}`;
+};
+
+const getDatoKomponenter = (dato) => {
   const nyDato = new Date(dato);
   const ukeDag = capitalizeFoersteBokstav(ukedagListe[nyDato.getDay()]);
   const dag = nyDato.getDate();
   const maaned = maanedListe[nyDato.getMonth()];
   const aar = nyDato.getFullYear();
-  return `${ukeDag} ${dag}. ${maaned} ${aar}`;
+  return {
+    ukeDag,
+    dag,
+    maaned,
+    aar,
+  };
 };
 
 export const tilDatoMedUkedagOgManedNavnOgKlokkeslett = (dato) => {

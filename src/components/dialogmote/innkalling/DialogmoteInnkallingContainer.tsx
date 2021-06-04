@@ -5,10 +5,10 @@ import Sidetopp from "../../Sidetopp";
 import DialogmoteInnkallingSkjema from "./DialogmoteInnkallingSkjema";
 import SideLaster from "../../SideLaster";
 import styled from "styled-components";
-import AlertStripe from "nav-frontend-alertstriper";
 import { useLedere } from "../../../hooks/useLedere";
 import { useTilgang } from "../../../hooks/useTilgang";
 import { useValgtPersonident } from "../../../hooks/useValgtBruker";
+import { AlertstripeFullbredde } from "../../AlertstripeFullbredde";
 
 const texts = {
   pageTitle: "Innkalling til dialogmøte",
@@ -17,11 +17,8 @@ const texts = {
     "I denne nye løsningen sender du innkalling, avlysning, endring av tidspunkt og referat. I Arena trenger du bare endre status til ferdig behandlet.",
 };
 
-const DialogmoteInnkallingWarningAlert = styled(AlertStripe)`
+const DialogmoteInnkallingWarningAlert = styled(AlertstripeFullbredde)`
   margin-bottom: 2.5em;
-  .alertstripe__tekst {
-    max-width: 100%;
-  }
 `;
 
 const DialogmoteInnkallingContainer = (): ReactElement => {

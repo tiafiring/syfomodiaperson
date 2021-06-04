@@ -3,13 +3,13 @@ import { Knapp } from "nav-frontend-knapper";
 import { Field, useFormState } from "react-final-form";
 import DialogmoteInnkallingSkjemaSeksjon from "./DialogmoteInnkallingSkjemaSeksjon";
 import styled from "styled-components";
-import AlertStripe from "nav-frontend-alertstriper";
 import { FlexColumn, FlexRow, PaddingSize } from "../../Layout";
-import FritekstStor from "../../FritekstStor";
 import { Innholdstittel } from "nav-frontend-typografi";
 import { DialogmoteInnkallingSkjemaValues } from "./DialogmoteInnkallingSkjema";
 import { useForhandsvisInnkalling } from "../../../hooks/dialogmote/useForhandsvisInnkalling";
 import { Forhandsvisning } from "../Forhandsvisning";
+import { AlertstripeFullbredde } from "../../AlertstripeFullbredde";
+import Fritekst from "../../Fritekst";
 
 export const texts = {
   title: "Tekster i innkallingen",
@@ -32,11 +32,8 @@ interface FritekstSeksjonProps {
   handlePreviewClick: () => void;
 }
 
-const TeksterAlert = styled(AlertStripe)`
+const TeksterAlert = styled(AlertstripeFullbredde)`
   margin-bottom: 4em;
-  .alertstripe__tekst {
-    max-width: 100%;
-  }
 `;
 
 const FritekstWrapper = styled.div`
@@ -57,7 +54,7 @@ const FritekstSeksjon = ({
       <FlexColumn flex={1}>
         <Field<string> name={fieldName}>
           {({ input }) => (
-            <FritekstStor maxLength={1000} label={label} {...input} />
+            <Fritekst size="medium" maxLength={1000} label={label} {...input} />
           )}
         </Field>
       </FlexColumn>

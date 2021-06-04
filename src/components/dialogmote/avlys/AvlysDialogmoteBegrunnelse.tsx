@@ -1,9 +1,9 @@
 import { FlexColumn, FlexRow, PaddingSize } from "../../Layout";
 import { Field } from "react-final-form";
-import FritekstStor from "../../FritekstStor";
 import React, { ReactElement } from "react";
 import AvlysDialogmoteSkjemaSeksjon from "./AvlysDialogmoteSkjemaSeksjon";
 import { TrackedKnapp } from "../../buttons/TrackedKnapp";
+import Fritekst from "../../Fritekst";
 
 const texts = {
   preview: "Forhåndsvisning",
@@ -26,7 +26,8 @@ const AvlysDialogmoteBegrunnelse = ({
         <FlexColumn flex={1}>
           <Field<string> name={fieldName}>
             {({ input, meta }) => (
-              <FritekstStor
+              <Fritekst
+                size="medium"
                 label={label}
                 maxLength={1000}
                 feil={meta.submitFailed && meta.error}

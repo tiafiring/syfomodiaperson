@@ -35,3 +35,57 @@ export const avlysningTexts = {
 export const commonTexts = {
   hilsen: "Vennlig hilsen",
 };
+
+// TODO: Legger inn text-verdier når forhåndsvisning implementeres
+export const referatTexts = {
+  standardTekster: [
+    {
+      label: "Ikke behov for bistand fra NAV nå",
+      text: "Ikke behov for bistand fra NAV nå",
+    },
+    {
+      label: "Friskmelding til arbeidsformidling",
+      text: "Friskmelding til arbeidsformidling",
+    },
+    {
+      label: "Avklaring av arbeidsevnen",
+      text: "Avklaring av arbeidsevnen",
+    },
+    {
+      label: "Oppfølgingstiltak",
+      text: "Oppfølgingstiltak",
+    },
+    {
+      label: "Arbeidsrettet rehabilitering",
+      text: "Arbeidsrettet rehabilitering",
+    },
+    {
+      label: "Opplæring og utdanning",
+      text: "Opplæring og utdanning",
+    },
+    {
+      label: "Unntak fra arbeidsgiverperioden - langvarig eller kronisk sykdom",
+      text: "Unntak fra arbeidsgiverperioden - langvarig eller kronisk sykdom",
+    },
+    {
+      label: "Reisetilskudd",
+      text: "Reisetilskudd",
+    },
+    {
+      label: "Hjelpemidler og tilrettelegging",
+      text: "Hjelpemidler og tilrettelegging",
+    },
+    {
+      label: "Midlertidig lønnstilskudd",
+      text: "Midlertidig lønnstilskudd",
+    },
+    {
+      label: "Hjelp til å søke om annen økonomisk støtte",
+      text: "Hjelp til å søke om annen økonomisk støtte",
+    },
+    {
+      label: "Ingen videre rettigheter",
+      text: "Ingen videre rettigheter",
+    },
+  ],
+};

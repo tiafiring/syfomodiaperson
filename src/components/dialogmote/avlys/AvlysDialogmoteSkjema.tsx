@@ -7,10 +7,7 @@ import { FlexRow, PaddingSize } from "../../Layout";
 import { useDispatch } from "react-redux";
 import { avlysMote } from "../../../data/dialogmote/dialogmote_actions";
 import { useAppSelector } from "../../../hooks/hooks";
-import {
-  AlertStripeAdvarsel,
-  AlertStripeFeil,
-} from "nav-frontend-alertstriper";
+import { AlertStripeFeil } from "nav-frontend-alertstriper";
 import { Form } from "react-final-form";
 import DialogmoteInfo from "./DialogmoteInfo";
 import { DialogmoteDTO } from "../../../data/dialogmote/dialogmoteTypes";
@@ -22,6 +19,7 @@ import { TrackedHovedknapp } from "../../buttons/TrackedHovedknapp";
 import { TrackedFlatknapp } from "../../buttons/TrackedFlatknapp";
 import { useForhandsvisAvlysning } from "../../../hooks/dialogmote/useForhandsvisAvlysning";
 import { Forhandsvisning } from "../Forhandsvisning";
+import { AlertstripeFullbredde } from "../../AlertstripeFullbredde";
 
 export const texts = {
   begrunnelseArbeidstakerLabel: "Begrunnelse til arbeidstakeren",
@@ -59,11 +57,8 @@ const SendButton = styled(TrackedHovedknapp)`
   margin-right: 0.5rem;
 `;
 
-const AvlysningAlertStripe = styled(AlertStripeAdvarsel)`
+const AvlysningAlertStripe = styled(AlertstripeFullbredde)`
   margin-bottom: 4em;
-  .alertstripe__tekst {
-    max-width: 100%;
-  }
 `;
 
 const AvlysDialogmoteSkjema = ({
@@ -160,7 +155,9 @@ const AvlysDialogmoteSkjema = ({
                 <AlertStripeFeil>{texts.errorMsg}</AlertStripeFeil>
               </FlexRow>
             )}
-            <AvlysningAlertStripe>{texts.alert}</AvlysningAlertStripe>
+            <AvlysningAlertStripe type="advarsel">
+              {texts.alert}
+            </AvlysningAlertStripe>
             {submitFailed && !feilUtbedret && (
               <SkjemaFeiloppsummering errors={errors} />
             )}
