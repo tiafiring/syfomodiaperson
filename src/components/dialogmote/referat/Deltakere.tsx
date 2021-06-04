@@ -19,18 +19,11 @@ interface DeltakereProps {
 interface DeltakerFieldProps {
   deltaker: Deltaker;
   label: string;
-  disabled?: boolean;
 }
 
-const DeltakerField = ({
-  deltaker,
-  label,
-  disabled = false,
-}: DeltakerFieldProps) => (
+const DeltakerField = ({ deltaker, label }: DeltakerFieldProps) => (
   <Field<Deltaker> name="deltakere" type="checkbox" value={deltaker}>
-    {({ input }) => (
-      <ReferatCheckbox {...input} label={label} disabled={disabled} />
-    )}
+    {({ input }) => <ReferatCheckbox {...input} label={label} />}
   </Field>
 );
 
@@ -50,9 +43,8 @@ const Deltakere = ({ arbeidsgiverNavn }: DeltakereProps): ReactElement => {
     <DeltakereBoks>
       <Header>{texts.title}</Header>
       <DeltakerField
-        disabled
         deltaker="arbeidstaker"
-        label={`Arbeidstaker: ${navbruker?.navn}`}
+        label={`Arbeidstaker (obligatorisk): ${navbruker?.navn}`}
       />
       <DeltakerField
         deltaker="arbeidsgiver"
