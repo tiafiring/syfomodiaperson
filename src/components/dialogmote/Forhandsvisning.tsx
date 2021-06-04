@@ -116,7 +116,7 @@ export const Forhandsvisning = ({
       contentLabel={contentLabel}
       ariaHideApp={false}
     >
-      <ModalContentContainer>
+      <ModalContentContainer data-cy="ForhåndsvisningModal">
         <FlexRow
           topPadding={PaddingSize.SM}
           bottomPadding={PaddingSize.MD}

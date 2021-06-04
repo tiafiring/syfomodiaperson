@@ -1,29 +1,31 @@
-function generateUuid() {
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-    var r = (Math.random() * 16) | 0,
-      v = c === "x" ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
-  });
-}
+import {
+  DialogmoteStatus,
+  MotedeltakerVarselType,
+} from "../../src/data/dialogmote/dialogmoteTypes";
 
-const createDialogmote = (moteStatus, varselType, moteTid) => {
+const createDialogmote = (
+  uuid: string,
+  moteStatus: DialogmoteStatus,
+  varselType: MotedeltakerVarselType,
+  moteTid: string
+) => {
   return {
-    uuid: generateUuid(),
+    uuid: uuid,
     createdAt: "2021-05-26T12:56:26.238385",
     updatedAt: "2021-05-26T12:56:26.238385",
-    status: moteStatus,
+    status: moteStatus.toString(),
     opprettetAv: "Z999999",
     tildeltVeilederIdent: "Z999999",
     tildeltEnhet: "1000",
     arbeidstaker: {
-      uuid: generateUuid(),
+      uuid: uuid + 1,
       personIdent: "12345678912",
       type: "ARBEIDSTAKER",
       varselList: [
         {
-          uuid: generateUuid(),
+          uuid: uuid + 2,
           createdAt: "2021-05-26T12:56:26.271381",
-          varselType: varselType,
+          varselType: varselType.toString(),
           digitalt: true,
           lestDato: "2021-05-26T12:56:26.271381",
           fritekst: "Ipsum lorum arbeidstaker",
@@ -42,14 +44,14 @@ const createDialogmote = (moteStatus, varselType, moteTid) => {
       ],
     },
     arbeidsgiver: {
-      uuid: generateUuid(),
+      uuid: uuid + 3,
       virksomhetsnummer: "912345678",
       lederNavn: "He-man",
       lederEpost: null,
       type: "ARBEIDSGIVER",
       varselList: [
         {
-          uuid: generateUuid(),
+          uuid: uuid + 4,
           createdAt: "2021-05-26T12:56:26.282386",
           varselType: varselType,
           lestDato: "2021-05-26T12:56:26.271381",
@@ -65,8 +67,27 @@ const createDialogmote = (moteStatus, varselType, moteTid) => {
   };
 };
 
+export const innkaltDialogmote = createDialogmote(
+  "1",
+  DialogmoteStatus.INNKALT,
+  MotedeltakerVarselType.INNKALT,
+  "2021-06-25T14:22:23.539843"
+);
+export const avlystDialogmote = createDialogmote(
+  "2",
+  DialogmoteStatus.AVLYST,
+  MotedeltakerVarselType.AVLYST,
+  "2021-01-15T11:52:13.539843"
+);
+export const ferdigstiltDialogmote = createDialogmote(
+  "3",
+  DialogmoteStatus.FERDIGSTILT,
+  MotedeltakerVarselType.INNKALT,
+  "2020-03-21T12:34:23.539843"
+);
+
 export const dialogmoterMock = [
-  createDialogmote("INNKALT", "INNKALT", "2021-06-25T14:22:23.539843"),
-  createDialogmote("AVLYST", "AVLYST", "2021-01-15T11:52:13.539843"),
-  createDialogmote("FERDIGSTILT", "INNKALT", "2020-03-21T12:34:23.539843"),
+  innkaltDialogmote,
+  avlystDialogmote,
+  ferdigstiltDialogmote,
 ];
