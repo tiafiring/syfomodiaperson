@@ -66,7 +66,7 @@ describe("ReferatTest", () => {
       >
         <Route path="/sykefravaer/dialogmote/:dialogmoteUuid/referat">
           <Provider store={store({ ...realState, ...mockState })}>
-            <Referat dialogmote={mote} />
+            <Referat dialogmote={mote} pageTitle="Test" />
           </Provider>
         </Route>
       </MemoryRouter>
@@ -83,7 +83,7 @@ describe("ReferatTest", () => {
       >
         <Route path="/sykefravaer/dialogmote/:dialogmoteUuid/referat">
           <Provider store={store({ ...realState, ...mockState })}>
-            <Referat dialogmote={mote} />
+            <Referat dialogmote={mote} pageTitle="Test" />
           </Provider>
         </Route>
       </MemoryRouter>
