@@ -5,7 +5,7 @@ import MotebookingContainer from "../components/mote/container/MotebookingContai
 import AvbrytMoteContainer from "../components/mote/container/AvbrytMoteContainer";
 import BekreftMoteContainer from "../components/mote/container/BekreftMoteContainer";
 import SykmeldingerContainer from "../components/speiling/sykmeldinger/container/SykmeldingerContainer";
-import SykepengesoknaderContainer from "../components/speiling/sykepengsoknader/container/SykepengesoknaderContainer";
+import SykepengesoknaderContainer from "../components/speiling/sykepengsoknader/container/SykepengesoknaderSide";
 import SykepengesoknadContainer from "../components/speiling/sykepengsoknader/container/SykepengesoknadContainer";
 import OppfoelgingsPlanerOversiktContainer from "../components/oppfolgingsplan/container/OppfoelgingsPlanerOversiktContainer";
 import OppfoelgingsplanContainer from "../components/oppfolgingsplan/container/OppfoelgingsplanContainer";
