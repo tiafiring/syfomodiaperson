@@ -21,6 +21,9 @@ describe("MotelandingssideContainer", () => {
     beforeEach(() => {
       store = configureStore([]);
       mockState = {
+        dialogmote: {
+          henterMoteForsokt: true,
+        },
         tilgang: {
           data: {
             harTilgang: true,
@@ -34,10 +37,12 @@ describe("MotelandingssideContainer", () => {
           },
         },
         moter: {
+          hentingForsokt: true,
           data: [],
         },
         motebehov: {
           hentet: true,
+          hentingForsokt: true,
           data: [
             {
               UUID: "33333333-c987-4b57-a401-a3915ec11411",
@@ -57,6 +62,7 @@ describe("MotelandingssideContainer", () => {
         },
         ledere: {
           hentet: true,
+          hentingForsokt: true,
           data: [
             {
               navn: "Tatten Tattover",
@@ -135,6 +141,7 @@ describe("MotelandingssideContainer", () => {
 
     it("Skal vise feilmelding hvis ikke tilgang", () => {
       mockState.tilgang = {
+        hentingForsokt: true,
         data: {
           harTilgang: false,
         },
@@ -150,6 +157,7 @@ describe("MotelandingssideContainer", () => {
 
     it("Skal vise feilmelding hvis hentingFeilet", () => {
       mockState.tilgang = {
+        hentingForsokt: true,
         hentingFeilet: true,
         data: {
           harTilgang: true,

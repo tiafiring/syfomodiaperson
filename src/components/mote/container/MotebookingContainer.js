@@ -90,11 +90,14 @@ export const mapStateToProps = (state) => {
     return mote.status !== "AVBRUTT";
   })[0];
 
-  const harForsoktHentetAlt = state.moter.hentingForsokt;
+  const harForsoktHentetAlt =
+    state.moter.hentingForsokt &&
+    state.ledere.hentingForsokt &&
+    state.tilgang.hentingForsokt;
   return {
     fnr: state.valgtbruker.personident,
     mote: aktivtMote,
-    henter: !harForsoktHentetAlt || state.ledere.henter || state.tilgang.henter,
+    henter: !harForsoktHentetAlt,
     sender: state.moter.sender,
     hentingFeilet:
       state.moter.hentingFeilet ||

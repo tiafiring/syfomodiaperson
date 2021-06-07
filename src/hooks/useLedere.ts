@@ -3,12 +3,12 @@ import { useAppSelector } from "./hooks";
 export const useLedere = () => {
   const {
     data: ledere,
-    henter: henterLedere,
+    hentingForsokt: hentingLedereForsokt,
     hentingFeilet: hentingLedereFeilet,
   } = useAppSelector((state) => state.ledere);
   return {
     ledere,
-    henterLedere,
+    hentingLedereForsokt,
     hentingLedereFeilet,
   };
 };

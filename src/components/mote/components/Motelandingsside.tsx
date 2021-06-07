@@ -14,12 +14,7 @@ import { hentSykmeldinger } from "../../../data/sykmelding/sykmeldinger_actions"
 import { hentOppfoelgingsdialoger } from "../../../data/oppfolgingsplan/oppfoelgingsdialoger_actions";
 import { hentOppfolgingstilfelleperioder } from "../../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder_actions";
 import { hentVirksomhet } from "../../../data/virksomhet/virksomhet_actions";
-import {
-  harForsoktHentetLedere,
-  harForsoktHentetMotebehov,
-} from "../../../utils/reducerUtils";
 import { useOppfoelgingsDialoger } from "../../../hooks/useOppfoelgingsDialoger";
-import { Tilgang } from "../../../data/tilgang/tilgang";
 import { DialogmoteOnskePanel } from "../../motebehov/DialogmoteOnskePanel";
 import { fetchDialogmote } from "../../../data/dialogmote/dialogmote_actions";
 import { MotehistorikkPanel } from "../../dialogmote/motehistorikk/MotehistorikkPanel";
@@ -48,7 +43,6 @@ export const Motelandingsside = ({ fnr }: Props) => {
     dialogmote,
     navbruker,
     veilederinfo,
-    tilgang,
     oppfolgingstilfelleperioder,
   } = useAppSelector((state) => state);
 
@@ -59,7 +53,7 @@ export const Motelandingsside = ({ fnr }: Props) => {
     dispatch(hentMotebehov(fnr));
     dispatch(hentSykmeldinger(fnr));
     dispatch(hentOppfoelgingsdialoger(fnr));
-  }, [fnr]);
+  }, []);
 
   useEffect(() => {
     dispatch(hentOppfolgingstilfelleperioder(fnr));
@@ -73,29 +67,17 @@ export const Motelandingsside = ({ fnr }: Props) => {
     });
   }, []);
 
-  const findRelevantTilgang = (): Tilgang => {
-    if (motebehov.tilgang?.harTilgang === false) return motebehov.tilgang;
-
-    return tilgang.data;
-  };
-
   const harForsoktHentetAlt =
-    harForsoktHentetMotebehov(motebehov) &&
+    motebehov.hentingForsokt &&
     harForsoktHentetOppfoelgingsdialoger &&
-    harForsoktHentetLedere(ledere) &&
-    !moter.henter &&
-    !dialogmote.henterMote &&
-    !tilgang.henter;
+    ledere.hentingForsokt &&
+    moter.hentingForsokt &&
+    dialogmote.henterMoteForsokt;
 
   return (
     <SideLaster
       henter={!harForsoktHentetAlt}
-      hentingFeilet={
-        motebehov.hentingFeilet ||
-        dialogmote.henterMoteFeilet ||
-        tilgang.hentingFeilet
-      }
-      tilgang={findRelevantTilgang()}
+      hentingFeilet={motebehov.hentingFeilet || dialogmote.henterMoteFeilet}
     >
       <Sidetopp tittel={texts.dialogmoter} />
 

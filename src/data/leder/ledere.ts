@@ -23,6 +23,7 @@ export interface LedereState {
   henter: boolean;
   hentet: boolean;
   hentingFeilet: boolean;
+  hentingForsokt: boolean;
   data: Leder[];
   allLedere: Leder[];
   formerLedere: Leder[];
@@ -32,6 +33,7 @@ export const initialState: LedereState = {
   henter: false,
   hentet: false,
   hentingFeilet: false,
+  hentingForsokt: false,
   data: [],
   allLedere: [],
   formerLedere: [],
@@ -47,6 +49,7 @@ const ledere: Reducer<LedereState> = (state = initialState, action) => {
         henter: false,
         hentet: true,
         hentingFeilet: false,
+        hentingForsokt: true,
       };
     }
     case HENTER_LEDERE: {
@@ -54,6 +57,7 @@ const ledere: Reducer<LedereState> = (state = initialState, action) => {
         henter: true,
         hentet: false,
         hentingFeilet: false,
+        hentingForsokt: false,
         data: [],
         formerLedere: [],
         allLedere: [],
@@ -64,6 +68,7 @@ const ledere: Reducer<LedereState> = (state = initialState, action) => {
         henter: false,
         hentet: false,
         hentingFeilet: true,
+        hentingForsokt: true,
         data: [],
         formerLedere: [],
         allLedere: [],

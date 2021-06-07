@@ -24,6 +24,7 @@ describe("MotebookingContainer", () => {
     beforeEach(() => {
       hentMoter = sinon.spy();
       tilgang = {
+        hentingForsokt: true,
         harTilgang: true,
       };
       moterTilgang = {};
@@ -127,6 +128,7 @@ describe("MotebookingContainer", () => {
             harTilgang: true,
           },
           hentingFeilet: false,
+          hentingForsokt: true,
           henter: false,
         },
         valgtbruker: {
@@ -196,14 +198,14 @@ describe("MotebookingContainer", () => {
       expect(props.henter).to.be.equal(true);
     });
 
-    it("Skal returnere henter false når møter er forsokt henter", () => {
+    it("Skal returnere henter false når møter er forsokt hentet", () => {
       state.moter.data = [
         {
           id: 1,
         },
       ];
       state.moter.hentingForsokt = true;
-      state.ledere.henter = false;
+      state.ledere.hentingForsokt = true;
       const props = mapStateToProps(state);
       expect(props.henter).to.be.equal(false);
     });
@@ -215,7 +217,7 @@ describe("MotebookingContainer", () => {
         },
       ];
       state.moter.hentingForsokt = false;
-      state.ledere.henter = false;
+      state.ledere.hentingForsokt = true;
       const props = mapStateToProps(state);
       expect(props.henter).to.be.equal(true);
     });

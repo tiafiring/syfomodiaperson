@@ -33,6 +33,7 @@ describe("ledere", () => {
       henter: false,
       hentet: true,
       hentingFeilet: false,
+      hentingForsokt: true,
       data: [
         {
           navn: "Kurt Nilsen",
@@ -66,6 +67,7 @@ describe("ledere", () => {
       henter: true,
       hentet: false,
       hentingFeilet: false,
+      hentingForsokt: false,
     });
   });
 
@@ -79,6 +81,7 @@ describe("ledere", () => {
       henter: false,
       hentet: false,
       hentingFeilet: true,
+      hentingForsokt: true,
       data: [],
       formerLedere: [],
       allLedere: [],

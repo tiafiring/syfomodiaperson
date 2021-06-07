@@ -8,6 +8,7 @@ export interface DialogmoteState {
   sendInnkallingFullfort: boolean;
   henterMote: boolean;
   henterMoteFeilet: boolean;
+  henterMoteForsokt: boolean;
   moterHentet: boolean;
   dialogmoter: DialogmoteDTO[];
   avlyserMote: boolean;
@@ -24,6 +25,7 @@ export const initialState: DialogmoteState = {
   avlysMoteFullfort: false,
   henterMote: false,
   henterMoteFeilet: false,
+  henterMoteForsokt: false,
   moterHentet: false,
   dialogmoter: [],
 };
@@ -80,6 +82,7 @@ const dialogmote: Reducer<DialogmoteState, DialogmoteActions> = (
         ...state,
         henterMote: true,
         henterMoteFeilet: false,
+        henterMoteForsokt: false,
       };
     }
     case DialogmoteActionTypes.FETCH_DIALOGMOTE_SUCCESS: {
@@ -87,6 +90,7 @@ const dialogmote: Reducer<DialogmoteState, DialogmoteActions> = (
         ...state,
         henterMote: false,
         henterMoteFeilet: false,
+        henterMoteForsokt: true,
         dialogmoter: action.dialogmoteDtoList,
         moterHentet: true,
       };
@@ -96,6 +100,7 @@ const dialogmote: Reducer<DialogmoteState, DialogmoteActions> = (
         ...state,
         henterMote: false,
         henterMoteFeilet: true,
+        henterMoteForsokt: true,
         dialogmoter: initialState.dialogmoter,
       };
     }
