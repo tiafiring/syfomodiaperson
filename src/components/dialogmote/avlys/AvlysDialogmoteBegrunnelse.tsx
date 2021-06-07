@@ -27,6 +27,7 @@ const AvlysDialogmoteBegrunnelse = ({
           <Field<string> name={fieldName}>
             {({ input, meta }) => (
               <Fritekst
+                data-cy={fieldName + "TextArea"}
                 size="medium"
                 label={label}
                 maxLength={1000}
@@ -41,6 +42,7 @@ const AvlysDialogmoteBegrunnelse = ({
       <FlexRow>
         <TrackedKnapp
           htmlType="button"
+          data-cy={fieldName + "Knapp"}
           context={label}
           onClick={handlePreviewClick}
         >

@@ -124,16 +124,25 @@ export const DialogmoteMoteStatusPanel = ({ dialogmote }: Props) => {
       </FlexRow>
 
       <FlexRow topPadding={PaddingSize.MD}>
-        <TrackedKnapp context={texts.innkallingSendtTrackingContext}>
+        <TrackedKnapp
+          data-cy="endreMoteKnapp"
+          context={texts.innkallingSendtTrackingContext}
+        >
           {texts.endreMote}
         </TrackedKnapp>
         <Link to={`/sykefravaer/dialogmote/${dialogmote.uuid}/avlys`}>
-          <TrackedKnapp context={texts.innkallingSendtTrackingContext}>
+          <TrackedKnapp
+            data-cy="avlysMoteKnapp"
+            context={texts.innkallingSendtTrackingContext}
+          >
             {texts.avlysMote}
           </TrackedKnapp>
         </Link>
         <Link to={`/sykefravaer/dialogmote/${dialogmote.uuid}/referat`}>
-          <TrackedHovedknapp context={texts.innkallingSendtTrackingContext}>
+          <TrackedHovedknapp
+            data-cy="skrivReferatKnapp"
+            context={texts.innkallingSendtTrackingContext}
+          >
             {texts.skrivReferat}
           </TrackedHovedknapp>
         </Link>
