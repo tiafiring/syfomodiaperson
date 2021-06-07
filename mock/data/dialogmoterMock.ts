@@ -82,7 +82,7 @@ export const avlystDialogmote = createDialogmote(
 export const ferdigstiltDialogmote = createDialogmote(
   "3",
   DialogmoteStatus.FERDIGSTILT,
-  MotedeltakerVarselType.INNKALT,
+  MotedeltakerVarselType.REFERAT,
   "2020-03-21T12:34:23.539843"
 );
 
