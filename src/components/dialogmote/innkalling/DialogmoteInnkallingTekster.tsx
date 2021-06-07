@@ -26,6 +26,8 @@ export const texts = {
     "Forhåndsvis innkalling til dialogmøte arbeidsgiver",
 };
 
+export const MAX_LENGTH_INNKALLING_FRITEKST = 1000;
+
 interface FritekstSeksjonProps {
   fieldName: string;
   label: string;
@@ -54,7 +56,12 @@ const FritekstSeksjon = ({
       <FlexColumn flex={1}>
         <Field<string> name={fieldName}>
           {({ input }) => (
-            <Fritekst size="medium" maxLength={1000} label={label} {...input} />
+            <Fritekst
+              size="medium"
+              maxLength={MAX_LENGTH_INNKALLING_FRITEKST}
+              label={label}
+              {...input}
+            />
           )}
         </Field>
       </FlexColumn>

@@ -6,6 +6,7 @@ import DialogmoteInnkallingTekster from "./DialogmoteInnkallingTekster";
 import { Form } from "react-final-form";
 import {
   validerArbeidsgiver,
+  validerInnkallingFritekster,
   validerSted,
   validerTidspunkt,
 } from "../../../utils/valideringUtils";
@@ -107,7 +108,12 @@ const DialogmoteInnkallingSkjema = ({
         klokkeslett: values.klokkeslett,
       }),
       sted: validerSted(values.sted),
+      ...validerInnkallingFritekster({
+        fritekstArbeidstaker: values.fritekstArbeidstaker,
+        fritekstArbeidsgiver: values.fritekstArbeidsgiver,
+      }),
     };
+
     updateFeilUtbedret(feilmeldinger);
 
     return feilmeldinger;
