@@ -4,6 +4,8 @@ import { Normaltekst } from "nav-frontend-typografi";
 import { ReferatInfoColumn } from "./ReferatInfoColumn";
 import { ReferatTextareaFieldColumn } from "./ReferatTextareaFieldColumn";
 
+export const MAX_LENGTH_KONKLUSJON = 1000;
+
 const texts = {
   label: "Konklusjon",
   placeholder: "Gi en kort oppsummering",
@@ -17,7 +19,7 @@ export const Konklusjon = (): ReactElement => (
       fieldName="konklusjon"
       label={texts.label}
       placeholder={texts.placeholder}
-      maxLength={1000}
+      maxLength={MAX_LENGTH_KONKLUSJON}
     />
     <ReferatInfoColumn>
       <Normaltekst>{texts.infoboks}</Normaltekst>

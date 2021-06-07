@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { Form } from "react-final-form";
 import Panel from "nav-frontend-paneler";
 import { tilDatoMedManedNavn } from "../../../utils/datoUtils";
-import Deltakere, { Deltaker } from "./Deltakere";
+import Deltakere from "./Deltakere";
 import { useNavBrukerData } from "../../../data/navbruker/navbruker_hooks";
 import { DialogmoteDTO } from "../../../data/dialogmote/dialogmoteTypes";
 import { AlertstripeFullbredde } from "../../AlertstripeFullbredde";
@@ -15,6 +15,13 @@ import { ArbeidstakersOppgave } from "./ArbeidstakersOppgave";
 import { ArbeidsgiversOppgave } from "./ArbeidsgiversOppgave";
 import { VeiledersOppgave } from "./VeiledersOppgave";
 import { StandardTekster } from "./StandardTekster";
+import {
+  ReferatSkjemaFeil,
+  validerReferatDeltakere,
+  validerReferatTekster,
+} from "../../../utils/valideringUtils";
+import { useFeilUtbedret } from "../../../hooks/useFeilUtbedret";
+import { SkjemaFeiloppsummering } from "../../SkjemaFeiloppsummering";
 
 const texts = {
   digitalReferat:
@@ -23,8 +30,10 @@ const texts = {
     "Du må aldri skrive sensitive opplysninger om helse, diagnose, behandling, og prognose. Dette gjelder også hvis arbeidstakeren er åpen om helsen og snakket om den i møtet.",
 };
 
-interface ReferatSkjemaValues {
-  deltakere: Deltaker[];
+export interface ReferatSkjemaValues {
+  deltakerArbeidstaker: boolean;
+  deltakerArbeidsgiver: boolean;
+  deltakerVeileder: boolean;
   situasjon: string;
   konklusjon: string;
   arbeidstakersOppgave: string;
@@ -33,38 +42,9 @@ interface ReferatSkjemaValues {
   standardtekster: string[];
 }
 
-const fakeButtonActions = {
-  sendMethod: () => {
-    console.log("SEND!");
-  },
-  previewMethod: () => {
-    console.log("PREVIEW!");
-  },
-  abortMethod: () => {
-    console.log("ABORT!");
-  },
-};
-
 const ReferatTittel = styled(Innholdstittel)`
   margin-bottom: 2em;
 `;
-
-const validate = (
-  values: Partial<ReferatSkjemaValues>
-): Partial<ReferatSkjemaValues> => {
-  const feilmeldinger: Partial<ReferatSkjemaValues> = {};
-  const forMangeTegn = values.konklusjon && values.konklusjon.length > 2000;
-
-  feilmeldinger.konklusjon = forMangeTegn
-    ? "For mange tegn i konklusjon! Maks 2000 tegn!"
-    : undefined;
-
-  return feilmeldinger;
-};
-
-const submit = (values: ReferatSkjemaValues) => {
-  console.log("Submit referat with values: ", values);
-};
 
 const ReferatWarningAlert = styled(AlertstripeFullbredde)`
   margin-bottom: 4em;
@@ -80,14 +60,38 @@ const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
   const dateAndTimeForMeeting = tilDatoMedManedNavn(dialogmote.tid);
 
   const header = `${navbruker?.navn}, ${dateAndTimeForMeeting}, ${dialogmote.sted}`;
+
+  const {
+    feilUtbedret,
+    resetFeilUtbedret,
+    updateFeilUtbedret,
+  } = useFeilUtbedret();
+
+  const validate = (values: Partial<ReferatSkjemaValues>) => {
+    const feilmeldinger: Partial<ReferatSkjemaFeil> = {
+      ...validerReferatDeltakere(values),
+      ...validerReferatTekster(values),
+    };
+
+    updateFeilUtbedret(feilmeldinger);
+
+    return feilmeldinger;
+  };
+
+  const submit = (values: ReferatSkjemaValues) => {
+    console.log("Submit referat with values: ", values);
+  };
+
   const initialValues: Partial<ReferatSkjemaValues> = {
-    deltakere: ["arbeidstaker", "arbeidsgiver", "veileder"],
+    deltakerArbeidstaker: true,
+    deltakerArbeidsgiver: true,
+    deltakerVeileder: true,
   };
 
   return (
     <Panel>
       <Form onSubmit={submit} validate={validate} initialValues={initialValues}>
-        {({ handleSubmit }) => (
+        {({ handleSubmit, submitFailed, errors }) => (
           <form onSubmit={handleSubmit}>
             <ReferatTittel>{header}</ReferatTittel>
             <ReferatWarningAlert type="advarsel">
@@ -103,7 +107,15 @@ const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
             <ArbeidsgiversOppgave />
             <VeiledersOppgave />
             <StandardTekster />
-            <ReferatButtons pageTitle={pageTitle} {...fakeButtonActions} />
+            {submitFailed && !feilUtbedret && (
+              <SkjemaFeiloppsummering errors={errors} />
+            )}
+            <ReferatButtons
+              pageTitle={pageTitle}
+              onSendClick={resetFeilUtbedret}
+              onPreviewClick={() => console.log("PREVIEW!")}
+              onCancelClick={() => console.log("ABORT!")}
+            />
           </form>
         )}
       </Form>

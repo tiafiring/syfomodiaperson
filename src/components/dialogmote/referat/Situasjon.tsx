@@ -4,6 +4,8 @@ import { Normaltekst } from "nav-frontend-typografi";
 import { ReferatInfoColumn } from "./ReferatInfoColumn";
 import { ReferatTextareaFieldColumn } from "./ReferatTextareaFieldColumn";
 
+export const MAX_LENGTH_SITUASJON = 2000;
+
 const texts = {
   label: "Situasjon og muligheter",
   placeholder: "Skriv hva deltakerne forteller om situasjonen",
@@ -25,7 +27,7 @@ export const Situasjon = (): ReactElement => (
       fieldName="situasjon"
       label={texts.label}
       placeholder={texts.placeholder}
-      maxLength={2000}
+      maxLength={MAX_LENGTH_SITUASJON}
     />
     <ReferatInfoColumn>
       <Normaltekst>{texts.infoboks.eksempler}</Normaltekst>

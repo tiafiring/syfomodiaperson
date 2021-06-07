@@ -4,7 +4,7 @@ import React, { ReactElement } from "react";
 import { referatTexts } from "../../../data/dialogmote/dialogmoteTexts";
 import styled from "styled-components";
 import { ReferatCheckbox } from "./ReferatCheckbox";
-import { FlexColumn, FlexRow } from "../../Layout";
+import { FlexColumn, FlexRow, PaddingSize } from "../../Layout";
 import { ReferatInfoColumn } from "./ReferatInfoColumn";
 
 const texts = {
@@ -23,7 +23,7 @@ const Subheader = styled(Normaltekst)`
 `;
 
 export const StandardTekster = (): ReactElement => (
-  <FlexRow>
+  <FlexRow bottomPadding={PaddingSize.MD}>
     <FlexColumn flex={1}>
       <Header>{texts.header}</Header>
       <Subheader>{texts.subHeader}</Subheader>
