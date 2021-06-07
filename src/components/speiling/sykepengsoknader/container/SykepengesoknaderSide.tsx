@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Side from "../../../../sider/Side";
 import Soknader from "../soknader/Soknader";
 import Brodsmuler from "../../Brodsmuler";
