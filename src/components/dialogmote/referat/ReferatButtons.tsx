@@ -11,9 +11,9 @@ const texts = {
 };
 
 interface ReferatButtonsProps {
-  sendMethod: () => void;
-  previewMethod: () => void;
-  abortMethod: () => void;
+  onSendClick: () => void;
+  onPreviewClick: () => void;
+  onCancelClick: () => void;
   pageTitle: string;
 }
 
@@ -22,14 +22,14 @@ const HovedKnappRightMargin = styled(TrackedHovedknapp)`
 `;
 
 const ReferatButtons = ({
-  sendMethod,
-  previewMethod,
-  abortMethod,
+  onSendClick,
+  onPreviewClick,
+  onCancelClick,
   pageTitle,
 }: ReferatButtonsProps): ReactElement => (
   <>
-    <FlexRow topPadding={PaddingSize.LG}>
-      <Knapp htmlType="button" onClick={previewMethod}>
+    <FlexRow topPadding={PaddingSize.MD}>
+      <Knapp htmlType="button" onClick={onPreviewClick}>
         {texts.preview}
       </Knapp>
     </FlexRow>
@@ -37,11 +37,11 @@ const ReferatButtons = ({
       <HovedKnappRightMargin
         context={pageTitle}
         htmlType="submit"
-        onClick={sendMethod}
+        onClick={onSendClick}
       >
         {texts.send}
       </HovedKnappRightMargin>
-      <Flatknapp htmlType="button" onClick={abortMethod}>
+      <Flatknapp htmlType="button" onClick={onCancelClick}>
         {texts.abort}
       </Flatknapp>
     </FlexRow>

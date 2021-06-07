@@ -10,20 +10,25 @@ const texts = {
   title: "Deltakere i møtet",
 };
 
-export type Deltaker = "arbeidstaker" | "arbeidsgiver" | "veileder";
-
 interface DeltakereProps {
   arbeidsgiverNavn?: string;
 }
 
 interface DeltakerFieldProps {
-  deltaker: Deltaker;
+  fieldName: string;
   label: string;
 }
 
-const DeltakerField = ({ deltaker, label }: DeltakerFieldProps) => (
-  <Field<Deltaker> name="deltakere" type="checkbox" value={deltaker}>
-    {({ input }) => <ReferatCheckbox {...input} label={label} />}
+const DeltakerField = ({ fieldName, label }: DeltakerFieldProps) => (
+  <Field name={fieldName} type="checkbox">
+    {({ input, meta }) => (
+      <ReferatCheckbox
+        feil={meta.submitFailed && meta.error}
+        id={fieldName}
+        {...input}
+        label={label}
+      />
+    )}
   </Field>
 );
 
@@ -43,15 +48,15 @@ const Deltakere = ({ arbeidsgiverNavn }: DeltakereProps): ReactElement => {
     <DeltakereBoks>
       <Header>{texts.title}</Header>
       <DeltakerField
-        deltaker="arbeidstaker"
+        fieldName="deltakerArbeidstaker"
         label={`Arbeidstaker (obligatorisk): ${navbruker?.navn}`}
       />
       <DeltakerField
-        deltaker="arbeidsgiver"
+        fieldName="deltakerArbeidsgiver"
         label={`Nærmeste leder: ${arbeidsgiverNavn || ""}`}
       />
       <DeltakerField
-        deltaker="veileder"
+        fieldName="deltakerVeileder"
         label={`Fra NAV: ${veilederinfo?.navn}`}
       />
     </DeltakereBoks>

@@ -16,10 +16,12 @@ export const texts = {
 };
 
 const getFeiloppsummeringFeil = (errors: SkjemaFeil): FeiloppsummeringFeil[] =>
-  Object.entries(errors).map(([key, value]) => ({
-    skjemaelementId: key,
-    feilmelding: value || "",
-  }));
+  Object.entries(errors)
+    .filter(([, value]) => value !== undefined)
+    .map(([key, value]) => ({
+      skjemaelementId: key,
+      feilmelding: value || "",
+    }));
 
 export const SkjemaFeiloppsummering = ({
   errors,
