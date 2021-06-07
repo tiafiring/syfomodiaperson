@@ -111,6 +111,7 @@ const moter: Reducer<MoterState> = (
         sendingFeilet: false,
         henter: false,
         hentingFeilet: false,
+        hentingForsokt: true,
         avbryter: false,
         avbrytFeilet: false,
         tilgang: action.tilgang,
