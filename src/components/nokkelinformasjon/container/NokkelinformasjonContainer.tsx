@@ -6,7 +6,6 @@ import { hentOppfolgingstilfelleperioder } from "../../../data/oppfolgingstilfel
 import { hentSykmeldinger } from "../../../data/sykmelding/sykmeldinger_actions";
 import { hentLedere } from "../../../data/leder/ledere_actions";
 import { NOKKELINFORMASJON } from "../../../enums/menypunkter";
-import { harForsoktHentetLedere } from "../../../utils/reducerUtils";
 import Side from "../../../sider/Side";
 import Nokkelinformasjon from "../Nokkelinformasjon";
 import { useOppfoelgingsDialoger } from "../../../hooks/useOppfoelgingsDialoger";
@@ -39,7 +38,7 @@ export const NokkelinformasjonSide = () => {
   const sykmeldingerState = useSelector((state: any) => state.sykmeldinger);
 
   const harForsoktHentetAlt =
-    harForsoktHentetOppfoelgingsdialoger && harForsoktHentetLedere(ledereState);
+    harForsoktHentetOppfoelgingsdialoger && ledereState.hentingForsokt;
 
   const henter = !harForsoktHentetAlt;
   const hentingFeilet = sykmeldingerState.hentingFeilet;

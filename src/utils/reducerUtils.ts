@@ -1,16 +1,3 @@
-export const harForsoktHentetMotebehov = (motebehovReducer: any) => {
-  return (
-    motebehovReducer.hentet ||
-    motebehovReducer.hentingFeilet ||
-    (motebehovReducer.tilgang &&
-      motebehovReducer.tilgang.harTilgang !== undefined)
-  );
-};
-
-export const harForsoktHentetLedere = (ledereReducer: any) => {
-  return ledereReducer.hentet || ledereReducer.hentingFeilet;
-};
-
 export const harForsoktHentetOppfoelgingsdialoger = (
   oppfoelgingsdialogerReducer: any
 ) => {
