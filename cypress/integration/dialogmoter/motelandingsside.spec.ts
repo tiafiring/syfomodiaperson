@@ -26,4 +26,18 @@ context("Møtelandingsside actions", () => {
 
     cy.url().should("include", "/sykefravaer/dialogmote");
   });
+
+  it("Ser på referat og avlysningsbrev i møtehistorikk", () => {
+    cy.dataCy("Avlysningsbrev").click();
+
+    cy.dataCy("ForhåndsvisningModal").contains("Avlysningsbrev");
+
+    cy.contains("Lukk").click();
+
+    cy.dataCy("Referat").click();
+
+    cy.dataCy("ForhåndsvisningModal").contains("Referat");
+
+    cy.contains("Lukk").click();
+  });
 });

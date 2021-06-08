@@ -13,7 +13,7 @@ import Lukknapp from "nav-frontend-lukknapp";
 import {
   DocumentComponentDto,
   DocumentComponentType,
-} from "../../src/data/dialogmote/dialogmoteTypes";
+} from "../../src/data/dialogmote/types/dialogmoteTypes";
 import Lenke from "nav-frontend-lenker";
 
 describe("Forhandsvisning", () => {

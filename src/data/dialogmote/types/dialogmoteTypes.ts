@@ -1,6 +1,9 @@
+import { ReferatDTO } from "./dialogmoteReferatTypes";
+
 export enum MotedeltakerVarselType {
   AVLYST = "AVLYST",
   INNKALT = "INNKALT",
+  REFERAT = "REFERAT",
   NYTT_TID_STED = "NYTT_TID_STED",
 }
 
@@ -98,4 +101,5 @@ export interface DialogmoteDTO {
   readonly sted: string;
   readonly tid: string;
   readonly videoLink?: string;
+  readonly referat?: ReferatDTO;
 }

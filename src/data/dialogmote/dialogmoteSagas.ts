@@ -14,7 +14,7 @@ import {
   opprettInnkallingFullfort,
 } from "./dialogmote_actions";
 import { get, post } from "../../api";
-import { DialogmoteDTO } from "./dialogmoteTypes";
+import { DialogmoteDTO } from "./types/dialogmoteTypes";
 
 function* opprettInnkalling(action: OpprettInnkallingAction) {
   yield put(oppretterInnkalling());

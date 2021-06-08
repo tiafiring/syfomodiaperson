@@ -1,5 +1,5 @@
 import { DialogmoteInnkallingSkjemaValues } from "../../components/dialogmote/innkalling/DialogmoteInnkallingSkjema";
-import { DocumentComponentDto } from "../../data/dialogmote/dialogmoteTypes";
+import { DocumentComponentDto } from "../../data/dialogmote/types/dialogmoteTypes";
 import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../utils/datoUtils";
 import { genererDato } from "../../components/mote/utils";
 import { useNavBrukerData } from "../../data/navbruker/navbruker_hooks";

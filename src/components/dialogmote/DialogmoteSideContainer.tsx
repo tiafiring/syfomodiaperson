@@ -8,7 +8,7 @@ import { MOETEPLANLEGGER } from "../../enums/menypunkter";
 import SideLaster from "../SideLaster";
 import Sidetopp from "../Sidetopp";
 import Feilmelding from "../Feilmelding";
-import { DialogmoteDTO } from "../../data/dialogmote/dialogmoteTypes";
+import { DialogmoteDTO } from "../../data/dialogmote/types/dialogmoteTypes";
 
 interface DialogmoteSideProps {
   title: string;

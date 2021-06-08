@@ -13,7 +13,7 @@ import {
   DialogmotedeltakerArbeidstakerVarselDTO,
   DialogmoteDTO,
   MotedeltakerVarselType,
-} from "../../../../data/dialogmote/dialogmoteTypes";
+} from "../../../../data/dialogmote/types/dialogmoteTypes";
 import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
 import { Brukerinfo } from "../../../../data/navbruker/types/Brukerinfo";
 import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../../../utils/datoUtils";

@@ -2,7 +2,7 @@ import { useBehandlendeEnhet } from "../../data/behandlendeenhet/behandlendeEnhe
 import { useVeilederinfo } from "../useVeilederinfo";
 import { createParagraph } from "../../utils/documentComponentUtils";
 import { commonTexts } from "../../data/dialogmote/dialogmoteTexts";
-import { DocumentComponentDto } from "../../data/dialogmote/dialogmoteTypes";
+import { DocumentComponentDto } from "../../data/dialogmote/types/dialogmoteTypes";
 import { VeilederinfoDTO } from "../../data/veilederinfo/types/VeilederinfoDTO";
 
 export const useForhandsvisningHilsen = () => {

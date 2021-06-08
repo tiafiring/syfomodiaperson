@@ -1,6 +1,6 @@
 import { RootState } from "../rootState";
 import { useSelector } from "react-redux";
-import { DialogmoteDTO, DialogmoteStatus } from "./dialogmoteTypes";
+import { DialogmoteDTO, DialogmoteStatus } from "./types/dialogmoteTypes";
 
 export const useAktivtDialogmote = (): DialogmoteDTO | undefined => {
   const dialogmoter = useSelector(

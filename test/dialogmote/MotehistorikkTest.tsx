@@ -8,7 +8,7 @@ import { expect } from "chai";
 import {
   DialogmoteStatus,
   MotedeltakerVarselType,
-} from "../../src/data/dialogmote/dialogmoteTypes";
+} from "../../src/data/dialogmote/types/dialogmoteTypes";
 import { MotehistorikkPanel } from "../../src/components/dialogmote/motehistorikk/MotehistorikkPanel";
 
 const realState = createStore(rootReducer).getState();

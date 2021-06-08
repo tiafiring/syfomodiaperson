@@ -12,7 +12,7 @@ import {
 } from "../../../utils/valideringUtils";
 import { opprettInnkalling } from "../../../data/dialogmote/dialogmote_actions";
 import { useDispatch } from "react-redux";
-import { DialogmoteInnkallingDTO } from "../../../data/dialogmote/dialogmoteTypes";
+import { DialogmoteInnkallingDTO } from "../../../data/dialogmote/types/dialogmoteTypes";
 import { genererDato } from "../../mote/utils";
 import { Link } from "react-router-dom";
 import { useNavEnhet } from "../../../hooks/useNavEnhet";
