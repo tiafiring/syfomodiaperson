@@ -11,7 +11,7 @@ import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFo
 import Panel from "nav-frontend-paneler";
 import styled from "styled-components";
 import { texts } from "./Pengestopp";
-import navFarger from "nav-frontend-core";
+import { navLysBlaDarken40, navLysBlaLighten80 } from "../../colors";
 
 interface IPengestoppDropdown {
   statusEndringList: StatusEndring[];
@@ -19,8 +19,8 @@ interface IPengestoppDropdown {
 }
 
 const StyledBorderedPanel = styled(Panel)`
-  background: ${navFarger.navLysBlaLighten80};
-  border-color: ${navFarger.navLysBlaDarken40};
+  background: ${navLysBlaLighten80};
+  border-color: ${navLysBlaDarken40};
   margin: 0.5em 0;
 `;
 
