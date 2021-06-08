@@ -21,6 +21,11 @@ module.exports = merge(common, {
           },
           {
             loader: "css-loader",
+            options: {
+              modules: {
+                compileType: "icss",
+              },
+            },
           },
           {
             loader: "postcss-loader",
