@@ -9,7 +9,7 @@ import { mount, ReactWrapper } from "enzyme";
 import {
   DialogmoteDTO,
   DialogmoteStatus,
-} from "../../src/data/dialogmote/dialogmoteTypes";
+} from "../../src/data/dialogmote/types/dialogmoteTypes";
 import { Feilmelding, Innholdstittel } from "nav-frontend-typografi";
 import { expect } from "chai";
 import { Checkbox, Feiloppsummering } from "nav-frontend-skjema";

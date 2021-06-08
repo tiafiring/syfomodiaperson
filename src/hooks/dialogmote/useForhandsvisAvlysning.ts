@@ -1,7 +1,7 @@
 import {
   DialogmoteDTO,
   DocumentComponentDto,
-} from "../../data/dialogmote/dialogmoteTypes";
+} from "../../data/dialogmote/types/dialogmoteTypes";
 import { useNavBrukerData } from "../../data/navbruker/navbruker_hooks";
 import { AvlysDialogmoteSkjemaValues } from "../../components/dialogmote/avlys/AvlysDialogmoteSkjema";
 import { avlysningTexts } from "../../data/dialogmote/dialogmoteTexts";

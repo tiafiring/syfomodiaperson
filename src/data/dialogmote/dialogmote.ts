@@ -1,6 +1,6 @@
 import { Reducer } from "redux";
 import { DialogmoteActions, DialogmoteActionTypes } from "./dialogmote_actions";
-import { DialogmoteDTO } from "./dialogmoteTypes";
+import { DialogmoteDTO } from "./types/dialogmoteTypes";
 
 export interface DialogmoteState {
   senderInnkalling: boolean;

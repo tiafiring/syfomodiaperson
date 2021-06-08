@@ -7,7 +7,7 @@ import {
   DialogmoteDTO,
   DialogmoteStatus,
   MotedeltakerVarselType,
-} from "../../../data/dialogmote/dialogmoteTypes";
+} from "../../../data/dialogmote/types/dialogmoteTypes";
 import { tilDatoMedUkedagOgManedNavn } from "../../../utils/datoUtils";
 import styled from "styled-components";
 import { Forhandsvisning } from "../Forhandsvisning";
@@ -39,31 +39,34 @@ interface MoteListElementProps {
 const MoteListElement = ({ children }: MoteListElementProps): ReactElement => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const isMoteAvlyst = children.status === DialogmoteStatus.AVLYST;
-  const varselType = isMoteAvlyst
-    ? MotedeltakerVarselType.AVLYST
-    : MotedeltakerVarselType.REFERAT;
-  const documentComponents = children.arbeidstaker.varselList.find(
-    (varsel) => varsel.varselType === varselType
-  )?.document;
+  const forhandsVisningTitle = isMoteAvlyst
+    ? texts.avlysningsBrev
+    : texts.referat;
+  const listElementLabel = isMoteAvlyst ? texts.avlystMote : texts.avholdtMote;
+
+  const documentComponents = isMoteAvlyst
+    ? children.arbeidstaker.varselList.find(
+        (varsel) => varsel.varselType === MotedeltakerVarselType.AVLYST
+      )?.document
+    : children.referat?.document;
 
   return (
     <li>
       <InlineNormaltekst>
-        {isMoteAvlyst ? texts.avlystMote : texts.avholdtMote}{" "}
-        {tilDatoMedUkedagOgManedNavn(children.tid)}
+        {listElementLabel} {tilDatoMedUkedagOgManedNavn(children.tid)}
       </InlineNormaltekst>
       {documentComponents && (
         <>
           <Forhandsvisning
-            title={isMoteAvlyst ? texts.avlysningsBrev : texts.referat}
+            title={forhandsVisningTitle}
             subtitle=""
-            contentLabel={isMoteAvlyst ? texts.avlysningsBrev : texts.referat}
+            contentLabel={forhandsVisningTitle}
             isOpen={modalIsOpen}
             handleClose={() => setModalIsOpen(false)}
             documentComponents={() => documentComponents}
           />
           <FlatknappWithMargin
-            data-cy={isMoteAvlyst ? texts.avlysningsBrev : texts.referat}
+            data-cy={forhandsVisningTitle}
             context={texts.header}
             mini
             htmlType="button"
@@ -71,7 +74,7 @@ const MoteListElement = ({ children }: MoteListElementProps): ReactElement => {
               setModalIsOpen(true);
             }}
           >
-            {isMoteAvlyst ? texts.avlysningsBrev : texts.referat}
+            {forhandsVisningTitle}
           </FlatknappWithMargin>
         </>
       )}

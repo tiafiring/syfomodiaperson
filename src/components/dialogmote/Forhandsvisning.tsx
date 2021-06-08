@@ -16,7 +16,7 @@ import React, { ReactElement } from "react";
 import {
   DocumentComponentDto,
   DocumentComponentType,
-} from "../../data/dialogmote/dialogmoteTypes";
+} from "../../data/dialogmote/types/dialogmoteTypes";
 import styled from "styled-components";
 import Lenke from "nav-frontend-lenker";
 

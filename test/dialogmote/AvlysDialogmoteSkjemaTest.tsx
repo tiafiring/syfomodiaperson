@@ -9,7 +9,7 @@ import { expect } from "chai";
 import {
   DialogmoteDTO,
   DialogmoteStatus,
-} from "../../src/data/dialogmote/dialogmoteTypes";
+} from "../../src/data/dialogmote/types/dialogmoteTypes";
 import { Feilmelding } from "nav-frontend-typografi";
 import { Feiloppsummering } from "nav-frontend-skjema";
 import { Hovedknapp, Knapp } from "nav-frontend-knapper";

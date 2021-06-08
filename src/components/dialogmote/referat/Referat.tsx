@@ -4,7 +4,7 @@ import Panel from "nav-frontend-paneler";
 import { tilDatoMedManedNavn } from "../../../utils/datoUtils";
 import Deltakere from "./Deltakere";
 import { useNavBrukerData } from "../../../data/navbruker/navbruker_hooks";
-import { DialogmoteDTO } from "../../../data/dialogmote/dialogmoteTypes";
+import { DialogmoteDTO } from "../../../data/dialogmote/types/dialogmoteTypes";
 import { AlertstripeFullbredde } from "../../AlertstripeFullbredde";
 import ReferatButtons from "./ReferatButtons";
 import { Innholdstittel } from "nav-frontend-typografi";

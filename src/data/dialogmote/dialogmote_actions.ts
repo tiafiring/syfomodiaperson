@@ -2,7 +2,7 @@ import {
   DialogmoteDTO,
   DialogmoteInnkallingDTO,
   AvlysDialogmoteDTO,
-} from "./dialogmoteTypes";
+} from "./types/dialogmoteTypes";
 
 export enum DialogmoteActionTypes {
   OPPRETT_INNKALLING_FORESPURT = "OPPRETT_INNKALLING_FORESPURT",

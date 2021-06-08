@@ -10,7 +10,7 @@ import { useAppSelector } from "../../../hooks/hooks";
 import { AlertStripeFeil } from "nav-frontend-alertstriper";
 import { Form } from "react-final-form";
 import DialogmoteInfo from "./DialogmoteInfo";
-import { DialogmoteDTO } from "../../../data/dialogmote/dialogmoteTypes";
+import { DialogmoteDTO } from "../../../data/dialogmote/types/dialogmoteTypes";
 import AvlysDialogmoteBegrunnelse from "./AvlysDialogmoteBegrunnelse";
 import { SkjemaFeiloppsummering } from "../../SkjemaFeiloppsummering";
 import { useFeilUtbedret } from "../../../hooks/useFeilUtbedret";
