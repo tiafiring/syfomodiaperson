@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Column } from "nav-frontend-grid";
 import styled from "styled-components";
-import navFarger from "nav-frontend-core";
+import { navGra60 } from "../../colors";
 
 const StyledColumn = styled(Column)`
   display: flex;
@@ -18,7 +18,7 @@ const StyledIcon = styled.img`
 const StyledCenteredText = styled.h3`
   text-align: center;
   font-weight: normal;
-  color: ${navFarger.navGra60};
+  color: ${navGra60};
 `;
 
 interface Props {

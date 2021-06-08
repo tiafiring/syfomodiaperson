@@ -2,10 +2,10 @@ import * as React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import NavFrontendChevron from "nav-frontend-chevron";
-import navFarger from "nav-frontend-core";
+import { navBla } from "../colors";
 
 const BlueText = styled.span`
-  color: ${navFarger.navBla};
+  color: ${navBla};
 `;
 
 const TextAndChevronWrapper = styled.div`
