@@ -28,6 +28,8 @@ import { EventType } from "../data/modiacontext/modiacontextTypes";
 import AppSpinner from "../components/AppSpinner";
 import { useAppSelector } from "../hooks/hooks";
 import DialogmoteReferatContainer from "../components/dialogmote/referat/DialogmoteReferatContainer";
+import { useUserProperties } from "../data/logging/loggingHooks";
+import { setUserProperties } from "../amplitude/amplitude";
 
 const getFnrFromParams = (): string => {
   return window.location.pathname.split("/")[2];
@@ -160,6 +162,13 @@ const AktivBrukerLoader = () => {
 
 const AppRouter = () => {
   const fnrFromParam = getFnrFromParams();
+  const userProperties = useUserProperties();
+
+  useEffect(() => {
+    if (userProperties.valgtEnhet) {
+      setUserProperties(userProperties);
+    }
+  }, [userProperties.valgtEnhet]);
 
   if (erGyldigFodselsnummer(fnrFromParam)) {
     setAktivBrukerFromParams(fnrFromParam);
