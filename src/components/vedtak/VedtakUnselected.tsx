@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { Column } from "nav-frontend-grid";
 import { DocumentImage } from "../../../img/ImageComponents";
-import navFarger from "nav-frontend-core";
+import { navGra60 } from "../../colors";
 
 const texts = {
   noSelectedVedtak: "Ingen vedtak er valgt",
@@ -23,7 +23,7 @@ const StyledIcon = styled.img`
 const StyledCenteredText = styled.h4`
   text-align: center;
   font-weight: normal;
-  color: ${navFarger.navGra60};
+  color: ${navGra60};
 `;
 
 const VedtakUnselected = () => {

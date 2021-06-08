@@ -6,7 +6,7 @@ import { formaterOrgnr } from "../../../utils";
 import { lederHasActiveSykmelding } from "../../../utils/ledereUtils";
 import kanskjeBooleanTilJaNeiKanskje from "../kanskjeBooleanTilJaNeiKanskje";
 import { FabrikkImage } from "../../../../img/ImageComponents";
-import navFarger from "nav-frontend-core";
+import { navGraBakgrunn } from "../../../colors";
 
 const texts = {
   activeSykmelding: "Sykmeldt nå",
@@ -27,7 +27,7 @@ const FlexColumn = styled.div`
 `;
 
 const HeaderStyled = styled.div`
-  background-color: ${navFarger.navGraBakgrunn};
+  background-color: ${navGraBakgrunn};
   padding: 0.5em;
   border: none;
 `;
