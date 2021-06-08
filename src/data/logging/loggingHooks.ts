@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../rootState";
-import { trackEvent } from "../../amplitude/amplitude";
+import { trackEvent, UserProperties } from "../../amplitude/amplitude";
 
 export const texts = {
   click: "Klikker på:",
@@ -11,7 +11,6 @@ export const texts = {
 export interface loggingMetadata {
   team: string;
   app: string;
-  valgEnhetId: string;
   behandlendeEnhetId: string;
   behandlendeEnhetNavn: string;
 }
@@ -27,7 +26,6 @@ export const hasLoadedMetaData = (): boolean => {
 };
 
 export const useLoggingMetaData = (): loggingMetadata => {
-  const valgEnhetId = useSelector((state: RootState) => state.enhet.valgtEnhet);
   const behandlendeEnhet = useSelector(
     (state: RootState) => state.behandlendeEnhet.data
   );
@@ -35,9 +33,16 @@ export const useLoggingMetaData = (): loggingMetadata => {
   return {
     team: "iSyfo",
     app: "Syfomodiaperson",
-    valgEnhetId: valgEnhetId,
     behandlendeEnhetId: behandlendeEnhet.enhetId,
     behandlendeEnhetNavn: behandlendeEnhet.navn,
+  };
+};
+
+export const useUserProperties = (): UserProperties => {
+  const valgtEnhet = useSelector((state: RootState) => state.enhet.valgtEnhet);
+
+  return {
+    valgtEnhet: valgtEnhet,
   };
 };
 

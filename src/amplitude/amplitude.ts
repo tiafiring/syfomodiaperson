@@ -10,6 +10,14 @@ export const initAmplitude = () => {
   });
 };
 
+export interface UserProperties {
+  valgtEnhet: string;
+}
+
+export const setUserProperties = (userProperties: UserProperties) => {
+  amplitude.getInstance().setUserProperties(userProperties);
+};
+
 // Prefer loggingHooks.ts to using this directly, to get default variables from Redux.
 // If you need to use this, consider appending default metadata manually.
 export const trackEvent = (
