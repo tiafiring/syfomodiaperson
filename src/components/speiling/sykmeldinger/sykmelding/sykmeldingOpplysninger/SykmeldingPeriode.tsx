@@ -10,7 +10,7 @@ const texts = {
   avventendeInspill: "Innspill til arbeidsgiver om tilrettelegging",
   behandlingsdager: "behandlingsdager",
   reisetilskudd: "med reisetilskudd",
-  reisetilskuddTitle: "din-sykmelding.periode.reisetilskudd.tittel",
+  reisetilskuddTitle: "Reisetilskudd",
 };
 
 interface SykmeldingPeriodeProps {
