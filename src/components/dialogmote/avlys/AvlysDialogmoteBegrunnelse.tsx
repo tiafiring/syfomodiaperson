@@ -5,6 +5,8 @@ import AvlysDialogmoteSkjemaSeksjon from "./AvlysDialogmoteSkjemaSeksjon";
 import { TrackedKnapp } from "../../buttons/TrackedKnapp";
 import Fritekst from "../../Fritekst";
 
+export const MAX_LENGTH_AVLYS_BEGRUNNELSE = 1000;
+
 const texts = {
   preview: "Forhåndsvisning",
 };
@@ -30,7 +32,7 @@ const AvlysDialogmoteBegrunnelse = ({
                 data-cy={fieldName + "TextArea"}
                 size="medium"
                 label={label}
-                maxLength={1000}
+                maxLength={MAX_LENGTH_AVLYS_BEGRUNNELSE}
                 feil={meta.submitFailed && meta.error}
                 id={fieldName}
                 {...input}

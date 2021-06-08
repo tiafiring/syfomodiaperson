@@ -6,6 +6,8 @@ import { MAX_LENGTH_SITUASJON } from "../components/dialogmote/referat/Situasjon
 import { MAX_LENGTH_ARBEIDSTAKERS_OPPGAVE } from "../components/dialogmote/referat/ArbeidstakersOppgave";
 import { MAX_LENGTH_ARBEIDSGIVERS_OPPGAVE } from "../components/dialogmote/referat/ArbeidsgiversOppgave";
 import { MAX_LENGTH_VEILEDERS_OPPGAVE } from "../components/dialogmote/referat/VeiledersOppgave";
+import { MAX_LENGTH_AVLYS_BEGRUNNELSE } from "../components/dialogmote/avlys/AvlysDialogmoteBegrunnelse";
+import { MAX_LENGTH_INNKALLING_FRITEKST } from "../components/dialogmote/innkalling/DialogmoteInnkallingTekster";
 
 interface Tidspunkt {
   klokkeslett?: string;
@@ -15,6 +17,11 @@ interface Tidspunkt {
 interface Begrunnelser {
   begrunnelseArbeidstaker?: string;
   begrunnelseArbeidsgiver?: string;
+}
+
+interface InnkallingFritekster {
+  fritekstArbeidsgiver?: string;
+  fritekstArbeidstaker?: string;
 }
 
 export type ReferatSkjemaFeil = {
@@ -81,19 +88,42 @@ export const validerTidspunkt = (tidspunkt?: Tidspunkt): Partial<Tidspunkt> => {
   return feil;
 };
 
+export const validerInnkallingFritekster = (
+  fritekster: InnkallingFritekster
+): Partial<InnkallingFritekster> => {
+  const { fritekstArbeidsgiver, fritekstArbeidstaker } = fritekster;
+  return {
+    fritekstArbeidsgiver: validerFritekst(
+      fritekstArbeidsgiver,
+      false,
+      MAX_LENGTH_INNKALLING_FRITEKST
+    ),
+    fritekstArbeidstaker: validerFritekst(
+      fritekstArbeidstaker,
+      false,
+      MAX_LENGTH_INNKALLING_FRITEKST
+    ),
+  };
+};
+
 export const validerBegrunnelser = (
   begrunnelser: Begrunnelser
 ): Partial<Begrunnelser> => {
   const { begrunnelseArbeidstaker, begrunnelseArbeidsgiver } = begrunnelser;
-  const feil: Partial<Begrunnelser> = {};
-  if (!begrunnelseArbeidstaker || begrunnelseArbeidstaker.trim() === "") {
-    feil.begrunnelseArbeidstaker = texts.begrunnelseArbeidstakerMissing;
-  }
-  if (!begrunnelseArbeidsgiver || begrunnelseArbeidsgiver.trim() === "") {
-    feil.begrunnelseArbeidsgiver = texts.begrunnelseArbeidsgiverMissing;
-  }
-
-  return feil;
+  return {
+    begrunnelseArbeidsgiver: validerFritekst(
+      begrunnelseArbeidsgiver,
+      true,
+      MAX_LENGTH_AVLYS_BEGRUNNELSE,
+      texts.begrunnelseArbeidsgiverMissing
+    ),
+    begrunnelseArbeidstaker: validerFritekst(
+      begrunnelseArbeidstaker,
+      true,
+      MAX_LENGTH_AVLYS_BEGRUNNELSE,
+      texts.begrunnelseArbeidstakerMissing
+    ),
+  };
 };
 
 export const validerReferatDeltakere = (
