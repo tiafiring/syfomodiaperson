@@ -22,7 +22,7 @@ export interface ForhandsvisAvlysningGenerator {
 export const useForhandsvisAvlysning = (
   dialogmote: DialogmoteDTO
 ): ForhandsvisAvlysningGenerator => {
-  const { hilsen } = useForhandsvisningHilsen();
+  const hilsen = useForhandsvisningHilsen();
   const navBruker = useNavBrukerData();
   const gjelderText = createParagraph(
     `Gjelder ${navBruker.navn}, f.nr. ${navBruker.kontaktinfo.fnr}.`

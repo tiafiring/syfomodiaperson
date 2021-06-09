@@ -2,9 +2,6 @@ export const innkallingTexts = {
   moteTidTitle: "Møtetidspunkt",
   moteStedTitle: "Møtested",
   videoLinkTitle: "Lenke til videomøte",
-  foerMoteTitle: "Før møtet",
-  foerMoteText:
-    "Det er viktig at dere fyller ut oppfølgingsplanen sammen og deler den med NAV. Den gir oss et godt utgangspunkt for å snakke om hva som fungerer, hva som har blitt forsøkt, og hvilke muligheter som finnes framover.",
   arbeidstaker: {
     intro1:
       "Velkommen til dialogmøte mellom deg, arbeidsgiveren din og en veileder fra NAV. I møtet skal vi snakke om situasjonen din og bli enige om en plan som kan hjelpe deg videre.",
@@ -12,6 +9,9 @@ export const innkallingTexts = {
       "I møtet vil vi høre både hva du og arbeidsgiveren sier om arbeidssituasjonen og mulighetene for å jobbe.",
     outro1:
       "Den som har sykmeldt deg, eller en annen behandler, kan også bli invitert til å delta i møtet. Til dette møtet har vi ikke sett behov for det.",
+    outro2Title: "Før møtet",
+    outro2Text:
+      "Det er viktig at dere fyller ut oppfølgingsplanen sammen og deler den med NAV. Den gir oss et godt utgangspunkt for å snakke om hva som fungerer, hva som har blitt forsøkt, og hvilke muligheter som finnes framover.",
   },
   arbeidsgiver: {
     intro1:
@@ -19,11 +19,11 @@ export const innkallingTexts = {
     intro2:
       "I møtet vil vi høre både hva du og arbeidsgiveren sier om arbeidssituasjonen og mulighetene for å jobbe.",
     outro1:
-      "Vi gjør oppmerksom på at det er obligatorisk å delta i dialogmøter med NAV og å sende inn oppfølgingsplan på forhånd. Oppdatert oppfølgingsplan skal sendes til NAV senest 1 uke før møtet avholdes.",
+      "Det er obligatorisk å delta i dialogmøtet. Hvis vårt forslag ikke passer, ber vi om at du tar kontakt. Vi minner om at det ikke må sendes sensitive personopplysninger over e-post eller SMS.",
     outro2:
-      "Hvis vårt forslag til møtetidspunkt, møtested eller møteform ikke passer, ber vi om at du tar kontakt for å diskutere alternativer. I så fall kan du sende e-post eller ringe undertegnede på telefon. Vi minner om at det ikke må sendes sensitive personopplysninger over e-post eller SMS.",
-    outro3:
       "NAV kan be fastlegen eller annet helsepersonell om å delta i møtet. Til dette møtet har vi ikke sett behov for det.",
+    arbeidsgiverTlfLabel: "Arbeidsgivertelefonen",
+    arbeidsgiverTlf: "55 55 33 36",
   },
 };
 

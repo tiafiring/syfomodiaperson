@@ -446,20 +446,18 @@ const expectedArbeidsgiverInnkalling = [
     type: "PARAGRAPH",
   },
   {
-    texts: [innkallingTexts.arbeidsgiver.outro3],
-    type: "PARAGRAPH",
-  },
-  {
-    texts: [innkallingTexts.foerMoteText],
-    title: innkallingTexts.foerMoteTitle,
-    type: "PARAGRAPH",
-  },
-  {
     texts: [commonTexts.hilsen, navEnhetNavn],
     type: "PARAGRAPH",
   },
   {
-    texts: [veilederNavn, veilederEpost, veilederTlf],
+    texts: [veilederNavn],
+    type: "PARAGRAPH",
+  },
+  {
+    texts: [
+      innkallingTexts.arbeidsgiver.arbeidsgiverTlfLabel,
+      innkallingTexts.arbeidsgiver.arbeidsgiverTlf,
+    ],
     type: "PARAGRAPH",
   },
 ];
@@ -504,8 +502,8 @@ const expectedArbeidstakerInnkalling = [
     type: "PARAGRAPH",
   },
   {
-    texts: [innkallingTexts.foerMoteText],
-    title: innkallingTexts.foerMoteTitle,
+    texts: [innkallingTexts.arbeidstaker.outro2Text],
+    title: innkallingTexts.arbeidstaker.outro2Title,
     type: "PARAGRAPH",
   },
   {
