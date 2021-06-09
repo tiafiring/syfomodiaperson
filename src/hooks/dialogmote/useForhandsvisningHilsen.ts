@@ -3,36 +3,13 @@ import { useVeilederinfo } from "../useVeilederinfo";
 import { createParagraph } from "../../utils/documentComponentUtils";
 import { commonTexts } from "../../data/dialogmote/dialogmoteTexts";
 import { DocumentComponentDto } from "../../data/dialogmote/types/dialogmoteTypes";
-import { VeilederinfoDTO } from "../../data/veilederinfo/types/VeilederinfoDTO";
 
-export const useForhandsvisningHilsen = () => {
+export const useForhandsvisningHilsen = (): DocumentComponentDto[] => {
   const behandlendeEnhet = useBehandlendeEnhet();
   const { veilederinfo } = useVeilederinfo();
-  const enhetParagraph = createParagraph(
-    commonTexts.hilsen,
-    behandlendeEnhet.navn
-  );
-  const hilsen = [enhetParagraph];
-  const hilsenMedKontaktinfo = [enhetParagraph];
+  const hilsen = [createParagraph(commonTexts.hilsen, behandlendeEnhet.navn)];
   if (veilederinfo) {
-    hilsen.push(veilederParagraph(veilederinfo));
-    hilsenMedKontaktinfo.push(veilederParagraph(veilederinfo, true));
+    hilsen.push(createParagraph(veilederinfo.navn));
   }
-  return {
-    hilsen,
-    hilsenMedKontaktinfo,
-  };
-};
-
-const veilederParagraph = (
-  veilederinfo: VeilederinfoDTO,
-  medKontaktinfo = false
-): DocumentComponentDto => {
-  return medKontaktinfo
-    ? createParagraph(
-        veilederinfo.navn,
-        veilederinfo.epost,
-        veilederinfo.telefonnummer ?? ""
-      )
-    : createParagraph(veilederinfo.navn);
+  return hilsen;
 };

@@ -24,7 +24,7 @@ export interface ForhandsvisInnkallingGenerator {
 
 export const useForhandsvisInnkalling = (): ForhandsvisInnkallingGenerator => {
   const navBruker = useNavBrukerData();
-  const { hilsen, hilsenMedKontaktinfo } = useForhandsvisningHilsen();
+  const hilsen = useForhandsvisningHilsen();
 
   const arbeidstakerInnkalling = (
     values: Partial<DialogmoteInnkallingSkjemaValues>
@@ -51,7 +51,14 @@ export const useForhandsvisInnkalling = (): ForhandsvisInnkallingGenerator => {
     if (values.fritekstArbeidsgiver) {
       documentComponents.push(createParagraph(values.fritekstArbeidsgiver));
     }
-    documentComponents.push(...arbeidsgiverOutro(), ...hilsenMedKontaktinfo);
+    documentComponents.push(
+      ...arbeidsgiverOutro(),
+      ...hilsen,
+      createParagraph(
+        innkallingTexts.arbeidsgiver.arbeidsgiverTlfLabel,
+        innkallingTexts.arbeidsgiver.arbeidsgiverTlf
+      )
+    );
 
     return documentComponents;
   };
@@ -105,8 +112,8 @@ const arbeidstakerOutro = (): DocumentComponentDto[] => {
   return [
     createParagraph(innkallingTexts.arbeidstaker.outro1),
     createParagraphWithTitle(
-      innkallingTexts.foerMoteTitle,
-      innkallingTexts.foerMoteText
+      innkallingTexts.arbeidstaker.outro2Title,
+      innkallingTexts.arbeidstaker.outro2Text
     ),
   ];
 };
@@ -115,10 +122,5 @@ const arbeidsgiverOutro = (): DocumentComponentDto[] => {
   return [
     createParagraph(innkallingTexts.arbeidsgiver.outro1),
     createParagraph(innkallingTexts.arbeidsgiver.outro2),
-    createParagraph(innkallingTexts.arbeidsgiver.outro3),
-    createParagraphWithTitle(
-      innkallingTexts.foerMoteTitle,
-      innkallingTexts.foerMoteText
-    ),
   ];
 };
