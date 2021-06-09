@@ -3,6 +3,9 @@ import { tilLesbarDatoMedArstall } from "../../utils/datoUtils";
 import OppfoelgingsdialogIkon from "../../ikoner/OppfoelgingsdialogIkon";
 import MoteIkon from "../../ikoner/MoteIkon";
 import LederIkon from "../../ikoner/LederIkon";
+import styled from "styled-components";
+import { Normaltekst } from "nav-frontend-typografi";
+import navFarger from "nav-frontend-core";
 
 const hentIkon = (event: any) => {
   switch (event.kilde) {
@@ -22,6 +25,26 @@ const hentIkon = (event: any) => {
   }
 };
 
+const HistorikkEventListItem = styled.li`
+  border-bottom: 1px solid ${navFarger.navGra40};
+  padding: 1.5em 0;
+  display: block;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+`;
+
+const HistorikkEventInfo = styled.div`
+  display: flex;
+`;
+
+const HistorikkIkonWrapper = styled.div`
+  display: flex;
+  align-self: center;
+  margin-right: 10px;
+`;
+
 interface HistorikkEventProps {
   event: any;
 }
@@ -29,15 +52,13 @@ interface HistorikkEventProps {
 const HistorikkEvent = (historikkEventProps: HistorikkEventProps) => {
   const event = historikkEventProps.event;
   return (
-    <li className="historikkevent">
-      <p className="historikkevent__meta">
-        {tilLesbarDatoMedArstall(event.tidspunkt)}
-      </p>
-      <div className="historikkevent__info">
-        <div className="historikkevent__ikon">{hentIkon(event)}</div>
-        <p className="historikkevent__tekst">{event.tekst}</p>
-      </div>
-    </li>
+    <HistorikkEventListItem>
+      <Normaltekst>{tilLesbarDatoMedArstall(event.tidspunkt)}</Normaltekst>
+      <HistorikkEventInfo>
+        <HistorikkIkonWrapper>{hentIkon(event)}</HistorikkIkonWrapper>
+        <Normaltekst>{event.tekst}</Normaltekst>
+      </HistorikkEventInfo>
+    </HistorikkEventListItem>
   );
 };
 
