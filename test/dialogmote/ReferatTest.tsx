@@ -15,7 +15,11 @@ import { expect } from "chai";
 import { Feiloppsummering } from "nav-frontend-skjema";
 import { texts as skjemaFeilOppsummeringTexts } from "../../src/components/SkjemaFeiloppsummering";
 import { texts as valideringsTexts } from "../../src/utils/valideringUtils";
-import { assertFeilmelding, changeFieldValue } from "../testUtils";
+import {
+  assertFeilmelding,
+  changeFieldValue,
+  changeTextAreaValue,
+} from "../testUtils";
 
 const realState = createStore(rootReducer).getState();
 const store = configureStore([]);
@@ -65,6 +69,12 @@ const mockState = {
     personident: arbeidstakerPersonIdent,
   },
 };
+
+const situasjonTekst = "Noe tekst om situasjonen";
+const konklusjonTekst = "Noe tekst om konklusjon";
+const arbeidsgiversOppgave = "Noe tekst om arbeidsgivers oppgave";
+const arbeidstakersOppgave = "Noe tekst om arbeidstakers oppgave";
+const veiledersOppgave = "Noe tekst om veileders oppgave";
 
 describe("ReferatTest", () => {
   it("viser arbeidstaker, dato og sted i tittel", () => {
@@ -172,5 +182,44 @@ describe("ReferatTest", () => {
     expect(feiloppsummering.text()).to.contain(
       valideringsTexts.arbeidsgiversOppgaveMissing
     );
+  });
+
+  it("ferdigstiller dialogmote ved submit av skjema", () => {
+    const mockStore = store({ ...realState, ...mockState });
+    const wrapper = mount(
+      <MemoryRouter
+        initialEntries={[`/sykefravaer/dialogmote/${moteUuid}/referat`]}
+      >
+        <Route path="/sykefravaer/dialogmote/:dialogmoteUuid/referat">
+          <Provider store={mockStore}>
+            <Referat dialogmote={mote} pageTitle="Test" />
+          </Provider>
+        </Route>
+      </MemoryRouter>
+    );
+
+    changeTextAreaValue(wrapper, "situasjon", situasjonTekst);
+    changeTextAreaValue(wrapper, "konklusjon", konklusjonTekst);
+    changeTextAreaValue(wrapper, "arbeidstakersOppgave", arbeidstakersOppgave);
+    changeTextAreaValue(wrapper, "arbeidsgiversOppgave", arbeidsgiversOppgave);
+    changeTextAreaValue(wrapper, "veiledersOppgave", veiledersOppgave);
+
+    wrapper.find("form").simulate("submit");
+
+    expect(mockStore.getActions()[0]).to.deep.equal({
+      type: "FERDIGSTILL_MOTE_FORESPURT",
+      fnr: arbeidstakerPersonIdent,
+      moteUuid: moteUuid,
+      data: {
+        narmesteLederNavn: lederNavn,
+        situasjon: situasjonTekst,
+        konklusjon: konklusjonTekst,
+        arbeidsgiverOppgave: arbeidsgiversOppgave,
+        arbeidstakerOppgave: arbeidstakersOppgave,
+        veilederOppgave: veiledersOppgave,
+        document: [],
+        andreDeltakere: [],
+      },
+    });
   });
 });

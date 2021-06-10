@@ -25,6 +25,7 @@ export const ReferatTextareaFieldColumn = ({
     <Field<string> name={fieldName}>
       {({ input, meta }) => (
         <Fritekst
+          data-cy={fieldName + "TextArea"}
           size={size}
           {...rest}
           feil={meta.submitFailed && meta.error}

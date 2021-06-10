@@ -17,6 +17,9 @@ export interface DialogmoteState {
   endrerTidSted: boolean;
   endreTidStedFeilet: boolean;
   endreTidStedFullfort: boolean;
+  ferdigstillerMote: boolean;
+  ferdigstillMoteFeilet: boolean;
+  ferdigstillMoteFullfort: boolean;
 }
 
 export const initialState: DialogmoteState = {
@@ -29,6 +32,9 @@ export const initialState: DialogmoteState = {
   endrerTidSted: false,
   endreTidStedFeilet: false,
   endreTidStedFullfort: false,
+  ferdigstillerMote: false,
+  ferdigstillMoteFeilet: false,
+  ferdigstillMoteFullfort: false,
   henterMote: false,
   henterMoteFeilet: false,
   henterMoteForsokt: false,
@@ -81,6 +87,27 @@ const dialogmote: Reducer<DialogmoteState, DialogmoteActions> = (
         avlyserMote: false,
         avlysMoteFullfort: false,
         avlysMoteFeilet: true,
+      };
+    }
+    case DialogmoteActionTypes.FERDIGSTILLER_MOTE: {
+      return {
+        ...state,
+        ferdigstillerMote: true,
+      };
+    }
+    case DialogmoteActionTypes.FERDIGSTILL_MOTE_FULLFORT: {
+      return {
+        ...state,
+        ferdigstillerMote: false,
+        ferdigstillMoteFullfort: true,
+      };
+    }
+    case DialogmoteActionTypes.FERDIGSTILL_MOTE_FEILET: {
+      return {
+        ...state,
+        ferdigstillerMote: false,
+        ferdigstillMoteFullfort: false,
+        ferdigstillMoteFeilet: true,
       };
     }
     case DialogmoteActionTypes.FETCH_DIALOGMOTE: {

@@ -43,4 +43,16 @@ export const mockIsdialogmote = (server) => {
       res.sendStatus(200);
     }
   );
+
+  server.post(
+    "/isdialogmote/api/post/v1/dialogmote/:moteuuid/ferdigstill",
+    (req, res) => {
+      const { moteuuid } = req.params;
+      const dialogmoteToUpdate = dialogmoterMock.find(
+        (dialogmote) => dialogmote.uuid === moteuuid
+      );
+      dialogmoteToUpdate!!.status = "FERDIGSTILT";
+      res.sendStatus(200);
+    }
+  );
 };

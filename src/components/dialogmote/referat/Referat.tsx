@@ -22,12 +22,20 @@ import {
 } from "../../../utils/valideringUtils";
 import { useFeilUtbedret } from "../../../hooks/useFeilUtbedret";
 import { SkjemaFeiloppsummering } from "../../SkjemaFeiloppsummering";
+import { useDispatch } from "react-redux";
+import { useValgtPersonident } from "../../../hooks/useValgtBruker";
+import { useAppSelector } from "../../../hooks/hooks";
+import { ferdigstillMote } from "../../../data/dialogmote/dialogmote_actions";
+import { FlexRow, PaddingSize } from "../../Layout";
+import { AlertStripeFeil } from "nav-frontend-alertstriper";
 
 const texts = {
   digitalReferat:
     "Referatet formidles her på nav.no. Det er bare de arbeidstakerne som har reservert seg mot digital kommunikasjon, som vil få referatet i posten.",
   personvern:
     "Du må aldri skrive sensitive opplysninger om helse, diagnose, behandling, og prognose. Dette gjelder også hvis arbeidstakeren er åpen om helsen og snakket om den i møtet.",
+  errorMsg:
+    "Referatet kunne ikke sendes på grunn av en midlertidig teknisk feil. Prøv igjen.",
 };
 
 export interface ReferatSkjemaValues {
@@ -54,9 +62,14 @@ interface ReferatProps {
 }
 
 const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
+  const dispatch = useDispatch();
+  const fnr = useValgtPersonident();
+  const { ferdigstillerMote, ferdigstillMoteFeilet } = useAppSelector(
+    (state) => state.dialogmote
+  );
   const navbruker = useNavBrukerData();
-  const dateAndTimeForMeeting = tilDatoMedManedNavn(dialogmote.tid);
 
+  const dateAndTimeForMeeting = tilDatoMedManedNavn(dialogmote.tid);
   const header = `${navbruker?.navn}, ${dateAndTimeForMeeting}, ${dialogmote.sted}`;
 
   const {
@@ -77,7 +90,18 @@ const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
   };
 
   const submit = (values: ReferatSkjemaValues) => {
-    console.log("Submit referat with values: ", values);
+    dispatch(
+      ferdigstillMote(dialogmote.uuid, fnr, {
+        narmesteLederNavn: values.naermesteLeder,
+        situasjon: values.situasjon,
+        konklusjon: values.konklusjon,
+        arbeidsgiverOppgave: values.arbeidsgiversOppgave,
+        arbeidstakerOppgave: values.arbeidstakersOppgave,
+        veilederOppgave: values.veiledersOppgave,
+        document: [], // TODO: implementer ifm forhåndsvisning,
+        andreDeltakere: [], // TODO: implementer ekstra deltakere,
+      })
+    );
   };
 
   const initialValues: Partial<ReferatSkjemaValues> = {
@@ -103,6 +127,11 @@ const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
             <ArbeidsgiversOppgave />
             <VeiledersOppgave />
             <StandardTekster />
+            {ferdigstillMoteFeilet && (
+              <FlexRow bottomPadding={PaddingSize.MD}>
+                <AlertStripeFeil>{texts.errorMsg}</AlertStripeFeil>
+              </FlexRow>
+            )}
             {submitFailed && !feilUtbedret && (
               <SkjemaFeiloppsummering errors={errors} />
             )}
@@ -110,7 +139,7 @@ const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
               pageTitle={pageTitle}
               onSendClick={resetFeilUtbedret}
               onPreviewClick={() => console.log("PREVIEW!")}
-              onCancelClick={() => console.log("ABORT!")}
+              showSendSpinner={ferdigstillerMote}
             />
           </form>
         )}
