@@ -77,6 +77,20 @@ export interface DialogmoteInnkallingDTO {
   };
 }
 
+export interface EndreTidStedDialogmoteDTO {
+  sted: string;
+  tid: string;
+  videoLink?: string;
+  arbeidstaker: {
+    begrunnelse: string;
+    endringsdokument: DocumentComponentDto[];
+  };
+  arbeidsgiver: {
+    begrunnelse: string;
+    endringsdokument: DocumentComponentDto[];
+  };
+}
+
 export interface AvlysDialogmoteDTO {
   arbeidstaker: AvlysningDto;
   arbeidsgiver: AvlysningDto;

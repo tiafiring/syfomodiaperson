@@ -14,6 +14,9 @@ export interface DialogmoteState {
   avlyserMote: boolean;
   avlysMoteFeilet: boolean;
   avlysMoteFullfort: boolean;
+  endrerTidSted: boolean;
+  endreTidStedFeilet: boolean;
+  endreTidStedFullfort: boolean;
 }
 
 export const initialState: DialogmoteState = {
@@ -23,6 +26,9 @@ export const initialState: DialogmoteState = {
   avlysMoteFeilet: false,
   avlyserMote: false,
   avlysMoteFullfort: false,
+  endrerTidSted: false,
+  endreTidStedFeilet: false,
+  endreTidStedFullfort: false,
   henterMote: false,
   henterMoteFeilet: false,
   henterMoteForsokt: false,
@@ -102,6 +108,27 @@ const dialogmote: Reducer<DialogmoteState, DialogmoteActions> = (
         henterMoteFeilet: true,
         henterMoteForsokt: true,
         dialogmoter: initialState.dialogmoter,
+      };
+    }
+    case DialogmoteActionTypes.ENDRER_TID_STED: {
+      return {
+        ...state,
+        endrerTidSted: true,
+      };
+    }
+    case DialogmoteActionTypes.ENDRE_TID_STED_FEILET: {
+      return {
+        ...state,
+        endrerTidSted: false,
+        endreTidStedFullfort: false,
+        endreTidStedFeilet: true,
+      };
+    }
+    case DialogmoteActionTypes.ENDRE_TID_STED_FULLFORT: {
+      return {
+        ...state,
+        endrerTidSted: false,
+        endreTidStedFullfort: true,
       };
     }
     default: {

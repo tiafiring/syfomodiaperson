@@ -5,6 +5,10 @@ import {
   avlysMoteFeilet,
   avlysMoteFullfort,
   DialogmoteActionTypes,
+  endrerTidSted,
+  EndreTidStedAction,
+  endreTidStedFeilet,
+  endreTidStedFullfort,
   FetchDialogmoteAction,
   fetchDialogmoteFailed,
   fetchDialogmoteSuccess,
@@ -51,6 +55,18 @@ function* avlysDialogmote(action: AvlysMoteAction) {
   }
 }
 
+function* endreTidStedDialogmote(action: EndreTidStedAction) {
+  yield put(endrerTidSted());
+  try {
+    const path = `${process.env.REACT_APP_ISDIALOGMOTE_ROOT}/post/v1/dialogmote/${action.moteUuid}/tidsted`;
+    yield call(post, path, action.data);
+    yield put(endreTidStedFullfort());
+    window.location.href = `/sykefravaer/moteoversikt`;
+  } catch (e) {
+    yield put(endreTidStedFeilet());
+  }
+}
+
 export default function* dialogmoteSagas() {
   yield takeEvery(
     DialogmoteActionTypes.OPPRETT_INNKALLING_FORESPURT,
@@ -58,4 +74,8 @@ export default function* dialogmoteSagas() {
   );
   yield takeEvery(DialogmoteActionTypes.FETCH_DIALOGMOTE, fetchDialogmoteSaga);
   yield takeEvery(DialogmoteActionTypes.AVLYS_MOTE_FORESPURT, avlysDialogmote);
+  yield takeEvery(
+    DialogmoteActionTypes.ENDRE_TID_STED_FORESPURT,
+    endreTidStedDialogmote
+  );
 }

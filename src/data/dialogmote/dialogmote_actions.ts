@@ -2,6 +2,7 @@ import {
   DialogmoteDTO,
   DialogmoteInnkallingDTO,
   AvlysDialogmoteDTO,
+  EndreTidStedDialogmoteDTO,
 } from "./types/dialogmoteTypes";
 
 export enum DialogmoteActionTypes {
@@ -16,6 +17,10 @@ export enum DialogmoteActionTypes {
   AVLYSER_MOTE = "AVLYSER_MOTE",
   AVLYS_MOTE_FEILET = "AVLYS_MOTE_FEILET",
   AVLYS_MOTE_FULLFORT = "AVLYS_MOTE_FULLFORT",
+  ENDRE_TID_STED_FORESPURT = "ENDRE_TID_STED_FORESPURT",
+  ENDRER_TID_STED = "ENDRE_TID_STED",
+  ENDRE_TID_STED_FEILET = "ENDRE_TID_STED_FEILET",
+  ENDRE_TID_STED_FULLFORT = "ENDRE_TID_STED_FULLFORT",
 }
 
 export interface OpprettInnkallingAction {
@@ -69,6 +74,25 @@ export interface AvlysMoteFullfortAction {
   type: DialogmoteActionTypes.AVLYS_MOTE_FULLFORT;
 }
 
+export interface EndreTidStedAction {
+  type: DialogmoteActionTypes.ENDRE_TID_STED_FORESPURT;
+  fnr: string;
+  moteUuid: string;
+  data: EndreTidStedDialogmoteDTO;
+}
+
+export interface EndrerTidStedAction {
+  type: DialogmoteActionTypes.ENDRER_TID_STED;
+}
+
+export interface EndreTidStedFeiletAction {
+  type: DialogmoteActionTypes.ENDRE_TID_STED_FEILET;
+}
+
+export interface EndreTidStedFullfortAction {
+  type: DialogmoteActionTypes.ENDRE_TID_STED_FULLFORT;
+}
+
 export type DialogmoteActions =
   | OpprettInnkallingAction
   | OppretterInnkallingAction
@@ -80,7 +104,11 @@ export type DialogmoteActions =
   | AvlysMoteAction
   | AvlyserMoteAction
   | AvlysMoteFeiletAction
-  | AvlysMoteFullfortAction;
+  | AvlysMoteFullfortAction
+  | EndreTidStedAction
+  | EndrerTidStedAction
+  | EndreTidStedFeiletAction
+  | EndreTidStedFullfortAction;
 
 export const opprettInnkalling = (
   fnr: string,
@@ -138,4 +166,27 @@ export const avlysMoteFeilet = (): AvlysMoteFeiletAction => ({
 
 export const avlysMoteFullfort = (): AvlysMoteFullfortAction => ({
   type: DialogmoteActionTypes.AVLYS_MOTE_FULLFORT,
+});
+
+export const endreTidSted = (
+  moteUuid: string,
+  fnr: string,
+  data: EndreTidStedDialogmoteDTO
+): EndreTidStedAction => ({
+  type: DialogmoteActionTypes.ENDRE_TID_STED_FORESPURT,
+  fnr,
+  moteUuid,
+  data,
+});
+
+export const endrerTidSted = (): EndrerTidStedAction => ({
+  type: DialogmoteActionTypes.ENDRER_TID_STED,
+});
+
+export const endreTidStedFeilet = (): EndreTidStedFeiletAction => ({
+  type: DialogmoteActionTypes.ENDRE_TID_STED_FEILET,
+});
+
+export const endreTidStedFullfort = (): EndreTidStedFullfortAction => ({
+  type: DialogmoteActionTypes.ENDRE_TID_STED_FULLFORT,
 });
