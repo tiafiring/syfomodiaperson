@@ -31,9 +31,7 @@ const texts = {
 };
 
 export interface ReferatSkjemaValues {
-  deltakerArbeidstaker: boolean;
-  deltakerArbeidsgiver: boolean;
-  deltakerVeileder: boolean;
+  naermesteLeder: string;
   situasjon: string;
   konklusjon: string;
   arbeidstakersOppgave: string;
@@ -83,9 +81,7 @@ const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
   };
 
   const initialValues: Partial<ReferatSkjemaValues> = {
-    deltakerArbeidstaker: true,
-    deltakerArbeidsgiver: true,
-    deltakerVeileder: true,
+    naermesteLeder: dialogmote.arbeidsgiver.lederNavn,
   };
 
   return (
@@ -97,7 +93,7 @@ const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
             <ReferatWarningAlert type="advarsel">
               {texts.digitalReferat}
             </ReferatWarningAlert>
-            <Deltakere arbeidsgiverNavn={dialogmote.arbeidsgiver.lederNavn} />
+            <Deltakere />
             <ReferatWarningAlert type="advarsel">
               {texts.personvern}
             </ReferatWarningAlert>

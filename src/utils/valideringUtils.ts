@@ -43,8 +43,7 @@ export const texts = {
   konklusjonMissing: "Vennligst angi konklusjon",
   arbeidstakersOppgaveMissing: "Vennligst angi arbeidstakerens oppgave",
   arbeidsgiversOppgaveMissing: "Vennligst angi arbeidsgiverens oppgave",
-  deltakerArbeidstakerMissing:
-    "Arbeidstakeren er obligatorisk deltaker i møtet",
+  naermesteLederMissing: "Vennligst angi nærmeste leder",
 };
 
 export const validerArbeidsgiver = (orgNummer?: string): string | undefined => {
@@ -130,8 +129,8 @@ export const validerReferatDeltakere = (
   values: Partial<ReferatSkjemaValues>
 ): Partial<ReferatSkjemaFeil> => {
   const feil: Partial<ReferatSkjemaFeil> = {};
-  if (!values.deltakerArbeidstaker) {
-    feil.deltakerArbeidstaker = texts.deltakerArbeidstakerMissing;
+  if (!values.naermesteLeder || values.naermesteLeder.trim() === "") {
+    feil.naermesteLeder = texts.naermesteLederMissing;
   }
   return feil;
 };

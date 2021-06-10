@@ -1,5 +1,5 @@
 import React from "react";
-import { mount, ReactWrapper } from "enzyme";
+import { mount } from "enzyme";
 import { expect } from "chai";
 import { MemoryRouter, Route } from "react-router-dom";
 import { createStore } from "redux";
@@ -26,6 +26,7 @@ import {
 import { Forhandsvisning } from "../../src/components/dialogmote/Forhandsvisning";
 import { texts as innkallingSkjemaTexts } from "../../src/components/dialogmote/innkalling/DialogmoteInnkallingTekster";
 import Lukknapp from "nav-frontend-lukknapp";
+import { changeFieldValue, changeTextAreaValue } from "../testUtils";
 
 const realState = createStore(rootReducer).getState();
 
@@ -204,15 +205,16 @@ describe("DialogmoteInnkallingSkjema", () => {
     changeFieldValue(videoLinkInput, moteVideoLink);
     changeFieldValue(klokkeslettInput, moteKlokkeslett);
 
-    const textAreas = wrapper.find("textarea");
-    const fritekstArbeidsgiverTextArea = textAreas.findWhere(
-      (w) => w.prop("name") === "fritekstArbeidsgiver"
+    changeTextAreaValue(
+      wrapper,
+      "fritekstArbeidsgiver",
+      fritekstTilArbeidsgiver
     );
-    const fritekstArbeidstakerTextArea = textAreas.findWhere(
-      (w) => w.prop("name") === "fritekstArbeidstaker"
+    changeTextAreaValue(
+      wrapper,
+      "fritekstArbeidstaker",
+      fritekstTilArbeidstaker
     );
-    changeFieldValue(fritekstArbeidsgiverTextArea, fritekstTilArbeidsgiver);
-    changeFieldValue(fritekstArbeidstakerTextArea, fritekstTilArbeidstaker);
 
     // Feilmeldinger og feiloppsummering forsvinner
     expect(wrapper.find(Feiloppsummering)).to.have.length(0);
@@ -259,15 +261,16 @@ describe("DialogmoteInnkallingSkjema", () => {
     changeFieldValue(videoLinkInput, moteVideoLink);
     changeFieldValue(klokkeslettInput, moteKlokkeslett);
 
-    const textAreas = wrapper.find("textarea");
-    const fritekstArbeidsgiverTextArea = textAreas.findWhere(
-      (w) => w.prop("name") === "fritekstArbeidsgiver"
+    changeTextAreaValue(
+      wrapper,
+      "fritekstArbeidsgiver",
+      fritekstTilArbeidsgiver
     );
-    const fritekstArbeidstakerTextArea = textAreas.findWhere(
-      (w) => w.prop("name") === "fritekstArbeidstaker"
+    changeTextAreaValue(
+      wrapper,
+      "fritekstArbeidstaker",
+      fritekstTilArbeidstaker
     );
-    changeFieldValue(fritekstArbeidsgiverTextArea, fritekstTilArbeidsgiver);
-    changeFieldValue(fritekstArbeidstakerTextArea, fritekstTilArbeidstaker);
 
     wrapper.find("form").simulate("submit");
 
@@ -327,15 +330,16 @@ describe("DialogmoteInnkallingSkjema", () => {
     changeFieldValue(videoLinkInput, moteVideoLink);
     changeFieldValue(klokkeslettInput, moteKlokkeslett);
 
-    const textAreas = wrapper.find("textarea");
-    const fritekstArbeidsgiverTextArea = textAreas.findWhere(
-      (w) => w.prop("name") === "fritekstArbeidsgiver"
+    changeTextAreaValue(
+      wrapper,
+      "fritekstArbeidsgiver",
+      fritekstTilArbeidsgiver
     );
-    const fritekstArbeidstakerTextArea = textAreas.findWhere(
-      (w) => w.prop("name") === "fritekstArbeidstaker"
+    changeTextAreaValue(
+      wrapper,
+      "fritekstArbeidstaker",
+      fritekstTilArbeidstaker
     );
-    changeFieldValue(fritekstArbeidsgiverTextArea, fritekstTilArbeidsgiver);
-    changeFieldValue(fritekstArbeidstakerTextArea, fritekstTilArbeidstaker);
 
     const getForhandsvisningsModaler = () => wrapper.find(Forhandsvisning);
     let forhandsvisninger = getForhandsvisningsModaler();
@@ -392,14 +396,6 @@ describe("DialogmoteInnkallingSkjema", () => {
     );
   });
 });
-
-const changeFieldValue = (field: ReactWrapper<any, any>, newValue: string) => {
-  field.simulate("change", {
-    target: {
-      value: newValue,
-    },
-  });
-};
 
 const expectedArbeidsgiverInnkalling = [
   {
