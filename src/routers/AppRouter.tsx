@@ -30,6 +30,7 @@ import { useAppSelector } from "../hooks/hooks";
 import DialogmoteReferatContainer from "../components/dialogmote/referat/DialogmoteReferatContainer";
 import { useUserProperties } from "../data/logging/loggingHooks";
 import { setUserProperties } from "../amplitude/amplitude";
+import EndreDialogmoteContainer from "../components/dialogmote/endre/EndreDialogmoteContainer";
 
 const getFnrFromParams = (): string => {
   return window.location.pathname.split("/")[2];
@@ -80,6 +81,13 @@ const AktivBrukerRouter = (): ReactElement => {
           path="/sykefravaer/dialogmote/:dialogmoteUuid/referat"
           exact
           component={DialogmoteReferatContainer}
+        />
+      )}
+      {erLokalEllerPreprod && (
+        <Route
+          path="/sykefravaer/dialogmote/:dialogmoteUuid/endre"
+          exact
+          component={EndreDialogmoteContainer}
         />
       )}
       <Route

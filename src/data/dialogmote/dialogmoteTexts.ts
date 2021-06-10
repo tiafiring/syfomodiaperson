@@ -27,6 +27,16 @@ export const innkallingTexts = {
   },
 };
 
+export const endreTidStedTexts = {
+  intro1:
+    "Du har tidligere blitt innkalt til et dialogmøte. Møtet skulle vært avholdt",
+  intro2: "Møtet må flyttes. Dette tidspunktet og møtestedet gjelder nå:",
+
+  moteTidTitle: "Møtetidspunkt",
+  moteStedTitle: "Møtested",
+  videoLinkTitle: "Lenke til videomøte",
+};
+
 export const avlysningTexts = {
   intro1: "NAV har tidligere innkalt til dialogmøtet som skulle vært avholdt",
   intro2: "Dette møtet er avlyst.",

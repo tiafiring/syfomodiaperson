@@ -1,22 +1,21 @@
 import React, { ReactElement, useState } from "react";
-import { Knapp } from "nav-frontend-knapper";
-import { Field, useFormState } from "react-final-form";
+import { useFormState } from "react-final-form";
 import DialogmoteInnkallingSkjemaSeksjon from "./DialogmoteInnkallingSkjemaSeksjon";
 import styled from "styled-components";
-import { FlexColumn, FlexRow, PaddingSize } from "../../Layout";
 import { Innholdstittel } from "nav-frontend-typografi";
 import { DialogmoteInnkallingSkjemaValues } from "./DialogmoteInnkallingSkjema";
 import { useForhandsvisInnkalling } from "../../../hooks/dialogmote/useForhandsvisInnkalling";
 import { Forhandsvisning } from "../Forhandsvisning";
 import { AlertstripeFullbredde } from "../../AlertstripeFullbredde";
-import Fritekst from "../../Fritekst";
+import FritekstSeksjon from "../FritekstSeksjon";
+
+export const MAX_LENGTH_INNKALLING_FRITEKST = 1000;
 
 export const texts = {
   title: "Tekster i innkallingen",
   alert: "Hvis du vil føye til noe i standardtekstene, kan du skrive det her.",
   arbeidstakerLabel: "Fritekst til arbeidstakeren (valgfri)",
   arbeidsgiverLabel: "Fritekst til nærmeste leder (valgfri)",
-  forhandsvisning: "Forhåndsvisning",
   forhandsvisningTitle: "Innkalling til dialogmøte",
   forhandsvisningArbeidstakerSubtitle: "(brev til arbeidstakeren)",
   forhandsvisningArbeidstakerContentLabel:
@@ -26,53 +25,13 @@ export const texts = {
     "Forhåndsvis innkalling til dialogmøte arbeidsgiver",
 };
 
-export const MAX_LENGTH_INNKALLING_FRITEKST = 1000;
-
-interface FritekstSeksjonProps {
-  fieldName: string;
-  label: string;
-  handlePreviewClick: () => void;
-}
-
 const TeksterAlert = styled(AlertstripeFullbredde)`
-  margin-bottom: 4em;
-`;
-
-const FritekstWrapper = styled.div`
   margin-bottom: 4em;
 `;
 
 const TeksterTittel = styled(Innholdstittel)`
   margin-bottom: 0.5em;
 `;
-
-const FritekstSeksjon = ({
-  fieldName,
-  label,
-  handlePreviewClick,
-}: FritekstSeksjonProps) => (
-  <FritekstWrapper>
-    <FlexRow bottomPadding={PaddingSize.SM}>
-      <FlexColumn flex={1}>
-        <Field<string> name={fieldName}>
-          {({ input }) => (
-            <Fritekst
-              size="medium"
-              maxLength={MAX_LENGTH_INNKALLING_FRITEKST}
-              label={label}
-              {...input}
-            />
-          )}
-        </Field>
-      </FlexColumn>
-    </FlexRow>
-    <FlexRow>
-      <Knapp htmlType="button" onClick={handlePreviewClick}>
-        {texts.forhandsvisning}
-      </Knapp>
-    </FlexRow>
-  </FritekstWrapper>
-);
 
 const DialogmoteInnkallingTekster = (): ReactElement => {
   const { values } = useFormState<DialogmoteInnkallingSkjemaValues>();
@@ -96,6 +55,7 @@ const DialogmoteInnkallingTekster = (): ReactElement => {
         fieldName="fritekstArbeidstaker"
         label={texts.arbeidstakerLabel}
         handlePreviewClick={() => setDisplayInnkallingArbeidstakerPreview(true)}
+        maxLength={MAX_LENGTH_INNKALLING_FRITEKST}
       />
       <Forhandsvisning
         title={texts.forhandsvisningTitle}
@@ -109,6 +69,7 @@ const DialogmoteInnkallingTekster = (): ReactElement => {
         fieldName="fritekstArbeidsgiver"
         label={texts.arbeidsgiverLabel}
         handlePreviewClick={() => setDisplayInnkallingArbeidsgiverPreview(true)}
+        maxLength={MAX_LENGTH_INNKALLING_FRITEKST}
       />
       <Forhandsvisning
         title={texts.forhandsvisningTitle}

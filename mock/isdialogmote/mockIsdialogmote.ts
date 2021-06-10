@@ -36,4 +36,11 @@ export const mockIsdialogmote = (server) => {
       res.sendStatus(200);
     }
   );
+
+  server.post(
+    "/isdialogmote/api/post/v1/dialogmote/:moteuuid/tidsted",
+    (req, res) => {
+      res.sendStatus(200);
+    }
+  );
 };
