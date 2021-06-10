@@ -46,7 +46,7 @@ const TeksterTittel = styled(Innholdstittel)`
   margin-bottom: 0.5em;
 `;
 
-const FritekstSeksjon = ({
+export const FritekstSeksjon = ({
   fieldName,
   label,
   handlePreviewClick,

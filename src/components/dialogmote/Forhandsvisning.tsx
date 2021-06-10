@@ -119,10 +119,14 @@ export const Forhandsvisning = ({
       <ModalContentContainer data-cy="ForhåndsvisningModal">
         <FlexRow
           topPadding={PaddingSize.SM}
-          bottomPadding={PaddingSize.MD}
           justifyContent={JustifyContentType.CENTER}
         >
           <Sidetittel>{title}</Sidetittel>
+        </FlexRow>
+        <FlexRow
+          bottomPadding={PaddingSize.MD}
+          justifyContent={JustifyContentType.CENTER}
+        >
           <Innholdstittel>{subtitle}</Innholdstittel>
         </FlexRow>
         {documentComponents().map((component, index) => (
