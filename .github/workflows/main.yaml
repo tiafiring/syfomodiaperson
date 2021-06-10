@@ -31,9 +31,21 @@ jobs:
       - name: Prettier check 💅
         run: |
           npx prettier --check .
-      - name: Run tests
+      - name: Run unit tests
         run: |
           npm run test
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm start
+          wait-on: 'http://localhost:8080/sykefravaer'
+          headless: true
+      - name: Upload screenshots if Cypress tests failed
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
       - name: Security audit
         run: |
           npm run sec-audit

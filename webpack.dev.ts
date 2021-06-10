@@ -23,7 +23,9 @@ module.exports = merge(common, {
         const filename = path.join(compiler.outputPath, "index.html");
         compiler.outputFileSystem.readFile(filename, (err, result) => {
           if (err) {
-            res.sendFile(path.resolve(__dirname, "public/error.html"));
+            res
+              .status(404)
+              .sendFile(path.resolve(__dirname, "public/error.html"));
             return;
           }
 
