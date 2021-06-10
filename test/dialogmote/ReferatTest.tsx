@@ -5,16 +5,17 @@ import Referat from "../../src/components/dialogmote/referat/Referat";
 import { createStore } from "redux";
 import { rootReducer } from "../../src/data/rootState";
 import configureStore from "redux-mock-store";
-import { mount, ReactWrapper } from "enzyme";
+import { mount } from "enzyme";
 import {
   DialogmoteDTO,
   DialogmoteStatus,
 } from "../../src/data/dialogmote/types/dialogmoteTypes";
 import { Feilmelding, Innholdstittel } from "nav-frontend-typografi";
 import { expect } from "chai";
-import { Checkbox, Feiloppsummering } from "nav-frontend-skjema";
+import { Feiloppsummering } from "nav-frontend-skjema";
 import { texts as skjemaFeilOppsummeringTexts } from "../../src/components/SkjemaFeiloppsummering";
 import { texts as valideringsTexts } from "../../src/utils/valideringUtils";
+import { assertFeilmelding, changeFieldValue } from "../testUtils";
 
 const realState = createStore(rootReducer).getState();
 const store = configureStore([]);
@@ -22,11 +23,13 @@ const arbeidstakerPersonIdent = "05087321470";
 const arbeidstakerNavn = "Arne Arbeidstaker";
 const veilederNavn = "Vetle Veileder";
 const moteUuid = "123abc";
+const lederNavn = "Grønn Bamse";
 const mote: DialogmoteDTO = {
   arbeidsgiver: {
     virksomhetsnummer: "912345678",
     type: "ARBEIDSGIVER",
     varselList: [],
+    lederNavn: lederNavn,
   },
   arbeidstaker: {
     personIdent: arbeidstakerPersonIdent,
@@ -58,6 +61,9 @@ const mockState = {
       },
     },
   },
+  valgtbruker: {
+    personident: arbeidstakerPersonIdent,
+  },
 };
 
 describe("ReferatTest", () => {
@@ -79,7 +85,7 @@ describe("ReferatTest", () => {
     );
   });
 
-  it("viser alle deltakere forhåndsvalgt og mulig å velge bort", () => {
+  it("viser alle deltakere forhåndsutfylt med nærmeste leder redigerbar og påkrevd", () => {
     const wrapper = mount(
       <MemoryRouter
         initialEntries={[`/sykefravaer/dialogmote/${moteUuid}/referat`]}
@@ -92,52 +98,39 @@ describe("ReferatTest", () => {
       </MemoryRouter>
     );
 
-    const checkboxes = wrapper.find(Checkbox);
-    const arbeidstakerCheckbox = checkboxes.at(0);
-    const arbeidsgiverCheckbox = checkboxes.at(1);
-    const veilederCheckbox = checkboxes.at(2);
+    expect(
+      wrapper
+        .find("li")
+        .findWhere((li) => li.text() === `Fra NAV: ${veilederNavn}`)
+    ).to.exist;
+    expect(
+      wrapper
+        .find("li")
+        .findWhere((li) => li.text() === `Arbeidstaker: ${arbeidstakerNavn}`)
+    ).to.exist;
 
-    expect(arbeidstakerCheckbox.props().checked).to.be.true;
-    expect(arbeidsgiverCheckbox.props().checked).to.be.true;
-    expect(veilederCheckbox.props().checked).to.be.true;
+    const getNaermesteLederInput = () =>
+      wrapper
+        .find("input")
+        .findWhere((input) => input.prop("name") === "naermesteLeder");
 
-    expect(arbeidstakerCheckbox.props().disabled).to.be.undefined;
-    expect(arbeidsgiverCheckbox.props().disabled).to.be.undefined;
-    expect(veilederCheckbox.props().disabled).to.be.undefined;
-  });
+    // Sjekk nærmeste leder preutfylt
+    let naermesteLederInput = getNaermesteLederInput();
+    expect(naermesteLederInput.prop("value")).to.equal(lederNavn);
 
-  it("validerer at arbeidstaker må være deltaker", () => {
-    const wrapper = mount(
-      <MemoryRouter
-        initialEntries={[`/sykefravaer/dialogmote/${moteUuid}/referat`]}
-      >
-        <Route path="/sykefravaer/dialogmote/:dialogmoteUuid/referat">
-          <Provider store={store({ ...realState, ...mockState })}>
-            <Referat dialogmote={mote} pageTitle="Test" />
-          </Provider>
-        </Route>
-      </MemoryRouter>
-    );
-
-    // Fjern avhuking på arbeidstaker og submit
-    const arbeidstakerCheckbox = wrapper.find(Checkbox).first();
-    arbeidstakerCheckbox
-      .find("input")
-      .simulate("change", { target: { checked: false } });
+    // Sjekk at nærmeste leder valideres
+    changeFieldValue(naermesteLederInput, "");
     wrapper.find("form").simulate("submit");
-
-    // Sjekk at feilmelding finnes i skjema og oppsummering
     assertFeilmelding(
       wrapper.find(Feilmelding),
-      valideringsTexts.deltakerArbeidstakerMissing
+      valideringsTexts.naermesteLederMissing
     );
-    const feiloppsummering = wrapper.find(Feiloppsummering);
-    expect(feiloppsummering.text()).to.contain(
-      skjemaFeilOppsummeringTexts.title
-    );
-    expect(feiloppsummering.text()).to.contain(
-      valideringsTexts.deltakerArbeidstakerMissing
-    );
+
+    // Sjekk at nærmeste leder kan endres
+    const endretNaermesteLeder = "Ny Leder";
+    changeFieldValue(naermesteLederInput, endretNaermesteLeder);
+    naermesteLederInput = getNaermesteLederInput();
+    expect(naermesteLederInput.prop("value")).to.equal(endretNaermesteLeder);
   });
 
   it("validerer alle fritekstfelter unntatt veileders oppgave", () => {
@@ -181,8 +174,3 @@ describe("ReferatTest", () => {
     );
   });
 });
-
-const assertFeilmelding = (
-  feilmeldinger: ReactWrapper<any, any>,
-  msg: string
-) => expect(feilmeldinger.someWhere((feil) => feil.text() === msg)).to.be.true;

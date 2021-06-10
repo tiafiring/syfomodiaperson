@@ -1,4 +1,4 @@
-import { mount, ReactWrapper } from "enzyme";
+import { mount } from "enzyme";
 import React from "react";
 import { MemoryRouter, Route } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -25,6 +25,7 @@ import {
 } from "../../src/data/dialogmote/dialogmoteTexts";
 import { Forhandsvisning } from "../../src/components/dialogmote/Forhandsvisning";
 import Lukknapp from "nav-frontend-lukknapp";
+import { assertFeilmelding, changeTextAreaValue } from "../testUtils";
 
 const realState = createStore(rootReducer).getState();
 const store = configureStore([]);
@@ -117,18 +118,14 @@ describe("AvlysDialogmoteSkjemaTest", () => {
 
     // Feilmeldinger i skjema
     const feilmeldinger = wrapper.find(Feilmelding);
-    expect(
-      feilmeldinger.someWhere(
-        (feil) =>
-          feil.text() === valideringsTexts.begrunnelseArbeidstakerMissing
-      )
-    ).to.be.true;
-    expect(
-      feilmeldinger.someWhere(
-        (feil) =>
-          feil.text() === valideringsTexts.begrunnelseArbeidsgiverMissing
-      )
-    ).to.be.true;
+    assertFeilmelding(
+      feilmeldinger,
+      valideringsTexts.begrunnelseArbeidstakerMissing
+    );
+    assertFeilmelding(
+      feilmeldinger,
+      valideringsTexts.begrunnelseArbeidsgiverMissing
+    );
 
     // Feilmeldinger i oppsummering
     const feiloppsummering = wrapper.find(Feiloppsummering);
@@ -157,18 +154,14 @@ describe("AvlysDialogmoteSkjemaTest", () => {
 
     // Feilmeldinger i skjema
     const feilmeldinger = wrapper.find(Feilmelding);
-    expect(
-      feilmeldinger.someWhere(
-        (feil) =>
-          feil.text() === valideringsTexts.begrunnelseArbeidstakerMissing
-      )
-    ).to.be.true;
-    expect(
-      feilmeldinger.someWhere(
-        (feil) =>
-          feil.text() === valideringsTexts.begrunnelseArbeidsgiverMissing
-      )
-    ).to.be.true;
+    assertFeilmelding(
+      feilmeldinger,
+      valideringsTexts.begrunnelseArbeidstakerMissing
+    );
+    assertFeilmelding(
+      feilmeldinger,
+      valideringsTexts.begrunnelseArbeidsgiverMissing
+    );
 
     // Feilmeldinger i oppsummering
     const feiloppsummering = wrapper.find(Feiloppsummering);
@@ -381,14 +374,3 @@ const expectedAvlysningArbeidstaker = [
     type: "PARAGRAPH",
   },
 ];
-
-const changeTextAreaValue = (
-  wrapper: ReactWrapper<any, any>,
-  textAreaName: string,
-  value: string
-) => {
-  const textAreas = wrapper.find("textarea");
-  textAreas
-    .findWhere((w) => w.prop("name") === textAreaName)
-    .simulate("change", { target: { value: value } });
-};
