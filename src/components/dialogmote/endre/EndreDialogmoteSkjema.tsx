@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 import { TrackedFlatknapp } from "../../buttons/TrackedFlatknapp";
 import Panel from "nav-frontend-paneler";
-import { FlexRow } from "../../Layout";
+import { FlexRow, PaddingSize } from "../../Layout";
 import { useAppSelector } from "../../../hooks/hooks";
 import { TrackedHovedknapp } from "../../buttons/TrackedHovedknapp";
 import { endreTidSted } from "../../../data/dialogmote/dialogmote_actions";
@@ -17,7 +17,7 @@ import {
   validerTidspunkt,
 } from "../../../utils/valideringUtils";
 import { useFeilUtbedret } from "../../../hooks/useFeilUtbedret";
-import DialogmoteInnkallingTidOgSted from "../innkalling/DialogmoteInnkallingTidOgSted";
+import DialogmoteTidOgSted from "../DialogmoteTidOgSted";
 import EndreDialogmoteTekster from "./EndreDialogmoteTekster";
 import { SkjemaFeiloppsummering } from "../../SkjemaFeiloppsummering";
 import { genererDato } from "../../mote/utils";
@@ -26,10 +26,13 @@ import {
   DialogmoteDTO,
   EndreTidStedDialogmoteDTO,
 } from "../../../data/dialogmote/types/dialogmoteTypes";
+import { AlertStripeFeil } from "nav-frontend-alertstriper";
 
 const texts = {
   send: "Lagre endringer",
   avbryt: "Avbryt",
+  errorMsg:
+    "Møtet kunne ikke avlyses på grunn av en midlertidig teknisk feil. Prøv igjen.",
 };
 
 const EndrePanel = styled(Panel)`
@@ -69,14 +72,19 @@ const EndreDialogmoteSkjema = ({ dialogmote, pageTitle }: Props) => {
   const dispatch = useDispatch();
   const fnr = useValgtPersonident();
 
+  const dato = dialogmote.tid.split("T")[0];
+  const klokkeslett = dialogmote.tid.split("T")[1].substr(0, 5);
+
   const initialValues: Partial<EndreTidStedSkjemaValues> = {
-    dato: dialogmote.tid.split("T")[0],
-    klokkeslett: dialogmote.tid.split("T")[1].substr(0, 5),
+    dato,
+    klokkeslett,
     sted: dialogmote.sted,
     videoLink: dialogmote.videoLink,
   };
 
-  const { senderInnkalling } = useAppSelector((state) => state.dialogmote);
+  const { endrerTidSted, endreTidStedFeilet } = useAppSelector(
+    (state) => state.dialogmote
+  );
 
   const {
     feilUtbedret,
@@ -84,7 +92,7 @@ const EndreDialogmoteSkjema = ({ dialogmote, pageTitle }: Props) => {
     updateFeilUtbedret,
   } = useFeilUtbedret();
 
-  const innkallingDocumentGenerator = useForhandsvisTidSted();
+  const forhandsvisEndreTidStedGenerator = useForhandsvisTidSted();
 
   const validate = (
     values: Partial<EndreTidStedSkjemaValues>
@@ -110,11 +118,17 @@ const EndreDialogmoteSkjema = ({ dialogmote, pageTitle }: Props) => {
     videoLink: values.videoLink,
     arbeidstaker: {
       begrunnelse: values.begrunnelseArbeidstaker,
-      endringsdokument: innkallingDocumentGenerator.arbeidstakerTidSted(values),
+      endringsdokument: forhandsvisEndreTidStedGenerator.arbeidstakerTidSted(
+        values,
+        dialogmote.tid
+      ),
     },
     arbeidsgiver: {
       begrunnelse: values.begrunnelseArbeidsgiver,
-      endringsdokument: innkallingDocumentGenerator.arbeidstakerTidSted(values),
+      endringsdokument: forhandsvisEndreTidStedGenerator.arbeidstakerTidSted(
+        values,
+        dialogmote.tid
+      ),
     },
   });
 
@@ -128,8 +142,13 @@ const EndreDialogmoteSkjema = ({ dialogmote, pageTitle }: Props) => {
       <Form initialValues={initialValues} onSubmit={submit} validate={validate}>
         {({ handleSubmit, submitFailed, errors }) => (
           <form onSubmit={handleSubmit}>
-            <DialogmoteInnkallingTidOgSted />
-            <EndreDialogmoteTekster />
+            <DialogmoteTidOgSted />
+            <EndreDialogmoteTekster opprinneligTid={dialogmote.tid} />
+            {endreTidStedFeilet && (
+              <FlexRow bottomPadding={PaddingSize.MD}>
+                <AlertStripeFeil>{texts.errorMsg}</AlertStripeFeil>
+              </FlexRow>
+            )}
             {submitFailed && !feilUtbedret && (
               <SkjemaFeiloppsummering errors={errors} />
             )}
@@ -138,7 +157,7 @@ const EndreDialogmoteSkjema = ({ dialogmote, pageTitle }: Props) => {
                 context={pageTitle}
                 onClick={resetFeilUtbedret}
                 htmlType="submit"
-                spinner={senderInnkalling}
+                spinner={endrerTidSted}
                 autoDisableVedSpinner
               >
                 {texts.send}

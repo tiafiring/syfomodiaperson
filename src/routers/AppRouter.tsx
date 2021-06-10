@@ -100,7 +100,6 @@ const AktivBrukerRouter = (): ReactElement => {
         exact
         component={BekreftMoteContainer}
       />
-
       <Route
         path="/sykefravaer/sykmeldinger"
         exact

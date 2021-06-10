@@ -10,8 +10,7 @@ import { useValgtPersonident } from "../../../hooks/useValgtBruker";
 import { AlertstripeFullbredde } from "../../AlertstripeFullbredde";
 
 const texts = {
-  pageTitle: "Innkalling til dialogmøte",
-  pageHeader: "Innkalling til dialogmøte",
+  title: "Innkalling til dialogmøte",
   alert:
     "I denne nye løsningen sender du innkalling, avlysning, endring av tidspunkt og referat. I Arena trenger du bare endre status til ferdig behandlet.",
 };
@@ -28,13 +27,13 @@ const DialogmoteInnkallingContainer = (): ReactElement => {
   const hentingFeilet = hentingLedereFeilet;
 
   return (
-    <Side fnr={fnr} tittel={texts.pageTitle} aktivtMenypunkt={MOETEPLANLEGGER}>
+    <Side fnr={fnr} tittel={texts.title} aktivtMenypunkt={MOETEPLANLEGGER}>
       <SideLaster henter={henter} hentingFeilet={hentingFeilet}>
-        <Sidetopp tittel={texts.pageHeader} />
+        <Sidetopp tittel={texts.title} />
         <DialogmoteInnkallingWarningAlert type="advarsel">
           {texts.alert}
         </DialogmoteInnkallingWarningAlert>
-        <DialogmoteInnkallingSkjema pageTitle={texts.pageTitle} />
+        <DialogmoteInnkallingSkjema pageTitle={texts.title} />
       </SideLaster>
     </Side>
   );

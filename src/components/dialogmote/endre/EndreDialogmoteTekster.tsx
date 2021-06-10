@@ -1,25 +1,31 @@
 import React, { useState } from "react";
 import { useFormState } from "react-final-form";
-import { FritekstSeksjon } from "../innkalling/DialogmoteInnkallingTekster";
 import { Forhandsvisning } from "../Forhandsvisning";
 import { EndreTidStedSkjemaValues } from "./EndreDialogmoteSkjema";
 import { useForhandsvisTidSted } from "../../../hooks/dialogmote/useForhandsvisTidSted";
+import FritekstSeksjon from "../FritekstSeksjon";
+
+const MAX_LENGTH_ENDRE_FRITEKST = 200;
 
 const texts = {
   send: "Lagre endringer",
   avbryt: "Avbryt",
-  begrunnelseArbeidsgiver: "Begrunnelse til arbeidsgiveren",
-  begrunnelseArbeidstaker: "Begrunnelse til nærmeste leder",
+  begrunnelseArbeidsgiver: "Begrunnelse til nærmeste leder",
+  begrunnelseArbeidstaker: "Begrunnelse til arbeidstakeren",
   forhandsvisningTitle: "Endret dialogmøte",
   forhandsvisningArbeidstakerSubtitle: "(brev til arbeidstakeren)",
   forhandsvisningArbeidstakerContentLabel:
     "Forhåndsvis endring av dialogmøte arbeidstaker",
   forhandsvisningArbeidsgiverSubtitle: "(brev til nærmeste leder)",
   forhandsvisningArbeidsgiverContentLabel:
-    "Forhåndsvis endring ab dialogmøte arbeidsgiver",
+    "Forhåndsvis endring av dialogmøte arbeidsgiver",
 };
 
-const EndreDialogmoteTekster = () => {
+interface Props {
+  opprinneligTid: string;
+}
+
+const EndreDialogmoteTekster = ({ opprinneligTid }: Props) => {
   const { values } = useFormState<EndreTidStedSkjemaValues>();
   const [
     displayEndringArbeidstakerPreview,
@@ -37,6 +43,7 @@ const EndreDialogmoteTekster = () => {
         fieldName="begrunnelseArbeidstaker"
         label={texts.begrunnelseArbeidstaker}
         handlePreviewClick={() => setDisplayEndringArbeidstakerPreview(true)}
+        maxLength={MAX_LENGTH_ENDRE_FRITEKST}
       />
       <Forhandsvisning
         title={texts.forhandsvisningTitle}
@@ -44,12 +51,13 @@ const EndreDialogmoteTekster = () => {
         contentLabel={texts.forhandsvisningArbeidstakerContentLabel}
         isOpen={displayEndringArbeidstakerPreview}
         handleClose={() => setDisplayEndringArbeidstakerPreview(false)}
-        documentComponents={() => arbeidstakerTidSted(values)}
+        documentComponents={() => arbeidstakerTidSted(values, opprinneligTid)}
       />
       <FritekstSeksjon
         fieldName="begrunnelseArbeidsgiver"
         label={texts.begrunnelseArbeidsgiver}
         handlePreviewClick={() => setDisplayEndringArbeidsgiverPreview(true)}
+        maxLength={MAX_LENGTH_ENDRE_FRITEKST}
       />
       <Forhandsvisning
         title={texts.forhandsvisningTitle}
@@ -57,7 +65,7 @@ const EndreDialogmoteTekster = () => {
         contentLabel={texts.forhandsvisningArbeidsgiverContentLabel}
         isOpen={displayEndringArbeidsgiverPreview}
         handleClose={() => setDisplayEndringArbeidsgiverPreview(false)}
-        documentComponents={() => arbeidsgiverTidSted(values)}
+        documentComponents={() => arbeidsgiverTidSted(values, opprinneligTid)}
       />
     </>
   );

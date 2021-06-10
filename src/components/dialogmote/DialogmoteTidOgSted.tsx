@@ -1,11 +1,11 @@
 import React, { ReactElement } from "react";
 import { Input, Label } from "nav-frontend-skjema";
 import { Field } from "react-final-form";
-import KlokkeslettField from "../../KlokkeslettField";
-import Datovelger from "../../Datovelger";
-import DialogmoteInnkallingSkjemaSeksjon from "./DialogmoteInnkallingSkjemaSeksjon";
+import KlokkeslettField from "../KlokkeslettField";
+import Datovelger from "../Datovelger";
+import DialogmoteInnkallingSkjemaSeksjon from "./innkalling/DialogmoteInnkallingSkjemaSeksjon";
 import styled from "styled-components";
-import { FlexColumn, FlexRow, PaddingSize } from "../../Layout";
+import { FlexColumn, FlexRow, PaddingSize } from "../Layout";
 import { Innholdstittel } from "nav-frontend-typografi";
 
 const texts = {
@@ -27,7 +27,7 @@ const TidOgStedTittel = styled(Innholdstittel)`
   margin-bottom: 1em;
 `;
 
-const DialogmoteInnkallingTidOgSted = (): ReactElement => {
+const DialogmoteTidOgSted = (): ReactElement => {
   const datoField = "dato";
   const klokkeslettField = "klokkeslett";
   const stedField = "sted";
@@ -83,4 +83,4 @@ const DialogmoteInnkallingTidOgSted = (): ReactElement => {
   );
 };
 
-export default DialogmoteInnkallingTidOgSted;
+export default DialogmoteTidOgSted;

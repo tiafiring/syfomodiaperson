@@ -17,11 +17,13 @@ import { DocumentComponentDto } from "../../data/dialogmote/types/dialogmoteType
 
 export interface ForhandsvisTidStedGenerator {
   arbeidsgiverTidSted(
-    values: Partial<EndreTidStedSkjemaValues>
+    values: Partial<EndreTidStedSkjemaValues>,
+    opprinneligTid: string
   ): DocumentComponentDto[];
 
   arbeidstakerTidSted(
-    values: Partial<EndreTidStedSkjemaValues>
+    values: Partial<EndreTidStedSkjemaValues>,
+    opprinneligTid: string
   ): DocumentComponentDto[];
 }
 
@@ -29,27 +31,35 @@ export const useForhandsvisTidSted = (): ForhandsvisTidStedGenerator => {
   const navBruker = useNavBrukerData();
   const hilsen = useForhandsvisningHilsen();
 
-  const arbeidsgiverTidSted = (values: Partial<EndreTidStedSkjemaValues>) => {
+  const arbeidsgiverTidSted = (
+    values: Partial<EndreTidStedSkjemaValues>,
+    opprinneligTid: string
+  ) => {
     const documentComponents = [
       arbeidsgiverIntro(navBruker),
-      ...fellesInfo(values),
-    ];
-
-    if (values.begrunnelseArbeidstaker) {
-      documentComponents.push(createParagraph(values.begrunnelseArbeidstaker));
-    }
-
-    return documentComponents;
-  };
-
-  const arbeidstakerTidSted = (values: Partial<EndreTidStedSkjemaValues>) => {
-    const documentComponents = [
-      arbeidstakerIntro(navBruker),
-      ...fellesInfo(values),
+      ...fellesInfo(values, opprinneligTid),
     ];
 
     if (values.begrunnelseArbeidsgiver) {
       documentComponents.push(createParagraph(values.begrunnelseArbeidsgiver));
+    }
+
+    documentComponents.push(...hilsen);
+
+    return documentComponents;
+  };
+
+  const arbeidstakerTidSted = (
+    values: Partial<EndreTidStedSkjemaValues>,
+    opprinneligTid: string
+  ) => {
+    const documentComponents = [
+      arbeidstakerIntro(navBruker),
+      ...fellesInfo(values, opprinneligTid),
+    ];
+
+    if (values.begrunnelseArbeidstaker) {
+      documentComponents.push(createParagraph(values.begrunnelseArbeidstaker));
     }
 
     documentComponents.push(...hilsen);
@@ -64,14 +74,15 @@ export const useForhandsvisTidSted = (): ForhandsvisTidStedGenerator => {
 };
 
 const fellesInfo = (
-  values: Partial<EndreTidStedSkjemaValues>
+  values: Partial<EndreTidStedSkjemaValues>,
+  opprinneligTid: string
 ): DocumentComponentDto[] => {
   const { dato, klokkeslett, sted, videoLink } = values;
 
   const components = [
     createParagraph(
       `${endreTidStedTexts.intro1} ${tilDatoMedUkedagOgManedNavnOgKlokkeslett(
-        genererDato(dato, klokkeslett)
+        opprinneligTid
       )}`
     ),
     createParagraph(endreTidStedTexts.intro2),

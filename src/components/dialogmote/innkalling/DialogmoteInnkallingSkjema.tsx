@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import Panel from "nav-frontend-paneler";
 import DialogmoteInnkallingVelgArbeidsgiver from "./DialogmoteInnkallingVelgArbeidsgiver";
-import DialogmoteInnkallingTidOgSted from "./DialogmoteInnkallingTidOgSted";
+import DialogmoteTidOgSted from "../DialogmoteTidOgSted";
 import DialogmoteInnkallingTekster from "./DialogmoteInnkallingTekster";
 import { Form } from "react-final-form";
 import {
@@ -135,7 +135,7 @@ const DialogmoteInnkallingSkjema = ({
         {({ handleSubmit, submitFailed, errors }) => (
           <form onSubmit={handleSubmit}>
             <DialogmoteInnkallingVelgArbeidsgiver />
-            <DialogmoteInnkallingTidOgSted />
+            <DialogmoteTidOgSted />
             <DialogmoteInnkallingTekster />
             {sendInnkallingFeilet && (
               <FlexRow bottomPadding={PaddingSize.MD}>
