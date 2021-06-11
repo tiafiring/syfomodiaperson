@@ -21,3 +21,7 @@ Du må ha Node installert.
 - Lint JS-kode med `npm run lint` eller `npm run lint:fix`
 
 Appen nås på [http://localhost:8080/sykefravaer](http://localhost:8080/sykefravaer)
+
+## Logger
+- Feil-logger: https://sentry.gc.nav.no/nav/syfomodiaperson/
+- Brukeradferds-logger: https://analytics.amplitude.com/nav/space/8uta1w0
