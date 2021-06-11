@@ -1,7 +1,7 @@
 # Cypress (https://docs.cypress.io/)
+
 - Rammeverk for å kjøre automatiske nettleser-tester, skrevet i JavaScript.
 - Testene kan kjøres lokalt, og det er også satt opp kjøring av alle tester ved push (Github Actions)
-
 
 ## Hvordan kjøre testene?
 
@@ -10,5 +10,6 @@
 - `npx cypress run`: Alternativ 2 - Kjører tester fra terminal uten UI
 
 ## Noen retningslinjer
+
 - Les gjennom Best Practices fra Cypress:
 - https://docs.cypress.io/guides/references/best-practices
