@@ -14,23 +14,31 @@ context("Avlys dialogmøte", () => {
   it("Tester feilhåndtering for manglende begrunnelse", () => {
     cy.dataCy("avlysMoteKnapp").click();
 
-    cy.dataCy("begrunnelseArbeidstakerTextArea")
-      .should("have.attr", "aria-invalid")
-      .and("equal", "false");
+    cy.dataCy("begrunnelseArbeidstakerTextArea").should(
+      "have.attr",
+      "aria-invalid",
+      "false"
+    );
 
-    cy.dataCy("begrunnelseArbeidsgiverTextArea")
-      .should("have.attr", "aria-invalid")
-      .and("equal", "false");
+    cy.dataCy("begrunnelseArbeidsgiverTextArea").should(
+      "have.attr",
+      "aria-invalid",
+      "false"
+    );
 
     cy.dataCy("sendAvlysningKnapp").click();
 
-    cy.dataCy("begrunnelseArbeidstakerTextArea")
-      .should("have.attr", "aria-invalid")
-      .and("equal", "true");
+    cy.dataCy("begrunnelseArbeidstakerTextArea").should(
+      "have.attr",
+      "aria-invalid",
+      "true"
+    );
 
-    cy.dataCy("begrunnelseArbeidsgiverTextArea")
-      .should("have.attr", "aria-invalid")
-      .and("equal", "true");
+    cy.dataCy("begrunnelseArbeidsgiverTextArea").should(
+      "have.attr",
+      "aria-invalid",
+      "true"
+    );
   });
 
   it("Går til avlys dialogmøte, sjekker forhåndsvisning og avbryter", () => {
