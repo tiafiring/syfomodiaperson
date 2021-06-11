@@ -18,7 +18,7 @@ const OppfoelgingsPlanerOversiktSide = ({
 
   useEffect(() => {
     dispatch(oppdialogActions.hentOppfoelgingsdialoger(fnr));
-  }, []);
+  }, [dispatch, fnr]);
 
   return (
     <SideFullbredde

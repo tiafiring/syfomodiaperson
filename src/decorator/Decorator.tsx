@@ -31,7 +31,7 @@ const Decorator = () => {
       dispatch(hentPersonAdresse(fnr));
       dispatch(sjekkTilgang(fnr));
     }
-  }, []);
+  }, [dispatch, fnr]);
 
   const handlePersonsokSubmit = () => {
     window.location.reload();

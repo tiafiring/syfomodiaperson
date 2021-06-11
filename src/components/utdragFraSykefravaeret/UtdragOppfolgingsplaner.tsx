@@ -139,11 +139,11 @@ export const UtdragOppfolgingsplaner = ({
 
   useEffect(() => {
     dispatch(hentPersonOppgaver(fnr));
-  }, [fnr]);
+  }, [dispatch, fnr]);
 
   useEffect(() => {
     dispatch(hentOppfolgingsplanerLPS(fnr));
-  }, [personOppgaveList]);
+  }, [dispatch, personOppgaveList, fnr]);
 
   const oppfolgingsplanerlpsState: OppfolgingsplanerlpsState = useAppSelector(
     (state) => state.oppfolgingsplanerlps
@@ -166,7 +166,7 @@ export const UtdragOppfolgingsplaner = ({
     aktiveDialoger?.forEach((plan: OppfolgingsplanDTO) => {
       dispatch(hentVirksomhet(plan.virksomhet.virksomhetsnummer));
     });
-  }, [activeLpsPlaner, aktiveDialoger]);
+  }, [dispatch, activeLpsPlaner, aktiveDialoger]);
 
   const anyActivePlaner =
     aktiveDialoger?.length > 0 || activeLpsPlaner.length > 0;

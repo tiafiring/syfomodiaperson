@@ -60,11 +60,11 @@ const Personkort = () => {
       dispatch(hentLedere(brukerFnr));
       dispatch(hentSykmeldinger(brukerFnr));
     }
-  }, [brukerFnr]);
+  }, [dispatch, brukerFnr]);
 
   useEffect(() => {
     dispatch(hentOppfolgingstilfelleperioder(brukerFnr));
-  }, [ledere]);
+  }, [dispatch, ledere, brukerFnr]);
 
   return (
     <div className="personkort">

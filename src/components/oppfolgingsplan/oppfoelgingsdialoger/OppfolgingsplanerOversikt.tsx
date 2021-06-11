@@ -109,7 +109,7 @@ const OppfolgingsplanerOversikt = (
     virksomhetsnummerSet.forEach((virksomhetsnummer: string) => {
       dispatch(hentVirksomhet(virksomhetsnummer));
     });
-  }, []);
+  }, [dispatch, aktiveDialoger, inaktiveDialoger, oppfolgingsplanerLPS]);
 
   aktiveDialoger.sort((a, b) => {
     return (

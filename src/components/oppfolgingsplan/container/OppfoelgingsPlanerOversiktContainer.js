@@ -28,11 +28,11 @@ const OppfoelgingsPlanerOversiktSide = ({
     dispatch(oppdialogActions.hentOppfoelgingsdialoger(fnr));
     dispatch(hentOppfolgingsplanerLPS(fnr));
     dispatch(hentPersonOppgaver(fnr));
-  }, []);
+  }, [dispatch, fnr]);
 
   useEffect(() => {
     dispatch(hentOppfolgingsplanerLPS(fnr));
-  }, [personOppgaveList]);
+  }, [dispatch, fnr, personOppgaveList]);
 
   return (
     <Side

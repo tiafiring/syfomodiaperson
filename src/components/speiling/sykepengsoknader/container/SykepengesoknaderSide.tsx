@@ -32,7 +32,7 @@ const SykepengesoknaderSide = () => {
 
   useEffect(() => {
     dispatch(hentSoknader(fnr));
-  }, []);
+  }, [dispatch, fnr]);
 
   const brodsmuler = [
     {

@@ -201,6 +201,7 @@ const PengestoppModal = ({
       contentLabel={texts.stansSykepenger}
       isOpen={isOpen}
       closeButton={true}
+      ariaHideApp={false}
       onRequestClose={() => {
         handleCloseModal();
         setStopped(false);

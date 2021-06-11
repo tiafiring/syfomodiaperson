@@ -15,7 +15,7 @@ export interface loggingMetadata {
   behandlendeEnhetNavn: string;
 }
 
-export const hasLoadedMetaData = (): boolean => {
+export const useHasLoadedMetaData = (): boolean => {
   const harHentetBehandlendeEnhet = useSelector(
     (state: RootState) => !!state.behandlendeEnhet.data.enhetId
   );

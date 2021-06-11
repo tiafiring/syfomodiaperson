@@ -41,7 +41,7 @@ const VedtakContainer = () => {
   useEffect(() => {
     dispatch(hentVedtak(fnr));
     dispatch(sjekkTilgang(fnr));
-  }, []);
+  }, [dispatch, fnr]);
 
   const harForsoktHentetAlt = vedtakState.hentingForsokt;
   const hentingFeilet = vedtakState.hentingFeilet;
