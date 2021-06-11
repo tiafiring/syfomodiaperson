@@ -23,3 +23,14 @@ export interface DialogmotedeltakerAnnenDTO {
   readonly funksjon: string;
   readonly navn: string;
 }
+
+export interface NewDialogmoteReferatDTO {
+  narmesteLederNavn: string;
+  situasjon: string;
+  konklusjon: string;
+  arbeidstakerOppgave: string;
+  arbeidsgiverOppgave: string;
+  veilederOppgave?: string;
+  document: DocumentComponentDto[];
+  andreDeltakere: Pick<DialogmotedeltakerAnnenDTO, "funksjon" | "navn">[];
+}

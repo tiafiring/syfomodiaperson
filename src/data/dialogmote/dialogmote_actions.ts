@@ -4,6 +4,7 @@ import {
   AvlysDialogmoteDTO,
   EndreTidStedDialogmoteDTO,
 } from "./types/dialogmoteTypes";
+import { NewDialogmoteReferatDTO } from "./types/dialogmoteReferatTypes";
 
 export enum DialogmoteActionTypes {
   OPPRETT_INNKALLING_FORESPURT = "OPPRETT_INNKALLING_FORESPURT",
@@ -21,6 +22,10 @@ export enum DialogmoteActionTypes {
   ENDRER_TID_STED = "ENDRE_TID_STED",
   ENDRE_TID_STED_FEILET = "ENDRE_TID_STED_FEILET",
   ENDRE_TID_STED_FULLFORT = "ENDRE_TID_STED_FULLFORT",
+  FERDIGSTILL_MOTE_FORESPURT = "FERDIGSTILL_MOTE_FORESPURT",
+  FERDIGSTILLER_MOTE = "FERDIGSTILLER_MOTE",
+  FERDIGSTILL_MOTE_FEILET = "FERDIGSTILL_MOTE_FEILET",
+  FERDIGSTILL_MOTE_FULLFORT = "FERDIGSTILL_MOTE_FULLFORT",
 }
 
 export interface OpprettInnkallingAction {
@@ -93,6 +98,25 @@ export interface EndreTidStedFullfortAction {
   type: DialogmoteActionTypes.ENDRE_TID_STED_FULLFORT;
 }
 
+export interface FerdigstillMoteAction {
+  type: DialogmoteActionTypes.FERDIGSTILL_MOTE_FORESPURT;
+  fnr: string;
+  moteUuid: string;
+  data: NewDialogmoteReferatDTO;
+}
+
+export interface FerdigstillerMoteAction {
+  type: DialogmoteActionTypes.FERDIGSTILLER_MOTE;
+}
+
+export interface FerdigstillMoteFeiletAction {
+  type: DialogmoteActionTypes.FERDIGSTILL_MOTE_FEILET;
+}
+
+export interface FerdigstillMoteFullfortAction {
+  type: DialogmoteActionTypes.FERDIGSTILL_MOTE_FULLFORT;
+}
+
 export type DialogmoteActions =
   | OpprettInnkallingAction
   | OppretterInnkallingAction
@@ -108,7 +132,11 @@ export type DialogmoteActions =
   | EndreTidStedAction
   | EndrerTidStedAction
   | EndreTidStedFeiletAction
-  | EndreTidStedFullfortAction;
+  | EndreTidStedFullfortAction
+  | FerdigstillMoteAction
+  | FerdigstillerMoteAction
+  | FerdigstillMoteFeiletAction
+  | FerdigstillMoteFullfortAction;
 
 export const opprettInnkalling = (
   fnr: string,
@@ -189,4 +217,27 @@ export const endreTidStedFeilet = (): EndreTidStedFeiletAction => ({
 
 export const endreTidStedFullfort = (): EndreTidStedFullfortAction => ({
   type: DialogmoteActionTypes.ENDRE_TID_STED_FULLFORT,
+});
+
+export const ferdigstillMote = (
+  moteUuid: string,
+  fnr: string,
+  data: NewDialogmoteReferatDTO
+): FerdigstillMoteAction => ({
+  type: DialogmoteActionTypes.FERDIGSTILL_MOTE_FORESPURT,
+  fnr,
+  moteUuid,
+  data,
+});
+
+export const ferdigstillerMote = (): FerdigstillerMoteAction => ({
+  type: DialogmoteActionTypes.FERDIGSTILLER_MOTE,
+});
+
+export const ferdigstillMoteFeilet = (): FerdigstillMoteFeiletAction => ({
+  type: DialogmoteActionTypes.FERDIGSTILL_MOTE_FEILET,
+});
+
+export const ferdigstillMoteFullfort = (): FerdigstillMoteFullfortAction => ({
+  type: DialogmoteActionTypes.FERDIGSTILL_MOTE_FULLFORT,
 });

@@ -9,6 +9,10 @@ import {
   EndreTidStedAction,
   endreTidStedFeilet,
   endreTidStedFullfort,
+  ferdigstillMoteFeilet,
+  ferdigstillMoteFullfort,
+  ferdigstillerMote,
+  FerdigstillMoteAction,
   FetchDialogmoteAction,
   fetchDialogmoteFailed,
   fetchDialogmoteSuccess,
@@ -67,6 +71,18 @@ function* endreTidStedDialogmote(action: EndreTidStedAction) {
   }
 }
 
+function* ferdigstillDialogmote(action: FerdigstillMoteAction) {
+  yield put(ferdigstillerMote());
+  try {
+    const path = `${process.env.REACT_APP_ISDIALOGMOTE_ROOT}/post/v1/dialogmote/${action.moteUuid}/ferdigstill`;
+    yield call(post, path, action.data);
+    yield put(ferdigstillMoteFullfort());
+    window.location.href = `/sykefravaer/moteoversikt`;
+  } catch (e) {
+    yield put(ferdigstillMoteFeilet());
+  }
+}
+
 export default function* dialogmoteSagas() {
   yield takeEvery(
     DialogmoteActionTypes.OPPRETT_INNKALLING_FORESPURT,
@@ -77,5 +93,9 @@ export default function* dialogmoteSagas() {
   yield takeEvery(
     DialogmoteActionTypes.ENDRE_TID_STED_FORESPURT,
     endreTidStedDialogmote
+  );
+  yield takeEvery(
+    DialogmoteActionTypes.FERDIGSTILL_MOTE_FORESPURT,
+    ferdigstillDialogmote
   );
 }

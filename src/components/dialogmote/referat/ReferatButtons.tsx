@@ -1,8 +1,10 @@
 import React, { ReactElement } from "react";
-import { Flatknapp, Knapp } from "nav-frontend-knapper";
+import { Knapp } from "nav-frontend-knapper";
 import { FlexRow, PaddingSize } from "../../Layout";
 import styled from "styled-components";
 import { TrackedHovedknapp } from "../../buttons/TrackedHovedknapp";
+import { Link } from "react-router-dom";
+import { TrackedFlatknapp } from "../../buttons/TrackedFlatknapp";
 
 const texts = {
   send: "Lagre og send",
@@ -13,8 +15,8 @@ const texts = {
 interface ReferatButtonsProps {
   onSendClick: () => void;
   onPreviewClick: () => void;
-  onCancelClick: () => void;
   pageTitle: string;
+  showSendSpinner: boolean;
 }
 
 const HovedKnappRightMargin = styled(TrackedHovedknapp)`
@@ -24,8 +26,8 @@ const HovedKnappRightMargin = styled(TrackedHovedknapp)`
 const ReferatButtons = ({
   onSendClick,
   onPreviewClick,
-  onCancelClick,
   pageTitle,
+  showSendSpinner,
 }: ReferatButtonsProps): ReactElement => (
   <>
     <FlexRow topPadding={PaddingSize.MD}>
@@ -38,12 +40,16 @@ const ReferatButtons = ({
         context={pageTitle}
         htmlType="submit"
         onClick={onSendClick}
+        autoDisableVedSpinner
+        spinner={showSendSpinner}
       >
         {texts.send}
       </HovedKnappRightMargin>
-      <Flatknapp htmlType="button" onClick={onCancelClick}>
-        {texts.abort}
-      </Flatknapp>
+      <Link to={`/sykefravaer/moteoversikt`}>
+        <TrackedFlatknapp context={pageTitle} htmlType="button">
+          {texts.abort}
+        </TrackedFlatknapp>
+      </Link>
     </FlexRow>
   </>
 );
