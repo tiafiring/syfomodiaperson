@@ -269,10 +269,10 @@ describe("AvlysDialogmoteSkjemaTest", () => {
 
     let forhandsvisningModaler = wrapper.find(Forhandsvisning);
     expect(
-      forhandsvisningModaler.at(0).props().documentComponents()
+      forhandsvisningModaler.at(0).props().getDocumentComponents()
     ).to.deep.equal(expectedAvlysningArbeidstaker);
     expect(
-      forhandsvisningModaler.at(1).props().documentComponents()
+      forhandsvisningModaler.at(1).props().getDocumentComponents()
     ).to.deep.equal(expectedAvlysningArbeidsgiver);
 
     const previewButtons = wrapper.find(Knapp);

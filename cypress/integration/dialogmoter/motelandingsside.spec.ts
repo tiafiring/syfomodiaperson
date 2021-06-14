@@ -1,4 +1,5 @@
 import { MoteState } from "../../support/motelandingsside-commands";
+import { selectors } from "../../support/constants";
 
 context("Møtelandingsside actions", () => {
   beforeEach(() => {
@@ -30,13 +31,13 @@ context("Møtelandingsside actions", () => {
   it("Ser på referat og avlysningsbrev i møtehistorikk", () => {
     cy.dataCy("Avlysningsbrev").click();
 
-    cy.dataCy("ForhåndsvisningModal").contains("Avlysningsbrev");
+    cy.dataCy(selectors.forhandsvisningModal).contains("Avlysningsbrev");
 
     cy.contains("Lukk").click();
 
     cy.dataCy("Referat").click();
 
-    cy.dataCy("ForhåndsvisningModal").contains("Referat");
+    cy.dataCy(selectors.forhandsvisningModal).contains("Referat");
 
     cy.contains("Lukk").click();
   });

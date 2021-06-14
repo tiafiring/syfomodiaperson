@@ -33,6 +33,7 @@ export enum DocumentComponentType {
 
 export interface DocumentComponentDto {
   readonly type: DocumentComponentType;
+  readonly key?: string;
   readonly title?: string;
   readonly texts: string[];
 }

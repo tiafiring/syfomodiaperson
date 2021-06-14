@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { Form } from "react-final-form";
 import Panel from "nav-frontend-paneler";
 import { tilDatoMedManedNavn } from "../../../utils/datoUtils";
@@ -28,14 +28,19 @@ import { useAppSelector } from "../../../hooks/hooks";
 import { ferdigstillMote } from "../../../data/dialogmote/dialogmote_actions";
 import { FlexRow, PaddingSize } from "../../Layout";
 import { AlertStripeFeil } from "nav-frontend-alertstriper";
+import { Forhandsvisning } from "../Forhandsvisning";
+import { useForhandsvisReferat } from "../../../hooks/dialogmote/useForhandsvisReferat";
+import { StandardTekst } from "../../../data/dialogmote/dialogmoteTexts";
 
-const texts = {
+export const texts = {
   digitalReferat:
     "Referatet formidles her på nav.no. Det er bare de arbeidstakerne som har reservert seg mot digital kommunikasjon, som vil få referatet i posten.",
   personvern:
     "Du må aldri skrive sensitive opplysninger om helse, diagnose, behandling, og prognose. Dette gjelder også hvis arbeidstakeren er åpen om helsen og snakket om den i møtet.",
   errorMsg:
     "Referatet kunne ikke sendes på grunn av en midlertidig teknisk feil. Prøv igjen.",
+  forhandsvisningTitle: "Referat fra dialogmøte",
+  forhandsvisningContentLabel: "Forhåndsvis referat fra dialogmøte",
 };
 
 export interface ReferatSkjemaValues {
@@ -45,7 +50,7 @@ export interface ReferatSkjemaValues {
   arbeidstakersOppgave: string;
   arbeidsgiversOppgave: string;
   veiledersOppgave?: string;
-  standardtekster: string[];
+  standardtekster: StandardTekst[];
 }
 
 const ReferatTittel = styled(Innholdstittel)`
@@ -68,6 +73,7 @@ const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
     (state) => state.dialogmote
   );
   const navbruker = useNavBrukerData();
+  const [displayReferatPreview, setDisplayReferatPreview] = useState(false);
 
   const dateAndTimeForMeeting = tilDatoMedManedNavn(dialogmote.tid);
   const header = `${navbruker?.navn}, ${dateAndTimeForMeeting}, ${dialogmote.sted}`;
@@ -77,6 +83,7 @@ const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
     resetFeilUtbedret,
     updateFeilUtbedret,
   } = useFeilUtbedret();
+  const { generateReferatDocument } = useForhandsvisReferat(dialogmote);
 
   const validate = (values: Partial<ReferatSkjemaValues>) => {
     const feilmeldinger: Partial<ReferatSkjemaFeil> = {
@@ -98,7 +105,7 @@ const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
         arbeidsgiverOppgave: values.arbeidsgiversOppgave,
         arbeidstakerOppgave: values.arbeidstakersOppgave,
         veilederOppgave: values.veiledersOppgave,
-        document: [], // TODO: implementer ifm forhåndsvisning,
+        document: generateReferatDocument(values),
         andreDeltakere: [], // TODO: implementer ekstra deltakere,
       })
     );
@@ -111,7 +118,7 @@ const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
   return (
     <Panel>
       <Form onSubmit={submit} validate={validate} initialValues={initialValues}>
-        {({ handleSubmit, submitFailed, errors }) => (
+        {({ handleSubmit, submitFailed, errors, values }) => (
           <form onSubmit={handleSubmit}>
             <ReferatTittel>{header}</ReferatTittel>
             <ReferatWarningAlert type="advarsel">
@@ -138,8 +145,15 @@ const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
             <ReferatButtons
               pageTitle={pageTitle}
               onSendClick={resetFeilUtbedret}
-              onPreviewClick={() => console.log("PREVIEW!")}
+              onPreviewClick={() => setDisplayReferatPreview(true)}
               showSendSpinner={ferdigstillerMote}
+            />
+            <Forhandsvisning
+              title={texts.forhandsvisningTitle}
+              contentLabel={texts.forhandsvisningContentLabel}
+              isOpen={displayReferatPreview}
+              handleClose={() => setDisplayReferatPreview(false)}
+              getDocumentComponents={() => generateReferatDocument(values)}
             />
           </form>
         )}

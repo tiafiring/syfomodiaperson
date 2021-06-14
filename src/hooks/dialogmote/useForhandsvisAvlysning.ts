@@ -10,11 +10,11 @@ import { createParagraph } from "../../utils/documentComponentUtils";
 import { useForhandsvisningHilsen } from "./useForhandsvisningHilsen";
 
 export interface ForhandsvisAvlysningGenerator {
-  avlysningArbeidstaker(
+  generateAvlysningArbeidstakerDocument(
     values: Partial<AvlysDialogmoteSkjemaValues>
   ): DocumentComponentDto[];
 
-  avlysningArbeidsgiver(
+  generateAvlysningArbeidsgiverDocument(
     values: Partial<AvlysDialogmoteSkjemaValues>
   ): DocumentComponentDto[];
 }
@@ -33,7 +33,7 @@ export const useForhandsvisAvlysning = (
     )}. ${avlysningTexts.intro2}`
   );
 
-  const avlysningArbeidstaker = (
+  const generateAvlysningArbeidstakerDocument = (
     values: Partial<AvlysDialogmoteSkjemaValues>
   ): DocumentComponentDto[] => {
     const documentComponents = [gjelderText, introText];
@@ -44,7 +44,7 @@ export const useForhandsvisAvlysning = (
     return documentComponents;
   };
 
-  const avlysningArbeidsgiver = (
+  const generateAvlysningArbeidsgiverDocument = (
     values: Partial<AvlysDialogmoteSkjemaValues>
   ): DocumentComponentDto[] => {
     const documentComponents = [gjelderText, introText];
@@ -56,7 +56,7 @@ export const useForhandsvisAvlysning = (
   };
 
   return {
-    avlysningArbeidstaker,
-    avlysningArbeidsgiver,
+    generateAvlysningArbeidstakerDocument,
+    generateAvlysningArbeidsgiverDocument,
   };
 };

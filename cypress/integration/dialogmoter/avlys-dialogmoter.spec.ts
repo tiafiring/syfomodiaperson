@@ -1,4 +1,5 @@
 import { MoteState } from "../../support/motelandingsside-commands";
+import { selectors } from "../../support/constants";
 
 const texts = {
   begrunnelseArbeidstaker: "Ørsta rådhus",
@@ -12,29 +13,29 @@ context("Avlys dialogmøte", () => {
   });
 
   it("Tester feilhåndtering for manglende begrunnelse", () => {
-    cy.dataCy("avlysMoteKnapp").click();
+    cy.dataCy(selectors.avlysMoteKnapp).click();
 
-    cy.dataCy("begrunnelseArbeidstakerTextArea").should(
+    cy.dataCy(selectors.begrunnelseArbeidstakerTextArea).should(
       "have.attr",
       "aria-invalid",
       "false"
     );
 
-    cy.dataCy("begrunnelseArbeidsgiverTextArea").should(
+    cy.dataCy(selectors.begrunnelseArbeidsgiverTextArea).should(
       "have.attr",
       "aria-invalid",
       "false"
     );
 
-    cy.dataCy("sendAvlysningKnapp").click();
+    cy.dataCy(selectors.sendAvlysningKnapp).click();
 
-    cy.dataCy("begrunnelseArbeidstakerTextArea").should(
+    cy.dataCy(selectors.begrunnelseArbeidstakerTextArea).should(
       "have.attr",
       "aria-invalid",
       "true"
     );
 
-    cy.dataCy("begrunnelseArbeidsgiverTextArea").should(
+    cy.dataCy(selectors.begrunnelseArbeidsgiverTextArea).should(
       "have.attr",
       "aria-invalid",
       "true"
@@ -42,20 +43,24 @@ context("Avlys dialogmøte", () => {
   });
 
   it("Går til avlys dialogmøte, sjekker forhåndsvisning og avbryter", () => {
-    cy.dataCy("avlysMoteKnapp").click();
+    cy.dataCy(selectors.avlysMoteKnapp).click();
 
-    cy.dataCy("begrunnelseArbeidstakerTextArea").type(
+    cy.dataCy(selectors.begrunnelseArbeidstakerTextArea).type(
       texts.begrunnelseArbeidstaker
     );
-    cy.dataCy("begrunnelseArbeidstakerKnapp").click();
-    cy.dataCy("ForhåndsvisningModal").contains(texts.begrunnelseArbeidstaker);
+    cy.dataCy(selectors.begrunnelseArbeidstakerKnapp).click();
+    cy.dataCy(selectors.forhandsvisningModal).contains(
+      texts.begrunnelseArbeidstaker
+    );
     cy.contains("Lukk").click();
 
-    cy.dataCy("begrunnelseArbeidsgiverTextArea").type(
+    cy.dataCy(selectors.begrunnelseArbeidsgiverTextArea).type(
       texts.begrunnelseArbeidsgiver
     );
-    cy.dataCy("begrunnelseArbeidsgiverKnapp").click();
-    cy.dataCy("ForhåndsvisningModal").contains(texts.begrunnelseArbeidsgiver);
+    cy.dataCy(selectors.begrunnelseArbeidsgiverKnapp).click();
+    cy.dataCy(selectors.forhandsvisningModal).contains(
+      texts.begrunnelseArbeidsgiver
+    );
     cy.contains("Lukk").click();
 
     cy.contains("Avbryt").click();
@@ -63,13 +68,13 @@ context("Avlys dialogmøte", () => {
   });
 
   it("Avlyser møte", () => {
-    cy.dataCy("avlysMoteKnapp").click();
+    cy.dataCy(selectors.avlysMoteKnapp).click();
 
-    cy.dataCy("begrunnelseArbeidstakerTextArea").type(
+    cy.dataCy(selectors.begrunnelseArbeidstakerTextArea).type(
       texts.begrunnelseArbeidstaker
     );
 
-    cy.dataCy("begrunnelseArbeidsgiverTextArea").type(
+    cy.dataCy(selectors.begrunnelseArbeidsgiverTextArea).type(
       texts.begrunnelseArbeidsgiver
     );
 

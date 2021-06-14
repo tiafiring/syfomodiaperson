@@ -84,8 +84,8 @@ const AvlysDialogmoteSkjema = ({
     setDisplayAvlysningArbeidsgiverPreview,
   ] = useState(false);
   const {
-    avlysningArbeidstaker,
-    avlysningArbeidsgiver,
+    generateAvlysningArbeidstakerDocument,
+    generateAvlysningArbeidsgiverDocument,
   } = useForhandsvisAvlysning(dialogmote);
 
   const validate = (
@@ -104,11 +104,11 @@ const AvlysDialogmoteSkjema = ({
       avlysMote(dialogmote.uuid, fnr, {
         arbeidstaker: {
           begrunnelse: values.begrunnelseArbeidstaker,
-          avlysning: avlysningArbeidstaker(values),
+          avlysning: generateAvlysningArbeidstakerDocument(values),
         },
         arbeidsgiver: {
           begrunnelse: values.begrunnelseArbeidsgiver,
-          avlysning: avlysningArbeidsgiver(values),
+          avlysning: generateAvlysningArbeidsgiverDocument(values),
         },
       })
     );
@@ -133,7 +133,9 @@ const AvlysDialogmoteSkjema = ({
               contentLabel={texts.forhandsvisningArbeidstakerContentlabel}
               isOpen={displayAvlysningArbeidstakerPreview}
               handleClose={() => setDisplayAvlysningArbeidstakerPreview(false)}
-              documentComponents={() => avlysningArbeidstaker(values)}
+              getDocumentComponents={() =>
+                generateAvlysningArbeidstakerDocument(values)
+              }
             />
             <AvlysDialogmoteBegrunnelse
               fieldName="begrunnelseArbeidsgiver"
@@ -148,7 +150,9 @@ const AvlysDialogmoteSkjema = ({
               contentLabel={texts.forhandsvisningArbeidsgiverContentlabel}
               isOpen={displayAvlysningArbeidsgiverPreview}
               handleClose={() => setDisplayAvlysningArbeidsgiverPreview(false)}
-              documentComponents={() => avlysningArbeidsgiver(values)}
+              getDocumentComponents={() =>
+                generateAvlysningArbeidsgiverDocument(values)
+              }
             />
             {avlysMoteFeilet && (
               <FlexRow bottomPadding={PaddingSize.MD}>

@@ -118,14 +118,14 @@ const EndreDialogmoteSkjema = ({ dialogmote, pageTitle }: Props) => {
     videoLink: values.videoLink,
     arbeidstaker: {
       begrunnelse: values.begrunnelseArbeidstaker,
-      endringsdokument: forhandsvisEndreTidStedGenerator.arbeidstakerTidSted(
+      endringsdokument: forhandsvisEndreTidStedGenerator.generateArbeidstakerTidStedDocument(
         values,
         dialogmote.tid
       ),
     },
     arbeidsgiver: {
       begrunnelse: values.begrunnelseArbeidsgiver,
-      endringsdokument: forhandsvisEndreTidStedGenerator.arbeidstakerTidSted(
+      endringsdokument: forhandsvisEndreTidStedGenerator.generateArbeidstakerTidStedDocument(
         values,
         dialogmote.tid
       ),

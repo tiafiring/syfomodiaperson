@@ -1,7 +1,10 @@
 import { Element, Normaltekst } from "nav-frontend-typografi";
 import { Field } from "react-final-form";
 import React, { ReactElement } from "react";
-import { referatTexts } from "../../../data/dialogmote/dialogmoteTexts";
+import {
+  referatTexts,
+  StandardTekst,
+} from "../../../data/dialogmote/dialogmoteTexts";
 import styled from "styled-components";
 import { ReferatCheckbox } from "./ReferatCheckbox";
 import { FlexColumn, FlexRow, PaddingSize } from "../../Layout";
@@ -27,14 +30,20 @@ export const StandardTekster = (): ReactElement => (
     <FlexColumn flex={1}>
       <Header>{texts.header}</Header>
       <Subheader>{texts.subHeader}</Subheader>
-      {referatTexts.standardTekster.map(({ label, text }, index) => (
-        <Field<string>
+      {referatTexts.standardTekster.map((standardtekst, index) => (
+        <Field<StandardTekst>
           key={index}
           name="standardtekster"
           type="checkbox"
-          value={text}
+          value={standardtekst}
         >
-          {({ input }) => <ReferatCheckbox {...input} label={label} />}
+          {({ input }) => (
+            <ReferatCheckbox
+              {...input}
+              value={standardtekst.text}
+              label={standardtekst.label}
+            />
+          )}
         </Field>
       ))}
     </FlexColumn>
