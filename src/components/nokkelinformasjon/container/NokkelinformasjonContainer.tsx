@@ -52,7 +52,7 @@ export const NokkelinformasjonSide = () => {
     dispatch(hentOppfoelgingsdialoger(fnr));
     dispatch(hentOppfolgingstilfellerPersonUtenArbeidsiver(fnr));
     dispatch(hentOppfolgingstilfelleperioder(fnr));
-  }, [dispatch, fnr]);
+  }, [dispatch, fnr, ledereState]);
 
   return (
     <Side

@@ -17,11 +17,7 @@ import { useDispatch } from "react-redux";
 import { endreStatus } from "../../data/pengestopp/flaggperson_actions";
 import { useNavEnhet } from "../../hooks/useNavEnhet";
 import { useValgtPersonident } from "../../hooks/useValgtBruker";
-import {
-  useEndrerFlaggperson,
-  useHasServerErrors,
-  useIsStopped,
-} from "../../data/pengestopp/flaggperson_hooks";
+import { useFlaggperson } from "../../data/pengestopp/flaggperson_hooks";
 
 const texts = {
   notStoppedTittel:
@@ -103,10 +99,9 @@ const PengestoppModal = ({
 }: IPengestoppModal) => {
   const dispatch = useDispatch();
   const navEnhet = useNavEnhet();
-  const endrer = useEndrerFlaggperson();
-  const isStopped = useIsStopped();
-  const hasServerErrors = useHasServerErrors();
   const fnr = useValgtPersonident();
+
+  const { isStopped, hasServerErrors, endrerFlaggperson } = useFlaggperson();
 
   const stoppAutomatikkInitialState = {
     sykmeldtFnr: { value: fnr },
@@ -245,8 +240,8 @@ const PengestoppModal = ({
           <Knapp
             type="hoved"
             mini
-            spinner={endrer}
-            disabled={endrer}
+            spinner={endrerFlaggperson}
+            disabled={endrerFlaggperson}
             onClick={submit}
           >
             {texts.send}
