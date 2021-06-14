@@ -12,12 +12,12 @@ import { VedtakDTO } from "../../data/vedtak/vedtak";
 import navFarger from "nav-frontend-core";
 
 interface StyledPanelProps {
-  readonly isActive: boolean;
+  readonly selected: boolean;
 }
 
 const StyledPanel = styled(Panel)<StyledPanelProps>`
   background: ${(props) =>
-    props.isActive ? navFarger.navBlaLighten80 : navFarger.white};
+    props.selected ? navFarger.navBlaLighten80 : navFarger.white};
 `;
 
 const StyledButton = styled.button`
@@ -72,13 +72,13 @@ const VedtakEkspanderbartPanel = (
     if (orgnr) {
       dispatch(hentVirksomhet(orgnr));
     }
-  }, []);
+  }, [dispatch, orgnr]);
 
   useEffect(() => {
     if (virksomhetState[orgnr]?.hentet) {
       setArbeidsgiver(virksomhetState[orgnr].data[orgnr]);
     }
-  }, [virksomhetState]);
+  }, [virksomhetState, orgnr]);
 
   return (
     <StyledEkspanderbartPanel
@@ -86,7 +86,7 @@ const VedtakEkspanderbartPanel = (
     >
       {vedtakPerArbeidsgiver.map((v: VedtakDTO, index: number) => {
         return (
-          <StyledPanel key={index} isActive={v.id === selectedVedtak?.id}>
+          <StyledPanel key={index} selected={v.id === selectedVedtak?.id}>
             <StyledButton
               onClick={() => {
                 setSelectedVedtak(v);

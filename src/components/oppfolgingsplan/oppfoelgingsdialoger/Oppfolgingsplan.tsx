@@ -91,7 +91,7 @@ const Oppfolgingsplan = (oppfolgingsplanWrapperProps: OppfolgingsplanProps) => {
 
   useEffect(() => {
     dispatch(hentDokumentinfo(oppfolgingsplan.id));
-  }, []);
+  }, [dispatch, oppfolgingsplan.id]);
 
   return (() => {
     if (henter) {

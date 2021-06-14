@@ -41,7 +41,7 @@ export const DialogmoteSideContainer = ({
     if (!moterHentet) {
       dispatch(fetchDialogmote(fnr));
     }
-  }, [moterHentet]);
+  }, [dispatch, fnr, moterHentet]);
 
   const henter = henterMote;
   const hentingFeilet = henterMoteFeilet;

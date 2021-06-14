@@ -34,7 +34,7 @@ const SykmeldingerSide = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(hentSykmeldinger(fnr));
-  }, []);
+  }, [dispatch, fnr]);
 
   const htmlIntro = {
     __html: `<p>${texts.introduksjonstekst}</p>`,

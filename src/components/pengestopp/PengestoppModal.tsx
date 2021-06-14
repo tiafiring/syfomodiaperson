@@ -1,8 +1,8 @@
 import * as React from "react";
-import { SyntheticEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import ModalWrapper from "nav-frontend-modal";
 import { Knapp } from "nav-frontend-knapper";
-import { Systemtittel, Feilmelding } from "nav-frontend-typografi";
+import { Feilmelding, Systemtittel } from "nav-frontend-typografi";
 import { Checkbox, CheckboxGruppe } from "nav-frontend-skjema";
 import styled from "styled-components";
 import {
@@ -13,11 +13,11 @@ import {
   VirksomhetNr,
 } from "../../data/pengestopp/types/FlaggPerson";
 import { AlertStripeInfo } from "nav-frontend-alertstriper";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { endreStatus } from "../../data/pengestopp/flaggperson_actions";
-import { FlaggpersonState } from "../../data/pengestopp/flaggperson";
 import { useNavEnhet } from "../../hooks/useNavEnhet";
 import { useValgtPersonident } from "../../hooks/useValgtBruker";
+import { useFlaggperson } from "../../data/pengestopp/flaggperson_hooks";
 
 const texts = {
   notStoppedTittel:
@@ -97,102 +97,90 @@ const PengestoppModal = ({
   arbeidsgivere,
   toggle,
 }: IPengestoppModal) => {
-  const navEnhet = useNavEnhet();
-  const flaggperson: FlaggpersonState = useSelector(
-    (state: any) => state.flaggperson
-  );
-
   const dispatch = useDispatch();
-
-  const [stopped, setStopped] = useState(false);
-  const [selected, setSelected] = useState<VirksomhetNr[]>([]);
-  const [selectedArsakList, setSelectedArsakList] = useState<
-    SykepengestoppArsak[]
-  >([]);
-  const [submitError, setSubmitError] = useState<boolean>(false);
-  const [submitErrorArsak, setSubmitErrorArsak] = useState<boolean>(false);
-  const [serverError, setServerError] = useState<boolean>(false);
-
+  const navEnhet = useNavEnhet();
   const fnr = useValgtPersonident();
-  const [stoppAutomatikk, setStoppAutomatikk] = useState<StoppAutomatikk>({
+
+  const { isStopped, hasServerErrors, endrerFlaggperson } = useFlaggperson();
+
+  const stoppAutomatikkInitialState = {
     sykmeldtFnr: { value: fnr },
     arsakList: [],
     virksomhetNr: [],
     enhetNr: { value: navEnhet },
+  };
+
+  const [employerError, setEmployerError] = useState<boolean>(false);
+  const [aarsakError, setAarsakError] = useState<boolean>(false);
+  const [stoppAutomatikk, setStoppAutomatikk] = useState<StoppAutomatikk>({
+    ...stoppAutomatikkInitialState,
   });
 
-  useEffect(() => {
-    setStoppAutomatikk({ ...stoppAutomatikk, virksomhetNr: selected });
-  }, [selected]);
-
-  useEffect(() => {
-    setStoppAutomatikk({ ...stoppAutomatikk, arsakList: selectedArsakList });
-  }, [selectedArsakList]);
-
-  useEffect(() => {
-    if (
-      flaggperson.endret &&
-      !flaggperson.endrer &&
-      !flaggperson.endringFeilet
-    ) {
-      setStopped(true);
-    } else if (
-      !flaggperson.endret &&
-      !flaggperson.endrer &&
-      flaggperson.endringFeilet
-    ) {
-      setServerError(true);
-    }
-  }, [flaggperson]);
-
-  const handleStoppAutomatikkButtonPress = () => {
+  const submit = () => {
     if (stoppAutomatikk.virksomhetNr.length <= 0) {
-      setSubmitError(true);
+      setEmployerError(true);
     } else if (stoppAutomatikk.arsakList.length <= 0) {
-      setSubmitErrorArsak(true);
+      setAarsakError(true);
     } else {
       dispatch(endreStatus(stoppAutomatikk));
     }
   };
 
-  const handleChange = (event: SyntheticEvent<HTMLInputElement>) => {
-    const orgnr: VirksomhetNr = {
-      value: (event.target as HTMLInputElement).name,
-    };
-    const { checked } = event.target as HTMLInputElement;
+  const updateVirksomhetNr = (virksomhetNrList: VirksomhetNr[]) => {
+    setStoppAutomatikk({
+      ...stoppAutomatikk,
+      virksomhetNr: virksomhetNrList,
+    });
+  };
 
-    if (checked) {
-      setSubmitError(false);
-      setSelected([...selected, orgnr]);
+  const updateAarsakList = (arsakList: SykepengestoppArsak[]) => {
+    setStoppAutomatikk({
+      ...stoppAutomatikk,
+      arsakList: arsakList,
+    });
+  };
+
+  const handleChangeVirksomhet = (e: ChangeEvent<HTMLInputElement>) => {
+    const orgnr: VirksomhetNr = {
+      value: e.target.name,
+    };
+
+    if (e.target.checked) {
+      setEmployerError(false);
+      updateVirksomhetNr([...stoppAutomatikk.virksomhetNr, orgnr]);
     } else {
-      const filtered = selected.filter((virksomhetNr: VirksomhetNr) => {
-        return virksomhetNr.value !== orgnr.value;
-      });
-      setSelected(filtered);
+      const virksomhetListWithoutSelection = stoppAutomatikk.virksomhetNr.filter(
+        (virksomhetNr: VirksomhetNr) => {
+          return virksomhetNr.value !== orgnr.value;
+        }
+      );
+      updateVirksomhetNr(virksomhetListWithoutSelection);
     }
   };
 
-  const handleChangeArsak = (event: SyntheticEvent<HTMLInputElement>) => {
+  const handleChangeArsak = (e: ChangeEvent<HTMLInputElement>) => {
     const newArsakType: SykepengestoppArsakType =
-      SykepengestoppArsakType[(event.target as HTMLInputElement).name];
+      SykepengestoppArsakType[e.target.name];
     const newArsak = { type: newArsakType };
-    const { checked } = event.target as HTMLInputElement;
 
-    if (checked) {
-      setSubmitErrorArsak(false);
-      setSelectedArsakList([...selectedArsakList, newArsak]);
+    if (e.target.checked) {
+      setAarsakError(false);
+      updateAarsakList([...stoppAutomatikk.arsakList, newArsak]);
     } else {
-      const filtered = selectedArsakList.filter(
+      const aarsakListWithoutSelection = stoppAutomatikk.arsakList.filter(
         (arsak: SykepengestoppArsak) => {
           return newArsak.type !== arsak.type;
         }
       );
-      setSelectedArsakList(filtered);
+      updateAarsakList(aarsakListWithoutSelection);
     }
   };
 
   const handleCloseModal = () => {
-    setSelected([]);
+    setStoppAutomatikk({ ...stoppAutomatikkInitialState });
+    setEmployerError(false);
+    setAarsakError(false);
+
     toggle();
   };
 
@@ -201,19 +189,19 @@ const PengestoppModal = ({
       contentLabel={texts.stansSykepenger}
       isOpen={isOpen}
       closeButton={true}
+      ariaHideApp={false}
       onRequestClose={() => {
         handleCloseModal();
-        setStopped(false);
       }}
     >
-      <Systemtittel>{tittel(stopped)}</Systemtittel>
+      <Systemtittel>{tittel(isStopped)}</Systemtittel>
 
-      {!stopped ? (
+      {!isStopped ? (
         <>
           <Group>
             <CheckboxGruppe
               legend={texts.arbeidsgiver}
-              feil={submitError && texts.submitError}
+              feil={employerError && texts.submitError}
             >
               {arbeidsgivere.map(
                 (arbeidsgiver: Arbeidsgiver, index: number) => {
@@ -221,7 +209,7 @@ const PengestoppModal = ({
                     <Checkbox
                       key={index}
                       label={arbeidsgiver.navn}
-                      onChange={handleChange}
+                      onChange={handleChangeVirksomhet}
                       name={arbeidsgiver.orgnummer}
                     />
                   );
@@ -232,7 +220,7 @@ const PengestoppModal = ({
           <Group>
             <CheckboxGruppe
               legend={texts.arsak.title}
-              feil={submitErrorArsak && texts.arsak.submitError}
+              feil={aarsakError && texts.arsak.submitError}
             >
               {sykepengestoppArsakTekstListe.map((arsak, index: number) => {
                 return (
@@ -252,9 +240,9 @@ const PengestoppModal = ({
           <Knapp
             type="hoved"
             mini
-            spinner={flaggperson.endrer}
-            disabled={flaggperson.endrer}
-            onClick={handleStoppAutomatikkButtonPress}
+            spinner={endrerFlaggperson}
+            disabled={endrerFlaggperson}
+            onClick={submit}
           >
             {texts.send}
           </Knapp>
@@ -269,7 +257,7 @@ const PengestoppModal = ({
           </Group>
         </>
       )}
-      {serverError && (
+      {hasServerErrors && (
         <BottomGroup>
           <Feilmelding>{texts.serverError}</Feilmelding>
         </BottomGroup>

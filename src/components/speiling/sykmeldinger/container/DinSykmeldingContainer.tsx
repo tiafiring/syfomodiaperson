@@ -66,7 +66,7 @@ const DinSykmeldingSide = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(hentSykmeldinger(fnr));
-  }, []);
+  }, [dispatch, fnr]);
 
   const brodsmuler = [
     {

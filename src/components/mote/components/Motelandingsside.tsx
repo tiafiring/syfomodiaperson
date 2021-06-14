@@ -53,11 +53,11 @@ export const Motelandingsside = ({ fnr }: Props) => {
     dispatch(hentMotebehov(fnr));
     dispatch(hentSykmeldinger(fnr));
     dispatch(hentOppfoelgingsdialoger(fnr));
-  }, []);
+  }, [dispatch, fnr]);
 
   useEffect(() => {
     dispatch(hentOppfolgingstilfelleperioder(fnr));
-  }, [ledere, sykmeldinger]);
+  }, [dispatch, fnr, ledere, sykmeldinger]);
 
   useEffect(() => {
     aktiveDialoger?.forEach((plan) => {
@@ -65,7 +65,7 @@ export const Motelandingsside = ({ fnr }: Props) => {
         dispatch(hentVirksomhet(plan.virksomhet.virksomhetsnummer));
       }
     });
-  }, []);
+  }, [dispatch, aktiveDialoger]);
 
   const harForsoktHentetAlt =
     motebehov.hentingForsokt &&

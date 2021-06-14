@@ -4,7 +4,7 @@ import Personkort from "../components/personkort/Personkort";
 import Decorator from "../decorator/Decorator";
 import DocumentTitle from "react-document-title";
 import {
-  hasLoadedMetaData,
+  useHasLoadedMetaData,
   useTrackPageLoad,
 } from "../data/logging/loggingHooks";
 
@@ -16,14 +16,14 @@ interface SideFullbreddeProps {
 
 const Side = (sideFullbreddeProps: SideFullbreddeProps) => {
   const { tittel, aktivtMenypunkt, children } = sideFullbreddeProps;
-  const metaDataLoaded = hasLoadedMetaData();
+  const metaDataLoaded = useHasLoadedMetaData();
   const trackPageLoad = useTrackPageLoad();
 
   useEffect(() => {
     if (metaDataLoaded) {
       trackPageLoad(tittel, aktivtMenypunkt);
     }
-  }, [metaDataLoaded]);
+  }, [metaDataLoaded, tittel, aktivtMenypunkt, trackPageLoad]);
 
   return (
     <>

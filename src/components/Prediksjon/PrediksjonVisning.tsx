@@ -22,8 +22,10 @@ const PrediksjonVisning = ({ fnr }: PrediksjonProps) => {
 
   useEffect(() => {
     dispatch(hentPrediksjon(fnr));
-  }, []);
+  }, [dispatch, fnr]);
+
   const prediksjonData = useAppSelector((state) => state.prediksjon?.data);
+
   return (
     <>
       {!!prediksjonData && (

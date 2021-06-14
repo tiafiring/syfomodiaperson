@@ -49,18 +49,10 @@ export const NokkelinformasjonSide = () => {
   useEffect(() => {
     dispatch(hentLedere(fnr));
     dispatch(hentSykmeldinger(fnr));
-    if (fnr) {
-      dispatch(hentOppfoelgingsdialoger(fnr));
-    }
-  }, []);
-
-  useEffect(() => {
+    dispatch(hentOppfoelgingsdialoger(fnr));
     dispatch(hentOppfolgingstilfellerPersonUtenArbeidsiver(fnr));
-  }, [sykmeldingerState]);
-
-  useEffect(() => {
     dispatch(hentOppfolgingstilfelleperioder(fnr));
-  }, [ledereState, sykmeldingerState]);
+  }, [dispatch, fnr, ledereState]);
 
   return (
     <Side

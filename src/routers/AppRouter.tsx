@@ -36,16 +36,6 @@ const getFnrFromParams = (): string => {
   return window.location.pathname.split("/")[2];
 };
 
-const setAktivBrukerFromParams = (brukerIdent: string) => {
-  const dispatch = useDispatch();
-  dispatch(
-    pushModiaContext({
-      verdi: brukerIdent,
-      eventType: EventType.NY_AKTIV_BRUKER,
-    })
-  );
-};
-
 const AktivBrukerRouter = (): ReactElement => {
   return (
     <Router>
@@ -160,7 +150,7 @@ const AktivBrukerLoader = () => {
     if (!modiacontextState.henterBruker && !harForsoktHentetAktivBruker) {
       dispatch(hentAktivBruker());
     }
-  }, []);
+  });
 
   if (!harForsoktHentetAktivBruker) {
     return <AppSpinner />;
@@ -171,16 +161,25 @@ const AktivBrukerLoader = () => {
 const AppRouter = () => {
   const fnrFromParam = getFnrFromParams();
   const userProperties = useUserProperties();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (userProperties.valgtEnhet) {
       setUserProperties(userProperties);
     }
-  }, [userProperties.valgtEnhet]);
+  }, [userProperties]);
 
-  if (erGyldigFodselsnummer(fnrFromParam)) {
-    setAktivBrukerFromParams(fnrFromParam);
-  }
+  useEffect(() => {
+    if (erGyldigFodselsnummer(fnrFromParam)) {
+      dispatch(
+        pushModiaContext({
+          verdi: fnrFromParam,
+          eventType: EventType.NY_AKTIV_BRUKER,
+        })
+      );
+    }
+  }, [dispatch, fnrFromParam, userProperties.valgtEnhet]);
+
   return AktivBrukerLoader();
 };
 

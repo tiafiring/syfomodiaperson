@@ -46,7 +46,7 @@ const Nokkelinformasjon = (
         dispatch(hentVirksomhet(dialog.virksomhet.virksomhetsnummer));
       }
     });
-  }, []);
+  }, [dispatch, aktiveDialoger]);
 
   return (
     <div>
