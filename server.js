@@ -314,7 +314,8 @@ server.use("/syfosmregister/api", cookieParser(), (req, res) => {
     },
   };
 
-  const url = "http://syfosmregister.teamsykmelding/api/v1/internal/sykmeldinger";
+  const url =
+    "http://syfosmregister.teamsykmelding/api/v1/internal/sykmeldinger";
   axios
     .get(url, options)
     .then((response) => {
