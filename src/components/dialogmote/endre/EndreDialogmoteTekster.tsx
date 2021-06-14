@@ -35,7 +35,10 @@ const EndreDialogmoteTekster = ({ opprinneligTid }: Props) => {
     displayEndringArbeidsgiverPreview,
     setDisplayEndringArbeidsgiverPreview,
   ] = useState(false);
-  const { arbeidstakerTidSted, arbeidsgiverTidSted } = useForhandsvisTidSted();
+  const {
+    generateArbeidstakerTidStedDocument,
+    generateArbeidsgiverTidStedDocument,
+  } = useForhandsvisTidSted();
 
   return (
     <>
@@ -51,7 +54,9 @@ const EndreDialogmoteTekster = ({ opprinneligTid }: Props) => {
         contentLabel={texts.forhandsvisningArbeidstakerContentLabel}
         isOpen={displayEndringArbeidstakerPreview}
         handleClose={() => setDisplayEndringArbeidstakerPreview(false)}
-        documentComponents={() => arbeidstakerTidSted(values, opprinneligTid)}
+        getDocumentComponents={() =>
+          generateArbeidstakerTidStedDocument(values, opprinneligTid)
+        }
       />
       <FritekstSeksjon
         fieldName="begrunnelseArbeidsgiver"
@@ -65,7 +70,9 @@ const EndreDialogmoteTekster = ({ opprinneligTid }: Props) => {
         contentLabel={texts.forhandsvisningArbeidsgiverContentLabel}
         isOpen={displayEndringArbeidsgiverPreview}
         handleClose={() => setDisplayEndringArbeidsgiverPreview(false)}
-        documentComponents={() => arbeidsgiverTidSted(values, opprinneligTid)}
+        getDocumentComponents={() =>
+          generateArbeidsgiverTidStedDocument(values, opprinneligTid)
+        }
       />
     </>
   );

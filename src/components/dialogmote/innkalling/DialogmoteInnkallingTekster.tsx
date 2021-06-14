@@ -44,8 +44,8 @@ const DialogmoteInnkallingTekster = (): ReactElement => {
     setDisplayInnkallingArbeidsgiverPreview,
   ] = useState(false);
   const {
-    arbeidstakerInnkalling,
-    arbeidsgiverInnkalling,
+    generateArbeidstakerInnkallingDocument,
+    generateArbeidsgiverInnkallingDocument,
   } = useForhandsvisInnkalling();
   return (
     <DialogmoteInnkallingSkjemaSeksjon>
@@ -63,7 +63,9 @@ const DialogmoteInnkallingTekster = (): ReactElement => {
         contentLabel={texts.forhandsvisningArbeidstakerContentLabel}
         isOpen={displayInnkallingArbeidstakerPreview}
         handleClose={() => setDisplayInnkallingArbeidstakerPreview(false)}
-        documentComponents={() => arbeidstakerInnkalling(values)}
+        getDocumentComponents={() =>
+          generateArbeidstakerInnkallingDocument(values)
+        }
       />
       <FritekstSeksjon
         fieldName="fritekstArbeidsgiver"
@@ -77,7 +79,9 @@ const DialogmoteInnkallingTekster = (): ReactElement => {
         contentLabel={texts.forhandsvisningArbeidsgiverContentLabel}
         isOpen={displayInnkallingArbeidsgiverPreview}
         handleClose={() => setDisplayInnkallingArbeidsgiverPreview(false)}
-        documentComponents={() => arbeidsgiverInnkalling(values)}
+        getDocumentComponents={() =>
+          generateArbeidsgiverInnkallingDocument(values)
+        }
       />
     </DialogmoteInnkallingSkjemaSeksjon>
   );

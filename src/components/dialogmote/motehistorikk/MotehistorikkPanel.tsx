@@ -63,7 +63,7 @@ const MoteListElement = ({ children }: MoteListElementProps): ReactElement => {
             contentLabel={forhandsVisningTitle}
             isOpen={modalIsOpen}
             handleClose={() => setModalIsOpen(false)}
-            documentComponents={() => documentComponents}
+            getDocumentComponents={() => documentComponents}
           />
           <FlatknappWithMargin
             data-cy={forhandsVisningTitle}

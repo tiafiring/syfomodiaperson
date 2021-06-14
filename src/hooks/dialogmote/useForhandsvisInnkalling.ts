@@ -13,11 +13,11 @@ import {
 import { useForhandsvisningHilsen } from "./useForhandsvisningHilsen";
 
 export interface ForhandsvisInnkallingGenerator {
-  arbeidstakerInnkalling(
+  generateArbeidstakerInnkallingDocument(
     values: Partial<DialogmoteInnkallingSkjemaValues>
   ): DocumentComponentDto[];
 
-  arbeidsgiverInnkalling(
+  generateArbeidsgiverInnkallingDocument(
     values: Partial<DialogmoteInnkallingSkjemaValues>
   ): DocumentComponentDto[];
 }
@@ -26,7 +26,7 @@ export const useForhandsvisInnkalling = (): ForhandsvisInnkallingGenerator => {
   const navBruker = useNavBrukerData();
   const hilsen = useForhandsvisningHilsen();
 
-  const arbeidstakerInnkalling = (
+  const generateArbeidstakerInnkallingDocument = (
     values: Partial<DialogmoteInnkallingSkjemaValues>
   ) => {
     const documentComponents = [
@@ -41,7 +41,7 @@ export const useForhandsvisInnkalling = (): ForhandsvisInnkallingGenerator => {
     return documentComponents;
   };
 
-  const arbeidsgiverInnkalling = (
+  const generateArbeidsgiverInnkallingDocument = (
     values: Partial<DialogmoteInnkallingSkjemaValues>
   ) => {
     const documentComponents = [
@@ -64,8 +64,8 @@ export const useForhandsvisInnkalling = (): ForhandsvisInnkallingGenerator => {
   };
 
   return {
-    arbeidstakerInnkalling,
-    arbeidsgiverInnkalling,
+    generateArbeidstakerInnkallingDocument,
+    generateArbeidsgiverInnkallingDocument,
   };
 };
 

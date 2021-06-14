@@ -6,6 +6,7 @@ import {
   Innholdstittel,
   Normaltekst,
   Sidetittel,
+  Systemtittel,
 } from "nav-frontend-typografi";
 import { expect } from "chai";
 import { Hovedknapp } from "nav-frontend-knapper";
@@ -25,7 +26,7 @@ describe("Forhandsvisning", () => {
         contentLabel={"Test"}
         isOpen={true}
         handleClose={() => {}}
-        documentComponents={() => []}
+        getDocumentComponents={() => []}
       />
     );
 
@@ -50,6 +51,10 @@ describe("Forhandsvisning", () => {
         title: "Paragraph title",
         texts: ["A paragraph", "Other paragraph"],
       },
+      {
+        type: DocumentComponentType.HEADER,
+        texts: ["En overskrift"],
+      },
     ];
     const wrapper = mount(
       <Forhandsvisning
@@ -58,7 +63,7 @@ describe("Forhandsvisning", () => {
         contentLabel={"Test"}
         isOpen={true}
         handleClose={() => {}}
-        documentComponents={() => documentComponents}
+        getDocumentComponents={() => documentComponents}
       />
     );
 
@@ -70,5 +75,6 @@ describe("Forhandsvisning", () => {
     expect(wrapper.find(Element).at(1).text()).to.equal("Paragraph title");
     expect(wrapper.find(Normaltekst).at(1).text()).to.equal("A paragraph");
     expect(wrapper.find(Normaltekst).at(2).text()).to.equal("Other paragraph");
+    expect(wrapper.find(Systemtittel).text()).to.equal("En overskrift");
   });
 });

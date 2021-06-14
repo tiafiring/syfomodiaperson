@@ -10,6 +10,7 @@ import {
   Innholdstittel,
   Normaltekst,
   Sidetittel,
+  Systemtittel,
 } from "nav-frontend-typografi";
 import { Hovedknapp } from "nav-frontend-knapper";
 import React, { ReactElement } from "react";
@@ -29,47 +30,54 @@ const Paragraph = styled.div`
 `;
 
 const TitledParagraph = styled.div`
-  margin-bottom: 2em;
+  margin: 1em 0;
 `;
 
 const ForhandsvisningModal = styled(ModalWrapper)`
   max-width: 50em;
 `;
 
-type DocumentComponentTextProps = Required<
-  Pick<DocumentComponentDto, "type" | "texts">
->;
+const Header = styled(Systemtittel)`
+  margin-top: 0.5em;
+`;
 
-const DocumentComponentText = ({ type, texts }: DocumentComponentTextProps) => {
-  if (texts.length === 0) {
-    return null;
-  }
-  //  TODO: Implement DocumentComponentType.HEADER for referat
-  switch (type) {
-    case DocumentComponentType.LINK: {
-      const link = texts[0];
-      return (
-        <Lenke target="_blank" rel="noopener noreferrer" href={link}>
-          {link}
-        </Lenke>
-      );
-    }
-    case DocumentComponentType.PARAGRAPH: {
-      return (
-        <>
-          {texts.map((text, index) => (
-            <Normaltekst key={index}>
-              {text}
-              <br />
-            </Normaltekst>
-          ))}
-        </>
-      );
-    }
-    default: {
-      return null;
-    }
-  }
+const DocumentComponentLink = (texts: string[], title?: string) => {
+  const link = texts.length === 0 ? "" : texts[0];
+  return (
+    <TitledParagraph>
+      <Element>{title ?? ""}</Element>
+      <Lenke target="_blank" rel="noopener noreferrer" href={link}>
+        {link}
+      </Lenke>
+    </TitledParagraph>
+  );
+};
+
+const DocumentComponentHeader = (texts: string[]) => {
+  const header = texts.length === 0 ? "" : texts[0];
+  return <Header>{header}</Header>;
+};
+
+const DocumentComponentParagraph = (texts: string[], title?: string) => {
+  const paragraphText = (
+    <>
+      {texts.map((text, index) => (
+        <Normaltekst key={index}>
+          {text}
+          <br />
+        </Normaltekst>
+      ))}
+    </>
+  );
+
+  return title ? (
+    <TitledParagraph>
+      <Element>{title}</Element>
+      {paragraphText}
+    </TitledParagraph>
+  ) : (
+    <Paragraph>{paragraphText}</Paragraph>
+  );
 };
 
 interface DocumentComponentVisningProps {
@@ -79,25 +87,29 @@ interface DocumentComponentVisningProps {
 const DocumentComponentVisning = ({
   documentComponent: { type, title, texts },
 }: DocumentComponentVisningProps) => {
-  return title ? (
-    <TitledParagraph>
-      <Element>{title}</Element>
-      <DocumentComponentText type={type} texts={texts} />
-    </TitledParagraph>
-  ) : (
-    <Paragraph>
-      <DocumentComponentText type={type} texts={texts} />
-    </Paragraph>
-  );
+  switch (type) {
+    case DocumentComponentType.HEADER: {
+      return DocumentComponentHeader(texts);
+    }
+    case DocumentComponentType.LINK: {
+      return DocumentComponentLink(texts, title);
+    }
+    case DocumentComponentType.PARAGRAPH: {
+      return DocumentComponentParagraph(texts, title);
+    }
+    default: {
+      return null;
+    }
+  }
 };
 
 interface ForhandsvisningProps {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   contentLabel: string;
   isOpen: boolean;
   handleClose: () => void;
-  documentComponents: () => DocumentComponentDto[];
+  getDocumentComponents: () => DocumentComponentDto[];
 }
 
 export const Forhandsvisning = ({
@@ -106,8 +118,9 @@ export const Forhandsvisning = ({
   title,
   subtitle,
   contentLabel,
-  documentComponents,
+  getDocumentComponents,
 }: ForhandsvisningProps): ReactElement => {
+  const documentComponents = isOpen ? getDocumentComponents() : [];
   return (
     <ForhandsvisningModal
       isOpen={isOpen}
@@ -117,19 +130,17 @@ export const Forhandsvisning = ({
       ariaHideApp={false}
     >
       <ModalContentContainer data-cy="ForhåndsvisningModal">
-        <FlexRow
-          topPadding={PaddingSize.SM}
-          justifyContent={JustifyContentType.CENTER}
-        >
-          <Sidetittel>{title}</Sidetittel>
+        <FlexRow topPadding={PaddingSize.SM} bottomPadding={PaddingSize.MD}>
+          <FlexRow justifyContent={JustifyContentType.CENTER}>
+            <Sidetittel>{title}</Sidetittel>
+          </FlexRow>
+          {subtitle ? (
+            <FlexRow justifyContent={JustifyContentType.CENTER}>
+              <Innholdstittel>{subtitle}</Innholdstittel>
+            </FlexRow>
+          ) : null}
         </FlexRow>
-        <FlexRow
-          bottomPadding={PaddingSize.MD}
-          justifyContent={JustifyContentType.CENTER}
-        >
-          <Innholdstittel>{subtitle}</Innholdstittel>
-        </FlexRow>
-        {documentComponents().map((component, index) => (
+        {documentComponents.map((component, index) => (
           <DocumentComponentVisning key={index} documentComponent={component} />
         ))}
         <FlexRow topPadding={PaddingSize.MD}>

@@ -343,12 +343,12 @@ describe("DialogmoteInnkallingSkjema", () => {
 
     const getForhandsvisningsModaler = () => wrapper.find(Forhandsvisning);
     let forhandsvisninger = getForhandsvisningsModaler();
-    expect(forhandsvisninger.at(0).props().documentComponents()).to.deep.equal(
-      expectedArbeidstakerInnkalling
-    );
-    expect(forhandsvisninger.at(1).props().documentComponents()).to.deep.equal(
-      expectedArbeidsgiverInnkalling
-    );
+    expect(
+      forhandsvisninger.at(0).props().getDocumentComponents()
+    ).to.deep.equal(expectedArbeidstakerInnkalling);
+    expect(
+      forhandsvisninger.at(1).props().getDocumentComponents()
+    ).to.deep.equal(expectedArbeidsgiverInnkalling);
 
     const previewButtons = wrapper.find(Knapp);
 

@@ -1,7 +1,9 @@
 import { MemoryRouter, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import React from "react";
-import Referat from "../../src/components/dialogmote/referat/Referat";
+import Referat, {
+  texts as referatSkjemaTexts,
+} from "../../src/components/dialogmote/referat/Referat";
 import { createStore } from "redux";
 import { rootReducer } from "../../src/data/rootState";
 import configureStore from "redux-mock-store";
@@ -9,6 +11,8 @@ import { mount } from "enzyme";
 import {
   DialogmoteDTO,
   DialogmoteStatus,
+  DocumentComponentDto,
+  DocumentComponentType,
 } from "../../src/data/dialogmote/types/dialogmoteTypes";
 import { Feilmelding, Innholdstittel } from "nav-frontend-typografi";
 import { expect } from "chai";
@@ -20,12 +24,22 @@ import {
   changeFieldValue,
   changeTextAreaValue,
 } from "../testUtils";
+import {
+  commonTexts,
+  referatTexts,
+} from "../../src/data/dialogmote/dialogmoteTexts";
+import { tilDatoMedUkedagOgManedNavn } from "../../src/utils/datoUtils";
+import { Forhandsvisning } from "../../src/components/dialogmote/Forhandsvisning";
+import { Knapp } from "nav-frontend-knapper";
+import Lukknapp from "nav-frontend-lukknapp";
 
 const realState = createStore(rootReducer).getState();
 const store = configureStore([]);
 const arbeidstakerPersonIdent = "05087321470";
 const arbeidstakerNavn = "Arne Arbeidstaker";
 const veilederNavn = "Vetle Veileder";
+const navEnhet = "0315";
+const navEnhetNavn = "NAV Grünerløkka";
 const moteUuid = "123abc";
 const lederNavn = "Grønn Bamse";
 const mote: DialogmoteDTO = {
@@ -52,6 +66,12 @@ const mote: DialogmoteDTO = {
 };
 
 const mockState = {
+  behandlendeEnhet: {
+    data: {
+      enhetId: navEnhet,
+      navn: navEnhetNavn,
+    },
+  },
   veilederinfo: {
     data: {
       navn: veilederNavn,
@@ -217,9 +237,117 @@ describe("ReferatTest", () => {
         arbeidsgiverOppgave: arbeidsgiversOppgave,
         arbeidstakerOppgave: arbeidstakersOppgave,
         veilederOppgave: veiledersOppgave,
-        document: [],
+        document: expectedReferat,
         andreDeltakere: [],
       },
     });
   });
+
+  it("forhåndsviser referat", () => {
+    const mockStore = store({ ...realState, ...mockState });
+    const wrapper = mount(
+      <MemoryRouter
+        initialEntries={[`/sykefravaer/dialogmote/${moteUuid}/referat`]}
+      >
+        <Route path="/sykefravaer/dialogmote/:dialogmoteUuid/referat">
+          <Provider store={mockStore}>
+            <Referat dialogmote={mote} pageTitle="Test" />
+          </Provider>
+        </Route>
+      </MemoryRouter>
+    );
+
+    changeTextAreaValue(wrapper, "situasjon", situasjonTekst);
+    changeTextAreaValue(wrapper, "konklusjon", konklusjonTekst);
+    changeTextAreaValue(wrapper, "arbeidstakersOppgave", arbeidstakersOppgave);
+    changeTextAreaValue(wrapper, "arbeidsgiversOppgave", arbeidsgiversOppgave);
+    changeTextAreaValue(wrapper, "veiledersOppgave", veiledersOppgave);
+
+    const forhandsvisningModal = () => wrapper.find(Forhandsvisning);
+    expect(
+      forhandsvisningModal().props().getDocumentComponents()
+    ).to.deep.equal(expectedReferat);
+
+    const previewButtons = wrapper.find(Knapp);
+
+    previewButtons.at(0).simulate("click");
+    expect(forhandsvisningModal().prop("isOpen")).to.be.true;
+    expect(forhandsvisningModal().text()).to.contain(
+      referatSkjemaTexts.forhandsvisningTitle
+    );
+    forhandsvisningModal().find(Lukknapp).simulate("click");
+    expect(forhandsvisningModal().prop("isOpen")).to.be.false;
+  });
 });
+
+const expectedReferat: DocumentComponentDto[] = [
+  {
+    texts: [arbeidstakerNavn],
+    type: DocumentComponentType.HEADER,
+  },
+  {
+    texts: [`F.nr. ${arbeidstakerPersonIdent}`],
+    type: DocumentComponentType.PARAGRAPH,
+  },
+  {
+    texts: [
+      `Dato: ${tilDatoMedUkedagOgManedNavn(mote.tid)}`,
+      `Sted: ${mote.sted}`,
+    ],
+    type: DocumentComponentType.PARAGRAPH,
+  },
+  {
+    texts: [
+      `Arbeidstaker: ${arbeidstakerNavn}`,
+      `Arbeidsgiver: ${lederNavn}`,
+      `Fra NAV: ${veilederNavn}`,
+    ],
+    title: referatTexts.deltakereTitle,
+    type: DocumentComponentType.PARAGRAPH,
+  },
+  {
+    texts: [referatTexts.intro1],
+    type: DocumentComponentType.PARAGRAPH,
+  },
+  {
+    texts: [referatTexts.intro2],
+    type: DocumentComponentType.PARAGRAPH,
+  },
+  {
+    texts: [referatTexts.detteSkjeddeHeader],
+    type: DocumentComponentType.HEADER,
+  },
+  {
+    texts: [konklusjonTekst],
+    title: referatTexts.konklusjonTitle,
+    type: DocumentComponentType.PARAGRAPH,
+  },
+  {
+    texts: [arbeidstakersOppgave],
+    title: referatTexts.arbeidstakersOppgaveTitle,
+    type: DocumentComponentType.PARAGRAPH,
+  },
+  {
+    texts: [arbeidsgiversOppgave],
+    title: referatTexts.arbeidsgiversOppgaveTitle,
+    type: DocumentComponentType.PARAGRAPH,
+  },
+  {
+    texts: [veiledersOppgave],
+    title: referatTexts.navOppgaveTitle,
+    type: DocumentComponentType.PARAGRAPH,
+  },
+  {
+    texts: [situasjonTekst],
+    title: referatTexts.situasjonTitle,
+    type: DocumentComponentType.PARAGRAPH,
+  },
+  {
+    texts: [commonTexts.hilsen, navEnhetNavn],
+    type: DocumentComponentType.PARAGRAPH,
+  },
+  {
+    texts: [veilederNavn],
+    type: DocumentComponentType.PARAGRAPH,
+  },
+];

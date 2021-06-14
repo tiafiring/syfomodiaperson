@@ -16,12 +16,12 @@ import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
 import { DocumentComponentDto } from "../../data/dialogmote/types/dialogmoteTypes";
 
 export interface ForhandsvisTidStedGenerator {
-  arbeidsgiverTidSted(
+  generateArbeidsgiverTidStedDocument(
     values: Partial<EndreTidStedSkjemaValues>,
     opprinneligTid: string
   ): DocumentComponentDto[];
 
-  arbeidstakerTidSted(
+  generateArbeidstakerTidStedDocument(
     values: Partial<EndreTidStedSkjemaValues>,
     opprinneligTid: string
   ): DocumentComponentDto[];
@@ -31,7 +31,7 @@ export const useForhandsvisTidSted = (): ForhandsvisTidStedGenerator => {
   const navBruker = useNavBrukerData();
   const hilsen = useForhandsvisningHilsen();
 
-  const arbeidsgiverTidSted = (
+  const generateArbeidsgiverTidStedDocument = (
     values: Partial<EndreTidStedSkjemaValues>,
     opprinneligTid: string
   ) => {
@@ -49,7 +49,7 @@ export const useForhandsvisTidSted = (): ForhandsvisTidStedGenerator => {
     return documentComponents;
   };
 
-  const arbeidstakerTidSted = (
+  const generateArbeidstakerTidStedDocument = (
     values: Partial<EndreTidStedSkjemaValues>,
     opprinneligTid: string
   ) => {
@@ -68,8 +68,8 @@ export const useForhandsvisTidSted = (): ForhandsvisTidStedGenerator => {
   };
 
   return {
-    arbeidstakerTidSted,
-    arbeidsgiverTidSted,
+    generateArbeidstakerTidStedDocument,
+    generateArbeidsgiverTidStedDocument,
   };
 };
 
