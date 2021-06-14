@@ -18,7 +18,7 @@ import AvlysDialogmoteSkjema, {
 } from "../../src/components/dialogmote/avlys/AvlysDialogmoteSkjema";
 import { texts as skjemaFeilOppsummeringTexts } from "../../src/components/SkjemaFeiloppsummering";
 import { texts as valideringsTexts } from "../../src/utils/valideringUtils";
-import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../src/utils/datoUtils";
+import { tilDatoMedManedNavnOgKlokkeslettWithComma } from "../../src/utils/datoUtils";
 import {
   avlysningTexts,
   commonTexts,
@@ -329,7 +329,7 @@ const expectedAvlysningArbeidsgiver = [
   },
   {
     texts: [
-      `${avlysningTexts.intro1} ${tilDatoMedUkedagOgManedNavnOgKlokkeslett(
+      `${avlysningTexts.intro1} ${tilDatoMedManedNavnOgKlokkeslettWithComma(
         mote.tid
       )}. ${avlysningTexts.intro2}`,
     ],
@@ -355,7 +355,7 @@ const expectedAvlysningArbeidstaker = [
   },
   {
     texts: [
-      `${avlysningTexts.intro1} ${tilDatoMedUkedagOgManedNavnOgKlokkeslett(
+      `${avlysningTexts.intro1} ${tilDatoMedManedNavnOgKlokkeslettWithComma(
         mote.tid
       )}. ${avlysningTexts.intro2}`,
     ],

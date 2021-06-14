@@ -17,7 +17,7 @@ const texts = {
   body1: "Det er obligatorisk å delta i dialogmøter i løpet av sykefraværet.",
   body2: "Passer ikke møtetidspunktet? ",
   linkText: "Ta kontakt for å gjøre en ny avtale.",
-  linkUrl: "",
+  linkUrl: "https://www.nav.no/person/kontakt-oss/nb/skriv-til-oss",
 };
 
 export const DialogmoteInnkallingTeksterAlert = () => {

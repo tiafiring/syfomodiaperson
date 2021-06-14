@@ -186,6 +186,13 @@ const getDatoKomponenter = (dato) => {
   };
 };
 
+export const tilDatoMedManedNavnOgKlokkeslettWithComma = (dato) => {
+  const newDate = new Date(dato);
+  const date = tilDatoMedManedNavn(newDate);
+  const time = visKlokkeslett(newDate);
+  return `${date}, kl. ${time}`;
+};
+
 export const tilDatoMedUkedagOgManedNavnOgKlokkeslett = (dato) => {
   const newDate = new Date(dato);
   const date = tilDatoMedUkedagOgManedNavn(newDate);

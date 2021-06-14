@@ -6,6 +6,7 @@ import {
   leggTilDagerPaDato,
   restdatoTildato,
   restdatoTilLesbarDato,
+  tilDatoMedManedNavnOgKlokkeslettWithComma,
   tilDatoMedUkedagOgManedNavn,
   tilDatoMedUkedagOgManedNavnOgKlokkeslett,
   tilLesbarDatoMedArUtenManedNavn,
@@ -49,6 +50,14 @@ describe("datoUtils", () => {
         "2021-06-04T09:34:55.422796"
       );
       expect(dato).to.equal("Fredag 4. juni 2021 kl. 09.34");
+    });
+  });
+  describe("tilDatoMedManedNavnOgKlokkeslettSeparatedByComma", () => {
+    it("Skal gi en string med dato, månednavn, år og klokkeslett med komma foran klokkeslett", () => {
+      const dato = tilDatoMedManedNavnOgKlokkeslettWithComma(
+        "2021-06-04T09:34:55.422796"
+      );
+      expect(dato).to.equal("4. juni 2021, kl. 09.34");
     });
   });
   describe("tilLesbarDatoMedArUtenManedNavn", () => {
