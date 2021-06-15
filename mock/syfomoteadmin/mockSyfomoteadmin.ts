@@ -1,5 +1,4 @@
 import { virksomhetMock } from "../data/virksomhetMock";
-import { enheterMock } from "../data/enheterMock";
 import { moterMock } from "../data/moterMock";
 import { historikkmoterMock } from "../data/historikkmoterMock";
 import { ledereMock } from "../data/ledereMock";
@@ -51,16 +50,6 @@ const mockMoteDeltakere = (alternativer, orgnummer) => {
 };
 
 const mockForLokal = (server) => {
-  server.get("/syfomoteadmin/api/internad/veilederinfo/enheter", (req, res) => {
-    res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(enheterMock));
-  });
-
-  server.get("/syfomoteadmin/api/internad/enheter", (req, res) => {
-    res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(enheterMock));
-  });
-
   server.get("/syfomoteadmin/api/internad/moter", (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.send(JSON.stringify(moterMock));

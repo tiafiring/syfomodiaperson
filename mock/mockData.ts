@@ -1,7 +1,6 @@
 import { moterMock } from "./data/moterMock";
 import { motebehovMock } from "./data/motebehovMock";
 import { brukerinfoMock } from "./data/brukerinfoMock";
-import { enheterMock } from "./data/enheterMock";
 import { historikkmotebehovMock } from "./data/historikkmotebehovMock";
 import { historikkmoterMock } from "./data/historikkmoterMock";
 import { historikkoppfolgingsplanMock } from "./data/historikkoppfolgingsplanMock";
@@ -19,7 +18,6 @@ export const mockData = {
   moterMock,
   motebehovMock,
   brukerinfoMock,
-  enheterMock,
   historikkmotebehovMock,
   historikkmoterMock,
   historikkoppfolgingsplanMock,
