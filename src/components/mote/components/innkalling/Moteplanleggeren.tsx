@@ -5,9 +5,9 @@ import { MoteIkonBlaaImage } from "../../../../../img/ImageComponents";
 import { DialogmotePanel } from "../DialogmotePanel";
 import { tilDatoMedUkedagOgManedNavn } from "../../../../utils/datoUtils";
 import { useAktivtMoteplanleggerMote } from "../../../../data/mote/moter_hooks";
-import { Knapp } from "nav-frontend-knapper";
 import { FlexRow } from "../../../Layout";
 import { useHistory } from "react-router";
+import { TrackedKnapp } from "../../../buttons/TrackedKnapp";
 
 const texts = {
   nyttMote: "Nytt dialogmøte",
@@ -54,13 +54,15 @@ export const Moteplanleggeren = (): ReactElement => {
       subtitle={texts.ingenMoterPlanlagt}
     >
       <FlexRow>
-        <Knapp
+        <TrackedKnapp
+          data-cy="nyttMoteplanleggerMote"
+          context={texts.planleggNyttMote}
           onClick={() => {
             history.push(`/sykefravaer/mote`);
           }}
         >
           {texts.nyttMote}
-        </Knapp>
+        </TrackedKnapp>
       </FlexRow>
     </DialogmotePanel>
   );

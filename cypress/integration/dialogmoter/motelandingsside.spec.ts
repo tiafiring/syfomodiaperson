@@ -41,4 +41,19 @@ context("Møtelandingsside actions", () => {
 
     cy.contains("Lukk").click();
   });
+
+  it("Har ikke tilgang til DM2, og ser derfor møteplanleggeren", () => {
+    cy.stubMoter(MoteState.INGEN_MOTER);
+    cy.intercept(
+      {
+        method: "GET",
+        url: "/isenabled/dm2/*",
+      },
+      "false"
+    );
+
+    cy.dataCy(selectors.nyttMoteplanleggerMote).click();
+
+    cy.url().should("include", "/sykefravaer/mote");
+  });
 });

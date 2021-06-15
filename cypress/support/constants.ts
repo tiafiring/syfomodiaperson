@@ -11,4 +11,5 @@ export const selectors = {
   arbeidstakersOppgaveTextArea: "arbeidstakersOppgaveTextArea",
   arbeidsgiversOppgaveTextArea: "arbeidsgiversOppgaveTextArea",
   forhandsvisningModal: "ForhåndsvisningModal",
+  nyttMoteplanleggerMote: "nyttMoteplanleggerMote",
 };

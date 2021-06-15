@@ -62,6 +62,9 @@ const HTML_FILE = path.join(DIST_DIR, "index.html");
 
 server.use("/static", express.static(DIST_DIR));
 
+const unleashRoutes = require("./server/routes/unleashRoutes");
+server.use("/isenabled", unleashRoutes);
+
 server.get(
   ["/", "/sykefravaer", "/sykefravaer/*", /^\/sykefravaer\/(?!(resources)).*$/],
   nocache,
