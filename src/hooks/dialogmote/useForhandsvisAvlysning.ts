@@ -5,7 +5,7 @@ import {
 import { useNavBrukerData } from "../../data/navbruker/navbruker_hooks";
 import { AvlysDialogmoteSkjemaValues } from "../../components/dialogmote/avlys/AvlysDialogmoteSkjema";
 import { avlysningTexts } from "../../data/dialogmote/dialogmoteTexts";
-import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../utils/datoUtils";
+import { tilDatoMedManedNavnOgKlokkeslettWithComma } from "../../utils/datoUtils";
 import { createParagraph } from "../../utils/documentComponentUtils";
 import { useForhandsvisningHilsen } from "./useForhandsvisningHilsen";
 
@@ -28,7 +28,7 @@ export const useForhandsvisAvlysning = (
     `Gjelder ${navBruker.navn}, f.nr. ${navBruker.kontaktinfo.fnr}.`
   );
   const introText = createParagraph(
-    `${avlysningTexts.intro1} ${tilDatoMedUkedagOgManedNavnOgKlokkeslett(
+    `${avlysningTexts.intro1} ${tilDatoMedManedNavnOgKlokkeslettWithComma(
       dialogmote.tid
     )}. ${avlysningTexts.intro2}`
   );

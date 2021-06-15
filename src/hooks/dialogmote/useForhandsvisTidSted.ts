@@ -5,7 +5,10 @@ import {
   createParagraph,
   createParagraphWithTitle,
 } from "../../utils/documentComponentUtils";
-import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../utils/datoUtils";
+import {
+  tilDatoMedManedNavnOgKlokkeslettWithComma,
+  tilDatoMedUkedagOgManedNavnOgKlokkeslett,
+} from "../../utils/datoUtils";
 import { genererDato } from "../../components/mote/utils";
 import { useForhandsvisningHilsen } from "./useForhandsvisningHilsen";
 import {
@@ -81,9 +84,9 @@ const fellesInfo = (
 
   const components = [
     createParagraph(
-      `${endreTidStedTexts.intro1} ${tilDatoMedUkedagOgManedNavnOgKlokkeslett(
+      `${endreTidStedTexts.intro1} ${tilDatoMedManedNavnOgKlokkeslettWithComma(
         opprinneligTid
-      )}`
+      )}.`
     ),
     createParagraph(endreTidStedTexts.intro2),
     createParagraphWithTitle(
