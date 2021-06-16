@@ -215,7 +215,7 @@ server.use(
 
 server.use(
   "/syfomoteadmin/api",
-  proxy("syfomoteadmin.default", {
+  proxy("syfomoteadmin.teamsykefravr", {
     https: false,
     proxyReqPathResolver: function (req) {
       return `/syfomoteadmin/api${req.url}`;
