@@ -14,15 +14,15 @@ export const erLokal = (): boolean => {
   return window.location.host.indexOf("localhost") > -1;
 };
 
-export const finnNaisUrlDefault = () => {
-  return erPreProd() ? ".nais.preprod.local" : ".nais.adeo.no";
+export const finnNaisUrlIntern = () => {
+  return erPreProd() ? ".dev.intern.nav.no" : ".intern.nav.no";
 };
 
-export const fullNaisUrlDefault = (host: string, path: string) => {
+export const fullNaisUrlIntern = (host: string, path: string) => {
   if (erLokal()) {
     return path;
   }
-  return `https://${host}${finnNaisUrlDefault()}${path}`;
+  return `https://${host}${finnNaisUrlIntern()}${path}`;
 };
 
 const env = {
