@@ -15,6 +15,7 @@ import { mockIsprediksjon } from "./isprediksjon/mockIsprediksjon";
 import { mockVedtak } from "./spinnsyn/mockVedtak";
 import { mockIsdialogmote } from "./isdialogmote/mockIsdialogmote";
 import { mockSyfoveileder } from "./syfoveileder/mockSyfoveileder";
+import { mockUnleash } from "./unleash/mockUnleash";
 
 const express = require("express");
 
@@ -40,6 +41,7 @@ const mockEndepunkter = (server) => {
     mockVedtak,
     mockIsdialogmote,
     mockSyfoveileder,
+    mockUnleash,
   ].forEach((func) => {
     func(server);
   });

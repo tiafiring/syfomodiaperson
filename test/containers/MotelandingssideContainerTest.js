@@ -24,6 +24,9 @@ describe("MotelandingssideContainer", () => {
         dialogmote: {
           henterMoteForsokt: true,
         },
+        unleash: {
+          fetching: false,
+        },
         tilgang: {
           data: {
             harTilgang: true,

@@ -29,8 +29,9 @@ import AppSpinner from "../components/AppSpinner";
 import { useAppSelector } from "../hooks/hooks";
 import DialogmoteReferatContainer from "../components/dialogmote/referat/DialogmoteReferatContainer";
 import { useUserProperties } from "../data/logging/loggingHooks";
-import { setUserProperties } from "../amplitude/amplitude";
+import { setAmplitudeUserProperties } from "../amplitude/amplitude";
 import EndreDialogmoteContainer from "../components/dialogmote/endre/EndreDialogmoteContainer";
+import { fetchUnleashToggles } from "../data/unleash/unleash_actions";
 
 const getFnrFromParams = (): string => {
   return window.location.pathname.split("/")[2];
@@ -165,9 +166,10 @@ const AppRouter = () => {
 
   useEffect(() => {
     if (userProperties.valgtEnhet) {
-      setUserProperties(userProperties);
+      dispatch(fetchUnleashToggles(userProperties.valgtEnhet));
+      setAmplitudeUserProperties(userProperties);
     }
-  }, [userProperties]);
+  }, [dispatch, userProperties]);
 
   useEffect(() => {
     if (erGyldigFodselsnummer(fnrFromParam)) {

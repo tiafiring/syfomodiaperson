@@ -7,9 +7,9 @@ import { DialogmotePanel } from "../DialogmotePanel";
 import { tilDatoMedUkedagOgManedNavn } from "../../../../utils/datoUtils";
 import { useAktivtMoteplanleggerMote } from "../../../../data/mote/moter_hooks";
 import { Moteplanleggeren } from "./Moteplanleggeren";
-import { erLokalEllerPreprod } from "../../../../utils/miljoUtil";
 import { DialogmoteMoteStatusPanel } from "./DialogmoteMoteStatusPanel";
 import { useAktivtDialogmote } from "../../../../data/dialogmote/dialogmote_hooks";
+import { useIsDM2Enabled } from "../../../../data/unleash/unleash_hooks";
 
 const texts = {
   bekreftetMote: "Bekreftet møte",
@@ -33,13 +33,15 @@ const resolveUndertittelForMoteStatus = (mote: MoteDTO) => {
 };
 
 export const InnkallingDialogmotePanel = (): ReactElement => {
+  const isDm2Enabled = useIsDM2Enabled();
   const aktivtMoteplanleggerMote = useAktivtMoteplanleggerMote();
   const aktivtDialogmote = useAktivtDialogmote();
 
-  //Fjernes når vi går i prod med ferdig løsning
-  if (!erLokalEllerPreprod) {
+  if (!isDm2Enabled) {
     return <Moteplanleggeren />;
-  } else if (aktivtDialogmote) {
+  }
+
+  if (aktivtDialogmote) {
     return <DialogmoteMoteStatusPanel dialogmote={aktivtDialogmote} />;
   } else if (aktivtMoteplanleggerMote) {
     return (

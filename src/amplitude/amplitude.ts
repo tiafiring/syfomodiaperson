@@ -14,7 +14,7 @@ export interface UserProperties {
   valgtEnhet: string;
 }
 
-export const setUserProperties = (userProperties: UserProperties) => {
+export const setAmplitudeUserProperties = (userProperties: UserProperties) => {
   amplitude.getInstance().setUserProperties(userProperties);
 };
 
