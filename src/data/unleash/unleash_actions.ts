@@ -7,6 +7,7 @@ export enum UnleashActionTypes {
 export interface FetchUnleashTogglesAction {
   type: UnleashActionTypes.FETCH_UNLEASH_TOGGLES;
   valgtEnhet: string;
+  userId: string;
 }
 
 export interface FetchUnleashTogglesFailedAction {
@@ -19,10 +20,12 @@ export interface FetchUnleashTogglesSuccessAction {
 }
 
 export const fetchUnleashToggles = (
-  valgtEnhet: string
+  valgtEnhet: string,
+  userId: string
 ): FetchUnleashTogglesAction => ({
   type: UnleashActionTypes.FETCH_UNLEASH_TOGGLES,
   valgtEnhet,
+  userId,
 });
 
 export const fetchUnleashTogglesFailed = (): FetchUnleashTogglesFailedAction => ({

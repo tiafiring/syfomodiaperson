@@ -13,7 +13,7 @@
     //Todo: Endre til true og legg inn returntyper i sagas
     "noImplicitAny": false,
     "strictNullChecks": true,
-    "allowSyntheticDefaultImports": true
+    "esModuleInterop": true
   },
   "exclude": [
     "node_modules",

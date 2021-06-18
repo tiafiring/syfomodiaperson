@@ -19,16 +19,27 @@ class ByEnhetAndEnvironment extends Strategy {
   }
 }
 
+class ByUserId extends Strategy {
+  constructor() {
+    super("byUserId");
+  }
+
+  isEnabled(parameters, context) {
+    return parameters.user.indexOf(context.user) !== -1;
+  }
+}
+
 const unleash = initialize({
   url: "https://unleash.nais.io/api/",
   appName: "syfomodiaperson",
   environment: process.env.NAIS_CONTEXT,
-  strategies: [new ByEnhetAndEnvironment()],
+  strategies: [new ByEnhetAndEnvironment(), new ByUserId()],
 });
 
-router.get("/dm2/:valgtEnhet", function (req, res) {
+router.get("/dm2/", function (req, res) {
   const isEnabled = unleash.isEnabled("syfo.syfomodiaperson.dm2", {
-    valgtEnhet: req.params.valgtEnhet,
+    valgtEnhet: req.query.valgtEnhet,
+    user: req.query.userId,
   });
 
   res.status(200).send(isEnabled);
