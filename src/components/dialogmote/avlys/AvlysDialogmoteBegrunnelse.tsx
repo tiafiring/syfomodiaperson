@@ -5,7 +5,7 @@ import AvlysDialogmoteSkjemaSeksjon from "./AvlysDialogmoteSkjemaSeksjon";
 import { TrackedKnapp } from "../../buttons/TrackedKnapp";
 import Fritekst from "../../Fritekst";
 
-export const MAX_LENGTH_AVLYS_BEGRUNNELSE = 1000;
+export const MAX_LENGTH_AVLYS_BEGRUNNELSE = 200;
 
 const texts = {
   preview: "Forhåndsvisning",

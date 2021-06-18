@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from "react";
 import { Form } from "react-final-form";
+import arrayMutators from "final-form-arrays";
 import Panel from "nav-frontend-paneler";
 import { tilDatoMedManedNavn } from "../../../utils/datoUtils";
 import Deltakere from "./Deltakere";
@@ -16,7 +17,6 @@ import { ArbeidsgiversOppgave } from "./ArbeidsgiversOppgave";
 import { VeiledersOppgave } from "./VeiledersOppgave";
 import { StandardTekster } from "./StandardTekster";
 import {
-  ReferatSkjemaFeil,
   validerReferatDeltakere,
   validerReferatTekster,
 } from "../../../utils/valideringUtils";
@@ -31,6 +31,7 @@ import { AlertStripeFeil } from "nav-frontend-alertstriper";
 import { Forhandsvisning } from "../Forhandsvisning";
 import { useForhandsvisReferat } from "../../../hooks/dialogmote/useForhandsvisReferat";
 import { StandardTekst } from "../../../data/dialogmote/dialogmoteTexts";
+import { NewDialogmotedeltakerAnnenDTO } from "../../../data/dialogmote/types/dialogmoteReferatTypes";
 
 export const texts = {
   digitalReferat:
@@ -51,6 +52,7 @@ export interface ReferatSkjemaValues {
   arbeidsgiversOppgave: string;
   veiledersOppgave?: string;
   standardtekster: StandardTekst[];
+  andreDeltakere: NewDialogmotedeltakerAnnenDTO[];
 }
 
 const ReferatTittel = styled(Innholdstittel)`
@@ -86,7 +88,7 @@ const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
   const { generateReferatDocument } = useForhandsvisReferat(dialogmote);
 
   const validate = (values: Partial<ReferatSkjemaValues>) => {
-    const feilmeldinger: Partial<ReferatSkjemaFeil> = {
+    const feilmeldinger = {
       ...validerReferatDeltakere(values),
       ...validerReferatTekster(values),
     };
@@ -106,7 +108,7 @@ const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
         arbeidstakerOppgave: values.arbeidstakersOppgave,
         veilederOppgave: values.veiledersOppgave,
         document: generateReferatDocument(values),
-        andreDeltakere: [], // TODO: implementer ekstra deltakere,
+        andreDeltakere: values.andreDeltakere || [],
       })
     );
   };
@@ -117,7 +119,12 @@ const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
 
   return (
     <Panel>
-      <Form onSubmit={submit} validate={validate} initialValues={initialValues}>
+      <Form
+        onSubmit={submit}
+        validate={validate}
+        initialValues={initialValues}
+        mutators={{ ...arrayMutators }}
+      >
         {({ handleSubmit, submitFailed, errors, values }) => (
           <form onSubmit={handleSubmit}>
             <ReferatTittel>{header}</ReferatTittel>

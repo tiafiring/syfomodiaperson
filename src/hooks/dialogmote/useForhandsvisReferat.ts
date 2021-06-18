@@ -61,11 +61,16 @@ const info = (
   navbruker: Brukerinfo,
   veileder?: VeilederinfoDTO
 ): DocumentComponentDto[] => {
+  const andreDeltakere =
+    values.andreDeltakere?.map(
+      ({ funksjon, navn }) => `${funksjon}: ${navn}`
+    ) || [];
   const deltakere = createParagraphWithTitle(
     referatTexts.deltakereTitle,
     `Arbeidstaker: ${navbruker.navn}`,
     `Arbeidsgiver: ${values.naermesteLeder}`,
-    `Fra NAV: ${veileder?.navn}`
+    `Fra NAV: ${veileder?.navn}`,
+    ...andreDeltakere
   );
 
   return [
