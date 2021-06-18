@@ -63,11 +63,11 @@ export const AndreDeltakere = () => {
     <FieldArray<NewDialogmotedeltakerAnnenDTO> name={"andreDeltakere"}>
       {({ fields }) => (
         <>
-          {fields.map((name, index) => (
-            <FlexRow key={name} bottomPadding={PaddingSize.SM}>
+          {fields.map((field, index) => (
+            <FlexRow key={field} bottomPadding={PaddingSize.SM}>
               <FunksjonColumn flex={0.3}>
                 <DeltakerField
-                  fieldName={`${name}.funksjon`}
+                  fieldName={`${field}.funksjon`}
                   label={texts.funksjonLabel}
                   submitFailed={submitFailed}
                   errors={errors}
@@ -75,7 +75,7 @@ export const AndreDeltakere = () => {
               </FunksjonColumn>
               <NavnColumn flex={0.3}>
                 <DeltakerField
-                  fieldName={`${name}.navn`}
+                  fieldName={`${field}.navn`}
                   label={texts.navnLabel}
                   submitFailed={submitFailed}
                   errors={errors}
