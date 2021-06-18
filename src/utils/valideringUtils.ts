@@ -9,6 +9,10 @@ import { MAX_LENGTH_VEILEDERS_OPPGAVE } from "../components/dialogmote/referat/V
 import { MAX_LENGTH_AVLYS_BEGRUNNELSE } from "../components/dialogmote/avlys/AvlysDialogmoteBegrunnelse";
 import { MAX_LENGTH_INNKALLING_FRITEKST } from "../components/dialogmote/innkalling/DialogmoteInnkallingTekster";
 
+export interface SkjemaFeil {
+  [key: string]: string | undefined;
+}
+
 interface Tidspunkt {
   klokkeslett?: string;
   dato?: string;
@@ -23,10 +27,6 @@ interface InnkallingFritekster {
   fritekstArbeidsgiver?: string;
   fritekstArbeidstaker?: string;
 }
-
-export type ReferatSkjemaFeil = {
-  [key in keyof ReferatSkjemaValues]: string;
-};
 
 export const texts = {
   dateMissing: "Vennligst angi dato",
@@ -44,7 +44,12 @@ export const texts = {
   arbeidstakersOppgaveMissing: "Vennligst angi arbeidstakerens oppgave",
   arbeidsgiversOppgaveMissing: "Vennligst angi arbeidsgiverens oppgave",
   naermesteLederMissing: "Vennligst angi nærmeste leder",
+  andreDeltakereMissingFunksjon: "Vennligst angi funksjon på deltaker",
+  andreDeltakereMissingNavn: "Vennligst angi navn på deltaker",
 };
+
+export const harFeilmeldinger = (errors: SkjemaFeil): boolean =>
+  Object.values(errors).filter((value) => value !== undefined).length > 0;
 
 export const validerArbeidsgiver = (orgNummer?: string): string | undefined => {
   if (!orgNummer || orgNummer === "VELG") {
@@ -57,9 +62,9 @@ export const validerSted = (
   sted?: string,
   maxLength?: number
 ): string | undefined => {
-  if (!sted || sted.trim() === "") {
+  if (undefinedOrEmpty(sted)) {
     return texts.placeMissing;
-  } else if (maxLength && sted.length > maxLength) {
+  } else if (maxLength && sted && sted.length > maxLength) {
     return texts.textTooLong(MAX_LENGTH_STED);
   } else {
     return undefined;
@@ -127,17 +132,28 @@ export const validerBegrunnelser = (
 
 export const validerReferatDeltakere = (
   values: Partial<ReferatSkjemaValues>
-): Partial<ReferatSkjemaFeil> => {
-  const feil: Partial<ReferatSkjemaFeil> = {};
-  if (!values.naermesteLeder || values.naermesteLeder.trim() === "") {
+): SkjemaFeil => {
+  const { naermesteLeder, andreDeltakere } = values;
+  const feil: SkjemaFeil = {};
+  if (undefinedOrEmpty(naermesteLeder)) {
     feil.naermesteLeder = texts.naermesteLederMissing;
   }
+  andreDeltakere?.forEach(({ navn, funksjon }, index) => {
+    if (undefinedOrEmpty(funksjon)) {
+      feil[`andreDeltakere[${index}].funksjon`] =
+        texts.andreDeltakereMissingFunksjon;
+    }
+    if (undefinedOrEmpty(navn)) {
+      feil[`andreDeltakere[${index}].navn`] = texts.andreDeltakereMissingNavn;
+    }
+  });
+
   return feil;
 };
 
 export const validerReferatTekster = (
   values: Partial<ReferatSkjemaValues>
-): Partial<ReferatSkjemaFeil> => {
+): SkjemaFeil => {
   return {
     situasjon: validerFritekst(
       values.situasjon,
@@ -177,11 +193,15 @@ const validerFritekst = (
   maxLength: number,
   missingMessage?: string
 ): string | undefined => {
-  if (required && (!tekst || tekst.trim() === "")) {
+  if (required && undefinedOrEmpty(tekst)) {
     return missingMessage || "";
   } else if (tekst !== undefined && tekst.length > maxLength) {
     return texts.textTooLong(maxLength);
   } else {
     return undefined;
   }
+};
+
+const undefinedOrEmpty = (value?: string): boolean => {
+  return !value || value.trim() === "";
 };

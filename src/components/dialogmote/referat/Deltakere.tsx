@@ -5,7 +5,8 @@ import { Element } from "nav-frontend-typografi";
 import { Field } from "react-final-form";
 import styled from "styled-components";
 import { Input } from "nav-frontend-skjema";
-import { FlexColumn, FlexRow } from "../../Layout";
+import { FlexColumn, FlexRow, PaddingSize } from "../../Layout";
+import { AndreDeltakere } from "./AndreDeltakere";
 
 const texts = {
   title: "Deltakere i møtet",
@@ -31,8 +32,8 @@ const Deltakere = (): ReactElement => {
         <li>{`Fra NAV: ${veilederinfo?.navn}`}</li>
         <li>{`Arbeidstaker: ${navbruker?.navn}`}</li>
       </ul>
-      <FlexRow>
-        <FlexColumn flex={0.4}>
+      <FlexRow bottomPadding={PaddingSize.MD}>
+        <FlexColumn flex={0.3}>
           <Field<string> name="naermesteLeder">
             {({ input, meta }) => (
               <Input
@@ -45,6 +46,7 @@ const Deltakere = (): ReactElement => {
           </Field>
         </FlexColumn>
       </FlexRow>
+      <AndreDeltakere />
     </DeltakereBoks>
   );
 };
