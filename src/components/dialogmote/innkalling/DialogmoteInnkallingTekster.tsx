@@ -9,7 +9,7 @@ import { Forhandsvisning } from "../Forhandsvisning";
 import FritekstSeksjon from "../FritekstSeksjon";
 import { DialogmoteInnkallingTeksterAlert } from "./DialogmoteInnkallingTeksterAlert";
 
-export const MAX_LENGTH_INNKALLING_FRITEKST = 1000;
+export const MAX_LENGTH_INNKALLING_FRITEKST = 2000;
 
 export const texts = {
   title: "Tekster i innkallingen",
