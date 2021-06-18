@@ -32,6 +32,8 @@ import { tilDatoMedUkedagOgManedNavn } from "../../src/utils/datoUtils";
 import { Forhandsvisning } from "../../src/components/dialogmote/Forhandsvisning";
 import { Knapp } from "nav-frontend-knapper";
 import Lukknapp from "nav-frontend-lukknapp";
+import { AndreDeltakere } from "../../src/components/dialogmote/referat/AndreDeltakere";
+import { SlettKnapp } from "../../src/components/SlettKnapp";
 
 const realState = createStore(rootReducer).getState();
 const store = configureStore([]);
@@ -42,6 +44,8 @@ const navEnhet = "0315";
 const navEnhetNavn = "NAV Grünerløkka";
 const moteUuid = "123abc";
 const lederNavn = "Grønn Bamse";
+const annenDeltakerFunksjon = "Verneombud";
+const annenDeltakerNavn = "Bodil Bolle";
 const mote: DialogmoteDTO = {
   arbeidsgiver: {
     virksomhetsnummer: "912345678",
@@ -204,6 +208,51 @@ describe("ReferatTest", () => {
     );
   });
 
+  it("validerer navn og funksjon på andre deltakere", () => {
+    const wrapper = mount(
+      <MemoryRouter
+        initialEntries={[`/sykefravaer/dialogmote/${moteUuid}/referat`]}
+      >
+        <Route path="/sykefravaer/dialogmote/:dialogmoteUuid/referat">
+          <Provider store={store({ ...realState, ...mockState })}>
+            <Referat dialogmote={mote} pageTitle="Test" />
+          </Provider>
+        </Route>
+      </MemoryRouter>
+    );
+
+    const addDeltakerButton = wrapper.find(Knapp).at(0);
+    addDeltakerButton.simulate("click");
+
+    wrapper.find("form").simulate("submit");
+
+    // Feilmeldinger i skjema
+    const feil = () => wrapper.find(Feilmelding);
+    assertFeilmelding(feil(), valideringsTexts.andreDeltakereMissingNavn);
+    assertFeilmelding(feil(), valideringsTexts.andreDeltakereMissingFunksjon);
+
+    // Feilmelding i oppsummering
+    const feiloppsummering = () => wrapper.find(Feiloppsummering);
+    expect(feiloppsummering().text()).to.contain(
+      skjemaFeilOppsummeringTexts.title
+    );
+    expect(feiloppsummering().text()).to.contain(
+      valideringsTexts.andreDeltakereMissingNavn
+    );
+    expect(feiloppsummering().text()).to.contain(
+      valideringsTexts.andreDeltakereMissingFunksjon
+    );
+
+    // Slett deltaker og sjekk at feil forsvinner
+    wrapper.find(SlettKnapp).simulate("click");
+    expect(feiloppsummering().text()).not.to.contain(
+      valideringsTexts.andreDeltakereMissingNavn
+    );
+    expect(feiloppsummering().text()).not.to.contain(
+      valideringsTexts.andreDeltakereMissingFunksjon
+    );
+  });
+
   it("ferdigstiller dialogmote ved submit av skjema", () => {
     const mockStore = store({ ...realState, ...mockState });
     const wrapper = mount(
@@ -224,6 +273,12 @@ describe("ReferatTest", () => {
     changeTextAreaValue(wrapper, "arbeidsgiversOppgave", arbeidsgiversOppgave);
     changeTextAreaValue(wrapper, "veiledersOppgave", veiledersOppgave);
 
+    const addDeltakerButton = wrapper.find(Knapp).at(0);
+    addDeltakerButton.simulate("click");
+    const deltakerInput = wrapper.find(AndreDeltakere).find("input");
+    changeFieldValue(deltakerInput.at(0), annenDeltakerFunksjon);
+    changeFieldValue(deltakerInput.at(1), annenDeltakerNavn);
+
     wrapper.find("form").simulate("submit");
 
     expect(mockStore.getActions()[0]).to.deep.equal({
@@ -238,7 +293,9 @@ describe("ReferatTest", () => {
         arbeidstakerOppgave: arbeidstakersOppgave,
         veilederOppgave: veiledersOppgave,
         document: expectedReferat,
-        andreDeltakere: [],
+        andreDeltakere: [
+          { funksjon: annenDeltakerFunksjon, navn: annenDeltakerNavn },
+        ],
       },
     });
   });
@@ -263,14 +320,20 @@ describe("ReferatTest", () => {
     changeTextAreaValue(wrapper, "arbeidsgiversOppgave", arbeidsgiversOppgave);
     changeTextAreaValue(wrapper, "veiledersOppgave", veiledersOppgave);
 
+    const addDeltakerButton = wrapper.find(Knapp).at(0);
+    addDeltakerButton.simulate("click");
+    const deltakerInput = wrapper.find(AndreDeltakere).find("input");
+    changeFieldValue(deltakerInput.at(0), annenDeltakerFunksjon);
+    changeFieldValue(deltakerInput.at(1), annenDeltakerNavn);
+
     const forhandsvisningModal = () => wrapper.find(Forhandsvisning);
     expect(
       forhandsvisningModal().props().getDocumentComponents()
     ).to.deep.equal(expectedReferat);
 
-    const previewButtons = wrapper.find(Knapp);
+    const previewButton = wrapper.find(Knapp).at(1);
 
-    previewButtons.at(0).simulate("click");
+    previewButton.simulate("click");
     expect(forhandsvisningModal().prop("isOpen")).to.be.true;
     expect(forhandsvisningModal().text()).to.contain(
       referatSkjemaTexts.forhandsvisningTitle
@@ -301,6 +364,7 @@ const expectedReferat: DocumentComponentDto[] = [
       `Arbeidstaker: ${arbeidstakerNavn}`,
       `Arbeidsgiver: ${lederNavn}`,
       `Fra NAV: ${veilederNavn}`,
+      `${annenDeltakerFunksjon}: ${annenDeltakerNavn}`,
     ],
     title: referatTexts.deltakereTitle,
     type: DocumentComponentType.PARAGRAPH,
