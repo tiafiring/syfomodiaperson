@@ -61,16 +61,16 @@ export const sykepengestoppArsakTekstListe: SykepengestoppArsakTekst[] = [
     text: "Medisinsk vilkår (§ 8-4 første ledd)",
   },
   {
-    type: SykepengestoppArsakType.AKTIVITETSKRAV,
-    text: "Aktivitetskravet (§ 8-4 andre ledd)",
-  },
-  {
     type: SykepengestoppArsakType.TILBAKEDATERT_SYKMELDING,
     text: "Tilbakedatert sykmelding (§ 8-7)",
   },
   {
     type: SykepengestoppArsakType.MANGLENDE_MEDVIRKING,
-    text: "Manglende medvirkning (§ 8-8)",
+    text: "Manglende medvirkning (§ 8-8 første ledd)",
+  },
+  {
+    type: SykepengestoppArsakType.AKTIVITETSKRAV,
+    text: "Aktivitetskravet (§ 8-8 andre ledd)",
   },
 ];
 
