@@ -89,7 +89,7 @@ server.get("/health/isReady", (req, res) => {
 
 server.use(
   "/fastlegerest/api",
-  proxy("fastlegerest.default", {
+  proxy("fastlegerest.teamsykefravr", {
     https: false,
     proxyReqPathResolver: function (req) {
       return `/fastlegerest/api${req.url}`;
