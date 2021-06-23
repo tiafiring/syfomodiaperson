@@ -8,7 +8,7 @@ export interface UnleashState {
 }
 
 export const initialState: UnleashState = {
-  fetching: true,
+  fetching: false,
   fetchingFailed: false,
   dm2Enabled: false,
 };

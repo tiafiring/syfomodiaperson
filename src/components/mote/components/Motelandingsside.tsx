@@ -44,7 +44,6 @@ export const Motelandingsside = ({ fnr }: Props) => {
     navbruker,
     veilederinfo,
     oppfolgingstilfelleperioder,
-    unleash,
   } = useAppSelector((state) => state);
 
   useEffect(() => {
@@ -73,8 +72,7 @@ export const Motelandingsside = ({ fnr }: Props) => {
     harForsoktHentetOppfoelgingsdialoger &&
     ledere.hentingForsokt &&
     moter.hentingForsokt &&
-    dialogmote.henterMoteForsokt &&
-    !unleash.fetching;
+    dialogmote.henterMoteForsokt;
 
   return (
     <SideLaster

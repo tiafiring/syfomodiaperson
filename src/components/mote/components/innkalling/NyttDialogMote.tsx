@@ -39,6 +39,7 @@ export const NyttDialogMote = (): ReactElement => {
     <>
       <FlexRow>
         <TrackedKnapp
+          data-cy="nyttDM2Mote"
           context={texts.nyttMoteTrackingContext}
           onClick={() => {
             setBehandlerModalIsOpen(true);
