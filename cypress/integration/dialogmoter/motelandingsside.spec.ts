@@ -9,7 +9,7 @@ context("Møtelandingsside actions", () => {
   it("Oppretter nytt møte der behandler skal være med", () => {
     cy.stubMoter(MoteState.INGEN_MOTER);
 
-    cy.contains("Nytt dialogmøte").click();
+    cy.dataCy(selectors.nyttDM2Mote).click();
 
     cy.get("button").contains("Ja").click();
 
@@ -19,7 +19,7 @@ context("Møtelandingsside actions", () => {
   it("Ønsker å prøve ny løsning for Dialogmøte", () => {
     cy.stubMoter(MoteState.INGEN_MOTER);
 
-    cy.contains("Nytt dialogmøte").click();
+    cy.dataCy(selectors.nyttDM2Mote).click();
 
     cy.get("button").contains("Nei").click();
 
@@ -33,7 +33,7 @@ context("Møtelandingsside actions", () => {
 
     cy.dataCy(selectors.forhandsvisningModal).contains("Avlysningsbrev");
 
-    cy.contains("Lukk").click();
+    cy.dataCy(selectors.forhandsvisningModal).contains("Lukk").click();
 
     cy.dataCy("Referat").click();
 
