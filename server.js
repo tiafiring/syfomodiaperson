@@ -282,7 +282,7 @@ server.use(
 
 server.use(
   "/syfobehandlendeenhet/api",
-  proxy("syfobehandlendeenhet.default", {
+  proxy("syfobehandlendeenhet.teamsykefravr", {
     https: false,
     proxyReqPathResolver: function (req) {
       return `/api${req.url}`;
