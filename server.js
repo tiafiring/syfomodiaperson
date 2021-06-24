@@ -89,7 +89,7 @@ server.get("/health/isReady", (req, res) => {
 
 server.use(
   "/fastlegerest/api",
-  proxy("fastlegerest.default", {
+  proxy("fastlegerest.teamsykefravr", {
     https: false,
     proxyReqPathResolver: function (req) {
       return `/fastlegerest/api${req.url}`;
@@ -341,7 +341,7 @@ server.use("/ispengestopp/api/v1/person/status", cookieParser(), (req, res) => {
   };
 
   axios
-    .get(`http://ispengestopp/api/v1/person/status`, options)
+    .get(`http://ispengestopp.teamsykefravr/api/v1/person/status`, options)
     .then((response) => {
       if (response.status === 204) {
         res.sendStatus(204);
