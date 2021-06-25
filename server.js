@@ -188,7 +188,7 @@ server.use(
 
 server.use(
   "/modiasyforest/api",
-  proxy("modiasyforest.default", {
+  proxy("modiasyforest.teamsykefravr", {
     https: false,
     proxyReqPathResolver: function (req) {
       return `/modiasyforest/api${req.url}`;
