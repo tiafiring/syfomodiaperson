@@ -103,7 +103,7 @@ server.use(
 
 server.use(
   "/ispersonoppgave/api",
-  proxy("ispersonoppgave.default", {
+  proxy("ispersonoppgave.teamsykefravr", {
     https: false,
     proxyReqPathResolver: function (req) {
       return `/api${req.path}`;
