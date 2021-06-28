@@ -254,7 +254,7 @@ server.use("/veileder/vedtak", cookieParser(), (req, res) => {
 
 server.use(
   "/syfomotebehov/api",
-  proxy("syfomotebehov.default", {
+  proxy("syfomotebehov.team-esyfo", {
     https: false,
     proxyReqPathResolver: function (req) {
       return `/syfomotebehov/api${req.url}`;
