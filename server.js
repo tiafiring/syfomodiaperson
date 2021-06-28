@@ -364,7 +364,9 @@ server.use("/ispengestopp/api/v1/person/flagg", cookieParser(), (req, res) => {
   const data = req.body;
 
   axios
-    .post(`http://ispengestopp.teamsykefravr/api/v1/person/flagg`, data, { headers })
+    .post(`http://ispengestopp.teamsykefravr/api/v1/person/flagg`, data, {
+      headers,
+    })
     .then((response) => {
       res.sendStatus(response.status);
     })
