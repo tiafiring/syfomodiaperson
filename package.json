@@ -5,7 +5,7 @@
   "main": "index.js",
   "test": "npm run test",
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+    "*.{js,jsx,ts,tsx,json,css,scss,md,less,html}": [
       "prettier --write"
     ]
   },
