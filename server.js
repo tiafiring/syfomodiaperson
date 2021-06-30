@@ -386,7 +386,7 @@ server.use("/isprediksjon/api/v1/prediksjon", cookieParser(), (req, res) => {
   };
 
   axios
-    .get(`http://isprediksjon/api/v1/prediksjon`, options)
+    .get(`http://isprediksjon.teamsykefravr/api/v1/prediksjon`, options)
     .then((response) => {
       if (response.status === 204) {
         res.sendStatus(204);
