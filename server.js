@@ -117,7 +117,7 @@ server.use(
 
 server.use(
   "/syfo-tilgangskontroll/api",
-  proxy("syfo-tilgangskontroll.default", {
+  proxy("syfo-tilgangskontroll.teamsykefravr", {
     https: false,
     proxyReqPathResolver: function (req) {
       return `/syfo-tilgangskontroll/api${req.url}`;
