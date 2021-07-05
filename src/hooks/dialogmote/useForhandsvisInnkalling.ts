@@ -4,7 +4,10 @@ import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../utils/datoUtils"
 import { genererDato } from "../../components/mote/utils";
 import { useNavBrukerData } from "../../data/navbruker/navbruker_hooks";
 import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
-import { innkallingTexts } from "../../data/dialogmote/dialogmoteTexts";
+import {
+  commonTexts,
+  innkallingTexts,
+} from "../../data/dialogmote/dialogmoteTexts";
 import {
   createLink,
   createParagraph,
@@ -55,8 +58,8 @@ export const useForhandsvisInnkalling = (): ForhandsvisInnkallingGenerator => {
       ...arbeidsgiverOutro(),
       ...hilsen,
       createParagraph(
-        innkallingTexts.arbeidsgiver.arbeidsgiverTlfLabel,
-        innkallingTexts.arbeidsgiver.arbeidsgiverTlf
+        commonTexts.arbeidsgiverTlfLabel,
+        commonTexts.arbeidsgiverTlf
       )
     );
 
