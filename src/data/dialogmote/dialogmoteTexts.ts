@@ -22,8 +22,6 @@ export const innkallingTexts = {
       "Det er obligatorisk å delta i dialogmøtet. Hvis vårt forslag ikke passer, ber vi om at du tar kontakt. Vi minner om at det ikke må sendes sensitive personopplysninger over e-post eller SMS.",
     outro2:
       "NAV kan be fastlegen eller annet helsepersonell om å delta i møtet. Til dette møtet har vi ikke sett behov for det.",
-    arbeidsgiverTlfLabel: "Arbeidsgivertelefonen",
-    arbeidsgiverTlf: "55 55 33 36",
   },
 };
 
@@ -44,6 +42,8 @@ export const avlysningTexts = {
 
 export const commonTexts = {
   hilsen: "Vennlig hilsen",
+  arbeidsgiverTlfLabel: "Arbeidsgivertelefonen",
+  arbeidsgiverTlf: "55 55 33 36",
 };
 
 // Disse nøklene knyttes til linker i eSyfo og skal ikke endres.

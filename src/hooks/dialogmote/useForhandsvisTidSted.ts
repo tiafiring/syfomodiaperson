@@ -12,6 +12,7 @@ import {
 import { genererDato } from "../../components/mote/utils";
 import { useForhandsvisningHilsen } from "./useForhandsvisningHilsen";
 import {
+  commonTexts,
   endreTidStedTexts,
   innkallingTexts,
 } from "../../data/dialogmote/dialogmoteTexts";
@@ -47,7 +48,13 @@ export const useForhandsvisTidSted = (): ForhandsvisTidStedGenerator => {
       documentComponents.push(createParagraph(values.begrunnelseArbeidsgiver));
     }
 
-    documentComponents.push(...hilsen);
+    documentComponents.push(
+      ...hilsen,
+      createParagraph(
+        commonTexts.arbeidsgiverTlfLabel,
+        commonTexts.arbeidsgiverTlf
+      )
+    );
 
     return documentComponents;
   };

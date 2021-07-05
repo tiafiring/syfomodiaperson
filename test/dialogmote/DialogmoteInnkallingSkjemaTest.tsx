@@ -450,10 +450,7 @@ const expectedArbeidsgiverInnkalling = [
     type: "PARAGRAPH",
   },
   {
-    texts: [
-      innkallingTexts.arbeidsgiver.arbeidsgiverTlfLabel,
-      innkallingTexts.arbeidsgiver.arbeidsgiverTlf,
-    ],
+    texts: [commonTexts.arbeidsgiverTlfLabel, commonTexts.arbeidsgiverTlf],
     type: "PARAGRAPH",
   },
 ];
