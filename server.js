@@ -35,6 +35,11 @@ const syfopersonHost =
     ? "https://syfoperson.dev.intern.nav.no"
     : "https://syfoperson.intern.nav.no";
 
+const ispersonoppgaveHost =
+  process.env.NAIS_CONTEXT === "dev"
+    ? "ispersonoppgave.dev.intern.nav.no"
+    : "ispersonoppgave.intern.nav.no";
+
 const isdialogmoteHost =
   process.env.NAIS_CONTEXT === "dev"
     ? "isdialogmote.dev.intern.nav.no"
@@ -102,9 +107,17 @@ server.use(
 );
 
 server.use(
-  "/ispersonoppgave/api",
-  proxy("ispersonoppgave.teamsykefravr", {
-    https: false,
+  "/ispersonoppgave/api/get",
+  cookieParser(),
+  proxy(ispersonoppgaveHost, {
+    https: true,
+    parseReqBody: false,
+    proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
+      const token = srcReq.cookies["isso-idtoken"];
+      proxyReqOpts.headers["Authorization"] = `Bearer ${token}`;
+      proxyReqOpts.headers["Content-Type"] = "application/json";
+      return proxyReqOpts;
+    },
     proxyReqPathResolver: function (req) {
       return `/api${req.path}`;
     },
@@ -138,6 +151,28 @@ server.use(
     },
     proxyErrorHandler: function (err, res, next) {
       console.error("Error in proxy for modiacontextholder", err.message);
+      next(err);
+    },
+  })
+);
+
+server.use(
+  "/ispersonoppgave/api/post",
+  cookieParser(),
+  proxy(ispersonoppgaveHost, {
+    https: true,
+    parseReqBody: true,
+    proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
+      const token = srcReq.cookies["isso-idtoken"];
+      proxyReqOpts.headers["Authorization"] = `Bearer ${token}`;
+      proxyReqOpts.headers["Content-Type"] = "application/json";
+      return proxyReqOpts;
+    },
+    proxyReqPathResolver: function (req) {
+      return `/api${req.path}`;
+    },
+    proxyErrorHandler: function (err, res, next) {
+      console.error("Error in proxy for ispersonoppgave", err.message);
       next(err);
     },
   })
