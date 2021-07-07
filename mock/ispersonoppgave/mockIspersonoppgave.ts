@@ -33,7 +33,7 @@ const getPersonOppgaver = () => {
 
 export const mockIspersonoppgave = (server) => {
   server.get(
-    "/ispersonoppgave/api/v1/personoppgave/personident",
+    "/ispersonoppgave/api/get/v1/personoppgave/personident",
     (req, res) => {
       if (
         req.headers[NAV_PERSONIDENT_HEADER] &&
@@ -48,7 +48,7 @@ export const mockIspersonoppgave = (server) => {
   );
 
   server.post(
-    "/ispersonoppgave/api/v1/personoppgave/:uuid/behandle",
+    "/ispersonoppgave/api/post/v1/personoppgave/:uuid/behandle",
     (req, res) => {
       res.sendStatus(200);
     }

@@ -5,7 +5,7 @@ import * as actions from "./personoppgave_actions";
 export function* hentPersonOppgaver(action: any) {
   yield put(actions.hentPersonOppgaverHenter());
   try {
-    const path = "/ispersonoppgave/api/v1/personoppgave/personident";
+    const path = "/ispersonoppgave/api/get/v1/personoppgave/personident";
     const data = yield call(get, path, action.fnr);
     const personOppgaveList = data || [];
     yield put(actions.hentPersonOppgaverHentet(personOppgaveList));
@@ -39,7 +39,7 @@ export function* behandlePersonOppgave(action: any) {
   const veilederIdent = action.veilederIdent;
   yield put(actions.behandlePersonOppgaveBehandler());
   try {
-    const path = `/ispersonoppgave/api/v1/personoppgave/${uuid}/behandle`;
+    const path = `/ispersonoppgave/api/post/v1/personoppgave/${uuid}/behandle`;
     yield call(post, path);
     yield put(
       actions.behandlePersonOppgaveBehandlet(uuid, referanseUuid, veilederIdent)
