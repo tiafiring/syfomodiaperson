@@ -71,7 +71,7 @@ const isNewerLeader = (ledere: Leder[], givenLeder: Leder): boolean => {
   );
 };
 
-const newestLederForEachVirksomhet = (ledere: Leder[]): Leder[] => {
+export const newestLederForEachVirksomhet = (ledere: Leder[]): Leder[] => {
   return ledere.filter((leder) => {
     return !isNewerLeader(ledere, leder);
   });
@@ -201,7 +201,9 @@ export const formerLedere = (ledere: Leder[]): Leder[] => {
   return ledere.filter((leder) => leder.aktivTom !== null);
 };
 
-export const ledereSortertPaaNavnOgOrganisasjonsnavn = (ledere: Leder[]) =>
+export const ledereSortertPaaNavnOgOrganisasjonsnavn = (
+  ledere: Leder[]
+): Leder[] =>
   ledere
     .sort((a, b) => {
       if (a.navn > b.navn) {

@@ -1,24 +1,27 @@
 import { call, fork, put, select, takeEvery } from "redux-saga/effects";
 import { get } from "../../api";
 import * as actions from "./ledere_actions";
+import { HentLedereAction } from "./ledere_actions";
+import { RootState } from "../rootState";
+import { Leder } from "./ledere";
 
-export function* hentLedere(action: any) {
-  yield put({ type: actions.HENTER_LEDERE });
+export function* hentLedere(action: HentLedereAction) {
+  yield put(actions.henterLedere());
   try {
     const path = `${process.env.REACT_APP_REST_ROOT}/internad/allnaermesteledere?fnr=${action.fnr}`;
-    const data = yield call(get, path);
-    yield put({ type: actions.LEDERE_HENTET, data });
+    const data: Leder[] = yield call(get, path);
+    yield put(actions.ledereHentet(data));
   } catch (e) {
-    yield put({ type: actions.HENT_LEDERE_FEILET });
+    yield put(actions.hentLedereFailed());
   }
 }
 
-export const skalHenteLedere = (state: any) => {
+export const skalHenteLedere = (state: RootState) => {
   const reducer = state.ledere;
   return !(reducer.henter || reducer.hentet || reducer.hentingFeilet);
 };
 
-export function* hentLedereHvisIkkeHentet(action: any) {
+export function* hentLedereHvisIkkeHentet(action: HentLedereAction) {
   const skalHente = yield select(skalHenteLedere);
   if (skalHente) {
     yield hentLedere(action);

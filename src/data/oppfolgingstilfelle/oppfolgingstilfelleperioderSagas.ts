@@ -20,7 +20,7 @@ export function* hentOppfolgingstilfelleperioder(
 export const hentLedereVirksomhetsnummerList = (ledere: LedereState) => {
   const erLedereHentet = ledere.hentet;
   if (erLedereHentet) {
-    return ledere.data.map((leder) => {
+    return ledere.currentLedere.map((leder) => {
       return leder.orgnummer;
     });
   }

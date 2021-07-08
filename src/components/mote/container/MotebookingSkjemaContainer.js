@@ -100,7 +100,7 @@ MotebookingSkjemaContainer.propTypes = {
 };
 
 export function mapStateToProps(state, ownProps) {
-  const ledere = state.ledere.data.filter((leder) => {
+  const ledere = state.ledere.currentLedere.filter((leder) => {
     return leder.erOppgitt;
   });
 

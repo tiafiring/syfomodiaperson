@@ -83,7 +83,7 @@ export const Motelandingsside = ({ fnr }: Props) => {
 
       <DialogmoteOnskePanel
         motebehovData={motebehov.data}
-        ledereData={ledere.data}
+        ledereData={ledere.currentLedere}
         oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
         sykmeldt={navbruker.data}
         veilederinfo={veilederinfo.data}

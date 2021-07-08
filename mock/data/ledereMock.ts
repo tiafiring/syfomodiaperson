@@ -83,4 +83,18 @@ export const ledereMock = [
     aktivTom: null,
     arbeidsgiverForskuttererLoenn: null,
   },
+  {
+    navn: "He-man",
+    id: 5,
+    aktoerId: "9909909909904",
+    tlf: "87654321",
+    epost: "test6@test.no",
+    aktiv: true,
+    erOppgitt: true,
+    fomDato: "2021-07-01T12:00:00+01:00",
+    orgnummer: "912345678",
+    organisasjonsnavn: "Skomaker Andersen",
+    aktivTom: null,
+    arbeidsgiverForskuttererLoenn: null,
+  },
 ];

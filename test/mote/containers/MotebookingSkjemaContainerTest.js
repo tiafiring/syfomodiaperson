@@ -12,7 +12,7 @@ describe("MotebookingSkjemaContainer", () => {
       };
       state = {
         ledere: {
-          data: [
+          currentLedere: [
             {
               navn: "Ole",
               erOppgitt: true,
@@ -48,14 +48,14 @@ describe("MotebookingSkjemaContainer", () => {
     });
 
     it("Skal returnere hentingFeilet når henting av ledere feiler", () => {
-      state.ledere.data = [];
+      state.ledere.currentLedere = [];
       state.ledere.hentingFeilet = true;
       const props = mapStateToProps(state, ownProps);
       expect(props.hentLedereFeiletBool).to.be.equal(true);
     });
 
     it("Skal returnere hentingFeilet når henting av ledere ikke feiler", () => {
-      state.ledere.data = [];
+      state.ledere.currentLedere = [];
       state.ledere.hentingFeilet = false;
       const props = mapStateToProps(state, ownProps);
       expect(props.hentLedereFeiletBool).to.be.equal(false);

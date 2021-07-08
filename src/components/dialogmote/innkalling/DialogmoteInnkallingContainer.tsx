@@ -23,12 +23,12 @@ const DialogmoteInnkallingContainer = (): ReactElement => {
   const fnr = useValgtPersonident();
   const { hentingLedereForsokt, hentingLedereFeilet } = useLedere();
 
-  const henter = !hentingLedereForsokt;
-  const hentingFeilet = hentingLedereFeilet;
-
   return (
     <Side fnr={fnr} tittel={texts.title} aktivtMenypunkt={MOETEPLANLEGGER}>
-      <SideLaster henter={henter} hentingFeilet={hentingFeilet}>
+      <SideLaster
+        henter={!hentingLedereForsokt}
+        hentingFeilet={hentingLedereFeilet}
+      >
         <Sidetopp tittel={texts.title} />
         <DialogmoteInnkallingWarningAlert type="advarsel">
           {texts.alert}

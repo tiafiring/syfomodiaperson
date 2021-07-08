@@ -43,8 +43,6 @@ const mockState = {
         arbeidsgiver: {
           uuid: 4,
           virksomhetsnummer: "912345678",
-          lederNavn: "He-man",
-          lederEpost: null,
           type: "ARBEIDSGIVER",
           varselList: [
             {
@@ -87,8 +85,6 @@ const mockState = {
         arbeidsgiver: {
           uuid: 41,
           virksomhetsnummer: "912345678",
-          lederNavn: "He-man",
-          lederEpost: null,
           type: "ARBEIDSGIVER",
           varselList: [
             {

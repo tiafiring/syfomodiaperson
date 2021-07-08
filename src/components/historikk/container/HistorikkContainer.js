@@ -116,7 +116,7 @@ export const mapStateToProps = (state) => {
     }) !== -1;
   const henter = state.tilgang.henter || state.ledere.henter || henterTilfeller;
 
-  const currentLedere = state.ledere.data;
+  const currentLedere = state.ledere.currentLedere;
   const formerLedere = state.ledere.formerLedere;
   const allLedere = [...currentLedere, ...formerLedere];
 

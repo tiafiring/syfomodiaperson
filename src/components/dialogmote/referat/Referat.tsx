@@ -32,6 +32,7 @@ import { Forhandsvisning } from "../Forhandsvisning";
 import { useForhandsvisReferat } from "../../../hooks/dialogmote/useForhandsvisReferat";
 import { StandardTekst } from "../../../data/dialogmote/dialogmoteTexts";
 import { NewDialogmotedeltakerAnnenDTO } from "../../../data/dialogmote/types/dialogmoteReferatTypes";
+import { useLedere } from "../../../hooks/useLedere";
 
 export const texts = {
   digitalReferat:
@@ -75,6 +76,7 @@ const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
     (state) => state.dialogmote
   );
   const navbruker = useNavBrukerData();
+  const { getCurrentNarmesteLeder } = useLedere();
   const [displayReferatPreview, setDisplayReferatPreview] = useState(false);
 
   const dateAndTimeForMeeting = tilDatoMedManedNavn(dialogmote.tid);
@@ -114,7 +116,9 @@ const Referat = ({ dialogmote, pageTitle }: ReferatProps): ReactElement => {
   };
 
   const initialValues: Partial<ReferatSkjemaValues> = {
-    naermesteLeder: dialogmote.arbeidsgiver.lederNavn,
+    naermesteLeder: getCurrentNarmesteLeder(
+      dialogmote.arbeidsgiver.virksomhetsnummer
+    )?.navn,
   };
 
   return (
