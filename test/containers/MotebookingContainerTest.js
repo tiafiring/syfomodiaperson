@@ -119,7 +119,7 @@ describe("MotebookingContainer", () => {
           navn: "BEKK",
         },
         ledere: {
-          data: [],
+          currentLedere: [],
           hentingFeilet: false,
           henter: false,
         },

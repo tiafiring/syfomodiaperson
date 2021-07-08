@@ -66,7 +66,7 @@ describe("MotelandingssideContainer", () => {
         ledere: {
           hentet: true,
           hentingForsokt: true,
-          data: [
+          currentLedere: [
             {
               navn: "Tatten Tattover",
               id: 2,

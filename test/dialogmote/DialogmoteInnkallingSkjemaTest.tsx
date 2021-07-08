@@ -76,7 +76,7 @@ const mockState = {
     personident: arbeidstakerFnr,
   },
   ledere: {
-    data: [
+    currentLedere: [
       {
         navn: "Tatten Tattover",
         aktoerId: "1902690001009",

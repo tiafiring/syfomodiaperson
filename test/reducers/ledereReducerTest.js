@@ -34,7 +34,7 @@ describe("ledere", () => {
       hentet: true,
       hentingFeilet: false,
       hentingForsokt: true,
-      data: [
+      currentLedere: [
         {
           navn: "Kurt Nilsen",
           aktivTom: null,
@@ -61,7 +61,7 @@ describe("ledere", () => {
     const action = { type: HENTER_LEDERE };
     const nextState = ledere(initialState, action);
     expect(nextState).to.deep.equal({
-      data: [],
+      currentLedere: [],
       formerLedere: [],
       allLedere: [],
       henter: true,
@@ -82,7 +82,7 @@ describe("ledere", () => {
       hentet: false,
       hentingFeilet: true,
       hentingForsokt: true,
-      data: [],
+      currentLedere: [],
       formerLedere: [],
       allLedere: [],
     });

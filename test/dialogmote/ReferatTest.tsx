@@ -51,7 +51,6 @@ const mote: DialogmoteDTO = {
     virksomhetsnummer: "912345678",
     type: "ARBEIDSGIVER",
     varselList: [],
-    lederNavn: lederNavn,
   },
   arbeidstaker: {
     personIdent: arbeidstakerPersonIdent,
@@ -91,6 +90,20 @@ const mockState = {
   },
   valgtbruker: {
     personident: arbeidstakerPersonIdent,
+  },
+  ledere: {
+    currentLedere: [
+      {
+        navn: lederNavn,
+        aktiv: true,
+        orgnummer: "912345678",
+      },
+      {
+        navn: "Annen Leder",
+        aktiv: true,
+        orgnummer: "89829812",
+      },
+    ],
   },
 };
 

@@ -53,8 +53,6 @@ export interface DialogmotedeltakerArbeidstakerDTO {
 
 export interface DialogmotedeltakerArbeidsgiverDTO {
   readonly virksomhetsnummer: string;
-  readonly lederNavn?: string;
-  readonly lederEpost?: string;
   readonly type: string;
   readonly varselList: DialogmotedeltakerArbeidsgiverVarselDTO[];
 }

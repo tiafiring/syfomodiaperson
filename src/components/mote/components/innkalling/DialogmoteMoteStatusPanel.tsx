@@ -20,6 +20,7 @@ import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../../../utils/dato
 import { Link } from "react-router-dom";
 import { TrackedKnapp } from "../../../buttons/TrackedKnapp";
 import { TrackedHovedknapp } from "../../../buttons/TrackedHovedknapp";
+import { useLedere } from "../../../../hooks/useLedere";
 
 const texts = {
   innkallingSendtTrackingContext: "Møtelandingsside: Sendt innkalling",
@@ -77,13 +78,18 @@ const ParticipantInfo = ({
     dialogmote.arbeidsgiver.varselList
   );
 
+  const { getCurrentNarmesteLeder } = useLedere();
+  const narmesteLederNavn = getCurrentNarmesteLeder(
+    dialogmote.arbeidsgiver.virksomhetsnummer
+  )?.navn;
+
   return (
     <FlexColumn>
       <InfoRow
         icon={getHarLestIcon(arbeidsgiverHarLestInnkallingen)}
         title={
           <span>
-            <b>{texts.naermesteLeder}</b> {dialogmote.arbeidsgiver.lederNavn},
+            <b>{texts.naermesteLeder}</b> {narmesteLederNavn ?? ""},
             {getHarLestText(arbeidsgiverHarLestInnkallingen)}
           </span>
         }

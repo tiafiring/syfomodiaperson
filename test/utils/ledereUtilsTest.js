@@ -9,6 +9,7 @@ import {
   ledereWithActiveLedereFirst,
   virksomheterWithoutLeder,
   ledereSortertPaaNavnOgOrganisasjonsnavn,
+  newestLederForEachVirksomhet,
 } from "../../src/utils/ledereUtils";
 import { ANTALL_MS_DAG } from "../../src/utils/datoUtils";
 import {
@@ -582,6 +583,32 @@ describe("ledereUtils", () => {
       expect(ledereSortert[0]).to.deep.equal(leder3);
       expect(ledereSortert[1]).to.deep.equal(leder2);
       expect(ledereSortert[2]).to.deep.equal(leder1);
+    });
+  });
+
+  describe("newestLederForEachVirksomhet", () => {
+    it("returns newest leder for each virksomhet (orgnummer)", () => {
+      const lederFor123Old = {
+        orgnummer: "123",
+        aktoerId: "1",
+        fomDato: "2020-01-01",
+      };
+      const lederFor123New = {
+        orgnummer: "123",
+        aktoerId: "2",
+        fomDato: "2020-09-30",
+      };
+      const lederFor999 = {
+        orgnummer: "999",
+        aktoerId: "3",
+        fomDato: "2020-01-01",
+      };
+      const ledere = [lederFor123Old, lederFor123New, lederFor999];
+
+      const newestLedere = newestLederForEachVirksomhet(ledere);
+      expect(newestLedere.length).to.equal(2);
+      expect(newestLedere[0]).to.deep.equal(lederFor123New);
+      expect(newestLedere[1]).to.deep.equal(lederFor999);
     });
   });
 });

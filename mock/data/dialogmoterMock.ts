@@ -46,8 +46,6 @@ const createDialogmote = (
     arbeidsgiver: {
       uuid: uuid + 3,
       virksomhetsnummer: "912345678",
-      lederNavn: "He-man",
-      lederEpost: null,
       type: "ARBEIDSGIVER",
       varselList: [
         {
