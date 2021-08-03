@@ -10,15 +10,34 @@ import { Moteplanleggeren } from "./Moteplanleggeren";
 import { DialogmoteMoteStatusPanel } from "./DialogmoteMoteStatusPanel";
 import { useAktivtDialogmote } from "../../../../data/dialogmote/dialogmote_hooks";
 import { useIsDM2Enabled } from "../../../../data/unleash/unleash_hooks";
+import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
+import styled from "styled-components";
+import { AlertstripeFullbredde } from "../../../AlertstripeFullbredde";
+import { Normaltekst } from "nav-frontend-typografi";
+import { BrukerKanIkkeVarslesText } from "../../../BrukerKanIkkeVarslesText";
 
-const texts = {
+export const texts = {
   bekreftetMote: "Bekreftet møte",
   seMotestatus: "Se møtestatus",
   planleggNyttMote: "Planlegg nytt dialogmøte",
   ingenMoterPlanlagt: "Ingen møter planlagt",
   dialogMote: "Dialogmøte",
   moteforesporselSendt: "Møteforespørsel sendt",
+  kanIkkeVarslesDialogmoteInnkalling:
+    "Dialogmøter med denne personen må fortsatt kalles inn via Arena.",
 };
+
+const BrukerKanIkkeVarslesAlertStripe = styled(AlertstripeFullbredde)`
+  margin-bottom: 2em;
+`;
+
+const BrukerKanIkkeVarslesWarning = () => (
+  <BrukerKanIkkeVarslesAlertStripe type="advarsel">
+    <BrukerKanIkkeVarslesText />
+    <br />
+    <Normaltekst>{texts.kanIkkeVarslesDialogmoteInnkalling}</Normaltekst>
+  </BrukerKanIkkeVarslesAlertStripe>
+);
 
 const resolveUndertittelForMoteStatus = (mote: MoteDTO) => {
   if (mote.status === "BEKREFTET" && mote.bekreftetAlternativ) {
@@ -36,6 +55,9 @@ export const InnkallingDialogmotePanel = (): ReactElement => {
   const isDm2Enabled = useIsDM2Enabled();
   const aktivtMoteplanleggerMote = useAktivtMoteplanleggerMote();
   const aktivtDialogmote = useAktivtDialogmote();
+  const {
+    kontaktinfo: { skalHaVarsel },
+  } = useNavBrukerData();
 
   if (!isDm2Enabled) {
     return <Moteplanleggeren />;
@@ -64,6 +86,7 @@ export const InnkallingDialogmotePanel = (): ReactElement => {
         header={texts.planleggNyttMote}
         subtitle={texts.ingenMoterPlanlagt}
       >
+        {!skalHaVarsel ? <BrukerKanIkkeVarslesWarning /> : <></>}
         <NyttDialogMote />
       </DialogmotePanel>
     );

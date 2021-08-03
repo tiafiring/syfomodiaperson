@@ -2,11 +2,12 @@ import { ArbeiderKvinneImage } from "../../../../../img/ImageComponents";
 import ModalWrapper from "nav-frontend-modal";
 import React, { ReactElement, useState } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router";
 import Veileder from "nav-frontend-veileder";
 import { FlexColumn, FlexRow, ModalContentContainer } from "../../../Layout";
 import { TrackedKnapp } from "../../../buttons/TrackedKnapp";
 import { TrackedFlatknapp } from "../../../buttons/TrackedFlatknapp";
+import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
+import { Link } from "react-router-dom";
 
 const ModalText = styled.div`
   max-width: 40ch;
@@ -33,7 +34,24 @@ const texts = {
 export const NyttDialogMote = (): ReactElement => {
   const [behandlerModalIsOpen, setBehandlerModalIsOpen] = useState(false);
   const [nyLosningModalIsOpen, setNyLosningModalIsOpen] = useState(false);
-  const history = useHistory();
+  const {
+    kontaktinfo: { skalHaVarsel },
+  } = useNavBrukerData();
+
+  if (!skalHaVarsel) {
+    return (
+      <FlexRow>
+        <Link to="/sykefravaer/mote">
+          <TrackedKnapp
+            data-cy="nyttDM2Mote"
+            context={texts.nyttMoteTrackingContext}
+          >
+            {texts.nyttMote}
+          </TrackedKnapp>
+        </Link>
+      </FlexRow>
+    );
+  }
 
   return (
     <>
@@ -63,15 +81,14 @@ export const NyttDialogMote = (): ReactElement => {
 
           <FlexRow>
             <FlexColumn>
-              <TrackedKnapp
-                context={texts.behandlerVaereMedTrackingContext}
-                onClick={() => {
-                  setBehandlerModalIsOpen(false);
-                  history.push(`/sykefravaer/mote`);
-                }}
-              >
-                {texts.ja}
-              </TrackedKnapp>
+              <Link to="/sykefravaer/mote">
+                <TrackedKnapp
+                  context={texts.behandlerVaereMedTrackingContext}
+                  onClick={() => setBehandlerModalIsOpen(false)}
+                >
+                  {texts.ja}
+                </TrackedKnapp>
+              </Link>
             </FlexColumn>
             <FlexColumn>
               <TrackedKnapp
@@ -122,26 +139,24 @@ export const NyttDialogMote = (): ReactElement => {
 
           <FlexRow>
             <FlexColumn>
-              <TrackedKnapp
-                context={texts.modalOnskerDuProveTrackingContext}
-                onClick={() => {
-                  setNyLosningModalIsOpen(false);
-                  history.push(`/sykefravaer/dialogmote`);
-                }}
-              >
-                {texts.ja}
-              </TrackedKnapp>
+              <Link to="/sykefravaer/dialogmote">
+                <TrackedKnapp
+                  context={texts.modalOnskerDuProveTrackingContext}
+                  onClick={() => setNyLosningModalIsOpen(false)}
+                >
+                  {texts.ja}
+                </TrackedKnapp>
+              </Link>
             </FlexColumn>
             <FlexColumn>
-              <TrackedKnapp
-                context={texts.modalOnskerDuProveTrackingContext}
-                onClick={() => {
-                  setNyLosningModalIsOpen(false);
-                  history.push(`/sykefravaer/mote`);
-                }}
-              >
-                {texts.nei}
-              </TrackedKnapp>
+              <Link to="/sykefravaer/mote">
+                <TrackedKnapp
+                  context={texts.modalOnskerDuProveTrackingContext}
+                  onClick={() => setNyLosningModalIsOpen(false)}
+                >
+                  {texts.nei}
+                </TrackedKnapp>
+              </Link>
             </FlexColumn>
             <FlexColumn>
               <TrackedFlatknapp
