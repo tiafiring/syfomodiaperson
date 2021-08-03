@@ -1,4 +1,8 @@
-import { hentLoginUrl, hentRedirectBaseUrl } from "./index";
+import {
+  defaultRequestHeaders,
+  hentLoginUrl,
+  hentRedirectBaseUrl,
+} from "./index";
 
 import axios from "axios";
 
@@ -89,11 +93,11 @@ function handleError(error): Failure {
 
 export const get = <ResponseData>(
   url: string,
-  fnr?: string
+  personIdent?: string
 ): Promise<Result<ResponseData>> => {
   return axios
     .get(url, {
-      headers: { "nav-consumer-id": "syfomodiaperson", "nav-personident": fnr },
+      headers: defaultRequestHeaders(personIdent),
     })
     .then((response) => {
       return new Success(response.data, response.status);
@@ -106,11 +110,11 @@ export const get = <ResponseData>(
 export const post = <ResponseData>(
   url: string,
   data: Record<string, any>,
-  fnr?: string
+  personIdent?: string
 ): Promise<Result<ResponseData>> => {
   return axios
     .post(url, data, {
-      headers: { "nav-consumer-id": "syfomodiaperson", "nav-personident": fnr },
+      headers: defaultRequestHeaders(personIdent),
     })
     .then((response) => {
       return new Success(response.data, response.status);
