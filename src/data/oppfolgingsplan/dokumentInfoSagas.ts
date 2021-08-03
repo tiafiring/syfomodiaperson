@@ -1,19 +1,10 @@
-import { all, call, fork, put, select, takeEvery } from "redux-saga/effects";
-import { get } from "../../api";
+import { call, put, select, takeEvery } from "redux-saga/effects";
 import * as actions from "./dokumentinfo_actions";
+import { get, Result, Success } from "../../api/axios";
+import { DokumentinfoDTO } from "./types/DokumentinfoDTO";
+import { RootState } from "../rootState";
 
-export function* dokumentInfoSaga(action: any) {
-  yield put(actions.henterDokumentinfo(action.id));
-  try {
-    const path = `${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/dokument/${action.id}/dokumentinfo`;
-    const data = yield call(get, path);
-    yield put(actions.dokumentinfoHentet(action.id, data));
-  } catch (e) {
-    yield put(actions.hentDokumentinfoFeilet(action.id));
-  }
-}
-
-export const skalHenteDokumentInfo = (state: any, action: any) => {
+export const skalHenteDokumentInfo = (state: RootState, action: any) => {
   const planId = action.id || {};
   const reducer = state.dokumentinfo[planId] || {};
   return (!reducer.henter && !reducer.hentingForsokt) || false;
@@ -22,17 +13,23 @@ export const skalHenteDokumentInfo = (state: any, action: any) => {
 export function* hentMotebehovHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHenteDokumentInfo, action);
   if (skalHente) {
-    yield dokumentInfoSaga(action);
+    yield put(actions.henterDokumentinfo(action.id));
+
+    const path = `${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/dokument/${action.id}/dokumentinfo`;
+    const result: Result<DokumentinfoDTO> = yield call(get, path);
+
+    if (result instanceof Success) {
+      yield put(actions.dokumentinfoHentet(action.id, result.data));
+    } else {
+      //TODO: Add error to reducer and errorboundary to components
+      yield put(actions.hentDokumentinfoFeilet(action.id));
+    }
   }
 }
 
-function* watchHentDokumentInfo() {
+export default function* dokumentInfoSagas() {
   yield takeEvery(
     actions.HENT_DOKUMENTINFO_FORESPURT,
     hentMotebehovHvisIkkeHentet
   );
-}
-
-export default function* dokumentInfoSagas() {
-  yield all([fork(watchHentDokumentInfo)]);
 }

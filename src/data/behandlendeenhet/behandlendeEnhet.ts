@@ -1,46 +1,45 @@
 import { Reducer } from "redux";
 import {
-  HENT_BEHANDLENDE_ENHET_FEILET,
-  HENTER_BEHANDLENDE_ENHET,
-  BEHANDLENDE_ENHET_HENTET,
+  BehandlendeEnhetActions,
+  BehandlendeEnhetActionTypes,
 } from "./behandlendeEnhet_actions";
 import { BehandlendeEnhet } from "./types/BehandlendeEnhet";
+import { ApiError } from "../../api/axios";
 
 export interface BehandlendeEnhetState {
   henter: boolean;
-  hentingFeilet: boolean;
+  error?: ApiError;
   data: BehandlendeEnhet;
 }
 
 export const initialState: BehandlendeEnhetState = {
   henter: false,
-  hentingFeilet: false,
   data: { navn: "", enhetId: "" },
 };
 
-const behandlendeEnhet: Reducer<BehandlendeEnhetState> = (
-  state = initialState,
-  action
-) => {
+const behandlendeEnhet: Reducer<
+  BehandlendeEnhetState,
+  BehandlendeEnhetActions
+> = (state = initialState, action) => {
   switch (action.type) {
-    case HENT_BEHANDLENDE_ENHET_FEILET: {
+    case BehandlendeEnhetActionTypes.HENT_BEHANDLENDE_ENHET_FEILET: {
       return {
         ...state,
         henter: false,
-        hentingFeilet: true,
+        error: action.error,
       };
     }
-    case HENTER_BEHANDLENDE_ENHET: {
+    case BehandlendeEnhetActionTypes.HENTER_BEHANDLENDE_ENHET: {
       return {
         ...state,
         henter: true,
-        hentingFeilet: false,
+        error: undefined,
       };
     }
-    case BEHANDLENDE_ENHET_HENTET: {
+    case BehandlendeEnhetActionTypes.BEHANDLENDE_ENHET_HENTET: {
       return {
         henter: false,
-        hentingFeilet: false,
+        error: undefined,
         data: action.data,
       };
     }

@@ -1,6 +1,5 @@
 import React from "react";
 import { PERSONKORTVISNING_TYPE } from "../../konstanter";
-import { BehandlendeEnhet } from "../../data/behandlendeenhet/types/BehandlendeEnhet";
 import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
 import { FastlegerState } from "../../data/fastlege/fastleger";
 import { Leder } from "../../data/leder/ledere";
@@ -10,7 +9,6 @@ import PersonkortSykmeldt from "./PersonkortSykmeldt";
 import VisningEnhet from "./PersonkortEnhet";
 
 interface PersonkortVisningProps {
-  behandlendeEnhet: BehandlendeEnhet;
   fastleger: FastlegerState;
   ledere: Leder[];
   navbruker: Brukerinfo;
@@ -21,7 +19,6 @@ interface PersonkortVisningProps {
 
 const PersonkortVisning = (personkortVisningProps: PersonkortVisningProps) => {
   const {
-    behandlendeEnhet,
     fastleger,
     ledere,
     navbruker,
@@ -44,7 +41,7 @@ const PersonkortVisning = (personkortVisningProps: PersonkortVisningProps) => {
             );
           }
           case ENHET: {
-            return <VisningEnhet behandlendeEnhet={behandlendeEnhet} />;
+            return <VisningEnhet />;
           }
           default: {
             return (

@@ -1,30 +1,64 @@
-export const HENT_DISKRESJONSKODE_FORESPURT = "HENT_DISKRESJONSKODE_FORESPURT";
-export const HENTER_DISKRESJONSKODE = "HENTER_DISKRESJONSKODE";
-export const HENT_DISKRESJONSKODE_FEILET = "HENT_DISKRESJONSKODE_FEILET";
-export const DISKRESJONSKODE_HENTET = "DISKRESJONSKODE_HENTET";
+import { ApiError } from "../../api/axios";
 
-export function hentDiskresjonskode(fnr: string) {
+export enum HentDiskresjonskodeActionTypes {
+  HENT_DISKRESJONSKODE_FORESPURT = "HENT_DISKRESJONSKODE_FORESPURT",
+  HENTER_DISKRESJONSKODE = "HENTER_DISKRESJONSKODE",
+  HENT_DISKRESJONSKODE_FEILET = "HENT_DISKRESJONSKODE_FEILET",
+  DISKRESJONSKODE_HENTET = "DISKRESJONSKODE_HENTET",
+}
+
+export interface HentDiskresjonskodeAction {
+  type: HentDiskresjonskodeActionTypes.HENT_DISKRESJONSKODE_FORESPURT;
+  fnr: string;
+}
+
+export interface HentDiskresjonskodeFeiletAction {
+  type: HentDiskresjonskodeActionTypes.HENT_DISKRESJONSKODE_FEILET;
+  error: ApiError;
+}
+
+export interface HenterDiskresjonskodeAction {
+  type: HentDiskresjonskodeActionTypes.HENTER_DISKRESJONSKODE;
+}
+
+export interface DiskresjonskodeHentetAction {
+  type: HentDiskresjonskodeActionTypes.DISKRESJONSKODE_HENTET;
+  data: string;
+}
+
+export type HentDiskresjonskodeActions =
+  | HentDiskresjonskodeAction
+  | HentDiskresjonskodeFeiletAction
+  | HenterDiskresjonskodeAction
+  | DiskresjonskodeHentetAction;
+
+export function hentDiskresjonskode(fnr: string): HentDiskresjonskodeAction {
   return {
-    type: HENT_DISKRESJONSKODE_FORESPURT,
+    type: HentDiskresjonskodeActionTypes.HENT_DISKRESJONSKODE_FORESPURT,
     fnr,
   };
 }
 
-export function hentDiskresjonskodeFeilet() {
+export function hentDiskresjonskodeFeilet(
+  error: ApiError
+): HentDiskresjonskodeFeiletAction {
   return {
-    type: HENT_DISKRESJONSKODE_FEILET,
+    type: HentDiskresjonskodeActionTypes.HENT_DISKRESJONSKODE_FEILET,
+    error,
   };
 }
 
-export function henterDiskresjonskode() {
+export function henterDiskresjonskode(): HenterDiskresjonskodeAction {
   return {
-    type: HENTER_DISKRESJONSKODE,
+    type: HentDiskresjonskodeActionTypes.HENTER_DISKRESJONSKODE,
   };
 }
 
-export function diskresjonskodeHentet(data: string) {
+export function diskresjonskodeHentet(
+  data: string
+): DiskresjonskodeHentetAction {
   return {
-    type: DISKRESJONSKODE_HENTET,
+    type: HentDiskresjonskodeActionTypes.DISKRESJONSKODE_HENTET,
     data,
   };
 }

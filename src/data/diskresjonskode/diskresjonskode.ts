@@ -1,9 +1,9 @@
 import { Reducer } from "redux";
 import {
-  HENTER_DISKRESJONSKODE,
-  DISKRESJONSKODE_HENTET,
-  HENT_DISKRESJONSKODE_FEILET,
+  HentDiskresjonskodeActions,
+  HentDiskresjonskodeActionTypes,
 } from "./diskresjonskode_actions";
+import { ApiError } from "../../api/axios";
 
 export interface DiskresjonskodeData {
   diskresjonskode: string;
@@ -12,45 +12,46 @@ export interface DiskresjonskodeData {
 export interface DiskresjonskodeState {
   henter: boolean;
   hentet: boolean;
-  hentingFeilet: boolean;
+  error?: ApiError;
   data: DiskresjonskodeData;
 }
 
 export const initialState: DiskresjonskodeState = {
   henter: false,
   hentet: false,
-  hentingFeilet: false,
   data: {
     diskresjonskode: "",
   },
 };
 
-const diskresjonskode: Reducer<DiskresjonskodeState> = (
-  state = initialState,
-  action
-) => {
+const diskresjonskode: Reducer<
+  DiskresjonskodeState,
+  HentDiskresjonskodeActions
+> = (state = initialState, action) => {
   switch (action.type) {
-    case HENTER_DISKRESJONSKODE: {
+    case HentDiskresjonskodeActionTypes.HENTER_DISKRESJONSKODE: {
       return {
         ...initialState,
         henter: true,
+        error: undefined,
       };
     }
-    case DISKRESJONSKODE_HENTET: {
+    case HentDiskresjonskodeActionTypes.DISKRESJONSKODE_HENTET: {
       return {
         ...state,
         henter: false,
         hentet: true,
+        error: undefined,
         data: {
           diskresjonskode: action.data.toString(),
         },
       };
     }
-    case HENT_DISKRESJONSKODE_FEILET: {
+    case HentDiskresjonskodeActionTypes.HENT_DISKRESJONSKODE_FEILET: {
       return {
         ...state,
         henter: false,
-        hentingFeilet: true,
+        error: action.error,
       };
     }
     default: {

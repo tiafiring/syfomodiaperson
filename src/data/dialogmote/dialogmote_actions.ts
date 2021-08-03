@@ -5,7 +5,7 @@ import {
   EndreTidStedDialogmoteDTO,
 } from "./types/dialogmoteTypes";
 import { NewDialogmoteReferatDTO } from "./types/dialogmoteReferatTypes";
-import { ApiError } from "../../api/api";
+import { ApiError } from "../../api/axios";
 
 export enum DialogmoteActionTypes {
   OPPRETT_INNKALLING_FORESPURT = "OPPRETT_INNKALLING_FORESPURT",

@@ -1,21 +1,25 @@
-import { call, fork, put, select, takeEvery } from "redux-saga/effects";
-import { get } from "../../api";
-import * as actions from "./egenansatt_actions";
+import { call, put, select, takeEvery } from "redux-saga/effects";
+import { get, Result, Success } from "../../api/axios";
+import { RootState } from "../rootState";
+import {
+  egenansattHentet,
+  HentEgenAnsattActionTypes,
+  hentEgenansattFeilet,
+} from "./egenansatt_actions";
 
 export function* hentEgenansattSaga(action: any) {
-  yield put(actions.henterEgenansatt());
-  try {
-    const path = `${process.env.REACT_APP_SYFOPERSON_ROOT}/person/egenansatt`;
-    const data = yield call(get, path, action.fnr);
-    yield put(actions.egenansattHentet(data));
-  } catch (e) {
-    yield put(actions.hentEgenansattFeilet());
+  const path = `${process.env.REACT_APP_SYFOPERSON_ROOT}/person/egenansatt`;
+  const result: Result<boolean> = yield call(get, path, action.fnr);
+  if (result instanceof Success) {
+    yield put(egenansattHentet(result.data));
+  } else {
+    yield put(hentEgenansattFeilet(result.error));
   }
 }
 
-export const skalHenteEgenansatt = (state: any) => {
-  const reducer = state.egenansatt;
-  return !(reducer.henter || reducer.hentet || reducer.hentingFeilet);
+export const skalHenteEgenansatt = (state: RootState) => {
+  const { henter, hentet, error } = state.egenansatt;
+  return !(henter || hentet || error);
 };
 
 export function* hentEgenansattHvisIkkeHentet(action: any) {
@@ -25,13 +29,9 @@ export function* hentEgenansattHvisIkkeHentet(action: any) {
   }
 }
 
-function* watchHentEgenansatt() {
+export default function* egenansattSagas() {
   yield takeEvery(
-    actions.HENT_EGENANSATT_FORESPURT,
+    HentEgenAnsattActionTypes.HENT_EGENANSATT_FORESPURT,
     hentEgenansattHvisIkkeHentet
   );
-}
-
-export default function* egenansattSagas() {
-  yield fork(watchHentEgenansatt);
 }

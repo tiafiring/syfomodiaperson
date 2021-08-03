@@ -1,30 +1,52 @@
-export const HENT_EGENANSATT_FORESPURT = "HENT_EGENANSATT_FORESPURT";
-export const HENTER_EGENANSATT = "HENTER_EGENANSATT";
-export const HENT_EGENANSATT_FEILET = "HENT_EGENANSATT_FEILET";
-export const EGENANSATT_HENTET = "EGENANSATT_HENTET";
+import { ApiError } from "../../api/axios";
 
-export function hentEgenansatt(fnr: string) {
+export enum HentEgenAnsattActionTypes {
+  HENT_EGENANSATT_FORESPURT = "HENT_EGENANSATT_FORESPURT",
+  HENT_EGENANSATT_FEILET = "HENT_EGENANSATT_FEILET",
+  EGENANSATT_HENTET = "EGENANSATT_HENTET",
+}
+
+export interface HentEgenansattAction {
+  type: HentEgenAnsattActionTypes.HENT_EGENANSATT_FORESPURT;
+  fnr: string;
+}
+
+export interface HentEgenansattFeiletAction {
+  type: HentEgenAnsattActionTypes.HENT_EGENANSATT_FEILET;
+  error: ApiError;
+}
+
+export interface EgenansattHentetAction {
+  type: HentEgenAnsattActionTypes.EGENANSATT_HENTET;
+  isEgenAnsatt: boolean;
+}
+
+export type HentEgenAnsattActions =
+  | HentEgenansattAction
+  | HentEgenansattFeiletAction
+  | EgenansattHentetAction;
+
+export function hentEgenansatt(fnr: string): HentEgenansattAction {
   return {
-    type: HENT_EGENANSATT_FORESPURT,
+    type: HentEgenAnsattActionTypes.HENT_EGENANSATT_FORESPURT,
     fnr,
   };
 }
 
-export function hentEgenansattFeilet() {
+export function hentEgenansattFeilet(
+  error: ApiError
+): HentEgenansattFeiletAction {
   return {
-    type: HENT_EGENANSATT_FEILET,
+    type: HentEgenAnsattActionTypes.HENT_EGENANSATT_FEILET,
+    error,
   };
 }
 
-export function henterEgenansatt() {
+export function egenansattHentet(
+  isEgenAnsatt: boolean
+): EgenansattHentetAction {
   return {
-    type: HENTER_EGENANSATT,
-  };
-}
-
-export function egenansattHentet(data: boolean) {
-  return {
-    type: EGENANSATT_HENTET,
-    data,
+    type: HentEgenAnsattActionTypes.EGENANSATT_HENTET,
+    isEgenAnsatt,
   };
 }

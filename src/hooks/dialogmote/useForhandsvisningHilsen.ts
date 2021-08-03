@@ -5,9 +5,9 @@ import { commonTexts } from "../../data/dialogmote/dialogmoteTexts";
 import { DocumentComponentDto } from "../../data/dialogmote/types/dialogmoteTypes";
 
 export const useForhandsvisningHilsen = (): DocumentComponentDto[] => {
-  const behandlendeEnhet = useBehandlendeEnhet();
+  const { data } = useBehandlendeEnhet();
   const { veilederinfo } = useVeilederinfo();
-  const hilsen = [createParagraph(commonTexts.hilsen, behandlendeEnhet.navn)];
+  const hilsen = [createParagraph(commonTexts.hilsen, data.navn)];
   if (veilederinfo) {
     hilsen.push(createParagraph(veilederinfo.navn));
   }

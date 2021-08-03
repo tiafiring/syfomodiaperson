@@ -1,25 +1,28 @@
-import { call, put, fork, takeEvery } from "redux-saga/effects";
-import { get } from "../../api";
+import { call, put, takeEvery } from "redux-saga/effects";
 import * as actions from "./behandlendeEnhet_actions";
+import {
+  BehandlendeEnhetActionTypes,
+  behandlendeEnhetHentet,
+  HentBehandlendeEnhetAction,
+  hentBehandlendeEnhetFeilet,
+} from "./behandlendeEnhet_actions";
+import { get, Result, Success } from "../../api/axios";
+import { BehandlendeEnhet } from "./types/BehandlendeEnhet";
 
-export function* hentBehandlendeEnhetSaga(action: any) {
+function* hentBehandlendeEnhetSaga(action: HentBehandlendeEnhetAction) {
   yield put(actions.henterBehandlendeEnhet());
-  try {
-    const path = `${process.env.REACT_APP_SYFOBEHANDLENDEENHETREST_ROOT}/internad/personident`;
-    const data = yield call(get, path, action.fnr);
-    yield put(actions.behandlendeEnhetHentet(data));
-  } catch (e) {
-    yield put(actions.hentBehandlendeEnhetFeilet());
+  const path = `${process.env.REACT_APP_SYFOBEHANDLENDEENHETREST_ROOT}/internad/personident`;
+  const result: Result<BehandlendeEnhet> = yield call(get, path, action.fnr);
+  if (result instanceof Success) {
+    yield put(behandlendeEnhetHentet(result.data));
+  } else {
+    yield put(hentBehandlendeEnhetFeilet(result.error));
   }
 }
 
-function* watchHentBehandlendeEnhet() {
+export default function* behandlendeEnhetSagas() {
   yield takeEvery(
-    actions.HENT_BEHANDLENDE_ENHET_FORESPURT,
+    BehandlendeEnhetActionTypes.HENT_BEHANDLENDE_ENHET_FORESPURT,
     hentBehandlendeEnhetSaga
   );
-}
-
-export default function* behandlendeEnhetSagas() {
-  yield fork(watchHentBehandlendeEnhet);
 }

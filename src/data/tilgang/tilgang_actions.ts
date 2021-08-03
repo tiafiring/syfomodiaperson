@@ -22,7 +22,7 @@ export function harTilgang() {
   };
 }
 
-export function harIkkeTilgang(begrunnelse: string) {
+export function harIkkeTilgang(begrunnelse?: string) {
   return {
     type: HAR_IKKE_TILGANG,
     begrunnelse,

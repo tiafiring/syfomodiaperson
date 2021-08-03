@@ -1,16 +1,26 @@
-import {
-  defaultRequestHeaders,
-  hentLoginUrl,
-  hentRedirectBaseUrl,
-} from "./index";
-
 import axios from "axios";
+import { hentLoginUrl, hentRedirectBaseUrl } from "../utils/miljoUtil";
 
-const texts = {
+export const NAV_CONSUMER_ID_HEADER = "nav-consumer-id";
+export const NAV_CONSUMER_ID = "syfomodiaperson";
+export const NAV_PERSONIDENT_HEADER = "nav-personident";
+
+export const defaultRequestHeaders = (personIdent?: string): HeadersInit => {
+  const headers = {
+    "Content-Type": "application/json",
+    [NAV_CONSUMER_ID_HEADER]: NAV_CONSUMER_ID,
+  };
+
+  if (personIdent) {
+    headers[NAV_PERSONIDENT_HEADER] = personIdent;
+  }
+  return headers;
+};
+
+export const defaultErrorTexts = {
   accessDenied: "Du har ikke tilgang til å utføre denne handlingen.",
   generalError: "Det skjedde en uventet feil. Vennligst prøv igjen senere.",
-  networkError:
-    "Vi har problemer med å koble til nettet. Vennligst sjekk din internettforbindelse.",
+  networkError: "Vi har problemer med nettet, prøv igjen senere.",
   loginRequired: "Handlingen krever at du logger på.",
 };
 
@@ -49,7 +59,7 @@ function handleError(error): Failure {
           {
             type: ErrorType.LOGIN_REQUIRED,
             message: error.message,
-            defaultErrorMsg: texts.loginRequired,
+            defaultErrorMsg: defaultErrorTexts.loginRequired,
           },
           error.response.status
         );
@@ -61,7 +71,7 @@ function handleError(error): Failure {
           {
             type: ErrorType.ACCESS_DENIED,
             message: message,
-            defaultErrorMsg: texts.accessDenied,
+            defaultErrorMsg: defaultErrorTexts.accessDenied,
           },
           error.response.status
         );
@@ -71,7 +81,7 @@ function handleError(error): Failure {
           {
             type: ErrorType.GENERAL_ERROR,
             message: error.message,
-            defaultErrorMsg: texts.generalError,
+            defaultErrorMsg: defaultErrorTexts.generalError,
           },
           error.response.status
         );
@@ -80,13 +90,13 @@ function handleError(error): Failure {
     return new Failure({
       type: ErrorType.NETWORK_ERROR,
       message: error.message,
-      defaultErrorMsg: texts.networkError,
+      defaultErrorMsg: defaultErrorTexts.networkError,
     });
   } else {
     return new Failure({
       type: ErrorType.GENERAL_ERROR,
       message: error.message,
-      defaultErrorMsg: texts.generalError,
+      defaultErrorMsg: defaultErrorTexts.generalError,
     });
   }
 }
