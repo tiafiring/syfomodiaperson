@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, ReactNode } from "react";
 import styled from "styled-components";
 import Panel from "nav-frontend-paneler";
 import {
@@ -14,7 +14,7 @@ interface Props {
   header: string;
   subtitle?: string;
   topRightElement?: ReactElement;
-  children: ReactElement[] | ReactElement;
+  children: ReactNode;
 }
 
 const StyledPanel = styled(Panel)`

@@ -86,7 +86,7 @@ export const InnkallingDialogmotePanel = (): ReactElement => {
         header={texts.planleggNyttMote}
         subtitle={texts.ingenMoterPlanlagt}
       >
-        {!skalHaVarsel ? <BrukerKanIkkeVarslesWarning /> : <></>}
+        {!skalHaVarsel && <BrukerKanIkkeVarslesWarning />}
         <NyttDialogMote />
       </DialogmotePanel>
     );
