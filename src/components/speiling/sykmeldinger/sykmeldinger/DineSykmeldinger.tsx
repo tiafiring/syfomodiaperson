@@ -1,40 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   SykmeldingOldFormat,
   SykmeldingStatus,
 } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
-import { sorterSykmeldinger } from "../../../../utils/sorterSykmeldingerUtils";
 import SykmeldingTeasere from "./SykmeldingTeasere";
-import SykmeldingerSorteringContainer from "./SykmeldingerSorteringContainer";
 import { useTrackOnClick } from "../../../../data/logging/loggingHooks";
+import { VelgSykmeldingSorteringDropdown } from "./VelgSykmeldingSorteringDropdown";
+import {
+  SorteringKriterium,
+  SorteringsKriteriumVerdi,
+  sorterSykmeldinger,
+} from "../../../../utils/sorterSykmeldingerUtils";
 
 const texts = {
   ingenSykmeldinger: "Tidligere sykmeldinger",
   ingenNyeSykmeldinger: "Du har ingen nye sykmeldinger",
   nyeSykmeldinger: "Nye sykmeldinger",
   apneSykmelding: "Åpne sykmelding",
+  sorteringDato: "Dato",
+  sorteringArbeidsgiver: "Arbeidsgiver",
 };
+
+const sorteringsKriterier: SorteringKriterium[] = [
+  {
+    tekst: texts.sorteringDato,
+    verdi: "dato",
+  },
+  {
+    tekst: texts.sorteringArbeidsgiver,
+    verdi: "arbeidsgiver",
+  },
+];
 
 interface DineSykmeldingerProps {
   fnr: string;
-  sortering: any;
   sykmeldinger: SykmeldingOldFormat[];
 }
 
 const DineSykmeldinger = (dineSykmeldingerProps: DineSykmeldingerProps) => {
-  const { sykmeldinger = [], sortering, fnr } = dineSykmeldingerProps;
+  const { sykmeldinger = [], fnr } = dineSykmeldingerProps;
   const nyeSykmeldinger = sykmeldinger.filter((sykmld) => {
     return sykmld.status === SykmeldingStatus.NY;
   });
   const tidligereSykmeldinger = sykmeldinger.filter((sykmld) => {
     return sykmld.status !== SykmeldingStatus.NY;
   });
-  const tidligereSortering =
-    sortering && sortering.tidligere ? sortering.tidligere : undefined;
   const trackOnClick = useTrackOnClick();
+  const [
+    valgtSortering,
+    setValgtSortering,
+  ] = useState<SorteringsKriteriumVerdi>("dato");
 
   return (
-    <div>
+    <>
       <SykmeldingTeasere
         sykmeldinger={sorterSykmeldinger(nyeSykmeldinger)}
         tittel={texts.nyeSykmeldinger}
@@ -48,7 +66,7 @@ const DineSykmeldinger = (dineSykmeldingerProps: DineSykmeldingerProps) => {
         <SykmeldingTeasere
           sykmeldinger={sorterSykmeldinger(
             tidligereSykmeldinger,
-            tidligereSortering
+            valgtSortering
           )}
           tittel={texts.ingenSykmeldinger}
           ingenSykmeldingerMelding={texts.ingenSykmeldinger}
@@ -57,10 +75,13 @@ const DineSykmeldinger = (dineSykmeldingerProps: DineSykmeldingerProps) => {
           id="sykmelding-liste-tidligere"
           trackOnClick={() => trackOnClick(texts.apneSykmelding)}
         >
-          <SykmeldingerSorteringContainer status="tidligere" />
+          <VelgSykmeldingSorteringDropdown
+            sorteringsKriterier={sorteringsKriterier}
+            onSorteringChanged={(e) => setValgtSortering(e.target.value)}
+          />
         </SykmeldingTeasere>
       )}
-    </div>
+    </>
   );
 };
 
