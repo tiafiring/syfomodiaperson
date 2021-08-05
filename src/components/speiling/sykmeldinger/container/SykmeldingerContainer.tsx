@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Side from "../../../../sider/Side";
 import { hentSykmeldinger } from "../../../../data/sykmelding/sykmeldinger_actions";
 import SidetoppSpeilet from "../../../SidetoppSpeilet";
@@ -11,6 +11,8 @@ import { harForsoktHentetSykmeldinger } from "../../../../utils/reducerUtils";
 import Pengestopp from "../../../pengestopp/Pengestopp";
 import { useValgtPersonident } from "../../../../hooks/useValgtBruker";
 import SideLaster from "../../../SideLaster";
+import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
+import { useAppSelector } from "../../../../hooks/hooks";
 
 const texts = {
   introduksjonstekst:
@@ -20,12 +22,9 @@ const texts = {
 const SykmeldingerSide = () => {
   const fnr = useValgtPersonident();
 
-  const navbrukerState = useSelector((state: any) => state.navbruker);
-  const sykmeldingerState = useSelector((state: any) => state.sykmeldinger);
-
-  const brukernavn = navbrukerState.data.navn;
+  const sykmeldingerState = useAppSelector((state) => state.sykmeldinger);
+  const { navn: brukernavn } = useNavBrukerData();
   const sykmeldinger = sykmeldingerState.data;
-  const sortering = sykmeldingerState.sortering;
 
   const harForsoektHentetAlt = harForsoktHentetSykmeldinger(sykmeldingerState);
   const henter = !harForsoektHentetAlt;
@@ -57,11 +56,7 @@ const SykmeldingerSide = () => {
           <div className="speiling">
             <Brodsmuler brodsmuler={brodsmuler} />
             <SidetoppSpeilet tittel="Dine sykmeldinger" htmlTekst={htmlIntro} />
-            <DineSykmeldinger
-              fnr={fnr}
-              sykmeldinger={sykmeldinger}
-              sortering={sortering}
-            />
+            <DineSykmeldinger fnr={fnr} sykmeldinger={sykmeldinger} />
           </div>
         </div>
       </SideLaster>

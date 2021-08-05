@@ -8,7 +8,6 @@ import {
   HENT_SYKMELDINGER_FEILET,
   HENTER_SYKMELDINGER,
   SYKMELDINGER_HENTET,
-  SYKMELDINGER_SORTERT,
 } from "./sykmeldinger_actions";
 import { SykmeldingNewFormatDTO } from "./types/SykmeldingNewFormatDTO";
 
@@ -64,14 +63,6 @@ const sykmeldinger: Reducer<SykmeldingerState> = (
             return oldFormatSMForAG(sykmelding, action.fnr);
           }
         ),
-      };
-    }
-    case SYKMELDINGER_SORTERT: {
-      const sortering = {} as any;
-      sortering[action.status] = action.kriterium;
-      return {
-        ...state,
-        sortering,
       };
     }
     default: {
