@@ -6,8 +6,6 @@ import PersonkortVisning from "../../../src/components/personkort/PersonkortVisn
 import { PERSONKORTVISNING_TYPE } from "../../../src/konstanter";
 import PersonkortElement from "../../../src/components/personkort/PersonkortElement";
 import PersonkortInformasjon from "../../../src/components/personkort/PersonkortInformasjon";
-import PersonkortLedere from "../../../src/components/personkort/ledere/PersonkortLedere";
-import PersonKortVirksomhetHeader from "../../../src/components/personkort/ledere/PersonKortVirksomhetHeader";
 import PersonkortSykmeldt from "../../../src/components/personkort/PersonkortSykmeldt";
 import PersonkortEnhet from "../../../src/components/personkort/PersonkortEnhet";
 import PersonkortLege, {
@@ -16,24 +14,23 @@ import PersonkortLege, {
 import mockSykmeldinger from "../../mockdata/sykmeldinger/mockSykmeldinger";
 import { newSMFormat2OldFormat } from "../../../src/utils/sykmeldinger/sykmeldingParser";
 import { leggTilDagerPaDato } from "../../../src/utils/datoUtils";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import { rootReducer } from "../../../src/data/rootState";
+import configureStore from "redux-mock-store";
 
 describe("PersonkortVisning", () => {
-  let ledere;
-  let navbruker;
-  let behandlendeEnhet;
-  let fastleger;
   let komponent;
-  let sykmeldinger;
-  let personadresse;
+  let mockState;
+  const realState = createStore(rootReducer).getState();
+  const store = configureStore([]);
 
-  const today = new Date();
-
-  const sykmeldignOldFormat = newSMFormat2OldFormat({
+  const sykmeldingOldFormat = newSMFormat2OldFormat({
     ...mockSykmeldinger[0],
     sykmeldingsperioder: [
       {
         fom: "2020-01-22",
-        tom: leggTilDagerPaDato(today, 1),
+        tom: leggTilDagerPaDato(new Date(), 1),
         gradert: null,
         behandlingsdager: null,
         innspillTilArbeidsgiver: null,
@@ -44,68 +41,72 @@ describe("PersonkortVisning", () => {
   });
 
   beforeEach(() => {
-    ledere = [
-      {
-        navn: "Station Officer Steele",
-        orgnummer: "000999000",
-        erOppgitt: true,
-      },
-      {
-        navn: "Are Arbeidsgiver",
-        orgnummer: "000999001",
-        erOppgitt: false,
-      },
-    ];
-    behandlendeEnhet = {
-      navn: "NAV Drammen",
-      enhetId: "1234",
-    };
-    fastleger = {
-      henter: false,
-      hentingFeilet: false,
-      hentet: false,
-      data: [{}, {}, {}],
-      aktiv: {
-        fastlegekontor: {},
-        pasientforhold: {
-          fom: "",
-          tom: "",
+    mockState = {
+      behandlendeEnhet: {
+        data: {
+          navn: "NAV Drammen",
+          enhetId: "1234",
         },
       },
-      tidligere: [
+      ledere: [
         {
-          fastlegekontor: {},
-          pasientforhold: {
-            fom: "",
-            tom: "",
-          },
+          navn: "Station Officer Steele",
+          orgnummer: "000999000",
+          erOppgitt: true,
         },
         {
-          fastlegekontor: {},
-          pasientforhold: {
-            fom: "",
-            tom: "",
-          },
+          navn: "Are Arbeidsgiver",
+          orgnummer: "000999001",
+          erOppgitt: false,
         },
       ],
-    };
-    navbruker = {
-      navn: "Knut",
-      kontaktinfo: {
-        fnr: "1234",
+      navbruker: {
+        navn: "Knut",
+        kontaktinfo: {
+          fnr: "1234",
+        },
       },
+      fastleger: {
+        henter: false,
+        hentingFeilet: false,
+        hentet: false,
+        data: [{}, {}, {}],
+        aktiv: {
+          fastlegekontor: {},
+          pasientforhold: {
+            fom: "",
+            tom: "",
+          },
+        },
+        tidligere: [
+          {
+            fastlegekontor: {},
+            pasientforhold: {
+              fom: "",
+              tom: "",
+            },
+          },
+          {
+            fastlegekontor: {},
+            pasientforhold: {
+              fom: "",
+              tom: "",
+            },
+          },
+        ],
+      },
+      personadresse: {},
+      sykmeldinger: [sykmeldingOldFormat],
     };
-    personadresse = {};
-    sykmeldinger = [sykmeldignOldFormat];
 
     komponent = mount(
       <PersonkortVisning
         visning={""}
-        ledere={ledere}
-        fastleger={fastleger}
-        navbruker={navbruker}
-        personadresse={personadresse}
-        behandlendeEnhet={behandlendeEnhet}
+        ledere={mockState.ledere}
+        fastleger={mockState.fastleger}
+        navbruker={mockState.navbruker}
+        personadresse={mockState.personadresse}
+        sykmeldinger={null}
       />
     );
   });
@@ -118,11 +119,11 @@ describe("PersonkortVisning", () => {
     komponent = mount(
       <PersonkortVisning
         visning={PERSONKORTVISNING_TYPE.LEGE}
-        ledere={ledere}
-        fastleger={fastleger}
-        navbruker={navbruker}
-        personadresse={personadresse}
-        behandlendeEnhet={behandlendeEnhet}
+        ledere={mockState.ledere}
+        fastleger={mockState.fastleger}
+        navbruker={mockState.navbruker}
+        personadresse={mockState.personadresse}
+        sykmeldinger={null}
       />
     );
     expect(komponent.find(PersonkortLege)).to.have.length(1);
@@ -130,14 +131,16 @@ describe("PersonkortVisning", () => {
 
   it("Skal vise VisningEnhet, dersom visning for lege er valgt", () => {
     komponent = mount(
-      <PersonkortVisning
-        visning={PERSONKORTVISNING_TYPE.ENHET}
-        ledere={ledere}
-        fastleger={fastleger}
-        navbruker={navbruker}
-        personadresse={personadresse}
-        behandlendeEnhet={behandlendeEnhet}
-      />
+      <Provider store={store({ ...realState, ...mockState })}>
+        <PersonkortVisning
+          visning={PERSONKORTVISNING_TYPE.ENHET}
+          ledere={mockState.ledere}
+          fastleger={mockState.fastleger}
+          navbruker={mockState.navbruker}
+          personadresse={mockState.personadresse}
+          sykmeldinger={null}
+        />
+      </Provider>
     );
     expect(komponent.find(PersonkortEnhet)).to.have.length(1);
   });
@@ -146,8 +149,8 @@ describe("PersonkortVisning", () => {
     beforeEach(() => {
       komponent = mount(
         <PersonkortSykmeldt
-          navbruker={navbruker}
-          personadresse={personadresse}
+          navbruker={mockState.navbruker}
+          personadresse={mockState.personadresse}
         />
       );
     });
@@ -164,17 +167,20 @@ describe("PersonkortVisning", () => {
   describe("PersonkortLege", () => {
     beforeEach(() => {
       komponent = mount(
-        <PersonkortLege fastleger={fastleger} sykmeldtNavn={navbruker.navn} />
+        <PersonkortLege
+          fastleger={mockState.fastleger}
+          sykmeldtNavn={mockState.navbruker.navn}
+        />
       );
     });
 
     it("Skal vise feilmelding, fastleger ikke ble funnet", () => {
       komponent = mount(
         <PersonkortLege
-          fastleger={Object.assign({}, fastleger, {
+          fastleger={Object.assign({}, mockState.fastleger, {
             ikkeFunnet: true,
           })}
-          sykmeldtNavn={navbruker.navn}
+          sykmeldtNavn={mockState.navbruker.navn}
         />
       );
       expect(komponent.find(Alertstripe)).to.have.length(1);
@@ -195,10 +201,10 @@ describe("PersonkortVisning", () => {
     it("Skal ikke tidligere leger dersom det ikke er tidligere fastleger", () => {
       komponent = mount(
         <PersonkortLege
-          fastleger={Object.assign({}, fastleger, {
+          fastleger={Object.assign({}, mockState.fastleger, {
             tidligere: [],
           })}
-          sykmeldtNavn={navbruker.navn}
+          sykmeldtNavn={mockState.navbruker.navn}
         />
       );
       expect(komponent.find(TidligereLeger)).to.have.length(1);
@@ -209,12 +215,14 @@ describe("PersonkortVisning", () => {
   describe("TidligereLeger", () => {
     beforeEach(() => {
       komponent = mount(
-        <TidligereLeger tidligereFastleger={fastleger.tidligere} />
+        <TidligereLeger tidligereFastleger={mockState.fastleger.tidligere} />
       );
     });
 
     it("Skal vise en liste med antall element lik antall tidligere fastleger", () => {
-      expect(komponent.find("li")).to.have.length(fastleger.tidligere.length);
+      expect(komponent.find("li")).to.have.length(
+        mockState.fastleger.tidligere.length
+      );
     });
   });
 });

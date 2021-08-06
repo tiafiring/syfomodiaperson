@@ -1,37 +1,43 @@
-import { call, fork, put, select, takeEvery } from "redux-saga/effects";
-import { get } from "../../api";
-import * as actions from "./diskresjonskode_actions";
+import { call, put, select, takeEvery } from "redux-saga/effects";
+import {
+  diskresjonskodeHentet,
+  HentDiskresjonskodeAction,
+  HentDiskresjonskodeActionTypes,
+  hentDiskresjonskodeFeilet,
+  henterDiskresjonskode,
+} from "./diskresjonskode_actions";
+import { get, Result, Success } from "../../api/axios";
+import { RootState } from "../rootState";
 
-export function* hentDiskresjonskodeSaga(action: any) {
-  yield put(actions.henterDiskresjonskode());
-  try {
-    const path = `${process.env.REACT_APP_SYFOPERSON_ROOT}/person/diskresjonskode`;
-    const data = yield call(get, path, action.fnr);
-    yield put(actions.diskresjonskodeHentet(data));
-  } catch (e) {
-    yield put(actions.hentDiskresjonskodeFeilet());
+export function* hentDiskresjonskodeSaga(action: HentDiskresjonskodeAction) {
+  yield put(henterDiskresjonskode());
+  const path = `${process.env.REACT_APP_SYFOPERSON_ROOT}/person/diskresjonskode`;
+  const result: Result<string> = yield call(get, path, action.fnr);
+
+  if (result instanceof Success) {
+    yield put(diskresjonskodeHentet(result.data));
+  } else {
+    yield put(hentDiskresjonskodeFeilet(result.error));
   }
 }
 
-export const skalHenteDiskresjonskode = (state: any) => {
-  const reducer = state.diskresjonskode;
-  return !(reducer.henter || reducer.hentet || reducer.hentingFeilet);
+export const skalHenteDiskresjonskode = (state: RootState) => {
+  const { henter, hentet, error } = state.diskresjonskode;
+  return !(henter || hentet || error);
 };
 
-export function* hentDiskresjonskodeHvisIkkeHentet(action: any) {
+export function* hentDiskresjonskodeHvisIkkeHentet(
+  action: HentDiskresjonskodeAction
+) {
   const skalHente = yield select(skalHenteDiskresjonskode);
   if (skalHente) {
-    yield hentDiskresjonskodeSaga(action);
+    yield call(hentDiskresjonskodeSaga, action);
   }
-}
-
-function* watchHentDiskresjonskode() {
-  yield takeEvery(
-    actions.HENT_DISKRESJONSKODE_FORESPURT,
-    hentDiskresjonskodeHvisIkkeHentet
-  );
 }
 
 export default function* diskresjonskodeSagas() {
-  yield fork(watchHentDiskresjonskode);
+  yield takeEvery(
+    HentDiskresjonskodeActionTypes.HENT_DISKRESJONSKODE_FORESPURT,
+    hentDiskresjonskodeHvisIkkeHentet
+  );
 }

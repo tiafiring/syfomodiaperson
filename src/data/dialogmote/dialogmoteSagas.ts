@@ -21,7 +21,7 @@ import {
   opprettInnkallingFeilet,
   opprettInnkallingFullfort,
 } from "./dialogmote_actions";
-import { get, post, Result, Success } from "../../api/api";
+import { get, post, Result, Success } from "../../api/axios";
 import {
   AvlysDialogmoteDTO,
   DialogmoteDTO,

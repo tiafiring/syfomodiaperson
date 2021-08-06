@@ -7,7 +7,7 @@ import {
   post,
   Result,
   Success,
-} from "../../src/api/api";
+} from "../../src/api/axios";
 import { Tilgang } from "../../src/data/tilgang/tilgang";
 import { expect } from "chai";
 

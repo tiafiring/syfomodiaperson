@@ -1,27 +1,27 @@
-import { all, call, fork, put, takeEvery } from "redux-saga/effects";
-import { get } from "../../api";
+import { call, put, takeEvery } from "redux-saga/effects";
 import {
+  HENT_NAVBRUKER_FEILET,
   HENT_NAVBRUKER_FORESPURT,
   HENTER_NAVBRUKER,
   NAVBRUKER_HENTET,
-  HENT_NAVBRUKER_FEILET,
 } from "./navbruker_actions";
+import { get, Result, Success } from "../../api/axios";
 
 export function* hentNavbruker(action: any) {
   yield put({ type: HENTER_NAVBRUKER });
-  try {
-    const path = `${process.env.REACT_APP_REST_ROOT}/internad/brukerinfo?fnr=${action.fnr}`;
-    const data = yield call(get, path);
-    yield put({ type: NAVBRUKER_HENTET, data });
-  } catch (e) {
+
+  const path = `${process.env.REACT_APP_REST_ROOT}/internad/brukerinfo?fnr=${action.fnr}`;
+  const result: Result<string> = yield call(get, path);
+
+  //TODO: Add proper actions and types
+  if (result instanceof Success) {
+    yield put({ type: NAVBRUKER_HENTET, data: result.data });
+  } else {
+    //TODO: Add error to reducer and errorboundary to components
     yield put({ type: HENT_NAVBRUKER_FEILET });
   }
 }
 
-function* watchHentNavbruker() {
-  yield takeEvery(HENT_NAVBRUKER_FORESPURT, hentNavbruker);
-}
-
 export default function* ledereSagas() {
-  yield all([fork(watchHentNavbruker)]);
+  yield takeEvery(HENT_NAVBRUKER_FORESPURT, hentNavbruker);
 }

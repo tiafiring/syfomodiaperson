@@ -1,19 +1,33 @@
-import { call, put, fork, takeEvery, select } from "redux-saga/effects";
-import { get } from "../../api";
-import * as actions from "./oppfolgingstilfelleperioder_actions";
+import { call, put, select, takeEvery } from "redux-saga/effects";
 import { LedereState } from "../leder/ledere";
+import { get, Result, Success } from "../../api/axios";
+import { OppfolgingstilfellePersonArbeidsgiver } from "./types/OppfolgingstilfellePersonArbeidsgiver";
+import { RootState } from "../rootState";
+import {
+  HentOppfolgingstilfelleperioderAction,
+  hentOppfolgingstilfelleperioderFeilet,
+  hentOppfolgingstilfelleperioderHenter,
+  hentOppfolgingstilfelleperioderHentet,
+  OppfolgingstilfelleperioderActionTypes,
+} from "./oppfolgingstilfelleperioder_actions";
 
 export function* hentOppfolgingstilfelleperioder(
-  action: any,
+  action: HentOppfolgingstilfelleperioderAction,
   orgnummer: string
 ) {
-  yield put(actions.hentOppfolgingstilfelleperioderHenter(orgnummer));
-  try {
-    const path = `${process.env.REACT_APP_REST_ROOT}/internad/oppfolgingstilfelleperioder?fnr=${action.fnr}&orgnummer=${orgnummer}`;
-    const data = yield call(get, path);
-    yield put(actions.hentOppfolgingstilfelleperioderHentet(data, orgnummer));
-  } catch (e) {
-    yield put(actions.hentOppfolgingstilfelleperioderFeilet(orgnummer));
+  yield put(hentOppfolgingstilfelleperioderHenter(orgnummer));
+
+  const path = `${process.env.REACT_APP_REST_ROOT}/internad/oppfolgingstilfelleperioder?fnr=${action.fnr}&orgnummer=${orgnummer}`;
+  const result: Result<OppfolgingstilfellePersonArbeidsgiver[]> = yield call(
+    get,
+    path
+  );
+
+  if (result instanceof Success) {
+    yield put(hentOppfolgingstilfelleperioderHentet(result.data, orgnummer));
+  } else {
+    //TODO: Add error to reducer and errorboundary to components
+    yield put(hentOppfolgingstilfelleperioderFeilet(orgnummer));
   }
 }
 
@@ -41,7 +55,7 @@ export const hentSykmeldingerVirksomhetsnummerList = (sykmeldinger: any) => {
   return [];
 };
 
-export const hentVirksomhetsnummerList = (state: any) => {
+export const hentVirksomhetsnummerList = (state: RootState) => {
   const ledereVirksomhetNrList = hentLedereVirksomhetsnummerList(state.ledere);
   const sykmeldingerVirksomhetsNrList = hentSykmeldingerVirksomhetsnummerList(
     state.sykmeldinger
@@ -59,7 +73,9 @@ export const skalHenteOppfolgingstilfelleperioder = (
   return (!reducer.henter && !reducer.hentingForsokt) || false;
 };
 
-export function* hentOppfolgingstilfelleperioderHvisIkkeHentet(action: any) {
+export function* hentOppfolgingstilfelleperioderHvisIkkeHentet(
+  action: HentOppfolgingstilfelleperioderAction
+) {
   const virksomhetsNrList = yield select(hentVirksomhetsnummerList);
   for (let i = 0; i < virksomhetsNrList.length; i++) {
     const skalHente = yield select(
@@ -72,13 +88,9 @@ export function* hentOppfolgingstilfelleperioderHvisIkkeHentet(action: any) {
   }
 }
 
-function* watchHentOppfolgingstilfelleperioder() {
+export default function* oppfolgingstilfelleperioderSagas() {
   yield takeEvery(
-    actions.HENT_OPPFOLGINGSTILFELLEPERIODER_FORESPURT,
+    OppfolgingstilfelleperioderActionTypes.HENT_OPPFOLGINGSTILFELLEPERIODER_FORESPURT,
     hentOppfolgingstilfelleperioderHvisIkkeHentet
   );
-}
-
-export default function* oppfolgingstilfelleperioderSagas() {
-  yield fork(watchHentOppfolgingstilfelleperioder);
 }

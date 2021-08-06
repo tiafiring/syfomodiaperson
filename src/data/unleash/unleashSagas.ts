@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { get } from "../../api";
+import { get, Result, Success } from "../../api/axios";
 import {
   FetchUnleashTogglesAction,
   fetchUnleashTogglesFailed,
@@ -9,11 +9,13 @@ import {
 
 //Common saga for all toggles
 function* fetchToggles(action: FetchUnleashTogglesAction) {
-  try {
-    const dm2Path = `${process.env.REACT_APP_UNLEASH_ROOT}/dm2/?valgtEnhet=${action.valgtEnhet}&userId=${action.userId}`;
-    const dm2Enabled = yield call(get, dm2Path);
-    yield put(fetchUnleashTogglesSuccess(dm2Enabled));
-  } catch (e) {
+  const dm2Path = `${process.env.REACT_APP_UNLEASH_ROOT}/dm2/?valgtEnhet=${action.valgtEnhet}&userId=${action.userId}`;
+  const result: Result<boolean> = yield call(get, dm2Path);
+
+  if (result instanceof Success) {
+    yield put(fetchUnleashTogglesSuccess(result.data));
+  } else {
+    //TODO: Add error to reducer and errorboundary to components
     yield put(fetchUnleashTogglesFailed());
   }
 }

@@ -1,17 +1,7 @@
-import { all, call, fork, put, select, takeEvery } from "redux-saga/effects";
-import { get } from "../../api";
+import { call, put, select, takeEvery } from "redux-saga/effects";
+import { get, Result, Success } from "../../api/axios";
 import * as actions from "./personInfo_actions";
-
-export function* hentPersonAdresse(action: any) {
-  yield put(actions.hentPersonAdresseHenter());
-  try {
-    const path = `${process.env.REACT_APP_SYFOPERSON_ROOT}/person/adresse`;
-    const data = yield call(get, path, action.fnr);
-    yield put(actions.hentPersonAdresseHentet(data));
-  } catch (e) {
-    yield put(actions.hentPersonAdresseFeilet());
-  }
-}
+import { PersonAdresse } from "./types/PersonAdresse";
 
 export const skalHentePersonAdresse = (state: any) => {
   const reducer = state.personadresse;
@@ -21,17 +11,22 @@ export const skalHentePersonAdresse = (state: any) => {
 export function* hentPersonAdresseHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHentePersonAdresse);
   if (skalHente) {
-    yield hentPersonAdresse(action);
+    yield put(actions.hentPersonAdresseHenter());
+    const path = `${process.env.REACT_APP_SYFOPERSON_ROOT}/person/adresse`;
+    const result: Result<PersonAdresse> = yield call(get, path, action.fnr);
+
+    if (result instanceof Success) {
+      yield put(actions.hentPersonAdresseHentet(result.data));
+    } else {
+      //TODO: Add error to reducer and errorboundary to components
+      yield put(actions.hentPersonAdresseFeilet());
+    }
   }
 }
 
-function* watchHentPersonAdresse() {
+export default function* personAdresseSagas() {
   yield takeEvery(
     actions.HENT_PERSON_ADRESSE_FORESPURT,
     hentPersonAdresseHvisIkkeHentet
   );
-}
-
-export default function* personAdresseSagas() {
-  yield all([fork(watchHentPersonAdresse)]);
 }

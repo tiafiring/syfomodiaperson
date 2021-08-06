@@ -1,19 +1,7 @@
-import { call, put, fork, takeEvery, select } from "redux-saga/effects";
-import { get } from "../../api";
+import { call, put, select, takeEvery } from "redux-saga/effects";
 import * as actions from "./oppfolgingstilfellerperson_actions";
-
-export function* hentOppfolgingstilfellePersonUtenArbeidsgiver(action: any) {
-  yield put(actions.hentOppfolgingstilfellerPersonUtenArbeidsiverHenter());
-  try {
-    const path = `${process.env.REACT_APP_REST_ROOT}/internad/oppfolgingstilfelleperioder/utenarbeidsgiver?fnr=${action.fnr}`;
-    const data = yield call(get, path);
-    yield put(
-      actions.hentOppfolgingstilfellerPersonUtenArbeidsiverHentet(data)
-    );
-  } catch (e) {
-    yield put(actions.hentOppfolgingstilfellerPersonUtenArbeidsiverFeilet());
-  }
-}
+import { get, Result, Success } from "../../api/axios";
+import { OppfolgingstilfellePerson } from "./types/OppfolgingstilfellePerson";
 
 export const harInnsendtSykmeldingUtenArbeidsgiver = (sykmeldinger: any) => {
   const erSykmeldingerHentet = sykmeldinger.hentet;
@@ -39,17 +27,25 @@ export const skalHenteOppfolgingstilfelleperioder = (state: any) => {
 export function* hentOppfolgingstilfellerPersonHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHenteOppfolgingstilfelleperioder);
   if (skalHente) {
-    yield call(hentOppfolgingstilfellePersonUtenArbeidsgiver, action);
+    yield put(actions.hentOppfolgingstilfellerPersonUtenArbeidsiverHenter());
+
+    const path = `${process.env.REACT_APP_REST_ROOT}/internad/oppfolgingstilfelleperioder/utenarbeidsgiver?fnr=${action.fnr}`;
+    const result: Result<OppfolgingstilfellePerson[]> = yield call(get, path);
+
+    if (result instanceof Success) {
+      yield put(
+        actions.hentOppfolgingstilfellerPersonUtenArbeidsiverHentet(result.data)
+      );
+    } else {
+      //TODO: Add error to reducer and errorboundary to components
+      yield put(actions.hentOppfolgingstilfellerPersonUtenArbeidsiverFeilet());
+    }
   }
 }
 
-function* watchHentOppfolgingstilfellerPerson() {
+export default function* oppfolgingstilfellerPersonSagas() {
   yield takeEvery(
     actions.HENT_OPPFOLGINGSTILFELLER_PERSON_FORESPURT,
     hentOppfolgingstilfellerPersonHvisIkkeHentet
   );
-}
-
-export default function* oppfolgingstilfellerPersonSagas() {
-  yield fork(watchHentOppfolgingstilfellerPerson);
 }

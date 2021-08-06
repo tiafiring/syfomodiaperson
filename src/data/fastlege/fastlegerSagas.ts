@@ -1,37 +1,33 @@
-import { call, fork, put, select, takeEvery } from "redux-saga/effects";
-import { get } from "../../api";
+import { call, put, select, takeEvery } from "redux-saga/effects";
+import { get, Result, Success } from "../../api/axios";
 import * as actions from "./fastleger_actions";
+import { Fastlege } from "./types/Fastlege";
+import { RootState } from "../rootState";
 
-export function* hentFastleger(action: any) {
-  yield put(actions.henterFastleger());
-  try {
-    const path = `${process.env.REACT_APP_FASTLEGEREST_ROOT}/internad/fastlege/v1/fastleger?fnr=${action.fnr}`;
-    const data = yield call(get, path);
-    yield put(actions.fastlegerHentet(data));
-  } catch (e) {
-    yield put(actions.hentFastlegerFeilet());
-  }
-}
-
-export const skalHenteFastleger = (state: any) => {
-  const reducer = state.fastleger;
-  return !(reducer.henter || reducer.hentet || reducer.hentingFeilet);
+export const skalHenteFastleger = (state: RootState) => {
+  const { henter, hentet, hentingFeilet } = state.fastleger;
+  return !(henter || hentet || hentingFeilet);
 };
 
 export function* hentFastlegerHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHenteFastleger);
   if (skalHente) {
-    yield hentFastleger(action);
+    yield put(actions.henterFastleger());
+    const path = `${process.env.REACT_APP_FASTLEGEREST_ROOT}/internad/fastlege/v1/fastleger?fnr=${action.fnr}`;
+    const result: Result<Fastlege> = yield call(get, path);
+
+    if (result instanceof Success) {
+      yield put(actions.fastlegerHentet(result.data));
+    } else {
+      //TODO: Add error to reducer and errorboundary to components
+      yield put(actions.hentFastlegerFeilet());
+    }
   }
 }
 
-function* watchHentFastleger() {
+export default function* fastlegerSagas() {
   yield takeEvery(
     actions.HENT_FASTLEGER_FORESPURT,
     hentFastlegerHvisIkkeHentet
   );
-}
-
-export default function* fastlegerSagas() {
-  yield fork(watchHentFastleger);
 }

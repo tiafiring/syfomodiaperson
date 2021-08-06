@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import EtikettBase from "nav-frontend-etiketter";
 import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
-import { DiskresjonskodeState } from "../../data/diskresjonskode/diskresjonskode";
 import { EgenansattState } from "../../data/egenansatt/egenansatt";
 import {
   formaterFnr,
@@ -11,14 +10,17 @@ import {
 } from "../../utils/fnrUtils";
 import { KJOENN } from "../../konstanter";
 import { sykmeldingerHasCoronaDiagnose } from "../../utils/sykmeldinger/sykmeldingUtils";
-import { startDateFromLatestActiveTilfelle } from "../../utils/periodeUtils";
 import { tilLesbarDatoMedArUtenManedNavn } from "../../utils/datoUtils";
 import CopyButton from "../kopierknapp/CopyButton";
 import { KvinneImage, MannImage } from "../../../img/ImageComponents";
+import { useAppSelector } from "../../hooks/hooks";
+import ErrorBoundary from "../ErrorBoundary";
+import { useStartDateFromLatestOppfolgingstilfellePeriode } from "../../data/oppfolgingstilfelle/oppfolgingstilfellerperson_hooks";
 
 const texts = {
   copied: "Kopiert!",
   startDate: "Sykmeldt f.o.m.: ",
+  fetchDiskresjonskodeFailed: "Klarte ikke hente diskresjonskode for brukeren.",
 };
 
 interface HeaderInfoStartDateProps {
@@ -45,6 +47,7 @@ const HeaderInfoStartDate = (
 
 const StyledFnr = styled.div`
   display: flex;
+
   img {
     padding-left: 0.5em;
     width: auto;
@@ -53,31 +56,26 @@ const StyledFnr = styled.div`
 `;
 
 interface PersonkortHeaderProps {
-  diskresjonskode: DiskresjonskodeState;
   egenansatt: EgenansattState;
   navbruker: Brukerinfo;
-  oppfolgingstilfelleperioder: any;
   sykmeldinger: any[];
 }
 
 const PersonkortHeader = (personkortHeaderProps: PersonkortHeaderProps) => {
+  const { egenansatt, navbruker, sykmeldinger } = personkortHeaderProps;
   const {
-    diskresjonskode,
-    egenansatt,
-    navbruker,
-    oppfolgingstilfelleperioder,
-    sykmeldinger,
-  } = personkortHeaderProps;
+    data: { diskresjonskode },
+    error,
+  } = useAppSelector((state) => state.diskresjonskode);
   const hasCoronaDiagnose = sykmeldingerHasCoronaDiagnose(sykmeldinger);
   const visEtiketter =
-    diskresjonskode.data.diskresjonskode === "6" ||
-    diskresjonskode.data.diskresjonskode === "7" ||
-    egenansatt.data.erEgenAnsatt ||
+    diskresjonskode === "6" ||
+    diskresjonskode === "7" ||
+    egenansatt.isEgenAnsatt ||
     hasCoronaDiagnose;
 
-  const startDate =
-    oppfolgingstilfelleperioder &&
-    startDateFromLatestActiveTilfelle(oppfolgingstilfelleperioder);
+  const startDate = useStartDateFromLatestOppfolgingstilfellePeriode();
+
   return (
     <div className="personkortHeader">
       <div className="personkortHeader__info">
@@ -104,20 +102,25 @@ const PersonkortHeader = (personkortHeaderProps: PersonkortHeaderProps) => {
         </div>
       </div>
       {visEtiketter && (
-        <div className="personkortHeader__etikker">
-          {diskresjonskode.data.diskresjonskode === "6" && (
-            <EtikettBase type="fokus">Kode 6</EtikettBase>
-          )}
-          {diskresjonskode.data.diskresjonskode === "7" && (
-            <EtikettBase type="fokus">Kode 7</EtikettBase>
-          )}
-          {egenansatt.data.erEgenAnsatt && (
-            <EtikettBase type="fokus">Egenansatt</EtikettBase>
-          )}
-          {hasCoronaDiagnose && (
-            <EtikettBase type="fokus">Koronasykmeldt</EtikettBase>
-          )}
-        </div>
+        <ErrorBoundary
+          apiError={error}
+          errorMessage={texts.fetchDiskresjonskodeFailed}
+        >
+          <div className="personkortHeader__etikker">
+            {diskresjonskode === "6" && (
+              <EtikettBase type="fokus">Kode 6</EtikettBase>
+            )}
+            {diskresjonskode === "7" && (
+              <EtikettBase type="fokus">Kode 7</EtikettBase>
+            )}
+            {egenansatt.isEgenAnsatt && (
+              <EtikettBase type="fokus">Egenansatt</EtikettBase>
+            )}
+            {hasCoronaDiagnose && (
+              <EtikettBase type="fokus">Koronasykmeldt</EtikettBase>
+            )}
+          </div>
+        </ErrorBoundary>
       )}
     </div>
   );

@@ -1,53 +1,49 @@
 import { Reducer } from "redux";
 import {
-  HENTER_EGENANSATT,
-  EGENANSATT_HENTET,
-  HENT_EGENANSATT_FEILET,
+  HentEgenAnsattActions,
+  HentEgenAnsattActionTypes,
 } from "./egenansatt_actions";
-
-export interface EgenansattData {
-  erEgenAnsatt: boolean;
-}
+import { ApiError } from "../../api/axios";
 
 export interface EgenansattState {
   henter: boolean;
   hentet: boolean;
-  hentingFeilet: boolean;
-  data: EgenansattData;
+  error?: ApiError;
+  isEgenAnsatt: boolean;
 }
 
 export const initialState: EgenansattState = {
   henter: false,
   hentet: false,
-  hentingFeilet: false,
-  data: {
-    erEgenAnsatt: false,
-  },
+  isEgenAnsatt: false,
 };
 
-const egenansatt: Reducer<EgenansattState> = (state = initialState, action) => {
+const egenansatt: Reducer<EgenansattState, HentEgenAnsattActions> = (
+  state = initialState,
+  action
+) => {
   switch (action.type) {
-    case HENTER_EGENANSATT: {
+    case HentEgenAnsattActionTypes.HENT_EGENANSATT_FORESPURT: {
       return {
         ...initialState,
         henter: true,
+        error: undefined,
       };
     }
-    case EGENANSATT_HENTET: {
+    case HentEgenAnsattActionTypes.EGENANSATT_HENTET: {
       return {
         ...state,
         henter: false,
         hentet: true,
-        data: {
-          erEgenAnsatt: action.data,
-        },
+        error: undefined,
+        isEgenAnsatt: action.isEgenAnsatt,
       };
     }
-    case HENT_EGENANSATT_FEILET: {
+    case HentEgenAnsattActionTypes.HENT_EGENANSATT_FEILET: {
       return {
         ...state,
         henter: false,
-        hentingFeilet: true,
+        error: action.error,
       };
     }
     default: {

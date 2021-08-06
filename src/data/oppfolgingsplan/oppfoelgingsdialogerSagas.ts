@@ -1,17 +1,7 @@
-import { call, fork, put, select, takeEvery } from "redux-saga/effects";
-import { get } from "../../api";
+import { call, put, select, takeEvery } from "redux-saga/effects";
+import { get, Result, Success } from "../../api/axios";
 import * as actions from "./oppfoelgingsdialoger_actions";
-
-export function* hentOppfoelgingsdialoger(action: any) {
-  yield put(actions.henterOppfoelgingsdialoger());
-  try {
-    const path = `${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/v1/oppfolgingsplan/${action.fnr}`;
-    const data = yield call(get, path);
-    yield put(actions.hentOppfolgingsdialogerHentet(data));
-  } catch (e) {
-    yield put(actions.hentOppfoelgingsdialogerFeilet());
-  }
-}
+import { OppfolgingsplanDTO } from "./oppfoelgingsdialoger";
 
 export const skalHenteOppfolgingsplaner = (state: any) => {
   const reducer = state.oppfoelgingsdialoger;
@@ -21,17 +11,23 @@ export const skalHenteOppfolgingsplaner = (state: any) => {
 export function* hentOppfolgingsplanerHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHenteOppfolgingsplaner);
   if (skalHente) {
-    yield hentOppfoelgingsdialoger(action);
+    yield put(actions.henterOppfoelgingsdialoger());
+
+    const path = `${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/v1/oppfolgingsplan/${action.fnr}`;
+    const result: Result<OppfolgingsplanDTO[]> = yield call(get, path);
+
+    if (result instanceof Success) {
+      yield put(actions.hentOppfolgingsdialogerHentet(result.data));
+    } else {
+      //TODO: Add error to reducer and errorboundary to components
+      yield put(actions.hentOppfoelgingsdialogerFeilet());
+    }
   }
 }
 
-function* watchHentOppfoelgingsdialoger() {
+export default function* oppfoelgingsdialogerSagas() {
   yield takeEvery(
     actions.HENT_OPPFOELGINGSDIALOGER_FORESPURT,
     hentOppfolgingsplanerHvisIkkeHentet
   );
-}
-
-export default function* oppfoelgingsdialogerSagas() {
-  yield fork(watchHentOppfoelgingsdialoger);
 }
