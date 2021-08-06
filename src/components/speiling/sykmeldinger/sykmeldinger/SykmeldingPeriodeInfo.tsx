@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { getDuration } from "../../../../utils/datoUtils";
 import { SykmeldingPeriodeDTO } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 import { capitalizeFoersteBokstav } from "../../../../utils/stringUtils";
@@ -64,52 +64,49 @@ interface SykmeldingPeriodeInfoProps {
   Element?: keyof JSX.IntrinsicElements;
 }
 
-const SykmeldingPeriodeInfo = ({
-  periode,
-  arbeidsgiver,
-  Element = "p",
-}: SykmeldingPeriodeInfoProps) => {
+const sykmeldingPeriodeTekst = (
+  periode: SykmeldingPeriodeDTO,
+  arbeidsgiver?: string
+): string => {
   const antallDager = getDuration(periode.fom, periode.tom);
   const sykmeldtEnDag = antallDager === 1;
   const sykmeldtEnDagIngenGrad = sykmeldtEnDag && periode.grad === undefined;
 
-  let text = textDefault(antallDager, arbeidsgiver, periode.grad);
-
-  if (periode.behandlingsdager === 1 && sykmeldtEnDagIngenGrad) {
-    text = textBehandlingsdagEnDag(periode.behandlingsdager, antallDager);
-  }
-
-  if (periode.behandlingsdager && periode.behandlingsdager > 1) {
-    text = textBehandlingsdager(periode.behandlingsdager, antallDager);
-
-    if (sykmeldtEnDagIngenGrad) {
-      text = textEnDagIngenGrad(periode.behandlingsdager);
-    }
-  }
-
-  if (periode.reisetilskudd) {
-    text = textReisetilskudd(antallDager);
-
-    if (sykmeldtEnDag) {
-      text = textReisetilskuddEnDag(antallDager);
-    }
-
-    if (periode.grad && periode.grad !== 100) {
-      text = textReisetilskuddGradert(periode.grad, antallDager);
-    }
-  }
-
   if (periode.avventende) {
     if (arbeidsgiver === undefined) {
-      text = sykmeldtEnDag
+      return sykmeldtEnDag
         ? textAvventendeEnDagUtenArbeidsgiver(antallDager)
         : textAvventendeUtenArbeidsgiver(antallDager);
     } else {
-      text = sykmeldtEnDag
+      return sykmeldtEnDag
         ? textAvventendeEnDag(arbeidsgiver, antallDager)
         : textAvventende(arbeidsgiver, antallDager);
     }
+  } else if (periode.reisetilskudd) {
+    if (periode.grad && periode.grad !== 100) {
+      return textReisetilskuddGradert(periode.grad, antallDager);
+    } else if (sykmeldtEnDag) {
+      return textReisetilskuddEnDag(antallDager);
+    } else {
+      return textReisetilskudd(antallDager);
+    }
+  } else if (periode.behandlingsdager && periode.behandlingsdager > 1) {
+    return sykmeldtEnDagIngenGrad
+      ? textEnDagIngenGrad(periode.behandlingsdager)
+      : textBehandlingsdager(periode.behandlingsdager, antallDager);
+  } else if (periode.behandlingsdager === 1 && sykmeldtEnDagIngenGrad) {
+    return textBehandlingsdagEnDag(periode.behandlingsdager, antallDager);
+  } else {
+    return textDefault(antallDager, arbeidsgiver, periode.grad);
   }
+};
+
+const SykmeldingPeriodeInfo = ({
+  periode,
+  arbeidsgiver,
+  Element = "p",
+}: SykmeldingPeriodeInfoProps): ReactElement => {
+  const text = sykmeldingPeriodeTekst(periode, arbeidsgiver);
 
   return <Element className="js-periode">{text}</Element>;
 };
