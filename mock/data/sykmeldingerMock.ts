@@ -587,8 +587,8 @@ export const sykmeldingerMock = [
     },
     sykmeldingsperioder: [
       {
-        fom: "2020-12-22",
-        tom: "2020-04-22",
+        fom: "2020-04-22",
+        tom: "2020-12-22",
         gradert: null,
         behandlingsdager: null,
         innspillTilArbeidsgiver: null,
@@ -710,8 +710,8 @@ export const sykmeldingerMock = [
     },
     sykmeldingsperioder: [
       {
-        fom: "2021-01-25",
-        tom: "2020-04-22",
+        fom: "2020-04-22",
+        tom: "2021-01-25",
         gradert: null,
         behandlingsdager: null,
         innspillTilArbeidsgiver: null,

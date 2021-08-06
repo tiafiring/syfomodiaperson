@@ -45,11 +45,11 @@ export interface SykmeldingDiagnose {
 export interface SykmeldingPeriodeDTO {
   fom: string;
   tom: string;
-  grad: number | null;
-  behandlingsdager: number | null;
-  reisetilskudd: boolean | null;
+  grad?: number;
+  behandlingsdager?: number;
+  reisetilskudd?: boolean;
   avventende?: string;
-  redusertVenteperiode?: boolean | null;
+  redusertVenteperiode?: boolean;
 }
 
 export interface Datospenn {
