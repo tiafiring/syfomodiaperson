@@ -25,6 +25,21 @@ export const fullNaisUrlIntern = (host: string, path: string) => {
   return `https://${host}${finnNaisUrlIntern()}${path}`;
 };
 
+export const hentLoginUrl = (): string => {
+  if (erProd()) {
+    return "https://loginservice.nais.adeo.no/login";
+  }
+  // Preprod
+  return "https://loginservice.nais.preprod.local/login";
+};
+
+export const hentRedirectBaseUrl = (): string => {
+  if (erProd()) {
+    return "https://syfomodiaperson.nais.adeo.no/sykefravaer/";
+  }
+  return "https://syfomodiaperson.nais.preprod.local/sykefravaer/";
+};
+
 const env = {
   DEVELOPMENT: "Development",
   PREPROD: "Preprod",

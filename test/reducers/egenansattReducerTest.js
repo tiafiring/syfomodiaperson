@@ -2,60 +2,43 @@ import { expect } from "chai";
 import deepFreeze from "deep-freeze";
 import * as actions from "../../src/data/egenansatt/egenansatt_actions";
 import egenansatt from "../../src/data/egenansatt/egenansatt";
-import {
-  HENTER_EGENANSATT,
-  EGENANSATT_HENTET,
-  HENT_EGENANSATT_FEILET,
-} from "../../src/data/egenansatt/egenansatt_actions";
+import { HentEgenAnsattActionTypes } from "../../src/data/egenansatt/egenansatt_actions";
+import { defaultErrorTexts, ErrorType } from "../../src/api/axios";
 
 describe("egenansatt", () => {
   describe("henter", () => {
     const initialState = deepFreeze({
       henter: false,
       hentet: false,
-      hentingFeilet: false,
-      data: {
-        erEgenAnsatt: false,
-      },
+      error: undefined,
+      isEgenAnsatt: false,
     });
 
-    it(`håndterer ${HENTER_EGENANSATT}`, () => {
-      const action = actions.henterEgenansatt();
-      const nextState = egenansatt(initialState, action);
-      expect(nextState).to.deep.equal({
-        henter: true,
-        hentet: false,
-        hentingFeilet: false,
-        data: {
-          erEgenAnsatt: false,
-        },
-      });
-    });
-
-    it(`håndterer ${EGENANSATT_HENTET}`, () => {
-      const data = true;
-      const action = actions.egenansattHentet(data);
+    it(`håndterer ${HentEgenAnsattActionTypes.EGENANSATT_HENTET}`, () => {
+      const action = actions.egenansattHentet(true);
       const nextState = egenansatt(initialState, action);
       expect(nextState).to.deep.equal({
         henter: false,
         hentet: true,
-        hentingFeilet: false,
-        data: {
-          erEgenAnsatt: data,
-        },
+        error: undefined,
+        isEgenAnsatt: true,
       });
     });
 
-    it(`håndterer ${HENT_EGENANSATT_FEILET}`, () => {
-      const action = actions.hentEgenansattFeilet();
+    it(`håndterer ${HentEgenAnsattActionTypes.HENT_EGENANSATT_FEILET}`, () => {
+      const generalError = {
+        type: ErrorType.GENERAL_ERROR,
+        message: "",
+        defaultErrorMsg: defaultErrorTexts.generalError,
+      };
+
+      const action = actions.hentEgenansattFeilet(generalError);
       const nextState = egenansatt(initialState, action);
       expect(nextState).to.deep.equal({
         henter: false,
         hentet: false,
-        hentingFeilet: true,
-        data: {
-          erEgenAnsatt: false,
-        },
+        error: generalError,
+        isEgenAnsatt: false,
       });
     });
   });

@@ -1,25 +1,7 @@
-import { all, call, fork, put, select, takeEvery } from "redux-saga/effects";
-import { get } from "../../api";
+import { call, put, select, takeEvery } from "redux-saga/effects";
 import * as actions from "./prediksjon_actions";
-import { PrediksjonState } from "./prediksjon";
-
-export function* hentPrediksjon(action: any) {
-  yield put(actions.hentPrediksjonHenter());
-  try {
-    const path = `${process.env.REACT_APP_ISPREDIKSJON_ROOT}/v1/prediksjon`;
-    const data = yield call(get, path, action.fnr);
-
-    if (data && !!data.err) {
-      yield put(actions.hentPrediksjonFeilet());
-    } else {
-      const prediksjondata = data ? data : {};
-
-      yield put(actions.hentPrediksjonHentet(prediksjondata, action.fnr));
-    }
-  } catch (e) {
-    yield put(actions.hentPrediksjonFeilet());
-  }
-}
+import { Prediksjon, PrediksjonState } from "./prediksjon";
+import { get, Result, Success } from "../../api/axios";
 
 export const skalHentePrediksjon = (state: { prediksjon: PrediksjonState }) => {
   const reducer = state.prediksjon;
@@ -29,17 +11,22 @@ export const skalHentePrediksjon = (state: { prediksjon: PrediksjonState }) => {
 export function* hentPrediksjonHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHentePrediksjon);
   if (skalHente) {
-    yield hentPrediksjon(action);
+    yield put(actions.hentPrediksjonHenter());
+    const path = `${process.env.REACT_APP_ISPREDIKSJON_ROOT}/v1/prediksjon`;
+    const result: Result<Prediksjon> = yield call(get, path, action.fnr);
+
+    if (result instanceof Success) {
+      yield put(actions.hentPrediksjonHentet(result.data, action.fnr));
+    } else {
+      //TODO: Add error to reducer and errorboundary to components
+      yield put(actions.hentPrediksjonFeilet());
+    }
   }
 }
 
-function* watchHentPrediksjon() {
+export default function* prediksjonSagas() {
   yield takeEvery(
     actions.HENT_PREDIKSJON_FORESPURT,
     hentPrediksjonHvisIkkeHentet
   );
-}
-
-export default function* prediksjonSagas() {
-  yield all([fork(watchHentPrediksjon)]);
 }

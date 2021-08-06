@@ -1,43 +1,38 @@
 import { Reducer } from "redux";
 import { DialogmoteActions, DialogmoteActionTypes } from "./dialogmote_actions";
 import { DialogmoteDTO } from "./types/dialogmoteTypes";
-import { ApiError } from "../../api/api";
+import { ApiError } from "../../api/axios";
 
 export interface DialogmoteState {
   senderInnkalling: boolean;
-  sendInnkallingFeil: ApiError | null;
+  sendInnkallingFeil?: ApiError;
   sendInnkallingFullfort: boolean;
   henterMote: boolean;
-  henterMoteFeil: ApiError | null;
+  henterMoteFeil?: ApiError;
   henterMoteForsokt: boolean;
   moterHentet: boolean;
   dialogmoter: DialogmoteDTO[];
   avlyserMote: boolean;
-  avlysMoteFeil: ApiError | null;
+  avlysMoteFeil?: ApiError;
   avlysMoteFullfort: boolean;
   endrerTidSted: boolean;
-  endreTidStedFeil: ApiError | null;
+  endreTidStedFeil?: ApiError;
   endreTidStedFullfort: boolean;
   ferdigstillerMote: boolean;
-  ferdigstillMoteFeil: ApiError | null;
+  ferdigstillMoteFeil?: ApiError;
   ferdigstillMoteFullfort: boolean;
 }
 
 export const initialState: DialogmoteState = {
   senderInnkalling: false,
-  sendInnkallingFeil: null,
   sendInnkallingFullfort: false,
-  avlysMoteFeil: null,
   avlyserMote: false,
   avlysMoteFullfort: false,
   endrerTidSted: false,
-  endreTidStedFeil: null,
   endreTidStedFullfort: false,
   ferdigstillerMote: false,
-  ferdigstillMoteFeil: null,
   ferdigstillMoteFullfort: false,
   henterMote: false,
-  henterMoteFeil: null,
   henterMoteForsokt: false,
   moterHentet: false,
   dialogmoter: [],
@@ -115,7 +110,7 @@ const dialogmote: Reducer<DialogmoteState, DialogmoteActions> = (
       return {
         ...state,
         henterMote: true,
-        henterMoteFeil: null,
+        henterMoteFeil: undefined,
         henterMoteForsokt: false,
       };
     }
@@ -123,7 +118,7 @@ const dialogmote: Reducer<DialogmoteState, DialogmoteActions> = (
       return {
         ...state,
         henterMote: false,
-        henterMoteFeil: null,
+        henterMoteFeil: undefined,
         henterMoteForsokt: true,
         dialogmoter: action.dialogmoteDtoList,
         moterHentet: true,

@@ -1,29 +1,40 @@
-import { all, call, fork, put, select, takeEvery } from "redux-saga/effects";
-import { get } from "../../api";
+import { call, put, select, takeEvery } from "redux-saga/effects";
 import * as actions from "./oppfolgingsplanerlps_actions";
 import { PersonOppgave } from "../personoppgave/types/PersonOppgave";
+import { get, Result, Success } from "../../api/axios";
+import { OppfolgingsplanLPS } from "./types/OppfolgingsplanLPS";
+import { RootState } from "../rootState";
 
 export function* hentOppfolgingsplanerLPS(
   action: any,
   personOppgaveList: PersonOppgave[]
 ) {
   yield put(actions.hentOppfolgingsplanerLPSHenter());
-  try {
-    const path = `${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/oppfolgingsplan/lps`;
-    const data = yield call(get, path, action.fnr);
-    yield put(actions.hentOppfolgingsplanerLPSHentet(data, personOppgaveList));
-  } catch (e) {
+
+  const path = `${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/oppfolgingsplan/lps`;
+  const result: Result<OppfolgingsplanLPS[]> = yield call(
+    get,
+    path,
+    action.fnr
+  );
+
+  if (result instanceof Success) {
+    yield put(
+      actions.hentOppfolgingsplanerLPSHentet(result.data, personOppgaveList)
+    );
+  } else {
+    //TODO: Add error to reducer and errorboundary to components
     yield put(actions.hentOppfolgingsplanerLPSFeilet());
   }
 }
 
-export const skalHenteOppfolgingsplanerLPS = (state: any) => {
+export const skalHenteOppfolgingsplanerLPS = (state: RootState) => {
   const reducer = state.oppfolgingsplanerlps;
   const harHentetPersonOppgaver = state.personoppgaver.hentet;
   return harHentetPersonOppgaver && !(reducer.henter || reducer.hentingForsokt);
 };
 
-export const hentPersonOppgaver = (state: any) => {
+export const hentPersonOppgaver = (state: RootState) => {
   const hentetPersonOppgaver = state.personoppgaver.hentet;
   if (hentetPersonOppgaver) {
     return state.personoppgaver.data;
@@ -39,13 +50,9 @@ export function* hentOppfolgingsplanerLPSHvisIkkeHentet(action: any) {
   }
 }
 
-function* watchHentOppfolgingsplanerLPS() {
+export default function* oppfolgingsplanerLPSSagas() {
   yield takeEvery(
     actions.HENT_OPPFOLGINGSPLANER_LPS_FORESPURT,
     hentOppfolgingsplanerLPSHvisIkkeHentet
   );
-}
-
-export default function* oppfolgingsplanerLPSSagas() {
-  yield all([fork(watchHentOppfolgingsplanerLPS)]);
 }

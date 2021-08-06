@@ -1,21 +1,7 @@
-import { call, put, fork, select, takeEvery } from "redux-saga/effects";
-import { get } from "../../api";
+import { call, put, select, takeEvery } from "redux-saga/effects";
 import * as actions from "./sykmeldinger_actions";
-
-export function* hentSykmeldinger(action: any) {
-  yield put(actions.henterSykmeldinger());
-  try {
-    const path = `${process.env.REACT_APP_SYFOSMREGISTER_ROOT}/v1/internal/sykmeldinger?fnr=${action.fnr}`;
-    const data = yield call(get, path);
-    if (!!data.err) {
-      yield put(actions.hentSykmeldingerFeilet());
-    } else {
-      yield put(actions.sykmeldingerHentet(data, action.fnr));
-    }
-  } catch (e) {
-    yield put(actions.hentSykmeldingerFeilet());
-  }
-}
+import { get, Result, Success } from "../../api/axios";
+import { SykmeldingNewFormatDTO } from "./types/SykmeldingNewFormatDTO";
 
 export const skalHenteSykmeldinger = (state: any) => {
   const reducer = state.sykmeldinger;
@@ -25,17 +11,23 @@ export const skalHenteSykmeldinger = (state: any) => {
 export function* hentSykmeldingerHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHenteSykmeldinger);
   if (skalHente) {
-    yield hentSykmeldinger(action);
+    yield put(actions.henterSykmeldinger());
+
+    const path = `${process.env.REACT_APP_SYFOSMREGISTER_ROOT}/v1/internal/sykmeldinger?fnr=${action.fnr}`;
+    const result: Result<SykmeldingNewFormatDTO[]> = yield call(get, path);
+
+    if (result instanceof Success) {
+      yield put(actions.sykmeldingerHentet(result.data, action.fnr));
+    } else {
+      //TODO: Add error to reducer and errorboundary to components
+      yield put(actions.hentSykmeldingerFeilet());
+    }
   }
 }
 
-function* watchHentSykmeldinger() {
+export default function* sykmeldingerSagas() {
   yield takeEvery(
     actions.HENT_SYKMELDINGER_FORESPURT,
     hentSykmeldingerHvisIkkeHentet
   );
-}
-
-export default function* sykmeldingerSagas() {
-  yield fork(watchHentSykmeldinger);
 }

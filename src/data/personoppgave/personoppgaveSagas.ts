@@ -1,18 +1,7 @@
-import { all, call, fork, put, select, takeEvery } from "redux-saga/effects";
-import { get, post } from "../../api";
+import { call, put, select, takeEvery } from "redux-saga/effects";
+import { get, post, Result, Success } from "../../api/axios";
 import * as actions from "./personoppgave_actions";
-
-export function* hentPersonOppgaver(action: any) {
-  yield put(actions.hentPersonOppgaverHenter());
-  try {
-    const path = "/ispersonoppgave/api/get/v1/personoppgave/personident";
-    const data = yield call(get, path, action.fnr);
-    const personOppgaveList = data || [];
-    yield put(actions.hentPersonOppgaverHentet(personOppgaveList));
-  } catch (e) {
-    yield put(actions.hentPersonOppgaverFeilet());
-  }
-}
+import { PersonOppgave } from "./types/PersonOppgave";
 
 export const skalHentePersonOppgaver = (state: any) => {
   const reducer = state.personoppgaver;
@@ -22,15 +11,18 @@ export const skalHentePersonOppgaver = (state: any) => {
 export function* hentPersonOppgaverHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHentePersonOppgaver);
   if (skalHente) {
-    yield hentPersonOppgaver(action);
-  }
-}
+    yield put(actions.hentPersonOppgaverHenter());
 
-function* watchHentPersonOppgaver() {
-  yield takeEvery(
-    actions.HENT_PERSONOPPGAVER_FORESPURT,
-    hentPersonOppgaverHvisIkkeHentet
-  );
+    const path = "/ispersonoppgave/api/get/v1/personoppgave/personident";
+    const result: Result<PersonOppgave[]> = yield call(get, path, action.fnr);
+
+    if (result instanceof Success) {
+      yield put(actions.hentPersonOppgaverHentet(result.data || []));
+    } else {
+      //TODO: Add error to reducer and errorboundary to components
+      yield put(actions.hentPersonOppgaverFeilet());
+    }
+  }
 }
 
 export function* behandlePersonOppgave(action: any) {
@@ -38,14 +30,17 @@ export function* behandlePersonOppgave(action: any) {
   const referanseUuid = action.referanseUuid;
   const veilederIdent = action.veilederIdent;
   yield put(actions.behandlePersonOppgaveBehandler());
-  try {
-    const path = `/ispersonoppgave/api/post/v1/personoppgave/${uuid}/behandle`;
-    yield call(post, path);
+
+  const path = `/ispersonoppgave/api/post/v1/personoppgave/${uuid}/behandle`;
+  const result: Result<any> = yield call(post, path, []);
+
+  if (result instanceof Success) {
     yield put(
       actions.behandlePersonOppgaveBehandlet(uuid, referanseUuid, veilederIdent)
     );
-  } catch (e) {
-    if (e.message === "409") {
+  } else {
+    //TODO: Add error to reducer and errorboundary to components
+    if (result.code === 409) {
       window.location.reload();
       return;
     }
@@ -53,13 +48,13 @@ export function* behandlePersonOppgave(action: any) {
   }
 }
 
-function* watchBehandlePersonOppgave() {
+export default function* personOppgaveSagas() {
   yield takeEvery(
     actions.BEHANDLE_PERSONOPPGAVE_FORESPURT,
     behandlePersonOppgave
   );
-}
-
-export default function* personOppgaveSagas() {
-  yield all([fork(watchHentPersonOppgaver), fork(watchBehandlePersonOppgave)]);
+  yield takeEvery(
+    actions.HENT_PERSONOPPGAVER_FORESPURT,
+    hentPersonOppgaverHvisIkkeHentet
+  );
 }

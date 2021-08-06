@@ -1,58 +1,61 @@
 import deepFreeze from "deep-freeze";
 import { expect } from "chai";
 import * as actions from "../../src/data/diskresjonskode/diskresjonskode_actions";
-import {
-  DISKRESJONSKODE_HENTET,
-  HENT_DISKRESJONSKODE_FEILET,
-  HENTER_DISKRESJONSKODE,
-} from "../../src/data/diskresjonskode/diskresjonskode_actions";
+import { HentDiskresjonskodeActionTypes } from "../../src/data/diskresjonskode/diskresjonskode_actions";
 import diskresjonskode from "../../src/data/diskresjonskode/diskresjonskode";
+import { defaultErrorTexts, ErrorType } from "../../src/api/axios";
 
 describe("diskresjonskode", () => {
   describe("henter", () => {
     const initialState = deepFreeze({
       henter: false,
       hentet: false,
-      hentingFeilet: false,
+      error: undefined,
       data: {
         diskresjonskode: "",
       },
     });
 
-    it(`håndterer ${HENTER_DISKRESJONSKODE}`, () => {
+    it(`håndterer ${HentDiskresjonskodeActionTypes.HENTER_DISKRESJONSKODE}`, () => {
       const action = actions.henterDiskresjonskode();
       const nextState = diskresjonskode(initialState, action);
       expect(nextState).to.deep.equal({
         henter: true,
         hentet: false,
-        hentingFeilet: false,
+        error: undefined,
         data: {
           diskresjonskode: "",
         },
       });
     });
 
-    it(`håndterer ${DISKRESJONSKODE_HENTET}`, () => {
+    it(`håndterer ${HentDiskresjonskodeActionTypes.DISKRESJONSKODE_HENTET}`, () => {
       const data = "7";
       const action = actions.diskresjonskodeHentet(data);
       const nextState = diskresjonskode(initialState, action);
       expect(nextState).to.deep.equal({
         henter: false,
         hentet: true,
-        hentingFeilet: false,
+        error: undefined,
         data: {
           diskresjonskode: data,
         },
       });
     });
 
-    it(`håndterer ${HENT_DISKRESJONSKODE_FEILET}`, () => {
-      const action = actions.hentDiskresjonskodeFeilet();
+    it(`håndterer ${HentDiskresjonskodeActionTypes.HENT_DISKRESJONSKODE_FEILET}`, () => {
+      const generalError = {
+        type: ErrorType.GENERAL_ERROR,
+        message: "",
+        defaultErrorMsg: defaultErrorTexts.generalError,
+      };
+
+      const action = actions.hentDiskresjonskodeFeilet(generalError);
       const nextState = diskresjonskode(initialState, action);
       expect(nextState).to.deep.equal({
         henter: false,
         hentet: false,
-        hentingFeilet: true,
+        error: generalError,
         data: {
           diskresjonskode: "",
         },

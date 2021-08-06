@@ -23,21 +23,11 @@ const texts = {
 };
 
 const Personkort = () => {
-  const behandlendeEnhetState = useSelector(
-    (state: any) => state.behandlendeEnhet
-  );
-  const behandlendeEnhet = behandlendeEnhetState.data;
-
-  const diskresjonskode = useSelector((state: any) => state.diskresjonskode);
   const egenansatt = useSelector((state: any) => state.egenansatt);
   const fastleger = useSelector((state: any) => state.fastleger);
 
   const personadresseState = useSelector((state: any) => state.personadresse);
   const personadresse = personadresseState.data;
-
-  const oppfolgingstilfelleperioder = useSelector(
-    (state: any) => state.oppfolgingstilfelleperioder
-  );
 
   const sykmeldingerState = useSelector((state: any) => state.sykmeldinger);
   const sykmeldinger = sykmeldingerState.data;
@@ -64,7 +54,7 @@ const Personkort = () => {
 
   useEffect(() => {
     dispatch(hentOppfolgingstilfelleperioder(brukerFnr));
-  }, [dispatch, ledere, brukerFnr]);
+  }, [dispatch, brukerFnr]);
 
   return (
     <div className="personkort">
@@ -73,10 +63,8 @@ const Personkort = () => {
         erApen={false}
         tittel={
           <PersonkortHeader
-            diskresjonskode={diskresjonskode}
             egenansatt={egenansatt}
             navbruker={navbruker}
-            oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
             sykmeldinger={sykmeldinger}
           />
         }
@@ -143,7 +131,6 @@ const Personkort = () => {
 
           <div aria-live="polite">
             <PersonkortVisning
-              behandlendeEnhet={behandlendeEnhet}
               fastleger={fastleger}
               ledere={ledere}
               navbruker={navbruker}

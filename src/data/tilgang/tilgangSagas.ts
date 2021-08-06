@@ -1,28 +1,26 @@
-import { call, fork, put, takeEvery } from "redux-saga/effects";
-import { get } from "../../api";
+import { call, put, takeEvery } from "redux-saga/effects";
+import { get, Result, Success } from "../../api/axios";
 import * as actions from "./tilgang_actions";
+import { Tilgang } from "./tilgang";
 
 export function* sjekkTilgang(action: any) {
   yield put(actions.sjekkerTilgang());
-  try {
-    const path = `${process.env.REACT_APP_TILGANGSKONTROLL_RESTROOT}/tilgang/bruker?fnr=${action.fnr}`;
-    const data = yield call(get, path);
-    if (data.harTilgang === true) {
+
+  const path = `${process.env.REACT_APP_TILGANGSKONTROLL_RESTROOT}/tilgang/bruker?fnr=${action.fnr}`;
+  const result: Result<Tilgang> = yield call(get, path);
+
+  if (result instanceof Success) {
+    if (result.data.harTilgang) {
       yield put(actions.harTilgang());
+    } else {
+      yield put(actions.harIkkeTilgang(result.data.begrunnelse));
     }
-  } catch (e) {
-    if (e.status === 403) {
-      yield put(actions.harIkkeTilgang(e.tilgang.begrunnelse));
-      return;
-    }
+  } else {
+    //TODO: Add error to reducer and errorboundary to components
     yield put(actions.sjekkTilgangFeilet());
   }
 }
 
-function* watchSjekkTilgang() {
-  yield takeEvery(actions.SJEKK_TILGANG_FORESPURT, sjekkTilgang);
-}
-
 export default function* tilgangSagas() {
-  yield fork(watchSjekkTilgang);
+  yield takeEvery(actions.SJEKK_TILGANG_FORESPURT, sjekkTilgang);
 }

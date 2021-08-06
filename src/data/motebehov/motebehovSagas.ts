@@ -1,26 +1,11 @@
-import { all, call, fork, put, select, takeEvery } from "redux-saga/effects";
-import { get, post } from "../../api";
+import { call, put, select, takeEvery } from "redux-saga/effects";
+import { get, post, Result, Success } from "../../api/axios";
 import * as actions from "./motebehov_actions";
-import * as behandleActions from "./behandlemotebehov_actions";
 import { HentMotebehovAction } from "./motebehov_actions";
+import * as behandleActions from "./behandlemotebehov_actions";
 import { BehandleMotebehovAction } from "./behandlemotebehov_actions";
 import { RootState } from "../rootState";
-
-export function* hentMotebehov(action: HentMotebehovAction) {
-  const fnr = action.fnr ? action.fnr : "";
-  yield put(actions.henterMotebehov());
-  try {
-    const path = `${process.env.REACT_APP_SYFOMOTEBEHOV_ROOT}/internad/veileder/motebehov?fnr=${fnr}`;
-    const data = yield call(get, path);
-    yield put(actions.motebehovHentet(data));
-  } catch (e) {
-    if (e.status === 403) {
-      yield put(actions.hentMotebehovIkkeTilgang(e.tilgang));
-      return;
-    }
-    yield put(actions.hentMotebehovFeilet());
-  }
-}
+import { MotebehovDTO } from "./types/motebehovTypes";
 
 export const skalHenteMotebehov = (state: RootState) => {
   const reducer = state.motebehov;
@@ -30,22 +15,40 @@ export const skalHenteMotebehov = (state: RootState) => {
 export function* hentMotebehovHvisIkkeHentet(action: HentMotebehovAction) {
   const skalHente = yield select(skalHenteMotebehov);
   if (skalHente) {
-    yield hentMotebehov(action);
+    const fnr = action.fnr ? action.fnr : "";
+    yield put(actions.henterMotebehov());
+
+    const path = `${process.env.REACT_APP_SYFOMOTEBEHOV_ROOT}/internad/veileder/motebehov?fnr=${fnr}`;
+    const result: Result<MotebehovDTO[]> = yield call(get, path);
+
+    if (result instanceof Success) {
+      yield put(actions.motebehovHentet(result.data));
+    } else {
+      //TODO: Add error to reducer and errorboundary to components
+      if (result.code === 403) {
+        yield put(actions.hentMotebehovIkkeTilgang(result.error.message));
+        return;
+      }
+      yield put(actions.hentMotebehovFeilet());
+    }
   }
 }
 
 export function* behandleMotebehov(action: BehandleMotebehovAction) {
   const fnr = action.fnr;
   yield put(behandleActions.behandleMotebehovBehandler());
-  try {
-    const path = `${process.env.REACT_APP_SYFOMOTEBEHOV_ROOT}/internad/veileder/motebehov/${fnr}/behandle`;
-    yield call(post, path);
+
+  const path = `${process.env.REACT_APP_SYFOMOTEBEHOV_ROOT}/internad/veileder/motebehov/${fnr}/behandle`;
+  const result: Result<any> = yield call(post, path, []);
+
+  if (result instanceof Success) {
     yield put(behandleActions.behandleMotebehovBehandlet(action.veilederIdent));
-  } catch (e) {
-    if (e.status === 403) {
+  } else {
+    //TODO: Add error to reducer and errorboundary to components
+    if (result.code === 403) {
       yield put(behandleActions.behandleMotebehovForbudt());
       return;
-    } else if (e.message === "409") {
+    } else if (result.code === 409) {
       window.location.reload();
       return;
     }
@@ -53,20 +56,13 @@ export function* behandleMotebehov(action: BehandleMotebehovAction) {
   }
 }
 
-function* watchHentMotebehov() {
+export default function* motebehovSagas() {
   yield takeEvery(
     actions.HENT_MOTEBEHOV_FORESPURT,
     hentMotebehovHvisIkkeHentet
   );
-}
-
-function* watchbehandleMotebehov() {
   yield takeEvery(
     behandleActions.BEHANDLE_MOTEBEHOV_FORESPURT,
     behandleMotebehov
   );
-}
-
-export default function* motebehovSagas() {
-  yield all([fork(watchHentMotebehov), fork(watchbehandleMotebehov)]);
 }
