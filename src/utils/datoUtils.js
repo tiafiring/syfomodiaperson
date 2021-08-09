@@ -1,3 +1,5 @@
+import { capitalizeFoersteBokstav } from "./stringUtils";
+
 const maneder = [
   "januar",
   "februar",
@@ -157,10 +159,6 @@ const ukedagListe = [
   "fredag",
   "lørdag",
 ];
-
-export const capitalizeFoersteBokstav = (ord) => {
-  return ord.charAt(0).toUpperCase() + ord.slice(1);
-};
 
 export const tilDatoMedManedNavn = (dato) => {
   const { dag, maaned, aar } = getDatoKomponenter(dato);
