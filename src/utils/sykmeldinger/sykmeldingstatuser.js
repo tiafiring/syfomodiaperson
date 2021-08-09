@@ -14,9 +14,3 @@ export const nyeSMStatuser = {
   UTGATT: "UTGATT",
   BEKREFTET: "BEKREFTET",
 };
-
-export const behandlingsutfallStatuser = {
-  OK: "OK",
-  MANUAL_PROCESSING: "MANUAL_PROCESSING",
-  INVALID: "INVALID",
-};

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Checkbox } from "nav-frontend-skjema";
 import { Hovedknapp } from "nav-frontend-knapper";
-import { SykmeldingOldFormat } from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
-import { gamleSMStatuser } from "../../../../../utils/sykmeldinger/sykmeldingstatuser";
+import {
+  SykmeldingOldFormat,
+  SykmeldingStatus,
+} from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
 
 const texts = {
   confirm: "Bekreft",
@@ -14,13 +16,12 @@ interface BekreftAvvistSykmeldingProps {
   sykmelding: SykmeldingOldFormat;
 }
 
-const BekreftAvvistSykmelding = (
-  bekreftAvvistSykmeldingProps: BekreftAvvistSykmeldingProps
-) => {
-  const { sykmelding } = bekreftAvvistSykmeldingProps;
+const BekreftAvvistSykmelding = ({
+  sykmelding,
+}: BekreftAvvistSykmeldingProps): ReactElement => {
   return (
     <>
-      {sykmelding.status === gamleSMStatuser.NY && (
+      {sykmelding.status === SykmeldingStatus.NY && (
         <>
           <div>
             <Checkbox

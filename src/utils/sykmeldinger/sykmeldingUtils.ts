@@ -1,4 +1,3 @@
-import { gamleSMStatuser } from "./sykmeldingstatuser";
 import {
   ARBEIDSLEDIG,
   FRILANSER,
@@ -8,6 +7,7 @@ import { senesteTom, tidligsteFom } from "../periodeUtils";
 import {
   SykmeldingOldFormat,
   SykmeldingPeriodeDTO,
+  SykmeldingStatus,
 } from "../../data/sykmelding/types/SykmeldingOldFormat";
 import { OppfolgingstilfellePerson } from "../../data/oppfolgingstilfelle/types/OppfolgingstilfellePerson";
 import { OppfolgingstilfelleperioderMapState } from "../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
@@ -161,7 +161,7 @@ export const sykmeldingerMedStatusSendt = (
   sykmeldinger: SykmeldingOldFormat[]
 ): SykmeldingOldFormat[] => {
   return sykmeldinger.filter(
-    (sykmelding) => sykmelding.status === gamleSMStatuser.SENDT
+    (sykmelding) => sykmelding.status === SykmeldingStatus.SENDT
   );
 };
 
@@ -170,7 +170,7 @@ export const sykmeldingerUtenArbeidsgiver = (
 ): SykmeldingOldFormat[] => {
   return sykmeldinger.filter(
     (sykmelding) =>
-      !sykmelding.orgnummer && sykmelding.status === gamleSMStatuser.BEKREFTET
+      !sykmelding.orgnummer && sykmelding.status === SykmeldingStatus.BEKREFTET
   );
 };
 
@@ -299,8 +299,8 @@ const isSykmeldingSendtOrBekreftet = (
   sykmelding: SykmeldingOldFormat
 ): boolean => {
   return (
-    sykmelding.status === gamleSMStatuser.SENDT ||
-    sykmelding.status === gamleSMStatuser.BEKREFTET
+    sykmelding.status === SykmeldingStatus.SENDT ||
+    sykmelding.status === SykmeldingStatus.BEKREFTET
   );
 };
 
@@ -336,7 +336,7 @@ export const activeSykmeldingerSentToArbeidsgiver = (
 ): SykmeldingOldFormat[] => {
   return sykmeldinger.filter((sykmelding) => {
     return (
-      sykmelding.status === gamleSMStatuser.SENDT &&
+      sykmelding.status === SykmeldingStatus.SENDT &&
       isSykmeldingActiveToday(sykmelding)
     );
   });

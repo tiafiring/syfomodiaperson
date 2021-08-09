@@ -78,7 +78,7 @@ export const UtvidbarTittel = ({ sykmelding }: UtvidbarTittelProps) => {
             {`${sykmelding.diagnose.hoveddiagnose.diagnosekode} (${sykmelding.diagnose.hoveddiagnose.diagnose})`}
           </span>
         )}
-        {sykmelding.erPapirsykmelding && (
+        {sykmelding.papirsykmelding && (
           <EtikettBase className="utvidbarTittel__etikett" type="info">
             {tekster.sykmeldinger.papirLabelText}
           </EtikettBase>

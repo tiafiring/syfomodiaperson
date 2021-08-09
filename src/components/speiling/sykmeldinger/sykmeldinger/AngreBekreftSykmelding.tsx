@@ -1,21 +1,19 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { ReactElement } from "react";
 import Knapp from "nav-frontend-knapper";
 import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
-import { SykepengesoknaderState } from "../../../../data/sykepengesoknad/soknader";
+import { useAppSelector } from "../../../../hooks/hooks";
+import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const texts = {
   angre: "Endre opplysninger",
 };
 
 export const sykmeldingHarSoknad = (
-  sykepengesoknaderState: SykepengesoknaderState,
+  sykepengeSoknader: SykepengesoknadDTO[],
   sykmeldingId: string
-) => {
-  return (
-    sykepengesoknaderState.data.filter((soknad) => {
-      return soknad.sykmeldingId === sykmeldingId;
-    }).length > 0
+): boolean => {
+  return sykepengeSoknader.some(
+    (soknad) => soknad.sykmeldingId === sykmeldingId
   );
 };
 
@@ -25,16 +23,16 @@ interface AngreBekreftSykmeldingProps {
 
 const AngreBekreftSykmelding = (
   angreBekreftSykmeldingProps: AngreBekreftSykmeldingProps
-) => {
+): ReactElement => {
   const { sykmelding } = angreBekreftSykmeldingProps;
 
-  const sykepengesoknaderState = useSelector((state: any) => state.soknader);
+  const { data: sykepengeSoknader } = useAppSelector((state) => state.soknader);
 
   const FIRE_MANEDER_SIDEN = new Date();
   FIRE_MANEDER_SIDEN.setMonth(FIRE_MANEDER_SIDEN.getMonth() - 4);
   const vis =
     new Date(sykmelding.sendtdato) > FIRE_MANEDER_SIDEN &&
-    !sykmeldingHarSoknad(sykepengesoknaderState, sykmelding.id);
+    !sykmeldingHarSoknad(sykepengeSoknader, sykmelding.id);
   return (
     <>
       {vis ? (

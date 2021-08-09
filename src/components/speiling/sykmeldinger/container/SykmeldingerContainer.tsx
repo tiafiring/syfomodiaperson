@@ -56,7 +56,7 @@ const SykmeldingerSide = () => {
           <div className="speiling">
             <Brodsmuler brodsmuler={brodsmuler} />
             <SidetoppSpeilet tittel="Dine sykmeldinger" htmlTekst={htmlIntro} />
-            <DineSykmeldinger fnr={fnr} sykmeldinger={sykmeldinger} />
+            <DineSykmeldinger sykmeldinger={sykmeldinger} />
           </div>
         </div>
       </SideLaster>
