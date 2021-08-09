@@ -136,7 +136,7 @@ interface SykmeldingopplysningFravaersperioderProps {
 
 export const SykmeldingopplysningFravaersperioder = (
   sykmeldingopplysningFravaersperioderProps: SykmeldingopplysningFravaersperioderProps
-): ReactElement | null => {
+): ReactElement => {
   const { sykmelding, className } = sykmeldingopplysningFravaersperioderProps;
   return sykmelding.sporsmal.harAnnetFravaer !== null ? (
     <SykmeldingNokkelOpplysning
@@ -156,7 +156,9 @@ export const SykmeldingopplysningFravaersperioder = (
         <p>{texts.egenmeldingPapirNei}</p>
       )}
     </SykmeldingNokkelOpplysning>
-  ) : null;
+  ) : (
+    <></>
+  );
 };
 
 interface SykmeldingopplysningForsikringProps {
@@ -166,14 +168,16 @@ interface SykmeldingopplysningForsikringProps {
 
 export const SykmeldingopplysningForsikring = (
   sykmeldingopplysningForsikringProps: SykmeldingopplysningForsikringProps
-): ReactElement | null => {
+): ReactElement => {
   const { sykmelding, className } = sykmeldingopplysningForsikringProps;
   const text = sykmelding.sporsmal.harForsikring ? texts.ja : texts.nei;
   return sykmelding.sporsmal.harForsikring !== null ? (
     <SykmeldingNokkelOpplysning className={className} tittel={texts.forsikring}>
       <p>{text}</p>
     </SykmeldingNokkelOpplysning>
-  ) : null;
+  ) : (
+    <></>
+  );
 };
 
 interface FrilansersporsmalProps {
