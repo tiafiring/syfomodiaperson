@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import {
   SykmeldingOldFormat,
   SykmeldingStatus,
@@ -85,7 +85,7 @@ interface BekreftetSykmeldingStatuspanelProps {
 
 const BekreftetSykmeldingStatuspanel = (
   bekreftetSykmeldingStatuspanelProps: BekreftetSykmeldingStatuspanelProps
-) => {
+): ReactElement => {
   const { sykmelding } = bekreftetSykmeldingStatuspanelProps;
   return (
     <Statuspanel>

@@ -1,9 +1,8 @@
-import React from "react";
-import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
+import React, { ReactElement } from "react";
 import {
-  behandlingsutfallStatuser,
-  gamleSMStatuser,
-} from "../../../../utils/sykmeldinger/sykmeldingstatuser";
+  SykmeldingOldFormat,
+  SykmeldingStatus,
+} from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 import DinSykmelding from "./DinSykmelding";
 import DinSendteSykmelding from "./DinSendteSykmelding";
 import DinBekreftedeSykmelding from "./DinBekreftedeSykmelding";
@@ -15,21 +14,24 @@ import AvvistSykmelding from "./avvisteSykmeldinger/AvvistSykmelding";
 import KoronaSykmeldingBekreftet from "./koronasykmeldinger/KoronaSykmelding-Bekreftet";
 import KoronaSykmeldingNy from "./koronasykmeldinger/KoronaSykmelding-Ny";
 import KoronaSykmeldingAvbrutt from "./koronasykmeldinger/KoronaSykmelding-Avbrutt";
+import { BehandlingsutfallStatusDTO } from "../../../../data/sykmelding/types/SykmeldingNewFormatDTO";
 
 interface SykmeldingSideProps {
   dinSykmelding?: SykmeldingOldFormat;
   arbeidsgiversSykmelding?: SykmeldingOldFormat;
 }
 
-const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
-  const { dinSykmelding, arbeidsgiversSykmelding } = sykmeldingSideProps;
+const SykmeldingSide = ({
+  dinSykmelding,
+  arbeidsgiversSykmelding,
+}: SykmeldingSideProps): ReactElement => {
   return (() => {
     if (!dinSykmelding) {
       return <Feilmelding tittel="Fant ikke sykmelding" />;
     }
     if (
       dinSykmelding.behandlingsutfall.status ===
-      behandlingsutfallStatuser.INVALID
+      BehandlingsutfallStatusDTO.INVALID
     ) {
       return (
         <div>
@@ -40,7 +42,7 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
     }
     if (dinSykmelding.egenmeldt) {
       switch (dinSykmelding.status) {
-        case gamleSMStatuser.BEKREFTET: {
+        case SykmeldingStatus.BEKREFTET: {
           return (
             <div>
               <KoronaSykmeldingBekreftet dinSykmelding={dinSykmelding} />
@@ -48,7 +50,7 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
             </div>
           );
         }
-        case gamleSMStatuser.NY: {
+        case SykmeldingStatus.NY: {
           return (
             <>
               <KoronaSykmeldingNy sykmelding={dinSykmelding} />
@@ -56,7 +58,7 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
             </>
           );
         }
-        case gamleSMStatuser.AVBRUTT: {
+        case SykmeldingStatus.AVBRUTT: {
           return (
             <div>
               <KoronaSykmeldingAvbrutt sykmelding={dinSykmelding} />
@@ -69,7 +71,7 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
         }
       }
     } else if (
-      dinSykmelding.status === gamleSMStatuser.SENDT &&
+      dinSykmelding.status === SykmeldingStatus.SENDT &&
       arbeidsgiversSykmelding
     ) {
       return (
@@ -83,7 +85,7 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
       );
     } else if (
       arbeidsgiversSykmelding &&
-      dinSykmelding.status === gamleSMStatuser.BEKREFTET
+      dinSykmelding.status === SykmeldingStatus.BEKREFTET
     ) {
       return (
         <div>
@@ -94,21 +96,21 @@ const SykmeldingSide = (sykmeldingSideProps: SykmeldingSideProps) => {
           <LenkeTilDineSykmeldinger />
         </div>
       );
-    } else if (dinSykmelding.status === gamleSMStatuser.UTGAATT) {
+    } else if (dinSykmelding.status === SykmeldingStatus.UTGAATT) {
       return (
         <div>
           <DinUtgaatteSykmelding sykmelding={dinSykmelding} />
           <LenkeTilDineSykmeldinger />
         </div>
       );
-    } else if (dinSykmelding.status === gamleSMStatuser.NY) {
+    } else if (dinSykmelding.status === SykmeldingStatus.NY) {
       return (
         <div>
           <DinSykmelding sykmelding={dinSykmelding} />
           <LenkeTilDineSykmeldinger />
         </div>
       );
-    } else if (dinSykmelding.status === gamleSMStatuser.AVBRUTT) {
+    } else if (dinSykmelding.status === SykmeldingStatus.AVBRUTT) {
       return (
         <div>
           <DinAvbrutteSykmelding sykmelding={dinSykmelding} />

@@ -1,29 +1,26 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 import SykmeldingTeaser from "./SykmeldingTeaser";
 
 interface SykmeldingTeasereProps {
   sykmeldinger: SykmeldingOldFormat[];
-  fnr: string;
   className: string;
   tittel: string;
   ingenSykmeldingerMelding: string;
   id: string;
-  children?: any;
+  children?: ReactElement;
   trackOnClick: () => void;
 }
 
-const SykmeldingTeasere = (sykmeldingTeasereProps: SykmeldingTeasereProps) => {
-  const {
-    sykmeldinger,
-    fnr,
-    className,
-    tittel = "",
-    ingenSykmeldingerMelding,
-    id,
-    children,
-    trackOnClick,
-  } = sykmeldingTeasereProps;
+const SykmeldingTeasere = ({
+  sykmeldinger,
+  className,
+  tittel = "",
+  ingenSykmeldingerMelding,
+  id,
+  children,
+  trackOnClick,
+}: SykmeldingTeasereProps): ReactElement => {
   return (
     <div className="blokk--l">
       <header className="inngangspanelerHeader">
@@ -32,16 +29,13 @@ const SykmeldingTeasere = (sykmeldingTeasereProps: SykmeldingTeasereProps) => {
       </header>
       <div id={id} className={className || "js-content"}>
         {sykmeldinger.length ? (
-          sykmeldinger.map((sykmelding, idx) => {
-            return (
-              <SykmeldingTeaser
-                key={idx}
-                fnr={fnr}
-                sykmelding={sykmelding}
-                trackOnClick={trackOnClick}
-              />
-            );
-          })
+          sykmeldinger.map((sykmelding, idx) => (
+            <SykmeldingTeaser
+              key={idx}
+              sykmelding={sykmelding}
+              trackOnClick={trackOnClick}
+            />
+          ))
         ) : (
           <p className="panel typo-infotekst">{ingenSykmeldingerMelding}</p>
         )}

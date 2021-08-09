@@ -6,8 +6,10 @@ import {
   SykepengestoppArsak,
 } from "../data/pengestopp/types/FlaggPerson";
 import { senesteTom } from "./periodeUtils";
-import { gamleSMStatuser } from "./sykmeldinger/sykmeldingstatuser";
-import { SykmeldingOldFormat } from "../data/sykmelding/types/SykmeldingOldFormat";
+import {
+  SykmeldingOldFormat,
+  SykmeldingStatus,
+} from "../data/sykmelding/types/SykmeldingOldFormat";
 import { sykepengestoppArsakTekstListe } from "../components/pengestopp/PengestoppModal";
 
 export const sykmeldingerToArbeidsgiver = (
@@ -41,20 +43,6 @@ export const allStoppAutomatikkStatusEndringer = (
   });
 };
 
-export const arbeidsgivereWithStoppAutomatikkStatus = (
-  arbeidsgivere: Arbeidsgiver[],
-  statusEndringList: StatusEndring[]
-) => {
-  const statusEndringerWithStoppAutomatikk = allStoppAutomatikkStatusEndringer(
-    statusEndringList
-  );
-  return arbeidsgivere.filter((arbeidsgiver) => {
-    return statusEndringerWithStoppAutomatikk.find((statusEndring) => {
-      return statusEndring.virksomhetNr.value === arbeidsgiver.orgnummer;
-    });
-  });
-};
-
 export const aktiveSykmeldingerFraSiste3Maneder = (
   sykmeldinger: SykmeldingOldFormat[]
 ) => {
@@ -62,7 +50,7 @@ export const aktiveSykmeldingerFraSiste3Maneder = (
   return sykmeldinger.filter((sykmelding) => {
     return (
       senesteTom(sykmelding.mulighetForArbeid.perioder) >= threeMonthsAgo &&
-      sykmelding.status === gamleSMStatuser.SENDT
+      sykmelding.status === SykmeldingStatus.SENDT
     );
   });
 };

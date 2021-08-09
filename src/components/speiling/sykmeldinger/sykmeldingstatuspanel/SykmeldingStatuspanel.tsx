@@ -1,26 +1,27 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import {
   Sykmeldingstatus,
   SendtDato,
   Arbeidsgiver,
   Orgnummer,
 } from "./SykmeldingStatuspanelOpplysning";
-import { gamleSMStatuser as sykmeldingstatuser } from "../../../../utils/sykmeldinger/sykmeldingstatuser";
 import GjenapneSykmelding from "./GjenapneSykmelding";
 import Statuspanel, { Statusopplysninger } from "../../Statuspanel";
-import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
+import {
+  SykmeldingOldFormat,
+  SykmeldingStatus,
+} from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 
 interface NokkelopplysningerProps {
   sykmelding: SykmeldingOldFormat;
 }
 
-export const Nokkelopplysninger = (
-  nokkelopplysningerProps: NokkelopplysningerProps
-) => {
-  const { sykmelding } = nokkelopplysningerProps;
+export const Nokkelopplysninger = ({
+  sykmelding,
+}: NokkelopplysningerProps): ReactElement => {
   switch (sykmelding.status) {
-    case sykmeldingstatuser.SENDT:
-    case sykmeldingstatuser.TIL_SENDING: {
+    case SykmeldingStatus.SENDT:
+    case SykmeldingStatus.TIL_SENDING: {
       return (
         <Statusopplysninger>
           <Sykmeldingstatus sykmelding={sykmelding} />
@@ -30,7 +31,7 @@ export const Nokkelopplysninger = (
         </Statusopplysninger>
       );
     }
-    case sykmeldingstatuser.AVBRUTT: {
+    case SykmeldingStatus.AVBRUTT: {
       return (
         <Statusopplysninger>
           <Sykmeldingstatus sykmelding={sykmelding} />
@@ -38,7 +39,7 @@ export const Nokkelopplysninger = (
         </Statusopplysninger>
       );
     }
-    case sykmeldingstatuser.UTGAATT: {
+    case SykmeldingStatus.UTGAATT: {
       return (
         <Statusopplysninger>
           <Sykmeldingstatus sykmelding={sykmelding} />
@@ -46,7 +47,7 @@ export const Nokkelopplysninger = (
       );
     }
     default: {
-      return null;
+      return <></>;
     }
   }
 };
@@ -55,14 +56,13 @@ interface SykmeldingStatuspanelProps {
   sykmelding: SykmeldingOldFormat;
 }
 
-const SykmeldingStatuspanel = (
-  sykmeldingStatuspanelProps: SykmeldingStatuspanelProps
-) => {
-  const { sykmelding } = sykmeldingStatuspanelProps;
+const SykmeldingStatuspanel = ({
+  sykmelding,
+}: SykmeldingStatuspanelProps): ReactElement => {
   return (
     <Statuspanel>
       <Nokkelopplysninger sykmelding={sykmelding} />
-      {sykmelding.status === sykmeldingstatuser.AVBRUTT &&
+      {sykmelding.status === SykmeldingStatus.AVBRUTT &&
         !sykmelding.egenmeldt && <GjenapneSykmelding />}
     </Statuspanel>
   );

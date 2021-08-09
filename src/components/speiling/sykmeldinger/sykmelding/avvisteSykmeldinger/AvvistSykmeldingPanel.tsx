@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import Veilederpanel from "nav-frontend-veilederpanel";
 import { SykmeldingOldFormat } from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
 import * as avvisningsregelnavn from "../../../../../utils/sykmeldinger/avvisningsregelnavn";
@@ -29,7 +29,9 @@ const hentHarIkkeRettTilASykmelde = (sykmelding: SykmeldingOldFormat) => {
   }, false);
 };
 
-export const hentHandlingsstreng = (sykmelding: SykmeldingOldFormat) => {
+export const hentHandlingsstreng = (
+  sykmelding: SykmeldingOldFormat
+): string => {
   const regelnavnliste = hentRegelnavnListe(sykmelding);
 
   const brukerErOver70 = regelnavnliste.find((regelnavn) => {
@@ -130,10 +132,9 @@ interface AvvistSykmeldingPanelProps {
   sykmelding: SykmeldingOldFormat;
 }
 
-export const AvvistSykmeldingPanel = (
-  avvistSykmeldingPanelProps: AvvistSykmeldingPanelProps
-) => {
-  const { sykmelding } = avvistSykmeldingPanelProps;
+export const AvvistSykmeldingPanel = ({
+  sykmelding,
+}: AvvistSykmeldingPanelProps): ReactElement => {
   const handlingstreng = hentHandlingsstreng(sykmelding);
   const introtekststreng = hentIntrotekst(sykmelding);
   return (

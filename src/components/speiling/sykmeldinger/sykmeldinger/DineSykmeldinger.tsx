@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ReactElement, useState } from "react";
 import {
   SykmeldingOldFormat,
   SykmeldingStatus,
@@ -33,12 +33,12 @@ const sorteringsKriterier: SorteringKriterium[] = [
 ];
 
 interface DineSykmeldingerProps {
-  fnr: string;
   sykmeldinger: SykmeldingOldFormat[];
 }
 
-const DineSykmeldinger = (dineSykmeldingerProps: DineSykmeldingerProps) => {
-  const { sykmeldinger = [], fnr } = dineSykmeldingerProps;
+const DineSykmeldinger = ({
+  sykmeldinger = [],
+}: DineSykmeldingerProps): ReactElement => {
   const nyeSykmeldinger = sykmeldinger.filter((sykmld) => {
     return sykmld.status === SykmeldingStatus.NY;
   });
@@ -58,7 +58,6 @@ const DineSykmeldinger = (dineSykmeldingerProps: DineSykmeldingerProps) => {
         tittel={texts.nyeSykmeldinger}
         ingenSykmeldingerMelding={texts.ingenNyeSykmeldinger}
         className="js-nye-sykmeldinger"
-        fnr={fnr}
         id="sykmelding-liste-nye"
         trackOnClick={() => trackOnClick(texts.apneSykmelding)}
       />
@@ -71,7 +70,6 @@ const DineSykmeldinger = (dineSykmeldingerProps: DineSykmeldingerProps) => {
           tittel={texts.ingenSykmeldinger}
           ingenSykmeldingerMelding={texts.ingenSykmeldinger}
           className="js-tidligere-sykmeldinger"
-          fnr={fnr}
           id="sykmelding-liste-tidligere"
           trackOnClick={() => trackOnClick(texts.apneSykmelding)}
         >

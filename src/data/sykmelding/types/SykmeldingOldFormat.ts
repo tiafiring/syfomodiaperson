@@ -77,9 +77,7 @@ export interface SykmeldingOldFormat {
   identdato: string;
   status: SykmeldingStatus;
   naermesteLederStatus: string | null;
-  erEgenmeldt?: boolean | null;
-  erPapirsykmelding?: boolean | null;
-  innsendtArbeidsgivernavn: string | null;
+  innsendtArbeidsgivernavn?: string;
   valgtArbeidssituasjon: ArbeidssituasjonType | null;
   behandlingsutfall: BehandlingsutfallDTO;
   mottakendeArbeidsgiver?: {
@@ -141,5 +139,6 @@ export interface SykmeldingOldFormat {
     sykmelderTlf: string | null;
   };
   egenmeldt?: boolean;
+  papirsykmelding?: boolean;
   harRedusertArbeidsgiverperiode: boolean | null;
 }

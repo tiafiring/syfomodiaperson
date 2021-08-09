@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
 import {
   SykmeldingOldFormat,
@@ -63,7 +63,7 @@ interface SykmeldingstatusProps {
 
 export const Sykmeldingstatus = (
   sykmeldingstatusProps: SykmeldingstatusProps
-) => {
+): ReactElement => {
   const { sykmelding } = sykmeldingstatusProps;
   return (
     <StatusNokkelopplysning tittel={texts.status.tittel}>
@@ -83,7 +83,7 @@ interface SendtDatoProps {
   sykmelding: SykmeldingOldFormat;
 }
 
-export const SendtDato = (sendtDatoProps: SendtDatoProps) => {
+export const SendtDato = (sendtDatoProps: SendtDatoProps): ReactElement => {
   const { sykmelding } = sendtDatoProps;
   const tittel =
     sykmelding.status === BEKREFTET
@@ -102,7 +102,9 @@ interface ArbeidsgiverProps {
   sykmelding: SykmeldingOldFormat;
 }
 
-export const Arbeidsgiver = (arbeidsgiverProps: ArbeidsgiverProps) => {
+export const Arbeidsgiver = (
+  arbeidsgiverProps: ArbeidsgiverProps
+): ReactElement => {
   const { sykmelding } = arbeidsgiverProps;
   return (
     <StatusNokkelopplysning tittel={texts.arbeidsgiver}>
@@ -115,7 +117,7 @@ interface OrgnummerProps {
   sykmelding: SykmeldingOldFormat;
 }
 
-export const Orgnummer = (orgnummerProps: OrgnummerProps) => {
+export const Orgnummer = (orgnummerProps: OrgnummerProps): ReactElement => {
   const { sykmelding } = orgnummerProps;
   const orgnummer = sykmelding.orgnummer
     ? sykmelding.orgnummer.replace(/(...)(...)(...)/g, "$1 $2 $3")
@@ -134,7 +136,7 @@ interface SykmeldingopplysningFravaersperioderProps {
 
 export const SykmeldingopplysningFravaersperioder = (
   sykmeldingopplysningFravaersperioderProps: SykmeldingopplysningFravaersperioderProps
-) => {
+): ReactElement => {
   const { sykmelding, className } = sykmeldingopplysningFravaersperioderProps;
   return sykmelding.sporsmal.harAnnetFravaer !== null ? (
     <SykmeldingNokkelOpplysning
@@ -154,7 +156,9 @@ export const SykmeldingopplysningFravaersperioder = (
         <p>{texts.egenmeldingPapirNei}</p>
       )}
     </SykmeldingNokkelOpplysning>
-  ) : null;
+  ) : (
+    <></>
+  );
 };
 
 interface SykmeldingopplysningForsikringProps {
@@ -164,14 +168,16 @@ interface SykmeldingopplysningForsikringProps {
 
 export const SykmeldingopplysningForsikring = (
   sykmeldingopplysningForsikringProps: SykmeldingopplysningForsikringProps
-) => {
+): ReactElement => {
   const { sykmelding, className } = sykmeldingopplysningForsikringProps;
   const text = sykmelding.sporsmal.harForsikring ? texts.ja : texts.nei;
   return sykmelding.sporsmal.harForsikring !== null ? (
     <SykmeldingNokkelOpplysning className={className} tittel={texts.forsikring}>
       <p>{text}</p>
     </SykmeldingNokkelOpplysning>
-  ) : null;
+  ) : (
+    <></>
+  );
 };
 
 interface FrilansersporsmalProps {
@@ -180,7 +186,7 @@ interface FrilansersporsmalProps {
 
 export const Frilansersporsmal = (
   frilansersporsmalProps: FrilansersporsmalProps
-) => {
+): ReactElement => {
   const { sykmelding } = frilansersporsmalProps;
   return (
     <Vis
