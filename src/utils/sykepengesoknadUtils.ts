@@ -1,3 +1,5 @@
+import { SporsmalDTO } from "../data/sykepengesoknad/types/SykepengesoknadDTO";
+
 export const getTidligsteSendtDato = (soknad: any) => {
   if (soknad.sendtTilNAVDato && soknad.sendtTilArbeidsgiverDato) {
     return soknad.sendtTilNAVDato > soknad.sendtTilArbeidsgiverDato
@@ -70,3 +72,6 @@ export const getSendtTilSuffix = (sykepengesoknad: any) => {
   }
   return "";
 };
+
+export const erVaerKlarOverAt = (s: SporsmalDTO): boolean =>
+  s.tag === "VAER_KLAR_OVER_AT";

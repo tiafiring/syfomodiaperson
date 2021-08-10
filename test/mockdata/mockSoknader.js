@@ -3477,7 +3477,7 @@ const mockSoknader = [
         sporsmalstekst: "Når skal du være utenfor Norge?",
         svar: [
           {
-            verdi: "{'fom':'2018-09-06','tom':'2018-09-07'}",
+            verdi: '{"fom":"2018-09-06","tom":"2018-09-07"}',
           },
         ],
         svartype: "PERIODER",
@@ -3602,7 +3602,7 @@ const mockSoknader = [
         sporsmalstekst: "Når skal du være utenfor Norge?",
         svar: [
           {
-            verdi: "{'fom':'2018-09-05','tom':'2018-09-07'}",
+            verdi: '{"fom":"2018-09-05","tom":"2018-09-07"}',
           },
         ],
         svartype: "PERIODER",
@@ -3735,7 +3735,7 @@ const mockSoknader = [
         sporsmalstekst: "Når skal du være utenfor Norge?",
         svar: [
           {
-            verdi: "{'fom':'2018-09-05','tom':'2018-09-14'}",
+            verdi: '{"fom":"2018-09-05","tom":"2018-09-14"}',
           },
         ],
         svartype: "PERIODER",
@@ -3868,7 +3868,7 @@ const mockSoknader = [
         sporsmalstekst: "Når skal du være utenfor Norge?",
         svar: [
           {
-            verdi: "{'fom':'2018-09-12','tom':'2018-09-16'}",
+            verdi: '{"fom":"2018-09-12","tom":"2018-09-16"}',
           },
         ],
         svartype: "PERIODER",
@@ -4662,7 +4662,7 @@ const mockSoknader = [
             sporsmalstekst: "Når oppholdt du deg utenfor Norge?",
             svar: [
               {
-                verdi: "{'fom':'2018-09-01','tom':'2018-09-02'}",
+                verdi: '{"fom": "2018-09-01", "tom":"2018-09-02"}',
               },
             ],
             svartype: "PERIODER",
@@ -6289,7 +6289,7 @@ const mockSoknader = [
         sporsmalstekst: "Når skal du være utenfor Norge?",
         svar: [
           {
-            verdi: "{'fom':'2018-09-12','tom':'2018-09-14'}",
+            verdi: '{"fom":"2018-09-12","tom":"2018-09-14"}',
           },
         ],
         svartype: "PERIODER",
@@ -6422,7 +6422,7 @@ const mockSoknader = [
         sporsmalstekst: "Når skal du være utenfor Norge?",
         svar: [
           {
-            verdi: "{'fom':'2018-09-05','tom':'2018-09-09'}",
+            verdi: '{"fom":"2018-09-05","tom":"2018-09-09"}',
           },
         ],
         svartype: "PERIODER",
@@ -6555,7 +6555,7 @@ const mockSoknader = [
         sporsmalstekst: "Når skal du være utenfor Norge?",
         svar: [
           {
-            verdi: "{'fom':'2018-10-10','tom':'2018-10-12'}",
+            verdi: '{"fom":"2018-10-10","tom":"2018-10-12"}',
           },
         ],
         svartype: "PERIODER",
@@ -6688,7 +6688,7 @@ const mockSoknader = [
         sporsmalstekst: "Når skal du være utenfor Norge?",
         svar: [
           {
-            verdi: "{'fom':'2018-09-20','tom':'2018-09-22'}",
+            verdi: '{"fom":"2018-09-20","tom":"2018-09-22"}',
           },
         ],
         svartype: "PERIODER",

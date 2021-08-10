@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import AlertStripe from "nav-frontend-alertstriper";
-import * as moterPropTypes from "../../../propTypes";
 import { getDatoFraZulu, erMotePassert } from "../utils";
 import Sidetopp from "../../Sidetopp";
 import KontaktInfoAdvarsel from "./KontaktInfoAdvarsel";
@@ -10,6 +9,7 @@ import BekreftetMotetidspunkt from "./BekreftetMotetidspunkt";
 import InformasjonSendt from "./InformasjonSendt";
 import FlereTidspunktSkjema from "../skjema/FlereTidspunktSkjema";
 import Svarstatus from "./Svarstatus";
+import { motePt } from "../moteProptypes";
 
 const texts = {
   valgSendtTilParter: "Møtetidspunkt valgt, møteresultat sendt til partene",
@@ -117,7 +117,7 @@ export const StatusVarsel = ({ mote, arbeidstaker }) => {
 };
 
 StatusVarsel.propTypes = {
-  mote: moterPropTypes.motePt,
+  mote: motePt,
   arbeidstaker: PropTypes.object,
 };
 
@@ -199,7 +199,7 @@ const MotebookingStatus = (props) => {
 };
 
 MotebookingStatus.propTypes = {
-  mote: moterPropTypes.motePt,
+  mote: motePt,
   antallNyeTidspunkt: PropTypes.number,
   fnr: PropTypes.string,
   arbeidstaker: PropTypes.object,

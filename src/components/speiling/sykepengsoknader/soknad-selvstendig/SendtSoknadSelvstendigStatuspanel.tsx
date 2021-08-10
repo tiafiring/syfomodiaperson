@@ -1,27 +1,34 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import Statuspanel, {
   Statusopplysninger,
   StatusNokkelopplysning,
 } from "../../Statuspanel";
-import { soknad as soknadPt } from "../../../../propTypes";
 import { VerktoyKnapp, Verktoylinje } from "../../Verktoylinje";
 import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
 import SykmeldingNokkelOpplysning from "../../sykmeldinger/sykmelding/sykmeldingOpplysninger/SykmeldingNokkelOpplysning";
+import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const texts = {
   status: "Status",
   sendtTilNav: "Sendt til NAV",
   innsendt: "Dato sendt",
   tittel: "Utbetaling av sykepenger",
+  endre: "Endre søknad",
   tilNav: {
     __html:
       'Sykepenger utbetales etter at NAV har innvilget søknaden. <a href="https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Utbetalinger/Utbetalinger/Utbetalingsdatoer%2C+feriepenger+og+skattetrekk?kap=499628" target="_blank">Les om sykepenger og saksbehandlingstider.</a>',
   },
 };
 
-const SendtSoknadSelvstendigStatuspanel = ({ soknad }) => {
+interface SendtSoknadSelvstendigStatuspanelProps {
+  soknad: SykepengesoknadDTO;
+}
+
+const SendtSoknadSelvstendigStatuspanel = ({
+  soknad,
+}: SendtSoknadSelvstendigStatuspanelProps): ReactElement => {
   const ETT_AAR_SIDEN = new Date();
-  ETT_AAR_SIDEN.setYear(ETT_AAR_SIDEN.getFullYear() - 1);
+  ETT_AAR_SIDEN.setFullYear(ETT_AAR_SIDEN.getFullYear() - 1);
   const visEndreknapp = soknad.opprettetDato >= ETT_AAR_SIDEN;
 
   return (
@@ -39,15 +46,11 @@ const SendtSoknadSelvstendigStatuspanel = ({ soknad }) => {
       </Statusopplysninger>
       {visEndreknapp && (
         <Verktoylinje>
-          <VerktoyKnapp>Endre søknad</VerktoyKnapp>
+          <VerktoyKnapp>{texts.endre}</VerktoyKnapp>
         </Verktoylinje>
       )}
     </Statuspanel>
   );
-};
-
-SendtSoknadSelvstendigStatuspanel.propTypes = {
-  soknad: soknadPt,
 };
 
 export default SendtSoknadSelvstendigStatuspanel;

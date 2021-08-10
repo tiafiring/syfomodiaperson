@@ -1,6 +1,6 @@
 import { tilLesbarDatoMedArstall } from "../datoUtils";
 import { formaterOrgnr } from "../index";
-import { KORRIGERT } from "../../enums/soknadstatuser";
+import { SoknadstatusDTO } from "../../data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const texts = {
   korrigert: "Korrigert",
@@ -48,7 +48,7 @@ const hentStatustekst = (soknad) => {
     ? tilLesbarDatoMedArstall(soknad.sendtTilNAVDato || soknad.innsendtDato)
     : null;
 
-  return soknad.status === KORRIGERT
+  return soknad.status === SoknadstatusDTO.KORRIGERT
     ? texts.korrigert
     : soknadSendtTilNav && soknadSendtTilArbeidsgiver
     ? textSendtTilArbeidsgiverOgNav(arbeidsgiver, orgnr, sendtTilNavDato)

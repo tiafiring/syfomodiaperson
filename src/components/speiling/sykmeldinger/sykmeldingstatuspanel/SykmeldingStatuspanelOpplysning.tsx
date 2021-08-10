@@ -53,10 +53,6 @@ const textStatus = (status: SykmeldingStatus) => {
   }
 };
 
-const tilSendingHjelpetekst = () => {
-  return <Hjelpetekst>{texts.hjelpetekst}</Hjelpetekst>;
-};
-
 interface SykmeldingstatusProps {
   sykmelding: SykmeldingOldFormat;
 }
@@ -70,7 +66,7 @@ export const Sykmeldingstatus = (
       {sykmelding.status === TIL_SENDING ? (
         <div className="medHjelpetekst">
           <span>{textStatus(sykmelding.status)}</span>
-          {tilSendingHjelpetekst()}
+          <Hjelpetekst>{texts.hjelpetekst}</Hjelpetekst>
         </div>
       ) : (
         <p className="js-status">{textStatus(sykmelding.status)}</p>

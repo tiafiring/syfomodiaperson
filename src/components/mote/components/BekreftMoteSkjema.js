@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import AlertStripe from "nav-frontend-alertstriper";
 import KnappBase from "nav-frontend-knapper";
-import * as motePropTypes from "../../../propTypes";
 import Epostmottakere from "./Epostmottakere";
 import Innholdsviser from "./Innholdsviser";
 import { mapStateToInnholdsviserProps } from "./AvbrytMote";
+import { motePt } from "../moteProptypes";
 
 export const InnholdsviserContainer = connect(mapStateToInnholdsviserProps)(
   Innholdsviser
@@ -72,7 +72,7 @@ BekreftMoteSkjema.propTypes = {
   arbeidstaker: PropTypes.object,
   onSubmit: PropTypes.func,
   avbrytHref: PropTypes.string,
-  mote: motePropTypes.motePt,
+  mote: motePt,
   bekrefter: PropTypes.bool,
   bekreftFeilet: PropTypes.bool,
   hentEpostinnhold: PropTypes.func,

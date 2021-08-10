@@ -1,5 +1,5 @@
 import { PropTypes } from "prop-types";
-import { ARBEIDSGIVER, BRUKER, NAV_VEILEDER } from "../konstanter";
+import { ARBEIDSGIVER, BRUKER, NAV_VEILEDER } from "../../konstanter";
 
 export const motealternativPt = PropTypes.shape({
   id: PropTypes.number,

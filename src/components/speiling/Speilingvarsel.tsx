@@ -5,8 +5,7 @@ interface SpeilingvarselProps {
   brukernavn: string;
 }
 
-const Speilingvarsel = (speilingvarselProps: SpeilingvarselProps) => {
-  const { brukernavn } = speilingvarselProps;
+const Speilingvarsel = ({ brukernavn }: SpeilingvarselProps) => {
   return (
     <Panel className="panel panel--komprimert blokk--s">
       <p>

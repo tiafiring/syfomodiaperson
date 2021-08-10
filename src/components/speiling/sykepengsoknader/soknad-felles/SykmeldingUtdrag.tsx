@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
 import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
 import SykmeldingPerioder from "../../sykmeldinger/sykmelding/sykmeldingOpplysninger/SykmeldingPerioder";
@@ -20,8 +20,10 @@ interface SykmeldingUtdragProps {
   sykmelding: SykmeldingOldFormat;
 }
 
-const SykmeldingUtdrag = (sykmeldingUtdragProps: SykmeldingUtdragProps) => {
-  const { erApen, sykmelding } = sykmeldingUtdragProps;
+const SykmeldingUtdrag = ({
+  erApen,
+  sykmelding,
+}: SykmeldingUtdragProps): ReactElement => {
   return (
     <div className="blokk">
       <Utvidbar

@@ -1,32 +1,36 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {
-  brodsmule,
-  soknad as soknadPt,
-  sykmelding as sykmeldingPt,
-} from "../../../../propTypes";
+import React, { ReactElement } from "react";
 import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
 import Statuspanel, {
   StatusNokkelopplysning,
   Statusopplysninger,
 } from "../../Statuspanel";
 import SoknadSpeiling from "../soknad-felles/SoknadSpeiling";
-import SykmeldingUtdrag from "../SykmeldingUtdragContainer";
 import VerktoylinjeGjenapne from "../soknad-felles/VerktoylinjeGjenapneSoknad";
+import { Brodsmule } from "../../Brodsmuler";
+import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+import { SykmeldingUtdragContainer } from "../SykmeldingUtdragContainer";
 
 const texts = {
+  tittel: "Søknad om sykepenger",
   avbrutt: "Avbrutt av deg",
+  avbruttTittel: "Dato avbrutt",
   status: "Status",
 };
 
-const AvbruttSoknadArbeidstakerStatuspanel = ({ soknad }) => {
+interface AvbruttSoknadArbeidstakerStatuspanelProps {
+  soknad: SykepengesoknadDTO;
+}
+
+const AvbruttSoknadArbeidstakerStatuspanel = ({
+  soknad,
+}: AvbruttSoknadArbeidstakerStatuspanelProps) => {
   return (
     <Statuspanel>
       <Statusopplysninger>
         <StatusNokkelopplysning tittel={texts.status}>
           <p>{texts.avbrutt}</p>
         </StatusNokkelopplysning>
-        <StatusNokkelopplysning tittel="Dato avbrutt">
+        <StatusNokkelopplysning tittel={texts.avbruttTittel}>
           <p>{tilLesbarDatoMedArstall(soknad.avbruttDato)}</p>
         </StatusNokkelopplysning>
       </Statusopplysninger>
@@ -35,34 +39,31 @@ const AvbruttSoknadArbeidstakerStatuspanel = ({ soknad }) => {
   );
 };
 
-AvbruttSoknadArbeidstakerStatuspanel.propTypes = {
-  brukernavn: PropTypes.string,
-  brodsmuler: PropTypes.arrayOf(brodsmule),
-  soknad: soknadPt,
-  fnr: PropTypes.string,
-  sykmelding: sykmeldingPt,
-};
+interface AvbruttSoknadArbeidstakerProps {
+  brukernavn: string;
+  fnr: string;
+  soknad: SykepengesoknadDTO;
+  brodsmuler: Brodsmule[];
+}
 
-const AvbruttSoknadArbeidstaker = ({ brukernavn, brodsmuler, soknad, fnr }) => {
+const AvbruttSoknadArbeidstaker = ({
+  brukernavn,
+  brodsmuler,
+  soknad,
+  fnr,
+}: AvbruttSoknadArbeidstakerProps): ReactElement => {
   return (
     <div>
       <SoknadSpeiling
-        tittel="Søknad om sykepenger"
+        tittel={texts.tittel}
         brukernavn={brukernavn}
         brodsmuler={brodsmuler}
       >
         <AvbruttSoknadArbeidstakerStatuspanel soknad={soknad} />
-        <SykmeldingUtdrag soknad={soknad} fnr={fnr} />
+        <SykmeldingUtdragContainer soknad={soknad} fnr={fnr} />
       </SoknadSpeiling>
     </div>
   );
-};
-
-AvbruttSoknadArbeidstaker.propTypes = {
-  brukernavn: PropTypes.string,
-  brodsmuler: PropTypes.arrayOf(brodsmule),
-  soknad: soknadPt,
-  fnr: PropTypes.string,
 };
 
 export default AvbruttSoknadArbeidstaker;

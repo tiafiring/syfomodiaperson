@@ -1,15 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { ReactElement } from "react";
 import Oppsummeringsvisning from "../soknad-felles-oppsummering/Oppsummeringsvisning";
-import { brodsmule, soknad as soknadPt } from "../../../../propTypes";
 import SoknadSpeiling from "../soknad-felles/SoknadSpeiling";
 import StatuspanelUtland from "./StatuspanelUtland";
+import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+import { Brodsmule } from "../../Brodsmuler";
 
 const texts = {
+  tittel: "Søknad om sykepenger under opphold utenfor Norge",
   oppsummering: "Oppsummering av søknaden",
 };
 
-const OppsummeringPanel = ({ soknad }) => {
+interface OppsummeringPanelProps {
+  soknad: SykepengesoknadDTO;
+}
+
+const OppsummeringPanel = ({ soknad }: OppsummeringPanelProps) => {
   return (
     <div className="panel blokk">
       <h2 className="panel__tittel blokk--xs"> {texts.oppsummering}</h2>
@@ -18,14 +23,20 @@ const OppsummeringPanel = ({ soknad }) => {
   );
 };
 
-OppsummeringPanel.propTypes = {
-  soknad: soknadPt,
-};
+interface SykepengesoknadUtlandProps {
+  brukernavn: string;
+  brodsmuler: Brodsmule[];
+  soknad: SykepengesoknadDTO;
+}
 
-const SykepengesoknadUtland = ({ brukernavn, brodsmuler, soknad }) => {
+const SykepengesoknadUtland = ({
+  brukernavn,
+  brodsmuler,
+  soknad,
+}: SykepengesoknadUtlandProps): ReactElement => {
   return (
     <SoknadSpeiling
-      tittel="Søknad om sykepenger under opphold utenfor Norge"
+      tittel={texts.tittel}
       brukernavn={brukernavn}
       brodsmuler={brodsmuler}
     >
@@ -33,12 +44,6 @@ const SykepengesoknadUtland = ({ brukernavn, brodsmuler, soknad }) => {
       <OppsummeringPanel soknad={soknad} />
     </SoknadSpeiling>
   );
-};
-
-SykepengesoknadUtland.propTypes = {
-  brukernavn: PropTypes.string,
-  brodsmuler: PropTypes.arrayOf(brodsmule),
-  soknad: soknadPt,
 };
 
 export default SykepengesoknadUtland;

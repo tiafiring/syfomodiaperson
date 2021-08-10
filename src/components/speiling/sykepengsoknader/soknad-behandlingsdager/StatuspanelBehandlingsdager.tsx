@@ -1,8 +1,8 @@
-import React from "react";
-import { soknad as soknadPt } from "../../../../propTypes";
+import React, { ReactElement } from "react";
 import { StatusNokkelopplysning } from "../../Statuspanel";
 import hentSykepengetekst from "../../../../utils/soknad-felles/hentSykepengetekst";
 import hentSoknadStatustekst from "../../../../utils/soknad-felles/hentSoknadStatustekst";
+import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const texts = {
   sendt: "Sendt til NAV",
@@ -13,7 +13,13 @@ const texts = {
   status: "Status",
 };
 
-const StatuspanelBehandlingsdager = ({ soknad }) => {
+interface StatuspanelBehandlingsdagerProps {
+  soknad: SykepengesoknadDTO;
+}
+
+const StatuspanelBehandlingsdager = ({
+  soknad,
+}: StatuspanelBehandlingsdagerProps): ReactElement => {
   return (
     <div className="panel panel--komprimert blokk statuspanel">
       <StatusNokkelopplysning tittel={texts.status}>
@@ -26,10 +32,6 @@ const StatuspanelBehandlingsdager = ({ soknad }) => {
       </StatusNokkelopplysning>
     </div>
   );
-};
-
-StatuspanelBehandlingsdager.propTypes = {
-  soknad: soknadPt,
 };
 
 export default StatuspanelBehandlingsdager;

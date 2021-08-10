@@ -6,9 +6,9 @@ import {
   sorterEtterOpprettetDato,
   sorterEtterPerioder,
 } from "../../../../utils/sykepengesoknadUtils";
-import { OPPHOLD_UTLAND } from "../../../../enums/soknadtyper";
 import {
   SoknadstatusDTO,
+  SoknadstypeDTO,
   SykepengesoknadDTO,
 } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
 
@@ -43,7 +43,7 @@ const Soknader = (soknaderProps: SoknaderProps): ReactElement => {
     .filter((soknad) => {
       return (
         (soknad.status === NY || soknad.status === UTKAST_TIL_KORRIGERING) &&
-        soknad.soknadstype !== OPPHOLD_UTLAND
+        soknad.soknadstype !== SoknadstypeDTO.OPPHOLD_UTLAND
       );
     })
     .sort(sorterEtterOpprettetDato);

@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { ReactElement, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { hentSykmeldinger } from "../../../../data/sykmelding/sykmeldinger_actions";
 import {
+  ArbeidssituasjonType,
   SykmeldingOldFormat,
   SykmeldingStatus,
 } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
@@ -11,10 +12,10 @@ import SykmeldingSide from "../sykmelding/SykmeldingSide";
 import Brodsmuler from "../../Brodsmuler";
 import Speilingvarsel from "../../Speilingvarsel";
 import { SYKMELDINGER } from "../../../../enums/menypunkter";
-import { ARBEIDSTAKER } from "../../../../enums/arbeidssituasjoner";
-import { harForsoktHentetSykmeldinger } from "../../../../utils/reducerUtils";
 import { useValgtPersonident } from "../../../../hooks/useValgtBruker";
 import SideLaster from "../../../SideLaster";
+import { useSykmeldinger } from "../../../../data/sykmelding/sykmeldinger_hooks";
+import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
 
 const texts = {
   pageTitleSykmelding: "Sykmelding",
@@ -30,38 +31,40 @@ const pageTitle = (dinSykmelding?: SykmeldingOldFormat) => {
 export function getSykmelding(
   sykmeldinger: SykmeldingOldFormat[],
   sykmeldingId: string
-) {
+): SykmeldingOldFormat | undefined {
   return sykmeldinger.find((sykmld) => {
     return `${sykmld.id}` === `${sykmeldingId}`;
   });
 }
 
-const DinSykmeldingSide = () => {
+const DinSykmeldingSide = (): ReactElement => {
   const fnr = useValgtPersonident();
   const sykmeldingId = window.location.pathname.split("/")[3];
 
-  const navbrukerState = useSelector((state: any) => state.navbruker);
-  const sykmeldingerState = useSelector((state: any) => state.sykmeldinger);
+  const { navn: brukernavn } = useNavBrukerData();
+  const {
+    harForsoktHentetSykmeldinger,
+    hentingSykmeldingerFeilet,
+    sykmeldinger,
+    arbeidsgiverssykmeldinger,
+  } = useSykmeldinger();
 
-  const harForsoktHentetAlt = harForsoktHentetSykmeldinger(sykmeldingerState);
-  const henter = !harForsoktHentetAlt;
-  const hentingFeilet = sykmeldingerState.hentingFeilet;
-  const dinSykmelding = getSykmelding(sykmeldingerState.data, sykmeldingId);
+  const henter = !harForsoktHentetSykmeldinger;
+  const dinSykmelding = getSykmelding(sykmeldinger, sykmeldingId);
   let arbeidsgiversSykmelding = {} as SykmeldingOldFormat | undefined;
 
   if (
     dinSykmelding &&
     (dinSykmelding.status === SykmeldingStatus.SENDT ||
       (dinSykmelding.status === SykmeldingStatus.BEKREFTET &&
-        dinSykmelding.valgtArbeidssituasjon === ARBEIDSTAKER))
+        dinSykmelding.valgtArbeidssituasjon ===
+          ArbeidssituasjonType.ARBEIDSTAKER))
   ) {
     arbeidsgiversSykmelding = getSykmelding(
-      sykmeldingerState.arbeidsgiverssykmeldinger,
+      arbeidsgiverssykmeldinger,
       sykmeldingId
     );
   }
-
-  const brukernavn = navbrukerState.data.navn;
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -86,7 +89,7 @@ const DinSykmeldingSide = () => {
       tittel={texts.pageTitleSykmelding}
       aktivtMenypunkt={SYKMELDINGER}
     >
-      <SideLaster henter={henter} hentingFeilet={hentingFeilet}>
+      <SideLaster henter={henter} hentingFeilet={hentingSykmeldingerFeilet}>
         <div>
           <Speilingvarsel brukernavn={brukernavn} />
           <div className="speiling">

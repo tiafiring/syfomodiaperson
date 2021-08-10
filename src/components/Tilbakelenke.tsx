@@ -6,8 +6,7 @@ interface TilbakelenkeProps {
   tekst: string;
 }
 
-const Tilbakelenke = (tilbakelenkeProps: TilbakelenkeProps) => {
-  const { to, tekst } = tilbakelenkeProps;
+const Tilbakelenke = ({ to, tekst }: TilbakelenkeProps) => {
   return (
     <div className="blokk">
       <Link to={to} className="tilbakelenke">
