@@ -10,6 +10,7 @@ import { OppfolgingsplanLPS } from "../../../data/oppfolgingsplan/types/Oppfolgi
 import BehandleOppfolgingsplanLPS from "./BehandleOppfolgingsplanLPS";
 import OppfolgingsplanLPSEtikett from "./OppfolgingsplanLPSEtikett";
 import { StatusKanImage } from "../../../../img/ImageComponents";
+import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "../../../apiConstants";
 
 const texts = {
   buttonOpenPlan: "Åpne oppfølgingsplanen(pdf)",
@@ -36,7 +37,7 @@ export const ButtonOpenPlan = (buttonOpenPlanProps: ButtonOpenPlanProps) => {
   return (
     <a
       className="lenke"
-      href={`${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/dokument/lps/${buttonOpenPlanProps.oppfolgingsplanLPS.uuid}`}
+      href={`${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/dokument/lps/${buttonOpenPlanProps.oppfolgingsplanLPS.uuid}`}
       download="oppfølgingsplan"
     >
       {texts.buttonOpenPlan}

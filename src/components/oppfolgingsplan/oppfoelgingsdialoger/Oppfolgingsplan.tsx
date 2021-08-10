@@ -7,6 +7,7 @@ import { OppfolgingsplanDTO } from "../../../data/oppfolgingsplan/oppfoelgingsdi
 import { hentDokumentinfo } from "../../../data/oppfolgingsplan/dokumentinfo_actions";
 import Feilmelding from "../../Feilmelding";
 import AppSpinner from "../../AppSpinner";
+import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "../../../apiConstants";
 
 interface PlanVisningProps {
   dokumentinfo: DokumentinfoDTO;
@@ -18,7 +19,7 @@ const PlanVisning = (planVisningProps: PlanVisningProps) => {
   const bildeUrler: string[] = [];
   for (let i = 1; i <= dokumentinfo.antallSider; i += 1) {
     bildeUrler.push(
-      `${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/dokument/${oppfolgingsplan.id}/side/${i}`
+      `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/dokument/${oppfolgingsplan.id}/side/${i}`
     );
   }
 
@@ -57,7 +58,7 @@ const PlanVisning = (planVisningProps: PlanVisningProps) => {
           type="standard"
           onClick={() => {
             const newWindow = window.open(
-              `${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/dokument/${oppfolgingsplan.id}`
+              `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/dokument/${oppfolgingsplan.id}`
             );
             newWindow?.print();
           }}

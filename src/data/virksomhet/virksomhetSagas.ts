@@ -3,6 +3,7 @@ import { get } from "../../api/axios";
 import * as actions from "./virksomhet_actions";
 import { Result, Success } from "../../api/axios";
 import { Virksomhet } from "./types/Virksomhet";
+import { SYFOMOTEADMIN_ROOT } from "../../apiConstants";
 
 export const skalHenteVirksomhet = (state: any, action: any) => {
   const orgnummer = action.orgnummer || {};
@@ -16,7 +17,7 @@ export function* hentVirksomhetHvisIkkeHentet(action: any) {
     const orgnummer = action.orgnummer;
     yield put(actions.henterVirksomhet(orgnummer));
 
-    const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/virksomhet/${orgnummer}`;
+    const path = `${SYFOMOTEADMIN_ROOT}/virksomhet/${orgnummer}`;
     const result: Result<Virksomhet> = yield call(get, path);
 
     if (result instanceof Success) {
