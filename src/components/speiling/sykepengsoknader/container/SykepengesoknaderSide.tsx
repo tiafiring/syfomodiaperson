@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { ReactElement, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Side from "../../../../sider/Side";
 import Soknader from "../soknader/Soknader";
@@ -7,28 +7,27 @@ import { SYKEPENGESOKNADER } from "../../../../enums/menypunkter";
 import Speilingvarsel from "../../Speilingvarsel";
 import Feilstripe from "../../../Feilstripe";
 import SideLaster from "../../../SideLaster";
-import { harForsoktHentetSoknader } from "../../../../utils/reducerUtils";
 import { useValgtPersonident } from "../../../../hooks/useValgtBruker";
 import { hentSoknader } from "../../../../data/sykepengesoknad/soknader_actions";
 import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
-import { useSoknaderState } from "../../../../data/sykepengesoknad/soknader_hooks";
+import { useSykepengeSoknader } from "../../../../data/sykepengesoknad/soknader_hooks";
 
-const errorMessageText = (name) => {
+const errorMessageText = (name: string) => {
   return `Beklager – vi kunne ikke hente alle sykepengesøknadene til ${name}`;
 };
 
-const SykepengesoknaderSide = () => {
+const SykepengesoknaderSide = (): ReactElement => {
   const dispatch = useDispatch();
 
   const fnr = useValgtPersonident();
 
-  const soknaderState = useSoknaderState();
-
-  const harForsoktHentetAlt = harForsoktHentetSoknader(soknaderState);
-  const hentingFeiletSoknader = soknaderState.hentingFeilet;
+  const {
+    sykepengesoknader,
+    harForsoktHentetSoknader,
+    hentingFeiletSoknader,
+  } = useSykepengeSoknader();
 
   const brukernavn = useNavBrukerData().navn;
-  const soknader = soknaderState.data;
 
   useEffect(() => {
     dispatch(hentSoknader(fnr));
@@ -49,7 +48,7 @@ const SykepengesoknaderSide = () => {
       aktivtMenypunkt={SYKEPENGESOKNADER}
     >
       <SideLaster
-        henter={!harForsoktHentetAlt}
+        henter={!harForsoktHentetSoknader}
         hentingFeilet={hentingFeiletSoknader}
       >
         <div>
@@ -61,7 +60,7 @@ const SykepengesoknaderSide = () => {
           <Speilingvarsel brukernavn={brukernavn} />
           <div className="speiling">
             <Brodsmuler brodsmuler={brodsmuler} />
-            <Soknader fnr={fnr} soknader={soknader} />
+            <Soknader fnr={fnr} soknader={sykepengesoknader} />
           </div>
         </div>
       </SideLaster>

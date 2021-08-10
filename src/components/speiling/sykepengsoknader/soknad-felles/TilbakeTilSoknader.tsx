@@ -1,7 +1,7 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import Tilbakelenke from "../../../Tilbakelenke";
 
-const TilbakeTilSoknader = () => {
+const TilbakeTilSoknader = (): ReactElement => {
   return (
     <Tilbakelenke
       to={`/sykefravaer/sykepengesoknader`}

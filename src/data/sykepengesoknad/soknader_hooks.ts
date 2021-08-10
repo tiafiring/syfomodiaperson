@@ -1,7 +1,17 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../rootState";
-import { SykepengesoknaderState } from "./soknader";
+import { useAppSelector } from "../../hooks/hooks";
+import { SykepengesoknadDTO } from "./types/SykepengesoknadDTO";
 
-export const useSoknaderState = (): SykepengesoknaderState => {
-  return useSelector((state: RootState) => state.soknader);
+export const useSykepengeSoknader: () => {
+  sykepengesoknader: SykepengesoknadDTO[];
+  hentingFeiletSoknader: boolean;
+  harForsoktHentetSoknader: boolean;
+} = () => {
+  const { data, hentingFeilet, hentet } = useAppSelector(
+    (state) => state.soknader
+  );
+  return {
+    sykepengesoknader: data,
+    hentingFeiletSoknader: hentingFeilet,
+    harForsoktHentetSoknader: hentet || hentingFeilet,
+  };
 };

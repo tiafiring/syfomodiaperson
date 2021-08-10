@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import * as motePropTypes from "../../../propTypes";
 import { ARBEIDSGIVER } from "../../../konstanter";
 import BekreftMoteSkjema from "./BekreftMoteSkjema";
 import BekreftMoteUtenSvarSkjema from "./BekreftMoteUtenSvarSkjema";
+import { motePt } from "../moteProptypes";
 
 class BekreftMote extends Component {
   constructor(props) {
@@ -62,7 +62,7 @@ BekreftMote.propTypes = {
   arbeidstaker: PropTypes.object,
   onSubmit: PropTypes.func,
   avbrytHref: PropTypes.string,
-  mote: motePropTypes.motePt,
+  mote: motePt,
   bekrefter: PropTypes.bool,
   bekreftFeilet: PropTypes.bool,
   hentEpostinnhold: PropTypes.func,

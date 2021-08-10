@@ -10,11 +10,6 @@ export const KJOENN = {
   MANN: "MANN",
 };
 
-export const CONTEXT_EVENT_TYPE = {
-  NY_AKTIV_ENHET: "NY_AKTIV_ENHET",
-  NY_AKTIV_BRUKER: "NY_AKTIV_BRUKER",
-};
-
 export const BRUKER = "Bruker";
 export const ARBEIDSGIVER = "arbeidsgiver";
 export const NAV_VEILEDER = "NAV-veileder";

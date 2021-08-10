@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { motedeltakerPt, motesvarPt } from "../../../propTypes";
 import { getSvar } from "../../../utils/moteplanleggerUtils";
 import { ARBEIDSGIVER, MULIGE_SVAR } from "../../../konstanter";
 import {
@@ -8,6 +7,7 @@ import {
   StatusKanIkkeImage,
   StatusKanImage,
 } from "../../../../img/ImageComponents";
+import { motedeltakerPt, motesvarPt } from "../moteProptypes";
 
 const texts = {
   kanMote: "kan møte på dette tidspunktet",

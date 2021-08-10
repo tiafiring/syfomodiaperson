@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { PersonImage } from "../../../img/ImageComponents";
 
-interface BrodsmuleProps {
-  sti: string;
+export type Brodsmule = {
   tittel: string;
-  sisteSmule: boolean;
-  erKlikkbar: boolean;
-}
+  sti?: string;
+  sisteSmule?: boolean;
+  erKlikkbar?: boolean;
+};
 
-const Brodsmule = (brodsmuleProps: BrodsmuleProps) => {
-  const { sti, tittel, sisteSmule, erKlikkbar } = brodsmuleProps;
+const Brodsmule = ({ sti, tittel, sisteSmule, erKlikkbar }: Brodsmule) => {
   if (sisteSmule) {
     return (
       <span className="js-smuletekst">
@@ -37,11 +36,10 @@ const Brodsmule = (brodsmuleProps: BrodsmuleProps) => {
 };
 
 interface ToggleLinkProps {
-  onClick: any;
+  onClick(event: React.MouseEvent<HTMLAnchorElement>): void;
 }
 
-const ToggleLink = (toggleLinkProps: ToggleLinkProps) => {
-  const { onClick } = toggleLinkProps;
+const ToggleLink = ({ onClick }: ToggleLinkProps) => {
   return (
     <span>
       <a
@@ -59,11 +57,11 @@ const ToggleLink = (toggleLinkProps: ToggleLinkProps) => {
 };
 
 interface BrodsmulerProps {
-  brodsmuler: any[];
+  brodsmuler: Brodsmule[];
 }
 
 const getSynligeBrodsmuler = (
-  brodsmuler: any[],
+  brodsmuler: Brodsmule[],
   shouldVisCollapsed: boolean
 ) => {
   if (shouldVisCollapsed) {
@@ -75,9 +73,7 @@ const getSynligeBrodsmuler = (
   return brodsmuler;
 };
 
-const Brodsmuler = (brodsmulerProps: BrodsmulerProps) => {
-  const { brodsmuler } = brodsmulerProps;
-
+const Brodsmuler = ({ brodsmuler }: BrodsmulerProps) => {
   const [visCollapsed, setVisCollapsed] = useState(true);
 
   const shouldVisCollapsed = brodsmuler.length > 3 && visCollapsed;
@@ -97,21 +93,20 @@ const Brodsmuler = (brodsmulerProps: BrodsmulerProps) => {
       {brodsmuler.length && <span className="brodsmule__skille"> / </span>}
       {shouldVisCollapsed && (
         <ToggleLink
-          onClick={(e: any) => {
+          onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
             e.preventDefault();
             setVisCollapsed(false);
           }}
         />
       )}
       {synligeBrodsmuler
-        .map((smule: any, index: number) => {
-          return Object.assign({}, smule, {
-            sisteSmule: synligeBrodsmuler.length === index + 1,
-          });
-        })
-        .map((smule: any, index: any) => {
-          return <Brodsmule key={index} {...smule} />;
-        })}
+        .map((smule: Brodsmule, index: number) => ({
+          ...smule,
+          sisteSmule: synligeBrodsmuler.length === index + 1,
+        }))
+        .map((smule: Brodsmule, index: number) => (
+          <Brodsmule key={index} {...smule} />
+        ))}
     </nav>
   );
 };

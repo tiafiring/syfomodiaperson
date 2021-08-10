@@ -1,79 +1,57 @@
 import React from "react";
 import { expect } from "chai";
-import { shallow } from "enzyme";
-import sinon from "sinon";
-import {
-  Container,
-  mapStateToProps,
-} from "../../src/components/speiling/sykepengsoknader/SykmeldingUtdragContainer";
-import sykmeldinger from "../../src/data/sykmelding/sykmeldinger";
+import { mount } from "enzyme";
+import { SykmeldingUtdragContainer } from "../../src/components/speiling/sykepengsoknader/SykmeldingUtdragContainer";
 import mockSykepengesoknader from "../mockdata/mockSykepengesoknader";
 import mockSykmeldinger from "../mockdata/sykmeldinger/mockSykmeldinger";
-import { sykmeldingerHentet } from "../../src/data/sykmelding/sykmeldinger_actions";
 import SykmeldingUtdrag from "../../src/components/speiling/sykepengsoknader/soknad-felles/SykmeldingUtdrag";
+import { createStore } from "redux";
+import { rootReducer } from "../../src/data/rootState";
+import configureStore from "redux-mock-store";
+import { Provider } from "react-redux";
+import { newSMFormat2OldFormat } from "../../src/utils/sykmeldinger/sykmeldingParser";
+
+const ARBEIDSTAKERSOKNAD_ID = "b9732cc7-6101-446e-a1ef-ec25a425b4fb";
+const realState = createStore(rootReducer).getState();
+const store = configureStore([]);
+const fnr = "12345000000";
+const soknad = mockSykepengesoknader.find(
+  (s) => s.id === ARBEIDSTAKERSOKNAD_ID
+);
+const sykmelding = mockSykmeldinger.find((s) => {
+  return s.id === soknad.sykmeldingId;
+});
 
 describe("SykmeldingUtdrag", () => {
-  let state;
-  let actions;
-  let hentSykmeldinger;
-  let ownProps;
-  const ARBEIDSTAKERSOKNAD_ID = "b9732cc7-6101-446e-a1ef-ec25a425b4fb";
-  let sykmelding;
-
-  beforeEach(() => {
-    state = {
-      sykmeldinger: sykmeldinger(),
-    };
-    hentSykmeldinger = sinon.spy();
-    actions = { hentSykmeldinger };
-    ownProps = {
-      fnr: "12345000000",
-      soknad: mockSykepengesoknader.find((s) => {
-        return s.id === ARBEIDSTAKERSOKNAD_ID;
-      }),
-    };
-    sykmelding = mockSykmeldinger.find((s) => {
-      return s.id === ownProps.soknad.sykmeldingId;
-    });
-  });
-
   it("Skal hente sykmeldinger", () => {
-    shallow(
-      <Container
-        {...mapStateToProps(state, ownProps)}
-        {...ownProps}
-        {...actions}
-      />
+    const mockStore = store({ ...realState });
+    mount(
+      <Provider store={mockStore}>
+        <SykmeldingUtdragContainer fnr={fnr} soknad={soknad} />
+      </Provider>
     );
-    expect(hentSykmeldinger.called).to.equal(true);
+    const hentSykmeldingerAction = {
+      type: "HENT_SYKMELDINGER_FORESPURT",
+      fnr: "12345000000",
+    };
+    expect(mockStore.getActions()).to.deep.equal([hentSykmeldingerAction]);
   });
 
-  it("Skal returnere riktig sykmelding", () => {
-    state.sykmeldinger = sykmeldinger(
-      sykmeldinger(),
-      sykmeldingerHentet(mockSykmeldinger)
+  it("Skal vise SykmeldingUtdrag for riktig sykmelding", () => {
+    const sykmeldingerData = mockSykmeldinger.map((s) =>
+      newSMFormat2OldFormat(s, fnr)
     );
-    const props = mapStateToProps(state, ownProps);
-    expect(props.sykmelding.id).to.equal(sykmelding.id);
-  });
-
-  describe("Når søknaden er en arbeidstaker-søknad", () => {
-    beforeEach(() => {
-      state.sykmeldinger = sykmeldinger(
-        sykmeldinger(),
-        sykmeldingerHentet(mockSykmeldinger)
-      );
+    const mockStore = store({
+      ...realState,
+      sykmeldinger: { data: sykmeldingerData },
     });
-
-    it("Skal vise et SykmeldingUtdrag", () => {
-      const component = shallow(
-        <Container
-          {...mapStateToProps(state, ownProps)}
-          {...ownProps}
-          {...actions}
-        />
-      );
-      expect(component.find(SykmeldingUtdrag).length).to.equal(1);
-    });
+    const wrapper = mount(
+      <Provider store={mockStore}>
+        <SykmeldingUtdragContainer fnr={fnr} soknad={soknad} />
+      </Provider>
+    );
+    expect(wrapper.find(SykmeldingUtdrag).prop("sykmelding").id).to.equal(
+      sykmelding.id
+    );
   });
 });

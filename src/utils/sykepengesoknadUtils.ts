@@ -1,3 +1,8 @@
+import {
+  SporsmalDTO,
+  SykepengesoknadDTO,
+} from "../data/sykepengesoknad/types/SykepengesoknadDTO";
+
 export const getTidligsteSendtDato = (soknad: any) => {
   if (soknad.sendtTilNAVDato && soknad.sendtTilArbeidsgiverDato) {
     return soknad.sendtTilNAVDato > soknad.sendtTilArbeidsgiverDato
@@ -69,4 +74,15 @@ export const getSendtTilSuffix = (sykepengesoknad: any) => {
     return ".til-nav";
   }
   return "";
+};
+
+export const erVaerKlarOverAt = (s: SporsmalDTO): boolean =>
+  s.tag === "VAER_KLAR_OVER_AT";
+
+export const erOpprettetSisteAar = (
+  sykepengesoknad: SykepengesoknadDTO
+): boolean => {
+  const ETT_AAR_SIDEN = new Date();
+  ETT_AAR_SIDEN.setFullYear(ETT_AAR_SIDEN.getFullYear() - 1);
+  return sykepengesoknad.opprettetDato >= ETT_AAR_SIDEN;
 };

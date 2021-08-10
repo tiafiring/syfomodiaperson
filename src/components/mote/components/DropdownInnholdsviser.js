@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Alertstripe from "nav-frontend-alertstriper";
-import * as moterPropTypes from "../../../propTypes";
 import AppSpinner from "../../AppSpinner";
 import { BRUKER } from "../../../konstanter";
+import { motePt } from "../moteProptypes";
 
 export const Innhold = ({ emne, innhold }) => {
   return (
@@ -93,7 +93,7 @@ DropdownInnholdsviser.propTypes = {
   type: PropTypes.string,
   hentEpostinnhold: PropTypes.func,
   hentArbeidsgiverEpostinnhold: PropTypes.func,
-  mote: moterPropTypes.motePt,
+  mote: motePt,
 };
 
 export default DropdownInnholdsviser;

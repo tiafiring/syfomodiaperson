@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import * as moterPropTypes from "../../../propTypes";
 import DropdownInnholdsviser from "./DropdownInnholdsviser";
 import * as epostinnholdActions from "../../../data/mote/epostinnhold_actions";
 import * as arbeidsgiverepostinnholdActions from "../../../data/mote/arbeidsgiverepostinnhold_actions";
@@ -13,6 +12,7 @@ import {
   PersonHoverImage,
   PersonImage,
 } from "../../../../img/ImageComponents";
+import { motePt } from "../moteProptypes";
 
 export const mapStateToInnholdsviserProps = (state) => {
   return {
@@ -72,7 +72,7 @@ const InformasjonSendt = ({ arbeidstaker, mote }) => {
 
 InformasjonSendt.propTypes = {
   arbeidstaker: PropTypes.object,
-  mote: moterPropTypes.motePt,
+  mote: motePt,
 };
 
 export default InformasjonSendt;

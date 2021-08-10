@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import * as moterPropTypes from "../../../propTypes";
 import { connect } from "react-redux";
 import AlertStripe from "nav-frontend-alertstriper";
 import KnappBase from "nav-frontend-knapper";
 import * as epostinnholdActions from "../../../data/mote/epostinnhold_actions";
 import Innholdsviser from "./Innholdsviser";
 import Epostmottakere from "./Epostmottakere";
+import { motePt } from "../moteProptypes";
 
 const texts = {
   overskrift: "Avbryt møteforespørsel",
@@ -82,7 +82,7 @@ AvbrytMote.propTypes = {
   avbrytHref: PropTypes.string,
   avbryter: PropTypes.bool,
   avbrytFeilet: PropTypes.bool,
-  mote: moterPropTypes.motePt,
+  mote: motePt,
 };
 
 export default AvbrytMote;

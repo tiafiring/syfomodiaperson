@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { ReactElement, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Side from "../../../../sider/Side";
 import { hentSykmeldinger } from "../../../../data/sykmelding/sykmeldinger_actions";
@@ -7,29 +7,28 @@ import DineSykmeldinger from "../sykmeldinger/DineSykmeldinger";
 import Brodsmuler from "../../Brodsmuler";
 import { SYKMELDINGER } from "../../../../enums/menypunkter";
 import Speilingvarsel from "../../Speilingvarsel";
-import { harForsoktHentetSykmeldinger } from "../../../../utils/reducerUtils";
 import Pengestopp from "../../../pengestopp/Pengestopp";
 import { useValgtPersonident } from "../../../../hooks/useValgtBruker";
 import SideLaster from "../../../SideLaster";
 import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
-import { useAppSelector } from "../../../../hooks/hooks";
+import { useSykmeldinger } from "../../../../data/sykmelding/sykmeldinger_hooks";
 
 const texts = {
   introduksjonstekst:
     "NAV mottar alle sykmeldinger. Ser du den ikke her? Det betyr at den som har sykmeldt deg ikke sender den digitalt til NAV. Da bruker du papirsykmeldingen i stedet.",
 };
 
-const SykmeldingerSide = () => {
+const SykmeldingerSide = (): ReactElement => {
   const fnr = useValgtPersonident();
 
-  const sykmeldingerState = useAppSelector((state) => state.sykmeldinger);
+  const {
+    sykmeldinger,
+    harForsoktHentetSykmeldinger,
+    hentingSykmeldingerFeilet,
+  } = useSykmeldinger();
   const { navn: brukernavn } = useNavBrukerData();
-  const sykmeldinger = sykmeldingerState.data;
 
-  const harForsoektHentetAlt = harForsoktHentetSykmeldinger(sykmeldingerState);
-  const henter = !harForsoektHentetAlt;
-  const hentingFeilet = sykmeldingerState.hentingFeilet;
-
+  const henter = !harForsoktHentetSykmeldinger;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(hentSykmeldinger(fnr));
@@ -49,7 +48,7 @@ const SykmeldingerSide = () => {
 
   return (
     <Side fnr={fnr} tittel="Sykmeldinger" aktivtMenypunkt={SYKMELDINGER}>
-      <SideLaster henter={henter} hentingFeilet={hentingFeilet}>
+      <SideLaster henter={henter} hentingFeilet={hentingSykmeldingerFeilet}>
         <div>
           <Pengestopp sykmeldinger={sykmeldinger} />
           <Speilingvarsel brukernavn={brukernavn} />

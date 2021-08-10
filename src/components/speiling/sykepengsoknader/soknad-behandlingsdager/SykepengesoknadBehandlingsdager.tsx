@@ -1,15 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { ReactElement } from "react";
 import Oppsummeringsvisning from "../soknad-felles-oppsummering/Oppsummeringsvisning";
-import { brodsmule, soknad as soknadPt } from "../../../../propTypes";
 import SoknadSpeiling from "../soknad-felles/SoknadSpeiling";
 import StatuspanelBehandlingsdager from "./StatuspanelBehandlingsdager";
+import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+import { Brodsmule } from "../../Brodsmuler";
 
 const texts = {
+  tittel: "Søknad om sykepenger for enkeltstående behandlingsdager",
   oppsummering: "Oppsummering av søknaden",
 };
 
-const OppsummeringPanel = ({ soknad }) => {
+interface OppsummeringPanelProps {
+  soknad: SykepengesoknadDTO;
+}
+
+const OppsummeringPanel = ({ soknad }: OppsummeringPanelProps) => {
   return (
     <div className="panel blokk">
       <h2 className="panel__tittel blokk--xs"> {texts.oppsummering}</h2>
@@ -18,34 +23,27 @@ const OppsummeringPanel = ({ soknad }) => {
   );
 };
 
-OppsummeringPanel.propTypes = {
-  soknad: soknadPt,
-};
+interface SykepengesoknadBehandlingsdagerProps {
+  brukernavn: string;
+  brodsmuler: Brodsmule[];
+  soknad: SykepengesoknadDTO;
+}
 
 const SykepengesoknadBehandlingsdager = ({
   brukernavn,
   brodsmuler,
   soknad,
-  fnr,
-}) => {
+}: SykepengesoknadBehandlingsdagerProps): ReactElement => {
   return (
     <SoknadSpeiling
-      tittel="Søknad om sykepenger for enkeltstående behandlingsdager"
+      tittel={texts.tittel}
       brukernavn={brukernavn}
       brodsmuler={brodsmuler}
-      fnr={fnr}
     >
       <StatuspanelBehandlingsdager soknad={soknad} />
       <OppsummeringPanel soknad={soknad} />
     </SoknadSpeiling>
   );
-};
-
-SykepengesoknadBehandlingsdager.propTypes = {
-  brukernavn: PropTypes.string,
-  brodsmuler: PropTypes.arrayOf(brodsmule),
-  soknad: soknadPt,
-  fnr: PropTypes.string,
 };
 
 export default SykepengesoknadBehandlingsdager;

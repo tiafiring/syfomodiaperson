@@ -1,10 +1,6 @@
-import {
-  ARBEIDSLEDIG,
-  FRILANSER,
-  NAERINGSDRIVENDE,
-} from "../../enums/arbeidssituasjoner";
 import { senesteTom, tidligsteFom } from "../periodeUtils";
 import {
+  ArbeidssituasjonType,
   SykmeldingOldFormat,
   SykmeldingPeriodeDTO,
   SykmeldingStatus,
@@ -146,11 +142,11 @@ export const arbeidsgivernavnEllerArbeidssituasjon = (
   }
 
   switch (sykmelding.sporsmal.arbeidssituasjon) {
-    case ARBEIDSLEDIG:
+    case ArbeidssituasjonType.ARBEIDSLEDIG:
       return "Ingen arbeidsgiver";
-    case NAERINGSDRIVENDE:
+    case ArbeidssituasjonType.NAERINGSDRIVENDE:
       return "Selvstendig næringsdrivende";
-    case FRILANSER:
+    case ArbeidssituasjonType.FRILANSER:
       return "Frilanser";
     default:
       return "Annet";

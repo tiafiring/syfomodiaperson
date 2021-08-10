@@ -1,20 +1,21 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import Statuspanel, {
   StatusNokkelopplysning,
   Statusopplysninger,
 } from "../../Statuspanel";
 import hentStatustekst from "../../../../utils/soknad-felles/hentSoknadStatustekst";
 import hentSykepengetekst from "../../../../utils/soknad-felles/hentSykepengetekst";
-import { soknad as soknadPt } from "../../../../propTypes";
 import { VerktoyKnapp, Verktoylinje } from "../../Verktoylinje";
 import {
   SoknadstatusDTO,
   SykepengesoknadDTO,
 } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+import { erOpprettetSisteAar } from "../../../../utils/sykepengesoknadUtils";
 
 const texts = {
   status: "Status",
   tittel: "Utbetaling av sykepenger",
+  endre: "Endre søknad",
 };
 
 interface StatusOgSykepengeopplysningerProps {
@@ -41,30 +42,22 @@ interface SykepengesoknadStatuspanelProps {
   soknad: SykepengesoknadDTO;
 }
 
-const SykepengesoknadStatuspanel = (
-  sykepengesoknadStatuspanelProps: SykepengesoknadStatuspanelProps
-) => {
-  const { soknad } = sykepengesoknadStatuspanelProps;
-  const ETT_AAR_SIDEN = new Date();
-  ETT_AAR_SIDEN.setFullYear(ETT_AAR_SIDEN.getFullYear() - 1);
+const SykepengesoknadStatuspanel = ({
+  soknad,
+}: SykepengesoknadStatuspanelProps): ReactElement => {
   const visEndreknapp =
-    soknad.opprettetDato >= ETT_AAR_SIDEN &&
-    soknad.status === SoknadstatusDTO.SENDT;
+    erOpprettetSisteAar(soknad) && soknad.status === SoknadstatusDTO.SENDT;
 
   return (
     <Statuspanel enKolonne>
       <StatusOgSykepengeopplysninger soknad={soknad} />
       {visEndreknapp && (
         <Verktoylinje>
-          <VerktoyKnapp>Endre søknad</VerktoyKnapp>
+          <VerktoyKnapp>{texts.endre}</VerktoyKnapp>
         </Verktoylinje>
       )}
     </Statuspanel>
   );
-};
-
-SykepengesoknadStatuspanel.propTypes = {
-  soknad: soknadPt,
 };
 
 export default SykepengesoknadStatuspanel;

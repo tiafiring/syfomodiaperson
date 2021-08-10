@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
 import {
   SoknadstatusDTO,
@@ -35,10 +35,6 @@ const getStatusTekst = (soknad: SykepengesoknadDTO) => {
   }
 };
 
-export const tilSendingHjelpetekst = () => {
-  return <Hjelpetekst>{texts.hjelpetekst}</Hjelpetekst>;
-};
-
 interface SendtDatoProps {
   soknad: SykepengesoknadDTO;
 }
@@ -56,7 +52,9 @@ interface StatuspanelUtlandProps {
   soknad: SykepengesoknadDTO;
 }
 
-const StatuspanelUtland = (statuspanelUtlandProps: StatuspanelUtlandProps) => {
+const StatuspanelUtland = (
+  statuspanelUtlandProps: StatuspanelUtlandProps
+): ReactElement => {
   const { soknad } = statuspanelUtlandProps;
   const tekst = getStatusTekst(soknad);
   return (
@@ -66,7 +64,7 @@ const StatuspanelUtland = (statuspanelUtlandProps: StatuspanelUtlandProps) => {
           {soknad.status === TIL_SENDING ? (
             <div>
               <span>{tekst}</span>
-              {tilSendingHjelpetekst()}
+              <Hjelpetekst>{texts.hjelpetekst}</Hjelpetekst>
             </div>
           ) : (
             <p>{tekst}</p>

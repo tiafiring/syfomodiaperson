@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import * as moterPropTypes from "../../../propTypes";
 import Side from "../../../sider/Side";
 import MotestatusContainer from "./MotestatusContainer";
 import * as moterActions from "../../../data/mote/moter_actions";
@@ -12,6 +11,7 @@ import AppSpinner from "../../AppSpinner";
 import * as epostinnholdActions from "../../../data/mote/epostinnhold_actions";
 import { MOETEPLANLEGGER } from "../../../enums/menypunkter";
 import { withRouter } from "react-router-dom";
+import { motePt } from "../moteProptypes";
 
 export class BekreftMoteSide extends Component {
   constructor(props) {
@@ -114,7 +114,7 @@ BekreftMoteSide.propTypes = {
   alternativ: PropTypes.object,
   henterMoterBool: PropTypes.bool,
   fnr: PropTypes.string,
-  mote: moterPropTypes.motePt,
+  mote: motePt,
   hentMoter: PropTypes.func,
   hentBekreftMoteEpostinnhold: PropTypes.func,
   bekreftMote: PropTypes.func,

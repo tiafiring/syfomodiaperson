@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Radio } from "nav-frontend-skjema";
 import Alertstripe from "nav-frontend-alertstriper";
-import * as moterPropTypes from "../../../propTypes";
 import AppSpinner from "../../AppSpinner";
 import { BRUKER, ARBEIDSGIVER } from "../../../konstanter";
+import { motedeltakertypePt, motePt } from "../moteProptypes";
 
 const texts = {
   info: "Informasjon som sendes",
@@ -63,7 +63,7 @@ export const Innholdsvelger = ({ onChange, valgtDeltakertype }) => {
 
 Innholdsvelger.propTypes = {
   onChange: PropTypes.func,
-  valgtDeltakertype: moterPropTypes.motedeltakertypePt,
+  valgtDeltakertype: motedeltakertypePt,
 };
 
 const Feil = ({ melding = "Beklager, det oppstod en feil" }) => {
@@ -153,7 +153,7 @@ Innholdsviser.propTypes = {
   epostinnhold: PropTypes.object,
   arbeidstaker: PropTypes.object,
   hentEpostinnhold: PropTypes.func,
-  mote: moterPropTypes.motePt,
+  mote: motePt,
 };
 
 export default Innholdsviser;

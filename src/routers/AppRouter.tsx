@@ -6,7 +6,6 @@ import AvbrytMoteContainer from "../components/mote/container/AvbrytMoteContaine
 import BekreftMoteContainer from "../components/mote/container/BekreftMoteContainer";
 import SykmeldingerContainer from "../components/speiling/sykmeldinger/container/SykmeldingerContainer";
 import SykepengesoknaderContainer from "../components/speiling/sykepengsoknader/container/SykepengesoknaderSide";
-import SykepengesoknadContainer from "../components/speiling/sykepengsoknader/container/SykepengesoknadContainer";
 import OppfoelgingsPlanerOversiktContainer from "../components/oppfolgingsplan/container/OppfoelgingsPlanerOversiktContainer";
 import OppfoelgingsplanContainer from "../components/oppfolgingsplan/container/OppfoelgingsplanContainer";
 import DinSykmeldingContainer from "../components/speiling/sykmeldinger/container/DinSykmeldingContainer";
@@ -32,6 +31,7 @@ import { useUserProperties } from "../data/logging/loggingHooks";
 import { setAmplitudeUserProperties } from "../amplitude/amplitude";
 import EndreDialogmoteContainer from "../components/dialogmote/endre/EndreDialogmoteContainer";
 import { fetchUnleashToggles } from "../data/unleash/unleash_actions";
+import { SykepengesoknadSide } from "../components/speiling/sykepengsoknader/container/SykepengesoknadSide";
 
 const getFnrFromParams = (): string => {
   return window.location.pathname.split("/")[2];
@@ -104,7 +104,7 @@ const AktivBrukerRouter = (): ReactElement => {
       <Route
         path="/sykefravaer/sykepengesoknader/:sykepengesoknadId"
         exact
-        component={SykepengesoknadContainer}
+        component={SykepengesoknadSide}
       />
       <Route
         path="/sykefravaer/sykmeldinger/:sykmeldingId"
