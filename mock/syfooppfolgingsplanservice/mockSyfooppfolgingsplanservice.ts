@@ -2,6 +2,7 @@ import { oppfolgingsplanMock } from "./oppfolgingsplanMock";
 import { historikkoppfolgingsplanMock } from "../data/historikkoppfolgingsplanMock";
 import { oppfolgingsplanerLPSMock } from "./oppfolgingsplanLPSMock";
 import { NAV_PERSONIDENT_HEADER } from "../util/requestUtil";
+import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "../../src/apiConstants";
 
 const path = require("path");
 
@@ -9,7 +10,7 @@ const dokumentinfo = { antallSider: 4 };
 
 export const mockSyfooppfolgingsplanservice = (server) => {
   server.get(
-    "/syfooppfolgingsplanservice/api/internad/v1/oppfolgingsplan/:fnr",
+    `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/v1/oppfolgingsplan/:fnr`,
     (req, res) => {
       res.setHeader("Content-Type", "application/json");
       res.send(JSON.stringify(oppfolgingsplanMock));
@@ -17,7 +18,7 @@ export const mockSyfooppfolgingsplanservice = (server) => {
   );
 
   server.get(
-    "/syfooppfolgingsplanservice/api/internad/v1/oppfolgingsplan/:fnr/historikk",
+    `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/v1/oppfolgingsplan/:fnr/historikk`,
     (req, res) => {
       res.setHeader("Content-Type", "application/json");
       res.send(JSON.stringify(historikkoppfolgingsplanMock));
@@ -25,7 +26,7 @@ export const mockSyfooppfolgingsplanservice = (server) => {
   );
 
   server.get(
-    "/syfooppfolgingsplanservice/api/internad/dokument/:id/dokumentinfo",
+    `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/dokument/:id/dokumentinfo`,
     (req, res) => {
       res.setHeader("Content-Type", "application/json");
       res.send(JSON.stringify(dokumentinfo));
@@ -33,7 +34,7 @@ export const mockSyfooppfolgingsplanservice = (server) => {
   );
 
   server.get(
-    "/syfooppfolgingsplanservice/api/internad/oppfolgingsplan/lps",
+    `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/oppfolgingsplan/lps`,
     (req, res) => {
       if (
         req.headers[NAV_PERSONIDENT_HEADER] &&
@@ -48,7 +49,7 @@ export const mockSyfooppfolgingsplanservice = (server) => {
   );
 
   server.get(
-    "/syfooppfolgingsplanservice/api/internad/dokument/lps/:uuid",
+    `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/dokument/lps/:uuid`,
     (req, res) => {
       const file = path.join(
         __dirname,

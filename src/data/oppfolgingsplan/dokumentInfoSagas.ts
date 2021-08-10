@@ -3,6 +3,7 @@ import * as actions from "./dokumentinfo_actions";
 import { get, Result, Success } from "../../api/axios";
 import { DokumentinfoDTO } from "./types/DokumentinfoDTO";
 import { RootState } from "../rootState";
+import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "../../apiConstants";
 
 export const skalHenteDokumentInfo = (state: RootState, action: any) => {
   const planId = action.id || {};
@@ -15,7 +16,7 @@ export function* hentMotebehovHvisIkkeHentet(action: any) {
   if (skalHente) {
     yield put(actions.henterDokumentinfo(action.id));
 
-    const path = `${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/dokument/${action.id}/dokumentinfo`;
+    const path = `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/dokument/${action.id}/dokumentinfo`;
     const result: Result<DokumentinfoDTO> = yield call(get, path);
 
     if (result instanceof Success) {

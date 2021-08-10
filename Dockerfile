@@ -1,7 +1,7 @@
 FROM node:14-alpine
 WORKDIR /syfomodiaperson
 
-COPY .env server.js package.json ./
+COPY server.js package.json ./
 
 COPY node_modules ./node_modules
 COPY img ./img
