@@ -1,8 +1,9 @@
 import { NAV_PERSONIDENT_HEADER } from "../util/requestUtil";
 import { prediksjonMock } from "../data/prediksjonMock";
+import { ISPREDIKSJON_ROOT } from "../../src/apiConstants";
 
 export const mockIsprediksjon = (server) => {
-  server.get("/isprediksjon/api/v1/prediksjon", (req, res) => {
+  server.get(`${ISPREDIKSJON_ROOT}/prediksjon`, (req, res) => {
     if (
       req.headers[NAV_PERSONIDENT_HEADER] &&
       req.headers[NAV_PERSONIDENT_HEADER].length === 11

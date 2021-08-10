@@ -1,3 +1,5 @@
+import { ISPENGESTOPP_ROOT } from "../../src/apiConstants";
+
 const Status = {
   NORMAL: "NORMAL",
   STOPP_AUTOMATIKK: "STOPP_AUTOMATIKK",
@@ -27,7 +29,7 @@ const createStatusList = (stoppAutomatikk) => {
 export const mockIspengestopp = (server) => {
   let STATUSLIST = undefined;
 
-  server.get("/ispengestopp/api/v1/person/status", (req, res) => {
+  server.get(`${ISPENGESTOPP_ROOT}/person/status`, (req, res) => {
     res.setHeader("Content-Type", "application/json");
     if (!STATUSLIST) {
       res.sendStatus(204);
@@ -35,7 +37,7 @@ export const mockIspengestopp = (server) => {
       res.send(JSON.stringify(STATUSLIST));
     }
   });
-  server.post("/ispengestopp/api/v1/person/flagg", (req, res) => {
+  server.post(`${ISPENGESTOPP_ROOT}/person/flagg`, (req, res) => {
     const body = req.body;
     STATUSLIST = createStatusList(body);
 

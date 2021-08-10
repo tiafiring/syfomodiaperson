@@ -6,9 +6,10 @@ import {
   HentEgenAnsattActionTypes,
   hentEgenansattFeilet,
 } from "./egenansatt_actions";
+import { SYFOPERSON_ROOT } from "../../apiConstants";
 
 export function* hentEgenansattSaga(action: any) {
-  const path = `${process.env.REACT_APP_SYFOPERSON_ROOT}/person/egenansatt`;
+  const path = `${SYFOPERSON_ROOT}/person/egenansatt`;
   const result: Result<boolean> = yield call(get, path, action.fnr);
   if (result instanceof Success) {
     yield put(egenansattHentet(result.data));

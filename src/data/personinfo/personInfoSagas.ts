@@ -2,6 +2,7 @@ import { call, put, select, takeEvery } from "redux-saga/effects";
 import { get, Result, Success } from "../../api/axios";
 import * as actions from "./personInfo_actions";
 import { PersonAdresse } from "./types/PersonAdresse";
+import { SYFOPERSON_ROOT } from "../../apiConstants";
 
 export const skalHentePersonAdresse = (state: any) => {
   const reducer = state.personadresse;
@@ -12,7 +13,7 @@ export function* hentPersonAdresseHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHentePersonAdresse);
   if (skalHente) {
     yield put(actions.hentPersonAdresseHenter());
-    const path = `${process.env.REACT_APP_SYFOPERSON_ROOT}/person/adresse`;
+    const path = `${SYFOPERSON_ROOT}/person/adresse`;
     const result: Result<PersonAdresse> = yield call(get, path, action.fnr);
 
     if (result instanceof Success) {

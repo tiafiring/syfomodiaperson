@@ -8,10 +8,11 @@ import {
 } from "./behandlendeEnhet_actions";
 import { get, Result, Success } from "../../api/axios";
 import { BehandlendeEnhet } from "./types/BehandlendeEnhet";
+import { SYFOBEHANDLENDEENHET_ROOT } from "../../apiConstants";
 
 function* hentBehandlendeEnhetSaga(action: HentBehandlendeEnhetAction) {
   yield put(actions.henterBehandlendeEnhet());
-  const path = `${process.env.REACT_APP_SYFOBEHANDLENDEENHETREST_ROOT}/internad/personident`;
+  const path = `${SYFOBEHANDLENDEENHET_ROOT}/personident`;
   const result: Result<BehandlendeEnhet> = yield call(get, path, action.fnr);
   if (result instanceof Success) {
     yield put(behandlendeEnhetHentet(result.data));

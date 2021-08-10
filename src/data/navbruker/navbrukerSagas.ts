@@ -6,11 +6,12 @@ import {
   NAVBRUKER_HENTET,
 } from "./navbruker_actions";
 import { get, Result, Success } from "../../api/axios";
+import { MODIASYFOREST_ROOT } from "../../apiConstants";
 
 export function* hentNavbruker(action: any) {
   yield put({ type: HENTER_NAVBRUKER });
 
-  const path = `${process.env.REACT_APP_REST_ROOT}/internad/brukerinfo?fnr=${action.fnr}`;
+  const path = `${MODIASYFOREST_ROOT}/brukerinfo?fnr=${action.fnr}`;
   const result: Result<string> = yield call(get, path);
 
   //TODO: Add proper actions and types

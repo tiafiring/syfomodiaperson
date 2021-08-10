@@ -29,10 +29,11 @@ import {
   EndreTidStedDialogmoteDTO,
 } from "./types/dialogmoteTypes";
 import { NewDialogmoteReferatDTO } from "./types/dialogmoteReferatTypes";
+import { ISDIALOGMOTE_ROOT } from "../../apiConstants";
 
 function* opprettInnkalling(action: OpprettInnkallingAction) {
   yield put(oppretterInnkalling());
-  const path = `${process.env.REACT_APP_ISDIALOGMOTE_ROOT}/post/v1/dialogmote/personident`;
+  const path = `${ISDIALOGMOTE_ROOT}/post/v1/dialogmote/personident`;
   const result: Result<DialogmoteInnkallingDTO> = yield call(
     post,
     path,
@@ -49,7 +50,7 @@ function* opprettInnkalling(action: OpprettInnkallingAction) {
 }
 
 function* fetchDialogmoteSaga(action: FetchDialogmoteAction) {
-  const path = `${process.env.REACT_APP_ISDIALOGMOTE_ROOT}/get/v1/dialogmote/personident`;
+  const path = `${ISDIALOGMOTE_ROOT}/get/v1/dialogmote/personident`;
   const result: Result<DialogmoteDTO[]> = yield call(get, path, action.fnr);
   if (result instanceof Success) {
     yield put(fetchDialogmoteSuccess(result.data));
@@ -60,7 +61,7 @@ function* fetchDialogmoteSaga(action: FetchDialogmoteAction) {
 
 function* avlysDialogmote(action: AvlysMoteAction) {
   yield put(avlyserMote());
-  const path = `${process.env.REACT_APP_ISDIALOGMOTE_ROOT}/post/v1/dialogmote/${action.moteUuid}/avlys`;
+  const path = `${ISDIALOGMOTE_ROOT}/post/v1/dialogmote/${action.moteUuid}/avlys`;
   const result: Result<AvlysDialogmoteDTO> = yield call(
     post,
     path,
@@ -77,7 +78,7 @@ function* avlysDialogmote(action: AvlysMoteAction) {
 
 function* endreTidStedDialogmote(action: EndreTidStedAction) {
   yield put(endrerTidSted());
-  const path = `${process.env.REACT_APP_ISDIALOGMOTE_ROOT}/post/v1/dialogmote/${action.moteUuid}/tidsted`;
+  const path = `${ISDIALOGMOTE_ROOT}/post/v1/dialogmote/${action.moteUuid}/tidsted`;
   const result: Result<EndreTidStedDialogmoteDTO> = yield call(
     post,
     path,
@@ -94,7 +95,7 @@ function* endreTidStedDialogmote(action: EndreTidStedAction) {
 
 function* ferdigstillDialogmote(action: FerdigstillMoteAction) {
   yield put(ferdigstillerMote());
-  const path = `${process.env.REACT_APP_ISDIALOGMOTE_ROOT}/post/v1/dialogmote/${action.moteUuid}/ferdigstill`;
+  const path = `${ISDIALOGMOTE_ROOT}/post/v1/dialogmote/${action.moteUuid}/ferdigstill`;
   const result: Result<NewDialogmoteReferatDTO> = yield call(
     post,
     path,

@@ -3,6 +3,7 @@ import { get, Result, Success } from "../../api/axios";
 import * as actions from "./fastleger_actions";
 import { Fastlege } from "./types/Fastlege";
 import { RootState } from "../rootState";
+import { FASTLEGEREST_ROOT } from "../../apiConstants";
 
 export const skalHenteFastleger = (state: RootState) => {
   const { henter, hentet, hentingFeilet } = state.fastleger;
@@ -13,7 +14,7 @@ export function* hentFastlegerHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHenteFastleger);
   if (skalHente) {
     yield put(actions.henterFastleger());
-    const path = `${process.env.REACT_APP_FASTLEGEREST_ROOT}/internad/fastlege/v1/fastleger?fnr=${action.fnr}`;
+    const path = `${FASTLEGEREST_ROOT}/fastleger?fnr=${action.fnr}`;
     const result: Result<Fastlege> = yield call(get, path);
 
     if (result instanceof Success) {

@@ -7,11 +7,12 @@ import {
   hentVeilederinfoFeilet,
   veilederinfoHentet,
 } from "./veilederinfo_actions";
+import { SYFOVEILEDER_ROOT } from "../../apiConstants";
 
 export function* hentVeilederinfoSaga() {
   yield put(henterVeilederinfo());
 
-  const path = `${process.env.REACT_APP_SYFOVEILEDER_ROOT}/veileder/self`;
+  const path = `${SYFOVEILEDER_ROOT}/veileder/self`;
   const result: Result<VeilederinfoDTO> = yield call(get, path);
 
   if (result instanceof Success) {

@@ -1,3 +1,5 @@
+import { MODIACONTEXTHOLDER_ROOT } from "../../src/apiConstants";
+
 const saksbehandler = {
   ident: "Z999999",
   navn: "Vetle Veileder",
@@ -26,22 +28,22 @@ const aktivEnhet = {
 };
 
 export const mockModiacontextholder = (server) => {
-  server.get("/modiacontextholder/api/decorator", (req, res) => {
+  server.get(`${MODIACONTEXTHOLDER_ROOT}/decorator`, (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.send(JSON.stringify(saksbehandler));
   });
 
-  server.get("/modiacontextholder/api/context/aktivbruker", (req, res) => {
+  server.get(`${MODIACONTEXTHOLDER_ROOT}/context/aktivbruker`, (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.send(JSON.stringify(aktivBruker));
   });
 
-  server.get("/modiacontextholder/api/context/aktivenhet", (req, res) => {
+  server.get(`${MODIACONTEXTHOLDER_ROOT}/context/aktivenhet`, (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.send(JSON.stringify(aktivEnhet));
   });
 
-  server.post("/modiacontextholder/api/context", (req, res) => {
+  server.post(`${MODIACONTEXTHOLDER_ROOT}/context`, (req, res) => {
     res.send().status(204);
   });
 };

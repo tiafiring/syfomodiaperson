@@ -1,4 +1,5 @@
 import { NAV_PERSONIDENT_HEADER } from "../util/requestUtil";
+import { SYFOBEHANDLENDEENHET_ROOT } from "../../src/apiConstants";
 
 const behandlendeEnhet = {
   enhetId: "0315",
@@ -6,7 +7,7 @@ const behandlendeEnhet = {
 };
 
 export const mockSyfobehandlendeenhet = (server) => {
-  server.get("/syfobehandlendeenhet/api/internad/personident", (req, res) => {
+  server.get(`${SYFOBEHANDLENDEENHET_ROOT}/personident`, (req, res) => {
     if (
       req.headers[NAV_PERSONIDENT_HEADER] &&
       req.headers[NAV_PERSONIDENT_HEADER].length === 11

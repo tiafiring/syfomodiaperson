@@ -1,9 +1,10 @@
 import { NAV_PERSONIDENT_HEADER } from "../util/requestUtil";
 import { dialogmoterMock } from "../data/dialogmoterMock";
+import { ISDIALOGMOTE_ROOT } from "../../src/apiConstants";
 
 export const mockIsdialogmote = (server) => {
   server.post(
-    "/isdialogmote/api/post/v1/dialogmote/personident",
+    `${ISDIALOGMOTE_ROOT}/post/v1/dialogmote/personident`,
     (req, res) => {
       if (
         req.headers[NAV_PERSONIDENT_HEADER] &&
@@ -20,13 +21,16 @@ export const mockIsdialogmote = (server) => {
       }
     }
   );
-  server.get("/isdialogmote/api/get/v1/dialogmote/personident", (req, res) => {
-    res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(dialogmoterMock));
-  });
+  server.get(
+    `${ISDIALOGMOTE_ROOT}/get/v1/dialogmote/personident`,
+    (req, res) => {
+      res.setHeader("Content-Type", "application/json");
+      res.send(JSON.stringify(dialogmoterMock));
+    }
+  );
 
   server.post(
-    "/isdialogmote/api/post/v1/dialogmote/:moteuuid/avlys",
+    `${ISDIALOGMOTE_ROOT}/post/v1/dialogmote/:moteuuid/avlys`,
     (req, res) => {
       const { moteuuid } = req.params;
       const dialogmoteToUpdate = dialogmoterMock.find(
@@ -38,14 +42,14 @@ export const mockIsdialogmote = (server) => {
   );
 
   server.post(
-    "/isdialogmote/api/post/v1/dialogmote/:moteuuid/tidsted",
+    `${ISDIALOGMOTE_ROOT}/post/v1/dialogmote/:moteuuid/tidsted`,
     (req, res) => {
       res.sendStatus(200);
     }
   );
 
   server.post(
-    "/isdialogmote/api/post/v1/dialogmote/:moteuuid/ferdigstill",
+    `${ISDIALOGMOTE_ROOT}/post/v1/dialogmote/:moteuuid/ferdigstill`,
     (req, res) => {
       const { moteuuid } = req.params;
       const dialogmoteToUpdate = dialogmoterMock.find(
