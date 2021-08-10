@@ -7,6 +7,7 @@ import { VerktoyKnapp, Verktoylinje } from "../../Verktoylinje";
 import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
 import SykmeldingNokkelOpplysning from "../../sykmeldinger/sykmelding/sykmeldingOpplysninger/SykmeldingNokkelOpplysning";
 import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+import { erOpprettetSisteAar } from "../../../../utils/sykepengesoknadUtils";
 
 const texts = {
   status: "Status",
@@ -27,9 +28,7 @@ interface SendtSoknadSelvstendigStatuspanelProps {
 const SendtSoknadSelvstendigStatuspanel = ({
   soknad,
 }: SendtSoknadSelvstendigStatuspanelProps): ReactElement => {
-  const ETT_AAR_SIDEN = new Date();
-  ETT_AAR_SIDEN.setFullYear(ETT_AAR_SIDEN.getFullYear() - 1);
-  const visEndreknapp = soknad.opprettetDato >= ETT_AAR_SIDEN;
+  const visEndreknapp = erOpprettetSisteAar(soknad);
 
   return (
     <Statuspanel>

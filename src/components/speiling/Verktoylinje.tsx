@@ -1,8 +1,8 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import Knapp from "nav-frontend-knapper";
 
 interface VerktoylinjeProps {
-  children: any;
+  children: ReactNode;
 }
 
 export const Verktoylinje = (verktoylinjeProps: VerktoylinjeProps) => {
@@ -10,11 +10,10 @@ export const Verktoylinje = (verktoylinjeProps: VerktoylinjeProps) => {
 };
 
 interface VerktoyKnappProps {
-  children?: any;
+  children?: ReactNode;
 }
 
-export const VerktoyKnapp = (verktoyKnappProps: VerktoyKnappProps) => {
-  const { children } = verktoyKnappProps;
+export const VerktoyKnapp = ({ children }: VerktoyKnappProps) => {
   return (
     <div className="verktoylinje__element">
       <Knapp type="standard" mini disabled>
