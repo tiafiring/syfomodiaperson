@@ -2,6 +2,7 @@ import { call, put, select, takeEvery } from "redux-saga/effects";
 import * as actions from "./soknader_actions";
 import { get, Result, Success } from "../../api/axios";
 import { SykepengesoknadDTO } from "./types/SykepengesoknadDTO";
+import { SYFOSOKNAD_ROOT } from "../../apiConstants";
 
 export const skalHenteSoknader = (state: any) => {
   const reducer = state.soknader;
@@ -13,7 +14,7 @@ export function* hentSoknaderHvisIkkeHentet(action: any) {
   if (skalHente) {
     yield put(actions.henterSoknader());
 
-    const path = `${process.env.REACT_APP_SYFOSOKNAD_ROOT}/veileder/internad/soknader?fnr=${action.fnr}`;
+    const path = `${SYFOSOKNAD_ROOT}/soknader?fnr=${action.fnr}`;
     const result: Result<SykepengesoknadDTO[]> = yield call(get, path);
 
     if (result instanceof Success) {

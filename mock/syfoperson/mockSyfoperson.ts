@@ -1,11 +1,12 @@
 import { NAV_PERSONIDENT_HEADER } from "../util/requestUtil";
 import { personAdresseMock } from "../data/personAdresseMock";
+import { SYFOPERSON_ROOT } from "../../src/apiConstants";
 
 const diskresjonskode = "7";
 const isEgenAnsatt = true;
 
 export const mockSyfoperson = (server) => {
-  server.get("/syfoperson/api/person/diskresjonskode", (req, res) => {
+  server.get(`${SYFOPERSON_ROOT}/person/diskresjonskode`, (req, res) => {
     if (
       req.headers[NAV_PERSONIDENT_HEADER] &&
       req.headers[NAV_PERSONIDENT_HEADER].length === 11
@@ -17,7 +18,7 @@ export const mockSyfoperson = (server) => {
     }
   });
 
-  server.get("/syfoperson/api/person/egenansatt", (req, res) => {
+  server.get(`${SYFOPERSON_ROOT}/person/egenansatt`, (req, res) => {
     if (
       req.headers[NAV_PERSONIDENT_HEADER] &&
       req.headers[NAV_PERSONIDENT_HEADER].length === 11
@@ -29,7 +30,7 @@ export const mockSyfoperson = (server) => {
     }
   });
 
-  server.get("/syfoperson/api/person/adresse", (req, res) => {
+  server.get(`${SYFOPERSON_ROOT}/person/adresse`, (req, res) => {
     if (
       req.headers[NAV_PERSONIDENT_HEADER] &&
       req.headers[NAV_PERSONIDENT_HEADER].length === 11

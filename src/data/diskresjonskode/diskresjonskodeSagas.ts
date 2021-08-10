@@ -8,10 +8,11 @@ import {
 } from "./diskresjonskode_actions";
 import { get, Result, Success } from "../../api/axios";
 import { RootState } from "../rootState";
+import { SYFOPERSON_ROOT } from "../../apiConstants";
 
 export function* hentDiskresjonskodeSaga(action: HentDiskresjonskodeAction) {
   yield put(henterDiskresjonskode());
-  const path = `${process.env.REACT_APP_SYFOPERSON_ROOT}/person/diskresjonskode`;
+  const path = `${SYFOPERSON_ROOT}/person/diskresjonskode`;
   const result: Result<string> = yield call(get, path, action.fnr);
 
   if (result instanceof Success) {

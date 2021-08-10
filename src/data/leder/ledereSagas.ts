@@ -4,6 +4,7 @@ import * as actions from "./ledere_actions";
 import { HentLedereAction } from "./ledere_actions";
 import { RootState } from "../rootState";
 import { Leder } from "./ledere";
+import { MODIASYFOREST_ROOT } from "../../apiConstants";
 
 export const skalHenteLedere = (state: RootState) => {
   const reducer = state.ledere;
@@ -15,7 +16,7 @@ export function* hentLedereHvisIkkeHentet(action: HentLedereAction) {
   if (skalHente) {
     yield put(actions.henterLedere());
 
-    const path = `${process.env.REACT_APP_REST_ROOT}/internad/allnaermesteledere?fnr=${action.fnr}`;
+    const path = `${MODIASYFOREST_ROOT}/allnaermesteledere?fnr=${action.fnr}`;
     const result: Result<Leder[]> = yield call(get, path);
 
     if (result instanceof Success) {

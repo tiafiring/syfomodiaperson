@@ -3,6 +3,7 @@ import { get, post } from "../../api/axios";
 import * as actions from "./modiacontext_actions";
 import { Result, Success } from "../../api/axios";
 import { RSContext } from "./modiacontextTypes";
+import { MODIACONTEXTHOLDER_ROOT } from "../../apiConstants";
 
 const redirectWithoutFnrInUrl = (fnr: string) => {
   window.location.href = window.location.pathname.replace(`/${fnr}`, "");
@@ -11,7 +12,7 @@ const redirectWithoutFnrInUrl = (fnr: string) => {
 export function* pushModiacontextSaga(action: actions.PushModiaContextAction) {
   yield put(actions.pusherModiaContext());
 
-  const path = `${process.env.REACT_APP_CONTEXTHOLDER_ROOT}/context`;
+  const path = `${MODIACONTEXTHOLDER_ROOT}/context`;
   const result: Result<any> = yield call(post, path, {
     verdi: action.data.verdi,
     eventType: action.data.eventType,
@@ -28,7 +29,7 @@ export function* pushModiacontextSaga(action: actions.PushModiaContextAction) {
 export function* aktivBrukerSaga() {
   yield put(actions.henterAktivBruker());
 
-  const path = `${process.env.REACT_APP_CONTEXTHOLDER_ROOT}/context/aktivbruker`;
+  const path = `${MODIACONTEXTHOLDER_ROOT}/context/aktivbruker`;
   const result: Result<RSContext> = yield call(get, path);
 
   if (result instanceof Success) {
@@ -42,7 +43,7 @@ export function* aktivBrukerSaga() {
 export function* aktivEnhetSaga(action: any) {
   yield put(actions.henterAktivEnhet());
 
-  const path = `${process.env.REACT_APP_CONTEXTHOLDER_ROOT}/context/aktivenhet`;
+  const path = `${MODIACONTEXTHOLDER_ROOT}/context/aktivenhet`;
   const result: Result<RSContext> = yield call(get, path);
 
   if (result instanceof Success) {

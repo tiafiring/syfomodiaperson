@@ -10,6 +10,7 @@ import {
   hentOppfolgingstilfelleperioderHentet,
   OppfolgingstilfelleperioderActionTypes,
 } from "./oppfolgingstilfelleperioder_actions";
+import { MODIASYFOREST_ROOT } from "../../apiConstants";
 
 export function* hentOppfolgingstilfelleperioder(
   action: HentOppfolgingstilfelleperioderAction,
@@ -17,7 +18,7 @@ export function* hentOppfolgingstilfelleperioder(
 ) {
   yield put(hentOppfolgingstilfelleperioderHenter(orgnummer));
 
-  const path = `${process.env.REACT_APP_REST_ROOT}/internad/oppfolgingstilfelleperioder?fnr=${action.fnr}&orgnummer=${orgnummer}`;
+  const path = `${MODIASYFOREST_ROOT}/oppfolgingstilfelleperioder?fnr=${action.fnr}&orgnummer=${orgnummer}`;
   const result: Result<OppfolgingstilfellePersonArbeidsgiver[]> = yield call(
     get,
     path

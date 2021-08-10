@@ -4,6 +4,7 @@ import { stoppAutomatikk2StatusEndring } from "../../utils/pengestoppUtils";
 import { FlaggpersonState } from "./flaggperson";
 import { get, post, Result, Success } from "../../api/axios";
 import { StatusEndring } from "./types/FlaggPerson";
+import { ISPENGESTOPP_ROOT } from "../../apiConstants";
 
 export const skalHenteStatus = (state: { flaggperson: any }) => {
   const reducer = state.flaggperson;
@@ -15,7 +16,7 @@ export function* hentStatusHvisIkkeHentet(action: any) {
   if (skalHente) {
     yield put(actions.henterStatus());
 
-    const path = `${process.env.REACT_APP_ISPENGESTOPP_ROOT}/v1/person/status?fnr=${action.fnr}`;
+    const path = `${ISPENGESTOPP_ROOT}/person/status?fnr=${action.fnr}`;
     const result: Result<StatusEndring[]> = yield call(get, path);
 
     if (result instanceof Success) {
@@ -37,7 +38,7 @@ export function* endreStatusHvisIkkeEndret(action: any) {
   if (skalEndre) {
     yield put(actions.endrerStatus());
 
-    const path = `${process.env.REACT_APP_ISPENGESTOPP_ROOT}/v1/person/flagg`;
+    const path = `${ISPENGESTOPP_ROOT}/person/flagg`;
 
     const result: Result<any> = yield call(post, path, action.stoppAutomatikk);
 

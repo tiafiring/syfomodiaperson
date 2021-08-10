@@ -2,6 +2,7 @@ import { call, put, select, takeEvery } from "redux-saga/effects";
 import * as actions from "./sykmeldinger_actions";
 import { get, Result, Success } from "../../api/axios";
 import { SykmeldingNewFormatDTO } from "./types/SykmeldingNewFormatDTO";
+import { SYFOSMREGISTER_ROOT } from "../../apiConstants";
 
 export const skalHenteSykmeldinger = (state: any) => {
   const reducer = state.sykmeldinger;
@@ -13,7 +14,7 @@ export function* hentSykmeldingerHvisIkkeHentet(action: any) {
   if (skalHente) {
     yield put(actions.henterSykmeldinger());
 
-    const path = `${process.env.REACT_APP_SYFOSMREGISTER_ROOT}/v1/internal/sykmeldinger?fnr=${action.fnr}`;
+    const path = `${SYFOSMREGISTER_ROOT}/internal/sykmeldinger?fnr=${action.fnr}`;
     const result: Result<SykmeldingNewFormatDTO[]> = yield call(get, path);
 
     if (result instanceof Success) {

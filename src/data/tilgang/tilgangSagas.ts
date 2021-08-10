@@ -2,11 +2,12 @@ import { call, put, takeEvery } from "redux-saga/effects";
 import { get, Result, Success } from "../../api/axios";
 import * as actions from "./tilgang_actions";
 import { Tilgang } from "./tilgang";
+import { SYFOTILGANGSKONTROLL_ROOT } from "../../apiConstants";
 
 export function* sjekkTilgang(action: any) {
   yield put(actions.sjekkerTilgang());
 
-  const path = `${process.env.REACT_APP_TILGANGSKONTROLL_RESTROOT}/tilgang/bruker?fnr=${action.fnr}`;
+  const path = `${SYFOTILGANGSKONTROLL_ROOT}/tilgang/bruker?fnr=${action.fnr}`;
   const result: Result<Tilgang> = yield call(get, path);
 
   if (result instanceof Success) {

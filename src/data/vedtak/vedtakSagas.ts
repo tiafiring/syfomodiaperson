@@ -7,6 +7,7 @@ import {
   hentVedtakHenter,
   hentVedtakHentet,
 } from "./vedtak_actions";
+import { VEDTAK_ROOT } from "../../apiConstants";
 
 export const skalHenteVedtak = (state: { vedtak: VedtakState }) => {
   const reducer = state.vedtak;
@@ -18,7 +19,7 @@ export function* hentVedtakHvisIkkeHentet(action: any) {
   if (skalHente) {
     yield put(hentVedtakHenter());
 
-    const path = `${process.env.REACT_APP_VEDTAK_ROOT}?fnr=${action.fnr}`;
+    const path = `${VEDTAK_ROOT}?fnr=${action.fnr}`;
     const result: Result<VedtakDTO> = yield call(get, path);
 
     if (result instanceof Success) {
