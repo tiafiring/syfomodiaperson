@@ -17,6 +17,7 @@ import { hentPersonOppgaver } from "../../data/personoppgave/personoppgave_actio
 import { PersonOppgave } from "../../data/personoppgave/types/PersonOppgave";
 import { hentVirksomhet } from "../../data/virksomhet/virksomhet_actions";
 import { H3NoMargins } from "../Layout";
+import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "../../apiConstants";
 
 const texts = {
   header: "Oppfølgingsplan",
@@ -84,7 +85,7 @@ const LpsPlaner = ({ lpsPlaner }: LpsPlanerProps) => {
           <div key={index}>
             <a
               className="lenke"
-              href={`${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/dokument/lps/${plan.uuid}`}
+              href={`${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/dokument/lps/${plan.uuid}`}
               download="oppfølgingsplan"
             >
               {`${virksomhet} (pdf)`}

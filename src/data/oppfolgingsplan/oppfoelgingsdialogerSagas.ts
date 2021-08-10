@@ -2,6 +2,7 @@ import { call, put, select, takeEvery } from "redux-saga/effects";
 import { get, Result, Success } from "../../api/axios";
 import * as actions from "./oppfoelgingsdialoger_actions";
 import { OppfolgingsplanDTO } from "./oppfoelgingsdialoger";
+import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "../../apiConstants";
 
 export const skalHenteOppfolgingsplaner = (state: any) => {
   const reducer = state.oppfoelgingsdialoger;
@@ -13,7 +14,7 @@ export function* hentOppfolgingsplanerHvisIkkeHentet(action: any) {
   if (skalHente) {
     yield put(actions.henterOppfoelgingsdialoger());
 
-    const path = `${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/v1/oppfolgingsplan/${action.fnr}`;
+    const path = `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/v1/oppfolgingsplan/${action.fnr}`;
     const result: Result<OppfolgingsplanDTO[]> = yield call(get, path);
 
     if (result instanceof Success) {

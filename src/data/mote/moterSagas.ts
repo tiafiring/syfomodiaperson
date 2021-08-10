@@ -3,11 +3,12 @@ import { get, post, Result, Success } from "../../api/axios";
 import * as actions from "./moter_actions";
 import * as historikkActions from "../historikk/historikk_actions";
 import { MoteDTO } from "./types/moteTypes";
+import { SYFOMOTEADMIN_ROOT } from "../../apiConstants";
 
 export function* opprettMote(action: any) {
   yield put(actions.oppretterMote());
 
-  const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/moter`;
+  const path = `${SYFOMOTEADMIN_ROOT}/moter`;
   const result: Result<any> = yield call(post, path, action.data);
 
   if (result instanceof Success) {
@@ -22,7 +23,7 @@ export function* opprettMote(action: any) {
 
 export function* hentMoter(action: any) {
   yield put(actions.henterMoter());
-  const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/moter?fnr=${action.fnr}&henttpsdata=true&limit=1`;
+  const path = `${SYFOMOTEADMIN_ROOT}/moter?fnr=${action.fnr}&henttpsdata=true&limit=1`;
   const result: Result<MoteDTO[]> = yield call(get, path);
 
   if (result instanceof Success) {
@@ -57,7 +58,7 @@ export function* hentMoterHvisIkkeHentet(action: any) {
 export function* avbrytMote(action: any) {
   yield put(actions.avbryterMote(action.uuid));
 
-  const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/moter/${action.uuid}/avbryt?varsle=${action.varsle}`;
+  const path = `${SYFOMOTEADMIN_ROOT}/moter/${action.uuid}/avbryt?varsle=${action.varsle}`;
   const result: Result<any> = yield call(post, path, []);
 
   if (result instanceof Success) {
@@ -72,7 +73,7 @@ export function* avbrytMote(action: any) {
 
 export function* bekreftMote(action: any) {
   yield put(actions.bekrefterMote());
-  const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/moter/${action.moteUuid}/bekreft?valgtAlternativId=${action.valgtAlternativId}`;
+  const path = `${SYFOMOTEADMIN_ROOT}/moter/${action.moteUuid}/bekreft?valgtAlternativId=${action.valgtAlternativId}`;
   const result: Result<any> = yield call(post, path, []);
 
   if (result instanceof Success) {
@@ -93,7 +94,7 @@ export function* bekreftMote(action: any) {
 export function* opprettFlereAlternativ(action: any) {
   yield put(actions.oppretterFlereAlternativ());
 
-  const path = `${process.env.REACT_APP_MOTEADMIN_REST_ROOT}/internad/moter/${action.moteUuid}/nyealternativer`;
+  const path = `${SYFOMOTEADMIN_ROOT}/moter/${action.moteUuid}/nyealternativer`;
   const result: Result<any> = yield call(post, path, action.data);
 
   if (result instanceof Success) {

@@ -6,6 +6,7 @@ import * as behandleActions from "./behandlemotebehov_actions";
 import { BehandleMotebehovAction } from "./behandlemotebehov_actions";
 import { RootState } from "../rootState";
 import { MotebehovDTO } from "./types/motebehovTypes";
+import { SYFOMOTEBEHOV_ROOT } from "../../apiConstants";
 
 export const skalHenteMotebehov = (state: RootState) => {
   const reducer = state.motebehov;
@@ -18,7 +19,7 @@ export function* hentMotebehovHvisIkkeHentet(action: HentMotebehovAction) {
     const fnr = action.fnr ? action.fnr : "";
     yield put(actions.henterMotebehov());
 
-    const path = `${process.env.REACT_APP_SYFOMOTEBEHOV_ROOT}/internad/veileder/motebehov?fnr=${fnr}`;
+    const path = `${SYFOMOTEBEHOV_ROOT}/motebehov?fnr=${fnr}`;
     const result: Result<MotebehovDTO[]> = yield call(get, path);
 
     if (result instanceof Success) {
@@ -38,7 +39,7 @@ export function* behandleMotebehov(action: BehandleMotebehovAction) {
   const fnr = action.fnr;
   yield put(behandleActions.behandleMotebehovBehandler());
 
-  const path = `${process.env.REACT_APP_SYFOMOTEBEHOV_ROOT}/internad/veileder/motebehov/${fnr}/behandle`;
+  const path = `${SYFOMOTEBEHOV_ROOT}/motebehov/${fnr}/behandle`;
   const result: Result<any> = yield call(post, path, []);
 
   if (result instanceof Success) {

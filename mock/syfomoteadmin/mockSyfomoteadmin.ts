@@ -2,6 +2,7 @@ import { virksomhetMock } from "../data/virksomhetMock";
 import { moterMock } from "../data/moterMock";
 import { historikkmoterMock } from "../data/historikkmoterMock";
 import { ledereMock } from "../data/ledereMock";
+import { SYFOMOTEADMIN_ROOT } from "../../src/apiConstants";
 
 const mockOpprettetIdResultat = () => {
   mockOpprettetIdResultat.rollingCounter += 1;
@@ -50,23 +51,23 @@ const mockMoteDeltakere = (alternativer, orgnummer) => {
 };
 
 const mockForLokal = (server) => {
-  server.get("/syfomoteadmin/api/internad/moter", (req, res) => {
+  server.get(`${SYFOMOTEADMIN_ROOT}/moter`, (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.send(JSON.stringify(moterMock));
   });
 
-  server.get("/syfomoteadmin/api/internad/historikk", (req, res) => {
+  server.get(`${SYFOMOTEADMIN_ROOT}/historikk`, (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.send(JSON.stringify(historikkmoterMock));
   });
 
-  server.get("/syfomoteadmin/api/internad/virksomhet/110110110", (req, res) => {
+  server.get(`${SYFOMOTEADMIN_ROOT}/virksomhet/110110110`, (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.send(virksomhetMock("Fire Station"));
   });
 
   server.get(
-    "/syfomoteadmin/api/internad/virksomhet/:virksomhetsnummer",
+    `${SYFOMOTEADMIN_ROOT}/virksomhet/:virksomhetsnummer`,
     (req, res) => {
       res.setHeader("Content-Type", "application/json");
       res.send(virksomhetMock());
@@ -75,7 +76,7 @@ const mockForLokal = (server) => {
 };
 
 const mockEndepunkterSomEndrerState = (server) => {
-  server.post("/syfomoteadmin/api/internad/moter/:uuid/avbryt", (req, res) => {
+  server.post(`${SYFOMOTEADMIN_ROOT}/moter/:uuid/avbryt`, (req, res) => {
     const { uuid } = req.params;
     const oppdaterteMoter = moterMock.map((mote) => {
       if (mote.moteUuid.toString() === uuid.toString()) {
@@ -88,7 +89,7 @@ const mockEndepunkterSomEndrerState = (server) => {
     res.send(JSON.stringify({}));
   });
 
-  server.post("/syfomoteadmin/api/internad/moter/:uuid/bekreft", (req, res) => {
+  server.post(`${SYFOMOTEADMIN_ROOT}/moter/:uuid/bekreft`, (req, res) => {
     const { valgtAlternativId } = req.query;
     const { uuid } = req.params;
     const oppdaterteMoter = moterMock.map((mote) => {
@@ -109,7 +110,7 @@ const mockEndepunkterSomEndrerState = (server) => {
   });
 
   server.post(
-    "/syfomoteadmin/api/internad/moter/:uuid/nyealternativer",
+    `${SYFOMOTEADMIN_ROOT}/moter/:uuid/nyealternativer`,
     (req, res) => {
       res.json({ requestBody: req.body });
 
@@ -133,7 +134,7 @@ const mockEndepunkterSomEndrerState = (server) => {
     }
   );
 
-  server.post("/syfomoteadmin/api/internad/moter", (req, res) => {
+  server.post(`${SYFOMOTEADMIN_ROOT}/moter`, (req, res) => {
     res.json({ requestBody: req.body });
 
     const reqBody = req.body;

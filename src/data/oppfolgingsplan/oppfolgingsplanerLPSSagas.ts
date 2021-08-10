@@ -4,6 +4,7 @@ import { PersonOppgave } from "../personoppgave/types/PersonOppgave";
 import { get, Result, Success } from "../../api/axios";
 import { OppfolgingsplanLPS } from "./types/OppfolgingsplanLPS";
 import { RootState } from "../rootState";
+import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "../../apiConstants";
 
 export function* hentOppfolgingsplanerLPS(
   action: any,
@@ -11,7 +12,7 @@ export function* hentOppfolgingsplanerLPS(
 ) {
   yield put(actions.hentOppfolgingsplanerLPSHenter());
 
-  const path = `${process.env.REACT_APP_OPPFOLGINGSPLANREST_ROOT}/internad/oppfolgingsplan/lps`;
+  const path = `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/oppfolgingsplan/lps`;
   const result: Result<OppfolgingsplanLPS[]> = yield call(
     get,
     path,

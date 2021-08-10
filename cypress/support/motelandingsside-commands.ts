@@ -1,4 +1,5 @@
 import { innkaltDialogmote } from "../../mock/data/dialogmoterMock";
+import { ISDIALOGMOTE_ROOT, SYFOMOTEADMIN_ROOT } from "../../src/apiConstants";
 
 export enum MoteState {
   INNKALT_DIALOGMOTE,
@@ -32,14 +33,14 @@ Cypress.Commands.add("stubMoter", (state: MoteState) => {
   cy.intercept(
     {
       method: "GET",
-      url: "/syfomoteadmin/api/internad/moter*",
+      url: `${SYFOMOTEADMIN_ROOT}/moter*`,
     },
     moter.moter
   );
   cy.intercept(
     {
       method: "GET",
-      url: "/isdialogmote/api/get/v1/dialogmote/personident",
+      url: `${ISDIALOGMOTE_ROOT}/get/v1/dialogmote/personident`,
     },
     moter.dialogmoter
   );
