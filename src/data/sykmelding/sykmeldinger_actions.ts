@@ -1,35 +1,55 @@
 import { SykmeldingNewFormatDTO } from "./types/SykmeldingNewFormatDTO";
+import { ApiError } from "../../api/axios";
 
-export const HENT_SYKMELDINGER_FEILET = "HENT_SYKMELDINGER_FEILET";
-export const HENTER_SYKMELDINGER = "HENTER_SYKMELDINGER";
-export const HENT_SYKMELDINGER_FORESPURT = "HENT_SYKMELDINGER_FORESPURT";
-export const SYKMELDINGER_HENTET = "SYKMELDINGER_HENTET";
-
-export function hentSykmeldingerFeilet() {
-  return {
-    type: HENT_SYKMELDINGER_FEILET,
-  };
+export enum SykmeldingerActionTypes {
+  HENT_SYKMELDINGER_FEILET = "HENT_SYKMELDINGER_FEILET",
+  HENT_SYKMELDINGER_FORESPURT = "HENT_SYKMELDINGER_FORESPURT",
+  SYKMELDINGER_HENTET = "SYKMELDINGER_HENTET",
 }
 
-export function henterSykmeldinger() {
-  return {
-    type: HENTER_SYKMELDINGER,
-  };
+export interface HentSykmeldingerAction {
+  type: SykmeldingerActionTypes.HENT_SYKMELDINGER_FORESPURT;
+  fnr: string;
 }
 
-export function hentSykmeldinger(fnr: string) {
+export interface HentSykmeldingerFeiletAction {
+  type: SykmeldingerActionTypes.HENT_SYKMELDINGER_FEILET;
+  error: ApiError;
+}
+
+export interface SykmeldingerHentetAction {
+  type: SykmeldingerActionTypes.SYKMELDINGER_HENTET;
+  data: SykmeldingNewFormatDTO[];
+  fnr: string;
+}
+
+export type SykmeldingerActions =
+  | HentSykmeldingerAction
+  | HentSykmeldingerFeiletAction
+  | SykmeldingerHentetAction;
+
+export function hentSykmeldinger(fnr: string): HentSykmeldingerAction {
   return {
-    type: HENT_SYKMELDINGER_FORESPURT,
+    type: SykmeldingerActionTypes.HENT_SYKMELDINGER_FORESPURT,
     fnr,
+  };
+}
+
+export function hentSykmeldingerFeilet(
+  error: ApiError
+): HentSykmeldingerFeiletAction {
+  return {
+    type: SykmeldingerActionTypes.HENT_SYKMELDINGER_FEILET,
+    error,
   };
 }
 
 export function sykmeldingerHentet(
   data: SykmeldingNewFormatDTO[],
   fnr: string
-) {
+): SykmeldingerHentetAction {
   return {
-    type: SYKMELDINGER_HENTET,
+    type: SykmeldingerActionTypes.SYKMELDINGER_HENTET,
     data,
     fnr,
   };

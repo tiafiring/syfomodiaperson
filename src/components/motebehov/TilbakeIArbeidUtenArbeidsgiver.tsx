@@ -11,7 +11,7 @@ const tekster = {
   usikkerDatoSporsmal: "Når antar du å kunne gi tilbakemelding på dette?",
 };
 
-const getTilbakeIArbeidCheckbox = (returDato?: string) => {
+const getTilbakeIArbeidCheckbox = (returDato?: Date) => {
   return (
     <TilbakeIArbeidCheckboxMedSporsmalOgDato
       checkboxLabel={tekster.retur}
@@ -21,7 +21,7 @@ const getTilbakeIArbeidCheckbox = (returDato?: string) => {
   );
 };
 
-const getUsikkerIArbeidCheckbox = (returDato?: string) => {
+const getUsikkerIArbeidCheckbox = (returDato?: Date) => {
   return (
     <TilbakeIArbeidCheckboxMedSporsmalOgDato
       checkboxLabel={tekster.usikkerCheckboxLabel}

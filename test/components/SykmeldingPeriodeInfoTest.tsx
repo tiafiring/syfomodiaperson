@@ -3,15 +3,16 @@ import React from "react";
 import { expect } from "chai";
 import SykmeldingPeriodeInfo from "../../src/components/speiling/sykmeldinger/sykmeldinger/SykmeldingPeriodeInfo";
 import { SykmeldingPeriodeDTO } from "../../src/data/sykmelding/types/SykmeldingOldFormat";
+import { toDateWithoutNullCheck } from "../../src/utils/datoUtils";
 
 const arbeidsgiver = "Arne Arbeidsgiver";
 const periodeFlereDager: SykmeldingPeriodeDTO = {
-  fom: "2021-06-01",
-  tom: "2021-06-10",
+  fom: toDateWithoutNullCheck("2021-06-01"),
+  tom: toDateWithoutNullCheck("2021-06-10"),
 };
 const periodeEnDag: SykmeldingPeriodeDTO = {
-  fom: "2021-06-01",
-  tom: "2021-06-01",
+  fom: toDateWithoutNullCheck("2021-06-01"),
+  tom: toDateWithoutNullCheck("2021-06-01"),
 };
 
 describe("SykmeldingPeriodeInfo", () => {

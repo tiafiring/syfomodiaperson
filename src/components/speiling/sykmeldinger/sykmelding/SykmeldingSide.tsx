@@ -14,7 +14,7 @@ import AvvistSykmelding from "./avvisteSykmeldinger/AvvistSykmelding";
 import KoronaSykmeldingBekreftet from "./koronasykmeldinger/KoronaSykmelding-Bekreftet";
 import KoronaSykmeldingNy from "./koronasykmeldinger/KoronaSykmelding-Ny";
 import KoronaSykmeldingAvbrutt from "./koronasykmeldinger/KoronaSykmelding-Avbrutt";
-import { BehandlingsutfallStatusDTO } from "../../../../data/sykmelding/types/SykmeldingNewFormatDTO";
+import { BehandlingsutfallStatusDTO } from "../../../../data/sykmelding/types/BehandlingsutfallStatusDTO";
 
 interface SykmeldingSideProps {
   dinSykmelding?: SykmeldingOldFormat;

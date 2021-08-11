@@ -4,16 +4,16 @@ import {
   newSMFormat2OldFormat,
   oldFormatSMForAG,
 } from "../../utils/sykmeldinger/sykmeldingParser";
-import {
-  HENT_SYKMELDINGER_FEILET,
-  HENTER_SYKMELDINGER,
-  SYKMELDINGER_HENTET,
-} from "./sykmeldinger_actions";
 import { SykmeldingNewFormatDTO } from "./types/SykmeldingNewFormatDTO";
+import {
+  SykmeldingerActions,
+  SykmeldingerActionTypes,
+} from "./sykmeldinger_actions";
+import { ApiError } from "../../api/axios";
 
 export interface SykmeldingerState {
   henter: boolean;
-  hentingFeilet: boolean;
+  error?: ApiError;
   hentet: boolean;
   data: SykmeldingOldFormat[];
   arbeidsgiverssykmeldinger: SykmeldingOldFormat[];
@@ -21,39 +21,42 @@ export interface SykmeldingerState {
 
 const initialState: SykmeldingerState = {
   henter: false,
-  hentingFeilet: false,
+  error: undefined,
   hentet: false,
   data: [],
   arbeidsgiverssykmeldinger: [],
 };
 
-const sykmeldinger: Reducer<SykmeldingerState> = (
+const sykmeldinger: Reducer<SykmeldingerState, SykmeldingerActions> = (
   state = initialState,
-  action = { type: "" }
+  action
 ) => {
   switch (action.type) {
-    case HENT_SYKMELDINGER_FEILET: {
-      return Object.assign({}, state, {
+    case SykmeldingerActionTypes.HENT_SYKMELDINGER_FEILET: {
+      return {
+        ...state,
         data: [],
         arbeidsgiverssykmeldinger: [],
         henter: false,
         hentet: true,
-        hentingFeilet: true,
-      });
+        error: action.error,
+      };
     }
-    case HENTER_SYKMELDINGER: {
+    case SykmeldingerActionTypes.HENT_SYKMELDINGER_FORESPURT: {
       return {
+        ...state,
         data: [],
         arbeidsgiverssykmeldinger: [],
         henter: true,
         hentet: false,
-        hentingFeilet: false,
+        error: undefined,
       };
     }
-    case SYKMELDINGER_HENTET: {
+    case SykmeldingerActionTypes.SYKMELDINGER_HENTET: {
       return {
+        ...state,
         henter: false,
-        hentingFeilet: false,
+        error: undefined,
         hentet: true,
         data: action.data.map((sykmelding: SykmeldingNewFormatDTO) => {
           return newSMFormat2OldFormat(sykmelding, action.fnr);

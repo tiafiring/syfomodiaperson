@@ -12,15 +12,15 @@ export const useSykmeldinger: () => {
   const {
     henter,
     hentet,
-    hentingFeilet,
+    error,
     data,
     arbeidsgiverssykmeldinger,
   } = useAppSelector((state) => state.sykmeldinger);
   return {
     henterSykmeldinger: henter,
     hentetSykmeldinger: hentet,
-    hentingSykmeldingerFeilet: hentingFeilet,
-    harForsoktHentetSykmeldinger: hentet || hentingFeilet,
+    hentingSykmeldingerFeilet: !!error,
+    harForsoktHentetSykmeldinger: hentet || !!error,
     sykmeldinger: data,
     arbeidsgiverssykmeldinger,
   };

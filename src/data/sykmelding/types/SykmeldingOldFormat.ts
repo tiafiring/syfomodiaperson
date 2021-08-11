@@ -1,7 +1,5 @@
-import {
-  BehandlingsutfallDTO,
-  UtdypendeOpplysning,
-} from "./SykmeldingNewFormatDTO";
+import { BehandlingsutfallDTO } from "./BehandlingsutfallDTO";
+import { SporsmalSvarDTO } from "./SporsmalSvarDTO";
 
 export enum ArbeidssituasjonType {
   NAERINGSDRIVENDE = "NAERINGSDRIVENDE",
@@ -39,12 +37,12 @@ export interface SykmeldingDiagnose {
   diagnose?: string;
   diagnosekode: string;
   diagnosesystem: string;
-  diagnosetekst?: string | null;
+  diagnosetekst?: string;
 }
 
 export interface SykmeldingPeriodeDTO {
-  fom: string;
-  tom: string;
+  fom: Date;
+  tom: Date;
   grad?: number;
   behandlingsdager?: number;
   reisetilskudd?: boolean;
@@ -53,92 +51,92 @@ export interface SykmeldingPeriodeDTO {
 }
 
 export interface Datospenn {
-  fom: string | null;
-  tom: string | null;
+  fom?: string;
+  tom?: string;
 }
 
 export interface FriskmeldingDTO {
   arbeidsfoerEtterPerioden?: boolean;
-  hensynPaaArbeidsplassen: string | null;
-  antarReturSammeArbeidsgiver: boolean;
-  antattDatoReturSammeArbeidsgiver?: string;
-  antarReturAnnenArbeidsgiver: boolean;
-  tilbakemeldingReturArbeid?: string;
-  utenArbeidsgiverAntarTilbakeIArbeid: boolean;
-  utenArbeidsgiverAntarTilbakeIArbeidDato?: string;
-  utenArbeidsgiverTilbakemelding?: string;
+  hensynPaaArbeidsplassen?: string;
+  antarReturSammeArbeidsgiver?: boolean;
+  antattDatoReturSammeArbeidsgiver?: Date;
+  antarReturAnnenArbeidsgiver?: boolean;
+  tilbakemeldingReturArbeid?: Date;
+  utenArbeidsgiverAntarTilbakeIArbeid?: boolean;
+  utenArbeidsgiverAntarTilbakeIArbeidDato?: Date;
+  utenArbeidsgiverTilbakemelding?: Date;
 }
 
 export interface SykmeldingOldFormat {
   id: string;
   mottattTidspunkt: Date;
-  startLegemeldtFravaer: Date | null;
+  startLegemeldtFravaer?: Date;
   skalViseSkravertFelt: boolean;
-  identdato: string;
+  identdato?: string;
   status: SykmeldingStatus;
-  naermesteLederStatus: string | null;
+  naermesteLederStatus?: string;
   innsendtArbeidsgivernavn?: string;
-  valgtArbeidssituasjon: ArbeidssituasjonType | null;
+  valgtArbeidssituasjon?: string;
   behandlingsutfall: BehandlingsutfallDTO;
   mottakendeArbeidsgiver?: {
     navn: string;
     virksomhetsnummer: string;
     juridiskOrgnummer: string;
-  } | null;
-  orgnummer?: string | null;
+  };
+  orgnummer?: string;
   sendtdato: string;
   sporsmal: {
-    harForsikring: boolean | null;
-    arbeidssituasjon: ArbeidssituasjonType | null;
-    fravaersperioder: Datospenn[] | null;
-    harAnnetFravaer: boolean | null;
+    harForsikring?: boolean;
+    arbeidssituasjon?: string;
+    fravaersperioder?: Datospenn[];
+    harAnnetFravaer?: boolean;
   };
   pasient: {
-    fnr: string | null;
-    fornavn: string | null;
-    mellomnavn: string | null;
-    etternavn: string | null;
+    fnr?: string;
+    fornavn?: string;
+    mellomnavn?: string;
+    etternavn?: string;
   };
-  arbeidsgiver: string | null;
-  stillingsprosent: number | null;
+  arbeidsgiver?: string;
+  stillingsprosent?: number;
   diagnose: {
-    hoveddiagnose: SykmeldingDiagnose;
-    bidiagnoser: SykmeldingDiagnose[] | null;
+    hoveddiagnose?: SykmeldingDiagnose;
+    bidiagnoser?: SykmeldingDiagnose[];
     fravaersgrunnLovfestet?: string;
     fravaerBeskrivelse?: string;
-    svangerskap: boolean | null;
-    yrkesskade: boolean | null;
-    yrkesskadeDato?: string;
+    svangerskap?: boolean;
+    yrkesskade?: boolean;
+    yrkesskadeDato?: Date;
   };
   mulighetForArbeid: {
     perioder: SykmeldingPeriodeDTO[];
-    aktivitetIkkeMulig433: string[] | null;
-    aktivitetIkkeMulig434: string[] | null;
+    aktivitetIkkeMulig433?: string[];
+    aktivitetIkkeMulig434?: string[];
     aarsakAktivitetIkkeMulig433?: string;
     aarsakAktivitetIkkeMulig434?: string;
   };
   friskmelding: FriskmeldingDTO;
-  utdypendeOpplysninger: Map<string, Map<string, UtdypendeOpplysning>>;
+  utdypendeOpplysninger: Map<string, Map<string, SporsmalSvarDTO>>;
   arbeidsevne: {
-    tilretteleggingArbeidsplass: string | null;
-    tiltakNAV: string | null;
-    tiltakAndre: string | null;
+    tilretteleggingArbeidsplass?: string;
+    tiltakNAV?: string;
+    tiltakAndre?: string;
   };
   meldingTilNav: {
-    navBoerTaTakISaken: boolean;
-    navBoerTaTakISakenBegrunnelse: string | null;
+    navBoerTaTakISaken?: boolean;
+    navBoerTaTakISakenBegrunnelse?: string;
   };
-  innspillTilArbeidsgiver: string | null;
+  innspillTilArbeidsgiver?: string;
   tilbakedatering: {
-    dokumenterbarPasientkontakt: string | null;
-    tilbakedatertBegrunnelse: string | null;
+    dokumenterbarPasientkontakt?: Date;
+    tilbakedatertBegrunnelse?: string;
   };
   bekreftelse: {
-    utstedelsesdato: string | null;
-    sykmelder: string | null;
-    sykmelderTlf: string | null;
+    utstedelsesdato?: Date;
+    sykmelder?: string;
+    sykmelderTlf?: string;
   };
   egenmeldt?: boolean;
   papirsykmelding?: boolean;
-  harRedusertArbeidsgiverperiode: boolean | null;
+  harRedusertArbeidsgiverperiode?: boolean;
 }

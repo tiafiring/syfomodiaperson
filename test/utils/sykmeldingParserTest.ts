@@ -37,6 +37,7 @@ import {
   arbeidsrelaterteArsakerTekst,
   medisinskeArsakerTekster,
 } from "../../src/utils/sykmeldinger/AktivitetIkkeMuligArsaker";
+import { FriskmeldingDTO } from "../../src/data/sykmelding/types/SykmeldingOldFormat";
 
 const sykmeldtFnr = "99887766554";
 
@@ -84,7 +85,7 @@ describe("sykmeldingParser", () => {
 
     it("Return correct arbeidsgiver without info", () => {
       const mockSM = mockSykmeldinger[0];
-      const expectedSykmeldingArbeidsgiver = null;
+      const expectedSykmeldingArbeidsgiver = undefined;
 
       const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
 
@@ -116,7 +117,7 @@ describe("sykmeldingParser", () => {
       const mockSM = mockSykmeldinger[0];
       const expectedSykmeldingBekreftelse = {
         sykmelder: "Lego Legesen",
-        sykmelderTlf: null,
+        sykmelderTlf: undefined,
         utstedelsesdato: toDate("2020-01-21T22:00:00Z"),
       };
 
@@ -164,10 +165,10 @@ describe("sykmeldingParser", () => {
         skjermesForPasient: true,
       };
       const expectedSykmeldingDiagnose = {
-        bidiagnoser: null,
-        fravaerBeskrivelse: null,
-        fravaersgrunnLovfestet: null,
-        hoveddiagnose: null,
+        bidiagnoser: undefined,
+        fravaerBeskrivelse: undefined,
+        fravaersgrunnLovfestet: undefined,
+        hoveddiagnose: undefined,
         svangerskap: true,
         yrkesskade: true,
         yrkesskadeDato: toDate("2020-01-22"),
@@ -185,16 +186,16 @@ describe("sykmeldingParser", () => {
       const mockSM = mockSykmeldinger[0];
       const expectedSykmeldingDiagnose = {
         bidiagnoser: [],
-        fravaerBeskrivelse: null,
-        fravaersgrunnLovfestet: null,
+        fravaerBeskrivelse: undefined,
+        fravaersgrunnLovfestet: undefined,
         hoveddiagnose: {
-          diagnose: null,
-          diagnosekode: null,
-          diagnosesystem: null,
+          diagnose: undefined,
+          diagnosekode: "tt",
+          diagnosesystem: "tt",
         },
-        svangerskap: null,
-        yrkesskade: null,
-        yrkesskadeDato: null,
+        svangerskap: false,
+        yrkesskade: false,
+        yrkesskadeDato: undefined,
       };
 
       const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
@@ -214,9 +215,9 @@ describe("sykmeldingParser", () => {
         arbeidsfoerEtterPerioden: true,
         hensynPaaArbeidsplassen: "Hensyn",
         tilbakemeldingReturArbeid: toDate("2020-01-22"),
-        utenArbeidsgiverAntarTilbakeIArbeid: null,
-        utenArbeidsgiverAntarTilbakeIArbeidDato: null,
-        utenArbeidsgiverTilbakemelding: null,
+        utenArbeidsgiverAntarTilbakeIArbeid: undefined,
+        utenArbeidsgiverAntarTilbakeIArbeidDato: undefined,
+        utenArbeidsgiverTilbakemelding: undefined,
       };
 
       const outputSM = newSMFormat2OldFormat(
@@ -233,12 +234,12 @@ describe("sykmeldingParser", () => {
       const incomingSykmeldingWithPrognoseErIkkeIArbeid = mockSykmeldingWithPrognoseErIkkeIArbeid;
 
       const expectedSykmeldingFriskmelding = {
-        antarReturAnnenArbeidsgiver: null,
-        antarReturSammeArbeidsgiver: null,
-        antattDatoReturSammeArbeidsgiver: null,
+        antarReturAnnenArbeidsgiver: undefined,
+        antarReturSammeArbeidsgiver: undefined,
+        antattDatoReturSammeArbeidsgiver: undefined,
         arbeidsfoerEtterPerioden: false,
         hensynPaaArbeidsplassen: "Hensyn",
-        tilbakemeldingReturArbeid: null,
+        tilbakemeldingReturArbeid: undefined,
         utenArbeidsgiverAntarTilbakeIArbeid: true,
         utenArbeidsgiverAntarTilbakeIArbeidDato: toDate("2020-01-22"),
         utenArbeidsgiverTilbakemelding: toDate("2020-01-22"),
@@ -258,15 +259,15 @@ describe("sykmeldingParser", () => {
       const mockSM = mockSykmeldinger[0];
 
       const expectedSykmeldingFriskmelding = {
-        antarReturAnnenArbeidsgiver: null,
-        antarReturSammeArbeidsgiver: null,
-        antattDatoReturSammeArbeidsgiver: null,
-        arbeidsfoerEtterPerioden: null,
-        hensynPaaArbeidsplassen: null,
-        tilbakemeldingReturArbeid: null,
-        utenArbeidsgiverAntarTilbakeIArbeid: null,
-        utenArbeidsgiverAntarTilbakeIArbeidDato: null,
-        utenArbeidsgiverTilbakemelding: null,
+        antarReturAnnenArbeidsgiver: undefined,
+        antarReturSammeArbeidsgiver: undefined,
+        antattDatoReturSammeArbeidsgiver: undefined,
+        arbeidsfoerEtterPerioden: undefined,
+        hensynPaaArbeidsplassen: undefined,
+        tilbakemeldingReturArbeid: undefined,
+        utenArbeidsgiverAntarTilbakeIArbeid: undefined,
+        utenArbeidsgiverAntarTilbakeIArbeidDato: undefined,
+        utenArbeidsgiverTilbakemelding: undefined,
       };
 
       const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
@@ -290,12 +291,12 @@ describe("sykmeldingParser", () => {
   });
 
   describe("identdato", () => {
-    it("Returns null", () => {
+    it("Returns undefined", () => {
       const mockSM = mockSykmeldinger[0];
 
       const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
 
-      expect(outputSM.identdato).to.deep.equal(null);
+      expect(outputSM.identdato).to.deep.equal(undefined);
     });
   });
 
@@ -353,7 +354,7 @@ describe("sykmeldingParser", () => {
 
       const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
 
-      expect(outputSM.innspillTilArbeidsgiver).to.deep.equal(null);
+      expect(outputSM.innspillTilArbeidsgiver).to.deep.equal(undefined);
     });
   });
 
@@ -378,8 +379,8 @@ describe("sykmeldingParser", () => {
       const mockSM = mockSykmeldinger[0];
 
       const expectedmeldingTilNav = {
-        navBoerTaTakISaken: null,
-        navBoerTaTakISakenBegrunnelse: null,
+        navBoerTaTakISaken: undefined,
+        navBoerTaTakISakenBegrunnelse: undefined,
       };
 
       const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
@@ -414,7 +415,7 @@ describe("sykmeldingParser", () => {
         sykmeldtFnr
       );
 
-      expect(outputSM.mottakendeArbeidsgiver).to.deep.equal(null);
+      expect(outputSM.mottakendeArbeidsgiver).to.deep.equal(undefined);
     });
   });
 
@@ -425,19 +426,15 @@ describe("sykmeldingParser", () => {
       const expectedMulighetForArbeid = {
         aarsakAktivitetIkkeMulig433: "Beskrivelse",
         aarsakAktivitetIkkeMulig434: "Beskrivelse2",
-        aktivitetIkkeMulig433: [
-          medisinskeArsakerTekster.TILSTAND_HINDRER_AKTIVITET,
-        ],
-        aktivitetIkkeMulig434: [
-          arbeidsrelaterteArsakerTekst.MANGLENDE_TILRETTELEGGING,
-        ],
+        aktivitetIkkeMulig433: [medisinskeArsakerTekster.ANNET],
+        aktivitetIkkeMulig434: [arbeidsrelaterteArsakerTekst.ANNET],
         perioder: [
           {
-            avventende: null,
-            behandlingsdager: null,
+            avventende: undefined,
+            behandlingsdager: undefined,
             fom: toDate("2020-01-22"),
             grad: 100,
-            reisetilskudd: null,
+            reisetilskudd: undefined,
             tom: toDate("2020-05-22"),
           },
         ],
@@ -463,8 +460,8 @@ describe("sykmeldingParser", () => {
         aktivitetIkkeMulig434: undefined,
         perioder: [
           {
-            avventende: null,
-            behandlingsdager: null,
+            avventende: undefined,
+            behandlingsdager: undefined,
             fom: toDate("2020-01-22"),
             grad: 50,
             reisetilskudd: true,
@@ -493,19 +490,19 @@ describe("sykmeldingParser", () => {
         aktivitetIkkeMulig434: undefined,
         perioder: [
           {
-            avventende: null,
-            behandlingsdager: null,
+            avventende: undefined,
+            behandlingsdager: undefined,
             fom: toDate("2020-01-22"),
             grad: 100,
-            reisetilskudd: null,
+            reisetilskudd: undefined,
             tom: toDate("2020-05-22"),
           },
           {
-            avventende: null,
+            avventende: undefined,
             behandlingsdager: 2,
             fom: toDate("2020-02-17"),
-            grad: null,
-            reisetilskudd: null,
+            grad: undefined,
+            reisetilskudd: undefined,
             tom: toDate("2020-03-01"),
           },
         ],
@@ -542,10 +539,10 @@ describe("sykmeldingParser", () => {
       const mockSM = mockSykmeldinger[0];
 
       const expectedPasient = {
-        etternavn: null,
+        etternavn: undefined,
         fnr: sykmeldtFnr,
-        fornavn: null,
-        mellomnavn: null,
+        fornavn: undefined,
+        mellomnavn: undefined,
       };
 
       const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
@@ -558,9 +555,8 @@ describe("sykmeldingParser", () => {
     it("Returns correct sendtdato", () => {
       const sykmeldingWithStatusSendt = mockSykmeldinger[0];
 
-      const expectedMottakendeArbeidsgiver = toDate(
-        "2020-01-29T09:38:05.414834Z"
-      );
+      const expectedMottakendeArbeidsgiver =
+        sykmeldingWithStatusSendt.sykmeldingStatus.timestamp;
 
       const outputSM = newSMFormat2OldFormat(
         sykmeldingWithStatusSendt,
@@ -573,11 +569,10 @@ describe("sykmeldingParser", () => {
 
   describe("sporsmal", () => {
     it("Returns correct sporsmal", () => {
-      const sykmeldingWithSporsmalOgSvarListe = mockSykmeldingWithSporsmalOgSvarListe;
+      const sykmeldingWithSporsmalOgSvarListe = mockSykmeldingWithSporsmalOgSvarListe();
 
       const expectedSporsmal = {
         arbeidssituasjon: "ARBEIDSTAKER",
-        dekningsgrad: null,
         fravaersperioder: [
           {
             fom: "2020-02-24",
@@ -600,11 +595,10 @@ describe("sykmeldingParser", () => {
       const mockSM = mockSykmeldinger[0];
 
       const expectedSporsmal = {
-        arbeidssituasjon: null,
-        dekningsgrad: null,
+        arbeidssituasjon: undefined,
         fravaersperioder: [],
-        harAnnetFravaer: null,
-        harForsikring: null,
+        harAnnetFravaer: false,
+        harForsikring: false,
       };
 
       const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
@@ -670,8 +664,8 @@ describe("sykmeldingParser", () => {
       const mockSM = mockSykmeldinger[0];
 
       const expectedSporsmal = {
-        dokumenterbarPasientkontakt: null,
-        tilbakedatertBegrunnelse: null,
+        dokumenterbarPasientkontakt: undefined,
+        tilbakedatertBegrunnelse: undefined,
       };
 
       const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
@@ -682,10 +676,10 @@ describe("sykmeldingParser", () => {
 
   describe("utdypendeOpplysninger", () => {
     it("Returns correct utdypendeOpplysninger with utdypende opplysninger pkt. 6.2", () => {
-      const sykmeldingWithUtdypendeOpplysningerPkt62 = mockSykmeldingerWithUtdypendeOpplysningerPkt62;
+      const sykmeldingWithUtdypendeOpplysningerPkt62 = mockSykmeldingerWithUtdypendeOpplysningerPkt62();
 
       const expectedUtdypendeOpplysninger =
-        mockSykmeldingerWithUtdypendeOpplysningerPkt62.utdypendeOpplysninger;
+        sykmeldingWithUtdypendeOpplysningerPkt62.utdypendeOpplysninger;
 
       const outputSM = newSMFormat2OldFormat(
         sykmeldingWithUtdypendeOpplysningerPkt62,
@@ -698,7 +692,7 @@ describe("sykmeldingParser", () => {
     });
 
     it("Returns correct utdypendeOpplysninger with utdypende opplysninger pkt. 6.3", () => {
-      const sykmeldingWithUtdypendeOpplysningerPkt63 = mockSykmeldingerWithUtdypendeOpplysningerPkt63;
+      const sykmeldingWithUtdypendeOpplysningerPkt63 = mockSykmeldingerWithUtdypendeOpplysningerPkt63();
 
       const expectedUtdypendeOpplysninger =
         sykmeldingWithUtdypendeOpplysningerPkt63.utdypendeOpplysninger;
@@ -726,10 +720,10 @@ describe("sykmeldingParser", () => {
     });
 
     it("Returns correct utdypendeOpplysninger with only some fields", () => {
-      const sykmeldingWithUtdypendeOpplysningerPkt62 = mockSykmeldingerWithUtdypendeOpplysningerPkt62SomeFieldsOmitted;
+      const sykmeldingWithUtdypendeOpplysningerPkt62 = mockSykmeldingerWithUtdypendeOpplysningerPkt62SomeFieldsOmitted();
 
-      const expectedUtdypendeOpplysninger =
-        mockSykmeldingerWithUtdypendeOpplysningerPkt62SomeFieldsOmitted.utdypendeOpplysninger;
+      const expectedUtdypendeOpplysninger = mockSykmeldingerWithUtdypendeOpplysningerPkt62SomeFieldsOmitted()
+        .utdypendeOpplysninger;
 
       const outputSM = newSMFormat2OldFormat(
         sykmeldingWithUtdypendeOpplysningerPkt62,
@@ -745,7 +739,7 @@ describe("sykmeldingParser", () => {
   describe("valgtArbeidssituasjon", () => {
     it("Returns correct valgtArbeidssituasjon arbeidstaker", () => {
       const outputSM = newSMFormat2OldFormat(
-        mockSykmeldingWithSporsmalOgSvarListe,
+        mockSykmeldingWithSporsmalOgSvarListe(),
         sykmeldtFnr
       );
 
@@ -757,7 +751,7 @@ describe("sykmeldingParser", () => {
 
       const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
 
-      expect(outputSM.valgtArbeidssituasjon).to.deep.equal(null);
+      expect(outputSM.valgtArbeidssituasjon).to.deep.equal(undefined);
     });
   });
 
@@ -776,7 +770,7 @@ describe("sykmeldingParser", () => {
 
       const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
 
-      expect(outputSM.egenmeldt).to.deep.equal(null);
+      expect(outputSM.egenmeldt).to.deep.equal(undefined);
     });
   });
 
@@ -795,7 +789,7 @@ describe("sykmeldingParser", () => {
 
       const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
 
-      expect(outputSM.harRedusertArbeidsgiverperiode).to.deep.equal(null);
+      expect(outputSM.harRedusertArbeidsgiverperiode).to.deep.equal(undefined);
     });
   });
 
@@ -814,7 +808,7 @@ describe("sykmeldingParser", () => {
 
       const outputSM = newSMFormat2OldFormat(mockSM, sykmeldtFnr);
 
-      expect(outputSM.papirsykmelding).to.deep.equal(null);
+      expect(outputSM.papirsykmelding).to.deep.equal(undefined);
     });
   });
 });
@@ -825,8 +819,8 @@ describe("oldFormatSMForAG", () => {
 
     const expectedArbeidsevne = {
       tilretteleggingArbeidsplass: "Tilrettelegging",
-      tiltakAndre: null,
-      tiltakNAV: null,
+      tiltakAndre: undefined,
+      tiltakNAV: undefined,
     };
 
     const outputSM = oldFormatSMForAG(sykmeldingWithArbeidsevne, sykmeldtFnr);
@@ -839,12 +833,12 @@ describe("oldFormatSMForAG", () => {
 
     const expectedDiagnose = {
       bidiagnoser: [],
-      fravaerBeskrivelse: null,
-      fravaersgrunnLovfestet: null,
-      hoveddiagnose: null,
-      svangerskap: null,
-      yrkesskade: null,
-      yrkesskadeDato: null,
+      fravaerBeskrivelse: undefined,
+      fravaersgrunnLovfestet: undefined,
+      hoveddiagnose: undefined,
+      svangerskap: undefined,
+      yrkesskade: undefined,
+      yrkesskadeDato: undefined,
     };
 
     const outputSM = oldFormatSMForAG(sykmeldingWithDiagnose, sykmeldtFnr);
@@ -861,10 +855,10 @@ describe("oldFormatSMForAG", () => {
       antattDatoReturSammeArbeidsgiver: toDate("2020-01-22"),
       arbeidsfoerEtterPerioden: true,
       hensynPaaArbeidsplassen: "Hensyn",
-      tilbakemeldingReturArbeid: null,
-      utenArbeidsgiverAntarTilbakeIArbeid: null,
-      utenArbeidsgiverAntarTilbakeIArbeidDato: null,
-      utenArbeidsgiverTilbakemelding: null,
+      tilbakemeldingReturArbeid: undefined,
+      utenArbeidsgiverAntarTilbakeIArbeid: undefined,
+      utenArbeidsgiverAntarTilbakeIArbeidDato: undefined,
+      utenArbeidsgiverTilbakemelding: undefined,
     };
 
     const outputSM = oldFormatSMForAG(
@@ -878,16 +872,16 @@ describe("oldFormatSMForAG", () => {
   it("Returns correct AG version with friskmelding when SM has Prognose for erIkkeIArbeid", () => {
     const sykmeldingWithPrognoseErIkkeIArbeid = mockSykmeldingWithPrognoseErIkkeIArbeid;
 
-    const expectedFriskmelding = {
-      antarReturAnnenArbeidsgiver: null,
-      antarReturSammeArbeidsgiver: null,
-      antattDatoReturSammeArbeidsgiver: null,
+    const expectedFriskmelding: FriskmeldingDTO = {
+      antarReturAnnenArbeidsgiver: undefined,
+      antarReturSammeArbeidsgiver: undefined,
+      antattDatoReturSammeArbeidsgiver: undefined,
       arbeidsfoerEtterPerioden: false,
       hensynPaaArbeidsplassen: "Hensyn",
-      tilbakemeldingReturArbeid: null,
-      utenArbeidsgiverAntarTilbakeIArbeid: null,
-      utenArbeidsgiverAntarTilbakeIArbeidDato: null,
-      utenArbeidsgiverTilbakemelding: null,
+      tilbakemeldingReturArbeid: undefined,
+      utenArbeidsgiverAntarTilbakeIArbeid: undefined,
+      utenArbeidsgiverAntarTilbakeIArbeidDato: undefined,
+      utenArbeidsgiverTilbakemelding: undefined,
     };
 
     const outputSM = oldFormatSMForAG(
@@ -902,8 +896,8 @@ describe("oldFormatSMForAG", () => {
     const sykmeldingWithMeldingTilNav = mockSykmeldingWithMeldingTilNav;
 
     const expectedMeldingTilNav = {
-      navBoerTaTakISaken: null,
-      navBoerTaTakISakenBegrunnelse: null,
+      navBoerTaTakISaken: undefined,
+      navBoerTaTakISakenBegrunnelse: undefined,
     };
 
     const outputSM = oldFormatSMForAG(sykmeldingWithMeldingTilNav, sykmeldtFnr);
@@ -918,16 +912,14 @@ describe("oldFormatSMForAG", () => {
       aarsakAktivitetIkkeMulig433: undefined,
       aarsakAktivitetIkkeMulig434: "Beskrivelse2",
       aktivitetIkkeMulig433: undefined,
-      aktivitetIkkeMulig434: [
-        arbeidsrelaterteArsakerTekst.MANGLENDE_TILRETTELEGGING,
-      ],
+      aktivitetIkkeMulig434: [arbeidsrelaterteArsakerTekst.ANNET],
       perioder: [
         {
-          avventende: null,
-          behandlingsdager: null,
+          avventende: undefined,
+          behandlingsdager: undefined,
           fom: toDate("2020-01-22"),
           grad: 100,
-          reisetilskudd: null,
+          reisetilskudd: undefined,
           tom: toDate("2020-05-22"),
         },
       ],
@@ -951,19 +943,19 @@ describe("oldFormatSMForAG", () => {
       aktivitetIkkeMulig434: undefined,
       perioder: [
         {
-          avventende: null,
-          behandlingsdager: null,
+          avventende: undefined,
+          behandlingsdager: undefined,
           fom: toDate("2020-01-22"),
           grad: 100,
-          reisetilskudd: null,
+          reisetilskudd: undefined,
           tom: toDate("2020-05-22"),
         },
         {
-          avventende: null,
+          avventende: undefined,
           behandlingsdager: 2,
           fom: toDate("2020-02-17"),
-          grad: null,
-          reisetilskudd: null,
+          grad: undefined,
+          reisetilskudd: undefined,
           tom: toDate("2020-03-01"),
         },
       ],
@@ -982,7 +974,7 @@ describe("oldFormatSMForAG", () => {
 
     const expectedTilbakedatering = {
       dokumenterbarPasientkontakt: toDate("2020-02-02T02:02:02.202Z"),
-      tilbakedatertBegrunnelse: null,
+      tilbakedatertBegrunnelse: undefined,
     };
 
     const outputSM = oldFormatSMForAG(
@@ -996,30 +988,22 @@ describe("oldFormatSMForAG", () => {
   it("Returns correct AG version with utdypendeOpplysninger removed when pkt 6.2", () => {
     const sykmeldingerWithUtdypendeOpplysningerPkt62 = mockSykmeldingerWithUtdypendeOpplysningerPkt62;
 
-    const expectedUtdypendeOpplysninger = {};
-
     const outputSM = oldFormatSMForAG(
-      sykmeldingerWithUtdypendeOpplysningerPkt62,
+      sykmeldingerWithUtdypendeOpplysningerPkt62(),
       sykmeldtFnr
     );
 
-    expect(outputSM.utdypendeOpplysninger).to.deep.equal(
-      expectedUtdypendeOpplysninger
-    );
+    expect(outputSM.utdypendeOpplysninger.size).to.equal(0);
   });
 
   it("Returns correct AG version with utdypendeOpplysninger removed when pkt 6.3", () => {
     const sykmeldingerWithUtdypendeOpplysningerPkt63 = mockSykmeldingerWithUtdypendeOpplysningerPkt63;
 
-    const expectedUtdypendeOpplysninger = {};
-
     const outputSM = oldFormatSMForAG(
-      sykmeldingerWithUtdypendeOpplysningerPkt63,
+      sykmeldingerWithUtdypendeOpplysningerPkt63(),
       sykmeldtFnr
     );
 
-    expect(outputSM.utdypendeOpplysninger).to.deep.equal(
-      expectedUtdypendeOpplysninger
-    );
+    expect(outputSM.utdypendeOpplysninger.size).to.equal(0);
   });
 });

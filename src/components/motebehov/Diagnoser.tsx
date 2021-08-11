@@ -28,7 +28,7 @@ export const DiagnoseBoks = ({ diagnose, erBiDiagnose }: DiagnoseBoksProps) => {
 
 interface DiagnoserProps {
   biDiagnoser: SykmeldingDiagnose[];
-  hovedDiagnose: SykmeldingDiagnose;
+  hovedDiagnose?: SykmeldingDiagnose;
 }
 
 const Diagnoser = (diagnoserProps: DiagnoserProps) => {
