@@ -1,24 +1,15 @@
 import React, { ReactElement } from "react";
 import Panel from "nav-frontend-paneler";
-import Alertstripe from "nav-frontend-alertstriper";
-import { Leder } from "../../data/leder/ledere";
 import HistorikkEventItem from "./HistorikkEventItem";
-import AppSpinner from "../AppSpinner";
-import IngenHistorikk from "./IngenHistorikk";
 import UtvidbarHistorikk from "./UtvidbarHistorikk";
-import Sidetopp from "../Sidetopp";
 import {
   TilfellePeriode,
-  tilfellerFromTilfelleperioder,
   tilfellerNewestToOldest,
 } from "../../utils/periodeUtils";
 import { tilLesbarPeriodeMedArstall } from "../../utils/datoUtils";
-import { HistorikkState } from "../../data/historikk/historikk";
-import { OppfolgingstilfelleperioderMapState } from "../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
 import { HistorikkEvent } from "../../data/historikk/types/historikkTypes";
 
 const texts = {
-  topp: "Logg",
   errorMessage:
     "Det skjedde en feil! Det er ikke sikkert du får all historikken som finnes.",
   tidligereHendelserUtvidbarTitle: "Tidligere hendelser",
@@ -54,23 +45,6 @@ const hentSykeforloepMedEvents = (
   });
 };
 
-const createHistorikkEventsFromLedere = (ledere: Leder[]): HistorikkEvent[] => {
-  return ledere.map((leder) => ({
-    opprettetAv: leder.organisasjonsnavn,
-    tekst: `${leder.organisasjonsnavn} har oppgitt ${leder.navn} som nærmeste leder`,
-    tidspunkt: leder.fomDato,
-    kilde: "LEDER",
-  }));
-};
-
-const Feilmelding = () => {
-  return (
-    <Alertstripe type="advarsel" className="blokk">
-      <p>{texts.errorMessage}</p>
-    </Alertstripe>
-  );
-};
-
 interface TidligereHendelserProps {
   eventsForForsteSykefravaer: HistorikkEvent[];
 }
@@ -96,9 +70,8 @@ const TidligereHendelser = ({
 };
 
 interface HistorikkProps {
-  historikk: HistorikkState;
-  ledere: Leder[];
-  oppfolgingstilfelleperioder: OppfolgingstilfelleperioderMapState;
+  historikkEvents: HistorikkEvent[];
+  tilfeller: TilfellePeriode[];
 }
 
 type TilfellePerioderMedSkyggeFom = TilfellePeriode & { skyggeFom: Date };
@@ -128,32 +101,9 @@ const tilfellerSortertMedSkyggeFom = (
 };
 
 const Historikk = ({
-  historikk,
-  ledere,
-  oppfolgingstilfelleperioder,
+  historikkEvents,
+  tilfeller,
 }: HistorikkProps): ReactElement => {
-  const tilfeller = tilfellerFromTilfelleperioder(oppfolgingstilfelleperioder);
-  const lederHistorikk = createHistorikkEventsFromLedere(ledere);
-  const historikkEvents = historikk.motebehovHistorikk
-    .concat(historikk.moteHistorikk)
-    .concat(historikk.oppfoelgingsdialogHistorikk)
-    .concat(lederHistorikk);
-  const hentetHistorikk =
-    historikk.hentetMoter &&
-    historikk.hentetMotebehov &&
-    historikk.hentetOppfoelgingsdialoger;
-  const henterHistorikk =
-    historikk.henterOppfoelgingsdialoger ||
-    historikk.henterMotebehov ||
-    historikk.henterMoter;
-
-  if (
-    tilfeller.length === 0 ||
-    (hentetHistorikk && historikkEvents.length === 0)
-  ) {
-    return <IngenHistorikk />;
-  }
-
   const tilfellerSortert = tilfellerSortertMedSkyggeFom(tilfeller);
   const eventsEtterSisteSykefravaer = historikkEvents.filter(
     (event: HistorikkEvent) => {
@@ -175,48 +125,43 @@ const Historikk = ({
 
   return (
     <>
-      {historikk.hentingFeilet && <Feilmelding />}
-      <Sidetopp tittel={texts.topp} />
-      <>
-        {henterHistorikk && <AppSpinner />}
-        {eventsEtterSisteSykefravaer.length > 0 && (
-          <Panel className="blokk">
-            <h2 className="panel__tittel">{texts.laterEventsTitle}</h2>
-            <ol className="historikkeventliste">
-              {eventsEtterSisteSykefravaer
-                .sort(byTidspunkt())
-                .map((event: HistorikkEvent, index: number) => (
-                  <HistorikkEventItem event={event} key={index} />
-                ))}
-            </ol>
-          </Panel>
-        )}
-        {perioderMedEvents.length > 0 && (
-          <div className="blokk--l">
-            <h2 className="panel__tittel">{texts.tilfellerTitle}</h2>
-            {perioderMedEvents.map(
-              (periode: TilfellePerioderMedSkyggeFom, index: number) => (
-                <UtvidbarHistorikk
-                  key={index}
-                  tittel={tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}
-                >
-                  <ol className="historikkeventliste">
-                    {historikkEvents
-                      .filter((event) => isEventInPeriode(event, periode))
-                      .sort(byTidspunkt())
-                      .map((event, idx) => (
-                        <HistorikkEventItem key={idx} event={event} />
-                      ))}
-                  </ol>
-                </UtvidbarHistorikk>
-              )
-            )}
-          </div>
-        )}
-        <TidligereHendelser
-          eventsForForsteSykefravaer={eventsForForsteSykefravaer}
-        />
-      </>
+      {eventsEtterSisteSykefravaer.length > 0 && (
+        <Panel className="blokk">
+          <h2 className="panel__tittel">{texts.laterEventsTitle}</h2>
+          <ol className="historikkeventliste">
+            {eventsEtterSisteSykefravaer
+              .sort(byTidspunkt())
+              .map((event: HistorikkEvent, index: number) => (
+                <HistorikkEventItem event={event} key={index} />
+              ))}
+          </ol>
+        </Panel>
+      )}
+      {perioderMedEvents.length > 0 && (
+        <div className="blokk--l">
+          <h2 className="panel__tittel">{texts.tilfellerTitle}</h2>
+          {perioderMedEvents.map(
+            (periode: TilfellePerioderMedSkyggeFom, index: number) => (
+              <UtvidbarHistorikk
+                key={index}
+                tittel={tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}
+              >
+                <ol className="historikkeventliste">
+                  {historikkEvents
+                    .filter((event) => isEventInPeriode(event, periode))
+                    .sort(byTidspunkt())
+                    .map((event, idx) => (
+                      <HistorikkEventItem key={idx} event={event} />
+                    ))}
+                </ol>
+              </UtvidbarHistorikk>
+            )
+          )}
+        </div>
+      )}
+      <TidligereHendelser
+        eventsForForsteSykefravaer={eventsForForsteSykefravaer}
+      />
     </>
   );
 };

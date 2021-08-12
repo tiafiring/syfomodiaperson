@@ -11,16 +11,42 @@ import { useValgtPersonident } from "../../../hooks/useValgtBruker";
 import { hentHistorikk } from "../../../data/historikk/historikk_actions";
 import { hentLedere } from "../../../data/leder/ledere_actions";
 import { hentOppfolgingstilfelleperioder } from "../../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder_actions";
+import { tilfellerFromTilfelleperioder } from "../../../utils/periodeUtils";
+import { Leder } from "../../../data/leder/ledere";
+import { HistorikkEvent } from "../../../data/historikk/types/historikkTypes";
+import IngenHistorikk from "../IngenHistorikk";
+import { useHistorikk } from "../../../data/historikk/historikk_hooks";
+import Sidetopp from "../../Sidetopp";
 
 const texts = {
+  topp: "Logg",
   pageTitle: "Historikk",
   errorTitle: "Du har ikke tilgang til denne tjenesten",
+};
+
+const createHistorikkEventsFromLedere = (ledere: Leder[]): HistorikkEvent[] => {
+  return ledere.map((leder) => ({
+    opprettetAv: leder.organisasjonsnavn,
+    tekst: `${leder.organisasjonsnavn} har oppgitt ${leder.navn} som nærmeste leder`,
+    tidspunkt: leder.fomDato,
+    kilde: "LEDER",
+  }));
 };
 
 export const HistorikkContainer = (): ReactElement => {
   const fnr = useValgtPersonident();
   const dispatch = useDispatch();
-  const historikkState = useAppSelector((state) => state.historikk);
+  const {
+    henterHistorikk,
+    hentetHistorikk,
+    hentingHistorikkFeilet,
+    skalHenteMoter,
+    skalHenteMotebehov,
+    skalHenteOppfoelgingsdialoger,
+    moteHistorikk,
+    motebehovHistorikk,
+    oppfoelgingsdialogHistorikk,
+  } = useHistorikk();
   const oppfolgingstilfelleperioder = useAppSelector(
     (state) => state.oppfolgingstilfelleperioder
   );
@@ -35,8 +61,10 @@ export const HistorikkContainer = (): ReactElement => {
   const henterTilfeller = Object.keys(oppfolgingstilfelleperioder).some(
     (orgnummer) => oppfolgingstilfelleperioder[orgnummer].henter
   );
-  const henter = henterTilgang || henterLedere || henterTilfeller;
-  const hentingFeilet = hentingTilgangFeilet || hentingLedereFeilet;
+  const henter =
+    henterTilgang || henterLedere || henterTilfeller || henterHistorikk;
+  const hentingFeilet =
+    hentingTilgangFeilet || hentingLedereFeilet || hentingHistorikkFeilet;
 
   const allLedere = useMemo(() => [...currentLedere, ...formerLedere], [
     currentLedere,
@@ -44,35 +72,22 @@ export const HistorikkContainer = (): ReactElement => {
   ]);
 
   useEffect(() => {
-    if (!historikkState.henterMoter && !historikkState.hentetMoter) {
+    if (skalHenteMoter) {
       dispatch(hentHistorikk(fnr, "MOTER"));
     }
-  }, [dispatch, fnr, historikkState.henterMoter, historikkState.hentetMoter]);
+  }, [dispatch, fnr, skalHenteMoter]);
 
   useEffect(() => {
-    if (!historikkState.henterMotebehov && !historikkState.hentetMotebehov) {
+    if (skalHenteMotebehov) {
       dispatch(hentHistorikk(fnr, "MOTEBEHOV"));
     }
-  }, [
-    dispatch,
-    fnr,
-    historikkState.henterMotebehov,
-    historikkState.hentetMotebehov,
-  ]);
+  }, [dispatch, fnr, skalHenteMotebehov]);
 
   useEffect(() => {
-    if (
-      !historikkState.henterOppfoelgingsdialoger &&
-      !historikkState.hentetOppfoelgingsdialoger
-    ) {
+    if (skalHenteOppfoelgingsdialoger) {
       dispatch(hentHistorikk(fnr, "OPPFOELGINGSDIALOG"));
     }
-  }, [
-    dispatch,
-    fnr,
-    historikkState.henterOppfoelgingsdialoger,
-    historikkState.hentetOppfoelgingsdialoger,
-  ]);
+  }, [dispatch, fnr, skalHenteOppfoelgingsdialoger]);
 
   useEffect(() => {
     dispatch(hentLedere(fnr));
@@ -84,14 +99,24 @@ export const HistorikkContainer = (): ReactElement => {
     }
   }, [dispatch, fnr, allLedere]);
 
+  const tilfeller = tilfellerFromTilfelleperioder(oppfolgingstilfelleperioder);
+  const lederHistorikk = createHistorikkEventsFromLedere(allLedere);
+  const historikkEvents = motebehovHistorikk
+    .concat(moteHistorikk)
+    .concat(oppfoelgingsdialogHistorikk)
+    .concat(lederHistorikk);
+  const ingenHistorikk =
+    tilfeller.length === 0 || (hentetHistorikk && historikkEvents.length === 0);
+
   return (
     <Side fnr={fnr} tittel={texts.pageTitle} aktivtMenypunkt={HISTORIKK}>
       <SideLaster henter={henter} hentingFeilet={hentingFeilet}>
-        <Historikk
-          oppfolgingstilfelleperioder={oppfolgingstilfelleperioder}
-          historikk={historikkState}
-          ledere={allLedere}
-        />
+        <Sidetopp tittel={texts.topp} />
+        {ingenHistorikk ? (
+          <IngenHistorikk />
+        ) : (
+          <Historikk historikkEvents={historikkEvents} tilfeller={tilfeller} />
+        )}
       </SideLaster>
     </Side>
   );
