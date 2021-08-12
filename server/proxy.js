@@ -5,43 +5,13 @@ const axios = require("axios");
 
 const Config = require("./config.js");
 
-const flexInternGatewayUrl =
-  process.env.NAIS_CONTEXT === "dev"
-    ? "flex-intern-gateway.dev.intern.nav.no"
-    : "flex-intern-gateway.intern.nav.no";
-
-const syfopersonHost =
-  process.env.NAIS_CONTEXT === "dev"
-    ? "https://syfoperson.dev.intern.nav.no"
-    : "https://syfoperson.intern.nav.no";
-
-const ispersonoppgaveHost =
-  process.env.NAIS_CONTEXT === "dev"
-    ? "ispersonoppgave.dev.intern.nav.no"
-    : "ispersonoppgave.intern.nav.no";
-
-const isdialogmoteHost =
-  process.env.NAIS_CONTEXT === "dev"
-    ? "isdialogmote.dev.intern.nav.no"
-    : "isdialogmote.intern.nav.no";
-
-const syfoveilederHost =
-  process.env.NAIS_CONTEXT === "dev"
-    ? "https://syfoveileder.dev.intern.nav.no"
-    : "https://syfoveileder.intern.nav.no";
-
-const syfooppfolgingsplanserviceHost =
-  process.env.NAIS_CONTEXT === "dev"
-    ? "https://syfooppfolgingsplanservice.dev.intern.nav.no"
-    : "https://syfooppfolgingsplanservice.intern.nav.no";
-
 const setup = () => {
   const router = express.Router();
 
   router.use(
     "/fastlegerest/api",
-    proxy("fastlegerest.teamsykefravr", {
-      https: false,
+    proxy(Config.auth.fastlegerest.host, {
+      https: true,
       proxyReqPathResolver: function (req) {
         return `/fastlegerest/api${req.url}`;
       },
@@ -55,7 +25,7 @@ const setup = () => {
   router.use(
     "/ispersonoppgave/api/get",
     cookieParser(),
-    proxy(ispersonoppgaveHost, {
+    proxy(Config.auth.ispersonoppgave.host, {
       https: true,
       parseReqBody: false,
       proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
@@ -76,8 +46,8 @@ const setup = () => {
 
   router.use(
     "/syfo-tilgangskontroll/api",
-    proxy("syfo-tilgangskontroll.teamsykefravr", {
-      https: false,
+    proxy(Config.auth.syfotilgangskontroll.host, {
+      https: true,
       proxyReqPathResolver: function (req) {
         return `/syfo-tilgangskontroll/api${req.url}`;
       },
@@ -105,7 +75,7 @@ const setup = () => {
   router.use(
     "/ispersonoppgave/api/post",
     cookieParser(),
-    proxy(ispersonoppgaveHost, {
+    proxy(Config.auth.ispersonoppgave.host, {
       https: true,
       parseReqBody: true,
       proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
@@ -127,7 +97,7 @@ const setup = () => {
   router.use(
     "/isdialogmote/api/get",
     cookieParser(),
-    proxy(isdialogmoteHost, {
+    proxy(Config.auth.isdialogmote.host, {
       https: true,
       parseReqBody: false,
       proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
@@ -149,7 +119,7 @@ const setup = () => {
   router.use(
     "/isdialogmote/api/post",
     cookieParser(),
-    proxy(isdialogmoteHost, {
+    proxy(Config.auth.isdialogmote.host, {
       https: true,
       parseReqBody: true,
       proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
@@ -169,8 +139,8 @@ const setup = () => {
 
   router.use(
     "/modiasyforest/api",
-    proxy("modiasyforest.teamsykefravr", {
-      https: false,
+    proxy(Config.auth.modiasyforest.host, {
+      https: true,
       proxyReqPathResolver: function (req) {
         return `/modiasyforest/api${req.url}`;
       },
@@ -183,7 +153,8 @@ const setup = () => {
 
   router.use(
     "/syfooppfolgingsplanservice/api",
-    proxy(syfooppfolgingsplanserviceHost, {
+    proxy(Config.auth.syfooppfolgingsplanservice.host, {
+      https: true,
       proxyReqPathResolver: function (req) {
         return `/syfooppfolgingsplanservice/api${req.url}`;
       },
@@ -199,8 +170,8 @@ const setup = () => {
 
   router.use(
     "/syfomoteadmin/api",
-    proxy("syfomoteadmin.teamsykefravr", {
-      https: false,
+    proxy(Config.auth.syfomoteadmin.host, {
+      https: true,
       proxyReqPathResolver: function (req) {
         return `/syfomoteadmin/api${req.url}`;
       },
@@ -221,7 +192,7 @@ const setup = () => {
       },
     };
 
-    const url = `https://${flexInternGatewayUrl}/spinnsyn-backend/api/v1/veileder/vedtak?fnr=${fnr}`;
+    const url = `https://${Config.auth.flexInternGateway.host}/spinnsyn-backend/api/v1/veileder/vedtak?fnr=${fnr}`;
     axios
       .get(url, options)
       .then((response) => {
@@ -235,8 +206,8 @@ const setup = () => {
 
   router.use(
     "/syfomotebehov/api",
-    proxy("syfomotebehov.team-esyfo", {
-      https: false,
+    proxy(Config.auth.syfomotebehov.host, {
+      https: true,
       proxyReqPathResolver: function (req) {
         return `/syfomotebehov/api${req.url}`;
       },
@@ -249,8 +220,8 @@ const setup = () => {
 
   router.use(
     "/syfosoknad/api",
-    proxy("syfosoknad.flex", {
-      https: false,
+    proxy(Config.auth.syfosoknad.host, {
+      https: true,
       proxyReqPathResolver: function (req) {
         return `/syfosoknad/api${req.url}`;
       },
@@ -263,8 +234,8 @@ const setup = () => {
 
   router.use(
     "/syfobehandlendeenhet/api",
-    proxy("syfobehandlendeenhet.teamsykefravr", {
-      https: false,
+    proxy(Config.auth.syfobehandlendeenhet.host, {
+      https: true,
       proxyReqPathResolver: function (req) {
         return `/api${req.url}`;
       },
@@ -277,7 +248,8 @@ const setup = () => {
 
   router.use(
     "/syfoperson/api",
-    proxy(syfopersonHost, {
+    proxy(Config.auth.syfoperson.host, {
+      https: true,
       proxyReqPathResolver: function (req) {
         return `/syfoperson/api${req.url}`;
       },
@@ -298,8 +270,7 @@ const setup = () => {
       },
     };
 
-    const url =
-      "http://syfosmregister.teamsykmelding/api/v1/internal/sykmeldinger";
+    const url = `http://${Config.auth.syfosmregister.host}/api/v1/internal/sykmeldinger`;
     axios
       .get(url, options)
       .then((response) => {
@@ -325,7 +296,10 @@ const setup = () => {
       };
 
       axios
-        .get(`http://ispengestopp.teamsykefravr/api/v1/person/status`, options)
+        .get(
+          `http://${Config.auth.ispengestopp.host}/api/v1/person/status`,
+          options
+        )
         .then((response) => {
           if (response.status === 204) {
             res.sendStatus(204);
@@ -352,9 +326,13 @@ const setup = () => {
       const data = req.body;
 
       axios
-        .post(`http://ispengestopp.teamsykefravr/api/v1/person/flagg`, data, {
-          headers,
-        })
+        .post(
+          `http://${Config.auth.ispengestopp.host}/api/v1/person/flagg`,
+          data,
+          {
+            headers,
+          }
+        )
         .then((response) => {
           res.sendStatus(response.status);
         })
@@ -375,7 +353,7 @@ const setup = () => {
     };
 
     axios
-      .get(`http://isprediksjon.teamsykefravr/api/v1/prediksjon`, options)
+      .get(`http://${Config.auth.isprediksjon.host}/api/v1/prediksjon`, options)
       .then((response) => {
         if (response.status === 204) {
           res.sendStatus(204);
@@ -391,7 +369,8 @@ const setup = () => {
 
   router.use(
     "/syfoveileder/api",
-    proxy(syfoveilederHost, {
+    proxy(Config.auth.syfoveileder.host, {
+      https: true,
       proxyReqPathResolver: function (req) {
         return `/syfoveileder/api/v1/${req.url}`;
       },

@@ -41,5 +41,38 @@ spec:
       value: 'dev'
     - name: NODE_ENV
       value: "production"
+    - name: FASTLEGEREST_HOST
+      value: "fastlegerest.dev.intern.nav.no"
+    - name: FLEX_INTERN_GATEWAY_HOST
+      value: "flex-intern-gateway.dev.intern.nav.no"
+    - name: ISDIALOGMOTE_HOST
+      value: "isdialogmote.dev.intern.nav.no"
+    - name: ISPENGESTOPP_HOST
+      value: "ispengestopp.teamsykefravr"
+    - name: ISPERSONOPPGAVE_HOST
+      value: "ispersonoppgave.dev.intern.nav.no"
+    - name: ISPREDIKSJON_HOST
+      value: "isprediksjon.teamsykefravr"
     - name: MODIACONTEXTHOLDER_HOST
       value: "modiacontextholder-q0.dev.adeo.no"
+    - name: MODIASYFOREST_HOST
+      value: "modiasyforest.dev.intern.nav.no"
+    - name: SYFOBEHANDLENDEENHET_HOST
+      value: "syfobehandlendeenhet.dev.intern.nav.no"
+    - name: SYFOMOTEADMIN_HOST
+      value: "syfomoteadmin.dev.intern.nav.no"
+    - name: SYFOMOTEBEHOV_HOST
+      value: "syfomotebehov.dev.intern.nav.no"
+    - name: SYFOOPPFOLGINGSPLANSERVICE_HOST
+      value: "syfooppfolgingsplanservice.dev.intern.nav.no"
+    - name: SYFOPERSON_HOST
+      value: "syfoperson.dev.intern.nav.no"
+    - name: SYFOSMREGISTER_HOST
+      value: "syfosmregister.teamsykmelding"
+    - name: SYFOSOKNAD_HOST
+      value: "syfosoknad.dev.intern.nav.no"
+    - name: SYFOTILGANGSKONTROLL_HOST
+      value: "syfo-tilgangskontroll.dev.intern.nav.no"
+    - name: SYFOVEILEDER_HOST
+      value: "syfoveileder.dev.intern.nav.no"
+
