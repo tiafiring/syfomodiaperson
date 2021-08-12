@@ -28,7 +28,7 @@ const KoronaSykmeldingNy = (
       <Undertittel style={{ marginBottom: "2.5rem", textAlign: "center" }}>
         {texts.pageSubtitle}
       </Undertittel>
-      <Hjelpeboble className="blokk" hvit stor>
+      <Hjelpeboble className="blokk" hvit bildeAlt={texts.infotext1}>
         <>
           <Normaltekst style={{ marginBottom: "1rem" }}>
             {texts.infotext1}

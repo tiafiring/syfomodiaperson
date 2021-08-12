@@ -30,7 +30,7 @@ const DinSykmelding = (dinSykmeldingProps: DinSykmeldingProps) => {
   } = dinSykmeldingProps;
   return (
     <div>
-      <Hjelpeboble className="blokk" hvit stor>
+      <Hjelpeboble className="blokk" hvit bildeAlt={texts.bjorn}>
         <div>
           <p>{texts.bjorn}</p>
           <p className="introtekst__knapperad">
