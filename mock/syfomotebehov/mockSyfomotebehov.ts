@@ -1,6 +1,6 @@
 import { motebehovMock } from "../data/motebehovMock";
-import { historikkmoterMock } from "../data/historikkmoterMock";
 import { SYFOMOTEBEHOV_ROOT } from "../../src/apiConstants";
+import { historikkmotebehovMock } from "../data/historikkmotebehovMock";
 
 export const mockSyfomotebehov = (server) => {
   server.get(`${SYFOMOTEBEHOV_ROOT}/motebehov`, (req, res) => {
@@ -14,7 +14,7 @@ export const mockSyfomotebehov = (server) => {
 
   server.get(`${SYFOMOTEBEHOV_ROOT}/historikk`, (req, res) => {
     res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(historikkmoterMock));
+    res.send(JSON.stringify(historikkmotebehovMock));
   });
 
   server.post(`${SYFOMOTEBEHOV_ROOT}/motebehov/:fnr/behandle`, (req, res) => {

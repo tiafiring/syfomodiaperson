@@ -1,10 +1,22 @@
 import { Reducer } from "redux";
-import { Historikk } from "./types/Historikk";
+import { HistorikkEvent, HistorikkKilde } from "./types/historikkTypes";
+import {
+  HENT_HISTORIKK_FEILET_MOTEBEHOV,
+  HENT_HISTORIKK_FEILET_MOTER,
+  HENT_HISTORIKK_FEILET_OPPFOELGINGSDIALOG,
+  HENTER_HISTORIKK_MOTEBEHOV,
+  HENTER_HISTORIKK_MOTER,
+  HENTER_HISTORIKK_OPPFOELGINGSDIALOG,
+  HISTORIKK_HENTET_MOTEBEHOV,
+  HISTORIKK_HENTET_MOTER,
+  HISTORIKK_HENTET_OPPFOELGINGSDIALOG,
+  HistorikkActions,
+} from "./historikk_actions";
 
 export interface HistorikkState {
-  moteHistorikk: Historikk[];
-  motebehovHistorikk: Historikk[];
-  oppfoelgingsdialogHistorikk: Historikk[];
+  moteHistorikk: HistorikkEvent[];
+  motebehovHistorikk: HistorikkEvent[];
+  oppfoelgingsdialogHistorikk: HistorikkEvent[];
   hentingFeilet: boolean;
   henterMoter: boolean;
   hentetMoter: boolean;
@@ -27,77 +39,86 @@ export const initialState: HistorikkState = {
   hentetOppfoelgingsdialoger: false,
 };
 
-const historikk: Reducer<HistorikkState> = (state = initialState, action) => {
-  switch (action.type) {
-    case "HISTORIKK_HENTET_MOTER": {
-      const nyHistorikk = action.data.map(() => {
-        return Object.assign({}, historikk, {
-          kilde: "MOTER",
-        });
-      });
+const mapHistorikkEvents = (
+  events: HistorikkEvent[],
+  kilde: HistorikkKilde
+): HistorikkEvent[] => {
+  return events.map((event) => ({
+    ...event,
+    kilde,
+  }));
+};
 
-      return Object.assign({}, state, {
+const historikk: Reducer<HistorikkState, HistorikkActions> = (
+  state = initialState,
+  action
+) => {
+  switch (action.type) {
+    case HISTORIKK_HENTET_MOTER: {
+      return {
+        ...state,
         henterMoter: false,
         hentetMoter: true,
-        moteHistorikk: nyHistorikk,
-      });
+        moteHistorikk: mapHistorikkEvents(action.data, "MOTER"),
+      };
     }
-    case "HISTORIKK_HENTET_MOTEBEHOV": {
-      const nyHistorikk = action.data.map((event: Historikk) => {
-        return Object.assign({}, event, {
-          kilde: "MOTEBEHOV",
-        });
-      });
-      return Object.assign({}, state, {
+    case HISTORIKK_HENTET_MOTEBEHOV: {
+      return {
+        ...state,
         henterMotebehov: false,
         hentetMotebehov: true,
-        motebehovHistorikk: nyHistorikk,
-      });
+        motebehovHistorikk: mapHistorikkEvents(action.data, "MOTEBEHOV"),
+      };
     }
-    case "HISTORIKK_HENTET_OPPFOELGINGSDIALOG": {
-      const nyHistorikk = action.data.map((event: Historikk) => {
-        return Object.assign({}, event, {
-          kilde: "OPPFOELGINGSDIALOG",
-        });
-      });
-      return Object.assign({}, state, {
+    case HISTORIKK_HENTET_OPPFOELGINGSDIALOG: {
+      return {
+        ...state,
         henterOppfoelgingsdialoger: false,
         hentetOppfoelgingsdialoger: true,
-        oppfoelgingsdialogHistorikk: nyHistorikk,
-      });
+        oppfoelgingsdialogHistorikk: mapHistorikkEvents(
+          action.data,
+          "OPPFOELGINGSDIALOG"
+        ),
+      };
     }
-    case "HENTER_HISTORIKK_MOTER": {
-      return Object.assign({}, state, {
+    case HENTER_HISTORIKK_MOTER: {
+      return {
+        ...state,
         henterMoter: true,
-      });
+      };
     }
-    case "HENTER_HISTORIKK_MOTEBEHOV": {
-      return Object.assign({}, state, {
+    case HENTER_HISTORIKK_MOTEBEHOV: {
+      return {
+        ...state,
         henterMotebehov: true,
-      });
+      };
     }
-    case "HENTER_HISTORIKK_OPPFOELGINGSDIALOG": {
-      return Object.assign({}, state, {
+    case HENTER_HISTORIKK_OPPFOELGINGSDIALOG: {
+      return {
+        ...state,
         henterOppfoelgingsdialoger: true,
-      });
+      };
     }
-    case "HENT_HISTORIKK_FEILET_MOTER": {
-      return Object.assign({}, state, {
+    case HENT_HISTORIKK_FEILET_MOTER: {
+      return {
+        ...state,
         henterMoter: false,
         hentingFeilet: true,
-      });
+      };
     }
-    case "HENT_HISTORIKK_FEILET_MOTEBEHOV": {
-      return Object.assign({}, state, {
+    case HENT_HISTORIKK_FEILET_MOTEBEHOV: {
+      return {
+        ...state,
         henterMotebehov: false,
         hentingFeilet: true,
-      });
+      };
     }
-    case "HENT_HISTORIKK_FEILET_OPPFOELGINGSDIALOG": {
-      return Object.assign({}, state, {
+    case HENT_HISTORIKK_FEILET_OPPFOELGINGSDIALOG: {
+      return {
+        ...state,
         henterOppfoelgingsdialoger: false,
         hentingFeilet: true,
-      });
+      };
     }
     default: {
       return state;
