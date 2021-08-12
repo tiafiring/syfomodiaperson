@@ -24,6 +24,10 @@ const isProd = envVar({ name: "NODE_ENV" }) === "production";
 
 // For auth
 const auth = {
+  internarbeidsflatedecoratorHost: envVar({
+    name: "INTERNARBEIDSFLATEDECORATOR_HOST",
+  }),
+
   fastlegerest: {
     host: envVar({
       name: "FASTLEGEREST_HOST",

@@ -45,6 +45,8 @@ spec:
       value: "fastlegerest.intern.nav.no"
     - name: FLEX_INTERN_GATEWAY_HOST
       value: "flex-intern-gateway.intern.nav.no"
+    - name: INTERNARBEIDSFLATEDECORATOR_HOST
+      value: "internarbeidsflatedecorator.intern.nav.no"
     - name: ISDIALOGMOTE_HOST
       value: "isdialogmote.intern.nav.no"
     - name: ISPENGESTOPP_HOST
