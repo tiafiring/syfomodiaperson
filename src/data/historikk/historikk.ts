@@ -1,17 +1,6 @@
 import { Reducer } from "redux";
 import { HistorikkEvent, HistorikkKilde } from "./types/historikkTypes";
-import {
-  HENT_HISTORIKK_FEILET_MOTEBEHOV,
-  HENT_HISTORIKK_FEILET_MOTER,
-  HENT_HISTORIKK_FEILET_OPPFOELGINGSDIALOG,
-  HENTER_HISTORIKK_MOTEBEHOV,
-  HENTER_HISTORIKK_MOTER,
-  HENTER_HISTORIKK_OPPFOELGINGSDIALOG,
-  HISTORIKK_HENTET_MOTEBEHOV,
-  HISTORIKK_HENTET_MOTER,
-  HISTORIKK_HENTET_OPPFOELGINGSDIALOG,
-  HistorikkActions,
-} from "./historikk_actions";
+import { HistorikkActions, HistorikkActionTypes } from "./historikk_actions";
 
 export interface HistorikkState {
   moteHistorikk: HistorikkEvent[];
@@ -54,7 +43,7 @@ const historikk: Reducer<HistorikkState, HistorikkActions> = (
   action
 ) => {
   switch (action.type) {
-    case HISTORIKK_HENTET_MOTER: {
+    case HistorikkActionTypes.HISTORIKK_HENTET_MOTER: {
       return {
         ...state,
         henterMoter: false,
@@ -62,7 +51,7 @@ const historikk: Reducer<HistorikkState, HistorikkActions> = (
         moteHistorikk: mapHistorikkEvents(action.data, "MOTER"),
       };
     }
-    case HISTORIKK_HENTET_MOTEBEHOV: {
+    case HistorikkActionTypes.HISTORIKK_HENTET_MOTEBEHOV: {
       return {
         ...state,
         henterMotebehov: false,
@@ -70,7 +59,7 @@ const historikk: Reducer<HistorikkState, HistorikkActions> = (
         motebehovHistorikk: mapHistorikkEvents(action.data, "MOTEBEHOV"),
       };
     }
-    case HISTORIKK_HENTET_OPPFOELGINGSDIALOG: {
+    case HistorikkActionTypes.HISTORIKK_HENTET_OPPFOELGINGSDIALOG: {
       return {
         ...state,
         henterOppfoelgingsdialoger: false,
@@ -81,39 +70,39 @@ const historikk: Reducer<HistorikkState, HistorikkActions> = (
         ),
       };
     }
-    case HENTER_HISTORIKK_MOTER: {
+    case HistorikkActionTypes.HENTER_HISTORIKK_MOTER: {
       return {
         ...state,
         henterMoter: true,
       };
     }
-    case HENTER_HISTORIKK_MOTEBEHOV: {
+    case HistorikkActionTypes.HENTER_HISTORIKK_MOTEBEHOV: {
       return {
         ...state,
         henterMotebehov: true,
       };
     }
-    case HENTER_HISTORIKK_OPPFOELGINGSDIALOG: {
+    case HistorikkActionTypes.HENTER_HISTORIKK_OPPFOELGINGSDIALOG: {
       return {
         ...state,
         henterOppfoelgingsdialoger: true,
       };
     }
-    case HENT_HISTORIKK_FEILET_MOTER: {
+    case HistorikkActionTypes.HENT_HISTORIKK_FEILET_MOTER: {
       return {
         ...state,
         henterMoter: false,
         hentingFeilet: true,
       };
     }
-    case HENT_HISTORIKK_FEILET_MOTEBEHOV: {
+    case HistorikkActionTypes.HENT_HISTORIKK_FEILET_MOTEBEHOV: {
       return {
         ...state,
         henterMotebehov: false,
         hentingFeilet: true,
       };
     }
-    case HENT_HISTORIKK_FEILET_OPPFOELGINGSDIALOG: {
+    case HistorikkActionTypes.HENT_HISTORIKK_FEILET_OPPFOELGINGSDIALOG: {
       return {
         ...state,
         henterOppfoelgingsdialoger: false,

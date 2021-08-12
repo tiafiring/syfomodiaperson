@@ -8,13 +8,11 @@ import {
   SYFOOPPFOLGINGSPLANSERVICE_ROOT,
 } from "../../apiConstants";
 import {
-  HENT_HISTORIKK_MOTEBEHOV,
-  HENT_HISTORIKK_MOTER,
-  HENT_HISTORIKK_OPPFOELGINGSDIALOG,
   HentHistorikkAction,
   henterHistorikk,
   historikkHentet,
   hentHistorikkFeilet,
+  HistorikkActionTypes,
 } from "./historikk_actions";
 
 export function* hentHistorikkOppfoelgingsdialog(action: HentHistorikkAction) {
@@ -61,9 +59,15 @@ export function* hentHistorikkMotebehov(action: HentHistorikkAction) {
 
 export default function* historikkSagas() {
   yield takeEvery(
-    HENT_HISTORIKK_OPPFOELGINGSDIALOG,
+    HistorikkActionTypes.HENT_HISTORIKK_OPPFOELGINGSDIALOG,
     hentHistorikkOppfoelgingsdialog
   );
-  yield takeEvery(HENT_HISTORIKK_MOTER, hentHistorikkMoter);
-  yield takeEvery(HENT_HISTORIKK_MOTEBEHOV, hentHistorikkMotebehov);
+  yield takeEvery(
+    HistorikkActionTypes.HENT_HISTORIKK_MOTER,
+    hentHistorikkMoter
+  );
+  yield takeEvery(
+    HistorikkActionTypes.HENT_HISTORIKK_MOTEBEHOV,
+    hentHistorikkMotebehov
+  );
 }
