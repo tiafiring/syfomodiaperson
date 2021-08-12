@@ -2,25 +2,107 @@ const express = require("express");
 const proxy = require("express-http-proxy");
 const cookieParser = require("cookie-parser");
 const axios = require("axios");
+const url = require("url");
 
 const Config = require("./config.js");
+
+const proxyExternalHost = (host, parseReqBody) =>
+  proxy(host, {
+    https: true,
+    parseReqBody: parseReqBody,
+    proxyReqOptDecorator: async (options, srcReq) => {
+      if (!options.headers) {
+        options.headers = {};
+      }
+      return options;
+    },
+    proxyReqPathResolver: (req) => {
+      const urlFromApi = url.parse(host);
+      const pathFromApi =
+        urlFromApi.pathname === "/" ? "" : urlFromApi.pathname;
+
+      const urlFromRequest = url.parse(req.originalUrl);
+      const pathFromRequest = urlFromRequest.pathname;
+
+      const queryString = urlFromRequest.query;
+      const newPath =
+        (pathFromApi ? pathFromApi : "") +
+        (pathFromRequest ? pathFromRequest : "") +
+        (queryString ? "?" + queryString : "");
+
+      if (host === Config.auth.syfobehandlendeenhet.host) {
+        const newPathSyfobehandlendeenhet = newPath.replace(
+          "syfobehandlendeenhet/",
+          ""
+        );
+        return `https://${newPathSyfobehandlendeenhet}`;
+      }
+      return `https://${newPath}`;
+    },
+    proxyErrorHandler: (err, res, next) => {
+      console.log(`Error in proxy for ${host} ${err.message}, ${err.code}`);
+      if (err && err.code === "ECONNREFUSED") {
+        console.log("proxyErrorHandler: Got ECONNREFUSED");
+        return res.status(503).send({ message: `Could not contact ${host}` });
+      }
+      next(err);
+    },
+  });
+
+const proxyOnBehalfOf = (req, res, next, externalAppConfig) => {
+  return proxyExternalHost(externalAppConfig.host, req.method === "POST")(
+    req,
+    res,
+    next
+  );
+};
 
 const setup = () => {
   const router = express.Router();
 
-  router.use(
-    "/fastlegerest/api",
-    proxy(Config.auth.fastlegerest.host, {
-      https: true,
-      proxyReqPathResolver: function (req) {
-        return `/fastlegerest/api${req.url}`;
-      },
-      proxyErrorHandler: function (err, res, next) {
-        console.error("Error in proxy for fastlegerest", err.message);
-        next(err);
-      },
-    })
-  );
+  router.use("/fastlegerest/*", (req, res, next) => {
+    proxyOnBehalfOf(req, res, next, Config.auth.fastlegerest);
+  });
+
+  router.use("/modiacontextholder/*", (req, res, next) => {
+    proxyOnBehalfOf(req, res, next, Config.auth.modiacontextholder);
+  });
+
+  router.use("/modiasyforest/*", (req, res, next) => {
+    proxyOnBehalfOf(req, res, next, Config.auth.modiasyforest);
+  });
+
+  router.use("/syfobehandlendeenhet/*", (req, res, next) => {
+    proxyOnBehalfOf(req, res, next, Config.auth.syfobehandlendeenhet);
+  });
+
+  router.use("/syfomoteadmin/*", (req, res, next) => {
+    proxyOnBehalfOf(req, res, next, Config.auth.syfomoteadmin);
+  });
+
+  router.use("/syfomotebehov/*", (req, res, next) => {
+    proxyOnBehalfOf(req, res, next, Config.auth.syfomotebehov);
+  });
+
+  router.use("/syfooppfolgingsplanservice/*", (req, res, next) => {
+    proxyOnBehalfOf(req, res, next, Config.auth.syfooppfolgingsplanservice);
+  });
+
+  router.use("/syfoperson/*", (req, res, next) => {
+    proxyOnBehalfOf(req, res, next, Config.auth.syfoperson);
+  });
+
+  router.use("/syfosoknad/*", (req, res, next) => {
+    proxyOnBehalfOf(req, res, next, Config.auth.syfosoknad);
+  });
+
+  router.use("/syfo-tilgangskontroll/*", (req, res, next) => {
+    proxyOnBehalfOf(req, res, next, Config.auth.syfotilgangskontroll);
+  });
+
+  router.use("/syfoveileder/*", (req, res, next) => {
+    proxyOnBehalfOf(req, res, next, Config.auth.syfoveileder);
+  });
 
   router.use(
     "/ispersonoppgave/api/get",
@@ -39,34 +121,6 @@ const setup = () => {
       },
       proxyErrorHandler: function (err, res, next) {
         console.error("Error in proxy for ispersonoppgave", err.message);
-        next(err);
-      },
-    })
-  );
-
-  router.use(
-    "/syfo-tilgangskontroll/api",
-    proxy(Config.auth.syfotilgangskontroll.host, {
-      https: true,
-      proxyReqPathResolver: function (req) {
-        return `/syfo-tilgangskontroll/api${req.url}`;
-      },
-      proxyErrorHandler: function (err, res, next) {
-        console.error("Error in proxy for tilgang", err.message);
-        next(err);
-      },
-    })
-  );
-
-  router.use(
-    "/modiacontextholder/api",
-    proxy(Config.auth.modiacontextholder.host, {
-      https: true,
-      proxyReqPathResolver: function (req) {
-        return `/modiacontextholder/api${req.url}`;
-      },
-      proxyErrorHandler: function (err, res, next) {
-        console.error("Error in proxy for modiacontextholder", err.message);
         next(err);
       },
     })
@@ -137,51 +191,6 @@ const setup = () => {
     })
   );
 
-  router.use(
-    "/modiasyforest/api",
-    proxy(Config.auth.modiasyforest.host, {
-      https: true,
-      proxyReqPathResolver: function (req) {
-        return `/modiasyforest/api${req.url}`;
-      },
-      proxyErrorHandler: function (err, res, next) {
-        console.error("Error in proxy for modiasyforest", err.message);
-        next(err);
-      },
-    })
-  );
-
-  router.use(
-    "/syfooppfolgingsplanservice/api",
-    proxy(Config.auth.syfooppfolgingsplanservice.host, {
-      https: true,
-      proxyReqPathResolver: function (req) {
-        return `/syfooppfolgingsplanservice/api${req.url}`;
-      },
-      proxyErrorHandler: function (err, res, next) {
-        console.error(
-          "Error in proxy for syfooppfolgingsplanservice",
-          err.message
-        );
-        next(err);
-      },
-    })
-  );
-
-  router.use(
-    "/syfomoteadmin/api",
-    proxy(Config.auth.syfomoteadmin.host, {
-      https: true,
-      proxyReqPathResolver: function (req) {
-        return `/syfomoteadmin/api${req.url}`;
-      },
-      proxyErrorHandler: function (err, res, next) {
-        console.error("Error in proxy for syfomoteadmin", err.message);
-        next(err);
-      },
-    })
-  );
-
   router.use("/veileder/vedtak", cookieParser(), (req, res) => {
     const token = req.cookies["isso-idtoken"];
     const fnr = req.query.fnr;
@@ -203,62 +212,6 @@ const setup = () => {
         res.sendStatus(err.response.status);
       });
   });
-
-  router.use(
-    "/syfomotebehov/api",
-    proxy(Config.auth.syfomotebehov.host, {
-      https: true,
-      proxyReqPathResolver: function (req) {
-        return `/syfomotebehov/api${req.url}`;
-      },
-      proxyErrorHandler: function (err, res, next) {
-        console.error("Error in proxy for syfomotebehov", err.message);
-        next(err);
-      },
-    })
-  );
-
-  router.use(
-    "/syfosoknad/api",
-    proxy(Config.auth.syfosoknad.host, {
-      https: true,
-      proxyReqPathResolver: function (req) {
-        return `/syfosoknad/api${req.url}`;
-      },
-      proxyErrorHandler: function (err, res, next) {
-        console.error("Error in proxy for syfosoknad", err.message);
-        next(err);
-      },
-    })
-  );
-
-  router.use(
-    "/syfobehandlendeenhet/api",
-    proxy(Config.auth.syfobehandlendeenhet.host, {
-      https: true,
-      proxyReqPathResolver: function (req) {
-        return `/api${req.url}`;
-      },
-      proxyErrorHandler: function (err, res, next) {
-        console.error("Error in proxy for syfobehandlendeenhet", err.message);
-        next(err);
-      },
-    })
-  );
-
-  router.use(
-    "/syfoperson/api",
-    proxy(Config.auth.syfoperson.host, {
-      https: true,
-      proxyReqPathResolver: function (req) {
-        return `/syfoperson/api${req.url}`;
-      },
-      proxyErrorHandler: function (err, res, next) {
-        console.error("Error in proxy for syfoperson", err.message);
-        next(err);
-      },
-    })
-  );
 
   router.use("/syfosmregister/api", cookieParser(), (req, res) => {
     const token = req.cookies["isso-idtoken"];
@@ -366,20 +319,6 @@ const setup = () => {
         res.sendStatus(err.response.status);
       });
   });
-
-  router.use(
-    "/syfoveileder/api",
-    proxy(Config.auth.syfoveileder.host, {
-      https: true,
-      proxyReqPathResolver: function (req) {
-        return `/syfoveileder/api/v1/${req.url}`;
-      },
-      proxyErrorHandler: function (err, res, next) {
-        console.error("Error in proxy for syfoveileder", err);
-        next(err);
-      },
-    })
-  );
 
   router.use(
     "/internarbeidsflatedecorator",

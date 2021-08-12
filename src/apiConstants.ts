@@ -13,6 +13,6 @@ export const SYFOPERSON_ROOT = "/syfoperson/api";
 export const SYFOSMREGISTER_ROOT = "/syfosmregister/api/v1";
 export const SYFOSOKNAD_ROOT = "/syfosoknad/api/veileder/internad";
 export const SYFOTILGANGSKONTROLL_ROOT = "/syfo-tilgangskontroll/api";
-export const SYFOVEILEDER_ROOT = "/syfoveileder/api";
+export const SYFOVEILEDER_ROOT = "/syfoveileder/api/v1";
 export const VEDTAK_ROOT = "/veileder/vedtak";
 export const UNLEASH_ROOT = "/isenabled";
