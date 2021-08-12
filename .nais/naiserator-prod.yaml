@@ -39,3 +39,7 @@ spec:
   env:
     - name: NAIS_CONTEXT
       value: 'prod'
+    - name: NODE_ENV
+      value: "production"
+    - name: MODIACONTEXTHOLDER_HOST
+      value: "modiacontextholder.nais.adeo.no"
