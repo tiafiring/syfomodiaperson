@@ -14,7 +14,7 @@ import {
   SykmeldingPeriodeDTO,
   SykmeldingStatus,
 } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
-import { BehandlingsutfallStatusDTO } from "../../../../data/sykmelding/types/SykmeldingNewFormatDTO";
+import { BehandlingsutfallStatusDTO } from "../../../../data/sykmelding/types/BehandlingsutfallStatusDTO";
 
 const texts = {
   teaserTekst: "Sykmelding\n",

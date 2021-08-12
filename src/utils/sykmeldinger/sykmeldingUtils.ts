@@ -98,7 +98,7 @@ export const erBedringAvArbeidsevnenInformasjon = (
 export const erMeldingTilNavInformasjon = (
   sykmelding: SykmeldingOldFormat
 ): boolean => {
-  return sykmelding.meldingTilNav.navBoerTaTakISaken;
+  return sykmelding.meldingTilNav.navBoerTaTakISaken || false;
 };
 
 export const erMeldingTilArbeidsgiverInformasjon = (
@@ -111,7 +111,10 @@ export const erUtdypendeOpplysninger = (
   sykmelding: SykmeldingOldFormat
 ): boolean => {
   const utdypendeOpplysninger = sykmelding.utdypendeOpplysninger;
-  return utdypendeOpplysninger && Object.keys(utdypendeOpplysninger).length > 0;
+  return (
+    (utdypendeOpplysninger && Object.keys(utdypendeOpplysninger).length > 0) ||
+    false
+  );
 };
 
 export const erEkstraInformasjonISykmeldingen = (
@@ -182,11 +185,9 @@ export const sykmeldingperioderSortertEldstTilNyest = (
   });
 };
 
-export function getSykmeldingStartdato(
-  sykmelding: SykmeldingOldFormat
-): string {
+export function getSykmeldingStartdato(sykmelding: SykmeldingOldFormat): Date {
   const perioder = sykmelding.mulighetForArbeid.perioder;
-  return sykmeldingperioderSortertEldstTilNyest(perioder)[0].fom;
+  return new Date(sykmeldingperioderSortertEldstTilNyest(perioder)[0].fom);
 }
 
 export const sykmeldingerInnenforOppfolgingstilfellet = (
@@ -196,7 +197,7 @@ export const sykmeldingerInnenforOppfolgingstilfellet = (
   return sykmeldinger.filter((sykmelding) => {
     const tilfelleperioderReducer =
       sykmelding.orgnummer && oppfolgingstilfelleperioder[sykmelding.orgnummer];
-    const sykmeldingStart = new Date(getSykmeldingStartdato(sykmelding));
+    const sykmeldingStart: Date = getSykmeldingStartdato(sykmelding);
     sykmeldingStart.setHours(0, 0, 0, 0);
 
     const tilfelleStart =
@@ -217,7 +218,7 @@ export const sykmeldingerInnenforOppfolgingstilfellePerson = (
   oppfolgingstilfelleperson: OppfolgingstilfellePerson
 ): SykmeldingOldFormat[] => {
   return sykmeldinger.filter((sykmelding) => {
-    const sykmeldingStart = new Date(getSykmeldingStartdato(sykmelding));
+    const sykmeldingStart: Date = getSykmeldingStartdato(sykmelding);
     sykmeldingStart.setHours(0, 0, 0, 0);
 
     const tilfelleStart = oppfolgingstilfelleperson.fom
@@ -338,25 +339,14 @@ export const activeSykmeldingerSentToArbeidsgiver = (
   });
 };
 
-const sykmeldingerForVirksomhet = (
-  sykmeldinger: SykmeldingOldFormat[],
-  virksomhetsnummer: string
-): SykmeldingOldFormat[] => {
-  return sykmeldinger.filter((sykmelding) => {
-    return (
-      sykmelding.mottakendeArbeidsgiver &&
-      sykmelding.mottakendeArbeidsgiver.virksomhetsnummer === virksomhetsnummer
-    );
-  });
-};
-
 export const latestSykmeldingForVirksomhet = (
   sykmeldinger: SykmeldingOldFormat[],
   virksomhetsnummer: string
 ): SykmeldingOldFormat => {
-  const virksomhetSykmeldinger = sykmeldingerForVirksomhet(
-    sykmeldinger,
-    virksomhetsnummer
+  const sykmeldingerForVirksomhet = sykmeldinger.filter(
+    (sykmelding) =>
+      sykmelding.mottakendeArbeidsgiver?.virksomhetsnummer === virksomhetsnummer
   );
-  return sykmeldingerSortertNyestTilEldst(virksomhetSykmeldinger)[0];
+
+  return sykmeldingerSortertNyestTilEldst(sykmeldingerForVirksomhet)[0];
 };

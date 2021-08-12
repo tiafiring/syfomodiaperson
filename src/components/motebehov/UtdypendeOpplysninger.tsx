@@ -1,7 +1,7 @@
 import React from "react";
-import { UtdypendeOpplysning } from "../../data/sykmelding/types/SykmeldingNewFormatDTO";
 import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
 import { erUtdypendeOpplysninger } from "../../utils/sykmeldinger/sykmeldingUtils";
+import { SporsmalSvarDTO } from "../../data/sykmelding/types/SporsmalSvarDTO";
 
 const tekster = {
   UtdypendeOpplysninger: {
@@ -10,7 +10,7 @@ const tekster = {
 };
 
 interface OpplysningsGruppeProps {
-  opplysningGruppe: Map<string, UtdypendeOpplysning>;
+  opplysningGruppe: Map<string, SporsmalSvarDTO>;
 }
 
 const OpplysningsGruppe = ({ opplysningGruppe }: OpplysningsGruppeProps) => {

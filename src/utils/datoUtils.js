@@ -238,12 +238,20 @@ export const erIkkeIdag = (dato) => {
 
 export const toDate = (dato) => {
   if (typeof dato === "undefined" || dato === null) {
-    return null;
+    return undefined;
   } else if (
     typeof date === "string" &&
     dato.includes("T") &&
     !dato.includes("Z")
   ) {
+    return new Date(`${dato}Z`);
+  }
+  return new Date(dato);
+};
+
+//TODO: Convert this util file to typescript
+export const toDateWithoutNullCheck = (dato) => {
+  if (typeof date === "string" && dato.includes("T") && !dato.includes("Z")) {
     return new Date(`${dato}Z`);
   }
   return new Date(dato);

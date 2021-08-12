@@ -5,7 +5,7 @@ import { tilLesbarDatoMedArstall } from "../../utils/datoUtils";
 interface TilbakeIArbeidCheckboxMedSporsmalOgDatoProps {
   checkboxLabel: string;
   sporsmal: string;
-  returDato?: string;
+  returDato?: Date;
 }
 
 const TilbakeIArbeidCheckboxMedSporsmalOgDato = ({

@@ -50,7 +50,7 @@ const AnnenLovfestetFravaersgrunn = ({
 );
 
 interface YrkesskadeProps {
-  dato?: string;
+  dato?: Date;
 }
 
 const Yrkesskade = ({ dato }: YrkesskadeProps) => (

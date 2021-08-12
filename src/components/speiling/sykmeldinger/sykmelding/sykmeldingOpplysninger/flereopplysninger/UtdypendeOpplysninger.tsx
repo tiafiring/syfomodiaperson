@@ -1,14 +1,14 @@
 import React from "react";
 import { SykmeldingOldFormat } from "../../../../../../data/sykmelding/types/SykmeldingOldFormat";
-import { UtdypendeOpplysning } from "../../../../../../data/sykmelding/types/SykmeldingNewFormatDTO";
 import SykmeldingOpplysning from "./SykmeldingOpplysning";
+import { SporsmalSvarDTO } from "../../../../../../data/sykmelding/types/SporsmalSvarDTO";
 
 const texts = {
   title: "Utdypende opplysninger",
 };
 
 interface OpplysningsGruppeProps {
-  opplysningGruppe: UtdypendeOpplysning;
+  opplysningGruppe: SporsmalSvarDTO;
 }
 
 const OpplysningsGruppe = (opplysningsGruppeProps: OpplysningsGruppeProps) => {
