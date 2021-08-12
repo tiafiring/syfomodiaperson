@@ -6,7 +6,9 @@ export interface HistorikkState {
   moteHistorikk: HistorikkEvent[];
   motebehovHistorikk: HistorikkEvent[];
   oppfoelgingsdialogHistorikk: HistorikkEvent[];
-  hentingFeilet: boolean;
+  hentingMoterFeilet: boolean;
+  hentingOppfoelgingdialogerFeilet: boolean;
+  hentingMotebehovFeilet: boolean;
   henterMoter: boolean;
   hentetMoter: boolean;
   henterMotebehov: boolean;
@@ -19,7 +21,9 @@ export const initialState: HistorikkState = {
   moteHistorikk: [],
   motebehovHistorikk: [],
   oppfoelgingsdialogHistorikk: [],
-  hentingFeilet: false,
+  hentingMoterFeilet: false,
+  hentingMotebehovFeilet: false,
+  hentingOppfoelgingdialogerFeilet: false,
   henterMoter: false,
   hentetMoter: false,
   henterMotebehov: false,
@@ -92,21 +96,21 @@ const historikk: Reducer<HistorikkState, HistorikkActions> = (
       return {
         ...state,
         henterMoter: false,
-        hentingFeilet: true,
+        hentingMoterFeilet: true,
       };
     }
     case HistorikkActionTypes.HENT_HISTORIKK_FEILET_MOTEBEHOV: {
       return {
         ...state,
         henterMotebehov: false,
-        hentingFeilet: true,
+        hentingMotebehovFeilet: true,
       };
     }
     case HistorikkActionTypes.HENT_HISTORIKK_FEILET_OPPFOELGINGSDIALOG: {
       return {
         ...state,
         henterOppfoelgingsdialoger: false,
-        hentingFeilet: true,
+        hentingOppfoelgingdialogerFeilet: true,
       };
     }
     default: {

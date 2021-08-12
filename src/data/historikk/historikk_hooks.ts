@@ -19,7 +19,9 @@ export const useHistorikk: () => {
     hentetMoter,
     hentetMotebehov,
     hentetOppfoelgingsdialoger,
-    hentingFeilet,
+    hentingMoterFeilet,
+    hentingMotebehovFeilet,
+    hentingOppfoelgingdialogerFeilet,
     moteHistorikk,
     motebehovHistorikk,
     oppfoelgingsdialogHistorikk,
@@ -28,17 +30,27 @@ export const useHistorikk: () => {
     henterOppfoelgingsdialoger || henterMotebehov || henterMoter;
   const hentetHistorikk =
     hentetMoter && hentetMotebehov && hentetOppfoelgingsdialoger;
-  const skalHenteMoter = !henterMoter && !hentetMoter;
-  const skalHenteMotebehov = !henterMotebehov && !hentetMotebehov;
-  const skalHenteOppfoelgingsdialoger =
-    !henterOppfoelgingsdialoger && !hentetOppfoelgingsdialoger;
+  const skalHenteMoter = !(henterMoter || hentetMoter || hentingMoterFeilet);
+  const skalHenteMotebehov = !(
+    henterMotebehov ||
+    hentetMotebehov ||
+    hentingMotebehovFeilet
+  );
+  const skalHenteOppfoelgingsdialoger = !(
+    henterOppfoelgingsdialoger ||
+    hentetOppfoelgingsdialoger ||
+    hentingOppfoelgingdialogerFeilet
+  );
   return {
     henterHistorikk,
     hentetHistorikk,
     skalHenteMoter,
     skalHenteMotebehov,
     skalHenteOppfoelgingsdialoger,
-    hentingHistorikkFeilet: hentingFeilet,
+    hentingHistorikkFeilet:
+      hentingMoterFeilet ||
+      hentingMotebehovFeilet ||
+      hentingOppfoelgingdialogerFeilet,
     moteHistorikk,
     motebehovHistorikk,
     oppfoelgingsdialogHistorikk,
