@@ -6,13 +6,21 @@ const url = require("url");
 
 const Config = require("./config.js");
 
-const proxyExternalHost = (host, parseReqBody) =>
+const proxyExternalHost = (
+  { applicationName, bearerHeader, host, removePathPrefix },
+  parseReqBody
+) =>
   proxy(host, {
     https: true,
     parseReqBody: parseReqBody,
     proxyReqOptDecorator: async (options, srcReq) => {
       if (!options.headers) {
         options.headers = {};
+      }
+      if (bearerHeader) {
+        const token = srcReq.cookies["isso-idtoken"];
+        options.headers["Authorization"] = `Bearer ${token}`;
+        return options;
       }
       return options;
     },
@@ -30,12 +38,9 @@ const proxyExternalHost = (host, parseReqBody) =>
         (pathFromRequest ? pathFromRequest : "") +
         (queryString ? "?" + queryString : "");
 
-      if (host === Config.auth.syfobehandlendeenhet.host) {
-        const newPathSyfobehandlendeenhet = newPath.replace(
-          "syfobehandlendeenhet/",
-          ""
-        );
-        return `https://${newPathSyfobehandlendeenhet}`;
+      if (removePathPrefix) {
+        const newPathWithoutPrefix = newPath.replace(`${applicationName}/`, "");
+        return `https://${newPathWithoutPrefix}`;
       }
       return `https://${newPath}`;
     },
@@ -50,7 +55,7 @@ const proxyExternalHost = (host, parseReqBody) =>
   });
 
 const proxyOnBehalfOf = (req, res, next, externalAppConfig) => {
-  return proxyExternalHost(externalAppConfig.host, req.method === "POST")(
+  return proxyExternalHost(externalAppConfig, req.method === "POST")(
     req,
     res,
     next
@@ -59,6 +64,14 @@ const proxyOnBehalfOf = (req, res, next, externalAppConfig) => {
 
 const setup = () => {
   const router = express.Router();
+
+  router.use("/isdialogmote/*", cookieParser(), (req, res, next) => {
+    proxyOnBehalfOf(req, res, next, Config.auth.isdialogmote);
+  });
+
+  router.use("/ispersonoppgave/*", cookieParser(), (req, res, next) => {
+    proxyOnBehalfOf(req, res, next, Config.auth.ispersonoppgave);
+  });
 
   router.use("/fastlegerest/*", (req, res, next) => {
     proxyOnBehalfOf(req, res, next, Config.auth.fastlegerest);
@@ -103,93 +116,6 @@ const setup = () => {
   router.use("/syfoveileder/*", (req, res, next) => {
     proxyOnBehalfOf(req, res, next, Config.auth.syfoveileder);
   });
-
-  router.use(
-    "/ispersonoppgave/api/get",
-    cookieParser(),
-    proxy(Config.auth.ispersonoppgave.host, {
-      https: true,
-      parseReqBody: false,
-      proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
-        const token = srcReq.cookies["isso-idtoken"];
-        proxyReqOpts.headers["Authorization"] = `Bearer ${token}`;
-        proxyReqOpts.headers["Content-Type"] = "application/json";
-        return proxyReqOpts;
-      },
-      proxyReqPathResolver: function (req) {
-        return `/api${req.path}`;
-      },
-      proxyErrorHandler: function (err, res, next) {
-        console.error("Error in proxy for ispersonoppgave", err.message);
-        next(err);
-      },
-    })
-  );
-
-  router.use(
-    "/ispersonoppgave/api/post",
-    cookieParser(),
-    proxy(Config.auth.ispersonoppgave.host, {
-      https: true,
-      parseReqBody: true,
-      proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
-        const token = srcReq.cookies["isso-idtoken"];
-        proxyReqOpts.headers["Authorization"] = `Bearer ${token}`;
-        proxyReqOpts.headers["Content-Type"] = "application/json";
-        return proxyReqOpts;
-      },
-      proxyReqPathResolver: function (req) {
-        return `/api${req.path}`;
-      },
-      proxyErrorHandler: function (err, res, next) {
-        console.error("Error in proxy for ispersonoppgave", err.message);
-        next(err);
-      },
-    })
-  );
-
-  router.use(
-    "/isdialogmote/api/get",
-    cookieParser(),
-    proxy(Config.auth.isdialogmote.host, {
-      https: true,
-      parseReqBody: false,
-      proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
-        const token = srcReq.cookies["isso-idtoken"];
-        proxyReqOpts.headers["Authorization"] = `Bearer ${token}`;
-        proxyReqOpts.headers["Content-Type"] = "application/json";
-        return proxyReqOpts;
-      },
-      proxyReqPathResolver: function (req) {
-        return `/api${req.url}`;
-      },
-      proxyErrorHandler: function (err, res, next) {
-        console.log("Error in proxy for isdialogmote", err.message);
-        next(err);
-      },
-    })
-  );
-
-  router.use(
-    "/isdialogmote/api/post",
-    cookieParser(),
-    proxy(Config.auth.isdialogmote.host, {
-      https: true,
-      parseReqBody: true,
-      proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
-        const token = srcReq.cookies["isso-idtoken"];
-        proxyReqOpts.headers["Authorization"] = `Bearer ${token}`;
-        return proxyReqOpts;
-      },
-      proxyReqPathResolver: function (req) {
-        return `/api${req.url}`;
-      },
-      proxyErrorHandler: function (err, res, next) {
-        console.log("Error in proxy for isdialogmote", err.message);
-        next(err);
-      },
-    })
-  );
 
   router.use("/veileder/vedtak", cookieParser(), (req, res) => {
     const token = req.cookies["isso-idtoken"];
