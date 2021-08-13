@@ -20,7 +20,13 @@ const proxyExternalHost = (
       if (bearerHeader) {
         const token = srcReq.cookies["isso-idtoken"];
         options.headers["Authorization"] = `Bearer ${token}`;
-        return options;
+      }
+      if (
+        host === Config.auth.ispengestopp.host ||
+        host === Config.auth.flexInternGateway.host ||
+        host === Config.auth.syfosmregister.host
+      ) {
+        options.headers["fnr"] = srcReq.query.fnr;
       }
       return options;
     },
@@ -69,8 +75,16 @@ const setup = () => {
     proxyOnBehalfOf(req, res, next, Config.auth.isdialogmote);
   });
 
+  router.use("/ispengestopp/*", cookieParser(), (req, res, next) => {
+    proxyOnBehalfOf(req, res, next, Config.auth.ispengestopp);
+  });
+
   router.use("/ispersonoppgave/*", cookieParser(), (req, res, next) => {
     proxyOnBehalfOf(req, res, next, Config.auth.ispersonoppgave);
+  });
+
+  router.use("/isprediksjon/*", cookieParser(), (req, res, next) => {
+    proxyOnBehalfOf(req, res, next, Config.auth.isprediksjon);
   });
 
   router.use("/fastlegerest/*", (req, res, next) => {
@@ -83,6 +97,10 @@ const setup = () => {
 
   router.use("/modiasyforest/*", (req, res, next) => {
     proxyOnBehalfOf(req, res, next, Config.auth.modiasyforest);
+  });
+
+  router.use("/spinnsyn-backend/*", cookieParser(), (req, res, next) => {
+    proxyOnBehalfOf(req, res, next, Config.auth.flexInternGateway);
   });
 
   router.use("/syfobehandlendeenhet/*", (req, res, next) => {
@@ -105,6 +123,10 @@ const setup = () => {
     proxyOnBehalfOf(req, res, next, Config.auth.syfoperson);
   });
 
+  router.use("/syfosmregister/*", cookieParser(), (req, res, next) => {
+    proxyOnBehalfOf(req, res, next, Config.auth.syfosmregister);
+  });
+
   router.use("/syfosoknad/*", (req, res, next) => {
     proxyOnBehalfOf(req, res, next, Config.auth.syfosoknad);
   });
@@ -117,133 +139,8 @@ const setup = () => {
     proxyOnBehalfOf(req, res, next, Config.auth.syfoveileder);
   });
 
-  router.use("/veileder/vedtak", cookieParser(), (req, res) => {
-    const token = req.cookies["isso-idtoken"];
-    const fnr = req.query.fnr;
-    const options = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        fnr,
-      },
-    };
-
-    const url = `https://${Config.auth.flexInternGateway.host}/spinnsyn-backend/api/v1/veileder/vedtak?fnr=${fnr}`;
-    axios
-      .get(url, options)
-      .then((response) => {
-        res.send(response.data);
-      })
-      .catch((err) => {
-        console.error("Error in proxy for spinnsyn-backend", err.message);
-        res.sendStatus(err.response.status);
-      });
-  });
-
-  router.use("/syfosmregister/api", cookieParser(), (req, res) => {
-    const token = req.cookies["isso-idtoken"];
-    const fnr = req.query.fnr;
-    const options = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        fnr,
-      },
-    };
-
-    const url = `http://${Config.auth.syfosmregister.host}/api/v1/internal/sykmeldinger`;
-    axios
-      .get(url, options)
-      .then((response) => {
-        res.send(response.data);
-      })
-      .catch((err) => {
-        console.error("Error in proxy for syfosmregister", err.message);
-        res.sendStatus(err.response.status);
-      });
-  });
-
-  router.use(
-    "/ispengestopp/api/v1/person/status",
-    cookieParser(),
-    (req, res) => {
-      const token = req.cookies["isso-idtoken"];
-      const fnr = req.query.fnr;
-      const options = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          fnr,
-        },
-      };
-
-      axios
-        .get(
-          `http://${Config.auth.ispengestopp.host}/api/v1/person/status`,
-          options
-        )
-        .then((response) => {
-          if (response.status === 204) {
-            res.sendStatus(204);
-          } else {
-            res.send(response.data);
-          }
-        })
-        .catch((err) => {
-          console.error("Error in proxy for ispengestopp", err.message);
-          res.sendStatus(err.response.status);
-        });
-    }
-  );
-
-  router.use(
-    "/ispengestopp/api/v1/person/flagg",
-    cookieParser(),
-    (req, res) => {
-      const token = req.cookies["isso-idtoken"];
-      const headers = {
-        Authorization: `Bearer ${token}`,
-      };
-
-      const data = req.body;
-
-      axios
-        .post(
-          `http://${Config.auth.ispengestopp.host}/api/v1/person/flagg`,
-          data,
-          {
-            headers,
-          }
-        )
-        .then((response) => {
-          res.sendStatus(response.status);
-        })
-        .catch((err) => {
-          console.log(err.message);
-          res.sendStatus(err.response.status);
-        });
-    }
-  );
-
-  router.use("/isprediksjon/api/v1/prediksjon", cookieParser(), (req, res) => {
-    const token = req.cookies["isso-idtoken"];
-    const options = {
-      headers: {
-        ...req.headers,
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    axios
-      .get(`http://${Config.auth.isprediksjon.host}/api/v1/prediksjon`, options)
-      .then((response) => {
-        if (response.status === 204) {
-          res.sendStatus(204);
-        } else {
-          res.send(response.data);
-        }
-      })
-      .catch((err) => {
-        console.error("Error in proxy for isprediksjon", err.message);
-        res.sendStatus(err.response.status);
-      });
+  router.use("/syfoveileder/*", (req, res, next) => {
+    proxyOnBehalfOf(req, res, next, Config.auth.syfoveileder);
   });
 
   router.use(

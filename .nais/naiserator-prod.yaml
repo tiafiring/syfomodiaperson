@@ -50,11 +50,11 @@ spec:
     - name: ISDIALOGMOTE_HOST
       value: "isdialogmote.intern.nav.no"
     - name: ISPENGESTOPP_HOST
-      value: "ispengestopp.teamsykefravr"
+      value: "ispengestopp.intern.nav.no"
     - name: ISPERSONOPPGAVE_HOST
       value: "ispersonoppgave.intern.nav.no"
     - name: ISPREDIKSJON_HOST
-      value: "isprediksjon.teamsykefravr"
+      value: "isprediksjon.intern.nav.no"
     - name: MODIACONTEXTHOLDER_HOST
       value: "modiacontextholder.nais.adeo.no"
     - name: MODIASYFOREST_HOST
@@ -70,7 +70,7 @@ spec:
     - name: SYFOPERSON_HOST
       value: "syfoperson.intern.nav.no"
     - name: SYFOSMREGISTER_HOST
-      value: "syfosmregister.teamsykmelding"
+      value: "syfosmregister.intern.nav.no"
     - name: SYFOSOKNAD_HOST
       value: "syfosoknad.intern.nav.no"
     - name: SYFOTILGANGSKONTROLL_HOST

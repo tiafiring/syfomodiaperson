@@ -39,6 +39,7 @@ const auth = {
     host: envVar({
       name: "FLEX_INTERN_GATEWAY_HOST",
     }),
+    bearerHeader: true,
   },
   isdialogmote: {
     applicationName: "isdialogmote",
@@ -53,6 +54,8 @@ const auth = {
     host: envVar({
       name: "ISPENGESTOPP_HOST",
     }),
+    bearerHeader: true,
+    removePathPrefix: true,
   },
   ispersonoppgave: {
     applicationName: "ispersonoppgave",
@@ -67,6 +70,8 @@ const auth = {
     host: envVar({
       name: "ISPREDIKSJON_HOST",
     }),
+    bearerHeader: true,
+    removePathPrefix: true,
   },
   modiacontextholder: {
     applicationName: "modiacontextholder",
@@ -116,6 +121,8 @@ const auth = {
     host: envVar({
       name: "SYFOSMREGISTER_HOST",
     }),
+    bearerHeader: true,
+    removePathPrefix: true,
   },
   syfosoknad: {
     applicationName: "syfosoknad",
