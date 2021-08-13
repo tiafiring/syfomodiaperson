@@ -4,11 +4,15 @@ import { Leder } from "../data/leder/ledere";
 
 export const useLedere = (): {
   currentLedere: Leder[];
+  formerLedere: Leder[];
+  henterLedere: boolean;
   hentingLedereFeilet: boolean;
   getCurrentNarmesteLeder: (virksomhetsnummer: string) => Leder | undefined;
   hentingLedereForsokt: boolean;
 } => {
   const {
+    formerLedere,
+    henter,
     currentLedere,
     hentingForsokt: hentingLedereForsokt,
     hentingFeilet: hentingLedereFeilet,
@@ -24,6 +28,8 @@ export const useLedere = (): {
   return {
     getCurrentNarmesteLeder,
     currentLedere,
+    formerLedere,
+    henterLedere: henter,
     hentingLedereForsokt,
     hentingLedereFeilet,
   };

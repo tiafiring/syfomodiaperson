@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { tilLesbarDatoMedArstall } from "../../utils/datoUtils";
 import OppfoelgingsdialogIkon from "../../ikoner/OppfoelgingsdialogIkon";
 import MoteIkon from "../../ikoner/MoteIkon";
@@ -6,8 +6,9 @@ import LederIkon from "../../ikoner/LederIkon";
 import styled from "styled-components";
 import { Normaltekst } from "nav-frontend-typografi";
 import navFarger from "nav-frontend-core";
+import { HistorikkEvent } from "../../data/historikk/types/historikkTypes";
 
-const hentIkon = (event: any) => {
+const hentIkon = (event: HistorikkEvent) => {
   switch (event.kilde) {
     case "MOTER":
     case "MOTEBEHOV": {
@@ -46,20 +47,17 @@ const HistorikkIkonWrapper = styled.div`
 `;
 
 interface HistorikkEventProps {
-  event: any;
+  event: HistorikkEvent;
 }
 
-const HistorikkEvent = (historikkEventProps: HistorikkEventProps) => {
-  const event = historikkEventProps.event;
-  return (
-    <HistorikkEventListItem>
-      <Normaltekst>{tilLesbarDatoMedArstall(event.tidspunkt)}</Normaltekst>
-      <HistorikkEventInfo>
-        <HistorikkIkonWrapper>{hentIkon(event)}</HistorikkIkonWrapper>
-        <Normaltekst>{event.tekst}</Normaltekst>
-      </HistorikkEventInfo>
-    </HistorikkEventListItem>
-  );
-};
+const HistorikkEventItem = ({ event }: HistorikkEventProps): ReactElement => (
+  <HistorikkEventListItem>
+    <Normaltekst>{tilLesbarDatoMedArstall(event.tidspunkt)}</Normaltekst>
+    <HistorikkEventInfo>
+      <HistorikkIkonWrapper>{hentIkon(event)}</HistorikkIkonWrapper>
+      <Normaltekst>{event.tekst}</Normaltekst>
+    </HistorikkEventInfo>
+  </HistorikkEventListItem>
+);
 
-export default HistorikkEvent;
+export default HistorikkEventItem;

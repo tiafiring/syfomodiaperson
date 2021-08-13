@@ -1,20 +1,17 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import Panel from "nav-frontend-paneler";
 import Infomelding from "../Infomelding";
-import Sidetopp from "../Sidetopp";
 
-const IngenHistorikk = () => {
-  return (
-    <div>
-      <Sidetopp tittel="Logg" />
-      <Panel>
-        <Infomelding
-          tittel="Denne personen har ingen oppfølgingshistorikk"
-          melding="Når en sykmeldt blir fulgt opp så vil oppfølgingen bli loggført her slik at du får oversikt over hva som har skjedd og hvem som har vært involvert i oppfølgingen."
-        />
-      </Panel>
-    </div>
-  );
+const texts = {
+  tittel: "Denne personen har ingen oppfølgingshistorikk",
+  melding:
+    "Når en sykmeldt blir fulgt opp så vil oppfølgingen bli loggført her slik at du får oversikt over hva som har skjedd og hvem som har vært involvert i oppfølgingen.",
 };
+
+const IngenHistorikk = (): ReactElement => (
+  <Panel>
+    <Infomelding tittel={texts.tittel} melding={texts.melding} />
+  </Panel>
+);
 
 export default IngenHistorikk;
