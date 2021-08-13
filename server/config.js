@@ -45,6 +45,8 @@ const auth = {
     host: envVar({
       name: "ISDIALOGMOTE_HOST",
     }),
+    bearerHeader: true,
+    removePathPrefix: true,
   },
   ispengestopp: {
     applicationName: "ispengestopp",
@@ -57,6 +59,8 @@ const auth = {
     host: envVar({
       name: "ISPERSONOPPGAVE_HOST",
     }),
+    bearerHeader: true,
+    removePathPrefix: true,
   },
   isprediksjon: {
     applicationName: "isprediksjon",
@@ -81,6 +85,7 @@ const auth = {
     host: envVar({
       name: "SYFOBEHANDLENDEENHET_HOST",
     }),
+    removePathPrefix: true,
   },
   syfomoteadmin: {
     applicationName: "syfomoteadmin",

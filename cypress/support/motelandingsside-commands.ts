@@ -40,7 +40,7 @@ Cypress.Commands.add("stubMoter", (state: MoteState) => {
   cy.intercept(
     {
       method: "GET",
-      url: `${ISDIALOGMOTE_ROOT}/get/v1/dialogmote/personident`,
+      url: `${ISDIALOGMOTE_ROOT}/dialogmote/personident`,
     },
     moter.dialogmoter
   );

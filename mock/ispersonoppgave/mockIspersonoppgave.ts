@@ -1,5 +1,6 @@
 import { NAV_PERSONIDENT_HEADER } from "../util/requestUtil";
 import { leggTilDagerPaDato } from "../util/dateUtil";
+import { ISPERSONOPPGAVE_ROOT } from "../../src/apiConstants";
 
 const getDefaultPersonOppgaveUbehandlet = () => {
   const today = new Date();
@@ -33,7 +34,7 @@ const getPersonOppgaver = () => {
 
 export const mockIspersonoppgave = (server) => {
   server.get(
-    "/ispersonoppgave/api/get/v1/personoppgave/personident",
+    `${ISPERSONOPPGAVE_ROOT}/personoppgave/personident`,
     (req, res) => {
       if (
         req.headers[NAV_PERSONIDENT_HEADER] &&
@@ -48,7 +49,7 @@ export const mockIspersonoppgave = (server) => {
   );
 
   server.post(
-    "/ispersonoppgave/api/post/v1/personoppgave/:uuid/behandle",
+    `${ISPERSONOPPGAVE_ROOT}/personoppgave/:uuid/behandle`,
     (req, res) => {
       res.sendStatus(200);
     }

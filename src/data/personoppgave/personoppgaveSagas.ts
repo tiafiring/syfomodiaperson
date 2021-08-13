@@ -2,6 +2,7 @@ import { call, put, select, takeEvery } from "redux-saga/effects";
 import { get, post, Result, Success } from "../../api/axios";
 import * as actions from "./personoppgave_actions";
 import { PersonOppgave } from "./types/PersonOppgave";
+import { ISPERSONOPPGAVE_ROOT } from "../../apiConstants";
 
 export const skalHentePersonOppgaver = (state: any) => {
   const reducer = state.personoppgaver;
@@ -13,7 +14,7 @@ export function* hentPersonOppgaverHvisIkkeHentet(action: any) {
   if (skalHente) {
     yield put(actions.hentPersonOppgaverHenter());
 
-    const path = "/ispersonoppgave/api/get/v1/personoppgave/personident";
+    const path = `${ISPERSONOPPGAVE_ROOT}/personoppgave/personident`;
     const result: Result<PersonOppgave[]> = yield call(get, path, action.fnr);
 
     if (result instanceof Success) {
@@ -31,7 +32,7 @@ export function* behandlePersonOppgave(action: any) {
   const veilederIdent = action.veilederIdent;
   yield put(actions.behandlePersonOppgaveBehandler());
 
-  const path = `/ispersonoppgave/api/post/v1/personoppgave/${uuid}/behandle`;
+  const path = `${ISPERSONOPPGAVE_ROOT}/personoppgave/${uuid}/behandle`;
   const result: Result<any> = yield call(post, path, []);
 
   if (result instanceof Success) {
