@@ -2,13 +2,13 @@ import React from "react";
 import { expect } from "chai";
 import { mount, shallow } from "enzyme";
 import AlertStripe from "nav-frontend-alertstriper";
-import { genererDato } from "../../../src/components/mote/utils";
+import { genererDato } from "@/components/mote/utils";
 import KontaktInfoAdvarsel from "../../../src/components/mote/components/KontaktInfoAdvarsel";
 import {
   MotebookingSkjema,
   validate,
   getData,
-} from "../../../src/components/mote/skjema/MotebookingSkjema";
+} from "@/components/mote/skjema/MotebookingSkjema";
 import Tidspunkter from "../../../src/components/mote/skjema/Tidspunkter";
 import { Field } from "react-final-form";
 

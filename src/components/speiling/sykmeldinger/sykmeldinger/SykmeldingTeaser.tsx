@@ -2,8 +2,8 @@ import React, { ReactElement, useState } from "react";
 import { Link } from "react-router-dom";
 import EtikettBase from "nav-frontend-etiketter";
 import SykmeldingPeriodeInfo from "./SykmeldingPeriodeInfo";
-import { tilLesbarPeriodeMedArstall } from "../../../../utils/datoUtils";
-import { senesteTom, tidligsteFom } from "../../../../utils/periodeUtils";
+import { tilLesbarPeriodeMedArstall } from "@/utils/datoUtils";
+import { senesteTom, tidligsteFom } from "@/utils/periodeUtils";
 import {
   ReportProblemTriangleImage,
   SykmeldingerHoverBlaaImage,
@@ -13,8 +13,8 @@ import {
   SykmeldingOldFormat,
   SykmeldingPeriodeDTO,
   SykmeldingStatus,
-} from "../../../../data/sykmelding/types/SykmeldingOldFormat";
-import { BehandlingsutfallStatusDTO } from "../../../../data/sykmelding/types/BehandlingsutfallStatusDTO";
+} from "@/data/sykmelding/types/SykmeldingOldFormat";
+import { BehandlingsutfallStatusDTO } from "@/data/sykmelding/types/BehandlingsutfallStatusDTO";
 
 const texts = {
   teaserTekst: "Sykmelding\n",

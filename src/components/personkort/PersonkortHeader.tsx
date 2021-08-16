@@ -1,21 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import EtikettBase from "nav-frontend-etiketter";
-import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
-import { EgenansattState } from "../../data/egenansatt/egenansatt";
+import { Brukerinfo } from "@/data/navbruker/types/Brukerinfo";
+import { EgenansattState } from "@/data/egenansatt/egenansatt";
 import {
   formaterFnr,
   hentBrukersAlderFraFnr,
   hentBrukersKjoennFraFnr,
-} from "../../utils/fnrUtils";
-import { KJOENN } from "../../konstanter";
-import { sykmeldingerHasCoronaDiagnose } from "../../utils/sykmeldinger/sykmeldingUtils";
-import { tilLesbarDatoMedArUtenManedNavn } from "../../utils/datoUtils";
+} from "@/utils/fnrUtils";
+import { KJOENN } from "@/konstanter";
+import { sykmeldingerHasCoronaDiagnose } from "@/utils/sykmeldinger/sykmeldingUtils";
+import { tilLesbarDatoMedArUtenManedNavn } from "@/utils/datoUtils";
 import CopyButton from "../kopierknapp/CopyButton";
 import { KvinneImage, MannImage } from "../../../img/ImageComponents";
-import { useAppSelector } from "../../hooks/hooks";
+import { useAppSelector } from "@/hooks/hooks";
 import ErrorBoundary from "../ErrorBoundary";
-import { useStartDateFromLatestOppfolgingstilfellePeriode } from "../../data/oppfolgingstilfelle/oppfolgingstilfellerperson_hooks";
+import { useStartDateFromLatestOppfolgingstilfellePeriode } from "@/data/oppfolgingstilfelle/oppfolgingstilfellerperson_hooks";
 
 const texts = {
   copied: "Kopiert!",

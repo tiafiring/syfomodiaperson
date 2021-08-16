@@ -8,7 +8,7 @@ import DocumentTitle from "react-document-title";
 import {
   useHasLoadedMetaData,
   useTrackPageLoad,
-} from "../data/logging/loggingHooks";
+} from "@/data/logging/loggingHooks";
 
 const StyledContainer = styled(Container)`
   width: 95%;

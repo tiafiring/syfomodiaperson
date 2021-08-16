@@ -1,6 +1,6 @@
 import React from "react";
-import { erBedringAvArbeidsevnenInformasjon } from "../../utils/sykmeldinger/sykmeldingUtils";
-import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
+import { erBedringAvArbeidsevnenInformasjon } from "@/utils/sykmeldinger/sykmeldingUtils";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 
 const tekster = {
   bedreArbeidsevnen: {

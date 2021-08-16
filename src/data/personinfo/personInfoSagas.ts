@@ -1,8 +1,8 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
-import { get, Result, Success } from "../../api/axios";
+import { get, Result, Success } from "@/api/axios";
 import * as actions from "./personInfo_actions";
 import { PersonAdresse } from "./types/PersonAdresse";
-import { SYFOPERSON_ROOT } from "../../apiConstants";
+import { SYFOPERSON_ROOT } from "@/apiConstants";
 
 export const skalHentePersonAdresse = (state: any) => {
   const reducer = state.personadresse;

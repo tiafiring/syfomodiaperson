@@ -3,9 +3,9 @@ import Statuspanel, {
   StatusNokkelopplysning,
   Statusopplysninger,
 } from "../../Statuspanel";
-import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
+import { tilLesbarDatoMedArstall } from "@/utils/datoUtils";
 import VerktoylinjeGjenapneSoknad from "../soknad-felles/VerktoylinjeGjenapneSoknad";
-import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+import { SykepengesoknadDTO } from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const texts = {
   tittel: "Dato avbrutt",

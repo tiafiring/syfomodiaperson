@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react";
 import AppSpinner from "./AppSpinner";
 import Feilmelding from "./Feilmelding";
-import { hentBegrunnelseTekst } from "../utils/tilgangUtils";
-import { useTilgang } from "../hooks/useTilgang";
+import { hentBegrunnelseTekst } from "@/utils/tilgangUtils";
+import { useTilgang } from "@/hooks/useTilgang";
 
 interface SideLasterProps {
   henter: boolean;

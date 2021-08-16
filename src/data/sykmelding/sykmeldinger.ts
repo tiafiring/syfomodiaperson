@@ -3,13 +3,13 @@ import { SykmeldingOldFormat } from "./types/SykmeldingOldFormat";
 import {
   newSMFormat2OldFormat,
   oldFormatSMForAG,
-} from "../../utils/sykmeldinger/sykmeldingParser";
+} from "@/utils/sykmeldinger/sykmeldingParser";
 import { SykmeldingNewFormatDTO } from "./types/SykmeldingNewFormatDTO";
 import {
   SykmeldingerActions,
   SykmeldingerActionTypes,
 } from "./sykmeldinger_actions";
-import { ApiError } from "../../api/axios";
+import { ApiError } from "@/api/axios";
 
 export interface SykmeldingerState {
   henter: boolean;

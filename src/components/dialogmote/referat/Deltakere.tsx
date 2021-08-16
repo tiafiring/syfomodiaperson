@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
-import { useVeilederinfo } from "../../../hooks/useVeilederinfo";
-import { useNavBrukerData } from "../../../data/navbruker/navbruker_hooks";
+import { useVeilederinfo } from "@/hooks/useVeilederinfo";
+import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
 import { Element } from "nav-frontend-typografi";
 import { Field } from "react-final-form";
 import styled from "styled-components";

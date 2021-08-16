@@ -1,12 +1,12 @@
 import React, { ReactElement } from "react";
-import { tilLesbarDatoMedArstall } from "../../utils/datoUtils";
+import { tilLesbarDatoMedArstall } from "@/utils/datoUtils";
 import OppfoelgingsdialogIkon from "../../ikoner/OppfoelgingsdialogIkon";
 import MoteIkon from "../../ikoner/MoteIkon";
 import LederIkon from "../../ikoner/LederIkon";
 import styled from "styled-components";
 import { Normaltekst } from "nav-frontend-typografi";
 import navFarger from "nav-frontend-core";
-import { HistorikkEvent } from "../../data/historikk/types/historikkTypes";
+import { HistorikkEvent } from "@/data/historikk/types/historikkTypes";
 
 const hentIkon = (event: HistorikkEvent) => {
   switch (event.kilde) {

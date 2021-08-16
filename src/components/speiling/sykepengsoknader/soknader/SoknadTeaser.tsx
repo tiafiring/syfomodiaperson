@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import {
   erSendtTilBeggeMenIkkeSamtidig,
   getSendtTilSuffix,
-} from "../../../../utils/sykepengesoknadUtils";
+} from "@/utils/sykepengesoknadUtils";
 import {
   tilLesbarDatoMedArstall,
   tilLesbarPeriodeMedArstall,
   toDatePrettyPrint,
-} from "../../../../utils/datoUtils";
+} from "@/utils/datoUtils";
 import {
   GlobeHoverImage,
   GlobeImage,
@@ -19,7 +19,7 @@ import {
   SoknadstatusDTO,
   SoknadstypeDTO,
   SykepengesoknadDTO,
-} from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+} from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const texts = {
   sendt: "Sendt til",

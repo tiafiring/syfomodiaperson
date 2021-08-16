@@ -2,10 +2,10 @@ import React, { ReactElement, useState } from "react";
 import { Form } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import Panel from "nav-frontend-paneler";
-import { tilDatoMedManedNavn } from "../../../utils/datoUtils";
+import { tilDatoMedManedNavn } from "@/utils/datoUtils";
 import Deltakere from "./Deltakere";
-import { useNavBrukerData } from "../../../data/navbruker/navbruker_hooks";
-import { DialogmoteDTO } from "../../../data/dialogmote/types/dialogmoteTypes";
+import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
+import { DialogmoteDTO } from "@/data/dialogmote/types/dialogmoteTypes";
 import { AlertstripeFullbredde } from "../../AlertstripeFullbredde";
 import ReferatButtons from "./ReferatButtons";
 import { Innholdstittel } from "nav-frontend-typografi";
@@ -19,20 +19,20 @@ import { StandardTekster } from "./StandardTekster";
 import {
   validerReferatDeltakere,
   validerReferatTekster,
-} from "../../../utils/valideringUtils";
-import { useFeilUtbedret } from "../../../hooks/useFeilUtbedret";
+} from "@/utils/valideringUtils";
+import { useFeilUtbedret } from "@/hooks/useFeilUtbedret";
 import { SkjemaFeiloppsummering } from "../../SkjemaFeiloppsummering";
 import { useDispatch } from "react-redux";
-import { useValgtPersonident } from "../../../hooks/useValgtBruker";
-import { useAppSelector } from "../../../hooks/hooks";
-import { ferdigstillMote } from "../../../data/dialogmote/dialogmote_actions";
+import { useValgtPersonident } from "@/hooks/useValgtBruker";
+import { useAppSelector } from "@/hooks/hooks";
+import { ferdigstillMote } from "@/data/dialogmote/dialogmote_actions";
 import { FlexRow, PaddingSize } from "../../Layout";
 import { AlertStripeFeil } from "nav-frontend-alertstriper";
 import { Forhandsvisning } from "../Forhandsvisning";
-import { useForhandsvisReferat } from "../../../hooks/dialogmote/useForhandsvisReferat";
-import { StandardTekst } from "../../../data/dialogmote/dialogmoteTexts";
-import { NewDialogmotedeltakerAnnenDTO } from "../../../data/dialogmote/types/dialogmoteReferatTypes";
-import { useLedere } from "../../../hooks/useLedere";
+import { useForhandsvisReferat } from "@/hooks/dialogmote/useForhandsvisReferat";
+import { StandardTekst } from "@/data/dialogmote/dialogmoteTexts";
+import { NewDialogmotedeltakerAnnenDTO } from "@/data/dialogmote/types/dialogmoteReferatTypes";
+import { useLedere } from "@/hooks/useLedere";
 
 export const texts = {
   digitalReferat:

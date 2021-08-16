@@ -1,14 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  ARBEIDSGIVER,
-  BRUKER,
-  MULIGE_SVAR,
-  NAV_VEILEDER,
-} from "../../../konstanter";
-import { MoteAlternativDTO, MoteDTO } from "../../../data/mote/types/moteTypes";
-import { MotedeltakerType } from "../../../data/mote/types/MotedeltakerType";
-import { getSvar } from "../../../utils/moteplanleggerUtils";
+import { ARBEIDSGIVER, BRUKER, MULIGE_SVAR, NAV_VEILEDER } from "@/konstanter";
+import { MoteAlternativDTO, MoteDTO } from "@/data/mote/types/moteTypes";
+import { MotedeltakerType } from "@/data/mote/types/MotedeltakerType";
+import { getSvar } from "@/utils/moteplanleggerUtils";
 import SvarMedIkon, { NavKan } from "./SvarMedIkon";
 import DatoOgTid from "./DatoOgTid";
 

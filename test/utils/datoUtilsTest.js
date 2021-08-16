@@ -12,7 +12,7 @@ import {
   tilLesbarDatoMedArUtenManedNavn,
   tilLesbarPeriodeMedArUtenManednavn,
   visKlokkeslett,
-} from "../../src/utils/datoUtils";
+} from "@/utils/datoUtils";
 
 describe("datoUtils", () => {
   describe("visKlokkeslett", () => {

@@ -5,7 +5,7 @@ import sinon from "sinon";
 import {
   AvbrytMoteSide,
   mapStateToProps,
-} from "../../src/components/mote/container/AvbrytMoteContainer";
+} from "@/components/mote/container/AvbrytMoteContainer";
 import AppSpinner from "../../src/components/AppSpinner";
 import Lightbox from "../../src/components/Lightbox";
 import AvbrytMote from "../../src/components/mote/components/AvbrytMote";

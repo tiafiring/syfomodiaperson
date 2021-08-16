@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { shallow } from "enzyme";
 import React from "react";
-import { ARBEIDSGIVER, BRUKER } from "../../../src/konstanter";
+import { ARBEIDSGIVER, BRUKER } from "@/konstanter";
 import InformasjonSendt, {
   InnholdsviserContainer,
 } from "../../../src/components/mote/components/InformasjonSendt";

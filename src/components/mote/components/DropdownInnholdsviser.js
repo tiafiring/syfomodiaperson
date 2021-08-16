@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Alertstripe from "nav-frontend-alertstriper";
 import AppSpinner from "../../AppSpinner";
-import { BRUKER } from "../../../konstanter";
+import { BRUKER } from "@/konstanter";
 import { motePt } from "../moteProptypes";
 
 export const Innhold = ({ emne, innhold }) => {

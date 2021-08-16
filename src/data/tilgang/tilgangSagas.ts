@@ -1,8 +1,8 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { get, Result, Success } from "../../api/axios";
+import { get, Result, Success } from "@/api/axios";
 import * as actions from "./tilgang_actions";
 import { Tilgang } from "./tilgang";
-import { SYFOTILGANGSKONTROLL_ROOT } from "../../apiConstants";
+import { SYFOTILGANGSKONTROLL_ROOT } from "@/apiConstants";
 
 export function* sjekkTilgang(action: any) {
   yield put(actions.sjekkerTilgang());

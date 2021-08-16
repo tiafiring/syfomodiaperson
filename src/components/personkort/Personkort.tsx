@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { PERSONKORTVISNING_TYPE } from "../../konstanter";
-import { hentDiskresjonskode } from "../../data/diskresjonskode/diskresjonskode_actions";
-import { hentEgenansatt } from "../../data/egenansatt/egenansatt_actions";
-import { hentFastleger } from "../../data/fastlege/fastleger_actions";
-import { hentLedere } from "../../data/leder/ledere_actions";
-import { hentOppfolgingstilfelleperioder } from "../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder_actions";
-import { hentSykmeldinger } from "../../data/sykmelding/sykmeldinger_actions";
+import { PERSONKORTVISNING_TYPE } from "@/konstanter";
+import { hentDiskresjonskode } from "@/data/diskresjonskode/diskresjonskode_actions";
+import { hentEgenansatt } from "@/data/egenansatt/egenansatt_actions";
+import { hentFastleger } from "@/data/fastlege/fastleger_actions";
+import { hentLedere } from "@/data/leder/ledere_actions";
+import { hentOppfolgingstilfelleperioder } from "@/data/oppfolgingstilfelle/oppfolgingstilfelleperioder_actions";
+import { hentSykmeldinger } from "@/data/sykmelding/sykmeldinger_actions";
 import OversiktLink from "./OversiktLink";
 import PersonkortHeader from "./PersonkortHeader";
 import PersonkortVisning from "./PersonkortVisning";
 import Utvidbar from "../Utvidbar";
-import { useNavBrukerData } from "../../data/navbruker/navbruker_hooks";
+import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
 
 const texts = {
   buttons: {

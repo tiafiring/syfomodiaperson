@@ -3,13 +3,13 @@ import React from "react";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import { createStore } from "redux";
-import { rootReducer } from "../../src/data/rootState";
+import { rootReducer } from "@/data/rootState";
 import { expect } from "chai";
 import {
   DialogmoteStatus,
   MotedeltakerVarselType,
-} from "../../src/data/dialogmote/types/dialogmoteTypes";
-import { MotehistorikkPanel } from "../../src/components/dialogmote/motehistorikk/MotehistorikkPanel";
+} from "@/data/dialogmote/types/dialogmoteTypes";
+import { MotehistorikkPanel } from "@/components/dialogmote/motehistorikk/MotehistorikkPanel";
 
 const realState = createStore(rootReducer).getState();
 const store = configureStore([]);

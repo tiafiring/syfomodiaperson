@@ -7,7 +7,7 @@ import Svarstatus, {
   getNyeAlternativer,
 } from "../../../src/components/mote/components/Svarstatus";
 import BesvarteTidspunkter from "../../../src/components/mote/components/BesvarteTidspunkter";
-import { konverterTid } from "../../../src/utils/datoUtils";
+import { konverterTid } from "@/utils/datoUtils";
 import Utvidbar from "../../../src/components/Utvidbar";
 
 describe("Svarstatus", () => {

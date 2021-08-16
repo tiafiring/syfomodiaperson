@@ -6,9 +6,9 @@ import {
   hentDiskresjonskodeFeilet,
   henterDiskresjonskode,
 } from "./diskresjonskode_actions";
-import { get, Result, Success } from "../../api/axios";
+import { get, Result, Success } from "@/api/axios";
 import { RootState } from "../rootState";
-import { SYFOPERSON_ROOT } from "../../apiConstants";
+import { SYFOPERSON_ROOT } from "@/apiConstants";
 
 export function* hentDiskresjonskodeSaga(action: HentDiskresjonskodeAction) {
   yield put(henterDiskresjonskode());

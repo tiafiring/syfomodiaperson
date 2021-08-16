@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { hentOppfoelgingsdialoger } from "../../../data/oppfolgingsplan/oppfoelgingsdialoger_actions";
-import { hentOppfolgingstilfellerPersonUtenArbeidsiver } from "../../../data/oppfolgingstilfelle/oppfolgingstilfellerperson_actions";
-import { hentOppfolgingstilfelleperioder } from "../../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder_actions";
-import { hentSykmeldinger } from "../../../data/sykmelding/sykmeldinger_actions";
-import { hentLedere } from "../../../data/leder/ledere_actions";
-import { NOKKELINFORMASJON } from "../../../enums/menypunkter";
+import { hentOppfoelgingsdialoger } from "@/data/oppfolgingsplan/oppfoelgingsdialoger_actions";
+import { hentOppfolgingstilfellerPersonUtenArbeidsiver } from "@/data/oppfolgingstilfelle/oppfolgingstilfellerperson_actions";
+import { hentOppfolgingstilfelleperioder } from "@/data/oppfolgingstilfelle/oppfolgingstilfelleperioder_actions";
+import { hentSykmeldinger } from "@/data/sykmelding/sykmeldinger_actions";
+import { hentLedere } from "@/data/leder/ledere_actions";
+import { NOKKELINFORMASJON } from "@/enums/menypunkter";
 import Side from "../../../sider/Side";
 import Nokkelinformasjon from "../Nokkelinformasjon";
-import { useOppfoelgingsDialoger } from "../../../hooks/useOppfoelgingsDialoger";
-import { useValgtPersonident } from "../../../hooks/useValgtBruker";
+import { useOppfoelgingsDialoger } from "@/hooks/useOppfoelgingsDialoger";
+import { useValgtPersonident } from "@/hooks/useValgtBruker";
 import SideLaster from "../../SideLaster";
 
 const texts = {

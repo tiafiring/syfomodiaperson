@@ -2,13 +2,13 @@ import { DialogmotePanel } from "../../mote/components/DialogmotePanel";
 import { FortidenImage } from "../../../../img/ImageComponents";
 import { FlexRow } from "../../Layout";
 import React, { ReactElement, useState } from "react";
-import { useHistoriskeDialogmoter } from "../../../data/dialogmote/dialogmote_hooks";
+import { useHistoriskeDialogmoter } from "@/data/dialogmote/dialogmote_hooks";
 import {
   DialogmoteDTO,
   DialogmoteStatus,
   MotedeltakerVarselType,
-} from "../../../data/dialogmote/types/dialogmoteTypes";
-import { tilDatoMedUkedagOgManedNavn } from "../../../utils/datoUtils";
+} from "@/data/dialogmote/types/dialogmoteTypes";
+import { tilDatoMedUkedagOgManedNavn } from "@/utils/datoUtils";
 import styled from "styled-components";
 import { Forhandsvisning } from "../Forhandsvisning";
 import { Normaltekst } from "nav-frontend-typografi";

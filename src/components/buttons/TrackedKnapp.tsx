@@ -1,7 +1,7 @@
 import React from "react";
 import { Knapp } from "nav-frontend-knapper";
 import { TrackedButtonProps } from "./trackedButtonTypes";
-import { useTrackOnClick } from "../../data/logging/loggingHooks";
+import { useTrackOnClick } from "@/data/logging/loggingHooks";
 
 export const TrackedKnapp = (props: TrackedButtonProps) => {
   const trackButtonClick = useTrackOnClick();

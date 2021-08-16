@@ -3,10 +3,10 @@ import { BrowserRouter, Link } from "react-router-dom";
 import chai from "chai";
 import chaiEnzyme from "chai-enzyme";
 import { mount } from "enzyme";
-import { BRUKER, NAV_VEILEDER, ARBEIDSGIVER } from "../../../src/konstanter";
+import { BRUKER, NAV_VEILEDER, ARBEIDSGIVER } from "@/konstanter";
 import BesvarteTidspunkter from "../../../src/components/mote/components/BesvarteTidspunkter";
-import { NavKan } from "../../../src/components/mote/components/SvarMedIkon";
-import { getTidligereAlternativer } from "../../../src/utils/moteplanleggerUtils";
+import { NavKan } from "@/components/mote/components/SvarMedIkon";
+import { getTidligereAlternativer } from "@/utils/moteplanleggerUtils";
 import {
   moteBesvartMedNyeAlternativerIkkeBesvart,
   moteBesvartMedNyeAlternativerBesvart,

@@ -1,7 +1,7 @@
 import React from "react";
 import { Select } from "nav-frontend-skjema";
-import { Leder } from "../../../data/leder/ledere";
-import { ledereSortertPaaNavnOgOrganisasjonsnavn } from "../../../utils/ledereUtils";
+import { Leder } from "@/data/leder/ledere";
+import { ledereSortertPaaNavnOgOrganisasjonsnavn } from "@/utils/ledereUtils";
 
 const texts = {
   chooseArbeidsgiver: "Velg arbeidsgiver",

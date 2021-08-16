@@ -8,7 +8,7 @@ import {
   senesteTom,
   tidligsteFom,
   tilfellerFromTilfelleperioder,
-} from "../../src/utils/periodeUtils";
+} from "@/utils/periodeUtils";
 import {
   oppfolgingstilfelleperioderMoreThanOneTilfelleInactive,
   oppfolgingstilfelleperioderOneTilfelleInactive,

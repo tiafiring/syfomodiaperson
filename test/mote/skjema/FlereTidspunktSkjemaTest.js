@@ -6,7 +6,7 @@ import {
   FlereTidspunktSkjema,
   getData,
   dekorerMedSted,
-} from "../../../src/components/mote/skjema/FlereTidspunktSkjema";
+} from "@/components/mote/skjema/FlereTidspunktSkjema";
 import Tidspunkter from "../../../src/components/mote/skjema/Tidspunkter";
 
 describe("FlereTidspunktSkjemaTest", () => {

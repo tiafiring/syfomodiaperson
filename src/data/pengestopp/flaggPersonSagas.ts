@@ -1,10 +1,10 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import * as actions from "./flaggperson_actions";
-import { stoppAutomatikk2StatusEndring } from "../../utils/pengestoppUtils";
+import { stoppAutomatikk2StatusEndring } from "@/utils/pengestoppUtils";
 import { FlaggpersonState } from "./flaggperson";
-import { get, post, Result, Success } from "../../api/axios";
+import { get, post, Result, Success } from "@/api/axios";
 import { StatusEndring } from "./types/FlaggPerson";
-import { ISPENGESTOPP_ROOT } from "../../apiConstants";
+import { ISPENGESTOPP_ROOT } from "@/apiConstants";
 
 export const skalHenteStatus = (state: { flaggperson: any }) => {
   const reducer = state.flaggperson;

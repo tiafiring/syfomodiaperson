@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import SoknadTeaser from "./SoknadTeaser";
-import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+import { SykepengesoknadDTO } from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 
 interface SoknaderTeasereProps {
   sykepengesoknader: SykepengesoknadDTO[];

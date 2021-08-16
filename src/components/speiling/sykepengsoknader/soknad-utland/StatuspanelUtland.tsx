@@ -3,8 +3,8 @@ import Hjelpetekst from "nav-frontend-hjelpetekst";
 import {
   SoknadstatusDTO,
   SykepengesoknadDTO,
-} from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
-import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
+} from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
+import { tilLesbarDatoMedArstall } from "@/utils/datoUtils";
 import Statuspanel, {
   StatusNokkelopplysning,
   Statusopplysninger,

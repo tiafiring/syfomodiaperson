@@ -1,8 +1,8 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
-import { get, Result, Success } from "../../api/axios";
+import { get, Result, Success } from "@/api/axios";
 import * as actions from "./oppfoelgingsdialoger_actions";
 import { OppfolgingsplanDTO } from "./oppfoelgingsdialoger";
-import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "../../apiConstants";
+import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "@/apiConstants";
 
 export const skalHenteOppfolgingsplaner = (state: any) => {
   const reducer = state.oppfoelgingsdialoger;

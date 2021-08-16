@@ -1,20 +1,20 @@
-import { ReferatSkjemaValues } from "../../components/dialogmote/referat/Referat";
+import { ReferatSkjemaValues } from "@/components/dialogmote/referat/Referat";
 import {
   DialogmoteDTO,
   DocumentComponentDto,
-} from "../../data/dialogmote/types/dialogmoteTypes";
-import { useNavBrukerData } from "../../data/navbruker/navbruker_hooks";
-import { tilDatoMedUkedagOgManedNavn } from "../../utils/datoUtils";
+} from "@/data/dialogmote/types/dialogmoteTypes";
+import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
+import { tilDatoMedUkedagOgManedNavn } from "@/utils/datoUtils";
 import {
   createHeader,
   createParagraph,
   createStandardtekstParagraph,
   createParagraphWithTitle,
-} from "../../utils/documentComponentUtils";
+} from "@/utils/documentComponentUtils";
 import { useVeilederinfo } from "../useVeilederinfo";
-import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
-import { VeilederinfoDTO } from "../../data/veilederinfo/types/VeilederinfoDTO";
-import { referatTexts } from "../../data/dialogmote/dialogmoteTexts";
+import { Brukerinfo } from "@/data/navbruker/types/Brukerinfo";
+import { VeilederinfoDTO } from "@/data/veilederinfo/types/VeilederinfoDTO";
+import { referatTexts } from "@/data/dialogmote/dialogmoteTexts";
 import { useForhandsvisningHilsen } from "./useForhandsvisningHilsen";
 
 export interface ForhandsvisReferatGenerator {

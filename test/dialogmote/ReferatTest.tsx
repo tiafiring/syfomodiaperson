@@ -5,7 +5,7 @@ import Referat, {
   texts as referatSkjemaTexts,
 } from "../../src/components/dialogmote/referat/Referat";
 import { createStore } from "redux";
-import { rootReducer } from "../../src/data/rootState";
+import { rootReducer } from "@/data/rootState";
 import configureStore from "redux-mock-store";
 import { mount } from "enzyme";
 import {
@@ -13,7 +13,7 @@ import {
   DialogmoteStatus,
   DocumentComponentDto,
   DocumentComponentType,
-} from "../../src/data/dialogmote/types/dialogmoteTypes";
+} from "@/data/dialogmote/types/dialogmoteTypes";
 import { Feilmelding, Innholdstittel } from "nav-frontend-typografi";
 import { expect } from "chai";
 import { Feiloppsummering } from "nav-frontend-skjema";
@@ -24,16 +24,13 @@ import {
   changeFieldValue,
   changeTextAreaValue,
 } from "../testUtils";
-import {
-  commonTexts,
-  referatTexts,
-} from "../../src/data/dialogmote/dialogmoteTexts";
-import { tilDatoMedUkedagOgManedNavn } from "../../src/utils/datoUtils";
-import { Forhandsvisning } from "../../src/components/dialogmote/Forhandsvisning";
+import { commonTexts, referatTexts } from "@/data/dialogmote/dialogmoteTexts";
+import { tilDatoMedUkedagOgManedNavn } from "@/utils/datoUtils";
+import { Forhandsvisning } from "@/components/dialogmote/Forhandsvisning";
 import { Knapp } from "nav-frontend-knapper";
 import Lukknapp from "nav-frontend-lukknapp";
-import { AndreDeltakere } from "../../src/components/dialogmote/referat/AndreDeltakere";
-import { SlettKnapp } from "../../src/components/SlettKnapp";
+import { AndreDeltakere } from "@/components/dialogmote/referat/AndreDeltakere";
+import { SlettKnapp } from "@/components/SlettKnapp";
 
 const realState = createStore(rootReducer).getState();
 const store = configureStore([]);

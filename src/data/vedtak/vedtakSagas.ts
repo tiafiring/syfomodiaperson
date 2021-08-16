@@ -1,5 +1,5 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
-import { get, Result, Success } from "../../api/axios";
+import { get, Result, Success } from "@/api/axios";
 import { VedtakDTO, VedtakState } from "./vedtak";
 import {
   HENT_VEDTAK_FORESPURT,
@@ -7,7 +7,7 @@ import {
   hentVedtakHenter,
   hentVedtakHentet,
 } from "./vedtak_actions";
-import { VEDTAK_ROOT } from "../../apiConstants";
+import { VEDTAK_ROOT } from "@/apiConstants";
 
 export const skalHenteVedtak = (state: { vedtak: VedtakState }) => {
   const reducer = state.vedtak;

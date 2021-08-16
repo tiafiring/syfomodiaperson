@@ -1,5 +1,5 @@
 import React from "react";
-import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 import ArbeidsgiversSykmelding from "./ArbeidsgiversSykmelding";
 import DineSykmeldingOpplysninger from "./sykmeldingOpplysninger/DineSykmeldingOpplysninger";
 import SykmeldingStatuspanel from "../sykmeldingstatuspanel/SykmeldingStatuspanel";

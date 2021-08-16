@@ -1,4 +1,4 @@
-import { KJOENN } from "../konstanter";
+import { KJOENN } from "@/konstanter";
 
 export const hentBrukersFoedseldatoFraFnr = (fnr: string) => {
   const individSifre = Number(fnr.substring(6, 9));

@@ -1,4 +1,4 @@
-import { OppfolgingsplanerState } from "../data/oppfolgingsplan/oppfoelgingsdialoger";
+import { OppfolgingsplanerState } from "@/data/oppfolgingsplan/oppfoelgingsdialoger";
 
 export const harForsoktHentetOppfoelgingsdialoger = (
   oppfoelgingsdialogerReducer: OppfolgingsplanerState

@@ -1,5 +1,5 @@
 import React from "react";
-import { visDato, visKlokkeslett } from "../../../utils/datoUtils";
+import { visDato, visKlokkeslett } from "@/utils/datoUtils";
 
 interface DatoOgTidProps {
   tid: Date;

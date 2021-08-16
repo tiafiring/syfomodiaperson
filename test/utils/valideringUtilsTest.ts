@@ -2,15 +2,15 @@ import {
   validerBegrunnelser,
   validerInnkallingFritekster,
   validerReferatTekster,
-} from "../../src/utils/valideringUtils";
-import { MAX_LENGTH_INNKALLING_FRITEKST } from "../../src/components/dialogmote/innkalling/DialogmoteInnkallingTekster";
+} from "@/utils/valideringUtils";
+import { MAX_LENGTH_INNKALLING_FRITEKST } from "@/components/dialogmote/innkalling/DialogmoteInnkallingTekster";
 import { expect } from "chai";
-import { MAX_LENGTH_AVLYS_BEGRUNNELSE } from "../../src/components/dialogmote/avlys/AvlysDialogmoteBegrunnelse";
-import { MAX_LENGTH_SITUASJON } from "../../src/components/dialogmote/referat/Situasjon";
-import { MAX_LENGTH_KONKLUSJON } from "../../src/components/dialogmote/referat/Konklusjon";
-import { MAX_LENGTH_ARBEIDSGIVERS_OPPGAVE } from "../../src/components/dialogmote/referat/ArbeidsgiversOppgave";
-import { MAX_LENGTH_ARBEIDSTAKERS_OPPGAVE } from "../../src/components/dialogmote/referat/ArbeidstakersOppgave";
-import { MAX_LENGTH_VEILEDERS_OPPGAVE } from "../../src/components/dialogmote/referat/VeiledersOppgave";
+import { MAX_LENGTH_AVLYS_BEGRUNNELSE } from "@/components/dialogmote/avlys/AvlysDialogmoteBegrunnelse";
+import { MAX_LENGTH_SITUASJON } from "@/components/dialogmote/referat/Situasjon";
+import { MAX_LENGTH_KONKLUSJON } from "@/components/dialogmote/referat/Konklusjon";
+import { MAX_LENGTH_ARBEIDSGIVERS_OPPGAVE } from "@/components/dialogmote/referat/ArbeidsgiversOppgave";
+import { MAX_LENGTH_ARBEIDSTAKERS_OPPGAVE } from "@/components/dialogmote/referat/ArbeidstakersOppgave";
+import { MAX_LENGTH_VEILEDERS_OPPGAVE } from "@/components/dialogmote/referat/VeiledersOppgave";
 
 const maxMessage = (max: number) => `Maks ${max} tegn tillatt`;
 const getTooLongText = (max: number) => "t".repeat(max + 1);

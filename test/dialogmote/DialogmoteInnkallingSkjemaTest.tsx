@@ -3,7 +3,7 @@ import { mount } from "enzyme";
 import { expect } from "chai";
 import { MemoryRouter, Route } from "react-router-dom";
 import { createStore } from "redux";
-import { rootReducer } from "../../src/data/rootState";
+import { rootReducer } from "@/data/rootState";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import DialogmoteInnkallingSkjema from "../../src/components/dialogmote/innkalling/DialogmoteInnkallingSkjema";
@@ -11,7 +11,7 @@ import {
   leggTilDagerPaDato,
   tilDatoMedUkedagOgManedNavnOgKlokkeslett,
   toDatePrettyPrint,
-} from "../../src/utils/datoUtils";
+} from "@/utils/datoUtils";
 import { InputDateStringToISODateString } from "nav-datovelger/lib/utils/dateFormatUtils";
 import { Feilmelding } from "nav-frontend-typografi";
 import { Feiloppsummering } from "nav-frontend-skjema";
@@ -22,8 +22,8 @@ import { genererDato } from "../../src/components/mote/utils";
 import {
   innkallingTexts,
   commonTexts,
-} from "../../src/data/dialogmote/dialogmoteTexts";
-import { Forhandsvisning } from "../../src/components/dialogmote/Forhandsvisning";
+} from "@/data/dialogmote/dialogmoteTexts";
+import { Forhandsvisning } from "@/components/dialogmote/Forhandsvisning";
 import { texts as innkallingSkjemaTexts } from "../../src/components/dialogmote/innkalling/DialogmoteInnkallingTekster";
 import Lukknapp from "nav-frontend-lukknapp";
 import { changeFieldValue, changeTextAreaValue } from "../testUtils";

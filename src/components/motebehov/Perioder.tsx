@@ -1,7 +1,7 @@
 import React from "react";
-import { tilLesbarPeriodeMedArUtenManednavn } from "../../utils/datoUtils";
+import { tilLesbarPeriodeMedArUtenManednavn } from "@/utils/datoUtils";
 import BoksRad from "./BoksRad";
-import { SykmeldingPeriodeDTO } from "../../data/sykmelding/types/SykmeldingOldFormat";
+import { SykmeldingPeriodeDTO } from "@/data/sykmelding/types/SykmeldingOldFormat";
 
 const kolonne2Tekst = (periode: SykmeldingPeriodeDTO) => {
   if (!!periode.behandlingsdager) {

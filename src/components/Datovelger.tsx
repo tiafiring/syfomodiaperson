@@ -1,7 +1,7 @@
 import React from "react";
 import { Field } from "react-final-form";
 
-import { toDatePrettyPrint } from "../utils/datoUtils";
+import { toDatePrettyPrint } from "@/utils/datoUtils";
 import { Datepicker, isISODateString } from "nav-datovelger";
 import dayjs from "dayjs";
 import { SkjemaelementFeilmelding } from "nav-frontend-skjema";

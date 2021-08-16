@@ -1,9 +1,9 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
-import { get, post, Result, Success } from "../../api/axios";
+import { get, post, Result, Success } from "@/api/axios";
 import * as actions from "./moter_actions";
 import * as historikkActions from "../historikk/historikk_actions";
 import { MoteDTO } from "./types/moteTypes";
-import { SYFOMOTEADMIN_ROOT } from "../../apiConstants";
+import { SYFOMOTEADMIN_ROOT } from "@/apiConstants";
 
 export function* opprettMote(action: any) {
   yield put(actions.oppretterMote());

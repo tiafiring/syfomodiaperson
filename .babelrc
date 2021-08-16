@@ -1,5 +1,15 @@
 {
-  "plugins": ["@babel/plugin-proposal-class-properties"],
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "@": "./src"
+        }
+      }
+    ]
+  ],
   "presets": [
     "@babel/preset-env",
     "@babel/preset-react",

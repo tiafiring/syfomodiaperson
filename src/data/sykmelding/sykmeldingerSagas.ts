@@ -1,8 +1,8 @@
 import { call, put, select, takeLeading } from "redux-saga/effects";
-import { get, Result, Success } from "../../api/axios";
+import { get, Result, Success } from "@/api/axios";
 import { SykmeldingNewFormatDTO } from "./types/SykmeldingNewFormatDTO";
 import { RootState } from "../rootState";
-import { SYFOSMREGISTER_ROOT } from "../../apiConstants";
+import { SYFOSMREGISTER_ROOT } from "@/apiConstants";
 import {
   hentSykmeldingerFeilet,
   SykmeldingerActionTypes,

@@ -7,7 +7,7 @@ import Innholdsviser, {
   Innholdsvelger,
 } from "../../../src/components/mote/components/Innholdsviser";
 import AppSpinner from "../../../src/components/AppSpinner";
-import { ARBEIDSGIVER, BRUKER } from "../../../src/konstanter";
+import { ARBEIDSGIVER, BRUKER } from "@/konstanter";
 
 const getMote = (mote) => {
   return Object.assign(

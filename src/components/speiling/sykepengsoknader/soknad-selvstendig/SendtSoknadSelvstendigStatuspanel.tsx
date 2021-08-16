@@ -4,10 +4,10 @@ import Statuspanel, {
   StatusNokkelopplysning,
 } from "../../Statuspanel";
 import { VerktoyKnapp, Verktoylinje } from "../../Verktoylinje";
-import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
+import { tilLesbarDatoMedArstall } from "@/utils/datoUtils";
 import SykmeldingNokkelOpplysning from "../../sykmeldinger/sykmelding/sykmeldingOpplysninger/SykmeldingNokkelOpplysning";
-import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
-import { erOpprettetSisteAar } from "../../../../utils/sykepengesoknadUtils";
+import { SykepengesoknadDTO } from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
+import { erOpprettetSisteAar } from "@/utils/sykepengesoknadUtils";
 
 const texts = {
   status: "Status",

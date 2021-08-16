@@ -1,9 +1,9 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { get, post } from "../../api/axios";
+import { get, post } from "@/api/axios";
 import * as actions from "./modiacontext_actions";
-import { Result, Success } from "../../api/axios";
+import { Result, Success } from "@/api/axios";
 import { RSContext } from "./modiacontextTypes";
-import { MODIACONTEXTHOLDER_ROOT } from "../../apiConstants";
+import { MODIACONTEXTHOLDER_ROOT } from "@/apiConstants";
 
 const redirectWithoutFnrInUrl = (fnr: string) => {
   window.location.href = window.location.pathname.replace(`/${fnr}`, "");

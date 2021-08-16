@@ -1,8 +1,8 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
-import { get, post, Result, Success } from "../../api/axios";
+import { get, post, Result, Success } from "@/api/axios";
 import * as actions from "./personoppgave_actions";
 import { PersonOppgave } from "./types/PersonOppgave";
-import { ISPERSONOPPGAVE_ROOT } from "../../apiConstants";
+import { ISPERSONOPPGAVE_ROOT } from "@/apiConstants";
 
 export const skalHentePersonOppgaver = (state: any) => {
   const reducer = state.personoppgaver;

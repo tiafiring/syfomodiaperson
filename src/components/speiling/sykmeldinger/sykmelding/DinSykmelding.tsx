@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Alertstripe from "nav-frontend-alertstriper";
-import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 import DineSykmeldingOpplysninger from "./sykmeldingOpplysninger/DineSykmeldingOpplysninger";
 import Hjelpeboble from "../../../bjorn/Hjelpeboble";
 import {

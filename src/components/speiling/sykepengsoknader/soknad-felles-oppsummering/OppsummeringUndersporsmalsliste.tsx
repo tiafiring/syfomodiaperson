@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import OppsummeringSporsmal from "./OppsummeringSporsmal";
 import { getKey } from "./Oppsummeringsvisning";
-import { SporsmalDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+import { SporsmalDTO } from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 
 interface OppsummeringUndersporsmalslisteProps {
   sporsmalsliste: SporsmalDTO[];

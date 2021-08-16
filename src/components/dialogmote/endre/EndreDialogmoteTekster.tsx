@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useFormState } from "react-final-form";
 import { Forhandsvisning } from "../Forhandsvisning";
 import { EndreTidStedSkjemaValues } from "./EndreDialogmoteSkjema";
-import { useForhandsvisTidSted } from "../../../hooks/dialogmote/useForhandsvisTidSted";
+import { useForhandsvisTidSted } from "@/hooks/dialogmote/useForhandsvisTidSted";
 import FritekstSeksjon from "../FritekstSeksjon";
 
 const MAX_LENGTH_ENDRE_FRITEKST = 200;

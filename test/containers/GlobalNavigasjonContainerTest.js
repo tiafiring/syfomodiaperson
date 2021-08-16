@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { mapStateToProps } from "../../src/components/globalnavigasjon/GlobalNavigasjonContainer";
+import { mapStateToProps } from "@/components/globalnavigasjon/GlobalNavigasjonContainer";
 
 describe("GlobalNavigasjonContainer", () => {
   describe("mapStateToProps", () => {

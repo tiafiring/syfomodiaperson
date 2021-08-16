@@ -2,8 +2,8 @@ import { expect } from "chai";
 import deepFreeze from "deep-freeze";
 import * as actions from "../../src/data/egenansatt/egenansatt_actions";
 import egenansatt from "../../src/data/egenansatt/egenansatt";
-import { HentEgenAnsattActionTypes } from "../../src/data/egenansatt/egenansatt_actions";
-import { defaultErrorTexts, ErrorType } from "../../src/api/axios";
+import { HentEgenAnsattActionTypes } from "@/data/egenansatt/egenansatt_actions";
+import { defaultErrorTexts, ErrorType } from "@/api/axios";
 
 describe("egenansatt", () => {
   describe("henter", () => {

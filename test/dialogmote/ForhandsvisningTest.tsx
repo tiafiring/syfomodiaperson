@@ -1,6 +1,6 @@
 import { mount } from "enzyme";
 import React from "react";
-import { Forhandsvisning } from "../../src/components/dialogmote/Forhandsvisning";
+import { Forhandsvisning } from "@/components/dialogmote/Forhandsvisning";
 import {
   Element,
   Innholdstittel,
@@ -14,7 +14,7 @@ import Lukknapp from "nav-frontend-lukknapp";
 import {
   DocumentComponentDto,
   DocumentComponentType,
-} from "../../src/data/dialogmote/types/dialogmoteTypes";
+} from "@/data/dialogmote/types/dialogmoteTypes";
 import Lenke from "nav-frontend-lenker";
 
 describe("Forhandsvisning", () => {

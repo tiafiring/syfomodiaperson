@@ -4,7 +4,7 @@ import DialogmoteInnkallingSkjemaSeksjon from "./DialogmoteInnkallingSkjemaSeksj
 import styled from "styled-components";
 import { Innholdstittel } from "nav-frontend-typografi";
 import { DialogmoteInnkallingSkjemaValues } from "./DialogmoteInnkallingSkjema";
-import { useForhandsvisInnkalling } from "../../../hooks/dialogmote/useForhandsvisInnkalling";
+import { useForhandsvisInnkalling } from "@/hooks/dialogmote/useForhandsvisInnkalling";
 import { Forhandsvisning } from "../Forhandsvisning";
 import FritekstSeksjon from "../FritekstSeksjon";
 import { DialogmoteInnkallingTeksterAlert } from "./DialogmoteInnkallingTeksterAlert";

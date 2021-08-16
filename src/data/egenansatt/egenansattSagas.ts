@@ -1,12 +1,12 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
-import { get, Result, Success } from "../../api/axios";
+import { get, Result, Success } from "@/api/axios";
 import { RootState } from "../rootState";
 import {
   egenansattHentet,
   HentEgenAnsattActionTypes,
   hentEgenansattFeilet,
 } from "./egenansatt_actions";
-import { SYFOPERSON_ROOT } from "../../apiConstants";
+import { SYFOPERSON_ROOT } from "@/apiConstants";
 
 export function* hentEgenansattSaga(action: any) {
   const path = `${SYFOPERSON_ROOT}/person/egenansatt`;

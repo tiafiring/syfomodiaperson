@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 import SykmeldingTeaser from "./SykmeldingTeaser";
 
 interface SykmeldingTeasereProps {

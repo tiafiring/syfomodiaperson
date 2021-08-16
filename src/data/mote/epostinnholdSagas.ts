@@ -1,9 +1,9 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import * as actions from "./epostinnhold_actions";
 import * as arbeidsgiveractions from "./arbeidsgiverepostinnhold_actions";
-import { get, Result, Success } from "../../api/axios";
+import { get, Result, Success } from "@/api/axios";
 import { EpostInnholdDTO } from "./types/EpostInnholdDTO";
-import { SYFOMOTEADMIN_ROOT } from "../../apiConstants";
+import { SYFOMOTEADMIN_ROOT } from "@/apiConstants";
 
 export function* hentBekreftMoteEpostinnhold(action: any) {
   yield put(actions.henterEpostInnhold());

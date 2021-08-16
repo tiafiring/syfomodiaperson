@@ -7,19 +7,19 @@ import SendtSoknadArbeidstakerNy from "../soknad-arbeidstaker-ny/SendtSoknadArbe
 import IkkeInnsendtSoknad from "../soknad-felles/IkkeInnsendtSoknad";
 import AvbruttSoknadArbeidtakerNy from "../soknad-arbeidstaker-ny/AvbruttSoknadArbeidtakerNy";
 import SykepengesoknadBehandlingsdager from "../soknad-behandlingsdager/SykepengesoknadBehandlingsdager";
-import { useValgtPersonident } from "../../../../hooks/useValgtBruker";
-import { hentSoknader } from "../../../../data/sykepengesoknad/soknader_actions";
-import { hentSykmeldinger } from "../../../../data/sykmelding/sykmeldinger_actions";
-import { useSykepengeSoknader } from "../../../../data/sykepengesoknad/soknader_hooks";
-import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
-import { useTilgang } from "../../../../hooks/useTilgang";
+import { useValgtPersonident } from "@/hooks/useValgtBruker";
+import { hentSoknader } from "@/data/sykepengesoknad/soknader_actions";
+import { hentSykmeldinger } from "@/data/sykmelding/sykmeldinger_actions";
+import { useSykepengeSoknader } from "@/data/sykepengesoknad/soknader_hooks";
+import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
+import { useTilgang } from "@/hooks/useTilgang";
 import { useParams } from "react-router-dom";
 import SideLaster from "../../../SideLaster";
 import {
   SoknadstatusDTO,
   SoknadstypeDTO,
-} from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
-import { useSykmeldinger } from "../../../../data/sykmelding/sykmeldinger_hooks";
+} from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
+import { useSykmeldinger } from "@/data/sykmelding/sykmeldinger_hooks";
 
 const SykepengesoknadContainer = (): ReactElement => {
   const dispatch = useDispatch();

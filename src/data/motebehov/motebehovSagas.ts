@@ -1,12 +1,12 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
-import { get, post, Result, Success } from "../../api/axios";
+import { get, post, Result, Success } from "@/api/axios";
 import * as actions from "./motebehov_actions";
 import { HentMotebehovAction } from "./motebehov_actions";
 import * as behandleActions from "./behandlemotebehov_actions";
 import { BehandleMotebehovAction } from "./behandlemotebehov_actions";
 import { RootState } from "../rootState";
 import { MotebehovDTO } from "./types/motebehovTypes";
-import { SYFOMOTEBEHOV_ROOT } from "../../apiConstants";
+import { SYFOMOTEBEHOV_ROOT } from "@/apiConstants";
 
 export const skalHenteMotebehov = (state: RootState) => {
   const reducer = state.motebehov;

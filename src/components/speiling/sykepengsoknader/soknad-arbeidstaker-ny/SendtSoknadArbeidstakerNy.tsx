@@ -7,11 +7,11 @@ import { Brodsmule } from "../../Brodsmuler";
 import {
   SoknadstatusDTO,
   SykepengesoknadDTO,
-} from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+} from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 import { KorrigertAv } from "../soknad-arbeidstaker/KorrigertAv";
 import { RelaterteSoknader } from "../soknad-arbeidstaker/RelaterteSoknader";
 import { SykmeldingUtdragContainer } from "../SykmeldingUtdragContainer";
-import { erVaerKlarOverAt } from "../../../../utils/sykepengesoknadUtils";
+import { erVaerKlarOverAt } from "@/utils/sykepengesoknadUtils";
 
 const texts = {
   tittel: "Søknad om sykepenger",

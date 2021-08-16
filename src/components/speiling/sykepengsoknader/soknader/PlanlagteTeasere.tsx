@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import PlanlagtTeaser from "./PlanlagtTeaser";
-import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+import { SykepengesoknadDTO } from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 
 interface PlanlagteTeasereProps {
   sykepengesoknader: SykepengesoknadDTO[];

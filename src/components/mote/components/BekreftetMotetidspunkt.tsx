@@ -1,6 +1,6 @@
 import React from "react";
-import { MoteDTO } from "../../../data/mote/types/moteTypes";
-import { ARBEIDSGIVER, BRUKER } from "../../../konstanter";
+import { MoteDTO } from "@/data/mote/types/moteTypes";
+import { ARBEIDSGIVER, BRUKER } from "@/konstanter";
 import DatoOgTid from "./DatoOgTid";
 import SvarMedIkon from "./SvarMedIkon";
 

@@ -1,8 +1,8 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import * as actions from "./oppfolgingstilfellerperson_actions";
-import { get, Result, Success } from "../../api/axios";
+import { get, Result, Success } from "@/api/axios";
 import { OppfolgingstilfellePerson } from "./types/OppfolgingstilfellePerson";
-import { MODIASYFOREST_ROOT } from "../../apiConstants";
+import { MODIASYFOREST_ROOT } from "@/apiConstants";
 
 export const harInnsendtSykmeldingUtenArbeidsgiver = (sykmeldinger: any) => {
   const erSykmeldingerHentet = sykmeldinger.hentet;

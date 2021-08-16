@@ -1,7 +1,7 @@
 import React from "react";
 import { Checkbox } from "nav-frontend-skjema";
-import { erMeldingTilNavInformasjon } from "../../utils/sykmeldinger/sykmeldingUtils";
-import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
+import { erMeldingTilNavInformasjon } from "@/utils/sykmeldinger/sykmeldingUtils";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 
 const tekster = {
   meldingTilNav: {

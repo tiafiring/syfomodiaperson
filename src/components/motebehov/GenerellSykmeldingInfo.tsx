@@ -4,11 +4,11 @@ import {
   erArbeidsforEtterPerioden,
   erHensynPaaArbeidsplassenInformasjon,
   sykmeldingperioderSortertEldstTilNyest,
-} from "../../utils/sykmeldinger/sykmeldingUtils";
+} from "@/utils/sykmeldinger/sykmeldingUtils";
 import Diagnoser from "./Diagnoser";
 import Perioder from "./Perioder";
 import EkstraDiagnoseInformasjon from "./EkstraDiagnoseInformasjon";
-import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 
 const tekster = {
   generellSykmeldingInfo: {

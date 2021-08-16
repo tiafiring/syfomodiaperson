@@ -6,14 +6,14 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import PengestoppModal from "./PengestoppModal";
 import PengestoppHistorikk from "./PengestoppHistorikk";
-import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 import {
   Arbeidsgiver,
   Status,
   StatusEndring,
-} from "../../data/pengestopp/types/FlaggPerson";
-import { FlaggpersonState } from "../../data/pengestopp/flaggperson";
-import { unikeArbeidsgivereMedSykmeldingSiste3Maneder } from "../../utils/pengestoppUtils";
+} from "@/data/pengestopp/types/FlaggPerson";
+import { FlaggpersonState } from "@/data/pengestopp/flaggperson";
+import { unikeArbeidsgivereMedSykmeldingSiste3Maneder } from "@/utils/pengestoppUtils";
 import Panel from "nav-frontend-paneler";
 
 export const texts = {

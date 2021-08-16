@@ -7,7 +7,7 @@ import { OppsummeringSporsmalProps } from "./OppsummeringSporsmal";
 import {
   SvarDTO,
   VisningskriterieDTO,
-} from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+} from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const texts = {
   ja: "Ja",

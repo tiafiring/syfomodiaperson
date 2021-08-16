@@ -1,8 +1,8 @@
 import React from "react";
-import { erFriskmeldingInformasjon } from "../../utils/sykmeldinger/sykmeldingUtils";
+import { erFriskmeldingInformasjon } from "@/utils/sykmeldinger/sykmeldingUtils";
 import TilbakeIArbeidMedArbeidsgiver from "./TilbakeIArbeidMedArbeidsgiver";
 import TilbakeIArbeidUtenArbeidsgiver from "./TilbakeIArbeidUtenArbeidsgiver";
-import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 
 interface TilbakeIArbeidProps {
   sykmelding: SykmeldingOldFormat;

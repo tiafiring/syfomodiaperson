@@ -1,7 +1,7 @@
 import React from "react";
-import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
-import { erUtdypendeOpplysninger } from "../../utils/sykmeldinger/sykmeldingUtils";
-import { SporsmalSvarDTO } from "../../data/sykmelding/types/SporsmalSvarDTO";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
+import { erUtdypendeOpplysninger } from "@/utils/sykmeldinger/sykmeldingUtils";
+import { SporsmalSvarDTO } from "@/data/sykmelding/types/SporsmalSvarDTO";
 
 const tekster = {
   UtdypendeOpplysninger: {

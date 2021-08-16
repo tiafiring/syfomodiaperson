@@ -1,6 +1,6 @@
 import { useAppSelector } from "./hooks";
-import { newestLederForEachVirksomhet } from "../utils/ledereUtils";
-import { Leder } from "../data/leder/ledere";
+import { newestLederForEachVirksomhet } from "@/utils/ledereUtils";
+import { Leder } from "@/data/leder/ledere";
 
 export const useLedere = (): {
   currentLedere: Leder[];

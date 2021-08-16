@@ -1,6 +1,6 @@
 import React from "react";
-import { SykmeldingPeriodeDTO } from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
-import { tilLesbarPeriodeMedArstall } from "../../../../../utils/datoUtils";
+import { SykmeldingPeriodeDTO } from "@/data/sykmelding/types/SykmeldingOldFormat";
+import { tilLesbarPeriodeMedArstall } from "@/utils/datoUtils";
 
 const texts = {
   title: "Periode",

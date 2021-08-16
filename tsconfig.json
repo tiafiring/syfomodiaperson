@@ -8,6 +8,10 @@
     "jsx": "react",
     "moduleResolution": "node",
     "outDir": "/",
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    },
     "noImplicitReturns": true,
     "noImplicitThis": true,
     //Todo: Endre til true og legg inn returntyper i sagas

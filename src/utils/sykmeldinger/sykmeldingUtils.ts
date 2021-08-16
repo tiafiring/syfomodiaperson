@@ -4,9 +4,9 @@ import {
   SykmeldingOldFormat,
   SykmeldingPeriodeDTO,
   SykmeldingStatus,
-} from "../../data/sykmelding/types/SykmeldingOldFormat";
-import { OppfolgingstilfellePerson } from "../../data/oppfolgingstilfelle/types/OppfolgingstilfellePerson";
-import { OppfolgingstilfelleperioderMapState } from "../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
+} from "@/data/sykmelding/types/SykmeldingOldFormat";
+import { OppfolgingstilfellePerson } from "@/data/oppfolgingstilfelle/types/OppfolgingstilfellePerson";
+import { OppfolgingstilfelleperioderMapState } from "@/data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
 
 export const finnAvventendeSykmeldingTekst = (
   sykmelding: SykmeldingOldFormat

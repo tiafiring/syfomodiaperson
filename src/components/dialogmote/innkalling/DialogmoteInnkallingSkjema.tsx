@@ -9,25 +9,25 @@ import {
   validerInnkallingFritekster,
   validerSted,
   validerTidspunkt,
-} from "../../../utils/valideringUtils";
-import { opprettInnkalling } from "../../../data/dialogmote/dialogmote_actions";
+} from "@/utils/valideringUtils";
+import { opprettInnkalling } from "@/data/dialogmote/dialogmote_actions";
 import { useDispatch } from "react-redux";
-import { DialogmoteInnkallingDTO } from "../../../data/dialogmote/types/dialogmoteTypes";
+import { DialogmoteInnkallingDTO } from "@/data/dialogmote/types/dialogmoteTypes";
 import { genererDato } from "../../mote/utils";
 import { Link } from "react-router-dom";
-import { useNavEnhet } from "../../../hooks/useNavEnhet";
+import { useNavEnhet } from "@/hooks/useNavEnhet";
 import { AlertStripeFeil } from "nav-frontend-alertstriper";
-import { useAppSelector } from "../../../hooks/hooks";
-import { useValgtPersonident } from "../../../hooks/useValgtBruker";
+import { useAppSelector } from "@/hooks/hooks";
+import { useValgtPersonident } from "@/hooks/useValgtBruker";
 import { FlexRow, PaddingSize } from "../../Layout";
 import { SkjemaFeiloppsummering } from "../../SkjemaFeiloppsummering";
-import { useFeilUtbedret } from "../../../hooks/useFeilUtbedret";
+import { useFeilUtbedret } from "@/hooks/useFeilUtbedret";
 import { TrackedFlatknapp } from "../../buttons/TrackedFlatknapp";
 import { TrackedHovedknapp } from "../../buttons/TrackedHovedknapp";
 import {
   ForhandsvisInnkallingGenerator,
   useForhandsvisInnkalling,
-} from "../../../hooks/dialogmote/useForhandsvisInnkalling";
+} from "@/hooks/dialogmote/useForhandsvisInnkalling";
 
 export interface DialogmoteInnkallingSkjemaValues {
   arbeidsgiver: string;

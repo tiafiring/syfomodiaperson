@@ -1,10 +1,10 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
-import { get, Result, Success } from "../../api/axios";
+import { get, Result, Success } from "@/api/axios";
 import * as actions from "./ledere_actions";
 import { HentLedereAction } from "./ledere_actions";
 import { RootState } from "../rootState";
 import { Leder } from "./ledere";
-import { MODIASYFOREST_ROOT } from "../../apiConstants";
+import { MODIASYFOREST_ROOT } from "@/apiConstants";
 
 export const skalHenteLedere = (state: RootState) => {
   const reducer = state.ledere;

@@ -1,7 +1,7 @@
 import { dagerMellomDatoer } from "./datoUtils";
 import { startDateFromLatestActiveTilfelle } from "./periodeUtils";
-import { MotebehovDTO } from "../data/motebehov/types/motebehovTypes";
-import { OppfolgingstilfelleperioderMapState } from "../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
+import { MotebehovDTO } from "@/data/motebehov/types/motebehovTypes";
+import { OppfolgingstilfelleperioderMapState } from "@/data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
 
 export const sorterMotebehovDataEtterDato = (
   a: MotebehovDTO,

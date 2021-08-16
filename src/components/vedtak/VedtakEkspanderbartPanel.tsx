@@ -1,14 +1,14 @@
 import { Normaltekst, Undertekst, Undertittel } from "nav-frontend-typografi";
-import { restdatoTildato } from "../../utils/datoUtils";
+import { restdatoTildato } from "@/utils/datoUtils";
 import VedtakAnnullertLabel from "./VedtakAnnullertLabel";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Panel from "nav-frontend-paneler";
 import { useDispatch, useSelector } from "react-redux";
-import { hentVirksomhet } from "../../data/virksomhet/virksomhet_actions";
+import { hentVirksomhet } from "@/data/virksomhet/virksomhet_actions";
 import Ekspanderbartpanel from "nav-frontend-ekspanderbartpanel";
-import { VedtakDTO } from "../../data/vedtak/vedtak";
+import { VedtakDTO } from "@/data/vedtak/vedtak";
 import navFarger from "nav-frontend-core";
 
 interface StyledPanelProps {

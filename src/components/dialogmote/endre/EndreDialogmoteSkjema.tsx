@@ -6,26 +6,26 @@ import { useDispatch } from "react-redux";
 import { TrackedFlatknapp } from "../../buttons/TrackedFlatknapp";
 import Panel from "nav-frontend-paneler";
 import { FlexRow, PaddingSize } from "../../Layout";
-import { useAppSelector } from "../../../hooks/hooks";
+import { useAppSelector } from "@/hooks/hooks";
 import { TrackedHovedknapp } from "../../buttons/TrackedHovedknapp";
-import { endreTidSted } from "../../../data/dialogmote/dialogmote_actions";
-import { useValgtPersonident } from "../../../hooks/useValgtBruker";
+import { endreTidSted } from "@/data/dialogmote/dialogmote_actions";
+import { useValgtPersonident } from "@/hooks/useValgtBruker";
 import { Form } from "react-final-form";
 import {
   validerBegrunnelser,
   validerSted,
   validerTidspunkt,
-} from "../../../utils/valideringUtils";
-import { useFeilUtbedret } from "../../../hooks/useFeilUtbedret";
+} from "@/utils/valideringUtils";
+import { useFeilUtbedret } from "@/hooks/useFeilUtbedret";
 import DialogmoteTidOgSted from "../DialogmoteTidOgSted";
 import EndreDialogmoteTekster from "./EndreDialogmoteTekster";
 import { SkjemaFeiloppsummering } from "../../SkjemaFeiloppsummering";
 import { genererDato } from "../../mote/utils";
-import { useForhandsvisTidSted } from "../../../hooks/dialogmote/useForhandsvisTidSted";
+import { useForhandsvisTidSted } from "@/hooks/dialogmote/useForhandsvisTidSted";
 import {
   DialogmoteDTO,
   EndreTidStedDialogmoteDTO,
-} from "../../../data/dialogmote/types/dialogmoteTypes";
+} from "@/data/dialogmote/types/dialogmoteTypes";
 import { AlertStripeFeil } from "nav-frontend-alertstriper";
 
 const texts = {

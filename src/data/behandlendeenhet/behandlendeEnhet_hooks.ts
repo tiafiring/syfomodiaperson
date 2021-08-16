@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../hooks/hooks";
+import { useAppSelector } from "@/hooks/hooks";
 import { BehandlendeEnhetState } from "./behandlendeEnhet";
 
 export const useBehandlendeEnhet = (): BehandlendeEnhetState => {

@@ -5,12 +5,12 @@ import PlanlagteTeasere from "./PlanlagteTeasere";
 import {
   sorterEtterOpprettetDato,
   sorterEtterPerioder,
-} from "../../../../utils/sykepengesoknadUtils";
+} from "@/utils/sykepengesoknadUtils";
 import {
   SoknadstatusDTO,
   SoknadstypeDTO,
   SykepengesoknadDTO,
-} from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+} from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const texts = {
   sidetittel: "Søknad om sykepenger",

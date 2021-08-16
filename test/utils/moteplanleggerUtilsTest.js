@@ -3,7 +3,7 @@ import {
   getTidligereAlternativer,
   brukerHarSvart,
   getSvar,
-} from "../../src/utils/moteplanleggerUtils";
+} from "@/utils/moteplanleggerUtils";
 import {
   moteIkkeBesvart,
   moteBesvartAlleAlternativer,

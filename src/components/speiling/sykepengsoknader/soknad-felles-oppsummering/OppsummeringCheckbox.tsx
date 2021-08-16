@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import OppsummeringAvkrysset from "./OppsummeringAvkrysset";
 import OppsummeringUndersporsmalsliste from "./OppsummeringUndersporsmalsliste";
 import { OppsummeringSporsmalProps } from "./OppsummeringSporsmal";
-import { VisningskriterieDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+import { VisningskriterieDTO } from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const OppsummeringCheckbox = ({
   svar,

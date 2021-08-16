@@ -1,13 +1,13 @@
 import React from "react";
-import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
+import { Brukerinfo } from "@/data/navbruker/types/Brukerinfo";
 import PersonkortElement from "./PersonkortElement";
 import PersonkortInformasjon from "./PersonkortInformasjon";
-import { formaterFnr } from "../../utils/fnrUtils";
+import { formaterFnr } from "@/utils/fnrUtils";
 import {
   formaterBostedsadresse,
   formaterKontaktadresse,
   formaterOppholdsadresse,
-} from "../../utils/pdladresseUtils";
+} from "@/utils/pdladresseUtils";
 import { PersonImage } from "../../../img/ImageComponents";
 
 const texts = {

@@ -1,4 +1,4 @@
-import { OppfolgingsplanerState } from "../data/oppfolgingsplan/oppfoelgingsdialoger";
+import { OppfolgingsplanerState } from "@/data/oppfolgingsplan/oppfoelgingsdialoger";
 import { useAppSelector } from "./hooks";
 
 export const useOppfoelgingsDialoger = () => {

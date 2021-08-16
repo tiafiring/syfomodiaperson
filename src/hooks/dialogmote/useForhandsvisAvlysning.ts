@@ -1,12 +1,12 @@
 import {
   DialogmoteDTO,
   DocumentComponentDto,
-} from "../../data/dialogmote/types/dialogmoteTypes";
-import { useNavBrukerData } from "../../data/navbruker/navbruker_hooks";
-import { AvlysDialogmoteSkjemaValues } from "../../components/dialogmote/avlys/AvlysDialogmoteSkjema";
-import { avlysningTexts } from "../../data/dialogmote/dialogmoteTexts";
-import { tilDatoMedManedNavnOgKlokkeslettWithComma } from "../../utils/datoUtils";
-import { createParagraph } from "../../utils/documentComponentUtils";
+} from "@/data/dialogmote/types/dialogmoteTypes";
+import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
+import { AvlysDialogmoteSkjemaValues } from "@/components/dialogmote/avlys/AvlysDialogmoteSkjema";
+import { avlysningTexts } from "@/data/dialogmote/dialogmoteTexts";
+import { tilDatoMedManedNavnOgKlokkeslettWithComma } from "@/utils/datoUtils";
+import { createParagraph } from "@/utils/documentComponentUtils";
 import { useForhandsvisningHilsen } from "./useForhandsvisningHilsen";
 
 export interface ForhandsvisAvlysningGenerator {

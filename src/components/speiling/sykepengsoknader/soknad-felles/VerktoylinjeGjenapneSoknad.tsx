@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { VerktoyKnapp, Verktoylinje } from "../../Verktoylinje";
-import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
-import { erOpprettetSisteAar } from "../../../../utils/sykepengesoknadUtils";
+import { SykepengesoknadDTO } from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
+import { erOpprettetSisteAar } from "@/utils/sykepengesoknadUtils";
 
 const texts = {
   gjenapne: "Gjenåpne søknad",

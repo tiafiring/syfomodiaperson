@@ -5,8 +5,8 @@ import {
   HENTER_NAVBRUKER,
   NAVBRUKER_HENTET,
 } from "./navbruker_actions";
-import { get, Result, Success } from "../../api/axios";
-import { MODIASYFOREST_ROOT } from "../../apiConstants";
+import { get, Result, Success } from "@/api/axios";
+import { MODIASYFOREST_ROOT } from "@/apiConstants";
 
 export function* hentNavbruker(action: any) {
   yield put({ type: HENTER_NAVBRUKER });

@@ -5,7 +5,7 @@ import {
   HENT_LEDERE_FEILET,
   LedereActions,
 } from "./ledere_actions";
-import { currentLedere, formerLedere } from "../../utils/ledereUtils";
+import { currentLedere, formerLedere } from "@/utils/ledereUtils";
 
 export interface Leder {
   aktoerId: string;

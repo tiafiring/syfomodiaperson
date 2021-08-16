@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react";
 import Knapp from "nav-frontend-knapper";
-import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
-import { useAppSelector } from "../../../../hooks/hooks";
-import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
+import { useAppSelector } from "@/hooks/hooks";
+import { SykepengesoknadDTO } from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const texts = {
   angre: "Endre opplysninger",

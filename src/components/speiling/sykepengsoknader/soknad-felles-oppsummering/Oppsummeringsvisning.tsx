@@ -3,7 +3,7 @@ import OppsummeringSporsmal from "./OppsummeringSporsmal";
 import {
   SvarTypeDTO,
   SykepengesoknadDTO,
-} from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+} from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 
 export const getKey = (tag: string, id?: string | number): string =>
   `${tag}_${id}`;

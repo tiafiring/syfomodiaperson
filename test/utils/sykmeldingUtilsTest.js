@@ -19,8 +19,8 @@ import {
   finnAvventendeSykmeldingTekst,
   sykmeldingerHasCoronaDiagnose,
   latestSykmeldingForVirksomhet,
-} from "../../src/utils/sykmeldinger/sykmeldingUtils";
-import { ANTALL_MS_DAG } from "../../src/utils/datoUtils";
+} from "@/utils/sykmeldinger/sykmeldingUtils";
+import { ANTALL_MS_DAG } from "@/utils/datoUtils";
 
 describe("sykmeldingUtils", () => {
   describe("finnAvventendeSykmeldingTekst", () => {

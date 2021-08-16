@@ -1,7 +1,7 @@
 import React from "react";
 import { Checkbox } from "nav-frontend-skjema";
 import TilbakeIArbeidCheckboxMedSporsmalOgDato from "./TilbakeIArbeidCheckboxMedSporsmalOgDato";
-import { FriskmeldingDTO } from "../../data/sykmelding/types/SykmeldingOldFormat";
+import { FriskmeldingDTO } from "@/data/sykmelding/types/SykmeldingOldFormat";
 
 const tekster = {
   header: "8 uker: Pasient med arbeidsgiver, utdypende opplysninger",

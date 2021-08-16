@@ -1,7 +1,7 @@
 import { Reducer } from "redux";
 import { MoteAlternativDTO, MoteDTO } from "./types/moteTypes";
 import * as actions from "./moter_actions";
-import { konverterTid } from "../../utils/datoUtils";
+import { konverterTid } from "@/utils/datoUtils";
 
 export interface MoterState {
   henter: boolean;

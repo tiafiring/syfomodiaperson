@@ -6,7 +6,7 @@ import Veileder from "nav-frontend-veileder";
 import { FlexColumn, FlexRow, ModalContentContainer } from "../../../Layout";
 import { TrackedKnapp } from "../../../buttons/TrackedKnapp";
 import { TrackedFlatknapp } from "../../../buttons/TrackedFlatknapp";
-import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
+import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
 import { Link } from "react-router-dom";
 
 const ModalText = styled.div`

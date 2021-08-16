@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ARBEIDSGIVER } from "../../../konstanter";
+import { ARBEIDSGIVER } from "@/konstanter";
 import BekreftMoteSkjema from "./BekreftMoteSkjema";
 import BekreftMoteUtenSvarSkjema from "./BekreftMoteUtenSvarSkjema";
 import { motePt } from "../moteProptypes";

@@ -2,15 +2,15 @@ import React, { ReactElement } from "react";
 import {
   SykmeldingOldFormat,
   SykmeldingStatus,
-} from "../../../../data/sykmelding/types/SykmeldingOldFormat";
-import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
+} from "@/data/sykmelding/types/SykmeldingOldFormat";
+import { tilLesbarDatoMedArstall } from "@/utils/datoUtils";
 import { Frilansersporsmal } from "./SykmeldingStatuspanelOpplysning";
 import Statuspanel, {
   StatusNokkelopplysning,
   Statusopplysninger,
 } from "../../Statuspanel";
 import AngreBekreftSykmelding from "../sykmeldinger/AngreBekreftSykmelding";
-import { tilStorForbokstav } from "../../../../utils";
+import { tilStorForbokstav } from "@/utils";
 
 const texts = {
   tittel: "Jeg er sykmeldt fra",

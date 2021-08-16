@@ -1,12 +1,12 @@
 import Side from "../../../sider/Side";
-import { MOETEPLANLEGGER } from "../../../enums/menypunkter";
+import { MOETEPLANLEGGER } from "@/enums/menypunkter";
 import React, { ReactElement } from "react";
 import Sidetopp from "../../Sidetopp";
 import DialogmoteInnkallingSkjema from "./DialogmoteInnkallingSkjema";
 import SideLaster from "../../SideLaster";
 import styled from "styled-components";
-import { useLedere } from "../../../hooks/useLedere";
-import { useValgtPersonident } from "../../../hooks/useValgtBruker";
+import { useLedere } from "@/hooks/useLedere";
+import { useValgtPersonident } from "@/hooks/useValgtBruker";
 import { AlertstripeFullbredde } from "../../AlertstripeFullbredde";
 
 const texts = {

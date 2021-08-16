@@ -1,4 +1,4 @@
-import { SykmeldingOldFormat } from "../data/sykmelding/types/SykmeldingOldFormat";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 import { toDate } from "./datoUtils";
 import {
   getSykmeldingStartdato,

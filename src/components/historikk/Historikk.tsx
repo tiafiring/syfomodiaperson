@@ -2,12 +2,9 @@ import React, { ReactElement } from "react";
 import Panel from "nav-frontend-paneler";
 import HistorikkEventItem from "./HistorikkEventItem";
 import UtvidbarHistorikk from "./UtvidbarHistorikk";
-import {
-  TilfellePeriode,
-  tilfellerNewestToOldest,
-} from "../../utils/periodeUtils";
-import { tilLesbarPeriodeMedArstall } from "../../utils/datoUtils";
-import { HistorikkEvent } from "../../data/historikk/types/historikkTypes";
+import { TilfellePeriode, tilfellerNewestToOldest } from "@/utils/periodeUtils";
+import { tilLesbarPeriodeMedArstall } from "@/utils/datoUtils";
+import { HistorikkEvent } from "@/data/historikk/types/historikkTypes";
 
 const texts = {
   errorMessage:

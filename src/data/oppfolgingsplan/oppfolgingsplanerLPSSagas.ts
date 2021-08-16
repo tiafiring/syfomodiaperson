@@ -1,10 +1,10 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import * as actions from "./oppfolgingsplanerlps_actions";
 import { PersonOppgave } from "../personoppgave/types/PersonOppgave";
-import { get, Result, Success } from "../../api/axios";
+import { get, Result, Success } from "@/api/axios";
 import { OppfolgingsplanLPS } from "./types/OppfolgingsplanLPS";
 import { RootState } from "../rootState";
-import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "../../apiConstants";
+import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "@/apiConstants";
 
 export function* hentOppfolgingsplanerLPS(
   action: any,

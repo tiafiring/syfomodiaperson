@@ -1,8 +1,8 @@
 import {
   DocumentComponentDto,
   DocumentComponentType,
-} from "../data/dialogmote/types/dialogmoteTypes";
-import { StandardTekst } from "../data/dialogmote/dialogmoteTexts";
+} from "@/data/dialogmote/types/dialogmoteTypes";
+import { StandardTekst } from "@/data/dialogmote/dialogmoteTexts";
 
 export const createLink = (
   title: string,

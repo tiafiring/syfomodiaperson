@@ -1,6 +1,6 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import { LedereState } from "../leder/ledere";
-import { get, Result, Success } from "../../api/axios";
+import { get, Result, Success } from "@/api/axios";
 import { OppfolgingstilfellePersonArbeidsgiver } from "./types/OppfolgingstilfellePersonArbeidsgiver";
 import { RootState } from "../rootState";
 import {
@@ -10,7 +10,7 @@ import {
   hentOppfolgingstilfelleperioderHentet,
   OppfolgingstilfelleperioderActionTypes,
 } from "./oppfolgingstilfelleperioder_actions";
-import { MODIASYFOREST_ROOT } from "../../apiConstants";
+import { MODIASYFOREST_ROOT } from "@/apiConstants";
 
 export function* hentOppfolgingstilfelleperioder(
   action: HentOppfolgingstilfelleperioderAction,

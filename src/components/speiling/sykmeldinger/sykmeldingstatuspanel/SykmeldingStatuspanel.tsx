@@ -10,7 +10,7 @@ import Statuspanel, { Statusopplysninger } from "../../Statuspanel";
 import {
   SykmeldingOldFormat,
   SykmeldingStatus,
-} from "../../../../data/sykmelding/types/SykmeldingOldFormat";
+} from "@/data/sykmelding/types/SykmeldingOldFormat";
 
 interface NokkelopplysningerProps {
   sykmelding: SykmeldingOldFormat;

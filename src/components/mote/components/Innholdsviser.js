@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Radio } from "nav-frontend-skjema";
 import Alertstripe from "nav-frontend-alertstriper";
 import AppSpinner from "../../AppSpinner";
-import { BRUKER, ARBEIDSGIVER } from "../../../konstanter";
+import { BRUKER, ARBEIDSGIVER } from "@/konstanter";
 import { motedeltakertypePt, motePt } from "../moteProptypes";
 
 const texts = {

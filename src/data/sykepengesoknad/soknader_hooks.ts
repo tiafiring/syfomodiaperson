@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../hooks/hooks";
+import { useAppSelector } from "@/hooks/hooks";
 import { SykepengesoknadDTO } from "./types/SykepengesoknadDTO";
 
 export const useSykepengeSoknader: () => {

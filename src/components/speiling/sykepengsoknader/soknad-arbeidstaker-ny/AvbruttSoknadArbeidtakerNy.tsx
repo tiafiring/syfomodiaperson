@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
+import { tilLesbarDatoMedArstall } from "@/utils/datoUtils";
 import Statuspanel, {
   StatusNokkelopplysning,
   Statusopplysninger,
@@ -7,7 +7,7 @@ import Statuspanel, {
 import SoknadSpeiling from "../soknad-felles/SoknadSpeiling";
 import VerktoylinjeGjenapne from "../soknad-felles/VerktoylinjeGjenapneSoknad";
 import { Brodsmule } from "../../Brodsmuler";
-import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+import { SykepengesoknadDTO } from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 import { SykmeldingUtdragContainer } from "../SykmeldingUtdragContainer";
 
 const texts = {

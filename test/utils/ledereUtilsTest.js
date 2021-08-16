@@ -10,8 +10,8 @@ import {
   virksomheterWithoutLeder,
   ledereSortertPaaNavnOgOrganisasjonsnavn,
   newestLederForEachVirksomhet,
-} from "../../src/utils/ledereUtils";
-import { ANTALL_MS_DAG } from "../../src/utils/datoUtils";
+} from "@/utils/ledereUtils";
+import { ANTALL_MS_DAG } from "@/utils/datoUtils";
 import {
   mockActiveSykmeldingForLeder,
   mockInactiveSykmeldingForLeder,

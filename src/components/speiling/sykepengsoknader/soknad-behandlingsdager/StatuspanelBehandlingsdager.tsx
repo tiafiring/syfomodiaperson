@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { StatusNokkelopplysning } from "../../Statuspanel";
 import hentSykepengetekst from "../../../../utils/soknad-felles/hentSykepengetekst";
 import hentSoknadStatustekst from "../../../../utils/soknad-felles/hentSoknadStatustekst";
-import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+import { SykepengesoknadDTO } from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const texts = {
   sendt: "Sendt til NAV",

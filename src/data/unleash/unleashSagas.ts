@@ -1,12 +1,12 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { get, Result, Success } from "../../api/axios";
+import { get, Result, Success } from "@/api/axios";
 import {
   FetchUnleashTogglesAction,
   fetchUnleashTogglesFailed,
   fetchUnleashTogglesSuccess,
   UnleashActionTypes,
 } from "./unleash_actions";
-import { UNLEASH_ROOT } from "../../apiConstants";
+import { UNLEASH_ROOT } from "@/apiConstants";
 
 //Common saga for all toggles
 function* fetchToggles(action: FetchUnleashTogglesAction) {

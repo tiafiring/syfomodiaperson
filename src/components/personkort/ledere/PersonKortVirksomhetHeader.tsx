@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import EtikettBase from "nav-frontend-etiketter";
-import { Leder } from "../../../data/leder/ledere";
-import { formaterOrgnr } from "../../../utils";
-import { lederHasActiveSykmelding } from "../../../utils/ledereUtils";
+import { Leder } from "@/data/leder/ledere";
+import { formaterOrgnr } from "@/utils";
+import { lederHasActiveSykmelding } from "@/utils/ledereUtils";
 import kanskjeBooleanTilJaNeiKanskje from "../kanskjeBooleanTilJaNeiKanskje";
 import { FabrikkImage } from "../../../../img/ImageComponents";
 import navFarger from "nav-frontend-core";

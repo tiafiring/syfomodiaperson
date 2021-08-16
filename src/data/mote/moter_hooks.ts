@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../hooks/hooks";
+import { useAppSelector } from "@/hooks/hooks";
 import { MoteDTO } from "./types/moteTypes";
 
 export const useAktivtMoteplanleggerMote = (): MoteDTO | undefined => {

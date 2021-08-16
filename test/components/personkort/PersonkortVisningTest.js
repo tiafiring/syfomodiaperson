@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { mount } from "enzyme";
 import Alertstripe from "nav-frontend-alertstriper";
 import PersonkortVisning from "../../../src/components/personkort/PersonkortVisning";
-import { PERSONKORTVISNING_TYPE } from "../../../src/konstanter";
+import { PERSONKORTVISNING_TYPE } from "@/konstanter";
 import PersonkortElement from "../../../src/components/personkort/PersonkortElement";
 import PersonkortInformasjon from "../../../src/components/personkort/PersonkortInformasjon";
 import PersonkortSykmeldt from "../../../src/components/personkort/PersonkortSykmeldt";
@@ -12,11 +12,11 @@ import PersonkortLege, {
   TidligereLeger,
 } from "../../../src/components/personkort/PersonkortLege";
 import mockSykmeldinger from "../../mockdata/sykmeldinger/mockSykmeldinger";
-import { newSMFormat2OldFormat } from "../../../src/utils/sykmeldinger/sykmeldingParser";
-import { leggTilDagerPaDato } from "../../../src/utils/datoUtils";
+import { newSMFormat2OldFormat } from "@/utils/sykmeldinger/sykmeldingParser";
+import { leggTilDagerPaDato } from "@/utils/datoUtils";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import { rootReducer } from "../../../src/data/rootState";
+import { rootReducer } from "@/data/rootState";
 import configureStore from "redux-mock-store";
 
 describe("PersonkortVisning", () => {

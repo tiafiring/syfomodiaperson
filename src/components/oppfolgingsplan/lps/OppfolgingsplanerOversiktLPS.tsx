@@ -1,16 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import Panel from "nav-frontend-paneler";
-import {
-  restdatoTilLesbarDato,
-  toDatePrettyPrint,
-} from "../../../utils/datoUtils";
-import { isPersonOppgaveBehandlet } from "../../../utils/personOppgaveUtils";
-import { OppfolgingsplanLPS } from "../../../data/oppfolgingsplan/types/OppfolgingsplanLPS";
+import { restdatoTilLesbarDato, toDatePrettyPrint } from "@/utils/datoUtils";
+import { isPersonOppgaveBehandlet } from "@/utils/personOppgaveUtils";
+import { OppfolgingsplanLPS } from "@/data/oppfolgingsplan/types/OppfolgingsplanLPS";
 import BehandleOppfolgingsplanLPS from "./BehandleOppfolgingsplanLPS";
 import OppfolgingsplanLPSEtikett from "./OppfolgingsplanLPSEtikett";
 import { StatusKanImage } from "../../../../img/ImageComponents";
-import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "../../../apiConstants";
+import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "@/apiConstants";
 
 const texts = {
   buttonOpenPlan: "Åpne oppfølgingsplanen(pdf)",

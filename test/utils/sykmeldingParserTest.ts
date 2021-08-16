@@ -1,9 +1,9 @@
 import { expect } from "chai";
-import { toDate } from "../../src/utils/datoUtils";
+import { toDate } from "@/utils/datoUtils";
 import {
   newSMFormat2OldFormat,
   oldFormatSMForAG,
-} from "../../src/utils/sykmeldinger/sykmeldingParser";
+} from "@/utils/sykmeldinger/sykmeldingParser";
 import mockSykmeldinger from "../mockdata/sykmeldinger/mockSykmeldinger";
 import {
   mockSykmeldingerWithBekreftelse,
@@ -31,13 +31,13 @@ import {
 import {
   gamleSMStatuser,
   nyeSMStatuser,
-} from "../../src/utils/sykmeldinger/sykmeldingstatuser";
+} from "@/utils/sykmeldinger/sykmeldingstatuser";
 import mockOldSykmeldinger from "../mockdata/sykmeldinger/mockOldSykmeldinger";
 import {
   arbeidsrelaterteArsakerTekst,
   medisinskeArsakerTekster,
-} from "../../src/utils/sykmeldinger/AktivitetIkkeMuligArsaker";
-import { FriskmeldingDTO } from "../../src/data/sykmelding/types/SykmeldingOldFormat";
+} from "@/utils/sykmeldinger/AktivitetIkkeMuligArsaker";
+import { FriskmeldingDTO } from "@/data/sykmelding/types/SykmeldingOldFormat";
 
 const sykmeldtFnr = "99887766554";
 

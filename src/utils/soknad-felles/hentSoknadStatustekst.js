@@ -1,6 +1,6 @@
 import { tilLesbarDatoMedArstall } from "../datoUtils";
 import { formaterOrgnr } from "../index";
-import { SoknadstatusDTO } from "../../data/sykepengesoknad/types/SykepengesoknadDTO";
+import { SoknadstatusDTO } from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const texts = {
   korrigert: "Korrigert",

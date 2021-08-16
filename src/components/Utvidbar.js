@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { scrollTo, erSynligIViewport } from "../utils/browserUtils";
+import { scrollTo, erSynligIViewport } from "@/utils/browserUtils";
 
 class Utvidbar extends Component {
   constructor(props) {

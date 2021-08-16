@@ -1,6 +1,6 @@
 import React from "react";
 import { Checkbox } from "nav-frontend-skjema";
-import { tilLesbarDatoMedArstall } from "../../utils/datoUtils";
+import { tilLesbarDatoMedArstall } from "@/utils/datoUtils";
 
 interface TilbakeIArbeidCheckboxMedSporsmalOgDatoProps {
   checkboxLabel: string;

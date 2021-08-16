@@ -9,8 +9,8 @@ import { VerktoyKnapp, Verktoylinje } from "../../Verktoylinje";
 import {
   SoknadstatusDTO,
   SykepengesoknadDTO,
-} from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
-import { erOpprettetSisteAar } from "../../../../utils/sykepengesoknadUtils";
+} from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
+import { erOpprettetSisteAar } from "@/utils/sykepengesoknadUtils";
 
 const texts = {
   status: "Status",

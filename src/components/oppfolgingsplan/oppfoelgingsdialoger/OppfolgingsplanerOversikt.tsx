@@ -9,11 +9,11 @@ import {
   leggTilDagerPaDato,
   restdatoTilLesbarDato,
   tilLesbarPeriodeMedArstall,
-} from "../../../utils/datoUtils";
-import { hentVirksomhet } from "../../../data/virksomhet/virksomhet_actions";
+} from "@/utils/datoUtils";
+import { hentVirksomhet } from "@/data/virksomhet/virksomhet_actions";
 import OppfolgingsplanerOversiktLPS from "../lps/OppfolgingsplanerOversiktLPS";
-import { OppfolgingsplanLPS } from "../../../data/oppfolgingsplan/types/OppfolgingsplanLPS";
-import { OppfolgingsplanDTO } from "../../../data/oppfolgingsplan/oppfoelgingsdialoger";
+import { OppfolgingsplanLPS } from "@/data/oppfolgingsplan/types/OppfolgingsplanLPS";
+import { OppfolgingsplanDTO } from "@/data/oppfolgingsplan/oppfoelgingsdialoger";
 
 const texts = {
   titles: {

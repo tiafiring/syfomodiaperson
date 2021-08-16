@@ -3,7 +3,7 @@ import {
   HentDiskresjonskodeActions,
   HentDiskresjonskodeActionTypes,
 } from "./diskresjonskode_actions";
-import { ApiError } from "../../api/axios";
+import { ApiError } from "@/api/axios";
 
 export interface DiskresjonskodeData {
   diskresjonskode: string;
