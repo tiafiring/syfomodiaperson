@@ -1,12 +1,12 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { get } from "../../api/axios";
-import { Result, Success } from "../../api/axios";
+import { get } from "@/api/axios";
+import { Result, Success } from "@/api/axios";
 import { HistorikkEvent } from "./types/historikkTypes";
 import {
   SYFOMOTEADMIN_ROOT,
   SYFOMOTEBEHOV_ROOT,
   SYFOOPPFOLGINGSPLANSERVICE_ROOT,
-} from "../../apiConstants";
+} from "@/apiConstants";
 import {
   HentHistorikkAction,
   henterHistorikk,

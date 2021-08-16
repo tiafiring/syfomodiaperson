@@ -1,7 +1,7 @@
 import React from "react";
 import EtikettBase from "nav-frontend-etiketter";
 import Lenke from "nav-frontend-lenker";
-import { OppfolgingsplanDTO } from "../../data/oppfolgingsplan/oppfoelgingsdialoger";
+import { OppfolgingsplanDTO } from "@/data/oppfolgingsplan/oppfoelgingsdialoger";
 import SykmeldingMotebehovVisning from "../motebehov/SykmeldingMotebehovVisning";
 import {
   arbeidsgivernavnEllerArbeidssituasjon,
@@ -14,22 +14,22 @@ import {
   sykmeldingerSortertNyestTilEldst,
   sykmeldingerUtenArbeidsgiver,
   sykmeldingperioderSortertEldstTilNyest,
-} from "../../utils/sykmeldinger/sykmeldingUtils";
-import { finnMiljoStreng } from "../../utils/miljoUtil";
-import { OppfolgingstilfellePerson } from "../../data/oppfolgingstilfelle/types/OppfolgingstilfellePerson";
-import { tilLesbarPeriodeMedArstall } from "../../utils/datoUtils";
-import { senesteTom, tidligsteFom } from "../../utils/periodeUtils";
+} from "@/utils/sykmeldinger/sykmeldingUtils";
+import { finnMiljoStreng } from "@/utils/miljoUtil";
+import { OppfolgingstilfellePerson } from "@/data/oppfolgingstilfelle/types/OppfolgingstilfellePerson";
+import { tilLesbarPeriodeMedArstall } from "@/utils/datoUtils";
+import { senesteTom, tidligsteFom } from "@/utils/periodeUtils";
 import Utvidbar from "../Utvidbar";
 import styled from "styled-components";
-import { OppfolgingstilfelleperioderMapState } from "../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
-import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
+import { OppfolgingstilfelleperioderMapState } from "@/data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 import {
   GultDokumentImage,
   MerInformasjonImage,
 } from "../../../img/ImageComponents";
 import { UtdragOppfolgingsplaner } from "./UtdragOppfolgingsplaner";
 import { DialogmotePanel } from "../mote/components/DialogmotePanel";
-import { useTrackOnClick } from "../../data/logging/loggingHooks";
+import { useTrackOnClick } from "@/data/logging/loggingHooks";
 
 const tekster = {
   header: "Utdrag fra sykefraværet",

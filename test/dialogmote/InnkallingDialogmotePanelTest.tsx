@@ -8,12 +8,12 @@ import {
   texts as innkallingDialmotePanelTexts,
 } from "../../src/components/mote/components/innkalling/InnkallingDialogmotePanel";
 import { createStore } from "redux";
-import { rootReducer } from "../../src/data/rootState";
+import { rootReducer } from "@/data/rootState";
 import configureStore from "redux-mock-store";
 import Alertstripe from "nav-frontend-alertstriper";
-import { NyttDialogMote } from "../../src/components/mote/components/innkalling/NyttDialogMote";
+import { NyttDialogMote } from "@/components/mote/components/innkalling/NyttDialogMote";
 import ModalWrapper from "nav-frontend-modal";
-import { brukerKanIkkeVarslesTekst } from "../../src/components/BrukerKanIkkeVarslesText";
+import { brukerKanIkkeVarslesTekst } from "@/components/BrukerKanIkkeVarslesText";
 
 const realState = createStore(rootReducer).getState();
 const store = configureStore([]);

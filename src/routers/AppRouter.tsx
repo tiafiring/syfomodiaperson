@@ -10,28 +10,28 @@ import OppfoelgingsPlanerOversiktContainer from "../components/oppfolgingsplan/c
 import OppfoelgingsplanContainer from "../components/oppfolgingsplan/container/OppfoelgingsplanContainer";
 import DinSykmeldingContainer from "../components/speiling/sykmeldinger/container/DinSykmeldingContainer";
 import HistorikkContainer from "../components/historikk/container/HistorikkContainer";
-import { erGyldigFodselsnummer } from "../utils/frnValideringUtils";
+import { erGyldigFodselsnummer } from "@/utils/frnValideringUtils";
 import MotelandingssideContainer from "../components/mote/container/MotelandingssideContainer";
 import NokkelinformasjonContainer from "../components/nokkelinformasjon/container/NokkelinformasjonContainer";
 import VedtakContainer from "../components/vedtak/container/VedtakContainer";
 import DialogmoteInnkallingContainer from "../components/dialogmote/innkalling/DialogmoteInnkallingContainer";
-import { erLokalEllerPreprod } from "../utils/miljoUtil";
+import { erLokalEllerPreprod } from "@/utils/miljoUtil";
 import AvlysDialogmoteContainer from "../components/dialogmote/avlys/AvlysDialogmoteContainer";
-import { useValgtPersonident } from "../hooks/useValgtBruker";
+import { useValgtPersonident } from "@/hooks/useValgtBruker";
 import { useDispatch } from "react-redux";
 import {
   hentAktivBruker,
   pushModiaContext,
-} from "../data/modiacontext/modiacontext_actions";
-import { EventType } from "../data/modiacontext/modiacontextTypes";
+} from "@/data/modiacontext/modiacontext_actions";
+import { EventType } from "@/data/modiacontext/modiacontextTypes";
 import AppSpinner from "../components/AppSpinner";
-import { useAppSelector } from "../hooks/hooks";
+import { useAppSelector } from "@/hooks/hooks";
 import DialogmoteReferatContainer from "../components/dialogmote/referat/DialogmoteReferatContainer";
-import { useUserProperties } from "../data/logging/loggingHooks";
-import { setAmplitudeUserProperties } from "../amplitude/amplitude";
+import { useUserProperties } from "@/data/logging/loggingHooks";
+import { setAmplitudeUserProperties } from "@/amplitude/amplitude";
 import EndreDialogmoteContainer from "../components/dialogmote/endre/EndreDialogmoteContainer";
-import { fetchUnleashToggles } from "../data/unleash/unleash_actions";
-import { SykepengesoknadSide } from "../components/speiling/sykepengsoknader/container/SykepengesoknadSide";
+import { fetchUnleashToggles } from "@/data/unleash/unleash_actions";
+import { SykepengesoknadSide } from "@/components/speiling/sykepengsoknader/container/SykepengesoknadSide";
 
 const getFnrFromParams = (): string => {
   return window.location.pathname.split("/")[2];

@@ -1,17 +1,17 @@
 import React, { ReactElement, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Side from "../../../../sider/Side";
-import { hentSykmeldinger } from "../../../../data/sykmelding/sykmeldinger_actions";
+import { hentSykmeldinger } from "@/data/sykmelding/sykmeldinger_actions";
 import SidetoppSpeilet from "../../../SidetoppSpeilet";
 import DineSykmeldinger from "../sykmeldinger/DineSykmeldinger";
 import Brodsmuler from "../../Brodsmuler";
-import { SYKMELDINGER } from "../../../../enums/menypunkter";
+import { SYKMELDINGER } from "@/enums/menypunkter";
 import Speilingvarsel from "../../Speilingvarsel";
 import Pengestopp from "../../../pengestopp/Pengestopp";
-import { useValgtPersonident } from "../../../../hooks/useValgtBruker";
+import { useValgtPersonident } from "@/hooks/useValgtBruker";
 import SideLaster from "../../../SideLaster";
-import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
-import { useSykmeldinger } from "../../../../data/sykmelding/sykmeldinger_hooks";
+import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
+import { useSykmeldinger } from "@/data/sykmelding/sykmeldinger_hooks";
 
 const texts = {
   introduksjonstekst:

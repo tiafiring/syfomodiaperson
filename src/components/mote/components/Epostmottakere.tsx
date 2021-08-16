@@ -1,7 +1,7 @@
 import React from "react";
-import { Brukerinfo } from "../../../data/navbruker/types/Brukerinfo";
-import { MoteDTO } from "../../../data/mote/types/moteTypes";
-import { BRUKER, ARBEIDSGIVER } from "../../../konstanter";
+import { Brukerinfo } from "@/data/navbruker/types/Brukerinfo";
+import { MoteDTO } from "@/data/mote/types/moteTypes";
+import { BRUKER, ARBEIDSGIVER } from "@/konstanter";
 
 const texts = {
   arbeidsgiver: "Sendes til arbeidsgiver",

@@ -4,8 +4,8 @@ import { connect, useDispatch } from "react-redux";
 import SideFullbredde from "../../../sider/SideFullbredde";
 import * as oppdialogActions from "../../../data/oppfolgingsplan/oppfoelgingsdialoger_actions";
 import Oppfolgingsplan from "../oppfoelgingsdialoger/Oppfolgingsplan";
-import { OPPFOELGINGSPLANER } from "../../../enums/menypunkter";
-import { harForsoktHentetOppfoelgingsdialoger } from "../../../utils/reducerUtils";
+import { OPPFOELGINGSPLANER } from "@/enums/menypunkter";
+import { harForsoktHentetOppfoelgingsdialoger } from "@/utils/reducerUtils";
 import SideLaster from "../../SideLaster";
 
 const OppfoelgingsPlanerOversiktSide = ({

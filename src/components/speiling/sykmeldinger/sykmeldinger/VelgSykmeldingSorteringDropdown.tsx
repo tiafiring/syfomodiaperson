@@ -3,7 +3,7 @@ import React, { ChangeEvent, ReactElement } from "react";
 import {
   SorteringKriterium,
   SorteringsKriteriumVerdi,
-} from "../../../../utils/sorterSykmeldingerUtils";
+} from "@/utils/sorterSykmeldingerUtils";
 
 const texts = {
   label: "Sorter etter",

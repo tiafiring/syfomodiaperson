@@ -1,9 +1,9 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import * as actions from "./dokumentinfo_actions";
-import { get, Result, Success } from "../../api/axios";
+import { get, Result, Success } from "@/api/axios";
 import { DokumentinfoDTO } from "./types/DokumentinfoDTO";
 import { RootState } from "../rootState";
-import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "../../apiConstants";
+import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "@/apiConstants";
 
 export const skalHenteDokumentInfo = (state: RootState, action: any) => {
   const planId = action.id || {};

@@ -1,10 +1,7 @@
 import { Element, Normaltekst } from "nav-frontend-typografi";
 import { Field } from "react-final-form";
 import React, { ReactElement } from "react";
-import {
-  referatTexts,
-  StandardTekst,
-} from "../../../data/dialogmote/dialogmoteTexts";
+import { referatTexts, StandardTekst } from "@/data/dialogmote/dialogmoteTexts";
 import styled from "styled-components";
 import { ReferatCheckbox } from "./ReferatCheckbox";
 import { FlexColumn, FlexRow, PaddingSize } from "../../Layout";

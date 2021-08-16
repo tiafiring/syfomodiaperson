@@ -6,7 +6,7 @@ import UtdypendeOpplysninger from "./UtdypendeOpplysninger";
 import TilbakeIArbeid from "./TilbakeIArbeid";
 import GenerellSykmeldingInfo from "./GenerellSykmeldingInfo";
 import MulighetForArbeid from "./MulighetForArbeid";
-import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 
 interface SykmeldingMotebehovVisningProps {
   sykmelding: SykmeldingOldFormat;

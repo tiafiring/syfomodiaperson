@@ -1,8 +1,8 @@
 import React from "react";
 import Side from "../../../sider/Side";
-import { MOETEPLANLEGGER } from "../../../enums/menypunkter";
+import { MOETEPLANLEGGER } from "@/enums/menypunkter";
 import Motelandingsside from "../components/Motelandingsside";
-import { useValgtPersonident } from "../../../hooks/useValgtBruker";
+import { useValgtPersonident } from "@/hooks/useValgtBruker";
 
 const texts = {
   pageTitle: "Møtelandingsside",

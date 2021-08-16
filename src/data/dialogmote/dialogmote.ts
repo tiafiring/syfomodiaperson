@@ -1,7 +1,7 @@
 import { Reducer } from "redux";
 import { DialogmoteActions, DialogmoteActionTypes } from "./dialogmote_actions";
 import { DialogmoteDTO } from "./types/dialogmoteTypes";
-import { ApiError } from "../../api/axios";
+import { ApiError } from "@/api/axios";
 
 export interface DialogmoteState {
   senderInnkalling: boolean;

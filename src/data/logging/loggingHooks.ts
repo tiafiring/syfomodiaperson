@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../rootState";
-import { trackEvent, UserProperties } from "../../amplitude/amplitude";
+import { trackEvent, UserProperties } from "@/amplitude/amplitude";
 
 export const texts = {
   click: "Klikker på:",

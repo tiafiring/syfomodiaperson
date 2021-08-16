@@ -5,7 +5,7 @@ import {
   HENTER_LEDERE,
   LEDERE_HENTET,
   HENT_LEDERE_FEILET,
-} from "../../src/data/leder/ledere_actions";
+} from "@/data/leder/ledere_actions";
 
 describe("ledere", () => {
   it(`håndterer ${LEDERE_HENTET}`, () => {

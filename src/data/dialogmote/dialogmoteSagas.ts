@@ -21,7 +21,7 @@ import {
   opprettInnkallingFeilet,
   opprettInnkallingFullfort,
 } from "./dialogmote_actions";
-import { get, post, Result, Success } from "../../api/axios";
+import { get, post, Result, Success } from "@/api/axios";
 import {
   AvlysDialogmoteDTO,
   DialogmoteDTO,
@@ -29,7 +29,7 @@ import {
   EndreTidStedDialogmoteDTO,
 } from "./types/dialogmoteTypes";
 import { NewDialogmoteReferatDTO } from "./types/dialogmoteReferatTypes";
-import { ISDIALOGMOTE_ROOT } from "../../apiConstants";
+import { ISDIALOGMOTE_ROOT } from "@/apiConstants";
 
 function* opprettInnkalling(action: OpprettInnkallingAction) {
   yield put(oppretterInnkalling());

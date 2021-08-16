@@ -1,8 +1,8 @@
 import { FlexColumn, FlexRow } from "../../Layout";
 import { Element, Normaltekst } from "nav-frontend-typografi";
-import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../../utils/datoUtils";
+import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "@/utils/datoUtils";
 import React, { ReactElement } from "react";
-import { DialogmoteDTO } from "../../../data/dialogmote/types/dialogmoteTypes";
+import { DialogmoteDTO } from "@/data/dialogmote/types/dialogmoteTypes";
 import AvlysDialogmoteSkjemaSeksjon from "./AvlysDialogmoteSkjemaSeksjon";
 
 const texts = {

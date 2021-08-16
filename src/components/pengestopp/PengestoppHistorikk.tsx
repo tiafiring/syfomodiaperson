@@ -1,13 +1,13 @@
 import * as React from "react";
 import { Element, Undertittel } from "nav-frontend-typografi";
-import { StatusEndring } from "../../data/pengestopp/types/FlaggPerson";
+import { StatusEndring } from "@/data/pengestopp/types/FlaggPerson";
 import {
   displayArbeidsgiverNavn,
   displayArsakText,
   sykmeldingerToArbeidsgiver,
   uniqueArbeidsgivere,
-} from "../../utils/pengestoppUtils";
-import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
+} from "@/utils/pengestoppUtils";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 import Panel from "nav-frontend-paneler";
 import styled from "styled-components";
 import { texts } from "./Pengestopp";

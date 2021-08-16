@@ -1,9 +1,9 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
-import { get, Result, Success } from "../../api/axios";
+import { get, Result, Success } from "@/api/axios";
 import * as actions from "./fastleger_actions";
 import { Fastlege } from "./types/Fastlege";
 import { RootState } from "../rootState";
-import { FASTLEGEREST_ROOT } from "../../apiConstants";
+import { FASTLEGEREST_ROOT } from "@/apiConstants";
 
 export const skalHenteFastleger = (state: RootState) => {
   const { henter, hentet, hentingFeilet } = state.fastleger;

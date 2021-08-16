@@ -1,5 +1,5 @@
-import { OppfolgingsplanLPS } from "../data/oppfolgingsplan/types/OppfolgingsplanLPS";
-import { OppfolgingstilfelleperioderMapState } from "../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
+import { OppfolgingsplanLPS } from "@/data/oppfolgingsplan/types/OppfolgingsplanLPS";
+import { OppfolgingstilfelleperioderMapState } from "@/data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
 import { startDateFromLatestActiveTilfelle } from "./periodeUtils";
 
 const newestLpsPlanPerVirksomhet = (lpsplaner: OppfolgingsplanLPS[]) => {

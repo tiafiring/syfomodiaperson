@@ -1,5 +1,5 @@
 import * as React from "react";
-import { fullNaisUrlIntern } from "../../utils/miljoUtil";
+import { fullNaisUrlIntern } from "@/utils/miljoUtil";
 
 const texts = {
   link: "Til oversikten",

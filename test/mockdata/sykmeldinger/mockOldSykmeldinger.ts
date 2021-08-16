@@ -1,9 +1,9 @@
-import { toDate, toDateWithoutNullCheck } from "../../../src/utils/datoUtils";
+import { toDate, toDateWithoutNullCheck } from "@/utils/datoUtils";
 import {
   SykmeldingOldFormat,
   SykmeldingStatus,
-} from "../../../src/data/sykmelding/types/SykmeldingOldFormat";
-import { BehandlingsutfallStatusDTO } from "../../../src/data/sykmelding/types/BehandlingsutfallStatusDTO";
+} from "@/data/sykmelding/types/SykmeldingOldFormat";
+import { BehandlingsutfallStatusDTO } from "@/data/sykmelding/types/BehandlingsutfallStatusDTO";
 
 const mockOldSykmeldinger: SykmeldingOldFormat[] = [
   {

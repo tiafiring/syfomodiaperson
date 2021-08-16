@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { harFeilmeldinger, SkjemaFeil } from "../utils/valideringUtils";
+import { harFeilmeldinger, SkjemaFeil } from "@/utils/valideringUtils";
 
 export const useFeilUtbedret = () => {
   const [feilUtbedret, setFeilUtbedret] = useState(false);

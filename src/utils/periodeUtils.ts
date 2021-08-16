@@ -1,6 +1,6 @@
 import { dagerMellomDatoer, isDate16DaysAgoOrLater, toDate } from "./datoUtils";
-import { SykmeldingPeriodeDTO } from "../data/sykmelding/types/SykmeldingOldFormat";
-import { OppfolgingstilfelleperioderMapState } from "../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
+import { SykmeldingPeriodeDTO } from "@/data/sykmelding/types/SykmeldingOldFormat";
+import { OppfolgingstilfelleperioderMapState } from "@/data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
 
 export type TilfellePeriode = { fom: string | Date; tom: string | Date };
 

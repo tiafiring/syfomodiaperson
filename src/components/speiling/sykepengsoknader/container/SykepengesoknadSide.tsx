@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactElement } from "react";
-import { useValgtPersonident } from "../../../../hooks/useValgtBruker";
-import { SYKEPENGESOKNADER } from "../../../../enums/menypunkter";
+import { useValgtPersonident } from "@/hooks/useValgtBruker";
+import { SYKEPENGESOKNADER } from "@/enums/menypunkter";
 import Side from "../../../../sider/Side";
 import SykepengesoknadContainer from "./SykepengesoknadContainer";
 

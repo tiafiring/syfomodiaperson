@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { leggTilDagerPaDato } from "../../mock/util/dateUtil";
-import { lpsPlanerWithActiveTilfelle } from "../../src/utils/oppfolgingsplanUtils";
+import { lpsPlanerWithActiveTilfelle } from "@/utils/oppfolgingsplanUtils";
 import { customOppfolgingstilfelleperioder } from "../mockdata/mockOppfolgingstilfelleperioder";
 
 describe("oppfolgingsplanUtils", () => {

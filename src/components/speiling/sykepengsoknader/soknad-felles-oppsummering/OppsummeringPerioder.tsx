@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { getKey } from "./Oppsummeringsvisning";
-import { toDatePrettyPrint } from "../../../../utils/datoUtils";
+import { toDatePrettyPrint } from "@/utils/datoUtils";
 import OppsummeringSporsmalscontainer from "./OppsummeringSporsmalscontainer";
 import OppsummeringSporsmalstekst from "./OppsummeringSporsmalstekst";
 import { OppsummeringSporsmalProps } from "./OppsummeringSporsmal";

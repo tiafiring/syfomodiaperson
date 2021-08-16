@@ -5,7 +5,7 @@ import AlertStripe from "nav-frontend-alertstriper";
 import KnappBase from "nav-frontend-knapper";
 import Tidspunkter from "./Tidspunkter";
 import { genererDato } from "../utils";
-import { validerTidspunkt } from "../../../utils/valideringUtils";
+import { validerTidspunkt } from "@/utils/valideringUtils";
 
 const texts = {
   leggTil: "Flere alternativer",

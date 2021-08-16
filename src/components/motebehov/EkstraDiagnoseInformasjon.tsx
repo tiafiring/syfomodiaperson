@@ -1,8 +1,8 @@
 import React from "react";
 import { Checkbox } from "nav-frontend-skjema";
-import { erEkstraDiagnoseInformasjon } from "../../utils/sykmeldinger/sykmeldingUtils";
-import { tilDatoMedUkedagOgManedNavn } from "../../utils/datoUtils";
-import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
+import { erEkstraDiagnoseInformasjon } from "@/utils/sykmeldinger/sykmeldingUtils";
+import { tilDatoMedUkedagOgManedNavn } from "@/utils/datoUtils";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 
 const tekster = {
   ekstraDiagnoseInformasjon: {

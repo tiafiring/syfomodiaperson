@@ -9,7 +9,7 @@ import TextField from "../TextField";
 import KontaktInfoAdvarsel from "../components/KontaktInfoAdvarsel";
 import Sidetopp from "../../Sidetopp";
 import { genererDato } from "../utils";
-import { validerSted, validerTidspunkt } from "../../../utils/valideringUtils";
+import { validerSted, validerTidspunkt } from "@/utils/valideringUtils";
 
 export const MAX_LENGTH_STED = 200;
 

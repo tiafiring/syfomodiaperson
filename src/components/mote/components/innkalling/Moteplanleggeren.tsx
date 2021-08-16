@@ -1,10 +1,10 @@
 import React, { ReactElement } from "react";
-import { MoteDTO } from "../../../../data/mote/types/moteTypes";
+import { MoteDTO } from "@/data/mote/types/moteTypes";
 import { SeMoteStatus } from "./SeMoteStatus";
 import { MoteIkonBlaaImage } from "../../../../../img/ImageComponents";
 import { DialogmotePanel } from "../DialogmotePanel";
-import { tilDatoMedUkedagOgManedNavn } from "../../../../utils/datoUtils";
-import { useAktivtMoteplanleggerMote } from "../../../../data/mote/moter_hooks";
+import { tilDatoMedUkedagOgManedNavn } from "@/utils/datoUtils";
+import { useAktivtMoteplanleggerMote } from "@/data/mote/moter_hooks";
 import { FlexRow } from "../../../Layout";
 import { useHistory } from "react-router";
 import { TrackedKnapp } from "../../../buttons/TrackedKnapp";

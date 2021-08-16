@@ -1,13 +1,13 @@
 import mockSykmeldinger from "./mockSykmeldinger";
-import { SykmeldingNewFormatDTO } from "../../../src/data/sykmelding/types/SykmeldingNewFormatDTO";
-import { PeriodetypeDTO } from "../../../src/data/sykmelding/types/PeriodetypeDTO";
-import { MedisinskArsakTypeDTO } from "../../../src/data/sykmelding/types/MedisinskArsakTypeDTO";
-import { ArbeidsrelatertArsakTypeDTO } from "../../../src/data/sykmelding/types/ArbeidsrelatertArsakTypeDTO";
-import { SporsmalSvarDTO } from "../../../src/data/sykmelding/types/SporsmalSvarDTO";
-import { SvarRestriksjonDTO } from "../../../src/data/sykmelding/types/SvarRestriksjonDTO";
-import { SvartypeDTO } from "../../../src/data/sykmelding/types/SvartypeDTO";
-import { ShortNameDTO } from "../../../src/data/sykmelding/types/ShortNameDTO";
-import { AnnenFraverGrunnDTO } from "../../../src/data/sykmelding/types/AnnenFraverGrunnDTO";
+import { SykmeldingNewFormatDTO } from "@/data/sykmelding/types/SykmeldingNewFormatDTO";
+import { PeriodetypeDTO } from "@/data/sykmelding/types/PeriodetypeDTO";
+import { MedisinskArsakTypeDTO } from "@/data/sykmelding/types/MedisinskArsakTypeDTO";
+import { ArbeidsrelatertArsakTypeDTO } from "@/data/sykmelding/types/ArbeidsrelatertArsakTypeDTO";
+import { SporsmalSvarDTO } from "@/data/sykmelding/types/SporsmalSvarDTO";
+import { SvarRestriksjonDTO } from "@/data/sykmelding/types/SvarRestriksjonDTO";
+import { SvartypeDTO } from "@/data/sykmelding/types/SvartypeDTO";
+import { ShortNameDTO } from "@/data/sykmelding/types/ShortNameDTO";
+import { AnnenFraverGrunnDTO } from "@/data/sykmelding/types/AnnenFraverGrunnDTO";
 
 const mockSM = mockSykmeldinger[0];
 

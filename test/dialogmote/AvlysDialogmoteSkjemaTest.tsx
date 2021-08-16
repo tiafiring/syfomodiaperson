@@ -4,12 +4,12 @@ import { MemoryRouter, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import { createStore } from "redux";
-import { rootReducer } from "../../src/data/rootState";
+import { rootReducer } from "@/data/rootState";
 import { expect } from "chai";
 import {
   DialogmoteDTO,
   DialogmoteStatus,
-} from "../../src/data/dialogmote/types/dialogmoteTypes";
+} from "@/data/dialogmote/types/dialogmoteTypes";
 import { Feilmelding } from "nav-frontend-typografi";
 import { Feiloppsummering } from "nav-frontend-skjema";
 import { Hovedknapp, Knapp } from "nav-frontend-knapper";
@@ -18,12 +18,9 @@ import AvlysDialogmoteSkjema, {
 } from "../../src/components/dialogmote/avlys/AvlysDialogmoteSkjema";
 import { texts as skjemaFeilOppsummeringTexts } from "../../src/components/SkjemaFeiloppsummering";
 import { texts as valideringsTexts } from "../../src/utils/valideringUtils";
-import { tilDatoMedManedNavnOgKlokkeslettWithComma } from "../../src/utils/datoUtils";
-import {
-  avlysningTexts,
-  commonTexts,
-} from "../../src/data/dialogmote/dialogmoteTexts";
-import { Forhandsvisning } from "../../src/components/dialogmote/Forhandsvisning";
+import { tilDatoMedManedNavnOgKlokkeslettWithComma } from "@/utils/datoUtils";
+import { avlysningTexts, commonTexts } from "@/data/dialogmote/dialogmoteTexts";
+import { Forhandsvisning } from "@/components/dialogmote/Forhandsvisning";
 import Lukknapp from "nav-frontend-lukknapp";
 import { assertFeilmelding, changeTextAreaValue } from "../testUtils";
 

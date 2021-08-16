@@ -1,10 +1,10 @@
 import React from "react";
-import { restdatoTilLesbarDato } from "../../utils/datoUtils";
+import { restdatoTilLesbarDato } from "@/utils/datoUtils";
 import PersonkortFeilmelding from "./PersonkortFeilmelding";
 import PersonkortElement from "./PersonkortElement";
 import PersonkortInformasjon from "./PersonkortInformasjon";
-import { FastlegerState } from "../../data/fastlege/fastleger";
-import { Fastlege } from "../../data/fastlege/types/Fastlege";
+import { FastlegerState } from "@/data/fastlege/fastleger";
+import { Fastlege } from "@/data/fastlege/types/Fastlege";
 import {
   MedisinboksImage,
   MedisinskrinImage,

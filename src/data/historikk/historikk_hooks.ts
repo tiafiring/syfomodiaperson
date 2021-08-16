@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../hooks/hooks";
+import { useAppSelector } from "@/hooks/hooks";
 import { HistorikkEvent } from "./types/historikkTypes";
 
 export const useHistorikk: () => {

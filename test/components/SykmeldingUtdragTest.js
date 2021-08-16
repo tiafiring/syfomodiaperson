@@ -1,15 +1,15 @@
 import React from "react";
 import { expect } from "chai";
 import { mount } from "enzyme";
-import { SykmeldingUtdragContainer } from "../../src/components/speiling/sykepengsoknader/SykmeldingUtdragContainer";
+import { SykmeldingUtdragContainer } from "@/components/speiling/sykepengsoknader/SykmeldingUtdragContainer";
 import mockSykepengesoknader from "../mockdata/mockSykepengesoknader";
 import mockSykmeldinger from "../mockdata/sykmeldinger/mockSykmeldinger";
 import SykmeldingUtdrag from "../../src/components/speiling/sykepengsoknader/soknad-felles/SykmeldingUtdrag";
 import { createStore } from "redux";
-import { rootReducer } from "../../src/data/rootState";
+import { rootReducer } from "@/data/rootState";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
-import { newSMFormat2OldFormat } from "../../src/utils/sykmeldinger/sykmeldingParser";
+import { newSMFormat2OldFormat } from "@/utils/sykmeldinger/sykmeldingParser";
 
 const ARBEIDSTAKERSOKNAD_ID = "b9732cc7-6101-446e-a1ef-ec25a425b4fb";
 const realState = createStore(rootReducer).getState();

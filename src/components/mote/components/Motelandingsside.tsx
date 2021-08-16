@@ -1,22 +1,22 @@
 import React, { useEffect } from "react";
 import Sidetopp from "../../Sidetopp";
 import { useDispatch } from "react-redux";
-import { hentMoter } from "../../../data/mote/moter_actions";
-import { useAppSelector } from "../../../hooks/hooks";
+import { hentMoter } from "@/data/mote/moter_actions";
+import { useAppSelector } from "@/hooks/hooks";
 import UtdragFraSykefravaeretPanel from "../../utdragFraSykefravaeret/UtdragFraSykefravaeret";
 import { InnkallingDialogmotePanel } from "./innkalling/InnkallingDialogmotePanel";
-import { erLokal } from "../../../utils/miljoUtil";
+import { erLokal } from "@/utils/miljoUtil";
 import PrediksjonVisningPanel from "../../Prediksjon/PrediksjonVisning";
 import SideLaster from "../../SideLaster";
-import { hentLedere } from "../../../data/leder/ledere_actions";
-import { hentMotebehov } from "../../../data/motebehov/motebehov_actions";
-import { hentSykmeldinger } from "../../../data/sykmelding/sykmeldinger_actions";
-import { hentOppfoelgingsdialoger } from "../../../data/oppfolgingsplan/oppfoelgingsdialoger_actions";
-import { hentOppfolgingstilfelleperioder } from "../../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder_actions";
-import { hentVirksomhet } from "../../../data/virksomhet/virksomhet_actions";
-import { useOppfoelgingsDialoger } from "../../../hooks/useOppfoelgingsDialoger";
+import { hentLedere } from "@/data/leder/ledere_actions";
+import { hentMotebehov } from "@/data/motebehov/motebehov_actions";
+import { hentSykmeldinger } from "@/data/sykmelding/sykmeldinger_actions";
+import { hentOppfoelgingsdialoger } from "@/data/oppfolgingsplan/oppfoelgingsdialoger_actions";
+import { hentOppfolgingstilfelleperioder } from "@/data/oppfolgingstilfelle/oppfolgingstilfelleperioder_actions";
+import { hentVirksomhet } from "@/data/virksomhet/virksomhet_actions";
+import { useOppfoelgingsDialoger } from "@/hooks/useOppfoelgingsDialoger";
 import { DialogmoteOnskePanel } from "../../motebehov/DialogmoteOnskePanel";
-import { fetchDialogmote } from "../../../data/dialogmote/dialogmote_actions";
+import { fetchDialogmote } from "@/data/dialogmote/dialogmote_actions";
 import { MotehistorikkPanel } from "../../dialogmote/motehistorikk/MotehistorikkPanel";
 
 interface Props {

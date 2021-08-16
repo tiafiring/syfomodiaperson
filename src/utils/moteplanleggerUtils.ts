@@ -1,4 +1,4 @@
-import { BRUKER, MULIGE_SVAR } from "../konstanter";
+import { BRUKER, MULIGE_SVAR } from "@/konstanter";
 
 export const brukerHarSvart = (svartidspunkt: any, created: any) => {
   if (!svartidspunkt) {

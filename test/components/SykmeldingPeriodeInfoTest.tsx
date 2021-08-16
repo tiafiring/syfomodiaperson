@@ -2,8 +2,8 @@ import { mount } from "enzyme";
 import React from "react";
 import { expect } from "chai";
 import SykmeldingPeriodeInfo from "../../src/components/speiling/sykmeldinger/sykmeldinger/SykmeldingPeriodeInfo";
-import { SykmeldingPeriodeDTO } from "../../src/data/sykmelding/types/SykmeldingOldFormat";
-import { toDateWithoutNullCheck } from "../../src/utils/datoUtils";
+import { SykmeldingPeriodeDTO } from "@/data/sykmelding/types/SykmeldingOldFormat";
+import { toDateWithoutNullCheck } from "@/utils/datoUtils";
 
 const arbeidsgiver = "Arne Arbeidsgiver";
 const periodeFlereDager: SykmeldingPeriodeDTO = {

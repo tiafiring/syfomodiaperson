@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import * as menypunkter from "../../enums/menypunkter";
 import cn from "classnames";
 import UnfinishedTasks from "./UnfinishedTasks";
-import { numberOfTasks } from "../../utils/GlobalNavigasjonUtils";
+import { numberOfTasks } from "@/utils/GlobalNavigasjonUtils";
 import { withRouter } from "react-router-dom";
 
 const nokkelinformasjonMenypunkt = {

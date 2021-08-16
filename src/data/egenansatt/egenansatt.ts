@@ -3,7 +3,7 @@ import {
   HentEgenAnsattActions,
   HentEgenAnsattActionTypes,
 } from "./egenansatt_actions";
-import { ApiError } from "../../api/axios";
+import { ApiError } from "@/api/axios";
 
 export interface EgenansattState {
   henter: boolean;

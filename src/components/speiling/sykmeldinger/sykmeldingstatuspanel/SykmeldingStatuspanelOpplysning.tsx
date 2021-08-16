@@ -3,12 +3,12 @@ import Hjelpetekst from "nav-frontend-hjelpetekst";
 import {
   SykmeldingOldFormat,
   SykmeldingStatus,
-} from "../../../../data/sykmelding/types/SykmeldingOldFormat";
+} from "@/data/sykmelding/types/SykmeldingOldFormat";
 import {
   tilLesbarDatoMedArstall,
   tilLesbarPeriodeMedArstall,
-} from "../../../../utils/datoUtils";
-import { Vis } from "../../../../utils";
+} from "@/utils/datoUtils";
+import { Vis } from "@/utils";
 import { StatusNokkelopplysning } from "../../Statuspanel";
 import SykmeldingNokkelOpplysning from "../sykmelding/sykmeldingOpplysninger/SykmeldingNokkelOpplysning";
 

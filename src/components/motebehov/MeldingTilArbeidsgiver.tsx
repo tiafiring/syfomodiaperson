@@ -1,6 +1,6 @@
 import React from "react";
-import { erMeldingTilArbeidsgiverInformasjon } from "../../utils/sykmeldinger/sykmeldingUtils";
-import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
+import { erMeldingTilArbeidsgiverInformasjon } from "@/utils/sykmeldinger/sykmeldingUtils";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 
 const tekster = {
   meldingTilArbeidsgiver: {

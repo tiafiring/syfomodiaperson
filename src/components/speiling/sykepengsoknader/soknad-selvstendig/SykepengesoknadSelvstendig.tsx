@@ -9,10 +9,10 @@ import Utvidbar from "../../../Utvidbar";
 import {
   SoknadstatusDTO,
   SykepengesoknadDTO,
-} from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
-import { SykmeldingOldFormat } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
+} from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 import { Brodsmule } from "../../Brodsmuler";
-import { erVaerKlarOverAt } from "../../../../utils/sykepengesoknadUtils";
+import { erVaerKlarOverAt } from "@/utils/sykepengesoknadUtils";
 
 const texts = {
   oppsummering: "Oppsummering",

@@ -1,12 +1,12 @@
 import React, { ReactElement, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { hentSykmeldinger } from "../../../data/sykmelding/sykmeldinger_actions";
+import { hentSykmeldinger } from "@/data/sykmelding/sykmeldinger_actions";
 import SykmeldingUtdrag from "./soknad-felles/SykmeldingUtdrag";
 import {
   SoknadstypeDTO,
   SykepengesoknadDTO,
-} from "../../../data/sykepengesoknad/types/SykepengesoknadDTO";
-import { useSykmeldinger } from "../../../data/sykmelding/sykmeldinger_hooks";
+} from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
+import { useSykmeldinger } from "@/data/sykmelding/sykmeldinger_hooks";
 
 interface SykmeldingUtdragContainerProps {
   soknad: SykepengesoknadDTO;

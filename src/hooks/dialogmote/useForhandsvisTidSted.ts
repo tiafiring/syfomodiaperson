@@ -1,23 +1,23 @@
-import { EndreTidStedSkjemaValues } from "../../components/dialogmote/endre/EndreDialogmoteSkjema";
-import { useNavBrukerData } from "../../data/navbruker/navbruker_hooks";
+import { EndreTidStedSkjemaValues } from "@/components/dialogmote/endre/EndreDialogmoteSkjema";
+import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
 import {
   createLink,
   createParagraph,
   createParagraphWithTitle,
-} from "../../utils/documentComponentUtils";
+} from "@/utils/documentComponentUtils";
 import {
   tilDatoMedManedNavnOgKlokkeslettWithComma,
   tilDatoMedUkedagOgManedNavnOgKlokkeslett,
-} from "../../utils/datoUtils";
+} from "@/utils/datoUtils";
 import { genererDato } from "../../components/mote/utils";
 import { useForhandsvisningHilsen } from "./useForhandsvisningHilsen";
 import {
   commonTexts,
   endreTidStedTexts,
   innkallingTexts,
-} from "../../data/dialogmote/dialogmoteTexts";
-import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
-import { DocumentComponentDto } from "../../data/dialogmote/types/dialogmoteTypes";
+} from "@/data/dialogmote/dialogmoteTexts";
+import { Brukerinfo } from "@/data/navbruker/types/Brukerinfo";
+import { DocumentComponentDto } from "@/data/dialogmote/types/dialogmoteTypes";
 
 export interface ForhandsvisTidStedGenerator {
   generateArbeidsgiverTidStedDocument(

@@ -12,7 +12,7 @@ import OppsummeringGruppeRadioUkekalender from "./OppsummeringGruppeRadioUkekale
 import {
   SporsmalDTO,
   SvarTypeDTO,
-} from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+} from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 
 export interface OppsummeringSporsmalProps extends SporsmalDTO {
   overskriftsnivaa?: number;

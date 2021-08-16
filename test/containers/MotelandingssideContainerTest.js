@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import Motelandingsside from "../../src/components/mote/components/Motelandingsside";
 import { MemoryRouter } from "react-router-dom";
 import { createStore } from "redux";
-import { rootReducer } from "../../src/data/rootState";
+import { rootReducer } from "@/data/rootState";
 
 const realState = createStore(rootReducer).getState();
 

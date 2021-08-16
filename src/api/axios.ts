@@ -1,5 +1,5 @@
 import axios from "axios";
-import { hentLoginUrl, hentRedirectBaseUrl } from "../utils/miljoUtil";
+import { hentLoginUrl, hentRedirectBaseUrl } from "@/utils/miljoUtil";
 
 export const NAV_CONSUMER_ID_HEADER = "nav-consumer-id";
 export const NAV_CONSUMER_ID = "syfomodiaperson";

@@ -8,7 +8,7 @@ import MotestatusContainer from "../../src/components/mote/container/MotestatusC
 import {
   mapStateToProps,
   MotebookingSide,
-} from "../../src/components/mote/container/MotebookingContainer";
+} from "@/components/mote/container/MotebookingContainer";
 
 describe("MotebookingContainer", () => {
   describe("MotebookingSide", () => {

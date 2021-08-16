@@ -1,4 +1,4 @@
-import { Leder } from "../data/leder/ledere";
+import { Leder } from "@/data/leder/ledere";
 import { senesteTom, tidligsteFom } from "./periodeUtils";
 import {
   erOppfoelgingsdatoPassertMed16UkerOgIkke26Uker,
@@ -6,9 +6,9 @@ import {
   harArbeidstakerSvartPaaMotebehov,
 } from "./motebehovUtils";
 import { activeSykmeldingerSentToArbeidsgiver } from "./sykmeldinger/sykmeldingUtils";
-import { OppfolgingstilfelleperioderMapState } from "../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
-import { MotebehovDTO } from "../data/motebehov/types/motebehovTypes";
-import { SykmeldingOldFormat } from "../data/sykmelding/types/SykmeldingOldFormat";
+import { OppfolgingstilfelleperioderMapState } from "@/data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
+import { MotebehovDTO } from "@/data/motebehov/types/motebehovTypes";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 
 export const ledereIVirksomheterMedMotebehovsvarFraArbeidstaker = (
   ledereData: Leder[],

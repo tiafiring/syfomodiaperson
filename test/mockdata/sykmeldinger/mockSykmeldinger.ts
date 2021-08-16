@@ -1,8 +1,8 @@
-import { SykmeldingNewFormatDTO } from "../../../src/data/sykmelding/types/SykmeldingNewFormatDTO";
-import { BehandlingsutfallStatusDTO } from "../../../src/data/sykmelding/types/BehandlingsutfallStatusDTO";
-import { PeriodetypeDTO } from "../../../src/data/sykmelding/types/PeriodetypeDTO";
-import { ShortNameDTO } from "../../../src/data/sykmelding/types/ShortNameDTO";
-import { SvartypeDTO } from "../../../src/data/sykmelding/types/SvartypeDTO";
+import { SykmeldingNewFormatDTO } from "@/data/sykmelding/types/SykmeldingNewFormatDTO";
+import { BehandlingsutfallStatusDTO } from "@/data/sykmelding/types/BehandlingsutfallStatusDTO";
+import { PeriodetypeDTO } from "@/data/sykmelding/types/PeriodetypeDTO";
+import { ShortNameDTO } from "@/data/sykmelding/types/ShortNameDTO";
+import { SvartypeDTO } from "@/data/sykmelding/types/SvartypeDTO";
 
 const mockSykmeldinger: SykmeldingNewFormatDTO[] = [
   {

@@ -3,13 +3,13 @@ import { Knapp } from "nav-frontend-knapper";
 import {
   tilLesbarDatoMedArstall,
   tilLesbarPeriodeMedArstall,
-} from "../../../../utils/datoUtils";
+} from "@/utils/datoUtils";
 import Lightbox from "../../../Lightbox";
 import { SoknaderImage } from "../../../../../img/ImageComponents";
 import {
   SoknadstatusDTO,
   SykepengesoknadDTO,
-} from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+} from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const texts = {
   dato: {

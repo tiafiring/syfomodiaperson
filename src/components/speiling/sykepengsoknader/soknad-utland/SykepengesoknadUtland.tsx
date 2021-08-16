@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import Oppsummeringsvisning from "../soknad-felles-oppsummering/Oppsummeringsvisning";
 import SoknadSpeiling from "../soknad-felles/SoknadSpeiling";
 import StatuspanelUtland from "./StatuspanelUtland";
-import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+import { SykepengesoknadDTO } from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 import { Brodsmule } from "../../Brodsmuler";
 
 const texts = {

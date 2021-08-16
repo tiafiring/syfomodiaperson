@@ -1,22 +1,22 @@
 import React, { ReactElement } from "react";
-import { Leder } from "../../data/leder/ledere";
+import { Leder } from "@/data/leder/ledere";
 import {
   finnArbeidstakerMotebehovSvar,
   motebehovFromLatestActiveTilfelle,
   sorterMotebehovDataEtterDato,
-} from "../../utils/motebehovUtils";
-import { tilLesbarDatoMedArUtenManedNavn } from "../../utils/datoUtils";
-import { MotebehovDTO } from "../../data/motebehov/types/motebehovTypes";
-import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
+} from "@/utils/motebehovUtils";
+import { tilLesbarDatoMedArUtenManedNavn } from "@/utils/datoUtils";
+import { MotebehovDTO } from "@/data/motebehov/types/motebehovTypes";
+import { Brukerinfo } from "@/data/navbruker/types/Brukerinfo";
 import {
   MotebehovIkkeSvartImage,
   MotebehovKanIkkeImage,
   MotebehovKanImage,
 } from "../../../img/ImageComponents";
-import { OppfolgingstilfelleperioderMapState } from "../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
+import { OppfolgingstilfelleperioderMapState } from "@/data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
 import { InfoRow } from "../InfoRow";
 import { PaddingSize } from "../Layout";
-import { ledereUtenMotebehovsvar } from "../../utils/ledereUtils";
+import { ledereUtenMotebehovsvar } from "@/utils/ledereUtils";
 
 export const lederMedGittAktorId = (aktorId: string, ledere: Leder[]) => {
   return ledere.find((leder) => {

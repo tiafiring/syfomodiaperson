@@ -1,12 +1,12 @@
 import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
-import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
+import { tilLesbarDatoMedArstall } from "@/utils/datoUtils";
 import {
   getTidligsteSendtDato,
   sorterEtterDato,
-} from "../../../../utils/sykepengesoknadUtils";
-import { useSykepengeSoknader } from "../../../../data/sykepengesoknad/soknader_hooks";
-import { SykepengesoknadDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+} from "@/utils/sykepengesoknadUtils";
+import { useSykepengeSoknader } from "@/data/sykepengesoknad/soknader_hooks";
+import { SykepengesoknadDTO } from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const texts = {
   tittel: "Tidligere utgaver som du har sendt",

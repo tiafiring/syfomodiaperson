@@ -1,5 +1,5 @@
 import { SykmeldingNewFormatDTO } from "./types/SykmeldingNewFormatDTO";
-import { ApiError } from "../../api/axios";
+import { ApiError } from "@/api/axios";
 
 export enum SykmeldingerActionTypes {
   HENT_SYKMELDINGER_FEILET = "HENT_SYKMELDINGER_FEILET",

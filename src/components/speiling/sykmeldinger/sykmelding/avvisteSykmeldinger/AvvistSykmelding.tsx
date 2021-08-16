@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import {
   SykmeldingOldFormat,
   SykmeldingStatus,
-} from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
+} from "@/data/sykmelding/types/SykmeldingOldFormat";
 import AvvistSykmeldingStatuspanel from "./AvvistSykmeldingStatuspanel";
 import { AvvistSykmeldingPanel } from "./AvvistSykmeldingPanel";
 import BekreftAvvistSykmelding from "./BekreftAvvistSykmelding";

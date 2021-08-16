@@ -1,7 +1,7 @@
 import React from "react";
 import { LeggTilKnapp } from "../../LeggTilKnapp";
 import { FieldArray } from "react-final-form-arrays";
-import { NewDialogmotedeltakerAnnenDTO } from "../../../data/dialogmote/types/dialogmoteReferatTypes";
+import { NewDialogmotedeltakerAnnenDTO } from "@/data/dialogmote/types/dialogmoteReferatTypes";
 import { Field, useFormState } from "react-final-form";
 import { Input } from "nav-frontend-skjema";
 import { FlexColumn, FlexRow, PaddingSize } from "../../Layout";

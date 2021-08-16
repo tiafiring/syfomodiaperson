@@ -1,8 +1,8 @@
-import { useBehandlendeEnhet } from "../../data/behandlendeenhet/behandlendeEnhet_hooks";
+import { useBehandlendeEnhet } from "@/data/behandlendeenhet/behandlendeEnhet_hooks";
 import { useVeilederinfo } from "../useVeilederinfo";
-import { createParagraph } from "../../utils/documentComponentUtils";
-import { commonTexts } from "../../data/dialogmote/dialogmoteTexts";
-import { DocumentComponentDto } from "../../data/dialogmote/types/dialogmoteTypes";
+import { createParagraph } from "@/utils/documentComponentUtils";
+import { commonTexts } from "@/data/dialogmote/dialogmoteTexts";
+import { DocumentComponentDto } from "@/data/dialogmote/types/dialogmoteTypes";
 
 export const useForhandsvisningHilsen = (): DocumentComponentDto[] => {
   const { data } = useBehandlendeEnhet();

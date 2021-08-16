@@ -1,14 +1,7 @@
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
-import {
-  ErrorType,
-  Failure,
-  get,
-  post,
-  Result,
-  Success,
-} from "../../src/api/axios";
-import { Tilgang } from "../../src/data/tilgang/tilgang";
+import { ErrorType, Failure, get, post, Result, Success } from "@/api/axios";
+import { Tilgang } from "@/data/tilgang/tilgang";
 import { expect } from "chai";
 
 describe("Axios API tests", () => {

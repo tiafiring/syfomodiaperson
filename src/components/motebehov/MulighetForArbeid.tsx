@@ -3,8 +3,8 @@ import { Checkbox } from "nav-frontend-skjema";
 import {
   erMulighetForArbeidInformasjon,
   finnAvventendeSykmeldingTekst,
-} from "../../utils/sykmeldinger/sykmeldingUtils";
-import { SykmeldingOldFormat } from "../../data/sykmelding/types/SykmeldingOldFormat";
+} from "@/utils/sykmeldinger/sykmeldingUtils";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 
 const tekster = {
   mulighetForArbeid: {

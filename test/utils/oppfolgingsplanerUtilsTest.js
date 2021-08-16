@@ -9,7 +9,7 @@ import {
 import {
   activeLPSOppfolgingsplaner,
   activeOppfolgingsplaner,
-} from "../../src/utils/oppfolgingsplanerUtils";
+} from "@/utils/oppfolgingsplanerUtils";
 
 describe("oppfolgingsplanerUtils", () => {
   let clock;

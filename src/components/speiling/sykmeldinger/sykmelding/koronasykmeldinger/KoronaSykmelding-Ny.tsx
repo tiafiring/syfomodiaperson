@@ -1,7 +1,7 @@
 import React from "react";
 import { Undertittel, Normaltekst } from "nav-frontend-typografi";
 import { Knapp } from "nav-frontend-knapper";
-import { SykmeldingOldFormat } from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 import DineKoronaSykmeldingOpplysninger from "../sykmeldingOpplysninger/DineKoronaSykmeldingOpplysninger";
 import Hjelpeboble from "../../../../bjorn/Hjelpeboble";
 import { PersonImage } from "../../../../../../img/ImageComponents";

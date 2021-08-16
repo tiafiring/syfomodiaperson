@@ -5,11 +5,11 @@ import Side from "../../../sider/Side";
 import * as oppdialogActions from "../../../data/oppfolgingsplan/oppfoelgingsdialoger_actions";
 import OppfolgingsplanerOversikt from "../oppfoelgingsdialoger/OppfolgingsplanerOversikt";
 import IngenPlaner from "../oppfoelgingsdialoger/IngenPlaner";
-import { OPPFOELGINGSPLANER } from "../../../enums/menypunkter";
-import { activeOppfolgingsplaner } from "../../../utils/oppfolgingsplanerUtils";
-import { harForsoktHentetOppfoelgingsdialoger } from "../../../utils/reducerUtils";
-import { hentOppfolgingsplanerLPS } from "../../../data/oppfolgingsplan/oppfolgingsplanerlps_actions";
-import { hentPersonOppgaver } from "../../../data/personoppgave/personoppgave_actions";
+import { OPPFOELGINGSPLANER } from "@/enums/menypunkter";
+import { activeOppfolgingsplaner } from "@/utils/oppfolgingsplanerUtils";
+import { harForsoktHentetOppfoelgingsdialoger } from "@/utils/reducerUtils";
+import { hentOppfolgingsplanerLPS } from "@/data/oppfolgingsplan/oppfolgingsplanerlps_actions";
+import { hentPersonOppgaver } from "@/data/personoppgave/personoppgave_actions";
 import SideLaster from "../../SideLaster";
 
 const OppfoelgingsPlanerOversiktSide = ({

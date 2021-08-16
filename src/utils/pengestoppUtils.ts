@@ -4,13 +4,13 @@ import {
   StatusEndring,
   StoppAutomatikk,
   SykepengestoppArsak,
-} from "../data/pengestopp/types/FlaggPerson";
+} from "@/data/pengestopp/types/FlaggPerson";
 import { senesteTom } from "./periodeUtils";
 import {
   SykmeldingOldFormat,
   SykmeldingStatus,
-} from "../data/sykmelding/types/SykmeldingOldFormat";
-import { sykepengestoppArsakTekstListe } from "../components/pengestopp/PengestoppModal";
+} from "@/data/sykmelding/types/SykmeldingOldFormat";
+import { sykepengestoppArsakTekstListe } from "@/components/pengestopp/PengestoppModal";
 
 export const sykmeldingerToArbeidsgiver = (
   sykmeldinger: SykmeldingOldFormat[]

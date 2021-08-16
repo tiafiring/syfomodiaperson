@@ -2,7 +2,7 @@ import { expect } from "chai";
 import {
   referatTexts,
   StandardtekstKey,
-} from "../../src/data/dialogmote/dialogmoteTexts";
+} from "@/data/dialogmote/dialogmoteTexts";
 
 const expectedStandardtekstKeys = [
   "IKKE_BEHOV",

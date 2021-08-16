@@ -6,7 +6,7 @@ import mockSoknader from "../mockdata/mockSoknader";
 import Feilmelding from "../../src/components/Feilmelding";
 import SykepengesoknadUtland from "../../src/components/speiling/sykepengsoknader/soknad-utland/SykepengesoknadUtland";
 import { createStore } from "redux";
-import { rootReducer } from "../../src/data/rootState";
+import { rootReducer } from "@/data/rootState";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import { MemoryRouter, Route } from "react-router-dom";

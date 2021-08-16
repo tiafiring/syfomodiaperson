@@ -6,7 +6,7 @@ import DocumentTitle from "react-document-title";
 import {
   useHasLoadedMetaData,
   useTrackPageLoad,
-} from "../data/logging/loggingHooks";
+} from "@/data/logging/loggingHooks";
 
 interface SideFullbreddeProps {
   tittel: string;

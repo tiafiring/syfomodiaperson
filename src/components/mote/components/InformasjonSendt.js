@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import DropdownInnholdsviser from "./DropdownInnholdsviser";
 import * as epostinnholdActions from "../../../data/mote/epostinnhold_actions";
 import * as arbeidsgiverepostinnholdActions from "../../../data/mote/arbeidsgiverepostinnhold_actions";
-import { ARBEIDSGIVER, BRUKER } from "../../../konstanter";
+import { ARBEIDSGIVER, BRUKER } from "@/konstanter";
 import Utvidbar from "../../Utvidbar";
 import {
   ArbeidsgiverHoverImage,

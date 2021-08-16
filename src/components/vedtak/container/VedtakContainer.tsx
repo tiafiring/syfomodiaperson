@@ -3,18 +3,18 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Column, Row } from "nav-frontend-grid";
 import { AlertStripeInfo } from "nav-frontend-alertstriper";
-import { hentVedtak } from "../../../data/vedtak/vedtak_actions";
+import { hentVedtak } from "@/data/vedtak/vedtak_actions";
 import Side from "../../../sider/Side";
-import { VedtakDTO } from "../../../data/vedtak/vedtak";
+import { VedtakDTO } from "@/data/vedtak/vedtak";
 import VedtakInfopanel from "../VedtakInfopanel";
 import styled from "styled-components";
-import { VEDTAK } from "../../../enums/menypunkter";
+import { VEDTAK } from "@/enums/menypunkter";
 import VedtakUnselected from "../VedtakUnselected";
 import VedtakColumn from "../VedtakColumn";
 import VedtakInfoBox from "../VedtakInfoBox";
-import { sjekkTilgang } from "../../../data/tilgang/tilgang_actions";
+import { sjekkTilgang } from "@/data/tilgang/tilgang_actions";
 import { MappeAdvarselImage } from "../../../../img/ImageComponents";
-import { useValgtPersonident } from "../../../hooks/useValgtBruker";
+import { useValgtPersonident } from "@/hooks/useValgtBruker";
 import SideLaster from "../../SideLaster";
 
 const texts = {

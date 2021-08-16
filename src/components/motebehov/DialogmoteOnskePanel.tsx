@@ -4,11 +4,11 @@ import { FlexRow, PaddingSize } from "../Layout";
 import BehandleMotebehovKnapp from "./BehandleMotebehovKnapp";
 import { DialogmotePanel } from "../mote/components/DialogmotePanel";
 import React from "react";
-import { MotebehovDTO } from "../../data/motebehov/types/motebehovTypes";
-import { Leder } from "../../data/leder/ledere";
-import { OppfolgingstilfelleperioderMapState } from "../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
-import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
-import { VeilederinfoDTO } from "../../data/veilederinfo/types/VeilederinfoDTO";
+import { MotebehovDTO } from "@/data/motebehov/types/motebehovTypes";
+import { Leder } from "@/data/leder/ledere";
+import { OppfolgingstilfelleperioderMapState } from "@/data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
+import { Brukerinfo } from "@/data/navbruker/types/Brukerinfo";
+import { VeilederinfoDTO } from "@/data/veilederinfo/types/VeilederinfoDTO";
 
 const texts = {
   onskerOmDialogmote: "Ønsker om dialogmøte",

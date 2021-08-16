@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Knapp from "nav-frontend-knapper";
-import { behandlePersonOppgave } from "../../../data/personoppgave/personoppgave_actions";
-import { OppfolgingsplanLPS } from "../../../data/oppfolgingsplan/types/OppfolgingsplanLPS";
+import { behandlePersonOppgave } from "@/data/personoppgave/personoppgave_actions";
+import { OppfolgingsplanLPS } from "@/data/oppfolgingsplan/types/OppfolgingsplanLPS";
 
 interface BehandleOppfolgingsplanLPSProps {
   oppfolgingsplanLPS: OppfolgingsplanLPS;

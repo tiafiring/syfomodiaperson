@@ -1,6 +1,6 @@
 import React from "react";
 import TilbakeIArbeidCheckboxMedSporsmalOgDato from "./TilbakeIArbeidCheckboxMedSporsmalOgDato";
-import { FriskmeldingDTO } from "../../data/sykmelding/types/SykmeldingOldFormat";
+import { FriskmeldingDTO } from "@/data/sykmelding/types/SykmeldingOldFormat";
 
 const tekster = {
   header: "8 uker: Pasient uten arbeidsgiver, utdypende opplysninger",

@@ -4,7 +4,7 @@ import { Hovedknapp } from "nav-frontend-knapper";
 import {
   SykmeldingOldFormat,
   SykmeldingStatus,
-} from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
+} from "@/data/sykmelding/types/SykmeldingOldFormat";
 
 const texts = {
   confirm: "Bekreft",

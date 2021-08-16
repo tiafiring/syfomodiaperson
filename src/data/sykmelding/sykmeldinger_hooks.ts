@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../hooks/hooks";
+import { useAppSelector } from "@/hooks/hooks";
 import { SykmeldingOldFormat } from "./types/SykmeldingOldFormat";
 
 export const useSykmeldinger: () => {

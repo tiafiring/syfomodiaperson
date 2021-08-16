@@ -1,12 +1,12 @@
 import { expect } from "chai";
 import sinon from "sinon";
-import { KJOENN } from "../../src/konstanter";
+import { KJOENN } from "@/konstanter";
 import {
   hentBrukersFoedseldatoFraFnr,
   hentBrukersAlderFraFnr,
   hentBrukersKjoennFraFnr,
   formaterFnr,
-} from "../../src/utils/fnrUtils";
+} from "@/utils/fnrUtils";
 
 describe("fnrUtils", () => {
   describe("hentBrukersFoedseldatoFraFnr", () => {

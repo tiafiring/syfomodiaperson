@@ -2,7 +2,7 @@ import React from "react";
 import PersonkortElement from "./PersonkortElement";
 import PersonkortInformasjon from "./PersonkortInformasjon";
 import { KontorByggImage } from "../../../img/ImageComponents";
-import { useBehandlendeEnhet } from "../../data/behandlendeenhet/behandlendeEnhet_hooks";
+import { useBehandlendeEnhet } from "@/data/behandlendeenhet/behandlendeEnhet_hooks";
 import ErrorBoundary from "../ErrorBoundary";
 
 const texts = {

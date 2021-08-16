@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { hentPrediksjon } from "../../data/prediksjon/prediksjon_actions";
+import { hentPrediksjon } from "@/data/prediksjon/prediksjon_actions";
 import PrediksjonHjelpetekst from "./PrediksjonHjelpetekst";
 import ViktigeFaktorer from "./ViktigeFaktorer";
 import DetaljertInformasjon from "./DetaljertInformasjon";
 import PrediksjonResultat from "./PrediksjonResultat";
-import { useAppSelector } from "../../hooks/hooks";
+import { useAppSelector } from "@/hooks/hooks";
 import { DialogmotePanel } from "../mote/components/DialogmotePanel";
 import { UtropstegnImage } from "../../../img/ImageComponents";
 

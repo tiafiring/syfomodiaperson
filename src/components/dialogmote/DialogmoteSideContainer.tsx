@@ -1,14 +1,14 @@
 import React, { ReactElement, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useAppSelector } from "../../hooks/hooks";
+import { useAppSelector } from "@/hooks/hooks";
 import { useDispatch } from "react-redux";
-import { fetchDialogmote } from "../../data/dialogmote/dialogmote_actions";
+import { fetchDialogmote } from "@/data/dialogmote/dialogmote_actions";
 import Side from "../../sider/Side";
-import { MOETEPLANLEGGER } from "../../enums/menypunkter";
+import { MOETEPLANLEGGER } from "@/enums/menypunkter";
 import SideLaster from "../SideLaster";
 import Sidetopp from "../Sidetopp";
 import Feilmelding from "../Feilmelding";
-import { DialogmoteDTO } from "../../data/dialogmote/types/dialogmoteTypes";
+import { DialogmoteDTO } from "@/data/dialogmote/types/dialogmoteTypes";
 
 interface DialogmoteSideProps {
   title: string;

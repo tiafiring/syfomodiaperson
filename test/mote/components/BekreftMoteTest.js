@@ -10,7 +10,7 @@ import BekreftMoteSkjema, {
 import BekreftMoteUtenSvarSkjema, {
   tekster as bekreftMoteUtenSvarTekster,
 } from "../../../src/components/mote/components/BekreftMoteUtenSvarSkjema";
-import { ARBEIDSGIVER, BRUKER } from "../../../src/konstanter";
+import { ARBEIDSGIVER, BRUKER } from "@/konstanter";
 import Epostmottakere from "../../../src/components/mote/components/Epostmottakere";
 
 const getMoteUtenSvar = (mote) => {

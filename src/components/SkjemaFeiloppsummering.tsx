@@ -1,6 +1,6 @@
 import { Feiloppsummering, FeiloppsummeringFeil } from "nav-frontend-skjema";
 import React, { ReactElement, useEffect, useRef } from "react";
-import { harFeilmeldinger, SkjemaFeil } from "../utils/valideringUtils";
+import { harFeilmeldinger, SkjemaFeil } from "@/utils/valideringUtils";
 import { FlexColumn, FlexRow, PaddingSize } from "./Layout";
 
 interface SkjemaFeiloppsummeringProps {

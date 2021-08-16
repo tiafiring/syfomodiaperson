@@ -1,6 +1,6 @@
 import React from "react";
 import BoksRad from "./BoksRad";
-import { SykmeldingDiagnose } from "../../data/sykmelding/types/SykmeldingOldFormat";
+import { SykmeldingDiagnose } from "@/data/sykmelding/types/SykmeldingOldFormat";
 
 interface DiagnoseBoksProps {
   diagnose: SykmeldingDiagnose;

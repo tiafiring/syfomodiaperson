@@ -1,13 +1,13 @@
-import { MAX_LENGTH_STED } from "../components/mote/skjema/MotebookingSkjema";
+import { MAX_LENGTH_STED } from "@/components/mote/skjema/MotebookingSkjema";
 import { isISODateString } from "nav-datovelger";
-import { ReferatSkjemaValues } from "../components/dialogmote/referat/Referat";
-import { MAX_LENGTH_KONKLUSJON } from "../components/dialogmote/referat/Konklusjon";
-import { MAX_LENGTH_SITUASJON } from "../components/dialogmote/referat/Situasjon";
-import { MAX_LENGTH_ARBEIDSTAKERS_OPPGAVE } from "../components/dialogmote/referat/ArbeidstakersOppgave";
-import { MAX_LENGTH_ARBEIDSGIVERS_OPPGAVE } from "../components/dialogmote/referat/ArbeidsgiversOppgave";
-import { MAX_LENGTH_VEILEDERS_OPPGAVE } from "../components/dialogmote/referat/VeiledersOppgave";
-import { MAX_LENGTH_AVLYS_BEGRUNNELSE } from "../components/dialogmote/avlys/AvlysDialogmoteBegrunnelse";
-import { MAX_LENGTH_INNKALLING_FRITEKST } from "../components/dialogmote/innkalling/DialogmoteInnkallingTekster";
+import { ReferatSkjemaValues } from "@/components/dialogmote/referat/Referat";
+import { MAX_LENGTH_KONKLUSJON } from "@/components/dialogmote/referat/Konklusjon";
+import { MAX_LENGTH_SITUASJON } from "@/components/dialogmote/referat/Situasjon";
+import { MAX_LENGTH_ARBEIDSTAKERS_OPPGAVE } from "@/components/dialogmote/referat/ArbeidstakersOppgave";
+import { MAX_LENGTH_ARBEIDSGIVERS_OPPGAVE } from "@/components/dialogmote/referat/ArbeidsgiversOppgave";
+import { MAX_LENGTH_VEILEDERS_OPPGAVE } from "@/components/dialogmote/referat/VeiledersOppgave";
+import { MAX_LENGTH_AVLYS_BEGRUNNELSE } from "@/components/dialogmote/avlys/AvlysDialogmoteBegrunnelse";
+import { MAX_LENGTH_INNKALLING_FRITEKST } from "@/components/dialogmote/innkalling/DialogmoteInnkallingTekster";
 
 export interface SkjemaFeil {
   [key: string]: string | undefined;

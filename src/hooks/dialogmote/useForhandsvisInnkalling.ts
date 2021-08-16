@@ -1,18 +1,18 @@
-import { DialogmoteInnkallingSkjemaValues } from "../../components/dialogmote/innkalling/DialogmoteInnkallingSkjema";
-import { DocumentComponentDto } from "../../data/dialogmote/types/dialogmoteTypes";
-import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../utils/datoUtils";
+import { DialogmoteInnkallingSkjemaValues } from "@/components/dialogmote/innkalling/DialogmoteInnkallingSkjema";
+import { DocumentComponentDto } from "@/data/dialogmote/types/dialogmoteTypes";
+import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "@/utils/datoUtils";
 import { genererDato } from "../../components/mote/utils";
-import { useNavBrukerData } from "../../data/navbruker/navbruker_hooks";
-import { Brukerinfo } from "../../data/navbruker/types/Brukerinfo";
+import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
+import { Brukerinfo } from "@/data/navbruker/types/Brukerinfo";
 import {
   commonTexts,
   innkallingTexts,
-} from "../../data/dialogmote/dialogmoteTexts";
+} from "@/data/dialogmote/dialogmoteTexts";
 import {
   createLink,
   createParagraph,
   createParagraphWithTitle,
-} from "../../utils/documentComponentUtils";
+} from "@/utils/documentComponentUtils";
 import { useForhandsvisningHilsen } from "./useForhandsvisningHilsen";
 
 export interface ForhandsvisInnkallingGenerator {

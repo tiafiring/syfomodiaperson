@@ -1,8 +1,8 @@
 import React from "react";
 import SykmeldingPeriode from "./SykmeldingPeriode";
-import { SykmeldingPeriodeDTO } from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
-import { getDuration } from "../../../../../utils/datoUtils";
-import { sorterPerioderEldsteForst } from "../../../../../utils/periodeUtils";
+import { SykmeldingPeriodeDTO } from "@/data/sykmelding/types/SykmeldingOldFormat";
+import { getDuration } from "@/utils/datoUtils";
+import { sorterPerioderEldsteForst } from "@/utils/periodeUtils";
 
 interface SykmeldingPerioderProps {
   perioder: SykmeldingPeriodeDTO[];

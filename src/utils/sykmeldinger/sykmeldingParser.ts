@@ -6,20 +6,20 @@ import {
   medisinskeArsakerKoder,
   medisinskeArsakerTekster,
 } from "./AktivitetIkkeMuligArsaker";
-import { SykmeldingNewFormatDTO } from "../../data/sykmelding/types/SykmeldingNewFormatDTO";
+import { SykmeldingNewFormatDTO } from "@/data/sykmelding/types/SykmeldingNewFormatDTO";
 import {
   Datospenn,
   FriskmeldingDTO,
   SykmeldingDiagnose,
   SykmeldingOldFormat,
   SykmeldingStatus,
-} from "../../data/sykmelding/types/SykmeldingOldFormat";
+} from "@/data/sykmelding/types/SykmeldingOldFormat";
 import { toDate, toDateWithoutNullCheck } from "../datoUtils";
-import { PeriodetypeDTO } from "../../data/sykmelding/types/PeriodetypeDTO";
-import { SykmeldingsperiodeDTO } from "../../data/sykmelding/types/SykmeldingsperiodeDTO";
-import { BehandlerDTO } from "../../data/sykmelding/types/BehandlerDTO";
-import { SporsmalDTO } from "../../data/sykmelding/types/SporsmalDTO";
-import { ShortNameDTO } from "../../data/sykmelding/types/ShortNameDTO";
+import { PeriodetypeDTO } from "@/data/sykmelding/types/PeriodetypeDTO";
+import { SykmeldingsperiodeDTO } from "@/data/sykmelding/types/SykmeldingsperiodeDTO";
+import { BehandlerDTO } from "@/data/sykmelding/types/BehandlerDTO";
+import { SporsmalDTO } from "@/data/sykmelding/types/SporsmalDTO";
+import { ShortNameDTO } from "@/data/sykmelding/types/ShortNameDTO";
 
 const mapArbeidsevne = (sykmelding: SykmeldingNewFormatDTO) => {
   return {

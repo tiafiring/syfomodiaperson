@@ -1,9 +1,9 @@
 import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import AlertStripe from "nav-frontend-alertstriper";
-import { tilLesbarDatoMedArstall } from "../../../../utils/datoUtils";
-import { getTidligsteSendtDato } from "../../../../utils/sykepengesoknadUtils";
-import { useSykepengeSoknader } from "../../../../data/sykepengesoknad/soknader_hooks";
+import { tilLesbarDatoMedArstall } from "@/utils/datoUtils";
+import { getTidligsteSendtDato } from "@/utils/sykepengesoknadUtils";
+import { useSykepengeSoknader } from "@/data/sykepengesoknad/soknader_hooks";
 
 const texts = {
   korrigert: "Du sendte inn en endring av denne søknaden den ",

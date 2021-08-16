@@ -2,15 +2,15 @@ import React, { ReactElement, useState } from "react";
 import {
   SykmeldingOldFormat,
   SykmeldingStatus,
-} from "../../../../data/sykmelding/types/SykmeldingOldFormat";
+} from "@/data/sykmelding/types/SykmeldingOldFormat";
 import SykmeldingTeasere from "./SykmeldingTeasere";
-import { useTrackOnClick } from "../../../../data/logging/loggingHooks";
+import { useTrackOnClick } from "@/data/logging/loggingHooks";
 import { VelgSykmeldingSorteringDropdown } from "./VelgSykmeldingSorteringDropdown";
 import {
   SorteringKriterium,
   SorteringsKriteriumVerdi,
   sorterSykmeldinger,
-} from "../../../../utils/sorterSykmeldingerUtils";
+} from "@/utils/sorterSykmeldingerUtils";
 
 const texts = {
   ingenSykmeldinger: "Tidligere sykmeldinger",

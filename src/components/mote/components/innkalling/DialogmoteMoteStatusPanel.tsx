@@ -13,14 +13,14 @@ import {
   DialogmotedeltakerArbeidstakerVarselDTO,
   DialogmoteDTO,
   MotedeltakerVarselType,
-} from "../../../../data/dialogmote/types/dialogmoteTypes";
-import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
-import { Brukerinfo } from "../../../../data/navbruker/types/Brukerinfo";
-import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "../../../../utils/datoUtils";
+} from "@/data/dialogmote/types/dialogmoteTypes";
+import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
+import { Brukerinfo } from "@/data/navbruker/types/Brukerinfo";
+import { tilDatoMedUkedagOgManedNavnOgKlokkeslett } from "@/utils/datoUtils";
 import { Link } from "react-router-dom";
 import { TrackedKnapp } from "../../../buttons/TrackedKnapp";
 import { TrackedHovedknapp } from "../../../buttons/TrackedHovedknapp";
-import { useLedere } from "../../../../hooks/useLedere";
+import { useLedere } from "@/hooks/useLedere";
 
 const texts = {
   innkallingSendtTrackingContext: "Møtelandingsside: Sendt innkalling",

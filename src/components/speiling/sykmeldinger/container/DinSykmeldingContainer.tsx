@@ -1,21 +1,21 @@
 import React, { ReactElement, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { hentSykmeldinger } from "../../../../data/sykmelding/sykmeldinger_actions";
+import { hentSykmeldinger } from "@/data/sykmelding/sykmeldinger_actions";
 import {
   ArbeidssituasjonType,
   SykmeldingOldFormat,
   SykmeldingStatus,
-} from "../../../../data/sykmelding/types/SykmeldingOldFormat";
+} from "@/data/sykmelding/types/SykmeldingOldFormat";
 import Side from "../../../../sider/Side";
 import SidetoppSpeilet from "../../../SidetoppSpeilet";
 import SykmeldingSide from "../sykmelding/SykmeldingSide";
 import Brodsmuler from "../../Brodsmuler";
 import Speilingvarsel from "../../Speilingvarsel";
-import { SYKMELDINGER } from "../../../../enums/menypunkter";
-import { useValgtPersonident } from "../../../../hooks/useValgtBruker";
+import { SYKMELDINGER } from "@/enums/menypunkter";
+import { useValgtPersonident } from "@/hooks/useValgtBruker";
 import SideLaster from "../../../SideLaster";
-import { useSykmeldinger } from "../../../../data/sykmelding/sykmeldinger_hooks";
-import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
+import { useSykmeldinger } from "@/data/sykmelding/sykmeldinger_hooks";
+import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
 
 const texts = {
   pageTitleSykmelding: "Sykmelding",

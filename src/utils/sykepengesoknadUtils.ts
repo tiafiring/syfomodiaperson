@@ -1,7 +1,7 @@
 import {
   SporsmalDTO,
   SykepengesoknadDTO,
-} from "../data/sykepengesoknad/types/SykepengesoknadDTO";
+} from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 
 export const getTidligsteSendtDato = (soknad: any) => {
   if (soknad.sendtTilNAVDato && soknad.sendtTilArbeidsgiverDato) {

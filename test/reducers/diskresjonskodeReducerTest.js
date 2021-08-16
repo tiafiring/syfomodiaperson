@@ -1,9 +1,9 @@
 import deepFreeze from "deep-freeze";
 import { expect } from "chai";
 import * as actions from "../../src/data/diskresjonskode/diskresjonskode_actions";
-import { HentDiskresjonskodeActionTypes } from "../../src/data/diskresjonskode/diskresjonskode_actions";
+import { HentDiskresjonskodeActionTypes } from "@/data/diskresjonskode/diskresjonskode_actions";
 import diskresjonskode from "../../src/data/diskresjonskode/diskresjonskode";
-import { defaultErrorTexts, ErrorType } from "../../src/api/axios";
+import { defaultErrorTexts, ErrorType } from "@/api/axios";
 
 describe("diskresjonskode", () => {
   describe("henter", () => {

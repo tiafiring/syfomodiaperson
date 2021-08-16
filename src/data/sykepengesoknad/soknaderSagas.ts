@@ -1,8 +1,8 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import * as actions from "./soknader_actions";
-import { get, Result, Success } from "../../api/axios";
+import { get, Result, Success } from "@/api/axios";
 import { SykepengesoknadDTO } from "./types/SykepengesoknadDTO";
-import { SYFOSOKNAD_ROOT } from "../../apiConstants";
+import { SYFOSOKNAD_ROOT } from "@/apiConstants";
 
 export const skalHenteSoknader = (state: any) => {
   const reducer = state.soknader;

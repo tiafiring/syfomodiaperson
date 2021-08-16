@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
-import { getDuration } from "../../../../utils/datoUtils";
-import { SykmeldingPeriodeDTO } from "../../../../data/sykmelding/types/SykmeldingOldFormat";
-import { capitalizeFoersteBokstav } from "../../../../utils/stringUtils";
+import { getDuration } from "@/utils/datoUtils";
+import { SykmeldingPeriodeDTO } from "@/data/sykmelding/types/SykmeldingOldFormat";
+import { capitalizeFoersteBokstav } from "@/utils/stringUtils";
 
 const textBehandlingsdagEnDag = (behandlingsdager: number, dager: number) => {
   return `${behandlingsdager} behandlingsdag i løpet av ${dager} dag\n`;

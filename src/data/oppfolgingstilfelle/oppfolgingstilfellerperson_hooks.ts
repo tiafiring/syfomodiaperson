@@ -1,5 +1,5 @@
-import { useAppSelector } from "../../hooks/hooks";
-import { startDateFromLatestActiveTilfelle } from "../../utils/periodeUtils";
+import { useAppSelector } from "@/hooks/hooks";
+import { startDateFromLatestActiveTilfelle } from "@/utils/periodeUtils";
 
 export const useStartDateFromLatestOppfolgingstilfellePeriode = ():
   | string

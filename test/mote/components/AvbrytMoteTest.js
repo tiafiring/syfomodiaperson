@@ -6,7 +6,7 @@ import AvbrytMote, {
   mapStateToInnholdsviserProps,
 } from "../../../src/components/mote/components/AvbrytMote";
 import Epostmottakere from "../../../src/components/mote/components/Epostmottakere";
-import { ARBEIDSGIVER, BRUKER } from "../../../src/konstanter";
+import { ARBEIDSGIVER, BRUKER } from "@/konstanter";
 
 const getMote = (mote) => {
   return Object.assign(

@@ -9,8 +9,8 @@ import {
   harArbeidstakerSvartPaaMotebehov,
   hentSistBehandletMotebehov,
   motebehovFromLatestActiveTilfelle,
-} from "../../src/utils/motebehovUtils";
-import { ANTALL_MS_DAG } from "../../src/utils/datoUtils";
+} from "@/utils/motebehovUtils";
+import { ANTALL_MS_DAG } from "@/utils/datoUtils";
 
 describe("motebehovUtils", () => {
   describe("finnNyesteMotebehovsvarFraHverDeltaker", () => {

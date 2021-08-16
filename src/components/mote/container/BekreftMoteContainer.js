@@ -9,7 +9,7 @@ import BekreftMote from "../components/BekreftMote";
 import Feilmelding from "../../Feilmelding";
 import AppSpinner from "../../AppSpinner";
 import * as epostinnholdActions from "../../../data/mote/epostinnhold_actions";
-import { MOETEPLANLEGGER } from "../../../enums/menypunkter";
+import { MOETEPLANLEGGER } from "@/enums/menypunkter";
 import { withRouter } from "react-router-dom";
 import { motePt } from "../moteProptypes";
 

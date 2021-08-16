@@ -1,10 +1,10 @@
 import React, { ReactElement } from "react";
-import { tilLesbarDatoMedArstall } from "../../../../../utils/datoUtils";
+import { tilLesbarDatoMedArstall } from "@/utils/datoUtils";
 import {
   StatusNokkelopplysning,
   Statusopplysninger,
 } from "../../../Statuspanel";
-import { SykmeldingOldFormat } from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 
 interface AvvistSykmeldingStatuspanelProps {
   sykmelding: SykmeldingOldFormat;

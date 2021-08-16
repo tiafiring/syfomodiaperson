@@ -1,18 +1,18 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Checkbox } from "nav-frontend-skjema";
-import { VeilederinfoDTO } from "../../data/veilederinfo/types/VeilederinfoDTO";
+import { VeilederinfoDTO } from "@/data/veilederinfo/types/VeilederinfoDTO";
 import {
   erMotebehovBehandlet,
   harUbehandletMotebehov,
   hentSistBehandletMotebehov,
   motebehovlisteMedKunJaSvar,
-} from "../../utils/motebehovUtils";
-import { toDatePrettyPrint } from "../../utils/datoUtils";
-import { behandleMotebehov } from "../../data/motebehov/behandlemotebehov_actions";
-import { MotebehovDTO } from "../../data/motebehov/types/motebehovTypes";
-import { useValgtPersonident } from "../../hooks/useValgtBruker";
-import { useTrackOnClick } from "../../data/logging/loggingHooks";
+} from "@/utils/motebehovUtils";
+import { toDatePrettyPrint } from "@/utils/datoUtils";
+import { behandleMotebehov } from "@/data/motebehov/behandlemotebehov_actions";
+import { MotebehovDTO } from "@/data/motebehov/types/motebehovTypes";
+import { useValgtPersonident } from "@/hooks/useValgtBruker";
+import { useTrackOnClick } from "@/data/logging/loggingHooks";
 
 const texts = {
   fjernOppgave: "Jeg har vurdert behovet. Oppgaven kan fjernes fra oversikten.",

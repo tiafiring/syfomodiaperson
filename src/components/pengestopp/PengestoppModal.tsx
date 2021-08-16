@@ -11,13 +11,13 @@ import {
   SykepengestoppArsak,
   SykepengestoppArsakType,
   VirksomhetNr,
-} from "../../data/pengestopp/types/FlaggPerson";
+} from "@/data/pengestopp/types/FlaggPerson";
 import { AlertStripeInfo } from "nav-frontend-alertstriper";
 import { useDispatch } from "react-redux";
-import { endreStatus } from "../../data/pengestopp/flaggperson_actions";
-import { useNavEnhet } from "../../hooks/useNavEnhet";
-import { useValgtPersonident } from "../../hooks/useValgtBruker";
-import { useFlaggperson } from "../../data/pengestopp/flaggperson_hooks";
+import { endreStatus } from "@/data/pengestopp/flaggperson_actions";
+import { useNavEnhet } from "@/hooks/useNavEnhet";
+import { useValgtPersonident } from "@/hooks/useValgtBruker";
+import { useFlaggperson } from "@/data/pengestopp/flaggperson_hooks";
 
 const texts = {
   notStoppedTittel:

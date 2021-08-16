@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { getSvar } from "../../../utils/moteplanleggerUtils";
-import { ARBEIDSGIVER, MULIGE_SVAR } from "../../../konstanter";
+import { getSvar } from "@/utils/moteplanleggerUtils";
+import { ARBEIDSGIVER, MULIGE_SVAR } from "@/konstanter";
 import {
   StatusIkkeSvarImage,
   StatusKanIkkeImage,

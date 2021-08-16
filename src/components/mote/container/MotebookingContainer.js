@@ -7,8 +7,8 @@ import MotestatusContainer from "./MotestatusContainer";
 import Feilmelding from "../../Feilmelding";
 import AppSpinner from "../../AppSpinner";
 import * as moterActions from "../../../data/mote/moter_actions";
-import { MOETEPLANLEGGER } from "../../../enums/menypunkter";
-import { hentBegrunnelseTekst } from "../../../utils/tilgangUtils";
+import { MOETEPLANLEGGER } from "@/enums/menypunkter";
+import { hentBegrunnelseTekst } from "@/utils/tilgangUtils";
 
 const texts = {
   pageTitle: "Møteplanlegger",

@@ -3,14 +3,14 @@ import { useDispatch } from "react-redux";
 import Side from "../../../../sider/Side";
 import Soknader from "../soknader/Soknader";
 import Brodsmuler from "../../Brodsmuler";
-import { SYKEPENGESOKNADER } from "../../../../enums/menypunkter";
+import { SYKEPENGESOKNADER } from "@/enums/menypunkter";
 import Speilingvarsel from "../../Speilingvarsel";
 import Feilstripe from "../../../Feilstripe";
 import SideLaster from "../../../SideLaster";
-import { useValgtPersonident } from "../../../../hooks/useValgtBruker";
-import { hentSoknader } from "../../../../data/sykepengesoknad/soknader_actions";
-import { useNavBrukerData } from "../../../../data/navbruker/navbruker_hooks";
-import { useSykepengeSoknader } from "../../../../data/sykepengesoknad/soknader_hooks";
+import { useValgtPersonident } from "@/hooks/useValgtBruker";
+import { hentSoknader } from "@/data/sykepengesoknad/soknader_actions";
+import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
+import { useSykepengeSoknader } from "@/data/sykepengesoknad/soknader_hooks";
 
 const errorMessageText = (name: string) => {
   return `Beklager – vi kunne ikke hente alle sykepengesøknadene til ${name}`;

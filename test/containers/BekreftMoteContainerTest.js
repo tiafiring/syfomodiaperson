@@ -5,7 +5,7 @@ import sinon from "sinon";
 import {
   BekreftMoteSide,
   mapStateToProps,
-} from "../../src/components/mote/container/BekreftMoteContainer";
+} from "@/components/mote/container/BekreftMoteContainer";
 
 describe("BekreftMoteContainer", () => {
   describe("BekreftMoteSide", () => {

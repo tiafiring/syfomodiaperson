@@ -1,5 +1,5 @@
 import React from "react";
-import { ApiError, defaultErrorTexts, ErrorType } from "../api/axios";
+import { ApiError, defaultErrorTexts, ErrorType } from "@/api/axios";
 import Alertstripe from "nav-frontend-alertstriper";
 import { Normaltekst } from "nav-frontend-typografi";
 import Lenke from "nav-frontend-lenker";

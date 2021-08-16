@@ -3,7 +3,7 @@ import OppsummeringSporsmalscontainer from "./OppsummeringSporsmalscontainer";
 import OppsummeringSporsmalstekst from "./OppsummeringSporsmalstekst";
 import { getKey } from "./Oppsummeringsvisning";
 import { OppsummeringSporsmalProps } from "./OppsummeringSporsmal";
-import { SvarTypeDTO } from "../../../../data/sykepengesoknad/types/SykepengesoknadDTO";
+import { SvarTypeDTO } from "@/data/sykepengesoknad/types/SykepengesoknadDTO";
 
 const texts = {
   timerTot: "timer totalt",

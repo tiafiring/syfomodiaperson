@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { get, Result, Success } from "../../api/axios";
+import { get, Result, Success } from "@/api/axios";
 import { VeilederinfoDTO } from "./types/VeilederinfoDTO";
 import {
   HENT_VEILEDERINFO_FORESPURT,
@@ -7,7 +7,7 @@ import {
   hentVeilederinfoFeilet,
   veilederinfoHentet,
 } from "./veilederinfo_actions";
-import { SYFOVEILEDER_ROOT } from "../../apiConstants";
+import { SYFOVEILEDER_ROOT } from "@/apiConstants";
 
 export function* hentVeilederinfoSaga() {
   yield put(henterVeilederinfo());

@@ -1,6 +1,6 @@
 import React from "react";
 import { Undertittel } from "nav-frontend-typografi";
-import { SykmeldingOldFormat } from "../../../../../data/sykmelding/types/SykmeldingOldFormat";
+import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 import SykmeldingStatuspanel from "../../sykmeldingstatuspanel/SykmeldingStatuspanel";
 import DineKoronaSykmeldingOpplysninger from "../sykmeldingOpplysninger/DineKoronaSykmeldingOpplysninger";
 import Utvidbar from "../../../../Utvidbar";

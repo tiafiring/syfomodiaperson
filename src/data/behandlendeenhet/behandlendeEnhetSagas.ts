@@ -6,9 +6,9 @@ import {
   HentBehandlendeEnhetAction,
   hentBehandlendeEnhetFeilet,
 } from "./behandlendeEnhet_actions";
-import { get, Result, Success } from "../../api/axios";
+import { get, Result, Success } from "@/api/axios";
 import { BehandlendeEnhet } from "./types/BehandlendeEnhet";
-import { SYFOBEHANDLENDEENHET_ROOT } from "../../apiConstants";
+import { SYFOBEHANDLENDEENHET_ROOT } from "@/apiConstants";
 
 function* hentBehandlendeEnhetSaga(action: HentBehandlendeEnhetAction) {
   yield put(actions.henterBehandlendeEnhet());

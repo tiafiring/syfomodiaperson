@@ -2,22 +2,22 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Lenke from "nav-frontend-lenker";
-import { OppfolgingsplanDTO } from "../../data/oppfolgingsplan/oppfoelgingsdialoger";
-import { hentOppfolgingsplanerLPS } from "../../data/oppfolgingsplan/oppfolgingsplanerlps_actions";
-import { OppfolgingsplanerlpsState } from "../../data/oppfolgingsplan/oppfolgingsplanerlps";
-import { useAppSelector } from "../../hooks/hooks";
-import { OppfolgingstilfelleperioderMapState } from "../../data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
-import { lpsPlanerWithActiveTilfelle } from "../../utils/oppfolgingsplanUtils";
+import { OppfolgingsplanDTO } from "@/data/oppfolgingsplan/oppfoelgingsdialoger";
+import { hentOppfolgingsplanerLPS } from "@/data/oppfolgingsplan/oppfolgingsplanerlps_actions";
+import { OppfolgingsplanerlpsState } from "@/data/oppfolgingsplan/oppfolgingsplanerlps";
+import { useAppSelector } from "@/hooks/hooks";
+import { OppfolgingstilfelleperioderMapState } from "@/data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
+import { lpsPlanerWithActiveTilfelle } from "@/utils/oppfolgingsplanUtils";
 import {
   tilLesbarDatoMedArstall,
   tilLesbarPeriodeMedArstall,
-} from "../../utils/datoUtils";
-import { OppfolgingsplanLPS } from "../../data/oppfolgingsplan/types/OppfolgingsplanLPS";
-import { hentPersonOppgaver } from "../../data/personoppgave/personoppgave_actions";
-import { PersonOppgave } from "../../data/personoppgave/types/PersonOppgave";
-import { hentVirksomhet } from "../../data/virksomhet/virksomhet_actions";
+} from "@/utils/datoUtils";
+import { OppfolgingsplanLPS } from "@/data/oppfolgingsplan/types/OppfolgingsplanLPS";
+import { hentPersonOppgaver } from "@/data/personoppgave/personoppgave_actions";
+import { PersonOppgave } from "@/data/personoppgave/types/PersonOppgave";
+import { hentVirksomhet } from "@/data/virksomhet/virksomhet_actions";
 import { H3NoMargins } from "../Layout";
-import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "../../apiConstants";
+import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "@/apiConstants";
 
 const texts = {
   header: "Oppfølgingsplan",
