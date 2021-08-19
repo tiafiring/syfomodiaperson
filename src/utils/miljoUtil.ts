@@ -58,5 +58,3 @@ export const getEnvironmentAsString = (): string => {
     return env.UNKNOWN;
   }
 };
-
-export const erLokalEllerPreprod = erPreProd() || erLokal();

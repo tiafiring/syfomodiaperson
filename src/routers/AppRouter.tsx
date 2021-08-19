@@ -15,7 +15,6 @@ import MotelandingssideContainer from "../components/mote/container/Motelandings
 import NokkelinformasjonContainer from "../components/nokkelinformasjon/container/NokkelinformasjonContainer";
 import VedtakContainer from "../components/vedtak/container/VedtakContainer";
 import DialogmoteInnkallingContainer from "../components/dialogmote/innkalling/DialogmoteInnkallingContainer";
-import { erLokalEllerPreprod } from "@/utils/miljoUtil";
 import AvlysDialogmoteContainer from "../components/dialogmote/avlys/AvlysDialogmoteContainer";
 import { useValgtPersonident } from "@/hooks/useValgtBruker";
 import { useDispatch } from "react-redux";
@@ -53,34 +52,26 @@ const AktivBrukerRouter = (): ReactElement => {
         component={MotelandingssideContainer}
       />
       <Route path="/sykefravaer/mote" exact component={MotebookingContainer} />
-      {erLokalEllerPreprod && (
-        <Route
-          path="/sykefravaer/dialogmote"
-          exact
-          component={DialogmoteInnkallingContainer}
-        />
-      )}
-      {erLokalEllerPreprod && (
-        <Route
-          path="/sykefravaer/dialogmote/:dialogmoteUuid/avlys"
-          exact
-          component={AvlysDialogmoteContainer}
-        />
-      )}
-      {erLokalEllerPreprod && (
-        <Route
-          path="/sykefravaer/dialogmote/:dialogmoteUuid/referat"
-          exact
-          component={DialogmoteReferatContainer}
-        />
-      )}
-      {erLokalEllerPreprod && (
-        <Route
-          path="/sykefravaer/dialogmote/:dialogmoteUuid/endre"
-          exact
-          component={EndreDialogmoteContainer}
-        />
-      )}
+      <Route
+        path="/sykefravaer/dialogmote"
+        exact
+        component={DialogmoteInnkallingContainer}
+      />
+      <Route
+        path="/sykefravaer/dialogmote/:dialogmoteUuid/avlys"
+        exact
+        component={AvlysDialogmoteContainer}
+      />
+      <Route
+        path="/sykefravaer/dialogmote/:dialogmoteUuid/referat"
+        exact
+        component={DialogmoteReferatContainer}
+      />
+      <Route
+        path="/sykefravaer/dialogmote/:dialogmoteUuid/endre"
+        exact
+        component={EndreDialogmoteContainer}
+      />
       <Route
         path="/sykefravaer/mote/:moteUuid/avbryt"
         exact
