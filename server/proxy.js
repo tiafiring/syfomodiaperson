@@ -22,7 +22,6 @@ const proxyExternalHost = (
         options.headers["Authorization"] = `Bearer ${token}`;
       }
       if (
-        (host === Config.auth.ispengestopp.host && !parseReqBody) ||
         host === Config.auth.flexInternGateway.host ||
         host === Config.auth.syfosmregister.host
       ) {

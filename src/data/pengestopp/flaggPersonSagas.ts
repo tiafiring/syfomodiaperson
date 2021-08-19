@@ -16,7 +16,7 @@ export function* hentStatusHvisIkkeHentet(action: any) {
   if (skalHente) {
     yield put(actions.henterStatus());
 
-    const path = `${ISPENGESTOPP_ROOT}/person/status?fnr=${action.fnr}`;
+    const path = `${ISPENGESTOPP_ROOT}/person/status`;
     const result: Result<StatusEndring[]> = yield call(get, path, action.fnr);
 
     if (result instanceof Success) {
