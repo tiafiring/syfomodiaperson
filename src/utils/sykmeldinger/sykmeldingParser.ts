@@ -20,6 +20,7 @@ import { SykmeldingsperiodeDTO } from "@/data/sykmelding/types/Sykmeldingsperiod
 import { BehandlerDTO } from "@/data/sykmelding/types/BehandlerDTO";
 import { SporsmalDTO } from "@/data/sykmelding/types/SporsmalDTO";
 import { ShortNameDTO } from "@/data/sykmelding/types/ShortNameDTO";
+import { DiagnoseDTO } from "@/data/sykmelding/types/DiagnoseDTO";
 
 const mapArbeidsevne = (sykmelding: SykmeldingNewFormatDTO) => {
   return {
@@ -36,7 +37,7 @@ const sykmelderNavn = (behandler: BehandlerDTO): string => {
   return `${behandler.fornavn} ${behandler.etternavn}`;
 };
 
-const mapSingleDiagnose = (diagnose): SykmeldingDiagnose => {
+const mapSingleDiagnose = (diagnose: DiagnoseDTO): SykmeldingDiagnose => {
   return {
     diagnose: diagnose.tekst,
     diagnosekode: diagnose.kode,
@@ -56,6 +57,7 @@ const mapDiagnose = (sykmelding: SykmeldingNewFormatDTO) => {
   const medisinskVurdering = sykmelding.medisinskVurdering;
   const annenFraversArsak = medisinskVurdering?.annenFraversArsak;
   const notSkjermesForPasient = sykmelding.skjermesForPasient ? null : true;
+  const hovedDiagnose = sykmelding.medisinskVurdering?.hovedDiagnose;
   return {
     bidiagnoser: notSkjermesForPasient ? mapBidiagnoser(sykmelding) : undefined,
     fravaerBeskrivelse:
@@ -66,9 +68,10 @@ const mapDiagnose = (sykmelding: SykmeldingNewFormatDTO) => {
       notSkjermesForPasient && annenFraversArsak
         ? annenFraversArsak.grunn[0]
         : undefined,
-    hoveddiagnose: notSkjermesForPasient
-      ? mapSingleDiagnose(sykmelding.medisinskVurdering?.hovedDiagnose)
-      : undefined,
+    hoveddiagnose:
+      notSkjermesForPasient && hovedDiagnose
+        ? mapSingleDiagnose(hovedDiagnose)
+        : undefined,
     svangerskap: medisinskVurdering?.svangerskap,
     yrkesskade: medisinskVurdering?.yrkesskade,
     yrkesskadeDato: toDate(medisinskVurdering?.yrkesskadeDato),
