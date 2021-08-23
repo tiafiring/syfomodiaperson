@@ -33,11 +33,9 @@ import {
   nyeSMStatuser,
 } from "@/utils/sykmeldinger/sykmeldingstatuser";
 import mockOldSykmeldinger from "../mockdata/sykmeldinger/mockOldSykmeldinger";
-import {
-  arbeidsrelaterteArsakerTekst,
-  medisinskeArsakerTekster,
-} from "@/utils/sykmeldinger/AktivitetIkkeMuligArsaker";
 import { FriskmeldingDTO } from "@/data/sykmelding/types/SykmeldingOldFormat";
+import { medisinskArsakTypeTekster } from "@/data/sykmelding/types/MedisinskArsakTypeDTO";
+import { arbeidsrelatertArsakTypetekster } from "@/data/sykmelding/types/ArbeidsrelatertArsakTypeDTO";
 
 const sykmeldtFnr = "99887766554";
 
@@ -426,8 +424,12 @@ describe("sykmeldingParser", () => {
       const expectedMulighetForArbeid = {
         aarsakAktivitetIkkeMulig433: "Beskrivelse",
         aarsakAktivitetIkkeMulig434: "Beskrivelse2",
-        aktivitetIkkeMulig433: [medisinskeArsakerTekster.ANNET],
-        aktivitetIkkeMulig434: [arbeidsrelaterteArsakerTekst.ANNET],
+        aktivitetIkkeMulig433: [
+          medisinskArsakTypeTekster.TILSTAND_HINDRER_AKTIVITET,
+        ],
+        aktivitetIkkeMulig434: [
+          arbeidsrelatertArsakTypetekster.MANGLENDE_TILRETTELEGGING,
+        ],
         perioder: [
           {
             avventende: undefined,
@@ -912,7 +914,9 @@ describe("oldFormatSMForAG", () => {
       aarsakAktivitetIkkeMulig433: undefined,
       aarsakAktivitetIkkeMulig434: "Beskrivelse2",
       aktivitetIkkeMulig433: undefined,
-      aktivitetIkkeMulig434: [arbeidsrelaterteArsakerTekst.ANNET],
+      aktivitetIkkeMulig434: [
+        arbeidsrelatertArsakTypetekster.MANGLENDE_TILRETTELEGGING,
+      ],
       perioder: [
         {
           avventende: undefined,
@@ -986,10 +990,8 @@ describe("oldFormatSMForAG", () => {
   });
 
   it("Returns correct AG version with utdypendeOpplysninger removed when pkt 6.2", () => {
-    const sykmeldingerWithUtdypendeOpplysningerPkt62 = mockSykmeldingerWithUtdypendeOpplysningerPkt62;
-
     const outputSM = oldFormatSMForAG(
-      sykmeldingerWithUtdypendeOpplysningerPkt62(),
+      mockSykmeldingerWithUtdypendeOpplysningerPkt62(),
       sykmeldtFnr
     );
 
@@ -997,10 +999,8 @@ describe("oldFormatSMForAG", () => {
   });
 
   it("Returns correct AG version with utdypendeOpplysninger removed when pkt 6.3", () => {
-    const sykmeldingerWithUtdypendeOpplysningerPkt63 = mockSykmeldingerWithUtdypendeOpplysningerPkt63;
-
     const outputSM = oldFormatSMForAG(
-      sykmeldingerWithUtdypendeOpplysningerPkt63(),
+      mockSykmeldingerWithUtdypendeOpplysningerPkt63(),
       sykmeldtFnr
     );
 

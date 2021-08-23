@@ -1,11 +1,4 @@
 import { nyeSMStatuser } from "./sykmeldingstatuser";
-import * as periodetyper from "./periodetyper";
-import {
-  arbeidsrelaterteArsakerKoder,
-  arbeidsrelaterteArsakerTekst,
-  medisinskeArsakerKoder,
-  medisinskeArsakerTekster,
-} from "./AktivitetIkkeMuligArsaker";
 import { SykmeldingNewFormatDTO } from "@/data/sykmelding/types/SykmeldingNewFormatDTO";
 import {
   Datospenn,
@@ -21,6 +14,8 @@ import { BehandlerDTO } from "@/data/sykmelding/types/BehandlerDTO";
 import { SporsmalDTO } from "@/data/sykmelding/types/SporsmalDTO";
 import { ShortNameDTO } from "@/data/sykmelding/types/ShortNameDTO";
 import { DiagnoseDTO } from "@/data/sykmelding/types/DiagnoseDTO";
+import { medisinskArsakTypeTekster } from "@/data/sykmelding/types/MedisinskArsakTypeDTO";
+import { arbeidsrelatertArsakTypetekster } from "@/data/sykmelding/types/ArbeidsrelatertArsakTypeDTO";
 
 const mapArbeidsevne = (sykmelding: SykmeldingNewFormatDTO) => {
   return {
@@ -130,17 +125,12 @@ const periodeWithAktivitetIkkeMulig = (
   });
 };
 
-const mapGrad = (periode): number | undefined => {
-  if (periode === null) {
-    return undefined;
-  }
-  if (periode.type === periodetyper.AKTIVITET_IKKE_MULIG) {
+const mapGrad = (periode: SykmeldingsperiodeDTO): number | undefined => {
+  if (periode.type === PeriodetypeDTO.AKTIVITET_IKKE_MULIG) {
     return 100;
   }
-  if (periode.gradert && periode.gradert.grad) {
-    return periode.gradert.grad;
-  }
-  return undefined;
+
+  return periode.gradert?.grad;
 };
 
 const mapPerioder = (sykmelding: SykmeldingNewFormatDTO) => {
@@ -154,37 +144,12 @@ const mapPerioder = (sykmelding: SykmeldingNewFormatDTO) => {
         fom: toDateWithoutNullCheck(periode.fom),
         grad: mapGrad(periode),
         reisetilskudd:
-          periode.type === periodetyper.REISETILSKUDD ||
+          periode.type === PeriodetypeDTO.REISETILSKUDD ||
           (periode.gradert && periode.gradert.reisetilskudd),
         tom: toDateWithoutNullCheck(periode.tom),
       };
     })
   );
-};
-
-const mapMedisinskArsak = (arsak) => {
-  return arsak.map((arsakKode) => {
-    switch (arsakKode) {
-      case medisinskeArsakerKoder.TILSTAND_HINDRER_AKTIVITET:
-        return medisinskeArsakerTekster.TILSTAND_HINDRER_AKTIVITET;
-      case medisinskeArsakerKoder.AKTIVITET_FORVERRER_TILSTAND:
-        return medisinskeArsakerTekster.AKTIVITET_FORVERRER_TILSTAND;
-      case medisinskeArsakerKoder.AKTIVITET_FORHINDRER_BEDRING:
-        return medisinskeArsakerTekster.AKTIVITET_FORHINDRER_BEDRING;
-      default:
-        return medisinskeArsakerTekster.ANNET;
-    }
-  });
-};
-
-const mapArbeidsrelatertArsak = (arsak) => {
-  return arsak.map((arsakKode) => {
-    if (arsakKode === arbeidsrelaterteArsakerKoder.MANGLENDE_TILRETTELEGGING) {
-      return arbeidsrelaterteArsakerTekst.MANGLENDE_TILRETTELEGGING;
-    }
-
-    return arbeidsrelaterteArsakerTekst.ANNET;
-  });
 };
 
 const mapMulighetForArbeid = (sykmelding: SykmeldingNewFormatDTO) => {
@@ -196,24 +161,17 @@ const mapMulighetForArbeid = (sykmelding: SykmeldingNewFormatDTO) => {
       aktivitetIkkeMulig?.medisinskArsak?.beskrivelse,
     aarsakAktivitetIkkeMulig434:
       aktivitetIkkeMulig?.arbeidsrelatertArsak?.beskrivelse,
-    aktivitetIkkeMulig433:
-      aktivitetIkkeMulig?.medisinskArsak?.arsak &&
-      mapMedisinskArsak(aktivitetIkkeMulig?.medisinskArsak?.arsak),
-    aktivitetIkkeMulig434:
-      aktivitetIkkeMulig?.arbeidsrelatertArsak?.arsak &&
-      mapArbeidsrelatertArsak(aktivitetIkkeMulig?.arbeidsrelatertArsak?.arsak),
+    aktivitetIkkeMulig433: aktivitetIkkeMulig?.medisinskArsak?.arsak?.map(
+      (arsakKode) => medisinskArsakTypeTekster[arsakKode]
+    ),
+    aktivitetIkkeMulig434: aktivitetIkkeMulig?.arbeidsrelatertArsak?.arsak?.map(
+      (arsakKode) => arbeidsrelatertArsakTypetekster[arsakKode]
+    ),
     perioder: mapPerioder(sykmelding),
   };
 };
 
-const mapOrgnummer = (sykmelding) => {
-  return (
-    sykmelding.sykmeldingStatus.arbeidsgiver &&
-    sykmelding.sykmeldingStatus.arbeidsgiver.orgnummer
-  );
-};
-
-const mapPasient = (fnr) => {
+const mapPasient = (fnr: string) => {
   return {
     etternavn: undefined,
     fnr,
@@ -327,7 +285,7 @@ export const newSMFormat2OldFormat = (
     mottakendeArbeidsgiver: mapMottakendeArbeidsgiver(sykmelding),
     mulighetForArbeid: mapMulighetForArbeid(sykmelding),
     naermesteLederStatus: undefined,
-    orgnummer: mapOrgnummer(sykmelding),
+    orgnummer: sykmelding.sykmeldingStatus.arbeidsgiver?.orgnummer,
     pasient: mapPasient(fnr),
     sendtdato: sykmelding.sykmeldingStatus.timestamp,
     mottattTidspunkt: new Date(sykmelding.mottattTidspunkt),
