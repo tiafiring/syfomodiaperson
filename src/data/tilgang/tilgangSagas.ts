@@ -7,7 +7,7 @@ import { SYFOTILGANGSKONTROLL_ROOT } from "@/apiConstants";
 export function* sjekkTilgang(action: any) {
   yield put(actions.sjekkerTilgang());
 
-  const path = `${SYFOTILGANGSKONTROLL_ROOT}/tilgang/bruker?fnr=${action.fnr}`;
+  const path = `${SYFOTILGANGSKONTROLL_ROOT}/tilgang/navident/bruker/${action.fnr}`;
   try {
     const { harTilgang, begrunnelse }: Tilgang = yield call(get, path);
     if (harTilgang) {

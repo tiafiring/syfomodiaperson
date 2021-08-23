@@ -18,9 +18,9 @@ export const skalHenteSykmeldinger = (state: RootState) => {
 export function* hentSykmeldingerHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHenteSykmeldinger);
   if (skalHente) {
-    const path = `${SYFOSMREGISTER_ROOT}/internal/sykmeldinger?fnr=${action.fnr}`;
+    const path = `${SYFOSMREGISTER_ROOT}/internal/sykmeldinger`;
     try {
-      const data: SykmeldingNewFormatDTO[] = yield call(get, path);
+      const data: SykmeldingNewFormatDTO[] = yield call(get, path, action.fnr);
       yield put(sykmeldingerHentet(data, action.fnr));
     } catch (e) {
       if (e instanceof ApiErrorException) {

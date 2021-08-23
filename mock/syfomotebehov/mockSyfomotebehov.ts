@@ -2,29 +2,47 @@ import { motebehovMock } from "../data/motebehovMock";
 import { SYFOMOTEBEHOV_ROOT } from "../../src/apiConstants";
 import { historikkmotebehovMock } from "../data/historikkmotebehovMock";
 
+const Auth = require("../../server/auth/index.js");
+
 export const mockSyfomotebehov = (server) => {
-  server.get(`${SYFOMOTEBEHOV_ROOT}/motebehov`, (req, res) => {
-    res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(motebehovMock));
-  });
+  server.get(
+    `${SYFOMOTEBEHOV_ROOT}/motebehov`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      res.setHeader("Content-Type", "application/json");
+      res.send(JSON.stringify(motebehovMock));
+    }
+  );
 
-  server.post(`${SYFOMOTEBEHOV_ROOT}/motebehov/:fnr/behandle`, (req, res) => {
-    res.sendStatus(200);
-  });
+  server.post(
+    `${SYFOMOTEBEHOV_ROOT}/motebehov/:fnr/behandle`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      res.sendStatus(200);
+    }
+  );
 
-  server.get(`${SYFOMOTEBEHOV_ROOT}/historikk`, (req, res) => {
-    res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(historikkmotebehovMock));
-  });
+  server.get(
+    `${SYFOMOTEBEHOV_ROOT}/historikk`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      res.setHeader("Content-Type", "application/json");
+      res.send(JSON.stringify(historikkmotebehovMock));
+    }
+  );
 
-  server.post(`${SYFOMOTEBEHOV_ROOT}/motebehov/:fnr/behandle`, (req, res) => {
-    const oppdaterteMotebehov = motebehovMock.map((motebehov) => {
-      motebehov.behandletTidspunkt = new Date().toDateString();
-      motebehov.behandletVeilederIdent = "Z990000";
-    });
+  server.post(
+    `${SYFOMOTEBEHOV_ROOT}/motebehov/:fnr/behandle`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      const oppdaterteMotebehov = motebehovMock.map((motebehov) => {
+        motebehov.behandletTidspunkt = new Date().toDateString();
+        motebehov.behandletVeilederIdent = "Z990000";
+      });
 
-    Object.assign(motebehovMock, ...oppdaterteMotebehov);
+      Object.assign(motebehovMock, ...oppdaterteMotebehov);
 
-    res.sendStatus(200);
-  });
+      res.sendStatus(200);
+    }
+  );
 };

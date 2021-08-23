@@ -6,35 +6,14 @@ import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "../../src/apiConstants";
 
 const path = require("path");
 
+const Auth = require("../../server/auth/index.js");
+
 const dokumentinfo = { antallSider: 4 };
 
 export const mockSyfooppfolgingsplanservice = (server) => {
   server.get(
-    `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/v1/oppfolgingsplan/:fnr`,
-    (req, res) => {
-      res.setHeader("Content-Type", "application/json");
-      res.send(JSON.stringify(oppfolgingsplanMock));
-    }
-  );
-
-  server.get(
-    `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/v1/oppfolgingsplan/:fnr/historikk`,
-    (req, res) => {
-      res.setHeader("Content-Type", "application/json");
-      res.send(JSON.stringify(historikkoppfolgingsplanMock));
-    }
-  );
-
-  server.get(
-    `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/dokument/:id/dokumentinfo`,
-    (req, res) => {
-      res.setHeader("Content-Type", "application/json");
-      res.send(JSON.stringify(dokumentinfo));
-    }
-  );
-
-  server.get(
     `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/oppfolgingsplan/lps`,
+    Auth.ensureAuthenticated(),
     (req, res) => {
       if (
         req.headers[NAV_PERSONIDENT_HEADER] &&
@@ -50,6 +29,7 @@ export const mockSyfooppfolgingsplanservice = (server) => {
 
   server.get(
     `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/dokument/lps/:uuid`,
+    Auth.ensureAuthenticated(),
     (req, res) => {
       const file = path.join(
         __dirname,
@@ -60,6 +40,33 @@ export const mockSyfooppfolgingsplanservice = (server) => {
           res.status(500).send("Error");
         }
       });
+    }
+  );
+
+  server.get(
+    `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/oppfolgingsplan/:fnr`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      res.setHeader("Content-Type", "application/json");
+      res.send(JSON.stringify(oppfolgingsplanMock));
+    }
+  );
+
+  server.get(
+    `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/oppfolgingsplan/:fnr/historikk`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      res.setHeader("Content-Type", "application/json");
+      res.send(JSON.stringify(historikkoppfolgingsplanMock));
+    }
+  );
+
+  server.get(
+    `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/dokument/:id/dokumentinfo`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      res.setHeader("Content-Type", "application/json");
+      res.send(JSON.stringify(dokumentinfo));
     }
   );
 };

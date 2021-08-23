@@ -2,6 +2,8 @@ const express = require("express");
 const path = require("path");
 const prometheus = require("prom-client");
 
+const Auth = require("./server/auth/index.js");
+
 const setupProxy = require("./server/proxy.js");
 
 // Prometheus metrics
@@ -27,7 +29,9 @@ function nocache(req, res, next) {
 }
 
 const setupServer = async () => {
-  server.use(setupProxy());
+  const authClient = await Auth.setupAuth(server);
+
+  server.use(setupProxy(authClient));
 
   const DIST_DIR = path.join(__dirname, "dist");
   const HTML_FILE = path.join(DIST_DIR, "index.html");

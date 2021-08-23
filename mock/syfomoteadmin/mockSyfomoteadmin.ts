@@ -4,6 +4,8 @@ import { historikkmoterMock } from "../data/historikkmoterMock";
 import { ledereMock } from "../data/ledereMock";
 import { SYFOMOTEADMIN_ROOT } from "../../src/apiConstants";
 
+const Auth = require("../../server/auth/index.js");
+
 const mockOpprettetIdResultat = () => {
   mockOpprettetIdResultat.rollingCounter += 1;
 };
@@ -51,23 +53,36 @@ const mockMoteDeltakere = (alternativer, orgnummer) => {
 };
 
 const mockForLokal = (server) => {
-  server.get(`${SYFOMOTEADMIN_ROOT}/moter`, (req, res) => {
-    res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(moterMock));
-  });
+  server.get(
+    `${SYFOMOTEADMIN_ROOT}/moter`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      res.setHeader("Content-Type", "application/json");
+      res.send(JSON.stringify(moterMock));
+    }
+  );
 
-  server.get(`${SYFOMOTEADMIN_ROOT}/historikk`, (req, res) => {
-    res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(historikkmoterMock));
-  });
+  server.get(
+    `${SYFOMOTEADMIN_ROOT}/historikk`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      res.setHeader("Content-Type", "application/json");
+      res.send(JSON.stringify(historikkmoterMock));
+    }
+  );
 
-  server.get(`${SYFOMOTEADMIN_ROOT}/virksomhet/110110110`, (req, res) => {
-    res.setHeader("Content-Type", "application/json");
-    res.send(virksomhetMock("Fire Station"));
-  });
+  server.get(
+    `${SYFOMOTEADMIN_ROOT}/virksomhet/110110110`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      res.setHeader("Content-Type", "application/json");
+      res.send(virksomhetMock("Fire Station"));
+    }
+  );
 
   server.get(
     `${SYFOMOTEADMIN_ROOT}/virksomhet/:virksomhetsnummer`,
+    Auth.ensureAuthenticated(),
     (req, res) => {
       res.setHeader("Content-Type", "application/json");
       res.send(virksomhetMock());
@@ -76,38 +91,46 @@ const mockForLokal = (server) => {
 };
 
 const mockEndepunkterSomEndrerState = (server) => {
-  server.post(`${SYFOMOTEADMIN_ROOT}/moter/:uuid/avbryt`, (req, res) => {
-    const { uuid } = req.params;
-    const oppdaterteMoter = moterMock.map((mote) => {
-      if (mote.moteUuid.toString() === uuid.toString()) {
-        mote.status = "AVBRUTT";
-      }
-    });
-    Object.assign(moterMock, ...oppdaterteMoter);
-
-    res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify({}));
-  });
-
-  server.post(`${SYFOMOTEADMIN_ROOT}/moter/:uuid/bekreft`, (req, res) => {
-    const { valgtAlternativId } = req.query;
-    const { uuid } = req.params;
-    const oppdaterteMoter = moterMock.map((mote) => {
-      if (mote.moteUuid.toString() === uuid.toString()) {
-        mote.status = "BEKREFTET";
-        const alternativ = mote.alternativer.find((alternativ) => {
-          return alternativ.id.toString() === valgtAlternativId.toString();
-        });
-        if (alternativ) {
-          mote.bekreftetAlternativ = alternativ;
+  server.post(
+    `${SYFOMOTEADMIN_ROOT}/moter/:uuid/avbryt`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      const { uuid } = req.params;
+      const oppdaterteMoter = moterMock.map((mote) => {
+        if (mote.moteUuid.toString() === uuid.toString()) {
+          mote.status = "AVBRUTT";
         }
-      }
-    });
-    Object.assign(moterMock, ...oppdaterteMoter);
+      });
+      Object.assign(moterMock, ...oppdaterteMoter);
 
-    res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify({}));
-  });
+      res.setHeader("Content-Type", "application/json");
+      res.send(JSON.stringify({}));
+    }
+  );
+
+  server.post(
+    `${SYFOMOTEADMIN_ROOT}/moter/:uuid/bekreft`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      const { valgtAlternativId } = req.query;
+      const { uuid } = req.params;
+      const oppdaterteMoter = moterMock.map((mote) => {
+        if (mote.moteUuid.toString() === uuid.toString()) {
+          mote.status = "BEKREFTET";
+          const alternativ = mote.alternativer.find((alternativ) => {
+            return alternativ.id.toString() === valgtAlternativId.toString();
+          });
+          if (alternativ) {
+            mote.bekreftetAlternativ = alternativ;
+          }
+        }
+      });
+      Object.assign(moterMock, ...oppdaterteMoter);
+
+      res.setHeader("Content-Type", "application/json");
+      res.send(JSON.stringify({}));
+    }
+  );
 
   server.post(
     `${SYFOMOTEADMIN_ROOT}/moter/:uuid/nyealternativer`,

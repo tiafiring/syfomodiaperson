@@ -3,6 +3,8 @@ import { oppfolgingstilfelleperioderMock } from "../data/oppfolgingstilfelleperi
 import { brukerinfoMock } from "../data/brukerinfoMock";
 import { MODIASYFOREST_ROOT } from "../../src/apiConstants";
 
+const Auth = require("../../server/auth/index.js");
+
 const getOppfolgingstilfellerPerson = () => {
   return [
     {
@@ -13,13 +15,18 @@ const getOppfolgingstilfellerPerson = () => {
 };
 
 export const mockModiasyforest = (server) => {
-  server.get(`${MODIASYFOREST_ROOT}/allnaermesteledere`, (req, res) => {
-    res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(ledereMock));
-  });
+  server.get(
+    `${MODIASYFOREST_ROOT}/allnaermesteledere`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      res.setHeader("Content-Type", "application/json");
+      res.send(JSON.stringify(ledereMock));
+    }
+  );
 
   server.get(
     `${MODIASYFOREST_ROOT}/oppfolgingstilfelleperioder`,
+    Auth.ensureAuthenticated(),
     (req, res) => {
       const { orgnummer } = req.query;
       res.setHeader("Content-Type", "application/json");
@@ -29,14 +36,19 @@ export const mockModiasyforest = (server) => {
 
   server.get(
     `${MODIASYFOREST_ROOT}/oppfolgingstilfelleperioder/utenarbeidsgiver`,
+    Auth.ensureAuthenticated(),
     (req, res) => {
       res.setHeader("Content-Type", "application/json");
       res.send(getOppfolgingstilfellerPerson());
     }
   );
 
-  server.get(`${MODIASYFOREST_ROOT}/brukerinfo`, (req, res) => {
-    res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(brukerinfoMock));
-  });
+  server.get(
+    `${MODIASYFOREST_ROOT}/brukerinfo`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      res.setHeader("Content-Type", "application/json");
+      res.send(JSON.stringify(brukerinfoMock));
+    }
+  );
 };
