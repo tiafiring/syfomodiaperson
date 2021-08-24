@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { hentLoginUrl, hentRedirectBaseUrl } from "@/utils/miljoUtil";
 import {
   accessDeniedError,
@@ -24,7 +24,7 @@ export const defaultRequestHeaders = (personIdent?: string): HeadersInit => {
   return headers;
 };
 
-function handleError(error) {
+function handleAxiosError(error: AxiosError) {
   if (error.response) {
     switch (error.response.status) {
       case 401: {
@@ -65,7 +65,11 @@ export const get = <ResponseData>(
     })
     .then((response) => response.data)
     .catch(function (error) {
-      handleError(error);
+      if (axios.isAxiosError(error)) {
+        handleAxiosError(error);
+      } else {
+        throw new ApiErrorException(generalError(error.message), error.code);
+      }
     });
 };
 
@@ -80,6 +84,10 @@ export const post = <ResponseData>(
     })
     .then((response) => response.data)
     .catch(function (error) {
-      handleError(error);
+      if (axios.isAxiosError(error)) {
+        handleAxiosError(error);
+      } else {
+        throw new ApiErrorException(generalError(error.message), error.code);
+      }
     });
 };
