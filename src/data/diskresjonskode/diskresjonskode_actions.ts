@@ -1,4 +1,4 @@
-import { ApiError } from "@/api/axios";
+import { ApiError } from "@/api/errors";
 
 export enum HentDiskresjonskodeActionTypes {
   HENT_DISKRESJONSKODE_FORESPURT = "HENT_DISKRESJONSKODE_FORESPURT",

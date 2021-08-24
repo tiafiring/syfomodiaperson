@@ -4,7 +4,7 @@ import {
   BehandlendeEnhetActionTypes,
 } from "./behandlendeEnhet_actions";
 import { BehandlendeEnhet } from "./types/BehandlendeEnhet";
-import { ApiError } from "@/api/axios";
+import { ApiError } from "@/api/errors";
 
 export interface BehandlendeEnhetState {
   henter: boolean;

@@ -1,8 +1,9 @@
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
-import { ErrorType, Failure, get, post, Result, Success } from "@/api/axios";
 import { Tilgang } from "@/data/tilgang/tilgang";
 import { expect } from "chai";
+import { get, post } from "@/api/axios";
+import { ApiErrorException, ErrorType } from "@/api/errors";
 
 describe("Axios API tests", () => {
   let stub: MockAdapter;
@@ -28,56 +29,64 @@ describe("Axios API tests", () => {
 
   describe("Happy case", () => {
     it("returns expected data from http 200", async function () {
-      const result: Result<any> = await get(pathHappyCase);
-      expect(result instanceof Success).to.equal(true);
-
-      const { data, code } = result as Success<any>;
-      expect(code).to.equal(200);
-      expect(data).to.equal(happyCaseMessage);
+      const result = await get(pathHappyCase);
+      expect(result).to.equal(happyCaseMessage);
     });
   });
 
   describe("Access denied tests", () => {
-    it("Returns access denied for http 403, and handles Tilgang-object", async function () {
-      const result: Result<any> = await get(pathAccessDenied);
-      expect(result instanceof Success).to.equal(false);
-      expect(result.code).to.equal(403);
+    it("Throws access denied for http 403, and handles Tilgang-object", async function () {
+      try {
+        await get(pathAccessDenied);
+      } catch (e) {
+        expect(e instanceof ApiErrorException).to.equal(true);
 
-      const { error } = result as Failure;
-      expect(error.type).to.equal(ErrorType.ACCESS_DENIED);
-      expect(error.message).to.equal(tilgangDenied.begrunnelse);
+        const { error, code } = e as ApiErrorException;
+        expect(code).to.equal(403);
+        expect(error.type).to.equal(ErrorType.ACCESS_DENIED);
+        expect(error.message).to.equal(tilgangDenied.begrunnelse);
+      }
     });
 
-    it("Returns access denied for http 403, and handles message", async function () {
-      const result: Result<any> = await post(pathAccessDeniedMessage, {
-        some: "data",
-      });
-      expect(result instanceof Failure).to.equal(true);
-      expect(result.code).to.equal(403);
+    it("Throws access denied for http 403, and handles message", async function () {
+      try {
+        await post(pathAccessDeniedMessage, {
+          some: "data",
+        });
+      } catch (e) {
+        expect(e instanceof ApiErrorException).to.equal(true);
 
-      const { error } = result as Failure;
-      expect(error.type).to.equal(ErrorType.ACCESS_DENIED);
-      expect(error.message).to.equal(tilgangDeniedMessage.message);
+        const { error, code } = e as ApiErrorException;
+        expect(code).to.equal(403);
+        expect(error.type).to.equal(ErrorType.ACCESS_DENIED);
+        expect(error.message).to.equal(tilgangDeniedMessage.message);
+      }
     });
   });
 
   describe("General error tests", () => {
-    it("Returns general error for http 404", async function () {
-      const result: Result<any> = await post(pathNotFound, { some: "data" });
-      expect(result instanceof Failure).to.equal(true);
-      expect(result.code).to.equal(404);
+    it("Throws general error for http 404", async function () {
+      try {
+        await post(pathNotFound, { some: "data" });
+      } catch (e) {
+        expect(e instanceof ApiErrorException).to.equal(true);
 
-      const { error } = result as Failure;
-      expect(error.type).to.equal(ErrorType.GENERAL_ERROR);
+        const { error, code } = e as ApiErrorException;
+        expect(code).to.equal(404);
+        expect(error.type).to.equal(ErrorType.GENERAL_ERROR);
+      }
     });
 
-    it("Returns general error for http 500", async function () {
-      const result: Result<any> = await get(pathInternalServerError);
-      expect(result instanceof Failure).to.equal(true);
-      expect(result.code).to.equal(500);
+    it("Throws general error for http 500", async function () {
+      try {
+        await get(pathInternalServerError);
+      } catch (e) {
+        expect(e instanceof ApiErrorException).to.equal(true);
 
-      const { error } = result as Failure;
-      expect(error.type).to.equal(ErrorType.GENERAL_ERROR);
+        const { error, code } = e as ApiErrorException;
+        expect(code).to.equal(500);
+        expect(error.type).to.equal(ErrorType.GENERAL_ERROR);
+      }
     });
   });
 });

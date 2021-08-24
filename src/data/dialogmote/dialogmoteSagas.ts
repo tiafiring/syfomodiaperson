@@ -21,92 +21,86 @@ import {
   opprettInnkallingFeilet,
   opprettInnkallingFullfort,
 } from "./dialogmote_actions";
-import { get, post, Result, Success } from "@/api/axios";
-import {
-  AvlysDialogmoteDTO,
-  DialogmoteDTO,
-  DialogmoteInnkallingDTO,
-  EndreTidStedDialogmoteDTO,
-} from "./types/dialogmoteTypes";
-import { NewDialogmoteReferatDTO } from "./types/dialogmoteReferatTypes";
+import { get, post } from "@/api/axios";
+import { DialogmoteDTO } from "./types/dialogmoteTypes";
 import { ISDIALOGMOTE_ROOT } from "@/apiConstants";
+import { ApiErrorException, generalError } from "@/api/errors";
 
 function* opprettInnkalling(action: OpprettInnkallingAction) {
   yield put(oppretterInnkalling());
   const path = `${ISDIALOGMOTE_ROOT}/dialogmote/personident`;
-  const result: Result<DialogmoteInnkallingDTO> = yield call(
-    post,
-    path,
-    action.data,
-    action.fnr
-  );
-
-  if (result instanceof Success) {
+  try {
+    yield call(post, path, action.data, action.fnr);
     yield put(opprettInnkallingFullfort());
     window.location.href = `/sykefravaer/moteoversikt`;
-  } else {
-    yield put(opprettInnkallingFeilet(result.error));
+  } catch (e) {
+    if (e instanceof ApiErrorException) {
+      yield put(opprettInnkallingFeilet(e.error));
+    } else {
+      yield put(opprettInnkallingFeilet(generalError(e.message)));
+    }
   }
 }
 
 function* fetchDialogmoteSaga(action: FetchDialogmoteAction) {
   const path = `${ISDIALOGMOTE_ROOT}/dialogmote/personident`;
-  const result: Result<DialogmoteDTO[]> = yield call(get, path, action.fnr);
-  if (result instanceof Success) {
-    yield put(fetchDialogmoteSuccess(result.data));
-  } else {
-    yield put(fetchDialogmoteFailed(result.error));
+  try {
+    const data: DialogmoteDTO[] = yield call(get, path, action.fnr);
+    yield put(fetchDialogmoteSuccess(data));
+  } catch (e) {
+    if (e instanceof ApiErrorException) {
+      yield put(fetchDialogmoteFailed(e.error));
+    } else {
+      yield put(fetchDialogmoteFailed(generalError(e.message)));
+    }
   }
 }
 
 function* avlysDialogmote(action: AvlysMoteAction) {
   yield put(avlyserMote());
   const path = `${ISDIALOGMOTE_ROOT}/dialogmote/${action.moteUuid}/avlys`;
-  const result: Result<AvlysDialogmoteDTO> = yield call(
-    post,
-    path,
-    action.data
-  );
-
-  if (result instanceof Success) {
+  try {
+    yield call(post, path, action.data);
     yield put(avlysMoteFullfort());
     window.location.href = `/sykefravaer/moteoversikt`;
-  } else {
-    yield put(avlysMoteFeilet(result.error));
+  } catch (e) {
+    if (e instanceof ApiErrorException) {
+      yield put(avlysMoteFeilet(e.error));
+    } else {
+      yield put(avlysMoteFeilet(generalError(e.message)));
+    }
   }
 }
 
 function* endreTidStedDialogmote(action: EndreTidStedAction) {
   yield put(endrerTidSted());
   const path = `${ISDIALOGMOTE_ROOT}/dialogmote/${action.moteUuid}/tidsted`;
-  const result: Result<EndreTidStedDialogmoteDTO> = yield call(
-    post,
-    path,
-    action.data
-  );
-
-  if (result instanceof Success) {
+  try {
+    yield call(post, path, action.data);
     yield put(endreTidStedFullfort());
     window.location.href = `/sykefravaer/moteoversikt`;
-  } else {
-    yield put(endreTidStedFeilet(result.error));
+  } catch (e) {
+    if (e instanceof ApiErrorException) {
+      yield put(endreTidStedFeilet(e.error));
+    } else {
+      yield put(endreTidStedFeilet(generalError(e.message)));
+    }
   }
 }
 
 function* ferdigstillDialogmote(action: FerdigstillMoteAction) {
   yield put(ferdigstillerMote());
   const path = `${ISDIALOGMOTE_ROOT}/dialogmote/${action.moteUuid}/ferdigstill`;
-  const result: Result<NewDialogmoteReferatDTO> = yield call(
-    post,
-    path,
-    action.data
-  );
-
-  if (result instanceof Success) {
+  try {
+    yield call(post, path, action.data);
     yield put(ferdigstillMoteFullfort());
     window.location.href = `/sykefravaer/moteoversikt`;
-  } else {
-    yield put(ferdigstillMoteFeilet(result.error));
+  } catch (e) {
+    if (e instanceof ApiErrorException) {
+      yield put(ferdigstillMoteFeilet(e.error));
+    } else {
+      yield put(ferdigstillMoteFeilet(generalError(e.message)));
+    }
   }
 }
 

@@ -1,9 +1,9 @@
+import { ApiError } from "@/api/errors";
 import { Reducer } from "redux";
 import {
   HentDiskresjonskodeActions,
   HentDiskresjonskodeActionTypes,
 } from "./diskresjonskode_actions";
-import { ApiError } from "@/api/axios";
 
 export interface DiskresjonskodeData {
   diskresjonskode: string;

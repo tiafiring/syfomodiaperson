@@ -1,5 +1,5 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
-import { get, Result, Success } from "@/api/axios";
+import { get } from "@/api/axios";
 import * as actions from "./ledere_actions";
 import { HentLedereAction } from "./ledere_actions";
 import { RootState } from "../rootState";
@@ -17,11 +17,10 @@ export function* hentLedereHvisIkkeHentet(action: HentLedereAction) {
     yield put(actions.henterLedere());
 
     const path = `${MODIASYFOREST_ROOT}/allnaermesteledere?fnr=${action.fnr}`;
-    const result: Result<Leder[]> = yield call(get, path);
-
-    if (result instanceof Success) {
-      yield put(actions.ledereHentet(result.data));
-    } else {
+    try {
+      const data: Leder[] = yield call(get, path);
+      yield put(actions.ledereHentet(data));
+    } catch (e) {
       //TODO: Add error to reducer and errorboundary to components
       yield put(actions.hentLedereFailed());
     }

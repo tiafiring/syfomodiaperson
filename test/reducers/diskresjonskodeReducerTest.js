@@ -3,7 +3,7 @@ import { expect } from "chai";
 import * as actions from "../../src/data/diskresjonskode/diskresjonskode_actions";
 import { HentDiskresjonskodeActionTypes } from "@/data/diskresjonskode/diskresjonskode_actions";
 import diskresjonskode from "../../src/data/diskresjonskode/diskresjonskode";
-import { defaultErrorTexts, ErrorType } from "@/api/axios";
+import { defaultErrorTexts, ErrorType } from "@/api/errors";
 
 describe("diskresjonskode", () => {
   describe("henter", () => {

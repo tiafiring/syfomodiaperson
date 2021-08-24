@@ -1,6 +1,6 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import { LedereState } from "../leder/ledere";
-import { get, Result, Success } from "@/api/axios";
+import { get } from "@/api/axios";
 import { OppfolgingstilfellePersonArbeidsgiver } from "./types/OppfolgingstilfellePersonArbeidsgiver";
 import { RootState } from "../rootState";
 import {
@@ -19,14 +19,10 @@ export function* hentOppfolgingstilfelleperioder(
   yield put(hentOppfolgingstilfelleperioderHenter(orgnummer));
 
   const path = `${MODIASYFOREST_ROOT}/oppfolgingstilfelleperioder?fnr=${action.fnr}&orgnummer=${orgnummer}`;
-  const result: Result<OppfolgingstilfellePersonArbeidsgiver[]> = yield call(
-    get,
-    path
-  );
-
-  if (result instanceof Success) {
-    yield put(hentOppfolgingstilfelleperioderHentet(result.data, orgnummer));
-  } else {
+  try {
+    const data: OppfolgingstilfellePersonArbeidsgiver[] = yield call(get, path);
+    yield put(hentOppfolgingstilfelleperioderHentet(data, orgnummer));
+  } catch (e) {
     //TODO: Add error to reducer and errorboundary to components
     yield put(hentOppfolgingstilfelleperioderFeilet(orgnummer));
   }

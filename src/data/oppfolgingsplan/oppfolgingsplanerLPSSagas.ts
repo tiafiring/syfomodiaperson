@@ -1,7 +1,7 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import * as actions from "./oppfolgingsplanerlps_actions";
 import { PersonOppgave } from "../personoppgave/types/PersonOppgave";
-import { get, Result, Success } from "@/api/axios";
+import { get } from "@/api/axios";
 import { OppfolgingsplanLPS } from "./types/OppfolgingsplanLPS";
 import { RootState } from "../rootState";
 import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "@/apiConstants";
@@ -13,17 +13,10 @@ export function* hentOppfolgingsplanerLPS(
   yield put(actions.hentOppfolgingsplanerLPSHenter());
 
   const path = `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/oppfolgingsplan/lps`;
-  const result: Result<OppfolgingsplanLPS[]> = yield call(
-    get,
-    path,
-    action.fnr
-  );
-
-  if (result instanceof Success) {
-    yield put(
-      actions.hentOppfolgingsplanerLPSHentet(result.data, personOppgaveList)
-    );
-  } else {
+  try {
+    const data: OppfolgingsplanLPS[] = yield call(get, path, action.fnr);
+    yield put(actions.hentOppfolgingsplanerLPSHentet(data, personOppgaveList));
+  } catch (e) {
     //TODO: Add error to reducer and errorboundary to components
     yield put(actions.hentOppfolgingsplanerLPSFeilet());
   }

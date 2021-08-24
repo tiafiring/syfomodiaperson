@@ -1,5 +1,5 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
-import { get, Result, Success } from "@/api/axios";
+import { get } from "@/api/axios";
 import * as actions from "./personInfo_actions";
 import { PersonAdresse } from "./types/PersonAdresse";
 import { SYFOPERSON_ROOT } from "@/apiConstants";
@@ -14,11 +14,10 @@ export function* hentPersonAdresseHvisIkkeHentet(action: any) {
   if (skalHente) {
     yield put(actions.hentPersonAdresseHenter());
     const path = `${SYFOPERSON_ROOT}/person/adresse`;
-    const result: Result<PersonAdresse> = yield call(get, path, action.fnr);
-
-    if (result instanceof Success) {
-      yield put(actions.hentPersonAdresseHentet(result.data));
-    } else {
+    try {
+      const data: PersonAdresse = yield call(get, path, action.fnr);
+      yield put(actions.hentPersonAdresseHentet(data));
+    } catch (e) {
       //TODO: Add error to reducer and errorboundary to components
       yield put(actions.hentPersonAdresseFeilet());
     }

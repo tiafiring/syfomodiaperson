@@ -6,18 +6,23 @@ import {
   HentBehandlendeEnhetAction,
   hentBehandlendeEnhetFeilet,
 } from "./behandlendeEnhet_actions";
-import { get, Result, Success } from "@/api/axios";
+import { get } from "@/api/axios";
 import { BehandlendeEnhet } from "./types/BehandlendeEnhet";
 import { SYFOBEHANDLENDEENHET_ROOT } from "@/apiConstants";
+import { ApiErrorException, generalError } from "@/api/errors";
 
 function* hentBehandlendeEnhetSaga(action: HentBehandlendeEnhetAction) {
   yield put(actions.henterBehandlendeEnhet());
   const path = `${SYFOBEHANDLENDEENHET_ROOT}/personident`;
-  const result: Result<BehandlendeEnhet> = yield call(get, path, action.fnr);
-  if (result instanceof Success) {
-    yield put(behandlendeEnhetHentet(result.data));
-  } else {
-    yield put(hentBehandlendeEnhetFeilet(result.error));
+  try {
+    const data: BehandlendeEnhet = yield call(get, path, action.fnr);
+    yield put(behandlendeEnhetHentet(data));
+  } catch (e) {
+    if (e instanceof ApiErrorException) {
+      yield put(hentBehandlendeEnhetFeilet(e.error));
+    } else {
+      yield put(hentBehandlendeEnhetFeilet(generalError(e.message)));
+    }
   }
 }
 

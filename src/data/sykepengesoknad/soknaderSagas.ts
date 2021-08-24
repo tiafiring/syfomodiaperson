@@ -1,6 +1,6 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import * as actions from "./soknader_actions";
-import { get, Result, Success } from "@/api/axios";
+import { get } from "@/api/axios";
 import { SykepengesoknadDTO } from "./types/SykepengesoknadDTO";
 import { SYFOSOKNAD_ROOT } from "@/apiConstants";
 
@@ -15,11 +15,10 @@ export function* hentSoknaderHvisIkkeHentet(action: any) {
     yield put(actions.henterSoknader());
 
     const path = `${SYFOSOKNAD_ROOT}/soknader?fnr=${action.fnr}`;
-    const result: Result<SykepengesoknadDTO[]> = yield call(get, path);
-
-    if (result instanceof Success) {
-      yield put(actions.soknaderHentet(result.data));
-    } else {
+    try {
+      const data: SykepengesoknadDTO[] = yield call(get, path);
+      yield put(actions.soknaderHentet(data));
+    } catch (e) {
       //TODO: Add error to reducer and errorboundary to components
       yield put(actions.hentSoknaderFeilet());
     }

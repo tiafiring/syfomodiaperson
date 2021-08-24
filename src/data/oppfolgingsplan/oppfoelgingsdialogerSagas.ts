@@ -1,5 +1,5 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
-import { get, Result, Success } from "@/api/axios";
+import { get } from "@/api/axios";
 import * as actions from "./oppfoelgingsdialoger_actions";
 import { OppfolgingsplanDTO } from "./oppfoelgingsdialoger";
 import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "@/apiConstants";
@@ -15,11 +15,10 @@ export function* hentOppfolgingsplanerHvisIkkeHentet(action: any) {
     yield put(actions.henterOppfoelgingsdialoger());
 
     const path = `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/v1/oppfolgingsplan/${action.fnr}`;
-    const result: Result<OppfolgingsplanDTO[]> = yield call(get, path);
-
-    if (result instanceof Success) {
-      yield put(actions.hentOppfolgingsdialogerHentet(result.data));
-    } else {
+    try {
+      const data: OppfolgingsplanDTO[] = yield call(get, path);
+      yield put(actions.hentOppfolgingsdialogerHentet(data));
+    } catch (e) {
       //TODO: Add error to reducer and errorboundary to components
       yield put(actions.hentOppfoelgingsdialogerFeilet());
     }

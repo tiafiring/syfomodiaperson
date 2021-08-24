@@ -6,19 +6,23 @@ import {
   hentDiskresjonskodeFeilet,
   henterDiskresjonskode,
 } from "./diskresjonskode_actions";
-import { get, Result, Success } from "@/api/axios";
+import { get } from "@/api/axios";
 import { RootState } from "../rootState";
 import { SYFOPERSON_ROOT } from "@/apiConstants";
+import { ApiErrorException, generalError } from "@/api/errors";
 
 export function* hentDiskresjonskodeSaga(action: HentDiskresjonskodeAction) {
   yield put(henterDiskresjonskode());
   const path = `${SYFOPERSON_ROOT}/person/diskresjonskode`;
-  const result: Result<string> = yield call(get, path, action.fnr);
-
-  if (result instanceof Success) {
-    yield put(diskresjonskodeHentet(result.data));
-  } else {
-    yield put(hentDiskresjonskodeFeilet(result.error));
+  try {
+    const data: string = yield call(get, path, action.fnr);
+    yield put(diskresjonskodeHentet(data));
+  } catch (e) {
+    if (e instanceof ApiErrorException) {
+      yield put(hentDiskresjonskodeFeilet(e.error));
+    } else {
+      yield put(hentDiskresjonskodeFeilet(generalError(e.message)));
+    }
   }
 }
 

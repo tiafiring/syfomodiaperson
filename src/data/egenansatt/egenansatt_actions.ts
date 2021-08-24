@@ -1,4 +1,4 @@
-import { ApiError } from "@/api/axios";
+import { ApiError } from "@/api/errors";
 
 export enum HentEgenAnsattActionTypes {
   HENT_EGENANSATT_FORESPURT = "HENT_EGENANSATT_FORESPURT",

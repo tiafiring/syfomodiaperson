@@ -1,5 +1,5 @@
 import { BehandlendeEnhet } from "./types/BehandlendeEnhet";
-import { ApiError } from "@/api/axios";
+import { ApiError } from "@/api/errors";
 
 export enum BehandlendeEnhetActionTypes {
   HENT_BEHANDLENDE_ENHET_FORESPURT = "HENT_BEHANDLENDE_ENHET_FORESPURT",
