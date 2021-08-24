@@ -2,7 +2,7 @@ import { call, put, select, takeEvery } from "redux-saga/effects";
 import * as actions from "./flaggperson_actions";
 import { stoppAutomatikk2StatusEndring } from "@/utils/pengestoppUtils";
 import { FlaggpersonState } from "./flaggperson";
-import { get, post, Result, Success } from "@/api/axios";
+import { get, post } from "@/api/axios";
 import { StatusEndring } from "./types/FlaggPerson";
 import { ISPENGESTOPP_ROOT } from "@/apiConstants";
 
@@ -17,11 +17,10 @@ export function* hentStatusHvisIkkeHentet(action: any) {
     yield put(actions.henterStatus());
 
     const path = `${ISPENGESTOPP_ROOT}/person/status`;
-    const result: Result<StatusEndring[]> = yield call(get, path, action.fnr);
-
-    if (result instanceof Success) {
-      yield put(actions.statusHentet(result.data || [], action.fnr));
-    } else {
+    try {
+      const data: StatusEndring[] = yield call(get, path, action.fnr);
+      yield put(actions.statusHentet(data || [], action.fnr));
+    } catch (e) {
       //TODO: Add error to reducer and errorboundary to components
       yield put(actions.hentStatusFeilet());
     }
@@ -39,10 +38,8 @@ export function* endreStatusHvisIkkeEndret(action: any) {
     yield put(actions.endrerStatus());
 
     const path = `${ISPENGESTOPP_ROOT}/person/flagg`;
-
-    const result: Result<any> = yield call(post, path, action.stoppAutomatikk);
-
-    if (result instanceof Success) {
+    try {
+      yield call(post, path, action.stoppAutomatikk);
       yield put(actions.statusEndret());
       yield put(
         actions.statusHentet(
@@ -53,7 +50,7 @@ export function* endreStatusHvisIkkeEndret(action: any) {
           action.fnr
         )
       );
-    } else {
+    } catch (e) {
       //TODO: Add error to reducer and errorboundary to components
       yield put(actions.endreStatusFeilet());
     }

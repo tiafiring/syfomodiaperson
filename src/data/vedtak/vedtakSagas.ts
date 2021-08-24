@@ -1,5 +1,5 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
-import { get, Result, Success } from "@/api/axios";
+import { get } from "@/api/axios";
 import { VedtakDTO, VedtakState } from "./vedtak";
 import {
   HENT_VEDTAK_FORESPURT,
@@ -20,11 +20,10 @@ export function* hentVedtakHvisIkkeHentet(action: any) {
     yield put(hentVedtakHenter());
 
     const path = `${VEDTAK_ROOT}?fnr=${action.fnr}`;
-    const result: Result<VedtakDTO> = yield call(get, path);
-
-    if (result instanceof Success) {
-      yield put(hentVedtakHentet(result.data || {}, action.fnr));
-    } else {
+    try {
+      const data: VedtakDTO = yield call(get, path);
+      yield put(hentVedtakHentet(data || {}, action.fnr));
+    } catch (e) {
       //TODO: Add error to reducer and errorboundary to components
       yield put(hentVedtakFeilet());
     }

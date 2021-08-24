@@ -3,7 +3,7 @@ import deepFreeze from "deep-freeze";
 import * as actions from "../../src/data/egenansatt/egenansatt_actions";
 import egenansatt from "../../src/data/egenansatt/egenansatt";
 import { HentEgenAnsattActionTypes } from "@/data/egenansatt/egenansatt_actions";
-import { defaultErrorTexts, ErrorType } from "@/api/axios";
+import { defaultErrorTexts, ErrorType } from "@/api/errors";
 
 describe("egenansatt", () => {
   describe("henter", () => {

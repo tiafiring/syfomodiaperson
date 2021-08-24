@@ -1,5 +1,5 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
-import { get, Result, Success } from "@/api/axios";
+import { get } from "@/api/axios";
 import * as actions from "./fastleger_actions";
 import { Fastlege } from "./types/Fastlege";
 import { RootState } from "../rootState";
@@ -15,11 +15,10 @@ export function* hentFastlegerHvisIkkeHentet(action: any) {
   if (skalHente) {
     yield put(actions.henterFastleger());
     const path = `${FASTLEGEREST_ROOT}/fastleger?fnr=${action.fnr}`;
-    const result: Result<Fastlege> = yield call(get, path);
-
-    if (result instanceof Success) {
-      yield put(actions.fastlegerHentet(result.data));
-    } else {
+    try {
+      const data: Fastlege = yield call(get, path);
+      yield put(actions.fastlegerHentet(data));
+    } catch (e) {
       //TODO: Add error to reducer and errorboundary to components
       yield put(actions.hentFastlegerFeilet());
     }

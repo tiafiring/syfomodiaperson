@@ -5,19 +5,18 @@ import {
   HENTER_NAVBRUKER,
   NAVBRUKER_HENTET,
 } from "./navbruker_actions";
-import { get, Result, Success } from "@/api/axios";
+import { get } from "@/api/axios";
 import { MODIASYFOREST_ROOT } from "@/apiConstants";
 
 export function* hentNavbruker(action: any) {
   yield put({ type: HENTER_NAVBRUKER });
 
   const path = `${MODIASYFOREST_ROOT}/brukerinfo?fnr=${action.fnr}`;
-  const result: Result<string> = yield call(get, path);
-
-  //TODO: Add proper actions and types
-  if (result instanceof Success) {
-    yield put({ type: NAVBRUKER_HENTET, data: result.data });
-  } else {
+  try {
+    //TODO: Add proper actions and types
+    const data: string = yield call(get, path);
+    yield put({ type: NAVBRUKER_HENTET, data });
+  } catch (e) {
     //TODO: Add error to reducer and errorboundary to components
     yield put({ type: HENT_NAVBRUKER_FEILET });
   }

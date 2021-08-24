@@ -1,9 +1,9 @@
 import React from "react";
-import { ApiError, defaultErrorTexts, ErrorType } from "@/api/axios";
 import Alertstripe from "nav-frontend-alertstriper";
 import { Normaltekst } from "nav-frontend-typografi";
 import Lenke from "nav-frontend-lenker";
 import styled from "styled-components";
+import { ApiError, defaultErrorTexts, ErrorType } from "@/api/errors";
 
 const texts = {
   meldFeil: "Meld oss gjerne om feilen her",

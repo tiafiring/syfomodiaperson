@@ -1,5 +1,5 @@
 import { call, put, select, takeLeading } from "redux-saga/effects";
-import { get, Result, Success } from "@/api/axios";
+import { get } from "@/api/axios";
 import { SykmeldingNewFormatDTO } from "./types/SykmeldingNewFormatDTO";
 import { RootState } from "../rootState";
 import { SYFOSMREGISTER_ROOT } from "@/apiConstants";
@@ -8,6 +8,7 @@ import {
   SykmeldingerActionTypes,
   sykmeldingerHentet,
 } from "./sykmeldinger_actions";
+import { ApiErrorException, generalError } from "@/api/errors";
 
 export const skalHenteSykmeldinger = (state: RootState) => {
   const reducer = state.sykmeldinger;
@@ -18,12 +19,15 @@ export function* hentSykmeldingerHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHenteSykmeldinger);
   if (skalHente) {
     const path = `${SYFOSMREGISTER_ROOT}/internal/sykmeldinger?fnr=${action.fnr}`;
-    const result: Result<SykmeldingNewFormatDTO[]> = yield call(get, path);
-
-    if (result instanceof Success) {
-      yield put(sykmeldingerHentet(result.data, action.fnr));
-    } else {
-      yield put(hentSykmeldingerFeilet(result.error));
+    try {
+      const data: SykmeldingNewFormatDTO[] = yield call(get, path);
+      yield put(sykmeldingerHentet(data, action.fnr));
+    } catch (e) {
+      if (e instanceof ApiErrorException) {
+        yield put(hentSykmeldingerFeilet(e.error));
+      } else {
+        yield put(hentSykmeldingerFeilet(generalError(e.message)));
+      }
     }
   }
 }

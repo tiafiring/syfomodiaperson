@@ -1,6 +1,5 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { get } from "@/api/axios";
-import { Result, Success } from "@/api/axios";
 import { HistorikkEvent } from "./types/historikkTypes";
 import {
   SYFOMOTEADMIN_ROOT,
@@ -19,11 +18,10 @@ export function* hentHistorikkOppfoelgingsdialog(action: HentHistorikkAction) {
   yield put(henterHistorikk("OPPFOELGINGSDIALOG"));
 
   const path = `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/v1/oppfolgingsplan/${action.fnr}/historikk`;
-  const result: Result<HistorikkEvent[]> = yield call(get, path);
-
-  if (result instanceof Success) {
-    yield put(historikkHentet(result.data, "OPPFOELGINGSDIALOG"));
-  } else {
+  try {
+    const data: HistorikkEvent[] = yield call(get, path);
+    yield put(historikkHentet(data, "OPPFOELGINGSDIALOG"));
+  } catch (e) {
     //TODO: Add error to reducer and errorboundary to components
     yield put(hentHistorikkFeilet("OPPFOELGINGSDIALOG"));
   }
@@ -33,11 +31,10 @@ export function* hentHistorikkMoter(action: HentHistorikkAction) {
   yield put(henterHistorikk("MOTER"));
 
   const path = `${SYFOMOTEADMIN_ROOT}/historikk?fnr=${action.fnr}`;
-  const result: Result<HistorikkEvent[]> = yield call(get, path);
-
-  if (result instanceof Success) {
-    yield put(historikkHentet(result.data, "MOTER"));
-  } else {
+  try {
+    const data: HistorikkEvent[] = yield call(get, path);
+    yield put(historikkHentet(data, "MOTER"));
+  } catch (e) {
     //TODO: Add error to reducer and errorboundary to components
     yield put(hentHistorikkFeilet("MOTER"));
   }
@@ -47,11 +44,10 @@ export function* hentHistorikkMotebehov(action: HentHistorikkAction) {
   yield put(henterHistorikk("MOTEBEHOV"));
 
   const path = `${SYFOMOTEBEHOV_ROOT}/historikk?fnr=${action.fnr}`;
-  const result: Result<HistorikkEvent[]> = yield call(get, path);
-
-  if (result instanceof Success) {
-    yield put(historikkHentet(result.data, "MOTEBEHOV"));
-  } else {
+  try {
+    const data: HistorikkEvent[] = yield call(get, path);
+    yield put(historikkHentet(data, "MOTEBEHOV"));
+  } catch (e) {
     //TODO: Add error to reducer and errorboundary to components
     yield put(hentHistorikkFeilet("MOTEBEHOV"));
   }

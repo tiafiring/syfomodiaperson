@@ -1,7 +1,7 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import * as actions from "./prediksjon_actions";
 import { Prediksjon, PrediksjonState } from "./prediksjon";
-import { get, Result, Success } from "@/api/axios";
+import { get } from "@/api/axios";
 import { ISPREDIKSJON_ROOT } from "@/apiConstants";
 
 export const skalHentePrediksjon = (state: { prediksjon: PrediksjonState }) => {
@@ -14,11 +14,10 @@ export function* hentPrediksjonHvisIkkeHentet(action: any) {
   if (skalHente) {
     yield put(actions.hentPrediksjonHenter());
     const path = `${ISPREDIKSJON_ROOT}/prediksjon`;
-    const result: Result<Prediksjon> = yield call(get, path, action.fnr);
-
-    if (result instanceof Success) {
-      yield put(actions.hentPrediksjonHentet(result.data, action.fnr));
-    } else {
+    try {
+      const data: Prediksjon = yield call(get, path, action.fnr);
+      yield put(actions.hentPrediksjonHentet(data, action.fnr));
+    } catch (e) {
       //TODO: Add error to reducer and errorboundary to components
       yield put(actions.hentPrediksjonFeilet());
     }

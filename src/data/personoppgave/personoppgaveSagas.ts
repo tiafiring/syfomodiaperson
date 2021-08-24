@@ -1,5 +1,5 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
-import { get, post, Result, Success } from "@/api/axios";
+import { get, post } from "@/api/axios";
 import * as actions from "./personoppgave_actions";
 import { PersonOppgave } from "./types/PersonOppgave";
 import { ISPERSONOPPGAVE_ROOT } from "@/apiConstants";
@@ -13,13 +13,11 @@ export function* hentPersonOppgaverHvisIkkeHentet(action: any) {
   const skalHente = yield select(skalHentePersonOppgaver);
   if (skalHente) {
     yield put(actions.hentPersonOppgaverHenter());
-
     const path = `${ISPERSONOPPGAVE_ROOT}/personoppgave/personident`;
-    const result: Result<PersonOppgave[]> = yield call(get, path, action.fnr);
-
-    if (result instanceof Success) {
-      yield put(actions.hentPersonOppgaverHentet(result.data || []));
-    } else {
+    try {
+      const data: PersonOppgave[] = yield call(get, path, action.fnr);
+      yield put(actions.hentPersonOppgaverHentet(data || []));
+    } catch (e) {
       //TODO: Add error to reducer and errorboundary to components
       yield put(actions.hentPersonOppgaverFeilet());
     }
@@ -33,15 +31,14 @@ export function* behandlePersonOppgave(action: any) {
   yield put(actions.behandlePersonOppgaveBehandler());
 
   const path = `${ISPERSONOPPGAVE_ROOT}/personoppgave/${uuid}/behandle`;
-  const result: Result<any> = yield call(post, path, []);
-
-  if (result instanceof Success) {
+  try {
+    yield call(post, path, []);
     yield put(
       actions.behandlePersonOppgaveBehandlet(uuid, referanseUuid, veilederIdent)
     );
-  } else {
+  } catch (e) {
     //TODO: Add error to reducer and errorboundary to components
-    if (result.code === 409) {
+    if (e.code === 409) {
       window.location.reload();
       return;
     }

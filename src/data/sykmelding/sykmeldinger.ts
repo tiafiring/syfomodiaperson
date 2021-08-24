@@ -9,7 +9,7 @@ import {
   SykmeldingerActions,
   SykmeldingerActionTypes,
 } from "./sykmeldinger_actions";
-import { ApiError } from "@/api/axios";
+import { ApiError } from "@/api/errors";
 
 export interface SykmeldingerState {
   henter: boolean;

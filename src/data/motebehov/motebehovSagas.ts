@@ -1,5 +1,5 @@
 import { call, put, select, takeEvery } from "redux-saga/effects";
-import { get, post, Result, Success } from "@/api/axios";
+import { get, post } from "@/api/axios";
 import * as actions from "./motebehov_actions";
 import { HentMotebehovAction } from "./motebehov_actions";
 import * as behandleActions from "./behandlemotebehov_actions";
@@ -20,14 +20,13 @@ export function* hentMotebehovHvisIkkeHentet(action: HentMotebehovAction) {
     yield put(actions.henterMotebehov());
 
     const path = `${SYFOMOTEBEHOV_ROOT}/motebehov?fnr=${fnr}`;
-    const result: Result<MotebehovDTO[]> = yield call(get, path);
-
-    if (result instanceof Success) {
-      yield put(actions.motebehovHentet(result.data));
-    } else {
+    try {
+      const data: MotebehovDTO[] = yield call(get, path);
+      yield put(actions.motebehovHentet(data));
+    } catch (e) {
       //TODO: Add error to reducer and errorboundary to components
-      if (result.code === 403) {
-        yield put(actions.hentMotebehovIkkeTilgang(result.error.message));
+      if (e.code === 403) {
+        yield put(actions.hentMotebehovIkkeTilgang(e.error.message));
         return;
       }
       yield put(actions.hentMotebehovFeilet());
@@ -40,16 +39,15 @@ export function* behandleMotebehov(action: BehandleMotebehovAction) {
   yield put(behandleActions.behandleMotebehovBehandler());
 
   const path = `${SYFOMOTEBEHOV_ROOT}/motebehov/${fnr}/behandle`;
-  const result: Result<any> = yield call(post, path, []);
-
-  if (result instanceof Success) {
+  try {
+    yield call(post, path, []);
     yield put(behandleActions.behandleMotebehovBehandlet(action.veilederIdent));
-  } else {
+  } catch (e) {
     //TODO: Add error to reducer and errorboundary to components
-    if (result.code === 403) {
+    if (e.code === 403) {
       yield put(behandleActions.behandleMotebehovForbudt());
       return;
-    } else if (result.code === 409) {
+    } else if (e.code === 409) {
       window.location.reload();
       return;
     }
