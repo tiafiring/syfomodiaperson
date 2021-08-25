@@ -1,5 +1,7 @@
 import { MODIACONTEXTHOLDER_ROOT } from "../../src/apiConstants";
 
+const Auth = require("../../server/auth/index.js");
+
 const saksbehandler = {
   ident: "Z999999",
   navn: "Vetle Veileder",
@@ -28,22 +30,38 @@ const aktivEnhet = {
 };
 
 export const mockModiacontextholder = (server) => {
-  server.get(`${MODIACONTEXTHOLDER_ROOT}/decorator`, (req, res) => {
-    res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(saksbehandler));
-  });
+  server.get(
+    `${MODIACONTEXTHOLDER_ROOT}/decorator`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      res.setHeader("Content-Type", "application/json");
+      res.send(JSON.stringify(saksbehandler));
+    }
+  );
 
-  server.get(`${MODIACONTEXTHOLDER_ROOT}/context/aktivbruker`, (req, res) => {
-    res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(aktivBruker));
-  });
+  server.get(
+    `${MODIACONTEXTHOLDER_ROOT}/context/aktivbruker`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      res.setHeader("Content-Type", "application/json");
+      res.send(JSON.stringify(aktivBruker));
+    }
+  );
 
-  server.get(`${MODIACONTEXTHOLDER_ROOT}/context/aktivenhet`, (req, res) => {
-    res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(aktivEnhet));
-  });
+  server.get(
+    `${MODIACONTEXTHOLDER_ROOT}/context/aktivenhet`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      res.setHeader("Content-Type", "application/json");
+      res.send(JSON.stringify(aktivEnhet));
+    }
+  );
 
-  server.post(`${MODIACONTEXTHOLDER_ROOT}/context`, (req, res) => {
-    res.send().status(204);
-  });
+  server.post(
+    `${MODIACONTEXTHOLDER_ROOT}/context`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      res.send().status(204);
+    }
+  );
 };

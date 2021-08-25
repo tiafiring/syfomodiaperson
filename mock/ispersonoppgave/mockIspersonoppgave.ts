@@ -2,6 +2,8 @@ import { NAV_PERSONIDENT_HEADER } from "../util/requestUtil";
 import { leggTilDagerPaDato } from "../util/dateUtil";
 import { ISPERSONOPPGAVE_ROOT } from "../../src/apiConstants";
 
+const Auth = require("../../server/auth/index.js");
+
 const getDefaultPersonOppgaveUbehandlet = () => {
   const today = new Date();
   return {
@@ -35,6 +37,7 @@ const getPersonOppgaver = () => {
 export const mockIspersonoppgave = (server) => {
   server.get(
     `${ISPERSONOPPGAVE_ROOT}/personoppgave/personident`,
+    Auth.ensureAuthenticated(),
     (req, res) => {
       if (
         req.headers[NAV_PERSONIDENT_HEADER] &&
@@ -50,6 +53,7 @@ export const mockIspersonoppgave = (server) => {
 
   server.post(
     `${ISPERSONOPPGAVE_ROOT}/personoppgave/:uuid/behandle`,
+    Auth.ensureAuthenticated(),
     (req, res) => {
       res.sendStatus(200);
     }

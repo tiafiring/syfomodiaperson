@@ -2,7 +2,7 @@ apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
   name: syfomodiaperson
-  namespace: default
+  namespace: teamsykefravr
   labels:
     team: teamsykefravr
 spec:
@@ -33,47 +33,94 @@ spec:
     requests:
       cpu: 100m
       memory: 128Mi
-  webproxy: false
+  azure:
+    application:
+      enabled: true
+      tenant: nav.no
+      replyURLs:
+        - "https://syfomodiaperson.intern.nav.no/oauth2/callback"
+      claims:
+        extra:
+          - "NAVident"
+  envFrom:
+    - secret: syfomodiaperson-session-key
+  webproxy: true
   ingresses:
-    - "https://syfomodiaperson.nais.adeo.no"
+    - "https://syfomodiaperson.intern.nav.no"
   env:
     - name: NAIS_CONTEXT
       value: 'prod'
     - name: NODE_ENV
       value: "production"
+    - name: REDIS_HOST
+      value: "syfomodiaperson-redis"
+    - name: AUTH_REDIRECT_URI
+      value: "https://syfomodiaperson.intern.nav.no/oauth2/callback"
+    - name: FASTLEGEREST_AAD_APP_CLIENT_ID
+      value: "eba0340e-61f5-458d-beef-3ef7520eac3a"
     - name: FASTLEGEREST_HOST
       value: "fastlegerest.intern.nav.no"
+    - name: FLEX_INTERN_GATEWAY_AAD_APP_CLIENT_ID
+      value: "bc7df6d5-a41a-4fcb-9575-cf1a4375e7d8"
     - name: FLEX_INTERN_GATEWAY_HOST
       value: "flex-intern-gateway.intern.nav.no"
     - name: INTERNARBEIDSFLATEDECORATOR_HOST
       value: "internarbeidsflatedecorator.intern.nav.no"
+    - name: ISDIALOGMOTE_AAD_APP_CLIENT_ID
+      value: "4898e614-e73d-4067-aafd-5afc2254c6b6"
     - name: ISDIALOGMOTE_HOST
       value: "isdialogmote.intern.nav.no"
+    - name: ISPENGESTOPP_AAD_APP_CLIENT_ID
+      value: "1504ecde-3da0-4698-b030-ae7350228f57"
     - name: ISPENGESTOPP_HOST
       value: "ispengestopp.intern.nav.no"
+    - name: ISPERSONOPPGAVE_AAD_APP_CLIENT_ID
+      value: "2acdc183-399f-4e67-a011-83ea72d83176"
     - name: ISPERSONOPPGAVE_HOST
       value: "ispersonoppgave.intern.nav.no"
+    - name: ISPREDIKSJON_AAD_APP_CLIENT_ID
+      value: "332ff36d-b9fe-41f7-9910-b18a9fd099b5"
     - name: ISPREDIKSJON_HOST
       value: "isprediksjon.intern.nav.no"
     - name: MODIACONTEXTHOLDER_HOST
       value: "modiacontextholder.nais.adeo.no"
+    - name: MODIASYFOREST_AAD_APP_CLIENT_ID
+      value: "c4d1aa5e-ba4f-45fb-9cbf-50da9b71a56f"
     - name: MODIASYFOREST_HOST
       value: "modiasyforest.intern.nav.no"
+    - name: SYFOBEHANDLENDEENHET_AAD_APP_CLIENT_ID
+      value: "97815ed7-ee77-4d6c-ab3b-ea86d93750a7"
     - name: SYFOBEHANDLENDEENHET_HOST
       value: "syfobehandlendeenhet.intern.nav.no"
+    - name: SYFOMOTEADMIN_AAD_APP_CLIENT_ID
+      value: "df2c236f-d109-4999-b255-206757b2f8b4"
     - name: SYFOMOTEADMIN_HOST
       value: "syfomoteadmin.intern.nav.no"
+    - name: SYFOMOTEBEHOV_AAD_APP_CLIENT_ID
+      value: "54f7befe-1d6b-45de-a718-a47de79c4239"
     - name: SYFOMOTEBEHOV_HOST
       value: "syfomotebehov.intern.nav.no"
+    - name: SYFOOPPFOLGINGSPLANSERVICE_AAD_APP_CLIENT_ID
+      value: "9eae3413-a2e3-4b5b-bb56-f5fa1e737110"
     - name: SYFOOPPFOLGINGSPLANSERVICE_HOST
       value: "syfooppfolgingsplanservice.intern.nav.no"
+    - name: SYFOPERSON_AAD_APP_CLIENT_ID
+      value: "65bd6a4c-e757-487f-9767-619a5307278f"
     - name: SYFOPERSON_HOST
       value: "syfoperson.intern.nav.no"
+    - name: SYFOSMREGISTER_AAD_APP_CLIENT_ID
+      value: "6d760b8b-6378-4534-864f-e07747359481"
     - name: SYFOSMREGISTER_HOST
       value: "syfosmregister.intern.nav.no"
+    - name: SYFOSOKNAD_AAD_APP_CLIENT_ID
+      value: "cd19b73e-8e2a-4f45-8697-8b014a034cab"
     - name: SYFOSOKNAD_HOST
       value: "syfosoknad.intern.nav.no"
+    - name: SYFOTILGANGSKONTROLL_AAD_APP_CLIENT_ID
+      value: "dfaa2699-7390-4459-9cfc-2e8de64dfaf9"
     - name: SYFOTILGANGSKONTROLL_HOST
       value: "syfo-tilgangskontroll.intern.nav.no"
+    - name: SYFOVEILEDER_AAD_APP_CLIENT_ID
+      value: "920f92f5-987a-4cc0-b619-bed1697889a8"
     - name: SYFOVEILEDER_HOST
       value: "syfoveileder.intern.nav.no"

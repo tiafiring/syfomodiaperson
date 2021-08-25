@@ -14,7 +14,7 @@ export function* hentOppfolgingsplanerHvisIkkeHentet(action: any) {
   if (skalHente) {
     yield put(actions.henterOppfoelgingsdialoger());
 
-    const path = `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/v1/oppfolgingsplan/${action.fnr}`;
+    const path = `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/oppfolgingsplan/${action.fnr}`;
     try {
       const data: OppfolgingsplanDTO[] = yield call(get, path);
       yield put(actions.hentOppfolgingsdialogerHentet(data));

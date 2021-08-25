@@ -1,5 +1,4 @@
 import axios, { AxiosError } from "axios";
-import { hentLoginUrl, hentRedirectBaseUrl } from "@/utils/miljoUtil";
 import {
   accessDeniedError,
   ApiErrorException,
@@ -28,7 +27,7 @@ function handleAxiosError(error: AxiosError) {
   if (error.response) {
     switch (error.response.status) {
       case 401: {
-        window.location.href = `${hentLoginUrl()}?redirect=${hentRedirectBaseUrl()}`;
+        window.location.href = `/login?redirectTo=${window.location.pathname}`;
         throw new ApiErrorException(
           loginRequiredError(error.message),
           error.response.status

@@ -1,5 +1,7 @@
 import { ISPENGESTOPP_ROOT } from "../../src/apiConstants";
 
+const Auth = require("../../server/auth/index.js");
+
 const Status = {
   NORMAL: "NORMAL",
   STOPP_AUTOMATIKK: "STOPP_AUTOMATIKK",
@@ -29,25 +31,33 @@ const createStatusList = (stoppAutomatikk) => {
 export const mockIspengestopp = (server) => {
   let STATUSLIST = undefined;
 
-  server.get(`${ISPENGESTOPP_ROOT}/person/status`, (req, res) => {
-    res.setHeader("Content-Type", "application/json");
-    if (!STATUSLIST) {
-      res.sendStatus(204);
-    } else {
-      res.send(JSON.stringify(STATUSLIST));
+  server.get(
+    `${ISPENGESTOPP_ROOT}/person/status`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      res.setHeader("Content-Type", "application/json");
+      if (!STATUSLIST) {
+        res.sendStatus(204);
+      } else {
+        res.send(JSON.stringify(STATUSLIST));
+      }
     }
-  });
-  server.post(`${ISPENGESTOPP_ROOT}/person/flagg`, (req, res) => {
-    const body = req.body;
-    STATUSLIST = createStatusList(body);
+  );
+  server.post(
+    `${ISPENGESTOPP_ROOT}/person/flagg`,
+    Auth.ensureAuthenticated(),
+    (req, res) => {
+      const body = req.body;
+      STATUSLIST = createStatusList(body);
 
-    const stoppAutomatikk =
-      body.sykmeldtFnr && body.virksomhetNr && body.enhetNr;
-    console.assert(stoppAutomatikk, {
-      stoppAutomatikk,
-      errorMsg: "invalid stoppAutomatikk object",
-    });
-    res.sendStatus(201);
-    console.log("StoppAutomatikk: 201 CREATED");
-  });
+      const stoppAutomatikk =
+        body.sykmeldtFnr && body.virksomhetNr && body.enhetNr;
+      console.assert(stoppAutomatikk, {
+        stoppAutomatikk,
+        errorMsg: "invalid stoppAutomatikk object",
+      });
+      res.sendStatus(201);
+      console.log("StoppAutomatikk: 201 CREATED");
+    }
+  );
 };

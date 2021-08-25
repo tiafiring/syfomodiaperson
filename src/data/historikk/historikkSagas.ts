@@ -17,7 +17,7 @@ import {
 export function* hentHistorikkOppfoelgingsdialog(action: HentHistorikkAction) {
   yield put(henterHistorikk("OPPFOELGINGSDIALOG"));
 
-  const path = `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/v1/oppfolgingsplan/${action.fnr}/historikk`;
+  const path = `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/oppfolgingsplan/${action.fnr}/historikk`;
   try {
     const data: HistorikkEvent[] = yield call(get, path);
     yield put(historikkHentet(data, "OPPFOELGINGSDIALOG"));
