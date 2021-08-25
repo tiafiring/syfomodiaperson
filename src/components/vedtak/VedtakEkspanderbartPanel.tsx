@@ -84,37 +84,43 @@ const VedtakEkspanderbartPanel = (
     <StyledEkspanderbartPanel
       tittel={<Normaltekst>{arbeidsgiver}</Normaltekst>}
     >
-      {vedtakPerArbeidsgiver.map((v: VedtakDTO, index: number) => {
-        return (
-          <StyledPanel key={index} selected={v.id === selectedVedtak?.id}>
-            <StyledButton
-              onClick={() => {
-                setSelectedVedtak(v);
-              }}
-            >
-              <FlexRow>
-                <FlexColInfo>
-                  <Undertittel>
-                    {`${restdatoTildato(v.vedtak.fom)} - ${restdatoTildato(
-                      v.vedtak.tom
-                    )}`}
-                  </Undertittel>
-                  <Undertekst>
-                    {`Utbetaling: ${restdatoTildato(
-                      v.opprettet
-                    )} · Restdager: ${v.vedtak.gjenståendeSykedager}`}
-                  </Undertekst>
-                </FlexColInfo>
-                {v.annullert && (
-                  <FlexColLabel>
-                    <VedtakAnnullertLabel />
-                  </FlexColLabel>
-                )}
-              </FlexRow>
-            </StyledButton>
-          </StyledPanel>
-        );
-      })}
+      {vedtakPerArbeidsgiver
+        .sort(
+          (v1: VedtakDTO, v2: VedtakDTO) =>
+            new Date(v2.vedtak.fom).getTime() -
+            new Date(v1.vedtak.fom).getTime()
+        )
+        .map((v: VedtakDTO, index: number) => {
+          return (
+            <StyledPanel key={index} selected={v.id === selectedVedtak?.id}>
+              <StyledButton
+                onClick={() => {
+                  setSelectedVedtak(v);
+                }}
+              >
+                <FlexRow>
+                  <FlexColInfo>
+                    <Undertittel>
+                      {`${restdatoTildato(v.vedtak.fom)} - ${restdatoTildato(
+                        v.vedtak.tom
+                      )}`}
+                    </Undertittel>
+                    <Undertekst>
+                      {`Utbetaling: ${restdatoTildato(
+                        v.opprettet
+                      )} · Restdager: ${v.vedtak.gjenståendeSykedager}`}
+                    </Undertekst>
+                  </FlexColInfo>
+                  {v.annullert && (
+                    <FlexColLabel>
+                      <VedtakAnnullertLabel />
+                    </FlexColLabel>
+                  )}
+                </FlexRow>
+              </StyledButton>
+            </StyledPanel>
+          );
+        })}
     </StyledEkspanderbartPanel>
   );
 };
