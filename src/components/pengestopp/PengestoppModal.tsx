@@ -130,6 +130,7 @@ const PengestoppModal = ({
     setStoppAutomatikk({
       ...stoppAutomatikk,
       virksomhetNr: virksomhetNrList,
+      enhetNr: { value: navEnhet },
     });
   };
 
