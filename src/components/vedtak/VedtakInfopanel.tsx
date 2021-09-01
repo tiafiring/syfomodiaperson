@@ -36,7 +36,7 @@ const VedtakInfopanel = (vedtakProps: VedtakInfopanelProps) => {
       </VedtakInfopanelRow>
       <VedtakMetaInformasjon selectedVedtak={selectedVedtak} />
       <VedtakOppsummering selectedVedtak={selectedVedtak} />
-      {selectedVedtak.annullert && (
+      {(selectedVedtak.annullert || selectedVedtak.revurdert) && (
         <VedtakInfopanelRow>
           <VedtakAnnullertAlertStripe />
         </VedtakInfopanelRow>
