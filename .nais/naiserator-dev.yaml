@@ -117,7 +117,7 @@ spec:
     - name: SYFOSOKNAD_HOST
       value: "syfosoknad.dev.intern.nav.no"
     - name: SYFOTILGANGSKONTROLL_AAD_APP_CLIENT_ID
-      value: "32e36aa5-1d12-452a-9b1e-9f3f557cbb4d"
+      value: "dev-fss.teamsykefravr.syfo-tilgangskontroll"
     - name: SYFOTILGANGSKONTROLL_HOST
       value: "syfo-tilgangskontroll.dev.intern.nav.no"
     - name: SYFOVEILEDER_AAD_APP_CLIENT_ID

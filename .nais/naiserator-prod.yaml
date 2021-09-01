@@ -117,7 +117,7 @@ spec:
     - name: SYFOSOKNAD_HOST
       value: "syfosoknad.intern.nav.no"
     - name: SYFOTILGANGSKONTROLL_AAD_APP_CLIENT_ID
-      value: "dfaa2699-7390-4459-9cfc-2e8de64dfaf9"
+      value: "prod-fss.teamsykefravr.syfo-tilgangskontroll"
     - name: SYFOTILGANGSKONTROLL_HOST
       value: "syfo-tilgangskontroll.intern.nav.no"
     - name: SYFOVEILEDER_AAD_APP_CLIENT_ID
