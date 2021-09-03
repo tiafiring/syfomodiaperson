@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Form } from "react-final-form";
 import AlertStripe from "nav-frontend-alertstriper";
@@ -6,11 +6,14 @@ import KnappBase from "nav-frontend-knapper";
 import Tidspunkter from "./Tidspunkter";
 import { genererDato } from "../utils";
 import { validerTidspunkt } from "@/utils/valideringUtils";
+import { alternativAlreadyExists } from "@/utils/moteplanleggerUtils";
 
 const texts = {
   leggTil: "Flere alternativer",
   send: "Send",
   avbryt: "Avbryt",
+  duplicateTidspunktError: "Et av tidspunktene er allerede foreslått",
+  genericError: "Beklager, det oppstod en feil. Prøv igjen senere!",
 };
 
 export const getData = (values) => {
@@ -32,7 +35,17 @@ const Feilmelding = () => {
   return (
     <div className="blokk">
       <AlertStripe type="advarsel">
-        <p>Beklager, det oppstod en feil. Prøv igjen senere!</p>
+        <p>{texts.genericError}</p>
+      </AlertStripe>
+    </div>
+  );
+};
+
+const DuplicateTidspunktError = () => {
+  return (
+    <div className="blokk">
+      <AlertStripe type="feil">
+        <p>{texts.duplicateTidspunktError}</p>
       </AlertStripe>
     </div>
   );
@@ -49,9 +62,22 @@ export const FlereTidspunktSkjema = (props) => {
     avbrytFlereAlternativ,
     antallNyeTidspunkt,
   } = props;
+  const [
+    showSameTidspunktErrorMessage,
+    setShowSameTidspunktErrorMessage,
+  ] = useState(false);
   const submit = (values) => {
-    const data = dekorerMedSted(getData(values), mote.alternativer[0].sted);
-    opprettFlereAlternativ(data, mote.moteUuid, fnr);
+    const duplicateTidspunkt = values.tidspunkter.find((newAlternativ) => {
+      return alternativAlreadyExists(mote, newAlternativ);
+    });
+
+    if (duplicateTidspunkt) {
+      setShowSameTidspunktErrorMessage(true);
+    } else {
+      setShowSameTidspunktErrorMessage(false);
+      const data = dekorerMedSted(getData(values), mote.alternativer[0].sted);
+      opprettFlereAlternativ(data, mote.moteUuid, fnr);
+    }
   };
 
   return (
@@ -69,6 +95,7 @@ export const FlereTidspunktSkjema = (props) => {
               </button>
             </div>
             {nyeAlternativFeilet && <Feilmelding />}
+            {showSameTidspunktErrorMessage && <DuplicateTidspunktError />}
             <KnappBase
               type="hoved"
               className="knapp--enten"
