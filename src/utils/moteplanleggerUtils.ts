@@ -1,4 +1,6 @@
 import { BRUKER, MULIGE_SVAR } from "@/konstanter";
+import { genererDato } from "@/components/mote/utils";
+import { MoteDTO } from "@/data/mote/types/moteTypes";
 
 export const brukerHarSvart = (svartidspunkt: any, created: any) => {
   if (!svartidspunkt) {
@@ -21,5 +23,16 @@ export const getTidligereAlternativer = (mote: any, deltakertype = BRUKER) => {
   })[0];
   return mote.alternativer.filter((alternativ: any) => {
     return alternativ.created < innloggetBruker.svartidspunkt;
+  });
+};
+
+export const alternativAlreadyExists = (mote: MoteDTO, alternativ: any) => {
+  const newTidspunkt = genererDato(alternativ.dato, alternativ.klokkeslett);
+
+  return mote.alternativer.find((existingAlternativ) => {
+    return (
+      new Date(existingAlternativ.tid).getTime() ===
+      new Date(newTidspunkt).getTime()
+    );
   });
 };
