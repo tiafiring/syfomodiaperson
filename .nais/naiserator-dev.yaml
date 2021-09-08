@@ -83,7 +83,7 @@ spec:
     - name: ISPREDIKSJON_HOST
       value: "isprediksjon.dev.intern.nav.no"
     - name: MODIACONTEXTHOLDER_HOST
-      value: "modiacontextholder-q0.dev.adeo.no"
+      value: "modiacontextholder-q0.dev.intern.nav.no"
     - name: MODIASYFOREST_AAD_APP_CLIENT_ID
       value: "9214f26e-b991-42a4-80c6-5defeadd9d63"
     - name: MODIASYFOREST_HOST
