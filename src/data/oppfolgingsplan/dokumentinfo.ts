@@ -11,7 +11,7 @@ export interface VirksomhetState {
   hentet: boolean;
   hentingFeilet: boolean;
   hentingForsokt: boolean;
-  data: DokumentinfoDTO | Record<string, unknown>;
+  data?: DokumentinfoDTO;
 }
 
 export interface DokumentinfoMapState {
@@ -28,7 +28,6 @@ const dokumentinfo: Reducer<DokumentinfoMapState> = (
   switch (action.type) {
     case HENTER_DOKUMENTINFO:
       oppfolgingsplanDokument[action.planId] = {
-        data: {},
         henter: true,
         hentet: false,
         hentingFeilet: false,
@@ -46,7 +45,6 @@ const dokumentinfo: Reducer<DokumentinfoMapState> = (
       return { ...state, ...oppfolgingsplanDokument };
     case HENT_DOKUMENTINFO_FEILET:
       oppfolgingsplanDokument[action.planId] = {
-        data: {},
         henter: false,
         hentet: false,
         hentingFeilet: false,

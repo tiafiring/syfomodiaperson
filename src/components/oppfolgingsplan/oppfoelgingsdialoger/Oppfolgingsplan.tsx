@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Knapp from "nav-frontend-knapper";
 import { DokumentinfoDTO } from "@/data/oppfolgingsplan/types/DokumentinfoDTO";
 import { OppfolgingsplanDTO } from "@/data/oppfolgingsplan/oppfoelgingsdialoger";
@@ -8,19 +8,21 @@ import { hentDokumentinfo } from "@/data/oppfolgingsplan/dokumentinfo_actions";
 import Feilmelding from "../../Feilmelding";
 import AppSpinner from "../../AppSpinner";
 import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "@/apiConstants";
+import { useAppSelector } from "@/hooks/hooks";
 
 interface PlanVisningProps {
-  dokumentinfo: DokumentinfoDTO;
+  dokumentinfo?: DokumentinfoDTO;
   oppfolgingsplan: OppfolgingsplanDTO;
 }
 
-const PlanVisning = (planVisningProps: PlanVisningProps) => {
-  const { dokumentinfo, oppfolgingsplan } = planVisningProps;
+const PlanVisning = ({ dokumentinfo, oppfolgingsplan }: PlanVisningProps) => {
   const bildeUrler: string[] = [];
-  for (let i = 1; i <= dokumentinfo.antallSider; i += 1) {
-    bildeUrler.push(
-      `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/dokument/${oppfolgingsplan.id}/side/${i}`
-    );
+  if (dokumentinfo) {
+    for (let i = 1; i <= dokumentinfo.antallSider; i += 1) {
+      bildeUrler.push(
+        `${SYFOOPPFOLGINGSPLANSERVICE_ROOT}/dokument/${oppfolgingsplan.id}/side/${i}`
+      );
+    }
   }
 
   const TilbakeTilOppfolgingsplaner = () => {
@@ -74,38 +76,25 @@ interface OppfolgingsplanProps {
   oppfolgingsplan: OppfolgingsplanDTO;
 }
 
-const Oppfolgingsplan = (oppfolgingsplanWrapperProps: OppfolgingsplanProps) => {
-  const { oppfolgingsplan } = oppfolgingsplanWrapperProps;
-
+const Oppfolgingsplan = ({ oppfolgingsplan }: OppfolgingsplanProps) => {
   const dispatch = useDispatch();
-
-  const dokumentinfoState = useSelector((state: any) => state.dokumentinfo);
-  const oppfolgingsplanDokumentinfoReducer =
+  const dokumentinfoState = useAppSelector((state) => state.dokumentinfo);
+  const { data, hentingFeilet, hentingForsokt } =
     dokumentinfoState[oppfolgingsplan.id] || {};
-
-  const harForsoktHentetAlt = oppfolgingsplanDokumentinfoReducer.hentingForsokt;
-  const henter = !harForsoktHentetAlt;
-  const hentingFeilet = oppfolgingsplanDokumentinfoReducer.hentingFeilet;
-  const dokumentinfo =
-    oppfolgingsplanDokumentinfoReducer &&
-    oppfolgingsplanDokumentinfoReducer.data;
 
   useEffect(() => {
     dispatch(hentDokumentinfo(oppfolgingsplan.id));
   }, [dispatch, oppfolgingsplan.id]);
 
   return (() => {
-    if (henter) {
+    if (!hentingForsokt) {
       return <AppSpinner />;
     }
     if (hentingFeilet) {
       return <Feilmelding />;
     }
     return (
-      <PlanVisning
-        oppfolgingsplan={oppfolgingsplan}
-        dokumentinfo={dokumentinfo}
-      />
+      <PlanVisning oppfolgingsplan={oppfolgingsplan} dokumentinfo={data} />
     );
   })();
 };
