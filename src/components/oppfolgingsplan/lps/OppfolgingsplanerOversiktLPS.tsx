@@ -8,6 +8,7 @@ import BehandleOppfolgingsplanLPS from "./BehandleOppfolgingsplanLPS";
 import OppfolgingsplanLPSEtikett from "./OppfolgingsplanLPSEtikett";
 import { StatusKanImage } from "../../../../img/ImageComponents";
 import { SYFOOPPFOLGINGSPLANSERVICE_ROOT } from "@/apiConstants";
+import { useVeilederinfo } from "@/hooks/useVeilederinfo";
 
 const texts = {
   buttonOpenPlan: "Åpne oppfølgingsplanen(pdf)",
@@ -44,16 +45,12 @@ export const ButtonOpenPlan = (buttonOpenPlanProps: ButtonOpenPlanProps) => {
 
 interface BehandleOppfolgingsplanLPSProps {
   oppfolgingsplanLPSBistandsbehov: OppfolgingsplanLPS;
-  veilederIdent: string;
 }
 
-const OppfolgingsplanerOversiktLPS = (
-  behandleOppfolgingsplanLPSProps: BehandleOppfolgingsplanLPSProps
-) => {
-  const {
-    oppfolgingsplanLPSBistandsbehov,
-    veilederIdent,
-  } = behandleOppfolgingsplanLPSProps;
+const OppfolgingsplanerOversiktLPS = ({
+  oppfolgingsplanLPSBistandsbehov,
+}: BehandleOppfolgingsplanLPSProps) => {
+  const { veilederinfo } = useVeilederinfo();
   const personOppgave = oppfolgingsplanLPSBistandsbehov.personoppgave;
   const erPersonOppgaveBehandlet = isPersonOppgaveBehandlet(personOppgave);
   return (
@@ -71,10 +68,10 @@ const OppfolgingsplanerOversiktLPS = (
       <DivMarginBottom>
         <ButtonOpenPlan oppfolgingsplanLPS={oppfolgingsplanLPSBistandsbehov} />
       </DivMarginBottom>
-      {personOppgave && !erPersonOppgaveBehandlet && (
+      {veilederinfo && personOppgave && !erPersonOppgaveBehandlet && (
         <BehandleOppfolgingsplanLPS
           oppfolgingsplanLPS={oppfolgingsplanLPSBistandsbehov}
-          veilederIdent={veilederIdent}
+          veilederIdent={veilederinfo.ident}
         />
       )}
       {personOppgave && erPersonOppgaveBehandlet && (

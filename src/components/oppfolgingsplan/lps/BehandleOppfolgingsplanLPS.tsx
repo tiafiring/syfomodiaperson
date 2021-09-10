@@ -6,13 +6,13 @@ import { OppfolgingsplanLPS } from "@/data/oppfolgingsplan/types/Oppfolgingsplan
 
 interface BehandleOppfolgingsplanLPSProps {
   oppfolgingsplanLPS: OppfolgingsplanLPS;
-  veilederIdent: any;
+  veilederIdent: string;
 }
 
-const BehandleOppfolgingsplanLPS = (
-  behandleOppfolgingsplanLPSProps: BehandleOppfolgingsplanLPSProps
-) => {
-  const { oppfolgingsplanLPS, veilederIdent } = behandleOppfolgingsplanLPSProps;
+const BehandleOppfolgingsplanLPS = ({
+  oppfolgingsplanLPS,
+  veilederIdent,
+}: BehandleOppfolgingsplanLPSProps) => {
   const dispatch = useDispatch();
   const opLPSPersonOppgave = oppfolgingsplanLPS.personoppgave;
   const [spinner, setSpinner] = useState(false);

@@ -30,14 +30,14 @@ const texts = {
   shared: "Delt med NAV",
 };
 
-const durationText = (plan: any) => {
+const durationText = (plan: OppfolgingsplanDTO) => {
   return `${texts.duration} ${tilLesbarPeriodeMedArstall(
     plan.godkjentPlan.gyldighetstidspunkt.fom,
     plan.godkjentPlan.gyldighetstidspunkt.tom
   )}`;
 };
 
-const deltMedNavText = (plan: any) => {
+const deltMedNavText = (plan: OppfolgingsplanDTO) => {
   const sharedDate =
     plan.godkjentPlan &&
     restdatoTilLesbarDato(plan.godkjentPlan.deltMedNAVTidspunkt);
@@ -49,7 +49,6 @@ interface OppfolgingsplanerOversiktProps {
   inaktiveDialoger: OppfolgingsplanDTO[];
   fnr: string;
   oppfolgingsplanerLPS: OppfolgingsplanLPS[];
-  veilederIdent: string;
 }
 
 const OppfolgingsplanerOversikt = (
@@ -59,7 +58,6 @@ const OppfolgingsplanerOversikt = (
     aktiveDialoger,
     inaktiveDialoger,
     oppfolgingsplanerLPS,
-    veilederIdent,
   } = oppfolgingsplanerOversiktProps;
 
   const dispatch = useDispatch();
@@ -143,7 +141,6 @@ const OppfolgingsplanerOversikt = (
             <OppfolgingsplanerOversiktLPS
               key={index}
               oppfolgingsplanLPSBistandsbehov={planLPS}
-              veilederIdent={veilederIdent}
             />
           );
         })}
@@ -205,7 +202,6 @@ const OppfolgingsplanerOversikt = (
           <OppfolgingsplanerOversiktLPS
             key={index}
             oppfolgingsplanLPSBistandsbehov={planLPS}
-            veilederIdent={veilederIdent}
           />
         );
       })}

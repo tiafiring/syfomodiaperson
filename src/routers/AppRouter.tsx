@@ -6,8 +6,6 @@ import AvbrytMoteContainer from "../components/mote/container/AvbrytMoteContaine
 import BekreftMoteContainer from "../components/mote/container/BekreftMoteContainer";
 import SykmeldingerContainer from "../components/speiling/sykmeldinger/container/SykmeldingerContainer";
 import SykepengesoknaderContainer from "../components/speiling/sykepengsoknader/container/SykepengesoknaderSide";
-import OppfoelgingsPlanerOversiktContainer from "../components/oppfolgingsplan/container/OppfoelgingsPlanerOversiktContainer";
-import OppfoelgingsplanContainer from "../components/oppfolgingsplan/container/OppfoelgingsplanContainer";
 import DinSykmeldingContainer from "../components/speiling/sykmeldinger/container/DinSykmeldingContainer";
 import HistorikkContainer from "../components/historikk/container/HistorikkContainer";
 import { erGyldigFodselsnummer } from "@/utils/frnValideringUtils";
@@ -31,6 +29,8 @@ import { setAmplitudeUserProperties } from "@/amplitude/amplitude";
 import EndreDialogmoteContainer from "../components/dialogmote/endre/EndreDialogmoteContainer";
 import { fetchUnleashToggles } from "@/data/unleash/unleash_actions";
 import { SykepengesoknadSide } from "@/components/speiling/sykepengsoknader/container/SykepengesoknadSide";
+import { OppfoelgingsPlanerOversiktContainer } from "@/components/oppfolgingsplan/container/OppfoelgingsPlanerOversiktContainer";
+import { OppfoelgingsplanContainer } from "@/components/oppfolgingsplan/container/OppfoelgingsplanContainer";
 
 const getFnrFromParams = (): string => {
   return window.location.pathname.split("/")[2];
