@@ -1,16 +1,20 @@
 import { Reducer } from "redux";
 import { UnleashActions, UnleashActionTypes } from "./unleash_actions";
+import { ToggleNames, Toggles } from "@/data/unleash/unleash_types";
 
 export interface UnleashState {
   fetching: boolean;
   fetchingFailed: boolean;
-  dm2Enabled: boolean;
+  toggles: Toggles;
 }
 
 export const initialState: UnleashState = {
   fetching: false,
   fetchingFailed: false,
-  dm2Enabled: false,
+  toggles: {
+    [ToggleNames.dm2]: false,
+    [ToggleNames.dm2VarselFysiskBrev]: false,
+  },
 };
 
 const unleash: Reducer<UnleashState, UnleashActions> = (
@@ -37,7 +41,7 @@ const unleash: Reducer<UnleashState, UnleashActions> = (
         ...state,
         fetching: false,
         fetchingFailed: false,
-        dm2Enabled: action.isDm2Enabled,
+        toggles: action.toggles,
       };
     }
     default: {

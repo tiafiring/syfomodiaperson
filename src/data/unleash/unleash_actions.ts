@@ -1,3 +1,5 @@
+import { Toggles } from "@/data/unleash/unleash_types";
+
 export enum UnleashActionTypes {
   FETCH_UNLEASH_TOGGLES = "FETCH_UNLEASH_TOGGLES",
   FETCH_UNLEASH_TOGGLES_FAILED = "FETCH_UNLEASH_TOGGLES_FAILED",
@@ -16,7 +18,7 @@ export interface FetchUnleashTogglesFailedAction {
 
 export interface FetchUnleashTogglesSuccessAction {
   type: UnleashActionTypes.FETCH_UNLEASH_TOGGLES_SUCCESS;
-  isDm2Enabled: boolean;
+  toggles: Toggles;
 }
 
 export const fetchUnleashToggles = (
@@ -33,10 +35,10 @@ export const fetchUnleashTogglesFailed = (): FetchUnleashTogglesFailedAction => 
 });
 
 export const fetchUnleashTogglesSuccess = (
-  isDm2Enabled: boolean
+  toggles: Toggles
 ): FetchUnleashTogglesSuccessAction => ({
   type: UnleashActionTypes.FETCH_UNLEASH_TOGGLES_SUCCESS,
-  isDm2Enabled,
+  toggles,
 });
 
 export type UnleashActions =

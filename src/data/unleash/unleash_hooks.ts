@@ -1,5 +1,8 @@
 import { useAppSelector } from "@/hooks/hooks";
 
-export const useIsDM2Enabled = () => {
-  return useAppSelector((state) => state.unleash.dm2Enabled);
+export const useDM2FeatureToggles: () => { isDm2Enabled: boolean } = () => {
+  const toggles = useAppSelector((state) => state.unleash.toggles);
+  return {
+    isDm2Enabled: toggles["syfo.syfomodiaperson.dm2"],
+  };
 };
