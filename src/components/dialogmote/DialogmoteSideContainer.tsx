@@ -59,10 +59,8 @@ export const DialogmoteSideContainer = ({
     <Side fnr={fnr} tittel={title} aktivtMenypunkt={MOETEPLANLEGGER}>
       <SideLaster henter={henter} hentingFeilet={!!henterMoteFeil}>
         <Sidetopp tittel={header} />
-        {isDm2FysiskBrevEnabled && !brukerKanVarslesDigitalt ? (
+        {isDm2FysiskBrevEnabled && !brukerKanVarslesDigitalt && (
           <BrukerKanIkkeVarslesPapirpostAdvarsel />
-        ) : (
-          <></>
         )}
         {dialogmote ? (
           children(dialogmote)

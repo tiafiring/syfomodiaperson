@@ -40,10 +40,8 @@ const DialogmoteInnkallingContainer = (): ReactElement => {
         <DialogmoteInnkallingWarningAlert type="advarsel">
           {texts.alert}
         </DialogmoteInnkallingWarningAlert>
-        {isDm2FysiskBrevEnabled && !brukerKanVarslesDigitalt ? (
+        {isDm2FysiskBrevEnabled && !brukerKanVarslesDigitalt && (
           <BrukerKanIkkeVarslesPapirpostAdvarsel />
-        ) : (
-          <></>
         )}
         <DialogmoteInnkallingSkjema pageTitle={texts.title} />
       </SideLaster>

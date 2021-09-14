@@ -20,7 +20,7 @@ const texts = {
   behandlerVaereMedTrackingContext:
     "Møtelandingsside: Modal behandler være med",
   behandlerVaereMed: "Skal behandleren være med i dialogmøtet?",
-  nyLoesningInnkalling: "Ny løsning for innkalling til Dialogmøte",
+  nyLosningInnkalling: "Ny løsning for innkalling til Dialogmøte",
   arbeiderBilde: "Bilde av arbeider",
   nei: "Nei",
   ja: "Ja",
@@ -39,10 +39,10 @@ export const NyttDialogMote = (): ReactElement => {
     kontaktinfo: { skalHaVarsel: brukerKanVarslesDigitalt },
   } = useNavBrukerData();
   const { isDm2FysiskBrevEnabled } = useDM2FeatureToggles();
-  const kanBrukeNyLoesningInnkalling =
+  const kanBrukeNyLosningInnkalling =
     brukerKanVarslesDigitalt || isDm2FysiskBrevEnabled;
 
-  if (!kanBrukeNyLoesningInnkalling) {
+  if (!kanBrukeNyLosningInnkalling) {
     return (
       <FlexRow>
         <Link to="/sykefravaer/mote">
@@ -123,7 +123,7 @@ export const NyttDialogMote = (): ReactElement => {
         isOpen={nyLosningModalIsOpen}
         onRequestClose={() => setNyLosningModalIsOpen(false)}
         closeButton={true}
-        contentLabel={texts.nyLoesningInnkalling}
+        contentLabel={texts.nyLosningInnkalling}
         ariaHideApp={false}
       >
         <ModalContentContainer>

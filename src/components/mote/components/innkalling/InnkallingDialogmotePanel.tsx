@@ -92,7 +92,7 @@ export const InnkallingDialogmotePanel = (): ReactElement => {
         header={texts.planleggNyttMote}
         subtitle={texts.ingenMoterPlanlagt}
       >
-        {!brukerKanVarslesDigitalt ? <BrukerKanIkkeVarslesWarning /> : <></>}
+        {!brukerKanVarslesDigitalt && <BrukerKanIkkeVarslesWarning />}
         <NyttDialogMote />
       </DialogmotePanel>
     );
