@@ -15,6 +15,7 @@ import styled from "styled-components";
 import { AlertstripeFullbredde } from "../../../AlertstripeFullbredde";
 import { Normaltekst } from "nav-frontend-typografi";
 import { BrukerKanIkkeVarslesText } from "../../../BrukerKanIkkeVarslesText";
+import { BrukerKanIkkeVarslesPapirpostAdvarsel } from "@/components/dialogmote/BrukerKanIkkeVarslesPapirpostAdvarsel";
 
 export const texts = {
   bekreftetMote: "Bekreftet møte",
@@ -23,21 +24,26 @@ export const texts = {
   ingenMoterPlanlagt: "Ingen møter planlagt",
   dialogMote: "Dialogmøte",
   moteforesporselSendt: "Møteforespørsel sendt",
-  kanIkkeVarslesDialogmoteInnkalling:
-    "Dialogmøter med denne personen må fortsatt kalles inn via Arena.",
+  arenaDialogmoteInnkalling:
+    "Dialogmøter med denne innbyggeren må fortsatt kalles inn via Arena.",
 };
 
 const BrukerKanIkkeVarslesAlertStripe = styled(AlertstripeFullbredde)`
   margin-bottom: 2em;
 `;
 
-const BrukerKanIkkeVarslesWarning = () => (
-  <BrukerKanIkkeVarslesAlertStripe type="advarsel">
-    <BrukerKanIkkeVarslesText />
-    <br />
-    <Normaltekst>{texts.kanIkkeVarslesDialogmoteInnkalling}</Normaltekst>
-  </BrukerKanIkkeVarslesAlertStripe>
-);
+const BrukerKanIkkeVarslesWarning = () => {
+  const { isDm2FysiskBrevEnabled } = useDM2FeatureToggles();
+  return isDm2FysiskBrevEnabled ? (
+    <BrukerKanIkkeVarslesPapirpostAdvarsel />
+  ) : (
+    <BrukerKanIkkeVarslesAlertStripe type="advarsel">
+      <BrukerKanIkkeVarslesText />
+      <br />
+      <Normaltekst>{texts.arenaDialogmoteInnkalling}</Normaltekst>
+    </BrukerKanIkkeVarslesAlertStripe>
+  );
+};
 
 const resolveUndertittelForMoteStatus = (mote: MoteDTO) => {
   if (mote.status === "BEKREFTET" && mote.bekreftetAlternativ) {
@@ -56,7 +62,7 @@ export const InnkallingDialogmotePanel = (): ReactElement => {
   const aktivtMoteplanleggerMote = useAktivtMoteplanleggerMote();
   const aktivtDialogmote = useAktivtDialogmote();
   const {
-    kontaktinfo: { skalHaVarsel },
+    kontaktinfo: { skalHaVarsel: brukerKanVarslesDigitalt },
   } = useNavBrukerData();
 
   if (!isDm2Enabled) {
@@ -86,7 +92,7 @@ export const InnkallingDialogmotePanel = (): ReactElement => {
         header={texts.planleggNyttMote}
         subtitle={texts.ingenMoterPlanlagt}
       >
-        {!skalHaVarsel && <BrukerKanIkkeVarslesWarning />}
+        {!brukerKanVarslesDigitalt && <BrukerKanIkkeVarslesWarning />}
         <NyttDialogMote />
       </DialogmotePanel>
     );

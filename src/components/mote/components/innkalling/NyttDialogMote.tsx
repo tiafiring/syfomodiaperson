@@ -8,6 +8,7 @@ import { TrackedKnapp } from "../../../buttons/TrackedKnapp";
 import { TrackedFlatknapp } from "../../../buttons/TrackedFlatknapp";
 import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
 import { Link } from "react-router-dom";
+import { useDM2FeatureToggles } from "@/data/unleash/unleash_hooks";
 
 const ModalText = styled.div`
   max-width: 40ch;
@@ -19,7 +20,7 @@ const texts = {
   behandlerVaereMedTrackingContext:
     "Møtelandingsside: Modal behandler være med",
   behandlerVaereMed: "Skal behandleren være med i dialogmøtet?",
-  nyLoesningInnkalling: "Ny løsning for innkalling til Dialogmøte",
+  nyLosningInnkalling: "Ny løsning for innkalling til Dialogmøte",
   arbeiderBilde: "Bilde av arbeider",
   nei: "Nei",
   ja: "Ja",
@@ -35,10 +36,13 @@ export const NyttDialogMote = (): ReactElement => {
   const [behandlerModalIsOpen, setBehandlerModalIsOpen] = useState(false);
   const [nyLosningModalIsOpen, setNyLosningModalIsOpen] = useState(false);
   const {
-    kontaktinfo: { skalHaVarsel },
+    kontaktinfo: { skalHaVarsel: brukerKanVarslesDigitalt },
   } = useNavBrukerData();
+  const { isDm2FysiskBrevEnabled } = useDM2FeatureToggles();
+  const kanBrukeNyLosningInnkalling =
+    brukerKanVarslesDigitalt || isDm2FysiskBrevEnabled;
 
-  if (!skalHaVarsel) {
+  if (!kanBrukeNyLosningInnkalling) {
     return (
       <FlexRow>
         <Link to="/sykefravaer/mote">
@@ -119,7 +123,7 @@ export const NyttDialogMote = (): ReactElement => {
         isOpen={nyLosningModalIsOpen}
         onRequestClose={() => setNyLosningModalIsOpen(false)}
         closeButton={true}
-        contentLabel={texts.nyLoesningInnkalling}
+        contentLabel={texts.nyLosningInnkalling}
         ariaHideApp={false}
       >
         <ModalContentContainer>
