@@ -46,10 +46,12 @@ context("Møtelandingsside actions", () => {
     cy.stubMoter(MoteState.INGEN_MOTER);
     cy.intercept(
       {
-        method: "GET",
-        url: "/isenabled/dm2/*",
+        method: "POST",
+        url: "/isenabled/dm2*",
       },
-      "false"
+      {
+        "syfo.syfomodiaperson.dm2": false,
+      }
     );
 
     cy.dataCy(selectors.nyttMoteplanleggerMote).click();

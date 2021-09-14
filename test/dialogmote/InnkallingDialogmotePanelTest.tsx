@@ -14,6 +14,7 @@ import Alertstripe from "nav-frontend-alertstriper";
 import { NyttDialogMote } from "@/components/mote/components/innkalling/NyttDialogMote";
 import ModalWrapper from "nav-frontend-modal";
 import { brukerKanIkkeVarslesTekst } from "@/components/BrukerKanIkkeVarslesText";
+import { ToggleNames } from "@/data/unleash/unleash_types";
 
 const realState = createStore(rootReducer).getState();
 const store = configureStore([]);
@@ -34,7 +35,9 @@ const brukerKanIkkeVarsles = {
 
 const mockState = {
   unleash: {
-    dm2Enabled: true,
+    toggles: {
+      [ToggleNames.dm2]: true,
+    },
   },
 };
 

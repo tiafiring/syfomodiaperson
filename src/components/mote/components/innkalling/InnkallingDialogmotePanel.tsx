@@ -9,7 +9,7 @@ import { useAktivtMoteplanleggerMote } from "@/data/mote/moter_hooks";
 import { Moteplanleggeren } from "./Moteplanleggeren";
 import { DialogmoteMoteStatusPanel } from "./DialogmoteMoteStatusPanel";
 import { useAktivtDialogmote } from "@/data/dialogmote/dialogmote_hooks";
-import { useIsDM2Enabled } from "@/data/unleash/unleash_hooks";
+import { useDM2FeatureToggles } from "@/data/unleash/unleash_hooks";
 import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
 import styled from "styled-components";
 import { AlertstripeFullbredde } from "../../../AlertstripeFullbredde";
@@ -52,7 +52,7 @@ const resolveUndertittelForMoteStatus = (mote: MoteDTO) => {
 };
 
 export const InnkallingDialogmotePanel = (): ReactElement => {
-  const isDm2Enabled = useIsDM2Enabled();
+  const { isDm2Enabled } = useDM2FeatureToggles();
   const aktivtMoteplanleggerMote = useAktivtMoteplanleggerMote();
   const aktivtDialogmote = useAktivtDialogmote();
   const {
