@@ -7,7 +7,7 @@ import { useTilgang } from "@/hooks/useTilgang";
 interface SideLasterProps {
   henter: boolean;
   hentingFeilet: boolean;
-  children: ReactNode[] | ReactNode;
+  children: ReactNode;
 }
 
 const texts = {
