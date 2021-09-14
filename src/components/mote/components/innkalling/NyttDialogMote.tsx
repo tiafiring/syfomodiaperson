@@ -8,6 +8,7 @@ import { TrackedKnapp } from "../../../buttons/TrackedKnapp";
 import { TrackedFlatknapp } from "../../../buttons/TrackedFlatknapp";
 import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
 import { Link } from "react-router-dom";
+import { useDM2FeatureToggles } from "@/data/unleash/unleash_hooks";
 
 const ModalText = styled.div`
   max-width: 40ch;
@@ -35,10 +36,13 @@ export const NyttDialogMote = (): ReactElement => {
   const [behandlerModalIsOpen, setBehandlerModalIsOpen] = useState(false);
   const [nyLosningModalIsOpen, setNyLosningModalIsOpen] = useState(false);
   const {
-    kontaktinfo: { skalHaVarsel },
+    kontaktinfo: { skalHaVarsel: brukerKanVarslesDigitalt },
   } = useNavBrukerData();
+  const { isDm2FysiskBrevEnabled } = useDM2FeatureToggles();
+  const kanBrukeNyLoesningInnkalling =
+    brukerKanVarslesDigitalt || isDm2FysiskBrevEnabled;
 
-  if (!skalHaVarsel) {
+  if (!kanBrukeNyLoesningInnkalling) {
     return (
       <FlexRow>
         <Link to="/sykefravaer/mote">
