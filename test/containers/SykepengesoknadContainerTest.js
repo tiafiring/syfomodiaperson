@@ -34,6 +34,7 @@ const mockState = {
   navbruker: {
     data: {
       navn: "Ola Nordmann",
+      kontaktinfo: { skalHaVarsel: false },
     },
   },
   valgtbruker: {

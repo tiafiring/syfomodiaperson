@@ -61,9 +61,7 @@ export const InnkallingDialogmotePanel = (): ReactElement => {
   const { isDm2Enabled } = useDM2FeatureToggles();
   const aktivtMoteplanleggerMote = useAktivtMoteplanleggerMote();
   const aktivtDialogmote = useAktivtDialogmote();
-  const {
-    kontaktinfo: { skalHaVarsel: brukerKanVarslesDigitalt },
-  } = useNavBrukerData();
+  const { brukerKanIkkeVarslesDigitalt } = useNavBrukerData();
 
   if (!isDm2Enabled) {
     return <Moteplanleggeren />;
@@ -92,7 +90,7 @@ export const InnkallingDialogmotePanel = (): ReactElement => {
         header={texts.planleggNyttMote}
         subtitle={texts.ingenMoterPlanlagt}
       >
-        {!brukerKanVarslesDigitalt && <BrukerKanIkkeVarslesWarning />}
+        {brukerKanIkkeVarslesDigitalt && <BrukerKanIkkeVarslesWarning />}
         <NyttDialogMote />
       </DialogmotePanel>
     );

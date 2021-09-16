@@ -72,7 +72,9 @@ export class MotebookingSkjema extends Component {
 
     return (
       <div>
-        {!arbeidstaker.kontaktinfo.skalHaVarsel && <KontaktInfoAdvarsel />}
+        {arbeidstaker.kontaktinfo.skalHaVarsel === false && (
+          <KontaktInfoAdvarsel />
+        )}
         <Sidetopp tittel={texts.pageHeader} />
         <Form
           onSubmit={(values) => submit(values)}

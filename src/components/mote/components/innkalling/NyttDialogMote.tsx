@@ -35,9 +35,7 @@ const texts = {
 export const NyttDialogMote = (): ReactElement => {
   const [behandlerModalIsOpen, setBehandlerModalIsOpen] = useState(false);
   const [nyLosningModalIsOpen, setNyLosningModalIsOpen] = useState(false);
-  const {
-    kontaktinfo: { skalHaVarsel: brukerKanVarslesDigitalt },
-  } = useNavBrukerData();
+  const { brukerKanVarslesDigitalt } = useNavBrukerData();
   const { isDm2FysiskBrevEnabled } = useDM2FeatureToggles();
   const kanBrukeNyLosningInnkalling =
     brukerKanVarslesDigitalt || isDm2FysiskBrevEnabled;

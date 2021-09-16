@@ -26,9 +26,7 @@ const DialogmoteInnkallingContainer = (): ReactElement => {
   const fnr = useValgtPersonident();
   const { hentingLedereForsokt, hentingLedereFeilet } = useLedere();
   const { isDm2FysiskBrevEnabled } = useDM2FeatureToggles();
-  const {
-    kontaktinfo: { skalHaVarsel: brukerKanVarslesDigitalt },
-  } = useNavBrukerData();
+  const { brukerKanIkkeVarslesDigitalt } = useNavBrukerData();
 
   return (
     <Side fnr={fnr} tittel={texts.title} aktivtMenypunkt={MOETEPLANLEGGER}>
@@ -40,7 +38,7 @@ const DialogmoteInnkallingContainer = (): ReactElement => {
         <DialogmoteInnkallingWarningAlert type="advarsel">
           {texts.alert}
         </DialogmoteInnkallingWarningAlert>
-        {isDm2FysiskBrevEnabled && !brukerKanVarslesDigitalt && (
+        {isDm2FysiskBrevEnabled && brukerKanIkkeVarslesDigitalt && (
           <BrukerKanIkkeVarslesPapirpostAdvarsel />
         )}
         <DialogmoteInnkallingSkjema pageTitle={texts.title} />

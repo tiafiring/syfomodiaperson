@@ -142,9 +142,10 @@ const MotebookingStatus = (props) => {
     visFlereAlternativ,
   } = props;
   const { alternativer, status } = mote;
-  const krrMeldingPanel = !arbeidstaker.kontaktinfo.skalHaVarsel ? (
-    <KontaktInfoAdvarsel />
-  ) : null;
+  const krrMeldingPanel =
+    arbeidstaker.kontaktinfo.skalHaVarsel === false ? (
+      <KontaktInfoAdvarsel />
+    ) : null;
   const motePassert = erMotePassert(mote);
   const flereTidspunktBoks = skalViseFlereAlternativ ? (
     <FlereTidspunktSkjema
