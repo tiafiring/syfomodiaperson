@@ -39,9 +39,7 @@ export const DialogmoteSideContainer = ({
     moterHentet,
   } = useAppSelector((state) => state.dialogmote);
   const { isDm2FysiskBrevEnabled } = useDM2FeatureToggles();
-  const {
-    kontaktinfo: { skalHaVarsel: brukerKanVarslesDigitalt },
-  } = useNavBrukerData();
+  const { brukerKanIkkeVarslesDigitalt } = useNavBrukerData();
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -59,7 +57,7 @@ export const DialogmoteSideContainer = ({
     <Side fnr={fnr} tittel={title} aktivtMenypunkt={MOETEPLANLEGGER}>
       <SideLaster henter={henter} hentingFeilet={!!henterMoteFeil}>
         <Sidetopp tittel={header} />
-        {isDm2FysiskBrevEnabled && !brukerKanVarslesDigitalt && (
+        {isDm2FysiskBrevEnabled && brukerKanIkkeVarslesDigitalt && (
           <BrukerKanIkkeVarslesPapirpostAdvarsel />
         )}
         {dialogmote ? (
