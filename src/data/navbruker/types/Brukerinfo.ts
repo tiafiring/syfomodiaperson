@@ -2,7 +2,7 @@ export interface Kontaktinfo {
   fnr: string;
   epost?: string;
   tlf?: string;
-  skalHaVarsel: boolean;
+  skalHaVarsel?: boolean;
   feilAarsak?: boolean;
 }
 

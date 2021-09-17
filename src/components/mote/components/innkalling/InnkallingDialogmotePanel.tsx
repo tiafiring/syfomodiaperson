@@ -9,12 +9,13 @@ import { useAktivtMoteplanleggerMote } from "@/data/mote/moter_hooks";
 import { Moteplanleggeren } from "./Moteplanleggeren";
 import { DialogmoteMoteStatusPanel } from "./DialogmoteMoteStatusPanel";
 import { useAktivtDialogmote } from "@/data/dialogmote/dialogmote_hooks";
-import { useIsDM2Enabled } from "@/data/unleash/unleash_hooks";
+import { useDM2FeatureToggles } from "@/data/unleash/unleash_hooks";
 import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
 import styled from "styled-components";
 import { AlertstripeFullbredde } from "../../../AlertstripeFullbredde";
 import { Normaltekst } from "nav-frontend-typografi";
 import { BrukerKanIkkeVarslesText } from "../../../BrukerKanIkkeVarslesText";
+import { BrukerKanIkkeVarslesPapirpostAdvarsel } from "@/components/dialogmote/BrukerKanIkkeVarslesPapirpostAdvarsel";
 
 export const texts = {
   bekreftetMote: "Bekreftet møte",
@@ -23,21 +24,26 @@ export const texts = {
   ingenMoterPlanlagt: "Ingen møter planlagt",
   dialogMote: "Dialogmøte",
   moteforesporselSendt: "Møteforespørsel sendt",
-  kanIkkeVarslesDialogmoteInnkalling:
-    "Dialogmøter med denne personen må fortsatt kalles inn via Arena.",
+  arenaDialogmoteInnkalling:
+    "Dialogmøter med denne innbyggeren må fortsatt kalles inn via Arena.",
 };
 
 const BrukerKanIkkeVarslesAlertStripe = styled(AlertstripeFullbredde)`
   margin-bottom: 2em;
 `;
 
-const BrukerKanIkkeVarslesWarning = () => (
-  <BrukerKanIkkeVarslesAlertStripe type="advarsel">
-    <BrukerKanIkkeVarslesText />
-    <br />
-    <Normaltekst>{texts.kanIkkeVarslesDialogmoteInnkalling}</Normaltekst>
-  </BrukerKanIkkeVarslesAlertStripe>
-);
+const BrukerKanIkkeVarslesWarning = () => {
+  const { isDm2FysiskBrevEnabled } = useDM2FeatureToggles();
+  return isDm2FysiskBrevEnabled ? (
+    <BrukerKanIkkeVarslesPapirpostAdvarsel />
+  ) : (
+    <BrukerKanIkkeVarslesAlertStripe type="advarsel">
+      <BrukerKanIkkeVarslesText />
+      <br />
+      <Normaltekst>{texts.arenaDialogmoteInnkalling}</Normaltekst>
+    </BrukerKanIkkeVarslesAlertStripe>
+  );
+};
 
 const resolveUndertittelForMoteStatus = (mote: MoteDTO) => {
   if (mote.status === "BEKREFTET" && mote.bekreftetAlternativ) {
@@ -52,12 +58,10 @@ const resolveUndertittelForMoteStatus = (mote: MoteDTO) => {
 };
 
 export const InnkallingDialogmotePanel = (): ReactElement => {
-  const isDm2Enabled = useIsDM2Enabled();
+  const { isDm2Enabled } = useDM2FeatureToggles();
   const aktivtMoteplanleggerMote = useAktivtMoteplanleggerMote();
   const aktivtDialogmote = useAktivtDialogmote();
-  const {
-    kontaktinfo: { skalHaVarsel },
-  } = useNavBrukerData();
+  const { brukerKanIkkeVarslesDigitalt } = useNavBrukerData();
 
   if (!isDm2Enabled) {
     return <Moteplanleggeren />;
@@ -86,7 +90,7 @@ export const InnkallingDialogmotePanel = (): ReactElement => {
         header={texts.planleggNyttMote}
         subtitle={texts.ingenMoterPlanlagt}
       >
-        {!skalHaVarsel && <BrukerKanIkkeVarslesWarning />}
+        {brukerKanIkkeVarslesDigitalt && <BrukerKanIkkeVarslesWarning />}
         <NyttDialogMote />
       </DialogmotePanel>
     );

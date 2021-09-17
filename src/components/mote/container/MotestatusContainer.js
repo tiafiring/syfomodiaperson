@@ -32,7 +32,7 @@ export const mapStateToProps = (state, ownProps) => {
     })[0];
   const reservert =
     state.navbruker.data.kontaktinfo &&
-    !state.navbruker.data.kontaktinfo.skalHaVarsel;
+    state.navbruker.data.kontaktinfo.skalHaVarsel === false;
   if (aktoer && !aktoer.svartidspunkt && reservert) {
     aktivtMote = Object.assign({}, aktivtMote, {
       deltakere: aktivtMote.deltakere.filter((deltaker) => {

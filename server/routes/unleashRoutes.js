@@ -36,13 +36,17 @@ const unleash = initialize({
   strategies: [new ByEnhetAndEnvironment(), new ByUserId()],
 });
 
-router.get("/dm2/", function (req, res) {
-  const isEnabled = unleash.isEnabled("syfo.syfomodiaperson.dm2", {
-    valgtEnhet: req.query.valgtEnhet,
-    user: req.query.userId,
-  });
+router.post("/dm2", function (req, res) {
+  const toggles = req.body.toggles;
+  const unleashToggles = toggles.reduce((acc, toggle) => {
+    acc[toggle] = unleash.isEnabled(toggle, {
+      valgtEnhet: req.query.valgtEnhet,
+      user: req.query.userId,
+    });
+    return acc;
+  }, {});
 
-  res.status(200).send(isEnabled);
+  res.status(200).send(unleashToggles);
 });
 
 module.exports = router;
