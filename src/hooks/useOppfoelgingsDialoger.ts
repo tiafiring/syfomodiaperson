@@ -2,18 +2,23 @@ import { OppfolgingsplanerState } from "@/data/oppfolgingsplan/oppfoelgingsdialo
 import { useAppSelector } from "./hooks";
 
 export const useOppfoelgingsDialoger = () => {
-  const oppfolgingsplanerState: OppfolgingsplanerState = useAppSelector(
+  const {
+    data,
+    hentet,
+    hentingFeilet,
+  }: OppfolgingsplanerState = useAppSelector(
     (state) => state.oppfoelgingsdialoger
   );
-  const aktiveDialoger = oppfolgingsplanerState.data?.filter((dialog) => {
+  const aktiveDialoger = data?.filter((dialog) => {
     return (
       dialog.status !== "AVBRUTT" &&
       new Date(dialog.godkjentPlan.gyldighetstidspunkt.tom) > new Date()
     );
   });
   return {
+    oppfoelgingsdialogerHentingFeilet: hentingFeilet,
+    oppfoelgingsdialoger: data,
     aktiveDialoger,
-    harForsoktHentetOppfoelgingsdialoger:
-      oppfolgingsplanerState.hentet || oppfolgingsplanerState.hentingFeilet,
+    harForsoktHentetOppfoelgingsdialoger: hentet || hentingFeilet,
   };
 };

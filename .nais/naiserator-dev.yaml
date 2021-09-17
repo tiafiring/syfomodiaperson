@@ -83,7 +83,7 @@ spec:
     - name: ISPREDIKSJON_HOST
       value: "isprediksjon.dev.intern.nav.no"
     - name: MODIACONTEXTHOLDER_HOST
-      value: "modiacontextholder-q0.dev.adeo.no"
+      value: "modiacontextholder-q0.dev.intern.nav.no"
     - name: MODIASYFOREST_AAD_APP_CLIENT_ID
       value: "9214f26e-b991-42a4-80c6-5defeadd9d63"
     - name: MODIASYFOREST_HOST
@@ -117,11 +117,11 @@ spec:
     - name: SYFOSOKNAD_HOST
       value: "syfosoknad.dev.intern.nav.no"
     - name: SYFOTILGANGSKONTROLL_AAD_APP_CLIENT_ID
-      value: "32e36aa5-1d12-452a-9b1e-9f3f557cbb4d"
+      value: "dev-fss.teamsykefravr.syfo-tilgangskontroll"
     - name: SYFOTILGANGSKONTROLL_HOST
       value: "syfo-tilgangskontroll.dev.intern.nav.no"
     - name: SYFOVEILEDER_AAD_APP_CLIENT_ID
-      value: "bdde0d4f-4ced-4aa0-9168-9cfe9044ac10"
+      value: "dev-fss.teamsykefravr.syfoveileder"
     - name: SYFOVEILEDER_HOST
       value: "syfoveileder.dev.intern.nav.no"
 

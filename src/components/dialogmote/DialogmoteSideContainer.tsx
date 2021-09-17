@@ -9,6 +9,9 @@ import SideLaster from "../SideLaster";
 import Sidetopp from "../Sidetopp";
 import Feilmelding from "../Feilmelding";
 import { DialogmoteDTO } from "@/data/dialogmote/types/dialogmoteTypes";
+import { BrukerKanIkkeVarslesPapirpostAdvarsel } from "@/components/dialogmote/BrukerKanIkkeVarslesPapirpostAdvarsel";
+import { useDM2FeatureToggles } from "@/data/unleash/unleash_hooks";
+import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
 
 interface DialogmoteSideProps {
   title: string;
@@ -35,6 +38,8 @@ export const DialogmoteSideContainer = ({
     dialogmoter,
     moterHentet,
   } = useAppSelector((state) => state.dialogmote);
+  const { isDm2FysiskBrevEnabled } = useDM2FeatureToggles();
+  const { brukerKanIkkeVarslesDigitalt } = useNavBrukerData();
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -52,6 +57,9 @@ export const DialogmoteSideContainer = ({
     <Side fnr={fnr} tittel={title} aktivtMenypunkt={MOETEPLANLEGGER}>
       <SideLaster henter={henter} hentingFeilet={!!henterMoteFeil}>
         <Sidetopp tittel={header} />
+        {isDm2FysiskBrevEnabled && brukerKanIkkeVarslesDigitalt && (
+          <BrukerKanIkkeVarslesPapirpostAdvarsel />
+        )}
         {dialogmote ? (
           children(dialogmote)
         ) : (

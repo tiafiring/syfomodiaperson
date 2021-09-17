@@ -6,8 +6,8 @@ import { DialogmotePanel } from "../DialogmotePanel";
 import { tilDatoMedUkedagOgManedNavn } from "@/utils/datoUtils";
 import { useAktivtMoteplanleggerMote } from "@/data/mote/moter_hooks";
 import { FlexRow } from "../../../Layout";
-import { useHistory } from "react-router";
 import { TrackedKnapp } from "../../../buttons/TrackedKnapp";
+import { Link } from "react-router-dom";
 
 const texts = {
   nyttMote: "Nytt dialogmøte",
@@ -33,7 +33,6 @@ const resolveUndertittelForMoteStatus = (mote: MoteDTO) => {
 
 export const Moteplanleggeren = (): ReactElement => {
   const aktivtMote = useAktivtMoteplanleggerMote();
-  const history = useHistory();
 
   return aktivtMote ? (
     <DialogmotePanel
@@ -54,15 +53,14 @@ export const Moteplanleggeren = (): ReactElement => {
       subtitle={texts.ingenMoterPlanlagt}
     >
       <FlexRow>
-        <TrackedKnapp
-          data-cy="nyttMoteplanleggerMote"
-          context={texts.planleggNyttMote}
-          onClick={() => {
-            history.push(`/sykefravaer/mote`);
-          }}
-        >
-          {texts.nyttMote}
-        </TrackedKnapp>
+        <Link to="/sykefravaer/mote">
+          <TrackedKnapp
+            data-cy="nyttMoteplanleggerMote"
+            context={texts.planleggNyttMote}
+          >
+            {texts.nyttMote}
+          </TrackedKnapp>
+        </Link>
       </FlexRow>
     </DialogmotePanel>
   );

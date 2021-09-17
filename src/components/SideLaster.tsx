@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, ReactNode } from "react";
 import AppSpinner from "./AppSpinner";
 import Feilmelding from "./Feilmelding";
 import { hentBegrunnelseTekst } from "@/utils/tilgangUtils";
@@ -7,7 +7,7 @@ import { useTilgang } from "@/hooks/useTilgang";
 interface SideLasterProps {
   henter: boolean;
   hentingFeilet: boolean;
-  children: ReactElement[] | ReactElement;
+  children: ReactNode;
 }
 
 const texts = {

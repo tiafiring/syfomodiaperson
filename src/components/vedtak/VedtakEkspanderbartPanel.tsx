@@ -66,7 +66,7 @@ const VedtakEkspanderbartPanel = (
   const dispatch = useDispatch();
   const virksomhetState = useSelector((state: any) => state.virksomhet);
   const [arbeidsgiver, setArbeidsgiver] = useState<string>("");
-  const orgnr = vedtakPerArbeidsgiver[0].vedtak.organisasjonsnummer;
+  const orgnr = vedtakPerArbeidsgiver[0].vedtak.organisasjonsnummer || "";
 
   useEffect(() => {
     if (orgnr) {
@@ -108,10 +108,12 @@ const VedtakEkspanderbartPanel = (
                     <Undertekst>
                       {`Utbetaling: ${restdatoTildato(
                         v.opprettet
-                      )} · Restdager: ${v.vedtak.gjenståendeSykedager}`}
+                      )} · Restdager: ${
+                        v.vedtak.utbetaling.gjenståendeSykedager
+                      }`}
                     </Undertekst>
                   </FlexColInfo>
-                  {v.annullert && (
+                  {(v.annullert || v.revurdert) && (
                     <FlexColLabel>
                       <VedtakAnnullertLabel />
                     </FlexColLabel>

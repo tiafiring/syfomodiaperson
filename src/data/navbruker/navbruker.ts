@@ -15,7 +15,6 @@ const initialState = {
     navn: "",
     kontaktinfo: {
       fnr: "",
-      skalHaVarsel: false,
     },
     arbeidssituasjon: "",
   },

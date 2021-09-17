@@ -8,6 +8,9 @@ import styled from "styled-components";
 import { useLedere } from "@/hooks/useLedere";
 import { useValgtPersonident } from "@/hooks/useValgtBruker";
 import { AlertstripeFullbredde } from "../../AlertstripeFullbredde";
+import { BrukerKanIkkeVarslesPapirpostAdvarsel } from "@/components/dialogmote/BrukerKanIkkeVarslesPapirpostAdvarsel";
+import { useDM2FeatureToggles } from "@/data/unleash/unleash_hooks";
+import { useNavBrukerData } from "@/data/navbruker/navbruker_hooks";
 
 const texts = {
   title: "Innkalling til dialogmøte",
@@ -22,6 +25,8 @@ const DialogmoteInnkallingWarningAlert = styled(AlertstripeFullbredde)`
 const DialogmoteInnkallingContainer = (): ReactElement => {
   const fnr = useValgtPersonident();
   const { hentingLedereForsokt, hentingLedereFeilet } = useLedere();
+  const { isDm2FysiskBrevEnabled } = useDM2FeatureToggles();
+  const { brukerKanIkkeVarslesDigitalt } = useNavBrukerData();
 
   return (
     <Side fnr={fnr} tittel={texts.title} aktivtMenypunkt={MOETEPLANLEGGER}>
@@ -33,6 +38,9 @@ const DialogmoteInnkallingContainer = (): ReactElement => {
         <DialogmoteInnkallingWarningAlert type="advarsel">
           {texts.alert}
         </DialogmoteInnkallingWarningAlert>
+        {isDm2FysiskBrevEnabled && brukerKanIkkeVarslesDigitalt && (
+          <BrukerKanIkkeVarslesPapirpostAdvarsel />
+        )}
         <DialogmoteInnkallingSkjema pageTitle={texts.title} />
       </SideLaster>
     </Side>
