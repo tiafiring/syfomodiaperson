@@ -6,7 +6,7 @@ import {
   sorterMotebehovDataEtterDato,
 } from "@/utils/motebehovUtils";
 import { tilLesbarDatoMedArUtenManedNavn } from "@/utils/datoUtils";
-import { MotebehovDTO } from "@/data/motebehov/types/motebehovTypes";
+import { MotebehovVeilederDTO } from "@/data/motebehov/types/motebehovTypes";
 import { Brukerinfo } from "@/data/navbruker/types/Brukerinfo";
 import {
   MotebehovIkkeSvartImage,
@@ -18,14 +18,8 @@ import { InfoRow } from "../InfoRow";
 import { PaddingSize } from "../Layout";
 import { ledereUtenMotebehovsvar } from "@/utils/ledereUtils";
 
-export const lederMedGittAktorId = (aktorId: string, ledere: Leder[]) => {
-  return ledere.find((leder) => {
-    return leder.aktoerId === aktorId;
-  });
-};
-
-export const arbeidsgiverNavnEllerTomStreng = (leder?: Leder) => {
-  return leder && leder.navn ? `${leder.navn}` : "";
+export const arbeidsgiverNavnEllerTomStreng = (lederNavn?: string) => {
+  return lederNavn ? `${lederNavn}` : "";
 };
 
 export const setSvarIkon = (deltakerOnskerMote?: boolean): string => {
@@ -70,7 +64,7 @@ const ikonAlternativTekst = (deltakerOnskerMote?: boolean) => {
   }
 };
 
-export const bareArbeidsgiversMotebehov = (motebehov: MotebehovDTO) => {
+export const bareArbeidsgiversMotebehov = (motebehov: MotebehovVeilederDTO) => {
   return motebehov.opprettetAv !== motebehov.aktorId;
 };
 
@@ -95,7 +89,7 @@ const composePersonSvarText = (
 interface MotebehovKvitteringInnholdProps {
   deltakerOnskerMote?: boolean;
   ikonAltTekst: string;
-  motebehov?: MotebehovDTO;
+  motebehov?: MotebehovVeilederDTO;
   tekst: ReactElement;
   topPadding?: PaddingSize;
 }
@@ -119,7 +113,7 @@ export const MotebehovKvitteringInnhold = ({
 };
 
 interface MotebehovKvitteringInnholdArbeidstakerProps {
-  arbeidstakersMotebehov?: MotebehovDTO;
+  arbeidstakersMotebehov?: MotebehovVeilederDTO;
   sykmeldt?: Brukerinfo;
 }
 
@@ -152,18 +146,17 @@ export const MotebehovKvitteringInnholdArbeidstaker = ({
 };
 
 interface MotebehovKvitteringInnholdArbeidsgiverProps {
-  motebehovListeMedBareArbeidsgiversMotebehov: MotebehovDTO[];
-  ledereData: Leder[];
+  motebehovListeMedBareArbeidsgiversMotebehov: MotebehovVeilederDTO[];
 }
 
 export const composeArbeidsgiverSvarText = (
-  leder?: Leder,
+  lederNavn?: string,
   harMotebehov?: boolean,
   svarOpprettetDato?: Date
 ) => {
   return composePersonSvarText(
     "Nærmeste leder: ",
-    arbeidsgiverNavnEllerTomStreng(leder),
+    arbeidsgiverNavnEllerTomStreng(lederNavn),
     harMotebehov,
     svarOpprettetDato
   );
@@ -171,17 +164,12 @@ export const composeArbeidsgiverSvarText = (
 
 export const MotebehovKvitteringInnholdArbeidsgiver = ({
   motebehovListeMedBareArbeidsgiversMotebehov,
-  ledereData,
 }: MotebehovKvitteringInnholdArbeidsgiverProps) => (
   <>
     {motebehovListeMedBareArbeidsgiversMotebehov.map((motebehov, index) => {
       const arbeidsgiverOnskerMote = motebehov.motebehovSvar?.harMotebehov;
-      const riktigLeder = lederMedGittAktorId(
-        motebehov.opprettetAv,
-        ledereData
-      );
       const ikonAltTekst = `Arbeidsgiver ${arbeidsgiverNavnEllerTomStreng(
-        riktigLeder
+        motebehov.opprettetAvNavn
       )} ${ikonAlternativTekst(arbeidsgiverOnskerMote)}`;
 
       return (
@@ -191,7 +179,7 @@ export const MotebehovKvitteringInnholdArbeidsgiver = ({
           ikonAltTekst={ikonAltTekst}
           motebehov={motebehov}
           tekst={composeArbeidsgiverSvarText(
-            riktigLeder,
+            motebehov.opprettetAvNavn,
             arbeidsgiverOnskerMote,
             motebehov.opprettetDato
           )}
@@ -212,13 +200,13 @@ export const MotebehovKvitteringInnholdArbeidsgiverUtenMotebehov = ({
   <>
     {ledereUtenInnsendtMotebehov.map((leder: Leder, index: number) => {
       const ikonAltTekst = `Arbeidsgiver ${arbeidsgiverNavnEllerTomStreng(
-        leder
+        leder.navn
       )} ${ikonAlternativTekst(undefined)}`;
       return (
         <MotebehovKvitteringInnhold
           key={index}
           ikonAltTekst={ikonAltTekst}
-          tekst={composeArbeidsgiverSvarText(leder)}
+          tekst={composeArbeidsgiverSvarText(leder.navn)}
           topPadding={PaddingSize.SM}
         />
       );
@@ -227,7 +215,7 @@ export const MotebehovKvitteringInnholdArbeidsgiverUtenMotebehov = ({
 );
 
 interface MotebehovKvitteringProps {
-  motebehovData: MotebehovDTO[];
+  motebehovData: MotebehovVeilederDTO[];
   ledereData: Leder[];
   oppfolgingstilfelleperioder: OppfolgingstilfelleperioderMapState;
   sykmeldt?: Brukerinfo;
@@ -262,7 +250,6 @@ const MotebehovKvittering = ({
         motebehovListeMedBareArbeidsgiversMotebehov={aktiveMotebehovSvar.filter(
           bareArbeidsgiversMotebehov
         )}
-        ledereData={ledereData}
       />
       <MotebehovKvitteringInnholdArbeidsgiverUtenMotebehov
         ledereUtenInnsendtMotebehov={ledereUtenInnsendtMotebehov}

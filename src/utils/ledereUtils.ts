@@ -7,12 +7,12 @@ import {
 } from "./motebehovUtils";
 import { activeSykmeldingerSentToArbeidsgiver } from "./sykmeldinger/sykmeldingUtils";
 import { OppfolgingstilfelleperioderMapState } from "@/data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
-import { MotebehovDTO } from "@/data/motebehov/types/motebehovTypes";
+import { MotebehovVeilederDTO } from "@/data/motebehov/types/motebehovTypes";
 import { SykmeldingOldFormat } from "@/data/sykmelding/types/SykmeldingOldFormat";
 
 export const ledereIVirksomheterMedMotebehovsvarFraArbeidstaker = (
   ledereData: Leder[],
-  motebehovData: MotebehovDTO[]
+  motebehovData: MotebehovVeilederDTO[]
 ): Leder[] => {
   return ledereData.filter((leder: Leder) =>
     motebehovData.some(
@@ -25,7 +25,7 @@ export const ledereIVirksomheterMedMotebehovsvarFraArbeidstaker = (
 
 export const ledereIVirksomheterDerIngenLederHarSvartPaMotebehov = (
   ledereListe: Leder[],
-  motebehovData: MotebehovDTO[]
+  motebehovData: MotebehovVeilederDTO[]
 ): Leder[] => {
   return ledereListe.filter(
     (leder) =>
@@ -79,7 +79,7 @@ export const newestLederForEachVirksomhet = (ledere: Leder[]): Leder[] => {
 
 export const ledereUtenMotebehovsvar = (
   ledereData: Leder[],
-  motebehovData: MotebehovDTO[],
+  motebehovData: MotebehovVeilederDTO[],
   oppfolgingstilfelleperioder: OppfolgingstilfelleperioderMapState
 ): Leder[] => {
   const arbeidstakerHarSvartPaaMotebehov =

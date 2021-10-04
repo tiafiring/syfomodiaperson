@@ -5,6 +5,7 @@ const motebehovArbeidstakerUbehandletMock = {
   opprettetDato: "2021-12-08T13:53:57.047+01:00",
   aktorId: "1",
   opprettetAv: "1",
+  opprettetAvNavn: "Sygve Sykmeldt",
   virksomhetsnummer: "110110110",
   motebehovSvar: {
     harMotebehov: true,
@@ -24,6 +25,7 @@ const motebehovArbeidstakerBehandletMock = {
   opprettetDato: "2019-01-08T13:53:57.047+01:00",
   aktorId: "1",
   opprettetAv: "1",
+  opprettetAvNavn: "Sygve Sykmeldt",
   virksomhetsnummer: "000999000",
   motebehovSvar: {
     harMotebehov: true,
@@ -43,6 +45,7 @@ const motebehovArbeidsgiverMock = {
   opprettetDato: "2021-12-08T13:53:57.047+01:00",
   aktorId: "1",
   opprettetAv: "1902690001009",
+  opprettetAvNavn: "Are Arbeidsgiver",
   virksomhetsnummer: "110110110",
   motebehovSvar: {
     harMotebehov: false,

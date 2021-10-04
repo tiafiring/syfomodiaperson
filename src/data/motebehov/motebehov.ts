@@ -10,10 +10,13 @@ import {
   BEHANDLE_MOTEBEHOV_BEHANDLET,
   BehandleMotebehovBehandletAction,
 } from "./behandlemotebehov_actions";
-import { MotebehovDTO } from "./types/motebehovTypes";
+import { MotebehovVeilederDTO } from "./types/motebehovTypes";
 import { Tilgang } from "../tilgang/tilgang";
 
-export const sorterEtterDato = (a: MotebehovDTO, b: MotebehovDTO): number => {
+export const sorterEtterDato = (
+  a: MotebehovVeilederDTO,
+  b: MotebehovVeilederDTO
+): number => {
   return b.opprettetDato === a.opprettetDato
     ? 0
     : b.opprettetDato > a.opprettetDato
@@ -26,7 +29,7 @@ export interface MotebehovState {
   hentet: boolean;
   hentingFeilet: boolean;
   hentingForsokt: boolean;
-  data: MotebehovDTO[];
+  data: MotebehovVeilederDTO[];
   tilgang?: Tilgang;
 }
 

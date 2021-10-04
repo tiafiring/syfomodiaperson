@@ -1,4 +1,4 @@
-import { MotebehovDTO } from "./types/motebehovTypes";
+import { MotebehovVeilederDTO } from "./types/motebehovTypes";
 
 export const HENT_MOTEBEHOV_FORESPURT = "HENT_MOTEBEHOV_FORESPURT";
 export const HENT_MOTEBEHOV_HENTER = "HENT_MOTEBEHOV_HENTER";
@@ -17,7 +17,7 @@ export interface HenterMotebehovAction {
 
 export interface MotebehovHentetAction {
   type: typeof HENT_MOTEBEHOV_HENTET;
-  data: MotebehovDTO[];
+  data: MotebehovVeilederDTO[];
 }
 
 export interface HentMotebehovFeiletAction {
@@ -46,7 +46,7 @@ export const henterMotebehov = (): HenterMotebehovAction => ({
 });
 
 export const motebehovHentet = (
-  data: MotebehovDTO[]
+  data: MotebehovVeilederDTO[]
 ): MotebehovHentetAction => ({
   type: HENT_MOTEBEHOV_HENTET,
   data,

@@ -1,11 +1,11 @@
 import { dagerMellomDatoer } from "./datoUtils";
 import { startDateFromLatestActiveTilfelle } from "./periodeUtils";
-import { MotebehovDTO } from "@/data/motebehov/types/motebehovTypes";
+import { MotebehovVeilederDTO } from "@/data/motebehov/types/motebehovTypes";
 import { OppfolgingstilfelleperioderMapState } from "@/data/oppfolgingstilfelle/oppfolgingstilfelleperioder";
 
 export const sorterMotebehovDataEtterDato = (
-  a: MotebehovDTO,
-  b: MotebehovDTO
+  a: MotebehovVeilederDTO,
+  b: MotebehovVeilederDTO
 ): number => {
   return b.opprettetDato === a.opprettetDato
     ? 0
@@ -15,8 +15,8 @@ export const sorterMotebehovDataEtterDato = (
 };
 
 export const finnNyesteMotebehovsvarFraHverDeltaker = (
-  sortertMotebehovListe: MotebehovDTO[]
-): MotebehovDTO[] => {
+  sortertMotebehovListe: MotebehovVeilederDTO[]
+): MotebehovVeilederDTO[] => {
   return sortertMotebehovListe.filter((motebehov1, index) => {
     return (
       sortertMotebehovListe.findIndex((motebehov2) => {
@@ -27,8 +27,8 @@ export const finnNyesteMotebehovsvarFraHverDeltaker = (
 };
 
 export const finnArbeidstakerMotebehovSvar = (
-  motebehovListe: MotebehovDTO[]
-): MotebehovDTO | undefined => {
+  motebehovListe: MotebehovVeilederDTO[]
+): MotebehovVeilederDTO | undefined => {
   return motebehovListe.find(
     (motebehov) => motebehov.opprettetAv === motebehov.aktorId
   );
@@ -70,14 +70,14 @@ export const erOppfolgingstilfelleSluttDatoPassert = (
 };
 
 export const harArbeidstakerSvartPaaMotebehov = (
-  motebehovData: MotebehovDTO[]
+  motebehovData: MotebehovVeilederDTO[]
 ): boolean => {
   return !!finnArbeidstakerMotebehovSvar(motebehovData);
 };
 
 export const motebehovUbehandlet = (
-  motebehovListe: MotebehovDTO[]
-): MotebehovDTO[] => {
+  motebehovListe: MotebehovVeilederDTO[]
+): MotebehovVeilederDTO[] => {
   return motebehovListe.filter(
     (motebehov) =>
       motebehov.motebehovSvar &&
@@ -87,39 +87,41 @@ export const motebehovUbehandlet = (
 };
 
 const erAlleMotebehovSvarBehandlet = (
-  motebehovListe: MotebehovDTO[]
+  motebehovListe: MotebehovVeilederDTO[]
 ): boolean => {
   return motebehovUbehandlet(motebehovListe).length === 0;
 };
 
 export const erMotebehovBehandlet = (
-  motebehovListe: MotebehovDTO[]
+  motebehovListe: MotebehovVeilederDTO[]
 ): boolean => {
   return erAlleMotebehovSvarBehandlet(motebehovListe);
 };
 
 export const harUbehandletMotebehov = (
-  motebehovListe: MotebehovDTO[]
+  motebehovListe: MotebehovVeilederDTO[]
 ): boolean => {
   return !erAlleMotebehovSvarBehandlet(motebehovListe);
 };
 
 export const hentSistBehandletMotebehov = (
-  motebehovListe: MotebehovDTO[]
-): MotebehovDTO | undefined =>
-  [...motebehovListe].sort((mb1: MotebehovDTO, mb2: MotebehovDTO) => {
-    if (mb2.behandletTidspunkt === mb1.behandletTidspunkt) {
-      return 0;
+  motebehovListe: MotebehovVeilederDTO[]
+): MotebehovVeilederDTO | undefined =>
+  [...motebehovListe].sort(
+    (mb1: MotebehovVeilederDTO, mb2: MotebehovVeilederDTO) => {
+      if (mb2.behandletTidspunkt === mb1.behandletTidspunkt) {
+        return 0;
+      }
+      if ((mb2.behandletTidspunkt ?? "") > (mb1.behandletTidspunkt ?? "")) {
+        return 1;
+      }
+      return -1;
     }
-    if ((mb2.behandletTidspunkt ?? "") > (mb1.behandletTidspunkt ?? "")) {
-      return 1;
-    }
-    return -1;
-  })[0];
+  )[0];
 
 export const motebehovlisteMedKunJaSvar = (
-  motebehovliste: MotebehovDTO[]
-): MotebehovDTO[] => {
+  motebehovliste: MotebehovVeilederDTO[]
+): MotebehovVeilederDTO[] => {
   return motebehovliste.filter(
     (motebehov) =>
       motebehov.motebehovSvar && motebehov.motebehovSvar.harMotebehov
@@ -127,9 +129,9 @@ export const motebehovlisteMedKunJaSvar = (
 };
 
 export const motebehovFromLatestActiveTilfelle = (
-  sortertMotebehovListe: MotebehovDTO[],
+  sortertMotebehovListe: MotebehovVeilederDTO[],
   oppfolgingstilfelleperioder: OppfolgingstilfelleperioderMapState
-): MotebehovDTO[] => {
+): MotebehovVeilederDTO[] => {
   const startDateNewestActiveTilfelle = startDateFromLatestActiveTilfelle(
     oppfolgingstilfelleperioder
   );

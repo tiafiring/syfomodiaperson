@@ -10,7 +10,7 @@ import {
 } from "@/utils/motebehovUtils";
 import { toDatePrettyPrint } from "@/utils/datoUtils";
 import { behandleMotebehov } from "@/data/motebehov/behandlemotebehov_actions";
-import { MotebehovDTO } from "@/data/motebehov/types/motebehovTypes";
+import { MotebehovVeilederDTO } from "@/data/motebehov/types/motebehovTypes";
 import { useValgtPersonident } from "@/hooks/useValgtBruker";
 import { useTrackOnClick } from "@/data/logging/loggingHooks";
 
@@ -20,7 +20,7 @@ const texts = {
 
 const behandleMotebehovKnappLabel = (
   erBehandlet: boolean,
-  sistBehandletMotebehov?: MotebehovDTO
+  sistBehandletMotebehov?: MotebehovVeilederDTO
 ): string => {
   return erBehandlet
     ? `Ferdigbehandlet av ${
@@ -30,7 +30,7 @@ const behandleMotebehovKnappLabel = (
 };
 
 interface BehandleMotebehovKnappProps {
-  motebehovData: MotebehovDTO[];
+  motebehovData: MotebehovVeilederDTO[];
   veilederinfo?: VeilederinfoDTO;
 }
 

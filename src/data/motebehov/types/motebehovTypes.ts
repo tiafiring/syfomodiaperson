@@ -1,16 +1,17 @@
-export interface MotebehovSvar {
+export interface MotebehovSvarVeilederDTO {
   harMotebehov: boolean;
   forklaring?: string;
 }
 
-export interface MotebehovDTO {
+export interface MotebehovVeilederDTO {
   id: string;
   opprettetDato: Date;
   aktorId: string;
   opprettetAv: string;
+  opprettetAvNavn?: string;
   arbeidstakerFnr: string;
   virksomhetsnummer: string;
-  motebehovSvar?: MotebehovSvar;
+  motebehovSvar?: MotebehovSvarVeilederDTO;
   tildeltEnhet?: string;
   behandletTidspunkt?: string | Date;
   behandletVeilederIdent?: string;

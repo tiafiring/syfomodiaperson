@@ -5,7 +5,7 @@ import { HentMotebehovAction } from "./motebehov_actions";
 import * as behandleActions from "./behandlemotebehov_actions";
 import { BehandleMotebehovAction } from "./behandlemotebehov_actions";
 import { RootState } from "../rootState";
-import { MotebehovDTO } from "./types/motebehovTypes";
+import { MotebehovVeilederDTO } from "./types/motebehovTypes";
 import { SYFOMOTEBEHOV_ROOT } from "@/apiConstants";
 
 export const skalHenteMotebehov = (state: RootState) => {
@@ -21,7 +21,7 @@ export function* hentMotebehovHvisIkkeHentet(action: HentMotebehovAction) {
 
     const path = `${SYFOMOTEBEHOV_ROOT}/motebehov?fnr=${fnr}`;
     try {
-      const data: MotebehovDTO[] = yield call(get, path);
+      const data: MotebehovVeilederDTO[] = yield call(get, path);
       yield put(actions.motebehovHentet(data));
     } catch (e) {
       //TODO: Add error to reducer and errorboundary to components
