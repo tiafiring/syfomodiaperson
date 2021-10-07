@@ -56,9 +56,6 @@ jobs:
         with:
           name: cypress-screenshots
           path: cypress/screenshots
-      - name: Security audit
-        run: |
-          npm run sec-audit
       - name: Build
         run: |
           npm run build
