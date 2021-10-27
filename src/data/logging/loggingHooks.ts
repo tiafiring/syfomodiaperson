@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../rootState";
 import { trackEvent, UserProperties } from "@/amplitude/amplitude";
+import { useBehandlendeEnhetQuery } from "@/data/behandlendeenhet/behandlendeEnhetQueryHooks";
 
 export const texts = {
   click: "Klikker på:",
@@ -16,9 +17,8 @@ export interface loggingMetadata {
 }
 
 export const useHasLoadedMetaData = (): boolean => {
-  const harHentetBehandlendeEnhet = useSelector(
-    (state: RootState) => !!state.behandlendeEnhet.data.enhetId
-  );
+  const { data } = useBehandlendeEnhetQuery();
+  const harHentetBehandlendeEnhet = !!data?.enhetId;
   const harHentetValgtEnhet = useSelector(
     (state: RootState) => !!state.enhet.valgtEnhet
   );
@@ -26,15 +26,13 @@ export const useHasLoadedMetaData = (): boolean => {
 };
 
 export const useLoggingMetaData = (): loggingMetadata => {
-  const behandlendeEnhet = useSelector(
-    (state: RootState) => state.behandlendeEnhet.data
-  );
+  const { data: behandlendeEnhet } = useBehandlendeEnhetQuery();
 
   return {
     team: "iSyfo",
     app: "Syfomodiaperson",
-    behandlendeEnhetId: behandlendeEnhet.enhetId,
-    behandlendeEnhetNavn: behandlendeEnhet.navn,
+    behandlendeEnhetId: behandlendeEnhet?.enhetId || "",
+    behandlendeEnhetNavn: behandlendeEnhet?.navn || "",
   };
 };
 
