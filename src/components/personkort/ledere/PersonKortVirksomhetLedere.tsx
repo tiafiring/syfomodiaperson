@@ -18,10 +18,10 @@ const texts = {
   startDate: "Meldt inn",
   active: "Nåværende",
   deactivated: "Deaktivert",
-  deactivatedArbeidstaker: "Deaktivert av arbeidstaker",
-  deactivatedLeder: "Deaktivert av leder",
-  deactivatedArbeidsforhold: "Deaktivert ved utdatert arbeidsforhold",
-  deactivatedNyLeder: "Deaktivert ved ny innmeldt leder",
+  deactivatedArbeidstaker: "Deaktivert av arbeidstakeren",
+  deactivatedLeder: "Deaktivert av lederen",
+  deactivatedArbeidsforhold: "Arbeidsforholdet er avsluttet",
+  deactivatedNyLeder: "Ny leder er meldt inn",
 };
 
 const getNarmesteLederRelasjonStatusText = (
