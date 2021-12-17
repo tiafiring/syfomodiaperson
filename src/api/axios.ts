@@ -17,12 +17,12 @@ export const defaultRequestHeaders = (personIdent?: string): HeadersInit => {
   const headers = {
     "Content-Type": "application/json",
     [NAV_CONSUMER_ID_HEADER]: NAV_CONSUMER_ID,
+    [NAV_CALL_ID_HEADER]: `${NAV_CONSUMER_ID}-${generateUUID()}`,
   };
 
   if (personIdent) {
     headers[NAV_PERSONIDENT_HEADER] = personIdent;
   }
-  headers[NAV_CALL_ID_HEADER] = `${NAV_CONSUMER_ID}-${generateUUID()}`;
   return headers;
 };
 
