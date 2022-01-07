@@ -1,33 +1,32 @@
 import React from "react";
 import { expect } from "chai";
-import { mount } from "enzyme";
 import { SykmeldingUtdragContainer } from "@/components/speiling/sykepengsoknader/SykmeldingUtdragContainer";
-import mockSykepengesoknader from "../mockdata/mockSykepengesoknader";
-import mockSykmeldinger from "../mockdata/sykmeldinger/mockSykmeldinger";
-import SykmeldingUtdrag from "../../src/components/speiling/sykepengsoknader/soknad-felles/SykmeldingUtdrag";
+import {
+  mockSykepengeSoknad,
+  mockSykmeldinger,
+} from "../mockdata/sykmeldinger/mockSykmeldinger";
 import { createStore } from "redux";
 import { rootReducer } from "@/data/rootState";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { newSMFormat2OldFormat } from "@/utils/sykmeldinger/sykmeldingParser";
+import { render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-const ARBEIDSTAKERSOKNAD_ID = "b9732cc7-6101-446e-a1ef-ec25a425b4fb";
 const realState = createStore(rootReducer).getState();
 const store = configureStore([]);
 const fnr = "12345000000";
-const soknad = mockSykepengesoknader.find(
-  (s) => s.id === ARBEIDSTAKERSOKNAD_ID
-);
+
 const sykmelding = mockSykmeldinger.find((s) => {
-  return s.id === soknad.sykmeldingId;
+  return s.id === mockSykepengeSoknad.sykmeldingId;
 });
 
 describe("SykmeldingUtdrag", () => {
   it("Skal hente sykmeldinger", () => {
     const mockStore = store({ ...realState });
-    mount(
+    render(
       <Provider store={mockStore}>
-        <SykmeldingUtdragContainer fnr={fnr} soknad={soknad} />
+        <SykmeldingUtdragContainer fnr={fnr} soknad={mockSykepengeSoknad} />
       </Provider>
     );
     const hentSykmeldingerAction = {
@@ -45,13 +44,15 @@ describe("SykmeldingUtdrag", () => {
       ...realState,
       sykmeldinger: { data: sykmeldingerData },
     });
-    const wrapper = mount(
+    const wrapper = render(
       <Provider store={mockStore}>
-        <SykmeldingUtdragContainer fnr={fnr} soknad={soknad} />
+        <SykmeldingUtdragContainer fnr={fnr} soknad={mockSykepengeSoknad} />
       </Provider>
     );
-    expect(wrapper.find(SykmeldingUtdrag).prop("sykmelding").id).to.equal(
-      sykmelding.id
+    userEvent.click(wrapper.getByRole("button"));
+    expect(sykmelding?.sykmeldingStatus?.arbeidsgiver?.orgNavn).to.equal(
+      "PONTYPANDY FIRE SERVICE"
     );
+    expect(wrapper.getByText("PONTYPANDY FIRE SERVICE")).to.exist;
   });
 });
