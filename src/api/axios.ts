@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosRequestHeaders } from "axios";
 import {
   accessDeniedError,
   ApiErrorException,
@@ -13,7 +13,9 @@ export const NAV_CONSUMER_ID_HEADER = "Nav-Consumer-Id";
 export const NAV_CONSUMER_ID = "syfomodiaperson";
 export const NAV_PERSONIDENT_HEADER = "nav-personident";
 
-export const defaultRequestHeaders = (personIdent?: string): HeadersInit => {
+export const defaultRequestHeaders = (
+  personIdent?: string
+): AxiosRequestHeaders => {
   const headers = {
     "Content-Type": "application/json",
     [NAV_CONSUMER_ID_HEADER]: NAV_CONSUMER_ID,
