@@ -25,7 +25,7 @@ export interface MoteSvarDTO {
 export interface MoteDeltakerDTO {
   navn: string;
   orgnummer: string;
-  type: MoteDeltakerType;
+  type: MotedeltakerType;
   svar: MoteSvarDTO[];
   svartidspunkt: Date;
 }
@@ -47,7 +47,7 @@ export interface MoteDTO {
   trengerBehandling: boolean;
 }
 
-enum MoteDeltakerType {
+export enum MotedeltakerType {
   BRUKER = "Bruker",
   ARBEIDSGIVER = "arbeidsgiver",
   NAV_VEILEDER = "NAV-veileder",
