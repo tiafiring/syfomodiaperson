@@ -40,8 +40,6 @@ export const Sykmeldingsgrad = ({
     sisteOppfolgingstilfelle
   );
 
-  console.log("sisteOppfolgingstilfelle", sisteOppfolgingstilfelle);
-
   const DAYS_IN_GRAPH = 55 * 7;
   const sykmeldingsgradPerDay = new Int32Array(DAYS_IN_GRAPH);
 
