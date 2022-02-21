@@ -285,7 +285,7 @@ describe("ReferatTest", () => {
       arbeidstakerOppgave: moteTekster.arbeidstakersOppgave,
       behandlerOppgave: moteTekster.behandlersOppgave,
       veilederOppgave: moteTekster.veiledersOppgave,
-      document: expectedReferatDocument,
+      document: expectedReferatDocument(),
       andreDeltakere: [
         { funksjon: annenDeltakerFunksjon, navn: annenDeltakerNavn },
       ],
@@ -321,7 +321,7 @@ describe("ReferatTest", () => {
         name: referatSkjemaTexts.forhandsvisningTitle,
       })
     ).to.exist;
-    expectedReferatDocument
+    expectedReferatDocument()
       .flatMap((documentComponent) => documentComponent.texts)
       .forEach((text) => {
         expect(within(forhandsvisningReferat).getByText(text)).to.exist;

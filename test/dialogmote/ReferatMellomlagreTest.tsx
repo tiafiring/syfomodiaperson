@@ -104,7 +104,7 @@ describe("ReferatMellomlagreTest", () => {
       arbeidstakerOppgave: moteTekster.arbeidstakersOppgave,
       behandlerOppgave: moteTekster.behandlersOppgave,
       veilederOppgave: moteTekster.veiledersOppgave,
-      document: expectedReferatDocument,
+      document: expectedReferatDocument(),
       andreDeltakere: [
         { funksjon: annenDeltakerFunksjon, navn: annenDeltakerNavn },
       ],
