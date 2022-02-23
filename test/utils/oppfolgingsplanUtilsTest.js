@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import { leggTilDagerPaDato } from "../../mock/util/dateUtil";
 import { lpsPlanerWithActiveTilfelle } from "@/utils/oppfolgingsplanUtils";
-import { customOppfolgingstilfelleperioder } from "../mockdata/mockOppfolgingstilfelleperioder";
 import {
   ARBEIDSTAKER_DEFAULT,
   VIRKSOMHET_PONTYPANDY,
@@ -30,12 +29,7 @@ describe("oppfolgingsplanUtils", () => {
 
     it("should return an empty list if plan is before active tilfelle", () => {
       const tilfelleFom = leggTilDagerPaDato(today, -1);
-      const tilfelleTom = leggTilDagerPaDato(today, 1);
 
-      const activeTilfelle = customOppfolgingstilfelleperioder(
-        tilfelleFom,
-        tilfelleTom
-      );
       const lpsPlanWithOpprettetBeforeTilfelleFom = {
         ...defaultLpsplan,
         opprettet: leggTilDagerPaDato(tilfelleFom, -5),
@@ -43,19 +37,14 @@ describe("oppfolgingsplanUtils", () => {
 
       const planer = [lpsPlanWithOpprettetBeforeTilfelleFom];
 
-      const activePlaner = lpsPlanerWithActiveTilfelle(planer, activeTilfelle);
+      const activePlaner = lpsPlanerWithActiveTilfelle(planer, tilfelleFom);
 
       expect(activePlaner.length).to.be.equal(0);
     });
 
     it("should return an empty list if tilfelle is not active, even if plan was sent within that tilfelle", () => {
       const tilfelleFom = leggTilDagerPaDato(today, -10);
-      const tilfelleTom = leggTilDagerPaDato(today, -4);
 
-      const inactiveTilfelle = customOppfolgingstilfelleperioder(
-        tilfelleFom,
-        tilfelleTom
-      );
       const lpsPlanWithinOldTilfelle = {
         ...defaultLpsplan,
         opprettet: leggTilDagerPaDato(tilfelleFom, -5),
@@ -63,10 +52,7 @@ describe("oppfolgingsplanUtils", () => {
 
       const planer = [lpsPlanWithinOldTilfelle];
 
-      const activePlaner = lpsPlanerWithActiveTilfelle(
-        planer,
-        inactiveTilfelle
-      );
+      const activePlaner = lpsPlanerWithActiveTilfelle(planer, tilfelleFom);
 
       expect(activePlaner.length).to.be.equal(0);
     });

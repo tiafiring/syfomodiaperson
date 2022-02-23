@@ -85,19 +85,3 @@ export const oppfolgingstilfelleperioderMoreThanOneTilfelleInactive = {
     data: [olderConnectedPeriode],
   },
 };
-
-export const customOppfolgingstilfelleperioder = (fom, tom) => {
-  return {
-    [VIRKSOMHET_PONTYPANDY.virksomhetsnummer]: {
-      data: [
-        {
-          orgnummer: VIRKSOMHET_PONTYPANDY.virksomhetsnummer,
-          fom: fom,
-          tom: tom,
-          grad: 100,
-          aktivitet: "aktivitet",
-        },
-      ],
-    },
-  };
-};
