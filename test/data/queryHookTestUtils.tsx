@@ -2,6 +2,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import React from "react";
 import { modiacontextQueryKeys } from "@/data/modiacontext/modiacontextQueryHooks";
 import { AKTIV_BRUKER_DEFAULT } from "../../mock/common/mockConstants";
+import { ValgtEnhetContext } from "@/context/ValgtEnhetContext";
+import { navEnhet } from "../dialogmote/testData";
 
 export const queryHookWrapper = (client: QueryClient) => {
   client.setQueryData(
@@ -9,7 +11,13 @@ export const queryHookWrapper = (client: QueryClient) => {
     () => AKTIV_BRUKER_DEFAULT
   );
   const wrapper = ({ children }) => (
-    <QueryClientProvider client={client}>{children}</QueryClientProvider>
+    <QueryClientProvider client={client}>
+      <ValgtEnhetContext.Provider
+        value={{ valgtEnhet: navEnhet.id, setValgtEnhet: () => void 0 }}
+      >
+        {children}
+      </ValgtEnhetContext.Provider>
+    </QueryClientProvider>
   );
 
   return wrapper;
