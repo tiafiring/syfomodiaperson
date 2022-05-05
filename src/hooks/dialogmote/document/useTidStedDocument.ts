@@ -16,7 +16,7 @@ import {
 } from "@/data/dialogmote/types/dialogmoteTypes";
 import { behandlerDeltakerTekst } from "@/utils/behandlerUtils";
 import { useDocumentComponents } from "@/hooks/dialogmote/document/useDocumentComponents";
-import { useFeatureToggles } from "@/data/unleash/unleashQueryHooks";
+import { useFeatureTogglesBehandler } from "@/data/unleash/unleashQueryHooks";
 import { ToggleNames } from "@/data/unleash/unleash_types";
 
 export interface ITidStedDocument {
@@ -36,10 +36,13 @@ export interface ITidStedDocument {
 export const useTidStedDocument = (
   dialogmote: DialogmoteDTO
 ): ITidStedDocument => {
-  const { isFeatureEnabled } = useFeatureToggles();
+  const { isFeatureEnabled } = useFeatureTogglesBehandler(
+    dialogmote?.behandler?.behandlerRef
+  );
   const visAlternativBehandlertekst = isFeatureEnabled(
     ToggleNames.behandlertekst
   );
+
   const { tid, arbeidsgiver, behandler } = dialogmote;
   const {
     getHilsen,
@@ -181,7 +184,7 @@ export const useTidStedDocument = (
     values: Partial<EndreTidStedSkjemaValues>
   ): DocumentComponentDto[] => {
     const documentComponents = [
-      createHeaderH1("Endret dialogmøte, svar ønskes"),
+      createHeaderH1("Endret dialogmøte, svar ønskes."),
       createParagraph(endreTidStedTexts.behandler.alternativ.intro),
       sendtDato,
       getIntroGjelder(),

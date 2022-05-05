@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Panel from "nav-frontend-paneler";
 import DialogmoteInnkallingVelgArbeidsgiver from "./DialogmoteInnkallingVelgArbeidsgiver";
 import DialogmoteTidOgSted from "../DialogmoteTidOgSted";
@@ -38,6 +38,8 @@ import { behandlerNavn } from "@/utils/behandlerUtils";
 import { useTrackOnClick } from "@/data/logging/loggingHooks";
 import { useSkjemaValuesToDto } from "@/hooks/dialogmote/useSkjemaValuesToDto";
 import { TidStedSkjemaValues } from "@/data/dialogmote/types/skjemaTypes";
+import { useFeatureTogglesBehandler } from "@/data/unleash/unleashQueryHooks";
+import { ToggleNames } from "@/data/unleash/unleash_types";
 
 interface DialogmoteInnkallingSkjemaTekster {
   fritekstArbeidsgiver: string;
@@ -119,12 +121,32 @@ const DialogmoteInnkallingSkjema = ({
 }: DialogmoteInnkallingSkjemaProps) => {
   const initialValues: Partial<DialogmoteInnkallingSkjemaValues> = {};
   const fnr = useValgtPersonident();
+  const [selectedBehandler, setSelectedBehandler] = useState<BehandlerDTO>();
   const {
     harIkkeUtbedretFeil,
     resetFeilUtbedret,
     updateFeilUtbedret,
   } = useFeilUtbedret();
-  const innkallingDocument = useInnkallingDocument();
+
+  const { isFeatureEnabled } = useFeatureTogglesBehandler(
+    selectedBehandler?.behandlerRef
+  );
+
+  const [
+    alternativBehandlerTekst,
+    setAlternativBehandlerTekst,
+  ] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (selectedBehandler?.behandlerRef) {
+      const visAlternativeBehandlertekst = isFeatureEnabled(
+        ToggleNames.behandlertekst
+      );
+      setAlternativBehandlerTekst(visAlternativeBehandlertekst);
+    }
+  }, [selectedBehandler, isFeatureEnabled]);
+
+  const innkallingDocument = useInnkallingDocument(alternativBehandlerTekst);
   const { toTidStedDto } = useSkjemaValuesToDto();
   const opprettInnkalling = useOpprettInnkallingDialogmote(fnr);
 
@@ -169,8 +191,6 @@ const DialogmoteInnkallingSkjema = ({
   };
   const trackOnClick = useTrackOnClick();
 
-  const [selectedBehandler, setSelectedBehandler] = useState<BehandlerDTO>();
-
   if (opprettInnkalling.isSuccess) {
     return <Navigate to={moteoversiktRoutePath} />;
   }
@@ -199,6 +219,7 @@ const DialogmoteInnkallingSkjema = ({
             <DialogmoteTidOgSted />
             <DialogmoteInnkallingTekster
               selectedBehandler={selectedBehandler}
+              alterativBehandlerTekst={alternativBehandlerTekst}
             />
             {opprettInnkalling.isError && (
               <SkjemaInnsendingFeil error={opprettInnkalling.error} />

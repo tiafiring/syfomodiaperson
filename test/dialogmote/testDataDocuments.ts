@@ -436,7 +436,7 @@ const expectedArbeidstakerEndringsdokument = (
 
 const expectedBehandlerEndringsdokument = (): DocumentComponentDto[] => [
   {
-    texts: ["Endret dialogmøte, svar ønskes"],
+    texts: ["Endret dialogmøte, svar ønskes."],
     type: DocumentComponentType.HEADER_H1,
   },
   {

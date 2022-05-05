@@ -17,9 +17,35 @@ export const useFeatureToggles = () => {
   const { data: veilederInfo } = useVeilederinfoQuery();
   const { valgtEnhet } = useValgtEnhet();
   const veilederIdent = veilederInfo?.ident || "";
-  const path = `${UNLEASH_ROOT}/toggles?valgtEnhet=${valgtEnhet}${
-    veilederIdent ? `&userId=${veilederIdent}` : ""
-  }`;
+  const path = `${UNLEASH_ROOT}/toggles?valgtEnhet=${valgtEnhet}&userId=${veilederIdent}`;
+
+  const fetchToggles = () =>
+    post<Toggles>(path, {
+      toggles: Object.values(ToggleNames),
+    });
+  const query = useQuery(
+    unleashQueryKeys.toggles(valgtEnhet, veilederIdent),
+    fetchToggles,
+    {
+      enabled: !!valgtEnhet,
+    }
+  );
+  const isFeatureEnabled = (toggle: ToggleNames): boolean => {
+    return query.data ? query.data[toggle] : false;
+  };
+
+  return {
+    ...query,
+    isFeatureEnabled,
+  };
+};
+
+export const useFeatureTogglesBehandler = (behandlerRef?: string) => {
+  const { data: veilederInfo } = useVeilederinfoQuery();
+  const { valgtEnhet } = useValgtEnhet();
+  const veilederIdent = veilederInfo?.ident || "";
+  const path = `${UNLEASH_ROOT}/toggles?valgtEnhet=${valgtEnhet}&userId=${behandlerRef}`;
+
   const fetchToggles = () =>
     post<Toggles>(path, {
       toggles: Object.values(ToggleNames),

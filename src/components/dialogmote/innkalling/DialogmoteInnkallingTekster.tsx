@@ -41,10 +41,12 @@ const ReservertAlert = styled(AlertstripeFullbredde)`
 
 interface DialogmoteInnkallingTeksterProps {
   selectedBehandler: BehandlerDTO | undefined;
+  alterativBehandlerTekst: boolean;
 }
 
 const DialogmoteInnkallingTekster = ({
   selectedBehandler,
+  alterativBehandlerTekst,
 }: DialogmoteInnkallingTeksterProps): ReactElement => {
   const { brukerKanIkkeVarslesDigitalt } = useNavBrukerData();
   const { values } = useFormState<DialogmoteInnkallingSkjemaValues>();
@@ -66,7 +68,7 @@ const DialogmoteInnkallingTekster = ({
     getInnkallingDocumentArbeidstaker,
     getInnkallingDocumentArbeidsgiver,
     getInnkallingDocumentBehandler,
-  } = useInnkallingDocument();
+  } = useInnkallingDocument(alterativBehandlerTekst);
 
   return (
     <DialogmoteInnkallingSkjemaSeksjon>

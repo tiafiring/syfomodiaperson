@@ -53,9 +53,9 @@ export const behandler: BehandlerDTO = {
 export const behandlerDeltaker: DialogmotedeltakerBehandlerDTO = {
   behandlerType: behandler.type,
   type: "BEHANDLER",
-  uuid: "456def",
+  uuid: "45",
   personIdent: "01038521470",
-  behandlerRef: "456def",
+  behandlerRef: "44",
   varselList: [],
   behandlerKontor: "Greendale Legekontor",
   behandlerNavn: "Dean Pelton",
