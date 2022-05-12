@@ -9,90 +9,99 @@ const texts = {
   fritekstBehandler: "Fritekst til behandler",
 };
 
-context("Innkalling dialogmøte", () => {
-  beforeEach(() => {
-    cy.stubEndepunkter(MoteState.INGEN_MOTER);
-    cy.visit("/sykefravaer/moteoversikt");
-    cy.OAuth2Login();
-  });
+describe(
+  "Innkalling dialogmøte",
+  {
+    retries: {
+      runMode: 3,
+    },
+  },
+  () => {
+    beforeEach(() => {
+      cy.stubEndepunkter(MoteState.INGEN_MOTER);
+      cy.visit("/sykefravaer/moteoversikt");
+      cy.OAuth2Login();
+    });
 
-  it("Går til nytt dialogmøte, fyller inn felter (ingen behandler), sjekker forhåndsvisning og sender inn", () => {
-    cy.dataCy(selectors.nyttDM2Mote).click();
+    it("Går til nytt dialogmøte, fyller inn felter (ingen behandler), sjekker forhåndsvisning og sender inn", () => {
+      cy.dataCy(selectors.nyttDM2Mote).click();
 
-    cy.url().should("include", "/sykefravaer/dialogmote");
+      cy.url().should("include", "/sykefravaer/dialogmote");
 
-    cy.get("[id=arbeidsgiver]").select(VIRKSOMHET_PONTYPANDY.virksomhetsnavn);
-    cy.get("[id=sted]").type("Videomøte");
+      cy.get("[id=arbeidsgiver]").select(VIRKSOMHET_PONTYPANDY.virksomhetsnavn);
+      cy.get("[id=sted]").type("Videomøte");
 
-    cy.get('[type="radio"]').first().check({ force: true });
-    const moteDato = tommorrowDateAsString();
-    cy.get("[id=dato]").clear().type(moteDato);
-    cy.get("[id=klokkeslett]").clear().type("10:00");
+      cy.get('[type="radio"]').first().check({ force: true });
+      const moteDato = tommorrowDateAsString();
+      cy.get("[id=dato]").clear().type(moteDato);
+      cy.get("[id=klokkeslett]").clear().type("10:00");
 
-    cy.dataCy(selectors.fritekstArbeidstakerTextArea).type(
-      texts.fritekstArbeidstaker
-    );
-    cy.dataCy(selectors.fritekstArbeidstakerKnapp).click();
-    cy.dataCy(selectors.forhandsvisningModal).contains(
-      texts.fritekstArbeidstaker
-    );
-    cy.contains("Lukk").click();
+      cy.dataCy(selectors.fritekstArbeidstakerTextArea).type(
+        texts.fritekstArbeidstaker
+      );
+      cy.dataCy(selectors.fritekstArbeidstakerKnapp).click();
+      cy.dataCy(selectors.forhandsvisningModal).contains(
+        texts.fritekstArbeidstaker
+      );
+      cy.contains("Lukk").click();
 
-    cy.dataCy(selectors.fritekstArbeidsgiverTextArea).type(
-      texts.fritekstArbeidsgiver
-    );
-    cy.dataCy(selectors.fritekstArbeidsgiverKnapp).click();
-    cy.dataCy(selectors.forhandsvisningModal).contains(
-      texts.fritekstArbeidsgiver
-    );
-    cy.dataCy(selectors.fritekstBehandlerKnapp).should("not.exist");
-    cy.contains("Lukk").click();
+      cy.dataCy(selectors.fritekstArbeidsgiverTextArea).type(
+        texts.fritekstArbeidsgiver
+      );
+      cy.dataCy(selectors.fritekstArbeidsgiverKnapp).click();
+      cy.dataCy(selectors.forhandsvisningModal).contains(
+        texts.fritekstArbeidsgiver
+      );
+      cy.dataCy(selectors.fritekstBehandlerKnapp).should("not.exist");
+      cy.contains("Lukk").click();
 
-    cy.contains("Send innkallingene").click();
+      cy.contains("Send innkallingene").click();
 
-    cy.url().should("include", "/sykefravaer/moteoversikt");
-  });
+      cy.url().should("include", "/sykefravaer/moteoversikt");
+    });
 
-  it("Går til nytt dialogmøte, fyller inn felter og velger behandler, sjekker forhåndsvisning og sender inn", () => {
-    cy.dataCy(selectors.nyttDM2Mote).click();
+    it("Går til nytt dialogmøte, fyller inn felter og velger behandler, sjekker forhåndsvisning og sender inn", () => {
+      cy.dataCy(selectors.nyttDM2Mote).click();
 
-    cy.url().should("include", "/sykefravaer/dialogmote");
+      cy.url().should("include", "/sykefravaer/dialogmote");
 
-    cy.get("[id=arbeidsgiver]").select(VIRKSOMHET_PONTYPANDY.virksomhetsnavn);
-    cy.get("[id=sted]").type("Videomøte");
+      cy.get("[id=arbeidsgiver]").select(VIRKSOMHET_PONTYPANDY.virksomhetsnavn);
+      cy.get("[id=sted]").type("Videomøte");
 
-    cy.get('[type="radio"]').last().check({ force: true });
-    const moteDato = tommorrowDateAsString();
-    cy.get("[id=dato]").clear().type(moteDato);
-    cy.get("[id=klokkeslett]").clear().type("10:00");
+      cy.get('[type="radio"]').last().check({ force: true });
+      const moteDato = tommorrowDateAsString();
+      cy.get("[id=dato]").clear().type(moteDato);
+      cy.get("[id=klokkeslett]").clear().type("10:00");
 
-    cy.dataCy(selectors.fritekstArbeidstakerTextArea).type(
-      texts.fritekstArbeidstaker
-    );
-    cy.dataCy(selectors.fritekstArbeidstakerKnapp).click();
-    cy.dataCy(selectors.forhandsvisningModal).contains(
-      texts.fritekstArbeidstaker
-    );
-    cy.contains("Lukk").click();
+      cy.dataCy(selectors.fritekstArbeidstakerTextArea).type(
+        texts.fritekstArbeidstaker
+      );
+      cy.dataCy(selectors.fritekstArbeidstakerKnapp).click();
+      cy.dataCy(selectors.forhandsvisningModal).contains(
+        texts.fritekstArbeidstaker
+      );
+      cy.contains("Lukk").click();
 
-    cy.dataCy(selectors.fritekstArbeidsgiverTextArea).type(
-      texts.fritekstArbeidsgiver
-    );
-    cy.dataCy(selectors.fritekstArbeidsgiverKnapp).click();
-    cy.dataCy(selectors.forhandsvisningModal).contains(
-      texts.fritekstArbeidsgiver
-    );
+      cy.dataCy(selectors.fritekstArbeidsgiverTextArea).type(
+        texts.fritekstArbeidsgiver
+      );
+      cy.dataCy(selectors.fritekstArbeidsgiverKnapp).click();
+      cy.dataCy(selectors.forhandsvisningModal).contains(
+        texts.fritekstArbeidsgiver
+      );
 
-    cy.dataCy(selectors.fritekstBehandlerTextArea).type(
-      texts.fritekstBehandler,
-      { force: true }
-    );
-    cy.dataCy(selectors.fritekstBehandlerKnapp).click({ force: true });
-    cy.dataCy(selectors.forhandsvisningModal).contains(texts.fritekstBehandler);
-    cy.contains("Lukk").click({ force: true });
+      cy.dataCy(
+        selectors.fritekstBehandlerTextArea
+      ).type(texts.fritekstBehandler, { force: true });
+      cy.dataCy(selectors.fritekstBehandlerKnapp).click({ force: true });
+      cy.dataCy(selectors.forhandsvisningModal).contains(
+        texts.fritekstBehandler
+      );
+      cy.contains("Lukk").click({ force: true });
 
-    cy.contains("Send innkallingene").click({ force: true });
+      cy.contains("Send innkallingene").click({ force: true });
 
-    cy.url().should("include", "/sykefravaer/moteoversikt");
-  });
-});
+      cy.url().should("include", "/sykefravaer/moteoversikt");
+    });
+  }
+);

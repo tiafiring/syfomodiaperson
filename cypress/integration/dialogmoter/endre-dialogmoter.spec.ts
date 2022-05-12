@@ -8,86 +8,94 @@ const texts = {
   begrunnelseBehandler: "Begrunnelse til behandler",
 };
 
-context("Endre dialogmøte", () => {
-  beforeEach(() => {
-    cy.stubEndepunkter(MoteState.INNKALT_DIALOGMOTE);
-    cy.visit("/sykefravaer/moteoversikt");
-    cy.OAuth2Login();
-  });
+describe(
+  "Endre dialogmøte",
+  {
+    retries: {
+      runMode: 3,
+    },
+  },
+  () => {
+    beforeEach(() => {
+      cy.stubEndepunkter(MoteState.INNKALT_DIALOGMOTE);
+      cy.visit("/sykefravaer/moteoversikt");
+      cy.OAuth2Login();
+    });
 
-  it("Tester feilhåndtering for manglende begrunnelse", () => {
-    cy.dataCy(selectors.endreMoteKnapp).click();
+    it("Tester feilhåndtering for manglende begrunnelse", () => {
+      cy.dataCy(selectors.endreMoteKnapp).click();
 
-    cy.dataCy(selectors.begrunnelseArbeidstakerTextArea).should(
-      "have.attr",
-      "aria-invalid",
-      "false"
-    );
+      cy.dataCy(selectors.begrunnelseArbeidstakerTextArea).should(
+        "have.attr",
+        "aria-invalid",
+        "false"
+      );
 
-    cy.dataCy(selectors.begrunnelseArbeidsgiverTextArea).should(
-      "have.attr",
-      "aria-invalid",
-      "false"
-    );
+      cy.dataCy(selectors.begrunnelseArbeidsgiverTextArea).should(
+        "have.attr",
+        "aria-invalid",
+        "false"
+      );
 
-    cy.dataCy(selectors.sendEndringKnapp).click();
+      cy.dataCy(selectors.sendEndringKnapp).click();
 
-    cy.dataCy(selectors.begrunnelseArbeidstakerTextArea).should(
-      "have.attr",
-      "aria-invalid",
-      "true"
-    );
+      cy.dataCy(selectors.begrunnelseArbeidstakerTextArea).should(
+        "have.attr",
+        "aria-invalid",
+        "true"
+      );
 
-    cy.dataCy(selectors.begrunnelseArbeidsgiverTextArea).should(
-      "have.attr",
-      "aria-invalid",
-      "true"
-    );
-  });
+      cy.dataCy(selectors.begrunnelseArbeidsgiverTextArea).should(
+        "have.attr",
+        "aria-invalid",
+        "true"
+      );
+    });
 
-  it("Går til endre dialogmøte, sjekker forhåndsvisning og avbryter", () => {
-    cy.dataCy(selectors.endreMoteKnapp).click();
+    it("Går til endre dialogmøte, sjekker forhåndsvisning og avbryter", () => {
+      cy.dataCy(selectors.endreMoteKnapp).click();
 
-    cy.dataCy(selectors.begrunnelseArbeidstakerTextArea).type(
-      texts.begrunnelseArbeidstaker
-    );
-    cy.dataCy(selectors.begrunnelseArbeidstakerKnapp).click();
-    cy.dataCy(selectors.forhandsvisningModal).contains(
-      texts.begrunnelseArbeidstaker
-    );
-    cy.contains("Lukk").click();
+      cy.dataCy(selectors.begrunnelseArbeidstakerTextArea).type(
+        texts.begrunnelseArbeidstaker
+      );
+      cy.dataCy(selectors.begrunnelseArbeidstakerKnapp).click();
+      cy.dataCy(selectors.forhandsvisningModal).contains(
+        texts.begrunnelseArbeidstaker
+      );
+      cy.contains("Lukk").click();
 
-    cy.dataCy(selectors.begrunnelseArbeidsgiverTextArea).type(
-      texts.begrunnelseArbeidsgiver
-    );
-    cy.dataCy(selectors.begrunnelseArbeidsgiverKnapp).click();
-    cy.dataCy(selectors.forhandsvisningModal).contains(
-      texts.begrunnelseArbeidsgiver
-    );
-    cy.contains("Lukk").click();
+      cy.dataCy(selectors.begrunnelseArbeidsgiverTextArea).type(
+        texts.begrunnelseArbeidsgiver
+      );
+      cy.dataCy(selectors.begrunnelseArbeidsgiverKnapp).click();
+      cy.dataCy(selectors.forhandsvisningModal).contains(
+        texts.begrunnelseArbeidsgiver
+      );
+      cy.contains("Lukk").click();
 
-    cy.contains("Avbryt").click();
-    cy.get(".sidetopp__tittel").contains("Dialogmøter");
-  });
+      cy.contains("Avbryt").click();
+      cy.get(".sidetopp__tittel").contains("Dialogmøter");
+    });
 
-  it("Endrer møte", () => {
-    cy.dataCy(selectors.endreMoteKnapp).click();
+    it("Endrer møte", () => {
+      cy.dataCy(selectors.endreMoteKnapp).click();
 
-    cy.dataCy(selectors.begrunnelseArbeidstakerTextArea).type(
-      texts.begrunnelseArbeidstaker
-    );
+      cy.dataCy(selectors.begrunnelseArbeidstakerTextArea).type(
+        texts.begrunnelseArbeidstaker
+      );
 
-    cy.dataCy(selectors.begrunnelseArbeidsgiverTextArea).type(
-      texts.begrunnelseArbeidsgiver
-    );
+      cy.dataCy(selectors.begrunnelseArbeidsgiverTextArea).type(
+        texts.begrunnelseArbeidsgiver
+      );
 
-    cy.get("[id=dato]").clear().type(tommorrowDateAsString());
+      cy.get("[id=dato]").clear().type(tommorrowDateAsString());
 
-    cy.contains("Send").click();
+      cy.contains("Send").click();
 
-    cy.url().should("include", "/sykefravaer/moteoversikt");
-  });
-});
+      cy.url().should("include", "/sykefravaer/moteoversikt");
+    });
+  }
+);
 
 context("Endre dialogmøte med behandler", () => {
   beforeEach(() => {
