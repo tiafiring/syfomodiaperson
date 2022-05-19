@@ -195,8 +195,14 @@ const setup = (authClient) => {
     proxyOnBehalfOf(req, res, next, authClient, Config.auth.syfosmregister);
   });
 
-  router.use("/syfosoknad/*", (req, res, next) => {
-    proxyOnBehalfOf(req, res, next, authClient, Config.auth.syfosoknad);
+  router.use("/sykepengesoknad-backend/*", (req, res, next) => {
+    proxyOnBehalfOf(
+      req,
+      res,
+      next,
+      authClient,
+      Config.auth.sykepengesoknadBackend
+    );
   });
 
   router.use("/syfo-tilgangskontroll/*", (req, res, next) => {
