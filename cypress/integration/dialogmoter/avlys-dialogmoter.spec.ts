@@ -7,11 +7,11 @@ const texts = {
   begrunnelseBehandler: "D greitt, det",
 };
 
-context("Avlys dialogmøte", () => {
+describe("Avlys dialogmøte", { retries: 3 }, () => {
   beforeEach(() => {
     cy.stubEndepunkter(MoteState.INNKALT_DIALOGMOTE);
-    cy.visit("/sykefravaer/moteoversikt");
     cy.OAuth2Login();
+    cy.visit("/sykefravaer/moteoversikt");
   });
 
   it("Tester feilhåndtering for manglende begrunnelse", () => {
@@ -86,11 +86,11 @@ context("Avlys dialogmøte", () => {
   });
 });
 
-context("Avlys dialogmøte med behandler", () => {
+describe("Avlys dialogmøte med behandler", { retries: 3 }, () => {
   beforeEach(() => {
     cy.stubEndepunkter(MoteState.INNKALT_DIALOGMOTE_MED_BEHANDLER);
-    cy.visit("/sykefravaer/moteoversikt");
     cy.OAuth2Login();
+    cy.visit("/sykefravaer/moteoversikt");
   });
 
   it("Tester feilhåndtering for manglende begrunnelse behandler", () => {

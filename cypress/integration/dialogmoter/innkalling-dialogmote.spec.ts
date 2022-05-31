@@ -9,11 +9,11 @@ const texts = {
   fritekstBehandler: "Fritekst til behandler",
 };
 
-context("Innkalling dialogmøte", () => {
+describe("Innkalling dialogmøte", { retries: 3 }, () => {
   beforeEach(() => {
     cy.stubEndepunkter(MoteState.INGEN_MOTER);
-    cy.visit("/sykefravaer/moteoversikt");
     cy.OAuth2Login();
+    cy.visit("/sykefravaer/moteoversikt");
   });
 
   it("Går til nytt dialogmøte, fyller inn felter (ingen behandler), sjekker forhåndsvisning og sender inn", () => {

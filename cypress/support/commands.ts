@@ -28,6 +28,8 @@ Cypress.Commands.add("dataCy", (value) => {
 });
 
 Cypress.Commands.add("OAuth2Login", () => {
+  cy.visit("/sykefravaer");
+
   cy.get('input[name="username"]').type("La den rette komme inn!");
 
   cy.get('input[name="acr"]').type(`Sesam sesam`);

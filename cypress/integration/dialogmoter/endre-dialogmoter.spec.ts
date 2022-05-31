@@ -8,11 +8,11 @@ const texts = {
   begrunnelseBehandler: "Begrunnelse til behandler",
 };
 
-context("Endre dialogmøte", () => {
+describe("Endre dialogmøte", { retries: 3 }, () => {
   beforeEach(() => {
     cy.stubEndepunkter(MoteState.INNKALT_DIALOGMOTE);
-    cy.visit("/sykefravaer/moteoversikt");
     cy.OAuth2Login();
+    cy.visit("/sykefravaer/moteoversikt");
   });
 
   it("Tester feilhåndtering for manglende begrunnelse", () => {
@@ -89,11 +89,11 @@ context("Endre dialogmøte", () => {
   });
 });
 
-context("Endre dialogmøte med behandler", () => {
+describe("Endre dialogmøte med behandler", { retries: 3 }, () => {
   beforeEach(() => {
     cy.stubEndepunkter(MoteState.INNKALT_DIALOGMOTE_MED_BEHANDLER);
-    cy.visit("/sykefravaer/moteoversikt");
     cy.OAuth2Login();
+    cy.visit("/sykefravaer/moteoversikt");
   });
 
   it("Tester feilhåndtering for manglende begrunnelse behandler", () => {

@@ -8,11 +8,11 @@ const texts = {
   arbeidsgiversOppgave: "Tekst",
 };
 
-context("Ferdigstill dialogmøte", () => {
+describe("Ferdigstill dialogmøte", { retries: 3 }, () => {
   beforeEach(() => {
     cy.stubEndepunkter(MoteState.INNKALT_DIALOGMOTE);
-    cy.visit("/sykefravaer/moteoversikt");
     cy.OAuth2Login();
+    cy.visit("/sykefravaer/moteoversikt");
   });
 
   it("Går til skriv referat, sjekker forhåndsvisning og avbryter", () => {
