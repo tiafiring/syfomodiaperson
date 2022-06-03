@@ -16,6 +16,7 @@ import { useDiskresjonskodeQuery } from "@/data/diskresjonskode/diskresjonskodeQ
 import { ApiErrorException } from "@/api/errors";
 import { getKvinneImage, getMannImage } from "@/utils/festiveUtils";
 import { useStartOfLatestOppfolgingstilfelle } from "@/data/oppfolgingstilfelle/person/oppfolgingstilfellePersonQueryHooks";
+import { useAktorIdQuery } from "@/data/personinfo/personAdresseQueryHooks";
 
 const texts = {
   copied: "Kopiert!",
@@ -61,6 +62,7 @@ interface PersonkortHeaderProps {
 
 const PersonkortHeader = (personkortHeaderProps: PersonkortHeaderProps) => {
   const { data: isEgenAnsatt } = useEgenansattQuery();
+  const { data: aktorId } = useAktorIdQuery();
   const { navbruker } = personkortHeaderProps;
   const { error, data: diskresjonskode } = useDiskresjonskodeQuery();
   const visEtiketter =
@@ -84,7 +86,7 @@ const PersonkortHeader = (personkortHeaderProps: PersonkortHeaderProps) => {
             navbruker.navn ? navbruker.navn : ""
           } (${hentBrukersAlderFraFnr(navbruker.kontaktinfo.fnr)} år)`}</h3>
           <StyledFnr>
-            {formaterFnr(navbruker.kontaktinfo.fnr)}
+            {formaterFnr(navbruker.kontaktinfo.fnr) + " aktorId: " + aktorId}
             <CopyButton
               message={texts.copied}
               value={navbruker.kontaktinfo.fnr}
