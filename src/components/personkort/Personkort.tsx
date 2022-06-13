@@ -8,6 +8,7 @@ import SnowButton from "@/components/personkort/SnowButton";
 import { isDecember } from "@/utils/festiveUtils";
 import { FlexRow, PaddingSize } from "../Layout";
 import { OversiktLenker } from "@/components/personkort/OversiktLenker";
+import WelcomeMessage from "@/components/personkort/WelcomeMessage";
 
 const texts = {
   buttons: {
@@ -27,6 +28,7 @@ const Personkort = () => {
     <div className="personkort">
       <FlexRow topPadding={PaddingSize.SM} bottomPadding={PaddingSize.SM}>
         <OversiktLenker />
+        <WelcomeMessage />
         {showSnowButton && <SnowButton />}
       </FlexRow>
       <Utvidbar
