@@ -59,7 +59,7 @@ jobs:
           echo ${IMAGE}
 
   deploy-dev:
-    if: github.ref == 'refs/heads/master' || github.ref == 'refs/tags/deploy-dev'
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/tags/deploy-dev-*'
     name: Deploy to NAIS Dev-fss
     needs: build
     runs-on: ubuntu-latest
