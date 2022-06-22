@@ -1,6 +1,7 @@
 name: main
 
-on: push
+on:
+  push:
 
 env:
   IMAGE: docker.pkg.github.com/${{ github.repository }}/syfomodiaperson:${{ github.sha }}
@@ -25,6 +26,10 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+
+        run: |
+          echo '::set-output name=SELECTED_COLOR::green'
+          echo "::debug::GitHub Ref ${{ github.ref }}"
       - name: Install deps
         run: |
           npm install
