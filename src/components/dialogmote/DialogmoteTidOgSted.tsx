@@ -54,6 +54,10 @@ const DialogmoteTidOgSted = ({
   const { brukerKanVarslesDigitalt } = useNavBrukerData();
   const showFuturisticWarning =
     !!isFuturisticMeeting && ABTestHit && brukerKanVarslesDigitalt;
+  console.log("ident: ", veilederinfo?.ident);
+  console.log("abtesthit: ", ABTestHit);
+  console.log("Bruker kan varsles ", brukerKanVarslesDigitalt);
+  console.log("in future: ", isFuturisticMeeting);
 
   return (
     <DialogmoteInnkallingSkjemaSeksjon>
